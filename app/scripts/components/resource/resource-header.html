@@ -13,19 +13,7 @@
     <div class="row wrapper white-bg page-heading">
         <div class="col-lg-12">
             <h2>{{ controller.model.name }}</h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a ui-sref="project.details({uuid: controller.model.project_uuid })">
-                        Project dashboard
-                    </a>
-                </li>
-                <li>
-                    <a ui-sref="{{ ::controller.listState }}" ng-bind="controller.listTitle"></a>
-                </li>
-                <li class="active">
-                    <strong>{{ controller.model.name }}</strong>
-                </li>
-            </ol>
+            <resource-breadcrumbs resource="controller.model"/>
         </div>
     </div>
     <resource-details resource="controller.model" controller="controller"></resource-details>

@@ -11,7 +11,7 @@ export const projectAlertsFeed = {
       this.title = 'Alerts';
       this.emptyText = 'No alerts yet.';
       this.showTypes = AlertDialogsService.alertTypes.bind(AlertDialogsService);
-      this.listState = 'project.alerts({uuid: FeedCtrl.project.uuid})';
+      this.listState = 'project.alerts({uuid: $ctrl.project.uuid})';
     }
 
     $onInit() {

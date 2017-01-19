@@ -18,9 +18,9 @@
             <tr ng-repeat="rule in group.rules track by $index">
                 <td rowspan="{{group.rules.length}}" ng-if="$index ===0">
                     <strong>{{ group.name | uppercase }}</strong>
-                    <span ng-if="group.description">({{ group.description }})</span>
+                    <div ng-if="group.description">({{ group.description }})</div>
                 </td>
-                <td>{{ rule.protocol | uppercase }}</td>
+                <td>{{ rule | securityGroupProtocol }}</td>
                 <td>
                     {{ rule | securityGroupRulePortRange }}
                 </td>

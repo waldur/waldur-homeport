@@ -5,7 +5,7 @@
     <div class="col-lg-10">
         <user-edit user="$ctrl.user"
                    errors="$ctrl.errors"
-                   on-save="$ctrl.saveUser()"
+                   on-save="$ctrl.saveUser($event)"
                    on-remove="$ctrl.removeUser()">
         </user-edit>
     </div>

@@ -13,6 +13,9 @@ import resourceTabs from './resource-tabs';
 import ResourceTabsConfiguration from './resource-tabs-configuration';
 import { DEFAULT_RESOURCE_TABS } from './constants';
 import { resourceSummaryBase } from './resource-summary-base';
+import { resourceBreadcrumbs } from './resource-breadcrumbs';
+import ResourceBreadcrumbsService from './resource-breadcrumbs-service';
+import { CATEGORY_ITEMS } from './resource-categories';
 
 export default module => {
   module.service('resourceUtils', resourceUtils);
@@ -30,4 +33,7 @@ export default module => {
   module.provider('ResourceTabsConfiguration', ResourceTabsConfiguration);
   module.constant('DEFAULT_RESOURCE_TABS', DEFAULT_RESOURCE_TABS);
   module.component('resourceSummaryBase', resourceSummaryBase);
+  module.component('resourceBreadcrumbs', resourceBreadcrumbs);
+  module.service('ResourceBreadcrumbsService', ResourceBreadcrumbsService);
+  module.constant('CATEGORY_ITEMS', CATEGORY_ITEMS);
 };

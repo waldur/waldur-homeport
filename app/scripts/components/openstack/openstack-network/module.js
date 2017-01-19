@@ -1,25 +1,19 @@
 import openstackAllocationPool from './openstack-allocation-pool';
-import openstackSubnet from './openstack-subnet';
 import openstackNetworksService from './openstack-networks-service';
-import openstackSubnetsService from './openstack-subnets-service';
 import openstackTenantNetworks from './openstack-tenant-networks';
-import openstackSubnetsList from './openstack-subnets-list';
 import { openstackNetworkSummary } from './openstack-network-summary';
-import { openstackSubnetSummary } from './openstack-subnet-summary';
 import { formatAllocationPool } from './filters';
+import breadcrumbsConfig from './breadcrumbs';
 
 export default module => {
   module.service('openstackNetworksService', openstackNetworksService);
-  module.service('openstackSubnetsService', openstackSubnetsService);
   module.component('openstackAllocationPool', openstackAllocationPool);
-  module.component('openstackSubnet', openstackSubnet);
   module.component('openstackTenantNetworks', openstackTenantNetworks);
-  module.component('openstackSubnetsList', openstackSubnetsList);
   module.component('openstackNetworkSummary', openstackNetworkSummary);
-  module.component('openstackSubnetSummary', openstackSubnetSummary);
   module.filter('formatAllocationPool', formatAllocationPool);
   module.config(actionConfig);
   module.config(tabsConfig);
+  module.run(breadcrumbsConfig);
 };
 
 // @ngInject
@@ -57,22 +51,6 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         })
       },
     },
-  });
-
-  ActionConfigurationProvider.register('OpenStack.SubNet', {
-    order: [
-      'edit',
-      'pull',
-      'destroy'
-    ],
-    options: {
-      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: 'Subnet has been updated'
-      }),
-      pull: {
-        title: 'Synchronise'
-      },
-    }
   });
 }
 

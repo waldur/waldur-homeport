@@ -96,9 +96,9 @@ function InvitationsListController(
             className: 'min-tablet-l',
             orderable: false,
             render: function(row) {
-              if (row.customer) {
+              if (row.customer_role) {
                 return ENV.roles.owner;
-              } else if (row.project) {
+              } else if (row.project_role) {
                 var href = $state.href('project.details', {
                   uuid: ncUtils.getUUID(row.project)
                 });

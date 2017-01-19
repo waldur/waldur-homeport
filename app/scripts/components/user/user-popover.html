@@ -2,7 +2,13 @@
     <h3 class="modal-title">User details</h3>
 </div>
 <div class="modal-body">
-    <user-popover-table user="$ctrl.user"></user-popover-table>
+    <div ng-if="$ctrl.loading">
+        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+    </div>
+
+    <div ng-if="!$ctrl.loading">
+        <user-popover-table user="$ctrl.user"></user-popover-table>
+    </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-default"

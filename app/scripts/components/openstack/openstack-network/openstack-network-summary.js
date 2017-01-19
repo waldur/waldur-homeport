@@ -6,11 +6,15 @@ export const openstackNetworkSummary = {
     resource: '<'
   },
   controller: class openstackNetworkSummaryController {
-    constructor(ncUtils) {
+    constructor($scope, ncUtils) {
       // @ngInject
       this.ncUtils = ncUtils;
+      $scope.$watch(() => this.resource, () => {
+        this.update();
+      });
     }
-    $onInit() {
+
+    update() {
       this.resource.tenant_uuid = this.ncUtils.getUUID(this.resource.tenant);
     }
   }

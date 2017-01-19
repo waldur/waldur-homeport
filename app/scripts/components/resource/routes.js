@@ -31,10 +31,12 @@ function loadResource(
 }
 
 // @ngInject
-function ResourceController($scope, currentUser, currentStateService, customersService) {
-  currentStateService.getCustomer().then(currentCustomer => {
-    const status = customersService.checkCustomerUser(currentCustomer, currentUser);
-    currentStateService.setOwnerOrStaff(status);
+function ResourceController($scope, usersService, currentStateService, customersService) {
+  usersService.getCurrentUser().then(currentUser => {
+    currentStateService.getCustomer().then(currentCustomer => {
+      const status = customersService.checkCustomerUser(currentCustomer, currentUser);
+      currentStateService.setOwnerOrStaff(status);
+    });
   });
 }
 

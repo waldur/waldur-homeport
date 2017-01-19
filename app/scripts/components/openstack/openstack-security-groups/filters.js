@@ -59,3 +59,10 @@ export function securityGroupCIDR() {
     }
   };
 }
+
+export default module => {
+  module.filter('securityGroupRulePort', securityGroupRulePort);
+  module.filter('securityGroupRulePortRange', securityGroupRulePortRange);
+  module.filter('securityGroupCIDR', securityGroupCIDR);
+  module.filter('securityGroupProtocol', securityGroupProtocol);
+};

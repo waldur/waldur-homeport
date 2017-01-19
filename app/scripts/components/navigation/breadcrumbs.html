@@ -1,0 +1,10 @@
+<ol class="breadcrumb">
+    <li ng-repeat="item in $ctrl.items">
+        <a ng-click="$ctrl.onClick(item)">
+            {{ item.label }}
+        </a>
+    </li>
+    <li class="active">
+        <strong>{{ $ctrl.activeItem }}</strong>
+    </li>
+</ol>

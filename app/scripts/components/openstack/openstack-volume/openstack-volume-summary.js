@@ -1,45 +1,23 @@
 import template from './openstack-volume-summary.html';
 
-export default function openstackVolumeSummary() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: SummaryController,
-    controllerAs: '$ctrl',
-    bindToController: true,
-    scope: {
-      model: '='
-    }
-  };
-}
-
-// @ngInject
-class SummaryController {
-  constructor(OpenStackSummaryService) {
-    this.OpenStackSummaryService = OpenStackSummaryService;
-    this.init();
-  }
-
-  init() {
-    this.loading = true;
-    this.components = {};
-    this.OpenStackSummaryService.getServiceComponents(this.model.service)
-      .then(components => {
-        this.components = components;
-      })
-      .finally(() => {
-        this.loading = false;
+export const openstackVolumeSummary = {
+  template,
+  bindings: {
+    resource: '<'
+  },
+  controller: class openstackVolumeSummaryController {
+    constructor($scope, ncUtils) {
+      // @ngInject
+      this.ncUtils = ncUtils;
+      $scope.$watch(() => this.resource, () => {
+        this.update();
       });
-  }
+    }
 
-  getDailyPrice() {
-    if (this.components && this.model.size) {
-      return this.model.size * this.components.storage;
+    update() {
+      if (this.resource.instance) {
+        this.resource.instance_uuid = this.ncUtils.getUUID(this.resource.instance);
+      }
     }
   }
-
-  getMonthlyPrice() {
-    return this.getDailyPrice() * 30;
-  }
-}
-
+};

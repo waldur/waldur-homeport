@@ -11,7 +11,7 @@ export const projectEventsFeed = {
       this.title = 'Events';
       this.emptyText = 'No events yet.';
       this.showTypes = EventDialogsService.eventTypes.bind(EventDialogsService);
-      this.listState = 'project.events({uuid: FeedCtrl.project.uuid})';
+      this.listState = 'project.events({uuid: $ctrl.project.uuid})';
     }
 
     $onInit() {

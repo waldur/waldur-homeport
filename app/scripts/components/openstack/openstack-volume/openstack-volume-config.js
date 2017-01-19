@@ -51,7 +51,7 @@ export default {
   watchers: {
     image: imageWatcher
   },
-  summaryComponent: 'openstackVolumeSummary'
+  summaryComponent: 'openstackVolumeCheckoutSummary'
 };
 
 function imageWatcher(model, options, newImage) {

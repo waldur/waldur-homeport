@@ -92,13 +92,22 @@
     });
   }
 
-  function getCurrentUser(usersService) {
-    return usersService.getCurrentUser();
+  function getCurrentUser(usersService, $q) {
+    // TODO: Migrate to Angular-UI Router v1.0
+    // And use $transition service which supports promises
+    // https://github.com/angular-ui/ui-router/issues/1153
+    return usersService.getCurrentUser().then(function(user) {
+      if (usersService.mandatoryFieldsMissing(user)) {
+        return $q.reject({
+          redirectTo: 'initialdata.view'
+        });
+      };
+    });
   }
 
   function decorateStates($stateProvider) {
     decorateState($stateProvider, function(state) {
-      if (state.data && state.data.auth) {
+      if (state.data && state.data.auth && !state.resolve.currentUser) {
         state.resolve.currentUser = getCurrentUser;
       }
     });

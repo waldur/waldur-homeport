@@ -32,14 +32,14 @@
         });
       },
       checkCustomerUser: function(customer, user) {
-        if (user.is_staff) {
+        if (user && user.is_staff) {
           return true;
         }
         if (!customer) {
           return false;
         }
         for (var i = 0; i < customer.owners.length; i++) {
-          if (user.uuid === customer.owners[i].uuid) {
+          if (user && user.uuid === customer.owners[i].uuid) {
             return true;
           }
         }
