@@ -7,7 +7,7 @@ import userEvents from './user-events';
 import userManage from './user-manage';
 import userSidebar from './user-sidebar';
 import userDetails, { PRIVATE_USER_TABS } from './user-details';
-import userEdit from './user-edit';
+import { userEdit } from './user-edit';
 import userDashboard from './user-dashboard';
 import userOrganizations from './user-organizations';
 import userProjects from './user-projects';
@@ -15,10 +15,10 @@ import { userPopover } from './user-popover';
 import userPopoverTable from './user-popover-table';
 import { stateUtilsService, attachStateUtils } from './utils';
 import userRoutes from './routes';
-import userStatusLabel from './user-status-label';
+import usersService from './users-service';
+import filtersModule from './filters';
 
 export default module => {
-  module.component('userStatusLabel', userStatusLabel);
   module.directive('hookDetails', hookDetails);
   module.filter('formatEventTitle', formatEventTitle);
   module.directive('hookList', hookList);
@@ -28,7 +28,7 @@ export default module => {
   module.directive('userManage', userManage);
   module.directive('userSidebar', userSidebar);
   module.directive('userDetails', userDetails);
-  module.directive('userEdit', userEdit);
+  module.component('userEdit', userEdit);
   module.constant('PRIVATE_USER_TABS', PRIVATE_USER_TABS);
   module.directive('userDashboard', userDashboard);
   module.directive('userOrganizations', userOrganizations);
@@ -36,6 +36,8 @@ export default module => {
   module.component('userPopover', userPopover);
   module.directive('userPopoverTable', userPopoverTable);
   module.service('stateUtilsService', stateUtilsService);
+  module.service('usersService', usersService);
   module.run(attachStateUtils);
   module.config(userRoutes);
+  filtersModule(module);
 };

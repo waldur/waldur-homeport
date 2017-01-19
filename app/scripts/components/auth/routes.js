@@ -91,6 +91,9 @@ export default function authRoutes($stateProvider) {
       data: {
         auth: true,
         bodyClass: 'old'
+      },
+      resolve: {
+        currentUser: usersService => usersService.getCurrentUser()
       }
     });
 }
