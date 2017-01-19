@@ -62,11 +62,16 @@ msgid "Delete"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:28
+#: app/scripts/components/user/user-edit.html:85
 msgid "Description"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:94
 msgid "Do not have an account?"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:26
+msgid "E-mail"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:69
@@ -75,6 +80,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:42
 msgid "External IP"
+msgstr ""
+
+#: app/scripts/components/issues/issues-short-list.html:48
+msgid "from"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:25
@@ -102,6 +111,18 @@ msgstr ""
 msgid "Instance"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:16
+msgid "Full name"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:108
+msgid "I accept the"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:58
+msgid "ID code"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:30
 msgid "Internal IP"
 msgstr ""
@@ -120,8 +141,16 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:76
+msgid "Job position"
+msgstr ""
+
 #: app/scripts/components/issues/issues-short-list.html:27
 msgid "Key"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:122
+msgid "Let’s get started"
 msgstr ""
 
 #: app/scripts/components/navigation/site-header.html:12
@@ -149,6 +178,10 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:8
+msgid "Manage at"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:14
 msgid "No access info"
 msgstr ""
@@ -171,12 +204,20 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:67
+msgid "Organization name"
+msgstr ""
+
 #: app/scripts/components/error/error-404.html:3
 msgid "Page Not Found :/"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:31
 msgid "Password"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:94
+msgid "Phone number"
 msgstr ""
 
 #: app/scripts/components/error/error-403.html:7
@@ -217,8 +258,16 @@ msgstr ""
 msgid "Register to"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:36
+msgid "Registration method"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:14
 msgid "Remote CIDR"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:138
+msgid "Remove profile"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:14
@@ -289,6 +338,10 @@ msgstr ""
 msgid "Tenant name"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:110
+msgid "Terms of Service"
+msgstr ""
+
 #: app/scripts/components/issues/issues-short-list.html:20
 msgid "There are no requests yet."
 msgstr ""
@@ -297,12 +350,20 @@ msgstr ""
 msgid "Time in progress"
 msgstr ""
 
+#: app/scripts/components/auth/auth-init.html:12
+msgid "To get your clouds under control, please fill in your data."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:13
 msgid "To port"
 msgstr ""
 
 #: app/scripts/components/error/error-403.html:6
 msgid "To update current plan visit"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:132
+msgid "Update profile"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:37
@@ -319,6 +380,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:72
 msgid "Uptime"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:47
+msgid "User status"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:22
@@ -345,6 +410,7 @@ msgstr ""
 msgid "VPC package"
 msgstr ""
 
+#: app/scripts/components/auth/auth-init.html:10
 #: app/scripts/components/auth/auth-login.html:5
 msgid "Welcome to"
 msgstr ""

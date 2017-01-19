@@ -16,8 +16,8 @@ export default class DashboardChartService {
   }
 
   clearServiceCache() {
-    this.priceEstimationService.cleanAllCache();
-    this.quotasService.cleanAllCache();
+    this.priceEstimationService.clearAllCacheForCurrentEndpoint();
+    this.quotasService.clearAllCacheForCurrentEndpoint();
   }
 
   getOrganizationCharts(organization) {
@@ -51,8 +51,8 @@ export default class DashboardChartService {
 
     var promises = validCharts.map(chart => {
       chart.quota = quotaMap[chart.quota];
-      chart.current = chart.quota.usage;
       return this.getQuotaHistory(chart.quota.url).then(data => {
+        chart.current = data[data.length - 1].value;
         chart.data = data;
       });
     });
@@ -71,7 +71,7 @@ export default class DashboardChartService {
   }
 
   getQuotaHistory(url) {
-    var end = moment.utc().unix();
+    var end = moment.utc().add(1, 'day').unix();
     var start = moment.utc().subtract(1, 'month').unix();
 
     return this.quotasService.getHistory(url, start, end, POINTS_COUNT).then(items => {
