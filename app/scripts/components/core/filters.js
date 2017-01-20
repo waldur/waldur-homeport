@@ -12,7 +12,7 @@ function filesize() {
       unit++;
     }
 
-    return input.toFixed(0) + ' ' + units[unit];
+    return Math.floor(input * 10) / 10 + ' ' + units[unit];
   };
 }
 
