@@ -27,7 +27,7 @@
             </label>
             <div class="col-sm-9 col-md-8">
                 <input id="email" type="email" class="form-control" ng-model="$ctrl.user.email" name="email" required/>
-                <div class="error" ng-if="$ctrl.errors.email">{{::$ctrl.errors.email}}</div>
+                <div class="error" ng-repeat="error in $ctrl.errors.email" ng-bind="error"></div>
             </div>
         </div>
 
