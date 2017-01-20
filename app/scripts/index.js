@@ -24,7 +24,7 @@ import routesModule from './routes/module';
 import analyticsModule from './components/analytics/module';
 import coreModule from './components/core/module';
 import dashboardModule from './components/dashboard/module';
-import filtersModule from './filters';
+import filtersModule from './components/core/filters';
 import bootstrap from './components/core/bootstrap';
 import errorModule from './components/error/module';
 
