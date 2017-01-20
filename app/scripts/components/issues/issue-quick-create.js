@@ -99,15 +99,15 @@ class IssueQuickCreateController {
       description: this.issue.description,
       is_reported_manually: true,
     };
-    if (this.issue.customer) {
-      issue.customer = this.issue.customer.url;
-    }
-    if (this.issue.project) {
-      issue.project = this.issue.project.url;
-    }
+
     if (this.issue.resource) {
       issue.resource = this.issue.resource.url;
+    } else if (this.issue.project) {
+      issue.project = this.issue.project.url;
+    } else if (this.issue.customer) {
+      issue.customer = this.issue.customer.url;
     }
+
     this.saving = true;
     return this.service.createIssue(issue).then(issue => {
       this.service.clearAllCacheForCurrentEndpoint();

@@ -26,16 +26,17 @@
                 <tr>
                     <th width="80" translate>Key</th>
                     <th translate>Description</th>
-                    <th width="100" translate>Updated</th>
-                    <th width="100" translate>Time in progress</th>
+                    <th width="100" translate class="hidden-xs">Updated</th>
+                    <th width="100" translate class="hidden-xs">Time in progress</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in $ctrl.items">
                     <td>
-                        <span ng-bind="::item.key"
-                              uib-tooltip="{{ ::item.type }}">
-                        </span>
+                        <a ng-bind="::item.key"
+                           ui-sref="support.detail({uuid: item.uuid})"
+                           uib-tooltip="{{ ::item.type }}">
+                        </a>
                     </td>
                     <td>
                         {{ item.summary }}<br>
@@ -53,10 +54,10 @@
                             at {{ item.created | shortDate }}
                         </small>
                     </td>
-                    <td>
+                    <td class="hidden-xs">
                         <small>{{ item.modified | shortDate }}</small>
                     </td>
-                    <td>
+                    <td class="hidden-xs">
                         <small>{{ item.timeSpent }}</small>
                     </td>
                 </tr>

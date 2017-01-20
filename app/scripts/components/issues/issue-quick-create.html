@@ -3,12 +3,12 @@
         <h5>Create request</h5>
     </div>
     <div class="ibox-content">
-        <form class="form-horizontal" name="$ctrl.IssueForm" ng-disabled="$ctrl.saving">
+        <form name="$ctrl.IssueForm" ng-disabled="$ctrl.saving">
             <div class="form-group">
-                <label for="issueType" class="col-sm-3 control-label">
+                <label for="issueType" class="control-label">
                     Request type <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-9">
+                <div>
                     <ui-select ng-model="$ctrl.issue.type" name="type" required>
                         <ui-select-match placeholder="Select request type..."
                                          allow-clear="true">
@@ -27,10 +27,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="issueSummary" class="col-sm-3 control-label">
+                <label for="issueSummary" class="control-label">
                     Title <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-9">
+                <div>
                     <input type="text"
                         id="issueSummary"
                         ng-model="$ctrl.issue.summary"
@@ -43,10 +43,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="issueDescription" class="col-sm-3 control-label">
+                <label for="issueDescription" class="control-label">
                     Description <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-9">
+                <div>
                     <textarea type="text"
                         id="issueDescription"
                         ng-model="$ctrl.issue.description"
@@ -59,10 +59,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">
+                <label class="control-label">
                     Organization
                 </label>
-                <div class="col-sm-6">
+                <div>
                     <ui-select ng-model="$ctrl.issue.customer" name="customer">
                         <ui-select-match placeholder="Select organization..."
                                          allow-clear="true">
@@ -78,10 +78,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">
+                <label class="control-label">
                     Project
                 </label>
-                <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.customer}">
+                <div ng-class="{disabled: !$ctrl.issue.customer}">
                     <ui-select ng-model="$ctrl.issue.project" name="project">
                         <ui-select-match placeholder="Select project..."
                                          allow-clear="true">
@@ -97,10 +97,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">
+                <label class="control-label">
                     Affected resource
                 </label>
-                <div class="col-sm-6">
+                <div ng-class="{disabled: !$ctrl.issue.project}">
                     <ui-select ng-model="$ctrl.issue.resource">
                         <ui-select-match placeholder="Select affected resource..."
                                          allow-clear="true">
