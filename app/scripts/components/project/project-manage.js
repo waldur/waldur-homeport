@@ -16,12 +16,16 @@ class ProjectManageController {
   constructor(projectsService,
               currentStateService,
               customersService,
+              WorkspaceService,
+              ncUtilsFlash,
               $rootScope,
               $state,
               $q) {
     this.projectsService = projectsService;
     this.currentStateService = currentStateService;
     this.customersService = customersService;
+    this.WorkspaceService = WorkspaceService;
+    this.ncUtilsFlash = ncUtilsFlash;
     this.$rootScope = $rootScope;
     this.$state = $state;
     this.$q = $q;
@@ -31,6 +35,9 @@ class ProjectManageController {
   activate() {
     this.canManage = false;
     this.projectModel = {};
+    this.currentStateService.getCustomer().then(customer => {
+      this.customer = customer;
+    });
     this.currentStateService.getProject().then(project => {
       this.project = project;
       this.projectModel = angular.copy(project);
@@ -45,7 +52,17 @@ class ProjectManageController {
       return this.$q.reject();
     }
     return this.projectsService.$update(null, this.project.url, this.projectModel).then(project => {
-      this.$rootScope.$broadcast('adjustCurrentProject', project);
+      this.ncUtilsFlash.success('Project has been updated');
+      // TODO: Migrate to Redux and make code DRY
+      this.currentStateService.setProject(project);
+      let item = this.customer.projects.filter(item => item.uuid === project.uuid)[0];
+      item.name = project.name;
+      this.WorkspaceService.setWorkspace({
+        customer: this.customer,
+        project: project,
+        hasCustomer: true,
+        workspace: 'project',
+      });
     }, response => {
       this.errors = response.data;
     });
