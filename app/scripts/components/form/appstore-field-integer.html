@@ -13,3 +13,7 @@
       {{ ::$ctrl.field.units }}
     </span>
 </div>
+
+<p class="help-block text-danger" ng-if="$ctrl.form[$ctrl.field.name].$error.min">
+  Minimal valid value is {{ $ctrl.field.min/$ctrl.field.factor }} {{ ::$ctrl.field.units }}
+</p>
