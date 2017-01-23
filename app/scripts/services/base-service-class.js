@@ -57,6 +57,7 @@
             vm.getFactory(true, null, endpointUrl).query(filter, function(response, responseHeaders) {
               var header = responseHeaders();
               var resultCount = !header['x-result-count'] ? null : header['x-result-count'];
+              response.resultCount = resultCount;
               vm.setPagesCount(resultCount);
               if (vm.cacheTime > 0) {
                 vm.setCache(vm.cacheTime, response, cacheKey, vm.endpoint);

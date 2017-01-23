@@ -2,6 +2,9 @@ const openstackSnapshotsList = {
   controller: SnapshotsListController,
   controllerAs: 'ListController',
   templateUrl: 'views/partials/filtered-list.html',
+  bindings: {
+    onListReceive: '&',
+  }
 };
 
 export default openstackSnapshotsList;

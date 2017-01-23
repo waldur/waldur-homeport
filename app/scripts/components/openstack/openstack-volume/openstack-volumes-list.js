@@ -2,6 +2,9 @@ const openstackVolumesList = {
   controller: VolumesListController,
   controllerAs: 'ListController',
   templateUrl: 'views/partials/filtered-list.html',
+  bindings: {
+    onListReceive: '&',
+  }
 };
 
 export default openstackVolumesList;

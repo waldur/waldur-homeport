@@ -19,6 +19,18 @@ const resourceStorageTabs = {
       });
     }
 
+    onVolumesListReceive({ filter, response }) {
+      if (!filter.name) {
+        this.volumesCount = response.resultCount;
+      }
+    }
+
+    onSnapshotsListReceive({ filter, response }) {
+      if (!filter.name) {
+        this.snapshotsCount = response.resultCount;
+      }
+    }
+
     refreshCount() {
       const query = {
         resource_category: 'storages',

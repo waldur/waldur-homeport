@@ -71,7 +71,15 @@
           } else {
             vm.list = response;
           }
-          vm.afterGetList();
+          vm.afterGetList(filter);
+          if (vm.controllerScope && vm.controllerScope.onListReceive) {
+            vm.controllerScope.onListReceive({
+              $event: {
+                filter,
+                response,
+              }
+            });
+          }
           vm.hideNoDataText = false;
         });
         vm.blockListElement(promise);
