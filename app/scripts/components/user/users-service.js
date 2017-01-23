@@ -1,11 +1,18 @@
 // @ngInject
-export default function usersService(baseServiceClass, $q, ENV) {
+export default function usersService(baseServiceClass, $q, ENV, $rootScope) {
   var ServiceClass = baseServiceClass.extend({
     currentUser: null,
     init: function() {
       this._super();
       this.endpoint = '/users/';
     },
+
+    setCurrentUser: function(user) {
+      // TODO: Migrate to Redux and make code DRY
+      $rootScope.$broadcast('CURRENT_USER_UPDATED', {user});
+      this.currentUser = user;
+    },
+
     getCurrentUser: function() {
       if (this.currentUser) {
         return $q.when(this.currentUser);
