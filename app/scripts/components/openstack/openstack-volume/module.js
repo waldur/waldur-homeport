@@ -6,6 +6,7 @@ import openstackVolumeCheckoutSummary from './openstack-volume-checkout-summary'
 import openstackVolumesService from './openstack-volumes-service';
 import openstackInstanceVolumes from './openstack-instance-volumes';
 import openstackVolumeSnapshots from './openstack-volume-snapshots';
+import openstackVolumesList from './openstack-volumes-list';
 
 export default module => {
   module.service('openstackVolumesService', openstackVolumesService);
@@ -15,6 +16,7 @@ export default module => {
   module.directive('openstackVolumeCheckoutSummary', openstackVolumeCheckoutSummary);
   module.component('openstackInstanceVolumes', openstackInstanceVolumes);
   module.component('openstackVolumeSnapshots', openstackVolumeSnapshots);
+  module.component('openstackVolumesList', openstackVolumesList);
 
   module.config(fieldsConfig);
   module.config(actionConfig);

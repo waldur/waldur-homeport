@@ -66,6 +66,10 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:33
+msgid "Device"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:94
 msgid "Do not have an account?"
 msgstr ""
@@ -82,15 +86,11 @@ msgstr ""
 msgid "External IP"
 msgstr ""
 
-#: app/scripts/components/issues/issues-short-list.html:48
-msgid "from"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:25
 msgid "Flavor"
 msgstr ""
 
-#: app/scripts/components/issues/issues-short-list.html:48
+#: app/scripts/components/issues/issues-short-list.html:49
 msgid "from"
 msgstr ""
 
@@ -98,8 +98,20 @@ msgstr ""
 msgid "From port"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:16
+msgid "Full name"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:51
 msgid "Gateway IP"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:108
+msgid "I accept the"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:58
+msgid "ID code"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:21
@@ -109,18 +121,6 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/openstack-backup-summary.html:5
 msgid "Instance"
-msgstr ""
-
-#: app/scripts/components/user/user-edit.html:16
-msgid "Full name"
-msgstr ""
-
-#: app/scripts/components/user/user-edit.html:108
-msgid "I accept the"
-msgstr ""
-
-#: app/scripts/components/user/user-edit.html:58
-msgid "ID code"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:30
@@ -162,6 +162,10 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:8
+msgid "Manage at"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:26
 msgid "Max RAM"
 msgstr ""
@@ -178,10 +182,6 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:8
-msgid "Manage at"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:14
 msgid "No access info"
 msgstr ""
@@ -196,7 +196,7 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: app/scripts/components/issues/issues-short-list.html:43
+#: app/scripts/components/issues/issues-short-list.html:44
 msgid "Opened by"
 msgstr ""
 
@@ -315,6 +315,10 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
+#: app/scripts/components/resource/resource-storage-tabs.html:14
+msgid "Snapshots"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:54
 msgid "SSH key"
 msgstr ""
@@ -362,16 +366,16 @@ msgstr ""
 msgid "To update current plan visit"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:132
-msgid "Update profile"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:37
 msgid "Total storage"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
 msgid "Type"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:132
+msgid "Update profile"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:29
@@ -404,6 +408,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:17
 msgid "Volume name"
+msgstr ""
+
+#: app/scripts/components/resource/resource-storage-tabs.html:5
+msgid "Volumes"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:18

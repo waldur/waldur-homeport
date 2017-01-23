@@ -131,8 +131,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.resources.storage', {
       url: 'storage/',
-      templateUrl: 'views/project/storage.html',
-      controller: 'StorageTabController',
+      template: '<ui-view/>',
       data: {
         pageTitle: 'Storage'
       },
@@ -141,16 +140,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.resources.storage.tabs', {
       url: '',
-      views: {
-        volumes: {
-          controller: 'VolumesListController as ListController',
-          templateUrl: 'views/partials/filtered-list.html',
-        },
-        snapshots: {
-          controller: 'SnapshotsListController as ListController',
-          templateUrl: 'views/partials/filtered-list.html',
-        }
-      }
+      template: '<resource-storage-tabs/>'
     })
 
     .state('project.delete', {
