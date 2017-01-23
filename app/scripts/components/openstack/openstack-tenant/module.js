@@ -5,7 +5,6 @@ import { openstackTenantSummary } from './openstack-tenant-summary';
 import packageTemplatesService from './package-templates-service';
 import openstackPackagesService from './openstack-packages-service';
 import openstackTenantChangePackageService from './openstack-tenant-change-package-service';
-import openstackTenantQuotasList from './openstack-tenant-quotas';
 
 export default module => {
   module.config(fieldsConfig);
@@ -14,7 +13,6 @@ export default module => {
   module.directive('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
   module.directive('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
   module.component('openstackTenantSummary', openstackTenantSummary);
-  module.component('openstackTenantQuotasList', openstackTenantQuotasList);
   module.service('packageTemplatesService', packageTemplatesService);
   module.service('openstackPackagesService', openstackPackagesService);
   module.service('openstackTenantChangePackageService', openstackTenantChangePackageService);
@@ -105,7 +103,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       },
       quotas: {
         heading: 'Quotas',
-        component: 'openstackTenantQuotasList'
+        component: 'quotasTable'
       },
     })
   });
