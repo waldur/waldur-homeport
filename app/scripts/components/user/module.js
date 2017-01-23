@@ -26,7 +26,7 @@ export default module => {
   module.directive('keyCreate', keyCreate);
   module.directive('userEvents', userEvents);
   module.directive('userManage', userManage);
-  module.directive('userSidebar', userSidebar);
+  module.component('userSidebar', userSidebar);
   module.directive('userDetails', userDetails);
   module.component('userEdit', userEdit);
   module.constant('PRIVATE_USER_TABS', PRIVATE_USER_TABS);
