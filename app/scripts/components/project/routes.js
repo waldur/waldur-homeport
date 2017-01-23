@@ -85,9 +85,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.alerts', {
       url: 'alerts/',
-      templateUrl: 'views/partials/filtered-list.html',
-      controller: 'ProjectAlertTabController',
-      controllerAs: 'ListController',
+      template: '<project-alerts-list/>',
       data: {
         pageTitle: 'Alerts'
       }
@@ -101,9 +99,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.resources.vms', {
       url: 'virtual-machines/',
-      templateUrl: 'views/partials/filtered-list.html',
-      controller: 'ProjectVirtualMachinesListController',
-      controllerAs: 'ListController',
+      template: '<resource-vms-list/>',
       data: {
         pageTitle: 'Virtual machines'
       }
@@ -111,9 +107,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.resources.apps', {
       url: 'applications/',
-      templateUrl: 'views/partials/filtered-list.html',
-      controller: 'ProjectApplicationsTabController',
-      controllerAs: 'ListController',
+      template: '<resource-applications-list/>',
       data: {
         pageTitle: 'Applications'
       }
@@ -121,9 +115,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.resources.clouds', {
       url: 'private-clouds/',
-      templateUrl: 'views/partials/filtered-list.html',
-      controller: 'ProjectPrivateCloudsTabController',
-      controllerAs: 'ListController',
+      template: '<resource-private-clouds-list/>',
       data: {
         pageTitle: 'Private clouds'
       }

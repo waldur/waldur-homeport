@@ -16,8 +16,13 @@ import { resourceSummaryBase } from './resource-summary-base';
 import { resourceBreadcrumbs } from './resource-breadcrumbs';
 import ResourceBreadcrumbsService from './resource-breadcrumbs-service';
 import { CATEGORY_ITEMS } from './resource-categories';
-import resourceStorageTabs from './resource-storage-tabs';
 import resourcesService from './resources-service';
+import baseResourceListController from './resources-list';
+import BaseProjectResourcesTabController from './resources-base-list';
+import resourceStorageTabs from './resource-storage-tabs';
+import resourceApplicationsList from './resource-applications-list';
+import resourceVmsList from './resource-vms-list';
+import resourcePrivateCloudsList from './resource-private-clouds-list';
 
 export default module => {
   module.service('resourceUtils', resourceUtils);
@@ -38,6 +43,11 @@ export default module => {
   module.component('resourceBreadcrumbs', resourceBreadcrumbs);
   module.service('ResourceBreadcrumbsService', ResourceBreadcrumbsService);
   module.constant('CATEGORY_ITEMS', CATEGORY_ITEMS);
-  module.component('resourceStorageTabs', resourceStorageTabs);
   module.service('resourcesService', resourcesService);
+  module.service('baseResourceListController', baseResourceListController);
+  module.service('BaseProjectResourcesTabController', BaseProjectResourcesTabController);
+  module.component('resourceStorageTabs', resourceStorageTabs);
+  module.component('resourceApplicationsList', resourceApplicationsList);
+  module.component('resourceVmsList', resourceVmsList);
+  module.component('resourcePrivateCloudsList', resourcePrivateCloudsList);
 };
