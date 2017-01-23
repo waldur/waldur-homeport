@@ -30,7 +30,7 @@ export default function planRoutes($stateProvider) {
           template: '<site-header></site-header>',
         },
         appContent: {
-          templateUrl: '<plan-agreement-cancel/>',
+          template: '<plan-agreement-cancel/>',
         }
       }
     });
