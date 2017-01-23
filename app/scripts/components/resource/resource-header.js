@@ -17,7 +17,6 @@ function ResourceDetailUpdateController(
   $interval,
   ENV,
   resourcesService,
-  resourcesCountService,
   baseControllerDetailUpdateClass,
   currentStateService,
   ncUtilsFlash) {
