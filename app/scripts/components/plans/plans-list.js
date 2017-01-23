@@ -1,4 +1,5 @@
 import template from './plans-list.html';
+import './plans-list.scss';
 
 const plansList = {
   template,
