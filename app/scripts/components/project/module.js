@@ -4,6 +4,7 @@ import ProjectDetailsController from './project-details';
 import projectIssues from './project-issues';
 import projectEvents from './project-events';
 import projectsList from './projects-list';
+import projectAlertsList from './project-alerts-list';
 import projectRoutes from './routes';
 
 export default module => {
@@ -13,5 +14,6 @@ export default module => {
   module.directive('projectIssues', projectIssues);
   module.directive('projectEvents', projectEvents);
   module.directive('projectsList', projectsList);
+  module.component('projectAlertsList', projectAlertsList);
   module.config(projectRoutes);
 };
