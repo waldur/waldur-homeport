@@ -6,19 +6,19 @@ export default function planRoutes($stateProvider) {
       abstract: true,
       templateUrl: 'views/partials/base.html',
       data: {
+        bodyClass: 'old',
         auth: true,
-        bodyClass: 'old'
       }
     })
 
     .state('agreement.approve', {
-      url: 'agreement/',
+      url: 'approve/',
       views: {
         appHeader: {
           template: '<site-header></site-header>',
         },
         appContent: {
-          templateUrl: 'views/agreement/approve.html',
+          template: '<plan-agreement-approve/>',
         }
       }
     })
@@ -30,7 +30,7 @@ export default function planRoutes($stateProvider) {
           template: '<site-header></site-header>',
         },
         appContent: {
-          templateUrl: 'views/agreement/cancel.html',
+          templateUrl: '<plan-agreement-cancel/>',
         }
       }
     });
