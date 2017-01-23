@@ -5,6 +5,7 @@ import { openstackTenantSummary } from './openstack-tenant-summary';
 import packageTemplatesService from './package-templates-service';
 import openstackPackagesService from './openstack-packages-service';
 import openstackTenantChangePackageService from './openstack-tenant-change-package-service';
+import openstackTenantQuotasList from './openstack-tenant-quotas';
 
 export default module => {
   module.config(fieldsConfig);
@@ -13,6 +14,7 @@ export default module => {
   module.directive('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
   module.directive('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
   module.component('openstackTenantSummary', openstackTenantSummary);
+  module.component('openstackTenantQuotasList', openstackTenantQuotasList);
   module.service('packageTemplatesService', packageTemplatesService);
   module.service('openstackPackagesService', openstackPackagesService);
   module.service('openstackTenantChangePackageService', openstackTenantChangePackageService);
@@ -86,6 +88,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       'networks',
       'security_groups',
       'floating_ips',
+      'quotas'
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       networks: {
@@ -99,6 +102,10 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       floating_ips: {
         heading: 'Floating IPs',
         component: 'openstackFloatingIpsList'
+      },
+      quotas: {
+        heading: 'Quotas',
+        component: 'openstackTenantQuotasList'
       },
     })
   });
