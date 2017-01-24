@@ -51,6 +51,11 @@ function InvitationsListController(
         this.loading = false;
       });
     },
+    getFilter: function() {
+      return {
+        customer: this.currentCustomer.uuid
+      };
+    },
     getSearchFilters: function() {
       this.searchFilters = [
         {

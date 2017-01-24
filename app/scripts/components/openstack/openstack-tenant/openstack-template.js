@@ -55,7 +55,7 @@ export function templateParser(template) {
     map[item.type] = item.amount;
     return map;
   }, {});
-  var dailyPrice = template.price * 24;
+  const dailyPrice = template.price;
   return angular.extend({}, template, {
     dailyPrice: dailyPrice,
     monthlyPrice: dailyPrice * 30,
