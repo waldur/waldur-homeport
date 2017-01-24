@@ -1,3 +1,10 @@
+/*
+Note that we are not using builtin Angular plugin for Sentry,
+because it is required to initialize before any other application code.
+But we need to load application configuration from JSON via AJAX and
+only then decide if we need to install Raven or not.
+*/
+
 import Raven from 'raven-js';
 
 export default module => {
