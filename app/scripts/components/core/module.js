@@ -1,10 +1,12 @@
 import attachTracking from './tracking';
 import submitButton from './submit-button';
+import sentryModule from './sentry';
 
 export default module => {
   module.run(attachTracking);
   module.directive('submitButton', submitButton);
   module.run(redirectToState);
+  sentryModule(module);
 };
 
 // @ngInject
