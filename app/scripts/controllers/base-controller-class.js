@@ -75,8 +75,8 @@
           if (vm.controllerScope && vm.controllerScope.onListReceive) {
             vm.controllerScope.onListReceive({
               $event: {
-                filter,
-                response,
+                filter: filter,
+                response: response
               }
             });
           }
