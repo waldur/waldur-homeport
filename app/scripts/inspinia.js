@@ -5,8 +5,16 @@
  * Custom scripts
  */
 
-$(document).ready(function () {
+ function updateSidebar() {
+        if ($(document).width() < 769) {
+            $('body').addClass('body-small');
+        } else {
+            $('body').removeClass('body-small');
+            $('body').removeClass('mini-navbar');
+        }
+ }
 
+$(document).ready(function () {
 
     // Full height of sidebar
     function fix_height() {
@@ -37,6 +45,7 @@ $(document).ready(function () {
     $(window).bind("load resize scroll", function() {
         if(!$("body").hasClass('body-small')) {
             fix_height();
+            updateSidebar();
         }
     });
 
@@ -51,6 +60,7 @@ $(document).ready(function () {
 
     setTimeout(function(){
         fix_height();
+        updateSidebar();
     });
 
 });
@@ -58,11 +68,6 @@ $(document).ready(function () {
 // Minimalize menu when screen is less than 768px
 $(function() {
     $(window).bind("load resize", function() {
-        if ($(document).width() < 769) {
-            $('body').addClass('body-small');
-        } else {
-            $('body').removeClass('body-small');
-            $('body').removeClass('mini-navbar');
-        }
-    })
+        updateSidebar();
+    });
 });
