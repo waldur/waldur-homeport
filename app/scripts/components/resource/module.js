@@ -10,6 +10,7 @@ import resourceTabsModule from './tabs/module';
 import resourcesListModule from './list/module';
 import monitoringModule from './monitoring/module';
 import actionsModule from './actions/module';
+import filtersModule from './filters';
 
 export default module => {
   module.service('resourceUtils', resourceUtils);
@@ -24,4 +25,5 @@ export default module => {
   resourcesListModule(module);
   monitoringModule(module);
   actionsModule(module);
+  filtersModule(module);
 };
