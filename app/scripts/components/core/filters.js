@@ -71,14 +71,6 @@ function dateTime() {
   };
 }
 
-function prettyQuotaName() {
-  return function(input) {
-    if (input) {
-      return input.replace(/nc_|_count/g, '').replace(/_/g, ' ');
-    }
-  };
-}
-
 export default module => {
   module.filter('filesize', filesize);
   module.filter('titleCase', titleCase);
@@ -87,5 +79,4 @@ export default module => {
   module.filter('defaultCurrency', defaultCurrency);
   module.filter('shortDate', shortDate);
   module.filter('dateTime', dateTime);
-  module.filter('prettyQuotaName', prettyQuotaName);
 };
