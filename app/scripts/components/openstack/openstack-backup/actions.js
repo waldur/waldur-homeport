@@ -17,7 +17,14 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
             type: 'datetime'
           }
         }
-      })
+      }),
+      restore: {
+        fields: {
+          flavor: {
+            formatter: ($filter, resource) => $filter('formatFlavor')(resource)
+          }
+        }
+      }
     }
   });
 }
