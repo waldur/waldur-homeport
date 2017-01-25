@@ -3,7 +3,7 @@
 </div>
 <div class="provider-quotas" ng-if="$ctrl.resource.quotas.length > 0">
     <div class="details-table__row" ng-repeat="quota in $ctrl.resource.quotas | orderBy:'name'">
-        <div class="details-table__key" translate>
+        <div class="details-table__key">
             {{ ::quota.name | quotaName }}:
         </div>
         <div class="details-table__value">

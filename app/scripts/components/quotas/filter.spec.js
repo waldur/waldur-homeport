@@ -24,10 +24,6 @@ describe('Quotas', () => {
     it('Displays snake_case strings replacing underscores with spaces, general case multiple words', () => {
       expect(quotaNameFilter('creepy_quota_value')).toBe('Creepy quota value');
     });
-
-    it('Displays snake_case strings replacing underscores with spaces, general case single word', () => {
-      expect(quotaNameFilter('single')).toBe('Single');
-    });
   });
 
   describe('quotaValueFilter', () => {
@@ -36,15 +32,15 @@ describe('Quotas', () => {
       quotaValueFilter = _quotaValueFilter_;
     }));
 
-    it('displays value in MB without any digits after comma if value < 1 GB', () => {
+    it('displays ram value that is formatted with filesize filter', () => {
       expect(quotaValueFilter(10.0, 'ram')).toBe('10 MB');
     });
 
-    it('displays value in GB without any digits after comma if value < 1 TB', () => {
+    it('displays storage value that is formatted with filesize filter', () => {
       expect(quotaValueFilter(100.0 * 1024, 'storage')).toBe('100 GB');
     });
 
-    it('displays value in TB with one digit after comma if value > 1 TB', () => {
+    it('displays backup_storage value that is formatted with filesize filter', () => {
       expect(quotaValueFilter(1.99 * 1024 * 1024, 'backup_storage')).toBe('1.9 TB');
     });
 
