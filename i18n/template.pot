@@ -14,6 +14,10 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
+#: app/scripts/components/auth/auth-activation.html:3
+msgid "Account activation"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 msgid "Actions"
 msgstr ""
@@ -36,6 +40,15 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:16
 msgid "Attached to"
+msgstr ""
+
+#: app/scripts/components/auth/auth-login-failed.html:10
+msgid "Back to login"
+msgstr ""
+
+#: app/scripts/components/plans/plan-agreement-approve.html:3
+#: app/scripts/components/plans/plan-agreement-cancel.html:3
+msgid "Billing plan agreement is being processed, please wait."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:7
@@ -157,9 +170,17 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
+#: app/scripts/components/auth/auth-login-complete.html:3
+msgid "Logging user in"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:102
 #: app/scripts/components/auth/auth-login.html:39
 msgid "Login"
+msgstr ""
+
+#: app/scripts/components/auth/auth-login-failed.html:3
+msgid "Login failed"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:8
@@ -315,7 +336,7 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: app/scripts/components/resource/resource-storage-tabs.html:14
+#: app/scripts/components/resource/list/resource-storage-tabs.html:14
 msgid "Snapshots"
 msgstr ""
 
@@ -410,7 +431,7 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
-#: app/scripts/components/resource/resource-storage-tabs.html:5
+#: app/scripts/components/resource/list/resource-storage-tabs.html:5
 msgid "Volumes"
 msgstr ""
 
