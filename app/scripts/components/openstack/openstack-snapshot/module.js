@@ -1,9 +1,11 @@
 import openstackSnapshotsService from './openstack-snapshots-service';
 import { openstackSnapshotSummary } from './openstack-snapshot-summary';
+import openstackSnapshotsList from './openstack-snapshots-list';
 
 export default module => {
   module.service('openstackSnapshotsService', openstackSnapshotsService);
   module.component('openstackSnapshotSummary', openstackSnapshotSummary);
+  module.component('openstackSnapshotsList', openstackSnapshotsList);
   module.config(actionConfig);
   module.config(stateConfig);
 };

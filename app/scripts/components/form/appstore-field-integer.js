@@ -6,7 +6,8 @@ export default function appstoreFieldInteger() {
     template: template,
     scope: {
       field: '=',
-      model: '='
+      model: '=',
+      form: '=',
     },
     controller: function() {},
     controllerAs: '$ctrl',

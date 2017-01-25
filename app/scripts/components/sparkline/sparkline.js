@@ -14,7 +14,7 @@ export default function sparkline() {
       }));
       scope.items = scope.sparkData.map(function(item) {
         return angular.extend({}, item, {
-          relative: max && Math.round(item.value * 100 / max)
+          relative: max && Math.round(item.value * 100 / max) + '%'
         });
       });
     }

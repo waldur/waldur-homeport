@@ -5,10 +5,10 @@ const resourceState = {
   bindings: {
     resource: '<'
   },
-  controller: function ResourceStateController($scope, resourceUtils) {
+  controller: function ResourceStateController($scope, resourceStateService) {
     $scope.$watch(() => this.resource, () => {
       if (this.resource) {
-        this.context = resourceUtils.getResourceState(this.resource);
+        this.context = resourceStateService.getResourceState(this.resource);
       }
     });
   }

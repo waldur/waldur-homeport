@@ -1,21 +1,15 @@
 import template from './user-sidebar.html';
 
-export default function userSidebar() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: UserSidebarController,
-    controllerAs: 'Ctrl',
-    bindToController: true,
-  };
-}
+const userSidebar = {
+  template,
+  controllerAs: 'Ctrl',
+  controller: function UserSidebarController($scope, authService, usersService, PRIVATE_USER_TABS) {
+    // @ngInject
+    this.items = PRIVATE_USER_TABS;
+    this.logout = authService.logout;
+    usersService.getCurrentUser().then(user => this.user = user);
+    $scope.$on('CURRENT_USER_UPDATED', (event, { user }) => this.user = user);
+  }
+};
 
-// @ngInject
-function UserSidebarController(authService, usersService, PRIVATE_USER_TABS) {
-  var ctrl = this;
-  ctrl.items = PRIVATE_USER_TABS;
-  ctrl.logout = authService.logout;
-  usersService.getCurrentUser().then(function(user) {
-    ctrl.user = user;
-  });
-}
+export default userSidebar;

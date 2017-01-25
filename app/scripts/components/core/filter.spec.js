@@ -1,4 +1,4 @@
-import filtersModule from './filters.js';
+import filtersModule from './filters';
 
 describe('Core filters', () => {
   filtersModule(angular.module('core.filters', []));
