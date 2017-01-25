@@ -25,7 +25,7 @@ export default class HttpUtils {
 
   fetchNextPage(accum, url) {
     /*
-      This function uses recursion, but it should be a problem
+      This function uses recursion, but it should not be a problem
       because it is expected that number of pages is not big
     */
     return this.$http.get(url).then(response => {
