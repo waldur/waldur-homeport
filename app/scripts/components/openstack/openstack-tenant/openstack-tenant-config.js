@@ -1,7 +1,8 @@
 import {
   openstackTemplateColumns,
   templateParser,
-  templateFormatter
+  templateFormatter,
+  templateComparator
 } from './openstack-template';
 
 export default {
@@ -30,7 +31,8 @@ export default {
       resource: 'package-templates',
       parser: templateParser,
       formatter: templateFormatter,
-      columns: openstackTemplateColumns
+      columns: openstackTemplateColumns,
+      comparator: templateComparator,
     },
     description: {
       type: 'text',

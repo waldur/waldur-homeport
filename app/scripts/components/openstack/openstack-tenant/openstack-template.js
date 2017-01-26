@@ -38,6 +38,24 @@ export const openstackTemplateColumns = [
   }
 ];
 
+export function templateComparator(a, b) {
+  const categories = ['Small', 'Medium', 'Large'];
+
+  const category1 = categories.indexOf(a.category);
+  const category2 = categories.indexOf(b.category);
+
+  if (category1 < category2) return -1;
+  if (category1 > category2) return 1;
+
+  if (a.monthlyPrice < b.monthlyPrice) return -1;
+  if (a.monthlyPrice > b.monthlyPrice) return 1;
+
+  const name1 = a.name.toUpperCase();
+  const name2 = b.name.toUpperCase();
+
+  return name1.localeCompare(name2);
+}
+
 export function templateParser(template) {
   /* Output is item with the following format:
   {
