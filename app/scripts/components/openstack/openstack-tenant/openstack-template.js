@@ -5,7 +5,8 @@ export const openstackTemplateColumns = [
   },
   {
     name: 'category',
-    label: 'Category'
+    label: 'Category',
+    filter: 'translate'
   },
   {
     name: 'cores',
@@ -37,6 +38,24 @@ export const openstackTemplateColumns = [
     filter: 'defaultCurrency'
   }
 ];
+
+export const TEMPLATE_CATEGORIES = ['Trial', 'Small', 'Medium', 'Large'];
+
+export function templateComparator(a, b) {
+  const category1 = TEMPLATE_CATEGORIES.indexOf(a.category);
+  const category2 = TEMPLATE_CATEGORIES.indexOf(b.category);
+
+  if (category1 < category2) return -1;
+  if (category1 > category2) return 1;
+
+  if (a.monthlyPrice < b.monthlyPrice) return -1;
+  if (a.monthlyPrice > b.monthlyPrice) return 1;
+
+  const name1 = a.name.toUpperCase();
+  const name2 = b.name.toUpperCase();
+
+  return name1.localeCompare(name2);
+}
 
 export function templateParser(template) {
   /* Output is item with the following format:

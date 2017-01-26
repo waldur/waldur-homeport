@@ -35,7 +35,7 @@
         <div class="search-box">
           <input id="organization-search-box"
                  type="text"
-                 class="form-control" 
+                 class="form-control"
                  ng-model="Ctrl.organizationSearchInput"
                  ng-model-options="{ debounce: 500 }"
                  placeholder="Filter organizations">
@@ -58,6 +58,8 @@
             class="elipsis"
             ng-if="organization.abbreviation"
             uib-tooltip="{{ organization.name }}"
+            tooltip-append-to-body="true"
+            tooltip-class="select-workspace-dialog__tooltip--order"
             ng-bind="organization.abbreviation"></div>
           <div
             class="elipsis"
@@ -80,7 +82,7 @@
         <div class="search-box">
           <input id="project-search-box"
                  type="text"
-                 class="form-control" 
+                 class="form-control"
                  ng-model="Ctrl.projectSearchInput"
                  ng-model-options="{ debounce: 500 }"
                  placeholder="Filter projects">

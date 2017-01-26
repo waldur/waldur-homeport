@@ -1,7 +1,9 @@
 import {
   openstackTemplateColumns,
   templateParser,
-  templateFormatter
+  templateFormatter,
+  templateComparator,
+  TEMPLATE_CATEGORIES
 } from './openstack-template';
 
 export default {
@@ -30,7 +32,21 @@ export default {
       resource: 'package-templates',
       parser: templateParser,
       formatter: templateFormatter,
-      columns: openstackTemplateColumns
+      columns: openstackTemplateColumns,
+      comparator: templateComparator,
+      filterOptions: {
+        name: 'category',
+        choices: [
+          {
+            value: '',
+            label: 'All categories'
+          },
+          ...TEMPLATE_CATEGORIES.map(category => ({
+            value: category,
+            label: category
+          }))
+        ]
+      }
     },
     description: {
       type: 'text',

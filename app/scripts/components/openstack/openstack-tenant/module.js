@@ -86,6 +86,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       'networks',
       'security_groups',
       'floating_ips',
+      'quotas'
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       networks: {
@@ -99,6 +100,10 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       floating_ips: {
         heading: 'Floating IPs',
         component: 'openstackFloatingIpsList'
+      },
+      quotas: {
+        heading: 'Quotas',
+        component: 'quotasTable'
       },
     })
   });

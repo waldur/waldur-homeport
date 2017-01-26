@@ -20,6 +20,8 @@ configuration files are loaded and their options are merged together with defaul
 
  - `enableExperimental` is used to enable experimental features, they are disabled by default.
 
+ - `SENTRY_DSN` should contain valid Data Source Name in order to connect Sentry.
+
 ## Authentication methods
 
 There are several authentication methods available:

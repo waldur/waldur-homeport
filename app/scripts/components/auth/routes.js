@@ -52,7 +52,8 @@ export default function authRoutes($stateProvider) {
         }
       },
       data: {
-        anonymous: true
+        anonymous: true,
+        bodyClass: 'old',
       }
     })
 
@@ -67,7 +68,24 @@ export default function authRoutes($stateProvider) {
         }
       },
       data: {
-        anonymous: true
+        anonymous: true,
+        bodyClass: 'old',
+      }
+    })
+
+    .state('home.login_failed', {
+      url: 'login_failed/',
+      views: {
+        'appHeader@home': {
+          template: '<site-header></site-header>',
+        },
+        'appContent@home': {
+          template: '<auth-login-failed></auth-login-failed>',
+        }
+      },
+      data: {
+        anonymous: true,
+        bodyClass: 'old',
       }
     })
 

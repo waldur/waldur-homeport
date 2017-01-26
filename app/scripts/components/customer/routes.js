@@ -171,7 +171,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.plans', {
       url: 'plans/',
-      templateUrl: 'views/customer/plans.html',
+      template: '<plans-list/>',
       data: {
         pageTitle: 'Plans'
       }

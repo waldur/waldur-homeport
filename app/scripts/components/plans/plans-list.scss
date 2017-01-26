@@ -1,3 +1,8 @@
+@import 'variables.scss';
+@import 'animate.scss';
+@import 'mixins/mediaqueries.scss';
+@import 'mixins/propertis.scss';
+
 .plans {
     @include property(margin, 20 0);
     display: flex;

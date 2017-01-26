@@ -53,6 +53,7 @@ module.exports = {
     $: true,
     Class: true,
     moment: true,
+    jasmine: true,
     describe: true,
     expect: true,
     it: true,

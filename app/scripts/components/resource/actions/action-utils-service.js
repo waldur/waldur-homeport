@@ -1,6 +1,6 @@
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $filter, ncUtils,
+  ncUtilsFlash, $rootScope, HttpUtils, $http, $q, $uibModal, $filter, ncUtils,
   resourcesService, ActionConfiguration) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
@@ -57,15 +57,7 @@ export default function actionUtilsService(
   };
 
   this.loadRawChoices = function(field) {
-    var url = field.url, query_params = {};
-    var parts = field.url.split('?');
-    if (parts.length === 2) {
-      url = parts[0];
-      query_params = ncUtils.parseQueryString(parts[1]);
-    }
-    return $http.get(url, {params: query_params}).then(function(response) {
-      return response.data;
-    });
+    return HttpUtils.getAll(field.url);
   };
 
   this.buttonClick = function(controller, model, name, action) {

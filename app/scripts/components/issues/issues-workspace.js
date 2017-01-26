@@ -4,11 +4,11 @@ export default {
   template: template,
   controller: class IssuesWorkspace {
     // @ngInject
-    constructor(usersService, $state, $rootScope, WorkspaceService) {
-      this.usersService = usersService;
+    constructor($state, $rootScope, WorkspaceService, IssueNavigationService) {
       this.$state = $state;
       this.$rootScope = $rootScope;
       this.WorkspaceService = WorkspaceService;
+      this.IssueNavigationService = IssueNavigationService;
     }
 
     $onInit() {
@@ -17,10 +17,7 @@ export default {
         workspace: 'support',
       });
 
-      this.usersService.getCurrentUser().then(user => {
-        this.user = user;
-        this.updateItems();
-      });
+      this.IssueNavigationService.getSidebarItems().then(items => this.items = items);
 
       this.unlisten = this.$rootScope.$on('$stateChangeSuccess', () => {
         this.pageTitle = this.$state.current.data.pageTitle;
@@ -32,49 +29,8 @@ export default {
       this.unlisten();
     }
 
-    gotoSupport() {
-      if (this.user.is_staff) {
-        this.$state.go('support.helpdesk');
-      } else {
-        this.$state.go('support.dashboard');
-      }
-    }
-
-    updateItems() {
-      if (this.user.is_staff) {
-        this.items = [
-          {
-            label: 'Helpdesk',
-            icon: 'fa-headphones',
-            link: 'support.helpdesk'
-          }
-        ];
-      } else {
-        this.items = [
-          {
-            label: 'Dashboard',
-            icon: 'fa-th-large',
-            link: 'support.dashboard'
-          },
-          {
-            label: 'Support requests',
-            icon: 'fa-list',
-            link: 'support.list'
-          },
-          {
-            label: 'Activity stream',
-            icon: 'fa-rss',
-            link: 'support.activity',
-            feature: 'support.activity'
-          },
-          {
-            label: 'SLAs',
-            icon: 'fa-book',
-            link: 'support.sla',
-            feature: 'support.sla'
-          }
-        ];
-      }
+    gotoDashboard() {
+      return this.IssueNavigationService.gotoDashboard();
     }
   }
 };
