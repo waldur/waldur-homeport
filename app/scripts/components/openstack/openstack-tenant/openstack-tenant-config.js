@@ -33,6 +33,27 @@ export default {
       formatter: templateFormatter,
       columns: openstackTemplateColumns,
       comparator: templateComparator,
+      filterOptions: {
+        name: 'category',
+        choices: [
+          {
+            value: '',
+            label: 'All categories'
+          },
+          {
+            value: 'Small',
+            label: 'Small'
+          },
+          {
+            value: 'Medium',
+            label: 'Medium'
+          },
+          {
+            value: 'Large',
+            label: 'Large'
+          }
+        ]
+      }
     },
     description: {
       type: 'text',

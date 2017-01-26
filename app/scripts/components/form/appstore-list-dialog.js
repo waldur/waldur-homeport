@@ -23,6 +23,7 @@ class DialogController {
     this.title = this.field.dialogTitle || `Select ${this.field.label}`;
     this.choices = this.field.choices;
     this.columns = this.field.columns;
+    this.filterOptions = this.field.filterOptions;
   }
 
   selectItem(item) {
