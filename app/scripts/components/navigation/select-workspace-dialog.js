@@ -1,4 +1,5 @@
 import template from './select-workspace-dialog.html';
+import './select-workspace-dialog.scss';
 
 export default function selectWorkspaceDialog() {
   return {
