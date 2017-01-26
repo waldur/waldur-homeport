@@ -38,11 +38,11 @@ export const openstackTemplateColumns = [
   }
 ];
 
-export function templateComparator(a, b) {
-  const categories = ['Small', 'Medium', 'Large'];
+export const TEMPLATE_CATEGORIES = ['Trial', 'Small', 'Medium', 'Large'];
 
-  const category1 = categories.indexOf(a.category);
-  const category2 = categories.indexOf(b.category);
+export function templateComparator(a, b) {
+  const category1 = TEMPLATE_CATEGORIES.indexOf(a.category);
+  const category2 = TEMPLATE_CATEGORIES.indexOf(b.category);
 
   if (category1 < category2) return -1;
   if (category1 > category2) return 1;
