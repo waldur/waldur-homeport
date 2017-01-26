@@ -5,6 +5,9 @@ function filesize() {
     if (isNaN(parseFloat(input)) || ! isFinite(input)) {
       return '?';
     }
+    if (input === 0) {
+      return input;
+    }
     let unit = 0;
 
     while (input >= 1024) {
