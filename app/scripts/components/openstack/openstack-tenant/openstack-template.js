@@ -5,7 +5,8 @@ export const openstackTemplateColumns = [
   },
   {
     name: 'category',
-    label: 'Category'
+    label: 'Category',
+    filter: 'translate'
   },
   {
     name: 'cores',
