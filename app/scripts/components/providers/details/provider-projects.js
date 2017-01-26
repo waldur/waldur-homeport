@@ -59,25 +59,24 @@ function ProviderProjectsController(
     },
     getContext: function() {
       // Context consists of list of projects and list of links
-      var context = {};
-      return $q.all([
-        projectsService.getList().then(function(projects) {
-          context.projects = projects;
-        }),
-        this.getLinks().then(function(links) {
-          context.links = links;
-        })
-      ]).then(function() {
-        return context;
+      return currentStateService.getCustomer().then(customer => {
+        var context = {};
+        return $q.all([
+          this.getProjects(customer).then(projects => context.projects = projects),
+          this.getLinks(customer).then(links => context.links = links)
+        ]).then(() => context);
       });
     },
-    getLinks: function() {
-      // Get service project links filtered by customer and service
-      return currentStateService.getCustomer().then(function(customer) {
-        return joinServiceProjectLinkService.getServiceProjectLinks(
-          customer.uuid, $scope.service.service_type, $scope.service.uuid
-        );
+    getProjects: function(customer) {
+      return projectsService.getList({
+        customer: customer.uuid
       });
+    },
+    getLinks: function(customer) {
+      // Get service project links filtered by customer and service
+      return joinServiceProjectLinkService.getServiceProjectLinks(
+        customer.uuid, $scope.service.service_type, $scope.service.uuid
+      );
     },
     save: function() {
       var add_promises = this.choices.filter(function(choice) {
