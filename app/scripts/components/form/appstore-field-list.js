@@ -25,6 +25,11 @@ class FieldController {
       this.field = angular.extend({}, this.field, {choices});
     }
 
+    if (this.field.comparator) {
+      const choices = this.field.choices.sort(this.field.comparator);
+      this.field = angular.extend({}, this.field, {choices});
+    }
+
     this.hasChoices = this.field.choices && this.field.choices.length > 0;
     this.renderWarning = this.field.required && !this.hasChoices;
     this.renderEmpty = !this.field.required && !this.hasChoices;

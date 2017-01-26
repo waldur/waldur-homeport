@@ -11,6 +11,7 @@ export default function choicesTable() {
       choices: '=',
       columns: '=',
       value: '=',
+      filterOptions: '=',
       selectItem: '&'
     }
   };
@@ -18,8 +19,20 @@ export default function choicesTable() {
 
 // @ngInject
 class TableController {
-  constructor($filter) {
+  constructor($filter, $scope) {
     this.$filter = $filter;
+    if (this.filterOptions) {
+      $scope.$watch(
+        () => this.filterValue,
+        filterValue => this.filter = {
+          [this.filterOptions.name]: filterValue
+        }
+      );
+    }
+    this.style = {
+      height: '300px',
+      'overflow-y': 'auto'
+    };
   }
 
   formatValue(column, choice) {
