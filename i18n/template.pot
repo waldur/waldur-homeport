@@ -10,7 +10,7 @@ msgid "&lt; Back"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:13
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:5
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:15
 msgid "Access"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:14
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:24
 msgid "No access info"
 msgstr ""
 
@@ -213,7 +213,11 @@ msgstr ""
 msgid "No items yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:12
+#: app/scripts/components/quotas/quotas-table.html:10
+msgid "of"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:22
 msgid "Open"
 msgstr ""
 
@@ -229,11 +233,15 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:5
+msgid "Package"
+msgstr ""
+
 #: app/scripts/components/error/error-404.html:3
 msgid "Page Not Found :/"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:31
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
 msgstr ""
 
@@ -411,7 +419,7 @@ msgstr ""
 msgid "User status"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:22
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
 msgid "Username"
 msgstr ""
 
@@ -446,6 +454,10 @@ msgstr ""
 
 #: app/scripts/components/error/error-403.html:3
 msgid "You have exceeded maximum number of quotas."
+msgstr ""
+
+#: app/scripts/components/quotas/quotas-table.html:2
+msgid "You have no quotas yet."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:15
