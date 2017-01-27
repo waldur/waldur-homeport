@@ -88,3 +88,23 @@ export function templateFormatter($filter, value) {
   const props = `${value.cores} vCPU, ${ram} RAM, ${storage} storage`;
   return `${value.name} (${props})`;
 }
+
+export function parseQuotas(quotas) {
+  return quotas.reduce((accum, quota) =>
+    angular.extend(accum, {
+      [quota.name]: quota.limit,
+    }), {});
+}
+
+export function getTenantTemplate(tenant) {
+  const quotas = parseQuotas(tenant.quotas);
+  return {
+    name: tenant.extra_configuration.package_name,
+    category: tenant.extra_configuration.package_category,
+    flavor: {
+      cores: quotas.vcpu,
+      ram: quotas.ram,
+      disk: quotas.storage,
+    }
+  };
+}
