@@ -97,6 +97,9 @@ export function parseQuotas(quotas) {
 }
 
 export function getTenantTemplate(tenant) {
+  if (!tenant.extra_configuration.package_category) {
+    return;
+  }
   const quotas = parseQuotas(tenant.quotas);
   return {
     name: tenant.extra_configuration.package_name,
