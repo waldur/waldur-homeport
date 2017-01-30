@@ -10,9 +10,12 @@
             <li>
                 <a ui-sref="help.list">Help</a>
             </li>
-            <li>
-                Build: <span ng-bind="::$ctrl.buildId"></span>
+            <li ng-if="::$ctrl.companyName">
+                <a ng-href="{{ $ctrl.companyUrl }}">{{ ::$ctrl.companyName }}</a>
             </li>
         </ul>
+    </div>
+    <div>
+        Build: <span ng-bind="::$ctrl.buildId"></span>
     </div>
 </footer>
