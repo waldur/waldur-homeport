@@ -2,13 +2,13 @@
     <div class="pull-right">
         <ul class="footer-nav">
             <li>
-                <a ui-sref="policy.privacy">Privacy policy</a>
+                <a ui-sref="policy.privacy" translate>Privacy policy</a>
             </li>
             <li>
-                <a ui-sref="tos.index">Terms of Service</a>
+                <a ui-sref="tos.index" translate>Terms of Service</a>
             </li>
             <li>
-                <a ui-sref="help.list">Help</a>
+                <a ui-sref="help.list" translate>Help</a>
             </li>
             <li ng-if="::$ctrl.companyName">
                 <a ng-href="{{ $ctrl.companyUrl }}">{{ ::$ctrl.companyName }}</a>
@@ -16,6 +16,7 @@
         </ul>
     </div>
     <div>
-        Build: <span ng-bind="::$ctrl.buildId"></span>
+        <span translate>Build</span>:
+        <span ng-bind="::$ctrl.buildId"></span>
     </div>
 </footer>
