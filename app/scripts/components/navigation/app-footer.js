@@ -5,6 +5,8 @@ export const appFooter = {
   controller: class AppFooterController {
     constructor(ENV) {
       this.buildId = ENV.buildId;
+      this.companyName = ENV.companyName;
+      this.companyUrl = ENV.companyUrl;
     }
   }
 };

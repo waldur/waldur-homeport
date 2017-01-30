@@ -119,6 +119,10 @@ msgstr ""
 msgid "Gateway IP"
 msgstr ""
 
+#: app/scripts/components/navigation/app-footer.html:11
+msgid "Help"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:108
 msgid "I accept the"
 msgstr ""
@@ -265,6 +269,10 @@ msgstr ""
 msgid "Price per month"
 msgstr ""
 
+#: app/scripts/components/navigation/app-footer.html:5
+msgid "Privacy policy"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:53
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:41
@@ -371,6 +379,7 @@ msgstr ""
 msgid "Tenant name"
 msgstr ""
 
+#: app/scripts/components/navigation/app-footer.html:8
 #: app/scripts/components/user/user-edit.html:110
 msgid "Terms of Service"
 msgstr ""
@@ -425,6 +434,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:29
 msgid "vCPU"
+msgstr ""
+
+#: app/scripts/components/navigation/app-footer.html:19
+msgid "Version"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:17
