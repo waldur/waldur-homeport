@@ -17,5 +17,5 @@ export default module => {
   module.directive('customerUsersList', customerUsersList);
   module.component('projectUsers', projectUsers);
   module.component('customerPermissionsLogList', customerPermissionsLogList);
-  module.component('projectPermissionsLogList', projectPermissionsLogList );
+  module.component('projectPermissionsLogList', projectPermissionsLogList);
 };
