@@ -171,7 +171,6 @@ function AddTeamMemberDialogController(
       instance.user = $scope.userModel.user.url || $scope.editUser.url;
       instance.project = newProjects[project];
       instance.role = newRoles[project];
-      instance.expiration_time = $scope.userModel.expiration_time;
       return instance.$save();
     });
 

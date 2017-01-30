@@ -3,7 +3,6 @@ import template from './permissions-log-list.html';
 const customerPermissionsLogList = {
   template: template,
   controller: customerPermissionsLogListController,
-  controllerAs: '$ctrl',
 };
 
 // @ngInject

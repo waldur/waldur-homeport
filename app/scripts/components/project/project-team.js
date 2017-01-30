@@ -1,5 +1,7 @@
 import template from './project-team.html';
 
-export default {
+const projectTeam = {
   template: template
 };
+
+export default projectTeam;

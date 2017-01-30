@@ -1,19 +1,22 @@
 <div class="tabs-container m-l-sm">
     <uib-tabset active="active">
-        <uib-tab heading="Users" index="0">
-            <div class="panel-body"
-                 ng-if="active==0"
-                 ui-view="users"></div>
+        <uib-tab index="0">
+            <uib-tab-heading translate>Users</uib-tab-heading>
+            <div class="panel-body" ng-if="active==0">
+                <customer-users-list></customer-users-list>
+            </div>
         </uib-tab>
-        <uib-tab heading="Invitations" index="1">
-            <div class="panel-body"
-                 ng-if="active==1"
-                 ui-view="invitations"></div>
+        <uib-tab index="1">
+            <uib-tab-heading translate>Invitations</uib-tab-heading>
+            <div class="panel-body" ng-if="active==1">
+                <invitations-list></invitations-list>
+            </div>
         </uib-tab>
-        <uib-tab heading="Permissions log" index="2">
-            <div class="panel-body"
-                 ng-if="active==2"
-                 ui-view="log"></div>
+        <uib-tab index="2">
+            <uib-tab-heading translate>Permissions log</uib-tab-heading>
+            <div class="panel-body" ng-if="active==2">
+                <customer-permissions-log-list></customer-permissions-log-list>
+            </div>
         </uib-tab>
     </uib-tabset>
 </div>

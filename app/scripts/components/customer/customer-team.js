@@ -1,5 +1,7 @@
 import template from './customer-team.html';
 
-export default {
+const customerTeam = {
   template: template
 };
+
+export default customerTeam;
