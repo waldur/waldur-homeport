@@ -140,6 +140,10 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
+#: app/scripts/components/customer/customer-team.html:10
+msgid "Invitations"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:49
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:42
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:37
@@ -213,6 +217,10 @@ msgstr ""
 msgid "No items yet."
 msgstr ""
 
+#: app/scripts/components/quotas/quotas-table.html:10
+msgid "of"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:12
 msgid "Open"
 msgstr ""
@@ -235,6 +243,11 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:31
 msgid "Password"
+msgstr ""
+
+#: app/scripts/components/customer/customer-team.html:16
+#: app/scripts/components/project/project-team.html:10
+msgid "Permissions log"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:94
@@ -415,6 +428,11 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
+#: app/scripts/components/customer/customer-team.html:4
+#: app/scripts/components/project/project-team.html:4
+msgid "Users"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:29
 msgid "vCPU"
 msgstr ""
@@ -446,6 +464,10 @@ msgstr ""
 
 #: app/scripts/components/error/error-403.html:3
 msgid "You have exceeded maximum number of quotas."
+msgstr ""
+
+#: app/scripts/components/quotas/quotas-table.html:2
+msgid "You have no quotas yet."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:15
