@@ -145,9 +145,22 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.team', {
       url: 'team/',
-      template: '<project-users></project-users>',
+      template: '<project-team>',
       data: {
         pageTitle: 'Team'
+      },
+      abstract: true
+    })
+
+    .state('project.team.tabs', {
+      url: '',
+      views: {
+        users: {
+          template: '<project-users></project-users>'
+        },
+        log: {
+          template: '<project-permissions-log-list></project-permissions-log-list>'
+        }
       }
     })
 

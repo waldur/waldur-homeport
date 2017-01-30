@@ -101,7 +101,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.team', {
       url: 'team/',
-      templateUrl: 'views/customer/tab-team.html',
+      template: '<customer-team></customer-team>',
       data: {
         pageTitle: 'Team'
       },
@@ -116,6 +116,9 @@ export default function organizationRoutes($stateProvider) {
         },
         invitations: {
           template: '<invitations-list></invitations-list>'
+        },
+        log: {
+          template: '<customer-permissions-log-list></customer-permissions-log-list>'
         }
       }
     })

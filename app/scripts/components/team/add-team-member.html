@@ -77,6 +77,30 @@
         <p ng-if="emptyProjectList" class="text-danger">
             There are no available projects.
         </p>
+
+        <div class="form-group">
+            <div class="datepicker input-group">
+                <input
+                        type="text"
+                        class="form-control"
+                        uib-datepicker-popup="{{ datetime.format }}"
+                        ng-model="userModel.expiration_time"
+                        is-open="dateTimeOpened"
+                        datepicker-options="datetime.dateOptions"
+                        close-text="Close"
+                        ng-change="test()"
+                        alt-input-formats="datetime.altInputFormats"/>
+                <span class="input-group-btn">
+                      <button
+                              type="button"
+                              class="btn btn-default"
+                              ng-click="dateTimeOpened = !dateTimeOpened">
+                        <i class="fa fa-calendar"></i>
+                      </button>
+                </span>
+            </div>
+        </div>
+
         <div class="error" ng-repeat="error in errors" ng-bind="error"></div>
     </div>
 </div>

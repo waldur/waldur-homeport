@@ -1,0 +1,29 @@
+<div class="modal-body">
+    <div ng-if="$ctrl.list.length === 0">
+        Permissions log is empty.
+    </div>
+    <table class="table" ng-if="$ctrl.list.length > 0">
+        <thead>
+        <tr>
+            <th>User</td>
+            <th>User email</td>
+            <th>Role</td>
+            <th>Created</td>
+            <th>Expires</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="permission in $ctrl.list track by permission.pk">
+            <td>
+                {{permission.user_full_name || permission.user_username}}
+            </td>
+            <td>{{ ::permission.user_email }}</td>
+            <td>{{ ::permission.role }}</td>
+            <td>{{ ::permission.created | dateTime }}</td>
+            <td>
+                {{ ::permission.expiration_time | dateTime }}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

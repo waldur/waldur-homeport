@@ -84,7 +84,7 @@ export default function ProjectDetailsController(
       {
         label: 'Team',
         icon: 'fa-group',
-        link: 'project.team({uuid: $ctrl.context.project.uuid})',
+        link: 'project.team.tabs({uuid: $ctrl.context.project.uuid})',
         feature: 'team',
         countFieldKey: 'users'
       },

@@ -2,13 +2,13 @@
     <uib-tabset active="active">
         <uib-tab heading="Users" index="0">
             <div class="panel-body"
-                ng-if="active==0"
-                ui-view="users"></div>
+                 ng-if="active==0"
+                 ui-view="users"></div>
         </uib-tab>
-        <uib-tab heading="Invitations" index="1">
+        <uib-tab heading="Permissions log" index="1">
             <div class="panel-body"
-                ng-if="active==1"
-                ui-view="invitations"></div>
+                 ng-if="active==1"
+                 ui-view="log"></div>
         </uib-tab>
     </uib-tabset>
 </div>

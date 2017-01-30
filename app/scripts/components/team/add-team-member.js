@@ -12,7 +12,6 @@ export default function addTeamMember() {
 function AddTeamMemberDialogController(
   customerPermissionsService,
   projectPermissionsService,
-  customersService,
   blockUI,
   $q,
   $scope,
@@ -23,8 +22,19 @@ function AddTeamMemberDialogController(
   $scope.addTitle = 'Add';
   $scope.userModel = {
     projectsAdminRole: [],
-    projectsManagerRole: []
+    projectsManagerRole: [],
+    expiration_time: null
   };
+
+  $scope.datetime = {
+    format: 'dd.MM.yyyy',
+    altInputFormats: ['M!/d!/yyyy'],
+    dateOptions: {
+      minDate: new Date(),
+      startingDay: 1
+    }
+  };
+
   $scope.errors = {};
   $scope.projects = [];
   $scope.refreshProjectChoices = refreshProjectChoices;
@@ -40,6 +50,7 @@ function AddTeamMemberDialogController(
     $scope.addTitle = 'Edit';
     $scope.userModel.user = $scope.editUser;
     $scope.userModel.role = $scope.editUser.role;
+    $scope.userModel.expiration_time = $scope.editUser.expiration_time;
 
     $scope.editUser.projects.forEach(function(project) {
       if (project.role === 'admin') {
@@ -107,9 +118,11 @@ function AddTeamMemberDialogController(
     permission.customer = $scope.currentCustomer.url;
     permission.user = $scope.userModel.user.url;
     permission.role = $scope.userModel.role === 'owner' ? 'owner' : null;
+    permission.expiration_time = $scope.userModel.expiration_time;
 
     if ($scope.editUser) {
-      if ($scope.userModel.role !== $scope.editUser.role) {
+      if ($scope.userModel.role !== $scope.editUser.role ||
+        $scope.userModel.expiration_time !== $scope.editUser.expiration_time) {
         if (!$scope.userModel.role) {
           return customerPermissionsService.deletePermission($scope.editUser.permission);
         } else {
@@ -158,6 +171,7 @@ function AddTeamMemberDialogController(
       instance.user = $scope.userModel.user.url || $scope.editUser.url;
       instance.project = newProjects[project];
       instance.role = newRoles[project];
+      instance.expiration_time = $scope.userModel.expiration_time;
       return instance.$save();
     });
 
