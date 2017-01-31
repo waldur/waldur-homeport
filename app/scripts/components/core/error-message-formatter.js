@@ -22,13 +22,11 @@ export default class ErrorMessageFormatter {
     See also: https://fetch.spec.whatwg.org/#concept-filtered-response
     */
 
-    let message;
-
     if (response.status === -1) {
-      message = NETWORK_ERROR_MESSAGE.replace('{apiEndpoint}', this.ENV.apiEndpoint);
-    } else {
-      message = response.status + ': ' + response.statusText;
+      return NETWORK_ERROR_MESSAGE.replace('{apiEndpoint}', this.ENV.apiEndpoint);
     }
+
+    let message = response.status + ': ' + response.statusText;
 
     if (response.data) {
       if (response.data.non_field_errors) {
