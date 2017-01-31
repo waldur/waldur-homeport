@@ -17,7 +17,9 @@ function AddProjectMemberDialogController(
   $scope.addTitle = 'Add';
   $scope.projectModel = {
     role: null,
-    expiration_time: null
+    expiration_time: {
+      expiration_time: null
+    }
   };
 
   $scope.possibleRoles = [
@@ -28,11 +30,14 @@ function AddProjectMemberDialogController(
   $scope.canSubmit = canSubmit;
 
   $scope.datetime = {
-    format: 'dd.MM.yyyy',
-    altInputFormats: ['M!/d!/yyyy'],
-    dateOptions: {
-      minDate: new Date(),
-      startingDay: 1
+    name: 'expiration_time',
+    options: {
+      format: 'dd.MM.yyyy',
+      altInputFormats: ['M!/d!/yyyy'],
+      dateOptions: {
+        minDate: new Date(),
+        startingDay: 1
+      }
     }
   };
 
@@ -44,7 +49,7 @@ function AddProjectMemberDialogController(
       $scope.addTitle = 'Edit';
       $scope.projectModel.user = $scope.editUser;
       $scope.projectModel.role = $scope.editUser.role;
-      $scope.projectModel.expiration_time = $scope.editUser.expiration_time;
+      $scope.projectModel.expiration_time.expiration_time = $scope.editUser.expiration_time;
       return $q.resolve();
     } else {
       return customersService.getAll({
@@ -80,12 +85,12 @@ function AddProjectMemberDialogController(
   function canSubmit() {
     return ((!$scope.editUser && !$scope.projectModel.user) ||
       ($scope.editUser && ($scope.editUser.role === $scope.projectModel.role &&
-      $scope.editUser.expiration_time === $scope.projectModel.expiration_time)));
+      $scope.editUser.expiration_time === $scope.projectModel.expiration_time.expiration_time)));
   }
 
   function saveProjectPermissions() {
     if ($scope.editUser && ($scope.editUser.role !== $scope.projectModel.role ||
-        $scope.editUser.expiration_time !== $scope.projectModel.expiration_time)) {
+        $scope.editUser.expiration_time !== $scope.projectModel.expiration_time.expiration_time)) {
       return createPermission($scope.projectModel.role).then(function() {
         return projectPermissionsService.deletePermission($scope.editUser.permission);
       });
@@ -98,7 +103,7 @@ function AddProjectMemberDialogController(
     var instance = projectPermissionsService.$create();
     instance.user = $scope.projectModel.user.url;
     instance.project = $scope.currentProject.url;
-    instance.expiration_time = $scope.projectModel.expiration_time;
+    instance.expiration_time = $scope.projectModel.expiration_time.expiration_time;
     instance.role = role;
     return instance.$save();
   }

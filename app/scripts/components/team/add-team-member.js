@@ -23,15 +23,20 @@ function AddTeamMemberDialogController(
   $scope.userModel = {
     projectsAdminRole: [],
     projectsManagerRole: [],
-    expiration_time: null
+    expiration_time: {
+      expiration_time: null
+    }
   };
 
   $scope.datetime = {
-    format: 'dd.MM.yyyy',
-    altInputFormats: ['M!/d!/yyyy'],
-    dateOptions: {
-      minDate: new Date(),
-      startingDay: 1
+    name: 'expiration_time',
+    options: {
+      format: 'dd.MM.yyyy',
+      altInputFormats: ['M!/d!/yyyy'],
+      dateOptions: {
+        minDate: new Date(),
+        startingDay: 1
+      }
     }
   };
 
@@ -50,7 +55,7 @@ function AddTeamMemberDialogController(
     $scope.addTitle = 'Edit';
     $scope.userModel.user = $scope.editUser;
     $scope.userModel.role = $scope.editUser.role;
-    $scope.userModel.expiration_time = $scope.editUser.expiration_time;
+    $scope.userModel.expiration_time.expiration_time = $scope.editUser.expiration_time;
 
     $scope.editUser.projects.forEach(function(project) {
       if (project.role === 'admin') {
@@ -118,11 +123,11 @@ function AddTeamMemberDialogController(
     permission.customer = $scope.currentCustomer.url;
     permission.user = $scope.userModel.user.url;
     permission.role = $scope.userModel.role === 'owner' ? 'owner' : null;
-    permission.expiration_time = $scope.userModel.expiration_time;
+    permission.expiration_time = $scope.userModel.expiration_time.expiration_time;
 
     if ($scope.editUser) {
       if ($scope.userModel.role !== $scope.editUser.role ||
-        $scope.userModel.expiration_time !== $scope.editUser.expiration_time) {
+        $scope.userModel.expiration_time.expiration_time !== $scope.editUser.expiration_time) {
         if (!$scope.userModel.role) {
           return customerPermissionsService.deletePermission($scope.editUser.permission);
         } else {

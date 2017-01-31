@@ -40,25 +40,10 @@
             </div>
         </div>
 
-        <div class="datepicker input-group">
-            <input
-                type="text"
-                class="form-control"
-                uib-datepicker-popup="{{ datetime.format }}"
-                ng-model="projectModel.expiration_time"
-                is-open="dateTimeOpened"
-                datepicker-options="datetime.dateOptions"
-                close-text="Close"
-                alt-input-formats="datetime.altInputFormats"/>
-            <span class="input-group-btn">
-                  <button
-                      type="button"
-                      class="btn btn-default"
-                      ng-click="dateTimeOpened = !dateTimeOpened">
-                    <i class="fa fa-calendar"></i>
-                  </button>
-            </span>
-        </div>
+        <action-field-datetime
+            model="projectModel.expiration_time"
+            field="datetime">
+        </action-field-datetime>
 
         <div class="error" ng-repeat="error in errors" ng-bind="error"></div>
     </div>
