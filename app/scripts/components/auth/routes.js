@@ -2,30 +2,15 @@
 export default function authRoutes($stateProvider) {
   $stateProvider
     .state('home', {
-      url: '/',
+      url: '',
       abstract: true,
       templateUrl: 'views/partials/base.html',
     })
 
-    .state('home.home', {
-      url: '',
-      views: {
-        'appHeader@home': {
-          template: '<site-header></site-header>',
-        },
-        'appContent@home': {
-          templateUrl: 'views/home/home.html',
-        }
-      },
-      data: {
-        bodyClass: 'landing',
-        disabled: true
-      },
-    })
-
     .state('login', {
+      parent: 'home',
       url: '/login/',
-      template: '<auth-login mode="login"></auth-login>',
+      template: '<auth-login mode="\'login\'"></auth-login>',
       data: {
         bodyClass: 'old',
         anonymous: true,
@@ -33,8 +18,9 @@ export default function authRoutes($stateProvider) {
     })
 
     .state('register', {
+      parent: 'home',
       url: '/register/',
-      template: '<auth-login mode="register"></auth-login>',
+      template: '<auth-login mode="\'register\'"></auth-login>',
       data: {
         bodyClass: 'old',
         anonymous: true
@@ -42,15 +28,8 @@ export default function authRoutes($stateProvider) {
     })
 
     .state('home.activate', {
-      url: 'activate/:user_uuid/:token/',
-      views: {
-        'appHeader@home': {
-          template: '<site-header></site-header>',
-        },
-        'appContent@home': {
-          template: '<auth-activation></auth-activation>',
-        }
-      },
+      url: '/activate/:user_uuid/:token/',
+      template: '<auth-activation></auth-activation>',
       data: {
         anonymous: true,
         bodyClass: 'old',
@@ -58,15 +37,8 @@ export default function authRoutes($stateProvider) {
     })
 
     .state('home.login_complete', {
-      url: 'login_complete/:token/',
-      views: {
-        'appHeader@home': {
-          template: '<site-header></site-header>',
-        },
-        'appContent@home': {
-          template: '<auth-login-complete></auth-login-complete>',
-        }
-      },
+      url: '/login_complete/:token/',
+      template: '<auth-login-complete></auth-login-complete>',
       data: {
         anonymous: true,
         bodyClass: 'old',
@@ -74,15 +46,8 @@ export default function authRoutes($stateProvider) {
     })
 
     .state('home.login_failed', {
-      url: 'login_failed/',
-      views: {
-        'appHeader@home': {
-          template: '<site-header></site-header>',
-        },
-        'appContent@home': {
-          template: '<auth-login-failed></auth-login-failed>',
-        }
-      },
+      url: '/login_failed/',
+      template: '<auth-login-failed></auth-login-failed>',
       data: {
         anonymous: true,
         bodyClass: 'old',
@@ -90,21 +55,15 @@ export default function authRoutes($stateProvider) {
     })
 
     .state('initialdata', {
+      parent: 'home',
       url: '/initial-data/',
-      templateUrl: 'views/partials/base.html',
+      template: '<ui-view/>',
       abstract: true
     })
 
     .state('initialdata.view', {
       url: '',
-      views: {
-        'appHeader@initialdata': {
-          template: '<site-header></site-header>',
-        },
-        'appContent@initialdata': {
-          template: '<auth-init></auth-init>',
-        }
-      },
+      template: '<auth-init></auth-init>',
       noInitialData: true,
       data: {
         auth: true,

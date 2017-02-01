@@ -1,5 +1,7 @@
 <div class="modal-header">
-    <h3 class="modal-title">Select workspace</h3>
+    <h3 class="modal-title">
+      <span translate>Select workspace</span>
+    </h3>
 </div>
 <div class="modal-body" ng-class="{disabled: Ctrl.loadingState}">
   <div ng-if="Ctrl.loadingOrganizations">
@@ -8,14 +10,14 @@
   <div ng-if="!Ctrl.loadingOrganizations && Ctrl.organizations.length === 0" class="row">
     <div class="middle-box text-center">
         <h3 class="font-bold m-b-lg">
-          You do not belong to any organisation yet.
+          <span translate>You do not belong to any organization yet.</span>
         </h3>
         <div>
             <a class="btn btn-default"
               ng-click="Ctrl.createOrganization()"
               ng-if="Ctrl.canCreateOrganization">
               <i class="fa fa-plus"></i>
-              Add new organization
+              <span translate>Add new organization</span>
             </a>
         </div>
     </div>
@@ -26,10 +28,11 @@
         ng-click="Ctrl.createOrganization()"
         ng-if="Ctrl.canCreateOrganization">
         <i class="fa fa-plus"></i>
-        Add new <span class="hidden-xs">organization</span>
+        <span translate>Add new</span>
+        <span class="hidden-xs" translate>organization</span>
       </a>
       <h3 class="m-b-md">
-        Organizations ({{ Ctrl.organizations.length }})
+        <span translate>Organizations</span> ({{ Ctrl.organizations.length }})
       </h3>
       <div class="form-group">
         <div class="search-box">
@@ -50,9 +53,9 @@
           ng-class="{active: organization.uuid == Ctrl.selectedOrganization.uuid}"
           ng-click="Ctrl.selectOrganization(organization)">
           <a class="btn btn-xs btn-default pull-right"
-            ng-if="organization.ownerOrStaff"
+            ng-if="organization.canGotoDashboard"
             submit-button="Ctrl.gotoOrganization(organization)">
-            Select
+            <span translate>Select</span>
           </a>
           <div
             class="elipsis"
@@ -73,10 +76,11 @@
         ng-click="Ctrl.createProject()"
         ng-if="Ctrl.selectedOrganization.ownerOrStaff">
         <i class="fa fa-plus"></i>
-        Add new project
+        <span translate>Add new project</span>
       </a>
       <h3 class="m-b-md">
-        Projects ({{ Ctrl.selectedOrganization.projects.length }})
+        <span translate>Projects</span>
+        ({{ Ctrl.selectedOrganization.projects.length || 0 }})
       </h3>
       <div class="form-group">
         <div class="search-box">
@@ -92,7 +96,9 @@
         </div>
       </div>
       <div ng-if="Ctrl.selectedOrganization.projects.length == 0">
-          <p class="text-center text-danger">There are no projects yet for this organization.</p>
+          <p class="text-center text-danger">
+            <span translate>There are no projects yet for this organization.</span>
+          </p>
       </div>
       <div ng-if="Ctrl.selectedOrganization.projects.length > 0"
         class="list-group"
@@ -102,7 +108,7 @@
           ng-class="{active: project.uuid == Ctrl.selectedProject.uuid}"
           ng-click="Ctrl.selectProject(project)">
           <a class="btn btn-xs btn-default pull-right" submit-button="Ctrl.gotoProject(project)">
-            Select
+            <span translate>Select</span>
           </a>
           <div class="elipsis">{{ project.name }}</div>
         </div>
@@ -112,9 +118,9 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-default" ng-click="Ctrl.gotoProfile()">
-      Go to my profile
+      <span translate>Go to my profile</span>
     </button>
     <button class="btn btn-default" ng-click="Ctrl.dismiss()">
-      Cancel
+      <span translate>Cancel</span>
     </button>
 </div>

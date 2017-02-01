@@ -4,22 +4,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: app/scripts/components/team/add-team-member.html:70
-msgid "{{ ::addText }}"
-msgstr ""
-
-#: app/scripts/components/team/add-team-member.html:2
-msgid "{{ ::addTitle }} team member"
-msgstr ""
-
-#: app/scripts/components/team/add-project-member.html:52
-msgid "{{ addText }}"
-msgstr ""
-
-#: app/scripts/components/team/add-project-member.html:2
-msgid "{{ addTitle }} project member"
-msgstr ""
-
 #: app/scripts/components/error/error-403.html:9
 #: app/scripts/components/error/error-404.html:6
 msgid "&lt; Back"
@@ -36,6 +20,18 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 msgid "Actions"
+msgstr ""
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:31
+msgid "Add new"
+msgstr ""
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:20
+msgid "Add new organization"
+msgstr ""
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:79
+msgid "Add new project"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:70
@@ -71,8 +67,8 @@ msgstr ""
 msgid "bootable"
 msgstr ""
 
-#: app/scripts/components/team/add-project-member.html:56
-#: app/scripts/components/team/add-team-member.html:76
+#: app/scripts/components/issues/issue-create-dialog.html:99
+#: app/scripts/components/navigation/select-workspace-dialog.html:124
 msgid "Cancel"
 msgstr ""
 
@@ -89,10 +85,6 @@ msgstr ""
 #: app/scripts/components/auth/auth-login.html:18
 #: app/scripts/components/auth/auth-login.html:96
 msgid "Create an account"
-msgstr ""
-
-#: app/scripts/components/team/add-team-member.html:58
-msgid "Customer role expires on:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
@@ -120,10 +112,6 @@ msgstr ""
 msgid "Enable DHCP"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:38
-msgid "Expiration time"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:42
 msgid "External IP"
 msgstr ""
@@ -148,6 +136,14 @@ msgstr ""
 msgid "Gateway IP"
 msgstr ""
 
+#: app/scripts/components/navigation/select-workspace-dialog.html:121
+msgid "Go to my profile"
+msgstr ""
+
+#: app/scripts/components/navigation/app-footer.html:11
+msgid "Help"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:108
 msgid "I accept the"
 msgstr ""
@@ -167,10 +163,6 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:30
 msgid "Internal IP"
-msgstr ""
-
-#: app/scripts/components/customer/customer-team.html:10
-msgid "Invitations"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:49
@@ -262,8 +254,22 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
+#: app/scripts/components/navigation/select-workspace-dialog.html:32
+msgid "organization"
+msgstr ""
+
+#: app/scripts/components/issues/issue-create-dialog.html:12
+#: app/scripts/components/issues/issue-create-dialog.html:22
+#: app/scripts/components/issues/issue-create-dialog.html:7
+msgid "Organization"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:67
 msgid "Organization name"
+msgstr ""
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:35
+msgid "Organizations"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:5
@@ -276,11 +282,6 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
-msgstr ""
-
-#: app/scripts/components/customer/customer-team.html:16
-#: app/scripts/components/project/project-team.html:10
-msgid "Permissions log"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:94
@@ -303,18 +304,20 @@ msgstr ""
 msgid "Price per month"
 msgstr ""
 
+#: app/scripts/components/navigation/app-footer.html:5
+msgid "Privacy policy"
+msgstr ""
+
+#: app/scripts/components/issues/issue-create-dialog.html:17
+#: app/scripts/components/issues/issue-create-dialog.html:27
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:53
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:41
 msgid "Project"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:36
-msgid "Project name"
-msgstr ""
-
-#: app/scripts/components/team/add-team-member.html:32
-msgid "Projects list:"
+#: app/scripts/components/navigation/select-workspace-dialog.html:82
+msgid "Projects"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:33
@@ -349,13 +352,13 @@ msgstr ""
 msgid "Reported by me"
 msgstr ""
 
-#: app/scripts/components/team/add-project-member.html:27
-#: app/scripts/components/team/add-team-member.html:37
-msgid "Role"
+#: app/scripts/components/issues/issue-create-dialog.html:37
+#: app/scripts/components/issues/issue-create-dialog.html:42
+msgid "Request type"
 msgstr ""
 
-#: app/scripts/components/team/add-project-member.html:44
-msgid "Role expires on:"
+#: app/scripts/components/issues/issue-create-dialog.html:32
+msgid "Resource"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:27
@@ -376,6 +379,19 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:28
 msgid "Segmentation ID"
+msgstr ""
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:111
+#: app/scripts/components/navigation/select-workspace-dialog.html:58
+msgid "Select"
+msgstr ""
+
+#: app/scripts/components/issues/issue-type-select.html:2
+msgid "Select request type"
+msgstr ""
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:3
+msgid "Select workspace"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:87
@@ -426,16 +442,13 @@ msgstr ""
 msgid "Tenant name"
 msgstr ""
 
+#: app/scripts/components/navigation/app-footer.html:8
 #: app/scripts/components/user/user-edit.html:110
 msgid "Terms of Service"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:62
-msgid "There are no available projects."
-msgstr ""
-
-#: app/scripts/components/team/add-project-member.html:14
-msgid "There are no available users."
+#: app/scripts/components/navigation/select-workspace-dialog.html:100
+msgid "There are no projects yet for this organization."
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:20
@@ -478,30 +491,20 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
-#: app/scripts/components/team/add-project-member.html:10
-msgid "User"
-msgstr ""
-
 #: app/scripts/components/user/user-edit.html:47
 msgid "User status"
-msgstr ""
-
-#: app/scripts/components/team/add-project-member.html:20
-#: app/scripts/components/team/add-team-member.html:11
-msgid "User:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
 msgid "Username"
 msgstr ""
 
-#: app/scripts/components/customer/customer-team.html:4
-#: app/scripts/components/project/project-team.html:4
-msgid "Users"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:29
 msgid "vCPU"
+msgstr ""
+
+#: app/scripts/components/navigation/app-footer.html:19
+msgid "Version"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:17
@@ -527,6 +530,16 @@ msgstr ""
 #: app/scripts/components/auth/auth-init.html:10
 #: app/scripts/components/auth/auth-login.html:5
 msgid "Welcome to"
+msgstr ""
+
+#: app/scripts/components/issues/issue-create-dialog.html:49
+#: app/scripts/components/issues/issue-create-dialog.html:69
+#: app/scripts/components/issues/issue-create-dialog.html:88
+msgid "You did not enter a field"
+msgstr ""
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:13
+msgid "You do not belong to any organization yet."
 msgstr ""
 
 #: app/scripts/components/error/error-403.html:3

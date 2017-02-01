@@ -13,25 +13,11 @@ export default function planRoutes($stateProvider) {
 
     .state('agreement.approve', {
       url: 'approve/',
-      views: {
-        appHeader: {
-          template: '<site-header></site-header>',
-        },
-        appContent: {
-          template: '<plan-agreement-approve/>',
-        }
-      }
+      template: '<plan-agreement-approve/>',
     })
 
     .state('agreement.cancel', {
       url: 'cancel/',
-      views: {
-        appHeader: {
-          template: '<site-header></site-header>',
-        },
-        appContent: {
-          template: '<plan-agreement-cancel/>',
-        }
-      }
+      template: '<plan-agreement-cancel/>',
     });
 }

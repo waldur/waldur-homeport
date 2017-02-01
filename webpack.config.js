@@ -16,7 +16,7 @@ module.exports = {
             loaders: [
                 {
                     test: /\.js$/,
-                    loader: 'ng-annotate!babel!eslint-loader',
+                    loader: 'ng-annotate!babel?cacheDirectory!eslint-loader',
                     exclude: /node_modules/
                 },
                 {

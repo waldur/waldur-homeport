@@ -29,7 +29,7 @@ function CustomerController($scope, $state, usersService, currentStateService, c
       $scope.currentCustomer = currentCustomer;
       $scope.currentUser = currentUser;
 
-      if (customersService.checkCustomerUser(currentCustomer, currentUser)) {
+      if (customersService.checkCustomerUser(currentCustomer, currentUser) || currentUser.is_support) {
         currentStateService.setOwnerOrStaff(true);
       } else {
         currentStateService.setOwnerOrStaff(false);

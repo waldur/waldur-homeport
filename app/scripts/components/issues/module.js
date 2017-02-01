@@ -17,6 +17,7 @@ import issuesHelpdesk from './issues-helpdesk';
 import issueCreateDialog from './issue-create-dialog';
 import issueRegistration from './issue-registration';
 import {ISSUE_IDS} from './constants';
+import issueTypeSelect from './issue-type-select';
 
 export default module => {
   module.constant('ISSUE_IDS', ISSUE_IDS);
@@ -35,7 +36,8 @@ export default module => {
   module.directive('issuesActivityStream', issuesActivityStream);
   module.directive('issuesListFiltered', issuesListFiltered);
   module.directive('issuesHelpdesk', issuesHelpdesk);
-  module.directive('issueCreateDialog', issueCreateDialog);
+  module.component('issueCreateDialog', issueCreateDialog);
   module.directive('issueRegistration', issueRegistration);
+  module.component('issueTypeSelect', issueTypeSelect);
   module.config(issueRoutes);
 };

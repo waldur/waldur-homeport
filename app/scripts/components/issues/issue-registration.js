@@ -1,4 +1,3 @@
-import { ISSUE_TYPE_CHOICES } from './constants';
 import template from './issue-registration.html';
 
 export default function issueRegistration() {
@@ -37,7 +36,6 @@ class IssueRegistrationController {
     this.features = features;
     this.service = issuesService;
     this.issue = {};
-    this.types = ISSUE_TYPE_CHOICES;
     this.ncUtilsFlash = ncUtilsFlash;
     this.usersService = usersService;
     this.issueUsersService = issueUsersService;
@@ -173,7 +171,7 @@ class IssueRegistrationController {
       return this.$q.reject();
     }
     let issue = {
-      type: this.issue.type.id,
+      type: this.issue.type,
       customer: this.issue.customer.url,
       project: this.issue.project.url,
       summary: this.issue.summary,

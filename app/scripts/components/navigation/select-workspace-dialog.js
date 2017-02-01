@@ -113,6 +113,7 @@ function SelectWorkspaceDialogController(
 
         angular.forEach(ctrl.organizations, organization => {
           organization.ownerOrStaff = customersService.checkCustomerUser(organization, ctrl.currentUser);
+          organization.canGotoDashboard = organization.ownerOrStaff || ctrl.currentUser.is_support;
         });
       })
     ]);

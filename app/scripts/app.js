@@ -172,9 +172,9 @@
 (function() {
   angular.module('ncsaas')
     .factory('httpInterceptor', [
-      '$q', '$location', 'ncUtilsFlash', 'ENV', '$rootScope', httpInterceptor]);
+      '$q', '$location', 'ncUtilsFlash', 'ENV', 'ErrorMessageFormatter', '$rootScope', httpInterceptor]);
 
-    function httpInterceptor($q, $location, ncUtilsFlash, ENV, $rootScope) {
+    function httpInterceptor($q, $location, ncUtilsFlash, ENV, ErrorMessageFormatter, $rootScope) {
       var timeouts = {},
           abortRequests;
       function getKey(config) {
@@ -213,13 +213,7 @@
         },
         'responseError': function(rejection) {
           if (!abortRequests) {
-            var message = rejection.status ? (rejection.status + ': ' + rejection.statusText) : 'Connection error';
-            if (rejection.data && rejection.data.non_field_errors) {
-              message += ' ' + rejection.data.non_field_errors;
-            }
-            if (rejection.data && rejection.data.detail) {
-              message += ' ' + rejection.data.detail;
-            }
+            var message = ErrorMessageFormatter.format(rejection);
             if (rejection.config) {
               clearTimeout(timeouts[getKey(rejection.config)]);
               console.error(message, rejection.config);

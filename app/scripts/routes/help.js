@@ -6,7 +6,8 @@ export default function helpRoutes($stateProvider) {
       abstract: true,
       template: '<help-workspace><ui-view></ui-view></help-workspace>',
       data: {
-        pageTitle: 'Help'
+        pageTitle: 'Help',
+        bodyClass: 'old',
       }
     })
 

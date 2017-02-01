@@ -5,7 +5,7 @@ const authLoginFailed = {
   controller: function AuthLoginFailedController(ncUtils) {
     // @ngInject
     const qs = ncUtils.parseQueryString(ncUtils.getQueryString());
-    if (qs) {
+    if (qs && qs.message) {
       this.message = decodeURIComponent(qs.message);
     }
   }
