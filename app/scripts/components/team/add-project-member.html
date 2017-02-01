@@ -17,14 +17,14 @@
 
     <div class="form-group" ng-if="editUser">
       <p class="form-control-static">
-        <strong translate>User:</strong>
+        <strong translate>User</strong>
         {{ editUser.full_name || editUser.username }}
       </p>
     </div>
 
     <div class="form-group" ng-if="isProjectManager">
       <p class="form-control-static">
-        <strong translate>Role</strong>: {{::possibleRoles[1].name}}
+        <strong translate>Role</strong> {{::possibleRoles[1].name}}
       </p>
     </div>
 
@@ -41,7 +41,7 @@
     </div>
 
     <div class="form-group">
-      <label class="control-label" translate>Role expires on:</label>
+      <label class="control-label" translate>Role expires on</label>
       <action-field-datetime model="projectModel" field="datetime"></action-field-datetime>
     </div>
 
@@ -52,6 +52,6 @@
   <button class="btn btn-primary"
     submit-button="saveUser()"
     ng-class="{'disabled': canSubmit()}"
-    translate>{{ addText }}</button>
+    >{{ addText | translate }}</button>
   <button class="btn btn-default" ng-click="$dismiss()" translate>Cancel</button>
 </div>

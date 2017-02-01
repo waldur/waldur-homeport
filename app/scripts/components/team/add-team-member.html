@@ -8,7 +8,7 @@
   <div ng-if="!loading" block-ui="add-team-member-dialog">
     <div class="form-group" ng-if="editUser">
       <p class="form-control-static">
-        <strong translate>User:</strong>
+        <strong translate>User</strong>
         {{ editUser.full_name || editUser.username }}
       </p>
     </div>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="form-group" ng-if="!emptyProjectList">
-      <label class="control-label" translate>Projects list:</label>
+      <label class="control-label" translate>Projects list</label>
       <table class="table">
         <thead>
         <tr>
@@ -55,7 +55,7 @@
     </div>
 
     <div class="form-group" ng-if="userModel.role">
-      <label class="control-label" translate="">Customer role expires on:</label>
+      <label class="control-label" translate>Customer role expires on</label>
       <action-field-datetime model="userModel" field="datetime"></action-field-datetime>
     </div>
 
@@ -69,13 +69,10 @@
 <div class="modal-footer">
   <button class="btn btn-primary"
     submit-button="saveUser()"
-    ng-class="{'disabled': !validateSubmit()}"
-    translate>
-    {{ ::addText }}
+    ng-class="{'disabled': !validateSubmit()}">
+    {{ ::addText | translate }}
   </button>
   <button class="btn btn-default"
-    ng-click="$dismiss()"
-    translate>
-    Cancel
+    ng-click="$dismiss()"><span translate>Cancel</span>
   </button>
 </div>
