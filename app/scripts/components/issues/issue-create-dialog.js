@@ -34,6 +34,9 @@ class IssueCreateDialogController {
     this.ncUtilsFlash = ncUtilsFlash;
     this.ISSUE_IDS = ISSUE_IDS;
     this.issue = this.resolve.issue || {};
+    if (!this.issue.type) {
+      this.issue.type = this.ISSUE_IDS.CHANGE_REQUEST;
+    }
     this.options = angular.extend({}, DEFAULT_OPTIONS, this.resolve.options);
   }
 
@@ -43,7 +46,7 @@ class IssueCreateDialogController {
       return this.$q.reject();
     }
     let issue = {
-      type: this.issue.type || this.ISSUE_IDS.CHANGE_REQUEST,
+      type: this.issue.type,
       summary: this.issue.summary,
       description: this.issue.description,
       is_reported_manually: true
