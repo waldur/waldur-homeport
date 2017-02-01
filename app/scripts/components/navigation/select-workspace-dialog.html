@@ -50,7 +50,7 @@
           ng-class="{active: organization.uuid == Ctrl.selectedOrganization.uuid}"
           ng-click="Ctrl.selectOrganization(organization)">
           <a class="btn btn-xs btn-default pull-right"
-            ng-if="organization.ownerOrStaff"
+            ng-if="organization.canGotoDashboard"
             submit-button="Ctrl.gotoOrganization(organization)">
             Select
           </a>
@@ -76,7 +76,7 @@
         Add new project
       </a>
       <h3 class="m-b-md">
-        Projects ({{ Ctrl.selectedOrganization.projects.length }})
+        Projects ({{ Ctrl.selectedOrganization.projects.length || 0 }})
       </h3>
       <div class="form-group">
         <div class="search-box">

@@ -1,9 +1,10 @@
 import template from './user-sidebar.html';
+import { PRIVATE_USER_TABS } from './constants';
 
 const userSidebar = {
   template,
   controllerAs: 'Ctrl',
-  controller: function UserSidebarController($scope, authService, usersService, PRIVATE_USER_TABS) {
+  controller: function UserSidebarController($scope, authService, usersService) {
     // @ngInject
     this.items = PRIVATE_USER_TABS;
     this.logout = authService.logout;
