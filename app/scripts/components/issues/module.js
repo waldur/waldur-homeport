@@ -36,7 +36,7 @@ export default module => {
   module.directive('issuesActivityStream', issuesActivityStream);
   module.directive('issuesListFiltered', issuesListFiltered);
   module.directive('issuesHelpdesk', issuesHelpdesk);
-  module.directive('issueCreateDialog', issueCreateDialog);
+  module.component('issueCreateDialog', issueCreateDialog);
   module.directive('issueRegistration', issueRegistration);
   module.component('issueTypeSelect', issueTypeSelect);
   module.config(issueRoutes);

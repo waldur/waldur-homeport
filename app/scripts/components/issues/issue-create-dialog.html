@@ -9,8 +9,23 @@
         </div>
 
         <div class="form-group" ng-if="$ctrl.issue.project">
+            <strong><span translate>Organization</span>:</strong>
+            {{ $ctrl.issue.project.customer_name }}
+        </div>
+
+        <div class="form-group" ng-if="$ctrl.issue.project">
             <strong><span translate>Project</span>:</strong>
             {{ $ctrl.issue.project.name }}
+        </div>
+
+        <div class="form-group" ng-if="$ctrl.issue.resource">
+            <strong><span translate>Organization</span>:</strong>
+            {{ $ctrl.issue.resource.customer_name }}
+        </div>
+
+        <div class="form-group" ng-if="$ctrl.issue.resource">
+            <strong><span translate>Project</span>:</strong>
+            {{ $ctrl.issue.resource.project_name }}
         </div>
 
         <div class="form-group" ng-if="$ctrl.issue.resource">
@@ -18,7 +33,12 @@
             {{ $ctrl.issue.resource.name }}
         </div>
 
-        <div class="form-group">
+        <div class="form-group" ng-if="!$ctrl.issueTypeEditable">
+            <strong><span translate>Request type</span>:</strong>
+            {{ $ctrl.issue.type | translate }}
+        </div>
+
+        <div class="form-group" ng-if="$ctrl.issueTypeEditable">
             <label class="control-label" translate>
                 Request type
             </label>
