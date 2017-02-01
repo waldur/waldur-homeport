@@ -15,7 +15,7 @@ function customerPermissionsLogListController(
       this.currentCustomerUuid = currentStateService.getCustomerUuid();
       this.tableOptions = {
         searchFieldName: 'username',
-        noDataText: 'You have no resources yet.',
+        noDataText: 'You have no permissions yet.',
         noMatchesText: 'No permissions found matching filter.',
         columns: [
           {

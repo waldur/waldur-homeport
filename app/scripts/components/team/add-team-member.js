@@ -1,5 +1,4 @@
 import template from './add-team-member.html';
-import './add-team-member.scss';
 
 export default function addTeamMember() {
   return {
@@ -17,11 +16,13 @@ function AddTeamMemberDialogController(
   $q,
   $scope,
   ENV,
-  ncUtils) {
+  ncUtils,
+  $filter) {
   $scope.roles = ENV.roles;
   $scope.saveUser = saveUser;
   $scope.addText = 'Save';
   $scope.addTitle = 'Edit';
+  $scope.helpText = $filter('translate')('You cannot change your own role');
   $scope.userModel = {
     expiration_time: null
   };
@@ -29,8 +30,8 @@ function AddTeamMemberDialogController(
   $scope.select = {
     name: 'role',
     list: [
-      { value: 'admin', display_name: 'system administrator' },
-      { value: 'manager', display_name: 'project manager' },
+      { value: 'admin', display_name: ENV.roles.admin },
+      { value: 'manager', display_name: ENV.roles.manager },
     ]
   };
   $scope.datetime = {
@@ -39,7 +40,7 @@ function AddTeamMemberDialogController(
       format: 'dd.MM.yyyy',
       altInputFormats: ['M!/d!/yyyy'],
       dateOptions: {
-        minDate: moment().add(1,'days').toDate(),
+        minDate: moment().add(1, 'days').toDate(),
         startingDay: 1
       }
     }
@@ -97,7 +98,7 @@ function AddTeamMemberDialogController(
     permission.customer = $scope.currentCustomer.url;
     permission.user = $scope.userModel.user.url;
     permission.role = $scope.userModel.role === 'owner' ? 'owner' : null;
-    permission.expiration_time = $scope.userModel.expiration_time;
+    permission.expiration_time = $scope.userModel.role === 'owner' ? $scope.userModel.expiration_time : null;
 
     if ($scope.editUser) {
       if ($scope.userModel.role !== $scope.editUser.role ||

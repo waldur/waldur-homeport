@@ -32,7 +32,7 @@ function AddProjectMemberDialogController(
       format: 'dd.MM.yyyy',
       altInputFormats: ['M!/d!/yyyy'],
       dateOptions: {
-        minDate: moment().add(1,'days').toDate(),
+        minDate: moment().add(1, 'days').toDate(),
         startingDay: 1
       }
     }

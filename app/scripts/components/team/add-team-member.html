@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 class="modal-title">{{ ::addTitle }} team member</h3>
+  <h3 class="modal-title" translate>{{ ::addTitle }} team member</h3>
 </div>
 <div class="modal-body">
   <div ng-if="loading">
@@ -8,7 +8,7 @@
   <div ng-if="!loading" block-ui="add-team-member-dialog">
     <div class="form-group" ng-if="editUser">
       <p class="form-control-static">
-        <strong>User:</strong>
+        <strong translate>User:</strong>
         {{ editUser.full_name || editUser.username }}
       </p>
     </div>
@@ -23,20 +23,19 @@
              ng-false-value="''">
           </input>
           {{ ::roles.owner }}
-          <helpicon ng-if="!canChangeRole"
-            help-text="You cannot change your own role"></helpicon>
+          <helpicon ng-if="!canChangeRole" help-text="{{ ::helpText }}"></helpicon>
         </label>
       </div>
     </div>
 
     <div class="form-group" ng-if="!emptyProjectList">
-      <label class="control-label">Projects list:</label>
+      <label class="control-label" translate>Projects list:</label>
       <table class="table">
         <thead>
         <tr>
-          <td>Project name</td>
-          <td>Role</td>
-          <td class="expiration-time-column">Expiration time</td>
+          <td translate>Project name</td>
+          <td translate>Role</td>
+          <td class="col-xs-4" translate>Expiration time</td>
         </tr>
         </thead>
         <tbody>
@@ -45,30 +44,22 @@
             <strong>{{ project.name }}</strong>
           </td>
           <td>
-            <action-field-select
-              model="project"
-              field="select"></action-field-select>
+            <action-field-select model="project" field="select"></action-field-select>
           </td>
           <td>
-            <action-field-datetime
-              model="project"
-              field="datetime">
-            </action-field-datetime>
+            <action-field-datetime model="project" field="datetime"></action-field-datetime>
           </td>
         </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="form-group" ng-if="canChangeRole">
-      <label class="control-label">Customer role expires on:</label>
-      <action-field-datetime
-        model="userModel"
-        field="datetime">
-      </action-field-datetime>
+    <div class="form-group" ng-if="userModel.role">
+      <label class="control-label" translate="">Customer role expires on:</label>
+      <action-field-datetime model="userModel" field="datetime"></action-field-datetime>
     </div>
 
-    <p ng-if="emptyProjectList" class="text-danger">
+    <p ng-if="emptyProjectList" class="text-danger" translate>
       There are no available projects.
     </p>
 
@@ -78,11 +69,13 @@
 <div class="modal-footer">
   <button class="btn btn-primary"
     submit-button="saveUser()"
-    ng-class="{'disabled': !validateSubmit()}">
+    ng-class="{'disabled': !validateSubmit()}"
+    translate>
     {{ ::addText }}
   </button>
   <button class="btn btn-default"
-    ng-click="$dismiss()">
+    ng-click="$dismiss()"
+    translate>
     Cancel
   </button>
 </div>
