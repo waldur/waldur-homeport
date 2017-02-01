@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 class="modal-title" translate>{{ ::addTitle }} team member</h3>
+  <h3 class="modal-title">{{ ::addTitle | translate }} <span translate>team member</span></h3>
 </div>
 <div class="modal-body">
   <div ng-if="loading">
@@ -41,7 +41,7 @@
         <tbody>
         <tr ng-repeat="project in projects track by project.uuid">
           <td>
-            <strong>{{ project.name }}</strong>
+            <strong>{{ ::project.name }}</strong>
           </td>
           <td>
             <action-field-select model="project" field="select"></action-field-select>
@@ -68,8 +68,7 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-primary"
-    submit-button="saveUser()"
-    ng-class="{'disabled': !validateSubmit()}">
+    submit-button="saveUser()">
     {{ ::addText | translate }}
   </button>
   <button class="btn btn-default"

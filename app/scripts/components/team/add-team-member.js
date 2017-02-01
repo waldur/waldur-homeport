@@ -46,8 +46,6 @@ function AddTeamMemberDialogController(
     }
   };
   $scope.projects = [];
-  $scope.validateSubmit = validateSubmit;
-
   init();
 
   function init() {
@@ -87,10 +85,6 @@ function AddTeamMemberDialogController(
       block.stop();
       $scope.errors = ncUtils.responseErrorFormatter(error);
     });
-  }
-
-  function validateSubmit() {
-    return true;
   }
 
   function saveCustomerPermission() {

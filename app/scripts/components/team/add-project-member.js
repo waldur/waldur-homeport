@@ -24,7 +24,6 @@ function AddProjectMemberDialogController(
     { name: roles.manager, value: 'manager' },
     { name: roles.admin, value: 'admin' }
   ];
-  $scope.canSubmit = canSubmit;
 
   $scope.datetime = {
     name: 'expiration_time',
@@ -79,18 +78,15 @@ function AddProjectMemberDialogController(
       });
   }
 
-  function canSubmit() {
-    return ((!$scope.editUser && !$scope.projectModel.user) ||
-      ($scope.editUser && ($scope.editUser.role === $scope.projectModel.role &&
-      $scope.editUser.expiration_time === $scope.projectModel.expiration_time)));
-  }
-
   function saveProjectPermissions() {
     if ($scope.editUser && ($scope.editUser.role !== $scope.projectModel.role ||
         $scope.editUser.expiration_time !== $scope.projectModel.expiration_time)) {
       return createPermission($scope.projectModel.role).then(function() {
         return projectPermissionsService.deletePermission($scope.editUser.permission);
       });
+    } else if ($scope.editUser && ($scope.editUser.role === $scope.projectModel.role ||
+      $scope.editUser.expiration_time === $scope.projectModel.expiration_time)) {
+      return $q.resolve();
     } else if (!$scope.editUser) {
       return createPermission($scope.projectModel.role);
     }
