@@ -14,14 +14,15 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
   stateUtilsService, currentStateService, WorkspaceService) {
 
   function getDashboardTab(user) {
-    const prevWorkspace = stateUtilsService.getPrevWorkspace() || 'organization';
+    const prevWorkspace = stateUtilsService.getPrevWorkspace();
     if (prevWorkspace === 'project') {
       return {
         label: 'Back to project',
         icon: 'fa-arrow-left',
         action: stateUtilsService.goBack
       };
-    } else if (currentStateService.getOwnerOrStaff() || user.is_support) {
+    } else if (prevWorkspace === 'organization' &&
+      (currentStateService.getOwnerOrStaff() || user.is_support)) {
       return {
         label: 'Back to organization',
         icon: 'fa-arrow-left',
