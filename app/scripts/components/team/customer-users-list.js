@@ -169,9 +169,6 @@ function CustomerUsersListController(
       dialogScope.currentCustomer = this.currentCustomer;
       dialogScope.currentUser = this.currentUser;
       dialogScope.editUser = user;
-      dialogScope.addedUsers = this.list.map(function(users) {
-        return users.uuid;
-      });
       $uibModal.open({
         component: 'addTeamMember',
         scope: dialogScope

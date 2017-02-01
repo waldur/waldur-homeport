@@ -229,7 +229,20 @@
             return 0;
         }
         return arr.sort(compare);
+      },
+      responseErrorFormatter: function(error) {
+      var errors = [];
+      if (!(error.data instanceof Object)) {
+        return [error.data];
       }
+
+      for (var i in error.data) {
+        if (error.data.hasOwnProperty(i)) {
+          errors = errors.concat(i + ': ' + error.data[i]);
+        }
+      }
+      return errors;
+    }
     };
   }
 })();

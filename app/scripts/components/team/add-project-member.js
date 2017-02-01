@@ -10,7 +10,7 @@ export default function addProjectMember() {
 
 // @ngInject
 function AddProjectMemberDialogController(
-  projectPermissionsService, customersService, blockUI, $q, $scope, ENV) {
+  projectPermissionsService, customersService, blockUI, $q, $scope, ENV, ncUtils) {
   var roles = ENV.roles;
   $scope.saveUser = saveUser;
   $scope.addText = 'Add';
@@ -24,7 +24,6 @@ function AddProjectMemberDialogController(
     { name: roles.manager, value: 'manager' },
     { name: roles.admin, value: 'admin' }
   ];
-  $scope.errors = {};
   $scope.canSubmit = canSubmit;
 
   $scope.datetime = {
@@ -33,7 +32,7 @@ function AddProjectMemberDialogController(
       format: 'dd.MM.yyyy',
       altInputFormats: ['M!/d!/yyyy'],
       dateOptions: {
-        minDate: new Date(),
+        minDate: moment().add(1,'days').toDate(),
         startingDay: 1
       }
     }
@@ -66,7 +65,7 @@ function AddProjectMemberDialogController(
   });
 
   function saveUser() {
-    $scope.errors = {};
+    $scope.errors = [];
     var block = blockUI.instances.get('add-team-member-dialog');
     block.start({delay: 0});
 
@@ -76,7 +75,7 @@ function AddProjectMemberDialogController(
         $scope.$close();
       }, function(error) {
         block.stop();
-        $scope.errors = error.data;
+        $scope.errors = ncUtils.responseErrorFormatter(error);
       });
   }
 

@@ -14,9 +14,9 @@ function customerPermissionsLogListController(
       this.service = customerPermissionsLogService;
       this.currentCustomerUuid = currentStateService.getCustomerUuid();
       this.tableOptions = {
-        searchFieldName: 'user_full_name',
-        noDataText: $filter('translate')('You have no resources yet.'),
-        noMatchesText: $filter('translate')('No resources found matching filter.'),
+        searchFieldName: 'username',
+        noDataText: 'You have no resources yet.',
+        noMatchesText: 'No permissions found matching filter.',
         columns: [
           {
             title: 'User',

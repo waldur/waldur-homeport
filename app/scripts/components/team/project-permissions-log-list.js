@@ -14,9 +14,9 @@ function projectPermissionsLogListController(
       this.service = projectPermissionsLogService;
       this.currentProjectUuid = currentStateService.getProjectUuid();
       this.tableOptions = {
-        searchFieldName: 'user_full_name',
-        noDataText: $filter('translate')('You have no resources yet.'),
-        noMatchesText: $filter('translate')('No resources found matching filter.'),
+        searchFieldName: 'username',
+        noDataText: 'You have no resources yet.',
+        noMatchesText: 'No permissions found matching filter.',
         columns: [
           {
             title: 'User',

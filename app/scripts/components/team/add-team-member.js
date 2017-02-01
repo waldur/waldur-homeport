@@ -1,4 +1,5 @@
 import template from './add-team-member.html';
+import './add-team-member.scss';
 
 export default function addTeamMember() {
   return {
@@ -15,86 +16,63 @@ function AddTeamMemberDialogController(
   blockUI,
   $q,
   $scope,
-  ENV) {
+  ENV,
+  ncUtils) {
   $scope.roles = ENV.roles;
   $scope.saveUser = saveUser;
-  $scope.addText = 'Add';
-  $scope.addTitle = 'Add';
+  $scope.addText = 'Save';
+  $scope.addTitle = 'Edit';
   $scope.userModel = {
-    projectsAdminRole: [],
-    projectsManagerRole: [],
     expiration_time: null
   };
 
+  $scope.select = {
+    name: 'role',
+    list: [
+      { value: 'admin', display_name: 'system administrator' },
+      { value: 'manager', display_name: 'project manager' },
+    ]
+  };
   $scope.datetime = {
     name: 'expiration_time',
     options: {
       format: 'dd.MM.yyyy',
       altInputFormats: ['M!/d!/yyyy'],
       dateOptions: {
-        minDate: new Date(),
+        minDate: moment().add(1,'days').toDate(),
         startingDay: 1
       }
     }
   };
-
-  $scope.errors = {};
   $scope.projects = [];
-  $scope.refreshProjectChoices = refreshProjectChoices;
-  $scope.pushBackToProjectsList = pushBackToProjectsList;
   $scope.validateSubmit = validateSubmit;
-  $scope.projects = $scope.currentCustomer.projects.filter(removeSelectedProjects);
-  $scope.emptyProjectList = !$scope.projects.length;
 
   init();
 
   function init() {
-    $scope.addText = 'Save';
-    $scope.addTitle = 'Edit';
     $scope.userModel.user = $scope.editUser;
     $scope.userModel.role = $scope.editUser.role;
     $scope.userModel.expiration_time = $scope.editUser.expiration_time;
 
-    $scope.editUser.projects.forEach(function(project) {
-      if (project.role === 'admin') {
-        $scope.userModel.projectsAdminRole.push(project);
-      } else {
-        $scope.userModel.projectsManagerRole.push(project);
-      }
+    $scope.projects = $scope.currentCustomer.projects.map(function(project) {
+      $scope.editUser.projects.some(function(permissionProject) {
+        project.role = null;
+        project.permission = null;
+        if (permissionProject.uuid === project.uuid) {
+          project.role = permissionProject.role;
+          project.permission = permissionProject.permission;
+          project.expiration_time = permissionProject.expiration_time;
+        }
+        return permissionProject.uuid === project.uuid;
+      });
+      return project;
     });
+    $scope.emptyProjectList = !$scope.projects.length;
     $scope.canChangeRole = $scope.currentUser.is_staff || $scope.editUser.uuid !== $scope.currentUser.uuid;
-    refreshProjectChoices();
-  }
-
-  function pushBackToProjectsList(item) {
-    $scope.projects.push(item);
-  }
-
-  function refreshProjectChoices() {
-    $scope.projects = $scope.projects.filter(removeSelectedProjects);
-  }
-
-  function removeSelectedProjects(project) {
-    var roleAdded = false,
-      i,
-      j;
-    for (i = 0; i < $scope.userModel.projectsAdminRole.length; i++) {
-      if ($scope.userModel.projectsAdminRole[i].uuid === project.uuid) {
-        roleAdded = true;
-        break;
-      }
-    }
-    for (j = 0; j < $scope.userModel.projectsManagerRole.length; j++) {
-      if ($scope.userModel.projectsManagerRole[j].uuid === project.uuid) {
-        roleAdded = true;
-        break;
-      }
-    }
-    return !roleAdded;
   }
 
   function saveUser() {
-    $scope.errors = {};
+    $scope.errors = [];
     var block = blockUI.instances.get('add-team-member-dialog');
     block.start({delay: 0});
 
@@ -106,14 +84,12 @@ function AddTeamMemberDialogController(
       $scope.$close();
     }, function(error) {
       block.stop();
-      $scope.errors = error.data;
+      $scope.errors = ncUtils.responseErrorFormatter(error);
     });
   }
 
   function validateSubmit() {
-    return (!$scope.editUser && !$scope.userModel.user) ||
-      (!$scope.userModel.role && !$scope.userModel.projectsAdminRole.length &&
-      !$scope.userModel.projectsManagerRole.length);
+    return true;
   }
 
   function saveCustomerPermission() {
@@ -153,13 +129,14 @@ function AddTeamMemberDialogController(
 
     var newRoles = {};
     var newProjects = {};
-    angular.forEach($scope.userModel.projectsManagerRole, function(project) {
-      newRoles[project.uuid] = 'manager';
-      newProjects[project.uuid] = project.url;
-    });
-    angular.forEach($scope.userModel.projectsAdminRole, function(project) {
-      newRoles[project.uuid] = 'admin';
-      newProjects[project.uuid] = project.url;
+    angular.forEach($scope.projects, function(project) {
+      if (project.role) {
+        newRoles[project.uuid] = project.role;
+        newProjects[project.uuid] = {
+          url: project.url,
+          expiration_time: project.expiration_time
+        };
+      }
     });
 
     var createdProjects = [];
@@ -172,7 +149,8 @@ function AddTeamMemberDialogController(
     var creationPromises = createdProjects.map(function(project) {
       var instance = projectPermissionsService.$create();
       instance.user = $scope.userModel.user.url || $scope.editUser.url;
-      instance.project = newProjects[project];
+      instance.project = newProjects[project].url;
+      instance.expiration_time = newProjects[project].expiration_time;
       instance.role = newRoles[project];
       return instance.$save();
     });
