@@ -67,6 +67,8 @@ msgstr ""
 msgid "bootable"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-offering.html:19
+#: app/scripts/components/appstore/category-selector.html:33
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:124
 msgid "Cancel"
@@ -81,6 +83,14 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:29
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:33
 msgid "CIDR"
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector-tabs.html:16
+msgid "Coming soon"
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-offering.html:16
+msgid "Create"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:18
@@ -151,6 +161,10 @@ msgstr ""
 
 #: app/scripts/components/user/user-edit.html:108
 msgid "I accept the"
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector.html:29
+msgid "I want another service"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:58
@@ -330,6 +344,7 @@ msgstr ""
 msgid "Project"
 msgstr ""
 
+#: app/scripts/components/appstore/category-selector.html:10
 #: app/scripts/components/navigation/select-workspace-dialog.html:82
 msgid "Projects"
 msgstr ""
@@ -403,9 +418,14 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
+#: app/scripts/components/appstore/category-selector-tabs.html:19
 #: app/scripts/components/navigation/select-workspace-dialog.html:111
 #: app/scripts/components/navigation/select-workspace-dialog.html:58
 msgid "Select"
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector.html:16
+msgid "Select project"
 msgstr ""
 
 #: app/scripts/components/issues/issue-type-select.html:2
@@ -414,6 +434,10 @@ msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:3
 msgid "Select workspace"
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector.html:2
+msgid "Service store"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:87

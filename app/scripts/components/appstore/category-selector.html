@@ -1,55 +1,35 @@
 <div class="modal-header">
-    <h2 class="modal-title">Service store</h2>
+    <h2 class="modal-title" translate>Service store</h2>
 </div>
 <div class="modal-body">
-    <div ng-if="DialogCtrl.loading">
+    <div ng-if="$ctrl.loading">
         <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
     </div>
-    <form ng-if="!DialogCtrl.loading" name="DialogCtrl.DialogForm" ng-class="{disabled: DialogCtrl.submitting}">
-        <div class="form-group" ng-if="DialogCtrl.selectProject">
-            <label class="control-label">Projects</label>
-            <select id="action-{{ name }}"
-                ng-options="project as project.name for project in DialogCtrl.projects"
-                ng-model="DialogCtrl.selectedProject"
+    <form ng-if="!$ctrl.loading" name="$ctrl.DialogForm" ng-class="{disabled: $ctrl.submitting}">
+        <div class="form-group" ng-if="$ctrl.selectProject">
+            <label class="control-label" translate>Projects</label>
+            <select
+                ng-options="project as project.name for project in $ctrl.projects"
+                ng-model="$ctrl.selectedProject"
                 class="form-control"
                 required="">
-                <option value="">Select project</option>
+                <option value="" translate>Select project</option>
              </select>
         </div>
         <div class="tabs-container">
-            <uib-tabset>
-                <uib-tab ng-repeat="group in DialogCtrl.groups"
-                         ng-if="::group.items.length > 0"
-                         heading="{{ ::group.label }}">
-                    <div class="panel-body">
-                        <div class="list-group appstore-category-selector row">
-                            <div class="col-md-6" ng-repeat="offering in group.items" visible="{{::offering.feature}}">
-                                <button class="list-group-item"
-                                    submit-button="DialogCtrl.selectOffering(offering)"
-                                    ng-class="{disabled: offering.comingSoon || DialogCtrl.leaving}">
-                                    <i class="offering-icon fa" ng-class="::offering.icon"></i>
-                                    <h4 class="list-group-item-heading m-l-xl elipsis">
-                                        {{ ::offering.label }}
-                                    </h4>
-                                    <div class="btn btn-default pull-right btn-xs">
-                                        {{ ::offering.comingSoon && 'Coming soon' || 'Select' }}
-                                    </div>
-                                    <p class="list-group-item-text m-l-xl" ng-bind="::offering.description"></p>
-                                </button>
-                            </div>
-                         </div>
-                    </div>
-                </uib-tab>
-            </uib-tabset>
+            <category-selector-tabs
+                groups="$ctrl.groups"
+                on-select="$ctrl.selectOffering(offering)"/>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default" ng-click="DialogCtrl.requestService()">
-        <i class="fa fa-question-circle"></i> I want another service
+    <button class="btn btn-default" ng-click="$ctrl.requestService()">
+        <i class="fa fa-question-circle"></i>
+        <span translate>I want another service</span>
     </button>
     <button class="btn btn-default"
-        ng-click="DialogCtrl.dismiss()">
-        Cancel
+        ng-click="$ctrl.dismiss()">
+        <span translate>Cancel</span>
     </button>
 </div>

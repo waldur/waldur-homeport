@@ -1,40 +1,52 @@
 import template from './appstore-offering.html';
 
-export default function appstoreOffering() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: AppStoreOfferingController,
-    controllerAs: 'OfferingController',
-    scope: {},
-    bindToController: true
-  };
-}
+const appstoreOffering = {
+  template: template,
+  controller: class AppStoreOfferingController {
+    constructor(
+      $stateParams,
+      $state,
+      ncUtilsFlash,
+      AppstoreOfferings,
+      currentStateService) {
+      this.$stateParams = $stateParams;
+      this.$state = $state;
+      this.ncUtilsFlash = ncUtilsFlash;
+      this.AppstoreOfferings = AppstoreOfferings;
+      this.currentStateService = currentStateService;
+    }
 
-function AppStoreOfferingController(
-  $stateParams, $state, issuesService, AppStoreUtilsService, ncUtilsFlash, ISSUE_IDS) {
-  var vm = this;
-  activate();
-  vm.save = save;
+    $onInit() {
+      this.model = {};
+      const key = this.$stateParams.category;
+      this.loading = true;
 
-  function activate() {
-    vm.offering = AppStoreUtilsService.findOffering($stateParams.category);
-    if (!vm.offering) {
-      $state.go('errorPage.notFound');
+      this.currentStateService.getProject().then(project => {
+        this.project = project;
+      });
+
+      this.AppstoreOfferings.getConfiguration().then(offerings => {
+        const offering = offerings[key];
+        if (!offering) {
+          return this.$state.go('errorPage.notFound');
+        }
+        this.offering = offering;
+      }).finally(() => this.loading = false);
+    }
+
+    save() {
+      const offering = angular.extend({
+        type: this.offering.key,
+        project: this.project.url,
+      }, this.model);
+      return this.AppstoreOfferings.createOffering(offering).then(issue => {
+        this.$state.go('support.detail', {uuid: issue.uuid});
+      }, response => {
+        this.errors = response.data;
+        this.ncUtilsFlash.error('Unable to create request for a turnkey solution.');
+      });
     }
   }
+};
 
-  function save() {
-    return issuesService.createIssue({
-      summary: 'Please create a turnkey solution: ' + vm.offering.label,
-      description: vm.details,
-      type: ISSUE_IDS.SERVICE_REQUEST,
-      is_reported_manually: true
-    }).then(function() {
-      $state.go('support.list');
-    }, function(response) {
-      vm.errors = response.data;
-      ncUtilsFlash.error('Unable to create request for a turnkey solution.');
-    });
-  }
-}
+export default appstoreOffering;

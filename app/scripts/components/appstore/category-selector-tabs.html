@@ -1,0 +1,29 @@
+<uib-tabset>
+    <uib-tab ng-repeat="group in $ctrl.groups"
+             ng-if="::group.items.length > 0"
+             heading="{{ ::group.label }}">
+        <div class="panel-body">
+            <div class="list-group appstore-category-selector row">
+                <div class="col-md-6" ng-repeat="offering in group.items" visible="{{::offering.feature}}">
+                    <button class="list-group-item"
+                        submit-button="$ctrl.onSelect({offering: offering})"
+                        ng-class="{disabled: offering.comingSoon}">
+                        <i class="offering-icon fa" ng-class="::offering.icon"></i>
+                        <h4 class="list-group-item-heading m-l-xl elipsis">
+                            {{ ::offering.label }}
+                        </h4>
+                        <div class="btn btn-default pull-right btn-xs">
+                            <span ng-if="offering.comingSoon" translate>
+                                Coming soon
+                            </span>
+                            <span ng-if="!offering.comingSoon" translate>
+                                Select
+                            </span>
+                        </div>
+                        <p class="list-group-item-text m-l-xl" ng-bind="::offering.description"></p>
+                    </button>
+                </div>
+             </div>
+        </div>
+    </uib-tab>
+</uib-tabset>
