@@ -101,10 +101,12 @@ export default {
     security_groups: {
       type: 'multiselect',
       label: 'Security groups',
+      component: 'openstackInstanceSecurityGroupsField',
       resource: 'openstacktenant-security-groups',
       parser: group => ({
         value: group.url,
-        display_name: group.name
+        display_name: group.name,
+        object: group
       }),
       serializer: groups => groups.map(group => ({
         url: group.value
