@@ -165,13 +165,16 @@ function CustomerUsersListController(
       return deferred.promise;
     },
     openPopup: function(user) {
-      var dialogScope = $rootScope.$new();
-      dialogScope.currentCustomer = this.currentCustomer;
-      dialogScope.currentUser = this.currentUser;
-      dialogScope.editUser = user;
+      var currentCustomer = this.currentCustomer,
+        currentUser = this.currentUser,
+        editUser = user;
       $uibModal.open({
         component: 'addTeamMember',
-        scope: dialogScope
+        resolve: {
+          currentCustomer: function() { return currentCustomer; },
+          currentUser: function() { return currentUser; },
+          editUser: function() { return editUser; }
+        }
       }).result.then(function() {
         controllerScope.resetCache();
         customerPermissionsService.clearAllCacheForCurrentEndpoint();

@@ -1,39 +1,39 @@
 <div class="modal-header">
-  <h3 class="modal-title">{{ ::addTitle | translate }} <span translate>project member</span></h3>
+  <h3 class="modal-title">{{ ::$ctrl.addTitle | translate }} <span translate>project member</span></h3>
 </div>
 <div class="modal-body">
-  <div ng-if="loading">
+  <div ng-if="$ctrl.loading">
     <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
   </div>
-  <div ng-if="!loading" block-ui="add-team-member-dialog">
-    <div class="form-group" ng-if="!editUser && users.length">
+  <div ng-if="!$ctrl.loading" block-ui="add-team-member-dialog">
+    <div class="form-group" ng-if="!$ctrl.editUser && $ctrl.users.length">
       <label class="control-label" translate>User</label>
-      <user-selector users="users" model="projectModel"></user-selector>
+      <user-selector users="$ctrl.users" model="$ctrl.projectModel"></user-selector>
     </div>
 
-    <p ng-if="!editUser && !users.length" class="text-danger" translate>
+    <p ng-if="!$ctrl.editUser && !$ctrl.users.length" class="text-danger" translate>
       There are no available users.
     </p>
 
-    <div class="form-group" ng-if="editUser">
+    <div class="form-group" ng-if="$ctrl.editUser">
       <p class="form-control-static">
         <strong translate>User</strong>:
-        {{ editUser.full_name || editUser.username }}
+        {{ $ctrl.editUser.full_name || $ctrl.editUser.username }}
       </p>
     </div>
 
-    <div class="form-group" ng-if="isProjectManager">
+    <div class="form-group" ng-if="$ctrl.isProjectManager">
       <p class="form-control-static">
-        <strong translate>Role</strong>: {{ ::possibleRoles[1].name }}
+        <strong translate>Role</strong>: {{ ::$ctrl.possibleRoles[1].name }}
       </p>
     </div>
 
-    <div class="form-group" ng-if="!isProjectManager">
-      <div ng-repeat="role in possibleRoles">
+    <div class="form-group" ng-if="!$ctrl.isProjectManager">
+      <div ng-repeat="role in $ctrl.possibleRoles">
         <label>
           <input name="role"
              type="radio"
-             ng-model="projectModel.role"
+             ng-model="$ctrl.projectModel.role"
              ng-value="role.value">
           {{ ::role.name | translate }}
         </label>
@@ -42,14 +42,14 @@
 
     <div class="form-group">
       <label class="control-label" translate>Role expires on</label>
-      <action-field-datetime model="projectModel" field="datetime"></action-field-datetime>
+      <action-field-datetime model="$ctrl.projectModel" field="$ctrl.datetime"></action-field-datetime>
     </div>
 
-    <div class="error" ng-repeat="error in errors track by $index" ng-bind="error"></div>
+    <div class="error" ng-repeat="error in $ctrl.errors track by $index" ng-bind="error"></div>
   </div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-primary"
-    submit-button="saveUser()">{{ ::addText | translate }}</button>
-  <button class="btn btn-default" ng-click="$dismiss()" translate>Cancel</button>
+    submit-button="$ctrl.saveUser()">{{ ::$ctrl.addText | translate }}</button>
+  <button class="btn btn-default" ng-click="$ctrl.close()" translate>Cancel</button>
 </div>

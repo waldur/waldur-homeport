@@ -1,15 +1,15 @@
 <div class="modal-header">
-  <h3 class="modal-title">{{ ::addTitle | translate }} <span translate>team member</span></h3>
+  <h3 class="modal-title">{{ ::$ctrl.addTitle | translate }} <span translate>team member</span></h3>
 </div>
 <div class="modal-body">
-  <div ng-if="loading">
+  <div ng-if="$ctrl.loading">
     <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
   </div>
-  <div ng-if="!loading" block-ui="add-team-member-dialog">
-    <div class="form-group" ng-if="editUser">
+  <div ng-if="!$ctrl.loading" block-ui="add-team-member-dialog">
+    <div class="form-group" ng-if="$ctrl.editUser">
       <p class="form-control-static">
         <strong translate>User</strong>
-        {{ editUser.full_name || editUser.username }}
+        {{ $ctrl.editUser.full_name || $ctrl.editUser.username }}
       </p>
     </div>
 
@@ -17,18 +17,18 @@
       <div class="checkbox">
         <label>
           <input type="checkbox"
-             ng-disabled="!canChangeRole"
-             ng-model="userModel.role"
+             ng-disabled="!$ctrl.canChangeRole"
+             ng-model="$ctrl.userModel.role"
              ng-true-value="'owner'"
              ng-false-value="''">
           </input>
-          {{ ::roles.owner }}
-          <helpicon ng-if="!canChangeRole" help-text="{{ ::helpText }}"></helpicon>
+          {{ ::$ctrl.roles.owner }}
+          <helpicon ng-if="!$ctrl.canChangeRole" help-text="{{ ::$ctrl.helpText }}"></helpicon>
         </label>
       </div>
     </div>
 
-    <div class="form-group" ng-if="!emptyProjectList">
+    <div class="form-group" ng-if="!$ctrl.emptyProjectList">
       <label class="control-label" translate>Projects list</label>
       <table class="table">
         <thead>
@@ -39,39 +39,39 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="project in projects track by project.uuid">
+        <tr ng-repeat="project in $ctrl.projects track by project.uuid">
           <td>
             <strong>{{ ::project.name }}</strong>
           </td>
           <td>
-            <action-field-select model="project" field="select"></action-field-select>
+            <action-field-select model="project" field="$ctrl.roleField"></action-field-select>
           </td>
           <td>
-            <action-field-datetime model="project" field="datetime"></action-field-datetime>
+            <action-field-datetime model="project" field="$ctrl.expirationTimeField"></action-field-datetime>
           </td>
         </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="form-group" ng-if="userModel.role">
+    <div class="form-group" ng-if="$ctrl.userModel.role">
       <label class="control-label" translate>Customer role expires on</label>
-      <action-field-datetime model="userModel" field="datetime"></action-field-datetime>
+      <action-field-datetime model="$ctrl.userModel" field="$ctrl.expirationTimeField"></action-field-datetime>
     </div>
 
-    <p ng-if="emptyProjectList" class="text-danger" translate>
+    <p ng-if="$ctrl.emptyProjectList" class="text-danger" translate>
       There are no available projects.
     </p>
 
-    <div class="error" ng-repeat="error in errors track by $index" ng-bind="error"></div>
+    <div class="error" ng-repeat="error in $ctrl.errors track by $index" ng-bind="error"></div>
   </div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-primary"
-    submit-button="saveUser()">
-    {{ ::addText | translate }}
+    submit-button="$ctrl.saveUser()">
+    {{ ::$ctrl.addText | translate }}
   </button>
   <button class="btn btn-default"
-    ng-click="$dismiss()"><span translate>Cancel</span>
+    ng-click="$ctrl.close()"><span translate>Cancel</span>
   </button>
 </div>

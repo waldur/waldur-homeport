@@ -12,8 +12,8 @@ export default module => {
   module.service('customerPermissionsLogService', customerPermissionsLogService);
   module.service('projectPermissionsLogService', projectPermissionsLogService);
   module.directive('userSelector', userSelector);
-  module.directive('addProjectMember', addProjectMember);
-  module.directive('addTeamMember', addTeamMember);
+  module.component('addProjectMember', addProjectMember);
+  module.component('addTeamMember', addTeamMember);
   module.directive('customerUsersList', customerUsersList);
   module.component('projectUsers', projectUsers);
   module.component('customerPermissionsLogList', customerPermissionsLogList);

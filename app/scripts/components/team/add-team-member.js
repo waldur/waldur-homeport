@@ -1,166 +1,173 @@
 import template from './add-team-member.html';
 
-export default function addTeamMember() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: AddTeamMemberDialogController
-  };
-}
+const addTeamMember = {
+  template,
+  bindings: {
+    close: '&',
+    resolve: '<'
+  },
+  controller: class AddTeamMemberDialogController {
+    constructor(customerPermissionsService, projectPermissionsService, blockUI, $q, ENV, ErrorMessageFormatter, $filter) {
+      // @ngInject
+      this.$q = $q;
+      this.customerPermissionsService = customerPermissionsService;
+      this.projectPermissionsService = projectPermissionsService;
+      this.blockUI = blockUI;
+      this.ENV = ENV;
+      this.ErrorMessageFormatter = ErrorMessageFormatter;
+      this.$filter = $filter;
+    }
 
-// @ngInject
-function AddTeamMemberDialogController(
-  customerPermissionsService,
-  projectPermissionsService,
-  blockUI,
-  $q,
-  $scope,
-  ENV,
-  ncUtils,
-  $filter) {
-  $scope.roles = ENV.roles;
-  $scope.saveUser = saveUser;
-  $scope.addText = 'Save';
-  $scope.addTitle = 'Edit';
-  $scope.helpText = $filter('translate')('You cannot change your own role');
-  $scope.userModel = {
-    expiration_time: null
-  };
+    $onInit() {
+      this.roles = this.ENV.roles;
+      this.addText = 'Save';
+      this.addTitle = 'Edit';
+      this.helpText = this.$filter('translate')('You cannot change your own role');
+      this.userModel = {
+        expiration_time: null
+      };
 
-  $scope.select = {
-    name: 'role',
-    list: [
-      { value: 'admin', display_name: ENV.roles.admin },
-      { value: 'manager', display_name: ENV.roles.manager },
-    ]
-  };
-  $scope.datetime = {
-    name: 'expiration_time',
-    options: {
-      format: 'dd.MM.yyyy',
-      altInputFormats: ['M!/d!/yyyy'],
-      dateOptions: {
-        minDate: moment().add(1, 'days').toDate(),
-        startingDay: 1
+      this.roleField = {
+        name: 'role',
+        list: [
+          { value: 'admin', display_name: this.ENV.roles.admin },
+          { value: 'manager', display_name: this.ENV.roles.manager },
+        ]
+      };
+      this.expirationTimeField = {
+        name: 'expiration_time',
+        options: {
+          format: 'dd.MM.yyyy',
+          altInputFormats: ['M!/d!/yyyy'],
+          dateOptions: {
+            minDate: moment().add(1, 'days').toDate(),
+            startingDay: 1
+          }
+        }
+      };
+      this.projects = [];
+
+      this.formatData();
+    }
+
+    formatData() {
+      this.userModel.user = this.resolve.editUser;
+      this.userModel.role = this.resolve.editUser.role;
+      this.userModel.expiration_time = this.resolve.editUser.expiration_time ?
+        new Date(this.resolve.editUser.expiration_time) :
+        null;
+
+      this.projects = this.resolve.currentCustomer.projects.map(project => {
+        this.resolve.editUser.projects.some(permissionProject => {
+          project.role = null;
+          project.permission = null;
+          if (permissionProject.uuid === project.uuid) {
+            project.role = permissionProject.role;
+            project.permission = permissionProject.permission;
+            project.expiration_time = permissionProject.expiration_time ?
+              new Date(permissionProject.expiration_time) :
+              null;
+          }
+          return permissionProject.uuid === project.uuid;
+        });
+        return project;
+      });
+
+      this.emptyProjectList = !this.projects.length;
+      this.canChangeRole = this.resolve.currentUser.is_staff ||
+        this.resolve.editUser.uuid !== this.resolve.currentUser.uuid;
+    }
+
+    saveUser() {
+      this.errors = [];
+      let block = this.blockUI.instances.get('add-team-member-dialog');
+      block.start({delay: 0});
+
+      return this.$q.all([
+        this.saveCustomerPermission(),
+        this.saveProjectPermissions()
+      ]).then(() => {
+        block.stop();
+        this.close();
+      }, error => {
+        block.stop();
+        this.errors = this.ErrorMessageFormatter.formatErrorFields(error);
+      });
+    }
+
+    saveCustomerPermission() {
+      let model = {};
+      model.url = this.resolve.editUser.permission;
+      model.expiration_time = this.userModel.expiration_time;
+
+      if (this.userModel.role !== this.resolve.editUser.role && !this.userModel.role) {
+        return this.customerPermissionsService.deletePermission(this.resolve.editUser.permission);
+      } else if (this.userModel.expiration_time !== this.resolve.editUser.expiration_time) {
+        return this.customerPermissionsService.update(model);
       }
     }
-  };
-  $scope.projects = [];
-  init();
 
-  function init() {
-    $scope.userModel.user = $scope.editUser;
-    $scope.userModel.role = $scope.editUser.role;
-    $scope.userModel.expiration_time = $scope.editUser.expiration_time;
+    saveProjectPermissions() {
+      let updatePermissions = [],
+        createdPermissions = [],
+        permissionsToDelete = [];
 
-    $scope.projects = $scope.currentCustomer.projects.map(function(project) {
-      $scope.editUser.projects.some(function(permissionProject) {
-        project.role = null;
-        project.permission = null;
-        if (permissionProject.uuid === project.uuid) {
-          project.role = permissionProject.role;
-          project.permission = permissionProject.permission;
-          project.expiration_time = permissionProject.expiration_time;
-        }
-        return permissionProject.uuid === project.uuid;
-      });
-      return project;
-    });
-    $scope.emptyProjectList = !$scope.projects.length;
-    $scope.canChangeRole = $scope.currentUser.is_staff || $scope.editUser.uuid !== $scope.currentUser.uuid;
-  }
+      this.projects.forEach(project => {
+        let exists = false,
+          update = false,
+          deletePermissionUrl = null;
+        this.resolve.editUser.projects.forEach(existingPermission => {
+          if (project.permission === existingPermission.permission) {
+            exists = true;
+            if (project.role === existingPermission.role &&
+              project.expiration_time !== existingPermission.expiration_time) {
+              update = true;
+            } else {
+              deletePermissionUrl = existingPermission.permission;
+            }
+          }
+        });
 
-  function saveUser() {
-    $scope.errors = [];
-    var block = blockUI.instances.get('add-team-member-dialog');
-    block.start({delay: 0});
-
-    return $q.all([
-      saveCustomerPermission(),
-      saveProjectPermissions()
-    ]).then(function() {
-      block.stop();
-      $scope.$close();
-    }, function(error) {
-      block.stop();
-      $scope.errors = ncUtils.responseErrorFormatter(error);
-    });
-  }
-
-  function saveCustomerPermission() {
-    var permission = customerPermissionsService.$create();
-    permission.customer = $scope.currentCustomer.url;
-    permission.user = $scope.userModel.user.url;
-    permission.role = $scope.userModel.role === 'owner' ? 'owner' : null;
-    permission.expiration_time = $scope.userModel.role === 'owner' ? $scope.userModel.expiration_time : null;
-
-    if ($scope.editUser) {
-      if ($scope.userModel.role !== $scope.editUser.role ||
-        $scope.userModel.expiration_time !== $scope.editUser.expiration_time) {
-        if (!$scope.userModel.role) {
-          return customerPermissionsService.deletePermission($scope.editUser.permission);
+        if (exists) {
+          if (update) {
+            updatePermissions.push(project);
+          } else {
+            permissionsToDelete.push(deletePermissionUrl);
+            createdPermissions.push(project);
+          }
         } else {
-          permission.user = $scope.editUser.url;
-          return permission.$save();
+          if (project.role) {
+            createdPermissions.push(project);
+          }
         }
-      }
-    } else if ($scope.userModel.role) {
-      return permission.$save();
-    }
-  }
-
-  function saveProjectPermissions() {
-    var originalPermissions = {};
-    var originalRoles = {};
-    if ($scope.editUser) {
-      angular.forEach($scope.editUser.projects, function(project) {
-        originalPermissions[project.uuid] = project.permission;
+        deletePermissionUrl = null;
       });
 
-      angular.forEach($scope.editUser.projects, function(project) {
-        originalRoles[project.uuid] = project.role;
+      let removalPromises = permissionsToDelete.map(permission => {
+        return this.projectPermissionsService.deletePermission(permission);
+      });
+
+      let renewalPromises = updatePermissions.map(permission => {
+        let model = {};
+        model.role = permission.role;
+        model.expiration_time = permission.expiration_time;
+        model.url = permission.permission;
+        return this.projectPermissionsService.update(model);
+      });
+
+      return this.$q.all(removalPromises).then(() => {
+        let creationPromises = createdPermissions.map(permission => {
+          let instance = this.projectPermissionsService.$create();
+          instance.user = this.resolve.editUser.url;
+          instance.role = permission.role;
+          instance.project = permission.url;
+          instance.expiration_time = permission.expiration_time;
+          return instance.$save();
+        });
+        return this.$q.all(renewalPromises.concat(creationPromises));
       });
     }
-
-    var newRoles = {};
-    var newProjects = {};
-    angular.forEach($scope.projects, function(project) {
-      if (project.role) {
-        newRoles[project.uuid] = project.role;
-        newProjects[project.uuid] = {
-          url: project.url,
-          expiration_time: project.expiration_time
-        };
-      }
-    });
-
-    var createdProjects = [];
-    angular.forEach(newRoles, function(role, project) {
-      if (!originalPermissions[project] || (originalRoles[project] !== role)) {
-        createdProjects.push(project);
-      }
-    });
-
-    var creationPromises = createdProjects.map(function(project) {
-      var instance = projectPermissionsService.$create();
-      instance.user = $scope.userModel.user.url || $scope.editUser.url;
-      instance.project = newProjects[project].url;
-      instance.expiration_time = newProjects[project].expiration_time;
-      instance.role = newRoles[project];
-      return instance.$save();
-    });
-
-    var deletedPermissions = [];
-    angular.forEach(originalRoles, function(role, project) {
-      if (!newRoles[project] || (newRoles[project] !== role)) {
-        deletedPermissions.push(originalPermissions[project]);
-      }
-    });
-
-    var removalPromises = deletedPermissions.map(function(permission) {
-      return projectPermissionsService.deletePermission(permission);
-    });
-
-    return $q.all(creationPromises.concat(removalPromises));
   }
-}
+};
+
+export default addTeamMember;
