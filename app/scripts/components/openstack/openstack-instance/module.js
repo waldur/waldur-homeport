@@ -2,11 +2,13 @@ import { openstackInstanceSummary } from './openstack-instance-summary';
 import openstackInstanceCheckoutSummary from './openstack-instance-checkout-summary';
 import OpenStackInstanceConfig from './openstack-instance-config';
 import openstackInstanceFloatingIp from './openstack-instance-floating-ip';
+import openstackInstanceSecurityGroupsField from './openstack-instance-security-groups-field';
 
 export default module => {
   module.component('openstackInstanceSummary', openstackInstanceSummary);
   module.directive('openstackInstanceCheckoutSummary', openstackInstanceCheckoutSummary);
   module.component('openstackInstanceFloatingIp', openstackInstanceFloatingIp);
+  module.component('openstackInstanceSecurityGroupsField', openstackInstanceSecurityGroupsField);
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(stateConfig);
