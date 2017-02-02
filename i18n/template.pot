@@ -78,6 +78,7 @@ msgstr ""
 msgid "Checkout summary"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:29
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:33
 msgid "CIDR"
 msgstr ""
@@ -94,6 +95,10 @@ msgstr ""
 #: app/scripts/components/issues/issues-short-list.html:28
 #: app/scripts/components/user/user-edit.html:85
 msgid "Description"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
+msgid "Details"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:33
@@ -161,6 +166,10 @@ msgstr ""
 msgid "Instance"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:8
+msgid "Instance does not have any security groups yet."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:30
 msgid "Internal IP"
 msgstr ""
@@ -172,6 +181,7 @@ msgid "Invoiced to"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:11
+#: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:14
 msgid "IP protocol"
 msgstr ""
 
@@ -292,6 +302,10 @@ msgstr ""
 msgid "plans page"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:15
+msgid "Port range"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:41
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:34
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:29
@@ -344,6 +358,10 @@ msgstr ""
 msgid "Remote CIDR"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:16
+msgid "Remote network"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:138
 msgid "Remove profile"
 msgstr ""
@@ -371,6 +389,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:63
 msgid "Security groups"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:3
+msgid "Security groups details"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:6
