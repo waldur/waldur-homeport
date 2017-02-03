@@ -6,6 +6,7 @@ export default {
     'system_volume_size',
     'data_volume_size',
     'ssh_public_key',
+    'security_groups',
     'floating_ip',
     'description',
     'user_data'
@@ -96,6 +97,20 @@ export default {
         }
       ],
       warningMessage: 'SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile.keys">profile</a>.'
+    },
+    security_groups: {
+      type: 'multiselect',
+      label: 'Security groups',
+      component: 'openstackInstanceSecurityGroupsField',
+      resource: 'openstacktenant-security-groups',
+      parser: group => ({
+        value: group.url,
+        display_name: group.name,
+        object: group
+      }),
+      serializer: groups => groups.map(group => ({
+        url: group.value
+      }))
     },
     floating_ip: {
       type: 'list',
