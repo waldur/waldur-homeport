@@ -85,7 +85,7 @@ function ResourceAnalysisController(
       var vm = this;
       return currentStateService.getCustomer().then(function(response) {
         vm.currentCustomer = response;
-        vm.currentPlan = response.plan.name;
+        vm.currentPlan = response.plan && response.plan.name;
         vm.resourcesLimit = null;
         vm.resourcesUsage = null;
 
