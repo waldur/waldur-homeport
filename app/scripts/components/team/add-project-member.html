@@ -6,19 +6,19 @@
     <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
   </div>
   <div ng-if="!$ctrl.loading" block-ui="add-team-member-dialog">
-    <div class="form-group" ng-if="!$ctrl.editUser && $ctrl.users.length">
+    <div class="form-group" ng-if="!$ctrl.resolve.editUser && $ctrl.users.length">
       <label class="control-label" translate>User</label>
       <user-selector users="$ctrl.users" model="$ctrl.projectModel"></user-selector>
     </div>
 
-    <p ng-if="!$ctrl.editUser && !$ctrl.users.length" class="text-danger" translate>
+    <p ng-if="!$ctrl.resolve.editUser && !$ctrl.users.length" class="text-danger" translate>
       There are no available users.
     </p>
 
-    <div class="form-group" ng-if="$ctrl.editUser">
+    <div class="form-group" ng-if="$ctrl.resolve.editUser">
       <p class="form-control-static">
         <strong translate>User</strong>:
-        {{ $ctrl.editUser.full_name || $ctrl.editUser.username }}
+        {{ $ctrl.resolve.editUser.full_name || $ctrl.resolve.editUser.username }}
       </p>
     </div>
 

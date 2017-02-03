@@ -43,14 +43,12 @@ const addProjectMember = {
       };
 
       this.loading = true;
-      var vm = this;
-      this.loadData().finally(function() {
-        vm.loading = false;
+      this.loadData().finally(() => {
+        this.loading = false;
       });
     }
 
     loadData() {
-      var vm = this;
       this.projectModel.role = 'admin';
 
       if (this.resolve.editUser) {
@@ -64,10 +62,10 @@ const addProjectMember = {
         return this.$q.resolve();
       } else {
         return this.customersService.getAll({
-          operation: 'users', UUID: vm.resolve.currentCustomer.uuid
-        }).then(function(users) {
-          vm.users = users.filter(function(user) {
-            return vm.resolve.addedUsers.indexOf(user.uuid) === -1;
+          operation: 'users', UUID: this.resolve.currentCustomer.uuid
+        }).then((users) => {
+          this.users = users.filter((user) => {
+            return this.resolve.addedUsers.indexOf(user.uuid) === -1;
           });
         });
       }
@@ -75,17 +73,16 @@ const addProjectMember = {
 
     saveUser() {
       this.errors = [];
-      var vm = this;
       var block = this.blockUI.instances.get('add-team-member-dialog');
       block.start({delay: 0});
 
       return this.saveProjectPermissions()
-        .then(function() {
+        .then(() => {
           block.stop();
-          vm.close();
-        }, function(error) {
+          this.close();
+        }, (error) => {
           block.stop();
-          vm.errors = this.ncUtils.responseErrorFormatter(error);
+          this.errors = this.ncUtils.responseErrorFormatter(error);
         });
     }
 
@@ -102,13 +99,12 @@ const addProjectMember = {
     }
 
     checkPermissionAction() {
-      var vm = this;
       if (this.resolve.editUser.expiration_time !== this.projectModel.expiration_time &&
         this.resolve.editUser.role === this.projectModel.role) {
         return this.updatePermission(this.resolve.editUser.permission);
       }
-      return this.projectPermissionsService.deletePermission(this.resolve.editUser.permission).then(function() {
-        return vm.createPermission(vm.projectModel.role);
+      return this.projectPermissionsService.deletePermission(this.resolve.editUser.permission).then(() => {
+        return this.createPermission(this.projectModel.role);
       });
     }
 

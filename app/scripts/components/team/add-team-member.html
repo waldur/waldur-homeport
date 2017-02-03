@@ -6,10 +6,10 @@
     <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
   </div>
   <div ng-if="!$ctrl.loading" block-ui="add-team-member-dialog">
-    <div class="form-group" ng-if="$ctrl.editUser">
+    <div class="form-group" ng-if="$ctrl.resolve.editUser">
       <p class="form-control-static">
         <strong translate>User</strong>
-        {{ $ctrl.editUser.full_name || $ctrl.editUser.username }}
+        {{ $ctrl.resolve.editUser.full_name || $ctrl.resolve.editUser.username }}
       </p>
     </div>
 
@@ -55,7 +55,7 @@
     </div>
 
     <div class="form-group" ng-if="$ctrl.userModel.role">
-      <label class="control-label" translate>Customer role expires on</label>
+      <label class="control-label" translate>Organization role expires on</label>
       <action-field-datetime model="$ctrl.userModel" field="$ctrl.expirationTimeField"></action-field-datetime>
     </div>
 

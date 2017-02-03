@@ -29,7 +29,7 @@ const addTeamMember = {
 
       this.roleField = {
         name: 'role',
-        list: [
+        choices: [
           { value: 'admin', display_name: this.ENV.roles.admin },
           { value: 'manager', display_name: this.ENV.roles.manager },
         ]
@@ -61,6 +61,7 @@ const addTeamMember = {
         this.resolve.editUser.projects.some(permissionProject => {
           project.role = null;
           project.permission = null;
+          project.expiration_time = null;
           if (permissionProject.uuid === project.uuid) {
             project.role = permissionProject.role;
             project.permission = permissionProject.permission;
