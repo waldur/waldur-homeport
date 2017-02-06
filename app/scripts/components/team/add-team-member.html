@@ -28,6 +28,14 @@
       </div>
     </div>
 
+    <div class="form-group p-r-xs" ng-if="$ctrl.userModel.role">
+      <label class="control-label" translate>Organization owner role expires on</label>
+      <action-field-datetime
+        model="$ctrl.userModel"
+        field="$ctrl.expirationTimeField"
+        disable-input="!$ctrl.canChangeRole"></action-field-datetime>
+    </div>
+
     <div class="form-group" ng-if="!$ctrl.emptyProjectList">
       <label class="control-label" translate>Projects list</label>
       <table class="table">
@@ -41,22 +49,23 @@
         <tbody>
         <tr ng-repeat="project in $ctrl.projects track by project.uuid">
           <td>
-            <strong>{{ ::project.name }}</strong>
+            {{ ::project.name }}
           </td>
           <td>
-            <action-field-select model="project" field="$ctrl.roleField"></action-field-select>
+            <action-field-select
+              model="project"
+              field="$ctrl.roleField"
+              disable-input="!$ctrl.canChangeRole"></action-field-select>
           </td>
           <td>
-            <action-field-datetime model="project" field="$ctrl.expirationTimeField"></action-field-datetime>
+            <action-field-datetime
+              model="project"
+              field="$ctrl.expirationTimeField"
+              disable-input="!$ctrl.canChangeRole"></action-field-datetime>
           </td>
         </tr>
         </tbody>
       </table>
-    </div>
-
-    <div class="form-group" ng-if="$ctrl.userModel.role">
-      <label class="control-label" translate>Organization role expires on</label>
-      <action-field-datetime model="$ctrl.userModel" field="$ctrl.expirationTimeField"></action-field-datetime>
     </div>
 
     <p ng-if="$ctrl.emptyProjectList" class="text-danger" translate>

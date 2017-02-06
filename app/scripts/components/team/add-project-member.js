@@ -7,14 +7,14 @@ const addProjectMember = {
     resolve: '<'
   },
   controller: class AddProjectMemberDialogController {
-    constructor(projectPermissionsService, customersService, blockUI, $q, ENV, ncUtils) {
+    constructor(projectPermissionsService, customersService, blockUI, $q, ENV, ErrorMessageFormatter) {
       // @ngInject
       this.$q = $q;
       this.projectPermissionsService = projectPermissionsService;
       this.customersService = customersService;
       this.blockUI = blockUI;
       this.ENV = ENV;
-      this.ncUtils = ncUtils;
+      this.ErrorMessageFormatter = ErrorMessageFormatter;
     }
 
     $onInit() {
@@ -82,19 +82,24 @@ const addProjectMember = {
           this.close();
         }, (error) => {
           block.stop();
-          this.errors = this.ncUtils.responseErrorFormatter(error);
+          this.errors = this.ErrorMessageFormatter.formatErrorFields(error);
         });
     }
 
     saveProjectPermissions() {
-      if (this.resolve.editUser && (this.resolve.editUser.role !== this.projectModel.role ||
-        this.resolve.editUser.expiration_time !== this.projectModel.expiration_time)) {
-        return this.checkPermissionAction();
-      } else if (this.resolve.editUser && (this.resolve.editUser.role === this.projectModel.role ||
-        this.resolve.editUser.expiration_time === this.projectModel.expiration_time)) {
+      if (this.resolve.editUser) {
+        if((this.resolve.editUser.role !== this.projectModel.role ||
+          this.resolve.editUser.expiration_time !== this.projectModel.expiration_time)) {
+          return this.checkPermissionAction();
+        } else if (this.resolve.editUser.role === this.projectModel.role ||
+          this.resolve.editUser.expiration_time === this.projectModel.expiration_time) {
+          return this.$q.resolve();
+        }
+      } else {
+        if (this.projectModel.user) {
+          return this.createPermission(this.projectModel.role);
+        }
         return this.$q.resolve();
-      } else if (!this.resolve.editUser) {
-        return this.createPermission(this.projectModel.role);
       }
     }
 

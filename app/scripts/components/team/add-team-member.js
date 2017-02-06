@@ -1,4 +1,5 @@
 import template from './add-team-member.html';
+import './add-team-member.scss';
 
 const addTeamMember = {
   template,
@@ -134,7 +135,6 @@ const addTeamMember = {
             updatePermissions.push(project);
           } else {
             permissionsToDelete.push(deletePermissionUrl);
-            createdPermissions.push(project);
           }
         } else {
           if (project.role) {
