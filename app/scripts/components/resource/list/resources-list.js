@@ -168,6 +168,7 @@ export default function baseResourceListController(
       'resource_type', 'latitude', 'longitude',
       'service_name', 'service_uuid', 'customer', 'service_settings_state',
       'service_settings_error_message', 'service_settings_uuid', 'security_groups',
+      'description'
     ],
     getMarkers: function() {
       var items = this.controllerScope.list.filter(function hasCoordinates(item) {
