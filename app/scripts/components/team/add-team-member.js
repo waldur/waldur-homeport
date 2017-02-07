@@ -28,8 +28,12 @@ const addTeamMember = {
         expiration_time: null
       };
 
+      this.canChangeRole = this.resolve.currentUser.is_staff ||
+        this.resolve.editUser.uuid !== this.resolve.currentUser.uuid;
+
       this.roleField = {
         name: 'role',
+        disableInput: !this.canChangeRole,
         choices: [
           { value: 'admin', display_name: this.ENV.roles.admin },
           { value: 'manager', display_name: this.ENV.roles.manager },
@@ -37,6 +41,7 @@ const addTeamMember = {
       };
       this.expirationTimeField = {
         name: 'expiration_time',
+        disableInput: !this.canChangeRole,
         options: {
           format: 'dd.MM.yyyy',
           altInputFormats: ['M!/d!/yyyy'],
@@ -76,15 +81,12 @@ const addTeamMember = {
       });
 
       this.emptyProjectList = !this.projects.length;
-      this.canChangeRole = this.resolve.currentUser.is_staff ||
-        this.resolve.editUser.uuid !== this.resolve.currentUser.uuid;
     }
 
     saveUser() {
       this.errors = [];
       let block = this.blockUI.instances.get('add-team-member-dialog');
       block.start({delay: 0});
-
       return this.$q.all([
         this.saveCustomerPermission(),
         this.saveProjectPermissions()
@@ -104,9 +106,20 @@ const addTeamMember = {
 
       if (this.userModel.role !== this.resolve.editUser.role && !this.userModel.role) {
         return this.customerPermissionsService.deletePermission(this.resolve.editUser.permission);
+      } else if (!this.resolve.editUser.role) {
+        return this.createCustomerPermission();
       } else if (this.userModel.expiration_time !== this.resolve.editUser.expiration_time) {
         return this.customerPermissionsService.update(model);
       }
+    }
+
+    createCustomerPermission() {
+      let instance = this.customerPermissionsService.$create();
+      instance.user = this.resolve.editUser.url;
+      instance.role = this.userModel.role;
+      instance.customer = this.resolve.currentCustomer.url;
+      instance.expiration_time = this.userModel.expiration_time;
+      return instance.$save();
     }
 
     saveProjectPermissions() {

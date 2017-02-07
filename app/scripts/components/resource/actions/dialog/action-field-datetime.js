@@ -6,6 +6,5 @@ export default {
   bindings: {
     model: '<',
     field: '<',
-    disableInput: '<'
   },
 };
