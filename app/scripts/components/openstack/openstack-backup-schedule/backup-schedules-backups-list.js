@@ -1,15 +1,11 @@
-export default function backupScheduleBackupsList() {
-  return {
-    restrict: 'E',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: BackupScheduleBackupsListController,
-    controllerAs: 'ListController',
-    scope: {},
-    bindToController: {
-      resource: '='
-    }
-  };
-}
+const backupScheduleBackupsList = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: BackupScheduleBackupsListController,
+  controllerAs: 'ListController',
+  bindings: {
+    resource: '='
+  }
+};
 
 // @ngInject
 function BackupScheduleBackupsListController(
@@ -25,8 +21,8 @@ function BackupScheduleBackupsListController(
     getTableOptions: function() {
       var options = this._super();
       options.disableSearch = true;
-      options.noDataText = 'No backups yet.';
-      options.noMatchesText = 'No backups found matching filter.';
+      options.noDataText = 'No schedules yet.';
+      options.noMatchesText = 'No schedules found matching filter.';
       options.columns = [
         {
           title: 'Name',
@@ -54,3 +50,5 @@ function BackupScheduleBackupsListController(
 
   controllerScope.__proto__ = new controllerClass();
 }
+
+export default backupScheduleBackupsList;

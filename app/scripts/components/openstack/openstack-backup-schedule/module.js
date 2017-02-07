@@ -5,8 +5,8 @@ import openstackBackupScheduleSummary from './openstack-backup-schedule-summary'
 
 export default module => {
   module.service('openStackBackupSchedulesService', openStackBackupSchedulesService);
-  module.directive('openStackBackupSchedulesList', openStackBackupSchedulesList);
-  module.directive('backupScheduleBackupsList', backupScheduleBackupsList);
+  module.component('openStackBackupSchedulesList', openStackBackupSchedulesList);
+  module.component('backupScheduleBackupsList', backupScheduleBackupsList);
   module.component('openstackBackupScheduleSummary', openstackBackupScheduleSummary);
   module.config(actionConfig);
   module.config(tabsConfig);

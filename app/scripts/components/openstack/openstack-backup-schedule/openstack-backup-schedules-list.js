@@ -1,15 +1,11 @@
-export default function openStackBackupSchedulesList() {
-  return {
-    restrict: 'E',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: OpenStackBackupSchedulesListController,
-    controllerAs: 'ListController',
-    scope: {},
-    bindToController: {
-      resource: '='
-    }
-  };
-}
+const openStackBackupSchedulesList = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: OpenStackBackupSchedulesListController,
+  controllerAs: 'ListController',
+  bindings: {
+    resource: '='
+  }
+};
 
 // @ngInject
 function OpenStackBackupSchedulesListController(
@@ -59,3 +55,5 @@ function OpenStackBackupSchedulesListController(
 
   controllerScope.__proto__ = new controllerClass();
 }
+
+export default openStackBackupSchedulesList;

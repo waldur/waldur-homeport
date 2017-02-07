@@ -5,9 +5,8 @@
 
   <ui-select-match>{{$select.selected.display_name}}</ui-select-match>
   <ui-select-choices
-    repeat="choice.value as choice in $ctrl.field.choices track by $index"
-    refresh="$ctrl.refreshChoice($select.search)"
-    refresh-delay="0">
+    repeat="choice.value as choice in $ctrl.field.choices |
+     filter: { display_name: $select.search } track by $index">
     <div ng-bind-html="choice.display_name"></div>
   </ui-select-choices>
 </ui-select>
