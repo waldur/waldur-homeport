@@ -34,10 +34,6 @@ function OpenStackBackupSchedulesListController(
           render: row => this.renderResourceName(row)
         },
         {
-          title: 'Description',
-          render: row => row.description || 'N/A'
-        },
-        {
           title: 'Max number of backups',
           render: row => row.maximal_number_of_backups || '&mdash;'
         },

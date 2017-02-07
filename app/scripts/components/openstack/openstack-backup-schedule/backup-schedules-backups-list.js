@@ -34,10 +34,6 @@ function BackupScheduleBackupsListController(
           render: row => this.renderResourceName(row)
         },
         {
-          title: 'Description',
-          render: row => row.description || 'N/A'
-        },
-        {
           title: 'Keep until',
           render: row => $filter('shortDate')(row.kept_until) || '&mdash;'
         },

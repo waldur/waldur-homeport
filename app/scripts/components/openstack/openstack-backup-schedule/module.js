@@ -25,7 +25,30 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: 'Backup schedule has been updated'
+        successMessage: 'Backup schedule has been updated',
+        fields: {
+          retention_time: {
+            help_text: 'Retention time in days. If 0 - keep forever.',
+            label: 'Retention time',
+            required: true,
+            type: 'integer'
+          },
+          timezone: {
+            label: 'Timezone',
+            required: false,
+            type: 'choice'
+          },
+          maximal_number_of_backups: {
+            label: 'Max number of backups',
+            required: true,
+            type: 'integer'
+          },
+          schedule: {
+            label: 'Schedule',
+            required: true,
+            type: 'string'
+          }
+        }
       }),
     }
   });
