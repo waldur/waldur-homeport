@@ -21,6 +21,5 @@ export default function helpRoutes($stateProvider) {
     .state('help.details', {
       url: ':name/',
       template: '<help-details/>',
-      auth: true,
     });
 }
