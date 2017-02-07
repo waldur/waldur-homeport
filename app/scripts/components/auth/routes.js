@@ -8,9 +8,8 @@ export default function authRoutes($stateProvider) {
     })
 
     .state('login', {
-      parent: 'home',
       url: '/login/',
-      template: '<auth-login mode="\'login\'"></auth-login>',
+      template: '<auth-login mode="\'login\'"/><app-footer/>',
       data: {
         bodyClass: 'old',
         anonymous: true,
@@ -18,9 +17,8 @@ export default function authRoutes($stateProvider) {
     })
 
     .state('register', {
-      parent: 'home',
       url: '/register/',
-      template: '<auth-login mode="\'register\'"></auth-login>',
+      template: '<auth-login mode="\'register\'"/><app-footer/>',
       data: {
         bodyClass: 'old',
         anonymous: true
