@@ -4,14 +4,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: app/scripts/components/team/add-team-member.html:2
-msgid "{{ ::addTitle }} team member"
-msgstr ""
-
-#: app/scripts/components/team/add-project-member.html:2
-msgid "{{ addTitle }} project member"
-msgstr ""
-
 #: app/scripts/components/error/error-403.html:9
 #: app/scripts/components/error/error-404.html:6
 msgid "&lt; Back"
@@ -77,8 +69,8 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:124
-#: app/scripts/components/team/add-project-member.html:56
-#: app/scripts/components/team/add-team-member.html:76
+#: app/scripts/components/team/add-project-member.html:54
+#: app/scripts/components/team/add-team-member.html:84
 msgid "Cancel"
 msgstr ""
 
@@ -96,10 +88,6 @@ msgstr ""
 #: app/scripts/components/auth/auth-login.html:18
 #: app/scripts/components/auth/auth-login.html:96
 msgid "Create an account"
-msgstr ""
-
-#: app/scripts/components/team/add-team-member.html:58
-msgid "Customer role expires on"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
@@ -131,7 +119,7 @@ msgstr ""
 msgid "Enable DHCP"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:38
+#: app/scripts/components/team/add-team-member.html:46
 msgid "Expiration time"
 msgstr ""
 
@@ -300,6 +288,10 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
+#: app/scripts/components/team/add-team-member.html:32
+msgid "Organization owner role expires on"
+msgstr ""
+
 #: app/scripts/components/navigation/select-workspace-dialog.html:35
 msgid "Organizations"
 msgstr ""
@@ -357,7 +349,11 @@ msgstr ""
 msgid "Project"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:36
+#: app/scripts/components/team/add-project-member.html:2
+msgid "project member"
+msgstr ""
+
+#: app/scripts/components/team/add-team-member.html:44
 msgid "Project name"
 msgstr ""
 
@@ -365,7 +361,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:32
+#: app/scripts/components/team/add-team-member.html:40
 msgid "Projects list"
 msgstr ""
 
@@ -415,7 +411,7 @@ msgid "Resource"
 msgstr ""
 
 #: app/scripts/components/team/add-project-member.html:27
-#: app/scripts/components/team/add-team-member.html:37
+#: app/scripts/components/team/add-team-member.html:45
 msgid "Role"
 msgstr ""
 
@@ -497,6 +493,10 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
+#: app/scripts/components/team/add-team-member.html:2
+msgid "team member"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:5
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:5
 #: app/scripts/components/openstack/openstack-security-groups/security-group-summary.html:5
@@ -513,7 +513,7 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:62
+#: app/scripts/components/team/add-team-member.html:71
 msgid "There are no available projects."
 msgstr ""
 
