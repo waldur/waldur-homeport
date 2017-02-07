@@ -4,7 +4,6 @@ export default function openStackBackupSchedulesService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/openstacktenant-backup-schedules/';
-      this.filterByCustomer = false;
     }
   });
   return new ServiceClass();

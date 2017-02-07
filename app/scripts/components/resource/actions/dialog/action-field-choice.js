@@ -6,9 +6,4 @@ export default {
     model: '<',
     field: '<'
   },
-  controller: class ActionFieldChoiceController {
-    $onInit() {
-      this.choicesCopy = angular.copy(this.field.choices);
-    }
-  }
 };

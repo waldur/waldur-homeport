@@ -3,7 +3,7 @@ const backupScheduleBackupsList = {
   controller: BackupScheduleBackupsListController,
   controllerAs: 'ListController',
   bindings: {
-    resource: '='
+    resource: '<'
   }
 };
 

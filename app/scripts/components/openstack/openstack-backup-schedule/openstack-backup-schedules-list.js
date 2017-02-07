@@ -3,7 +3,7 @@ const openStackBackupSchedulesList = {
   controller: OpenStackBackupSchedulesListController,
   controllerAs: 'ListController',
   bindings: {
-    resource: '='
+    resource: '<'
   }
 };
 
