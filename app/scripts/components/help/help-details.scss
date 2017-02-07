@@ -1,0 +1,21 @@
+.instruction-page {
+  .instruction-image {
+    width: 50%;
+    float: left;
+    min-width: 260px;
+    cursor: pointer;
+  }
+  .instruction-content {
+    @extend .instruction-image;
+    padding-left: 10px;
+    cursor: auto;
+  }
+  .instruction-content-alerts {
+    .left-padding {
+      padding-left: 10px;
+    }
+  }
+}
+pre.code {
+  background-color: #FFFAE5;
+}
