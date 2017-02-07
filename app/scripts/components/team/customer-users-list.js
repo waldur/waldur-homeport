@@ -141,7 +141,7 @@ function CustomerUsersListController(
       return this._super(angular.extend({
         operation: 'users',
         UUID: this.currentCustomer.uuid,
-        o: 'full_name'
+        o: 'concatenated_name'
       }, filter));
     },
     removeInstance: function(user) {
