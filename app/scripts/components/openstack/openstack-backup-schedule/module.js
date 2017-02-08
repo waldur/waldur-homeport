@@ -17,39 +17,17 @@ export default module => {
 function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStackTenant.BackupSchedule', {
     order: [
-      'edit',
+      'update',
       'activate',
       'deactivate',
       'destroy',
       'pull'
     ],
     options: {
-      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
+      update: {
+        title: 'Edit',
         successMessage: 'Backup schedule has been updated',
-        fields: {
-          retention_time: {
-            help_text: 'Retention time in days. If 0 - keep forever.',
-            label: 'Retention time',
-            required: true,
-            type: 'integer'
-          },
-          timezone: {
-            label: 'Timezone',
-            required: false,
-            type: 'choice'
-          },
-          maximal_number_of_backups: {
-            label: 'Max number of backups',
-            required: true,
-            type: 'integer'
-          },
-          schedule: {
-            label: 'Schedule',
-            required: true,
-            type: 'string'
-          }
-        }
-      }),
+      },
     }
   });
 }
@@ -64,16 +42,17 @@ function stateConfig(ResourceStateConfigurationProvider) {
 }
 
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider) {
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStackTenant.BackupSchedule', {
     order: [
+      ...DEFAULT_RESOURCE_TABS.order,
       'backups',
     ],
-    options: {
+    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       backups: {
         heading: 'Backups',
         component: 'backupScheduleBackupsList'
       },
-    }
+    })
   });
 }
