@@ -70,7 +70,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:124
 #: app/scripts/components/team/add-project-member.html:54
-#: app/scripts/components/team/add-team-member.html:84
+#: app/scripts/components/team/add-team-member.html:86
 msgid "Cancel"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Enable DHCP"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:46
+#: app/scripts/components/team/add-team-member.html:47
 msgid "Expiration time"
 msgstr ""
 
@@ -349,11 +349,7 @@ msgstr ""
 msgid "Project"
 msgstr ""
 
-#: app/scripts/components/team/add-project-member.html:2
-msgid "project member"
-msgstr ""
-
-#: app/scripts/components/team/add-team-member.html:44
+#: app/scripts/components/team/add-team-member.html:45
 msgid "Project name"
 msgstr ""
 
@@ -411,7 +407,7 @@ msgid "Resource"
 msgstr ""
 
 #: app/scripts/components/team/add-project-member.html:27
-#: app/scripts/components/team/add-team-member.html:45
+#: app/scripts/components/team/add-team-member.html:46
 msgid "Role"
 msgstr ""
 
@@ -493,10 +489,6 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:2
-msgid "team member"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:5
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:5
 #: app/scripts/components/openstack/openstack-security-groups/security-group-summary.html:5
@@ -513,7 +505,7 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:71
+#: app/scripts/components/team/add-team-member.html:73
 msgid "There are no available projects."
 msgstr ""
 
