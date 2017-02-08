@@ -63,21 +63,26 @@ const addTeamMember = {
         new Date(this.resolve.editUser.expiration_time) :
         null;
 
-      this.projects = this.resolve.currentCustomer.projects.map(project => {
-        project.role = null;
-        project.permission = null;
-        project.expiration_time = null;
+      this.projects = angular.copy(this.resolve.currentCustomer.projects).map(project => {
+        let displayProject = {
+          role: null,
+          permission: null,
+          expiration_time: null,
+          uuid: project.uuid,
+          name: project.name,
+          url: project.url
+        };
         this.resolve.editUser.projects.some(permissionProject => {
           if (permissionProject.uuid === project.uuid) {
-            project.role = permissionProject.role;
-            project.permission = permissionProject.permission;
-            project.expiration_time = permissionProject.expiration_time ?
+            displayProject.role = permissionProject.role;
+            displayProject.permission = permissionProject.permission;
+            displayProject.expiration_time = permissionProject.expiration_time ?
               new Date(permissionProject.expiration_time) :
               null;
           }
           return permissionProject.uuid === project.uuid;
         });
-        return project;
+        return displayProject;
       });
 
       this.emptyProjectList = !this.projects.length;
