@@ -1,7 +1,7 @@
 import OpenStackTenantConfig from './openstack-tenant-config';
 import openstackTenantCheckoutSummary from './openstack-tenant-checkout-summary';
 import openstackTenantChangePackageDialog from './openstack-tenant-change-package';
-import { openstackTenantSummary } from './openstack-tenant-summary';
+import openstackTenantSummary from './openstack-tenant-summary';
 import packageTemplatesService from './package-templates-service';
 import openstackPackagesService from './openstack-packages-service';
 import openstackTenantChangePackageService from './openstack-tenant-change-package-service';

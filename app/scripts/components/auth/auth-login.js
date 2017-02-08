@@ -41,13 +41,7 @@ export const authLogin = {
     }
 
     $onInit() {
-      if (this.ENV.invitationsEnabled && this.mode === 'register') {
-        if (!this.invitationService.getInvitationToken()) {
-          this.$state.go('errorPage.notFound');
-        } else {
-          this.checkRegistrationMethods();
-        }
-      }
+      this.checkRegistrationMethods();
     }
 
     showLoginButton() {
@@ -59,7 +53,9 @@ export const authLogin = {
     }
 
     showRegisterButton() {
-      return this.methods.LOCAL_SIGNUP && !this.isSignupFormVisible;
+      return this.methods.LOCAL_SIGNUP && !this.isSignupFormVisible && (
+        !this.ENV.invitationsEnabled || this.ENV.allowSignupWithoutInvitation
+      );
     }
 
     showRegisterForm() {
@@ -85,12 +81,39 @@ export const authLogin = {
     }
 
     checkRegistrationMethods() {
+      /*
+       This method validates invitation token for signup in four steps:
+
+       1) check if invitations are enabled and user tries to signup;
+
+       2) check if user is allowed to signup without invitation token;
+
+       3) check if invitation token is present in local storage;
+
+       4) check if invitation token is valid using REST API.
+      */
+
+      if (!this.ENV.invitationsEnabled || this.mode !== 'register') {
+        return;
+      }
+
+      if (this.ENV.allowSignupWithoutInvitation) {
+        return;
+      }
+
       const token = this.invitationService.getInvitationToken();
+      if (!token) {
+        this.ncUtilsFlash.error('Invitation token is not found.');
+        this.$state.go('errorPage.notFound');
+        return;
+      }
+
       this.invitationService.check(token).then(result => {
         if (result.data.civil_number_required) {
           this.civilNumberRequired = true;
         }
       }, () => {
+        this.ncUtilsFlash.error('Unable to validate invitation token.');
         this.$state.go('errorPage.notFound');
       });
     }

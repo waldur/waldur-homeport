@@ -118,23 +118,29 @@ export default function ProjectUsersListController(
       return projectPermissionsService.deletePermission(user.permission);
     },
     openPopup: function(user) {
-      var dialogScope = $rootScope.$new();
-      dialogScope.currentProject = controllerScope.currentProject;
-      dialogScope.currentCustomer = controllerScope.currentCustomer;
-      dialogScope.editUser = user;
-      dialogScope.isProjectManager = this.isProjectManager;
-      dialogScope.addedUsers = this.list.map(function(users) {
-        return users.uuid;
-      });
+      var isProjectManager = this.isProjectManager,
+        addedUsers = this.list.map(function(users) {
+          return users.uuid;
+        });
       $uibModal.open({
         component: 'addProjectMember',
-        scope: dialogScope
+        resolve: {
+          currentProject: () => controllerScope.currentProject,
+          currentCustomer: () => controllerScope.currentCustomer,
+          editUser: () => user,
+          isProjectManager: () => isProjectManager,
+          addedUsers: () => addedUsers
+        }
       }).result.then(function() {
         controllerScope.resetCache();
       });
     },
     getFilter: function() {
-      return {operation: 'users', UUID: controllerScope.currentProject.uuid};
+      return {
+        operation: 'users',
+        UUID: controllerScope.currentProject.uuid,
+        o: 'concatenated_name'
+      };
     },
     getProjectRole: function(role) {
       return projectPermissionsService.getList({

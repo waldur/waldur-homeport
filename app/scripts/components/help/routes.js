@@ -4,23 +4,22 @@ export default function helpRoutes($stateProvider) {
     .state('help', {
       url: '/help/',
       abstract: true,
-      template: '<help-workspace><ui-view></ui-view></help-workspace>',
+      templateUrl: 'views/partials/base.html',
       data: {
-        pageTitle: 'Help'
+        pageTitle: 'Help',
+        bodyClass: 'old',
+        auth: true,
+        feature: 'help',
       }
     })
 
     .state('help.list', {
       url: '',
-      templateUrl: 'views/help/list.html',
-      auth: true,
-      noInitialData: true,
+      template: '<help-list/>',
     })
 
     .state('help.details', {
       url: ':name/',
-      templateUrl: 'views/help/details.html',
-      auth: true,
-      noInitialData: true,
+      template: '<help-details/>',
     });
 }

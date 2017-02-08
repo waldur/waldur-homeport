@@ -59,7 +59,8 @@ function ProjectsListController(
     },
     getFilter: function() {
       return {
-        customer: controllerScope.currentCustomer.uuid
+        customer: controllerScope.currentCustomer.uuid,
+        o: 'name'
       };
     },
     getColumns: function() {

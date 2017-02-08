@@ -42,7 +42,7 @@ export default function actionUtilsService(
           display_name: field.emptyLabel
         });
       }
-      field.list = choices;
+      field.choices = choices;
     });
   };
 

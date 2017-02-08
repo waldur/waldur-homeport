@@ -78,17 +78,7 @@
                     Request type <span class="text-danger">*</span>
                 </label>
                 <div class="col-sm-6">
-                    <ui-select ng-model="$ctrl.issue.type" name="type" required>
-                        <ui-select-match placeholder="Select request type..."
-                                         allow-clear="true">
-                            <i class="fa" ng-class="[$select.selected.iconClass, $select.selected.textClass]"></i>
-                            {{ $select.selected.label }}
-                        </ui-select-match>
-                        <ui-select-choices repeat="option in $ctrl.types">
-                            <i class="fa" ng-class="[option.iconClass, option.textClass]"></i>
-                            {{ option.label }}
-                        </ui-select-choices>
-                    </ui-select>
+                    <issue-type-select model="$ctrl.issue" field="{name: 'type'}"></issue-type-select>
                     <div class="help-block text-danger"
                          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.type.$touched) && $ctrl.IssueForm.type.$error.required">
                         You did not enter a field

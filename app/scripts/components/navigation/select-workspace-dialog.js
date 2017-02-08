@@ -17,15 +17,13 @@ export default function selectWorkspaceDialog() {
 
 // @ngInject
 function SelectWorkspaceDialogController(
-    $scope,
-    $rootScope,
     $uibModal,
     $state,
     $q,
     customersService,
-    projectsService,
     currentStateService,
-    usersService
+    usersService,
+    ncUtils
   ) {
   var ctrl = this;
   ctrl.organizations = [];
@@ -102,7 +100,8 @@ function SelectWorkspaceDialogController(
       }),
 
       customersService.getAll({
-        field: ['name', 'uuid', 'projects', 'owners', 'quotas', 'abbreviation']
+        field: ['name', 'uuid', 'projects', 'owners', 'quotas', 'abbreviation'],
+        o: 'name'
       }).then(function(organizations) {
         if (ctrl.selectedOrganization) {
           organizations = organizations.filter(function(organization) {
@@ -113,6 +112,8 @@ function SelectWorkspaceDialogController(
 
         angular.forEach(ctrl.organizations, organization => {
           organization.ownerOrStaff = customersService.checkCustomerUser(organization, ctrl.currentUser);
+          organization.canGotoDashboard = organization.ownerOrStaff || ctrl.currentUser.is_support;
+          organization.projects = ncUtils.sortArrayOfObjects(organization.projects, 'name', 0);
         });
       })
     ]);

@@ -1,4 +1,3 @@
-import { ISSUE_TYPE_CHOICES } from './constants';
 import template from './issue-quick-create.html';
 
 export default function issueQuickCreate() {
@@ -27,7 +26,6 @@ class IssueQuickCreateController {
     this.$q = $q;
     this.service = issuesService;
     this.issue = {};
-    this.types = ISSUE_TYPE_CHOICES;
     this.ncUtilsFlash = ncUtilsFlash;
     this.customersService = customersService;
     this.projectsService = projectsService;
@@ -94,7 +92,7 @@ class IssueQuickCreateController {
       return this.$q.reject();
     }
     let issue = {
-      type: this.issue.type.id,
+      type: this.issue.type,
       summary: this.issue.summary,
       description: this.issue.description,
       is_reported_manually: true,

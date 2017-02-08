@@ -1,5 +1,15 @@
 <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
 
+<div class="m-b-xs" ng-if="$ctrl.template">
+  <dt>
+    <span translate>Package</span>:
+  </dt>
+  <dd>
+    {{ $ctrl.template.name }} ({{ $ctrl.template.category }}, {{ $ctrl.template.flavor | formatFlavor }})
+  </dd>
+</div>
+
+
 <div class="m-b-xs">
   <dt>
     <span translate>Access</span>:

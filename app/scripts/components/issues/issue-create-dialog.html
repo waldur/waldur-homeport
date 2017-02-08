@@ -1,11 +1,59 @@
 <div class="modal-header">
-    <h3 class="modal-title">{{ $ctrl.options.title }}</h3>
+    <h3 class="modal-title">{{ $ctrl.options.title | translate }}</h3>
 </div>
 <div class="modal-body">
     <form name="$ctrl.IssueForm">
+        <div class="form-group" ng-if="$ctrl.issue.customer">
+            <strong><span translate>Organization</span>:</strong>
+            {{ $ctrl.issue.customer.name }}
+        </div>
+
+        <div class="form-group" ng-if="$ctrl.issue.project">
+            <strong><span translate>Organization</span>:</strong>
+            {{ $ctrl.issue.project.customer_name }}
+        </div>
+
+        <div class="form-group" ng-if="$ctrl.issue.project">
+            <strong><span translate>Project</span>:</strong>
+            {{ $ctrl.issue.project.name }}
+        </div>
+
+        <div class="form-group" ng-if="$ctrl.issue.resource">
+            <strong><span translate>Organization</span>:</strong>
+            {{ $ctrl.issue.resource.customer_name }}
+        </div>
+
+        <div class="form-group" ng-if="$ctrl.issue.resource">
+            <strong><span translate>Project</span>:</strong>
+            {{ $ctrl.issue.resource.project_name }}
+        </div>
+
+        <div class="form-group" ng-if="$ctrl.issue.resource">
+            <strong><span translate>Resource</span>:</strong>
+            {{ $ctrl.issue.resource.name }}
+        </div>
+
+        <div class="form-group" ng-if="!$ctrl.issueTypeEditable">
+            <strong><span translate>Request type</span>:</strong>
+            {{ $ctrl.issue.type | translate }}
+        </div>
+
+        <div class="form-group" ng-if="$ctrl.issueTypeEditable">
+            <label class="control-label" translate>
+                Request type
+            </label>
+            <div>
+                <issue-type-select model="$ctrl.issue" field="{name: 'type'}"></issue-type-select>
+                <div class="help-block text-danger"
+                     ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.type.$touched) && $ctrl.IssueForm.type.$error.required">
+                    <span translate>You did not enter a field</span>
+                </div>
+            </div>
+        </div>
+
         <div class="form-group" ng-if="::!$ctrl.options.hideTitle">
             <label for="issueSummary" class="control-label">
-                {{::$ctrl.options.summaryLabel}}
+                {{::$ctrl.options.summaryLabel | translate }}
             </label>
             <div>
                 <input type="text"
@@ -13,18 +61,18 @@
                     ng-model="$ctrl.issue.summary"
                     class="form-control"
                     name="summary"
-                    placeholder="{{ $ctrl.options.summaryPlaceholder }}"
+                    placeholder="{{ $ctrl.options.summaryPlaceholder | translate }}"
                     required
                     ng-class="{disabled: $ctrl.saving}">
                 <div class="help-block text-danger"
                      ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.summary.$touched) && $ctrl.IssueForm.summary.$error.required">
-                    You did not enter a field
+                    <span translate>You did not enter a field</span>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <label for="issueDescription" class="control-label">
-                {{::$ctrl.options.descriptionLabel}}
+                {{ ::$ctrl.options.descriptionLabel | translate }}
             </label>
             <div>
                 <textarea type="text"
@@ -32,12 +80,12 @@
                     ng-model="$ctrl.issue.description"
                     class="form-control h-150"
                     name="description"
-                    placeholder="{{ $ctrl.options.descriptionPlaceholder }}"
+                    placeholder="{{ $ctrl.options.descriptionPlaceholder | translate }}"
                     required
                     ng-class="{disabled: $ctrl.saving}"/>
                 <div class="help-block text-danger"
                      ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
-                    You did not enter a field
+                    <span translate>You did not enter a field</span>
                 </div>
             </div>
         </div>
@@ -45,9 +93,9 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-primary" submit-button="$ctrl.save()">
-        {{::$ctrl.options.submitTitle}}
+        {{ ::$ctrl.options.submitTitle | translate }}
     </button>
     <button class="btn btn-default" type="button" ng-click="$ctrl.close()">
-        Cancel
+        <span translate>Cancel</span>
     </button>
 </div>

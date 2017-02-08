@@ -1,8 +1,10 @@
+import ErrorMessageFormatter from './error-message-formatter';
 import attachTracking from './tracking';
 import submitButton from './submit-button';
 import sentryModule from './sentry';
 
 export default module => {
+  module.service('ErrorMessageFormatter', ErrorMessageFormatter);
   module.run(attachTracking);
   module.directive('submitButton', submitButton);
   module.run(redirectToState);

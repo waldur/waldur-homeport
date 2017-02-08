@@ -3,3 +3,11 @@
     padding-bottom: 5px;
   }
 }
+
+.uib-datepicker-popup {
+  z-index: 3000;
+
+  &.dropdown-menu {
+    padding-bottom: 5px;
+  }
+}

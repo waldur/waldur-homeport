@@ -1,4 +1,5 @@
 import template from './user-details.html';
+import { PRIVATE_USER_TABS, PUBLIC_USER_TABS } from './constants';
 
 export default function userDetails() {
   return {
@@ -8,64 +9,26 @@ export default function userDetails() {
   };
 }
 
-export const PRIVATE_USER_TABS = [
-  {
-    label: 'Dashboard',
-    icon: 'fa-th-large',
-    link: 'profile.details'
-  },
-  {
-    label: 'Audit logs',
-    icon: 'fa-bell-o',
-    link: 'profile.events'
-  },
-  {
-    label: 'SSH Keys',
-    icon: 'fa-key',
-    link: 'profile.keys'
-  },
-  {
-    label: 'Notifications',
-    icon: 'fa-envelope',
-    link: 'profile.notifications',
-    feature: 'notifications'
-  },
-  {
-    label: 'Manage',
-    icon: 'fa-wrench',
-    link: 'profile.manage'
-  }
-];
-
 // @ngInject
 function UserDetailsController($scope, $state, $stateParams, usersService,
-  PRIVATE_USER_TABS, stateUtilsService, currentStateService, WorkspaceService) {
-  var publicTabs = [
-    {
-      label: 'Audit logs',
-      icon: 'fa-bell-o',
-      link: 'users.details({uuid: $ctrl.context.user.uuid})'
-    },
-    {
-      label: 'SSH Keys',
-      icon: 'fa-key',
-      link: 'users.keys({uuid: $ctrl.context.user.uuid})'
+  stateUtilsService, currentStateService, WorkspaceService) {
+
+  function getDashboardTab(user) {
+    const prevWorkspace = stateUtilsService.getPrevWorkspace();
+    if (prevWorkspace === 'project') {
+      return {
+        label: 'Back to project',
+        icon: 'fa-arrow-left',
+        action: stateUtilsService.goBack
+      };
+    } else if (prevWorkspace === 'organization' &&
+      (currentStateService.getOwnerOrStaff() || user.is_support)) {
+      return {
+        label: 'Back to organization',
+        icon: 'fa-arrow-left',
+        action: stateUtilsService.goBack
+      };
     }
-  ];
-  var dashboardTab;
-  var prevWorkspace = stateUtilsService.getPrevWorkspace() || 'organization';
-  if (prevWorkspace === 'project') {
-    dashboardTab = {
-      label: 'Back to project',
-      icon: 'fa-arrow-left',
-      action: stateUtilsService.goBack
-    };
-  } else if (currentStateService.getOwnerOrStaff()) {
-    dashboardTab = {
-      label: 'Back to organization',
-      icon: 'fa-arrow-left',
-      action: stateUtilsService.goBack
-    };
   }
 
   function updateSidebar() {
@@ -74,6 +37,7 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
       workspace: 'user',
     });
     usersService.getCurrentUser().then(function(user) {
+      let dashboardTab = getDashboardTab(user);
       if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
         if (dashboardTab) {
           $scope.items = [dashboardTab].concat(PRIVATE_USER_TABS);
@@ -86,9 +50,9 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
       } else {
         usersService.$get($stateParams.uuid).then(function(user) {
           if (dashboardTab) {
-            $scope.items = [dashboardTab].concat(publicTabs);
+            $scope.items = [dashboardTab].concat(PUBLIC_USER_TABS);
           } else {
-            $scope.items = publicTabs;
+            $scope.items = PUBLIC_USER_TABS;
           }
           $scope.currentUser = user;
           $scope.isPrivate = false;

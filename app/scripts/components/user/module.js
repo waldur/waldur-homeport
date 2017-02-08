@@ -6,7 +6,7 @@ import keyList from './key-list';
 import userEvents from './user-events';
 import userManage from './user-manage';
 import userSidebar from './user-sidebar';
-import userDetails, { PRIVATE_USER_TABS } from './user-details';
+import userDetails from './user-details';
 import { userEdit } from './user-edit';
 import userDashboard from './user-dashboard';
 import userOrganizations from './user-organizations';
@@ -29,7 +29,6 @@ export default module => {
   module.component('userSidebar', userSidebar);
   module.directive('userDetails', userDetails);
   module.component('userEdit', userEdit);
-  module.constant('PRIVATE_USER_TABS', PRIVATE_USER_TABS);
   module.directive('userDashboard', userDashboard);
   module.directive('userOrganizations', userOrganizations);
   module.directive('userProjects', userProjects);

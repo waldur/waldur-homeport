@@ -1,93 +1,88 @@
 <div class="modal-header">
-    <h3 class="modal-title">{{ addTitle }} team member</h3>
+  <h3 class="modal-title">{{ ::$ctrl.addTitle | translate }}</h3>
 </div>
 <div class="modal-body">
-    <div ng-if="loading">
-        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+  <div ng-if="$ctrl.loading">
+    <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+  </div>
+  <div ng-if="!$ctrl.loading" block-ui="add-team-member-dialog">
+    <div class="form-group" ng-if="$ctrl.resolve.editUser">
+      <p class="form-control-static">
+        <strong translate>User</strong>
+        {{ $ctrl.resolve.editUser.full_name || $ctrl.resolve.editUser.username }}
+      </p>
     </div>
-    <div ng-if="!loading" block-ui="add-team-member-dialog">
-        <div class="form-group" ng-if="!editUser && users.length">
-            <label class="control-label">User:</label>
-            <user-selector users="users" model="userModel"></user-selector>
-        </div>
 
-        <p ng-if="!editUser && !users.length" class="text-danger">
-            There are no available users.
-        </p>
-
-        <div class="form-group" ng-if="editUser">
-            <p class="form-control-static">
-                <strong>User:</strong>
-                {{ editUser.full_name || editUser.username }}
-            </p>
-        </div>
-
-        <div class="form-group">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox"
-                           ng-disabled="!canChangeRole"
-                           ng-model="userModel.role"
-                           ng-true-value="'owner'"
-                           ng-false-value="''">
-                    </input>
-                    {{ ::roles.owner }}
-                    <helpicon ng-if="!canChangeRole"
-                              help-text="You cannot change your own role"></helpicon>
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group" ng-if="!emptyProjectList">
-            <label class="control-label">{{ ::roles.manager }} in:</label>
-            <ui-select ng-model="userModel.projectsManagerRole"
-                       on-remove="pushBackToProjectsList($item)"
-                       on-select="refreshProjectChoices($select.search)"
-                       theme="bootstrap"
-                       multiple>
-                <ui-select-match placeholder="Select projects...">
-                    {{ $item.name }}
-                </ui-select-match>
-                <ui-select-choices multiple
-                                   repeat="project in projects | filter: {'name': $select.search}"
-                                   refresh="refreshProjectChoices($select.search)">
-                    {{ project.name }}
-                </ui-select-choices>
-            </ui-select>
-        </div>
-
-        <div class="form-group" ng-if="!emptyProjectList">
-            <label class="control-label">{{ ::roles.admin }} in:</label>
-            <ui-select ng-model="userModel.projectsAdminRole"
-                       on-remove="pushBackToProjectsList($item)"
-                       on-select="refreshProjectChoices($select.search)"
-                       theme="bootstrap"
-                       multiple>
-                <ui-select-match placeholder="Select projects...">
-                    {{ $item.name }}
-                </ui-select-match>
-                <ui-select-choices multiple
-                                   repeat="project in projects | filter: {'name': $select.search}"
-                                   refresh="refreshProjectChoices($select.search)">
-                    {{ project.name }}
-                </ui-select-choices>
-            </ui-select>
-        </div>
-
-        <p ng-if="emptyProjectList" class="text-danger">
-            There are no available projects.
-        </p>
-        <div class="error" ng-repeat="error in errors" ng-bind="error"></div>
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"
+             ng-disabled="!$ctrl.canChangeRole"
+             ng-model="$ctrl.userModel.role"
+             ng-true-value="'owner'"
+             ng-false-value="''">
+          </input>
+          {{ ::$ctrl.roles.owner }}
+          <helpicon ng-if="!$ctrl.canChangeRole" help-text="{{ ::$ctrl.helpText }}"></helpicon>
+        </label>
+      </div>
     </div>
+
+    <div class="form-group p-r-xs" ng-if="$ctrl.userModel.role">
+      <label class="control-label" translate>Organization owner role expires on</label>
+      <action-field-datetime
+        model="$ctrl.userModel"
+        field="$ctrl.expirationTimeField"
+        disable-input="!$ctrl.canChangeRole"></action-field-datetime>
+    </div>
+
+    <div class="form-group" ng-if="!$ctrl.emptyProjectList">
+      <label class="control-label" translate>Projects list</label>
+      <div slimscroll="{alwaysVisible: true, height: '300px'}">
+        <table class="table">
+          <thead>
+          <tr>
+            <td translate>Project name</td>
+            <td translate>Role</td>
+            <td class="col-xs-4" translate>Expiration time</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="project in $ctrl.projects track by project.uuid">
+            <td class="align-middle">
+              {{ ::project.name }}
+            </td>
+            <td>
+              <action-field-select
+                model="project"
+                field="$ctrl.roleField"
+                disable-input="!$ctrl.canChangeRole"></action-field-select>
+            </td>
+            <td>
+              <action-field-datetime
+                model="project"
+                field="$ctrl.expirationTimeField"
+                disable-input="!$ctrl.canChangeRole"></action-field-datetime>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p ng-if="$ctrl.emptyProjectList" class="text-danger" translate>
+      There are no available projects.
+    </p>
+
+    <div class="error" ng-repeat="error in $ctrl.errors track by $index" ng-bind="error"></div>
+  </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary"
-            submit-button="saveUser()"
-            ng-class="{'disabled': validateSubmit()}">
-        {{ addText }}
-    </button>
-    <button class="btn btn-default"
-            ng-click="$dismiss()">
-        Cancel
-    </button>
+  <button class="btn btn-primary"
+    submit-button="$ctrl.saveUser()">
+    {{ ::$ctrl.addText | translate }}
+  </button>
+  <button class="btn btn-default"
+    ng-click="$ctrl.close()"><span translate>Cancel</span>
+  </button>
 </div>

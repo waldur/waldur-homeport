@@ -145,10 +145,10 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.team', {
       url: 'team/',
-      template: '<project-users></project-users>',
+      template: '<project-team>',
       data: {
         pageTitle: 'Team'
-      }
+      },
     })
 
     .state('import', {

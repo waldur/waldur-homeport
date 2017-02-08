@@ -229,7 +229,7 @@
             return 0;
         }
         return arr.sort(compare);
-      }
+      },
     };
   }
 })();

@@ -82,9 +82,10 @@ function AppStoreCategorySelectorController(
     return $uibModal.open({
       component: 'issueCreateDialog',
       resolve: {
-        issue: () => ({
+        issue: currentStateService.getCustomer().then(customer => ({
+          customer,
           type: ISSUE_IDS.SERVICE_REQUEST
-        }),
+        })),
         options: {
           title: 'Request a new service',
           descriptionPlaceholder: 'Please clarify why do you need it',

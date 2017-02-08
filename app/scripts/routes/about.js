@@ -9,14 +9,7 @@ export default function aboutRoutes($stateProvider) {
 
     .state('tos.index', {
       url: '',
-      views: {
-        appContent: {
-          templateUrl: 'views/tos/index.html',
-        },
-        appHeader: {
-          template: '<site-header></site-header>',
-        },
-      },
+      templateUrl: 'views/tos/index.html',
       data: {
         bodyClass: 'old',
         pageTitle: 'Terms of service'
@@ -31,14 +24,7 @@ export default function aboutRoutes($stateProvider) {
 
     .state('about.index', {
       url: '',
-      views: {
-        appContent: {
-          templateUrl: 'views/about/index.html',
-        },
-        appHeader: {
-          template: '<site-header></site-header>',
-        },
-      },
+      templateUrl: 'views/about/index.html',
       data: {
         bodyClass: 'old',
         pageTitle: 'About'
@@ -53,14 +39,7 @@ export default function aboutRoutes($stateProvider) {
 
     .state('policy.privacy', {
       url: 'privacy/',
-      views: {
-        appContent: {
-          templateUrl: 'views/policy/privacy.html',
-        },
-        appHeader: {
-          template: '<site-header></site-header>',
-        },
-      },
+      templateUrl: 'views/policy/privacy.html',
       data: {
         bodyClass: 'old',
         pageTitle: 'Privacy policy'
