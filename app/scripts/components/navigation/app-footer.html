@@ -7,7 +7,7 @@
             <li>
                 <a ui-sref="tos.index" translate>Terms of Service</a>
             </li>
-            <li>
+            <li ng-if="$ctrl.isAuthenticated()" visible-if="'help'">
                 <a ui-sref="help.list" translate>Help</a>
             </li>
             <li ng-if="::$ctrl.companyName">

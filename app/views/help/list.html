@@ -1,4 +1,4 @@
-<div ng-controller="HelpListController as HelpList">
+<div>
     <div class="container">
         <h1>Help topics</h1>
     </div>
@@ -10,7 +10,7 @@
                     <a class="list-sort">Provider</a>
                 </div>
             </li>
-            <li class="list-item" ng-repeat="item in HelpList.list">
+            <li class="list-item" ng-repeat="item in $ctrl.providersHelp">
                 <div class="additional-cell display-for-mobile">
                     <h3 class="item-title">
                         <a ui-sref="help.details({name: item.key})" stoppropagation>
@@ -20,42 +20,42 @@
                 </div>
             </li>
         </ul>
-        <ul class="object-list" ng-if="HelpList.profileList">
+        <ul class="object-list" ng-if="$ctrl.profileHelp">
             <li class="list-item list-header">
                 <div class="additional-cell display-for-mobile">
                     <a class="list-sort">Profile</a>
                 </div>
             </li>
-            <li class="list-item" ng-if="HelpList.profileList.sshKeys.name">
+            <li class="list-item" ng-if="$ctrl.profileHelp.sshKeys.name">
                 <div class="additional-cell display-for-mobile">
                     <h3 class="item-title">
-                        <a ui-sref="help.details({name: HelpList.profileList.sshKeys.name})" stoppropagation>
-                            {{ HelpList.profileList.sshKeys.title }}
+                        <a ui-sref="help.details({name: $ctrl.profileHelp.sshKeys.name})" stoppropagation>
+                            {{ $ctrl.profileHelp.sshKeys.title }}
                         </a>
                     </h3>
                 </div>
             </li>
         </ul>
-        <ul class="object-list" ng-if="HelpList.dashboardList">
+        <ul class="object-list" ng-if="$ctrl.dashboardHelp">
             <li class="list-item list-header">
                 <div class="additional-cell display-for-mobile">
                     <a class="list-sort">Alerts & events</a>
                 </div>
             </li>
-            <li class="list-item" ng-if="HelpList.dashboardList.alertsList.name">
+            <li class="list-item" ng-if="$ctrl.dashboardHelp.alertsList.name">
                 <div class="additional-cell display-for-mobile">
                     <h3 class="item-title">
-                        <a ui-sref="help.details({name: HelpList.dashboardList.alertsList.name})" stoppropagation>
-                            {{ HelpList.dashboardList.alertsList.title }}
+                        <a ui-sref="help.details({name: $ctrl.dashboardHelp.alertsList.name})" stoppropagation>
+                            {{ $ctrl.dashboardHelp.alertsList.title }}
                         </a>
                     </h3>
                 </div>
             </li>
-            <li class="list-item" ng-if="HelpList.dashboardList.eventsList.name">
+            <li class="list-item" ng-if="$ctrl.dashboardHelp.eventsList.name">
                 <div class="additional-cell display-for-mobile">
                     <h3 class="item-title">
-                        <a ui-sref="help.details({name: HelpList.dashboardList.eventsList.name})" stoppropagation>
-                            {{ HelpList.dashboardList.eventsList.title }}
+                        <a ui-sref="help.details({name: $ctrl.dashboardHelp.eventsList.name})" stoppropagation>
+                            {{ $ctrl.dashboardHelp.eventsList.title }}
                         </a>
                     </h3>
                 </div>

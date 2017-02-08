@@ -213,45 +213,6 @@ angular.module('ncsaas')
     ],
     defaultListCacheTime: 60 * 10,
     optionsCacheTime: 10 * 1000,
-    dashboardHelp: {
-      alertsList: {
-        type: 'alertsList',
-        name: 'alerts',
-        title: 'Alerts'
-      },
-      eventsList: {
-        type: 'eventsList',
-        name: 'events',
-        title: 'Events'
-      }
-    },
-    profileHelp: {
-      sshKeys: {
-        type: 'sshKeys',
-        name: 'keys',
-        title: 'How to generate SSH key'
-      }
-    },
-    helpList: [
-      {
-        type: 'providers',
-        key: 'Azure',
-        name: 'Azure provider',
-        link: null
-      },
-      {
-        type: 'providers',
-        key: 'Amazon',
-        name: 'Amazon EC2 provider',
-        link: 'http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html'
-      },
-      {
-        type: 'providers',
-        key: 'DigitalOcean',
-        name: 'DigitalOcean provider',
-        link: 'https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2'
-      }
-    ],
     toBeFeatures: [
       'resources',
       'support',
@@ -294,6 +255,7 @@ angular.module('ncsaas')
     },
     invitationRedirectTime: 5000,
     invitationsEnabled: true,
+    allowSignupWithoutInvitation: true,
     userMandatoryFields: [
       'full_name',
       'email'

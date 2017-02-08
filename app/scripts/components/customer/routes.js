@@ -101,22 +101,9 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.team', {
       url: 'team/',
-      templateUrl: 'views/customer/tab-team.html',
+      template: '<customer-team></customer-team>',
       data: {
         pageTitle: 'Team'
-      },
-      abstract: true
-    })
-
-    .state('organization.team.tabs', {
-      url: '',
-      views: {
-        users: {
-          template: '<customer-users-list></customer-users-list>'
-        },
-        invitations: {
-          template: '<invitations-list></invitations-list>'
-        }
       }
     })
 

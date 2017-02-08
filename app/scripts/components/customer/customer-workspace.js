@@ -97,7 +97,7 @@ function CustomerWorkspaceController(
       {
         label: 'Team',
         icon: 'fa-group',
-        link: 'organization.team.tabs({uuid: $ctrl.context.customer.uuid})',
+        link: 'organization.team({uuid: $ctrl.context.customer.uuid})',
         feature: 'team',
         countFieldKey: 'users'
       },
