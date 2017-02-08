@@ -60,7 +60,7 @@ export default function appstoreRoutes($stateProvider) {
     })
 
     .state('offeringDetails', {
-      url: 'offering/:uuid/',
+      url: '/offering/:uuid/',
       template: '<offering-details/>',
     })
 
