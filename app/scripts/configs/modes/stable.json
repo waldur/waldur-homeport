@@ -1,6 +1,5 @@
 {
   "toBeFeatures": [
-    "people",
     "compare",
     "sizing",
     "apps",
@@ -13,6 +12,7 @@
     "projectCostDetails",
     "import",
     "openMap",
+    "help",
     "support.activity",
     "support.sla",
     "support.assigned_to_me",
