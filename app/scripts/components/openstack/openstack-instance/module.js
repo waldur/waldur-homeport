@@ -34,6 +34,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'unassign_floating_ip',
       'update_security_groups',
       'backup',
+      'create_backup_schedule',
       'unlink',
       'destroy'
     ],
@@ -68,6 +69,9 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
             serializer: items => items.map(item => ({url: item.value}))
           }
         }
+      },
+      create_backup_schedule: {
+        title: 'Create backup schedule'
       },
       destroy: {
         fields: {
@@ -108,6 +112,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       ...DEFAULT_RESOURCE_TABS.order,
       'volumes',
       'backups',
+      'backup_schedules',
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       volumes: {
@@ -118,6 +123,10 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
         heading: 'Backups',
         component: 'openstackBackupsList'
       },
+      backup_schedules: {
+        heading: 'Backup schedules',
+        component: 'openstackBackupSchedulesList'
+      }
     })
   });
 }

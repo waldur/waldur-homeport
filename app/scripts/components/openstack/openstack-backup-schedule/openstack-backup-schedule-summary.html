@@ -1,0 +1,28 @@
+<resource-summary-base resource="$ctrl.resource"></resource-summary-base>
+
+<div class="m-b-xs">
+  <dt>
+    <span translate>Max number of backups</span>:
+  </dt>
+  <dd class="elipsis">
+    {{ $ctrl.resource.maximal_number_of_backups || '&mdash;' }}
+  </dd>
+</div>
+
+<div class="m-b-xs">
+  <dt>
+    <span translate>Schedule</span>:
+  </dt>
+  <dd class="elipsis">
+    {{ $ctrl.resource.schedule || '&mdash;' }}
+  </dd>
+</div>
+
+<div class="m-b-xs">
+  <dt>
+    <span translate>Is active</span>:
+  </dt>
+  <dd>
+    {{ $ctrl.resource.is_active && 'Yes' || 'No' }}
+  </dd>
+</div>

@@ -25,7 +25,7 @@ function ActionDialogController(
         if (field.default_value) {
           $scope.form[name] = field.default_value;
         }
-        if (field.resource_default_value) {
+        if (field.resource_default_value || $scope.action.name === 'update') {
           $scope.form[name] = $scope.resource[name];
         }
         if (field.type === 'multiselect') {

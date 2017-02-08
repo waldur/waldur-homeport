@@ -50,9 +50,17 @@ function OpenStackBackupsListController(
       return options;
     },
     getFilter: function() {
-      return {
-        instance: controllerScope.resource.url
+      const fields = {
+        'OpenStackTenant.Instance': 'instance',
+        'OpenStackTenant.BackupSchedule': 'backup_schedule',
       };
+      const {resource_type, url} = controllerScope.resource;
+      let field = fields[resource_type];
+      if (field) {
+        return {
+          [field]: url
+        };
+      }
     }
   });
 

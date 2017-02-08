@@ -47,11 +47,11 @@
   </dd>
 </div>
 
-<div class="m-b-xs">
+<div class="m-b-xs" ng-if="$ctrl.resource.backend_id">
   <dt>
     Backend ID:
   </dt>
   <dd class="elipsis">
-    {{ ::$ctrl.resource.backend_id || '&mdash;' }}
+    {{ ::$ctrl.resource.backend_id }}
   </dd>
 </div>
