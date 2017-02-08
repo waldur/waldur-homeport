@@ -125,11 +125,11 @@ export default function ProjectUsersListController(
       $uibModal.open({
         component: 'addProjectMember',
         resolve: {
-          currentProject: function() { return controllerScope.currentProject; },
-          currentCustomer: function() { return controllerScope.currentCustomer; },
-          editUser: function() { return user; },
-          isProjectManager: function() { return isProjectManager; },
-          addedUsers: function() { return addedUsers; }
+          currentProject: () => controllerScope.currentProject,
+          currentCustomer: () => controllerScope.currentCustomer,
+          editUser: () => user,
+          isProjectManager: () => isProjectManager,
+          addedUsers: () => addedUsers
         }
       }).result.then(function() {
         controllerScope.resetCache();
