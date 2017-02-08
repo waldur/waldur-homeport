@@ -1,4 +1,4 @@
-<div ng-controller="HelpDetailsController as HelpDetails">
+<div>
     <div class="container">
         <h1 ng-if="['alerts', 'events'].indexOf(HelpDetails.model.name) === -1">How to obtain credentials for {{ HelpDetails.model.name }}</h1>
         <h1 ng-if="['alerts', 'events'].indexOf(HelpDetails.model.name) !== -1">List of supported {{ HelpDetails.model.name }}</h1>
@@ -22,9 +22,9 @@
             <div class="instruction-content" ng-if="HelpDetails.model">
                 <div ng-if="HelpDetails.model.key == 'Azure'">
                     <div>
-                        Azure requires generation of X.509 certificates which will be used for securing the NodeConductor Azure API connections.
+                        Azure requires generation of X.509 certificates which will be used for securing the Waldur Azure API connections.
                         You need to generate two separate files: <br/>
-                        azure_cert.pem - which needs to be uploaded within NodeConductor "Create provider" form <br/>
+                        azure_cert.pem - which needs to be uploaded within Waldur "Create provider" form <br/>
                         azure_cert.cer - which needs to be uploaded within Azure Management Console (please see screenshot on the left) <br/>
                     </div>
                     <div>
@@ -66,7 +66,7 @@
                 </div>
                 <p ng-if="HelpDetails.model.key == 'DigitalOcean'">
                 In order to add DigitalOcean IaaS you need to have a valid DigitalOcean account and API access token.
-                DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to manage your resources through NodeConductor.
+                DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to manage your resources through Waldur.
                 </p>
                 <p ng-if="HelpDetails.model.link"><a href="{{ HelpDetails.model.link }}" target="_blank">Instructions on the official site</a></p>
             </div>
