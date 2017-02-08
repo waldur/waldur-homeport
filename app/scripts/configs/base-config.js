@@ -255,6 +255,7 @@ angular.module('ncsaas')
     },
     invitationRedirectTime: 5000,
     invitationsEnabled: true,
+    allowSignupWithoutInvitation: true,
     userMandatoryFields: [
       'full_name',
       'email'
