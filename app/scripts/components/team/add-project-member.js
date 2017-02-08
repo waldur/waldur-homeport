@@ -20,7 +20,7 @@ const addProjectMember = {
     $onInit() {
       var roles = this.ENV.roles;
       this.addText = 'Add';
-      this.addTitle = 'Add';
+      this.addTitle = 'Add project member';
       this.projectModel = {
         role: null,
         expiration_time: null
@@ -53,7 +53,7 @@ const addProjectMember = {
 
       if (this.resolve.editUser) {
         this.addText = 'Save';
-        this.addTitle = 'Edit';
+        this.addTitle = 'Edit project member';
         this.projectModel.user = this.resolve.editUser;
         this.projectModel.role = this.resolve.editUser.role;
         this.projectModel.expiration_time = this.resolve.editUser.expiration_time ?

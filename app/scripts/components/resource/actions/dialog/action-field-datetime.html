@@ -7,6 +7,8 @@
     ng-model="$ctrl.model[$ctrl.field.name]"
     ng-required="$ctrl.field.required"
     is-open="dateTimeOpened"
+    datepicker-append-to-body="true"
+    ng-click="dateTimeOpened = !dateTimeOpened"
     datepicker-options="$ctrl.field.options.dateOptions"
     close-text="Close"
     ng-disabled="$ctrl.field.disableInput"

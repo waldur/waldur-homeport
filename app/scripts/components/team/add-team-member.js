@@ -22,7 +22,7 @@ const addTeamMember = {
     $onInit() {
       this.roles = this.ENV.roles;
       this.addText = 'Save';
-      this.addTitle = 'Edit';
+      this.addTitle = 'Edit team member';
       this.helpText = this.$filter('translate')('You cannot change your own role');
       this.userModel = {
         expiration_time: null
@@ -51,12 +51,12 @@ const addTeamMember = {
           }
         }
       };
-      this.projects = [];
 
       this.formatData();
     }
 
     formatData() {
+      this.projects = [];
       this.userModel.user = this.resolve.editUser;
       this.userModel.role = this.resolve.editUser.role;
       this.userModel.expiration_time = this.resolve.editUser.expiration_time ?
@@ -64,10 +64,10 @@ const addTeamMember = {
         null;
 
       this.projects = this.resolve.currentCustomer.projects.map(project => {
+        project.role = null;
+        project.permission = null;
+        project.expiration_time = null;
         this.resolve.editUser.projects.some(permissionProject => {
-          project.role = null;
-          project.permission = null;
-          project.expiration_time = null;
           if (permissionProject.uuid === project.uuid) {
             project.role = permissionProject.role;
             project.permission = permissionProject.permission;
@@ -106,7 +106,7 @@ const addTeamMember = {
 
       if (this.userModel.role !== this.resolve.editUser.role && !this.userModel.role) {
         return this.customerPermissionsService.deletePermission(this.resolve.editUser.permission);
-      } else if (!this.resolve.editUser.role) {
+      } else if (!this.resolve.editUser.role && this.userModel.role) {
         return this.createCustomerPermission();
       } else if (this.userModel.expiration_time !== this.resolve.editUser.expiration_time) {
         return this.customerPermissionsService.update(model);
@@ -129,32 +129,28 @@ const addTeamMember = {
 
       this.projects.forEach(project => {
         let exists = false,
-          update = false,
-          deletePermissionUrl = null;
+          update = false;
         this.resolve.editUser.projects.forEach(existingPermission => {
           if (project.permission === existingPermission.permission) {
             exists = true;
             if (project.role === existingPermission.role &&
               project.expiration_time !== existingPermission.expiration_time) {
               update = true;
-            } else {
-              deletePermissionUrl = existingPermission.permission;
+            } else if ((!project.role && existingPermission.role) ||
+              (project.role && existingPermission.role && project.role !== existingPermission.role)) {
+              permissionsToDelete.push(existingPermission.permission);
+            }
+            if (project.role && project.role !== existingPermission.role) {
+              createdPermissions.push(project);
             }
           }
         });
 
-        if (exists) {
-          if (update) {
-            updatePermissions.push(project);
-          } else {
-            permissionsToDelete.push(deletePermissionUrl);
-          }
-        } else {
-          if (project.role) {
-            createdPermissions.push(project);
-          }
+        if (update) {
+          updatePermissions.push(project);
+        } else if (project.role && !exists) {
+          createdPermissions.push(project);
         }
-        deletePermissionUrl = null;
       });
 
       let removalPromises = permissionsToDelete.map(permission => {

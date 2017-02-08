@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 class="modal-title">{{ ::$ctrl.addTitle | translate }} <span translate>team member</span></h3>
+  <h3 class="modal-title">{{ ::$ctrl.addTitle | translate }}</h3>
 </div>
 <div class="modal-body">
   <div ng-if="$ctrl.loading">
@@ -38,34 +38,36 @@
 
     <div class="form-group" ng-if="!$ctrl.emptyProjectList">
       <label class="control-label" translate>Projects list</label>
-      <table class="table">
-        <thead>
-        <tr>
-          <td translate>Project name</td>
-          <td translate>Role</td>
-          <td class="col-xs-4" translate>Expiration time</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="project in $ctrl.projects track by project.uuid">
-          <td class="align-middle">
-            {{ ::project.name }}
-          </td>
-          <td>
-            <action-field-select
-              model="project"
-              field="$ctrl.roleField"
-              disable-input="!$ctrl.canChangeRole"></action-field-select>
-          </td>
-          <td>
-            <action-field-datetime
-              model="project"
-              field="$ctrl.expirationTimeField"
-              disable-input="!$ctrl.canChangeRole"></action-field-datetime>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+      <div slimscroll="{alwaysVisible: true, height: '300px'}">
+        <table class="table">
+          <thead>
+          <tr>
+            <td translate>Project name</td>
+            <td translate>Role</td>
+            <td class="col-xs-4" translate>Expiration time</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="project in $ctrl.projects track by project.uuid">
+            <td class="align-middle">
+              {{ ::project.name }}
+            </td>
+            <td>
+              <action-field-select
+                model="project"
+                field="$ctrl.roleField"
+                disable-input="!$ctrl.canChangeRole"></action-field-select>
+            </td>
+            <td>
+              <action-field-datetime
+                model="project"
+                field="$ctrl.expirationTimeField"
+                disable-input="!$ctrl.canChangeRole"></action-field-datetime>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <p ng-if="$ctrl.emptyProjectList" class="text-danger" translate>
