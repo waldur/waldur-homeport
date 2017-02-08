@@ -287,7 +287,7 @@ export default function baseResourceListController(
     },
     reInitResource:function(resource) {
       var vm = this;
-      return vm.service.$get(resource.resource_type, resource.uuid).then(function(response) {
+      return resourcesService.$get(resource.resource_type, resource.uuid).then(function(response) {
         var index = vm.list.indexOf(resource);
         vm.list[index] = response;
         vm.afterGetList();
