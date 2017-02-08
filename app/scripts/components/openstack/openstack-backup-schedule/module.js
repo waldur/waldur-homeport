@@ -1,20 +1,20 @@
-import openStackBackupSchedulesList from './openstack-backup-schedules-list';
-import openStackBackupSchedulesService from './openstack-backup-schedules-service';
-import backupScheduleBackupsList from './backup-schedules-backups-list';
+import openstackBackupSchedulesList from './openstack-backup-schedules-list';
+import openstackBackupSchedulesService from './openstack-backup-schedules-service';
 import openstackBackupScheduleSummary from './openstack-backup-schedule-summary';
+import breadcrumbsConfig from './breadcrumbs';
 
 export default module => {
-  module.service('openStackBackupSchedulesService', openStackBackupSchedulesService);
-  module.component('openStackBackupSchedulesList', openStackBackupSchedulesList);
-  module.component('backupScheduleBackupsList', backupScheduleBackupsList);
+  module.service('openstackBackupSchedulesService', openstackBackupSchedulesService);
+  module.component('openstackBackupSchedulesList', openstackBackupSchedulesList);
   module.component('openstackBackupScheduleSummary', openstackBackupScheduleSummary);
   module.config(actionConfig);
   module.config(tabsConfig);
   module.config(stateConfig);
+  module.run(breadcrumbsConfig);
 };
 
 // @ngInject
-function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
+function actionConfig(ActionConfigurationProvider) {
   ActionConfigurationProvider.register('OpenStackTenant.BackupSchedule', {
     order: [
       'update',
@@ -51,7 +51,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       backups: {
         heading: 'Backups',
-        component: 'backupScheduleBackupsList'
+        component: 'openstackBackupsList'
       },
     })
   });

@@ -1,6 +1,6 @@
-const openStackBackupSchedulesList = {
+const openstackBackupSchedulesList = {
   templateUrl: 'views/partials/filtered-list.html',
-  controller: OpenStackBackupSchedulesListController,
+  controller: openstackBackupSchedulesListController,
   controllerAs: 'ListController',
   bindings: {
     resource: '<'
@@ -8,14 +8,14 @@ const openStackBackupSchedulesList = {
 };
 
 // @ngInject
-function OpenStackBackupSchedulesListController(
-  baseResourceListController, openStackBackupSchedulesService) {
+function openstackBackupSchedulesListController(
+  baseResourceListController, openstackBackupSchedulesService) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
-      this.service = openStackBackupSchedulesService;
+      this.service = openstackBackupSchedulesService;
       this.rowFields.push('schedule', 'maximal_number_of_backups');
     },
     getTableOptions: function() {
@@ -56,4 +56,4 @@ function OpenStackBackupSchedulesListController(
   controllerScope.__proto__ = new controllerClass();
 }
 
-export default openStackBackupSchedulesList;
+export default openstackBackupSchedulesList;

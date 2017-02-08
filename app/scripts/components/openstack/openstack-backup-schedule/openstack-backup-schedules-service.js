@@ -1,5 +1,5 @@
 // @ngInject
-export default function openStackBackupSchedulesService(baseServiceClass) {
+export default function openstackBackupSchedulesService(baseServiceClass) {
   var ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();

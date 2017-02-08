@@ -22,7 +22,7 @@
   <dt>
     <span translate>Is active</span>:
   </dt>
-  <dd class="elipsis">
-    {{ ::$ctrl.resource.is_active || '&mdash;' }}
+  <dd>
+    {{ $ctrl.resource.is_active && 'Yes' || 'No' }}
   </dd>
 </div>

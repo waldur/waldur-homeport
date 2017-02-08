@@ -70,6 +70,9 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
           }
         }
       },
+      create_backup_schedule: {
+        title: 'Create backup schedule'
+      },
       destroy: {
         fields: {
           delete_volumes: {
@@ -122,7 +125,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       },
       backup_schedules: {
         heading: 'Backup schedules',
-        component: 'openStackBackupSchedulesList'
+        component: 'openstackBackupSchedulesList'
       }
     })
   });
