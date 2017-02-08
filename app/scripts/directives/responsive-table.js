@@ -4,9 +4,9 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
-  responsiveTable.$inject = ['$timeout', '$interval', '$compile', 'ENV'];
+  responsiveTable.$inject = ['$timeout', '$interval', '$compile', '$filter', 'ENV'];
 
-  function responsiveTable($timeout, $interval, $compile, ENV) {
+  function responsiveTable($timeout, $interval, $compile, $filter, ENV) {
     return {
       restrict: 'E',
       scope: {
@@ -65,8 +65,8 @@
             buttons: buttons && buttons,
             columns: columns,
             language: {
-              emptyTable: options.noDataText,
-              zeroRecords: options.noMatchesText
+              emptyTable: $filter('translate')(options.noDataText),
+              zeroRecords: $filter('translate')(options.noMatchesText)
             },
             fnDrawCallback: function() {
               $(element).find('tr').each(function(index, element) {

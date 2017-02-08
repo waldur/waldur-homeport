@@ -71,6 +71,8 @@ msgstr ""
 #: app/scripts/components/appstore/category-selector.html:33
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:124
+#: app/scripts/components/team/add-project-member.html:54
+#: app/scripts/components/team/add-team-member.html:86
 msgid "Cancel"
 msgstr ""
 
@@ -127,6 +129,10 @@ msgstr ""
 msgid "Enable DHCP"
 msgstr ""
 
+#: app/scripts/components/team/add-team-member.html:47
+msgid "Expiration time"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:42
 msgid "External IP"
 msgstr ""
@@ -155,11 +161,15 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:106
+msgid "have been accepted on"
+msgstr ""
+
 #: app/scripts/components/navigation/app-footer.html:11
 msgid "Help"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:108
+#: app/scripts/components/user/user-edit.html:118
 msgid "I accept the"
 msgstr ""
 
@@ -188,6 +198,10 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
+#: app/scripts/components/customer/customer-team.html:10
+msgid "Invitations"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:49
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:42
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:37
@@ -211,7 +225,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:122
+#: app/scripts/components/user/user-edit.html:132
 msgid "Let’s get started"
 msgstr ""
 
@@ -292,6 +306,10 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
+#: app/scripts/components/team/add-team-member.html:32
+msgid "Organization owner role expires on"
+msgstr ""
+
 #: app/scripts/components/navigation/select-workspace-dialog.html:35
 msgid "Organizations"
 msgstr ""
@@ -306,6 +324,11 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
+msgstr ""
+
+#: app/scripts/components/customer/customer-team.html:16
+#: app/scripts/components/project/project-team.html:10
+msgid "Permissions log"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:94
@@ -344,9 +367,17 @@ msgstr ""
 msgid "Project"
 msgstr ""
 
+#: app/scripts/components/team/add-team-member.html:45
+msgid "Project name"
+msgstr ""
+
 #: app/scripts/components/appstore/category-selector.html:10
 #: app/scripts/components/navigation/select-workspace-dialog.html:82
 msgid "Projects"
+msgstr ""
+
+#: app/scripts/components/team/add-team-member.html:40
+msgid "Projects list"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:33
@@ -377,7 +408,7 @@ msgstr ""
 msgid "Remote network"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:138
+#: app/scripts/components/user/user-edit.html:148
 msgid "Remove profile"
 msgstr ""
 
@@ -392,6 +423,15 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-create-dialog.html:32
 msgid "Resource"
+msgstr ""
+
+#: app/scripts/components/team/add-project-member.html:27
+#: app/scripts/components/team/add-team-member.html:46
+msgid "Role"
+msgstr ""
+
+#: app/scripts/components/team/add-project-member.html:44
+msgid "Role expires on"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:27
@@ -489,8 +529,17 @@ msgid "Tenant name"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:8
-#: app/scripts/components/user/user-edit.html:110
+#: app/scripts/components/user/user-edit.html:104
+#: app/scripts/components/user/user-edit.html:120
 msgid "Terms of Service"
+msgstr ""
+
+#: app/scripts/components/team/add-team-member.html:73
+msgid "There are no available projects."
+msgstr ""
+
+#: app/scripts/components/team/add-project-member.html:14
+msgid "There are no available users."
 msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:100
@@ -525,7 +574,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:132
+#: app/scripts/components/user/user-edit.html:142
 msgid "Update profile"
 msgstr ""
 
@@ -537,12 +586,23 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
+#: app/scripts/components/team/add-project-member.html:10
+#: app/scripts/components/team/add-project-member.html:20
+#: app/scripts/components/team/add-team-member.html:11
+msgid "User"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:47
 msgid "User status"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
 msgid "Username"
+msgstr ""
+
+#: app/scripts/components/customer/customer-team.html:4
+#: app/scripts/components/project/project-team.html:4
+msgid "Users"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:29
