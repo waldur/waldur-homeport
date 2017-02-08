@@ -136,7 +136,11 @@ export default function ProjectUsersListController(
       });
     },
     getFilter: function() {
-      return {operation: 'users', UUID: controllerScope.currentProject.uuid};
+      return {
+        operation: 'users',
+        UUID: controllerScope.currentProject.uuid,
+        o: 'concatenated_name'
+      };
     },
     getProjectRole: function(role) {
       return projectPermissionsService.getList({
