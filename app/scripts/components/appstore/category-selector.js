@@ -17,7 +17,7 @@ const appstoreCategorySelector = {
       ENV,
       currentStateService,
       ISSUE_IDS,
-      AppstoreOfferings) {
+      offeringsService) {
       // @ngInject
       this.$q = $q;
       this.$state = $state;
@@ -26,7 +26,7 @@ const appstoreCategorySelector = {
       this.ENV = ENV;
       this.currentStateService = currentStateService;
       this.ISSUE_IDS = ISSUE_IDS;
-      this.AppstoreOfferings = AppstoreOfferings;
+      this.offeringsService = offeringsService;
     }
 
     $onInit() {
@@ -74,7 +74,7 @@ const appstoreCategorySelector = {
     }
 
     loadCustomOfferings() {
-      return this.AppstoreOfferings.getConfiguration()
+      return this.offeringsService.getConfiguration()
         .then(offerings => Object.keys(offerings).map(key => ({
           key,
           label: offerings[key].label,

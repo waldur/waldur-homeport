@@ -59,6 +59,11 @@ export default function appstoreRoutes($stateProvider) {
       template: '<appstore-offering></appstore-offering>',
     })
 
+    .state('offeringDetails', {
+      url: 'offering/:uuid/',
+      template: '<offering-details/>',
+    })
+
     .state('compare', {
       url: '/compare/',
       templateUrl: 'views/project/base.html',

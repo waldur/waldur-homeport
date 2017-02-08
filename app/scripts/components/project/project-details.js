@@ -52,6 +52,11 @@ export default function ProjectDetailsController(
             label: 'Storage',
             feature: 'storage',
             countFieldKey: 'storages'
+          },
+          {
+            link: 'project.resources.offerings({uuid: $ctrl.context.project.uuid})',
+            icon: 'fa-cog',
+            label: 'Offerings',
           }
         ]
       },
