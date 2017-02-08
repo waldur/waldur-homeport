@@ -90,13 +90,13 @@
     <div ng-if="auth.showEstonianId()">
         <auth-estonian-id/>
     </div>
-    <div class="form-group" ng-if="auth.showRegisterButton()">
+    <div class="form-group m-b-xl" ng-if="auth.showRegisterButton()">
         <p><small translate>Do not have an account?</small></p>
         <a ng-click="auth.gotoRegister()" class="btn btn-default btn-block">
             <span translate>Create an account</span>
         </a>
     </div>
-    <div class="form-group" ng-if="auth.showLoginButton()">
+    <div class="form-group m-b-xl" ng-if="auth.showLoginButton()">
         <p><small translate>Already have an account?</small></p>
         <a ng-click="auth.gotoLogin()" class="btn btn-default btn-block">
             <span translate>Login</span>
