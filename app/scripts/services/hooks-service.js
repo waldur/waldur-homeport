@@ -14,7 +14,6 @@
       init:function() {
         this._super();
         this.endpoint = '/hooks/';
-        this.filterByCustomer = false;
       },
       getUrlByType: function(hook_type) {
         return ENV.apiEndpoint + 'api' + endpoints[hook_type];

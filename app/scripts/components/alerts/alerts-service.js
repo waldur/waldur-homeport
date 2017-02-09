@@ -6,7 +6,6 @@ export default function alertsService(baseServiceClass, ENV) {
     init: function() {
       this._super();
       this.endpoint = '/alerts/';
-      this.filterByCustomer = false;
     },
     setDefaultFilter: function() {
       // New alerts first

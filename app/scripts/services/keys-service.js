@@ -10,7 +10,6 @@
       init:function() {
         this._super();
         this.endpoint = '/keys/';
-        this.filterByCustomer = false;
       },
       getCurrentUserKeyList: function() {
         var deferred = $q.defer(),

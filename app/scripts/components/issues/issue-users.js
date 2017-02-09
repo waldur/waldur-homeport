@@ -4,7 +4,6 @@ export default function issueUsersService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/support-users/';
-      this.filterByCustomer = false;
     }
   });
   return new ServiceClass();

@@ -7,7 +7,6 @@ export default function eventsService($q, baseServiceClass, ENV) {
     init: function() {
       this._super();
       this.endpoint = '/events/';
-      this.filterByCustomer = false;
     },
     setDefaultFilter: function() {
       this.defaultFilter = {exclude_extra: true};

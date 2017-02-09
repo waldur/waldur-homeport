@@ -4,7 +4,6 @@ export default function issuesService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/support-issues/';
-      this.filterByCustomer = false;
     },
     setDefaultFilter: function() {
       // New issues come first
