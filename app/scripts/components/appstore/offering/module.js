@@ -4,6 +4,7 @@ import appstoreOffering from './appstore-offering';
 import offeringHeader from './offering-header';
 import offeringSummary from './offering-summary';
 import offeringDetails from './offering-details';
+import offeringEvents from './offering-events';
 
 export default module => {
   module.service('offeringsService', offeringsService);
@@ -12,4 +13,5 @@ export default module => {
   module.component('offeringSummary', offeringSummary);
   module.component('appstoreOffering', appstoreOffering);
   module.component('offeringDetails', offeringDetails);
+  module.component('offeringEvents', offeringEvents);
 };

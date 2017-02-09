@@ -4,6 +4,14 @@ const offeringSummary = {
   template,
   bindings: {
     offering: '<'
+  },
+  controller: class {
+    $onInit() {
+      this.issue = {
+        uuid: this.offering.issue_uuid,
+        url: this.offering.issue,
+      };
+    }
   }
 };
 
