@@ -71,7 +71,12 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         }
       },
       create_backup_schedule: {
-        title: 'Create backup schedule'
+        title: 'Create backup schedule for OpenStack instance',
+        fields: {
+          schedule: {
+            component: 'crontabField'
+          }
+        }
       },
       destroy: {
         fields: {
