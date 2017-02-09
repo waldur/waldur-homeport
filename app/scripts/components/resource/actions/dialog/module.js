@@ -3,6 +3,7 @@ import actionField from './action-field';
 import actionFieldBoolean from './action-field-boolean';
 import actionFieldDatetime from './action-field-datetime';
 import actionFieldInteger from './action-field-integer';
+import actionFieldDecimal from './action-field-decimal';
 import actionFieldMultiselect from './action-field-multiselect';
 import actionFieldSelect from './action-field-select';
 import actionFieldString from './action-field-string';
@@ -15,6 +16,7 @@ export default module => {
   module.component('actionFieldBoolean', actionFieldBoolean);
   module.component('actionFieldDatetime', actionFieldDatetime);
   module.component('actionFieldInteger', actionFieldInteger);
+  module.component('actionFieldDecimal', actionFieldDecimal);
   module.component('actionFieldMultiselect', actionFieldMultiselect);
   module.component('actionFieldSelect', actionFieldSelect);
   module.component('actionFieldString', actionFieldString);

@@ -135,6 +135,14 @@ export default function projectRoutes($stateProvider) {
       template: '<resource-storage-tabs/>'
     })
 
+    .state('project.resources.offerings', {
+      url: 'offerings/',
+      template: '<project-offerings-list/>',
+      data: {
+        pageTitle: 'Offerings'
+      }
+    })
+
     .state('project.delete', {
       url: 'delete/',
       template: '<project-manage></project-manage>',

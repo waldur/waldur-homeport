@@ -52,6 +52,11 @@ export default function ProjectDetailsController(
             label: 'Storage',
             feature: 'storage',
             countFieldKey: 'storages'
+          },
+          {
+            link: 'project.resources.offerings({uuid: $ctrl.context.project.uuid})',
+            icon: 'fa-cog',
+            label: 'Offerings',
           }
         ]
       },
@@ -94,7 +99,7 @@ export default function ProjectDetailsController(
         label: 'Manage'
       }
     ];
-    $scope.$on('authService:signin', function() {
+    $scope.$on('WORKSPACE_CHANGED', function() {
       refreshProject();
     });
     refreshProject();
@@ -102,6 +107,9 @@ export default function ProjectDetailsController(
 
   function refreshProject() {
     currentStateService.getProject().then(function(project) {
+      if (!project) {
+        return;
+      }
       $scope.currentProject = project;
       $scope.context = {project: project};
       connectCounters(project);

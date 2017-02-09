@@ -1,0 +1,16 @@
+<div ng-controller="ProjectDetailsController as ProjectCtrl">
+  <sidebar items="items" context="context"></sidebar>
+</div>
+<div id="page-wrapper" class="gray-bg">
+  <div ng-if="!$ctrl.offering">
+    <h1 class="text-center">
+      <i class="icon fa-spinner fa-spin"></i>
+    </h1>
+  </div>
+  <div ng-if="$ctrl.offering">
+    <nc-header></nc-header>
+    <offering-header offering="$ctrl.offering"/>
+    <offering-summary offering="$ctrl.offering"/>
+  </div>
+  <app-footer/>
+</div>
