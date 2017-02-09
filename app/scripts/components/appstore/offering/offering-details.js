@@ -25,7 +25,6 @@ const offeringDetails = {
         .then(offering => {
           this.offering = offering;
           return this.projectsService.$get(offering.project_uuid).then(project => {
-            this.currentProject = project;
             this.currentStateService.setProject(project);
             return { project };
           });

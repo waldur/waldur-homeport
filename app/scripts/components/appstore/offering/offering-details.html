@@ -1,7 +1,7 @@
 <div ng-controller="ProjectDetailsController as ProjectCtrl">
   <sidebar items="items" context="context"></sidebar>
 </div>
-<div id="page-wrapper" class="white-bg">
+<div id="page-wrapper" class="gray-bg">
   <div ng-if="!$ctrl.offering">
     <h1 class="text-center">
       <i class="icon fa-spinner fa-spin"></i>
@@ -9,30 +9,8 @@
   </div>
   <div ng-if="$ctrl.offering">
     <nc-header></nc-header>
-    <div class="row wrapper white-bg page-heading">
-      <div class="col-lg-12">
-        <h2>Offering details</h2>
-        <ol class="breadcrumb">
-          <li>
-            <a ui-sref="project.details({uuid: $ctrl.currentProject.uuid })">Project dashboard</a>
-          </li>
-          <li>
-            <a ui-sref="project.resources.offerings({uuid: $ctrl.currentProject.uuid })">Offerings</a>
-          </li>
-          <li class="active">
-            <strong>{{ $ctrl.offering.name }}</strong>
-          </li>
-        </ol>
-      </div>
-    </div>
-    <div class="row wrapper white-bg">
-      <div class="col-lg-12">
-        <div class="ibox">
-          <div class="ibox-content">
-          </div>
-        </div>
-      </div>
-    </div>
+    <offering-header offering="$ctrl.offering"/>
+    <offering-summary offering="$ctrl.offering"/>
   </div>
   <app-footer/>
 </div>

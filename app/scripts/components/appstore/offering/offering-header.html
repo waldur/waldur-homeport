@@ -1,0 +1,26 @@
+<div class="row wrapper white-bg page-heading">
+  <div class="col-lg-12">
+    <h2 translate>Offering details</h2>
+    <div class="pull-right">
+      <action-button-resource
+        button-model="$ctrl.offering"
+        button-controller="$ctrl">
+      </action-button-resource>
+    </div>
+    <ol class="breadcrumb">
+      <li>
+        <a ui-sref="project.details({uuid: $ctrl.offering.project_uuid })">
+          <span translate>Project dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a ui-sref="project.resources.offerings({uuid: $ctrl.offering.project_uuid })">
+          <span translate>Offerings</span>
+        </a>
+      </li>
+      <li class="active">
+        <strong>{{ $ctrl.offering.name }}</strong>
+      </li>
+    </ol>
+  </div>
+</div>

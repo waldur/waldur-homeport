@@ -57,6 +57,11 @@ export default function appstoreRoutes($stateProvider) {
     .state('appstore.offering', {
       url: 'offering/:category/',
       template: '<appstore-offering></appstore-offering>',
+      data: {
+        category: 'offerings',
+        pageTitle: 'Offerings',
+        sidebarState: 'project.resources'
+      }
     })
 
     .state('offeringDetails', {
