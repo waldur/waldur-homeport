@@ -7,7 +7,6 @@ import appstoreSummary from './appstore-summary';
 import appstoreStore from './appstore-store';
 import appstoreRoutes from './routes';
 import AppstoreFieldConfiguration from './field-configuration';
-import offeringsModule from './offering/module';
 
 export default module => {
   module.service('AppStoreUtilsService', AppStoreUtilsService);
@@ -20,5 +19,4 @@ export default module => {
   module.directive('appstoreStore', appstoreStore);
   module.config(appstoreRoutes);
   module.provider('AppstoreFieldConfiguration', AppstoreFieldConfiguration);
-  offeringsModule(module);
 };

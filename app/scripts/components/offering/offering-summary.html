@@ -17,7 +17,7 @@
             <div class="m-b-xs">
               <dt><span translate>State</span>:</dt>
               <dd>
-                {{ $ctrl.offering.state | translate }}
+                <offering-state offering="$ctrl.offering"/>
               </dd>
             </div>
 
@@ -60,7 +60,10 @@
             </div>
           </dl>
           <h5 translate>Description</h5>
-          <pre>{{ $ctrl.offering.issue_description }}</pre>
+          <textarea
+            class="form-control h-150"
+            ng-bind="$ctrl.offering.issue_description"
+            readonly/>
         </div>
       </div>
       <div class="ibox">

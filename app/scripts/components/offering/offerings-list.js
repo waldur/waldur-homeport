@@ -43,7 +43,10 @@ function ProjectOfferingsListController(
         },
         {
           title: 'State',
-          render: row => row.state
+          render: row => {
+            const index = this.findIndexById(row);
+            return `<offering-state offering="controller.list[${index}]">`;
+          }
         },
         {
           title: 'Creation date',
@@ -54,8 +57,8 @@ function ProjectOfferingsListController(
       ];
     },
     getRowActions: function(row) {
-      var index = this.findIndexById(row);
-      return '<action-button-resource button-controller="controller" button-model="controller.list[' + index + ']"/>';
+      const index = this.findIndexById(row);
+      return `<action-button-resource button-controller="controller" button-model="controller.list[${index}]"/>`;
     },
     findIndexById: function(row) {
       // TODO: extract duplicating code to utils
