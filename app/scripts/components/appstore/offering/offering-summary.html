@@ -63,8 +63,6 @@
           <pre>{{ $ctrl.offering.issue_description }}</pre>
         </div>
       </div>
-    </div>
-    <div class="col-sm-6">
       <div class="ibox">
         <div class="ibox-title">
           <h5 translate>Event log</h5>
@@ -73,6 +71,8 @@
           <offering-events offering="$ctrl.offering"/>
         </div>
       </div>
+    </div>
+    <div class="col-sm-6">
       <div class="ibox" ng-if="$ctrl.issue.url">
         <div class="ibox-title">
           <h5 translate>Comments</h5>

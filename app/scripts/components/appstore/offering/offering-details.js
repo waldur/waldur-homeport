@@ -11,6 +11,7 @@ const offeringDetails = {
       WorkspaceService,
       $stateParams,
       $state) {
+      // @ngInject
       this.offeringsService = offeringsService;
       this.projectsService = projectsService;
       this.customersService = customersService;

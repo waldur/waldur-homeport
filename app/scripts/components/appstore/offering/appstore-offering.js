@@ -9,6 +9,7 @@ const appstoreOffering = {
       ncUtilsFlash,
       offeringsService,
       currentStateService) {
+      // @ngInject
       this.$stateParams = $stateParams;
       this.$state = $state;
       this.ncUtilsFlash = ncUtilsFlash;
