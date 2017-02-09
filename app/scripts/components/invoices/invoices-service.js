@@ -1,6 +1,5 @@
 // @ngInject
 export default function invoicesService(baseServiceClass, $http, ENV, $state) {
-  /*jshint validthis: true */
   var ServiceClass = baseServiceClass.extend({
     init:function() {
       this._super();

@@ -5,7 +5,6 @@
     .service('projectPermissionsService', ['baseServiceClass', 'ncUtils', projectPermissionsService]);
 
   function projectPermissionsService(baseServiceClass, ncUtils) {
-    /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
