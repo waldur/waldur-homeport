@@ -68,9 +68,13 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         dialogSize: 'lg'
       },
       pull_floating_ips: {
+        list_type: 'floating_ip',
+        single_title: 'Pull',
         title: 'Pull floating IPs'
       },
       create_floating_ip: {
+        list_type: 'floating_ip',
+        single_title: 'Create',
         title: 'Create floating IP'
       },
     },

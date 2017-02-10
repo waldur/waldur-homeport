@@ -18,6 +18,7 @@ function VolumeSnapshotsListController(
   var ResourceController = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
+      this.controllerScope.list_type = 'volume_snapshot';
       this._super();
 
       $scope.$on('actionApplied', function(event, name) {

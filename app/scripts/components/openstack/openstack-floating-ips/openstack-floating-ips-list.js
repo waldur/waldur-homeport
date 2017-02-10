@@ -14,6 +14,7 @@ function OpenstackFloatingIpsListController(
   var controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
+      this.controllerScope.list_type = 'floating_ip';
       this._super();
       this.service = openstackFloatingIpsService;
     },

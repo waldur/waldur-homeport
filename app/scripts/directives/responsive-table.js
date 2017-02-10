@@ -4,9 +4,9 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
-  responsiveTable.$inject = ['$timeout', '$interval', '$compile', '$filter', 'ENV'];
+  responsiveTable.$inject = ['$timeout', '$interval', '$compile', '$filter', 'ENV', 'ActionConfiguration'];
 
-  function responsiveTable($timeout, $interval, $compile, $filter, ENV) {
+  function responsiveTable($timeout, $interval, $compile, $filter, ENV, ActionConfiguration) {
     return {
       restrict: 'E',
       scope: {
@@ -17,12 +17,25 @@
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
         var table;
+        var singleActionButtons = [];
 
         scope.$watch('controller.tableOptions', function(newTableOptions) {
           if (table) {
             // Table should be initialized once
             return;
           }
+
+          if (scope.controller.resource) {
+            var actionOptions = ActionConfiguration[scope.controller.resource.resource_type].options;
+            angular.forEach(actionOptions, (value, key) => {
+              if (scope.controller.list_type && value.list_type === scope.controller.list_type) {
+                singleActionButtons.push({
+                  text: $compile('<action-button-single ' +
+                    'button-controller="controller" action-name="'+ key +'"></action-button-single>')(scope)});
+              }
+            });
+          }
+
           if (newTableOptions && newTableOptions.columns) {
             options = newTableOptions;
             if (options.hiddenColumns) {
@@ -126,6 +139,8 @@
               });
             }
           });
+
+          buttons = singleActionButtons.length ? buttons.concat(singleActionButtons) : buttons;
           return buttons;
         }
 
@@ -133,7 +148,7 @@
           var columns = options.columns.map(function(column) {
             function render(data, type, row, meta) {
               return column.render(row);
-            };
+            }
             return angular.extend({}, column, {render: render});
           });
           if (options.rowActions && options.rowActions.length) {
