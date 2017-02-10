@@ -4,7 +4,6 @@ export default function openstackBackupsService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/openstacktenant-backups/';
-      this.filterByCustomer = false;
     }
   });
   return new ServiceClass();

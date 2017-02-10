@@ -1,11 +1,9 @@
 // @ngInject
 export default function invoicesService(baseServiceClass, $http, ENV, $state) {
-  /*jshint validthis: true */
   var ServiceClass = baseServiceClass.extend({
     init:function() {
       this._super();
       this.endpoint = '/invoices/';
-      this.filterByCustomer = false;
     },
     sendNotification: function(invoice_uuid) {
       var url = ENV.apiEndpoint + 'api' + this.endpoint + invoice_uuid + '/send_notification/';

@@ -5,7 +5,6 @@
     .service('paymentsService', ['baseServiceClass', 'ENV', '$http', paymentsService]);
 
   function paymentsService(baseServiceClass, ENV, $http) {
-    /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
