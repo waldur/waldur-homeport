@@ -41,8 +41,7 @@ const parsePrices = template => template.components.reduce(
     [component.type]: parseFloat(component.price)
   }), {});
 
-const parseFlavors = (template, flavors) => {
-  const prices = parsePrices(template);
+const parseFlavors = (prices, flavors) => {
   return flavors.map(flavor => {
     const { name, cores, ram, disk } = flavor;
     const cpuPrice = cores * prices.cores;
@@ -84,12 +83,11 @@ const openstackTenantPrices = {
 
     loadData() {
       return this.$q.all([
-        this.loadTemplate(),
-        this.loadFlavors()
+        this.loadTemplate(), this.loadFlavors()
       ])
       .then(([template, flavors]) => {
-        this.template = template;
-        this.flavors = parseFlavors(template, flavors);
+        this.prices = parsePrices(template);
+        this.flavors = parseFlavors(this.prices, flavors);
       })
       .catch(response => {
         this.error = response.data;
