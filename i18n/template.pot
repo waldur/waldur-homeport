@@ -68,9 +68,9 @@ msgid "bootable"
 msgstr ""
 
 #: app/scripts/components/appstore/category-selector.html:33
-#: app/scripts/components/appstore/offering/appstore-offering.html:19
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:124
+#: app/scripts/components/offering/appstore-offering.html:19
 #: app/scripts/components/team/add-project-member.html:54
 #: app/scripts/components/team/add-team-member.html:86
 msgid "Cancel"
@@ -91,11 +91,11 @@ msgstr ""
 msgid "Coming soon"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:78
+#: app/scripts/components/offering/offering-summary.html:81
 msgid "Comments"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/appstore-offering.html:16
+#: app/scripts/components/offering/appstore-offering.html:16
 msgid "Create"
 msgstr ""
 
@@ -108,8 +108,8 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:62
 #: app/scripts/components/issues/issues-short-list.html:28
+#: app/scripts/components/offering/offering-summary.html:62
 #: app/scripts/components/user/user-edit.html:85
 msgid "Description"
 msgstr ""
@@ -134,7 +134,7 @@ msgstr ""
 msgid "Enable DHCP"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:70
+#: app/scripts/components/offering/offering-summary.html:71
 msgid "Event log"
 msgstr ""
 
@@ -226,19 +226,19 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:23
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
 msgid "Is active"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:39
+#: app/scripts/components/offering/offering-summary.html:39
 msgid "Issue key"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:53
+#: app/scripts/components/offering/offering-summary.html:53
 msgid "Issue link"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:46
+#: app/scripts/components/offering/offering-summary.html:46
 msgid "Issue status"
 msgstr ""
 
@@ -276,7 +276,7 @@ msgid "Manage at"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:5
-msgid "Max number of backups"
+msgid "Max # of backups"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:26
@@ -291,7 +291,7 @@ msgstr ""
 msgid "Max vCPU"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:11
+#: app/scripts/components/offering/offering-summary.html:11
 msgid "Name"
 msgstr ""
 
@@ -313,11 +313,11 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-header.html:3
+#: app/scripts/components/offering/offering-header.html:3
 msgid "Offering details"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-header.html:18
+#: app/scripts/components/offering/offering-header.html:18
 msgid "Offerings"
 msgstr ""
 
@@ -325,7 +325,7 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:57
+#: app/scripts/components/offering/offering-summary.html:57
 msgid "Open in JIRA"
 msgstr ""
 
@@ -388,7 +388,7 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:32
+#: app/scripts/components/offering/offering-summary.html:32
 msgid "Price"
 msgstr ""
 
@@ -416,7 +416,7 @@ msgstr ""
 msgid "Project"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-header.html:13
+#: app/scripts/components/offering/offering-header.html:13
 msgid "Project dashboard"
 msgstr ""
 
@@ -566,7 +566,7 @@ msgstr ""
 msgid "SSH key"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:18
+#: app/scripts/components/offering/offering-summary.html:18
 msgid "State"
 msgstr ""
 
@@ -574,7 +574,7 @@ msgstr ""
 msgid "Storage"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:6
+#: app/scripts/components/offering/offering-summary.html:6
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 msgid "Summary"
 msgstr ""
@@ -632,7 +632,7 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
-#: app/scripts/components/appstore/offering/offering-summary.html:25
+#: app/scripts/components/offering/offering-summary.html:25
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
 msgid "Type"
 msgstr ""

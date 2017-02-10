@@ -9,7 +9,7 @@ const openstackBackupSchedulesList = {
 
 // @ngInject
 function openstackBackupSchedulesListController(
-  baseResourceListController, openstackBackupSchedulesService) {
+  baseResourceListController, openstackBackupSchedulesService, $filter) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
@@ -36,7 +36,7 @@ function openstackBackupSchedulesListController(
         {
           title: 'Schedule',
           className: 'min-tablet-l',
-          render: row => row.schedule
+          render: row => $filter('formatCrontab')(row.schedule)
         },
         {
           title: 'State',
