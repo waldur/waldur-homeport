@@ -5,6 +5,7 @@
   "repository": "https://code.opennodecloud.com/nc-saas/nodeconductor-web",
   "license": "MIT",
   "dependencies": {
+    "angular-cron-jobs": "^3.2.0",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.16.0",

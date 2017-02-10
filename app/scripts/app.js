@@ -23,6 +23,7 @@
       'blockUI',
       'ngSanitize',
       'leaflet-directive',
+      'angular-cron-jobs',
       'ui.bootstrap',
       'ui.slimscroll'
     ])

@@ -28,6 +28,10 @@ module.exports = {
                     loader: ExtractTextPlugin.extract('style', 'css!sass?includePaths[]=' + scssPath)
                 },
                 {
+                    test: /\.css$/,
+                    loader: 'style!css'
+                },
+                {
                     test: /\.json$/,
                     loader: 'json-loader'
                 },

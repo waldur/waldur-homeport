@@ -4,7 +4,7 @@
   <dt>
     <span translate>Max number of backups</span>:
   </dt>
-  <dd class="elipsis">
+  <dd>
     {{ $ctrl.resource.maximal_number_of_backups || '&mdash;' }}
   </dd>
 </div>
@@ -13,8 +13,10 @@
   <dt>
     <span translate>Schedule</span>:
   </dt>
-  <dd class="elipsis">
-    {{ $ctrl.resource.schedule || '&mdash;' }}
+  <dd>
+    <span uib-tooltip="{{ $ctrl.resource.schedule }}">
+      {{ $ctrl.resource.schedule | formatCrontab }}
+    </span>
   </dd>
 </div>
 
