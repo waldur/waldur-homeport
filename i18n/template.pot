@@ -104,10 +104,6 @@ msgstr ""
 msgid "Create an account"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/crontab-field.html:23
-msgid "Day"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
 msgstr ""
@@ -136,10 +132,6 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:69
 msgid "Enable DHCP"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-backup-schedule/crontab-field.html:48
-msgid "Enter schedule in cron format"
 msgstr ""
 
 #: app/scripts/components/offering/offering-summary.html:71
@@ -234,7 +226,7 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:23
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
 msgid "Is active"
 msgstr ""
 
@@ -284,7 +276,7 @@ msgid "Manage at"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:5
-msgid "Max number of backups"
+msgid "Max # of backups"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:26
@@ -319,10 +311,6 @@ msgstr ""
 
 #: app/scripts/components/quotas/quotas-table.html:10
 msgid "of"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-backup-schedule/crontab-field.html:25
-msgid "of every"
 msgstr ""
 
 #: app/scripts/components/offering/offering-header.html:3
@@ -447,10 +435,6 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:33
 msgid "RAM"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-backup-schedule/crontab-field.html:15
-msgid "Recurs every"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:11
