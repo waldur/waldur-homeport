@@ -5,6 +5,9 @@ import openstackTenantSummary from './openstack-tenant-summary';
 import packageTemplatesService from './package-templates-service';
 import openstackPackagesService from './openstack-packages-service';
 import openstackTenantChangePackageService from './openstack-tenant-change-package-service';
+import openstackFlavorsService from './openstack-flavors-service';
+import openstackPrices from './openstack-prices';
+import openstackTenantPrices from './openstack-tenant-prices';
 
 export default module => {
   module.config(fieldsConfig);
@@ -16,6 +19,9 @@ export default module => {
   module.service('packageTemplatesService', packageTemplatesService);
   module.service('openstackPackagesService', openstackPackagesService);
   module.service('openstackTenantChangePackageService', openstackTenantChangePackageService);
+  module.service('openstackFlavorsService', openstackFlavorsService);
+  module.component('openstackPrices', openstackPrices);
+  module.component('openstackTenantPrices', openstackTenantPrices);
 };
 
 // @ngInject

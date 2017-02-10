@@ -3,7 +3,7 @@ import {
   templateParser,
   templateFormatter,
   templateComparator,
-  TEMPLATE_CATEGORIES
+  openstackTemplateFilters
 } from './openstack-template';
 
 export default {
@@ -34,19 +34,7 @@ export default {
       formatter: templateFormatter,
       columns: openstackTemplateColumns,
       comparator: templateComparator,
-      filterOptions: {
-        name: 'category',
-        choices: [
-          {
-            value: '',
-            label: 'All categories'
-          },
-          ...TEMPLATE_CATEGORIES.map(category => ({
-            value: category,
-            label: category
-          }))
-        ]
-      }
+      filterOptions: openstackTemplateFilters
     },
     description: {
       type: 'text',

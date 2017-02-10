@@ -1,0 +1,9 @@
+<div ng-if="$ctrl.loading">
+  <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+</div>
+<div class="text-danger" ng-bind="$ctrl.error"/>
+<choices-table
+  ng-if="$ctrl.flavors"
+  choices="$ctrl.flavors"
+  columns="$ctrl.columns"
+  enable-select="false"/>
