@@ -392,6 +392,18 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:19
+msgid "Price for 1 GB of RAM"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:14
+msgid "Price for 1 GB of storage"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:9
+msgid "Price for 1 vCPU"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:41
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:34
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:29
@@ -694,6 +706,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:18
 msgid "VPC package"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-prices.html:4
+msgid "VPC packages for this provider are not found."
 msgstr ""
 
 #: app/scripts/components/auth/auth-init.html:10

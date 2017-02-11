@@ -1,7 +1,11 @@
-<entitylist
-    ng-if="PriceList"
-    entity-list="PriceList"
-    entity-service="PriceList.service"
-    entity-buttons="PriceList.actionButtonsListItems"
-    entity-options="PriceList.entityOptions">
-</entitylist>
+<div ng-switch="$ctrl.provider.service_type">
+  <div ng-switch-when="OpenStack">
+    <openstack-prices provider="$ctrl.provider"/>
+  </div>
+  <div ng-switch-when="OpenStackTenant">
+    <openstack-tenant-prices provider="$ctrl.provider"/>
+  </div>
+  <div ng-switch-default>
+    <provider-price-list provider="$ctrl.provider"/>
+  </div>
+</div>
