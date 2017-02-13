@@ -52,7 +52,8 @@ export const openstackTemplateFilters = {
       value: category,
       label: category
     }))
-  ]
+  ],
+  defaultValue: '',
 };
 
 export function templateComparator(a, b) {
