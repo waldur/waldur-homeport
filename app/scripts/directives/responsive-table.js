@@ -144,7 +144,7 @@
 
         function getColumns() {
           var columns = options.columns.map(function(column) {
-            var title = $filter('translate')(title);
+            var title = $filter('translate')(column.title);
             function render(data, type, row, meta) {
               return column.render(row);
             };
