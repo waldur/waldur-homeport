@@ -1,18 +1,19 @@
-export default function projectsList() {
-  return {
-    restrict: 'E',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: ProjectsListController,
-    controllerAs: 'ListController',
-  };
-}
+import ResourceFeatures from '../resource/features';
+
+const projectsList = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: ProjectsListController,
+  controllerAs: 'ListController',
+};
+
+export default projectsList;
 
 // @ngInject
 function ProjectsListController(
   baseControllerListClass,
   projectsService,
   customersService,
-  ENV,
+  features,
   $filter,
   $q,
   $state,
@@ -64,7 +65,7 @@ function ProjectsListController(
       };
     },
     getColumns: function() {
-      var columns = [
+      return [
         {
           title: 'Name',
           render: function(row) {
@@ -86,37 +87,27 @@ function ProjectsListController(
           render: function(row) {
             return $filter('dateTime')(row.created);
           }
-        }
-      ];
-      if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('resources') == -1) {
-        columns.push({
+        },
+        {
           title: 'VMs',
-          render: function(row) {
-            return row.vm_count || 0;
-          }
-        });
-        columns.push({
+          render: row => row.vm_count || 0
+        },
+        {
           title: 'Storage',
-          render: function(row) {
-            return row.storage_count || 0;
-          }
-        });
-        columns.push({
+          render: row => row.storage_count || 0
+        },
+        {
           title: 'Apps',
-          render: function(row) {
-            return row.app_count || 0;
-          }
-        });
-        columns.push({
+          feature: ResourceFeatures.APPLICATIONS,
+          render: row => row.app_count || 0
+        },
+        {
           title: 'Private clouds',
-          render: function(row) {
-            return row.private_cloud_count || 0;
-          }
-        });
-      }
-      if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('premiumSupport') == -1) {
-        columns.push({
+          render: row => row.private_cloud_count || 0
+        },
+        {
           title: 'SLA',
+          feature: 'premiumSupport',
           render: function(row) {
             if (row.plan) {
               return row.plan.name;
@@ -126,9 +117,8 @@ function ProjectsListController(
               return 'No plan';
             }
           }
-        });
-      }
-      return columns;
+        }
+      ];
     },
     getTableActions: function() {
       var vm = this;

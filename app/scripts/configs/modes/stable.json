@@ -13,6 +13,7 @@
     "import",
     "openMap",
     "help",
+    "resource.applications",
     "support.activity",
     "support.sla",
     "support.assigned_to_me",
