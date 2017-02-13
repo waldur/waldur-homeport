@@ -127,4 +127,26 @@ export default function actionUtilsService(
       $rootScope.$broadcast('actionApplied', name);
     });
   };
+
+  this.getSingleActionNames = function(resourceType, listType) {
+    var actionOptions = ActionConfiguration[resourceType].options,
+      actionNames = [];
+    angular.forEach(actionOptions, (value, key) => {
+      if (value.list_type === listType) {
+        actionNames.push(key);
+      }
+    });
+    return actionNames;
+  };
+
+  this.loadSingleActions = function(resourceType, listType, model) {
+    var actionPromises = [],
+      actionNames = this.getSingleActionNames(resourceType, listType);
+
+    actionNames.forEach(() => {
+      actionPromises.push(this.loadActions(model));
+    });
+    return $q.all(actionPromises);
+
+  };
 }

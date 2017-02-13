@@ -140,7 +140,7 @@
             }
           });
 
-          buttons = singleActionButtons.length ? buttons.concat(singleActionButtons) : buttons;
+          // buttons = singleActionButtons.length ? buttons.concat(singleActionButtons) : buttons;
           return buttons;
         }
 

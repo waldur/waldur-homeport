@@ -9,14 +9,23 @@ const openstackFloatingIpsList = {
 
 // @ngInject
 function OpenstackFloatingIpsListController(
-  baseResourceListController, openstackFloatingIpsService) {
+  baseResourceListController, openstackFloatingIpsService, actionUtilsService) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
+      this.listActions = null;
       this.controllerScope.list_type = 'floating_ip';
-      this._super();
-      this.service = openstackFloatingIpsService;
+      var fn = this._super.bind(this);
+      var vm = this;
+
+      actionUtilsService.loadSingleActions(
+        controllerScope.resource.resource_type, this.controllerScope.list_type, controllerScope.resource
+      ).then(function(result){
+        vm.listActions = result;
+        fn();
+        vm.service = openstackFloatingIpsService;
+      });
     },
     getTableOptions: function() {
       var options = this._super();
@@ -40,8 +49,32 @@ function OpenstackFloatingIpsListController(
       };
     },
     getTableActions: function() {
-      return [];
-    }
+      var actions = [];
+      var vm = this;
+      // TODO: comparisons in loop are unnecessary is listActions contain exactly single actions
+      angular.forEach(this.listActions[0], function(value, key) {
+        if (key === 'create_floating_ip') {
+          actions.push({
+            name: 'Create',
+            callback: actionUtilsService
+              .buttonClick.bind(actionUtilsService, vm, controllerScope.resource, key, value),
+            disabled: !value.enabled,
+            titleAttr: value.reason
+          });
+        }
+        if (key === 'pull_floating_ips') {
+          actions.push({
+            name: 'Pull',
+            callback: actionUtilsService
+              .buttonClick.bind(actionUtilsService, vm, controllerScope.resource, key, value),
+            disabled: !value.enabled,
+            titleAttr: value.reason
+          });
+        }
+      });
+
+      return actions;
+    },
   });
 
   controllerScope.__proto__ = new controllerClass();
