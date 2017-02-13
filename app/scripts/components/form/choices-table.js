@@ -40,6 +40,9 @@ class TableController {
     if (angular.isUndefined(this.enableSelect)) {
       this.enableSelect = true;
     }
+    if (angular.isDefined(this.filterOptions.defaultValue)) {
+      this.filterValue = this.filterOptions.defaultValue;
+    }
   }
 
   formatValue(column, choice) {

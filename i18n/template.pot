@@ -393,15 +393,15 @@ msgid "Price"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:19
-msgid "Price for 1 GB of RAM"
+msgid "Price for 1 GB of RAM per day"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:14
-msgid "Price for 1 GB of storage"
+msgid "Price for 1 GB of storage per day"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:9
-msgid "Price for 1 vCPU"
+msgid "Price for 1 vCPU per day"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:41

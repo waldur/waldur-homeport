@@ -4,9 +4,22 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
-  responsiveTable.$inject = ['$timeout', '$interval', '$compile', '$filter', 'ENV', 'ActionConfiguration'];
+  responsiveTable.$inject = ['$timeout', '$interval', '$compile', '$filter', 'ENV', 'features'];
 
-  function responsiveTable($timeout, $interval, $compile, $filter, ENV, ActionConfiguration) {
+  /*
+    Controller should define tableOptions object with list of columns in `columns` field.
+    Each column has following format:
+
+    - `title` is required field; it is passed to `translate` filter for i18n;
+
+    - `render` is required field; this is a function which accepts row as
+      it's single argument and returns HTML code;
+
+    - `feature` is optional field; it allows to toggle display of
+      field according to configuration parameter `toBeFeatures`.
+  */
+
+  function responsiveTable($timeout, $interval, $compile, $filter, ENV, features) {
     return {
       restrict: 'E',
       scope: {
@@ -17,25 +30,12 @@
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
         var table;
-        var singleActionButtons = [];
 
         scope.$watch('controller.tableOptions', function(newTableOptions) {
           if (table) {
             // Table should be initialized once
             return;
           }
-
-          if (scope.controller.resource) {
-            var actionOptions = ActionConfiguration[scope.controller.resource.resource_type].options;
-            angular.forEach(actionOptions, (value, key) => {
-              if (scope.controller.list_type && value.list_type === scope.controller.list_type) {
-                singleActionButtons.push({
-                  text: $compile('<action-button-single ' +
-                    'button-controller="controller" action-name="'+ key +'"></action-button-single>')(scope)});
-              }
-            });
-          }
-
           if (newTableOptions && newTableOptions.columns) {
             options = newTableOptions;
             if (options.hiddenColumns) {
@@ -139,17 +139,19 @@
               });
             }
           });
-
-          // buttons = singleActionButtons.length ? buttons.concat(singleActionButtons) : buttons;
           return buttons;
         }
 
         function getColumns() {
           var columns = options.columns.map(function(column) {
+            var title = $filter('translate')(column.title);
             function render(data, type, row, meta) {
               return column.render(row);
-            }
-            return angular.extend({}, column, {render: render});
+            };
+            return angular.extend({}, column, {render: render, title: title});
+          });
+          columns = columns.filter(function(column) {
+            return !column.feature || features.isVisible(column.feature);
           });
           if (options.rowActions && options.rowActions.length) {
             var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
