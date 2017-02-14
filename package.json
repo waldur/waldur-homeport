@@ -47,7 +47,6 @@
   "devDependencies": {
     "css-loader": "^0.25.0",
     "eslint": "^3.12.2",
-    "eslint-loader": "^1.6.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "grunt-angular-gettext": "~2.1.0",
     "grunt-po2json-angular-translate": "0.0.3",
