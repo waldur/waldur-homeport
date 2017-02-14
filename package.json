@@ -39,8 +39,10 @@
     "postinstall": "bower install",
     "start": "grunt",
     "build": "grunt prodbatch",
-    "test": "node_modules/.bin/karma start test/karma.conf.js",
-    "test-single-run": "node_modules/.bin/karma start test/karma.conf.js --single-run"
+    "test": "npm run lint && npm run test-single-run",
+    "lint": "eslint app/scripts/components",
+    "test-server": "karma start test/karma.conf.js",
+    "test-single-run": "karma start test/karma.conf.js --single-run"
   },
   "devDependencies": {
     "css-loader": "^0.25.0",
