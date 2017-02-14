@@ -12,35 +12,28 @@ __Development/testing__:
 
 ## Installation
 
-__Installation steps__:
 
 1. Install dependencies. Example for CentOS 7:
-
 ```
 yum -y install epel-release https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
 yum -y install bzip2 git libjpeg-turbo-devel libpng-devel libtool make nasm "nodejs-4*" rubygems
-
 gem install sass
 npm install -g bower grunt-cli
 ```
 
 2. Clone project and go to its folder:
-
 ```
 git clone git@code.opennodecloud.com:nc-saas/nodeconductor-web.git
 cd nodeconductor-web
 ```
 
 3. Build static assets:
-
-
 ```
 npm install
 bower install
 ```
 
 4. Create `/app/scripts/configs/custom-config.json`:
-
 ```
 cp app/scripts/configs/config.json.example app/scripts/configs/config.json
 ```
@@ -51,9 +44,18 @@ cp app/scripts/configs/config.json.example app/scripts/configs/config.json
 
 Server will listen on `//localhost:8000`
 
-## Backend
+## Backend configration
 
-Use [Waldur MasterMind][4] for backend. Note that django-cors configuration must set the following lines in the config file of Waldur MasterMind. It is needed for enabling reading header's response from frontend app:
+Use [Waldur MasterMind][4] for backend.
+
+Also you should install django-cors-headers from pip in order to add CORS headers:
+
+```
+pip install django-cors-headers
+```
+
+Then you should update `nodeconductor/server/settings.py` and add the following 
+lines at the end of the file:
 
 ```
 INSTALLED_APPS += ('corsheaders',)
