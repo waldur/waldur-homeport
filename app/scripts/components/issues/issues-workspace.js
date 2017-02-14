@@ -19,10 +19,13 @@ export default {
 
       this.IssueNavigationService.getSidebarItems().then(items => this.items = items);
 
-      this.unlisten = this.$rootScope.$on('$stateChangeSuccess', () => {
-        this.pageTitle = this.$state.current.data.pageTitle;
-        this.hideBreadcrumbs = this.$state.current.data.hideBreadcrumbs;
-      });
+      this.unlisten = this.$rootScope.$on('$stateChangeSuccess', this.syncHeader.bind(this));
+      this.syncHeader();
+    }
+
+    syncHeader() {
+      this.pageTitle = this.$state.current.data.pageTitle;
+      this.hideBreadcrumbs = this.$state.current.data.hideBreadcrumbs;
     }
 
     $onDestroy() {

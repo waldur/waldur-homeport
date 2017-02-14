@@ -1,5 +1,5 @@
 <div ng-if="loading">
-  <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+  <loading-spinner/>
 </div>
 <div ng-if="!loading && !canManage" class="empty-list-message">
     You don't have enough permission to edit projects for <strong>{{ service.name }}</strong> provider.

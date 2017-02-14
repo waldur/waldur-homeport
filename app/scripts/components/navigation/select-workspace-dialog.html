@@ -5,7 +5,7 @@
 </div>
 <div class="modal-body" ng-class="{disabled: Ctrl.loadingState}">
   <div ng-if="Ctrl.loadingOrganizations">
-      <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+      <loading-spinner/>
   </div>
   <div ng-if="!Ctrl.loadingOrganizations && Ctrl.organizations.length === 0" class="row">
     <div class="middle-box text-center">
