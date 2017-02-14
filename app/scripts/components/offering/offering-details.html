@@ -3,9 +3,7 @@
 </div>
 <div id="page-wrapper" class="gray-bg">
   <div ng-if="!$ctrl.offering">
-    <h1 class="text-center">
-      <i class="icon fa-spinner fa-spin"></i>
-    </h1>
+    <loading-spinner/>
   </div>
   <div ng-if="$ctrl.offering">
     <nc-header></nc-header>
