@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
     <div ng-if="$ctrl.loading">
-        <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+        <loading-spinner/>
     </div>
     <form ng-if="!$ctrl.loading" name="$ctrl.DialogForm" ng-class="{disabled: $ctrl.submitting}">
         <div class="form-group" ng-if="$ctrl.selectProject">

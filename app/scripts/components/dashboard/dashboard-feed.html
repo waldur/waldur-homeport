@@ -9,7 +9,7 @@
     </div>
     <div class="ibox-content">
         <div ng-if="$ctrl.loading">
-            <h1 class="text-center"><i class="icon fa-spinner fa-spin"></i></h1>
+            <loading-spinner/>
         </div>
         <div ng-if="!$ctrl.loading">
             <div ng-if="$ctrl.items.length == 0">
