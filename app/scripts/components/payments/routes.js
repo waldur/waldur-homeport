@@ -13,7 +13,7 @@ export default function paymentRoutes($stateProvider) {
 
     .state('payment.approve', {
       url: 'approve/',
-      templateUrl: 'views/payment/approve.html',
+      template: '<payment-approve/>',
       data: {
         pageTitle: 'Approve payment'
       }
@@ -21,7 +21,7 @@ export default function paymentRoutes($stateProvider) {
 
     .state('payment.cancel', {
       url: 'cancel/',
-      templateUrl: 'views/payment/cancel.html',
+      template: '<payment-cancel/>',
       data: {
         pageTitle: 'Cancel payment'
       }
