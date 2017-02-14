@@ -235,6 +235,10 @@ msgstr ""
 msgid "Invoiced to"
 msgstr ""
 
+#: app/scripts/components/customer/customer-billing.html:4
+msgid "Invoices"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:11
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:14
 msgid "IP protocol"
@@ -393,6 +397,11 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
+msgstr ""
+
+#: app/scripts/components/payments/payment-approve.html:2
+#: app/scripts/components/payments/payment-cancel.html:2
+msgid "Payment is being processed, please wait."
 msgstr ""
 
 #: app/scripts/components/customer/customer-team.html:16
