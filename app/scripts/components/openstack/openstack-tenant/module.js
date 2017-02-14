@@ -35,6 +35,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
     order: [
       'edit',
       'pull',
+      'pull_quotas',
       'change_package',
       'create_network',
       'create_security_group',
@@ -48,6 +49,9 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       }),
       pull: {
         title: 'Synchronise'
+      },
+      pull_quotas: {
+        title: 'Synchronise quotas'
       },
       create_network: {
         title: 'Create network',
