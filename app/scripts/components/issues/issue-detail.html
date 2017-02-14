@@ -12,72 +12,72 @@
     <div class="row m-b-md">
       <dl class="dl-horizontal resource-details-table col-sm-12">
         <div class="m-b-xs">
-          <dt>Caller:</dt>
+          <dt><span translate>Caller</span>:</dt>
           <dd>{{ ::$ctrl.issue.caller_full_name }}</dd>
         </div>
 
         <div class="m-b-xs" ng-if="::$ctrl.issue.reporter_name">
-          <dt>Reporter:</dt>
+          <dt><span translate>Reporter</span>:</dt>
           <dd>{{ ::$ctrl.issue.reporter_name }}</dd>
         </div>
 
         <div class="m-b-xs">
-          <dt>Assigned to:</dt>
+          <dt><span translate>Assigned to</span>:</dt>
           <dd>{{ ::$ctrl.issue.assignee_name || 'N/A' }}</dd>
         </div>
 
         <div class="m-b-xs" ng-if="::$ctrl.issue.customer_name">
-          <dt>Organization:</dt>
+          <dt><span translate>Organization</span>:</dt>
           <dd>{{ ::$ctrl.issue.customer_name }}</dd>
         </div>
 
         <div class="m-b-xs">
-          <dt>Request type:</dt>
+          <dt><span translate>Request type</span>:</dt>
           <dd>{{ ::$ctrl.issue.type }}</dd>
         </div>
 
         <div class="m-b-xs" ng-if="::$ctrl.issue.project_name">
-          <dt>Project:</dt>
+          <dt><span translate>Project</span>:</dt>
           <dd>{{ ::$ctrl.issue.project_name }}</dd>
         </div>
 
         <div class="m-b-xs" ng-if="::$ctrl.issue.resource_type">
-          <dt>Service type:</dt>
+          <dt><span translate>Service type</span>:</dt>
           <dd>{{ ::$ctrl.issue.resource_type }}</dd>
         </div>
 
         <div class="m-b-xs" ng-if="::$ctrl.issue.resource_name">
-          <dt>Affected resource:</dt>
+          <dt><span translate>Affected resource</span>:</dt>
           <dd>{{ ::$ctrl.issue.resource_name }}</dd>
         </div>
 
         <div class="m-b-xs">
-          <dt>Status:</dt>
+          <dt><span translate>Status</span>:</dt>
           <dd>{{ ::$ctrl.issue.status }}</dd>
         </div>
 
         <div class="m-b-xs" ng-if="::$ctrl.issue.resolution">
-          <dt>Resolution:</dt>
+          <dt><span translate>Resolution</span>:</dt>
           <dd>{{ ::$ctrl.issue.resolution }}</dd>
         </div>
 
         <div class="m-b-xs" ng-if="::$ctrl.issue.priority">
-          <dt>Priority:</dt>
+          <dt><span translate>Priority</span>:</dt>
           <dd>{{ ::$ctrl.issue.priority }}</dd>
         </div>
 
-        <div class="m-b-xs" ng-if="::$ctrl.issue.link">
-          <dt>Link:</dt>
+        <div class="m-b-xs" ng-if="$ctrl.showLink()">
+          <dt><span translate>Link</span>:</dt>
           <dd>
             <a href="{{ ::$ctrl.issue.link }}" target="_blank">
               <i class="fa fa-external-link"></i>
-              Open in JIRA
+              <span translate>Open in Service Desk</span>
             </a>
           </dd>
         </div>
 
         <div class="m-b-xs">
-          <dt>Created:</dt>
+          <dt><span translate>Created</span>:</dt>
           <dd>
             <span am-time-ago="::$ctrl.issue.created"></span>,
             {{ ::$ctrl.issue.created | dateTime }}
@@ -86,7 +86,7 @@
       </dl>
 
       <div class="col-sm-12">
-        <h3>Description</h3>
+        <h3 translate>Description</h3>
         <p>{{ ::$ctrl.issue.description }}</p>
       </div>
     </div>
@@ -95,7 +95,7 @@
 
 <div class="ibox" ng-if="!$ctrl.loading && $ctrl.issue">
   <div class="ibox-title">
-    <h4>Comments</h4>
+    <h4 translate>Comments</h4>
   </div>
   <div class="ibox-content">
     <issue-comments-list issue="$ctrl.issue"></issue-comments-list>
