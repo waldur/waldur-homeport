@@ -349,7 +349,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:74
 #: app/scripts/components/offering/offering-summary.html:57
-msgid "Open in JIRA"
+msgid "Open in Service Desk"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:44
