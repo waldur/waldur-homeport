@@ -26,7 +26,7 @@ export default module => {
   module.service('issueUsersService', issueUsersService);
   module.service('issueCommentsService', issueCommentsService);
   module.directive('issuesList', issuesList);
-  module.directive('issueDetail', issueDetail);
+  module.component('issueDetail', issueDetail);
   module.component('issueCommentsList', issueCommentsList);
   module.directive('issueCommentsForm', issueCommentsForm);
   module.component('issuesWorkspace', issuesWorkspace);

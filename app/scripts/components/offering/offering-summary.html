@@ -49,7 +49,7 @@
               </dd>
             </div>
 
-            <div class="m-b-xs" ng-if="::$ctrl.offering.issue_link">
+            <div class="m-b-xs" ng-if="$ctrl.showLink()">
               <dt><span translate>Issue link</span>:</dt>
               <dd>
                 <a href="{{ ::$ctrl.offering.issue_link }}" target="_blank">
