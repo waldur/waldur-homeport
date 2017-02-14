@@ -17,8 +17,9 @@ export default function actionButtonResource() {
 
 // @ngInject
 class ActionButtonController {
-  constructor(actionUtilsService) {
+  constructor(actionUtilsService, NestedActionConfiguration) {
     this.actionUtilsService = actionUtilsService;
+    this.NestedActionConfiguration = NestedActionConfiguration;
     this.actions = [];
     this.loading = false;
   }
@@ -47,7 +48,13 @@ class ActionButtonController {
     this.loading = true;
     this.actions = [];
     this.actionUtilsService.loadActions(this.buttonModel).then(actions => {
-      this.actions = actions;
+      let actionsObj = {};
+      angular.forEach(actions, (value, key) => {
+        if (!this.NestedActionConfiguration[this.buttonModel.resource_type].options[key]) {
+          actionsObj[key] = value;
+        }
+      });
+      this.actions = actionsObj;
     }).finally(() => {
       this.loading = false;
     });

@@ -12,6 +12,7 @@ import openstackTenantPrices from './openstack-tenant-prices';
 export default module => {
   module.config(fieldsConfig);
   module.config(actionConfig);
+  module.config(nestedActionConfig);
   module.config(tabsConfig);
   module.directive('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
   module.directive('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
@@ -74,17 +75,48 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         dialogSize: 'lg'
       },
       pull_floating_ips: {
-        list_type: 'floating_ip',
-        single_title: 'Pull',
         title: 'Pull floating IPs'
       },
       create_floating_ip: {
-        list_type: 'floating_ip',
-        single_title: 'Create',
         title: 'Create floating IP'
       },
     },
     delete_message: 'All tenant resources will be deleted.'
+  });
+}
+
+// @ngInject
+function nestedActionConfig(NestedActionConfigurationProvider) {
+  NestedActionConfigurationProvider.register('OpenStack.Tenant', {
+    options: {
+      create_network: {
+        tab: 'networks',
+        title: 'Create',
+        fields: {
+          description: {
+            type: 'text'
+          }
+        }
+      },
+      create_security_group: {
+        tab: 'security_groups',
+        title: 'Create',
+        fields: {
+          rules: {
+            component: 'securityGroupRuleEditor'
+          }
+        },
+        dialogSize: 'lg'
+      },
+      pull_floating_ips: {
+        tab: 'floating_ips',
+        title: 'Pull',
+      },
+      create_floating_ip: {
+        tab: 'floating_ips',
+        title: 'Create'
+      },
+    },
   });
 }
 

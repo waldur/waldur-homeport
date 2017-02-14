@@ -9,14 +9,22 @@ const openstackTenantNetworks = {
 
 // @ngInject
 function TenantNetworksController(
-  baseResourceListController, openstackNetworksService) {
+  baseResourceListController, openstackNetworksService, nestedResourceActionsService) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this._super();
-      this.service = openstackNetworksService;
-      this.rowFields.push('subnets');
+      this.listActions = null;
+      var list_type = 'networks';
+      var fn = this._super.bind(this);
+      var vm = this;
+
+      nestedResourceActionsService.loadNestedActions(this, controllerScope.resource, list_type).then(function(result) {
+        vm.listActions = result;
+        fn();
+        vm.rowFields.push('subnets');
+        vm.service = openstackNetworksService;
+      });
     },
     getTableOptions: function() {
       var options = this._super();
@@ -56,7 +64,7 @@ function TenantNetworksController(
       };
     },
     getTableActions: function() {
-      return [];
+      return this.listActions;
     }
   });
 

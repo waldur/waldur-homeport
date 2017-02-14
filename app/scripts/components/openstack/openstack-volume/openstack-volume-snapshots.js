@@ -13,13 +13,21 @@ export default volumeSnapshots;
 function VolumeSnapshotsListController(
   baseResourceListController,
   $scope,
-  $timeout) {
+  $timeout,
+  nestedResourceActionsService) {
   var controllerScope = this;
   var ResourceController = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this.controllerScope.list_type = 'volume_snapshot';
-      this._super();
+      this.listActions = null;
+      var list_type = 'snapshots';
+      var fn = this._super.bind(this);
+      var vm = this;
+
+      nestedResourceActionsService.loadNestedActions(this, controllerScope.resource, list_type).then(function(result) {
+        vm.listActions = result;
+        fn();
+      });
 
       $scope.$on('actionApplied', function(event, name) {
         if (name === 'snapshot') {
@@ -40,7 +48,10 @@ function VolumeSnapshotsListController(
         source_volume_uuid: controllerScope.resource.uuid,
         resource_type: 'OpenStackTenant.Snapshot'
       };
-    }
+    },
+    getTableActions: function() {
+      return this.listActions;
+    },
   });
   controllerScope.__proto__ = new ResourceController();
 }
