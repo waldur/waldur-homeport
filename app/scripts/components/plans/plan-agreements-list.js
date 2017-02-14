@@ -1,3 +1,11 @@
+const agreementsList = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: CustomerAgreementsTabController,
+  controllerAs: 'ListController',
+};
+
+export default agreementsList;
+
 function CustomerAgreementsTabController(
   baseControllerListClass,
   agreementsService,
