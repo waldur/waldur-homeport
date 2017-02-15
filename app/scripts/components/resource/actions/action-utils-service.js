@@ -127,4 +127,22 @@ export default function actionUtilsService(
       $rootScope.$broadcast('actionApplied', name);
     });
   };
+
+  this.loadNestedActions = function(controller, model, tab) {
+    let vm = this;
+    return this.loadActions(model).then(function(actions) {
+      var nestedActions = [];
+      angular.forEach(actions, (value, key) => {
+        if (value.tab && value.tab === tab) {
+          nestedActions.push({
+            name: value.nestedTabTitle,
+            callback: vm.buttonClick.bind(vm, controller, model, key, value),
+            disabled: !value.enabled,
+            titleAttr: value.reason
+          });
+        }
+      });
+      return nestedActions;
+    });
+  };
 }

@@ -9,7 +9,7 @@ const openstackFloatingIpsList = {
 
 // @ngInject
 function OpenstackFloatingIpsListController(
-  baseResourceListController, openstackFloatingIpsService, nestedResourceActionsService) {
+  baseResourceListController, openstackFloatingIpsService, actionUtilsService) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
@@ -19,7 +19,7 @@ function OpenstackFloatingIpsListController(
       var fn = this._super.bind(this);
       var vm = this;
 
-      nestedResourceActionsService.loadNestedActions(this, controllerScope.resource, list_type).then(function(result) {
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(function(result) {
         vm.listActions = result;
         fn();
         vm.service = openstackFloatingIpsService;

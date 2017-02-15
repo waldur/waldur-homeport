@@ -9,7 +9,7 @@ const openstackTenantNetworks = {
 
 // @ngInject
 function TenantNetworksController(
-  baseResourceListController, openstackNetworksService, nestedResourceActionsService) {
+  baseResourceListController, openstackNetworksService, actionUtilsService) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
@@ -19,7 +19,7 @@ function TenantNetworksController(
       var fn = this._super.bind(this);
       var vm = this;
 
-      nestedResourceActionsService.loadNestedActions(this, controllerScope.resource, list_type).then(function(result) {
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(function(result) {
         vm.listActions = result;
         fn();
         vm.rowFields.push('subnets');
