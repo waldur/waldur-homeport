@@ -1,17 +1,17 @@
 // @ngInject
 export default function nestedResourceActionsService(
-  actionUtilsService, NestedActionConfiguration) {
+  actionUtilsService) {
   this.loadNestedActions = function(controller, model, tab) {
     return actionUtilsService.loadActions(model).then(function(actions) {
       var nestedActions = [];
-      angular.forEach(NestedActionConfiguration[model.resource_type].options, (value, key) => {
-        if (value.tab === tab) {
+      angular.forEach(actions, (value, key) => {
+        if (value.tab && value.tab === tab) {
           nestedActions.push({
-            name: value.title,
+            name: value.nestedTabTitle,
             callback: actionUtilsService
-              .buttonClick.bind(actionUtilsService, controller, model, key, actions[key]),
-            disabled: !actions[key].enabled,
-            titleAttr: actions[key].reason
+              .buttonClick.bind(actionUtilsService, controller, model, key, value),
+            disabled: !value.enabled,
+            titleAttr: value.reason
           });
         }
       });

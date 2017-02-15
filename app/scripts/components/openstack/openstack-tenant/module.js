@@ -12,7 +12,6 @@ import openstackTenantPrices from './openstack-tenant-prices';
 export default module => {
   module.config(fieldsConfig);
   module.config(actionConfig);
-  module.config(nestedActionConfig);
   module.config(tabsConfig);
   module.directive('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
   module.directive('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
@@ -55,7 +54,9 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         title: 'Synchronise quotas'
       },
       create_network: {
+        tab: 'networks',
         title: 'Create network',
+        nestedTabTitle: 'Create',
         fields: {
           description: {
             type: 'text'
@@ -70,7 +71,9 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         dialogSize: 'lg'
       },
       create_security_group: {
+        tab: 'security_groups',
         title: 'Create security group',
+        nestedTabTitle: 'Create',
         fields: {
           rules: {
             component: 'securityGroupRuleEditor'
@@ -79,48 +82,17 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         dialogSize: 'lg'
       },
       pull_floating_ips: {
-        title: 'Pull floating IPs'
+        tab: 'floating_ips',
+        title: 'Pull floating IPs',
+        nestedTabTitle: 'Pull',
       },
       create_floating_ip: {
-        title: 'Create floating IP'
+        tab: 'floating_ips',
+        title: 'Create floating IP',
+        nestedTabTitle: 'Create',
       },
     },
     delete_message: 'All tenant resources will be deleted.'
-  });
-}
-
-// @ngInject
-function nestedActionConfig(NestedActionConfigurationProvider) {
-  NestedActionConfigurationProvider.register('OpenStack.Tenant', {
-    options: {
-      create_network: {
-        tab: 'networks',
-        title: 'Create',
-        fields: {
-          description: {
-            type: 'text'
-          }
-        }
-      },
-      create_security_group: {
-        tab: 'security_groups',
-        title: 'Create',
-        fields: {
-          rules: {
-            component: 'securityGroupRuleEditor'
-          }
-        },
-        dialogSize: 'lg'
-      },
-      pull_floating_ips: {
-        tab: 'floating_ips',
-        title: 'Pull',
-      },
-      create_floating_ip: {
-        tab: 'floating_ips',
-        title: 'Create'
-      },
-    },
   });
 }
 

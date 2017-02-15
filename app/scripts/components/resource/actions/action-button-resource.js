@@ -17,9 +17,8 @@ export default function actionButtonResource() {
 
 // @ngInject
 class ActionButtonController {
-  constructor(actionUtilsService, NestedActionConfiguration) {
+  constructor(actionUtilsService) {
     this.actionUtilsService = actionUtilsService;
-    this.NestedActionConfiguration = NestedActionConfiguration;
     this.actions = [];
     this.loading = false;
   }
@@ -50,7 +49,7 @@ class ActionButtonController {
     this.actionUtilsService.loadActions(this.buttonModel).then(actions => {
       let actionsObj = {};
       angular.forEach(actions, (value, key) => {
-        if (!this.NestedActionConfiguration[this.buttonModel.resource_type].options[key]) {
+        if (!value.tab) {
           actionsObj[key] = value;
         }
       });

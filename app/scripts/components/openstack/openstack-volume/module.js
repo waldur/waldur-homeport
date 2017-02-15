@@ -20,7 +20,6 @@ export default module => {
 
   module.config(fieldsConfig);
   module.config(actionConfig);
-  module.config(nestedActionConfig);
   module.config(stateConfig);
   module.config(tabsConfig);
 };
@@ -53,22 +52,11 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         component: 'volumeExtendDialog'
       },
       snapshot: {
+        tab: 'snapshots',
+        nestedTabTitle: 'Create',
         component: 'snapshotCreateDialog'
       }
     }
-  });
-}
-
-// @ngInject
-function nestedActionConfig(NestedActionConfigurationProvider) {
-  NestedActionConfigurationProvider.register('OpenStackTenant.Volume', {
-    options: {
-      snapshot: {
-        tab: 'snapshots',
-        title: 'Create',
-        component: 'snapshotCreateDialog'
-      }
-    },
   });
 }
 
