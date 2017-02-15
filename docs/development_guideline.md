@@ -1,4 +1,18 @@
-# Development guidelines
+# Styleguides
+
+* [Angular 1 Style Guide](https://github.com/johnpapa/angular-styleguide/tree/master/a1)
+* [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+
+## Unit tests
+
+In order to run unit tests only once, for example in Jenkins, execute command `npm test`.
+If you want to run server, which watches for changes in tests, run `npm run test-server`.
+
+Unit tests are used for testing services, controllers and directives.
+Unit tests are written in the `.spec.js` files.
+We use the following testing stack: Jasmine, Karma, Phantom.
+
+Consider [this example](app/scripts/components/core/filter.spec.js) of filter test.
 
 # Component approach
 
