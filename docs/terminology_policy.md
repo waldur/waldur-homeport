@@ -22,3 +22,5 @@ Should be used when an action of importing or unlinking / deleting a record with
 undeploying is applied to:
 
 * VMs
+
+Please use "synchronise" instead of "pull" in action title.

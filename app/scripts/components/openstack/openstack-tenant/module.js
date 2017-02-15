@@ -78,7 +78,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         dialogSize: 'lg'
       },
       pull_floating_ips: {
-        title: 'Pull floating IPs'
+        title: 'Synchronise floating IPs'
       },
       create_floating_ip: {
         title: 'Create floating IP'
