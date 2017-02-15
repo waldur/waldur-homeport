@@ -55,8 +55,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       },
       create_network: {
         tab: 'networks',
-        title: 'Create network',
-        nestedTabTitle: 'Create',
+        title: 'Create',
         fields: {
           description: {
             type: 'text'
@@ -72,8 +71,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       },
       create_security_group: {
         tab: 'security_groups',
-        title: 'Create security group',
-        nestedTabTitle: 'Create',
+        title: 'Create',
         fields: {
           rules: {
             component: 'securityGroupRuleEditor'
@@ -83,13 +81,11 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       },
       pull_floating_ips: {
         tab: 'floating_ips',
-        title: 'Synchronise floating IPs',
-        nestedTabTitle: 'Synchronise',
+        title: 'Synchronise',
       },
       create_floating_ip: {
         tab: 'floating_ips',
-        title: 'Create floating IP',
-        nestedTabTitle: 'Create',
+        title: 'Create',
       },
     },
     delete_message: 'All tenant resources will be deleted.'

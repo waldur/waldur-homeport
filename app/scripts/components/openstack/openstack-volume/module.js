@@ -53,7 +53,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       },
       snapshot: {
         tab: 'snapshots',
-        nestedTabTitle: 'Create',
+        title: 'Create',
         component: 'snapshotCreateDialog'
       }
     }

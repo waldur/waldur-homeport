@@ -135,7 +135,7 @@ export default function actionUtilsService(
       angular.forEach(actions, (value, key) => {
         if (value.tab && value.tab === tab) {
           nestedActions.push({
-            name: value.nestedTabTitle,
+            name: value.title,
             callback: vm.buttonClick.bind(vm, controller, model, key, value),
             disabled: !value.enabled,
             titleAttr: value.reason
