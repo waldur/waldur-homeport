@@ -176,7 +176,7 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
-                        cwd: 'bower_components/satellizer',
+                        cwd: 'bower_components/satellizer/dist/',
                         src: ['satellizer.js'],
                         dest: 'app/static/js/angular/',
                         filter: 'isFile'
