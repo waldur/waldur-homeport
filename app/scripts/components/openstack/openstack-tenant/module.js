@@ -84,7 +84,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       pull_floating_ips: {
         tab: 'floating_ips',
         title: 'Synchronise floating IPs',
-        nestedTabTitle: 'Pull',
+        nestedTabTitle: 'Synchronise',
       },
       create_floating_ip: {
         tab: 'floating_ips',
