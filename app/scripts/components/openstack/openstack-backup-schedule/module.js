@@ -35,6 +35,9 @@ function actionConfig(ActionConfigurationProvider) {
           }
         }
       },
+      pull: {
+        title: 'Synchronise'
+      },
     }
   });
 }

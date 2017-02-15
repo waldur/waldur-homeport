@@ -139,7 +139,7 @@ export default function projectRoutes($stateProvider) {
       url: 'offerings/',
       template: '<project-offerings-list/>',
       data: {
-        pageTitle: 'Offerings'
+        pageTitle: 'Requested Services'
       }
     })
 

@@ -56,7 +56,7 @@ export default function ProjectDetailsController(
           {
             link: 'project.resources.offerings({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-cog',
-            label: 'Offerings',
+            label: 'Requested Services',
           }
         ]
       },
