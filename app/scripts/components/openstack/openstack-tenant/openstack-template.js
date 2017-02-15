@@ -98,10 +98,7 @@ export function templateParser(template) {
 }
 
 export function templateFormatter($filter, value) {
-  const ram = $filter('filesize')(value.ram);
-  const storage = $filter('filesize')(value.storage);
-  const props = `${value.cores} vCPU, ${ram} RAM, ${storage} storage`;
-  return `${value.name} / ${value.category} (${props})`;
+  return $filter('formatPackage')(value);
 }
 
 export function parseQuotas(quotas) {

@@ -9,6 +9,7 @@ import openstackSubnetModule from './openstack-subnet/module';
 import openstackSecurityGroupsModule from './openstack-security-groups/module';
 import openstackFloatingIpsModule from './openstack-floating-ips/module';
 import openstackSnapshotModule from './openstack-snapshot/module';
+import filtersModule from './filters';
 
 export default module => {
   module.service('OpenStackSummaryService', OpenStackSummaryService);
@@ -22,4 +23,5 @@ export default module => {
   openstackSecurityGroupsModule(module);
   openstackFloatingIpsModule(module);
   openstackSnapshotModule(module);
+  filtersModule(module);
 };
