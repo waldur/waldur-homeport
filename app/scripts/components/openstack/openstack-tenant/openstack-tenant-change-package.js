@@ -1,5 +1,5 @@
 import template from './openstack-tenant-change-package.html';
-import { openstackTemplateColumns, templateFormatter } from './openstack-template';
+import { openstackTemplateColumns } from './openstack-template';
 
 export default function openstackTenantChangePackageDialog() {
   return {
@@ -31,7 +31,7 @@ class DialogController {
       this.package = context.package;
       this.template = context.template;
       this.templates = context.templates;
-      this.templateDisplay = templateFormatter(this.$filter, this.template);
+      this.templateDisplay = this.$filter('formatPackage')(this.template);
     }).catch(response => {
       if (response) {
         this.errors = response.data;

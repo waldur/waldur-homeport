@@ -119,10 +119,8 @@ export function getTenantTemplate(tenant) {
   return {
     name: tenant.extra_configuration.package_name,
     category: tenant.extra_configuration.package_category,
-    flavor: {
-      cores: quotas.vcpu,
-      ram: quotas.ram,
-      disk: quotas.storage,
-    }
+    cores: quotas.vcpu,
+    ram: quotas.ram,
+    storage: quotas.storage,
   };
 }
