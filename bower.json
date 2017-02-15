@@ -12,7 +12,7 @@
     "angular-resource": "~1.5.9",
     "angular-ui-router": "~0.2.13",
     "d3": "^3.5.13",
-    "satellizer": "~0.9.2",
+    "satellizer": "~0.15.5",
     "angular-scroll": "~0.6.4",
     "fontawesome": "~4.7.0",
     "html5shiv": "~3.7.2",
