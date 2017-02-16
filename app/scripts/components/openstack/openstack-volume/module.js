@@ -52,6 +52,10 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         component: 'volumeExtendDialog'
       },
       snapshot: {
+        tab: 'snapshots',
+        title: 'Create',
+        dialogTitle: 'Create snapshot for ',
+        iconClass: 'fa-plus',
         component: 'snapshotCreateDialog'
       }
     }
