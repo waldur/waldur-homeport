@@ -22,10 +22,10 @@ function VolumeSnapshotsListController(
       this.listActions = null;
       var list_type = 'snapshots';
       var fn = this._super.bind(this);
-      var vm = this;
 
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(function(result) {
-        vm.listActions = result;
+      this.loading = true;
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
+        this.listActions = result;
         fn();
       });
 
