@@ -9,7 +9,7 @@ export default {
     constructor($element) {
       this.$element = $element;
     }
-    
+
     $onInit() {
       let passwordMarker = '&#8226;';
       this.spanElement = this.$element.find('span');

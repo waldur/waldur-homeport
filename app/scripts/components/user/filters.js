@@ -26,27 +26,25 @@ function formatUserStatus() {
 
 function formatLifetime() {
   return function(input) {
-    let min = input / 60,
-      hour = Math.floor(input / 3600);
+    let time = moment.duration(input, 'seconds'),
+      hours = time.hours(),
+      minutes = time.minutes(),
+      seconds = time.seconds();
 
     if (input === null || input === 0) {
       return 'token will not timeout';
     }
-    if (min < 1) {
-      return `${input} sec`;
+    if (hours === 0 && minutes === 0) {
+      return `${seconds} sec`;
     }
-    if (min >= 1 && min < 60) {
-      return `${Math.round(min)} min`;
+    if (hours === 0 && minutes !== 0) {
+      return `${minutes} min`;
     }
-    if (hour >= 1) {
-      let timeLeft,
-        template;
-      timeLeft = input - hour * 3600;
-      min = Math.round(timeLeft / 60);
-      template = min ? `${hour} h ${min} min` : `${hour} h`;
+    if (hours !== 0) {
+      let template = minutes !== 0 ? `${hours} h ${minutes} min` : `${hours} h`;
       return template;
     }
-  }
+  };
 }
 
 export default module => {
