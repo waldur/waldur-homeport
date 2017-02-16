@@ -13,20 +13,26 @@ export default function openStackBackupsList() {
 
 // @ngInject
 function OpenStackBackupsListController(
-  baseResourceListController, openstackBackupsService, $filter) {
+  baseResourceListController, openstackBackupsService, actionUtilsService, $filter) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this._super();
-      this.service = openstackBackupsService;
-      this.rowFields.push('kept_until');
+      var fn = this._super.bind(this);
+      this.loading = true;
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, 'backups').then(result => {
+        this.listActions = result;
+        fn();
+        this.service = openstackBackupsService;
+        this.rowFields.push('kept_until');
+      });
     },
     getTableOptions: function() {
       var options = this._super();
       options.disableSearch = true;
       options.noDataText = 'No backups yet.';
       options.noMatchesText = 'No backups found matching filter.';
+      options.tableActions = this.listActions;
       options.columns = [
         {
           title: 'Name',

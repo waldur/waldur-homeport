@@ -122,6 +122,7 @@ export const authLogin = {
       if (this.LoginForm.$invalid) {
         return this.$q.reject();
       }
+      this.errors = {};
       return this.authService.signin(this.user.username, this.user.password)
                  .then(this.loginSuccess.bind(this))
                  .catch(this.loginError.bind(this));

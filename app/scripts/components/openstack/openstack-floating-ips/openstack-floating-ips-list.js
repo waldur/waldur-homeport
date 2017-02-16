@@ -9,13 +9,21 @@ const openstackFloatingIpsList = {
 
 // @ngInject
 function OpenstackFloatingIpsListController(
-  baseResourceListController, openstackFloatingIpsService) {
+  baseResourceListController, openstackFloatingIpsService, actionUtilsService) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this._super();
-      this.service = openstackFloatingIpsService;
+      this.listActions = null;
+      var list_type = 'floating_ips';
+      var fn = this._super.bind(this);
+
+      this.loading = true;
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
+        this.listActions = result;
+        fn();
+        this.service = openstackFloatingIpsService;
+      });
     },
     getTableOptions: function() {
       var options = this._super();
@@ -39,8 +47,8 @@ function OpenstackFloatingIpsListController(
       };
     },
     getTableActions: function() {
-      return [];
-    }
+      return this.listActions;
+    },
   });
 
   controllerScope.__proto__ = new controllerClass();
