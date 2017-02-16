@@ -17,13 +17,12 @@ function OpenstackSecurityGroupsListController(
       this.listActions = null;
       var list_type = 'security_groups';
       var fn = this._super.bind(this);
-      var vm = this;
 
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(function(result) {
-        vm.listActions = result;
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
+        this.listActions = result;
         fn();
-        vm.rowFields.push('rules');
-        vm.service = openstackSecurityGroupsService;
+        this.rowFields.push('rules');
+        this.service = openstackSecurityGroupsService;
       });
     },
     getTableOptions: function() {

@@ -54,6 +54,8 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       snapshot: {
         tab: 'snapshots',
         title: 'Create',
+        dialogTitle: 'Create snapshot for ',
+        iconClass: 'fa-plus',
         component: 'snapshotCreateDialog'
       }
     }
