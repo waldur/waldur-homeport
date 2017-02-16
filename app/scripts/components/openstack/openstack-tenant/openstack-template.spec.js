@@ -25,11 +25,9 @@ describe('getTenantTemplate', () => {
     const expectedTemplate = {
       name: 'Trial package',
       category: 'Small',
-      flavor: {
-        cores: 10.0,
-        ram: 10240.0,
-        disk: 51200.0
-      }
+      cores: 10.0,
+      ram: 10240.0,
+      storage: 51200.0
     };
     expect(getTenantTemplate(tenant)).toEqual(expectedTemplate);
   });
