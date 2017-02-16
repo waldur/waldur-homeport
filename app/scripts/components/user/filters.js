@@ -24,7 +24,33 @@ function formatUserStatus() {
   };
 }
 
+function formatLifetime() {
+  return function(input) {
+    let min = input / 60,
+      hour = Math.floor(input / 3600);
+
+    if (input === null || input === 0) {
+      return 'token will not timeout';
+    }
+    if (min < 1) {
+      return `${input} sec`;
+    }
+    if (min >= 1 && min < 60) {
+      return `${Math.round(min)} min`;
+    }
+    if (hour >= 1) {
+      let timeLeft,
+        template;
+      timeLeft = input - hour * 3600;
+      min = Math.round(timeLeft / 60);
+      template = min ? `${hour} h ${min} min` : `${hour} h`;
+      return template;
+    }
+  }
+}
+
 export default module => {
   module.filter('formatRegistrationMethod', formatRegistrationMethod);
   module.filter('formatUserStatus', formatUserStatus);
+  module.filter('formatLifetime', formatLifetime);
 };

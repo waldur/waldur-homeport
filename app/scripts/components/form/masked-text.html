@@ -1,0 +1,12 @@
+<div class="m-t-xs row">
+  <div class="col-md-8">
+    <span></span>
+  </div>
+  <div class="col-md-4">
+    <a class="icon password-icon"
+       ng-class="{'fa-eye-slash': $ctrl.showSecret, 'fa-eye': !$ctrl.showSecret}"
+       title="{{ $ctrl.showSecret ? 'Hide' : 'Show' }}"
+       ng-click="$ctrl.toggle()">
+    </a>
+  </div>
+</div>

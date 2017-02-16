@@ -14,6 +14,7 @@ import fieldLabel from './field-label';
 import helpicon from './help-icon';
 import multiplyBy from './multiply-by';
 import choicesTable from './choices-table';
+import maskedText from './masked-text';
 
 export default module => {
   module.directive('appstoreForm', appstoreForm);
@@ -32,4 +33,5 @@ export default module => {
   module.directive('helpicon', helpicon);
   module.directive('multiplyBy', multiplyBy);
   module.directive('choicesTable', choicesTable);
+  module.component('maskedText', maskedText);
 };
