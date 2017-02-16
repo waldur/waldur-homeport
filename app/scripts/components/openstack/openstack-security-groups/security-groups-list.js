@@ -18,6 +18,7 @@ function OpenstackSecurityGroupsListController(
       var list_type = 'security_groups';
       var fn = this._super.bind(this);
 
+      this.loading = true;
       actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
         this.listActions = result;
         fn();

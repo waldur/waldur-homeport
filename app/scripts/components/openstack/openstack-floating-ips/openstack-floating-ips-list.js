@@ -17,12 +17,12 @@ function OpenstackFloatingIpsListController(
       this.listActions = null;
       var list_type = 'floating_ips';
       var fn = this._super.bind(this);
-      var vm = this;
 
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(function(result) {
-        vm.listActions = result;
+      this.loading = true;
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
+        this.listActions = result;
         fn();
-        vm.service = openstackFloatingIpsService;
+        this.service = openstackFloatingIpsService;
       });
     },
     getTableOptions: function() {
