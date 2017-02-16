@@ -16,7 +16,7 @@ function openstackBackupSchedulesListController(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackBackupSchedulesService;
-      this.rowFields.push('schedule', 'maximal_number_of_backups');
+      this.rowFields.push('schedule', 'maximal_number_of_resources');
     },
     getTableOptions: function() {
       var options = this._super();
@@ -31,7 +31,7 @@ function openstackBackupSchedulesListController(
         },
         {
           title: 'Max number of backups',
-          render: row => row.maximal_number_of_backups || '&mdash;'
+          render: row => row.maximal_number_of_resources || '&mdash;'
         },
         {
           title: 'Schedule',
