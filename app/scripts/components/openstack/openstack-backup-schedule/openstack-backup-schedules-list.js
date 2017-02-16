@@ -9,20 +9,26 @@ const openstackBackupSchedulesList = {
 
 // @ngInject
 function openstackBackupSchedulesListController(
-  baseResourceListController, openstackBackupSchedulesService, $filter) {
+  baseResourceListController, openstackBackupSchedulesService, actionUtilsService, $filter) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this._super();
-      this.service = openstackBackupSchedulesService;
-      this.rowFields.push('schedule', 'maximal_number_of_resources');
+      var fn = this._super.bind(this);
+      this.loading = true;
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, 'backup_schedules').then(result => {
+        this.listActions = result;
+        fn();
+        this.service = openstackBackupSchedulesService;
+        this.rowFields.push('schedule', 'maximal_number_of_resources');
+      });
     },
     getTableOptions: function() {
       var options = this._super();
       options.disableSearch = true;
       options.noDataText = 'No backup schedules yet.';
       options.noMatchesText = 'No backup schedules found matching filter.';
+      options.tableActions = this.listActions;
       options.columns = [
         {
           title: 'Name',
