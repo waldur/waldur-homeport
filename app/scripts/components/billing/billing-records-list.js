@@ -76,23 +76,7 @@ function RecordsListController(
       }
     },
     getSearchFilters: function() {
-      this.searchFilters = [
-        {
-          name: 'state',
-          title: 'Pending',
-          value: 'pending'
-        },
-        {
-          name: 'state',
-          title: 'Canceled',
-          value: 'canceled'
-        },
-        {
-          name: 'state',
-          title: 'Created',
-          value: 'created'
-        },
-      ];
+      this.searchFilters = BillingUtils.getSearchFilters();
     },
     getFilter: function() {
       return {

@@ -87,21 +87,7 @@ function InvoicesListController(
     },
     getSearchFilters: function() {
       this.searchFilters = [
-        {
-          name: 'state',
-          title: 'Pending',
-          value: 'pending'
-        },
-        {
-          name: 'state',
-          title: 'Canceled',
-          value: 'canceled'
-        },
-        {
-          name: 'state',
-          title: 'Created',
-          value: 'created'
-        },
+        ...BillingUtils.getSearchFilters(),
         {
           name: 'state',
           title: 'Paid',
