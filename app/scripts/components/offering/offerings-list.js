@@ -19,8 +19,8 @@ function ProjectOfferingsListController(
         this.project = project;
         this.tableOptions = {
           searchFieldName: 'name',
-          noDataText: 'You have no offerings yet.',
-          noMatchesText: 'No offerings found matching filter.',
+          noDataText: 'You have no requested services.',
+          noMatchesText: 'No requested services found matching filter.',
           columns: this.getColumns(),
           rowActions: this.getRowActions.bind(this),
         };

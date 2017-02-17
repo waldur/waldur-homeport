@@ -71,8 +71,10 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         }
       },
       create_backup_schedule: {
-        title: 'Create backup schedule',
+        title: 'Create',
         dialogTitle: 'Create backup schedule for OpenStack instance',
+        tab: 'backup_schedules',
+        iconClass: 'fa-plus',
         fields: {
           schedule: {
             type: 'crontab'
@@ -87,9 +89,16 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         }
       },
       backup: {
+        tab: 'backups',
+        title: 'Create',
+        dialogTitle: 'Create backup for ',
+        iconClass: 'fa-plus',
         fields: {
           description: {
             type: 'text'
+          },
+          backup_schedule: {
+            formatter: ($filter, resource) => resource.name
           }
         }
       }

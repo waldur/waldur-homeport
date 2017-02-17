@@ -56,7 +56,7 @@ const appstoreOffering = {
         project: this.project.url,
       }, this.model);
       return this.offeringsService.createOffering(offering).then(offering => {
-        this.$state.go('support.detail', {uuid: offering.issue_uuid});
+        this.$state.go('offeringDetails', {uuid: offering.uuid});
       }, response => {
         this.errors = response.data;
         this.ncUtilsFlash.error('Unable to create request for a turnkey solution.');
