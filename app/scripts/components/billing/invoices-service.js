@@ -10,7 +10,7 @@ export default function invoicesService(baseServiceClass, $http, ENV, $state) {
       return $http.post(url, {link_template: this.getTemplateUrl()});
     },
     getTemplateUrl: function() {
-      var path = $state.href('organization.invoiceDetails', {invoiceUUID: 'TEMPLATE'});
+      var path = $state.href('billingDetails', {uuid: 'TEMPLATE'});
       return location.origin + path.replace('TEMPLATE', '{uuid}');
     }
   });

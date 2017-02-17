@@ -1,30 +1,30 @@
 <div class="row wrapper border-bottom white-bg page-heading hidden-print">
     <div class="col-lg-8">
-        <h2>Invoice</h2>
+        <h2 translate>Invoice</h2>
         <ol class="breadcrumb">
             <li>
-                <a ui-sref="organization.details({uuid: InvoiceDetails.customerUUID})">Home</a>
+                <a ui-sref="organization.details({uuid: InvoiceDetails.customerUUID})" translate>Organization dashboard</a>
             </li>
             <li>
-                <a ui-sref="organization.billing.tabs({uuid: InvoiceDetails.customerUUID})">
+                <a ui-sref="organization.billing.tabs({uuid: InvoiceDetails.customerUUID})" translate>
                     Invoices list
                 </a>
             </li>
             <li class="active">
-                <strong>Invoice</strong>
+                <strong>{{::InvoiceDetails.invoice.period}}</strong>
             </li>
         </ol>
     </div>
     <div class="col-lg-4">
         <div class="title-action">
-            <button class="btn btn-primary" ng-click="InvoiceDetails.printLink()"><i class="fa fa-print"></i> Print Invoice</button>
+            <button class="btn btn-primary" ng-click="InvoiceDetails.printLink()">
+                <i class="fa fa-print"></i>
+                <span translate>Print Invoice</span>
+            </button>
         </div>
     </div>
 </div>
 
-<div ng-if="InvoiceDetails.loading">
-    <loading-spinner/>
-</div>
 
 <div ng-if="!InvoiceDetails.loading" class="row">
     <div class="col-lg-12">
@@ -32,34 +32,17 @@
             <div class="p-xl">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h5>From:</h5>
-                        <address>
-                            <strong>{{::InvoiceDetails.invoice.issuer_details.company}}</strong><br>
-                            {{::InvoiceDetails.invoice.issuer_details.address}}<br>
-                            {{::InvoiceDetails.invoice.issuer_details.country}}, {{::InvoiceDetails.invoice.issuer_details.postal}}<br>
-                            <abbr title="Phone">P:</abbr> {{::InvoiceDetails.invoice.issuer_details.phone}}<br>
-                            {{::InvoiceDetails.invoice.issuer_details.bank}}, {{::InvoiceDetails.invoice.issuer_details.account}} <br>
-                            <span ng-if="InvoiceDetails.invoice.issuer_details.vat_code">
-                                <abbr>VAT:</abbr> {{::InvoiceDetails.invoice.issuer_details.vat_code}}<br>
-                            </span>
-                            {{::InvoiceDetails.invoice.issuer_details.email}}
-                        </address>
+                        <h5><span translate>From</span>:</h5>
+                        <billing-issuer-details issuer="InvoiceDetails.invoice.issuer_details"/>
                     </div>
 
                     <div class="col-sm-6 text-right">
-                        <h4>Invoice No.</h4>
+                        <h4 translate>Invoice No.</h4>
                         <h4 class="text-navy">{{::InvoiceDetails.invoice.number}}</h4>
-                        <span>To:</span>
-                        <address>
-                            <strong>{{::InvoiceDetails.invoice.customer_details.company}}</strong><br>
-                            {{::InvoiceDetails.invoice.customer_details.address}}<br>
-                            {{::InvoiceDetails.invoice.customer_details.country}}, {{::InvoiceDetails.invoice.customer_details.postal}}<br>
-                            <abbr title="Phone">P:</abbr> {{::InvoiceDetails.invoice.customer_details.phone}}<br>
-                            {{::InvoiceDetails.invoice.customer_details.bank}}<br>
-                            {{::InvoiceDetails.invoice.customer_details.email}}
-                        </address>
+                        <span><span translate>To</span>:</span>
+                        <billing-customer-details customer="InvoiceDetails.invoice.customer_details"/>
                         <div>
-                            <span><strong>Invoice Date:</strong> {{::InvoiceDetails.invoice.invoice_date || '&mdash;'}}</span><br>
+                            <span><strong><span translate>Invoice Date</span>:</strong> {{::InvoiceDetails.invoice.invoice_date || '&mdash;'}}</span><br>
                             <span><strong>Due Date:</strong> {{::InvoiceDetails.invoice.due_date || '&mdash;'}}</span>
                         </div>
                     </div>
@@ -69,11 +52,11 @@
                     <table class="table invoice-table">
                         <thead>
                         <tr>
-                            <th>Item List</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
+                            <th translate>Item List</th>
+                            <th translate>Quantity</th>
+                            <th translate>Unit Price</th>
                             <th ng-if="InvoiceDetails.invoice.issuer_details.vat_code">Tax</th>
-                            <th>Total Price</th>
+                            <th translate>Total Price</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -92,15 +75,15 @@
                 <table class="table invoice-total">
                     <tbody>
                     <tr>
-                        <td><strong>Sub Total: </strong></td>
+                        <td><strong><span translate>Sub Total</span>: </strong></td>
                         <td>{{::InvoiceDetails.invoice.price | defaultCurrency}}</td>
                     </tr>
                     <tr ng-if="InvoiceDetails.invoice.issuer_details.vat_code">
-                        <td><strong>TAX: </strong></td>
+                        <td><strong><span translate>TAX</span>: </strong></td>
                         <td>{{::InvoiceDetails.invoice.tax | defaultCurrency}}</td>
                     </tr>
                     <tr>
-                        <td><strong>TOTAL: </strong></td>
+                        <td><strong><span translate>TOTAL</span>: </strong></td>
                         <td>{{::InvoiceDetails.invoice.total | defaultCurrency}}</td>
                     </tr>
                     </tbody>
