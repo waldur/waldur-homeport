@@ -27,7 +27,7 @@ describe('getTenantTemplate', () => {
       category: 'Small',
       cores: 10.0,
       ram: 10240.0,
-      storage: 51200.0
+      disk: 51200.0
     };
     expect(getTenantTemplate(tenant)).toEqual(expectedTemplate);
   });

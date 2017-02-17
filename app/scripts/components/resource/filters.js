@@ -9,8 +9,8 @@ function formatFlavor($filter) {
       if (resource.ram) {
         parts.push($filter('filesize')(resource.ram) + ' RAM');
       }
-      if (resource.disk || resource.storage) {
-        parts.push($filter('filesize')(resource.disk || resource.storage) + ' storage');
+      if (resource.disk) {
+        parts.push($filter('filesize')(resource.disk) + ' storage');
       }
       return parts.join(', ');
     }

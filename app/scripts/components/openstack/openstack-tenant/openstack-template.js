@@ -118,6 +118,6 @@ export function getTenantTemplate(tenant) {
     category: tenant.extra_configuration.package_category,
     cores: quotas.vcpu,
     ram: quotas.ram,
-    storage: quotas.storage,
+    disk: quotas.storage,
   };
 }
