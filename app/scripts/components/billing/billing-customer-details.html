@@ -2,7 +2,7 @@
   <strong>{{ ::$ctrl.customer.company }}</strong><br>
   {{ ::$ctrl.customer.address }}<br>
   {{ ::$ctrl.customer.country }}, {{ ::$ctrl.customer.postal }}<br>
-  <abbr title="Phone">P:</abbr> {{ ::$ctrl.customer.phone }}<br>
+  <abbr title="{{ ::('Phone' | translate) }}">P:</abbr> {{ ::$ctrl.customer.phone }}<br>
   {{ ::$ctrl.customer.bank }}<br>
   {{ ::$ctrl.customer.email }}
 </address>

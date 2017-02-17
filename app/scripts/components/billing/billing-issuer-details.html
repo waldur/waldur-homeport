@@ -2,7 +2,7 @@
     <strong>{{ ::$ctrl.issuer.company }}</strong><br>
     {{ ::$ctrl.issuer.address }}<br>
     {{ ::$ctrl.issuer.country }}, {{ ::$ctrl.issuer.postal }}<br>
-    <abbr title="Phone">P:</abbr> {{ ::$ctrl.issuer.phone }}<br>
+    <abbr title="{{ ::('Phone' | translate) }}">P:</abbr> {{ ::$ctrl.issuer.phone }}<br>
     {{ ::$ctrl.issuer.bank }}, {{ ::$ctrl.issuer.account }} <br>
     <span ng-if="$ctrl.issuer.vat_code">
         <abbr><span translate>VAT</span>:</abbr> {{ ::$ctrl.issuer.vat_code }}<br>
