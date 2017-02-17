@@ -195,5 +195,8 @@ angular.module('ncsaas')
     userMandatoryFields: [
       'full_name',
       'email'
-    ]
+    ],
+
+    // Either 'accounting' or 'billing'
+    accountingMode: 'accounting'
 });
