@@ -16,6 +16,7 @@ import userPopoverTable from './user-popover-table';
 import { stateUtilsService, attachStateUtils } from './utils';
 import userRoutes from './routes';
 import usersService from './users-service';
+import userToken from '../user/user-token';
 import filtersModule from './filters';
 
 export default module => {
@@ -38,5 +39,6 @@ export default module => {
   module.service('usersService', usersService);
   module.run(attachStateUtils);
   module.config(userRoutes);
+  module.component('userToken', userToken);
   filtersModule(module);
 };
