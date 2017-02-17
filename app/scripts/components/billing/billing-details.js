@@ -63,7 +63,7 @@ const billingDetails = {
           this.currentStateService.setCustomer(currentCustomer);
         });
       })
-      .catch(response => {
+      .catch(() => {
         this.$state.go('errorPage.notFound');
       });
     }
