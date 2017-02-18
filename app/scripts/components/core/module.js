@@ -1,12 +1,14 @@
 import ErrorMessageFormatter from './error-message-formatter';
 import attachTracking from './tracking';
 import submitButton from './submit-button';
+import loadingSpinner from './loading-spinner';
 import sentryModule from './sentry';
 
 export default module => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
   module.run(attachTracking);
   module.directive('submitButton', submitButton);
+  module.component('loadingSpinner', loadingSpinner);
   module.run(redirectToState);
   sentryModule(module);
 };

@@ -1,98 +1,120 @@
 import template from './category-selector.html';
 import './category-selector.scss';
 
-export default function() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: AppStoreCategorySelectorController,
-    controllerAs: 'DialogCtrl',
-    scope: {},
-    bindToController: {
-      dismiss: '&',
-      close: '&',
-      resolve: '='
+const appstoreCategorySelector = {
+  template,
+  bindings: {
+    dismiss: '&',
+    close: '&',
+    resolve: '<'
+  },
+  controller: class AppStoreCategorySelectorController {
+    constructor(
+      $q,
+      $state,
+      $http,
+      $uibModal,
+      ENV,
+      currentStateService,
+      ISSUE_IDS,
+      offeringsService) {
+      // @ngInject
+      this.$q = $q;
+      this.$state = $state;
+      this.$http = $http;
+      this.$uibModal = $uibModal;
+      this.ENV = ENV;
+      this.currentStateService = currentStateService;
+      this.ISSUE_IDS = ISSUE_IDS;
+      this.offeringsService = offeringsService;
     }
-  };
-}
 
-// @ngInject
-function AppStoreCategorySelectorController(
-  $q, ENV, $state, $rootScope, currentStateService, projectsService, $uibModal, ISSUE_IDS
-) {
-  var vm = this;
-  vm.selectOffering = selectOffering;
-  vm.requestService = requestService;
-  activate();
+    $onInit() {
+      this.loadProject();
+      this.loadOfferings();
+    }
 
-  function activate() {
-    vm.selectProject = vm.resolve.selectProject;
-
-    var offerings = ENV.offerings.filter(item =>
-      !item.requireOwnerOrStaff || currentStateService.getOwnerOrStaff());
-
-    angular.forEach(offerings, function(offering) {
-      if (ENV.futureCategories.indexOf(offering.key) !== -1) {
-        offering.comingSoon = true;
+    loadProject() {
+      this.selectProject = this.resolve.selectProject;
+      if (this.resolve.selectProject) {
+        this.currentStateService.getCustomer().then(customer => {
+          this.projects = customer.projects;
+        });
+      } else {
+        this.currentStateService.getProject().then(project => {
+          this.selectedProject = project;
+        });
       }
-    });
+    }
 
-    offerings = offerings.reduce((map, item) => {
-      map[item.key] = item;
-      return map;
-    }, {});
+    loadOfferings() {
+      this.loadCustomOfferings().then(customOfferings => {
+        let offerings = [customOfferings, ...this.ENV.offerings];
 
-    vm.groups = ENV.offeringCategories.map(category => ({
-      label: category.label,
-      items: category.items.map(item => offerings[item]).filter(x => !!x)
-    }));
+        offerings = offerings.filter(item =>
+          !item.requireOwnerOrStaff || this.currentStateService.getOwnerOrStaff());
 
-    if (vm.selectProject) {
-      currentStateService.getCustomer().then(function(customer) {
-        vm.projects = customer.projects;
+        offerings = offerings.reduce((map, item) => {
+          map[item.key] = item;
+          return map;
+        }, {});
+
+        const groups = this.ENV.offeringCategories.map(category => ({
+          label: category.label,
+          items: category.items.map(item => offerings[item]).filter(x => !!x)
+        }));
+
+        const customOfferingsCategory = {
+          label: 'Turnkey solutions',
+          items: customOfferings
+        };
+
+        this.groups = [...groups, customOfferingsCategory];
       });
     }
-  }
 
-  function selectOffering(offering) {
-    if (vm.DialogForm.$invalid) {
-      return $q.reject();
-    } else {
-      vm.submitting = true;
-      return selectProject().then(project => {
-        return $state.go(offering.state, {category: offering.key, uuid: project.uuid});
-      }).then(function() {
-        vm.close();
-      }).finally(function() {
-        vm.submitting = false;
-      });
+    loadCustomOfferings() {
+      return this.offeringsService.getConfiguration()
+        .then(offerings => Object.keys(offerings).map(key => ({
+          key,
+          label: offerings[key].label,
+          icon: 'fa-gear',
+          state: 'appstore.offering',
+        })
+      ));
     }
-  }
 
-  function selectProject() {
-    if (vm.selectedProject) {
-      return $q.when(vm.selectedProject);
-    } else {
-      return currentStateService.getProject();
+    selectOffering(offering) {
+      if (this.DialogForm.$valid) {
+        this.submitting = true;
+        return this.$state.go(offering.state, {
+          category: offering.key,
+          uuid: this.selectedProject.uuid
+        })
+        .then(() => this.close())
+        .finally(() => this.submitting = false);
+      }
     }
-  }
 
-  function requestService() {
-    vm.close();
-    return $uibModal.open({
-      component: 'issueCreateDialog',
-      resolve: {
-        issue: currentStateService.getCustomer().then(customer => ({
-          customer,
-          type: ISSUE_IDS.SERVICE_REQUEST
-        })),
-        options: {
-          title: 'Request a new service',
-          descriptionPlaceholder: 'Please clarify why do you need it',
-          descriptionLabel: 'Motivation',
-          summaryLabel: 'Service name'
+    requestService() {
+      this.close();
+      return this.$uibModal.open({
+        component: 'issueCreateDialog',
+        resolve: {
+          issue: this.currentStateService.getCustomer().then(customer => ({
+            customer,
+            type: this.ISSUE_IDS.SERVICE_REQUEST
+          })),
+          options: {
+            title: 'Request a new service',
+            descriptionPlaceholder: 'Please clarify why do you need it',
+            descriptionLabel: 'Motivation',
+            summaryLabel: 'Service name'
+          }
         }
-      }
-    });
+      });
+    }
   }
-}
+};
+
+export default appstoreCategorySelector;

@@ -12,7 +12,8 @@ export default function choicesTable() {
       columns: '=',
       value: '=',
       filterOptions: '=',
-      selectItem: '&'
+      selectItem: '&',
+      enableSelect: '<',
     }
   };
 }
@@ -33,6 +34,15 @@ class TableController {
       height: '300px',
       'overflow-y': 'auto'
     };
+  }
+
+  $onInit() {
+    if (angular.isUndefined(this.enableSelect)) {
+      this.enableSelect = true;
+    }
+    if (this.filterOptions && angular.isDefined(this.filterOptions.defaultValue)) {
+      this.filterValue = this.filterOptions.defaultValue;
+    }
   }
 
   formatValue(column, choice) {

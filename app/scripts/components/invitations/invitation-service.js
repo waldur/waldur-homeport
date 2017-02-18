@@ -1,7 +1,6 @@
 const invitationStorageToken = 'ncInvitationToken';
 
 export default function invitationService(baseServiceClass, $http, ENV, $window) {
-  /*jshint validthis: true */
   var ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();

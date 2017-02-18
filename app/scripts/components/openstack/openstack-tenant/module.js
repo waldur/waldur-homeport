@@ -5,6 +5,9 @@ import openstackTenantSummary from './openstack-tenant-summary';
 import packageTemplatesService from './package-templates-service';
 import openstackPackagesService from './openstack-packages-service';
 import openstackTenantChangePackageService from './openstack-tenant-change-package-service';
+import openstackFlavorsService from './openstack-flavors-service';
+import openstackPrices from './openstack-prices';
+import openstackTenantPrices from './openstack-tenant-prices';
 
 export default module => {
   module.config(fieldsConfig);
@@ -16,6 +19,9 @@ export default module => {
   module.service('packageTemplatesService', packageTemplatesService);
   module.service('openstackPackagesService', openstackPackagesService);
   module.service('openstackTenantChangePackageService', openstackTenantChangePackageService);
+  module.service('openstackFlavorsService', openstackFlavorsService);
+  module.component('openstackPrices', openstackPrices);
+  module.component('openstackTenantPrices', openstackTenantPrices);
 };
 
 // @ngInject
@@ -29,9 +35,11 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
     order: [
       'edit',
       'pull',
+      'pull_quotas',
       'change_package',
       'create_network',
       'create_security_group',
+      'pull_security_groups',
       'pull_floating_ips',
       'create_floating_ip',
       'destroy'
@@ -43,8 +51,14 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       pull: {
         title: 'Synchronise'
       },
+      pull_quotas: {
+        title: 'Synchronise quotas'
+      },
       create_network: {
-        title: 'Create network',
+        tab: 'networks',
+        title: 'Create',
+        dialogTitle: 'Create network for ',
+        iconClass: 'fa-plus',
         fields: {
           description: {
             type: 'text'
@@ -59,7 +73,10 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         dialogSize: 'lg'
       },
       create_security_group: {
-        title: 'Create security group',
+        tab: 'security_groups',
+        title: 'Create',
+        dialogTitle: 'Create security group for ',
+        iconClass: 'fa-plus',
         fields: {
           rules: {
             component: 'securityGroupRuleEditor'
@@ -67,11 +84,19 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         },
         dialogSize: 'lg'
       },
+      pull_security_groups: {
+        tab: 'security_groups',
+        title: 'Synchronise'
+      },
       pull_floating_ips: {
-        title: 'Pull floating IPs'
+        tab: 'floating_ips',
+        title: 'Synchronise',
       },
       create_floating_ip: {
-        title: 'Create floating IP'
+        tab: 'floating_ips',
+        title: 'Create',
+        dialogTitle: 'Create floating IP for ',
+        iconClass: 'fa-plus',
       },
     },
     delete_message: 'All tenant resources will be deleted.'

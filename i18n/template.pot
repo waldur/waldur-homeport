@@ -18,6 +18,15 @@ msgstr ""
 msgid "Account activation"
 msgstr ""
 
+#: app/scripts/components/billing/billing-record-details.html:3
+msgid "Accounting record"
+msgstr ""
+
+#: app/scripts/components/billing/billing-record-details.html:9
+#: app/scripts/components/billing/billing-tabs.html:10
+msgid "Accounting records"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 msgid "Actions"
 msgstr ""
@@ -42,12 +51,20 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
+#: app/scripts/components/issues/issue-detail.html:50
+msgid "Affected resource"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:42
 msgid "Allocation"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:100
 msgid "Already have an account?"
+msgstr ""
+
+#: app/scripts/components/issues/issue-detail.html:25
+msgid "Assigned to"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:16
@@ -67,8 +84,14 @@ msgstr ""
 msgid "bootable"
 msgstr ""
 
+#: app/scripts/components/issues/issue-detail.html:15
+msgid "Caller"
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector.html:33
 #: app/scripts/components/issues/issue-create-dialog.html:99
-#: app/scripts/components/navigation/select-workspace-dialog.html:124
+#: app/scripts/components/navigation/select-workspace-dialog.html:125
+#: app/scripts/components/offering/appstore-offering.html:19
 #: app/scripts/components/team/add-project-member.html:54
 #: app/scripts/components/team/add-team-member.html:86
 msgid "Cancel"
@@ -85,16 +108,35 @@ msgstr ""
 msgid "CIDR"
 msgstr ""
 
+#: app/scripts/components/appstore/category-selector-tabs.html:16
+msgid "Coming soon"
+msgstr ""
+
+#: app/scripts/components/issues/issue-detail.html:98
+#: app/scripts/components/offering/offering-summary.html:81
+msgid "Comments"
+msgstr ""
+
+#: app/scripts/components/offering/appstore-offering.html:16
+msgid "Create"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:18
 #: app/scripts/components/auth/auth-login.html:96
 msgid "Create an account"
+msgstr ""
+
+#: app/scripts/components/issues/issue-detail.html:80
+msgid "Created"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
 msgstr ""
 
+#: app/scripts/components/issues/issue-detail.html:89
 #: app/scripts/components/issues/issues-short-list.html:28
+#: app/scripts/components/offering/offering-summary.html:62
 #: app/scripts/components/user/user-edit.html:85
 msgid "Description"
 msgstr ""
@@ -119,6 +161,14 @@ msgstr ""
 msgid "Enable DHCP"
 msgstr ""
 
+#: app/scripts/components/billing/billing-record-details.html:71
+msgid "End time"
+msgstr ""
+
+#: app/scripts/components/offering/offering-summary.html:71
+msgid "Event log"
+msgstr ""
+
 #: app/scripts/components/team/add-team-member.html:47
 msgid "Expiration time"
 msgstr ""
@@ -131,8 +181,16 @@ msgstr ""
 msgid "Flavor"
 msgstr ""
 
+#: app/scripts/components/billing/billing-record-details.html:41
+msgid "For"
+msgstr ""
+
 #: app/scripts/components/issues/issues-short-list.html:49
 msgid "from"
+msgstr ""
+
+#: app/scripts/components/billing/invoice-details.html:35
+msgid "From"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:12
@@ -147,16 +205,24 @@ msgstr ""
 msgid "Gateway IP"
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:121
+#: app/scripts/components/navigation/select-workspace-dialog.html:122
 msgid "Go to my profile"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:106
+msgid "have been accepted on"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:11
 msgid "Help"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:108
+#: app/scripts/components/user/user-edit.html:118
 msgid "I accept the"
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector.html:29
+msgid "I want another service"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:58
@@ -184,10 +250,30 @@ msgstr ""
 msgid "Invitations"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-details.html:3
+msgid "Invoice"
+msgstr ""
+
+#: app/scripts/components/billing/invoice-details.html:45
+msgid "Invoice Date"
+msgstr ""
+
+#: app/scripts/components/billing/invoice-details.html:40
+msgid "Invoice No."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:49
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:42
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:37
 msgid "Invoiced to"
+msgstr ""
+
+#: app/scripts/components/billing/billing-tabs.html:4
+msgid "Invoices"
+msgstr ""
+
+#: app/scripts/components/billing/invoice-details.html:9
+msgid "Invoices list"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:11
@@ -199,6 +285,27 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
+msgid "Is active"
+msgstr ""
+
+#: app/scripts/components/offering/offering-summary.html:39
+msgid "Issue key"
+msgstr ""
+
+#: app/scripts/components/offering/offering-summary.html:53
+msgid "Issue link"
+msgstr ""
+
+#: app/scripts/components/offering/offering-summary.html:46
+msgid "Issue status"
+msgstr ""
+
+#: app/scripts/components/billing/billing-record-details.html:57
+#: app/scripts/components/billing/invoice-details.html:55
+msgid "Item List"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:76
 msgid "Job position"
 msgstr ""
@@ -207,8 +314,12 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:122
+#: app/scripts/components/user/user-edit.html:132
 msgid "Let’s get started"
+msgstr ""
+
+#: app/scripts/components/issues/issue-detail.html:70
+msgid "Link"
 msgstr ""
 
 #: app/scripts/components/navigation/site-header.html:12
@@ -232,6 +343,10 @@ msgstr ""
 msgid "Manage at"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:5
+msgid "Max # of backups"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:26
 msgid "Max RAM"
 msgstr ""
@@ -242,6 +357,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:22
 msgid "Max vCPU"
+msgstr ""
+
+#: app/scripts/components/offering/offering-summary.html:11
+msgid "Name"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:19
@@ -262,8 +381,17 @@ msgstr ""
 msgid "of"
 msgstr ""
 
+#: app/scripts/components/offering/offering-header.html:3
+msgid "Offering details"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:22
 msgid "Open"
+msgstr ""
+
+#: app/scripts/components/issues/issue-detail.html:74
+#: app/scripts/components/offering/offering-summary.html:57
+msgid "Open in Service Desk"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:44
@@ -281,7 +409,14 @@ msgstr ""
 #: app/scripts/components/issues/issue-create-dialog.html:12
 #: app/scripts/components/issues/issue-create-dialog.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:7
+#: app/scripts/components/issues/issue-detail.html:30
 msgid "Organization"
+msgstr ""
+
+#: app/scripts/components/billing/billing-record-details.html:6
+#: app/scripts/components/billing/invoice-details.html:6
+#: app/scripts/components/customer/customer-workspace.html:9
+msgid "Organization dashboard"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:67
@@ -308,6 +443,11 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: app/scripts/components/payments/payment-approve.html:2
+#: app/scripts/components/payments/payment-cancel.html:2
+msgid "Payment is being processed, please wait."
+msgstr ""
+
 #: app/scripts/components/customer/customer-team.html:16
 #: app/scripts/components/project/project-team.html:10
 msgid "Permissions log"
@@ -325,6 +465,22 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
+#: app/scripts/components/offering/offering-summary.html:32
+msgid "Price"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:19
+msgid "Price for 1 GB of RAM per day"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:14
+msgid "Price for 1 GB of storage per day"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:9
+msgid "Price for 1 vCPU per day"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:41
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:34
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:29
@@ -337,22 +493,40 @@ msgstr ""
 msgid "Price per month"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-details.html:22
+msgid "Print Invoice"
+msgstr ""
+
+#: app/scripts/components/billing/billing-record-details.html:22
+msgid "Print record"
+msgstr ""
+
+#: app/scripts/components/issues/issue-detail.html:65
+msgid "Priority"
+msgstr ""
+
 #: app/scripts/components/navigation/app-footer.html:5
 msgid "Privacy policy"
 msgstr ""
 
 #: app/scripts/components/issues/issue-create-dialog.html:17
 #: app/scripts/components/issues/issue-create-dialog.html:27
+#: app/scripts/components/issues/issue-detail.html:40
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:53
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:41
 msgid "Project"
 msgstr ""
 
+#: app/scripts/components/offering/offering-header.html:13
+msgid "Project dashboard"
+msgstr ""
+
 #: app/scripts/components/team/add-team-member.html:45
 msgid "Project name"
 msgstr ""
 
+#: app/scripts/components/appstore/category-selector.html:10
 #: app/scripts/components/navigation/select-workspace-dialog.html:82
 msgid "Projects"
 msgstr ""
@@ -361,8 +535,21 @@ msgstr ""
 msgid "Projects list"
 msgstr ""
 
+#: app/scripts/components/billing/billing-record-details.html:58
+#: app/scripts/components/billing/invoice-details.html:56
+msgid "Quantity"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:33
 msgid "RAM"
+msgstr ""
+
+#: app/scripts/components/billing/billing-record-details.html:38
+msgid "Record no."
+msgstr ""
+
+#: app/scripts/components/billing/billing-record-details.html:46
+msgid "Record period"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:11
@@ -389,7 +576,7 @@ msgstr ""
 msgid "Remote network"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:138
+#: app/scripts/components/user/user-edit.html:148
 msgid "Remove profile"
 msgstr ""
 
@@ -397,9 +584,22 @@ msgstr ""
 msgid "Reported by me"
 msgstr ""
 
+#: app/scripts/components/issues/issue-detail.html:20
+msgid "Reporter"
+msgstr ""
+
 #: app/scripts/components/issues/issue-create-dialog.html:37
 #: app/scripts/components/issues/issue-create-dialog.html:42
+#: app/scripts/components/issues/issue-detail.html:35
 msgid "Request type"
+msgstr ""
+
+#: app/scripts/components/offering/offering-header.html:18
+msgid "Requested Services"
+msgstr ""
+
+#: app/scripts/components/issues/issue-detail.html:60
+msgid "Resolution"
 msgstr ""
 
 #: app/scripts/components/issues/issue-create-dialog.html:32
@@ -417,6 +617,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:27
 msgid "Runtime state"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:14
+msgid "Schedule"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:4
@@ -439,9 +643,14 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:111
+#: app/scripts/components/appstore/category-selector-tabs.html:19
+#: app/scripts/components/navigation/select-workspace-dialog.html:112
 #: app/scripts/components/navigation/select-workspace-dialog.html:58
 msgid "Select"
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector.html:16
+msgid "Select project"
 msgstr ""
 
 #: app/scripts/components/issues/issue-type-select.html:2
@@ -450,6 +659,14 @@ msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:3
 msgid "Select workspace"
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector.html:2
+msgid "Service store"
+msgstr ""
+
+#: app/scripts/components/issues/issue-detail.html:45
+msgid "Service type"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:87
@@ -481,12 +698,33 @@ msgstr ""
 msgid "SSH key"
 msgstr ""
 
+#: app/scripts/components/billing/billing-record-details.html:70
+msgid "Start time"
+msgstr ""
+
+#: app/scripts/components/offering/offering-summary.html:18
+msgid "State"
+msgstr ""
+
+#: app/scripts/components/issues/issue-detail.html:55
+msgid "Status"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:25
 msgid "Storage"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-details.html:78
+msgid "Sub Total"
+msgstr ""
+
+#: app/scripts/components/offering/offering-summary.html:6
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 msgid "Summary"
+msgstr ""
+
+#: app/scripts/components/billing/invoice-details.html:82
+msgid "TAX"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:5
@@ -501,7 +739,8 @@ msgid "Tenant name"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:8
-#: app/scripts/components/user/user-edit.html:110
+#: app/scripts/components/user/user-edit.html:104
+#: app/scripts/components/user/user-edit.html:120
 msgid "Terms of Service"
 msgstr ""
 
@@ -525,6 +764,10 @@ msgstr ""
 msgid "Time in progress"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-details.html:42
+msgid "To"
+msgstr ""
+
 #: app/scripts/components/auth/auth-init.html:12
 msgid "To get your clouds under control, please fill in your data."
 msgstr ""
@@ -537,15 +780,31 @@ msgstr ""
 msgid "To update current plan visit"
 msgstr ""
 
+#: app/scripts/components/billing/billing-record-details.html:85
+#: app/scripts/components/billing/invoice-details.html:86
+msgid "TOTAL"
+msgstr ""
+
+#: app/scripts/components/billing/billing-record-details.html:60
+#: app/scripts/components/billing/invoice-details.html:59
+msgid "Total Price"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:37
 msgid "Total storage"
 msgstr ""
 
+#: app/scripts/components/offering/offering-summary.html:25
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
 msgid "Type"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:132
+#: app/scripts/components/billing/billing-record-details.html:59
+#: app/scripts/components/billing/invoice-details.html:57
+msgid "Unit Price"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:142
 msgid "Update profile"
 msgstr ""
 
@@ -576,6 +835,10 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
+#: app/scripts/components/billing/billing-issuer-details.html:8
+msgid "VAT"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:29
 msgid "vCPU"
 msgstr ""
@@ -602,6 +865,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:18
 msgid "VPC package"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-prices.html:4
+msgid "VPC packages for this provider are not found."
 msgstr ""
 
 #: app/scripts/components/auth/auth-init.html:10

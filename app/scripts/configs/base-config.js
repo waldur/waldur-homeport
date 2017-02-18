@@ -14,11 +14,7 @@ angular.module('ncsaas')
 
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
-    topMenuCustomersCount: 50,
     serviceIcon: 'static/images/icons/icon_openstack_small.png',
-    defaultCustomerIcon: 'static/images/logo.png',
-    topMenuCustomersCacheTime: 60 * 10, // seconds
-    topMenuProjectsCacheTime: 60 * 10, // seconds
     dashboardEventsCacheTime: 60, // seconds
     listControlPanelShow: false,
     showImport: false,
@@ -30,34 +26,6 @@ angular.module('ncsaas')
     currency: '€',
 
     offerings: [
-      {
-        label: "IT Transformation Service",
-        description: "Hosting in highly secured data center.",
-        key: "transformation",
-        icon: "fa-building",
-        state: "appstore.offering"
-      },
-      {
-        label: "Devops-as-a-Service platform",
-        description: "Enforce best-practices of application delivery.",
-        key: "devops",
-        icon: "fa-gears",
-        state: "appstore.offering"
-      },
-      {
-        label: "Disaster Recovery site",
-        description: "Planning for business continuity under all conditions.",
-        key: "recovery",
-        icon: "fa-get-pocket",
-        state: "appstore.offering"
-      },
-      {
-        label: "Managed applications",
-        description: "Full monitoring and application support",
-        key: "managed_apps",
-        icon: "fa-gears",
-        state: "appstore.offering"
-      },
       {
         label: "Virtual machines",
         icon: "fa-desktop",
@@ -99,18 +67,6 @@ angular.module('ncsaas')
         state: "appstore.premiumSupport",
         description: "Premium support service."
       },
-      {
-        label: "netHSM",
-        icon: "fa-get-pocket",
-        key: "nethsm",
-        state: "appstore.offering"
-      },
-      {
-        label: "X-Road security server",
-        icon: "fa-get-pocket",
-        key: "xroad",
-        state: "appstore.offering"
-      }
     ],
 
     offeringCategories: [
@@ -118,27 +74,7 @@ angular.module('ncsaas')
         label: 'IaaS',
         items: ['private_clouds', 'vms', 'storages', 'support']
       },
-      {
-        label: 'Security',
-        items: ['nethsm', 'xroad']
-      },
-      {
-        label: 'Platforms',
-        items: []
-      },
-      {
-        label: 'Applications',
-        items: []
-      },
-      {
-        label: 'Turnkey solutions',
-        items: ['transformation', 'devops', 'recovery', 'managed_apps']
-      }
     ],
-
-    futureCategories: ['nethsm', 'xroad'],
-
-    appStoreLimitChoices: 10,
 
     // Index of category inside of appStoreCategories
     AllResources: -1,
@@ -259,5 +195,8 @@ angular.module('ncsaas')
     userMandatoryFields: [
       'full_name',
       'email'
-    ]
+    ],
+
+    // Either 'accounting' or 'billing'
+    accountingMode: 'accounting'
 });

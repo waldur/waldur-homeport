@@ -14,7 +14,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th></th>
+                <th ng-if="::$ctrl.enableSelect"></th>
                 <th ng-repeat="column in $ctrl.columns">
                     {{ ::column.label | translate }}
                 </th>
@@ -24,9 +24,8 @@
             <tr ng-repeat="choice in $ctrl.choices|filter:$ctrl.filter"
                 ng-click="$ctrl.selectItem({item: choice})"
                 ng-keyup="$event.keyCode === 13 && $ctrl.selectItem({item: choice})"
-                ng-class="{disabled: choice.disabled}"
-                class="cursor-pointer">
-                <td>
+                ng-class="{disabled: choice.disabled, 'cursor-pointer': $ctrl.enableSelect}">
+                <td ng-if="::$ctrl.enableSelect">
                     <input type="radio" ng-model="$ctrl.value" ng-value="choice">
                 </td>
                 <td ng-repeat="column in $ctrl.columns">

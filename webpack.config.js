@@ -16,7 +16,7 @@ module.exports = {
             loaders: [
                 {
                     test: /\.js$/,
-                    loader: 'ng-annotate!babel?cacheDirectory!eslint-loader',
+                    loader: 'ng-annotate!babel?cacheDirectory',
                     exclude: /node_modules/
                 },
                 {
@@ -26,6 +26,10 @@ module.exports = {
                 {
                     test: /\.scss$/,
                     loader: ExtractTextPlugin.extract('style', 'css!sass?includePaths[]=' + scssPath)
+                },
+                {
+                    test: /\.css$/,
+                    loader: 'style!css'
                 },
                 {
                     test: /\.json$/,

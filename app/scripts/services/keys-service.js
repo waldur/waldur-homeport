@@ -5,12 +5,10 @@
     .service('keysService', ['$q', 'usersService', 'baseServiceClass', keysService]);
 
   function keysService($q, usersService, baseServiceClass) {
-    /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();
         this.endpoint = '/keys/';
-        this.filterByCustomer = false;
       },
       getCurrentUserKeyList: function() {
         var deferred = $q.defer(),

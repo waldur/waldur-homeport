@@ -9,7 +9,6 @@
    * Notice: CurrentStateService can not make any backend calls. It stores only selected on user-side objects.
    */
   function currentStateService($q, ENV, ncUtils, $rootScope) {
-    /*jshint validthis: true */
     var vm = this;
     vm.getCustomer = getCustomer;
     vm.setCustomer = setCustomer;

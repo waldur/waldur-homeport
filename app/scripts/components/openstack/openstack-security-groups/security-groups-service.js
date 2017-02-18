@@ -4,7 +4,6 @@ export default function openstackSecurityGroupsService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/openstack-security-groups/';
-      this.filterByCustomer = false;
     }
   });
   return new ServiceClass();

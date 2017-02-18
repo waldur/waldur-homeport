@@ -83,9 +83,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.alerts', {
       url: 'alerts/',
-      templateUrl: 'views/partials/filtered-list.html',
-      controller: 'CustomerAlertsListController',
-      controllerAs: 'ListController',
+      template: '<customer-alerts/>',
       data: {
         pageTitle: 'Alerts'
       }
@@ -117,32 +115,9 @@ export default function organizationRoutes($stateProvider) {
       }
     })
 
-    .state('organization.billing', {
-      url: 'billing/',
-      templateUrl: 'views/customer/tab-billing.html',
-      data: {
-        pageTitle: 'Billing'
-      },
-      abstract: true
-    })
-
-    .state('organization.billing.tabs', {
-      url: '',
-      views: {
-        invoices: {
-          template: '<invoices-list></invoices-list>'
-        }
-      }
-    })
-
-    .state('organization.invoiceDetails', {
-      url: 'invoice/:invoiceUUID/',
-      template: '<invoice-details></invoice-details>'
-    })
-
     .state('organization.sizing', {
       url: 'sizing/',
-      templateUrl: 'views/customer/tab-sizing.html',
+      template: '<customer-sizing/>',
       data: {
         pageTitle: 'Sizing'
       }

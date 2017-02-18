@@ -14,7 +14,7 @@ export default module => {
   module.controller('ProjectDetailsController', ProjectDetailsController);
   module.directive('projectIssues', projectIssues);
   module.directive('projectEvents', projectEvents);
-  module.directive('projectsList', projectsList);
+  module.component('projectsList', projectsList);
   module.component('projectAlertsList', projectAlertsList);
   module.component('projectTeam', projectTeam);
   module.config(projectRoutes);

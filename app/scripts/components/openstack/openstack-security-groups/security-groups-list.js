@@ -9,14 +9,22 @@ const openstackSecurityGroupsList = {
 
 // @ngInject
 function OpenstackSecurityGroupsListController(
-  baseResourceListController, openstackSecurityGroupsService) {
+  baseResourceListController, openstackSecurityGroupsService, actionUtilsService) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this._super();
-      this.service = openstackSecurityGroupsService;
-      this.rowFields.push('rules');
+      this.listActions = null;
+      var list_type = 'security_groups';
+      var fn = this._super.bind(this);
+
+      this.loading = true;
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
+        this.listActions = result;
+        fn();
+        this.rowFields.push('rules');
+        this.service = openstackSecurityGroupsService;
+      });
     },
     getTableOptions: function() {
       var options = this._super();
@@ -40,7 +48,7 @@ function OpenstackSecurityGroupsListController(
       };
     },
     getTableActions: function() {
-      return [];
+      return this.listActions;
     }
   });
 

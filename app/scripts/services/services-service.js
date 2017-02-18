@@ -5,7 +5,6 @@
     .service('servicesService', ['baseServiceClass', '$q', '$http', 'ENV', servicesService]);
 
   function servicesService(baseServiceClass, $q, $http, ENV) {
-    /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       services: null,
 

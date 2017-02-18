@@ -4,9 +4,22 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
-  responsiveTable.$inject = ['$timeout', '$interval', '$compile', '$filter', 'ENV'];
+  responsiveTable.$inject = ['$timeout', '$interval', '$compile', '$filter', 'ENV', 'features'];
 
-  function responsiveTable($timeout, $interval, $compile, $filter, ENV) {
+  /*
+    Controller should define tableOptions object with list of columns in `columns` field.
+    Each column has following format:
+
+    - `title` is required field; it is passed to `translate` filter for i18n;
+
+    - `render` is required field; this is a function which accepts row as
+      it's single argument and returns HTML code;
+
+    - `feature` is optional field; it allows to toggle display of
+      field according to configuration parameter `toBeFeatures`.
+  */
+
+  function responsiveTable($timeout, $interval, $compile, $filter, ENV, features) {
     return {
       restrict: 'E',
       scope: {
@@ -131,10 +144,14 @@
 
         function getColumns() {
           var columns = options.columns.map(function(column) {
+            var title = $filter('translate')(column.title);
             function render(data, type, row, meta) {
               return column.render(row);
             };
-            return angular.extend({}, column, {render: render});
+            return angular.extend({}, column, {render: render, title: title});
+          });
+          columns = columns.filter(function(column) {
+            return !column.feature || features.isVisible(column.feature);
           });
           if (options.rowActions && options.rowActions.length) {
             var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);

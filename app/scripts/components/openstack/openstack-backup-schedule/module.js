@@ -2,6 +2,7 @@ import openstackBackupSchedulesList from './openstack-backup-schedules-list';
 import openstackBackupSchedulesService from './openstack-backup-schedules-service';
 import openstackBackupScheduleSummary from './openstack-backup-schedule-summary';
 import breadcrumbsConfig from './breadcrumbs';
+import filtersModule from './filters';
 
 export default module => {
   module.service('openstackBackupSchedulesService', openstackBackupSchedulesService);
@@ -11,6 +12,7 @@ export default module => {
   module.config(tabsConfig);
   module.config(stateConfig);
   module.run(breadcrumbsConfig);
+  filtersModule(module);
 };
 
 // @ngInject
@@ -27,6 +29,14 @@ function actionConfig(ActionConfigurationProvider) {
       update: {
         title: 'Edit',
         successMessage: 'Backup schedule has been updated',
+        fields: {
+          schedule: {
+            type: 'crontab'
+          }
+        }
+      },
+      pull: {
+        title: 'Synchronise'
       },
     }
   });

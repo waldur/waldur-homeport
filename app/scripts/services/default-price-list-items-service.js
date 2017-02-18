@@ -5,7 +5,6 @@
     .service('defaultPriceListItemsService', ['baseServiceClass', defaultPriceListItemsService]);
 
   function defaultPriceListItemsService(baseServiceClass) {
-    /*jshint validthis: true */
     var ServiceClass = baseServiceClass.extend({
       init:function() {
         this._super();

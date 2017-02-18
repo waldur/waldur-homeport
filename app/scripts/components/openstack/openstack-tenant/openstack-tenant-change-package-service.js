@@ -46,7 +46,7 @@ export default class openstackTenantChangePackageService {
   // Private API section
   loadTenantPackage(context) {
     return this.openstackPackagesService.getList({
-      tenant: context.tenant.uuid
+      tenant_uuid: context.tenant.uuid
     }).then(packages => {
       if (packages.length === 1) {
         return angular.extend(context, {
@@ -68,7 +68,7 @@ export default class openstackTenantChangePackageService {
 
   loadTemplates(context) {
     return this.packageTemplatesService.getAll({
-      settings_uuid: context.tenant.service_settings_uuid
+      service_settings_uuid: context.tenant.service_settings_uuid
     }).then(templates => angular.extend(context, {
       templates: templates.map(templateParser).filter(
         template => template.uuid !== context.template.uuid

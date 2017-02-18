@@ -41,6 +41,21 @@ export const openstackTemplateColumns = [
 
 export const TEMPLATE_CATEGORIES = ['Trial', 'Small', 'Medium', 'Large'];
 
+export const openstackTemplateFilters = {
+  name: 'category',
+  choices: [
+    {
+      value: '',
+      label: 'All categories'
+    },
+    ...TEMPLATE_CATEGORIES.map(category => ({
+      value: category,
+      label: category
+    }))
+  ],
+  defaultValue: '',
+};
+
 export function templateComparator(a, b) {
   const category1 = TEMPLATE_CATEGORIES.indexOf(a.category);
   const category2 = TEMPLATE_CATEGORIES.indexOf(b.category);

@@ -4,7 +4,6 @@ export default function packageTemplatesService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/package-templates/';
-      this.filterByCustomer = false;
     }
   });
   return new ServiceClass();

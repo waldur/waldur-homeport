@@ -1,0 +1,94 @@
+<div class="row wrapper border-bottom white-bg page-heading hidden-print">
+    <div class="col-lg-8">
+        <h2 translate>Invoice</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="organization.details({uuid: InvoiceDetails.customerUUID})" translate>Organization dashboard</a>
+            </li>
+            <li>
+                <a ui-sref="organization.billing.tabs({uuid: InvoiceDetails.customerUUID})" translate>
+                    Invoices list
+                </a>
+            </li>
+            <li class="active">
+                <strong>{{::InvoiceDetails.invoice.period}}</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-4">
+        <div class="title-action">
+            <button class="btn btn-primary" ng-click="InvoiceDetails.printLink()">
+                <i class="fa fa-print"></i>
+                <span translate>Print Invoice</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div ng-if="!InvoiceDetails.loading" class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content">
+            <div class="p-xl">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5><span translate>From</span>:</h5>
+                        <billing-issuer-details issuer="InvoiceDetails.invoice.issuer_details"/>
+                    </div>
+
+                    <div class="col-sm-6 text-right">
+                        <h4 translate>Invoice No.</h4>
+                        <h4 class="text-navy">{{::InvoiceDetails.invoice.number}}</h4>
+                        <span><span translate>To</span>:</span>
+                        <billing-customer-details customer="InvoiceDetails.invoice.customer_details"/>
+                        <div>
+                            <span><strong><span translate>Invoice Date</span>:</strong> {{::InvoiceDetails.invoice.invoice_date || '&mdash;'}}</span><br>
+                            <span><strong>Due Date:</strong> {{::InvoiceDetails.invoice.due_date || '&mdash;'}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive m-t">
+                    <table class="table invoice-table">
+                        <thead>
+                        <tr>
+                            <th translate>Item List</th>
+                            <th translate>Quantity</th>
+                            <th translate>Unit Price</th>
+                            <th ng-if="InvoiceDetails.invoice.issuer_details.vat_code">Tax</th>
+                            <th translate>Total Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in InvoiceDetails.invoice.openstack_items track by $index">
+                                <td><div><strong>{{item.name}}</strong></div>
+                                    <small>Start time: {{item.start || '&mdash;' | dateTime }}. End time: {{item.end || '&mdash;' | dateTime }}</small></td>
+                                <td>{{item.usage_days}}</td>
+                                <td>{{item.daily_price | defaultCurrency}}</td>
+                                <td ng-if="InvoiceDetails.invoice.issuer_details.vat_code">{{item.tax | defaultCurrency}}</td>
+                                <td>{{item.total | defaultCurrency}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /table-responsive -->
+
+                <table class="table invoice-total">
+                    <tbody>
+                    <tr>
+                        <td><strong><span translate>Sub Total</span>: </strong></td>
+                        <td>{{::InvoiceDetails.invoice.price | defaultCurrency}}</td>
+                    </tr>
+                    <tr ng-if="InvoiceDetails.invoice.issuer_details.vat_code">
+                        <td><strong><span translate>TAX</span>: </strong></td>
+                        <td>{{::InvoiceDetails.invoice.tax | defaultCurrency}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong><span translate>TOTAL</span>: </strong></td>
+                        <td>{{::InvoiceDetails.invoice.total | defaultCurrency}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

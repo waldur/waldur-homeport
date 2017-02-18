@@ -2,12 +2,10 @@ import { EVENT_ICONS_TYPES, EVENT_TEMPLATES } from './constants';
 
 // @ngInject
 export default function eventsService($q, baseServiceClass, ENV) {
-  /*jshint validthis: true */
   var ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/events/';
-      this.filterByCustomer = false;
     },
     setDefaultFilter: function() {
       this.defaultFilter = {exclude_extra: true};

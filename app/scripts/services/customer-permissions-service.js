@@ -7,7 +7,6 @@
       init:function() {
         this._super();
         this.endpoint = '/customer-permissions/';
-        this.filterByCustomer = false;
       },
 
       deletePermission: function(permission) {
@@ -20,11 +19,7 @@
         var deferred = $q.defer(),
           filter = {username: username};
         if (customerUUID) {
-          /*jshint camelcase: false */
           filter.customer = customerUUID;
-          this.filterByCustomer = false;
-        } else {
-          this.filterByCustomer = true;
         }
 
         this.getList(filter).then(function(permissions) {

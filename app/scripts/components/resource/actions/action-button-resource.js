@@ -47,7 +47,13 @@ class ActionButtonController {
     this.loading = true;
     this.actions = [];
     this.actionUtilsService.loadActions(this.buttonModel).then(actions => {
-      this.actions = actions;
+      let actionsObj = {};
+      angular.forEach(actions, (value, key) => {
+        if (!value.tab) {
+          actionsObj[key] = value;
+        }
+      });
+      this.actions = actionsObj;
     }).finally(() => {
       this.loading = false;
     });
