@@ -32,7 +32,7 @@ angular.module('ncsaas')
         feature: "vms",
         key: "vms",
         state: "appstore.vms",
-        description: "OpenStack instances and DigitalOcean droplets."
+        description: "Create virtual machines (VMs) in Virtual Private Clouds or public clouds."
       },
       {
         label: "Private clouds",
@@ -40,16 +40,16 @@ angular.module('ncsaas')
         feature: "private_clouds",
         key: "private_clouds",
         state: "appstore.private_clouds",
-        description: "OpenStack tenants and Amazon VPC.",
+        description: "Purchase bulk resource by creating Virtual Private Clouds (VPC). Once created VMs and Storage could be created from that VPC.",
         requireOwnerOrStaff: true
       },
       {
-        label: "Storage",
+        label: "Block Storage",
         icon: "fa-hdd-o",
         feature: "storage",
         key: "storages",
         state: "appstore.storages",
-        description: "Block devices, object store spaces and other persistency services."
+        description: "Create persistent block storage volumes in Virtual Private Clouds."
       },
       {
         label: "Applications",
