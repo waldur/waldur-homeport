@@ -63,6 +63,12 @@ msgstr ""
 msgid "Already have an account?"
 msgstr ""
 
+#: app/scripts/configs/base-config.js:105
+#: app/scripts/configs/base-config.js:124
+#: app/scripts/configs/base-config.js:57
+msgid "Applications"
+msgstr ""
+
 #: app/scripts/components/issues/issue-detail.html:25
 msgid "Assigned to"
 msgstr ""
@@ -78,6 +84,10 @@ msgstr ""
 #: app/scripts/components/plans/plan-agreement-approve.html:3
 #: app/scripts/components/plans/plan-agreement-cancel.html:3
 msgid "Billing plan agreement is being processed, please wait."
+msgstr ""
+
+#: app/scripts/configs/base-config.js:54
+msgid "Block devices, object store spaces and other persistency services."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:7
@@ -223,6 +233,10 @@ msgstr ""
 
 #: app/scripts/components/appstore/category-selector.html:29
 msgid "I want another service"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:76
+msgid "IaaS"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:58
@@ -398,8 +412,20 @@ msgstr ""
 msgid "Opened by"
 msgstr ""
 
+#: app/scripts/configs/base-config.js:37
+msgid "OpenStack instances and DigitalOcean droplets."
+msgstr ""
+
+#: app/scripts/configs/base-config.js:45
+msgid "OpenStack tenants and Amazon VPC."
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:76
 msgid "Or use social login"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:62
+msgid "Oracle database and SugarCRM."
 msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:32
@@ -421,6 +447,10 @@ msgstr ""
 
 #: app/scripts/components/user/user-edit.html:67
 msgid "Organization name"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:190
+msgid "Organization owner"
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.html:32
@@ -463,6 +493,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:15
 msgid "Port range"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:70
+msgid "Premium support service."
 msgstr ""
 
 #: app/scripts/components/offering/offering-summary.html:32
@@ -509,6 +543,11 @@ msgstr ""
 msgid "Privacy policy"
 msgstr ""
 
+#: app/scripts/configs/base-config.js:40
+#: app/scripts/configs/base-config.js:97
+msgid "Private clouds"
+msgstr ""
+
 #: app/scripts/components/issues/issue-create-dialog.html:17
 #: app/scripts/components/issues/issue-create-dialog.html:27
 #: app/scripts/components/issues/issue-detail.html:40
@@ -520,6 +559,10 @@ msgstr ""
 
 #: app/scripts/components/offering/offering-header.html:13
 msgid "Project dashboard"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:191
+msgid "Project manager"
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.html:45
@@ -542,6 +585,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:33
 msgid "RAM"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:23
+msgid "Reason unknown, please contact support"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:38
@@ -711,7 +758,12 @@ msgid "Status"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:25
+#: app/scripts/configs/base-config.js:49
 msgid "Storage"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:112
+msgid "Storages"
 msgstr ""
 
 #: app/scripts/components/billing/invoice-details.html:78
@@ -721,6 +773,14 @@ msgstr ""
 #: app/scripts/components/offering/offering-summary.html:6
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 msgid "Summary"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:65
+msgid "Support"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:192
+msgid "System administrator"
 msgstr ""
 
 #: app/scripts/components/billing/invoice-details.html:82
@@ -845,6 +905,12 @@ msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:19
 msgid "Version"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:120
+#: app/scripts/configs/base-config.js:32
+#: app/scripts/configs/base-config.js:90
+msgid "Virtual machines"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:17
