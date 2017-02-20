@@ -3,16 +3,12 @@ import template from './user-token.html';
 export default {
   template,
   bindings: {
-    input: '<'
+    token: '<'
   },
   controller: class maskedTextController {
-    constructor($element) {
-      this.$element = $element;
-    }
-
     $onInit() {
-      let passwordMarker = '&bull;';
-      this.maskedInput = this.input.split('').map(() => { return passwordMarker; }).join('');
+      const passwordMarker = '&bull;';
+      this.maskedToken = this.token.split('').map(() =>  passwordMarker).join('');
     }
   }
 };

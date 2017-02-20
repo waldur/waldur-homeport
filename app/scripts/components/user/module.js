@@ -16,7 +16,7 @@ import userPopoverTable from './user-popover-table';
 import { stateUtilsService, attachStateUtils } from './utils';
 import userRoutes from './routes';
 import usersService from './users-service';
-import userToken from '../user/user-token';
+import userToken from './user-token';
 import filtersModule from './filters';
 
 export default module => {
