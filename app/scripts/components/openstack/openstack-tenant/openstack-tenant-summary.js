@@ -1,5 +1,5 @@
 import template from './openstack-tenant-summary.html';
-import { getTenantTemplate } from './openstack-template';
+import { getTenantTemplate } from '../utils';
 
 const openstackTenantSummary = {
   template,

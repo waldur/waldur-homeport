@@ -20,7 +20,7 @@ describe('Resource filters', () => {
         ram: 2 * 1024,
         disk: 1.29 * 1024 * 1024,
       };
-      expect(formatFlavorFilter(flavor)).toBe('1 vCPU, 2 GB memory, 1.2 TB storage');
+      expect(formatFlavorFilter(flavor)).toBe('1 vCPU, 2 GB RAM, 1.2 TB storage');
     });
 
     it('skips any flavor parameter if it is not specified or zero', () => {
