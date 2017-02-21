@@ -10,7 +10,7 @@ export default function customerWorkspace() {
 }
 
 // @ngInject
-function CustomerWorkspaceController(
+export function CustomerWorkspaceController(
   $scope,
   currentStateService,
   joinService,
@@ -19,12 +19,21 @@ function CustomerWorkspaceController(
   $state,
   tabCounterService,
   AppStoreUtilsService,
-  WorkspaceService) {
+  WorkspaceService,
+  BillingUtils) {
 
   activate();
 
   function activate() {
     $scope.$on('WORKSPACE_CHANGED', refreshWorkspace);
+    $scope.$on('$stateChangeSuccess', () => {
+      if ($state.current.data && $state.current.data) {
+        $scope.pageTitle = $state.current.data.pageTitle;
+      }
+    });
+    $scope.$on('breadcrumbChanged', (event, pageTitle) => {
+      $scope.pageTitle = pageTitle;
+    });
     refreshWorkspace();
   }
 
@@ -102,7 +111,7 @@ function CustomerWorkspaceController(
         countFieldKey: 'users'
       },
       {
-        label: 'Billing',
+        label: BillingUtils.getTabTitle(),
         icon: 'fa-file-text-o',
         link: 'organization.billing.tabs({uuid: $ctrl.context.customer.uuid})',
         feature: 'billing'

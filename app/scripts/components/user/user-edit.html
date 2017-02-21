@@ -63,6 +63,29 @@
         </div>
 
         <div class="form-group">
+            <label class="col-sm-3 col-md-4 col-lg-3 control-label">
+                <span translate>Token</span>
+            </label>
+            <div class="col-sm-9 col-md-8">
+                <user-token token="$ctrl.user.token"></user-token>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="token_lifetime" class="col-sm-3 col-md-4 col-lg-3 control-label">
+                <span translate>Token lifetime</span>
+            </label>
+            <div class="col-sm-9 col-md-8">
+                <select
+                  id="token_lifetime"
+                  ng-options="item.value as item.name for item in $ctrl.lifetimeOptions"
+                  ng-model="$ctrl.user.token_lifetime"
+                  class="form-control">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="organization" class="col-sm-3 col-md-4 col-lg-3 control-label">
                 <span translate>Organization name</span>
             </label>
