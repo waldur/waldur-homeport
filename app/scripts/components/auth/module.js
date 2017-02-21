@@ -7,7 +7,7 @@ import initAuthProvider from './auth-config';
 import interceptorModule from './interceptor';
 import UserSettings from './user-settings';
 import storeLastState from './store-state';
-import estonianIdModule from './estonianId/module'
+import estonianIdModule from './estonianId/module';
 
 export default module => {
   module.service('authService', authService);
