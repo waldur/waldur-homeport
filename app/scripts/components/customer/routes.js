@@ -115,25 +115,6 @@ export default function organizationRoutes($stateProvider) {
       }
     })
 
-    .state('organization.billing', {
-      url: 'billing/',
-      template: '<ui-view/>',
-      data: {
-        pageTitle: 'Billing'
-      },
-      abstract: true
-    })
-
-    .state('organization.billing.tabs', {
-      url: '',
-      template: '<customer-billing/>'
-    })
-
-    .state('organization.invoiceDetails', {
-      url: 'invoice/:invoiceUUID/',
-      template: '<invoice-details></invoice-details>'
-    })
-
     .state('organization.sizing', {
       url: 'sizing/',
       template: '<customer-sizing/>',

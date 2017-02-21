@@ -1,15 +1,19 @@
-export const invoicesList = {
+const invoicesList = {
   controller: InvoicesListController,
   controllerAs: 'ListController',
   templateUrl: 'views/partials/filtered-list.html'
 };
 
+export default invoicesList;
+
 // @ngInject
-export default function InvoicesListController(
+function InvoicesListController(
   baseControllerListClass,
   currentStateService,
   usersService,
   invoicesService,
+  BillingUtils,
+  ncUtils,
   ncUtilsFlash,
   $state,
   $filter) {
@@ -38,54 +42,39 @@ export default function InvoicesListController(
             title: 'Invoice number',
             className: 'all',
             render: function(row) {
-              var href = $state.href('organization.invoiceDetails',
-                {invoiceUUID: row.uuid});
-              return '<a href="{href}">{name}</a>'
-                .replace('{href}', href)
-                .replace('{name}', row.number);
+              const href = $state.href('billingDetails', {uuid: row.uuid});
+              return ncUtils.renderLink(href, row.number);
             }
           },
           {
             title: 'State',
             className: 'all',
-            render: function(row) {
-              return row.state;
-            }
+            render: row => row.state
           },
           {
             title: 'Price',
             className: 'all',
-            render: function(row) {
-              return $filter('defaultCurrency')(row.price);
-            }
+            render: row => $filter('defaultCurrency')(row.price)
           },
           {
             title: 'Tax',
             className: 'min-tablet-l',
-            render: function(row) {
-              return $filter('defaultCurrency')(row.tax);
-            }
+            render: row => $filter('defaultCurrency')(row.tax)
           },
           {
             title: 'Total',
             className: 'min-tablet-l',
-            render: function(row) {
-              return $filter('defaultCurrency')(row.total);
-            }
+            render: row => $filter('defaultCurrency')(row.total)
           },
           {
             title: 'Invoice date',
             className: 'all',
-            render: function(row) {
-              return row.invoice_date || '&mdash;';
-            }
+            render: row => row.invoice_date || '&mdash;'
           },
           {
             title: 'Due date',
             className: 'min-tablet-l',
-            render: function(row) {
-              return row.due_date || '&mdash;';
-            }
+            render: row => row.due_date || '&mdash;'
           }
         ],
         rowActions: this.getRowActions()
@@ -93,48 +82,12 @@ export default function InvoicesListController(
     },
     getRowActions: function() {
       if (this.currentUser.is_staff) {
-        return [
-          {
-            name: '<i class="fa fa-envelope-o"></i> Send notification',
-            callback: this.sendNotification.bind(controllerScope),
-
-            isDisabled: function(row) {
-              return row.state != 'created';
-            }.bind(controllerScope),
-
-            tooltip: function(row) {
-              if (row.state != 'created') {
-                return 'Notification only for the created invoice can be sent.';
-              }
-            }.bind(controllerScope),
-          }
-        ];
+        return BillingUtils.getTableActions();
       }
-    },
-    sendNotification: function(row) {
-      invoicesService.sendNotification(row.uuid).then(function() {
-        ncUtilsFlash.success('Invoice notification has been sent to organization owners.');
-      }).catch(function() {
-        ncUtilsFlash.error('Unable to invoice notification.');
-      });
     },
     getSearchFilters: function() {
       this.searchFilters = [
-        {
-          name: 'state',
-          title: 'Pending',
-          value: 'pending'
-        },
-        {
-          name: 'state',
-          title: 'Canceled',
-          value: 'canceled'
-        },
-        {
-          name: 'state',
-          title: 'Created',
-          value: 'created'
-        },
+        ...BillingUtils.getSearchFilters(),
         {
           name: 'state',
           title: 'Paid',
