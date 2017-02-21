@@ -18,7 +18,7 @@ export const openstackTemplateColumns = [
     filter: 'filesize'
   },
   {
-    name: 'storage',
+    name: 'disk',
     label: 'Max storage',
     filter: 'filesize'
   },
@@ -70,54 +70,4 @@ export function templateComparator(a, b) {
   const name2 = b.name.toUpperCase();
 
   return name1.localeCompare(name2);
-}
-
-export function templateParser(template) {
-  /* Output is item with the following format:
-  {
-    "url": "https://example.com/api/package-templates/2/",
-    "name": "Minimal VPC package",
-    "dailyPrice": 1,
-    "monthlyPrice": 30,
-    "annualPrice": 365
-    "ram": 20240,
-    "cores": 20,
-    "storage": 51200,
-  }
-  */
-  const components = template.components.reduce((map, item) => {
-    map[item.type] = item.amount;
-    return map;
-  }, {});
-  const dailyPrice = template.price;
-  return angular.extend({}, template, {
-    dailyPrice: dailyPrice,
-    monthlyPrice: dailyPrice * 30,
-    annualPrice: dailyPrice * 365
-  }, components);
-}
-
-export function templateFormatter($filter, value) {
-  return $filter('formatPackage')(value);
-}
-
-export function parseQuotas(quotas) {
-  return quotas.reduce((accum, quota) =>
-    angular.extend(accum, {
-      [quota.name]: quota.limit,
-    }), {});
-}
-
-export function getTenantTemplate(tenant) {
-  if (!tenant.extra_configuration.package_category) {
-    return;
-  }
-  const quotas = parseQuotas(tenant.quotas);
-  return {
-    name: tenant.extra_configuration.package_name,
-    category: tenant.extra_configuration.package_category,
-    cores: quotas.vcpu,
-    ram: quotas.ram,
-    disk: quotas.storage,
-  };
 }

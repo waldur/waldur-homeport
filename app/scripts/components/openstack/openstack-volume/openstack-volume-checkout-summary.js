@@ -34,7 +34,7 @@ class SummaryController {
 
   getDailyPrice() {
     if (this.components && this.model.size) {
-      return this.model.size * this.components.storage;
+      return this.model.size * this.components.disk;
     }
   }
 

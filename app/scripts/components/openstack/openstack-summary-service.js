@@ -1,3 +1,5 @@
+import { parsePrices } from './utils';
+
 // @ngInject
 export default class OpenStackSummaryService {
   constructor($http, $q, ENV) {
@@ -10,7 +12,7 @@ export default class OpenStackSummaryService {
     return this.fetchServiceSettings(service)
       .then(this.fetchSettingsScope.bind(this))
       .then(this.fetchTenantTemplate.bind(this))
-      .then(this.parseTemplate);
+      .then(template => parsePrices(template.components));
   }
 
   fetchServiceSettings(service) {
@@ -32,12 +34,5 @@ export default class OpenStackSummaryService {
     }
     const url = `${this.ENV.apiEndpoint}api/package-templates/${config.package_uuid}/`;
     return this.$http.get(url).then(response => response.data);
-  }
-
-  parseTemplate(template) {
-    return template.components.reduce((result, item) => {
-      result[item.type] = parseFloat(item.price);
-      return result;
-    }, {});
   }
 }

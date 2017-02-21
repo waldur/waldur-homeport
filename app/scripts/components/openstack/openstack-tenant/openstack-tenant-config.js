@@ -1,7 +1,6 @@
+import { templateParser } from '../utils';
 import {
   openstackTemplateColumns,
-  templateParser,
-  templateFormatter,
   templateComparator,
   openstackTemplateFilters
 } from './openstack-template';
@@ -31,7 +30,7 @@ export default {
       dialogSize: 'lg',
       resource: 'package-templates',
       parser: templateParser,
-      formatter: templateFormatter,
+      formatter: ($filter, value) => $filter('formatPackage')(value),
       columns: openstackTemplateColumns,
       comparator: templateComparator,
       filterOptions: openstackTemplateFilters

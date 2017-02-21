@@ -8,6 +8,7 @@ import openstackTenantChangePackageService from './openstack-tenant-change-packa
 import openstackFlavorsService from './openstack-flavors-service';
 import openstackPrices from './openstack-prices';
 import openstackTenantPrices from './openstack-tenant-prices';
+import filtersModule from './filters';
 
 export default module => {
   module.config(fieldsConfig);
@@ -22,6 +23,7 @@ export default module => {
   module.service('openstackFlavorsService', openstackFlavorsService);
   module.component('openstackPrices', openstackPrices);
   module.component('openstackTenantPrices', openstackTenantPrices);
+  filtersModule(module);
 };
 
 // @ngInject

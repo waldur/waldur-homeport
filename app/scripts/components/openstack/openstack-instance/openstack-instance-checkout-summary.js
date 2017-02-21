@@ -36,7 +36,7 @@ class SummaryController {
     if (this.components && this.model.flavor) {
       return this.model.flavor.cores * this.components.cores +
              this.model.flavor.ram * this.components.ram +
-             this.getTotalStorage() * this.components.storage;
+             this.getTotalStorage() * this.components.disk;
     }
   }
 

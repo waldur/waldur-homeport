@@ -1,3 +1,4 @@
+import { parsePrices } from '../utils';
 import template from './openstack-tenant-prices.html';
 
 export const openstackFlavorColumns = [
@@ -36,17 +37,12 @@ export const openstackFlavorColumns = [
   }
 ];
 
-const parsePrices = template => template.components.reduce(
-  (accum, component) => angular.extend(accum, {
-    [component.type]: parseFloat(component.price)
-  }), {});
-
 const parseFlavors = (prices, flavors) => {
   return flavors.map(flavor => {
     const { name, cores, ram, disk } = flavor;
     const cpuPrice = cores * prices.cores;
     const ramPrice = ram * prices.ram;
-    const diskPrice = disk * prices.storage;
+    const diskPrice = disk * prices.disk;
     const dailyPrice = cpuPrice + ramPrice + diskPrice;
     const monthlyPrice = dailyPrice * 30;
     const annualPrice = dailyPrice * 365;

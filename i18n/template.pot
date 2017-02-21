@@ -102,9 +102,14 @@ msgstr ""
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:125
 #: app/scripts/components/offering/appstore-offering.html:19
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:52
 #: app/scripts/components/team/add-project-member.html:54
 #: app/scripts/components/team/add-team-member.html:86
 msgid "Cancel"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:2
+msgid "Change VPC package"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:4
@@ -138,6 +143,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:80
 msgid "Created"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:15
+msgid "Current VPC package"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
@@ -379,6 +388,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:19
 msgid "Network"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:27
+msgid "New VPC package"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:24
@@ -770,6 +783,10 @@ msgstr ""
 msgid "Sub Total"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:46
+msgid "Submit"
+msgstr ""
+
 #: app/scripts/components/offering/offering-summary.html:6
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 msgid "Summary"
@@ -794,6 +811,7 @@ msgstr ""
 msgid "Tenant"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
 msgid "Tenant name"
 msgstr ""
@@ -818,6 +836,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:20
 msgid "There are no requests yet."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:23
+msgid "There are no suitable VPC packages for this tenant."
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:30
