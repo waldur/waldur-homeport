@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="form-group" ng-if="!$ctrl.initial">
+        <div class="form-group" ng-if="!$ctrl.initial && $ctrl.user.token">
             <label class="col-sm-3 col-md-4 col-lg-3 control-label">
                 <span translate>Token</span>
             </label>
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div class="form-group" ng-if="!$ctrl.initial">
+        <div class="form-group" ng-if="!$ctrl.initial && $ctrl.user.token_lifetime">
             <label for="token_lifetime" class="col-sm-3 col-md-4 col-lg-3 control-label">
                 <span translate>Token lifetime</span>
             </label>
