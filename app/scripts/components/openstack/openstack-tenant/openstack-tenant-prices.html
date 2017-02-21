@@ -4,22 +4,22 @@
 
 <div class="text-danger" ng-bind="$ctrl.error"/>
 
-<dl ng-if="$ctrl.prices" class="dl-horizontal">
-  <dt class="m-b-sm">
-    <span translate>Price for 1 vCPU per day</span>:
-  </dt>
-  <dd>{{ $ctrl.prices.cores | defaultCurrency }}</dd>
-
-  <dt class="m-b-sm">
-    <span translate>Price for 1 GB of storage per day</span>:
-  </dt>
-  <dd>{{ $ctrl.prices.disk | defaultCurrency }}</dd>
-
-  <dt class="m-b-sm">
-    <span translate>Price for 1 GB of RAM per day</span>:
-  </dt>
-  <dd>{{ $ctrl.prices.ram | defaultCurrency }}</dd>
-</dl>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <tr>
+      <th translate>Price for 1 vCPU per day</th>
+      <td>{{ $ctrl.prices.cores | defaultCurrency }}</td>
+    </tr>
+    <tr>
+      <th translate>Price for 1 GB of storage per day</th>
+      <td>{{ $ctrl.prices.disk | defaultCurrency }}</td>
+    </tr>
+    <tr>
+      <th translate>Price for 1 GB of RAM per day</th>
+      <td>{{ $ctrl.prices.ram | defaultCurrency }}</td>
+    </tr>
+  </table>
+</div>
 
 <choices-table
   ng-if="$ctrl.flavors"

@@ -82,7 +82,7 @@ const openstackTenantPrices = {
         this.loadTemplate(), this.loadFlavors()
       ])
       .then(([template, flavors]) => {
-        this.prices = parsePrices(template);
+        this.prices = parsePrices(template.components);
         this.flavors = parseFlavors(this.prices, flavors);
       })
       .catch(response => {
