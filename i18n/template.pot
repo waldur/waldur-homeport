@@ -86,8 +86,8 @@ msgstr ""
 msgid "Billing plan agreement is being processed, please wait."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:54
-msgid "Block devices, object store spaces and other persistency services."
+#: app/scripts/configs/base-config.js:49
+msgid "Block storage"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:7
@@ -425,14 +425,6 @@ msgstr ""
 msgid "Opened by"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:37
-msgid "OpenStack instances and DigitalOcean droplets."
-msgstr ""
-
-#: app/scripts/configs/base-config.js:45
-msgid "OpenStack tenants and Amazon VPC."
-msgstr ""
-
 #: app/scripts/components/auth/auth-login.html:76
 msgid "Or use social login"
 msgstr ""
@@ -589,6 +581,18 @@ msgstr ""
 
 #: app/scripts/components/team/add-team-member.html:40
 msgid "Projects list"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:54
+msgid "Provision persistent storage volumes in available Providers."
+msgstr ""
+
+#: app/scripts/configs/base-config.js:37
+msgid "Provision virtual machines (VMs) in available Providers."
+msgstr ""
+
+#: app/scripts/configs/base-config.js:45
+msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:58
@@ -771,7 +775,6 @@ msgid "Status"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:25
-#: app/scripts/configs/base-config.js:49
 msgid "Storage"
 msgstr ""
 

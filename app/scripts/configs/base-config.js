@@ -34,7 +34,7 @@ angular.module('ncsaas')
         feature: 'vms',
         key: 'vms',
         state: 'appstore.vms',
-        description: gettext('OpenStack instances and DigitalOcean droplets.')
+        description: gettext('Provision virtual machines (VMs) in available Providers.')
       },
       {
         label: gettext('Private clouds'),
@@ -42,16 +42,16 @@ angular.module('ncsaas')
         feature: 'private_clouds',
         key: 'private_clouds',
         state: 'appstore.private_clouds',
-        description: gettext('OpenStack tenants and Amazon VPC.'),
+        description: gettext('Purchase bulk resource as Virtual Private Clouds (VPC).'),
         requireOwnerOrStaff: true
       },
       {
-        label: gettext('Storage'),
+        label: gettext('Block storage'),
         icon: 'fa-hdd-o',
         feature: 'storage',
         key: 'storages',
         state: 'appstore.storages',
-        description: gettext('Block devices, object store spaces and other persistency services.')
+        description: gettext('Provision persistent storage volumes in available Providers.')
       },
       {
         label: gettext('Applications'),
