@@ -147,7 +147,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html:89
 #: app/scripts/components/issues/issues-short-list.html:28
 #: app/scripts/components/offering/offering-summary.html:62
-#: app/scripts/components/user/user-edit.html:85
+#: app/scripts/components/user/user-edit.html:108
 msgid "Description"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:106
+#: app/scripts/components/user/user-edit.html:129
 msgid "have been accepted on"
 msgstr ""
 
@@ -227,7 +227,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:118
+#: app/scripts/components/user/user-edit.html:141
 msgid "I accept the"
 msgstr ""
 
@@ -320,7 +320,7 @@ msgstr ""
 msgid "Item List"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:76
+#: app/scripts/components/user/user-edit.html:99
 msgid "Job position"
 msgstr ""
 
@@ -328,7 +328,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:132
+#: app/scripts/components/user/user-edit.html:155
 msgid "Let’s get started"
 msgstr ""
 
@@ -445,7 +445,7 @@ msgstr ""
 msgid "Organization dashboard"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:67
+#: app/scripts/components/user/user-edit.html:90
 msgid "Organization name"
 msgstr ""
 
@@ -483,7 +483,7 @@ msgstr ""
 msgid "Permissions log"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:94
+#: app/scripts/components/user/user-edit.html:117
 msgid "Phone number"
 msgstr ""
 
@@ -623,7 +623,7 @@ msgstr ""
 msgid "Remote network"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:148
+#: app/scripts/components/user/user-edit.html:171
 msgid "Remove profile"
 msgstr ""
 
@@ -799,8 +799,8 @@ msgid "Tenant name"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:8
-#: app/scripts/components/user/user-edit.html:104
-#: app/scripts/components/user/user-edit.html:120
+#: app/scripts/components/user/user-edit.html:127
+#: app/scripts/components/user/user-edit.html:143
 msgid "Terms of Service"
 msgstr ""
 
@@ -840,6 +840,14 @@ msgstr ""
 msgid "To update current plan visit"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:67
+msgid "Token"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:76
+msgid "Token lifetime"
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-details.html:85
 #: app/scripts/components/billing/invoice-details.html:86
 msgid "TOTAL"
@@ -864,7 +872,7 @@ msgstr ""
 msgid "Unit Price"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:142
+#: app/scripts/components/user/user-edit.html:165
 msgid "Update profile"
 msgstr ""
 
