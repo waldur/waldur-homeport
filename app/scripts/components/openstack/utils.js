@@ -38,7 +38,7 @@ export function templateParser(template) {
     "annualPrice": 365
     "ram": 20240,
     "cores": 20,
-    "storage": 51200,
+    "disk": 51200,
   }
   */
   const components = parseComponents(template.components);
