@@ -169,6 +169,7 @@ angular.module('ncsaas')
       'SOCIAL_SIGNUP',
       'ESTONIAN_ID'
     ],
+    estoniaIdLogoutUrl: 'https://openid.ee/auth/logout',
     resourcesTypes: {
       vms: 'vms',
       applications: 'apps',
