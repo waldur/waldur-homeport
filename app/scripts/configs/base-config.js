@@ -34,7 +34,7 @@ angular.module('ncsaas')
         feature: 'vms',
         key: 'vms',
         state: 'appstore.vms',
-        description: gettext('Create virtual machines (VMs) in Virtual Private Clouds or public clouds.')
+        description: gettext('Provision virtual machines (VMs) in available Providers.')
       },
       {
         label: gettext('Private clouds'),
@@ -42,16 +42,16 @@ angular.module('ncsaas')
         feature: 'private_clouds',
         key: 'private_clouds',
         state: 'appstore.private_clouds',
-        description: gettext('Purchase bulk resource by creating Virtual Private Clouds (VPC). Once created VMs and Storage could be created from that VPC.'),
+        description: gettext('Purchase bulk resource as Virtual Private Clouds (VPC).'),
         requireOwnerOrStaff: true
       },
       {
-        label: gettext('Storage'),
+        label: gettext('Block storage'),
         icon: 'fa-hdd-o',
         feature: 'storage',
         key: 'storages',
         state: 'appstore.storages',
-        description: gettext('Create persistent block storage volumes in Virtual Private Clouds.')
+        description: gettext('Provision persistent storage volumes in available Providers.')
       },
       {
         label: gettext('Applications'),
