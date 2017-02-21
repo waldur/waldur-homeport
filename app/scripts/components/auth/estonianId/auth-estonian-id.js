@@ -1,6 +1,6 @@
 import template from './auth-estonian-id.html';
 
-export const authEstonianId = {
+const authEstonianId = {
   template,
   controller: class AuthEstonianIdController {
     constructor($sce, ENV) {
@@ -9,3 +9,5 @@ export const authEstonianId = {
     }
   }
 };
+
+export default authEstonianId;
