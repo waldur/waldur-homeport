@@ -1,10 +1,10 @@
 <div class="modal-header">
-  <h3 class="modal-title">Event details</h3>
+  <h3 class="modal-title" translate>Event details</h3>
 </div>
 <div class="modal-body">
   <div class="details-table__row">
     <div class="details-table__key">
-      Timestamp
+      <span translate>Timestamp</span>
     </div>
     <div class="details-table__value">
       {{ ::$ctrl.event['@timestamp'] | dateTime }}
@@ -12,7 +12,7 @@
   </div>
   <div class="details-table__row" ng-if="::$ctrl.event.user_uuid">
     <div class="details-table__key">
-      User
+      <span translate>User</span>
     </div>
     <div class="details-table__value">
       <a ui-sref="users.details({uuid: $ctrl.event.user_uuid })">
@@ -22,7 +22,7 @@
   </div>
   <div class="details-table__row" ng-if="::$ctrl.event.ip_address">
     <div class="details-table__key">
-      IP address
+      <span translate>IP address</span>
     </div>
     <div class="details-table__value">
       {{ ::$ctrl.event.ip_address }}
@@ -30,7 +30,7 @@
   </div>
   <div class="details-table__row">
     <div class="details-table__key">
-      Importance
+      <span translate>Importance</span>
     </div>
     <div class="details-table__value">
       {{ ::$ctrl.event.importance | titleCase }}
@@ -38,7 +38,7 @@
   </div>
   <div class="details-table__row">
     <div class="details-table__key">
-      Event type
+      <span translate>Event type</span>
     </div>
     <div class="details-table__value">
       {{ ::$ctrl.event.event_type }}
@@ -46,7 +46,7 @@
   </div>
   <div class="details-table__row" ng-if="::$ctrl.event.error_message">
     <div class="details-table__key">
-      Error message
+      <span translate>Error message</span>
     </div>
     <div class="details-table__value">
       {{ ::$ctrl.event.error_message }}
@@ -54,7 +54,7 @@
   </div>
   <div class="details-table__row" ng-if="::$ctrl.event.customer_uuid">
     <div class="details-table__key">
-      Organization
+      <span translate>Organization</span>
     </div>
     <div class="details-table__value">
       <a ui-sref="organization.details({uuid: $ctrl.event.customer_uuid })">
@@ -64,7 +64,7 @@
   </div>
   <div class="details-table__row" ng-if="::$ctrl.event.project_uuid">
     <div class="details-table__key">
-      Project
+      <span translate>Project</span>
     </div>
     <div class="details-table__value">
       <a ui-sref="project.details({uuid: $ctrl.event.project_uuid })">
@@ -74,7 +74,7 @@
   </div>
   <div class="details-table__row" ng-if="::$ctrl.event.service_uuid">
     <div class="details-table__key">
-      Service
+      <span translate>Service</span>
     </div>
     <div class="details-table__value">
       <a ui-sref="organization.providers({
@@ -88,7 +88,7 @@
   </div>
   <div class="details-table__row" ng-if="::$ctrl.event.resource_uuid">
     <div class="details-table__key">
-      Resource
+      <span translate>Resource</span>
     </div>
     <div class="details-table__value">
       <a ui-sref="resources.details({
@@ -101,7 +101,7 @@
   </div>
   <div class="details-table__row" ng-if="::$ctrl.event.message">
     <div class="details-table__key">
-      Message
+      <span translate>Message</span>
     </div>
     <div class="details-table__value">
       {{ ::$ctrl.event.message }}
@@ -110,6 +110,6 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="$ctrl.dismiss()">
-      Cancel
+      <span translate>Cancel</span>
   </button>
 </div>

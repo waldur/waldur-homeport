@@ -103,6 +103,7 @@ msgid "Caller"
 msgstr ""
 
 #: app/scripts/components/appstore/category-selector.html:33
+#: app/scripts/components/events/event-details-dialog.html:113
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:125
 #: app/scripts/components/offering/appstore-offering.html:19
@@ -190,12 +191,21 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
+#: app/scripts/components/events/event-details-dialog.html:49
 #: app/scripts/components/resource/summary/resource-summary-base.html:12
 msgid "Error message"
 msgstr ""
 
+#: app/scripts/components/events/event-details-dialog.html:2
+msgid "Event details"
+msgstr ""
+
 #: app/scripts/components/offering/offering-summary.html:71
 msgid "Event log"
+msgstr ""
+
+#: app/scripts/components/events/event-details-dialog.html:41
+msgid "Event type"
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.html:47
@@ -267,6 +277,10 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
+#: app/scripts/components/events/event-details-dialog.html:33
+msgid "Importance"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup/openstack-backup-summary.html:5
 msgid "Instance"
 msgstr ""
@@ -307,6 +321,10 @@ msgstr ""
 
 #: app/scripts/components/billing/invoice-details.html:9
 msgid "Invoices list"
+msgstr ""
+
+#: app/scripts/components/events/event-details-dialog.html:25
+msgid "IP address"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:11
@@ -392,6 +410,10 @@ msgstr ""
 msgid "Max vCPU"
 msgstr ""
 
+#: app/scripts/components/events/event-details-dialog.html:104
+msgid "Message"
+msgstr ""
+
 #: app/scripts/components/offering/offering-summary.html:11
 msgid "Name"
 msgstr ""
@@ -447,6 +469,7 @@ msgstr ""
 msgid "organization"
 msgstr ""
 
+#: app/scripts/components/events/event-details-dialog.html:57
 #: app/scripts/components/issues/issue-create-dialog.html:12
 #: app/scripts/components/issues/issue-create-dialog.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:7
@@ -563,6 +586,7 @@ msgstr ""
 msgid "Private clouds"
 msgstr ""
 
+#: app/scripts/components/events/event-details-dialog.html:67
 #: app/scripts/components/issues/issue-create-dialog.html:17
 #: app/scripts/components/issues/issue-create-dialog.html:27
 #: app/scripts/components/issues/issue-detail.html:40
@@ -680,6 +704,7 @@ msgstr ""
 msgid "Resolution"
 msgstr ""
 
+#: app/scripts/components/events/event-details-dialog.html:91
 #: app/scripts/components/issues/issue-create-dialog.html:32
 msgid "Resource"
 msgstr ""
@@ -737,6 +762,10 @@ msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:3
 msgid "Select workspace"
+msgstr ""
+
+#: app/scripts/components/events/event-details-dialog.html:77
+msgid "Service"
 msgstr ""
 
 #: app/scripts/components/appstore/category-selector.html:2
@@ -864,6 +893,10 @@ msgstr ""
 msgid "Time in progress"
 msgstr ""
 
+#: app/scripts/components/events/event-details-dialog.html:7
+msgid "Timestamp"
+msgstr ""
+
 #: app/scripts/components/billing/invoice-details.html:42
 msgid "To"
 msgstr ""
@@ -924,6 +957,7 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
+#: app/scripts/components/events/event-details-dialog.html:15
 #: app/scripts/components/team/add-project-member.html:10
 #: app/scripts/components/team/add-project-member.html:20
 #: app/scripts/components/team/add-team-member.html:11
