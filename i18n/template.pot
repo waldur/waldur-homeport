@@ -77,8 +77,12 @@ msgstr ""
 msgid "Attached to"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login-failed.html:10
+#: app/scripts/components/auth/estonianId/auth-login-failed.html:10
 msgid "Back to login"
+msgstr ""
+
+#: app/scripts/components/resource/summary/resource-summary-base.html:58
+msgid "Backend ID"
 msgstr ""
 
 #: app/scripts/components/plans/plan-agreement-approve.html:3
@@ -142,6 +146,7 @@ msgid "Create an account"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:80
+#: app/scripts/components/resource/summary/resource-summary-base.html:39
 msgid "Created"
 msgstr ""
 
@@ -156,6 +161,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html:89
 #: app/scripts/components/issues/issues-short-list.html:28
 #: app/scripts/components/offering/offering-summary.html:62
+#: app/scripts/components/resource/summary/resource-summary-base.html:30
 #: app/scripts/components/user/user-edit.html:108
 msgid "Description"
 msgstr ""
@@ -182,6 +188,10 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:71
 msgid "End time"
+msgstr ""
+
+#: app/scripts/components/resource/summary/resource-summary-base.html:12
+msgid "Error message"
 msgstr ""
 
 #: app/scripts/components/offering/offering-summary.html:71
@@ -349,7 +359,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login-complete.html:3
+#: app/scripts/components/auth/estonianId/auth-login-complete.html:3
 msgid "Logging user in"
 msgstr ""
 
@@ -358,7 +368,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login-failed.html:3
+#: app/scripts/components/auth/estonianId/auth-login-failed.html:3
 msgid "Login failed"
 msgstr ""
 
@@ -454,7 +464,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:190
+#: app/scripts/configs/base-config.js:191
 msgid "Organization owner"
 msgstr ""
 
@@ -566,7 +576,7 @@ msgstr ""
 msgid "Project dashboard"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:191
+#: app/scripts/configs/base-config.js:192
 msgid "Project manager"
 msgstr ""
 
@@ -581,6 +591,10 @@ msgstr ""
 
 #: app/scripts/components/team/add-team-member.html:40
 msgid "Projects list"
+msgstr ""
+
+#: app/scripts/components/resource/summary/resource-summary-base.html:21
+msgid "Provider"
 msgstr ""
 
 #: app/scripts/configs/base-config.js:54
@@ -741,11 +755,11 @@ msgstr ""
 msgid "Sign in with Google"
 msgstr ""
 
-#: app/scripts/components/auth/auth-estonian-id.html:6
+#: app/scripts/components/auth/estonianId/auth-estonian-id.html:6
 msgid "Sign in with ID card"
 msgstr ""
 
-#: app/scripts/components/auth/auth-estonian-id.html:15
+#: app/scripts/components/auth/estonianId/auth-estonian-id.html:15
 msgid "Sign in with Mobile ID"
 msgstr ""
 
@@ -767,6 +781,7 @@ msgid "Start time"
 msgstr ""
 
 #: app/scripts/components/offering/offering-summary.html:18
+#: app/scripts/components/resource/summary/resource-summary-base.html:3
 msgid "State"
 msgstr ""
 
@@ -799,7 +814,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:192
+#: app/scripts/configs/base-config.js:193
 msgid "System administrator"
 msgstr ""
 
@@ -926,6 +941,10 @@ msgstr ""
 #: app/scripts/components/customer/customer-team.html:4
 #: app/scripts/components/project/project-team.html:4
 msgid "Users"
+msgstr ""
+
+#: app/scripts/components/resource/summary/resource-summary-base.html:49
+msgid "UUID"
 msgstr ""
 
 #: app/scripts/components/billing/billing-issuer-details.html:8
