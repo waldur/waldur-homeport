@@ -164,11 +164,9 @@ function flavorWatcher(model, options, newFlavor) {
   }
 }
 
-function flavorFormatter($filter, value) {
-  const ram = $filter('filesize')(value.ram);
-  const storage = $filter('filesize')(value.disk);
-  const props = `${value.cores} vCPU, ${ram} RAM, ${storage} storage`;
-  return `${value.name} (${props})`;
+function flavorFormatter($filter, flavor) {
+  const props = $filter('formatFlavor')(flavor);
+  return `${flavor.name} (${props})`;
 }
 
 function flavorComparator(a, b) {

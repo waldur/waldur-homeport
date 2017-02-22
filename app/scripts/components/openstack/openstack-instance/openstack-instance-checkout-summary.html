@@ -5,13 +5,13 @@
         </h5>
     </div>
     <div class="ibox-content">
-        <p ng-if="!$ctrl.model.flavor">
+        <p ng-if="!$ctrl.isValid()">
             <span translate>No items yet.</span>
         </p>
         <p ng-if="$ctrl.components">
             Note that this virtual machine is charged as part of <strong>{{ $ctrl.model.service.name }}</strong> package.
         </p>
-        <table class="table table-bordered" ng-if="$ctrl.model.flavor">
+        <table class="table table-bordered" ng-if="$ctrl.isValid()">
           <tbody>
             <tr ng-if="$ctrl.model.name">
                 <td><strong translate>VM name</strong></td>

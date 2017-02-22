@@ -410,8 +410,16 @@ msgstr ""
 msgid "Max vCPU"
 msgstr ""
 
+#: app/scripts/components/form/appstore-field-integer.html:22
+msgid "Maximal valid value is"
+msgstr ""
+
 #: app/scripts/components/events/event-details-dialog.html:104
 msgid "Message"
+msgstr ""
+
+#: app/scripts/components/form/appstore-field-integer.html:18
+msgid "Minimal valid value is"
 msgstr ""
 
 #: app/scripts/components/offering/offering-summary.html:11
