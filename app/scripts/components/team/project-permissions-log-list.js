@@ -49,7 +49,7 @@ function projectPermissionsLogListController(
     },
     getFilter: function() {
       return {
-        project_uuid: this.currentProjectUuid
+        project: this.currentProjectUuid
       };
     },
   });

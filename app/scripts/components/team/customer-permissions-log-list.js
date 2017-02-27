@@ -49,7 +49,7 @@ function customerPermissionsLogListController(
     },
     getFilter: function() {
       return {
-        customer_uuid: this.currentCustomerUuid
+        customer: this.currentCustomerUuid
       };
     },
   });
