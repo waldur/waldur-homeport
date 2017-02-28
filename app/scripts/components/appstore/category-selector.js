@@ -78,7 +78,7 @@ const appstoreCategorySelector = {
           items: customOfferingCategories[key],
         }));
         this.groups = groups.concat(customGroups);
-    });
+      });
     }
 
     loadCustomOfferings() {
@@ -86,9 +86,9 @@ const appstoreCategorySelector = {
         .then(offerings => Object.keys(offerings).map(key => ({
           key,
           label: offerings[key].label,
-          icon: offerings[key].icon,
+          icon: offerings[key].icon || 'fa-gear',
           description: offerings[key].description,
-          category: offerings[key].category,
+          category: offerings[key].category || 'Custom request',
           state: 'appstore.offering',
         })
       ));
