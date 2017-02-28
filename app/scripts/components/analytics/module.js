@@ -12,7 +12,7 @@ export default module => {
   module.directive('costAnalysis', costAnalysis);
   module.directive('pieChart', pieChart);
   module.component('resourceAnalysis', resourceAnalysis);
-  module.directive('resourceBarChart', resourceBarChart);
+  module.component('resourceBarChart', resourceBarChart);
   module.directive('resourcePieChart', resourcePieChart);
   module.service('ResourceChartService', ResourceChartService);
   module.config(analyticsRoutes);

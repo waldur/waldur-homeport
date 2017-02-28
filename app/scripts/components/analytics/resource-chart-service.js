@@ -50,26 +50,45 @@ export default class ResourceChartService {
     this.features = features;
   }
 
+  getPieChart(customer) {
+    const categories = this.getCategories();
+    return this.parseQuotas(categories, customer.quotas);
+  }
+
+  getBarChart(projects, total) {
+    const categories = this.getCategories();
+    return projects
+      .map(project => this.parseProject(categories, total, project))
+      .filter(project => project.total > 0);
+  }
+
+  parseProject(categories, total, project) {
+    const usage = this.parseQuotas(categories, project.quotas)
+      .map(category => angular.extend({}, category, {
+        relative: Math.round(category.value * 100.0 / total)
+      }));
+    return {
+      name: project.name,
+      categories: usage,
+      total: this.getTotal(usage)
+    };
+  }
+
+  parseQuotas(categories, quotas) {
+    const usage = parseUsage(quotas);
+    return categories.map(category => ({
+      label: category.label,
+      color: category.color,
+      value: usage[category.quota],
+    })).filter(category => category.value > 0);
+  }
+
   getCategories() {
     return resourceCategories
       .filter(category => this.features.isVisible(category.feature));
   }
 
-  getPieChart(customer) {
-    const quotas = parseUsage(customer.quotas);
-    return this.getCategories().map(category => ({
-      label: category.label,
-      color: category.color,
-      value: quotas[category.quota],
-    }));
-  }
-
-  getBarChart(projects) {
-    const projectQuotas = projects.map(project => parseUsage(project.quotas));
-    return this.getCategories().map(category => ({
-      label: category.label,
-      backgroundColor: category.color,
-      data: projectQuotas.map(quotas => quotas[category.quota])
-    }));
+  getTotal(categories) {
+    return categories.reduce((sum, category) => sum + category.value, 0);
   }
 }

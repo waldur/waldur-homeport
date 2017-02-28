@@ -6,13 +6,12 @@ export default function resourcePieChart() {
   return {
     restrict: 'E',
     scope: {
-      items: '='
+      items: '=',
+      total: '=',
     },
     template: template,
     link: function(scope, element) {
       // @ngInject
-      scope.$watch('items', () => scope.total = scope.items.reduce(
-        (accum, item) => accum + item.value, 0));
       const ctx = element[0].querySelector('canvas');
       new Chart(ctx, {
         type: 'pie',

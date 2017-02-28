@@ -2,10 +2,15 @@
   <loading-spinner/>
 </div>
 <div class="row m-t-md" ng-if="!$ctrl.loading">
-  <div class="col-sm-6">
-    <resource-pie-chart items="$ctrl.pieChart"/>
+  <div ng-if="$ctrl.total === 0">
+    <h3 translate class="text-center">Not enough data for resource analysis.</h3>
   </div>
-  <div class="col-sm-6">
-    <resource-bar-chart items="$ctrl.barChart" labels="$ctrl.projects"/>
+  <div ng-if="$ctrl.total > 0">
+    <div class="col-sm-6">
+      <resource-pie-chart items="$ctrl.pieChart" total="$ctrl.total"/>
+    </div>
+    <div class="col-sm-6">
+      <resource-bar-chart items="$ctrl.barChart"/>
+    </div>
   </div>
 </div>

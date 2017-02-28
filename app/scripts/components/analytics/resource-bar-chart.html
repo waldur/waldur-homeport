@@ -3,9 +3,22 @@
     <h5 translate>Resources by projects</h5>
   </div>
   <div class="ibox-content">
-    <div class="row">
-      <div class="col-md-6">
-        <canvas></canvas>
+    <div ng-repeat="project in $ctrl.projects">
+      <p>
+        <strong>{{ project.name }}</strong>
+        ({{ project.total }} <span>resources</span>)
+      </p>
+      <div class="progress">
+        <div
+          class="progress-bar"
+          ng-repeat="category in project.categories"
+          uib-tooltip="{{ category.label }}"
+          ng-bind="category.value"
+          ng-style="{
+            'background-color': category.color,
+            'width': (category.relative - 0.5) + '%'
+          }">
+        </div>
       </div>
     </div>
   </div>
