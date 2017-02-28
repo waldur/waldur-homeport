@@ -49,7 +49,7 @@ const appstoreCategorySelector = {
 
     loadOfferings() {
       this.loadCustomOfferings().then(customOfferings => {
-        let offerings = [customOfferings, ...this.ENV.offerings];
+        let offerings = customOfferings.concat(this.ENV.offerings);
 
         offerings = offerings.filter(item =>
           !item.requireOwnerOrStaff || this.currentStateService.getOwnerOrStaff());
@@ -64,13 +64,21 @@ const appstoreCategorySelector = {
           items: category.items.map(item => offerings[item]).filter(x => !!x)
         }));
 
-        const customOfferingsCategory = {
-          label: 'Turnkey solutions',
-          items: customOfferings
-        };
+        let customOfferingCategories = customOfferings.reduce((map, offering) => {
+          if (map[offering.category] !== undefined) {
+            map[offering.category].push(offering);
+          } else {
+            map[offering.category] = [offering];
+          }
+          return map;
+        }, {});
 
-        this.groups = [...groups, customOfferingsCategory];
-      });
+        let customGroups = Object.keys(customOfferingCategories).map(key => ({
+          label: key,
+          items: customOfferingCategories[key],
+        }));
+        this.groups = groups.concat(customGroups);
+    });
     }
 
     loadCustomOfferings() {
@@ -78,7 +86,9 @@ const appstoreCategorySelector = {
         .then(offerings => Object.keys(offerings).map(key => ({
           key,
           label: offerings[key].label,
-          icon: 'fa-gear',
+          icon: offerings[key].icon,
+          description: offerings[key].description,
+          category: offerings[key].category,
           state: 'appstore.offering',
         })
       ));
