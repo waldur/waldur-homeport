@@ -1,0 +1,11 @@
+<div ng-if="$ctrl.loading">
+  <loading-spinner/>
+</div>
+<div class="row m-t-md" ng-if="!$ctrl.loading">
+  <div class="col-sm-6">
+    <resource-pie-chart items="$ctrl.pieChart"/>
+  </div>
+  <div class="col-sm-6">
+    <resource-bar-chart items="$ctrl.barChart" labels="$ctrl.projects"/>
+  </div>
+</div>

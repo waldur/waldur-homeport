@@ -1,0 +1,75 @@
+import { listToDict } from '../core/utils';
+
+var gettext = angular.identity;
+
+const chartColors = {
+  red: 'rgb(255, 99, 132)',
+  orange: 'rgb(255, 159, 64)',
+  yellow: 'rgb(255, 205, 86)',
+  green: 'rgb(75, 192, 192)',
+  blue: 'rgb(54, 162, 235)',
+  purple: 'rgb(153, 102, 255)',
+  grey: 'rgb(231,233,237)'
+};
+
+const resourceCategories = [
+  {
+    label: gettext('Virtual machines'),
+    quota: 'nc_vm_count',
+    color: chartColors.red,
+    feature: 'vms',
+  },
+  {
+    label: gettext('Private clouds'),
+    quota: 'nc_app_count',
+    color: chartColors.yellow,
+    feature: 'private_clouds',
+  },
+  {
+    label: gettext('Applications'),
+    quota: 'nc_private_cloud_count',
+    color: chartColors.purple,
+    feature: 'apps',
+  },
+  {
+    label: gettext('Storage'),
+    quota: 'nc_storage_count',
+    color: chartColors.blue,
+    feature: 'storage',
+  },
+];
+
+const parseUsage = listToDict(
+  item => item.name,
+  item => item.usage
+);
+
+// @ngInject
+export default class ResourceChartService {
+  constructor(features) {
+    this.features = features;
+  }
+
+  getCategories() {
+    return resourceCategories
+      .filter(category => this.features.isVisible(category.feature));
+  }
+
+  getPieChart(customer) {
+    const quotas = parseUsage(customer.quotas);
+    return this.getCategories().map(category => ({
+      label: category.label,
+      color: category.color,
+      value: quotas[category.quota],
+    }));
+  }
+
+  getBarChart(projects) {
+    const projectQuotas = projects.map(project => parseUsage(project.quotas));
+    return this.getCategories().map(category => ({
+      label: category.label,
+      backgroundColor: category.color,
+      data: projectQuotas.map(quotas => quotas[category.quota])
+    }));
+  }
+}
