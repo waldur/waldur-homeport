@@ -1,6 +1,8 @@
 import template from './category-selector.html';
 import './category-selector.scss';
 
+var gettext = angular.identity;
+
 const appstoreCategorySelector = {
   template,
   bindings: {
@@ -88,7 +90,7 @@ const appstoreCategorySelector = {
           label: offerings[key].label,
           icon: offerings[key].icon || 'fa-gear',
           description: offerings[key].description,
-          category: offerings[key].category || 'Custom request',
+          category: offerings[key].category || gettext('Custom request'),
           state: 'appstore.offering',
         })
       ));
