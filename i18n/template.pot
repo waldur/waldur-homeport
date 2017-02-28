@@ -155,6 +155,10 @@ msgstr ""
 msgid "Current VPC package"
 msgstr ""
 
+#: app/scripts/components/appstore/category-selector.js:93
+msgid "Custom request"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
 msgstr ""
