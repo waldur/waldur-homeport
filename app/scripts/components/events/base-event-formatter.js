@@ -113,7 +113,7 @@ export default function BaseEventFormatter($state) {
       for (let name in entities) {
         for (var i = 0; i < fields.length; i++) {
           var field = fields[i];
-          if (field.lastIndexOf(name) === 0 && !table[field]) {
+          if ((field.lastIndexOf(name) === 0) && !table[field]) {
             table[field] = name;
           }
         }
