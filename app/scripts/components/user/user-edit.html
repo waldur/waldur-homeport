@@ -111,7 +111,8 @@
         <div class="form-group" ng-if="$ctrl.user.token">
             <label for="token_lifetime" class="col-sm-3 col-md-4 col-lg-3 control-label">
                 <span translate>API token lifetime</span>
-                <i class="fa fa-question-circle m-l-xs" uib-tooltip="{{:: $ctrl.tokenLifeTimeHelperMessage | translate}}">
+                <i class="fa fa-question-circle m-l-xs"
+                   uib-tooltip="{{ 'Lifetime will be updated and reset upon saving the form' | translate }}">
                 </i>
             </label>
             <div class="col-sm-9 col-md-8">

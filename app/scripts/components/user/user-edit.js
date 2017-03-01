@@ -27,8 +27,6 @@ export const userEdit = {
         { name: '12 h', value: 43200 },
         { name: 'token will not timeout', value: null }
       ];
-
-      this.tokenLifeTimeHelperMessage = 'Lifetime will be updated and reset upon saving the form';
     }
 
     $onInit() {
