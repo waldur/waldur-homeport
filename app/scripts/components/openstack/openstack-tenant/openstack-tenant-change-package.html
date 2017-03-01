@@ -11,9 +11,9 @@
           {{ $ctrl.tenant.name }}
         </p>
 
-        <p ng-if="$ctrl.templateDisplay">
+        <p ng-if="$ctrl.template">
           <strong><span translate>Current VPC package</span>:</strong>
-          {{ ::$ctrl.templateDisplay }}
+          {{ ::$ctrl.template | formatPackage }}
         </p>
         <p class="text-danger"
            ng-repeat="error in $ctrl.errors.package"

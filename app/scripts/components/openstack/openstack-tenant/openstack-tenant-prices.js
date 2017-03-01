@@ -1,4 +1,4 @@
-import { parsePrices } from '../utils';
+import { parsePrices, templateParser } from '../utils';
 import template from './openstack-tenant-prices.html';
 
 export const openstackFlavorColumns = [
@@ -82,6 +82,7 @@ const openstackTenantPrices = {
         this.loadTemplate(), this.loadFlavors()
       ])
       .then(([template, flavors]) => {
+        this.template = templateParser(template);
         this.prices = parsePrices(template.components);
         this.flavors = parseFlavors(this.prices, flavors);
       })
