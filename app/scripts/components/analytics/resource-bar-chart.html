@@ -1,25 +1,20 @@
-<div class="ibox">
-  <div class="ibox-title">
-    <h5 translate>Resources by projects</h5>
-  </div>
-  <div class="ibox-content">
-    <div ng-repeat="project in $ctrl.projects">
-      <p>
-        <strong>{{ project.name }}</strong>
-        ({{ project.total }} <span>resources</span>)
-      </p>
-      <div class="progress">
-        <div
-          class="progress-bar"
-          ng-repeat="category in project.categories"
-          uib-tooltip="{{ category.label | translate }}"
-          ng-bind="category.value"
-          ng-style="{
-            'background-color': category.color,
-            'width': (category.relative - 0.5) + '%'
-          }">
-        </div>
-      </div>
+<div ng-repeat="project in $ctrl.projects">
+  <p>
+    <a ui-sref="project.details({uuid: project.uuid})">
+      <strong>{{ project.name }}</strong>
+    </a>
+    ({{ project.total }} <span>resources</span>)
+  </p>
+  <div class="progress">
+    <div
+      class="progress-bar"
+      ng-repeat="category in project.categories"
+      uib-tooltip="{{ category.label | translate }}"
+      ng-bind="category.value"
+      ng-style="{
+        'background-color': category.color,
+        'width': (category.relative - 0.5) + '%'
+      }">
     </div>
   </div>
 </div>

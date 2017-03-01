@@ -1,35 +1,28 @@
-<div class="ibox">
-  <div class="ibox-title">
-    <h5 translate>Resources usage</h5>
+<div class="row">
+  <div class="col-md-6">
+    <canvas class="resource-pie-chart" width="250"></canvas>
   </div>
-  <div class="ibox-content">
-    <div class="row">
-      <div class="col-md-6">
-        <canvas class="resource-pie-chart" width="250"></canvas>
-      </div>
-      <div class="col-md-6">
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <tr ng-repeat="item in items">
-              <td>
-                <span class="resource-pie-chart-indicator"
-                  ng-style="{'background-color': item.color}"></span>
-                {{ item.label | translate }}
-              </td>
-              <td>
-                {{ item.value }}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span class="resource-pie-chart-indicator"></span>
-                <span translate>Total</span>
-              </td>
-              <td>{{ total }}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
+  <div class="col-md-6">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tr ng-repeat="item in items">
+          <td>
+            <span class="resource-pie-chart-indicator"
+              ng-style="{'background-color': item.color}"></span>
+            {{ item.label | translate }}
+          </td>
+          <td>
+            {{ item.value }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="resource-pie-chart-indicator"></span>
+            <span translate>Total</span>
+          </td>
+          <td>{{ total }}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>

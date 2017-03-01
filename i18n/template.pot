@@ -63,6 +63,10 @@ msgstr ""
 msgid "Already have an account?"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:113
+msgid "API token lifetime"
+msgstr ""
+
 #: app/scripts/components/analytics/resource-chart-service.js:29
 #: app/scripts/configs/base-config.js:105
 #: app/scripts/configs/base-config.js:124
@@ -89,6 +93,10 @@ msgstr ""
 #: app/scripts/components/plans/plan-agreement-approve.html:3
 #: app/scripts/components/plans/plan-agreement-cancel.html:3
 msgid "Billing plan agreement is being processed, please wait."
+msgstr ""
+
+#: app/scripts/components/analytics/resource-chart-service.js:35
+msgid "Block devices"
 msgstr ""
 
 #: app/scripts/configs/base-config.js:49
@@ -152,6 +160,10 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
+#: app/scripts/components/user/user-edit.html:104
+msgid "Current API token"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:15
 msgid "Current VPC package"
 msgstr ""
@@ -168,7 +180,7 @@ msgstr ""
 #: app/scripts/components/issues/issues-short-list.html:28
 #: app/scripts/components/offering/offering-summary.html:62
 #: app/scripts/components/resource/summary/resource-summary-base.html:30
-#: app/scripts/components/user/user-edit.html:108
+#: app/scripts/components/user/user-edit.html:85
 msgid "Description"
 msgstr ""
 
@@ -253,7 +265,7 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:129
+#: app/scripts/components/user/user-edit.html:133
 msgid "have been accepted on"
 msgstr ""
 
@@ -261,7 +273,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:141
+#: app/scripts/components/user/user-edit.html:145
 msgid "I accept the"
 msgstr ""
 
@@ -362,7 +374,7 @@ msgstr ""
 msgid "Item List"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:99
+#: app/scripts/components/user/user-edit.html:76
 msgid "Job position"
 msgstr ""
 
@@ -370,8 +382,12 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:155
+#: app/scripts/components/user/user-edit.html:159
 msgid "Let’s get started"
+msgstr ""
+
+#: app/scripts/components/user/user-edit.html:115
+msgid "Lifetime will be updated and reset upon saving the form"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:70
@@ -449,10 +465,6 @@ msgstr ""
 msgid "No items yet."
 msgstr ""
 
-#: app/scripts/components/analytics/resource-analysis-new.html:6
-msgid "Not enough data for resource analysis."
-msgstr ""
-
 #: app/scripts/components/quotas/quotas-table.html:10
 msgid "of"
 msgstr ""
@@ -500,7 +512,7 @@ msgstr ""
 msgid "Organization dashboard"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:90
+#: app/scripts/components/user/user-edit.html:67
 msgid "Organization name"
 msgstr ""
 
@@ -538,7 +550,7 @@ msgstr ""
 msgid "Permissions log"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:117
+#: app/scripts/components/user/user-edit.html:94
 msgid "Phone number"
 msgstr ""
 
@@ -696,7 +708,7 @@ msgstr ""
 msgid "Remote network"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:171
+#: app/scripts/components/user/user-edit.html:175
 msgid "Remove profile"
 msgstr ""
 
@@ -727,12 +739,12 @@ msgstr ""
 msgid "Resource"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-bar-chart.html:3
-msgid "Resources by projects"
+#: app/scripts/components/analytics/resource-analysis-new.html:13
+msgid "Resource count in"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-pie-chart.html:3
-msgid "Resources usage"
+#: app/scripts/components/analytics/resource-analysis-new.html:34
+msgid "Resources by projects"
 msgstr ""
 
 #: app/scripts/components/team/add-project-member.html:27
@@ -844,7 +856,6 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-chart-service.js:35
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:25
 msgid "Storage"
 msgstr ""
@@ -891,8 +902,8 @@ msgid "Tenant name"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:8
-#: app/scripts/components/user/user-edit.html:127
-#: app/scripts/components/user/user-edit.html:143
+#: app/scripts/components/user/user-edit.html:131
+#: app/scripts/components/user/user-edit.html:147
 msgid "Terms of Service"
 msgstr ""
 
@@ -910,6 +921,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:20
 msgid "There are no requests yet."
+msgstr ""
+
+#: app/scripts/components/analytics/resource-analysis-new.html:6
+msgid "There are no resources in the organization."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:23
@@ -940,15 +955,7 @@ msgstr ""
 msgid "To update current plan visit"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:67
-msgid "Token"
-msgstr ""
-
-#: app/scripts/components/user/user-edit.html:76
-msgid "Token lifetime"
-msgstr ""
-
-#: app/scripts/components/analytics/resource-pie-chart.html:26
+#: app/scripts/components/analytics/resource-pie-chart.html:21
 msgid "Total"
 msgstr ""
 
@@ -976,7 +983,7 @@ msgstr ""
 msgid "Unit Price"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:165
+#: app/scripts/components/user/user-edit.html:169
 msgid "Update profile"
 msgstr ""
 

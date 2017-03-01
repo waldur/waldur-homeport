@@ -32,7 +32,7 @@ const resourceCategories = [
     feature: 'apps',
   },
   {
-    label: gettext('Storage'),
+    label: gettext('Block devices'),
     quota: 'nc_storage_count',
     color: chartColors.blue,
     feature: 'storage',
@@ -69,6 +69,7 @@ export default class ResourceChartService {
       }));
     return {
       name: project.name,
+      uuid: project.uuid,
       categories: usage,
       total: this.getTotal(usage)
     };

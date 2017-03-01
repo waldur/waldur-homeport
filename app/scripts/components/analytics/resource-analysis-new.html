@@ -3,14 +3,40 @@
 </div>
 <div class="row m-t-md" ng-if="!$ctrl.loading">
   <div ng-if="$ctrl.total === 0">
-    <h3 translate class="text-center">Not enough data for resource analysis.</h3>
+    <h2 translate class="text-center m-t-xl">There are no resources in the organization.</h2>
   </div>
   <div ng-if="$ctrl.total > 0">
     <div class="col-sm-6">
-      <resource-pie-chart items="$ctrl.pieChart" total="$ctrl.total"/>
+      <div class="ibox">
+        <div class="ibox-title">
+          <h5>
+            <span translate>Resource count in</span>
+            <span
+              ng-if="::$ctrl.customer.abbreviation"
+              ng-bind="::$ctrl.customer.abbreviation"
+              uib-tooltip="{{ ::$ctrl.customer.name }}">
+            </span>
+            <span
+              ng-if="::!$ctrl.customer.abbreviation"
+              ng-bind="::$ctrl.customer.name"
+              >
+            </span>
+          </h5>
+        </div>
+        <div class="ibox-content">
+          <resource-pie-chart items="$ctrl.pieChart" total="$ctrl.total"/>
+        </div>
+      </div>
     </div>
     <div class="col-sm-6">
-      <resource-bar-chart items="$ctrl.barChart"/>
+      <div class="ibox">
+        <div class="ibox-title">
+          <h5 translate>Resources by projects</h5>
+        </div>
+        <div class="ibox-content">
+          <resource-bar-chart items="$ctrl.barChart"/>
+        </div>
+      </div>
     </div>
   </div>
 </div>

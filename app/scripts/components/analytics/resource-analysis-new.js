@@ -13,6 +13,7 @@ const resourceAnalysis = {
     $onInit() {
       this.loading = true;
       this.currentStateService.getCustomer().then(customer => {
+        this.customer = customer;
         this.pieChart = this.ResourceChartService.getPieChart(customer);
         this.total = this.ResourceChartService.getTotal(this.pieChart);
         return this.projectsService.getAll({
