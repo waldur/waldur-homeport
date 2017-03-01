@@ -4,25 +4,31 @@
 
 <div class="text-danger" ng-bind="$ctrl.error"/>
 
-<div class="table-responsive">
-  <table class="table table-bordered">
-    <tr>
-      <th translate>Price for 1 vCPU per day</th>
-      <td>{{ $ctrl.prices.cores | defaultCurrency }}</td>
-    </tr>
-    <tr>
-      <th translate>Price for 1 GB of storage per day</th>
-      <td>{{ $ctrl.prices.disk | defaultCurrency }}</td>
-    </tr>
-    <tr>
-      <th translate>Price for 1 GB of RAM per day</th>
-      <td>{{ $ctrl.prices.ram | defaultCurrency }}</td>
-    </tr>
-  </table>
-</div>
+<div ng-if="!$ctrl.loading">
+  <p>
+    <strong><span translate>Current VPC package</span>:</strong>
+    {{ ::$ctrl.template | formatPackage }}
+  </p>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tr>
+        <th translate>Price for 1 vCPU per day</th>
+        <td>{{ $ctrl.prices.cores | defaultCurrency }}</td>
+      </tr>
+      <tr>
+        <th translate>Price for 1 GB of storage per day</th>
+        <td>{{ $ctrl.prices.disk * 1024 | defaultCurrency }}</td>
+      </tr>
+      <tr>
+        <th translate>Price for 1 GB of RAM per day</th>
+        <td>{{ $ctrl.prices.ram * 1024 | defaultCurrency }}</td>
+      </tr>
+    </table>
+  </div>
 
-<choices-table
-  ng-if="$ctrl.flavors"
-  choices="$ctrl.flavors"
-  columns="$ctrl.columns"
-  enable-select="false"/>
+  <choices-table
+    ng-if="$ctrl.flavors"
+    choices="$ctrl.flavors"
+    columns="$ctrl.columns"
+    enable-select="false"/>
+</div>
