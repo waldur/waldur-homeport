@@ -40,6 +40,13 @@ module.exports = {
         plugins: [
             extractPlugin
         ],
+        stats: {
+            children: false,
+            hash: false,
+            version: false,
+            warnings: false,
+            errorDetails: true,
+        },
     },
     dev: {
         watch: true,
