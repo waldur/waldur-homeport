@@ -20,6 +20,7 @@ export const userEdit = {
       });
 
       this.userTokenLifetimeOptions = [
+        { name: '10 min', value: 600 },
         { name: '30 min', value: 1800 },
         { name: '1 h', value: 3600 },
         { name: '2 h', value: 7200 },
