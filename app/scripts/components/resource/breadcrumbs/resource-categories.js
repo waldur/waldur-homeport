@@ -1,18 +1,18 @@
 export const CATEGORY_ITEMS = {
   apps: {
-    label: 'Applications',
+    label: gettext('Applications'),
     state: 'project.resources.apps',
   },
   private_clouds: {
-    label: 'Private clouds',
+    label: gettext('Private clouds'),
     state: 'project.resources.clouds',
   },
   storages: {
-    label: 'Storage',
+    label: gettext('Storage'),
     state: 'project.resources.storage.tabs',
   },
   vms: {
-    label: 'Virtual machines',
+    label: gettext('Virtual machines'),
     state: 'project.resources.vms',
   }
 };

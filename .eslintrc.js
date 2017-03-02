@@ -48,6 +48,7 @@ module.exports = {
     ],
   },
   'globals': {
+    gettext: true,
     angular: true,
     d3: true,
     $: true,

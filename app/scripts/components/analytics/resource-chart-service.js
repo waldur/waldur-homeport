@@ -1,7 +1,5 @@
 import { listToDict } from '../core/utils';
 
-var gettext = angular.identity;
-
 const chartColors = {
   red: 'rgb(255, 99, 132)',
   orange: 'rgb(255, 159, 64)',

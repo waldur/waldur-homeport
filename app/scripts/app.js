@@ -1,3 +1,5 @@
+window.gettext = angular.identity;
+
 (function() {
   'use strict';
 

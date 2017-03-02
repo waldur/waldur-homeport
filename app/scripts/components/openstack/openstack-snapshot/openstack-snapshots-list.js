@@ -27,10 +27,10 @@ function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $st
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = 'You have no snapshots yet.';
-      options.noMatchesText = 'No snapshots found matching filter.';
+      options.noDataText = gettext('You have no snapshots yet.');
+      options.noMatchesText = gettext('No snapshots found matching filter.');
       options.columns.push({
-        title: 'Size',
+        title: gettext('Size'),
         className: 'all',
         render: function(row) {
           if (!row.size) {
@@ -40,10 +40,10 @@ function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $st
         }
       });
       options.columns.push({
-        title: 'Volume',
+        title: gettext('Volume'),
         render: function(row) {
           if (!row.source_volume) {
-            return 'Not known';
+            return gettext('Not known');
           }
           var uuid = ncUtils.getUUID(row.source_volume);
           var href = $state.href('resources.details', {
@@ -56,10 +56,10 @@ function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $st
       return options;
     },
     getImportTitle: function() {
-      return 'Import snapshots';
+      return gettext('Import snapshots');
     },
     getCreateTitle: function() {
-      return 'Add snapshots';
+      return gettext('Add snapshots');
     }
   });
   controllerScope.__proto__ = new ResourceController();

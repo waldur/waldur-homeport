@@ -27,8 +27,8 @@ function actionConfig(ActionConfigurationProvider) {
     ],
     options: {
       update: {
-        title: 'Edit',
-        successMessage: 'Backup schedule has been updated',
+        title: gettext('Edit'),
+        successMessage: gettext('Backup schedule has been updated'),
         fields: {
           schedule: {
             type: 'crontab'
@@ -36,7 +36,7 @@ function actionConfig(ActionConfigurationProvider) {
         }
       },
       pull: {
-        title: 'Synchronise'
+        title: gettext('Synchronise')
       },
     }
   });
@@ -60,7 +60,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       backups: {
-        heading: 'Backups',
+        heading: gettext('Backups'),
         component: 'openstackBackupsList'
       },
     })
