@@ -10,12 +10,4 @@
         });
         $translateProvider.useSanitizeValueStrategy('escaped');
     }]);
-
-  angular.module('ncsaas')
-    .value('LANGUAGE', {
-        CHOICES: [
-            {code: 'en', label: 'English'}
-        ],
-        DEFAULT: 'en'
-    });
 })();

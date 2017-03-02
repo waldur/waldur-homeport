@@ -51,8 +51,8 @@ function ProjectsListController(
       }).then(function() {
         vm.tableOptions = {
           searchFieldName: 'name',
-          noDataText: 'You have no projects yet.',
-          noMatchesText: 'No projects found matching filter.',
+          noDataText: gettext('You have no projects yet.'),
+          noMatchesText: gettext('No projects found matching filter.'),
           columns: vm.getColumns(),
           tableActions: vm.getTableActions()
         };
@@ -67,7 +67,7 @@ function ProjectsListController(
     getColumns: function() {
       return [
         {
-          title: 'Name',
+          title: gettext('Name'),
           render: function(row) {
             var href = $state.href('project.details', {uuid: row.uuid});
             return '<a href="{href}">{name}</a>'
@@ -76,37 +76,37 @@ function ProjectsListController(
           }
         },
         {
-          title: 'Description',
+          title: gettext('Description'),
           width: '200px',
           render: function(row) {
             return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.description}">${row.description}</span>`;
           }
         },
         {
-          title: 'Creation date',
+          title: gettext('Creation date'),
           render: function(row) {
             return $filter('dateTime')(row.created);
           }
         },
         {
-          title: 'VMs',
+          title: gettext('VMs'),
           render: row => row.vm_count || 0
         },
         {
-          title: 'Storage',
+          title: gettext('Storage'),
           render: row => row.storage_count || 0
         },
         {
-          title: 'Apps',
+          title: gettext('Apps'),
           feature: ResourceFeatures.APPLICATIONS,
           render: row => row.app_count || 0
         },
         {
-          title: 'Private clouds',
+          title: gettext('Private clouds'),
           render: row => row.private_cloud_count || 0
         },
         {
-          title: 'SLA',
+          title: gettext('SLA'),
           feature: 'premiumSupport',
           render: function(row) {
             if (row.plan) {

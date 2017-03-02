@@ -7,20 +7,21 @@ export default function languageSelector() {
     scope: {},
     controllerAs: '$ctrl',
     controller: class LogoutLinkController {
-      constructor($translate, LANGUAGE) {
+      constructor($translate, ENV) {
         // @ngInject
         this.$translate = $translate;
-        this.languageChoices = LANGUAGE.CHOICES;
-        this.currentLanguage = this.findLanguageByCode($translate.use())
+        this.languageChoices = ENV.languageChoices;
+        this.currentLanguage = this.findLanguageByCode($translate.use());
       }
 
       selectLanguage(language) {
-        this.$translate.use(language);
+        this.currentLanguage = language;
+        this.$translate.use(language.code);
       }
 
       findLanguageByCode(code) {
         return this.languageChoices.filter(language => language.code === code)[0];
       }
     }
-  }
-};
+  };
+}

@@ -10,5 +10,5 @@ export default function logoutLink() {
       // @ngInject
       this.logout = () => authService.logout();
     }
-  }
-};
+  };
+}

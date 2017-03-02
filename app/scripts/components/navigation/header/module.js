@@ -12,4 +12,4 @@ export default module => {
   module.directive('languageSelector', languageSelector);
   module.directive('mainSearch', mainSearch);
   module.component('ncHeader', ncHeader);
-}
+};

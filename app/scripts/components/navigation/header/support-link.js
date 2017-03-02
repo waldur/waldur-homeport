@@ -10,5 +10,5 @@ export default function supportLink() {
       // @ngInject
       this.gotoSupport = () => IssueNavigationService.gotoDashboard();
     }
-  }
-};
+  };
+}

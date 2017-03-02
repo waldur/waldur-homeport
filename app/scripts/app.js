@@ -148,17 +148,17 @@ window.gettext = angular.identity;
 })();
 
 (function() {
-  angular.module('ncsaas').run(checkLanguage);
+  // angular.module('ncsaas').run(checkLanguage);
 
-  checkLanguage.$inject = ['$translate', 'LANGUAGE'];
+  checkLanguage.$inject = ['$translate', 'ENV'];
 
-  function checkLanguage($translate, LANGUAGE) {
+  function checkLanguage($translate, ENV) {
     // Check if current language is listed in choices and
     // switch to default language if current choice is invalid.
 
     function isValid(current) {
-      for (var i=0; i<LANGUAGE.CHOICES.length; i++) {
-        if (LANGUAGE.CHOICES[i].code == current) {
+      for (var i=0; i < ENV.languageChoices.length; i++) {
+        if (ENV.languageChoices[i].code === current) {
           return true;
         }
       }
@@ -166,8 +166,8 @@ window.gettext = angular.identity;
     }
 
     var current = $translate.use();
-    if (!isValid(current)) {
-      $translate.use(LANGUAGE.DEFAULT);
+    if (!current || !isValid(current)) {
+      $translate.use(ENV.defaultLanguage);
     }
   }
 })();

@@ -199,5 +199,13 @@ angular.module('ncsaas')
     ],
 
     // Either 'accounting' or 'billing'
-    accountingMode: 'accounting'
+    accountingMode: 'accounting',
+
+    languageChoices: [
+      {
+        code: 'en',
+        label: 'English'
+      }
+    ],
+    defaultLanguage: 'en',
   });

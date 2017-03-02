@@ -5,4 +5,4 @@ export default function notificationsMenu() {
     template: template,
     replace: true,
   };
-};
+}
