@@ -121,7 +121,7 @@
           );
           var exportCollection = {
             extend: 'collection',
-            text: '<i class="fa fa-download"></i> Export as <span class="caret"></span>',
+            text: '<i class="fa fa-download"></i> <span translate>Export as</span> <span class="caret"></span>',
             autoClose: true,
             fade: 0,
             buttons: exportButtons
@@ -132,7 +132,7 @@
             buttons = buttons.concat(tableButtons);
           }
           buttons.push({
-            text: '<i class="fa fa-refresh"></i> Refresh',
+            text: '<i class="fa fa-refresh"></i> <span translate>Refresh</span>',
             action: function() {
               $timeout(function() {
                 scope.controller.resetCache();
@@ -148,7 +148,7 @@
             function render(data, type, row, meta) {
               return column.render(row);
             };
-            return angular.extend({}, column, {render: render, title: title});
+            return angular.extend({}, column, {render: render, title: $filter('translate')(title)});
           });
           columns = columns.filter(function(column) {
             return !column.feature || features.isVisible(column.feature);

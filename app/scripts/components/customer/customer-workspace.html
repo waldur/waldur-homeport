@@ -3,13 +3,13 @@
     <nc-header></nc-header>
     <div class="row wrapper white-bg page-heading">
         <div class="col-lg-12">
-            <h2>{{ pageTitle }}</h2>
+            <h2>{{ pageTitle | translate }}</h2>
             <ol class="breadcrumb">
                 <li>
                     <a ui-sref="organization.dashboard({uuid: currentCustomer.uuid})" translate>Organization dashboard</a>
                 </li>
                 <li class="active">
-                    <strong>{{ pageTitle }}</strong>
+                    <strong>{{ pageTitle | translate }}</strong>
                 </li>
             </ol>
         </div>
