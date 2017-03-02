@@ -1,4 +1,4 @@
-<li uib-dropdown ng-if="$ctrl.languageChoices.length > 1">
+<li uib-dropdown ng-show="$ctrl.languageChoices.length > 1">
     <a uib-dropdown-toggle title="{{ $ctrl.currentLanguage.label }}">
         {{ $ctrl.currentLanguage.code | uppercase }}
     </a>
