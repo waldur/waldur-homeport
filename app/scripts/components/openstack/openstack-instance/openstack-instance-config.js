@@ -7,6 +7,7 @@ export default {
     'data_volume_size',
     'ssh_public_key',
     'security_groups',
+    'internal_ips_set',
     'floating_ip',
     'description',
     'user_data'
@@ -113,16 +114,28 @@ export default {
       }))
     },
     floating_ip: {
-      type: 'list',
       label: 'Floating IP',
-      columns: [
-        {
-          name: 'address',
-          label: 'Address'
-        }
-      ],
       component: 'openstackInstanceFloatingIp',
       formatter: floatingIPFormatter
+    },
+    internal_ips_set: {
+      type: 'multiselect',
+      label: 'SubNets',
+      resource: 'openstacktenant-subnets',
+      parser: subnet => ({
+        value: subnet.url,
+        display_name: displaySubNet(subnet),
+        object: subnet
+      }),
+      serializer: subnets => subnets.map(subnet => ({
+        subnet: subnet.value,
+      })),
+      init: (field, model) => (
+        model[field.name] = field.choices.map(choice => ({
+          value: choice.url,
+          display_name: displaySubNet(choice)
+        }))
+      )
     },
     description: {
       type: 'text',
@@ -141,6 +154,10 @@ export default {
   },
   summaryComponent: 'openstackInstanceCheckoutSummary'
 };
+
+function displaySubNet(subnet) {
+  return `${subnet.name} (${subnet.cidr})`;
+}
 
 function validateAndSort(model, options, validator, comparator, name) {
   const choices = options[name].choices;
