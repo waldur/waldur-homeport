@@ -8,6 +8,7 @@ export default module => {
   module.component('openstackSnapshotSchedulesList', openstackSnapshotSchedulesList);
   module.component('openstackSnapshotScheduleSummary', openstackSnapshotScheduleSummary);
   module.config(actionConfig);
+  module.config(tabsConfig);
   module.run(breadcrumbsConfig);
   module.config(stateConfig);
 };
@@ -24,8 +25,8 @@ function actionConfig(ActionConfigurationProvider) {
     ],
     options: {
       update: {
-        title: 'Edit',
-        successMessage: 'Snapshot schedule has been updated',
+        title: gettext('Edit'),
+        successMessage: gettext('Snapshot schedule has been updated'),
         fields: {
           schedule: {
             type: 'crontab'
@@ -33,7 +34,7 @@ function actionConfig(ActionConfigurationProvider) {
         }
       },
       pull: {
-        title: 'Synchronise'
+        title: gettext('Synchronise')
       },
     }
   });
@@ -45,5 +46,22 @@ function stateConfig(ResourceStateConfigurationProvider) {
     error_states: [
       'error'
     ]
+  });
+}
+
+
+// @ngInject
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+  ResourceTabsConfigurationProvider.register('OpenStackTenant.SnapshotSchedule', {
+    order: [
+      ...DEFAULT_RESOURCE_TABS.order,
+      'snapshots',
+    ],
+    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
+      snapshots: {
+        heading: gettext('Snapshots'),
+        component: 'openstackSnapshotsNestedList'
+      },
+    })
   });
 }

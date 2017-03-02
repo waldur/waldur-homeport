@@ -1,4 +1,4 @@
-export default function openStackBackupsList() {
+export default function openstackBackupsList() {
   return {
     restrict: 'E',
     templateUrl: 'views/partials/filtered-list.html',
@@ -30,25 +30,25 @@ function OpenStackBackupsListController(
     getTableOptions: function() {
       var options = this._super();
       options.disableSearch = true;
-      options.noDataText = 'No backups yet.';
-      options.noMatchesText = 'No backups found matching filter.';
+      options.noDataText = gettext('No backups yet.');
+      options.noMatchesText = gettext('No backups found matching filter.');
       options.tableActions = this.listActions;
       options.columns = [
         {
-          title: 'Name',
+          title: gettext('Name'),
           className: 'all',
           render: row => this.renderResourceName(row)
         },
         {
-          title: 'Description',
+          title: gettext('Description'),
           render: row => row.description || 'N/A'
         },
         {
-          title: 'Keep until',
+          title: gettext('Keep until'),
           render: row => $filter('shortDate')(row.kept_until) || '&mdash;'
         },
         {
-          title: 'State',
+          title: gettext('State'),
           className: 'min-tablet-l',
           render: row => this.renderResourceState(row)
         },
