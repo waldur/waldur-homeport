@@ -39,7 +39,8 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'detach',
       'extend',
       'snapshot',
-      'destroy'
+      'destroy',
+      'create_snapshot_schedule',
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
@@ -56,8 +57,30 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         title: 'Create',
         dialogTitle: 'Create snapshot for ',
         iconClass: 'fa-plus',
-        component: 'snapshotCreateDialog'
-      }
+        component: 'snapshotCreateDialog',
+        fields: {
+          kept_until: {
+            help_text: 'Guaranteed time of snapshot retention. If null - keep forever.',
+            label: 'Kept until',
+            required: false,
+            type: 'datetime'
+          }
+        }
+      },
+      create_snapshot_schedule: {
+        title: 'Create',
+        dialogTitle: 'Create snapshot schedule for OpenStack volume',
+        tab: 'snapshot_schedules',
+        iconClass: 'fa-plus',
+        // enabled: true,
+        // type: 'form',
+        // dialogSize: 'lg',
+        fields: {
+          schedule: {
+            type: 'crontab'
+          }
+        }
+      },
     }
   });
 }
@@ -77,11 +100,16 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     order: [
       ...DEFAULT_RESOURCE_TABS.order,
       'snapshots',
+      'snapshot_schedules',
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       snapshots: {
         heading: 'Snapshots',
         component: 'openstackVolumeSnapshots'
+      },
+      snapshot_schedules: {
+        heading: 'Snapshot schedules',
+        component: 'openstackSnapshotSchedulesList'
       },
     })
   });

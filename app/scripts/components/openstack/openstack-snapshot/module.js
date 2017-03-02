@@ -20,7 +20,15 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: 'Snapshot has been updated'
+        successMessage: 'Snapshot has been updated',
+        fields: {
+          kept_until: {
+            help_text: 'Guaranteed time of snapshot retention. If null - keep forever.',
+            label: 'Kept until',
+            required: false,
+            type: 'datetime'
+          }
+        }
       }),
       pull: {
         title: 'Synchronise'
