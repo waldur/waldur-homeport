@@ -395,6 +395,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
+#: app/scripts/components/navigation/header/logout-link.html:4
 #: app/scripts/components/navigation/site-header.html:12
 msgid "Log out"
 msgstr ""
@@ -878,6 +879,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
+#: app/scripts/components/navigation/header/support-link.html:4
 #: app/scripts/configs/base-config.js:65
 msgid "Support"
 msgstr ""

@@ -1,0 +1,13 @@
+<li uib-dropdown ng-if="$ctrl.languageChoices.length > 1">
+    <a uib-dropdown-toggle title="{{ $ctrl.currentLanguage.label }}">
+        {{ $ctrl.currentLanguage.code | uppercase }}
+    </a>
+    <ul uib-dropdown-menu>
+        <li ng-repeat="language in $ctrl.languageChoices"
+            ng-click="$ctrl.selectLanguage(language)">
+            <a>
+                {{ language.label }}
+            </a>
+        </li>
+    </ul>
+</li>
