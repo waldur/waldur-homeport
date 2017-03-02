@@ -1,7 +1,5 @@
 'use strict';
 
-var gettext = angular.identity;
-
 angular.module('ncsaas')
   .constant('ENV', {
     // general config
