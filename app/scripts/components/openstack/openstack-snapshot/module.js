@@ -61,7 +61,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       restored: {
-        heading: 'Restored volumes',
+        heading: gettext('Restored volumes'),
         component: 'restoredVolumesList',
       },
     })

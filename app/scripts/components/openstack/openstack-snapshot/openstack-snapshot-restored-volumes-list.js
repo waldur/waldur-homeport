@@ -29,7 +29,7 @@ function RestoredVolumesListController($filter, baseResourceListController, open
       options.noMatchesText = gettext('No restored volumes found matching filter.');
 
       options.columns.push({
-        title: 'Created',
+        title: gettext('Created'),
         className: 'desktop',
         render: function(row) {
           return $filter('shortDate')(row.created) || '&mdash;';
