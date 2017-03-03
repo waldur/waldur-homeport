@@ -1,6 +1,6 @@
 const MODES = {
-  accounting: 'Accounting',
-  billing: 'Billing'
+  accounting: gettext('Accounting'),
+  billing: gettext('Billing'),
 };
 
 // @ngInject

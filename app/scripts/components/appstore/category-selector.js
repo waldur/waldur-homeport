@@ -1,8 +1,6 @@
 import template from './category-selector.html';
 import './category-selector.scss';
 
-var gettext = angular.identity;
-
 const appstoreCategorySelector = {
   template,
   bindings: {

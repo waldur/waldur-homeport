@@ -18,6 +18,10 @@ msgstr ""
 msgid "Account activation"
 msgstr ""
 
+#: app/scripts/components/billing/billing-utils.js:2
+msgid "Accounting"
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-details.html:3
 msgid "Accounting record"
 msgstr ""
@@ -47,12 +51,20 @@ msgstr ""
 msgid "Add rule"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:62
+msgid "Add snapshots"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:50
 msgid "Affected resource"
+msgstr ""
+
+#: app/scripts/components/customer/customer-workspace.js:100
+msgid "Alerts"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:42
@@ -63,15 +75,24 @@ msgstr ""
 msgid "Already have an account?"
 msgstr ""
 
+#: app/scripts/components/customer/customer-workspace.js:70
+msgid "Analytics"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:113
 msgid "API token lifetime"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-chart-service.js:29
-#: app/scripts/configs/base-config.js:105
-#: app/scripts/configs/base-config.js:124
-#: app/scripts/configs/base-config.js:57
+#: app/scripts/components/analytics/resource-chart-service.js:27
+#: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
+#: app/scripts/configs/base-config.js:103
+#: app/scripts/configs/base-config.js:122
+#: app/scripts/configs/base-config.js:55
 msgid "Applications"
+msgstr ""
+
+#: app/scripts/components/project/projects-list.js:100
+msgid "Apps"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:25
@@ -82,6 +103,10 @@ msgstr ""
 msgid "Attached to"
 msgstr ""
 
+#: app/scripts/components/customer/customer-workspace.js:88
+msgid "Audit logs"
+msgstr ""
+
 #: app/scripts/components/auth/estonianId/auth-login-failed.html:10
 msgid "Back to login"
 msgstr ""
@@ -90,16 +115,32 @@ msgstr ""
 msgid "Backend ID"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-backup-schedule/module.js:31
+msgid "Backup schedule has been updated"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/breadcrumbs.js:22
+msgid "Backup schedules"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/module.js:63
+msgid "Backups"
+msgstr ""
+
+#: app/scripts/components/billing/billing-utils.js:3
+msgid "Billing"
+msgstr ""
+
 #: app/scripts/components/plans/plan-agreement-approve.html:3
 #: app/scripts/components/plans/plan-agreement-cancel.html:3
 msgid "Billing plan agreement is being processed, please wait."
 msgstr ""
 
-#: app/scripts/components/analytics/resource-chart-service.js:35
+#: app/scripts/components/analytics/resource-chart-service.js:33
 msgid "Block devices"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:49
+#: app/scripts/configs/base-config.js:47
 msgid "Block storage"
 msgstr ""
 
@@ -146,7 +187,13 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
+#: app/scripts/components/customer/customer-workspace.js:76
+msgid "Cost analysis"
+msgstr ""
+
 #: app/scripts/components/offering/appstore-offering.html:16
+#: app/scripts/components/openstack/openstack-volume/module.js:57
+#: app/scripts/components/openstack/openstack-volume/module.js:71
 msgid "Create"
 msgstr ""
 
@@ -155,9 +202,21 @@ msgstr ""
 msgid "Create an account"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-volume/module.js:58
+msgid "Create snapshot for"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/module.js:72
+msgid "Create snapshot schedule for OpenStack volume"
+msgstr ""
+
 #: app/scripts/components/issues/issue-detail.html:80
 #: app/scripts/components/resource/summary/resource-summary-base.html:39
 msgid "Created"
+msgstr ""
+
+#: app/scripts/components/project/projects-list.js:86
+msgid "Creation date"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:104
@@ -169,8 +228,12 @@ msgstr ""
 msgid "Current VPC package"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:93
+#: app/scripts/components/appstore/category-selector.js:91
 msgid "Custom request"
+msgstr ""
+
+#: app/scripts/components/customer/customer-workspace.js:43
+msgid "Dashboard"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
@@ -180,6 +243,8 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html:89
 #: app/scripts/components/issues/issues-short-list.html:28
 #: app/scripts/components/offering/offering-summary.html:62
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:43
+#: app/scripts/components/project/projects-list.js:79
 #: app/scripts/components/resource/summary/resource-summary-base.html:30
 #: app/scripts/components/user/user-edit.html:85
 msgid "Description"
@@ -201,6 +266,11 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-backup-schedule/module.js:30
+#: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:28
+msgid "Edit"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:69
 msgid "Enable DHCP"
 msgstr ""
@@ -209,9 +279,17 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
+#: app/scripts/configs/base-config.js:207
+msgid "English"
+msgstr ""
+
 #: app/scripts/components/events/event-details-dialog.html:49
 #: app/scripts/components/resource/summary/resource-summary-base.html:12
 msgid "Error message"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:211
+msgid "Estonian"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:2
@@ -266,6 +344,11 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-snapshot/module.js:28
+#: app/scripts/components/openstack/openstack-volume/module.js:63
+msgid "Guaranteed time of snapshot retention. If null - keep forever."
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:133
 msgid "have been accepted on"
 msgstr ""
@@ -282,7 +365,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:76
+#: app/scripts/configs/base-config.js:74
 msgid "IaaS"
 msgstr ""
 
@@ -293,6 +376,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:21
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:21
 msgid "Image"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:59
+msgid "Import snapshots"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:33
@@ -355,6 +442,9 @@ msgid "IP version"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:48
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedule-summary.html:25
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:48
 msgid "Is active"
 msgstr ""
 
@@ -370,6 +460,10 @@ msgstr ""
 msgid "Issue status"
 msgstr ""
 
+#: app/scripts/components/customer/customer-workspace.js:94
+msgid "Issues"
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-details.html:57
 #: app/scripts/components/billing/invoice-details.html:55
 msgid "Item List"
@@ -377,6 +471,15 @@ msgstr ""
 
 #: app/scripts/components/user/user-edit.html:76
 msgid "Job position"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:47
+msgid "Keep until"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/module.js:29
+#: app/scripts/components/openstack/openstack-volume/module.js:64
+msgid "Kept until"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:27
@@ -395,6 +498,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
+#: app/scripts/components/navigation/header/logout-link.html:4
 #: app/scripts/components/navigation/site-header.html:12
 msgid "Log out"
 msgstr ""
@@ -412,12 +516,28 @@ msgstr ""
 msgid "Login failed"
 msgstr ""
 
+#: app/scripts/components/customer/customer-workspace.js:126
+msgid "Manage"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:8
 msgid "Manage at"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:5
 msgid "Max # of backups"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedule-summary.html:5
+msgid "Max # of snapshots"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:39
+msgid "Max number of backups"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:39
+msgid "Max number of snapshots"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:26
@@ -445,6 +565,11 @@ msgid "Minimal valid value is"
 msgstr ""
 
 #: app/scripts/components/offering/offering-summary.html:11
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:38
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:30
+#: app/scripts/components/project/projects-list.js:70
 msgid "Name"
 msgstr ""
 
@@ -460,10 +585,51 @@ msgstr ""
 msgid "No access info"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:30
+msgid "No backup schedules found matching filter."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:29
+msgid "No backup schedules yet."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:34
+msgid "No backups found matching filter."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:33
+msgid "No backups yet."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:9
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:9
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:9
 msgid "No items yet."
+msgstr ""
+
+#: app/scripts/components/project/projects-list.js:55
+msgid "No projects found matching filter."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:30
+msgid "No snapshot schedules found matching filter."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:29
+msgid "No snapshot schedules yet."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:31
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:27
+msgid "No snapshots found matching filter."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:26
+msgid "No snapshots yet."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:46
+msgid "Not known"
 msgstr ""
 
 #: app/scripts/components/quotas/quotas-table.html:10
@@ -491,7 +657,7 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:62
+#: app/scripts/configs/base-config.js:60
 msgid "Oracle database and SugarCRM."
 msgstr ""
 
@@ -517,7 +683,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:191
+#: app/scripts/configs/base-config.js:189
 msgid "Organization owner"
 msgstr ""
 
@@ -563,7 +729,7 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:70
+#: app/scripts/configs/base-config.js:68
 msgid "Premium support service."
 msgstr ""
 
@@ -611,9 +777,11 @@ msgstr ""
 msgid "Privacy policy"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-chart-service.js:23
-#: app/scripts/configs/base-config.js:40
-#: app/scripts/configs/base-config.js:97
+#: app/scripts/components/analytics/resource-chart-service.js:21
+#: app/scripts/components/project/projects-list.js:105
+#: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
+#: app/scripts/configs/base-config.js:38
+#: app/scripts/configs/base-config.js:95
 msgid "Private clouds"
 msgstr ""
 
@@ -628,10 +796,11 @@ msgid "Project"
 msgstr ""
 
 #: app/scripts/components/offering/offering-header.html:13
+#: app/views/project/base.html:13
 msgid "Project dashboard"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:192
+#: app/scripts/configs/base-config.js:190
 msgid "Project manager"
 msgstr ""
 
@@ -640,6 +809,7 @@ msgid "Project name"
 msgstr ""
 
 #: app/scripts/components/appstore/category-selector.html:10
+#: app/scripts/components/customer/customer-workspace.js:55
 #: app/scripts/components/navigation/select-workspace-dialog.html:82
 msgid "Projects"
 msgstr ""
@@ -652,15 +822,19 @@ msgstr ""
 msgid "Provider"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:54
+#: app/scripts/components/customer/customer-workspace.js:48
+msgid "Providers"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:52
 msgid "Provision persistent storage volumes in available Providers."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:37
+#: app/scripts/configs/base-config.js:35
 msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:45
+#: app/scripts/configs/base-config.js:43
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
@@ -673,7 +847,7 @@ msgstr ""
 msgid "RAM"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:23
+#: app/scripts/configs/base-config.js:21
 msgid "Reason unknown, please contact support"
 msgstr ""
 
@@ -744,6 +918,10 @@ msgstr ""
 msgid "Resource count in"
 msgstr ""
 
+#: app/scripts/components/customer/customer-workspace.js:81
+msgid "Resource usage"
+msgstr ""
+
 #: app/scripts/components/analytics/resource-analysis-new.html:34
 msgid "Resources by projects"
 msgstr ""
@@ -762,6 +940,9 @@ msgid "Runtime state"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:14
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:43
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedule-summary.html:14
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:43
 msgid "Schedule"
 msgstr ""
 
@@ -808,6 +989,7 @@ msgid "Service"
 msgstr ""
 
 #: app/scripts/components/appstore/category-selector.html:2
+#: app/scripts/components/customer/customer-workspace.js:63
 msgid "Service store"
 msgstr ""
 
@@ -832,10 +1014,35 @@ msgid "Sign in with Mobile ID"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:5
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:33
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:40
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:5
 msgid "Size"
 msgstr ""
 
+#: app/scripts/components/customer/customer-workspace.js:120
+msgid "Sizing"
+msgstr ""
+
+#: app/scripts/components/project/projects-list.js:109
+msgid "SLA"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/module.js:25
+msgid "Snapshot has been updated"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:29
+msgid "Snapshot schedule has been updated"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot-schedule/breadcrumbs.js:22
+#: app/scripts/components/openstack/openstack-volume/module.js:108
+msgid "Snapshot schedules"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:62
+#: app/scripts/components/openstack/openstack-volume/module.js:104
 #: app/scripts/components/resource/list/resource-storage-tabs.html:14
 msgid "Snapshots"
 msgstr ""
@@ -849,6 +1056,10 @@ msgid "Start time"
 msgstr ""
 
 #: app/scripts/components/offering/offering-summary.html:18
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:52
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:51
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:52
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:35
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
 msgid "State"
 msgstr ""
@@ -858,10 +1069,12 @@ msgid "Status"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:25
+#: app/scripts/components/project/projects-list.js:96
+#: app/scripts/components/resource/breadcrumbs/resource-categories.js:11
 msgid "Storage"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:112
+#: app/scripts/configs/base-config.js:110
 msgid "Storages"
 msgstr ""
 
@@ -878,16 +1091,28 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:65
+#: app/scripts/components/navigation/header/support-link.html:4
+#: app/scripts/configs/base-config.js:63
 msgid "Support"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:193
+#: app/scripts/components/openstack/openstack-backup-schedule/module.js:39
+#: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:37
+#: app/scripts/components/openstack/openstack-snapshot/module.js:36
+#: app/scripts/components/openstack/openstack-volume/module.js:50
+msgid "Synchronise"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:191
 msgid "System administrator"
 msgstr ""
 
 #: app/scripts/components/billing/invoice-details.html:82
 msgid "TAX"
+msgstr ""
+
+#: app/scripts/components/customer/customer-workspace.js:107
+msgid "Team"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:5
@@ -1032,10 +1257,11 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-chart-service.js:17
-#: app/scripts/configs/base-config.js:120
-#: app/scripts/configs/base-config.js:32
-#: app/scripts/configs/base-config.js:90
+#: app/scripts/components/analytics/resource-chart-service.js:15
+#: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
+#: app/scripts/configs/base-config.js:118
+#: app/scripts/configs/base-config.js:30
+#: app/scripts/configs/base-config.js:88
 msgid "Virtual machines"
 msgstr ""
 
@@ -1043,8 +1269,17 @@ msgstr ""
 msgid "VM name"
 msgstr ""
 
+#: app/scripts/components/project/projects-list.js:92
+msgid "VMs"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:13
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:43
 msgid "Volume"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/module.js:47
+msgid "Volume has been updated"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:17
@@ -1082,8 +1317,16 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
+#: app/scripts/components/project/projects-list.js:54
+msgid "You have no projects yet."
+msgstr ""
+
 #: app/scripts/components/quotas/quotas-table.html:2
 msgid "You have no quotas yet."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:30
+msgid "You have no snapshots yet."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:15

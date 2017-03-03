@@ -40,19 +40,19 @@ export function CustomerWorkspaceController(
   function setItems() {
     $scope.items = [
       {
-        label: 'Dashboard',
+        label: gettext('Dashboard'),
         icon: 'fa-th-large',
         link: 'organization.dashboard({uuid: $ctrl.context.customer.uuid})'
       },
       {
-        label: 'Providers',
+        label: gettext('Providers'),
         icon: 'fa-database',
         link: 'organization.providers({uuid: $ctrl.context.customer.uuid})',
         feature: 'providers',
         countFieldKey: 'services'
       },
       {
-        label: 'Projects',
+        label: gettext('Projects'),
         icon: 'fa-bookmark',
         link: 'organization.projects({uuid: $ctrl.context.customer.uuid})',
         feature: 'projects',
@@ -60,51 +60,51 @@ export function CustomerWorkspaceController(
       },
       {
         icon: 'fa-shopping-cart',
-        label: 'Service store',
+        label: gettext('Service store'),
         feature: 'appstore',
         action: function() {
           return AppStoreUtilsService.openDialog({selectProject: true});
         },
       },
       {
-        label: 'Analytics',
+        label: gettext('Analytics'),
         icon: 'fa-bar-chart-o',
         link: 'organization.analysis',
         feature: 'analytics',
         children: [
           {
-            label: 'Cost analysis',
+            label: gettext('Cost analysis'),
             icon: 'fa-pie-chart',
             link: 'organization.analysis.cost({uuid: $ctrl.context.customer.uuid})'
           },
           {
-            label: 'Resource usage',
+            label: gettext('Resource usage'),
             icon: 'fa-tachometer',
             link: 'organization.analysis.resources({uuid: $ctrl.context.customer.uuid})'
           }
         ]
       },
       {
-        label: 'Audit logs',
+        label: gettext('Audit logs'),
         icon: 'fa-bell-o',
         link: 'organization.details({uuid: $ctrl.context.customer.uuid})',
         feature: 'eventlog'
       },
       {
-        label: 'Issues',
+        label: gettext('Issues'),
         icon: 'fa-question-circle',
         link: 'organization.issues({uuid: $ctrl.context.customer.uuid})',
         feature: 'support'
       },
       {
-        label: 'Alerts',
+        label: gettext('Alerts'),
         icon: 'fa-fire',
         link: 'organization.alerts({uuid: $ctrl.context.customer.uuid})',
         feature: 'alerts',
         countFieldKey: 'alerts'
       },
       {
-        label: 'Team',
+        label: gettext('Team'),
         icon: 'fa-group',
         link: 'organization.team({uuid: $ctrl.context.customer.uuid})',
         feature: 'team',
@@ -117,13 +117,13 @@ export function CustomerWorkspaceController(
         feature: 'billing'
       },
       {
-        label: 'Sizing',
+        label: gettext('Sizing'),
         icon: 'fa-calculator',
         link: 'organization.sizing({uuid: $ctrl.context.customer.uuid})',
         feature: 'sizing'
       },
       {
-        label: 'Manage',
+        label: gettext('Manage'),
         icon: 'fa-wrench',
         link: 'organization.delete({uuid: $ctrl.context.customer.uuid})'
       }

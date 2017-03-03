@@ -38,3 +38,36 @@ msgstr "Teenused"
 #: app/views/partials/app-header.html:34
 msgid "Users"
 msgstr "Kasutajad"
+
+#: app/scripts/components/customer/customer-workspace.js:48
+msgid "Providers"
+msgstr "Teenused"
+
+#: app/scripts/components/customer/customer-workspace.js:107
+msgid "Team"
+msgstr "Kasutajad"
+
+#: app/scripts/components/customer/customer-workspace.js:126
+msgid "Manage"
+msgstr "Juhtima"
+
+#: app/scripts/components/customer/customer-workspace.js:70
+msgid "Analytics"
+msgstr "Analüüs"
+
+#: app/scripts/components/offering/offering-header.html:13
+msgid "Project dashboard"
+msgstr "Projekti töölaud"
+
+#: app/scripts/components/customer/customer-workspace.html:9
+msgid "Organization dashboard"
+msgstr "Organisatsioon töölaud"
+
+msgid "Name"
+msgstr "Nimi"
+
+msgid "Description"
+msgstr "Kirjeldus"
+
+msgid "Creation date"
+msgstr "Loomise kuupäev"

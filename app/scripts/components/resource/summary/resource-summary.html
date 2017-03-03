@@ -41,6 +41,10 @@
     <openstack-backup-schedule-summary resource="$ctrl.resource"></openstack-backup-schedule-summary>
   </div>
 
+  <div ng-switch-when="OpenStackTenant.SnapshotSchedule">
+    <openstack-snapshot-schedule-summary resource="$ctrl.resource"></openstack-snapshot-schedule-summary>
+  </div>
+
   <div ng-switch-default>
     <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
   </div>

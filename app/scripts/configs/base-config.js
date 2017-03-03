@@ -1,7 +1,5 @@
 'use strict';
 
-var gettext = angular.identity;
-
 angular.module('ncsaas')
   .constant('ENV', {
     // general config
@@ -201,5 +199,17 @@ angular.module('ncsaas')
     ],
 
     // Either 'accounting' or 'billing'
-    accountingMode: 'accounting'
+    accountingMode: 'accounting',
+
+    languageChoices: [
+      {
+        code: 'en',
+        label: gettext('English')
+      },
+      {
+        code: 'et',
+        label: gettext('Estonian')
+      }
+    ],
+    defaultLanguage: 'et',
   });

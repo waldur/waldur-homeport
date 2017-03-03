@@ -1,7 +1,7 @@
 // @ngInject
 export default function breadcrumbsConfig(ResourceBreadcrumbsService, ncUtils, CATEGORY_ITEMS) {
-  ResourceBreadcrumbsService.register('OpenStackTenant.BackupSchedule', resource => {
-    const instance_uuid = ncUtils.getUUID(resource.instance);
+  ResourceBreadcrumbsService.register('OpenStackTenant.SnapshotSchedule', resource => {
+    const instance_uuid = ncUtils.getUUID(resource.source_volume);
     return [
       {
         label: CATEGORY_ITEMS.vms.label,
@@ -11,20 +11,20 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService, ncUtils, C
         }
       },
       {
-        label: resource.instance_name,
+        label: resource.source_volume_name,
         state: 'resources.details',
         params: {
           uuid: instance_uuid,
-          resource_type: 'OpenStackTenant.Instance'
+          resource_type: 'OpenStackTenant.Volume'
         }
       },
       {
-        label: gettext('Backup schedules'),
+        label: gettext('Snapshot schedules'),
         state: 'resources.details',
         params: {
           uuid: instance_uuid,
-          resource_type: 'OpenStackTenant.Instance',
-          tab: 'backup_schedules'
+          resource_type: 'OpenStackTenant.Volume',
+          tab: 'snapshot_schedules'
         }
       },
     ];

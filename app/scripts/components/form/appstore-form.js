@@ -31,6 +31,9 @@ class AppstoreFormController {
       if (field.default_value) {
         model[field.name] = field.default_value;
       }
+      if (field.init) {
+        field.init(field, model);
+      }
     });
   }
 
