@@ -13,9 +13,11 @@
     </a>
     <ul uib-dropdown-menu class="m-t-xs">
         <li ng-repeat="item in Ctrl.items" visible-if="item.feature">
-            <a ui-sref="{{ ::item.link }}" ng-bind="::item.label"></a>
+            <a ui-sref="{{ ::item.link }}">
+                {{ item.label | translate }}
+            </a>
         </li>
         <li class="divider"></li>
-        <li><a ng-click="Ctrl.logout()">Logout</a></li>
+        <li><a ng-click="Ctrl.logout()"><span translate>Log out</span></a></li>
     </ul>
 </div>

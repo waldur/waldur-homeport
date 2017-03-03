@@ -500,6 +500,7 @@ msgstr ""
 
 #: app/scripts/components/navigation/header/logout-link.html:4
 #: app/scripts/components/navigation/site-header.html:12
+#: app/scripts/components/user/user-sidebar.html:21
 msgid "Log out"
 msgstr ""
 
@@ -1226,6 +1227,10 @@ msgstr ""
 #: app/scripts/components/team/add-project-member.html:20
 #: app/scripts/components/team/add-team-member.html:11
 msgid "User"
+msgstr ""
+
+#: app/scripts/components/user/user-details.html:9
+msgid "User dashboard"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:47

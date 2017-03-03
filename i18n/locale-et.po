@@ -71,3 +71,30 @@ msgstr "Kirjeldus"
 
 msgid "Creation date"
 msgstr "Loomise kuupäev"
+
+msgid "Login"
+msgstr "Logi sisse"
+
+msgid "Log out"
+msgstr "Logi välja"
+
+msgid "Create an account"
+msgstr "Kontot looma"
+
+msgid "Do not have an account?"
+msgstr "Kas pole kontot?"
+
+msgid "Or use social login"
+msgstr "Või kasutada sotsiaalse login"
+
+msgid "Sign in with Google"
+msgstr "Logi sisse Google"
+
+msgid "Sign in with Facebook"
+msgstr "Logi sisse Facebook"
+
+msgid "Sign in with ID card"
+msgstr "Logi sisse ID-kaardiga"
+
+msgid "Sign in with Mobile ID"
+msgstr "Logi sisse Mobiil-ID"
