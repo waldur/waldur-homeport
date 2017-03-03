@@ -148,7 +148,7 @@ window.gettext = angular.identity;
 })();
 
 (function() {
-  // angular.module('ncsaas').run(checkLanguage);
+  angular.module('ncsaas').run(checkLanguage);
 
   checkLanguage.$inject = ['$translate', 'ENV'];
 
@@ -165,7 +165,9 @@ window.gettext = angular.identity;
       return false;
     }
 
-    var current = $translate.use();
+    var key = $translate.storageKey();
+    var storage = $translate.storage();
+    var current = storage.get(key);
     if (!current || !isValid(current)) {
       $translate.use(ENV.defaultLanguage);
     }

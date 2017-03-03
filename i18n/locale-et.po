@@ -71,6 +71,3 @@ msgstr "Kirjeldus"
 
 msgid "Creation date"
 msgstr "Loomise kuupäev"
-
-msgid "Creation date"
-msgstr "Loomise kuupäev"

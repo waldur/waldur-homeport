@@ -1,5 +1,5 @@
 <li uib-dropdown ng-show="$ctrl.languageChoices.length > 1">
-  <a uib-dropdown-toggle title="{{ $ctrl.currentLanguage.label }}">
+  <a uib-dropdown-toggle title="{{ $ctrl.currentLanguage.label | translate }}">
     {{ $ctrl.currentLanguage.code | uppercase }}
   </a>
   <ul uib-dropdown-menu>

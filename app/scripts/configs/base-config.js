@@ -203,9 +203,9 @@ angular.module('ncsaas')
 
     languageChoices: [
       {
-        code: 'en',
-        label: 'English'
+        code: 'et',
+        label: 'Estonian'
       }
     ],
-    defaultLanguage: 'en',
+    defaultLanguage: 'et',
   });
