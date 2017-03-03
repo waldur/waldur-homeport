@@ -2,7 +2,7 @@ import openstackSnapshotsService from './openstack-snapshots-service';
 import { openstackSnapshotSummary } from './openstack-snapshot-summary';
 import openstackSnapshotsList from './openstack-snapshots-list';
 import openstackSnapshotsNestedList from './openstack-snapshots-nested-list';
-import restoredVolumesList from './openstack-restored-volumes-list';
+import restoredVolumesList from './openstack-snapshot-restored-volumes-list';
 
 export default module => {
   module.config(tabsConfig);
