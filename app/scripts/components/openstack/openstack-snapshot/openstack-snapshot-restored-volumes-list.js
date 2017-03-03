@@ -36,7 +36,7 @@ function RestoredVolumesListController($filter, baseResourceListController, open
         {
           title: gettext('Size'),
           render: function(row) {
-            return $filter('filesize')(row.size)
+            return $filter('filesize')(row.size);
           }
         },
         {
