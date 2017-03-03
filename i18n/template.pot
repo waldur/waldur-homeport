@@ -153,7 +153,7 @@ msgid "Caller"
 msgstr ""
 
 #: app/scripts/components/appstore/category-selector.html:33
-#: app/scripts/components/events/event-details-dialog.html:113
+#: app/scripts/components/events/event-details-dialog.html:125
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:125
 #: app/scripts/components/offering/appstore-offering.html:19
@@ -283,7 +283,7 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html:49
+#: app/scripts/components/events/event-details-dialog.html:51
 #: app/scripts/components/resource/summary/resource-summary-base.html:12
 msgid "Error message"
 msgstr ""
@@ -300,7 +300,7 @@ msgstr ""
 msgid "Event log"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html:41
+#: app/scripts/components/events/event-details-dialog.html:43
 msgid "Event type"
 msgstr ""
 
@@ -382,7 +382,7 @@ msgstr ""
 msgid "Import snapshots"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html:33
+#: app/scripts/components/events/event-details-dialog.html:35
 msgid "Importance"
 msgstr ""
 
@@ -428,7 +428,7 @@ msgstr ""
 msgid "Invoices list"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html:25
+#: app/scripts/components/events/event-details-dialog.html:27
 msgid "IP address"
 msgstr ""
 
@@ -557,7 +557,7 @@ msgstr ""
 msgid "Maximal valid value is"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html:104
+#: app/scripts/components/events/event-details-dialog.html:114
 msgid "Message"
 msgstr ""
 
@@ -666,7 +666,7 @@ msgstr ""
 msgid "organization"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html:57
+#: app/scripts/components/events/event-details-dialog.html:59
 #: app/scripts/components/issues/issue-create-dialog.html:12
 #: app/scripts/components/issues/issue-create-dialog.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:7
@@ -786,7 +786,7 @@ msgstr ""
 msgid "Private clouds"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html:67
+#: app/scripts/components/events/event-details-dialog.html:69
 #: app/scripts/components/issues/issue-create-dialog.html:17
 #: app/scripts/components/issues/issue-create-dialog.html:27
 #: app/scripts/components/issues/issue-detail.html:40
@@ -910,9 +910,13 @@ msgstr ""
 msgid "Resolution"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html:91
+#: app/scripts/components/events/event-details-dialog.html:93
 #: app/scripts/components/issues/issue-create-dialog.html:32
 msgid "Resource"
+msgstr ""
+
+#: app/scripts/components/events/event-details-dialog.html:106
+msgid "Resource configuration"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis-new.html:13
@@ -985,7 +989,7 @@ msgstr ""
 msgid "Select workspace"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html:77
+#: app/scripts/components/events/event-details-dialog.html:79
 msgid "Service"
 msgstr ""
 
@@ -1162,7 +1166,7 @@ msgstr ""
 msgid "Time in progress"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html:7
+#: app/scripts/components/events/event-details-dialog.html:9
 msgid "Timestamp"
 msgstr ""
 
@@ -1222,7 +1226,7 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html:15
+#: app/scripts/components/events/event-details-dialog.html:17
 #: app/scripts/components/team/add-project-member.html:10
 #: app/scripts/components/team/add-project-member.html:20
 #: app/scripts/components/team/add-team-member.html:11
