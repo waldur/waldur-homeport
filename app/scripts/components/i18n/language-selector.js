@@ -6,7 +6,7 @@ export default function languageSelector() {
     replace: true,
     scope: {},
     controllerAs: '$ctrl',
-    controller: class LogoutLinkController {
+    controller: class LanguageSelectorController {
       constructor($translate, ENV) {
         // @ngInject
         this.$translate = $translate;

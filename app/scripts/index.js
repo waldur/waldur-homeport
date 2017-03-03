@@ -31,6 +31,7 @@ import coreModule from './components/core/module';
 import dashboardModule from './components/dashboard/module';
 import filtersModule from './components/core/filters';
 import quotasModule from './components/quotas/module';
+import i18nModule from './components/i18n/module';
 import bootstrap from './components/core/bootstrap';
 import errorModule from './components/error/module';
 
@@ -66,6 +67,7 @@ coreModule(module);
 dashboardModule(module);
 filtersModule(module);
 quotasModule(module);
+i18nModule(module);
 errorModule(module);
 
 bootstrap('ncsaas');

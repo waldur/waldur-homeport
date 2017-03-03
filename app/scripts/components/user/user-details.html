@@ -3,14 +3,14 @@
     <nc-header/>
     <div class="row wrapper white-bg page-heading">
         <div class="col-lg-12">
-            <h2>{{$state.current.data.pageTitle}}</h2>
+            <h2>{{ $state.current.data.pageTitle | translate }}</h2>
             <ol class="breadcrumb" ng-if="!$state.current.data.hideBreadcrumbs">
                 <li>
-                    <a ng-if="isPrivate" ui-sref="profile.details">User dashboard</a>
+                    <a ng-if="isPrivate" ui-sref="profile.details" translate>User dashboard</a>
                     <span ng-if="!isPrivate">{{ currentUser.full_name }}</span>
                 </li>
                 <li class="active">
-                    <strong>{{$state.current.data.pageTitle}}</strong>
+                    <strong>{{ $state.current.data.pageTitle | translate }}</strong>
                 </li>
             </ol>
         </div>
