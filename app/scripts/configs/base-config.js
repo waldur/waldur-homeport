@@ -203,8 +203,12 @@ angular.module('ncsaas')
 
     languageChoices: [
       {
+        code: 'en',
+        label: gettext('English')
+      },
+      {
         code: 'et',
-        label: 'Estonian'
+        label: gettext('Estonian')
       }
     ],
     defaultLanguage: 'et',

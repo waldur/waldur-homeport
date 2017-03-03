@@ -279,9 +279,17 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
+#: app/scripts/configs/base-config.js:207
+msgid "English"
+msgstr ""
+
 #: app/scripts/components/events/event-details-dialog.html:49
 #: app/scripts/components/resource/summary/resource-summary-base.html:12
 msgid "Error message"
+msgstr ""
+
+#: app/scripts/configs/base-config.js:211
+msgid "Estonian"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:2
