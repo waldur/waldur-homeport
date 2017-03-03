@@ -7,20 +7,16 @@ export default function languageSelector() {
     scope: {},
     controllerAs: '$ctrl',
     controller: class LanguageSelectorController {
-      constructor($translate, ENV) {
+      constructor(LanguageUtilsService) {
         // @ngInject
-        this.$translate = $translate;
-        this.languageChoices = ENV.languageChoices;
-        this.currentLanguage = this.findLanguageByCode($translate.use());
+        this.utils = LanguageUtilsService;
+        this.languageChoices = this.utils.getChoices();
+        this.currentLanguage = this.utils.getCurrentLanguage();
       }
 
       selectLanguage(language) {
         this.currentLanguage = language;
-        this.$translate.use(language.code);
-      }
-
-      findLanguageByCode(code) {
-        return this.languageChoices.filter(language => language.code === code)[0];
+        this.utils.setCurrentLanguage(language);
       }
     }
   };
