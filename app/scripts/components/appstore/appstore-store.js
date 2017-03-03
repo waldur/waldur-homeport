@@ -393,6 +393,7 @@ function AppStoreController(
       this._super();
       projectsService.clearAllCacheForCurrentEndpoint();
       priceEstimationService.clearAllCacheForCurrentEndpoint();
+      joinService.clearAllCacheForCurrentEndpoint();
     },
     onError: function() {
       var message = '';
