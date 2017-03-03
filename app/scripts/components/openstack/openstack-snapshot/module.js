@@ -25,6 +25,9 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'destroy',
     ],
     options: {
+      restore: {
+        dialogTitle: gettext('Please provide details of a new volume created from snapshot'),
+      },
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: gettext('Snapshot has been updated'),
         fields: {
