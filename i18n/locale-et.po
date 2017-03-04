@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: app/views/profile/update.html:29
 msgid "Cancel"
@@ -49,11 +49,11 @@ msgstr "Kasutajad"
 
 #: app/scripts/components/customer/customer-workspace.js:126
 msgid "Manage"
-msgstr "Juhtima"
+msgstr "Haldus"
 
 #: app/scripts/components/customer/customer-workspace.js:70
 msgid "Analytics"
-msgstr "Analüüs"
+msgstr "Analüütika"
 
 #: app/scripts/components/offering/offering-header.html:13
 msgid "Project dashboard"
@@ -79,19 +79,19 @@ msgid "Log out"
 msgstr "Logi välja"
 
 msgid "Create an account"
-msgstr "Kontot looma"
+msgstr "Loo konto"
 
 msgid "Do not have an account?"
-msgstr "Kas pole kontot?"
+msgstr "Konto puudub?"
 
 msgid "Or use social login"
-msgstr "Või kasutada sotsiaalse login"
+msgstr "Või sisene sotsiaalmeedia kontoga"
 
 msgid "Sign in with Google"
-msgstr "Logi sisse Google"
+msgstr "Sisene Googlega"
 
 msgid "Sign in with Facebook"
-msgstr "Logi sisse Facebook"
+msgstr "Sisene Facebookiga"
 
 msgid "Sign in with ID card"
 msgstr "Logi sisse ID-kaardiga"
