@@ -97,4 +97,4 @@ msgid "Sign in with ID card"
 msgstr "Logi sisse ID-kaardiga"
 
 msgid "Sign in with Mobile ID"
-msgstr "Logi sisse Mobiil-ID"
+msgstr "Logi sisse Mobiil IDga"
