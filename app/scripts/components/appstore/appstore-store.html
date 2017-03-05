@@ -6,8 +6,11 @@
 
             <div class="ibox" ng-if="AppStore.selectedResourceType">
                 <div class="ibox-title">
-                    <h5>Configure {{ AppStore.getServiceTypeDisplay(AppStore.serviceType) }}
-                        {{ AppStore.selectedResourceTypeName }}</h5>
+                    <h5>
+                        <span translate>Configure</span>
+                        {{ AppStore.getServiceTypeDisplay(AppStore.serviceType) }}
+                        {{ AppStore.selectedResourceTypeName }}
+                    </h5>
                 </div>
                 <div class="ibox-content">
                     <div ng-if="AppStore.loadingResourceProperties">
@@ -16,7 +19,7 @@
                     <div class="form-horizontal" ng-if="!AppStore.loadingResourceProperties">
                         <div class="form-group">
                             <div class="col-sm-3 control-label">
-                                <label>Provider</label>
+                                <label translate>Provider</label>
                             </div>
                             <div class="col-sm-4 form-control-static">
                                 {{ AppStore.selectedService.name }}
@@ -34,11 +37,12 @@
                         ng-disabled="!AppStore.canSave()"
                         uib-tooltip="{{ AppStore.getTooltip() }}">
                         <i class="fa fa fa-shopping-cart"></i>
-                        {{ AppStore.enablePurchaseCostDisplay ? 'Purchase' : 'Create' }}
+                        <span ng-if="AppStore.enablePurchaseCostDisplay" translate>Purchase</span>
+                        <span ng-if="!AppStore.enablePurchaseCostDisplay" translate>Create</span>
                     </a>
                     <button class="btn btn-white" type="button"
                         ng-click="AppStore.resetResourceType()">
-                        Cancel
+                        <span translate>Cancel</span>
                     </button>
                 </div>
             </div>
@@ -49,7 +53,7 @@
                     <h5>
                         <a ui-sref="compare.compare">
                             <i class="fa fa-balance-scale"></i>
-                            Compare flavors
+                            <span translate>Compare flavors</span>
                         </a>
                     </h5>
                 </div>

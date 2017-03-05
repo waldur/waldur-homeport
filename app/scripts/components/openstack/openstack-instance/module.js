@@ -40,13 +40,13 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: 'Instance has been updated'
+        successMessage: gettext('Instance has been updated')
       }),
       pull: {
-        title: 'Synchronise'
+        title: gettext('Synchronise')
       },
       change_flavor: {
-        title: 'Change flavor',
+        title: gettext('Change flavor'),
         fields: {
           flavor: {
             formatter: OpenStackInstanceConfig.options.flavor.formatter
@@ -56,12 +56,12 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       assign_floating_ip: {
         fields: {
           floating_ip: {
-            emptyLabel: 'Allocate and assign new floating IP'
+            emptyLabel: gettext('Allocate and assign new floating IP')
           }
         }
       },
       update_security_groups: {
-        title: 'Update security groups',
+        title: gettext('Update security groups'),
         fields: {
           security_groups: {
             type: 'multiselect',
@@ -71,8 +71,8 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         }
       },
       create_backup_schedule: {
-        title: 'Create',
-        dialogTitle: 'Create backup schedule for OpenStack instance',
+        title: gettext('Create'),
+        dialogTitle: gettext('Create backup schedule for OpenStack instance'),
         tab: 'backup_schedules',
         iconClass: 'fa-plus',
         fields: {
@@ -90,8 +90,8 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       },
       backup: {
         tab: 'backups',
-        title: 'Create',
-        dialogTitle: 'Create backup for ',
+        title: gettext('Create'),
+        dialogTitle: gettext('Create backup for '),
         iconClass: 'fa-plus',
         fields: {
           description: {
@@ -131,15 +131,15 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       volumes: {
-        heading: 'Volumes',
+        heading: gettext('Volumes'),
         component: 'openstackInstanceVolumes'
       },
       backups: {
-        heading: 'Backups',
+        heading: gettext('Backups'),
         component: 'openstackBackupsList'
       },
       backup_schedules: {
-        heading: 'Backup schedules',
+        heading: gettext('Backup schedules'),
         component: 'openstackBackupSchedulesList'
       }
     })

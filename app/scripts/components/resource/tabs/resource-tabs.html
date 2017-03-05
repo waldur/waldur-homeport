@@ -1,7 +1,7 @@
 <uib-tabset active="active">
   <uib-tab
     ng-repeat="tab in $ctrl.tabs"
-    heading="{{ ::tab.heading }}"
+    heading="{{ tab.heading | translate }}"
     visible-if="tab.feature"
     index="::tab.name">
     <div class="panel-body" ng-if="active==tab.name">

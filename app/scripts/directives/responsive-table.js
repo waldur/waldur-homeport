@@ -230,7 +230,7 @@
 
         function getActionColumn(spec, width) {
           return {
-            title: 'Actions',
+            title: gettext('Actions'),
             orderable: false,
             className: 'actions text-center all',
             render: function(data, type, row, meta) {

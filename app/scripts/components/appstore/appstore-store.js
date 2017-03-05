@@ -150,27 +150,31 @@ function AppStoreController(
       vm.allFormOptions = null;
     },
     setResourceType: function(type) {
-      var vm = this;
-      vm.selectedResourceType = type;
-      vm.errors = {};
-      vm.selectedResourceTypeName = type.split(/(?=[A-Z])/).join(' ');
-      vm.fields = [];
+      this.selectedResourceType = type;
+      this.errors = {};
+      this.selectedResourceTypeName = type.split(/(?=[A-Z])/).join(' ');
+      this.fields = [];
 
-      var key = vm.serviceType + '.' + vm.selectedResourceType;
-      var fields = angular.copy(AppstoreFieldConfiguration[key]);
-      vm.fields = fields;
+      this.loadingResourceProperties = true;
+      return servicesService.getOption(this.getResourceUrl()).then(response => {
+        let key = this.serviceType + '.' + this.selectedResourceType;
+        let fields = angular.copy(AppstoreFieldConfiguration[key]);
+        if (!fields) {
+          fields = {
+            order: Object.keys(response.actions.POST).filter(key => key != 'service_project_link'),
+            options: response.actions.POST
+          };
+        }
+        let formOptions = angular.merge({}, response.actions.POST, fields.options);
+        this.fields = fields;
 
-      var promise = servicesService.getOption(vm.getResourceUrl()).then(function(response) {
-        var formOptions = angular.merge({}, response.actions.POST, fields.options);
-        vm.allFormOptions = formOptions;
-        return vm.getValidChoices(formOptions).then(function(validChoices) {
-          vm.setFields(formOptions, validChoices);
+        this.allFormOptions = formOptions;
+        return this.getValidChoices(formOptions).then(validChoices => {
+          this.setFields(formOptions, validChoices);
         });
-      });
-      vm.loadingResourceProperties = true;
-      promise.finally(function() {
-        vm.instance = vm.buildInstance();
-        vm.loadingResourceProperties = false;
+      }).finally(() => {
+        this.instance = this.buildInstance();
+        this.loadingResourceProperties = false;
       });
     },
     buildInstance: function() {
