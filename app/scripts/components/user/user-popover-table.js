@@ -1,14 +1,10 @@
 import template from './user-popover-table.html';
 
-export default function userPopoverTable() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: function() {},
-    controllerAs: '$ctrl',
-    scope: {},
-    bindToController: {
-      user: '='
-    }
-  };
-}
+const userPopoverTable = {
+  template: template,
+  bindings: {
+    user: '<'
+  }
+};
+
+export default userPopoverTable;

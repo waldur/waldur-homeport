@@ -8,8 +8,9 @@ export const projectAlertsFeed = {
   controller: class ProjectAlertsFeedController {
     constructor(DashboardFeedService, AlertDialogsService) {
       this.DashboardFeedService = DashboardFeedService;
-      this.title = 'Alerts';
-      this.emptyText = 'No alerts yet.';
+      this.title = gettext('Alerts');
+      this.buttonTitle = gettext('Alert types');
+      this.emptyText = gettext('No alerts yet.');
       this.showTypes = AlertDialogsService.alertTypes.bind(AlertDialogsService);
       this.listState = 'project.alerts({uuid: $ctrl.project.uuid})';
     }

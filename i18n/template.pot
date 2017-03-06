@@ -37,6 +37,14 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
+#: app/scripts/components/team/add-project-member.js:22
+msgid "Add"
+msgstr ""
+
+#: app/scripts/components/user/keys/key-create.html:42
+msgid "Add key"
+msgstr ""
+
 #: app/scripts/components/navigation/select-workspace-dialog.html:31
 msgid "Add new"
 msgstr ""
@@ -47,6 +55,10 @@ msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:79
 msgid "Add new project"
+msgstr ""
+
+#: app/scripts/components/team/add-project-member.js:23
+msgid "Add project member"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:70
@@ -69,7 +81,12 @@ msgstr ""
 msgid "Affected resource"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:100
+#: app/scripts/components/dashboard/project-alerts-feed.js:12
+msgid "Alert types"
+msgstr ""
+
+#: app/scripts/components/customer/customer-workspace.js:102
+#: app/scripts/components/dashboard/project-alerts-feed.js:11
 msgid "Alerts"
 msgstr ""
 
@@ -94,6 +111,7 @@ msgid "API token lifetime"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:27
+#: app/scripts/components/dashboard/constants.js:7
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
 #: app/scripts/configs/base-config.js:103
 #: app/scripts/configs/base-config.js:122
@@ -113,7 +131,10 @@ msgstr ""
 msgid "Attached to"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:88
+#: app/scripts/components/customer/customer-workspace.js:90
+#: app/scripts/components/user/constants.js:32
+#: app/scripts/components/user/constants.js:8
+#: app/scripts/components/user/user-dashboard.html:28
 msgid "Audit logs"
 msgstr ""
 
@@ -183,6 +204,8 @@ msgstr ""
 #: app/scripts/components/resource/actions/dialog/action-dialog.html:33
 #: app/scripts/components/team/add-project-member.html:54
 #: app/scripts/components/team/add-team-member.html:86
+#: app/scripts/components/user/hooks/hook-details.html:81
+#: app/scripts/components/user/keys/key-create.html:45
 msgid "Cancel"
 msgstr ""
 
@@ -218,6 +241,10 @@ msgstr ""
 msgid "Compare flavors"
 msgstr ""
 
+#: app/scripts/components/user/user-popover-table.html:25
+msgid "Competence"
+msgstr ""
+
 #: app/scripts/components/appstore/appstore-store.html:10
 msgid "Configure"
 msgstr ""
@@ -232,6 +259,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/module.js:93
 #: app/scripts/components/openstack/openstack-volume/module.js:57
 #: app/scripts/components/openstack/openstack-volume/module.js:71
+#: app/scripts/components/user/hooks/hook-details.html:77
 msgid "Create"
 msgstr ""
 
@@ -246,6 +274,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/module.js:75
 msgid "Create backup schedule for OpenStack instance"
+msgstr ""
+
+#: app/scripts/components/user/hooks/hook-details.html:4
+msgid "Create notification"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/module.js:58
@@ -279,11 +311,16 @@ msgid "Custom request"
 msgstr ""
 
 #: app/scripts/components/customer/customer-workspace.js:43
+#: app/scripts/components/user/constants.js:3
 msgid "Dashboard"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:81
 msgid "Data volume size"
+msgstr ""
+
+#: app/scripts/components/user/user-popover-table.html:33
+msgid "Date joined"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
@@ -314,7 +351,10 @@ msgstr ""
 msgid "Do not have an account?"
 msgstr ""
 
+#: app/scripts/components/team/customer-users-list.js:71
+#: app/scripts/components/team/project-users-list.js:56
 #: app/scripts/components/user/user-edit.html:26
+#: app/scripts/components/user/user-popover-table.html:17
 msgid "E-mail"
 msgstr ""
 
@@ -324,8 +364,16 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+#: app/scripts/components/team/add-team-member.js:25
+msgid "Edit team member"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:69
 msgid "Enable DHCP"
+msgstr ""
+
+#: app/scripts/components/user/hooks/hook-details.html:37
+msgid "Enabled"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:71
@@ -357,12 +405,28 @@ msgstr ""
 msgid "Event type"
 msgstr ""
 
+#: app/scripts/components/dashboard/project-events-feed.js:12
+msgid "Event types"
+msgstr ""
+
+#: app/scripts/components/dashboard/project-events-feed.js:11
+msgid "Events"
+msgstr ""
+
 #: app/scripts/components/team/add-team-member.html:47
 msgid "Expiration time"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:42
 msgid "External IP"
+msgstr ""
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:44
+msgid "Filter organizations"
+msgstr ""
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:92
+msgid "Filter projects"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:97
@@ -404,6 +468,7 @@ msgid "From port"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:16
+#: app/scripts/components/user/user-popover-table.html:5
 msgid "Full name"
 msgstr ""
 
@@ -432,6 +497,10 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
+#: app/scripts/components/user/keys/key-create.html:19
+msgid "How to generate RSA keys"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:145
 msgid "I accept the"
 msgstr ""
@@ -445,6 +514,7 @@ msgid "IaaS"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:58
+#: app/scripts/components/user/user-popover-table.html:9
 msgid "ID code"
 msgstr ""
 
@@ -544,7 +614,7 @@ msgstr ""
 msgid "Issue status"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:94
+#: app/scripts/components/customer/customer-workspace.js:96
 msgid "Issues"
 msgstr ""
 
@@ -554,6 +624,7 @@ msgid "Item List"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:76
+#: app/scripts/components/user/user-popover-table.html:37
 msgid "Job position"
 msgstr ""
 
@@ -569,6 +640,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:27
 msgid "Key"
+msgstr ""
+
+#: app/scripts/components/user/keys/key-create.html:4
+msgid "Key name"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:159
@@ -589,7 +664,7 @@ msgstr ""
 
 #: app/scripts/components/navigation/header/logout-link.html:4
 #: app/scripts/components/navigation/site-header.html:12
-#: app/scripts/components/user/user-sidebar.html:21
+#: app/scripts/components/user/user-sidebar.html:24
 msgid "Log out"
 msgstr ""
 
@@ -606,12 +681,17 @@ msgstr ""
 msgid "Login failed"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:126
+#: app/scripts/components/customer/customer-workspace.js:128
+#: app/scripts/components/user/constants.js:24
 msgid "Manage"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:8
 msgid "Manage at"
+msgstr ""
+
+#: app/scripts/components/user/user-dashboard.html:16
+msgid "Managed projects"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:5
@@ -644,6 +724,11 @@ msgstr ""
 
 #: app/scripts/components/form/appstore-field-integer.html:22
 msgid "Maximal valid value is"
+msgstr ""
+
+#: app/scripts/components/team/customer-users-list.js:67
+#: app/scripts/components/team/project-users-list.js:52
+msgid "Member"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:114
@@ -685,6 +770,10 @@ msgstr ""
 msgid "No access info"
 msgstr ""
 
+#: app/scripts/components/dashboard/project-alerts-feed.js:13
+msgid "No alerts yet."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:30
 msgid "No backup schedules found matching filter."
 msgstr ""
@@ -701,6 +790,10 @@ msgstr ""
 msgid "No backups yet."
 msgstr ""
 
+#: app/scripts/components/dashboard/project-events-feed.js:13
+msgid "No events yet."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:31
 msgid "No floating IPs found matching filter."
 msgstr ""
@@ -713,6 +806,11 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:9
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:9
 msgid "No items yet."
+msgstr ""
+
+#: app/scripts/components/team/customer-users-list.js:63
+#: app/scripts/components/team/project-users-list.js:48
+msgid "No members found matching filter."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js:55
@@ -740,12 +838,24 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
+#: app/scripts/components/user/hooks/hook-details.html:15
+msgid "Notification method"
+msgstr ""
+
+#: app/scripts/components/user/constants.js:18
+msgid "Notifications"
+msgstr ""
+
 #: app/scripts/components/quotas/quotas-table.html:10
 msgid "of"
 msgstr ""
 
 #: app/scripts/components/offering/offering-header.html:3
 msgid "Offering details"
+msgstr ""
+
+#: app/scripts/components/user/user-popover.html:16
+msgid "OK"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:22
@@ -803,6 +913,14 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
+#: app/scripts/components/user/user-dashboard.html:6
+msgid "Owned organizations"
+msgstr ""
+
+#: app/scripts/components/team/customer-users-list.js:77
+msgid "Owner"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:5
 msgid "Package"
 msgstr ""
@@ -829,12 +947,20 @@ msgstr ""
 msgid "Phone number"
 msgstr ""
 
+#: app/scripts/components/user/user-popover-table.html:13
+msgid "Phone numbers"
+msgstr ""
+
 #: app/scripts/components/error/error-403.html:7
 msgid "plans page"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:15
 msgid "Port range"
+msgstr ""
+
+#: app/scripts/components/user/user-popover-table.html:21
+msgid "Preferred language"
 msgstr ""
 
 #: app/scripts/configs/base-config.js:68
@@ -886,6 +1012,7 @@ msgid "Privacy policy"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:21
+#: app/scripts/components/dashboard/constants.js:15
 #: app/scripts/components/project/projects-list.js:105
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
 #: app/scripts/configs/base-config.js:38
@@ -922,6 +1049,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
+#: app/scripts/components/dashboard/organization-dashboard.html:15
 #: app/scripts/components/team/add-team-member.html:40
 msgid "Projects list"
 msgstr ""
@@ -941,6 +1069,10 @@ msgstr ""
 
 #: app/scripts/configs/base-config.js:35
 msgid "Provision virtual machines (VMs) in available Providers."
+msgstr ""
+
+#: app/scripts/components/user/keys/key-create.html:23
+msgid "Public key"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:40
@@ -986,7 +1118,12 @@ msgid "Register to"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:36
+#: app/scripts/components/user/user-popover-table.html:29
 msgid "Registration method"
+msgstr ""
+
+#: app/scripts/components/user/filters.js:24
+msgid "Regular user"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:14
@@ -1040,7 +1177,7 @@ msgstr ""
 msgid "Resource has been updated"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:81
+#: app/scripts/components/customer/customer-workspace.js:82
 msgid "Resource usage"
 msgstr ""
 
@@ -1057,8 +1194,16 @@ msgstr ""
 msgid "Role expires on"
 msgstr ""
 
+#: app/scripts/components/team/project-users-list.js:62
+msgid "Role in project:"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:27
 msgid "Runtime state"
+msgstr ""
+
+#: app/scripts/components/team/add-team-member.js:24
+msgid "Save"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:14
@@ -1124,6 +1269,10 @@ msgstr ""
 msgid "Service type"
 msgstr ""
 
+#: app/scripts/components/dashboard/dashboard-feed.html:27
+msgid "Show all"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:87
 msgid "Sign in with Facebook"
 msgstr ""
@@ -1147,7 +1296,7 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:120
+#: app/scripts/components/customer/customer-workspace.js:122
 msgid "Sizing"
 msgstr ""
 
@@ -1183,12 +1332,25 @@ msgstr ""
 msgid "SSH key"
 msgstr ""
 
+#: app/scripts/components/user/constants.js:13
+#: app/scripts/components/user/constants.js:37
+msgid "SSH Keys"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:89
 msgid "SSH public key"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:100
 msgid "SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref=\"profile.keys\">profile</a>."
+msgstr ""
+
+#: app/scripts/components/user/filters.js:18
+msgid "Staff"
+msgstr ""
+
+#: app/scripts/components/user/filters.js:20
+msgid "Staff and Support user"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:70
@@ -1206,9 +1368,11 @@ msgid "State"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:55
+#: app/scripts/components/user/user-popover-table.html:41
 msgid "Status"
 msgstr ""
 
+#: app/scripts/components/dashboard/constants.js:19
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:64
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:25
 #: app/scripts/components/project/projects-list.js:96
@@ -1243,6 +1407,10 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
+#: app/scripts/components/user/filters.js:22
+msgid "Support user"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js:39
 #: app/scripts/components/openstack/openstack-instance/module.js:46
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:37
@@ -1263,8 +1431,12 @@ msgstr ""
 msgid "TAX"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:107
+#: app/scripts/components/customer/customer-workspace.js:109
 msgid "Team"
+msgstr ""
+
+#: app/scripts/components/dashboard/constants.js:23
+msgid "Team size"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:5
@@ -1365,6 +1537,14 @@ msgstr ""
 msgid "Unit Price"
 msgstr ""
 
+#: app/scripts/components/user/hooks/hook-details.html:76
+msgid "Update"
+msgstr ""
+
+#: app/scripts/components/user/hooks/hook-details.html:3
+msgid "Update notification"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:169
 msgid "Update profile"
 msgstr ""
@@ -1394,6 +1574,14 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:147
 msgid "User data"
+msgstr ""
+
+#: app/scripts/components/user/user-popover.html:2
+msgid "User details"
+msgstr ""
+
+#: app/scripts/components/user/user-sidebar.html:8
+msgid "User profile"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:47
@@ -1427,6 +1615,7 @@ msgid "Version"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:15
+#: app/scripts/components/dashboard/constants.js:11
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
 #: app/scripts/configs/base-config.js:118
 #: app/scripts/configs/base-config.js:30
@@ -1474,6 +1663,10 @@ msgstr ""
 msgid "Welcome to"
 msgstr ""
 
+#: app/scripts/components/team/add-team-member.js:26
+msgid "You cannot change your own role"
+msgstr ""
+
 #: app/scripts/components/issues/issue-create-dialog.html:49
 #: app/scripts/components/issues/issue-create-dialog.html:69
 #: app/scripts/components/issues/issue-create-dialog.html:88
@@ -1498,6 +1691,11 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:30
 msgid "You have no snapshots yet."
+msgstr ""
+
+#: app/scripts/components/team/customer-users-list.js:62
+#: app/scripts/components/team/project-users-list.js:47
+msgid "You have no team members yet"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:15

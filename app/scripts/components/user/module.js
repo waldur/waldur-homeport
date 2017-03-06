@@ -1,8 +1,3 @@
-import hookDetails from './hook-details';
-import hookList from './hook-list';
-import formatEventTitle from './hook-filter';
-import keyCreate from './key-create';
-import keyList from './key-list';
 import userEvents from './user-events';
 import userManage from './user-manage';
 import userSidebar from './user-sidebar';
@@ -18,13 +13,10 @@ import userRoutes from './routes';
 import usersService from './users-service';
 import userToken from './user-token';
 import filtersModule from './filters';
+import hooksModule from './hooks/module';
+import keysModule from './keys/module';
 
 export default module => {
-  module.directive('hookDetails', hookDetails);
-  module.filter('formatEventTitle', formatEventTitle);
-  module.directive('hookList', hookList);
-  module.directive('keyList', keyList);
-  module.directive('keyCreate', keyCreate);
   module.directive('userEvents', userEvents);
   module.directive('userManage', userManage);
   module.component('userSidebar', userSidebar);
@@ -34,11 +26,13 @@ export default module => {
   module.directive('userOrganizations', userOrganizations);
   module.directive('userProjects', userProjects);
   module.component('userPopover', userPopover);
-  module.directive('userPopoverTable', userPopoverTable);
+  module.component('userPopoverTable', userPopoverTable);
   module.service('stateUtilsService', stateUtilsService);
   module.service('usersService', usersService);
   module.run(attachStateUtils);
   module.config(userRoutes);
   module.component('userToken', userToken);
   filtersModule(module);
+  hooksModule(module);
+  keysModule(module);
 };

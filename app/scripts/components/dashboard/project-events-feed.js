@@ -8,8 +8,9 @@ export const projectEventsFeed = {
   controller: class ProjectEventsFeedController {
     constructor(DashboardFeedService, EventDialogsService) {
       this.DashboardFeedService = DashboardFeedService;
-      this.title = 'Events';
-      this.emptyText = 'No events yet.';
+      this.title = gettext('Events');
+      this.buttonTitle = gettext('Event types');
+      this.emptyText = gettext('No events yet.');
       this.showTypes = EventDialogsService.eventTypes.bind(EventDialogsService);
       this.listState = 'project.events({uuid: $ctrl.project.uuid})';
     }

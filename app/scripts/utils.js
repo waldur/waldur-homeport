@@ -130,6 +130,11 @@
                 .replace('{href}', href)
                 .replace('{name}', name);
       },
+      renderAvatar: function(user) {
+        var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+          .replace('{gravatarSrc}', user.email);
+        return avatar + ' ' + (user.full_name || user.username);
+      },
       parseQueryString: function(qs) {
         // Example input: foo=123&bar=456
         // Example output: {foo: "123", bar: "456"}

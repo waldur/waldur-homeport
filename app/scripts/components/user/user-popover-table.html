@@ -2,40 +2,44 @@
     <table class="table table-bordered">
         <tbody>
             <tr>
-                <td><strong>Full name</strong></td>
+                <td><strong translate>Full name</strong></td>
                 <td>{{ $ctrl.user.username }}</td>
             </tr>
             <tr>
-                <td><strong>ID code</strong></td>
+                <td><strong translate>ID code</strong></td>
                 <td>{{ $ctrl.user.civil_number || 'N/A' }}</td>
             </tr>
             <tr>
-                <td><strong>Phone numbers</strong></td>
+                <td><strong translate>Phone numbers</strong></td>
                 <td>{{ $ctrl.user.phone_number || 'N/A' }}</td>
             </tr>
             <tr>
-                <td><strong>E-mail</strong></td>
+                <td><strong translate>E-mail</strong></td>
                 <td>{{ $ctrl.user.email }}</td>
             </tr>
             <tr>
-                <td><strong>Preferred language</strong></td>
+                <td><strong translate>Preferred language</strong></td>
                 <td>{{ $ctrl.user.preferred_language || 'N/A' }}</td>
             </tr>
             <tr>
-                <td><strong>Competence</strong></td>
+                <td><strong translate>Competence</strong></td>
                 <td>{{ $ctrl.user.competence || 'N/A' }}</td>
             </tr>
             <tr>
-                <td><strong>Registration method</strong></td>
-                <td>{{ $ctrl.user.registration_method || 'N/A' }}</td>
+                <td><strong translate>Registration method</strong></td>
+                <td>{{ $ctrl.user | formatRegistrationMethod }}</td>
             </tr>
             <tr>
-                <td><strong>Date joined</strong></td>
+                <td><strong translate>Date joined</strong></td>
                 <td>{{ $ctrl.user.date_joined | dateTime}}</td>
             </tr>
             <tr>
-                <td><strong>Job position</strong></td>
+                <td><strong translate>Job position</strong></td>
                 <td>{{ $ctrl.user.job_title || 'N/A' }}</td>
+            </tr>
+            <tr>
+                <td><strong translate>Status</strong></td>
+                <td>{{ $ctrl.user | formatUserStatus }}</td>
             </tr>
         </tbody>
     </table>

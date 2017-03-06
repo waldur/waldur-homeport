@@ -41,7 +41,7 @@
                  class="form-control"
                  ng-model="Ctrl.organizationSearchInput"
                  ng-model-options="{ debounce: 500 }"
-                 placeholder="Filter organizations">
+                 placeholder="{{ 'Filter organizations' | translate }}">
           <label for="organization-search-box">
             <i class="fa fa-search"></i>
           </label>
@@ -89,7 +89,7 @@
                  class="form-control"
                  ng-model="Ctrl.projectSearchInput"
                  ng-model-options="{ debounce: 500 }"
-                 placeholder="Filter projects">
+                 placeholder="{{ 'Filter projects' | translate }}">
           <label for="project-search-box">
             <i class="fa fa-search"></i>
           </label>
