@@ -44,39 +44,39 @@ export const ISSUE_TYPE_CHOICES = Object.keys(ISSUE_IDS).map(item => {
 export const ISSUE_FILTERS = [
   {
     name: 'customer',
-    label: 'Organization name'
+    label: gettext('Organization name')
   },
   {
     name: 'customer',
-    label: 'Organization code'
+    label: gettext('Organization code')
   },
   {
     name: 'project',
-    label: 'Project name'
+    label: gettext('Project name')
   },
   {
     name: 'scope',
-    label: 'Service type'
+    label: gettext('Service type')
   },
   {
     name: 'resource',
-    label: 'Affected resource'
+    label: gettext('Affected resource')
   },
   {
     name: 'type',
-    label: 'Request type'
+    label: gettext('Request type')
   },
   {
     name: 'status',
-    label: 'Status'
+    label: gettext('Status')
   },
   {
     name: 'reporter',
-    label: 'Reporter'
+    label: gettext('Reporter')
   },
   {
     name: 'assignee',
-    label: 'Assignee'
+    label: gettext('Assignee')
   }
 ];
 
@@ -91,22 +91,22 @@ export const ISSUE_FILTERS_SHORT = {
   ],
   options: {
     customer: {
-      label: 'Organization'
+      label: gettext('Organization')
     },
     project: {
-      label: 'Project'
+      label: gettext('Project')
     },
     caller: {
-      label: 'Caller'
+      label: gettext('Caller')
     },
     key: {
-      label: 'Key'
+      label: gettext('Key')
     },
     type: {
-      label: 'Request type'
+      label: gettext('Request type')
     },
     status: {
-      label: 'Status'
+      label: gettext('Status')
     }
   }
 };

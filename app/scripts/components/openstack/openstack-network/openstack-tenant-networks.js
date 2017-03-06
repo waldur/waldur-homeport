@@ -33,14 +33,14 @@ function TenantNetworksController(
       options.noMatchesText = 'No networks found matching filter.';
       options.columns = [
         {
-          title: 'Name',
+          title: gettext('Name'),
           className: 'all',
           render: function(row) {
             return vm.renderResourceName(row);
           }
         },
         {
-          title: 'Subnets',
+          title: gettext('Subnets'),
           className: 'min-tablet-l',
           render: function(row) {
             return row.subnets.map(function(subnet) {
@@ -49,7 +49,7 @@ function TenantNetworksController(
           }
         },
         {
-          title: 'State',
+          title: gettext('State'),
           className: 'min-tablet-l',
           render: function(row) {
             return vm.renderResourceState(row);

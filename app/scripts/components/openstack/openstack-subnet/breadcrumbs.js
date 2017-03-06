@@ -20,7 +20,7 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService, ncUtils, C
         }
       },
       {
-        label: 'Networks',
+        label: gettext('Networks'),
         state: 'resources.details',
         params: {
           uuid: tenant_uuid,
@@ -37,7 +37,7 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService, ncUtils, C
         }
       },
       {
-        label: 'Subnets',
+        label: gettext('Subnets'),
         state: 'resources.details',
         params: {
           uuid: network_uuid,

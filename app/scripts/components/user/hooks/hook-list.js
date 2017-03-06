@@ -19,11 +19,11 @@ function HookListController(
       this._super();
 
       this.tableOptions = {
-        noDataText: 'No notifications registered.',
-        noMatchesText: 'No notifications found matching filter.',
+        noDataText: gettext('No notifications registered.'),
+        noMatchesText: gettext('No notifications found matching filter.'),
         columns: [
           {
-            title: 'State',
+            title: gettext('State'),
             className: 'text-center all',
             render: function(row) {
               var cls = row.is_active && 'online' || '';
@@ -34,7 +34,7 @@ function HookListController(
             width: '40px'
           },
           {
-            title: 'Method',
+            title: gettext('Method'),
             className: 'min-tablet-l',
             render: function(row) {
               return row.label;
@@ -42,7 +42,7 @@ function HookListController(
             width: '100px'
           },
           {
-            title: 'Destination',
+            title: gettext('Destination'),
             className: 'min-tablet-l',
             render: function(row) {
               return row.destination;
@@ -50,7 +50,7 @@ function HookListController(
             width: '100px'
           },
           {
-            title: 'Events',
+            title: gettext('Events'),
             className: 'min-tablet-l',
             render: function(row) {
               return row.events;

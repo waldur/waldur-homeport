@@ -39,20 +39,20 @@ function OpenstackVolumesList(
       options.noMatchesText = 'No volumes found matching filter.';
       options.columns = [
         {
-          title: 'Name',
+          title: gettext('Name'),
           className: 'all',
           render: row => this.renderResourceName(row)
         },
         {
-          title: 'Size',
+          title: gettext('Size'),
           render: row => $filter('filesize')(row.size)
         },
         {
-          title: 'Attached to',
+          title: gettext('Attached to'),
           render: row => row.device || 'N/A'
         },
         {
-          title: 'State',
+          title: gettext('State'),
           className: 'min-tablet-l',
           render: row => this.renderResourceState(row)
         },

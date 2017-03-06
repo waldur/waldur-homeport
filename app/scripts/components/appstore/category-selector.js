@@ -116,8 +116,8 @@ const appstoreCategorySelector = {
             type: this.ISSUE_IDS.SERVICE_REQUEST
           })),
           options: {
-            title: 'Request a new service',
-            descriptionPlaceholder: 'Please clarify why do you need it',
+            title: gettext('Request a new service'),
+            descriptionPlaceholder: gettext('Please clarify why do you need it'),
             descriptionLabel: 'Motivation',
             summaryLabel: 'Service name'
           }

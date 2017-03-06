@@ -24,18 +24,18 @@ function KeyListController(
 
       this.tableOptions = {
         searchFieldName: 'name',
-        noDataText: 'No SSH keys yet.',
-        noMatchesText: 'No SSH keys found matching filter.',
+        noDataText: gettext('No SSH keys yet.'),
+        noMatchesText: gettext('No SSH keys found matching filter.'),
         columns: [
           {
-            title: 'Title',
+            title: gettext('Title'),
             className: 'all',
             render: function(row) {
               return row.name;
             }
           },
           {
-            title: 'Fingerprint',
+            title: gettext('Fingerprint'),
             className: 'min-tablet-l',
             render: function(row) {
               return row.fingerprint;

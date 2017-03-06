@@ -51,11 +51,11 @@ class UserManageController {
           summary: 'Account removal'
         }),
         options: {
-          title: 'Account removal',
+          title: gettext('Account removal'),
           hideTitle: true,
-          descriptionPlaceholder: 'Why would you want to go away? Help us become better please!',
-          descriptionLabel: 'Reason',
-          submitTitle: 'Request removal'
+          descriptionPlaceholder: gettext('Why would you want to go away? Help us become better please!'),
+          descriptionLabel: gettext('Reason'),
+          submitTitle: gettext('Request removal')
         }
       }
     });
