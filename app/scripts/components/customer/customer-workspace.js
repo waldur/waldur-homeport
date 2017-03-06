@@ -75,12 +75,14 @@ export function CustomerWorkspaceController(
           {
             label: gettext('Cost analysis'),
             icon: 'fa-pie-chart',
-            link: 'organization.analysis.cost({uuid: $ctrl.context.customer.uuid})'
+            link: 'organization.analysis.cost({uuid: $ctrl.context.customer.uuid})',
+            feature: 'analytics.cost'
           },
           {
             label: gettext('Resource usage'),
             icon: 'fa-tachometer',
-            link: 'organization.analysis.resources({uuid: $ctrl.context.customer.uuid})'
+            link: 'organization.analysis.resources({uuid: $ctrl.context.customer.uuid})',
+            feature: 'analytics.resources'
           }
         ]
       },
