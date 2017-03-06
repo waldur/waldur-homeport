@@ -3,7 +3,7 @@ const tabs = {
     url: '',
     template: '<user-dashboard></user-dashboard>',
     data: {
-      pageTitle: 'User dashboard',
+      pageTitle: gettext('User dashboard'),
       pageClass: 'gray-bg',
       hideBreadcrumbs: true
     }
@@ -12,28 +12,28 @@ const tabs = {
     url: 'events/',
     template: '<user-events user="currentUser"></user-events>',
     data: {
-      pageTitle: 'Audit logs'
+      pageTitle: gettext('Audit logs')
     }
   },
   keys: {
     url: 'keys/',
     template: '<key-list></key-list>',
     data: {
-      pageTitle: 'SSH keys'
+      pageTitle: gettext('SSH keys')
     }
   },
   notifications: {
     url: 'notifications/',
     template: '<hook-list></hook-list>',
     data: {
-      pageTitle: 'Notifications'
+      pageTitle: gettext('Notifications')
     }
   },
   manage: {
     url: 'manage/',
     template: '<user-manage></user-manage>',
     data: {
-      pageTitle: 'Manage'
+      pageTitle: gettext('Manage')
     }
   }
 };
@@ -78,7 +78,7 @@ export default function($stateProvider) {
       template: '<user-details></user-details>',
       data: {
         auth: true,
-        pageTitle: 'Add SSH key',
+        pageTitle: gettext('Add SSH key'),
         workspace: 'user'
       }
     })

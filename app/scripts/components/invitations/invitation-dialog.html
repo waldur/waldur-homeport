@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h2 class="modal-title">Invite user</h2>
+    <h2 class="modal-title" translate>Invite user</h2>
 </div>
 <form name="DialogCtrl.DialogForm">
 <div class="modal-body">
@@ -9,7 +9,8 @@
     <div ng-if="!DialogCtrl.loading">
         <div class="form-group">
             <label class="control-label" for="inviteEmail">
-                E-mail <span class="text-danger">*</span>
+                <span translate>E-mail</span>
+                <span class="text-danger">*</span>
             </label>
             <input class="form-control" id="inviteEmail" name="email" type="email" ng-model="DialogCtrl.email" required ng-disabled="DialogCtrl.submitting">
             <p class="text-danger" ng-repeat="error in DialogCtrl.errors.email" ng-bind="error"></p>
@@ -17,7 +18,7 @@
 
         <div class="form-group">
             <label class="control-label" for="inviteCivilNumber">
-                Civil number
+                <span translate>Civil number</span>
             </label>
             <input class="form-control" id="inviteCivilNumber" name="civil_number" ng-model="DialogCtrl.civil_number" ng-disabled="DialogCtrl.submitting">
             <p class="text-danger" ng-repeat="error in DialogCtrl.errors.civil_number" ng-bind="error"></p>
@@ -25,7 +26,7 @@
 
         <div class="form-group">
             <div>
-                <label class="control-label">Role</label>
+                <label class="control-label" translate>Role</label>
             </div>
             <div class="btn-group">
                 <button
@@ -34,7 +35,7 @@
                     ng-repeat="role in DialogCtrl.roles"
                     ng-class="{active: DialogCtrl.role == role}"
                     ng-click="DialogCtrl.role = role">
-                    <i class="fa" ng-class="role.icon"></i> {{ role.title }}
+                    <i class="fa" ng-class="role.icon"></i> {{ role.title | translate }}
                 </button>
             </div>
             <p class="text-danger" ng-repeat="error in DialogCtrl.errors.customer" ng-bind="error"></p>
@@ -42,7 +43,8 @@
 
         <div class="form-group" ng-if="DialogCtrl.role.field == 'project_role'">
             <label class="control-label" for="inviteProject">
-                Project <span class="text-danger">*</span>
+                <span translate>Project</span>
+                <span class="text-danger">*</span>
             </label>
             <select
                 id="inviteProject"
@@ -51,7 +53,7 @@
                 class="form-control"
                 required
                 ng-disabled="DialogCtrl.submitting">
-                <option value="">Select project</option>
+                <option value=""><span translate>Select project</span></option>
             </select>
             <p class="text-danger" ng-repeat="error in DialogCtrl.errors.project" ng-bind="error"></p>
         </div>
@@ -68,11 +70,11 @@
 <div class="modal-footer">
     <button class="btn btn-primary" type="submit"
        submit-button="DialogCtrl.submitForm()">
-       Invite user
+       <span translate>Invite user</span>
     </button>
     <button class="btn btn-default" type="button"
         ng-click="DialogCtrl.dismiss()">
-        Cancel
+        <span translate>Cancel</span>
     </button>
 </div>
 </form>

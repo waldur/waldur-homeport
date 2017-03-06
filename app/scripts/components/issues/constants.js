@@ -1,8 +1,8 @@
 export const ISSUE_IDS = {
-  INCIDENT: 'Incident',
-  CHANGE_REQUEST: 'Change Request',
-  SERVICE_REQUEST: 'Service Request',
-  INFORMATIONAL: 'Informational'
+  INCIDENT: gettext('Incident'),
+  CHANGE_REQUEST: gettext('Change Request'),
+  SERVICE_REQUEST: gettext('Service Request'),
+  INFORMATIONAL: gettext('Informational'),
 };
 
 export const ISSUE_CLASSES = {

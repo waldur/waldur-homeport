@@ -15,7 +15,7 @@ export default function paymentRoutes($stateProvider) {
       url: 'approve/',
       template: '<payment-approve/>',
       data: {
-        pageTitle: 'Approve payment'
+        pageTitle: gettext('Approve payment')
       }
     })
 
@@ -23,7 +23,7 @@ export default function paymentRoutes($stateProvider) {
       url: 'cancel/',
       template: '<payment-cancel/>',
       data: {
-        pageTitle: 'Cancel payment'
+        pageTitle: gettext('Cancel payment')
       }
     });
 }

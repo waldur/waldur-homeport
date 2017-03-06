@@ -11,7 +11,7 @@ export default function analyticsRoutes($stateProvider) {
       url: 'cost-analysis/',
       template: '<cost-analysis></cost-analysis>',
       data: {
-        pageTitle: 'Cost analysis'
+        pageTitle: gettext('Cost analysis')
       }
     })
 
@@ -20,7 +20,7 @@ export default function analyticsRoutes($stateProvider) {
       template: '<resource-analysis/>',
       data: {
         pageClass: 'gray-bg',
-        pageTitle: 'Resource usage'
+        pageTitle: gettext('Resource usage')
       }
     });
 }

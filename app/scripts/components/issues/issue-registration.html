@@ -8,7 +8,7 @@
                 </label>
                 <div class="col-sm-6">
                     <ui-select ng-model="$ctrl.issue.caller" name="caller" required>
-                        <ui-select-match placeholder="Select caller..."
+                        <ui-select-match placeholder="{{ 'Select caller...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.full_name || $select.selected.username }}
                         </ui-select-match>
@@ -45,7 +45,7 @@
                 </label>
                 <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.caller}">
                     <ui-select ng-model="$ctrl.issue.customer" name="customer" required>
-                        <ui-select-match placeholder="Select organization..."
+                        <ui-select-match placeholder="{{ 'Select organization...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>
@@ -129,7 +129,7 @@
                 </label>
                 <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.customer}">
                     <ui-select ng-model="$ctrl.issue.project" name="project" required>
-                        <ui-select-match placeholder="Select project..."
+                        <ui-select-match placeholder="{{ 'Select project...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>
@@ -158,7 +158,7 @@
                 </label>
                 <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.project}">
                     <ui-select ng-model="$ctrl.issue.scope">
-                        <ui-select-match placeholder="Select service type...">
+                        <ui-select-match placeholder="{{ 'Select service type...' | translate }}">
                             {{ $select.selected.display_name }}
                         </ui-select-match>
                         <ui-select-choices repeat="option in $ctrl.scopes">
@@ -173,7 +173,7 @@
                 </label>
                 <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.scope}">
                     <ui-select ng-model="$ctrl.issue.resource">
-                        <ui-select-match placeholder="Select affected resource..."
+                        <ui-select-match placeholder="{{ 'Select affected resource...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>
@@ -192,7 +192,7 @@
                 </label>
                 <div class="col-sm-6">
                     <ui-select ng-model="$ctrl.issue.assignee" name="assignee">
-                        <ui-select-match placeholder="Select assignee..."
+                        <ui-select-match placeholder="{{ 'Select assignee...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>

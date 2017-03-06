@@ -8,7 +8,7 @@ export default function appstoreRoutes($stateProvider) {
       template: '<ui-view></ui-view>',
       data: {
         auth: true,
-        pageTitle: 'Service store',
+        pageTitle: gettext('Service store'),
         workspace: 'project',
         pageClass: 'gray-bg'
       }
@@ -19,7 +19,7 @@ export default function appstoreRoutes($stateProvider) {
       template: '<appstore-store></appstore-store>',
       data: {
         category: 'private_clouds',
-        pageTitle: 'Private clouds',
+        pageTitle: gettext('Private clouds'),
         sidebarState: 'project.resources'
       }
     })
@@ -29,7 +29,7 @@ export default function appstoreRoutes($stateProvider) {
       template: '<appstore-store></appstore-store>',
       data: {
         category: 'vms',
-        pageTitle: 'Virtual machines',
+        pageTitle: gettext('Virtual machines'),
         sidebarState: 'project.resources'
       }
     })
@@ -39,7 +39,7 @@ export default function appstoreRoutes($stateProvider) {
       template: '<appstore-store></appstore-store>',
       data: {
         category: 'apps',
-        pageTitle: 'Applications',
+        pageTitle: gettext('Applications'),
         sidebarState: 'project.resources'
       }
     })
@@ -49,7 +49,7 @@ export default function appstoreRoutes($stateProvider) {
       template: '<appstore-store></appstore-store>',
       data: {
         category: 'storages',
-        pageTitle: 'Storages',
+        pageTitle: gettext('Storages'),
         sidebarState: 'project.resources'
       }
     })
@@ -59,7 +59,7 @@ export default function appstoreRoutes($stateProvider) {
       template: '<appstore-offering></appstore-offering>',
       data: {
         category: 'offerings',
-        pageTitle: 'Offerings',
+        pageTitle: gettext('Offerings'),
         sidebarState: 'project.resources'
       }
     })
@@ -75,7 +75,7 @@ export default function appstoreRoutes($stateProvider) {
       abstract: true,
       data: {
         auth: true,
-        pageTitle: 'Compare flavors',
+        pageTitle: gettext('Compare flavors'),
       }
     })
 

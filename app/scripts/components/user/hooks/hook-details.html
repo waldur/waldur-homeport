@@ -42,7 +42,7 @@
                 id="hookEmail"
                 ng-model="HookController.instance.email"
                 class="form-control"
-                placeholder="E-mail address"/>
+                placeholder="{{ 'E-mail address' | translate }}"/>
             <p class="text-danger"
                 ng-repeat="error in HookController.errors.email"
                 ng-bind="error"></p>
@@ -53,7 +53,7 @@
                 id="destination_url"
                 ng-model="HookController.instance.destination_url"
                 class="form-control"
-                placeholder="Destination URL"/>
+                placeholder="{{ 'Destination URL' | translate }}"/>
             <p class="text-danger"
                 ng-repeat="error in HookController.errors.destination_url"
                 ng-bind="error"></p>

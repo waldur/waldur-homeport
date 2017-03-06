@@ -57,7 +57,7 @@
                 </label>
                 <div>
                     <ui-select ng-model="$ctrl.issue.customer" name="customer">
-                        <ui-select-match placeholder="Select organization..."
+                        <ui-select-match placeholder="{{ 'Select organization...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>
@@ -76,7 +76,7 @@
                 </label>
                 <div ng-class="{disabled: !$ctrl.issue.customer}">
                     <ui-select ng-model="$ctrl.issue.project" name="project">
-                        <ui-select-match placeholder="Select project..."
+                        <ui-select-match placeholder="{{ 'Select project...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>
@@ -95,7 +95,7 @@
                 </label>
                 <div ng-class="{disabled: !$ctrl.issue.project}">
                     <ui-select ng-model="$ctrl.issue.resource">
-                        <ui-select-match placeholder="Select affected resource..."
+                        <ui-select-match placeholder="{{ 'Select affected resource...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>

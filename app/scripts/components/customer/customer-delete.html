@@ -4,10 +4,11 @@
 
 <div ng-if="!DeleteController.loading">
     <div class="panel panel-default">
-        <div class="panel-heading">Organization details</div>
+        <div class="panel-heading" translate>Organization details</div>
         <div class="panel-body">
             <dl class="dl-horizontal">
-                <dt>Name: </dt><dd>{{::DeleteController.customer.name}}</dd>
+                <dt><span translate>Name</span>: </dt>
+                <dd>{{::DeleteController.customer.name}}</dd>
             </dl>
         </div>
     </div>
@@ -15,29 +16,46 @@
         <div class="panel-heading">Payment details</div>
         <div class="panel-body">
             <dl class="dl-horizontal">
-                <dt>Company: </dt><dd>{{::DeleteController.paymentDetails.company}}</dd>
-                <dt>Address: </dt><dd>{{::DeleteController.paymentDetails.address}}</dd>
-                <dt>Country: </dt><dd>{{::DeleteController.paymentDetails.country}}</dd>
-                <dt>Email: </dt><dd>{{::DeleteController.paymentDetails.email}}</dd>
-                <dt>Postal: </dt><dd>{{::DeleteController.paymentDetails.postal}}</dd>
-                <dt>Phone: </dt><dd>{{::DeleteController.paymentDetails.phone}}</dd>
-                <dt>Bank: </dt><dd>{{::DeleteController.paymentDetails.bank}}</dd>
-                <dt>Account: </dt><dd>{{::DeleteController.paymentDetails.account}}</dd>
-                <dt>Default tax percent: </dt><dd>{{::DeleteController.paymentDetails.default_tax_percent}}</dd>
+                <dt><span translate>Company</span>:</dt>
+                <dd>{{::DeleteController.paymentDetails.company}}</dd>
+
+                <dt><span translate>Address</span>:</dt>
+                <dd>{{::DeleteController.paymentDetails.address}}</dd>
+
+                <dt><span translate>Country</span>:</dt>
+                <dd>{{::DeleteController.paymentDetails.country}}</dd>
+
+                <dt><span translate>Email</span>:</dt>
+                <dd>{{::DeleteController.paymentDetails.email}}</dd>
+
+                <dt><span translate>Postal</span>:</dt>
+                <dd>{{::DeleteController.paymentDetails.postal}}</dd>
+
+                <dt><span translate>Phone</span>:</dt>
+                <dd>{{::DeleteController.paymentDetails.phone}}</dd>
+
+                <dt><span translate>Bank</span>:</dt>
+                <dd>{{::DeleteController.paymentDetails.bank}}</dd>
+
+                <dt><span translate>Account</span>:</dt>
+                <dd>{{::DeleteController.paymentDetails.account}}</dd>
+
+                <dt><span translate>Default tax percent</span>:</dt>
+                <dd>{{::DeleteController.paymentDetails.default_tax_percent}}</dd>
             </dl>
         </div>
     </div>
     <div class="panel panel-default" ng-if="DeleteController.canRemoveCustomer">
-        <div class="panel-heading">Organization actions</div>
+        <div class="panel-heading" translate>Organization actions</div>
         <div class="panel-body">
-            <h3>You can remove this organization by pressing the button</h3>
+            <p translate>You can remove this organization by pressing the button</p>
             <a ng-click="DeleteController.removeCustomer()" class="btn btn-danger">
                 <i class="fa fa-trash"></i>
-                Remove organization
+                <span translate>Remove organization</span>
             </a>
         </div>
     </div>
     <h3 ng-if="!DeleteController.canRemoveCustomer">
-        Only staff user can remove organization.
+        <span translate>Only staff user can remove organization.</span>
     </h3>
 </div>
