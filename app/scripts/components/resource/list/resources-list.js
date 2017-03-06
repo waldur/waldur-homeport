@@ -30,25 +30,25 @@ export default function baseResourceListController(
       var vm = this.controllerScope;
       return {
         searchFieldName: 'name',
-        noDataText: 'You have no resources yet.',
-        noMatchesText: 'No resources found matching filter.',
+        noDataText: gettext('You have no resources yet.'),
+        noMatchesText: gettext('No resources found matching filter.'),
         columns: [
           {
-            title: 'Name',
+            title: gettext('Name'),
             className: 'all',
             render: function(row) {
               return vm.renderResourceName(row);
             }
           },
           {
-            title: 'Provider',
+            title: gettext('Provider'),
             className: 'desktop',
             render: function(row) {
               return row.service_name;
             }
           },
           {
-            title: 'State',
+            title: gettext('State'),
             className: 'min-tablet-l',
             render: function(row) {
               return vm.renderResourceState(row);

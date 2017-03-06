@@ -35,7 +35,7 @@ function AppStoreController(
     resourceTypesBlock: false,
     loadingResourceProperties: false,
 
-    successMessage: 'Purchase of {vm_name} was successful.',
+    successMessage: gettext('Purchase of {vm_name} was successful.'),
     formOptions: {},
     allFormOptions: {},
     selectedService: {},

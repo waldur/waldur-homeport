@@ -30,24 +30,24 @@ function backupSnapshotsListController(
       options.noMatchesText = 'No snapshots found matching filter.';
       options.columns = [
         {
-          title: 'Name',
+          title: gettext('Name'),
           className: 'all',
           render: row => this.renderResourceName(row)
         },
         {
-          title: 'Description',
+          title: gettext('Description'),
           render: row => row.description || 'N/A'
         },
         {
-          title: 'Size',
+          title: gettext('Size'),
           render: row => $filter('filesize')(row.size)
         },
         {
-          title: 'Created',
+          title: gettext('Created'),
           render: row => $filter('shortDate')(row.created) || '&mdash;'
         },
         {
-          title: 'State',
+          title: gettext('State'),
           className: 'min-tablet-l',
           render: row => this.renderResourceState(row)
         },

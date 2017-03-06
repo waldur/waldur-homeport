@@ -26,23 +26,23 @@ function ProviderPriceListController(
         this.tableOptions = {
           disableSearch: true,
           disableAutoUpdate: true,
-          noDataText: 'No price list items yet.',
-          noMatchesText: 'No price list items found matching filter.',
+          noDataText: gettext('No price list items yet.'),
+          noMatchesText: gettext('No price list items found matching filter.'),
           columns: [
             {
-              title: 'Resource type',
+              title: gettext('Resource type'),
               render: row => row.resource_type,
             },
             {
-              title: 'Item type',
+              title: gettext('Item type'),
               render: row => row.item_type,
             },
             {
-              title: 'Key',
+              title: gettext('Key'),
               render: row => row.key,
             },
             {
-              title: 'Hourly rate',
+              title: gettext('Hourly rate'),
               render: row => $filter('defaultCurrency')(row.value)
             }
           ]

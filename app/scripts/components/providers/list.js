@@ -34,25 +34,25 @@ export default function ProviderListController(
           this.checkPermissions();
           this.tableOptions = {
             searchFieldName: 'name',
-            noDataText: 'No providers yet.',
-            noMatchesText: 'No providers found matching filter.',
+            noDataText: gettext('No providers yet.'),
+            noMatchesText: gettext('No providers found matching filter.'),
             columns: [
               {
-                title: 'Type',
+                title: gettext('Type'),
                 className: 'all',
                 render: function(row) {
                   return row.service_type;
                 }
               },
               {
-                title: 'Name',
+                title: gettext('Name'),
                 className: 'all',
                 render: function(row) {
                   return row.name;
                 }
               },
               {
-                title: 'State',
+                title: gettext('State'),
                 className: 'text-center min-tablet-l',
                 render: function(row) {
                   return vm.renderProviderState(row);
@@ -60,7 +60,7 @@ export default function ProviderListController(
                 width: '40px'
               },
               {
-                title: 'System provider',
+                title: gettext('System provider'),
                 className: 'text-center min-tablet-l',
                 render: function(row) {
                   var cls = row.shared && 'fa-check' || 'fa-minus';
@@ -69,7 +69,7 @@ export default function ProviderListController(
                 width: '100px'
               },
               {
-                title: 'Resources',
+                title: gettext('Resources'),
                 className: 'text-center min-tablet-l',
                 render: function(row) {
                   if (!controllerScope.canUserManageService) {

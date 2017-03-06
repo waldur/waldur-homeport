@@ -42,8 +42,8 @@
 
         this.entityOptions = {
           entityData: {
-            noDataText: 'No items to compare yet.',
-            noMatchesText: 'No items found matching filter.',
+            noDataText: gettext('No items to compare yet.'),
+            noMatchesText: gettext('No items found matching filter.'),
             hidePagination: true,
             hideActionButtons: true,
             hideSearch: true,

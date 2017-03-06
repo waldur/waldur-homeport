@@ -20,7 +20,7 @@ function actionConfig(ActionConfigurationProvider) {
     ],
     options: {
       pull: {
-        title: 'Synchronise'
+        title: gettext('Synchronise')
       },
     }
   });

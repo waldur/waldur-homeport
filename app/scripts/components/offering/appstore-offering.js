@@ -37,13 +37,13 @@ const appstoreOffering = {
           name: {
             type: 'string',
             required: true,
-            label: 'Name',
+            label: gettext('Name'),
             max_length: 150
           },
           description: {
             type: 'string',
             required: false,
-            label: 'Description',
+            label: gettext('Description'),
           },
         });
         angular.forEach(offering.options, (option, name) => option.name = name);

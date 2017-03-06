@@ -18,7 +18,7 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService, CATEGORY_I
         }
       },
       {
-        label: 'Security groups',
+        label: gettext('Security groups'),
         state: 'resources.details',
         params: {
           uuid: resource.tenant_uuid,

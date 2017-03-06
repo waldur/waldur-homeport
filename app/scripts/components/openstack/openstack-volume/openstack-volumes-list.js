@@ -31,7 +31,7 @@ function VolumesListController(BaseProjectResourcesTabController, ncUtils, $stat
       options.noDataText = 'You have no volumes yet.';
       options.noMatchesText = 'No volumes found matching filter.';
       options.columns.push({
-        title: 'Size',
+        title: gettext('Size'),
         className: 'all',
         render: function(row) {
           if (!row.size) {
@@ -41,7 +41,7 @@ function VolumesListController(BaseProjectResourcesTabController, ncUtils, $stat
         }
       });
       options.columns.push({
-        title: 'Attached to',
+        title: gettext('Attached to'),
         className: 'min-tablet-l',
         render: function(row) {
           if (!row.instance) {

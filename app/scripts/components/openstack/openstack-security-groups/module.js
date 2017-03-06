@@ -49,13 +49,13 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: 'Security group has been updated'
+        successMessage: gettext('Security group has been updated')
       }),
       pull: {
-        title: 'Synchronise'
+        title: gettext('Synchronise')
       },
       set_rules: {
-        title: 'Set rules',
+        title: gettext('Set rules'),
         enabled: true,
         type: 'form',
         fields: {

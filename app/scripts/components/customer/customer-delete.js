@@ -78,11 +78,11 @@ function CustomerDeleteController(
               summary: 'Organization removal'
             }),
             options: {
-              title: 'Organization removal',
+              title: gettext('Organization removal'),
               hideTitle: true,
-              descriptionLabel: 'Reason',
-              descriptionPlaceholder: 'Why do you need to remove organization with existing projects?',
-              submitTitle: 'Request removal'
+              descriptionLabel: gettext('Reason'),
+              descriptionPlaceholder: gettext('Why do you need to remove organization with existing projects?'),
+              submitTitle: gettext('Request removal')
             }
           }
         });

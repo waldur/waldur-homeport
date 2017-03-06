@@ -17,14 +17,14 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
     const prevWorkspace = stateUtilsService.getPrevWorkspace();
     if (prevWorkspace === 'project') {
       return {
-        label: 'Back to project',
+        label: gettext('Back to project'),
         icon: 'fa-arrow-left',
         action: stateUtilsService.goBack
       };
     } else if (prevWorkspace === 'organization' &&
       (currentStateService.getOwnerOrStaff() || user.is_support)) {
       return {
-        label: 'Back to organization',
+        label: gettext('Back to organization'),
         icon: 'fa-arrow-left',
         action: stateUtilsService.goBack
       };

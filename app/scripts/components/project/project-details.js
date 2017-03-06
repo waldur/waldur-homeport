@@ -8,12 +8,12 @@ export default function ProjectDetailsController(
     $scope.items = [
       {
         icon: 'fa-th-large',
-        label: 'Dashboard',
+        label: gettext('Dashboard'),
         link: 'project.details({uuid: $ctrl.context.project.uuid})',
       },
       {
         icon: 'fa-shopping-cart',
-        label: 'Service store',
+        label: gettext('Service store'),
         feature: 'appstore',
         action: function() {
           return AppStoreUtilsService.openDialog();
@@ -21,73 +21,73 @@ export default function ProjectDetailsController(
         state: 'appstore',
       },
       {
-        label: 'Resources',
+        label: gettext('Resources'),
         icon: 'fa-files-o',
         link: 'project.resources',
         children: [
           {
             link: 'project.resources.vms({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-desktop',
-            label: 'Virtual machines',
+            label: gettext('Virtual machines'),
             feature: 'vms',
             countFieldKey: 'vms'
           },
           {
             link: 'project.resources.clouds({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-cloud',
-            label: 'Private clouds',
+            label: gettext('Private clouds'),
             feature: 'private_clouds',
             countFieldKey: 'private_clouds'
           },
           {
             link: 'project.resources.apps({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-cube',
-            label: 'Applications',
+            label: gettext('Applications'),
             feature: 'apps',
             countFieldKey: 'apps'
           },
           {
             link: 'project.resources.storage.tabs({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-hdd-o',
-            label: 'Storage',
+            label: gettext('Storage'),
             feature: 'storage',
             countFieldKey: 'storages'
           },
           {
             link: 'project.resources.offerings({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-cog',
-            label: 'Requested Services',
+            label: gettext('Requested Services'),
           }
         ]
       },
       {
         link: 'project.support({uuid: $ctrl.context.project.uuid})',
         icon: 'fa-question-circle',
-        label: 'Support',
+        label: gettext('Support'),
         feature: 'premiumSupport',
         countFieldKey: 'premium_support_contracts'
       },
       {
         link: 'project.events({uuid: $ctrl.context.project.uuid})',
         icon: 'fa-bell-o',
-        label: 'Audit logs',
+        label: gettext('Audit logs'),
         feature: 'eventlog'
       },
       {
         link: 'project.issues({uuid: $ctrl.context.project.uuid})',
         icon: 'fa-question-circle',
-        label: 'Issues',
+        label: gettext('Issues'),
         feature: 'support'
       },
       {
         link: 'project.alerts({uuid: $ctrl.context.project.uuid})',
         icon: 'fa-fire',
-        label: 'Alerts',
+        label: gettext('Alerts'),
         feature: 'alerts',
         countFieldKey: 'alerts'
       },
       {
-        label: 'Team',
+        label: gettext('Team'),
         icon: 'fa-group',
         link: 'project.team({uuid: $ctrl.context.project.uuid})',
         feature: 'team',
@@ -96,7 +96,7 @@ export default function ProjectDetailsController(
       {
         link: 'project.delete({uuid: $ctrl.context.project.uuid})',
         icon: 'fa-wrench',
-        label: 'Manage'
+        label: gettext('Manage')
       }
     ];
     $scope.$on('WORKSPACE_CHANGED', function() {

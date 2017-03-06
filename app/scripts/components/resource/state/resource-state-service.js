@@ -8,7 +8,7 @@ export default function resourceStateService(resourceUtils, ResourceStateConfigu
       let runtimeErrorStates = config.error_states || [];
       let context = {
         className: '',
-        label: '',
+        label: gettext(''),
         tooltip: '',
         movementClassName: ''
       };
