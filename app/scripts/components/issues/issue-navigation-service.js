@@ -1,6 +1,6 @@
 const HELPDESK_ITEMS = [
   {
-    label: 'Helpdesk',
+    label: gettext('Helpdesk'),
     icon: 'fa-headphones',
     link: 'support.helpdesk'
   }
@@ -8,23 +8,23 @@ const HELPDESK_ITEMS = [
 
 const DASHBOARD_ITEMS = [
   {
-    label: 'Dashboard',
+    label: gettext('Dashboard'),
     icon: 'fa-th-large',
     link: 'support.dashboard'
   },
   {
-    label: 'Support requests',
+    label: gettext('Support requests'),
     icon: 'fa-list',
     link: 'support.list'
   },
   {
-    label: 'Activity stream',
+    label: gettext('Activity stream'),
     icon: 'fa-rss',
     link: 'support.activity',
     feature: 'support.activity'
   },
   {
-    label: 'SLAs',
+    label: gettext('SLAs'),
     icon: 'fa-book',
     link: 'support.sla',
     feature: 'support.sla'

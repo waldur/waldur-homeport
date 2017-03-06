@@ -29,17 +29,17 @@ export default class BillingUtils {
     return [
       {
         name: 'state',
-        title: 'Pending',
+        title: gettext('Pending'),
         value: 'pending'
       },
       {
         name: 'state',
-        title: 'Canceled',
+        title: gettext('Canceled'),
         value: 'canceled'
       },
       {
         name: 'state',
-        title: 'Created',
+        title: gettext('Created'),
         value: 'created'
       },
     ];

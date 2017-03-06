@@ -4,35 +4,35 @@ import template from './openstack-tenant-prices.html';
 export const openstackFlavorColumns = [
   {
     name: 'name',
-    label: 'Flavor'
+    label: gettext('Flavor')
   },
   {
     name: 'cores',
-    label: 'vCPU'
+    label: gettext('vCPU')
   },
   {
     name: 'ram',
-    label: 'RAM',
+    label: gettext('RAM'),
     filter: 'filesize'
   },
   {
     name: 'disk',
-    label: 'Storage',
+    label: gettext('Storage'),
     filter: 'filesize'
   },
   {
     name: 'dailyPrice',
-    label: '1 day',
+    label: gettext('1 day'),
     filter: 'defaultCurrency'
   },
   {
     name: 'monthlyPrice',
-    label: '1 month',
+    label: gettext('1 month'),
     filter: 'defaultCurrency'
   },
   {
     name: 'annualPrice',
-    label: '1 year',
+    label: gettext('1 year'),
     filter: 'defaultCurrency'
   }
 ];

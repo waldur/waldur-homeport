@@ -32,11 +32,11 @@ function OpenstackSecurityGroupsListController(
       options.noMatchesText = 'No security groups found matching filter.';
       options.columns = [
         {
-          title: 'Name',
+          title: gettext('Name'),
           render: row => this.renderResourceName(row)
         },
         {
-          title: 'State',
+          title: gettext('State'),
           render: row => this.renderResourceState(row)
         }
       ];

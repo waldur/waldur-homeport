@@ -15,31 +15,31 @@ function customerPermissionsLogListController(
       this.currentCustomerUuid = currentStateService.getCustomerUuid();
       this.tableOptions = {
         searchFieldName: 'username',
-        noDataText: 'You have no permissions yet.',
-        noMatchesText: 'No permissions found matching filter.',
+        noDataText: gettext('You have no permissions yet.'),
+        noMatchesText: gettext('No permissions found matching filter.'),
         columns: [
           {
-            title: 'User',
+            title: gettext('User'),
             className: 'all',
             render: row => row.user_full_name || row.user_username
           },
           {
-            title: 'User email',
+            title: gettext('User email'),
             className: 'desktop',
             render: row => row.user_email
           },
           {
-            title: 'Role',
+            title: gettext('Role'),
             className: 'min-tablet-l',
             render: row => $filter('translate')(row.role)
           },
           {
-            title: 'Created',
+            title: gettext('Created'),
             className: 'min-tablet-l',
             render: row => $filter('dateTime')(row.created)
           },
           {
-            title: 'Expiration time',
+            title: gettext('Expiration time'),
             className: 'min-tablet-l',
             render: row => $filter('dateTime')(row.expiration_time)
           }

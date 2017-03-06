@@ -22,12 +22,12 @@ function ProjectEventsController(baseEventListController) {
       this.searchFilters = [
         {
           name: 'feature',
-          title: 'Project events',
+          title: gettext('Project events'),
           value: 'projects'
         },
         {
           name: 'feature',
-          title: 'Resource events',
+          title: gettext('Resource events'),
           value: 'resources'
         }
       ];

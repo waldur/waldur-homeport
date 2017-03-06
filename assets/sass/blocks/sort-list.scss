@@ -36,11 +36,6 @@
                 margin-top: 10px;
             } // xs
         } // &.right-sort
-
-        .button-support {
-            padding: 7px 10px;
-            height: auto;
-        } //.button-support
         .app-title {
             @include inline-middle;
             @include property(margin-bottom, -4);

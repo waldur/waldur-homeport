@@ -12,9 +12,9 @@ import { appFooter } from './app-footer';
 import headerModule from './header/module';
 
 export default module => {
-  module.directive('selectWorkspaceToggle', selectWorkspaceToggle);
-  module.directive('selectWorkspaceDialog', selectWorkspaceDialog);
-  module.directive('sidebar', sidebar);
+  module.component('selectWorkspaceToggle', selectWorkspaceToggle);
+  module.component('selectWorkspaceDialog', selectWorkspaceDialog);
+  module.component('sidebar', sidebar);
   module.component('sidebarToggle', sidebarToggle);
   module.component('siteHeader', siteHeader);
   module.service('titleService', titleService);

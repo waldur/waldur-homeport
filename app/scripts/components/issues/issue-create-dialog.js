@@ -1,13 +1,13 @@
 import template from './issue-create-dialog.html';
 
 const DEFAULT_OPTIONS = {
-  title: 'Create request',
+  title: gettext('Create request'),
   hideTitle: false,
-  descriptionLabel: 'Request description',
-  descriptionPlaceholder: 'Request description',
-  summaryLabel: 'Request name',
-  summaryPlaceholder: 'Request name',
-  submitTitle: 'Create'
+  descriptionLabel: gettext('Request description'),
+  descriptionPlaceholder: gettext('Request description'),
+  summaryLabel: gettext('Request name'),
+  summaryPlaceholder: gettext('Request name'),
+  submitTitle: gettext('Create')
 };
 
 const issueCreateDialog = {

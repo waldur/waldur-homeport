@@ -18,7 +18,7 @@ function CustomerAgreementsTabController(
 
       this.entityOptions = {
         entityData: {
-          noDataText: 'No plans yet',
+          noDataText: gettext('No plans yet'),
         },
         list: [
           {

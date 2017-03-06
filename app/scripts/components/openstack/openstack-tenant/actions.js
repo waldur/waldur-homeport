@@ -15,18 +15,18 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: 'Tenant has been updated'
+        successMessage: gettext('Tenant has been updated')
       }),
       pull: {
-        title: 'Synchronise'
+        title: gettext('Synchronise')
       },
       pull_quotas: {
-        title: 'Synchronise quotas'
+        title: gettext('Synchronise quotas')
       },
       create_network: {
         tab: 'networks',
-        title: 'Create',
-        dialogTitle: 'Create network for ',
+        title: gettext('Create'),
+        dialogTitle: gettext('Create network for '),
         iconClass: 'fa-plus',
         fields: {
           description: {
@@ -35,7 +35,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         }
       },
       change_package: {
-        title: 'Change VPC package',
+        title: gettext('Change VPC package'),
         enabled: true,
         type: 'form',
         component: 'openstackTenantChangePackageDialog',
@@ -43,8 +43,8 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
       },
       create_security_group: {
         tab: 'security_groups',
-        title: 'Create',
-        dialogTitle: 'Create security group for ',
+        title: gettext('Create'),
+        dialogTitle: gettext('Create security group for '),
         iconClass: 'fa-plus',
         fields: {
           rules: {
@@ -55,16 +55,16 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
       },
       pull_security_groups: {
         tab: 'security_groups',
-        title: 'Synchronise'
+        title: gettext('Synchronise')
       },
       pull_floating_ips: {
         tab: 'floating_ips',
-        title: 'Synchronise',
+        title: gettext('Synchronise'),
       },
       create_floating_ip: {
         tab: 'floating_ips',
-        title: 'Create',
-        dialogTitle: 'Create floating IP for ',
+        title: gettext('Create'),
+        dialogTitle: gettext('Create floating IP for '),
         iconClass: 'fa-plus',
       },
     },

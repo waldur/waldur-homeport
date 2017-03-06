@@ -8,10 +8,10 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: 'Subnet has been updated'
+        successMessage: gettext('Subnet has been updated')
       }),
       pull: {
-        title: 'Synchronise'
+        title: gettext('Synchronise')
       },
     }
   });

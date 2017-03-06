@@ -25,21 +25,21 @@ function OpenstackSubnetsListController(
       options.noMatchesText = 'No subnets found matching filter.';
       options.columns = [
         {
-          title: 'Name',
+          title: gettext('Name'),
           className: 'all',
           render: function(row) {
             return vm.renderResourceName(row);
           }
         },
         {
-          title: 'CIDR',
+          title: gettext('CIDR'),
           className: 'min-tablet-l',
           render: function(row) {
             return row.cidr;
           }
         },
         {
-          title: 'State',
+          title: gettext('State'),
           className: 'min-tablet-l',
           render: function(row) {
             return vm.renderResourceState(row);

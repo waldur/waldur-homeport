@@ -223,7 +223,7 @@
       controllerScope: null, // required in init
       detailsState: null,
       redirectToDetailsPage: false,
-      successMessage: 'Saving of {vm_name} was successful.',
+      successMessage: gettext('Saving of {vm_name} was successful.'),
 
       init: function() {
         this.instance = this.service.$create();

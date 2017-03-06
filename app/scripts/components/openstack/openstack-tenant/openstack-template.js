@@ -1,40 +1,40 @@
 export const openstackTemplateColumns = [
   {
     name: 'name',
-    label: 'VPC package'
+    label: gettext('VPC package')
   },
   {
     name: 'category',
-    label: 'Category',
+    label: gettext('Category'),
     filter: 'translate'
   },
   {
     name: 'cores',
-    label: 'Max vCPU'
+    label: gettext('Max vCPU')
   },
   {
     name: 'ram',
-    label: 'Max RAM',
+    label: gettext('Max RAM'),
     filter: 'filesize'
   },
   {
     name: 'disk',
-    label: 'Max storage',
+    label: gettext('Max storage'),
     filter: 'filesize'
   },
   {
     name: 'dailyPrice',
-    label: '1 day',
+    label: gettext('1 day'),
     filter: 'defaultCurrency'
   },
   {
     name: 'monthlyPrice',
-    label: '1 month',
+    label: gettext('1 month'),
     filter: 'defaultCurrency'
   },
   {
     name: 'annualPrice',
-    label: '1 year',
+    label: gettext('1 year'),
     filter: 'defaultCurrency'
   }
 ];
@@ -46,7 +46,7 @@ export const openstackTemplateFilters = {
   choices: [
     {
       value: '',
-      label: 'All categories'
+      label: gettext('All categories')
     },
     ...TEMPLATE_CATEGORIES.map(category => ({
       value: category,

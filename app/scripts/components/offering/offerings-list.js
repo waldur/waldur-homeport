@@ -19,8 +19,8 @@ function ProjectOfferingsListController(
         this.project = project;
         this.tableOptions = {
           searchFieldName: 'name',
-          noDataText: 'You have no requested services.',
-          noMatchesText: 'No requested services found matching filter.',
+          noDataText: gettext('You have no requested services.'),
+          noMatchesText: gettext('No requested services found matching filter.'),
           columns: this.getColumns(),
           rowActions: this.getRowActions.bind(this),
         };
@@ -29,7 +29,7 @@ function ProjectOfferingsListController(
     getColumns: function() {
       return [
         {
-          title: 'Name',
+          title: gettext('Name'),
           render: function(row) {
             var href = $state.href('offeringDetails', {uuid: row.uuid});
             return '<a href="{href}">{name}</a>'
@@ -38,18 +38,18 @@ function ProjectOfferingsListController(
           }
         },
         {
-          title: 'Type',
+          title: gettext('Type'),
           render: row => row.type_label
         },
         {
-          title: 'State',
+          title: gettext('State'),
           render: row => {
             const index = this.findIndexById(row);
             return `<offering-state offering="controller.list[${index}]">`;
           }
         },
         {
-          title: 'Creation date',
+          title: gettext('Creation date'),
           render: function(row) {
             return $filter('dateTime')(row.created);
           }

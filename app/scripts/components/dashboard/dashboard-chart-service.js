@@ -112,7 +112,7 @@ export default class DashboardChartService {
         return estimate;
       });
       return {
-        title: 'Total cost',
+        title: gettext('Total cost'),
         data: estimates,
         current: this.$filter('defaultCurrency')(estimates[estimates.length - 1].value),
         change: this.getRelativeChange([

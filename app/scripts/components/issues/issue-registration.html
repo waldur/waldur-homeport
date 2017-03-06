@@ -3,7 +3,8 @@
         <form class="form-horizontal" name="$ctrl.IssueForm" ng-disabled="$ctrl.saving">
             <div class="form-group">
                 <label class="col-sm-3 control-label">
-                    Caller <span class="text-danger">*</span>
+                    <span translate>Caller</span>
+                    <span class="text-danger">*</span>
                 </label>
                 <div class="col-sm-6">
                     <ui-select ng-model="$ctrl.issue.caller" name="caller" required>
@@ -20,7 +21,7 @@
                     </ui-select>
                     <div class="help-block text-danger"
                          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.caller.$touched) && $ctrl.IssueForm.caller.$error.required">
-                        You did not enter a field
+                        <span translate>You did not enter a field</span>
                     </div>
                 </div>
                 <div class="col-sm-3" ng-if="$ctrl.issue.caller">
@@ -28,18 +29,19 @@
                         <a ng-click="$ctrl.openUserDialog($ctrl.issue.caller)"
                            class="btn btn-default">
                             <i class="fa fa-eye"></i>
-                           Details
+                           <span translate>Details</span>
                         </a>
                         <a ng-click="$ctrl.filterByCaller($ctrl.issue.caller)" class="btn btn-default">
                             <i class="fa fa-search"></i>
-                           Filter
+                           <span translate>Filter</span>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">
-                    Organization <span class="text-danger">*</span>
+                    <span translate>Organization</span>
+                    <span class="text-danger">*</span>
                 </label>
                 <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.caller}">
                     <ui-select ng-model="$ctrl.issue.customer" name="customer" required>
@@ -56,7 +58,7 @@
                     </ui-select>
                     <div class="help-block text-danger"
                          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.customer.$touched) && $ctrl.IssueForm.customer.$error.required">
-                        You did not enter a field
+                        <span translate>You did not enter a field</span>
                     </div>
                 </div>
                 <div class="col-sm-3" ng-if="$ctrl.issue.customer">
@@ -64,30 +66,32 @@
                         <a ng-click="$ctrl.openCustomerDialog($ctrl.issue.customer)"
                            class="btn btn-default">
                             <i class="fa fa-eye"></i>
-                           Details
+                           <span translate>Details</span>
                         </a>
                         <a ng-click="$ctrl.filterByCustomer($ctrl.issue.customer)" class="btn btn-default">
                             <i class="fa fa-search"></i>
-                           Filter
+                           <span translate>Filter</span>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="issueType" class="col-sm-3 control-label">
-                    Request type <span class="text-danger">*</span>
+                    <span translate>Request type</span>
+                    <span class="text-danger">*</span>
                 </label>
                 <div class="col-sm-6">
                     <issue-type-select model="$ctrl.issue" field="{name: 'type'}"></issue-type-select>
                     <div class="help-block text-danger"
                          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.type.$touched) && $ctrl.IssueForm.type.$error.required">
-                        You did not enter a field
+                        <span translate>You did not enter a field</span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="issueSummary" class="col-sm-3 control-label">
-                    Title <span class="text-danger">*</span>
+                    <span translate>Title</span>
+                    <span class="text-danger">*</span>
                 </label>
                 <div class="col-sm-6">
                     <input type="text"
@@ -97,13 +101,14 @@
                         name="summary" required>
                     <div class="help-block text-danger"
                          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.summary.$touched) && $ctrl.IssueForm.summary.$error.required">
-                        You did not enter a field
+                        <span translate>You did not enter a field</span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="issueDescription" class="col-sm-3 control-label">
-                    Description <span class="text-danger">*</span>
+                    <span translate>Description</span>
+                    <span class="text-danger">*</span>
                 </label>
                 <div class="col-sm-6">
                     <textarea type="text"
@@ -113,13 +118,14 @@
                         name="description" required/>
                     <div class="help-block text-danger"
                          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
-                        You did not enter a field
+                        <span translate>You did not enter a field</span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">
-                    Project <span class="text-danger">*</span>
+                    <span translate>Project</span>
+                    <span class="text-danger">*</span>
                 </label>
                 <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.customer}">
                     <ui-select ng-model="$ctrl.issue.project" name="project" required>
@@ -136,19 +142,19 @@
                     </ui-select>
                     <div class="help-block text-danger"
                          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.project.$touched) && $ctrl.IssueForm.project.$error.required">
-                        You did not enter a field
+                        <span translate>You did not enter a field</span>
                     </div>
                 </div>
                 <div class="col-sm-3" ng-if="$ctrl.issue.project">
                     <a ng-click="$ctrl.filterByProject($ctrl.issue.project)" class="btn btn-default">
                         <i class="fa fa-search"></i>
-                       Filter
+                       <span translate>Filter</span>
                     </a>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">
-                    Service type
+                    <span translate>Service type</span>
                 </label>
                 <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.project}">
                     <ui-select ng-model="$ctrl.issue.scope">
@@ -163,7 +169,7 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">
-                    Affected resource
+                    <span translate>Affected resource</span>
                 </label>
                 <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.scope}">
                     <ui-select ng-model="$ctrl.issue.resource">
@@ -182,7 +188,7 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">
-                    Assigned to
+                    <span translate>Assigned to</span>
                 </label>
                 <div class="col-sm-6">
                     <ui-select ng-model="$ctrl.issue.assignee" name="assignee">
@@ -203,10 +209,12 @@
     </div>
     <div class="ibox-content text-right">
         <button class="btn btn-default" type="button" ng-click="$ctrl.onSearch({filter: $ctrl.issue})">
-            <i class="fa fa-search"></i> Search
+            <i class="fa fa-search"></i>
+            <span translate>Search</span>
         </button>
         <button class="btn btn-primary" type="submit" submit-button="$ctrl.save()">
-            <i class="fa fa-plus"></i> Create request
+            <i class="fa fa-plus"></i>
+            <span translate>Create request</span>
         </button>
     </div>
 </div>

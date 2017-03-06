@@ -8,7 +8,7 @@ export default {
   ],
   options: {
     name: {
-      label: 'Volume name',
+      label: gettext('Volume name'),
       type: 'string',
       required: true,
       maxlength: 150
@@ -16,27 +16,27 @@ export default {
     image: {
       type: 'list',
       required: false,
-      label: 'Image',
+      label: gettext('Image'),
       columns: [
         {
           name: 'name',
-          label: 'Image name'
+          label: gettext('Image name')
         },
         {
           name: 'min_ram',
-          label: 'Min RAM',
+          label: gettext('Min RAM'),
           filter: 'filesize'
         },
         {
           name: 'min_disk',
-          label: 'Min storage',
+          label: gettext('Min storage'),
           filter: 'filesize'
         }
       ]
     },
     size: {
       type: 'integer',
-      label: 'Size',
+      label: gettext('Size'),
       factor: 1024,
       units: 'GB',
       min: 0,
@@ -44,7 +44,7 @@ export default {
     },
     description: {
       type: 'text',
-      label: 'Description',
+      label: gettext('Description'),
       maxlength: 500
     }
   },

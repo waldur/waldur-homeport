@@ -2,12 +2,12 @@ export const dashboardHelp = {
   alertsList: {
     type: 'alertsList',
     name: 'alerts',
-    title: 'Alerts'
+    title: gettext('Alerts')
   },
   eventsList: {
     type: 'eventsList',
     name: 'events',
-    title: 'Events'
+    title: gettext('Events')
   }
 };
 
@@ -15,7 +15,7 @@ export const profileHelp = {
   sshKeys: {
     type: 'sshKeys',
     name: 'keys',
-    title: 'How to generate SSH key'
+    title: gettext('How to generate SSH key')
   }
 };
 

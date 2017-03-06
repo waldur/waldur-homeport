@@ -21,7 +21,7 @@ function PaymentsListController(
 
       this.entityOptions = {
         entityData: {
-          noDataText: 'No payments yet',
+          noDataText: gettext('No payments yet'),
           hideTableHead: false,
           expandable: true
         },

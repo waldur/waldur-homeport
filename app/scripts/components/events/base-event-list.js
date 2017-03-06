@@ -9,20 +9,20 @@ export default function baseEventListController(
     init:function() {
       this.service = eventsService;
       this.tableOptions = {
-        noDataText: 'No events yet',
-        noMatchesText: 'No events found matching filter.',
+        noDataText: gettext('No events yet'),
+        noMatchesText: gettext('No events found matching filter.'),
         searchFieldName: 'search',
 
         columns: [
           {
-            title: 'Message',
+            title: gettext('Message'),
             className: 'all',
             render: function(row) {
               return eventFormatter.format(row);
             }
           },
           {
-            title: 'Timestamp',
+            title: gettext('Timestamp'),
             className: 'all',
             render: function(row) {
               return $filter('dateTime')(row['@timestamp']);

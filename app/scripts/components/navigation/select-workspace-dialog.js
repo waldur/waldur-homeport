@@ -1,19 +1,16 @@
 import template from './select-workspace-dialog.html';
 import './select-workspace-dialog.scss';
 
-export default function selectWorkspaceDialog() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: SelectWorkspaceDialogController,
-    controllerAs: 'Ctrl',
-    scope: {},
-    bindToController: {
-      dismiss: '&',
-      close: '&'
-    }
-  };
-}
+const selectWorkspaceDialog = {
+  template: template,
+  controller: SelectWorkspaceDialogController,
+  bindings: {
+    dismiss: '&',
+    close: '&'
+  }
+};
+
+export default selectWorkspaceDialog;
 
 // @ngInject
 function SelectWorkspaceDialogController(

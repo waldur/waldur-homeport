@@ -28,21 +28,21 @@ function IssueListController(
         disableSearch: true,
         enableOrdering: true,
         searchFieldName: 'summary',
-        noDataText: 'No support requests yet.',
-        noMatchesText: 'No support requests found matching filter.',
+        noDataText: gettext('No support requests yet.'),
+        noMatchesText: gettext('No support requests found matching filter.'),
         columns: [
           {
             id: 'type',
-            title: 'Type',
+            title: gettext('Type'),
             orderField: 'type',
             render: function(row) {
-              return row.type.toUpperCase();
+              return $filter('translate')(row.type).toUpperCase();
             },
             width: 90
           },
           {
             id: 'key',
-            title: 'Key',
+            title: gettext('Key'),
             orderField: 'key',
             render: function(row) {
               var href = $state.href('support.detail', {uuid: row.uuid});
@@ -52,7 +52,7 @@ function IssueListController(
           },
           {
             id: 'status',
-            title: 'Status',
+            title: gettext('Status'),
             orderField: 'status',
             render: function(row) {
               return row.status;
@@ -61,7 +61,7 @@ function IssueListController(
           },
           {
             id: 'title',
-            title: 'Title',
+            title: gettext('Title'),
             orderField: 'summary',
             render: function(row) {
               return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.summary}">${row.summary}</span>`;
@@ -70,7 +70,7 @@ function IssueListController(
           },
           {
             id: 'description',
-            title: 'Description',
+            title: gettext('Description'),
             orderable: false,
             render: function(row) {
               return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.description}">${row.description}</span>`;
@@ -78,7 +78,7 @@ function IssueListController(
           },
           {
             id: 'resource_type',
-            title: 'Service type',
+            title: gettext('Service type'),
             orderable: false,
             render: function(row) {
               return row.resource_type || 'N/A';
@@ -86,7 +86,7 @@ function IssueListController(
           },
           {
             id: 'customer',
-            title: 'Organization',
+            title: gettext('Organization'),
             orderField: 'customer_name',
             render: function(row) {
               return row.customer_name || 'N/A';
@@ -94,7 +94,7 @@ function IssueListController(
           },
           {
             id: 'caller',
-            title: 'Caller',
+            title: gettext('Caller'),
             orderField: 'caller_full_name',
             render: function(row) {
               return row.caller_full_name || 'N/A';
@@ -103,7 +103,7 @@ function IssueListController(
           },
           {
             id: 'reporter',
-            title: 'Reporter',
+            title: gettext('Reporter'),
             orderField: 'reporter_name',
             render: function(row) {
               return row.reporter_name || 'N/A';
@@ -112,7 +112,7 @@ function IssueListController(
           },
           {
             id: 'assignee',
-            title: 'Assigned to',
+            title: gettext('Assigned to'),
             orderField: 'assignee_name',
             render: function(row) {
               return row.assignee_name || 'N/A';
@@ -121,7 +121,7 @@ function IssueListController(
           },
           {
             id: 'created',
-            title: 'Created',
+            title: gettext('Created'),
             orderField: 'created',
             render: function(row) {
               return $filter('shortDate')(row.created);
@@ -130,7 +130,7 @@ function IssueListController(
           },
           {
             id: 'modified',
-            title: 'Updated',
+            title: gettext('Updated'),
             orderField: 'modified',
             render: function(row) {
               return $filter('shortDate')(row.modified);
@@ -139,7 +139,7 @@ function IssueListController(
           },
           {
             id: 'in_progress',
-            title: 'Time in progress',
+            title: gettext('Time in progress'),
             orderable: false,
             render: function(row) {
               return ncUtils.relativeDate(row.created);
