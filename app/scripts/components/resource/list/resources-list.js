@@ -35,7 +35,7 @@ export default function baseResourceListController(
         columns: [
           {
             id: 'name',
-            title: 'Name',
+            title: gettext('Name'),
             className: 'all',
             render: function(row) {
               return vm.renderResourceName(row);

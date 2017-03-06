@@ -297,7 +297,7 @@ msgstr ""
 #: app/scripts/components/navigation/select-workspace-dialog.html:125
 #: app/scripts/components/offering/appstore-offering.html:19
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:52
-#: app/scripts/components/resource/actions/dialog/action-dialog.html:33
+#: app/scripts/components/resource/actions/dialog/action-dialog.html:34
 #: app/scripts/components/team/add-project-member.html:54
 #: app/scripts/components/team/add-team-member.html:86
 #: app/scripts/components/user/hooks/hook-details.html:81
@@ -436,6 +436,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html:80
 #: app/scripts/components/issues/issues-list.js:124
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:46
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:45
 #: app/scripts/components/resource/summary/resource-summary-base.html:39
 #: app/scripts/components/team/customer-permissions-log-list.js:37
 #: app/scripts/components/team/project-permissions-log-list.js:37
@@ -694,7 +695,7 @@ msgstr ""
 msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/module.js:28
+#: app/scripts/components/openstack/openstack-snapshot/module.js:35
 #: app/scripts/components/openstack/openstack-volume/module.js:63
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr ""
@@ -916,7 +917,7 @@ msgid "Keep until"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:15
-#: app/scripts/components/openstack/openstack-snapshot/module.js:29
+#: app/scripts/components/openstack/openstack-snapshot/module.js:36
 #: app/scripts/components/openstack/openstack-volume/module.js:64
 msgid "Kept until"
 msgstr ""
@@ -1067,7 +1068,7 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js:70
 #: app/scripts/components/providers/list.js:48
 #: app/scripts/components/resource/actions/constants.js:20
-#: app/scripts/components/resource/list/resources-list.js:37
+#: app/scripts/components/resource/list/resources-list.js:38
 msgid "Name"
 msgstr ""
 
@@ -1231,6 +1232,10 @@ msgstr ""
 
 #: app/scripts/components/resource/list/resources-list.js:34
 msgid "No resources found matching filter."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:30
+msgid "No restored volumes found matching filter."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:30
@@ -1473,6 +1478,10 @@ msgstr ""
 msgid "Please clarify why do you need it"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-snapshot/module.js:29
+msgid "Please provide details of a new volume created from snapshot"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:15
 msgid "Port range"
 msgstr ""
@@ -1609,7 +1618,7 @@ msgid "Projects list"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:22
-#: app/scripts/components/resource/list/resources-list.js:44
+#: app/scripts/components/resource/list/resources-list.js:46
 #: app/scripts/components/resource/summary/resource-summary-base.html:21
 msgid "Provider"
 msgstr ""
@@ -1889,6 +1898,10 @@ msgstr ""
 msgid "Resources by projects"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-snapshot/module.js:67
+msgid "Restored volumes"
+msgstr ""
+
 #: app/scripts/components/invitations/invitations-list.js:100
 #: app/scripts/components/team/add-project-member.html:27
 #: app/scripts/components/team/add-team-member.html:46
@@ -2026,6 +2039,7 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:47
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:42
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:38
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:5
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:33
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:40
@@ -2056,7 +2070,7 @@ msgstr ""
 msgid "SLAs"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/module.js:25
+#: app/scripts/components/openstack/openstack-snapshot/module.js:32
 msgid "Snapshot has been updated"
 msgstr ""
 
@@ -2133,7 +2147,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:42
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:55
 #: app/scripts/components/providers/list.js:55
-#: app/scripts/components/resource/list/resources-list.js:51
+#: app/scripts/components/resource/list/resources-list.js:54
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
 #: app/scripts/components/user/hooks/hook-list.js:26
 msgid "State"
@@ -2168,7 +2182,7 @@ msgid "Sub Total"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:46
-#: app/scripts/components/resource/actions/dialog/action-dialog.html:29
+#: app/scripts/components/resource/actions/dialog/action-dialog.html:30
 msgid "Submit"
 msgstr ""
 
@@ -2214,7 +2228,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-network/module.js:33
 #: app/scripts/components/openstack/openstack-security-groups/module.js:55
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:37
-#: app/scripts/components/openstack/openstack-snapshot/module.js:36
+#: app/scripts/components/openstack/openstack-snapshot/module.js:43
 #: app/scripts/components/openstack/openstack-subnet/actions.js:14
 #: app/scripts/components/openstack/openstack-tenant/actions.js:21
 #: app/scripts/components/openstack/openstack-tenant/actions.js:58
@@ -2642,6 +2656,10 @@ msgstr ""
 
 #: app/scripts/components/resource/list/resources-list.js:33
 msgid "You have no resources yet."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:29
+msgid "You have no restored volumes yet."
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-contracts.js:32
