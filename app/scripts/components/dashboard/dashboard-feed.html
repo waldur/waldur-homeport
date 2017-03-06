@@ -1,9 +1,9 @@
 <div class="ibox float-e-margins">
     <div class="ibox-title">
-        <h5>{{ ::$ctrl.title }}</h5>
+        <h5>{{ $ctrl.title | translate }}</h5>
         <div class="pull-right">
             <a class="btn btn-xs btn-link" ng-click="$ctrl.showTypes()">
-                <i class="fa fa-question-circle"></i> {{ ::$ctrl.title }} types
+                <i class="fa fa-question-circle"></i> {{ $ctrl.buttonTitle | translate }}
             </a>
         </div>
     </div>
@@ -13,7 +13,7 @@
         </div>
         <div ng-if="!$ctrl.loading">
             <div ng-if="$ctrl.items.length == 0">
-                {{ ::$ctrl.emptyText }}
+                {{ $ctrl.emptyText | translate }}
             </div>
             <div ng-if="$ctrl.items.length > 0">
                 <div class="feed-activity-list">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <a class="btn btn-default btn-block m-t" ui-sref="{{ ::$ctrl.listState }}">
-                    Show all
+                    <span translate>Show all</span>
                 </a>
             </div>
         </div>

@@ -21,9 +21,9 @@ const addTeamMember = {
 
     $onInit() {
       this.roles = this.ENV.roles;
-      this.addText = 'Save';
-      this.addTitle = 'Edit team member';
-      this.helpText = this.$filter('translate')('You cannot change your own role');
+      this.addText = gettext('Save');
+      this.addTitle = gettext('Edit team member');
+      this.helpText = gettext('You cannot change your own role');
       this.userModel = {
         expiration_time: null
       };

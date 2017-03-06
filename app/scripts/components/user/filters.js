@@ -1,3 +1,4 @@
+// @ngInject
 function formatRegistrationMethod($filter) {
   return function(user) {
     if (!user.registration_method) {
@@ -10,18 +11,20 @@ function formatRegistrationMethod($filter) {
   };
 }
 
-function formatUserStatus() {
-  return function(user) {
+// @ngInject
+function formatUserStatus($filter) {
+  function getStatus(user) {
     if (user.is_staff && !user.is_support) {
-      return 'Staff';
+      return gettext('Staff');
     } else if (user.is_staff && user.is_support) {
-      return 'Staff and Support user';
+      return gettext('Staff and Support user');
     } else if (!user.is_staff && user.is_support) {
-      return 'Support user';
+      return gettext('Support user');
     } else {
-      return 'Regular user';
+      return gettext('Regular user');
     }
-  };
+  }
+  return user => $filter('translate')(getStatus(user));
 }
 
 function formatLifetime() {

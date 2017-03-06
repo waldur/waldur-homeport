@@ -20,6 +20,7 @@ function CustomerUsersListController(
     projectPermissionsService,
     currentStateService,
     usersService,
+    ncUtils,
     $q,
     $rootScope,
     $uibModal,
@@ -58,30 +59,22 @@ function CustomerUsersListController(
     getTableOptions: function() {
       var vm = this;
       return {
-        noDataText: 'You have no team members yet',
-        noMatchesText: 'No members found matching filter.',
+        noDataText: gettext('You have no team members yet'),
+        noMatchesText: gettext('No members found matching filter.'),
         searchFieldName: 'full_name',
         columns: [
           {
-            title: 'Member',
-            className: 'all',
-            width: '20%',
-            render: function(row) {
-              var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
-                .replace('{gravatarSrc}', row.email);
-              return avatar + ' ' + (row.full_name || row.username);
-            }
+            title: gettext('Member'),
+            render: ncUtils.renderAvatar
           },
           {
-            title: 'E-mail',
-            className: 'min-tablet-l',
+            title: gettext('E-mail'),
             render: function(row) {
               return row.email;
             }
           },
           {
-            title: 'Owner',
-            className: 'all',
+            title: gettext('Owner'),
             render: function(row) {
               var cls = row.role == 'owner' ? 'check' : 'minus';
               var title = ENV.roles[row.role];
@@ -92,14 +85,12 @@ function CustomerUsersListController(
           },
           {
             title: ENV.roles.manager + ' in:',
-            className: 'min-tablet-l',
             render: function(row) {
               return vm.formatProjectRolesList('manager', row);
             }
           },
           {
             title: ENV.roles.admin + ' in:',
-            className: 'min-tablet-l',
             render: function(row) {
               return vm.formatProjectRolesList('admin', row);
             }
@@ -126,6 +117,10 @@ function CustomerUsersListController(
     getRowActions: function() {
       if (this.isOwnerOrStaff) {
         return [
+          {
+            name: '<i class="fa fa-eye"></i> Details',
+            callback: this.openDetails.bind(this)
+          },
           {
             name: '<i class="fa fa-pencil"></i> Edit',
             callback: this.openPopup.bind(this)
@@ -165,6 +160,14 @@ function CustomerUsersListController(
       });
       return deferred.promise;
     },
+    openDetails: function(user) {
+      $uibModal.open({
+        component: 'userPopover',
+        resolve: {
+          user_uuid: () => user.uuid
+        }
+      });
+    },
     openPopup: function(user) {
       var currentCustomer = this.currentCustomer,
         currentUser = this.currentUser,
@@ -172,9 +175,9 @@ function CustomerUsersListController(
       $uibModal.open({
         component: 'addTeamMember',
         resolve: {
-          currentCustomer: function() { return currentCustomer; },
-          currentUser: function() { return currentUser; },
-          editUser: function() { return editUser; }
+          currentCustomer: () => currentCustomer,
+          currentUser: () => currentUser,
+          editUser: () => editUser,
         }
       }).result.then(function() {
         controllerScope.resetCache();

@@ -1,6 +1,7 @@
 <div class="modal-header">
     <h3 class="modal-title">
-        {{ HookController.instance.uuid && 'Update' || 'Create' }} notification
+        <span ng-if="HookController.instance.uuid" translate>Update notification</span>
+        <span ng-if="!HookController.instance.uuid" translate>Create notification</span>
     </h3>
 </div>
 
@@ -11,8 +12,8 @@
 
     <div ng-if="!HookController.loading">
         <p class="form-control-static" ng-if="HookController.instance.uuid">
-            <strong>Notification method:</strong>
-            {{ HookController.instance.hook_type|titleCase }}
+            <strong><span translate>Notification method</span>:</strong>
+            {{ HookController.instance.hook_type | titleCase }}
         </p>
 
         <div class="form-group" ng-if="!HookController.instance.uuid">
@@ -25,7 +26,7 @@
                         'fa-envelope-o': type == 'email',
                         'fa-link': type == 'webhook'
                     }"></i>
-                    {{ type|titleCase }}
+                    {{ type | titleCase }}
                 </button>
             </div>
         </div>
@@ -33,7 +34,7 @@
         <div class="checkbox awesome-checkbox checkbox-success"
             ng-if="HookController.instance.uuid">
             <input id="hook-enabled" type="checkbox" ng-model="HookController.instance.is_active">
-            <label for="hook-enabled">Enabled</label>
+            <label for="hook-enabled" translate>Enabled</label>
         </div>
 
         <div class="form-group" ng-if="HookController.instance.hook_type == 'email'">
@@ -72,10 +73,11 @@
 <div class="modal-footer">
     <button class="btn btn-primary"
         submit-button="HookController.save()">
-        {{ HookController.instance.uuid && 'Update' || 'Create' }}
+        <span ng-if="HookController.instance.uuid" translate>Update</span>
+        <span ng-if="!HookController.instance.uuid" translate>Create</span>
     </button>
     <button class="btn btn-default"
         ng-click="HookController.dismiss()">
-        Cancel
+        <span translate>Cancel</span>
     </button>
 </div>

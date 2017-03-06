@@ -12,6 +12,7 @@ export default function ProjectUsersListController(
   usersService,
   projectsService,
   projectPermissionsService,
+  ncUtils,
   ENV,
   $q,
   $rootScope,
@@ -43,30 +44,22 @@ export default function ProjectUsersListController(
     },
     getTableOptions: function() {
       return {
-        noDataText: 'You have no team members yet',
-        noMatchesText: 'No members found matching filter.',
+        noDataText: gettext('You have no team members yet'),
+        noMatchesText: gettext('No members found matching filter.'),
         searchFieldName: 'full_name',
         columns: [
           {
-            title: 'Member',
-            className: 'all',
-            width: '20%',
-            render: function(row) {
-              var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
-                .replace('{gravatarSrc}', row.email);
-              return avatar + ' ' + (row.full_name || row.username);
-            }
+            title: gettext('Member'),
+            render: ncUtils.renderAvatar
           },
           {
-            title: 'E-mail',
-            className: 'min-tablet-l',
+            title: gettext('E-mail'),
             render: function(row) {
               return row.email;
             }
           },
           {
-            title: 'Role in project:',
-            className: 'min-tablet-l',
+            title: gettext('Role in project:'),
             render: function(row) {
               return ENV.roles[row.role];
             }
@@ -88,7 +81,12 @@ export default function ProjectUsersListController(
     },
     getRowActions: function() {
       var vm = this;
-      var actions = [];
+      var actions = [
+        {
+          name: '<i class="fa fa-eye"></i> Details',
+          callback: this.openDetails.bind(this)
+        }
+      ];
 
       if (this.isOwnerOrStaff) {
         actions.push({
@@ -106,7 +104,7 @@ export default function ProjectUsersListController(
           },
           tooltip: function(row) {
             if (vm.isProjectManager && row.role === 'manager') {
-              return 'Project manager cannot edit users with same role';
+              return gettext('Project manager cannot edit users with same role');
             }
           }
         });
@@ -116,6 +114,14 @@ export default function ProjectUsersListController(
     },
     removeInstance: function(user) {
       return projectPermissionsService.deletePermission(user.permission);
+    },
+    openDetails: function(user) {
+      $uibModal.open({
+        component: 'userPopover',
+        resolve: {
+          user_uuid: () => user.uuid
+        }
+      });
     },
     openPopup: function(user) {
       var isProjectManager = this.isProjectManager,
