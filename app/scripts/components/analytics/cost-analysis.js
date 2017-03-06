@@ -1,4 +1,5 @@
 import template from './cost-analysis.html';
+import './cost-analysis.scss';
 
 export default function costAnalysis() {
   return {

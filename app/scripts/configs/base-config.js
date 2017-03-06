@@ -211,5 +211,5 @@ angular.module('ncsaas')
         label: gettext('Estonian')
       }
     ],
-    defaultLanguage: 'et',
+    defaultLanguage: 'en',
   });

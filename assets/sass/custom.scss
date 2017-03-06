@@ -138,3 +138,16 @@ body.landing {
 .nav.navbar-right > li > a.active {
   color: $blue;
 }
+
+.p-r-n {
+  padding-right: none;
+}
+
+.table-borderless tbody tr td,
+.table-borderless tbody tr th,
+.table-borderless thead tr th,
+.table-borderless thead tr td,
+.table-borderless tfoot tr th,
+.table-borderless tfoot tr td {
+    border: none;
+}

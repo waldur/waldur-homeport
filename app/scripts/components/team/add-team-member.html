@@ -23,7 +23,7 @@
              ng-false-value="''">
           </input>
           {{ ::$ctrl.roles.owner }}
-          <helpicon ng-if="!$ctrl.canChangeRole" help-text="{{ ::$ctrl.helpText }}"></helpicon>
+          <helpicon ng-if="!$ctrl.canChangeRole" help-text="{{ ::$ctrl.helpText |  translate }}"></helpicon>
         </label>
       </div>
     </div>

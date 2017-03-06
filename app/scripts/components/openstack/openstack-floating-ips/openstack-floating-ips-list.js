@@ -27,15 +27,15 @@ function OpenstackFloatingIpsListController(
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = 'No floating IPs yet.';
-      options.noMatchesText = 'No floating IPs found matching filter.';
+      options.noDataText = gettext('No floating IPs yet.');
+      options.noMatchesText = gettext('No floating IPs found matching filter.');
       options.columns = [
         {
-          title: 'Floating IP',
+          title: gettext('Floating IP'),
           render: row => this.renderResourceName(row)
         },
         {
-          title: 'State',
+          title: gettext('State'),
           render: row => this.renderResourceState(row)
         }
       ];

@@ -10,20 +10,20 @@ export const defaultFieldOptions = {
 };
 
 export const defaultEditAction = {
-  title: 'Edit',
+  title: gettext('Edit'),
   enabled: true,
   type: 'form',
   method: 'PUT',
-  successMessage: 'Resource has been updated',
+  successMessage: gettext('Resource has been updated'),
   fields: {
     name: {
-      label: 'Name',
+      label: gettext('Name'),
       max_length: 150,
       required: true,
       type: 'string'
     },
     description: {
-      label: 'Description',
+      label: gettext('Description'),
       max_length: 500,
       required: false,
       type: 'text'

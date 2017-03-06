@@ -9,65 +9,612 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.12\n"
 
-#: app/views/profile/update.html:29
+#: app/scripts/components/error/error-403.html:9
+#: app/scripts/components/error/error-404.html:6
+msgid "&lt; Back"
+msgstr "&lt; Tagasi"
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:13
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:15
+msgid "Access"
+msgstr "Ligipääs"
+
+#: app/scripts/components/auth/auth-activation.html:3
+msgid "Account activation"
+msgstr "Konto aktiveerimine"
+
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
+msgid "Actions"
+msgstr "Toimingud"
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:31
+msgid "Add new"
+msgstr "Lisa uus"
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:20
+msgid "Add new organization"
+msgstr "Lisa uus asutus"
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:79
+msgid "Add new project"
+msgstr "Lisa uus projekt"
+
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:70
+msgid "Add rule"
+msgstr "Lisa reegel"
+
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:62
+msgid "Add snapshots"
+msgstr "Lisa tõmmised"
+
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
+msgid "Address"
+msgstr "Aadress"
+
+#: app/scripts/components/customer/customer-workspace.js:100
+msgid "Alerts"
+msgstr "Hoiatused"
+
+#: app/scripts/components/auth/auth-login.html:100
+msgid "Already have an account?"
+msgstr "Kui Sul konto juba on"
+
+#: app/scripts/components/customer/customer-workspace.js:70
+msgid "Analytics"
+msgstr "Analüütika"
+
+#: app/scripts/components/user/user-edit.html:113
+msgid "API token lifetime"
+msgstr "API token'i eluiga"
+
+#: app/scripts/components/analytics/resource-chart-service.js:27
+#: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
+#: app/scripts/configs/base-config.js:103
+#: app/scripts/configs/base-config.js:122 app/scripts/configs/base-config.js:55
+msgid "Applications"
+msgstr "Rakendused"
+
+#: app/scripts/components/project/projects-list.js:100
+msgid "Apps"
+msgstr "Rakendused"
+
+#: app/scripts/components/issues/issue-detail.html:25
+msgid "Assigned to"
+msgstr "Kellele määratud"
+
+#: app/scripts/components/openstack/openstack-backup-schedule/module.js:63
+msgid "Backups"
+msgstr "Varundamine"
+
+#: app/scripts/components/analytics/resource-chart-service.js:33
+msgid "Block devices"
+msgstr "Plokkseadmed "
+
+#: app/scripts/configs/base-config.js:47
+msgid "Block storage"
+msgstr "Plokk"
+
+#: app/scripts/components/appstore/category-selector.html:33
+#: app/scripts/components/events/event-details-dialog.html:125
+#: app/scripts/components/issues/issue-create-dialog.html:99
+#: app/scripts/components/navigation/select-workspace-dialog.html:125
+#: app/scripts/components/offering/appstore-offering.html:19
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:52
+#: app/scripts/components/team/add-project-member.html:54
+#: app/scripts/components/team/add-team-member.html:86
 msgid "Cancel"
 msgstr "Tühista"
 
-#: app/views/partials/app-header.html:18
+#: app/scripts/components/offering/appstore-offering.html:16
+#: app/scripts/components/openstack/openstack-volume/module.js:57
+#: app/scripts/components/openstack/openstack-volume/module.js:71
+msgid "Create"
+msgstr "Loo"
+
+#: app/scripts/components/auth/auth-login.html:18
+#: app/scripts/components/auth/auth-login.html:96
+msgid "Create an account"
+msgstr "Loo konto"
+
+#: app/scripts/components/issues/issue-detail.html:80
+#: app/scripts/components/resource/summary/resource-summary-base.html:39
+msgid "Created"
+msgstr "Loodud"
+
+#: app/scripts/components/project/projects-list.js:86
+msgid "Creation date"
+msgstr "Loomisaeg"
+
+#: app/scripts/components/customer/customer-workspace.js:43
 msgid "Dashboard"
 msgstr "Töölaud"
 
-#: app/views/partials/app-header.html:26
+#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
+msgid "Delete"
+msgstr "Kustuta"
+
+#: app/scripts/components/issues/issue-detail.html:89
+#: app/scripts/components/issues/issues-short-list.html:28
+#: app/scripts/components/offering/offering-summary.html:62
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:43
+#: app/scripts/components/project/projects-list.js:79
+#: app/scripts/components/resource/summary/resource-summary-base.html:30
+#: app/scripts/components/user/user-edit.html:85
+msgid "Description"
+msgstr "Kirjeldus"
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
+msgid "Details"
+msgstr "Lisainfo"
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:33
+msgid "Device"
+msgstr "Seade"
+
+#: app/scripts/components/auth/auth-login.html:94
+msgid "Do not have an account?"
+msgstr "Konto puudub?"
+
+#: app/scripts/components/user/user-edit.html:26
+msgid "E-mail"
+msgstr "E-post"
+
+#: app/scripts/components/openstack/openstack-backup-schedule/module.js:30
+#: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:28
+msgid "Edit"
+msgstr "Muuda"
+
+#: app/scripts/components/billing/billing-record-details.html:71
+msgid "End time"
+msgstr "Lõppaeg"
+
+#: app/scripts/components/events/event-details-dialog.html:51
+#: app/scripts/components/resource/summary/resource-summary-base.html:12
+msgid "Error message"
+msgstr "Veateade"
+
+#: app/scripts/configs/base-config.js:211
+msgid "Estonian"
+msgstr "Eesti"
+
+#: app/scripts/components/user/user-edit.html:16
+msgid "Full name"
+msgstr "Täisnimi"
+
+#: app/scripts/components/navigation/app-footer.html:11
+msgid "Help"
+msgstr "Abi"
+
+#: app/scripts/components/billing/invoice-details.html:3
+msgid "Invoice"
+msgstr "Arve"
+
+#: app/scripts/components/billing/invoice-details.html:45
+msgid "Invoice Date"
+msgstr "Arve kuupäev"
+
+#: app/scripts/components/billing/invoice-details.html:40
+msgid "Invoice No."
+msgstr "Arve nr."
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:49
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:42
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:37
+msgid "Invoiced to"
+msgstr "Kellele"
+
+#: app/scripts/components/billing/billing-tabs.html:4
+msgid "Invoices"
+msgstr "Arved"
+
+#: app/scripts/components/events/event-details-dialog.html:27
+msgid "IP address"
+msgstr "IP aadress"
+
+#: app/scripts/components/issues/issues-short-list.html:27
+msgid "Key"
+msgstr "Võti"
+
+#: app/scripts/components/issues/issue-detail.html:70
+msgid "Link"
+msgstr "Viide"
+
+#: app/scripts/components/navigation/header/logout-link.html:4
+#: app/scripts/components/navigation/site-header.html:12
+#: app/scripts/components/user/user-sidebar.html:21
+msgid "Log out"
+msgstr "Logi välja"
+
+#: app/scripts/components/auth/auth-login.html:102
+#: app/scripts/components/auth/auth-login.html:39
+msgid "Login"
+msgstr "Logi sisse"
+
+#: app/scripts/components/auth/estonianId/auth-login-failed.html:3
+msgid "Login failed"
+msgstr "Tõrge sisselogimisel"
+
+#: app/scripts/components/customer/customer-workspace.js:126
+msgid "Manage"
+msgstr "Haldus"
+
+#: app/scripts/components/events/event-details-dialog.html:114
+msgid "Message"
+msgstr "Teade"
+
+#: app/scripts/components/offering/offering-summary.html:11
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:38
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:30
+#: app/scripts/components/project/projects-list.js:70
+msgid "Name"
+msgstr "Nimi"
+
+#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:19
+msgid "Network"
+msgstr "Võrk"
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:27
+msgid "New VPC package"
+msgstr "Uus VPC pakett"
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:22
+msgid "Open"
+msgstr "Ava"
+
+#: app/scripts/components/auth/auth-login.html:76
+msgid "Or use social login"
+msgstr "Või sisene sotsiaalmeedia kontoga"
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:32
+msgid "organization"
+msgstr "asutus"
+
+#: app/scripts/components/events/event-details-dialog.html:59
+#: app/scripts/components/issues/issue-create-dialog.html:12
+#: app/scripts/components/issues/issue-create-dialog.html:22
+#: app/scripts/components/issues/issue-create-dialog.html:7
+#: app/scripts/components/issues/issue-detail.html:30
+msgid "Organization"
+msgstr "Asutus"
+
+#: app/scripts/components/billing/billing-record-details.html:6
+#: app/scripts/components/billing/invoice-details.html:6
+#: app/scripts/components/customer/customer-workspace.html:9
+msgid "Organization dashboard"
+msgstr "Organisatsioon töölaud"
+
+#: app/scripts/components/user/user-edit.html:67
+msgid "Organization name"
+msgstr "Asutuse nimi"
+
+#: app/scripts/configs/base-config.js:189
+msgid "Organization owner"
+msgstr "Asutuse peakasutaja"
+
+#: app/scripts/components/team/add-team-member.html:32
+msgid "Organization owner role expires on"
+msgstr "Asutuse peakasutaja roll aegub"
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:35
+msgid "Organizations"
+msgstr "Asutused"
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:5
+msgid "Package"
+msgstr "Pakett"
+
+#: app/scripts/components/error/error-404.html:3
+msgid "Page Not Found :/"
+msgstr "Lehte ei leitud :/"
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:41
+msgid "Password"
+msgstr "Parool"
+
+#: app/scripts/components/user/user-edit.html:94
+msgid "Phone number"
+msgstr "Telefoninumber"
+
+#: app/scripts/components/offering/offering-summary.html:32
+msgid "Price"
+msgstr "Hind"
+
+#: app/scripts/components/issues/issue-detail.html:65
+msgid "Priority"
+msgstr "Prioriteet"
+
+#: app/scripts/components/navigation/app-footer.html:5
+msgid "Privacy policy"
+msgstr "Privaatsuspoliitika"
+
+#: app/scripts/components/analytics/resource-chart-service.js:21
+#: app/scripts/components/project/projects-list.js:105
+#: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
+#: app/scripts/configs/base-config.js:38 app/scripts/configs/base-config.js:95
+msgid "Private clouds"
+msgstr "Privaatpilved"
+
+#: app/scripts/components/events/event-details-dialog.html:69
+#: app/scripts/components/issues/issue-create-dialog.html:17
+#: app/scripts/components/issues/issue-create-dialog.html:27
+#: app/scripts/components/issues/issue-detail.html:40
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:53
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:41
+msgid "Project"
+msgstr "Projekt"
+
+#: app/scripts/components/offering/offering-header.html:13
+#: app/views/project/base.html:13
+msgid "Project dashboard"
+msgstr "Projekti töölaud"
+
+#: app/scripts/configs/base-config.js:190
+msgid "Project manager"
+msgstr "Projektihaldur"
+
+#: app/scripts/components/team/add-team-member.html:45
+msgid "Project name"
+msgstr "Projekti nimi"
+
+#: app/scripts/components/appstore/category-selector.html:10
+#: app/scripts/components/customer/customer-workspace.js:55
+#: app/scripts/components/navigation/select-workspace-dialog.html:82
 msgid "Projects"
 msgstr "Projektid"
 
-#: app/views/partials/app-header.html:22
-msgid "Resources"
-msgstr "Ressursid"
+#: app/scripts/components/team/add-team-member.html:40
+msgid "Projects list"
+msgstr "Projektide nimekiri"
 
-#: app/views/profile/update.html:30
-msgid "Save"
-msgstr "Salvesta"
-
-#: app/views/partials/app-header.html:30
-msgid "Services"
-msgstr "Teenused"
-
-#: app/views/partials/app-header.html:34
-msgid "Users"
-msgstr "Kasutajad"
+#: app/scripts/components/resource/summary/resource-summary-base.html:21
+msgid "Provider"
+msgstr "Teenusepakkuja"
 
 #: app/scripts/components/customer/customer-workspace.js:48
 msgid "Providers"
-msgstr "Teenused"
+msgstr "Teenusepakkujad"
+
+#: app/scripts/components/billing/billing-record-details.html:58
+#: app/scripts/components/billing/invoice-details.html:56
+msgid "Quantity"
+msgstr "Hulk"
+
+#: app/scripts/components/issues/issues-short-list.html:11
+msgid "Refresh"
+msgstr "Värskenda"
+
+#: app/scripts/components/issues/issue-detail.html:60
+msgid "Resolution"
+msgstr "Resolutsioon"
+
+#: app/scripts/components/events/event-details-dialog.html:93
+#: app/scripts/components/issues/issue-create-dialog.html:32
+msgid "Resource"
+msgstr "Ressurss"
+
+#: app/scripts/components/events/event-details-dialog.html:106
+msgid "Resource configuration"
+msgstr "Ressursside häälestamine"
+
+#: app/scripts/components/team/add-project-member.html:27
+#: app/scripts/components/team/add-team-member.html:46
+msgid "Role"
+msgstr "Roll"
+
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:14
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:43
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedule-summary.html:14
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:43
+msgid "Schedule"
+msgstr "Ajagraafik"
+
+#: app/scripts/components/appstore/category-selector-tabs.html:19
+#: app/scripts/components/navigation/select-workspace-dialog.html:112
+#: app/scripts/components/navigation/select-workspace-dialog.html:58
+msgid "Select"
+msgstr "Vali"
+
+#: app/scripts/components/appstore/category-selector.html:16
+msgid "Select project"
+msgstr "Vali projekt"
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:3
+msgid "Select workspace"
+msgstr "Vali töölaud"
+
+#: app/scripts/components/events/event-details-dialog.html:79
+msgid "Service"
+msgstr "Teenus"
+
+#: app/scripts/components/appstore/category-selector.html:2
+#: app/scripts/components/customer/customer-workspace.js:63
+msgid "Service store"
+msgstr "Teenuste kataloog"
+
+#: app/scripts/components/issues/issue-detail.html:45
+msgid "Service type"
+msgstr "Teenuse tüüp"
+
+#: app/scripts/components/auth/auth-login.html:87
+msgid "Sign in with Facebook"
+msgstr "Sisene Facebookiga"
+
+#: app/scripts/components/auth/auth-login.html:81
+msgid "Sign in with Google"
+msgstr "Sisene Googlega"
+
+#: app/scripts/components/auth/estonianId/auth-estonian-id.html:6
+msgid "Sign in with ID card"
+msgstr "Logi sisse ID-kaardiga"
+
+#: app/scripts/components/auth/estonianId/auth-estonian-id.html:15
+msgid "Sign in with Mobile ID"
+msgstr "Logi sisse Mobiil IDga"
+
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:5
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:33
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:40
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:5
+msgid "Size"
+msgstr "Suurus"
+
+#: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:62
+#: app/scripts/components/openstack/openstack-volume/module.js:104
+#: app/scripts/components/resource/list/resource-storage-tabs.html:14
+msgid "Snapshots"
+msgstr "Tõmmised"
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:54
+msgid "SSH key"
+msgstr "SSH võti"
+
+#: app/scripts/components/billing/billing-record-details.html:70
+msgid "Start time"
+msgstr "Algusaeg"
+
+#: app/scripts/components/offering/offering-summary.html:18
+#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:52
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:51
+#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:52
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:35
+#: app/scripts/components/resource/summary/resource-summary-base.html:3
+msgid "State"
+msgstr "Olek"
+
+#: app/scripts/components/issues/issue-detail.html:55
+msgid "Status"
+msgstr "Staatus"
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:25
+#: app/scripts/components/project/projects-list.js:96
+#: app/scripts/components/resource/breadcrumbs/resource-categories.js:11
+msgid "Storage"
+msgstr "Kettavolüümid"
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:46
+msgid "Submit"
+msgstr "Saada"
+
+#: app/scripts/components/offering/offering-summary.html:6
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
+msgid "Summary"
+msgstr "Kokkuvõte"
+
+#: app/scripts/components/navigation/header/support-link.html:4
+#: app/scripts/configs/base-config.js:63
+msgid "Support"
+msgstr "Tugi"
+
+#: app/scripts/components/openstack/openstack-backup-schedule/module.js:39
+#: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:37
+#: app/scripts/components/openstack/openstack-snapshot/module.js:36
+#: app/scripts/components/openstack/openstack-volume/module.js:50
+msgid "Synchronise"
+msgstr "Sünkroniseeri"
+
+#: app/scripts/configs/base-config.js:191
+msgid "System administrator"
+msgstr "Süsteemiadministraator"
 
 #: app/scripts/components/customer/customer-workspace.js:107
 msgid "Team"
 msgstr "Kasutajad"
 
-#: app/scripts/components/customer/customer-workspace.js:126
-msgid "Manage"
-msgstr "Juhtima"
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:10
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
+msgid "Tenant name"
+msgstr "Tenanti nimi"
 
-#: app/scripts/components/customer/customer-workspace.js:70
-msgid "Analytics"
-msgstr "Analüüs"
+#: app/scripts/components/navigation/app-footer.html:8
+#: app/scripts/components/user/user-edit.html:131
+#: app/scripts/components/user/user-edit.html:147
+msgid "Terms of Service"
+msgstr "Kasutustingimused"
 
-#: app/scripts/components/offering/offering-header.html:13
-msgid "Project dashboard"
-msgstr "Projekti töölaud"
+#: app/scripts/components/offering/offering-summary.html:25
+#: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
+msgid "Type"
+msgstr "Tüüp"
 
-#: app/scripts/components/customer/customer-workspace.html:9
-msgid "Organization dashboard"
-msgstr "Organisatsioon töölaud"
+#: app/scripts/components/issues/issues-short-list.html:29
+msgid "Updated"
+msgstr "Uuendatud"
 
-msgid "Name"
-msgstr "Nimi"
+#: app/scripts/components/events/event-details-dialog.html:17
+#: app/scripts/components/team/add-project-member.html:10
+#: app/scripts/components/team/add-project-member.html:20
+#: app/scripts/components/team/add-team-member.html:11
+msgid "User"
+msgstr "Kasutaja"
 
-msgid "Description"
-msgstr "Kirjeldus"
+#: app/scripts/components/user/user-details.html:9
+msgid "User dashboard"
+msgstr "Kasutaja töölaud"
 
-msgid "Creation date"
-msgstr "Loomise kuupäev"
+#: app/scripts/components/user/user-edit.html:47
+msgid "User status"
+msgstr "Kasutaja staatus"
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
+msgid "Username"
+msgstr "Kasutajanimi"
+
+#: app/scripts/components/customer/customer-team.html:4
+#: app/scripts/components/project/project-team.html:4
+msgid "Users"
+msgstr "Kasutajad"
+
+#: app/scripts/components/navigation/app-footer.html:19
+msgid "Version"
+msgstr "Versioon"
+
+#: app/scripts/components/analytics/resource-chart-service.js:15
+#: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
+#: app/scripts/configs/base-config.js:118 app/scripts/configs/base-config.js:30
+#: app/scripts/configs/base-config.js:88
+msgid "Virtual machines"
+msgstr "Virtuaalmasinad"
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:17
+msgid "VM name"
+msgstr "VMi nimi"
+
+#: app/scripts/components/project/projects-list.js:92
+msgid "VMs"
+msgstr "VMid"
+
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:13
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:43
+msgid "Volume"
+msgstr "Volüüm"
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:17
+msgid "Volume name"
+msgstr "Volüümi nimi"
+
+#: app/scripts/components/resource/list/resource-storage-tabs.html:5
+msgid "Volumes"
+msgstr "Volüümid"
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:18
+msgid "VPC package"
+msgstr "VPC pakett"
+
+#: app/scripts/components/auth/auth-init.html:10
+#: app/scripts/components/auth/auth-login.html:5
+msgid "Welcome to"
+msgstr "Tere tulemast"
+
+#~ msgid "Resources"
+#~ msgstr "Ressursid"
+
+#~ msgid "Save"
+#~ msgstr "Salvesta"
+
+#~ msgid "Services"
+#~ msgstr "Teenused"

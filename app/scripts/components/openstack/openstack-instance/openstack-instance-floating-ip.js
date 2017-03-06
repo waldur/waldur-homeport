@@ -14,12 +14,12 @@ export default {
       this.selectList.push(
         {
           model: null,
-          label: 'Skip assignment',
+          label: gettext('Skip assignment'),
           modelName: null
         },
         {
           model: true,
-          label: 'Auto-assign',
+          label: gettext('Auto-assign'),
           modelName: 'allocate_floating_ip'
         }
       );

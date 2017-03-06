@@ -1,7 +1,7 @@
 <div class="form-horizontal">
     <div class="form-group">
         <label for="keyName" class="col-sm-3 control-label">
-            Key name:
+            <span translate>Key name</span>:
         </label>
         <div class="col-sm-5">
             <input id="keyName"
@@ -15,7 +15,12 @@
     </div>
     <div class="form-group">
         <label for="publicKey" class="col-sm-3 control-label">
-            <a title="How to generate RSA keys" href="#/help/keys/"><i class="fa fa-question-circle"></i></a> Public key
+            <a visible-if="'help'"
+               title="{{ 'How to generate RSA keys' | translate }}"
+               href="#/help/keys/">
+                <i class="fa fa-question-circle"></i>
+            </a>
+            <span translate>Public key</span>
         </label>
         <div class="col-sm-5">
             <textarea id="publicKey"
@@ -33,8 +38,12 @@
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-5">
-            <button class="btn btn-primary" submit-button="KeyAdd.save()">Add key</button>
-            <button class="btn btn-default" ng-click="KeyAdd.cancel()">Cancel</button>
+            <button class="btn btn-primary" submit-button="KeyAdd.save()">
+                <span translate>Add key</span>
+            </button>
+            <button class="btn btn-default" ng-click="KeyAdd.cancel()">
+                <span translate>Cancel</span>
+            </button>
         </div>
     </div>
 </div>

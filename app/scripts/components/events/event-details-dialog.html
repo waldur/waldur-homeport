@@ -2,111 +2,123 @@
   <h3 class="modal-title" translate>Event details</h3>
 </div>
 <div class="modal-body">
-  <div class="details-table__row">
-    <div class="details-table__key">
-      <span translate>Timestamp</span>
-    </div>
-    <div class="details-table__value">
-      {{ ::$ctrl.event['@timestamp'] | dateTime }}
-    </div>
-  </div>
-  <div class="details-table__row" ng-if="::$ctrl.event.user_uuid">
-    <div class="details-table__key">
-      <span translate>User</span>
-    </div>
-    <div class="details-table__value">
-      <a ui-sref="users.details({uuid: $ctrl.event.user_uuid })">
-        {{ ::$ctrl.event.user_full_name || $ctrl.event.user_username }}
-      </a>
-    </div>
-  </div>
-  <div class="details-table__row" ng-if="::$ctrl.event.ip_address">
-    <div class="details-table__key">
-      <span translate>IP address</span>
-    </div>
-    <div class="details-table__value">
-      {{ ::$ctrl.event.ip_address }}
-    </div>
-  </div>
-  <div class="details-table__row">
-    <div class="details-table__key">
-      <span translate>Importance</span>
-    </div>
-    <div class="details-table__value">
-      {{ ::$ctrl.event.importance | titleCase }}
-    </div>
-  </div>
-  <div class="details-table__row">
-    <div class="details-table__key">
-      <span translate>Event type</span>
-    </div>
-    <div class="details-table__value">
-      {{ ::$ctrl.event.event_type }}
-    </div>
-  </div>
-  <div class="details-table__row" ng-if="::$ctrl.event.error_message">
-    <div class="details-table__key">
-      <span translate>Error message</span>
-    </div>
-    <div class="details-table__value">
-      {{ ::$ctrl.event.error_message }}
-    </div>
-  </div>
-  <div class="details-table__row" ng-if="::$ctrl.event.customer_uuid">
-    <div class="details-table__key">
-      <span translate>Organization</span>
-    </div>
-    <div class="details-table__value">
-      <a ui-sref="organization.details({uuid: $ctrl.event.customer_uuid })">
-        {{ ::$ctrl.event.customer_name }}
-      </a>
-    </div>
-  </div>
-  <div class="details-table__row" ng-if="::$ctrl.event.project_uuid">
-    <div class="details-table__key">
-      <span translate>Project</span>
-    </div>
-    <div class="details-table__value">
-      <a ui-sref="project.details({uuid: $ctrl.event.project_uuid })">
-        {{ ::$ctrl.event.project_name }}
-      </a>
-    </div>
-  </div>
-  <div class="details-table__row" ng-if="::$ctrl.event.service_uuid">
-    <div class="details-table__key">
-      <span translate>Service</span>
-    </div>
-    <div class="details-table__value">
-      <a ui-sref="organization.providers({
-        uuid: $ctrl.event.customer_uuid,
-        providerUuid: $ctrl.event.service_uuid,
-        providerType: $ctrl.event.service_type
-      })">
-        {{ ::$ctrl.event.service_name }}
-      </a>
-    </div>
-  </div>
-  <div class="details-table__row" ng-if="::$ctrl.event.resource_uuid">
-    <div class="details-table__key">
-      <span translate>Resource</span>
-    </div>
-    <div class="details-table__value">
-      <a ui-sref="resources.details({
-        uuid: $ctrl.event.resource_uuid,
-        resource_type: $ctrl.event.resource_type
-      })">
-        {{ ::$ctrl.event.resource_full_name }}
-      </a>
-    </div>
-  </div>
-  <div class="details-table__row" ng-if="::$ctrl.event.message">
-    <div class="details-table__key">
-      <span translate>Message</span>
-    </div>
-    <div class="details-table__value">
-      {{ ::$ctrl.event.message }}
-    </div>
-  </div>
+  <table class="table table-borderless">
+    <tbody>
+      <tr>
+        <td>
+          <span translate>Timestamp</span>
+        </td>
+        <td>
+          {{ ::$ctrl.event['@timestamp'] | dateTime }}
+        </td>
+      </tr>
+      <tr ng-if="::$ctrl.event.user_uuid">
+        <td>
+          <span translate>User</span>
+        </td>
+        <td>
+          <a ui-sref="users.details({uuid: $ctrl.event.user_uuid })">
+            {{ ::$ctrl.event.user_full_name || $ctrl.event.user_username }}
+          </a>
+        </td>
+      </tr>
+      <tr ng-if="::$ctrl.event.ip_address">
+        <td>
+          <span translate>IP address</span>
+        </td>
+        <td>
+          {{ ::$ctrl.event.ip_address }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span translate>Importance</span>
+        </td>
+        <td>
+          {{ ::$ctrl.event.importance | titleCase }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span translate>Event type</span>
+        </td>
+        <td>
+          {{ ::$ctrl.event.event_type }}
+        </td>
+      </tr>
+      <tr ng-if="::$ctrl.event.error_message">
+        <td>
+          <span translate>Error message</span>
+        </td>
+        <td>
+          {{ ::$ctrl.event.error_message }}
+        </td>
+      </tr>
+      <tr ng-if="::$ctrl.event.customer_uuid">
+        <td>
+          <span translate>Organization</span>
+        </td>
+        <td>
+          <a ui-sref="organization.details({uuid: $ctrl.event.customer_uuid })">
+            {{ ::$ctrl.event.customer_name }}
+          </a>
+        </td>
+      </tr>
+      <tr ng-if="::$ctrl.event.project_uuid">
+        <td>
+          <span translate>Project</span>
+        </td>
+        <td>
+          <a ui-sref="project.details({uuid: $ctrl.event.project_uuid })">
+            {{ ::$ctrl.event.project_name }}
+          </a>
+        </td>
+      </tr>
+      <tr ng-if="::$ctrl.event.service_name">
+        <td>
+          <span translate>Service</span>
+        </td>
+        <td>
+          <a ui-sref="organization.providers({
+            uuid: $ctrl.event.customer_uuid,
+            providerUuid: $ctrl.event.service_uuid,
+            providerType: $ctrl.event.service_type
+          })">
+            {{ ::$ctrl.event.service_name }}
+          </a>
+        </td>
+      </tr>
+      <tr ng-if="::$ctrl.event.resource_uuid">
+        <td>
+          <span translate>Resource</span>
+        </td>
+        <td>
+          <a ui-sref="resources.details({
+            uuid: $ctrl.event.resource_uuid,
+            resource_type: $ctrl.event.resource_type
+          })">
+            {{ ::$ctrl.event.resource_full_name }}
+          </a>
+        </td>
+      </tr>
+      <tr ng-if="::$ctrl.event.resource_configuration">
+        <td>
+          <span translate>Resource configuration</span>
+        </td>
+        <td>
+          {{ ::$ctrl.event.resource_configuration }}
+        </td>
+      </tr>
+      <tr ng-if="::$ctrl.event.message">
+        <td>
+          <span translate>Message</span>
+        </td>
+        <td>
+          {{ ::$ctrl.event.message }}
+        </div>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="$ctrl.dismiss()">

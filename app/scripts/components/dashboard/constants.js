@@ -4,23 +4,23 @@ export const POINTS_COUNT = 25;
 
 export const DASHBOARD_QUOTAS = {
   nc_app_count: {
-    title: 'Applications',
+    title: gettext('Applications'),
     feature: 'apps'
   },
   nc_vm_count: {
-    title: 'Virtual machines',
+    title: gettext('Virtual machines'),
     feature: 'vms'
   },
   nc_private_cloud_count: {
-    title: 'Private clouds',
+    title: gettext('Private clouds'),
     feature: 'private_clouds',
   },
   nc_storage_count: {
-    title: 'Storage',
+    title: gettext('Storage'),
     feature: 'storage'
   },
   nc_user_count: {
-    title: 'Team size',
+    title: gettext('Team size'),
     feature: 'users'
   }
 };
