@@ -37,6 +37,11 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
+#: app/scripts/components/issues/issue-navigation-service.js:21
+msgid "Activity stream"
+msgstr ""
+
+#: app/scripts/components/issues/issue-comments-form.html:17
 #: app/scripts/components/team/add-project-member.js:22
 msgid "Add"
 msgstr ""
@@ -78,6 +83,8 @@ msgid "Address"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:50
+#: app/scripts/components/issues/issue-quick-create.html:94
+#: app/scripts/components/issues/issue-registration.html:172
 msgid "Affected resource"
 msgstr ""
 
@@ -119,11 +126,17 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
+#: app/scripts/components/issues/issues-list-filtered.html:11
+msgid "Apply filters"
+msgstr ""
+
 #: app/scripts/components/project/projects-list.js:100
 msgid "Apps"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:25
+#: app/scripts/components/issues/issue-registration.html:191
+#: app/scripts/components/issues/issues-list.js:115
 msgid "Assigned to"
 msgstr ""
 
@@ -191,12 +204,15 @@ msgid "bootable"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:15
+#: app/scripts/components/issues/issue-registration.html:6
+#: app/scripts/components/issues/issues-list.js:97
 msgid "Caller"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:45
 #: app/scripts/components/appstore/category-selector.html:33
 #: app/scripts/components/events/event-details-dialog.html:125
+#: app/scripts/components/issues/issue-comments-form.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:125
 #: app/scripts/components/offering/appstore-offering.html:19
@@ -230,6 +246,11 @@ msgstr ""
 
 #: app/scripts/components/appstore/category-selector-tabs.html:16
 msgid "Coming soon"
+msgstr ""
+
+#: app/scripts/components/issues/issue-comments-form.html:10
+#: app/scripts/components/issues/issue-comments-form.html:6
+msgid "Comment"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:98
@@ -280,6 +301,12 @@ msgstr ""
 msgid "Create notification"
 msgstr ""
 
+#: app/scripts/components/issues/issue-quick-create.html:116
+#: app/scripts/components/issues/issue-quick-create.html:3
+#: app/scripts/components/issues/issue-registration.html:217
+msgid "Create request"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-volume/module.js:58
 msgid "Create snapshot for"
 msgstr ""
@@ -289,6 +316,7 @@ msgid "Create snapshot schedule for OpenStack volume"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:80
+#: app/scripts/components/issues/issues-list.js:124
 #: app/scripts/components/resource/summary/resource-summary-base.html:39
 msgid "Created"
 msgstr ""
@@ -311,6 +339,7 @@ msgid "Custom request"
 msgstr ""
 
 #: app/scripts/components/customer/customer-workspace.js:43
+#: app/scripts/components/issues/issue-navigation-service.js:11
 #: app/scripts/components/user/constants.js:3
 msgid "Dashboard"
 msgstr ""
@@ -328,6 +357,9 @@ msgid "Delete"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:89
+#: app/scripts/components/issues/issue-quick-create.html:39
+#: app/scripts/components/issues/issue-registration.html:110
+#: app/scripts/components/issues/issues-list.js:73
 #: app/scripts/components/issues/issues-short-list.html:28
 #: app/scripts/components/offering/offering-summary.html:62
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:43
@@ -339,7 +371,10 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
+#: app/scripts/components/issues/issue-registration.html:32
+#: app/scripts/components/issues/issue-registration.html:69
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
+#: app/scripts/components/user/user-sidebar.html:12
 msgid "Details"
 msgstr ""
 
@@ -421,6 +456,12 @@ msgstr ""
 msgid "External IP"
 msgstr ""
 
+#: app/scripts/components/issues/issue-registration.html:151
+#: app/scripts/components/issues/issue-registration.html:36
+#: app/scripts/components/issues/issue-registration.html:73
+msgid "Filter"
+msgstr ""
+
 #: app/scripts/components/navigation/select-workspace-dialog.html:44
 msgid "Filter organizations"
 msgstr ""
@@ -495,6 +536,10 @@ msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:11
 msgid "Help"
+msgstr ""
+
+#: app/scripts/components/issues/issue-navigation-service.js:3
+msgid "Helpdesk"
 msgstr ""
 
 #: app/scripts/components/user/keys/key-create.html:19
@@ -638,6 +683,7 @@ msgstr ""
 msgid "Kept until"
 msgstr ""
 
+#: app/scripts/components/issues/issues-list.js:45
 #: app/scripts/components/issues/issues-short-list.html:27
 msgid "Key"
 msgstr ""
@@ -834,6 +880,14 @@ msgstr ""
 msgid "No snapshots yet."
 msgstr ""
 
+#: app/scripts/components/issues/issues-list.js:32
+msgid "No support requests found matching filter."
+msgstr ""
+
+#: app/scripts/components/issues/issues-list.js:31
+msgid "No support requests yet."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:46
 msgid "Not known"
 msgstr ""
@@ -888,6 +942,9 @@ msgstr ""
 #: app/scripts/components/issues/issue-create-dialog.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:7
 #: app/scripts/components/issues/issue-detail.html:30
+#: app/scripts/components/issues/issue-quick-create.html:56
+#: app/scripts/components/issues/issue-registration.html:43
+#: app/scripts/components/issues/issues-list.js:89
 msgid "Organization"
 msgstr ""
 
@@ -1024,6 +1081,8 @@ msgstr ""
 #: app/scripts/components/issues/issue-create-dialog.html:17
 #: app/scripts/components/issues/issue-create-dialog.html:27
 #: app/scripts/components/issues/issue-detail.html:40
+#: app/scripts/components/issues/issue-quick-create.html:75
+#: app/scripts/components/issues/issue-registration.html:127
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:53
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:41
@@ -1037,6 +1096,10 @@ msgstr ""
 
 #: app/scripts/configs/base-config.js:190
 msgid "Project manager"
+msgstr ""
+
+#: app/scripts/components/team/project-users-list.js:107
+msgid "Project manager cannot edit users with same role"
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.html:45
@@ -1143,12 +1206,15 @@ msgid "Reported by me"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:20
+#: app/scripts/components/issues/issues-list.js:106
 msgid "Reporter"
 msgstr ""
 
 #: app/scripts/components/issues/issue-create-dialog.html:37
 #: app/scripts/components/issues/issue-create-dialog.html:42
 #: app/scripts/components/issues/issue-detail.html:35
+#: app/scripts/components/issues/issue-quick-create.html:9
+#: app/scripts/components/issues/issue-registration.html:80
 msgid "Request type"
 msgstr ""
 
@@ -1213,6 +1279,7 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
+#: app/scripts/components/issues/issue-registration.html:213
 #: app/scripts/components/navigation/header/main-search.html:3
 msgid "Search"
 msgstr ""
@@ -1253,6 +1320,7 @@ msgid "Select request type"
 msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:3
+#: app/scripts/components/navigation/select-workspace-toggle.html:8
 msgid "Select workspace"
 msgstr ""
 
@@ -1266,6 +1334,8 @@ msgid "Service store"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:45
+#: app/scripts/components/issues/issue-registration.html:157
+#: app/scripts/components/issues/issues-list.js:81
 msgid "Service type"
 msgstr ""
 
@@ -1306,6 +1376,10 @@ msgstr ""
 
 #: app/scripts/components/project/projects-list.js:109
 msgid "SLA"
+msgstr ""
+
+#: app/scripts/components/issues/issue-navigation-service.js:27
+msgid "SLAs"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/module.js:25
@@ -1368,6 +1442,7 @@ msgid "State"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:55
+#: app/scripts/components/issues/issues-list.js:55
 #: app/scripts/components/user/user-popover-table.html:41
 msgid "Status"
 msgstr ""
@@ -1405,6 +1480,14 @@ msgstr ""
 #: app/scripts/components/navigation/header/support-link.html:4
 #: app/scripts/configs/base-config.js:63
 msgid "Support"
+msgstr ""
+
+#: app/scripts/components/issues/issues-workspace.html:9
+msgid "Support dashboard"
+msgstr ""
+
+#: app/scripts/components/issues/issue-navigation-service.js:16
+msgid "Support requests"
 msgstr ""
 
 #: app/scripts/components/user/filters.js:22
@@ -1485,12 +1568,19 @@ msgstr ""
 msgid "There are no suitable VPC packages for this tenant."
 msgstr ""
 
+#: app/scripts/components/issues/issues-list.js:142
 #: app/scripts/components/issues/issues-short-list.html:30
 msgid "Time in progress"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:9
 msgid "Timestamp"
+msgstr ""
+
+#: app/scripts/components/issues/issue-quick-create.html:22
+#: app/scripts/components/issues/issue-registration.html:93
+#: app/scripts/components/issues/issues-list.js:64
+msgid "Title"
 msgstr ""
 
 #: app/scripts/components/billing/invoice-details.html:42
@@ -1527,6 +1617,7 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
+#: app/scripts/components/issues/issues-list.js:36
 #: app/scripts/components/offering/offering-summary.html:25
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
 msgid "Type"
@@ -1553,6 +1644,7 @@ msgstr ""
 msgid "Update security groups"
 msgstr ""
 
+#: app/scripts/components/issues/issues-list.js:133
 #: app/scripts/components/issues/issues-short-list.html:29
 msgid "Updated"
 msgstr ""
@@ -1670,6 +1762,15 @@ msgstr ""
 #: app/scripts/components/issues/issue-create-dialog.html:49
 #: app/scripts/components/issues/issue-create-dialog.html:69
 #: app/scripts/components/issues/issue-create-dialog.html:88
+#: app/scripts/components/issues/issue-quick-create.html:16
+#: app/scripts/components/issues/issue-quick-create.html:33
+#: app/scripts/components/issues/issue-quick-create.html:50
+#: app/scripts/components/issues/issue-registration.html:104
+#: app/scripts/components/issues/issue-registration.html:121
+#: app/scripts/components/issues/issue-registration.html:145
+#: app/scripts/components/issues/issue-registration.html:24
+#: app/scripts/components/issues/issue-registration.html:61
+#: app/scripts/components/issues/issue-registration.html:87
 msgid "You did not enter a field"
 msgstr ""
 

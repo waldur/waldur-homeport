@@ -29,10 +29,6 @@
     <link rel="stylesheet" type="text/css" href="static/css/bundle.min.css">
     <!-- @endif -->
 
-    <!-- @if NODE_ENV == 'STAGING' -->
-    <link rel="stylesheet" type="text/css" href="static/css/style.min.css">
-    <!-- @endif -->
-
     <!-- @if NODE_ENV == 'PRODUCTION' -->
     <link rel="stylesheet" type="text/css" href="static/css/app.css">
     <!-- @endif -->
@@ -136,7 +132,6 @@
 <script src="scripts/directives/importable-resources.js"></script>
 <script src="scripts/directives/line-chart.js"></script>
 <script src="scripts/directives/list-cache-reset.js"></script>
-<script src="scripts/directives/mini-pagination.js"></script>
 <script src="scripts/directives/multiple-select.js"></script>
 <script src="scripts/directives/pagination.js"></script>
 <script src="scripts/directives/project-price-limit.js"></script>
@@ -145,10 +140,6 @@
 <script src="scripts/directives/stoppropagation.js"></script>
 <script src="scripts/directives/visible.js"></script>
 <script src="static/js/bundle.js"></script>
-<!-- @endif -->
-
-<!-- @if NODE_ENV == 'STAGING' -->
-<script src="static/js/main/main.min.js"></script>
 <!-- @endif -->
 
 <!-- @if NODE_ENV == 'PRODUCTION' -->

@@ -116,8 +116,6 @@ const mapStringsToChoices = choices => choices.map(item => ({
   value: item
 }));
 
-export const ISSUE_STATUS_CHOICES = mapStringsToChoices(ISSUE_STATUSES);
-
 export const CHANNELS = [
   'phone',
   'email',
