@@ -28,18 +28,20 @@ function RestoredVolumesListController($filter, baseResourceListController, open
       var options = this._super();
       options.noDataText = gettext('You have no restored volumes yet.');
       options.noMatchesText = gettext('No restored volumes found matching filter.');
-      options.columns = options.columns.filter(function(item) {
-        return item.title.toLowerCase() !== 'provider';
-      });
+      options.hiddenColumns = [
+        'provider',
+      ];
 
       options.columns.push(
         {
+          id: 'size',
           title: gettext('Size'),
           render: function(row) {
             return $filter('filesize')(row.size);
           }
         },
         {
+          id: 'created',
           title: gettext('Created'),
           className: 'desktop',
           render: function(row) {

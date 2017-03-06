@@ -34,6 +34,7 @@ export default function baseResourceListController(
         noMatchesText: 'No resources found matching filter.',
         columns: [
           {
+            id: 'name',
             title: 'Name',
             className: 'all',
             render: function(row) {
@@ -41,6 +42,7 @@ export default function baseResourceListController(
             }
           },
           {
+            id: 'provider',
             title: 'Provider',
             className: 'desktop',
             render: function(row) {
@@ -48,6 +50,7 @@ export default function baseResourceListController(
             }
           },
           {
+            id: 'state',
             title: 'State',
             className: 'min-tablet-l',
             render: function(row) {
