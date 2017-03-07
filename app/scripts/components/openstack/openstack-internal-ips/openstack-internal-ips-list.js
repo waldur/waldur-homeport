@@ -50,7 +50,8 @@ function OpenstackInternalIpsListController(
             title: gettext('MAC address'),
             render: row => row.mac_address
           },
-        ]
+        ],
+        tableActions: this.getTableActions()
       };
     },
     getFilter: function() {
