@@ -10,11 +10,12 @@
     </tr>
     <tr ng-if="$ctrl.provider.homepage">
       <th translate>Homepage</td>
-      <td>{{ $ctrl.provider.homepage }}</td>
-    </tr>
-    <tr ng-if="$ctrl.provider.terms_of_services">
-      <th translate>Terms of Services</td>
-      <td>{{ $ctrl.provider.terms_of_services }}</td>
+      <td>
+        <a ng-href="{{ $ctrl.provider.homepage }}" target="_blank">
+          <i class="fa fa-external-link"></i>
+          <span translate>Open link</span>
+        </a>
+      </td>
     </tr>
     <tr ng-if="$ctrl.provider.certifications.length > 0">
       <th translate>Certifications</td>
@@ -30,8 +31,16 @@
       </td>
     </tr>
   </table>
+
+  <div ng-if="$ctrl.provider.terms_of_services">
+    <h4 translate>Terms of Services</h4>
+    <p>
+      {{ $ctrl.provider.terms_of_services }}
+    </p>
+  </div>
+
   <div ng-if="$ctrl.markers.length > 0">
-    <h4 translate>Physical location</h4>
+    <h4 translate>Physical locations</h4>
     <leaflet width="100%" height="300px" markers="$ctrl.markers" maxbounds="$ctrl.maxbounds"></leaflet>
   </div>
 </div>

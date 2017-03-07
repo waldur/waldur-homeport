@@ -169,7 +169,7 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:59
+#: app/scripts/components/openstack/openstack-instance/module.js:62
 msgid "Allocate and assign new floating IP"
 msgstr ""
 
@@ -273,13 +273,13 @@ msgid "Backup schedule has been updated"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:142
+#: app/scripts/components/openstack/openstack-instance/module.js:169
 msgid "Backup schedules"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js:63
 #: app/scripts/components/openstack/openstack-backup/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:138
+#: app/scripts/components/openstack/openstack-instance/module.js:165
 msgid "Backups"
 msgstr ""
 
@@ -365,11 +365,11 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-details.html:20
+#: app/scripts/components/providers/details/provider-details.html:21
 msgid "Certifications"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:49
+#: app/scripts/components/openstack/openstack-instance/module.js:52
 msgid "Change flavor"
 msgstr ""
 
@@ -388,6 +388,7 @@ msgstr ""
 msgid "Checkout summary"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:42
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:29
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:33
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:35
@@ -448,8 +449,8 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-store.html:41
 #: app/scripts/components/issues/issue-create-dialog.js:10
 #: app/scripts/components/offering/appstore-offering.html:16
-#: app/scripts/components/openstack/openstack-instance/module.js:74
-#: app/scripts/components/openstack/openstack-instance/module.js:93
+#: app/scripts/components/openstack/openstack-instance/module.js:119
+#: app/scripts/components/openstack/openstack-instance/module.js:77
 #: app/scripts/components/openstack/openstack-tenant/actions.js:28
 #: app/scripts/components/openstack/openstack-tenant/actions.js:46
 #: app/scripts/components/openstack/openstack-tenant/actions.js:66
@@ -464,11 +465,11 @@ msgstr ""
 msgid "Create an account"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:94
+#: app/scripts/components/openstack/openstack-instance/module.js:120
 msgid "Create backup for"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:75
+#: app/scripts/components/openstack/openstack-instance/module.js:78
 msgid "Create backup schedule for OpenStack instance"
 msgstr ""
 
@@ -936,13 +937,17 @@ msgstr ""
 msgid "Instance does not have any security groups yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:43
+#: app/scripts/components/openstack/openstack-instance/module.js:46
 msgid "Instance has been updated"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:30
 #: app/scripts/components/resource/list/resource-vms-list.js:24
 msgid "Internal IP"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/module.js:173
+msgid "Internal IPs"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/module.js:47
@@ -1025,6 +1030,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:60
 msgid "IP version"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:46
+msgid "IP4 address"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
@@ -1144,6 +1153,10 @@ msgstr ""
 msgid "Login failed"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:50
+msgid "MAC address"
+msgstr ""
+
 #: app/scripts/components/customer/customer-workspace.js:128
 #: app/scripts/components/project/project-details.js:99
 #: app/scripts/components/project/routes.js:150
@@ -1235,6 +1248,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:33
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:38
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:93
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:38
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:36
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:35
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
@@ -1317,6 +1331,14 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:30
 msgid "No floating IPs yet."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:35
+msgid "No internal IPs found matching filter."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:34
+msgid "No internal IPs yet."
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js:86
@@ -1499,6 +1521,10 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html:74
 #: app/scripts/components/offering/offering-summary.html:57
 msgid "Open in Service Desk"
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-details.html:16
+msgid "Open link"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:44
@@ -1692,8 +1718,8 @@ msgstr ""
 msgid "Phone numbers"
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-details.html:34
-msgid "Physical location"
+#: app/scripts/components/providers/details/provider-details.html:43
+msgid "Physical locations"
 msgstr ""
 
 #: app/scripts/components/customer/routes.js:136
@@ -2611,7 +2637,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js:39
 #: app/scripts/components/openstack/openstack-floating-ips/module.js:23
-#: app/scripts/components/openstack/openstack-instance/module.js:46
+#: app/scripts/components/openstack/openstack-instance/module.js:49
 #: app/scripts/components/openstack/openstack-network/module.js:33
 #: app/scripts/components/openstack/openstack-security-groups/module.js:55
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:37
@@ -2690,7 +2716,7 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-details.html:16
+#: app/scripts/components/providers/details/provider-details.html:36
 msgid "Terms of Services"
 msgstr ""
 
@@ -2806,6 +2832,7 @@ msgstr ""
 msgid "Unit Price"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/module.js:89
 #: app/scripts/components/user/hooks/hook-details.html:76
 msgid "Update"
 msgstr ""
@@ -2822,7 +2849,7 @@ msgstr ""
 msgid "Update project details"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:64
+#: app/scripts/components/openstack/openstack-instance/module.js:67
 msgid "Update security groups"
 msgstr ""
 
@@ -2989,7 +3016,7 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:134
+#: app/scripts/components/openstack/openstack-instance/module.js:161
 #: app/scripts/components/resource/list/resource-storage-tabs.html:5
 msgid "Volumes"
 msgstr ""
