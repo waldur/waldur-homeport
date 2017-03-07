@@ -3,12 +3,14 @@ import openstackInstanceCheckoutSummary from './openstack-instance-checkout-summ
 import OpenStackInstanceConfig from './openstack-instance-config';
 import openstackInstanceFloatingIp from './openstack-instance-floating-ip';
 import openstackInstanceSecurityGroupsField from './openstack-instance-security-groups-field';
+import openstackInstanceInternalIpsList from './openstack-instance-internal-ips-list';
 
 export default module => {
   module.component('openstackInstanceSummary', openstackInstanceSummary);
   module.directive('openstackInstanceCheckoutSummary', openstackInstanceCheckoutSummary);
   module.component('openstackInstanceFloatingIp', openstackInstanceFloatingIp);
   module.component('openstackInstanceSecurityGroupsField', openstackInstanceSecurityGroupsField);
+  module.component('openstackInstanceInternalIpsList', openstackInstanceInternalIpsList);
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(stateConfig);
@@ -35,6 +37,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'update_security_groups',
       'backup',
       'create_backup_schedule',
+      'update_internal_ips_set',
       'unlink',
       'destroy'
     ],
@@ -80,6 +83,29 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
             type: 'crontab'
           }
         }
+      },
+      update_internal_ips_set: {
+        tab: 'internal_ips',
+        title: gettext('Update'),
+        fields: {
+          internal_ips_set: {
+            type: 'multiselect',
+            resource_default_value: true,
+            serializer: items =>  items.map(item => ({ subnet: item.value })),
+            formatter: ($filter, value) => {
+              let name = value.name || value.subnet_name;
+              let cidr = value.cidr || value.subnet_cidr;
+              return `${name} (${cidr})`;
+            },
+            init: (model) => {
+              return model.map(item => {
+                item.url = item.subnet;
+                return item;
+              });
+            },
+            value_field: 'url',
+          }
+        },
       },
       destroy: {
         fields: {
@@ -128,6 +154,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       'volumes',
       'backups',
       'backup_schedules',
+      'internal_ips_set',
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       volumes: {
@@ -141,6 +168,10 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       backup_schedules: {
         heading: gettext('Backup schedules'),
         component: 'openstackBackupSchedulesList'
+      },
+      internal_ips_set: {
+        heading: gettext('Internal IPs'),
+        component: 'openstackInstanceInternalIpsList'
       }
     })
   });
