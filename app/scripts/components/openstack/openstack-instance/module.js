@@ -3,12 +3,14 @@ import openstackInstanceCheckoutSummary from './openstack-instance-checkout-summ
 import OpenStackInstanceConfig from './openstack-instance-config';
 import openstackInstanceFloatingIp from './openstack-instance-floating-ip';
 import openstackInstanceSecurityGroupsField from './openstack-instance-security-groups-field';
+import openstackInstanceInternalIpsList from './openstack-instance-internal-ips-list';
 
 export default module => {
   module.component('openstackInstanceSummary', openstackInstanceSummary);
   module.directive('openstackInstanceCheckoutSummary', openstackInstanceCheckoutSummary);
   module.component('openstackInstanceFloatingIp', openstackInstanceFloatingIp);
   module.component('openstackInstanceSecurityGroupsField', openstackInstanceSecurityGroupsField);
+  module.component('openstackInstanceInternalIpsList', openstackInstanceInternalIpsList);
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(stateConfig);
@@ -95,17 +97,6 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
               let cidr = value.cidr || value.subnet_cidr;
               return `${name} (${cidr})`;
             },
-            choicesFilter: (choices, model) => {
-              return choices.filter(item => {
-                let exists = false;
-                model.forEach(modelItem => {
-                  if (item.value === modelItem.value) {
-                    exists = true;
-                  }
-                });
-                return !exists;
-              });
-            },
             value_field: 'url',
             default_value_field: 'subnet'
           }
@@ -175,7 +166,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       },
       internal_ips_set: {
         heading: gettext('Internal IPs'),
-        component: 'openstackInternalIpsList'
+        component: 'openstackInstanceInternalIpsList'
       }
     })
   });

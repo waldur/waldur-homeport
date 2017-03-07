@@ -10,7 +10,6 @@ import openstackSecurityGroupsModule from './openstack-security-groups/module';
 import openstackFloatingIpsModule from './openstack-floating-ips/module';
 import openstackSnapshotModule from './openstack-snapshot/module';
 import openstackSnapshotScheduleModule from './openstack-snapshot-schedule/module';
-import openstackInternalIpsModule from './openstack-internal-ips/module';
 
 export default module => {
   module.service('OpenStackSummaryService', OpenStackSummaryService);
@@ -25,6 +24,4 @@ export default module => {
   openstackFloatingIpsModule(module);
   openstackSnapshotModule(module);
   openstackSnapshotScheduleModule(module);
-  openstackSnapshotScheduleModule(module);
-  openstackInternalIpsModule(module);
 };
