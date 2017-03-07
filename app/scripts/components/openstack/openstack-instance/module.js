@@ -97,8 +97,13 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
               let cidr = value.cidr || value.subnet_cidr;
               return `${name} (${cidr})`;
             },
+            init: (model) => {
+              return model.map(item => {
+                item.url = item.subnet;
+                return item;
+              });
+            },
             value_field: 'url',
-            default_value_field: 'subnet'
           }
         },
       },

@@ -51,7 +51,7 @@ export default function actionUtilsService(
                               field.formatter($filter, item) :
                               item[field.display_name_field];
     return items.map(item => ({
-      value: item[field.value_field] || item[field.default_value_field],
+      value: item[field.value_field],
       display_name: formatter(item)
     }));
   };
