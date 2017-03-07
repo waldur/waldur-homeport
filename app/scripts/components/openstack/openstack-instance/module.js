@@ -35,6 +35,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'update_security_groups',
       'backup',
       'create_backup_schedule',
+      'update_internal_ips_set',
       'unlink',
       'destroy'
     ],
@@ -80,6 +81,35 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
             type: 'crontab'
           }
         }
+      },
+      update_internal_ips_set: {
+        tab: 'internal_ips',
+        title: gettext('Update'),
+        fields: {
+          internal_ips_set: {
+            type: 'multiselect',
+            resource_default_value: true,
+            serializer: items =>  items.map(item => ({ subnet: item.value })),
+            formatter: ($filter, value) => {
+              let name = value.name || value.subnet_name;
+              let cidr = value.cidr || value.subnet_cidr;
+              return `${name} (${cidr})`;
+            },
+            choicesFilter: (choices, model) => {
+              return choices.filter(item => {
+                let exists = false;
+                model.forEach(modelItem => {
+                  if (item.value === modelItem.value) {
+                    exists = true;
+                  }
+                });
+                return !exists;
+              });
+            },
+            value_field: 'url',
+            default_value_field: 'subnet'
+          }
+        },
       },
       destroy: {
         fields: {
@@ -128,6 +158,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       'volumes',
       'backups',
       'backup_schedules',
+      'internal_ips_set',
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       volumes: {
@@ -141,6 +172,10 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       backup_schedules: {
         heading: gettext('Backup schedules'),
         component: 'openstackBackupSchedulesList'
+      },
+      internal_ips_set: {
+        heading: gettext('Internal IPs'),
+        component: 'openstackInternalIpsList'
       }
     })
   });

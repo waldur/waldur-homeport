@@ -1,7 +1,8 @@
 <ui-select
   multiple
   ng-model="$ctrl.model[$ctrl.field.name]"
-  ng-if="$ctrl.field.choices && $ctrl.field.choices.length !== 0"
+  ng-change="$ctrl.filterChoices()"
+  ng-if="$ctrl.field.choices"
   theme="bootstrap">
   <ui-select-match placeholder="Select {{ $ctrl.field.label }}...">
     {{ $item.display_name }}
@@ -12,6 +13,6 @@
 </ui-select>
 <div
   class="form-control-static"
-  ng-if="!$ctrl.field.choices || $ctrl.field.choices.length === 0">
+  ng-if="!$ctrl.field.choices">
   N/A
 </div>
