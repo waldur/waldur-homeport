@@ -366,7 +366,7 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-details.html:21
+#: app/scripts/components/providers/details/provider-details.html:30
 msgid "Certifications"
 msgstr ""
 
@@ -1550,10 +1550,6 @@ msgstr ""
 msgid "Open in Service Desk"
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-details.html:16
-msgid "Open link"
-msgstr ""
-
 #: app/scripts/components/issues/issues-short-list.html:44
 msgid "Opened by"
 msgstr ""
@@ -1745,7 +1741,7 @@ msgstr ""
 msgid "Phone numbers"
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-details.html:43
+#: app/scripts/components/providers/details/provider-details.html:44
 msgid "Physical locations"
 msgstr ""
 
@@ -2750,7 +2746,7 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-details.html:36
+#: app/scripts/components/providers/details/provider-details.html:21
 msgid "Terms of Services"
 msgstr ""
 
