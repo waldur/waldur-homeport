@@ -21,8 +21,8 @@ function OpenstackSubnetsListController(
     getTableOptions: function() {
       var options = this._super();
       var vm = this;
-      options.noDataText = 'No subnets yet.';
-      options.noMatchesText = 'No subnets found matching filter.';
+      options.noDataText = gettext('No subnets yet.');
+      options.noMatchesText = gettext('No subnets found matching filter.');
       options.columns = [
         {
           title: gettext('Name'),
