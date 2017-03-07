@@ -2,26 +2,29 @@
     <h3 class="modal-title" translate>Provider details</h3>
 </div>
 <div class="modal-body">
-    <uib-tabset active="active">
+    <div ng-if="$ctrl.loading">
+        <loading-spinner/>
+    </div>
+    <uib-tabset active="active" ng-if="!$ctrl.loading">
         <uib-tab index="0">
             <uib-tab-heading translate>Details</uib-tab-heading>
             <div class="panel-body" ng-if="active==0">
                 <provider-details provider="$ctrl.provider"></provider-settings>
             </div>
         </uib-tab>
-        <uib-tab index="1">
+        <uib-tab index="1" ng-if="$ctrl.editable">
             <uib-tab-heading translate>Settings</uib-tab-heading>
             <div class="panel-body" ng-if="active==1">
                 <provider-settings provider="$ctrl.provider"></provider-settings>
             </div>
         </uib-tab>
-        <uib-tab index="2">
+        <uib-tab index="2" ng-if="$ctrl.editable">
             <uib-tab-heading translate>Quotas</uib-tab-heading>
             <div class="panel-body" ng-if="active==2">
                 <quotas-table resource="$ctrl.provider"></quotas-table>
             </div>
         </uib-tab>
-        <uib-tab index="3">
+        <uib-tab index="3" ng-if="$ctrl.editable">
             <uib-tab-heading translate>Projects</uib-tab-heading>
             <div class="panel-body" ng-if="active==3">
                 <provider-projects provider="$ctrl.provider"></provider-projects>

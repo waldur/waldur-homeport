@@ -14,30 +14,36 @@
 
 <div class="ibox" ng-if="!AppStore.loadingProviders && AppStore.renderStore && !AppStore.selectedResourceType">
     <div class="ibox-title">
-        <h5>Select provider</h5>
+        <h5 translate>Select provider</h5>
     </div>
     <div class="ibox-content">
         <div class="row">
             <div class="col-md-4"
-                 ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]"
-                 ng-click="AppStore.setService(service)">
-
+                 ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]">
                 <div class="ibox" uib-tooltip="{{ service.warning }}">
                     <div class="ibox-content product-box cursor-pointer">
+                        <div class="product-desc" ng-class="{disabled: !service.enabled}">
+                            <a class="product-name">
+                                <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>
+                                {{ ::service.name }}
+                            </a>
+                        </div>
+
                         <div class="text-center m-b-sm m-t-xl"
                              ng-class="{disabled: !service.enabled}">
                             <img ng-src="{{ AppStore.getServiceIcon(service.type) }}" class="img-lg">
                         </div>
                         <div class="product-desc" ng-class="{disabled: !service.enabled}">
+                            <a class="btn btn-sm btn-outline btn-primary" ng-click="AppStore.showServiceDetails(service)">
+                                <span translate>Details</span>
+                                <i class="fa fa-eye"></i>
+                            </a>
                             <div class="pull-right">
-                                <a class="btn btn-sm btn-outline btn-primary">
-                                    Select <i class="fa fa-long-arrow-right"></i>
+                                <a class="btn btn-sm btn-outline btn-primary" ng-click="AppStore.setService(service)">
+                                    <span translate>Select</span>
+                                    <i class="fa fa-long-arrow-right"></i>
                                 </a>
                             </div>
-                            <a class="product-name">
-                                <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>
-                                {{ ::service.name }}
-                            </a>
                         </div>
                     </div>
                 </div>

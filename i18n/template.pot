@@ -617,10 +617,11 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-providers.html:38
 #: app/scripts/components/issues/issue-registration.html:32
 #: app/scripts/components/issues/issue-registration.html:69
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
-#: app/scripts/components/providers/details/dialog.html:7
+#: app/scripts/components/providers/details/dialog.html:10
 #: app/scripts/components/user/user-sidebar.html:12
 msgid "Details"
 msgstr ""
@@ -1482,7 +1483,7 @@ msgid "Offerings"
 msgstr ""
 
 #: app/scripts/components/customer/customer-popover.html:53
-#: app/scripts/components/providers/details/dialog.html:41
+#: app/scripts/components/providers/details/dialog.html:44
 #: app/scripts/components/user/user-popover.html:16
 msgid "OK"
 msgstr ""
@@ -1691,6 +1692,10 @@ msgstr ""
 msgid "Phone numbers"
 msgstr ""
 
+#: app/scripts/components/providers/details/provider-details.html:34
+msgid "Physical location"
+msgstr ""
+
 #: app/scripts/components/customer/routes.js:136
 msgid "Plans"
 msgstr ""
@@ -1767,7 +1772,7 @@ msgstr ""
 msgid "Price per month"
 msgstr ""
 
-#: app/scripts/components/providers/details/dialog.html:31
+#: app/scripts/components/providers/details/dialog.html:34
 msgid "Prices"
 msgstr ""
 
@@ -1879,7 +1884,7 @@ msgstr ""
 #: app/scripts/components/customer/customer-workspace.js:55
 #: app/scripts/components/customer/routes.js:96
 #: app/scripts/components/navigation/select-workspace-dialog.html:82
-#: app/scripts/components/providers/details/dialog.html:25
+#: app/scripts/components/providers/details/dialog.html:28
 msgid "Projects"
 msgstr ""
 
@@ -1939,7 +1944,7 @@ msgstr ""
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:38
+#: app/scripts/components/appstore/appstore-store.js:39
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
@@ -1956,7 +1961,7 @@ msgstr ""
 msgid "Quota limit exceeded"
 msgstr ""
 
-#: app/scripts/components/providers/details/dialog.html:19
+#: app/scripts/components/providers/details/dialog.html:22
 msgid "Quotas"
 msgstr ""
 
@@ -2288,6 +2293,7 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-providers.html:43
 #: app/scripts/components/appstore/category-selector-tabs.html:19
 #: app/scripts/components/navigation/select-workspace-dialog.html:112
 #: app/scripts/components/navigation/select-workspace-dialog.html:58
@@ -2324,6 +2330,10 @@ msgstr ""
 #: app/scripts/components/issues/issue-quick-create.html:79
 #: app/scripts/components/issues/issue-registration.html:132
 msgid "Select project..."
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-providers.html:17
+msgid "Select provider"
 msgstr ""
 
 #: app/scripts/components/providers/create.html:17
@@ -2381,7 +2391,7 @@ msgstr ""
 msgid "Set rules"
 msgstr ""
 
-#: app/scripts/components/providers/details/dialog.html:13
+#: app/scripts/components/providers/details/dialog.html:16
 msgid "Settings"
 msgstr ""
 

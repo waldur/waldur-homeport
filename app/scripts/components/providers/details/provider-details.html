@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="table table-bordered">
+  <table class="table table-borderless">
     <tr>
       <th translate>Name</td>
       <td>{{ $ctrl.provider.name }}</td>
@@ -16,7 +16,7 @@
       <th translate>Terms of Services</td>
       <td>{{ $ctrl.provider.terms_of_services }}</td>
     </tr>
-    <tr ng-if="$ctrl.provider.certifications">
+    <tr ng-if="$ctrl.provider.certifications.length > 0">
       <th translate>Certifications</td>
       <td>
         <ul class="list-inline">
@@ -30,8 +30,8 @@
       </td>
     </tr>
   </table>
-  <div ng-if="$ctrl.markers">
-    <h4>Physical location</h4>
-    <leaflet width="100%" class="h-150" markers="$ctrl.markers" maxbounds="$ctrl.maxbounds"></leaflet>
+  <div ng-if="$ctrl.markers.length > 0">
+    <h4 translate>Physical location</h4>
+    <leaflet width="100%" height="300px" markers="$ctrl.markers" maxbounds="$ctrl.maxbounds"></leaflet>
   </div>
 </div>

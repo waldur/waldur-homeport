@@ -19,6 +19,7 @@ function AppStoreController(
   ncUtils,
   $q,
   $state,
+  $uibModal,
   resourcesService,
   joinService,
   ncUtilsFlash,
@@ -107,6 +108,16 @@ function AppStoreController(
     },
     isApplicationSelected: function() {
       return this.selectedCategory.name == ENV.appStoreCategories[ENV.Applications].name;
+    },
+    showServiceDetails: function(service) {
+      $uibModal.open({
+        component: 'providerDialog',
+        size: 'lg',
+        resolve: {
+          provider_uuid: () => service.uuid,
+          provider_type: () => service.type,
+        }
+      });
     },
     setService: function(service) {
       if (!service.enabled) {

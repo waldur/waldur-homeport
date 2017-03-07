@@ -157,9 +157,8 @@ function ProviderListController(
         component: 'providerDialog',
         size: 'lg',
         resolve: {
-          provider: function() {
-            return row;
-          }
+          provider: () => row,
+          editable: () => true,
         }
       });
     },
