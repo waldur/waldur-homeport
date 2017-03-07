@@ -1,21 +1,17 @@
 import template from './dialog.html';
 
-export default function providerDetails() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: ProviderDetailsDialog,
-    controllerAs: '$ctrl',
-    scope: {},
-    bindToController: {
-      dismiss: '&',
-      close: '&',
-      resolve: '='
+const providerDialog = {
+  template: template,
+  bindings: {
+    dismiss: '&',
+    close: '&',
+    resolve: '<'
+  },
+  controller: class ProviderDialogController {
+    $onInit() {
+      this.provider = this.resolve.provider;
     }
-  };
-}
+  }
+};
 
-// @ngInject
-function ProviderDetailsDialog() {
-  this.provider = this.resolve.provider;
-}
+export default providerDialog;

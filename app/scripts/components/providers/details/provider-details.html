@@ -1,0 +1,37 @@
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <tr>
+      <th translate>Name</td>
+      <td>{{ $ctrl.provider.name }}</td>
+    </tr>
+    <tr>
+      <th translate>Type</td>
+      <td>{{ $ctrl.provider.service_type }}</td>
+    </tr>
+    <tr ng-if="$ctrl.provider.homepage">
+      <th translate>Homepage</td>
+      <td>{{ $ctrl.provider.homepage }}</td>
+    </tr>
+    <tr ng-if="$ctrl.provider.terms_of_services">
+      <th translate>Terms of Services</td>
+      <td>{{ $ctrl.provider.terms_of_services }}</td>
+    </tr>
+    <tr ng-if="$ctrl.provider.certifications">
+      <th translate>Certifications</td>
+      <td>
+        <ul class="list-inline">
+          <li ng-repeat="certification in $ctrl.provider.certifications">
+            <a ng-href="{{ certification.link }}" target="_blank">
+              <i class="fa fa-external-link"></i>
+              {{ ::certification.name }}
+            </a>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <div ng-if="$ctrl.markers">
+    <h4>Physical location</h4>
+    <leaflet width="100%" class="h-150" markers="$ctrl.markers" maxbounds="$ctrl.maxbounds"></leaflet>
+  </div>
+</div>
