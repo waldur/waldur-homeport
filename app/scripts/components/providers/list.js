@@ -1,5 +1,13 @@
+const providersList = {
+  controller: ProviderListController,
+  controllerAs: 'ListController',
+  templateUrl: 'views/partials/filtered-list.html',
+};
+
+export default providersList;
+
 // @ngInject
-export default function ProviderListController(
+function ProviderListController(
   $stateParams,
   $location,
   $rootScope,
@@ -146,12 +154,11 @@ export default function ProviderListController(
     },
     openDialog: function(row) {
       $uibModal.open({
-        component: 'providerDetails',
+        component: 'providerDialog',
         size: 'lg',
         resolve: {
-          provider: function() {
-            return row;
-          }
+          provider: () => row,
+          editable: () => true,
         }
       });
     },

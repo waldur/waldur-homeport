@@ -107,9 +107,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.providers', {
       url: 'providers/?providerUuid&providerType',
-      templateUrl: 'views/partials/filtered-list.html',
-      controller: 'ProviderListController',
-      controllerAs: 'ListController',
+      template: '<providers-list/>',
       data: {
         pageTitle: gettext('Providers')
       }

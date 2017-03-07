@@ -4,6 +4,6 @@
             ng-repeat="filter in filterController.searchFilters"
             ng-click="toggleFilter(filter)"
             ng-class="{'active': isFilterChosen(filter)}"
-            ng-bind="::filter.title"></a>
+            ng-bind="filter.title | translate"></a>
     </div>
 </div>

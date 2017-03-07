@@ -35,8 +35,8 @@ function OpenstackVolumesList(
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = 'You have no volumes yet';
-      options.noMatchesText = 'No volumes found matching filter.';
+      options.noDataText = gettext('You have no volumes yet');
+      options.noMatchesText = gettext('No volumes found matching filter.');
       options.columns = [
         {
           title: gettext('Name'),

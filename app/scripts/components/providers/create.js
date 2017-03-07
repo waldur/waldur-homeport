@@ -1,13 +1,12 @@
 import template from './create.html';
 
-export default function providerCreate() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: ServiceAddController,
-    controllerAs: 'ServiceAdd'
-  };
-}
+const providerCreate = {
+  template: template,
+  controller: ServiceAddController,
+  controllerAs: 'ServiceAdd'
+};
+
+export default providerCreate;
 
 // @ngInject
 function ServiceAddController(

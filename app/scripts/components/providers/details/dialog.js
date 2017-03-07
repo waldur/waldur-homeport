@@ -1,21 +1,29 @@
 import template from './dialog.html';
 
-export default function providerDetails() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: ProviderDetailsDialog,
-    controllerAs: '$ctrl',
-    scope: {},
-    bindToController: {
-      dismiss: '&',
-      close: '&',
-      resolve: '='
+const providerDialog = {
+  template: template,
+  bindings: {
+    dismiss: '&',
+    close: '&',
+    resolve: '<'
+  },
+  controller: class ProviderDialogController {
+    constructor(joinService) {
+      this.joinService = joinService;
+      this.editable = this.resolve.editable;
     }
-  };
-}
 
-// @ngInject
-function ProviderDetailsDialog() {
-  this.provider = this.resolve.provider;
-}
+    $onInit() {
+      if (this.resolve.provider_uuid) {
+        this.loading = true;
+        this.joinService.$get(this.resolve.provider_type, this.resolve.provider_uuid)
+          .then(provider => this.provider = provider)
+          .finally(() => this.loading = false);
+      } else {
+        this.provider = this.resolve.provider;
+      }
+    }
+  }
+};
+
+export default providerDialog;

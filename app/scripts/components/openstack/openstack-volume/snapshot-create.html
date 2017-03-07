@@ -1,6 +1,6 @@
 <form name="SnapshotForm">
     <div class="modal-header">
-        <h3 class="modal-title">Create snapshot for OpenStack volume</h3>
+        <h3 class="modal-title" translate>Create snapshot for OpenStack volume</h3>
     </div>
     <div class="modal-body">
         <div class="form-group">
@@ -8,13 +8,17 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="snapshotName">Snapshot name:</label>
+            <label class="control-label" for="snapshotName">
+                <span translate>Snapshot name</span>:
+            </label>
             <input class="form-control" id="snapshotName" type="text" ng-model="snapshot.name" required>
             <p class="text-danger" ng-if="errors.name" ng-bind="errors.name"></p>
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="snapshotDescription">Description:</label>
+            <label class="control-label" for="snapshotDescription">
+                <span translate>Description</span>:
+            </label>
             <textarea class="form-control"
                       id="snapshotDescription"
                       type="text"
@@ -32,7 +36,11 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" submit-button="submitForm()">Submit</button>
-        <button type="button" class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+        <button type="submit" class="btn btn-primary" submit-button="submitForm()">
+            <span translate>Submit</span>
+        </button>
+        <button type="button" class="btn btn-default" ng-click="$dismiss()">
+            <span translate>Cancel</span>
+        </button>
     </div>
 </form>
