@@ -50,7 +50,8 @@ function KeyListController(
       if (this.isStaffOrSelf()) {
         return [
           {
-            name: '<i class="fa fa-trash"></i> Remove',
+            title: gettext('Remove'),
+            iconClass: 'fa fa-trash',
             callback: this.remove.bind(controllerScope)
           }
         ];
@@ -60,7 +61,8 @@ function KeyListController(
       if (this.isStaffOrSelf()) {
         return [
           {
-            name: '<i class="fa fa-plus"></i> Add SSH key',
+            title: gettext('Add SSH key'),
+            iconClass: 'fa fa-plus',
             callback: function() {
               $state.go('keys.create');
             }

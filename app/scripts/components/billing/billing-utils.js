@@ -48,7 +48,8 @@ export default class BillingUtils {
   getTableActions() {
     return [
       {
-        name: '<i class="fa fa-envelope-o"></i> Send notification',
+        title: gettext('Send notification'),
+        iconClass: 'fa fa-envelope-o',
         callback: this.sendNotification.bind(this),
 
         isDisabled: row => row.state != 'created',

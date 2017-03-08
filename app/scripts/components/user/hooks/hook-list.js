@@ -59,17 +59,20 @@ function HookListController(
         ],
         tableActions: [
           {
-            name: '<i class="fa fa-plus"></i> Add notification',
+            title: gettext('Add notification'),
+            iconClass: 'fa fa-plus',
             callback: this.openDialog.bind(controllerScope)
           }
         ],
         rowActions: [
           {
-            name: '<i class="fa fa-pencil"></i> Edit',
+            title: gettext('Edit'),
+            iconClass: 'fa fa-pencil',
             callback: this.openDialog.bind(controllerScope)
           },
           {
-            name: '<i class="fa fa-trash"></i> Remove',
+            title: gettext('Remove'),
+            iconClass: 'fa fa-trash',
             className: 'danger',
             callback: this.remove.bind(controllerScope)
           }

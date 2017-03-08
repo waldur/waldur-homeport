@@ -32,7 +32,8 @@ export default function BaseAlertsListController(
         ],
         tableActions: [
           {
-            name: '<i class="fa fa-question-circle"></i> Alert types',
+            title: gettext('Alert types'),
+            iconClass: 'fa fa-question-circle',
             callback: AlertDialogsService.alertTypes.bind(AlertDialogsService)
           }
         ]

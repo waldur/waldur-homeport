@@ -32,14 +32,15 @@ export default function baseEventListController(
 
         tableActions: [
           {
-            name: '<i class="fa fa-question-circle"></i> Event types',
+            title: gettext('Event types'),
+            iconClass: 'fa fa-question-circle',
             callback: EventDialogsService.eventTypes.bind(EventDialogsService)
           }
         ],
 
         rowActions: [
           {
-            name: 'Details',
+            title: gettext('Details'),
             callback: EventDialogsService.eventDetails.bind(EventDialogsService)
           }
         ]

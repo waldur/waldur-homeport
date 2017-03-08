@@ -73,7 +73,8 @@ export default function ProjectUsersListController(
       if (this.isOwnerOrStaff || this.isProjectManager) {
         return [
           {
-            name: '<i class="fa fa-plus"></i> Add member',
+            title: gettext('Add member'),
+            iconClass: 'fa fa-plus',
             callback: this.openPopup.bind(this)
           }
         ];
@@ -83,21 +84,24 @@ export default function ProjectUsersListController(
       var vm = this;
       var actions = [
         {
-          name: '<i class="fa fa-eye"></i> Details',
+          title: gettext('Details'),
+          iconClass: 'fa fa-eye',
           callback: this.openDetails.bind(this)
         }
       ];
 
       if (this.isOwnerOrStaff) {
         actions.push({
-          name: '<i class="fa fa-pencil"></i> Edit',
+          title: gettext('Edit'),
+          iconClass: 'fa fa-pencil',
           callback: this.openPopup.bind(this),
         });
       }
 
       if (this.isOwnerOrStaff || this.isProjectManager) {
         actions.push({
-          name: '<i class="fa fa-trash"></i> Remove',
+          title: gettext('Remove'),
+          iconClass: 'fa fa-trash',
           callback: this.remove.bind(this),
           isDisabled: function(row) {
             return vm.isProjectManager && row.role === 'manager';
