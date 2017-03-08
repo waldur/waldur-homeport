@@ -69,7 +69,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/directives/responsive-table.js:267
+#: app/scripts/directives/responsive-table.js:278
 msgid "Actions"
 msgstr ""
 
@@ -771,7 +771,7 @@ msgstr ""
 msgid "Expires at"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:121
+#: app/scripts/directives/responsive-table.js:132
 msgid "Export as"
 msgstr ""
 
@@ -798,6 +798,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:97
 #: app/scripts/components/user/keys/key-list.js:38
 msgid "Fingerprint"
+msgstr ""
+
+#: app/scripts/directives/responsive-table.js:93
+msgid "First"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:25
@@ -1142,6 +1146,10 @@ msgstr ""
 msgid "Key name"
 msgstr ""
 
+#: app/scripts/directives/responsive-table.js:94
+msgid "Last"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:56
 msgid "Leave blank if you want admin password to be auto-generated"
 msgstr ""
@@ -1168,6 +1176,10 @@ msgstr ""
 
 #: app/scripts/components/resource/actions/action-button-resource.html:9
 msgid "Loading actions"
+msgstr ""
+
+#: app/scripts/directives/responsive-table.js:89
+msgid "Loading..."
 msgstr ""
 
 #: app/scripts/components/navigation/header/logout-link.html:4
@@ -1315,6 +1327,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:27
 msgid "New VPC package"
+msgstr ""
+
+#: app/scripts/directives/responsive-table.js:95
+msgid "Next"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:24
@@ -1825,6 +1841,10 @@ msgstr ""
 msgid "Premium support service."
 msgstr ""
 
+#: app/scripts/directives/responsive-table.js:96
+msgid "Previous"
+msgstr ""
+
 #: app/scripts/components/billing/billing-records-list.js:55
 #: app/scripts/components/billing/invoices-list.js:55
 #: app/scripts/components/offering/offering-summary.html:32
@@ -1886,6 +1906,10 @@ msgstr ""
 #: app/scripts/configs/base-config.js:38
 #: app/scripts/configs/base-config.js:95
 msgid "Private clouds"
+msgstr ""
+
+#: app/scripts/directives/responsive-table.js:90
+msgid "Processing..."
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:69
@@ -2078,7 +2102,7 @@ msgid "Record period"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:11
-#: app/scripts/directives/responsive-table.js:124
+#: app/scripts/directives/responsive-table.js:135
 msgid "Refresh"
 msgstr ""
 
@@ -2364,6 +2388,10 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+#: app/scripts/directives/responsive-table.js:91
+msgid "Search:"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:4
 msgid "Security group does not contain any rule yet."
 msgstr ""
@@ -2496,8 +2524,16 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: app/scripts/directives/responsive-table.js:88
+msgid "Show _MENU_ entries"
+msgstr ""
+
 #: app/scripts/components/dashboard/dashboard-feed.html:27
 msgid "Show all"
+msgstr ""
+
+#: app/scripts/directives/responsive-table.js:87
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:89

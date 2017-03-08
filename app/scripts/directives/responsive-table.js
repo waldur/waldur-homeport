@@ -82,8 +82,19 @@
             buttons: buttons && buttons,
             columns: columns,
             language: {
-              emptyTable: $filter('translate')(options.noDataText),
-              zeroRecords: $filter('translate')(options.noMatchesText)
+              emptyTable:     $filter('translate')(options.noDataText),
+              zeroRecords:    $filter('translate')(options.noMatchesText),
+              info:           $filter('translate')(gettext('Showing _START_ to _END_ of _TOTAL_ entries')),
+              lengthMenu:     $filter('translate')(gettext('Show _MENU_ entries')),
+              loadingRecords: $filter('translate')(gettext('Loading...')),
+              processing:     $filter('translate')(gettext('Processing...')),
+              search:         $filter('translate')(gettext('Search:')),
+              paginate: {
+                first:        $filter('translate')(gettext('First')),
+                last:         $filter('translate')(gettext('Last')),
+                next:         $filter('translate')(gettext('Next')),
+                previous:     $filter('translate')(gettext('Previous')),
+              },
             },
             fnDrawCallback: function() {
               $(element).find('tr').each(function(index, element) {
