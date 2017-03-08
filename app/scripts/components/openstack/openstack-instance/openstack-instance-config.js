@@ -124,16 +124,14 @@ export default {
       resource: 'openstacktenant-subnets',
       parser: subnet => ({
         value: subnet.url,
-        display_name: displaySubNet(subnet),
+        display_name: internalIpFormatter(subnet),
         object: subnet
       }),
-      serializer: subnets => subnets.map(subnet => ({
-        subnet: subnet.value,
-      })),
+      serializer: subnets => subnets.map(subnet => ({ subnet: subnet.value })),
       init: (field, model) => (
         model[field.name] = field.choices.map(choice => ({
           value: choice.url,
-          display_name: displaySubNet(choice)
+          display_name: internalIpFormatter(choice)
         }))
       )
     },
@@ -155,7 +153,7 @@ export default {
   summaryComponent: 'openstackInstanceCheckoutSummary'
 };
 
-function displaySubNet(subnet) {
+export function internalIpFormatter(subnet) {
   return `${subnet.name} (${subnet.cidr})`;
 }
 
@@ -181,7 +179,7 @@ function flavorWatcher(model, options, newFlavor) {
   }
 }
 
-function flavorFormatter($filter, flavor) {
+export function flavorFormatter($filter, flavor) {
   const props = $filter('formatFlavor')(flavor);
   return `${flavor.name} (${props})`;
 }

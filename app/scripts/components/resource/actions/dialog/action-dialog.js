@@ -28,8 +28,8 @@ function ActionDialogController(
         if (field.resource_default_value || $scope.action.name === 'update') {
           $scope.form[name] = $scope.resource[name];
         }
-        if (field.init) {
-          $scope.form[name] = field.init($scope.form[name]);
+        if (field.modelParser) {
+          $scope.form[name] = field.modelParser(field, $scope.form[name]);
         }
         if (field.type === 'multiselect') {
           $scope.form[name] = actionUtilsService.formatChoices(field, $scope.form[name]);
