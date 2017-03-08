@@ -160,7 +160,7 @@
             };
             return angular.extend({}, column, {
               render: render,
-              title: $filter('translate')(title)
+              title: title
             });
           });
           columns = columns.filter(function(column) {
