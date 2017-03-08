@@ -1,5 +1,5 @@
 // @ngInject
-export default function resourceUtils(ncUtils, ncServiceUtils, authService, $filter) {
+export default function resourceUtils(ncUtils, ncServiceUtils, authService, ENV, $filter) {
   return {
     setAccessInfo: function(resource) {
       resource.access_info_text = 'No access info';
@@ -51,6 +51,44 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
       var type = item.resource_type || item.type;
       var service_type = ncServiceUtils.getTypeDisplay(type.split('.')[0]);
       return 'static/images/appstore/icon-' + service_type.toLowerCase() + '.png';
+    },
+    getListState: function(resourceType, selectedCategoryName) {
+      if (isApplicationSelected(resourceType, selectedCategoryName)) {
+        return 'project.resources.apps';
+      } else if (isPrivateCloudSelected(resourceType, selectedCategoryName)) {
+        return 'project.resources.clouds';
+      } else if (isStorageSelected(resourceType)) {
+        return 'project.resources.storage.tabs';
+      } else if (isVirtualMachinesSelected(resourceType, selectedCategoryName)) {
+        return 'project.resources.vms';
+      } else {
+        return 'project.resources.vms';
+      }
+
+      function isStorageSelected(resourceType) {
+        if (resourceType) {
+          return ENV.resourceCategory[resourceType] === 'storages';
+        }
+        return false;
+      }
+
+      function isPrivateCloudSelected(resourceType, selectedCategoryName) {
+        return resourceType ?
+          ENV.resourceCategory[resourceType] === 'private_clouds' :
+          selectedCategoryName === ENV.appStoreCategories[ENV.PrivateClouds].name;
+      }
+
+      function isVirtualMachinesSelected(resourceType, selectedCategoryName) {
+        return resourceType ?
+          ENV.resourceCategory[resourceType] === 'vms' :
+          selectedCategoryName === ENV.appStoreCategories[ENV.VirtualMachines].name;
+      }
+
+      function isApplicationSelected(resourceType, selectedCategoryName) {
+        return resourceType ?
+          ENV.resourceCategory[resourceType] === 'apps' :
+          selectedCategoryName === ENV.appStoreCategories[ENV.Applications].name;
+      }
     },
   };
 }

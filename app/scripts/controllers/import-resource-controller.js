@@ -296,30 +296,8 @@
         resourcesService.clearAllCacheForCurrentEndpoint();
         priceEstimationService.clearAllCacheForCurrentEndpoint();
         $rootScope.$broadcast('refreshCounts');
-        $state.go(this.getListState(), {uuid: this.currentProject.uuid});
+        $state.go(resourceUtils.getListState(null, this.selectedCategory.name), {uuid: this.currentProject.uuid});
       },
-
-      getListState: function() {
-        if (this.isApplicationSelected()) {
-          return 'project.resources.apps';
-        } else if (this.isPrivateCloudSelected()) {
-          return 'project.resources.clouds';
-        } else {
-          return 'project.resources.vms';
-        }
-      },
-
-      isPrivateCloudSelected: function() {
-        return this.selectedCategory.name === ENV.appStoreCategories[ENV.PrivateClouds].name;
-      },
-
-      isVirtualMachinesSelected: function() {
-        return this.selectedCategory.name === ENV.appStoreCategories[ENV.VirtualMachines].name;
-      },
-
-      isApplicationSelected: function() {
-        return this.selectedCategory.name === ENV.appStoreCategories[ENV.Applications].name;
-      }
     });
     controllerScope.__proto__ = new Controller();
   }

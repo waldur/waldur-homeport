@@ -19,6 +19,7 @@ function ResourceDetailUpdateController(
   resourcesService,
   baseControllerDetailUpdateClass,
   currentStateService,
+  resourceUtils,
   ncUtilsFlash) {
   var controllerScope = this;
   var Controller = baseControllerDetailUpdateClass.extend({
@@ -60,11 +61,11 @@ function ResourceDetailUpdateController(
       });
     },
 
-    afterInstanceRemove: function() {
+    afterInstanceRemove: function(resource) {
       this.service.clearAllCacheForCurrentEndpoint();
       $rootScope.$broadcast('refreshCounts');
 
-      var state = this.getListState(this.model.resource_type);
+      var state = resourceUtils.getListState(resource.resource_type);
       $state.go(state, {uuid: this.model.project_uuid});
     },
 
