@@ -115,7 +115,8 @@ export default function baseResourceListController(
         tooltip = 'Import resources from the registered provider accounts.';
       }
       return {
-        name: '<i class="fa fa-plus"></i> ' + this.getImportTitle(),
+        title: this.getImportTitle(),
+        iconClass: 'fa fa-plus',
         callback: function() {
           $state.go('import.import');
         },
@@ -133,7 +134,8 @@ export default function baseResourceListController(
         tooltip = 'Quota has been reached';
       }
       return {
-        name: '<i class="fa fa-plus"></i> ' + this.getCreateTitle(),
+        title: this.getCreateTitle(),
+        iconClass: 'fa fa-plus',
         callback: function() {
           this.gotoAppstore();
         }.bind(this),
@@ -162,7 +164,8 @@ export default function baseResourceListController(
     },
     getMapAction: function() {
       return {
-        name: '<i class="fa fa-map-marker"></i> Open map',
+        title: gettext('Open map'),
+        iconClass: 'fa fa-map-marker',
         callback: this.openMap.bind(this)
       };
     },

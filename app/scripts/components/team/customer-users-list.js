@@ -118,15 +118,18 @@ function CustomerUsersListController(
       if (this.isOwnerOrStaff) {
         return [
           {
-            name: '<i class="fa fa-eye"></i> Details',
+            title: gettext('Details'),
+            iconClass: 'fa fa-eye',
             callback: this.openDetails.bind(this)
           },
           {
-            name: '<i class="fa fa-pencil"></i> Edit',
+            title: gettext('Edit'),
+            iconClass: 'fa fa-pencil',
             callback: this.openPopup.bind(this)
           },
           {
-            name: '<i class="fa fa-trash"></i> Remove',
+            title: gettext('Remove'),
+            iconClass: 'fa fa-trash',
             callback: this.remove.bind(this)
           }
         ];

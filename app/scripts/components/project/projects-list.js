@@ -132,7 +132,8 @@ function ProjectsListController(
       }
       return [
         {
-          name: '<i class="fa fa-plus"></i> Add project',
+          title: gettext('Add project'),
+          iconClass: 'fa fa-plus',
           callback: function() {
             $state.go('organization.createProject', {
               uuid: vm.currentCustomer.uuid

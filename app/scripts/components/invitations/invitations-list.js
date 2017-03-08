@@ -153,7 +153,8 @@ function InvitationsListController(
     getTableActions: function() {
       return [
         {
-          name: '<i class="fa fa-plus"></i> Invite user',
+          title: gettext('Invite user'),
+          iconClass: 'fa fa-plus',
           callback: this.openDialog.bind(this),
           disabled: !this.isOwnerOrStaff,
           titleAttr: !this.isOwnerOrStaff && 'Only customer owner or staff can invite users.'
@@ -176,7 +177,8 @@ function InvitationsListController(
       if (this.isOwnerOrStaff) {
         return [
           {
-            name: '<i class="fa fa-ban"></i> Cancel',
+            title: gettext('Cancel'),
+            iconClass: 'fa fa-ban',
             callback: this.cancelInvitation.bind(this),
             isDisabled: function(row) {
               return row.state !== 'pending';
@@ -188,7 +190,8 @@ function InvitationsListController(
             }
           },
           {
-            name: '<i class="fa fa-envelope-o"></i> Resend',
+            title: gettext('Resend'),
+            iconClass: 'fa fa-envelope-o',
             callback: this.resendInvitation.bind(this),
             isDisabled: function(row) {
               return row.state !== 'pending';

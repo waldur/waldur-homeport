@@ -4,7 +4,9 @@
 
   angular.module('ncsaas').directive('responsiveTable', responsiveTable);
 
-  responsiveTable.$inject = ['$timeout', '$interval', '$compile', '$filter', 'ENV', 'features'];
+  responsiveTable.$inject = [
+    '$rootScope', '$timeout', '$interval', '$compile', '$filter', 'ENV', 'features'
+  ];
 
   /*
     Controller should define tableOptions object with list of columns in `columns` field.
@@ -19,7 +21,7 @@
       field according to configuration parameter `toBeFeatures`.
   */
 
-  function responsiveTable($timeout, $interval, $compile, $filter, ENV, features) {
+  function responsiveTable($rootScope, $timeout, $interval, $compile, $filter, ENV, features) {
     return {
       restrict: 'E',
       scope: {
@@ -30,6 +32,7 @@
       link: function(scope, element) {
         var options = scope.controller.tableOptions;
         var table;
+        var rootScopeListener;
 
         scope.$watch('controller.tableOptions', function(newTableOptions) {
           if (table) {
@@ -49,6 +52,7 @@
             if (!newTableOptions.disableAutoUpdate) {
               connectWatcher(table);
             }
+            connectTranslate(table);
             registerEvents(table);
           }
         });
@@ -78,8 +82,19 @@
             buttons: buttons && buttons,
             columns: columns,
             language: {
-              emptyTable: $filter('translate')(options.noDataText),
-              zeroRecords: $filter('translate')(options.noMatchesText)
+              emptyTable:     $filter('translate')(options.noDataText),
+              zeroRecords:    $filter('translate')(options.noMatchesText),
+              info:           $filter('translate')(gettext('Showing _START_ to _END_ of _TOTAL_ entries')),
+              lengthMenu:     $filter('translate')(gettext('Show _MENU_ entries')),
+              loadingRecords: $filter('translate')(gettext('Loading...')),
+              processing:     $filter('translate')(gettext('Processing...')),
+              search:         $filter('translate')(gettext('Search:')),
+              paginate: {
+                first:        $filter('translate')(gettext('First')),
+                last:         $filter('translate')(gettext('Last')),
+                next:         $filter('translate')(gettext('Next')),
+                previous:     $filter('translate')(gettext('Previous')),
+              },
             },
             fnDrawCallback: function() {
               $(element).find('tr').each(function(index, element) {
@@ -114,6 +129,12 @@
             return;
           }
 
+          var exportButtonTitle = $filter('translate')(gettext('Export as'));
+          var exportButtonText = '<i class="fa fa-download"></i> ' + exportButtonTitle + ' <i class="caret"></i>';
+
+          var refreshButtonTitle = $filter('translate')(gettext('Refresh'));
+          var refreshButtonText = '<i class="fa fa-refresh"></i> ' + refreshButtonTitle;
+
           var exportButtons = getExportButtons(
             options.columns.length,
             options.rowActions,
@@ -121,7 +142,7 @@
           );
           var exportCollection = {
             extend: 'collection',
-            text: '<i class="fa fa-download"></i> <span translate>Export as</span> <span class="caret"></span>',
+            text: exportButtonText,
             autoClose: true,
             fade: 0,
             buttons: exportButtons
@@ -132,7 +153,7 @@
             buttons = buttons.concat(tableButtons);
           }
           buttons.push({
-            text: '<i class="fa fa-refresh"></i> <span translate>Refresh</span>',
+            text: refreshButtonText,
             action: function() {
               $timeout(function() {
                 scope.controller.resetCache();
@@ -148,7 +169,10 @@
             function render(data, type, row, meta) {
               return column.render(row);
             };
-            return angular.extend({}, column, {render: render, title: $filter('translate')(title)});
+            return angular.extend({}, column, {
+              render: render,
+              title: title
+            });
           });
           columns = columns.filter(function(column) {
             return !column.feature || features.isVisible(column.feature);
@@ -158,6 +182,27 @@
             columns.push(actionColumn);
           }
           return columns;
+        }
+
+        function connectTranslate(table) {
+          if(rootScopeListener) {
+            rootScopeListener();
+            rootScopeListener = null;
+          }
+          rootScopeListener = $rootScope.$on('$translateChangeSuccess', function() {
+            angular.forEach(getColumns(), function(column, index) {
+              table.columns(index).header().to$().text(column.title);
+            });
+            table.columns.adjust().draw();
+            angular.forEach(getButtons(), function(button, index) {
+              table.buttons(index).text(button.text);
+            });
+          });
+          scope.$on('$destroy', function() {
+            if(rootScopeListener) {
+              rootScopeListener();
+            }
+          });
         }
 
         function connectWatcher(table) {
@@ -177,7 +222,7 @@
         function getTableButtons(actions) {
           return actions.map(function(action) {
             return {
-              text: action.name,
+              text: formatActionName(action),
               action: function() {
                 $timeout(function() {
                   action.callback();
@@ -230,7 +275,7 @@
 
         function getActionColumn(spec, width) {
           return {
-            title: gettext('Actions'),
+            title: $filter('translate')(gettext('Actions')),
             orderable: false,
             className: 'actions text-center all',
             render: function(data, type, row, meta) {
@@ -245,13 +290,22 @@
                                .replace('{cls}', action.className)
                                .replace('{row}', meta.row)
                                .replace('{action}', index)
-                               .replace('{name}', action.name)
+                               .replace('{name}', formatActionName(action))
                                .replace('{tooltip}', tooltip);
               }).join('');
               return '<div class="btn-group">' + buttons + '</div>';
             },
             width: width
           };
+        }
+
+        function formatActionName(action) {
+          var name = '';
+          if (action.iconClass) {
+            name = '<i class="' + action.iconClass + '"></i> ';
+          }
+          name += $filter('translate')(action.title);
+          return name;
         }
 
         function getExportButtons(columnsCount, rowActions, formats) {

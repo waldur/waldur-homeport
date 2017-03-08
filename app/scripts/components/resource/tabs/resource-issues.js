@@ -23,7 +23,8 @@ export default {
         ],
         tableActions: [
           {
-            name: '<i class="fa fa-plus"></i> Create',
+            title: gettext('Create'),
+            iconClass: 'fa fa-plus',
             callback: () => {
               this.$uibModal.open({
                 component: 'issueCreateDialog',

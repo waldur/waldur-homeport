@@ -90,11 +90,13 @@ function ProviderListController(
             ],
             rowActions: [
               {
-                name: '<i class="fa fa-search"></i> Details',
+                title: gettext('Details'),
+                iconClass: 'fa fa-search',
                 callback: this.openDialog
               },
               {
-                name: '<i class="fa fa-trash"></i> Remove',
+                title: gettext('Remove'),
+                iconClass: 'fa fa-trash',
                 callback: this.remove.bind(this.controllerScope),
 
                 isDisabled: function(service) {
@@ -115,7 +117,8 @@ function ProviderListController(
               },
 
               {
-                name: '<i class="fa fa-chain-broken"></i> Unlink',
+                title: gettext('Unlink'),
+                iconClass: 'fa fa-chain-broken',
 
                 callback: function(service) {
                   var vm = this.controllerScope;
@@ -174,7 +177,8 @@ function ProviderListController(
       }
       return [
         {
-          name: '<i class="fa fa-plus"></i> Add provider',
+          title: gettext('Add provider'),
+          iconClass: 'fa fa-plus',
           callback: function() {
             $state.go('organization.createProvider', {
               uuid: vm.currentCustomer.uuid
