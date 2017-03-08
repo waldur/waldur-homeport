@@ -19,12 +19,16 @@ const providerDetails = {
 
       this.markers = [];
       this.markers = this.provider.geolocations
+        .filter(item => item.hasOwnProperty('latitude') && item.hasOwnProperty('longitude'))
         .map(item => ({
           lat: item.latitude,
           lng: item.longitude,
         }));
-      // eslint-disable-next-line no-undef
-      this.maxbounds = new L.LatLngBounds(this.markers);
+      if (this.markers.length > 0) {
+        // eslint-disable-next-line no-undef
+        this.maxbounds = new L.LatLngBounds(this.markers);
+        this.center = angular.extend({zoom: 5}, this.maxbounds.getCenter());
+      }
     }
   }
 };
