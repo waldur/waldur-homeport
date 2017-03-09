@@ -18,32 +18,32 @@ function CustomerEventsController(baseEventListController) {
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
-
-      this.searchFilters = [
-        {
-          name: 'feature',
-          title: gettext('Organization events'),
-          value: 'customers'
-        },
-        {
-          name: 'feature',
-          title: gettext('Project events'),
-          value: 'projects'
-        },
-        {
-          name: 'feature',
-          title: gettext('Resource events'),
-          value: 'resources'
-        }
-      ];
-
-      this.defaultFilter = this.searchFilters[0];
+    },
+    getUserFilter: function() {
+      return {
+        name: 'feature',
+        choices: [
+          {
+            title: gettext('Organization events'),
+            value: 'customers',
+            chosen: true
+          },
+          {
+            title: gettext('Project events'),
+            value: 'projects'
+          },
+          {
+            title: gettext('Resource events'),
+            value: 'resources'
+          }
+        ]
+      };
     },
     getFilter: function() {
       let filter = {
         scope: controllerScope.customer.url
       };
-      if (this.chosenFilters.length === 0) {
+      if (!this.hasChosenFilter()) {
         filter.feature = ['customers', 'projects', 'resources'];
       }
       return filter;

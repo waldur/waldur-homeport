@@ -21,7 +21,6 @@ function RecordsListController(
   var InvoicesController = baseControllerListClass.extend({
     init: function() {
       this.service = invoicesService;
-      this.getSearchFilters();
       let fn = this._super.bind(this);
       return usersService.getCurrentUser().then(currentUser => {
         this.currentUser = currentUser;
@@ -75,8 +74,8 @@ function RecordsListController(
         return BillingUtils.getTableActions();
       }
     },
-    getSearchFilters: function() {
-      this.searchFilters = BillingUtils.getSearchFilters();
+    getUserFilter: function() {
+      return BillingUtils.getUserFilter();
     },
     getFilter: function() {
       return {

@@ -10,35 +10,42 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
     searchInput: '',
     searchFieldName: 'name', // required in init
     controllerScope: null, // required in init
-    showgroup: false, // for showing group buttons and checkboxes in list view
-    // checkboxes
-    selectedInstances: [],
-    uniqueModelKeyName: 'uuid',
-    // filters
-    searchFilters: [], // should contains array of objects {name: 'name', title: 'Title', value: 'value'}
-    chosenFilters: [],
     cacheTime: ENV.defaultListCacheTime,
-    controlPanelShow: true,
     mergeListFieldIdentifier: null,
 
     init: function() {
       this.service.page = 1;
       this.service.cacheTime = this.cacheTime;
+      this.userFilter = this.getUserFilter();
       this._super();
       this.hideNoDataText = true;
-      this.listPromise = this.getList();
+      this.initialized = false;
+      this.listPromise = this.getList().finally(() => this.initialized = true);
       this.blockListElement();
       // reset after state change
-      this.selectedInstances = [];
-      this.controlPanelShow = ENV.listControlPanelShow;
       this.enableRefresh = true;
+    },
+    hasChosenFilter: function() {
+      return this.userFilter.choices.filter(x => x.chosen).length > 0;
+    },
+    getUserFilter: function() {
+      return {};
+    },
+    getChosenFilter: function() {
+      if (!this.userFilter.choices) {
+        return {};
+      }
+      const values = this.userFilter.choices.filter(x => x.chosen).map(x => x.value);
+      return {
+        [this.userFilter.name]: values
+      };
     },
     getList: function(filter) {
       // It should return promise
       filter = filter || {};
       this.service.cacheTime = this.cacheTime;
-      filter = angular.extend(filter, this.getFilter());
-      var promise = this.service.getList(filter).then(response => {
+      filter = angular.extend(filter, this.getChosenFilter(), this.getFilter());
+      this.listPromise = this.service.getList(filter).then(response => {
         if (this.mergeListFieldIdentifier) {
           this.list = ncUtils.mergeLists(this.list, response, this.mergeListFieldIdentifier);
         } else {
@@ -55,8 +62,8 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
         }
         this.hideNoDataText = false;
       });
-      this.blockListElement(promise);
-      return promise;
+      this.blockListElement(this.listPromise);
+      return this.listPromise;
     },
     getFilter: function() {
       return {};
@@ -120,11 +127,6 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       var index = this.list.indexOf(instance);
       if (index !== -1) {
         this.list.splice(index, 1);
-      }
-
-      index = this.selectedInstances.indexOf(instance[this.uniqueModelKeyName]);
-      if (index !== -1) {
-        this.selectedInstances.splice(index, 1);
       }
 
       if (this.list.length === 0 && this.currentPage > 1) {

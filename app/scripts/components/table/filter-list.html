@@ -1,9 +1,11 @@
 <div class="form-group">
-    <div class="btn-group">
-        <a class="btn btn-default btn-sm"
-            ng-repeat="filter in filterController.searchFilters"
-            ng-click="toggleFilter(filter)"
-            ng-class="{'active': isFilterChosen(filter)}"
-            ng-bind="filter.title | translate"></a>
-    </div>
+  <div class="btn-group">
+    <label
+      uib-btn-checkbox
+      class="btn btn-default btn-sm"
+      ng-repeat="filter in searchFilters"
+      ng-model="filter.chosen">
+      {{ filter.title | translate }}
+    </label>
+  </div>
 </div>
