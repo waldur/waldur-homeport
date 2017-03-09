@@ -56,7 +56,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         tab: 'snapshots',
         title: gettext('Create'),
         dialogTitle: gettext('Create snapshot for '),
-        iconClass: 'fa-plus',
+        iconClass: 'fa fa-plus',
         component: 'snapshotCreateDialog',
         fields: {
           kept_until: {
@@ -71,7 +71,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         title: gettext('Create'),
         dialogTitle: gettext('Create snapshot schedule for OpenStack volume'),
         tab: 'snapshot_schedules',
-        iconClass: 'fa-plus',
+        iconClass: 'fa fa-plus',
         fields: {
           schedule: {
             type: 'crontab'

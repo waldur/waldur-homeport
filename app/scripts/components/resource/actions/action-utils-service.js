@@ -129,19 +129,13 @@ export default function actionUtilsService(
   };
 
   this.loadNestedActions = function(controller, model, tab) {
-    function formatActionTitle(action) {
-      if (action.iconClass) {
-        return `<i class="fa ${action.iconClass}"></i> ${action.title}`;
-      } else {
-        return action.title;
-      }
-    }
     return this.loadActions(model).then(actions => {
       var nestedActions = [];
       angular.forEach(actions, (action, key) => {
         if (action.tab && action.tab === tab) {
           nestedActions.push({
-            name: formatActionTitle(action),
+            title: action.title,
+            iconClass: action.iconClass,
             callback: this.buttonClick.bind(this, controller, model, key, action),
             disabled: !action.enabled,
             titleAttr: action.reason
