@@ -69,7 +69,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/directives/responsive-table.js:278
+#: app/scripts/components/table/responsive-table.js:268
 msgid "Actions"
 msgstr ""
 
@@ -771,7 +771,7 @@ msgstr ""
 msgid "Expires at"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:132
+#: app/scripts/components/table/responsive-table.js:123
 msgid "Export as"
 msgstr ""
 
@@ -800,7 +800,7 @@ msgstr ""
 msgid "Fingerprint"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:93
+#: app/scripts/components/table/responsive-table.js:84
 msgid "First"
 msgstr ""
 
@@ -1146,7 +1146,7 @@ msgstr ""
 msgid "Key name"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:94
+#: app/scripts/components/table/responsive-table.js:85
 msgid "Last"
 msgstr ""
 
@@ -1178,7 +1178,7 @@ msgstr ""
 msgid "Loading actions"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:89
+#: app/scripts/components/table/responsive-table.js:80
 msgid "Loading..."
 msgstr ""
 
@@ -1329,7 +1329,7 @@ msgstr ""
 msgid "New VPC package"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:95
+#: app/scripts/components/table/responsive-table.js:86
 msgid "Next"
 msgstr ""
 
@@ -1841,7 +1841,7 @@ msgstr ""
 msgid "Premium support service."
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:96
+#: app/scripts/components/table/responsive-table.js:87
 msgid "Previous"
 msgstr ""
 
@@ -1908,7 +1908,7 @@ msgstr ""
 msgid "Private clouds"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:90
+#: app/scripts/components/table/responsive-table.js:81
 msgid "Processing..."
 msgstr ""
 
@@ -2102,7 +2102,7 @@ msgid "Record period"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:11
-#: app/scripts/directives/responsive-table.js:135
+#: app/scripts/components/table/responsive-table.js:126
 msgid "Refresh"
 msgstr ""
 
@@ -2371,7 +2371,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: app/scripts/controllers/base-controller-class.js:226
+#: app/scripts/controllers/base-controller-class.js:41
 msgid "Saving of {vm_name} was successful."
 msgstr ""
 
@@ -2388,7 +2388,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:91
+#: app/scripts/components/table/responsive-table.js:82
 msgid "Search:"
 msgstr ""
 
@@ -2524,7 +2524,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:88
+#: app/scripts/components/table/responsive-table.js:79
 msgid "Show _MENU_ entries"
 msgstr ""
 
@@ -2532,7 +2532,7 @@ msgstr ""
 msgid "Show all"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:87
+#: app/scripts/components/table/responsive-table.js:78
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
