@@ -52,43 +52,17 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, ENV,
       var service_type = ncServiceUtils.getTypeDisplay(type.split('.')[0]);
       return 'static/images/appstore/icon-' + service_type.toLowerCase() + '.png';
     },
-    getListState: function(resourceType, selectedCategoryName) {
-      if (isApplicationSelected(resourceType, selectedCategoryName)) {
+    getListState: function(resourceCategory) {
+      if (resourceCategory === 'apps') {
         return 'project.resources.apps';
-      } else if (isPrivateCloudSelected(resourceType, selectedCategoryName)) {
+      } else if (resourceCategory === 'private_clouds') {
         return 'project.resources.clouds';
-      } else if (isStorageSelected(resourceType)) {
+      } else if (resourceCategory === 'storages') {
         return 'project.resources.storage.tabs';
-      } else if (isVirtualMachinesSelected(resourceType, selectedCategoryName)) {
-        return 'project.resources.vms';
-      } else {
+      } else if(resourceCategory === 'vms') {
         return 'project.resources.vms';
       }
-
-      function isStorageSelected(resourceType) {
-        if (resourceType) {
-          return ENV.resourceCategory[resourceType] === 'storages';
-        }
-        return false;
-      }
-
-      function isPrivateCloudSelected(resourceType, selectedCategoryName) {
-        return resourceType ?
-          ENV.resourceCategory[resourceType] === 'private_clouds' :
-          selectedCategoryName === ENV.appStoreCategories[ENV.PrivateClouds].name;
-      }
-
-      function isVirtualMachinesSelected(resourceType, selectedCategoryName) {
-        return resourceType ?
-          ENV.resourceCategory[resourceType] === 'vms' :
-          selectedCategoryName === ENV.appStoreCategories[ENV.VirtualMachines].name;
-      }
-
-      function isApplicationSelected(resourceType, selectedCategoryName) {
-        return resourceType ?
-          ENV.resourceCategory[resourceType] === 'apps' :
-          selectedCategoryName === ENV.appStoreCategories[ENV.Applications].name;
-      }
+      return 'project.resources.vms';
     },
   };
 }

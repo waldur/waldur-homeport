@@ -1,95 +1,80 @@
 import template from './resource-header.html';
 
-export default function resourceHeader() {
-  return {
+const resourceHeader = {
     template: template,
-    controller: ResourceDetailUpdateController,
-    controllerAs: 'controller',
-  };
-}
+    controller: class {
+      constructor($stateParams, $state, $interval, ENV,
+        resourcesService, baseControllerClass, resourceUtils, ncUtilsFlash) {
+        // @ngInject
+        this.$stateParams = $stateParams;
+        this.$state = $state;
+        this.$interval = $interval;
+        this.ENV = ENV;
+        this.resourcesService = resourcesService;
+        this.baseControllerClass = baseControllerClass;
+        this.resourceUtils = resourceUtils;
+        this.ncUtilsFlash = ncUtilsFlash;
 
-// @ngInject
-function ResourceDetailUpdateController(
-  $stateParams,
-  $state,
-  $scope,
-  $rootScope,
-  $interval,
-  ENV,
-  resourcesService,
-  baseControllerDetailUpdateClass,
-  currentStateService,
-  resourceUtils,
-  ncUtilsFlash) {
-  var controllerScope = this;
-  var Controller = baseControllerDetailUpdateClass.extend({
-    defaultErrorMessage: ENV.defaultErrorMessage,
-
-    init:function() {
-      this.service = resourcesService;
-      this.controllerScope = controllerScope;
-      this._super();
-      controllerScope.enableRefresh = true;
-    },
-
-    getModel: function() {
-      return this.service.$get($stateParams.resource_type, $stateParams.uuid);
-    },
-
-    reInitResource: function() {
-      if (!controllerScope.enableRefresh) {
-        return;
+        this.model = null;
       }
-      return controllerScope.getModel().then(function(model) {
-        controllerScope.model = model;
-      }, function(error) {
-        if (error.status === 404) {
-          ncUtilsFlash.error('Resource is gone.');
-          this.modelNotFound();
+
+      $onInit() {
+        this.enableRefresh = true;
+        this.activate();
+      }
+
+      $onDestroy() {
+        this.$interval.cancel(this.refreshPromise);
+      }
+
+      activate() {
+        this.loading = true;
+        this.getModel().then(response => {
+          this.model = response;
+          this.afterActivate(response);
+        }, this.modelNotFound)
+          .finally(() => {
+            this.loading = false;
+          });
+      }
+
+      afterActivate() {
+        this.refreshPromise = this.$interval(
+          this.reInitResource.bind(this),
+          this.ENV.resourcesTimerInterval * 1000
+        );
+      }
+
+      getModel() {
+        return this.resourcesService.$get(this.$stateParams.resource_type, this.$stateParams.uuid);
+      }
+
+      modelNotFound() {
+        let state = this.resourceUtils.getListState(this.ENV.resourceCategory[this.model.resource_type]);
+        this.$state.go(state, {uuid: this.model.project_uuid});
+      }
+
+      reInitResource() {
+        if (!this.enableRefresh) {
+          return;
         }
-      }.bind(this));
-    },
-
-    afterActivate: function() {
-      var refreshPromise = $interval(
-        this.reInitResource.bind(this),
-        ENV.resourcesTimerInterval * 1000
-      );
-
-      $scope.$on('$destroy', function() {
-        $interval.cancel(refreshPromise);
-      });
-    },
-
-    afterInstanceRemove: function(resource) {
-      this.service.clearAllCacheForCurrentEndpoint();
-      $rootScope.$broadcast('refreshCounts');
-
-      var state = resourceUtils.getListState(resource.resource_type);
-      $state.go(state, {uuid: this.model.project_uuid});
-    },
-
-    modelNotFound: function() {
-      currentStateService.getProject().then(function(project) {
-        $state.go('project.details', {uuid: project.uuid});
-      }, function() {
-        currentStateService.getCustomer().then(function(response) {
-          $state.go('organization.details', {uuid: response.uuid});
-        }, function() {
-          $state.go('profile.details');
+        return this.getModel().then(model => {
+          this.model = model;
+        }, error => {
+          if (error.status === 404) {
+            this.ncUtilsFlash.error('Resource is gone.');
+            this.modelNotFound();
+          }
         });
-      });
-    },
+      }
 
-    update: function() {
-      var vm = this;
-      vm.model.$update(function success() {
-        resourcesService.clearAllCacheForCurrentEndpoint();
-      }, function error(response) {
-        vm.errors = response.data;
-      });
+      handleActionException(response) {
+        if (response.status === 409) {
+          let message = response.data.detail || response.data.status;
+          this.ncUtilsFlash.error(message);
+        }
+      }
     }
-  });
+};
 
-  controllerScope.__proto__ = new Controller();
-}
+export default resourceHeader;

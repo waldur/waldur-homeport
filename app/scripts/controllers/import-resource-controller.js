@@ -296,7 +296,7 @@
         resourcesService.clearAllCacheForCurrentEndpoint();
         priceEstimationService.clearAllCacheForCurrentEndpoint();
         $rootScope.$broadcast('refreshCounts');
-        $state.go(resourceUtils.getListState(null, this.selectedCategory.name), {uuid: this.currentProject.uuid});
+        $state.go(resourceUtils.getListState(this.selectedCategory.name), {uuid: this.currentProject.uuid});
       },
     });
     controllerScope.__proto__ = new Controller();
