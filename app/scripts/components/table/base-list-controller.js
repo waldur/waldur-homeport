@@ -25,13 +25,32 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       // reset after state change
       this.enableRefresh = true;
     },
-    hasChosenFilter: function() {
+    hasChosenUserFilter: function() {
       return this.userFilter.choices.filter(x => x.chosen).length > 0;
     },
     getUserFilter: function() {
+      /* It is expected that subclass returns object with the following format:
+      {
+        name: 'state',
+        choices: [
+          {
+            title: gettext('Pending'),
+            value: 'pending',
+            chosen: true
+          },
+          {
+            title: gettext('Canceled'),
+            value: 'canceled'
+          }
+        ]
+      }
+      It is rendered as button group. When user clicks on button, search results are updated.
+      For example, if first choice is chosen, API request looks as following: ?state=pending
+      If both choices are chosen, API request looks as following: ?state=pending&state=canceled
+      */
       return {};
     },
-    getChosenFilter: function() {
+    getChosenUserFilter: function() {
       if (!this.userFilter.choices) {
         return {};
       }
@@ -44,7 +63,7 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       // It should return promise
       filter = filter || {};
       this.service.cacheTime = this.cacheTime;
-      filter = angular.extend(filter, this.getChosenFilter(), this.getFilter());
+      filter = angular.extend(filter, this.getChosenUserFilter(), this.getFilter());
       this.listPromise = this.service.getList(filter).then(response => {
         if (this.mergeListFieldIdentifier) {
           this.list = ncUtils.mergeLists(this.list, response, this.mergeListFieldIdentifier);

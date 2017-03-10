@@ -39,7 +39,7 @@ function ProjectEventsController(baseEventListController) {
       let filter = {
         scope: controllerScope.project.url
       };
-      if (!this.hasChosenFilter()) {
+      if (!this.hasChosenUserFilter()) {
         filter.feature = ['projects', 'resources'];
       }
       return filter;

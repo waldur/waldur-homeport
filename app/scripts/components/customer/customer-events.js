@@ -43,7 +43,7 @@ function CustomerEventsController(baseEventListController) {
       let filter = {
         scope: controllerScope.customer.url
       };
-      if (!this.hasChosenFilter()) {
+      if (!this.hasChosenUserFilter()) {
         filter.feature = ['customers', 'projects', 'resources'];
       }
       return filter;
