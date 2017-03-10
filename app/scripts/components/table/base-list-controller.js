@@ -24,10 +24,7 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       this.blockListElement();
       // reset after state change
       this.enableRefresh = true;
-      $rootScope.$on('resourceDeletion', this.disableRefresh.bind(this));
-    },
-    disableRefresh: function() {
-      this.enableRefresh = false;
+      $rootScope.$on('resourceDeletion', this.toggleRefresh.bind(this));
     },
     hasChosenUserFilter: function() {
       return this.userFilter.choices.filter(x => x.chosen).length > 0;
