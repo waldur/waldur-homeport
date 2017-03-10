@@ -1,5 +1,5 @@
 // @ngInject
-export default function resourceUtils(ncUtils, ncServiceUtils, authService, ENV, $filter) {
+export default function resourceUtils(ncUtils, ncServiceUtils, authService, $filter) {
   return {
     setAccessInfo: function(resource) {
       resource.access_info_text = 'No access info';
