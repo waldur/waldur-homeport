@@ -1,0 +1,11 @@
+<div class="form-group">
+  <div class="btn-group">
+    <label
+      uib-btn-checkbox
+      class="btn btn-default btn-sm"
+      ng-repeat="filter in searchFilters"
+      ng-model="filter.chosen">
+      {{ filter.title | translate }}
+    </label>
+  </div>
+</div>

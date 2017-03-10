@@ -13,13 +13,13 @@ import routes from './routes';
 
 export default module => {
   module.directive('customerCreateDialog', customerCreateDialog);
-  module.directive('customerDelete', customerDelete);
+  module.component('customerDelete', customerDelete);
   module.controller('CustomerWorkspaceController', CustomerWorkspaceController);
   module.directive('customerWorkspace', customerWorkspace);
   module.component('customerPopover', customerPopover);
   module.component('customerAlerts', customerAlerts);
-  module.directive('customerIssues', customerIssues);
-  module.directive('customerEvents', customerEvents);
+  module.component('customerIssues', customerIssues);
+  module.component('customerEvents', customerEvents);
   module.component('customerUsersDetailsList', customerUsersDetailsList);
   module.component('customerTeam', customerTeam);
   module.component('customerSizing', customerSizing);

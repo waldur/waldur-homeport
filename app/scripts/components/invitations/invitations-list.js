@@ -40,7 +40,6 @@ function InvitationsListController(
       ]).then(() => {
         this.isOwnerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
         this.tableOptions = this.getTableOptions();
-        this.getSearchFilters();
         fn();
         this.defaultFilter = {
           name: 'state',
@@ -56,29 +55,28 @@ function InvitationsListController(
         customer: this.currentCustomer.uuid
       };
     },
-    getSearchFilters: function() {
-      this.searchFilters = [
-        {
-          name: 'state',
-          title: gettext('Pending'),
-          value: 'pending'
-        },
-        {
-          name: 'state',
-          title: gettext('Canceled'),
-          value: 'canceled'
-        },
-        {
-          name: 'state',
-          title: gettext('Expired'),
-          value: 'expired'
-        },
-        {
-          name: 'state',
-          title: gettext('Accepted'),
-          value: 'accepted'
-        }
-      ];
+    getUserFilter: function() {
+      return {
+        name: 'state',
+        choices: [
+          {
+            title: gettext('Pending'),
+            value: 'pending',
+          },
+          {
+            title: gettext('Canceled'),
+            value: 'canceled'
+          },
+          {
+            title: gettext('Expired'),
+            value: 'expired'
+          },
+          {
+            title: gettext('Accepted'),
+            value: 'accepted'
+          }
+        ]
+      };
     },
     getTableOptions: function() {
       return {
