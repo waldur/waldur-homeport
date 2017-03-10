@@ -58,7 +58,13 @@
         this.selectedInstances = [];
         this.controlPanelShow = ENV.listControlPanelShow;
         this.enableRefresh = true;
+        $rootScope.$on('resourceDeletion', this.disableRefresh);
       },
+
+      disableRefresh: function() {
+        this.enableRefresh = false;
+      },
+
       getList: function(filter) {
         // It should return promise
         var vm = this;

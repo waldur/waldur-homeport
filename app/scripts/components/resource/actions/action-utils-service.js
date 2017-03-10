@@ -94,6 +94,9 @@ export default function actionUtilsService(
 
     function onSuccess(response) {
       if (response.status === 201 || response.status === 202) {
+        if (response.config.method === 'DELETE') {
+          $rootScope.$broadcast('resourceDeletion');
+        }
         vm.handleActionSuccess(action);
       } else if (response.status === 204) {
         ncUtilsFlash.success('Resource has been deleted');
