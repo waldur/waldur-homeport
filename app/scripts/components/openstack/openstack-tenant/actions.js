@@ -27,7 +27,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         tab: 'networks',
         title: gettext('Create'),
         dialogTitle: gettext('Create network for '),
-        iconClass: 'fa-plus',
+        iconClass: 'fa fa-plus',
         fields: {
           description: {
             type: 'text'
@@ -45,7 +45,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         tab: 'security_groups',
         title: gettext('Create'),
         dialogTitle: gettext('Create security group for '),
-        iconClass: 'fa-plus',
+        iconClass: 'fa fa-plus',
         fields: {
           rules: {
             component: 'securityGroupRuleEditor'
@@ -65,7 +65,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         tab: 'floating_ips',
         title: gettext('Create'),
         dialogTitle: gettext('Create floating IP for '),
-        iconClass: 'fa-plus',
+        iconClass: 'fa fa-plus',
       },
     },
     delete_message: 'All tenant resources will be deleted.'

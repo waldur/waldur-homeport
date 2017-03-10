@@ -25,24 +25,24 @@ export default class BillingUtils {
     return `${this.ENV.shortPageTitle} | ${this.getTabTitle()}`;
   }
 
-  getSearchFilters() {
-    return [
-      {
-        name: 'state',
-        title: gettext('Pending'),
-        value: 'pending'
-      },
-      {
-        name: 'state',
-        title: gettext('Canceled'),
-        value: 'canceled'
-      },
-      {
-        name: 'state',
-        title: gettext('Created'),
-        value: 'created'
-      },
-    ];
+  getUserFilter() {
+    return {
+      name: 'state',
+      choices: [
+        {
+          title: gettext('Pending'),
+          value: 'pending',
+        },
+        {
+          title: gettext('Canceled'),
+          value: 'canceled'
+        },
+        {
+          title: gettext('Created'),
+          value: 'created'
+        }
+      ]
+    };
   }
 
   getTableActions() {

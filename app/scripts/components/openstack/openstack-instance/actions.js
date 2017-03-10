@@ -58,7 +58,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         title: gettext('Create'),
         dialogTitle: gettext('Create backup schedule for OpenStack instance'),
         tab: 'backup_schedules',
-        iconClass: 'fa-plus',
+        iconClass: 'fa fa-plus',
         fields: {
           schedule: {
             type: 'crontab'
@@ -94,7 +94,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         tab: 'backups',
         title: gettext('Create'),
         dialogTitle: gettext('Create backup for '),
-        iconClass: 'fa-plus',
+        iconClass: 'fa fa-plus',
         fields: {
           description: {
             type: 'text'

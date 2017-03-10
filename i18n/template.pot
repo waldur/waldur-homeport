@@ -32,7 +32,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:78
+#: app/scripts/components/invitations/invitations-list.js:75
 msgid "Accepted"
 msgstr ""
 
@@ -69,7 +69,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/directives/responsive-table.js:278
+#: app/scripts/components/table/responsive-table.js:268
 msgid "Actions"
 msgstr ""
 
@@ -128,7 +128,7 @@ msgstr ""
 msgid "Add snapshots"
 msgstr ""
 
-#: app/scripts/components/user/keys/key-list.js:64
+#: app/scripts/components/user/keys/key-list.js:62
 #: app/scripts/components/user/routes.js:81
 msgid "Add SSH key"
 msgstr ""
@@ -207,9 +207,9 @@ msgstr ""
 #: app/scripts/components/project/project-details.js:45
 #: app/scripts/components/project/routes.js:112
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
-#: app/scripts/configs/base-config.js:103
-#: app/scripts/configs/base-config.js:122
-#: app/scripts/configs/base-config.js:55
+#: app/scripts/configs/base-config.js:102
+#: app/scripts/configs/base-config.js:121
+#: app/scripts/configs/base-config.js:54
 msgid "Applications"
 msgstr ""
 
@@ -307,7 +307,7 @@ msgstr ""
 msgid "Bank"
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-contracts.js:65
+#: app/scripts/components/premiumSupport/premium-support-contracts.js:67
 msgid "Base rate"
 msgstr ""
 
@@ -324,7 +324,7 @@ msgstr ""
 msgid "Block devices"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:47
+#: app/scripts/configs/base-config.js:46
 msgid "Block storage"
 msgstr ""
 
@@ -349,7 +349,7 @@ msgstr ""
 #: app/scripts/components/customer/customer-create-dialog.html:94
 #: app/scripts/components/events/event-details-dialog.html:125
 #: app/scripts/components/invitations/invitation-dialog.html:77
-#: app/scripts/components/invitations/invitations-list.js:180
+#: app/scripts/components/invitations/invitations-list.js:178
 #: app/scripts/components/issues/issue-comments-form.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:125
@@ -371,7 +371,7 @@ msgid "Cancel payment"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:37
-#: app/scripts/components/invitations/invitations-list.js:68
+#: app/scripts/components/invitations/invitations-list.js:67
 msgid "Canceled"
 msgstr ""
 
@@ -541,7 +541,7 @@ msgstr ""
 msgid "Create subnet"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:42
+#: app/scripts/components/billing/billing-utils.js:41
 #: app/scripts/components/issues/issue-detail.html:80
 #: app/scripts/components/issues/issues-list.js:124
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:46
@@ -556,7 +556,7 @@ msgstr ""
 msgid "Created a new payment for {customer_name}"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:125
+#: app/scripts/components/invitations/invitations-list.js:123
 msgid "Created at"
 msgstr ""
 
@@ -623,7 +623,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:40
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:47
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:20
-#: app/scripts/components/premiumSupport/premium-support-contracts.js:61
+#: app/scripts/components/premiumSupport/premium-support-contracts.js:63
 #: app/scripts/components/project/project-manage.html:29
 #: app/scripts/components/project/projects-list.js:79
 #: app/scripts/components/resource/actions/constants.js:26
@@ -661,7 +661,7 @@ msgstr ""
 msgid "Do not have an account?"
 msgstr ""
 
-#: app/scripts/components/billing/invoices-list.js:75
+#: app/scripts/components/billing/invoices-list.js:74
 msgid "Due date"
 msgstr ""
 
@@ -697,7 +697,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:61
 #: app/scripts/components/customer/customer-delete.html:28
-#: app/scripts/components/invitations/invitations-list.js:90
+#: app/scripts/components/invitations/invitations-list.js:88
 msgid "Email"
 msgstr ""
 
@@ -713,7 +713,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:207
+#: app/scripts/configs/base-config.js:206
 msgid "English"
 msgstr ""
 
@@ -726,7 +726,7 @@ msgstr ""
 msgid "Error message"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:211
+#: app/scripts/configs/base-config.js:210
 msgid "Estonian"
 msgstr ""
 
@@ -763,15 +763,15 @@ msgstr ""
 msgid "Expiration time"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:73
+#: app/scripts/components/invitations/invitations-list.js:71
 msgid "Expired"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:133
+#: app/scripts/components/invitations/invitations-list.js:131
 msgid "Expires at"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:132
+#: app/scripts/components/table/responsive-table.js:123
 msgid "Export as"
 msgstr ""
 
@@ -796,11 +796,11 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:80
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:97
-#: app/scripts/components/user/keys/key-list.js:38
+#: app/scripts/components/user/keys/key-list.js:36
 msgid "Fingerprint"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:93
+#: app/scripts/components/table/responsive-table.js:84
 msgid "First"
 msgstr ""
 
@@ -888,7 +888,7 @@ msgstr ""
 msgid "Homepage"
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-contracts.js:69
+#: app/scripts/components/premiumSupport/premium-support-contracts.js:71
 msgid "Hour rate"
 msgstr ""
 
@@ -916,7 +916,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:74
+#: app/scripts/configs/base-config.js:73
 msgid "IaaS"
 msgstr ""
 
@@ -1004,7 +1004,7 @@ msgstr ""
 
 #: app/scripts/components/invitations/invitation-dialog.html:2
 #: app/scripts/components/invitations/invitation-dialog.html:73
-#: app/scripts/components/invitations/invitations-list.js:156
+#: app/scripts/components/invitations/invitations-list.js:154
 msgid "Invite user"
 msgstr ""
 
@@ -1012,7 +1012,7 @@ msgstr ""
 msgid "Invoice"
 msgstr ""
 
-#: app/scripts/components/billing/invoices-list.js:70
+#: app/scripts/components/billing/invoices-list.js:69
 msgid "Invoice date"
 msgstr ""
 
@@ -1040,7 +1040,7 @@ msgstr ""
 msgid "Invoice No."
 msgstr ""
 
-#: app/scripts/components/billing/invoices-list.js:42
+#: app/scripts/components/billing/invoices-list.js:41
 msgid "Invoice number"
 msgstr ""
 
@@ -1146,7 +1146,7 @@ msgstr ""
 msgid "Key name"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:94
+#: app/scripts/components/table/responsive-table.js:85
 msgid "Last"
 msgstr ""
 
@@ -1178,7 +1178,7 @@ msgstr ""
 msgid "Loading actions"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:89
+#: app/scripts/components/table/responsive-table.js:80
 msgid "Loading..."
 msgstr ""
 
@@ -1329,7 +1329,7 @@ msgstr ""
 msgid "New VPC package"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:95
+#: app/scripts/components/table/responsive-table.js:86
 msgid "Next"
 msgstr ""
 
@@ -1393,11 +1393,11 @@ msgstr ""
 msgid "No internal IPs yet."
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:86
+#: app/scripts/components/invitations/invitations-list.js:84
 msgid "No invitations found matching filter."
 msgstr ""
 
-#: app/scripts/components/billing/invoices-list.js:38
+#: app/scripts/components/billing/invoices-list.js:37
 msgid "No invoices found matching filter."
 msgstr ""
 
@@ -1474,7 +1474,7 @@ msgstr ""
 msgid "No providers yet."
 msgstr ""
 
-#: app/scripts/components/billing/billing-records-list.js:38
+#: app/scripts/components/billing/billing-records-list.js:37
 msgid "No records found matching filter."
 msgstr ""
 
@@ -1515,11 +1515,11 @@ msgstr ""
 msgid "No snapshots yet."
 msgstr ""
 
-#: app/scripts/components/user/keys/key-list.js:28
+#: app/scripts/components/user/keys/key-list.js:26
 msgid "No SSH keys found matching filter."
 msgstr ""
 
-#: app/scripts/components/user/keys/key-list.js:27
+#: app/scripts/components/user/keys/key-list.js:25
 msgid "No SSH keys yet."
 msgstr ""
 
@@ -1607,7 +1607,7 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:60
+#: app/scripts/configs/base-config.js:59
 msgid "Oracle database and SugarCRM."
 msgstr ""
 
@@ -1676,7 +1676,7 @@ msgstr ""
 msgid "Organization details"
 msgstr ""
 
-#: app/scripts/components/customer/customer-events.js:25
+#: app/scripts/components/customer/customer-events.js:27
 #: app/scripts/components/events/constants.js:57
 msgid "Organization events"
 msgstr ""
@@ -1687,7 +1687,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:189
+#: app/scripts/configs/base-config.js:188
 msgid "Organization owner"
 msgstr ""
 
@@ -1732,7 +1732,7 @@ msgstr ""
 msgid "Page Not Found :/"
 msgstr ""
 
-#: app/scripts/components/billing/invoices-list.js:93
+#: app/scripts/components/billing/invoices-list.js:91
 msgid "Paid"
 msgstr ""
 
@@ -1763,8 +1763,8 @@ msgstr ""
 msgid "Payment is being processed, please wait."
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:32
-#: app/scripts/components/invitations/invitations-list.js:47
+#: app/scripts/components/billing/billing-utils.js:33
+#: app/scripts/components/invitations/invitations-list.js:46
 #: app/scripts/components/invitations/invitations-list.js:63
 msgid "Pending"
 msgstr ""
@@ -1837,16 +1837,16 @@ msgstr ""
 msgid "Premium support"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:68
+#: app/scripts/configs/base-config.js:67
 msgid "Premium support service."
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:96
+#: app/scripts/components/table/responsive-table.js:87
 msgid "Previous"
 msgstr ""
 
-#: app/scripts/components/billing/billing-records-list.js:55
-#: app/scripts/components/billing/invoices-list.js:55
+#: app/scripts/components/billing/billing-records-list.js:54
+#: app/scripts/components/billing/invoices-list.js:54
 #: app/scripts/components/offering/offering-summary.html:32
 msgid "Price"
 msgstr ""
@@ -1903,12 +1903,12 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js:105
 #: app/scripts/components/project/routes.js:120
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
-#: app/scripts/configs/base-config.js:38
-#: app/scripts/configs/base-config.js:95
+#: app/scripts/configs/base-config.js:37
+#: app/scripts/configs/base-config.js:94
 msgid "Private clouds"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:90
+#: app/scripts/components/table/responsive-table.js:81
 msgid "Processing..."
 msgstr ""
 
@@ -1961,9 +1961,9 @@ msgstr ""
 msgid "Project details"
 msgstr ""
 
-#: app/scripts/components/customer/customer-events.js:30
+#: app/scripts/components/customer/customer-events.js:32
 #: app/scripts/components/events/constants.js:59
-#: app/scripts/components/project/project-events.js:25
+#: app/scripts/components/project/project-events.js:27
 msgid "Project events"
 msgstr ""
 
@@ -1971,7 +1971,7 @@ msgstr ""
 msgid "Project has been renamed from {project_previous_name} to {project_name}."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:190
+#: app/scripts/configs/base-config.js:189
 msgid "Project manager"
 msgstr ""
 
@@ -2031,11 +2031,11 @@ msgstr ""
 msgid "Providers events"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:52
+#: app/scripts/configs/base-config.js:51
 msgid "Provision persistent storage volumes in available Providers."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:35
+#: app/scripts/configs/base-config.js:34
 msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
 
@@ -2047,7 +2047,7 @@ msgstr ""
 msgid "Purchase"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:43
+#: app/scripts/configs/base-config.js:42
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
@@ -2084,7 +2084,7 @@ msgstr ""
 msgid "Reason"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:21
+#: app/scripts/configs/base-config.js:20
 msgid "Reason unknown, please contact support"
 msgstr ""
 
@@ -2092,17 +2092,17 @@ msgstr ""
 msgid "Record no."
 msgstr ""
 
-#: app/scripts/components/billing/billing-records-list.js:42
+#: app/scripts/components/billing/billing-records-list.js:41
 msgid "Record number"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:46
-#: app/scripts/components/billing/billing-records-list.js:65
+#: app/scripts/components/billing/billing-records-list.js:64
 msgid "Record period"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:11
-#: app/scripts/directives/responsive-table.js:135
+#: app/scripts/components/table/responsive-table.js:126
 msgid "Refresh"
 msgstr ""
 
@@ -2148,7 +2148,7 @@ msgstr ""
 #: app/scripts/components/team/customer-users-list.js:131
 #: app/scripts/components/team/project-users-list.js:103
 #: app/scripts/components/user/hooks/hook-list.js:74
-#: app/scripts/components/user/keys/key-list.js:53
+#: app/scripts/components/user/keys/key-list.js:51
 msgid "Remove"
 msgstr ""
 
@@ -2213,7 +2213,7 @@ msgstr ""
 msgid "Requested Services"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:193
+#: app/scripts/components/invitations/invitations-list.js:191
 msgid "Resend"
 msgstr ""
 
@@ -2306,9 +2306,9 @@ msgstr ""
 msgid "Resource count in"
 msgstr ""
 
-#: app/scripts/components/customer/customer-events.js:35
+#: app/scripts/components/customer/customer-events.js:36
 #: app/scripts/components/events/constants.js:61
-#: app/scripts/components/project/project-events.js:30
+#: app/scripts/components/project/project-events.js:32
 msgid "Resource events"
 msgstr ""
 
@@ -2339,7 +2339,7 @@ msgid "Restored volumes"
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-dialog.html:29
-#: app/scripts/components/invitations/invitations-list.js:100
+#: app/scripts/components/invitations/invitations-list.js:98
 #: app/scripts/components/team/add-project-member.html:27
 #: app/scripts/components/team/add-team-member.html:46
 #: app/scripts/components/team/customer-permissions-log-list.js:32
@@ -2371,7 +2371,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: app/scripts/controllers/base-controller-class.js:226
+#: app/scripts/controllers/base-controller-class.js:41
 msgid "Saving of {vm_name} was successful."
 msgstr ""
 
@@ -2388,7 +2388,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:91
+#: app/scripts/components/table/responsive-table.js:82
 msgid "Search:"
 msgstr ""
 
@@ -2524,7 +2524,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:88
+#: app/scripts/components/table/responsive-table.js:79
 msgid "Show _MENU_ entries"
 msgstr ""
 
@@ -2532,7 +2532,7 @@ msgstr ""
 msgid "Show all"
 msgstr ""
 
-#: app/scripts/directives/responsive-table.js:87
+#: app/scripts/components/table/responsive-table.js:78
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
@@ -2656,8 +2656,8 @@ msgstr ""
 msgid "Start time"
 msgstr ""
 
-#: app/scripts/components/billing/billing-records-list.js:50
-#: app/scripts/components/billing/invoices-list.js:50
+#: app/scripts/components/billing/billing-records-list.js:49
+#: app/scripts/components/billing/invoices-list.js:49
 #: app/scripts/components/offering/offering-summary.html:18
 #: app/scripts/components/offering/offerings-list.js:45
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:52
@@ -2677,7 +2677,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:117
+#: app/scripts/components/invitations/invitations-list.js:115
 #: app/scripts/components/issues/constants.js:109
 #: app/scripts/components/issues/constants.js:71
 #: app/scripts/components/issues/issue-detail.html:55
@@ -2699,7 +2699,7 @@ msgid "Storage"
 msgstr ""
 
 #: app/scripts/components/appstore/routes.js:52
-#: app/scripts/configs/base-config.js:110
+#: app/scripts/configs/base-config.js:109
 msgid "Storages"
 msgstr ""
 
@@ -2733,7 +2733,7 @@ msgstr ""
 
 #: app/scripts/components/navigation/header/support-link.html:4
 #: app/scripts/components/project/project-details.js:66
-#: app/scripts/configs/base-config.js:63
+#: app/scripts/configs/base-config.js:62
 msgid "Support"
 msgstr ""
 
@@ -2770,7 +2770,7 @@ msgstr ""
 msgid "Synchronise quotas"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:191
+#: app/scripts/configs/base-config.js:190
 msgid "System administrator"
 msgstr ""
 
@@ -2782,7 +2782,7 @@ msgstr ""
 msgid "System volume size"
 msgstr ""
 
-#: app/scripts/components/billing/invoices-list.js:60
+#: app/scripts/components/billing/invoices-list.js:59
 msgid "Tax"
 msgstr ""
 
@@ -2818,7 +2818,7 @@ msgstr ""
 msgid "Tenant name"
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-contracts.js:73
+#: app/scripts/components/premiumSupport/premium-support-contracts.js:75
 msgid "Terms"
 msgstr ""
 
@@ -2890,7 +2890,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-quick-create.html:22
 #: app/scripts/components/issues/issue-registration.html:93
 #: app/scripts/components/issues/issues-list.js:64
-#: app/scripts/components/user/keys/key-list.js:31
+#: app/scripts/components/user/keys/key-list.js:29
 msgid "Title"
 msgstr ""
 
@@ -2911,8 +2911,8 @@ msgid "To update current plan visit"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-pie-chart.html:21
-#: app/scripts/components/billing/billing-records-list.js:60
-#: app/scripts/components/billing/invoices-list.js:65
+#: app/scripts/components/billing/billing-records-list.js:59
+#: app/scripts/components/billing/invoices-list.js:64
 msgid "Total"
 msgstr ""
 
@@ -2982,7 +2982,7 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:141
+#: app/scripts/components/invitations/invitations-list.js:139
 msgid "URL"
 msgstr ""
 
@@ -3106,9 +3106,9 @@ msgstr ""
 #: app/scripts/components/project/project-details.js:31
 #: app/scripts/components/project/routes.js:104
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
-#: app/scripts/configs/base-config.js:118
-#: app/scripts/configs/base-config.js:30
-#: app/scripts/configs/base-config.js:88
+#: app/scripts/configs/base-config.js:117
+#: app/scripts/configs/base-config.js:29
+#: app/scripts/configs/base-config.js:87
 msgid "Virtual machines"
 msgstr ""
 
@@ -3199,7 +3199,7 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
-#: app/scripts/components/billing/invoices-list.js:37
+#: app/scripts/components/billing/invoices-list.js:36
 msgid "You have no invoices yet"
 msgstr ""
 
@@ -3216,7 +3216,7 @@ msgstr ""
 msgid "You have no quotas yet."
 msgstr ""
 
-#: app/scripts/components/billing/billing-records-list.js:37
+#: app/scripts/components/billing/billing-records-list.js:36
 msgid "You have no records yet"
 msgstr ""
 
@@ -3232,7 +3232,7 @@ msgstr ""
 msgid "You have no restored volumes yet."
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-contracts.js:32
+#: app/scripts/components/premiumSupport/premium-support-contracts.js:34
 msgid "You have no SLAs yet."
 msgstr ""
 
@@ -3240,7 +3240,7 @@ msgstr ""
 msgid "You have no snapshots yet."
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:85
+#: app/scripts/components/invitations/invitations-list.js:83
 msgid "You have no team invitations yet"
 msgstr ""
 

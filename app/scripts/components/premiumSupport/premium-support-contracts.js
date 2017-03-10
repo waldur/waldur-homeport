@@ -1,7 +1,9 @@
+import template from './premium-support-contracts.html';
+
 export default function premiumSupportContracts() {
   return {
     restrict: 'E',
-    templateUrl: 'views/partials/list.html',
+    template: template,
     controller: ContractsListController,
     controllerAs: 'Ctrl',
     scope: {},

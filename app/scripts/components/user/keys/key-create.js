@@ -1,13 +1,12 @@
 import template from './key-create.html';
 
-export default function keyCreate() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: KeyAddController,
-    controllerAs: 'KeyAdd',
-  };
-}
+const keyCreate = {
+  template: template,
+  controller: KeyAddController,
+  controllerAs: 'KeyAdd',
+};
+
+export default keyCreate;
 
 // @ngInject
 function KeyAddController(baseControllerAddClass, keysService, $state, $q) {

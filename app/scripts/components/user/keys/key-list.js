@@ -1,12 +1,10 @@
-export default function keyList() {
-  return {
-    restrict: 'E',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: KeyListController,
-    controllerAs: 'ListController',
-    scope: {}
-  };
-}
+const keyList = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: KeyListController,
+  controllerAs: 'ListController',
+};
+
+export default keyList;
 
 // @ngInject
 function KeyListController(

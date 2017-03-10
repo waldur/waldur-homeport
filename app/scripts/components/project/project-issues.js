@@ -1,25 +1,13 @@
 import template from './project-issues.html';
 
-export default function projectIssues() {
-  return {
-    restrict: 'E',
-    controller: ProjectIssuesController,
-    controllerAs: '$ctrl',
-    template: template,
-    scope: {},
-    bindToController: true
-  };
-}
-
 class ProjectIssuesController {
   constructor(currentStateService, $uibModal, $rootScope) {
     this.currentStateService = currentStateService;
     this.$uibModal = $uibModal;
     this.$rootScope = $rootScope;
-    this.init();
   }
 
-  init() {
+  $onInit() {
     this.loading = true;
     this.currentStateService.getProject().then(project => {
       this.setOptions(project);
@@ -55,3 +43,10 @@ class ProjectIssuesController {
     };
   }
 }
+
+const projectIssues = {
+  template: template,
+  controller: ProjectIssuesController,
+};
+
+export default projectIssues;

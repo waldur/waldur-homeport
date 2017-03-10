@@ -1,16 +1,5 @@
 import template from './project-manage.html';
 
-export default function projectManage() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: ProjectManageController,
-    controllerAs: '$ctrl',
-    scope: {},
-    bindToController: true
-  };
-}
-
 // @ngInject
 class ProjectManageController {
   constructor(projectsService,
@@ -29,10 +18,9 @@ class ProjectManageController {
     this.$rootScope = $rootScope;
     this.$state = $state;
     this.$q = $q;
-    this.activate();
   }
 
-  activate() {
+  $onInit() {
     this.canManage = false;
     this.projectModel = {};
     this.currentStateService.getCustomer().then(customer => {
@@ -91,3 +79,10 @@ class ProjectManageController {
     });
   }
 }
+
+const projectManage = {
+  template: template,
+  controller: ProjectManageController,
+};
+
+export default projectManage;
