@@ -58,7 +58,7 @@ function openstackSnapshotSchedulesListController(
     },
     getFilter: function() {
       return {
-        instance: controllerScope.resource.url
+        source_volume: controllerScope.resource.url
       };
     }
   });
