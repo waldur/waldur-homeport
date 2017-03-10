@@ -1,13 +1,12 @@
 import template from './customer-delete.html';
 
-export default function customerDelete() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: CustomerDeleteController,
-    controllerAs: 'DeleteController',
-  };
-}
+const customerDelete = {
+  template: template,
+  controller: CustomerDeleteController,
+  controllerAs: 'DeleteController',
+};
+
+export default customerDelete;
 
 // @ngInject
 function CustomerDeleteController(

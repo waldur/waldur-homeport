@@ -1,15 +1,13 @@
-export default function customerEvents() {
-  return {
-    restrict: 'E',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: CustomerEventsController,
-    controllerAs: 'ListController',
-    scope: {},
-    bindToController: {
-      customer: '='
-    }
-  };
-}
+const customerEvents = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: CustomerEventsController,
+  controllerAs: 'ListController',
+  bindings: {
+    customer: '<'
+  }
+};
+
+export default customerEvents;
 
 // @ngInject
 function CustomerEventsController(baseEventListController) {

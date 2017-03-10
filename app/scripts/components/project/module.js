@@ -9,11 +9,11 @@ import projectTeam from './project-team';
 import projectRoutes from './routes';
 
 export default module => {
-  module.directive('projectManage', projectManage);
-  module.directive('projectCreate', projectCreate);
+  module.component('projectManage', projectManage);
+  module.component('projectCreate', projectCreate);
   module.controller('ProjectDetailsController', ProjectDetailsController);
-  module.directive('projectIssues', projectIssues);
-  module.directive('projectEvents', projectEvents);
+  module.component('projectIssues', projectIssues);
+  module.component('projectEvents', projectEvents);
   module.component('projectsList', projectsList);
   module.component('projectAlertsList', projectAlertsList);
   module.component('projectTeam', projectTeam);

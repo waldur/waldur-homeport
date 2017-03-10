@@ -1,13 +1,12 @@
 import template from './project-create.html';
 
-export default function projectCreate() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: ProjectAddController,
-    controllerAs: 'ProjectAdd',
-  };
-}
+const projectCreate = {
+  template: template,
+  controller: ProjectAddController,
+  controllerAs: 'ProjectAdd',
+};
+
+export default projectCreate;
 
 // @ngInject
 function ProjectAddController(

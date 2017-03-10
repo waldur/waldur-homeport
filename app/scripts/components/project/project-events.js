@@ -1,15 +1,13 @@
-export default function projectEvents() {
-  return {
-    restrict: 'E',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: ProjectEventsController,
-    controllerAs: 'ListController',
-    scope: {},
-    bindToController: {
-      project: '='
-    }
-  };
-}
+const projectEvents = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: ProjectEventsController,
+  controllerAs: 'ListController',
+  bindings: {
+    project: '<'
+  }
+};
+
+export default projectEvents;
 
 // @ngInject
 function ProjectEventsController(baseEventListController) {
