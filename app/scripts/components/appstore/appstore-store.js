@@ -27,7 +27,8 @@ function AppStoreController(
   priceEstimationService,
   ncServiceUtils,
   resourceUtils,
-  AppstoreFieldConfiguration) {
+  AppstoreFieldConfiguration,
+  AppstoreResourceLoader) {
   var controllerScope = this;
   var Controller = baseControllerAddClass.extend({
     enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
@@ -52,8 +53,6 @@ function AppStoreController(
     categoryServices: {},
 
     configureStepNumber: 4,
-    chooseResourceTypeStepNumber: 3,
-
     fields: [],
     quotaThreshold: 0.8,
 
@@ -180,15 +179,19 @@ function AppStoreController(
         this.fields = fields;
 
         this.allFormOptions = formOptions;
-        return this.getValidChoices(formOptions).then(validChoices => {
-          this.setFields(formOptions, validChoices);
-        });
+        return AppstoreResourceLoader
+          .loadValidChoices(this.getContext(), formOptions)
+          .then(validChoices => angular.forEach(validChoices, (choices, name) => {
+            if (this.fields.options.hasOwnProperty(name)) {
+              this.fields.options[name].choices = choices;
+            }
+          }));
       }).finally(() => {
-        this.instance = this.buildInstance();
+        this.instance = this.getInstance();
         this.loadingResourceProperties = false;
       });
     },
-    buildInstance: function() {
+    getInstance: function() {
       return {
         type: this.selectedResourceType,
         customer: this.currentCustomer,
@@ -197,53 +200,14 @@ function AppStoreController(
         service_project_link: this.selectedService.service_project_link_url
       };
     },
-    getValidChoices: function(formOptions) {
-      var vm = this;
-      var promises = [];
-      var validChoices = {};
-      var context = {
-        project: vm.currentProject.uuid,
-        project_uuid: vm.currentProject.uuid,
-        service_uuid: vm.selectedService.uuid,
-        settings_uuid: vm.selectedService.settings_uuid,
-        service_settings_uuid: vm.selectedService.settings_uuid,
+    getContext: function() {
+      return {
+        project: this.currentProject.uuid,
+        project_uuid: this.currentProject.uuid,
+        service_uuid: this.selectedService.uuid,
+        settings_uuid: this.selectedService.settings_uuid,
+        service_settings_uuid: this.selectedService.settings_uuid,
       };
-
-      angular.forEach(formOptions, function(options, name) {
-        if (options.resource) {
-          options.url = ENV.apiEndpoint + 'api/' + options.resource + '/';
-        }
-
-        if (options.url && name != 'service_project_link') {
-          var parts = options.url.split('?');
-          var base_url;
-          var query;
-          if (parts.length > 1) {
-            base_url = parts[0];
-            query = ncUtils.parseQueryString(parts[1]);
-          } else {
-            base_url = options.url;
-            query = {};
-          }
-          query = angular.extend(query, context);
-
-          var promise = servicesService.getAll(query, base_url).then(function(response) {
-            validChoices[name] = response;
-          });
-          promises.push(promise);
-        }
-      });
-      return $q.all(promises).then(function() {
-        return validChoices;
-      });
-    },
-    setFields: function(formOptions, validChoices) {
-      var vm = this;
-      angular.forEach(validChoices, function(choices, name) {
-        if (vm.fields.options.hasOwnProperty(name)) {
-          vm.fields.options[name].choices = choices;
-        }
-      });
     },
     getServiceTypeDisplay: ncServiceUtils.getTypeDisplay,
     getServiceIcon: ncServiceUtils.getServiceIcon,

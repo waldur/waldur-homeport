@@ -7,6 +7,7 @@ import appstoreSummary from './appstore-summary';
 import appstoreStore from './appstore-store';
 import appstoreRoutes from './routes';
 import AppstoreFieldConfiguration from './field-configuration';
+import AppstoreResourceLoader from './appstore-resource-loader';
 
 export default module => {
   module.service('AppStoreUtilsService', AppStoreUtilsService);
@@ -19,4 +20,5 @@ export default module => {
   module.directive('appstoreStore', appstoreStore);
   module.config(appstoreRoutes);
   module.provider('AppstoreFieldConfiguration', AppstoreFieldConfiguration);
+  module.service('AppstoreResourceLoader', AppstoreResourceLoader);
 };

@@ -118,15 +118,25 @@ export default function actionUtilsService(
 
   this.openActionDialog = function(controller, resource, name, action) {
     var component = action.component || 'actionDialog';
-    var dialogScope = $rootScope.$new();
-    dialogScope.action = action;
-    dialogScope.controller = controller;
-    dialogScope.resource = resource;
-    $uibModal.open({
-      component: component,
-      scope: dialogScope,
-      size: action.dialogSize
-    }).result.then(function() {
+    const params = {component, size: action.dialogSize};
+    if (action.useResolve) {
+      angular.extend(params, {
+        resolve: {
+          action: () => action,
+          controller: () => controller,
+          resource: () => resource,
+        }
+      });
+    } else {
+      var dialogScope = $rootScope.$new();
+      angular.extend(dialogScope, {
+        action,
+        controller,
+        resource
+      });
+      params.scope = dialogScope;
+    }
+    $uibModal.open(params).result.then(function() {
       $rootScope.$broadcast('actionApplied', name);
     });
   };

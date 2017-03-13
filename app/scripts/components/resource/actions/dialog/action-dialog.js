@@ -22,6 +22,9 @@ function ActionDialogController(
         $scope.loading = false;
       });
       angular.forEach($scope.action.fields, function(field, name) {
+        if (field.init) {
+          field.init(field, $scope.resource, $scope.form);
+        }
         if (field.default_value) {
           $scope.form[name] = field.default_value;
         }
