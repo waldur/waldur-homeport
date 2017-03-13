@@ -28,7 +28,7 @@ const openstackInstanceNetworks = {
 
     $onInit() {
       this.subnets = this.field.choices.subnets.map(subnet => ({
-        display_name: subnet.name,
+        display_name: internalIpFormatter(subnet),
         value: subnet.url,
       }));
       const floating_ips = this.field.choices.floating_ips.map(floating_ip => ({
