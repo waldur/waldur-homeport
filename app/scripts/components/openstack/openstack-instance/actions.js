@@ -13,12 +13,11 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
       'stop',
       'restart',
       'change_flavor',
-      'assign_floating_ip',
-      'unassign_floating_ip',
-      'update_security_groups',
       'backup',
       'create_backup_schedule',
+      'update_security_groups',
       'update_internal_ips_set',
+      'update_floating_ips',
       'unlink',
       'destroy'
     ],
@@ -34,13 +33,6 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         fields: {
           flavor: {
             formatter: flavorFormatter
-          }
-        }
-      },
-      assign_floating_ip: {
-        fields: {
-          floating_ip: {
-            emptyLabel: gettext('Allocate and assign new floating IP')
           }
         }
       },
@@ -82,6 +74,14 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
             value_field: 'url',
           }
         },
+      },
+      update_floating_ips: {
+        title: gettext('Update floating IPs'),
+        fields: {
+          floating_ips: {
+            type: 'multiselect',
+          }
+        }
       },
       destroy: {
         fields: {
