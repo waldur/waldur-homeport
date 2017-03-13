@@ -1,10 +1,10 @@
-<div ng-if="ListController.loading && !ListController.initialized">
-    <loading-spinner/>
+<div ng-if="!ListController.initialized">
+  <loading-spinner/>
 </div>
-<div ng-if="!ListController.loading || ListController.initialized"
-  ng-class="{disabled: ListController.loading}">
+<div ng-if="ListController.initialized">
 	<filter-list
     on-select="ListController.getList()"
+    is-loading="ListController.loading"
     search-filters="ListController.userFilter.choices"
     ng-if="ListController.userFilter.choices"></filter-list>
 	<responsive-table table-ctrl="ListController"></responsive-table>

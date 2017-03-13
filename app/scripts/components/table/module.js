@@ -5,5 +5,5 @@ import filterList from './filter-list';
 export default module => {
   module.service('baseControllerListClass', baseControllerListClass);
   module.directive('responsiveTable', responsiveTable);
-  module.directive('filterList', filterList);
+  module.component('filterList', filterList);
 };

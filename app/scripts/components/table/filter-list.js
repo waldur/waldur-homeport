@@ -1,17 +1,24 @@
 import template from './filter-list.html';
 
-export default function filterList() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {
-      searchFilters: '=',
-      onSelect: '&'
-    },
-    link: function ($scope) {
-      $scope.$watch('searchFilters', function() {
-        $scope.onSelect();
+const filterList = {
+  template: template,
+  bindings: {
+    searchFilters: '<',
+    isLoading: '<',
+    onSelect: '&'
+  },
+  controller: class FilterListController {
+    constructor($scope) {
+      // @ngInject
+      this.$scope = $scope;
+    }
+
+    $onInit() {
+      this.$scope.$watch(() => this.searchFilters, () => {
+        this.onSelect();
       }, true);
     }
-  };
-}
+  }
+};
+
+export default filterList;
