@@ -46,7 +46,7 @@ const openstackInstanceFloatingIps = {
             return {
               subnet: item.subnet,
               url: item.floating_ip,
-            }
+            };
           }
         });
       }, true);
