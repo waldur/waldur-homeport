@@ -52,5 +52,17 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
       var service_type = ncServiceUtils.getTypeDisplay(type.split('.')[0]);
       return 'static/images/appstore/icon-' + service_type.toLowerCase() + '.png';
     },
+    getListState: function(resourceCategory) {
+      if (resourceCategory === 'apps') {
+        return 'project.resources.apps';
+      } else if (resourceCategory === 'private_clouds') {
+        return 'project.resources.clouds';
+      } else if (resourceCategory === 'storages') {
+        return 'project.resources.storage.tabs';
+      } else if(resourceCategory === 'vms') {
+        return 'project.resources.vms';
+      }
+      return 'project.resources.vms';
+    },
   };
 }
