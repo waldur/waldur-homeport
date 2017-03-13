@@ -208,7 +208,3 @@ function flavorValidator(model, choice) {
   }
   return false;
 }
-
-function floatingIPFormatter($filter, value) {
-  return value.address;
-}
