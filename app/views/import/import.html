@@ -4,7 +4,7 @@
             <div class="appstore-content">
                 <section class="step-1">
                     <div class="step-title">
-                        <span>Step 1: Choose category</span>
+                        <span translate>Step 1: Choose category</span>
                     </div>
                     <div class="appstore-templates">
                         <!-- category -->
@@ -22,16 +22,16 @@
             <div class="form-row" block-ui="import-second-step" ng-show="ImportResource.secondStep">
                 <div class="col full appstore-content">
                     <section class="step-2">
-                        <div class="step-title"><span>Step 2: Select Provider</span></div>
+                        <div class="step-title"><span translate>Step 2: Select Provider</span></div>
                         <!-- Select service -->
                         <div class="white-box no-styles"
                              ng-show="ImportResource.services[ImportResource.selectedCategory.name].length === 0">
-                            <h2 class="app-title">
+                            <h2 class="app-title" translate>
                                 You don't have any provider yet.
                             </h2>
                             <div class="decision">
                                 <div class="col">
-                                    <a ui-sref="organization.createProvider({uuid: ImportResource.customer.uuid})" class="button">Create new provider</a>
+                                    <a ui-sref="organization.createProvider({uuid: ImportResource.customer.uuid})" class="button" translate>Create new provider</a>
                                 </div>
                             </div>
                         </div>
@@ -55,16 +55,16 @@
                 </div>
                 <div class="col full appstore-content" ng-if="ImportResource.selectTenant">
                     <section class="step-2">
-                        <div class="step-title"><span>Step 3: Select Tenant</span></div>
+                        <div class="step-title"><span translate>Step 3: Select Tenant</span></div>
                         <!-- Select tenant -->
                         <div class="white-box no-styles"
                              ng-show="ImportResource.tenants.length === 0">
-                            <h2 class="app-title">
+                            <h2 class="app-title" translate>
                                 You don't have any tenant yet.
                             </h2>
                             <div class="decision">
                                 <div class="col">
-                                    <a ui-sref="appstore.private_clouds" class="button">Create new tenant first.</a>
+                                    <a ui-sref="appstore.private_clouds" class="button" translate>Create new tenant first.</a>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                    ng-show="ImportResource.importedResources.length"
                    ng-click="showImportedResources=!showImportedResources"
                    ng-class="{'active': showImportedResources}">
-                   Show imported resources ({{ ImportResource.importedResources.length }})
+                   <span translate>Show imported resources</span> ({{ ImportResource.importedResources.length }})
                 </a>
                 <div class="col full" ng-show="showImportedResources && ImportResource.importedResources.length">
                     <ul class="object-list">
@@ -103,7 +103,11 @@
                                     {{ resource.type }}
                                 </div>
                                 <div class="additional-cell">
-                                    <span class="status">Resource is already managed under <a ui-sref="organization.details({uuid: resource.customer_uuid})">{{ resource.customer_name }}</a>: <a ui-sref="project.details({uuid: resource.project_uuid})">{{ resource.project_name }}</a></span>
+                                    <span class="status">
+                                        <span translate>Resource is already managed under</span>
+                                        <a ui-sref="organization.details({uuid: resource.customer_uuid})">{{ resource.customer_name }}</a>:
+                                        <a ui-sref="project.details({uuid: resource.project_uuid})">{{ resource.project_name }}</a>
+                                    </span>
                                 </div>
                             </div>
                         </li>
@@ -123,7 +127,7 @@
         <div class="decision" ng-show="ImportResource.importableResources.length">
             <div class="col select-project">
                 <p>
-                    Selected resources will be imported into project
+                    <span translate>Selected resources will be imported into project</span>
                     {{ ImportResource.currentProject.name }}
                 </p>
                 <p>
@@ -133,7 +137,7 @@
                             type="checkbox"
                             ng-model="ImportResource.import_historical_usage">
                         </input>
-                        Try to detect historical usage of resources
+                        <span translate>Try to detect historical usage of resources</span>
                     </label>
                 </p>
             </div>
@@ -143,7 +147,8 @@
             <div class="col">
                 <a class="single button-apply"
                    ng-class="{'disabled': !ImportResource.canImport()}"
-                   submit-button="ImportResource.save()">Import</a>
+                   submit-button="ImportResource.save()"
+                   translate>Import</a>
             </div>
         </div>
 

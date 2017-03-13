@@ -1,32 +1,32 @@
 <div class="ibox">
     <div class="ibox-title">
-        <h5>
+        <h5 translate>
             Checkout summary
         </h5>
     </div>
     <div class="ibox-content">
-        <p ng-if="!$ctrl.plan.name">
+        <p ng-if="!$ctrl.plan.name" translate>
             No items yet.
         </p>
         <table class="table table-bordered" ng-if="$ctrl.plan.name">
             <tr>
-                <td><strong>Support package</strong></td>
+                <td><strong translate>Support package</strong></td>
                 <td>{{ $ctrl.plan.name }}</td>
             </tr>
             <tr>
-                <td><strong>Monthly base price</strong></td>
+                <td><strong translate>Monthly base price</strong></td>
                 <td>{{ $ctrl.plan.base_rate | defaultCurrency }}</td>
             </tr>
             <tr>
-                <td><strong>Hour price</strong></td>
+                <td><strong translate>Hour price</strong></td>
                 <td>{{ $ctrl.plan.hour_rate | defaultCurrency }}</td>
             </tr>
             <tr>
-                <td><strong>Invoiced to</strong></td>
+                <td><strong translate>Invoiced to</strong></td>
                 <td>{{ $ctrl.customer.name }}</td>
             </tr>
             <tr>
-                <td><strong>Project</strong></td>
+                <td><strong translate>Project</strong></td>
                 <td>{{ $ctrl.project.name }}</td>
             </tr>
         </table>

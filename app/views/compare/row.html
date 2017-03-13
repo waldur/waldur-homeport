@@ -9,7 +9,7 @@
 <div class="compact-list__details">
   <div class="details-table__row">
     <div class="details-table__key">
-      Type
+      <span translate>Type</span>
     </div>
     <div class="details-table__value">
       {{ entity.resource_type }}
@@ -17,7 +17,7 @@
   </div>
   <div class="details-table__row">
     <div class="details-table__key">
-      Price/hour
+      <span translate>Price/hour</span>
     </div>
     <div class="details-table__value">
       {{ entity.value | defaultCurrency }}
@@ -41,7 +41,7 @@
   </div>
   <div class="details-table__row" ng-if="entity.metadata.disk">
     <div class="details-table__key">
-      Storage
+      <span translate>Storage</span>
     </div>
     <div class="details-table__value">
       {{ entity.metadata.disk | filesize }}

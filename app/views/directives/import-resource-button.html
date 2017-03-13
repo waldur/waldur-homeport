@@ -3,19 +3,19 @@
           class="button-apply"
           ng-class="{'pending': !resource.checked}">
         <span ng-if="!resource.checked">
-            <i class="icon fa-square-o"></i> Select
+            <i class="icon fa-square-o"></i> <span translate>Select</span>
         </span>
         <span ng-if="resource.checked">
-            <i class="icon fa-check-square-o"></i> Selected
+            <i class="icon fa-check-square-o"></i> <span translate>Selected</span>
         </span>
     </span>
     <span ng-switch-when="progress">
-        <i class="icon fa-spinner fa-spin"></i> In progress
+        <i class="icon fa-spinner fa-spin"></i> <span translate>In progress</span>
     </span>
     <span ng-switch-when="success">
-        <i class="fa fa-check"></i>Imported
+        <i class="fa fa-check"></i> <span translate>Imported</span>
     </span>
     <span ng-switch-when="failed">
-        <i class="icon fa fa-exclamation-triangle"></i>Failed
+        <i class="icon fa fa-exclamation-triangle"></i> <span translate>Failed</span>
     </span>
 </div>

@@ -6,13 +6,13 @@
         <div>{{ ::user.full_name }}</div>
         <small>
             <div ng-if="::user.username">
-                Username: {{ ::user.username }}
+                <span translate>Username:</span> {{ ::user.username }}
             </div>
             <div ng-if="::user.email">
-                E-mail: {{ ::user.email }}
+                <span translate>E-mail:</span> {{ ::user.email }}
             </div>
             <div ng-if="::user.civil_number">
-                Civil number: {{ ::user.civil_number }}
+                <span translate>Civil number:</span> {{ ::user.civil_number }}
             </div>
         </small>
     </ui-select-choices>

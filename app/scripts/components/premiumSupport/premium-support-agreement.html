@@ -1,20 +1,20 @@
 <div class="ibox">
     <div class="ibox-title">
-        <h5>Sign a support agreement</h5>
+        <h5 translate>Sign a support agreement</h5>
     </div>
     <div class="ibox-content">
-        <h4>1. Check terms</h4>
+        <h4>1. <span translate>Check terms</span></h4>
         <ul>
             <li>
-                <strong>Monthly base price:</strong>
+                <strong translate>Monthly base price:</strong>
                 {{ $ctrl.plan.base_rate | defaultCurrency }}
             </li>
             <li>
-                <strong>Hour price:</strong>
+                <strong translate>Hour price:</strong>
                 {{ $ctrl.plan.hour_rate | defaultCurrency }}
             </li>
         </ul>
-        <h4>2. Read through terms and conditions</h4>
+        <h4>2. <span translate>Read through terms and conditions</span></h4>
         <longread text="$ctrl.plan.terms"></longread>
     </div>
     <div class="ibox-content">
@@ -23,13 +23,13 @@
             class="btn btn-primary pull-right"
             submit-button="$ctrl.onSubmit()">
             <i class="fa fa-shopping-cart"></i>
-            Submit <span class="hidden-xs">SLA request</span>
+            <span translate>Submit</span> <span class="hidden-xs" translate>SLA request</span>
         </button>
         <button
             type="button"
             cancel-button
             class="btn btn-default">
-            Cancel
+            <span translate>Cancel</span>
         </button>
     </div>
 </div>

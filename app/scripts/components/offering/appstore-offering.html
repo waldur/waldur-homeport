@@ -5,7 +5,7 @@
         <loading-spinner/>
       </div>
       <div class="ibox" ng-if="$ctrl.offering">
-        <div class="ibox-title"><h3>{{ $ctrl.offering.label }}</h3></div>
+        <div class="ibox-title"><h3>{{ $ctrl.offering.label | translate }}</h3></div>
         <div class="ibox-content">
           <appstore-form fields="$ctrl.offering" model="$ctrl.model" errors="$ctrl.errors"/>
         </div>

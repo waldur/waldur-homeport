@@ -2,10 +2,10 @@
     <loading-spinner/>
 </div>
 <div ng-if="!$ctrl.loading && $ctrl.comments.length == 0">
-    There are no comments yet.
+    <span translate>There are no comments yet.</span>
 </div>
 <div ng-if="!$ctrl.loading && $ctrl.erred">
-    Unable to load comments.
+    <span translate>Unable to load comments.</span>
 </div>
 <div ng-if="!$ctrl.loading && $ctrl.comments.length > 0"
      id="vertical-timeline"
@@ -19,8 +19,8 @@
                 <a ng-click="$ctrl.openUserDialog(item.user)">
                     {{ comment.author_name }}
                 </a>
-                commented:
-                {{ comment.description }}
+                <span translate>commented:</span>
+                {{ comment.description | translate }}
             </p>
             <span class="vertical-date small text-muted">
                 {{ ::comment.created | date:'medium' }}

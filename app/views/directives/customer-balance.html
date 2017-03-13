@@ -5,25 +5,25 @@
                  ng-click="toggle('plan')">
                 <div class="indicator-button__name">
                     <i class="icon fa-sliders"></i>
-                    Plan
+                    <span translate>Plan</span>
                     <i class="icon fa-angle-down"></i>
                 </div>
                 <div class="indicator-button__value">
-                    {{ plan.name || 'Default' }}
+                    {{(plan.name || 'Default') | translate }}
                 </div>
             </div>
             <div class="dropdown__menu"
                  ng-show="isShown('plan')">
                 <div class="dropdown__header">
                     <div class="icon close" ng-click="toggle('plan')"></div>
-                    Quota usage
+                    <span translate>Quota usage</span>
                 </div>
                 <div class="dropdown__content">
                     <div ng-repeat="quota in plan.quotas"
                          visible="{{ quota.name }}">
                         <div class="usage-row">
-                            <div class="usage-row__key">{{ quota.name | titleCase }}</div>
-                            <div class="usage-row__value">{{ quota.usage }} out of {{ quota.limit }}</div>
+                            <div class="usage-row__key">{{ quota.name | titleCase | translate }}</div>
+                            <div class="usage-row__value">{{ quota.usage }} <span translate>out of</span> {{ quota.limit }}</div>
                         </div>
                         <div class="usage-bar">
                             <div class="usage-bar__value" ng-style="{width: {{ quota.percent }} + '%'}"></div>
@@ -33,7 +33,7 @@
                 <a class="dropdown__action"
                    ng-show="showUpgradeButton"
                    ui-sref="organization.plans({uuid: model.uuid})">
-                   <i class="icon fa-cart-plus"></i> Upgrade
+                    <i class="icon fa-cart-plus"></i> <span translate>Upgrade</span>
                 </a>
             </div>
         </div>
@@ -43,10 +43,10 @@
         <div class="tab-link__item" ng-click="showPlan = !showPlan">
             <div class="tab-link__key">
                 <i class="icon fa-sliders"></i>
-                Plan
+                <span translate>Plan</span>
             </div>
             <div class="tab-link__value">
-                {{ plan.name || 'Default' }}
+                {{ (plan.name || 'Default') | translate }}
                 <i class="icon fa-angle-down"></i>
             </div>
         </div>
@@ -54,8 +54,8 @@
             <div ng-repeat="quota in plan.quotas"
                  visible="{{ quota.name }}">
                 <div class="usage-row">
-                    <div class="usage-row__key">{{ quota.name | titleCase }}</div>
-                    <div class="usage-row__value">{{ quota.usage }} out of {{ quota.limit }}</div>
+                    <div class="usage-row__key">{{ quota.name | titleCase | translate }}</div>
+                    <div class="usage-row__value">{{ quota.usage }} <span translate>out of</span> {{ quota.limit }}</div>
                 </div>
                 <div class="usage-bar">
                     <div class="usage-bar__value" ng-style="{width: {{ quota.percent }} + '%'}"></div>
@@ -63,7 +63,7 @@
             </div>
             <a class="button"
                ui-sref="organization.plans({uuid: model.uuid})">
-               <i class="icon fa-cart-plus"></i> Upgrade
+                <i class="icon fa-cart-plus"></i> <span translate>Upgrade</span>
             </a>
         </div>
     </div>
@@ -74,7 +74,7 @@
                  ng-click="toggle('balance')">
                 <div class="indicator-button__name">
                     <i class="icon fa-credit-card"></i>
-                    Balance
+                    <span translate>Balance</span>
                     <i class="icon fa-angle-down"></i>
                 </div>
                 <div class="indicator-button__value">
@@ -85,7 +85,7 @@
                  ng-if="isShown('balance')">
                 <div class="dropdown__header">
                     <div class="icon close" ng-click="toggle('balance')"></div>
-                    Balance
+                    <span translate>Balance</span>
                 </div>
                 <div class="dropdown__content">
                     <line-chart ng-if="showChart"
@@ -94,11 +94,11 @@
                                 chart-data="d3Data"></line-chart>
 
                     <div ng-if="!showChart">
-                        No changes for a month.
+                        <span translate>No changes for a month.</span>
                     </div>
 
                     <div class="usage-row add-amount" ng-show="showUpgradeButton">
-                        <div class="usage-row__key">Amount</div>
+                        <div class="usage-row__key"><span translate>Amount</span></div>
                         <div class="usage-row__value">
                             <form>
                                 <input type="number" min="1" max="10000" ng-model="amount">
@@ -110,7 +110,7 @@
                 <a class="dropdown__action"
                    ng-show="showUpgradeButton"
                    submit-button="addCredit(amount)">
-                   <i class="icon fa-cart-plus"></i> Add credit
+                    <i class="icon fa-cart-plus"></i> <span translate>Add credit</span>
                 </a>
             </div>
         </div>
@@ -120,7 +120,7 @@
         <div class="tab-link__item" ng-click="showBalance = !showBalance">
             <div class="tab-link__key">
                 <i class="icon fa-credit-card"></i>
-                Balance
+                <span translate>Balance</span>
             </div>
             <div class="tab-link__value">
                 {{ model.balance || 0 | defaultCurrency }}
@@ -133,7 +133,7 @@
                         chart-bottom="40"
                         chart-data="d3Data"></line-chart>
             <div class="usage-row add-amount" ng-show="showUpgradeButton">
-                <div class="usage-row__key">Amount</div>
+                <div class="usage-row__key"><span translate>Amount</span></div>
                 <div class="usage-row__value">
                     <form>
                         <input type="number" min="1" max="10000" ng-model="amount">
@@ -144,7 +144,7 @@
             <a class="button"
                ng-show="showUpgradeButton"
                submit-button="addCredit(amount)">
-               <i class="icon fa-cart-plus"></i> Add credit
+                <i class="icon fa-cart-plus"></i> <span translate>Add credit</span>
             </a>
         </div>
     </div>

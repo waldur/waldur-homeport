@@ -1,7 +1,7 @@
 <section detailscontent="checkbox avatar">
 
     <header>
-        <h4 ng-if="expandableOptions.headBlock == 'heading'" class="item-title">{{ expandableOptions.sectionTitle }}</h4>
+        <h4 ng-if="expandableOptions.headBlock == 'heading'" class="item-title">{{ expandableOptions.sectionTitle | translate }}</h4>
 
         <minipagination
                 page-models="expandableList[expandableOptions.listKey]"
@@ -19,15 +19,15 @@
                         <img gravatar-src="element[item.avatarSrc]" gravatar-size="60">
                     </div>
                     <a ui-sref="{{ item.entityDetailsLink }}"
-                       ng-switch-when="link">{{ element[item.entityDetailsLinkText] }}</a>
+                       ng-switch-when="link">{{ element[item.entityDetailsLinkText] | translate }}</a>
                 </span>
             </section>
         </li>
     </ul>
 
     <article ng-if="expandableOptions.addItemBlock" class="light-description">
-        {{ expandableOptions.articleBlockText }}
-        <a ui-sref="{{ expandableOptions.entitiesLinkRef }}">{{ expandableOptions.entitiesLinkText }}</a>.
+        {{ expandableOptions.articleBlockText | translate }}
+        <a ui-sref="{{ expandableOptions.entitiesLinkRef }}">{{ expandableOptions.entitiesLinkText | translate }}</a>.
     </article>
 
 </section>

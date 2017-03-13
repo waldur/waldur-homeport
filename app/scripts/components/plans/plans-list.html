@@ -3,7 +3,7 @@
 </div>
 <div ng-if="!PlanList.loading">
     <section class="content">
-        <h4 class="app-title">Choose new plan</h4>
+        <h4 class="app-title" translate>Choose new plan</h4>
         <div class="plans">
             <div class="plan" ng-repeat="plan in PlanList.list">
                 <div class="plan-item"
@@ -19,9 +19,9 @@
                                 {{ quota.value }} {{ PlanList.getPrettyQuotaName(quota.name) }}
                                 <span class="inline">
                                     <helpicon ng-if="quota.name === 'nc_resource_count'"
-                                              help-text="{{PlanList.helpIconMessage}}"></helpicon>
+                                              help-text="{{PlanList.helpIconMessage | translate}}"></helpicon>
                                 </span>
-                                <div class="usage">Usage: {{ PlanList.usage[quota.name] }}</div>
+                                <div class="usage"><span translate>Usage:</span> {{ PlanList.usage[quota.name] }}</div>
                             </td>
                         </tr>
                     </table>
@@ -31,10 +31,10 @@
         <div class="decision">
             <div class="col">
                 <a class="btn btn-primary" ng-class="{'disabled': !PlanList.selectedPlan}"
-                   submit-button="PlanList.createOrder()">Confirm changing your plan</a>
+                   submit-button="PlanList.createOrder()" translate>Confirm changing your plan</a>
             </div>
             <div class="col">
-                <a class="btn btn-default" ng-click="PlanList.cancel()">Cancel</a>
+                <a class="btn btn-default" ng-click="PlanList.cancel()" translate>Cancel</a>
             </div>
         </div>
     </section>
