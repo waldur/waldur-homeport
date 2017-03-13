@@ -15,6 +15,8 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
       this._super();
       this.rowFields.push('internal_ips');
       this.rowFields.push('external_ips');
+      this.rowFields.push('floating_ips');
+      this.rowFields.push('internal_ips_set');
     },
     getTableOptions: function() {
       var options = this._super();
