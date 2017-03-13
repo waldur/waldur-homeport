@@ -4,11 +4,11 @@ import { internalIpFormatter } from './openstack-instance-config';
 const FLOATING_IP_CHOICES = [
   {
     value: '',
-    label: gettext('Skip floating IP assignment'),
+    display_name: gettext('Skip floating IP assignment'),
   },
   {
     value: true,
-    label: gettext('Auto-assign floating IP'),
+    display_name: gettext('Auto-assign floating IP'),
   }
 ];
 
@@ -28,11 +28,11 @@ const openstackInstanceNetworks = {
 
     $onInit() {
       this.subnets = this.field.choices.subnets.map(subnet => ({
-        label: internalIpFormatter(subnet),
+        display_name: subnet.name,
         value: subnet.url,
       }));
       const floating_ips = this.field.choices.floating_ips.map(floating_ip => ({
-        label: floating_ip.address,
+        display_name: floating_ip.address,
         value: floating_ip.url,
       }));
       this.floating_ips = FLOATING_IP_CHOICES.concat(floating_ips);

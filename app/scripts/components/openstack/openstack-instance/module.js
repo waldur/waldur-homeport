@@ -4,6 +4,7 @@ import OpenStackInstanceConfig from './openstack-instance-config';
 import openstackInstanceSecurityGroupsField from './openstack-instance-security-groups-field';
 import openstackInstanceInternalIpsList from './openstack-instance-internal-ips-list';
 import openstackInstanceNetworks from './openstack-instance-networks';
+import openstackInstanceFloatingIps from './openstack-instance-floating-ips';
 import actionConfig from './actions';
 
 export default module => {
@@ -12,6 +13,7 @@ export default module => {
   module.component('openstackInstanceSecurityGroupsField', openstackInstanceSecurityGroupsField);
   module.component('openstackInstanceInternalIpsList', openstackInstanceInternalIpsList);
   module.component('openstackInstanceNetworks', openstackInstanceNetworks);
+  module.component('openstackInstanceFloatingIps', openstackInstanceFloatingIps);
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(stateConfig);

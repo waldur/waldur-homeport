@@ -1,8 +1,12 @@
 <table class="table table-borderless m-b-xs">
   <tbody>
     <tr ng-repeat="item in $ctrl.items">
-      <td class="p-l-n col-md-6">
+      <td class="col-md-6">
+        <span ng-if="item.address">
+          {{ item.subnet_name }}
+        </span>
         <select
+          ng-if="!item.address"
           ng-options="choice.value as choice.display_name for choice in $ctrl.subnets"
           ng-model="item.subnet"
           class="form-control">
@@ -10,14 +14,18 @@
         </select>
       </td>
       <td class="col-md-5">
+        <span ng-if="item.address">
+          {{ item.address }}
+        </span>
         <select
+          ng-if="!item.address"
           ng-options="choice.value as choice.display_name for choice in $ctrl.floating_ips"
           ng-model="item.floating_ip"
           ng-class="{disabled: !item.subnet}"
           class="form-control">
         </select>
       </td>
-      <td class="p-r-n">
+      <td>
         <button
           type="button"
           class="btn btn-default"

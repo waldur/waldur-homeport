@@ -79,7 +79,13 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         title: gettext('Update floating IPs'),
         fields: {
           floating_ips: {
-            type: 'multiselect',
+            resource_default_value: true,
+            component: 'openstackInstanceFloatingIps',
+            init: (field, resource) => {
+              field.internal_ips_set = resource.internal_ips_set;
+            },
+            display_name_field: 'address',
+            value_field: 'url',
           }
         }
       },
