@@ -1,47 +1,55 @@
-<table class="table table-borderless m-b-xs">
-  <tbody>
-    <tr ng-repeat="item in $ctrl.items">
-      <td class="col-md-6">
-        <span ng-if="item.address">
-          {{ item.subnet_name }}
-        </span>
-        <select
-          ng-if="!item.address"
-          ng-options="choice.value as choice.display_name for choice in $ctrl.subnets"
-          ng-model="item.subnet"
-          class="form-control">
-          <option value="" translate>Select subnet</option>
-        </select>
-      </td>
-      <td class="col-md-5">
-        <span ng-if="item.address">
-          {{ item.address }}
-        </span>
-        <select
-          ng-if="!item.address"
-          ng-options="choice.value as choice.display_name for choice in $ctrl.floating_ips"
-          ng-model="item.floating_ip"
-          ng-class="{disabled: !item.subnet}"
-          class="form-control">
-        </select>
-      </td>
-      <td>
-        <button
-          type="button"
-          class="btn btn-default"
-          uib-tooltip="{{ 'Delete' | translate }}"
-          ng-click="$ctrl.deleteItem(item)">
-          <i class="fa fa-trash-o"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div ng-if="$ctrl.subnets.length === 0" translate>
+  Instance is not connected to any internal subnets yet. Please connect it to internal subnet first.
+</div>
+<div ng-if="$ctrl.subnets.length > 0">
+  <div ng-if="$ctrl.items.length === 0" translate>
+    Instance does not have any floating IPs yet.
+  </div>
+  <table class="table table-borderless m-b-xs" ng-if="$ctrl.items.length > 0">
+    <tbody>
+      <tr ng-repeat="item in $ctrl.items">
+        <td class="col-md-6 p-l-n">
+          <span ng-if="item.address">
+            {{ item.subnet_name }}
+          </span>
+          <select
+            ng-if="!item.address"
+            ng-options="choice.value as choice.display_name for choice in $ctrl.subnets"
+            ng-model="item.subnet"
+            class="form-control">
+            <option value="" translate>Select subnet</option>
+          </select>
+        </td>
+        <td class="col-md-5">
+          <span ng-if="item.address">
+            {{ item.address }}
+          </span>
+          <select
+            ng-if="!item.address"
+            ng-options="choice.value as choice.display_name for choice in $ctrl.floating_ips"
+            ng-model="item.floating_ip"
+            ng-class="{disabled: !item.subnet}"
+            class="form-control">
+          </select>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-default"
+            uib-tooltip="{{ 'Delete' | translate }}"
+            ng-click="$ctrl.deleteItem(item)">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<button
-  type="button"
-  class="btn btn-default"
-  ng-click="$ctrl.addItem()">
-  <i class="fa fa-plus"></i>
-  <span translate>Add</span>
-</button>
+  <button
+    type="button"
+    class="btn btn-default"
+    ng-click="$ctrl.addItem()">
+    <i class="fa fa-plus"></i>
+    <span translate>Add</span>
+  </button>
+</div>

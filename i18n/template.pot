@@ -78,6 +78,7 @@ msgid "Activity stream"
 msgstr ""
 
 #: app/scripts/components/issues/issue-comments-form.html:17
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:53
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:38
 #: app/scripts/components/team/add-project-member.js:22
 msgid "Add"
@@ -253,6 +254,7 @@ msgstr ""
 msgid "Authentication events"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.js:7
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.js:11
 msgid "Auto-assign floating IP"
 msgstr ""
@@ -282,13 +284,13 @@ msgid "Backup schedule has been updated"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:60
+#: app/scripts/components/openstack/openstack-instance/module.js:62
 msgid "Backup schedules"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js:63
 #: app/scripts/components/openstack/openstack-backup/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:56
+#: app/scripts/components/openstack/openstack-instance/module.js:58
 msgid "Backups"
 msgstr ""
 
@@ -461,8 +463,8 @@ msgstr ""
 #: app/scripts/components/customer/customer-issues.js:31
 #: app/scripts/components/issues/issue-create-dialog.js:10
 #: app/scripts/components/offering/appstore-offering.html:16
+#: app/scripts/components/openstack/openstack-instance/actions.js:101
 #: app/scripts/components/openstack/openstack-instance/actions.js:50
-#: app/scripts/components/openstack/openstack-instance/actions.js:95
 #: app/scripts/components/openstack/openstack-tenant/actions.js:28
 #: app/scripts/components/openstack/openstack-tenant/actions.js:46
 #: app/scripts/components/openstack/openstack-tenant/actions.js:66
@@ -479,7 +481,7 @@ msgstr ""
 msgid "Create an account"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js:96
+#: app/scripts/components/openstack/openstack-instance/actions.js:102
 msgid "Create backup for"
 msgstr ""
 
@@ -599,6 +601,7 @@ msgstr ""
 msgid "Default tax percent"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:39
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
@@ -774,7 +777,7 @@ msgid "Export as"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:42
-#: app/scripts/components/resource/list/resource-vms-list.js:33
+#: app/scripts/components/resource/list/resource-vms-list.js:35
 msgid "External IP"
 msgstr ""
 
@@ -968,6 +971,10 @@ msgstr ""
 msgid "Instance"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:5
+msgid "Instance does not have any floating IPs yet."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:8
 msgid "Instance does not have any security groups yet."
 msgstr ""
@@ -976,12 +983,16 @@ msgstr ""
 msgid "Instance has been updated"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:1
+msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:30
-#: app/scripts/components/resource/list/resource-vms-list.js:24
+#: app/scripts/components/resource/list/resource-vms-list.js:26
 msgid "Internal IP"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:64
+#: app/scripts/components/openstack/openstack-instance/module.js:66
 msgid "Internal IPs"
 msgstr ""
 
@@ -2475,6 +2486,7 @@ msgstr ""
 msgid "Select size..."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:20
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:9
 msgid "Select subnet"
 msgstr ""
@@ -3138,7 +3150,7 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:52
+#: app/scripts/components/openstack/openstack-instance/module.js:54
 #: app/scripts/components/resource/list/resource-storage-tabs.html:5
 msgid "Volumes"
 msgstr ""
