@@ -16,9 +16,9 @@ function AuthActivationController($state, $stateParams, authService, ncUtilsFlas
     user_uuid: $stateParams.user_uuid,
     token: $stateParams.token
   }).then(function() {
-    ncUtilsFlash.info('Account has been activated');
+    ncUtilsFlash.info(gettext('Account has been activated'));
     $state.go('initialdata.view');
   }, function() {
-    ncUtilsFlash.error('Unable to activate account');
+    ncUtilsFlash.error(gettext('Unable to activate account'));
   });
 }

@@ -16,15 +16,15 @@ function ProjectPrivateCloudsTabController(BaseProjectResourcesTabController, EN
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = 'You have no private clouds yet';
-      options.noMatchesText = 'No private clouds found matching filter.';
+      options.noDataText = gettext('You have no private clouds yet');
+      options.noMatchesText = gettext('No private clouds found matching filter.');
       return options;
     },
     getImportTitle: function() {
-      return 'Import private cloud';
+      return gettext('Import private cloud');
     },
     getCreateTitle: function() {
-      return 'Add private cloud';
+      return gettext('Add private cloud');
     }
   });
   controllerScope.__proto__ = new ResourceController();

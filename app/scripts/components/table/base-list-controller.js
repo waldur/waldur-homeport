@@ -129,7 +129,7 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
     },
     remove: function(model) {
       var vm = this.controllerScope;
-      var confirmDelete = confirm('Confirm deletion?');
+      var confirmDelete = confirm(gettext('Confirm deletion?'));
       if (confirmDelete) {
         vm.removeInstance(model).then(function() {
           vm.afterInstanceRemove(model);

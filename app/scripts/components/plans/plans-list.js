@@ -23,7 +23,7 @@ function PlansListController(
         controllerScope.loading = false;
       });
       this.selectedPlan = null;
-      this.helpIconMessage = 'Both VMs and applications are counted as resources';
+      this.helpIconMessage = gettext('Both VMs and applications are counted as resources');
     },
 
     loadInitial: function() {

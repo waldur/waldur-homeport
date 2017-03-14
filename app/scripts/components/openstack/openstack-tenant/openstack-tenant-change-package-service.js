@@ -27,17 +27,17 @@ export default class openstackTenantChangePackageService {
   saveData(context) {
     if (this.compareTemplates(context.newTemplate, context.template)) {
       return this.createIssue(context).then(issue => {
-        this.ncUtilsFlash.success('Request to change tenant package has been created.');
+        this.ncUtilsFlash.success(gettext('Request to change tenant package has been created.'));
         return this.$state.go('support.detail', {uuid: issue.uuid});
       }).catch(response => {
-        this.ncUtilsFlash.error('Unable to create request to change tenant package.');
+        this.ncUtilsFlash.error(gettext('Unable to create request to change tenant package.'));
         return this.$q.reject(response);
       });
     } else {
       return this.extendPackage(context).then(() => {
-        this.ncUtilsFlash.success('Tenant package has been upgraded.');
+        this.ncUtilsFlash.success(gettext('Tenant package has been upgraded.'));
       }).catch(response => {
-        this.ncUtilsFlash.error('Unable to upgrade tenant package.');
+        this.ncUtilsFlash.error(gettext('Unable to upgrade tenant package.'));
         return this.$q.reject(response);
       });
     }
@@ -95,7 +95,7 @@ export default class openstackTenantChangePackageService {
   }
 
   formatIssueSummary(context) {
-    return `Please downgrade tenant '${context.tenant.name}' to VPC '${context.newTemplate.name}'`;
+    return `${gettext('Please downgrade tenant')} '${context.tenant.name}' ${gettext('to VPC')} '${context.newTemplate.name}'`;
   }
 
   formatIssueDescription(context) {

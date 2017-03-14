@@ -7,7 +7,7 @@ const paymentApprove = {
     // @ngInject
     let qs = ncUtils.parseQueryString(ncUtils.getQueryString());
     if (!qs.paymentId || !qs.PayerID || !qs.token) {
-      ncUtilsFlash.error('Invalid URL. Unable to parse payment details.');
+      ncUtilsFlash.error(gettext('Invalid URL. Unable to parse payment details.'));
       return;
     }
     paymentsService.approve({
@@ -15,7 +15,7 @@ const paymentApprove = {
       payer_id: qs.PayerID,
       token: qs.token
     }).then(() => {
-      ncUtilsFlash.success('Payment has been processed successfully.');
+      ncUtilsFlash.success(gettext('Payment has been processed successfully.'));
       currentStateService.reloadCurrentCustomer(function() {
         $rootScope.$broadcast('customerBalance:refresh');
       });

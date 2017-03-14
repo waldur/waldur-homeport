@@ -82,19 +82,19 @@ function ProviderProjectsController(
       var add_promises = this.choices.filter(function(choice) {
         return choice.selected && !choice.link_url;
       }).map(function(choice) {
-        choice.subtitle = 'Adding link';
+        choice.subtitle = gettext('Adding link');
         return joinServiceProjectLinkService.addLink(
           $scope.service.service_type,
           $scope.service.uuid,
           choice.project_url).then(function(link) {
             choice.link_url = link.url;
-            choice.subtitle = 'Link created';
+            choice.subtitle = gettext('Link created');
           }).catch(function(response) {
             var reason = '';
             if (response.data && response.data.detail) {
               reason = response.data.detail;
             }
-            choice.subtitle = 'Unable to create link. ' + reason;
+            choice.subtitle = gettext('Unable to create link.') + ' ' + reason;
             choice.selected = false;
           });
       });
@@ -102,16 +102,16 @@ function ProviderProjectsController(
       var delete_promises = this.choices.filter(function(choice) {
         return !choice.selected && choice.link_url;
       }).map(function(choice) {
-        choice.subtitle = 'Removing link';
+        choice.subtitle = gettext('Removing link');
         return joinServiceProjectLinkService.$deleteByUrl(choice.link_url).then(function() {
           choice.link_url = null;
-          choice.subtitle = 'Link removed';
+          choice.subtitle = gettext('Link removed');
         }).catch(function(response) {
           var reason = '';
           if (response.data && response.data.detail) {
             reason = response.data.detail;
           }
-          choice.subtitle = 'Unable to delete link. ' + reason;
+          choice.subtitle = gettext('Unable to delete link.') + ' ' + reason;
           choice.selected = true;
         });
       });

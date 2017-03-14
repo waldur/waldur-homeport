@@ -11,41 +11,41 @@ function formatCrontab(cronService, baseFrequency, $filter) {
 
     switch(base) {
     case baseFrequency.minute:
-      return 'Every minute';
+      return gettext('Every minute');
 
     case baseFrequency.hour:
       if (minuteValues) {
-        return `Every hour at ${minuteValues} past the hour`;
+        return `${gettext('Every hour at')} ${minuteValues} ${gettext('past the hour')}`;
       } else {
-        return 'Every hour';
+        return gettext('Every hour');
       }
 
     case baseFrequency.day:
       if (angular.isDefined(hourValues)) {
-        return `Every day ${formatTime()}`;
+        return `${gettext('Every day')} ${formatTime()}`;
       } else {
-        return 'Every day';
+        return gettext('Every day');
       }
 
     case baseFrequency.week:
       if (angular.isDefined(dayValues)) {
-        return `Every week on ${formatDay()} ${formatTime()}`;
+        return `${gettext('Every week on')} ${formatDay()} ${formatTime()}`;
       } else {
-        return 'Every week';
+        return gettext('Every week');
       }
 
     case baseFrequency.month:
       if (angular.isDefined(dayOfMonthValues)) {
-        return `Every month on the ${formatNumeral()} ${formatTime()}`;
+        return `${gettext('Every month on the')} ${formatNumeral()} ${formatTime()}`;
       } else {
-        return 'Every month';
+        return gettext('Every month');
       }
 
     case baseFrequency.year:
       if (angular.isDefined(dayOfMonthValues)) {
-        return `Every month on the ${formatNumeral()} of ${formatMonth()} ${formatTime()}`;
+        return `${gettext('Every month on the')} ${formatNumeral()} of ${formatMonth()} ${formatTime()}`;
       } else {
-        return 'Every year';
+        return gettext('Every year');
       }
 
     default:

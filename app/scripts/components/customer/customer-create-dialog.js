@@ -41,13 +41,15 @@ function CustomerCreateDialogController(customersService, $scope, $rootScope, $s
         $rootScope.$broadcast('refreshCounts');
 
         if (vm.customer) {
-          ncUtilsFlash.success('Organization {} is updated'.replace('{}', customer.name));
+          ncUtilsFlash.success('{org} {} {is_upd}'.replace('{}', customer.name)
+            .replace('{org}', gettext('Organization'))
+            .replace('{is_upd}', gettext('is updated')));
           $rootScope.$broadcast('refreshCustomerList', {
             model: customer,
             update: true
           });
         } else {
-          ncUtilsFlash.success('Organization has been created.');
+          ncUtilsFlash.success(gettext('Organization has been created.'));
           $rootScope.$broadcast('refreshCustomerList', {
             model: customer,
             new: true,

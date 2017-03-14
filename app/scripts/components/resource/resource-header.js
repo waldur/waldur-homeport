@@ -62,7 +62,7 @@ const resourceHeader = {
         this.model = model;
       }, error => {
         if (error.status === 404) {
-          this.ncUtilsFlash.error('Resource is gone.');
+          this.ncUtilsFlash.error(gettext('Resource is gone.'));
           this.modelNotFound();
         }
       });

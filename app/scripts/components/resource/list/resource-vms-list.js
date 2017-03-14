@@ -20,8 +20,8 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = 'You have no virtual machines yet';
-      options.noMatchesText = 'No virtual machines found matching filter.';
+      options.noDataText = gettext('You have no virtual machines yet');
+      options.noMatchesText = gettext('No virtual machines found matching filter.');
       options.columns.push({
         title: gettext('Internal IP'),
         render: function(row) {
@@ -43,10 +43,10 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
       return options;
     },
     getImportTitle: function() {
-      return 'Import virtual machine';
+      return gettext('Import virtual machine');
     },
     getCreateTitle: function() {
-      return 'Add virtual machine';
+      return gettext('Add virtual machine');
     },
   });
   controllerScope.__proto__ = new ResourceController();

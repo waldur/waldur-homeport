@@ -59,7 +59,7 @@ const issueCreateDialog = {
       this.saving = true;
       return this.service.createIssue(issue).then(issue => {
         this.service.clearAllCacheForCurrentEndpoint();
-        this.ncUtilsFlash.success(`Request ${issue.key} has been created`);
+        this.ncUtilsFlash.success(`${issue.key} ${gettext('request  has been created')}`);
         return this.$state.go('support.detail', {uuid: issue.uuid}).then(() => {
           this.close();
         });

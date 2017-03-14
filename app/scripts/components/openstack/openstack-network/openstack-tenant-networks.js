@@ -29,8 +29,8 @@ function TenantNetworksController(
     getTableOptions: function() {
       var options = this._super();
       var vm = this;
-      options.noDataText = 'No networks yet.';
-      options.noMatchesText = 'No networks found matching filter.';
+      options.noDataText = gettext('No networks yet.');
+      options.noMatchesText = gettext('No networks found matching filter.');
       options.columns = [
         {
           title: gettext('Name'),

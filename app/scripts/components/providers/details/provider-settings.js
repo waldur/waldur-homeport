@@ -120,10 +120,10 @@ function ProviderSettingsController(
     updateServiceName: function(name) {
       return joinService.$update(null, $scope.service.url, {name: name}).then(function() {
         $scope.service.name = name;
-        ncUtilsFlash.success('Provider name has been updated');
+        ncUtilsFlash.success(gettext('Provider name has been updated'));
         $rootScope.$broadcast('refreshProviderList');
       }).catch(function() {
-        ncUtilsFlash.success('Unable to update provider name');
+        ncUtilsFlash.success(gettext('Unable to update provider name'));
       });
     },
     updateSettings: function() {
@@ -153,7 +153,7 @@ function ProviderSettingsController(
         message += (service.options[name] ? service.options[name].label : name) + ': ' + response.data[name];
       }
       if (message) {
-        ncUtilsFlash.error('Unable to save provider. ' + message);
+        ncUtilsFlash.error(gettext('Unable to save provider.') + ' ' + message);
       }
     },
     hasChanged: function() {

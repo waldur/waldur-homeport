@@ -77,14 +77,14 @@ export default function actionUtilsService(
     let confirmTextSuffix = custom && custom.delete_message || '';
     if (name === 'destroy') {
       var confirmText = (model.state === 'Erred')
-        ? 'Are you sure you want to delete a {resource_type} in an Erred state?' +
-          ' A cleanup attempt will be performed if you choose so. {confirmTextSuffix}'
-        : 'Are you sure you want to delete a {resource_type}? {confirmTextSuffix}';
+        ? `Are you sure you want to delete a ${model.resource_type} in an Erred state? 
+          A cleanup attempt will be performed if you choose so. ${confirmTextSuffix}`
+        : `Are you sure you want to delete a ${model.resource_type}? ${confirmTextSuffix}`;
       return confirm(confirmText
         .replace('{resource_type}', model.resource_type)
         .replace('{confirmTextSuffix}', confirmTextSuffix));
     } else {
-      return confirm('Are you sure? This action cannot be undone.');
+      return confirm(gettext('Are you sure? This action cannot be undone.'));
     }
   };
 
@@ -99,7 +99,7 @@ export default function actionUtilsService(
         }
         vm.handleActionSuccess(action);
       } else if (response.status === 204) {
-        ncUtilsFlash.success('Resource has been deleted');
+        ncUtilsFlash.success(gettext('Resource has been deleted'));
         controller.afterInstanceRemove(resource);
       } else {
         vm.handleActionSuccess(action);
@@ -111,9 +111,8 @@ export default function actionUtilsService(
   };
 
   this.handleActionSuccess = function(action) {
-    var template = action.successMessage || 'Request to {action} has been accepted';
-    var message = template.replace('{action}', action.title.toLowerCase());
-    ncUtilsFlash.success(message);
+    var template = action.successMessage || `${gettext('Request to')} ${action.title.toLowerCase()} ${gettext('has been accepted')}`;
+    ncUtilsFlash.success(template);
   };
 
   this.openActionDialog = function(controller, resource, name, action) {

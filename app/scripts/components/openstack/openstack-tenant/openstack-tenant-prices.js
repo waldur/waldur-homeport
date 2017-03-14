@@ -103,7 +103,7 @@ const openstackTenantPrices = {
       }).then(templates => {
         if (templates.length !== 1) {
           return this.$q.reject({
-            data: 'Provider package is not defined.'
+            data: gettext('Provider package is not defined.')
           });
         } else {
           return templates[0];

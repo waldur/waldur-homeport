@@ -2,17 +2,17 @@
 export default function resourceUtils(ncUtils, ncServiceUtils, authService, $filter) {
   return {
     setAccessInfo: function(resource) {
-      resource.access_info_text = 'No access info';
+      resource.access_info_text = gettext('No access info');
       if (!resource.access_url) {
         return;
       }
 
       if (ncUtils.startsWith(resource.access_url, 'http')) {
         resource.access_info_url = resource.access_url;
-        resource.access_info_text = 'Open';
+        resource.access_info_text = gettext('Open');
 
         if (ncUtils.endsWith(resource.access_url, '/rdp/')) {
-          resource.access_info_text = 'Connect';
+          resource.access_info_text = gettext('Connect');
           resource.access_info_url = authService.getDownloadLink(resource.access_url);
         }
       } else if (angular.isArray(resource.access_url)) {

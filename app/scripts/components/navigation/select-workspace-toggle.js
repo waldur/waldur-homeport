@@ -57,7 +57,7 @@ class SelectWorkspaceToggleController {
 
   getTooltip() {
     if (!this.hasCustomer) {
-      return 'You don\'t have any organization yet';
+      return gettext('You don\'t have any organization yet');
     }
   }
 

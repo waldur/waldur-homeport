@@ -28,8 +28,8 @@ function VolumesListController(BaseProjectResourcesTabController, ncUtils, $stat
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = 'You have no volumes yet.';
-      options.noMatchesText = 'No volumes found matching filter.';
+      options.noDataText = gettext('You have no volumes yet.');
+      options.noMatchesText = gettext('No volumes found matching filter.');
       options.columns.push({
         title: gettext('Size'),
         className: 'all',
@@ -58,10 +58,10 @@ function VolumesListController(BaseProjectResourcesTabController, ncUtils, $stat
       return options;
     },
     getImportTitle: function() {
-      return 'Import volumes';
+      return gettext('Import volumes');
     },
     getCreateTitle: function() {
-      return 'Add volumes';
+      return gettext('Add volumes');
     }
   });
   controllerScope.__proto__ = new ResourceController();

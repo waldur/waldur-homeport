@@ -86,7 +86,7 @@ function CustomerDeleteController(
           }
         });
       }
-      var confirmDelete = confirm('Confirm deletion?');
+      var confirmDelete = confirm(gettext('Confirm deletion?'));
       if (confirmDelete) {
         currentStateService.setCustomer(null);
         this.customer.$delete().then(function() {

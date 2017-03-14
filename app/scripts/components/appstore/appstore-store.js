@@ -300,14 +300,14 @@ function AppStoreController(
     },
     getServiceDisabledReason: function(service) {
       if (service.state === 'Erred') {
-        return 'Provider is in erred state.';
+        return gettext('Provider is in erred state.');
       } else if (service.reachedLimit) {
-        return 'All provider quotas have reached limit.';
+        return gettext('All provider quotas have reached limit.');
       }
     },
     getServiceWarningMessage: function(service) {
       if (service.reachedThreshold) {
-        return 'Provider quota have reached threshold.';
+        return gettext('Provider quota have reached threshold.');
       }
     },
     canSave: function() {
@@ -323,7 +323,7 @@ function AppStoreController(
     },
     getTooltip: function() {
       if (!this.instance) {
-        return 'Instance is not configured';
+        return gettext('Instance is not configured');
       }
       var fields = [];
       for (var name in this.allFormOptions) {
@@ -333,7 +333,7 @@ function AppStoreController(
         }
       }
       if (fields.length > 0) {
-        return 'Please specify ' + fields.join(', ').toLowerCase();
+        return gettext('Please specify') + ' ' + fields.join(', ').toLowerCase();
       }
     },
     getResourceUrl: function() {
@@ -385,7 +385,7 @@ function AppStoreController(
           }
         }
       } else {
-        message = 'Server error occurred';
+        message = gettext('Server error occurred');
       }
       ncUtilsFlash.error(message);
     },

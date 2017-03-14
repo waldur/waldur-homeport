@@ -33,7 +33,7 @@ function ContractsListController(
         entityData: {
           noDataText: gettext('You have no SLAs yet.'),
           createLink: 'appstore.premiumSupport',
-          createLinkText: 'Add SLA',
+          createLinkText: gettext('Add SLA'),
           expandable: true,
           hideActionButtons: true
         },

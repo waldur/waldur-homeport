@@ -50,7 +50,7 @@ export class invitationUtilsService {
 
   acceptInvitation(token) {
     return this.invitationService.accept(token).then(() => {
-      this.ncUtilsFlash.success('Your invitation was accepted');
+      this.ncUtilsFlash.success(gettext('Your invitation was accepted'));
       this.invitationService.clearInvitationToken();
       this.$rootScope.$broadcast('refreshCustomerList', {updateSignal: true});
     }).catch(this.showError.bind(this));
@@ -58,12 +58,12 @@ export class invitationUtilsService {
 
   showError(response) {
     if (response.status === 404) {
-      this.ncUtilsFlash.error('Invitation is not found');
+      this.ncUtilsFlash.error(gettext('Invitation is not found'));
     } else if (response.status === 400) {
       this.invitationService.clearInvitationToken();
-      this.ncUtilsFlash.error('Invitation is not valid');
+      this.ncUtilsFlash.error(gettext('Invitation is not valid'));
     } else if (response.status === 500) {
-      this.ncUtilsFlash.error('Internal server error occurred. Please try again or contact support.');
+      this.ncUtilsFlash.error(gettext('Internal server error occurred. Please try again or contact support.'));
     }
   }
 }

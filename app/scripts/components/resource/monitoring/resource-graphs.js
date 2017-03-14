@@ -17,8 +17,8 @@ const resourceGraphs = {
       if (host) {
         this.loadGraphs(host.uuid);
       } else {
-        this.cpuGraphError = 'Not enough data for chart';
-        this.ramGraphError = 'Not enough data for chart';
+        this.cpuGraphError = gettext('Not enough data for chart');
+        this.ramGraphError = gettext('Not enough data for chart');
       }
     }
 
@@ -52,7 +52,7 @@ const resourceGraphs = {
       return this.zabbixHostsService.getList(chartQuery)
           .then(items => this.parseData(items))
           .then(data => this.cpuGraphData = data)
-          .catch(() => this.cpuGraphError = 'Chart is not available at this moment');
+          .catch(() => this.cpuGraphError = gettext('Chart is not available at this moment'));
     }
 
     loadRamChart(query) {
@@ -63,7 +63,7 @@ const resourceGraphs = {
       return this.zabbixHostsService.getList(chartQuery)
           .then(items => this.parseData(items))
           .then(data => this.ramGraphData = data)
-          .catch(() => this.ramGraphError = 'Chart is not available at this moment');
+          .catch(() => this.ramGraphError = gettext('Chart is not available at this moment'));
     }
 
     parseData(items) {

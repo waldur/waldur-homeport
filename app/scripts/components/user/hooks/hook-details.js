@@ -63,10 +63,10 @@ function HookDetailsController(hooksService, eventsService, ncUtilsFlash, $filte
     vm.instance.event_groups = getSelected();
     if (vm.instance.uuid) {
       promise = hooksService.update(vm.instance);
-      message = 'Notification has been updated';
+      message = gettext('Notification has been updated');
     } else {
       promise = hooksService.create(vm.instance);
-      message = 'Notification has been created';
+      message = gettext('Notification has been created');
     }
     return promise.then(function() {
       ncUtilsFlash.success(message);

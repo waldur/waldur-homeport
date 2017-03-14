@@ -104,7 +104,7 @@ function CustomerUsersListController(
         return item.role === roleName;
       });
       if (filteredProjects.length === 0) {
-        return 'No projects are assigned to this role';
+        return gettext('No projects are assigned to this role');
       }
       return filteredProjects.map(function(item) {
         var projectName = item.name;
