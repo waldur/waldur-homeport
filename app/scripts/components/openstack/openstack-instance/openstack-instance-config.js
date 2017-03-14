@@ -7,8 +7,7 @@ export default {
     'data_volume_size',
     'ssh_public_key',
     'security_groups',
-    'internal_ips_set',
-    'floating_ip',
+    'networks',
     'description',
     'user_data'
   ],
@@ -113,27 +112,25 @@ export default {
         url: group.value
       }))
     },
-    floating_ip: {
-      label: gettext('Floating IP'),
-      component: 'openstackInstanceFloatingIp',
-      formatter: floatingIPFormatter
-    },
-    internal_ips_set: {
-      type: 'multiselect',
-      label: gettext('SubNets'),
-      resource: 'openstacktenant-subnets',
-      parser: subnet => ({
-        value: subnet.url,
-        display_name: internalIpFormatter(subnet),
-        object: subnet
-      }),
-      serializer: subnets => subnets.map(subnet => ({ subnet: subnet.value })),
-      init: (field, model) => (
-        model[field.name] = field.choices.map(choice => ({
-          value: choice.url,
-          display_name: internalIpFormatter(choice)
-        }))
-      )
+    networks: {
+      label: gettext('Networks'),
+      component: 'openstackInstanceNetworks',
+      resources: context => ({
+        subnets: {
+          endpoint: 'openstacktenant-subnets',
+          params: {
+            settings_uuid: context.settings_uuid,
+          }
+        },
+        floating_ips: {
+          endpoint: 'openstacktenant-floating-ips',
+          params: {
+            settings_uuid: context.settings_uuid,
+            is_booked: false,
+            runtime_state: 'DOWN',
+          }
+        }
+      })
     },
     description: {
       type: 'text',
@@ -210,8 +207,4 @@ function flavorValidator(model, choice) {
     return true;
   }
   return false;
-}
-
-function floatingIPFormatter($filter, value) {
-  return value.address;
 }

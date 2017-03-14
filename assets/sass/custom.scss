@@ -140,7 +140,11 @@ body.landing {
 }
 
 .p-r-n {
-  padding-right: none;
+  padding-right: 0 !important;
+}
+
+.p-l-n {
+  padding-left: 0 !important;
 }
 
 .table-borderless tbody tr td,
