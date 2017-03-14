@@ -10,7 +10,7 @@
                 <span class="chart-name" translate>Current usage</span>
                 <pie-chart chart-data="DashboardController.currentUsageData"
                            chart-controller="DashboardController"></pie-chart>
-                <div><span translate>Current plan:</span>
+                <div><span translate>Current plan</span>:
                     <a ui-sref="organization.plans({uuid: DashboardController.currentCustomer.uuid})">
                         {{DashboardController.currentPlan}}
                     </a>

@@ -2,12 +2,12 @@
     <h3 class="modal-title" translate>Extend OpenStack volume</h3>
 </div>
 <div class="modal-body">
-    <p><strong translate>Volume name:</strong> {{ resource.name }}</p>
+    <p><strong><span translate>Volume name</span>:</strong> {{ resource.name }}</p>
 
-    <p><strong translate>Current size:</strong> {{ resource.size | filesize }}</p>
+    <p><strong><span translate>Current size</span>:</strong> {{ resource.size | filesize }}</p>
 
     <div class="form-group">
-        <label class="control-label" for="newSize" translate>New size:</label>
+        <label class="control-label" for="newSize"><span translate>New size</span>:</label>
         <div class="input-group">
             <input class="form-control"
                    id="newSize"

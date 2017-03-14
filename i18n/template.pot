@@ -1185,10 +1185,6 @@ msgstr ""
 msgid "Homepage"
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-summary.html:21
-msgid "Hour price"
-msgstr ""
-
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:13
 msgid "Hour price:"
 msgstr ""

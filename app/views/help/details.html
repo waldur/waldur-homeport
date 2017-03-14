@@ -1,24 +1,20 @@
 <div>
     <div class="container">
-        <h1 ng-if="['alerts', 'events'].indexOf(HelpDetails.model.name) === -1">
-            <span translate>How to obtain credentials for</span> {{ HelpDetails.model.name | translate }}
-        </h1>
-        <h1 ng-if="['alerts', 'events'].indexOf(HelpDetails.model.name) !== -1">
-            <span translate>List of supported</span> {{ HelpDetails.model.name | translate }}
-        </h1>
+        <h1 ng-if="['alerts', 'events'].indexOf(HelpDetails.model.name) === -1">How to obtain credentials for {{ HelpDetails.model.name }}</h1>
+        <h1 ng-if="['alerts', 'events'].indexOf(HelpDetails.model.name) !== -1">List of supported {{ HelpDetails.model.name }}</h1>
     </div>
     <div class="white-box">
         <div class="instruction-page" ng-if="HelpDetails.model.type !== 'sshKeys'
         && HelpDetails.model.type !== 'providers'
         && ['alertsList', 'eventsList'].indexOf(HelpDetails.model.type) === -1">
-            <span translate>Help page is not available</span>
+            Help page is not available
         </div>
         <div class="instruction-page"
-            ng-if="HelpDetails.model.type == 'sshKeys'"
-            ng-include="'views/help/ssh-keys.html'"></div>
+             ng-if="HelpDetails.model.type == 'sshKeys'"
+             ng-include="'views/help/ssh-keys.html'"></div>
         <div class="instruction-page"
-            ng-if="['alertsList', 'eventsList'].indexOf(HelpDetails.model.type) !== -1"
-            ng-include="'views/help/alerts-events-list.html'"></div>
+             ng-if="['alertsList', 'eventsList'].indexOf(HelpDetails.model.type) !== -1"
+             ng-include="'views/help/alerts-events-list.html'"></div>
         <div class="instruction-page" ng-if="HelpDetails.model.type == 'providers'">
             <div class="">
                 <image-box image="static/images/help/{{ HelpDetails.model.key.toLowerCase() }}_tokens.png"></image-box>
@@ -26,75 +22,59 @@
             <div class="instruction-content" ng-if="HelpDetails.model">
                 <div ng-if="HelpDetails.model.key == 'Azure'">
                     <div>
-                        <span translate>Azure requires generation of X.509 certificates which will be used for securing the Waldur Azure API connections.
-                            You need to generate two separate files:</span> <br/>
-                        <span translate>azure_cert.pem - which needs to be uploaded within Waldur "Create provider" form</span> <br/>
-                        <span translate>azure_cert.cer - which needs to be uploaded within Azure Management Console (please see screenshot on the left)</span> <br/>
+                        Azure requires generation of X.509 certificates which will be used for securing the Waldur Azure API connections.
+                        You need to generate two separate files: <br/>
+                        azure_cert.pem - which needs to be uploaded within Waldur "Create provider" form <br/>
+                        azure_cert.cer - which needs to be uploaded within Azure Management Console (please see screenshot on the left) <br/>
                     </div>
                     <div>
-                        <b translate>On Linux</b>, <span translate>you can generate the certificate files using the commands shown below:</span><br/>
-                        <span translate>generating azure_cert.pem</span><br/>
+                        <b>On Linux</b>, you can generate the certificate files using the commands shown below:<br/>
+                        generating azure_cert.pem<br/>
                         <pre class="code">openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout azure_cert.pem -out azure_cert.pem</pre>
-                        <span translate>generating azure_cert.cer</span><br/>
+                        generating azure_cert.cer<br/>
                         <pre class="code">openssl x509 -inform pem -in azure_cert.pem -outform der -out azure_cert.cer</pre>
                     </div>
                     <div>
                         <p>
-                            <b translate>Generating certificate on Windows</b>
+                            <b>Generating certificate on Windows</b>
                         </p>
                         <p>
-                            <span translate>The Windows Software Development Kit for Windows 8 (possibly you will need to install it) includes the Certificate Creation Tool, MakeCert.exe.</span><br/>
-                            <span translate>If you are using Windows 8.1, enter following command in the command prompt to generate a self-signed certificate.</span><br/>
-                            <span translate>The certificate name should be changed in both places:</span>
-                            <pre class="code">"C:\Program Files (x86)\Windows Kits\8.1\bin\x86\makecert.exe" -sky exchange -r -n "CN=certificate_name" -pe -a sha256 -len 2048 -ss My "certificate_name.cer"</pre>
+                            The Windows Software Development Kit for Windows 8 (possibly you will need to install it) includes the Certificate Creation Tool, MakeCert.exe.<br/>
+                            If you are using Windows 8.1, enter following command in the command prompt to generate a self-signed certificate.<br/>
+                            The certificate name should be changed in both places:
+                        <pre class="code">"C:\Program Files (x86)\Windows Kits\8.1\bin\x86\makecert.exe" -sky exchange -r -n "CN=certificate_name" -pe -a sha256 -len 2048 -ss My "certificate_name.cer"</pre>
                         </p>
                         <p>
-                            <span translate>You can create validity periods for the certificate, using the -b (beginning) and -e (end) options.</span><br/>
-                            <span translate>You will see “Succeeded” message after completing this procedure.</span><br/>
-                            <span translate>Now when certificate is created, a .cer file for the certificate will be written to your current directory, and the certificate will be saved to the machine’s certificate store.</span>
+                            You can create validity periods for the certificate, using the -b (beginning) and -e (end) options.<br/>
+                            You will see “Succeeded” message after completing this procedure.<br/>
+                            Now when certificate is created, a .cer file for the certificate will be written to your current directory, and the certificate will be saved to the machine’s certificate store.
                         </p>
 
                     </div>
                 </div>
                 <div ng-if="HelpDetails.model.key == 'Amazon'">
-                    <span translate>Amazon EC2 API access requires Access Key ID and Secret Access Key that must be generated if not already existing.
-                        In addition, API access policy needs to be attached allowing modification access for the resources.</span>
+                    Amazon EC2 API access requires Access Key ID and Secret Access Key that must be generated if not already existing.
+                    In addition, API access policy needs to be attached allowing modification access for the resources.
                     <ol>
-                        <li><span translate>Go to the</span> <b translate>Security Credentials</b> <span translate>section.</span></li>
-                        <li><span translate>Click on the</span> <b translate>Users</b> <span translate>tab.</span></li>
-                        <li>
-                            <span translate>Select the user by clicking on its username.
-                                If you don't have a user, create it by clicking on the
-                            </span> <b translate>Create New Users</b>
-                            <span translate>button.</span>
-                        </li>
-                        <li>
-                            <span translate>Navigate to the</span> <b translate>Permissions</b>
-                            <span translate>tab and click on the</span> <b translate>Attach Policy</b>
-                            <span translate>button. Select</span> <b translate>AmazonEC2FullAccess</b>
-                            <span translate>and click</span> <b translate>Attach Policy</b>.
-                        </li>
-                        <li><span translate>Navigate to the</span> <b translate>Security Credentials</b>
-                            <span translate>tab and click on the</span> <b translate>Create Access Key</b>
-                            <span translate>button to generate new access key.</span>
-                            <span translate>You can check newly created credentials by clicking on the</span>
-                            <b translate>Show User Security Credentials</b> <span translate>button in the pop-up.</span>
-                        </li>
+                        <li>Go to the <b>Security Credentials</b> section.</li>
+                        <li>Click on the <b>Users</b> tab.</li>
+                        <li>Select the user by clicking on its username. If you don't have a user, create it by clicking on the <b>Create New Users</b> button.</li>
+                        <li>Navigate to the <b>Permissions</b> tab and click on the <b>Attach Policy</b> button. Select <b>AmazonEC2FullAccess</b> and click <b>Attach Policy</b>.</li>
+                        <li>Navigate to the <b>Security Credentials</b> tab and click on the <b>Create Access Key</b> button to generate new access key.
+                            You can check newly created credentials by clicking on the <b>Show User Security Credentials</b> button in the pop-up.</li>
                     </ol>
                 </div>
-                <p ng-if="HelpDetails.model.key == 'DigitalOcean'" translate>
-                In order to add DigitalOcean IaaS you need to have a valid DigitalOcean account and API access token.
-                DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to manage your resources through Waldur.
+                <p ng-if="HelpDetails.model.key == 'DigitalOcean'">
+                    In order to add DigitalOcean IaaS you need to have a valid DigitalOcean account and API access token.
+                    DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to manage your resources through Waldur.
                 </p>
-                <p ng-if="HelpDetails.model.link">
-                    <a href="{{ HelpDetails.model.link }}" target="_blank" translate>Instructions on the official site</a>
-                </p>
+                <p ng-if="HelpDetails.model.link"><a href="{{ HelpDetails.model.link }}" target="_blank">Instructions on the official site</a></p>
             </div>
             <div ng-if="!HelpDetails.model">
-                <h2 translate>No instructions</h2>
+                <h2>No instructions</h2>
             </div>
             <div class="clear"></div>
-            <p><a ui-sref="help.list" translate>Back to help topics</a></p>
+            <p><a ui-sref="help.list">Back to help topics</a></p>
         </div>
     </div>
 </div>

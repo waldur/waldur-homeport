@@ -16,8 +16,8 @@ export default function eventTypesDialog() {
 }
 
 class EventTypesDialogController {
-  constructor() {
-    this.type = this.resolve.type;
+  constructor($filter) {
+    this.type = `${$filter('titleCase')(this.resolve.type)} types`;
     this.types = this.resolve.types;
   }
 }

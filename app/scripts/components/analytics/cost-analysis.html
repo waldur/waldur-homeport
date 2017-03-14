@@ -56,8 +56,8 @@
                 <div class="total-cost">
                     <span class="table-alert"></span>
                     <span class="cost">
-                        {{ row.isCurrent ? 'Projected' : 'Total' }}
-                        <span translate>cost</span>
+                        <span ng-if="row.isCurrent" translate>Projected cost</span>
+                        <span ng-if="!row.isCurrent" translate>Total cost</span>
                         {{ row.total | defaultCurrency }}
                     </span>
                 </div>

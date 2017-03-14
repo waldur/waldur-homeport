@@ -43,7 +43,10 @@
                         <billing-customer-details customer="InvoiceDetails.invoice.customer_details"/>
                         <div>
                             <span><strong><span translate>Invoice Date</span>:</strong> {{::InvoiceDetails.invoice.invoice_date || '&mdash;'}}</span><br>
-                            <span><strong>Due Date:</strong> {{::InvoiceDetails.invoice.due_date || '&mdash;'}}</span>
+                            <span>
+                                <strong><span translate>Due Date</span>:</strong>
+                                {{::InvoiceDetails.invoice.due_date || '&mdash;'}}
+                            </span>
                         </div>
                     </div>
                 </div>
