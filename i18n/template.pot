@@ -612,7 +612,7 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
-#: app/scripts/components/plans/plans-list.html:33
+#: app/scripts/components/plans/plans-list.html:34
 msgid "Confirm changing your plan"
 msgstr ""
 
@@ -1241,7 +1241,7 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:31
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:21
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:25
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:24
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:23
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:19
 msgid "Image"
@@ -1253,7 +1253,7 @@ msgstr ""
 msgid "Image name"
 msgstr ""
 
-#: app/views/import/import.html:148
+#: app/views/import/import.html:150
 msgid "Import"
 msgstr ""
 
@@ -1325,6 +1325,14 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:1
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr ""
+
+#: app/views/help/ssh-keys.html:30
+msgid "Instructions are pretty much the same as for Linux,"
+msgstr ""
+
+#: app/views/help/details.html:90
+msgid "Instructions on the official site"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:30
@@ -2624,6 +2632,10 @@ msgstr ""
 msgid "RAM"
 msgstr ""
 
+#: app/scripts/components/premiumSupport/premium-support-agreement.html:17
+msgid "Read through terms and conditions"
+msgstr ""
+
 #: app/scripts/components/customer/customer-delete.js:82
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
@@ -2856,6 +2868,10 @@ msgstr ""
 msgid "Resource count in"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/resource-sla.html:2
+msgid "Resource doesn't have SLA yet. Please connect it to monitoring system"
+msgstr ""
+
 #: app/scripts/components/customer/customer-events.js:34
 #: app/scripts/components/events/constants.js:61
 #: app/scripts/components/project/project-events.js:30
@@ -3061,6 +3077,12 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:20
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:9
 msgid "Select subnet"
+msgstr ""
+
+#: app/views/help/details.html:66
+msgid ""
+"Select the user by clicking on its username.\r\n"
+"                                If you don't have a user, create it by clicking on the"
 msgstr ""
 
 #: app/scripts/components/team/user-selector.html:2
@@ -3349,7 +3371,7 @@ msgstr ""
 msgid "Sub Total"
 msgstr ""
 
-#: app/scripts/components/digitalocean/droplet-resize.html:73
+#: app/scripts/components/digitalocean/droplet-resize.html:75
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:46
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:40
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:33
@@ -3681,6 +3703,10 @@ msgstr ""
 msgid "Unlink"
 msgstr ""
 
+#: app/views/directives/importable-resources.html:27
+msgid "Unselect all"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/actions.js:62
 #: app/scripts/components/user/hooks/hook-details.html:76
 msgid "Update"
@@ -3886,6 +3912,11 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:19
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:11
 msgid "Volume name"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/snapshot-create.html:7
+#: app/scripts/components/openstack/openstack-volume/volume-extend.html:5
+msgid "Volume name:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/module.js:54
