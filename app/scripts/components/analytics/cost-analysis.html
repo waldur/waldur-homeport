@@ -24,7 +24,7 @@
                         <div class="icon"></div>
                         <a stoppropagation ng-click="row.selected=true; row.activeTab='projects'" ng-class="{'active': row.selected && row.activeTab=='projects'}">Projects (<span ng-bind="::row.projects.length"></span>)</a>
                     </li>
-                    <li visible="resources" exclude-mode="modeCostTracking">
+                    <li visible="resources">
                         <div class="icon"></div>
                         <a stoppropagation ng-click="row.selected=true; row.activeTab='resources'" ng-class="{'active': row.selected && row.activeTab=='resources'}">Resources (<span ng-bind="::row.resources.length"></span>)</a>
                     </li>

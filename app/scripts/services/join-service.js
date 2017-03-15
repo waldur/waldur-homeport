@@ -14,9 +14,6 @@
 
       setDefaultFilter: function() {
         this.defaultFilter = {o: 'name'};
-        if (ENV.modeName == 'modeCostTracking') {
-          this.defaultFilter.shared = 'False';
-        }
       },
 
       create: function(url, options) {

@@ -10,19 +10,11 @@
   <loading-spinner/>
 </div>
 
-<div ng-if="!service.editable && !service.nameEditable" class="empty-list-message">
+<div ng-if="!service.editable" class="empty-list-message">
     You don't have enough permissions to edit settings for <strong>{{ service.name }}</strong> provider.
 </div>
 
 <div class="form-horizontal" ng-if="!loading">
-    <div class="form-group" ng-if="::service.nameEditable">
-        <label class="col-sm-3 control-label" for="serviceName">
-            <span translate>Name</span>:
-        </label>
-        <div class="col-sm-9">
-            <input class="form-control" id="serviceName" ng-model="service.values.name">
-        </div>
-    </div>
     <div class="form-group" ng-repeat="field in service.fields" ng-if="::service.editable">
         <label class="col-sm-3 control-label" for="{{ ::service.uuid }}_{{ ::field.name }}">
             <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>
