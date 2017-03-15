@@ -41,6 +41,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         fields: {
           security_groups: {
             type: 'multiselect',
+            placeholder: 'Select security groups..',
             resource_default_value: true,
             serializer: items => items.map(item => ({url: item.value}))
           }
@@ -59,10 +60,13 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
       },
       update_internal_ips_set: {
         tab: 'internal_ips',
-        title: gettext('Update'),
+        title: gettext('Configure'),
+        iconClass: 'fa fa-wrench',
         fields: {
           internal_ips_set: {
             type: 'multiselect',
+            label: 'Connected subnets',
+            placeholder: 'Select subnets to connect to..',
             resource_default_value: true,
             serializer: items => items.map(item => ({ subnet: item.value })),
             formatter: ($filter, item) => internalIpFormatter(item),

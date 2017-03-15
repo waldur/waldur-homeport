@@ -10,7 +10,6 @@ export default providersList;
 function ProviderListController(
   $stateParams,
   $location,
-  $rootScope,
   joinService,
   $uibModal,
   $state,
@@ -18,7 +17,6 @@ function ProviderListController(
   ENV,
   ncUtils,
   baseControllerListClass,
-  ENTITYLISTFIELDTYPES,
   currentStateService,
   customersService,
   usersService) {
@@ -30,6 +28,7 @@ function ProviderListController(
       this.service = joinService;
       this.service.defaultFilter.customer = $stateParams.uuid;
       this._super();
+      this.additionalCssClass = true;
       this.showSelectedProvider();
       $scope.$on('refreshProviderList', function() {
         controllerScope.resetCache();
