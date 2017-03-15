@@ -21,7 +21,7 @@ const resourceCategories = [
     label: gettext('Private clouds'),
     quota: 'nc_app_count',
     color: chartColors.yellow,
-    feature: 'private_clouds',
+    feature: 'private_cloud',
   },
   {
     label: gettext('Applications'),
