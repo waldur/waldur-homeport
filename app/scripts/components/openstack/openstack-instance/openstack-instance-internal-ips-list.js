@@ -26,7 +26,7 @@ function OpenstackInternalIpsListController(
       });
     },
     afterGetList: function() {
-      this.list = this.list[0].internal_ips_set;
+      this.list = this.list[0] ? this.list[0].internal_ips_set : [];
     },
     getTableOptions: function() {
       return {
