@@ -3,13 +3,13 @@
     <nc-header></nc-header>
     <div class="row wrapper white-bg page-heading" ng-if="$ctrl.pageTitle">
         <div class="col-lg-12">
-            <h2>{{ $ctrl.pageTitle }}</h2>
+            <h2>{{ $ctrl.pageTitle | translate }}</h2>
             <ol class="breadcrumb" ng-if="!$ctrl.hideBreadcrumbs">
                 <li>
-                    <a ng-click="$ctrl.gotoDashboard()">Support dashboard</a>
+                    <a ng-click="$ctrl.gotoDashboard()" translate>Support dashboard</a>
                 </li>
                 <li class="active">
-                    <strong>{{ $ctrl.pageTitle }}</strong>
+                    <strong>{{ $ctrl.pageTitle | translate }}</strong>
                 </li>
             </ol>
         </div>

@@ -32,9 +32,23 @@
         this.pageSize = ENV.pageSize;
         this.page = 1;
         this.pages = null;
+        this.postprocessors = [];
         this.setDefaultFilter();
         this.pageChangingReset();
         this.cacheTime = 0;
+      },
+
+      pushPostprocessor: function(postprocessor) {
+        this.postprocessors.push(postprocessor);
+      },
+
+      applyPostprocessors: function(items) {
+        var vm = this;
+        return items.map(function(item) {
+          return vm.postprocessors.reduce(function(result, postprocessor) {
+            return postprocessor(result);
+          }, item);
+        });
       },
 
       getList:function(filter, endpointUrl) {
@@ -55,6 +69,7 @@
             vm.cacheReset = false;
             listCache.put(cacheKey, {data: null, time: 0});
             vm.getFactory(true, null, endpointUrl).query(filter, function(response, responseHeaders) {
+              response = vm.applyPostprocessors(response);
               var header = responseHeaders();
               var resultCount = !header['x-result-count'] ? null : header['x-result-count'];
               response.resultCount = resultCount;

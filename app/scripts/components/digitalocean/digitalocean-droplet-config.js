@@ -11,32 +11,32 @@ export default {
     name: {
       type: 'string',
       required: true,
-      label: 'VM name',
+      label: gettext('VM name'),
       maxlength: 150
     },
     region: {
       type: 'list',
       required: true,
-      label: 'Region',
+      label: gettext('Region'),
       columns: [
         {
           name: 'name',
-          label: 'Region name'
+          label: gettext('Region name')
         }
       ]
     },
     image: {
       type: 'list',
       required: true,
-      label: 'Image',
+      label: gettext('Image'),
       columns: [
         {
           name: 'name',
-          label: 'Image name'
+          label: gettext('Image name')
         },
         {
           name: 'is_official',
-          label: 'Is official',
+          label: gettext('Is official'),
         }
       ],
       formatter: imageFormatter
@@ -44,24 +44,24 @@ export default {
     size: {
       type: 'list',
       required: true,
-      label: 'Size',
+      label: gettext('Size'),
       columns: [
         {
           name: 'name',
-          label: 'Size name'
+          label: gettext('Size name')
         },
         {
           name: 'cores',
-          label: 'vCPU'
+          label: gettext('vCPU')
         },
         {
           name: 'ram',
-          label: 'RAM',
+          label: gettext('RAM'),
           filter: 'filesize'
         },
         {
           name: 'disk',
-          label: 'Storage',
+          label: gettext('Storage'),
           filter: 'filesize'
         }
       ],
@@ -69,23 +69,23 @@ export default {
     },
     ssh_public_key: {
       type: 'list',
-      label: 'SSH public key',
+      label: gettext('SSH public key'),
       columns: [
         {
           name: 'name',
-          label: 'Name'
+          label: gettext('Name')
         },
         {
           name: 'fingerprint',
-          label: 'Fingerprint'
+          label: gettext('Fingerprint')
         }
       ],
       warningMessage: 'SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile.keys">profile</a>.'
     },
     user_data: {
       type: 'text',
-      label: 'User data',
-      help_text: 'Additional data that will be added to instance on provisioning'
+      label: gettext('User data'),
+      help_text: gettext('Additional data that will be added to instance on provisioning')
     }
   },
   watchers: {

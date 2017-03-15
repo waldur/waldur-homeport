@@ -1,25 +1,13 @@
 import template from './customer-issues.html';
 
-export default function customerIssues() {
-  return {
-    restrict: 'E',
-    controller: CustomerIssuesController,
-    controllerAs: '$ctrl',
-    template: template,
-    scope: {},
-    bindToController: true
-  };
-}
-
 class CustomerIssuesController {
   constructor(currentStateService, $uibModal, $rootScope) {
     this.currentStateService = currentStateService;
     this.$uibModal = $uibModal;
     this.$rootScope = $rootScope;
-    this.init();
   }
 
-  init() {
+  $onInit() {
     this.loading = true;
     this.currentStateService.getCustomer().then(customer => {
       this.setOptions(customer);
@@ -40,7 +28,8 @@ class CustomerIssuesController {
       ],
       tableActions: [
         {
-          name: '<i class="fa fa-plus"></i> Create',
+          title: gettext('Create'),
+          iconClass: 'fa fa-plus',
           callback: () => {
             this.$uibModal.open({
               component: 'issueCreateDialog',
@@ -54,3 +43,10 @@ class CustomerIssuesController {
     };
   }
 }
+
+const customerIssues = {
+  controller: CustomerIssuesController,
+  template: template,
+};
+
+export default customerIssues;

@@ -1,6 +1,6 @@
 const MODES = {
-  accounting: 'Accounting',
-  billing: 'Billing'
+  accounting: gettext('Accounting'),
+  billing: gettext('Billing'),
 };
 
 // @ngInject
@@ -25,30 +25,31 @@ export default class BillingUtils {
     return `${this.ENV.shortPageTitle} | ${this.getTabTitle()}`;
   }
 
-  getSearchFilters() {
-    return [
-      {
-        name: 'state',
-        title: 'Pending',
-        value: 'pending'
-      },
-      {
-        name: 'state',
-        title: 'Canceled',
-        value: 'canceled'
-      },
-      {
-        name: 'state',
-        title: 'Created',
-        value: 'created'
-      },
-    ];
+  getUserFilter() {
+    return {
+      name: 'state',
+      choices: [
+        {
+          title: gettext('Pending'),
+          value: 'pending',
+        },
+        {
+          title: gettext('Canceled'),
+          value: 'canceled'
+        },
+        {
+          title: gettext('Created'),
+          value: 'created'
+        }
+      ]
+    };
   }
 
   getTableActions() {
     return [
       {
-        name: '<i class="fa fa-envelope-o"></i> Send notification',
+        title: gettext('Send notification'),
+        iconClass: 'fa fa-envelope-o',
         callback: this.sendNotification.bind(this),
 
         isDisabled: row => row.state != 'created',

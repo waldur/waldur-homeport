@@ -2,11 +2,6 @@
     @include transition(all, 0.1s, ease);
 }
 
-.inlist-action {
-    float: right;
-    margin-right: 10px;
-} // inlist-action
-
 .button {
     background-color: $button-green;
     @include inline-middle;
@@ -25,106 +20,12 @@
     }
 } // button
 
-.button-red {
-    background-color: red;
-}
-
-.button-support {
-    @extend .button;
-    padding: 4px;
-    font-weight: normal;
-    line-height: 16px;
-    height: 27px;
-    font-size: 14px;
-    margin-bottom: 1px;
-
-    &.pending {
-        border: 1px solid $button-green;
-        background-color: white;
-        color: $button-green;
-        &:hover {
-            background-color: $button-green;
-            color: white;
-        }
-        @include bp(xs) {
-            margin-right: 5px;
-        }
-    }
-}
-.button-cancel {
-    @include inline-middle;
-    @include property(border-radius, 2);
-    @include property(padding, 10 10);
-    @include property(padding-top, 12);
-    line-height: 1;
-    color: #444;
-    &.active, &:active, &:hover {
-        text-decoration: underline;
-    } // &.active, &:active, &:hover
-
-} // button-cancel
-.button-apply {
-    @extend .button;
-    @include inline-middle;
-    @include property(border-radius, 2);
-    @include property(padding, 10 10);
-    @include property(padding-top, 12);
-    line-height: 1;
-    padding-top: 12px;
-    height: 39px;
-    font-weight: normal;
-    &:hover {
-        opacity: 0.8;
-    }
-    &.pending {
-        border: 1px solid $button-green;
-        background-color: white;
-        color: $button-green;
-    }
-} // button-apply
-.button-select {
-    @include inline-middle;
-    @include property(border-radius, 2);
-    @include property(padding, 10 10);
-    @include property(padding-top, 12);
-    line-height: 1;
-    background-color: #7db243;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
-    border-color: transparent;
-    border-bottom: 2px solid #2d6c09;
-    color: #fff;
-    &.inhome-plans {
-        @include property(font-size, $big-font);
-        @include property(padding, 6 12);
-        @include property(padding-top, 8);
-    }
-} // button-select
-.button-login {
-    @include inline-middle;
-    @include property(border-radius, 2);
-    @include property(padding, 12 15);
-    line-height: 1;
-    background-color: #7db243;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
-    border-color: transparent;
-    border-bottom: 2px solid #2d6c09;
-    color: #fff;
-} // button-select
-
-.button-margin-bottom {
-    margin-bottom: 10px;
-}
-
 .list-sort {
     @include inline-middle;
     color: rgb(0, 0, 0);
     font-weight: 700;
 } // list-sort
 
-
-.button-tooltip {
-    display: inline-block;
-}
 
 .button-spinner {
     position: relative;

@@ -18,26 +18,26 @@ function UserProjectsController(
       this.controllerScope = controllerScope;
       this.tableOptions = {
         disableSearch: true,
-        noDataText: 'No projects yet',
-        noMatchesText: 'No projects found matching filter.',
+        noDataText: gettext('No projects yet'),
+        noMatchesText: gettext('No projects found matching filter.'),
 
         columns: [
           {
-            title: 'Project name',
+            title: gettext('Project name'),
             className: 'all',
             render: function(row) {
               return row.project_name;
             }
           },
           {
-            title: 'Organization',
+            title: gettext('Organization'),
             className: 'all',
             render: function(row) {
               return row.customer_name;
             }
           },
           {
-            title: 'Role',
+            title: gettext('Role'),
             className: 'all',
             render: function(row) {
               return row.role;

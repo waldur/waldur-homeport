@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label class="control-label">New size:</label>
                 <ui-select ng-model="options.newSize" theme="bootstrap">
-                    <ui-select-match placeholder="Select size...">
+                    <ui-select-match placeholder="{{ 'Select size...' | translate }}">
                         {{ formatSize($select.selected) }}
                     </ui-select-match>
                     <ui-select-choices repeat="size in sizes track by size.uuid"

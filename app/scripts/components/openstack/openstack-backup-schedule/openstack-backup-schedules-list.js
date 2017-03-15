@@ -20,32 +20,36 @@ function openstackBackupSchedulesListController(
         this.listActions = result;
         fn();
         this.service = openstackBackupSchedulesService;
-        this.rowFields.push('schedule', 'maximal_number_of_backups');
+        this.rowFields.push('schedule', 'maximal_number_of_resources', 'is_active');
       });
     },
     getTableOptions: function() {
       var options = this._super();
       options.disableSearch = true;
-      options.noDataText = 'No backup schedules yet.';
-      options.noMatchesText = 'No backup schedules found matching filter.';
+      options.noDataText = gettext('No backup schedules yet.');
+      options.noMatchesText = gettext('No backup schedules found matching filter.');
       options.tableActions = this.listActions;
       options.columns = [
         {
-          title: 'Name',
+          title: gettext('Name'),
           className: 'all',
           render: row => this.renderResourceName(row)
         },
         {
-          title: 'Max number of backups',
-          render: row => row.maximal_number_of_backups || '&mdash;'
+          title: gettext('Max number of backups'),
+          render: row => row.maximal_number_of_resources || '&mdash;'
         },
         {
-          title: 'Schedule',
+          title: gettext('Schedule'),
           className: 'min-tablet-l',
           render: row => $filter('formatCrontab')(row.schedule)
         },
         {
-          title: 'State',
+          title: gettext('Is active'),
+          render: row => `<i class="fa ${row.is_active ? 'fa-check' : 'fa-minus'}"></i>`
+        },
+        {
+          title: gettext('State'),
           className: 'min-tablet-l',
           render: row => this.renderResourceState(row)
         },

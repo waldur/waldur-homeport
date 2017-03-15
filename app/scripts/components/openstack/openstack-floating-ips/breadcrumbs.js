@@ -18,7 +18,7 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService, CATEGORY_I
         }
       },
       {
-        label: 'Floating IPs',
+        label: gettext('Floating IPs'),
         state: 'resources.details',
         params: {
           uuid: resource.tenant_uuid,

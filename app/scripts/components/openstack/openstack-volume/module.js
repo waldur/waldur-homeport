@@ -39,25 +39,45 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       'detach',
       'extend',
       'snapshot',
-      'destroy'
+      'destroy',
+      'create_snapshot_schedule',
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: 'Volume has been updated'
+        successMessage: gettext('Volume has been updated')
       }),
       pull: {
-        title: 'Synchronise'
+        title: gettext('Synchronise')
       },
       extend: {
         component: 'volumeExtendDialog'
       },
       snapshot: {
         tab: 'snapshots',
-        title: 'Create',
-        dialogTitle: 'Create snapshot for ',
-        iconClass: 'fa-plus',
-        component: 'snapshotCreateDialog'
-      }
+        title: gettext('Create'),
+        dialogTitle: gettext('Create snapshot for '),
+        iconClass: 'fa fa-plus',
+        component: 'snapshotCreateDialog',
+        fields: {
+          kept_until: {
+            help_text: gettext('Guaranteed time of snapshot retention. If null - keep forever.'),
+            label: gettext('Kept until'),
+            required: false,
+            type: 'datetime'
+          }
+        }
+      },
+      create_snapshot_schedule: {
+        title: gettext('Create'),
+        dialogTitle: gettext('Create snapshot schedule for OpenStack volume'),
+        tab: 'snapshot_schedules',
+        iconClass: 'fa fa-plus',
+        fields: {
+          schedule: {
+            type: 'crontab'
+          }
+        }
+      },
     }
   });
 }
@@ -77,11 +97,16 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     order: [
       ...DEFAULT_RESOURCE_TABS.order,
       'snapshots',
+      'snapshot_schedules',
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       snapshots: {
-        heading: 'Snapshots',
+        heading: gettext('Snapshots'),
         component: 'openstackVolumeSnapshots'
+      },
+      snapshot_schedules: {
+        heading: gettext('Snapshot schedules'),
+        component: 'openstackSnapshotSchedulesList'
       },
     })
   });

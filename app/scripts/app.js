@@ -1,3 +1,5 @@
+window.gettext = angular.identity;
+
 (function() {
   'use strict';
 
@@ -143,31 +145,6 @@
       featuresProvider.setFeatures(ENV.toBeFeatures);
       featuresProvider.setVisibility(ENV.featuresVisible);
     });
-})();
-
-(function() {
-  angular.module('ncsaas').run(checkLanguage);
-
-  checkLanguage.$inject = ['$translate', 'LANGUAGE'];
-
-  function checkLanguage($translate, LANGUAGE) {
-    // Check if current language is listed in choices and
-    // switch to default language if current choice is invalid.
-
-    function isValid(current) {
-      for (var i=0; i<LANGUAGE.CHOICES.length; i++) {
-        if (LANGUAGE.CHOICES[i].code == current) {
-          return true;
-        }
-      }
-      return false;
-    }
-
-    var current = $translate.use();
-    if (!isValid(current)) {
-      $translate.use(LANGUAGE.DEFAULT);
-    }
-  }
 })();
 
 (function() {

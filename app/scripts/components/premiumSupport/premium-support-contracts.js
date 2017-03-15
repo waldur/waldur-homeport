@@ -1,7 +1,9 @@
+import template from './premium-support-contracts.html';
+
 export default function premiumSupportContracts() {
   return {
     restrict: 'E',
-    templateUrl: 'views/partials/list.html',
+    template: template,
     controller: ContractsListController,
     controllerAs: 'Ctrl',
     scope: {},
@@ -29,7 +31,7 @@ function ContractsListController(
 
       this.entityOptions = {
         entityData: {
-          noDataText: 'You have no SLAs yet.',
+          noDataText: gettext('You have no SLAs yet.'),
           createLink: 'appstore.premiumSupport',
           createLinkText: 'Add SLA',
           expandable: true,
@@ -58,19 +60,19 @@ function ContractsListController(
           items: [
             {
               key: 'plan_description',
-              label: 'Description'
+              label: gettext('Description')
             },
             {
               key: 'plan_base_rate',
-              label: 'Base rate'
+              label: gettext('Base rate')
             },
             {
               key: 'plan_hour_rate',
-              label: 'Hour rate'
+              label: gettext('Hour rate')
             },
             {
               key: 'plan_terms',
-              label: 'Terms'
+              label: gettext('Terms')
             }
           ]
         }

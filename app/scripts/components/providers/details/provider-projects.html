@@ -5,12 +5,14 @@
     You don't have enough permission to edit projects for <strong>{{ service.name }}</strong> provider.
 </div>
 <div ng-if="!loading && canManage && !choices.length" class="empty-list-message">
-    There are no projects yet.
+    <span translate>There are no projects yet.</span>
 </div>
 <div ng-if="choices.length">
-    <p>Please select projects where usage of the provider is permitted.</p>
+    <p translate>Please select projects where usage of the provider is permitted.</p>
     <div multiple-select choices="choices"></div>
     <p class="text-center">
-        <a class="btn btn-primary" submit-button="save()">Save</a>
+        <a class="btn btn-primary" submit-button="save()">
+          <span translate>Save</span>
+        </a>
     </p>
 </div>

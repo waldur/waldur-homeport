@@ -29,17 +29,12 @@
     <link rel="stylesheet" type="text/css" href="static/css/bundle.min.css">
     <!-- @endif -->
 
-    <!-- @if NODE_ENV == 'STAGING' -->
-    <link rel="stylesheet" type="text/css" href="static/css/style.min.css">
-    <!-- @endif -->
-
     <!-- @if NODE_ENV == 'PRODUCTION' -->
     <link rel="stylesheet" type="text/css" href="static/css/app.css">
     <!-- @endif -->
 </head>
 <body class="fixed-sidebar {{$state.current.data.bodyClass}}" id="page-top">
 <div class="flash-message-fixed" flash-message="5000"></div>
-<div scroll-to-top></div>
 <div ui-view id="wrapper"></div>
 <!-- @if NODE_ENV == 'DEVELOPMENT' || NODE_ENV == 'TEST' -->
 <script src="static/js/jquery.min.js"></script>
@@ -111,10 +106,8 @@
 <script src="scripts/services/customer-permissions-service.js"></script>
 <script src="scripts/services/customers-service.js"></script>
 <script src="scripts/services/default-price-list-items-service.js"></script>
-<script src="scripts/services/hooks-service.js"></script>
 <script src="scripts/services/join-service-project-link-service.js"></script>
 <script src="scripts/services/join-service.js"></script>
-<script src="scripts/services/keys-service.js"></script>
 <script src="scripts/services/payment-details.js"></script>
 <script src="scripts/services/price-estimation-service.js"></script>
 <script src="scripts/services/price-list-items-service.js"></script>
@@ -129,31 +122,22 @@
 <script src="scripts/directives/check-quotas.js"></script>
 <script src="scripts/directives/compact-table-sorter.js"></script>
 <script src="scripts/directives/customer-balance.js"></script>
-<script src="scripts/directives/responsive-table.js"></script>
 <script src="scripts/directives/entity-list.js"></script>
 <script src="scripts/directives/expandable-indicator.js"></script>
 <script src="scripts/directives/expandable-item.js"></script>
-<script src="scripts/directives/filter-list.js"></script>
 <script src="scripts/directives/footer-position.js"></script>
 <script src="scripts/directives/import-resource-button.js"></script>
 <script src="scripts/directives/importable-resources.js"></script>
 <script src="scripts/directives/line-chart.js"></script>
 <script src="scripts/directives/list-cache-reset.js"></script>
-<script src="scripts/directives/mini-pagination.js"></script>
 <script src="scripts/directives/multiple-select.js"></script>
 <script src="scripts/directives/pagination.js"></script>
 <script src="scripts/directives/project-price-limit.js"></script>
 <script src="scripts/directives/add-body-class.js"></script>
-<script src="scripts/directives/scroll-to-me.js"></script>
-<script src="scripts/directives/scroll-to-top.js"></script>
 <script src="scripts/directives/sizing.js"></script>
 <script src="scripts/directives/stoppropagation.js"></script>
 <script src="scripts/directives/visible.js"></script>
 <script src="static/js/bundle.js"></script>
-<!-- @endif -->
-
-<!-- @if NODE_ENV == 'STAGING' -->
-<script src="static/js/main/main.min.js"></script>
 <!-- @endif -->
 
 <!-- @if NODE_ENV == 'PRODUCTION' -->

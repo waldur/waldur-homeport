@@ -21,7 +21,6 @@ function InvoicesListController(
   var InvoicesController = baseControllerListClass.extend({
     init: function() {
       this.service = invoicesService;
-      this.getSearchFilters();
       let fn = this._super.bind(this);
       return usersService.getCurrentUser().then(currentUser => {
         this.currentUser = currentUser;
@@ -34,12 +33,12 @@ function InvoicesListController(
     },
     getTableOptions: function() {
       return {
-        noDataText: 'You have no invoices yet',
-        noMatchesText: 'No invoices found matching filter.',
+        noDataText: gettext('You have no invoices yet'),
+        noMatchesText: gettext('No invoices found matching filter.'),
         searchFieldName: 'number',
         columns: [
           {
-            title: 'Invoice number',
+            title: gettext('Invoice number'),
             className: 'all',
             render: function(row) {
               const href = $state.href('billingDetails', {uuid: row.uuid});
@@ -47,32 +46,32 @@ function InvoicesListController(
             }
           },
           {
-            title: 'State',
+            title: gettext('State'),
             className: 'all',
             render: row => row.state
           },
           {
-            title: 'Price',
+            title: gettext('Price'),
             className: 'all',
             render: row => $filter('defaultCurrency')(row.price)
           },
           {
-            title: 'Tax',
+            title: gettext('Tax'),
             className: 'min-tablet-l',
             render: row => $filter('defaultCurrency')(row.tax)
           },
           {
-            title: 'Total',
+            title: gettext('Total'),
             className: 'min-tablet-l',
             render: row => $filter('defaultCurrency')(row.total)
           },
           {
-            title: 'Invoice date',
+            title: gettext('Invoice date'),
             className: 'all',
             render: row => row.invoice_date || '&mdash;'
           },
           {
-            title: 'Due date',
+            title: gettext('Due date'),
             className: 'min-tablet-l',
             render: row => row.due_date || '&mdash;'
           }
@@ -85,15 +84,14 @@ function InvoicesListController(
         return BillingUtils.getTableActions();
       }
     },
-    getSearchFilters: function() {
-      this.searchFilters = [
-        ...BillingUtils.getSearchFilters(),
-        {
-          name: 'state',
-          title: 'Paid',
+    getUserFilter: function() {
+      const base = BillingUtils.getUserFilter();
+      return angular.merge({}, base, {
+        choices: base.choices.concat({
+          title: gettext('Paid'),
           value: 'paid'
-        }
-      ];
+        })
+      });
     },
     getFilter: function() {
       return {

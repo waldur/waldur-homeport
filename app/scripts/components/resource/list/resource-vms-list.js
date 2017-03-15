@@ -15,13 +15,15 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
       this._super();
       this.rowFields.push('internal_ips');
       this.rowFields.push('external_ips');
+      this.rowFields.push('floating_ips');
+      this.rowFields.push('internal_ips_set');
     },
     getTableOptions: function() {
       var options = this._super();
       options.noDataText = 'You have no virtual machines yet';
       options.noMatchesText = 'No virtual machines found matching filter.';
       options.columns.push({
-        title: 'Internal IP',
+        title: gettext('Internal IP'),
         render: function(row) {
           if (row.internal_ips.length === 0) {
             return '&ndash;';
@@ -30,7 +32,7 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
         }
       });
       options.columns.push({
-        title: 'External IP',
+        title: gettext('External IP'),
         render: function(row) {
           if (row.external_ips.length === 0) {
             return '&ndash;';

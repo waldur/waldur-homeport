@@ -629,7 +629,8 @@ module.exports = function(grunt) {
                 files: {
                   'i18n/template.pot': [
                     'app/views/**/*.html',
-                    'app/scripts/components/**/*.html'
+                    'app/scripts/components/**/*.html',
+                    'app/scripts/**/*.js',
                   ]
                 }
             },

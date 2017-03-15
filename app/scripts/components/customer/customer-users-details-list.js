@@ -22,12 +22,12 @@ function customerUsersDetailsListController(
     },
     getTableOptions: function() {
       return {
-        noDataText: 'You have no users yet',
-        noMatchesText: 'No users found matching filter.',
+        noDataText: gettext('You have no users yet'),
+        noMatchesText: gettext('No users found matching filter.'),
         searchFieldName: 'full_name',
         columns: [
           {
-            title: 'Member',
+            title: gettext('Member'),
             className: 'all',
             width: '20%',
             render: function(row) {
@@ -37,42 +37,42 @@ function customerUsersDetailsListController(
             }
           },
           {
-            title: 'E-mail',
+            title: gettext('E-mail'),
             className: 'min-tablet-l',
             render: function(row) {
               return row.email;
             }
           },
           {
-            title: 'Civil number',
+            title: gettext('Civil number'),
             className: 'min-tablet-l',
             render: function(row) {
               return row.civil_number || 'N/A';
             }
           },
           {
-            title: 'Phone number',
+            title: gettext('Phone number'),
             className: 'min-tablet-l',
             render: function(row) {
               return row.phone_number || 'N/A';
             }
           },
           {
-            title: 'Preferred language',
+            title: gettext('Preferred language'),
             className: 'min-tablet-l',
             render: function(row) {
               return row.preferred_language || 'N/A';
             }
           },
           {
-            title: 'Competence',
+            title: gettext('Competence'),
             className: 'min-tablet-l',
             render: function(row) {
               return row.competence || 'N/A';
             }
           },
           {
-            title: 'Job position',
+            title: gettext('Job position'),
             className: 'min-tablet-l',
             render: function(row) {
               return row.job_title || 'N/A';

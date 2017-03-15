@@ -94,6 +94,9 @@ export default function actionUtilsService(
 
     function onSuccess(response) {
       if (response.status === 201 || response.status === 202) {
+        if (response.config.method === 'DELETE') {
+          $rootScope.$broadcast('resourceDeletion');
+        }
         vm.handleActionSuccess(action);
       } else if (response.status === 204) {
         ncUtilsFlash.success('Resource has been deleted');
@@ -115,33 +118,37 @@ export default function actionUtilsService(
 
   this.openActionDialog = function(controller, resource, name, action) {
     var component = action.component || 'actionDialog';
-    var dialogScope = $rootScope.$new();
-    dialogScope.action = action;
-    dialogScope.controller = controller;
-    dialogScope.resource = resource;
-    $uibModal.open({
-      component: component,
-      scope: dialogScope,
-      size: action.dialogSize
-    }).result.then(function() {
+    const params = {component, size: action.dialogSize};
+    if (action.useResolve) {
+      angular.extend(params, {
+        resolve: {
+          action: () => action,
+          controller: () => controller,
+          resource: () => resource,
+        }
+      });
+    } else {
+      var dialogScope = $rootScope.$new();
+      angular.extend(dialogScope, {
+        action,
+        controller,
+        resource
+      });
+      params.scope = dialogScope;
+    }
+    $uibModal.open(params).result.then(function() {
       $rootScope.$broadcast('actionApplied', name);
     });
   };
 
   this.loadNestedActions = function(controller, model, tab) {
-    function formatActionTitle(action) {
-      if (action.iconClass) {
-        return `<i class="fa ${action.iconClass}"></i> ${action.title}`;
-      } else {
-        return action.title;
-      }
-    }
     return this.loadActions(model).then(actions => {
       var nestedActions = [];
       angular.forEach(actions, (action, key) => {
         if (action.tab && action.tab === tab) {
           nestedActions.push({
-            name: formatActionTitle(action),
+            title: action.title,
+            iconClass: action.iconClass,
             callback: this.buttonClick.bind(this, controller, model, key, action),
             disabled: !action.enabled,
             titleAttr: action.reason

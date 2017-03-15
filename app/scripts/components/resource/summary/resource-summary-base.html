@@ -1,19 +1,25 @@
 <div class="m-b-xs">
-  <dt>State:</dt>
+  <dt>
+    <span translate>State</span>:
+  </dt>
   <dd>
     <resource-state resource="$ctrl.resource"></resource-state>
   </dd>
 </div>
 
 <div class="m-b-xs" ng-if="$ctrl.resource.state == 'Erred'">
-  <dt>Error message:</dt>
+  <dt>
+    <span translate>Error message</span>:
+  </dt>
   <dd>
     {{ $ctrl.resource.error_message }}
   </dd>
 </div>
 
 <div class="m-b-xs">
-  <dt>Provider:</dt>
+  <dt>
+    <span translate>Provider</span>:
+  </dt>
   <dd>
     {{ ::$ctrl.resource.service_name }}
   </dd>
@@ -21,7 +27,7 @@
 
 <div class="m-b-xs" ng-if="$ctrl.resource.description">
   <dt>
-    Description:
+    <span translate>Description</span>:
   </dt>
   <dd>
     <span ng-bind="$ctrl.resource.description"></span>
@@ -30,7 +36,7 @@
 
 <div class="m-b-xs">
   <dt>
-    Created:
+    <span translate>Created</span>:
   </dt>
   <dd>
     <span am-time-ago="::$ctrl.resource.created"></span>,
@@ -40,7 +46,7 @@
 
 <div class="m-b-xs">
   <dt>
-    UUID:
+    <span translate>UUID</span>:
   </dt>
   <dd class="elipsis">
     {{ ::$ctrl.resource.uuid }}
@@ -49,7 +55,7 @@
 
 <div class="m-b-xs" ng-if="$ctrl.resource.backend_id">
   <dt>
-    Backend ID:
+    <span translate>Backend ID</span>:
   </dt>
   <dd class="elipsis">
     {{ ::$ctrl.resource.backend_id }}

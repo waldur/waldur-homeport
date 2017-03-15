@@ -6,7 +6,7 @@ export default function helpRoutes($stateProvider) {
       abstract: true,
       templateUrl: 'views/partials/base.html',
       data: {
-        pageTitle: 'Help',
+        pageTitle: gettext('Help'),
         bodyClass: 'old',
         auth: true,
         feature: 'help',

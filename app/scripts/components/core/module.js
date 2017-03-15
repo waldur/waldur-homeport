@@ -10,6 +10,7 @@ export default module => {
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
   module.run(redirectToState);
+  module.run(scrollToTop);
   sentryModule(module);
 };
 
@@ -21,5 +22,13 @@ function redirectToState($rootScope, $state) {
     } else {
       $state.go('errorPage.notFound');
     }
+  });
+}
+
+// @ngInject
+function scrollToTop($rootScope, $document) {
+  $rootScope.$on('$stateChangeSuccess', function() {
+    $document.scrollTop(0);
+    $('#wrapper').scrollTop(0);
   });
 }

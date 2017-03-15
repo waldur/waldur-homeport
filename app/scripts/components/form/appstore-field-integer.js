@@ -1,16 +1,12 @@
 import template from './appstore-field-integer.html';
 
-export default function appstoreFieldInteger() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {
-      field: '=',
-      model: '=',
-      form: '=',
-    },
-    controller: function() {},
-    controllerAs: '$ctrl',
-    bindToController: true
-  };
-}
+const appstoreFieldInteger = {
+  template,
+  bindings: {
+    field: '<',
+    model: '<',
+    form: '<',
+  },
+};
+
+export default appstoreFieldInteger;

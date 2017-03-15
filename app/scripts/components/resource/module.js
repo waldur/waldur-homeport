@@ -15,7 +15,7 @@ import filtersModule from './filters';
 export default module => {
   module.service('resourceUtils', resourceUtils);
   module.component('resourceDetails', resourceDetails);
-  module.directive('resourceHeader', resourceHeader);
+  module.component('resourceHeader', resourceHeader);
   module.config(resourceRoutes);
   module.service('resourcesService', resourcesService);
   resourceSummaryModule(module);

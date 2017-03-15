@@ -17,7 +17,7 @@
                            ng-model='entityList.searchInput'
                            ng-model-options="{ debounce: 500 }"
                            ng-change="entityList.search()"
-                           placeholder="Search">
+                           placeholder="{{ 'Search' | translate }}">
                     <label for="search-box">
                       <i class="fa fa-search"></i>
                     </label>

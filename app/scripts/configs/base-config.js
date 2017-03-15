@@ -16,9 +16,8 @@ angular.module('ncsaas')
     pageSize: 10,
     serviceIcon: 'static/images/icons/icon_openstack_small.png',
     dashboardEventsCacheTime: 60, // seconds
-    listControlPanelShow: false,
     showImport: false,
-    defaultErrorMessage: 'Reason unknown, please contact support',
+    defaultErrorMessage: gettext('Reason unknown, please contact support'),
 
     // build version
     buildId: 'develop',
@@ -27,51 +26,51 @@ angular.module('ncsaas')
 
     offerings: [
       {
-        label: "Virtual machines",
-        icon: "fa-desktop",
-        feature: "vms",
-        key: "vms",
-        state: "appstore.vms",
-        description: "OpenStack instances and DigitalOcean droplets."
+        label: gettext('Virtual machines'),
+        icon: 'fa-desktop',
+        feature: 'vms',
+        key: 'vms',
+        state: 'appstore.vms',
+        description: gettext('Provision virtual machines (VMs) in available Providers.')
       },
       {
-        label: "Private clouds",
-        icon: "fa-cloud",
-        feature: "private_clouds",
-        key: "private_clouds",
-        state: "appstore.private_clouds",
-        description: "OpenStack tenants and Amazon VPC.",
+        label: gettext('Private clouds'),
+        icon: 'fa-cloud',
+        feature: 'private_clouds',
+        key: 'private_clouds',
+        state: 'appstore.private_clouds',
+        description: gettext('Purchase bulk resource as Virtual Private Clouds (VPC).'),
         requireOwnerOrStaff: true
       },
       {
-        label: "Storage",
-        icon: "fa-hdd-o",
-        feature: "storage",
-        key: "storages",
-        state: "appstore.storages",
-        description: "Block devices, object store spaces and other persistency services."
+        label: gettext('Block storage'),
+        icon: 'fa-hdd-o',
+        feature: 'storage',
+        key: 'storages',
+        state: 'appstore.storages',
+        description: gettext('Provision persistent storage volumes in available Providers.')
       },
       {
-        label: "Applications",
-        icon: "fa-database",
-        feature: "apps",
-        key: "apps",
-        state: "appstore.apps",
-        description: "Oracle database and SugarCRM."
+        label: gettext('Applications'),
+        icon: 'fa-database',
+        feature: 'apps',
+        key: 'apps',
+        state: 'appstore.apps',
+        description: gettext('Oracle database and SugarCRM.')
       },
       {
-        label: "Support",
-        icon: "fa-wrench",
-        key: "support",
-        feature: "premiumSupport",
-        state: "appstore.premiumSupport",
-        description: "Premium support service."
+        label: gettext('Support'),
+        icon: 'fa-wrench',
+        key: 'support',
+        feature: 'premiumSupport',
+        state: 'appstore.premiumSupport',
+        description: gettext('Premium support service.')
       },
     ],
 
     offeringCategories: [
       {
-        label: 'IaaS',
+        label: gettext('IaaS'),
         items: ['private_clouds', 'vms', 'storages', 'support']
       },
     ],
@@ -85,14 +84,14 @@ angular.module('ncsaas')
 
     appStoreCategories: [
       {
-        name: 'Virtual machines',
+        name: gettext('Virtual machines'),
         type: 'provider',
         icon: 'desktop',
         key: 'vms',
         services: ['DigitalOcean', 'Azure', 'Amazon', 'OpenStackTenant']
       },
       {
-        name: 'Private clouds',
+        name: gettext('Private clouds'),
         type: 'provider',
         icon: 'cloud',
         key: 'private_clouds',
@@ -100,14 +99,14 @@ angular.module('ncsaas')
         requireOwnerOrStaff: true
       },
       {
-        name: 'Applications',
+        name: gettext('Applications'),
         icon: 'database',
         type: 'provider',
         key: 'apps',
         services: ['Oracle', 'GitLab']
       },
       {
-        name: 'Storages',
+        name: gettext('Storages'),
         type: 'provider',
         key: 'storages',
         services: ['OpenStackTenant'],
@@ -115,34 +114,34 @@ angular.module('ncsaas')
     ],
     serviceCategories: [
       {
-        name: 'Virtual machines',
+        name: gettext('Virtual machines'),
         services: ['Amazon', 'Azure', 'DigitalOcean', 'OpenStack'],
       },
       {
-        name: 'Applications',
+        name: gettext('Applications'),
         services: ['Oracle', 'GitLab']
       }
     ],
     resourceCategory: {
-        "Amazon.Instance": "vms",
-        "SaltStack.SharepointTenant": "apps",
-        "GitLab.Project": "apps",
-        "SugarCRM.CRM": "apps",
-        "Azure.VirtualMachine": "vms",
-        "IaaS.Instance": "vms",
-        "JIRA.Project": "apps",
-        "DigitalOcean.Droplet": "vms",
-        "OpenStack.Instance": "vms",
-        "SaltStack.ExchangeTenant": "apps",
-        "OpenStack.Tenant": "private_clouds",
-        "OpenStackTenant.Instance": "vms",
-        "OpenStackTenant.Volume": "storages",
-        "OpenStackTenant.Snapshot": "storages",
-        "GitLab.Group": "apps",
-        "Zabbix.Host": "apps",
-        "Zabbix.ITService": "apps",
-        "OpenStack.Volume": "storages",
-        "OpenStack.Snapshot": "storages"
+      'Amazon.Instance': 'vms',
+      'SaltStack.SharepointTenant': 'apps',
+      'GitLab.Project': 'apps',
+      'SugarCRM.CRM': 'apps',
+      'Azure.VirtualMachine': 'vms',
+      'IaaS.Instance': 'vms',
+      'JIRA.Project': 'apps',
+      'DigitalOcean.Droplet': 'vms',
+      'OpenStack.Instance': 'vms',
+      'SaltStack.ExchangeTenant': 'apps',
+      'OpenStack.Tenant': 'private_clouds',
+      'OpenStackTenant.Instance': 'vms',
+      'OpenStackTenant.Volume': 'storages',
+      'OpenStackTenant.Snapshot': 'storages',
+      'GitLab.Group': 'apps',
+      'Zabbix.Host': 'apps',
+      'Zabbix.ITService': 'apps',
+      'OpenStack.Volume': 'storages',
+      'OpenStack.Snapshot': 'storages'
     },
     showCompare: [
       'Virtual machines'
@@ -167,6 +166,7 @@ angular.module('ncsaas')
       'SOCIAL_SIGNUP',
       'ESTONIAN_ID'
     ],
+    estoniaIdLogoutUrl: 'https://openid.ee/auth/logout',
     resourcesTypes: {
       vms: 'vms',
       applications: 'apps',
@@ -185,9 +185,9 @@ angular.module('ncsaas')
     ownerCanManageCustomer: true,
 
     roles: {
-      owner: 'Organization owner',
-      manager: 'Project manager',
-      admin: 'System administrator'
+      owner: gettext('Organization owner'),
+      manager: gettext('Project manager'),
+      admin: gettext('System administrator')
     },
     invitationRedirectTime: 5000,
     invitationsEnabled: true,
@@ -198,5 +198,17 @@ angular.module('ncsaas')
     ],
 
     // Either 'accounting' or 'billing'
-    accountingMode: 'accounting'
-});
+    accountingMode: 'accounting',
+
+    languageChoices: [
+      {
+        code: 'en',
+        label: gettext('English')
+      },
+      {
+        code: 'et',
+        label: gettext('Estonian')
+      }
+    ],
+    defaultLanguage: 'en',
+  });

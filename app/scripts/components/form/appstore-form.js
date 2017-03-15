@@ -22,7 +22,7 @@ class AppstoreFormController {
     const order = this.fields.order;
     const model = this.model;
 
-    this.fieldsList = order.map(name => options[name]);
+    this.fieldsList = order.map(name => options[name]).filter(angular.isDefined);
     angular.forEach(watchers, (watcher, field) => {
       $scope.$watch(() => model[field], watcher.bind(null, model, options));
     });
@@ -30,6 +30,9 @@ class AppstoreFormController {
     angular.forEach(this.fieldsList, field => {
       if (field.default_value) {
         model[field.name] = field.default_value;
+      }
+      if (field.init) {
+        field.init(field, model);
       }
     });
   }

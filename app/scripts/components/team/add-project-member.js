@@ -19,8 +19,8 @@ const addProjectMember = {
 
     $onInit() {
       var roles = this.ENV.roles;
-      this.addText = 'Add';
-      this.addTitle = 'Add project member';
+      this.addText = gettext('Add');
+      this.addTitle = gettext('Add project member');
       this.projectModel = {
         role: null,
         expiration_time: null

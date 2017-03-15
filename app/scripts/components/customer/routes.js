@@ -60,7 +60,7 @@ export default function organizationRoutes($stateProvider) {
       url: 'dashboard/',
       template: '<organization-dashboard customer="currentCustomer"></organization-dashboard>',
       data: {
-        pageTitle: 'Dashboard',
+        pageTitle: gettext('Dashboard'),
         pageClass: 'gray-bg',
       }
     })
@@ -69,7 +69,7 @@ export default function organizationRoutes($stateProvider) {
       url: 'events/',
       template: '<customer-events customer="currentCustomer"></customer-events>',
       data: {
-        pageTitle: 'Audit logs'
+        pageTitle: gettext('Audit logs')
       }
     })
 
@@ -77,7 +77,7 @@ export default function organizationRoutes($stateProvider) {
       url: 'issues/',
       template: '<customer-issues></customer-issues>',
       data: {
-        pageTitle: 'Issues'
+        pageTitle: gettext('Issues')
       }
     })
 
@@ -85,7 +85,7 @@ export default function organizationRoutes($stateProvider) {
       url: 'alerts/',
       template: '<customer-alerts/>',
       data: {
-        pageTitle: 'Alerts'
+        pageTitle: gettext('Alerts')
       }
     })
 
@@ -93,7 +93,7 @@ export default function organizationRoutes($stateProvider) {
       url: 'projects/',
       template: '<projects-list></projects-list>',
       data: {
-        pageTitle: 'Projects'
+        pageTitle: gettext('Projects')
       }
     })
 
@@ -101,17 +101,15 @@ export default function organizationRoutes($stateProvider) {
       url: 'team/',
       template: '<customer-team></customer-team>',
       data: {
-        pageTitle: 'Team'
+        pageTitle: gettext('Team')
       }
     })
 
     .state('organization.providers', {
       url: 'providers/?providerUuid&providerType',
-      templateUrl: 'views/partials/filtered-list.html',
-      controller: 'ProviderListController',
-      controllerAs: 'ListController',
+      template: '<providers-list/>',
       data: {
-        pageTitle: 'Providers'
+        pageTitle: gettext('Providers')
       }
     })
 
@@ -119,7 +117,7 @@ export default function organizationRoutes($stateProvider) {
       url: 'sizing/',
       template: '<customer-sizing/>',
       data: {
-        pageTitle: 'Sizing'
+        pageTitle: gettext('Sizing')
       }
     })
 
@@ -127,7 +125,7 @@ export default function organizationRoutes($stateProvider) {
       url: 'delete/',
       template: '<customer-delete></customer-delete>',
       data: {
-        pageTitle: 'Delete organization'
+        pageTitle: gettext('Delete organization')
       }
     })
 
@@ -135,7 +133,7 @@ export default function organizationRoutes($stateProvider) {
       url: 'plans/',
       template: '<plans-list/>',
       data: {
-        pageTitle: 'Plans'
+        pageTitle: gettext('Plans')
       }
     })
 
@@ -143,7 +141,7 @@ export default function organizationRoutes($stateProvider) {
       url: 'createProject/',
       template: '<project-create></project-create>',
       data: {
-        pageTitle: 'Create project',
+        pageTitle: gettext('Create project'),
       }
     })
 
@@ -151,7 +149,7 @@ export default function organizationRoutes($stateProvider) {
       url: 'createProvider/',
       template: '<provider-create></provider-create>',
       data: {
-        pageTitle: 'Create provider'
+        pageTitle: gettext('Create provider')
       }
     });
 }

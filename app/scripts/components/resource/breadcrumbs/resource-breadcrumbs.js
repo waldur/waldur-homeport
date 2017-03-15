@@ -11,7 +11,7 @@ export const resourceBreadcrumbs = {
     $onInit() {
       this.items = [
         {
-          label: 'Project dashboard',
+          label: gettext('Project dashboard'),
           state: 'project.details',
           params: {
             uuid: this.resource.project_uuid

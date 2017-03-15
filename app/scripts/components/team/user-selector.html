@@ -1,5 +1,5 @@
 <ui-select ng-model="model.user" ng-required="model.user" theme="bootstrap">
-    <ui-select-match placeholder="Select user...">
+    <ui-select-match placeholder="{{ 'Select user...' | translate }}">
         {{ $select.selected.full_name || $select.selected.username }}
     </ui-select-match>
     <ui-select-choices repeat="user in users | filter: $select.search">

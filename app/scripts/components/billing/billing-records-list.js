@@ -21,7 +21,6 @@ function RecordsListController(
   var InvoicesController = baseControllerListClass.extend({
     init: function() {
       this.service = invoicesService;
-      this.getSearchFilters();
       let fn = this._super.bind(this);
       return usersService.getCurrentUser().then(currentUser => {
         this.currentUser = currentUser;
@@ -34,12 +33,12 @@ function RecordsListController(
     },
     getTableOptions: function() {
       return {
-        noDataText: 'You have no records yet',
-        noMatchesText: 'No records found matching filter.',
+        noDataText: gettext('You have no records yet'),
+        noMatchesText: gettext('No records found matching filter.'),
         searchFieldName: 'number',
         columns: [
           {
-            title: 'Record number',
+            title: gettext('Record number'),
             className: 'all',
             render: function(row) {
               const href = $state.href('billingDetails', {uuid: row.uuid});
@@ -47,22 +46,22 @@ function RecordsListController(
             }
           },
           {
-            title: 'State',
+            title: gettext('State'),
             className: 'all',
             render: row => row.state
           },
           {
-            title: 'Price',
+            title: gettext('Price'),
             className: 'all',
             render: row => $filter('defaultCurrency')(row.price)
           },
           {
-            title: 'Total',
+            title: gettext('Total'),
             className: 'min-tablet-l',
             render: row => $filter('defaultCurrency')(row.total)
           },
           {
-            title: 'Record period',
+            title: gettext('Record period'),
             className: 'all',
             render: row => BillingUtils.formatPeriod(row)
           },
@@ -75,8 +74,8 @@ function RecordsListController(
         return BillingUtils.getTableActions();
       }
     },
-    getSearchFilters: function() {
-      this.searchFilters = BillingUtils.getSearchFilters();
+    getUserFilter: function() {
+      return BillingUtils.getUserFilter();
     },
     getFilter: function() {
       return {

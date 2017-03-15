@@ -1,13 +1,12 @@
 import template from './customer-delete.html';
 
-export default function customerDelete() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: CustomerDeleteController,
-    controllerAs: 'DeleteController',
-  };
-}
+const customerDelete = {
+  template: template,
+  controller: CustomerDeleteController,
+  controllerAs: 'DeleteController',
+};
+
+export default customerDelete;
 
 // @ngInject
 function CustomerDeleteController(
@@ -78,11 +77,11 @@ function CustomerDeleteController(
               summary: 'Organization removal'
             }),
             options: {
-              title: 'Organization removal',
+              title: gettext('Organization removal'),
               hideTitle: true,
-              descriptionLabel: 'Reason',
-              descriptionPlaceholder: 'Why do you need to remove organization with existing projects?',
-              submitTitle: 'Request removal'
+              descriptionLabel: gettext('Reason'),
+              descriptionPlaceholder: gettext('Why do you need to remove organization with existing projects?'),
+              submitTitle: gettext('Request removal')
             }
           }
         });

@@ -1,17 +1,6 @@
 import template from './select-workspace-toggle.html';
 import './select-workspace-toggle.scss';
 
-export default function selectWorkspaceToggle() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: SelectWorkspaceToggleController,
-    controllerAs: '$ctrl',
-    bindToController: true,
-    scope: {}
-  };
-}
-
 const workspaceIconClasses = {
   organization: 'fa-sitemap',
   project: 'fa-bookmark',
@@ -32,10 +21,9 @@ class SelectWorkspaceToggleController {
     this.WorkspaceService = WorkspaceService;
     this.$uibModal = $uibModal;
     this.$rootScope = $rootScope;
-    this.init();
   }
 
-  init() {
+  $onInit() {
     this.$rootScope.$on('WORKSPACE_CHANGED', this.refreshWorkspace.bind(this));
     this.refreshWorkspace();
   }
@@ -55,8 +43,6 @@ class SelectWorkspaceToggleController {
       return this.customer.name;
     } else if (this.project && this.workspace == 'project') {
       return this.customer.name + ' > ' + this.project.name;
-    } else {
-      return 'Select workspace';
     }
   }
 
@@ -85,3 +71,10 @@ class SelectWorkspaceToggleController {
     });
   }
 }
+
+const selectWorkspaceToggle = {
+  template: template,
+  controller: SelectWorkspaceToggleController,
+};
+
+export default selectWorkspaceToggle;

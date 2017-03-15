@@ -7,7 +7,7 @@ function formatFlavor($filter) {
         parts.push(resource.cores + ' vCPU');
       }
       if (resource.ram) {
-        parts.push($filter('filesize')(resource.ram) + ' memory');
+        parts.push($filter('filesize')(resource.ram) + ' RAM');
       }
       if (resource.disk) {
         parts.push($filter('filesize')(resource.disk) + ' storage');

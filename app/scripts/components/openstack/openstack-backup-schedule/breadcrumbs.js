@@ -19,7 +19,7 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService, ncUtils, C
         }
       },
       {
-        label: 'Backup schedules',
+        label: gettext('Backup schedules'),
         state: 'resources.details',
         params: {
           uuid: instance_uuid,

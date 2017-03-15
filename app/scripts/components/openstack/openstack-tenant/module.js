@@ -1,3 +1,5 @@
+import actionConfig from './actions';
+import tabsConfig from './tabs';
 import OpenStackTenantConfig from './openstack-tenant-config';
 import openstackTenantCheckoutSummary from './openstack-tenant-checkout-summary';
 import openstackTenantChangePackageDialog from './openstack-tenant-change-package';
@@ -8,11 +10,13 @@ import openstackTenantChangePackageService from './openstack-tenant-change-packa
 import openstackFlavorsService from './openstack-flavors-service';
 import openstackPrices from './openstack-prices';
 import openstackTenantPrices from './openstack-tenant-prices';
+import filtersModule from './filters';
 
 export default module => {
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(tabsConfig);
+  module.run(eventsConfig);
   module.directive('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
   module.directive('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
   module.component('openstackTenantSummary', openstackTenantSummary);
@@ -22,6 +26,7 @@ export default module => {
   module.service('openstackFlavorsService', openstackFlavorsService);
   module.component('openstackPrices', openstackPrices);
   module.component('openstackTenantPrices', openstackTenantPrices);
+  filtersModule(module);
 };
 
 // @ngInject
@@ -29,107 +34,24 @@ function fieldsConfig(AppstoreFieldConfigurationProvider) {
   AppstoreFieldConfigurationProvider.register('OpenStack.Tenant', OpenStackTenantConfig);
 }
 
-// @ngInject
-function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
-  ActionConfigurationProvider.register('OpenStack.Tenant', {
-    order: [
-      'edit',
-      'pull',
-      'pull_quotas',
-      'change_package',
-      'create_network',
-      'create_security_group',
-      'pull_security_groups',
-      'pull_floating_ips',
-      'create_floating_ip',
-      'destroy'
-    ],
-    options: {
-      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: 'Tenant has been updated'
-      }),
-      pull: {
-        title: 'Synchronise'
-      },
-      pull_quotas: {
-        title: 'Synchronise quotas'
-      },
-      create_network: {
-        tab: 'networks',
-        title: 'Create',
-        dialogTitle: 'Create network for ',
-        iconClass: 'fa-plus',
-        fields: {
-          description: {
-            type: 'text'
-          }
-        }
-      },
-      change_package: {
-        title: 'Change VPC package',
-        enabled: true,
-        type: 'form',
-        component: 'openstackTenantChangePackageDialog',
-        dialogSize: 'lg'
-      },
-      create_security_group: {
-        tab: 'security_groups',
-        title: 'Create',
-        dialogTitle: 'Create security group for ',
-        iconClass: 'fa-plus',
-        fields: {
-          rules: {
-            component: 'securityGroupRuleEditor'
-          }
-        },
-        dialogSize: 'lg'
-      },
-      pull_security_groups: {
-        tab: 'security_groups',
-        title: 'Synchronise'
-      },
-      pull_floating_ips: {
-        tab: 'floating_ips',
-        title: 'Synchronise',
-      },
-      create_floating_ip: {
-        tab: 'floating_ips',
-        title: 'Create',
-        dialogTitle: 'Create floating IP for ',
-        iconClass: 'fa-plus',
-      },
-    },
-    delete_message: 'All tenant resources will be deleted.'
-  });
+function parsePackageEvent(event) {
+  return {
+    name: event.resource_extra_configuration.package_name,
+    category: event.resource_extra_configuration.package_category,
+    ram: event.resource_extra_configuration.ram,
+    cores: event.resource_extra_configuration.cores,
+    disk: event.resource_extra_configuration.storage,
+  };
 }
 
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
-  ResourceTabsConfigurationProvider.register('OpenStack.Tenant', {
-    order: [
-      ...DEFAULT_RESOURCE_TABS.order,
-      'networks',
-      'security_groups',
-      'floating_ips',
-      'quotas'
-    ],
-    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
-      networks: {
-        heading: 'Networks',
-        component: 'openstackTenantNetworks'
-      },
-      security_groups: {
-        heading: 'Security groups',
-        component: 'openstackSecurityGroupsList'
-      },
-      floating_ips: {
-        heading: 'Floating IPs',
-        component: 'openstackFloatingIpsList'
-      },
-      quotas: {
-        heading: 'Quotas',
-        component: 'quotasTable'
-      },
-    })
+function eventsConfig(eventsService, $filter) {
+  eventsService.pushPostprocessor(event => {
+    if (event.resource_extra_configuration && event.resource_extra_configuration.package_name) {
+      const resource_configuration = $filter('formatPackage')(parsePackageEvent(event));
+      return angular.extend({}, event, { resource_configuration });
+    } else {
+      return event;
+    }
   });
 }

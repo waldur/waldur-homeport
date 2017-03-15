@@ -21,7 +21,7 @@ const offeringSummary = {
     }
 
     showLink() {
-      return this.offering.issue_link && (this.currentUser.is_staff || this.currentUser.is_support);
+      return this.offering.issue_link && this.currentUser && (this.currentUser.is_staff || this.currentUser.is_support);
     }
 
     onCommentCreated() {

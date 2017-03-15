@@ -1,10 +1,10 @@
 <ol class="breadcrumb">
     <li ng-repeat="item in $ctrl.items">
         <a ng-click="$ctrl.onClick(item)">
-            {{ item.label }}
+            {{ item.label | translate }}
         </a>
     </li>
     <li class="active">
-        <strong>{{ $ctrl.activeItem }}</strong>
+        <strong>{{ $ctrl.activeItem | translate }}</strong>
     </li>
 </ol>

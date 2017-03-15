@@ -12,7 +12,7 @@ export default function aboutRoutes($stateProvider) {
       templateUrl: 'views/tos/index.html',
       data: {
         bodyClass: 'old',
-        pageTitle: 'Terms of service'
+        pageTitle: gettext('Terms of service')
       }
     })
 
@@ -27,7 +27,7 @@ export default function aboutRoutes($stateProvider) {
       templateUrl: 'views/about/index.html',
       data: {
         bodyClass: 'old',
-        pageTitle: 'About'
+        pageTitle: gettext('About')
       }
     })
 
@@ -42,7 +42,7 @@ export default function aboutRoutes($stateProvider) {
       templateUrl: 'views/policy/privacy.html',
       data: {
         bodyClass: 'old',
-        pageTitle: 'Privacy policy'
+        pageTitle: gettext('Privacy policy')
       }
     });
 }

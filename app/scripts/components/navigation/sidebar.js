@@ -1,27 +1,17 @@
 import template from './sidebar.html';
 
-export default function sidebar() {
-  return {
-    restrict: 'E',
-    scope: {
-      items: '=',
-      context: '='
-    },
-    template: template,
-    controller: SidebarController,
-    controllerAs: '$ctrl',
-    bindToController: true
-  };
-}
-
 // @ngInject
 class SidebarController {
   constructor(ENV, $state, $scope) {
     this.shortPageTitle = ENV.shortPageTitle;
     this.sidebarLogo = ENV.sidebarLogo;
     this.$state = $state;
-    $scope.$on('$stateChangeSuccess', this.syncMenu.bind(this));
-    $scope.$watch('items', this.syncMenu.bind(this));
+    this.$scope = $scope;
+  }
+
+  $onInit() {
+    this.$scope.$on('$stateChangeSuccess', this.syncMenu.bind(this));
+    this.$scope.$watch('items', this.syncMenu.bind(this));
   }
 
   onMenuClick(event, item) {
@@ -45,3 +35,14 @@ class SidebarController {
     });
   }
 }
+
+const sidebar = {
+  template: template,
+  bindings: {
+    items: '<',
+    context: '<'
+  },
+  controller: SidebarController,
+};
+
+export default sidebar;

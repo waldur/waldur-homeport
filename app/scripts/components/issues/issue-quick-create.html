@@ -1,24 +1,26 @@
 <div class="ibox float-e-margins">
     <div class="ibox-title">
-        <h5>Create request</h5>
+        <h5 translate>Create request</h5>
     </div>
     <div class="ibox-content">
         <form name="$ctrl.IssueForm" ng-disabled="$ctrl.saving">
             <div class="form-group">
                 <label for="issueType" class="control-label">
-                    Request type <span class="text-danger">*</span>
+                    <span translate>Request type</span>
+                    <span class="text-danger">*</span>
                 </label>
                 <div>
                     <issue-type-select model="$ctrl.issue" field="{name: 'type'}"></issue-type-select>
                     <div class="help-block text-danger"
                          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.type.$touched) && $ctrl.IssueForm.type.$error.required">
-                        You did not enter a field
+                        <span translate>You did not enter a field</span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="issueSummary" class="control-label">
-                    Title <span class="text-danger">*</span>
+                    <span translate>Title</span>
+                    <span class="text-danger">*</span>
                 </label>
                 <div>
                     <input type="text"
@@ -28,13 +30,14 @@
                         name="summary" required>
                     <div class="help-block text-danger"
                          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.summary.$touched) && $ctrl.IssueForm.summary.$error.required">
-                        You did not enter a field
+                        <span translate>You did not enter a field</span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="issueDescription" class="control-label">
-                    Description <span class="text-danger">*</span>
+                    <span translate>Description</span>
+                    <span class="text-danger">*</span>
                 </label>
                 <div>
                     <textarea type="text"
@@ -44,17 +47,17 @@
                         name="description" required/>
                     <div class="help-block text-danger"
                          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
-                        You did not enter a field
+                        <span translate>You did not enter a field</span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label">
-                    Organization
+                    <span translate>Organization</span>
                 </label>
                 <div>
                     <ui-select ng-model="$ctrl.issue.customer" name="customer">
-                        <ui-select-match placeholder="Select organization..."
+                        <ui-select-match placeholder="{{ 'Select organization...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>
@@ -69,11 +72,11 @@
             </div>
             <div class="form-group">
                 <label class="control-label">
-                    Project
+                    <span translate>Project</span>
                 </label>
                 <div ng-class="{disabled: !$ctrl.issue.customer}">
                     <ui-select ng-model="$ctrl.issue.project" name="project">
-                        <ui-select-match placeholder="Select project..."
+                        <ui-select-match placeholder="{{ 'Select project...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>
@@ -88,11 +91,11 @@
             </div>
             <div class="form-group">
                 <label class="control-label">
-                    Affected resource
+                    <span translate>Affected resource</span>
                 </label>
                 <div ng-class="{disabled: !$ctrl.issue.project}">
                     <ui-select ng-model="$ctrl.issue.resource">
-                        <ui-select-match placeholder="Select affected resource..."
+                        <ui-select-match placeholder="{{ 'Select affected resource...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.name }}
                         </ui-select-match>
@@ -110,7 +113,7 @@
                     submit-button="$ctrl.save()"
                     type="submit">
                     <i class="fa fa fa-plus"></i>
-                    Create request
+                    <span translate>Create request</span>
                 </a>
             </div>
         </form>

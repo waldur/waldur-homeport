@@ -21,8 +21,8 @@ export default module => {
   module.directive('appstoreFieldString', appstoreFieldString);
   module.directive('appstoreFieldPassword', appstoreFieldPassword);
   module.directive('appstoreFieldText', appstoreFieldText);
-  module.directive('appstoreFieldInteger', appstoreFieldInteger);
-  module.directive('appstoreFieldBoolean', appstoreFieldBoolean);
+  module.component('appstoreFieldInteger', appstoreFieldInteger);
+  module.component('appstoreFieldBoolean', appstoreFieldBoolean);
   module.directive('appstoreFieldErrors', appstoreFieldErrors);
   module.directive('appstoreFieldLabel', appstoreFieldLabel);
   module.directive('appstoreFieldList', appstoreFieldList);

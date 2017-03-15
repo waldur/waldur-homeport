@@ -1,5 +1,13 @@
+const providersList = {
+  controller: ProviderListController,
+  controllerAs: 'ListController',
+  templateUrl: 'views/partials/filtered-list.html',
+};
+
+export default providersList;
+
 // @ngInject
-export default function ProviderListController(
+function ProviderListController(
   $stateParams,
   $location,
   $rootScope,
@@ -34,25 +42,25 @@ export default function ProviderListController(
           this.checkPermissions();
           this.tableOptions = {
             searchFieldName: 'name',
-            noDataText: 'No providers yet.',
-            noMatchesText: 'No providers found matching filter.',
+            noDataText: gettext('No providers yet.'),
+            noMatchesText: gettext('No providers found matching filter.'),
             columns: [
               {
-                title: 'Type',
+                title: gettext('Type'),
                 className: 'all',
                 render: function(row) {
                   return row.service_type;
                 }
               },
               {
-                title: 'Name',
+                title: gettext('Name'),
                 className: 'all',
                 render: function(row) {
                   return row.name;
                 }
               },
               {
-                title: 'State',
+                title: gettext('State'),
                 className: 'text-center min-tablet-l',
                 render: function(row) {
                   return vm.renderProviderState(row);
@@ -60,7 +68,7 @@ export default function ProviderListController(
                 width: '40px'
               },
               {
-                title: 'System provider',
+                title: gettext('System provider'),
                 className: 'text-center min-tablet-l',
                 render: function(row) {
                   var cls = row.shared && 'fa-check' || 'fa-minus';
@@ -69,7 +77,7 @@ export default function ProviderListController(
                 width: '100px'
               },
               {
-                title: 'Resources',
+                title: gettext('Resources'),
                 className: 'text-center min-tablet-l',
                 render: function(row) {
                   if (!controllerScope.canUserManageService) {
@@ -82,11 +90,13 @@ export default function ProviderListController(
             ],
             rowActions: [
               {
-                name: '<i class="fa fa-search"></i> Details',
+                title: gettext('Details'),
+                iconClass: 'fa fa-search',
                 callback: this.openDialog
               },
               {
-                name: '<i class="fa fa-trash"></i> Remove',
+                title: gettext('Remove'),
+                iconClass: 'fa fa-trash',
                 callback: this.remove.bind(this.controllerScope),
 
                 isDisabled: function(service) {
@@ -107,7 +117,8 @@ export default function ProviderListController(
               },
 
               {
-                name: '<i class="fa fa-chain-broken"></i> Unlink',
+                title: gettext('Unlink'),
+                iconClass: 'fa fa-chain-broken',
 
                 callback: function(service) {
                   var vm = this.controllerScope;
@@ -146,12 +157,11 @@ export default function ProviderListController(
     },
     openDialog: function(row) {
       $uibModal.open({
-        component: 'providerDetails',
+        component: 'providerDialog',
         size: 'lg',
         resolve: {
-          provider: function() {
-            return row;
-          }
+          provider: () => row,
+          editable: () => true,
         }
       });
     },
@@ -167,7 +177,8 @@ export default function ProviderListController(
       }
       return [
         {
-          name: '<i class="fa fa-plus"></i> Add provider',
+          title: gettext('Add provider'),
+          iconClass: 'fa fa-plus',
           callback: function() {
             $state.go('organization.createProvider', {
               uuid: vm.currentCustomer.uuid

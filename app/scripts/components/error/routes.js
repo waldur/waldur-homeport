@@ -14,7 +14,7 @@ export default function errorRoutes($stateProvider) {
       url: '404/',
       template: '<error404></error404>',
       data: {
-        pageTitle: 'Page not found'
+        pageTitle: gettext('Page not found')
       }
     })
 
@@ -22,7 +22,7 @@ export default function errorRoutes($stateProvider) {
       url: '403/',
       template: '<error403></error403>',
       data: {
-        pageTitle: 'Quota limit exceeded'
+        pageTitle: gettext('Quota limit exceeded')
       }
     });
 }

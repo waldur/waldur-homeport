@@ -7,7 +7,7 @@ export default {
     'data_volume_size',
     'ssh_public_key',
     'security_groups',
-    'floating_ip',
+    'networks',
     'description',
     'user_data'
   ],
@@ -15,26 +15,26 @@ export default {
     name: {
       type: 'string',
       required: true,
-      label: 'VM name',
+      label: gettext('VM name'),
       maxlength: 150
     },
     image: {
       type: 'list',
       required: true,
-      label: 'Image',
+      label: gettext('Image'),
       columns: [
         {
           name: 'name',
-          label: 'Image name'
+          label: gettext('Image name')
         },
         {
           name: 'min_ram',
-          label: 'Min RAM',
+          label: gettext('Min RAM'),
           filter: 'filesize'
         },
         {
           name: 'min_disk',
-          label: 'Min storage',
+          label: gettext('Min storage'),
           filter: 'filesize'
         }
       ]
@@ -42,25 +42,25 @@ export default {
     flavor: {
       type: 'list',
       required: true,
-      label: 'Flavor',
+      label: gettext('Flavor'),
       formatter: flavorFormatter,
       columns: [
         {
           name: 'name',
-          label: 'Flavor name'
+          label: gettext('Flavor name')
         },
         {
           name: 'cores',
-          label: 'vCPU'
+          label: gettext('vCPU')
         },
         {
           name: 'ram',
-          label: 'RAM',
+          label: gettext('RAM'),
           filter: 'filesize'
         },
         {
           name: 'disk',
-          label: 'Storage',
+          label: gettext('Storage'),
           filter: 'filesize'
         }
       ]
@@ -68,7 +68,7 @@ export default {
     system_volume_size: {
       type: 'integer',
       required: true,
-      label: 'System volume size',
+      label: gettext('System volume size'),
       factor: 1024,
       units: 'GB',
       min: 1024,
@@ -77,7 +77,7 @@ export default {
     data_volume_size: {
       type: 'integer',
       required: true,
-      label: 'Data volume size',
+      label: gettext('Data volume size'),
       factor: 1024,
       units: 'GB',
       min: 1024,
@@ -85,22 +85,22 @@ export default {
     },
     ssh_public_key: {
       type: 'list',
-      label: 'SSH public key',
+      label: gettext('SSH public key'),
       columns: [
         {
           name: 'name',
-          label: 'Name'
+          label: gettext('Name')
         },
         {
           name: 'fingerprint',
-          label: 'Fingerprint'
+          label: gettext('Fingerprint')
         }
       ],
-      warningMessage: 'SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile.keys">profile</a>.'
+      warningMessage: gettext('SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile.keys">profile</a>.')
     },
     security_groups: {
       type: 'multiselect',
-      label: 'Security groups',
+      label: gettext('Security groups'),
       component: 'openstackInstanceSecurityGroupsField',
       resource: 'openstacktenant-security-groups',
       parser: group => ({
@@ -112,27 +112,35 @@ export default {
         url: group.value
       }))
     },
-    floating_ip: {
-      type: 'list',
-      label: 'Floating IP',
-      columns: [
-        {
-          name: 'address',
-          label: 'Address'
+    networks: {
+      label: gettext('Networks'),
+      component: 'openstackInstanceNetworks',
+      resources: context => ({
+        subnets: {
+          endpoint: 'openstacktenant-subnets',
+          params: {
+            settings_uuid: context.settings_uuid,
+          }
+        },
+        floating_ips: {
+          endpoint: 'openstacktenant-floating-ips',
+          params: {
+            settings_uuid: context.settings_uuid,
+            is_booked: false,
+            runtime_state: 'DOWN',
+          }
         }
-      ],
-      component: 'openstackInstanceFloatingIp',
-      formatter: floatingIPFormatter
+      })
     },
     description: {
       type: 'text',
-      label: 'Description',
+      label: gettext('Description'),
       maxlength: 500
     },
     user_data: {
       type: 'text',
-      label: 'User data',
-      help_text: 'Additional data that will be added to instance on provisioning'
+      label: gettext('User data'),
+      help_text: gettext('Additional data that will be added to instance on provisioning')
     }
   },
   watchers: {
@@ -141,6 +149,10 @@ export default {
   },
   summaryComponent: 'openstackInstanceCheckoutSummary'
 };
+
+export function internalIpFormatter(subnet) {
+  return `${subnet.name} (${subnet.cidr})`;
+}
 
 function validateAndSort(model, options, validator, comparator, name) {
   const choices = options[name].choices;
@@ -164,11 +176,9 @@ function flavorWatcher(model, options, newFlavor) {
   }
 }
 
-function flavorFormatter($filter, value) {
-  const ram = $filter('filesize')(value.ram);
-  const storage = $filter('filesize')(value.disk);
-  const props = `${value.cores} vCPU, ${ram} RAM, ${storage} storage`;
-  return `${value.name} (${props})`;
+export function flavorFormatter($filter, flavor) {
+  const props = $filter('formatFlavor')(flavor);
+  return `${flavor.name} (${props})`;
 }
 
 function flavorComparator(a, b) {
@@ -197,8 +207,4 @@ function flavorValidator(model, choice) {
     return true;
   }
   return false;
-}
-
-function floatingIPFormatter($filter, value) {
-  return value.address;
 }

@@ -1,7 +1,6 @@
+import { templateParser } from '../utils';
 import {
   openstackTemplateColumns,
-  templateParser,
-  templateFormatter,
   templateComparator,
   openstackTemplateFilters
 } from './openstack-template';
@@ -21,51 +20,51 @@ export default {
     name: {
       type: 'string',
       required: true,
-      label: 'Tenant name'
+      label: gettext('Tenant name')
     },
     template: {
       type: 'list',
       required: true,
-      label: 'VPC package',
-      dialogTitle: 'Select Virtual Private Cloud package',
+      label: gettext('VPC package'),
+      dialogTitle: gettext('Select Virtual Private Cloud package'),
       dialogSize: 'lg',
       resource: 'package-templates',
       parser: templateParser,
-      formatter: templateFormatter,
+      formatter: ($filter, value) => $filter('formatPackage')(value),
       columns: openstackTemplateColumns,
       comparator: templateComparator,
       filterOptions: openstackTemplateFilters
     },
     description: {
       type: 'text',
-      label: 'Description'
+      label: gettext('Description')
     },
     access: {
       type: 'label',
-      label: 'Access'
+      label: gettext('Access')
     },
     user_username: {
       type: 'string',
-      label: 'Initial admin username',
-      placeholder: 'generate automatically',
-      help_text: 'Leave blank if you want admin username to be auto-generated'
+      label: gettext('Initial admin username'),
+      placeholder: gettext('generate automatically'),
+      help_text: gettext('Leave blank if you want admin username to be auto-generated')
     },
     user_password: {
       type: 'password',
-      label: 'Initial admin password',
-      placeholder: 'generate automatically',
-      help_text: 'Leave blank if you want admin password to be auto-generated'
+      label: gettext('Initial admin password'),
+      placeholder: gettext('generate automatically'),
+      help_text: gettext('Leave blank if you want admin password to be auto-generated')
     },
     subnet_cidr: {
       component: 'openstackSubnet',
-      label: 'Internal network mask (CIDR)',
+      label: gettext('Internal network mask (CIDR)'),
       default_value: 42,
       mask: '192.168.X.0/24',
       serializer: (value, field) => field.mask.replace('X', value)
     },
     subnet_allocation_pool: {
       component: 'openstackAllocationPool',
-      label: 'Internal network allocation pool',
+      label: gettext('Internal network allocation pool'),
       range: '192.168.X.10 — 192.168.X.200',
       parentField: 'subnet_cidr'
     },

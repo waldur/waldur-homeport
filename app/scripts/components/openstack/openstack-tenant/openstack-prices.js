@@ -1,8 +1,5 @@
-import {
-  templateParser,
-  openstackTemplateColumns,
-  openstackTemplateFilters
-} from './openstack-template';
+import { templateParser } from '../utils';
+import { openstackTemplateColumns, openstackTemplateFilters } from './openstack-template';
 
 import template from './openstack-prices.html';
 

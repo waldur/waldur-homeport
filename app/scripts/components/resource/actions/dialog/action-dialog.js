@@ -22,11 +22,17 @@ function ActionDialogController(
         $scope.loading = false;
       });
       angular.forEach($scope.action.fields, function(field, name) {
+        if (field.init) {
+          field.init(field, $scope.resource, $scope.form);
+        }
         if (field.default_value) {
           $scope.form[name] = field.default_value;
         }
         if (field.resource_default_value || $scope.action.name === 'update') {
           $scope.form[name] = $scope.resource[name];
+        }
+        if (field.modelParser) {
+          $scope.form[name] = field.modelParser(field, $scope.form[name]);
         }
         if (field.type === 'multiselect') {
           $scope.form[name] = actionUtilsService.formatChoices(field, $scope.form[name]);

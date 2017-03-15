@@ -1,7 +1,7 @@
     <div class="form-horizontal">
         <div class="form-group">
             <label for="projectName" class="col-sm-3 control-label">
-                Project name
+                <span translate>Project name</span>
             </label>
             <div class="col-sm-5">
                 <input type="text"
@@ -16,7 +16,7 @@
 
         <div class="form-group">
             <label for="projectDescription" class="col-sm-3 control-label">
-                Project description
+                <span translate>Project description</span>
             </label>
             <div class="col-sm-5">
                 <textarea id="projectDescription"
@@ -36,8 +36,12 @@
 
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
-                <button class="btn btn-primary" submit-button="ProjectAdd.save()">Add project</button>
-                <button class="btn btn-default" ng-click="ProjectAdd.cancel()">Cancel</button>
+                <button class="btn btn-primary" submit-button="ProjectAdd.save()">
+                    <span translate>Add project</span>
+                </button>
+                <button class="btn btn-default" ng-click="ProjectAdd.cancel()">
+                    <span translate>Cancel</span>
+                </button>
             </div>
         </div>
     </div>

@@ -3,7 +3,7 @@
     type="text"
     class="form-control"
     uib-datepicker-popup="{{ $ctrl.field.options.format }}"
-    placeholder="Enter date"
+    placeholder="{{ 'Enter date' | translate }}"
     ng-model="$ctrl.model[$ctrl.field.name]"
     ng-required="$ctrl.field.required"
     is-open="dateTimeOpened"

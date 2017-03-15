@@ -28,15 +28,15 @@ function OpenstackSecurityGroupsListController(
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = 'No security groups yet.';
-      options.noMatchesText = 'No security groups found matching filter.';
+      options.noDataText = gettext('No security groups yet.');
+      options.noMatchesText = gettext('No security groups found matching filter.');
       options.columns = [
         {
-          title: 'Name',
+          title: gettext('Name'),
           render: row => this.renderResourceName(row)
         },
         {
-          title: 'State',
+          title: gettext('State'),
           render: row => this.renderResourceState(row)
         }
       ];

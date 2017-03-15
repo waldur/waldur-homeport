@@ -7,7 +7,7 @@ export default function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RE
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       snapshots: {
-        heading: 'Snapshots',
+        heading: gettext('Snapshots'),
         component: 'backupSnapshotsList'
       },
     })

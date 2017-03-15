@@ -11,15 +11,16 @@ export default function analyticsRoutes($stateProvider) {
       url: 'cost-analysis/',
       template: '<cost-analysis></cost-analysis>',
       data: {
-        pageTitle: 'Cost analysis'
+        pageTitle: gettext('Cost analysis')
       }
     })
 
     .state('organization.analysis.resources', {
       url: 'resource-usage/',
-      template: '<resource-analysis></resource-analysis>',
+      template: '<resource-analysis/>',
       data: {
-        pageTitle: 'Resource usage'
+        pageClass: 'gray-bg',
+        pageTitle: gettext('Resource usage')
       }
     });
 }

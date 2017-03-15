@@ -7,12 +7,14 @@
 
     <div ng-if="!ServiceAdd.loadingCustomer">
         <div class="form-group">
-            <label class="col-sm-3 control-label">Provider type</label>
+            <label class="col-sm-3 control-label">
+              <span translate>Provider type</span>
+            </label>
             <div class="col-sm-4">
               <ui-select 
                 ng-model="ServiceAdd.serviceChoice"
                 theme="bootstrap">
-                <ui-select-match placeholder="Select provider type...">
+                <ui-select-match placeholder="{{ 'Select provider type...' | translate }}">
                     <img width="25" ng-src="static/images/appstore/icon-{{ $select.selected.name.toLowerCase() }}.png" />
                     {{ $select.selected.name }}
                 </ui-select-match>
@@ -36,13 +38,15 @@
                     <a ui-sref="help.details({name: ServiceAdd.model.name})"
                        target="_blank">
                        <i class="fa fa-question-circle"></i>
-                       How to obtain credentials
+                       <span translate>How to obtain credentials</span>
                     </a>
                 </div>
             </div>
 
             <div class="form-group" ng-class="{'has-error': ServiceAdd.errors.name}">
-                <label for="serviceName" class="col-sm-3 control-label">Provider name</label>
+                <label for="serviceName" class="col-sm-3 control-label">
+                  <span translate>Provider name</span>
+                </label>
                 <div class="col-sm-4">
                     <input type="text"
                         ng-model="ServiceAdd.model.serviceName"
@@ -67,7 +71,7 @@
                     class="col-sm-offset-3 col-sm-4 checkbox">
                     <label>
                         <input type="checkbox" ng-model="option.value"/>
-                        {{ ::option.label }}
+                        {{ option.label | translate }}
                         <small class="form-text text-muted" ng-bind="option.help_text"></small>
                     </label>
                 </div>
@@ -105,7 +109,7 @@
                                ngf-accept="'application/x-x509-ca-cert'"
                                ng-model="option.value">
                                <i class="fa fa-upload"></i>
-                               Browse
+                               <span translate>Browse</span>
                             </a>
                         </div>
 
@@ -136,7 +140,7 @@
 
             <div class="form-group"
                 ng-if="ServiceAdd.isDisabled()">
-                <p class="help-block col-sm-offset-3 col-sm-4">
+                <p class="help-block col-sm-offset-3 col-sm-4" translate>
                     Not all required fields have been entered.
                 </p>
             </div>
@@ -147,12 +151,12 @@
                        class="btn btn-primary"
                        ng-class="{'disabled': ServiceAdd.isDisabled()}"
                        submit-button="ServiceAdd.save()">
-                       Add provider
+                       <span translate>Add provider</span>
                     </button>
                     <button
                        class="btn btn-default"
                        ng-click="ServiceAdd.cancel()">
-                       Cancel
+                       <span translate>Cancel</span>
                     </button>
                 </div>
             </div>

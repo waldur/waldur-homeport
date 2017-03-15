@@ -40,11 +40,10 @@ function InvitationsListController(
       ]).then(() => {
         this.isOwnerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
         this.tableOptions = this.getTableOptions();
-        this.getSearchFilters();
         fn();
         this.defaultFilter = {
           name: 'state',
-          title: 'Pending',
+          title: gettext('Pending'),
           value: 'pending'
         };
       }).finally(() => {
@@ -56,38 +55,37 @@ function InvitationsListController(
         customer: this.currentCustomer.uuid
       };
     },
-    getSearchFilters: function() {
-      this.searchFilters = [
-        {
-          name: 'state',
-          title: 'Pending',
-          value: 'pending'
-        },
-        {
-          name: 'state',
-          title: 'Canceled',
-          value: 'canceled'
-        },
-        {
-          name: 'state',
-          title: 'Expired',
-          value: 'expired'
-        },
-        {
-          name: 'state',
-          title: 'Accepted',
-          value: 'accepted'
-        }
-      ];
+    getUserFilter: function() {
+      return {
+        name: 'state',
+        choices: [
+          {
+            title: gettext('Pending'),
+            value: 'pending',
+          },
+          {
+            title: gettext('Canceled'),
+            value: 'canceled'
+          },
+          {
+            title: gettext('Expired'),
+            value: 'expired'
+          },
+          {
+            title: gettext('Accepted'),
+            value: 'accepted'
+          }
+        ]
+      };
     },
     getTableOptions: function() {
       return {
-        noDataText: 'You have no team invitations yet',
-        noMatchesText: 'No invitations found matching filter.',
+        noDataText: gettext('You have no team invitations yet'),
+        noMatchesText: gettext('No invitations found matching filter.'),
         enableOrdering: true,
         columns: [
           {
-            title: 'Email',
+            title: gettext('Email'),
             className: 'all',
             orderField: 'email',
             render: function(row) {
@@ -97,7 +95,7 @@ function InvitationsListController(
             }
           },
           {
-            title: 'Role',
+            title: gettext('Role'),
             className: 'min-tablet-l',
             orderable: false,
             render: function(row) {
@@ -114,7 +112,7 @@ function InvitationsListController(
             }
           },
           {
-            title: 'Status',
+            title: gettext('Status'),
             className: 'min-tablet-l',
             orderField: 'state',
             render: function(row) {
@@ -122,7 +120,7 @@ function InvitationsListController(
             }
           },
           {
-            title: 'Created at',
+            title: gettext('Created at'),
             className: 'min-tablet-l',
             orderField: 'created',
             render: function(row) {
@@ -130,7 +128,7 @@ function InvitationsListController(
             }
           },
           {
-            title: 'Expires at',
+            title: gettext('Expires at'),
             className: 'min-tablet-l',
             orderable: false,
             render: function(row) {
@@ -138,7 +136,7 @@ function InvitationsListController(
             }
           },
           {
-            title: 'URL',
+            title: gettext('URL'),
             className: 'none',
             orderable: false,
             render: function(row) {
@@ -153,7 +151,8 @@ function InvitationsListController(
     getTableActions: function() {
       return [
         {
-          name: '<i class="fa fa-plus"></i> Invite user',
+          title: gettext('Invite user'),
+          iconClass: 'fa fa-plus',
           callback: this.openDialog.bind(this),
           disabled: !this.isOwnerOrStaff,
           titleAttr: !this.isOwnerOrStaff && 'Only customer owner or staff can invite users.'
@@ -176,7 +175,8 @@ function InvitationsListController(
       if (this.isOwnerOrStaff) {
         return [
           {
-            name: '<i class="fa fa-ban"></i> Cancel',
+            title: gettext('Cancel'),
+            iconClass: 'fa fa-ban',
             callback: this.cancelInvitation.bind(this),
             isDisabled: function(row) {
               return row.state !== 'pending';
@@ -188,7 +188,8 @@ function InvitationsListController(
             }
           },
           {
-            name: '<i class="fa fa-envelope-o"></i> Resend',
+            title: gettext('Resend'),
+            iconClass: 'fa fa-envelope-o',
             callback: this.resendInvitation.bind(this),
             isDisabled: function(row) {
               return row.state !== 'pending';

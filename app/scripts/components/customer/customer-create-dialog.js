@@ -15,12 +15,6 @@ function CustomerCreateDialogController(customersService, $scope, $rootScope, $s
     instance: {},
     init: function() {
       if (this.customer) {
-        this.dialogTitle = 'Edit organization';
-      } else {
-        this.dialogTitle = 'Create organization';
-      }
-
-      if (this.customer) {
         this.copyFields(this.customer, this.instance, this.fields);
       }
       this.loadCountries();

@@ -3,45 +3,45 @@
       <span translate>Select workspace</span>
     </h3>
 </div>
-<div class="modal-body" ng-class="{disabled: Ctrl.loadingState}">
-  <div ng-if="Ctrl.loadingOrganizations">
+<div class="modal-body" ng-class="{disabled: $ctrl.loadingState}">
+  <div ng-if="$ctrl.loadingOrganizations">
       <loading-spinner/>
   </div>
-  <div ng-if="!Ctrl.loadingOrganizations && Ctrl.organizations.length === 0" class="row">
+  <div ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length === 0" class="row">
     <div class="middle-box text-center">
         <h3 class="font-bold m-b-lg">
           <span translate>You do not belong to any organization yet.</span>
         </h3>
         <div>
             <a class="btn btn-default"
-              ng-click="Ctrl.createOrganization()"
-              ng-if="Ctrl.canCreateOrganization">
+              ng-click="$ctrl.createOrganization()"
+              ng-if="$ctrl.canCreateOrganization">
               <i class="fa fa-plus"></i>
               <span translate>Add new organization</span>
             </a>
         </div>
     </div>
   </div>
-  <div ng-if="!Ctrl.loadingOrganizations && Ctrl.organizations.length > 0" class="row">
+  <div ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length > 0" class="row">
     <div class="col-md-6 col-xs-12 m-b-md">
       <a class="pull-right btn btn-sm btn-default"
-        ng-click="Ctrl.createOrganization()"
-        ng-if="Ctrl.canCreateOrganization">
+        ng-click="$ctrl.createOrganization()"
+        ng-if="$ctrl.canCreateOrganization">
         <i class="fa fa-plus"></i>
         <span translate>Add new</span>
         <span class="hidden-xs" translate>organization</span>
       </a>
       <h3 class="m-b-md">
-        <span translate>Organizations</span> ({{ Ctrl.organizations.length }})
+        <span translate>Organizations</span> ({{ $ctrl.organizations.length }})
       </h3>
       <div class="form-group">
         <div class="search-box">
           <input id="organization-search-box"
                  type="text"
                  class="form-control"
-                 ng-model="Ctrl.organizationSearchInput"
+                 ng-model="$ctrl.organizationSearchInput"
                  ng-model-options="{ debounce: 500 }"
-                 placeholder="Filter organizations">
+                 placeholder="{{ 'Filter organizations' | translate }}">
           <label for="organization-search-box">
             <i class="fa fa-search"></i>
           </label>
@@ -49,12 +49,12 @@
       </div>
       <div class="list-group" slimscroll="{alwaysVisible: true, height: '300px'}" id="organization-selector">
         <div class="list-group-item"
-          ng-repeat="organization in Ctrl.organizations | filter: {name: Ctrl.organizationSearchInput}"
-          ng-class="{active: organization.uuid == Ctrl.selectedOrganization.uuid}"
-          ng-click="Ctrl.selectOrganization(organization)">
+          ng-repeat="organization in $ctrl.organizations | filter: {name: $ctrl.organizationSearchInput}"
+          ng-class="{active: organization.uuid == $ctrl.selectedOrganization.uuid}"
+          ng-click="$ctrl.selectOrganization(organization)">
           <a class="btn btn-xs btn-default pull-right"
             ng-if="organization.canGotoDashboard"
-            submit-button="Ctrl.gotoOrganization(organization)">
+            submit-button="$ctrl.gotoOrganization(organization)">
             <span translate>Select</span>
           </a>
           <div
@@ -73,42 +73,42 @@
     </div>
     <div class="col-md-6 col-xs-12">
       <a class="pull-right btn btn-sm btn-default"
-        ng-click="Ctrl.createProject()"
-        ng-if="Ctrl.selectedOrganization.ownerOrStaff">
+        ng-click="$ctrl.createProject()"
+        ng-if="$ctrl.selectedOrganization.ownerOrStaff">
         <i class="fa fa-plus"></i>
         <span translate>Add new project</span>
       </a>
       <h3 class="m-b-md">
         <span translate>Projects</span>
-        ({{ Ctrl.selectedOrganization.projects.length || 0 }})
+        ({{ $ctrl.selectedOrganization.projects.length || 0 }})
       </h3>
       <div class="form-group">
         <div class="search-box">
           <input id="project-search-box"
                  type="text"
                  class="form-control"
-                 ng-model="Ctrl.projectSearchInput"
+                 ng-model="$ctrl.projectSearchInput"
                  ng-model-options="{ debounce: 500 }"
-                 placeholder="Filter projects">
+                 placeholder="{{ 'Filter projects' | translate }}">
           <label for="project-search-box">
             <i class="fa fa-search"></i>
           </label>
         </div>
       </div>
-      <div ng-if="Ctrl.selectedOrganization.projects.length == 0">
+      <div ng-if="$ctrl.selectedOrganization.projects.length == 0">
           <p class="text-center text-danger">
             <span translate>There are no projects yet for this organization.</span>
           </p>
       </div>
-      <div ng-if="Ctrl.selectedOrganization.projects.length > 0"
+      <div ng-if="$ctrl.selectedOrganization.projects.length > 0"
         class="list-group"
         slimscroll="{alwaysVisible: true, height: '300px'}"
         id="project-selector">
         <div class="list-group-item"
-          ng-repeat="project in Ctrl.selectedOrganization.projects | filter: {name: Ctrl.projectSearchInput}"
-          ng-class="{active: project.uuid == Ctrl.selectedProject.uuid}"
-          ng-click="Ctrl.selectProject(project)">
-          <a class="btn btn-xs btn-default pull-right" submit-button="Ctrl.gotoProject(project)">
+          ng-repeat="project in $ctrl.selectedOrganization.projects | filter: {name: $ctrl.projectSearchInput}"
+          ng-class="{active: project.uuid == $ctrl.selectedProject.uuid}"
+          ng-click="$ctrl.selectProject(project)">
+          <a class="btn btn-xs btn-default pull-right" submit-button="$ctrl.gotoProject(project)">
             <span translate>Select</span>
           </a>
           <div class="elipsis">{{ project.name }}</div>
@@ -118,10 +118,10 @@
   </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default" ng-click="Ctrl.gotoProfile()">
+    <button class="btn btn-default" ng-click="$ctrl.gotoProfile()">
       <span translate>Go to my profile</span>
     </button>
-    <button class="btn btn-default" ng-click="Ctrl.dismiss()">
+    <button class="btn btn-default" ng-click="$ctrl.dismiss()">
       <span translate>Cancel</span>
     </button>
 </div>

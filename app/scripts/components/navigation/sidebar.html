@@ -21,7 +21,7 @@
                 visible-if="item.feature">
                 <a ui-sref="{{ item.link }}" ng-if="item.link" ng-click="$ctrl.onMenuClick($event, item)">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
-                    <span class="nav-label" ng-bind="::item.label"/>
+                    <span class="nav-label">{{ item.label | translate }}</span>
                     <span class="label label-default pull-right"
                         ng-if="::item.countFieldKey"
                         ng-bind="item.count"/>
@@ -29,7 +29,7 @@
                 </a>
                 <a ng-if="::item.action" ng-click="item.action()">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
-                    <span class="nav-label">{{ ::item.label }}</span>
+                    <span class="nav-label">{{ item.label | translate }}</span>
                 </a>
                 <ul class="nav nav-second-level ng-hide"
                     ng-show="item.expanded"
@@ -40,7 +40,7 @@
                         visible-if="child.feature">
                         <a ui-sref="{{ child.link }}">
                             <i class="fa {{ ::child.icon }}"></i>
-                            {{ ::child.label }}
+                            {{ child.label | translate }}
                             <span class="label label-info pull-right"
                                 ng-if="::child.countFieldKey"
                                 ng-bind="child.count"/>

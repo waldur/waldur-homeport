@@ -1,4 +1,4 @@
-import { templateParser } from './openstack-template';
+import { templateParser } from '../utils';
 
 // @ngInject
 export default class openstackTenantChangePackageService {
@@ -77,7 +77,7 @@ export default class openstackTenantChangePackageService {
   }
 
   compareTemplates(a, b) {
-    return a.cores < b.cores || a.ram < b.ram || a.storage < b.storage;
+    return a.cores < b.cores || a.ram < b.ram || a.disk < b.disk;
   }
 
   createIssue(context) {

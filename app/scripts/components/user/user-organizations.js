@@ -18,19 +18,19 @@ function UserOrganizationsController(
       this.controllerScope = controllerScope;
       this.tableOptions = {
         disableSearch: true,
-        noDataText: 'No organizations yet',
-        noMatchesText: 'No organizations found matching filter.',
+        noDataText: gettext('No organizations yet'),
+        noMatchesText: gettext('No organizations found matching filter.'),
 
         columns: [
           {
-            title: 'Organization name',
+            title: gettext('Organization name'),
             className: 'all',
             render: function(row) {
               return row.customer_name;
             },
           },
           {
-            title: 'Owner',
+            title: gettext('Owner'),
             className: 'text-center min-tablet-l',
             render: function(row) {
               var cls = (row.role === 'owner') && 'fa-check' || 'fa-minus';

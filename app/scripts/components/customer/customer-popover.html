@@ -13,23 +13,23 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <td class="col-md-3"><strong>Organization type</strong></td>
+                                <td class="col-md-3"><strong translate>Organization type</strong></td>
                                 <td class="col-md-9">{{ $ctrl.paymentDetails.type || 'N/A' }}</td>
                             </tr>
                             <tr>
-                                <td><strong>Registration code</strong></td>
+                                <td><strong translate>Registration code</strong></td>
                                 <td>{{ $ctrl.customer.registration_code || 'N/A' }}</td>
                             </tr>
                             <tr>
-                                <td><strong>Legal address</strong></td>
+                                <td><strong translate>Legal address</strong></td>
                                 <td>{{ $ctrl.paymentDetails.address || 'N/A' }}</td>
                             </tr>
                             <tr>
-                                <td><strong>Contact email</strong></td>
+                                <td><strong translate>Contact email</strong></td>
                                 <td>{{ $ctrl.paymentDetails.email || 'N/A' }}</td>
                             </tr>
                             <tr>
-                                <td><strong>Phone</strong></td>
+                                <td><strong translate>Phone</strong></td>
                                 <td>{{ $ctrl.paymentDetails.phone || 'N/A' }}</td>
                             </tr>
                         </tbody>
@@ -50,6 +50,6 @@
 <div class="modal-footer">
     <button class="btn btn-default"
         ng-click="$ctrl.dismiss()">
-        OK
+        <span translate>OK</span>
     </button>
 </div>

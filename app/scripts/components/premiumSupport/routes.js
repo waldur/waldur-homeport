@@ -6,7 +6,7 @@ export default function premiumSupportRoute($stateProvider) {
       parent: 'project',
       template: '<premium-support-provision></premium-support-provision>',
       data: {
-        pageTitle: 'Premium support',
+        pageTitle: gettext('Premium support'),
         pageClass: 'gray-bg',
         workspace: 'project',
         category: 'support'
@@ -17,7 +17,7 @@ export default function premiumSupportRoute($stateProvider) {
       url: 'support/',
       template: '<premium-support-contracts></premium-support-contracts>',
       data: {
-        pageTitle: 'Premium support'
+        pageTitle: gettext('Premium support')
       }
     });
 }

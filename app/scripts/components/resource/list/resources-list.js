@@ -30,25 +30,28 @@ export default function baseResourceListController(
       var vm = this.controllerScope;
       return {
         searchFieldName: 'name',
-        noDataText: 'You have no resources yet.',
-        noMatchesText: 'No resources found matching filter.',
+        noDataText: gettext('You have no resources yet.'),
+        noMatchesText: gettext('No resources found matching filter.'),
         columns: [
           {
-            title: 'Name',
+            id: 'name',
+            title: gettext('Name'),
             className: 'all',
             render: function(row) {
               return vm.renderResourceName(row);
             }
           },
           {
-            title: 'Provider',
+            id: 'provider',
+            title: gettext('Provider'),
             className: 'desktop',
             render: function(row) {
               return row.service_name;
             }
           },
           {
-            title: 'State',
+            id: 'state',
+            title: gettext('State'),
             className: 'min-tablet-l',
             render: function(row) {
               return vm.renderResourceState(row);
@@ -112,7 +115,8 @@ export default function baseResourceListController(
         tooltip = 'Import resources from the registered provider accounts.';
       }
       return {
-        name: '<i class="fa fa-plus"></i> ' + this.getImportTitle(),
+        title: this.getImportTitle(),
+        iconClass: 'fa fa-plus',
         callback: function() {
           $state.go('import.import');
         },
@@ -130,7 +134,8 @@ export default function baseResourceListController(
         tooltip = 'Quota has been reached';
       }
       return {
-        name: '<i class="fa fa-plus"></i> ' + this.getCreateTitle(),
+        title: this.getCreateTitle(),
+        iconClass: 'fa fa-plus',
         callback: function() {
           this.gotoAppstore();
         }.bind(this),
@@ -159,7 +164,8 @@ export default function baseResourceListController(
     },
     getMapAction: function() {
       return {
-        name: '<i class="fa fa-map-marker"></i> Open map',
+        title: gettext('Open map'),
+        iconClass: 'fa fa-map-marker',
         callback: this.openMap.bind(this)
       };
     },

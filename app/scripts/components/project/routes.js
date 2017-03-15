@@ -61,7 +61,7 @@ export default function projectRoutes($stateProvider) {
       url: '',
       template: '<project-dashboard project="currentProject"></project-dashboard>',
       data: {
-        pageTitle: 'Project dashboard',
+        pageTitle: gettext('Project dashboard'),
         pageClass: 'gray-bg'
       }
     })
@@ -70,7 +70,7 @@ export default function projectRoutes($stateProvider) {
       url: 'issues/',
       template: '<project-issues></project-issues>',
       data: {
-        pageTitle: 'Issues',
+        pageTitle: gettext('Issues'),
         pageClass: 'gray-bg'
       }
     })
@@ -79,7 +79,7 @@ export default function projectRoutes($stateProvider) {
       url: 'events/',
       template: '<project-events project="currentProject"></project-events>',
       data: {
-        pageTitle: 'Audit logs'
+        pageTitle: gettext('Audit logs')
       }
     })
 
@@ -87,7 +87,7 @@ export default function projectRoutes($stateProvider) {
       url: 'alerts/',
       template: '<project-alerts-list/>',
       data: {
-        pageTitle: 'Alerts'
+        pageTitle: gettext('Alerts')
       }
     })
 
@@ -101,7 +101,7 @@ export default function projectRoutes($stateProvider) {
       url: 'virtual-machines/',
       template: '<resource-vms-list/>',
       data: {
-        pageTitle: 'Virtual machines'
+        pageTitle: gettext('Virtual machines')
       }
     })
 
@@ -109,7 +109,7 @@ export default function projectRoutes($stateProvider) {
       url: 'applications/',
       template: '<resource-applications-list/>',
       data: {
-        pageTitle: 'Applications'
+        pageTitle: gettext('Applications')
       }
     })
 
@@ -117,7 +117,7 @@ export default function projectRoutes($stateProvider) {
       url: 'private-clouds/',
       template: '<resource-private-clouds-list/>',
       data: {
-        pageTitle: 'Private clouds'
+        pageTitle: gettext('Private clouds')
       }
     })
 
@@ -125,7 +125,7 @@ export default function projectRoutes($stateProvider) {
       url: 'storage/',
       template: '<ui-view/>',
       data: {
-        pageTitle: 'Storage'
+        pageTitle: gettext('Storage')
       },
       abstract: true
     })
@@ -139,7 +139,7 @@ export default function projectRoutes($stateProvider) {
       url: 'offerings/',
       template: '<project-offerings-list/>',
       data: {
-        pageTitle: 'Requested Services'
+        pageTitle: gettext('Requested Services')
       }
     })
 
@@ -147,7 +147,7 @@ export default function projectRoutes($stateProvider) {
       url: 'delete/',
       template: '<project-manage></project-manage>',
       data: {
-        pageTitle: 'Manage'
+        pageTitle: gettext('Manage')
       }
     })
 
@@ -155,7 +155,7 @@ export default function projectRoutes($stateProvider) {
       url: 'team/',
       template: '<project-team>',
       data: {
-        pageTitle: 'Team'
+        pageTitle: gettext('Team')
       },
     })
 
@@ -167,7 +167,7 @@ export default function projectRoutes($stateProvider) {
       data: {
         auth: true,
         workspace: 'project',
-        pageTitle: 'Import resources from provider'
+        pageTitle: gettext('Import resources from provider')
       }
     })
 
