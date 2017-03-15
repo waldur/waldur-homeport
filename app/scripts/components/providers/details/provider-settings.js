@@ -18,7 +18,6 @@ function ProviderSettingsController(
   $rootScope,
   usersService,
   servicesService,
-  currentStateService,
   customersService,
   ncUtils,
   ncUtilsFlash,
@@ -27,50 +26,55 @@ function ProviderSettingsController(
   ENV) {
   angular.extend($scope, {
     init: function() {
-      var vm = this;
-      vm.loading = true;
-      vm.loadService($scope.service).finally(function() {
-        vm.loading = false;
-      });
-      vm.defaultErrorMessage = ENV.defaultErrorMessage;
+      this.loading = true;
+      this.loadData($scope.service).finally(() => this.loading = false);
+      this.defaultErrorMessage = ENV.defaultErrorMessage;
     },
-    loadService: function(service) {
-      var vm = this;
-      return currentStateService.getCustomer().then(customer => {
-        vm.customer = customer;
-      }).then(() => {
-        return usersService.getCurrentUser().then(user => {
-          vm.user = user;
-          service.nameEditable = customersService.checkCustomerUser(vm.customer, vm.user);
-        });
-      }).then(() => {
-        service.editable = vm.user.is_staff || !service.shared;
-        if (!service.editable) {
-          service.values = {name: service.name};
-        }
-        if (service.values) {
-          return;
-        }
-
-        return joinService.getOptions(service.service_type).then(function(options) {
+    loadData: function(service) {
+      return this.loadSettings(service)
+        .then(settings => this.checkPermissions(settings))
+        .then(editable => service.editable = editable)
+        .then(() => joinService.getOptions(service.service_type))
+        .then(options => {
+          options = angular.extend({
+            name: {
+              type: 'string',
+              required: true,
+              read_only: false,
+              label: gettext('Name'),
+              max_length: 150
+            },
+          }, options);
           service.options = options;
-          service.fields = vm.getFields(options);
-
-          return servicesService.$get(null, service.settings).then(function(settings) {
-            service.values = settings.toJSON();
-            service.values.name = service.name;
-            angular.forEach(service.fields, function(field) {
-              if (angular.isUndefined(service.values[field.name])) {
-                service.values[field.name] = '';
-              }
-            });
-          });
+          service.fields = this.getFields(options);
         });
+    },
+    loadSettings: function(service) {
+      return servicesService.$get(null, service.settings).then(settings => {
+        service.values = settings.toJSON();
+        angular.forEach(service.fields, field => {
+          if (angular.isUndefined(service.values[field.name])) {
+            service.values[field.name] = '';
+          }
+        });
+        return settings;
+      });
+    },
+    checkPermissions: function(settings) {
+      // User can update settings only if he is an owner of their customer or a staff
+      return usersService.getCurrentUser().then(user => {
+        if (!settings.customer) {
+          return user.is_staff;
+        } else {
+          return customersService.$get(null, settings.customer).then(customer => {
+            return customersService.checkCustomerUser(customer, user);
+          });
+        }
       });
     },
     getFields: function(options) {
       var fields = [];
-      var blacklist = ['name', 'customer', 'settings', 'available_for_all', 'scope', 'project'];
+      var blacklist = ['customer', 'settings', 'available_for_all', 'scope', 'project'];
       var secretFields = ['password', 'token'];
       for (var name in options) {
         var option = options[name];
@@ -89,7 +93,7 @@ function ProviderSettingsController(
         var name = service.fields[index].name;
         var option = service.options[name];
         var value = service.values[name];
-        if (option && option.required && !value) {
+        if (option && option.required && !value && angular.isUndefined(option.default_value)) {
           return true;
         }
       }
@@ -117,23 +121,11 @@ function ProviderSettingsController(
       }
       return values;
     },
-    updateServiceName: function(name) {
-      return joinService.$update(null, $scope.service.url, {name: name}).then(function() {
-        $scope.service.name = name;
-        ncUtilsFlash.success('Provider name has been updated');
-        $rootScope.$broadcast('refreshProviderList');
-      }).catch(function() {
-        ncUtilsFlash.success('Unable to update provider name');
-      });
-    },
     updateSettings: function() {
       var service = $scope.service;
       var url = service.settings;
       var data = this.getData(service);
       var promises = [];
-      if (service.nameEditable && service.revision.name !== service.values.name) {
-        promises.push(this.updateServiceName(service.values.name));
-      }
       if (service.editable) {
         promises.push(joinService.update(url, data));
       }
@@ -143,6 +135,9 @@ function ProviderSettingsController(
       );
     },
     onSaveSuccess: function(service) {
+      ncUtilsFlash.success(gettext('Provider has been updated'));
+      $rootScope.$broadcast('refreshProviderList');
+
       if (service) {
         this.saveRevision(service);
       }
