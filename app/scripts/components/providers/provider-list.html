@@ -1,11 +1,1 @@
-<div ng-if="!ListController.initialized">
-  <loading-spinner/>
-</div>
-<div ng-if="ListController.initialized" class="wrapper wrapper-content">
-  <filter-list
-    on-select="ListController.getList()"
-    is-loading="ListController.loading"
-    search-filters="ListController.userFilter.choices"
-    ng-if="ListController.userFilter.choices"></filter-list>
-  <responsive-table table-ctrl="ListController"></responsive-table>
-</div>
+<div class="wrapper wrapper-content" ng-include="'views/partials/filtered-list.html'"></div>

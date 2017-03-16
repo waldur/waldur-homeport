@@ -2487,11 +2487,8 @@ msgstr ""
 msgid "Select request type"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:104
-msgid "Select security groups.."
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-instance/actions.js:44
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:104
 msgid "Select security groups..."
 msgstr ""
 

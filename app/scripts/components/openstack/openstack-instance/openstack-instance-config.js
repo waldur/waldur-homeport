@@ -101,7 +101,7 @@ export default {
     security_groups: {
       type: 'multiselect',
       label: gettext('Security groups'),
-      placeholder: gettext('Select security groups..'),
+      placeholder: gettext('Select security groups...'),
       component: 'openstackInstanceSecurityGroupsField',
       resource: 'openstacktenant-security-groups',
       parser: group => ({
