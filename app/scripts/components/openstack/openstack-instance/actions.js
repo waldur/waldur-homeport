@@ -41,7 +41,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         fields: {
           security_groups: {
             type: 'multiselect',
-            placeholder: gettext('Select security groups..'),
+            placeholder: gettext('Select security groups...'),
             resource_default_value: true,
             serializer: items => items.map(item => ({url: item.value}))
           }

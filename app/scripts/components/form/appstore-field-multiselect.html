@@ -3,7 +3,7 @@
   ng-model="$ctrl.model[$ctrl.field.name]"
   ng-if="$ctrl.field.choices && $ctrl.field.choices.length !== 0"
   theme="bootstrap">
-  <ui-select-match placeholder="{{ ::$ctrl.field.placeholder }}">
+  <ui-select-match placeholder="{{ ::$ctrl.field.placeholder | translate }}">
     {{ $item.display_name }}
   </ui-select-match>
   <ui-select-choices repeat="item in $ctrl.field.choices | filter: {display_name: $select.search} track by item.value">
