@@ -43,7 +43,7 @@ function UserOrganizationsController(
       var fn = this._super.bind(this);
       usersService.getCurrentUser().then(() => {
         fn();
-      })
+      });
     },
     getFilter: function() {
       return {
