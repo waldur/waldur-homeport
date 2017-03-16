@@ -10,7 +10,7 @@
   <loading-spinner/>
 </div>
 
-<div ng-if="!service.editable" class="empty-list-message">
+<div ng-if="!loading && !service.editable" class="empty-list-message">
     You don't have enough permissions to edit settings for <strong>{{ service.name }}</strong> provider.
 </div>
 
