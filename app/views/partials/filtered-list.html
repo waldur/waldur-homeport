@@ -1,7 +1,7 @@
 <div ng-if="!ListController.initialized">
   <loading-spinner/>
 </div>
-<div ng-if="ListController.initialized" ng-class="{'wrapper wrapper-content': ListController.additionalCssClass}">
+<div ng-if="ListController.initialized">
 	<filter-list
     on-select="ListController.getList()"
     is-loading="ListController.loading"
