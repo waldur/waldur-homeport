@@ -2506,7 +2506,7 @@ msgid "Select subnet"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/actions.js:69
-msgid "Select subnets to connect to.."
+msgid "Select subnets to connect to..."
 msgstr ""
 
 #: app/scripts/components/team/user-selector.html:2

@@ -66,7 +66,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
           internal_ips_set: {
             type: 'multiselect',
             label: gettext('Connected subnets'),
-            placeholder: gettext('Select subnets to connect to..'),
+            placeholder: gettext('Select subnets to connect to...'),
             resource_default_value: true,
             serializer: items => items.map(item => ({ subnet: item.value })),
             formatter: ($filter, item) => internalIpFormatter(item),
