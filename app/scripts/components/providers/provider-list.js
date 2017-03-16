@@ -1,7 +1,9 @@
+import template from './provider-list.html';
+
 const providersList = {
   controller: ProviderListController,
   controllerAs: 'ListController',
-  templateUrl: 'views/partials/filtered-list.html',
+  template: template,
 };
 
 export default providersList;
@@ -28,7 +30,6 @@ function ProviderListController(
       this.service = joinService;
       this.service.defaultFilter.customer = $stateParams.uuid;
       this._super();
-      this.additionalCssClass = true;
       this.showSelectedProvider();
       $scope.$on('refreshProviderList', function() {
         controllerScope.resetCache();
