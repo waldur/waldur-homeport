@@ -3,7 +3,7 @@
     <tr ng-repeat="item in $ctrl.items">
       <td class="p-l-n col-md-6">
         <select
-          ng-options="choice.value as choice.display_name for choice in $ctrl.subnets"
+          ng-options="choice.value as choice.display_name for choice in $ctrl.getFreeSubnets(item.subnet)"
           ng-model="item.subnet"
           class="form-control">
           <option value="" translate>Select subnet</option>
@@ -11,7 +11,7 @@
       </td>
       <td class="col-md-5">
         <select
-          ng-options="choice.value as choice.display_name for choice in $ctrl.floating_ips"
+          ng-options="choice.value as choice.display_name for choice in $ctrl.getFreeFloatingIps(item.floating_ip)"
           ng-model="item.floating_ip"
           ng-class="{disabled: !item.subnet}"
           class="form-control">
@@ -33,7 +33,8 @@
 <button
   type="button"
   class="btn btn-default"
-  ng-click="$ctrl.addItem()">
+  ng-click="$ctrl.addItem()"
+  ng-class="{disabled: !$ctrl.hasFreeSubnets()}">
   <i class="fa fa-plus"></i>
   <span translate>Add</span>
 </button>
