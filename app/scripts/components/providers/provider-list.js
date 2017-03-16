@@ -1,7 +1,9 @@
+import template from './provider-list.html';
+
 const providersList = {
   controller: ProviderListController,
   controllerAs: 'ListController',
-  templateUrl: 'views/partials/filtered-list.html',
+  template: template,
 };
 
 export default providersList;
@@ -10,7 +12,6 @@ export default providersList;
 function ProviderListController(
   $stateParams,
   $location,
-  $rootScope,
   joinService,
   $uibModal,
   $state,
@@ -18,7 +19,6 @@ function ProviderListController(
   ENV,
   ncUtils,
   baseControllerListClass,
-  ENTITYLISTFIELDTYPES,
   currentStateService,
   customersService,
   usersService) {
