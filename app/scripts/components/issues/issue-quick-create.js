@@ -20,7 +20,8 @@ class IssueQuickCreateController {
               ncUtilsFlash,
               customersService,
               projectsService,
-              resourcesService) {
+              resourcesService,
+              coreUtils) {
     this.$state = $state;
     this.$scope = $scope;
     this.$q = $q;
@@ -30,6 +31,7 @@ class IssueQuickCreateController {
     this.customersService = customersService;
     this.projectsService = projectsService;
     this.resourcesService = resourcesService;
+    this.coreUtils = coreUtils;
     this.init();
   }
 
@@ -109,7 +111,7 @@ class IssueQuickCreateController {
     this.saving = true;
     return this.service.createIssue(issue).then(issue => {
       this.service.clearAllCacheForCurrentEndpoint();
-      this.ncUtilsFlash.success(`${issue.key} ${gettext('request has been created')}`);
+      this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {requestId} has been created'), {requestId: issue.key}));
       return this.$state.go('support.detail', {uuid: issue.uuid});
     }).finally(() => {
       this.saving = false;

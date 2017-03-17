@@ -27,6 +27,7 @@ function AppStoreController(
   priceEstimationService,
   ncServiceUtils,
   resourceUtils,
+  coreUtils,
   AppstoreFieldConfiguration,
   AppstoreResourceLoader) {
   var controllerScope = this;
@@ -333,7 +334,7 @@ function AppStoreController(
         }
       }
       if (fields.length > 0) {
-        return gettext('Please specify') + ' ' + fields.join(', ').toLowerCase();
+        return coreUtils.templateFormatter(gettext('Please specify {fields}'), {fields: fields.join(', ').toLowerCase()});
       }
     },
     getResourceUrl: function() {

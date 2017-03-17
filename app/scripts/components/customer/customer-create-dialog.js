@@ -9,7 +9,7 @@ export default function customerCreateDialog() {
 }
 
 // @ngInject
-function CustomerCreateDialogController(customersService, $scope, $rootScope, $state, ncUtilsFlash) {
+function CustomerCreateDialogController(customersService, $scope, $rootScope, $state, ncUtilsFlash, coreUtils) {
   angular.extend($scope, {
     fields: ['name', 'contact_details', 'registration_code', 'vat_code'],
     instance: {},
@@ -41,9 +41,9 @@ function CustomerCreateDialogController(customersService, $scope, $rootScope, $s
         $rootScope.$broadcast('refreshCounts');
 
         if (vm.customer) {
-          ncUtilsFlash.success('{org} {} {is_upd}'.replace('{}', customer.name)
-            .replace('{org}', gettext('Organization'))
-            .replace('{is_upd}', gettext('is updated')));
+          var message = coreUtils.templateFormatter(gettext('Organization {organizationName} is updated'),
+            {organizationName: customer.name});
+          ncUtilsFlash.success(message);
           $rootScope.$broadcast('refreshCustomerList', {
             model: customer,
             update: true

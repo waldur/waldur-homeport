@@ -1,5 +1,5 @@
 // @ngInject
-function formatCrontab(cronService, baseFrequency, $filter) {
+function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
   return function(crontab) {
     const schedule = cronService.fromCron(crontab, false);
     const { base, minuteValues, hourValues, dayOfMonthValues, dayValues, monthValues } = schedule;
@@ -15,7 +15,7 @@ function formatCrontab(cronService, baseFrequency, $filter) {
 
     case baseFrequency.hour:
       if (minuteValues) {
-        return `${gettext('Every hour at')} ${minuteValues} ${gettext('past the hour')}`;
+        return coreUtils.templateFormatter(gettext('Every hour at {minuteValues} past the hour'), {minuteValues: minuteValues});
       } else {
         return gettext('Every hour');
       }

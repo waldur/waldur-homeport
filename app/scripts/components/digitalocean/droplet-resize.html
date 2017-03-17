@@ -17,7 +17,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label" translate>New size</label>:
+                <label class="control-label"><span translate>New size</span>:</label>
                 <ui-select ng-model="options.newSize" theme="bootstrap">
                     <ui-select-match placeholder="{{ 'Select size...' | translate }}">
                         {{ formatSize($select.selected) }}

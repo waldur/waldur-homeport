@@ -4,6 +4,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: app/scripts/components/events/event-types-dialog.js:20
+msgid "{eventType} types"
+msgstr ""
+
 #: app/scripts/components/events/constants.js:18
 msgid "{quota_name} quota threshold has been reached for project {project_name}."
 msgstr ""
@@ -52,6 +56,10 @@ msgstr ""
 msgid "Account activation"
 msgstr ""
 
+#: app/scripts/components/auth/auth-activation.js:19
+msgid "Account has been activated"
+msgstr ""
+
 #: app/scripts/components/user/user-manage.js:54
 msgid "Account removal"
 msgstr ""
@@ -87,6 +95,10 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
+#: app/scripts/components/resource/list/resource-applications-list.js:27
+msgid "Add application"
+msgstr ""
+
 #: app/views/directives/customer-balance.html:113
 #: app/views/directives/customer-balance.html:147
 msgid "Add credit"
@@ -120,6 +132,10 @@ msgstr ""
 msgid "Add notification"
 msgstr ""
 
+#: app/scripts/components/resource/list/resource-private-clouds-list.js:27
+msgid "Add private cloud"
+msgstr ""
+
 #: app/scripts/components/project/project-create.html:40
 #: app/scripts/components/project/projects-list.js:135
 msgid "Add project"
@@ -138,6 +154,10 @@ msgstr ""
 msgid "Add rule"
 msgstr ""
 
+#: app/scripts/components/premiumSupport/premium-support-contracts.js:36
+msgid "Add SLA"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:62
 msgid "Add snapshots"
 msgstr ""
@@ -147,8 +167,16 @@ msgstr ""
 msgid "Add SSH key"
 msgstr ""
 
-#: app/views/help/ssh-keys.html:65
-msgid "Add your SSH key to ssh-agent:"
+#: app/scripts/components/resource/list/resource-vms-list.js:49
+msgid "Add virtual machine"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:64
+msgid "Add volumes"
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-projects.js:85
+msgid "Adding link"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:88
@@ -167,12 +195,6 @@ msgstr ""
 #: app/scripts/components/issues/issue-quick-create.html:94
 #: app/scripts/components/issues/issue-registration.html:172
 msgid "Affected resource"
-msgstr ""
-
-#: app/views/help/ssh-keys.html:24
-msgid ""
-"After successful creation you should copy id_rsa.pub (your public key)\r\n"
-"          content and paste it into \"Public key\" input on Add key page"
 msgstr ""
 
 #: app/scripts/components/alerts/base-alerts-list.js:35
@@ -213,22 +235,16 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-store.js:306
+msgid "All provider quotas have reached limit."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:42
 msgid "Allocation"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:102
 msgid "Already have an account?"
-msgstr ""
-
-#: app/views/help/details.html:60
-msgid ""
-"Amazon EC2 API access requires Access Key ID and Secret Access Key that must be generated if not already existing.\r\n"
-"                        In addition, API access policy needs to be attached allowing modification access for the resources."
-msgstr ""
-
-#: app/views/help/details.html:74
-msgid "AmazonEC2FullAccess"
 msgstr ""
 
 #: app/views/directives/customer-balance.html:101
@@ -240,8 +256,10 @@ msgstr ""
 msgid "Analytics"
 msgstr ""
 
-#: app/views/help/details.html:75
-msgid "and click"
+#: app/scripts/components/openstack/openstack-security-groups/filters.js:32
+#: app/scripts/components/openstack/openstack-security-groups/filters.js:45
+#: app/scripts/components/openstack/openstack-security-groups/filters.js:56
+msgid "Any"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:113
@@ -272,6 +290,14 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
+#: app/scripts/components/providers/list.js:125
+msgid "Are you sure you want to unlink provider and all related resources?"
+msgstr ""
+
+#: app/scripts/components/resource/actions/action-utils-service.js:87
+msgid "Are you sure? This action cannot be undone."
+msgstr ""
+
 #: app/scripts/components/issues/issue-detail.html:25
 #: app/scripts/components/issues/issue-registration.html:191
 #: app/scripts/components/issues/issues-list.js:115
@@ -280,15 +306,6 @@ msgstr ""
 
 #: app/scripts/components/issues/constants.js:79
 msgid "Assignee"
-msgstr ""
-
-#: app/views/help/ssh-keys.html:40
-msgid "At first check if you already have public key, if so you can use it on our Add Key page."
-msgstr ""
-
-#: app/views/help/details.html:73
-#: app/views/help/details.html:75
-msgid "Attach Policy"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:51
@@ -312,6 +329,10 @@ msgstr ""
 msgid "Authentication events"
 msgstr ""
 
+#: app/scripts/components/auth/auth-login.js:154
+msgid "Authentication failed"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.js:7
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.js:11
 msgid "Auto-assign floating IP"
@@ -322,23 +343,7 @@ msgstr ""
 msgid "Average"
 msgstr ""
 
-#: app/views/help/details.html:29
-msgid ""
-"Azure requires generation of X.509 certificates which will be used for securing the Waldur Azure API connections.\r\n"
-"                            You need to generate two separate files:"
-msgstr ""
-
-#: app/views/help/details.html:32
-msgid "azure_cert.cer - which needs to be uploaded within Azure Management Console (please see screenshot on the left)"
-msgstr ""
-
-#: app/views/help/details.html:31
-msgid "azure_cert.pem - which needs to be uploaded within Waldur \"Create provider\" form"
-msgstr ""
-
 #: app/views/help/alerts-events-list.html:17
-#: app/views/help/details.html:97
-#: app/views/help/ssh-keys.html:75
 msgid "Back to help topics"
 msgstr ""
 
@@ -407,6 +412,11 @@ msgstr ""
 msgid "Billing"
 msgstr ""
 
+#: app/scripts/components/plans/plan-agreement-approve.js:19
+#: app/scripts/components/plans/plan-agreement-cancel.js:19
+msgid "Billing plan agreement has been processed successfully."
+msgstr ""
+
 #: app/scripts/components/plans/plan-agreement-approve.html:3
 #: app/scripts/components/plans/plan-agreement-cancel.html:3
 msgid "Billing plan agreement is being processed, please wait."
@@ -424,29 +434,13 @@ msgstr ""
 msgid "bootable"
 msgstr ""
 
+#: app/scripts/components/plans/plans-list.js:26
+msgid "Both VMs and applications are counted as resources"
+msgstr ""
+
 #: app/scripts/components/providers/create.html:112
 #: app/scripts/components/providers/details/provider-settings.html:73
 msgid "Browse"
-msgstr ""
-
-#: app/views/help/ssh-keys.html:31
-msgid "but you may omit directory creation and enter only this line"
-msgstr ""
-
-#: app/views/help/details.html:81
-msgid "button in the pop-up."
-msgstr ""
-
-#: app/views/help/details.html:79
-msgid "button to generate new access key."
-msgstr ""
-
-#: app/views/help/details.html:69
-msgid "button."
-msgstr ""
-
-#: app/views/help/details.html:74
-msgid "button. Select"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:35
@@ -521,6 +515,11 @@ msgstr ""
 msgid "Change VPC package"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/resource-graphs.js:55
+#: app/scripts/components/resource/monitoring/resource-graphs.js:66
+msgid "Chart is not available at this moment"
+msgstr ""
+
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:6
 msgid "Check terms"
 msgstr ""
@@ -549,15 +548,8 @@ msgstr ""
 
 #: app/scripts/components/customer/customer-users-details-list.js:47
 #: app/scripts/components/invitations/invitation-dialog.html:21
-msgid "Civil number"
-msgstr ""
-
 #: app/scripts/components/team/user-selector.html:15
-msgid "Civil number:"
-msgstr ""
-
-#: app/views/help/details.html:64
-msgid "Click on the"
+msgid "Civil number"
 msgstr ""
 
 #: app/scripts/components/customer/customer-sizing.html:37
@@ -581,12 +573,12 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: app/scripts/components/issues/issues-activity-stream.html:36
-msgid "commented on"
+#: app/scripts/components/issues/issue-comments-list.html:22
+msgid "commented"
 msgstr ""
 
-#: app/scripts/components/issues/issue-comments-list.html:22
-msgid "commented:"
+#: app/scripts/components/issues/issues-activity-stream.html:36
+msgid "commented on"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:98
@@ -616,12 +608,22 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-popover.html:28
-msgid "Contact email"
+#: app/scripts/components/customer/customer-delete.js:89
+#: app/scripts/components/project/project-manage.js:60
+#: app/scripts/components/table/base-list-controller.js:132
+msgid "Confirm deletion?"
 msgstr ""
 
-#: app/scripts/components/analytics/cost-analysis.html:60
-msgid "cost"
+#: app/scripts/components/auth/auth-login.js:188
+msgid "Confirmation mail has been sent. Please check your inbox!"
+msgstr ""
+
+#: app/scripts/components/resource/resource-utils-service.js:15
+msgid "Connect"
+msgstr ""
+
+#: app/scripts/components/customer/customer-popover.html:28
+msgid "Contact email"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:115
@@ -636,7 +638,7 @@ msgid "Cost analysis"
 msgstr ""
 
 #: app/views/directives/project-price-limit.html:15
-msgid "Cost threshold:"
+msgid "Cost threshold"
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:36
@@ -659,10 +661,6 @@ msgstr ""
 #: app/scripts/components/resource/tabs/resource-issues.js:26
 #: app/scripts/components/user/hooks/hook-details.html:77
 msgid "Create"
-msgstr ""
-
-#: app/views/help/details.html:78
-msgid "Create Access Key"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:18
@@ -692,10 +690,6 @@ msgstr ""
 
 #: app/views/import/import.html:67
 msgid "Create new tenant first."
-msgstr ""
-
-#: app/views/help/details.html:68
-msgid "Create New Users"
 msgstr ""
 
 #: app/scripts/components/user/hooks/hook-details.html:4
@@ -774,12 +768,12 @@ msgid "Current API token"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:13
-msgid "Current plan:"
+msgid "Current plan"
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html:14
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:7
-msgid "Current size:"
+msgid "Current size"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:10
@@ -885,10 +879,15 @@ msgstr ""
 msgid "Due date"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-details.html:47
+msgid "Due Date"
+msgstr ""
+
 #: app/scripts/components/customer/customer-users-details-list.js:40
 #: app/scripts/components/invitations/invitation-dialog.html:12
 #: app/scripts/components/team/customer-users-list.js:71
 #: app/scripts/components/team/project-users-list.js:56
+#: app/scripts/components/team/user-selector.html:12
 #: app/scripts/components/user/user-edit.html:26
 #: app/scripts/components/user/user-popover-table.html:17
 msgid "E-mail"
@@ -896,10 +895,6 @@ msgstr ""
 
 #: app/scripts/components/user/hooks/hook-details.html:45
 msgid "E-mail address"
-msgstr ""
-
-#: app/scripts/components/team/user-selector.html:12
-msgid "E-mail:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js:30
@@ -913,6 +908,10 @@ msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:3
 msgid "Edit organization"
+msgstr ""
+
+#: app/scripts/components/team/add-project-member.js:56
+msgid "Edit project member"
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.js:25
@@ -987,6 +986,44 @@ msgstr ""
 #: app/scripts/components/help/constants.js:10
 #: app/scripts/components/user/hooks/hook-list.js:53
 msgid "Events"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:25
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:27
+msgid "Every day"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:20
+msgid "Every hour"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:18
+msgid "Every hour at {minuteValues} past the hour"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:14
+msgid "Every minute"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:41
+msgid "Every month"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:39
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:46
+msgid "Every month on the"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:34
+msgid "Every week"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:32
+msgid "Every week on"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:48
+msgid "Every year"
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.html:47
@@ -1067,21 +1104,16 @@ msgstr ""
 msgid "Floating IP"
 msgstr ""
 
+#: app/scripts/components/quotas/filters.js:4
+msgid "Floating IP count"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-floating-ips/breadcrumbs.js:21
 msgid "Floating IPs"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:41
 msgid "For"
-msgstr ""
-
-#: app/views/policy/privacy.html:8
-#: app/views/tos/index.html:9
-msgid "For example:"
-msgstr ""
-
-#: app/views/help/ssh-keys.html:26
-msgid "For other Linux systems search instructions for your distribution."
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:49
@@ -1115,24 +1147,8 @@ msgstr ""
 msgid "generate automatically"
 msgstr ""
 
-#: app/views/help/details.html:38
-msgid "generating azure_cert.cer"
-msgstr ""
-
-#: app/views/help/details.html:36
-msgid "generating azure_cert.pem"
-msgstr ""
-
-#: app/views/help/details.html:43
-msgid "Generating certificate on Windows"
-msgstr ""
-
 #: app/scripts/components/navigation/select-workspace-dialog.html:122
 msgid "Go to my profile"
-msgstr ""
-
-#: app/views/help/details.html:63
-msgid "Go to the"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:14
@@ -1142,6 +1158,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/module.js:35
 #: app/scripts/components/openstack/openstack-volume/module.js:63
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
+msgstr ""
+
+#: app/scripts/components/resource/actions/action-utils-service.js:114
+msgid "has been accepted"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:133
@@ -1157,10 +1177,6 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: app/views/help/details.html:14
-msgid "Help page is not available"
-msgstr ""
-
 #: app/views/help/list.html:3
 msgid "Help topics"
 msgstr ""
@@ -1173,20 +1189,13 @@ msgstr ""
 msgid "Helpdesk dashboard"
 msgstr ""
 
-#: app/views/policy/privacy.html:8
-msgid "Heroku Privacy Statement"
-msgstr ""
-
-#: app/views/tos/index.html:9
-msgid "Heroku Terms of Service"
-msgstr ""
-
 #: app/scripts/components/providers/details/provider-details.html:12
 msgid "Homepage"
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:13
-msgid "Hour price:"
+#: app/scripts/components/premiumSupport/premium-support-summary.html:21
+msgid "Hour price"
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-contracts.js:71
@@ -1198,7 +1207,6 @@ msgid "Hourly rate"
 msgstr ""
 
 #: app/scripts/components/user/keys/key-create.html:19
-#: app/views/help/ssh-keys.html:2
 msgid "How to generate RSA keys"
 msgstr ""
 
@@ -1208,10 +1216,6 @@ msgstr ""
 
 #: app/scripts/components/providers/create.html:41
 msgid "How to obtain credentials"
-msgstr ""
-
-#: app/views/help/details.html:4
-msgid "How to obtain credentials for"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:145
@@ -1229,10 +1233,6 @@ msgstr ""
 #: app/scripts/components/user/user-edit.html:58
 #: app/scripts/components/user/user-popover-table.html:9
 msgid "ID code"
-msgstr ""
-
-#: app/views/help/details.html:47
-msgid "If you are using Windows 8.1, enter following command in the command prompt to generate a self-signed certificate."
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:31
@@ -1253,6 +1253,14 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
+#: app/scripts/components/resource/list/resource-applications-list.js:24
+msgid "Import application"
+msgstr ""
+
+#: app/scripts/components/resource/list/resource-private-clouds-list.js:24
+msgid "Import private cloud"
+msgstr ""
+
 #: app/scripts/components/project/routes.js:170
 msgid "Import resources from provider"
 msgstr ""
@@ -1261,18 +1269,20 @@ msgstr ""
 msgid "Import snapshots"
 msgstr ""
 
+#: app/scripts/components/resource/list/resource-vms-list.js:46
+msgid "Import virtual machine"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:61
+msgid "Import volumes"
+msgstr ""
+
 #: app/scripts/components/events/event-details-dialog.html:35
 msgid "Importance"
 msgstr ""
 
 #: app/views/directives/import-resource-button.html:16
 msgid "Imported"
-msgstr ""
-
-#: app/views/help/details.html:85
-msgid ""
-"In order to add DigitalOcean IaaS you need to have a valid DigitalOcean account and API access token.\r\n"
-"                DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to manage your resources through Waldur."
 msgstr ""
 
 #: app/views/directives/import-resource-button.html:13
@@ -1319,16 +1329,16 @@ msgstr ""
 msgid "Instance has been updated"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-store.js:327
+msgid "Instance is not configured"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:1
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
 msgstr ""
 
-#: app/views/help/ssh-keys.html:30
-msgid "Instructions are pretty much the same as for Linux,"
-msgstr ""
-
-#: app/views/help/details.html:90
-msgid "Instructions on the official site"
+#: app/scripts/components/quotas/filters.js:8
+msgid "Instances count"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:30
@@ -1348,6 +1358,36 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-network/module.js:40
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:60
 msgid "Internal network mask (CIDR)"
+msgstr ""
+
+#: app/scripts/components/invitations/utils.js:66
+msgid "Internal server error occurred. Please try again or contact support."
+msgstr ""
+
+#: app/scripts/components/plans/plan-agreement-approve.js:15
+#: app/scripts/components/plans/plan-agreement-cancel.js:15
+msgid "Invalid URL. Unable to parse billing plan agreement details."
+msgstr ""
+
+#: app/scripts/components/payments/payment-approve.js:10
+#: app/scripts/components/payments/payment-cancel.js:9
+msgid "Invalid URL. Unable to parse payment details."
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-dialog.js:57
+msgid "Invitation has been created."
+msgstr ""
+
+#: app/scripts/components/invitations/utils.js:61
+msgid "Invitation is not found"
+msgstr ""
+
+#: app/scripts/components/invitations/utils.js:64
+msgid "Invitation is not valid"
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.js:106
+msgid "Invitation token is not found."
 msgstr ""
 
 #: app/scripts/components/customer/customer-team.html:10
@@ -1460,7 +1500,7 @@ msgid "Issues"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:57
-#: app/scripts/components/billing/invoice-details.html:55
+#: app/scripts/components/billing/invoice-details.html:58
 msgid "Item List"
 msgstr ""
 
@@ -1537,8 +1577,12 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: app/views/help/details.html:7
-msgid "List of supported"
+#: app/scripts/components/providers/details/provider-projects.js:91
+msgid "Link created"
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-projects.js:108
+msgid "Link removed"
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-button-resource.html:9
@@ -1653,12 +1697,9 @@ msgstr ""
 msgid "Minimal valid value is"
 msgstr ""
 
+#: app/scripts/components/premiumSupport/premium-support-agreement.html:9
 #: app/scripts/components/premiumSupport/premium-support-summary.html:17
 msgid "Monthly base price"
-msgstr ""
-
-#: app/scripts/components/premiumSupport/premium-support-agreement.html:9
-msgid "Monthly base price:"
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:11
@@ -1688,11 +1729,6 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: app/views/help/details.html:72
-#: app/views/help/details.html:77
-msgid "Navigate to the"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:19
 msgid "Network"
 msgstr ""
@@ -1713,7 +1749,7 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html:20
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:10
-msgid "New size:"
+msgid "New size"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:27
@@ -1724,11 +1760,8 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: app/views/help/ssh-keys.html:60
-msgid "Next, you have to enable your ssh-agent and add keys that you have created."
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:24
+#: app/scripts/components/resource/resource-utils-service.js:5
 msgid "No access info"
 msgstr ""
 
@@ -1742,6 +1775,10 @@ msgstr ""
 
 #: app/scripts/components/dashboard/project-alerts-feed.js:13
 msgid "No alerts yet."
+msgstr ""
+
+#: app/scripts/components/resource/list/resource-applications-list.js:20
+msgid "No applications found matching filter."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:30
@@ -1788,11 +1825,6 @@ msgstr ""
 msgid "No floating IPs yet."
 msgstr ""
 
-#: app/views/help/details.html:94
-#: app/views/help/ssh-keys.html:72
-msgid "No instructions"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:35
 msgid "No internal IPs found matching filter."
 msgstr ""
@@ -1827,6 +1859,14 @@ msgstr ""
 #: app/scripts/components/team/customer-users-list.js:63
 #: app/scripts/components/team/project-users-list.js:48
 msgid "No members found matching filter."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:33
+msgid "No networks found matching filter."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:32
+msgid "No networks yet."
 msgstr ""
 
 #: app/scripts/components/user/hooks/hook-list.js:23
@@ -1864,6 +1904,14 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-price-list.js:29
 msgid "No price list items yet."
+msgstr ""
+
+#: app/scripts/components/resource/list/resource-private-clouds-list.js:20
+msgid "No private clouds found matching filter."
+msgstr ""
+
+#: app/scripts/components/team/customer-users-list.js:107
+msgid "No projects are assigned to this role"
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js:55
@@ -1919,11 +1967,14 @@ msgstr ""
 msgid "No snapshot schedules yet."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:30
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:31
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:27
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-snapshots.js:43
 msgid "No snapshots found matching filter."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:29
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:26
 msgid "No snapshots yet."
 msgstr ""
@@ -1956,7 +2007,12 @@ msgstr ""
 msgid "No users found matching filter."
 msgstr ""
 
+#: app/scripts/components/resource/list/resource-vms-list.js:24
+msgid "No virtual machines found matching filter."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:39
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:32
 msgid "No volumes found matching filter."
 msgstr ""
 
@@ -1966,6 +2022,8 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:25
 #: app/scripts/components/analytics/resource-analysis.html:37
+#: app/scripts/components/resource/monitoring/resource-graphs.js:20
+#: app/scripts/components/resource/monitoring/resource-graphs.js:21
 msgid "Not enough data for chart"
 msgstr ""
 
@@ -1989,17 +2047,25 @@ msgstr ""
 msgid "Note that this volume is charged as part of"
 msgstr ""
 
+#: app/scripts/components/user/hooks/hook-details.js:69
+msgid "Notification has been created"
+msgstr ""
+
+#: app/scripts/components/user/hooks/hook-details.js:66
+msgid "Notification has been updated"
+msgstr ""
+
 #: app/scripts/components/user/hooks/hook-details.html:15
 msgid "Notification method"
+msgstr ""
+
+#: app/scripts/components/billing/billing-utils.js:59
+msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
 #: app/scripts/components/user/constants.js:18
 #: app/scripts/components/user/routes.js:29
 msgid "Notifications"
-msgstr ""
-
-#: app/views/help/details.html:54
-msgid "Now when certificate is created, a .cer file for the certificate will be written to your current directory, and the certificate will be saved to the machine’s certificate store."
 msgstr ""
 
 #: app/scripts/components/quotas/quotas-table.html:10
@@ -2021,16 +2087,28 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: app/views/help/details.html:35
-msgid "On Linux"
+#: app/scripts/components/providers/list.js:173
+msgid "Only customer owner or staff can create provider."
 msgstr ""
 
-#: app/views/help/ssh-keys.html:36
-msgid "On of the possible ways to create SSH keys on Windows is using"
+#: app/scripts/components/invitations/invitations-list.js:158
+msgid "Only customer owner or staff can invite users."
 msgstr ""
 
-#: app/views/help/ssh-keys.html:5
-msgid "On your machine create public and private SSH keys using the command-line:"
+#: app/scripts/components/providers/list.js:111
+msgid "Only customer owner or staff can remove provider"
+msgstr ""
+
+#: app/scripts/components/providers/list.js:139
+msgid "Only customer owner or staff can unlink provider."
+msgstr ""
+
+#: app/scripts/components/invitations/invitations-list.js:186
+msgid "Only pending invitation can be canceled."
+msgstr ""
+
+#: app/scripts/components/invitations/invitations-list.js:199
+msgid "Only pending invitation can be sent again."
 msgstr ""
 
 #: app/scripts/components/customer/customer-delete.html:59
@@ -2039,11 +2117,8 @@ msgstr ""
 
 #: app/scripts/components/alerts/alert-filter.html:1
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:22
+#: app/scripts/components/resource/resource-utils-service.js:12
 msgid "Open"
-msgstr ""
-
-#: app/views/help/ssh-keys.html:41
-msgid "Open Git Bash and enter:"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:74
@@ -2053,10 +2128,6 @@ msgstr ""
 
 #: app/scripts/components/resource/list/resources-list.js:167
 msgid "Open map"
-msgstr ""
-
-#: app/views/help/ssh-keys.html:61
-msgid "Open your Git Bash and start the agent:"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:44
@@ -2122,6 +2193,10 @@ msgstr ""
 msgid "Organization {customer_name} has no providers."
 msgstr ""
 
+#: app/scripts/components/customer/customer-create-dialog.js:44
+msgid "Organization {organizationName} is updated"
+msgstr ""
+
 #: app/scripts/components/customer/customer-delete.html:49
 msgid "Organization actions"
 msgstr ""
@@ -2143,6 +2218,10 @@ msgstr ""
 #: app/scripts/components/customer/customer-events.js:25
 #: app/scripts/components/events/constants.js:57
 msgid "Organization events"
+msgstr ""
+
+#: app/scripts/components/customer/customer-create-dialog.js:52
+msgid "Organization has been created."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:70
@@ -2232,6 +2311,11 @@ msgstr ""
 msgid "Payment for {customer_name} has been cancelled"
 msgstr ""
 
+#: app/scripts/components/payments/payment-approve.js:18
+#: app/scripts/components/payments/payment-cancel.js:13
+msgid "Payment has been processed successfully."
+msgstr ""
+
 #: app/scripts/components/payments/payment-approve.html:2
 #: app/scripts/components/payments/payment-cancel.html:2
 msgid "Payment is being processed, please wait."
@@ -2245,10 +2329,6 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html:56
 msgid "Permanent"
-msgstr ""
-
-#: app/views/help/details.html:72
-msgid "Permissions"
 msgstr ""
 
 #: app/scripts/components/customer/customer-team.html:16
@@ -2298,6 +2378,10 @@ msgstr ""
 msgid "Please create first project"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:98
+msgid "Please downgrade tenant"
+msgstr ""
+
 #: app/scripts/components/analytics/cost-analysis.html:7
 msgid "Please import resources or add more providers"
 msgstr ""
@@ -2310,13 +2394,12 @@ msgstr ""
 msgid "Please provide your EU VAT ID if you are registered in the European Union"
 msgstr ""
 
-#: app/views/policy/privacy.html:7
-#: app/views/tos/index.html:7
-msgid "Please put your text here"
-msgstr ""
-
 #: app/scripts/components/providers/details/provider-projects.html:11
 msgid "Please select projects where usage of the provider is permitted."
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-store.js:337
+msgid "Please specify {fields}"
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-settings.html:2
@@ -2405,10 +2488,6 @@ msgstr ""
 msgid "Privacy policy"
 msgstr ""
 
-#: app/views/policy/privacy.html:3
-msgid "Privacy Statement"
-msgstr ""
-
 #: app/scripts/components/analytics/resource-chart-service.js:21
 #: app/scripts/components/appstore/routes.js:22
 #: app/scripts/components/dashboard/constants.js:15
@@ -2427,6 +2506,10 @@ msgstr ""
 
 #: app/views/help/list.html:26
 msgid "Profile"
+msgstr ""
+
+#: app/scripts/components/user/user-manage.js:39
+msgid "Profile has been updated"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:114
@@ -2491,6 +2574,10 @@ msgstr ""
 msgid "Project has been renamed from {project_previous_name} to {project_name}."
 msgstr ""
 
+#: app/scripts/components/project/project-manage.js:43
+msgid "Project has been updated"
+msgstr ""
+
 #: app/scripts/configs/base-config.js:189
 msgid "Project manager"
 msgstr ""
@@ -2506,6 +2593,10 @@ msgstr ""
 #: app/scripts/components/team/add-team-member.html:45
 #: app/scripts/components/user/user-projects.js:26
 msgid "Project name"
+msgstr ""
+
+#: app/scripts/components/analytics/cost-analysis.html:59
+msgid "Projected cost"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:28
@@ -2538,6 +2629,18 @@ msgstr ""
 msgid "Provider details"
 msgstr ""
 
+#: app/scripts/components/providers/create.js:73
+msgid "Provider has been created"
+msgstr ""
+
+#: app/scripts/components/providers/list.js:114
+msgid "Provider has resources. Please remove them first"
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-store.js:304
+msgid "Provider is in erred state."
+msgstr ""
+
 #: app/scripts/components/appstore/appstore-providers.html:13
 msgid "provider management"
 msgstr ""
@@ -2545,6 +2648,18 @@ msgstr ""
 #: app/scripts/components/analytics/cost-analysis.html:92
 #: app/scripts/components/providers/create.html:48
 msgid "Provider name"
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-settings.js:123
+msgid "Provider name has been updated"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:106
+msgid "Provider package is not defined."
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-store.js:311
+msgid "Provider quota have reached threshold."
 msgstr ""
 
 #: app/scripts/components/providers/create.html:11
@@ -2591,12 +2706,12 @@ msgstr ""
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:40
+#: app/scripts/components/appstore/appstore-store.js:41
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:58
-#: app/scripts/components/billing/invoice-details.html:56
+#: app/scripts/components/billing/invoice-details.html:59
 msgid "Quantity"
 msgstr ""
 
@@ -2606,6 +2721,14 @@ msgstr ""
 
 #: app/scripts/components/events/constants.js:63
 msgid "Quota events"
+msgstr ""
+
+#: app/scripts/components/project/projects-list.js:131
+msgid "Quota has been reached"
+msgstr ""
+
+#: app/scripts/components/providers/list.js:176
+msgid "Quota has been reached."
 msgstr ""
 
 #: app/scripts/components/error/routes.js:25
@@ -2625,6 +2748,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:33
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:58
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:15
+#: app/scripts/components/quotas/filters.js:6
 msgid "RAM"
 msgstr ""
 
@@ -2643,6 +2767,10 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:38
 msgid "Record no."
+msgstr ""
+
+#: app/scripts/components/billing/billing-utils.js:68
+msgid "Record notification has been sent to organization owners."
 msgstr ""
 
 #: app/scripts/components/billing/billing-records-list.js:41
@@ -2718,6 +2846,10 @@ msgstr ""
 msgid "Remove project"
 msgstr ""
 
+#: app/scripts/components/providers/details/provider-projects.js:105
+msgid "Removing link"
+msgstr ""
+
 #: app/scripts/components/issues/issues-short-list.html:14
 msgid "Reported by me"
 msgstr ""
@@ -2726,6 +2858,12 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html:20
 #: app/scripts/components/issues/issues-list.js:106
 msgid "Reporter"
+msgstr ""
+
+#: app/scripts/components/issues/issue-create-dialog.js:63
+#: app/scripts/components/issues/issue-quick-create.js:114
+#: app/scripts/components/issues/issue-registration.js:192
+msgid "Request {requestId} has been created"
 msgstr ""
 
 #: app/scripts/components/appstore/category-selector.js:119
@@ -2749,6 +2887,14 @@ msgstr ""
 #: app/scripts/components/customer/customer-delete.js:84
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
+msgstr ""
+
+#: app/scripts/components/resource/actions/action-utils-service.js:114
+msgid "Request to"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:30
+msgid "Request to change tenant package has been created."
 msgstr ""
 
 #: app/scripts/components/issues/constants.js:106
@@ -2874,12 +3020,20 @@ msgstr ""
 msgid "Resource events"
 msgstr ""
 
+#: app/scripts/components/resource/actions/action-utils-service.js:102
+msgid "Resource has been deleted"
+msgstr ""
+
 #: app/scripts/components/resource/actions/constants.js:17
 msgid "Resource has been updated"
 msgstr ""
 
 #: app/views/import/import.html:107
 msgid "Resource is already managed under"
+msgstr ""
+
+#: app/scripts/components/resource/resource-header.js:65
+msgid "Resource is gone."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:112
@@ -2945,6 +3099,7 @@ msgstr ""
 #: app/scripts/components/customer/customer-create-dialog.html:89
 #: app/scripts/components/providers/details/provider-projects.html:15
 #: app/scripts/components/providers/details/provider-settings.html:84
+#: app/scripts/components/team/add-project-member.js:55
 #: app/scripts/components/team/add-team-member.js:24
 msgid "Save"
 msgstr ""
@@ -2968,15 +3123,6 @@ msgstr ""
 
 #: app/scripts/components/table/responsive-table.js:82
 msgid "Search:"
-msgstr ""
-
-#: app/views/help/details.html:63
-msgid "section."
-msgstr ""
-
-#: app/views/help/details.html:63
-#: app/views/help/details.html:77
-msgid "Security Credentials"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:4
@@ -3075,12 +3221,6 @@ msgstr ""
 msgid "Select subnet"
 msgstr ""
 
-#: app/views/help/details.html:66
-msgid ""
-"Select the user by clicking on its username.\r\n"
-"                                If you don't have a user, create it by clicking on the"
-msgstr ""
-
 #: app/scripts/components/team/user-selector.html:2
 msgid "Select user..."
 msgstr ""
@@ -3108,6 +3248,10 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:51
 msgid "Send notification"
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-store.js:389
+msgid "Server error occurred"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:79
@@ -3151,10 +3295,6 @@ msgstr ""
 
 #: app/views/import/import.html:90
 msgid "Show imported resources"
-msgstr ""
-
-#: app/views/help/details.html:81
-msgid "Show User Security Credentials"
 msgstr ""
 
 #: app/views/directives/pagination.html:3
@@ -3250,6 +3390,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/module.js:104
 #: app/scripts/components/resource/list/resource-storage-tabs.html:14
 msgid "Snapshots"
+msgstr ""
+
+#: app/scripts/components/quotas/filters.js:10
+msgid "Snapshots count"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:54
@@ -3363,7 +3507,7 @@ msgstr ""
 msgid "Storages"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-details.html:78
+#: app/scripts/components/billing/invoice-details.html:81
 msgid "Sub Total"
 msgstr ""
 
@@ -3445,20 +3589,11 @@ msgstr ""
 msgid "System volume size"
 msgstr ""
 
-#: app/views/help/details.html:73
-#: app/views/help/details.html:78
-msgid "tab and click on the"
-msgstr ""
-
-#: app/views/help/details.html:64
-msgid "tab."
-msgstr ""
-
 #: app/scripts/components/billing/invoices-list.js:59
 msgid "Tax"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-details.html:82
+#: app/scripts/components/billing/invoice-details.html:85
 msgid "TAX"
 msgstr ""
 
@@ -3490,6 +3625,10 @@ msgstr ""
 msgid "Tenant name"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:38
+msgid "Tenant package has been upgraded."
+msgstr ""
+
 #: app/scripts/components/premiumSupport/premium-support-contracts.js:75
 msgid "Terms"
 msgstr ""
@@ -3505,20 +3644,7 @@ msgid "Terms of Service"
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-details.html:21
-#: app/views/tos/index.html:3
 msgid "Terms of Services"
-msgstr ""
-
-#: app/views/help/ssh-keys.html:68
-msgid "That's it, you are ready to go!"
-msgstr ""
-
-#: app/views/help/details.html:48
-msgid "The certificate name should be changed in both places:"
-msgstr ""
-
-#: app/views/help/details.html:46
-msgid "The Windows Software Development Kit for Windows 8 (possibly you will need to install it) includes the Certificate Creation Tool, MakeCert.exe."
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-button-resource.html:12
@@ -3573,28 +3699,17 @@ msgstr ""
 msgid "There is no activity yet."
 msgstr ""
 
-#: app/views/help/ssh-keys.html:43
-msgid ""
-"This command will show existing files in your .ssh directory. Public key has .pub extension\r\n"
-"          (usually id_rsa.pub)"
-msgstr ""
-
 #: app/scripts/components/customer/customer-create-dialog.html:20
 msgid "This field is required."
 msgstr ""
 
+#: app/scripts/components/user/keys/key-create.js:34
+#: app/scripts/components/user/keys/key-create.js:37
+msgid "This field may not be blank."
+msgstr ""
+
 #: app/scripts/components/alerts/constants.js:7
 msgid "This month estimated costs for organization {customer_name} exceeded."
-msgstr ""
-
-#: app/views/help/ssh-keys.html:37
-msgid "This set of steps is based this tool, you need to install it to proceed further."
-msgstr ""
-
-#: app/views/help/ssh-keys.html:49
-msgid ""
-"This will create new ssh key, using the provided email as a label, when you see information about\r\n"
-"          choosing keys directory just press Enter."
 msgstr ""
 
 #: app/scripts/components/issues/issues-list.js:142
@@ -3619,10 +3734,6 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-#: app/views/help/ssh-keys.html:47
-msgid "To generate new SSH key pair in your Git Bash enter:"
-msgstr ""
-
 #: app/scripts/components/auth/auth-init.html:12
 msgid "To get your clouds under control, please fill in your data."
 msgstr ""
@@ -3639,6 +3750,10 @@ msgstr ""
 msgid "To update your current plan, please visit"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:98
+msgid "to VPC"
+msgstr ""
+
 #: app/scripts/components/analytics/resource-analysis.html:62
 msgid "Top providers by project"
 msgstr ""
@@ -3650,16 +3765,17 @@ msgid "Total"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:85
-#: app/scripts/components/billing/invoice-details.html:86
+#: app/scripts/components/billing/invoice-details.html:89
 msgid "TOTAL"
 msgstr ""
 
+#: app/scripts/components/analytics/cost-analysis.html:60
 #: app/scripts/components/dashboard/dashboard-chart-service.js:115
 msgid "Total cost"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:60
-#: app/scripts/components/billing/invoice-details.html:59
+#: app/scripts/components/billing/invoice-details.html:62
 msgid "Total Price"
 msgstr ""
 
@@ -3682,16 +3798,92 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: app/scripts/components/events/event-types-dialog.html:2
-msgid "types"
+#: app/scripts/components/auth/auth-activation.js:22
+msgid "Unable to activate account"
+msgstr ""
+
+#: app/scripts/components/plans/plan-agreement-approve.js:26
+msgid "Unable to approve billing plan"
+msgstr ""
+
+#: app/scripts/components/plans/plan-agreement-cancel.js:25
+msgid "Unable to cancel billing plan"
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-dialog.js:60
+msgid "Unable to create invitation."
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-projects.js:97
+msgid "Unable to create link."
+msgstr ""
+
+#: app/scripts/components/premiumSupport/premium-support-provision.js:70
+msgid "Unable to create premium support contract"
+msgstr ""
+
+#: app/scripts/components/offering/appstore-offering.js:62
+msgid "Unable to create request for a turnkey solution."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:33
+msgid "Unable to create request to change tenant package."
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-projects.js:114
+msgid "Unable to delete link."
+msgstr ""
+
+#: app/scripts/controllers/import-resource-controller.js:217
+msgid "Unable to get list of imported resources"
+msgstr ""
+
+#: app/scripts/controllers/import-resource-controller.js:245
+msgid "Unable to get list of resources for service"
+msgstr ""
+
+#: app/scripts/controllers/import-resource-controller.js:196
+msgid "Unable to get list of tenants."
+msgstr ""
+
+#: app/scripts/controllers/import-resource-controller.js:271
+msgid "Unable to import resource"
+msgstr ""
+
+#: app/scripts/components/core/bootstrap.js:23
+msgid "Unable to load application configuration. Please reload this page"
 msgstr ""
 
 #: app/scripts/components/issues/issue-comments-list.html:8
 msgid "Unable to load comments."
 msgstr ""
 
+#: app/scripts/components/providers/details/provider-settings.js:156
+msgid "Unable to save provider."
+msgstr ""
+
+#: app/scripts/components/auth/auth-init.js:29
+msgid "Unable to save user"
+msgstr ""
+
+#: app/scripts/components/billing/billing-utils.js:70
+msgid "Unable to send record notification."
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-settings.js:126
+msgid "Unable to update provider name"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:40
+msgid "Unable to upgrade tenant package."
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.js:116
+msgid "Unable to validate invitation token."
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-details.html:59
-#: app/scripts/components/billing/invoice-details.html:57
+#: app/scripts/components/billing/invoice-details.html:60
 msgid "Unit Price"
 msgstr ""
 
@@ -3747,7 +3939,7 @@ msgid "URL"
 msgstr ""
 
 #: app/scripts/components/plans/plans-list.html:24
-msgid "Usage:"
+msgid "Usage"
 msgstr ""
 
 #: app/scripts/components/customer/customer-sizing.html:32
@@ -3841,16 +4033,12 @@ msgstr ""
 #: app/scripts/components/auth/auth-login.html:28
 #: app/scripts/components/auth/auth-login.html:51
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
-msgid "Username"
-msgstr ""
-
 #: app/scripts/components/team/user-selector.html:9
-msgid "Username:"
+msgid "Username"
 msgstr ""
 
 #: app/scripts/components/customer/customer-team.html:4
 #: app/scripts/components/project/project-team.html:4
-#: app/views/help/details.html:64
 msgid "Users"
 msgstr ""
 
@@ -3870,6 +4058,10 @@ msgstr ""
 msgid "vCPU"
 msgstr ""
 
+#: app/scripts/components/quotas/filters.js:5
+msgid "vCPU count"
+msgstr ""
+
 #: app/scripts/components/navigation/app-footer.html:19
 msgid "Version"
 msgstr ""
@@ -3884,6 +4076,10 @@ msgstr ""
 #: app/scripts/configs/base-config.js:29
 #: app/scripts/configs/base-config.js:87
 msgid "Virtual machines"
+msgstr ""
+
+#: app/scripts/components/quotas/filters.js:7
+msgid "Virtual machines count"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:14
@@ -3907,17 +4103,18 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:19
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:11
-msgid "Volume name"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:7
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:5
-msgid "Volume name:"
+msgid "Volume name"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/module.js:54
 #: app/scripts/components/resource/list/resource-storage-tabs.html:5
 msgid "Volumes"
+msgstr ""
+
+#: app/scripts/components/quotas/filters.js:9
+msgid "Volumes count"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js:4
@@ -3930,9 +4127,12 @@ msgstr ""
 msgid "VPC packages for this provider are not found."
 msgstr ""
 
-#: app/scripts/components/auth/auth-init.html:10
 #: app/scripts/components/auth/auth-login.html:5
 msgid "Welcome to"
+msgstr ""
+
+#: app/scripts/components/auth/auth-init.js:12
+msgid "Welcome to {pageTitle}!"
 msgstr ""
 
 #: app/scripts/components/customer/customer-delete.js:83
@@ -3947,18 +4147,6 @@ msgstr ""
 msgid "You can change that in"
 msgstr ""
 
-#: app/views/help/details.html:80
-msgid "You can check newly created credentials by clicking on the"
-msgstr ""
-
-#: app/views/help/details.html:52
-msgid "You can create validity periods for the certificate, using the -b (beginning) and -e (end) options."
-msgstr ""
-
-#: app/views/help/details.html:35
-msgid "you can generate the certificate files using the commands shown below:"
-msgstr ""
-
 #: app/scripts/components/customer/customer-delete.html:51
 msgid "You can remove this organization by pressing the button"
 msgstr ""
@@ -3969,6 +4157,10 @@ msgstr ""
 
 #: app/scripts/components/team/add-team-member.js:26
 msgid "You cannot change your own role"
+msgstr ""
+
+#: app/scripts/components/providers/list.js:108
+msgid "You cannot remove shared provider"
 msgstr ""
 
 #: app/scripts/components/issues/issue-create-dialog.html:49
@@ -3990,6 +4182,10 @@ msgstr ""
 msgid "You do not belong to any organization yet."
 msgstr ""
 
+#: app/scripts/components/navigation/select-workspace-toggle.js:60
+msgid "You don't have any organization yet"
+msgstr ""
+
 #: app/views/import/import.html:29
 msgid "You don't have any provider yet."
 msgstr ""
@@ -3998,8 +4194,16 @@ msgstr ""
 msgid "You don't have any tenant yet."
 msgstr ""
 
+#: app/scripts/components/project/projects-list.js:129
+msgid "You don't have enough privileges to perform this operation"
+msgstr ""
+
 #: app/scripts/components/error/error-403.html:3
 msgid "You have exceeded maximum number of quotas."
+msgstr ""
+
+#: app/scripts/components/resource/list/resource-applications-list.js:19
+msgid "You have no applications yet."
 msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:36
@@ -4009,6 +4213,10 @@ msgstr ""
 #: app/scripts/components/team/customer-permissions-log-list.js:18
 #: app/scripts/components/team/project-permissions-log-list.js:18
 msgid "You have no permissions yet."
+msgstr ""
+
+#: app/scripts/components/resource/list/resource-private-clouds-list.js:19
+msgid "You have no private clouds yet"
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js:54
@@ -4039,6 +4247,10 @@ msgstr ""
 msgid "You have no SLAs yet."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-snapshots.js:42
+msgid "You have no snapshots yet"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:30
 msgid "You have no snapshots yet."
 msgstr ""
@@ -4056,34 +4268,32 @@ msgstr ""
 msgid "You have no users yet"
 msgstr ""
 
+#: app/scripts/components/resource/list/resource-vms-list.js:23
+msgid "You have no virtual machines yet"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:38
 msgid "You have no volumes yet"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:31
+msgid "You have no volumes yet."
 msgstr ""
 
 #: app/views/directives/check-quotas.html:11
 msgid "You have reached the limit of your"
 msgstr ""
 
-#: app/views/help/ssh-keys.html:51
-msgid ""
-"You will also be asked to enter a passphrase.\r\n"
-"          After all is done you will see output like this:"
-msgstr ""
-
-#: app/views/help/ssh-keys.html:15
-msgid "You will be asked to confirm keys location and create passphrase to protect your private key:"
-msgstr ""
-
 #: app/scripts/components/invitations/invitation-accept.html:4
 msgid "You will be redirected to sign up form in a moment."
 msgstr ""
 
-#: app/views/help/details.html:53
-msgid "You will see “Succeeded” message after completing this procedure."
-msgstr ""
-
 #: app/scripts/components/invitations/invitation-accept.html:3
 msgid "Your invitation is being processed."
+msgstr ""
+
+#: app/scripts/components/invitations/utils.js:53
+msgid "Your invitation was accepted"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:15

@@ -3,13 +3,13 @@ import template from './auth-init.html';
 export const authInit = {
   template,
   controller: class AuthInitController {
-    constructor(usersService, $state, ENV, ncUtilsFlash) {
+    constructor(usersService, $state, ENV, ncUtilsFlash, coreUtils) {
       // @ngInject
       this.usersService = usersService;
       this.$state = $state;
-      this.ncUtilsFlash = ncUtilsFlash,
+      this.ncUtilsFlash = ncUtilsFlash;
       this.user = {};
-      this.pageTitle = ENV.shortPageTitle;
+      this.pageTitle = coreUtils.templateFormatter(gettext('Welcome to {pageTitle}!'), {pageTitle: ENV.shortPageTitle});
     }
 
     $onInit() {
