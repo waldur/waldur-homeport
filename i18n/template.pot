@@ -4,12 +4,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: app/scripts/components/events/event-types-dialog.js:20
-msgid "{eventType} types"
+#: app/scripts/components/form/appstore-field-list.js:38
+msgid "{fieldLabel} is required for provisioning resource."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:18
 msgid "{quota_name} quota threshold has been reached for project {project_name}."
+msgstr ""
+
+#: app/scripts/components/resource/state/resource-state-service.js:60
+msgid "{resourceType} has state {resourceState}"
+msgstr ""
+
+#: app/scripts/components/billing/billing-utils.js:26
+msgid "{shortPageTitle} | {tabTitle}"
 msgstr ""
 
 #: app/scripts/components/error/error-403.html:9
@@ -290,11 +298,15 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
+#: app/scripts/components/resource/actions/action-utils-service.js:83
+msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}"
+msgstr ""
+
 #: app/scripts/components/providers/list.js:125
 msgid "Are you sure you want to unlink provider and all related resources?"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:87
+#: app/scripts/components/resource/actions/action-utils-service.js:89
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
@@ -489,7 +501,7 @@ msgstr ""
 msgid "Cancel payment"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:37
+#: app/scripts/components/billing/billing-utils.js:39
 #: app/scripts/components/invitations/invitations-list.js:67
 msgid "Canceled"
 msgstr ""
@@ -735,7 +747,7 @@ msgstr ""
 msgid "Create subnet"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:41
+#: app/scripts/components/billing/billing-utils.js:43
 #: app/scripts/components/issues/issue-detail.html:80
 #: app/scripts/components/issues/issues-list.js:124
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:46
@@ -774,6 +786,10 @@ msgstr ""
 #: app/scripts/components/digitalocean/droplet-resize.html:14
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:7
 msgid "Current size"
+msgstr ""
+
+#: app/scripts/components/resource/state/resource-state-service.js:69
+msgid "current state on backend: {resourceState}"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:10
@@ -953,6 +969,11 @@ msgstr ""
 msgid "Error message"
 msgstr ""
 
+#: app/scripts/components/resource/state/resource-state-service.js:35
+#: app/scripts/components/resource/state/resource-state-service.js:46
+msgid "error message: {errorMessage}"
+msgstr ""
+
 #: app/views/directives/project-price-limit.html:7
 msgid "Estimated cost"
 msgstr ""
@@ -979,6 +1000,7 @@ msgstr ""
 
 #: app/scripts/components/dashboard/project-events-feed.js:12
 #: app/scripts/components/events/base-event-list.js:35
+#: app/scripts/components/events/event-types-dialog.js:20
 msgid "Event types"
 msgstr ""
 
@@ -1055,6 +1077,10 @@ msgstr ""
 
 #: app/views/directives/import-resource-button.html:19
 msgid "Failed"
+msgstr ""
+
+#: app/scripts/components/resource/state/resource-state-service.js:43
+msgid "Failed to operate with backend"
 msgstr ""
 
 #: app/scripts/components/issues/issue-registration.html:151
@@ -1158,10 +1184,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/module.js:35
 #: app/scripts/components/openstack/openstack-volume/module.js:63
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
-msgstr ""
-
-#: app/scripts/components/resource/actions/action-utils-service.js:114
-msgid "has been accepted"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:133
@@ -2059,7 +2081,7 @@ msgstr ""
 msgid "Notification method"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:59
+#: app/scripts/components/billing/billing-utils.js:61
 msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
@@ -2321,7 +2343,7 @@ msgstr ""
 msgid "Payment is being processed, please wait."
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:33
+#: app/scripts/components/billing/billing-utils.js:35
 #: app/scripts/components/invitations/invitations-list.js:46
 #: app/scripts/components/invitations/invitations-list.js:63
 msgid "Pending"
@@ -2378,8 +2400,8 @@ msgstr ""
 msgid "Please create first project"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:98
-msgid "Please downgrade tenant"
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:99
+msgid "Please downgrade tenant {tenantName} to VPC {vpcName}"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:7
@@ -2769,7 +2791,7 @@ msgstr ""
 msgid "Record no."
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:68
+#: app/scripts/components/billing/billing-utils.js:70
 msgid "Record notification has been sent to organization owners."
 msgstr ""
 
@@ -2889,11 +2911,11 @@ msgstr ""
 msgid "Request removal"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:114
-msgid "Request to"
+#: app/scripts/components/resource/actions/action-utils-service.js:117
+msgid "Request to {action} has been accepted"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:30
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:31
 msgid "Request to change tenant package has been created."
 msgstr ""
 
@@ -2911,6 +2933,14 @@ msgstr ""
 #: app/scripts/components/project/project-details.js:59
 #: app/scripts/components/project/routes.js:142
 msgid "Requested Services"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:108
+msgid "requested VPC template name"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:109
+msgid "requested VPC template UUID"
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js:191
@@ -3020,7 +3050,7 @@ msgstr ""
 msgid "Resource events"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:102
+#: app/scripts/components/resource/actions/action-utils-service.js:104
 msgid "Resource has been deleted"
 msgstr ""
 
@@ -3034,6 +3064,10 @@ msgstr ""
 
 #: app/scripts/components/resource/resource-header.js:65
 msgid "Resource is gone."
+msgstr ""
+
+#: app/scripts/components/resource/state/resource-state-service.js:28
+msgid "Resource is in sync"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:112
@@ -3160,6 +3194,10 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
+#: app/scripts/components/form/appstore-list-dialog.js:23
+msgid "Select {fieldLabel}"
+msgstr ""
+
 #: app/scripts/components/issues/issue-quick-create.html:98
 #: app/scripts/components/issues/issue-registration.html:176
 msgid "Select affected resource..."
@@ -3246,7 +3284,7 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:51
+#: app/scripts/components/billing/billing-utils.js:53
 msgid "Send notification"
 msgstr ""
 
@@ -3260,6 +3298,10 @@ msgstr ""
 
 #: app/scripts/components/issues/constants.js:4
 msgid "Service Request"
+msgstr ""
+
+#: app/scripts/components/resource/state/resource-state-service.js:33
+msgid "Service settings of this resource are in state erred"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-header.html:13
@@ -3619,14 +3661,19 @@ msgstr ""
 msgid "Tenant has been updated"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:106
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:23
 msgid "Tenant name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:38
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:39
 msgid "Tenant package has been upgraded."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:107
+msgid "tenant UUID"
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-contracts.js:75
@@ -3750,10 +3797,6 @@ msgstr ""
 msgid "To update your current plan, please visit"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:98
-msgid "to VPC"
-msgstr ""
-
 #: app/scripts/components/analytics/resource-analysis.html:62
 msgid "Top providers by project"
 msgstr ""
@@ -3826,7 +3869,7 @@ msgstr ""
 msgid "Unable to create request for a turnkey solution."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:33
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:34
 msgid "Unable to create request to change tenant package."
 msgstr ""
 
@@ -3834,20 +3877,20 @@ msgstr ""
 msgid "Unable to delete link."
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:217
+#: app/scripts/controllers/import-resource-controller.js:215
 msgid "Unable to get list of imported resources"
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:245
+#: app/scripts/controllers/import-resource-controller.js:243
 msgid "Unable to get list of resources for service"
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:196
+#: app/scripts/controllers/import-resource-controller.js:194
 msgid "Unable to get list of tenants."
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:271
-msgid "Unable to import resource"
+#: app/scripts/controllers/import-resource-controller.js:269
+msgid "Unable to import resource {resourceName}"
 msgstr ""
 
 #: app/scripts/components/core/bootstrap.js:23
@@ -3866,7 +3909,7 @@ msgstr ""
 msgid "Unable to save user"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:70
+#: app/scripts/components/billing/billing-utils.js:72
 msgid "Unable to send record notification."
 msgstr ""
 
@@ -3874,7 +3917,7 @@ msgstr ""
 msgid "Unable to update provider name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:40
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:41
 msgid "Unable to upgrade tenant package."
 msgstr ""
 

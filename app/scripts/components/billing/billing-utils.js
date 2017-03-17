@@ -5,11 +5,12 @@ const MODES = {
 
 // @ngInject
 export default class BillingUtils {
-  constructor(ENV, $filter, invoicesService, ncUtilsFlash) {
+  constructor(ENV, $filter, invoicesService, ncUtilsFlash, coreUtils) {
     this.ENV = ENV;
     this.$filter = $filter;
     this.invoicesService = invoicesService;
     this.ncUtilsFlash = ncUtilsFlash;
+    this.coreUtils = coreUtils;
   }
 
   formatPeriod({ year, month }) {
@@ -22,7 +23,8 @@ export default class BillingUtils {
   }
 
   getPageTitle() {
-    return `${this.ENV.shortPageTitle} | ${this.getTabTitle()}`;
+    return this.coreUtils.templateFormatter(gettext('{shortPageTitle} | {tabTitle}'),
+      { shortPageTitle: this.ENV.shortPageTitle, tabTitle: this.getTabTitle() });
   }
 
   getUserFilter() {

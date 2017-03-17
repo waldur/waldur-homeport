@@ -1,11 +1,12 @@
 // @ngInject
-export default function resourceStateService(resourceUtils, ResourceStateConfiguration) {
+export default function resourceStateService(resourceUtils, ResourceStateConfiguration, coreUtils) {
   return {
     getResourceState(resource) {
       let resourceType = resourceUtils.formatResourceType(resource);
       let config = ResourceStateConfiguration[resource.resource_type] || {};
       let runtimeShutdownStates = config.shutdown_states || [];
       let runtimeErrorStates = config.error_states || [];
+      let messageSuffix = null;
       let context = {
         className: '',
         label: '',
@@ -24,23 +25,27 @@ export default function resourceStateService(resourceUtils, ResourceStateConfigu
         context.label = resource.runtime_state || resource.state;
         if (resource.service_settings_state.toLowerCase() !== 'erred') {
           context.className = context.className || 'progress-bar-primary';
-          context.tooltip = 'Resource is in sync';
+          context.tooltip = gettext('Resource is in sync');
           showRuntimeState = true;
         } else {
           let errorMessage = resource.service_settings_error_message;
           context.className = context.className || 'progress-bar-warning';
-          context.tooltip = 'Service settings of this resource are in state erred';
+          context.tooltip = gettext('Service settings of this resource are in state erred');
           if (errorMessage) {
-            context.tooltip += `, error message: ${errorMessage}`;
+            messageSuffix = coreUtils.templateFormatter(gettext('error message: {errorMessage}'),
+              { errorMessage: errorMessage });
+            context.tooltip += (', ' + messageSuffix);
           }
         }
       } else if (resource.state.toLowerCase() === 'erred') {
         context.className = 'progress-bar-warning';
         context.label = resource.runtime_state || resource.state;
-        context.tooltip = 'Failed to operate with backend';
+        context.tooltip = gettext('Failed to operate with backend');
         let errorMessage = resource.error_message;
         if (errorMessage) {
-          context.tooltip += `, error message: ${errorMessage}`;
+          messageSuffix = coreUtils.templateFormatter(gettext('error message: {errorMessage}'),
+            { errorMessage: errorMessage });
+          context.tooltip += (', ' + messageSuffix);
         }
       } else {
         showRuntimeState = true;
@@ -48,11 +53,12 @@ export default function resourceStateService(resourceUtils, ResourceStateConfigu
         context.movementClassName = 'progress-striped active';
         if (resource.action) {
           context.label = resource.action;
-          context.tooltip = resource.action_details.message || `${resource.action} ${resourceType}`;
+          context.tooltip = gettext(resource.action_details.message) || `${resource.action} ${resourceType}`;
         } else {
           context.label = resource.state;
           if (runtimeErrorStates.indexOf(resource.state) !== -1) {
-            context.tooltip = `${resourceType} has state ${resource.state}`;
+            context.tooltip = coreUtils.templateFormatter(gettext('{resourceType} has state {resourceState}'),
+              { resourceType: resourceType, resourceState: resource.state });
           } else {
             context.tooltip = `${resource.state} ${resourceType}`;
           }
@@ -60,7 +66,9 @@ export default function resourceStateService(resourceUtils, ResourceStateConfigu
       }
 
       if (showRuntimeState && resource.runtime_state) {
-        context.tooltip += `, current state on backend: ${resource.runtime_state}`;
+        messageSuffix = coreUtils.templateFormatter(gettext('current state on backend: {resourceState}'),
+          { resourceState: resource.runtime_state });
+        context.tooltip += (', ' + messageSuffix);
       }
 
       return context;

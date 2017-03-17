@@ -1,7 +1,7 @@
 // @ngInject
 export default function actionUtilsService(
   ncUtilsFlash, $rootScope, HttpUtils, $http, $q, $uibModal, $filter, ncUtils,
-  resourcesService, ActionConfiguration) {
+  resourcesService, ActionConfiguration, coreUtils) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return resourcesService.getOption(model.url).then(response => {
@@ -77,9 +77,11 @@ export default function actionUtilsService(
     let confirmTextSuffix = custom && custom.delete_message || '';
     if (name === 'destroy') {
       var confirmText = (model.state === 'Erred')
-        ? `Are you sure you want to delete a ${model.resource_type} in an Erred state? 
-          A cleanup attempt will be performed if you choose so. ${confirmTextSuffix}`
-        : `Are you sure you want to delete a ${model.resource_type}? ${confirmTextSuffix}`;
+        ?  coreUtils.templateFormatter(gettext(`Are you sure you want to delete a {resourceType} in an Erred state? 
+        A cleanup attempt will be performed if you choose so. {confirmTextSuffix}`),
+          { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix })
+        : coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType}? {confirmTextSuffix}'),
+        { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix });
       return confirm(confirmText
         .replace('{resource_type}', model.resource_type)
         .replace('{confirmTextSuffix}', confirmTextSuffix));
@@ -111,7 +113,8 @@ export default function actionUtilsService(
   };
 
   this.handleActionSuccess = function(action) {
-    var template = action.successMessage || `${gettext('Request to')} ${action.title.toLowerCase()} ${gettext('has been accepted')}`;
+    var template = action.successMessage ||
+        coreUtils.templateFormatter(gettext('Request to {action} has been accepted'), { action: action.title.toLowerCase() });
     ncUtilsFlash.success(template);
   };
 

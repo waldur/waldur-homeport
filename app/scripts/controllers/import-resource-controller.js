@@ -12,13 +12,12 @@
       'currentStateService',
       'usersService',
       '$state',
-      '$filter',
-      '$scope',
       '$q',
       'ncUtils',
       'ncUtilsFlash',
       '$rootScope',
       '$stateParams',
+      'coreUtils',
       ImportResourceController]);
 
   function ImportResourceController(
@@ -31,13 +30,12 @@
     currentStateService,
     usersService,
     $state,
-    $filter,
-    $scope,
     $q,
     ncUtils,
     ncUtilsFlash,
     $rootScope,
-    $stateParams
+    $stateParams,
+    coreUtils
     ) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -268,7 +266,9 @@
           resource.status = 'success';
           vm.toggleResource(resource);
         }, function() {
-          ncUtilsFlash.warning(`${gettext('Unable to import resource')} ` + resource.name);
+          var message = coreUtils.templateFormatter(gettext('Unable to import resource {resourceName}'),
+            { resourceName: resource.name });
+          ncUtilsFlash.warning(message);
           resource.status = 'failed';
         });
       },

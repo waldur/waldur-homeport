@@ -7,7 +7,7 @@ export default class openstackTenantChangePackageService {
   // * saveData - accepts dictionary with fields {tenant, package, template, newTemplate}
 
   constructor($q, $state, packageTemplatesService,
-              openstackPackagesService, issuesService, ncUtilsFlash, ISSUE_IDS) {
+              openstackPackagesService, issuesService, ncUtilsFlash, ISSUE_IDS, coreUtils) {
     this.$q = $q;
     this.$state = $state;
     this.packageTemplatesService = packageTemplatesService;
@@ -15,6 +15,7 @@ export default class openstackTenantChangePackageService {
     this.issuesService = issuesService;
     this.ncUtilsFlash = ncUtilsFlash;
     this.ISSUE_IDS = ISSUE_IDS;
+    this.coreUtils = coreUtils;
   }
 
   loadData(tenant) {
@@ -95,15 +96,16 @@ export default class openstackTenantChangePackageService {
   }
 
   formatIssueSummary(context) {
-    return `${gettext('Please downgrade tenant')} '${context.tenant.name}' ${gettext('to VPC')} '${context.newTemplate.name}'`;
+    return this.coreUtils.templateFormatter(gettext('Please downgrade tenant {tenantName} to VPC {vpcName}'),
+      { tenantName: context.tenant.name, vpcName: context.newTemplate.name });
   }
 
   formatIssueDescription(context) {
     // Indentation is not used here in order to format description correctly
     return `
-Tenant name: ${context.tenant.name};
-tenant UUID: ${context.tenant.uuid};
-requested VPC template name: ${context.newTemplate.name};
-requested VPC template UUID: ${context.newTemplate.uuid}`;
+${gettext('Tenant name')}: ${context.tenant.name};
+${gettext('tenant UUID')}: ${context.tenant.uuid};
+${gettext('requested VPC template name')}: ${context.newTemplate.name};
+${gettext('requested VPC template UUID')}: ${context.newTemplate.uuid}`;
   }
 }
