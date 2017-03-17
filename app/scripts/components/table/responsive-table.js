@@ -79,7 +79,7 @@ export default function responsiveTable($rootScope, $timeout, $interval, $compil
             lengthMenu:     $filter('translate')(gettext('Show _MENU_ entries')),
             loadingRecords: $filter('translate')(gettext('Loading...')),
             processing:     $filter('translate')(gettext('Processing...')),
-            search:         $filter('translate')(gettext('Search:')),
+            search:         $filter('translate')(gettext('Search')),
             paginate: {
               first:        $filter('translate')(gettext('First')),
               last:         $filter('translate')(gettext('Last')),

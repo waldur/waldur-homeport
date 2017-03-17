@@ -59,7 +59,7 @@ export default function ProjectUsersListController(
             }
           },
           {
-            title: gettext('Role in project:'),
+            title: gettext('Role in project'),
             render: function(row) {
               return ENV.roles[row.role];
             }

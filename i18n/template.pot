@@ -4,6 +4,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: app/scripts/components/auth/auth-login.html:5
+msgid "{{ ::auth.pageTitle }}"
+msgstr ""
+
 #: app/scripts/components/form/appstore-field-list.js:38
 msgid "{fieldLabel} is required for provisioning resource."
 msgstr ""
@@ -341,7 +345,7 @@ msgstr ""
 msgid "Authentication events"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:154
+#: app/scripts/components/auth/auth-login.js:156
 msgid "Authentication failed"
 msgstr ""
 
@@ -626,7 +630,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:188
+#: app/scripts/components/auth/auth-login.js:190
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
@@ -945,7 +949,7 @@ msgid "Email"
 msgstr ""
 
 #: app/scripts/components/customer/customer-sizing.html:21
-msgid "email to:"
+msgid "email to"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:69
@@ -1412,7 +1416,7 @@ msgstr ""
 msgid "Invitation is not valid"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:106
+#: app/scripts/components/auth/auth-login.js:108
 msgid "Invitation token is not found."
 msgstr ""
 
@@ -3122,7 +3126,7 @@ msgid "Role expires on"
 msgstr ""
 
 #: app/scripts/components/team/project-users-list.js:62
-msgid "Role in project:"
+msgid "Role in project"
 msgstr ""
 
 #: app/scripts/components/events/constants.js:62
@@ -3154,12 +3158,9 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-registration.html:213
 #: app/scripts/components/navigation/header/main-search.html:3
+#: app/scripts/components/table/responsive-table.js:82
 #: app/views/directives/entity-list/entity-list.html:20
 msgid "Search"
-msgstr ""
-
-#: app/scripts/components/table/responsive-table.js:82
-msgid "Search:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:4
@@ -3937,7 +3938,7 @@ msgstr ""
 msgid "Unable to upgrade tenant package."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:116
+#: app/scripts/components/auth/auth-login.js:118
 msgid "Unable to validate invitation token."
 msgstr ""
 
@@ -4185,8 +4186,8 @@ msgstr ""
 msgid "VPC packages for this provider are not found."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:5
-msgid "Welcome to"
+#: app/scripts/components/auth/auth-login.js:33
+msgid "Welcome to {pageTitle}"
 msgstr ""
 
 #: app/scripts/components/auth/auth-init.js:12

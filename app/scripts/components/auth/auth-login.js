@@ -17,7 +17,7 @@ export const authLogin = {
   controllerAs: 'auth',
   controller: class AuthLoginController {
     constructor(ENV, $q, $state, authService,
-                ncUtilsFlash, invitationService, usersService, UserSettings) {
+                ncUtilsFlash, invitationService, usersService, UserSettings, coreUtils) {
       // @ngInject
       this.ENV = ENV;
       this.$q = $q;
@@ -27,9 +27,11 @@ export const authLogin = {
       this.invitationService = invitationService;
       this.usersService = usersService;
       this.UserSettings = UserSettings;
+      this.coreUtils = coreUtils;
 
       this.loginLogo = ENV.loginLogo;
-      this.shortPageTitle = ENV.shortPageTitle;
+      this.shortPageTitle = this.coreUtils.templateFormatter(gettext('Welcome to {pageTitle}'), { pageTitle: ENV.shortPageTitle });
+
       this.methods = ENV.authenticationMethods.reduce((result, item) => {
         result[item] = true;
         return result;
