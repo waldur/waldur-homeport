@@ -4,9 +4,7 @@
 
 <div class="ibox-content" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
     <p>
-        <span translate>There are no working</span>
-        {{category.label.toLowerCase()}}
-        <span translate>providers available for the current project.</span>
+        <span>{{ ::noProvidersMessage | translate }}</span>
     </p>
     <p visible="providers">
         <span translate>You can change that in</span>

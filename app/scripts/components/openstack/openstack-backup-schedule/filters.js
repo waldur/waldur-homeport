@@ -29,7 +29,8 @@ function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
 
     case baseFrequency.week:
       if (angular.isDefined(dayValues)) {
-        return `${gettext('Every week on')} ${formatDay()} ${formatTime()}`;
+        return coreUtils.templateFormatter(gettext('Every week on {day} {time}'),
+          { day: formatDay(), time: formatTime() });
       } else {
         return gettext('Every week');
       }

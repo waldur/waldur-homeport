@@ -8,7 +8,7 @@ export function appstoreHeader() {
 }
 
 // @ngInject
-export function AppStoreHeaderController($scope, $state, $stateParams, AppStoreUtilsService) {
+export function AppStoreHeaderController($scope, $state, $stateParams, AppStoreUtilsService, coreUtils) {
   $scope.openDialog = function() {
     AppStoreUtilsService.openDialog();
   };
@@ -18,6 +18,8 @@ export function AppStoreHeaderController($scope, $state, $stateParams, AppStoreU
     var category = $state.current.data.category || $stateParams.category;
     if (category) {
       $scope.category = AppStoreUtilsService.findOffering(category);
+      $scope.noProvidersMessage = coreUtils.templateFormatter(gettext('There are no working {categoryLabel} providers available for the current project.'),
+        { categoryLabel: category.label.toLowerCase() });
     }
   }
 }

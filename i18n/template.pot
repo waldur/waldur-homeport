@@ -4,10 +4,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: app/scripts/components/auth/auth-login.html:5
-msgid "{{ ::auth.pageTitle }}"
-msgstr ""
-
 #: app/scripts/components/form/appstore-field-list.js:38
 msgid "{fieldLabel} is required for provisioning resource."
 msgstr ""
@@ -873,7 +869,7 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:40
+#: app/scripts/components/appstore/appstore-providers.html:38
 #: app/scripts/components/events/base-event-list.js:43
 #: app/scripts/components/issues/issue-registration.html:32
 #: app/scripts/components/issues/issue-registration.html:69
@@ -1035,24 +1031,24 @@ msgstr ""
 msgid "Every minute"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:41
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:42
 msgid "Every month"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:39
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:46
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:40
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:47
 msgid "Every month on the"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:34
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:35
 msgid "Every week"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/filters.js:32
-msgid "Every week on"
+msgid "Every week on {day} {time}"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:48
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:49
 msgid "Every year"
 msgstr ""
 
@@ -2674,7 +2670,7 @@ msgstr ""
 msgid "Provider is in erred state."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:13
+#: app/scripts/components/appstore/appstore-providers.html:11
 msgid "provider management"
 msgstr ""
 
@@ -2701,10 +2697,6 @@ msgstr ""
 #: app/scripts/components/customer/routes.js:112
 #: app/views/directives/sizing.html:46
 msgid "Providers"
-msgstr ""
-
-#: app/scripts/components/appstore/appstore-providers.html:9
-msgid "providers available for the current project."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:60
@@ -3190,7 +3182,7 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:45
+#: app/scripts/components/appstore/appstore-providers.html:43
 #: app/scripts/components/appstore/category-selector-tabs.html:19
 #: app/scripts/components/navigation/select-workspace-dialog.html:112
 #: app/scripts/components/navigation/select-workspace-dialog.html:58
@@ -3238,7 +3230,7 @@ msgstr ""
 msgid "Select project..."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:19
+#: app/scripts/components/appstore/appstore-providers.html:17
 msgid "Select provider"
 msgstr ""
 
@@ -3755,8 +3747,8 @@ msgstr ""
 msgid "There are no suitable VPC packages for this tenant."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:7
-msgid "There are no working"
+#: app/scripts/components/appstore/appstore-header.js:21
+msgid "There are no working {categoryLabel} providers available for the current project."
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-plans.html:6
@@ -4202,7 +4194,7 @@ msgstr ""
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:12
+#: app/scripts/components/appstore/appstore-providers.html:10
 msgid "You can change that in"
 msgstr ""
 
