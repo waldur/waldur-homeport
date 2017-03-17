@@ -33,6 +33,14 @@
     var hasCustomer = undefined;
     var ownerOrStaff = undefined;
 
+    $rootScope.$on('logoutStart', () => {
+      setCustomer(null);
+      setProject(null);
+      isCustomerDefined = false;
+      setHasCustomer(undefined);
+      setOwnerOrStaff(undefined);
+    });
+
     function setProject(newProject) {
       project = newProject;
     }
