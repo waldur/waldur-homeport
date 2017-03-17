@@ -1,5 +1,5 @@
 import providerState from './provider-state';
-import providersList from './list';
+import providersList from './provider-list';
 import providerCreate from './create';
 import detailsModule from './details/module';
 

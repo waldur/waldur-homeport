@@ -59,6 +59,30 @@ const openstackInstanceNetworks = {
       }, true);
     }
 
+    getFreeSubnets(current_choice) {
+      let used_choices = {};
+      angular.forEach(this.items, item => {
+        if (item.subnet && item.subnet !== current_choice) {
+          used_choices[item.subnet] = true;
+        }
+      });
+      return this.subnets.filter(choice => !used_choices[choice.value]);
+    }
+
+    hasFreeSubnets() {
+      return this.getFreeSubnets().length > 0;
+    }
+
+    getFreeFloatingIps(current_choice) {
+      let used_choices = {};
+      angular.forEach(this.items, item => {
+        if (item.floating_ip && item.floating_ip !== true && item.floating_ip !== current_choice) {
+          used_choices[item.floating_ip] = true;
+        }
+      });
+      return this.floating_ips.filter(choice => !used_choices[choice.value]);
+    }
+
     addItem() {
       this.items.push({
         floating_ip: ''
@@ -67,7 +91,7 @@ const openstackInstanceNetworks = {
 
     deleteItem(item) {
       const index = this.items.indexOf(item);
-      this.items.splice(index);
+      this.items.splice(index, 1);
     }
   }
 };

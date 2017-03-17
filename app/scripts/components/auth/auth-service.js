@@ -47,9 +47,6 @@ export default function authService(
     usersService.currentUser = null;
     usersService.cleanAllCache();
     $auth.logout();
-    currentStateService.isCustomerDefined = false;
-    currentStateService.setHasCustomer(undefined);
-    currentStateService.setOwnerOrStaff(undefined);
     $rootScope.$broadcast('abortRequests');
     $state.go('login');
   }

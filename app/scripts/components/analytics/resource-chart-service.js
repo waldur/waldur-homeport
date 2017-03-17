@@ -19,13 +19,13 @@ const resourceCategories = [
   },
   {
     label: gettext('Private clouds'),
-    quota: 'nc_app_count',
+    quota: 'nc_private_cloud_count',
     color: chartColors.yellow,
     feature: 'private_clouds',
   },
   {
     label: gettext('Applications'),
-    quota: 'nc_private_cloud_count',
+    quota: 'nc_app_count',
     color: chartColors.purple,
     feature: 'apps',
   },

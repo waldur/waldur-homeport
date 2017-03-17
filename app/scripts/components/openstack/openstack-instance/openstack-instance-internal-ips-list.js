@@ -26,7 +26,7 @@ function OpenstackInternalIpsListController(
       });
     },
     afterGetList: function() {
-      this.list = this.list[0].internal_ips_set;
+      this.list = this.list[0] ? this.list[0].internal_ips_set : [];
     },
     getTableOptions: function() {
       return {
@@ -35,20 +35,20 @@ function OpenstackInternalIpsListController(
         noMatchesText: gettext('No internal IPs found matching filter.'),
         columns: [
           {
-            title: gettext('Name'),
-            render: row => row.subnet_name
-          },
-          {
-            title: gettext('CIDR'),
-            render: row => row.subnet_cidr
-          },
-          {
-            title: gettext('IP4 address'),
+            title: gettext('IPv4 address'),
             render: row => row.ip4_address
           },
           {
             title: gettext('MAC address'),
             render: row => row.mac_address
+          },
+          {
+            title: gettext('Subnet Name'),
+            render: row => row.subnet_name
+          },
+          {
+            title: gettext('Subnet CIDR'),
+            render: row => row.subnet_cidr
           },
         ],
         tableActions: this.getTableActions()

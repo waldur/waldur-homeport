@@ -7,6 +7,12 @@
             <li>
                 <a ui-sref="tos.index" translate>Terms of Service</a>
             </li>
+            <li ng-if="::$ctrl.supportEmail">
+                {{ ::$ctrl.supportEmail }}
+            </li>
+            <li ng-if="::$ctrl.supportPhone">
+                {{ ::$ctrl.supportPhone }}
+            </li>
             <li ng-if="$ctrl.isAuthenticated()" visible-if="'help'">
                 <a ui-sref="help.list" translate>Help</a>
             </li>
