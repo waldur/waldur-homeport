@@ -2,12 +2,11 @@
 export default function coreUtils() {
   return {
     templateFormatter: function(template, params) {
-      for (let i in params) {
-        if (params.hasOwnProperty(i)) {
-          template = template.replace(`{${i}}`, params[i]);
+      return template.replace(/{(.+?)}/g, function(match, contents)
+        {
+          return params[contents];
         }
-      }
-      return template;
+      );
     }
   };
 }

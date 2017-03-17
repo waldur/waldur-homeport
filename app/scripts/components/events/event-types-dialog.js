@@ -16,8 +16,8 @@ export default function eventTypesDialog() {
 }
 
 class EventTypesDialogController {
-  constructor($filter, coreUtils) {
-    this.type = coreUtils.templateFormatter(gettext('{eventType} types'), {eventType: $filter('titleCase')(this.resolve.type)});
+  constructor() {
+    this.dialogTitle = gettext('Event types');
     this.types = this.resolve.types;
   }
 }
