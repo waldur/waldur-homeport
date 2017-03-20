@@ -298,7 +298,11 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:83
+#: app/scripts/components/resource/actions/action-utils-service.js:80
+msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}"
+msgstr ""
+
+#: app/scripts/components/resource/actions/action-utils-service.js:82
 msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}"
 msgstr ""
 
@@ -306,7 +310,7 @@ msgstr ""
 msgid "Are you sure you want to unlink provider and all related resources?"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:89
+#: app/scripts/components/resource/actions/action-utils-service.js:88
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
@@ -2908,7 +2912,7 @@ msgstr ""
 msgid "Request removal"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:117
+#: app/scripts/components/resource/actions/action-utils-service.js:116
 msgid "Request to {action} has been accepted"
 msgstr ""
 
@@ -3039,7 +3043,7 @@ msgstr ""
 msgid "Resource events"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:104
+#: app/scripts/components/resource/actions/action-utils-service.js:103
 msgid "Resource has been deleted"
 msgstr ""
 
@@ -3668,6 +3672,14 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:23
 msgid "Tenant name"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:106
+msgid ""
+"Tenant name: {tenantName}; \r\n"
+" tenant UUID: {tenantUUID}; \r\n"
+" requested VPC template name: {templateName}; \r\n"
+" requested VPC template UUID: {templateUUID}"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:40

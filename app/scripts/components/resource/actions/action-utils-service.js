@@ -77,8 +77,7 @@ export default function actionUtilsService(
     let confirmTextSuffix = custom && custom.delete_message || '';
     if (name === 'destroy') {
       var confirmText = (model.state === 'Erred')
-        ?  coreUtils.templateFormatter(gettext(`Are you sure you want to delete a {resourceType} in an Erred state? 
-        A cleanup attempt will be performed if you choose so. {confirmTextSuffix}`),
+        ?  coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}'),
           { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix })
         : coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType}? {confirmTextSuffix}'),
         { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix });

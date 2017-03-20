@@ -103,11 +103,7 @@ export default class openstackTenantChangePackageService {
 
   formatIssueDescription(context) {
     // Indentation is not used here in order to format description correctly
-    return this.coreUtils.templateFormatter(gettext(
-      `Tenant name: {tenantName};
-       tenant UUID: {tenantUUID};
-       requested VPC template name: {templateName};
-       requested VPC template UUID: {templateUUID}`),
+    return this.coreUtils.templateFormatter(gettext('Tenant name: {tenantName}; \r\n tenant UUID: {tenantUUID}; \r\n requested VPC template name: {templateName}; \r\n requested VPC template UUID: {templateUUID}'),
       { tenantName: context.tenant.name, tenantUUID: context.tenant.uuid, templateName: context.newTemplate.name,
         templateUUID: context.newTemplate.uuid });
   }
