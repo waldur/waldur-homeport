@@ -11,7 +11,7 @@ export default function invoicesService(baseServiceClass, $http, ENV, $state) {
     },
     getTemplateUrl: function() {
       var path = $state.href('billingDetails', {uuid: 'TEMPLATE'});
-      return location.origin + path.replace('TEMPLATE', '{uuid}');
+      return location.origin + '/' + path.replace('TEMPLATE', '{uuid}');
     }
   });
   return new ServiceClass();

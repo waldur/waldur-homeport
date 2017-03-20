@@ -33,6 +33,14 @@
     var hasCustomer = undefined;
     var ownerOrStaff = undefined;
 
+    $rootScope.$on('logoutStart', function() {
+      vm.setCustomer(null);
+      vm.setProject(null);
+      vm.isCustomerDefined = false;
+      vm.setHasCustomer(undefined);
+      vm.setOwnerOrStaff(undefined);
+    });
+
     function setProject(newProject) {
       project = newProject;
     }

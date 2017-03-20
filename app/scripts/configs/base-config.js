@@ -211,4 +211,11 @@ angular.module('ncsaas')
       }
     ],
     defaultLanguage: 'en',
+
+    // Support email and phone is rendered at the footer
+    // supportEmail: 'support@example.com',
+    // supportPhone: '+1234567890'
+
+    // Renders label and logo at the login page
+    // poweredByLogo: 'static/images/logo.png'
   });

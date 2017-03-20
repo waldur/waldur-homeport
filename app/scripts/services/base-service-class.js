@@ -36,6 +36,11 @@
         this.setDefaultFilter();
         this.pageChangingReset();
         this.cacheTime = 0;
+
+        var vm = this;
+        $rootScope.$on('logoutStart', function() {
+          vm.clearAllCacheForCurrentEndpoint();
+        });
       },
 
       pushPostprocessor: function(postprocessor) {

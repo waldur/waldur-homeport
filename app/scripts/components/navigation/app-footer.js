@@ -8,6 +8,8 @@ export const appFooter = {
       this.companyName = ENV.companyName;
       this.companyUrl = ENV.companyUrl;
       this.isAuthenticated = authService.isAuthenticated;
+      this.supportEmail = ENV.supportEmail;
+      this.supportPhone = ENV.supportPhone;
     }
   }
 };
