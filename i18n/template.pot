@@ -12,17 +12,25 @@ msgstr ""
 msgid "{quota_name} quota threshold has been reached for project {project_name}."
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:60
-msgid "{resourceType} has state {resourceState}"
+#: app/scripts/directives/customer-balance.js:72
+msgid "{quotaUsage} out of {quotaLimit}"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:26
-msgid "{shortPageTitle} | {tabTitle}"
+#: app/scripts/components/resource/state/resource-state-service.js:60
+msgid "{resourceType} has state {resourceState}"
 msgstr ""
 
 #: app/scripts/components/error/error-403.html:9
 #: app/scripts/components/error/error-404.html:6
 msgid "&lt; Back"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.js:33
+msgid "<span>Note that this virtual machine is charged as part of </span><strong>{serviceName}</strong><span translate>package.</span>"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.js:33
+msgid "<span>Note that this volume is charged as part of </span><strong>{serviceName}</strong><span translate>package.</span>"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js:27
@@ -501,7 +509,7 @@ msgstr ""
 msgid "Cancel payment"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:39
+#: app/scripts/components/billing/billing-utils.js:37
 #: app/scripts/components/invitations/invitations-list.js:67
 msgid "Canceled"
 msgstr ""
@@ -751,7 +759,7 @@ msgstr ""
 msgid "Create subnet"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:43
+#: app/scripts/components/billing/billing-utils.js:41
 #: app/scripts/components/issues/issue-detail.html:80
 #: app/scripts/components/issues/issues-list.js:124
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:46
@@ -1014,12 +1022,12 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:25
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:27
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:26
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:28
 msgid "Every day"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:20
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:21
 msgid "Every hour"
 msgstr ""
 
@@ -1031,24 +1039,27 @@ msgstr ""
 msgid "Every minute"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:42
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:44
 msgid "Every month"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:40
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:47
-msgid "Every month on the"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:35
-msgid "Every week"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:32
-msgid "Every week on {day} {time}"
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:41
+msgid "Every month on the {days} {time}"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/filters.js:49
+msgid "Every month on the {days} of {months} {time}"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:36
+msgid "Every week"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:33
+msgid "Every week on {day} {time}"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:52
 msgid "Every year"
 msgstr ""
 
@@ -1116,7 +1127,7 @@ msgstr ""
 msgid "First"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:25
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:23
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:45
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:7
 msgid "Flavor"
@@ -1262,9 +1273,9 @@ msgid "ID code"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:31
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:21
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:19
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:24
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:23
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:19
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:19
 msgid "Image"
 msgstr ""
@@ -1462,9 +1473,9 @@ msgstr ""
 msgid "Invoice number"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:49
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:47
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:42
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:39
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:35
 #: app/scripts/components/premiumSupport/premium-support-summary.html:25
 msgid "Invoiced to"
 msgstr ""
@@ -2068,10 +2079,6 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:12
-msgid "Note that this volume is charged as part of"
-msgstr ""
-
 #: app/scripts/components/user/hooks/hook-details.js:69
 msgid "Notification has been created"
 msgstr ""
@@ -2084,7 +2091,7 @@ msgstr ""
 msgid "Notification method"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:61
+#: app/scripts/components/billing/billing-utils.js:59
 msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
@@ -2280,11 +2287,6 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: app/views/directives/customer-balance.html:26
-#: app/views/directives/customer-balance.html:58
-msgid "out of"
-msgstr ""
-
 #: app/scripts/components/user/user-dashboard.html:6
 msgid "Owned organizations"
 msgstr ""
@@ -2296,10 +2298,6 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:5
 msgid "Package"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:14
-msgid "package."
 msgstr ""
 
 #: app/scripts/components/error/routes.js:17
@@ -2346,7 +2344,7 @@ msgstr ""
 msgid "Payment is being processed, please wait."
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:35
+#: app/scripts/components/billing/billing-utils.js:33
 #: app/scripts/components/invitations/invitations-list.js:46
 #: app/scripts/components/invitations/invitations-list.js:63
 msgid "Pending"
@@ -2476,15 +2474,15 @@ msgstr ""
 msgid "Price for 1 vCPU per day"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:41
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:39
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:34
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:31
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:27
 msgid "Price per day"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:45
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:43
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:38
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:35
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:31
 msgid "Price per month"
 msgstr ""
 
@@ -2546,9 +2544,9 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html:40
 #: app/scripts/components/issues/issue-quick-create.html:75
 #: app/scripts/components/issues/issue-registration.html:127
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:53
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:51
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:43
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:39
 #: app/scripts/components/premiumSupport/premium-support-summary.html:29
 msgid "Project"
 msgstr ""
@@ -2766,7 +2764,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:54
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:59
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:33
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:31
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:58
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:15
 #: app/scripts/components/quotas/filters.js:6
@@ -2790,7 +2788,7 @@ msgstr ""
 msgid "Record no."
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:70
+#: app/scripts/components/billing/billing-utils.js:68
 msgid "Record notification has been sent to organization owners."
 msgstr ""
 
@@ -3289,7 +3287,7 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:53
+#: app/scripts/components/billing/billing-utils.js:51
 msgid "Send notification"
 msgstr ""
 
@@ -3540,7 +3538,7 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:64
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:63
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:20
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:27
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:23
 #: app/scripts/components/project/project-details.js:52
 #: app/scripts/components/project/projects-list.js:96
 #: app/scripts/components/project/routes.js:128
@@ -3835,7 +3833,7 @@ msgstr ""
 msgid "Total Price"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:37
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:35
 msgid "Total storage"
 msgstr ""
 
@@ -3922,7 +3920,7 @@ msgstr ""
 msgid "Unable to save user"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:72
+#: app/scripts/components/billing/billing-utils.js:70
 msgid "Unable to send record notification."
 msgstr ""
 
@@ -4103,7 +4101,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:53
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:55
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:29
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:27
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:54
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:11
 msgid "vCPU"
@@ -4134,7 +4132,7 @@ msgid "Virtual machines count"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:14
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:17
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:15
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:18
 msgid "VM name"
 msgstr ""
@@ -4152,7 +4150,7 @@ msgstr ""
 msgid "Volume has been updated"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:19
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:15
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:11
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:7
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:5

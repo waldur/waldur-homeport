@@ -23,7 +23,7 @@
                          visible="{{ quota.name }}">
                         <div class="usage-row">
                             <div class="usage-row__key">{{ quota.name | titleCase | translate }}</div>
-                            <div class="usage-row__value">{{ quota.usage }} <span translate>out of</span> {{ quota.limit }}</div>
+                            <div class="usage-row__value">{{ :: quota.quotaUsageMessage }}</div>
                         </div>
                         <div class="usage-bar">
                             <div class="usage-bar__value" ng-style="{width: {{ quota.percent }} + '%'}"></div>
@@ -55,7 +55,7 @@
                  visible="{{ quota.name }}">
                 <div class="usage-row">
                     <div class="usage-row__key">{{ quota.name | titleCase | translate }}</div>
-                    <div class="usage-row__value">{{ quota.usage }} <span translate>out of</span> {{ quota.limit }}</div>
+                    <div class="usage-row__value">{{ :: quota.quotaUsageMessage }}</div>
                 </div>
                 <div class="usage-bar">
                     <div class="usage-bar__value" ng-style="{width: {{ quota.percent }} + '%'}"></div>

@@ -12,6 +12,7 @@
       '$scope',
       '$state',
       '$window',
+      'coreUtils',
       'usersService',
       CustomerBalanceController]);
 
@@ -24,6 +25,7 @@
     $scope,
     $state,
     $window,
+    coreUtils,
     usersService) {
 
     function init() {
@@ -52,7 +54,7 @@
         $window.location = payment.approval_url;
         return true;
       });
-    }
+    };
 
     function getPercent(usage, limit) {
       return Math.round(Math.max(0, Math.min(100, usage / limit * 100)));
@@ -66,11 +68,15 @@
         currentPlan = customer.plan.name;
         currentPlanQuotas = customer.plan.quotas.map(function(quota) {
           var name = ncUtils.getPrettyQuotaName(quota.name);
+          var limit = quota.value < 0 ? '∞' : quota.value;
+          var quotaUsageMessage = coreUtils.templateFormatter(gettext('{quotaUsage} out of {quotaLimit}'),
+            { quotaUsage: usage[quota.name], quotaLimit: limit });
           return {
             name: name + (quota.value > 1 || quota.value == -1 ? 's' : ''),
-            limit: quota.value < 0 ? '∞' : quota.value,
+            limit: limit,
             usage: usage[quota.name],
-            percent: getPercent(usage[quota.name], quota.value)
+            percent: getPercent(usage[quota.name], quota.value),
+            quotaUsageMessage: quotaUsageMessage
           };
         });
       } else {

@@ -15,7 +15,8 @@ function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
 
     case baseFrequency.hour:
       if (minuteValues) {
-        return coreUtils.templateFormatter(gettext('Every hour at {minuteValues} past the hour'), {minuteValues: minuteValues});
+        return coreUtils.templateFormatter(gettext('Every hour at {minuteValues} past the hour'),
+          {minuteValues: minuteValues});
       } else {
         return gettext('Every hour');
       }
@@ -37,14 +38,16 @@ function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
 
     case baseFrequency.month:
       if (angular.isDefined(dayOfMonthValues)) {
-        return `${gettext('Every month on the')} ${formatNumeral()} ${formatTime()}`;
+        return coreUtils.templateFormatter(gettext('Every month on the {days} {time}'),
+          { days: formatNumeral(), time: formatTime() });
       } else {
         return gettext('Every month');
       }
 
     case baseFrequency.year:
       if (angular.isDefined(dayOfMonthValues)) {
-        return `${gettext('Every month on the')} ${formatNumeral()} of ${formatMonth()} ${formatTime()}`;
+        return coreUtils.templateFormatter(gettext('Every month on the {days} of {months} {time}'),
+          { days: formatNumeral(), months: formatMonth(), time: formatTime() });
       } else {
         return gettext('Every year');
       }
