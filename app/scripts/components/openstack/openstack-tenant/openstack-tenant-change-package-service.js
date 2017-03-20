@@ -7,7 +7,7 @@ export default class openstackTenantChangePackageService {
   // * saveData - accepts dictionary with fields {tenant, package, template, newTemplate}
 
   constructor($q, $state, packageTemplatesService,
-              openstackPackagesService, issuesService, ncUtilsFlash, ISSUE_IDS, coreUtils) {
+              openstackPackagesService, issuesService, ncUtilsFlash, ISSUE_IDS, coreUtils, $filter) {
     this.$q = $q;
     this.$state = $state;
     this.packageTemplatesService = packageTemplatesService;
@@ -16,6 +16,7 @@ export default class openstackTenantChangePackageService {
     this.ncUtilsFlash = ncUtilsFlash;
     this.ISSUE_IDS = ISSUE_IDS;
     this.coreUtils = coreUtils;
+    this.$filter = $filter;
   }
 
   loadData(tenant) {
@@ -84,7 +85,7 @@ export default class openstackTenantChangePackageService {
   createIssue(context) {
     return this.issuesService.createIssue({
       summary: this.formatIssueSummary(context),
-      description: this.formatIssueDescription(context),
+      description: this.$filter('translate')(this.formatIssueDescription(context)),
       resource: context.tenant.url,
       is_reported_manually: true,
       type: this.ISSUE_IDS.CHANGE_REQUEST
@@ -102,10 +103,12 @@ export default class openstackTenantChangePackageService {
 
   formatIssueDescription(context) {
     // Indentation is not used here in order to format description correctly
-    return `
-${gettext('Tenant name')}: ${context.tenant.name};
-${gettext('tenant UUID')}: ${context.tenant.uuid};
-${gettext('requested VPC template name')}: ${context.newTemplate.name};
-${gettext('requested VPC template UUID')}: ${context.newTemplate.uuid}`;
+    return this.coreUtils.templateFormatter(gettext(
+      `Tenant name: {tenantName};
+       tenant UUID: {tenantUUID};
+       requested VPC template name: {templateName};
+       requested VPC template UUID: {templateUUID}`),
+      { tenantName: context.tenant.name, tenantUUID: context.tenant.uuid, templateName: context.newTemplate.name,
+        templateUUID: context.newTemplate.uuid });
   }
 }

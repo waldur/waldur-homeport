@@ -30,7 +30,7 @@ class SummaryController {
         this.components = components;
         this.componentsMessage =
           this.coreUtils.templateFormatter(
-            gettext('<span>Note that this virtual machine is charged as part of </span><strong>{serviceName}</strong><span translate>package.</span>'),
+            gettext('Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package.'),
             { serviceName: this.model.service.name });
         this.componentsMessage = this.$filter('translate')(this.componentsMessage);
       })

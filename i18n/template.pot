@@ -25,14 +25,6 @@ msgstr ""
 msgid "&lt; Back"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.js:33
-msgid "<span>Note that this virtual machine is charged as part of </span><strong>{serviceName}</strong><span translate>package.</span>"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.js:33
-msgid "<span>Note that this volume is charged as part of </span><strong>{serviceName}</strong><span translate>package.</span>"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js:27
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:25
 msgid "1 day"
@@ -2079,6 +2071,14 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.js:33
+msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.js:33
+msgid "Note that this volume is charged as part of <strong>{serviceName}</strong> package."
+msgstr ""
+
 #: app/scripts/components/user/hooks/hook-details.js:69
 msgid "Notification has been created"
 msgstr ""
@@ -2401,7 +2401,7 @@ msgstr ""
 msgid "Please create first project"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:99
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:100
 msgid "Please downgrade tenant {tenantName} to VPC {vpcName}"
 msgstr ""
 
@@ -2912,7 +2912,7 @@ msgstr ""
 msgid "Request to {action} has been accepted"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:31
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:32
 msgid "Request to change tenant package has been created."
 msgstr ""
 
@@ -2930,14 +2930,6 @@ msgstr ""
 #: app/scripts/components/project/project-details.js:59
 #: app/scripts/components/project/routes.js:142
 msgid "Requested Services"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:108
-msgid "requested VPC template name"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:109
-msgid "requested VPC template UUID"
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js:191
@@ -3672,19 +3664,14 @@ msgstr ""
 msgid "Tenant has been updated"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:106
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:23
 msgid "Tenant name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:39
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:40
 msgid "Tenant package has been upgraded."
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:107
-msgid "tenant UUID"
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-contracts.js:75
@@ -3880,7 +3867,7 @@ msgstr ""
 msgid "Unable to create request for a turnkey solution."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:34
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:35
 msgid "Unable to create request to change tenant package."
 msgstr ""
 
@@ -3924,7 +3911,7 @@ msgstr ""
 msgid "Unable to send record notification."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:41
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:42
 msgid "Unable to upgrade tenant package."
 msgstr ""
 
