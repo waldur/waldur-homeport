@@ -115,9 +115,9 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.sizing', {
       url: 'sizing/',
-      template: '<customer-sizing/>',
+      template: '<cost-plans-list/>',
       data: {
-        pageTitle: gettext('Sizing')
+        pageTitle: gettext('Cost planning')
       }
     })
 

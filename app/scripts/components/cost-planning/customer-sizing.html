@@ -1,13 +1,13 @@
 <article class="tab-sizing">
     <div class="sizing-actions">
-        <a href="#" class="button">New</a>
+        <a href="#" class="btn btn-primary">New</a>
     </div>
     <ul class="sizing-list">
         <li ng-repeat="item in CustomerSizing.list"
             ng-class="{open: item.open === true}">
             <header ng-click="item.open = !item.open">
                 <div class="title">
-                    <h2  stoppropagation>
+                    <h2 stoppropagation>
                         <span editable-text="item.name"
                               e-form="rowform"
                               buttons="no">
@@ -17,7 +17,7 @@
                              ng-click="rowform.$show()"
                              ng-hide="rowform.$visible"></div>
                     </h2>
-                    <span  stoppropagation>
+                    <span stoppropagation>
                         email to:
                         <span editable-text="item.email"
                               e-form="rowformEmail"
@@ -32,9 +32,9 @@
                     <span>USD/mo ({{ item.provider.name ? item.provider.name : 'Provider doesn\'t selected' }})</span>
                 </div>
                 <div class="btn-set">
-                    <a href="#" class="button">Send</a>
-                    <a href="#" class="button">Provision</a>
-                    <a href="#" class="button">Clone</a>
+                    <a href="#" class="btn btn-primary">Send</a>
+                    <a href="#" class="btn btn-primary">Provision</a>
+                    <a href="#" class="btn btn-primary">Clone</a>
                 </div>
                 <expandable-indicator open="item.open"></expandable-indicator>
             </header>

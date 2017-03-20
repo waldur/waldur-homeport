@@ -1,4 +1,5 @@
 import template from './customer-sizing.html';
+import './customer-sizing.scss';
 
 const customerSizing = {
   template,

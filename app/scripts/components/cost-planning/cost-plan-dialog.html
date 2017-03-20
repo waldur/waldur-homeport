@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h2 class="modal-title" translate>Cost plan</h2>
+</div>
+<div class="modal-body">
+    <div ng-if="$ctrl.loading">
+        <loading-spinner/>
+    </div>
+    <form ng-if="!$ctrl.loading"
+        name="$ctrl.DialogForm"
+        ng-class="{disabled: $ctrl.submitting}">
+        <div class="form-group">
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default"
+        ng-click="$ctrl.dismiss()">
+        <span translate>Cancel</span>
+    </button>
+</div>
