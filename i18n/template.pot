@@ -32,7 +32,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:75
+#: app/scripts/components/invitations/invitations-list.js:71
 msgid "Accepted"
 msgstr ""
 
@@ -67,6 +67,7 @@ msgstr ""
 msgid "Accounting records"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-items.html:11
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/resource/actions/action-button-resource.html:3
 #: app/scripts/components/table/responsive-table.js:268
@@ -79,9 +80,13 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-comments-form.html:17
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:53
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:38
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:39
 #: app/scripts/components/team/add-project-member.js:22
 msgid "Add"
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-items.html:52
+msgid "Add item"
 msgstr ""
 
 #: app/scripts/components/user/keys/key-create.html:42
@@ -345,10 +350,11 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:45
 #: app/scripts/components/appstore/category-selector.html:33
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:45
 #: app/scripts/components/customer/customer-create-dialog.html:94
 #: app/scripts/components/events/event-details-dialog.html:125
 #: app/scripts/components/invitations/invitation-dialog.html:77
-#: app/scripts/components/invitations/invitations-list.js:178
+#: app/scripts/components/invitations/invitations-list.js:174
 #: app/scripts/components/issues/issue-comments-form.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:125
@@ -370,7 +376,7 @@ msgid "Cancel payment"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:37
-#: app/scripts/components/invitations/invitations-list.js:67
+#: app/scripts/components/invitations/invitations-list.js:63
 msgid "Canceled"
 msgstr ""
 
@@ -401,7 +407,6 @@ msgstr ""
 msgid "Checkout summary"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:42
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:29
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:33
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:35
@@ -459,6 +464,18 @@ msgstr ""
 msgid "Cost analysis"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:2
+msgid "Cost plan"
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-items.html:2
+msgid "Cost plan does not have any item yet."
+msgstr ""
+
+#: app/scripts/components/customer/routes.js:120
+msgid "Cost planning"
+msgstr ""
+
 #: app/scripts/components/customer/customer-create-dialog.html:36
 #: app/scripts/components/customer/customer-delete.html:25
 msgid "Country"
@@ -508,6 +525,10 @@ msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:4
 msgid "Create organization"
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plans-list.js:44
+msgid "Create plan"
 msgstr ""
 
 #: app/scripts/components/customer/routes.js:144
@@ -560,7 +581,7 @@ msgstr ""
 msgid "Created a new payment for {customer_name}"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:123
+#: app/scripts/components/invitations/invitations-list.js:119
 msgid "Created at"
 msgstr ""
 
@@ -606,6 +627,7 @@ msgstr ""
 msgid "Default tax percent"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-items.html:40
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:39
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
@@ -647,6 +669,7 @@ msgid "Destination URL"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.html:38
+#: app/scripts/components/cost-planning/cost-plans-list.js:54
 #: app/scripts/components/events/base-event-list.js:43
 #: app/scripts/components/issues/issue-registration.html:32
 #: app/scripts/components/issues/issue-registration.html:69
@@ -703,7 +726,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:61
 #: app/scripts/components/customer/customer-delete.html:28
-#: app/scripts/components/invitations/invitations-list.js:88
+#: app/scripts/components/invitations/invitations-list.js:84
 msgid "Email"
 msgstr ""
 
@@ -769,11 +792,11 @@ msgstr ""
 msgid "Expiration time"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:71
+#: app/scripts/components/invitations/invitations-list.js:67
 msgid "Expired"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:131
+#: app/scripts/components/invitations/invitations-list.js:127
 msgid "Expires at"
 msgstr ""
 
@@ -877,7 +900,7 @@ msgid "have been accepted on"
 msgstr ""
 
 #: app/scripts/components/help/routes.js:9
-#: app/scripts/components/navigation/app-footer.html:11
+#: app/scripts/components/navigation/app-footer.html:17
 msgid "Help"
 msgstr ""
 
@@ -1017,7 +1040,7 @@ msgstr ""
 
 #: app/scripts/components/invitations/invitation-dialog.html:2
 #: app/scripts/components/invitations/invitation-dialog.html:73
-#: app/scripts/components/invitations/invitations-list.js:154
+#: app/scripts/components/invitations/invitations-list.js:150
 msgid "Invite user"
 msgstr ""
 
@@ -1085,8 +1108,8 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:46
-msgid "IP4 address"
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:38
+msgid "IPv4 address"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
@@ -1214,7 +1237,7 @@ msgstr ""
 msgid "Login failed"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:50
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:42
 msgid "MAC address"
 msgstr ""
 
@@ -1299,6 +1322,8 @@ msgstr ""
 msgid "Minimal valid value is"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:11
+#: app/scripts/components/cost-planning/cost-plans-list.js:32
 #: app/scripts/components/customer/customer-create-dialog.html:11
 #: app/scripts/components/customer/customer-delete.html:10
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:76
@@ -1309,7 +1334,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:33
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:38
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:92
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:38
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:36
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:35
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
@@ -1337,6 +1361,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-network/breadcrumbs.js:22
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:23
 msgid "Networks"
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-dialog.js:27
+msgid "New plan"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:27
@@ -1379,6 +1407,10 @@ msgstr ""
 msgid "No backups yet."
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plans-list.js:29
+msgid "No cost plans found matching filter."
+msgstr ""
+
 #: app/scripts/components/events/base-event-list.js:13
 msgid "No events found matching filter."
 msgstr ""
@@ -1407,7 +1439,7 @@ msgstr ""
 msgid "No internal IPs yet."
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:84
+#: app/scripts/components/invitations/invitations-list.js:80
 msgid "No invitations found matching filter."
 msgstr ""
 
@@ -1778,8 +1810,7 @@ msgid "Payment is being processed, please wait."
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:33
-#: app/scripts/components/invitations/invitations-list.js:46
-#: app/scripts/components/invitations/invitations-list.js:63
+#: app/scripts/components/invitations/invitations-list.js:58
 msgid "Pending"
 msgstr ""
 
@@ -1841,6 +1872,10 @@ msgstr ""
 msgid "Postal"
 msgstr ""
 
+#: app/scripts/components/auth/powered-by.html:2
+msgid "Powered by"
+msgstr ""
+
 #: app/scripts/components/customer/customer-users-details-list.js:61
 #: app/scripts/components/user/user-popover-table.html:21
 msgid "Preferred language"
@@ -1853,6 +1888,10 @@ msgstr ""
 
 #: app/scripts/configs/base-config.js:67
 msgid "Premium support service."
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-items.html:9
+msgid "Preset"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js:87
@@ -2075,6 +2114,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:58
 #: app/scripts/components/billing/invoice-details.html:56
+#: app/scripts/components/cost-planning/cost-plan-items.html:10
 msgid "Quantity"
 msgstr ""
 
@@ -2231,7 +2271,11 @@ msgstr ""
 msgid "Requested Services"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:191
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:17
+msgid "Required certifications"
+msgstr ""
+
+#: app/scripts/components/invitations/invitations-list.js:187
 msgid "Resend"
 msgstr ""
 
@@ -2357,7 +2401,7 @@ msgid "Restored volumes"
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-dialog.html:29
-#: app/scripts/components/invitations/invitations-list.js:98
+#: app/scripts/components/invitations/invitations-list.js:94
 #: app/scripts/components/team/add-project-member.html:27
 #: app/scripts/components/team/add-team-member.html:46
 #: app/scripts/components/team/customer-permissions-log-list.js:32
@@ -2382,6 +2426,7 @@ msgstr ""
 msgid "Runtime state"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:41
 #: app/scripts/components/customer/customer-create-dialog.html:89
 #: app/scripts/components/providers/details/provider-projects.html:15
 #: app/scripts/components/providers/details/provider-settings.html:76
@@ -2443,6 +2488,10 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-items.html:18
+msgid "Select a preset"
+msgstr ""
+
 #: app/scripts/components/issues/issue-quick-create.html:98
 #: app/scripts/components/issues/issue-registration.html:176
 msgid "Select affected resource..."
@@ -2454,6 +2503,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-registration.html:11
 msgid "Select caller..."
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:20
+msgid "Select certifications"
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:39
@@ -2602,7 +2655,6 @@ msgid "Size name"
 msgstr ""
 
 #: app/scripts/components/customer/customer-workspace.js:122
-#: app/scripts/components/customer/routes.js:120
 msgid "Sizing"
 msgstr ""
 
@@ -2709,7 +2761,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:115
+#: app/scripts/components/invitations/invitations-list.js:111
 #: app/scripts/components/issues/constants.js:109
 #: app/scripts/components/issues/constants.js:71
 #: app/scripts/components/issues/issue-detail.html:55
@@ -2745,8 +2797,16 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:50
+msgid "Subnet CIDR"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-subnet/actions.js:11
 msgid "Subnet has been updated"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:46
+msgid "Subnet Name"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:43
@@ -3013,7 +3073,7 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:139
+#: app/scripts/components/invitations/invitations-list.js:135
 msgid "URL"
 msgstr ""
 
@@ -3127,7 +3187,7 @@ msgstr ""
 msgid "vCPU"
 msgstr ""
 
-#: app/scripts/components/navigation/app-footer.html:19
+#: app/scripts/components/navigation/app-footer.html:25
 msgid "Version"
 msgstr ""
 
@@ -3230,6 +3290,10 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plans-list.js:28
+msgid "You have no cost plans yet"
+msgstr ""
+
 #: app/scripts/components/billing/invoices-list.js:36
 msgid "You have no invoices yet"
 msgstr ""
@@ -3271,7 +3335,7 @@ msgstr ""
 msgid "You have no snapshots yet."
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:83
+#: app/scripts/components/invitations/invitations-list.js:79
 msgid "You have no team invitations yet"
 msgstr ""
 

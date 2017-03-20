@@ -34,6 +34,7 @@ function CostsPlansListController(
           }
         ],
         tableActions: this.getTableActions(),
+        rowActions: this.getRowActions(),
       };
     },
 
@@ -42,18 +43,39 @@ function CostsPlansListController(
         {
           title: gettext('Create plan'),
           iconClass: 'fa fa-plus',
-          callback: this.openDialog.bind(this),
+          callback: this.openCreateDialog.bind(this),
         }
       ];
     },
 
-    openDialog: function() {
+    getRowActions: function() {
+      return [
+        {
+          title: gettext('Details'),
+          iconClass: 'fa fa-eye',
+          callback: this.openDetailsDialog.bind(this),
+        }
+      ];
+    },
+
+    openDetailsDialog: function(plan) {
+      $uibModal.open({
+        component: 'costPlanDialog',
+        resolve: {
+          customer: () => this.currentCustomer,
+          plan: () => plan,
+        },
+      }).result.then(function() {
+        controllerScope.resetCache();
+      });
+    },
+
+    openCreateDialog: function() {
       $uibModal.open({
         component: 'costPlanDialog',
         resolve: {
           customer: () => this.currentCustomer
         },
-        dialogSize: 'lg',
       }).result.then(function() {
         controllerScope.resetCache();
       });
