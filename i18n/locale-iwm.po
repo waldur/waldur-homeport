@@ -104,6 +104,12 @@ msgstr "Owned federations"
 msgid "Add new project"
 msgstr "Add new operational tenant"
 
+msgid "Add new organization"
+msgstr "Add new federation"
+
+msgid "You do not belong to any organization yet."
+msgstr "You do not belong to any federation yet."
+
 msgid "Add project"
 msgstr "Add operational tenant"
 
@@ -136,6 +142,13 @@ msgstr "Federation actions"
 
 msgid "Remove organization"
 msgstr "Remove federation"
+
+msgid "Organization events"
+msgstr "Federation events"
+
+msgid "Projects events"
+msgstr "Operational tenant events"
+
 
 msgid "You can remove this organization by pressing the button"
 msgstr "You can remove this federation by pressing the button"
