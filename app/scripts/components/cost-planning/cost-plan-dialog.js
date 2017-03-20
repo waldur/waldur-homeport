@@ -42,7 +42,7 @@ const costPlanDialog = {
     addItem() {
       this.plan.items.push({
         quantity: 1
-      })
+      });
     }
 
     deleteItem(item) {
@@ -66,7 +66,7 @@ const costPlanDialog = {
         plan.url = this.plan.url;
         promise = this.costPlansService.update(plan);
       } else {
-        promise = plan.$save()
+        promise = plan.$save();
       }
 
       promise.finally(() => this.loading = false);
