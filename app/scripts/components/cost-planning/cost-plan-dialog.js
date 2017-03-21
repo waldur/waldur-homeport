@@ -77,11 +77,11 @@ const costPlanDialog = {
       plan.certifications = this.plan.certifications.map(({url}) => ({url}));
 
       let promise;
-      if (this.resolve.plan) {
+      if (this.plan.url) {
         plan.url = this.plan.url;
         promise = this.costPlansService.update(plan);
       } else {
-        promise = plan.$save();
+        promise = plan.$save().then(plan => this.plan.url = plan.url);
       }
 
       this.saving = true;

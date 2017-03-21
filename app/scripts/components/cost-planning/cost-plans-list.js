@@ -72,9 +72,7 @@ function CostsPlansListController(
           plan: () => plan,
         },
         size: 'lg'
-      }).result.then(function() {
-        controllerScope.resetCache();
-      });
+      }).closed.then(() => controllerScope.resetCache());
     },
 
     openCreateDialog: function() {
@@ -84,9 +82,7 @@ function CostsPlansListController(
           customer: () => this.currentCustomer
         },
         size: 'lg'
-      }).result.then(function() {
-        controllerScope.resetCache();
-      });
+      }).closed.then(() => controllerScope.resetCache());
     },
 
     getFilter: function() {
