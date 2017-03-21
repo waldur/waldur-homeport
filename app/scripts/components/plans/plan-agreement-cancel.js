@@ -22,7 +22,7 @@ function AgreementCancelController(
     if (error.data) {
       ncUtilsFlash.error(error.data.detail);
     } else {
-      ncUtilsFlash.error(gettext('Unable to cancel billing plan'));
+      ncUtilsFlash.error(gettext('Unable to cancel billing plan.'));
     }
   });
 }

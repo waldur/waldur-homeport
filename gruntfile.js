@@ -479,6 +479,13 @@ module.exports = function(grunt) {
                         dest: 'app/static/css/datatables/',
                         filter: 'isFile'
                     },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/angular-bind-html-compile',
+                        src: ['angular-bind-html-compile.js'],
+                        dest: 'app/static/js/angular/',
+                        filter: 'isFile'
+                    },
                 ]
             },
             dist: {
@@ -673,6 +680,7 @@ module.exports = function(grunt) {
                     'app/static/js/angular/ng-file-upload.js',
                     'app/static/js/angular/xeditable.js',
                     'app/static/js/angular/angular-sanitize.js',
+                    'app/static/js/angular/angular-bind-html-compile.js',
                     'app/static/js/d3.js',
                     'app/scripts/class.js',
                     'app/scripts/inspinia.js',

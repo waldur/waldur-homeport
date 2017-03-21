@@ -69,7 +69,7 @@
         currentPlanQuotas = customer.plan.quotas.map(function(quota) {
           var name = ncUtils.getPrettyQuotaName(quota.name);
           var limit = quota.value < 0 ? '∞' : quota.value;
-          var quotaUsageMessage = coreUtils.templateFormatter(gettext('{quotaUsage} out of {quotaLimit}'),
+          var quotaUsageMessage = coreUtils.templateFormatter(gettext('{quotaUsage} out of {quotaLimit}.'),
             { quotaUsage: usage[quota.name], quotaLimit: limit });
           return {
             name: name + (quota.value > 1 || quota.value == -1 ? 's' : ''),

@@ -44,6 +44,7 @@ class IssueQuickCreateController {
       this.issue.resource = null;
       this.refreshResources();
     });
+    this.emptyFieldMessage = gettext('You did not enter a field.');
   }
 
   refreshCustomers(name) {
@@ -111,7 +112,7 @@ class IssueQuickCreateController {
     this.saving = true;
     return this.service.createIssue(issue).then(issue => {
       this.service.clearAllCacheForCurrentEndpoint();
-      this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {requestId} has been created'), {requestId: issue.key}));
+      this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {requestId} has been created.'), {requestId: issue.key}));
       return this.$state.go('support.detail', {uuid: issue.uuid});
     }).finally(() => {
       this.saving = false;

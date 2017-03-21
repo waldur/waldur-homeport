@@ -77,9 +77,9 @@ export default function actionUtilsService(
     let confirmTextSuffix = custom && custom.delete_message || '';
     if (name === 'destroy') {
       var confirmText = (model.state === 'Erred')
-        ?  coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}'),
+        ?  coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}.'),
           { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix })
-        : coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType}? {confirmTextSuffix}'),
+        : coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType}? {confirmTextSuffix}.'),
         { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix });
       return confirm(confirmText
         .replace('{resource_type}', model.resource_type)
@@ -100,7 +100,7 @@ export default function actionUtilsService(
         }
         vm.handleActionSuccess(action);
       } else if (response.status === 204) {
-        ncUtilsFlash.success(gettext('Resource has been deleted'));
+        ncUtilsFlash.success(gettext('Resource has been deleted.'));
         controller.afterInstanceRemove(resource);
       } else {
         vm.handleActionSuccess(action);
@@ -113,7 +113,7 @@ export default function actionUtilsService(
 
   this.handleActionSuccess = function(action) {
     var template = action.successMessage ||
-        coreUtils.templateFormatter(gettext('Request to {action} has been accepted'), { action: action.title.toLowerCase() });
+        coreUtils.templateFormatter(gettext('Request to {action} has been accepted.'), { action: action.title.toLowerCase() });
     ncUtilsFlash.success(template);
   };
 

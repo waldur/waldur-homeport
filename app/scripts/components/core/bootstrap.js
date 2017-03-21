@@ -20,7 +20,7 @@ export default function bootstrap(modulename) {
     }
 
     function reportError() {
-      alert(gettext('Unable to load application configuration. Please reload this page'));
+      alert(gettext('Unable to load application configuration. Please reload this page.'));
     }
   }
 

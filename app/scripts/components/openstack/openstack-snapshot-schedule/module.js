@@ -26,7 +26,7 @@ function actionConfig(ActionConfigurationProvider) {
     options: {
       update: {
         title: gettext('Edit'),
-        successMessage: gettext('Snapshot schedule has been updated'),
+        successMessage: gettext('Snapshot schedule has been updated.'),
         fields: {
           schedule: {
             type: 'crontab'

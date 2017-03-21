@@ -33,7 +33,7 @@ function RecordsListController(
     },
     getTableOptions: function() {
       return {
-        noDataText: gettext('You have no records yet'),
+        noDataText: gettext('You have no records yet.'),
         noMatchesText: gettext('No records found matching filter.'),
         searchFieldName: 'number',
         columns: [

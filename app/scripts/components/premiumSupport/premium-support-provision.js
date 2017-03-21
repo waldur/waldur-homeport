@@ -67,7 +67,7 @@ class PremiumSupportProvisionController {
       return true;
     }).catch(response => {
       this.errors = response.data;
-      this.ncUtilsFlash.error(gettext('Unable to create premium support contract'));
+      this.ncUtilsFlash.error(gettext('Unable to create premium support contract.'));
     });
   }
 }

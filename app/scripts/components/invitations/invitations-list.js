@@ -80,7 +80,7 @@ function InvitationsListController(
     },
     getTableOptions: function() {
       return {
-        noDataText: gettext('You have no team invitations yet'),
+        noDataText: gettext('You have no team invitations yet.'),
         noMatchesText: gettext('No invitations found matching filter.'),
         enableOrdering: true,
         columns: [

@@ -1,6 +1,6 @@
 <div class="white-box empty-data-block" ng-if="DashboardController.projectsList.length == 0">
-    <h1 translate>Not enough data for resource analysis</h1>
-    <h2 translate>Please create first project</h2>
+    <h1 translate>Not enough data for resource analysis.</h1>
+    <h2 translate>Please create first project.</h2>
 </div>
 <div class="white-box dashboard-resources-tab" ng-if="DashboardController.projectsList.length">
         <div class="pie-charts-block" block-ui="pie-charts">
@@ -34,7 +34,7 @@
         <div class="big-chart" block-ui="bar-chart" ng-if="DashboardController.barChartTab === 'vmsByProject'">
             <span class="chart-name" translate>By project</span>
             <div ng-if="!DashboardController.resourcesCount" class="empty-chart-message">
-                <span translate>Not enough data for chart</span>
+                <span translate>Not enough data for chart.</span>
             </div>
             <div ng-if="DashboardController.projectsList.showBarChart &&
                         DashboardController.resourcesCount">

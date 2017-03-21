@@ -1,11 +1,12 @@
 // @ngInject
-export default function coreUtils() {
+export default function coreUtils($filter) {
   return {
     templateFormatter: function(template, params) {
-      return template.replace(/{(.+?)}/g, function(match, contents) {
-        return params[contents];
+      let formattedString = template.replace(/{(.+?)}/g, function(match, key) {
+        return params[key];
       }
       );
+      return $filter('translate')(formattedString);
     }
   };
 }

@@ -85,7 +85,7 @@ export default class openstackTenantChangePackageService {
   createIssue(context) {
     return this.issuesService.createIssue({
       summary: this.formatIssueSummary(context),
-      description: this.$filter('translate')(this.formatIssueDescription(context)),
+      description: this.formatIssueDescription(context),
       resource: context.tenant.url,
       is_reported_manually: true,
       type: this.ISSUE_IDS.CHANGE_REQUEST
@@ -97,7 +97,7 @@ export default class openstackTenantChangePackageService {
   }
 
   formatIssueSummary(context) {
-    return this.coreUtils.templateFormatter(gettext('Please downgrade tenant {tenantName} to VPC {vpcName}'),
+    return this.coreUtils.templateFormatter(gettext('Please downgrade tenant {tenantName} to VPC {vpcName}.'),
       { tenantName: context.tenant.name, vpcName: context.newTemplate.name });
   }
 

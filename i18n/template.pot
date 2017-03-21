@@ -13,14 +13,14 @@ msgid "{quota_name} quota threshold has been reached for project {project_name}.
 msgstr ""
 
 #: app/scripts/directives/customer-balance.js:72
-msgid "{quotaUsage} out of {quotaLimit}"
+msgid "{quotaUsage} out of {quotaLimit}."
 msgstr ""
 
 #: app/scripts/components/resource/state/resource-state-service.js:60
-msgid "{resourceType} has state {resourceState}"
+msgid "{resourceType} has state {resourceState}."
 msgstr ""
 
-#: app/scripts/components/error/error-403.html:9
+#: app/scripts/components/error/error-403.html:8
 #: app/scripts/components/error/error-404.html:6
 msgid "&lt; Back"
 msgstr ""
@@ -65,7 +65,7 @@ msgid "Account activation"
 msgstr ""
 
 #: app/scripts/components/auth/auth-activation.js:19
-msgid "Account has been activated"
+msgid "Account has been activated."
 msgstr ""
 
 #: app/scripts/components/user/user-manage.js:54
@@ -189,7 +189,7 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:88
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:144
-msgid "Additional data that will be added to instance on provisioning"
+msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:54
@@ -207,6 +207,7 @@ msgstr ""
 
 #: app/scripts/components/alerts/base-alerts-list.js:35
 #: app/scripts/components/dashboard/project-alerts-feed.js:12
+#: app/scripts/components/events/event-types-dialog.js:20
 msgid "Alert types"
 msgstr ""
 
@@ -243,7 +244,7 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:306
+#: app/scripts/components/appstore/appstore-store.js:314
 msgid "All provider quotas have reached limit."
 msgstr ""
 
@@ -299,11 +300,11 @@ msgid "Apps"
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js:80
-msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}"
+msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}."
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js:82
-msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}"
+msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}."
 msgstr ""
 
 #: app/scripts/components/providers/provider-list.js:125
@@ -451,7 +452,7 @@ msgid "bootable"
 msgstr ""
 
 #: app/scripts/components/plans/plans-list.js:26
-msgid "Both VMs and applications are counted as resources"
+msgid "Both VMs and applications are counted as resources."
 msgstr ""
 
 #: app/scripts/components/providers/create.html:112
@@ -533,7 +534,7 @@ msgstr ""
 
 #: app/scripts/components/resource/monitoring/resource-graphs.js:55
 #: app/scripts/components/resource/monitoring/resource-graphs.js:66
-msgid "Chart is not available at this moment"
+msgid "Chart is not available at this moment."
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:6
@@ -767,7 +768,7 @@ msgid "Created"
 msgstr ""
 
 #: app/scripts/components/events/constants.js:13
-msgid "Created a new payment for {customer_name}"
+msgid "Created a new payment for {customer_name}."
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js:123
@@ -780,7 +781,7 @@ msgid "Creation date"
 msgstr ""
 
 #: app/scripts/components/events/constants.js:38
-msgid "Creation of service project link {service_name} has failed"
+msgid "Creation of service project link {service_name} has failed."
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:104
@@ -797,7 +798,7 @@ msgid "Current size"
 msgstr ""
 
 #: app/scripts/components/resource/state/resource-state-service.js:69
-msgid "current state on backend: {resourceState}"
+msgid "current state on backend: {resourceState}."
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:10
@@ -873,7 +874,7 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:38
+#: app/scripts/components/appstore/appstore-providers.html:35
 #: app/scripts/components/events/base-event-list.js:43
 #: app/scripts/components/issues/issue-registration.html:32
 #: app/scripts/components/issues/issue-registration.html:69
@@ -892,7 +893,7 @@ msgid "Device"
 msgstr ""
 
 #: app/views/directives/project-price-limit.html:41
-msgid "Disable provisioning when threshold is reached"
+msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:96
@@ -1091,7 +1092,7 @@ msgid "Failed"
 msgstr ""
 
 #: app/scripts/components/resource/state/resource-state-service.js:43
-msgid "Failed to operate with backend"
+msgid "Failed to operate with backend."
 msgstr ""
 
 #: app/scripts/components/issues/issue-registration.html:151
@@ -1359,11 +1360,11 @@ msgid "Instance does not have any security groups yet."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/actions.js:26
-msgid "Instance has been updated"
+msgid "Instance has been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:327
-msgid "Instance is not configured"
+#: app/scripts/components/appstore/appstore-store.js:335
+msgid "Instance is not configured."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:1
@@ -1412,11 +1413,11 @@ msgid "Invitation has been created."
 msgstr ""
 
 #: app/scripts/components/invitations/utils.js:61
-msgid "Invitation is not found"
+msgid "Invitation is not found."
 msgstr ""
 
 #: app/scripts/components/invitations/utils.js:64
-msgid "Invitation is not valid"
+msgid "Invitation is not valid."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.js:108
@@ -1587,11 +1588,11 @@ msgid "Latest SLA events"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:56
-msgid "Leave blank if you want admin password to be auto-generated"
+msgid "Leave blank if you want admin password to be auto-generated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:50
-msgid "Leave blank if you want admin username to be auto-generated"
+msgid "Leave blank if you want admin username to be auto-generated."
 msgstr ""
 
 #: app/scripts/components/customer/customer-popover.html:24
@@ -1603,7 +1604,7 @@ msgid "Let’s get started"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:115
-msgid "Lifetime will be updated and reset upon saving the form"
+msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:70
@@ -1766,7 +1767,7 @@ msgid "Network"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/module.js:30
-msgid "Network has been updated"
+msgid "Network has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:117
@@ -1943,7 +1944,7 @@ msgid "No private clouds found matching filter."
 msgstr ""
 
 #: app/scripts/components/team/customer-users-list.js:107
-msgid "No projects are assigned to this role"
+msgid "No projects are assigned to this role."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js:55
@@ -2053,22 +2054,25 @@ msgid "Not all required fields have been entered."
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:25
-#: app/scripts/components/analytics/resource-analysis.html:37
-#: app/scripts/components/resource/monitoring/resource-graphs.js:20
-#: app/scripts/components/resource/monitoring/resource-graphs.js:21
 msgid "Not enough data for chart"
 msgstr ""
 
+#: app/scripts/components/analytics/resource-analysis.html:37
+#: app/scripts/components/resource/monitoring/resource-graphs.js:20
+#: app/scripts/components/resource/monitoring/resource-graphs.js:21
+msgid "Not enough data for chart."
+msgstr ""
+
 #: app/scripts/components/analytics/cost-analysis.html:6
-msgid "Not enough data for cost analysis"
+msgid "Not enough data for cost analysis."
 msgstr ""
 
 #: app/scripts/components/resource/monitoring/resource-graphs.html:3
-msgid "Not enough data for CPU graph"
+msgid "Not enough data for CPU graph."
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:2
-msgid "Not enough data for resource analysis"
+msgid "Not enough data for resource analysis."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:46
@@ -2084,11 +2088,11 @@ msgid "Note that this volume is charged as part of <strong>{serviceName}</strong
 msgstr ""
 
 #: app/scripts/components/user/hooks/hook-details.js:69
-msgid "Notification has been created"
+msgid "Notification has been created."
 msgstr ""
 
 #: app/scripts/components/user/hooks/hook-details.js:66
-msgid "Notification has been updated"
+msgid "Notification has been updated."
 msgstr ""
 
 #: app/scripts/components/user/hooks/hook-details.html:15
@@ -2132,7 +2136,7 @@ msgid "Only customer owner or staff can invite users."
 msgstr ""
 
 #: app/scripts/components/providers/provider-list.js:111
-msgid "Only customer owner or staff can remove provider"
+msgid "Only customer owner or staff can remove provider."
 msgstr ""
 
 #: app/scripts/components/providers/provider-list.js:139
@@ -2230,7 +2234,7 @@ msgid "Organization {customer_name} has no providers."
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.js:44
-msgid "Organization {organizationName} is updated"
+msgid "Organization {organizationName} is updated."
 msgstr ""
 
 #: app/scripts/components/customer/customer-delete.html:49
@@ -2331,11 +2335,11 @@ msgid "Payment events"
 msgstr ""
 
 #: app/scripts/components/events/constants.js:11
-msgid "Payment for {customer_name} has been approved"
+msgid "Payment for {customer_name} has been approved."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:12
-msgid "Payment for {customer_name} has been cancelled"
+msgid "Payment for {customer_name} has been cancelled."
 msgstr ""
 
 #: app/scripts/components/payments/payment-approve.js:18
@@ -2392,41 +2396,36 @@ msgstr ""
 msgid "Plans"
 msgstr ""
 
-#: app/scripts/components/error/error-403.html:7
-#: app/views/directives/check-quotas.html:15
-msgid "plans page"
-msgstr ""
-
 #: app/scripts/components/appstore/category-selector.js:120
 msgid "Please clarify why do you need it"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:3
-msgid "Please create first project"
+msgid "Please create first project."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:100
-msgid "Please downgrade tenant {tenantName} to VPC {vpcName}"
+msgid "Please downgrade tenant {tenantName} to VPC {vpcName}."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:7
-msgid "Please import resources or add more providers"
+msgid "Please import resources or add more providers."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/module.js:29
-msgid "Please provide details of a new volume created from snapshot"
+msgid "Please provide details of a new volume created from snapshot."
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:64
-msgid "Please provide your EU VAT ID if you are registered in the European Union"
+msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-projects.html:11
 msgid "Please select projects where usage of the provider is permitted."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:337
-msgid "Please specify {fields}"
+#: app/scripts/components/appstore/appstore-store.js:345
+msgid "Please specify {fields}."
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-settings.html:2
@@ -2536,7 +2535,7 @@ msgid "Profile"
 msgstr ""
 
 #: app/scripts/components/user/user-manage.js:39
-msgid "Profile has been updated"
+msgid "Profile has been updated."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:114
@@ -2602,7 +2601,7 @@ msgid "Project has been renamed from {project_previous_name} to {project_name}."
 msgstr ""
 
 #: app/scripts/components/project/project-manage.js:43
-msgid "Project has been updated"
+msgid "Project has been updated."
 msgstr ""
 
 #: app/scripts/configs/base-config.js:189
@@ -2610,7 +2609,7 @@ msgid "Project manager"
 msgstr ""
 
 #: app/scripts/components/team/project-users-list.js:111
-msgid "Project manager cannot edit users with same role"
+msgid "Project manager cannot edit users with same role."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:69
@@ -2657,23 +2656,19 @@ msgid "Provider details"
 msgstr ""
 
 #: app/scripts/components/providers/create.js:73
-msgid "Provider has been created"
+msgid "Provider has been created."
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-settings.js:138
-msgid "Provider has been updated"
+msgid "Provider has been updated."
 msgstr ""
 
 #: app/scripts/components/providers/provider-list.js:114
-msgid "Provider has resources. Please remove them first"
+msgid "Provider has resources. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:304
+#: app/scripts/components/appstore/appstore-store.js:312
 msgid "Provider is in erred state."
-msgstr ""
-
-#: app/scripts/components/appstore/appstore-providers.html:11
-msgid "provider management"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:92
@@ -2685,7 +2680,7 @@ msgstr ""
 msgid "Provider package is not defined."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:311
+#: app/scripts/components/appstore/appstore-store.js:319
 msgid "Provider quota have reached threshold."
 msgstr ""
 
@@ -2729,7 +2724,7 @@ msgstr ""
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:41
+#: app/scripts/components/appstore/appstore-store.js:43
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
@@ -2738,24 +2733,14 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
-#: app/views/directives/check-quotas.html:13
-msgid "quota"
-msgstr ""
-
 #: app/scripts/components/events/constants.js:63
 msgid "Quota events"
 msgstr ""
 
+#: app/scripts/components/error/routes.js:25
 #: app/scripts/components/project/projects-list.js:131
-msgid "Quota has been reached"
-msgstr ""
-
 #: app/scripts/components/providers/provider-list.js:176
 msgid "Quota has been reached."
-msgstr ""
-
-#: app/scripts/components/error/routes.js:25
-msgid "Quota limit exceeded"
 msgstr ""
 
 #: app/views/directives/customer-balance.html:19
@@ -2776,7 +2761,7 @@ msgid "RAM"
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:17
-msgid "Read through terms and conditions"
+msgid "Read through terms and conditions."
 msgstr ""
 
 #: app/scripts/components/customer/customer-delete.js:82
@@ -2785,7 +2770,7 @@ msgid "Reason"
 msgstr ""
 
 #: app/scripts/configs/base-config.js:20
-msgid "Reason unknown, please contact support"
+msgid "Reason unknown, please contact support."
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:38
@@ -2883,10 +2868,13 @@ msgstr ""
 msgid "Reporter"
 msgstr ""
 
-#: app/scripts/components/issues/issue-create-dialog.js:63
-#: app/scripts/components/issues/issue-quick-create.js:114
-#: app/scripts/components/issues/issue-registration.js:192
-msgid "Request {requestId} has been created"
+#: app/scripts/components/issues/issue-registration.js:193
+msgid "Request {key} has been created."
+msgstr ""
+
+#: app/scripts/components/issues/issue-create-dialog.js:64
+#: app/scripts/components/issues/issue-quick-create.js:115
+msgid "Request {requestId} has been created."
 msgstr ""
 
 #: app/scripts/components/appstore/category-selector.js:119
@@ -2913,7 +2901,7 @@ msgid "Request removal"
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js:116
-msgid "Request to {action} has been accepted"
+msgid "Request to {action} has been accepted."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:32
@@ -3034,7 +3022,7 @@ msgid "Resource count in"
 msgstr ""
 
 #: app/scripts/components/resource/monitoring/resource-sla.html:2
-msgid "Resource doesn't have SLA yet. Please connect it to monitoring system"
+msgid "Resource doesn't have SLA yet. Please connect it to monitoring system."
 msgstr ""
 
 #: app/scripts/components/customer/customer-events.js:34
@@ -3044,11 +3032,11 @@ msgid "Resource events"
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js:103
-msgid "Resource has been deleted"
+msgid "Resource has been deleted."
 msgstr ""
 
 #: app/scripts/components/resource/actions/constants.js:17
-msgid "Resource has been updated"
+msgid "Resource has been updated."
 msgstr ""
 
 #: app/views/import/import.html:107
@@ -3154,7 +3142,7 @@ msgid "Security group does not contain any rule yet."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/module.js:52
-msgid "Security group has been updated"
+msgid "Security group has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:103
@@ -3176,7 +3164,7 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:43
+#: app/scripts/components/appstore/appstore-providers.html:40
 #: app/scripts/components/appstore/category-selector-tabs.html:19
 #: app/scripts/components/navigation/select-workspace-dialog.html:112
 #: app/scripts/components/navigation/select-workspace-dialog.html:58
@@ -3224,7 +3212,7 @@ msgstr ""
 msgid "Select project..."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:17
+#: app/scripts/components/appstore/appstore-providers.html:14
 msgid "Select provider"
 msgstr ""
 
@@ -3276,7 +3264,7 @@ msgid "Selected"
 msgstr ""
 
 #: app/views/import/import.html:130
-msgid "Selected resources will be imported into project"
+msgid "Selected resources will be imported into project."
 msgstr ""
 
 #: app/scripts/components/customer/customer-sizing.html:35
@@ -3287,8 +3275,8 @@ msgstr ""
 msgid "Send notification"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:389
-msgid "Server error occurred"
+#: app/scripts/components/appstore/appstore-store.js:397
+msgid "Server error occurred."
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:79
@@ -3300,7 +3288,7 @@ msgid "Service Request"
 msgstr ""
 
 #: app/scripts/components/resource/state/resource-state-service.js:33
-msgid "Service settings of this resource are in state erred"
+msgid "Service settings of this resource are in state erred."
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-header.html:13
@@ -3410,7 +3398,7 @@ msgid "Small"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/module.js:32
-msgid "Snapshot has been updated"
+msgid "Snapshot has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:12
@@ -3418,7 +3406,7 @@ msgid "Snapshot name"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:29
-msgid "Snapshot schedule has been updated"
+msgid "Snapshot schedule has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot-schedule/breadcrumbs.js:22
@@ -3566,7 +3554,7 @@ msgid "Subnet CIDR"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/actions.js:11
-msgid "Subnet has been updated"
+msgid "Subnet has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:46
@@ -3665,7 +3653,7 @@ msgid "Tenant"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/actions.js:18
-msgid "Tenant has been updated"
+msgid "Tenant has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:10
@@ -3705,7 +3693,7 @@ msgid "Terms of Services"
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-button-resource.html:12
-msgid "There are no actions"
+msgid "There are no actions."
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.html:73
@@ -3799,12 +3787,8 @@ msgstr ""
 msgid "To port"
 msgstr ""
 
-#: app/scripts/components/error/error-403.html:6
-msgid "To update current plan visit"
-msgstr ""
-
-#: app/views/directives/check-quotas.html:15
-msgid "To update your current plan, please visit"
+#: app/scripts/components/error/error-403.js:19
+msgid "To update current plan visit <a ui-sref=\"organization.plans({customerUuid})\">plans page</a>"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:62
@@ -3837,7 +3821,7 @@ msgid "Total storage"
 msgstr ""
 
 #: app/views/import/import.html:140
-msgid "Try to detect historical usage of resources"
+msgid "Try to detect historical usage of resources."
 msgstr ""
 
 #: app/scripts/components/issues/issues-list.js:36
@@ -3852,15 +3836,15 @@ msgid "Type"
 msgstr ""
 
 #: app/scripts/components/auth/auth-activation.js:22
-msgid "Unable to activate account"
+msgid "Unable to activate account."
 msgstr ""
 
 #: app/scripts/components/plans/plan-agreement-approve.js:26
-msgid "Unable to approve billing plan"
+msgid "Unable to approve billing plan."
 msgstr ""
 
 #: app/scripts/components/plans/plan-agreement-cancel.js:25
-msgid "Unable to cancel billing plan"
+msgid "Unable to cancel billing plan."
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-dialog.js:60
@@ -3872,7 +3856,7 @@ msgid "Unable to create link."
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-provision.js:70
-msgid "Unable to create premium support contract"
+msgid "Unable to create premium support contract."
 msgstr ""
 
 #: app/scripts/components/offering/appstore-offering.js:62
@@ -3888,11 +3872,11 @@ msgid "Unable to delete link."
 msgstr ""
 
 #: app/scripts/controllers/import-resource-controller.js:215
-msgid "Unable to get list of imported resources"
+msgid "Unable to get list of imported resources."
 msgstr ""
 
 #: app/scripts/controllers/import-resource-controller.js:243
-msgid "Unable to get list of resources for service"
+msgid "Unable to get list of resources for service."
 msgstr ""
 
 #: app/scripts/controllers/import-resource-controller.js:194
@@ -3900,11 +3884,11 @@ msgid "Unable to get list of tenants."
 msgstr ""
 
 #: app/scripts/controllers/import-resource-controller.js:269
-msgid "Unable to import resource {resourceName}"
+msgid "Unable to import resource {resourceName}."
 msgstr ""
 
 #: app/scripts/components/core/bootstrap.js:23
-msgid "Unable to load application configuration. Please reload this page"
+msgid "Unable to load application configuration. Please reload this page."
 msgstr ""
 
 #: app/scripts/components/issues/issue-comments-list.html:8
@@ -3916,7 +3900,7 @@ msgid "Unable to save provider."
 msgstr ""
 
 #: app/scripts/components/auth/auth-init.js:29
-msgid "Unable to save user"
+msgid "Unable to save user."
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:70
@@ -4146,7 +4130,7 @@ msgid "Volume"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/module.js:47
-msgid "Volume has been updated"
+msgid "Volume has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:15
@@ -4175,11 +4159,8 @@ msgstr ""
 msgid "VPC packages for this provider are not found."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:33
-msgid "Welcome to {pageTitle}"
-msgstr ""
-
 #: app/scripts/components/auth/auth-init.js:12
+#: app/scripts/components/auth/auth-login.js:33
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
@@ -4191,8 +4172,8 @@ msgstr ""
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:10
-msgid "You can change that in"
+#: app/scripts/components/appstore/appstore-store.js:82
+msgid "You can change that in <a ui-sref=\"organization.providers({uuid})\">provider management</a>."
 msgstr ""
 
 #: app/scripts/components/customer/customer-delete.html:51
@@ -4204,26 +4185,17 @@ msgid "You can remove this project by pressing the button"
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.js:26
-msgid "You cannot change your own role"
+msgid "You cannot change your own role."
 msgstr ""
 
 #: app/scripts/components/providers/provider-list.js:108
-msgid "You cannot remove shared provider"
+msgid "You cannot remove shared provider."
 msgstr ""
 
-#: app/scripts/components/issues/issue-create-dialog.html:49
-#: app/scripts/components/issues/issue-create-dialog.html:69
-#: app/scripts/components/issues/issue-create-dialog.html:88
-#: app/scripts/components/issues/issue-quick-create.html:16
-#: app/scripts/components/issues/issue-quick-create.html:33
-#: app/scripts/components/issues/issue-quick-create.html:50
-#: app/scripts/components/issues/issue-registration.html:104
-#: app/scripts/components/issues/issue-registration.html:121
-#: app/scripts/components/issues/issue-registration.html:145
-#: app/scripts/components/issues/issue-registration.html:24
-#: app/scripts/components/issues/issue-registration.html:61
-#: app/scripts/components/issues/issue-registration.html:87
-msgid "You did not enter a field"
+#: app/scripts/components/issues/issue-create-dialog.js:38
+#: app/scripts/components/issues/issue-quick-create.js:47
+#: app/scripts/components/issues/issue-registration.js:68
+msgid "You did not enter a field."
 msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:13
@@ -4231,7 +4203,7 @@ msgid "You do not belong to any organization yet."
 msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-toggle.js:60
-msgid "You don't have any organization yet"
+msgid "You don't have any organization yet."
 msgstr ""
 
 #: app/views/import/import.html:29
@@ -4243,7 +4215,7 @@ msgid "You don't have any tenant yet."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js:129
-msgid "You don't have enough privileges to perform this operation"
+msgid "You don't have enough privileges to perform this operation."
 msgstr ""
 
 #: app/scripts/components/error/error-403.html:3
@@ -4255,7 +4227,7 @@ msgid "You have no applications yet."
 msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:36
-msgid "You have no invoices yet"
+msgid "You have no invoices yet."
 msgstr ""
 
 #: app/scripts/components/team/customer-permissions-log-list.js:18
@@ -4264,7 +4236,7 @@ msgid "You have no permissions yet."
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-private-clouds-list.js:19
-msgid "You have no private clouds yet"
+msgid "You have no private clouds yet."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js:54
@@ -4276,7 +4248,7 @@ msgid "You have no quotas yet."
 msgstr ""
 
 #: app/scripts/components/billing/billing-records-list.js:36
-msgid "You have no records yet"
+msgid "You have no records yet."
 msgstr ""
 
 #: app/scripts/components/offering/offerings-list.js:22
@@ -4295,41 +4267,35 @@ msgstr ""
 msgid "You have no SLAs yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-snapshots.js:42
-msgid "You have no snapshots yet"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:30
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-snapshots.js:42
 msgid "You have no snapshots yet."
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js:83
-msgid "You have no team invitations yet"
+msgid "You have no team invitations yet."
 msgstr ""
 
 #: app/scripts/components/team/customer-users-list.js:62
 #: app/scripts/components/team/project-users-list.js:47
-msgid "You have no team members yet"
+msgid "You have no team members yet."
 msgstr ""
 
 #: app/scripts/components/customer/customer-users-details-list.js:25
-msgid "You have no users yet"
+msgid "You have no users yet."
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-vms-list.js:23
-msgid "You have no virtual machines yet"
+msgid "You have no virtual machines yet."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:38
-msgid "You have no volumes yet"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:31
 msgid "You have no volumes yet."
 msgstr ""
 
-#: app/views/directives/check-quotas.html:11
-msgid "You have reached the limit of your"
+#: app/scripts/directives/check-quotas.js:59
+msgid "You have reached the limit of your {quotaName} quota ({quotaUsage}). To update your current plan, please visit <a ui-sref=\"{plansLink}\" translate>plans page</a>."
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-accept.html:4
@@ -4341,7 +4307,7 @@ msgid "Your invitation is being processed."
 msgstr ""
 
 #: app/scripts/components/invitations/utils.js:53
-msgid "Your invitation was accepted"
+msgid "Your invitation was accepted."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:15

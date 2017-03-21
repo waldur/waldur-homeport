@@ -135,7 +135,7 @@ function ProviderSettingsController(
       );
     },
     onSaveSuccess: function(service) {
-      ncUtilsFlash.success(gettext('Provider has been updated'));
+      ncUtilsFlash.success(gettext('Provider has been updated.'));
       $rootScope.$broadcast('refreshProviderList');
 
       if (service) {

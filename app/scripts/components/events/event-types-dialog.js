@@ -17,7 +17,7 @@ export default function eventTypesDialog() {
 
 class EventTypesDialogController {
   constructor() {
-    this.dialogTitle = gettext('Event types');
+    this.dialogTitle = this.resolve.type === 'Events' ? gettext('Event types') : gettext('Alert types');
     this.types = this.resolve.types;
   }
 }

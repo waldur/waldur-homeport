@@ -3,8 +3,8 @@
 </div>
 <div ng-if="!DashboardController.loading">
     <div class="white-box empty-data-block" ng-if="DashboardController.table.length <= 1">
-        <h1 translate>Not enough data for cost analysis</h1>
-        <h2 visible="import" visible="providers" translate>Please import resources or add more providers</h2>
+        <h1 translate>Not enough data for cost analysis.</h1>
+        <h2 visible="import" visible="providers" translate>Please import resources or add more providers.</h2>
     </div>
     <div class="white-box big-chart" ng-if="DashboardController.table.length > 1">
         <dashboard-cost-chart data="DashboardController.costData"></dashboard-cost-chart>

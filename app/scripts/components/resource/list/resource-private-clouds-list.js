@@ -16,7 +16,7 @@ function ProjectPrivateCloudsTabController(BaseProjectResourcesTabController, EN
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = gettext('You have no private clouds yet');
+      options.noDataText = gettext('You have no private clouds yet.');
       options.noMatchesText = gettext('No private clouds found matching filter.');
       return options;
     },

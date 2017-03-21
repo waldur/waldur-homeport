@@ -41,7 +41,7 @@ function CustomerCreateDialogController(customersService, $scope, $rootScope, $s
         $rootScope.$broadcast('refreshCounts');
 
         if (vm.customer) {
-          var message = coreUtils.templateFormatter(gettext('Organization {organizationName} is updated'),
+          var message = coreUtils.templateFormatter(gettext('Organization {organizationName} is updated.'),
             {organizationName: customer.name});
           ncUtilsFlash.success(message);
           $rootScope.$broadcast('refreshCustomerList', {

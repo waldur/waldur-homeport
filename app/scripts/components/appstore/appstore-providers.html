@@ -2,14 +2,11 @@
     <loading-spinner/>
 </div>
 
-<div class="ibox-content" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
+<div class="ibox-content">
     <p>
-        <span>{{ ::noProvidersMessage | translate }}</span>
+        <span>{{ ::noProvidersMessage }}</span>
     </p>
-    <p visible="providers">
-        <span translate>You can change that in</span>
-        <a ui-sref="organization.providers({uuid: AppStore.currentCustomer.uuid})" translate>provider management</a>.
-    </p>
+    <p visible="providers" bind-html-compile="AppStore.providerManagementMessage"></p>
 </div>
 
 <div class="ibox" ng-if="!AppStore.loadingProviders && AppStore.renderStore && !AppStore.selectedResourceType">

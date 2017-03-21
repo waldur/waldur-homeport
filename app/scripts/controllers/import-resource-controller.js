@@ -212,7 +212,7 @@
           service, controllerScope.currentProject.uuid).then(function(resources) {
           controllerScope.importedResources = resources;
         }, function() {
-          ncUtilsFlash.warning(gettext('Unable to get list of imported resources'));
+          ncUtilsFlash.warning(gettext('Unable to get list of imported resources.'));
         });
       },
 
@@ -240,7 +240,7 @@
           }
         }, function(){
           controllerScope.noResources = true;
-          ncUtilsFlash.warning(gettext('Unable to get list of resources for service'));
+          ncUtilsFlash.warning(gettext('Unable to get list of resources for service.'));
         });
       },
 
@@ -266,7 +266,7 @@
           resource.status = 'success';
           vm.toggleResource(resource);
         }, function() {
-          var message = coreUtils.templateFormatter(gettext('Unable to import resource {resourceName}'),
+          var message = coreUtils.templateFormatter(gettext('Unable to import resource {resourceName}.'),
             { resourceName: resource.name });
           ncUtilsFlash.warning(message);
           resource.status = 'failed';

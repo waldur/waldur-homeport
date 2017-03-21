@@ -105,13 +105,13 @@ function ProviderListController(
 
                 tooltip: function(service) {
                   if (service.shared) {
-                    return gettext('You cannot remove shared provider');
+                    return gettext('You cannot remove shared provider.');
                   }
                   if (!this.canUserManageService) {
-                    return gettext('Only customer owner or staff can remove provider');
+                    return gettext('Only customer owner or staff can remove provider.');
                   }
                   if (service.resources_count > 0) {
-                    return gettext('Provider has resources. Please remove them first');
+                    return gettext('Provider has resources. Please remove them first.');
                   }
                 }.bind(this.controllerScope),
               },

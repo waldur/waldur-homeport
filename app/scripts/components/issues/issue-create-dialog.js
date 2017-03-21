@@ -35,6 +35,7 @@ const issueCreateDialog = {
         this.issueTypeEditable = true;
       }
       this.options = angular.extend({}, DEFAULT_OPTIONS, this.resolve.options);
+      this.emptyFieldMessage = gettext('You did not enter a field.');
     }
 
     save() {
@@ -60,7 +61,7 @@ const issueCreateDialog = {
       this.saving = true;
       return this.service.createIssue(issue).then(issue => {
         this.service.clearAllCacheForCurrentEndpoint();
-        this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {requestId} has been created'), {requestId: issue.key}));
+        this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {requestId} has been created.'), {requestId: issue.key}));
         return this.$state.go('support.detail', {uuid: issue.uuid}).then(() => {
           this.close();
         });

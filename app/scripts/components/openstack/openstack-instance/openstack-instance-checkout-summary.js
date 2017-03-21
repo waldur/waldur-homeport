@@ -32,7 +32,6 @@ class SummaryController {
           this.coreUtils.templateFormatter(
             gettext('Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package.'),
             { serviceName: this.model.service.name });
-        this.componentsMessage = this.$filter('translate')(this.componentsMessage);
       })
       .finally(() => {
         this.loading = false;

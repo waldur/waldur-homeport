@@ -27,7 +27,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: gettext('Network has been updated')
+        successMessage: gettext('Network has been updated.')
       }),
       pull: {
         title: gettext('Synchronise')

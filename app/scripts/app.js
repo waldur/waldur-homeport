@@ -27,7 +27,8 @@ window.gettext = angular.identity;
       'leaflet-directive',
       'angular-cron-jobs',
       'ui.bootstrap',
-      'ui.slimscroll'
+      'ui.slimscroll',
+      'angular-bind-html-compile'
     ])
 })();
 

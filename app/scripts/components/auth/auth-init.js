@@ -26,7 +26,7 @@ export const authInit = {
         this.usersService.currentUser = response.data;
         this.$state.go('profile.details');
       }).catch(response => {
-        this.ncUtilsFlash.error(gettext('Unable to save user'));
+        this.ncUtilsFlash.error(gettext('Unable to save user.'));
         if (response.status === 400) {
           this.errors = response.data;
         }

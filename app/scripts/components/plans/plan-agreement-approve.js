@@ -23,7 +23,7 @@ function AgreementApproveController(
     if (error.data) {
       ncUtilsFlash.error(error.data.detail);
     } else {
-      ncUtilsFlash.error(gettext('Unable to approve billing plan'));
+      ncUtilsFlash.error(gettext('Unable to approve billing plan.'));
     }
   });
 }

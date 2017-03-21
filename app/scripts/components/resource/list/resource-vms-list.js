@@ -20,7 +20,7 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = gettext('You have no virtual machines yet');
+      options.noDataText = gettext('You have no virtual machines yet.');
       options.noMatchesText = gettext('No virtual machines found matching filter.');
       options.columns.push({
         title: gettext('Internal IP'),

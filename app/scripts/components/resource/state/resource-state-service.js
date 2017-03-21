@@ -30,7 +30,7 @@ export default function resourceStateService(resourceUtils, ResourceStateConfigu
         } else {
           let errorMessage = resource.service_settings_error_message;
           context.className = context.className || 'progress-bar-warning';
-          context.tooltip = gettext('Service settings of this resource are in state erred');
+          context.tooltip = gettext('Service settings of this resource are in state erred.');
           if (errorMessage) {
             messageSuffix = coreUtils.templateFormatter(gettext('error message: {errorMessage}'),
               { errorMessage: errorMessage });
@@ -40,7 +40,7 @@ export default function resourceStateService(resourceUtils, ResourceStateConfigu
       } else if (resource.state.toLowerCase() === 'erred') {
         context.className = 'progress-bar-warning';
         context.label = resource.runtime_state || resource.state;
-        context.tooltip = gettext('Failed to operate with backend');
+        context.tooltip = gettext('Failed to operate with backend.');
         let errorMessage = resource.error_message;
         if (errorMessage) {
           messageSuffix = coreUtils.templateFormatter(gettext('error message: {errorMessage}'),
@@ -57,7 +57,7 @@ export default function resourceStateService(resourceUtils, ResourceStateConfigu
         } else {
           context.label = resource.state;
           if (runtimeErrorStates.indexOf(resource.state) !== -1) {
-            context.tooltip = coreUtils.templateFormatter(gettext('{resourceType} has state {resourceState}'),
+            context.tooltip = coreUtils.templateFormatter(gettext('{resourceType} has state {resourceState}.'),
               { resourceType: resourceType, resourceState: resource.state });
           } else {
             context.tooltip = `${resource.state} ${resourceType}`;
@@ -66,7 +66,7 @@ export default function resourceStateService(resourceUtils, ResourceStateConfigu
       }
 
       if (showRuntimeState && resource.runtime_state) {
-        messageSuffix = coreUtils.templateFormatter(gettext('current state on backend: {resourceState}'),
+        messageSuffix = coreUtils.templateFormatter(gettext('current state on backend: {resourceState}.'),
           { resourceState: resource.runtime_state });
         context.tooltip += (', ' + messageSuffix);
       }

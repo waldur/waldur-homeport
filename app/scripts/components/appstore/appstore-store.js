@@ -28,6 +28,8 @@ function AppStoreController(
   ncServiceUtils,
   resourceUtils,
   coreUtils,
+  $compile,
+  $scope,
   AppstoreFieldConfiguration,
   AppstoreResourceLoader) {
   var controllerScope = this;
@@ -60,6 +62,9 @@ function AppStoreController(
     init:function() {
       this.service = resourcesService;
       this.controllerScope = controllerScope;
+      this.coreUtils = coreUtils;
+      this.$compile = $compile;
+      this.$scope = $scope;
       this._super();
     },
     activate:function() {
@@ -73,6 +78,9 @@ function AppStoreController(
         if (ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'resource')) {
           $state.go('errorPage.limitQuota');
         }
+        vm.providerManagementMessage = coreUtils.templateFormatter(
+          gettext('You can change that in <a ui-sref="organization.providers({uuid})">provider management</a>.'),
+        { uuid: `{uuid: '${vm.currentCustomer.uuid}'}` });
       });
     },
     setCategory: function(category) {
@@ -324,7 +332,7 @@ function AppStoreController(
     },
     getTooltip: function() {
       if (!this.instance) {
-        return gettext('Instance is not configured');
+        return gettext('Instance is not configured.');
       }
       var fields = [];
       for (var name in this.allFormOptions) {
@@ -334,7 +342,7 @@ function AppStoreController(
         }
       }
       if (fields.length > 0) {
-        return coreUtils.templateFormatter(gettext('Please specify {fields}'), {fields: fields.join(', ').toLowerCase()});
+        return coreUtils.templateFormatter(gettext('Please specify {fields}.'), {fields: fields.join(', ').toLowerCase()});
       }
     },
     getResourceUrl: function() {
@@ -386,7 +394,7 @@ function AppStoreController(
           }
         }
       } else {
-        message = gettext('Server error occurred');
+        message = gettext('Server error occurred.');
       }
       ncUtilsFlash.error(message);
     },

@@ -70,7 +70,7 @@ function ServiceAddController(
     init: function() {
       this.service = joinService;
       this.controllerScope = controllerScope;
-      this.successMessage = gettext('Provider has been created');
+      this.successMessage = gettext('Provider has been created.');
       var vm = this;
       $scope.$watch('ServiceAdd.serviceChoice', function(choice) {
         if (!choice) {

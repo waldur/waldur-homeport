@@ -40,7 +40,7 @@ class ProjectManageController {
       return this.$q.reject();
     }
     return this.projectsService.$update(null, this.project.url, this.projectModel).then(project => {
-      this.ncUtilsFlash.success(gettext('Project has been updated'));
+      this.ncUtilsFlash.success(gettext('Project has been updated.'));
       // TODO: Migrate to Redux and make code DRY
       this.currentStateService.setProject(project);
       let item = this.customer.projects.filter(item => item.uuid === project.uuid)[0];

@@ -126,9 +126,9 @@ function ProjectsListController(
       var quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'project');
       var title;
       if (!ownerOrStaff) {
-        title = gettext('You don\'t have enough privileges to perform this operation');
+        title = gettext('You don\'t have enough privileges to perform this operation.');
       } else if (quotaReached) {
-        title = gettext('Quota has been reached');
+        title = gettext('Quota has been reached.');
       }
       return [
         {
