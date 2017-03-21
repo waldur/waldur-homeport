@@ -2,6 +2,7 @@ import template from './cost-plan-dialog.html';
 
 // Although it is not used directly as these labels come from backend
 // they are listed explicitly in order to extract labels for translation.
+// eslint-disable-next-line no-unused-vars
 const PRESET_VARIANTS = [
   gettext('Small'),
   gettext('Medium'),
@@ -33,7 +34,8 @@ const costPlanDialog = {
       } else {
         this.plan = {
           name: gettext('New plan'),
-          items: []
+          items: [],
+          certifications: []
         };
         this.addItem();
       }

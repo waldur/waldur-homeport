@@ -65,6 +65,7 @@ function CostsPlansListController(
           customer: () => this.currentCustomer,
           plan: () => plan,
         },
+        size: 'lg'
       }).result.then(function() {
         controllerScope.resetCache();
       });
@@ -76,6 +77,7 @@ function CostsPlansListController(
         resolve: {
           customer: () => this.currentCustomer
         },
+        size: 'lg'
       }).result.then(function() {
         controllerScope.resetCache();
       });
