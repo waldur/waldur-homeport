@@ -119,7 +119,7 @@ export function CustomerWorkspaceController(
         feature: 'billing'
       },
       {
-        label: gettext('Sizing'),
+        label: gettext('Cost planning'),
         icon: 'fa-calculator',
         link: 'organization.sizing({uuid: $ctrl.context.customer.uuid})',
         feature: 'sizing'
