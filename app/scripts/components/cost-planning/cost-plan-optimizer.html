@@ -1,0 +1,36 @@
+<button
+    type="button"
+    class="btn btn-default"
+    ng-click="$ctrl.refresh()"
+    ng-class="{disabled: !$ctrl.valid}">
+    <i class="fa fa-gears"></i>
+    <span translate>Evaluate plan</span>
+</button>
+<loading-spinner ng-if="$ctrl.loading"/>
+<div ng-if="$ctrl.services.length === 0" class="m-t-sm">
+    <span translate>There are no services for this deployment plan.</span>
+</div>
+<div ng-if="$ctrl.services.length > 0">
+    <table class="table">
+        <thead>
+            <tr>
+                <th translate>Provider</th>
+                <th translate>Package</th>
+                <th translate>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="service in $ctrl.services">
+                <td>
+                    {{ service.service_settings_name }}
+                </td>
+                <td>
+                    {{ service.package_templates[0].name }}
+                </td>
+                <td>
+                    {{ service.package_templates[0].price | defaultCurrency }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

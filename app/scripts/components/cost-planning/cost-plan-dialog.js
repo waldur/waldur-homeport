@@ -61,6 +61,10 @@ const costPlanDialog = {
       this.plan.items.splice(index, 1);
     }
 
+    saveAndClose() {
+      return this.save().then(() => this.close());
+    }
+
     save() {
       const items = this.getValidItems();
       let plan = this.costPlansService.$create();
@@ -82,7 +86,6 @@ const costPlanDialog = {
 
       this.saving = true;
       return promise
-        .then(() => this.close())
         .finally(() => this.saving = false);
     }
 
@@ -92,13 +95,28 @@ const costPlanDialog = {
       angular.forEach(items, item => {
         cores += item.preset.cores * item.quantity;
         ram += item.preset.ram * item.quantity;
-        disk += item.preset.storage * item.quantity;
+        disk += item.preset.disk * item.quantity;
       });
       return {cores, ram, disk};
     }
 
     getValidItems() {
       return this.plan.items.filter(item => item.preset);
+    }
+
+    isValidPlan() {
+      return this.getValidItems().length > 0;
+    }
+
+    saveAndEvaluate() {
+      this.save().then(() => this.evaluatePlan());
+    }
+
+    evaluatePlan() {
+      this.isEvaluating = true;
+      this.costPlansService.evaluate(this.plan)
+        .then(services => this.optimalServices = services)
+        .finally(() => this.isEvaluating = false);
     }
   }
 };

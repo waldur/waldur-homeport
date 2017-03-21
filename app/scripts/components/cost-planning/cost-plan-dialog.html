@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h3 class="modal-title" translate>Cost plan</h3>
+    <h3 class="modal-title" translate>Deployment plan</h3>
 </div>
 <div class="modal-body" ng-class="{disabled: $ctrl.saving}">
     <div ng-if="$ctrl.loading">
@@ -35,12 +35,17 @@
             <strong translate>Total planned resource consumption</strong>:
             {{ $ctrl.getTotalConsumption() | formatFlavor }}
         </p>
+        <cost-plan-optimizer
+            valid="$ctrl.isValidPlan()"
+            refresh="$ctrl.saveAndEvaluate()"
+            loading="$ctrl.isEvaluating"
+            services="$ctrl.optimalServices"/>
     </div>
 </div>
 <div class="modal-footer">
     <button type="button"
         class="btn btn-primary"
-        submit-button="$ctrl.save()">
+        submit-button="$ctrl.saveAndClose()">
         <span translate>Save</span>
     </button>
     <button class="btn btn-default"

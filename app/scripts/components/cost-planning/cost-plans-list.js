@@ -35,6 +35,7 @@ function CostsPlansListController(
         ],
         tableActions: this.getTableActions(),
         rowActions: this.getRowActions(),
+        actionsColumnWidth: '250px'
       };
     },
 
@@ -54,6 +55,11 @@ function CostsPlansListController(
           title: gettext('Details'),
           iconClass: 'fa fa-eye',
           callback: this.openDetailsDialog.bind(this),
+        },
+        {
+          title: gettext('Remove'),
+          iconClass: 'fa fa-trash',
+          callback: this.remove.bind(controllerScope),
         }
       ];
     },

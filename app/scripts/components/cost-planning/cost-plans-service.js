@@ -1,5 +1,5 @@
 // @ngInject
-export default function costPlansService(baseServiceClass) {
+export default function costPlansService($http, baseServiceClass) {
   var ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
@@ -10,6 +10,9 @@ export default function costPlansService(baseServiceClass) {
         });
         return plan;
       });
+    },
+    evaluate: function(plan) {
+      return $http.get(`${plan.url}evaluate/`).then(response => response.data);
     }
   });
   return new ServiceClass();
