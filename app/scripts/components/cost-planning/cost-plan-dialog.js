@@ -1,5 +1,13 @@
 import template from './cost-plan-dialog.html';
 
+// Although it is not used directly as these labels come from backend
+// they are listed explicitly in order to extract labels for translation.
+const PRESET_VARIANTS = [
+  gettext('Small'),
+  gettext('Medium'),
+  gettext('Large'),
+];
+
 const costPlanDialog = {
   template,
   bindings: {
@@ -41,21 +49,22 @@ const costPlanDialog = {
 
     addItem() {
       this.plan.items.push({
-        quantity: 1
+        quantity: 1,
+        variant: 'Small'
       });
     }
 
     deleteItem(item) {
       const index = this.plan.items.indexOf(item);
-      this.items.splice(index, 1);
+      this.plan.items.splice(index, 1);
     }
 
     save() {
-      this.loading = true;
+      const items = this.getValidItems();
       let plan = this.costPlansService.$create();
       plan.name = this.plan.name;
       plan.customer = this.customer.url;
-      plan.items = this.plan.items.map(item => ({
+      plan.items = items.map(item => ({
         preset: item.preset.url,
         quantity: item.quantity,
       }));
@@ -69,8 +78,25 @@ const costPlanDialog = {
         promise = plan.$save();
       }
 
-      promise.finally(() => this.loading = false);
-      this.close();
+      this.saving = true;
+      return promise
+        .then(() => this.close())
+        .finally(() => this.saving = false);
+    }
+
+    getTotalConsumption() {
+      let cores = 0, ram = 0, disk = 0;
+      const items = this.getValidItems();
+      angular.forEach(items, item => {
+        cores += item.preset.cores * item.quantity;
+        ram += item.preset.ram * item.quantity;
+        disk += item.preset.storage * item.quantity;
+      });
+      return {cores, ram, disk};
+    }
+
+    getValidItems() {
+      return this.plan.items.filter(item => item.preset);
     }
   }
 };

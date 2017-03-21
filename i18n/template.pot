@@ -350,7 +350,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:45
 #: app/scripts/components/appstore/category-selector.html:33
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:45
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:49
 #: app/scripts/components/customer/customer-create-dialog.html:94
 #: app/scripts/components/events/event-details-dialog.html:125
 #: app/scripts/components/invitations/invitation-dialog.html:77
@@ -1182,6 +1182,10 @@ msgstr ""
 msgid "Key name"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-dialog.js:36
+msgid "Large"
+msgstr ""
+
 #: app/scripts/components/table/responsive-table.js:85
 msgid "Last"
 msgstr ""
@@ -1290,6 +1294,10 @@ msgstr ""
 
 #: app/scripts/components/form/appstore-field-integer.html:22
 msgid "Maximal valid value is"
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-dialog.js:35
+msgid "Medium"
 msgstr ""
 
 #: app/scripts/components/customer/customer-users-details-list.js:30
@@ -2426,7 +2434,7 @@ msgstr ""
 msgid "Runtime state"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:41
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:45
 #: app/scripts/components/customer/customer-create-dialog.html:89
 #: app/scripts/components/providers/details/provider-projects.html:15
 #: app/scripts/components/providers/details/provider-settings.html:76
@@ -2668,6 +2676,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-navigation-service.js:27
 msgid "SLAs"
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-dialog.js:34
+msgid "Small"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/module.js:32
@@ -3011,6 +3023,10 @@ msgstr ""
 
 #: app/scripts/components/dashboard/dashboard-chart-service.js:115
 msgid "Total cost"
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:36
+msgid "Total planned resource consumption"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:60

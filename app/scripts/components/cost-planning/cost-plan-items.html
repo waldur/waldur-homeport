@@ -16,12 +16,12 @@
       <td class="p-l-n">
         <ui-select ng-model="item.preset">
           <ui-select-match placeholder="{{ 'Select a preset' | translate }}">
-            {{ $select.selected.category }} / {{ $select.selected.name }}
+            {{ $select.selected.category }} / {{ $select.selected.variant | translate }} {{ $select.selected.name }} ({{ $select.selected | formatFlavor }})
           </ui-select-match>
           <ui-select-choices
             group-by="'category'"
             repeat="preset in $ctrl.presets | filter: {name: $select.search} track by preset.uuid">
-            <div ng-bind-html="preset.name | highlight: $select.search"></div>
+            {{ preset.variant | translate }} <span ng-bind-html="preset.name | highlight: $select.search"></span>
           </ui-select-choices>
         </ui-select>
       </td>
