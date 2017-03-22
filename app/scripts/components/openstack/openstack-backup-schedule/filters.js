@@ -11,21 +11,21 @@ function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
 
     switch(base) {
     case baseFrequency.minute:
-      return gettext('Every minute');
+      return $filter('translate')(gettext('Every minute'));
 
     case baseFrequency.hour:
       if (minuteValues) {
         return coreUtils.templateFormatter(gettext('Every hour at {minuteValues} past the hour'),
           {minuteValues: minuteValues});
       } else {
-        return gettext('Every hour');
+        return $filter('translate')(gettext('Every hour'));
       }
 
     case baseFrequency.day:
       if (angular.isDefined(hourValues)) {
         return `${gettext('Every day')} ${formatTime()}`;
       } else {
-        return gettext('Every day');
+        return $filter('translate')(gettext('Every day'));
       }
 
     case baseFrequency.week:
@@ -33,7 +33,7 @@ function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
         return coreUtils.templateFormatter(gettext('Every week on {day} {time}'),
           { day: formatDay(), time: formatTime() });
       } else {
-        return gettext('Every week');
+        return $filter('translate')(gettext('Every week'));
       }
 
     case baseFrequency.month:
@@ -41,7 +41,7 @@ function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
         return coreUtils.templateFormatter(gettext('Every month on the {days} {time}'),
           { days: formatNumeral(), time: formatTime() });
       } else {
-        return gettext('Every month');
+        return $filter('translate')(gettext('Every month'));
       }
 
     case baseFrequency.year:
@@ -49,7 +49,7 @@ function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
         return coreUtils.templateFormatter(gettext('Every month on the {days} of {months} {time}'),
           { days: formatNumeral(), months: formatMonth(), time: formatTime() });
       } else {
-        return gettext('Every year');
+        return $filter('translate')(gettext('Every year'));
       }
 
     default:

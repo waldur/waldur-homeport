@@ -244,7 +244,7 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:314
+#: app/scripts/components/appstore/appstore-store.js:317
 msgid "All provider quotas have reached limit."
 msgstr ""
 
@@ -625,7 +625,7 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:89
+#: app/scripts/components/customer/customer-delete.js:90
 #: app/scripts/components/project/project-manage.js:60
 #: app/scripts/components/table/base-list-controller.js:132
 msgid "Confirm deletion?"
@@ -1363,7 +1363,7 @@ msgstr ""
 msgid "Instance has been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:335
+#: app/scripts/components/appstore/appstore-store.js:338
 msgid "Instance is not configured."
 msgstr ""
 
@@ -2283,7 +2283,7 @@ msgstr ""
 msgid "Organization registration code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:80
+#: app/scripts/components/customer/customer-delete.js:81
 msgid "Organization removal"
 msgstr ""
 
@@ -2424,7 +2424,7 @@ msgstr ""
 msgid "Please select projects where usage of the provider is permitted."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:345
+#: app/scripts/components/appstore/appstore-store.js:348
 msgid "Please specify {fields}."
 msgstr ""
 
@@ -2667,7 +2667,7 @@ msgstr ""
 msgid "Provider has resources. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:312
+#: app/scripts/components/appstore/appstore-store.js:315
 msgid "Provider is in erred state."
 msgstr ""
 
@@ -2680,7 +2680,7 @@ msgstr ""
 msgid "Provider package is not defined."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:319
+#: app/scripts/components/appstore/appstore-store.js:322
 msgid "Provider quota have reached threshold."
 msgstr ""
 
@@ -2724,7 +2724,7 @@ msgstr ""
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:43
+#: app/scripts/components/appstore/appstore-store.js:42
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
@@ -2764,7 +2764,7 @@ msgstr ""
 msgid "Read through terms and conditions."
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:82
+#: app/scripts/components/customer/customer-delete.js:83
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
@@ -2895,7 +2895,7 @@ msgstr ""
 msgid "Request name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:84
+#: app/scripts/components/customer/customer-delete.js:85
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
 msgstr ""
@@ -3275,7 +3275,7 @@ msgstr ""
 msgid "Send notification"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:397
+#: app/scripts/components/appstore/appstore-store.js:400
 msgid "Server error occurred."
 msgstr ""
 
@@ -3787,8 +3787,8 @@ msgstr ""
 msgid "To port"
 msgstr ""
 
-#: app/scripts/components/error/error-403.js:19
-msgid "To update current plan visit <a ui-sref=\"organization.plans({customerUuid})\">plans page</a>"
+#: app/scripts/components/error/error-403.js:24
+msgid "To update current plan visit {linkStart}plans page{linkEnd}."
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:62
@@ -4164,7 +4164,7 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:83
+#: app/scripts/components/customer/customer-delete.js:84
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
@@ -4172,8 +4172,8 @@ msgstr ""
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:82
-msgid "You can change that in <a ui-sref=\"organization.providers({uuid})\">provider management</a>."
+#: app/scripts/components/appstore/appstore-store.js:85
+msgid "You can change that in {linkStart}provider management{linkEnd}."
 msgstr ""
 
 #: app/scripts/components/customer/customer-delete.html:51
@@ -4294,8 +4294,8 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
-#: app/scripts/directives/check-quotas.js:59
-msgid "You have reached the limit of your {quotaName} quota ({quotaUsage}). To update your current plan, please visit <a ui-sref=\"{plansLink}\" translate>plans page</a>."
+#: app/scripts/directives/check-quotas.js:61
+msgid "You have reached the limit of your {quotaName} quota ({quotaUsage}). To update your current plan, please visit {linkStart}plans page{linkEnd}."
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-accept.html:4

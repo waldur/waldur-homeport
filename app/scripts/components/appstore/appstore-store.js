@@ -28,7 +28,6 @@ function AppStoreController(
   ncServiceUtils,
   resourceUtils,
   coreUtils,
-  $compile,
   $scope,
   AppstoreFieldConfiguration,
   AppstoreResourceLoader) {
@@ -63,12 +62,12 @@ function AppStoreController(
       this.service = resourcesService;
       this.controllerScope = controllerScope;
       this.coreUtils = coreUtils;
-      this.$compile = $compile;
       this.$scope = $scope;
+      this.$state = $state;
       this._super();
     },
     activate:function() {
-      var vm = this;
+      let vm = this;
       servicesService.getServicesList().then(function(response) {
         vm.servicesMetadata = response;
         vm.setCurrentProject();
@@ -78,9 +77,13 @@ function AppStoreController(
         if (ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'resource')) {
           $state.go('errorPage.limitQuota');
         }
+        let providersLink = vm.$state.href('organization.providers', {uuid: vm.currentCustomer.uuid});
+        let linkStart = `<a href="${providersLink}">`;
+        let linkEnd = '</a>';
+
         vm.providerManagementMessage = coreUtils.templateFormatter(
-          gettext('You can change that in <a ui-sref="organization.providers({uuid})">provider management</a>.'),
-        { uuid: `{uuid: '${vm.currentCustomer.uuid}'}` });
+          gettext('You can change that in {linkStart}provider management{linkEnd}.'),
+        { linkStart: linkStart, linkEnd: linkEnd });
       });
     },
     setCategory: function(category) {

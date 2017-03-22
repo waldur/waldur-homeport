@@ -2,7 +2,7 @@
     <loading-spinner/>
 </div>
 
-<div class="ibox-content">
+<div class="ibox-content" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
     <p>
         <span>{{ ::noProvidersMessage }}</span>
     </p>

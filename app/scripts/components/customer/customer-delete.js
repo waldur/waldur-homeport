@@ -18,6 +18,7 @@ function CustomerDeleteController(
   $uibModal,
   $state,
   $q,
+  $filter,
   ENV,
   ISSUE_IDS
 ) {
@@ -86,7 +87,7 @@ function CustomerDeleteController(
           }
         });
       }
-      var confirmDelete = confirm(gettext('Confirm deletion?'));
+      var confirmDelete = confirm($filter('translate')(gettext('Confirm deletion?')));
       if (confirmDelete) {
         currentStateService.setCustomer(null);
         this.customer.$delete().then(function() {

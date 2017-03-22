@@ -9,7 +9,7 @@ export default function customerCreateDialog() {
 }
 
 // @ngInject
-function CustomerCreateDialogController(customersService, $scope, $rootScope, $state, ncUtilsFlash, coreUtils) {
+function CustomerCreateDialogController(customersService, $scope, $rootScope, $state, ncUtilsFlash, coreUtils, $filter) {
   angular.extend($scope, {
     fields: ['name', 'contact_details', 'registration_code', 'vat_code'],
     instance: {},
@@ -49,7 +49,7 @@ function CustomerCreateDialogController(customersService, $scope, $rootScope, $s
             update: true
           });
         } else {
-          ncUtilsFlash.success(gettext('Organization has been created.'));
+          ncUtilsFlash.success($filter('translate')(gettext('Organization has been created.')));
           $rootScope.$broadcast('refreshCustomerList', {
             model: customer,
             new: true,
