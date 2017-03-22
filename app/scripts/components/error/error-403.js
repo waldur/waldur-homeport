@@ -17,12 +17,9 @@ export const error403 = {
       this.href = this.errorUtilsService.getBackLink(
         this.$rootScope.prevPreviousState, this.$rootScope.prevPreviousParams
       );
-      let plansLink = this.$state.href('organization.plans', { uuid: this.customerUuid });
-      let linkStart = `<a href="${plansLink}">`;
-      let linkEnd = '</a>';
-
-      this.updatePlanMessage = this.coreUtils.templateFormatter(gettext('To update current plan visit {linkStart}plans page{linkEnd}.'),
-        { linkStart: linkStart, linkEnd: linkEnd });
+      let link = this.$state.href('organization.plans', { uuid: this.customerUuid });
+      this.updatePlanMessage = this.coreUtils.templateFormatter(gettext('To update current plan visit <a href="{link}">plans page</a>.'),
+        { link: link });
     }
   }
 };

@@ -244,7 +244,7 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:317
+#: app/scripts/components/appstore/appstore-store.js:312
 msgid "All provider quotas have reached limit."
 msgstr ""
 
@@ -346,7 +346,7 @@ msgstr ""
 msgid "Authentication events"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:156
+#: app/scripts/components/auth/auth-login.js:157
 msgid "Authentication failed"
 msgstr ""
 
@@ -631,7 +631,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:190
+#: app/scripts/components/auth/auth-login.js:191
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
@@ -1019,9 +1019,12 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:26
 #: app/scripts/components/openstack/openstack-backup-schedule/filters.js:28
 msgid "Every day"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:26
+msgid "Every day at"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/filters.js:21
@@ -1041,11 +1044,11 @@ msgid "Every month"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/filters.js:41
-msgid "Every month on the {days} {time}"
+msgid "Every month on the {days} at {time}"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/filters.js:49
-msgid "Every month on the {days} of {months} {time}"
+msgid "Every month on the {days} of {months} at {time}"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/filters.js:36
@@ -1053,7 +1056,7 @@ msgid "Every week"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/filters.js:33
-msgid "Every week on {day} {time}"
+msgid "Every week on {day} at {time}"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/filters.js:52
@@ -1363,7 +1366,7 @@ msgstr ""
 msgid "Instance has been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:338
+#: app/scripts/components/appstore/appstore-store.js:333
 msgid "Instance is not configured."
 msgstr ""
 
@@ -1420,7 +1423,7 @@ msgstr ""
 msgid "Invitation is not valid."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:108
+#: app/scripts/components/auth/auth-login.js:109
 msgid "Invitation token is not found."
 msgstr ""
 
@@ -2424,7 +2427,7 @@ msgstr ""
 msgid "Please select projects where usage of the provider is permitted."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:348
+#: app/scripts/components/appstore/appstore-store.js:343
 msgid "Please specify {fields}."
 msgstr ""
 
@@ -2667,7 +2670,7 @@ msgstr ""
 msgid "Provider has resources. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:315
+#: app/scripts/components/appstore/appstore-store.js:310
 msgid "Provider is in erred state."
 msgstr ""
 
@@ -2680,7 +2683,7 @@ msgstr ""
 msgid "Provider package is not defined."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:322
+#: app/scripts/components/appstore/appstore-store.js:317
 msgid "Provider quota have reached threshold."
 msgstr ""
 
@@ -2724,7 +2727,7 @@ msgstr ""
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:42
+#: app/scripts/components/appstore/appstore-store.js:41
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
@@ -3275,7 +3278,7 @@ msgstr ""
 msgid "Send notification"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:400
+#: app/scripts/components/appstore/appstore-store.js:395
 msgid "Server error occurred."
 msgstr ""
 
@@ -3787,8 +3790,8 @@ msgstr ""
 msgid "To port"
 msgstr ""
 
-#: app/scripts/components/error/error-403.js:24
-msgid "To update current plan visit {linkStart}plans page{linkEnd}."
+#: app/scripts/components/error/error-403.js:21
+msgid "To update current plan visit <a href=\"{link}\">plans page</a>."
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:62
@@ -3911,7 +3914,7 @@ msgstr ""
 msgid "Unable to upgrade tenant package."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:118
+#: app/scripts/components/auth/auth-login.js:119
 msgid "Unable to validate invitation token."
 msgstr ""
 
@@ -4172,8 +4175,8 @@ msgstr ""
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:85
-msgid "You can change that in {linkStart}provider management{linkEnd}."
+#: app/scripts/components/appstore/appstore-store.js:80
+msgid "You can change that in <a href=\"{link}\">provider management</a>."
 msgstr ""
 
 #: app/scripts/components/customer/customer-delete.html:51
@@ -4294,8 +4297,8 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
-#: app/scripts/directives/check-quotas.js:61
-msgid "You have reached the limit of your {quotaName} quota ({quotaUsage}). To update your current plan, please visit {linkStart}plans page{linkEnd}."
+#: app/scripts/directives/check-quotas.js:59
+msgid "You have reached the limit of your {quotaName} quota ({quotaUsage}). To update your current plan, please visit <a href=\"{link}\">plans page</a>."
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-accept.html:4

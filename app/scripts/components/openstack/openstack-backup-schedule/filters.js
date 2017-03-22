@@ -4,7 +4,7 @@ function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
     const schedule = cronService.fromCron(crontab, false);
     const { base, minuteValues, hourValues, dayOfMonthValues, dayValues, monthValues } = schedule;
 
-    const formatTime = () => `at ${hourValues}:${minuteValues}`;
+    const formatTime = () => `${hourValues}:${minuteValues}`;
     const formatDay = () => $filter('cronDayName')(dayValues);
     const formatMonth = () => $filter('cronMonthName')(monthValues);
     const formatNumeral = () => $filter('cronNumeral')(dayOfMonthValues);
@@ -23,14 +23,14 @@ function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
 
     case baseFrequency.day:
       if (angular.isDefined(hourValues)) {
-        return `${gettext('Every day')} ${formatTime()}`;
+        return `${$filter('translate')(gettext('Every day at'))} ${formatTime()}`;
       } else {
         return $filter('translate')(gettext('Every day'));
       }
 
     case baseFrequency.week:
       if (angular.isDefined(dayValues)) {
-        return coreUtils.templateFormatter(gettext('Every week on {day} {time}'),
+        return coreUtils.templateFormatter(gettext('Every week on {day} at {time}'),
           { day: formatDay(), time: formatTime() });
       } else {
         return $filter('translate')(gettext('Every week'));
@@ -38,7 +38,7 @@ function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
 
     case baseFrequency.month:
       if (angular.isDefined(dayOfMonthValues)) {
-        return coreUtils.templateFormatter(gettext('Every month on the {days} {time}'),
+        return coreUtils.templateFormatter(gettext('Every month on the {days} at {time}'),
           { days: formatNumeral(), time: formatTime() });
       } else {
         return $filter('translate')(gettext('Every month'));
@@ -46,7 +46,7 @@ function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
 
     case baseFrequency.year:
       if (angular.isDefined(dayOfMonthValues)) {
-        return coreUtils.templateFormatter(gettext('Every month on the {days} of {months} {time}'),
+        return coreUtils.templateFormatter(gettext('Every month on the {days} of {months} at {time}'),
           { days: formatNumeral(), months: formatMonth(), time: formatTime() });
       } else {
         return $filter('translate')(gettext('Every year'));

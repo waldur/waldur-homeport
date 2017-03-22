@@ -55,15 +55,12 @@
         if (response) {
           scope.quotaName = response.name;
           scope.quotaUsage = response.usage.join("/");
-          let linkStart = `<a href="${scope.plansLink}">`;
-          let linkEnd = '</a>';
           scope.quotaTooltipMessage = coreUtils.templateFormatter(
-            gettext('You have reached the limit of your {quotaName} quota ({quotaUsage}). To update your current plan, please visit {linkStart}plans page{linkEnd}.'),
+            gettext('You have reached the limit of your {quotaName} quota ({quotaUsage}). To update your current plan, please visit <a href="{link}">plans page</a>.'),
             {
               quotaName: scope.quotaName,
               quotaUsage: scope.quotaUsage,
-              linkStart: linkStart,
-              linkEnd: linkEnd
+              link: scope.plansLink
             });
         }
         scope.classes.disabled = scope.enable;

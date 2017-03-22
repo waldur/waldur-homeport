@@ -15,7 +15,7 @@ export default module => {
   module.directive('appstoreHeader', appstoreHeader);
   module.component('categorySelectorTabs', categorySelectorTabs);
   module.component('appstoreCategorySelector', appstoreCategorySelector);
-  module.directive('appstoreProviders', appstoreProviders);
+  module.component('appstoreProviders', appstoreProviders);
   module.directive('appstoreSummary', appstoreSummary);
   module.directive('appstoreStore', appstoreStore);
   module.config(appstoreRoutes);

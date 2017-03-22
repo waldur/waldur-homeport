@@ -30,7 +30,8 @@ export const authLogin = {
       this.coreUtils = coreUtils;
 
       this.loginLogo = ENV.loginLogo;
-      this.shortPageTitle = this.coreUtils.templateFormatter(gettext('Welcome to {pageTitle}!'), { pageTitle: ENV.shortPageTitle });
+      this.pageTitle = this.coreUtils.templateFormatter(gettext('Welcome to {pageTitle}!'), { pageTitle: ENV.shortPageTitle });
+      this.shortPageTitle = ENV.shortPageTitle;
 
       this.methods = ENV.authenticationMethods.reduce((result, item) => {
         result[item] = true;
