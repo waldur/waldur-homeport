@@ -1,0 +1,154 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:32
+msgid "organization"
+msgstr "federation"
+
+#: app/scripts/components/events/event-details-dialog.html:59
+#: app/scripts/components/issues/issue-create-dialog.html:12
+#: app/scripts/components/issues/issue-create-dialog.html:22
+#: app/scripts/components/issues/issue-create-dialog.html:7
+#: app/scripts/components/issues/issue-detail.html:30
+msgid "Organization"
+msgstr "Federation"
+
+#: app/scripts/components/billing/billing-record-details.html:6
+#: app/scripts/components/billing/invoice-details.html:6
+#: app/scripts/components/customer/customer-workspace.html:9
+msgid "Organization dashboard"
+msgstr "Federation dashboard"
+
+#: app/scripts/components/user/user-edit.html:67
+msgid "Organization name"
+msgstr "Federation name"
+
+#: app/scripts/configs/base-config.js:189
+msgid "Organization owner"
+msgstr "Federation administrator"
+
+#: app/scripts/components/team/add-team-member.html:32
+msgid "Organization owner role expires on"
+msgstr "Federation owner role expires on"
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:35
+msgid "Organizations"
+msgstr "Federations"
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:41
+msgid "Project"
+msgstr "Operational Tenant"
+
+#: app/scripts/components/offering/offering-header.html:13
+#: app/views/project/base.html:13
+msgid "Project dashboard"
+msgstr "Operational Tenant dashboard"
+
+#: app/scripts/configs/base-config.js:190
+msgid "Project manager"
+msgstr "Operationl Tenant manager"
+
+#: app/scripts/components/team/add-team-member.html:45
+msgid "Project name"
+msgstr "Operational Tenant name"
+
+#: app/scripts/components/appstore/category-selector.html:10
+#: app/scripts/components/customer/customer-workspace.js:55
+#: app/scripts/components/navigation/select-workspace-dialog.html:82
+msgid "Projects"
+msgstr "Operational Tenants"
+
+#: app/scripts/components/team/add-team-member.html:40
+msgid "Projects list"
+msgstr "Operational Tenants list"
+
+
+#: app/scripts/components/appstore/category-selector.html:16
+msgid "Select project"
+msgstr "Select operational tenant"
+
+#: app/scripts/configs/base-config.js:191
+msgid "System administrator"
+msgstr "Operational Tenant administrator"
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:10
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
+msgid "Tenant name"
+msgstr "Operational Tenant name"
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:44
+msgid "Filter organizations"
+msgstr "Filter federations"
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:92
+msgid "Filter projects"
+msgstr "Filter operational tenants"
+
+msgid "Managed projects"
+msgstr "Managed operational tenants"
+
+msgid "Owned organizations"
+msgstr "Owned federations"
+
+msgid "Add new project"
+msgstr "Add new operational tenant"
+
+msgid "Add new organization"
+msgstr "Add new federation"
+
+msgid "You do not belong to any organization yet."
+msgstr "You do not belong to any federation yet."
+
+msgid "Add project"
+msgstr "Add operational tenant"
+
+msgid "Create project"
+msgstr "Crete operational tenant"
+
+msgid "Project description"
+msgstr "Operational tenant description"
+
+msgid "Project details"
+msgstr "Operational tenant details"
+
+msgid "Project actions"
+msgstr "Operational tenant actions"
+
+msgid "Remove project"
+msgstr "Remove tenant"
+
+msgid "Update project details"
+msgstr "Update tenant details"
+
+msgid "You can remove this project by pressing the button"
+msgstr "You can remove this tenant by pressing the button"
+
+msgid "Organization details"
+msgstr "Federation details"
+
+msgid "Organization actions"
+msgstr "Federation actions"
+
+msgid "Remove organization"
+msgstr "Remove federation"
+
+msgid "Organization events"
+msgstr "Federation events"
+
+msgid "Projects events"
+msgstr "Operational tenant events"
+
+
+msgid "You can remove this organization by pressing the button"
+msgstr "You can remove this federation by pressing the button"

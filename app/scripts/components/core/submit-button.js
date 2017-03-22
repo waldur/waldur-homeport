@@ -7,7 +7,7 @@ export default function submitButton($q) {
     },
     link: function(scope, element) {
       element.bind('click', function() {
-        click();
+        scope.$apply(click);
       });
       function click() {
         element.addClass('disabled').addClass('button-spinner');

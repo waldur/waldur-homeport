@@ -113,14 +113,6 @@ export default function organizationRoutes($stateProvider) {
       }
     })
 
-    .state('organization.sizing', {
-      url: 'sizing/',
-      template: '<customer-sizing/>',
-      data: {
-        pageTitle: gettext('Sizing')
-      }
-    })
-
     .state('organization.delete', {
       url: 'delete/',
       template: '<customer-delete></customer-delete>',

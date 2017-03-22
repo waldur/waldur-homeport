@@ -1,0 +1,9 @@
+.powered-by {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  div {
+    flex: 1;
+  }
+}

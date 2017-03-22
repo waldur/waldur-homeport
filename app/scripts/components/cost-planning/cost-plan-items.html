@@ -1,0 +1,60 @@
+<div ng-if="$ctrl.items.length === 0">
+  <h4 translate>Deployment plan does not have any item yet.</h4>
+</div>
+<table
+  class="table table-borderless m-b-xs"
+  ng-if="$ctrl.items.length > 0">
+  <thead>
+    <tr>
+      <th translate class="p-l-n col-md-10">Components</th>
+      <th translate class="col-md-1">Quantity</th>
+      <th translate class="p-r-n col-md-1">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in $ctrl.items track by $index">
+      <td class="p-l-n">
+        <ui-select ng-model="item.preset">
+          <ui-select-match placeholder="{{ 'Select a preset' | translate }}">
+            {{ $select.selected.category }} / {{ $select.selected.variant | translate }} {{ $select.selected.name }}
+            (<small>{{ $select.selected | formatFlavor }}</small>)
+          </ui-select-match>
+          <ui-select-choices
+            group-by="'category'"
+            repeat="preset in $ctrl.getFreePresets(item.preset)
+                    | filter: {name: $select.search}
+                    | orderBy: ['category', 'name', 'variant']
+                    track by preset.uuid">
+            {{ preset.variant | translate }}
+            <span ng-bind-html="preset.name | highlight: $select.search"></span>
+            (<small>{{ preset | formatFlavor }}</small>)
+          </ui-select-choices>
+        </ui-select>
+      </td>
+      <td>
+        <input
+          type="number"
+          class="form-control"
+          ng-model="item.quantity"
+          ng-class="{disabled: !item.preset}"
+          min="1"
+          max="100">
+      </td>
+      <td class="p-r-n text-center">
+        <button type="button"
+          class="btn btn-default"
+          ng-click="$ctrl.onDelete({item: item})"
+          uib-tooltip="{{ 'Delete' | translate }}">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button type="button"
+  class="btn btn-default"
+  ng-click="$ctrl.onAdd()">
+  <i class="fa fa-plus"></i>
+  <span translate>Add item</span>
+</button>
