@@ -17,18 +17,24 @@ const costPlanDialog = {
     close: '&',
   },
   controller: class CostPlanDialogController {
-    constructor(costPlansService, costPresetsService, certificationsService, $q) {
+    constructor(
+      costPlansService,
+      costPresetsService,
+      certificationsService,
+      costPlanOptimizerService,
+      $q) {
       // @ngInject
       this.costPlansService = costPlansService;
       this.costPresetsService = costPresetsService;
       this.certificationsService = certificationsService;
+      this.costPlanOptimizerService = costPlanOptimizerService;
       this.$q = $q;
     }
 
     $onInit() {
       this.loadData();
 
-      this.customer = this.resolve.customer;
+      this.project = this.resolve.project;
       if (this.resolve.plan) {
         this.plan = angular.copy(this.resolve.plan);
       } else {
@@ -68,7 +74,7 @@ const costPlanDialog = {
       const items = this.getValidItems();
       let plan = this.costPlansService.$create();
       plan.name = this.plan.name;
-      plan.customer = this.customer.url;
+      plan.project = this.project.url;
       plan.items = items.map(item => ({
         preset: item.preset.url,
         quantity: item.quantity,
@@ -113,7 +119,7 @@ const costPlanDialog = {
 
     evaluatePlan() {
       this.isEvaluating = true;
-      this.costPlansService.evaluate(this.plan)
+      this.costPlanOptimizerService.evaluate(this.plan)
         .then(services => this.optimalServices = services)
         .finally(() => this.isEvaluating = false);
     }

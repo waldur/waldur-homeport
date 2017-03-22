@@ -13,14 +13,13 @@ function CostsPlansListController(
       const fn = this._super.bind(this);
 
       this.loading = true;
-      currentStateService.getCustomer().then(customer => {
-        this.currentCustomer = customer;
-      }).then(() => {
-        this.tableOptions = this.getTableOptions();
-        fn();
-      }).finally(() => {
-        this.loading = false;
-      });
+      currentStateService.getProject()
+        .then(project => this.currentProject = project)
+        .then(() => {
+          this.tableOptions = this.getTableOptions();
+          fn();
+        })
+        .finally(() => this.loading = false);
     },
 
     getTableOptions: function() {
@@ -68,7 +67,7 @@ function CostsPlansListController(
       $uibModal.open({
         component: 'costPlanDialog',
         resolve: {
-          customer: () => this.currentCustomer,
+          project: () => this.currentProject,
           plan: () => plan,
         },
         size: 'lg'
@@ -79,7 +78,7 @@ function CostsPlansListController(
       $uibModal.open({
         component: 'costPlanDialog',
         resolve: {
-          customer: () => this.currentCustomer
+          project: () => this.currentProject
         },
         size: 'lg'
       }).closed.then(() => controllerScope.resetCache());
@@ -87,7 +86,7 @@ function CostsPlansListController(
 
     getFilter: function() {
       return {
-        customer: this.currentCustomer.uuid
+        project_uuid: this.currentProject.uuid
       };
     }
   });

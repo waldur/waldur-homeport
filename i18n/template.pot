@@ -85,7 +85,7 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-items.html:53
+#: app/scripts/components/cost-planning/cost-plan-items.html:58
 msgid "Add item"
 msgstr ""
 
@@ -350,7 +350,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:45
 #: app/scripts/components/appstore/category-selector.html:33
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:48
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:53
 #: app/scripts/components/customer/customer-create-dialog.html:94
 #: app/scripts/components/events/event-details-dialog.html:125
 #: app/scripts/components/invitations/invitation-dialog.html:77
@@ -468,7 +468,8 @@ msgstr ""
 msgid "Cost analysis"
 msgstr ""
 
-#: app/scripts/components/customer/routes.js:120
+#: app/scripts/components/project/project-details.js:97
+#: app/scripts/components/project/routes.js:166
 msgid "Cost planning"
 msgstr ""
 
@@ -527,11 +528,11 @@ msgstr ""
 msgid "Create plan"
 msgstr ""
 
-#: app/scripts/components/customer/routes.js:144
+#: app/scripts/components/customer/routes.js:136
 msgid "Create project"
 msgstr ""
 
-#: app/scripts/components/customer/routes.js:152
+#: app/scripts/components/customer/routes.js:144
 msgid "Create provider"
 msgstr ""
 
@@ -623,14 +624,14 @@ msgstr ""
 msgid "Default tax percent"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-items.html:41
+#: app/scripts/components/cost-planning/cost-plan-items.html:46
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:39
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
 msgstr ""
 
-#: app/scripts/components/customer/routes.js:128
+#: app/scripts/components/customer/routes.js:120
 msgid "Delete organization"
 msgstr ""
 
@@ -673,6 +674,7 @@ msgid "Destination URL"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.html:38
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:18
 #: app/scripts/components/cost-planning/cost-plans-list.js:54
 #: app/scripts/components/events/base-event-list.js:43
 #: app/scripts/components/issues/issue-registration.html:32
@@ -684,6 +686,10 @@ msgstr ""
 #: app/scripts/components/team/project-users-list.js:87
 #: app/scripts/components/user/user-sidebar.html:12
 msgid "Details"
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:32
+msgid "Details are not available."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:33
@@ -765,6 +771,10 @@ msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:65
 msgid "EU VAT ID"
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:7
+msgid "Evaluate plan"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:2
@@ -971,7 +981,7 @@ msgstr ""
 msgid "Image name"
 msgstr ""
 
-#: app/scripts/components/project/routes.js:170
+#: app/scripts/components/project/routes.js:178
 msgid "Import resources from provider"
 msgstr ""
 
@@ -1249,8 +1259,8 @@ msgstr ""
 msgid "MAC address"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:128
-#: app/scripts/components/project/project-details.js:99
+#: app/scripts/components/customer/customer-workspace.js:122
+#: app/scripts/components/project/project-details.js:105
 #: app/scripts/components/project/routes.js:150
 #: app/scripts/components/user/constants.js:24
 #: app/scripts/components/user/routes.js:36
@@ -1335,7 +1345,7 @@ msgid "Minimal valid value is"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:11
-#: app/scripts/components/cost-planning/cost-plans-list.js:32
+#: app/scripts/components/cost-planning/cost-plans-list.js:31
 #: app/scripts/components/customer/customer-create-dialog.html:11
 #: app/scripts/components/customer/customer-delete.html:10
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:76
@@ -1375,7 +1385,7 @@ msgstr ""
 msgid "Networks"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.js:36
+#: app/scripts/components/cost-planning/cost-plan-dialog.js:42
 msgid "New plan"
 msgstr ""
 
@@ -1419,7 +1429,7 @@ msgstr ""
 msgid "No backups yet."
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plans-list.js:29
+#: app/scripts/components/cost-planning/cost-plans-list.js:28
 msgid "No cost plans found matching filter."
 msgstr ""
 
@@ -1851,7 +1861,7 @@ msgstr ""
 msgid "Physical locations"
 msgstr ""
 
-#: app/scripts/components/customer/routes.js:136
+#: app/scripts/components/customer/routes.js:128
 msgid "Plans"
 msgstr ""
 
@@ -1924,12 +1934,19 @@ msgstr ""
 msgid "Price for 1 vCPU per day"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:40
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:48
+msgid "Price is not available."
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:19
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:41
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:34
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:29
 msgid "Price per day"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:20
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:45
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:38
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:33
@@ -2062,6 +2079,7 @@ msgid "Projects list"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:22
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:17
 #: app/scripts/components/resource/list/resources-list.js:46
 #: app/scripts/components/resource/summary/resource-summary-base.html:21
 msgid "Provider"
@@ -2210,6 +2228,7 @@ msgstr ""
 msgid "Remote network"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plans-list.js:59
 #: app/scripts/components/providers/provider-list.js:98
 #: app/scripts/components/team/customer-users-list.js:131
 #: app/scripts/components/team/project-users-list.js:103
@@ -2434,7 +2453,7 @@ msgstr ""
 msgid "Runtime state"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:44
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:49
 #: app/scripts/components/customer/customer-create-dialog.html:89
 #: app/scripts/components/providers/details/provider-projects.html:15
 #: app/scripts/components/providers/details/provider-settings.html:76
@@ -2660,10 +2679,6 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:51
 msgid "Size name"
-msgstr ""
-
-#: app/scripts/components/customer/customer-workspace.js:122
-msgid "Sizing"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.js:7
@@ -2954,6 +2969,10 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-projects.html:8
 msgid "There are no projects yet."
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:11
+msgid "There are no providers for this deployment plan."
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:20
@@ -3306,7 +3325,7 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plans-list.js:28
+#: app/scripts/components/cost-planning/cost-plans-list.js:27
 msgid "You have no cost plans yet"
 msgstr ""
 

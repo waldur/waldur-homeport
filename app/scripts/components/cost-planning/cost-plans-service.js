@@ -10,9 +10,6 @@ export default function costPlansService($http, baseServiceClass) {
         });
         return plan;
       });
-    },
-    evaluate: function(plan) {
-      return $http.get(`${plan.url}evaluate/`).then(response => response.data);
     }
   });
   return new ServiceClass();

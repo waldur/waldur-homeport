@@ -15,8 +15,9 @@
         <thead>
             <tr>
                 <th translate>Provider</th>
-                <th translate>Package</th>
+                <th translate>Details</th>
                 <th translate>Price per day</th>
+                <th translate>Price per month</th>
             </tr>
         </thead>
         <tbody>
@@ -25,10 +26,28 @@
                     {{ service.service_settings_name }}
                 </td>
                 <td>
-                    {{ service.package_templates[0].name }}
+                    <span ng-if="service.details">
+                        {{ service.details }}
+                    </span>
+                    <span ng-if="!service.details" translate>
+                        Details are not available.
+                    </span>
                 </td>
                 <td>
-                    {{ service.package_templates[0].price | defaultCurrency }}
+                    <span ng-if="service.price">
+                        {{ service.price | defaultCurrency }}
+                    </span>
+                    <span ng-if="!service.price" translate>
+                        Price is not available.
+                    </span>
+                </td>
+                <td>
+                    <span ng-if="service.price">
+                        {{ (service.price * 30) | defaultCurrency }}
+                    </span>
+                    <span ng-if="!service.price" translate>
+                        Price is not available.
+                    </span>
                 </td>
             </tr>
         </tbody>
