@@ -3735,7 +3735,7 @@ msgstr ""
 msgid "There are no suitable VPC packages for this tenant."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-header.js:21
+#: app/scripts/components/appstore/appstore-providers.js:23
 msgid "There are no working {categoryLabel} providers available for the current project."
 msgstr ""
 
