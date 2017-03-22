@@ -29,7 +29,7 @@ export function securityGroupRulePort() {
 export function securityGroupRulePortRange($filter) {
   return function formatPortRange(rule) {
     if (rule.from_port === -1 || !rule.from_port) {
-      return 'Any';
+      return gettext('Any');
     } else if (rule.from_port === rule.to_port) {
       return $filter('securityGroupRulePort')(rule.from_port);
     } else {
@@ -42,7 +42,7 @@ export function securityGroupRulePortRange($filter) {
 export function securityGroupProtocol() {
   return function(rule) {
     if (!rule.protocol) {
-      return 'Any';
+      return gettext('Any');
     } else {
       return rule.protocol.toUpperCase();
     }
@@ -53,7 +53,7 @@ export function securityGroupProtocol() {
 export function securityGroupCIDR() {
   return function(rule) {
     if (!rule.cidr) {
-      return 'Any';
+      return gettext('Any');
     } else {
       return rule.cidr;
     }

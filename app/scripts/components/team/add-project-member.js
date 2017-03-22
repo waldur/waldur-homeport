@@ -52,8 +52,8 @@ const addProjectMember = {
       this.projectModel.role = 'admin';
 
       if (this.resolve.editUser) {
-        this.addText = 'Save';
-        this.addTitle = 'Edit project member';
+        this.addText = gettext('Save');
+        this.addTitle = gettext('Edit project member');
         this.projectModel.user = this.resolve.editUser;
         this.projectModel.role = this.resolve.editUser.role;
         this.projectModel.expiration_time = this.resolve.editUser.expiration_time ?

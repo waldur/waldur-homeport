@@ -47,13 +47,13 @@ export default {
       type: 'string',
       label: gettext('Initial admin username'),
       placeholder: gettext('generate automatically'),
-      help_text: gettext('Leave blank if you want admin username to be auto-generated')
+      help_text: gettext('Leave blank if you want admin username to be auto-generated.')
     },
     user_password: {
       type: 'password',
       label: gettext('Initial admin password'),
       placeholder: gettext('generate automatically'),
-      help_text: gettext('Leave blank if you want admin password to be auto-generated')
+      help_text: gettext('Leave blank if you want admin password to be auto-generated.')
     },
     subnet_cidr: {
       component: 'openstackSubnet',

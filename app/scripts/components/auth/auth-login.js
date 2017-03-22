@@ -17,7 +17,7 @@ export const authLogin = {
   controllerAs: 'auth',
   controller: class AuthLoginController {
     constructor(ENV, $q, $state, authService,
-                ncUtilsFlash, invitationService, usersService, UserSettings) {
+                ncUtilsFlash, invitationService, usersService, UserSettings, coreUtils) {
       // @ngInject
       this.ENV = ENV;
       this.$q = $q;
@@ -27,9 +27,12 @@ export const authLogin = {
       this.invitationService = invitationService;
       this.usersService = usersService;
       this.UserSettings = UserSettings;
+      this.coreUtils = coreUtils;
 
       this.loginLogo = ENV.loginLogo;
+      this.pageTitle = this.coreUtils.templateFormatter(gettext('Welcome to {pageTitle}!'), { pageTitle: ENV.shortPageTitle });
       this.shortPageTitle = ENV.shortPageTitle;
+
       this.methods = ENV.authenticationMethods.reduce((result, item) => {
         result[item] = true;
         return result;
@@ -103,7 +106,7 @@ export const authLogin = {
 
       const token = this.invitationService.getInvitationToken();
       if (!token) {
-        this.ncUtilsFlash.error('Invitation token is not found.');
+        this.ncUtilsFlash.error(gettext('Invitation token is not found.'));
         this.$state.go('errorPage.notFound');
         return;
       }
@@ -113,7 +116,7 @@ export const authLogin = {
           this.civilNumberRequired = true;
         }
       }, () => {
-        this.ncUtilsFlash.error('Unable to validate invitation token.');
+        this.ncUtilsFlash.error(gettext('Unable to validate invitation token.'));
         this.$state.go('errorPage.notFound');
       });
     }
@@ -151,7 +154,7 @@ export const authLogin = {
     loginError(response) {
       this.errors = [];
       if (response.status != 400 && +response.status > 0) {
-        this.errors[response.status] = response.statusText + ' Authentication failed';
+        this.errors[response.status] = response.statusText + ' ' + gettext('Authentication failed');
       } else {
         this.errors = response.data;
       }
@@ -185,7 +188,7 @@ export const authLogin = {
       }
       this.errors = {};
       return this.authService.signup(this.user).then(() => {
-        this.ncUtilsFlash.info('Confirmation mail has been sent. Please check your inbox!');
+        this.ncUtilsFlash.info(gettext('Confirmation mail has been sent. Please check your inbox!'));
         this.isSignupFormVisible = false;
         this.user = {};
         return true;

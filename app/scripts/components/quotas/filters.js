@@ -1,13 +1,13 @@
 // @ngInject
 export function quotaName($filter) {
   var names = {
-    floating_ip_count: 'Floating IP count',
-    vcpu: 'vCPU count',
-    ram: 'RAM',
-    vm_count: 'Virtual machines count',
-    instances: 'Instances count',
-    volumes: 'Volumes count',
-    snapshots: 'Snapshots count'
+    floating_ip_count: gettext('Floating IP count'),
+    vcpu: gettext('vCPU count'),
+    ram: gettext('RAM'),
+    vm_count: gettext('Virtual machines count'),
+    instances: gettext('Instances count'),
+    volumes: gettext('Volumes count'),
+    snapshots: gettext('Snapshots count')
   };
   return function(name) {
     if (names[name]) {

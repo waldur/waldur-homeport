@@ -1,16 +1,16 @@
 <div class="white-box empty-data-block" ng-if="DashboardController.projectsList.length == 0">
-    <h1>Not enough data for resource analysis</h1>
-    <h2>Please create first project</h2>
+    <h1 translate>Not enough data for resource analysis.</h1>
+    <h2 translate>Please create first project.</h2>
 </div>
 <div class="white-box dashboard-resources-tab" ng-if="DashboardController.projectsList.length">
         <div class="pie-charts-block" block-ui="pie-charts">
             <div class="chart-element"
                  ng-class="{'active': DashboardController.barChartTab === 'vmsByProject'}"
                  ng-click="DashboardController.changeTab('vmsByProject')">
-                <span class="chart-name">Current usage</span>
+                <span class="chart-name" translate>Current usage</span>
                 <pie-chart chart-data="DashboardController.currentUsageData"
                            chart-controller="DashboardController"></pie-chart>
-                <div>Current plan:
+                <div><span translate>Current plan</span>:
                     <a ui-sref="organization.plans({uuid: DashboardController.currentCustomer.uuid})">
                         {{DashboardController.currentPlan}}
                     </a>
@@ -20,9 +20,9 @@
                  block-ui="month-cost-charts"
                  ng-class="{'active': DashboardController.barChartTab === 'providersByProject'}"
                  ng-click="DashboardController.changeTab('providersByProject')">
-                <span class="chart-name">By provider (30d top 5)</span>
+                <span class="chart-name" translate>By provider (30d top 5)</span>
                 <div ng-if="!DashboardController.totalMonthCost" class="empty-chart-message">
-                    Not enough data for chart
+                    <span translate>Not enough data for chart</span>
                 </div>
                 <pie-chart class="month-cost-chart" ng-if="DashboardController.totalMonthCost"
                            chart-data="DashboardController.monthCostChartData"
@@ -32,9 +32,9 @@
             </div>
         </div>
         <div class="big-chart" block-ui="bar-chart" ng-if="DashboardController.barChartTab === 'vmsByProject'">
-            <span class="chart-name">By project</span>
+            <span class="chart-name" translate>By project</span>
             <div ng-if="!DashboardController.resourcesCount" class="empty-chart-message">
-                Not enough data for chart
+                <span translate>Not enough data for chart.</span>
             </div>
             <div ng-if="DashboardController.projectsList.showBarChart &&
                         DashboardController.resourcesCount">
@@ -50,16 +50,16 @@
                             {{ ::project.name }}
                         </div>
                         <div class="details-table__value">
-                            {{ project.vcpu }}  vCPU /
-                            {{ project.ram }} RAM /
-                            {{ project.storage }}  HDD
+                            {{ project.vcpu }}  <span translate>vCPU</span> /
+                            {{ project.ram }} <span translate>RAM</span> /
+                            {{ project.storage }}  <span translate>HDD</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="big-chart" block-ui="bar-chart" ng-if="DashboardController.barChartTab === 'providersByProject'">
-            <span class="chart-name">Top providers by project</span>
+            <span class="chart-name" translate>Top providers by project</span>
             <bar-chart ng-if="DashboardController.projectsList.showBarChart"
                        chart-data="DashboardController.servicesByProjectChartData"
                        chart-controller="DashboardController"></bar-chart>

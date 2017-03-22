@@ -7,7 +7,7 @@ export default class openstackTenantChangePackageService {
   // * saveData - accepts dictionary with fields {tenant, package, template, newTemplate}
 
   constructor($q, $state, packageTemplatesService,
-              openstackPackagesService, issuesService, ncUtilsFlash, ISSUE_IDS) {
+              openstackPackagesService, issuesService, ncUtilsFlash, ISSUE_IDS, coreUtils, $filter) {
     this.$q = $q;
     this.$state = $state;
     this.packageTemplatesService = packageTemplatesService;
@@ -15,6 +15,8 @@ export default class openstackTenantChangePackageService {
     this.issuesService = issuesService;
     this.ncUtilsFlash = ncUtilsFlash;
     this.ISSUE_IDS = ISSUE_IDS;
+    this.coreUtils = coreUtils;
+    this.$filter = $filter;
   }
 
   loadData(tenant) {
@@ -27,17 +29,17 @@ export default class openstackTenantChangePackageService {
   saveData(context) {
     if (this.compareTemplates(context.newTemplate, context.template)) {
       return this.createIssue(context).then(issue => {
-        this.ncUtilsFlash.success('Request to change tenant package has been created.');
+        this.ncUtilsFlash.success(gettext('Request to change tenant package has been created.'));
         return this.$state.go('support.detail', {uuid: issue.uuid});
       }).catch(response => {
-        this.ncUtilsFlash.error('Unable to create request to change tenant package.');
+        this.ncUtilsFlash.error(gettext('Unable to create request to change tenant package.'));
         return this.$q.reject(response);
       });
     } else {
       return this.extendPackage(context).then(() => {
-        this.ncUtilsFlash.success('Tenant package has been upgraded.');
+        this.ncUtilsFlash.success(gettext('Tenant package has been upgraded.'));
       }).catch(response => {
-        this.ncUtilsFlash.error('Unable to upgrade tenant package.');
+        this.ncUtilsFlash.error(gettext('Unable to upgrade tenant package.'));
         return this.$q.reject(response);
       });
     }
@@ -95,15 +97,14 @@ export default class openstackTenantChangePackageService {
   }
 
   formatIssueSummary(context) {
-    return `Please downgrade tenant '${context.tenant.name}' to VPC '${context.newTemplate.name}'`;
+    return this.coreUtils.templateFormatter(gettext('Please downgrade tenant {tenantName} to VPC {vpcName}.'),
+      { tenantName: context.tenant.name, vpcName: context.newTemplate.name });
   }
 
   formatIssueDescription(context) {
     // Indentation is not used here in order to format description correctly
-    return `
-Tenant name: ${context.tenant.name};
-tenant UUID: ${context.tenant.uuid};
-requested VPC template name: ${context.newTemplate.name};
-requested VPC template UUID: ${context.newTemplate.uuid}`;
+    return this.coreUtils.templateFormatter(gettext('Tenant name: {tenantName}; \r\n tenant UUID: {tenantUUID}; \r\n requested VPC template name: {templateName}; \r\n requested VPC template UUID: {templateUUID}'),
+      { tenantName: context.tenant.name, tenantUUID: context.tenant.uuid, templateName: context.newTemplate.name,
+        templateUUID: context.newTemplate.uuid });
   }
 }

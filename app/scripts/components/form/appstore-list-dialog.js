@@ -16,11 +16,12 @@ export default function appstoreListDialog() {
 }
 
 class DialogController {
-  constructor() {
+  constructor(coreUtils) {
     this.field = this.resolve.field;
     this.model = this.resolve.model;
     this.value = this.model[this.field.name];
-    this.title = this.field.dialogTitle || `Select ${this.field.label}`;
+    this.title = this.field.dialogTitle || coreUtils.templateFormatter(gettext('Select {fieldLabel}'),
+        { fieldLabel: this.field.label });
     this.choices = this.field.choices;
     this.columns = this.field.columns;
     this.filterOptions = this.field.filterOptions;

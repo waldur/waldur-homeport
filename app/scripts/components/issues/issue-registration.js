@@ -27,7 +27,8 @@ class IssueRegistrationController {
               issueUsersService,
               customersService,
               projectsService,
-              resourcesService) {
+              resourcesService,
+              coreUtils) {
     this.$state = $state;
     this.$scope = $scope;
     this.$q = $q;
@@ -42,6 +43,7 @@ class IssueRegistrationController {
     this.customersService = customersService;
     this.projectsService = projectsService;
     this.resourcesService = resourcesService;
+    this.coreUtils = coreUtils;
     this.init();
   }
 
@@ -63,6 +65,7 @@ class IssueRegistrationController {
       this.refreshResources();
     });
     this.scopes = this.getScopes();
+    this.emptyFieldMessage = gettext('You did not enter a field.');
   }
 
   getScopes() {
@@ -187,7 +190,7 @@ class IssueRegistrationController {
     this.saving = true;
     return this.service.createIssue(issue).then(issue => {
       this.service.clearAllCacheForCurrentEndpoint();
-      this.ncUtilsFlash.success(`Request ${issue.key} has been created`);
+      this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {key} has been created.'), {key: issue.key}));
       return this.$state.go('support.detail', {uuid: issue.uuid});
     }).finally(() => {
       this.saving = false;

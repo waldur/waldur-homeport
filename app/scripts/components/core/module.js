@@ -3,9 +3,11 @@ import attachTracking from './tracking';
 import submitButton from './submit-button';
 import loadingSpinner from './loading-spinner';
 import sentryModule from './sentry';
+import coreUtils from './core-utils-service';
 
 export default module => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
+  module.service('coreUtils', coreUtils);
   module.run(attachTracking);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);

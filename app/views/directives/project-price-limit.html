@@ -4,7 +4,7 @@
 <section class="expand-project-limits" ng-if="!loading">
   <div class="details-table__row">
     <div class="details-table__key">
-      Estimated cost:
+      <span translate>Estimated cost</span>:
     </div>
     <div class="details-table__value">
       <span ng-class="{'over-threshold': isOverThreshold() }">{{ estimate.total || 0 | defaultCurrency }}</span>
@@ -12,7 +12,7 @@
   </div>
   <div class="details-table__row">
     <div class="details-table__key">
-      Cost threshold:
+      <span translate>Cost threshold</span>:
     </div>
     <div class="details-table__value" ng-if="!userCanManageProjects">
       {{ estimate.threshold || 0 | defaultCurrency }}
@@ -38,7 +38,7 @@
         <i class="icon" ng-class="{
         'fa-check-circle': isHardLimit,
         'fa-circle-o': !isHardLimit}"></i>
-        Disable provisioning when threshold is reached
+        <span translate>Disable provisioning when threshold is reached.</span>
       </label>
     </div>
   </div>

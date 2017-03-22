@@ -7,10 +7,10 @@
                 <h2>{{ category.label }}</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a ui-sref="project.details({uuid: currentProject.uuid })">Project dashboard</a>
+                        <a ui-sref="project.details({uuid: currentProject.uuid })" translate>Project dashboard</a>
                     </li>
                     <li>
-                        <a ng-click="openDialog()">Service store</a>
+                        <a ng-click="openDialog()" translate>Service store</a>
                     </li>
                     <li class="active">
                         <strong>{{ category.label }}</strong>

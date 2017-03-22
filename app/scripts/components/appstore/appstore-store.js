@@ -27,6 +27,7 @@ function AppStoreController(
   priceEstimationService,
   ncServiceUtils,
   resourceUtils,
+  coreUtils,
   AppstoreFieldConfiguration,
   AppstoreResourceLoader) {
   var controllerScope = this;
@@ -59,10 +60,12 @@ function AppStoreController(
     init:function() {
       this.service = resourcesService;
       this.controllerScope = controllerScope;
+      this.coreUtils = coreUtils;
+      this.$state = $state;
       this._super();
     },
     activate:function() {
-      var vm = this;
+      let vm = this;
       servicesService.getServicesList().then(function(response) {
         vm.servicesMetadata = response;
         vm.setCurrentProject();
@@ -72,6 +75,10 @@ function AppStoreController(
         if (ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'resource')) {
           $state.go('errorPage.limitQuota');
         }
+        let link = vm.$state.href('organization.providers', {uuid: vm.currentCustomer.uuid});
+        vm.providerManagementMessage = coreUtils.templateFormatter(
+          gettext('You can change that in <a href="{link}">provider management</a>.'),
+        { link: link });
       });
     },
     setCategory: function(category) {
@@ -300,14 +307,14 @@ function AppStoreController(
     },
     getServiceDisabledReason: function(service) {
       if (service.state === 'Erred') {
-        return 'Provider is in erred state.';
+        return gettext('Provider is in erred state.');
       } else if (service.reachedLimit) {
-        return 'All provider quotas have reached limit.';
+        return gettext('All provider quotas have reached limit.');
       }
     },
     getServiceWarningMessage: function(service) {
       if (service.reachedThreshold) {
-        return 'Provider quota have reached threshold.';
+        return gettext('Provider quota have reached threshold.');
       }
     },
     canSave: function() {
@@ -323,7 +330,7 @@ function AppStoreController(
     },
     getTooltip: function() {
       if (!this.instance) {
-        return 'Instance is not configured';
+        return gettext('Instance is not configured.');
       }
       var fields = [];
       for (var name in this.allFormOptions) {
@@ -333,7 +340,7 @@ function AppStoreController(
         }
       }
       if (fields.length > 0) {
-        return 'Please specify ' + fields.join(', ').toLowerCase();
+        return coreUtils.templateFormatter(gettext('Please specify {fields}.'), {fields: fields.join(', ').toLowerCase()});
       }
     },
     getResourceUrl: function() {
@@ -385,7 +392,7 @@ function AppStoreController(
           }
         }
       } else {
-        message = 'Server error occurred';
+        message = gettext('Server error occurred.');
       }
       ncUtilsFlash.error(message);
     },

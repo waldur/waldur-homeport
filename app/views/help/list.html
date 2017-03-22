@@ -1,13 +1,13 @@
 <div>
     <div class="container">
-        <h1>Help topics</h1>
+        <h1 translate>Help topics</h1>
     </div>
 
     <div class="white-box list-box">
         <ul class="object-list">
             <li class="list-item list-header">
                 <div class="additional-cell display-for-mobile">
-                    <a class="list-sort">Provider</a>
+                    <a class="list-sort" translate>Provider</a>
                 </div>
             </li>
             <li class="list-item" ng-repeat="item in $ctrl.providersHelp">
@@ -23,14 +23,14 @@
         <ul class="object-list" ng-if="$ctrl.profileHelp">
             <li class="list-item list-header">
                 <div class="additional-cell display-for-mobile">
-                    <a class="list-sort">Profile</a>
+                    <a class="list-sort" translate>Profile</a>
                 </div>
             </li>
             <li class="list-item" ng-if="$ctrl.profileHelp.sshKeys.name">
                 <div class="additional-cell display-for-mobile">
                     <h3 class="item-title">
                         <a ui-sref="help.details({name: $ctrl.profileHelp.sshKeys.name})" stoppropagation>
-                            {{ $ctrl.profileHelp.sshKeys.title }}
+                            {{ $ctrl.profileHelp.sshKeys.title | translate }}
                         </a>
                     </h3>
                 </div>
@@ -39,14 +39,14 @@
         <ul class="object-list" ng-if="$ctrl.dashboardHelp">
             <li class="list-item list-header">
                 <div class="additional-cell display-for-mobile">
-                    <a class="list-sort">Alerts & events</a>
+                    <a class="list-sort" translate>Alerts & events</a>
                 </div>
             </li>
             <li class="list-item" ng-if="$ctrl.dashboardHelp.alertsList.name">
                 <div class="additional-cell display-for-mobile">
                     <h3 class="item-title">
                         <a ui-sref="help.details({name: $ctrl.dashboardHelp.alertsList.name})" stoppropagation>
-                            {{ $ctrl.dashboardHelp.alertsList.title }}
+                            {{ $ctrl.dashboardHelp.alertsList.title | translate }}
                         </a>
                     </h3>
                 </div>
@@ -55,7 +55,7 @@
                 <div class="additional-cell display-for-mobile">
                     <h3 class="item-title">
                         <a ui-sref="help.details({name: $ctrl.dashboardHelp.eventsList.name})" stoppropagation>
-                            {{ $ctrl.dashboardHelp.eventsList.title }}
+                            {{ $ctrl.dashboardHelp.eventsList.title | translate }}
                         </a>
                     </h3>
                 </div>

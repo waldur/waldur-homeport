@@ -44,7 +44,7 @@ export default function ProjectUsersListController(
     },
     getTableOptions: function() {
       return {
-        noDataText: gettext('You have no team members yet'),
+        noDataText: gettext('You have no team members yet.'),
         noMatchesText: gettext('No members found matching filter.'),
         searchFieldName: 'full_name',
         columns: [
@@ -59,7 +59,7 @@ export default function ProjectUsersListController(
             }
           },
           {
-            title: gettext('Role in project:'),
+            title: gettext('Role in project'),
             render: function(row) {
               return ENV.roles[row.role];
             }
@@ -108,7 +108,7 @@ export default function ProjectUsersListController(
           },
           tooltip: function(row) {
             if (vm.isProjectManager && row.role === 'manager') {
-              return gettext('Project manager cannot edit users with same role');
+              return gettext('Project manager cannot edit users with same role.');
             }
           }
         });

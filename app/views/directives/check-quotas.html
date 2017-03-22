@@ -7,9 +7,8 @@
             <div class="close" ng-click="closeTooltip()"></div>
             <div class="clear"></div>
         </div>
+        <p visible="providers" bind-html-compile="quotaTooltipMessage"></p>
         <div class="tooltip-text">
-            You have reached the limit of your {{quotaName}} quota ({{quotaUsage}}).
-            To update your current plan, please visit <a ui-sref="{{plansLink}}">plans page</a>.
         </div>
     </div>
 </div>

@@ -44,7 +44,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: gettext('Volume has been updated')
+        successMessage: gettext('Volume has been updated.')
       }),
       pull: {
         title: gettext('Synchronise')

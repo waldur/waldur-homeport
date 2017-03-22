@@ -17,7 +17,7 @@ angular.module('ncsaas')
     serviceIcon: 'static/images/icons/icon_openstack_small.png',
     dashboardEventsCacheTime: 60, // seconds
     showImport: false,
-    defaultErrorMessage: gettext('Reason unknown, please contact support'),
+    defaultErrorMessage: gettext('Reason unknown, please contact support.'),
 
     // build version
     buildId: 'develop',

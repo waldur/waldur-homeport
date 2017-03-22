@@ -36,7 +36,7 @@ class UserManageController {
     return this.usersService.update(user).then(response => {
       this.usersService.setCurrentUser(response.data);
     }).then(() => {
-      this.ncUtilsFlash.success('Profile has been updated');
+      this.ncUtilsFlash.success(gettext('Profile has been updated.'));
     }).catch(response => {
       this.errors = response.data;
     });

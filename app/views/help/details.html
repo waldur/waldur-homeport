@@ -10,11 +10,11 @@
             Help page is not available
         </div>
         <div class="instruction-page"
-            ng-if="HelpDetails.model.type == 'sshKeys'"
-            ng-include="'views/help/ssh-keys.html'"></div>
+             ng-if="HelpDetails.model.type == 'sshKeys'"
+             ng-include="'views/help/ssh-keys.html'"></div>
         <div class="instruction-page"
-            ng-if="['alertsList', 'eventsList'].indexOf(HelpDetails.model.type) !== -1"
-            ng-include="'views/help/alerts-events-list.html'"></div>
+             ng-if="['alertsList', 'eventsList'].indexOf(HelpDetails.model.type) !== -1"
+             ng-include="'views/help/alerts-events-list.html'"></div>
         <div class="instruction-page" ng-if="HelpDetails.model.type == 'providers'">
             <div class="">
                 <image-box image="static/images/help/{{ HelpDetails.model.key.toLowerCase() }}_tokens.png"></image-box>
@@ -42,7 +42,7 @@
                             The Windows Software Development Kit for Windows 8 (possibly you will need to install it) includes the Certificate Creation Tool, MakeCert.exe.<br/>
                             If you are using Windows 8.1, enter following command in the command prompt to generate a self-signed certificate.<br/>
                             The certificate name should be changed in both places:
-                            <pre class="code">"C:\Program Files (x86)\Windows Kits\8.1\bin\x86\makecert.exe" -sky exchange -r -n "CN=certificate_name" -pe -a sha256 -len 2048 -ss My "certificate_name.cer"</pre>
+                        <pre class="code">"C:\Program Files (x86)\Windows Kits\8.1\bin\x86\makecert.exe" -sky exchange -r -n "CN=certificate_name" -pe -a sha256 -len 2048 -ss My "certificate_name.cer"</pre>
                         </p>
                         <p>
                             You can create validity periods for the certificate, using the -b (beginning) and -e (end) options.<br/>
@@ -65,8 +65,8 @@
                     </ol>
                 </div>
                 <p ng-if="HelpDetails.model.key == 'DigitalOcean'">
-                In order to add DigitalOcean IaaS you need to have a valid DigitalOcean account and API access token.
-                DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to manage your resources through Waldur.
+                    In order to add DigitalOcean IaaS you need to have a valid DigitalOcean account and API access token.
+                    DigitalOcean tokens can be created with read or read-write scope, latter is required if you want to manage your resources through Waldur.
                 </p>
                 <p ng-if="HelpDetails.model.link"><a href="{{ HelpDetails.model.link }}" target="_blank">Instructions on the official site</a></p>
             </div>

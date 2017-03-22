@@ -33,7 +33,7 @@ function InvoicesListController(
     },
     getTableOptions: function() {
       return {
-        noDataText: gettext('You have no invoices yet'),
+        noDataText: gettext('You have no invoices yet.'),
         noMatchesText: gettext('No invoices found matching filter.'),
         searchFieldName: 'number',
         columns: [

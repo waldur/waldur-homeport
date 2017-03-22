@@ -16,9 +16,10 @@ export default function appstoreFieldList() {
 
 // @ngInject
 class FieldController {
-  constructor($uibModal, $filter) {
+  constructor($uibModal, $filter, coreUtils) {
     this.$uibModal = $uibModal;
     this.$filter = $filter;
+    this.coreUtils = coreUtils;
 
     if (this.field.parser) {
       const choices = this.field.choices.map(this.field.parser);
@@ -34,7 +35,8 @@ class FieldController {
     this.renderWarning = this.field.required && !this.hasChoices;
     this.renderEmpty = !this.field.required && !this.hasChoices;
     this.warningMessage = this.field.warningMessage ||
-      `${this.field.label} is required for provisioning resource.`;
+      this.coreUtils.templateFormatter(gettext('{fieldLabel} is required for provisioning resource.'),
+        {fieldLabel: this.field.label});
   }
 
   openDialog() {

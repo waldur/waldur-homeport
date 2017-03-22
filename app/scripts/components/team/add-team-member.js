@@ -23,7 +23,7 @@ const addTeamMember = {
       this.roles = this.ENV.roles;
       this.addText = gettext('Save');
       this.addTitle = gettext('Edit team member');
-      this.helpText = gettext('You cannot change your own role');
+      this.helpText = gettext('You cannot change your own role.');
       this.userModel = {
         expiration_time: null
       };

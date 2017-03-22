@@ -3,8 +3,8 @@
 </div>
 <div ng-if="!DashboardController.loading">
     <div class="white-box empty-data-block" ng-if="DashboardController.table.length <= 1">
-        <h1>Not enough data for cost analysis</h1>
-        <h2 visible="import" visible="providers">Please import resources or add more providers</h2>
+        <h1 translate>Not enough data for cost analysis.</h1>
+        <h2 visible="import" visible="providers" translate>Please import resources or add more providers.</h2>
     </div>
     <div class="white-box big-chart" ng-if="DashboardController.table.length > 1">
         <dashboard-cost-chart data="DashboardController.costData"></dashboard-cost-chart>
@@ -22,37 +22,53 @@
                     </li>
                     <li>
                         <div class="icon"></div>
-                        <a stoppropagation ng-click="row.selected=true; row.activeTab='projects'" ng-class="{'active': row.selected && row.activeTab=='projects'}">Projects (<span ng-bind="::row.projects.length"></span>)</a>
+                        <a stoppropagation
+                           ng-click="row.selected=true; row.activeTab='projects'"
+                           ng-class="{'active': row.selected && row.activeTab=='projects'}">
+                            <span translate>Projects</span> (<span ng-bind="::row.projects.length"></span>)
+                        </a>
                     </li>
                     <li visible="resources">
                         <div class="icon"></div>
-                        <a stoppropagation ng-click="row.selected=true; row.activeTab='resources'" ng-class="{'active': row.selected && row.activeTab=='resources'}">Resources (<span ng-bind="::row.resources.length"></span>)</a>
+                        <a stoppropagation
+                           ng-click="row.selected=true; row.activeTab='resources'"
+                           ng-class="{'active': row.selected && row.activeTab=='resources'}">
+                            <span translate>Resources</span> (<span ng-bind="::row.resources.length"></span>)
+                        </a>
                     </li>
                     <li visible="providers">
                         <div class="icon"></div>
-                        <a stoppropagation ng-click="row.selected=true; row.activeTab='services'" ng-class="{'active': row.selected && row.activeTab=='services'}">Providers (<span ng-bind="::row.services.length"></span>)</a>
+                        <a stoppropagation
+                           ng-click="row.selected=true; row.activeTab='services'"
+                           ng-class="{'active': row.selected && row.activeTab=='services'}">
+                            <span translate>Providers</span> (<span ng-bind="::row.services.length"></span>)
+                        </a>
                     </li>
                 </ul>
                 <ul class="sort-list" ng-if="row.total == 0">
                     <li>
                         <span class="month" ng-bind="::row.date"></span>
                     </li>
-                    <li>
+                    <li translate>
                         No resources used during this month.
                     </li>
                 </ul>
                 <div class="total-cost">
                     <span class="table-alert"></span>
-                    <span class="cost">{{ row.isCurrent ? 'Projected' : 'Total' }} cost {{ row.total | defaultCurrency }}</span>
+                    <span class="cost">
+                        <span ng-if="row.isCurrent" translate>Projected cost</span>
+                        <span ng-if="!row.isCurrent" translate>Total cost</span>
+                        {{ row.total | defaultCurrency }}
+                    </span>
                 </div>
                 <div class="clear"></div>
             </div>
             <div ng-if="row.selected">
                 <div class="cost-table desktop" ng-if="row.projects.length && row.activeTab=='projects'">
                     <div class="tr th">
-                        <div class="td"><span>Project name</span></div>
-                        <div class="td"><span>Organization name</span></div>
-                        <div class="td"><span>Cost</span></div>
+                        <div class="td"><span translate>Project name</span></div>
+                        <div class="td"><span translate>Organization name</span></div>
+                        <div class="td"><span translate>Cost</span></div>
                     </div>
                     <div class="tr" ng-repeat="project in row.projects">
                         <div class="td"><span ng-bind="::project.project_name"></span></div>
@@ -73,8 +89,8 @@
                 </div>
                 <div class="cost-table desktop" ng-if="row.services.length && row.activeTab=='services'">
                     <div class="tr th">
-                        <div class="td"><span>Provider name</span></div>
-                        <div class="td"><span>Cost</span></div>
+                        <div class="td"><span translate>Provider name</span></div>
+                        <div class="td"><span translate>Cost</span></div>
                     </div>
                     <div class="tr" ng-repeat="service in row.services">
                         <div class="td"><span ng-bind="::service.scope_name"></span></div>
@@ -93,10 +109,10 @@
                 </div>
                 <div class="cost-table resources-cost-list desktop" ng-if="row.resources.length && row.activeTab=='resources'">
                     <div class="tr th">
-                        <div class="td"><span>Resource name</span></div>
-                        <div class="td"><span>Resource type</span></div>
-                        <div class="td"><span>Project</span></div>
-                        <div class="td"><span>Cost</span></div>
+                        <div class="td"><span translate>Resource name</span></div>
+                        <div class="td"><span translate>Resource type</span></div>
+                        <div class="td"><span translate>Project</span></div>
+                        <div class="td"><span translate>Cost</span></div>
                     </div>
                     <div class="tr" ng-repeat="resource in row.resources">
                         <div class="td">

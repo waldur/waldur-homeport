@@ -12,17 +12,17 @@ function AgreementCancelController(
   ncUtils, ncUtilsFlash, agreementsService, $state) {
   var qs = ncUtils.parseQueryString(ncUtils.getQueryString());
   if (!qs.token) {
-    ncUtilsFlash.error('Invalid URL. Unable to parse billing plan agreement details.');
+    ncUtilsFlash.error(gettext('Invalid URL. Unable to parse billing plan agreement details.'));
     return;
   }
   agreementsService.cancel({token: qs.token}).then(function() {
-    ncUtilsFlash.success('Billing plan agreement has been processed successfully.');
+    ncUtilsFlash.success(gettext('Billing plan agreement has been processed successfully.'));
     $state.go('profile.details');
   }, function(error) {
     if (error.data) {
       ncUtilsFlash.error(error.data.detail);
     } else {
-      ncUtilsFlash.error('Unable to cancel billing plan');
+      ncUtilsFlash.error(gettext('Unable to cancel billing plan.'));
     }
   });
 }

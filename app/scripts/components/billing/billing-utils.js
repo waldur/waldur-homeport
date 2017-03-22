@@ -56,7 +56,7 @@ export default class BillingUtils {
 
         tooltip: function(row) {
           if (row.state != 'created') {
-            return 'Notification only for the created invoice can be sent.';
+            return gettext('Notification only for the created invoice can be sent.');
           }
         }
       }
@@ -65,9 +65,9 @@ export default class BillingUtils {
 
   sendNotification(invoice) {
     this.invoicesService.sendNotification(invoice.uuid).then(() => {
-      this.ncUtilsFlash.success('Record notification has been sent to organization owners.');
+      this.ncUtilsFlash.success(gettext('Record notification has been sent to organization owners.'));
     }).catch(() => {
-      this.ncUtilsFlash.error('Unable to send record notification.');
+      this.ncUtilsFlash.error(gettext('Unable to send record notification.'));
     });
   }
 }

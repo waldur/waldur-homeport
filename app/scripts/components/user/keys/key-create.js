@@ -31,10 +31,10 @@ function KeyAddController(baseControllerAddClass, keysService, $state, $q) {
             this.instance.name = key[2].trim();
             return this._super();
           } else {
-            this.errors = {name: ['This field may not be blank.']};
+            this.errors = {name: [gettext('This field may not be blank.')]};
           }
         } else {
-          this.errors = {public_key: ['This field may not be blank.']};
+          this.errors = {public_key: [gettext('This field may not be blank.')]};
         }
       }
       return $q.reject();
