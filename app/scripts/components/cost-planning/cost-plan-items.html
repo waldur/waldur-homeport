@@ -21,9 +21,9 @@
           </ui-select-match>
           <ui-select-choices
             group-by="'category'"
-            repeat="preset in $ctrl.presets
+            repeat="preset in $ctrl.getFreePresets(item.preset)
                     | filter: {name: $select.search}
-                    | orderBy: ['category','name','variant']
+                    | orderBy: ['category', 'name', 'variant']
                     track by preset.uuid">
             {{ preset.variant | translate }}
             <span ng-bind-html="preset.name | highlight: $select.search"></span>
@@ -36,6 +36,7 @@
           type="number"
           class="form-control"
           ng-model="item.quantity"
+          ng-class="{disabled: !item.preset}"
           min="1"
           max="100">
       </td>
