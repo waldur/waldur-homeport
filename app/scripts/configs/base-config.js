@@ -157,7 +157,7 @@ angular.module('ncsaas')
       'payments',
       'premiumSupport',
       'notifications',
-      'sizing',
+      'cost-planning',
       'alerts'
     ],
     authenticationMethods: [

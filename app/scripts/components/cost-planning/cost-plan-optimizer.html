@@ -1,0 +1,55 @@
+<button
+    type="button"
+    class="btn btn-default"
+    ng-click="$ctrl.refresh()"
+    ng-class="{disabled: !$ctrl.valid || $ctrl.loading}">
+    <i class="fa fa-gears"></i>
+    <span translate>Evaluate plan</span>
+</button>
+<loading-spinner ng-if="$ctrl.loading"/>
+<div ng-if="$ctrl.services.length === 0" class="m-t-sm">
+    <span translate>There are no providers for this deployment plan.</span>
+</div>
+<div ng-if="$ctrl.services.length > 0">
+    <table class="table">
+        <thead>
+            <tr>
+                <th translate>Provider</th>
+                <th translate>Details</th>
+                <th translate>Price per day</th>
+                <th translate>Price per month</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="service in $ctrl.services">
+                <td>
+                    {{ service.service_settings_name }}
+                </td>
+                <td>
+                    <span ng-if="service.details">
+                        {{ service.details }}
+                    </span>
+                    <span ng-if="!service.details" translate>
+                        Details are not available.
+                    </span>
+                </td>
+                <td>
+                    <span ng-if="service.price">
+                        {{ service.price | defaultCurrency }}
+                    </span>
+                    <span ng-if="!service.price" translate>
+                        Price is not available.
+                    </span>
+                </td>
+                <td>
+                    <span ng-if="service.price">
+                        {{ (service.price * 30) | defaultCurrency }}
+                    </span>
+                    <span ng-if="!service.price" translate>
+                        Price is not available.
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -41,11 +41,6 @@ function InvitationsListController(
         this.isOwnerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
         this.tableOptions = this.getTableOptions();
         fn();
-        this.defaultFilter = {
-          name: 'state',
-          title: gettext('Pending'),
-          value: 'pending'
-        };
       }).finally(() => {
         this.loading = false;
       });
@@ -62,6 +57,7 @@ function InvitationsListController(
           {
             title: gettext('Pending'),
             value: 'pending',
+            chosen: true,
           },
           {
             title: gettext('Canceled'),

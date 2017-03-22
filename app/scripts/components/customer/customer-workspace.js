@@ -119,12 +119,6 @@ export function CustomerWorkspaceController(
         feature: 'billing'
       },
       {
-        label: gettext('Sizing'),
-        icon: 'fa-calculator',
-        link: 'organization.sizing({uuid: $ctrl.context.customer.uuid})',
-        feature: 'sizing'
-      },
-      {
         label: gettext('Manage'),
         icon: 'fa-wrench',
         link: 'organization.delete({uuid: $ctrl.context.customer.uuid})'

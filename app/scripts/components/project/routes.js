@@ -159,6 +159,14 @@ export default function projectRoutes($stateProvider) {
       },
     })
 
+    .state('project.cost-planning', {
+      url: 'cost-planning/',
+      template: '<cost-plans-list/>',
+      data: {
+        pageTitle: gettext('Cost planning')
+      }
+    })
+
     .state('import', {
       url: 'import/',
       parent: 'project',
