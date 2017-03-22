@@ -52,7 +52,6 @@ const costPlanDialog = {
     addItem() {
       this.plan.items.push({
         quantity: 1,
-        variant: 'Small'
       });
     }
 
