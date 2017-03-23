@@ -1,82 +1,79 @@
 import template from './premium-support-contracts.html';
 
-export default function premiumSupportContracts() {
-  return {
-    restrict: 'E',
+const premiumSupportContracts = {
     template: template,
     controller: ContractsListController,
-    controllerAs: 'Ctrl',
-    scope: {},
-  };
-}
+    controllerAs: 'ListController',
+};
 
 // @ngInject
 function ContractsListController(
   baseControllerListClass,
   premiumSupportContractsService,
-  premiumSupportPlansService,
   currentStateService,
-  ENTITYLISTFIELDTYPES,
   ENV,
   $filter,
-  $stateParams,
-  ncUtils
-) {
+  $stateParams) {
   var controllerScope = this;
   var ResourceController = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = premiumSupportContractsService;
       this._super();
-
-      this.entityOptions = {
-        entityData: {
-          noDataText: gettext('You have no SLAs yet.'),
-          createLink: 'appstore.premiumSupport',
-          createLinkText: gettext('Add SLA'),
-          expandable: true,
-          hideActionButtons: true
-        },
-        list: [
+    },
+    getTableOptions: function() {
+      return {
+        searchFieldName: 'name',
+        noDataText: gettext('You have no SLAs yet.'),
+        noMatchesText: gettext('No SLAs found matching filter.'),
+        columns: [
           {
-            name: 'Name',
-            propertyName: 'plan_name',
-            type: ENTITYLISTFIELDTYPES.none,
-            showForMobile: ENTITYLISTFIELDTYPES.showForMobile
+            title: gettext('Name'),
+            className: 'all',
+            render: function(row) {
+              return row.plan_name || 'N/A';
+            }
           },
           {
-            name: 'State',
-            propertyName: 'state',
-            type: ENTITYLISTFIELDTYPES.none,
-            showForMobile: ENTITYLISTFIELDTYPES.showForMobile
-          }
-        ]
-      };
-      this.expandableOptions = [
-        {
-          isList: false,
-          addItemBlock: false,
-          viewType: 'description',
-          items: [
-            {
-              key: 'plan_description',
-              label: gettext('Description')
-            },
-            {
-              key: 'plan_base_rate',
-              label: gettext('Base rate')
-            },
-            {
-              key: 'plan_hour_rate',
-              label: gettext('Hour rate')
-            },
-            {
-              key: 'plan_terms',
-              label: gettext('Terms')
+            title: gettext('State'),
+            className: 'all',
+            render: function(row) {
+              return row.state || 'N/A';
             }
-          ]
-        }
-      ];
+          },
+          {
+            title: gettext('Description'),
+            className: 'desktop',
+            render: function(row) {
+              return row.plan_description || 'N/A';
+            }
+          },
+          {
+            title: gettext('Base rate'),
+            className: 'desktop',
+            render: function(row) {
+              return $filter('currency')(row.base_rate, ENV.currency) || 'N/A';
+            }
+          },
+          {
+            title: gettext('Hour rate'),
+            className: 'desktop',
+            render: function(row) {
+              return $filter('currency')(row.hour_rate, ENV.currency) || 'N/A';
+            }
+          },
+          {
+            title: gettext('Terms'),
+            className: 'desktop',
+            render: function(row) {
+              return row.plan_terms || 'N/A';
+            }
+          },
+        ],
+      };
+    },
+    afterGetList: function() {
+      this.tableOptions = this.getTableOptions();
     },
     getList: function(filter) {
       var vm = this;
@@ -90,16 +87,9 @@ function ContractsListController(
         return fn(filter);
       });
     },
-    showMore: function(contract) {
-      var promise = premiumSupportPlansService.$get(null, contract.plan).then(function(response) {
-        contract.plan_description = response.description;
-        contract.plan_terms = response.terms;
-        contract.plan_base_rate = $filter('currency')(response.base_rate, ENV.currency);
-        contract.plan_hour_rate = $filter('currency')(response.hour_rate, ENV.currency);
-      });
-      ncUtils.blockElement('block_'+contract.uuid, promise);
-    }
   });
 
   controllerScope.__proto__ = new ResourceController();
 }
+
+export default premiumSupportContracts;

@@ -14,7 +14,7 @@ export default module => {
   module.directive('premiumSupportProvision', premiumSupportProvision);
   module.directive('premiumSupportAgreement', premiumSupportAgreement);
   module.directive('premiumSupportPlans', premiumSupportPlans);
-  module.directive('premiumSupportContracts', premiumSupportContracts);
+  module.component('premiumSupportContracts', premiumSupportContracts);
   module.directive('premiumSupportSummary', premiumSupportSummary);
   module.config(premiumSupportRoute);
 };
