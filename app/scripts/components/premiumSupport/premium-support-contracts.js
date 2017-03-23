@@ -1,9 +1,9 @@
 import template from './premium-support-contracts.html';
 
 const premiumSupportContracts = {
-    template: template,
-    controller: ContractsListController,
-    controllerAs: 'ListController',
+  template: template,
+  controller: ContractsListController,
+  controllerAs: 'ListController',
 };
 
 // @ngInject
