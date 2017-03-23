@@ -1,14 +1,11 @@
 // @ngInject
-export default function costPlanningConfig(costPlanOptimizerService, $filter) {
-  function formatPlan(item) {
-    const price = $filter('defaultCurrency')(item.price);
-    const preset = `${item.preset.category} / ${item.preset.variant}`;
-    const flavor = `${item.size.name} (${$filter('formatFlavor')(item.size)})`;
-    return `${preset} &mdash; ${flavor} &mdash; ${price}`;
-  }
+export default function costPlanningConfig(costPlanOptimizerService, CostPlanningFormatter) {
   costPlanOptimizerService.pushPostprocessor(plan => {
-    if (plan.optimized_presets) {
-      plan.details = plan.optimized_presets.map(formatPlan).join('<br/>');
+    if (plan.service_settings_type === 'DigitalOcean' && plan.optimized_presets) {
+      angular.forEach(plan.optimized_presets, preset => {
+        preset.flavor = preset.size;
+      });
+      plan.details = CostPlanningFormatter.formatPresets(plan);
     }
     return plan;
   });

@@ -1,6 +1,7 @@
 const providersList = {
   controller: ProviderListController,
   controllerAs: 'ListController',
+  // eslint-disable-next-line quotes
   template: `<div class="wrapper wrapper-content" ng-include="'views/partials/filtered-list.html'"></div>`,
 };
 

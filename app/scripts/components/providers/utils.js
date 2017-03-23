@@ -6,8 +6,7 @@ export default function ncServiceUtils() {
     return type;
   }
   function getServiceIcon(type) {
-    var type = getTypeDisplay(type);
-    return 'static/images/appstore/icon-' + type.toLowerCase() + '.png';
+    return 'static/images/appstore/icon-' + getTypeDisplay(type).toLowerCase() + '.png';
   }
   return {
     getTypeDisplay: getTypeDisplay,
