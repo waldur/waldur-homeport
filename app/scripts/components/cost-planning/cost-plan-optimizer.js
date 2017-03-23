@@ -4,6 +4,11 @@ const costPlanOptimizer = {
   template,
   bindings: {
     services: '<',
+  },
+  controller: class ComponentController {
+    explainPlan(plan) {
+      plan.expanded = !plan.expanded;
+    }
   }
 };
 

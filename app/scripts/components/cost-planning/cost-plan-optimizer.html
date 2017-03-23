@@ -5,23 +5,20 @@
     <table class="table">
         <thead>
             <tr>
-                <th translate class="col-sm-3">Provider</th>
-                <th translate>Details</th>
+                <th></th>
+                <th translate>Provider</th>
                 <th translate>Price per day</th>
                 <th translate>Price per month</th>
+                <th translate>Actions</th>
             </tr>
         </thead>
-        <tbody>
-            <tr ng-repeat="service in $ctrl.services">
+        <tbody ng-repeat="service in $ctrl.services">
+            <tr>
                 <td>
                     <provider-icon type="service.service_settings_type" size="img-xs"/>
-                    <span class="m-l-sm">{{ service.service_settings_name }}</span>
                 </td>
                 <td>
-                    <span ng-if="service.details" ng-bind-html="service.details"></span>
-                    <span ng-if="!service.details">
-                        {{ ::service.error_message }}
-                    </span>
+                    {{ service.service_settings_name }}
                 </td>
                 <td>
                     <span ng-if="service.price">
@@ -37,6 +34,80 @@
                     </span>
                     <span ng-if="!service.price" translate>
                         Price is not available.
+                    </span>
+                </td>
+                <td>
+                    <button type="button"
+                      class="btn btn-sm btn-default"
+                      ng-click="$ctrl.explainPlan(service)">
+                      <i class="fa fa-eye"></i>
+                      <span translate>Explain plan</span>
+                    </button>
+                </td>
+            </tr>
+            <tr ng-if="service.expanded">
+                <td colspan="5">
+                    <span ng-if="service.error_message">
+                        {{ ::service.error_message }}
+                    </span>
+                    <span ng-if="!service.error_message && service.service_settings_type==='DigitalOcean'">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th translate>Component</th>
+                                    <th translate>Flavor</th>
+                                    <th translate>Quantity</th>
+                                    <th translate>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in service.optimized_presets">
+                                    <td>
+                                        {{ item.preset.category }} / {{ item.preset.variant }} {{ item.preset.name }} (<small>{{ item.preset | formatFlavor }}</small>)
+                                    </td>
+                                    <td>
+                                        {{ item.size.name }} (<small>{{ item.size | formatFlavor }}</small>)
+                                    </td>
+                                    <td>
+                                        {{ item.quantity }}
+                                    </td>
+                                    <td>
+                                        {{ item.price | defaultCurrency }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </span>
+                    <span ng-if="!service.error_message && service.service_settings_type==='OpenStackTenant'">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th translate>Component</th>
+                                    <th translate>Flavor</th>
+                                    <th translate>Quantity</th>
+                                    <th translate>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in service.optimized_presets">
+                                    <td>
+                                        {{ item.preset.category }} / {{ item.preset.variant }} {{ item.preset.name }} (<small>{{ item.preset | formatFlavor }}</small>)
+                                    </td>
+                                    <td>
+                                        {{ item.flavor.name }} (<small>{{ item.flavor | formatFlavor }}</small>)
+                                    </td>
+                                    <td>
+                                        {{ item.quantity }}
+                                    </td>
+                                    <td>
+                                        {{ item.price | defaultCurrency }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </span>
+                    <span ng-if="!service.error_message && service.service_settings_type==='OpenStack'">
+                        {{ service.details }}
                     </span>
                 </td>
             </tr>
