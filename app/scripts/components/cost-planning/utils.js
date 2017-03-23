@@ -9,7 +9,7 @@ export default class CostPlanningFormatter {
   }
 
   formatPreset(preset) {
-    return `${preset.category} / ${preset.variant}`;
+    return `${preset.category} / ${preset.variant} ${preset.name}`;
   }
 
   formatPlan(item) {
