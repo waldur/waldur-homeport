@@ -14,7 +14,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th translate>Provider</th>
+                <th translate class="col-sm-3">Provider</th>
                 <th translate>Details</th>
                 <th translate>Price per day</th>
                 <th translate>Price per month</th>
@@ -30,8 +30,8 @@
                     <span ng-if="service.details">
                         {{ service.details }}
                     </span>
-                    <span ng-if="!service.details" translate>
-                        Details are not available.
+                    <span ng-if="!service.details">
+                        {{ ::service.error_message }}
                     </span>
                 </td>
                 <td>

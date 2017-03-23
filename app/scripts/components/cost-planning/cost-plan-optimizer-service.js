@@ -6,6 +6,16 @@ export default function costPlanOptimizerService($http) {
     price: parseFloat(plan.price)
   }));
 
+  function comparePrices(a, b) {
+    if (b.price === null) {
+      return -1;
+    }
+    if (a.price === null) {
+      return 1;
+    }
+    return a.price - b.price;
+  }
+
   return {
     pushPostprocessor(postprocessor) {
       postprocessors.push(postprocessor);
@@ -20,7 +30,9 @@ export default function costPlanOptimizerService($http) {
 
     evaluate(plan) {
       return $http.get(`${plan.url}evaluate/`)
-        .then(response => this.applyPostprocessors(response.data));
+        .then(response => response.data)
+        .then(items => items.sort(comparePrices))
+        .then(items => this.applyPostprocessors(items));
     }
   };
 }
