@@ -28,7 +28,7 @@
 
                         <div class="text-center m-b-sm m-t-xl"
                              ng-class="{disabled: !service.enabled}">
-                            <img ng-src="{{ $ctrl.appstore.getServiceIcon(service.type) }}" class="img-lg">
+                            <provider-icon type="service.type" size="img-lg"/>
                         </div>
                         <div class="product-desc" ng-class="{disabled: !service.enabled}">
                             <a class="btn btn-sm btn-outline btn-primary" ng-click="$ctrl.appstore.showServiceDetails(service)">

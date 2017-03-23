@@ -23,7 +23,8 @@
         <tbody>
             <tr ng-repeat="service in $ctrl.services">
                 <td>
-                    {{ service.service_settings_name }}
+                    <provider-icon type="service.service_settings_type" size="img-xs"/>
+                    <span class="m-l-sm">{{ service.service_settings_name }}</span>
                 </td>
                 <td>
                     <span ng-if="service.details">

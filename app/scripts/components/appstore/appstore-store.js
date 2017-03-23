@@ -217,7 +217,6 @@ function AppStoreController(
       };
     },
     getServiceTypeDisplay: ncServiceUtils.getTypeDisplay,
-    getServiceIcon: ncServiceUtils.getServiceIcon,
     formatResourceType: resourceUtils.formatResourceType,
     setCurrentProject: function() {
       var vm = this;
