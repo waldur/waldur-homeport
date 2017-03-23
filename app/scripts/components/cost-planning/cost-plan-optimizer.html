@@ -1,12 +1,3 @@
-<button
-    type="button"
-    class="btn btn-default"
-    ng-click="$ctrl.refresh()"
-    ng-class="{disabled: !$ctrl.valid || $ctrl.loading}">
-    <i class="fa fa-gears"></i>
-    <span translate>Evaluate plan</span>
-</button>
-<loading-spinner ng-if="$ctrl.loading"/>
 <div ng-if="$ctrl.services.length === 0" class="m-t-sm">
     <span translate>There are no providers for this deployment plan.</span>
 </div>
