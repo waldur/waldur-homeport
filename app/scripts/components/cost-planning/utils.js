@@ -15,7 +15,7 @@ export default class CostPlanningFormatter {
   formatPlan(item) {
     const price = this.$filter('defaultCurrency')(item.price);
     const preset = this.formatPreset(item.preset);
-    const flavor = this.formatFlavor(item.size);
+    const flavor = this.formatFlavor(item.flavor);
     return `${preset} &mdash; ${flavor} &mdash; ${price}`;
   }
 
