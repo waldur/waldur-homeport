@@ -27,9 +27,7 @@
                     <span class="m-l-sm">{{ service.service_settings_name }}</span>
                 </td>
                 <td>
-                    <span ng-if="service.details">
-                        {{ service.details }}
-                    </span>
+                    <span ng-if="service.details" ng-bind-html="service.details"></span>
                     <span ng-if="!service.details">
                         {{ ::service.error_message }}
                     </span>
