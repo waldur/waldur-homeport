@@ -485,7 +485,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:125
 #: app/scripts/components/offering/appstore-offering.html:19
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:52
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:53
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:43
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:34
 #: app/scripts/components/plans/plans-list.html:37
@@ -682,8 +682,8 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/actions.js:105
 #: app/scripts/components/openstack/openstack-instance/actions.js:51
 #: app/scripts/components/openstack/openstack-tenant/actions.js:28
-#: app/scripts/components/openstack/openstack-tenant/actions.js:46
-#: app/scripts/components/openstack/openstack-tenant/actions.js:66
+#: app/scripts/components/openstack/openstack-tenant/actions.js:47
+#: app/scripts/components/openstack/openstack-tenant/actions.js:67
 #: app/scripts/components/openstack/openstack-volume/module.js:57
 #: app/scripts/components/openstack/openstack-volume/module.js:71
 #: app/scripts/components/project/project-issues.js:31
@@ -705,7 +705,7 @@ msgstr ""
 msgid "Create backup schedule for OpenStack instance"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:67
+#: app/scripts/components/openstack/openstack-tenant/actions.js:68
 msgid "Create floating IP for"
 msgstr ""
 
@@ -748,7 +748,7 @@ msgstr ""
 msgid "Create request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:47
+#: app/scripts/components/openstack/openstack-tenant/actions.js:48
 msgid "Create security group for"
 msgstr ""
 
@@ -983,7 +983,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:206
+#: app/scripts/configs/base-config.js:205
 msgid "English"
 msgstr ""
 
@@ -1005,7 +1005,7 @@ msgstr ""
 msgid "Estimated cost"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:210
+#: app/scripts/configs/base-config.js:209
 msgid "Estonian"
 msgstr ""
 
@@ -1825,7 +1825,7 @@ msgstr ""
 msgid "New size"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:27
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:28
 msgid "New VPC package"
 msgstr ""
 
@@ -2315,7 +2315,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:188
+#: app/scripts/configs/base-config.js:187
 msgid "Organization owner"
 msgstr ""
 
@@ -2445,10 +2445,6 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:3
 msgid "Please create first project."
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:100
-msgid "Please downgrade tenant {tenantName} to VPC {vpcName}."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:7
@@ -2654,7 +2650,7 @@ msgstr ""
 msgid "Project has been updated."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:189
+#: app/scripts/configs/base-config.js:188
 msgid "Project manager"
 msgstr ""
 
@@ -2951,10 +2947,6 @@ msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js:116
 msgid "Request to {action} has been accepted."
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:32
-msgid "Request to change tenant package has been created."
 msgstr ""
 
 #: app/scripts/components/issues/constants.js:106
@@ -3589,7 +3581,7 @@ msgid "Sub Total"
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html:75
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:46
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:47
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:40
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:33
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:26
@@ -3652,8 +3644,8 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/module.js:43
 #: app/scripts/components/openstack/openstack-subnet/actions.js:14
 #: app/scripts/components/openstack/openstack-tenant/actions.js:21
-#: app/scripts/components/openstack/openstack-tenant/actions.js:58
-#: app/scripts/components/openstack/openstack-tenant/actions.js:62
+#: app/scripts/components/openstack/openstack-tenant/actions.js:59
+#: app/scripts/components/openstack/openstack-tenant/actions.js:63
 #: app/scripts/components/openstack/openstack-volume/module.js:50
 msgid "Synchronise"
 msgstr ""
@@ -3662,7 +3654,7 @@ msgstr ""
 msgid "Synchronise quotas"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:190
+#: app/scripts/configs/base-config.js:189
 msgid "System administrator"
 msgstr ""
 
@@ -3710,16 +3702,8 @@ msgstr ""
 msgid "Tenant name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:106
-msgid ""
-"Tenant name: {tenantName}; \r\n"
-" tenant UUID: {tenantUUID}; \r\n"
-" requested VPC template name: {templateName}; \r\n"
-" requested VPC template UUID: {templateUUID}"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:40
-msgid "Tenant package has been upgraded."
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:32
+msgid "Tenant package has been changed."
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-contracts.js:75
@@ -3780,7 +3764,7 @@ msgstr ""
 msgid "There are no resources in the organization."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:23
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:24
 msgid "There are no suitable VPC packages for this tenant."
 msgstr ""
 
@@ -3903,6 +3887,10 @@ msgstr ""
 msgid "Unable to cancel billing plan."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:34
+msgid "Unable to change tenant package."
+msgstr ""
+
 #: app/scripts/components/invitations/invitation-dialog.js:60
 msgid "Unable to create invitation."
 msgstr ""
@@ -3917,10 +3905,6 @@ msgstr ""
 
 #: app/scripts/components/offering/appstore-offering.js:62
 msgid "Unable to create request for a turnkey solution."
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:35
-msgid "Unable to create request to change tenant package."
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-projects.js:114
@@ -3961,10 +3945,6 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:70
 msgid "Unable to send record notification."
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:42
-msgid "Unable to upgrade tenant package."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.js:119

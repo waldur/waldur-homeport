@@ -5,8 +5,8 @@ export default function openstackPackagesService(baseServiceClass, ENV, $http) {
       this._super();
       this.endpoint = '/openstack-packages/';
     },
-    extend: function(package_uuid, template_uuid) {
-      var url = `${ENV.apiEndpoint}api/openstack-packages/extend/`;
+    change: function(package_uuid, template_uuid) {
+      const url = `${ENV.apiEndpoint}api/openstack-packages/change/`;
       return $http.post(url, {
         package: `${ENV.apiEndpoint}api/openstack-packages/${package_uuid}/`,
         template: `${ENV.apiEndpoint}api/package-templates/${template_uuid}/`

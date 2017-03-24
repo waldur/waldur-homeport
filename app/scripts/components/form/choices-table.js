@@ -31,7 +31,7 @@ class TableController {
       );
     }
     this.style = {
-      height: '300px',
+      'max-height': '300px',
       'overflow-y': 'auto'
     };
   }
