@@ -20,8 +20,8 @@ export default module => {
   module.config(tabsConfig);
   module.run(eventsConfig);
   module.run(costPlanningConfig);
-  module.directive('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
-  module.directive('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
+  module.component('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
+  module.component('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
   module.component('openstackTenantSummary', openstackTenantSummary);
   module.service('packageTemplatesService', packageTemplatesService);
   module.service('openstackPackagesService', openstackPackagesService);

@@ -39,6 +39,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         enabled: true,
         type: 'form',
         component: 'openstackTenantChangePackageDialog',
+        useResolve: true,
         dialogSize: 'lg'
       },
       create_security_group: {
