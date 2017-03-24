@@ -86,6 +86,7 @@ msgid "Accounting records"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html:11
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:12
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/resource/actions/action-button-resource.html:3
 #: app/scripts/components/table/responsive-table.js:268
@@ -113,7 +114,7 @@ msgstr ""
 msgid "Add credit"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-items.html:59
+#: app/scripts/components/cost-planning/cost-plan-items.html:58
 msgid "Add item"
 msgstr ""
 
@@ -155,7 +156,7 @@ msgid "Add project member"
 msgstr ""
 
 #: app/scripts/components/providers/create.html:154
-#: app/scripts/components/providers/provider-list.js:180
+#: app/scripts/components/providers/provider-list.js:179
 msgid "Add provider"
 msgstr ""
 
@@ -245,7 +246,7 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:312
+#: app/scripts/components/appstore/appstore-store.js:311
 msgid "All provider quotas have reached limit."
 msgstr ""
 
@@ -308,7 +309,7 @@ msgstr ""
 msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}."
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:125
+#: app/scripts/components/providers/provider-list.js:124
 msgid "Are you sure you want to unlink provider and all related resources?"
 msgstr ""
 
@@ -473,7 +474,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:45
 #: app/scripts/components/appstore/category-selector.html:33
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:53
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:56
 #: app/scripts/components/customer/customer-create-dialog.html:94
 #: app/scripts/components/digitalocean/droplet-resize.html:76
 #: app/scripts/components/events/event-details-dialog.html:125
@@ -609,11 +610,16 @@ msgstr ""
 msgid "Competence"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-flavors.html:4
+msgid "Component"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-items.html:9
 msgid "Components"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:10
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:9
 #: app/scripts/components/openstack/openstack-instance/actions.js:63
 msgid "Configure"
 msgstr ""
@@ -840,7 +846,7 @@ msgstr ""
 msgid "Default tax percent"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-items.html:47
+#: app/scripts/components/cost-planning/cost-plan-items.html:46
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:39
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
@@ -890,23 +896,18 @@ msgid "Destination URL"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.html:35
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:18
 #: app/scripts/components/cost-planning/cost-plans-list.js:54
 #: app/scripts/components/events/base-event-list.js:43
 #: app/scripts/components/issues/issue-registration.html:32
 #: app/scripts/components/issues/issue-registration.html:69
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
 #: app/scripts/components/providers/details/dialog.html:10
-#: app/scripts/components/providers/provider-list.js:93
+#: app/scripts/components/providers/provider-list.js:92
 #: app/scripts/components/team/customer-users-list.js:121
 #: app/scripts/components/team/project-users-list.js:87
 #: app/scripts/components/user/user-sidebar.html:12
 #: app/views/directives/importable-resources.html:17
 msgid "Details"
-msgstr ""
-
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:32
-msgid "Details are not available."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:33
@@ -1012,8 +1013,8 @@ msgstr ""
 msgid "EU VAT ID"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:7
-msgid "Evaluate plan"
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:39
+msgid "Evaluate"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:2
@@ -1098,6 +1099,10 @@ msgstr ""
 msgid "Expires at"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:44
+msgid "Explain plan"
+msgstr ""
+
 #: app/scripts/components/table/responsive-table.js:123
 msgid "Export as"
 msgstr ""
@@ -1148,6 +1153,7 @@ msgstr ""
 msgid "First"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-flavors.html:5
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:23
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:45
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:7
@@ -1387,7 +1393,7 @@ msgstr ""
 msgid "Instance has been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:333
+#: app/scripts/components/appstore/appstore-store.js:332
 msgid "Instance is not configured."
 msgstr ""
 
@@ -1763,7 +1769,12 @@ msgstr ""
 msgid "Monthly base price"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:11
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:27
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:35
+msgid "N/A"
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:13
 #: app/scripts/components/cost-planning/cost-plans-list.js:31
 #: app/scripts/components/customer/customer-create-dialog.html:11
 #: app/scripts/components/customer/customer-delete.html:10
@@ -1784,7 +1795,7 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js:70
 #: app/scripts/components/providers/details/provider-details.html:4
 #: app/scripts/components/providers/details/provider-settings.js:44
-#: app/scripts/components/providers/provider-list.js:56
+#: app/scripts/components/providers/provider-list.js:55
 #: app/scripts/components/resource/actions/constants.js:20
 #: app/scripts/components/resource/list/resources-list.js:38
 #: app/views/directives/importable-resources.html:14
@@ -1989,11 +2000,11 @@ msgstr ""
 msgid "No projects yet"
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:46
+#: app/scripts/components/providers/provider-list.js:45
 msgid "No providers found matching filter."
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:45
+#: app/scripts/components/providers/provider-list.js:44
 msgid "No providers yet."
 msgstr ""
 
@@ -2160,7 +2171,7 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:173
+#: app/scripts/components/providers/provider-list.js:172
 msgid "Only customer owner or staff can create provider."
 msgstr ""
 
@@ -2168,11 +2179,11 @@ msgstr ""
 msgid "Only customer owner or staff can invite users."
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:111
+#: app/scripts/components/providers/provider-list.js:110
 msgid "Only customer owner or staff can remove provider."
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:139
+#: app/scripts/components/providers/provider-list.js:138
 msgid "Only customer owner or staff can unlink provider."
 msgstr ""
 
@@ -2456,7 +2467,7 @@ msgstr ""
 msgid "Please select projects where usage of the provider is permitted."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:343
+#: app/scripts/components/appstore/appstore-store.js:342
 msgid "Please specify {fields}."
 msgstr ""
 
@@ -2497,6 +2508,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-records-list.js:54
 #: app/scripts/components/billing/invoices-list.js:54
+#: app/scripts/components/cost-planning/cost-plan-flavors.html:7
 #: app/scripts/components/offering/offering-summary.html:32
 msgid "Price"
 msgstr ""
@@ -2513,19 +2525,14 @@ msgstr ""
 msgid "Price for 1 vCPU per day"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:40
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:48
-msgid "Price is not available."
-msgstr ""
-
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:19
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:10
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:39
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:34
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:27
 msgid "Price per day"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:20
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:11
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:43
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:38
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:31
@@ -2684,7 +2691,7 @@ msgid "Projects list"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:22
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:17
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:9
 #: app/scripts/components/resource/list/resources-list.js:46
 #: app/scripts/components/resource/summary/resource-summary-base.html:21
 #: app/views/help/list.html:10
@@ -2707,11 +2714,11 @@ msgstr ""
 msgid "Provider has been updated."
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:114
+#: app/scripts/components/providers/provider-list.js:113
 msgid "Provider has resources. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:310
+#: app/scripts/components/appstore/appstore-store.js:309
 msgid "Provider is in erred state."
 msgstr ""
 
@@ -2724,7 +2731,7 @@ msgstr ""
 msgid "Provider package is not defined."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:317
+#: app/scripts/components/appstore/appstore-store.js:316
 msgid "Provider quota have reached threshold."
 msgstr ""
 
@@ -2769,6 +2776,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:58
 #: app/scripts/components/billing/invoice-details.html:59
+#: app/scripts/components/cost-planning/cost-plan-flavors.html:6
 #: app/scripts/components/cost-planning/cost-plan-items.html:10
 msgid "Quantity"
 msgstr ""
@@ -2779,7 +2787,7 @@ msgstr ""
 
 #: app/scripts/components/error/routes.js:25
 #: app/scripts/components/project/projects-list.js:131
-#: app/scripts/components/providers/provider-list.js:176
+#: app/scripts/components/providers/provider-list.js:175
 msgid "Quota has been reached."
 msgstr ""
 
@@ -2875,7 +2883,7 @@ msgid "Remote network"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plans-list.js:59
-#: app/scripts/components/providers/provider-list.js:98
+#: app/scripts/components/providers/provider-list.js:97
 #: app/scripts/components/team/customer-users-list.js:131
 #: app/scripts/components/team/project-users-list.js:103
 #: app/scripts/components/user/hooks/hook-list.js:74
@@ -2965,7 +2973,7 @@ msgstr ""
 msgid "Requested Services"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:17
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:19
 msgid "Required certifications"
 msgstr ""
 
@@ -3117,7 +3125,7 @@ msgstr ""
 #: app/scripts/components/analytics/cost-analysis.html:36
 #: app/scripts/components/analytics/dashboard-cost-chart.html:13
 #: app/scripts/components/project/project-details.js:24
-#: app/scripts/components/providers/provider-list.js:80
+#: app/scripts/components/providers/provider-list.js:79
 #: app/views/directives/importable-resources.html:7
 msgid "Resources"
 msgstr ""
@@ -3156,7 +3164,7 @@ msgstr ""
 msgid "Runtime state"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:49
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:52
 #: app/scripts/components/customer/customer-create-dialog.html:89
 #: app/scripts/components/providers/details/provider-projects.html:15
 #: app/scripts/components/providers/details/provider-settings.html:76
@@ -3223,7 +3231,7 @@ msgid "Select {fieldLabel}"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html:18
-msgid "Select a preset"
+msgid "Select a component"
 msgstr ""
 
 #: app/scripts/components/issues/issue-quick-create.html:98
@@ -3243,7 +3251,7 @@ msgstr ""
 msgid "Select caller..."
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:20
+#: app/scripts/components/cost-planning/cost-plan-certifications.html:2
 msgid "Select certifications"
 msgstr ""
 
@@ -3325,7 +3333,7 @@ msgstr ""
 msgid "Send notification"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:395
+#: app/scripts/components/appstore/appstore-store.js:394
 msgid "Server error occurred."
 msgstr ""
 
@@ -3529,7 +3537,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:35
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:42
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:55
-#: app/scripts/components/providers/provider-list.js:63
+#: app/scripts/components/providers/provider-list.js:62
 #: app/scripts/components/resource/list/resources-list.js:54
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
 #: app/scripts/components/user/hooks/hook-list.js:26
@@ -3658,7 +3666,7 @@ msgstr ""
 msgid "System administrator"
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:71
+#: app/scripts/components/providers/provider-list.js:70
 msgid "System provider"
 msgstr ""
 
@@ -3756,7 +3764,7 @@ msgstr ""
 msgid "There are no projects yet."
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:11
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:2
 msgid "There are no providers for this deployment plan."
 msgstr ""
 
@@ -3855,7 +3863,7 @@ msgstr ""
 msgid "Total cost"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:35
+#: app/scripts/components/cost-planning/cost-plan-dialog.html:31
 msgid "Total planned resource consumption"
 msgstr ""
 
@@ -3877,7 +3885,7 @@ msgstr ""
 #: app/scripts/components/offering/offerings-list.js:41
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
 #: app/scripts/components/providers/details/provider-details.html:8
-#: app/scripts/components/providers/provider-list.js:49
+#: app/scripts/components/providers/provider-list.js:48
 #: app/views/compare/row.html:12
 #: app/views/directives/importable-resources.html:12
 msgid "Type"
@@ -3968,7 +3976,7 @@ msgstr ""
 msgid "Unit Price"
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:120
+#: app/scripts/components/providers/provider-list.js:119
 msgid "Unlink"
 msgstr ""
 
@@ -4232,7 +4240,7 @@ msgstr ""
 msgid "You cannot change your own role."
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:108
+#: app/scripts/components/providers/provider-list.js:107
 msgid "You cannot remove shared provider."
 msgstr ""
 

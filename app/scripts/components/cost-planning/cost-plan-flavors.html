@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th class="col-md-5" translate>Component</th>
+      <th class="col-md-5" translate>Flavor</th>
+      <th class="col-md-1" translate>Quantity</th>
+      <th class="col-md-1" translate>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in $ctrl.items">
+      <td>
+        <cost-plan-component component="item.preset"/>
+      </td>
+      <td>
+        {{ item.flavor.name }} (<small>{{ item.flavor | formatFlavor }}</small>)
+      </td>
+      <td>
+        {{ item.quantity }}
+      </td>
+      <td>
+        {{ item.price | defaultCurrency }}
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -34,27 +34,6 @@
   }
 
   angular.module('ncsaas')
-    .service('ncServiceUtils', ['ENV', ncServiceUtils]);
-
-  function ncServiceUtils(ENV) {
-    function getTypeDisplay(type) {
-      if (type === 'OpenStackTenant') {
-        type = 'OpenStack';
-      }
-      return type;
-    }
-    function getServiceIcon(type) {
-      var type = getTypeDisplay(type);
-      return 'static/images/appstore/icon-' + type.toLowerCase() + '.png';
-    }
-    return {
-      getTypeDisplay: getTypeDisplay,
-      getServiceIcon: getServiceIcon
-    };
-  }
-
-
-  angular.module('ncsaas')
     .factory('ncUtils', ['blockUI', ncUtils]);
 
   function ncUtils(blockUI) {

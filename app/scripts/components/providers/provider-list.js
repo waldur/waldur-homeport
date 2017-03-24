@@ -1,9 +1,8 @@
-import template from './provider-list.html';
-
 const providersList = {
   controller: ProviderListController,
   controllerAs: 'ListController',
-  template: template,
+  // eslint-disable-next-line quotes
+  template: `<div class="wrapper wrapper-content" ng-include="'views/partials/filtered-list.html'"></div>`,
 };
 
 export default providersList;
