@@ -2,7 +2,8 @@
 export default function costPlanOptimizerService($http) {
   let postprocessors = [];
 
-  function comparePlans(a, b) {
+  function comparePrice(a, b) {
+    // Items without valid price should be located at the end of list
     if (!a.price) {
       return 1;
     }
@@ -22,7 +23,7 @@ export default function costPlanOptimizerService($http) {
   function parseResponse(response) {
     let plans = response.data;
     angular.forEach(plans, item => item.price = parseFloat(item.price));
-    plans.sort(comparePlans);
+    plans.sort(comparePrice);
     return applyPostprocessors(plans);
   }
 

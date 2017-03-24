@@ -1,0 +1,9 @@
+<ui-select ng-model="$ctrl.plan.certifications" multiple>
+  <ui-select-match placeholder="{{ 'Select certifications' | translate }}">
+    {{ $item.name }}
+  </ui-select-match>
+  <ui-select-choices
+    repeat="certification in $ctrl.certifications | filter: {name: $select.search} track by certification.uuid">
+    <div ng-bind-html="certification.name | highlight: $select.search"></div>
+  </ui-select-choices>
+</ui-select>
