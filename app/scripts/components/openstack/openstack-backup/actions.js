@@ -21,7 +21,13 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
       restore: {
         fields: {
           flavor: {
+            valueFormatter: angular.identity,
+            serializer: value => value.url,
             formatter: ($filter, resource) => $filter('formatFlavor')(resource)
+          },
+          summary: {
+            component: 'openstackBackupRestoreSummary',
+            formGroupClass: 'm-b-n'
           }
         }
       }
