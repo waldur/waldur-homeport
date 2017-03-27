@@ -1,40 +1,59 @@
 const openstackBackupRestoreSummary = {
-  template: '<openstack-instance-checkout-summary ng-if="$ctrl.context.resource" model="$ctrl.summaryModel"/>',
+  template: '<openstack-instance-checkout-summary ng-if="$ctrl.resource" model="$ctrl.summaryModel"/>',
   bindings: {
     model: '<',
     field: '<',
     context: '<',
   },
   controller: class ComponentController {
-    constructor($scope) {
+    constructor($scope, resourcesService) {
       // @ngInject
       this.$scope = $scope;
+      this.resourcesService = resourcesService;
       this.summaryModel = {};
     }
 
     $onInit() {
-      this.$scope.$watch(() => this.model, () => {
+      this.loadResource();
+      this.setupWatcher();
+    }
+
+    loadResource() {
+      if (!this.context.resource.metadata) {
+        this.resourcesService
+          .$get(null, null, this.context.resource.url)
+          .then(resource => this.resource = resource)
+      } else {
+        this.resource = this.context.resource;
+      }
+    }
+
+    setupWatcher() {
+      this.$scope.$watch(() => [this.model, this.resource], () => {
         this.summaryModel = this.getSummaryModel();
       }, true);
     }
 
     getSummaryModel() {
+      if (!this.resource) {
+        return;
+      }
       return {
         service: {
-          settings: this.context.resource.service_settings,
-          name: this.context.resource.service_name,
+          settings: this.resource.service_settings,
+          name: this.resource.service_name,
         },
         flavor: this.model.flavor,
         image: {
-          name: this.context.resource.metadata.image_name,
+          name: this.resource.metadata.image_name,
         },
         customer: {
-          name: this.context.resource.customer_name,
+          name: this.resource.customer_name,
         },
         project: {
-          name: this.context.resource.project_name,
+          name: this.resource.project_name,
         },
-        system_volume_size: 0,
+        system_volume_size: this.resource.metadata.size,
         data_volume_size: 0,
       };
     }
