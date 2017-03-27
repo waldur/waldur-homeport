@@ -1,5 +1,7 @@
+import template from './digitalocean-droplet-summary.html';
+
 const digitaloceanDropletSummary = {
-  template: '<virtual-machine-summary resource="$ctrl.resource"/>',
+  template,
   bindings: {
     resource: '<'
   }
