@@ -9,7 +9,8 @@
     <div ng-if="!loading">
         <p ng-if="::action.dialogSubtitle">{{ action.dialogSubtitle | translate }}</p>
         <div class="form-group"
-             ng-repeat="(name, field) in action.fields">
+             ng-repeat="(name, field) in action.fields"
+             ng-class="field.formGroupClass">
             <label class="control-label"
                 for="action-{{ name }}"
                 ng-if="field.type != 'boolean'">
@@ -17,7 +18,7 @@
                 <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>
             </label>
             <div>
-                <action-field field="field" model="form"></action-field>
+                <action-field field="field" model="form" context="{resource: resource}"></action-field>
                 <p class="text-danger" ng-repeat="error in errors[name]" ng-bind="error"></p>
             </div>
         </div>
