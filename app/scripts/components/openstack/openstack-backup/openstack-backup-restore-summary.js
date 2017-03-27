@@ -22,7 +22,7 @@ const openstackBackupRestoreSummary = {
       if (!this.context.resource.metadata) {
         this.resourcesService
           .$get(null, null, this.context.resource.url)
-          .then(resource => this.resource = resource)
+          .then(resource => this.resource = resource);
       } else {
         this.resource = this.context.resource;
       }
