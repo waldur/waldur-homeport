@@ -20,7 +20,7 @@
                 <div class="ibox" uib-tooltip="{{ service.warning }}">
                     <div class="ibox-content product-box cursor-pointer">
                         <div class="product-desc" ng-class="{disabled: !service.enabled}">
-                            <a class="product-name">
+                            <a class="product-name elipsis">
                                 <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>
                                 {{ ::service.name }}
                             </a>
