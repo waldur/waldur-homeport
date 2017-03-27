@@ -45,6 +45,10 @@
     <openstack-snapshot-schedule-summary resource="$ctrl.resource"></openstack-snapshot-schedule-summary>
   </div>
 
+  <div ng-switch-when="DigitalOcean.Droplet">
+    <digitalocean-droplet-summary resource="$ctrl.resource"></digitalocean-droplet-summary>
+  </div>
+
   <div ng-switch-default>
     <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
   </div>
