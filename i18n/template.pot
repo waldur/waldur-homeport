@@ -50,9 +50,9 @@ msgstr ""
 msgid "Accepted"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:13
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:44
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:15
+#: app/scripts/components/resource/summary/virtual-machine-summary.html:13
 msgid "Access"
 msgstr ""
 
@@ -301,11 +301,11 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:80
+#: app/scripts/components/resource/actions/action-utils-service.js:93
 msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}."
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:82
+#: app/scripts/components/resource/actions/action-utils-service.js:95
 msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}."
 msgstr ""
 
@@ -313,7 +313,7 @@ msgstr ""
 msgid "Are you sure you want to unlink provider and all related resources?"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:88
+#: app/scripts/components/resource/actions/action-utils-service.js:101
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
@@ -492,7 +492,7 @@ msgstr ""
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:32
 #: app/scripts/components/project/project-create.html:43
 #: app/scripts/components/providers/create.html:159
-#: app/scripts/components/resource/actions/dialog/action-dialog.html:34
+#: app/scripts/components/resource/actions/dialog/action-dialog.html:35
 #: app/scripts/components/team/add-project-member.html:54
 #: app/scripts/components/team/add-team-member.html:86
 #: app/scripts/components/user/hooks/hook-details.html:81
@@ -1111,8 +1111,8 @@ msgstr ""
 msgid "Extend OpenStack volume"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:42
 #: app/scripts/components/resource/list/resource-vms-list.js:35
+#: app/scripts/components/resource/summary/virtual-machine-summary.html:42
 msgid "External IP"
 msgstr ""
 
@@ -1405,8 +1405,8 @@ msgstr ""
 msgid "Instances count"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:30
 #: app/scripts/components/resource/list/resource-vms-list.js:26
+#: app/scripts/components/resource/summary/virtual-machine-summary.html:30
 msgid "Internal IP"
 msgstr ""
 
@@ -2841,6 +2841,7 @@ msgid "Refresh"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:20
+#: app/scripts/components/digitalocean/digitalocean-droplet-summary.html:5
 msgid "Region"
 msgstr ""
 
@@ -2945,7 +2946,7 @@ msgstr ""
 msgid "Request removal"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:116
+#: app/scripts/components/resource/actions/action-utils-service.js:129
 msgid "Request to {action} has been accepted."
 msgstr ""
 
@@ -3076,7 +3077,7 @@ msgstr ""
 msgid "Resource events"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:103
+#: app/scripts/components/resource/actions/action-utils-service.js:116
 msgid "Resource has been deleted."
 msgstr ""
 
@@ -3192,7 +3193,7 @@ msgid "Security group has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:103
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:63
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 #: app/scripts/components/openstack/openstack-security-groups/breadcrumbs.js:21
 msgid "Security groups"
 msgstr ""
@@ -3469,7 +3470,7 @@ msgstr ""
 msgid "Snapshots count"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:54
+#: app/scripts/components/resource/summary/virtual-machine-summary.html:54
 msgid "SSH key"
 msgstr ""
 
@@ -3585,7 +3586,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:40
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:33
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:26
-#: app/scripts/components/resource/actions/dialog/action-dialog.html:30
+#: app/scripts/components/resource/actions/dialog/action-dialog.html:31
 msgid "Submit"
 msgstr ""
 
@@ -3607,7 +3608,7 @@ msgid "Subnets"
 msgstr ""
 
 #: app/scripts/components/offering/offering-summary.html:6
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
+#: app/scripts/components/resource/summary/virtual-machine-summary.html:5
 msgid "Summary"
 msgstr ""
 
@@ -3998,7 +3999,7 @@ msgstr ""
 msgid "Upgrade"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:72
+#: app/scripts/components/resource/summary/virtual-machine-summary.html:63
 msgid "Uptime"
 msgstr ""
 
