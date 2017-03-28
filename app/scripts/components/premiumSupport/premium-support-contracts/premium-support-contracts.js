@@ -11,9 +11,8 @@ function ContractsListController(
   baseControllerListClass,
   premiumSupportContractsService,
   currentStateService,
-  ENV,
-  $filter,
-  $stateParams) {
+  $stateParams,
+  $uibModal) {
   var controllerScope = this;
   var ResourceController = baseControllerListClass.extend({
     init: function() {
@@ -41,36 +40,26 @@ function ContractsListController(
               return row.state || 'N/A';
             }
           },
-          {
-            title: gettext('Description'),
-            className: 'desktop',
-            render: function(row) {
-              return row.plan_description || 'N/A';
-            }
-          },
-          {
-            title: gettext('Base rate'),
-            className: 'desktop',
-            render: function(row) {
-              return $filter('currency')(row.base_rate, ENV.currency) || 'N/A';
-            }
-          },
-          {
-            title: gettext('Hour rate'),
-            className: 'desktop',
-            render: function(row) {
-              return $filter('currency')(row.hour_rate, ENV.currency) || 'N/A';
-            }
-          },
-          {
-            title: gettext('Terms'),
-            className: 'desktop',
-            render: function(row) {
-              return row.plan_terms || 'N/A';
-            }
-          },
         ],
+        rowActions: this.getRowActions(),
       };
+    },
+    getRowActions: function() {
+      return [
+        {
+          title: gettext('Details'),
+          iconClass: 'fa fa-eye',
+          callback: this.openDetailsDialog.bind(this),
+        },
+      ];
+    },
+    openDetailsDialog: function(contract) {
+      $uibModal.open({
+        component: 'contractDetailsDialog',
+        resolve: {
+          contract: () => contract,
+        },
+      });
     },
     afterGetList: function() {
       this.tableOptions = this.getTableOptions();

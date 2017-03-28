@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h3 class="modal-title">
+    <span>{{ ::$ctrl.dialogTitle }}</span>
+  </h3>
+</div>
+<div class="modal-body">
+  <div ng-if="!$ctrl.plan">
+    <span translate>Data is unavailable.</span>
+  </div>
+  <table class="table" ng-if="$ctrl.plan">
+    <thead>
+    <tr>
+      <th translate>Description</th>
+      <th translate>Terms</th>
+      <th translate>Base rate</th>
+      <th translate>Hour rate</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ ::$ctrl.plan.description }}</td>
+        <td>{{ ::$ctrl.plan.terms }}</td>
+        <td>{{ ::$ctrl.plan.base_rate }}</td>
+        <td>{{ ::$ctrl.plan.hour_rate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
