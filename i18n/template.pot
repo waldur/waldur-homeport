@@ -146,7 +146,7 @@ msgstr ""
 msgid "Add private cloud"
 msgstr ""
 
-#: app/scripts/components/project/project-create.html:68
+#: app/scripts/components/project/project-create.html:69
 #: app/scripts/components/project/projects-list.js:135
 msgid "Add project"
 msgstr ""
@@ -490,7 +490,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:34
 #: app/scripts/components/plans/plans-list.html:37
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:32
-#: app/scripts/components/project/project-create.html:71
+#: app/scripts/components/project/project-create.html:72
 #: app/scripts/components/providers/create.html:159
 #: app/scripts/components/resource/actions/dialog/action-dialog.html:35
 #: app/scripts/components/team/add-project-member.html:54
@@ -631,6 +631,7 @@ msgid "Confirm changing your plan"
 msgstr ""
 
 #: app/scripts/components/customer/customer-delete.js:90
+#: app/scripts/components/project/project-manage.js:94
 #: app/scripts/components/table/base-list-controller.js:132
 msgid "Confirm deletion?"
 msgstr ""
@@ -1772,7 +1773,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:27
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:35
-#: app/scripts/components/project/project-create.html:51
+#: app/scripts/components/project/project-create.html:52
 msgid "N/A"
 msgstr ""
 
@@ -2614,11 +2615,11 @@ msgstr ""
 msgid "Project {project_name} has been updated."
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:82
+#: app/scripts/components/project/project-manage.html:83
 msgid "Project actions"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:73
+#: app/scripts/components/project/project-manage.html:74
 msgid "Project cost details"
 msgstr ""
 
@@ -2646,6 +2647,10 @@ msgstr ""
 
 #: app/scripts/components/events/constants.js:16
 msgid "Project has been renamed from {project_previous_name} to {project_name}."
+msgstr ""
+
+#: app/scripts/components/project/project-manage.js:64
+msgid "Project has been updated."
 msgstr ""
 
 #: app/scripts/configs/base-config.js:188
@@ -2694,6 +2699,11 @@ msgstr ""
 
 #: app/scripts/components/alerts/constants.js:5
 msgid "Provider {service_name} is not responding."
+msgstr ""
+
+#: app/scripts/components/project/project-create.html:38
+#: app/scripts/components/project/project-manage.html:43
+msgid "Provider certification required by this project"
 msgstr ""
 
 #: app/scripts/components/providers/details/dialog.html:2
@@ -2894,7 +2904,7 @@ msgstr ""
 msgid "Remove profile"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:88
+#: app/scripts/components/project/project-manage.html:89
 msgid "Remove project"
 msgstr ""
 
@@ -3243,8 +3253,8 @@ msgid "Select caller..."
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-certifications.html:2
-#: app/scripts/components/project/project-create.html:44
-#: app/scripts/components/project/project-manage.html:49
+#: app/scripts/components/project/project-create.html:45
+#: app/scripts/components/project/project-manage.html:50
 msgid "Select certifications"
 msgstr ""
 
@@ -3981,7 +3991,7 @@ msgstr ""
 msgid "Update profile"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:62
+#: app/scripts/components/project/project-manage.html:63
 msgid "Update project details"
 msgstr ""
 
@@ -4213,7 +4223,7 @@ msgstr ""
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:85
+#: app/scripts/components/project/project-manage.html:86
 msgid "You can remove this project by pressing the button"
 msgstr ""
 
