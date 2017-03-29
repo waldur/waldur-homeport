@@ -146,7 +146,7 @@ msgstr ""
 msgid "Add private cloud"
 msgstr ""
 
-#: app/scripts/components/project/project-create.html:40
+#: app/scripts/components/project/project-create.html:69
 #: app/scripts/components/project/projects-list.js:135
 msgid "Add project"
 msgstr ""
@@ -156,7 +156,7 @@ msgid "Add project member"
 msgstr ""
 
 #: app/scripts/components/providers/create.html:154
-#: app/scripts/components/providers/provider-list.js:179
+#: app/scripts/components/providers/provider-list.js:182
 msgid "Add provider"
 msgstr ""
 
@@ -348,10 +348,6 @@ msgstr ""
 msgid "Authentication events"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:157
-msgid "Authentication failed"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.js:7
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.js:11
 msgid "Auto-assign floating IP"
@@ -472,6 +468,10 @@ msgstr ""
 msgid "Caller"
 msgstr ""
 
+#: app/scripts/components/providers/provider-list.js:141
+msgid "Can't unlink system provider."
+msgstr ""
+
 #: app/scripts/components/appstore/appstore-store.html:45
 #: app/scripts/components/appstore/category-selector.html:33
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:56
@@ -490,7 +490,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:34
 #: app/scripts/components/plans/plans-list.html:37
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:32
-#: app/scripts/components/project/project-create.html:43
+#: app/scripts/components/project/project-create.html:72
 #: app/scripts/components/providers/create.html:159
 #: app/scripts/components/resource/actions/dialog/action-dialog.html:35
 #: app/scripts/components/team/add-project-member.html:54
@@ -513,6 +513,8 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
+#: app/scripts/components/project/project-create.html:37
+#: app/scripts/components/project/project-manage.html:42
 #: app/scripts/components/providers/details/provider-details.html:30
 msgid "Certifications"
 msgstr ""
@@ -629,12 +631,12 @@ msgid "Confirm changing your plan"
 msgstr ""
 
 #: app/scripts/components/customer/customer-delete.js:90
-#: app/scripts/components/project/project-manage.js:60
+#: app/scripts/components/project/project-manage.js:94
 #: app/scripts/components/table/base-list-controller.js:132
 msgid "Confirm deletion?"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:191
+#: app/scripts/components/auth/auth-login.js:184
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
@@ -666,7 +668,7 @@ msgstr ""
 msgid "Cost planning"
 msgstr ""
 
-#: app/views/directives/project-price-limit.html:15
+#: app/scripts/components/project/project-price-limit.html:15
 msgid "Cost threshold"
 msgstr ""
 
@@ -914,7 +916,7 @@ msgstr ""
 msgid "Device"
 msgstr ""
 
-#: app/views/directives/project-price-limit.html:41
+#: app/scripts/components/project/project-price-limit.html:41
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
@@ -1001,7 +1003,7 @@ msgstr ""
 msgid "error message: {errorMessage}"
 msgstr ""
 
-#: app/views/directives/project-price-limit.html:7
+#: app/scripts/components/project/project-price-limit.html:7
 msgid "Estimated cost"
 msgstr ""
 
@@ -1771,6 +1773,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:27
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:35
+#: app/scripts/components/project/project-create.html:52
 msgid "N/A"
 msgstr ""
 
@@ -2171,7 +2174,7 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:172
+#: app/scripts/components/providers/provider-list.js:175
 msgid "Only customer owner or staff can create provider."
 msgstr ""
 
@@ -2612,11 +2615,11 @@ msgstr ""
 msgid "Project {project_name} has been updated."
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:63
+#: app/scripts/components/project/project-manage.html:83
 msgid "Project actions"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:54
+#: app/scripts/components/project/project-manage.html:74
 msgid "Project cost details"
 msgstr ""
 
@@ -2628,7 +2631,7 @@ msgstr ""
 msgid "Project dashboard"
 msgstr ""
 
-#: app/scripts/components/project/project-create.html:19
+#: app/scripts/components/project/project-create.html:23
 msgid "Project description"
 msgstr ""
 
@@ -2646,7 +2649,7 @@ msgstr ""
 msgid "Project has been renamed from {project_previous_name} to {project_name}."
 msgstr ""
 
-#: app/scripts/components/project/project-manage.js:43
+#: app/scripts/components/project/project-manage.js:64
 msgid "Project has been updated."
 msgstr ""
 
@@ -2660,7 +2663,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:69
 #: app/scripts/components/issues/constants.js:55
-#: app/scripts/components/project/project-create.html:4
+#: app/scripts/components/project/project-create.html:8
 #: app/scripts/components/project/project-manage.html:13
 #: app/scripts/components/team/add-team-member.html:45
 #: app/scripts/components/user/user-projects.js:26
@@ -2696,6 +2699,11 @@ msgstr ""
 
 #: app/scripts/components/alerts/constants.js:5
 msgid "Provider {service_name} is not responding."
+msgstr ""
+
+#: app/scripts/components/project/project-create.html:38
+#: app/scripts/components/project/project-manage.html:43
+msgid "Provider certification required by this project"
 msgstr ""
 
 #: app/scripts/components/providers/details/dialog.html:2
@@ -2783,7 +2791,7 @@ msgstr ""
 
 #: app/scripts/components/error/routes.js:25
 #: app/scripts/components/project/projects-list.js:131
-#: app/scripts/components/providers/provider-list.js:175
+#: app/scripts/components/providers/provider-list.js:178
 msgid "Quota has been reached."
 msgstr ""
 
@@ -2896,7 +2904,7 @@ msgstr ""
 msgid "Remove profile"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:69
+#: app/scripts/components/project/project-manage.html:89
 msgid "Remove project"
 msgstr ""
 
@@ -3245,6 +3253,8 @@ msgid "Select caller..."
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-certifications.html:2
+#: app/scripts/components/project/project-create.html:45
+#: app/scripts/components/project/project-manage.html:50
 msgid "Select certifications"
 msgstr ""
 
@@ -3981,7 +3991,7 @@ msgstr ""
 msgid "Update profile"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:43
+#: app/scripts/components/project/project-manage.html:63
 msgid "Update project details"
 msgstr ""
 
@@ -4213,7 +4223,7 @@ msgstr ""
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:66
+#: app/scripts/components/project/project-manage.html:86
 msgid "You can remove this project by pressing the button"
 msgstr ""
 
