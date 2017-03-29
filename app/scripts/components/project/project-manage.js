@@ -5,6 +5,7 @@ class ProjectManageController {
   constructor(projectsService,
               currentStateService,
               customersService,
+              certificationsService,
               WorkspaceService,
               ncUtilsFlash,
               $rootScope,
@@ -13,6 +14,7 @@ class ProjectManageController {
     this.projectsService = projectsService;
     this.currentStateService = currentStateService;
     this.customersService = customersService;
+    this.certificationsService = certificationsService;
     this.WorkspaceService = WorkspaceService;
     this.ncUtilsFlash = ncUtilsFlash;
     this.$rootScope = $rootScope;
@@ -23,23 +25,42 @@ class ProjectManageController {
   $onInit() {
     this.canManage = false;
     this.projectModel = {};
-    this.currentStateService.getCustomer().then(customer => {
-      this.customer = customer;
-    });
-    this.currentStateService.getProject().then(project => {
-      this.project = project;
-      this.projectModel = angular.copy(project);
-    });
-    this.customersService.isOwnerOrStaff().then(canManage => {
-      this.canManage = canManage;
-    });
+    this.loading = true;
+    this.$q.all([
+      this.currentStateService.getCustomer().then(customer => {
+        this.customer = customer;
+      }),
+      this.currentStateService.getProject().then(project => {
+        this.project = project;
+        this.projectModel = angular.copy(project);
+      }),
+      this.customersService.isOwnerOrStaff().then(canManage => {
+        this.canManage = canManage;
+      }),
+      this.certificationsService.getAll().then(certifications => {
+        this.certifications = certifications;
+      }),
+    ]).then(() => {
+      this.projectCertifications = angular.copy(this.project.certifications);
+    }).finally(() => this.loading = false);
   }
 
   saveProject() {
     if (this.ProjectForm.$invalid) {
       return this.$q.reject();
     }
-    return this.projectsService.$update(null, this.project.url, this.projectModel).then(project => {
+    return this.$q.all([
+      this.updateProject(),
+      this.updateCertifications(),
+    ]);
+  }
+
+  updateProject() {
+    return this.projectsService.updateProject(this.project.url, {
+      name: this.projectModel.name,
+      description: this.projectModel.description,
+    }).then(response => {
+      const project = response.data;
       this.ncUtilsFlash.success(gettext('Project has been updated.'));
       // TODO: Migrate to Redux and make code DRY
       this.currentStateService.setProject(project);
@@ -54,6 +75,19 @@ class ProjectManageController {
     }, response => {
       this.errors = response.data;
     });
+  }
+
+  updateCertifications() {
+    function mapItems(items) {
+      return items.map(item => ({url: item.url}));
+    }
+    const oldItems = mapItems(this.project.certifications);
+    const newItems = mapItems(this.projectCertifications);
+    if (angular.equals(oldItems, newItems)) {
+      return this.$q.resolve();
+    } else {
+      return this.projectsService.updateCertifications(this.project.url, newItems);
+    }
   }
 
   removeProject() {
