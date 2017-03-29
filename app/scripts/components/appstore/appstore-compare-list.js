@@ -12,6 +12,7 @@ export default AppstoreCompareList;
 function AppstoreCompareListController(
   defaultPriceListItemsService,
   baseControllerListClass,
+  resourceUtils,
   $filter) {
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({
@@ -23,6 +24,30 @@ function AppstoreCompareListController(
     afterGetList: function() {
       this.tableOptions = this.getTableOptions();
     },
+    getUserFilter: function() {
+      return {
+        name: 'resource_type',
+        choices: [
+          {
+            title: resourceUtils.formatResourceType({ resource_type: 'Amazon.Instance' }),
+            value: 'Amazon.Instance',
+            // chosen: true,
+          },
+          {
+            title: resourceUtils.formatResourceType({ resource_type: 'DigitalOcean.Droplet' }),
+            value: 'DigitalOcean.Droplet'
+          },
+          {
+            title: resourceUtils.formatResourceType({ resource_type: 'OpenStackTenant.Instance' }),
+            value: 'OpenStackTenant.Instance'
+          },
+          {
+            title: resourceUtils.formatResourceType({ resource_type: 'OpenStackTenant.Volume' }),
+            value: 'OpenStackTenant.Volume'
+          },
+        ]
+      };
+    },
     getTableOptions: function() {
       return {
         searchFieldName: 'name',
@@ -33,7 +58,7 @@ function AppstoreCompareListController(
             title: gettext('Provider'),
             className: 'all',
             render: function(row) {
-              return row.resource_type || 'N/A';
+              return `<img src="${resourceUtils.getIcon(row)}" title="${row.resource_type}" class="img-xs m-r-xs"> ${row.resource_type}`;
             }
           },
           {
