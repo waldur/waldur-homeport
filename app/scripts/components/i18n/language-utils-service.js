@@ -1,7 +1,8 @@
 // @ngInject
 export default class LanguageUtilsService {
-  constructor($translate, ENV) {
+  constructor($translate, $http, ENV) {
     this.$translate = $translate;
+    this.$http = $http;
     this.ENV = ENV;
   }
 
@@ -12,6 +13,7 @@ export default class LanguageUtilsService {
   setCurrentLanguage(language) {
     this.current = language;
     this.$translate.use(language.code);
+    this.$http.defaults.headers.common['Accept-Language'] = language.code;
   }
 
   checkLanguage() {
