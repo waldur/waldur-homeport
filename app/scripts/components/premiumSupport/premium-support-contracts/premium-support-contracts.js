@@ -12,7 +12,8 @@ function ContractsListController(
   premiumSupportContractsService,
   currentStateService,
   $stateParams,
-  $uibModal) {
+  $uibModal,
+  $state) {
   var controllerScope = this;
   var ResourceController = baseControllerListClass.extend({
     init: function() {
@@ -42,7 +43,17 @@ function ContractsListController(
           },
         ],
         rowActions: this.getRowActions(),
+        tableActions: this.getTableActions(),
       };
+    },
+    getTableActions: function() {
+      return [
+        {
+          title: gettext('Create'),
+          iconClass: 'fa fa-plus',
+          callback: $state.go('appstore.premiumSupport'),
+        }
+      ];
     },
     getRowActions: function() {
       return [
