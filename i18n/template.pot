@@ -246,7 +246,7 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:311
+#: app/scripts/components/appstore/appstore-providers-service.js:53
 msgid "All provider quotas have reached limit."
 msgstr ""
 
@@ -1395,7 +1395,7 @@ msgstr ""
 msgid "Instance has been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:332
+#: app/scripts/components/appstore/appstore-store.js:287
 msgid "Instance is not configured."
 msgstr ""
 
@@ -2466,7 +2466,7 @@ msgstr ""
 msgid "Please select projects where usage of the provider is permitted."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:342
+#: app/scripts/components/appstore/appstore-store.js:297
 msgid "Please specify {fields}."
 msgstr ""
 
@@ -2726,7 +2726,7 @@ msgstr ""
 msgid "Provider has resources. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:309
+#: app/scripts/components/appstore/appstore-providers-service.js:50
 msgid "Provider is in erred state."
 msgstr ""
 
@@ -2739,7 +2739,7 @@ msgstr ""
 msgid "Provider package is not defined."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:316
+#: app/scripts/components/appstore/appstore-providers-service.js:64
 msgid "Provider quota have reached threshold."
 msgstr ""
 
@@ -2778,7 +2778,7 @@ msgstr ""
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:41
+#: app/scripts/components/appstore/appstore-store.js:42
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
@@ -3340,7 +3340,7 @@ msgstr ""
 msgid "Send notification"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:394
+#: app/scripts/components/appstore/appstore-store.js:349
 msgid "Server error occurred."
 msgstr ""
 
