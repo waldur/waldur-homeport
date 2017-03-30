@@ -1,4 +1,5 @@
 import AppStoreUtilsService from './appstore-utils';
+import AppstoreProvidersService from './appstore-providers-service';
 import { AppStoreHeaderController, appstoreHeader } from './appstore-header';
 import categorySelectorTabs from './category-selector-tabs';
 import appstoreCategorySelector from './category-selector';
@@ -11,6 +12,7 @@ import AppstoreResourceLoader from './appstore-resource-loader';
 
 export default module => {
   module.service('AppStoreUtilsService', AppStoreUtilsService);
+  module.service('AppstoreProvidersService', AppstoreProvidersService);
   module.controller('AppStoreHeaderController', AppStoreHeaderController);
   module.directive('appstoreHeader', appstoreHeader);
   module.component('categorySelectorTabs', categorySelectorTabs);

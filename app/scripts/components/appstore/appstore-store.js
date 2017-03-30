@@ -29,7 +29,8 @@ function AppStoreController(
   resourceUtils,
   coreUtils,
   AppstoreFieldConfiguration,
-  AppstoreResourceLoader) {
+  AppstoreResourceLoader,
+  AppstoreProvidersService) {
   var controllerScope = this;
   var Controller = baseControllerAddClass.extend({
     enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
@@ -55,13 +56,10 @@ function AppStoreController(
 
     configureStepNumber: 4,
     fields: [],
-    quotaThreshold: 0.8,
 
     init:function() {
       this.service = resourcesService;
       this.controllerScope = controllerScope;
-      this.coreUtils = coreUtils;
-      this.$state = $state;
       this._super();
     },
     activate:function() {
@@ -75,7 +73,7 @@ function AppStoreController(
         if (ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'resource')) {
           $state.go('errorPage.limitQuota');
         }
-        let link = vm.$state.href('organization.providers', {uuid: vm.currentCustomer.uuid});
+        let link = $state.href('organization.providers', {uuid: vm.currentCustomer.uuid});
         vm.providerManagementMessage = coreUtils.templateFormatter(
           gettext('You can change that in <a href="{link}">provider management</a>.'),
         { link: link });
@@ -233,27 +231,27 @@ function AppStoreController(
       vm.renderStore = false;
       vm.loadingProviders = true;
 
-      vm.loadProjectWithServices().then(function() {
-        for (var j = 0; j < categories.length; j++) {
-          var category = categories[j];
-          vm.categoryServices[category.name] = [];
-          for (var i = 0; i < vm.currentProject.services.length; i++) {
-            var service = vm.currentProject.services[i];
-            service.warning = vm.getServiceDisabledReason(service) ||
-                              vm.getServiceWarningMessage(service);
-            service.enabled = !vm.getServiceDisabledReason(service);
-            if (category.services && (category.services.indexOf(service.type) + 1)) {
-              vm.categoryServices[category.name].push(service);
+      currentStateService.getProject().then(function(project) {
+        vm.currentProject = project;
+        AppstoreProvidersService.loadServices(project).then(function() {
+          for (var j = 0; j < categories.length; j++) {
+            var category = categories[j];
+            vm.categoryServices[category.name] = [];
+            for (var i = 0; i < vm.currentProject.services.length; i++) {
+              var service = vm.currentProject.services[i];
+              if (category.services && (category.services.indexOf(service.type) + 1)) {
+                vm.categoryServices[category.name].push(service);
+              }
             }
+            if (vm.categoryServices[category.name].length > 0) {
+              vm.categories.push(category);
+            }
+            vm.categoryServices[category.name].sort(function(a, b) {
+              return a.enabled < b.enabled;
+            });
           }
-          if (vm.categoryServices[category.name].length > 0) {
-            vm.categories.push(category);
-          }
-          vm.categoryServices[category.name].sort(function(a, b) {
-            return a.enabled < b.enabled;
-          });
-        }
-        vm.setCategoryFromParams();
+          vm.setCategoryFromParams();
+        });
       }).finally(function() {
         vm.loadingProviders = false;
       });
@@ -269,51 +267,6 @@ function AppStoreController(
             return;
           }
         }
-      }
-    },
-    loadProjectWithServices: function() {
-      var vm = this;
-      return currentStateService.getProject().then(function(project) {
-        vm.currentProject = project;
-        return joinService.getAll({
-          project_uuid: project.uuid,
-          field: ['url', 'quotas']
-        }).then(function(services) {
-          if (services.length === 0) {
-            return;
-          }
-          angular.forEach(services, function(service) {
-            var quotas = service.quotas.filter(function(quota) {
-              return quota.limit !== -1 && quota.usage >= (quota.limit * vm.quotaThreshold);
-            });
-            service.reachedThreshold = quotas.length > 0;
-            quotas = service.quotas.filter(function(quota) {
-              return quota.limit !== -1 && quota.usage >= quota.limit;
-            });
-            service.reachedLimit = quotas.length === service.quotas.length && quotas.length > 0;
-          });
-          var details = services.reduce(function(result, service) {
-            result[service.url] = service;
-            return result;
-          }, {});
-          angular.forEach(vm.currentProject.services, function(service) {
-            var detail = details[service.url];
-            service.reachedThreshold = detail.reachedThreshold;
-            service.reachedLimit = detail.reachedLimit;
-          });
-        });
-      });
-    },
-    getServiceDisabledReason: function(service) {
-      if (service.state === 'Erred') {
-        return gettext('Provider is in erred state.');
-      } else if (service.reachedLimit) {
-        return gettext('All provider quotas have reached limit.');
-      }
-    },
-    getServiceWarningMessage: function(service) {
-      if (service.reachedThreshold) {
-        return gettext('Provider quota have reached threshold.');
       }
     },
     canSave: function() {

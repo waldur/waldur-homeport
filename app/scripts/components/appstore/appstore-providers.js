@@ -13,7 +13,6 @@ const appstoreProviders = {
       this.$stateParams = $stateParams;
       this.AppStoreUtilsService = AppStoreUtilsService;
       this.coreUtils = coreUtils;
-
     }
 
     $onInit() {
