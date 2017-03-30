@@ -1,4 +1,5 @@
 import { templateParser, parseQuotasUsage, parseComponents } from '../utils';
+import { templateComparator } from './openstack-template';
 
 // @ngInject
 export default class openstackTenantChangePackageService {
@@ -71,7 +72,10 @@ export default class openstackTenantChangePackageService {
     return this.packageTemplatesService.getAll({
       service_settings_uuid: context.tenant.service_settings_uuid
     }).then(templates => angular.extend(context, {
-      templates: templates.map(templateParser).filter(this.checkTemplate.bind(this, context))
+      templates: templates
+        .map(templateParser)
+        .filter(this.checkTemplate.bind(this, context))
+        .sort(templateComparator)
     }));
   }
 
