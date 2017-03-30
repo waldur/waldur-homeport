@@ -56,7 +56,7 @@ export default function baseResourceListController(
             render: function(row) {
               return vm.renderResourceState(row);
             }
-          }
+          },
         ],
         tableActions: this.getTableActions(),
         rowActions: function(row) {
@@ -73,7 +73,13 @@ export default function baseResourceListController(
         uuid: row.uuid,
         resource_type: row.resource_type
       });
-      return ncUtils.renderLink(href, img + ' ' + (row.name || '&mdash;'));
+      var link = ncUtils.renderLink(href, img + ' ' + (row.name || '&mdash;'));
+      return link + ' ' + this.getLinkState(row);
+    },
+    getLinkState: function(row) {
+      var index = this.findIndexById(row);
+      return '<resource-link-state resource="controller.list[{index}]"></resource-state>'
+        .replace('{index}', index);
     },
     renderResourceState: function(row) {
       var index = this.findIndexById(row);
@@ -174,7 +180,7 @@ export default function baseResourceListController(
       'resource_type', 'latitude', 'longitude',
       'service_name', 'service_uuid', 'customer', 'service_settings_state',
       'service_settings_error_message', 'service_settings_uuid', 'security_groups',
-      'description'
+      'description', 'is_link_valid',
     ],
     getMarkers: function() {
       var items = this.controllerScope.list.filter(function hasCoordinates(item) {

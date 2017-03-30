@@ -47,12 +47,25 @@ export default function actionUtilsService(
   };
 
   this.formatChoices = function(field, items) {
-    const formatter = item => field.formatter ?
-                              field.formatter($filter, item) :
-                              item[field.display_name_field];
+    function valueFormatter(item) {
+      if (field.valueFormatter) {
+        return field.valueFormatter(item);
+      } else {
+        return item[field.value_field];
+      }
+    }
+
+    function displayFormatter(item) {
+      if (field.formatter) {
+        return field.formatter($filter, item);
+      } else {
+        return item[field.display_name_field];
+      }
+    }
+
     return items.map(item => ({
-      value: item[field.value_field],
-      display_name: formatter(item)
+      value: valueFormatter(item),
+      display_name: displayFormatter(item)
     }));
   };
 

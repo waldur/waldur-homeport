@@ -1,9 +1,8 @@
-import template from './provider-list.html';
-
 const providersList = {
   controller: ProviderListController,
   controllerAs: 'ListController',
-  template: template,
+  // eslint-disable-next-line quotes
+  template: `<div class="wrapper wrapper-content" ng-include="'views/partials/filtered-list.html'"></div>`,
 };
 
 export default providersList;
@@ -130,13 +129,16 @@ function ProviderListController(
                   }
                 }.bind(this.controllerScope),
 
-                isDisabled: function() {
-                  return !this.canUserManageService;
+                isDisabled: function(service) {
+                  return !this.canUserManageService || service.shared;
                 }.bind(this.controllerScope),
 
-                tooltip: function() {
+                tooltip: function(service) {
                   if (!this.canUserManageService) {
                     return gettext('Only customer owner or staff can unlink provider.');
+                  }
+                  if (service.shared) {
+                    return gettext('Can\'t unlink system provider.');
                   }
                 }.bind(this.controllerScope),
               }

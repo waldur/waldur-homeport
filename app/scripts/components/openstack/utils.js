@@ -12,7 +12,12 @@ const parseQuotas = listToDict(
   item => item.limit
 );
 
-const parseComponents = listToDict(
+export const parseQuotasUsage = listToDict(
+  item => parseQuotaName(item.name),
+  item => item.usage
+);
+
+export const parseComponents = listToDict(
   item => parseQuotaName(item.type),
   item => item.amount
 );

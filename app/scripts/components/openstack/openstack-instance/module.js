@@ -1,4 +1,4 @@
-import { openstackInstanceSummary } from './openstack-instance-summary';
+import openstackInstanceSummary from './openstack-instance-summary';
 import openstackInstanceCheckoutSummary from './openstack-instance-checkout-summary';
 import OpenStackInstanceConfig from './openstack-instance-config';
 import openstackInstanceSecurityGroupsField from './openstack-instance-security-groups-field';

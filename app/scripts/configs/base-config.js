@@ -178,9 +178,8 @@ angular.module('ncsaas')
     countsCacheTime: 60, // seconds
     enablePurchaseCostDisplay: true,
 
-    resourcesTimerInterval: 7, // seconds
-    countersTimerInterval: 7, // seconds
-    providersTimerInterval: 7, // seconds
+    resourcesTimerInterval: 30, // seconds
+    countersTimerInterval: 30, // seconds
 
     ownerCanManageCustomer: true,
 

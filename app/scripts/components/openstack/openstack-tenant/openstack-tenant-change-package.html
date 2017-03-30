@@ -15,6 +15,7 @@
           <strong><span translate>Current VPC package</span>:</strong>
           {{ ::$ctrl.template | formatPackage }}
         </p>
+
         <p class="text-danger"
            ng-repeat="error in $ctrl.errors.package"
            ng-bind="error"></p>

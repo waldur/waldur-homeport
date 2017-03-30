@@ -128,13 +128,13 @@ export const authLogin = {
       this.errors = {};
       return this.authService.signin(this.user.username, this.user.password)
                  .then(this.loginSuccess.bind(this))
-                 .catch(this.loginError.bind(this));
+                 .catch(response => this.errors = response.data);
     }
 
     authenticate(provider) {
       return this.authService.authenticate(provider)
                  .then(this.loginSuccess.bind(this))
-                 .catch(this.loginError.bind(this));
+                 .catch(response => this.errors = response.data);
     }
 
     loginSuccess() {
@@ -151,15 +151,6 @@ export const authLogin = {
       });
     }
 
-    loginError(response) {
-      this.errors = [];
-      if (response.status != 400 && +response.status > 0) {
-        this.errors[response.status] = response.statusText + ' ' + gettext('Authentication failed');
-      } else {
-        this.errors = response.data;
-      }
-    }
-
     getErrors() {
       if (!this.errors) {
         return '';
@@ -167,8 +158,10 @@ export const authLogin = {
 
       let prettyErrors = [];
       if (angular.isString(this.errors)) {
-        prettyErrors.push(this.errors);
-        return prettyErrors;
+        return [this.errors];
+      }
+      if (angular.isString(this.errors.detail)) {
+        return [this.errors.detail];
       }
       for (let key in this.errors) {
         if (this.errors.hasOwnProperty(key)) {
