@@ -61,7 +61,7 @@ export default function AppstoreProvidersService($filter, joinService) {
   function getServiceWarningMessage(service) {
     let messages = [];
     if (service.reachedThreshold) {
-      messages.push($filter('translate')(gettext('Provider quota have reached threshold.')));
+      messages.push($filter('translate')(gettext('Provider quota has reached threshold.')));
     }
     if (service.validation_state === 'WARNING') {
       messages.push(service.validation_message);
