@@ -2,7 +2,12 @@
     <div class="row">
         <div class="col-md-9">
 
-            <appstore-providers appstore="AppStore" loading="AppStore.loadingProviders"></appstore-providers>
+            <appstore-providers
+                ng-if="!AppStore.selectedResourceType"
+                loading="AppStore.loadingProviders"
+                services="AppStore.getServices()"
+                on-select="AppStore.setService(service)">
+            </appstore-providers>
 
             <div class="ibox" ng-if="AppStore.selectedResourceType">
                 <div class="ibox-title">
