@@ -19,7 +19,6 @@ function AppStoreController(
   ncUtils,
   $q,
   $state,
-  $uibModal,
   resourcesService,
   joinService,
   ncUtilsFlash,
@@ -73,10 +72,6 @@ function AppStoreController(
         if (ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'resource')) {
           $state.go('errorPage.limitQuota');
         }
-        let link = $state.href('organization.providers', {uuid: vm.currentCustomer.uuid});
-        vm.providerManagementMessage = coreUtils.templateFormatter(
-          gettext('You can change that in <a href="{link}">provider management</a>.'),
-        { link: link });
       });
     },
     setCategory: function(category) {
@@ -99,12 +94,16 @@ function AppStoreController(
       this.selectedService = null;
       this.fields = [];
 
-      var services = this.categoryServices[this.selectedCategory.name];
-
+      var services = this.getServices();
       this.renderStore = services && services.length > 0;
 
       if (services && services.length == 1) {
         this.setService(services[0]);
+      }
+    },
+    getServices: function() {
+      if (this.selectedCategory) {
+        return this.categoryServices[this.selectedCategory.name];
       }
     },
     isVirtualMachinesSelected: function() {
@@ -112,16 +111,6 @@ function AppStoreController(
     },
     isApplicationSelected: function() {
       return this.selectedCategory.name == ENV.appStoreCategories[ENV.Applications].name;
-    },
-    showServiceDetails: function(service) {
-      $uibModal.open({
-        component: 'providerDialog',
-        size: 'lg',
-        resolve: {
-          provider_uuid: () => service.uuid,
-          provider_type: () => service.type,
-        }
-      });
     },
     setService: function(service) {
       if (!service.enabled) {
@@ -233,7 +222,7 @@ function AppStoreController(
 
       currentStateService.getProject().then(function(project) {
         vm.currentProject = project;
-        AppstoreProvidersService.loadServices(project).then(function() {
+        return AppstoreProvidersService.loadServices(project).then(function() {
           for (var j = 0; j < categories.length; j++) {
             var category = categories[j];
             vm.categoryServices[category.name] = [];
@@ -292,7 +281,9 @@ function AppStoreController(
         }
       }
       if (fields.length > 0) {
-        return coreUtils.templateFormatter(gettext('Please specify {fields}.'), {fields: fields.join(', ').toLowerCase()});
+        return coreUtils.templateFormatter(gettext('Please specify {fields}.'), {
+          fields: fields.join(', ').toLowerCase()
+        });
       }
     },
     getResourceUrl: function() {

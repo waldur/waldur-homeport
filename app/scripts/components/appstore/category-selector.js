@@ -30,25 +30,28 @@ const appstoreCategorySelector = {
     }
 
     $onInit() {
-      this.loadProject();
-      this.loadOfferings();
+      this.loading = true;
+      this.$q.all([
+        this.loadProject(),
+        this.loadOfferings(),
+      ]).finally(() => this.loading = false);
     }
 
     loadProject() {
       this.selectProject = this.resolve.selectProject;
       if (this.resolve.selectProject) {
-        this.currentStateService.getCustomer().then(customer => {
+        return this.currentStateService.getCustomer().then(customer => {
           this.projects = customer.projects;
         });
       } else {
-        this.currentStateService.getProject().then(project => {
+        return this.currentStateService.getProject().then(project => {
           this.selectedProject = project;
         });
       }
     }
 
     loadOfferings() {
-      this.loadCustomOfferings().then(customOfferings => {
+      return this.loadCustomOfferings().then(customOfferings => {
         let offerings = customOfferings.concat(this.ENV.offerings);
 
         offerings = offerings.filter(item =>
