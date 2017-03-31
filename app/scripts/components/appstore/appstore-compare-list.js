@@ -13,39 +13,34 @@ function AppstoreCompareListController(
   defaultPriceListItemsService,
   baseControllerListClass,
   resourceUtils,
-  $filter) {
+  $filter,
+  $state,
+  ENV) {
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = defaultPriceListItemsService;
+      this.category = $state.params.category;
       this._super();
     },
     afterGetList: function() {
       this.tableOptions = this.getTableOptions();
     },
     getUserFilter: function() {
+      var choices = [];
+      for (var i in ENV.resourceCategory) {
+        if (ENV.resourceCategory[i] === this.category) {
+          choices.push({
+            title: resourceUtils.formatResourceType({ resource_type: i }),
+            value: i,
+          });
+        }
+      }
+
       return {
         name: 'resource_type',
-        choices: [
-          {
-            title: resourceUtils.formatResourceType({ resource_type: 'Amazon.Instance' }),
-            value: 'Amazon.Instance',
-            // chosen: true,
-          },
-          {
-            title: resourceUtils.formatResourceType({ resource_type: 'DigitalOcean.Droplet' }),
-            value: 'DigitalOcean.Droplet'
-          },
-          {
-            title: resourceUtils.formatResourceType({ resource_type: 'OpenStackTenant.Instance' }),
-            value: 'OpenStackTenant.Instance'
-          },
-          {
-            title: resourceUtils.formatResourceType({ resource_type: 'OpenStackTenant.Volume' }),
-            value: 'OpenStackTenant.Volume'
-          },
-        ]
+        choices: choices
       };
     },
     getTableOptions: function() {

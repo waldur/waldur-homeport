@@ -23,8 +23,8 @@ const contractDetailsDialog = {
         this.plan = {
           description: response.description,
           terms: response.terms,
-          base_rate: this.$filter('defaultCurrency')(response.base_rate, this.ENV.currency),
-          hour_rate: this.$filter('defaultCurrency')(response.hour_rate, this.ENV.currency)
+          base_rate: response.base_rate,
+          hour_rate: response.hour_rate
         };
       });
     }

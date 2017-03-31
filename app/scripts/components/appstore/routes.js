@@ -70,7 +70,7 @@ export default function appstoreRoutes($stateProvider) {
     })
 
     .state('compare', {
-      url: '/compare/',
+      url: '/compare/:category/',
       templateUrl: 'views/project/base.html',
       abstract: true,
       data: {

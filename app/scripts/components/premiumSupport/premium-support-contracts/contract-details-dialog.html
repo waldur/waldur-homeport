@@ -20,8 +20,8 @@
       <tr>
         <td>{{ ::$ctrl.plan.description }}</td>
         <td>{{ ::$ctrl.plan.terms }}</td>
-        <td>{{ ::$ctrl.plan.base_rate }}</td>
-        <td>{{ ::$ctrl.plan.hour_rate }}</td>
+        <td>{{ ::$ctrl.plan.base_rate | defaultCurrency }}</td>
+        <td>{{ ::$ctrl.plan.hour_rate | defaultCurrency }}</td>
       </tr>
     </tbody>
   </table>
