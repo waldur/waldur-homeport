@@ -17,7 +17,7 @@ angular.module('ncsaas')
     serviceIcon: 'static/images/icons/icon_openstack_small.png',
     dashboardEventsCacheTime: 60, // seconds
     showImport: false,
-    defaultErrorMessage: gettext('Reason unknown, please contact support'),
+    defaultErrorMessage: gettext('Reason unknown, please contact support.'),
 
     // build version
     buildId: 'develop',
@@ -157,7 +157,7 @@ angular.module('ncsaas')
       'payments',
       'premiumSupport',
       'notifications',
-      'sizing',
+      'cost-planning',
       'alerts'
     ],
     authenticationMethods: [
@@ -178,9 +178,8 @@ angular.module('ncsaas')
     countsCacheTime: 60, // seconds
     enablePurchaseCostDisplay: true,
 
-    resourcesTimerInterval: 7, // seconds
-    countersTimerInterval: 7, // seconds
-    providersTimerInterval: 7, // seconds
+    resourcesTimerInterval: 30, // seconds
+    countersTimerInterval: 30, // seconds
 
     ownerCanManageCustomer: true,
 

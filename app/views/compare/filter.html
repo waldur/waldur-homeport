@@ -1,4 +1,4 @@
-<a ui-sref="appstore.vms">back to store</a>
+<a ui-sref="appstore.vms" translate>back to store</a>
 
 <div class="xs-hide">
   <ul class="sort-list">
@@ -13,14 +13,14 @@
 <div class="xs-show">
   <div class="details-table__row">
     <div class="details-table__key">
-      Filter by type
+      <span translate>Filter by type</span>
     </div>
     <div class="details-table__value">
       <select
           ng-options="key as key for key in entityList.servicesTypes"
           ng-model="key"
           ng-change="entityList.filterByResourceType(key)">
-          <option value="">All</option>
+        <option value=""><span translate>All</span></option>
       </select>
     </div>
   </div>

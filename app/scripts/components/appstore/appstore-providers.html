@@ -1,45 +1,42 @@
-<div ng-if="AppStore.loadingProviders">
+<div ng-if="$ctrl.loading">
     <loading-spinner/>
 </div>
 
-<div class="ibox-content" ng-if="!AppStore.loadingProviders && !AppStore.renderStore">
+<div class="ibox-content" ng-if="!$ctrl.loading && !$ctrl.services.length">
     <p>
-        There are no working {{category.label.toLowerCase()}} providers available for the current project.
+        <span>{{ ::$ctrl.noProvidersMessage }}</span>
     </p>
-    <p visible="providers">
-        You can change that in
-        <a ui-sref="organization.providers({uuid: AppStore.currentCustomer.uuid})">provider management</a>.
-    </p>
+    <p visible="providers" ng-bind-html="$ctrl.providerManagementMessage"></p>
 </div>
 
-<div class="ibox" ng-if="!AppStore.loadingProviders && AppStore.renderStore && !AppStore.selectedResourceType">
+<div class="ibox" ng-if="!$ctrl.loading && $ctrl.services.length">
     <div class="ibox-title">
         <h5 translate>Select provider</h5>
     </div>
     <div class="ibox-content">
         <div class="row">
             <div class="col-md-4"
-                 ng-repeat="service in AppStore.categoryServices[AppStore.selectedCategory.name]">
+                 ng-repeat="service in $ctrl.services">
                 <div class="ibox" uib-tooltip="{{ service.warning }}">
                     <div class="ibox-content product-box cursor-pointer">
                         <div class="product-desc" ng-class="{disabled: !service.enabled}">
-                            <a class="product-name">
+                            <a class="product-name elipsis">
                                 <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>
                                 {{ ::service.name }}
                             </a>
                         </div>
 
-                        <div class="text-center m-b-sm m-t-xl"
+                        <div class="text-center m-b-xl m-t-xl"
                              ng-class="{disabled: !service.enabled}">
-                            <img ng-src="{{ AppStore.getServiceIcon(service.type) }}" class="img-lg">
+                            <provider-icon type="service.type" size="img-lg"/>
                         </div>
                         <div class="product-desc" ng-class="{disabled: !service.enabled}">
-                            <a class="btn btn-sm btn-outline btn-primary" ng-click="AppStore.showServiceDetails(service)">
+                            <a class="btn btn-sm btn-outline btn-primary" ng-click="$ctrl.showDetails(service)">
                                 <span translate>Details</span>
                                 <i class="fa fa-eye"></i>
                             </a>
                             <div class="pull-right">
-                                <a class="btn btn-sm btn-outline btn-primary" ng-click="AppStore.setService(service)">
+                                <a class="btn btn-sm btn-outline btn-primary" ng-click="$ctrl.onSelect({service: service})">
                                     <span translate>Select</span>
                                     <i class="fa fa-long-arrow-right"></i>
                                 </a>

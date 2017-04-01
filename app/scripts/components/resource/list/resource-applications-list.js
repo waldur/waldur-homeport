@@ -16,15 +16,15 @@ function ProjectApplicationsTabController(BaseProjectResourcesTabController, ENV
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = 'You have no applications yet.';
-      options.noMatchesText = 'No applications found matching filter.';
+      options.noDataText = gettext('You have no applications yet.');
+      options.noMatchesText = gettext('No applications found matching filter.');
       return options;
     },
     getImportTitle: function() {
-      return 'Import application';
+      return gettext('Import application');
     },
     getCreateTitle: function() {
-      return 'Add application';
+      return gettext('Add application');
     }
   });
   controllerScope.__proto__ = new ResourceController();

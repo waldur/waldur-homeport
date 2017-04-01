@@ -135,7 +135,7 @@ function ProviderSettingsController(
       );
     },
     onSaveSuccess: function(service) {
-      ncUtilsFlash.success(gettext('Provider has been updated'));
+      ncUtilsFlash.success(gettext('Provider has been updated.'));
       $rootScope.$broadcast('refreshProviderList');
 
       if (service) {
@@ -148,7 +148,7 @@ function ProviderSettingsController(
         message += (service.options[name] ? service.options[name].label : name) + ': ' + response.data[name];
       }
       if (message) {
-        ncUtilsFlash.error('Unable to save provider. ' + message);
+        ncUtilsFlash.error(gettext('Unable to save provider.') + ' ' + message);
       }
     },
     hasChanged: function() {

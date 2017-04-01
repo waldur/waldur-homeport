@@ -15,8 +15,10 @@ export default function openstackInstanceCheckoutSummary() {
 
 // @ngInject
 class SummaryController {
-  constructor(OpenStackSummaryService) {
+  constructor(OpenStackSummaryService, coreUtils, $filter) {
     this.OpenStackSummaryService = OpenStackSummaryService;
+    this.coreUtils = coreUtils;
+    this.$filter = $filter;
     this.init();
   }
 
@@ -26,6 +28,10 @@ class SummaryController {
     this.OpenStackSummaryService.getServiceComponents(this.model.service)
       .then(components => {
         this.components = components;
+        this.componentsMessage =
+          this.coreUtils.templateFormatter(
+            gettext('Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package.'),
+            { serviceName: this.model.service.name });
       })
       .finally(() => {
         this.loading = false;

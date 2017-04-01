@@ -59,7 +59,7 @@ function CustomerUsersListController(
     getTableOptions: function() {
       var vm = this;
       return {
-        noDataText: gettext('You have no team members yet'),
+        noDataText: gettext('You have no team members yet.'),
         noMatchesText: gettext('No members found matching filter.'),
         searchFieldName: 'full_name',
         columns: [
@@ -104,7 +104,7 @@ function CustomerUsersListController(
         return item.role === roleName;
       });
       if (filteredProjects.length === 0) {
-        return 'No projects are assigned to this role';
+        return gettext('No projects are assigned to this role.');
       }
       return filteredProjects.map(function(item) {
         var projectName = item.name;

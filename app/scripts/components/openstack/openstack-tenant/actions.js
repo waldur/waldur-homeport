@@ -15,7 +15,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: gettext('Tenant has been updated')
+        successMessage: gettext('Tenant has been updated.')
       }),
       pull: {
         title: gettext('Synchronise')
@@ -39,6 +39,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         enabled: true,
         type: 'form',
         component: 'openstackTenantChangePackageDialog',
+        useResolve: true,
         dialogSize: 'lg'
       },
       create_security_group: {

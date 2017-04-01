@@ -55,6 +55,13 @@
         if (response) {
           scope.quotaName = response.name;
           scope.quotaUsage = response.usage.join("/");
+          scope.quotaTooltipMessage = coreUtils.templateFormatter(
+            gettext('You have reached the limit of your {quotaName} quota ({quotaUsage}). To update your current plan, please visit <a href="{link}">plans page</a>.'),
+            {
+              quotaName: scope.quotaName,
+              quotaUsage: scope.quotaUsage,
+              link: scope.plansLink
+            });
         }
         scope.classes.disabled = scope.enable;
       });

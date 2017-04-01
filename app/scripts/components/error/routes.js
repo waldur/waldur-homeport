@@ -22,7 +22,7 @@ export default function errorRoutes($stateProvider) {
       url: '403/',
       template: '<error403></error403>',
       data: {
-        pageTitle: gettext('Quota limit exceeded')
+        pageTitle: gettext('Quota has been reached.')
       }
     });
 }

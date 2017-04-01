@@ -1,51 +1,55 @@
 // @ngInject
-function formatCrontab(cronService, baseFrequency, $filter) {
+function formatCrontab(cronService, baseFrequency, $filter, coreUtils) {
   return function(crontab) {
     const schedule = cronService.fromCron(crontab, false);
     const { base, minuteValues, hourValues, dayOfMonthValues, dayValues, monthValues } = schedule;
 
-    const formatTime = () => `at ${hourValues}:${minuteValues}`;
+    const formatTime = () => `${hourValues}:${minuteValues}`;
     const formatDay = () => $filter('cronDayName')(dayValues);
     const formatMonth = () => $filter('cronMonthName')(monthValues);
     const formatNumeral = () => $filter('cronNumeral')(dayOfMonthValues);
 
     switch(base) {
     case baseFrequency.minute:
-      return 'Every minute';
+      return $filter('translate')(gettext('Every minute'));
 
     case baseFrequency.hour:
       if (minuteValues) {
-        return `Every hour at ${minuteValues} past the hour`;
+        return coreUtils.templateFormatter(gettext('Every hour at {minuteValues} past the hour'),
+          {minuteValues: minuteValues});
       } else {
-        return 'Every hour';
+        return $filter('translate')(gettext('Every hour'));
       }
 
     case baseFrequency.day:
       if (angular.isDefined(hourValues)) {
-        return `Every day ${formatTime()}`;
+        return `${$filter('translate')(gettext('Every day at'))} ${formatTime()}`;
       } else {
-        return 'Every day';
+        return $filter('translate')(gettext('Every day'));
       }
 
     case baseFrequency.week:
       if (angular.isDefined(dayValues)) {
-        return `Every week on ${formatDay()} ${formatTime()}`;
+        return coreUtils.templateFormatter(gettext('Every week on {day} at {time}'),
+          { day: formatDay(), time: formatTime() });
       } else {
-        return 'Every week';
+        return $filter('translate')(gettext('Every week'));
       }
 
     case baseFrequency.month:
       if (angular.isDefined(dayOfMonthValues)) {
-        return `Every month on the ${formatNumeral()} ${formatTime()}`;
+        return coreUtils.templateFormatter(gettext('Every month on the {days} at {time}'),
+          { days: formatNumeral(), time: formatTime() });
       } else {
-        return 'Every month';
+        return $filter('translate')(gettext('Every month'));
       }
 
     case baseFrequency.year:
       if (angular.isDefined(dayOfMonthValues)) {
-        return `Every month on the ${formatNumeral()} of ${formatMonth()} ${formatTime()}`;
+        return coreUtils.templateFormatter(gettext('Every month on the {days} of {months} at {time}'),
+          { days: formatNumeral(), months: formatMonth(), time: formatTime() });
       } else {
-        return 'Every year';
+        return $filter('translate')(gettext('Every year'));
       }
 
     default:

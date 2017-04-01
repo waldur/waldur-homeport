@@ -59,7 +59,7 @@ const appstoreOffering = {
         this.$state.go('offeringDetails', {uuid: offering.uuid});
       }, response => {
         this.errors = response.data;
-        this.ncUtilsFlash.error('Unable to create request for a turnkey solution.');
+        this.ncUtilsFlash.error(gettext('Unable to create request for a turnkey solution.'));
       });
     }
   }

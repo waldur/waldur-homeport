@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h3 class="modal-title">{{ $ctrl.type | titleCase }} types</h3>
+    <h3 class="modal-title">{{ $ctrl.dialogTitle | translate }}</h3>
 </div>
 <div class="modal-body event-types-dialog">
     <div ng-repeat="item in $ctrl.types">
@@ -11,7 +11,7 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default" ng-click="$ctrl.dismiss()">
+    <button class="btn btn-default" ng-click="$ctrl.dismiss()" translate>
         Cancel
     </button>
 </div>

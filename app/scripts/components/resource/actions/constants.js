@@ -14,7 +14,7 @@ export const defaultEditAction = {
   enabled: true,
   type: 'form',
   method: 'PUT',
-  successMessage: gettext('Resource has been updated'),
+  successMessage: gettext('Resource has been updated.'),
   fields: {
     name: {
       label: gettext('Name'),

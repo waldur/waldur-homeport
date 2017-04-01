@@ -49,7 +49,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: gettext('Security group has been updated')
+        successMessage: gettext('Security group has been updated.')
       }),
       pull: {
         title: gettext('Synchronise')

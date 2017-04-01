@@ -1,5 +1,5 @@
 <div class="details-table__row">
-  <div class="details-table__key">
+  <div class="details-table__key" translate>
     Code
   </div>
   <div class="details-table__value">
@@ -8,7 +8,7 @@
 </div>
 
 <div class="details-table__row">
-  <div class="details-table__key">
+  <div class="details-table__key" translate>
     State
   </div>
   <div class="details-table__value">
@@ -17,5 +17,5 @@
 </div>
 
 <div ng-if="expandableElement.state == 'Erred'" class="error-message">
-    {{ ::expandableElement.error_message || expandableList.defaultErrorMessage }}
+    {{ (expandableElement.error_message || expandableList.defaultErrorMessage) | translate }}
 </div>

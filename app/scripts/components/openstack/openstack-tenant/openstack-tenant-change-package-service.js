@@ -1,4 +1,5 @@
-import { templateParser } from '../utils';
+import { templateParser, parseQuotasUsage, parseComponents } from '../utils';
+import { templateComparator } from './openstack-template';
 
 // @ngInject
 export default class openstackTenantChangePackageService {
@@ -6,44 +7,45 @@ export default class openstackTenantChangePackageService {
   // * loadData - returns promise with fields {package, template, templates}
   // * saveData - accepts dictionary with fields {tenant, package, template, newTemplate}
 
-  constructor($q, $state, packageTemplatesService,
-              openstackPackagesService, issuesService, ncUtilsFlash, ISSUE_IDS) {
+  constructor(
+    $q,
+    resourcesService,
+    packageTemplatesService,
+    openstackPackagesService,
+    ncUtilsFlash) {
     this.$q = $q;
-    this.$state = $state;
+    this.resourcesService = resourcesService;
     this.packageTemplatesService = packageTemplatesService;
     this.openstackPackagesService = openstackPackagesService;
-    this.issuesService = issuesService;
     this.ncUtilsFlash = ncUtilsFlash;
-    this.ISSUE_IDS = ISSUE_IDS;
   }
 
   loadData(tenant) {
-    let context = {tenant};
-    return this.loadTenantPackage(context)
+    let context = { tenant };
+    return this.loadTenantQuotasUsage(context)
+          .then(this.loadTenantPackage.bind(this))
           .then(this.loadPackageTemplate.bind(this))
           .then(this.loadTemplates.bind(this));
   }
 
   saveData(context) {
-    if (this.compareTemplates(context.newTemplate, context.template)) {
-      return this.createIssue(context).then(issue => {
-        this.ncUtilsFlash.success('Request to change tenant package has been created.');
-        return this.$state.go('support.detail', {uuid: issue.uuid});
-      }).catch(response => {
-        this.ncUtilsFlash.error('Unable to create request to change tenant package.');
-        return this.$q.reject(response);
-      });
-    } else {
-      return this.extendPackage(context).then(() => {
-        this.ncUtilsFlash.success('Tenant package has been upgraded.');
-      }).catch(response => {
-        this.ncUtilsFlash.error('Unable to upgrade tenant package.');
-        return this.$q.reject(response);
-      });
-    }
+    return this.changePackage(context).then(() => {
+      this.ncUtilsFlash.success(gettext('Tenant package has been changed.'));
+    }).catch(response => {
+      this.ncUtilsFlash.error(gettext('Unable to change tenant package.'));
+      return this.$q.reject(response);
+    });
   }
 
   // Private API section
+
+  loadTenantQuotasUsage(context) {
+    return this.resourcesService.$get(null, null, context.tenant.url)
+    .then(tenant => angular.extend(context, {
+      quotas: parseQuotasUsage(tenant.quotas)
+    }));
+  }
+
   loadTenantPackage(context) {
     return this.openstackPackagesService.getList({
       tenant_uuid: context.tenant.uuid
@@ -70,40 +72,28 @@ export default class openstackTenantChangePackageService {
     return this.packageTemplatesService.getAll({
       service_settings_uuid: context.tenant.service_settings_uuid
     }).then(templates => angular.extend(context, {
-      templates: templates.map(templateParser).filter(
-        template => template.uuid !== context.template.uuid
-      )
+      templates: templates
+        .map(templateParser)
+        .filter(this.checkTemplate.bind(this, context))
+        .sort(templateComparator)
     }));
   }
 
-  compareTemplates(a, b) {
-    return a.cores < b.cores || a.ram < b.ram || a.disk < b.disk;
+  checkTemplate(context, template) {
+    // Exclude current package template
+    if (template.uuid === context.template.uuid) {
+      return false;
+    }
+
+    // Allow to change package only if current usage of all quotas <= new package quotas
+    const components = parseComponents(template.components);
+    return (
+      context.quotas.cores <= components.cores &&
+      context.quotas.ram <= components.ram &&
+      context.quotas.disk <= components.disk);
   }
 
-  createIssue(context) {
-    return this.issuesService.createIssue({
-      summary: this.formatIssueSummary(context),
-      description: this.formatIssueDescription(context),
-      resource: context.tenant.url,
-      is_reported_manually: true,
-      type: this.ISSUE_IDS.CHANGE_REQUEST
-    });
-  }
-
-  extendPackage(context) {
-    return this.openstackPackagesService.extend(context.package.uuid, context.newTemplate.uuid);
-  }
-
-  formatIssueSummary(context) {
-    return `Please downgrade tenant '${context.tenant.name}' to VPC '${context.newTemplate.name}'`;
-  }
-
-  formatIssueDescription(context) {
-    // Indentation is not used here in order to format description correctly
-    return `
-Tenant name: ${context.tenant.name};
-tenant UUID: ${context.tenant.uuid};
-requested VPC template name: ${context.newTemplate.name};
-requested VPC template UUID: ${context.newTemplate.uuid}`;
+  changePackage(context) {
+    return this.openstackPackagesService.change(context.package.uuid, context.newTemplate.uuid);
   }
 }

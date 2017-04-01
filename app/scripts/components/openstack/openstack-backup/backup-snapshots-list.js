@@ -26,8 +26,8 @@ function backupSnapshotsListController(
     getTableOptions: function() {
       var options = this._super();
       options.disableSearch = true;
-      options.noDataText = 'No snapshots yet.';
-      options.noMatchesText = 'No snapshots found matching filter.';
+      options.noDataText = gettext('No snapshots yet.');
+      options.noMatchesText = gettext('No snapshots found matching filter.');
       options.columns = [
         {
           title: gettext('Name'),

@@ -8,9 +8,7 @@
         <p ng-if="!$ctrl.model.size">
             <span translate>No items yet.</span>
         </p>
-        <p ng-if="$ctrl.components">
-            Note that this volume is charged as part of <strong>{{ $ctrl.model.service.name }}</strong> package.
-        </p>
+        <p ng-if="$ctrl.components" ng-bind-html="::$ctrl.componentsMessage"></p>
         <table class="table table-bordered" ng-if="$ctrl.model.size">
           <tbody>
             <tr ng-if="$ctrl.model.name">

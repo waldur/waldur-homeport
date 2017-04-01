@@ -41,11 +41,6 @@ function InvitationsListController(
         this.isOwnerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
         this.tableOptions = this.getTableOptions();
         fn();
-        this.defaultFilter = {
-          name: 'state',
-          title: gettext('Pending'),
-          value: 'pending'
-        };
       }).finally(() => {
         this.loading = false;
       });
@@ -62,6 +57,7 @@ function InvitationsListController(
           {
             title: gettext('Pending'),
             value: 'pending',
+            chosen: true,
           },
           {
             title: gettext('Canceled'),
@@ -80,7 +76,7 @@ function InvitationsListController(
     },
     getTableOptions: function() {
       return {
-        noDataText: gettext('You have no team invitations yet'),
+        noDataText: gettext('You have no team invitations yet.'),
         noMatchesText: gettext('No invitations found matching filter.'),
         enableOrdering: true,
         columns: [
@@ -155,7 +151,7 @@ function InvitationsListController(
           iconClass: 'fa fa-plus',
           callback: this.openDialog.bind(this),
           disabled: !this.isOwnerOrStaff,
-          titleAttr: !this.isOwnerOrStaff && 'Only customer owner or staff can invite users.'
+          titleAttr: !this.isOwnerOrStaff && gettext('Only customer owner or staff can invite users.')
         }
       ];
     },
@@ -183,7 +179,7 @@ function InvitationsListController(
             },
             tooltip: function(row) {
               if (row.state !== 'pending') {
-                return 'Only pending invitation can be canceled.';
+                return gettext('Only pending invitation can be canceled.');
               }
             }
           },
@@ -196,7 +192,7 @@ function InvitationsListController(
             },
             tooltip: function(row) {
               if (row.state !== 'pending') {
-                return 'Only pending invitation can be sent again.';
+                return gettext('Only pending invitation can be sent again.');
               }
             }
           }

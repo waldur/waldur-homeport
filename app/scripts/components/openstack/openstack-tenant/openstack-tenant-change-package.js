@@ -1,34 +1,22 @@
 import template from './openstack-tenant-change-package.html';
-import { openstackTemplateColumns } from './openstack-template';
-
-export default function openstackTenantChangePackageDialog() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: DialogController,
-    controllerAs: '$ctrl',
-    bindToController: true
-  };
-}
+import { openstackTemplateColumns, openstackTemplateFilters } from './openstack-template';
 
 // @ngInject
 class DialogController {
-  constructor($scope, $filter, openstackTenantChangePackageService) {
-    this.$filter = $filter;
+  constructor(openstackTenantChangePackageService) {
     this.service = openstackTenantChangePackageService;
-    this.tenant = $scope.resource;
-    this.dismiss = $scope.$dismiss;
-    this.close = $scope.$close;
-    this.init();
   }
 
-  init() {
+  $onInit() {
+    this.tenant = this.resolve.resource;
     this.newTemplate = null;
     this.columns = openstackTemplateColumns;
+    this.filterOptions = openstackTemplateFilters;
     this.templates = [];
     this.loading = true;
     this.service.loadData(this.tenant).then(context => {
       this.package = context.package;
+      this.quotas = context.quotas;
       this.template = context.template;
       this.templates = context.templates;
     }).catch(response => {
@@ -59,3 +47,15 @@ class DialogController {
     });
   }
 }
+
+const openstackTenantChangePackageDialog = {
+  template: template,
+  controller: DialogController,
+  bindings: {
+    resolve: '<',
+    dismiss: '&',
+    close: '&',
+  }
+};
+
+export default openstackTenantChangePackageDialog;

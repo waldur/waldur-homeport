@@ -4,15 +4,15 @@
             <b class="icon" ng-class="::item[0]"></b>
             <span class="left-padding" ng-bind-html="::item[1]"></span>
             <ul>
-                <li ng-repeat="message in item[2]">{{message}}</li>
+                <li ng-repeat="message in item[2]">{{ message }}</li>
             </ul>
         </div>
     </div>
 </div>
 <div ng-if="!HelpDetails.model">
-    <h2>No contents</h2>
+    <h2 translate>No contents</h2>
 </div>
 <div class="clear"></div>
 <p>
-    <a ui-sref="help.list">Back to help topics</a>
+    <a ui-sref="help.list" translate>Back to help topics</a>
 </p>

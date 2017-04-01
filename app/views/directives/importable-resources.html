@@ -1,30 +1,30 @@
 <div ng-show="noResources && selectedService.name">
-    <h4 class="app-title centered">
+    <h4 class="app-title centered" translate>
         There are no resources available for import in this provider.
     </h4>
 </div>
 <div ng-show="resources.length" class="profile-content">
-    <h3 class="app-title">Resources</h3>
+    <h3 class="app-title" translate>Resources</h3>
 
     <div class="white-box list-box">
         <ul class="object-list">
             <li class="list-item list-header">
-                <div class="additional-cell icon-header">Type</div>
+                <div class="additional-cell icon-header"><span translate>Type</span></div>
                 <div class="additional-cell resource-name">
-                    <a class="list-sort">Name</a>
+                    <a class="list-sort" translate>Name</a>
                 </div>
                 <div class="additional-cell">
-                    <a class="list-sort">Details</a>
+                    <a class="list-sort" translate>Details</a>
                 </div>
                 <div class="additional-cell"
                      ng-click="toggleSelectAll()">
                      <a ng-if="!selectAll">
                          <i class="icon fa-square-o"></i>
-                         Select all
+                         <span translate>Select all</span>
                      </a>
                      <a ng-if="selectAll">
                          <i class="icon fa-check-square-o"></i>
-                         Unselect all
+                         <span translate>Unselect all</span>
                      </a>
                 </div>
             </li>
@@ -42,7 +42,7 @@
                     {{ resource.name }}
                 </div>
                 <div class="additional-cell">
-                    {{ resource.details }}
+                    {{ resource.details | translate }}
                 </div>
                 <import-resource-button
                     resource="resource"

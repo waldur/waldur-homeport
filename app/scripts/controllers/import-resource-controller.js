@@ -12,13 +12,12 @@
       'currentStateService',
       'usersService',
       '$state',
-      '$filter',
-      '$scope',
       '$q',
       'ncUtils',
       'ncUtilsFlash',
       '$rootScope',
       '$stateParams',
+      'coreUtils',
       ImportResourceController]);
 
   function ImportResourceController(
@@ -31,13 +30,12 @@
     currentStateService,
     usersService,
     $state,
-    $filter,
-    $scope,
     $q,
     ncUtils,
     ncUtilsFlash,
     $rootScope,
-    $stateParams
+    $stateParams,
+    coreUtils
     ) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -193,7 +191,7 @@
         servicesService.getList(query, url).then(function(tenants) {
           this.tenants = tenants;
         }.bind(this), function() {
-          ncUtilsFlash.warning('Unable to get list of tenants.');
+          ncUtilsFlash.warning(gettext('Unable to get list of tenants.'));
         });
       },
 
@@ -214,7 +212,7 @@
           service, controllerScope.currentProject.uuid).then(function(resources) {
           controllerScope.importedResources = resources;
         }, function() {
-          ncUtilsFlash.warning('Unable to get list of imported resources');
+          ncUtilsFlash.warning(gettext('Unable to get list of imported resources.'));
         });
       },
 
@@ -242,7 +240,7 @@
           }
         }, function(){
           controllerScope.noResources = true;
-          ncUtilsFlash.warning('Unable to get list of resources for service');
+          ncUtilsFlash.warning(gettext('Unable to get list of resources for service.'));
         });
       },
 
@@ -268,7 +266,9 @@
           resource.status = 'success';
           vm.toggleResource(resource);
         }, function() {
-          ncUtilsFlash.warning('Unable to import resource ' + resource.name);
+          var message = coreUtils.templateFormatter(gettext('Unable to import resource {resourceName}.'),
+            { resourceName: resource.name });
+          ncUtilsFlash.warning(message);
           resource.status = 'failed';
         });
       },

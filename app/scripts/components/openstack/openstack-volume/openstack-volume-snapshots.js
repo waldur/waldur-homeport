@@ -39,8 +39,8 @@ function VolumeSnapshotsListController(
     },
     getTableOptions: function() {
       var options = this._super();
-      options.noDataText = 'You have no snapshots yet';
-      options.noMatchesText = 'No snapshots found matching filter.';
+      options.noDataText = gettext('You have no snapshots yet.');
+      options.noMatchesText = gettext('No snapshots found matching filter.');
       return options;
     },
     getFilter: function() {

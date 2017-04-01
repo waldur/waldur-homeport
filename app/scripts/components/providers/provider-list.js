@@ -1,9 +1,8 @@
-import template from './provider-list.html';
-
 const providersList = {
   controller: ProviderListController,
   controllerAs: 'ListController',
-  template: template,
+  // eslint-disable-next-line quotes
+  template: `<div class="wrapper wrapper-content" ng-include="'views/partials/filtered-list.html'"></div>`,
 };
 
 export default providersList;
@@ -105,13 +104,13 @@ function ProviderListController(
 
                 tooltip: function(service) {
                   if (service.shared) {
-                    return 'You cannot remove shared provider';
+                    return gettext('You cannot remove shared provider.');
                   }
                   if (!this.canUserManageService) {
-                    return 'Only customer owner or staff can remove provider';
+                    return gettext('Only customer owner or staff can remove provider.');
                   }
                   if (service.resources_count > 0) {
-                    return 'Provider has resources. Please remove them first';
+                    return gettext('Provider has resources. Please remove them first.');
                   }
                 }.bind(this.controllerScope),
               },
@@ -122,7 +121,7 @@ function ProviderListController(
 
                 callback: function(service) {
                   var vm = this.controllerScope;
-                  var confirmDelete = confirm('Are you sure you want to unlink provider and all related resources?');
+                  var confirmDelete = confirm(gettext('Are you sure you want to unlink provider and all related resources?'));
                   if (confirmDelete) {
                     vm.unlinkService(service).then(function() {
                       vm.afterInstanceRemove(service);
@@ -130,13 +129,16 @@ function ProviderListController(
                   }
                 }.bind(this.controllerScope),
 
-                isDisabled: function() {
-                  return !this.canUserManageService;
+                isDisabled: function(service) {
+                  return !this.canUserManageService || service.shared;
                 }.bind(this.controllerScope),
 
-                tooltip: function() {
+                tooltip: function(service) {
                   if (!this.canUserManageService) {
-                    return 'Only customer owner or staff can unlink provider.';
+                    return gettext('Only customer owner or staff can unlink provider.');
+                  }
+                  if (service.shared) {
+                    return gettext('Can\'t unlink system provider.');
                   }
                 }.bind(this.controllerScope),
               }
@@ -170,10 +172,10 @@ function ProviderListController(
       var quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'service');
       let title;
       if (!this.canUserManageService) {
-        title = 'Only customer owner or staff can create provider.';
+        title = gettext('Only customer owner or staff can create provider.');
       }
       if (quotaReached) {
-        title = 'Quota has been reached.';
+        title = gettext('Quota has been reached.');
       }
       return [
         {

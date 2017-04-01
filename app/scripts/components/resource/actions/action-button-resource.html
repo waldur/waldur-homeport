@@ -9,7 +9,7 @@
             <a translate>Loading actions</a>
         </li>
         <li role="menuitem" ng-show="!$ctrl.loading && !$ctrl.actions">
-            <a translate>There are no actions</a>
+            <a translate>There are no actions.</a>
         </li>
         <li ng-repeat="(name, action) in $ctrl.actions" title="{{ action.reason }}">
             <a ng-click="$ctrl.onClick(name, action)"

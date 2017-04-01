@@ -11,14 +11,17 @@ import openstackFlavorsService from './openstack-flavors-service';
 import openstackPrices from './openstack-prices';
 import openstackTenantPrices from './openstack-tenant-prices';
 import filtersModule from './filters';
+import eventsConfig from './events';
+import costPlanningConfig from './cost-planning';
 
 export default module => {
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(tabsConfig);
   module.run(eventsConfig);
-  module.directive('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
-  module.directive('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
+  module.run(costPlanningConfig);
+  module.component('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
+  module.component('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
   module.component('openstackTenantSummary', openstackTenantSummary);
   module.service('packageTemplatesService', packageTemplatesService);
   module.service('openstackPackagesService', openstackPackagesService);
@@ -32,26 +35,4 @@ export default module => {
 // @ngInject
 function fieldsConfig(AppstoreFieldConfigurationProvider) {
   AppstoreFieldConfigurationProvider.register('OpenStack.Tenant', OpenStackTenantConfig);
-}
-
-function parsePackageEvent(event) {
-  return {
-    name: event.resource_extra_configuration.package_name,
-    category: event.resource_extra_configuration.package_category,
-    ram: event.resource_extra_configuration.ram,
-    cores: event.resource_extra_configuration.cores,
-    disk: event.resource_extra_configuration.storage,
-  };
-}
-
-// @ngInject
-function eventsConfig(eventsService, $filter) {
-  eventsService.pushPostprocessor(event => {
-    if (event.resource_extra_configuration && event.resource_extra_configuration.package_name) {
-      const resource_configuration = $filter('formatPackage')(parsePackageEvent(event));
-      return angular.extend({}, event, { resource_configuration });
-    } else {
-      return event;
-    }
-  });
 }

@@ -12,7 +12,9 @@ export default projectCreate;
 function ProjectAddController(
   projectsService,
   currentStateService,
+  certificationsService,
   baseControllerAddClass,
+  $q,
   $rootScope,
   $state,
   ncUtils,
@@ -27,14 +29,31 @@ function ProjectAddController(
       this.detailsState = 'project.details';
       this.redirectToDetailsPage = true;
       this.project = this.instance;
+      this.certifications = [];
+      this.projectCertifications = [];
     },
     activate: function() {
-      currentStateService.getCustomer().then(customer => {
+      this.loading = true;
+      $q.all([
+        this.loadCustomer(),
+        this.loadCertificates()
+      ]).finally(() => this.loading = false);
+    },
+    loadCustomer: function() {
+      return currentStateService.getCustomer().then(customer => {
         this.project.customer = customer.url;
         if (ncUtils.isCustomerQuotaReached(customer, 'project')) {
           $state.go('errorPage.limitQuota');
         }
       });
+    },
+    loadCertificates: function() {
+      return certificationsService.getAll().then(certifications => {
+        this.certifications = certifications;
+      });
+    },
+    beforeSave: function() {
+      this.project.certifications = this.projectCertifications.map(item => ({url: item.url}));
     },
     afterSave: function(project) {
       $rootScope.$broadcast('refreshProjectList', {

@@ -1,7 +1,7 @@
 // @ngInject
 export default function actionUtilsService(
   ncUtilsFlash, $rootScope, HttpUtils, $http, $q, $uibModal, $filter, ncUtils,
-  resourcesService, ActionConfiguration) {
+  resourcesService, ActionConfiguration, coreUtils) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return resourcesService.getOption(model.url).then(response => {
@@ -47,12 +47,25 @@ export default function actionUtilsService(
   };
 
   this.formatChoices = function(field, items) {
-    const formatter = item => field.formatter ?
-                              field.formatter($filter, item) :
-                              item[field.display_name_field];
+    function valueFormatter(item) {
+      if (field.valueFormatter) {
+        return field.valueFormatter(item);
+      } else {
+        return item[field.value_field];
+      }
+    }
+
+    function displayFormatter(item) {
+      if (field.formatter) {
+        return field.formatter($filter, item);
+      } else {
+        return item[field.display_name_field];
+      }
+    }
+
     return items.map(item => ({
-      value: item[field.value_field],
-      display_name: formatter(item)
+      value: valueFormatter(item),
+      display_name: displayFormatter(item)
     }));
   };
 
@@ -77,14 +90,15 @@ export default function actionUtilsService(
     let confirmTextSuffix = custom && custom.delete_message || '';
     if (name === 'destroy') {
       var confirmText = (model.state === 'Erred')
-        ? 'Are you sure you want to delete a {resource_type} in an Erred state?' +
-          ' A cleanup attempt will be performed if you choose so. {confirmTextSuffix}'
-        : 'Are you sure you want to delete a {resource_type}? {confirmTextSuffix}';
+        ?  coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}.'),
+          { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix })
+        : coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType}? {confirmTextSuffix}.'),
+        { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix });
       return confirm(confirmText
         .replace('{resource_type}', model.resource_type)
         .replace('{confirmTextSuffix}', confirmTextSuffix));
     } else {
-      return confirm('Are you sure? This action cannot be undone.');
+      return confirm(gettext('Are you sure? This action cannot be undone.'));
     }
   };
 
@@ -99,7 +113,7 @@ export default function actionUtilsService(
         }
         vm.handleActionSuccess(action);
       } else if (response.status === 204) {
-        ncUtilsFlash.success('Resource has been deleted');
+        ncUtilsFlash.success(gettext('Resource has been deleted.'));
         controller.afterInstanceRemove(resource);
       } else {
         vm.handleActionSuccess(action);
@@ -111,9 +125,9 @@ export default function actionUtilsService(
   };
 
   this.handleActionSuccess = function(action) {
-    var template = action.successMessage || 'Request to {action} has been accepted';
-    var message = template.replace('{action}', action.title.toLowerCase());
-    ncUtilsFlash.success(message);
+    var template = action.successMessage ||
+        coreUtils.templateFormatter(gettext('Request to {action} has been accepted.'), { action: action.title.toLowerCase() });
+    ncUtilsFlash.success(template);
   };
 
   this.openActionDialog = function(controller, resource, name, action) {

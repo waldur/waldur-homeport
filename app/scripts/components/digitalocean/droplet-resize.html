@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h3 class="modal-title">Resize droplet</h3>
+    <h3 class="modal-title" translate>Resize droplet</h3>
 </div>
 <div class="modal-body">
     <div ng-if="loading">
@@ -11,13 +11,13 @@
         <div ng-if="action.enabled">
             <div class="form-group">
                 <p class="form-control-static">
-                    <strong>Current size:</strong>
+                    <strong><span translate>Current size</span>: </strong>
                     {{ formatSize(resource) }}
                 </p>
             </div>
 
             <div class="form-group">
-                <label class="control-label">New size:</label>
+                <label class="control-label"><span translate>New size</span>:</label>
                 <ui-select ng-model="options.newSize" theme="bootstrap">
                     <ui-select-match placeholder="{{ 'Select size...' | translate }}">
                         {{ formatSize($select.selected) }}
@@ -38,8 +38,8 @@
                             ng-model="options.resizeType"
                             name="resizeType"
                             value="flexible">
-                        <strong>Flexible</strong>
-                        <p>Increase a droplet's RAM and CPU only (not the storage).</p>
+                        <strong translate>Flexible</strong>
+                        <p translate>Increase a droplet's RAM and CPU only (not the storage).</p>
                     </label>
                 </div>
             </div>
@@ -53,8 +53,8 @@
                             ng-model="options.resizeType"
                             name="resizeType"
                             value="permanent">
-                        <strong>Permanent</strong>
-                        <p>Increase a droplet's RAM, CPU and SSD disk.</p>
+                        <strong translate>Permanent</strong>
+                        <p translate>Increase a droplet's RAM, CPU and SSD disk.</p>
                     </label>
                 </div>
             </div>
@@ -72,6 +72,6 @@
 <div class="modal-footer">
     <button class="btn btn-primary"
        ng-class="{'disabled': !action.enabled || !options.newSize}"
-       submit-button="submitForm()">Submit</button>
-    <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+       submit-button="submitForm()"><span translate>Submit</span></button>
+    <button class="btn btn-default" ng-click="$dismiss()" translate>Cancel</button>
 </div>

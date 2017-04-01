@@ -18,13 +18,14 @@ const issueCreateDialog = {
     resolve: '<'
   },
   controller: class IssueCreateDialogController {
-    constructor(issuesService, $q, $state, ncUtilsFlash, ISSUE_IDS) {
+    constructor(issuesService, $q, $state, ncUtilsFlash, ISSUE_IDS, coreUtils) {
       // @ngInject
       this.service = issuesService;
       this.$q = $q;
       this.$state = $state;
       this.ncUtilsFlash = ncUtilsFlash;
       this.ISSUE_IDS = ISSUE_IDS;
+      this.coreUtils = coreUtils;
     }
 
     $onInit() {
@@ -34,6 +35,7 @@ const issueCreateDialog = {
         this.issueTypeEditable = true;
       }
       this.options = angular.extend({}, DEFAULT_OPTIONS, this.resolve.options);
+      this.emptyFieldMessage = gettext('You did not enter a field.');
     }
 
     save() {
@@ -59,7 +61,7 @@ const issueCreateDialog = {
       this.saving = true;
       return this.service.createIssue(issue).then(issue => {
         this.service.clearAllCacheForCurrentEndpoint();
-        this.ncUtilsFlash.success(`Request ${issue.key} has been created`);
+        this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {requestId} has been created.'), {requestId: issue.key}));
         return this.$state.go('support.detail', {uuid: issue.uuid}).then(() => {
           this.close();
         });

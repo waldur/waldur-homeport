@@ -1,62 +1,4 @@
-<resource-summary-base resource="$ctrl.resource"></resource-summary-base>
-
-<div class="m-b-xs" ng-if="::$ctrl.resource.summary">
-  <dt>
-    <span translate>Summary</span>:</dt>
-  <dd>
-    {{ ::$ctrl.resource.summary }}
-  </dd>
-</div>
-
-<div class="m-b-xs">
-  <dt>
-    <span translate>Access</span>:
-  </dt>
-  <dd>
-    <a ng-if="$ctrl.resource.access_info_url"
-       href="{{ $ctrl.resource.access_info_url }}"
-       target="_blank">
-        <i class="fa fa-external-link"></i>
-        {{ $ctrl.resource.access_info_text }}
-    </a>
-    <span ng-if="!$ctrl.resource.access_info_url">
-      {{ $ctrl.resource.access_info_text }}
-    </span>
-  </dd>
-</div>
-
-<div class="m-b-xs" ng-if="$ctrl.resource.internal_ips">
-  <dt>
-    <span translate>Internal IP</span>:
-  </dt>
-  <dd>
-    <span ng-if="$ctrl.resource.internal_ips.length === 0">&ndash;</span>
-    <span ng-if="$ctrl.resource.internal_ips.length > 0">
-      {{ $ctrl.resource.internal_ips.join(', ') }}
-    </span>
-  </dd>
-</div>
-
-<div class="m-b-xs" ng-if="$ctrl.resource.external_ips">
-  <dt>
-    <span translate>External IP</span>:
-  </dt>
-  <dd>
-    <span ng-if="$ctrl.resource.external_ips.length === 0">&ndash;</span>
-    <span ng-if="$ctrl.resource.external_ips.length > 0">
-      {{ $ctrl.resource.external_ips.join(', ') }}
-    </span>
-  </dd>
-</div>
-
-<div class="m-b-xs" ng-if="$ctrl.resource.key_name">
-  <dt>
-    <span translate>SSH key</span>:
-  </dt>
-  <dd>
-    <span ng-bind="$ctrl.resource.key_name"></span>
-  </dd>
-</div>
+<virtual-machine-summary resource="$ctrl.resource"/>
 
 <div class="m-b-xs" ng-if="$ctrl.resource.security_groups">
   <dt>
@@ -64,14 +6,5 @@
   </dt>
   <dd>
     <security-groups-link security-groups="$ctrl.resource.security_groups"/>
-  </dd>
-</div>
-
-<div class="m-b-xs" ng-if="$ctrl.resource.uptime">
-  <dt>
-    <span translate>Uptime</span>:
-  </dt>
-  <dd>
-    {{ ::$ctrl.resource.uptime }}
   </dd>
 </div>

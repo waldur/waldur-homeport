@@ -9,9 +9,9 @@
             <input type="radio" ng-model="projectSelect" id="source-resource" class="source-switch" value="resource"/>
             <input type="radio" ng-model="projectSelect" id="source-service" class="source-switch" value="service"/>
 
-            <label ng-class="{on: projectSelect === 'project'}" for="source-project">Projects</label>
-            <label ng-class="{on: projectSelect === 'resource'}" for="source-resource">Resources</label>
-            <label ng-class="{on: projectSelect === 'service'}" for="source-service">Providers</label>
+            <label ng-class="{on: projectSelect === 'project'}" for="source-project" translate>Projects</label>
+            <label ng-class="{on: projectSelect === 'resource'}" for="source-resource" translate>Resources</label>
+            <label ng-class="{on: projectSelect === 'service'}" for="source-service" translate>Providers</label>
         </div>
         <div><span class="date_label">Date: </span> <span class="date" ng-bind="currentValues.date"></span></div>
         <ul class="entities">

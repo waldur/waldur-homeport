@@ -22,7 +22,7 @@ function customerUsersDetailsListController(
     },
     getTableOptions: function() {
       return {
-        noDataText: gettext('You have no users yet'),
+        noDataText: gettext('You have no users yet.'),
         noMatchesText: gettext('No users found matching filter.'),
         searchFieldName: 'full_name',
         columns: [

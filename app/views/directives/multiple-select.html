@@ -4,7 +4,7 @@
         ng-class="{'disabled': choice.disabled}">
         <input id="{{ 'checkbox-' + $index }}" type="checkbox" ng-model="choice.selected">
         <label for="{{ 'checkbox-' + $index }}">
-            {{ choice.title }}
+            {{ choice.title | translate }}
             <helpicon class="pull-right" help-text="{{ choice.help_text }}" ng-if="choice.help_text"/>
         </label>
         <small ng-bind="choice.subtitle" ng-if="choice.subtitle"></small>

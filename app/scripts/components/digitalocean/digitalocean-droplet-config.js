@@ -85,7 +85,7 @@ export default {
     user_data: {
       type: 'text',
       label: gettext('User data'),
-      help_text: gettext('Additional data that will be added to instance on provisioning')
+      help_text: gettext('Additional data that will be added to instance on provisioning.')
     }
   },
   watchers: {

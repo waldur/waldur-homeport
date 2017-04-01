@@ -46,7 +46,7 @@
                 <issue-type-select model="$ctrl.issue" field="{name: 'type'}"></issue-type-select>
                 <div class="help-block text-danger"
                      ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.type.$touched) && $ctrl.IssueForm.type.$error.required">
-                    <span translate>You did not enter a field</span>
+                    <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
                     ng-class="{disabled: $ctrl.saving}">
                 <div class="help-block text-danger"
                      ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.summary.$touched) && $ctrl.IssueForm.summary.$error.required">
-                    <span translate>You did not enter a field</span>
+                    <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@
                     ng-class="{disabled: $ctrl.saving}"/>
                 <div class="help-block text-danger"
                      ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
-                    <span translate>You did not enter a field</span>
+                    <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
                 </div>
             </div>
         </div>

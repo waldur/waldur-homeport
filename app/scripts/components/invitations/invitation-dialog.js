@@ -54,10 +54,10 @@ function InvitationDialogController($q, $state, invitationService, ncUtilsFlash,
     vm.submitting = true;
     return createInvite().then(function() {
       vm.close();
-      ncUtilsFlash.success('Invitation has been created.');
+      ncUtilsFlash.success(gettext('Invitation has been created.'));
     }).catch(function(response) {
       vm.errors = response.data;
-      ncUtilsFlash.error('Unable to create invitation.');
+      ncUtilsFlash.error(gettext('Unable to create invitation.'));
     }).finally(function() {
       vm.submitting = false;
     });

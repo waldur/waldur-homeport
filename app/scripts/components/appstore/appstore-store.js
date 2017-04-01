@@ -19,7 +19,6 @@ function AppStoreController(
   ncUtils,
   $q,
   $state,
-  $uibModal,
   resourcesService,
   joinService,
   ncUtilsFlash,
@@ -27,8 +26,10 @@ function AppStoreController(
   priceEstimationService,
   ncServiceUtils,
   resourceUtils,
+  coreUtils,
   AppstoreFieldConfiguration,
-  AppstoreResourceLoader) {
+  AppstoreResourceLoader,
+  AppstoreProvidersService) {
   var controllerScope = this;
   var Controller = baseControllerAddClass.extend({
     enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
@@ -54,7 +55,6 @@ function AppStoreController(
 
     configureStepNumber: 4,
     fields: [],
-    quotaThreshold: 0.8,
 
     init:function() {
       this.service = resourcesService;
@@ -62,7 +62,7 @@ function AppStoreController(
       this._super();
     },
     activate:function() {
-      var vm = this;
+      let vm = this;
       servicesService.getServicesList().then(function(response) {
         vm.servicesMetadata = response;
         vm.setCurrentProject();
@@ -94,12 +94,16 @@ function AppStoreController(
       this.selectedService = null;
       this.fields = [];
 
-      var services = this.categoryServices[this.selectedCategory.name];
-
+      var services = this.getServices();
       this.renderStore = services && services.length > 0;
 
       if (services && services.length == 1) {
         this.setService(services[0]);
+      }
+    },
+    getServices: function() {
+      if (this.selectedCategory) {
+        return this.categoryServices[this.selectedCategory.name];
       }
     },
     isVirtualMachinesSelected: function() {
@@ -107,16 +111,6 @@ function AppStoreController(
     },
     isApplicationSelected: function() {
       return this.selectedCategory.name == ENV.appStoreCategories[ENV.Applications].name;
-    },
-    showServiceDetails: function(service) {
-      $uibModal.open({
-        component: 'providerDialog',
-        size: 'lg',
-        resolve: {
-          provider_uuid: () => service.uuid,
-          provider_type: () => service.type,
-        }
-      });
     },
     setService: function(service) {
       if (!service.enabled) {
@@ -210,7 +204,6 @@ function AppStoreController(
       };
     },
     getServiceTypeDisplay: ncServiceUtils.getTypeDisplay,
-    getServiceIcon: ncServiceUtils.getServiceIcon,
     formatResourceType: resourceUtils.formatResourceType,
     setCurrentProject: function() {
       var vm = this;
@@ -227,27 +220,27 @@ function AppStoreController(
       vm.renderStore = false;
       vm.loadingProviders = true;
 
-      vm.loadProjectWithServices().then(function() {
-        for (var j = 0; j < categories.length; j++) {
-          var category = categories[j];
-          vm.categoryServices[category.name] = [];
-          for (var i = 0; i < vm.currentProject.services.length; i++) {
-            var service = vm.currentProject.services[i];
-            service.warning = vm.getServiceDisabledReason(service) ||
-                              vm.getServiceWarningMessage(service);
-            service.enabled = !vm.getServiceDisabledReason(service);
-            if (category.services && (category.services.indexOf(service.type) + 1)) {
-              vm.categoryServices[category.name].push(service);
+      currentStateService.getProject().then(function(project) {
+        vm.currentProject = project;
+        return AppstoreProvidersService.loadServices(project).then(function() {
+          for (var j = 0; j < categories.length; j++) {
+            var category = categories[j];
+            vm.categoryServices[category.name] = [];
+            for (var i = 0; i < vm.currentProject.services.length; i++) {
+              var service = vm.currentProject.services[i];
+              if (category.services && (category.services.indexOf(service.type) + 1)) {
+                vm.categoryServices[category.name].push(service);
+              }
             }
+            if (vm.categoryServices[category.name].length > 0) {
+              vm.categories.push(category);
+            }
+            vm.categoryServices[category.name].sort(function(a, b) {
+              return a.enabled < b.enabled;
+            });
           }
-          if (vm.categoryServices[category.name].length > 0) {
-            vm.categories.push(category);
-          }
-          vm.categoryServices[category.name].sort(function(a, b) {
-            return a.enabled < b.enabled;
-          });
-        }
-        vm.setCategoryFromParams();
+          vm.setCategoryFromParams();
+        });
       }).finally(function() {
         vm.loadingProviders = false;
       });
@@ -265,51 +258,6 @@ function AppStoreController(
         }
       }
     },
-    loadProjectWithServices: function() {
-      var vm = this;
-      return currentStateService.getProject().then(function(project) {
-        vm.currentProject = project;
-        return joinService.getAll({
-          project_uuid: project.uuid,
-          field: ['url', 'quotas']
-        }).then(function(services) {
-          if (services.length === 0) {
-            return;
-          }
-          angular.forEach(services, function(service) {
-            var quotas = service.quotas.filter(function(quota) {
-              return quota.limit !== -1 && quota.usage >= (quota.limit * vm.quotaThreshold);
-            });
-            service.reachedThreshold = quotas.length > 0;
-            quotas = service.quotas.filter(function(quota) {
-              return quota.limit !== -1 && quota.usage >= quota.limit;
-            });
-            service.reachedLimit = quotas.length === service.quotas.length && quotas.length > 0;
-          });
-          var details = services.reduce(function(result, service) {
-            result[service.url] = service;
-            return result;
-          }, {});
-          angular.forEach(vm.currentProject.services, function(service) {
-            var detail = details[service.url];
-            service.reachedThreshold = detail.reachedThreshold;
-            service.reachedLimit = detail.reachedLimit;
-          });
-        });
-      });
-    },
-    getServiceDisabledReason: function(service) {
-      if (service.state === 'Erred') {
-        return 'Provider is in erred state.';
-      } else if (service.reachedLimit) {
-        return 'All provider quotas have reached limit.';
-      }
-    },
-    getServiceWarningMessage: function(service) {
-      if (service.reachedThreshold) {
-        return 'Provider quota have reached threshold.';
-      }
-    },
     canSave: function() {
       if (!this.instance) {
         return false;
@@ -323,7 +271,7 @@ function AppStoreController(
     },
     getTooltip: function() {
       if (!this.instance) {
-        return 'Instance is not configured';
+        return gettext('Instance is not configured.');
       }
       var fields = [];
       for (var name in this.allFormOptions) {
@@ -333,7 +281,9 @@ function AppStoreController(
         }
       }
       if (fields.length > 0) {
-        return 'Please specify ' + fields.join(', ').toLowerCase();
+        return coreUtils.templateFormatter(gettext('Please specify {fields}.'), {
+          fields: fields.join(', ').toLowerCase()
+        });
       }
     },
     getResourceUrl: function() {
@@ -385,7 +335,7 @@ function AppStoreController(
           }
         }
       } else {
-        message = 'Server error occurred';
+        message = gettext('Server error occurred.');
       }
       ncUtilsFlash.error(message);
     },

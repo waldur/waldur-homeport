@@ -2,7 +2,7 @@
     <span ng-if="::!auth.loginLogo">
         <h1 class="logo-name">{{ ::auth.shortPageTitle }}</h1>
         <h4 ng-if="!auth.isSignupFormVisible">
-            <span translate>Welcome to</span> {{ ::auth.shortPageTitle }}
+            <span>{{ ::auth.pageTitle | translate }}</span>
         </h4>
     </span>
     <span ng-if="::auth.loginLogo">
