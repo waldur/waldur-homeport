@@ -112,13 +112,13 @@ export default function baseResourceListController(
       var disabled, tooltip;
       if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
         disabled = true;
-        tooltip = 'Quota has been reached';
+        tooltip = gettext('Quota has been reached.');
       } else if (!this.projectHasNonSharedService(this.currentProject)) {
         disabled = true;
-        tooltip = 'Import is not possible as there are no personal provider accounts registered.';
+        tooltip = gettext('Import is not possible as there are no personal provider accounts registered.');
       } else {
         disabled = false;
-        tooltip = 'Import resources from the registered provider accounts.';
+        tooltip = gettext('Import resources from the registered provider accounts.');
       }
       return {
         title: this.getImportTitle(),
@@ -137,7 +137,7 @@ export default function baseResourceListController(
       var disabled, tooltip;
       if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
         disabled = true;
-        tooltip = 'Quota has been reached';
+        tooltip = gettext('Quota has been reached.');
       }
       return {
         title: this.getCreateTitle(),
@@ -214,7 +214,7 @@ export default function baseResourceListController(
       var markers = this.getMarkers();
 
       if(!markers) {
-        alert('No virtual machines with coordinates');
+        alert('No virtual machines with coordinates.');
       } else {
         var scope = $rootScope.$new();
         scope.markers = markers;

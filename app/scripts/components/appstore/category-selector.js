@@ -121,8 +121,8 @@ const appstoreCategorySelector = {
           options: {
             title: gettext('Request a new service'),
             descriptionPlaceholder: gettext('Please clarify why do you need it'),
-            descriptionLabel: 'Motivation',
-            summaryLabel: 'Service name'
+            descriptionLabel: gettext('Motivation'),
+            summaryLabel: gettext('Service name'),
           }
         }
       });

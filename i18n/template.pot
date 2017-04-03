@@ -472,7 +472,7 @@ msgstr ""
 msgid "Can't unlink system provider."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.html:51
+#: app/scripts/components/appstore/appstore-store.html:50
 #: app/scripts/components/appstore/category-selector.html:33
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:56
 #: app/scripts/components/customer/customer-create-dialog.html:94
@@ -602,7 +602,7 @@ msgstr ""
 msgid "Company"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.html:62
+#: app/scripts/components/appstore/appstore-store.html:61
 #: app/scripts/components/appstore/routes.js:78
 msgid "Compare flavors"
 msgstr ""
@@ -620,7 +620,7 @@ msgstr ""
 msgid "Components"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.html:16
+#: app/scripts/components/appstore/appstore-store.html:15
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:9
 #: app/scripts/components/openstack/openstack-instance/actions.js:63
 msgid "Configure"
@@ -677,7 +677,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.html:47
+#: app/scripts/components/appstore/appstore-store.html:46
 #: app/scripts/components/customer/customer-issues.js:31
 #: app/scripts/components/issues/issue-create-dialog.js:10
 #: app/scripts/components/offering/appstore-offering.html:16
@@ -1323,12 +1323,20 @@ msgstr ""
 msgid "Import application"
 msgstr ""
 
+#: app/scripts/components/resource/list/resources-list.js:118
+msgid "Import is not possible as there are no personal provider accounts registered."
+msgstr ""
+
 #: app/scripts/components/resource/list/resource-private-clouds-list.js:24
 msgid "Import private cloud"
 msgstr ""
 
 #: app/scripts/components/project/routes.js:178
 msgid "Import resources from provider"
+msgstr ""
+
+#: app/scripts/components/resource/list/resources-list.js:121
+msgid "Import resources from the registered provider accounts."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:59
@@ -1769,6 +1777,10 @@ msgstr ""
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:9
 #: app/scripts/components/premiumSupport/premium-support-summary.html:17
 msgid "Monthly base price"
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector.js:124
+msgid "Motivation"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:27
@@ -2689,7 +2701,7 @@ msgstr ""
 msgid "Projects list"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.html:28
+#: app/scripts/components/appstore/appstore-store.html:27
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:9
 #: app/scripts/components/resource/list/resources-list.js:46
 #: app/scripts/components/resource/summary/resource-summary-base.html:21
@@ -2770,7 +2782,7 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.html:46
+#: app/scripts/components/appstore/appstore-store.html:45
 msgid "Purchase"
 msgstr ""
 
@@ -2796,6 +2808,8 @@ msgstr ""
 #: app/scripts/components/error/routes.js:25
 #: app/scripts/components/project/projects-list.js:131
 #: app/scripts/components/providers/provider-list.js:178
+#: app/scripts/components/resource/list/resources-list.js:115
+#: app/scripts/components/resource/list/resources-list.js:140
 msgid "Quota has been reached."
 msgstr ""
 
@@ -3350,6 +3364,10 @@ msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:79
 msgid "Service"
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector.js:125
+msgid "Service name"
 msgstr ""
 
 #: app/scripts/components/issues/constants.js:4
