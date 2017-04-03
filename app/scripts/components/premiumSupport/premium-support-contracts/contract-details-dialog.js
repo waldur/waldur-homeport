@@ -15,6 +15,7 @@ const contractDetailsDialog = {
     }
 
     $onInit() {
+      this.initialized = false;
       this.plan = null;
       this.dialogTitle = this.coreUtils.templateFormatter(
         gettext('"{planName}" details'),
@@ -26,6 +27,8 @@ const contractDetailsDialog = {
           base_rate: response.base_rate,
           hour_rate: response.hour_rate
         };
+      }).finally(() => {
+        this.initialized = true;
       });
     }
   }

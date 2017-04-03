@@ -10,64 +10,49 @@ export default paymentsList;
 function PaymentsListController(
   baseControllerListClass,
   paymentsService,
-  ENTITYLISTFIELDTYPES,
-  ENV) {
+  $filter,
+  baseResourceListController) {
   var controllerScope = this;
   var PaymentsController = baseControllerListClass.extend({
-    defaultErrorMessage: ENV.defaultErrorMessage,
     init: function() {
       this.service = paymentsService;
       this._super();
 
-      this.entityOptions = {
-        entityData: {
-          noDataText: gettext('No payments yet'),
-          hideTableHead: false,
-          expandable: true
-        },
-        list: [
+      this.tableOptions = {
+        searchFieldName: 'type',
+        noDataText: gettext('No payments yet'),
+        noMatchesText: gettext('No payments found matching filter.'),
+        columns: [
           {
-            type: ENTITYLISTFIELDTYPES.colorState,
-            propertyName: 'state',
-            className: 'visual-status',
-            getClass: function(state) {
-              var classes = {
-                Erred: 'erred',
-                Approved: 'online',
-                Created: 'processing',
-                Cancelled: 'offline'
-              };
-              var cls = classes[state];
-              if (cls == 'processing') {
-                return 'icon fa-refresh fa-spin';
-              } else {
-                return 'status-circle ' + cls;
-              }
+            title: gettext('State'),
+            className: 'all',
+            render: function(row) {
+              return baseResourceListController.renderResourceState(row);
             }
           },
           {
-            name: 'Type',
-            propertyName: 'type'
+            title: gettext('Type'),
+            className: 'all',
+            render: function(row) {
+              return row.type || 'N/A';
+            }
           },
           {
-            name: 'Date',
-            propertyName: 'created',
-            type: ENTITYLISTFIELDTYPES.dateShort,
+            title: gettext('Date'),
+            className: 'all',
+            render: function(row) {
+              return $filter('dateTime')(row.created);
+            },
           },
           {
-            name: 'Amount',
-            propertyName: 'amount',
-            type: ENTITYLISTFIELDTYPES.currency
+            title: gettext('Amount'),
+            className: 'all',
+            render: function(row) {
+              return $filter('defaultCurrency')(row.amount);
+            },
           }
-        ]
+        ],
       };
-      this.expandableOptions = [
-        {
-          isList: false,
-          addItemBlock: false,
-          viewType: 'payment'
-        }
-      ];
     },
     afterGetList: function() {
       this._super();

@@ -9,45 +9,47 @@ export default agreementsList;
 function CustomerAgreementsTabController(
   baseControllerListClass,
   agreementsService,
-  ENTITYLISTFIELDTYPES) {
+  $filter,
+  baseResourceListController) {
   var controllerScope = this;
   var AgreementsController = baseControllerListClass.extend({
     init: function() {
       this.service = agreementsService;
       this._super();
 
-      this.entityOptions = {
-        entityData: {
-          noDataText: gettext('No plans yet'),
-        },
-        list: [
+      this.tableOptions = {
+        searchFieldName: 'plan_name',
+        noDataText: gettext('No plans yet.'),
+        noMatchesText: gettext('No plans found matching filter.'),
+        columns: [
           {
-            type: ENTITYLISTFIELDTYPES.colorState,
-            propertyName: 'state',
-            className: 'visual-status',
-            getClass: function(state) {
-              if (state == 'active') {
-                return 'status-circle online';
-              } else {
-                return 'status-circle offline';
-              }
+            title: gettext('State'),
+            className: 'all',
+            render: function(row) {
+              return baseResourceListController.renderResourceState(row);
             }
           },
           {
-            name: 'Plan name',
-            propertyName: 'plan_name',
+            title: gettext('Plan name'),
+            render: function(row) {
+              return row.plan_name || 'N/A';
+            }
           },
           {
-            name: 'Date',
-            propertyName: 'created',
-            type: ENTITYLISTFIELDTYPES.dateShort,
+            title: gettext('Date'),
+            className: 'all',
+            render: function(row) {
+              return $filter('dateTime')(row.created);
+            },
           },
           {
-            name: 'Monthly price',
-            propertyName: 'plan_price',
-            type: ENTITYLISTFIELDTYPES.currency
+            title: gettext('Price'),
+            className: 'all',
+            render: function(row) {
+              return $filter('defaultCurrency')(row.plan_price);
+            },
           }
-        ]
+        ],
       };
     }
   });

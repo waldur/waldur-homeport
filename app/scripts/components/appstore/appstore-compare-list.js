@@ -1,9 +1,7 @@
-import template from './appstore-compare-list.html';
-
 const AppstoreCompareList = {
   controller: AppstoreCompareListController,
   controllerAs: 'ListController',
-  template: template,
+  templateUrl: 'views/partials/filtered-list.html',
 };
 
 export default AppstoreCompareList;
