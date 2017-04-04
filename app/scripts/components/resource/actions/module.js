@@ -1,4 +1,5 @@
 import HttpUtils from './http-utils';
+import ActionResourceLoader from './action-resource-loader';
 import actionUtilsService from './action-utils-service';
 import actionButtonResource from './action-button-resource';
 import ActionConfiguration from './action-configuration';
@@ -7,6 +8,7 @@ import dialogModule from './dialog/module';
 
 export default module => {
   module.service('HttpUtils', HttpUtils);
+  module.service('ActionResourceLoader', ActionResourceLoader);
   module.service('actionUtilsService', actionUtilsService);
   module.directive('actionButtonResource', actionButtonResource);
   module.provider('ActionConfiguration', ActionConfiguration);

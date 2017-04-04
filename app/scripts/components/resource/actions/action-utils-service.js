@@ -1,7 +1,7 @@
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, HttpUtils, $http, $q, $uibModal, $filter, ncUtils,
-  resourcesService, ActionConfiguration, coreUtils) {
+  ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils,
+  resourcesService, ActionConfiguration, ActionResourceLoader, coreUtils) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return resourcesService.getOption(model.url).then(response => {
@@ -21,56 +21,6 @@ export default function actionUtilsService(
         return result;
       }, {});
     });
-  };
-
-  this.getSelectList = function(fields) {
-    var vm = this;
-    var promises = [];
-    angular.forEach(fields, function(field) {
-      if (field.url) {
-        promises.push(vm.loadChoices(field));
-      }
-    });
-    return $q.all(promises);
-  };
-
-  this.loadChoices = function(field) {
-    return this.loadRawChoices(field).then(items => {
-      let choices = this.formatChoices(field, items);
-      if (field.emptyLabel && !field.required) {
-        choices.unshift({
-          display_name: field.emptyLabel
-        });
-      }
-      field.choices = choices;
-    });
-  };
-
-  this.formatChoices = function(field, items) {
-    function valueFormatter(item) {
-      if (field.valueFormatter) {
-        return field.valueFormatter(item);
-      } else {
-        return item[field.value_field];
-      }
-    }
-
-    function displayFormatter(item) {
-      if (field.formatter) {
-        return field.formatter($filter, item);
-      } else {
-        return item[field.display_name_field];
-      }
-    }
-
-    return items.map(item => ({
-      value: valueFormatter(item),
-      display_name: displayFormatter(item)
-    }));
-  };
-
-  this.loadRawChoices = function(field) {
-    return HttpUtils.getAll(field.url);
   };
 
   this.buttonClick = function(controller, model, name, action) {
@@ -94,9 +44,7 @@ export default function actionUtilsService(
           { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix })
         : coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType}? {confirmTextSuffix}.'),
         { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix });
-      return confirm(confirmText
-        .replace('{resource_type}', model.resource_type)
-        .replace('{confirmTextSuffix}', confirmTextSuffix));
+      return confirm(confirmText);
     } else {
       return confirm(gettext('Are you sure? This action cannot be undone.'));
     }
