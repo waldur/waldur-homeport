@@ -51,7 +51,11 @@ function AppstoreCompareListController(
             title: gettext('Provider'),
             className: 'all',
             render: function(row) {
-              return `<img src="${resourceUtils.getIcon(row)}" title="${row.resource_type}" class="img-xs m-r-xs"> ${row.resource_type}`;
+              var imageSource = resourceUtils.getIcon(row);
+              if (imageSource) {
+                return `<img src="${imageSource}" title="${row.resource_type}" class="img-xs m-r-xs"> ${row.resource_type}`;
+              }
+              return row.resource_type || 'N/A';
             }
           },
           {
