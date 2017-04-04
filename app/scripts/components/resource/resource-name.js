@@ -13,7 +13,7 @@ const resourceName = {
 
     $onInit() {
       this.resourceIcon = this.resourceUtils.getIcon(this.resource);
-      this.resourceType = this.resourceUtils.formatResourceType(this.resource.resource_type);
+      this.resourceType = this.resourceUtils.formatResourceType(this.resource);
     }
   }
 };

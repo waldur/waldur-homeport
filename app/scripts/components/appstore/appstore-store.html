@@ -1,5 +1,10 @@
 <div class="wrapper wrapper-content">
-    <div class="row">
+    <div class="row" ng-if="AppStore.policyErrorMessage">
+        <div class="ibox-content">
+            <p>{{ ::AppStore.policyErrorMessage }}</p>
+        </div>
+    </div>
+    <div class="row" ng-if="!AppStore.policyErrorMessage">
         <div class="col-md-9">
 
             <appstore-providers

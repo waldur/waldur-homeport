@@ -4,6 +4,7 @@ import resourceRoutes from './routes';
 import resourceHeader from './resource-header';
 import resourceName from './resource-name';
 import resourcesService from './resources-service';
+import ResourceProvisionPolicy from './resource-provision-policy';
 import resourceSummaryModule from './summary/module';
 import resourceBreadcrumbsModule from './breadcrumbs/module';
 import resourceStateModule from './state/module';
@@ -20,6 +21,7 @@ export default module => {
   module.component('resourceName', resourceName);
   module.config(resourceRoutes);
   module.service('resourcesService', resourcesService);
+  module.service('ResourceProvisionPolicy', ResourceProvisionPolicy);
   resourceSummaryModule(module);
   resourceBreadcrumbsModule(module);
   resourceStateModule(module);

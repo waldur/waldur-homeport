@@ -6,7 +6,9 @@ export default function baseResourceListController(
   priceEstimationService,
   servicesService,
   currentStateService,
+  usersService,
   projectsService,
+  ResourceProvisionPolicy,
   $uibModal,
   $rootScope,
   $state,
@@ -123,11 +125,9 @@ export default function baseResourceListController(
       return gettext('Import');
     },
     getCreateAction: function() {
-      var disabled, tooltip;
-      if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
-        disabled = true;
-        tooltip = gettext('Quota has been reached.');
-      }
+      const { disabled, errorMessage } = ResourceProvisionPolicy.checkResource(
+        this.currentUser, this.currentCustomer, this.currentProject, this.getCategoryKey()
+      );
       return {
         title: this.getCreateTitle(),
         iconClass: 'fa fa-plus',
@@ -135,7 +135,7 @@ export default function baseResourceListController(
           this.gotoAppstore();
         }.bind(this),
         disabled: disabled,
-        titleAttr: tooltip
+        titleAttr: errorMessage
       };
     },
     getCreateTitle: function() {
@@ -145,6 +145,9 @@ export default function baseResourceListController(
       $state.go(this.getCategoryState(), {
         uuid: this.currentProject.uuid
       });
+    },
+    getCategoryKey: function() {
+      return this.categories[this.category];
     },
     getCategoryState: function() {
       if (this.category === ENV.VirtualMachines) {
@@ -234,6 +237,9 @@ export default function baseResourceListController(
         }),
         currentStateService.getProject().then(function(project) {
           vm.currentProject = project;
+        }),
+        usersService.getCurrentUser().then(function(user) {
+          vm.currentUser = user;
         })
       ]).then(function() {
         vm.tableOptions = vm.getTableOptions();
@@ -241,7 +247,7 @@ export default function baseResourceListController(
           field: vm.rowFields
         });
         if (angular.isDefined(vm.category) && !vm.getFilter().resource_type) {
-          query.resource_category = vm.categories[vm.category];
+          query.resource_category = vm.getCategoryKey();
           vm.updateFilters(filter);
         }
         return fn(query);
@@ -249,7 +255,7 @@ export default function baseResourceListController(
     },
     updateFilters: function(filter) {
       var query = angular.extend({
-        resource_category: this.categories[this.category],
+        resource_category: this.getCategoryKey(),
         customer: currentStateService.getCustomerUuid()
       }, filter);
       angular.forEach(this.service.defaultFilter, function(val, key) {
