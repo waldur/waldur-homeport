@@ -1,5 +1,5 @@
 import template from './openstack-tenant-change-package.html';
-import { openstackTemplateColumns } from './openstack-template';
+import { openstackTemplateColumns, openstackTemplateFilters } from './openstack-template';
 
 // @ngInject
 class DialogController {
@@ -11,6 +11,7 @@ class DialogController {
     this.tenant = this.resolve.resource;
     this.newTemplate = null;
     this.columns = openstackTemplateColumns;
+    this.filterOptions = openstackTemplateFilters;
     this.templates = [];
     this.loading = true;
     this.service.loadData(this.tenant).then(context => {

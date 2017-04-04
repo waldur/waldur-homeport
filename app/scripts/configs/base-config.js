@@ -40,7 +40,6 @@ angular.module('ncsaas')
         key: 'private_clouds',
         state: 'appstore.private_clouds',
         description: gettext('Purchase bulk resource as Virtual Private Clouds (VPC).'),
-        requireOwnerOrStaff: true
       },
       {
         label: gettext('Block storage'),
@@ -75,6 +74,12 @@ angular.module('ncsaas')
       },
     ],
 
+    resourcesTypes: {
+      vms: 'vms',
+      storages: 'storages',
+      private_clouds: 'private_clouds'
+    },
+
     // Index of category inside of appStoreCategories
     AllResources: -1,
     VirtualMachines: 0,
@@ -96,7 +101,6 @@ angular.module('ncsaas')
         icon: 'cloud',
         key: 'private_clouds',
         services: ['OpenStack'],
-        requireOwnerOrStaff: true
       },
       {
         name: gettext('Applications'),
@@ -167,11 +171,6 @@ angular.module('ncsaas')
       'ESTONIAN_ID'
     ],
     estoniaIdLogoutUrl: 'https://openid.ee/auth/logout',
-    resourcesTypes: {
-      vms: 'vms',
-      applications: 'apps',
-      privateClouds: 'private_clouds'
-    },
     featuresVisible: false,
 
     requestTimeout: 1000 * 20,
@@ -182,6 +181,7 @@ angular.module('ncsaas')
     countersTimerInterval: 30, // seconds
 
     ownerCanManageCustomer: true,
+    MANAGER_CAN_MANAGE_TENANTS: false,
 
     roles: {
       owner: gettext('Organization owner'),

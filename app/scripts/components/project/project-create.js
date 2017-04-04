@@ -30,6 +30,7 @@ function ProjectAddController(
       this.redirectToDetailsPage = true;
       this.project = this.instance;
       this.certifications = [];
+      this.projectCertifications = [];
     },
     activate: function() {
       this.loading = true;

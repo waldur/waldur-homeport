@@ -1,8 +1,18 @@
 <div class="wrapper wrapper-content">
-    <div class="row">
+    <div class="row" ng-if="AppStore.policyErrorMessage">
+        <div class="ibox-content">
+            <p>{{ ::AppStore.policyErrorMessage }}</p>
+        </div>
+    </div>
+    <div class="row" ng-if="!AppStore.policyErrorMessage">
         <div class="col-md-9">
 
-            <appstore-providers appstore="AppStore" loading="AppStore.loadingProviders"></appstore-providers>
+            <appstore-providers
+                ng-if="!AppStore.selectedResourceType"
+                loading="AppStore.loadingProviders"
+                services="AppStore.getServices()"
+                on-select="AppStore.setService(service)">
+            </appstore-providers>
 
             <div class="ibox" ng-if="AppStore.selectedResourceType">
                 <div class="ibox-title">
