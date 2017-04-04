@@ -66,19 +66,8 @@ export default function baseResourceListController(
       };
     },
     renderResourceName: function(row) {
-      var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
-        .replace('{src}', resourceUtils.getIcon(row))
-        .replace('{title}', row.resource_type);
-      var href = $state.href('resources.details', {
-        uuid: row.uuid,
-        resource_type: row.resource_type
-      });
-      var link = ncUtils.renderLink(href, img + ' ' + (row.name || '&mdash;'));
-      return link + ' ' + this.getLinkState(row);
-    },
-    getLinkState: function(row) {
       var index = this.findIndexById(row);
-      return '<resource-link-state resource="controller.list[{index}]"></resource-state>'
+      return '<resource-name resource="controller.list[{index}]"></resource-name>'
         .replace('{index}', index);
     },
     renderResourceState: function(row) {
@@ -131,7 +120,7 @@ export default function baseResourceListController(
       };
     },
     getImportTitle: function() {
-      return 'Import';
+      return gettext('Import');
     },
     getCreateAction: function() {
       var disabled, tooltip;
@@ -150,7 +139,7 @@ export default function baseResourceListController(
       };
     },
     getCreateTitle: function() {
-      return 'Create';
+      return gettext('Create');
     },
     gotoAppstore: function() {
       $state.go(this.getCategoryState(), {

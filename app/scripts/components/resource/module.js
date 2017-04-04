@@ -2,7 +2,7 @@ import resourceUtils from './resource-utils-service';
 import resourceDetails from './resource-details';
 import resourceRoutes from './routes';
 import resourceHeader from './resource-header';
-import resourceLinkState from './resource-link-state';
+import resourceName from './resource-name';
 import resourcesService from './resources-service';
 import resourceSummaryModule from './summary/module';
 import resourceBreadcrumbsModule from './breadcrumbs/module';
@@ -17,7 +17,7 @@ export default module => {
   module.service('resourceUtils', resourceUtils);
   module.component('resourceDetails', resourceDetails);
   module.component('resourceHeader', resourceHeader);
-  module.component('resourceLinkState', resourceLinkState);
+  module.component('resourceName', resourceName);
   module.config(resourceRoutes);
   module.service('resourcesService', resourcesService);
   resourceSummaryModule(module);
