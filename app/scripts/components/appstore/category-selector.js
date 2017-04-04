@@ -12,59 +12,100 @@ const appstoreCategorySelector = {
     constructor(
       $q,
       $state,
-      $http,
+      $scope,
       $uibModal,
       ENV,
       currentStateService,
+      usersService,
       ISSUE_IDS,
-      offeringsService) {
+      offeringsService,
+      projectPermissionsService,
+      ResourceProvisionPolicy) {
       // @ngInject
       this.$q = $q;
       this.$state = $state;
-      this.$http = $http;
+      this.$scope = $scope;
       this.$uibModal = $uibModal;
       this.ENV = ENV;
       this.currentStateService = currentStateService;
+      this.usersService = usersService;
       this.ISSUE_IDS = ISSUE_IDS;
       this.offeringsService = offeringsService;
+      this.projectPermissionsService = projectPermissionsService;
+      this.ResourceProvisionPolicy = ResourceProvisionPolicy;
     }
 
     $onInit() {
       this.loading = true;
       this.$q.all([
+        this.loadCustomer(),
         this.loadProject(),
         this.loadOfferings(),
-      ]).finally(() => this.loading = false);
+      ]).then(() => this.checkPolicy()).finally(() => this.loading = false);
+    }
+
+    loadCustomer() {
+      return this.currentStateService.getCustomer().then(customer => this.currentCustomer = customer);
     }
 
     loadProject() {
+      this.$scope.$watch(() => this.selectedProject, () => this.checkPolicy());
       this.selectProject = this.resolve.selectProject;
-      if (this.resolve.selectProject) {
-        return this.currentStateService.getCustomer().then(customer => {
-          this.projects = customer.projects;
+
+      return this.usersService.getCurrentUser()
+        .then(user => this.currentUser = user)
+        .then(() => {
+          if (this.resolve.selectProject) {
+            return this.currentStateService.getCustomer().then(customer => {
+              this.projects = customer.projects;
+            });
+          } else {
+            return this.currentStateService.getProject().then(project => {
+              return this.projectPermissionsService.getList({
+                user: this.currentUser.uuid,
+                project: project.uuid,
+              }).then(permissions => {
+                project.permissions = permissions;
+                this.selectedProject = project;
+              });
+            });
+          }
         });
-      } else {
-        return this.currentStateService.getProject().then(project => {
-          this.selectedProject = project;
-        });
+    }
+
+    checkPolicy() {
+      if (!this.selectedProject || !this.currentCustomer || !this.currentUser) {
+        return;
       }
+
+      angular.forEach(this.offerings, offering => {
+        if (!this.isResource(offering.key)) {
+          return;
+        }
+        const { disabled, errorMessage } = this.ResourceProvisionPolicy.checkResource(
+          this.currentUser, this.currentCustomer, this.selectedProject, offering.key
+        );
+        offering.disabled = disabled;
+        offering.errorMessage = errorMessage;
+      });
+    }
+
+    isResource(key) {
+      return angular.isDefined(this.ENV.resourcesTypes[key]);
     }
 
     loadOfferings() {
       return this.loadCustomOfferings().then(customOfferings => {
         let offerings = customOfferings.concat(this.ENV.offerings);
 
-        offerings = offerings.filter(item =>
-          !item.requireOwnerOrStaff || this.currentStateService.getOwnerOrStaff());
-
-        offerings = offerings.reduce((map, item) => {
+        this.offerings = offerings.reduce((map, item) => {
           map[item.key] = item;
           return map;
         }, {});
 
         const groups = this.ENV.offeringCategories.map(category => ({
           label: category.label,
-          items: category.items.map(item => offerings[item]).filter(x => !!x)
+          items: category.items.map(item => this.offerings[item]).filter(x => !!x)
         }));
 
         let customOfferingCategories = customOfferings.reduce((map, offering) => {
@@ -114,10 +155,10 @@ const appstoreCategorySelector = {
       return this.$uibModal.open({
         component: 'issueCreateDialog',
         resolve: {
-          issue: this.currentStateService.getCustomer().then(customer => ({
-            customer,
+          issue: () => ({
+            customer: this.currentCustomer,
             type: this.ISSUE_IDS.SERVICE_REQUEST
-          })),
+          }),
           options: {
             title: gettext('Request a new service'),
             descriptionPlaceholder: gettext('Please clarify why do you need it'),

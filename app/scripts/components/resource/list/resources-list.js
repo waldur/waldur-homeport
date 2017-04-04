@@ -6,7 +6,9 @@ export default function baseResourceListController(
   priceEstimationService,
   servicesService,
   currentStateService,
+  usersService,
   projectsService,
+  ResourceProvisionPolicy,
   $uibModal,
   $rootScope,
   $state,
@@ -66,19 +68,8 @@ export default function baseResourceListController(
       };
     },
     renderResourceName: function(row) {
-      var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
-        .replace('{src}', resourceUtils.getIcon(row))
-        .replace('{title}', row.resource_type);
-      var href = $state.href('resources.details', {
-        uuid: row.uuid,
-        resource_type: row.resource_type
-      });
-      var link = ncUtils.renderLink(href, img + ' ' + (row.name || '&mdash;'));
-      return link + ' ' + this.getLinkState(row);
-    },
-    getLinkState: function(row) {
       var index = this.findIndexById(row);
-      return '<resource-link-state resource="controller.list[{index}]"></resource-state>'
+      return '<resource-name resource="controller.list[{index}]"></resource-name>'
         .replace('{index}', index);
     },
     renderResourceState: function(row) {
@@ -131,14 +122,12 @@ export default function baseResourceListController(
       };
     },
     getImportTitle: function() {
-      return 'Import';
+      return gettext('Import');
     },
     getCreateAction: function() {
-      var disabled, tooltip;
-      if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
-        disabled = true;
-        tooltip = gettext('Quota has been reached.');
-      }
+      const { disabled, errorMessage } = ResourceProvisionPolicy.checkResource(
+        this.currentUser, this.currentCustomer, this.currentProject, this.getCategoryKey()
+      );
       return {
         title: this.getCreateTitle(),
         iconClass: 'fa fa-plus',
@@ -146,16 +135,19 @@ export default function baseResourceListController(
           this.gotoAppstore();
         }.bind(this),
         disabled: disabled,
-        titleAttr: tooltip
+        titleAttr: errorMessage
       };
     },
     getCreateTitle: function() {
-      return 'Create';
+      return gettext('Create');
     },
     gotoAppstore: function() {
       $state.go(this.getCategoryState(), {
         uuid: this.currentProject.uuid
       });
+    },
+    getCategoryKey: function() {
+      return this.categories[this.category];
     },
     getCategoryState: function() {
       if (this.category === ENV.VirtualMachines) {
@@ -245,6 +237,9 @@ export default function baseResourceListController(
         }),
         currentStateService.getProject().then(function(project) {
           vm.currentProject = project;
+        }),
+        usersService.getCurrentUser().then(function(user) {
+          vm.currentUser = user;
         })
       ]).then(function() {
         vm.tableOptions = vm.getTableOptions();
@@ -252,7 +247,7 @@ export default function baseResourceListController(
           field: vm.rowFields
         });
         if (angular.isDefined(vm.category) && !vm.getFilter().resource_type) {
-          query.resource_category = vm.categories[vm.category];
+          query.resource_category = vm.getCategoryKey();
           vm.updateFilters(filter);
         }
         return fn(query);
@@ -260,7 +255,7 @@ export default function baseResourceListController(
     },
     updateFilters: function(filter) {
       var query = angular.extend({
-        resource_category: this.categories[this.category],
+        resource_category: this.getCategoryKey(),
         customer: currentStateService.getCustomerUuid()
       }, filter);
       angular.forEach(this.service.defaultFilter, function(val, key) {
