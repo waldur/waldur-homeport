@@ -9,7 +9,7 @@ const quotaUsageBarChart = {
     return {
       exceeds(quota) {
         return quota.usage + quota.required > quota.limit;
-      }
+      };
     }
   }
 };
