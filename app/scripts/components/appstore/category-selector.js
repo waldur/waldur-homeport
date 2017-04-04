@@ -41,7 +41,7 @@ const appstoreCategorySelector = {
         this.loadCustomer(),
         this.loadProject(),
         this.loadOfferings(),
-      ]).finally(() => this.loading = false);
+      ]).then(() => this.checkPolicy()).finally(() => this.loading = false);
     }
 
     loadCustomer() {
@@ -67,7 +67,6 @@ const appstoreCategorySelector = {
               }).then(permissions => {
                 project.permissions = permissions;
                 this.selectedProject = project;
-                this.checkPolicy();
               });
             });
           }
