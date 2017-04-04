@@ -17,6 +17,7 @@ function PaymentsListController(
     init: function() {
       this.service = paymentsService;
       this._super();
+      var vm = this;
 
       this.tableOptions = {
         searchFieldName: 'type',
@@ -27,7 +28,7 @@ function PaymentsListController(
             title: gettext('State'),
             className: 'all',
             render: function(row) {
-              var index = baseResourceListController.findIndexById(row);
+              var index = vm.findIndexById(row);
               return '<payment-state payment="controller.list[{index}]"></payment-state>'
                 .replace('{index}', index);
             }

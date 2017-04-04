@@ -16,6 +16,7 @@ function CustomerAgreementsTabController(
     init: function() {
       this.service = agreementsService;
       this._super();
+      var vm = this;
 
       this.tableOptions = {
         searchFieldName: 'plan_name',
@@ -26,7 +27,7 @@ function CustomerAgreementsTabController(
             title: gettext('State'),
             className: 'all',
             render: function(row) {
-              var index = baseResourceListController.findIndexById(row);
+              var index = vm.findIndexById(row);
               return '<plan-agreement-state agreement="controller.list[{index}]"></plan-agreement-state>'
                 .replace('{index}', index);
             }

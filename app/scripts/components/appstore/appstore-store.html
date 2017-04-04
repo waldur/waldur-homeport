@@ -47,9 +47,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="col-md-3" ng-if="AppStore.renderStore">
-                <div class="ibox" visible="compare" ng-if="!AppStore.selectedResourceType && AppStore.showCompare.indexOf(AppStore.selectedCategory.name) !== -1">
+        <div class="col-md-3" ng-if="AppStore.renderStore">
+            <div class="ibox" visible="compare" ng-if="!AppStore.selectedResourceType && AppStore.showCompare.indexOf(AppStore.selectedCategory.name) !== -1">
+                <div class="ibox-title">
                     <h5>
                         <a ui-sref="compare.compare({ category: AppStore.selectedCategory.key })">
                             <i class="fa fa-balance-scale"></i>

@@ -86,15 +86,6 @@ export default function baseResourceListController(
       return '<resource-state resource="controller.list[{index}]"></resource-state>'
         .replace('{index}', index);
     },
-    findIndexById: function(row) {
-      var index;
-      for (var i = 0; i < this.controllerScope.list.length; i++) {
-        if (this.controllerScope.list[i].uuid === row.uuid) {
-          index = i;
-        }
-      }
-      return index;
-    },
     getTableActions: function() {
       var actions = [];
       if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') === -1) {
