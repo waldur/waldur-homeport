@@ -9,8 +9,7 @@ export default agreementsList;
 function CustomerAgreementsTabController(
   baseControllerListClass,
   agreementsService,
-  $filter,
-  baseResourceListController) {
+  $filter) {
   var controllerScope = this;
   var AgreementsController = baseControllerListClass.extend({
     init: function() {

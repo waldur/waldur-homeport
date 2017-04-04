@@ -10,8 +10,7 @@ export default paymentsList;
 function PaymentsListController(
   baseControllerListClass,
   paymentsService,
-  $filter,
-  baseResourceListController) {
+  $filter) {
   var controllerScope = this;
   var PaymentsController = baseControllerListClass.extend({
     init: function() {
