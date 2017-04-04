@@ -26,7 +26,9 @@ function CustomerAgreementsTabController(
             title: gettext('State'),
             className: 'all',
             render: function(row) {
-              return baseResourceListController.renderResourceState(row);
+              var index = baseResourceListController.findIndexById(row);
+              return '<plan-agreement-state agreement="controller.list[{index}]"></plan-agreement-state>'
+                .replace('{index}', index);
             }
           },
           {

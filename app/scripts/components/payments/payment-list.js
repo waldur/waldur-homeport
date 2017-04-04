@@ -27,7 +27,9 @@ function PaymentsListController(
             title: gettext('State'),
             className: 'all',
             render: function(row) {
-              return baseResourceListController.renderResourceState(row);
+              var index = baseResourceListController.findIndexById(row);
+              return '<payment-state payment="controller.list[{index}]"></payment-state>'
+                .replace('{index}', index);
             }
           },
           {
