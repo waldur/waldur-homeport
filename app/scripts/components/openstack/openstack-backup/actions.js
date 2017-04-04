@@ -32,33 +32,29 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
           security_groups: {
             type: 'multiselect',
             placeholder: gettext('Select security groups...'),
-            resource_default_value: true,
+            init: function(field, resource, form) {
+              form.security_groups = resource.instance_security_groups;
+            },
             serializer: items => items.map(item => ({url: item.value}))
           },
-          internal_ips_set: {
-            type: 'multiselect',
-            label: gettext('Connected subnets'),
-            placeholder: gettext('Select subnets to connect to...'),
-            resource_default_value: true,
-            serializer: items => items.map(item => ({ subnet: item.value })),
-            formatter: ($filter, item) => internalIpFormatter(item),
-            modelParser: (field, items) => items.map(item => ({
-              url: item.subnet,
-              name: item.subnet_name,
-              cidr: item.subnet_cidr,
-            })),
-            value_field: 'url',
-          },
-          floating_ips: {
-            resource_default_value: true,
-            component: 'openstackInstanceFloatingIps',
-            init: (field, resource) => {
-              field.internal_ips_set = resource.internal_ips_set;
-            },
-            display_name_field: 'address',
-            value_field: 'url',
+          networks: {
+            label: gettext('Networks'),
+            component: 'openstackInstanceNetworks',
+            init: function(field, resource, form, action) {
+              field.choices = {
+                subnets: action.fields.internal_ips_set.rawChoices,
+                floating_ips: action.fields.floating_ips.rawChoices,
+              };
+              form.internal_ips_set = resource.instance_internal_ips_set;
+            }
           }
-        }
+        },
+        order: [
+          'flavor',
+          'security_groups',
+          'networks',
+          'summary',
+        ]
       }
     }
   });
