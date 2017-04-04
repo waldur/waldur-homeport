@@ -26,8 +26,8 @@ class SummaryController {
     this.loading = true;
     this.components = {};
     this.OpenStackSummaryService.getServiceComponents(this.model.service)
-      .then(components => {
-        this.components = components;
+      .then(result => {
+        this.components = result.components;
         this.componentsMessage =
           this.coreUtils.templateFormatter(
             gettext('Note that this volume is charged as part of <strong>{serviceName}</strong> package.'),

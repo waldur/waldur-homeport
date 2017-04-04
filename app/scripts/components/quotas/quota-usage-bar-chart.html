@@ -1,0 +1,15 @@
+<div ng-repeat="quota in $ctrl.quotas">
+  <p class="pull-right text-muted">
+    {{ quota.usage | quotaValue:quota.name }} of {{ quota.limit | quotaValue:quota.name }} used
+  </p>
+  <p>
+    <i class="fa fa-exclamation-triangle"
+      ng-if="$ctrl.exceeds(quota)"
+      uib-tooltip="{{ 'Quota usage exceeds limit.' | translate }}"></i>
+    <strong>{{ quota.name | quotaName }}</strong>
+  </p>
+  <uib-progress max="quota.limit">
+    <uib-bar value="quota.usage" type="success"></uib-bar>
+    <uib-bar value="quota.required" type="warning"></uib-bar>
+  </uib-progress>
+</div>

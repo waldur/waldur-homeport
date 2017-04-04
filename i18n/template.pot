@@ -301,11 +301,11 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:93
+#: app/scripts/components/resource/actions/action-utils-service.js:43
 msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}."
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:95
+#: app/scripts/components/resource/actions/action-utils-service.js:45
 msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}."
 msgstr ""
 
@@ -313,7 +313,7 @@ msgstr ""
 msgid "Are you sure you want to unlink provider and all related resources?"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:101
+#: app/scripts/components/resource/actions/action-utils-service.js:49
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
@@ -786,7 +786,7 @@ msgstr ""
 msgid "Created at"
 msgstr ""
 
-#: app/scripts/components/offering/offerings-list.js:52
+#: app/scripts/components/offering/offerings-list.js:54
 #: app/scripts/components/project/projects-list.js:86
 msgid "Creation date"
 msgstr ""
@@ -872,7 +872,7 @@ msgstr ""
 #: app/scripts/components/offering/appstore-offering.js:46
 #: app/scripts/components/offering/offering-summary.html:62
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:38
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:43
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:45
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:138
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:40
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:47
@@ -1586,7 +1586,7 @@ msgstr ""
 msgid "Job position"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:47
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:49
 msgid "Keep until"
 msgstr ""
 
@@ -1794,10 +1794,10 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:76
 #: app/scripts/components/offering/appstore-offering.js:40
 #: app/scripts/components/offering/offering-summary.html:11
-#: app/scripts/components/offering/offerings-list.js:32
+#: app/scripts/components/offering/offerings-list.js:34
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:33
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:38
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:40
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:92
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:36
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:35
@@ -1823,6 +1823,7 @@ msgstr ""
 msgid "Network has been updated."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-backup/actions.js:41
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:117
 #: app/scripts/components/openstack/openstack-network/breadcrumbs.js:22
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:23
@@ -1875,11 +1876,11 @@ msgstr ""
 msgid "No backup schedules yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:34
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:36
 msgid "No backups found matching filter."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:33
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:35
 msgid "No backups yet."
 msgstr ""
 
@@ -2025,7 +2026,7 @@ msgstr ""
 msgid "No records found matching filter."
 msgstr ""
 
-#: app/scripts/components/offering/offerings-list.js:23
+#: app/scripts/components/offering/offerings-list.js:24
 msgid "No requested services found matching filter."
 msgstr ""
 
@@ -2136,7 +2137,7 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.js:33
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.js:38
 msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
 msgstr ""
 
@@ -2363,6 +2364,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:5
 msgid "Package"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:64
+msgid "Package limits"
 msgstr ""
 
 #: app/scripts/components/error/routes.js:17
@@ -2815,6 +2820,10 @@ msgstr ""
 msgid "Quota usage"
 msgstr ""
 
+#: app/scripts/components/quotas/quota-usage-bar-chart.html:8
+msgid "Quota usage exceeds limit."
+msgstr ""
+
 #: app/scripts/components/providers/details/dialog.html:22
 msgid "Quotas"
 msgstr ""
@@ -2970,7 +2979,7 @@ msgstr ""
 msgid "Request removal"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:129
+#: app/scripts/components/resource/actions/action-utils-service.js:77
 msgid "Request to {action} has been accepted."
 msgstr ""
 
@@ -3105,7 +3114,7 @@ msgstr ""
 msgid "Resource events"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:116
+#: app/scripts/components/resource/actions/action-utils-service.js:64
 msgid "Resource has been deleted."
 msgstr ""
 
@@ -3240,7 +3249,7 @@ msgid "Segmentation ID"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.html:40
-#: app/scripts/components/appstore/category-selector-tabs.html:17
+#: app/scripts/components/appstore/category-selector-tabs.html:19
 #: app/scripts/components/navigation/select-workspace-dialog.html:112
 #: app/scripts/components/navigation/select-workspace-dialog.html:58
 #: app/views/directives/import-resource-button.html:6
@@ -3309,6 +3318,7 @@ msgstr ""
 msgid "Select request type"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-backup/actions.js:34
 #: app/scripts/components/openstack/openstack-instance/actions.js:44
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:104
 msgid "Select security groups..."
@@ -3553,10 +3563,10 @@ msgstr ""
 #: app/scripts/components/billing/billing-records-list.js:49
 #: app/scripts/components/billing/invoices-list.js:49
 #: app/scripts/components/offering/offering-summary.html:18
-#: app/scripts/components/offering/offerings-list.js:45
+#: app/scripts/components/offering/offerings-list.js:47
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:52
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:50
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:51
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:53
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:38
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:52
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:39
@@ -3901,7 +3911,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-list.js:36
 #: app/scripts/components/offering/offering-summary.html:25
-#: app/scripts/components/offering/offerings-list.js:41
+#: app/scripts/components/offering/offerings-list.js:43
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
 #: app/scripts/components/providers/details/provider-details.html:8
 #: app/scripts/components/providers/provider-list.js:48
@@ -4326,7 +4336,7 @@ msgstr ""
 msgid "You have no records yet."
 msgstr ""
 
-#: app/scripts/components/offering/offerings-list.js:22
+#: app/scripts/components/offering/offerings-list.js:23
 msgid "You have no requested services."
 msgstr ""
 

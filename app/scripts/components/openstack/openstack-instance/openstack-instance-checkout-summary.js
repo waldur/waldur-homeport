@@ -15,27 +15,58 @@ export default function openstackInstanceCheckoutSummary() {
 
 // @ngInject
 class SummaryController {
-  constructor(OpenStackSummaryService, coreUtils, $filter) {
+  constructor(OpenStackSummaryService, coreUtils, $filter, $scope) {
     this.OpenStackSummaryService = OpenStackSummaryService;
     this.coreUtils = coreUtils;
     this.$filter = $filter;
+    this.$scope = $scope;
     this.init();
   }
 
   init() {
     this.loading = true;
     this.components = {};
+    this.quotas = [];
     this.OpenStackSummaryService.getServiceComponents(this.model.service)
-      .then(components => {
-        this.components = components;
+      .then(result => {
+        this.components = result.components;
+        this.usages = result.usages;
+        this.limits = result.limits;
+
         this.componentsMessage =
           this.coreUtils.templateFormatter(
             gettext('Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package.'),
             { serviceName: this.model.service.name });
+
+        this.$scope.$watch(() => this.model, () => this.updateQuotas(), true);
+        this.updateQuotas();
       })
       .finally(() => {
         this.loading = false;
       });
+  }
+
+  updateQuotas() {
+    this.quotas = [
+      {
+        name: 'ram',
+        usage: this.usages.ram,
+        limit: this.limits.ram,
+        required: this.model.flavor && this.model.flavor.ram
+      },
+      {
+        name: 'cores',
+        usage: this.usages.cores,
+        limit: this.limits.cores,
+        required: this.model.flavor && this.model.flavor.cores
+      },
+      {
+        name: 'storage',
+        usage: this.usages.disk,
+        limit: this.limits.disk,
+        required: this.getTotalStorage() || 0
+      },
+    ];
   }
 
   isValid() {

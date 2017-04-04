@@ -7,7 +7,7 @@ const quotaNames = {
 
 const parseQuotaName = name => quotaNames[name] || name;
 
-const parseQuotas = listToDict(
+export const parseQuotas = listToDict(
   item => parseQuotaName(item.name),
   item => item.limit
 );
