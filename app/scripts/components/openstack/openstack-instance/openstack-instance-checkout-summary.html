@@ -1,4 +1,7 @@
-<div class="ibox">
+<div class="ibox" ng-if="$ctrl.loading">
+    <loading-spinner/>
+</div>
+<div class="ibox" ng-if="!$ctrl.loading">
     <div class="ibox-title">
         <h5>
             <span translate>Checkout summary</span>

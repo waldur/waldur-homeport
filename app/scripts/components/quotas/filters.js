@@ -4,6 +4,7 @@ export function quotaName($filter) {
     floating_ip_count: gettext('Floating IP count'),
     vcpu: gettext('vCPU count'),
     ram: gettext('RAM'),
+    storage: gettext('Storage'),
     vm_count: gettext('Virtual machines count'),
     instances: gettext('Instances count'),
     volumes: gettext('Volumes count'),

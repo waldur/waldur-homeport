@@ -1,29 +1,14 @@
 import template from './openstack-instance-checkout-summary.html';
 
-export default function openstackInstanceCheckoutSummary() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: SummaryController,
-    controllerAs: '$ctrl',
-    bindToController: true,
-    scope: {
-      model: '='
-    }
-  };
-}
-
 // @ngInject
 class SummaryController {
-  constructor(OpenStackSummaryService, coreUtils, $filter, $scope) {
+  constructor(OpenStackSummaryService, coreUtils, $scope) {
     this.OpenStackSummaryService = OpenStackSummaryService;
     this.coreUtils = coreUtils;
-    this.$filter = $filter;
     this.$scope = $scope;
-    this.init();
   }
 
-  init() {
+  $onInit() {
     this.loading = true;
     this.components = {};
     this.quotas = [];
@@ -55,7 +40,7 @@ class SummaryController {
         required: this.model.flavor && this.model.flavor.ram
       },
       {
-        name: 'cores',
+        name: 'vcpu',
         usage: this.usages.cores,
         limit: this.limits.cores,
         required: this.model.flavor && this.model.flavor.cores
@@ -90,3 +75,12 @@ class SummaryController {
   }
 }
 
+const openstackInstanceCheckoutSummary = {
+  template: template,
+  controller: SummaryController,
+  bindings: {
+    model: '<'
+  }
+};
+
+export default openstackInstanceCheckoutSummary;

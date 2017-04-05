@@ -1,41 +1,45 @@
 import template from './openstack-volume-checkout-summary.html';
 
-export default function openstackVolumeCheckoutSummary() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: SummaryController,
-    controllerAs: '$ctrl',
-    bindToController: true,
-    scope: {
-      model: '='
-    }
-  };
-}
-
 // @ngInject
 class SummaryController {
-  constructor(OpenStackSummaryService, coreUtils, $filter) {
+  constructor(OpenStackSummaryService, coreUtils, $scope) {
     this.OpenStackSummaryService = OpenStackSummaryService;
     this.coreUtils = coreUtils;
-    this.$filter = $filter;
-    this.init();
+    this.$scope = $scope;
   }
 
-  init() {
+  $onInit() {
     this.loading = true;
     this.components = {};
+    this.quotas = [];
     this.OpenStackSummaryService.getServiceComponents(this.model.service)
       .then(result => {
         this.components = result.components;
+        this.usages = result.usages;
+        this.limits = result.limits;
+
         this.componentsMessage =
           this.coreUtils.templateFormatter(
             gettext('Note that this volume is charged as part of <strong>{serviceName}</strong> package.'),
             { serviceName: this.model.service.name });
+
+          this.$scope.$watch(() => this.model, () => this.updateQuotas(), true);
+          this.updateQuotas();
       })
       .finally(() => {
         this.loading = false;
       });
+  }
+
+  updateQuotas() {
+    this.quotas = [
+      {
+        name: 'storage',
+        usage: this.usages.disk,
+        limit: this.limits.disk,
+        required: this.model.size || 0
+      }
+    ];
   }
 
   getDailyPrice() {
@@ -49,3 +53,12 @@ class SummaryController {
   }
 }
 
+const openstackVolumeCheckoutSummary = {
+  template: template,
+  controller: SummaryController,
+  bindings: {
+    model: '<'
+  }
+};
+
+export default openstackVolumeCheckoutSummary;

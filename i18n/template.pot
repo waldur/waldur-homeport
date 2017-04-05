@@ -20,6 +20,10 @@ msgstr ""
 msgid "{resourceType} has state {resourceState}."
 msgstr ""
 
+#: app/scripts/components/quotas/quota-usage-bar-chart.js:19
+msgid "{usage} of {limit} used"
+msgstr ""
+
 #: app/scripts/components/error/error-403.html:8
 #: app/scripts/components/error/error-404.html:6
 msgid "&lt; Back"
@@ -541,9 +545,9 @@ msgstr ""
 msgid "Check terms"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:4
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:7
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:4
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:4
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:7
 #: app/scripts/components/premiumSupport/premium-support-summary.html:3
 msgid "Checkout summary"
 msgstr ""
@@ -1084,6 +1088,10 @@ msgstr ""
 msgid "Every year"
 msgstr ""
 
+#: app/scripts/components/quotas/quota-usage-bar-chart.js:26
+msgid "Existing quota usage: {usage}"
+msgstr ""
+
 #: app/scripts/components/team/add-team-member.html:47
 #: app/scripts/components/team/customer-permissions-log-list.js:42
 #: app/scripts/components/team/project-permissions-log-list.js:42
@@ -1153,7 +1161,7 @@ msgid "First"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:5
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:28
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:31
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:45
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:7
 msgid "Flavor"
@@ -1299,9 +1307,9 @@ msgid "ID code"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:31
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:24
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:27
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:24
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:19
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:22
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:19
 msgid "Image"
 msgstr ""
@@ -1409,7 +1417,7 @@ msgstr ""
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js:8
+#: app/scripts/components/quotas/filters.js:9
 msgid "Instances count"
 msgstr ""
 
@@ -1508,9 +1516,9 @@ msgstr ""
 msgid "Invoice number"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:52
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:55
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:42
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:35
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:38
 #: app/scripts/components/premiumSupport/premium-support-summary.html:25
 msgid "Invoiced to"
 msgstr ""
@@ -1940,9 +1948,9 @@ msgstr ""
 msgid "No items to compare yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:12
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:15
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:9
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:9
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:12
 #: app/scripts/components/premiumSupport/premium-support-summary.html:8
 msgid "No items yet."
 msgstr ""
@@ -2137,11 +2145,11 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.js:38
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.js:23
 msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.js:33
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.js:23
 msgid "Note that this volume is charged as part of <strong>{serviceName}</strong> package."
 msgstr ""
 
@@ -2366,7 +2374,8 @@ msgstr ""
 msgid "Package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:64
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:67
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:50
 msgid "Package limits"
 msgstr ""
 
@@ -2451,6 +2460,10 @@ msgstr ""
 #: app/views/directives/customer-balance.html:46
 #: app/views/directives/customer-balance.html:8
 msgid "Plan"
+msgstr ""
+
+#: app/scripts/components/quotas/quota-usage-bar-chart.js:32
+msgid "Planned quota usage: {usage}"
 msgstr ""
 
 #: app/scripts/components/customer/routes.js:128
@@ -2540,16 +2553,16 @@ msgid "Price for 1 vCPU per day"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:10
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:44
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:47
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:34
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:27
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:30
 msgid "Price per day"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:11
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:48
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:51
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:38
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:31
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:34
 msgid "Price per month"
 msgstr ""
 
@@ -2611,9 +2624,9 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html:40
 #: app/scripts/components/issues/issue-quick-create.html:75
 #: app/scripts/components/issues/issue-registration.html:127
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:56
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:59
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:39
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:42
 #: app/scripts/components/premiumSupport/premium-support-summary.html:29
 msgid "Project"
 msgstr ""
@@ -2830,7 +2843,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:54
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:59
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:36
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:39
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:58
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:15
 #: app/scripts/components/quotas/filters.js:6
@@ -3096,7 +3109,7 @@ msgstr ""
 msgid "Resource configuration"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:9
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:12
 msgid "Resource configuration is invalid. Please fix errors in form."
 msgstr ""
 
@@ -3510,7 +3523,7 @@ msgstr ""
 msgid "Snapshots"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js:10
+#: app/scripts/components/quotas/filters.js:11
 msgid "Snapshots count"
 msgstr ""
 
@@ -3607,10 +3620,11 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:64
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:63
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:20
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:23
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:26
 #: app/scripts/components/project/project-details.js:52
 #: app/scripts/components/project/projects-list.js:96
 #: app/scripts/components/project/routes.js:147
+#: app/scripts/components/quotas/filters.js:7
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:11
 #: app/views/compare/row.html:44
 msgid "Storage"
@@ -3901,7 +3915,7 @@ msgstr ""
 msgid "Total Price"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:40
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:43
 msgid "Total storage"
 msgstr ""
 
@@ -4161,7 +4175,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:53
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:55
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:32
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:35
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:54
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:11
 msgid "vCPU"
@@ -4187,12 +4201,12 @@ msgstr ""
 msgid "Virtual machines"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js:7
+#: app/scripts/components/quotas/filters.js:8
 msgid "Virtual machines count"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:14
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:20
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:23
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:18
 msgid "VM name"
 msgstr ""
@@ -4210,7 +4224,7 @@ msgstr ""
 msgid "Volume has been updated."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:15
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:18
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:11
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:7
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:5
@@ -4222,7 +4236,7 @@ msgstr ""
 msgid "Volumes"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js:9
+#: app/scripts/components/quotas/filters.js:10
 msgid "Volumes count"
 msgstr ""
 
