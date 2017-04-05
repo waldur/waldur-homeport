@@ -41,14 +41,14 @@ function CustomerAgreementsTabController(
             title: gettext('Date'),
             className: 'all',
             render: function(row) {
-              return $filter('dateTime')(row.created);
+              return $filter('dateTime')(row.created) || 'N/A';
             },
           },
           {
             title: gettext('Price'),
             className: 'all',
             render: function(row) {
-              return $filter('defaultCurrency')(row.plan_price);
+              return $filter('defaultCurrency')(row.plan_price) || 'N/A';
             },
           }
         ],

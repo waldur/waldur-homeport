@@ -43,21 +43,20 @@ function PaymentsListController(
             title: gettext('Date'),
             className: 'all',
             render: function(row) {
-              return $filter('dateTime')(row.created);
+              return $filter('dateTime')(row.created) || 'N/A';
             },
           },
           {
             title: gettext('Amount'),
             className: 'all',
             render: function(row) {
-              return $filter('defaultCurrency')(row.amount);
+              return $filter('defaultCurrency')(row.amount) || 'N/A';
             },
           }
         ],
       };
     },
     afterGetList: function() {
-      this._super();
       angular.forEach(this.list, function(payment) {
         payment.type = 'PayPal';
       });

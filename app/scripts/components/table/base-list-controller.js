@@ -165,8 +165,8 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
     },
     findIndexById: function(row) {
       var index;
-      for (var i = 0; i < this.controllerScope.list.length; i++) {
-        if (this.controllerScope.list[i].uuid === row.uuid) {
+      for (var i = 0; i < this.list.length; i++) {
+        if (this.list[i].uuid === row.uuid) {
           index = i;
         }
       }
