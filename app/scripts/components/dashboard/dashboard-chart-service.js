@@ -23,10 +23,14 @@ export default class DashboardChartService {
   getOrganizationCharts(organization) {
     const quotas = this.getDashboardQuotas(ORGANIZATION_DASHBOARD_QUOTAS);
     this.clearServiceCache();
-    return this.$q.all([
-      this.getCostChart(organization),
-      this.getResourceHistoryCharts(quotas, organization)
-    ]).then(charts => [charts[0]].concat(charts[1]));
+    if (this.features.isVisible('dashboard.total_cost')) {
+      return this.$q.all([
+        this.getCostChart(organization),
+        this.getResourceHistoryCharts(quotas, organization)
+      ]).then(charts => [charts[0]].concat(charts[1]));
+    } else {
+      return this.getResourceHistoryCharts(quotas, organization);
+    }
   }
 
   getProjectCharts(project) {
