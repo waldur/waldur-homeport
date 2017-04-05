@@ -13,7 +13,7 @@ export default module => {
   module.directive('volumeExtendDialog', volumeExtendDialog);
   module.directive('snapshotCreateDialog', snapshotCreateDialog);
   module.component('openstackVolumeSummary', openstackVolumeSummary);
-  module.directive('openstackVolumeCheckoutSummary', openstackVolumeCheckoutSummary);
+  module.component('openstackVolumeCheckoutSummary', openstackVolumeCheckoutSummary);
   module.component('openstackInstanceVolumes', openstackInstanceVolumes);
   module.component('openstackVolumeSnapshots', openstackVolumeSnapshots);
   module.component('openstackVolumesList', openstackVolumesList);
