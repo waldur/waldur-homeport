@@ -23,8 +23,8 @@ class SummaryController {
             gettext('Note that this volume is charged as part of <strong>{serviceName}</strong> package.'),
             { serviceName: this.model.service.name });
 
-          this.$scope.$watch(() => this.model, () => this.updateQuotas(), true);
-          this.updateQuotas();
+        this.$scope.$watch(() => this.model, () => this.updateQuotas(), true);
+        this.updateQuotas();
       })
       .finally(() => {
         this.loading = false;
