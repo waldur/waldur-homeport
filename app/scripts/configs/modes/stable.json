@@ -8,6 +8,7 @@
     "alerts",
     "mainSearch",
     "analytics.cost",
+    "dashboard.total_cost",
     "monitoring",
     "projectCostDetails",
     "import",
