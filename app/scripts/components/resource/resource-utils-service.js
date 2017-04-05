@@ -49,7 +49,10 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
     },
     getIcon: function(item) {
       var type = item.resource_type || item.type;
-      return ncServiceUtils.getServiceIcon(type.split('.')[0]);
+      if (type) {
+        return ncServiceUtils.getServiceIcon(type.split('.')[0]);
+      }
+      return null;
     },
     getListState: function(resourceCategory) {
       if (resourceCategory === 'apps') {
