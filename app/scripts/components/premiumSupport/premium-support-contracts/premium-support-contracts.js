@@ -49,7 +49,7 @@ function ContractsListController(
     getTableActions: function() {
       return [
         {
-          title: gettext('Create'),
+          title: gettext('Add SLA'),
           iconClass: 'fa fa-plus',
           callback: $state.go('appstore.premiumSupport'),
         }

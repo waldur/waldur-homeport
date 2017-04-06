@@ -35,9 +35,9 @@
         if (user && user.is_staff) {
           return true;
         }
-        if (!customer) {
-          return false;
-        }
+        return customer && this.isOwner(customer, user);
+      },
+      isOwner: function(customer, user) {
         for (var i = 0; i < customer.owners.length; i++) {
           if (user && user.uuid === customer.owners[i].uuid) {
             return true;
