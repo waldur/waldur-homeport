@@ -936,6 +936,10 @@ msgstr ""
 msgid "Do not have an account?"
 msgstr ""
 
+#: app/scripts/components/navigation/header/docs-link.html:3
+msgid "Documentation"
+msgstr ""
+
 #: app/scripts/components/billing/invoices-list.js:74
 msgid "Due date"
 msgstr ""

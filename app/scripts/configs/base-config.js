@@ -218,4 +218,7 @@ angular.module('ncsaas')
 
     // Renders label and logo at the login page
     // poweredByLogo: 'static/images/logo.png'
+
+    // Renders link to docs in header
+    // docsLink: 'http://example.com/docs/'
   });
