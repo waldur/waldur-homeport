@@ -4,6 +4,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.js:21
+msgid "\"{planName}\" details"
+msgstr ""
+
 #: app/scripts/components/form/appstore-field-list.js:38
 msgid "{fieldLabel} is required for provisioning resource."
 msgstr ""
@@ -50,7 +54,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:71
+#: app/scripts/components/invitations/invitations-list.js:82
 msgid "Accepted"
 msgstr ""
 
@@ -168,7 +172,7 @@ msgstr ""
 msgid "Add rule"
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-contracts.js:36
+#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:52
 msgid "Add SLA"
 msgstr ""
 
@@ -242,10 +246,6 @@ msgstr ""
 msgid "Alerts about resources (VMs and applications)"
 msgstr ""
 
-#: app/views/compare/filter.html:23
-msgid "All"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js:49
 msgid "All categories"
 msgstr ""
@@ -262,6 +262,7 @@ msgstr ""
 msgid "Already have an account?"
 msgstr ""
 
+#: app/scripts/components/payments/payment-list.js:50
 #: app/views/directives/customer-balance.html:101
 #: app/views/directives/customer-balance.html:136
 msgid "Amount"
@@ -373,10 +374,6 @@ msgstr ""
 msgid "Back to project"
 msgstr ""
 
-#: app/views/compare/filter.html:1
-msgid "back to store"
-msgstr ""
-
 #: app/scripts/components/resource/summary/resource-summary-base.html:59
 msgid "Backend ID"
 msgstr ""
@@ -418,7 +415,7 @@ msgstr ""
 msgid "Bank"
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-contracts.js:67
+#: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:19
 msgid "Base rate"
 msgstr ""
 
@@ -483,8 +480,8 @@ msgstr ""
 #: app/scripts/components/digitalocean/droplet-resize.html:76
 #: app/scripts/components/events/event-details-dialog.html:125
 #: app/scripts/components/events/event-types-dialog.html:14
-#: app/scripts/components/invitations/invitation-dialog.html:77
-#: app/scripts/components/invitations/invitations-list.js:174
+#: app/scripts/components/invitations/actions/cancel.js:8
+#: app/scripts/components/invitations/actions/invitation-dialog.html:77
 #: app/scripts/components/issues/issue-comments-form.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:125
@@ -509,7 +506,7 @@ msgid "Cancel payment"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:37
-#: app/scripts/components/invitations/invitations-list.js:63
+#: app/scripts/components/invitations/invitations-list.js:74
 msgid "Canceled"
 msgstr ""
 
@@ -567,7 +564,7 @@ msgid "CIDR"
 msgstr ""
 
 #: app/scripts/components/customer/customer-users-details-list.js:47
-#: app/scripts/components/invitations/invitation-dialog.html:21
+#: app/scripts/components/invitations/actions/invitation-dialog.html:21
 #: app/scripts/components/team/user-selector.html:15
 msgid "Civil number"
 msgstr ""
@@ -576,7 +573,7 @@ msgstr ""
 msgid "Closed"
 msgstr ""
 
-#: app/views/directives/expandable-item/expandable-item-payment.html:2
+#: app/scripts/components/appstore/appstore-compare-list.js:62
 msgid "Code"
 msgstr ""
 
@@ -677,6 +674,10 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-compare-list.js:76
+msgid "CPU"
+msgstr ""
+
 #: app/scripts/components/appstore/appstore-store.html:51
 #: app/scripts/components/customer/customer-issues.js:31
 #: app/scripts/components/issues/issue-create-dialog.js:10
@@ -689,7 +690,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/module.js:57
 #: app/scripts/components/openstack/openstack-volume/module.js:71
 #: app/scripts/components/project/project-issues.js:31
-#: app/scripts/components/resource/list/resources-list.js:142
+#: app/scripts/components/resource/list/resources-list.js:133
 #: app/scripts/components/resource/tabs/resource-issues.js:26
 #: app/scripts/components/user/hooks/hook-details.html:77
 msgid "Create"
@@ -786,7 +787,7 @@ msgstr ""
 msgid "Created a new payment for {customer_name}."
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:119
+#: app/scripts/components/invitations/invitations-list.js:130
 msgid "Created at"
 msgstr ""
 
@@ -837,8 +838,17 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
+#: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:12
+msgid "Data is unavailable."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:80
 msgid "Data volume size"
+msgstr ""
+
+#: app/scripts/components/payments/payment-list.js:43
+#: app/scripts/components/plans/plan-agreements-list.js:41
+msgid "Date"
 msgstr ""
 
 #: app/scripts/components/user/user-popover-table.html:33
@@ -881,7 +891,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:40
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:47
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:20
-#: app/scripts/components/premiumSupport/premium-support-contracts.js:63
+#: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:17
 #: app/scripts/components/project/project-manage.html:29
 #: app/scripts/components/project/projects-list.js:79
 #: app/scripts/components/resource/actions/constants.js:26
@@ -904,6 +914,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-registration.html:32
 #: app/scripts/components/issues/issue-registration.html:69
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
+#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
 #: app/scripts/components/providers/details/dialog.html:10
 #: app/scripts/components/providers/provider-list.js:92
 #: app/scripts/components/team/customer-users-list.js:121
@@ -934,7 +945,7 @@ msgid "Due Date"
 msgstr ""
 
 #: app/scripts/components/customer/customer-users-details-list.js:40
-#: app/scripts/components/invitations/invitation-dialog.html:12
+#: app/scripts/components/invitations/actions/invitation-dialog.html:12
 #: app/scripts/components/team/customer-users-list.js:71
 #: app/scripts/components/team/project-users-list.js:56
 #: app/scripts/components/team/user-selector.html:12
@@ -964,13 +975,13 @@ msgstr ""
 msgid "Edit project member"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.js:25
+#: app/scripts/components/team/add-team-member.js:34
 msgid "Edit team member"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:61
 #: app/scripts/components/customer/customer-delete.html:28
-#: app/scripts/components/invitations/invitations-list.js:84
+#: app/scripts/components/invitations/invitations-list.js:95
 msgid "Email"
 msgstr ""
 
@@ -986,7 +997,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:205
+#: app/scripts/configs/base-config.js:206
 msgid "English"
 msgstr ""
 
@@ -1008,7 +1019,7 @@ msgstr ""
 msgid "Estimated cost"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:209
+#: app/scripts/configs/base-config.js:210
 msgid "Estonian"
 msgstr ""
 
@@ -1092,17 +1103,17 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:47
+#: app/scripts/components/team/add-team-member.html:48
 #: app/scripts/components/team/customer-permissions-log-list.js:42
 #: app/scripts/components/team/project-permissions-log-list.js:42
 msgid "Expiration time"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:67
+#: app/scripts/components/invitations/invitations-list.js:78
 msgid "Expired"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:127
+#: app/scripts/components/invitations/invitations-list.js:138
 msgid "Expires at"
 msgstr ""
 
@@ -1137,10 +1148,6 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: app/views/compare/filter.html:16
-msgid "Filter by type"
-msgstr ""
-
 #: app/scripts/components/navigation/select-workspace-dialog.html:44
 msgid "Filter organizations"
 msgstr ""
@@ -1156,7 +1163,6 @@ msgid "Fingerprint"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js:84
-#: app/views/directives/pagination.html:9
 msgid "First"
 msgstr ""
 
@@ -1269,7 +1275,7 @@ msgstr ""
 msgid "Hour price"
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-contracts.js:71
+#: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:20
 msgid "Hour rate"
 msgstr ""
 
@@ -1320,7 +1326,7 @@ msgstr ""
 msgid "Image name"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:125
+#: app/scripts/components/resource/list/resources-list.js:116
 #: app/views/import/import.html:150
 msgid "Import"
 msgstr ""
@@ -1329,7 +1335,7 @@ msgstr ""
 msgid "Import application"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:109
+#: app/scripts/components/resource/list/resources-list.js:100
 msgid "Import is not possible as there are no personal provider accounts registered."
 msgstr ""
 
@@ -1341,7 +1347,7 @@ msgstr ""
 msgid "Import resources from provider"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:112
+#: app/scripts/components/resource/list/resources-list.js:103
 msgid "Import resources from the registered provider accounts."
 msgstr ""
 
@@ -1454,8 +1460,16 @@ msgstr ""
 msgid "Invalid URL. Unable to parse payment details."
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-dialog.js:57
+#: app/scripts/components/invitations/actions/cancel.js:13
+msgid "Invitation has been canceled."
+msgstr ""
+
+#: app/scripts/components/invitations/actions/invitation-dialog-service.js:52
 msgid "Invitation has been created."
+msgstr ""
+
+#: app/scripts/components/invitations/actions/send.js:13
+msgid "Invitation has been sent again."
 msgstr ""
 
 #: app/scripts/components/invitations/utils.js:61
@@ -1474,9 +1488,9 @@ msgstr ""
 msgid "Invitations"
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-dialog.html:2
-#: app/scripts/components/invitations/invitation-dialog.html:73
-#: app/scripts/components/invitations/invitations-list.js:150
+#: app/scripts/components/invitations/actions/create.js:8
+#: app/scripts/components/invitations/actions/invitation-dialog.html:2
+#: app/scripts/components/invitations/actions/invitation-dialog.html:73
 msgid "Invite user"
 msgstr ""
 
@@ -1624,7 +1638,6 @@ msgid "Large"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js:85
-#: app/views/directives/pagination.html:15
 msgid "Last"
 msgstr ""
 
@@ -1795,6 +1808,7 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-compare-list.js:69
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:13
 #: app/scripts/components/cost-planning/cost-plans-list.js:31
 #: app/scripts/components/customer/customer-create-dialog.html:11
@@ -1813,6 +1827,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:30
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:28
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:42
+#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:31
 #: app/scripts/components/project/projects-list.js:70
 #: app/scripts/components/providers/details/provider-details.html:4
 #: app/scripts/components/providers/details/provider-settings.js:44
@@ -1932,7 +1947,7 @@ msgstr ""
 msgid "No internal IPs yet."
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:80
+#: app/scripts/components/invitations/invitations-list.js:91
 msgid "No invitations found matching filter."
 msgstr ""
 
@@ -1940,11 +1955,11 @@ msgstr ""
 msgid "No invoices found matching filter."
 msgstr ""
 
-#: app/scripts/controllers/compare-controller.js:46
+#: app/scripts/components/appstore/appstore-compare-list.js:48
 msgid "No items found matching filter."
 msgstr ""
 
-#: app/scripts/controllers/compare-controller.js:45
+#: app/scripts/components/appstore/appstore-compare-list.js:47
 msgid "No items to compare yet."
 msgstr ""
 
@@ -1985,6 +2000,10 @@ msgid "No organizations yet"
 msgstr ""
 
 #: app/scripts/components/payments/payment-list.js:24
+msgid "No payments found matching filter."
+msgstr ""
+
+#: app/scripts/components/payments/payment-list.js:23
 msgid "No payments yet"
 msgstr ""
 
@@ -1993,8 +2012,12 @@ msgstr ""
 msgid "No permissions found matching filter."
 msgstr ""
 
-#: app/scripts/components/plans/plan-agreements-list.js:21
-msgid "No plans yet"
+#: app/scripts/components/plans/plan-agreements-list.js:23
+msgid "No plans found matching filter."
+msgstr ""
+
+#: app/scripts/components/plans/plan-agreements-list.js:22
+msgid "No plans yet."
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-price-list.js:30
@@ -2056,6 +2079,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:31
 msgid "No security groups yet."
+msgstr ""
+
+#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:28
+msgid "No SLAs found matching filter."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:30
@@ -2175,7 +2202,6 @@ msgid "Notifications"
 msgstr ""
 
 #: app/scripts/components/quotas/quotas-table.html:10
-#: app/views/directives/pagination.html:4
 msgid "of"
 msgstr ""
 
@@ -2197,7 +2223,7 @@ msgstr ""
 msgid "Only customer owner or staff can create provider."
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:154
+#: app/scripts/components/invitations/actions/create.js:21
 msgid "Only customer owner or staff can invite users."
 msgstr ""
 
@@ -2209,11 +2235,11 @@ msgstr ""
 msgid "Only customer owner or staff can unlink provider."
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:182
+#: app/scripts/components/invitations/actions/cancel.js:36
 msgid "Only pending invitation can be canceled."
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:195
+#: app/scripts/components/invitations/actions/send.js:34
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
@@ -2232,7 +2258,7 @@ msgstr ""
 msgid "Open in Service Desk"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:165
+#: app/scripts/components/resource/list/resources-list.js:156
 msgid "Open map"
 msgstr ""
 
@@ -2337,11 +2363,11 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:187
+#: app/scripts/configs/base-config.js:188
 msgid "Organization owner"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.html:32
+#: app/scripts/components/team/add-team-member.html:34
 msgid "Organization owner role expires on"
 msgstr ""
 
@@ -2424,7 +2450,7 @@ msgid "Payment is being processed, please wait."
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:33
-#: app/scripts/components/invitations/invitations-list.js:58
+#: app/scripts/components/invitations/invitations-list.js:69
 msgid "Pending"
 msgstr ""
 
@@ -2460,6 +2486,10 @@ msgstr ""
 #: app/views/directives/customer-balance.html:46
 #: app/views/directives/customer-balance.html:8
 msgid "Plan"
+msgstr ""
+
+#: app/scripts/components/plans/plan-agreements-list.js:35
+msgid "Plan name"
 msgstr ""
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js:32
@@ -2537,6 +2567,7 @@ msgstr ""
 #: app/scripts/components/billing/invoices-list.js:54
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:7
 #: app/scripts/components/offering/offering-summary.html:32
+#: app/scripts/components/plans/plan-agreements-list.js:48
 msgid "Price"
 msgstr ""
 
@@ -2566,7 +2597,7 @@ msgstr ""
 msgid "Price per month"
 msgstr ""
 
-#: app/views/compare/row.html:20
+#: app/scripts/components/appstore/appstore-compare-list.js:97
 msgid "Price/hour"
 msgstr ""
 
@@ -2617,7 +2648,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:114
 #: app/scripts/components/events/event-details-dialog.html:69
-#: app/scripts/components/invitations/invitation-dialog.html:46
+#: app/scripts/components/invitations/actions/invitation-dialog.html:46
 #: app/scripts/components/issues/constants.js:97
 #: app/scripts/components/issues/issue-create-dialog.html:17
 #: app/scripts/components/issues/issue-create-dialog.html:27
@@ -2681,7 +2712,7 @@ msgstr ""
 msgid "Project has been updated."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:188
+#: app/scripts/configs/base-config.js:189
 msgid "Project manager"
 msgstr ""
 
@@ -2693,7 +2724,7 @@ msgstr ""
 #: app/scripts/components/issues/constants.js:55
 #: app/scripts/components/project/project-create.html:8
 #: app/scripts/components/project/project-manage.html:13
-#: app/scripts/components/team/add-team-member.html:45
+#: app/scripts/components/team/add-team-member.html:46
 #: app/scripts/components/user/user-projects.js:26
 msgid "Project name"
 msgstr ""
@@ -2713,10 +2744,11 @@ msgid "Projects"
 msgstr ""
 
 #: app/scripts/components/dashboard/organization-dashboard.html:15
-#: app/scripts/components/team/add-team-member.html:40
+#: app/scripts/components/team/add-team-member.html:41
 msgid "Projects list"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-compare-list.js:51
 #: app/scripts/components/appstore/appstore-store.html:32
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:9
 #: app/scripts/components/resource/list/resources-list.js:48
@@ -2824,7 +2856,7 @@ msgstr ""
 #: app/scripts/components/error/routes.js:25
 #: app/scripts/components/project/projects-list.js:131
 #: app/scripts/components/providers/provider-list.js:178
-#: app/scripts/components/resource/list/resources-list.js:106
+#: app/scripts/components/resource/list/resources-list.js:97
 #: app/scripts/components/resource/resource-provision-policy.js:14
 msgid "Quota has been reached."
 msgstr ""
@@ -2842,6 +2874,7 @@ msgid "Quotas"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:54
+#: app/scripts/components/appstore/appstore-compare-list.js:83
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:59
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:39
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:58
@@ -3016,7 +3049,7 @@ msgstr ""
 msgid "Required certifications"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:187
+#: app/scripts/components/invitations/actions/send.js:8
 msgid "Resend"
 msgstr ""
 
@@ -3181,10 +3214,10 @@ msgstr ""
 msgid "Restored volumes"
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-dialog.html:29
-#: app/scripts/components/invitations/invitations-list.js:94
+#: app/scripts/components/invitations/actions/invitation-dialog.html:29
+#: app/scripts/components/invitations/invitations-list.js:105
 #: app/scripts/components/team/add-project-member.html:27
-#: app/scripts/components/team/add-team-member.html:46
+#: app/scripts/components/team/add-team-member.html:47
 #: app/scripts/components/team/customer-permissions-log-list.js:32
 #: app/scripts/components/team/project-permissions-log-list.js:32
 #: app/scripts/components/user/user-projects.js:40
@@ -3212,7 +3245,7 @@ msgstr ""
 #: app/scripts/components/providers/details/provider-projects.html:15
 #: app/scripts/components/providers/details/provider-settings.html:76
 #: app/scripts/components/team/add-project-member.js:55
-#: app/scripts/components/team/add-team-member.js:24
+#: app/scripts/components/team/add-team-member.js:33
 msgid "Save"
 msgstr ""
 
@@ -3230,7 +3263,6 @@ msgstr ""
 #: app/scripts/components/issues/issue-registration.html:213
 #: app/scripts/components/navigation/header/main-search.html:3
 #: app/scripts/components/table/responsive-table.js:82
-#: app/views/directives/entity-list/entity-list.html:20
 msgid "Search"
 msgstr ""
 
@@ -3310,7 +3342,7 @@ msgid "Select organization..."
 msgstr ""
 
 #: app/scripts/components/appstore/category-selector.html:16
-#: app/scripts/components/invitations/invitation-dialog.html:56
+#: app/scripts/components/invitations/actions/invitation-dialog.html:56
 msgid "Select project"
 msgstr ""
 
@@ -3432,10 +3464,6 @@ msgstr ""
 
 #: app/views/import/import.html:90
 msgid "Show imported resources"
-msgstr ""
-
-#: app/views/directives/pagination.html:3
-msgid "Showing"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js:78
@@ -3587,15 +3615,17 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:35
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:42
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:55
+#: app/scripts/components/payments/payment-list.js:27
+#: app/scripts/components/plans/plan-agreements-list.js:26
+#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:38
 #: app/scripts/components/providers/provider-list.js:62
 #: app/scripts/components/resource/list/resources-list.js:56
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
 #: app/scripts/components/user/hooks/hook-list.js:26
-#: app/views/directives/expandable-item/expandable-item-payment.html:11
 msgid "State"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:111
+#: app/scripts/components/invitations/invitations-list.js:122
 #: app/scripts/components/issues/constants.js:109
 #: app/scripts/components/issues/constants.js:71
 #: app/scripts/components/issues/issue-detail.html:55
@@ -3616,6 +3646,7 @@ msgstr ""
 msgid "Step 3: Select Tenant"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-compare-list.js:90
 #: app/scripts/components/dashboard/constants.js:19
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:64
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:63
@@ -3626,7 +3657,6 @@ msgstr ""
 #: app/scripts/components/project/routes.js:147
 #: app/scripts/components/quotas/filters.js:7
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:11
-#: app/views/compare/row.html:44
 msgid "Storage"
 msgstr ""
 
@@ -3713,7 +3743,7 @@ msgstr ""
 msgid "Synchronise quotas"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:189
+#: app/scripts/configs/base-config.js:190
 msgid "System administrator"
 msgstr ""
 
@@ -3765,7 +3795,7 @@ msgstr ""
 msgid "Tenant package has been changed."
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-contracts.js:75
+#: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:18
 msgid "Terms"
 msgstr ""
 
@@ -3902,7 +3932,7 @@ msgid "TOTAL"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:60
-#: app/scripts/components/dashboard/dashboard-chart-service.js:115
+#: app/scripts/components/dashboard/dashboard-chart-service.js:119
 msgid "Total cost"
 msgstr ""
 
@@ -3927,9 +3957,9 @@ msgstr ""
 #: app/scripts/components/offering/offering-summary.html:25
 #: app/scripts/components/offering/offerings-list.js:43
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
+#: app/scripts/components/payments/payment-list.js:36
 #: app/scripts/components/providers/details/provider-details.html:8
 #: app/scripts/components/providers/provider-list.js:48
-#: app/views/compare/row.html:12
 #: app/views/directives/importable-resources.html:12
 msgid "Type"
 msgstr ""
@@ -3946,11 +3976,15 @@ msgstr ""
 msgid "Unable to cancel billing plan."
 msgstr ""
 
+#: app/scripts/components/invitations/actions/cancel.js:17
+msgid "Unable to cancel invitation."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:35
 msgid "Unable to change tenant package."
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-dialog.js:60
+#: app/scripts/components/invitations/actions/invitation-dialog-service.js:56
 msgid "Unable to create invitation."
 msgstr ""
 
@@ -3992,6 +4026,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-comments-list.html:8
 msgid "Unable to load comments."
+msgstr ""
+
+#: app/scripts/components/invitations/actions/send.js:15
+msgid "Unable to resend invitation."
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-settings.js:151
@@ -4061,7 +4099,7 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:135
+#: app/scripts/components/invitations/invitations-list.js:146
 msgid "URL"
 msgstr ""
 
@@ -4275,8 +4313,12 @@ msgstr ""
 msgid "You can remove this project by pressing the button"
 msgstr ""
 
-#: app/scripts/components/team/add-team-member.js:26
+#: app/scripts/components/team/add-team-member.js:48
 msgid "You cannot change your own role."
+msgstr ""
+
+#: app/scripts/components/team/add-team-member.js:51
+msgid "You cannot manage other organization owner."
 msgstr ""
 
 #: app/scripts/components/providers/provider-list.js:107
@@ -4311,6 +4353,14 @@ msgstr ""
 
 #: app/scripts/components/project/projects-list.js:129
 msgid "You don't have enough privileges to perform this operation."
+msgstr ""
+
+#: app/scripts/components/invitations/actions/cancel.js:33
+msgid "You don't have permission to cancel this invitation."
+msgstr ""
+
+#: app/scripts/components/invitations/actions/send.js:31
+msgid "You don't have permission to send this invitation."
 msgstr ""
 
 #: app/scripts/components/error/error-403.html:3
@@ -4362,7 +4412,7 @@ msgstr ""
 msgid "You have no restored volumes yet."
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-contracts.js:34
+#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:27
 msgid "You have no SLAs yet."
 msgstr ""
 
@@ -4371,7 +4421,7 @@ msgstr ""
 msgid "You have no snapshots yet."
 msgstr ""
 
-#: app/scripts/components/invitations/invitations-list.js:79
+#: app/scripts/components/invitations/invitations-list.js:90
 msgid "You have no team invitations yet."
 msgstr ""
 

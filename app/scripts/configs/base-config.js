@@ -181,6 +181,7 @@ angular.module('ncsaas')
     countersTimerInterval: 30, // seconds
 
     ownerCanManageCustomer: true,
+    OWNERS_CAN_MANAGE_OWNERS: true,
     MANAGER_CAN_MANAGE_TENANTS: false,
 
     roles: {

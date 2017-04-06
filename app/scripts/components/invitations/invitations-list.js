@@ -1,12 +1,10 @@
-export default function invitationsList() {
-  return {
-    restrict: 'E',
-    controller: InvitationsListController,
-    controllerAs: 'ListController',
-    templateUrl: 'views/partials/filtered-list.html',
-    scope: {}
-  };
-}
+const invitationsList = {
+  controller: InvitationsListController,
+  controllerAs: 'ListController',
+  templateUrl: 'views/partials/filtered-list.html',
+};
+
+export default invitationsList;
 
 // @ngInject
 function InvitationsListController(
@@ -19,8 +17,9 @@ function InvitationsListController(
   $state,
   $filter,
   $q,
-  $uibModal,
-  ncUtilsFlash,
+  InvitationCreateAction,
+  InvitationSendAction,
+  InvitationCancelAction,
   ENV
 ) {
   var controllerScope = this;
@@ -30,20 +29,32 @@ function InvitationsListController(
       this.service = invitationService;
       var fn = this._super.bind(this);
       this.loading = true;
-      $q.all([
+      this.loadContext().then(() => {
+        this.actionContext = this.getActionContext();
+        this.tableOptions = this.getTableOptions();
+        fn();
+      }).finally(() => {
+        this.loading = false;
+      });
+    },
+    loadContext: function() {
+      return $q.all([
         currentStateService.getCustomer().then(customer => {
           this.currentCustomer = customer;
         }),
         usersService.getCurrentUser().then(user => {
           this.currentUser = user;
         })
-      ]).then(() => {
-        this.isOwnerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
-        this.tableOptions = this.getTableOptions();
-        fn();
-      }).finally(() => {
-        this.loading = false;
-      });
+      ]);
+    },
+    getActionContext: function() {
+      return {
+        resetCache: controllerScope.resetCache.bind(this),
+        customer: this.currentCustomer,
+        user: this.currentUser,
+        isStaff: this.currentUser.is_staff,
+        isOwner: customersService.isOwner(this.currentCustomer, this.currentUser)
+      };
     },
     getFilter: function() {
       return {
@@ -140,81 +151,15 @@ function InvitationsListController(
             }
           }
         ],
-        tableActions: this.getTableActions(),
-        rowActions: this.getRowActions()
+        tableActions: [
+          InvitationCreateAction(this.actionContext),
+        ],
+        rowActions: [
+          InvitationSendAction(this.actionContext),
+          InvitationCancelAction(this.actionContext),
+        ]
       };
     },
-    getTableActions: function() {
-      return [
-        {
-          title: gettext('Invite user'),
-          iconClass: 'fa fa-plus',
-          callback: this.openDialog.bind(this),
-          disabled: !this.isOwnerOrStaff,
-          titleAttr: !this.isOwnerOrStaff && gettext('Only customer owner or staff can invite users.')
-        }
-      ];
-    },
-    openDialog: function() {
-      $uibModal.open({
-        component: 'invitationDialog',
-        resolve: {
-          customer: () => {
-            return this.currentCustomer;
-          }
-        }
-      }).result.then(function() {
-        controllerScope.resetCache();
-      });
-    },
-    getRowActions: function() {
-      if (this.isOwnerOrStaff) {
-        return [
-          {
-            title: gettext('Cancel'),
-            iconClass: 'fa fa-ban',
-            callback: this.cancelInvitation.bind(this),
-            isDisabled: function(row) {
-              return row.state !== 'pending';
-            },
-            tooltip: function(row) {
-              if (row.state !== 'pending') {
-                return gettext('Only pending invitation can be canceled.');
-              }
-            }
-          },
-          {
-            title: gettext('Resend'),
-            iconClass: 'fa fa-envelope-o',
-            callback: this.resendInvitation.bind(this),
-            isDisabled: function(row) {
-              return row.state !== 'pending';
-            },
-            tooltip: function(row) {
-              if (row.state !== 'pending') {
-                return gettext('Only pending invitation can be sent again.');
-              }
-            }
-          }
-        ];
-      }
-    },
-    cancelInvitation: function(row) {
-      invitationService.cancel(row.uuid).then(function() {
-        ncUtilsFlash.success('Invitation has been canceled.');
-        row.state = 'canceled';
-        controllerScope.resetCache();
-      }).catch(function() {
-        ncUtilsFlash.error('Unable to cancel invitation.');
-      });
-    },
-    resendInvitation: function(row) {
-      invitationService.resend(row.uuid).then(function() {
-        ncUtilsFlash.success('Invitation has been sent again.');
-      }).catch(function() {
-        ncUtilsFlash.error('Unable to resend invitation.');
-      });
-    }
   });
   controllerScope.__proto__ = new InvitationController();
 }

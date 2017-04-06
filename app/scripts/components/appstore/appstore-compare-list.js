@@ -44,8 +44,8 @@ function AppstoreCompareListController(
     getTableOptions: function() {
       return {
         searchFieldName: 'name',
-        noDataText: gettext('No resources to compare yet.'),
-        noMatchesText: gettext('No resources found matching filter.'),
+        noDataText: gettext('No items to compare yet.'),
+        noMatchesText: gettext('No items found matching filter.'),
         columns: [
           {
             title: gettext('Provider'),
