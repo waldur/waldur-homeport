@@ -152,18 +152,7 @@ angular.module('ncsaas')
     ],
     defaultListCacheTime: 60 * 10,
     optionsCacheTime: 10 * 1000,
-    toBeFeatures: [
-      'resources',
-      'support',
-      'monitoring',
-      'users',
-      'invoices',
-      'payments',
-      'premiumSupport',
-      'notifications',
-      'cost-planning',
-      'alerts'
-    ],
+    disabledFeatures: [],
     authenticationMethods: [
       'LOCAL_SIGNIN',
       'LOCAL_SIGNUP',
