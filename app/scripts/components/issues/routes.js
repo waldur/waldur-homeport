@@ -7,6 +7,7 @@ export default function issueRoutes($stateProvider) {
       abstract: true,
       data: {
         auth: true,
+        feature: 'support',
         workspace: 'support'
       }
     })

@@ -222,11 +222,12 @@ msgid "Alert types"
 msgstr ""
 
 #: app/scripts/components/customer/customer-workspace.js:102
-#: app/scripts/components/customer/routes.js:88
+#: app/scripts/components/customer/routes.js:89
 #: app/scripts/components/dashboard/project-alerts-feed.js:11
 #: app/scripts/components/help/constants.js:5
-#: app/scripts/components/project/project-details.js:85
-#: app/scripts/components/project/routes.js:109
+#: app/scripts/components/project/project-details.js:86
+#: app/scripts/components/project/routes.js:110
+#: app/scripts/components/resource/tabs/constants.js:20
 msgid "Alerts"
 msgstr ""
 
@@ -286,7 +287,7 @@ msgstr ""
 #: app/scripts/components/appstore/routes.js:42
 #: app/scripts/components/dashboard/constants.js:7
 #: app/scripts/components/project/project-details.js:45
-#: app/scripts/components/project/routes.js:131
+#: app/scripts/components/project/routes.js:132
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
 #: app/scripts/configs/base-config.js:106
 #: app/scripts/configs/base-config.js:125
@@ -338,10 +339,14 @@ msgstr ""
 msgid "Attached to"
 msgstr ""
 
+#: app/scripts/components/resource/tabs/constants.js:11
+msgid "Audit log"
+msgstr ""
+
 #: app/scripts/components/customer/customer-workspace.js:90
 #: app/scripts/components/customer/routes.js:72
-#: app/scripts/components/project/project-details.js:73
-#: app/scripts/components/project/routes.js:101
+#: app/scripts/components/project/project-details.js:74
+#: app/scripts/components/project/routes.js:102
 #: app/scripts/components/user/constants.js:32
 #: app/scripts/components/user/constants.js:8
 #: app/scripts/components/user/routes.js:15
@@ -474,7 +479,7 @@ msgid "Can't unlink system provider."
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:55
-#: app/scripts/components/appstore/category-selector.html:33
+#: app/scripts/components/appstore/category-selector.html:36
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:56
 #: app/scripts/components/customer/customer-create-dialog.html:94
 #: app/scripts/components/digitalocean/droplet-resize.html:76
@@ -600,7 +605,7 @@ msgid "Company"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:66
-#: app/scripts/components/appstore/routes.js:78
+#: app/scripts/components/appstore/routes.js:80
 msgid "Compare flavors"
 msgstr ""
 
@@ -627,7 +632,7 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:90
+#: app/scripts/components/customer/customer-delete.js:95
 #: app/scripts/components/project/project-manage.js:94
 #: app/scripts/components/table/base-list-controller.js:132
 msgid "Confirm deletion?"
@@ -660,8 +665,8 @@ msgstr ""
 msgid "Cost analysis"
 msgstr ""
 
-#: app/scripts/components/project/project-details.js:97
-#: app/scripts/components/project/routes.js:185
+#: app/scripts/components/project/project-details.js:98
+#: app/scripts/components/project/routes.js:187
 msgid "Cost planning"
 msgstr ""
 
@@ -737,11 +742,11 @@ msgstr ""
 msgid "Create plan"
 msgstr ""
 
-#: app/scripts/components/customer/routes.js:136
+#: app/scripts/components/customer/routes.js:137
 msgid "Create project"
 msgstr ""
 
-#: app/scripts/components/customer/routes.js:144
+#: app/scripts/components/customer/routes.js:145
 msgid "Create provider"
 msgstr ""
 
@@ -826,7 +831,7 @@ msgstr ""
 msgid "Current VPC package"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:135
+#: app/scripts/components/appstore/category-selector.js:140
 msgid "Custom request"
 msgstr ""
 
@@ -866,7 +871,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: app/scripts/components/customer/routes.js:120
+#: app/scripts/components/customer/routes.js:121
 msgid "Delete organization"
 msgstr ""
 
@@ -1001,7 +1006,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:206
+#: app/scripts/configs/base-config.js:195
 msgid "English"
 msgstr ""
 
@@ -1023,7 +1028,7 @@ msgstr ""
 msgid "Estimated cost"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:210
+#: app/scripts/configs/base-config.js:199
 msgid "Estonian"
 msgstr ""
 
@@ -1236,6 +1241,10 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
+#: app/scripts/components/resource/tabs/constants.js:25
+msgid "Graphs"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup/actions.js:14
 msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr ""
@@ -1266,7 +1275,7 @@ msgstr ""
 msgid "Helpdesk"
 msgstr ""
 
-#: app/scripts/components/issues/routes.js:27
+#: app/scripts/components/issues/routes.js:28
 msgid "Helpdesk dashboard"
 msgstr ""
 
@@ -1303,7 +1312,7 @@ msgstr ""
 msgid "I accept the"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.html:29
+#: app/scripts/components/appstore/category-selector.html:32
 msgid "I want another service"
 msgstr ""
 
@@ -1347,7 +1356,7 @@ msgstr ""
 msgid "Import private cloud"
 msgstr ""
 
-#: app/scripts/components/project/routes.js:197
+#: app/scripts/components/project/routes.js:199
 msgid "Import resources from provider"
 msgstr ""
 
@@ -1591,9 +1600,10 @@ msgid "Issue status"
 msgstr ""
 
 #: app/scripts/components/customer/customer-workspace.js:96
-#: app/scripts/components/customer/routes.js:80
-#: app/scripts/components/project/project-details.js:79
-#: app/scripts/components/project/routes.js:92
+#: app/scripts/components/customer/routes.js:81
+#: app/scripts/components/project/project-details.js:80
+#: app/scripts/components/project/routes.js:93
+#: app/scripts/components/resource/tabs/constants.js:15
 msgid "Issues"
 msgstr ""
 
@@ -1713,8 +1723,8 @@ msgid "MAC address"
 msgstr ""
 
 #: app/scripts/components/customer/customer-workspace.js:122
-#: app/scripts/components/project/project-details.js:105
-#: app/scripts/components/project/routes.js:169
+#: app/scripts/components/project/project-details.js:106
+#: app/scripts/components/project/routes.js:171
 #: app/scripts/components/user/constants.js:24
 #: app/scripts/components/user/routes.js:36
 msgid "Manage"
@@ -1802,7 +1812,7 @@ msgstr ""
 msgid "Monthly base price"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:165
+#: app/scripts/components/appstore/category-selector.js:170
 msgid "Motivation"
 msgstr ""
 
@@ -2341,6 +2351,10 @@ msgstr ""
 msgid "Organization code"
 msgstr ""
 
+#: app/scripts/components/customer/customer-delete.js:75
+msgid "Organization contains projects. Please remove them first."
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-details.html:6
 #: app/scripts/components/billing/invoice-details.html:6
 #: app/scripts/components/customer/customer-workspace.html:9
@@ -2367,7 +2381,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:188
+#: app/scripts/configs/base-config.js:177
 msgid "Organization owner"
 msgstr ""
 
@@ -2379,7 +2393,8 @@ msgstr ""
 msgid "Organization registration code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:81
+#: app/scripts/components/customer/customer-delete.js:83
+#: app/scripts/components/customer/customer-delete.js:86
 msgid "Organization removal"
 msgstr ""
 
@@ -2500,11 +2515,11 @@ msgstr ""
 msgid "Planned quota usage: {usage}"
 msgstr ""
 
-#: app/scripts/components/customer/routes.js:128
+#: app/scripts/components/customer/routes.js:129
 msgid "Plans"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:164
+#: app/scripts/components/appstore/category-selector.js:169
 msgid "Please clarify why do you need it"
 msgstr ""
 
@@ -2631,7 +2646,7 @@ msgstr ""
 #: app/scripts/components/dashboard/constants.js:15
 #: app/scripts/components/project/project-details.js:38
 #: app/scripts/components/project/projects-list.js:105
-#: app/scripts/components/project/routes.js:139
+#: app/scripts/components/project/routes.js:140
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
 #: app/scripts/configs/base-config.js:37
 #: app/scripts/configs/base-config.js:99
@@ -2716,7 +2731,7 @@ msgstr ""
 msgid "Project has been updated."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:189
+#: app/scripts/configs/base-config.js:178
 msgid "Project manager"
 msgstr ""
 
@@ -2741,7 +2756,7 @@ msgstr ""
 #: app/scripts/components/analytics/dashboard-cost-chart.html:12
 #: app/scripts/components/appstore/category-selector.html:10
 #: app/scripts/components/customer/customer-workspace.js:55
-#: app/scripts/components/customer/routes.js:96
+#: app/scripts/components/customer/routes.js:97
 #: app/scripts/components/navigation/select-workspace-dialog.html:82
 #: app/scripts/components/providers/details/dialog.html:28
 msgid "Projects"
@@ -2814,7 +2829,7 @@ msgstr ""
 #: app/scripts/components/analytics/cost-analysis.html:44
 #: app/scripts/components/analytics/dashboard-cost-chart.html:14
 #: app/scripts/components/customer/customer-workspace.js:48
-#: app/scripts/components/customer/routes.js:112
+#: app/scripts/components/customer/routes.js:113
 msgid "Providers"
 msgstr ""
 
@@ -2891,7 +2906,7 @@ msgstr ""
 msgid "Read through terms and conditions."
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:83
+#: app/scripts/components/customer/customer-delete.js:88
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
@@ -3006,7 +3021,7 @@ msgstr ""
 msgid "Request {requestId} has been created."
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:163
+#: app/scripts/components/appstore/category-selector.js:168
 msgid "Request a new service"
 msgstr ""
 
@@ -3015,7 +3030,7 @@ msgstr ""
 msgid "Request description"
 msgstr ""
 
-#: app/scripts/components/issues/routes.js:35
+#: app/scripts/components/issues/routes.js:36
 msgid "Request detail"
 msgstr ""
 
@@ -3024,7 +3039,7 @@ msgstr ""
 msgid "Request name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:85
+#: app/scripts/components/customer/customer-delete.js:90
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
 msgstr ""
@@ -3045,7 +3060,7 @@ msgstr ""
 
 #: app/scripts/components/offering/offering-header.html:18
 #: app/scripts/components/project/project-details.js:59
-#: app/scripts/components/project/routes.js:161
+#: app/scripts/components/project/routes.js:162
 msgid "Requested Services"
 msgstr ""
 
@@ -3423,7 +3438,7 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:166
+#: app/scripts/components/appstore/category-selector.js:171
 msgid "Service name"
 msgstr ""
 
@@ -3516,6 +3531,7 @@ msgid "Skip floating IP assignment"
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js:109
+#: app/scripts/components/resource/tabs/constants.js:30
 msgid "SLA"
 msgstr ""
 
@@ -3658,7 +3674,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:26
 #: app/scripts/components/project/project-details.js:52
 #: app/scripts/components/project/projects-list.js:96
-#: app/scripts/components/project/routes.js:147
+#: app/scripts/components/project/routes.js:148
 #: app/scripts/components/quotas/filters.js:7
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:11
 msgid "Storage"
@@ -3705,13 +3721,13 @@ msgid "Summary"
 msgstr ""
 
 #: app/scripts/components/navigation/header/support-link.html:4
-#: app/scripts/components/project/project-details.js:66
+#: app/scripts/components/project/project-details.js:67
 #: app/scripts/configs/base-config.js:61
 msgid "Support"
 msgstr ""
 
 #: app/scripts/components/issues/issues-workspace.html:9
-#: app/scripts/components/issues/routes.js:18
+#: app/scripts/components/issues/routes.js:19
 msgid "Support dashboard"
 msgstr ""
 
@@ -3720,7 +3736,7 @@ msgid "Support package"
 msgstr ""
 
 #: app/scripts/components/issues/issue-navigation-service.js:16
-#: app/scripts/components/issues/routes.js:43
+#: app/scripts/components/issues/routes.js:44
 msgid "Support requests"
 msgstr ""
 
@@ -3747,7 +3763,7 @@ msgstr ""
 msgid "Synchronise quotas"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:190
+#: app/scripts/configs/base-config.js:179
 msgid "System administrator"
 msgstr ""
 
@@ -3768,9 +3784,9 @@ msgid "TAX"
 msgstr ""
 
 #: app/scripts/components/customer/customer-workspace.js:109
-#: app/scripts/components/customer/routes.js:104
-#: app/scripts/components/project/project-details.js:90
-#: app/scripts/components/project/routes.js:177
+#: app/scripts/components/customer/routes.js:105
+#: app/scripts/components/project/project-details.js:91
+#: app/scripts/components/project/routes.js:179
 msgid "Team"
 msgstr ""
 
@@ -4235,7 +4251,7 @@ msgstr ""
 #: app/scripts/components/appstore/routes.js:32
 #: app/scripts/components/dashboard/constants.js:11
 #: app/scripts/components/project/project-details.js:31
-#: app/scripts/components/project/routes.js:123
+#: app/scripts/components/project/routes.js:124
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
 #: app/scripts/configs/base-config.js:121
 #: app/scripts/configs/base-config.js:29
@@ -4297,7 +4313,7 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:84
+#: app/scripts/components/customer/customer-delete.js:89
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 

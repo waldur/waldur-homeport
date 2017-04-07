@@ -8,25 +8,26 @@ export const DEFAULT_RESOURCE_TABS = {
   ],
   options: {
     events: {
-      heading: 'Audit log',
+      heading: gettext('Audit log'),
       component: 'resourceEvents',
     },
     issues: {
-      heading: 'Issues',
+      heading: gettext('Issues'),
       component: 'resourceIssues',
+      feature: 'support',
     },
     alerts: {
-      heading: 'Alerts',
+      heading: gettext('Alerts'),
       component: 'resourceAlerts',
       feature: 'alerts',
     },
     graphs: {
-      heading: 'Graphs',
+      heading: gettext('Graphs'),
       component: 'resourceGraphs',
       feature: 'monitoring',
     },
     sla: {
-      heading: 'SLA',
+      heading: gettext('SLA'),
       component: 'resourceSla',
       feature: 'monitoring',
     },
