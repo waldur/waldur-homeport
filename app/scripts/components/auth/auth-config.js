@@ -4,14 +4,27 @@ export default function initAuthProvider(ENV, $authProvider) {
 
   $authProvider.loginUrl = ENV.apiEndpoint + 'api-auth/password/';
 
-  $authProvider.facebook({
-    clientId: ENV.facebookClientId,
-    url: ENV.apiEndpoint + 'api-auth/facebook/',
-  });
+  if (ENV.facebookClientId) {
+    $authProvider.facebook({
+      clientId: ENV.facebookClientId,
+      url: ENV.apiEndpoint + 'api-auth/facebook/',
+    });
+  }
 
-  $authProvider.google({
-    clientId: ENV.googleClientId,
-    url: ENV.apiEndpoint + 'api-auth/google/'
-  });
+  if (ENV.googleClientId) {
+    $authProvider.google({
+      clientId: ENV.googleClientId,
+      url: ENV.apiEndpoint + 'api-auth/google/'
+    });
+  }
 
+  if (ENV.smartIdClientId) {
+    $authProvider.oauth2({
+      name: 'smartid',
+      clientId: ENV.smartIdClientId,
+      url: ENV.apiEndpoint + 'api-auth/smartidee/',
+      redirectUri: ENV.smartIdRedirectUri,
+      authorizationEndpoint: 'https://id.smartid.ee/oauth/authorize',
+    });
+  }
 }

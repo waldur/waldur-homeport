@@ -259,7 +259,7 @@ msgstr ""
 msgid "Allocation"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:102
+#: app/scripts/components/auth/auth-login.html:108
 msgid "Already have an account?"
 msgstr ""
 
@@ -638,7 +638,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:184
+#: app/scripts/components/auth/auth-login.js:196
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
@@ -701,8 +701,8 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
+#: app/scripts/components/auth/auth-login.html:104
 #: app/scripts/components/auth/auth-login.html:18
-#: app/scripts/components/auth/auth-login.html:98
 msgid "Create an account"
 msgstr ""
 
@@ -937,7 +937,7 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:96
+#: app/scripts/components/auth/auth-login.html:102
 msgid "Do not have an account?"
 msgstr ""
 
@@ -1493,7 +1493,7 @@ msgstr ""
 msgid "Invitation is not valid."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:109
+#: app/scripts/components/auth/auth-login.js:121
 msgid "Invitation token is not found."
 msgstr ""
 
@@ -1709,7 +1709,7 @@ msgstr ""
 msgid "Logging user in"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:104
+#: app/scripts/components/auth/auth-login.html:110
 #: app/scripts/components/auth/auth-login.html:41
 msgid "Login"
 msgstr ""
@@ -3509,6 +3509,10 @@ msgstr ""
 msgid "Sign in with Mobile ID"
 msgstr ""
 
+#: app/scripts/components/auth/auth-login.html:95
+msgid "Sign in with SmartID"
+msgstr ""
+
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:47
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:42
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:38
@@ -4064,7 +4068,7 @@ msgstr ""
 msgid "Unable to send record notification."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:119
+#: app/scripts/components/auth/auth-login.js:131
 msgid "Unable to validate invitation token."
 msgstr ""
 

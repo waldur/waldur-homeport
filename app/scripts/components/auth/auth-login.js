@@ -69,6 +69,18 @@ export const authLogin = {
       return this.methods.SOCIAL_SIGNUP && !this.civilNumberRequired;
     }
 
+    showGoogle() {
+      return this.showSocialSignup() && !!this.ENV.googleClientId;
+    }
+
+    showFacebook() {
+      return this.showSocialSignup() && !!this.ENV.facebookClientId;
+    }
+
+    showSmartId() {
+      return this.showSocialSignup() && !!this.ENV.smartIdClientId;
+    }
+
     showEstonianId() {
       return this.methods.ESTONIAN_ID;
     }
