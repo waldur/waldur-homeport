@@ -12,7 +12,6 @@ angular.module('ncsaas')
     // googleClientId: 'CHANGE_ME_TO_GOOGLE_SECRET',
     // facebookClientId: 'CHANGE_ME_TO_FACEBOOK_SECRET',
     // smartIdClientId: 'CHANGE_ME_TO_SMARTIDEE_SECRET',
-    // smartIdRedirectUri: 'CHANGE_ME_TO_SMARTIDEE_REDIRECT_URI'
 
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
