@@ -24,6 +24,7 @@ export default function initAuthProvider(ENV, $authProvider) {
       clientId: ENV.smartIdClientId,
       url: ENV.apiEndpoint + 'api-auth/smartidee/',
       authorizationEndpoint: 'https://id.smartid.ee/oauth/authorize',
+      redirectUri: window.location.origin,
     });
   }
 }
