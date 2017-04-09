@@ -77,16 +77,22 @@
     <p ng-if="auth.showSocialSignup()">
         <small translate>Or use social login</small>
     </p>
-    <div ng-if="auth.showSocialSignup()" class="m-b-sm">
+    <div ng-if="auth.showGoogle()" class="m-b-sm">
         <button ng-click="auth.authenticate('google')" class="btn btn-google btn-block">
             <i class="fa fa-google-plus-square" aria-hidden="true"></i>
             <span translate>Sign in with Google</span>
         </button>
     </div>
-    <div ng-if="auth.showSocialSignup()" class="m-b-sm">
+    <div ng-if="auth.showFacebook()" class="m-b-sm">
         <button ng-click="auth.authenticate('facebook')" class="btn btn-facebook btn-block">
             <i class="fa fa-facebook-square" aria-hidden="true"></i>
             <span translate>Sign in with Facebook</span>
+        </button>
+    </div>
+    <div ng-if="auth.showSmartId()" class="m-b-sm">
+        <button ng-click="auth.authenticate('smartid')" class="btn btn-smartid btn-block">
+            <i class="fa fa-id-card-o" aria-hidden="true"></i>
+            <span translate>Sign in with SmartID</span>
         </button>
     </div>
     <div ng-if="auth.showEstonianId()">
