@@ -14,6 +14,7 @@ function ServiceAddController(
   joinService,
   currentStateService,
   baseControllerAddClass,
+  CategoriesService,
   ENV,
   $rootScope,
   $state,
@@ -129,7 +130,7 @@ function ServiceAddController(
         vm.choices = [];
         angular.forEach(services, function(service, name) {
           service.name = name;
-          var category = ENV.serviceCategories.filter(function(category) {
+          var category = CategoriesService.getServiceCategories().filter(function(category) {
             return category.services.indexOf(name) !== -1;
           })[0];
           if (category) {
