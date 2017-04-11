@@ -18,6 +18,7 @@
       '$rootScope',
       '$stateParams',
       'coreUtils',
+      'CategoriesService',
       ImportResourceController]);
 
   function ImportResourceController(
@@ -35,7 +36,8 @@
     ncUtilsFlash,
     $rootScope,
     $stateParams,
-    coreUtils
+    coreUtils,
+    CategoriesService
     ) {
     var controllerScope = this;
     var Controller = baseControllerClass.extend({
@@ -75,7 +77,7 @@
       setProject: function() {
         var vm = this;
         vm.categories = [];
-        var categories = ENV.appStoreCategories;
+        var categories = CategoriesService.getResourceCategories();
         currentStateService.getProject().then(function(response) {
           vm.currentProject = response;
           for (var j = 0; j < categories.length; j++) {
@@ -110,7 +112,7 @@
         this.importedResources = [];
       },
       getCategoryForServiceType: function(service_type) {
-        var categories = ENV.appStoreCategories;
+        var categories = CategoriesService.getResourceCategories();
         for (var j = 0; j < categories.length; j++) {
           var category = categories[j];
           if (category.services.indexOf(service_type) !== -1) {

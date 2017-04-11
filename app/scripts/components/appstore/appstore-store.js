@@ -28,6 +28,7 @@ function AppStoreController(
   ncServiceUtils,
   resourceUtils,
   coreUtils,
+  CategoriesService,
   AppstoreFieldConfiguration,
   AppstoreResourceLoader,
   AppstoreProvidersService,
@@ -107,12 +108,6 @@ function AppStoreController(
       if (this.selectedCategory) {
         return this.categoryServices[this.selectedCategory.name];
       }
-    },
-    isVirtualMachinesSelected: function() {
-      return this.selectedCategory.name == ENV.appStoreCategories[ENV.VirtualMachines].name;
-    },
-    isApplicationSelected: function() {
-      return this.selectedCategory.name == ENV.appStoreCategories[ENV.Applications].name;
     },
     setService: function(service) {
       if (!service.enabled) {
@@ -209,7 +204,7 @@ function AppStoreController(
     formatResourceType: resourceUtils.formatResourceType,
     setCurrentProject: function() {
       var vm = this;
-      var categories = ENV.appStoreCategories;
+      var categories = CategoriesService.getResourceCategories();
       vm.categories = [];
       vm.selectedCategory = null;
       vm.secondStep = false;

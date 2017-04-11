@@ -127,6 +127,10 @@ angular.module('ncsaas')
         services: ['Oracle', 'GitLab']
       }
     ],
+
+    // optional list of disabled services, for example, ['Amazon', 'Azure']
+    disabledServices: [],
+
     resourceCategory: {
       'Amazon.Instance': 'vms',
       'SaltStack.SharepointTenant': 'apps',
