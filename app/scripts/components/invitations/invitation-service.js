@@ -9,8 +9,10 @@ export default function invitationService(baseServiceClass, $http, ENV, $window)
     check: function(invitation_uuid) {
       return this.executeAction(invitation_uuid, 'check');
     },
-    accept: function(invitation_uuid) {
-      return this.executeAction(invitation_uuid, 'accept');
+    accept: function(invitation_uuid, replace_email) {
+      return this.executeAction(invitation_uuid, 'accept', {
+        replace_email: replace_email
+      });
     },
     cancel: function(invitation_uuid) {
       return this.executeAction(invitation_uuid, 'cancel');
@@ -18,8 +20,8 @@ export default function invitationService(baseServiceClass, $http, ENV, $window)
     resend: function(invitation_uuid) {
       return this.executeAction(invitation_uuid, 'send');
     },
-    executeAction: function(invitation_uuid, action) {
-      return $http.post(`${ENV.apiEndpoint}api/user-invitations/${invitation_uuid}/${action}/`);
+    executeAction: function(invitation_uuid, action, data) {
+      return $http.post(`${ENV.apiEndpoint}api/user-invitations/${invitation_uuid}/${action}/`, data);
     },
     setInvitationToken: function(invitationUUID) {
       if (invitationUUID) {
