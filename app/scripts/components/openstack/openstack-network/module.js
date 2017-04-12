@@ -55,13 +55,13 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
 }
 
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_SUBRESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStack.Network', {
     order: [
-      ...DEFAULT_RESOURCE_TABS.order,
+      ...DEFAULT_SUBRESOURCE_TABS.order,
       'subnets',
     ],
-    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
+    options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
       subnets: {
         heading: 'Subnets',
         component: 'openstackSubnetsList',
