@@ -1,12 +1,24 @@
 // @ngInject
 export class invitationUtilsService {
-  constructor(invitationService, ncUtilsFlash, $auth, $state, $rootScope, $timeout) {
+  constructor(
+    invitationService,
+    usersService,
+    ncUtilsFlash,
+    $q,
+    $auth,
+    $state,
+    $rootScope,
+    $timeout,
+    $uibModal) {
     this.invitationService = invitationService;
+    this.usersService = usersService;
     this.ncUtilsFlash = ncUtilsFlash;
+    this.$q = $q;
     this.$auth = $auth;
     this.$state = $state;
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
+    this.$uibModal = $uibModal;
   }
 
   init() {
@@ -49,11 +61,41 @@ export class invitationUtilsService {
   }
 
   acceptInvitation(token) {
-    return this.invitationService.accept(token).then(() => {
-      this.ncUtilsFlash.success(gettext('Your invitation was accepted.'));
-      this.invitationService.clearInvitationToken();
-      this.$rootScope.$broadcast('refreshCustomerList', {updateSignal: true});
-    }).catch(this.showError.bind(this));
+    return this.shallChangeEmail(token).then(replace_email => {
+      return this.invitationService.accept(token, replace_email).then(() => {
+        this.ncUtilsFlash.success(gettext('Your invitation was accepted.'));
+        this.invitationService.clearInvitationToken();
+        this.$rootScope.$broadcast('refreshCustomerList', {updateSignal: true});
+      }).catch(this.showError.bind(this));
+    });
+  }
+
+  shallChangeEmail(token) {
+    return this.loadUserInvitation(token).then(context => {
+      if (!context.user.email || context.user.email === context.invitation.email) {
+        return true;
+      }
+
+      const dialog = this.$uibModal.open({
+        component: 'invitationConfirmDialog',
+        resolve: {
+          user: () => context.user,
+          invitation: () => context.invitation,
+        }
+      });
+      const deferred = this.$q.defer();
+      dialog.result.then(() => deferred.resolve(true));
+      dialog.closed.then(() => deferred.resolve(false));
+      return deferred.promise;
+    });
+  }
+
+  loadUserInvitation(token) {
+    return this.usersService.getCurrentUser().then(user => {
+      return this.invitationService.check(token).then(response => {
+        return { invitation: response.data, user };
+      });
+    });
   }
 
   showError(response) {

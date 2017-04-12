@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h2 class="modal-title" translate>Configure default email</h2>
+</div>
+<div class="modal-body">
+  <p>
+    <span translate>Your current email is:</span>
+    <strong>{{ $ctrl.resolve.user.email }}</strong>
+  </p>
+  <p>
+    <span translate>Invitation email is:</span>
+    <strong>{{ $ctrl.resolve.invitation.email }}</strong>
+  </p>
+  <p>
+    <span translate>Do you want to replace your email with email from invitation?</span>
+  </p>
+  </p>
+</div>
+<div class="modal-footer">
+  <button
+      class="btn btn-primary"
+      ng-click="$ctrl.close()">
+      <span translate>Yes, use invitation email</span>
+  </button>
+  <button class="btn btn-default"
+      ng-click="$ctrl.dismiss()">
+      <span translate>No, skip existing email</span>
+  </button>
+</div>

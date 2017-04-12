@@ -289,9 +289,9 @@ msgstr ""
 #: app/scripts/components/project/project-details.js:45
 #: app/scripts/components/project/routes.js:132
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
-#: app/scripts/configs/base-config.js:106
-#: app/scripts/configs/base-config.js:125
-#: app/scripts/configs/base-config.js:53
+#: app/scripts/configs/base-config.js:107
+#: app/scripts/configs/base-config.js:126
+#: app/scripts/configs/base-config.js:54
 msgid "Applications"
 msgstr ""
 
@@ -442,7 +442,7 @@ msgstr ""
 msgid "Block devices"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:45
+#: app/scripts/configs/base-config.js:46
 msgid "Block storage"
 msgstr ""
 
@@ -626,6 +626,10 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:9
 #: app/scripts/components/openstack/openstack-instance/actions.js:63
 msgid "Configure"
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:2
+msgid "Configure default email"
 msgstr ""
 
 #: app/scripts/components/plans/plans-list.html:34
@@ -941,6 +945,10 @@ msgstr ""
 msgid "Do not have an account?"
 msgstr ""
 
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:8
+msgid "Do you want to replace your email with email from invitation?"
+msgstr ""
+
 #: app/scripts/components/navigation/header/docs-link.html:3
 msgid "Documentation"
 msgstr ""
@@ -1006,7 +1014,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:195
+#: app/scripts/configs/base-config.js:200
 msgid "English"
 msgstr ""
 
@@ -1028,7 +1036,7 @@ msgstr ""
 msgid "Estimated cost"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:199
+#: app/scripts/configs/base-config.js:204
 msgid "Estonian"
 msgstr ""
 
@@ -1316,7 +1324,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:72
+#: app/scripts/configs/base-config.js:73
 msgid "IaaS"
 msgstr ""
 
@@ -1428,7 +1436,7 @@ msgstr ""
 msgid "Instance has been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:276
+#: app/scripts/components/appstore/appstore-store.js:271
 msgid "Instance is not configured."
 msgstr ""
 
@@ -1459,7 +1467,7 @@ msgstr ""
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:66
+#: app/scripts/components/invitations/utils.js:101
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
@@ -1471,6 +1479,10 @@ msgstr ""
 #: app/scripts/components/payments/payment-approve.js:10
 #: app/scripts/components/payments/payment-cancel.js:9
 msgid "Invalid URL. Unable to parse payment details."
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:7
+msgid "Invitation email is:"
 msgstr ""
 
 #: app/scripts/components/invitations/actions/cancel.js:13
@@ -1485,11 +1497,11 @@ msgstr ""
 msgid "Invitation has been sent again."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:61
+#: app/scripts/components/invitations/utils.js:96
 msgid "Invitation is not found."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:64
+#: app/scripts/components/invitations/utils.js:99
 msgid "Invitation is not valid."
 msgstr ""
 
@@ -2156,6 +2168,10 @@ msgstr ""
 msgid "No volumes found matching filter."
 msgstr ""
 
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:19
+msgid "No, skip existing email"
+msgstr ""
+
 #: app/scripts/components/providers/create.html:143
 msgid "Not all required fields have been entered."
 msgstr ""
@@ -2284,7 +2300,7 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:58
+#: app/scripts/configs/base-config.js:59
 msgid "Oracle database and SugarCRM."
 msgstr ""
 
@@ -2381,7 +2397,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:177
+#: app/scripts/configs/base-config.js:182
 msgid "Organization owner"
 msgstr ""
 
@@ -2543,7 +2559,7 @@ msgstr ""
 msgid "Please select projects where usage of the provider is permitted."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:286
+#: app/scripts/components/appstore/appstore-store.js:281
 msgid "Please specify {fields}."
 msgstr ""
 
@@ -2574,7 +2590,7 @@ msgstr ""
 msgid "Premium support"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:66
+#: app/scripts/configs/base-config.js:67
 msgid "Premium support service."
 msgstr ""
 
@@ -2648,8 +2664,8 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js:105
 #: app/scripts/components/project/routes.js:140
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
-#: app/scripts/configs/base-config.js:37
-#: app/scripts/configs/base-config.js:99
+#: app/scripts/configs/base-config.js:100
+#: app/scripts/configs/base-config.js:38
 msgid "Private clouds"
 msgstr ""
 
@@ -2731,7 +2747,7 @@ msgstr ""
 msgid "Project has been updated."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:178
+#: app/scripts/configs/base-config.js:183
 msgid "Project manager"
 msgstr ""
 
@@ -2793,7 +2809,7 @@ msgstr ""
 msgid "Provider does not comply with project policies"
 msgstr ""
 
-#: app/scripts/components/providers/create.js:73
+#: app/scripts/components/providers/create.js:74
 msgid "Provider has been created."
 msgstr ""
 
@@ -2837,11 +2853,11 @@ msgstr ""
 msgid "Providers events"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:50
+#: app/scripts/configs/base-config.js:51
 msgid "Provision persistent storage volumes in available Providers."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:34
+#: app/scripts/configs/base-config.js:35
 msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
 
@@ -2853,11 +2869,11 @@ msgstr ""
 msgid "Purchase"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:42
+#: app/scripts/configs/base-config.js:43
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:43
+#: app/scripts/components/appstore/appstore-store.js:44
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
@@ -2911,7 +2927,7 @@ msgstr ""
 msgid "Reason"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:20
+#: app/scripts/configs/base-config.js:21
 msgid "Reason unknown, please contact support."
 msgstr ""
 
@@ -3430,7 +3446,7 @@ msgstr ""
 msgid "Send notification"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:340
+#: app/scripts/components/appstore/appstore-store.js:335
 msgid "Server error occurred."
 msgstr ""
 
@@ -3685,7 +3701,7 @@ msgid "Storage"
 msgstr ""
 
 #: app/scripts/components/appstore/routes.js:52
-#: app/scripts/configs/base-config.js:113
+#: app/scripts/configs/base-config.js:114
 msgid "Storages"
 msgstr ""
 
@@ -3726,7 +3742,7 @@ msgstr ""
 
 #: app/scripts/components/navigation/header/support-link.html:4
 #: app/scripts/components/project/project-details.js:67
-#: app/scripts/configs/base-config.js:61
+#: app/scripts/configs/base-config.js:62
 msgid "Support"
 msgstr ""
 
@@ -3767,7 +3783,7 @@ msgstr ""
 msgid "Synchronise quotas"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:179
+#: app/scripts/configs/base-config.js:184
 msgid "System administrator"
 msgstr ""
 
@@ -4028,19 +4044,19 @@ msgstr ""
 msgid "Unable to delete link."
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:215
+#: app/scripts/controllers/import-resource-controller.js:217
 msgid "Unable to get list of imported resources."
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:243
+#: app/scripts/controllers/import-resource-controller.js:245
 msgid "Unable to get list of resources for service."
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:194
+#: app/scripts/controllers/import-resource-controller.js:196
 msgid "Unable to get list of tenants."
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:269
+#: app/scripts/controllers/import-resource-controller.js:271
 msgid "Unable to import resource {resourceName}."
 msgstr ""
 
@@ -4257,9 +4273,9 @@ msgstr ""
 #: app/scripts/components/project/project-details.js:31
 #: app/scripts/components/project/routes.js:124
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
-#: app/scripts/configs/base-config.js:121
-#: app/scripts/configs/base-config.js:29
-#: app/scripts/configs/base-config.js:92
+#: app/scripts/configs/base-config.js:122
+#: app/scripts/configs/base-config.js:30
+#: app/scripts/configs/base-config.js:93
 msgid "Virtual machines"
 msgstr ""
 
@@ -4323,6 +4339,10 @@ msgstr ""
 
 #: app/scripts/components/user/user-manage.js:56
 msgid "Why would you want to go away? Help us become better please!"
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:15
+msgid "Yes, use invitation email"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.js:40
@@ -4467,19 +4487,19 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
-#: app/scripts/directives/check-quotas.js:59
-msgid "You have reached the limit of your {quotaName} quota ({quotaUsage}). To update your current plan, please visit <a href=\"{link}\">plans page</a>."
-msgstr ""
-
 #: app/scripts/components/invitations/invitation-accept.html:4
 msgid "You will be redirected to sign up form in a moment."
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:6
+msgid "Your current email is:"
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-accept.html:3
 msgid "Your invitation is being processed."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:53
+#: app/scripts/components/invitations/utils.js:64
 msgid "Your invitation was accepted."
 msgstr ""
 
