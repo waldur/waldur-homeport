@@ -628,10 +628,6 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:2
-msgid "Configure default email"
-msgstr ""
-
 #: app/scripts/components/plans/plans-list.html:34
 msgid "Confirm changing your plan"
 msgstr ""
@@ -945,10 +941,6 @@ msgstr ""
 msgid "Do not have an account?"
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:8
-msgid "Do you want to replace your email with email from invitation?"
-msgstr ""
-
 #: app/scripts/components/navigation/header/docs-link.html:3
 msgid "Documentation"
 msgstr ""
@@ -1000,6 +992,10 @@ msgstr ""
 #: app/scripts/components/customer/customer-delete.html:28
 #: app/scripts/components/invitations/invitations-list.js:95
 msgid "Email"
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:2
+msgid "Email update"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:69
@@ -1467,7 +1463,7 @@ msgstr ""
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:101
+#: app/scripts/components/invitations/utils.js:108
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
@@ -1481,7 +1477,7 @@ msgstr ""
 msgid "Invalid URL. Unable to parse payment details."
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:7
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:10
 msgid "Invitation email is:"
 msgstr ""
 
@@ -1497,11 +1493,11 @@ msgstr ""
 msgid "Invitation has been sent again."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:96
+#: app/scripts/components/invitations/utils.js:103
 msgid "Invitation is not found."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:99
+#: app/scripts/components/invitations/utils.js:106
 msgid "Invitation is not valid."
 msgstr ""
 
@@ -2168,8 +2164,8 @@ msgstr ""
 msgid "No volumes found matching filter."
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:19
-msgid "No, skip existing email"
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:26
+msgid "No, continue using current email"
 msgstr ""
 
 #: app/scripts/components/providers/create.html:143
@@ -4341,7 +4337,11 @@ msgstr ""
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:15
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:14
+msgid "Would you like to update your current email with the one from the invitation?"
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:22
 msgid "Yes, use invitation email"
 msgstr ""
 
@@ -4499,7 +4499,7 @@ msgstr ""
 msgid "Your invitation is being processed."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:64
+#: app/scripts/components/invitations/utils.js:66
 msgid "Your invitation was accepted."
 msgstr ""
 
