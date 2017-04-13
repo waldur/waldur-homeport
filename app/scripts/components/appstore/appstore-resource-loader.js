@@ -20,7 +20,9 @@ export default class AppstoreResourceLoader {
       }
 
       if (field.resource) {
-        field.url = this.getResourceUrl(field.resource);
+        promises.push(this.loadResource(field.resource).then(response => {
+          validChoices[name] = response;
+        }));
       }
 
       if (field.url && name != 'service_project_link') {
@@ -55,11 +57,16 @@ export default class AppstoreResourceLoader {
     const promises = Object.keys(spec).map(name => {
       const { endpoint, params } = spec[name];
       const url = this.getResourceUrl(endpoint);
-      return this.$http.get(url, { params }).then(response => {
-        choices[name] = response.data;
+      return this.servicesService.getAll(params, url).then(response => {
+        choices[name] = response;
       });
     });
     return this.$q.all(promises).then(() => choices);
+  }
+
+  loadResource({ endpoint, params }) {
+    const url = this.getResourceUrl(endpoint);
+    return this.servicesService.getAll(params, url);
   }
 
   getResourceUrl(endpoint) {
