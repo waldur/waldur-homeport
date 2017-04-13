@@ -11,7 +11,7 @@ export default function actionDialog() {
 
 // @ngInject
 function ActionDialogController(
-  $scope, $q, $http, resourcesService, actionUtilsService,
+  $scope, $q, $http, $state, resourcesService, actionUtilsService,
   ActionResourceLoader, ncUtils, DEFAULT_FIELD_OPTIONS) {
   angular.extend($scope, {
     init: function () {
@@ -90,9 +90,18 @@ function ActionDialogController(
         promise = $http.post($scope.action.url, form);
       }
 
-      return promise.then(function() {
+      return promise.then(function(response) {
         $scope.errors = {};
         actionUtilsService.handleActionSuccess($scope.action);
+
+        if (response.status === 201 && $scope.action.followRedirect) {
+          const resource = response.data;
+          return $state.go('resources.details', {
+            resource_type: resource.resource_type,
+            uuid: resource.uuid,
+          });
+        }
+
         $scope.controller.reInitResource($scope.resource);
         $scope.$close();
       }, function(response) {
