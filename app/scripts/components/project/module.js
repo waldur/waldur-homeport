@@ -1,7 +1,8 @@
 import projectManage from './project-manage';
 import projectCreate from './project-create';
-import ProjectDetailsController from './project-details';
+import ProjectWorkspaceController from './project-workspace';
 import projectPriceLimit from './project-price-limit';
+import projectDialog from './project-dialog';
 import projectIssues from './project-issues';
 import projectEvents from './project-events';
 import projectsList from './projects-list';
@@ -13,8 +14,9 @@ import projectRoutes from './routes';
 export default module => {
   module.component('projectManage', projectManage);
   module.component('projectCreate', projectCreate);
-  module.controller('ProjectDetailsController', ProjectDetailsController);
+  module.controller('ProjectWorkspaceController', ProjectWorkspaceController);
   module.component('projectPriceLimit', projectPriceLimit);
+  module.component('projectDialog', projectDialog);
   module.component('projectIssues', projectIssues);
   module.component('projectEvents', projectEvents);
   module.component('projectsList', projectsList);

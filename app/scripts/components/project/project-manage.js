@@ -30,19 +30,27 @@ class ProjectManageController {
       this.currentStateService.getCustomer().then(customer => {
         this.customer = customer;
       }),
-      this.currentStateService.getProject().then(project => {
-        this.project = project;
-        this.projectModel = angular.copy(project);
-      }),
       this.customersService.isOwnerOrStaff().then(canManage => {
         this.canManage = canManage;
       }),
       this.certificationsService.getAll().then(certifications => {
         this.certifications = certifications;
       }),
+      this.loadProject(),
     ]).then(() => {
       this.projectCertifications = angular.copy(this.project.certifications);
     }).finally(() => this.loading = false);
+  }
+
+  loadProject() {
+    if (this.project) {
+      this.projectModel = angular.copy(this.project);
+      return;
+    }
+    return this.currentStateService.getProject().then(project => {
+      this.project = project;
+      this.projectModel = angular.copy(project);
+    });
   }
 
   saveProject() {
@@ -117,6 +125,9 @@ class ProjectManageController {
 const projectManage = {
   template: template,
   controller: ProjectManageController,
+  bindings: {
+    project: '<'
+  }
 };
 
 export default projectManage;

@@ -19,6 +19,7 @@ function ProjectsListController(
   $state,
   $scope,
   $timeout,
+  $uibModal,
   ncUtils,
   currentStateService,
   usersService) {
@@ -54,7 +55,8 @@ function ProjectsListController(
           noDataText: gettext('You have no projects yet.'),
           noMatchesText: gettext('No projects found matching filter.'),
           columns: vm.getColumns(),
-          tableActions: vm.getTableActions()
+          tableActions: vm.getTableActions(),
+          rowActions: vm.getRowActions(),
         };
       });
     },
@@ -143,6 +145,24 @@ function ProjectsListController(
           titleAttr: title
         }
       ];
+    },
+    getRowActions: function() {
+      return [
+        {
+          title: gettext('Details'),
+          iconClass: 'fa fa-eye',
+          callback: this.openDetailsDialog.bind(this),
+        },
+      ];
+    },
+    openDetailsDialog: function(project) {
+      $uibModal.open({
+        component: 'projectDialog',
+        resolve: {
+          project: () => project
+        },
+        size: 'lg',
+      });
     },
     afterGetList: function() {
       for (var i = 0; i < this.list.length; i++) {

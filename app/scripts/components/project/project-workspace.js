@@ -1,5 +1,5 @@
 // @ngInject
-export default function ProjectDetailsController(
+export default function ProjectWorkspaceController(
   $scope, currentStateService, tabCounterService,
   eventsService, projectsService, $state, AppStoreUtilsService) {
   activate();
