@@ -1,4 +1,7 @@
-<div class="ibox">
+<div class="ibox" ng-if="$ctrl.loading">
+    <loading-spinner/>
+</div>
+<div class="ibox" ng-if="!$ctrl.loading">
     <div class="ibox-title">
         <h5>
             <span translate>Checkout summary</span>
@@ -41,5 +44,13 @@
             </tr>
           </tbody>
         </table>
+    </div>
+    <div class="ibox-title">
+        <h5>
+            <span translate>Package limits</span>
+        </h5>
+    </div>
+    <div class="ibox-content">
+        <quota-usage-bar-chart quotas="$ctrl.quotas"/>
     </div>
 </div>

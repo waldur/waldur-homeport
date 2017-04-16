@@ -1,5 +1,10 @@
 <div class="wrapper wrapper-content">
-    <div class="row">
+    <div class="row" ng-if="AppStore.policyErrorMessage">
+        <div class="ibox-content">
+            <p>{{ ::AppStore.policyErrorMessage }}</p>
+        </div>
+    </div>
+    <div class="row" ng-if="!AppStore.policyErrorMessage">
         <div class="col-md-9">
 
             <appstore-providers
@@ -56,7 +61,7 @@
             <div class="ibox" visible="compare" ng-if="!AppStore.selectedResourceType && AppStore.showCompare.indexOf(AppStore.selectedCategory.name) !== -1">
                 <div class="ibox-title">
                     <h5>
-                        <a ui-sref="compare.compare">
+                        <a ui-sref="compare.compare({ category: AppStore.selectedCategory.key })">
                             <i class="fa fa-balance-scale"></i>
                             <span translate>Compare flavors</span>
                         </a>

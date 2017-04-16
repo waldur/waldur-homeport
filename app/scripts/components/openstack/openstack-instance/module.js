@@ -9,7 +9,7 @@ import actionConfig from './actions';
 
 export default module => {
   module.component('openstackInstanceSummary', openstackInstanceSummary);
-  module.directive('openstackInstanceCheckoutSummary', openstackInstanceCheckoutSummary);
+  module.component('openstackInstanceCheckoutSummary', openstackInstanceCheckoutSummary);
   module.component('openstackInstanceSecurityGroupsField', openstackInstanceSecurityGroupsField);
   module.component('openstackInstanceInternalIpsList', openstackInstanceInternalIpsList);
   module.component('openstackInstanceNetworks', openstackInstanceNetworks);

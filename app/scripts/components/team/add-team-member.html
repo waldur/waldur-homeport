@@ -17,13 +17,15 @@
       <div class="checkbox">
         <label>
           <input type="checkbox"
-             ng-disabled="!$ctrl.canChangeRole"
+             ng-disabled="!$ctrl.canChangeRole || !$ctrl.canManageOwner"
              ng-model="$ctrl.userModel.role"
              ng-true-value="'owner'"
              ng-false-value="''">
           </input>
           {{ ::$ctrl.roles.owner }}
-          <helpicon ng-if="!$ctrl.canChangeRole" help-text="{{ ::$ctrl.helpText |  translate }}"></helpicon>
+          <helpicon
+            ng-if="!$ctrl.canChangeRole || !$ctrl.canManageOwner"
+            help-text="{{ ::$ctrl.helpText | translate }}"></helpicon>
         </label>
       </div>
     </div>
@@ -32,8 +34,7 @@
       <label class="control-label" translate>Organization owner role expires on</label>
       <action-field-datetime
         model="$ctrl.userModel"
-        field="$ctrl.expirationTimeField"
-        disable-input="!$ctrl.canChangeRole"></action-field-datetime>
+        field="$ctrl.ownerExpirationTimeField"/>
     </div>
 
     <div class="form-group" ng-if="!$ctrl.emptyProjectList">
@@ -61,8 +62,7 @@
             <td>
               <action-field-datetime
                 model="project"
-                field="$ctrl.expirationTimeField"
-                disable-input="!$ctrl.canChangeRole"></action-field-datetime>
+                field="$ctrl.projectExpirationTimeField"/>
             </td>
           </tr>
           </tbody>

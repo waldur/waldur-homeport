@@ -15,6 +15,7 @@ function AppStoreController(
   baseControllerAddClass,
   servicesService,
   currentStateService,
+  usersService,
   ENV,
   ncUtils,
   $q,
@@ -27,9 +28,11 @@ function AppStoreController(
   ncServiceUtils,
   resourceUtils,
   coreUtils,
+  CategoriesService,
   AppstoreFieldConfiguration,
   AppstoreResourceLoader,
-  AppstoreProvidersService) {
+  AppstoreProvidersService,
+  ResourceProvisionPolicy) {
   var controllerScope = this;
   var Controller = baseControllerAddClass.extend({
     enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
@@ -62,25 +65,25 @@ function AppStoreController(
       this._super();
     },
     activate:function() {
-      let vm = this;
-      servicesService.getServicesList().then(function(response) {
-        vm.servicesMetadata = response;
-        vm.setCurrentProject();
-      });
-      currentStateService.getCustomer().then(function(response) {
-        vm.currentCustomer = response;
-        if (ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'resource')) {
-          $state.go('errorPage.limitQuota');
-        }
-      });
+      $q.all([
+        usersService.getCurrentUser().then(user =>
+          this.currentUser = user),
+        currentStateService.getCustomer().then(customer =>
+          this.currentCustomer = customer),
+        servicesService.getServicesList().then(servicesMetadata =>
+          this.servicesMetadata = servicesMetadata)
+      ]).then(() => this.setCurrentProject());
     },
     setCategory: function(category) {
       if (category === this.selectedCategory) {
         return;
       }
 
-      if (category.requireOwnerOrStaff && !currentStateService.getOwnerOrStaff()) {
-        $state.go('errorPage.notFound');
+      const { disabled, errorMessage } = ResourceProvisionPolicy.checkResource(
+        this.currentUser, this.currentCustomer, this.currentProject, category.key
+      );
+      if (disabled) {
+        this.policyErrorMessage = errorMessage;
         return;
       }
 
@@ -105,12 +108,6 @@ function AppStoreController(
       if (this.selectedCategory) {
         return this.categoryServices[this.selectedCategory.name];
       }
-    },
-    isVirtualMachinesSelected: function() {
-      return this.selectedCategory.name == ENV.appStoreCategories[ENV.VirtualMachines].name;
-    },
-    isApplicationSelected: function() {
-      return this.selectedCategory.name == ENV.appStoreCategories[ENV.Applications].name;
     },
     setService: function(service) {
       if (!service.enabled) {
@@ -207,7 +204,7 @@ function AppStoreController(
     formatResourceType: resourceUtils.formatResourceType,
     setCurrentProject: function() {
       var vm = this;
-      var categories = ENV.appStoreCategories;
+      var categories = CategoriesService.getResourceCategories();
       vm.categories = [];
       vm.selectedCategory = null;
       vm.secondStep = false;

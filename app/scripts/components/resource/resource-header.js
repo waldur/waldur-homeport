@@ -32,7 +32,7 @@ const resourceHeader = {
       this.getModel().then(response => {
         this.model = response;
         this.afterActivate(response);
-      }, this.modelNotFound)
+      }, this.modelNotFound.bind(this))
         .finally(() => {
           this.loading = false;
         });

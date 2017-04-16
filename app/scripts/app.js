@@ -35,9 +35,9 @@ window.gettext = angular.identity;
 (function() {
   angular.module('ncsaas').run(protectStates);
 
-  protectStates.$inject = ['$rootScope', '$state', '$auth', 'ENV'];
+  protectStates.$inject = ['$rootScope', '$state', '$auth', 'features'];
 
-  function protectStates($rootScope, $state, $auth, ENV) {
+  function protectStates($rootScope, $state, $auth, features) {
     // 1) If state data has `disabled` flag, user is redirected to dashboard.
 
     // 3) If state data has `anonymous` flag and user has authentication token,
@@ -64,7 +64,7 @@ window.gettext = angular.identity;
           return 'errorPage.notFound';
         } else if (data.anonymous && $auth.isAuthenticated()) {
           return 'profile.details';
-        } else if (data.feature && disabledFeature(data.feature)) {
+        } else if (data.feature && !features.isVisible(data.feature)) {
           return 'errorPage.notFound';
         }
       }
@@ -72,10 +72,6 @@ window.gettext = angular.identity;
       $rootScope.prevPreviousState = fromState;
       $rootScope.prevPreviousParams = fromParams;
     });
-
-    function disabledFeature(feature) {
-      return (!ENV.featuresVisible && ENV.toBeFeatures.indexOf(feature) !== -1);
-    }
   }
 
 })();
@@ -143,7 +139,7 @@ window.gettext = angular.identity;
 (function() {
   angular.module('ncsaas')
     .config(function(ENV, featuresProvider) {
-      featuresProvider.setFeatures(ENV.toBeFeatures);
+      featuresProvider.setFeatures(ENV.toBeFeatures.concat(ENV.disabledFeatures));
       featuresProvider.setVisibility(ENV.featuresVisible);
     });
 })();

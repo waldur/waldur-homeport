@@ -6,7 +6,9 @@ export default function baseResourceListController(
   priceEstimationService,
   servicesService,
   currentStateService,
+  usersService,
   projectsService,
+  ResourceProvisionPolicy,
   $uibModal,
   $rootScope,
   $state,
@@ -66,34 +68,14 @@ export default function baseResourceListController(
       };
     },
     renderResourceName: function(row) {
-      var img = '<img src="{src}" title="{title}" class="img-xs m-r-xs">'
-        .replace('{src}', resourceUtils.getIcon(row))
-        .replace('{title}', row.resource_type);
-      var href = $state.href('resources.details', {
-        uuid: row.uuid,
-        resource_type: row.resource_type
-      });
-      var link = ncUtils.renderLink(href, img + ' ' + (row.name || '&mdash;'));
-      return link + ' ' + this.getLinkState(row);
-    },
-    getLinkState: function(row) {
       var index = this.findIndexById(row);
-      return '<resource-link-state resource="controller.list[{index}]"></resource-state>'
+      return '<resource-name resource="controller.list[{index}]"></resource-name>'
         .replace('{index}', index);
     },
     renderResourceState: function(row) {
       var index = this.findIndexById(row);
       return '<resource-state resource="controller.list[{index}]"></resource-state>'
         .replace('{index}', index);
-    },
-    findIndexById: function(row) {
-      var index;
-      for (var i = 0; i < this.controllerScope.list.length; i++) {
-        if (this.controllerScope.list[i].uuid === row.uuid) {
-          index = i;
-        }
-      }
-      return index;
     },
     getTableActions: function() {
       var actions = [];
@@ -112,13 +94,13 @@ export default function baseResourceListController(
       var disabled, tooltip;
       if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
         disabled = true;
-        tooltip = 'Quota has been reached';
+        tooltip = gettext('Quota has been reached.');
       } else if (!this.projectHasNonSharedService(this.currentProject)) {
         disabled = true;
-        tooltip = 'Import is not possible as there are no personal provider accounts registered.';
+        tooltip = gettext('Import is not possible as there are no personal provider accounts registered.');
       } else {
         disabled = false;
-        tooltip = 'Import resources from the registered provider accounts.';
+        tooltip = gettext('Import resources from the registered provider accounts.');
       }
       return {
         title: this.getImportTitle(),
@@ -131,14 +113,12 @@ export default function baseResourceListController(
       };
     },
     getImportTitle: function() {
-      return 'Import';
+      return gettext('Import');
     },
     getCreateAction: function() {
-      var disabled, tooltip;
-      if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
-        disabled = true;
-        tooltip = 'Quota has been reached';
-      }
+      const { disabled, errorMessage } = ResourceProvisionPolicy.checkResource(
+        this.currentUser, this.currentCustomer, this.currentProject, this.getCategoryKey()
+      );
       return {
         title: this.getCreateTitle(),
         iconClass: 'fa fa-plus',
@@ -146,16 +126,19 @@ export default function baseResourceListController(
           this.gotoAppstore();
         }.bind(this),
         disabled: disabled,
-        titleAttr: tooltip
+        titleAttr: errorMessage
       };
     },
     getCreateTitle: function() {
-      return 'Create';
+      return gettext('Create');
     },
     gotoAppstore: function() {
       $state.go(this.getCategoryState(), {
         uuid: this.currentProject.uuid
       });
+    },
+    getCategoryKey: function() {
+      return this.categories[this.category];
     },
     getCategoryState: function() {
       if (this.category === ENV.VirtualMachines) {
@@ -214,7 +197,7 @@ export default function baseResourceListController(
       var markers = this.getMarkers();
 
       if(!markers) {
-        alert('No virtual machines with coordinates');
+        alert('No virtual machines with coordinates.');
       } else {
         var scope = $rootScope.$new();
         scope.markers = markers;
@@ -245,6 +228,9 @@ export default function baseResourceListController(
         }),
         currentStateService.getProject().then(function(project) {
           vm.currentProject = project;
+        }),
+        usersService.getCurrentUser().then(function(user) {
+          vm.currentUser = user;
         })
       ]).then(function() {
         vm.tableOptions = vm.getTableOptions();
@@ -252,7 +238,7 @@ export default function baseResourceListController(
           field: vm.rowFields
         });
         if (angular.isDefined(vm.category) && !vm.getFilter().resource_type) {
-          query.resource_category = vm.categories[vm.category];
+          query.resource_category = vm.getCategoryKey();
           vm.updateFilters(filter);
         }
         return fn(query);
@@ -260,7 +246,7 @@ export default function baseResourceListController(
     },
     updateFilters: function(filter) {
       var query = angular.extend({
-        resource_category: this.categories[this.category],
+        resource_category: this.getCategoryKey(),
         customer: currentStateService.getCustomerUuid()
       }, filter);
       angular.forEach(this.service.defaultFilter, function(val, key) {

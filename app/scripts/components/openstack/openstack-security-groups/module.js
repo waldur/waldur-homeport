@@ -23,10 +23,10 @@ export default module => {
 };
 
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_SUBRESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStack.SecurityGroup', {
     order: [
-      ...DEFAULT_RESOURCE_TABS.order,
+      ...DEFAULT_SUBRESOURCE_TABS.order,
       'rules',
     ],
     options: angular.merge({
@@ -34,7 +34,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
         heading: 'Rules',
         component: 'securityGroupRulesList'
       }
-    }, DEFAULT_RESOURCE_TABS.options)
+    }, DEFAULT_SUBRESOURCE_TABS.options)
   });
 }
 

@@ -162,7 +162,17 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
     showMore: function() {},
     toggleRefresh: function(open) {
       this.enableRefresh = !open;
-    }
+    },
+    findIndexById: function(row) {
+      var index;
+      var list = this.controllerScope.list;
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].uuid === row.uuid) {
+          index = i;
+        }
+      }
+      return index;
+    },
   });
 
   return ControllerListClass;

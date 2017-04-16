@@ -52,13 +52,13 @@ function stateConfig(ResourceStateConfigurationProvider) {
 }
 
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_SUBRESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStackTenant.BackupSchedule', {
     order: [
-      ...DEFAULT_RESOURCE_TABS.order,
+      ...DEFAULT_SUBRESOURCE_TABS.order,
       'backups',
     ],
-    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
+    options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
       backups: {
         heading: gettext('Backups'),
         component: 'openstackBackupsList'

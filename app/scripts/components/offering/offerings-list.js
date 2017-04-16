@@ -15,6 +15,7 @@ function ProjectOfferingsListController(
   var Controller = baseControllerListClass.extend({
     init: function() {
       this.service = offeringsService;
+      let fn = this._super.bind(this);
       currentStateService.getProject().then(project => {
         this.project = project;
         this.tableOptions = {
@@ -24,6 +25,7 @@ function ProjectOfferingsListController(
           columns: this.getColumns(),
           rowActions: this.getRowActions.bind(this),
         };
+        fn();
       });
     },
     getColumns: function() {

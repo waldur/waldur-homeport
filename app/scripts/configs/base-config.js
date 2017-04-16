@@ -9,8 +9,9 @@ angular.module('ncsaas')
     shortPageTitle: 'Waldur',
 
     // Social login config
-    googleClientId: 'google client id',
-    facebookClientId: 'facebook client id',
+    // googleClientId: 'CHANGE_ME_TO_GOOGLE_SECRET',
+    // facebookClientId: 'CHANGE_ME_TO_FACEBOOK_SECRET',
+    // smartIdClientId: 'CHANGE_ME_TO_SMARTIDEE_SECRET',
 
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
@@ -40,7 +41,6 @@ angular.module('ncsaas')
         key: 'private_clouds',
         state: 'appstore.private_clouds',
         description: gettext('Purchase bulk resource as Virtual Private Clouds (VPC).'),
-        requireOwnerOrStaff: true
       },
       {
         label: gettext('Block storage'),
@@ -75,6 +75,12 @@ angular.module('ncsaas')
       },
     ],
 
+    resourcesTypes: {
+      vms: 'vms',
+      storages: 'storages',
+      private_clouds: 'private_clouds'
+    },
+
     // Index of category inside of appStoreCategories
     AllResources: -1,
     VirtualMachines: 0,
@@ -96,7 +102,6 @@ angular.module('ncsaas')
         icon: 'cloud',
         key: 'private_clouds',
         services: ['OpenStack'],
-        requireOwnerOrStaff: true
       },
       {
         name: gettext('Applications'),
@@ -122,6 +127,10 @@ angular.module('ncsaas')
         services: ['Oracle', 'GitLab']
       }
     ],
+
+    // optional list of disabled services, for example, ['Amazon', 'Azure']
+    disabledServices: [],
+
     resourceCategory: {
       'Amazon.Instance': 'vms',
       'SaltStack.SharepointTenant': 'apps',
@@ -148,18 +157,7 @@ angular.module('ncsaas')
     ],
     defaultListCacheTime: 60 * 10,
     optionsCacheTime: 10 * 1000,
-    toBeFeatures: [
-      'resources',
-      'support',
-      'monitoring',
-      'users',
-      'invoices',
-      'payments',
-      'premiumSupport',
-      'notifications',
-      'cost-planning',
-      'alerts'
-    ],
+    disabledFeatures: [],
     authenticationMethods: [
       'LOCAL_SIGNIN',
       'LOCAL_SIGNUP',
@@ -167,11 +165,6 @@ angular.module('ncsaas')
       'ESTONIAN_ID'
     ],
     estoniaIdLogoutUrl: 'https://openid.ee/auth/logout',
-    resourcesTypes: {
-      vms: 'vms',
-      applications: 'apps',
-      privateClouds: 'private_clouds'
-    },
     featuresVisible: false,
 
     requestTimeout: 1000 * 20,
@@ -182,6 +175,8 @@ angular.module('ncsaas')
     countersTimerInterval: 30, // seconds
 
     ownerCanManageCustomer: true,
+    OWNERS_CAN_MANAGE_OWNERS: true,
+    MANAGER_CAN_MANAGE_TENANTS: false,
 
     roles: {
       owner: gettext('Organization owner'),
@@ -217,4 +212,7 @@ angular.module('ncsaas')
 
     // Renders label and logo at the login page
     // poweredByLogo: 'static/images/logo.png'
+
+    // Renders link to docs in header
+    // docsLink: 'http://example.com/docs/'
   });

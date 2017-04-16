@@ -8,9 +8,18 @@ const addTeamMember = {
     resolve: '<'
   },
   controller: class AddTeamMemberDialogController {
-    constructor(customerPermissionsService, projectPermissionsService, blockUI, $q, ENV, ErrorMessageFormatter, $filter) {
+    constructor(
+      $q,
+      customersService,
+      customerPermissionsService,
+      projectPermissionsService,
+      blockUI,
+      ENV,
+      ErrorMessageFormatter,
+      $filter) {
       // @ngInject
       this.$q = $q;
+      this.customersService = customersService;
       this.customerPermissionsService = customerPermissionsService;
       this.projectPermissionsService = projectPermissionsService;
       this.blockUI = blockUI;
@@ -23,13 +32,24 @@ const addTeamMember = {
       this.roles = this.ENV.roles;
       this.addText = gettext('Save');
       this.addTitle = gettext('Edit team member');
-      this.helpText = gettext('You cannot change your own role.');
       this.userModel = {
         expiration_time: null
       };
 
       this.canChangeRole = this.resolve.currentUser.is_staff ||
         this.resolve.editUser.uuid !== this.resolve.currentUser.uuid;
+
+      this.canManageOwner = this.resolve.currentUser.is_staff ||
+        (this.customersService.isOwner(this.resolve.currentCustomer, this.resolve.editUser) &&
+          this.customersService.isOwner(this.resolve.currentCustomer, this.resolve.currentUser) &&
+          this.ENV.OWNERS_CAN_MANAGE_OWNERS);
+
+      if (!this.canChangeRole) {
+        this.helpText = gettext('You cannot change your own role.');
+      }
+      if (!this.canManageOwner) {
+        this.helpText = gettext('You cannot manage other organization owner.');
+      }
 
       this.roleField = {
         name: 'role',
@@ -39,7 +59,7 @@ const addTeamMember = {
           { value: 'manager', display_name: this.ENV.roles.manager },
         ]
       };
-      this.expirationTimeField = {
+      this.projectExpirationTimeField = {
         name: 'expiration_time',
         disableInput: !this.canChangeRole,
         options: {
@@ -51,6 +71,10 @@ const addTeamMember = {
           }
         }
       };
+
+      this.ownerExpirationTimeField = angular.extend({}, this.projectExpirationTimeField, {
+        disableInput: !this.canChangeRole || !this.canManageOwner
+      });
 
       this.formatData();
     }

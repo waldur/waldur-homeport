@@ -28,8 +28,34 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
           summary: {
             component: 'openstackBackupRestoreSummary',
             formGroupClass: 'm-b-n'
+          },
+          security_groups: {
+            type: 'multiselect',
+            placeholder: gettext('Select security groups...'),
+            init: function(field, resource, form) {
+              form.security_groups = resource.instance_security_groups;
+            },
+            serializer: items => items.map(item => ({url: item.value}))
+          },
+          networks: {
+            label: gettext('Networks'),
+            component: 'openstackInstanceNetworks',
+            init: function(field, resource, form, action) {
+              field.choices = {
+                subnets: action.fields.internal_ips_set.rawChoices,
+                floating_ips: action.fields.floating_ips.rawChoices,
+              };
+              form.internal_ips_set = resource.instance_internal_ips_set;
+            }
           }
-        }
+        },
+        order: [
+          'flavor',
+          'security_groups',
+          'networks',
+          'summary',
+        ],
+        followRedirect: true
       }
     }
   });

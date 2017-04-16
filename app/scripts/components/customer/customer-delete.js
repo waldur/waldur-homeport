@@ -15,6 +15,8 @@ function CustomerDeleteController(
   paymentDetailsService,
   usersService,
   currentStateService,
+  features,
+  ncUtilsFlash,
   $uibModal,
   $state,
   $q,
@@ -69,13 +71,16 @@ function CustomerDeleteController(
     removeCustomer: function() {
       var vm = this;
       if (this.customer.projects.length > 0) {
+        if (!features.isVisible('support')) {
+          return ncUtilsFlash.error($filter('translate')(gettext('Organization contains projects. Please remove them first.')));
+        }
         return $uibModal.open({
           component: 'issueCreateDialog',
           resolve: {
             issue: () => ({
               customer: vm.customer,
               type: ISSUE_IDS.CHANGE_REQUEST,
-              summary: 'Organization removal'
+              summary: gettext('Organization removal'),
             }),
             options: {
               title: gettext('Organization removal'),

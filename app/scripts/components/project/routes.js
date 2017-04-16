@@ -1,11 +1,30 @@
 // @ngInject
-function loadProject($stateParams, $q, $state, currentStateService, projectsService, customersService, WorkspaceService) {
+function loadProject(
+  $stateParams,
+  $q,
+  $state,
+  usersService,
+  currentStateService,
+  projectsService,
+  projectPermissionsService,
+  customersService,
+  WorkspaceService) {
+
   if (!$stateParams.uuid) {
     return $q.reject();
   }
-  return projectsService.$get($stateParams.uuid).then(project => {
-    currentStateService.setProject(project);
-    return { project };
+
+  return usersService.getCurrentUser().then(user => {
+    return projectsService.$get($stateParams.uuid).then(project => {
+      return projectPermissionsService.getList({
+        user: user.uuid,
+        project: project.uuid,
+      }).then(permissions => {
+        project.permissions = permissions;
+        currentStateService.setProject(project);
+        return { project };
+      });
+    });
   }).then(({ project }) => {
     return customersService.$get(project.customer_uuid).then(customer => {
       currentStateService.setCustomer(customer);
@@ -70,6 +89,7 @@ export default function projectRoutes($stateProvider) {
       url: 'issues/',
       template: '<project-issues></project-issues>',
       data: {
+        feature: 'support',
         pageTitle: gettext('Issues'),
         pageClass: 'gray-bg'
       }
@@ -139,7 +159,8 @@ export default function projectRoutes($stateProvider) {
       url: 'offerings/',
       template: '<project-offerings-list/>',
       data: {
-        pageTitle: gettext('Requested Services')
+        pageTitle: gettext('Requested Services'),
+        feature: 'offering'
       }
     })
 

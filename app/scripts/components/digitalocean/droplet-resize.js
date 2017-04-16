@@ -9,7 +9,8 @@ export default function dropletResizeDialog() {
 }
 
 // @ngInject
-function DropletResizeDialogController($scope, resourcesService, resourceUtils, actionUtilsService) {
+function DropletResizeDialogController($scope, resourcesService, resourceUtils,
+  actionUtilsService, AppstoreResourceLoader) {
   angular.extend($scope, {
     loading: true,
     options: {
@@ -40,7 +41,7 @@ function DropletResizeDialogController($scope, resourcesService, resourceUtils, 
         if (!$scope.action.enabled) {
           return;
         }
-        return actionUtilsService.loadRawChoices($scope.action.fields.size).then(function(sizes) {
+        return AppstoreResourceLoader.loadRawChoices($scope.action.fields.size).then(function(sizes) {
           sizes.forEach(function(size) {
             size.enabled = $scope.isValidSize(size);
           });

@@ -9,6 +9,7 @@ import appstoreStore from './appstore-store';
 import appstoreRoutes from './routes';
 import AppstoreFieldConfiguration from './field-configuration';
 import AppstoreResourceLoader from './appstore-resource-loader';
+import appstoreCompareList from './appstore-compare-list';
 
 export default module => {
   module.service('AppStoreUtilsService', AppStoreUtilsService);
@@ -18,6 +19,7 @@ export default module => {
   module.component('categorySelectorTabs', categorySelectorTabs);
   module.component('appstoreCategorySelector', appstoreCategorySelector);
   module.component('appstoreProviders', appstoreProviders);
+  module.component('appstoreCompareList', appstoreCompareList);
   module.directive('appstoreSummary', appstoreSummary);
   module.directive('appstoreStore', appstoreStore);
   module.config(appstoreRoutes);

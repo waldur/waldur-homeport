@@ -60,17 +60,19 @@ export default function appstoreRoutes($stateProvider) {
       data: {
         category: 'offerings',
         pageTitle: gettext('Offerings'),
-        sidebarState: 'project.resources'
+        sidebarState: 'project.resources',
+        feature: 'offering',
       }
     })
 
     .state('offeringDetails', {
       url: '/offering/:uuid/',
       template: '<offering-details/>',
+      feature: 'offering',
     })
 
     .state('compare', {
-      url: '/compare/',
+      url: '/compare/:category/',
       templateUrl: 'views/project/base.html',
       abstract: true,
       data: {
@@ -81,6 +83,6 @@ export default function appstoreRoutes($stateProvider) {
 
     .state('compare.compare', {
       url: '',
-      templateUrl: 'views/compare/table.html',
+      template: '<appstore-compare-list/>',
     });
 }

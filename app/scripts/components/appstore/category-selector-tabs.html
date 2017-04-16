@@ -4,18 +4,18 @@
              heading="{{ ::(group.label | translate) }}">
         <div class="panel-body">
             <div class="list-group appstore-category-selector row">
-                <div class="col-md-6" ng-repeat="offering in group.items" visible="{{::offering.feature}}">
+                <div class="col-md-6"
+                    ng-repeat="offering in group.items"
+                    visible="{{::offering.feature}}"
+                    uib-tooltip="{{ offering.errorMessage }}">
                     <button class="list-group-item"
                         submit-button="$ctrl.onSelect({offering: offering})"
-                        ng-class="{disabled: offering.comingSoon}">
+                        ng-class="{disabled: offering.disabled}">
                         <i class="offering-icon fa" ng-class="::offering.icon"></i>
                         <h4 class="list-group-item-heading m-l-xl elipsis">
                             {{ ::offering.label | translate }}
                         </h4>
                         <div class="btn btn-default pull-right btn-xs">
-                            <span ng-if="offering.comingSoon" translate>
-                                Coming soon
-                            </span>
                             <span ng-if="!offering.comingSoon" translate>
                                 Select
                             </span>

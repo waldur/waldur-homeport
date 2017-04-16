@@ -9,7 +9,7 @@
     <div ng-if="!loading">
         <p ng-if="::action.dialogSubtitle">{{ action.dialogSubtitle | translate }}</p>
         <div class="form-group"
-             ng-repeat="(name, field) in action.fields"
+             ng-repeat="(name, field) in fields"
              ng-class="field.formGroupClass">
             <label class="control-label"
                 for="action-{{ name }}"
