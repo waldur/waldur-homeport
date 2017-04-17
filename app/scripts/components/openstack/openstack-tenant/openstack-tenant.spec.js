@@ -32,7 +32,7 @@ describe('OpenStack Tenant Provision Form', function() {
     servicesService = _servicesService_;
   }));
 
-  it('loads security groups, subnets and floating IPs filtered by settings', () => {
+  it('loads package templates filtered by settings', () => {
     loader.loadValidChoices({
       settings_uuid: 'VALID_SETTINGS_UUID'
     }, OpenStackTenantConfig.options);
