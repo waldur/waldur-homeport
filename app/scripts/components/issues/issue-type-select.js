@@ -1,5 +1,4 @@
 import template from './issue-type-select.html';
-import { ISSUE_TYPE_CHOICES } from './constants';
 
 const issueTypeSelect = {
   template,
@@ -7,8 +6,9 @@ const issueTypeSelect = {
     model: '<',
     field: '<',
   },
-  controller: function() {
-    this.types = ISSUE_TYPE_CHOICES;
+  controller: function(IssueTypesService) {
+    // @ngInject
+    IssueTypesService.getAllTypes().then(types => this.types = types);
   }
 };
 

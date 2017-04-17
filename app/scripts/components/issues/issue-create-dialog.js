@@ -18,24 +18,26 @@ const issueCreateDialog = {
     resolve: '<'
   },
   controller: class IssueCreateDialogController {
-    constructor(issuesService, $q, $state, ncUtilsFlash, ISSUE_IDS, coreUtils) {
+    constructor(issuesService, $q, $state, ncUtilsFlash, IssueTypesService, coreUtils) {
       // @ngInject
       this.service = issuesService;
       this.$q = $q;
       this.$state = $state;
       this.ncUtilsFlash = ncUtilsFlash;
-      this.ISSUE_IDS = ISSUE_IDS;
+      this.IssueTypesService = IssueTypesService;
       this.coreUtils = coreUtils;
     }
 
     $onInit() {
-      this.issue = angular.copy(this.resolve.issue) || {};
-      if (!this.issue.type) {
-        this.issue.type = this.ISSUE_IDS.CHANGE_REQUEST;
-        this.issueTypeEditable = true;
-      }
-      this.options = angular.extend({}, DEFAULT_OPTIONS, this.resolve.options);
-      this.emptyFieldMessage = gettext('You did not enter a field.');
+      this.IssueTypesService.getDefaultType().then(defaultType => {
+        this.issue = angular.copy(this.resolve.issue) || {};
+        if (!this.issue.type) {
+          this.issue.type = defaultType;
+          this.issueTypeEditable = true;
+        }
+        this.options = angular.extend({}, DEFAULT_OPTIONS, this.resolve.options);
+        this.emptyFieldMessage = gettext('You did not enter a field.');
+      });
     }
 
     save() {

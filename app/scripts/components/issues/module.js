@@ -1,4 +1,5 @@
 import issuesService from './issues-service';
+import IssueTypesService from './issue-types-service';
 import IssueNavigationService from './issue-navigation-service';
 import issueUsersService from './issue-users';
 import issueCommentsService from './issue-comments-service';
@@ -22,6 +23,7 @@ import issueTypeSelect from './issue-type-select';
 export default module => {
   module.constant('ISSUE_IDS', ISSUE_IDS);
   module.service('issuesService', issuesService);
+  module.service('IssueTypesService', IssueTypesService);
   module.service('IssueNavigationService', IssueNavigationService);
   module.service('issueUsersService', issueUsersService);
   module.service('issueCommentsService', issueCommentsService);
