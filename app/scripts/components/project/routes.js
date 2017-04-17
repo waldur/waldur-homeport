@@ -89,6 +89,7 @@ export default function projectRoutes($stateProvider) {
       url: 'issues/',
       template: '<project-issues></project-issues>',
       data: {
+        feature: 'support',
         pageTitle: gettext('Issues'),
         pageClass: 'gray-bg'
       }
@@ -158,7 +159,8 @@ export default function projectRoutes($stateProvider) {
       url: 'offerings/',
       template: '<project-offerings-list/>',
       data: {
-        pageTitle: gettext('Requested Services')
+        pageTitle: gettext('Requested Services'),
+        feature: 'offering'
       }
     })
 

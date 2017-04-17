@@ -70,7 +70,8 @@ export default class openstackTenantChangePackageService {
 
   loadTemplates(context) {
     return this.packageTemplatesService.getAll({
-      service_settings_uuid: context.tenant.service_settings_uuid
+      service_settings_uuid: context.tenant.service_settings_uuid,
+      archived: 'False',
     }).then(templates => angular.extend(context, {
       templates: templates
         .map(templateParser)

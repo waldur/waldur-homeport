@@ -15,6 +15,7 @@ const appstoreCategorySelector = {
       $scope,
       $uibModal,
       ENV,
+      features,
       currentStateService,
       usersService,
       ISSUE_IDS,
@@ -27,6 +28,7 @@ const appstoreCategorySelector = {
       this.$scope = $scope;
       this.$uibModal = $uibModal;
       this.ENV = ENV;
+      this.features = features;
       this.currentStateService = currentStateService;
       this.usersService = usersService;
       this.ISSUE_IDS = ISSUE_IDS;
@@ -126,6 +128,9 @@ const appstoreCategorySelector = {
     }
 
     loadCustomOfferings() {
+      if (!this.features.isVisible('support')) {
+        return this.$q.resolve([]);
+      }
       return this.offeringsService.getConfiguration()
         .then(offerings => Object.keys(offerings).map(key => ({
           key,

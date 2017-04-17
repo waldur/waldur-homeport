@@ -51,13 +51,13 @@ function stateConfig(ResourceStateConfigurationProvider) {
 
 
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_SUBRESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStackTenant.SnapshotSchedule', {
     order: [
-      ...DEFAULT_RESOURCE_TABS.order,
+      ...DEFAULT_SUBRESOURCE_TABS.order,
       'snapshots',
     ],
-    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
+    options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
       snapshots: {
         heading: gettext('Snapshots'),
         component: 'openstackSnapshotsNestedList'

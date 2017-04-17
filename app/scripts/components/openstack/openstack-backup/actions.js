@@ -54,7 +54,8 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
           'security_groups',
           'networks',
           'summary',
-        ]
+        ],
+        followRedirect: true
       }
     }
   });

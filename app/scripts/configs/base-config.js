@@ -9,8 +9,9 @@ angular.module('ncsaas')
     shortPageTitle: 'Waldur',
 
     // Social login config
-    googleClientId: 'google client id',
-    facebookClientId: 'facebook client id',
+    // googleClientId: 'CHANGE_ME_TO_GOOGLE_SECRET',
+    // facebookClientId: 'CHANGE_ME_TO_FACEBOOK_SECRET',
+    // smartIdClientId: 'CHANGE_ME_TO_SMARTIDEE_SECRET',
 
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
@@ -126,6 +127,10 @@ angular.module('ncsaas')
         services: ['Oracle', 'GitLab']
       }
     ],
+
+    // optional list of disabled services, for example, ['Amazon', 'Azure']
+    disabledServices: [],
+
     resourceCategory: {
       'Amazon.Instance': 'vms',
       'SaltStack.SharepointTenant': 'apps',
@@ -152,18 +157,7 @@ angular.module('ncsaas')
     ],
     defaultListCacheTime: 60 * 10,
     optionsCacheTime: 10 * 1000,
-    toBeFeatures: [
-      'resources',
-      'support',
-      'monitoring',
-      'users',
-      'invoices',
-      'payments',
-      'premiumSupport',
-      'notifications',
-      'cost-planning',
-      'alerts'
-    ],
+    disabledFeatures: [],
     authenticationMethods: [
       'LOCAL_SIGNIN',
       'LOCAL_SIGNUP',

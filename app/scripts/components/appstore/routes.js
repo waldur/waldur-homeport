@@ -60,13 +60,15 @@ export default function appstoreRoutes($stateProvider) {
       data: {
         category: 'offerings',
         pageTitle: gettext('Offerings'),
-        sidebarState: 'project.resources'
+        sidebarState: 'project.resources',
+        feature: 'offering',
       }
     })
 
     .state('offeringDetails', {
       url: '/offering/:uuid/',
       template: '<offering-details/>',
+      feature: 'offering',
     })
 
     .state('compare', {

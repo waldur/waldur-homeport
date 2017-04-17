@@ -77,6 +77,7 @@ export default function organizationRoutes($stateProvider) {
       url: 'issues/',
       template: '<customer-issues></customer-issues>',
       data: {
+        feature: 'support',
         pageTitle: gettext('Issues')
       }
     })
