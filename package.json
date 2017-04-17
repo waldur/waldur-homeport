@@ -1,6 +1,6 @@
 {
   "name": "waldur-homeport",
-  "version": "2.4.3",
+  "version": "2.4.5",
   "description": "Web interface for Waldur MasterMind cloud orchestrator",
   "repository": "https://code.opennodecloud.com/nc-saas/nodeconductor-web",
   "license": "MIT",
