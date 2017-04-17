@@ -7,52 +7,50 @@
 <div ng-if="!loading && canManage && !choices.length" class="empty-list-message">
     <span translate>There are no projects yet.</span>
 </div>
-<div ng-switch="service.service_type">
+<div ng-switch="service.service_type" ng-if="choices.length">
+    <p translate>Please select projects where usage of the provider is permitted.</p>
     <div ng-switch-when="OpenStack">
         <div multiple-select choices="choices" ></div>
     </div>
     <div ng-switch-default>
-        <div ng-if="choices.length">
-            <p translate>Please select projects where usage of the provider is permitted.</p>
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                    <th>Permitted</th>
-                    <th>Name</th>
-                    <th>RAM limit</th>
-                    <th>CPU limit</th>
-                    <th>Storage limit</th>
-                </thead>
-                <tr ng-repeat="choice in choices">
-                    <td>
-                        <input ng-model="choice.selected" type="checkbox"/>
-                    </td>
-                    <td>
-                        <label>
-                            {{ choice.title | translate }}
-                            <helpicon class="pull-right" help-text="{{ choice.help_text }}" ng-if="choice.help_text"/>
-                        </label>
-                        <br/>
-                        <small ng-bind="choice.subtitle" ng-if="choice.subtitle"></small>
-                    </td>
-                    <td>
-                        <input class="form-control" id="{{ 'quotas-ram-' + $index }}" type="number"
-                         ng-model="choice.quotas.ram.limit"
-                         ng-change="choice.dirty = true">
-                    </td>
-                    <td>
-                        <input class="form-control" id="{{ 'quotas-vcpu-' + $index }}" type="number"
-                         ng-model="choice.quotas.vcpu.limit"
-                         ng-change="choice.dirty = true">
-                    </td>
-                    <td>
-                        <input class="form-control" id="{{ 'quotas-storage-' + $index }}" type="number"
-                         ng-model="choice.quotas.storage.limit"
-                         ng-change="choice.dirty = true">
-                    </td>
-                </tr>
-              </table>
-            </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+                <th>Permitted</th>
+                <th>Name</th>
+                <th>RAM limit</th>
+                <th>CPU limit</th>
+                <th>Storage limit</th>
+            </thead>
+            <tr ng-repeat="choice in choices">
+                <td>
+                    <input ng-model="choice.selected" type="checkbox"/>
+                </td>
+                <td>
+                    <label>
+                        {{ choice.title | translate }}
+                        <helpicon class="pull-right" help-text="{{ choice.help_text }}" ng-if="choice.help_text"/>
+                    </label>
+                    <br/>
+                    <small ng-bind="choice.subtitle" ng-if="choice.subtitle"></small>
+                </td>
+                <td>
+                    <input class="form-control" id="{{ 'quotas-ram-' + $index }}" type="number"
+                     ng-model="choice.quotas.ram.limit"
+                     ng-change="choice.dirty = true">
+                </td>
+                <td>
+                    <input class="form-control" id="{{ 'quotas-vcpu-' + $index }}" type="number"
+                     ng-model="choice.quotas.vcpu.limit"
+                     ng-change="choice.dirty = true">
+                </td>
+                <td>
+                    <input class="form-control" id="{{ 'quotas-storage-' + $index }}" type="number"
+                     ng-model="choice.quotas.storage.limit"
+                     ng-change="choice.dirty = true">
+                </td>
+            </tr>
+          </table>
         </div>
     </div>
     <p class="text-center">
