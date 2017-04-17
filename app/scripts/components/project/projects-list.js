@@ -26,12 +26,18 @@ function ProjectsListController(
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({
     init: function() {
+      this.controllerScope = controllerScope;
       this.service = projectsService;
       var fn = this._super.bind(this);
       this.activate().then(function() {
         fn();
       });
       $scope.$on('currentCustomerUpdated', function() {
+        $timeout(function() {
+          controllerScope.resetCache();
+        });
+      });
+      $scope.$on('refreshProjectList', function() {
         $timeout(function() {
           controllerScope.resetCache();
         });
@@ -153,6 +159,11 @@ function ProjectsListController(
           iconClass: 'fa fa-eye',
           callback: this.openDetailsDialog.bind(this),
         },
+        {
+          title: gettext('Remove'),
+          iconClass: 'fa fa-trash',
+          callback: this.remove.bind(this.controllerScope),
+        }
       ];
     },
     openDetailsDialog: function(project) {

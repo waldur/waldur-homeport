@@ -23,6 +23,7 @@ class ProjectManageController {
   }
 
   $onInit() {
+    this.workspace = this.WorkspaceService.getWorkspace().workspace;
     this.canManage = false;
     this.projectModel = {};
     this.loading = true;
@@ -39,6 +40,7 @@ class ProjectManageController {
       this.loadProject(),
     ]).then(() => {
       this.projectCertifications = angular.copy(this.project.certifications);
+      this.certificationsList = this.project.certifications.map(x => x.name).join(', ');
     }).finally(() => this.loading = false);
   }
 
@@ -70,6 +72,10 @@ class ProjectManageController {
     }).then(response => {
       const project = response.data;
       this.ncUtilsFlash.success(gettext('Project has been updated.'));
+      if (this.workspace === 'organization') {
+        this.$rootScope.$broadcast('refreshProjectList');
+        return;
+      }
       // TODO: Migrate to Redux and make code DRY
       this.currentStateService.setProject(project);
       let item = this.customer.projects.filter(item => item.uuid === project.uuid)[0];
