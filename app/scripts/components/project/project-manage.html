@@ -37,26 +37,6 @@
               <p class="form-control-static" ng-if="!$ctrl.canManage">{{::$ctrl.projectModel.description || '&mdash;'}}</p>
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-sm-3 col-md-4 col-lg-3 control-label">
-              <span translate>Certifications</span>
-              <i class="fa fa-question-circle" uib-tooltip="{{ 'Provider certification required by this project' | translate }}"></i>
-            </label>
-            <div class="col-sm-9 col-md-8">
-              <ui-select
-                multiple
-                ng-model="$ctrl.projectCertifications"
-                ng-if="$ctrl.canManage">
-                <ui-select-match placeholder="{{ 'Select certifications' | translate }}">
-                  {{ $item.name }}
-                </ui-select-match>
-                <ui-select-choices repeat="item in $ctrl.certifications | filter: {name: $select.search} track by item.url">
-                  <div ng-bind-html="item.name | highlight: $select.search"></div>
-                </ui-select-choices>
-              </ui-select>
-              <p class="form-control-static" ng-if="!$ctrl.canManage">{{::$ctrl.certificationsList || '&mdash;'}}</p>
-            </div>
-          </div>
           <div class="form-group" ng-if="$ctrl.canManage">
             <div class="col-sm-offset-3 col-xs-12">
               <button type="submit" class="btn btn-primary" submit-button="$ctrl.saveProject()">
@@ -70,9 +50,37 @@
   </uib-tab>
 
   <uib-tab visible-if="'projectCostDetails'">
-    <uib-tab-heading translate>Project cost details</uib-tab-heading>
+    <uib-tab-heading translate>Project policies</uib-tab-heading>
     <div class="panel-body">
-      <project-price-limit project="$ctrl.project"></project-price-limit>
+      <div class="form-group">
+        <h5>
+          <span translate>Project policies</span>
+          <i class="fa fa-question-circle" uib-tooltip="{{ 'Provider certification required by this project' | translate }}"></i>
+        </h5>
+        <ui-select
+          multiple
+          ng-model="$ctrl.projectCertifications"
+          ng-if="$ctrl.canManage">
+          <ui-select-match placeholder="{{ 'Select certifications' | translate }}">
+            {{ $item.name }}
+          </ui-select-match>
+          <ui-select-choices repeat="item in $ctrl.certifications | filter: {name: $select.search} track by item.url">
+            <div ng-bind-html="item.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+        <p ng-if="!$ctrl.canManage">{{::$ctrl.certificationsList || '&mdash;'}}</p>
+      </div>
+
+      <div class="form-group" ng-if="$ctrl.canManage">
+        <button type="submit" class="btn btn-primary btn-sm" submit-button="$ctrl.updateCertifications()">
+          <span translate>Update certificates</span>
+        </button>
+      </div>
+
+      <div class="form-group">
+        <h5 translate>Cost policies</h5>
+        <project-price-limit project="$ctrl.project"></project-price-limit>
+      </div>
     </div>
   </uib-tab>
 

@@ -59,10 +59,7 @@ class ProjectManageController {
     if (this.ProjectForm.$invalid) {
       return this.$q.reject();
     }
-    return this.$q.all([
-      this.updateProject(),
-      this.updateCertifications(),
-    ]);
+    return this.updateProject();
   }
 
   updateProject() {
@@ -72,14 +69,16 @@ class ProjectManageController {
     }).then(response => {
       const project = response.data;
       this.ncUtilsFlash.success(gettext('Project has been updated.'));
+
+      let item = this.customer.projects.filter(item => item.uuid === project.uuid)[0];
+      item.name = project.name;
+
       if (this.workspace === 'organization') {
         this.$rootScope.$broadcast('refreshProjectList');
         return;
       }
       // TODO: Migrate to Redux and make code DRY
       this.currentStateService.setProject(project);
-      let item = this.customer.projects.filter(item => item.uuid === project.uuid)[0];
-      item.name = project.name;
       this.WorkspaceService.setWorkspace({
         customer: this.customer,
         project: project,
@@ -100,7 +99,16 @@ class ProjectManageController {
     if (angular.equals(oldItems, newItems)) {
       return this.$q.resolve();
     } else {
-      return this.projectsService.updateCertifications(this.project.url, newItems);
+      return this.projectsService.updateCertifications(this.project.url, newItems).then(response => {
+        let item = this.customer.projects.filter(item => item.uuid === this.project.uuid)[0];
+        item.certifications = this.project.certifications;
+        this.projectsService.clearAllCacheForCurrentEndpoint();
+
+        if (this.workspace === 'organization') {
+          this.$rootScope.$broadcast('refreshProjectList');
+          return;
+        }
+      });
     }
   }
 
