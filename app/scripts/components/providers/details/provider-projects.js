@@ -18,7 +18,8 @@ function ProviderProjectsController(
   joinServiceProjectLinkService,
   projectsService,
   currentStateService,
-  customersService) {
+  customersService,
+  quotasService) {
   angular.extend($scope, {
     init: function() {
       $scope.loading = true;
@@ -27,6 +28,8 @@ function ProviderProjectsController(
       }).finally(function() {
         $scope.loading = false;
       });
+
+      $scope.quotaNames = ['ram', 'vcpu', 'storage'];
     },
     getChoices: function() {
       var vm = this;
@@ -49,13 +52,28 @@ function ProviderProjectsController(
 
     },
     newChoice: function(project, link) {
-      return {
+      let choice = {
         title: project.name,
         selected: link && !!link.url,
         link_url: link && link.url,
         project_url: project.url,
-        subtitle: link && link.state
+        subtitle: link && link.state,
+        quotas: {},
+        dirty: false,
       };
+
+      $scope.quotaNames.forEach(function(name) {
+          choice.quotas[name] = {
+            limit: -1,
+            name: name,
+          };
+
+          if (link && link.quotas && link.quotas.length > 1) {
+            choice.quotas[name] = link.quotas.find(function(quota){return quota.name == name});
+          }
+      });
+
+      return choice;
     },
     getContext: function() {
       // Context consists of list of projects and list of links
@@ -89,6 +107,21 @@ function ProviderProjectsController(
           choice.project_url).then(function(link) {
             choice.link_url = link.url;
             choice.subtitle = gettext('Link created');
+
+            if (link.quotas && link.quotas.length > 0) {
+              let updatePromises = link.quotas.map(function(quota) {
+                choice.quotas[quota.name].url = quota.url;
+                return quotasService.update(choice.quotas[quota.name]);
+              });
+
+              $q.all(updatePromises).catch(function(response){
+                var reason = '';
+                if (response.data && response.data.detail) {
+                  reason = response.data.detail;
+                }
+                choice.subtitle = gettext('Unable to set quotas.') + ' ' + reason;
+              });
+            }
           }).catch(function(response) {
             var reason = '';
             if (response.data && response.data.detail) {
@@ -96,6 +129,23 @@ function ProviderProjectsController(
             }
             choice.subtitle = gettext('Unable to create link.') + ' ' + reason;
             choice.selected = false;
+          });
+      });
+
+      let quotasUpdatePromises = $scope.choices.filter(function(choice){
+        return choice.selected && choice.link_url && choice.dirty;
+      }).map(function(choice){
+        return $scope.quotaNames.map(function(name){
+          return quotasService.update(choice.quotas[name]).then(function(){
+              choice.dirty = false;
+              choice.subtitle = gettext('Quotas have been updated.');
+            }).catch(function(response){
+                var reason = '';
+                if (response.data && response.data.detail) {
+                  reason = response.data.detail;
+                }
+                choice.subtitle = gettext('Unable to update quotas.') + ' ' + reason;
+            });
           });
       });
 
@@ -116,7 +166,7 @@ function ProviderProjectsController(
         });
       });
 
-      return $q.all(add_promises.concat(delete_promises));
+      return $q.all(add_promises.concat(delete_promises).concat(quotasUpdatePromises));
     }
   });
   $scope.init();
