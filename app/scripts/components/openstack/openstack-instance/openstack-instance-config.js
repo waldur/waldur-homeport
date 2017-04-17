@@ -103,9 +103,12 @@ export default {
       label: gettext('Security groups'),
       placeholder: gettext('Select security groups...'),
       component: 'openstackInstanceSecurityGroupsField',
-      resource: {
-        endpoint: 'openstacktenant-security-groups'
-      },
+      resource: context => ({
+        endpoint: 'openstacktenant-security-groups',
+        params: {
+          settings_uuid: context.settings_uuid,
+        }
+      }),
       parser: group => ({
         value: group.url,
         display_name: group.name,

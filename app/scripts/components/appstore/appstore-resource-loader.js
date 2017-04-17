@@ -20,7 +20,7 @@ export default class AppstoreResourceLoader {
       }
 
       if (field.resource) {
-        promises.push(this.loadResource(field.resource).then(response => {
+        promises.push(this.loadResource(context, field).then(response => {
           validChoices[name] = response;
         }));
       }
@@ -64,7 +64,8 @@ export default class AppstoreResourceLoader {
     return this.$q.all(promises).then(() => choices);
   }
 
-  loadResource({ endpoint, params }) {
+  loadResource(context, field) {
+    const { endpoint, params } = field.resource(context);
     const url = this.getResourceUrl(endpoint);
     return this.servicesService.getAll(params, url);
   }
