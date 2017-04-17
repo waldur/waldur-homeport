@@ -99,9 +99,7 @@ class ProjectManageController {
     if (angular.equals(oldItems, newItems)) {
       return this.$q.resolve();
     } else {
-      return this.projectsService.updateCertifications(this.project.url, newItems).then(response => {
-        let item = this.customer.projects.filter(item => item.uuid === this.project.uuid)[0];
-        item.certifications = this.project.certifications;
+      return this.projectsService.updateCertifications(this.project.url, newItems).then(() => {
         this.projectsService.clearAllCacheForCurrentEndpoint();
 
         if (this.workspace === 'organization') {
