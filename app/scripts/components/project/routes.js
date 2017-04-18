@@ -164,14 +164,6 @@ export default function projectRoutes($stateProvider) {
       }
     })
 
-    .state('project.delete', {
-      url: 'delete/',
-      template: '<project-manage></project-manage>',
-      data: {
-        pageTitle: gettext('Manage')
-      }
-    })
-
     .state('project.team', {
       url: 'team/',
       template: '<project-team>',

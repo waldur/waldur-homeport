@@ -99,11 +99,6 @@ export default function ProjectWorkspaceController(
         icon: 'fa-calculator',
         link: 'project.cost-planning({uuid: $ctrl.context.project.uuid})',
         feature: 'cost-planning'
-      },
-      {
-        link: 'project.delete({uuid: $ctrl.context.project.uuid})',
-        icon: 'fa-wrench',
-        label: gettext('Manage')
       }
     ];
     $scope.$on('WORKSPACE_CHANGED', function() {

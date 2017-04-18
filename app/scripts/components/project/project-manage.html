@@ -86,15 +86,4 @@
       </div>
     </div>
   </uib-tab>
-
-  <uib-tab ng-if="$ctrl.canManage && $ctrl.workspace !== 'organization'">
-    <uib-tab-heading translate>Project actions</uib-tab-heading>
-    <div class="panel-body">
-      <p translate>You can remove this project by pressing the button</p>
-      <a submit-button="$ctrl.removeProject()" class="btn btn-danger">
-          <i class="fa fa-trash"></i>
-          <span translate>Remove project</span>
-      </a>
-    </div>
-  </uib-tab>
 </div>

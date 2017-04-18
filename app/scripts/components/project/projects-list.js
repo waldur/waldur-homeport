@@ -120,9 +120,9 @@ function ProjectsListController(
             if (row.plan) {
               return row.plan.name;
             } else if (row.has_pending_contracts) {
-              return 'Pending';
+              return gettext('Pending');
             } else {
-              return 'No plan';
+              return gettext('No plan');
             }
           }
         }
