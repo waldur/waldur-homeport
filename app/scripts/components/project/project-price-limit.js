@@ -7,10 +7,11 @@ const projectPriceLimit = {
     project: '<'
   },
   controller: class ProjectPriceLimitController {
-    constructor(projectsService, customersService) {
+    constructor(projectsService, customersService, $q) {
       // @ngInject
       this.projectsService = projectsService;
       this.customersService = customersService;
+      this.$q = $q;
     }
 
     $onInit() {
@@ -28,7 +29,12 @@ const projectPriceLimit = {
     }
 
     setThreshold(value) {
-      return this.projectsService.setThreshold(this.project.url, value);
+      let promises = [];
+      if (this.isHardLimit) {
+        promises.push(this.projectsService.setLimit(this.project.url, value));
+      }
+      promises.push(this.projectsService.setThreshold(this.project.url, value));
+      return this.$q.all(promises);
     }
 
     toggleLimit() {

@@ -1,5 +1,5 @@
 // @ngInject
-export default function projectsService($q, $http, baseServiceClass, ENV) {
+export default function projectsService($q, $http, baseServiceClass, currentStateService, ENV) {
   var ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
@@ -25,12 +25,20 @@ export default function projectsService($q, $http, baseServiceClass, ENV) {
       return $http.post(ENV.apiEndpoint + 'api/price-estimates/threshold/', {
         threshold: value,
         scope: project_url
+      }).then(() => {
+        currentStateService.getProject().then(project => {
+          project.price_estimate.threshold = value;
+        });
       });
     },
     setLimit: function(project_url, value) {
       return $http.post(ENV.apiEndpoint + 'api/price-estimates/limit/', {
         limit: value,
         scope: project_url
+      }).then(() => {
+        currentStateService.getProject().then(project => {
+          project.price_estimate.limit = value;
+        });
       });
     },
     updateProject: function(project_url, fields) {

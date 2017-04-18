@@ -49,4 +49,12 @@
           </tbody>
         </table>
     </div>
+    <div class="ibox-title" ng-if="$ctrl.quotas.length">
+        <h5>
+            <span translate>Project limits</span>
+        </h5>
+    </div>
+    <div class="ibox-content" ng-if="$ctrl.quotas.length">
+        <quota-usage-bar-chart quotas="$ctrl.quotas"/>
+    </div>
 </div>
