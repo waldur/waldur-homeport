@@ -5,28 +5,25 @@ const providerProjectLinkQuotas = {
   bindings: {
     choices: '<',
   },
-  require: {
-    mainForm: '^form',
-  },
   controller: class ProviderProjectLinkQuotasController {
-    constructor (coreUtils, $scope, $rootScope, quotasService, $q) {
-      let ctrl = this;
-      ctrl.coreUtils = coreUtils;
-      ctrl.multiplyFactor = 1024;
-      ctrl.quotaNames = ['ram', 'vcpu', 'storage'];
-      ctrl.quotasService = quotasService;
-      ctrl.$q = $q;
+    constructor (coreUtils, $scope, quotasService, $q, $filter) {
+      this.coreUtils = coreUtils;
+      this.multiplyFactor = 1024;
+      this.quotaNames = ['ram', 'vcpu', 'storage'];
+      this.quotasService = quotasService;
+      this.$q = $q;
+      this.$filter = $filter;
 
-      ctrl.initializeChoices();
-      $scope.$on('onLinkCreated', ctrl.onLinkCreated);
-      $scope.$on('onSave', ctrl.onSave);
+      this.initializeChoices();
+      $scope.$on('onLinkCreated', this.onLinkCreated);
+      $scope.$on('onSave', this.onSave);
     }
     initializeChoices() {
       let ctrl = this;
-      angular.forEach(ctrl.choices, function(choice){
+      angular.forEach(ctrl.choices, (choice) => {
         choice.quotas = {};
 
-        angular.forEach(ctrl.quotaNames, function(name) {
+        angular.forEach(ctrl.quotaNames, (name) => {
           choice.quotas[name] = {
             limit: 1,
             usage: 0,
@@ -37,7 +34,7 @@ const providerProjectLinkQuotas = {
           }
 
           if (choice.link && choice.link.quotas && choice.link.quotas.length > 1) {
-            choice.quotas[name] = choice.link.quotas.filter(function(quota){return quota.name === name;})[0];
+            choice.quotas[name] = choice.link.quotas.filter((quota) => {return quota.name === name;})[0];
           }
 
         });
@@ -47,12 +44,8 @@ const providerProjectLinkQuotas = {
       return quota.limit < quota.usage;
     }
     getUsageSummary(quota){
-      let usage = quota.usage;
-      if (quota.name !== 'vcpu') {
-        usage = (usage / this.multiplyFactor).toFixed(2);
-      }
       return this.coreUtils.templateFormatter(gettext('{usage} used'), {
-        usage: usage,
+        usage: this.$filter('quotaValue')(quota.usage, quota.name),
       });
     }
     getPercentage(quota){
@@ -71,12 +64,12 @@ const providerProjectLinkQuotas = {
       let ctrl = event.currentScope.$ctrl;
 
       if (link.quotas && link.quotas.length > 0) {
-        let updatePromises = link.quotas.map(function(quota) {
+        let updatePromises = link.quotas.map((quota) => {
           choice.quotas[quota.name].url = quota.url;
           return ctrl.quotasService.update(choice.quotas[quota.name]);
         });
 
-        ctrl.$q.all(updatePromises).catch(function(response){
+        ctrl.$q.all(updatePromises).catch((response) => {
           let reason = '';
           if (response.data && response.data.detail) {
             reason = response.data.detail;
@@ -88,14 +81,14 @@ const providerProjectLinkQuotas = {
     onSave(event) {
       let ctrl = event.currentScope.$ctrl;
 
-      ctrl.choices.filter(function(choice){
+      ctrl.choices.filter((choice) => {
         return choice.selected && choice.link_url && choice.dirty;
-      }).map(function(choice){
-        return ctrl.quotaNames.map(function(name){
-          return ctrl.quotasService.update(choice.quotas[name]).then(function(){
+      }).map((choice) => {
+        return ctrl.quotaNames.map((name) => {
+          return ctrl.quotasService.update(choice.quotas[name]).then(() => {
             choice.dirty = false;
             choice.subtitle = gettext('Quotas have been updated.');
-          }).catch(function(response){
+          }).catch((response) => {
             let reason = '';
             if (response.data && response.data.detail) {
               reason = response.data.detail;
@@ -105,12 +98,12 @@ const providerProjectLinkQuotas = {
         });
       });
 
-      let clearedChoices = ctrl.choices.filter(function(choice){
+      let clearedChoices = ctrl.choices.filter((choice) => {
         return !choice.selected && !choice.link_url;
       });
 
-      angular.forEach(clearedChoices, function(choice){
-        angular.forEach(ctrl.quotaNames, function(name){
+      angular.forEach(clearedChoices, (choice) => {
+        angular.forEach(ctrl.quotaNames, (name) => {
           choice.quotas[name].usage = 0;
         });
       });
