@@ -2,10 +2,10 @@
   <loading-spinner/>
 </div>
 
-<uib-tabset ng-if="!$ctrl.loading">
-  <uib-tab>
+<uib-tabset ng-if="!$ctrl.loading" active="active">
+  <uib-tab index="0">
     <uib-tab-heading translate>General</uib-tab-heading>
-    <div class="panel-body">
+    <div class="panel-body" ng-if="active == 0">
       <div class="row">
         <form class="col-sm-10 col-xs-12 form-horizontal" name="$ctrl.ProjectForm">
           <div class="form-group">
@@ -49,9 +49,9 @@
     </div>
   </uib-tab>
 
-  <uib-tab visible-if="'projectCostDetails'">
+  <uib-tab index="1">
     <uib-tab-heading translate>Policies</uib-tab-heading>
-    <div class="panel-body">
+    <div class="panel-body" ng-if="active == 1">
       <div class="form-group">
         <h4>
           <span translate>Required certifications</span>
@@ -77,7 +77,7 @@
         </button>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" visible-if="'projectCostDetails'">
         <h4>
           <span translate>Cost limitations</span>
           <i class="fa fa-question-circle" uib-tooltip="{{ 'Upper bound of monthly resource cost provisioned from shared providers.' | translate }}"></i>
