@@ -632,7 +632,6 @@ msgid "Confirm changing your plan"
 msgstr ""
 
 #: app/scripts/components/customer/customer-delete.js:95
-#: app/scripts/components/project/project-manage.js:114
 #: app/scripts/components/table/base-list-controller.js:132
 msgid "Confirm deletion?"
 msgstr ""
@@ -664,16 +663,12 @@ msgstr ""
 msgid "Cost analysis"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:82
-msgid "Cost limitations"
-msgstr ""
-
 #: app/scripts/components/project/project-workspace.js:98
 #: app/scripts/components/project/routes.js:179
 msgid "Cost planning"
 msgstr ""
 
-#: app/scripts/components/project/project-price-limit.html:15
+#: app/scripts/components/project/project-policies.html:33
 msgid "Cost threshold"
 msgstr ""
 
@@ -900,7 +895,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:47
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:20
 #: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:17
-#: app/scripts/components/project/project-manage.html:29
+#: app/scripts/components/project/project-details.html:25
 #: app/scripts/components/project/projects-list.js:87
 #: app/scripts/components/resource/actions/constants.js:26
 #: app/scripts/components/resource/summary/resource-summary-base.html:31
@@ -937,7 +932,7 @@ msgstr ""
 msgid "Device"
 msgstr ""
 
-#: app/scripts/components/project/project-price-limit.html:41
+#: app/scripts/components/project/project-policies.html:61
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
@@ -1032,8 +1027,12 @@ msgstr ""
 msgid "error message: {errorMessage}"
 msgstr ""
 
-#: app/scripts/components/project/project-price-limit.html:7
-msgid "Estimated cost"
+#: app/scripts/components/project/project-policies.html:52
+msgid "Estimated cost exceeds threshold."
+msgstr ""
+
+#: app/scripts/components/project/project-policies.html:53
+msgid "Estimated cost for current month"
 msgstr ""
 
 #: app/scripts/configs/base-config.js:204
@@ -1240,7 +1239,7 @@ msgstr ""
 msgid "GB"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:7
+#: app/scripts/components/project/project-dialog.html:7
 msgid "General"
 msgstr ""
 
@@ -2250,7 +2249,7 @@ msgid "Offerings"
 msgstr ""
 
 #: app/scripts/components/customer/customer-popover.html:53
-#: app/scripts/components/project/project-dialog.html:9
+#: app/scripts/components/project/project-dialog.html:23
 #: app/scripts/components/providers/details/dialog.html:44
 #: app/scripts/components/user/user-popover.html:16
 msgid "OK"
@@ -2575,7 +2574,7 @@ msgstr ""
 msgid "Please wait while provider is being configured."
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:53
+#: app/scripts/components/project/project-dialog.html:14
 msgid "Policies"
 msgstr ""
 
@@ -2747,7 +2746,7 @@ msgstr ""
 msgid "Project has been renamed from {project_previous_name} to {project_name}."
 msgstr ""
 
-#: app/scripts/components/project/project-manage.js:71
+#: app/scripts/components/project/project-details.js:48
 msgid "Project has been updated."
 msgstr ""
 
@@ -2762,7 +2761,7 @@ msgstr ""
 #: app/scripts/components/analytics/cost-analysis.html:69
 #: app/scripts/components/issues/constants.js:55
 #: app/scripts/components/project/project-create.html:8
-#: app/scripts/components/project/project-manage.html:13
+#: app/scripts/components/project/project-details.html:9
 #: app/scripts/components/team/add-team-member.html:46
 #: app/scripts/components/user/user-projects.js:26
 msgid "Project name"
@@ -2801,7 +2800,7 @@ msgid "Provider {service_name} is not responding."
 msgstr ""
 
 #: app/scripts/components/project/project-create.html:38
-#: app/scripts/components/project/project-manage.html:58
+#: app/scripts/components/project/project-policies.html:10
 msgid "Provider certification required by this project"
 msgstr ""
 
@@ -3082,7 +3081,7 @@ msgid "Requested Services"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:19
-#: app/scripts/components/project/project-manage.html:57
+#: app/scripts/components/project/project-policies.html:9
 msgid "Required certifications"
 msgstr ""
 
@@ -3365,7 +3364,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-certifications.html:2
 #: app/scripts/components/project/project-create.html:45
-#: app/scripts/components/project/project-manage.html:64
+#: app/scripts/components/project/project-policies.html:17
 msgid "Select certifications"
 msgstr ""
 
@@ -4107,10 +4106,6 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:76
-msgid "Update certifications"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-instance/actions.js:83
 msgid "Update floating IPs"
 msgstr ""
@@ -4119,11 +4114,15 @@ msgstr ""
 msgid "Update notification"
 msgstr ""
 
+#: app/scripts/components/project/project-policies.html:70
+msgid "Update policies"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html:169
 msgid "Update profile"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:43
+#: app/scripts/components/project/project-details.html:39
 msgid "Update project details"
 msgstr ""
 
@@ -4141,7 +4140,7 @@ msgstr ""
 msgid "Upgrade"
 msgstr ""
 
-#: app/scripts/components/project/project-manage.html:83
+#: app/scripts/components/project/project-policies.html:34
 msgid "Upper bound of monthly resource cost provisioned from shared providers."
 msgstr ""
 

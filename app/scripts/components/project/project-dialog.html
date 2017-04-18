@@ -2,7 +2,21 @@
   <h3 class="modal-title" translate>Project details</h3>
 </div>
 <div class="modal-body">
-  <project-manage project="$ctrl.resolve.project"/>
+  <uib-tabset active="active">
+    <uib-tab index="0">
+      <uib-tab-heading translate>General</uib-tab-heading>
+      <div class="panel-body" ng-if="active == 0">
+        <project-details project="$ctrl.project"/>
+      </div>
+    </uib-tab>
+
+    <uib-tab index="1">
+      <uib-tab-heading translate>Policies</uib-tab-heading>
+      <div class="panel-body" ng-if="active == 1">
+        <project-policies project="$ctrl.project"/>
+      </div>
+    </uib-tab>
+  </div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="$ctrl.dismiss()">

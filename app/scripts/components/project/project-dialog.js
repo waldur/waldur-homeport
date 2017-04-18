@@ -6,6 +6,11 @@ const projectDialog = {
     dismiss: '&',
     close: '&',
     resolve: '<'
+  },
+  controller: class ProjectDialogController {
+    $onInit() {
+      this.project = this.resolve.project;
+    }
   }
 };
 
