@@ -18,8 +18,7 @@ function ProviderProjectsController(
   joinServiceProjectLinkService,
   projectsService,
   currentStateService,
-  customersService,
-  quotasService) {
+  customersService) {
   angular.extend($scope, {
     init: function() {
       $scope.loading = true;
@@ -28,23 +27,21 @@ function ProviderProjectsController(
       }).finally(function() {
         $scope.loading = false;
       });
-
-      $scope.quotaNames = ['ram', 'vcpu', 'storage'];
     },
     getChoices: function() {
-      var vm = this;
+      let vm = this;
       return customersService.isOwnerOrStaff().then(function(canManage) {
         vm.canManage = canManage;
         if (!vm.canManage) {
           return;
         }
         return vm.getContext().then(function(context) {
-          var link_for_project = {};
+          let link_for_project = {};
           angular.forEach(context.links, function(link) {
             link_for_project[link.project_uuid] = link;
           });
           return context.projects.map(function(project) {
-            var link = link_for_project[project.uuid];
+            let link = link_for_project[project.uuid];
             return vm.newChoice(project, link);
           });
         });
@@ -52,33 +49,19 @@ function ProviderProjectsController(
 
     },
     newChoice: function(project, link) {
-      let choice = {
+      return {
         title: project.name,
         selected: link && !!link.url,
         link_url: link && link.url,
         project_url: project.url,
         subtitle: link && link.state,
-        quotas: {},
-        dirty: false,
+        link: link,
       };
-
-      $scope.quotaNames.forEach(function(name) {
-          choice.quotas[name] = {
-            limit: -1,
-            name: name,
-          };
-
-          if (link && link.quotas && link.quotas.length > 1) {
-            choice.quotas[name] = link.quotas.find(function(quota){return quota.name == name});
-          }
-      });
-
-      return choice;
     },
     getContext: function() {
       // Context consists of list of projects and list of links
       return currentStateService.getCustomer().then(customer => {
-        var context = {};
+        let context = {};
         return $q.all([
           this.getProjects(customer).then(projects => context.projects = projects),
           this.getLinks(customer).then(links => context.links = links)
@@ -97,7 +80,7 @@ function ProviderProjectsController(
       );
     },
     save: function() {
-      var add_promises = this.choices.filter(function(choice) {
+      let add_promises = this.choices.filter(function(choice) {
         return choice.selected && !choice.link_url;
       }).map(function(choice) {
         choice.subtitle = gettext('Adding link');
@@ -107,23 +90,13 @@ function ProviderProjectsController(
           choice.project_url).then(function(link) {
             choice.link_url = link.url;
             choice.subtitle = gettext('Link created');
+            choice.link = link;
 
-            if (link.quotas && link.quotas.length > 0) {
-              let updatePromises = link.quotas.map(function(quota) {
-                choice.quotas[quota.name].url = quota.url;
-                return quotasService.update(choice.quotas[quota.name]);
-              });
-
-              $q.all(updatePromises).catch(function(response){
-                var reason = '';
-                if (response.data && response.data.detail) {
-                  reason = response.data.detail;
-                }
-                choice.subtitle = gettext('Unable to set quotas.') + ' ' + reason;
-              });
-            }
+            $scope.$broadcast('onLinkCreated', {
+              choice: choice,
+            });
           }).catch(function(response) {
-            var reason = '';
+            let reason = '';
             if (response.data && response.data.detail) {
               reason = response.data.detail;
             }
@@ -132,32 +105,16 @@ function ProviderProjectsController(
           });
       });
 
-      let quotasUpdatePromises = $scope.choices.filter(function(choice){
-        return choice.selected && choice.link_url && choice.dirty;
-      }).map(function(choice){
-        return $scope.quotaNames.map(function(name){
-          return quotasService.update(choice.quotas[name]).then(function(){
-              choice.dirty = false;
-              choice.subtitle = gettext('Quotas have been updated.');
-            }).catch(function(response){
-                var reason = '';
-                if (response.data && response.data.detail) {
-                  reason = response.data.detail;
-                }
-                choice.subtitle = gettext('Unable to update quotas.') + ' ' + reason;
-            });
-          });
-      });
-
-      var delete_promises = this.choices.filter(function(choice) {
+      let delete_promises = this.choices.filter(function(choice) {
         return !choice.selected && choice.link_url;
       }).map(function(choice) {
         choice.subtitle = gettext('Removing link');
         return joinServiceProjectLinkService.$deleteByUrl(choice.link_url).then(function() {
           choice.link_url = null;
+          choice.link = null;
           choice.subtitle = gettext('Link removed');
         }).catch(function(response) {
-          var reason = '';
+          let reason = '';
           if (response.data && response.data.detail) {
             reason = response.data.detail;
           }
@@ -166,7 +123,10 @@ function ProviderProjectsController(
         });
       });
 
-      return $q.all(add_promises.concat(delete_promises).concat(quotasUpdatePromises));
+
+      return $q.all(add_promises.concat(delete_promises)).then(function(){
+        $scope.$broadcast('onSave');
+      });
     }
   });
   $scope.init();

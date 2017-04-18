@@ -1,0 +1,102 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th translate>Permitted</th>
+                <th translate>Project name</th>
+                <th><translate>RAM limit</translate> GB</th>
+                <th translate>CPU limit</th>
+                <th><translate>Storage limit</translate> GB</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="choice in $ctrl.choices" ng-form name="quotaForm">
+                <td>
+                    <input ng-model="choice.selected" type="checkbox"/>
+                </td>
+                <td>
+                    <label>
+                        {{ choice.title | translate }}
+                        <helpicon class="pull-right" help-text="{{ choice.help_text }}" ng-if="choice.help_text"/>
+                    </label>
+                    <br/>
+                    <small ng-bind="choice.subtitle" ng-if="choice.subtitle"></small>
+                </td>
+                <td>
+                    <input class="form-control" id="{{ 'quotas-ram-' + $index }}" type="number" name="ram"
+                     ng-model="choice.quotas.ram.limit"
+                     multiply-by="$ctrl.multiplyFactor"
+                     ng-min="1"
+                     ng-change="choice.dirty = true">
+                    <p class="help-block text-danger"
+                       ng-if="quotaForm.ram.$error.min">
+                        <span translate>Minimal valid value is</span> 1 GB.
+                    </p>
+                    <p>
+                        <i class="fa fa-exclamation-triangle" uib-tooltip="Quota usage exceeds limit."
+                        ng-if="$ctrl.exceeds(choice.quotas.ram) && choice.selected" ></i>
+                        {{ $ctrl.getUsageSummary(choice.quotas.ram) }}
+                    </p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar"
+                             ng-class="{'progress-bar-warning': choice.quotas.storage.limit < choice.quotas.storage.usage}"
+                             aria-valuenow="{{ choice.quotas.ram.usage }}"
+                             aria-valuemin="0"
+                             aria-valuemax="{{ choice.quotas.ram.limit }}"
+                             ng-style="{ 'width': $ctrl.getPercentage(choice.quotas.ram) + '%'}">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <input class="form-control" id="{{ 'quotas-vcpu-' + $index }}" type="number" name="vcpu"
+                     ng-model="choice.quotas.vcpu.limit"
+                     ng-min="1"
+                     ng-change="choice.dirty = true">
+                    <p class="help-block text-danger"
+                       ng-if="quotaForm.vcpu.$error.min">
+                        <span translate>Minimal valid value is</span> 1
+                    </p>
+                    <p>
+                        <i class="fa fa-exclamation-triangle" uib-tooltip="Quota usage exceeds limit."
+                        ng-if="$ctrl.exceeds(choice.quotas.vcpu) && choice.selected"></i>
+                        {{ $ctrl.getUsageSummary(choice.quotas.vcpu) }}
+                    </p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar"
+                             ng-class="{'progress-bar-warning': choice.quotas.storage.limit < choice.quotas.storage.usage}"
+                             aria-valuenow="{{ choice.quotas.vcpu.usage }}"
+                             aria-valuemin="0"
+                             aria-valuemax="{{ choice.quotas.vcpu.limit }}"
+                             ng-style="{ 'width': $ctrl.getPercentage(choice.quotas.vcpu) + '%'}">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <input class="form-control" id="{{ 'quotas-storage-' + $index }}" type="number" name="storage"
+                     ng-model="choice.quotas.storage.limit"
+                     multiply-by="$ctrl.multiplyFactor"
+                     ng-min="1"
+                     ng-change="choice.dirty = true">
+                    <p class="help-block text-danger"
+                       ng-if="quotaForm.storage.$error.min">
+                        <span translate>Minimal valid value is</span> 1 GB
+                    </p>
+                    <p>
+                        <i class="fa fa-exclamation-triangle" uib-tooltip="Quota usage exceeds limit."
+                           ng-if="$ctrl.exceeds(choice.quotas.storage)  && choice.selected"></i>
+                        {{ $ctrl.getUsageSummary(choice.quotas.storage) }}
+                    </p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar"
+                             ng-class="{'progress-bar-warning': choice.quotas.storage.limit < choice.quotas.storage.usage}"
+                             aria-valuenow="{{ choice.quotas.storage.usage }}"
+                             aria-valuemin="0"
+                             aria-valuemax="{{ choice.quotas.storage.limit }}"
+                             ng-style="{ 'width': $ctrl.getPercentage(choice.quotas.storage) + '%'}">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
