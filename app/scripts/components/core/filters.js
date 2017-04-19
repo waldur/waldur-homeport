@@ -47,11 +47,11 @@ function replace() {
 // @ngInject
 function defaultCurrency(ENV, $filter) {
   return function(value) {
-    if (!value || value.indexOf && value.indexOf(ENV.currency) !== -1) {
+    if (value === undefined || value.indexOf && value.indexOf(ENV.currency) !== -1) {
       return value;
     }
     let fractionSize = 2;
-    if (value < 0.01) {
+    if (value != 0 && value < 0.01) {
       fractionSize = 3;
     }
     return $filter('currency')(value, ENV.currency, fractionSize);

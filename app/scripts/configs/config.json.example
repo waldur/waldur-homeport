@@ -1,5 +1,6 @@
 {
   "name": "development",
+  "apiEndpoint": "https://localhost:8080/",
   "googleClientId": "251636923168-9a6n6391j5vv5v4vf0m1k3n9sl9kag41.apps.googleusercontent.com",
   "facebookClientId": "654736081301402",
   "GoogleAnalyticsID": "UA-34543419-4",
