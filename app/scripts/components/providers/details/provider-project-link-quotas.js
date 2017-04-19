@@ -12,7 +12,6 @@ const providerProjectLinkQuotas = {
       this.quotasService = quotasService;
       this.$q = $q;
 
-      $scope.$on('onLinkCreated', this.onLinkCreated);
       $scope.$on('onSave', this.onSave);
     }
     $onInit(){
@@ -42,38 +41,20 @@ const providerProjectLinkQuotas = {
         });
       });
     }
-    onLinkCreated(event, data) {
-      let choice = data.choice;
-      let link = choice.link;
-      let ctrl = event.currentScope.$ctrl;
-
-      if (link.quotas && link.quotas.length > 0) {
-        let updatePromises = link.quotas.map((quota) => {
-          choice.quotas[quota.name].url = quota.url;
-          choice.new = true;
-          return ctrl.updateQuota(choice.quotas[quota.name]);
-        });
-
-        ctrl.$q.all(updatePromises).catch((response) => {
-          let reason = '';
-          if (response.data && response.data.detail) {
-            reason = response.data.detail;
-          }
-          choice.subtitle = gettext('Unable to set quotas.') + ' ' + reason;
-        });
-      }
-    }
     onSave(event) {
       let ctrl = event.currentScope.$ctrl;
 
       ctrl.choices.filter((choice) => {
-        return choice.selected && choice.link_url && choice.dirty && !choice.new;
+        return choice.selected && choice.link_url && choice.dirty;
       }).map((choice) => {
         let updateQuotasPromises = ctrl.quotaNames.map((name) => {
           choice.quotas[name].url = choice.link.quotas.filter((quota) => { return quota.name === name; })[0].url;
           return ctrl.updateQuota(choice.quotas[name]).then(() => {
-            choice.dirty = choice.new = false;
-            choice.subtitle = gettext('Quotas updated.');
+            if (choice.dirty) {
+              choice.subtitle = gettext('Quotas updated.');
+            }
+
+            choice.dirty = false;
           });
         });
 
@@ -82,7 +63,7 @@ const providerProjectLinkQuotas = {
           if (response.data && response.data.detail) {
             reason = response.data.detail;
           }
-          choice.subtitle = gettext('Unable to update quotas.') + ' ' + reason;
+          choice.subtitle = gettext('Unable to set quotas.') + ' ' + reason;
         });
       });
 

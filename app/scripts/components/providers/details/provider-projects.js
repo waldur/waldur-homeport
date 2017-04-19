@@ -91,10 +91,6 @@ function ProviderProjectsController(
             choice.link_url = link.url;
             choice.subtitle = gettext('Link created');
             choice.link = link;
-
-            $scope.$broadcast('onLinkCreated', {
-              choice: choice,
-            });
           }).catch(function(response) {
             let reason = '';
             if (response.data && response.data.detail) {
