@@ -124,9 +124,9 @@ function ProviderProjectsController(
       });
 
 
-      return $q.all(add_promises.concat(delete_promises)).then(function(){
-        $scope.$broadcast('onSave');
-      });
+      return $q.all(add_promises.concat(delete_promises))
+        .then(() => { $scope.$broadcast('onSave'); })
+        .then(() => { joinServiceProjectLinkService.clearAllCacheForCurrentEndpoint(); });
     }
   });
   $scope.init();
