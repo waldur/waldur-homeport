@@ -15,9 +15,9 @@
     <p>
         <i class="fa fa-exclamation-triangle"
             uib-tooltip="{{'Quota usage exceeds limit.' | translate}}"
-            ng-if="$ctrl.exceeds(quota) && $ctrl.choice.selected">
+            ng-if="$ctrl.exceeds() && $ctrl.choice.selected">
         </i>
-        {{ $ctrl.getUsageSummary(quota) }}
+        {{ $ctrl.getUsageSummary() }}
     </p>
     <uib-progressbar max="$ctrl.quota.limit" value="$ctrl.quota.usage" type="warning">
     </uib-progressbar>
