@@ -12,7 +12,7 @@
         <tbody>
             <tr ng-repeat="choice in $ctrl.choices" ng-form name="quotaForm">
                 <td>
-                    <input ng-model="choice.selected" type="checkbox"/>
+                    <input ng-model="choice.selected" type="checkbox" ng-change="choice.dirty = choice.selected"/>
                 </td>
                 <td>
                     <label>
@@ -21,7 +21,7 @@
                     </label>
                     <br/>
                     <small ng-bind="choice.subtitle" ng-if="choice.subtitle"></small>
-                    <small ng-if="quotaForm.$invalid" translate>Minimum value is 0.</small>
+                    <small ng-if="quotaForm.$invalid" translate>Please provide valid quotas.</small>
                 </td>
                 <td>
                     <provider-project-link-quota choice="choice"

@@ -12,7 +12,7 @@ const providerProjectLinkQuotas = {
       this.quotasService = quotasService;
       this.$q = $q;
 
-      $scope.$on('onSave', this.onSave);
+      $scope.$on('onSave', this.onSave.bind(this));
     }
     $onInit(){
       this.initializeChoices();
@@ -41,24 +41,21 @@ const providerProjectLinkQuotas = {
         });
       });
     }
-    onSave(event) {
-      let ctrl = event.currentScope.$ctrl;
-
-      ctrl.choices.filter((choice) => {
+    onSave() {
+      this.choices.filter((choice) => {
         return choice.selected && choice.link_url && choice.dirty;
       }).map((choice) => {
-        let updateQuotasPromises = ctrl.quotaNames.map((name) => {
+        let updateQuotasPromises = this.quotaNames.map((name) => {
           choice.quotas[name].url = choice.link.quotas.filter((quota) => { return quota.name === name; })[0].url;
-          return ctrl.updateQuota(choice.quotas[name]).then(() => {
+          return this.updateQuota(choice.quotas[name]).then(() => {
             if (choice.dirty) {
               choice.subtitle = gettext('Quotas updated.');
             }
-
             choice.dirty = false;
           });
         });
 
-        ctrl.$q.all(updateQuotasPromises).catch((response) => {
+        this.$q.all(updateQuotasPromises).catch((response) => {
           let reason = '';
           if (response.data && response.data.detail) {
             reason = response.data.detail;
@@ -67,12 +64,12 @@ const providerProjectLinkQuotas = {
         });
       });
 
-      let clearedChoices = ctrl.choices.filter((choice) => {
+      let clearedChoices = this.choices.filter((choice) => {
         return !choice.selected && !choice.link_url;
       });
 
       angular.forEach(clearedChoices, (choice) => {
-        angular.forEach(ctrl.quotaNames, (name) => {
+        angular.forEach(this.quotaNames, (name) => {
           choice.quotas[name].usage = 0;
         });
       });

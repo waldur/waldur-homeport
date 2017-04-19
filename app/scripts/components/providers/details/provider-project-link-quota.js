@@ -27,7 +27,7 @@ const providerProjectLinkQuota = {
     }
     onLimitChange() {
       this.choice.dirty = true;
-      let limitValidity = this.quota.unlimited || this.quota.limit >= 0;
+      let limitValidity = this.quota.unlimited || this.quota.limit >= this.quota.usage;
       this.parentForm[this.quota.name].$setValidity('minLimit', limitValidity);
     }
     hasError() {
