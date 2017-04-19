@@ -12,24 +12,24 @@ const providerProjectLinkQuotas = {
       this.quotasService = quotasService;
       this.$q = $q;
 
-      this.initializeChoices();
       $scope.$on('onLinkCreated', this.onLinkCreated);
       $scope.$on('onSave', this.onSave);
     }
+    $onInit(){
+      this.initializeChoices();
+    }
     initializeChoices() {
-      let ctrl = this;
-      angular.forEach(ctrl.choices, (choice) => {
+      let factors = {ram: 1024, vcpu: 1, storage: 1024};
+
+      angular.forEach(this.choices, (choice) => {
         choice.quotas = {};
 
-        angular.forEach(ctrl.quotaNames, (name) => {
+        angular.forEach(this.quotaNames, (name) => {
           choice.quotas[name] = {
-            limit: 1,
+            limit: 1 * factors[name],
             usage: 0,
             name: name,
           };
-          if (['ram', 'storage'].indexOf(name) >= 0) {
-            choice.quotas[name].limit = choice.quotas[name].limit * 1024;
-          }
 
           if (choice.link && choice.link.quotas && choice.link.quotas.length > 1) {
             choice.quotas[name] = choice.link.quotas.filter((quota) => {return quota.name === name;})[0];

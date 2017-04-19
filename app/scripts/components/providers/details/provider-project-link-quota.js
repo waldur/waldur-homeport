@@ -11,6 +11,7 @@ const providerProjectLinkQuota = {
     parentForm: '^form',
   },
   controller: class ProviderProjectLinkQuotaController {
+    // @ngInject
     constructor(coreUtils, $filter){
       this.$filter = $filter;
       this.coreUtils = coreUtils;
@@ -28,6 +29,9 @@ const providerProjectLinkQuota = {
       this.choice.dirty = true;
       let limitValidity = this.quota.unlimited || this.quota.limit >= 0;
       this.parentForm[this.quota.name].$setValidity('minLimit', limitValidity);
+    }
+    hasError() {
+      return this.parentForm[this.quota.name].$error.minLimit;
     }
   }
 };
