@@ -11,7 +11,8 @@ export default class OpenStackSummaryService {
   getServiceComponents(service) {
     return this.fetchServiceSettings(service)
       .then(this.fetchSettingsScope.bind(this))
-      .then(this.fetchTenantTemplate.bind(this));
+      .then(this.fetchTenantTemplate.bind(this))
+      .then(this.aggregateQuotasFromSPL.bind(this, service));
   }
 
   fetchServiceSettings(service) {
@@ -38,6 +39,24 @@ export default class OpenStackSummaryService {
       const limits = parseQuotas(tenant.quotas);
       const usages = parseQuotasUsage(tenant.quotas);
       return { components, usages, limits };
+    });
+  }
+
+  aggregateQuotasFromSPL(service, components) {
+    let quotaNamesMapping = {
+      vcpu: 'cores',
+      storage: 'disk',
+      ram: 'ram',
+    };
+
+    return this.$http.get(service.service_project_link_url).then((response) => {
+      angular.forEach(response.data.quotas, (quota) => {
+        let componentQuotaName = quotaNamesMapping[quota.name];
+        components.limits[componentQuotaName] = Math.min(quota.limit, components.limits[componentQuotaName]);
+        components.usages[componentQuotaName] = Math.max(quota.usage, components.usages[componentQuotaName]);
+      });
+
+      return components;
     });
   }
 }
