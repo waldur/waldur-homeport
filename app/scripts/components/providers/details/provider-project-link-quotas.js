@@ -19,16 +19,15 @@ const providerProjectLinkQuotas = {
       this.initializeChoices();
     }
     initializeChoices() {
-      let factors = {ram: 1024, vcpu: 1, storage: 1024};
-
       angular.forEach(this.choices, (choice) => {
         choice.quotas = {};
 
         angular.forEach(this.quotaNames, (name) => {
           choice.quotas[name] = {
-            limit: 1 * factors[name],
+            limit: 0,
             usage: 0,
             name: name,
+            unlimited: true,
           };
 
           if (choice.link && choice.link.quotas && choice.link.quotas.length > 1) {
