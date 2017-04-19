@@ -28,12 +28,13 @@ export default {
       label: gettext('VPC package'),
       dialogTitle: gettext('Select Virtual Private Cloud package'),
       dialogSize: 'lg',
-      resource: {
+      resource: context => ({
         endpoint: 'package-templates',
         params: {
           archived: 'False',
+          service_settings_uuid: context.settings_uuid,
         }
-      },
+      }),
       parser: templateParser,
       formatter: ($filter, value) => $filter('formatPackage')(value),
       columns: openstackTemplateColumns,

@@ -215,4 +215,7 @@ angular.module('ncsaas')
 
     // Renders link to docs in header
     // docsLink: 'http://example.com/docs/'
+
+    // Conceal "Change request" from a selection of issue types for non-staff/non-support users
+    // concealChangeRequest: false
   });

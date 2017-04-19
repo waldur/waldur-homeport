@@ -103,9 +103,12 @@ export default {
       label: gettext('Security groups'),
       placeholder: gettext('Select security groups...'),
       component: 'openstackInstanceSecurityGroupsField',
-      resource: {
-        endpoint: 'openstacktenant-security-groups'
-      },
+      resource: context => ({
+        endpoint: 'openstacktenant-security-groups',
+        params: {
+          settings_uuid: context.settings_uuid,
+        }
+      }),
       parser: group => ({
         value: group.url,
         display_name: group.name,
@@ -129,7 +132,7 @@ export default {
           endpoint: 'openstacktenant-floating-ips',
           params: {
             settings_uuid: context.settings_uuid,
-            is_booked: false,
+            is_booked: 'False',
             runtime_state: 'DOWN',
           }
         }
