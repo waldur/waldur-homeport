@@ -45,24 +45,31 @@ const projectPolicies = {
     }
 
     updatePolicies() {
-      let promises = [];
+      const promises = [
+        this.saveLimit(),
+        this.saveThreshold(),
+        this.saveCertifications(),
+      ];
 
-      if (this.project.price_estimate.threshold !== this.estimate.threshold) {
-        promises.push(this.projectsService.setThreshold(this.project.url, this.estimate.threshold));
-      }
-
-      if (this.isHardLimit !== this.checkIsHardLimit(this.project.price_estimate)) {
-        const limit = this.isHardLimit && this.estimate.threshold || 0;
-        promises.push(this.projectsService.setLimit(this.project.url, limit));
-      }
-
-      promises.push(this.updateCertifications());
       return this.$q.all(promises).then(() => {
         this.ncUtilsFlash.success(gettext('Project policies have been updated.'));
       });
     }
 
-    updateCertifications() {
+    saveThreshold() {
+      return this.projectsService
+        .setThreshold(this.project.url, this.estimate.threshold)
+        .then(() => this.project.price_estimate.threshold = this.estimate.threshold);
+    }
+
+    saveLimit() {
+      const limit = this.isHardLimit ? this.estimate.threshold : -1;
+      return this.projectsService
+        .setLimit(this.project.url, limit)
+        .then(() => this.project.price_estimate.limit = limit);
+    }
+
+    saveCertifications() {
       function mapItems(items) {
         return items.map(item => ({url: item.url}));
       }
