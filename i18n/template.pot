@@ -28,6 +28,10 @@ msgstr ""
 msgid "{usage} of {limit} used"
 msgstr ""
 
+#: app/scripts/components/providers/details/provider-project-link-quota.js:24
+msgid "{usage} used"
+msgstr ""
+
 #: app/scripts/components/error/error-403.html:8
 #: app/scripts/components/error/error-404.html:6
 msgid "&lt; Back"
@@ -193,7 +197,7 @@ msgstr ""
 msgid "Add volumes"
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-projects.js:85
+#: app/scripts/components/providers/details/provider-projects.js:86
 msgid "Adding link"
 msgstr ""
 
@@ -679,6 +683,10 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-compare-list.js:76
 msgid "CPU"
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-project-link-quotas.html:8
+msgid "CPU limit"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:51
@@ -1698,11 +1706,11 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-projects.js:91
+#: app/scripts/components/providers/details/provider-projects.js:92
 msgid "Link created"
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-projects.js:108
+#: app/scripts/components/providers/details/provider-projects.js:111
 msgid "Link removed"
 msgstr ""
 
@@ -2086,6 +2094,10 @@ msgstr ""
 
 #: app/scripts/components/providers/provider-list.js:44
 msgid "No providers yet."
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-project-link-quota.html:3
+msgid "No quota set"
 msgstr ""
 
 #: app/scripts/components/billing/billing-records-list.js:37
@@ -2509,6 +2521,10 @@ msgstr ""
 msgid "Permissions log"
 msgstr ""
 
+#: app/scripts/components/providers/details/provider-project-link-quotas.html:5
+msgid "Permitted"
+msgstr ""
+
 #: app/scripts/components/billing/billing-customer-details.html:5
 #: app/scripts/components/billing/billing-issuer-details.html:5
 #: app/scripts/components/customer/customer-delete.html:34
@@ -2560,6 +2576,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/module.js:29
 msgid "Please provide details of a new volume created from snapshot."
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-project-link-quotas.html:24
+msgid "Please provide valid quotas."
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:64
@@ -2770,12 +2790,13 @@ msgstr ""
 #: app/scripts/components/issues/constants.js:55
 #: app/scripts/components/project/project-create.html:8
 #: app/scripts/components/project/project-details.html:9
+#: app/scripts/components/providers/details/provider-project-link-quotas.html:6
 #: app/scripts/components/team/add-team-member.html:46
 #: app/scripts/components/user/user-projects.js:26
 msgid "Project name"
 msgstr ""
 
-#: app/scripts/components/project/project-policies.js:61
+#: app/scripts/components/project/project-policies.js:55
 msgid "Project policies have been updated."
 msgstr ""
 
@@ -2915,12 +2936,17 @@ msgstr ""
 msgid "Quota usage"
 msgstr ""
 
+#: app/scripts/components/providers/details/provider-project-link-quota.html:17
 #: app/scripts/components/quotas/quota-usage-bar-chart.html:8
 msgid "Quota usage exceeds limit."
 msgstr ""
 
 #: app/scripts/components/providers/details/dialog.html:22
 msgid "Quotas"
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-project-link-quotas.js:52
+msgid "Quotas updated."
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:54
@@ -2931,6 +2957,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:15
 #: app/scripts/components/quotas/filters.js:6
 msgid "RAM"
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-project-link-quotas.html:7
+msgid "RAM limit GB"
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:17
@@ -3026,7 +3056,7 @@ msgstr ""
 msgid "Remove profile"
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-projects.js:105
+#: app/scripts/components/providers/details/provider-projects.js:107
 msgid "Removing link"
 msgstr ""
 
@@ -3290,7 +3320,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:52
 #: app/scripts/components/customer/customer-create-dialog.html:89
-#: app/scripts/components/providers/details/provider-projects.html:15
+#: app/scripts/components/providers/details/provider-projects.html:21
 #: app/scripts/components/providers/details/provider-settings.html:76
 #: app/scripts/components/team/add-project-member.js:55
 #: app/scripts/components/team/add-team-member.js:33
@@ -3713,6 +3743,10 @@ msgstr ""
 msgid "Storage"
 msgstr ""
 
+#: app/scripts/components/providers/details/provider-project-link-quotas.html:9
+msgid "Storage limit GB"
+msgstr ""
+
 #: app/scripts/components/appstore/routes.js:52
 #: app/scripts/configs/base-config.js:114
 msgid "Storages"
@@ -4041,7 +4075,7 @@ msgstr ""
 msgid "Unable to create invitation."
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-projects.js:97
+#: app/scripts/components/providers/details/provider-projects.js:99
 msgid "Unable to create link."
 msgstr ""
 
@@ -4053,7 +4087,7 @@ msgstr ""
 msgid "Unable to create request for a turnkey solution."
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-projects.js:114
+#: app/scripts/components/providers/details/provider-projects.js:117
 msgid "Unable to delete link."
 msgstr ""
 
@@ -4095,6 +4129,10 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:70
 msgid "Unable to send record notification."
+msgstr ""
+
+#: app/scripts/components/providers/details/provider-project-link-quotas.js:63
+msgid "Unable to set quotas."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.js:131

@@ -1,0 +1,43 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th translate>Permitted</th>
+                <th translate>Project name</th>
+                <th translate>RAM limit GB</th>
+                <th translate>CPU limit</th>
+                <th translate>Storage limit GB</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="choice in $ctrl.choices" ng-form name="quotaForm">
+                <td>
+                    <input ng-model="choice.selected" type="checkbox" ng-change="choice.dirty = choice.selected"/>
+                </td>
+                <td>
+                    <label>
+                        {{ choice.title | translate }}
+                        <helpicon class="pull-right" help-text="{{ choice.help_text }}" ng-if="choice.help_text"/>
+                    </label>
+                    <br/>
+                    <small ng-bind="choice.subtitle" ng-if="choice.subtitle"></small>
+                    <small ng-if="quotaForm.$invalid" translate>Please provide valid quotas.</small>
+                </td>
+                <td>
+                    <provider-project-link-quota choice="choice"
+                                                 multiply-factor="$ctrl.multiplyFactor"
+                                                 quota="choice.quotas.ram"></provider-project-link-quota>
+                </td>
+                <td>
+                    <provider-project-link-quota choice="choice"
+                                                 quota="choice.quotas.vcpu"></provider-project-link-quota>
+                </td>
+                <td>
+                    <provider-project-link-quota choice="choice"
+                                                 multiply-factor="$ctrl.multiplyFactor"
+                                                 quota="choice.quotas.storage"></provider-project-link-quota>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

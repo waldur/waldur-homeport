@@ -29,19 +29,19 @@ function ProviderProjectsController(
       });
     },
     getChoices: function() {
-      var vm = this;
+      let vm = this;
       return customersService.isOwnerOrStaff().then(function(canManage) {
         vm.canManage = canManage;
         if (!vm.canManage) {
           return;
         }
         return vm.getContext().then(function(context) {
-          var link_for_project = {};
+          let link_for_project = {};
           angular.forEach(context.links, function(link) {
             link_for_project[link.project_uuid] = link;
           });
           return context.projects.map(function(project) {
-            var link = link_for_project[project.uuid];
+            let link = link_for_project[project.uuid];
             return vm.newChoice(project, link);
           });
         });
@@ -54,13 +54,14 @@ function ProviderProjectsController(
         selected: link && !!link.url,
         link_url: link && link.url,
         project_url: project.url,
-        subtitle: link && link.state
+        subtitle: link && link.state,
+        link: link,
       };
     },
     getContext: function() {
       // Context consists of list of projects and list of links
       return currentStateService.getCustomer().then(customer => {
-        var context = {};
+        let context = {};
         return $q.all([
           this.getProjects(customer).then(projects => context.projects = projects),
           this.getLinks(customer).then(links => context.links = links)
@@ -79,7 +80,7 @@ function ProviderProjectsController(
       );
     },
     save: function() {
-      var add_promises = this.choices.filter(function(choice) {
+      let add_promises = this.choices.filter(function(choice) {
         return choice.selected && !choice.link_url;
       }).map(function(choice) {
         choice.subtitle = gettext('Adding link');
@@ -89,8 +90,9 @@ function ProviderProjectsController(
           choice.project_url).then(function(link) {
             choice.link_url = link.url;
             choice.subtitle = gettext('Link created');
+            choice.link = link;
           }).catch(function(response) {
-            var reason = '';
+            let reason = '';
             if (response.data && response.data.detail) {
               reason = response.data.detail;
             }
@@ -99,15 +101,16 @@ function ProviderProjectsController(
           });
       });
 
-      var delete_promises = this.choices.filter(function(choice) {
+      let delete_promises = this.choices.filter(function(choice) {
         return !choice.selected && choice.link_url;
       }).map(function(choice) {
         choice.subtitle = gettext('Removing link');
         return joinServiceProjectLinkService.$deleteByUrl(choice.link_url).then(function() {
           choice.link_url = null;
+          choice.link = null;
           choice.subtitle = gettext('Link removed');
         }).catch(function(response) {
-          var reason = '';
+          let reason = '';
           if (response.data && response.data.detail) {
             reason = response.data.detail;
           }
@@ -116,7 +119,10 @@ function ProviderProjectsController(
         });
       });
 
-      return $q.all(add_promises.concat(delete_promises));
+
+      return $q.all(add_promises.concat(delete_promises))
+        .then(() => { $scope.$broadcast('onSave'); })
+        .then(() => { joinServiceProjectLinkService.clearAllCacheForCurrentEndpoint(); });
     }
   });
   $scope.init();
