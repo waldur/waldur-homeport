@@ -8,7 +8,8 @@ export function quotaName($filter) {
     vm_count: gettext('Virtual machines count'),
     instances: gettext('Instances count'),
     volumes: gettext('Volumes count'),
-    snapshots: gettext('Snapshots count')
+    snapshots: gettext('Snapshots count'),
+    cost: gettext('Monthly cost'),
   };
   return function(name) {
     if (names[name]) {
@@ -24,7 +25,8 @@ export function quotaValue($filter) {
   var filters = {
     ram: 'filesize',
     storage: 'filesize',
-    backup_storage: 'filesize'
+    backup_storage: 'filesize',
+    cost: 'defaultCurrency',
   };
   return function(value, name) {
     if (value == -1) {

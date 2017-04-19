@@ -1,4 +1,4 @@
-<div ng-repeat="quota in $ctrl.quotas">
+<div ng-repeat="quota in $ctrl.quotas" ng-if="quota.limit !== -1">
   <p class="pull-right text-muted">
     {{ $ctrl.getSummary(quota) }}
   </p>

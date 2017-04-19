@@ -1825,6 +1825,10 @@ msgstr ""
 msgid "Monthly base price"
 msgstr ""
 
+#: app/scripts/components/quotas/filters.js:12
+msgid "Monthly cost"
+msgstr ""
+
 #: app/scripts/components/appstore/category-selector.js:170
 msgid "Motivation"
 msgstr ""
@@ -2207,11 +2211,11 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.js:23
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.js:39
 msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.js:23
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.js:39
 msgid "Note that this volume is charged as part of <strong>{serviceName}</strong> package."
 msgstr ""
 
@@ -2750,6 +2754,10 @@ msgstr ""
 msgid "Project has been updated."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:54
+msgid "Project limits"
+msgstr ""
+
 #: app/scripts/configs/base-config.js:183
 msgid "Project manager"
 msgstr ""
@@ -2765,6 +2773,10 @@ msgstr ""
 #: app/scripts/components/team/add-team-member.html:46
 #: app/scripts/components/user/user-projects.js:26
 msgid "Project name"
+msgstr ""
+
+#: app/scripts/components/project/project-policies.js:61
+msgid "Project policies have been updated."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:59
@@ -3032,7 +3044,7 @@ msgstr ""
 msgid "Request {key} has been created."
 msgstr ""
 
-#: app/scripts/components/issues/issue-create-dialog.js:64
+#: app/scripts/components/issues/issue-create-dialog.js:66
 #: app/scripts/components/issues/issue-quick-create.js:115
 msgid "Request {requestId} has been created."
 msgstr ""
@@ -4378,7 +4390,7 @@ msgstr ""
 msgid "You cannot remove shared provider."
 msgstr ""
 
-#: app/scripts/components/issues/issue-create-dialog.js:38
+#: app/scripts/components/issues/issue-create-dialog.js:39
 #: app/scripts/components/issues/issue-quick-create.js:47
 #: app/scripts/components/issues/issue-registration.js:68
 msgid "You did not enter a field."
