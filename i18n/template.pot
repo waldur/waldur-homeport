@@ -197,6 +197,7 @@ msgstr ""
 msgid "Add volumes"
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:75
 #: app/scripts/components/providers/details/provider-projects.js:86
 msgid "Adding link"
 msgstr ""
@@ -1706,10 +1707,12 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:80
 #: app/scripts/components/providers/details/provider-projects.js:92
 msgid "Link created"
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:97
 #: app/scripts/components/providers/details/provider-projects.js:111
 msgid "Link removed"
 msgstr ""
@@ -2591,7 +2594,7 @@ msgid "Please select projects where usage of the provider is permitted."
 msgstr ""
 
 #: app/scripts/components/project/project-providers.html:11
-msgid "Please select providers where usage of the project is permitted."
+msgid "Please select providers allowed to be used in this project."
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.js:281
@@ -2802,6 +2805,10 @@ msgstr ""
 
 #: app/scripts/components/project/project-policies.js:55
 msgid "Project policies have been updated."
+msgstr ""
+
+#: app/scripts/components/project/project-providers-service.js:62
+msgid "Project providers links have been updated."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:59
@@ -3061,6 +3068,7 @@ msgstr ""
 msgid "Remove profile"
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:92
 #: app/scripts/components/providers/details/provider-projects.js:107
 msgid "Removing link"
 msgstr ""
@@ -4085,6 +4093,7 @@ msgstr ""
 msgid "Unable to create invitation."
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:86
 #: app/scripts/components/providers/details/provider-projects.js:99
 msgid "Unable to create link."
 msgstr ""
@@ -4097,8 +4106,13 @@ msgstr ""
 msgid "Unable to create request for a turnkey solution."
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:103
 #: app/scripts/components/providers/details/provider-projects.js:117
 msgid "Unable to delete link."
+msgstr ""
+
+#: app/scripts/components/project/project-providers-service.js:24
+msgid "Unable to fetch project providers."
 msgstr ""
 
 #: app/scripts/controllers/import-resource-controller.js:217
