@@ -2,6 +2,8 @@ import projectDetails from './project-details';
 import projectCreate from './project-create';
 import ProjectWorkspaceController from './project-workspace';
 import projectPolicies from './project-policies';
+import ProviderProjectsService from './project-providers-service';
+import projectProviders from './project-providers';
 import projectDialog from './project-dialog';
 import projectIssues from './project-issues';
 import projectEvents from './project-events';
@@ -16,6 +18,8 @@ export default module => {
   module.component('projectCreate', projectCreate);
   module.controller('ProjectWorkspaceController', ProjectWorkspaceController);
   module.component('projectPolicies', projectPolicies);
+  module.service('ProviderProjectsService', ProviderProjectsService);
+  module.component('projectProviders', projectProviders);
   module.component('projectDialog', projectDialog);
   module.component('projectIssues', projectIssues);
   module.component('projectEvents', projectEvents);

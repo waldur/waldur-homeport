@@ -2265,7 +2265,7 @@ msgid "Offerings"
 msgstr ""
 
 #: app/scripts/components/customer/customer-popover.html:53
-#: app/scripts/components/project/project-dialog.html:23
+#: app/scripts/components/project/project-dialog.html:30
 #: app/scripts/components/providers/details/dialog.html:44
 #: app/scripts/components/user/user-popover.html:16
 msgid "OK"
@@ -2590,6 +2590,10 @@ msgstr ""
 msgid "Please select projects where usage of the provider is permitted."
 msgstr ""
 
+#: app/scripts/components/project/project-providers.html:11
+msgid "Please select providers where usage of the project is permitted."
+msgstr ""
+
 #: app/scripts/components/appstore/appstore-store.js:281
 msgid "Please specify {fields}."
 msgstr ""
@@ -2882,6 +2886,7 @@ msgstr ""
 #: app/scripts/components/analytics/dashboard-cost-chart.html:14
 #: app/scripts/components/customer/customer-workspace.js:48
 #: app/scripts/components/customer/routes.js:113
+#: app/scripts/components/project/project-dialog.html:21
 msgid "Providers"
 msgstr ""
 
@@ -3320,6 +3325,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:52
 #: app/scripts/components/customer/customer-create-dialog.html:89
+#: app/scripts/components/project/project-providers.html:16
 #: app/scripts/components/providers/details/provider-projects.html:21
 #: app/scripts/components/providers/details/provider-settings.html:76
 #: app/scripts/components/team/add-project-member.js:55
@@ -3928,6 +3934,10 @@ msgstr ""
 msgid "There are no providers for this deployment plan."
 msgstr ""
 
+#: app/scripts/components/project/project-providers.html:8
+msgid "There are no providers yet."
+msgstr ""
+
 #: app/scripts/components/issues/issues-short-list.html:20
 msgid "There are no requests yet."
 msgstr ""
@@ -4452,6 +4462,10 @@ msgstr ""
 
 #: app/views/import/import.html:62
 msgid "You don't have any tenant yet."
+msgstr ""
+
+#: app/scripts/components/project/project-providers.html:4
+msgid "You don't have enough permission to edit providers for current project."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js:137
