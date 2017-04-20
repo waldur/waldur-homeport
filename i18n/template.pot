@@ -197,6 +197,7 @@ msgstr ""
 msgid "Add volumes"
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:75
 #: app/scripts/components/providers/details/provider-projects.js:86
 msgid "Adding link"
 msgstr ""
@@ -1704,10 +1705,12 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:80
 #: app/scripts/components/providers/details/provider-projects.js:92
 msgid "Link created"
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:97
 #: app/scripts/components/providers/details/provider-projects.js:111
 msgid "Link removed"
 msgstr ""
@@ -2261,7 +2264,7 @@ msgid "Offerings"
 msgstr ""
 
 #: app/scripts/components/customer/customer-popover.html:53
-#: app/scripts/components/project/project-dialog.html:23
+#: app/scripts/components/project/project-dialog.html:30
 #: app/scripts/components/providers/details/dialog.html:44
 #: app/scripts/components/user/user-popover.html:16
 msgid "OK"
@@ -2586,6 +2589,10 @@ msgstr ""
 msgid "Please select projects where usage of the provider is permitted."
 msgstr ""
 
+#: app/scripts/components/project/project-providers.html:11
+msgid "Please select providers allowed to be used in this project."
+msgstr ""
+
 #: app/scripts/components/appstore/appstore-store.js:281
 msgid "Please specify {fields}."
 msgstr ""
@@ -2796,6 +2803,10 @@ msgstr ""
 msgid "Project policies have been updated."
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:62
+msgid "Project providers links have been updated."
+msgstr ""
+
 #: app/scripts/components/analytics/cost-analysis.html:59
 msgid "Projected cost"
 msgstr ""
@@ -2878,6 +2889,7 @@ msgstr ""
 #: app/scripts/components/analytics/dashboard-cost-chart.html:14
 #: app/scripts/components/customer/customer-workspace.js:48
 #: app/scripts/components/customer/routes.js:113
+#: app/scripts/components/project/project-dialog.html:21
 msgid "Providers"
 msgstr ""
 
@@ -3052,6 +3064,7 @@ msgstr ""
 msgid "Remove profile"
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:92
 #: app/scripts/components/providers/details/provider-projects.js:107
 msgid "Removing link"
 msgstr ""
@@ -3316,6 +3329,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:52
 #: app/scripts/components/customer/customer-create-dialog.html:89
+#: app/scripts/components/project/project-providers.html:16
 #: app/scripts/components/providers/details/provider-projects.html:21
 #: app/scripts/components/providers/details/provider-settings.html:76
 #: app/scripts/components/team/add-project-member.js:55
@@ -3924,6 +3938,10 @@ msgstr ""
 msgid "There are no providers for this deployment plan."
 msgstr ""
 
+#: app/scripts/components/project/project-providers.html:8
+msgid "There are no providers yet."
+msgstr ""
+
 #: app/scripts/components/issues/issues-short-list.html:20
 msgid "There are no requests yet."
 msgstr ""
@@ -4071,6 +4089,7 @@ msgstr ""
 msgid "Unable to create invitation."
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:86
 #: app/scripts/components/providers/details/provider-projects.js:99
 msgid "Unable to create link."
 msgstr ""
@@ -4083,8 +4102,13 @@ msgstr ""
 msgid "Unable to create request for a turnkey solution."
 msgstr ""
 
+#: app/scripts/components/project/project-providers-service.js:103
 #: app/scripts/components/providers/details/provider-projects.js:117
 msgid "Unable to delete link."
+msgstr ""
+
+#: app/scripts/components/project/project-providers-service.js:24
+msgid "Unable to fetch project providers."
 msgstr ""
 
 #: app/scripts/controllers/import-resource-controller.js:217
@@ -4448,6 +4472,10 @@ msgstr ""
 
 #: app/views/import/import.html:62
 msgid "You don't have any tenant yet."
+msgstr ""
+
+#: app/scripts/components/project/project-providers.html:4
+msgid "You don't have enough permission to edit providers for current project."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js:137

@@ -16,7 +16,14 @@
         <project-policies project="$ctrl.project"/>
       </div>
     </uib-tab>
-  </div>
+
+    <uib-tab index="2">
+      <uib-tab-heading translate>Providers</uib-tab-heading>
+      <div class="panel-body" ng-if="active == 2">
+        <project-providers project="$ctrl.project"/>
+      </div>
+    </uib-tab>
+  </uib-tabset>
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="$ctrl.dismiss()">
