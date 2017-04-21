@@ -31,37 +31,4 @@
                 <div class="clear"></div>
             </div>
         </div>
-        <div class="big-chart" block-ui="bar-chart" ng-if="DashboardController.barChartTab === 'vmsByProject'">
-            <span class="chart-name" translate>By project</span>
-            <div ng-if="!DashboardController.resourcesCount" class="empty-chart-message">
-                <span translate>Not enough data for chart.</span>
-            </div>
-            <div ng-if="DashboardController.projectsList.showBarChart &&
-                        DashboardController.resourcesCount">
-                <bar-chart
-                    class="xs-hide"
-                    chart-data="DashboardController.resourcesByProjectChartData"
-                    chart-controller="DashboardController">
-                </bar-chart>
-                <div class="xs-show">
-                    <div class="details-table__row"
-                         ng-repeat="project in DashboardController.projectsList">
-                        <div class="details-table__key">
-                            {{ ::project.name }}
-                        </div>
-                        <div class="details-table__value">
-                            {{ project.vcpu }}  <span translate>vCPU</span> /
-                            {{ project.ram }} <span translate>RAM</span> /
-                            {{ project.storage }}  <span translate>HDD</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="big-chart" block-ui="bar-chart" ng-if="DashboardController.barChartTab === 'providersByProject'">
-            <span class="chart-name" translate>Top providers by project</span>
-            <bar-chart ng-if="DashboardController.projectsList.showBarChart"
-                       chart-data="DashboardController.servicesByProjectChartData"
-                       chart-controller="DashboardController"></bar-chart>
-        </div>
 </div>
