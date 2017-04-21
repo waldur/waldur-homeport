@@ -162,8 +162,10 @@ angular.module('ncsaas')
       'LOCAL_SIGNIN',
       'LOCAL_SIGNUP',
       'SOCIAL_SIGNUP',
-      'ESTONIAN_ID'
+      'ESTONIAN_ID',
+      'SAML2'
     ],
+    SAML2_IDENTITY_PROVIDER: 'https://reos.taat.edu.ee/saml2/idp/metadata.php',
     estoniaIdLogoutUrl: 'https://openid.ee/auth/logout',
     featuresVisible: false,
 

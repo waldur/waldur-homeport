@@ -30,6 +30,10 @@
     @include btn-social(#6abb6a);
 }
 
+.btn-saml2 {
+    @include btn-social(#42b3f1);
+}
+
 .btn-smartid {
     @include btn-social(#6E4CD3);
 }

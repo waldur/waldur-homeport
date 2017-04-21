@@ -264,7 +264,7 @@ msgstr ""
 msgid "Allocation"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:108
+#: app/scripts/components/auth/auth-login.html:111
 msgid "Already have an account?"
 msgstr ""
 
@@ -372,7 +372,8 @@ msgstr ""
 msgid "Back to help topics"
 msgstr ""
 
-#: app/scripts/components/auth/estonianId/auth-login-failed.html:10
+#: app/scripts/components/auth/callbacks/auth-login-failed.html:10
+#: app/scripts/components/auth/callbacks/auth-logout-failed.html:10
 msgid "Back to login"
 msgstr ""
 
@@ -462,10 +463,6 @@ msgstr ""
 #: app/scripts/components/providers/create.html:112
 #: app/scripts/components/providers/details/provider-settings.html:65
 msgid "Browse"
-msgstr ""
-
-#: app/scripts/components/analytics/resource-analysis.html:35
-msgid "By project"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:23
@@ -640,7 +637,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:196
+#: app/scripts/components/auth/auth-login.js:200
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
@@ -708,7 +705,7 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:104
+#: app/scripts/components/auth/auth-login.html:107
 #: app/scripts/components/auth/auth-login.html:18
 msgid "Create an account"
 msgstr ""
@@ -945,7 +942,7 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:102
+#: app/scripts/components/auth/auth-login.html:105
 msgid "Do not have an account?"
 msgstr ""
 
@@ -1018,7 +1015,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:200
+#: app/scripts/configs/base-config.js:202
 msgid "English"
 msgstr ""
 
@@ -1044,7 +1041,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:204
+#: app/scripts/configs/base-config.js:206
 msgid "Estonian"
 msgstr ""
 
@@ -1276,10 +1273,6 @@ msgstr ""
 
 #: app/scripts/components/user/user-edit.html:133
 msgid "have been accepted on"
-msgstr ""
-
-#: app/scripts/components/analytics/resource-analysis.html:55
-msgid "HDD"
 msgstr ""
 
 #: app/scripts/components/help/routes.js:9
@@ -1515,7 +1508,7 @@ msgstr ""
 msgid "Invitation is not valid."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:121
+#: app/scripts/components/auth/auth-login.js:125
 msgid "Invitation token is not found."
 msgstr ""
 
@@ -1729,17 +1722,21 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: app/scripts/components/auth/estonianId/auth-login-complete.html:3
+#: app/scripts/components/auth/callbacks/auth-login-complete.html:3
 msgid "Logging user in"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:110
+#: app/scripts/components/auth/auth-login.html:113
 #: app/scripts/components/auth/auth-login.html:41
 msgid "Login"
 msgstr ""
 
-#: app/scripts/components/auth/estonianId/auth-login-failed.html:3
+#: app/scripts/components/auth/callbacks/auth-login-failed.html:3
 msgid "Login failed"
+msgstr ""
+
+#: app/scripts/components/auth/callbacks/auth-logout-failed.html:3
+msgid "Logout failed"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:42
@@ -2200,7 +2197,6 @@ msgstr ""
 msgid "Not enough data for chart"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-analysis.html:37
 #: app/scripts/components/resource/monitoring/resource-graphs.js:20
 #: app/scripts/components/resource/monitoring/resource-graphs.js:21
 msgid "Not enough data for chart."
@@ -2325,10 +2321,6 @@ msgstr ""
 msgid "Oracle database and SugarCRM."
 msgstr ""
 
-#: app/views/directives/compact-table-sorter.html:4
-msgid "Order by"
-msgstr ""
-
 #: app/scripts/components/navigation/select-workspace-dialog.html:32
 msgid "organization"
 msgstr ""
@@ -2418,7 +2410,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:182
+#: app/scripts/configs/base-config.js:184
 msgid "Organization owner"
 msgstr ""
 
@@ -2781,7 +2773,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:183
+#: app/scripts/configs/base-config.js:185
 msgid "Project manager"
 msgstr ""
 
@@ -2957,7 +2949,6 @@ msgstr ""
 msgid "Quotas updated."
 msgstr ""
 
-#: app/scripts/components/analytics/resource-analysis.html:54
 #: app/scripts/components/appstore/appstore-compare-list.js:83
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:59
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:39
@@ -3582,6 +3573,10 @@ msgstr ""
 msgid "Sign in with SmartID"
 msgstr ""
 
+#: app/scripts/components/auth/auth-saml2.html:6
+msgid "Sign in with TAAT"
+msgstr ""
+
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:47
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:42
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:38
@@ -3840,7 +3835,7 @@ msgstr ""
 msgid "Synchronise quotas"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:184
+#: app/scripts/configs/base-config.js:186
 msgid "System administrator"
 msgstr ""
 
@@ -4017,10 +4012,6 @@ msgstr ""
 msgid "To update current plan visit <a href=\"{link}\">plans page</a>."
 msgstr ""
 
-#: app/scripts/components/analytics/resource-analysis.html:62
-msgid "Top providers by project"
-msgstr ""
-
 #: app/scripts/components/analytics/resource-pie-chart.html:21
 #: app/scripts/components/billing/billing-records-list.js:59
 #: app/scripts/components/billing/invoices-list.js:64
@@ -4155,7 +4146,7 @@ msgstr ""
 msgid "Unable to set quotas."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:131
+#: app/scripts/components/auth/auth-login.js:135
 msgid "Unable to validate invitation token."
 msgstr ""
 
@@ -4330,7 +4321,6 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-analysis.html:53
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:55
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:35
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:54
