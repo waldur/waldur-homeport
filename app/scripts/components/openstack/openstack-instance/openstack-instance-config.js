@@ -132,7 +132,7 @@ export default {
           endpoint: 'openstacktenant-floating-ips',
           params: {
             settings_uuid: context.settings_uuid,
-            is_booked: false,
+            is_booked: 'False',
             runtime_state: 'DOWN',
           }
         }

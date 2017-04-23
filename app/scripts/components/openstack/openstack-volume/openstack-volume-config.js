@@ -2,7 +2,6 @@
 export default {
   order: [
     'name',
-    'image',
     'size',
     'description'
   ],
@@ -12,27 +11,6 @@ export default {
       type: 'string',
       required: true,
       maxlength: 150
-    },
-    image: {
-      type: 'list',
-      required: false,
-      label: gettext('Image'),
-      columns: [
-        {
-          name: 'name',
-          label: gettext('Image name')
-        },
-        {
-          name: 'min_ram',
-          label: gettext('Min RAM'),
-          filter: 'filesize'
-        },
-        {
-          name: 'min_disk',
-          label: gettext('Min storage'),
-          filter: 'filesize'
-        }
-      ]
     },
     size: {
       type: 'integer',
@@ -48,15 +26,5 @@ export default {
       maxlength: 500
     }
   },
-  watchers: {
-    image: imageWatcher
-  },
   summaryComponent: 'openstackVolumeCheckoutSummary'
 };
-
-function imageWatcher(model, options, newImage) {
-  if (newImage) {
-    model.size = Math.max(model.size || 0, newImage.min_disk);
-    options.size.min = newImage.min_disk;
-  }
-}

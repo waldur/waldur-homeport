@@ -14,7 +14,7 @@ export default class AppstoreResourceLoader {
 
     angular.forEach(fields, (field, name) => {
       if (field.resources) {
-        promises = promises.concat(this.loadResources(context, field).then(response => {
+        promises.push(this.loadResources(context, field).then(response => {
           validChoices[name] = response;
         }));
       }

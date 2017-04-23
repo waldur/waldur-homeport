@@ -28,6 +28,9 @@
             service_uuid: service_uuid
           }, url);
         });
+      },
+      clearAllCacheForCurrentEndpoint: function() {
+        joinService.clearAllCacheForCurrentEndpoint();
       }
     });
     return new ServiceClass();

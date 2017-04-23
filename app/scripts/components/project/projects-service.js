@@ -1,5 +1,5 @@
 // @ngInject
-export default function projectsService($q, $http, baseServiceClass, ENV) {
+export default function projectsService($q, $http, baseServiceClass, currentStateService, ENV) {
   var ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();

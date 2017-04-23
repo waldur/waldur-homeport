@@ -19,18 +19,25 @@ function ProjectsListController(
   $state,
   $scope,
   $timeout,
+  $uibModal,
   ncUtils,
   currentStateService,
   usersService) {
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({
     init: function() {
+      this.controllerScope = controllerScope;
       this.service = projectsService;
       var fn = this._super.bind(this);
       this.activate().then(function() {
         fn();
       });
       $scope.$on('currentCustomerUpdated', function() {
+        $timeout(function() {
+          controllerScope.resetCache();
+        });
+      });
+      $scope.$on('refreshProjectList', function() {
         $timeout(function() {
           controllerScope.resetCache();
         });
@@ -54,7 +61,8 @@ function ProjectsListController(
           noDataText: gettext('You have no projects yet.'),
           noMatchesText: gettext('No projects found matching filter.'),
           columns: vm.getColumns(),
-          tableActions: vm.getTableActions()
+          tableActions: vm.getTableActions(),
+          rowActions: vm.getRowActions(),
         };
       });
     },
@@ -112,9 +120,9 @@ function ProjectsListController(
             if (row.plan) {
               return row.plan.name;
             } else if (row.has_pending_contracts) {
-              return 'Pending';
+              return gettext('Pending');
             } else {
-              return 'No plan';
+              return gettext('No plan');
             }
           }
         }
@@ -143,6 +151,29 @@ function ProjectsListController(
           titleAttr: title
         }
       ];
+    },
+    getRowActions: function() {
+      return [
+        {
+          title: gettext('Details'),
+          iconClass: 'fa fa-eye',
+          callback: this.openDetailsDialog.bind(this),
+        },
+        {
+          title: gettext('Remove'),
+          iconClass: 'fa fa-trash',
+          callback: this.remove.bind(this.controllerScope),
+        }
+      ];
+    },
+    openDetailsDialog: function(project) {
+      $uibModal.open({
+        component: 'projectDialog',
+        resolve: {
+          project: () => project
+        },
+        size: 'lg',
+      });
     },
     afterGetList: function() {
       for (var i = 0; i < this.list.length; i++) {

@@ -17,9 +17,6 @@
     @include bp(sm) {
         padding-left: 0;
     } // sm
-    .customer-owner-icon {
-        width: 60px;
-    }
     &.list-header {
         min-height: 40px;
         padding: 5px 0;
@@ -33,62 +30,19 @@
                 display: none !important;
             } // sm
         }
-
-        .resource-access {
-            @include bp(xs) {
-                display: none !important;
-            } // xs
-            @include bp(sm) {
-                display: none !important;
-            } // sm
-        }
-        .state-help-tooltip {
-            display: inline-block;
-        }
     } // &.list-header
     &.list {
         &:hover,&.selected {
             background-color: $expandable-hover;
         } // &:hover
     }// &.list
-    &.resources {
-        &.on-desktop {
-            @include bp(xs) {
-                display: none;
-            } // xs
-            @include bp(sm) {
-                display: none;
-            } // sm
-        } // &.on-desktop
-        &.on-mobile {
-            display: none;
-            @include bp(xs) {
-                @include table;
-            } // xs
-            @include bp(sm) {
-                @include table;
-            } // sm
-        } // &.on-mobile
-    } // &.resources
     &.pointer {
         cursor: pointer;
     } // pointer
-    &.no-cursor {
-        cursor: default;
-    } // &.no-cursor
     > * {
         @include table-cell;
         vertical-align: middle;
         @include property(padding, 0 10);
-        &.on-mobile {
-            display: none;
-            @include bp(xs) {
-                @include table-cell;
-            } // xs
-            @include bp(sm) {
-                @include table-cell;
-            } // sm
-        } // on-mobile
         &:nth-child(1) {
             @include property(padding-left, 10);
         } // &:nth-child(1)
@@ -212,30 +166,6 @@
                     }
                 }
             }
-            &.status-name {
-                width: 153px;
-            }
-            &.statusCircle {
-                width: 20px;
-                &.support {
-                    width: 28px;
-                    vertical-align: top;
-                }
-            }
-            &.visual-status {
-                width: 65px;
-                text-align: center;
-                @include bp(xs) {
-                    padding-right: 0;
-                    text-align: left;
-                    width: 20px;
-                } // xs
-                @include bp(sm) {
-                    padding-right: 0;
-                    text-align: left;
-                    width: 20px;
-                } // sm
-            }
             &.event-message {
                 width: auto;
                 line-height: 1.5;
@@ -257,20 +187,6 @@
                     display: inline-block;
                 } // sm
             }
-            &.service-type {
-                width: 120px;
-            }
-            &.resources-count {
-                width: 91px;
-                text-align: center;
-            }
-            &.sla-info {
-                width: 100px;
-            }
-            &.shared-filed {
-                width: 100px;
-                text-align: center;
-            }
             .bool-field {
                 color: $link-color;
             }
@@ -285,69 +201,6 @@
                     display: block;
                 } // sm
             }
-            &.resource-access {
-                @include bp(xs) {
-                    display: inline-block;
-                    margin-top: 5px;
-                    font-size: 10pt;
-                } // xs
-                @include bp(sm) {
-                    display: inline-block;
-                    margin-top: 5px;
-                    font-size: 10pt;
-                } // sm
-            }
-            &.pdf-icon {
-                width: 30px;
-            }
-            &.reduce-cell-width {
-                width: 40%;
-            }
         } // &.additional-cell
     } // > div
-    .field-description {
-        color: #50b848;
-        font-size: 14px;
-    }
 } // list-item
-
-.list-page {
-    .list-box {
-        position: relative;
-        .list-cache-reset {
-            top: -69px;
-            right: 20px;
-        }
-    }
-}
-
-.button-wrap-center {
-    text-align: center;
-    padding-top: 1em;
-    padding-bottom: 2em;
-    .button-green {
-        margin-top: 15px;
-        margin-bottom: 15px;
-        display: block;
-        width: 100%;
-        -webkit-border-radius: 5px;
-        border-radius: 5px;
-        background: #50b848;
-        text-align: center;
-        height: 50px;
-        line-height: 50px;
-        span {
-            color: #FFF;
-            font-size: 16px;
-            font-weight: bold;
-        }
-    }
-}
-
-.tab-title {
-    padding-right: 5px;
-}
-
-.list-help-button .button {
-    padding: 0px 12px;
-}

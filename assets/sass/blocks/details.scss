@@ -1,26 +1,3 @@
-.password {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  li {
-    float: left;
-    min-width: 25%;
-    padding-right: 10px;
-    .button {
-      margin-top: 37px;
-    }
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-  }
-}
-
-.tooltip-relative {
-  position: relative;
-}
-
 .details-table__row {
   display: flex;
   padding: 10px;
@@ -42,16 +19,16 @@
 }
 
 .details-table__value {
-    flex-grow: 1;
-    margin-left: 6px;
-    padding: 3px 0px;
+  flex-grow: 1;
+  margin-left: 6px;
+  padding: 3px 0px;
 
-    select {
-      border-radius: 4px;
-      width: 100%;
-      box-sizing: border-box;
-      height: 32px;
-      background: white;
-      padding-left: 3px;
-    }
+  select {
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 32px;
+    background: white;
+    padding-left: 3px;
+  }
 }
