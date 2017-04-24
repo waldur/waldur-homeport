@@ -1015,7 +1015,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:202
+#: app/scripts/configs/base-config.js:203
 msgid "English"
 msgstr ""
 
@@ -1041,7 +1041,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:206
+#: app/scripts/configs/base-config.js:207
 msgid "Estonian"
 msgstr ""
 
@@ -2410,7 +2410,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:184
+#: app/scripts/configs/base-config.js:185
 msgid "Organization owner"
 msgstr ""
 
@@ -2773,7 +2773,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:185
+#: app/scripts/configs/base-config.js:186
 msgid "Project manager"
 msgstr ""
 
@@ -3553,6 +3553,10 @@ msgstr ""
 msgid "Sign a support agreement"
 msgstr ""
 
+#: app/scripts/components/auth/auth-saml2.js:11
+msgid "Sign in with {provider}"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:89
 msgid "Sign in with Facebook"
 msgstr ""
@@ -3571,10 +3575,6 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:95
 msgid "Sign in with SmartID"
-msgstr ""
-
-#: app/scripts/components/auth/auth-saml2.html:6
-msgid "Sign in with TAAT"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:47
@@ -3835,7 +3835,7 @@ msgstr ""
 msgid "Synchronise quotas"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:186
+#: app/scripts/configs/base-config.js:187
 msgid "System administrator"
 msgstr ""
 
