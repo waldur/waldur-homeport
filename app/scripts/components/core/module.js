@@ -10,7 +10,6 @@ import { ncUtils, coreUtils } from './utils';
 
 export default module => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
-  module.service('coreUtils', coreUtils);
   module.service('ncUtils', ncUtils);
   module.service('coreUtils', coreUtils);
   module.service('baseServiceClass', baseServiceClass);

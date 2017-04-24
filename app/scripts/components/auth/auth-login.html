@@ -95,6 +95,9 @@
             <span translate>Sign in with SmartID</span>
         </button>
     </div>
+    <div ng-if="auth.showSaml2()">
+        <auth-saml2/>
+    </div>
     <div ng-if="auth.showEstonianId()">
         <auth-estonian-id/>
     </div>

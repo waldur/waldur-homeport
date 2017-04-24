@@ -52,6 +52,15 @@ export default function authRoutes($stateProvider) {
       }
     })
 
+    .state('home.logout_failed', {
+      url: '/logout_failed/',
+      template: '<auth-logout-failed/>',
+      data: {
+        anonymous: true,
+        bodyClass: 'old',
+      }
+    })
+
     .state('initialdata', {
       parent: 'home',
       url: '/initial-data/',
