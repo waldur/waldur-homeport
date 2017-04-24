@@ -85,6 +85,10 @@ export const authLogin = {
       return this.methods.ESTONIAN_ID;
     }
 
+    showSaml2() {
+      return this.methods.SAML2 && !!this.ENV.SAML2_IDENTITY_PROVIDER;
+    }
+
     gotoRegister() {
       this.isSignupFormVisible = true;
       this.$state.go('register');
