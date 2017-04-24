@@ -4,16 +4,15 @@
   angular.module('ncsaas')
     .service('tabCounterService', tabCounterService);
 
-  tabCounterService.$inject = ['$interval', '$q', 'ENV'];
+  tabCounterService.$inject = ['$q', 'ENV'];
 
-  function tabCounterService($interval, $q, ENV) {
+  function tabCounterService($q) {
     this.connect = connect;
-    this.cancel = $interval.cancel;
 
     function connect(options) {
       // Options should contain following keys:
       // $scope, tabs, getCounters, getCountersError
-      var defaultOptions = {
+      let defaultOptions = {
         getCounters: function() {
           // It should return promise
           return $q.reject();
@@ -22,23 +21,12 @@
           // It may redirect or display message
         },
         tabs: []
-      }
+      };
       var options = angular.extend(defaultOptions, options);
-      if (options.timer) {
-        $interval.cancel(options.timer);
-      }
       updateCounters(options);
-      var timer = $interval(
-        updateCounters.bind(null, options),
-        ENV.countersTimerInterval * 1000
-      );
-      options.$scope.$on('$destroy', function() {
-        $interval.cancel(timer);
-      });
-      options.$scope.$on('refreshCounts', function() {
+      options.$scope.$on('refreshCounts', () => {
         updateCounters(options);
       });
-      return timer;
     }
 
     function updateCounters(options) {

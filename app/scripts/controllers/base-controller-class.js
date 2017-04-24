@@ -52,7 +52,6 @@
           vm.afterSave(model);
           ncUtilsFlash.success(vm.getSuccessMessage());
           vm.service.clearAllCacheForCurrentEndpoint();
-          $rootScope.$broadcast('refreshCounts');
           vm.successRedirect(model);
           return true;
         }, function(response) {
