@@ -3,8 +3,9 @@ import template from './offering-header.html';
 const offeringHeader = {
   template,
   bindings: {
-    offering: '<'
-  }
+    offering: '<',
+    reInitResource: '&'
+  },
 };
 
 export default offeringHeader;
