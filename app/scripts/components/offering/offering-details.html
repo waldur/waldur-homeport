@@ -7,7 +7,7 @@
   </div>
   <div ng-if="$ctrl.offering">
     <nc-header></nc-header>
-    <offering-header offering="$ctrl.offering"/>
+    <offering-header offering="$ctrl.offering" re-init-resource="$ctrl.reInitResource($ctrl.offering)"/>
     <offering-summary offering="$ctrl.offering"/>
   </div>
   <app-footer/>
