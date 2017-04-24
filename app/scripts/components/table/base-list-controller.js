@@ -107,7 +107,9 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       }
       this.service.cacheReset = true;
       this.service.clearAllCacheForCurrentEndpoint();
-      return this.getList(filter);
+      return this.getList(filter).then(() => {
+        $rootScope.$broadcast('refreshCounts');
+      });
     },
     getTotal: function() {
       return this.service.resultCount;
@@ -143,7 +145,6 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
     afterInstanceRemove: function(instance) {
       this.service.setPagesCount(this.service.resultCount - 1);
       this.service.clearAllCacheForCurrentEndpoint();
-      $rootScope.$broadcast('refreshCounts');
       var index = this.list.indexOf(instance);
       if (index !== -1) {
         this.list.splice(index, 1);

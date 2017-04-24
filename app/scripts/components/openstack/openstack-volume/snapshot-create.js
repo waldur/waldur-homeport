@@ -25,7 +25,6 @@ function SnapshotCreateDialogController($q, $rootScope, $scope, resourcesService
       $scope.errors = {};
       $scope.$close();
       $scope.controller.reInitResource($scope.resource);
-      $rootScope.$broadcast('refreshCounts');
     }).catch(response => {
       $scope.errors = response.data;
     });

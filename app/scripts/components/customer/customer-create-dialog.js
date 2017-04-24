@@ -38,7 +38,6 @@ function CustomerCreateDialogController(customersService, $scope, $rootScope, $s
       return vm.getPromise().then(function(customer) {
         vm.errors = {};
         customersService.clearAllCacheForCurrentEndpoint();
-        $rootScope.$broadcast('refreshCounts');
 
         if (vm.customer) {
           var message = coreUtils.templateFormatter(gettext('Organization {organizationName} is updated.'),
