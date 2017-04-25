@@ -10,7 +10,7 @@ export default function userOrganizations() {
 
 // @ngInject
 function UserOrganizationsController(
-  baseControllerListClass, customerPermissionsService, usersService) {
+  baseControllerListClass, customerPermissionsService, usersService, $state, ncUtils) {
   var controllerScope = this;
   var ControllerListClass = baseControllerListClass.extend({
     init: function() {
@@ -26,7 +26,8 @@ function UserOrganizationsController(
             title: gettext('Organization name'),
             className: 'all',
             render: function(row) {
-              return row.customer_name;
+              const href = $state.href('organization.dashboard', {uuid: row.customer_uuid});
+              return ncUtils.renderLink(href, row.customer_name);
             },
           },
           {
