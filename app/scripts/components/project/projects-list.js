@@ -21,6 +21,7 @@ function ProjectsListController(
   $timeout,
   $uibModal,
   ncUtils,
+  ncUtilsFlash,
   currentStateService,
   usersService) {
   var controllerScope = this;
@@ -31,11 +32,6 @@ function ProjectsListController(
       var fn = this._super.bind(this);
       this.activate().then(function() {
         fn();
-      });
-      $scope.$on('currentCustomerUpdated', function() {
-        $timeout(function() {
-          controllerScope.resetCache();
-        });
       });
       $scope.$on('refreshProjectList', function() {
         $timeout(function() {
@@ -56,6 +52,7 @@ function ProjectsListController(
       ]).finally(function() {
         vm.loading = false;
       }).then(function() {
+        vm.controllerScope.addProjectDisabled = !vm.userCanAddProject();
         vm.tableOptions = {
           searchFieldName: 'name',
           noDataText: gettext('You have no projects yet.'),
@@ -64,6 +61,13 @@ function ProjectsListController(
           tableActions: vm.getTableActions(),
           rowActions: vm.getRowActions(),
         };
+      });
+    },
+    refreshCustomer: function() {
+      return customersService.$get(this.currentCustomer.uuid).then((customer) => {
+        this.currentCustomer = customer;
+        currentStateService.setCustomer(this.currentCustomer);
+        this.controllerScope.addProjectDisabled = !this.userCanAddProject();
       });
     },
     getFilter: function() {
@@ -128,11 +132,16 @@ function ProjectsListController(
         }
       ];
     },
+    userCanAddProject: function() {
+      var ownerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
+      var quotaReached = ncUtils.isCustomerQuotaReached(this.currentCustomer, 'project');
+      return ownerOrStaff && !quotaReached;
+    },
     getTableActions: function() {
       var vm = this;
-      var ownerOrStaff = customersService.checkCustomerUser(vm.currentCustomer, vm.currentUser);
-      var quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'project');
-      var title;
+      let ownerOrStaff = customersService.checkCustomerUser(vm.currentCustomer, vm.currentUser);
+      let quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'project');
+      let title;
       if (!ownerOrStaff) {
         title = gettext('You don\'t have enough privileges to perform this operation.');
       } else if (quotaReached) {
@@ -147,12 +156,15 @@ function ProjectsListController(
               uuid: vm.currentCustomer.uuid
             });
           },
-          disabled: !ownerOrStaff || quotaReached,
-          titleAttr: title
+          disabled: vm.controllerScope.addProjectDisabled,
+          isDisabled: () => { return vm.controllerScope.addProjectDisabled; },
+          titleAttr: title,
         }
       ];
     },
     getRowActions: function() {
+      let vm = this;
+      let ownerOrStaff = customersService.checkCustomerUser(vm.currentCustomer, vm.currentUser);
       return [
         {
           title: gettext('Details'),
@@ -163,6 +175,16 @@ function ProjectsListController(
           title: gettext('Remove'),
           iconClass: 'fa fa-trash',
           callback: this.remove.bind(this.controllerScope),
+          isDisabled: (project) => {
+            return !ownerOrStaff || vm.hasConnectedResources(project);
+          },
+          tooltip: (project) => {
+            if (!ownerOrStaff) {
+              return gettext('You don\'t have enough privileges to perform this operation.');
+            } else if(vm.hasConnectedResources(project)) {
+              return gettext('Project has connected resources and can\'t be removed');
+            }
+          }
         }
       ];
     },
@@ -195,7 +217,25 @@ function ProjectsListController(
           project.storage_count = quota.usage;
         }
       }
-    }
+    },
+    hasConnectedResources: function(project) {
+      return (project.app_count !== 0
+        || project.vm_count !== 0
+        || project.private_cloud_count !== 0
+        || project.storage_count !== 0);
+    },
+    removeInstance: function(project) {
+      return project.$delete()
+        .then(() => {
+          return this.refreshCustomer().then(()=> {
+            ncUtilsFlash.success(gettext('Project has been removed successfully.'));
+          });
+        })
+        .catch((response)=>{
+          let message = response.data.detail || gettext('An error occurred on project removal.');
+          ncUtilsFlash.error(message);
+        });
+    },
   });
 
   controllerScope.__proto__ = new Controller();
