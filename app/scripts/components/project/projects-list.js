@@ -133,12 +133,12 @@ function ProjectsListController(
       ];
     },
     userCanAddProject: function() {
-      var ownerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
-      var quotaReached = ncUtils.isCustomerQuotaReached(this.currentCustomer, 'project');
+      const ownerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
+      let quotaReached = ncUtils.isCustomerQuotaReached(this.currentCustomer, 'project');
       return ownerOrStaff && !quotaReached;
     },
     getTableActions: function() {
-      var vm = this;
+      let vm = this;
       let ownerOrStaff = customersService.checkCustomerUser(vm.currentCustomer, vm.currentUser);
       let quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'project');
       let title;
@@ -219,10 +219,7 @@ function ProjectsListController(
       }
     },
     hasConnectedResources: function(project) {
-      return (project.app_count !== 0
-        || project.vm_count !== 0
-        || project.private_cloud_count !== 0
-        || project.storage_count !== 0);
+      return ncUtils.getQuotaUsage(project.quotas).nc_resource_count !== 0;
     },
     removeInstance: function(project) {
       return project.$delete()

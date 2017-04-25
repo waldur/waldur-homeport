@@ -101,7 +101,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:12
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/components/table/responsive-table.js:268
+#: app/scripts/components/table/responsive-table.js:284
 msgid "Actions"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgid "Add private cloud"
 msgstr ""
 
 #: app/scripts/components/project/project-create.html:69
-#: app/scripts/components/project/projects-list.js:143
+#: app/scripts/components/project/projects-list.js:152
 msgid "Add project"
 msgstr ""
 
@@ -274,6 +274,10 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
+#: app/scripts/components/project/projects-list.js:232
+msgid "An error occurred on project removal."
+msgstr ""
+
 #: app/scripts/components/customer/customer-workspace.js:70
 msgid "Analytics"
 msgstr ""
@@ -308,7 +312,7 @@ msgstr ""
 msgid "Approve payment"
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:108
+#: app/scripts/components/project/projects-list.js:112
 msgid "Apps"
 msgstr ""
 
@@ -462,10 +466,6 @@ msgstr ""
 #: app/scripts/components/providers/create.html:112
 #: app/scripts/components/providers/details/provider-settings.html:65
 msgid "Browse"
-msgstr ""
-
-#: app/scripts/components/analytics/resource-analysis.html:35
-msgid "By project"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:23
@@ -804,7 +804,7 @@ msgid "Created at"
 msgstr ""
 
 #: app/scripts/components/offering/offerings-list.js:54
-#: app/scripts/components/project/projects-list.js:94
+#: app/scripts/components/project/projects-list.js:98
 msgid "Creation date"
 msgstr ""
 
@@ -905,7 +905,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:20
 #: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:17
 #: app/scripts/components/project/project-details.html:25
-#: app/scripts/components/project/projects-list.js:87
+#: app/scripts/components/project/projects-list.js:91
 #: app/scripts/components/resource/actions/constants.js:26
 #: app/scripts/components/resource/summary/resource-summary-base.html:31
 #: app/scripts/components/user/user-edit.html:85
@@ -927,7 +927,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-registration.html:69
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
-#: app/scripts/components/project/projects-list.js:158
+#: app/scripts/components/project/projects-list.js:170
 #: app/scripts/components/providers/details/dialog.html:10
 #: app/scripts/components/providers/provider-list.js:92
 #: app/scripts/components/team/customer-users-list.js:121
@@ -1276,10 +1276,6 @@ msgstr ""
 
 #: app/scripts/components/user/user-edit.html:133
 msgid "have been accepted on"
-msgstr ""
-
-#: app/scripts/components/analytics/resource-analysis.html:55
-msgid "HDD"
 msgstr ""
 
 #: app/scripts/components/help/routes.js:9
@@ -1866,7 +1862,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:28
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:42
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:31
-#: app/scripts/components/project/projects-list.js:78
+#: app/scripts/components/project/projects-list.js:82
 #: app/scripts/components/providers/details/provider-details.html:4
 #: app/scripts/components/providers/details/provider-settings.js:44
 #: app/scripts/components/providers/provider-list.js:55
@@ -2050,7 +2046,7 @@ msgstr ""
 msgid "No permissions found matching filter."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:125
+#: app/scripts/components/project/projects-list.js:129
 msgid "No plan"
 msgstr ""
 
@@ -2078,7 +2074,7 @@ msgstr ""
 msgid "No projects are assigned to this role."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:62
+#: app/scripts/components/project/projects-list.js:59
 #: app/scripts/components/user/user-projects.js:22
 msgid "No projects found matching filter."
 msgstr ""
@@ -2200,7 +2196,6 @@ msgstr ""
 msgid "Not enough data for chart"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-analysis.html:37
 #: app/scripts/components/resource/monitoring/resource-graphs.js:20
 #: app/scripts/components/resource/monitoring/resource-graphs.js:21
 msgid "Not enough data for chart."
@@ -2323,10 +2318,6 @@ msgstr ""
 
 #: app/scripts/configs/base-config.js:59
 msgid "Oracle database and SugarCRM."
-msgstr ""
-
-#: app/views/directives/compact-table-sorter.html:4
-msgid "Order by"
 msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:32
@@ -2507,7 +2498,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:33
 #: app/scripts/components/invitations/invitations-list.js:69
-#: app/scripts/components/project/projects-list.js:123
+#: app/scripts/components/project/projects-list.js:127
 msgid "Pending"
 msgstr ""
 
@@ -2699,7 +2690,7 @@ msgstr ""
 #: app/scripts/components/appstore/routes.js:22
 #: app/scripts/components/dashboard/constants.js:15
 #: app/scripts/components/project/project-workspace.js:38
-#: app/scripts/components/project/projects-list.js:113
+#: app/scripts/components/project/projects-list.js:117
 #: app/scripts/components/project/routes.js:140
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
 #: app/scripts/configs/base-config.js:100
@@ -2769,12 +2760,20 @@ msgstr ""
 msgid "Project events"
 msgstr ""
 
+#: app/scripts/components/project/projects-list.js:228
+msgid "Project has been removed successfully."
+msgstr ""
+
 #: app/scripts/components/events/constants.js:16
 msgid "Project has been renamed from {project_previous_name} to {project_name}."
 msgstr ""
 
 #: app/scripts/components/project/project-details.js:48
 msgid "Project has been updated."
+msgstr ""
+
+#: app/scripts/components/project/projects-list.js:185
+msgid "Project has connected resources and can't be removed"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:54
@@ -2933,7 +2932,7 @@ msgid "Quota events"
 msgstr ""
 
 #: app/scripts/components/error/routes.js:25
-#: app/scripts/components/project/projects-list.js:139
+#: app/scripts/components/project/projects-list.js:148
 #: app/scripts/components/providers/provider-list.js:178
 #: app/scripts/components/resource/list/resources-list.js:97
 #: app/scripts/components/resource/resource-provision-policy.js:14
@@ -2957,7 +2956,6 @@ msgstr ""
 msgid "Quotas updated."
 msgstr ""
 
-#: app/scripts/components/analytics/resource-analysis.html:54
 #: app/scripts/components/appstore/appstore-compare-list.js:83
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:59
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:39
@@ -3047,7 +3045,7 @@ msgid "Remote network"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plans-list.js:59
-#: app/scripts/components/project/projects-list.js:163
+#: app/scripts/components/project/projects-list.js:175
 #: app/scripts/components/providers/provider-list.js:97
 #: app/scripts/components/team/customer-users-list.js:131
 #: app/scripts/components/team/project-users-list.js:103
@@ -3603,7 +3601,7 @@ msgstr ""
 msgid "Skip floating IP assignment"
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:117
+#: app/scripts/components/project/projects-list.js:121
 #: app/scripts/components/resource/tabs/constants.js:22
 msgid "SLA"
 msgstr ""
@@ -3746,7 +3744,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:20
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:26
 #: app/scripts/components/project/project-workspace.js:52
-#: app/scripts/components/project/projects-list.js:104
+#: app/scripts/components/project/projects-list.js:108
 #: app/scripts/components/project/routes.js:148
 #: app/scripts/components/quotas/filters.js:7
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:11
@@ -4015,10 +4013,6 @@ msgstr ""
 
 #: app/scripts/components/error/error-403.js:21
 msgid "To update current plan visit <a href=\"{link}\">plans page</a>."
-msgstr ""
-
-#: app/scripts/components/analytics/resource-analysis.html:62
-msgid "Top providers by project"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-pie-chart.html:21
@@ -4330,7 +4324,6 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-analysis.html:53
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:55
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:35
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:54
@@ -4368,7 +4361,7 @@ msgstr ""
 msgid "VM name"
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:100
+#: app/scripts/components/project/projects-list.js:104
 msgid "VMs"
 msgstr ""
 
@@ -4478,7 +4471,8 @@ msgstr ""
 msgid "You don't have enough permission to edit providers for current project."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:137
+#: app/scripts/components/project/projects-list.js:146
+#: app/scripts/components/project/projects-list.js:183
 msgid "You don't have enough privileges to perform this operation."
 msgstr ""
 
@@ -4515,7 +4509,7 @@ msgstr ""
 msgid "You have no private clouds yet."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:61
+#: app/scripts/components/project/projects-list.js:58
 msgid "You have no projects yet."
 msgstr ""
 

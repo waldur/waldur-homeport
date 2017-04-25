@@ -211,19 +211,23 @@ export default function responsiveTable($rootScope, $timeout, $interval, $compil
         });
       }
 
+      function setupActionWatcher(action, uniqueClassName) {
+        if (action.hasOwnProperty('isDisabled')) {
+          scope.$watch(action.isDisabled, function(newValue, oldValue){
+            if (newValue !== oldValue) {
+              let action = $('.' + uniqueClassName);
+              action.toggleClass('disabled');
+              // title is lost through clojures, clean it up from leftovers.
+              action.removeAttr('title');
+            }
+          });
+        }
+      }
+
       function getTableButtons(actions) {
         return actions.map(function(action, index) {
           let uniqueClassName = 'btn-' + index;
-          if (action.hasOwnProperty('isDisabled')) {
-            scope.$watch(action.isDisabled, function(newValue, oldValue){
-              if (newValue !== oldValue) {
-                let action = $('.' + uniqueClassName);
-                action.toggleClass('disabled');
-                // title is lost through clojures, clean it up from leftovers.
-                action.removeAttr('title');
-              }
-            });
-          }
+          setupActionWatcher(action, uniqueClassName);
 
           return {
             text: formatActionName(action),
