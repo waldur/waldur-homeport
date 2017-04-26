@@ -19,14 +19,14 @@
                  ng-repeat="service in $ctrl.services">
                 <div class="ibox" uib-tooltip="{{ service.warning }}">
                     <div class="ibox-content product-box cursor-pointer">
-                        <div class="product-desc" ng-class="{disabled: !service.enabled}">
+                        <div class="m-md" ng-class="{disabled: !service.enabled}">
                             <a class="product-name elipsis">
                                 <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>
                                 {{ ::service.name }}
                             </a>
                         </div>
 
-                        <div class="text-center m-b-lg m-t-md"
+                        <div class="text-center m-b m-t"
                              ng-class="{disabled: !service.enabled}">
                             <provider-icon type="service.type" size="img-md"/>
                         </div>
