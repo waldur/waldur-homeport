@@ -17,7 +17,7 @@
                     </li>
                 </ol>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4" ng-if="$state.current.name === 'project.details'">
                 <project-details-button project="currentProject"></project-details-button>
             </div>
         </div>
