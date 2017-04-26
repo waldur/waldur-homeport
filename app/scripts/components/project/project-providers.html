@@ -7,7 +7,7 @@
 <div ng-if="!$ctrl.loading && $ctrl.canManage && !$ctrl.choices.length" class="empty-list-message">
     <span translate>There are no providers yet.</span>
 </div>
-<div ng-if="$ctrl.choices.length">
+<div ng-if="$ctrl.choices.length && $ctrl.canManage">
     <p translate>Please select providers allowed to be used in this project.</p>
     <div multiple-select choices="$ctrl.choices"></div>
     <button
