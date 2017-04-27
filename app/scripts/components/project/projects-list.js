@@ -118,6 +118,11 @@ function ProjectsListController(
           render: row => row.private_cloud_count || 0
         },
         {
+          title: gettext('Estimated cost'),
+          feature: 'projectCostDetails',
+          render: row => $filter('defaultCurrency')(row.price_estimate.total)
+        },
+        {
           title: gettext('SLA'),
           feature: 'premiumSupport',
           render: function(row) {
