@@ -1,0 +1,16 @@
+<table class="table table-borderless m-b-xs">
+  <tbody>
+  <td ng-show="$ctrl.active">
+    <appstore-field-integer model="$ctrl.model" field="$ctrl.field" form="$ctrl.form"></appstore-field-integer>
+  </td>
+  <td>
+        <button
+          type="button"
+          class="btn btn-default"
+          ng-click="$ctrl.toggleField()">
+          <i class="fa" ng-class="{'fa-trash-o' : $ctrl.active, 'fa-plus' : !$ctrl.active}"></i>
+          <span ng-hide="$ctrl.active" translate>Add</span>
+        </button>
+  </td>
+  </tbody>
+</table>

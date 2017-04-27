@@ -290,10 +290,20 @@ function AppStoreController(
       return this.serviceMetadata.resources[this.selectedResourceType];
     },
     save: function() {
+      let callback = this._super.bind(this);
+
       if (!this.canSave()) {
         return $q.reject();
+      } else if (this.fields.hasOwnProperty('saveConfirmation')) {
+        return this.fields.saveConfirmation($q, this.instance).then(() => {
+          // _super is getting lost in clojures.
+          return callback();
+        }).catch(()=> {
+          return $q.reject();
+        });
       }
-      return this._super();
+
+      return callback();
     },
     saveInstance: function() {
       var resourceUrl = this.getResourceUrl();

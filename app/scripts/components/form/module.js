@@ -4,6 +4,7 @@ import appstoreFieldString from './appstore-field-string';
 import appstoreFieldPassword from './appstore-field-password';
 import appstoreFieldText from './appstore-field-text';
 import appstoreFieldInteger from './appstore-field-integer';
+import appstoreFieldNullableInteger from './appstore-field-nullable-integer';
 import appstoreFieldBoolean from './appstore-field-boolean';
 import appstoreFieldErrors from './appstore-field-errors';
 import appstoreFieldLabel from './appstore-field-label';
@@ -22,6 +23,7 @@ export default module => {
   module.directive('appstoreFieldPassword', appstoreFieldPassword);
   module.directive('appstoreFieldText', appstoreFieldText);
   module.component('appstoreFieldInteger', appstoreFieldInteger);
+  module.component('appstoreFieldNullableInteger', appstoreFieldNullableInteger);
   module.component('appstoreFieldBoolean', appstoreFieldBoolean);
   module.directive('appstoreFieldErrors', appstoreFieldErrors);
   module.directive('appstoreFieldLabel', appstoreFieldLabel);
