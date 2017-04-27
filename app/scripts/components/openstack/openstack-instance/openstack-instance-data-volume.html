@@ -1,7 +1,7 @@
 <table class="table table-borderless m-b-xs">
     <tbody>
     <tr ng-hide="$ctrl.active">
-        <td>
+        <td class="no-padding">
             <button type="button" class="btn btn-default"
                     ng-click="$ctrl.toggleField()">
                 <i class="fa fa-plus"></i>
@@ -13,10 +13,10 @@
         <label ng-show="$ctrl.active" translate>Data volume size:</label>
     </tr>
     <tr ng-show="$ctrl.active">
-        <td>
+        <td class="no-padding">
             <appstore-field-integer model="$ctrl.model" field="$ctrl.field" form="$ctrl.form"></appstore-field-integer>
         </td>
-        <td>
+        <td class="no-padding">
             <button type="button" class="btn btn-default"
                     ng-click="$ctrl.toggleField()">
                 <i class="fa fa-trash-o" uib-tooltip="{{ 'Disable data volume' | translate}}"></i>
