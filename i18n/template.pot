@@ -110,7 +110,6 @@ msgstr ""
 msgid "Activity stream"
 msgstr ""
 
-#: app/scripts/components/form/appstore-field-nullable-integer.html:12
 #: app/scripts/components/issues/issue-comments-form.html:17
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:53
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:39
@@ -125,6 +124,10 @@ msgstr ""
 #: app/views/directives/customer-balance.html:113
 #: app/views/directives/customer-balance.html:147
 msgid "Add credit"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html:8
+msgid "Add data volume"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html:58
@@ -204,7 +207,7 @@ msgid "Adding link"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:88
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:148
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:147
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
@@ -317,7 +320,7 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:167
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:166
 msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
 msgstr ""
 
@@ -407,13 +410,13 @@ msgid "Backup schedule has been updated"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:62
+#: app/scripts/components/openstack/openstack-instance/module.js:64
 msgid "Backup schedules"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js:63
 #: app/scripts/components/openstack/openstack-backup/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:58
+#: app/scripts/components/openstack/openstack-instance/module.js:60
 msgid "Backups"
 msgstr ""
 
@@ -860,8 +863,8 @@ msgstr ""
 msgid "Data is unavailable."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:79
-msgid "Data volume size"
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html:13
+msgid "Data volume size:"
 msgstr ""
 
 #: app/scripts/components/payments/payment-list.js:43
@@ -905,7 +908,7 @@ msgstr ""
 #: app/scripts/components/offering/offering-summary.html:62
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:38
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:45
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:142
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:141
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:46
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:25
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:20
@@ -933,6 +936,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-registration.html:69
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
+#: app/scripts/components/project/project-details-button.html:4
 #: app/scripts/components/project/projects-list.js:175
 #: app/scripts/components/providers/details/dialog.html:10
 #: app/scripts/components/providers/provider-list.js:92
@@ -945,6 +949,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:33
 msgid "Device"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html:22
+msgid "Disable data volume"
 msgstr ""
 
 #: app/scripts/components/project/project-policies.html:61
@@ -1192,7 +1200,7 @@ msgid "Filter projects"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:80
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:95
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:94
 #: app/scripts/components/user/keys/key-list.js:36
 msgid "Fingerprint"
 msgstr ""
@@ -1469,7 +1477,7 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:66
+#: app/scripts/components/openstack/openstack-instance/module.js:68
 msgid "Internal IPs"
 msgstr ""
 
@@ -1868,7 +1876,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:33
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:40
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:91
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:90
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:36
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:35
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
@@ -1895,7 +1903,7 @@ msgid "Network has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:41
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:121
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:120
 #: app/scripts/components/openstack/openstack-network/breadcrumbs.js:22
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:23
 msgid "Networks"
@@ -3374,7 +3382,7 @@ msgstr ""
 msgid "Security group has been updated."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:102
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:101
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 #: app/scripts/components/openstack/openstack-security-groups/breadcrumbs.js:21
 msgid "Security groups"
@@ -3465,7 +3473,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:34
 #: app/scripts/components/openstack/openstack-instance/actions.js:44
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:103
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:102
 msgid "Select security groups..."
 msgstr ""
 
@@ -3690,11 +3698,11 @@ msgid "SSH Keys"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:72
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:87
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:86
 msgid "SSH public key"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:98
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:97
 msgid "SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr ""
 
@@ -4301,7 +4309,7 @@ msgid "User dashboard"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:87
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:147
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:146
 msgid "User data"
 msgstr ""
 
@@ -4399,7 +4407,7 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:54
+#: app/scripts/components/openstack/openstack-instance/module.js:56
 #: app/scripts/components/resource/list/resource-storage-tabs.html:5
 msgid "Volumes"
 msgstr ""

@@ -5,6 +5,7 @@ import openstackInstanceSecurityGroupsField from './openstack-instance-security-
 import openstackInstanceInternalIpsList from './openstack-instance-internal-ips-list';
 import openstackInstanceNetworks from './openstack-instance-networks';
 import openstackInstanceFloatingIps from './openstack-instance-floating-ips';
+import openstackInstanceDataVolume from './openstack-instance-data-volume';
 import actionConfig from './actions';
 
 export default module => {
@@ -12,6 +13,7 @@ export default module => {
   module.component('openstackInstanceCheckoutSummary', openstackInstanceCheckoutSummary);
   module.component('openstackInstanceSecurityGroupsField', openstackInstanceSecurityGroupsField);
   module.component('openstackInstanceInternalIpsList', openstackInstanceInternalIpsList);
+  module.component('openstackInstanceDataVolume', openstackInstanceDataVolume);
   module.component('openstackInstanceNetworks', openstackInstanceNetworks);
   module.component('openstackInstanceFloatingIps', openstackInstanceFloatingIps);
   module.config(fieldsConfig);
