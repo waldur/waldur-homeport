@@ -164,8 +164,8 @@ function saveConfirmation($q, instance) {
   // * must return a promise //
   let deferred = $q.defer();
   if (!instance.hasOwnProperty('data_volume_size') || instance.data_volume_size === undefined) {
-    const confirmation_message = 'Are you sure you do not want to create a data volume? System volume is not resizable';
-    if (confirm(gettext(confirmation_message))) {
+    const message = gettext('Are you sure you do not want to create a data volume? System volume is not resizable');
+    if (confirm(message)) {
       deferred.resolve();
     } else {
       deferred.reject();

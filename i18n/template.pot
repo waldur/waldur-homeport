@@ -317,6 +317,10 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:167
+msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
+msgstr ""
+
 #: app/scripts/components/resource/actions/action-utils-service.js:43
 msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}."
 msgstr ""
