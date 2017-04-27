@@ -75,8 +75,7 @@ export default {
       max: 1024 * 320
     },
     data_volume_size: {
-      type: 'integer',
-      required: true,
+      type: 'nullable-integer',
       label: gettext('Data volume size'),
       factor: 1024,
       units: 'GB',
@@ -151,13 +150,31 @@ export default {
   },
   watchers: {
     image: imageWatcher,
-    flavor: flavorWatcher
+    flavor: flavorWatcher,
   },
-  summaryComponent: 'openstackInstanceCheckoutSummary'
+  summaryComponent: 'openstackInstanceCheckoutSummary',
+  saveConfirmation: saveConfirmation,
 };
 
 export function internalIpFormatter(subnet) {
   return `${subnet.name} (${subnet.cidr})`;
+}
+
+function saveConfirmation($q, instance) {
+  // * must return a promise //
+  let deferred = $q.defer();
+  if (!instance.hasOwnProperty('data_volume_size') || instance.data_volume_size === undefined) {
+    const message = gettext('Are you sure you do not want to create a data volume? System volume is not resizable');
+    if (confirm(message)) {
+      deferred.resolve();
+    } else {
+      deferred.reject();
+    }
+  } else {
+    deferred.resolve();
+  }
+
+  return deferred.promise;
 }
 
 function validateAndSort(model, options, validator, comparator, name) {
