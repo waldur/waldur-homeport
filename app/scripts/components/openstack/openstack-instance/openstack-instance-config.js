@@ -75,8 +75,7 @@ export default {
       max: 1024 * 320
     },
     data_volume_size: {
-      type: 'nullable-integer',
-      label: gettext('Data volume size'),
+      component: 'openstackInstanceDataVolume',
       factor: 1024,
       units: 'GB',
       min: 1024,
