@@ -13,6 +13,7 @@ export default function baseResourceListController(
   $rootScope,
   $state,
   $q,
+  $timeout,
   resourceUtils,
   ncUtils) {
   var ControllerListClass = baseControllerListClass.extend({
@@ -276,6 +277,7 @@ export default function baseResourceListController(
         resourcesService.cleanOptionsCache(resource.url);
       });
       this._super();
+      this.pollResources();
     },
     afterInstanceRemove: function(resource) {
       this._super(resource);
@@ -286,9 +288,69 @@ export default function baseResourceListController(
     reInitResource:function(resource) {
       var vm = this;
       return resourcesService.$get(resource.resource_type, resource.uuid).then(function(response) {
-        var index = vm.list.indexOf(resource);
-        vm.list[index] = response;
+        vm.setResource(resource, response);
+        // when row is updated in the list it is not refreshed in the datatable. Do it manually.
+        $rootScope.$broadcast('updateRow', {data:response});
         vm.afterGetList();
+      });
+    },
+    setResource: function(resource, response) {
+      var index = this.list.indexOf(resource);
+      this.list[index] = response;
+    },
+    resourceIsUpdating: function(resource) {
+      // resource is updating if it is not in stable state.
+      return (resource.state !== 'OK' && resource.state !== 'ERRED');
+    },
+    pollResource: function(resource) {
+      let vm = this;
+      vm.monitoredResources = vm.monitoredResources || [];
+      function removeItem(collection, item) {
+        // modify an object, not a reference.
+        let index = collection.indexOf(item);
+        if (index !== -1) {
+          collection.splice(index, 1);
+        }
+      }
+      function internalPollResource(resource) {
+        let uuid = resource.uuid;
+
+        $timeout(() => {
+          vm.service.$get(resource.resource_type, uuid).then((response) => {
+            // do not call updateRow as it reloads a table and actions are reloaded on ENV.singleResourcePollingTimeout
+            vm.setResource(resource, response);
+            if (vm.resourceIsUpdating(response)) {
+              internalPollResource(resource);
+            } else {
+              // update row only once to avoid table redrawing on each call.
+              $rootScope.$broadcast('updateRow', {data:response});
+              resourcesService.cleanOptionsCache(resource.url);
+              removeItem(vm.monitoredResources, uuid);
+            }
+          }).catch((response) => {
+            if (response.status === 404) {
+              removeItem(vm.list, resource);
+              $rootScope.$broadcast('removeRow', {data: uuid});
+            }
+            removeItem(vm.monitoredResources, uuid);
+          });
+        }, ENV.singleResourcePollingTimeout);
+      }
+
+      if (vm.monitoredResources.indexOf(resource.uuid) === -1) {
+        vm.monitoredResources.push(resource.uuid);
+        internalPollResource(resource);
+      }
+    },
+    pollResources: function() {
+      if (!ENV.resourcePollingEnabled) {
+        return;
+      }
+      let vm = this;
+
+      let newResources = this.list.filter(vm.resourceIsUpdating);
+      angular.forEach(newResources, (resource) => {
+        vm.pollResource(resource);
       });
     }
   });
