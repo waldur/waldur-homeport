@@ -55,6 +55,9 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         fields: {
           schedule: {
             type: 'crontab'
+          },
+          timezone: {
+            default_value: 'UTC'
           }
         }
       },
