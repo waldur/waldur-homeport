@@ -41,6 +41,10 @@ const openstackInstanceNetworks = {
         display_name: internalIpFormatter(subnet),
         value: subnet.url,
       }));
+
+      if (this.subnets.length === 1) {
+        this.items[0].subnet = this.subnets[0].value;
+      }
     }
 
     serializeSubnets() {
