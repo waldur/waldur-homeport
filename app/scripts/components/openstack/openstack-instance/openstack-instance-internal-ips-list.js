@@ -28,6 +28,12 @@ function OpenstackInternalIpsListController(
     afterGetList: function() {
       this.list = this.list[0] ? this.list[0].internal_ips_set : [];
     },
+    reInitResource: function(resource) {
+      this.service.$get(resource.resource_type, resource.uuid)
+        .then(response => {
+          this.controllerScope.resource.internal_ips_set = response.internal_ips_set;
+        });
+    },
     getTableOptions: function() {
       return {
         searchFieldName: 'subnet_name',
