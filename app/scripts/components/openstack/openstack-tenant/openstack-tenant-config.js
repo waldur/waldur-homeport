@@ -57,6 +57,7 @@ export default {
     },
     user_password: {
       type: 'password',
+      autocomplete: false,
       label: gettext('Initial admin password'),
       placeholder: gettext('generate automatically'),
       help_text: gettext('Leave blank if you want admin password to be auto-generated.')
