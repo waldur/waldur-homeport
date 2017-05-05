@@ -2215,6 +2215,10 @@ msgstr ""
 msgid "Not all required fields have been entered."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:46
+msgid "Not assigned"
+msgstr ""
+
 #: app/scripts/components/analytics/resource-analysis.html:25
 msgid "Not enough data for chart"
 msgstr ""

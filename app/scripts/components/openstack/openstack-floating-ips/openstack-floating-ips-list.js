@@ -42,7 +42,10 @@ function OpenstackFloatingIpsListController(
         {
           title: gettext('Instance'),
           render: row => {
-            var href = $state.href('resources.details', {
+            if (!row.instance_uuid) {
+              return gettext('Not assigned');
+            }
+            let href = $state.href('resources.details', {
               uuid: row.instance_uuid,
               resource_type: 'OpenStackTenant.Instance'
             });
