@@ -25,6 +25,26 @@ export default function responsiveTable($rootScope, $timeout, $interval, $compil
       var table;
       var rootScopeListener;
 
+      scope.$on('updateRow', (event, args) => {
+        let data = args.data;
+        table.rows().every(function() {
+          let rowData = this.data();
+          if (rowData.uuid === data.uuid) {
+            table.row(this).data(data).draw();
+          }
+        });
+      });
+
+      scope.$on('removeRow', (event, args) => {
+        let uuid = args.data;
+        table.rows().every(function() {
+          let rowData = this.data();
+          if (rowData && rowData.uuid === uuid) {
+            table.row(this).remove().draw();
+          }
+        });
+      });
+
       scope.$watch('controller.tableOptions', function(newTableOptions) {
         if (table) {
           // Table should be initialized once

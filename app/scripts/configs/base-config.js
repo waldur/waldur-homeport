@@ -177,6 +177,10 @@ angular.module('ncsaas')
     resourcesTimerInterval: 30, // seconds
     countersTimerInterval: 30, // seconds
 
+    // refresh timeout for a single resource polling.
+    resourcePollingEnabled: true,
+    singleResourcePollingTimeout: 1000 * 2,
+
     ownerCanManageCustomer: true,
     OWNERS_CAN_MANAGE_OWNERS: true,
     MANAGER_CAN_MANAGE_TENANTS: false,
