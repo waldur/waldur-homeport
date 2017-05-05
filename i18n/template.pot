@@ -207,7 +207,7 @@ msgid "Adding link"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:88
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:147
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:148
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
@@ -320,7 +320,7 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:166
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:167
 msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
 msgstr ""
 
@@ -636,7 +636,7 @@ msgid "Components"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:9
-#: app/scripts/components/openstack/openstack-instance/actions.js:63
+#: app/scripts/components/openstack/openstack-instance/actions.js:66
 msgid "Configure"
 msgstr ""
 
@@ -657,7 +657,7 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js:68
+#: app/scripts/components/openstack/openstack-instance/actions.js:71
 msgid "Connected subnets"
 msgstr ""
 
@@ -703,7 +703,7 @@ msgstr ""
 #: app/scripts/components/customer/customer-issues.js:31
 #: app/scripts/components/issues/issue-create-dialog.js:10
 #: app/scripts/components/offering/appstore-offering.html:16
-#: app/scripts/components/openstack/openstack-instance/actions.js:105
+#: app/scripts/components/openstack/openstack-instance/actions.js:108
 #: app/scripts/components/openstack/openstack-instance/actions.js:51
 #: app/scripts/components/openstack/openstack-tenant/actions.js:28
 #: app/scripts/components/openstack/openstack-tenant/actions.js:47
@@ -722,7 +722,7 @@ msgstr ""
 msgid "Create an account"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js:106
+#: app/scripts/components/openstack/openstack-instance/actions.js:109
 msgid "Create backup for"
 msgstr ""
 
@@ -908,7 +908,7 @@ msgstr ""
 #: app/scripts/components/offering/offering-summary.html:62
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:38
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:45
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:141
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:142
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:46
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:25
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:20
@@ -1224,7 +1224,7 @@ msgstr ""
 msgid "Flexible"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:34
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:35
 msgid "Floating IP"
 msgstr ""
 
@@ -1445,6 +1445,7 @@ msgid "Initial admin username"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/openstack-backup-summary.html:5
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:43
 msgid "Instance"
 msgstr ""
 
@@ -1608,7 +1609,7 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:38
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:44
 msgid "IPv4 address"
 msgstr ""
 
@@ -1760,7 +1761,7 @@ msgstr ""
 msgid "Logout failed"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:42
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:48
 msgid "MAC address"
 msgstr ""
 
@@ -1903,7 +1904,7 @@ msgid "Network has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:41
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:120
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:121
 #: app/scripts/components/openstack/openstack-network/breadcrumbs.js:22
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:23
 msgid "Networks"
@@ -1987,19 +1988,19 @@ msgstr ""
 msgid "No events yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:31
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:32
 msgid "No floating IPs found matching filter."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:30
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:31
 msgid "No floating IPs yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:35
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:41
 msgid "No internal IPs found matching filter."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:34
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:40
 msgid "No internal IPs yet."
 msgstr ""
 
@@ -3440,6 +3441,10 @@ msgstr ""
 msgid "Select certifications"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:20
+msgid "Select connected subnet"
+msgstr ""
+
 #: app/scripts/components/customer/customer-create-dialog.html:39
 msgid "Select country..."
 msgstr ""
@@ -3485,12 +3490,11 @@ msgstr ""
 msgid "Select size..."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:20
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:9
 msgid "Select subnet"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js:69
+#: app/scripts/components/openstack/openstack-instance/actions.js:72
 msgid "Select subnets to connect to..."
 msgstr ""
 
@@ -3657,13 +3661,13 @@ msgid "Snapshot schedule has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot-schedule/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-volume/module.js:108
+#: app/scripts/components/openstack/openstack-volume/module.js:111
 msgid "Snapshot schedules"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/tabs.js:10
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:62
-#: app/scripts/components/openstack/openstack-volume/module.js:104
+#: app/scripts/components/openstack/openstack-volume/module.js:107
 #: app/scripts/components/resource/list/resource-storage-tabs.html:14
 msgid "Snapshots"
 msgstr ""
@@ -3725,7 +3729,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:52
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:50
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:53
-#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:38
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:39
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:52
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:39
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:52
@@ -3799,7 +3803,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:50
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:56
 msgid "Subnet CIDR"
 msgstr ""
 
@@ -3807,7 +3811,7 @@ msgstr ""
 msgid "Subnet has been updated."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:46
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:52
 msgid "Subnet Name"
 msgstr ""
 
@@ -4196,7 +4200,7 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js:83
+#: app/scripts/components/openstack/openstack-instance/actions.js:86
 msgid "Update floating IPs"
 msgstr ""
 
@@ -4309,7 +4313,7 @@ msgid "User dashboard"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:87
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:146
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:147
 msgid "User data"
 msgstr ""
 
