@@ -1,4 +1,4 @@
-import template from './notifications-menu.html';
+import template from './alerts-menu.html';
 
 export default function notificationsMenu() {
   return {
