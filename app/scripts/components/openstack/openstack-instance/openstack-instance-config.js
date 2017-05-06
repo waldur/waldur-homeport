@@ -72,7 +72,7 @@ export default {
       factor: 1024,
       units: 'GB',
       min: 1024,
-      max: 1024 * 320
+      max: 1024 * 4096
     },
     data_volume_size: {
       type: 'integer',
@@ -81,7 +81,7 @@ export default {
       factor: 1024,
       units: 'GB',
       min: 1024,
-      max: 1024 * 320
+      max: 1024 * 4096
     },
     ssh_public_key: {
       type: 'list',
