@@ -72,16 +72,14 @@ export default {
       factor: 1024,
       units: 'GB',
       min: 1024,
-      max: 1024 * 320
+      max: 1024 * 4096
     },
     data_volume_size: {
-      type: 'integer',
-      required: true,
-      label: gettext('Data volume size'),
+      component: 'openstackInstanceDataVolume',
       factor: 1024,
       units: 'GB',
       min: 1024,
-      max: 1024 * 320
+      max: 1024 * 4096
     },
     ssh_public_key: {
       type: 'list',
@@ -103,6 +101,7 @@ export default {
       label: gettext('Security groups'),
       placeholder: gettext('Select security groups...'),
       component: 'openstackInstanceSecurityGroupsField',
+      default: 'default',
       resource: context => ({
         endpoint: 'openstacktenant-security-groups',
         params: {
@@ -151,13 +150,31 @@ export default {
   },
   watchers: {
     image: imageWatcher,
-    flavor: flavorWatcher
+    flavor: flavorWatcher,
   },
-  summaryComponent: 'openstackInstanceCheckoutSummary'
+  summaryComponent: 'openstackInstanceCheckoutSummary',
+  saveConfirmation: saveConfirmation,
 };
 
 export function internalIpFormatter(subnet) {
   return `${subnet.name} (${subnet.cidr})`;
+}
+
+function saveConfirmation($q, instance) {
+  // * must return a promise //
+  let deferred = $q.defer();
+  if (!instance.hasOwnProperty('data_volume_size') || instance.data_volume_size === undefined) {
+    const message = gettext('Are you sure you do not want to create a data volume? System volume is not resizable');
+    if (confirm(message)) {
+      deferred.resolve();
+    } else {
+      deferred.reject();
+    }
+  } else {
+    deferred.resolve();
+  }
+
+  return deferred.promise;
 }
 
 function validateAndSort(model, options, validator, comparator, name) {

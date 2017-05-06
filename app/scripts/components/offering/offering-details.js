@@ -47,6 +47,12 @@ const offeringDetails = {
           this.$state.go('errorPage.notFound');
         });
     }
+
+    reInitResource(offering) {
+      return this.offeringsService.$get(offering.uuid).then(response => {
+        this.offering = response;
+      });
+    }
   }
 };
 

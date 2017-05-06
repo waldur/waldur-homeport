@@ -67,6 +67,8 @@ export default function actionUtilsService(
         vm.handleActionSuccess(action);
         return controller.reInitResource(resource);
       }
+
+      controller.pollResource(resource);
     }
 
     return promise.then(onSuccess, controller.handleActionException.bind(controller));

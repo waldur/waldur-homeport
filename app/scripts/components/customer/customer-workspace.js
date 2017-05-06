@@ -132,21 +132,13 @@ export function CustomerWorkspaceController(
       $scope.currentCustomer = options.customer;
       $scope.context = {customer: options.customer};
       setItems();
-      connectCounters(options.customer);
+      tabCounterService.connect({
+        $scope: $scope,
+        tabs: $scope.items,
+        getCounters: getCounters.bind(null, options.customer),
+        getCountersError: getCountersError
+      });
     }
-  }
-
-  function connectCounters(customer) {
-    if ($scope.timer) {
-      tabCounterService.cancel($scope.timer);
-    }
-
-    $scope.timer = tabCounterService.connect({
-      $scope: $scope,
-      tabs: $scope.items,
-      getCounters: getCounters.bind(null, customer),
-      getCountersError: getCountersError
-    });
   }
 
   function getCounters(customer) {
@@ -161,8 +153,6 @@ export function CustomerWorkspaceController(
   function getCountersError(error) {
     if (error.status == 404) {
       $state.go('errorPage.notFound');
-    } else {
-      tabCounterService.cancel($scope.timer);
     }
   }
 }

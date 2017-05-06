@@ -6,6 +6,7 @@ import multipleSelect from './multiple-select';
 import sentryModule from './sentry';
 import { baseServiceClass, listCache } from './base-service';
 import servicesService from './services-service';
+import tabCounterService from './tab-counters-service';
 import { ncUtils, coreUtils } from './utils';
 
 export default module => {
@@ -15,6 +16,7 @@ export default module => {
   module.service('baseServiceClass', baseServiceClass);
   module.factory('listCache', listCache);
   module.service('servicesService', servicesService);
+  module.service('tabCounterService', tabCounterService);
   module.run(attachTracking);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);

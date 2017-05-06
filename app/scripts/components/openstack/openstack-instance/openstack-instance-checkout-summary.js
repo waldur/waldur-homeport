@@ -91,7 +91,7 @@ class SummaryController {
   }
 
   getTotalStorage() {
-    return this.model.system_volume_size + this.model.data_volume_size;
+    return this.model.system_volume_size + (this.model.data_volume_size || 0);
   }
 }
 

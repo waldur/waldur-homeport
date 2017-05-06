@@ -1,4 +1,5 @@
 import projectDetails from './project-details';
+import projectDetailsButton from './project-details-button';
 import projectCreate from './project-create';
 import ProjectWorkspaceController from './project-workspace';
 import projectPolicies from './project-policies';
@@ -15,6 +16,7 @@ import projectRoutes from './routes';
 
 export default module => {
   module.component('projectDetails', projectDetails);
+  module.component('projectDetailsButton', projectDetailsButton);
   module.component('projectCreate', projectCreate);
   module.controller('ProjectWorkspaceController', ProjectWorkspaceController);
   module.component('projectPolicies', projectPolicies);

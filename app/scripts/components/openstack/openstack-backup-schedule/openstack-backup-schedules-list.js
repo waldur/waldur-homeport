@@ -20,7 +20,7 @@ function openstackBackupSchedulesListController(
         this.listActions = result;
         fn();
         this.service = openstackBackupSchedulesService;
-        this.rowFields.push('schedule', 'maximal_number_of_resources', 'is_active');
+        this.rowFields.push('schedule', 'maximal_number_of_resources', 'is_active', 'retention_time', 'timezone');
       });
     },
     getTableOptions: function() {

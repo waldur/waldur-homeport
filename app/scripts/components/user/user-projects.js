@@ -10,7 +10,7 @@ export default function userProjects() {
 
 // @ngInject
 function UserProjectsController(
-  baseControllerListClass, projectPermissionsService, usersService) {
+  baseControllerListClass, projectPermissionsService, usersService, $state, ncUtils) {
   var controllerScope = this;
   var ControllerListClass = baseControllerListClass.extend({
     init: function() {
@@ -26,7 +26,8 @@ function UserProjectsController(
             title: gettext('Project name'),
             className: 'all',
             render: function(row) {
-              return row.project_name;
+              const href = $state.href('project', {uuid: row.project_uuid});
+              return ncUtils.renderLink(href, row.project_name);
             }
           },
           {

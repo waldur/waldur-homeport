@@ -114,20 +114,12 @@ export default function ProjectWorkspaceController(
       }
       $scope.currentProject = project;
       $scope.context = {project: project};
-      connectCounters(project);
-    });
-  }
-
-  function connectCounters(project) {
-    if ($scope.timer) {
-      tabCounterService.cancel($scope.timer);
-    }
-
-    $scope.timer = tabCounterService.connect({
-      $scope: $scope,
-      tabs: $scope.items,
-      getCounters: getCounters.bind(null, project),
-      getCountersError: getCountersError
+      tabCounterService.connect({
+        $scope: $scope,
+        tabs: $scope.items,
+        getCounters: getCounters.bind(null, project),
+        getCountersError: getCountersError
+      });
     });
   }
 
@@ -144,8 +136,6 @@ export default function ProjectWorkspaceController(
       projectsService.getFirst().then(function(project) {
         $state.go('project.details', {uuid: project.uuid});
       });
-    } else {
-      tabCounterService.cancel($scope.timer);
     }
   }
 }

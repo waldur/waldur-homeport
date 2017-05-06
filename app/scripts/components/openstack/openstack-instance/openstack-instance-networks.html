@@ -6,7 +6,7 @@
           ng-options="choice.value as choice.display_name for choice in $ctrl.getFreeSubnets(item.subnet)"
           ng-model="item.subnet"
           class="form-control">
-          <option value="" translate>Select subnet</option>
+          <option ng-if="!item.subnet" value="" translate>Select subnet</option>
         </select>
       </td>
       <td class="col-md-5">

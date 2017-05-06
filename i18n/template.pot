@@ -101,7 +101,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:12
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/components/table/responsive-table.js:268
+#: app/scripts/components/table/responsive-table.js:284
 msgid "Actions"
 msgstr ""
 
@@ -124,6 +124,10 @@ msgstr ""
 #: app/views/directives/customer-balance.html:113
 #: app/views/directives/customer-balance.html:147
 msgid "Add credit"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html:8
+msgid "Add data volume"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html:58
@@ -159,7 +163,7 @@ msgid "Add private cloud"
 msgstr ""
 
 #: app/scripts/components/project/project-create.html:69
-#: app/scripts/components/project/projects-list.js:143
+#: app/scripts/components/project/projects-list.js:157
 msgid "Add project"
 msgstr ""
 
@@ -203,7 +207,7 @@ msgid "Adding link"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:88
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:149
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:148
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
@@ -274,6 +278,10 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
+#: app/scripts/components/project/projects-list.js:237
+msgid "An error occurred on project removal."
+msgstr ""
+
 #: app/scripts/components/customer/customer-workspace.js:70
 msgid "Analytics"
 msgstr ""
@@ -308,8 +316,12 @@ msgstr ""
 msgid "Approve payment"
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:108
+#: app/scripts/components/project/projects-list.js:112
 msgid "Apps"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:167
+msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js:43
@@ -398,13 +410,13 @@ msgid "Backup schedule has been updated"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:62
+#: app/scripts/components/openstack/openstack-instance/module.js:64
 msgid "Backup schedules"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js:63
 #: app/scripts/components/openstack/openstack-backup/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:58
+#: app/scripts/components/openstack/openstack-instance/module.js:60
 msgid "Backups"
 msgstr ""
 
@@ -624,7 +636,7 @@ msgid "Components"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:9
-#: app/scripts/components/openstack/openstack-instance/actions.js:63
+#: app/scripts/components/openstack/openstack-instance/actions.js:66
 msgid "Configure"
 msgstr ""
 
@@ -633,7 +645,7 @@ msgid "Confirm changing your plan"
 msgstr ""
 
 #: app/scripts/components/customer/customer-delete.js:95
-#: app/scripts/components/table/base-list-controller.js:132
+#: app/scripts/components/table/base-list-controller.js:134
 msgid "Confirm deletion?"
 msgstr ""
 
@@ -645,7 +657,7 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js:68
+#: app/scripts/components/openstack/openstack-instance/actions.js:71
 msgid "Connected subnets"
 msgstr ""
 
@@ -691,7 +703,7 @@ msgstr ""
 #: app/scripts/components/customer/customer-issues.js:31
 #: app/scripts/components/issues/issue-create-dialog.js:10
 #: app/scripts/components/offering/appstore-offering.html:16
-#: app/scripts/components/openstack/openstack-instance/actions.js:105
+#: app/scripts/components/openstack/openstack-instance/actions.js:108
 #: app/scripts/components/openstack/openstack-instance/actions.js:51
 #: app/scripts/components/openstack/openstack-tenant/actions.js:28
 #: app/scripts/components/openstack/openstack-tenant/actions.js:47
@@ -710,7 +722,7 @@ msgstr ""
 msgid "Create an account"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js:106
+#: app/scripts/components/openstack/openstack-instance/actions.js:109
 msgid "Create backup for"
 msgstr ""
 
@@ -801,7 +813,7 @@ msgid "Created at"
 msgstr ""
 
 #: app/scripts/components/offering/offerings-list.js:54
-#: app/scripts/components/project/projects-list.js:94
+#: app/scripts/components/project/projects-list.js:98
 msgid "Creation date"
 msgstr ""
 
@@ -851,8 +863,8 @@ msgstr ""
 msgid "Data is unavailable."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:80
-msgid "Data volume size"
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html:13
+msgid "Data volume size:"
 msgstr ""
 
 #: app/scripts/components/payments/payment-list.js:43
@@ -896,13 +908,13 @@ msgstr ""
 #: app/scripts/components/offering/offering-summary.html:62
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:38
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:45
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:143
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:142
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:46
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:25
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:20
 #: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:17
 #: app/scripts/components/project/project-details.html:25
-#: app/scripts/components/project/projects-list.js:87
+#: app/scripts/components/project/projects-list.js:91
 #: app/scripts/components/resource/actions/constants.js:26
 #: app/scripts/components/resource/summary/resource-summary-base.html:31
 #: app/scripts/components/user/user-edit.html:85
@@ -924,7 +936,8 @@ msgstr ""
 #: app/scripts/components/issues/issue-registration.html:69
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
-#: app/scripts/components/project/projects-list.js:158
+#: app/scripts/components/project/project-details-button.html:4
+#: app/scripts/components/project/projects-list.js:175
 #: app/scripts/components/providers/details/dialog.html:10
 #: app/scripts/components/providers/provider-list.js:92
 #: app/scripts/components/team/customer-users-list.js:121
@@ -936,6 +949,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:33
 msgid "Device"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html:22
+msgid "Disable data volume"
 msgstr ""
 
 #: app/scripts/components/project/project-policies.html:61
@@ -1031,6 +1048,10 @@ msgstr ""
 #: app/scripts/components/resource/state/resource-state-service.js:35
 #: app/scripts/components/resource/state/resource-state-service.js:46
 msgid "error message: {errorMessage}"
+msgstr ""
+
+#: app/scripts/components/project/projects-list.js:121
+msgid "Estimated cost"
 msgstr ""
 
 #: app/scripts/components/project/project-policies.html:52
@@ -1179,7 +1200,7 @@ msgid "Filter projects"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:80
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:96
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:94
 #: app/scripts/components/user/keys/key-list.js:36
 msgid "Fingerprint"
 msgstr ""
@@ -1203,7 +1224,7 @@ msgstr ""
 msgid "Flexible"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:34
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:35
 msgid "Floating IP"
 msgstr ""
 
@@ -1424,6 +1445,7 @@ msgid "Initial admin username"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/openstack-backup-summary.html:5
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:43
 msgid "Instance"
 msgstr ""
 
@@ -1456,7 +1478,7 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:66
+#: app/scripts/components/openstack/openstack-instance/module.js:68
 msgid "Internal IPs"
 msgstr ""
 
@@ -1587,7 +1609,7 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:38
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:44
 msgid "IPv4 address"
 msgstr ""
 
@@ -1739,7 +1761,7 @@ msgstr ""
 msgid "Logout failed"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:42
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:48
 msgid "MAC address"
 msgstr ""
 
@@ -1855,7 +1877,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:33
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:40
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:92
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:90
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:36
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:35
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
@@ -1863,7 +1885,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:28
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:42
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:31
-#: app/scripts/components/project/projects-list.js:78
+#: app/scripts/components/project/projects-list.js:82
 #: app/scripts/components/providers/details/provider-details.html:4
 #: app/scripts/components/providers/details/provider-settings.js:44
 #: app/scripts/components/providers/provider-list.js:55
@@ -1882,7 +1904,7 @@ msgid "Network has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:41
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:122
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:121
 #: app/scripts/components/openstack/openstack-network/breadcrumbs.js:22
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:23
 msgid "Networks"
@@ -1966,19 +1988,19 @@ msgstr ""
 msgid "No events yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:31
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:32
 msgid "No floating IPs found matching filter."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:30
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:31
 msgid "No floating IPs yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:35
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:41
 msgid "No internal IPs found matching filter."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:34
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:40
 msgid "No internal IPs yet."
 msgstr ""
 
@@ -2047,7 +2069,7 @@ msgstr ""
 msgid "No permissions found matching filter."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:125
+#: app/scripts/components/project/projects-list.js:134
 msgid "No plan"
 msgstr ""
 
@@ -2075,7 +2097,7 @@ msgstr ""
 msgid "No projects are assigned to this role."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:62
+#: app/scripts/components/project/projects-list.js:59
 #: app/scripts/components/user/user-projects.js:22
 msgid "No projects found matching filter."
 msgstr ""
@@ -2191,6 +2213,10 @@ msgstr ""
 
 #: app/scripts/components/providers/create.html:143
 msgid "Not all required fields have been entered."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:46
+msgid "Not assigned"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:25
@@ -2334,7 +2360,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-quick-create.html:56
 #: app/scripts/components/issues/issue-registration.html:43
 #: app/scripts/components/issues/issues-list.js:89
-#: app/scripts/components/user/user-projects.js:33
+#: app/scripts/components/user/user-projects.js:34
 msgid "Organization"
 msgstr ""
 
@@ -2368,7 +2394,7 @@ msgstr ""
 msgid "Organization {customer_name} has no providers."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.js:44
+#: app/scripts/components/customer/customer-create-dialog.js:43
 msgid "Organization {organizationName} is updated."
 msgstr ""
 
@@ -2399,7 +2425,7 @@ msgstr ""
 msgid "Organization events"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.js:52
+#: app/scripts/components/customer/customer-create-dialog.js:51
 msgid "Organization has been created."
 msgstr ""
 
@@ -2440,7 +2466,7 @@ msgid "Owned organizations"
 msgstr ""
 
 #: app/scripts/components/team/customer-users-list.js:77
-#: app/scripts/components/user/user-organizations.js:33
+#: app/scripts/components/user/user-organizations.js:34
 msgid "Owner"
 msgstr ""
 
@@ -2499,7 +2525,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:33
 #: app/scripts/components/invitations/invitations-list.js:69
-#: app/scripts/components/project/projects-list.js:123
+#: app/scripts/components/project/projects-list.js:132
 msgid "Pending"
 msgstr ""
 
@@ -2691,7 +2717,7 @@ msgstr ""
 #: app/scripts/components/appstore/routes.js:22
 #: app/scripts/components/dashboard/constants.js:15
 #: app/scripts/components/project/project-workspace.js:38
-#: app/scripts/components/project/projects-list.js:113
+#: app/scripts/components/project/projects-list.js:117
 #: app/scripts/components/project/routes.js:140
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
 #: app/scripts/configs/base-config.js:100
@@ -2761,12 +2787,20 @@ msgstr ""
 msgid "Project events"
 msgstr ""
 
+#: app/scripts/components/project/projects-list.js:233
+msgid "Project has been removed successfully."
+msgstr ""
+
 #: app/scripts/components/events/constants.js:16
 msgid "Project has been renamed from {project_previous_name} to {project_name}."
 msgstr ""
 
 #: app/scripts/components/project/project-details.js:48
 msgid "Project has been updated."
+msgstr ""
+
+#: app/scripts/components/project/projects-list.js:190
+msgid "Project has connected resources and can't be removed"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:54
@@ -2925,7 +2959,7 @@ msgid "Quota events"
 msgstr ""
 
 #: app/scripts/components/error/routes.js:25
-#: app/scripts/components/project/projects-list.js:139
+#: app/scripts/components/project/projects-list.js:153
 #: app/scripts/components/providers/provider-list.js:178
 #: app/scripts/components/resource/list/resources-list.js:97
 #: app/scripts/components/resource/resource-provision-policy.js:14
@@ -3038,7 +3072,7 @@ msgid "Remote network"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plans-list.js:59
-#: app/scripts/components/project/projects-list.js:163
+#: app/scripts/components/project/projects-list.js:180
 #: app/scripts/components/providers/provider-list.js:97
 #: app/scripts/components/team/customer-users-list.js:131
 #: app/scripts/components/team/project-users-list.js:103
@@ -3298,7 +3332,7 @@ msgstr ""
 #: app/scripts/components/team/add-team-member.html:47
 #: app/scripts/components/team/customer-permissions-log-list.js:32
 #: app/scripts/components/team/project-permissions-log-list.js:32
-#: app/scripts/components/user/user-projects.js:40
+#: app/scripts/components/user/user-projects.js:41
 msgid "Role"
 msgstr ""
 
@@ -3353,7 +3387,7 @@ msgstr ""
 msgid "Security group has been updated."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:103
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:101
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 #: app/scripts/components/openstack/openstack-security-groups/breadcrumbs.js:21
 msgid "Security groups"
@@ -3411,6 +3445,10 @@ msgstr ""
 msgid "Select certifications"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:20
+msgid "Select connected subnet"
+msgstr ""
+
 #: app/scripts/components/customer/customer-create-dialog.html:39
 msgid "Select country..."
 msgstr ""
@@ -3444,7 +3482,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:34
 #: app/scripts/components/openstack/openstack-instance/actions.js:44
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:104
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:102
 msgid "Select security groups..."
 msgstr ""
 
@@ -3456,12 +3494,11 @@ msgstr ""
 msgid "Select size..."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:20
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:9
 msgid "Select subnet"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js:69
+#: app/scripts/components/openstack/openstack-instance/actions.js:72
 msgid "Select subnets to connect to..."
 msgstr ""
 
@@ -3490,7 +3527,7 @@ msgstr ""
 msgid "Send notification"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:335
+#: app/scripts/components/appstore/appstore-store.js:345
 msgid "Server error occurred."
 msgstr ""
 
@@ -3598,7 +3635,7 @@ msgstr ""
 msgid "Skip floating IP assignment"
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:117
+#: app/scripts/components/project/projects-list.js:126
 #: app/scripts/components/resource/tabs/constants.js:22
 msgid "SLA"
 msgstr ""
@@ -3628,13 +3665,13 @@ msgid "Snapshot schedule has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot-schedule/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-volume/module.js:108
+#: app/scripts/components/openstack/openstack-volume/module.js:111
 msgid "Snapshot schedules"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/tabs.js:10
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:62
-#: app/scripts/components/openstack/openstack-volume/module.js:104
+#: app/scripts/components/openstack/openstack-volume/module.js:107
 #: app/scripts/components/resource/list/resource-storage-tabs.html:14
 msgid "Snapshots"
 msgstr ""
@@ -3669,11 +3706,11 @@ msgid "SSH Keys"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:72
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:88
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:86
 msgid "SSH public key"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:99
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:97
 msgid "SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr ""
 
@@ -3696,7 +3733,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:52
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:50
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:53
-#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:38
+#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:39
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:52
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:39
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:52
@@ -3741,7 +3778,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:20
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:26
 #: app/scripts/components/project/project-workspace.js:52
-#: app/scripts/components/project/projects-list.js:104
+#: app/scripts/components/project/projects-list.js:108
 #: app/scripts/components/project/routes.js:148
 #: app/scripts/components/quotas/filters.js:7
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:11
@@ -3770,7 +3807,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:50
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:56
 msgid "Subnet CIDR"
 msgstr ""
 
@@ -3778,7 +3815,7 @@ msgstr ""
 msgid "Subnet has been updated."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:46
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:52
 msgid "Subnet Name"
 msgstr ""
 
@@ -4167,7 +4204,7 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js:83
+#: app/scripts/components/openstack/openstack-instance/actions.js:86
 msgid "Update floating IPs"
 msgstr ""
 
@@ -4280,7 +4317,7 @@ msgid "User dashboard"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:87
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:148
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:147
 msgid "User data"
 msgstr ""
 
@@ -4358,7 +4395,7 @@ msgstr ""
 msgid "VM name"
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:100
+#: app/scripts/components/project/projects-list.js:104
 msgid "VMs"
 msgstr ""
 
@@ -4378,7 +4415,7 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:54
+#: app/scripts/components/openstack/openstack-instance/module.js:56
 #: app/scripts/components/resource/list/resource-storage-tabs.html:5
 msgid "Volumes"
 msgstr ""
@@ -4468,7 +4505,8 @@ msgstr ""
 msgid "You don't have enough permission to edit providers for current project."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:137
+#: app/scripts/components/project/projects-list.js:151
+#: app/scripts/components/project/projects-list.js:188
 msgid "You don't have enough privileges to perform this operation."
 msgstr ""
 
@@ -4505,7 +4543,7 @@ msgstr ""
 msgid "You have no private clouds yet."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:61
+#: app/scripts/components/project/projects-list.js:58
 msgid "You have no projects yet."
 msgstr ""
 

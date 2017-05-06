@@ -9,12 +9,13 @@ const openstackFloatingIpsList = {
 
 // @ngInject
 function OpenstackFloatingIpsListController(
-  baseResourceListController, openstackFloatingIpsService, actionUtilsService) {
+  baseResourceListController, openstackFloatingIpsService, actionUtilsService, $state, ncUtils) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.listActions = null;
+      this.rowFields.push('instance_uuid', 'instance_name');
       var list_type = 'floating_ips';
       var fn = this._super.bind(this);
 
@@ -37,6 +38,19 @@ function OpenstackFloatingIpsListController(
         {
           title: gettext('State'),
           render: row => this.renderResourceState(row)
+        },
+        {
+          title: gettext('Instance'),
+          render: row => {
+            if (!row.instance_uuid) {
+              return gettext('Not assigned');
+            }
+            let href = $state.href('resources.details', {
+              uuid: row.instance_uuid,
+              resource_type: 'OpenStackTenant.Instance'
+            });
+            return ncUtils.renderLink(href, row.instance_name);
+          }
         }
       ];
       return options;

@@ -15,28 +15,28 @@
     </div>
     <div class="ibox-content">
         <div class="row">
-            <div class="col-md-4"
+            <div class="col-md-3"
                  ng-repeat="service in $ctrl.services">
                 <div class="ibox" uib-tooltip="{{ service.warning }}">
                     <div class="ibox-content product-box cursor-pointer">
-                        <div class="product-desc" ng-class="{disabled: !service.enabled}">
-                            <a class="product-name elipsis">
+                        <div class="m-md" ng-class="{disabled: !service.enabled}">
+                            <a class="product-name elipsis" uib-tooltip="{{ ::service.name }}">
                                 <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>
                                 {{ ::service.name }}
                             </a>
                         </div>
 
-                        <div class="text-center m-b-xl m-t-xl"
+                        <div class="text-center m-b m-t"
                              ng-class="{disabled: !service.enabled}">
-                            <provider-icon type="service.type" size="img-lg"/>
+                            <provider-icon type="service.type" size="img-md"/>
                         </div>
                         <div class="product-desc" ng-class="{disabled: !service.enabled}">
-                            <a class="btn btn-sm btn-outline btn-primary" ng-click="$ctrl.showDetails(service)">
+                            <a class="btn btn-xs btn-outline btn-primary" ng-click="$ctrl.showDetails(service)">
                                 <span translate>Details</span>
                                 <i class="fa fa-eye"></i>
                             </a>
                             <div class="pull-right">
-                                <a class="btn btn-sm btn-outline btn-primary" ng-click="$ctrl.onSelect({service: service})">
+                                <a class="btn btn-xs btn-outline btn-primary" ng-click="$ctrl.onSelect({service: service})">
                                     <span translate>Select</span>
                                     <i class="fa fa-long-arrow-right"></i>
                                 </a>
