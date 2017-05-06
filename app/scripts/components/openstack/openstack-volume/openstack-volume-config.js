@@ -18,7 +18,7 @@ export default {
       factor: 1024,
       units: 'GB',
       min: 0,
-      max: 1024 * 320
+      max: 1024 * 4096
     },
     description: {
       type: 'text',
