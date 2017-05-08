@@ -68,7 +68,10 @@ export default function actionUtilsService(
         return controller.reInitResource(resource);
       }
 
-      controller.pollResource(resource);
+      if ('pollResource' in controller) {
+        // trigger polling if it is possible.
+        controller.pollResource(resource);
+      }
     }
 
     return promise.then(onSuccess, controller.handleActionException.bind(controller));
