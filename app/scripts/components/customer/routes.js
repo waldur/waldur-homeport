@@ -114,11 +114,11 @@ export default function organizationRoutes($stateProvider) {
       }
     })
 
-    .state('organization.delete', {
-      url: 'delete/',
-      template: '<customer-delete></customer-delete>',
+    .state('organization.manage', {
+      url: 'manage/',
+      template: '<customer-manage></customer-manage>',
       data: {
-        pageTitle: gettext('Delete organization')
+        pageTitle: gettext('Manage organization')
       }
     })
 

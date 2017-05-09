@@ -1,5 +1,5 @@
 import customerCreateDialog from './customer-create-dialog';
-import customerDelete from './customer-delete';
+import customerManage from './customer-manage';
 import customerWorkspace from './customer-workspace';
 import { CustomerWorkspaceController } from './customer-workspace';
 import { customerPopover } from './customer-popover';
@@ -12,7 +12,7 @@ import routes from './routes';
 
 export default module => {
   module.directive('customerCreateDialog', customerCreateDialog);
-  module.component('customerDelete', customerDelete);
+  module.component('customerManage', customerManage);
   module.controller('CustomerWorkspaceController', CustomerWorkspaceController);
   module.directive('customerWorkspace', customerWorkspace);
   module.component('customerPopover', customerPopover);

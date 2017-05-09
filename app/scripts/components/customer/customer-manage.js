@@ -1,17 +1,18 @@
-import template from './customer-delete.html';
+import template from './customer-manage.html';
 
-const customerDelete = {
+const customerManage = {
   template: template,
-  controller: CustomerDeleteController,
-  controllerAs: 'DeleteController',
+  controller: CustomerManageController,
+  controllerAs: 'ManageController',
 };
 
-export default customerDelete;
+export default customerManage;
 
 // @ngInject
-function CustomerDeleteController(
+function CustomerManageController(
   baseControllerClass,
   customersService,
+  priceEstimatesService,
   paymentDetailsService,
   usersService,
   currentStateService,
@@ -24,29 +25,31 @@ function CustomerDeleteController(
   ENV,
   ISSUE_IDS
 ) {
-  var controllerScope = this;
-  var DeleteController = baseControllerClass.extend({
+  let controllerScope = this;
+  let ManageController = baseControllerClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
       this.paymentDetails = null;
       this.loadInitial();
+      this.currency = ENV.currency;
     },
     loadInitial: function() {
-      var vm = this;
+      let vm = this;
       vm.loading = true;
       return currentStateService.getCustomer().then(function(customer) {
         vm.customer = customer;
+        vm.isHardLimit = vm.checkIsHardLimit(vm.customer.price_estimate);
         vm.getPaymentDetails();
-        return vm.checkCanRemoveCustomer(customer).then(function(result) {
-          vm.canRemoveCustomer = result;
+        return vm.checkCanManageCustomer(customer).then(function(result) {
+          vm.canManageCustomer = result;
         });
       }).finally(function() {
         vm.loading = false;
       });
     },
     getPaymentDetails: function() {
-      var vm = this;
+      let vm = this;
       paymentDetailsService.getList({
         customer_uuid: vm.customer.uuid
       }).then(function(result) {
@@ -55,12 +58,12 @@ function CustomerDeleteController(
         }
       });
     },
-    checkCanRemoveCustomer: function(customer) {
+    checkCanManageCustomer: function(customer) {
       return usersService.getCurrentUser().then(function(user) {
         if (user.is_staff) {
           return $q.when(true);
         }
-        for (var i = 0; i < customer.owners.length; i++) {
+        for (let i = 0; i < customer.owners.length; i++) {
           if (user.uuid === customer.owners[i].uuid) {
             return $q.when(ENV.ownerCanManageCustomer);
           }
@@ -69,7 +72,7 @@ function CustomerDeleteController(
       });
     },
     removeCustomer: function() {
-      var vm = this;
+      let vm = this;
       if (this.customer.projects.length > 0) {
         if (!features.isVisible('support')) {
           return ncUtilsFlash.error($filter('translate')(gettext('Organization contains projects. Please remove them first.')));
@@ -92,7 +95,7 @@ function CustomerDeleteController(
           }
         });
       }
-      var confirmDelete = confirm($filter('translate')(gettext('Confirm deletion?')));
+      let confirmDelete = confirm($filter('translate')(gettext('Confirm deletion?')));
       if (confirmDelete) {
         currentStateService.setCustomer(null);
         this.customer.$delete().then(function() {
@@ -102,9 +105,42 @@ function CustomerDeleteController(
           currentStateService.setCustomer(vm.customer);
         });
       }
+    },
+    checkIsHardLimit(estimate) {
+      return estimate.limit > 0 && estimate.limit === estimate.threshold;
+    },
+    updatePolicies: function() {
+      const promises = [
+        this.saveLimit(),
+        this.saveThreshold(),
+      ];
+
+      return $q.all(promises).then(() => {
+        ncUtilsFlash.success(gettext('Organization policies have been updated.'));
+      }).catch((response) => {
+        if (response.status === 400) {
+          for (let name in response.data) {
+            let message = response.data[name];
+            ncUtilsFlash.error(message);
+          }
+        } else {
+          ncUtilsFlash.error(gettext('An error occurred on policies update.'));
+        }
+      });
+    },
+    saveLimit() {
+      const limit = this.isHardLimit ? this.customer.price_estimate.threshold : -1;
+      return priceEstimatesService.setLimit(this.customer.url, limit);
+    },
+    saveThreshold(){
+      return priceEstimatesService.setThreshold(this.customer.url, this.customer.price_estimate.threshold);
+    },
+    validateThreshold() {
+      let isValid = this.customer.price_estimate.threshold > this.customer.price_estimate.total;
+      this.policiesForm.threshold.$setValidity('exceedsThreshold', isValid);
     }
   });
 
-  controllerScope.__proto__ = new DeleteController();
+  controllerScope.__proto__ = new ManageController();
 }
 

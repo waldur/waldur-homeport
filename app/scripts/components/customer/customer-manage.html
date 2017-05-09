@@ -1,0 +1,110 @@
+<div ng-if="ManageController.loading">
+    <loading-spinner/>
+</div>
+
+<div ng-if="!ManageController.loading">
+    <div class="panel panel-default">
+        <div class="panel-heading" translate>Organization details</div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt><span translate>Name</span>:</dt>
+                <dd>{{::ManageController.customer.name}}</dd>
+            </dl>
+            <dl class="dl-horizontal">
+                <dt><span translate>Estimated cost</span>:</dt>
+                <dd>{{::ManageController.customer.price_estimate.total | defaultCurrency}}</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-if="ManageController.paymentDetails">
+        <div class="panel-heading">Payment details</div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt><span translate>Company</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.company}}</dd>
+
+                <dt><span translate>Address</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.address}}</dd>
+
+                <dt><span translate>Country</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.country}}</dd>
+
+                <dt><span translate>Email</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.email}}</dd>
+
+                <dt><span translate>Postal</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.postal}}</dd>
+
+                <dt><span translate>Phone</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.phone}}</dd>
+
+                <dt><span translate>Bank</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.bank}}</dd>
+
+                <dt><span translate>Account</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.account}}</dd>
+
+                <dt><span translate>Default tax percent</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.default_tax_percent}}</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-if="ManageController.canManageCustomer">
+        <div class="panel-heading" translate>Policies</div>
+        <div class="panel-body">
+            <form name="ManageController.policiesForm" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-4 col-xs-4">
+                        <label for="threshold" class="control-label">
+                            <span translate>Cost threshold</span>
+                            <i class="fa fa-question-circle"
+                               uib-tooltip="{{ 'Upper bound of monthly resource cost provisioned from shared providers.' | translate }}"></i>
+                        </label>
+                        <div class="input-group">
+                            <input id="threshold" type="number" class="form-control" required name="threshold"
+                                   ng-change="ManageController.validateThreshold()"
+                                   ng-model="ManageController.customer.price_estimate.threshold" ng-min="0">
+                            <div class="input-group-addon">
+                                {{ ::ManageController.currency }}
+                            </div>
+                        </div>
+                        <p class="help-block text-danger"
+                           ng-if="ManageController.policiesForm.threshold.$error.min">
+                            <span translate>Minimal valid value is</span> 0
+                        </p>
+                        <p class="help-block text-danger"
+                           ng-if="ManageController.policiesForm.threshold.$error.exceedsThreshold">
+                            <span translate>Estimated cost exceeds threshold</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8 col-xs-8">
+                        <div class="awesome-checkbox checkbox-success">
+                            <input type="checkbox" ng-model="ManageController.isHardLimit" id="isHardLimit"/>
+                            <label for="isHardLimit" translate>Disable provisioning when threshold is reached.</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success"
+                        submit-button="ManageController.updatePolicies()"
+                        ng-disabled="ManageController.policiesForm.$invalid">
+                    <span translate>Update</span>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-if="ManageController.canManageCustomer">
+        <div class="panel-heading" translate>Organization actions</div>
+        <div class="panel-body">
+            <p translate>You can remove this organization by pressing the button</p>
+            <a ng-click="ManageController.removeCustomer()" class="btn btn-danger">
+                <i class="fa fa-trash"></i>
+                <span translate>Remove organization</span>
+            </a>
+        </div>
+    </div>
+    <h3 ng-if="!ManageController.canManageCustomer">
+        <span translate>Only staff user can remove organization.</span>
+    </h3>
+</div>

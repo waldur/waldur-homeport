@@ -68,7 +68,7 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.html:40
+#: app/scripts/components/customer/customer-manage.html:44
 msgid "Account"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:12
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/components/table/responsive-table.js:284
+#: app/scripts/components/table/responsive-table.js:304
 msgid "Actions"
 msgstr ""
 
@@ -212,7 +212,7 @@ msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:54
-#: app/scripts/components/customer/customer-delete.html:22
+#: app/scripts/components/customer/customer-manage.html:26
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
 msgstr ""
@@ -276,6 +276,14 @@ msgstr ""
 #: app/views/directives/customer-balance.html:101
 #: app/views/directives/customer-balance.html:136
 msgid "Amount"
+msgstr ""
+
+#: app/scripts/components/project/project-policies.js:65
+msgid "An error occurred during policy update."
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.js:127
+msgid "An error occurred on policies update."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js:237
@@ -434,7 +442,7 @@ msgstr ""
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.html:37
+#: app/scripts/components/customer/customer-manage.html:41
 msgid "Bank"
 msgstr ""
 
@@ -613,7 +621,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.html:19
+#: app/scripts/components/customer/customer-manage.html:23
 msgid "Company"
 msgstr ""
 
@@ -644,7 +652,7 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:95
+#: app/scripts/components/customer/customer-manage.js:98
 #: app/scripts/components/table/base-list-controller.js:134
 msgid "Confirm deletion?"
 msgstr ""
@@ -681,12 +689,13 @@ msgstr ""
 msgid "Cost planning"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:59
 #: app/scripts/components/project/project-policies.html:33
 msgid "Cost threshold"
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:36
-#: app/scripts/components/customer/customer-delete.html:25
+#: app/scripts/components/customer/customer-manage.html:29
 msgid "Country"
 msgstr ""
 
@@ -711,7 +720,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/module.js:57
 #: app/scripts/components/openstack/openstack-volume/module.js:71
 #: app/scripts/components/project/project-issues.js:31
-#: app/scripts/components/resource/list/resources-list.js:133
+#: app/scripts/components/resource/list/resources-list.js:134
 #: app/scripts/components/resource/tabs/resource-issues.js:26
 #: app/scripts/components/user/hooks/hook-details.html:77
 msgid "Create"
@@ -876,7 +885,7 @@ msgstr ""
 msgid "Date joined"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.html:43
+#: app/scripts/components/customer/customer-manage.html:47
 msgid "Default tax percent"
 msgstr ""
 
@@ -885,10 +894,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
-msgstr ""
-
-#: app/scripts/components/customer/routes.js:121
-msgid "Delete organization"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:2
@@ -955,6 +960,7 @@ msgstr ""
 msgid "Disable data volume"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:85
 #: app/scripts/components/project/project-policies.html:61
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
@@ -1011,7 +1017,7 @@ msgid "Edit team member"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:61
-#: app/scripts/components/customer/customer-delete.html:28
+#: app/scripts/components/customer/customer-manage.html:32
 #: app/scripts/components/invitations/invitations-list.js:95
 msgid "Email"
 msgstr ""
@@ -1032,7 +1038,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:203
+#: app/scripts/configs/base-config.js:207
 msgid "English"
 msgstr ""
 
@@ -1050,8 +1056,13 @@ msgstr ""
 msgid "error message: {errorMessage}"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:14
 #: app/scripts/components/project/projects-list.js:121
 msgid "Estimated cost"
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.html:77
+msgid "Estimated cost exceeds threshold"
 msgstr ""
 
 #: app/scripts/components/project/project-policies.html:52
@@ -1062,7 +1073,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:207
+#: app/scripts/configs/base-config.js:211
 msgid "Estonian"
 msgstr ""
 
@@ -1164,7 +1175,7 @@ msgstr ""
 msgid "Explain plan"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:123
+#: app/scripts/components/table/responsive-table.js:143
 msgid "Export as"
 msgstr ""
 
@@ -1205,7 +1216,7 @@ msgstr ""
 msgid "Fingerprint"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:84
+#: app/scripts/components/table/responsive-table.js:104
 msgid "First"
 msgstr ""
 
@@ -1271,7 +1282,7 @@ msgid "General"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:55
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:61
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:62
 msgid "generate automatically"
 msgstr ""
 
@@ -1371,7 +1382,7 @@ msgstr ""
 msgid "Image name"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:116
+#: app/scripts/components/resource/list/resources-list.js:117
 #: app/views/import/import.html:150
 msgid "Import"
 msgstr ""
@@ -1380,7 +1391,7 @@ msgstr ""
 msgid "Import application"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:100
+#: app/scripts/components/resource/list/resources-list.js:101
 msgid "Import is not possible as there are no personal provider accounts registered."
 msgstr ""
 
@@ -1392,7 +1403,7 @@ msgstr ""
 msgid "Import resources from provider"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:103
+#: app/scripts/components/resource/list/resources-list.js:104
 msgid "Import resources from the registered provider accounts."
 msgstr ""
 
@@ -1436,7 +1447,7 @@ msgstr ""
 msgid "Informational"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:60
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:61
 msgid "Initial admin password"
 msgstr ""
 
@@ -1483,12 +1494,12 @@ msgid "Internal IPs"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/module.js:47
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:73
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:74
 msgid "Internal network allocation pool"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/module.js:40
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:66
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:67
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
@@ -1688,7 +1699,7 @@ msgstr ""
 msgid "Large"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:85
+#: app/scripts/components/table/responsive-table.js:105
 msgid "Last"
 msgstr ""
 
@@ -1696,7 +1707,7 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:62
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:63
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr ""
 
@@ -1734,7 +1745,7 @@ msgstr ""
 msgid "Loading actions"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:80
+#: app/scripts/components/table/responsive-table.js:100
 msgid "Loading..."
 msgstr ""
 
@@ -1773,6 +1784,10 @@ msgstr ""
 
 #: app/scripts/components/user/user-edit.html:8
 msgid "Manage at"
+msgstr ""
+
+#: app/scripts/components/customer/routes.js:121
+msgid "Manage organization"
 msgstr ""
 
 #: app/scripts/components/user/user-dashboard.html:16
@@ -1842,6 +1857,7 @@ msgstr ""
 msgid "Min storage"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:73
 #: app/scripts/components/form/appstore-field-integer.html:18
 msgid "Minimal valid value is"
 msgstr ""
@@ -1869,7 +1885,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:13
 #: app/scripts/components/cost-planning/cost-plans-list.js:31
 #: app/scripts/components/customer/customer-create-dialog.html:11
-#: app/scripts/components/customer/customer-delete.html:10
+#: app/scripts/components/customer/customer-manage.html:10
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:76
 #: app/scripts/components/offering/appstore-offering.js:40
 #: app/scripts/components/offering/offering-summary.html:11
@@ -1890,7 +1906,7 @@ msgstr ""
 #: app/scripts/components/providers/details/provider-settings.js:44
 #: app/scripts/components/providers/provider-list.js:55
 #: app/scripts/components/resource/actions/constants.js:20
-#: app/scripts/components/resource/list/resources-list.js:40
+#: app/scripts/components/resource/list/resources-list.js:41
 #: app/views/directives/importable-resources.html:14
 msgid "Name"
 msgstr ""
@@ -1923,7 +1939,7 @@ msgstr ""
 msgid "New VPC package"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:86
+#: app/scripts/components/table/responsive-table.js:106
 msgid "Next"
 msgstr ""
 
@@ -2126,7 +2142,7 @@ msgstr ""
 msgid "No requested services found matching filter."
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:36
+#: app/scripts/components/resource/list/resources-list.js:37
 msgid "No resources found matching filter."
 msgstr ""
 
@@ -2316,7 +2332,7 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.html:59
+#: app/scripts/components/customer/customer-manage.html:108
 msgid "Only staff user can remove organization."
 msgstr ""
 
@@ -2331,7 +2347,7 @@ msgstr ""
 msgid "Open in Service Desk"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:156
+#: app/scripts/components/resource/list/resources-list.js:157
 msgid "Open map"
 msgstr ""
 
@@ -2398,7 +2414,7 @@ msgstr ""
 msgid "Organization {organizationName} is updated."
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.html:49
+#: app/scripts/components/customer/customer-manage.html:98
 msgid "Organization actions"
 msgstr ""
 
@@ -2406,7 +2422,7 @@ msgstr ""
 msgid "Organization code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:75
+#: app/scripts/components/customer/customer-manage.js:78
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
@@ -2416,7 +2432,7 @@ msgstr ""
 msgid "Organization dashboard"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.html:7
+#: app/scripts/components/customer/customer-manage.html:7
 msgid "Organization details"
 msgstr ""
 
@@ -2436,7 +2452,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:185
+#: app/scripts/configs/base-config.js:189
 msgid "Organization owner"
 msgstr ""
 
@@ -2444,12 +2460,16 @@ msgstr ""
 msgid "Organization owner role expires on"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.js:119
+msgid "Organization policies have been updated."
+msgstr ""
+
 #: app/scripts/components/customer/customer-create-dialog.html:26
 msgid "Organization registration code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:83
-#: app/scripts/components/customer/customer-delete.js:86
+#: app/scripts/components/customer/customer-manage.js:86
+#: app/scripts/components/customer/customer-manage.js:89
 msgid "Organization removal"
 msgstr ""
 
@@ -2544,7 +2564,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-customer-details.html:5
 #: app/scripts/components/billing/billing-issuer-details.html:5
-#: app/scripts/components/customer/customer-delete.html:34
+#: app/scripts/components/customer/customer-manage.html:38
 #: app/scripts/components/customer/customer-popover.html:32
 msgid "Phone"
 msgstr ""
@@ -2619,6 +2639,7 @@ msgstr ""
 msgid "Please wait while provider is being configured."
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:53
 #: app/scripts/components/project/project-dialog.html:14
 msgid "Policies"
 msgstr ""
@@ -2628,7 +2649,7 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.html:31
+#: app/scripts/components/customer/customer-manage.html:35
 msgid "Postal"
 msgstr ""
 
@@ -2650,7 +2671,7 @@ msgstr ""
 msgid "Premium support service."
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:87
+#: app/scripts/components/table/responsive-table.js:107
 msgid "Previous"
 msgstr ""
 
@@ -2725,7 +2746,7 @@ msgstr ""
 msgid "Private clouds"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:81
+#: app/scripts/components/table/responsive-table.js:101
 msgid "Processing..."
 msgstr ""
 
@@ -2807,7 +2828,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:186
+#: app/scripts/configs/base-config.js:190
 msgid "Project manager"
 msgstr ""
 
@@ -2825,7 +2846,7 @@ msgstr ""
 msgid "Project name"
 msgstr ""
 
-#: app/scripts/components/project/project-policies.js:55
+#: app/scripts/components/project/project-policies.js:57
 msgid "Project policies have been updated."
 msgstr ""
 
@@ -2855,7 +2876,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-compare-list.js:51
 #: app/scripts/components/appstore/appstore-store.html:32
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:9
-#: app/scripts/components/resource/list/resources-list.js:48
+#: app/scripts/components/resource/list/resources-list.js:49
 #: app/scripts/components/resource/summary/resource-summary-base.html:21
 #: app/views/help/list.html:10
 msgid "Provider"
@@ -2961,7 +2982,7 @@ msgstr ""
 #: app/scripts/components/error/routes.js:25
 #: app/scripts/components/project/projects-list.js:153
 #: app/scripts/components/providers/provider-list.js:178
-#: app/scripts/components/resource/list/resources-list.js:97
+#: app/scripts/components/resource/list/resources-list.js:98
 #: app/scripts/components/resource/resource-provision-policy.js:14
 msgid "Quota has been reached."
 msgstr ""
@@ -3000,7 +3021,7 @@ msgstr ""
 msgid "Read through terms and conditions."
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:88
+#: app/scripts/components/customer/customer-manage.js:91
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
@@ -3028,7 +3049,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-activity-stream.html:11
 #: app/scripts/components/issues/issues-short-list.html:11
-#: app/scripts/components/table/responsive-table.js:126
+#: app/scripts/components/table/responsive-table.js:146
 msgid "Refresh"
 msgstr ""
 
@@ -3081,7 +3102,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.html:54
+#: app/scripts/components/customer/customer-manage.html:103
 msgid "Remove organization"
 msgstr ""
 
@@ -3131,12 +3152,12 @@ msgstr ""
 msgid "Request name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:90
+#: app/scripts/components/customer/customer-manage.js:93
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:77
+#: app/scripts/components/resource/actions/action-utils-service.js:79
 msgid "Request to {action} has been accepted."
 msgstr ""
 
@@ -3375,7 +3396,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-registration.html:213
 #: app/scripts/components/navigation/header/main-search.html:3
-#: app/scripts/components/table/responsive-table.js:82
+#: app/scripts/components/table/responsive-table.js:102
 msgid "Search"
 msgstr ""
 
@@ -3570,7 +3591,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:79
+#: app/scripts/components/table/responsive-table.js:99
 msgid "Show _MENU_ entries"
 msgstr ""
 
@@ -3582,7 +3603,7 @@ msgstr ""
 msgid "Show imported resources"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:78
+#: app/scripts/components/table/responsive-table.js:98
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
@@ -3744,7 +3765,7 @@ msgstr ""
 #: app/scripts/components/plans/plan-agreements-list.js:26
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:38
 #: app/scripts/components/providers/provider-list.js:62
-#: app/scripts/components/resource/list/resources-list.js:56
+#: app/scripts/components/resource/list/resources-list.js:57
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
 #: app/scripts/components/user/hooks/hook-list.js:26
 msgid "State"
@@ -3872,7 +3893,7 @@ msgstr ""
 msgid "Synchronise quotas"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:187
+#: app/scripts/configs/base-config.js:191
 msgid "System administrator"
 msgstr ""
 
@@ -4200,6 +4221,7 @@ msgstr ""
 msgid "Unselect all"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:92
 #: app/scripts/components/user/hooks/hook-details.html:76
 msgid "Update"
 msgstr ""
@@ -4238,6 +4260,7 @@ msgstr ""
 msgid "Upgrade"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:61
 #: app/scripts/components/project/project-policies.html:34
 msgid "Upper bound of monthly resource cost provisioned from shared providers."
 msgstr ""
@@ -4439,7 +4462,7 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.js:89
+#: app/scripts/components/customer/customer-manage.js:92
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
@@ -4459,7 +4482,7 @@ msgstr ""
 msgid "You can change that in <a href=\"{link}\">provider management</a>."
 msgstr ""
 
-#: app/scripts/components/customer/customer-delete.html:51
+#: app/scripts/components/customer/customer-manage.html:100
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
@@ -4559,7 +4582,7 @@ msgstr ""
 msgid "You have no requested services."
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:35
+#: app/scripts/components/resource/list/resources-list.js:36
 msgid "You have no resources yet."
 msgstr ""
 
