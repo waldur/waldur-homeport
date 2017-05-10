@@ -24,6 +24,7 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
       options.noMatchesText = gettext('No virtual machines found matching filter.');
       options.columns.push({
         title: gettext('Internal IP'),
+        orderField: 'internal_ips',
         render: function(row) {
           if (row.internal_ips.length === 0) {
             return '&ndash;';
@@ -33,6 +34,7 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
       });
       options.columns.push({
         title: gettext('External IP'),
+        orderField: 'external_ips',
         render: function(row) {
           if (row.external_ips.length === 0) {
             return '&ndash;';

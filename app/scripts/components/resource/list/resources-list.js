@@ -35,11 +35,13 @@ export default function baseResourceListController(
         searchFieldName: 'name',
         noDataText: gettext('You have no resources yet.'),
         noMatchesText: gettext('No resources found matching filter.'),
+        enableOrdering: true,
         columns: [
           {
             id: 'name',
             title: gettext('Name'),
             className: 'all',
+            orderField: 'name',
             render: function(row) {
               return vm.renderResourceName(row);
             }
@@ -48,6 +50,7 @@ export default function baseResourceListController(
             id: 'provider',
             title: gettext('Provider'),
             className: 'desktop',
+            orderField: 'service_name',
             render: function(row) {
               return row.service_name;
             }
@@ -56,6 +59,7 @@ export default function baseResourceListController(
             id: 'state',
             title: gettext('State'),
             className: 'min-tablet-l',
+            orderField: 'state',
             render: function(row) {
               return vm.renderResourceState(row);
             }
