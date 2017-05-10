@@ -16,16 +16,8 @@ export const DASHBOARD_QUOTAS = {
     feature: 'private_clouds',
   },
   nc_storage_count: {
-    title: gettext('Block devices'),
+    title: gettext('Storage'),
     feature: 'storage'
-  },
-  volumes: {
-    title: gettext('Volumes size'),
-    feature: 'volumes'
-  },
-  snapshots: {
-    title: gettext('Snapshots size'),
-    feature: 'snapshots'
   },
   nc_user_count: {
     title: gettext('Team size'),
