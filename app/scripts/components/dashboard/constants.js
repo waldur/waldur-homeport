@@ -29,9 +29,7 @@ export const PROJECT_DASHBOARD_QUOTAS = [
   'nc_app_count',
   'nc_vm_count',
   'nc_private_cloud_count',
-  'nc_storage_count',
-  'volumes',
-  'snapshots'
+  'nc_storage_count'
 ];
 
 export const ORGANIZATION_DASHBOARD_QUOTAS = [
@@ -39,7 +37,5 @@ export const ORGANIZATION_DASHBOARD_QUOTAS = [
   'nc_vm_count',
   'nc_private_cloud_count',
   'nc_storage_count',
-  'snapshots',
-  'volumes',
   'nc_user_count'
 ];
