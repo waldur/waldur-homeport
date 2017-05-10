@@ -12,7 +12,6 @@ export default customerManage;
 function CustomerManageController(
   baseControllerClass,
   customersService,
-  priceEstimatesService,
   paymentDetailsService,
   usersService,
   currentStateService,
@@ -109,36 +108,6 @@ function CustomerManageController(
     checkIsHardLimit(estimate) {
       return estimate.limit > 0 && estimate.limit === estimate.threshold;
     },
-    updatePolicies: function() {
-      const promises = [
-        this.saveLimit(),
-        this.saveThreshold(),
-      ];
-
-      return $q.all(promises).then(() => {
-        ncUtilsFlash.success(gettext('Organization policies have been updated.'));
-      }).catch((response) => {
-        if (response.status === 400) {
-          for (let name in response.data) {
-            let message = response.data[name];
-            ncUtilsFlash.error(message);
-          }
-        } else {
-          ncUtilsFlash.error(gettext('An error occurred on policies update.'));
-        }
-      });
-    },
-    saveLimit() {
-      const limit = this.isHardLimit ? this.customer.price_estimate.threshold : -1;
-      return priceEstimatesService.setLimit(this.customer.url, limit);
-    },
-    saveThreshold(){
-      return priceEstimatesService.setThreshold(this.customer.url, this.customer.price_estimate.threshold);
-    },
-    validateThreshold() {
-      let isValid = this.customer.price_estimate.threshold > this.customer.price_estimate.total;
-      this.policiesForm.threshold.$setValidity('exceedsThreshold', isValid);
-    }
   });
 
   controllerScope.__proto__ = new ManageController();

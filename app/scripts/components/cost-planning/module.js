@@ -9,7 +9,6 @@ import costPlansService from './cost-plans-service';
 import costPlanOptimizerService from './cost-plan-optimizer-service';
 import costPresetsService from './cost-presets-service';
 import certificationsService from './certifications-service';
-import PriceEstimatesService from './price-estimates-service';
 
 export default module => {
   module.component('costPlansList', costPlansList);
@@ -23,5 +22,4 @@ export default module => {
   module.service('costPlanOptimizerService', costPlanOptimizerService);
   module.service('costPresetsService', costPresetsService);
   module.service('certificationsService', certificationsService);
-  module.service('priceEstimatesService', PriceEstimatesService);
 };

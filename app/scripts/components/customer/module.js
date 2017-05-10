@@ -9,6 +9,8 @@ import customerEvents from './customer-events';
 import {customerUsersDetailsList} from './customer-users-details-list';
 import customerTeam from './customer-team';
 import routes from './routes';
+import PriceEstimatesService from './price-estimates-service';
+import customerPolicies from './customer-policies';
 
 export default module => {
   module.directive('customerCreateDialog', customerCreateDialog);
@@ -21,5 +23,7 @@ export default module => {
   module.component('customerEvents', customerEvents);
   module.component('customerUsersDetailsList', customerUsersDetailsList);
   module.component('customerTeam', customerTeam);
+  module.component('customerPolicies', customerPolicies);
+  module.service('priceEstimatesService', PriceEstimatesService);
   module.config(routes);
 };
