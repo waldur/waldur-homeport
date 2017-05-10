@@ -32,6 +32,7 @@ function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $st
       options.columns.push({
         title: gettext('Size'),
         className: 'all',
+        orderField: 'size',
         render: function(row) {
           if (!row.size) {
             return '&ndash;';
@@ -41,6 +42,7 @@ function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $st
       });
       options.columns.push({
         title: gettext('Volume'),
+        orderField: 'source_volume_name',
         render: function(row) {
           if (!row.source_volume) {
             return gettext('Not known');
