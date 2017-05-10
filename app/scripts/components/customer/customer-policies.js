@@ -4,7 +4,6 @@ const customerPolicies = {
   template: template,
   bindings: {
     customer: '<',
-    canManageCustomer: '<',
     isHardLimit: '<',
   },
   controller: class CustomerPoliciesController {
