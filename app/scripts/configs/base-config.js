@@ -15,7 +15,6 @@ angular.module('ncsaas')
 
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
-    serviceIcon: 'static/images/icons/icon_openstack_small.png',
     dashboardEventsCacheTime: 60, // seconds
     showImport: false,
     defaultErrorMessage: gettext('Reason unknown, please contact support.'),

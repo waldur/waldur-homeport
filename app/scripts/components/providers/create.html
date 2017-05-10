@@ -80,6 +80,7 @@
                     <div ng-if="option.secret" class="has-password">
                         <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
                                type="{{showSecret ? 'text' : 'password'}}"
+                               autocomplete="new-password"
                                ng-model="option.value"
                                class="form-control">
                         <a class="icon password-icon"
