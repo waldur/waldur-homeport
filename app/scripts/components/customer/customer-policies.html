@@ -1,6 +1,10 @@
 <div class="panel panel-default">
         <div class="panel-heading" translate>Policies</div>
         <div class="panel-body">
+            <div>
+                <span translate>Estimated cost</span>:
+                {{::$ctrl.customer.price_estimate.total | defaultCurrency}}
+            </div>
             <form name="$ctrl.policiesForm" class="form-horizontal">
                 <div class="form-group">
                     <div class="col-sm-4 col-xs-4">

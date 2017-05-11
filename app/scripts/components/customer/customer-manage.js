@@ -31,7 +31,6 @@ function CustomerManageController(
       this._super();
       this.paymentDetails = null;
       this.loadInitial();
-      this.currency = ENV.currency;
     },
     loadInitial: function() {
       let vm = this;

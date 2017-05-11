@@ -10,10 +10,6 @@
                 <dt><span translate>Name</span>:</dt>
                 <dd>{{::ManageController.customer.name}}</dd>
             </dl>
-            <dl class="dl-horizontal">
-                <dt><span translate>Estimated cost</span>:</dt>
-                <dd>{{::ManageController.customer.price_estimate.total | defaultCurrency}}</dd>
-            </dl>
         </div>
     </div>
     <div class="panel panel-default" ng-if="ManageController.paymentDetails">

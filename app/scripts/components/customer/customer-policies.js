@@ -13,6 +13,7 @@ const customerPolicies = {
       this.ncUtilsFlash = ncUtilsFlash;
       this.priceEstimatesService = priceEstimatesService;
       this.currency = ENV.currency;
+      this.customer = angular.copy(this.customer);
     }
 
     updatePolicies() {
@@ -45,7 +46,7 @@ const customerPolicies = {
     }
 
     validateThreshold() {
-      let isValid = this.customer.price_estimate.threshold > this.customer.price_estimate.total;
+      let isValid = this.customer.price_estimate.threshold >= this.customer.price_estimate.total;
       this.policiesForm.threshold.$setValidity('exceedsThreshold', isValid);
     }
   }
