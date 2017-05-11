@@ -304,7 +304,7 @@ export default function baseResourceListController(
     },
     resourceIsUpdating: function(resource) {
       // resource is updating if it is not in stable state.
-      return (resource.state !== 'OK' && resource.state !== 'ERRED');
+      return (resource.state !== 'OK' && resource.state !== 'Erred');
     },
     pollResource: function(resource) {
       let vm = this;
