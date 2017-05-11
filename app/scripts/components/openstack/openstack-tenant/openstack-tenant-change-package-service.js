@@ -49,7 +49,7 @@ export default class openstackTenantChangePackageService {
   }
 
   loadTenant(context) {
-    return this.resourcesService.$get(null, null, context.tenant.url)
+    return this.resourcesService.$get(null, null, context.tenant.url);
   }
 
   loadTenantPackage(context) {
