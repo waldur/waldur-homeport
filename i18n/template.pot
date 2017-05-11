@@ -68,7 +68,7 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:44
+#: app/scripts/components/customer/customer-manage.html:40
 msgid "Account"
 msgstr ""
 
@@ -212,7 +212,7 @@ msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:54
-#: app/scripts/components/customer/customer-manage.html:26
+#: app/scripts/components/customer/customer-manage.html:22
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
 msgstr ""
@@ -282,7 +282,7 @@ msgstr ""
 msgid "An error occurred during policy update."
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:33
+#: app/scripts/components/customer/customer-policies.js:34
 msgid "An error occurred on policies update."
 msgstr ""
 
@@ -442,7 +442,7 @@ msgstr ""
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:41
+#: app/scripts/components/customer/customer-manage.html:37
 msgid "Bank"
 msgstr ""
 
@@ -621,7 +621,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:23
+#: app/scripts/components/customer/customer-manage.html:19
 msgid "Company"
 msgstr ""
 
@@ -652,7 +652,7 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:97
+#: app/scripts/components/customer/customer-manage.js:96
 #: app/scripts/components/table/base-list-controller.js:134
 msgid "Confirm deletion?"
 msgstr ""
@@ -689,13 +689,13 @@ msgstr ""
 msgid "Cost planning"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:8
+#: app/scripts/components/customer/customer-policies.html:12
 #: app/scripts/components/project/project-policies.html:33
 msgid "Cost threshold"
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:36
-#: app/scripts/components/customer/customer-manage.html:29
+#: app/scripts/components/customer/customer-manage.html:25
 msgid "Country"
 msgstr ""
 
@@ -885,7 +885,7 @@ msgstr ""
 msgid "Date joined"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:47
+#: app/scripts/components/customer/customer-manage.html:43
 msgid "Default tax percent"
 msgstr ""
 
@@ -960,7 +960,7 @@ msgstr ""
 msgid "Disable data volume"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:34
+#: app/scripts/components/customer/customer-policies.html:38
 #: app/scripts/components/project/project-policies.html:61
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
@@ -1017,7 +1017,7 @@ msgid "Edit team member"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:61
-#: app/scripts/components/customer/customer-manage.html:32
+#: app/scripts/components/customer/customer-manage.html:28
 #: app/scripts/components/invitations/invitations-list.js:95
 msgid "Email"
 msgstr ""
@@ -1056,12 +1056,12 @@ msgstr ""
 msgid "error message: {errorMessage}"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:14
+#: app/scripts/components/customer/customer-policies.html:5
 #: app/scripts/components/project/projects-list.js:121
 msgid "Estimated cost"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:26
+#: app/scripts/components/customer/customer-policies.html:30
 msgid "Estimated cost exceeds threshold"
 msgstr ""
 
@@ -1857,9 +1857,12 @@ msgstr ""
 msgid "Min storage"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:22
 #: app/scripts/components/form/appstore-field-integer.html:18
 msgid "Minimal valid value is"
+msgstr ""
+
+#: app/scripts/components/customer/customer-policies.html:26
+msgid "Minimal valid value is 0"
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:9
@@ -2332,7 +2335,7 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:67
+#: app/scripts/components/customer/customer-manage.html:63
 msgid "Only staff can update policies or remove organization."
 msgstr ""
 
@@ -2414,7 +2417,7 @@ msgstr ""
 msgid "Organization {organizationName} is updated."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:57
+#: app/scripts/components/customer/customer-manage.html:53
 msgid "Organization actions"
 msgstr ""
 
@@ -2422,7 +2425,7 @@ msgstr ""
 msgid "Organization code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:77
+#: app/scripts/components/customer/customer-manage.js:76
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
@@ -2460,7 +2463,7 @@ msgstr ""
 msgid "Organization owner role expires on"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:25
+#: app/scripts/components/customer/customer-policies.js:26
 msgid "Organization policies have been updated."
 msgstr ""
 
@@ -2468,8 +2471,8 @@ msgstr ""
 msgid "Organization registration code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:85
-#: app/scripts/components/customer/customer-manage.js:88
+#: app/scripts/components/customer/customer-manage.js:84
+#: app/scripts/components/customer/customer-manage.js:87
 msgid "Organization removal"
 msgstr ""
 
@@ -2564,7 +2567,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-customer-details.html:5
 #: app/scripts/components/billing/billing-issuer-details.html:5
-#: app/scripts/components/customer/customer-manage.html:38
+#: app/scripts/components/customer/customer-manage.html:34
 #: app/scripts/components/customer/customer-popover.html:32
 msgid "Phone"
 msgstr ""
@@ -2649,7 +2652,7 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:35
+#: app/scripts/components/customer/customer-manage.html:31
 msgid "Postal"
 msgstr ""
 
@@ -3021,7 +3024,7 @@ msgstr ""
 msgid "Read through terms and conditions."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:90
+#: app/scripts/components/customer/customer-manage.js:89
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
@@ -3102,7 +3105,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:62
+#: app/scripts/components/customer/customer-manage.html:58
 msgid "Remove organization"
 msgstr ""
 
@@ -3152,7 +3155,7 @@ msgstr ""
 msgid "Request name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:92
+#: app/scripts/components/customer/customer-manage.js:91
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
 msgstr ""
@@ -4221,7 +4224,7 @@ msgstr ""
 msgid "Unselect all"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:41
+#: app/scripts/components/customer/customer-policies.html:45
 #: app/scripts/components/user/hooks/hook-details.html:76
 msgid "Update"
 msgstr ""
@@ -4260,7 +4263,7 @@ msgstr ""
 msgid "Upgrade"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:10
+#: app/scripts/components/customer/customer-policies.html:14
 #: app/scripts/components/project/project-policies.html:34
 msgid "Upper bound of monthly resource cost provisioned from shared providers."
 msgstr ""
@@ -4462,7 +4465,7 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:91
+#: app/scripts/components/customer/customer-manage.js:90
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
@@ -4482,7 +4485,7 @@ msgstr ""
 msgid "You can change that in <a href=\"{link}\">provider management</a>."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:59
+#: app/scripts/components/customer/customer-manage.html:55
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
