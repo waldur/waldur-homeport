@@ -37,7 +37,6 @@ function CustomerManageController(
       vm.loading = true;
       return currentStateService.getCustomer().then(function(customer) {
         vm.customer = customer;
-        vm.isHardLimit = vm.checkIsHardLimit(vm.customer.price_estimate);
         vm.getPaymentDetails();
         return vm.checkCanManageCustomer(customer).then(function(result) {
           vm.canManageCustomer = result;
@@ -103,9 +102,6 @@ function CustomerManageController(
           currentStateService.setCustomer(vm.customer);
         });
       }
-    },
-    checkIsHardLimit(estimate) {
-      return estimate.limit > 0 && estimate.limit === estimate.threshold;
     },
   });
 

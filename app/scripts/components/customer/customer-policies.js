@@ -4,7 +4,6 @@ const customerPolicies = {
   template: template,
   bindings: {
     customer: '<',
-    isHardLimit: '<',
   },
   controller: class CustomerPoliciesController {
     // @ngInject
@@ -14,6 +13,11 @@ const customerPolicies = {
       this.priceEstimatesService = priceEstimatesService;
       this.currency = ENV.currency;
       this.customer = angular.copy(this.customer);
+      this.isHardLimit = this.isHardLimit(this.customer.price_estimate);
+    }
+
+    isHardLimit(estimate) {
+      return estimate.limit > 0 && estimate.limit === estimate.threshold;
     }
 
     updatePolicies() {
