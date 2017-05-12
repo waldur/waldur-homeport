@@ -3,7 +3,7 @@
         <div class="panel-body">
             <div>
                 <span translate>Estimated cost</span>:
-                {{::$ctrl.customer.price_estimate.total | defaultCurrency}}
+                <p id="price-estimate">{{::$ctrl.customer.price_estimate.total | defaultCurrency}}</p>
             </div>
             <form name="$ctrl.policiesForm" class="form-horizontal">
                 <div class="form-group">
