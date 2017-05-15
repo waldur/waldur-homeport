@@ -9,19 +9,20 @@ const customerManage = {
 export default customerManage;
 
 // @ngInject
-function CustomerManageController(baseControllerClass,
-                                  customersService,
-                                  paymentDetailsService,
-                                  usersService,
-                                  currentStateService,
-                                  features,
-                                  ncUtilsFlash,
-                                  $uibModal,
-                                  $state,
-                                  $q,
-                                  $filter,
-                                  ENV,
-                                  ISSUE_IDS) {
+function CustomerManageController(
+  baseControllerClass,
+  customersService,
+  paymentDetailsService,
+  usersService,
+  currentStateService,
+  features,
+  ncUtilsFlash,
+  $uibModal,
+  $state,
+  $q,
+  $filter,
+  ENV,
+  ISSUE_IDS) {
   let controllerScope = this;
   let ManageController = baseControllerClass.extend({
     init: function () {
