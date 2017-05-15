@@ -77,11 +77,13 @@ describe('Customer policies', () => {
   });
 
   it('should set form to invalid state if threshold is less than 0', () => {
+    expect(controller.policiesForm.threshold.$valid).toBeTruthy();
     controller.policiesForm.threshold.$setViewValue(-1);
     expect(controller.policiesForm.threshold.$valid).toBeFalsy();
   });
 
   it('should check hard limit checkbox if threshold is less than total', () => {
+    expect(customer.price_estimate.total).toBeGreaterThan(customer.price_estimate.threshold);
     let el = angular.element(element[0].querySelector('#isHardLimit'));
     expect(el.val()).toBe('on');
   });

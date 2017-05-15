@@ -9,66 +9,71 @@ const customerManage = {
 export default customerManage;
 
 // @ngInject
-function CustomerManageController(
-  baseControllerClass,
-  customersService,
-  paymentDetailsService,
-  usersService,
-  currentStateService,
-  features,
-  ncUtilsFlash,
-  $uibModal,
-  $state,
-  $q,
-  $filter,
-  ENV,
-  ISSUE_IDS
-) {
+function CustomerManageController(baseControllerClass,
+                                  customersService,
+                                  paymentDetailsService,
+                                  usersService,
+                                  currentStateService,
+                                  features,
+                                  ncUtilsFlash,
+                                  $uibModal,
+                                  $state,
+                                  $q,
+                                  $filter,
+                                  ENV,
+                                  ISSUE_IDS) {
   let controllerScope = this;
   let ManageController = baseControllerClass.extend({
-    init: function() {
+    init: function () {
       this.controllerScope = controllerScope;
       this._super();
       this.paymentDetails = null;
       this.loadInitial();
     },
-    loadInitial: function() {
+    loadInitial: function () {
       let vm = this;
       vm.loading = true;
-      return currentStateService.getCustomer().then(function(customer) {
+      return currentStateService.getCustomer().then(function (customer) {
         vm.customer = customer;
         vm.getPaymentDetails();
-        return vm.checkCanManageCustomer(customer).then(function(result) {
-          vm.canManageCustomer = result;
+        return vm.getCustomerPermissions(customer).then(function (result) {
+          vm.canDeleteCustomer = result.canDeleteCustomer;
+          vm.canUpdateCustomerPolicies = result.canUpdateCustomerPolicies;
         });
-      }).finally(function() {
+      }).finally(function () {
         vm.loading = false;
       });
     },
-    getPaymentDetails: function() {
+    getPaymentDetails: function () {
       let vm = this;
       paymentDetailsService.getList({
         customer_uuid: vm.customer.uuid
-      }).then(function(result) {
+      }).then(function (result) {
         if (result) {
           vm.paymentDetails = result[0];
         }
       });
     },
-    checkCanManageCustomer: function(customer) {
-      return usersService.getCurrentUser().then(function(user) {
+    getCustomerPermissions: function (customer) {
+      return usersService.getCurrentUser().then(function (user) {
         if (user.is_staff) {
-          return $q.when(true);
+          return $q.when({
+            canDeleteCustomer: true,
+            canUpdateCustomerPolicies: true
+          });
         }
         for (let i = 0; i < customer.owners.length; i++) {
           if (user.uuid === customer.owners[i].uuid) {
-            return $q.when(ENV.ownerCanManageCustomer);
+            return $q.when({
+              canDeleteCustomer: ENV.ownerCanDeleteCustomer,
+              canUpdateCustomerPolicies: ENV.ownerCanUpdateCustomerPolicies
+            });
           }
         }
         return $q.when(false);
       });
     },
-    removeCustomer: function() {
+    removeCustomer: function () {
       let vm = this;
       if (this.customer.projects.length > 0) {
         if (!features.isVisible('support')) {
@@ -95,10 +100,10 @@ function CustomerManageController(
       let confirmDelete = confirm($filter('translate')(gettext('Confirm deletion?')));
       if (confirmDelete) {
         currentStateService.setCustomer(null);
-        this.customer.$delete().then(function() {
+        this.customer.$delete().then(function () {
           customersService.clearAllCacheForCurrentEndpoint();
           $state.go('profile.details');
-        }, function() {
+        }, function () {
           currentStateService.setCustomer(vm.customer);
         });
       }

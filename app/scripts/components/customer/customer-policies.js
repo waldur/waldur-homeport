@@ -13,10 +13,10 @@ const customerPolicies = {
       this.priceEstimatesService = priceEstimatesService;
       this.currency = ENV.currency;
       this.customer = angular.copy(this.customer);
-      this.isHardLimit = this.isHardLimit(this.customer.price_estimate);
+      this.isHardLimit = this.isLimitPositiveAndEqualsToThreshold(this.customer.price_estimate);
     }
 
-    isHardLimit(estimate) {
+    isLimitPositiveAndEqualsToThreshold(estimate) {
       return estimate.limit > 0 && estimate.limit === estimate.threshold;
     }
 
