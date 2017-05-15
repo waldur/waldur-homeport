@@ -23,8 +23,8 @@ npm install -g bower grunt-cli
 
 2. Clone project and go to its folder:
 ```
-git clone git@code.opennodecloud.com:nc-saas/nodeconductor-web.git
-cd nodeconductor-web
+git clone <repository-url>
+cd waldur-homeport
 ```
 
 3. Build static assets:
@@ -73,4 +73,4 @@ See [Development guidelines](docs/development_guideline.md) for development poli
 
 [1]: http://bower.io
 [2]: http://gruntjs.com
-[4]: https://code.opennodecloud.com/nodeconductor/nodeconductor-assembly-waldur
+[4]: https://github.com/opennode/nodeconductor-assembly-waldur
