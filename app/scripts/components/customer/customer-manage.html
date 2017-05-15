@@ -48,6 +48,9 @@
     <customer-policies
             ng-if="ManageController.canUpdateCustomerPolicies"
             customer="ManageController.customer"></customer-policies>
+    <h3 ng-if="!ManageController.canUpdateCustomerPolicies">
+        <span translate>Only staff can update organization policies.</span>
+    </h3>
     <div class="panel panel-default" ng-if="ManageController.canDeleteCustomer">
         <div class="panel-heading" translate>Organization actions</div>
         <div class="panel-body">
@@ -59,6 +62,6 @@
         </div>
     </div>
     <h3 ng-if="!ManageController.canDeleteCustomer">
-        <span translate>Only staff can update policies or remove organization.</span>
+        <span translate>Only staff can remove organization.</span>
     </h3>
 </div>

@@ -66,7 +66,7 @@ function CustomerManageController(
         for (let i = 0; i < customer.owners.length; i++) {
           if (user.uuid === customer.owners[i].uuid) {
             return $q.when({
-              canDeleteCustomer: ENV.ownerCanDeleteCustomer,
+              canDeleteCustomer: ENV.ownerCanManageCustomer,
               canUpdateCustomerPolicies: ENV.ownerCanUpdateCustomerPolicies
             });
           }

@@ -181,7 +181,7 @@ angular.module('ncsaas')
     resourcePollingEnabled: true,
     singleResourcePollingTimeout: 1000 * 2,
 
-    ownerCanDeleteCustomer: true,
+    ownerCanManageCustomer: true,
     ownerCanUpdateCustomerPolicies: true,
     OWNERS_CAN_MANAGE_OWNERS: true,
     MANAGER_CAN_MANAGE_TENANTS: false,
