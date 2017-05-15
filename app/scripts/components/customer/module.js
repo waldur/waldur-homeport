@@ -1,5 +1,5 @@
 import customerCreateDialog from './customer-create-dialog';
-import customerDelete from './customer-delete';
+import customerManage from './customer-manage';
 import customerWorkspace from './customer-workspace';
 import { CustomerWorkspaceController } from './customer-workspace';
 import { customerPopover } from './customer-popover';
@@ -9,10 +9,12 @@ import customerEvents from './customer-events';
 import {customerUsersDetailsList} from './customer-users-details-list';
 import customerTeam from './customer-team';
 import routes from './routes';
+import PriceEstimatesService from './price-estimates-service';
+import customerPolicies from './customer-policies';
 
 export default module => {
   module.directive('customerCreateDialog', customerCreateDialog);
-  module.component('customerDelete', customerDelete);
+  module.component('customerManage', customerManage);
   module.controller('CustomerWorkspaceController', CustomerWorkspaceController);
   module.directive('customerWorkspace', customerWorkspace);
   module.component('customerPopover', customerPopover);
@@ -21,5 +23,7 @@ export default module => {
   module.component('customerEvents', customerEvents);
   module.component('customerUsersDetailsList', customerUsersDetailsList);
   module.component('customerTeam', customerTeam);
+  module.component('customerPolicies', customerPolicies);
+  module.service('priceEstimatesService', PriceEstimatesService);
   module.config(routes);
 };

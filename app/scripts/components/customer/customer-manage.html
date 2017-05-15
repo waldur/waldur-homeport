@@ -1,0 +1,67 @@
+<div ng-if="ManageController.loading">
+    <loading-spinner/>
+</div>
+
+<div ng-if="!ManageController.loading">
+    <div class="panel panel-default">
+        <div class="panel-heading" translate>Organization details</div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt><span translate>Name</span>:</dt>
+                <dd>{{::ManageController.customer.name}}</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-if="ManageController.paymentDetails">
+        <div class="panel-heading">Payment details</div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt><span translate>Company</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.company}}</dd>
+
+                <dt><span translate>Address</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.address}}</dd>
+
+                <dt><span translate>Country</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.country}}</dd>
+
+                <dt><span translate>Email</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.email}}</dd>
+
+                <dt><span translate>Postal</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.postal}}</dd>
+
+                <dt><span translate>Phone</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.phone}}</dd>
+
+                <dt><span translate>Bank</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.bank}}</dd>
+
+                <dt><span translate>Account</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.account}}</dd>
+
+                <dt><span translate>Default tax percent</span>:</dt>
+                <dd>{{::ManageController.paymentDetails.default_tax_percent}}</dd>
+            </dl>
+        </div>
+    </div>
+    <customer-policies
+            ng-if="ManageController.canUpdateCustomerPolicies"
+            customer="ManageController.customer"></customer-policies>
+    <h3 ng-if="!ManageController.canUpdateCustomerPolicies">
+        <span translate>Only staff can update organization policies.</span>
+    </h3>
+    <div class="panel panel-default" ng-if="ManageController.canDeleteCustomer">
+        <div class="panel-heading" translate>Organization actions</div>
+        <div class="panel-body">
+            <p translate>You can remove this organization by pressing the button</p>
+            <a ng-click="ManageController.removeCustomer()" class="btn btn-danger">
+                <i class="fa fa-trash"></i>
+                <span translate>Remove organization</span>
+            </a>
+        </div>
+    </div>
+    <h3 ng-if="!ManageController.canDeleteCustomer">
+        <span translate>Only staff can remove organization.</span>
+    </h3>
+</div>

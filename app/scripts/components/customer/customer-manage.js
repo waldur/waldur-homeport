@@ -1,15 +1,15 @@
-import template from './customer-delete.html';
+import template from './customer-manage.html';
 
-const customerDelete = {
+const customerManage = {
   template: template,
-  controller: CustomerDeleteController,
-  controllerAs: 'DeleteController',
+  controller: CustomerManageController,
+  controllerAs: 'ManageController',
 };
 
-export default customerDelete;
+export default customerManage;
 
 // @ngInject
-function CustomerDeleteController(
+function CustomerManageController(
   baseControllerClass,
   customersService,
   paymentDetailsService,
@@ -22,54 +22,60 @@ function CustomerDeleteController(
   $q,
   $filter,
   ENV,
-  ISSUE_IDS
-) {
-  var controllerScope = this;
-  var DeleteController = baseControllerClass.extend({
-    init: function() {
+  ISSUE_IDS) {
+  let controllerScope = this;
+  let ManageController = baseControllerClass.extend({
+    init: function () {
       this.controllerScope = controllerScope;
       this._super();
       this.paymentDetails = null;
       this.loadInitial();
     },
-    loadInitial: function() {
-      var vm = this;
+    loadInitial: function () {
+      let vm = this;
       vm.loading = true;
-      return currentStateService.getCustomer().then(function(customer) {
+      return currentStateService.getCustomer().then(function (customer) {
         vm.customer = customer;
         vm.getPaymentDetails();
-        return vm.checkCanRemoveCustomer(customer).then(function(result) {
-          vm.canRemoveCustomer = result;
+        return vm.getCustomerPermissions(customer).then(function (result) {
+          vm.canDeleteCustomer = result.canDeleteCustomer;
+          vm.canUpdateCustomerPolicies = result.canUpdateCustomerPolicies;
         });
-      }).finally(function() {
+      }).finally(function () {
         vm.loading = false;
       });
     },
-    getPaymentDetails: function() {
-      var vm = this;
+    getPaymentDetails: function () {
+      let vm = this;
       paymentDetailsService.getList({
         customer_uuid: vm.customer.uuid
-      }).then(function(result) {
+      }).then(function (result) {
         if (result) {
           vm.paymentDetails = result[0];
         }
       });
     },
-    checkCanRemoveCustomer: function(customer) {
-      return usersService.getCurrentUser().then(function(user) {
+    getCustomerPermissions: function (customer) {
+      return usersService.getCurrentUser().then(function (user) {
         if (user.is_staff) {
-          return $q.when(true);
+          return $q.when({
+            canDeleteCustomer: true,
+            canUpdateCustomerPolicies: true
+          });
         }
-        for (var i = 0; i < customer.owners.length; i++) {
+        for (let i = 0; i < customer.owners.length; i++) {
           if (user.uuid === customer.owners[i].uuid) {
-            return $q.when(ENV.ownerCanManageCustomer);
+            return $q.when({
+              canDeleteCustomer: ENV.ownerCanManageCustomer,
+              canUpdateCustomerPolicies: ENV.ownerCanUpdateCustomerPolicies
+            });
           }
         }
         return $q.when(false);
       });
     },
-    removeCustomer: function() {
-      var vm = this;
+    removeCustomer: function () {
+      let vm = this;
       if (this.customer.projects.length > 0) {
         if (!features.isVisible('support')) {
           return ncUtilsFlash.error($filter('translate')(gettext('Organization contains projects. Please remove them first.')));
@@ -92,19 +98,19 @@ function CustomerDeleteController(
           }
         });
       }
-      var confirmDelete = confirm($filter('translate')(gettext('Confirm deletion?')));
+      let confirmDelete = confirm($filter('translate')(gettext('Confirm deletion?')));
       if (confirmDelete) {
         currentStateService.setCustomer(null);
-        this.customer.$delete().then(function() {
+        this.customer.$delete().then(function () {
           customersService.clearAllCacheForCurrentEndpoint();
           $state.go('profile.details');
-        }, function() {
+        }, function () {
           currentStateService.setCustomer(vm.customer);
         });
       }
-    }
+    },
   });
 
-  controllerScope.__proto__ = new DeleteController();
+  controllerScope.__proto__ = new ManageController();
 }
 
