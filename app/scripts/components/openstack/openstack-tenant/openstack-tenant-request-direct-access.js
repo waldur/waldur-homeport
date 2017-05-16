@@ -15,7 +15,7 @@ class DialogController {
     this.supportEmail = this.ENV.supportEmail;
     let supportEnabled = this.features.isVisible('support');
 
-    if (!supportEnabled) {
+    if (supportEnabled) {
       this.close();
       this.$uibModal.open({
         component: 'issueCreateDialog',
