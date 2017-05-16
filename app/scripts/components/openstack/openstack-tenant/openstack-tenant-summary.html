@@ -1,48 +1,48 @@
 <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
 
 <div class="m-b-xs" ng-if="$ctrl.template">
-  <dt>
-    <span translate>Package</span>:
-  </dt>
-  <dd>
-    {{ $ctrl.template | formatPackage }}
-  </dd>
+    <dt>
+        <span translate>Package</span>:
+    </dt>
+    <dd>
+        {{ $ctrl.template | formatPackage }}
+    </dd>
 </div>
 
 
-<div class="m-b-xs">
-  <dt>
-    <span translate>Access</span>:
-  </dt>
-  <dd>
-    <a ng-if="$ctrl.resource.access_url"
-       href="{{ $ctrl.resource.access_url }}"
-       target="_blank">
-        <i class="fa fa-external-link"></i>
-        <span translate>Open</span>
-    </a>
-    <span ng-if="!$ctrl.resource.access_url" translate>
+<div class="m-b-xs" ng-if="$ctrl.resource.access_url">
+    <dt>
+        <span translate>Access</span>:
+    </dt>
+    <dd>
+        <a ng-if="$ctrl.resource.access_url"
+           href="{{ $ctrl.resource.access_url }}"
+           target="_blank">
+            <i class="fa fa-external-link"></i>
+            <span translate>Open</span>
+        </a>
+        <span ng-if="!$ctrl.resource.access_url" translate>
       No access info
     </span>
-  </dd>
+    </dd>
 </div>
 
 <div class="m-b-xs" ng-if="$ctrl.resource.user_username">
-  <dt>
-    <span translate>Username</span>:
-  </dt>
-  <dd>
-    <span ng-bind="$ctrl.resource.user_username"></span>
-  </dd>
+    <dt>
+        <span translate>Username</span>:
+    </dt>
+    <dd>
+        <span ng-bind="$ctrl.resource.user_username"></span>
+    </dd>
 </div>
 
 <div class="m-b-xs" ng-if="$ctrl.resource.user_password">
-  <dt>
-    <span translate>Password</span>:
-  </dt>
-  <dd>
-    <span ng-if="!showPassword">***************</span>
-    <a class="icon fa-eye" title="Show password" ng-click="showPassword=!showPassword"></a>
-    <span ng-if="showPassword" ng-bind="$ctrl.resource.user_password"></span>
-  </dd>
+    <dt>
+        <span translate>Password</span>:
+    </dt>
+    <dd>
+        <span ng-if="!showPassword">***************</span>
+        <a class="icon fa-eye" title="Show password" ng-click="showPassword=!showPassword"></a>
+        <span ng-if="showPassword" ng-bind="$ctrl.resource.user_password"></span>
+    </dd>
 </div>

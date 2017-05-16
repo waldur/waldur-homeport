@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h3 class="modal-title" translate>Request direct access to {{ $ctrl.tenant.name }}</h3>
+</div>
+<form name="ActionForm">
+    <div class="modal-body">
+        <div ng-if="loading">
+            <loading-spinner/>
+        </div>
+        <div ng-if="!loading">
+            <p translate>To get access please send a request to {{$ctrl.supportEmail || 'support' | translate}}.</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="$ctrl.close()">
+            <span translate>Close</span>
+        </button>
+    </div>
+</form>

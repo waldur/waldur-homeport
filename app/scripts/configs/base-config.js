@@ -212,6 +212,7 @@ angular.module('ncsaas')
       }
     ],
     defaultLanguage: 'en',
+    tenantCredentialsVisible: true,
 
     // Support email and phone is rendered at the footer
     // supportEmail: 'support@example.com',
