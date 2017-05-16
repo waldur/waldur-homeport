@@ -13,20 +13,20 @@ class DialogController {
     this.tenant = this.resolve.resource;
     this.loading = false;
     this.supportEmail = this.ENV.supportEmail;
-    this.supportEnabled = this.features.isVisible('support');
+    let supportEnabled = this.features.isVisible('support');
 
-    if (this.supportEnabled) {
+    if (!supportEnabled) {
       this.close();
       this.$uibModal.open({
         component: 'issueCreateDialog',
         resolve: {
           issue: () => ({
             type: this.ISSUE_IDS.SERVICE_REQUEST,
-            summary: gettext('Request direct access to Open Stack Tenant'),
+            summary: gettext('Request direct access to OpenStack Tenant'),
             resource: this.tenant,
           }),
           options: {
-            title: gettext('Request direct access to Open Stack Tenant'),
+            title: gettext('Request direct access to OpenStack Tenant'),
             descriptionPlaceholder: gettext('Please provide a reason'),
             descriptionLabel: gettext('Description'),
             summaryLabel: gettext('Tenant name'),
