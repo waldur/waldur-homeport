@@ -1,21 +1,13 @@
-import template from './openstack-tenant-request-direct-access.html';
-
 // @ngInject
 class DialogController {
-  constructor(features, $uibModal, ISSUE_IDS, ENV) {
+  constructor(features, $uibModal, ISSUE_IDS) {
     this.features = features;
     this.$uibModal = $uibModal;
     this.ISSUE_IDS = ISSUE_IDS;
-    this.ENV = ENV;
   }
 
   $onInit() {
-    this.tenant = this.resolve.resource;
-    this.loading = false;
-    this.supportEmail = this.ENV.supportEmail;
-    let supportEnabled = this.features.isVisible('support');
-
-    if (supportEnabled) {
+    if (this.features.isVisible('support')) {
       this.close();
       this.$uibModal.open({
         component: 'issueCreateDialog',
@@ -23,7 +15,7 @@ class DialogController {
           issue: () => ({
             type: this.ISSUE_IDS.SERVICE_REQUEST,
             summary: gettext('Request direct access to OpenStack Tenant'),
-            resource: this.tenant,
+            resource: this.resolve.resource,
           }),
           options: {
             title: gettext('Request direct access to OpenStack Tenant'),
@@ -39,7 +31,6 @@ class DialogController {
 }
 
 const openstackTenantRequestDirectAccess = {
-  template: template,
   controller: DialogController,
   bindings: {
     resolve: '<',
