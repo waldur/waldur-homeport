@@ -10,7 +10,7 @@
 </div>
 
 
-<div class="m-b-xs">
+<div class="m-b-xs" ng-if="$ctrl.resource.access_url && $ctrl.tenantCredentialsVisible">
   <dt>
     <span translate>Access</span>:
   </dt>
@@ -18,8 +18,8 @@
     <a ng-if="$ctrl.resource.access_url"
        href="{{ $ctrl.resource.access_url }}"
        target="_blank">
-        <i class="fa fa-external-link"></i>
-        <span translate>Open</span>
+      <i class="fa fa-external-link"></i>
+      <span translate>Open</span>
     </a>
     <span ng-if="!$ctrl.resource.access_url" translate>
       No access info
@@ -27,7 +27,7 @@
   </dd>
 </div>
 
-<div class="m-b-xs" ng-if="$ctrl.resource.user_username">
+<div class="m-b-xs" ng-if="$ctrl.resource.user_username && $ctrl.tenantCredentialsVisible">
   <dt>
     <span translate>Username</span>:
   </dt>
@@ -36,7 +36,7 @@
   </dd>
 </div>
 
-<div class="m-b-xs" ng-if="$ctrl.resource.user_password">
+<div class="m-b-xs" ng-if="$ctrl.resource.user_password && $ctrl.tenantCredentialsVisible">
   <dt>
     <span translate>Password</span>:
   </dt>
