@@ -11,7 +11,6 @@ class DialogController {
 
   $onInit() {
     this.tenant = this.resolve.resource;
-    this.loading = false;
     this.supportEmail = this.ENV.supportEmail;
     let supportEnabled = this.features.isVisible('support');
 
