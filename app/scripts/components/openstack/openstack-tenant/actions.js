@@ -68,7 +68,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
     delete_message: 'All tenant resources will be deleted.'
   };
 
-  if (!ENV.tenantCredentialsVisible && ENV.supportEmail) {
+  if (!ENV.tenantCredentialsVisible) {
     tenantConfig.order.splice(tenantConfig.order.indexOf('edit') + 1, 0, 'direct_access');
     tenantConfig.options['direct_access'] = {
       title: gettext('Request direct access'),
