@@ -1,20 +1,6 @@
 import template from './action-button-resource.html';
 import './action-button-resource.scss';
 
-export default function actionButtonResource() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {},
-    controller: ActionButtonController,
-    controllerAs: '$ctrl',
-    bindToController: {
-      buttonController: '=',
-      buttonModel: '='
-    }
-  };
-}
-
 // @ngInject
 class ActionButtonController {
   constructor(actionUtilsService) {
@@ -59,3 +45,14 @@ class ActionButtonController {
     });
   }
 }
+
+const actionButtonResource = {
+  template: template,
+  controller: ActionButtonController,
+  bindings: {
+    buttonController: '<',
+    buttonModel: '<'
+  }
+};
+
+export default actionButtonResource;
