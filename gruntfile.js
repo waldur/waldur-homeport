@@ -40,11 +40,7 @@ module.exports = function (grunt) {
             'app/static/css/bootstrap.min.css',
             'app/static/css/font-awesome.min.css',
             'app/static/css/style.css',
-            'app/static/css/angular-flash.css',
             'app/static/css/select.css',
-            'app/static/css/xeditable.css',
-            'app/static/css/angular-block-ui.css',
-            'app/static/css/leaflet.css',
             'app/static/css/flags16.css',
             'app/static/css/datatables/*.css',
             'app/static/css/bundle.min.css',
@@ -112,7 +108,7 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
-            cwd: 'bower_components/bootstrap/dist/fonts/',
+            cwd: 'node_modules/bootstrap/dist/fonts/',
             src: ['*'],
             dest: 'app/static/fonts/',
             filter: 'isFile'
@@ -147,10 +143,24 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
-            cwd: 'bower_components/bootstrap/dist/css/',
+            cwd: 'node_modules/leaflet/dist/',
+            src: ['leaflet.css'],
+            dest: 'app/static/css/',
+            filter: 'isFile'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/bootstrap/dist/css/',
             src: ['bootstrap.min.css'],
             dest: 'app/static/css/',
             filter: 'isFile'
+          },
+          {
+            expand: true,
+            cwd: 'bower_components/pdfmake/build/',
+            src: ['pdfmake.min.js', 'vfs_fonts.js'],
+            dest: 'app/static/js/datatables/',
+            filter: 'isFile',
           },
         ]
       },
