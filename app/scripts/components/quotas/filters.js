@@ -25,6 +25,8 @@ export function quotaValue($filter) {
   var filters = {
     ram: 'filesize',
     storage: 'filesize',
+    volumes_size: 'filesize',
+    snapshots_size: 'filesize',
     backup_storage: 'filesize',
     cost: 'defaultCurrency',
   };

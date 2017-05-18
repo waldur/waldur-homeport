@@ -35,11 +35,13 @@ export default function baseResourceListController(
         searchFieldName: 'name',
         noDataText: gettext('You have no resources yet.'),
         noMatchesText: gettext('No resources found matching filter.'),
+        enableOrdering: true,
         columns: [
           {
             id: 'name',
             title: gettext('Name'),
             className: 'all',
+            orderField: 'name',
             render: function(row) {
               return vm.renderResourceName(row);
             }
@@ -48,6 +50,7 @@ export default function baseResourceListController(
             id: 'provider',
             title: gettext('Provider'),
             className: 'desktop',
+            orderField: 'service_name',
             render: function(row) {
               return row.service_name;
             }
@@ -56,6 +59,7 @@ export default function baseResourceListController(
             id: 'state',
             title: gettext('State'),
             className: 'min-tablet-l',
+            orderField: 'state',
             render: function(row) {
               return vm.renderResourceState(row);
             }
@@ -164,7 +168,7 @@ export default function baseResourceListController(
       'resource_type', 'latitude', 'longitude',
       'service_name', 'service_uuid', 'customer', 'service_settings_state',
       'service_settings_error_message', 'service_settings_uuid', 'security_groups',
-      'description', 'is_link_valid',
+      'description', 'is_link_valid', 'customer_name', 'project_name'
     ],
     getMarkers: function() {
       var items = this.controllerScope.list.filter(function hasCoordinates(item) {
@@ -300,7 +304,7 @@ export default function baseResourceListController(
     },
     resourceIsUpdating: function(resource) {
       // resource is updating if it is not in stable state.
-      return (resource.state !== 'OK' && resource.state !== 'ERRED');
+      return (resource.state !== 'OK' && resource.state !== 'Erred');
     },
     pollResource: function(resource) {
       let vm = this;

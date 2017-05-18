@@ -12,10 +12,12 @@ const projectPolicies = {
       certificationsService,
       ncUtilsFlash,
       customersService,
+      priceEstimatesService,
       $rootScope,
       $q) {
       this.ENV = ENV;
       this.projectsService = projectsService;
+      this.priceEstimatesService = priceEstimatesService;
       this.certificationsService = certificationsService;
       this.ncUtilsFlash = ncUtilsFlash;
       this.customersService = customersService;
@@ -53,18 +55,27 @@ const projectPolicies = {
 
       return this.$q.all(promises).then(() => {
         this.ncUtilsFlash.success(gettext('Project policies have been updated.'));
+      }).catch((response) => {
+        if (response.status === 400) {
+          for (let name in response.data) {
+            let error = response.data[name];
+            this.ncUtilsFlash.error(error);
+          }
+        } else {
+          this.ncUtilsFlash.error(gettext('An error occurred during policy update.'));
+        }
       });
     }
 
     saveThreshold() {
-      return this.projectsService
+      return this.priceEstimatesService
         .setThreshold(this.project.url, this.estimate.threshold)
         .then(() => this.project.price_estimate.threshold = this.estimate.threshold);
     }
 
     saveLimit() {
       const limit = this.isHardLimit ? this.estimate.threshold : -1;
-      return this.projectsService
+      return this.priceEstimatesService
         .setLimit(this.project.url, limit)
         .then(() => this.project.price_estimate.limit = limit);
     }

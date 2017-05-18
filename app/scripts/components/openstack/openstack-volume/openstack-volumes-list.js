@@ -33,6 +33,7 @@ function VolumesListController(BaseProjectResourcesTabController, ncUtils, $stat
       options.columns.push({
         title: gettext('Size'),
         className: 'all',
+        orderField: 'size',
         render: function(row) {
           if (!row.size) {
             return '&ndash;';
@@ -43,6 +44,7 @@ function VolumesListController(BaseProjectResourcesTabController, ncUtils, $stat
       options.columns.push({
         title: gettext('Attached to'),
         className: 'min-tablet-l',
+        orderField: 'instance_name',
         render: function(row) {
           if (!row.instance) {
             return '&ndash;';

@@ -15,7 +15,6 @@ angular.module('ncsaas')
 
     pageSizes: [5, 10, 20, 50],
     pageSize: 10,
-    serviceIcon: 'static/images/icons/icon_openstack_small.png',
     dashboardEventsCacheTime: 60, // seconds
     showImport: false,
     defaultErrorMessage: gettext('Reason unknown, please contact support.'),
@@ -182,6 +181,7 @@ angular.module('ncsaas')
     singleResourcePollingTimeout: 1000 * 2,
 
     ownerCanManageCustomer: true,
+    ownerCanUpdateCustomerPolicies: true,
     OWNERS_CAN_MANAGE_OWNERS: true,
     MANAGER_CAN_MANAGE_TENANTS: false,
 
@@ -212,6 +212,7 @@ angular.module('ncsaas')
       }
     ],
     defaultLanguage: 'en',
+    tenantCredentialsVisible: true,
 
     // Support email and phone is rendered at the footer
     // supportEmail: 'support@example.com',

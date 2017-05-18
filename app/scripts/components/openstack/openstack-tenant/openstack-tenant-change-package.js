@@ -38,7 +38,8 @@ class DialogController {
       package: this.package,
       template: this.template,
       newTemplate: this.newTemplate
-    }).then(() => {
+    }).then(tenant => {
+      this.resolve.controller.reInitResource(tenant);
       this.close();
     }).catch(response => {
       if (response) {

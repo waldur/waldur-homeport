@@ -121,7 +121,7 @@ export function CustomerWorkspaceController(
       {
         label: gettext('Manage'),
         icon: 'fa-wrench',
-        link: 'organization.delete({uuid: $ctrl.context.customer.uuid})'
+        link: 'organization.manage({uuid: $ctrl.context.customer.uuid})'
       }
     ];
   }

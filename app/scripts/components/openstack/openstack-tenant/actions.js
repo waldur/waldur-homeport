@@ -1,10 +1,9 @@
 // @ngInject
-export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
-  ActionConfigurationProvider.register('OpenStack.Tenant', {
+export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION, ENV) {
+  let tenantConfig = {
     order: [
       'edit',
       'pull',
-      'pull_quotas',
       'change_package',
       'create_network',
       'create_security_group',
@@ -19,9 +18,6 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
       }),
       pull: {
         title: gettext('Synchronise')
-      },
-      pull_quotas: {
-        title: gettext('Synchronise quotas')
       },
       create_network: {
         tab: 'networks',
@@ -70,5 +66,18 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
       },
     },
     delete_message: 'All tenant resources will be deleted.'
-  });
+  };
+
+  if (!ENV.tenantCredentialsVisible) {
+    tenantConfig.order.splice(tenantConfig.order.indexOf('edit') + 1, 0, 'direct_access');
+    tenantConfig.options['direct_access'] = {
+      title: gettext('Request direct access'),
+      component: 'openstackTenantRequestDirectAccess',
+      enabled: true,
+      useResolve: true,
+      type: 'form',
+    };
+  }
+
+  ActionConfigurationProvider.register('OpenStack.Tenant', tenantConfig);
 }
