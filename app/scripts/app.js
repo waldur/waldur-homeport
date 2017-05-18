@@ -1,10 +1,7 @@
-window.gettext = angular.identity;
-
 (function() {
   'use strict';
 
   angular
-
     // module name and dependencies
     .module('ncsaas', [
       'satellizer',
@@ -27,9 +24,8 @@ window.gettext = angular.identity;
       'leaflet-directive',
       'angular-cron-jobs',
       'ui.bootstrap',
-      'ui.slimscroll',
       'angular-bind-html-compile'
-    ])
+    ]);
 })();
 
 (function() {
