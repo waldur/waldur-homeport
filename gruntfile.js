@@ -323,11 +323,11 @@ module.exports = function (grunt) {
     concat: {
       build: {
         src: [
-          'app/scripts/class.js',
-          'app/scripts/inspinia.js',
           'app/static/js/vendor-bundle.js',
           'app/static/js/datatables/pdfmake.min.js',
           'app/static/js/datatables/vfs_fonts.js',
+          'app/scripts/class.js',
+          'app/scripts/inspinia.js',
           'app/scripts/app.js',
           'app/scripts/utils.js',
           'app/scripts/configs/*.js',
