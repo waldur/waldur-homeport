@@ -38,7 +38,6 @@ module.exports = function (grunt) {
         files: {
           'app/static/css/style.min.css': [
             'app/static/css/bootstrap.min.css',
-            'app/static/css/font-awesome.min.css',
             'app/static/css/style.css',
             'app/static/css/select.css',
             'app/static/css/flags16.css',
@@ -64,20 +63,6 @@ module.exports = function (grunt) {
       main: {
         files: [
           // front-end
-          {
-            expand: true,
-            cwd: 'bower_components/fontawesome/fonts',
-            src: ['*'],
-            dest: 'app/static/fonts/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            cwd: 'bower_components/fontawesome/css',
-            src: ['font-awesome.min.css'],
-            dest: 'app/static/css/',
-            filter: 'isFile'
-          },
           {
             expand: true,
             cwd: 'bower_components/open-sans-fontface/fonts/Semibold',

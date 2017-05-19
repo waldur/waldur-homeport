@@ -30,6 +30,7 @@
     "angular-bind-html-compile-ci-dev": "^1.2.2",
     "angular-flash-alert": "~1.1.0",
     "bootstrap": "^3.3.7",
+    "font-awesome": "~4.7.0",
     "ng-file-upload": "~5.0.8",
     "d3": "~4.9.1",
     "ui-select": "^0.19.8",
