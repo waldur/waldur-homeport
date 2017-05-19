@@ -1,7 +1,7 @@
 import $ from 'jquery';
-window.$ = window.jQuery = $;
+// $ is required for datatables.net to work properly.
+// Can be replaced with a providePlugin when slimscroll is migrated to webpack
 import angular from 'angular';
-window.angular = angular;
 window.gettext = angular.identity;
 import 'angular-cron-jobs';
 import 'angular-cron-jobs/dist/angular-cron-jobs.css';

@@ -38,13 +38,15 @@ module.exports = {
           test: /\.json$/,
           loader: 'json-loader'
         },
+        {
+          // replace with prodivePlugin when slimscroll is migrated to webpack.
+          test: require.resolve('jquery'),
+          loader: 'expose?jQuery!expose?$'
+        },
       ]
     },
     plugins: [
       extractPlugin,
-      new webpack.ProvidePlugin({
-        'window.jQuery': 'jquery', // provide angular with jQuery
-      }),
     ],
     stats: {
       children: false,

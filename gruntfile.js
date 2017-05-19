@@ -162,6 +162,20 @@ module.exports = function (grunt) {
             dest: 'app/static/js/datatables/',
             filter: 'isFile',
           },
+          {
+            expand: true,
+            cwd: 'bower_components/slimScroll/',
+            src: ['jquery.slimscroll.min.js'],
+            dest: 'app/static/js/',
+            filter: 'isFile'
+          },
+          {
+            expand: true,
+            cwd: 'bower_components/angular-slimscroll/',
+            src: ['angular-slimscroll.js'],
+            dest: 'app/static/js/angular/',
+            filter: 'isFile'
+          },
         ]
       },
       dist: {
@@ -336,6 +350,8 @@ module.exports = function (grunt) {
           'app/static/js/vendor-bundle.js',
           'app/static/js/datatables/pdfmake.min.js',
           'app/static/js/datatables/vfs_fonts.js',
+          'app/static/js/jquery.slimscroll.min.js',
+          'app/static/js/angular/angular-slimscroll.js',
           'app/scripts/class.js',
           'app/scripts/inspinia.js',
           'app/scripts/app.js',

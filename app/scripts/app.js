@@ -24,6 +24,7 @@
       'leaflet-directive',
       'angular-cron-jobs',
       'ui.bootstrap',
+      'ui.slimscroll',
       'angular-bind-html-compile'
     ]);
 })();

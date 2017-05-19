@@ -47,7 +47,7 @@
           </label>
         </div>
       </div>
-      <div class="list-group pre-scrollable" id="organization-selector">
+      <div class="list-group" slimscroll="{alwaysVisible: true, height: '300px'}" id="organization-selector">
         <div class="list-group-item"
           ng-repeat="organization in $ctrl.organizations | filter: {name: $ctrl.organizationSearchInput}"
           ng-class="{active: organization.uuid == $ctrl.selectedOrganization.uuid}"
@@ -101,7 +101,8 @@
           </p>
       </div>
       <div ng-if="$ctrl.selectedOrganization.projects.length > 0"
-        class="list-group pre-scrollable"
+        class="list-group"
+        slimscroll="{alwaysVisible: true, height: '300px'}"
         id="project-selector">
         <div class="list-group-item"
           ng-repeat="project in $ctrl.selectedOrganization.projects | filter: {name: $ctrl.projectSearchInput}"
