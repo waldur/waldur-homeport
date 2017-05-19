@@ -1,5 +1,5 @@
 import 'font-awesome/css/font-awesome.css';
-
+import 'leaflet/dist/leaflet.css';
 import $ from 'jquery';
 // $ is required for datatables.net to work properly.
 // Can be replaced with a providePlugin when slimscroll is migrated to webpack
