@@ -117,6 +117,14 @@
           {{ ::$ctrl.event.message }}
         </div>
       </tr>
+      <tr ng-if="::$ctrl.event.link">
+        <td>
+          <span translate>Issue link</span>
+        </td>
+        <td>
+          {{ ::$ctrl.event.link }}
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
