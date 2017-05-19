@@ -39,7 +39,6 @@ module.exports = function (grunt) {
           'app/static/css/style.min.css': [
             'app/static/css/bootstrap.min.css',
             'app/static/css/style.css',
-            'app/static/css/flags16.css',
             'app/static/css/datatables/*.css',
             'app/static/css/bundle.min.css',
           ]
@@ -109,20 +108,6 @@ module.exports = function (grunt) {
             cwd: 'bower_components/respond/dest',
             src: ['respond.min.js'],
             dest: 'app/static/js/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            cwd: 'bower_components/world-flags-sprite/stylesheets/',
-            src: ['flags16.css'],
-            dest: 'app/static/css/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            cwd: 'bower_components/world-flags-sprite/images/',
-            src: ['flags16.png'],
-            dest: 'app/static/images/',
             filter: 'isFile'
           },
           {
