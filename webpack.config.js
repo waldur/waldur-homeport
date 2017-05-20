@@ -44,12 +44,17 @@ module.exports = {
           loader: 'expose?jQuery!expose?$'
         },
         {
-          test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+          test: /\.(eot|svg|otf|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
           loader: 'url'
         },
         {
-          test: /\.png$/,
-          loader: 'url'
+          test: /\.(jpe?g|gif|png)$/,
+          loader: 'file?emitFile=false&name=[path][name].[ext]'
+        },
+        {
+          test: /bootstrap.+\.js$/,
+          // imports loader must be replaced with ProvidePlugin when slimscroll is gone.
+          loader: 'imports?jQuery=jquery,$=jquery,this=>window'
         }
       ]
     },

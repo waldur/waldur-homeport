@@ -1,6 +1,9 @@
 import 'font-awesome/css/font-awesome.css';
 import 'leaflet/dist/leaflet.css';
 import 'world-flags-sprite/stylesheets/flags16.css';
+// jquery is passed by webpack.
+import 'bootstrap/dist/css/bootstrap.css';
+import '../static/css/style.css';
 import $ from 'jquery';
 // $ is required for datatables.net to work properly.
 // Can be replaced with a providePlugin when slimscroll is migrated to webpack

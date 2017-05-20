@@ -37,7 +37,6 @@ module.exports = function (grunt) {
       combine: {
         files: {
           'app/static/css/style.min.css': [
-            'app/static/css/bootstrap.min.css',
             'app/static/css/style.css',
             'app/static/css/datatables/*.css',
             'app/static/css/bundle.min.css',
@@ -91,13 +90,6 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
-            cwd: 'node_modules/bootstrap/dist/fonts/',
-            src: ['*'],
-            dest: 'app/static/fonts/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
             cwd: 'bower_components/html5shiv/dist',
             src: ['html5shiv.min.js'],
             dest: 'app/static/js/',
@@ -108,13 +100,6 @@ module.exports = function (grunt) {
             cwd: 'bower_components/respond/dest',
             src: ['respond.min.js'],
             dest: 'app/static/js/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            cwd: 'node_modules/bootstrap/dist/css/',
-            src: ['bootstrap.min.css'],
-            dest: 'app/static/css/',
             filter: 'isFile'
           },
           {
