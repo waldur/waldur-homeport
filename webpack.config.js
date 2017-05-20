@@ -48,8 +48,8 @@ module.exports = {
           loader: 'url'
         },
         {
-          test: /\.(jpe?g|gif|png)$/,
-          loader: 'file?emitFile=false&name=[path][name].[ext]'
+          test: /\.(png|jpg)$/,
+          loader: 'url'
         },
         {
           test: /bootstrap.+\.js$/,
