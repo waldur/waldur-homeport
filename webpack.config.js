@@ -45,11 +45,11 @@ module.exports = {
         },
         {
           test: /\.(eot|svg|otf|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-          loader: 'url'
+          loader: 'file?publicPath=static/&name=fonts/[name].[ext]'
         },
         {
           test: /\.(png|jpg)$/,
-          loader: 'url'
+          loader: 'file?publicPath=static/&name=images/[name].[ext]'
         },
         {
           test: /bootstrap.+\.js$/,
