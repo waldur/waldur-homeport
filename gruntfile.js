@@ -37,9 +37,8 @@ module.exports = function (grunt) {
       combine: {
         files: {
           'app/static/css/style.min.css': [
-            'app/static/css/style.css',
-            'app/static/css/datatables/*.css',
-            'app/static/css/bundle.min.css',
+            'app/static/css/vendor-bundle.css',
+            'app/static/css/index-bundle.css',
           ]
         }
       }
@@ -73,20 +72,6 @@ module.exports = function (grunt) {
             src: ['pdfmake.min.js', 'vfs_fonts.js'],
             dest: 'app/static/js/datatables/',
             filter: 'isFile',
-          },
-          {
-            expand: true,
-            cwd: 'bower_components/slimScroll/',
-            src: ['jquery.slimscroll.min.js'],
-            dest: 'app/static/js/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            cwd: 'bower_components/angular-slimscroll/',
-            src: ['angular-slimscroll.js'],
-            dest: 'app/static/js/angular/',
-            filter: 'isFile'
           },
         ]
       },

@@ -3,7 +3,7 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var scssPath = path.resolve(__dirname, './assets/sass');
-var extractPlugin = new ExtractTextPlugin('./css/bundle.min.css');
+var extractPlugin = new ExtractTextPlugin('./css/[name]-bundle.css');
 var momentLocalesPlugin = new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en-gb|et)/);
 
 module.exports = {
@@ -29,11 +29,11 @@ module.exports = {
         },
         {
           test: /\.scss$/,
-          loader: ExtractTextPlugin.extract('style', 'css!sass?includePaths[]=' + scssPath)
+          loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap&includePaths[]=' + scssPath)
         },
         {
           test: /\.css$/,
-          loader: 'style!css'
+          loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
         },
         {
           test: /\.json$/,
@@ -45,12 +45,12 @@ module.exports = {
           loader: 'expose?jQuery!expose?$'
         },
         {
-          test: /\.(eot|svg|otf|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-          loader: 'file?publicPath=static/&name=fonts/[name].[ext]'
+          test: /\.(eot|svg|otf|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?/,
+          loader: 'file?publicPath=../&name=fonts/[name].[ext]'
         },
         {
           test: /\.(png|jpg)$/,
-          loader: 'file?publicPath=static/&name=images/[name].[ext]'
+          loader: 'file?publicPath=../&name=images/[name].[ext]'
         },
         {
           test: /bootstrap.+\.js$/,

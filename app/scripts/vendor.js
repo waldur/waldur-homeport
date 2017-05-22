@@ -5,15 +5,14 @@ import 'html5shiv';
 import 'npm-font-open-sans';
 // jquery is passed by webpack.
 import 'bootstrap/dist/css/bootstrap.css';
-import '../static/css/style.css';
 import $ from 'jquery';
 // $ is required for datatables.net to work properly.
 // Can be replaced with a providePlugin when slimscroll is migrated to webpack
 import angular from 'angular';
 window.gettext = angular.identity;
-// bower dependant
-import '../static/js/jquery.slimscroll.min.js';
-import '../static/js/angular/angular-slimscroll.js';
+
+import '../../bower_components/slimScroll/jquery.slimscroll.js';
+import '../../bower_components/angular-slimscroll/angular-slimscroll.js';
 // end
 import 'angular-cron-jobs';
 import 'angular-cron-jobs/dist/angular-cron-jobs.css';
@@ -45,7 +44,6 @@ import 'angular-xeditable';
 import 'angular-xeditable/dist/css/xeditable.css';
 import 'angular-sanitize';
 import 'leaflet';
-import 'd3';
 import 'angular-leaflet-directive';
 import 'angular-ui-bootstrap';
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';

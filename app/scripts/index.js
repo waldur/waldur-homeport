@@ -1,3 +1,5 @@
+import '../../assets/sass/style.scss';
+
 import sparkline from './components/sparkline/sparkline';
 import featuresModule from './components/features/module';
 import teamModule from './components/team/module';
