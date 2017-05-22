@@ -4,8 +4,6 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "fontawesome": "~4.7.0",
-    "html5shiv": "~3.7.2",
     "respond": "~1.4.2",
     "open-sans-fontface": "^1.4.2",
     "pdfmake": "^0.1.20",

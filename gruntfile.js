@@ -90,13 +90,6 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
-            cwd: 'bower_components/html5shiv/dist',
-            src: ['html5shiv.min.js'],
-            dest: 'app/static/js/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
             cwd: 'bower_components/respond/dest',
             src: ['respond.min.js'],
             dest: 'app/static/js/',
