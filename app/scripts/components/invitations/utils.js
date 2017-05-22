@@ -47,6 +47,9 @@ export class invitationUtilsService {
       if (this.$auth.isAuthenticated()) {
         this.acceptInvitation(token).then(() => {
           this.$state.go('profile.details');
+        }).catch(reason => {
+          this.ncUtilsFlash.error(reason);
+          return this.$state.go('errorPage.notFound');
         });
       } else {
         this.invitationService.setInvitationToken(token);
@@ -63,17 +66,15 @@ export class invitationUtilsService {
   }
 
   acceptInvitation(token) {
-    this.loadUserInvitation(token).then(context => {
+    return this.loadUserInvitation(token).then(context => {
       let user = context.user;
       let invitation = context.invitation;
       if (this.validateInvitationEmail && user.email && user.email === invitation.email) {
-        this.invitationService.clearInvitationToken().then(() => {
-          this.ncUtilsFlash.error(gettext('Invitation is not valid.'));
-          this.$state.go('errorPage.notFound');
-        });
+        this.invitationService.clearInvitationToken();
+        return this.$q.reject(gettext('Invitation is not valid.'));
       }
 
-      return this.shallChangeEmail(invitation).then(replace_email => {
+      return this.shallChangeEmail(user, invitation).then(replace_email => {
         return this.invitationService.accept(token, replace_email).then(() => {
           this.ncUtilsFlash.success(gettext('Your invitation was accepted.'));
           this.invitationService.clearInvitationToken();
