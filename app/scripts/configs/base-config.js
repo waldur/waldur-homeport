@@ -184,6 +184,7 @@ angular.module('ncsaas')
     ownerCanUpdateCustomerPolicies: true,
     OWNERS_CAN_MANAGE_OWNERS: true,
     MANAGER_CAN_MANAGE_TENANTS: false,
+    UPDATE_EMAIL_WITH_INVITATION_ACTIVE: true,
 
     roles: {
       owner: gettext('Organization owner'),
