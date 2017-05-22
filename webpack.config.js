@@ -4,6 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var scssPath = path.resolve(__dirname, './assets/sass');
 var extractPlugin = new ExtractTextPlugin('./css/bundle.min.css');
+var momentLocalesPlugin = new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en-gb|et)/);
 
 module.exports = {
   options: {
@@ -60,6 +61,7 @@ module.exports = {
     },
     plugins: [
       extractPlugin,
+      momentLocalesPlugin,
     ],
     stats: {
       children: false,
@@ -79,6 +81,7 @@ module.exports = {
   prod: {
     plugins: [
       extractPlugin,
+      momentLocalesPlugin,
       new webpack.optimize.DedupePlugin(),
     ]
   }
