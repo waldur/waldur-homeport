@@ -62,34 +62,6 @@ module.exports = function (grunt) {
           // front-end
           {
             expand: true,
-            cwd: 'bower_components/open-sans-fontface/fonts/Semibold',
-            src: ['*'],
-            dest: 'app/static/fonts/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            cwd: 'bower_components/open-sans-fontface/fonts/Bold',
-            src: ['*'],
-            dest: 'app/static/fonts/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            cwd: 'bower_components/open-sans-fontface/fonts/Regular',
-            src: ['*'],
-            dest: 'app/static/fonts/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            cwd: 'bower_components/open-sans-fontface/fonts/Light',
-            src: ['*'],
-            dest: 'app/static/fonts/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
             cwd: 'bower_components/respond/dest',
             src: ['respond.min.js'],
             dest: 'app/static/js/',
