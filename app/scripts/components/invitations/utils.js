@@ -20,7 +20,7 @@ export class invitationUtilsService {
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
     this.$uibModal = $uibModal;
-    this.emailUpdateActive = ENV.UPDATE_EMAIL_WITH_INVITATION_ACTIVE;
+    this.validateInvitationEmail = ENV.VALIDATE_INVITATION_EMAIL;
   }
 
   init() {
@@ -66,7 +66,7 @@ export class invitationUtilsService {
     this.loadUserInvitation(token).then(context => {
       let user = context.user;
       let invitation = context.invitation;
-      if (!this.emailUpdateActive && user.email && user.email === invitation.email) {
+      if (this.validateInvitationEmail && user.email && user.email === invitation.email) {
         this.invitationService.clearInvitationToken().then(() => {
           this.ncUtilsFlash.error(gettext('Invitation is not valid.'));
           this.$state.go('errorPage.notFound');
