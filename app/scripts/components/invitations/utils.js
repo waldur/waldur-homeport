@@ -9,7 +9,8 @@ export class invitationUtilsService {
     $state,
     $rootScope,
     $timeout,
-    $uibModal) {
+    $uibModal,
+    ENV) {
     this.invitationService = invitationService;
     this.usersService = usersService;
     this.ncUtilsFlash = ncUtilsFlash;
@@ -19,6 +20,7 @@ export class invitationUtilsService {
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
     this.$uibModal = $uibModal;
+    this.invitationCheckInterval = ENV.invitationCheckInterval;
   }
 
   init() {
@@ -30,34 +32,33 @@ export class invitationUtilsService {
       }
     });
   }
-
   checkAndAccept(token) {
-    /* 1) If invitation token is invalid then display 404.
-
-       2) If invitation token is valid and user is already logged in
-          then accept invitation and display message to user.
-
-       3) If invitation is valid and user is anonymous then
-          redirect him to registration page.
+    /*
+      - Poll invitation check endpoint if server is not available.
+      - If invitation is valid - accept token and redirect user either to profile or registration page.
+      - redirect user to Not Found page.
     */
 
-    return this.invitationService.check(token).then(() => {
-      if (this.$auth.isAuthenticated()) {
-        this.acceptInvitation(token).then(() => {
-          this.$state.go('profile.details');
-        });
-      } else {
-        this.invitationService.setInvitationToken(token);
-        this.$state.go('register');
-      }
+    this.invitationService.check(token).then(() => {
+      this.accept(token);
     }).catch(response => {
-      this.showError(response);
-      if (this.$auth.isAuthenticated()) {
-        this.$state.go('profile.details');
+      if (response.status === -1 || response.status >= 500) {
+        this.ncUtilsFlash.clear();
+        this.$timeout(this.checkAndAccept.bind(this), this.invitationCheckInterval, true, token);
       } else {
-        this.$state.go('login');
+        this.$state.go('errorPage.notFound');
       }
     });
+  }
+  accept(token) {
+    if (this.$auth.isAuthenticated()) {
+      this.acceptInvitation(token).then(() => {
+        this.$state.go('profile.details');
+      });
+    } else {
+      this.invitationService.setInvitationToken(token);
+      this.$state.go('register');
+    }
   }
 
   acceptInvitation(token) {
