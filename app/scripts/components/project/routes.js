@@ -176,7 +176,8 @@ export default function projectRoutes($stateProvider) {
       url: 'cost-planning/',
       template: '<cost-plans-list/>',
       data: {
-        pageTitle: gettext('Cost planning')
+        pageTitle: gettext('Cost planning'),
+        feature: 'cost-planning'
       }
     })
 

@@ -37,13 +37,13 @@ import tableModule from './components/table/module';
 import i18nModule from './components/i18n/module';
 import bootstrap from './components/core/bootstrap';
 import errorModule from './components/error/module';
-import { configModule, gravatarModule } from './components/configs/module';
+import configModule from './components/configs/module';
 import controllersModule from './components/controllers/module';
 import directivesModule from './components/directives/module';
 import servicesModule from './components/services/module';
-import appModule from './components/module';
+import rootModule from './components/module';
 
-const ncSaasModule = angular.module('ncsaas', [
+const appModule = angular.module('ncsaas', [
   'satellizer',
   'ui.router',
   'ngCookies',
@@ -68,48 +68,45 @@ const ncSaasModule = angular.module('ncsaas', [
   'angular-bind-html-compile'
 ]);
 
-appModule(ncSaasModule);
-sparkline(ncSaasModule);
-featuresModule(ncSaasModule);
-teamModule(ncSaasModule);
-issuesModule(ncSaasModule);
-userModule(ncSaasModule);
-providersModule(ncSaasModule);
-projectModule(ncSaasModule);
-navigationModule(ncSaasModule);
-resourceModule(ncSaasModule);
-billingModule(ncSaasModule);
-authModule(ncSaasModule);
-invitationsModule(ncSaasModule);
-appstoreModule(ncSaasModule);
-formModule(ncSaasModule);
-awsModule(ncSaasModule);
-openstackModule(ncSaasModule);
-digitaloceanModule(ncSaasModule);
-premiumSupportModule(ncSaasModule);
-customerModule(ncSaasModule);
-plansModule(ncSaasModule);
-paymentsModule(ncSaasModule);
-eventsModule(ncSaasModule);
-alertsModule(ncSaasModule);
-routesModule(ncSaasModule);
-analyticsModule(ncSaasModule);
-offeringsModule(ncSaasModule);
-helpModule(ncSaasModule);
-costPlanningModule(ncSaasModule);
-coreModule(ncSaasModule);
-dashboardModule(ncSaasModule);
-filtersModule(ncSaasModule);
-quotasModule(ncSaasModule);
-tableModule(ncSaasModule);
-i18nModule(ncSaasModule);
-errorModule(ncSaasModule);
-configModule(ncSaasModule);
-controllersModule(ncSaasModule);
-directivesModule(ncSaasModule);
-servicesModule(ncSaasModule);
+rootModule(appModule);
+sparkline(appModule);
+featuresModule(appModule);
+teamModule(appModule);
+issuesModule(appModule);
+userModule(appModule);
+providersModule(appModule);
+projectModule(appModule);
+navigationModule(appModule);
+resourceModule(appModule);
+billingModule(appModule);
+authModule(appModule);
+invitationsModule(appModule);
+appstoreModule(appModule);
+formModule(appModule);
+awsModule(appModule);
+openstackModule(appModule);
+digitaloceanModule(appModule);
+premiumSupportModule(appModule);
+customerModule(appModule);
+plansModule(appModule);
+paymentsModule(appModule);
+eventsModule(appModule);
+alertsModule(appModule);
+routesModule(appModule);
+analyticsModule(appModule);
+offeringsModule(appModule);
+helpModule(appModule);
+costPlanningModule(appModule);
+coreModule(appModule);
+dashboardModule(appModule);
+filtersModule(appModule);
+quotasModule(appModule);
+tableModule(appModule);
+i18nModule(appModule);
+errorModule(appModule);
+configModule(appModule);
+controllersModule(appModule);
+directivesModule(appModule);
+servicesModule(appModule);
 
 bootstrap('ncsaas');
-
-const uiGravatarModule = angular.module('ui.gravatar');
-gravatarModule(uiGravatarModule);
