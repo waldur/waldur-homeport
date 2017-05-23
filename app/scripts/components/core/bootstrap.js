@@ -1,7 +1,7 @@
-import stableMode from '../../configs/modes/stable.json';
-import experimentalMode from '../../configs/modes/experimental.json';
+import stableMode from '../configs/modes/stable.json';
+import experimentalMode from '../configs/modes/experimental.json';
 
-const files = ['scripts/configs/config.json'];
+const files = ['scripts/components/configs/config.json'];
 const modes = {stableMode, experimentalMode};
 
 export default function bootstrap(modulename) {

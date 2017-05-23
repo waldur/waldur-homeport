@@ -33,7 +33,7 @@ msgstr "Federation dashboard"
 msgid "Organization name"
 msgstr "Federation name"
 
-#: app/scripts/configs/base-config.js:189
+#: app/scripts/components/configs/base-config.js:189
 msgid "Organization owner"
 msgstr "Federation administrator"
 
@@ -55,7 +55,7 @@ msgstr "Operational Tenant"
 msgid "Project dashboard"
 msgstr "Operational Tenant dashboard"
 
-#: app/scripts/configs/base-config.js:190
+#: app/scripts/components/configs/base-config.js:190
 msgid "Project manager"
 msgstr "Operationl Tenant manager"
 
@@ -78,7 +78,7 @@ msgstr "Operational Tenants list"
 msgid "Select project"
 msgstr "Select operational tenant"
 
-#: app/scripts/configs/base-config.js:191
+#: app/scripts/components/configs/base-config.js:191
 msgid "System administrator"
 msgstr "Operational Tenant administrator"
 

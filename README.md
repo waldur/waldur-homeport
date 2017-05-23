@@ -33,9 +33,9 @@ npm install
 bower install
 ```
 
-4. Create `/app/scripts/configs/custom-config.json`:
+4. Create `/app/scripts/components/configs/custom-config.json`:
 ```
-cp app/scripts/configs/config.json.example app/scripts/configs/config.json
+cp app/scripts/components/configs/config.json.example app/scripts/components/configs/config.json
 ```
 
 5. Configure `config.json`. Please read [Configuration guide](docs/config.md) to learn more.
