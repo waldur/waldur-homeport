@@ -1,14 +1,15 @@
 // @ngInject
 export class invitationUtilsService {
-  constructor(invitationService,
-              usersService,
-              ncUtilsFlash,
-              $q,
-              $auth,
-              $state,
-              $rootScope,
-              $timeout,
-              $uibModal) {
+  constructor(
+    invitationService,
+    usersService,
+    ncUtilsFlash,
+    $q,
+    $auth,
+    $state,
+    $rootScope,
+    $timeout,
+    $uibModal) {
     this.invitationService = invitationService;
     this.usersService = usersService;
     this.ncUtilsFlash = ncUtilsFlash;
