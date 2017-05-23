@@ -86,7 +86,7 @@ export class invitationUtilsService {
 
   shallChangeEmail(user, invitation) {
     if (!user.email || user.email === invitation.email) {
-      return true;
+      return this.$q.resolve(true);
     }
 
     const dialog = this.$uibModal.open({
