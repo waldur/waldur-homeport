@@ -42,7 +42,7 @@ import directivesModule from './components/directives/module';
 import servicesModule from './components/services/module';
 import rootModule from './components/module';
 
-const appModule = angular.module('ncsaas', [
+const appModule = angular.module('waldur', [
   'satellizer',
   'ui.router',
   'ngCookies',
@@ -108,4 +108,4 @@ controllersModule(appModule);
 directivesModule(appModule);
 servicesModule(appModule);
 
-bootstrap('ncsaas');
+bootstrap('waldur');
