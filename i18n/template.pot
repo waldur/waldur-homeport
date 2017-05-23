@@ -16,7 +16,7 @@ msgstr ""
 msgid "{quota_name} quota threshold has been reached for project {project_name}."
 msgstr ""
 
-#: app/scripts/directives/customer-balance.js:72
+#: app/scripts/components/directives/customer-balance.js:54
 msgid "{quotaUsage} out of {quotaLimit}."
 msgstr ""
 
@@ -52,7 +52,7 @@ msgstr ""
 msgid "1 year"
 msgstr ""
 
-#: app/scripts/routes/about.js:30
+#: app/scripts/components/routes/about.js:30
 #: app/views/about/index.html:3
 #: app/views/about/index.html:8
 msgid "About"
@@ -306,6 +306,9 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:27
 #: app/scripts/components/appstore/routes.js:42
+#: app/scripts/components/configs/base-config.js:103
+#: app/scripts/components/configs/base-config.js:122
+#: app/scripts/components/configs/base-config.js:50
 #: app/scripts/components/dashboard/constants.js:7
 #: app/scripts/components/project/project-workspace.js:45
 #: app/scripts/components/project/routes.js:132
@@ -468,6 +471,7 @@ msgstr ""
 msgid "Block devices"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:42
 #: app/scripts/configs/base-config.js:45
 msgid "Block storage"
 msgstr ""
@@ -1047,6 +1051,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:204
 #: app/scripts/configs/base-config.js:210
 msgid "English"
 msgstr ""
@@ -1082,6 +1087,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:208
 #: app/scripts/configs/base-config.js:214
 msgid "Estonian"
 msgstr ""
@@ -1370,6 +1376,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:69
 #: app/scripts/configs/base-config.js:72
 msgid "IaaS"
 msgstr ""
@@ -1408,7 +1415,7 @@ msgstr ""
 msgid "Import private cloud"
 msgstr ""
 
-#: app/scripts/components/project/routes.js:191
+#: app/scripts/components/project/routes.js:192
 msgid "Import resources from provider"
 msgstr ""
 
@@ -1512,7 +1519,7 @@ msgstr ""
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:134
+#: app/scripts/components/invitations/utils.js:133
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
@@ -1546,15 +1553,15 @@ msgstr ""
 msgid "Invitation has been sent again."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:129
+#: app/scripts/components/invitations/utils.js:128
 msgid "Invitation is not found."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:71
+#: app/scripts/components/invitations/utils.js:70
 msgid "Invitation is not valid anymore."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:132
+#: app/scripts/components/invitations/utils.js:131
 msgid "Invitation is not valid."
 msgstr ""
 
@@ -2384,6 +2391,7 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:55
 #: app/scripts/configs/base-config.js:58
 msgid "Oracle database and SugarCRM."
 msgstr ""
@@ -2477,6 +2485,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:186
 #: app/scripts/configs/base-config.js:192
 msgid "Organization owner"
 msgstr ""
@@ -2704,6 +2713,7 @@ msgstr ""
 msgid "Premium support"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:63
 #: app/scripts/configs/base-config.js:66
 msgid "Premium support service."
 msgstr ""
@@ -2767,12 +2777,14 @@ msgid "Priority"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:5
-#: app/scripts/routes/about.js:45
+#: app/scripts/components/routes/about.js:45
 msgid "Privacy policy"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:21
 #: app/scripts/components/appstore/routes.js:22
+#: app/scripts/components/configs/base-config.js:34
+#: app/scripts/components/configs/base-config.js:96
 #: app/scripts/components/dashboard/constants.js:15
 #: app/scripts/components/project/project-workspace.js:38
 #: app/scripts/components/project/projects-list.js:117
@@ -2865,6 +2877,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:187
 #: app/scripts/configs/base-config.js:193
 msgid "Project manager"
 msgstr ""
@@ -2981,10 +2994,12 @@ msgstr ""
 msgid "Providers events"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:47
 #: app/scripts/configs/base-config.js:50
 msgid "Provision persistent storage volumes in available Providers."
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:31
 #: app/scripts/configs/base-config.js:34
 msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
@@ -2997,6 +3012,7 @@ msgstr ""
 msgid "Purchase"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:39
 #: app/scripts/configs/base-config.js:42
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
@@ -3063,6 +3079,7 @@ msgstr ""
 msgid "Reason"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:17
 #: app/scripts/configs/base-config.js:20
 msgid "Reason unknown, please contact support."
 msgstr ""
@@ -3433,7 +3450,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: app/scripts/controllers/base-controller-class.js:41
+#: app/scripts/components/controllers/base-controller-class.js:32
 msgid "Saving of {vm_name} was successful."
 msgstr ""
 
@@ -3861,6 +3878,7 @@ msgid "Storage limit GB"
 msgstr ""
 
 #: app/scripts/components/appstore/routes.js:52
+#: app/scripts/components/configs/base-config.js:110
 #: app/scripts/configs/base-config.js:113
 msgid "Storages"
 msgstr ""
@@ -3900,6 +3918,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:58
 #: app/scripts/components/navigation/header/support-link.html:4
 #: app/scripts/components/project/project-workspace.js:67
 #: app/scripts/configs/base-config.js:61
@@ -3939,6 +3958,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:188
 #: app/scripts/configs/base-config.js:194
 msgid "System administrator"
 msgstr ""
@@ -3996,7 +4016,7 @@ msgstr ""
 msgid "Terms"
 msgstr ""
 
-#: app/scripts/routes/about.js:15
+#: app/scripts/components/routes/about.js:15
 msgid "Terms of service"
 msgstr ""
 
@@ -4211,19 +4231,19 @@ msgstr ""
 msgid "Unable to fetch project providers."
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:217
+#: app/scripts/components/controllers/import-resource-controller.js:196
 msgid "Unable to get list of imported resources."
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:245
+#: app/scripts/components/controllers/import-resource-controller.js:224
 msgid "Unable to get list of resources for service."
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:196
+#: app/scripts/components/controllers/import-resource-controller.js:174
 msgid "Unable to get list of tenants."
 msgstr ""
 
-#: app/scripts/controllers/import-resource-controller.js:271
+#: app/scripts/components/controllers/import-resource-controller.js:250
 msgid "Unable to import resource {resourceName}."
 msgstr ""
 
@@ -4453,6 +4473,9 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:15
 #: app/scripts/components/appstore/routes.js:32
+#: app/scripts/components/configs/base-config.js:118
+#: app/scripts/components/configs/base-config.js:26
+#: app/scripts/components/configs/base-config.js:89
 #: app/scripts/components/dashboard/constants.js:11
 #: app/scripts/components/project/project-workspace.js:31
 #: app/scripts/components/project/routes.js:124
@@ -4688,7 +4711,7 @@ msgstr ""
 msgid "Your invitation is being processed."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:79
+#: app/scripts/components/invitations/utils.js:78
 msgid "Your invitation was accepted."
 msgstr ""
 
