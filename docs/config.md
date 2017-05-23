@@ -8,10 +8,10 @@ configuration files are loaded and their options are merged together with defaul
 
  - /scripts/components/configs/base-config.js - default configuration settings.
 
- - /scripts/components/configs/modes/stable.js - stable mode configuration settings.
+ - /scripts/configs/modes/stable.js - stable mode configuration settings.
 
- - /scripts/components/configs/modes/experimental.js - experimental mode configuration settings.
+ - /scripts/configs/modes/experimental.js - experimental mode configuration settings.
 
- - /scripts/components/configs/config.json - custom configuration settings.
+ - /scripts/configs/config.json - custom configuration settings.
 
 Please follow [Administration guide](https://opennode.atlassian.net/wiki/display/WD/HomePort+configuration) to learn more.
