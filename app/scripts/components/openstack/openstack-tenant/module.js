@@ -3,6 +3,7 @@ import tabsConfig from './tabs';
 import OpenStackTenantConfig from './openstack-tenant-config';
 import openstackTenantCheckoutSummary from './openstack-tenant-checkout-summary';
 import openstackTenantChangePackageDialog from './openstack-tenant-change-package';
+import openstackTenantRequestDirectAccess from './openstack-tenant-request-direct-access';
 import openstackTenantSummary from './openstack-tenant-summary';
 import packageTemplatesService from './package-templates-service';
 import openstackPackagesService from './openstack-packages-service';
@@ -22,6 +23,7 @@ export default module => {
   module.run(costPlanningConfig);
   module.component('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
   module.component('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
+  module.component('openstackTenantRequestDirectAccess', openstackTenantRequestDirectAccess);
   module.component('openstackTenantSummary', openstackTenantSummary);
   module.service('packageTemplatesService', packageTemplatesService);
   module.service('openstackPackagesService', openstackPackagesService);
