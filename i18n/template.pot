@@ -171,7 +171,7 @@ msgstr ""
 msgid "Add project member"
 msgstr ""
 
-#: app/scripts/components/providers/create.html:154
+#: app/scripts/components/providers/create.html:155
 #: app/scripts/components/providers/provider-list.js:182
 msgid "Add provider"
 msgstr ""
@@ -184,7 +184,7 @@ msgstr ""
 msgid "Add SLA"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:62
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:64
 msgid "Add snapshots"
 msgstr ""
 
@@ -193,11 +193,11 @@ msgstr ""
 msgid "Add SSH key"
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-vms-list.js:49
+#: app/scripts/components/resource/list/resource-vms-list.js:51
 msgid "Add virtual machine"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:64
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:66
 msgid "Add volumes"
 msgstr ""
 
@@ -282,7 +282,7 @@ msgstr ""
 msgid "An error occurred during policy update."
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:34
+#: app/scripts/components/customer/customer-policies.js:35
 msgid "An error occurred on policies update."
 msgstr ""
 
@@ -310,9 +310,9 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js:45
 #: app/scripts/components/project/routes.js:132
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
-#: app/scripts/configs/base-config.js:107
-#: app/scripts/configs/base-config.js:126
-#: app/scripts/configs/base-config.js:54
+#: app/scripts/configs/base-config.js:106
+#: app/scripts/configs/base-config.js:125
+#: app/scripts/configs/base-config.js:53
 msgid "Applications"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:51
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:16
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:44
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:45
 msgid "Attached to"
 msgstr ""
 
@@ -468,7 +468,7 @@ msgstr ""
 msgid "Block devices"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:46
+#: app/scripts/configs/base-config.js:45
 msgid "Block storage"
 msgstr ""
 
@@ -480,7 +480,7 @@ msgstr ""
 msgid "Both VMs and applications are counted as resources."
 msgstr ""
 
-#: app/scripts/components/providers/create.html:112
+#: app/scripts/components/providers/create.html:113
 #: app/scripts/components/providers/details/provider-settings.html:65
 msgid "Browse"
 msgstr ""
@@ -519,7 +519,7 @@ msgstr ""
 #: app/scripts/components/plans/plans-list.html:37
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:32
 #: app/scripts/components/project/project-create.html:72
-#: app/scripts/components/providers/create.html:159
+#: app/scripts/components/providers/create.html:160
 #: app/scripts/components/resource/actions/dialog/action-dialog.html:35
 #: app/scripts/components/team/add-project-member.html:54
 #: app/scripts/components/team/add-team-member.html:86
@@ -652,7 +652,7 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:96
+#: app/scripts/components/customer/customer-manage.js:101
 #: app/scripts/components/table/base-list-controller.js:134
 msgid "Confirm deletion?"
 msgstr ""
@@ -720,7 +720,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/module.js:57
 #: app/scripts/components/openstack/openstack-volume/module.js:71
 #: app/scripts/components/project/project-issues.js:31
-#: app/scripts/components/resource/list/resources-list.js:134
+#: app/scripts/components/resource/list/resources-list.js:138
 #: app/scripts/components/resource/tabs/resource-issues.js:26
 #: app/scripts/components/user/hooks/hook-details.html:77
 msgid "Create"
@@ -808,7 +808,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:46
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:45
 #: app/scripts/components/resource/summary/resource-summary-base.html:40
-#: app/scripts/components/team/customer-permissions-log-list.js:37
+#: app/scripts/components/team/customer-permissions-log-list.js:41
 #: app/scripts/components/team/project-permissions-log-list.js:37
 msgid "Created"
 msgstr ""
@@ -1038,7 +1038,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:207
+#: app/scripts/configs/base-config.js:208
 msgid "English"
 msgstr ""
 
@@ -1073,7 +1073,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:211
+#: app/scripts/configs/base-config.js:212
 msgid "Estonian"
 msgstr ""
 
@@ -1158,7 +1158,7 @@ msgid "Existing quota usage: {usage}"
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.html:48
-#: app/scripts/components/team/customer-permissions-log-list.js:42
+#: app/scripts/components/team/customer-permissions-log-list.js:47
 #: app/scripts/components/team/project-permissions-log-list.js:42
 msgid "Expiration time"
 msgstr ""
@@ -1183,7 +1183,7 @@ msgstr ""
 msgid "Extend OpenStack volume"
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-vms-list.js:35
+#: app/scripts/components/resource/list/resource-vms-list.js:36
 #: app/scripts/components/resource/summary/virtual-machine-summary.html:42
 msgid "External IP"
 msgstr ""
@@ -1361,7 +1361,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:73
+#: app/scripts/configs/base-config.js:72
 msgid "IaaS"
 msgstr ""
 
@@ -1382,7 +1382,7 @@ msgstr ""
 msgid "Image name"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:117
+#: app/scripts/components/resource/list/resources-list.js:121
 #: app/views/import/import.html:150
 msgid "Import"
 msgstr ""
@@ -1391,7 +1391,7 @@ msgstr ""
 msgid "Import application"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:101
+#: app/scripts/components/resource/list/resources-list.js:105
 msgid "Import is not possible as there are no personal provider accounts registered."
 msgstr ""
 
@@ -1403,19 +1403,19 @@ msgstr ""
 msgid "Import resources from provider"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:104
+#: app/scripts/components/resource/list/resources-list.js:108
 msgid "Import resources from the registered provider accounts."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:59
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:61
 msgid "Import snapshots"
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-vms-list.js:46
+#: app/scripts/components/resource/list/resource-vms-list.js:48
 msgid "Import virtual machine"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:61
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:63
 msgid "Import volumes"
 msgstr ""
 
@@ -1503,7 +1503,7 @@ msgstr ""
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:108
+#: app/scripts/components/invitations/utils.js:120
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
@@ -1533,11 +1533,11 @@ msgstr ""
 msgid "Invitation has been sent again."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:103
+#: app/scripts/components/invitations/utils.js:115
 msgid "Invitation is not found."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:106
+#: app/scripts/components/invitations/utils.js:118
 msgid "Invitation is not valid."
 msgstr ""
 
@@ -1909,7 +1909,7 @@ msgstr ""
 #: app/scripts/components/providers/details/provider-settings.js:44
 #: app/scripts/components/providers/provider-list.js:55
 #: app/scripts/components/resource/actions/constants.js:20
-#: app/scripts/components/resource/list/resources-list.js:41
+#: app/scripts/components/resource/list/resources-list.js:42
 #: app/views/directives/importable-resources.html:14
 msgid "Name"
 msgstr ""
@@ -2230,7 +2230,7 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
-#: app/scripts/components/providers/create.html:143
+#: app/scripts/components/providers/create.html:144
 msgid "Not all required fields have been entered."
 msgstr ""
 
@@ -2259,7 +2259,7 @@ msgstr ""
 msgid "Not enough data for resource analysis."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:46
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:48
 msgid "Not known"
 msgstr ""
 
@@ -2335,8 +2335,12 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:63
-msgid "Only staff can update policies or remove organization."
+#: app/scripts/components/customer/customer-manage.html:65
+msgid "Only staff can remove organization."
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.html:52
+msgid "Only staff can update organization policies."
 msgstr ""
 
 #: app/scripts/components/alerts/alert-filter.html:1
@@ -2350,7 +2354,7 @@ msgstr ""
 msgid "Open in Service Desk"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:157
+#: app/scripts/components/resource/list/resources-list.js:161
 msgid "Open map"
 msgstr ""
 
@@ -2362,7 +2366,7 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:59
+#: app/scripts/configs/base-config.js:58
 msgid "Oracle database and SugarCRM."
 msgstr ""
 
@@ -2417,7 +2421,7 @@ msgstr ""
 msgid "Organization {organizationName} is updated."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:53
+#: app/scripts/components/customer/customer-manage.html:55
 msgid "Organization actions"
 msgstr ""
 
@@ -2425,7 +2429,7 @@ msgstr ""
 msgid "Organization code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:76
+#: app/scripts/components/customer/customer-manage.js:81
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
@@ -2455,7 +2459,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:189
+#: app/scripts/configs/base-config.js:190
 msgid "Organization owner"
 msgstr ""
 
@@ -2463,7 +2467,7 @@ msgstr ""
 msgid "Organization owner role expires on"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:26
+#: app/scripts/components/customer/customer-policies.js:27
 msgid "Organization policies have been updated."
 msgstr ""
 
@@ -2471,8 +2475,8 @@ msgstr ""
 msgid "Organization registration code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:84
-#: app/scripts/components/customer/customer-manage.js:87
+#: app/scripts/components/customer/customer-manage.js:89
+#: app/scripts/components/customer/customer-manage.js:92
 msgid "Organization removal"
 msgstr ""
 
@@ -2670,7 +2674,7 @@ msgstr ""
 msgid "Premium support"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:67
+#: app/scripts/configs/base-config.js:66
 msgid "Premium support service."
 msgstr ""
 
@@ -2744,8 +2748,8 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js:117
 #: app/scripts/components/project/routes.js:140
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
-#: app/scripts/configs/base-config.js:100
-#: app/scripts/configs/base-config.js:38
+#: app/scripts/configs/base-config.js:37
+#: app/scripts/configs/base-config.js:99
 msgid "Private clouds"
 msgstr ""
 
@@ -2831,7 +2835,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:190
+#: app/scripts/configs/base-config.js:191
 msgid "Project manager"
 msgstr ""
 
@@ -2879,7 +2883,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-compare-list.js:51
 #: app/scripts/components/appstore/appstore-store.html:32
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:9
-#: app/scripts/components/resource/list/resources-list.js:49
+#: app/scripts/components/resource/list/resources-list.js:51
 #: app/scripts/components/resource/summary/resource-summary-base.html:21
 #: app/views/help/list.html:10
 msgid "Provider"
@@ -2947,11 +2951,11 @@ msgstr ""
 msgid "Providers events"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:51
+#: app/scripts/configs/base-config.js:50
 msgid "Provision persistent storage volumes in available Providers."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:35
+#: app/scripts/configs/base-config.js:34
 msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
 
@@ -2963,7 +2967,7 @@ msgstr ""
 msgid "Purchase"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:43
+#: app/scripts/configs/base-config.js:42
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
@@ -2985,7 +2989,7 @@ msgstr ""
 #: app/scripts/components/error/routes.js:25
 #: app/scripts/components/project/projects-list.js:153
 #: app/scripts/components/providers/provider-list.js:178
-#: app/scripts/components/resource/list/resources-list.js:98
+#: app/scripts/components/resource/list/resources-list.js:102
 #: app/scripts/components/resource/resource-provision-policy.js:14
 msgid "Quota has been reached."
 msgstr ""
@@ -3024,12 +3028,12 @@ msgstr ""
 msgid "Read through terms and conditions."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:89
+#: app/scripts/components/customer/customer-manage.js:94
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:21
+#: app/scripts/configs/base-config.js:20
 msgid "Reason unknown, please contact support."
 msgstr ""
 
@@ -3105,7 +3109,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:58
+#: app/scripts/components/customer/customer-manage.html:60
 msgid "Remove organization"
 msgstr ""
 
@@ -3155,12 +3159,12 @@ msgstr ""
 msgid "Request name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:91
+#: app/scripts/components/customer/customer-manage.js:96
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:79
+#: app/scripts/components/resource/actions/action-utils-service.js:82
 msgid "Request to {action} has been accepted."
 msgstr ""
 
@@ -3354,7 +3358,7 @@ msgstr ""
 #: app/scripts/components/invitations/invitations-list.js:105
 #: app/scripts/components/team/add-project-member.html:27
 #: app/scripts/components/team/add-team-member.html:47
-#: app/scripts/components/team/customer-permissions-log-list.js:32
+#: app/scripts/components/team/customer-permissions-log-list.js:35
 #: app/scripts/components/team/project-permissions-log-list.js:32
 #: app/scripts/components/user/user-projects.js:41
 msgid "Role"
@@ -3768,7 +3772,7 @@ msgstr ""
 #: app/scripts/components/plans/plan-agreements-list.js:26
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:38
 #: app/scripts/components/providers/provider-list.js:62
-#: app/scripts/components/resource/list/resources-list.js:57
+#: app/scripts/components/resource/list/resources-list.js:60
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
 #: app/scripts/components/user/hooks/hook-list.js:26
 msgid "State"
@@ -3814,7 +3818,7 @@ msgid "Storage limit GB"
 msgstr ""
 
 #: app/scripts/components/appstore/routes.js:52
-#: app/scripts/configs/base-config.js:114
+#: app/scripts/configs/base-config.js:113
 msgid "Storages"
 msgstr ""
 
@@ -3855,7 +3859,7 @@ msgstr ""
 
 #: app/scripts/components/navigation/header/support-link.html:4
 #: app/scripts/components/project/project-workspace.js:67
-#: app/scripts/configs/base-config.js:62
+#: app/scripts/configs/base-config.js:61
 msgid "Support"
 msgstr ""
 
@@ -3896,7 +3900,7 @@ msgstr ""
 msgid "Synchronise quotas"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:191
+#: app/scripts/configs/base-config.js:192
 msgid "System administrator"
 msgstr ""
 
@@ -3944,7 +3948,7 @@ msgstr ""
 msgid "Tenant name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:33
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:34
 msgid "Tenant package has been changed."
 msgstr ""
 
@@ -4133,7 +4137,7 @@ msgstr ""
 msgid "Unable to cancel invitation."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:35
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:38
 msgid "Unable to change tenant package."
 msgstr ""
 
@@ -4284,7 +4288,7 @@ msgstr ""
 #: app/scripts/components/team/add-project-member.html:10
 #: app/scripts/components/team/add-project-member.html:20
 #: app/scripts/components/team/add-team-member.html:11
-#: app/scripts/components/team/customer-permissions-log-list.js:22
+#: app/scripts/components/team/customer-permissions-log-list.js:23
 #: app/scripts/components/team/project-permissions-log-list.js:22
 msgid "User"
 msgstr ""
@@ -4337,6 +4341,10 @@ msgstr ""
 msgid "User {user_full_name} authenticated successfully with username and password."
 msgstr ""
 
+#: app/scripts/components/invitations/utils.js:74
+msgid "User and invitation email do not match."
+msgstr ""
+
 #: app/scripts/components/user/routes.js:6
 #: app/scripts/components/user/user-details.html:9
 msgid "User dashboard"
@@ -4351,7 +4359,7 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
-#: app/scripts/components/team/customer-permissions-log-list.js:27
+#: app/scripts/components/team/customer-permissions-log-list.js:29
 #: app/scripts/components/team/project-permissions-log-list.js:27
 msgid "User email"
 msgstr ""
@@ -4405,9 +4413,9 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js:31
 #: app/scripts/components/project/routes.js:124
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
-#: app/scripts/configs/base-config.js:122
-#: app/scripts/configs/base-config.js:30
-#: app/scripts/configs/base-config.js:93
+#: app/scripts/configs/base-config.js:121
+#: app/scripts/configs/base-config.js:29
+#: app/scripts/configs/base-config.js:92
 msgid "Virtual machines"
 msgstr ""
 
@@ -4426,7 +4434,7 @@ msgid "VMs"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:13
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:43
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:44
 msgid "Volume"
 msgstr ""
 
@@ -4465,7 +4473,7 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:90
+#: app/scripts/components/customer/customer-manage.js:95
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
@@ -4485,7 +4493,7 @@ msgstr ""
 msgid "You can change that in <a href=\"{link}\">provider management</a>."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:55
+#: app/scripts/components/customer/customer-manage.html:57
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
@@ -4636,7 +4644,7 @@ msgstr ""
 msgid "Your invitation is being processed."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:66
+#: app/scripts/components/invitations/utils.js:79
 msgid "Your invitation was accepted."
 msgstr ""
 

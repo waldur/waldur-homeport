@@ -69,9 +69,9 @@ export class invitationUtilsService {
     return this.loadUserInvitation(token).then(context => {
       let user = context.user;
       let invitation = context.invitation;
-      if (this.validateInvitationEmail && user.email && user.email === invitation.email) {
+      if (this.validateInvitationEmail && user.email && user.email !== invitation.email) {
         this.invitationService.clearInvitationToken();
-        return this.$q.reject(gettext('Invitation is not valid.'));
+        return this.$q.reject(gettext('User and invitation email do not match.'));
       }
 
       return this.shallChangeEmail(user, invitation).then(replace_email => {
