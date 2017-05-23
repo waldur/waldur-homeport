@@ -10,10 +10,8 @@ import $ from 'jquery';
 // Can be replaced with a providePlugin when slimscroll is migrated to webpack
 import angular from 'angular';
 window.gettext = angular.identity;
-
-import '../../bower_components/slimScroll/jquery.slimscroll.js';
+require('!script!../../bower_components/slimScroll/jquery.slimscroll.js');
 import '../../bower_components/angular-slimscroll/angular-slimscroll.js';
-// end
 import 'angular-cron-jobs';
 import 'angular-cron-jobs/dist/angular-cron-jobs.css';
 import 'angular-animate';

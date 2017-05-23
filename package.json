@@ -111,6 +111,7 @@
     "karma-webpack": "^1.8.0",
     "node-sass": "~3.10.1",
     "sass-loader": "^4.0.2",
+    "script-loader": "^0.7.0",
     "style-loader": "^0.13.1"
   }
 }
