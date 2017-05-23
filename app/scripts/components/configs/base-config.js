@@ -173,6 +173,9 @@ const ENV = {
   resourcesTimerInterval: 30, // seconds
   countersTimerInterval: 30, // seconds
 
+  // an interval in milliseconds to check invitation if server returns 500 or there is a network error.
+  invitationCheckInterval: 5000,
+
   // refresh timeout for a single resource polling.
   resourcePollingEnabled: true,
   singleResourcePollingTimeout: 1000 * 2,
