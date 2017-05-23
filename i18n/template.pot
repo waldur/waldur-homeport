@@ -310,9 +310,9 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js:45
 #: app/scripts/components/project/routes.js:132
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
-#: app/scripts/configs/base-config.js:106
-#: app/scripts/configs/base-config.js:125
-#: app/scripts/configs/base-config.js:53
+#: app/scripts/components/configs/base-config.js:106
+#: app/scripts/components/configs/base-config.js:125
+#: app/scripts/components/configs/base-config.js:53
 msgid "Applications"
 msgstr ""
 
@@ -468,7 +468,7 @@ msgstr ""
 msgid "Block devices"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:45
+#: app/scripts/components/configs/base-config.js:45
 msgid "Block storage"
 msgstr ""
 
@@ -1043,7 +1043,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:207
+#: app/scripts/components/configs/base-config.js:207
 msgid "English"
 msgstr ""
 
@@ -1078,7 +1078,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:211
+#: app/scripts/components/configs/base-config.js:211
 msgid "Estonian"
 msgstr ""
 
@@ -1366,7 +1366,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:72
+#: app/scripts/components/configs/base-config.js:72
 msgid "IaaS"
 msgstr ""
 
@@ -2371,7 +2371,7 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:58
+#: app/scripts/components/configs/base-config.js:58
 msgid "Oracle database and SugarCRM."
 msgstr ""
 
@@ -2464,7 +2464,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:189
+#: app/scripts/components/configs/base-config.js:189
 msgid "Organization owner"
 msgstr ""
 
@@ -2687,7 +2687,7 @@ msgstr ""
 msgid "Premium support"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:66
+#: app/scripts/components/configs/base-config.js:66
 msgid "Premium support service."
 msgstr ""
 
@@ -2761,8 +2761,8 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js:117
 #: app/scripts/components/project/routes.js:140
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
-#: app/scripts/configs/base-config.js:37
-#: app/scripts/configs/base-config.js:99
+#: app/scripts/components/configs/base-config.js:37
+#: app/scripts/components/configs/base-config.js:99
 msgid "Private clouds"
 msgstr ""
 
@@ -2848,7 +2848,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:190
+#: app/scripts/components/configs/base-config.js:190
 msgid "Project manager"
 msgstr ""
 
@@ -2964,11 +2964,11 @@ msgstr ""
 msgid "Providers events"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:50
+#: app/scripts/components/configs/base-config.js:50
 msgid "Provision persistent storage volumes in available Providers."
 msgstr ""
 
-#: app/scripts/configs/base-config.js:34
+#: app/scripts/components/configs/base-config.js:34
 msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
 
@@ -2980,7 +2980,7 @@ msgstr ""
 msgid "Purchase"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:42
+#: app/scripts/components/configs/base-config.js:42
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
@@ -3046,7 +3046,7 @@ msgstr ""
 msgid "Reason"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:20
+#: app/scripts/components/configs/base-config.js:20
 msgid "Reason unknown, please contact support."
 msgstr ""
 
@@ -3844,7 +3844,7 @@ msgid "Storage limit GB"
 msgstr ""
 
 #: app/scripts/components/appstore/routes.js:52
-#: app/scripts/configs/base-config.js:113
+#: app/scripts/components/configs/base-config.js:113
 msgid "Storages"
 msgstr ""
 
@@ -3885,7 +3885,7 @@ msgstr ""
 
 #: app/scripts/components/navigation/header/support-link.html:4
 #: app/scripts/components/project/project-workspace.js:67
-#: app/scripts/configs/base-config.js:61
+#: app/scripts/components/configs/base-config.js:61
 msgid "Support"
 msgstr ""
 
@@ -3922,7 +3922,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: app/scripts/configs/base-config.js:191
+#: app/scripts/components/configs/base-config.js:191
 msgid "System administrator"
 msgstr ""
 
@@ -4436,9 +4436,9 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js:31
 #: app/scripts/components/project/routes.js:124
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
-#: app/scripts/configs/base-config.js:121
-#: app/scripts/configs/base-config.js:29
-#: app/scripts/configs/base-config.js:92
+#: app/scripts/components/configs/base-config.js:121
+#: app/scripts/components/configs/base-config.js:29
+#: app/scripts/components/configs/base-config.js:92
 msgid "Virtual machines"
 msgstr ""
 

@@ -71,8 +71,8 @@ msgstr "API token'i eluiga"
 
 #: app/scripts/components/analytics/resource-chart-service.js:27
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
-#: app/scripts/configs/base-config.js:103
-#: app/scripts/configs/base-config.js:122 app/scripts/configs/base-config.js:55
+#: app/scripts/components/configs/base-config.js:103
+#: app/scripts/components/configs/base-config.js:122 app/scripts/components/configs/base-config.js:55
 msgid "Applications"
 msgstr "Rakendused"
 
@@ -92,7 +92,7 @@ msgstr "Varundamine"
 msgid "Block devices"
 msgstr "Plokkseadmed "
 
-#: app/scripts/configs/base-config.js:47
+#: app/scripts/components/configs/base-config.js:47
 msgid "Block storage"
 msgstr "Plokk"
 
@@ -175,7 +175,7 @@ msgstr "Lõppaeg"
 msgid "Error message"
 msgstr "Veateade"
 
-#: app/scripts/configs/base-config.js:211
+#: app/scripts/components/configs/base-config.js:211
 msgid "Estonian"
 msgstr "Eesti"
 
@@ -291,7 +291,7 @@ msgstr "Organisatsioon töölaud"
 msgid "Organization name"
 msgstr "Asutuse nimi"
 
-#: app/scripts/configs/base-config.js:189
+#: app/scripts/components/configs/base-config.js:189
 msgid "Organization owner"
 msgstr "Asutuse peakasutaja"
 
@@ -334,7 +334,7 @@ msgstr "Privaatsuspoliitika"
 #: app/scripts/components/analytics/resource-chart-service.js:21
 #: app/scripts/components/project/projects-list.js:105
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
-#: app/scripts/configs/base-config.js:38 app/scripts/configs/base-config.js:95
+#: app/scripts/components/configs/base-config.js:38 app/scripts/components/configs/base-config.js:95
 msgid "Private clouds"
 msgstr "Privaatpilved"
 
@@ -353,7 +353,7 @@ msgstr "Projekt"
 msgid "Project dashboard"
 msgstr "Projekti töölaud"
 
-#: app/scripts/configs/base-config.js:190
+#: app/scripts/components/configs/base-config.js:190
 msgid "Project manager"
 msgstr "Projektihaldur"
 
@@ -506,7 +506,7 @@ msgid "Summary"
 msgstr "Kokkuvõte"
 
 #: app/scripts/components/navigation/header/support-link.html:4
-#: app/scripts/configs/base-config.js:63
+#: app/scripts/components/configs/base-config.js:63
 msgid "Support"
 msgstr "Tugi"
 
@@ -517,7 +517,7 @@ msgstr "Tugi"
 msgid "Synchronise"
 msgstr "Sünkroniseeri"
 
-#: app/scripts/configs/base-config.js:191
+#: app/scripts/components/configs/base-config.js:191
 msgid "System administrator"
 msgstr "Süsteemiadministraator"
 
@@ -575,8 +575,8 @@ msgstr "Versioon"
 
 #: app/scripts/components/analytics/resource-chart-service.js:15
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
-#: app/scripts/configs/base-config.js:118 app/scripts/configs/base-config.js:30
-#: app/scripts/configs/base-config.js:88
+#: app/scripts/components/configs/base-config.js:118 app/scripts/components/configs/base-config.js:30
+#: app/scripts/components/configs/base-config.js:88
 msgid "Virtual machines"
 msgstr "Virtuaalmasinad"
 

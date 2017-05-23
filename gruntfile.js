@@ -240,23 +240,13 @@ module.exports = function (grunt) {
         }
       }
     },
-
     concat: {
       build: {
         src: [
+          'app/static/js/class.js',
           'app/static/js/vendor-bundle.js',
           'app/static/js/datatables/pdfmake.min.js',
           'app/static/js/datatables/vfs_fonts.js',
-          'app/static/js/jquery.slimscroll.min.js',
-          'app/static/js/angular/angular-slimscroll.js',
-          'app/scripts/class.js',
-          'app/scripts/inspinia.js',
-          'app/scripts/app.js',
-          'app/scripts/utils.js',
-          'app/scripts/configs/*.js',
-          'app/scripts/controllers/*.js',
-          'app/scripts/directives/*.js',
-          'app/scripts/services/*.js',
           'app/static/js/index-bundle.js',
         ],
         dest: 'app/static/js/main/main.js'
@@ -295,7 +285,6 @@ module.exports = function (grunt) {
         dest: 'app/test.html'
       }
     },
-
     protractor: {
       options: {
         configFile: "test/protractor.conf.js", // Default config file
