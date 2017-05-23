@@ -8,8 +8,7 @@ export function CustomerBalanceController(
   $scope,
   $state,
   $window,
-  coreUtils,
-  usersService) {
+  coreUtils) {
 
   function init() {
     if (!ENV.featuresVisible && (ENV.toBeFeatures.indexOf('payment') > -1)) {
@@ -126,7 +125,6 @@ export function CustomerBalanceController(
 
   function refresh() {
     currentStateService.getCustomer().then(function(customer) {
-      var currentUser = usersService.currentUser;
       $scope.model = customer;
       $scope.plan = getPlan(customer);
       getChart(customer);

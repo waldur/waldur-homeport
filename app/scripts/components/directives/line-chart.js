@@ -28,9 +28,9 @@ export default function lineChart() {
       var max = d3.max(data, function(d) { return d; });
       var min = d3.min(data, function(d) { return d; });
 
-      var div = d3.select("body").append("div")
-        .attr("class", "chart-tooltip")
-        .style("opacity", 0);
+      var div = d3.select('body').append('div')
+        .attr('class', 'chart-tooltip')
+        .style('opacity', 0);
 
       scope.$on('$destroy', function() {
         div.remove();
@@ -50,44 +50,44 @@ export default function lineChart() {
           return y(d);
         });
 
-      var graph = d3.select(element.children()[0]).append("svg:svg")
-        .attr("width", w + m[1] + m[3])
-        .attr("height", h + m[0] + m[2])
-        .append("svg:g")
-        .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+      var graph = d3.select(element.children()[0]).append('svg:svg')
+        .attr('width', w + m[1] + m[3])
+        .attr('height', h + m[0] + m[2])
+        .append('svg:g')
+        .attr('transform', 'translate(' + m[3] + ',' + m[0] + ')');
 
       var xAxis = d3.svg.axis().scale(x).tickSize(-h).tickSubdivide(true)
         .tickFormat(function(d) {
           return scope.data.x[d];
         });
 
-      graph.append("svg:g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + h + ")")
+      graph.append('svg:g')
+        .attr('class', 'x axis')
+        .attr('transform', 'translate(0,' + h + ')')
         .call(xAxis)
-        .selectAll("text")
-        .style("text-anchor", "end")
-        .style("font-size", "12px")
-        .attr("dx", "-.8em")
-        .attr("dy", ".15em")
-        .attr("transform", "rotate(-65)" );
+        .selectAll('text')
+        .style('text-anchor', 'end')
+        .style('font-size', '12px')
+        .attr('dx', '-.8em')
+        .attr('dy', '.15em')
+        .attr('transform', 'rotate(-65)' );
 
 
-      var yAxisLeft = d3.svg.axis().scale(y).ticks(4).orient("left").tickFormat(d3.format("d"));
-      graph.append("svg:g")
-        .attr("class", "y axis")
-        .attr("transform", "translate(-25,0)")
+      var yAxisLeft = d3.svg.axis().scale(y).ticks(4).orient('left').tickFormat(d3.format('d'));
+      graph.append('svg:g')
+        .attr('class', 'y axis')
+        .attr('transform', 'translate(-25,0)')
         .call(yAxisLeft);
 
       graph
         .append('svg:g')
-        .attr("class", "line");
+        .attr('class', 'line');
 
       var pathContainers = graph.selectAll('g.line');
 
       pathContainers
-        .append("svg:path")
-        .attr("d", line(data));
+        .append('svg:path')
+        .attr('d', line(data));
 
       scope.data.y.forEach(function(yValue, xValue) {
         pathContainers
@@ -96,19 +96,19 @@ export default function lineChart() {
           .attr('cy', function () { return y(yValue); })
           .attr('r', 5)
           .attr('value', scope.data.x[xValue] + ': ' + yValue)
-          .on("mouseenter", function() {
+          .on('mouseenter', function() {
             var name = d3.event.toElement.getAttribute('value');
             div.transition()
               .duration(200)
-              .style("opacity", .9)
-              .style("display", "block");
+              .style('opacity', .9)
+              .style('display', 'block');
             div.html(name)
-              .style("left", (d3.event.pageX) + "px")
-              .style("top", (d3.event.pageY - 28) + "px");
+              .style('left', (d3.event.pageX) + 'px')
+              .style('top', (d3.event.pageY - 28) + 'px');
           })
-          .on("mouseout", function() {
+          .on('mouseout', function() {
             div.transition()
-              .style("display", "none");
+              .style('display', 'none');
           });
       });
     }

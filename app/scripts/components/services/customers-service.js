@@ -13,8 +13,8 @@ export default function customersService(baseServiceClass, $state, $q, $http, EN
       return this.getList(query);
     },
     getCounters: function(query) {
-      var query = angular.extend({operation: 'counters'}, query);
-      return this.getFactory(false).get(query).$promise;
+      var extendedQuery = angular.extend({operation: 'counters'}, query);
+      return this.getFactory(false).get(extendedQuery).$promise;
     },
     isOwnerOrStaff: function() {
       var vm = this;

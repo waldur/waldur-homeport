@@ -1,5 +1,5 @@
 // @ngInject
-export default function joinService(baseServiceClass, servicesService, $http, $q, ENV) {
+export default function joinService(baseServiceClass, servicesService, $http, $q) {
   var ServiceClass = baseServiceClass.extend({
     init:function() {
       this._super();

@@ -111,7 +111,7 @@ export function httpInterceptor($q, $location, ncUtilsFlash, ENV, ErrorMessageFo
   });
 
   return {
-    'request': function(config) {
+    request: function(config) {
       if (abortRequests && !(/^views.*\/(.*?).html$/.test(config.url))) {
         var canceler = $q.defer();
         config.timeout = canceler.promise;
@@ -123,22 +123,24 @@ export function httpInterceptor($q, $location, ncUtilsFlash, ENV, ErrorMessageFo
         timeouts[getKey(config)] = setTimeout(function() {
           var errorMessage = 'Problem getting response from the server.';
           ncUtilsFlash.error(errorMessage);
+          // eslint-disable-next-line no-console
           console.error(errorMessage, config);
         }, ENV.requestTimeout);
       }
       return config;
     },
-    'response': function(response) {
+    response: function(response) {
       if (response.config) {
         clearTimeout(timeouts[getKey(response.config)]);
       }
       return response;
     },
-    'responseError': function(rejection) {
+    responseError: function(rejection) {
       if (!abortRequests) {
         var message = ErrorMessageFormatter.format(rejection);
         if (rejection.config) {
           clearTimeout(timeouts[getKey(rejection.config)]);
+          // eslint-disable-next-line no-console
           console.error(message, rejection.config);
         }
         // handlers for excluding 404 errors are too slow

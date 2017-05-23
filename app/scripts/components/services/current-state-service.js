@@ -87,6 +87,7 @@ export default function currentStateService($q, ENV, ncUtils, $rootScope) {
     });
   }
 
+  // eslint-disable-next-line no-unused-vars
   function reloadCurrentCustomer(callback) {
     // TODO: Remove calls to this method
   }

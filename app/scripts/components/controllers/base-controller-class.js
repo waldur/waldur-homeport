@@ -75,6 +75,7 @@ export function baseControllerAddClass($rootScope, $state, baseControllerClass, 
     getSuccessMessage: function() {
       return this.successMessage.replace('{vm_name}', this.instance.name);
     },
+    // eslint-disable-next-line no-unused-vars
     onError: function(errorObject) {}
   });
 

@@ -42,7 +42,7 @@ export default function ImportResourceController(
         }
 
         if (customer.projects.length == 0) {
-          ncUtilsFlash.error("No projects!");
+          ncUtilsFlash.error('No projects!');
           $state.go('organization.projects', {uuid: customer.uuid});
         } else {
           vm.setProject();
@@ -75,7 +75,7 @@ export default function ImportResourceController(
           }
         }
         if (vm.categories.length == 0) {
-          ncUtilsFlash.error("No providers!");
+          ncUtilsFlash.error('No providers!');
           $state.go('organization.providers', {uuid: vm.customer.uuid});
         }
         vm.setRoutedService();
@@ -190,10 +190,11 @@ export default function ImportResourceController(
       controllerScope.importedResources = [];
       return resourcesService.getImportedResources(
         service, controllerScope.currentProject.uuid).then(function(resources) {
-        controllerScope.importedResources = resources;
-      }, function() {
-        ncUtilsFlash.warning(gettext('Unable to get list of imported resources.'));
-      });
+          controllerScope.importedResources = resources;
+        },
+        function() {
+          ncUtilsFlash.warning(gettext('Unable to get list of imported resources.'));
+        });
     },
 
     getResourcesForService: function(service, extra) {
