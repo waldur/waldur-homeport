@@ -20,7 +20,7 @@ module.exports = function(config) {
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-translate/angular-translate.js',
-      'app/scripts/class.js',
+      '../app/scripts/class.js',
       'test/test_index.js',
     ],
 
