@@ -9,7 +9,8 @@ export class invitationUtilsService {
     $state,
     $rootScope,
     $timeout,
-    $uibModal) {
+    $uibModal,
+    ENV) {
     this.invitationService = invitationService;
     this.usersService = usersService;
     this.ncUtilsFlash = ncUtilsFlash;
@@ -19,6 +20,7 @@ export class invitationUtilsService {
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
     this.$uibModal = $uibModal;
+    this.validateInvitationEmail = ENV.VALIDATE_INVITATION_EMAIL;
   }
 
   init() {
@@ -45,6 +47,9 @@ export class invitationUtilsService {
       if (this.$auth.isAuthenticated()) {
         this.acceptInvitation(token).then(() => {
           this.$state.go('profile.details');
+        }).catch(reason => {
+          this.ncUtilsFlash.error(reason);
+          return this.$state.go('errorPage.notFound');
         });
       } else {
         this.invitationService.setInvitationToken(token);
@@ -61,33 +66,40 @@ export class invitationUtilsService {
   }
 
   acceptInvitation(token) {
-    return this.shallChangeEmail(token).then(replace_email => {
-      return this.invitationService.accept(token, replace_email).then(() => {
-        this.ncUtilsFlash.success(gettext('Your invitation was accepted.'));
+    return this.loadUserInvitation(token).then(context => {
+      let user = context.user;
+      let invitation = context.invitation;
+      if (this.validateInvitationEmail && user.email && user.email !== invitation.email) {
         this.invitationService.clearInvitationToken();
-        this.$rootScope.$broadcast('refreshCustomerList', {updateSignal: true});
-      }).catch(this.showError.bind(this));
+        return this.$q.reject(gettext('User and invitation email do not match.'));
+      }
+
+      return this.shallChangeEmail(user, invitation).then(replace_email => {
+        return this.invitationService.accept(token, replace_email).then(() => {
+          this.ncUtilsFlash.success(gettext('Your invitation was accepted.'));
+          this.invitationService.clearInvitationToken();
+          this.$rootScope.$broadcast('refreshCustomerList', {updateSignal: true});
+        }).catch(this.showError.bind(this));
+      });
     });
   }
 
-  shallChangeEmail(token) {
-    return this.loadUserInvitation(token).then(context => {
-      if (!context.user.email || context.user.email === context.invitation.email) {
-        return true;
-      }
+  shallChangeEmail(user, invitation) {
+    if (!user.email || user.email === invitation.email) {
+      return this.$q.resolve(true);
+    }
 
-      const dialog = this.$uibModal.open({
-        component: 'invitationConfirmDialog',
-        resolve: {
-          user: () => context.user,
-          invitation: () => context.invitation,
-        }
-      });
-      const deferred = this.$q.defer();
-      dialog.result.then(() => deferred.resolve(true));
-      dialog.closed.then(() => deferred.resolve(false));
-      return deferred.promise;
+    const dialog = this.$uibModal.open({
+      component: 'invitationConfirmDialog',
+      resolve: {
+        user: () => user,
+        invitation: () => invitation,
+      }
     });
+    const deferred = this.$q.defer();
+    dialog.result.then(() => deferred.resolve(true));
+    dialog.closed.then(() => deferred.resolve(false));
+    return deferred.promise;
   }
 
   loadUserInvitation(token) {
