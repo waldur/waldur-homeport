@@ -11,22 +11,8 @@
     <!-- css -->
 
     <!-- @if NODE_ENV == 'DEVELOPMENT' || NODE_ENV == 'TEST' -->
-    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
-    <link rel="stylesheet" type="text/css" href="static/css/angular-flash.css">
-    <link rel="stylesheet" type="text/css" href="static/css/select.css">
-
-    <link rel="stylesheet" type="text/css" href="static/css/xeditable.css">
-    <link rel="stylesheet" type="text/css" href="static/css/angular-block-ui.css"/>
-    <link rel="stylesheet" type="text/css" href="static/css/leaflet.css"/>
-    <link rel="stylesheet" type="text/css" href="static/css/flags16.css">
-
-    <link rel="stylesheet" type="text/css" href="static/css/datatables/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/datatables/buttons.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/datatables/responsive.bootstrap.min.css">
-
-    <link rel="stylesheet" type="text/css" href="static/css/bundle.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/vendor-bundle.css">
+    <link rel="stylesheet" type="text/css" href="static/css/index-bundle.css">
     <!-- @endif -->
 
     <!-- @if NODE_ENV == 'PRODUCTION' -->
@@ -37,57 +23,12 @@
 <div class="flash-message-fixed" flash-message="5000"></div>
 <div ui-view id="wrapper"></div>
 <!-- @if NODE_ENV == 'DEVELOPMENT' || NODE_ENV == 'TEST' -->
-<script src="static/js/jquery.min.js"></script>
-<!-- angular -->
-<script src="static/js/angular/angular.js"></script>
-<script src="static/js/angular/angular-animate.js"></script>
-<script src="static/js/angular/angular-block-ui.js"></script>
-<script src="static/js/angular/angular-cookies.js"></script>
-<script src="static/js/angular/angular-flash.js"></script>
-<script src="static/js/angular/angular-loader.js"></script>
-<script src="static/js/angular/angular-gravatar.js"></script>
-<script src="static/js/angular/moment.js"></script>
-<script src="static/js/angular/angulartics.js"></script>
-<script src="static/js/angular/angulartics-ga.js"></script>
-<script src="static/js/angular/angular-moment.js"></script>
-<script src="static/js/angular/angular-resource.js"></script>
-<script src="static/js/angular/angular-scroll.js"></script>
-<script src="static/js/angular/angular-ui-router.js"></script>
-<script src="static/js/angular/select.js"></script>
-<script src="static/js/angular/satellizer.js"></script>
-<script src="static/js/angular/angular-translate.js"></script>
-<script src="static/js/angular/angular-translate-storage-cookie.js"></script>
-<script src="static/js/angular/angular-translate-storage-local.js"></script>
-<script src="static/js/angular/angular-translate-loader-static-files.js"></script>
-<script src="static/js/angular/ng-file-upload.js"></script>
-<script src="static/js/angular/xeditable.js"></script>
-<script src="static/js/angular/angular-sanitize.js"></script>
-<script src="static/js/leaflet.js"></script>
-<script src="static/js/d3.js"></script>
-<script src="static/js/angular/angular-leaflet-directive.js"></script>
-<script src="static/js/angular/ui-bootstrap-tpls.min.js"></script>
-<script src="static/js/jquery.slimscroll.min.js"></script>
-<script src="static/js/angular/angular-slimscroll.js"></script>
-<script src="static/js/angular/angular-bind-html-compile.js"></script>
-
-<script src="static/js/datatables/jszip.min.js"></script>
+<!-- pdfmake is a serverside renderer not supposed to work in webpack. Use old version from bower -->
+<script src="scripts/class.js"></script>
+<script src="static/js/vendor-bundle.js"></script>
 <script src="static/js/datatables/pdfmake.min.js"></script>
 <script src="static/js/datatables/vfs_fonts.js"></script>
-<script src="static/js/datatables/jquery.dataTables.min.js"></script>
-<script src="static/js/datatables/dataTables.bootstrap.min.js"></script>
-<script src="static/js/datatables/dataTables.buttons.min.js"></script>
-<script src="static/js/datatables/buttons.html5.min.js"></script>
-<script src="static/js/datatables/buttons.print.min.js"></script>
-<script src="static/js/datatables/buttons.bootstrap.min.js"></script>
-<script src="static/js/datatables/dataTables.responsive.min.js"></script>
-<script src="static/js/datatables/responsive.bootstrap.js"></script>
-
-<!-- i18n setup -->
-<script>window.gettext = angular.identity</script>
-
-<!-- libs -->
-<script src="scripts/class.js"></script>
-<script src="static/js/bundle.js"></script>
+<script src="static/js/index-bundle.js"></script>
 <!-- @endif -->
 
 <!-- @if NODE_ENV == 'PRODUCTION' -->

@@ -1,5 +1,4 @@
-import 'angular-cron-jobs';
-import 'angular-cron-jobs/dist/angular-cron-jobs.css';
+import '../../assets/sass/style.scss';
 
 import sparkline from './components/sparkline/module';
 import featuresModule from './components/features/module';
@@ -43,7 +42,7 @@ import directivesModule from './components/directives/module';
 import servicesModule from './components/services/module';
 import rootModule from './components/module';
 
-const appModule = angular.module('ncsaas', [
+const appModule = angular.module('waldur', [
   'satellizer',
   'ui.router',
   'ngCookies',
@@ -109,4 +108,4 @@ controllersModule(appModule);
 directivesModule(appModule);
 servicesModule(appModule);
 
-bootstrap('ncsaas');
+bootstrap('waldur');
