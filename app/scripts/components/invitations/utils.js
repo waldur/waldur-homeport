@@ -1,16 +1,14 @@
 // @ngInject
 export class invitationUtilsService {
-  constructor(
-    invitationService,
-    usersService,
-    ncUtilsFlash,
-    $q,
-    $auth,
-    $state,
-    $rootScope,
-    $timeout,
-    $uibModal,
-    ENV) {
+  constructor(invitationService,
+              usersService,
+              ncUtilsFlash,
+              $q,
+              $auth,
+              $state,
+              $rootScope,
+              $timeout,
+              $uibModal) {
     this.invitationService = invitationService;
     this.usersService = usersService;
     this.ncUtilsFlash = ncUtilsFlash;
@@ -20,45 +18,58 @@ export class invitationUtilsService {
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
     this.$uibModal = $uibModal;
-    this.invitationCheckInterval = ENV.invitationCheckInterval;
   }
 
   init() {
     // After successful login/sign up accept invitation and display message to user.
-    this.$rootScope.$on('authService:signin', () => {
-      var token = this.invitationService.getInvitationToken();
-      if (token) {
-        this.acceptInvitation(token);
+    this.$rootScope.$on('$stateChangeSuccess', () => {
+      if (this.$auth.isAuthenticated()) {
+        this.usersService.getCurrentUser().then(user => {
+          let token = this.invitationService.getInvitationToken();
+          if (token && !this.usersService.mandatoryFieldsMissing(user)) {
+            this.validateInvitationToken(token).then(() => {
+              this.acceptInvitation(token);
+            }).catch(() => {
+              this.ncUtilsFlash.error(gettext('Invitation could not be accepted'));
+            });
+          }
+        });
       }
     });
   }
-  checkAndAccept(token) {
-    /*
-      - Poll invitation check endpoint if server is not available.
-      - If invitation is valid - accept token and redirect user either to profile or registration page.
-      - redirect user to Not Found page.
-    */
 
-    this.invitationService.check(token).then(() => {
-      this.accept(token);
-    }).catch(response => {
-      if (response.status === -1 || response.status >= 500) {
-        this.ncUtilsFlash.clear();
-        this.$timeout(this.checkAndAccept.bind(this), this.invitationCheckInterval, true, token);
-      } else {
-        this.$state.go('errorPage.notFound');
-      }
-    });
-  }
-  accept(token) {
-    if (this.$auth.isAuthenticated()) {
-      this.acceptInvitation(token).then(() => {
-        this.$state.go('profile.details');
+  checkAndAccept(token) {
+    /* 1) If invitation token is invalid then display 404.
+
+     2) If invitation token is valid and user is already logged in
+     then accept invitation and display message to user.
+
+     3) If invitation is valid and user is anonymous then
+     redirect him to registration page.
+     */
+
+    return this.validateInvitationToken(token).then(() => {
+      this.invitationService.check(token).then(() => {
+        if (this.$auth.isAuthenticated()) {
+          this.acceptInvitation(token).then(() => {
+            this.$state.go('profile.details');
+          });
+        } else {
+          this.invitationService.setInvitationToken(token);
+          this.$state.go('register');
+        }
+      }).catch(response => {
+        this.showError(response);
+        if (this.$auth.isAuthenticated()) {
+          this.$state.go('profile.details');
+        } else {
+          this.$state.go('login');
+        }
       });
-    } else {
-      this.invitationService.setInvitationToken(token);
-      this.$state.go('register');
-    }
+    }).catch(() => {
+      this.ncUtilsFlash.error(gettext('Invitation is not valid anymore.'));
+      this.$state.go('errorPage.notFound');
+    });
   }
 
   acceptInvitation(token) {
@@ -69,6 +80,19 @@ export class invitationUtilsService {
         this.$rootScope.$broadcast('refreshCustomerList', {updateSignal: true});
       }).catch(this.showError.bind(this));
     });
+  }
+
+  validateInvitationToken(token) {
+    const dialog = this.$uibModal.open({
+      component: 'invitationCheckDialog',
+      resolve: {
+        token: () => token,
+      }
+    });
+    const deferred = this.$q.defer();
+    dialog.result.then(() => deferred.resolve());
+    dialog.closed.then(() => deferred.reject());
+    return deferred.promise;
   }
 
   shallChangeEmail(token) {

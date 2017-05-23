@@ -528,6 +528,10 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#: app/scripts/components/invitations/invitation-check-dialog.html:14
+msgid "Cancel invitation"
+msgstr ""
+
 #: app/scripts/components/payments/routes.js:26
 msgid "Cancel payment"
 msgstr ""
@@ -1508,7 +1512,7 @@ msgstr ""
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:109
+#: app/scripts/components/invitations/utils.js:134
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
@@ -1520,6 +1524,10 @@ msgstr ""
 #: app/scripts/components/payments/payment-approve.js:10
 #: app/scripts/components/payments/payment-cancel.js:9
 msgid "Invalid URL. Unable to parse payment details."
+msgstr ""
+
+#: app/scripts/components/invitations/utils.js:33
+msgid "Invitation could not be accepted"
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html:10
@@ -1538,11 +1546,15 @@ msgstr ""
 msgid "Invitation has been sent again."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:104
+#: app/scripts/components/invitations/utils.js:129
 msgid "Invitation is not found."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:107
+#: app/scripts/components/invitations/utils.js:71
+msgid "Invitation is not valid anymore."
+msgstr ""
+
+#: app/scripts/components/invitations/utils.js:132
 msgid "Invitation is not valid."
 msgstr ""
 
@@ -2618,6 +2630,10 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-analysis.html:3
 msgid "Please create first project."
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-check-dialog.html:7
+msgid "Please give us a moment to validate the invitation."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:7
@@ -4412,6 +4428,10 @@ msgstr ""
 msgid "UUID"
 msgstr ""
 
+#: app/scripts/components/invitations/invitation-check-dialog.html:2
+msgid "Validating your invitation.."
+msgstr ""
+
 #: app/scripts/components/billing/billing-issuer-details.html:8
 msgid "VAT"
 msgstr ""
@@ -4668,7 +4688,7 @@ msgstr ""
 msgid "Your invitation is being processed."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:67
+#: app/scripts/components/invitations/utils.js:79
 msgid "Your invitation was accepted."
 msgstr ""
 
