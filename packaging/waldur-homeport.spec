@@ -35,7 +35,7 @@ Web interface for Waldur MasterMind cloud orchestrator.
 VERSION=$(grep '"version":' package.json | awk '{print $2}' | sed -e "s/\"//g;s/,//g")
 
 # Inject package version
-sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" app/scripts/configs/base-config.js
+sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" app/scripts/components/configs/base-config.js
 
 npm install --global bower grunt-cli
 
