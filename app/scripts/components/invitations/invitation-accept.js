@@ -1,8 +1,11 @@
+import template from './invitation-accept.html';
+
 export default function invitationAccept() {
   return {
     restrict: 'E',
     controller: InvitationAcceptController,
     controllerAs: '$ctrl',
+    template: template,
     scope: {},
     bindToController: true
   };
