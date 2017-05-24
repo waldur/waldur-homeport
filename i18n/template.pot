@@ -1052,7 +1052,11 @@ msgid "End time"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:204
+<<<<<<< HEAD
 #: app/scripts/configs/base-config.js:210
+=======
+#: app/scripts/configs/base-config.js:208
+>>>>>>> 852481909e182808b8152620296504f19eef3ba5
 msgid "English"
 msgstr ""
 
@@ -1088,7 +1092,11 @@ msgid "Estimated cost for current month"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:208
+<<<<<<< HEAD
 #: app/scripts/configs/base-config.js:214
+=======
+#: app/scripts/configs/base-config.js:212
+>>>>>>> 852481909e182808b8152620296504f19eef3ba5
 msgid "Estonian"
 msgstr ""
 
@@ -1519,7 +1527,11 @@ msgstr ""
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
+<<<<<<< HEAD
 #: app/scripts/components/invitations/utils.js:133
+=======
+#: app/scripts/components/invitations/utils.js:120
+>>>>>>> 852481909e182808b8152620296504f19eef3ba5
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
@@ -1553,6 +1565,7 @@ msgstr ""
 msgid "Invitation has been sent again."
 msgstr ""
 
+<<<<<<< HEAD
 #: app/scripts/components/invitations/utils.js:128
 msgid "Invitation is not found."
 msgstr ""
@@ -1562,6 +1575,13 @@ msgid "Invitation is not valid anymore."
 msgstr ""
 
 #: app/scripts/components/invitations/utils.js:131
+=======
+#: app/scripts/components/invitations/utils.js:115
+msgid "Invitation is not found."
+msgstr ""
+
+#: app/scripts/components/invitations/utils.js:118
+>>>>>>> 852481909e182808b8152620296504f19eef3ba5
 msgid "Invitation is not valid."
 msgstr ""
 
@@ -2486,7 +2506,11 @@ msgid "Organization name"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:186
+<<<<<<< HEAD
 #: app/scripts/configs/base-config.js:192
+=======
+#: app/scripts/configs/base-config.js:190
+>>>>>>> 852481909e182808b8152620296504f19eef3ba5
 msgid "Organization owner"
 msgstr ""
 
@@ -2878,7 +2902,11 @@ msgid "Project limits"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:187
+<<<<<<< HEAD
 #: app/scripts/configs/base-config.js:193
+=======
+#: app/scripts/configs/base-config.js:191
+>>>>>>> 852481909e182808b8152620296504f19eef3ba5
 msgid "Project manager"
 msgstr ""
 
@@ -3959,7 +3987,11 @@ msgid "Synchronise"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:188
+<<<<<<< HEAD
 #: app/scripts/configs/base-config.js:194
+=======
+#: app/scripts/configs/base-config.js:192
+>>>>>>> 852481909e182808b8152620296504f19eef3ba5
 msgid "System administrator"
 msgstr ""
 
@@ -4405,6 +4437,10 @@ msgstr ""
 msgid "User {user_full_name} authenticated successfully with username and password."
 msgstr ""
 
+#: app/scripts/components/invitations/utils.js:74
+msgid "User and invitation email do not match."
+msgstr ""
+
 #: app/scripts/components/user/routes.js:6
 #: app/scripts/components/user/user-details.html:9
 msgid "User dashboard"
@@ -4711,7 +4747,11 @@ msgstr ""
 msgid "Your invitation is being processed."
 msgstr ""
 
+<<<<<<< HEAD
 #: app/scripts/components/invitations/utils.js:78
+=======
+#: app/scripts/components/invitations/utils.js:79
+>>>>>>> 852481909e182808b8152620296504f19eef3ba5
 msgid "Your invitation was accepted."
 msgstr ""
 
