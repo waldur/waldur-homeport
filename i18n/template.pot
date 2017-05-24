@@ -529,7 +529,7 @@ msgid "Cancel"
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html:43
-msgid "Cancel invitation."
+msgid "Cancel invitation"
 msgstr ""
 
 #: app/scripts/components/payments/routes.js:26
@@ -4676,8 +4676,16 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
+#: app/scripts/components/invitations/invitation-accept.html:5
+msgid "You will be redirected in a moment."
+msgstr ""
+
 #: app/scripts/components/invitations/invitation-confirm-dialog.html:16
 msgid "Your current email is:"
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-accept.html:4
+msgid "Your invitation is being processed."
 msgstr ""
 
 #: app/scripts/components/invitations/utils.js:68
