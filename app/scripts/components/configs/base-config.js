@@ -181,6 +181,7 @@ const ENV = {
   ownerCanUpdateCustomerPolicies: true,
   OWNERS_CAN_MANAGE_OWNERS: true,
   MANAGER_CAN_MANAGE_TENANTS: false,
+  VALIDATE_INVITATION_EMAIL: false,
 
   roles: {
     owner: gettext('Organization owner'),
