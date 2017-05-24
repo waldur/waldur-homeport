@@ -1,12 +1,10 @@
-export default function userProjects() {
-  return {
-    restrict: 'E',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: UserProjectsController,
-    controllerAs: 'ListController',
-    scope: {}
-  };
-}
+const userProjects = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: UserProjectsController,
+  controllerAs: 'ListController',
+};
+
+export default userProjects;
 
 // @ngInject
 function UserProjectsController(
@@ -16,7 +14,28 @@ function UserProjectsController(
     init: function() {
       this.service = projectPermissionsService;
       this.controllerScope = controllerScope;
-      this.tableOptions = {
+      var fn = this._super.bind(this);
+      this.loading = true;
+      this.loadContext().then(() => {
+        this.tableOptions = this.getTableOptions();
+        this.loading = false;
+        fn();
+      }).finally(() => {
+        this.loading = false;
+      });
+    },
+    loadContext: function() {
+      return usersService.getCurrentUser().then(user => {
+        this.currentUser = user;
+      });
+    },
+    getFilter: function() {
+      return {
+        user_url: this.currentUser.url
+      };
+    },
+    getTableOptions: function() {
+      return {
         disableSearch: true,
         noDataText: gettext('No projects yet'),
         noMatchesText: gettext('No projects found matching filter.'),
@@ -45,15 +64,6 @@ function UserProjectsController(
             }
           },
         ]
-      };
-      var fn = this._super.bind(this);
-      usersService.getCurrentUser().then(() => {
-        fn();
-      });
-    },
-    getFilter: function() {
-      return {
-        user_url: usersService.currentUser.url
       };
     }
   });

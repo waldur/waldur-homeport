@@ -243,7 +243,7 @@ module.exports = function (grunt) {
     concat: {
       build: {
         src: [
-          'app/static/js/class.js',
+          'app/scripts/class.js',
           'app/static/js/vendor-bundle.js',
           'app/static/js/datatables/pdfmake.min.js',
           'app/static/js/datatables/vfs_fonts.js',
