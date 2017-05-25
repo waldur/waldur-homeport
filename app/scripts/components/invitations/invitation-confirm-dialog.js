@@ -45,6 +45,18 @@ const invitationConfirmDialog = {
         }
       });
     }
+
+    invitationChecked() {
+      return this.invitation && this.invitation.email;
+    }
+
+    closeAcceptingNewEmail() {
+      this.close({$value: this.resolve.acceptNewEmail});
+    }
+
+    closeDecliningNewEmail() {
+      this.close({$value: this.resolve.rejectNewEmail});
+    }
   }
 };
 

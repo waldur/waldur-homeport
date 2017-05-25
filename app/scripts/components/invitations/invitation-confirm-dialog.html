@@ -1,9 +1,9 @@
 <div class="modal-header">
-  <h2 class="modal-title" ng-hide="$ctrl.user.email" translate>Invitation check</h2>
-  <h2 class="modal-title" ng-show="$ctrl.user.email" translate>Email update</h2>
+  <h2 class="modal-title" ng-if="!$ctrl.invitationChecked()" translate>Invitation check</h2>
+  <h2 class="modal-title" ng-if="$ctrl.invitationChecked()" translate>Email update</h2>
 </div>
 <div class="modal-body">
-  <div ng-hide="$ctrl.invitation.email">
+  <div ng-if="!$ctrl.invitationChecked()">
     <p>
       <loading-spinner></loading-spinner>
     </p>
@@ -11,7 +11,7 @@
       <span translate>Please give us a moment to validate your invitation.</span>
     </p>
   </div>
-  <div ng-show="$ctrl.invitation.email">
+  <div ng-if="$ctrl.invitationChecked()">
     <p>
       <span translate>Your current email is:</span>
       <strong>{{ $ctrl.user.email }}</strong>
@@ -26,18 +26,18 @@
   </div>
 </div>
 <div class="modal-footer">
-  <div ng-show="$ctrl.invitation.email">
+  <div ng-if="$ctrl.invitationChecked()">
     <button
         class="btn btn-primary"
-        ng-click="$ctrl.close({$value: $ctrl.resolve.acceptNewEmail})">
+            ng-click="$ctrl.closeAcceptingNewEmail()">
       <span translate>Yes, use invitation email</span>
     </button>
     <button class="btn btn-default"
-            ng-click="$ctrl.close({$value: $ctrl.resolve.rejectNewEmail})">
+            ng-click="$ctrl.closeDecliningNewEmail()">
       <span translate>No, continue using current email</span>
     </button>
   </div>
-  <div ng-hide="$ctrl.invitation.email">
+  <div ng-if="!$ctrl.invitationChecked()">
     <button class="btn btn-default"
             ng-click="$ctrl.dismiss()">
       <span translate>Cancel invitation</span>
