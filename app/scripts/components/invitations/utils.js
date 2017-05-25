@@ -28,10 +28,10 @@ export class invitationUtilsService {
      Display invitation confirm dialog on registration.
 
      Triggered only if user has registered, which is the case if:
-      - $stateChangeSuccess called;
-      - user is logged in;
-      - invitation token is set in invitation service;
-      - user has filled all mandatory fields;
+     - $stateChangeSuccess called;
+     - user is logged in;
+     - invitation token is set in invitation service;
+     - user has filled all mandatory fields;
      */
     this.$rootScope.$on('$stateChangeSuccess', () => {
       if (this.$auth.isAuthenticated()) {

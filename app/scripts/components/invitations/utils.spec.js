@@ -1,4 +1,4 @@
-import { attachInvitationUtils, invitationUtilsService } from './utils.js';
+import {attachInvitationUtils, invitationUtilsService} from './utils.js';
 import coreModule from '../core/module';
 
 describe('invitationUtilsService', () => {
@@ -11,20 +11,23 @@ describe('invitationUtilsService', () => {
     module.run(attachInvitationUtils);
     coreModule(module);
   }
+
   initModule(angular.module('invitationUtilsModule', ['ngResource', 'ui.router']));
   beforeEach(angular.mock.module('invitationUtilsModule'));
 
   let emailConfirmedDialogResult = {
-    result:{
+    result: {
       then: (callback) => callback(true),
     },
     closed: {
-      then: () => {}
+      then: () => {
+      }
     }
   };
   let invitationCanceledDialogResult = {
-    result:{
-      then: () => {},
+    result: {
+      then: () => {
+      },
     },
     closed: {
       then: (callback) => callback()
@@ -32,13 +35,13 @@ describe('invitationUtilsService', () => {
   };
 
   let token = 'token';
-  beforeEach(angular.mock.module(function($provide) {
-    $provide.factory('$auth', function() {
+  beforeEach(angular.mock.module(function ($provide) {
+    $provide.factory('$auth', function () {
       return {
         isAuthenticated: jasmine.createSpy('isAuthenticated').and.returnValue(true),
       };
     });
-    $provide.factory('invitationService', function($q) {
+    $provide.factory('invitationService', function ($q) {
       return {
         getInvitationToken: jasmine.createSpy('getInvitationToken').and.returnValue(token),
         setInvitationToken: jasmine.createSpy('setInvitationToken'),
@@ -46,24 +49,24 @@ describe('invitationUtilsService', () => {
         clearInvitationToken: jasmine.createSpy('clearInvitationToken')
       };
     });
-    $provide.factory('usersService', function($q) {
+    $provide.factory('usersService', function ($q) {
       return {
         mandatoryFieldsMissing: jasmine.createSpy('mandatoryFieldsMissing').and.returnValue(false),
         getCurrentUser: jasmine.createSpy('getCurrentUser').and.returnValue($q.when([]))
       };
     });
-    $provide.factory('ncUtilsFlash', function() {
+    $provide.factory('ncUtilsFlash', function () {
       return {
         success: jasmine.createSpy('success'),
         error: jasmine.createSpy('error')
       };
     });
-    $provide.factory('$uibModal', function() {
+    $provide.factory('$uibModal', function () {
       return {
         open: jasmine.createSpy('open').and.returnValue(emailConfirmedDialogResult)
       };
     });
-    $provide.factory('$state', function() {
+    $provide.factory('$state', function () {
       return {
         go: jasmine.createSpy('go')
       };
