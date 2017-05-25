@@ -24,7 +24,15 @@ export class invitationUtilsService {
   }
 
   init() {
-    // After successful login/sign up accept invitation and display message to user.
+    /*
+     Display invitation confirm dialog on registration.
+
+     Triggered only if user has registered, which is the case if:
+      - $stateChangeSuccess called;
+      - user is logged in;
+      - invitation token is set in invitation service;
+      - user has filled all mandatory fields;
+     */
     this.$rootScope.$on('$stateChangeSuccess', () => {
       if (this.$auth.isAuthenticated()) {
         this.usersService.getCurrentUser().then(user => {
@@ -43,6 +51,11 @@ export class invitationUtilsService {
   }
 
   checkAndAccept(token) {
+    /*
+     Call confirm token dialog, accept it and redirect user to profile.
+     If user is not logged in - set token and redirect user to registration.
+     If user is logged in and token is not valid - clear the token and redirect to user profile with the error message.
+     */
     if (this.$auth.isAuthenticated()) {
       return this.confirmInvitation(token).then(replaceEmail => {
         this.acceptInvitation(token, replaceEmail).then(() => {
@@ -51,11 +64,7 @@ export class invitationUtilsService {
       }).catch(() => {
         this.invitationService.clearInvitationToken();
         this.ncUtilsFlash.error(gettext('Invitation is not valid anymore.'));
-        if (this.$auth.isAuthenticated()) {
-          this.$state.go('profile.details');
-        } else {
-          this.$state.go('login');
-        }
+        this.$state.go('profile.details');
       });
     } else {
       this.invitationService.setInvitationToken(token);
@@ -82,7 +91,7 @@ export class invitationUtilsService {
     });
     const deferred = this.$q.defer();
     dialog.result.then(result => deferred.resolve(result));
-    dialog.closed.then(() => deferred.resolve());
+    dialog.closed.then(() => deferred.reject());
     return deferred.promise;
   }
 
