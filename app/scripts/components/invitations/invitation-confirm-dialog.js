@@ -27,7 +27,7 @@ const invitationConfirmDialog = {
         this.usersService.getCurrentUser().then(user => {
           let invitation = response.data;
           if (!user.email || user.email === invitation.email) {
-            this.dismiss();
+            this.closeDecliningNewEmail();
           }
 
           if (this.validateInvitationEmail && user.email && user.email !== invitation.email) {
