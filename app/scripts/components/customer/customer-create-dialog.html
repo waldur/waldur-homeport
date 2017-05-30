@@ -1,102 +1,99 @@
 <div class="modal-header">
-  <h3 class="modal-title">
-    <span ng-if="customer" translate>Edit organization</span>
-    <span ng-if="!customer" translate>Create organization</span>
-  </h3>
+    <h3 class="modal-title">
+      <span ng-if="customer" translate>Edit organization</span>
+      <span ng-if="!customer" translate>Create organization</span>
+    </h3>
 </div>
 <div class="modal-body">
-  <form name="CustomerForm">
-    <div class="form-group">
-      <label for="customerName" class="control-label">
-        <span translate>Name</span>:
-      </label>
-      <input type="text"
-             id="customerName"
-             name="name"
-             required ng-model="instance.name"
-             class="form-control">
-      <p class="text-danger"
-         ng-if="CustomerForm.name.$dirty && CustomerForm.name.$invalid">
-        <span translate>This field is required.</span>
-      </p>
-    </div>
+    <form name="CustomerForm">
+        <div class="form-group">
+            <label for="customerName" class="control-label">
+                <span translate>Name</span>:
+            </label>
+            <input type="text"
+                   id="customerName"
+                   name="name"
+                   required ng-model="instance.name"
+                   class="form-control">
+            <p class="text-danger"
+               ng-if="CustomerForm.name.$dirty && CustomerForm.name.$invalid">
+               <span translate>This field is required.</span>
+            </p>
+        </div>
 
-    <div class="form-group">
-      <label for="customerCode" class="control-label">
-        <span translate>Organization registration code</span>:
-      </label>
-      <input type="text"
-             id="customerCode"
-             ng-model="instance.registration_code"
-             class="form-control">
-    </div>
+        <div class="form-group">
+            <label for="customerCode" class="control-label">
+                <span translate>Organization registration code</span>:
+            </label>
+            <input type="text"
+                   id="customerCode"
+                   ng-model="instance.registration_code"
+                   class="form-control">
+        </div>
 
-    <div class="form-group">
-      <label for="customerCountry" class="control-label">
-        <span translate>Country</span>:
-      </label>
-      <ui-select ng-model="instance.country" theme="bootstrap">
-        <ui-select-match placeholder="{{ 'Select country...' | translate }}">
-          <span class="f16"><span class="flag {{ $select.selected.value | lowercase }}"></span></span>
-          {{ $select.selected.display_name }}
-        </ui-select-match>
-        <ui-select-choices
-            repeat="country in countryChoices | filter: $select.search"
-            refresh-delay="0">
-          <span class="f16"><span class="flag {{ country.value | lowercase }}"></span></span>
-          {{ ::country.display_name }}
-        </ui-select-choices>
-      </ui-select>
-    </div>
+        <div class="form-group">
+            <label for="customerCountry" class="control-label">
+                <span translate>Country</span>:
+            </label>
+            <ui-select ng-model="instance.country" theme="bootstrap">
+                <ui-select-match placeholder="{{ 'Select country...' | translate }}">
+                <span class="f16"><span class="flag {{ $select.selected.value | lowercase }}"></span></span>
+                    {{ $select.selected.display_name }}
+                </ui-select-match>
+                <ui-select-choices
+                    repeat="country in countryChoices | filter: $select.search"
+                    refresh-delay="0">
+                    <span class="f16"><span class="flag {{ country.value | lowercase }}"></span></span>
+                    {{ ::country.display_name }}
+                </ui-select-choices>
+            </ui-select>
+        </div>
 
-    <div class="form-group">
-      <label for="customerAddress" class="control-label">
-        <span translate>Address</span>:
-      </label>
-      <input type="text"
-             id="customerAddress"
-             ng-model="instance.contact_details"
-             class="form-control">
-    </div>
+        <div class="form-group">
+            <label for="customerAddress" class="control-label">
+                <span translate>Address</span>:
+            </label>
+            <input type="text"
+                   id="customerAddress"
+                   ng-model="instance.contact_details"
+                   class="form-control">
+        </div>
 
-    <div class="form-group">
-      <label for="vat_code" class="control-label">
-        <helpicon
-            help-text="{{ 'Please provide your EU VAT ID if you are registered in the European Union.' | translate }}"></helpicon>
-        <span translate>EU VAT ID</span>
-      </label>
-      <input type="text"
-             id="vat_code"
-             ng-model="instance.vat_code"
-             class="form-control">
-    </div>
-    <div class="form-group">
-      <customer-threshold toggle-hard-limit="toggleHardLimit()"
-                          price-estimate="priceEstimate"></customer-threshold>
-    </div>
+        <div class="form-group">
+            <label for="vat_code" class="control-label">
+                <helpicon help-text="{{ 'Please provide your EU VAT ID if you are registered in the European Union.' | translate }}"></helpicon>
+                <span translate>EU VAT ID</span>
+            </label>
+            <input type="text"
+                   id="vat_code"
+                   ng-model="instance.vat_code"
+                   class="form-control">
+            <p class="text-danger" ng-repeat="error in errors.vat_code" ng-bind="error"></p>
+        </div>
+        <div class="form-group">
+          <customer-threshold toggle-hard-limit="toggleHardLimit()"
+                              price-estimate="priceEstimate"></customer-threshold>
+        </div>
 
-    <p class="text-danger" ng-repeat="error in errors.vat_code" ng-bind="error"></p>
-</div>
-
-<div class="form-group"
-     ng-if="errors.non_field_errors">
-  <p class="text-danger"
-     ng-repeat="error in errors.non_field_errors"
-     ng-bind="error">
-  </p>
-</div>
-</form>
+        <div class="form-group"
+            ng-if="errors.non_field_errors">
+            <p class="text-danger"
+               ng-repeat="error in errors.non_field_errors"
+               ng-bind="error">
+            </p>
+        </div>
+    </form>
 </div>
 <div class="modal-footer">
-  <button type="button"
-          class="btn btn-primary"
-          ng-class="{'disabled': CustomerForm.$invalid}"
-          submit-button="saveCustomer()">
-    <span translate>Save</span>
-  </button>
-  <button class="btn btn-default"
-          type="button"
-          ng-click="$close()">
-    <span translate>Cancel</span>
-  </button>
+    <button type="button"
+        class="btn btn-primary"
+        ng-class="{'disabled': CustomerForm.$invalid}"
+        submit-button="saveCustomer()">
+        <span translate>Save</span>
+    </button>
+    <button class="btn btn-default"
+        type="button"
+        ng-click="$close()">
+        <span translate>Cancel</span>
+    </button>
 </div>
