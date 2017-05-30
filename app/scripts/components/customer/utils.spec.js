@@ -12,7 +12,7 @@ describe('customerUtils', () => {
       total: 10,
     }
   };
-  beforeEach(inject(($q) => {
+  beforeEach(inject(() => {
     priceEstimatesService = function($q) {
       return {
         isHardLimit: jasmine.createSpy('isHardLimit').and.returnValue(false),
