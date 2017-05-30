@@ -9,15 +9,33 @@ export default function customerCreateDialog() {
 }
 
 // @ngInject
-function CustomerCreateDialogController(customersService, $scope, $rootScope, $state, ncUtilsFlash, coreUtils, $filter) {
+function CustomerCreateDialogController(
+  customersService,
+  $scope,
+  $rootScope,
+  $state,
+  ncUtilsFlash,
+  coreUtils,
+  $filter,
+  $q,
+  customerUtils) {
   angular.extend($scope, {
     fields: ['name', 'contact_details', 'registration_code', 'vat_code'],
     instance: {},
     init: function() {
+      this.isHardLimit = false;
+      this.priceEstimate = {
+        limit: -1,
+        threshold: 0,
+        total: 0,
+      };
       if (this.customer) {
         this.copyFields(this.customer, this.instance, this.fields);
       }
       this.loadCountries();
+    },
+    toggleHardLimit: function() {
+      this.isHardLimit = !this.isHardLimit;
     },
     loadCountries: function() {
       function find(list, predicate) {
@@ -34,31 +52,36 @@ function CustomerCreateDialogController(customersService, $scope, $rootScope, $s
       });
     },
     saveCustomer: function() {
-      var vm = this;
-      return vm.getPromise().then(function(customer) {
-        vm.errors = {};
-        customersService.clearAllCacheForCurrentEndpoint();
-
-        if (vm.customer) {
-          var message = coreUtils.templateFormatter(gettext('Organization {organizationName} is updated.'),
-            {organizationName: customer.name});
-          ncUtilsFlash.success(message);
-          $rootScope.$broadcast('refreshCustomerList', {
-            model: customer,
-            update: true
-          });
-        } else {
-          ncUtilsFlash.success($filter('translate')(gettext('Organization has been created.')));
-          $rootScope.$broadcast('refreshCustomerList', {
-            model: customer,
-            new: true,
-            current: true
-          });
-          $state.go('organization.details', {uuid: customer.uuid});
-        }
-
-        vm.$close(customer);
-      }, function(response) {
+      let vm = this;
+      return vm.getPromise().then((customer) => {
+        customer.price_estimate.threshold = this.priceEstimate.threshold;
+        let costLimitPromises = [
+          customerUtils.saveLimit(this.isHardLimit, customer),
+          customerUtils.saveThreshold(customer),
+        ];
+        $q.all(costLimitPromises).then(() => {
+          vm.errors = {};
+          customersService.clearAllCacheForCurrentEndpoint();
+          if (vm.customer) {
+            let message = coreUtils.templateFormatter(gettext('Organization {organizationName} is updated.'),
+              {organizationName: customer.name});
+            ncUtilsFlash.success(message);
+            $rootScope.$broadcast('refreshCustomerList', {
+              model: customer,
+              update: true
+            });
+          } else {
+            ncUtilsFlash.success($filter('translate')(gettext('Organization has been created.')));
+            $rootScope.$broadcast('refreshCustomerList', {
+              model: customer,
+              new: true,
+              current: true
+            });
+            $state.go('organization.details', {uuid: customer.uuid});
+          }
+          vm.$close(customer);
+        });
+      }).catch(response => {
         vm.errors = response.data;
       });
     },

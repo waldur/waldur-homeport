@@ -7,20 +7,22 @@ const customerPolicies = {
   },
   controller: class CustomerPoliciesController {
     // @ngInject
-    constructor($q, ncUtilsFlash, priceEstimatesService, ENV) {
+    constructor($q, ncUtilsFlash, customerUtils) {
       this.$q = $q;
       this.ncUtilsFlash = ncUtilsFlash;
-      this.priceEstimatesService = priceEstimatesService;
-      this.currency = ENV.currency;
       this.customer = angular.copy(this.customer);
-      this.isHardLimit = this.customer.price_estimate.limit > 0 &&
-        this.customer.price_estimate.limit === this.customer.price_estimate.threshold;
+      this.customerUtils = customerUtils;
+      this.isHardLimit = this.customerUtils.isHardLimit(this.customer.price_estimate);
+    }
+
+    toggleHardLimit() {
+      this.isHardLimit = !this.isHardLimit;
     }
 
     updatePolicies() {
       const promises = [
-        this.saveLimit(),
-        this.saveThreshold(),
+        this.customerUtils.saveLimit(this.isHardLimit, this.customer),
+        this.customerUtils.saveThreshold(this.customer),
       ];
 
       return this.$q.all(promises).then(() => {
@@ -35,20 +37,6 @@ const customerPolicies = {
           this.ncUtilsFlash.error(gettext('An error occurred on policies update.'));
         }
       });
-    }
-
-    saveLimit() {
-      const limit = this.isHardLimit ? this.customer.price_estimate.threshold : -1;
-      return this.priceEstimatesService.setLimit(this.customer.url, limit);
-    }
-
-    saveThreshold() {
-      return this.priceEstimatesService.setThreshold(this.customer.url, this.customer.price_estimate.threshold);
-    }
-
-    validateThreshold() {
-      let isValid = this.customer.price_estimate.threshold >= this.customer.price_estimate.total;
-      this.policiesForm.threshold.$setValidity('exceedsThreshold', isValid);
     }
   }
 };

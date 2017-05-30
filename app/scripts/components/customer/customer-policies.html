@@ -3,47 +3,9 @@
     <div class="panel-body">
         <div class="row">
         <form name="$ctrl.policiesForm" class="form-horizontal col-lg-5">
-            <div class="form-group">
-                <div class="col-sm-4">
-                    <label for="threshold" class="control-label">
-                        <span translate>Cost threshold</span>
-                        <i class="fa fa-question-circle"
-                           uib-tooltip="{{ 'Upper bound of monthly resource cost provisioned from shared providers.' | translate }}"></i>
-                    </label>
-                </div>
-                <div class="col-sm-8">
-                    <div class="input-group">
-                        <input id="threshold" type="number" class="form-control" required name="threshold"
-                               ng-change="$ctrl.validateThreshold()"
-                               ng-model="$ctrl.customer.price_estimate.threshold" ng-min="0">
-                        <div class="input-group-addon">
-                            {{ ::$ctrl.currency }}
-                        </div>
-                    </div>
-                    <p class="help-block text-danger"
-                       ng-if="$ctrl.policiesForm.threshold.$error.min">
-                        <span translate>Minimal valid value is 0</span>
-                    </p>
-                    <p class="help-block text-danger"
-                       ng-if="$ctrl.policiesForm.threshold.$error.exceedsThreshold">
-                        <span translate>Estimated cost exceeds threshold</span>
-                    </p>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-8">
-                    <span translate>Estimated cost for current month</span>:
-                    <span id="price-estimate">{{::$ctrl.customer.price_estimate.total | defaultCurrency}}</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-8">
-                    <div class="awesome-checkbox checkbox-success">
-                        <input type="checkbox" ng-model="$ctrl.isHardLimit" id="isHardLimit"/>
-                        <label for="isHardLimit" translate>Disable provisioning when threshold is reached.</label>
-                    </div>
-                </div>
-            </div>
+            <customer-threshold toggle-hard-limit="$ctrl.toggleHardLimit()"
+                                price_estimate="$ctrl.customer.price_estimate"
+                                horizontal="true"></customer-threshold>
             <div class="form-group">
                 <div class="col-sm-offset-4 col-sm-8">
                     <button type="submit" class="btn btn-primary"
