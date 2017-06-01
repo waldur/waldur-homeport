@@ -11,6 +11,8 @@ import customerTeam from './customer-team';
 import routes from './routes';
 import PriceEstimatesService from './price-estimates-service';
 import customerPolicies from './customer-policies';
+import customerThreshold from './customer-threshold';
+import customerUtils from './utils';
 
 export default module => {
   module.directive('customerCreateDialog', customerCreateDialog);
@@ -24,6 +26,8 @@ export default module => {
   module.component('customerUsersDetailsList', customerUsersDetailsList);
   module.component('customerTeam', customerTeam);
   module.component('customerPolicies', customerPolicies);
+  module.component('customerThreshold', customerThreshold);
   module.service('priceEstimatesService', PriceEstimatesService);
+  module.service('customerUtils', customerUtils);
   module.config(routes);
 };
