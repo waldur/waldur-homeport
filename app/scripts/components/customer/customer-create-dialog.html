@@ -35,9 +35,8 @@
             <label for="customerCountry" class="control-label">
                 <span translate>Country</span>:
             </label>
-            <ui-select ng-model="instance.country" theme="bootstrap">
+            <ui-select ng-model="instance.country">
                 <ui-select-match placeholder="{{ 'Select country...' | translate }}">
-                <span class="f16"><span class="flag {{ $select.selected.value | lowercase }}"></span></span>
                     {{ $select.selected.display_name }}
                 </ui-select-match>
                 <ui-select-choices
