@@ -11,7 +11,11 @@ const customerThreshold = {
     // @ngInject
     constructor(ENV, customerUtils) {
       this.currency = ENV.currency;
-      this.isHardLimit = customerUtils.isHardLimit(this.priceEstimate);
+      this.customerUtils = customerUtils;
+    }
+
+    $onInit() {
+      this.isHardLimit = this.customerUtils.isHardLimit(this.priceEstimate);
     }
 
     validateThreshold() {
