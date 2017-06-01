@@ -313,9 +313,6 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js:45
 #: app/scripts/components/project/routes.js:132
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
-#: app/scripts/configs/base-config.js:106
-#: app/scripts/configs/base-config.js:125
-#: app/scripts/configs/base-config.js:53
 msgid "Applications"
 msgstr ""
 
@@ -472,7 +469,6 @@ msgid "Block devices"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:42
-#: app/scripts/configs/base-config.js:45
 msgid "Block storage"
 msgstr ""
 
@@ -530,6 +526,10 @@ msgstr ""
 #: app/scripts/components/user/hooks/hook-details.html:81
 #: app/scripts/components/user/keys/key-create.html:45
 msgid "Cancel"
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:43
+msgid "Cancel invitation"
 msgstr ""
 
 #: app/scripts/components/payments/routes.js:26
@@ -1031,7 +1031,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:2
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:3
 msgid "Email update"
 msgstr ""
 
@@ -1047,8 +1047,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:204
-#: app/scripts/configs/base-config.js:208
+#: app/scripts/components/configs/base-config.js:208
 msgid "English"
 msgstr ""
 
@@ -1083,8 +1082,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:208
-#: app/scripts/configs/base-config.js:212
+#: app/scripts/components/configs/base-config.js:212
 msgid "Estonian"
 msgstr ""
 
@@ -1373,7 +1371,6 @@ msgid "I want another service"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:69
-#: app/scripts/configs/base-config.js:72
 msgid "IaaS"
 msgstr ""
 
@@ -1515,7 +1512,7 @@ msgstr ""
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:120
+#: app/scripts/components/invitations/utils.js:96
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
@@ -1529,7 +1526,15 @@ msgstr ""
 msgid "Invalid URL. Unable to parse payment details."
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:10
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:2
+msgid "Invitation check"
+msgstr ""
+
+#: app/scripts/components/invitations/utils.js:37
+msgid "Invitation could not be accepted"
+msgstr ""
+
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:20
 msgid "Invitation email is:"
 msgstr ""
 
@@ -1545,11 +1550,15 @@ msgstr ""
 msgid "Invitation has been sent again."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:115
+#: app/scripts/components/invitations/utils.js:91
 msgid "Invitation is not found."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:118
+#: app/scripts/components/invitations/utils.js:53
+msgid "Invitation is not valid anymore."
+msgstr ""
+
+#: app/scripts/components/invitations/utils.js:94
 msgid "Invitation is not valid."
 msgstr ""
 
@@ -2239,7 +2248,7 @@ msgstr ""
 msgid "No volumes found matching filter."
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:26
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:37
 msgid "No, continue using current email"
 msgstr ""
 
@@ -2380,7 +2389,6 @@ msgid "Or use social login"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:55
-#: app/scripts/configs/base-config.js:58
 msgid "Oracle database and SugarCRM."
 msgstr ""
 
@@ -2473,8 +2481,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:186
-#: app/scripts/configs/base-config.js:190
+#: app/scripts/components/configs/base-config.js:190
 msgid "Organization owner"
 msgstr ""
 
@@ -2629,6 +2636,10 @@ msgstr ""
 msgid "Please create first project."
 msgstr ""
 
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:11
+msgid "Please give us a moment to validate your invitation."
+msgstr ""
+
 #: app/scripts/components/analytics/cost-analysis.html:7
 msgid "Please import resources or add more providers."
 msgstr ""
@@ -2698,7 +2709,6 @@ msgid "Premium support"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:63
-#: app/scripts/configs/base-config.js:66
 msgid "Premium support service."
 msgstr ""
 
@@ -2774,8 +2784,6 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js:117
 #: app/scripts/components/project/routes.js:140
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
-#: app/scripts/configs/base-config.js:37
-#: app/scripts/configs/base-config.js:99
 msgid "Private clouds"
 msgstr ""
 
@@ -2861,8 +2869,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:187
-#: app/scripts/configs/base-config.js:191
+#: app/scripts/components/configs/base-config.js:191
 msgid "Project manager"
 msgstr ""
 
@@ -2979,12 +2986,10 @@ msgid "Providers events"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:47
-#: app/scripts/configs/base-config.js:50
 msgid "Provision persistent storage volumes in available Providers."
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:31
-#: app/scripts/configs/base-config.js:34
 msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
 
@@ -2997,7 +3002,6 @@ msgid "Purchase"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:39
-#: app/scripts/configs/base-config.js:42
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
@@ -3064,7 +3068,6 @@ msgid "Reason"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:17
-#: app/scripts/configs/base-config.js:20
 msgid "Reason unknown, please contact support."
 msgstr ""
 
@@ -3863,7 +3866,6 @@ msgstr ""
 
 #: app/scripts/components/appstore/routes.js:52
 #: app/scripts/components/configs/base-config.js:110
-#: app/scripts/configs/base-config.js:113
 msgid "Storages"
 msgstr ""
 
@@ -3905,7 +3907,6 @@ msgstr ""
 #: app/scripts/components/configs/base-config.js:58
 #: app/scripts/components/navigation/header/support-link.html:4
 #: app/scripts/components/project/project-workspace.js:67
-#: app/scripts/configs/base-config.js:61
 msgid "Support"
 msgstr ""
 
@@ -3942,8 +3943,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:188
-#: app/scripts/configs/base-config.js:192
+#: app/scripts/components/configs/base-config.js:192
 msgid "System administrator"
 msgstr ""
 
@@ -4389,10 +4389,6 @@ msgstr ""
 msgid "User {user_full_name} authenticated successfully with username and password."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:74
-msgid "User and invitation email do not match."
-msgstr ""
-
 #: app/scripts/components/user/routes.js:6
 #: app/scripts/components/user/user-details.html:9
 msgid "User dashboard"
@@ -4464,9 +4460,6 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js:31
 #: app/scripts/components/project/routes.js:124
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
-#: app/scripts/configs/base-config.js:121
-#: app/scripts/configs/base-config.js:29
-#: app/scripts/configs/base-config.js:92
 msgid "Virtual machines"
 msgstr ""
 
@@ -4532,11 +4525,11 @@ msgstr ""
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:14
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:24
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:22
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:33
 msgid "Yes, use invitation email"
 msgstr ""
 
@@ -4683,19 +4676,19 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-accept.html:4
-msgid "You will be redirected to sign up form in a moment."
+#: app/scripts/components/invitations/invitation-accept.html:5
+msgid "You will be redirected in a moment."
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:6
+#: app/scripts/components/invitations/invitation-confirm-dialog.html:16
 msgid "Your current email is:"
 msgstr ""
 
-#: app/scripts/components/invitations/invitation-accept.html:3
+#: app/scripts/components/invitations/invitation-accept.html:4
 msgid "Your invitation is being processed."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:79
+#: app/scripts/components/invitations/utils.js:68
 msgid "Your invitation was accepted."
 msgstr ""
 

@@ -24,90 +24,75 @@ export class invitationUtilsService {
   }
 
   init() {
-    // After successful login/sign up accept invitation and display message to user.
-    this.$rootScope.$on('authService:signin', () => {
-      var token = this.invitationService.getInvitationToken();
-      if (token) {
-        this.acceptInvitation(token);
+    /*
+     Display invitation confirm dialog on registration.
+
+     Triggered only if user has registered, which is the case if:
+     - $stateChangeSuccess called;
+     - user is logged in;
+     - invitation token is set in invitation service;
+     - user has filled all mandatory fields;
+     */
+    this.$rootScope.$on('$stateChangeSuccess', () => {
+      if (this.$auth.isAuthenticated()) {
+        this.usersService.getCurrentUser().then(user => {
+          let token = this.invitationService.getInvitationToken();
+          if (token && !this.usersService.mandatoryFieldsMissing(user)) {
+            this.confirmInvitation(token).then(replaceEmail => {
+              this.acceptInvitation(token, replaceEmail);
+            }).catch(() => {
+              this.invitationService.clearInvitationToken();
+              this.ncUtilsFlash.error(gettext('Invitation could not be accepted'));
+            });
+          }
+        });
       }
     });
   }
 
   checkAndAccept(token) {
-    /* 1) If invitation token is invalid then display 404.
-
-       2) If invitation token is valid and user is already logged in
-          then accept invitation and display message to user.
-
-       3) If invitation is valid and user is anonymous then
-          redirect him to registration page.
-    */
-
-    return this.invitationService.check(token).then(() => {
-      if (this.$auth.isAuthenticated()) {
-        this.acceptInvitation(token).then(() => {
+    /*
+     Call confirm token dialog, accept it and redirect user to profile.
+     If user is not logged in - set token and redirect user to registration.
+     If user is logged in and token is not valid - clear the token and redirect to user profile with the error message.
+     */
+    if (this.$auth.isAuthenticated()) {
+      return this.confirmInvitation(token).then(replaceEmail => {
+        this.acceptInvitation(token, replaceEmail).then(() => {
           this.$state.go('profile.details');
-        }).catch(reason => {
-          this.ncUtilsFlash.error(reason);
-          return this.$state.go('errorPage.notFound');
         });
-      } else {
-        this.invitationService.setInvitationToken(token);
-        this.$state.go('register');
-      }
-    }).catch(response => {
-      this.showError(response);
-      if (this.$auth.isAuthenticated()) {
-        this.$state.go('profile.details');
-      } else {
-        this.$state.go('login');
-      }
-    });
-  }
-
-  acceptInvitation(token) {
-    return this.loadUserInvitation(token).then(context => {
-      let user = context.user;
-      let invitation = context.invitation;
-      if (this.validateInvitationEmail && user.email && user.email !== invitation.email) {
+      }).catch(() => {
         this.invitationService.clearInvitationToken();
-        return this.$q.reject(gettext('User and invitation email do not match.'));
-      }
-
-      return this.shallChangeEmail(user, invitation).then(replace_email => {
-        return this.invitationService.accept(token, replace_email).then(() => {
-          this.ncUtilsFlash.success(gettext('Your invitation was accepted.'));
-          this.invitationService.clearInvitationToken();
-          this.$rootScope.$broadcast('refreshCustomerList', {updateSignal: true});
-        }).catch(this.showError.bind(this));
+        this.ncUtilsFlash.error(gettext('Invitation is not valid anymore.'));
+        this.$state.go('profile.details');
       });
-    });
+    } else {
+      this.invitationService.setInvitationToken(token);
+      this.$state.go('register');
+    }
   }
 
-  shallChangeEmail(user, invitation) {
-    if (!user.email || user.email === invitation.email) {
-      return this.$q.resolve(true);
-    }
+  acceptInvitation(token, replaceEmail) {
+    return this.invitationService.accept(token, replaceEmail).then(() => {
+      this.ncUtilsFlash.success(gettext('Your invitation was accepted.'));
+      this.invitationService.clearInvitationToken();
+      this.$rootScope.$broadcast('refreshCustomerList', {updateSignal: true});
+    }).catch(this.showError.bind(this));
+  }
 
+  confirmInvitation(token) {
     const dialog = this.$uibModal.open({
       component: 'invitationConfirmDialog',
       resolve: {
-        user: () => user,
-        invitation: () => invitation,
+        token: () => token,
+        acceptNewEmail: () => true,
+        rejectNewEmail: () => false,
       }
     });
     const deferred = this.$q.defer();
-    dialog.result.then(() => deferred.resolve(true));
-    dialog.closed.then(() => deferred.resolve(false));
+    dialog.result.then(result => deferred.resolve(result));
+    dialog.closed.then(() => deferred.reject());
     return deferred.promise;
-  }
-
-  loadUserInvitation(token) {
-    return this.usersService.getCurrentUser().then(user => {
-      return this.invitationService.check(token).then(response => {
-        return { invitation: response.data, user };
-      });
-    });
   }
 
   showError(response) {
