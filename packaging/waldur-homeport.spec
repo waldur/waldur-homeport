@@ -6,7 +6,7 @@
 
 Name: waldur-homeport
 Summary: Waldur HomePort
-Version: 2.5.2
+Version: 2.5.4
 Release: 1.el7
 License: MIT
 Source0: %{name}-%{version}.tar.gz
@@ -35,7 +35,7 @@ Web interface for Waldur MasterMind cloud orchestrator.
 VERSION=$(grep '"version":' package.json | awk '{print $2}' | sed -e "s/\"//g;s/,//g")
 
 # Inject package version
-sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" app/scripts/configs/base-config.js
+sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" app/scripts/components/configs/base-config.js
 
 npm install --global bower grunt-cli
 
@@ -65,6 +65,9 @@ rm -rf %{buildroot}
 %config(noreplace) %{__conf_dir}/nginx.conf
 
 %changelog
+* Fri Jun 2 2017 Jenkins <jenkins@opennodecloud.com> - 2.5.4-1.el7
+- New upstream release
+
 * Sat May 6 2017 Jenkins <jenkins@opennodecloud.com> - 2.5.2-1.el7
 - New upstream release
 

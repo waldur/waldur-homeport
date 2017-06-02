@@ -30,7 +30,10 @@ export default class openstackTenantChangePackageService {
 
   saveData(context) {
     return this.changePackage(context).then(() => {
-      this.ncUtilsFlash.success(gettext('Tenant package has been changed.'));
+      return this.loadTenant(context).then(tenant => {
+        this.ncUtilsFlash.success(gettext('Tenant package has been changed.'));
+        return tenant;
+      });
     }).catch(response => {
       this.ncUtilsFlash.error(gettext('Unable to change tenant package.'));
       return this.$q.reject(response);
@@ -40,10 +43,13 @@ export default class openstackTenantChangePackageService {
   // Private API section
 
   loadTenantQuotasUsage(context) {
-    return this.resourcesService.$get(null, null, context.tenant.url)
-    .then(tenant => angular.extend(context, {
+    return this.loadTenant(context).then(tenant => angular.extend(context, {
       quotas: parseQuotasUsage(tenant.quotas)
     }));
+  }
+
+  loadTenant(context) {
+    return this.resourcesService.$get(null, null, context.tenant.url);
   }
 
   loadTenantPackage(context) {

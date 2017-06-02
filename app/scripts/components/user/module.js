@@ -23,8 +23,8 @@ export default module => {
   module.directive('userDetails', userDetails);
   module.component('userEdit', userEdit);
   module.directive('userDashboard', userDashboard);
-  module.directive('userOrganizations', userOrganizations);
-  module.directive('userProjects', userProjects);
+  module.component('userOrganizations', userOrganizations);
+  module.component('userProjects', userProjects);
   module.component('userPopover', userPopover);
   module.component('userPopoverTable', userPopoverTable);
   module.service('stateUtilsService', stateUtilsService);

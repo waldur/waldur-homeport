@@ -1,12 +1,10 @@
-export default function userOrganizations() {
-  return {
-    restrict: 'E',
-    templateUrl: 'views/partials/filtered-list.html',
-    controller: UserOrganizationsController,
-    controllerAs: 'ListController',
-    scope: {}
-  };
-}
+const userOrganizations = {
+  templateUrl: 'views/partials/filtered-list.html',
+  controller: UserOrganizationsController,
+  controllerAs: 'ListController',
+};
+
+export default userOrganizations;
 
 // @ngInject
 function UserOrganizationsController(
@@ -16,7 +14,28 @@ function UserOrganizationsController(
     init: function() {
       this.service = customerPermissionsService;
       this.controllerScope = controllerScope;
-      this.tableOptions = {
+      var fn = this._super.bind(this);
+      this.loading = true;
+      this.loadContext().then(() => {
+        this.tableOptions = this.getTableOptions();
+        this.loading = false;
+        fn();
+      }).finally(() => {
+        this.loading = false;
+      });
+    },
+    loadContext: function() {
+      return usersService.getCurrentUser().then(user => {
+        this.currentUser = user;
+      });
+    },
+    getFilter: function() {
+      return {
+        user_url: this.currentUser.url
+      };
+    },
+    getTableOptions: function() {
+      return {
         disableSearch: true,
         noDataText: gettext('No organizations yet'),
         noMatchesText: gettext('No organizations found matching filter.'),
@@ -40,15 +59,6 @@ function UserOrganizationsController(
             width: '50px'
           }
         ]
-      };
-      var fn = this._super.bind(this);
-      usersService.getCurrentUser().then(() => {
-        fn();
-      });
-    },
-    getFilter: function() {
-      return {
-        user_url: usersService.currentUser.url
       };
     }
   });

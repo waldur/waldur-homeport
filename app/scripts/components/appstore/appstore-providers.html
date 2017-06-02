@@ -20,7 +20,7 @@
                 <div class="ibox" uib-tooltip="{{ service.warning }}">
                     <div class="ibox-content product-box cursor-pointer">
                         <div class="m-md" ng-class="{disabled: !service.enabled}">
-                            <a class="product-name elipsis" uib-tooltip="{{ ::service.name }}">
+                            <a class="h5 elipsis" uib-tooltip="{{ ::service.name }}">
                                 <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>
                                 {{ ::service.name }}
                             </a>
@@ -30,7 +30,7 @@
                              ng-class="{disabled: !service.enabled}">
                             <provider-icon type="service.type" size="img-md"/>
                         </div>
-                        <div class="product-desc" ng-class="{disabled: !service.enabled}">
+                        <div class="p-xs" ng-class="{disabled: !service.enabled}">
                             <a class="btn btn-xs btn-outline btn-primary" ng-click="$ctrl.showDetails(service)">
                                 <span translate>Details</span>
                                 <i class="fa fa-eye"></i>

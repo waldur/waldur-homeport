@@ -115,7 +115,15 @@
         </td>
         <td>
           {{ ::$ctrl.event.message }}
-        </div>
+        </td>
+      </tr>
+      <tr ng-if="::$ctrl.event.link">
+        <td>
+          <span translate>Issue link</span>
+        </td>
+        <td>
+          {{ ::$ctrl.event.issue_link }}
+        </td>
       </tr>
     </tbody>
   </table>

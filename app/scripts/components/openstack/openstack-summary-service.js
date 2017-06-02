@@ -52,7 +52,9 @@ export default class OpenStackSummaryService {
     return this.$http.get(service.service_project_link_url).then((response) => {
       angular.forEach(response.data.quotas, (quota) => {
         let componentQuotaName = quotaNamesMapping[quota.name];
-        components.limits[componentQuotaName] = Math.min(quota.limit, components.limits[componentQuotaName]);
+        if (quota.limit !== -1) {
+          components.limits[componentQuotaName] = Math.min(quota.limit, components.limits[componentQuotaName]);
+        }
         components.usages[componentQuotaName] = Math.max(quota.usage, components.usages[componentQuotaName]);
       });
 
