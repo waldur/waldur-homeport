@@ -4,12 +4,14 @@
 <div class="row" ng-if="!$ctrl.loading">
   <div class="col-sm-offset-3 col-sm-9">
     <dl class="dl-horizontal">
-      <dt><span translate>Username</span>:</dt>
+      <!-- default dl-horizontal dt width is 160px.
+           Add 13px to display Terms of Service and move content 13px right to maintain previous appearance -->
+      <dt style='width:173px; margin-right:13px'><span translate>Username</span>:</dt>
       <dd ng-bind="$ctrl.profile.username"></dd>
 
-      <dt>
+      <dt style='width:173px; margin-right:13px'>
         <a ui-sref="tos.index" target="_blank">
-          <span translate>Terms</span>
+          <span translate>Terms of Service</span>
         </a>
         <span translate>accepted</span>:
       </dt>
