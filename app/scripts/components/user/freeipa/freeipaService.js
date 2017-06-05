@@ -3,7 +3,7 @@ export default function freeipaService($http, ENV) {
   const endpoint = `${ENV.apiEndpoint}api/freeipa-profiles/`;
 
   let createProfile = function (username, agreeWithPolicy){
-    return $http.post(endpoint, {username, 'agree_with_policy': agreeWithPolicy});
+    return $http.post(endpoint, {username, agree_with_policy: agreeWithPolicy});
   };
 
   let getProfile = function(username) {
