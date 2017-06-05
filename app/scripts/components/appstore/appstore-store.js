@@ -165,6 +165,11 @@ function AppStoreController(
             order: Object.keys(response.actions.POST).filter(key => key != 'service_project_link'),
             options: response.actions.POST
           };
+        } else {
+          fields.order = fields.order.filter(name => {
+            const field = fields.options[name];
+            return !field || !field.is_visible || field.is_visible(ENV);
+          });
         }
         let formOptions = angular.merge({}, response.actions.POST, fields.options);
         this.fields = fields;
