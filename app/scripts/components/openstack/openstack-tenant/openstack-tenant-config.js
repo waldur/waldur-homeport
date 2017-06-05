@@ -47,7 +47,8 @@ export default {
     },
     access: {
       type: 'label',
-      label: gettext('Access')
+      label: gettext('Access'),
+      is_visible: ENV => ENV.tenantCredentialsVisible,
     },
     user_username: {
       type: 'string',
