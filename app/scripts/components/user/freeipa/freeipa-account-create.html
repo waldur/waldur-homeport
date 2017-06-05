@@ -1,0 +1,42 @@
+<div ng-if="$ctrl.loading">
+  <loading-spinner/>
+</div>
+<div class="row" ng-if="!$ctrl.loading">
+  <form class="form-horizontal" name="$ctrl.parentForm">
+    <div class="form-group">
+      <label for="username" class="col-sm-3 col-md-4 col-lg-3 control-label">
+        <span translate>Username</span>
+      </label>
+      <div class="col-sm-6 col-md-4">
+        <input class="form-control" id="username" type="text" name="username"
+               ng-model="$ctrl.profile.username" required/>
+        <p class="text-danger" ng-if="$ctrl.parentForm.$submitted && $ctrl.parentForm.username.$error.required">
+          User name is required.</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="checkbox col-sm-offset-3 col-xs-12">
+        <label>
+          <input
+              id="acceptPolicy"
+              type="checkbox"
+              ng-model="$ctrl.profile.agree_with_policy"/>
+          <span translate>I accept the</span>&nbsp;
+          <a ui-sref="tos-freeipa" target="_blank">
+            <span translate>Terms of Service</span>
+          </a>.
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-5">
+          <a type="submit" class="btn btn-primary"
+                  ng-disabled="!$ctrl.profile.agree_with_policy"
+                  submit-button="$ctrl.submitForm()"
+                  uib-tooltip="{{ $ctrl.getTooltip() }}">
+            <span translate>Create</span>
+          </a>
+      </div>
+    </div>
+  </form>
+</div>
