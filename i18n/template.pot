@@ -42,14 +42,14 @@ msgstr ""
 msgid "1 day"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:32
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:30
-msgid "1 month"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js:37
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:35
 msgid "1 year"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:32
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:30
+msgid "30 days"
 msgstr ""
 
 #: app/scripts/components/user/freeipa/freeipa-account-create.js:26
@@ -62,7 +62,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:20
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:21
 msgid "accepted"
 msgstr ""
 
@@ -209,7 +209,7 @@ msgstr ""
 msgid "Add volumes"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:39
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:40
 msgid "Add Waldur user ssh keys to the FreeIPA profile"
 msgstr ""
 
@@ -673,7 +673,7 @@ msgid "Confirm changing your plan"
 msgstr ""
 
 #: app/scripts/components/customer/customer-manage.js:101
-#: app/scripts/components/table/base-list-controller.js:134
+#: app/scripts/components/table/base-list-controller.js:138
 msgid "Confirm deletion?"
 msgstr ""
 
@@ -978,7 +978,7 @@ msgstr ""
 msgid "Device"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:29
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:30
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr ""
 
@@ -1052,7 +1052,7 @@ msgstr ""
 msgid "Email update"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:34
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:35
 msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
 msgstr ""
 
@@ -4053,7 +4053,7 @@ msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:8
 #: app/scripts/components/user/freeipa/freeipa-account-create.html:29
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:18
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:19
 #: app/scripts/components/user/user-edit.html:131
 #: app/scripts/components/user/user-edit.html:147
 msgid "Terms of Service"
@@ -4470,7 +4470,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
 #: app/scripts/components/team/user-selector.html:9
 #: app/scripts/components/user/freeipa/freeipa-account-create.html:8
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:9
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:10
 msgid "Username"
 msgstr ""
 
