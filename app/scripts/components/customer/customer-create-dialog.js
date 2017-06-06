@@ -20,7 +20,7 @@ function CustomerCreateDialogController(
   $q,
   customerUtils) {
   angular.extend($scope, {
-    fields: ['name', 'contact_details', 'registration_code', 'vat_code'],
+    fields: ['name', 'contact_details', 'email', 'phone_number', 'registration_code', 'vat_code'],
     instance: {},
     init: function() {
       this.isHardLimit = false;
