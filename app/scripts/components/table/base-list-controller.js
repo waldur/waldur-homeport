@@ -17,6 +17,7 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       this.service.page = 1;
       this.service.cacheTime = this.cacheTime;
       this.userFilter = this.getUserFilter();
+      this.orderField = '';
       this._super();
       this.hideNoDataText = true;
       this.initialized = false;
@@ -63,6 +64,7 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
     getList: function(filter) {
       // It should return promise
       filter = filter || {};
+      this.orderField = filter.o || this.orderField;
       this.service.cacheTime = this.cacheTime;
       filter = angular.extend(filter, this.getChosenUserFilter(), this.getFilter());
       this.listPromise = this.service.getList(filter).then(response => {
@@ -101,7 +103,9 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       if (!this.enableRefresh) {
         return;
       }
-      var filter = {};
+      let filter = {
+        o: this.orderField,
+      };
       if (this.searchInput) {
         filter[this.searchFieldName] = this.searchInput;
       }
