@@ -7,9 +7,14 @@ const freeipaAccountEdit = {
   },
   controller: class FreeIPAAccountEditController {
     // @ngInject
-    constructor(freeipaService, ncUtilsFlash){
+    constructor(freeipaService, ncUtilsFlash, ENV){
       this.freeipaService = freeipaService;
       this.ncUtilsFlash = ncUtilsFlash;
+      this.prefix = ENV.freeipaWaldurPrefix;
+    }
+
+    $onInit(){
+      this.profile.username = this.profile.username.replace(this.prefix, '');
     }
 
     enableProfile() {

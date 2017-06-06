@@ -7,7 +7,6 @@ describe('FreeIPA account create', () => {
     module.component('freeipaAccountCreate', freeipaAccountCreate);
     module.constant('ENV', {
       apiEndpoint: 'https://example.com/',
-      currency: 'EUR',
     });
     filtersModule(module);
   }

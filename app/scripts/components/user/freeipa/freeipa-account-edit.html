@@ -7,8 +7,12 @@
       <!-- default dl-horizontal dt width is 160px.
            Add 13px to display Terms of Service and move content 13px right to maintain previous appearance -->
       <dt style='width:173px; margin-right:13px'><span translate>Username</span>:</dt>
-      <dd ng-bind="$ctrl.profile.username"></dd>
-
+      <dd class="input-group col-sm-4 m-b-sm">
+        <div class="input-group-addon">
+          {{ $ctrl.prefix }}
+        </div>
+        <input type="text" class="form-control" ng-model="$ctrl.profile.username" readonly>
+      </dd>
       <dt style='width:173px; margin-right:13px'>
         <a ui-sref="tos.freeipa" target="_blank">
           <span translate>Terms of Service</span>
@@ -24,13 +28,16 @@
     <button class="btn btn-warning"
             uib-tooltip="{{ 'Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems' | translate }}"
             ng-click="$ctrl.disableProfile()"
-            ng-if="$ctrl.profile.is_active">Disable profile</button>
+            ng-if="$ctrl.profile.is_active">Disable profile
+    </button>
     <button class="btn btn-success"
             uib-tooltip="{{ 'Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems' | translate }}"
             ng-click="$ctrl.enableProfile()"
-            ng-if="!$ctrl.profile.is_active">Enable profile</button>
+            ng-if="!$ctrl.profile.is_active">Enable profile
+    </button>
     <button class="btn btn-info"
             uib-tooltip="{{ 'Add Waldur user ssh keys to the FreeIPA profile' | translate }}"
-            ng-click="$ctrl.syncProfile()">Sync profile</button>
+            ng-click="$ctrl.syncProfile()">Sync profile
+    </button>
   </div>
 </div>
