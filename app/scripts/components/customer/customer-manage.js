@@ -109,6 +109,12 @@ function CustomerManageController(
         });
       }
     },
+    reportError: function() {
+      return $uibModal.open({
+        component: 'customerReportError',
+        resolve: () => ({customer: this.customer})
+      });
+    },
   });
 
   controllerScope.__proto__ = new ManageController();

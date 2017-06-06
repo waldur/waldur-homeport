@@ -52,6 +52,10 @@ msgstr ""
 msgid "30 days"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:19
+msgid "Abbreviation"
+msgstr ""
+
 #: app/scripts/components/routes/about.js:30
 #: app/views/about/index.html:3
 #: app/views/about/index.html:8
@@ -68,7 +72,7 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:40
+#: app/scripts/components/customer/customer-manage.html:80
 msgid "Account"
 msgstr ""
 
@@ -212,7 +216,8 @@ msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:53
-#: app/scripts/components/customer/customer-manage.html:22
+#: app/scripts/components/customer/customer-manage.html:34
+#: app/scripts/components/customer/customer-manage.html:62
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
 msgstr ""
@@ -222,6 +227,10 @@ msgstr ""
 #: app/scripts/components/issues/issue-quick-create.html:94
 #: app/scripts/components/issues/issue-registration.html:172
 msgid "Affected resource"
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.html:29
+msgid "Agreement number"
 msgstr ""
 
 #: app/scripts/components/alerts/base-alerts-list.js:35
@@ -442,7 +451,7 @@ msgstr ""
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:37
+#: app/scripts/components/customer/customer-manage.html:77
 msgid "Bank"
 msgstr ""
 
@@ -599,6 +608,7 @@ msgstr ""
 msgid "Civil number"
 msgstr ""
 
+#: app/scripts/components/customer/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 msgid "Close"
 msgstr ""
@@ -629,7 +639,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:19
+#: app/scripts/components/customer/customer-manage.html:59
 msgid "Company"
 msgstr ""
 
@@ -677,8 +687,16 @@ msgstr ""
 msgid "Connected subnets"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:39
+msgid "Contact e-mail"
+msgstr ""
+
 #: app/scripts/components/customer/customer-popover.html:28
 msgid "Contact email"
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.html:44
+msgid "Contact phone"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:115
@@ -703,7 +721,7 @@ msgid "Cost threshold"
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:36
-#: app/scripts/components/customer/customer-manage.html:25
+#: app/scripts/components/customer/customer-manage.html:65
 msgid "Country"
 msgstr ""
 
@@ -893,10 +911,6 @@ msgstr ""
 msgid "Date joined"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:43
-msgid "Default tax percent"
-msgstr ""
-
 #: app/scripts/components/cost-planning/cost-plan-items.html:46
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:39
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
@@ -1026,7 +1040,7 @@ msgid "Edit team member"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:61
-#: app/scripts/components/customer/customer-manage.html:28
+#: app/scripts/components/customer/customer-manage.html:68
 #: app/scripts/components/invitations/invitations-list.js:95
 msgid "Email"
 msgstr ""
@@ -1442,6 +1456,11 @@ msgstr ""
 
 #: app/scripts/components/issues/constants.js:2
 msgid "Incident"
+msgstr ""
+
+#: app/scripts/components/customer/customer-report-error.html:2
+#: app/scripts/components/customer/customer-report-error.js:21
+msgid "Incorrect organization details"
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html:42
@@ -1936,6 +1955,10 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:14
+msgid "Native name"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:19
 msgid "Network"
 msgstr ""
@@ -2357,11 +2380,11 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:65
+#: app/scripts/components/customer/customer-manage.html:111
 msgid "Only staff can remove organization."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:52
+#: app/scripts/components/customer/customer-manage.html:92
 msgid "Only staff can update organization policies."
 msgstr ""
 
@@ -2443,7 +2466,7 @@ msgstr ""
 msgid "Organization {organizationName} is updated."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:55
+#: app/scripts/components/customer/customer-manage.html:95
 msgid "Organization actions"
 msgstr ""
 
@@ -2593,7 +2616,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-customer-details.html:5
 #: app/scripts/components/billing/billing-issuer-details.html:5
-#: app/scripts/components/customer/customer-manage.html:34
+#: app/scripts/components/customer/customer-manage.html:74
 #: app/scripts/components/customer/customer-popover.html:32
 msgid "Phone"
 msgstr ""
@@ -2690,7 +2713,7 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:31
+#: app/scripts/components/customer/customer-manage.html:71
 msgid "Postal"
 msgstr ""
 
@@ -3120,6 +3143,10 @@ msgstr ""
 msgid "Registration method"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:24
+msgid "Registry code"
+msgstr ""
+
 #: app/scripts/components/user/filters.js:24
 msgid "Regular user"
 msgstr ""
@@ -3143,7 +3170,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:60
+#: app/scripts/components/customer/customer-manage.html:106
 msgid "Remove organization"
 msgstr ""
 
@@ -3154,6 +3181,10 @@ msgstr ""
 #: app/scripts/components/project/project-providers-service.js:92
 #: app/scripts/components/providers/details/provider-projects.js:107
 msgid "Removing link"
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.html:99
+msgid "Report incorrect data"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:14
@@ -4109,6 +4140,10 @@ msgstr ""
 msgid "To"
 msgstr ""
 
+#: app/scripts/components/customer/customer-report-error.js:28
+msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:6
 msgid "To get access, please send a request to {{$ctrl.supportEmail}}."
 msgstr ""
@@ -4436,6 +4471,14 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:49
+msgid "VAT code"
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.html:83
+msgid "VAT rate"
+msgstr ""
+
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:55
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:35
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:54
@@ -4537,7 +4580,7 @@ msgstr ""
 msgid "You can change that in <a href=\"{link}\">provider management</a>."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:57
+#: app/scripts/components/customer/customer-manage.html:103
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
