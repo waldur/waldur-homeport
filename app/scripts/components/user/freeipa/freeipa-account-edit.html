@@ -2,11 +2,12 @@
   <loading-spinner/>
 </div>
 <div class="row" ng-if="!$ctrl.loading">
-  <div class="col-sm-offset-3 col-sm-9">
+  <div class="col-sm-offset-3 col-sm-9 form-horizontal">
     <dl class="dl-horizontal">
       <!-- default dl-horizontal dt width is 160px.
            Add 13px to display Terms of Service and move content 13px right to maintain previous appearance -->
-      <dt style='width:173px; margin-right:13px'><span translate>Username</span>:</dt>
+      <dt style='width:173px; margin-right:13px;' class="control-label">
+        <span translate>Username</span>:</dt>
       <dd class="input-group col-sm-4 m-b-sm">
         <div class="input-group-addon">
           {{ $ctrl.prefix }}
