@@ -62,7 +62,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:16
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:20
 msgid "accepted"
 msgstr ""
 
@@ -209,7 +209,7 @@ msgstr ""
 msgid "Add volumes"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:33
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:39
 msgid "Add Waldur user ssh keys to the FreeIPA profile"
 msgstr ""
 
@@ -978,7 +978,7 @@ msgstr ""
 msgid "Device"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:25
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:29
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr ""
 
@@ -1052,7 +1052,7 @@ msgstr ""
 msgid "Email update"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:29
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:34
 msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
 msgstr ""
 
@@ -2829,15 +2829,15 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.js:29
+#: app/scripts/components/user/freeipa/freeipa-account-edit.js:34
 msgid "Profile has been disabled"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.js:19
+#: app/scripts/components/user/freeipa/freeipa-account-edit.js:24
 msgid "Profile has been enabled"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.js:38
+#: app/scripts/components/user/freeipa/freeipa-account-edit.js:43
 msgid "Profile has been synced successfully"
 msgstr ""
 
@@ -4053,7 +4053,7 @@ msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:8
 #: app/scripts/components/user/freeipa/freeipa-account-create.html:29
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:14
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:18
 #: app/scripts/components/user/user-edit.html:131
 #: app/scripts/components/user/user-edit.html:147
 msgid "Terms of Service"
