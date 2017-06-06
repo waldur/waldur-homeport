@@ -42,14 +42,14 @@ msgstr ""
 msgid "1 day"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:32
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:30
-msgid "1 month"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js:37
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:35
 msgid "1 year"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:32
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:30
+msgid "30 days"
 msgstr ""
 
 #: app/scripts/components/routes/about.js:30
@@ -211,7 +211,7 @@ msgstr ""
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:54
+#: app/scripts/components/customer/customer-create-dialog.html:53
 #: app/scripts/components/customer/customer-manage.html:22
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
@@ -282,7 +282,7 @@ msgstr ""
 msgid "An error occurred during policy update."
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:35
+#: app/scripts/components/customer/customer-policies.js:37
 msgid "An error occurred on policies update."
 msgstr ""
 
@@ -503,7 +503,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-store.html:55
 #: app/scripts/components/appstore/category-selector.html:36
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:56
-#: app/scripts/components/customer/customer-create-dialog.html:94
+#: app/scripts/components/customer/customer-create-dialog.html:96
 #: app/scripts/components/digitalocean/droplet-resize.html:76
 #: app/scripts/components/events/event-details-dialog.html:133
 #: app/scripts/components/events/event-types-dialog.html:14
@@ -661,7 +661,7 @@ msgid "Confirm changing your plan"
 msgstr ""
 
 #: app/scripts/components/customer/customer-manage.js:101
-#: app/scripts/components/table/base-list-controller.js:134
+#: app/scripts/components/table/base-list-controller.js:138
 msgid "Confirm deletion?"
 msgstr ""
 
@@ -697,7 +697,7 @@ msgstr ""
 msgid "Cost planning"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:9
+#: app/scripts/components/customer/customer-threshold.html:5
 #: app/scripts/components/project/project-policies.html:33
 msgid "Cost threshold"
 msgstr ""
@@ -969,7 +969,7 @@ msgstr ""
 msgid "Disable data volume"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:43
+#: app/scripts/components/customer/customer-threshold.html:39
 #: app/scripts/components/project/project-policies.html:61
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
@@ -1069,7 +1069,7 @@ msgstr ""
 msgid "Estimated cost"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:29
+#: app/scripts/components/customer/customer-threshold.html:25
 msgid "Estimated cost exceeds threshold"
 msgstr ""
 
@@ -1077,7 +1077,7 @@ msgstr ""
 msgid "Estimated cost exceeds threshold."
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:35
+#: app/scripts/components/customer/customer-threshold.html:31
 #: app/scripts/components/project/project-policies.html:53
 msgid "Estimated cost for current month"
 msgstr ""
@@ -1086,7 +1086,7 @@ msgstr ""
 msgid "Estonian"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:65
+#: app/scripts/components/customer/customer-create-dialog.html:64
 msgid "EU VAT ID"
 msgstr ""
 
@@ -1290,8 +1290,8 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:55
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:62
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:56
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:64
 msgid "generate automatically"
 msgstr ""
 
@@ -1456,11 +1456,11 @@ msgstr ""
 msgid "Informational"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:61
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:63
 msgid "Initial admin password"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:54
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:55
 msgid "Initial admin username"
 msgstr ""
 
@@ -1481,7 +1481,7 @@ msgstr ""
 msgid "Instance has been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:271
+#: app/scripts/components/appstore/appstore-store.js:276
 msgid "Instance is not configured."
 msgstr ""
 
@@ -1503,16 +1503,16 @@ msgid "Internal IPs"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/module.js:47
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:74
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:77
 msgid "Internal network allocation pool"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/module.js:40
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:67
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:70
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:96
+#: app/scripts/components/invitations/utils.js:105
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
@@ -1530,7 +1530,7 @@ msgstr ""
 msgid "Invitation check"
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:37
+#: app/scripts/components/invitations/utils.js:45
 msgid "Invitation could not be accepted"
 msgstr ""
 
@@ -1550,15 +1550,15 @@ msgstr ""
 msgid "Invitation has been sent again."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:91
+#: app/scripts/components/invitations/utils.js:100
 msgid "Invitation is not found."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:53
+#: app/scripts/components/invitations/utils.js:66
 msgid "Invitation is not valid anymore."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:94
+#: app/scripts/components/invitations/utils.js:103
 msgid "Invitation is not valid."
 msgstr ""
 
@@ -1729,11 +1729,11 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:63
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:65
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:56
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:57
 msgid "Leave blank if you want admin username to be auto-generated."
 msgstr ""
 
@@ -1883,7 +1883,7 @@ msgstr ""
 msgid "Minimal valid value is"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:25
+#: app/scripts/components/customer/customer-threshold.html:21
 msgid "Minimal valid value is 0"
 msgstr ""
 
@@ -2089,11 +2089,11 @@ msgstr ""
 msgid "No notifications registered."
 msgstr ""
 
-#: app/scripts/components/user/user-organizations.js:22
+#: app/scripts/components/user/user-organizations.js:41
 msgid "No organizations found matching filter."
 msgstr ""
 
-#: app/scripts/components/user/user-organizations.js:21
+#: app/scripts/components/user/user-organizations.js:40
 msgid "No organizations yet"
 msgstr ""
 
@@ -2139,11 +2139,11 @@ msgid "No projects are assigned to this role."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js:59
-#: app/scripts/components/user/user-projects.js:22
+#: app/scripts/components/user/user-projects.js:41
 msgid "No projects found matching filter."
 msgstr ""
 
-#: app/scripts/components/user/user-projects.js:21
+#: app/scripts/components/user/user-projects.js:40
 msgid "No projects yet"
 msgstr ""
 
@@ -2405,7 +2405,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-quick-create.html:56
 #: app/scripts/components/issues/issue-registration.html:43
 #: app/scripts/components/issues/issues-list.js:89
-#: app/scripts/components/user/user-projects.js:34
+#: app/scripts/components/user/user-projects.js:53
 msgid "Organization"
 msgstr ""
 
@@ -2439,7 +2439,7 @@ msgstr ""
 msgid "Organization {customer_name} has no providers."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.js:43
+#: app/scripts/components/customer/customer-create-dialog.js:66
 msgid "Organization {organizationName} is updated."
 msgstr ""
 
@@ -2470,14 +2470,14 @@ msgstr ""
 msgid "Organization events"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.js:51
+#: app/scripts/components/customer/customer-create-dialog.js:74
 msgid "Organization has been created."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:70
 #: app/scripts/components/issues/constants.js:47
 #: app/scripts/components/user/user-edit.html:67
-#: app/scripts/components/user/user-organizations.js:26
+#: app/scripts/components/user/user-organizations.js:45
 msgid "Organization name"
 msgstr ""
 
@@ -2489,7 +2489,7 @@ msgstr ""
 msgid "Organization owner role expires on"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:27
+#: app/scripts/components/customer/customer-policies.js:29
 msgid "Organization policies have been updated."
 msgstr ""
 
@@ -2515,7 +2515,7 @@ msgid "Owned organizations"
 msgstr ""
 
 #: app/scripts/components/team/customer-users-list.js:77
-#: app/scripts/components/user/user-organizations.js:34
+#: app/scripts/components/user/user-organizations.js:53
 msgid "Owner"
 msgstr ""
 
@@ -2660,7 +2660,7 @@ msgstr ""
 msgid "Please provide valid quotas."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:64
+#: app/scripts/components/customer/customer-create-dialog.html:63
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
@@ -2672,7 +2672,7 @@ msgstr ""
 msgid "Please select providers allowed to be used in this project."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:281
+#: app/scripts/components/appstore/appstore-store.js:286
 msgid "Please specify {fields}."
 msgstr ""
 
@@ -2883,7 +2883,7 @@ msgstr ""
 #: app/scripts/components/project/project-details.html:9
 #: app/scripts/components/providers/details/provider-project-link-quotas.html:6
 #: app/scripts/components/team/add-team-member.html:46
-#: app/scripts/components/user/user-projects.js:26
+#: app/scripts/components/user/user-projects.js:45
 msgid "Project name"
 msgstr ""
 
@@ -3407,7 +3407,7 @@ msgstr ""
 #: app/scripts/components/team/add-team-member.html:47
 #: app/scripts/components/team/customer-permissions-log-list.js:35
 #: app/scripts/components/team/project-permissions-log-list.js:32
-#: app/scripts/components/user/user-projects.js:41
+#: app/scripts/components/user/user-projects.js:60
 msgid "Role"
 msgstr ""
 
@@ -3428,7 +3428,7 @@ msgid "Runtime state"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:52
-#: app/scripts/components/customer/customer-create-dialog.html:89
+#: app/scripts/components/customer/customer-create-dialog.html:91
 #: app/scripts/components/project/project-providers.html:16
 #: app/scripts/components/providers/details/provider-projects.html:21
 #: app/scripts/components/providers/details/provider-settings.html:76
@@ -3602,7 +3602,7 @@ msgstr ""
 msgid "Send notification"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:345
+#: app/scripts/components/appstore/appstore-store.js:350
 msgid "Server error occurred."
 msgstr ""
 
@@ -4276,7 +4276,7 @@ msgstr ""
 msgid "Unselect all"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:52
+#: app/scripts/components/customer/customer-policies.html:14
 #: app/scripts/components/user/hooks/hook-details.html:76
 msgid "Update"
 msgstr ""
@@ -4315,7 +4315,7 @@ msgstr ""
 msgid "Upgrade"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:11
+#: app/scripts/components/customer/customer-threshold.html:7
 #: app/scripts/components/project/project-policies.html:34
 msgid "Upper bound of monthly resource cost provisioned from shared providers."
 msgstr ""
@@ -4688,7 +4688,7 @@ msgstr ""
 msgid "Your invitation is being processed."
 msgstr ""
 
-#: app/scripts/components/invitations/utils.js:68
+#: app/scripts/components/invitations/utils.js:77
 msgid "Your invitation was accepted."
 msgstr ""
 
