@@ -46,15 +46,15 @@ describe('FreeIPA account create', () => {
   }));
 
   it('submitForm calls freeipaService service', () => {
-    controller.parentForm.username.$setViewValue(profile.username);
-    controller.parentForm.acceptPolicy.$setViewValue(profile.acceptPolicy);
+    controller.profileForm.username.$setViewValue(profile.username);
+    controller.profileForm.acceptPolicy.$setViewValue(profile.acceptPolicy);
     controller.submitForm();
     expect(freeipaService.createProfile).toHaveBeenCalledWith(profile.username, profile.acceptPolicy);
   });
 
   it('submitForm does not call freeipaService service username is empty', () => {
-    controller.parentForm.username.$setViewValue('');
-    controller.parentForm.acceptPolicy.$setViewValue(profile.acceptPolicy);
+    controller.profileForm.username.$setViewValue('');
+    controller.profileForm.acceptPolicy.$setViewValue(profile.acceptPolicy);
     controller.submitForm();
     expect(freeipaService.createProfile).not.toHaveBeenCalled();
   });

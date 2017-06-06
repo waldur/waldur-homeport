@@ -1,37 +1,26 @@
 // @ngInject
-export default function freeipaService($http, ENV) {
-  const endpoint = `${ENV.apiEndpoint}api/freeipa-profiles/`;
-
-  let createProfile = function (username, agreeWithPolicy){
-    return $http.post(endpoint, {username, agree_with_policy: agreeWithPolicy});
-  };
-
-  let getProfile = function(username) {
-    return $http.get(endpoint, {params: {username: username}});
-  };
-
-  function resourceAction(uuid, action) {
-    let url = `${endpoint}${uuid}/${action}/`;
-    return $http.post(url);
+export default class FreeIPAService{
+  constructor($http, ENV) {
+    this.endpoint = `${ENV.apiEndpoint}api/freeipa-profiles/`;
+    this.$http = $http;
   }
-
-  let enable = function(uuid) {
-    return resourceAction(uuid, 'enable');
-  };
-
-  let disable = function(uuid) {
-    return resourceAction(uuid, 'disable');
-  };
-
-  let sync = function(uuid) {
-    return resourceAction(uuid, 'update_ssh_keys');
-  };
-
-  return {
-    createProfile: createProfile,
-    enableProfile: enable,
-    disableProfile: disable,
-    syncProfile: sync,
-    getProfile: getProfile,
-  };
+  createProfile(username, agreeWithPolicy){
+    return this.$http.post(this.endpoint, {username, agree_with_policy: agreeWithPolicy});
+  }
+  getProfile(username) {
+    return this.$http.get(this.endpoint, {params: {username: username}});
+  }
+  resourceAction(uuid, action) {
+    let url = `${this.endpoint}${uuid}/${action}/`;
+    return this.$http.post(url);
+  }
+  enableProfile(uuid) {
+    return this.resourceAction(uuid, 'enable');
+  }
+  disableProfile(uuid) {
+    return this.resourceAction(uuid, 'disable');
+  }
+  syncProfile(uuid) {
+    return this.resourceAction(uuid, 'update_ssh_keys');
+  }
 }

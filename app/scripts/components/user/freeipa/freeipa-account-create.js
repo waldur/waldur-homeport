@@ -17,8 +17,8 @@ const freeipaAccountCreate = {
       }
     }
     submitForm() {
-      this.parentForm.$setSubmitted();
-      if(this.parentForm.$invalid){
+      this.profileForm.$setSubmitted();
+      if(this.profileForm.$invalid){
         return;
       }
       this.loading = true;

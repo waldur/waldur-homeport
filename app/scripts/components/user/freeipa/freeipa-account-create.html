@@ -2,7 +2,7 @@
   <loading-spinner/>
 </div>
 <div class="row" ng-if="!$ctrl.loading">
-  <form class="form-horizontal" name="$ctrl.parentForm">
+  <form class="form-horizontal" name="$ctrl.profileForm">
     <div class="form-group">
       <label for="username" class="col-sm-3 col-md-4 col-lg-3 control-label">
         <span translate>Username</span>
@@ -11,7 +11,7 @@
       <div class="col-sm-6 col-md-4">
         <input class="form-control" id="username" type="text" name="username"
                ng-model="$ctrl.profile.username" required/>
-        <p class="text-danger" ng-if="$ctrl.parentForm.$submitted && $ctrl.parentForm.username.$error.required">
+        <p class="text-danger" ng-if="$ctrl.profileForm.$submitted && $ctrl.profileForm.username.$error.required">
           User name is required.</p>
       </div>
     </div>
@@ -25,8 +25,9 @@
               ng-model="$ctrl.profile.agree_with_policy"/>
           <span translate>I accept the</span>&nbsp;
           <a ui-sref="tos.freeipa" target="_blank">
+            <i class="fa fa-external-link"></i>
             <span translate>Terms of Service</span>
-          </a>.
+          </a>
         </label>
       </div>
     </div>
