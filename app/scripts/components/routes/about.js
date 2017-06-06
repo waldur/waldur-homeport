@@ -21,7 +21,8 @@ export default function aboutRoutes($stateProvider) {
       templateUrl: 'views/tos/freeipa.html',
       data: {
         bodyClass: 'old',
-        pageTitle: gettext('Terms of service')
+        pageTitle: gettext('Terms of service'),
+        feature: 'freeipa'
       }
     })
 

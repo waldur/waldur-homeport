@@ -40,7 +40,8 @@ const tabs = {
     url: 'freeipa-account/',
     template: '<freeipa-account></freeipa-account>',
     data: {
-      pageTitle: gettext('FreeIPA account')
+      pageTitle: gettext('FreeIPA account'),
+      feature: 'freeipa'
     }
   }
 };

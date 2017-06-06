@@ -26,9 +26,10 @@ export const PRIVATE_USER_TABS = [
     link: 'profile.manage'
   },
   {
-    label: gettext('FreeIPA Account'),
+    label: gettext('FreeIPA account'),
     icon: 'fa-user',
-    link: 'profile.freeipa'
+    link: 'profile.freeipa',
+    feature: 'freeipa'
   }
 ];
 
