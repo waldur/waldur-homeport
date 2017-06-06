@@ -29,7 +29,7 @@ export const openstackTemplateColumns = [
   },
   {
     name: 'monthlyPrice',
-    label: gettext('1 month'),
+    label: gettext('30 days'),
     filter: 'defaultCurrency'
   },
   {
