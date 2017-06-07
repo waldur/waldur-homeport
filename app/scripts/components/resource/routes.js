@@ -56,7 +56,7 @@ export default function resourceRoutes($stateProvider) {
     })
 
     .state('resources.details', {
-      url: ':resource_type/:uuid',
+      url: ':resource_type/:uuid/:tab',
       template: '<resource-header></resource-header>',
       resolve: {
         resource: loadResource
