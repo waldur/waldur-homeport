@@ -22,8 +22,7 @@ function OpenstackVolumesList(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackVolumesService;
-      this.rowFields.push('size');
-      this.rowFields.push('device');
+      this.addRowFields(['size', 'device']);
 
       $scope.$on('actionApplied', function(event, name) {
         if (name === 'volume') {

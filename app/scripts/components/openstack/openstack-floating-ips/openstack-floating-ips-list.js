@@ -15,7 +15,7 @@ function OpenstackFloatingIpsListController(
     init: function() {
       this.controllerScope = controllerScope;
       this.listActions = null;
-      this.rowFields.push('instance_uuid', 'instance_name');
+      this.addRowFields(['instance_uuid', 'instance_name']);
       var list_type = 'floating_ips';
       var fn = this._super.bind(this);
 

@@ -18,7 +18,7 @@ function OpenstackSnapshotsNestedListController(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackSnapshotsService;
-      this.rowFields.push('size');
+      this.addRowFields(['size']);
     },
     getTableOptions: function() {
       var options = this._super();
