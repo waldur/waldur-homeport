@@ -38,6 +38,7 @@ const appstoreOffering = {
             type: 'string',
             required: true,
             label: gettext('Name'),
+            help_text: gettext('This name will be visible in accounting data.'),
             max_length: 150
           },
           description: {

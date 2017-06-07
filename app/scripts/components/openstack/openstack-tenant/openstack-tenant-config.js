@@ -20,7 +20,8 @@ export default {
     name: {
       type: 'string',
       required: true,
-      label: gettext('Tenant name')
+      label: gettext('Tenant name'),
+      help_text: gettext('This name will be visible in accounting data.'),
     },
     template: {
       type: 'list',
