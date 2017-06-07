@@ -49,6 +49,14 @@
                     <dt><span translate>VAT code</span>:</dt>
                     <dd>{{::ManageController.customer.vat_code}}</dd>
                 </span>
+
+                <span ng-if="::ManageController.customer.access_subnets && ManageController.organizationSubnetsVisible">
+                    <dt>
+                        <helpicon help-text="{{ 'Subnets from which connection to self-service is allowed.' | translate }}"></helpicon>
+                        <span translate>Subnets</span>:
+                    </dt>
+                    <dd>{{::ManageController.customer.access_subnets}}</dd>
+                </span>
             </dl>
         </div>
     </div>
