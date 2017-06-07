@@ -24,6 +24,13 @@ describe('FreeIPA account create', () => {
         success: jasmine.createSpy('success'),
       };
     });
+    $provide.factory('usersService', function($q) {
+      return {
+        getCurrentUser: jasmine.createSpy('createProfile').and.returnValue($q.when({
+          username: 'admin'
+        }))
+      };
+    });
   }));
 
   let freeipaService;
@@ -51,7 +58,7 @@ describe('FreeIPA account create', () => {
     expect(freeipaService.createProfile).toHaveBeenCalledWith(profile.username, profile.acceptPolicy);
   });
 
-  it('submitForm does not call freeipaService service username is empty', () => {
+  it('submitForm does not call freeipaService if username is empty', () => {
     controller.profileForm.username.$setViewValue('');
     controller.profileForm.acceptPolicy.$setViewValue(profile.acceptPolicy);
     controller.submitForm();
