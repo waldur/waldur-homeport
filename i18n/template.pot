@@ -170,7 +170,7 @@ msgstr ""
 msgid "Add private cloud"
 msgstr ""
 
-#: app/scripts/components/project/project-create.html:70
+#: app/scripts/components/project/project-create.html:72
 #: app/scripts/components/project/projects-list.js:157
 msgid "Add project"
 msgstr ""
@@ -535,7 +535,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:34
 #: app/scripts/components/plans/plans-list.html:37
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:32
-#: app/scripts/components/project/project-create.html:73
+#: app/scripts/components/project/project-create.html:75
 #: app/scripts/components/providers/create.html:160
 #: app/scripts/components/resource/actions/dialog/action-dialog.html:35
 #: app/scripts/components/team/add-project-member.html:54
@@ -562,7 +562,7 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: app/scripts/components/project/project-create.html:38
+#: app/scripts/components/project/project-create.html:40
 #: app/scripts/components/providers/details/provider-details.html:30
 msgid "Certifications"
 msgstr ""
@@ -1955,7 +1955,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:27
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:35
-#: app/scripts/components/project/project-create.html:53
+#: app/scripts/components/project/project-create.html:55
 msgid "N/A"
 msgstr ""
 
@@ -2896,7 +2896,7 @@ msgstr ""
 msgid "Project dashboard"
 msgstr ""
 
-#: app/scripts/components/project/project-create.html:24
+#: app/scripts/components/project/project-create.html:26
 msgid "Project description"
 msgstr ""
 
@@ -2940,7 +2940,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:69
 #: app/scripts/components/issues/constants.js:55
-#: app/scripts/components/project/project-create.html:9
+#: app/scripts/components/project/project-create.html:8
 #: app/scripts/components/project/project-details.html:9
 #: app/scripts/components/providers/details/provider-project-link-quotas.html:6
 #: app/scripts/components/team/add-team-member.html:46
@@ -2988,7 +2988,7 @@ msgstr ""
 msgid "Provider {service_name} is not responding."
 msgstr ""
 
-#: app/scripts/components/project/project-create.html:39
+#: app/scripts/components/project/project-create.html:41
 #: app/scripts/components/project/project-policies.html:10
 msgid "Provider certification required by this project"
 msgstr ""
@@ -3584,7 +3584,7 @@ msgid "Select caller..."
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-certifications.html:2
-#: app/scripts/components/project/project-create.html:46
+#: app/scripts/components/project/project-create.html:48
 #: app/scripts/components/project/project-policies.html:17
 msgid "Select certifications"
 msgstr ""
@@ -4170,7 +4170,7 @@ msgstr ""
 
 #: app/scripts/components/offering/appstore-offering.js:41
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:24
-#: app/scripts/components/project/project-create.html:8
+#: app/scripts/components/project/project-create.html:15
 msgid "This name will be visible in accounting data."
 msgstr ""
 
