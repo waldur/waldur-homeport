@@ -29,6 +29,7 @@ function CustomerManageController(
       this.controllerScope = controllerScope;
       this._super();
       this.paymentDetails = null;
+      this.organizationSubnetsVisible = ENV.organizationSubnetsVisible;
       this.loadInitial();
     },
     loadInitial: function () {

@@ -214,6 +214,7 @@ const ENV = {
   ],
   defaultLanguage: 'en',
   tenantCredentialsVisible: true,
+  organizationSubnetsVisible: false,
 
   // Support email and phone is rendered at the footer
   // supportEmail: 'support@example.com',
