@@ -52,8 +52,8 @@ msgstr ""
 msgid "30 days"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-create.js:26
-msgid "A profile has been created"
+#: app/scripts/components/user/freeipa/freeipa-account-create.js:45
+msgid "A profile has been created."
 msgstr ""
 
 #: app/scripts/components/customer/customer-manage.html:19
@@ -66,15 +66,11 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:21
-msgid "accepted"
-msgstr ""
-
 #: app/scripts/components/invitations/invitations-list.js:82
 msgid "Accepted"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:50
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:51
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:15
 #: app/scripts/components/resource/summary/virtual-machine-summary.html:13
 msgid "Access"
@@ -174,7 +170,7 @@ msgstr ""
 msgid "Add private cloud"
 msgstr ""
 
-#: app/scripts/components/project/project-create.html:69
+#: app/scripts/components/project/project-create.html:72
 #: app/scripts/components/project/projects-list.js:157
 msgid "Add project"
 msgstr ""
@@ -196,7 +192,7 @@ msgstr ""
 msgid "Add SLA"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:64
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:62
 msgid "Add snapshots"
 msgstr ""
 
@@ -205,15 +201,15 @@ msgstr ""
 msgid "Add SSH key"
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-vms-list.js:51
+#: app/scripts/components/resource/list/resource-vms-list.js:48
 msgid "Add virtual machine"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:66
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:64
 msgid "Add volumes"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:40
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:31
 msgid "Add Waldur user ssh keys to the FreeIPA profile"
 msgstr ""
 
@@ -379,9 +375,9 @@ msgstr ""
 msgid "Assignee"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:51
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:50
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:16
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:45
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:43
 msgid "Attached to"
 msgstr ""
 
@@ -539,7 +535,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:34
 #: app/scripts/components/plans/plans-list.html:37
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:32
-#: app/scripts/components/project/project-create.html:72
+#: app/scripts/components/project/project-create.html:75
 #: app/scripts/components/providers/create.html:160
 #: app/scripts/components/resource/actions/dialog/action-dialog.html:35
 #: app/scripts/components/team/add-project-member.html:54
@@ -566,7 +562,7 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: app/scripts/components/project/project-create.html:37
+#: app/scripts/components/project/project-create.html:40
 #: app/scripts/components/providers/details/provider-details.html:30
 msgid "Certifications"
 msgstr ""
@@ -762,7 +758,7 @@ msgstr ""
 #: app/scripts/components/project/project-issues.js:31
 #: app/scripts/components/resource/list/resources-list.js:138
 #: app/scripts/components/resource/tabs/resource-issues.js:26
-#: app/scripts/components/user/freeipa/freeipa-account-create.html:40
+#: app/scripts/components/user/freeipa/freeipa-account-create.html:58
 #: app/scripts/components/user/hooks/hook-details.html:77
 msgid "Create"
 msgstr ""
@@ -846,7 +842,7 @@ msgstr ""
 #: app/scripts/components/billing/billing-utils.js:41
 #: app/scripts/components/issues/issue-detail.html:80
 #: app/scripts/components/issues/issues-list.js:124
-#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:46
+#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:45
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:45
 #: app/scripts/components/resource/summary/resource-summary-base.html:40
 #: app/scripts/components/team/customer-permissions-log-list.js:41
@@ -946,12 +942,12 @@ msgstr ""
 #: app/scripts/components/issues/issue-registration.html:110
 #: app/scripts/components/issues/issues-list.js:73
 #: app/scripts/components/issues/issues-short-list.html:28
-#: app/scripts/components/offering/appstore-offering.js:46
+#: app/scripts/components/offering/appstore-offering.js:47
 #: app/scripts/components/offering/offering-summary.html:62
-#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:38
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:45
+#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:37
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:43
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:142
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:46
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:47
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:30
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:25
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:20
@@ -994,12 +990,16 @@ msgstr ""
 msgid "Device"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:30
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:38
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html:22
 msgid "Disable data volume"
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:42
+msgid "Disable profile"
 msgstr ""
 
 #: app/scripts/components/customer/customer-threshold.html:39
@@ -1068,12 +1068,16 @@ msgstr ""
 msgid "Email update"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:35
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:46
 msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:69
 msgid "Enable DHCP"
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:50
+msgid "Enable profile"
 msgstr ""
 
 #: app/scripts/components/user/hooks/hook-details.html:37
@@ -1229,7 +1233,7 @@ msgstr ""
 msgid "Extend OpenStack volume"
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-vms-list.js:36
+#: app/scripts/components/resource/list/resource-vms-list.js:33
 #: app/scripts/components/resource/summary/virtual-machine-summary.html:42
 msgid "External IP"
 msgstr ""
@@ -1332,8 +1336,8 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:56
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:64
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:57
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:65
 msgid "generate automatically"
 msgstr ""
 
@@ -1354,6 +1358,7 @@ msgstr ""
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr ""
 
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:22
 #: app/scripts/components/user/user-edit.html:133
 msgid "have been accepted on"
 msgstr ""
@@ -1404,7 +1409,7 @@ msgstr ""
 msgid "How to obtain credentials"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-create.html:26
+#: app/scripts/components/user/freeipa/freeipa-account-create.html:42
 #: app/scripts/components/user/user-edit.html:145
 msgid "I accept the"
 msgstr ""
@@ -1459,15 +1464,15 @@ msgstr ""
 msgid "Import resources from the registered provider accounts."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:61
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:59
 msgid "Import snapshots"
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-vms-list.js:48
+#: app/scripts/components/resource/list/resource-vms-list.js:45
 msgid "Import virtual machine"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:63
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:61
 msgid "Import volumes"
 msgstr ""
 
@@ -1504,11 +1509,11 @@ msgstr ""
 msgid "Informational"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:63
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:64
 msgid "Initial admin password"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:55
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:56
 msgid "Initial admin username"
 msgstr ""
 
@@ -1541,7 +1546,7 @@ msgstr ""
 msgid "Instances count"
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-vms-list.js:26
+#: app/scripts/components/resource/list/resource-vms-list.js:23
 #: app/scripts/components/resource/summary/virtual-machine-summary.html:30
 msgid "Internal IP"
 msgstr ""
@@ -1551,12 +1556,12 @@ msgid "Internal IPs"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/module.js:47
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:77
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:78
 msgid "Internal network allocation pool"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-network/module.js:40
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:70
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:71
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
@@ -1740,7 +1745,7 @@ msgstr ""
 msgid "Job position"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:49
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:47
 msgid "Keep until"
 msgstr ""
 
@@ -1777,11 +1782,11 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:65
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:66
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:57
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:58
 msgid "Leave blank if you want admin username to be auto-generated."
 msgstr ""
 
@@ -1950,7 +1955,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:27
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:35
-#: app/scripts/components/project/project-create.html:52
+#: app/scripts/components/project/project-create.html:55
 msgid "N/A"
 msgstr ""
 
@@ -1964,15 +1969,15 @@ msgstr ""
 #: app/scripts/components/offering/offering-summary.html:11
 #: app/scripts/components/offering/offerings-list.js:34
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34
-#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:33
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:40
+#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:32
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:38
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:90
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:36
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:35
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:30
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:28
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:42
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:41
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:31
 #: app/scripts/components/project/projects-list.js:82
 #: app/scripts/components/providers/details/provider-details.html:4
@@ -2049,11 +2054,11 @@ msgstr ""
 msgid "No backup schedules yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:36
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:34
 msgid "No backups found matching filter."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:35
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:33
 msgid "No backups yet."
 msgstr ""
 
@@ -2251,14 +2256,14 @@ msgstr ""
 msgid "No snapshot schedules yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:30
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:31
+#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:29
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:29
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:27
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-snapshots.js:43
 msgid "No snapshots found matching filter."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:29
+#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:28
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:26
 msgid "No snapshots yet."
 msgstr ""
@@ -2291,12 +2296,12 @@ msgstr ""
 msgid "No users found matching filter."
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-vms-list.js:24
+#: app/scripts/components/resource/list/resource-vms-list.js:21
 msgid "No virtual machines found matching filter."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:39
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:32
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:38
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:30
 msgid "No volumes found matching filter."
 msgstr ""
 
@@ -2333,7 +2338,7 @@ msgstr ""
 msgid "Not enough data for resource analysis."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:48
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:46
 msgid "Not known"
 msgstr ""
 
@@ -2716,8 +2721,8 @@ msgstr ""
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-create.html:9
-msgid "Please select a username that you will use for login into the Linux systems"
+#: app/scripts/components/user/freeipa/freeipa-account-create.html:26
+msgid "Please select a username that you will use for login into the Linux systems."
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-projects.html:11
@@ -2851,18 +2856,6 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.js:34
-msgid "Profile has been disabled"
-msgstr ""
-
-#: app/scripts/components/user/freeipa/freeipa-account-edit.js:24
-msgid "Profile has been enabled"
-msgstr ""
-
-#: app/scripts/components/user/freeipa/freeipa-account-edit.js:43
-msgid "Profile has been synced successfully"
-msgstr ""
-
 #: app/scripts/components/user/user-manage.js:39
 msgid "Profile has been updated."
 msgstr ""
@@ -2903,7 +2896,7 @@ msgstr ""
 msgid "Project dashboard"
 msgstr ""
 
-#: app/scripts/components/project/project-create.html:23
+#: app/scripts/components/project/project-create.html:26
 msgid "Project description"
 msgstr ""
 
@@ -2995,7 +2988,7 @@ msgstr ""
 msgid "Provider {service_name} is not responding."
 msgstr ""
 
-#: app/scripts/components/project/project-create.html:38
+#: app/scripts/components/project/project-create.html:41
 #: app/scripts/components/project/project-policies.html:10
 msgid "Provider certification required by this project"
 msgstr ""
@@ -3004,7 +2997,7 @@ msgstr ""
 msgid "Provider details"
 msgstr ""
 
-#: app/scripts/components/resource/resource-name.html:14
+#: app/scripts/components/resource/resource-name.html:15
 msgid "Provider does not comply with project policies"
 msgstr ""
 
@@ -3591,7 +3584,7 @@ msgid "Select caller..."
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-certifications.html:2
-#: app/scripts/components/project/project-create.html:45
+#: app/scripts/components/project/project-create.html:48
 #: app/scripts/components/project/project-policies.html:17
 msgid "Select certifications"
 msgstr ""
@@ -3657,7 +3650,7 @@ msgstr ""
 msgid "Select user..."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:29
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:30
 msgid "Select Virtual Private Cloud package"
 msgstr ""
 
@@ -3766,15 +3759,15 @@ msgid "Sign in with SmartID"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:47
-#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:42
+#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:41
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:38
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:5
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:33
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:31
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:40
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:47
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:46
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:17
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:5
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:34
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:32
 msgid "Size"
 msgstr ""
 
@@ -3882,15 +3875,15 @@ msgstr ""
 #: app/scripts/components/offering/offering-summary.html:18
 #: app/scripts/components/offering/offerings-list.js:47
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:52
-#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:50
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:53
+#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:49
+#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:51
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:39
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:52
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:39
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:52
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:35
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:42
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:55
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:54
 #: app/scripts/components/payments/payment-list.js:27
 #: app/scripts/components/plans/plan-agreements-list.js:26
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:38
@@ -4009,6 +4002,10 @@ msgstr ""
 msgid "Support user"
 msgstr ""
 
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:34
+msgid "Sync profile"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js:39
 #: app/scripts/components/openstack/openstack-floating-ips/module.js:23
 #: app/scripts/components/openstack/openstack-instance/actions.js:29
@@ -4087,8 +4084,8 @@ msgid "Terms of service"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:8
-#: app/scripts/components/user/freeipa/freeipa-account-create.html:29
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:19
+#: app/scripts/components/user/freeipa/freeipa-account-create.html:45
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:20
 #: app/scripts/components/user/user-edit.html:131
 #: app/scripts/components/user/user-edit.html:147
 msgid "Terms of Service"
@@ -4169,6 +4166,12 @@ msgstr ""
 
 #: app/scripts/components/alerts/constants.js:7
 msgid "This month estimated costs for organization {customer_name} exceeded."
+msgstr ""
+
+#: app/scripts/components/offering/appstore-offering.js:41
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:24
+#: app/scripts/components/project/project-create.html:15
+msgid "This name will be visible in accounting data."
 msgstr ""
 
 #: app/scripts/components/issues/issues-list.js:142
@@ -4277,6 +4280,10 @@ msgstr ""
 msgid "Unable to change tenant package."
 msgstr ""
 
+#: app/scripts/components/user/freeipa/freeipa-account-create.js:43
+msgid "Unable to create a FreeIPA profile."
+msgstr ""
+
 #: app/scripts/components/invitations/actions/invitation-dialog-service.js:56
 msgid "Unable to create invitation."
 msgstr ""
@@ -4290,7 +4297,7 @@ msgstr ""
 msgid "Unable to create premium support contract."
 msgstr ""
 
-#: app/scripts/components/offering/appstore-offering.js:62
+#: app/scripts/components/offering/appstore-offering.js:63
 msgid "Unable to create request for a turnkey solution."
 msgstr ""
 
@@ -4509,8 +4516,12 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
 #: app/scripts/components/team/user-selector.html:9
 #: app/scripts/components/user/freeipa/freeipa-account-create.html:8
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:10
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:8
 msgid "Username"
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-create.html:13
+msgid "Username prefix"
 msgstr ""
 
 #: app/scripts/components/customer/customer-team.html:4
@@ -4576,7 +4587,7 @@ msgid "VMs"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:13
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:44
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:42
 msgid "Volume"
 msgstr ""
 
@@ -4602,7 +4613,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js:4
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:18
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:28
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:29
 msgid "VPC package"
 msgstr ""
 
@@ -4747,7 +4758,7 @@ msgstr ""
 msgid "You have no SLAs yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:30
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:28
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-snapshots.js:42
 msgid "You have no snapshots yet."
 msgstr ""
@@ -4765,17 +4776,17 @@ msgstr ""
 msgid "You have no users yet."
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-vms-list.js:23
+#: app/scripts/components/resource/list/resource-vms-list.js:20
 msgid "You have no virtual machines yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:38
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:31
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:37
+#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:29
 msgid "You have no volumes yet."
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-create.js:16
-msgid "You must agree with terms of service"
+#: app/scripts/components/user/freeipa/freeipa-account-create.js:29
+msgid "You must agree with terms of service."
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-accept.html:5
@@ -4784,6 +4795,22 @@ msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html:16
 msgid "Your current email is:"
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.js:20
+msgid "Your FreeIPA has been enabled."
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.js:40
+msgid "Your FreeIPA has been removed in FreeIPA server."
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.js:43
+msgid "Your FreeIPA has been synced successfully."
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.js:30
+msgid "Your FreeIPA profile has been disabled."
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-accept.html:4

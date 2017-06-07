@@ -12,6 +12,9 @@
                     id="projectName"
                     ng-model="ProjectAdd.project.name"
                     class="form-control">
+                <p class="help-block m-b-n-xs text-muted" translate>
+                  This name will be visible in accounting data.
+                </p>
                 <p class="text-danger"
                    ng-repeat="error in ProjectAdd.errors.name"
                    ng-bind="error"></p>
