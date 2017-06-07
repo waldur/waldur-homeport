@@ -214,6 +214,7 @@ const ENV = {
   ],
   defaultLanguage: 'en',
   tenantCredentialsVisible: true,
+  organizationSubnetsVisible: false,
 
   freeipaWaldurPrefix: '',
 

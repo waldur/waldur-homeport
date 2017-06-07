@@ -56,7 +56,11 @@ msgstr ""
 msgid "A profile has been created"
 msgstr ""
 
-#: app/scripts/components/routes/about.js:39
+#: app/scripts/components/customer/customer-manage.html:19
+msgid "Abbreviation"
+msgstr ""
+
+#: app/scripts/components/routes/about.js:40
 #: app/views/about/index.html:3
 #: app/views/about/index.html:8
 msgid "About"
@@ -76,7 +80,7 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:40
+#: app/scripts/components/customer/customer-manage.html:88
 msgid "Account"
 msgstr ""
 
@@ -197,7 +201,7 @@ msgid "Add snapshots"
 msgstr ""
 
 #: app/scripts/components/user/keys/key-list.js:62
-#: app/scripts/components/user/routes.js:90
+#: app/scripts/components/user/routes.js:91
 msgid "Add SSH key"
 msgstr ""
 
@@ -223,8 +227,9 @@ msgstr ""
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:53
-#: app/scripts/components/customer/customer-manage.html:22
+#: app/scripts/components/customer/customer-create-dialog.html:73
+#: app/scripts/components/customer/customer-manage.html:34
+#: app/scripts/components/customer/customer-manage.html:70
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
 msgstr ""
@@ -234,6 +239,10 @@ msgstr ""
 #: app/scripts/components/issues/issue-quick-create.html:94
 #: app/scripts/components/issues/issue-registration.html:172
 msgid "Affected resource"
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.html:29
+msgid "Agreement number"
 msgstr ""
 
 #: app/scripts/components/alerts/base-alerts-list.js:35
@@ -384,7 +393,7 @@ msgstr ""
 #: app/scripts/components/customer/routes.js:72
 #: app/scripts/components/project/project-workspace.js:74
 #: app/scripts/components/project/routes.js:102
-#: app/scripts/components/user/constants.js:37
+#: app/scripts/components/user/constants.js:38
 #: app/scripts/components/user/constants.js:8
 #: app/scripts/components/user/routes.js:15
 #: app/scripts/components/user/user-dashboard.html:28
@@ -454,7 +463,7 @@ msgstr ""
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:37
+#: app/scripts/components/customer/customer-manage.html:85
 msgid "Bank"
 msgstr ""
 
@@ -515,7 +524,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-store.html:55
 #: app/scripts/components/appstore/category-selector.html:36
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:56
-#: app/scripts/components/customer/customer-create-dialog.html:96
+#: app/scripts/components/customer/customer-create-dialog.html:116
 #: app/scripts/components/digitalocean/droplet-resize.html:76
 #: app/scripts/components/events/event-details-dialog.html:133
 #: app/scripts/components/events/event-types-dialog.html:14
@@ -611,6 +620,7 @@ msgstr ""
 msgid "Civil number"
 msgstr ""
 
+#: app/scripts/components/customer/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 msgid "Close"
 msgstr ""
@@ -641,7 +651,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:19
+#: app/scripts/components/customer/customer-manage.html:67
 msgid "Company"
 msgstr ""
 
@@ -672,7 +682,7 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:101
+#: app/scripts/components/customer/customer-manage.js:102
 #: app/scripts/components/table/base-list-controller.js:138
 msgid "Confirm deletion?"
 msgstr ""
@@ -689,8 +699,18 @@ msgstr ""
 msgid "Connected subnets"
 msgstr ""
 
+#: app/scripts/components/customer/customer-create-dialog.html:36
+#: app/scripts/components/customer/customer-manage.html:39
+msgid "Contact e-mail"
+msgstr ""
+
 #: app/scripts/components/customer/customer-popover.html:28
 msgid "Contact email"
+msgstr ""
+
+#: app/scripts/components/customer/customer-create-dialog.html:46
+#: app/scripts/components/customer/customer-manage.html:44
+msgid "Contact phone"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:115
@@ -714,8 +734,8 @@ msgstr ""
 msgid "Cost threshold"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:36
-#: app/scripts/components/customer/customer-manage.html:25
+#: app/scripts/components/customer/customer-create-dialog.html:56
+#: app/scripts/components/customer/customer-manage.html:73
 msgid "Country"
 msgstr ""
 
@@ -906,10 +926,6 @@ msgstr ""
 msgid "Date joined"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:43
-msgid "Default tax percent"
-msgstr ""
-
 #: app/scripts/components/cost-planning/cost-plan-items.html:46
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:39
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
@@ -1043,7 +1059,7 @@ msgid "Edit team member"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:61
-#: app/scripts/components/customer/customer-manage.html:28
+#: app/scripts/components/customer/customer-manage.html:76
 #: app/scripts/components/invitations/invitations-list.js:95
 msgid "Email"
 msgstr ""
@@ -1107,7 +1123,7 @@ msgstr ""
 msgid "Estonian"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:64
+#: app/scripts/components/customer/customer-create-dialog.html:84
 msgid "EU VAT ID"
 msgstr ""
 
@@ -1281,12 +1297,9 @@ msgstr ""
 msgid "For"
 msgstr ""
 
+#: app/scripts/components/user/constants.js:29
 #: app/scripts/components/user/routes.js:43
 msgid "FreeIPA account"
-msgstr ""
-
-#: app/scripts/components/user/constants.js:29
-msgid "FreeIPA Account"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:49
@@ -1472,6 +1485,11 @@ msgstr ""
 
 #: app/scripts/components/issues/constants.js:2
 msgid "Incident"
+msgstr ""
+
+#: app/scripts/components/customer/customer-report-error.html:2
+#: app/scripts/components/customer/customer-report-error.js:21
+msgid "Incorrect organization details"
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html:42
@@ -1966,6 +1984,10 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:14
+msgid "Native name"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:19
 msgid "Network"
 msgstr ""
@@ -2387,11 +2409,11 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:65
+#: app/scripts/components/customer/customer-manage.html:119
 msgid "Only staff can remove organization."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:52
+#: app/scripts/components/customer/customer-manage.html:100
 msgid "Only staff can update organization policies."
 msgstr ""
 
@@ -2473,7 +2495,7 @@ msgstr ""
 msgid "Organization {organizationName} is updated."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:55
+#: app/scripts/components/customer/customer-manage.html:103
 msgid "Organization actions"
 msgstr ""
 
@@ -2481,7 +2503,7 @@ msgstr ""
 msgid "Organization code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:81
+#: app/scripts/components/customer/customer-manage.js:82
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
@@ -2527,8 +2549,8 @@ msgstr ""
 msgid "Organization registration code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:89
-#: app/scripts/components/customer/customer-manage.js:92
+#: app/scripts/components/customer/customer-manage.js:90
+#: app/scripts/components/customer/customer-manage.js:93
 msgid "Organization removal"
 msgstr ""
 
@@ -2623,7 +2645,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-customer-details.html:5
 #: app/scripts/components/billing/billing-issuer-details.html:5
-#: app/scripts/components/customer/customer-manage.html:34
+#: app/scripts/components/customer/customer-manage.html:82
 #: app/scripts/components/customer/customer-popover.html:32
 msgid "Phone"
 msgstr ""
@@ -2690,7 +2712,7 @@ msgstr ""
 msgid "Please provide valid quotas."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:63
+#: app/scripts/components/customer/customer-create-dialog.html:83
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
@@ -2724,7 +2746,7 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:31
+#: app/scripts/components/customer/customer-manage.html:79
 msgid "Postal"
 msgstr ""
 
@@ -2805,7 +2827,7 @@ msgid "Priority"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:5
-#: app/scripts/components/routes/about.js:54
+#: app/scripts/components/routes/about.js:55
 msgid "Privacy policy"
 msgstr ""
 
@@ -3108,7 +3130,7 @@ msgstr ""
 msgid "Read through terms and conditions."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:94
+#: app/scripts/components/customer/customer-manage.js:95
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
@@ -3166,6 +3188,10 @@ msgstr ""
 msgid "Registration method"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:24
+msgid "Registry code"
+msgstr ""
+
 #: app/scripts/components/user/filters.js:24
 msgid "Regular user"
 msgstr ""
@@ -3189,7 +3215,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:60
+#: app/scripts/components/customer/customer-manage.html:114
 msgid "Remove organization"
 msgstr ""
 
@@ -3200,6 +3226,10 @@ msgstr ""
 #: app/scripts/components/project/project-providers-service.js:92
 #: app/scripts/components/providers/details/provider-projects.js:107
 msgid "Removing link"
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.html:107
+msgid "Report incorrect data"
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:14
@@ -3252,7 +3282,7 @@ msgstr ""
 msgid "Request name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:96
+#: app/scripts/components/customer/customer-manage.js:97
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
 msgstr ""
@@ -3474,7 +3504,7 @@ msgid "Runtime state"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:52
-#: app/scripts/components/customer/customer-create-dialog.html:91
+#: app/scripts/components/customer/customer-create-dialog.html:111
 #: app/scripts/components/project/project-providers.html:16
 #: app/scripts/components/providers/details/provider-projects.html:21
 #: app/scripts/components/providers/details/provider-settings.html:76
@@ -3570,7 +3600,7 @@ msgstr ""
 msgid "Select connected subnet"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:39
+#: app/scripts/components/customer/customer-create-dialog.html:59
 msgid "Select country..."
 msgstr ""
 
@@ -3822,7 +3852,7 @@ msgid "SSH keys"
 msgstr ""
 
 #: app/scripts/components/user/constants.js:13
-#: app/scripts/components/user/constants.js:42
+#: app/scripts/components/user/constants.js:43
 msgid "SSH Keys"
 msgstr ""
 
@@ -3940,9 +3970,14 @@ msgstr ""
 msgid "Subnet Name"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:56
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:43
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:40
 msgid "Subnets"
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.html:55
+msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
 #: app/scripts/components/offering/offering-summary.html:6
@@ -4156,6 +4191,10 @@ msgstr ""
 
 #: app/scripts/components/billing/invoice-details.html:42
 msgid "To"
+msgstr ""
+
+#: app/scripts/components/customer/customer-report-error.js:28
+msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:6
@@ -4487,6 +4526,14 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
+#: app/scripts/components/customer/customer-manage.html:49
+msgid "VAT code"
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.html:91
+msgid "VAT rate"
+msgstr ""
+
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:55
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:35
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:54
@@ -4568,7 +4615,7 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:95
+#: app/scripts/components/customer/customer-manage.js:96
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
@@ -4588,7 +4635,7 @@ msgstr ""
 msgid "You can change that in <a href=\"{link}\">provider management</a>."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:57
+#: app/scripts/components/customer/customer-manage.html:111
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
