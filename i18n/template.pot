@@ -3934,7 +3934,7 @@ msgid "Subnets"
 msgstr ""
 
 #: app/scripts/components/customer/customer-manage.html:55
-msgid "Subnets from which connection to self-service is allowed."
+msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
 #: app/scripts/components/offering/offering-summary.html:6
