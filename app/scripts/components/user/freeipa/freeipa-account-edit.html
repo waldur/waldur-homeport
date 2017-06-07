@@ -2,43 +2,54 @@
   <loading-spinner/>
 </div>
 <div class="row" ng-if="!$ctrl.loading">
-  <div class="col-sm-offset-3 col-sm-9 form-horizontal">
-    <dl class="dl-horizontal">
-      <!-- default dl-horizontal dt width is 160px.
-           Add 13px to display Terms of Service and move content 13px right to maintain previous appearance -->
-      <dt style='width:173px; margin-right:13px;' class="control-label">
-        <span translate>Username</span>:</dt>
-      <dd class="input-group col-sm-4 m-b-sm">
-        <div class="input-group-addon">
-          {{ $ctrl.prefix }}
-        </div>
-        <input type="text" class="form-control" ng-model="$ctrl.profile.username" readonly>
-      </dd>
-      <dt style='width:173px; margin-right:13px'>
-        <a ui-sref="tos.freeipa" target="_blank">
-          <span translate>Terms of Service</span>
-        </a>
-        <span translate>accepted</span>:
-      </dt>
-      <dd>
-        {{ ::$ctrl.profile.agreement_date | dateTime }}
-      </dd>
-    </dl>
-  </div>
-  <div class="text-center">
-    <button class="btn btn-warning"
-            uib-tooltip="{{ 'Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems' | translate }}"
-            ng-click="$ctrl.disableProfile()"
-            ng-if="$ctrl.profile.is_active">Disable profile
-    </button>
-    <button class="btn btn-success"
-            uib-tooltip="{{ 'Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems' | translate }}"
-            ng-click="$ctrl.enableProfile()"
-            ng-if="!$ctrl.profile.is_active">Enable profile
-    </button>
-    <button class="btn btn-info"
-            uib-tooltip="{{ 'Add Waldur user ssh keys to the FreeIPA profile' | translate }}"
-            ng-click="$ctrl.syncProfile()">Sync profile
-    </button>
+  <div class="form-horizontal">
+    <div class="form-group m-b-n">
+      <label class="control-label col-sm-3">
+        <span translate>Username</span>:
+      </label>
+      <div class="col-sm-6 m-b-sm">
+        <p class="form-control-static">
+          {{ ::$ctrl.profile.username }}
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-5">
+        <p class="form-control-static">
+          <a ui-sref="tos.freeipa" target="_blank">
+            <span translate>Terms of Service</span>
+          </a>
+          <span translate>have been accepted on</span>
+          {{ ::$ctrl.profile.agreement_date | dateTime }}
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-5">
+        <button
+          class="btn btn-info m-r-sm"
+          uib-tooltip="{{ 'Add Waldur user ssh keys to the FreeIPA profile' | translate }}"
+          ng-click="$ctrl.syncProfile()">
+          <i class="fa fa-refresh"></i>
+          <span translate>Sync profile</span>
+        </button>
+        <button
+          class="btn btn-warning"
+          uib-tooltip="{{ 'Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems' | translate }}"
+          ng-click="$ctrl.disableProfile()"
+          ng-if="$ctrl.profile.is_active">
+          <i class="fa fa-toggle-on"></i>
+          <span translate>Disable profile</span>
+        </button>
+        <button
+          class="btn btn-success"
+          uib-tooltip="{{ 'Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems' | translate }}"
+          ng-click="$ctrl.enableProfile()"
+          ng-if="!$ctrl.profile.is_active">
+          <i class="fa fa-toggle-off"></i>
+          <span translate>Enable profile</span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

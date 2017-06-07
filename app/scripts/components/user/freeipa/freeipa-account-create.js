@@ -7,27 +7,44 @@ const freeipaAccountCreate = {
   },
   controller: class FreeIPAAccountCreateController {
     // @ngInject
-    constructor(freeipaService, ncUtilsFlash){
+    constructor(freeipaService, ncUtilsFlash, ENV, usersService){
       this.freeipaService = freeipaService;
       this.ncUtilsFlash = ncUtilsFlash;
+      this.usersService = usersService;
+      this.prefix = ENV.FREEIPA_USERNAME_PREFIX;
     }
+
+    $onInit() {
+      this.loading = true;
+      this.usersService.getCurrentUser().then(user => {
+        this.profile = {
+          username: user.username,
+          agree_with_policy: false,
+        };
+      }).finally(() => this.loading = false);
+    }
+
     getTooltip() {
-      if(!this.profile || !this.profile.agree_with_policy) {
-        return gettext('You must agree with terms of service');
+      if(!this.profile.agree_with_policy) {
+        return gettext('You must agree with terms of service.');
       }
     }
+
     submitForm() {
       this.profileForm.$setSubmitted();
       if(this.profileForm.$invalid){
         return;
       }
-      this.loading = true;
-      this.freeipaService.createProfile(this.profile.username, this.profile.agree_with_policy).then(() => {
-        this.ncUtilsFlash.success(gettext('A profile has been created'));
+      this.submitting = true;
+      return this.freeipaService.createProfile(
+        this.profile.username,
+        this.profile.agree_with_policy
+      ).catch(() => {
+        this.ncUtilsFlash.success(gettext('Unable to create a FreeIPA profile.'));
+      }).then(() => {
+        this.ncUtilsFlash.success(gettext('A profile has been created.'));
         this.onProfileAdded();
-      }).finally(() => {
-        this.loading = false;
-      });
+      }).finally(() => this.submitting = false);
     }
   }
 };
