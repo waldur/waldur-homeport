@@ -17,7 +17,7 @@ function RestoredVolumesListController($filter, baseResourceListController, open
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackVolumesService;
-      this.rowFields.push('size');
+      this.addRowFields(['size']);
     },
     getFilter: function() {
       return {

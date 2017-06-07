@@ -16,9 +16,7 @@ function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $st
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
-      this.rowFields.push('size');
-      this.rowFields.push('source_volume');
-      this.rowFields.push('source_volume_name');
+      this.addRowFields(['size', 'source_volume', 'source_volume_name']);
     },
     getFilter: function() {
       return {

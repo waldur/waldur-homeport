@@ -16,7 +16,7 @@ function OpenstackSubnetsListController(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackSubnetsService;
-      this.rowFields.push('cidr');
+      this.addRowFields(['cidr']);
     },
     getTableOptions: function() {
       var options = this._super();

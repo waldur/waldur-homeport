@@ -22,7 +22,7 @@ function OpenstackInternalIpsListController(
       actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
         this.listActions = result;
         fn();
-        this.rowFields.push('internal_ips_set');
+        this.addRowFields(['internal_ips_set']);
       });
     },
     afterGetList: function() {

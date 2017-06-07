@@ -22,7 +22,7 @@ function TenantNetworksController(
       actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(function(result) {
         vm.listActions = result;
         fn();
-        vm.rowFields.push('subnets');
+        this.addRowFields(['subnets']);
         vm.service = openstackNetworksService;
       });
     },

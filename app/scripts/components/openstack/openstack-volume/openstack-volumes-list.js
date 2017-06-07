@@ -17,9 +17,7 @@ function VolumesListController(BaseProjectResourcesTabController, ncUtils, $stat
       this.category = ENV.Storages;
       this.controllerScope = controllerScope;
       this._super();
-      this.rowFields.push('size');
-      this.rowFields.push('instance');
-      this.rowFields.push('instance_name');
+      this.addRowFields(['size', 'instance', 'instance_name']);
     },
     getFilter: function() {
       return {

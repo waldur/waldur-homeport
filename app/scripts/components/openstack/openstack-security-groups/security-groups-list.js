@@ -22,7 +22,7 @@ function OpenstackSecurityGroupsListController(
       actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
         this.listActions = result;
         fn();
-        this.rowFields.push('rules');
+        this.addRowFields(['rules']);
         this.service = openstackSecurityGroupsService;
       });
     },
