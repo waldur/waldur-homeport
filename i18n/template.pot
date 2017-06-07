@@ -52,14 +52,22 @@ msgstr ""
 msgid "30 days"
 msgstr ""
 
+#: app/scripts/components/user/freeipa/freeipa-account-create.js:26
+msgid "A profile has been created"
+msgstr ""
+
 #: app/scripts/components/customer/customer-manage.html:19
 msgid "Abbreviation"
 msgstr ""
 
-#: app/scripts/components/routes/about.js:30
+#: app/scripts/components/routes/about.js:40
 #: app/views/about/index.html:3
 #: app/views/about/index.html:8
 msgid "About"
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:21
+msgid "accepted"
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js:82
@@ -193,7 +201,7 @@ msgid "Add snapshots"
 msgstr ""
 
 #: app/scripts/components/user/keys/key-list.js:62
-#: app/scripts/components/user/routes.js:81
+#: app/scripts/components/user/routes.js:91
 msgid "Add SSH key"
 msgstr ""
 
@@ -203,6 +211,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:66
 msgid "Add volumes"
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:40
+msgid "Add Waldur user ssh keys to the FreeIPA profile"
 msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js:75
@@ -381,7 +393,7 @@ msgstr ""
 #: app/scripts/components/customer/routes.js:72
 #: app/scripts/components/project/project-workspace.js:74
 #: app/scripts/components/project/routes.js:102
-#: app/scripts/components/user/constants.js:32
+#: app/scripts/components/user/constants.js:38
 #: app/scripts/components/user/constants.js:8
 #: app/scripts/components/user/routes.js:15
 #: app/scripts/components/user/user-dashboard.html:28
@@ -750,6 +762,7 @@ msgstr ""
 #: app/scripts/components/project/project-issues.js:31
 #: app/scripts/components/resource/list/resources-list.js:138
 #: app/scripts/components/resource/tabs/resource-issues.js:26
+#: app/scripts/components/user/freeipa/freeipa-account-create.html:40
 #: app/scripts/components/user/hooks/hook-details.html:77
 msgid "Create"
 msgstr ""
@@ -981,6 +994,10 @@ msgstr ""
 msgid "Device"
 msgstr ""
 
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:30
+msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html:22
 msgid "Disable data volume"
 msgstr ""
@@ -1049,6 +1066,10 @@ msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html:3
 msgid "Email update"
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:35
+msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:69
@@ -1276,6 +1297,11 @@ msgstr ""
 msgid "For"
 msgstr ""
 
+#: app/scripts/components/user/constants.js:29
+#: app/scripts/components/user/routes.js:43
+msgid "FreeIPA account"
+msgstr ""
+
 #: app/scripts/components/issues/issues-short-list.html:49
 msgid "from"
 msgstr ""
@@ -1378,6 +1404,7 @@ msgstr ""
 msgid "How to obtain credentials"
 msgstr ""
 
+#: app/scripts/components/user/freeipa/freeipa-account-create.html:26
 #: app/scripts/components/user/user-edit.html:145
 msgid "I accept the"
 msgstr ""
@@ -2689,6 +2716,10 @@ msgstr ""
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
+#: app/scripts/components/user/freeipa/freeipa-account-create.html:9
+msgid "Please select a username that you will use for login into the Linux systems"
+msgstr ""
+
 #: app/scripts/components/providers/details/provider-projects.html:11
 msgid "Please select projects where usage of the provider is permitted."
 msgstr ""
@@ -2796,7 +2827,7 @@ msgid "Priority"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:5
-#: app/scripts/components/routes/about.js:45
+#: app/scripts/components/routes/about.js:55
 msgid "Privacy policy"
 msgstr ""
 
@@ -2818,6 +2849,18 @@ msgstr ""
 
 #: app/views/help/list.html:26
 msgid "Profile"
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.js:34
+msgid "Profile has been disabled"
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.js:24
+msgid "Profile has been enabled"
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-edit.js:43
+msgid "Profile has been synced successfully"
 msgstr ""
 
 #: app/scripts/components/user/user-manage.js:39
@@ -3809,7 +3852,7 @@ msgid "SSH keys"
 msgstr ""
 
 #: app/scripts/components/user/constants.js:13
-#: app/scripts/components/user/constants.js:37
+#: app/scripts/components/user/constants.js:43
 msgid "SSH Keys"
 msgstr ""
 
@@ -4039,10 +4082,13 @@ msgid "Terms"
 msgstr ""
 
 #: app/scripts/components/routes/about.js:15
+#: app/scripts/components/routes/about.js:24
 msgid "Terms of service"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:8
+#: app/scripts/components/user/freeipa/freeipa-account-create.html:29
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:19
 #: app/scripts/components/user/user-edit.html:131
 #: app/scripts/components/user/user-edit.html:147
 msgid "Terms of Service"
@@ -4462,6 +4508,8 @@ msgstr ""
 #: app/scripts/components/auth/auth-login.html:51
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
 #: app/scripts/components/team/user-selector.html:9
+#: app/scripts/components/user/freeipa/freeipa-account-create.html:8
+#: app/scripts/components/user/freeipa/freeipa-account-edit.html:10
 msgid "Username"
 msgstr ""
 
@@ -4724,6 +4772,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:38
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:31
 msgid "You have no volumes yet."
+msgstr ""
+
+#: app/scripts/components/user/freeipa/freeipa-account-create.js:16
+msgid "You must agree with terms of service"
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-accept.html:5
