@@ -29,6 +29,7 @@ function CustomerManageController(
       this.controllerScope = controllerScope;
       this._super();
       this.paymentDetails = null;
+      this.organizationSubnetsVisible = ENV.organizationSubnetsVisible;
       this.loadInitial();
     },
     loadInitial: function () {
@@ -108,6 +109,12 @@ function CustomerManageController(
           currentStateService.setCustomer(vm.customer);
         });
       }
+    },
+    reportError: function() {
+      return $uibModal.open({
+        component: 'customerReportError',
+        resolve: () => ({customer: this.customer})
+      });
     },
   });
 

@@ -214,6 +214,9 @@ const ENV = {
   ],
   defaultLanguage: 'en',
   tenantCredentialsVisible: true,
+  organizationSubnetsVisible: false,
+
+  FREEIPA_USERNAME_PREFIX: 'webtest_',
 
   // Support email and phone is rendered at the footer
   // supportEmail: 'support@example.com',
