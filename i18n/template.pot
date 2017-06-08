@@ -519,6 +519,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:55
 #: app/scripts/components/appstore/category-selector.html:36
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:48
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:56
 #: app/scripts/components/customer/customer-create-dialog.html:116
 #: app/scripts/components/digitalocean/droplet-resize.html:76
@@ -730,6 +731,10 @@ msgstr ""
 msgid "Cost threshold"
 msgstr ""
 
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.js:27
+msgid "Could not load a list of providers. Please try again."
+msgstr ""
+
 #: app/scripts/components/customer/customer-create-dialog.html:56
 #: app/scripts/components/customer/customer-manage.html:73
 msgid "Country"
@@ -905,6 +910,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:12
 #: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:12
 msgid "Data is unavailable."
 msgstr ""
@@ -1090,6 +1096,10 @@ msgstr ""
 
 #: app/scripts/components/configs/base-config.js:208
 msgid "English"
+msgstr ""
+
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:23
+msgid "Enter at least 2 characters to start searching..."
 msgstr ""
 
 #: app/scripts/components/resource/actions/dialog/action-field-datetime.html:6
@@ -1836,6 +1846,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:113
 #: app/scripts/components/auth/auth-login.html:41
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:42
 msgid "Login"
 msgstr ""
 
@@ -2313,6 +2324,10 @@ msgstr ""
 msgid "Not all required fields have been entered."
 msgstr ""
 
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:16
+msgid "Not all results may be visible as search is limited to"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:46
 msgid "Not assigned"
 msgstr ""
@@ -2731,6 +2746,10 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers.html:11
 msgid "Please select providers allowed to be used in this project."
+msgstr ""
+
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:3
+msgid "Please select your organization"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.js:286
@@ -3734,7 +3753,7 @@ msgstr ""
 msgid "Sign a support agreement"
 msgstr ""
 
-#: app/scripts/components/auth/auth-saml2.js:11
+#: app/scripts/components/auth/saml2/auth-saml2.js:8
 msgid "Sign in with {provider}"
 msgstr ""
 
