@@ -285,7 +285,7 @@ msgstr ""
 msgid "Allocation"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:111
+#: app/scripts/components/auth/auth-login.html:114
 msgid "Already have an account?"
 msgstr ""
 
@@ -519,7 +519,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:55
 #: app/scripts/components/appstore/category-selector.html:36
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:48
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:43
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:56
 #: app/scripts/components/customer/customer-create-dialog.html:116
 #: app/scripts/components/digitalocean/droplet-resize.html:76
@@ -684,7 +684,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:200
+#: app/scripts/components/auth/auth-login.js:204
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
@@ -768,7 +768,7 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:107
+#: app/scripts/components/auth/auth-login.html:110
 #: app/scripts/components/auth/auth-login.html:18
 msgid "Create an account"
 msgstr ""
@@ -1013,7 +1013,7 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:105
+#: app/scripts/components/auth/auth-login.html:108
 msgid "Do not have an account?"
 msgstr ""
 
@@ -1625,7 +1625,7 @@ msgstr ""
 msgid "Invitation is not valid."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:125
+#: app/scripts/components/auth/auth-login.js:129
 msgid "Invitation token is not found."
 msgstr ""
 
@@ -1844,9 +1844,9 @@ msgstr ""
 msgid "Logging user in"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:113
+#: app/scripts/components/auth/auth-login.html:116
 #: app/scripts/components/auth/auth-login.html:41
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:42
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:40
 msgid "Login"
 msgstr ""
 
@@ -3753,8 +3753,12 @@ msgstr ""
 msgid "Sign a support agreement"
 msgstr ""
 
-#: app/scripts/components/auth/saml2/auth-saml2.js:8
+#: app/scripts/components/auth/saml2/auth-saml2.js:11
 msgid "Sign in with {provider}"
+msgstr ""
+
+#: app/scripts/components/auth/saml2/auth-saml2-trigger.html:4
+msgid "Sign in with eduGAIN"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:89
@@ -4373,7 +4377,7 @@ msgstr ""
 msgid "Unable to set quotas."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:135
+#: app/scripts/components/auth/auth-login.js:139
 msgid "Unable to validate invitation token."
 msgstr ""
 
