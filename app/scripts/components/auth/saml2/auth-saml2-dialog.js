@@ -8,22 +8,22 @@ const authSaml2Dialog = {
   },
   controller: class AuthSaml2DialogController {
     // @ngInject
-    constructor($sce, ENV, saml2Service, ncUtilsFlash) {
-      this.saml2Service = saml2Service;
+    constructor($sce, ENV, Saml2Service, ncUtilsFlash) {
+      this.Saml2Service = Saml2Service;
       this.ncUtilsFlash = ncUtilsFlash;
     }
 
     $onInit() {
-      this.loginUrl = this.saml2Service.getLoginUrl();
+      this.loginUrl = this.Saml2Service.getLoginUrl();
       this.initialized = false;
       this.providersLimit = 20;
 
-      this.saml2Service.getProviders().then(response => {
+      this.Saml2Service.getProviders().then(response => {
         this.providers = response.data;
         this.initialized = true;
       }).catch(() => {
         this.error = true;
-        this.ncUtilsFlash(gettext('Could not load a list of providers. Please try again.'));
+        this.ncUtilsFlash(gettext('Could not load a list of identity providers. Please try again.'));
       });
     }
 

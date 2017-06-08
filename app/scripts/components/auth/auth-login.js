@@ -89,8 +89,8 @@ export const authLogin = {
       return this.methods.SAML2 && !!this.ENV.SAML2_IDENTITY_PROVIDER;
     }
 
-    showSaml2Edu() {
-      return this.methods.SAML2 && this.ENV.SAML2_EDU_GAIN_ACTIVE;
+    showSaml2Providers() {
+      return this.methods.SAML2 && this.ENV.allowToSelectSAML2Provider;
     }
 
     gotoRegister() {

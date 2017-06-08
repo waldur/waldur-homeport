@@ -9,22 +9,20 @@
   </div>
   <div ng-if="$ctrl.initialized">
     <div ng-if="$ctrl.error">
-      <span translate>Data is unavailable.</span>
+      <span translate>Identity providers are not unavailable.</span>
     </div>
     <div ng-if="!$ctrl.error">
-      <div>
-        <ui-select ng-model="$ctrl.provider"
-                   title="{{'Choose an organization' | translate }}">
-          <ui-select-match placeholder="{{'Enter at least 2 characters to start searching...' | translate}}">
-            {{$select.selected.name}}
-          </ui-select-match>
-          <ui-select-choices
-              minimum-input-length="2"
-              repeat="item in $ctrl.providers | filter: $select.search | limitTo: $ctrl.providersLimit | orderBy:'name'">
-            <div ng-bind-html="item.name | highlight: $select.search"></div>
-          </ui-select-choices>
-        </ui-select>
-      </div>
+      <ui-select ng-model="$ctrl.provider"
+                 title="{{'Choose an organization' | translate }}">
+        <ui-select-match placeholder="{{'Enter at least 2 characters to start searching...' | translate}}">
+          {{$select.selected.name}}
+        </ui-select-match>
+        <ui-select-choices
+            minimum-input-length="2"
+            repeat="item in $ctrl.providers | filter: $select.search | limitTo: $ctrl.providersLimit | orderBy:'name'">
+          <div ng-bind-html="item.name | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
     </div>
   </div>
 </div>

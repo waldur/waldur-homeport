@@ -519,7 +519,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:55
 #: app/scripts/components/appstore/category-selector.html:36
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:38
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:36
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:56
 #: app/scripts/components/customer/customer-create-dialog.html:116
 #: app/scripts/components/digitalocean/droplet-resize.html:76
@@ -597,7 +597,7 @@ msgstr ""
 msgid "Checkout summary"
 msgstr ""
 
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:17
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:16
 msgid "Choose an organization"
 msgstr ""
 
@@ -736,7 +736,7 @@ msgid "Cost threshold"
 msgstr ""
 
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.js:26
-msgid "Could not load a list of providers. Please try again."
+msgid "Could not load a list of identity providers. Please try again."
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-dialog.html:56
@@ -914,7 +914,6 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:12
 #: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:12
 msgid "Data is unavailable."
 msgstr ""
@@ -1102,7 +1101,7 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:18
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:17
 msgid "Enter at least 2 characters to start searching..."
 msgstr ""
 
@@ -1439,6 +1438,10 @@ msgstr ""
 #: app/scripts/components/user/user-edit.html:58
 #: app/scripts/components/user/user-popover-table.html:9
 msgid "ID code"
+msgstr ""
+
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:12
+msgid "Identity providers are not unavailable."
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:31
@@ -1850,7 +1853,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:116
 #: app/scripts/components/auth/auth-login.html:41
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:35
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:33
 msgid "Login"
 msgstr ""
 
@@ -3753,7 +3756,7 @@ msgstr ""
 msgid "Sign a support agreement"
 msgstr ""
 
-#: app/scripts/components/auth/saml2/auth-saml2.js:10
+#: app/scripts/components/auth/saml2/auth-saml2.js:15
 msgid "Sign in with {provider}"
 msgstr ""
 
