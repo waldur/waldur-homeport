@@ -163,6 +163,7 @@ const ENV = {
   ],
   SAML2_IDENTITY_PROVIDER: 'https://reos.taat.edu.ee/saml2/idp/metadata.php',
   SAML2_LABEL: 'TAAT',
+  allowToSelectSAML2Provider: true,
   estoniaIdLogoutUrl: 'https://openid.ee/auth/logout',
   featuresVisible: false,
 
