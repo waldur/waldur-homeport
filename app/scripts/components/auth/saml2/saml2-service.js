@@ -3,13 +3,11 @@ export default class Saml2Service {
   constructor(ENV, $http, $sce) {
     this.endpoint = `${ENV.apiEndpoint}api-auth/saml2/`;
     this.$http = $http;
-
-    const callbackUrl = 'api-auth/saml2/login/';
-    this.loginUrl = $sce.trustAsResourceUrl(ENV.apiEndpoint + callbackUrl);
+    this.$sce = $sce;
   }
 
   getLoginUrl() {
-    return this.loginUrl;
+    return this.$sce.trustAsResourceUrl(`${this.endpoint}login/`);
   }
 
   getProviders() {
