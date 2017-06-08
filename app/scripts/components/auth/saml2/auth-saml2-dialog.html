@@ -34,19 +34,13 @@
   </div>
 </div>
 <div class="modal-footer">
-  <div class="row">
-    <div class="col-sm-offset-7 col-sm-2">
-      <form action="{{ $ctrl.loginUrl }}" method="post">
-        <input type="hidden" name="idp" value="{{ $ctrl.provider.url }}"/>
-        <button type="submit" class="btn btn-primary" ng-disabled="!!!$ctrl.provider">
-          <span translate>Login</span>
-        </button>
-      </form>
-    </div>
-    <div class="col-sm-1">
-      <button class="btn btn-default" type="button" ng-click="$ctrl.dismiss()">
-        <span translate>Cancel</span>
-      </button>
-    </div>
-  </div>
+  <form action="{{ $ctrl.loginUrl }}" method="post">
+    <input type="hidden" name="idp" value="{{ $ctrl.provider.url }}"/>
+    <button type="submit" class="btn btn-primary" ng-disabled="!!!$ctrl.provider">
+      <span translate>Login</span>
+    </button>
+    <button class="btn btn-default" type="button" ng-click="$ctrl.dismiss()">
+      <span translate>Cancel</span>
+    </button>
+  </form>
 </div>

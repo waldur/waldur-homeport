@@ -89,6 +89,10 @@ export const authLogin = {
       return this.methods.SAML2 && !!this.ENV.SAML2_IDENTITY_PROVIDER;
     }
 
+    showSaml2Edu() {
+      return this.methods.SAML2;
+    }
+
     gotoRegister() {
       this.isSignupFormVisible = true;
       this.$state.go('register');

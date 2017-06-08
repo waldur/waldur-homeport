@@ -1,6 +1,9 @@
 <div class="m-b-sm">
-    <button type="submit" class="btn btn-saml2 btn-block" ng-click="$ctrl.selectProvider()">
-        <i class="fa fa-university" aria-hidden="true"></i>
-        {{ ::$ctrl.buttonLabel }}
-    </button>
+    <form action="{{ $ctrl.loginUrl }}" method="post">
+        <input type="hidden" name="idp" value="{{ $ctrl.provider }}" />
+        <button type="submit" class="btn btn-saml2 btn-block">
+            <i class="fa fa-university" aria-hidden="true"></i>
+            {{ ::$ctrl.buttonLabel }}
+        </button>
+    </form>
 </div>
