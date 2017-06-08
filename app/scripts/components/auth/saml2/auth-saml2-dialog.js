@@ -10,15 +10,14 @@ const authSaml2Dialog = {
     // @ngInject
     constructor($sce, ENV, saml2Service, ncUtilsFlash) {
       this.saml2Service = saml2Service;
-      this.initialized = false;
-      this.providersLimit = 100;
       this.ncUtilsFlash = ncUtilsFlash;
-
-      const callbackUrl = 'api-auth/saml2/login/';
-      this.loginUrl = $sce.trustAsResourceUrl(ENV.apiEndpoint + callbackUrl);
     }
 
     $onInit() {
+      this.loginUrl = this.saml2Service.getLoginUrl();
+      this.initialized = false;
+      this.providersLimit = 20;
+
       this.saml2Service.getProviders().then(response => {
         this.providers = response.data;
         this.initialized = true;
@@ -26,6 +25,10 @@ const authSaml2Dialog = {
         this.error = true;
         this.ncUtilsFlash(gettext('Could not load a list of providers. Please try again.'));
       });
+    }
+
+    isProviderSelected() {
+      return !!this.provider;
     }
   }
 };

@@ -11,21 +11,16 @@
     <div ng-if="$ctrl.error">
       <span translate>Data is unavailable.</span>
     </div>
-    <div ng-if="!$ctrl.error" class="form-group">
-      <div class="m-b-sm">
-        <span translate>Not all results may be visible as search is limited to</span>: {{$ctrl.providersLimit}}
-      </div>
+    <div ng-if="!$ctrl.error">
       <div>
         <ui-select ng-model="$ctrl.provider"
-                   limit="{{$ctrl.providersLimit}}"
-                   theme="bootstrap"
-                   title="Choose an organization">
+                   title="{{'Choose an organization' | translate }}">
           <ui-select-match placeholder="{{'Enter at least 2 characters to start searching...' | translate}}">
             {{$select.selected.name}}
           </ui-select-match>
           <ui-select-choices
               minimum-input-length="2"
-              repeat="item in $ctrl.providers | filter: $select.search | limitTo: $select.limit | orderBy:'name'">
+              repeat="item in $ctrl.providers | filter: $select.search | limitTo: $ctrl.providersLimit | orderBy:'name'">
             <div ng-bind-html="item.name | highlight: $select.search"></div>
           </ui-select-choices>
         </ui-select>
@@ -36,7 +31,7 @@
 <div class="modal-footer">
   <form action="{{ $ctrl.loginUrl }}" method="post">
     <input type="hidden" name="idp" value="{{ $ctrl.provider.url }}"/>
-    <button type="submit" class="btn btn-primary" ng-disabled="!!!$ctrl.provider">
+    <button type="submit" class="btn btn-primary" ng-disabled="!$ctrl.isProviderSelected()">
       <span translate>Login</span>
     </button>
     <button class="btn btn-default" type="button" ng-click="$ctrl.dismiss()">

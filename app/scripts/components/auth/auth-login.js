@@ -90,7 +90,7 @@ export const authLogin = {
     }
 
     showSaml2Edu() {
-      return this.methods.SAML2;
+      return this.methods.SAML2 && this.ENV.SAML2_EDU_GAIN_ACTIVE;
     }
 
     gotoRegister() {

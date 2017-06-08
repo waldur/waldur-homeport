@@ -519,7 +519,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:55
 #: app/scripts/components/appstore/category-selector.html:36
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:43
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:38
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:56
 #: app/scripts/components/customer/customer-create-dialog.html:116
 #: app/scripts/components/digitalocean/droplet-resize.html:76
@@ -595,6 +595,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:7
 #: app/scripts/components/premiumSupport/premium-support-summary.html:3
 msgid "Checkout summary"
+msgstr ""
+
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:17
+msgid "Choose an organization"
 msgstr ""
 
 #: app/scripts/components/plans/plans-list.html:6
@@ -731,7 +735,7 @@ msgstr ""
 msgid "Cost threshold"
 msgstr ""
 
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.js:27
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.js:26
 msgid "Could not load a list of providers. Please try again."
 msgstr ""
 
@@ -1094,11 +1098,11 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:208
+#: app/scripts/components/configs/base-config.js:209
 msgid "English"
 msgstr ""
 
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:23
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:18
 msgid "Enter at least 2 characters to start searching..."
 msgstr ""
 
@@ -1133,7 +1137,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:212
+#: app/scripts/components/configs/base-config.js:213
 msgid "Estonian"
 msgstr ""
 
@@ -1846,7 +1850,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:116
 #: app/scripts/components/auth/auth-login.html:41
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:40
+#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:35
 msgid "Login"
 msgstr ""
 
@@ -2324,10 +2328,6 @@ msgstr ""
 msgid "Not all required fields have been entered."
 msgstr ""
 
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:16
-msgid "Not all results may be visible as search is limited to"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:46
 msgid "Not assigned"
 msgstr ""
@@ -2553,7 +2553,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:190
+#: app/scripts/components/configs/base-config.js:191
 msgid "Organization owner"
 msgstr ""
 
@@ -2949,7 +2949,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:191
+#: app/scripts/components/configs/base-config.js:192
 msgid "Project manager"
 msgstr ""
 
@@ -3753,7 +3753,7 @@ msgstr ""
 msgid "Sign a support agreement"
 msgstr ""
 
-#: app/scripts/components/auth/saml2/auth-saml2.js:11
+#: app/scripts/components/auth/saml2/auth-saml2.js:10
 msgid "Sign in with {provider}"
 msgstr ""
 
@@ -4044,7 +4044,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:192
+#: app/scripts/components/configs/base-config.js:193
 msgid "System administrator"
 msgstr ""
 
