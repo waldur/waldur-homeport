@@ -1,0 +1,52 @@
+<div class="modal-header">
+  <h3 class="modal-title">
+    <span translate>Please select your organization</span>
+  </h3>
+</div>
+<div class="modal-body">
+  <div ng-if="!$ctrl.initialized">
+    <loading-spinner/>
+  </div>
+  <div ng-if="$ctrl.initialized">
+    <div ng-if="$ctrl.error">
+      <span translate>Data is unavailable.</span>
+    </div>
+    <div ng-if="!$ctrl.error" class="form-group">
+      <div class="m-b-sm">
+        <span translate>Not all results may be visible as search is limited to</span>: {{$ctrl.providersLimit}}
+      </div>
+      <div>
+        <ui-select ng-model="$ctrl.provider"
+                   limit="{{$ctrl.providersLimit}}"
+                   theme="bootstrap"
+                   title="Choose an organization">
+          <ui-select-match placeholder="{{'Enter at least 2 characters to start searching...' | translate}}">
+            {{$select.selected.name}}
+          </ui-select-match>
+          <ui-select-choices
+              minimum-input-length="2"
+              repeat="item in $ctrl.providers | filter: $select.search | limitTo: $select.limit | orderBy:'name'">
+            <div ng-bind-html="item.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="row">
+    <div class="col-sm-offset-7 col-sm-2">
+      <form action="{{ $ctrl.loginUrl }}" method="post">
+        <input type="hidden" name="idp" value="{{ $ctrl.provider.url }}"/>
+        <button type="submit" class="btn btn-primary" ng-disabled="!!!$ctrl.provider">
+          <span translate>Login</span>
+        </button>
+      </form>
+    </div>
+    <div class="col-sm-1">
+      <button class="btn btn-default" type="button" ng-click="$ctrl.dismiss()">
+        <span translate>Cancel</span>
+      </button>
+    </div>
+  </div>
+</div>
