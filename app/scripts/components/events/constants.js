@@ -1,5 +1,9 @@
 export const EVENT_TEMPLATES = {
-  auth_logged_in_with_username: gettext('User {user_full_name} authenticated successfully with username and password.'),
+  auth_logged_in_with_username: gettext('User {user_username} with full name {user_full_name} authenticated successfully with username and password.'),
+  auth_logged_in_with_openid: gettext('User {user_username} with full name {user_full_name} authenticated successfully with OpenID.'),
+  auth_logged_in_with_google: gettext('User {user_username} with full name {user_full_name} authenticated successfully with Google.'),
+  auth_logged_in_with_facebook: gettext('User {user_username} with full name {user_full_name} authenticated successfully with Facebook.'),
+  auth_logged_in_with_smart_id_ee: gettext('User {user_username} with full name {user_full_name} authenticated successfully with Smart ID EE.'),
   customer_account_credited: gettext('Balance has been increased by {amount} for customer {customer_name}.'),
   customer_account_debited: gettext('Balance has been decreased by {amount} for customer {customer_name}.'),
   customer_creation_succeeded: gettext('Organization {customer_name} has been created.'),
