@@ -16,6 +16,16 @@ export default function aboutRoutes($stateProvider) {
       }
     })
 
+    .state('tos.freeipa', {
+      url: 'freeipa-terms/',
+      templateUrl: 'views/tos/freeipa.html',
+      data: {
+        bodyClass: 'old',
+        pageTitle: gettext('Terms of service'),
+        feature: 'freeipa'
+      }
+    })
+
     .state('about', {
       url: '/about/',
       abstract: true,

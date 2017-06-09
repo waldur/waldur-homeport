@@ -24,6 +24,12 @@ export const PRIVATE_USER_TABS = [
     label: gettext('Manage'),
     icon: 'fa-wrench',
     link: 'profile.manage'
+  },
+  {
+    label: gettext('FreeIPA account'),
+    icon: 'fa-user',
+    link: 'profile.freeipa',
+    feature: 'freeipa'
   }
 ];
 

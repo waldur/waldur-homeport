@@ -1,6 +1,6 @@
 {
   "name": "waldur-homeport",
-  "version": "2.5.4",
+  "version": "2.5.5",
   "description": "Web interface for Waldur MasterMind cloud orchestrator",
   "repository": "https://github.com/opennode/waldur-homeport",
   "license": "MIT",
@@ -77,7 +77,7 @@
     "satellizer": "^0.15.5",
     "shelljs": "^0.2.6",
     "uglify-js": "^2.7.5",
-    "ui-select": "^0.19.8",
+    "ui-select": "^0.18.1",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2",
     "world-flags-sprite": "^0.0.2"

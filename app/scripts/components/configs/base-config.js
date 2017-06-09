@@ -163,6 +163,7 @@ const ENV = {
   ],
   SAML2_IDENTITY_PROVIDER: 'https://reos.taat.edu.ee/saml2/idp/metadata.php',
   SAML2_LABEL: 'TAAT',
+  allowToSelectSAML2Provider: true,
   estoniaIdLogoutUrl: 'https://openid.ee/auth/logout',
   featuresVisible: false,
 
@@ -214,6 +215,9 @@ const ENV = {
   ],
   defaultLanguage: 'en',
   tenantCredentialsVisible: true,
+  organizationSubnetsVisible: false,
+
+  FREEIPA_USERNAME_PREFIX: 'webtest_',
 
   // Support email and phone is rendered at the footer
   // supportEmail: 'support@example.com',

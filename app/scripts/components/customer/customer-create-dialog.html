@@ -32,6 +32,26 @@
         </div>
 
         <div class="form-group">
+            <label for="email" class="control-label">
+                <span translate>Contact e-mail</span>:
+            </label>
+            <input type="email"
+                   id="email"
+                   ng-model="instance.email"
+                   class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="phoneNumber" class="control-label">
+                <span translate>Contact phone</span>:
+            </label>
+            <input type="tel"
+                   id="phoneNumber"
+                   ng-model="instance.phone_number"
+                   class="form-control">
+        </div>
+
+        <div class="form-group">
             <label for="customerCountry" class="control-label">
                 <span translate>Country</span>:
             </label>

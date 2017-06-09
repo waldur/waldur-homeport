@@ -35,6 +35,14 @@ const tabs = {
     data: {
       pageTitle: gettext('Manage')
     }
+  },
+  freeipa: {
+    url: 'freeipa-account/',
+    template: '<freeipa-account></freeipa-account>',
+    data: {
+      pageTitle: gettext('FreeIPA account'),
+      feature: 'freeipa'
+    }
   }
 };
 
@@ -56,6 +64,7 @@ export default function($stateProvider) {
     .state('profile.keys', tabs.keys)
     .state('profile.notifications', tabs.notifications)
     .state('profile.manage', tabs.manage)
+    .state('profile.freeipa', tabs.freeipa)
 
     .state('users', {
       url: '/users/:uuid/',
@@ -71,6 +80,7 @@ export default function($stateProvider) {
     .state('users.keys', angular.copy(tabs.keys))
     .state('users.notifications', angular.copy(tabs.notifications))
     .state('users.manage', angular.copy(tabs.manage))
+    .state('users.freeipa', angular.copy(tabs.freeipa))
 
     .state('keys', {
       url: '/keys/',

@@ -23,7 +23,7 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService, CATEGORY_I
         params: {
           uuid: resource.tenant_uuid,
           resource_type: 'OpenStack.Tenant',
-          tab: 'networks'
+          tab: 'security_groups'
         }
       },
     ];

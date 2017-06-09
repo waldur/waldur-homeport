@@ -170,6 +170,14 @@ export default function baseResourceListController(
       'service_settings_error_message', 'service_settings_uuid', 'security_groups',
       'description', 'is_link_valid', 'customer_name', 'project_name'
     ],
+    addRowFields: function(fields) {
+      for (let i = 0; i < fields.length; i++) {
+        let field = fields[i];
+        if (this.rowFields.indexOf(field) === -1) {
+          this.rowFields.push(field);
+        }
+      }
+    },
     getMarkers: function() {
       var items = this.controllerScope.list.filter(function hasCoordinates(item) {
         return item.latitude != null && item.longitude != null;

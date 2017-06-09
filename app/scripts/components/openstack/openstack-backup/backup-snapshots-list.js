@@ -20,8 +20,7 @@ function backupSnapshotsListController(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackSnapshotsService;
-      this.rowFields.push('size');
-      this.rowFields.push('created');
+      this.addRowFields(['size', 'created']);
     },
     getTableOptions: function() {
       var options = this._super();

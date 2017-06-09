@@ -20,7 +20,7 @@ function openstackSnapshotSchedulesListController(
         this.listActions = result;
         fn();
         this.service = openstackSnapshotSchedulesService;
-        this.rowFields.push('schedule', 'maximal_number_of_resources', 'is_active');
+        this.addRowFields(['schedule', 'maximal_number_of_resources', 'is_active']);
       });
     },
     getTableOptions: function() {

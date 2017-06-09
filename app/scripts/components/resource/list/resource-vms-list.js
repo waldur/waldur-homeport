@@ -13,10 +13,7 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
       this.controllerScope = controllerScope;
       this.category = ENV.VirtualMachines;
       this._super();
-      this.rowFields.push('internal_ips');
-      this.rowFields.push('external_ips');
-      this.rowFields.push('floating_ips');
-      this.rowFields.push('internal_ips_set');
+      this.addRowFields(['internal_ips', 'external_ips', 'floating_ips', 'internal_ips_set']);
     },
     getTableOptions: function() {
       var options = this._super();

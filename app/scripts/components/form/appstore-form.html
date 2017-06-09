@@ -9,6 +9,9 @@
             </div>
             <div class="col-sm-6">
                 <appstore-field field="field" model="$ctrl.model" form="$ctrl.Form"></appstore-field>
+                <p class="help-block m-b-n-xs text-muted" ng-if="field.form_text">
+                  {{ field.form_text | translate }}
+                </p>
                 <appstore-field-errors field="field" errors="$ctrl.errors"></appstore-field-errors>
             </div>
         </div>

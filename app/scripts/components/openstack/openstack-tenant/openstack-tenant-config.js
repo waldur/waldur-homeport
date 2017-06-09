@@ -20,7 +20,8 @@ export default {
     name: {
       type: 'string',
       required: true,
-      label: gettext('Tenant name')
+      label: gettext('Tenant name'),
+      form_text: gettext('This name will be visible in accounting data.'),
     },
     template: {
       type: 'list',
@@ -47,20 +48,23 @@ export default {
     },
     access: {
       type: 'label',
-      label: gettext('Access')
+      label: gettext('Access'),
+      is_visible: ENV => ENV.tenantCredentialsVisible,
     },
     user_username: {
       type: 'string',
       label: gettext('Initial admin username'),
       placeholder: gettext('generate automatically'),
-      help_text: gettext('Leave blank if you want admin username to be auto-generated.')
+      help_text: gettext('Leave blank if you want admin username to be auto-generated.'),
+      is_visible: ENV => ENV.tenantCredentialsVisible,
     },
     user_password: {
       type: 'password',
       autocomplete: false,
       label: gettext('Initial admin password'),
       placeholder: gettext('generate automatically'),
-      help_text: gettext('Leave blank if you want admin password to be auto-generated.')
+      help_text: gettext('Leave blank if you want admin password to be auto-generated.'),
+      is_visible: ENV => ENV.tenantCredentialsVisible,
     },
     subnet_cidr: {
       component: 'openstackSubnet',

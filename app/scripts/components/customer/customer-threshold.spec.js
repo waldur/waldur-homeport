@@ -53,7 +53,6 @@ describe('customerThreshold', () => {
 
   it('should display total price-estimate', () => {
     compileElement(priceEstimate);
-    console.log(element[0]);
     let priceEstimateElement = angular.element(element[0].querySelector('#priceEstimate'));
     expect(priceEstimateElement.text()).toBe('EUR9.00');
   });

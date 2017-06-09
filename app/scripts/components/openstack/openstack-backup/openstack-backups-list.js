@@ -24,9 +24,7 @@ function OpenStackBackupsListController(
         this.listActions = result;
         fn();
         this.service = openstackBackupsService;
-        this.rowFields.push('kept_until');
-        this.rowFields.push('instance_internal_ips_set');
-        this.rowFields.push('instance_security_groups');
+        this.addRowFields(['kept_until', 'instance_internal_ips_set', 'instance_security_groups']);
       });
     },
     getTableOptions: function() {

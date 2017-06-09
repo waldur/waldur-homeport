@@ -34,6 +34,10 @@
     @include btn-social(#42b3f1);
 }
 
+.btn-saml2-edu {
+    @include btn-social(#F8AC59);
+}
+
 .btn-smartid {
     @include btn-social(#6E4CD3);
 }
