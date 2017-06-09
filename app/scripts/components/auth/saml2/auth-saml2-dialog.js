@@ -23,7 +23,7 @@ const authSaml2Dialog = {
         this.initialized = true;
       }).catch(() => {
         this.error = true;
-        this.ncUtilsFlash(gettext('Could not load a list of identity providers. Please try again.'));
+        this.ncUtilsFlash.error(gettext('Could not load a list of identity providers. Please try again.'));
       });
     }
 
