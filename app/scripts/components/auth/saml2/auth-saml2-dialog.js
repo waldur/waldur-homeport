@@ -16,14 +16,18 @@ const authSaml2Dialog = {
     $onInit() {
       this.loginUrl = this.Saml2Service.getLoginUrl();
       this.initialized = false;
-      this.providersLimit = 20;
 
-      this.Saml2Service.getProviders().then(response => {
-        this.providers = response.data;
+      this.refreshChoices().then(() => {
         this.initialized = true;
       }).catch(() => {
         this.error = true;
         this.ncUtilsFlash.error(gettext('Could not load a list of identity providers. Please try again.'));
+      });
+    }
+
+    refreshChoices(name) {
+      return this.Saml2Service.getProviders(name).then(response => {
+        this.providers = response.data;
       });
     }
 
