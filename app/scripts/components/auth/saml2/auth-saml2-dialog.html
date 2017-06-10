@@ -14,12 +14,13 @@
     <div ng-if="!$ctrl.error">
       <ui-select ng-model="$ctrl.provider"
                  title="{{'Choose an organization' | translate }}">
-        <ui-select-match placeholder="{{'Enter at least 2 characters to start searching...' | translate}}">
+        <ui-select-match placeholder="{{'Please select your organization' | translate}}">
           {{$select.selected.name}}
         </ui-select-match>
         <ui-select-choices
-            minimum-input-length="2"
-            repeat="item in $ctrl.providers | filter: $select.search | limitTo: $ctrl.providersLimit | orderBy:'name'">
+          repeat="item in $ctrl.providers track by item.url"
+          refresh="$ctrl.refreshChoices($select.search)"
+          refresh-delay="0">
           <div ng-bind-html="item.name | highlight: $select.search"></div>
         </ui-select-choices>
       </ui-select>

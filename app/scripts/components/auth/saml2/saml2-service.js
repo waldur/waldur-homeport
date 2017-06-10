@@ -10,8 +10,12 @@ export default class Saml2Service {
     return this.$sce.trustAsResourceUrl(`${this.endpoint}login/`);
   }
 
-  getProviders() {
+  getProviders(name) {
     let url = `${this.endpoint}providers/`;
-    return this.$http.get(url);
+    let params = {};
+    if (name) {
+      params.name = name;
+    }
+    return this.$http.get(url, {params});
   }
 }
