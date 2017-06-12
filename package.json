@@ -93,6 +93,7 @@
   },
   "devDependencies": {
     "css-loader": "^0.25.0",
+    "cssnano": "^3.10.0",
     "eslint": "^3.12.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.11.1",
@@ -110,6 +111,8 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
     "node-sass": "~3.10.1",
+    "postcss-import": "^10.0.0",
+    "postcss-loader": "^2.0.5",
     "sass-loader": "^4.0.2",
     "script-loader": "^0.7.0",
     "style-loader": "^0.13.1"

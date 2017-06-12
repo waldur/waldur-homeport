@@ -29,11 +29,11 @@ module.exports = {
         },
         {
           test: /\.scss$/,
-          loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap&includePaths[]=' + scssPath)
+          loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss?sourceMap!sass?sourceMap&includePaths[]=' + scssPath)
         },
         {
           test: /\.css$/,
-          loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+          loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss?sourceMap')
         },
         {
           test: /\.json$/,

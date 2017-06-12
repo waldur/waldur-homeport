@@ -8,42 +8,6 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
-
-    sass: {
-      dist: {
-        options: {
-          style: 'expanded',
-          compass: false
-        },
-        files: {
-          'assets/css/style.css': 'assets/sass/style.scss'
-        }
-      }
-    },
-
-    autoprefixer: {
-      options: {
-        browsers: ['last 10 version']
-      },
-      multiple_files: {
-        expand: true,
-        flatten: true,
-        src: 'assets/css/*.css',
-        dest: 'app/static/css/'
-      }
-    },
-
-    cssmin: {
-      combine: {
-        files: {
-          'app/static/css/style.min.css': [
-            'app/static/css/vendor-bundle.css',
-            'app/static/css/index-bundle.css',
-          ]
-        }
-      }
-    },
-
     image: {
       dynamic: {
         files: [{
@@ -148,22 +112,6 @@ module.exports = function (grunt) {
       options: {
         livereload: true
       },
-      sass: {
-        files: ['assets/sass/*.scss', 'assets/sass/*/*.scss'],
-        tasks: ['sass', 'autoprefixer'],
-        options: {
-          spawn: false,
-          livereload: false,
-        }
-      },
-      css: {
-        files: ['app/static/css/*.css', '!app/static/css/style.min.css'],
-        tasks: ['cssmin'],
-      },
-      autoprefixer: {
-        files: 'assets/css/**',
-        tasks: ['autoprefixer']
-      },
       images: {
         files: ['assets/images/*.{png,jpg,gif}'],
         tasks: ['image'],
@@ -183,10 +131,10 @@ module.exports = function (grunt) {
 
     focus: {
       dev: {
-        include: ['sass', 'autoprefixer', 'images', 'index']
+        include: ['images', 'index']
       },
       prod: {
-        include: ['sass', 'css', 'autoprefixer', 'images', 'scripts']
+        include: ['css', 'images', 'scripts']
       }
     },
 
@@ -326,9 +274,6 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'copy:main',
     'image',
-    'sass',
-    'autoprefixer',
-    'cssmin'
   ]);
 
   grunt.registerTask('run', [
@@ -337,8 +282,6 @@ module.exports = function (grunt) {
     'env:dev',
     'preprocess:index',
     'connect:server',
-    'sass',
-    'autoprefixer',
     'webpack:dev',
     'focus:dev'
   ]);
@@ -353,12 +296,9 @@ module.exports = function (grunt) {
     'preprocess:index',
     'connect:dist',
     'image',
-    'sass',
-    'autoprefixer',
     'webpack:prod',
     'concat',
     'uglify',
-    'cssmin',
     'copy:dist',
     'focus:prod'
   ]);
@@ -369,12 +309,9 @@ module.exports = function (grunt) {
     'env:prod',
     'preprocess:index',
     'image',
-    'sass',
-    'autoprefixer',
     'webpack:prod',
     'concat',
     'uglify',
-    'cssmin',
     'copy:dist',
   ]);
 
@@ -385,8 +322,6 @@ module.exports = function (grunt) {
     'preprocess:test',
     'connect:test',
     'image',
-    'sass',
-    'autoprefixer',
     'focus:dev'
   ]);
 
@@ -397,8 +332,6 @@ module.exports = function (grunt) {
     'preprocess:test',
     'connect:test',
     'image',
-    'sass',
-    'autoprefixer',
     'express:test',
     'protractor:test'
   ]);
