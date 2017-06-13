@@ -129,7 +129,10 @@ body.landing {
 }
 
 .footer-indent {
-  padding-bottom: 40px;
+  padding-bottom: 43px;
+  @include bp(xs) {
+    padding-bottom: 60px;
+  }
 }
 
 .cursor-pointer {cursor: pointer;}
