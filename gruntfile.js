@@ -8,17 +8,6 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
-    image: {
-      dynamic: {
-        files: [{
-          expand: true,
-          cwd: 'assets/images/',
-          src: ['**/*.{png,jpg,gif,svg,ico}'],
-          dest: 'app/static/images/'
-        }]
-      }
-    },
-
     copy: {
       main: {
         files: [
@@ -49,15 +38,6 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
-            cwd: 'app/static/css/',
-            src: ['style.min.css'],
-            dest: 'dist/static/css/',
-            rename: function (dest) {
-              return dest + 'app.css';
-            }
-          },
-          {
-            expand: true,
             cwd: 'app/static/js/main/',
             src: ['main.min.js'],
             dest: 'dist/static/js/',
@@ -76,12 +56,6 @@ module.exports = function (grunt) {
             cwd: 'app/static/js/i18n/',
             src: ['*.json'],
             dest: 'dist/static/js/i18n/'
-          },
-          {
-            expand: true,
-            cwd: 'app/static/images/',
-            src: ['**'],
-            dest: 'dist/static/images/'
           },
           {
             expand: true,
@@ -112,10 +86,6 @@ module.exports = function (grunt) {
       options: {
         livereload: true
       },
-      images: {
-        files: ['assets/images/*.{png,jpg,gif}'],
-        tasks: ['image'],
-      },
       scripts: {
         files: 'app/scripts/**/*.js',
         tasks: ['concat', 'uglify'],
@@ -126,15 +96,6 @@ module.exports = function (grunt) {
       index: {
         files: 'app/index-template.html',
         tasks: ['preprocess:index']
-      }
-    },
-
-    focus: {
-      dev: {
-        include: ['images', 'index']
-      },
-      prod: {
-        include: ['css', 'images', 'scripts']
       }
     },
 
@@ -273,7 +234,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'copy:main',
-    'image',
   ]);
 
   grunt.registerTask('run', [
@@ -295,7 +255,6 @@ module.exports = function (grunt) {
     'env:prod',
     'preprocess:index',
     'connect:dist',
-    'image',
     'webpack:prod',
     'concat',
     'uglify',
@@ -308,7 +267,6 @@ module.exports = function (grunt) {
     'copy:main',
     'env:prod',
     'preprocess:index',
-    'image',
     'webpack:prod',
     'concat',
     'uglify',
@@ -321,7 +279,6 @@ module.exports = function (grunt) {
     'env:test',
     'preprocess:test',
     'connect:test',
-    'image',
     'focus:dev'
   ]);
 
@@ -331,7 +288,6 @@ module.exports = function (grunt) {
     'env:test',
     'preprocess:test',
     'connect:test',
-    'image',
     'express:test',
     'protractor:test'
   ]);

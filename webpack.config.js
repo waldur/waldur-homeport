@@ -1,8 +1,10 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var scssPath = path.resolve(__dirname, './assets/sass');
+var imagesPath = path.resolve(__dirname, './assets/images');
 var extractPlugin = new ExtractTextPlugin('./css/[name]-bundle.css');
 var momentLocalesPlugin = new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en-gb|et)/);
 
@@ -49,8 +51,8 @@ module.exports = {
           loader: 'file?publicPath=../&name=fonts/[name].[ext]'
         },
         {
-          test: /\.(png|jpg)$/,
-          loader: 'file?publicPath=../&name=images/[name].[ext]'
+          test: /\.(png|jpe?g|gif|svg|ico)$/,
+          loader: 'file?publicPath=../&name=images/[name].[ext]',
         },
         {
           test: /bootstrap.+\.js$/,
@@ -62,6 +64,12 @@ module.exports = {
     plugins: [
       extractPlugin,
       momentLocalesPlugin,
+      // some files are not referenced explicitly, copy them.
+      new CopyWebpackPlugin([
+        { from: path.resolve(imagesPath, './appstore'), to: './images/appstore' },
+        { from: path.resolve(imagesPath, './help'), to: './images/help' },
+        { from: path.resolve(imagesPath, './waldur'), to: './images/waldur' },
+      ]),
     ],
     stats: {
       children: false,

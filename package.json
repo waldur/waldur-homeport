@@ -92,6 +92,7 @@
     "test-single-run": "karma start test/karma.conf.js --single-run"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.25.0",
     "cssnano": "^3.10.0",
     "eslint": "^3.12.2",
