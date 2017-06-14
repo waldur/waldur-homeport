@@ -8,20 +8,22 @@ const authSaml2Dialog = {
   },
   controller: class AuthSaml2DialogController {
     // @ngInject
-    constructor($sce, ENV, Saml2Service, ncUtilsFlash) {
+    constructor(Saml2Service, ncUtilsFlash, $rootScope) {
       this.Saml2Service = Saml2Service;
       this.ncUtilsFlash = ncUtilsFlash;
+      this.$rootScope = $rootScope;
     }
 
     $onInit() {
       this.loginUrl = this.Saml2Service.getLoginUrl();
       this.initialized = false;
 
-      this.refreshChoices().then(() => {
-        this.initialized = true;
-      }).catch(() => {
+      this.$rootScope.$broadcast('enableRequests');
+      this.refreshChoices().catch(() => {
         this.error = true;
         this.ncUtilsFlash.error(gettext('Could not load a list of identity providers. Please try again.'));
+      }).finally(() => {
+        this.initialized = true;
       });
     }
 
