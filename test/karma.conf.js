@@ -1,4 +1,4 @@
-var webpackConfig = require('../webpack.config.js');
+var webpackCommon = require('../webpack.config.common.js');
 
 module.exports = function(config) {
   'use strict';
@@ -29,7 +29,7 @@ module.exports = function(config) {
       'test/test_index.js': ['webpack']
     },
 
-    webpack: webpackConfig.options,
+    webpack: webpackCommon,
 
     // list of files / patterns to exclude
     exclude: [],
