@@ -28,16 +28,16 @@ const appstoreProviders = {
       if (category) {
         category = this.AppStoreUtilsService.findOffering(category);
         this.noProvidersMessage = this.coreUtils.templateFormatter(
-          gettext('There are no working {categoryLabel} providers available for the current project.'),
+          gettext('There are no {categoryLabel} providers available for the current project.'),
           { categoryLabel: category.label.toLowerCase() });
       }
     }
 
     initProvidersManagementMessage() {
-      this.currentStateService.getCustomer().then(customer => {
-        const link = this.$state.href('organization.providers', { uuid: customer.uuid });
+      this.currentStateService.getProject().then(project => {
+        const link = this.$state.href('appstore.private_clouds', { uuid: project.uuid });
         this.providerManagementMessage = this.coreUtils.templateFormatter(
-          gettext('You can change that in <a href="{link}">provider management</a>.'), { link });
+          gettext('You can provision a new provider through <a href="{link}">Service store</a>.'), { link });
       });
     }
 
