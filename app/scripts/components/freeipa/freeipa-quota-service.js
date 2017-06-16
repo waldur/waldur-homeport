@@ -32,5 +32,4 @@ export default class FreeIPAQuotaService {
       this.findQuota(scope).limit = quota.limit;
     });
   }
-
 }

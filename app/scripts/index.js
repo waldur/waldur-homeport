@@ -40,6 +40,7 @@ import configModule from './components/configs/module';
 import controllersModule from './components/controllers/module';
 import directivesModule from './components/directives/module';
 import servicesModule from './components/services/module';
+import freeipaModule from './components/freeipa/module';
 import rootModule from './components/module';
 
 const appModule = angular.module('waldur', [
@@ -107,5 +108,6 @@ configModule(appModule);
 controllersModule(appModule);
 directivesModule(appModule);
 servicesModule(appModule);
+freeipaModule(appModule);
 
 bootstrap('waldur');

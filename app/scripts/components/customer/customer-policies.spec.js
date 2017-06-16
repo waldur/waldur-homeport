@@ -26,6 +26,11 @@ describe('Customer policies', () => {
       return {
       };
     });
+    $provide.factory('FreeIPAQuotaService', function() {
+      return {
+        loadQuota: () => undefined
+      };
+    });
   }));
 
   let customerUtils;

@@ -1,5 +1,5 @@
 import freeipaAccountEdit from './freeipa-account-edit';
-import filtersModule from '../../core/filters';
+import filtersModule from '../core/filters';
 
 describe('FreeIPA account edit', () => {
 
