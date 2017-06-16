@@ -85,7 +85,7 @@
   "scripts": {
     "postinstall": "bower --allow-root --no-color install",
     "start": "grunt nggettext_extract && grunt po2json_angular_translate && webpack --config=webpack.config.common.js && webpack-dev-server --config webpack.config.dev.js",
-    "build": "grunt nggettext_extract && grunt po2json_angular_translate && webpack --config=webpack.config.prod.js",
+    "build": "grunt nggettext_extract && grunt po2json_angular_translate && webpack -p --config=webpack.config.prod.js",
     "test": "npm run lint && npm run test-single-run",
     "lint": "eslint app/scripts/components",
     "test-server": "karma start test/karma.conf.js",
