@@ -1,5 +1,5 @@
 import freeipaAccountCreate from './freeipa-account-create';
-import filtersModule from '../../core/filters';
+import filtersModule from '../core/filters';
 
 describe('FreeIPA account create', () => {
 
