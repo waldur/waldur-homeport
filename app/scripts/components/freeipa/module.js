@@ -12,4 +12,4 @@ export default module => {
   module.component('freeipaAccountCreate', freeipaAccountCreate);
   module.component('freeipaAccount', freeipaAccount);
   module.component('freeipaQuota', freeipaQuota);
-}
+};
