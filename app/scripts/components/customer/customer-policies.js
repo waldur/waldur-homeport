@@ -4,6 +4,7 @@ const customerPolicies = {
   template: template,
   bindings: {
     customer: '<',
+    canUpdateQuota: '<',
   },
   controller: class CustomerPoliciesController {
     // @ngInject
@@ -22,7 +23,6 @@ const customerPolicies = {
 
       this.currency = this.ENV.currency;
       this.quota = this.FreeIPAQuotaService.loadQuota(this.customer);
-      this.canManage = true;
     }
 
     toggleHardLimit() {

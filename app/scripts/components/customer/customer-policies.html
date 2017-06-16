@@ -1,10 +1,10 @@
 <div class="panel panel-default">
     <div class="panel-heading" translate>Policies</div>
     <div class="panel-body">
-        <form name="$ctrl.policiesForm" class="form-horizontal">
+        <form name="$ctrl.policiesForm" class="form-horizontal" visible-if="'freeipa'">
             <freeipa-quota
                 quota="$ctrl.quota"
-                can-manage="$ctrl.canManage"
+                can-manage="$ctrl.canUpdateQuota"
                 currency="$ctrl.currency">
             </freeipa-quota>
         </form>

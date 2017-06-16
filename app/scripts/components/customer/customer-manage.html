@@ -95,7 +95,8 @@
     </div>
     <customer-policies
             ng-if="ManageController.canUpdateCustomerPolicies"
-            customer="ManageController.customer"></customer-policies>
+            customer="ManageController.customer"
+            can-update-quota="ManageController.canUpdateQuota"></customer-policies>
     <h3 ng-if="!ManageController.canUpdateCustomerPolicies">
         <span translate>Only staff can update organization policies.</span>
     </h3>
