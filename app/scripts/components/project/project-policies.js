@@ -13,6 +13,7 @@ const projectPolicies = {
       ncUtilsFlash,
       customersService,
       priceEstimatesService,
+      FreeIPAQuotaService,
       $rootScope,
       $q) {
       this.ENV = ENV;
@@ -21,6 +22,7 @@ const projectPolicies = {
       this.certificationsService = certificationsService;
       this.ncUtilsFlash = ncUtilsFlash;
       this.customersService = customersService;
+      this.FreeIPAQuotaService = FreeIPAQuotaService;
       this.$rootScope = $rootScope;
       this.$q = $q;
     }
@@ -33,6 +35,7 @@ const projectPolicies = {
 
       this.estimate = angular.copy(this.project.price_estimate);
       this.isHardLimit = this.checkIsHardLimit(this.estimate);
+      this.quota = this.FreeIPAQuotaService.loadQuota(this.project);
 
       this.loading = true;
       this.$q.all([
@@ -47,11 +50,15 @@ const projectPolicies = {
     }
 
     updatePolicies() {
-      const promises = [
+      let promises = [
         this.saveLimit(),
         this.saveThreshold(),
         this.saveCertifications(),
       ];
+
+      if (this.quota) {
+        promises.push(this.FreeIPAQuotaService.saveQuota(this.project, this.quota));
+      }
 
       return this.$q.all(promises).then(() => {
         this.ncUtilsFlash.success(gettext('Project policies have been updated.'));

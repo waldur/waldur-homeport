@@ -12,6 +12,8 @@ import projectsList from './projects-list';
 import projectAlertsList from './project-alerts-list';
 import projectTeam from './project-team';
 import projectsService from './projects-service';
+import freeipaQuota from './freeipa-quota';
+import FreeIPAQuotaService from './freeipa-quota-service';
 import projectRoutes from './routes';
 
 export default module => {
@@ -29,5 +31,7 @@ export default module => {
   module.component('projectAlertsList', projectAlertsList);
   module.component('projectTeam', projectTeam);
   module.service('projectsService', projectsService);
+  module.component('freeipaQuota', freeipaQuota);
+  module.service('FreeIPAQuotaService', FreeIPAQuotaService);
   module.config(projectRoutes);
 };
