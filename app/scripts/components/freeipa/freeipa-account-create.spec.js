@@ -62,7 +62,7 @@ describe('FreeIPA account create', () => {
     controller.profileForm.acceptPolicy.$setViewValue(true);
     expect(controller.profileForm.$invalid).toBeTruthy();
     controller.submitForm();
-    expect(freeipaService.createProfile).not.toHaveBeenCalled()
+    expect(freeipaService.createProfile).not.toHaveBeenCalled();
   });
 
   it('submitForm does not call backend if form is user has not accepted agreement', () => {
@@ -70,7 +70,7 @@ describe('FreeIPA account create', () => {
     controller.profileForm.acceptPolicy.$setViewValue(false);
     expect(controller.profileForm.$invalid).toBeTruthy();
     controller.submitForm();
-    expect(freeipaService.createProfile).not.toHaveBeenCalled()
+    expect(freeipaService.createProfile).not.toHaveBeenCalled();
   });
 
   it('form is invalid if username is empty', () => {
