@@ -224,7 +224,6 @@ const ENV = {
   // supportPhone: '+1234567890'
 
   // Renders label and logo at the login page
-  // TODO [TM:6/12/17] has to be copied explicitly
   // poweredByLogo: 'static/images/waldur/logo.png'
 
   // Renders link to docs in header
