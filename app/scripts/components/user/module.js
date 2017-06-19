@@ -15,7 +15,6 @@ import userToken from './user-token';
 import filtersModule from './filters';
 import hooksModule from './hooks/module';
 import keysModule from './keys/module';
-import freeipaModule from './freeipa/module';
 
 export default module => {
   module.directive('userEvents', userEvents);
@@ -36,5 +35,4 @@ export default module => {
   filtersModule(module);
   hooksModule(module);
   keysModule(module);
-  freeipaModule(module);
 };

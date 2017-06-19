@@ -19,7 +19,7 @@ function TenantNetworksController(
       var fn = this._super.bind(this);
       var vm = this;
 
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(function(result) {
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
         vm.listActions = result;
         fn();
         this.addRowFields(['subnets']);

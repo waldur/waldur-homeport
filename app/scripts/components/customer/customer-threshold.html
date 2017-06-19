@@ -1,13 +1,11 @@
-<ng-form name="$ctrl.thresholdForm">
+<ng-form name="$ctrl.thresholdForm" ng-class="{'form-horizontal': $ctrl.horizontal}">
   <div class="form-group">
-    <div ng-class="$ctrl.horizontal ? 'col-xs-4' : ''">
-      <label for="threshold" class="control-label">
-        <span translate>Cost threshold</span>
-        <i class="fa fa-question-circle"
-           uib-tooltip="{{ 'Upper bound of monthly resource cost provisioned from shared providers.' | translate }}"></i>
-      </label>
-    </div>
-    <div ng-class="$ctrl.horizontal ? 'col-xs-8' : ''">
+    <label for="threshold" class="control-label" ng-class="{'col-sm-3': $ctrl.horizontal}">
+      <span translate>Cost threshold</span>
+      <i class="fa fa-question-circle"
+         uib-tooltip="{{ 'Upper bound of monthly resource cost provisioned from shared providers.' | translate }}"></i>
+    </label>
+    <div ng-class="{'col-sm-9 col-lg-3': $ctrl.horizontal}">
       <div class="input-group">
         <input id="threshold" type="number" class="form-control" required name="threshold"
                ng-change="$ctrl.validateThreshold()"
@@ -27,13 +25,13 @@
     </div>
   </div>
   <div class="form-group" ng-if="$ctrl.priceEstimate.total">
-    <div ng-class="$ctrl.horizontal ? 'col-sm-offset-4 col-sm-8' : ''">
+    <div ng-class="{'col-sm-offset-3 col-sm-9': $ctrl.horizontal}">
       <span translate>Estimated cost for current month</span>:
       <span id="priceEstimate">{{::$ctrl.priceEstimate.total | defaultCurrency}}</span>
     </div>
   </div>
   <div class="form-group">
-    <div ng-class="$ctrl.horizontal ? 'col-sm-offset-4 col-sm-8' : ''">
+    <div ng-class="{'col-sm-offset-3 col-sm-9': $ctrl.horizontal}">
       <div class="awesome-checkbox checkbox-success">
         <input type="checkbox" ng-click="$ctrl.toggleHardLimit()" ng-model="$ctrl.isHardLimit" id="isHardLimit"/>
         <label for="isHardLimit" translate>Disable provisioning when threshold is reached.</label>

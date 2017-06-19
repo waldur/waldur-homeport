@@ -42,13 +42,11 @@
     }
     @include bp(xs) {
         display: block;
-        margin-bottom: 11px;
         font-size: 12px;
         float: none;
         text-align: center;
     } // xs
     @include bp(sm) {
-        margin-bottom: 11px;
         display: block;
     } // sm
 } // footer-nav

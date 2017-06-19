@@ -41,6 +41,7 @@ function CustomerManageController(
         return vm.getCustomerPermissions(customer).then(function (result) {
           vm.canDeleteCustomer = result.canDeleteCustomer;
           vm.canUpdateCustomerPolicies = result.canUpdateCustomerPolicies;
+          vm.canUpdateQuota = result.canUpdateQuota;
         });
       }).finally(function () {
         vm.loading = false;
@@ -61,14 +62,16 @@ function CustomerManageController(
         if (user.is_staff) {
           return $q.when({
             canDeleteCustomer: true,
-            canUpdateCustomerPolicies: true
+            canUpdateCustomerPolicies: true,
+            canUpdateQuota: true,
           });
         }
         for (let i = 0; i < customer.owners.length; i++) {
           if (user.uuid === customer.owners[i].uuid) {
             return $q.when({
               canDeleteCustomer: ENV.ownerCanManageCustomer,
-              canUpdateCustomerPolicies: ENV.ownerCanUpdateCustomerPolicies
+              canUpdateCustomerPolicies: ENV.ownerCanUpdateCustomerPolicies,
+              canUpdateQuota: false,
             });
           }
         }

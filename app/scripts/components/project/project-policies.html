@@ -27,6 +27,12 @@
       </div>
     </div>
 
+    <freeipa-quota
+      quota="$ctrl.quota"
+      can-manage="$ctrl.canManage"
+      currency="$ctrl.currency">
+    </freeipa-quota>
+
     <div visible-if="'projectCostDetails'">
       <div class="form-group">
         <label class="col-sm-3 control-label">
