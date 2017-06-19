@@ -31,11 +31,17 @@
                 <td>{{ $ctrl.model.template.disk | filesize }}</td>
             </tr>
             <tr>
-                <td><strong translate>Price per day</strong></td>
+                <td>
+                    <vat-tooltip></vat-tooltip>
+                    <strong translate>Price per day</strong>
+                </td>
                 <td>{{ $ctrl.model.template.dailyPrice | defaultCurrency }}</td>
             </tr>
             <tr>
-                <td><strong translate>Price per month</strong></td>
+                <td>
+                    <vat-tooltip></vat-tooltip>
+                    <strong translate>Price per month</strong>
+                </td>
                 <td>{{ $ctrl.model.template.monthlyPrice | defaultCurrency }}</td>
             </tr>
             <tr>

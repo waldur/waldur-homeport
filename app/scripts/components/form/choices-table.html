@@ -17,6 +17,7 @@
                 <th ng-if="::$ctrl.enableSelect"></th>
                 <th ng-repeat="column in $ctrl.columns">
                     {{ ::column.label | translate }}
+                    <vat-tooltip ng-if="column.vatTooltip"></vat-tooltip>
                 </th>
             </tr>
         </thead>
