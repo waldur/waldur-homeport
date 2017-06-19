@@ -20,6 +20,7 @@ const ENV = {
   buildId: 'develop',
 
   currency: '€',
+  pricesWithVAT: false,
 
   offerings: [
     {
