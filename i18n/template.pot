@@ -52,7 +52,7 @@ msgstr ""
 msgid "30 days"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-create.js:45
+#: app/scripts/components/freeipa/freeipa-account-create.js:45
 msgid "A profile has been created."
 msgstr ""
 
@@ -209,7 +209,7 @@ msgstr ""
 msgid "Add volumes"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:31
+#: app/scripts/components/freeipa/freeipa-account-edit.html:31
 msgid "Add Waldur user ssh keys to the FreeIPA profile"
 msgstr ""
 
@@ -295,11 +295,11 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: app/scripts/components/project/project-policies.js:65
+#: app/scripts/components/project/project-policies.js:72
 msgid "An error occurred during policy update."
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:37
+#: app/scripts/components/customer/customer-policies.js:51
 msgid "An error occurred on policies update."
 msgstr ""
 
@@ -683,7 +683,7 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:102
+#: app/scripts/components/customer/customer-manage.js:105
 #: app/scripts/components/table/base-list-controller.js:139
 msgid "Confirm deletion?"
 msgstr ""
@@ -730,8 +730,8 @@ msgstr ""
 msgid "Cost planning"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:5
-#: app/scripts/components/project/project-policies.html:33
+#: app/scripts/components/customer/customer-threshold.html:4
+#: app/scripts/components/project/project-policies.html:39
 msgid "Cost threshold"
 msgstr ""
 
@@ -755,6 +755,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-store.html:20
 #: app/scripts/components/appstore/appstore-store.html:51
 #: app/scripts/components/customer/customer-issues.js:31
+#: app/scripts/components/freeipa/freeipa-account-create.html:58
 #: app/scripts/components/issues/issue-create-dialog.js:10
 #: app/scripts/components/offering/appstore-offering.html:16
 #: app/scripts/components/openstack/openstack-instance/actions.js:108
@@ -767,7 +768,6 @@ msgstr ""
 #: app/scripts/components/project/project-issues.js:31
 #: app/scripts/components/resource/list/resources-list.js:138
 #: app/scripts/components/resource/tabs/resource-issues.js:26
-#: app/scripts/components/user/freeipa/freeipa-account-create.html:58
 #: app/scripts/components/user/hooks/hook-details.html:77
 msgid "Create"
 msgstr ""
@@ -999,7 +999,7 @@ msgstr ""
 msgid "Device"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:38
+#: app/scripts/components/freeipa/freeipa-account-edit.html:38
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr ""
 
@@ -1007,12 +1007,12 @@ msgstr ""
 msgid "Disable data volume"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:42
+#: app/scripts/components/freeipa/freeipa-account-edit.html:42
 msgid "Disable profile"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:39
-#: app/scripts/components/project/project-policies.html:61
+#: app/scripts/components/customer/customer-threshold.html:37
+#: app/scripts/components/project/project-policies.html:67
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
@@ -1077,7 +1077,7 @@ msgstr ""
 msgid "Email update"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:46
+#: app/scripts/components/freeipa/freeipa-account-edit.html:46
 msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
 msgstr ""
 
@@ -1085,7 +1085,7 @@ msgstr ""
 msgid "Enable DHCP"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:50
+#: app/scripts/components/freeipa/freeipa-account-edit.html:50
 msgid "Enable profile"
 msgstr ""
 
@@ -1119,16 +1119,16 @@ msgstr ""
 msgid "Estimated cost"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:25
+#: app/scripts/components/customer/customer-threshold.html:23
 msgid "Estimated cost exceeds threshold"
 msgstr ""
 
-#: app/scripts/components/project/project-policies.html:52
+#: app/scripts/components/project/project-policies.html:58
 msgid "Estimated cost exceeds threshold."
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:31
-#: app/scripts/components/project/project-policies.html:53
+#: app/scripts/components/customer/customer-threshold.html:29
+#: app/scripts/components/project/project-policies.html:59
 msgid "Estimated cost for current month"
 msgstr ""
 
@@ -1315,6 +1315,10 @@ msgstr ""
 msgid "FreeIPA account"
 msgstr ""
 
+#: app/scripts/components/freeipa/freeipa-quota.html:3
+msgid "FreeIPA group quota"
+msgstr ""
+
 #: app/scripts/components/issues/issues-short-list.html:49
 msgid "from"
 msgstr ""
@@ -1367,7 +1371,7 @@ msgstr ""
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:22
+#: app/scripts/components/freeipa/freeipa-account-edit.html:22
 #: app/scripts/components/user/user-edit.html:133
 msgid "have been accepted on"
 msgstr ""
@@ -1418,7 +1422,7 @@ msgstr ""
 msgid "How to obtain credentials"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-create.html:42
+#: app/scripts/components/freeipa/freeipa-account-create.html:42
 #: app/scripts/components/user/user-edit.html:145
 msgid "I accept the"
 msgstr ""
@@ -1950,7 +1954,7 @@ msgstr ""
 msgid "Minimal valid value is"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:21
+#: app/scripts/components/customer/customer-threshold.html:19
 msgid "Minimal valid value is 0"
 msgstr ""
 
@@ -2428,11 +2432,11 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:119
+#: app/scripts/components/customer/customer-manage.html:120
 msgid "Only staff can remove organization."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:100
+#: app/scripts/components/customer/customer-manage.html:101
 msgid "Only staff can update organization policies."
 msgstr ""
 
@@ -2514,7 +2518,7 @@ msgstr ""
 msgid "Organization {organizationName} is updated."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:103
+#: app/scripts/components/customer/customer-manage.html:104
 msgid "Organization actions"
 msgstr ""
 
@@ -2522,7 +2526,7 @@ msgstr ""
 msgid "Organization code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:82
+#: app/scripts/components/customer/customer-manage.js:85
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
@@ -2560,7 +2564,7 @@ msgstr ""
 msgid "Organization owner role expires on"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:29
+#: app/scripts/components/customer/customer-policies.js:43
 msgid "Organization policies have been updated."
 msgstr ""
 
@@ -2568,8 +2572,8 @@ msgstr ""
 msgid "Organization registration code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:90
 #: app/scripts/components/customer/customer-manage.js:93
+#: app/scripts/components/customer/customer-manage.js:96
 msgid "Organization removal"
 msgstr ""
 
@@ -2735,7 +2739,7 @@ msgstr ""
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-create.html:26
+#: app/scripts/components/freeipa/freeipa-account-create.html:26
 msgid "Please select a username that you will use for login into the Linux systems."
 msgstr ""
 
@@ -2967,7 +2971,7 @@ msgstr ""
 msgid "Project name"
 msgstr ""
 
-#: app/scripts/components/project/project-policies.js:57
+#: app/scripts/components/project/project-policies.js:64
 msgid "Project policies have been updated."
 msgstr ""
 
@@ -3142,7 +3146,7 @@ msgstr ""
 msgid "Read through terms and conditions."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:95
+#: app/scripts/components/customer/customer-manage.js:98
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
@@ -3227,7 +3231,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:114
+#: app/scripts/components/customer/customer-manage.html:115
 msgid "Remove organization"
 msgstr ""
 
@@ -3240,7 +3244,7 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:107
+#: app/scripts/components/customer/customer-manage.html:108
 msgid "Report incorrect data"
 msgstr ""
 
@@ -3294,7 +3298,7 @@ msgstr ""
 msgid "Request name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:97
+#: app/scripts/components/customer/customer-manage.js:100
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
 msgstr ""
@@ -3725,6 +3729,10 @@ msgstr ""
 msgid "Service type"
 msgstr ""
 
+#: app/scripts/components/freeipa/freeipa-quota.html:18
+msgid "Set limit"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/module.js:58
 msgid "Set rules"
 msgstr ""
@@ -4025,7 +4033,7 @@ msgstr ""
 msgid "Support user"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:34
+#: app/scripts/components/freeipa/freeipa-account-edit.html:34
 msgid "Sync profile"
 msgstr ""
 
@@ -4106,9 +4114,9 @@ msgstr ""
 msgid "Terms of service"
 msgstr ""
 
+#: app/scripts/components/freeipa/freeipa-account-create.html:45
+#: app/scripts/components/freeipa/freeipa-account-edit.html:20
 #: app/scripts/components/navigation/app-footer.html:8
-#: app/scripts/components/user/freeipa/freeipa-account-create.html:45
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:20
 #: app/scripts/components/user/user-edit.html:131
 #: app/scripts/components/user/user-edit.html:147
 msgid "Terms of Service"
@@ -4116,6 +4124,10 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-details.html:21
 msgid "Terms of Services"
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-providers.js:31
+msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-button-resource.html:12
@@ -4164,10 +4176,6 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:24
 msgid "There are no suitable VPC packages for this tenant."
-msgstr ""
-
-#: app/scripts/components/appstore/appstore-providers.js:31
-msgid "There are no working {categoryLabel} providers available for the current project."
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-plans.html:6
@@ -4303,7 +4311,7 @@ msgstr ""
 msgid "Unable to change tenant package."
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-create.js:43
+#: app/scripts/components/freeipa/freeipa-account-create.js:43
 msgid "Unable to create a FreeIPA profile."
 msgstr ""
 
@@ -4386,6 +4394,11 @@ msgstr ""
 msgid "Unit Price"
 msgstr ""
 
+#: app/scripts/components/freeipa/freeipa-quota.html:12
+#: app/scripts/components/freeipa/freeipa-quota.html:37
+msgid "Unlimited"
+msgstr ""
+
 #: app/scripts/components/providers/provider-list.js:119
 msgid "Unlink"
 msgstr ""
@@ -4394,7 +4407,7 @@ msgstr ""
 msgid "Unselect all"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:14
+#: app/scripts/components/customer/customer-policies.html:21
 #: app/scripts/components/user/hooks/hook-details.html:76
 msgid "Update"
 msgstr ""
@@ -4407,7 +4420,7 @@ msgstr ""
 msgid "Update notification"
 msgstr ""
 
-#: app/scripts/components/project/project-policies.html:70
+#: app/scripts/components/project/project-policies.html:76
 msgid "Update policies"
 msgstr ""
 
@@ -4433,8 +4446,8 @@ msgstr ""
 msgid "Upgrade"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:7
-#: app/scripts/components/project/project-policies.html:34
+#: app/scripts/components/customer/customer-threshold.html:6
+#: app/scripts/components/project/project-policies.html:40
 msgid "Upper bound of monthly resource cost provisioned from shared providers."
 msgstr ""
 
@@ -4552,14 +4565,14 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:28
 #: app/scripts/components/auth/auth-login.html:51
+#: app/scripts/components/freeipa/freeipa-account-create.html:8
+#: app/scripts/components/freeipa/freeipa-account-edit.html:8
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
 #: app/scripts/components/team/user-selector.html:9
-#: app/scripts/components/user/freeipa/freeipa-account-create.html:8
-#: app/scripts/components/user/freeipa/freeipa-account-edit.html:8
 msgid "Username"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-create.html:13
+#: app/scripts/components/freeipa/freeipa-account-create.html:13
 msgid "Username prefix"
 msgstr ""
 
@@ -4665,7 +4678,7 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:96
+#: app/scripts/components/customer/customer-manage.js:99
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
@@ -4682,10 +4695,10 @@ msgid "Yes, use invitation email"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.js:40
-msgid "You can change that in <a href=\"{link}\">provider management</a>."
+msgid "You can provision a new provider through <a href=\"{link}\">Service store</a>."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:111
+#: app/scripts/components/customer/customer-manage.html:112
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
@@ -4824,7 +4837,7 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-create.js:29
+#: app/scripts/components/freeipa/freeipa-account-create.js:29
 msgid "You must agree with terms of service."
 msgstr ""
 
@@ -4836,19 +4849,19 @@ msgstr ""
 msgid "Your current email is:"
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.js:20
+#: app/scripts/components/freeipa/freeipa-account-edit.js:20
 msgid "Your FreeIPA has been enabled."
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.js:40
+#: app/scripts/components/freeipa/freeipa-account-edit.js:40
 msgid "Your FreeIPA has been removed in FreeIPA server."
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.js:43
+#: app/scripts/components/freeipa/freeipa-account-edit.js:43
 msgid "Your FreeIPA has been synced successfully."
 msgstr ""
 
-#: app/scripts/components/user/freeipa/freeipa-account-edit.js:30
+#: app/scripts/components/freeipa/freeipa-account-edit.js:30
 msgid "Your FreeIPA profile has been disabled."
 msgstr ""
 
