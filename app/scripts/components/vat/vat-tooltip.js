@@ -5,7 +5,7 @@ const vatTooltip = {
   controller: class VATTooltipController {
     // @ngInject
     constructor(ENV) {
-      this.showTooltip = ENV.pricesWithVAT;
+      this.showTooltip = ENV.pricesWithoutVAT;
     }
   }
 };
