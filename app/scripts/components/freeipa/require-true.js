@@ -3,7 +3,7 @@ const requireTrue = function() {
     require: 'ngModel',
     restrict: 'A',
     link: function(scope, elm, attrs, ctrl) {
-      ctrl.$validators.requireTrue = function(modelValue, viewValue) {
+      ctrl.$validators.requireTrue = function(modelValue) {
         return !!modelValue;
       };
     }
