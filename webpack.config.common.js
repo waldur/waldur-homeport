@@ -6,8 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var scssPath = path.resolve(__dirname, './assets/sass');
 var imagesPath = path.resolve(__dirname, './assets/images');
-var bowerPath = path.resolve(__dirname, './bower_components');
-var extractPlugin = new ExtractTextPlugin('css/[name]-bundle.css');
+var extractPlugin = new ExtractTextPlugin('css/[name]-bundle-[contenthash].css');
 var momentLocalesPlugin = new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en-gb|et)/);
 
 module.exports = {
