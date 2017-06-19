@@ -7,6 +7,7 @@ describe('FreeIPA account create', () => {
     module.component('freeipaAccountCreate', freeipaAccountCreate);
     module.constant('ENV', {
       apiEndpoint: 'https://example.com/',
+      FREEIPA_USERNAME_PREFIX: 'waldur_',
     });
     filtersModule(module);
   }
@@ -36,10 +37,7 @@ describe('FreeIPA account create', () => {
   let freeipaService;
   let $rootScope;
   let controller, scope, element;
-  let profile = {
-    username: 'username',
-    acceptPolicy: true,
-  };
+
   beforeEach(inject((_freeipaService_, _$rootScope_, $compile) => {
     freeipaService = _freeipaService_;
     $rootScope = _$rootScope_;
@@ -51,17 +49,48 @@ describe('FreeIPA account create', () => {
     controller = element.controller('freeipaAccountCreate');
   }));
 
-  it('submitForm calls freeipaService service', () => {
-    controller.profileForm.username.$setViewValue(profile.username);
-    controller.profileForm.acceptPolicy.$setViewValue(profile.acceptPolicy);
+  it('submitForm calls backend if form is valid', () => {
+    controller.profileForm.username.$setViewValue('username');
+    controller.profileForm.acceptPolicy.$setViewValue(true);
+    expect(controller.profileForm.$valid).toBeTruthy();
     controller.submitForm();
-    expect(freeipaService.createProfile).toHaveBeenCalledWith(profile.username, profile.acceptPolicy);
+    expect(freeipaService.createProfile).toHaveBeenCalledWith('username', true);
   });
 
-  it('submitForm does not call freeipaService if username is empty', () => {
-    controller.profileForm.username.$setViewValue('');
-    controller.profileForm.acceptPolicy.$setViewValue(profile.acceptPolicy);
+  it('submitForm does not call backend if form is invalid', () => {
+    controller.profileForm.username.$setViewValue('invalid username');
+    controller.profileForm.acceptPolicy.$setViewValue(true);
+    expect(controller.profileForm.$invalid).toBeTruthy();
     controller.submitForm();
-    expect(freeipaService.createProfile).not.toHaveBeenCalled();
+    expect(freeipaService.createProfile).not.toHaveBeenCalled()
+  });
+
+  it('submitForm does not call backend if form is user has not accepted agreement', () => {
+    controller.profileForm.username.$setViewValue('invalid username');
+    controller.profileForm.acceptPolicy.$setViewValue(false);
+    expect(controller.profileForm.$invalid).toBeTruthy();
+    controller.submitForm();
+    expect(freeipaService.createProfile).not.toHaveBeenCalled()
+  });
+
+  it('form is invalid if username is empty', () => {
+    controller.profileForm.username.$setViewValue('');
+    controller.profileForm.acceptPolicy.$setViewValue(true);
+    controller.submitForm();
+    expect(controller.profileForm.username.$error.required).toBeTruthy();
+  });
+
+  it('form is invalid if username contains invalid sign', () => {
+    controller.profileForm.username.$setViewValue('@');
+    controller.profileForm.acceptPolicy.$setViewValue(true);
+    controller.submitForm();
+    expect(controller.profileForm.username.$error.pattern).toBeTruthy();
+  });
+
+  it('form is invalid if username is too long', () => {
+    controller.profileForm.username.$setViewValue(Array(255).join('a'));
+    controller.profileForm.acceptPolicy.$setViewValue(true);
+    controller.submitForm();
+    expect(controller.profileForm.username.$error.maxlength).toBeTruthy();
   });
 });
