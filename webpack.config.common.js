@@ -52,7 +52,7 @@ module.exports = {
         loader: 'file?publicPath=../&name=fonts/[name].[ext]?[hash]'
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
+        test: /\.(png|jpg|jpeg|gif|ico)$/,
         loader: 'file?publicPath=../&name=images/[name].[ext]?[hash]',
       },
       {
