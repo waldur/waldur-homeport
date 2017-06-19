@@ -21,12 +21,20 @@
             type="text"
             name="username"
             ng-model="$ctrl.profile.username"
+            ng-maxlength="$ctrl.maxUsernameLength"
+            ng-pattern="$ctrl.usernamePattern"
             required/>
         </div>
         <p class="form-text text-muted" translate>
           Please select a username that you will use for login into the Linux systems.
         </p>
-        <p class="text-danger" ng-if="$ctrl.profileForm.$submitted && $ctrl.profileForm.username.$error.required">
+        <p class="text-danger" ng-if="$ctrl.profileForm.username.$error.pattern" translate>
+          Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.).
+        </p>
+        <p class="text-danger" ng-if="$ctrl.profileForm.username.$error.maxlength" translate>
+          Maximum username length with mandatory username prefix is 32 characters.
+        </p>
+        <p class="text-danger" ng-if="$ctrl.profileForm.username.$error.required" translate>
           Username is required.
         </p>
       </div>
@@ -38,7 +46,8 @@
               id="acceptPolicy"
               type="checkbox"
               name="acceptPolicy"
-              ng-model="$ctrl.profile.agree_with_policy"/>
+              ng-model="$ctrl.profile.agree_with_policy"
+              require-true/>
           <span translate>I accept the</span>&nbsp;
           <a ui-sref="tos.freeipa" target="_blank">
             <i class="fa fa-external-link"></i>
@@ -51,7 +60,7 @@
       <div class="col-sm-offset-3 col-sm-5">
           <a type="submit"
             class="btn btn-primary"
-            ng-disabled="!$ctrl.profile.agree_with_policy"
+            ng-disabled="$ctrl.profileForm.$invalid"
             submit-button="$ctrl.submitForm()"
             uib-tooltip="{{ $ctrl.getTooltip() }}">
             <i class="fa fa-plus"></i>
