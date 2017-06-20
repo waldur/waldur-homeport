@@ -20,7 +20,9 @@ const ENV = {
   buildId: 'develop',
 
   currency: '€',
-  pricesWithoutVAT: true,
+  // Either 'accounting' or 'billing'
+  accountingMode: 'accounting',
+
 
   offerings: [
     {
@@ -200,9 +202,6 @@ const ENV = {
     'full_name',
     'email'
   ],
-
-  // Either 'accounting' or 'billing'
-  accountingMode: 'accounting',
 
   languageChoices: [
     {

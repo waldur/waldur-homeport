@@ -13,7 +13,6 @@ function RecordsListController(
   usersService,
   invoicesService,
   ncUtils,
-  ncUtilsFlash,
   BillingUtils,
   $state,
   $filter) {
@@ -51,20 +50,15 @@ function RecordsListController(
             render: row => row.state
           },
           {
-            title: gettext('Price'),
-            className: 'all',
-            render: row => $filter('defaultCurrency')(row.price)
-          },
-          {
-            title: gettext('Total'),
-            className: 'min-tablet-l',
-            render: row => $filter('defaultCurrency')(row.total)
-          },
-          {
             title: gettext('Record period'),
             className: 'all',
             render: row => BillingUtils.formatPeriod(row)
           },
+          {
+            title: '<vat-tooltip></vat-tooltip>' + gettext('Total'),
+            className: 'all',
+            render: row => $filter('defaultCurrency')(row.price)
+          }
         ],
         rowActions: this.getRowActions()
       };

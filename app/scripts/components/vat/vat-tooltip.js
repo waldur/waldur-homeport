@@ -5,7 +5,8 @@ const vatTooltip = {
   controller: class VATTooltipController {
     // @ngInject
     constructor(ENV) {
-      this.showTooltip = ENV.pricesWithoutVAT;
+      // we show highlights only when accounting mode is activated
+      this.showTooltip = ENV.accountingMode == 'accounting';
     }
   }
 };

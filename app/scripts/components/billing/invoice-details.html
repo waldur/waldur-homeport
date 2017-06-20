@@ -59,12 +59,10 @@
                             <th translate>Quantity</th>
                             <th>
                                 <span translate>Unit Price</span>
-                                <vat-tooltip></vat-tooltip>
                             </th>
                             <th ng-if="InvoiceDetails.invoice.issuer_details.vat_code">Tax</th>
                             <th>
                                 <span translate>Total Price</span>
-                                <vat-tooltip></vat-tooltip>
                             </th>
                         </tr>
                         </thead>
@@ -85,7 +83,6 @@
                     <tbody>
                     <tr>
                         <td>
-                            <vat-tooltip></vat-tooltip>
                             <strong><span translate>Sub Total</span>: </strong>
                         </td>
                         <td>{{::InvoiceDetails.invoice.price | defaultCurrency}}</td>
@@ -96,7 +93,6 @@
                     </tr>
                     <tr>
                         <td>
-                            <vat-tooltip></vat-tooltip>
                             <strong><span translate>TOTAL</span>: </strong>
                         </td>
                         <td>{{::InvoiceDetails.invoice.total | defaultCurrency}}</td>
