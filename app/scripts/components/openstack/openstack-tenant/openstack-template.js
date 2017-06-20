@@ -25,19 +25,22 @@ export const openstackTemplateColumns = [
   {
     name: 'dailyPrice',
     label: gettext('1 day'),
-    vatTooltip: true,
+    priceTooltip: true,
+    priceEstimated: true,
     filter: 'defaultCurrency'
   },
   {
     name: 'monthlyPrice',
     label: gettext('30 days'),
-    vatTooltip: true,
+    priceTooltip: true,
+    priceEstimated: true,
     filter: 'defaultCurrency'
   },
   {
     name: 'annualPrice',
     label: gettext('365 days'),
-    vatTooltip: true,
+    priceTooltip: true,
+    priceEstimated: true,
     filter: 'defaultCurrency'
   }
 ];

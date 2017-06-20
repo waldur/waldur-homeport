@@ -14,21 +14,21 @@
       <tr>
         <th>
           <span translate>Price for 1 vCPU per day</span>
-          <vat-tooltip></vat-tooltip>
+          <price-tooltip></price-tooltip>
         </th>
         <td>{{ $ctrl.prices.cores | defaultCurrency }}</td>
       </tr>
       <tr>
         <th>
           <span translate>Price for 1 GB of storage per day</span>
-          <vat-tooltip></vat-tooltip>
+          <price-tooltip></price-tooltip>
         </th>
         <td>{{ $ctrl.prices.disk * 1024 | defaultCurrency }}</td>
       </tr>
       <tr>
         <th>
           <span translate>Price for 1 GB of RAM per day</span>
-          <vat-tooltip></vat-tooltip>
+          <price-tooltip></price-tooltip>
         </th>
         <td>{{ $ctrl.prices.ram * 1024 | defaultCurrency }}</td>
       </tr>

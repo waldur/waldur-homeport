@@ -55,7 +55,7 @@ function RecordsListController(
             render: row => BillingUtils.formatPeriod(row)
           },
           {
-            title: '<vat-tooltip></vat-tooltip>' + gettext('Total'),
+            title: '<price-tooltip></price-tooltip>' + gettext('Total'),
             className: 'all',
             render: row => $filter('defaultCurrency')(row.price)
           }

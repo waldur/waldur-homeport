@@ -13,7 +13,7 @@
                         <th>
                             <span class="plan-name">{{ plan.name }}</span>
                             <span class="plan-price">{{ plan.price | defaultCurrency }} / mo.</span>
-                            <vat-tooltip></vat-tooltip>
+                            <price-tooltip></price-tooltip>
                         </th>
                         <tr ng-repeat="quota in plan.quotas" visible="{{ PlanList.getPrettyQuotaName(quota.name) }}s">
                             <td>
