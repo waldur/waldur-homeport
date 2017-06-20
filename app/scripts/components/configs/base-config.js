@@ -217,7 +217,7 @@ const ENV = {
   tenantCredentialsVisible: true,
   organizationSubnetsVisible: false,
 
-  FREEIPA_USERNAME_PREFIX: 'webtest_',
+  FREEIPA_USERNAME_PREFIX: 'waldur_',
 
   // Support email and phone is rendered at the footer
   // supportEmail: 'support@example.com',

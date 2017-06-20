@@ -52,7 +52,7 @@ msgstr ""
 msgid "30 days"
 msgstr ""
 
-#: app/scripts/components/freeipa/freeipa-account-create.js:45
+#: app/scripts/components/freeipa/freeipa-account-create.js:49
 msgid "A profile has been created."
 msgstr ""
 
@@ -755,7 +755,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-store.html:20
 #: app/scripts/components/appstore/appstore-store.html:51
 #: app/scripts/components/customer/customer-issues.js:31
-#: app/scripts/components/freeipa/freeipa-account-create.html:58
+#: app/scripts/components/freeipa/freeipa-account-create.html:67
 #: app/scripts/components/issues/issue-create-dialog.js:10
 #: app/scripts/components/offering/appstore-offering.html:16
 #: app/scripts/components/openstack/openstack-instance/actions.js:108
@@ -1422,7 +1422,7 @@ msgstr ""
 msgid "How to obtain credentials"
 msgstr ""
 
-#: app/scripts/components/freeipa/freeipa-account-create.html:42
+#: app/scripts/components/freeipa/freeipa-account-create.html:51
 #: app/scripts/components/user/user-edit.html:145
 msgid "I accept the"
 msgstr ""
@@ -1920,6 +1920,10 @@ msgstr ""
 
 #: app/scripts/components/form/appstore-field-integer.html:22
 msgid "Maximal valid value is"
+msgstr ""
+
+#: app/scripts/components/freeipa/freeipa-account-create.html:34
+msgid "Maximum username length with mandatory username prefix is 32 characters."
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.js:8
@@ -2739,7 +2743,7 @@ msgstr ""
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
-#: app/scripts/components/freeipa/freeipa-account-create.html:26
+#: app/scripts/components/freeipa/freeipa-account-create.html:28
 msgid "Please select a username that you will use for login into the Linux systems."
 msgstr ""
 
@@ -4114,7 +4118,7 @@ msgstr ""
 msgid "Terms of service"
 msgstr ""
 
-#: app/scripts/components/freeipa/freeipa-account-create.html:45
+#: app/scripts/components/freeipa/freeipa-account-create.html:54
 #: app/scripts/components/freeipa/freeipa-account-edit.html:20
 #: app/scripts/components/navigation/app-footer.html:8
 #: app/scripts/components/user/user-edit.html:131
@@ -4311,7 +4315,7 @@ msgstr ""
 msgid "Unable to change tenant package."
 msgstr ""
 
-#: app/scripts/components/freeipa/freeipa-account-create.js:43
+#: app/scripts/components/freeipa/freeipa-account-create.js:55
 msgid "Unable to create a FreeIPA profile."
 msgstr ""
 
@@ -4572,8 +4576,16 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
+#: app/scripts/components/freeipa/freeipa-account-create.html:37
+msgid "Username is required."
+msgstr ""
+
 #: app/scripts/components/freeipa/freeipa-account-create.html:13
 msgid "Username prefix"
+msgstr ""
+
+#: app/scripts/components/freeipa/freeipa-account-create.html:31
+msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
 #: app/scripts/components/customer/customer-team.html:4
@@ -4837,7 +4849,7 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
-#: app/scripts/components/freeipa/freeipa-account-create.js:29
+#: app/scripts/components/freeipa/freeipa-account-create.js:36
 msgid "You must agree with terms of service."
 msgstr ""
 
