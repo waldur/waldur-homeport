@@ -82,8 +82,11 @@
         <table class="table invoice-total">
           <tbody>
             <tr>
-              <td><strong translate>TOTAL</strong>:</td>
-              <td>{{ ::$ctrl.invoice.total | defaultCurrency }}</td>
+              <td>
+                <price-tooltip></price-tooltip>
+                <strong translate>TOTAL</strong>:
+              </td>
+              <td>{{ ::$ctrl.invoice.price | defaultCurrency }}</td>
             </tr>
           </tbody>
         </table>

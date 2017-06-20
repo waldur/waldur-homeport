@@ -32,7 +32,7 @@ export const openstackFlavorColumns = [
   },
   {
     name: 'annualPrice',
-    label: gettext('1 year'),
+    label: gettext('365 days'),
     filter: 'defaultCurrency'
   }
 ];
