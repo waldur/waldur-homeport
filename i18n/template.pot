@@ -8,7 +8,7 @@ msgstr ""
 msgid "\"{planName}\" details"
 msgstr ""
 
-#: app/scripts/components/form/appstore-field-list.js:38
+#: app/scripts/components/form/appstore-field-list.js:41
 msgid "{fieldLabel} is required for provisioning resource."
 msgstr ""
 
@@ -219,7 +219,7 @@ msgid "Adding link"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:88
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:148
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:149
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
@@ -345,7 +345,7 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:167
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:168
 msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
 msgstr ""
 
@@ -955,7 +955,7 @@ msgstr ""
 #: app/scripts/components/offering/offering-summary.html:62
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:37
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:43
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:142
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:143
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:47
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:30
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:25
@@ -2024,7 +2024,7 @@ msgid "Network has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:41
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:121
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:122
 #: app/scripts/components/openstack/openstack-network/breadcrumbs.js:22
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:23
 msgid "Networks"
@@ -3558,7 +3558,7 @@ msgstr ""
 msgid "Security group has been updated."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:101
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:102
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 #: app/scripts/components/openstack/openstack-security-groups/breadcrumbs.js:21
 msgid "Security groups"
@@ -3653,7 +3653,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:34
 #: app/scripts/components/openstack/openstack-instance/actions.js:44
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:102
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:103
 msgid "Select security groups..."
 msgstr ""
 
@@ -3887,10 +3887,6 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:72
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:86
 msgid "SSH public key"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:97
-msgid "SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr ""
 
 #: app/scripts/components/user/filters.js:18
@@ -4150,6 +4146,10 @@ msgstr ""
 msgid "There are no comments yet."
 msgstr ""
 
+#: app/scripts/components/form/appstore-field-list.js:43
+msgid "There are no items yet."
+msgstr ""
+
 #: app/scripts/components/navigation/select-workspace-dialog.html:100
 msgid "There are no projects yet for this organization."
 msgstr ""
@@ -4315,7 +4315,7 @@ msgstr ""
 msgid "Unable to change tenant package."
 msgstr ""
 
-#: app/scripts/components/freeipa/freeipa-account-create.js:52
+#: app/scripts/components/freeipa/freeipa-account-create.js:55
 msgid "Unable to create a FreeIPA profile."
 msgstr ""
 
@@ -4546,7 +4546,7 @@ msgid "User dashboard"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:87
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:147
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:148
 msgid "User data"
 msgstr ""
 
@@ -4847,6 +4847,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:37
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:29
 msgid "You have no volumes yet."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:98
+msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.js:36

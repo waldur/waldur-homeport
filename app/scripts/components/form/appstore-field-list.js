@@ -31,12 +31,16 @@ class FieldController {
       this.field = angular.extend({}, this.field, {choices});
     }
 
+    if (this.field.preselectFirst && this.field.choices.length === 1) {
+      this.model[this.field.name] = this.field.choices[0];
+    }
+
     this.hasChoices = this.field.choices && this.field.choices.length > 0;
-    this.renderWarning = this.field.required && !this.hasChoices;
     this.renderEmpty = !this.field.required && !this.hasChoices;
     this.warningMessage = this.field.warningMessage ||
       this.coreUtils.templateFormatter(gettext('{fieldLabel} is required for provisioning resource.'),
         {fieldLabel: this.field.label});
+    this.emptyMessage = this.field.emptyMessage || gettext('There are no items yet.');
   }
 
   openDialog() {
