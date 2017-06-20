@@ -70,4 +70,28 @@ export default class BillingUtils {
       this.ncUtilsFlash.error(gettext('Unable to send record notification.'));
     });
   }
+
+  groupInvoiceItems(invoice) {
+    let projects = {
+      default: {
+        items: [],
+        name: gettext('Default project'),
+      }
+    };
+    for (var i = 0; i < invoice.openstack_items.length; i++) {
+      const item = invoice.openstack_items[i];
+      if (!item.project_uuid) {
+        projects.default.items.push(item);
+      } else {
+        if (!projects[item.project_uuid]) {
+          projects[item.project_uuid] = {
+            items: [],
+            name: item.project_name,
+          };
+        }
+        projects[item.project_uuid].items.push(item);
+      }
+    }
+    return projects;
+  }
 }
