@@ -9,8 +9,8 @@ export default class FreeIPAService{
     return this.$http.post(this.endpoint, {username, agree_with_policy: agreeWithPolicy});
   }
 
-  getProfile(username) {
-    return this.$http.get(this.endpoint, {params: {username: username}});
+  getProfile(user) {
+    return this.$http.get(this.endpoint, {params: {user: user.uuid}});
   }
 
   resourceAction(uuid, action) {

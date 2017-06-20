@@ -17,7 +17,7 @@ const freeipaAccount = {
     refreshProfile() {
       this.loading = true;
       this.usersService.getCurrentUser().then(user => {
-        this.freeipaService.getProfile(user.username).then(response => {
+        this.freeipaService.getProfile(user).then(response => {
           this.userHasProfile = response.data.length === 1;
           if (this.userHasProfile) {
             this.profile = response.data[0];

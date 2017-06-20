@@ -42,12 +42,12 @@ msgstr ""
 msgid "1 day"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:34
+#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:33
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:30
 msgid "30 days"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:41
+#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:40
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:35
 msgid "365 days"
 msgstr ""
@@ -273,7 +273,7 @@ msgstr ""
 msgid "Alerts about resources (VMs and applications)"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:55
+#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:54
 msgid "All categories"
 msgstr ""
 
