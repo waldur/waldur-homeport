@@ -26,7 +26,6 @@ export const openstackTemplateColumns = [
     name: 'dailyPrice',
     label: gettext('1 day'),
     priceTooltip: true,
-    priceEstimated: true,
     filter: 'defaultCurrency'
   },
   {
