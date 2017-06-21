@@ -57,7 +57,7 @@ describe('Appstore field list', () => {
     $compile = _$compile_;
   }));
 
-  it('preselects SSH key if exactly one key is configured', () => {
+  function compileElement(field) {
     let scope = $rootScope.$new();
     scope.field = field;
     scope.model = model;
@@ -66,6 +66,16 @@ describe('Appstore field list', () => {
     element = $compile(element)(scope);
     let controller = element.controller('appstoreFieldList');
     scope.$apply();
+    return {
+      controller: controller,
+      element: element,
+    };
+  }
+
+  it('preselects SSH key if exactly one key is configured', () => {
+    let compiled = compileElement(field);
+    let controller = compiled.controller;
+    let element = compiled.element;
 
     expect(controller.model[field.name]).toBe(field.choices[0]);
     expect(controller.renderEmpty).toBeFalsy();
@@ -75,15 +85,8 @@ describe('Appstore field list', () => {
   });
 
   it('sets renderEmpty to True if field has no choices', () => {
-    let scope = $rootScope.$new();
     field.choices = [];
-    scope.field = field;
-    scope.model = model;
-    let html = '<appstore-field-list field="field" model="model"></appstore-field-list>';
-    let element = angular.element(html);
-    element = $compile(element)(scope);
-    let controller = element.controller('appstoreFieldList');
-    scope.$apply();
+    let controller = compileElement(field).controller;
 
     expect(controller.emptyMessage).toBe(field.emptyMessage);
     expect(controller.renderEmpty).toBeTruthy();
@@ -91,16 +94,9 @@ describe('Appstore field list', () => {
   });
 
   it('sets renderWarning to True if field has is required and has no choices', () => {
-    let scope = $rootScope.$new();
     field.choices = [];
     field.required = true;
-    scope.field = field;
-    scope.model = model;
-    let html = '<appstore-field-list field="field" model="model"></appstore-field-list>';
-    let element = angular.element(html);
-    element = $compile(element)(scope);
-    let controller = element.controller('appstoreFieldList');
-    scope.$apply();
+    let controller = compileElement(field).controller;
 
     expect(controller.warningMessage).toBe(field.warningMessage);
     expect(controller.renderWarning).toBeTruthy();
