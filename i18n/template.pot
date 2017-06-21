@@ -21,7 +21,7 @@ msgid "{quotaUsage} out of {quotaLimit}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:24
-msgid "{resource_full_name} creation has been scheduled by {user_username}."
+msgid "{resource_full_name} creation has been scheduled by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:23
@@ -33,47 +33,47 @@ msgid "{resource_full_name} deletion has failed."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:25
-msgid "{resource_full_name} has been created by {user_username}."
+msgid "{resource_full_name} has been created by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:28
-msgid "{resource_full_name} has been deleted by {user_username}."
+msgid "{resource_full_name} has been deleted by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:29
-msgid "{resource_full_name} has been imported by {user_username}."
+msgid "{resource_full_name} has been imported by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:32
-msgid "{resource_full_name} has been restarted by {user_username}."
+msgid "{resource_full_name} has been restarted by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:27
-msgid "{resource_full_name} has been scheduled to deletion by {user_username}."
+msgid "{resource_full_name} has been scheduled to deletion by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:31
-msgid "{resource_full_name} has been scheduled to restart by {user_username}."
+msgid "{resource_full_name} has been scheduled to restart by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:34
-msgid "{resource_full_name} has been scheduled to start by {user_username}."
+msgid "{resource_full_name} has been scheduled to start by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:37
-msgid "{resource_full_name} has been scheduled to stop by {user_username}."
+msgid "{resource_full_name} has been scheduled to stop by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:35
-msgid "{resource_full_name} has been started by {user_username}."
+msgid "{resource_full_name} has been started by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:38
-msgid "{resource_full_name} has been stopped by {user_username}."
+msgid "{resource_full_name} has been stopped by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:39
-msgid "{resource_full_name} has been updated by {user_username}."
+msgid "{resource_full_name} has been updated by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:30
