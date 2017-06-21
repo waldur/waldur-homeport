@@ -37,7 +37,8 @@ VERSION=$(grep '"version":' package.json | awk '{print $2}' | sed -e "s/\"//g;s/
 # Inject package version
 sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" app/scripts/components/configs/base-config.js
 
-npm install
+npm install -g yarn
+yarn
 npm run build
 
 %install
