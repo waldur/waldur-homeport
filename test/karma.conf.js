@@ -1,4 +1,4 @@
-var webpackCommon = require('../webpack.config.common.js');
+var webpackCommon = require('../webpack.config.test.js');
 
 module.exports = function(config) {
   'use strict';
@@ -26,7 +26,7 @@ module.exports = function(config) {
 
     // add webpack as preprocessor
     preprocessors: {
-      'test/test_index.js': ['webpack']
+      'test/test_index.js': ['webpack', 'sourcemap']
     },
 
     webpack: webpackCommon,
@@ -54,6 +54,7 @@ module.exports = function(config) {
       'karma-phantomjs-launcher',
       'karma-jasmine',
       'karma-webpack',
+      'karma-sourcemap-loader',
     ],
 
     // Continuous Integration mode

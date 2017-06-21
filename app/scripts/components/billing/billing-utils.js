@@ -75,7 +75,7 @@ export default class BillingUtils {
     let projects = {
       default: {
         items: [],
-        name: gettext('Default project'),
+        name: '',
       }
     };
     for (var i = 0; i < invoice.openstack_items.length; i++) {
@@ -92,6 +92,6 @@ export default class BillingUtils {
         projects[item.project_uuid].items.push(item);
       }
     }
-    return projects;
+    return Object.keys(projects).map(key => projects[key]);
   }
 }

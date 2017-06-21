@@ -16,9 +16,9 @@
             <span><span translate>To</span>:</span>
             <billing-customer-details customer="$ctrl.invoice.customer_details"/>
             <div>
-              <span><strong><span translate>Invoice Date</span>:</strong> {{ ::$ctrl.invoice.invoice_date || '&mdash;'}}</span><br>
+              <span><strong><span translate>Invoice date</span>:</strong> {{ ::$ctrl.invoice.invoice_date || '&mdash;'}}</span><br>
               <span>
-                <strong><span translate>Due Date</span>:</strong>
+                <strong><span translate>Due date</span>:</strong>
                 {{ ::$ctrl.invoice.due_date || '&mdash;'}}
               </span>
             </div>
@@ -29,15 +29,15 @@
           <table class="table invoice-table">
             <thead>
               <tr>
-                <th translate>Item List</th>
+                <th translate>Item</th>
                 <th translate>Quantity</th>
-                <th translate>Unit Price</th>
+                <th translate>Unit price</th>
                 <th ng-if="$ctrl.invoice.issuer_details.vat_code">Tax</th>
-                <th translate>Total Price</th>
+                <th translate>Total price</th>
               </tr>
             </thead>
-            <tbody ng-repeat="project in $ctrl.projects track by $index">
-              <tr class="project">
+            <tbody ng-repeat="project in $ctrl.projects | orderBy:'name' track by $index">
+              <tr class="project" ng-if="::project.name">
                 <td colspan="4">
                   <h3>{{ ::project.name }}</h3>
                 </td>
@@ -59,13 +59,13 @@
               </tr>
             </tbody>
           </table>
-        </div><!-- /table-responsive -->
+        </div>
 
         <table class="table invoice-total">
           <tbody>
           <tr>
             <td>
-              <strong><span translate>Sub Total</span>: </strong>
+              <strong><span translate>Subtotal</span>: </strong>
             </td>
             <td>{{ ::$ctrl.invoice.price | defaultCurrency}}</td>
           </tr>

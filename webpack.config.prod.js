@@ -5,7 +5,6 @@ var path = require('path');
 
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-
 module.exports = merge(baseConfig, {
   output: {
     path: path.resolve(__dirname, './dist/static/'),
@@ -26,5 +25,4 @@ module.exports = merge(baseConfig, {
       exclude: [/\.min\.js$/gi]
     }),
   ],
-})
-;
+});

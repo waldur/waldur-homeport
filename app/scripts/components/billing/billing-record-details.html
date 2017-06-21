@@ -29,14 +29,14 @@
           <table class="table invoice-table">
             <thead>
               <tr>
-                <th translate>Item List</th>
+                <th translate>Item</th>
                 <th translate>Quantity</th>
-                <th translate>Unit Price</th>
-                <th translate>Total Price</th>
+                <th translate>Unit price</th>
+                <th translate>Total price</th>
               </tr>
             </thead>
-            <tbody ng-repeat="project in $ctrl.projects track by $index">
-              <tr class="project">
+            <tbody ng-repeat="project in $ctrl.projects | orderBy:'name' track by $index">
+              <tr class="project" ng-if="::project.name">
                 <td colspan="4">
                   <h3>{{ ::project.name }}</h3>
                 </td>
