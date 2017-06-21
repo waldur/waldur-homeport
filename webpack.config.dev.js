@@ -18,7 +18,6 @@ module.exports = merge(baseConfig, {
   ],
   watch: true,
   failOnError: false,
-  devtool: 'eval-source-map',
   debug: true,
   devServer: {
     // look for missing files in app folder (app has to be built one more time for this)
