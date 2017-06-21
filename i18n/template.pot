@@ -42,14 +42,14 @@ msgstr ""
 msgid "1 day"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:37
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:35
-msgid "1 year"
-msgstr ""
-
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:32
+#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:33
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:30
 msgid "30 days"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:40
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:35
+msgid "365 days"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.js:49
@@ -106,7 +106,7 @@ msgid "Accounting records"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html:11
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:12
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:18
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/resource/actions/action-button-resource.html:3
 #: app/scripts/components/table/responsive-table.js:304
@@ -273,7 +273,7 @@ msgstr ""
 msgid "Alerts about resources (VMs and applications)"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:49
+#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:54
 msgid "All categories"
 msgstr ""
 
@@ -323,9 +323,9 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:27
 #: app/scripts/components/appstore/routes.js:42
-#: app/scripts/components/configs/base-config.js:103
-#: app/scripts/components/configs/base-config.js:122
-#: app/scripts/components/configs/base-config.js:50
+#: app/scripts/components/configs/base-config.js:106
+#: app/scripts/components/configs/base-config.js:125
+#: app/scripts/components/configs/base-config.js:53
 #: app/scripts/components/dashboard/constants.js:7
 #: app/scripts/components/project/project-workspace.js:45
 #: app/scripts/components/project/routes.js:132
@@ -485,7 +485,7 @@ msgstr ""
 msgid "Block devices"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:42
+#: app/scripts/components/configs/base-config.js:45
 msgid "Block storage"
 msgstr ""
 
@@ -534,8 +534,8 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:54
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:43
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:34
-#: app/scripts/components/plans/plans-list.html:37
-#: app/scripts/components/premiumSupport/premium-support-agreement.html:32
+#: app/scripts/components/plans/plans-list.html:38
+#: app/scripts/components/premiumSupport/premium-support-agreement.html:34
 #: app/scripts/components/project/project-create.html:75
 #: app/scripts/components/providers/create.html:160
 #: app/scripts/components/resource/actions/dialog/action-dialog.html:35
@@ -648,7 +648,7 @@ msgid "commented on"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:98
-#: app/scripts/components/offering/offering-summary.html:81
+#: app/scripts/components/offering/offering-summary.html:84
 msgid "Comments"
 msgstr ""
 
@@ -679,7 +679,7 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
-#: app/scripts/components/plans/plans-list.html:34
+#: app/scripts/components/plans/plans-list.html:35
 msgid "Confirm changing your plan"
 msgstr ""
 
@@ -952,7 +952,7 @@ msgstr ""
 #: app/scripts/components/issues/issues-list.js:73
 #: app/scripts/components/issues/issues-short-list.html:28
 #: app/scripts/components/offering/appstore-offering.js:47
-#: app/scripts/components/offering/offering-summary.html:62
+#: app/scripts/components/offering/offering-summary.html:65
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:37
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:43
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:143
@@ -1011,7 +1011,7 @@ msgstr ""
 msgid "Disable profile"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:37
+#: app/scripts/components/customer/customer-threshold.html:38
 #: app/scripts/components/project/project-policies.html:67
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
@@ -1127,7 +1127,7 @@ msgstr ""
 msgid "Estimated cost exceeds threshold."
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:29
+#: app/scripts/components/customer/customer-threshold.html:30
 #: app/scripts/components/project/project-policies.html:59
 msgid "Estimated cost for current month"
 msgstr ""
@@ -1148,7 +1148,7 @@ msgstr ""
 msgid "Event details"
 msgstr ""
 
-#: app/scripts/components/offering/offering-summary.html:71
+#: app/scripts/components/offering/offering-summary.html:74
 msgid "Event log"
 msgstr ""
 
@@ -1230,7 +1230,7 @@ msgstr ""
 msgid "Expires at"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:44
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:50
 msgid "Explain plan"
 msgstr ""
 
@@ -1397,8 +1397,8 @@ msgstr ""
 msgid "Homepage"
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-agreement.html:13
-#: app/scripts/components/premiumSupport/premium-support-summary.html:21
+#: app/scripts/components/premiumSupport/premium-support-agreement.html:15
+#: app/scripts/components/premiumSupport/premium-support-summary.html:25
 msgid "Hour price"
 msgstr ""
 
@@ -1431,7 +1431,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:69
+#: app/scripts/components/configs/base-config.js:72
 msgid "IaaS"
 msgstr ""
 
@@ -1682,10 +1682,10 @@ msgstr ""
 msgid "Invoice number"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:55
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:42
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:38
-#: app/scripts/components/premiumSupport/premium-support-summary.html:25
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:61
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:48
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:44
+#: app/scripts/components/premiumSupport/premium-support-summary.html:31
 msgid "Invoiced to"
 msgstr ""
 
@@ -1726,16 +1726,16 @@ msgstr ""
 msgid "Is official"
 msgstr ""
 
-#: app/scripts/components/offering/offering-summary.html:39
+#: app/scripts/components/offering/offering-summary.html:42
 msgid "Issue key"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:122
-#: app/scripts/components/offering/offering-summary.html:53
+#: app/scripts/components/offering/offering-summary.html:56
 msgid "Issue link"
 msgstr ""
 
-#: app/scripts/components/offering/offering-summary.html:46
+#: app/scripts/components/offering/offering-summary.html:49
 msgid "Issue status"
 msgstr ""
 
@@ -1962,8 +1962,8 @@ msgstr ""
 msgid "Minimal valid value is 0"
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-agreement.html:9
-#: app/scripts/components/premiumSupport/premium-support-summary.html:17
+#: app/scripts/components/premiumSupport/premium-support-agreement.html:10
+#: app/scripts/components/premiumSupport/premium-support-summary.html:18
 msgid "Monthly base price"
 msgstr ""
 
@@ -1975,8 +1975,8 @@ msgstr ""
 msgid "Motivation"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:27
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:35
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:33
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:41
 #: app/scripts/components/project/project-create.html:55
 msgid "N/A"
 msgstr ""
@@ -2238,7 +2238,7 @@ msgstr ""
 msgid "No quota set"
 msgstr ""
 
-#: app/scripts/components/billing/billing-records-list.js:37
+#: app/scripts/components/billing/billing-records-list.js:36
 msgid "No records found matching filter."
 msgstr ""
 
@@ -2451,7 +2451,7 @@ msgid "Open"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:74
-#: app/scripts/components/offering/offering-summary.html:57
+#: app/scripts/components/offering/offering-summary.html:60
 msgid "Open in Service Desk"
 msgstr ""
 
@@ -2467,7 +2467,7 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:55
+#: app/scripts/components/configs/base-config.js:58
 msgid "Oracle database and SugarCRM."
 msgstr ""
 
@@ -2560,7 +2560,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:191
+#: app/scripts/components/configs/base-config.js:194
 msgid "Organization owner"
 msgstr ""
 
@@ -2602,8 +2602,8 @@ msgstr ""
 msgid "Package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:67
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:50
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:73
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:56
 msgid "Package limits"
 msgstr ""
 
@@ -2796,7 +2796,7 @@ msgstr ""
 msgid "Premium support"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:63
+#: app/scripts/components/configs/base-config.js:66
 msgid "Premium support service."
 msgstr ""
 
@@ -2804,37 +2804,40 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: app/scripts/components/billing/billing-records-list.js:54
 #: app/scripts/components/billing/invoices-list.js:54
-#: app/scripts/components/cost-planning/cost-plan-flavors.html:7
-#: app/scripts/components/offering/offering-summary.html:32
+#: app/scripts/components/cost-planning/cost-plan-flavors.html:8
+#: app/scripts/components/offering/offering-summary.html:34
 #: app/scripts/components/plans/plan-agreements-list.js:48
 msgid "Price"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:23
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:30
 msgid "Price for 1 GB of RAM per day"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:19
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:23
 msgid "Price for 1 GB of storage per day"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:15
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:16
 msgid "Price for 1 vCPU per day"
 msgstr ""
 
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:10
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:47
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:34
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:30
-msgid "Price per day"
+#: app/scripts/components/price/price-tooltip.js:18
+msgid "Price is estimated."
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:11
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:51
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:38
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:34
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:48
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:36
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:31
+msgid "Price per day"
+msgstr ""
+
+#: app/scripts/components/cost-planning/cost-plan-optimizer.html:15
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:55
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:43
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:38
 msgid "Price per month"
 msgstr ""
 
@@ -2865,8 +2868,8 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:21
 #: app/scripts/components/appstore/routes.js:22
-#: app/scripts/components/configs/base-config.js:34
-#: app/scripts/components/configs/base-config.js:96
+#: app/scripts/components/configs/base-config.js:37
+#: app/scripts/components/configs/base-config.js:99
 #: app/scripts/components/dashboard/constants.js:15
 #: app/scripts/components/project/project-workspace.js:38
 #: app/scripts/components/project/projects-list.js:117
@@ -2896,10 +2899,10 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html:40
 #: app/scripts/components/issues/issue-quick-create.html:75
 #: app/scripts/components/issues/issue-registration.html:127
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:59
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:42
-#: app/scripts/components/premiumSupport/premium-support-summary.html:29
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:65
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:52
+#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:48
+#: app/scripts/components/premiumSupport/premium-support-summary.html:35
 msgid "Project"
 msgstr ""
 
@@ -2953,11 +2956,11 @@ msgstr ""
 msgid "Project has connected resources and can't be removed"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:54
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:60
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:192
+#: app/scripts/components/configs/base-config.js:195
 msgid "Project manager"
 msgstr ""
 
@@ -3073,11 +3076,11 @@ msgstr ""
 msgid "Providers events"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:47
+#: app/scripts/components/configs/base-config.js:50
 msgid "Provision persistent storage volumes in available Providers."
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:31
+#: app/scripts/components/configs/base-config.js:34
 msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
 
@@ -3089,7 +3092,7 @@ msgstr ""
 msgid "Purchase"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:39
+#: app/scripts/components/configs/base-config.js:42
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
@@ -3146,7 +3149,7 @@ msgstr ""
 msgid "RAM limit GB"
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-agreement.html:17
+#: app/scripts/components/premiumSupport/premium-support-agreement.html:19
 msgid "Read through terms and conditions."
 msgstr ""
 
@@ -3167,12 +3170,12 @@ msgstr ""
 msgid "Record notification has been sent to organization owners."
 msgstr ""
 
-#: app/scripts/components/billing/billing-records-list.js:41
+#: app/scripts/components/billing/billing-records-list.js:40
 msgid "Record number"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:46
-#: app/scripts/components/billing/billing-records-list.js:64
+#: app/scripts/components/billing/billing-records-list.js:53
 msgid "Record period"
 msgstr ""
 
@@ -3819,7 +3822,7 @@ msgstr ""
 msgid "SLA"
 msgstr ""
 
-#: app/scripts/components/premiumSupport/premium-support-agreement.html:26
+#: app/scripts/components/premiumSupport/premium-support-agreement.html:28
 msgid "SLA request"
 msgstr ""
 
@@ -3901,7 +3904,7 @@ msgstr ""
 msgid "Start time"
 msgstr ""
 
-#: app/scripts/components/billing/billing-records-list.js:49
+#: app/scripts/components/billing/billing-records-list.js:48
 #: app/scripts/components/billing/invoices-list.js:49
 #: app/scripts/components/offering/offering-summary.html:18
 #: app/scripts/components/offering/offerings-list.js:47
@@ -3965,11 +3968,11 @@ msgid "Storage limit GB"
 msgstr ""
 
 #: app/scripts/components/appstore/routes.js:52
-#: app/scripts/components/configs/base-config.js:110
+#: app/scripts/components/configs/base-config.js:113
 msgid "Storages"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-details.html:81
+#: app/scripts/components/billing/invoice-details.html:86
 msgid "Sub Total"
 msgstr ""
 
@@ -3977,7 +3980,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:48
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:40
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:33
-#: app/scripts/components/premiumSupport/premium-support-agreement.html:26
+#: app/scripts/components/premiumSupport/premium-support-agreement.html:28
 #: app/scripts/components/resource/actions/dialog/action-dialog.html:31
 msgid "Submit"
 msgstr ""
@@ -4009,7 +4012,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:58
+#: app/scripts/components/configs/base-config.js:61
 #: app/scripts/components/navigation/header/support-link.html:4
 #: app/scripts/components/project/project-workspace.js:67
 msgid "Support"
@@ -4052,7 +4055,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:193
+#: app/scripts/components/configs/base-config.js:196
 msgid "System administrator"
 msgstr ""
 
@@ -4068,7 +4071,7 @@ msgstr ""
 msgid "Tax"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-details.html:85
+#: app/scripts/components/billing/invoice-details.html:91
 msgid "TAX"
 msgstr ""
 
@@ -4252,13 +4255,13 @@ msgid "To update current plan visit <a href=\"{link}\">plans page</a>."
 msgstr ""
 
 #: app/scripts/components/analytics/resource-pie-chart.html:21
-#: app/scripts/components/billing/billing-records-list.js:59
+#: app/scripts/components/billing/billing-records-list.js:58
 #: app/scripts/components/billing/invoices-list.js:64
 msgid "Total"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:85
-#: app/scripts/components/billing/invoice-details.html:89
+#: app/scripts/components/billing/billing-record-details.html:87
+#: app/scripts/components/billing/invoice-details.html:96
 msgid "TOTAL"
 msgstr ""
 
@@ -4272,7 +4275,7 @@ msgid "Total planned resource consumption"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:60
-#: app/scripts/components/billing/invoice-details.html:62
+#: app/scripts/components/billing/invoice-details.html:65
 msgid "Total Price"
 msgstr ""
 
@@ -4394,7 +4397,7 @@ msgid "Unable to validate invitation token."
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:59
-#: app/scripts/components/billing/invoice-details.html:60
+#: app/scripts/components/billing/invoice-details.html:61
 msgid "Unit Price"
 msgstr ""
 
@@ -4463,7 +4466,7 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
-#: app/scripts/components/plans/plans-list.html:24
+#: app/scripts/components/plans/plans-list.html:25
 msgid "Usage"
 msgstr ""
 
@@ -4605,6 +4608,10 @@ msgstr ""
 msgid "VAT code"
 msgstr ""
 
+#: app/scripts/components/price/price-tooltip.js:17
+msgid "VAT is not included."
+msgstr ""
+
 #: app/scripts/components/customer/customer-manage.html:91
 msgid "VAT rate"
 msgstr ""
@@ -4626,9 +4633,9 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:15
 #: app/scripts/components/appstore/routes.js:32
-#: app/scripts/components/configs/base-config.js:118
-#: app/scripts/components/configs/base-config.js:26
-#: app/scripts/components/configs/base-config.js:89
+#: app/scripts/components/configs/base-config.js:121
+#: app/scripts/components/configs/base-config.js:29
+#: app/scripts/components/configs/base-config.js:92
 #: app/scripts/components/dashboard/constants.js:11
 #: app/scripts/components/project/project-workspace.js:31
 #: app/scripts/components/project/routes.js:124
@@ -4802,7 +4809,7 @@ msgstr ""
 msgid "You have no quotas yet."
 msgstr ""
 
-#: app/scripts/components/billing/billing-records-list.js:36
+#: app/scripts/components/billing/billing-records-list.js:35
 msgid "You have no records yet."
 msgstr ""
 

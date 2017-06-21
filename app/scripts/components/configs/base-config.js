@@ -20,6 +20,9 @@ const ENV = {
   buildId: 'develop',
 
   currency: '€',
+  // Either 'accounting' or 'billing'
+  accountingMode: 'accounting',
+
 
   offerings: [
     {
@@ -200,9 +203,6 @@ const ENV = {
     'email'
   ],
 
-  // Either 'accounting' or 'billing'
-  accountingMode: 'accounting',
-
   languageChoices: [
     {
       code: 'en',
@@ -224,7 +224,7 @@ const ENV = {
   // supportPhone: '+1234567890'
 
   // Renders label and logo at the login page
-  // poweredByLogo: 'static/images/logo.png'
+  // poweredByLogo: 'static/images/waldur/logo.png'
 
   // Renders link to docs in header
   // docsLink: 'http://example.com/docs/'

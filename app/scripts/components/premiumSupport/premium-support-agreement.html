@@ -6,10 +6,12 @@
         <h4>1. <span translate>Check terms</span></h4>
         <ul>
             <li>
+                <price-tooltip></price-tooltip>
                 <strong><span translate>Monthly base price</span>: </strong>
                 {{ $ctrl.plan.base_rate | defaultCurrency }}
             </li>
             <li>
+                <price-tooltip></price-tooltip>
                 <strong><span translate>Hour price</span>: </strong>
                 {{ $ctrl.plan.hour_rate | defaultCurrency }}
             </li>

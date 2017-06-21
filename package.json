@@ -84,21 +84,24 @@
   },
   "scripts": {
     "postinstall": "bower --allow-root --no-color install",
-    "start": "grunt",
-    "build": "grunt prodbatch",
+    "start": "grunt nggettext_extract && grunt po2json_angular_translate && webpack --config=webpack.config.common.js && webpack-dev-server --config webpack.config.dev.js",
+    "build": "grunt nggettext_extract && grunt po2json_angular_translate && webpack --config=webpack.config.prod.js",
     "test": "npm run lint && npm run test-single-run",
     "lint": "eslint app/scripts/components",
     "test-server": "karma start test/karma.conf.js",
     "test-single-run": "karma start test/karma.conf.js --single-run"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.25.0",
+    "cssnano": "^3.10.0",
     "eslint": "^3.12.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.11.1",
     "grunt-angular-gettext": "~2.1.0",
     "grunt-po2json-angular-translate": "0.0.3",
     "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.28.0",
     "imports-loader": "^0.7.1",
     "jasmine-core": "^2.1.3",
     "json-loader": "^0.5.4",
@@ -110,8 +113,11 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
     "node-sass": "~3.10.1",
+    "postcss-import": "^10.0.0",
+    "postcss-loader": "^2.0.5",
     "sass-loader": "^4.0.2",
     "script-loader": "^0.7.0",
-    "style-loader": "^0.13.1"
+    "style-loader": "^0.13.1",
+    "webpack-merge": "^4.1.0"
   }
 }

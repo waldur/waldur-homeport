@@ -17,6 +17,7 @@
                 <th ng-if="::$ctrl.enableSelect"></th>
                 <th ng-repeat="column in $ctrl.columns">
                     {{ ::column.label | translate }}
+                    <price-tooltip ng-if="column.priceTooltip" estimated="column.priceEstimated"/>
                 </th>
             </tr>
         </thead>

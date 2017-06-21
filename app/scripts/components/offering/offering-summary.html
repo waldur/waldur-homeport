@@ -29,7 +29,10 @@
             </div>
 
             <div class="m-b-xs">
-              <dt><span translate>Price</span>:</dt>
+              <dt>
+                <price-tooltip></price-tooltip>
+                <span translate>Price</span>:
+              </dt>
               <dd>
                 {{ $ctrl.offering.price | defaultCurrency }}
               </dd>

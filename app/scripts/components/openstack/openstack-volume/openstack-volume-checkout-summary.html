@@ -27,11 +27,17 @@
                 <td>{{ $ctrl.model.size | filesize }}</td>
             </tr>
             <tr>
-                <td><strong translate>Price per day</strong></td>
+                <td>
+                    <strong translate>Price per day</strong>
+                    <price-tooltip></price-tooltip>
+                </td>
                 <td>{{ $ctrl.getDailyPrice() | defaultCurrency }}</td>
             </tr>
             <tr>
-                <td><strong translate>Price per month</strong></td>
+                <td>
+                    <strong translate>Price per month</strong>
+                    <price-tooltip></price-tooltip>
+                </td>
                 <td>{{ $ctrl.getMonthlyPrice() | defaultCurrency }}</td>
             </tr>
             <tr>
