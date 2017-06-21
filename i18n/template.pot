@@ -20,6 +20,74 @@ msgstr ""
 msgid "{quotaUsage} out of {quotaLimit}."
 msgstr ""
 
+#: app/scripts/components/events/constants.js:24
+msgid "{resource_full_name} creation has been scheduled by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:23
+msgid "{resource_full_name} creation has failed."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:26
+msgid "{resource_full_name} deletion has failed."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:25
+msgid "{resource_full_name} has been created by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:28
+msgid "{resource_full_name} has been deleted by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:29
+msgid "{resource_full_name} has been imported by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:32
+msgid "{resource_full_name} has been restarted by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:27
+msgid "{resource_full_name} has been scheduled to deletion by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:31
+msgid "{resource_full_name} has been scheduled to restart by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:34
+msgid "{resource_full_name} has been scheduled to start by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:37
+msgid "{resource_full_name} has been scheduled to stop by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:35
+msgid "{resource_full_name} has been started by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:38
+msgid "{resource_full_name} has been stopped by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:39
+msgid "{resource_full_name} has been updated by {user_username}."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:30
+msgid "{resource_full_name} restart has failed."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:33
+msgid "{resource_full_name} start has failed."
+msgstr ""
+
+#: app/scripts/components/events/constants.js:36
+msgid "{resource_full_name} stop has failed."
+msgstr ""
+
 #: app/scripts/components/resource/state/resource-state-service.js:60
 msgid "{resourceType} has state {resourceState}."
 msgstr ""
@@ -931,10 +999,6 @@ msgstr ""
 msgid "Date joined"
 msgstr ""
 
-#: app/scripts/components/billing/billing-utils.js:78
-msgid "Default project"
-msgstr ""
-
 #: app/scripts/components/cost-planning/cost-plan-items.html:46
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:39
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
@@ -1028,12 +1092,9 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-details.html:21
 #: app/scripts/components/billing/invoices-list.js:74
 msgid "Due date"
-msgstr ""
-
-#: app/scripts/components/billing/invoice-details.html:21
-msgid "Due Date"
 msgstr ""
 
 #: app/scripts/components/customer/customer-users-details-list.js:40
@@ -1654,12 +1715,9 @@ msgstr ""
 msgid "Invoice"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-details.html:19
 #: app/scripts/components/billing/invoices-list.js:69
 msgid "Invoice date"
-msgstr ""
-
-#: app/scripts/components/billing/invoice-details.html:19
-msgid "Invoice Date"
 msgstr ""
 
 #: app/scripts/components/events/constants.js:59
@@ -1753,7 +1811,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:32
 #: app/scripts/components/billing/invoice-details.html:32
-msgid "Item List"
+msgid "Item"
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-price-list.js:37
@@ -3356,76 +3414,8 @@ msgstr ""
 msgid "Resource"
 msgstr ""
 
-#: app/scripts/components/events/constants.js:24
-msgid "Resource {resource_name} creation has been scheduled."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:23
-msgid "Resource {resource_name} creation has failed."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:26
-msgid "Resource {resource_name} deletion has failed."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:25
-msgid "Resource {resource_name} has been created."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:28
-msgid "Resource {resource_name} has been deleted."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:29
-msgid "Resource {resource_name} has been imported."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:32
-msgid "Resource {resource_name} has been restarted."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:27
-msgid "Resource {resource_name} has been scheduled to deletion."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:31
-msgid "Resource {resource_name} has been scheduled to restart."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:34
-msgid "Resource {resource_name} has been scheduled to start."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:37
-msgid "Resource {resource_name} has been scheduled to stop."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:35
-msgid "Resource {resource_name} has been started."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:38
-msgid "Resource {resource_name} has been stopped."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:39
-msgid "Resource {resource_name} has been updated."
-msgstr ""
-
 #: app/scripts/components/alerts/constants.js:6
 msgid "Resource {resource_name} has disappeared from the {service_name} provider in {project_name} project."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:30
-msgid "Resource {resource_name} restart has failed."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:33
-msgid "Resource {resource_name} start has failed."
-msgstr ""
-
-#: app/scripts/components/events/constants.js:36
-msgid "Resource {resource_name} stop has failed."
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:106
@@ -3980,10 +3970,6 @@ msgstr ""
 msgid "Storages"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-details.html:68
-msgid "Sub Total"
-msgstr ""
-
 #: app/scripts/components/digitalocean/droplet-resize.html:75
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:48
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:40
@@ -4013,6 +3999,10 @@ msgstr ""
 
 #: app/scripts/components/customer/customer-manage.html:55
 msgid "Subnets from where connection to self-service is allowed."
+msgstr ""
+
+#: app/scripts/components/billing/invoice-details.html:68
+msgid "Subtotal"
 msgstr ""
 
 #: app/scripts/components/offering/offering-summary.html:6
@@ -4280,7 +4270,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:35
 #: app/scripts/components/billing/invoice-details.html:36
-msgid "Total Price"
+msgid "Total price"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:43
@@ -4402,7 +4392,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:34
 #: app/scripts/components/billing/invoice-details.html:34
-msgid "Unit Price"
+msgid "Unit price"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-quota.html:12
