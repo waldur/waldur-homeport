@@ -8,7 +8,7 @@ msgstr ""
 msgid "\"{planName}\" details"
 msgstr ""
 
-#: app/scripts/components/form/appstore-field-list.js:41
+#: app/scripts/components/form/appstore-field-list.js:42
 msgid "{fieldLabel} is required for provisioning resource."
 msgstr ""
 
@@ -385,7 +385,7 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:113
+#: app/scripts/components/user/user-edit.html:125
 msgid "API token lifetime"
 msgstr ""
 
@@ -944,7 +944,7 @@ msgstr ""
 msgid "Creation of service project link {service_name} has failed."
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:104
+#: app/scripts/components/user/user-edit.html:116
 msgid "Current API token"
 msgstr ""
 
@@ -1033,7 +1033,7 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js:91
 #: app/scripts/components/resource/actions/constants.js:26
 #: app/scripts/components/resource/summary/resource-summary-base.html:31
-#: app/scripts/components/user/user-edit.html:85
+#: app/scripts/components/user/user-edit.html:93
 msgid "Description"
 msgstr ""
 
@@ -1102,7 +1102,7 @@ msgstr ""
 #: app/scripts/components/team/customer-users-list.js:71
 #: app/scripts/components/team/project-users-list.js:56
 #: app/scripts/components/team/user-selector.html:12
-#: app/scripts/components/user/user-edit.html:26
+#: app/scripts/components/user/user-edit.html:29
 #: app/scripts/components/user/user-popover-table.html:17
 msgid "E-mail"
 msgstr ""
@@ -1437,7 +1437,7 @@ msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-edit.html:22
-#: app/scripts/components/user/user-edit.html:133
+#: app/scripts/components/user/user-edit.html:145
 msgid "have been accepted on"
 msgstr ""
 
@@ -1488,7 +1488,7 @@ msgid "How to obtain credentials"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.html:51
-#: app/scripts/components/user/user-edit.html:145
+#: app/scripts/components/user/user-edit.html:157
 msgid "I accept the"
 msgstr ""
 
@@ -1500,7 +1500,7 @@ msgstr ""
 msgid "IaaS"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:58
+#: app/scripts/components/user/user-edit.html:62
 #: app/scripts/components/user/user-popover-table.html:9
 msgid "ID code"
 msgstr ""
@@ -1819,7 +1819,7 @@ msgid "Item type"
 msgstr ""
 
 #: app/scripts/components/customer/customer-users-details-list.js:75
-#: app/scripts/components/user/user-edit.html:76
+#: app/scripts/components/user/user-edit.html:82
 #: app/scripts/components/user/user-popover-table.html:37
 msgid "Job position"
 msgstr ""
@@ -1873,11 +1873,11 @@ msgstr ""
 msgid "Legal address"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:159
+#: app/scripts/components/user/user-edit.html:171
 msgid "Let’s get started"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:115
+#: app/scripts/components/user/user-edit.html:127
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
 
@@ -2617,7 +2617,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:70
 #: app/scripts/components/issues/constants.js:47
-#: app/scripts/components/user/user-edit.html:67
+#: app/scripts/components/user/user-edit.html:71
 #: app/scripts/components/user/user-organizations.js:45
 msgid "Organization name"
 msgstr ""
@@ -2740,7 +2740,7 @@ msgid "Phone"
 msgstr ""
 
 #: app/scripts/components/customer/customer-users-details-list.js:54
-#: app/scripts/components/user/user-edit.html:94
+#: app/scripts/components/user/user-edit.html:104
 msgid "Phone number"
 msgstr ""
 
@@ -3268,7 +3268,7 @@ msgstr ""
 msgid "Registration code"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:36
+#: app/scripts/components/user/user-edit.html:40
 #: app/scripts/components/user/user-popover-table.html:29
 msgid "Registration method"
 msgstr ""
@@ -3304,7 +3304,7 @@ msgstr ""
 msgid "Remove organization"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:175
+#: app/scripts/components/user/user-edit.html:187
 msgid "Remove profile"
 msgstr ""
 
@@ -4114,8 +4114,8 @@ msgstr ""
 #: app/scripts/components/freeipa/freeipa-account-create.html:54
 #: app/scripts/components/freeipa/freeipa-account-edit.html:20
 #: app/scripts/components/navigation/app-footer.html:8
-#: app/scripts/components/user/user-edit.html:131
-#: app/scripts/components/user/user-edit.html:147
+#: app/scripts/components/user/user-edit.html:143
+#: app/scripts/components/user/user-edit.html:159
 msgid "Terms of Service"
 msgstr ""
 
@@ -4143,7 +4143,7 @@ msgstr ""
 msgid "There are no comments yet."
 msgstr ""
 
-#: app/scripts/components/form/appstore-field-list.js:43
+#: app/scripts/components/form/appstore-field-list.js:44
 msgid "There are no items yet."
 msgstr ""
 
@@ -4425,7 +4425,7 @@ msgstr ""
 msgid "Update policies"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:169
+#: app/scripts/components/user/user-edit.html:181
 msgid "Update profile"
 msgstr ""
 
@@ -4560,7 +4560,7 @@ msgstr ""
 msgid "User profile"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:47
+#: app/scripts/components/user/user-edit.html:51
 msgid "User status"
 msgstr ""
 
