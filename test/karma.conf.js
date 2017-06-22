@@ -31,6 +31,10 @@ module.exports = function(config) {
 
     webpack: webpackCommon,
 
+    webpackMiddleware: {
+      stats: 'errors-only'
+    },
+
     // list of files / patterns to exclude
     exclude: [],
 
