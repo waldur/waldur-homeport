@@ -13,20 +13,24 @@
     <form class="col-sm-10 col-xs-12 form-horizontal" name="$ctrl.UserForm">
         <div class="form-group">
             <label for="full_name" class="col-sm-3 col-md-4 col-lg-3 control-label">
-                <span translate>Full name</span> <span class="text-danger">*</span>
+                <span translate>Full name</span>
+                <span ng-if="$ctrl.isRequired('full_name')" class="text-danger"> *</span>
             </label>
             <div class="col-sm-9 col-md-8">
-                <input id="full_name" type="text" class="form-control" ng-model="$ctrl.user.full_name" name="full_name" required />
+                <input id="full_name" type="text" class="form-control"
+                       ng-model="$ctrl.user.full_name" name="full_name"
+                       ng-required="$ctrl.isRequired('full_name')"/>
                 <div class="error" ng-if="$ctrl.errors.full_name">{{::$ctrl.errors.full_name}}</div>
             </div>
         </div>
 
         <div class="form-group">
             <label for="email" class="col-sm-3 col-md-4 col-lg-3 control-label">
-                <span translate>E-mail</span> <span class="text-danger">*</span>
+                <span translate>E-mail</span><span ng-if="$ctrl.isRequired('email')" class="text-danger"> *</span>
             </label>
             <div class="col-sm-9 col-md-8">
-                <input id="email" type="email" class="form-control" ng-model="$ctrl.user.email" name="email" required/>
+                <input id="email" type="email" class="form-control"
+                       ng-model="$ctrl.user.email" name="email" ng-required="$ctrl.isRequired('email')"/>
                 <div class="error" ng-repeat="error in $ctrl.errors.email" ng-bind="error"></div>
             </div>
         </div>
@@ -65,36 +69,44 @@
         <div class="form-group">
             <label for="organization" class="col-sm-3 col-md-4 col-lg-3 control-label">
                 <span translate>Organization name</span>
+                <span ng-if="$ctrl.isRequired('organization')" class="text-danger"> *</span>
             </label>
             <div class="col-sm-9 col-md-8">
-                <input id="organization" type="text" class="form-control" ng-model="$ctrl.user.organization"/>
+                <input id="organization" type="text" class="form-control"
+                       ng-model="$ctrl.user.organization" ng-required="$ctrl.isRequired('organization')"/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="job_title" class="col-sm-3 col-md-4 col-lg-3 control-label">
                 <span translate>Job position</span>
+                <span ng-if="$ctrl.isRequired('job_title')" class="text-danger"> *</span>
             </label>
             <div class="col-sm-9 col-md-8">
-                <input id="job_title" type="text" class="form-control" ng-model="$ctrl.user.job_title"/>
+                <input id="job_title" type="text" class="form-control"
+                       ng-model="$ctrl.user.job_title" ng-required="$ctrl.isRequired('job_title')"/>
             </div>
         </div>
 
         <div class="form-group" ng-if="$ctrl.currentUser.is_staff || $ctrl.currentUser.is_support">
             <label for="description" class="col-sm-3 col-md-4 col-lg-3 control-label">
                 <span translate>Description</span>
+                <span ng-if="$ctrl.isRequired('description')" class="text-danger"> *</span>
             </label>
             <div class="col-sm-9 col-md-8">
-                <input id="description" type="text" class="form-control" ng-model="$ctrl.user.description"/>
+                <input id="description" type="text" class="form-control"
+                       ng-model="$ctrl.user.description" ng-required="$ctrl.isRequired('description')"/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="phone_number" class="col-sm-3 col-md-4 col-lg-3 control-label">
                 <span translate>Phone number</span>
+                <span ng-if="$ctrl.isRequired('phone_number')" class="text-danger"> *</span>
             </label>
             <div class="col-sm-9 col-md-8">
-                <input id="phone_number" type="text" class="form-control" ng-model="$ctrl.user.phone_number"/>
+                <input id="phone_number" type="text" class="form-control"
+                       ng-model="$ctrl.user.phone_number" ng-required="$ctrl.isRequired('phone_number')"/>
             </div>
         </div>
 

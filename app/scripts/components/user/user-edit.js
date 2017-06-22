@@ -11,14 +11,14 @@ export const userEdit = {
     initial: '<',
   },
   controller: class UserEditController {
-    constructor($q, usersService, $filter) {
+    constructor($q, usersService, $filter, ENV) {
       // @ngInject
       this.$q = $q;
       this.$filter = $filter;
       usersService.getCurrentUser().then(user => {
         this.currentUser = user;
       });
-
+      this.userMandatoryFields = ENV.userMandatoryFields;
       this.userTokenLifetimeOptions = [
         { name: '10 min', value: 600 },
         { name: '30 min', value: 1800 },
@@ -45,6 +45,10 @@ export const userEdit = {
           user: this.user
         }
       });
+    }
+
+    isRequired(field) {
+      return this.userMandatoryFields.indexOf(field) !== -1;
     }
 
     mergeLifeTimeOptions(options, option) {
