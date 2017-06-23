@@ -142,8 +142,9 @@ export function CustomerWorkspaceController(
   }
 
   function getCounters(customer) {
+    const fields = ['services', 'projects', 'users'];
     var query = angular.extend(
-        {UUID: customer.uuid},
+        {UUID: customer.uuid, fields},
         joinService.defaultFilter,
         eventsService.defaultFilter
     );

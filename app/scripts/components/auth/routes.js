@@ -9,7 +9,7 @@ export default function authRoutes($stateProvider) {
 
     .state('login', {
       url: '/login/',
-      template: '<auth-login mode="\'login\'"/><app-footer/>',
+      template: '<auth-login mode="\'login\'"/>',
       data: {
         bodyClass: 'old',
         anonymous: true,
@@ -18,7 +18,7 @@ export default function authRoutes($stateProvider) {
 
     .state('register', {
       url: '/register/',
-      template: '<auth-login mode="\'register\'"/><app-footer/>',
+      template: '<auth-login mode="\'register\'"/>',
       data: {
         bodyClass: 'old',
         anonymous: true

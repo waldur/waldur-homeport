@@ -1,29 +1,4 @@
-<div class="row wrapper border-bottom white-bg page-heading hidden-print">
-  <div class="col-lg-8">
-    <h2><span translate>Accounting record</span></h2>
-    <ol class="breadcrumb">
-      <li>
-        <a ui-sref="organization.details({uuid: $ctrl.customerUUID})" translate>Organization dashboard</a>
-      </li>
-      <li>
-        <a ui-sref="organization.billing.tabs({uuid: $ctrl.customerUUID})" translate>
-          Accounting records
-        </a>
-      </li>
-      <li class="active">
-        <strong>{{ ::$ctrl.invoice.period }}</strong>
-      </li>
-    </ol>
-  </div>
-  <div class="col-lg-4">
-    <div class="title-action">
-      <button class="btn btn-primary" ng-click="$ctrl.printLink()">
-        <i class="fa fa-print"></i>
-        <span translate>Print record</span>
-      </button>
-    </div>
-  </div>
-</div>
+<billing-record-header invoice="$ctrl.invoice"></billing-record-header>
 
 <div ng-if="$ctrl.loading">
   <loading-spinner/>
@@ -53,27 +28,32 @@
         <div class="table-responsive m-t">
           <table class="table invoice-table">
             <thead>
-            <tr>
-              <th translate>Item List</th>
-              <th translate>Quantity</th>
-              <th translate>Unit Price</th>
-              <th translate>Total Price</th>
-            </tr>
+              <tr>
+                <th translate>Item</th>
+                <th translate>Quantity</th>
+                <th translate>Unit price</th>
+                <th translate>Total price</th>
+              </tr>
             </thead>
-            <tbody>
-              <tr ng-repeat="item in $ctrl.invoice.openstack_items track by $index">
+            <tbody ng-repeat="project in $ctrl.projects | orderBy:'name' track by $index">
+              <tr class="project" ng-if="::project.name">
+                <td colspan="4">
+                  <h3>{{ ::project.name }}</h3>
+                </td>
+              </tr>
+              <tr ng-repeat="item in project.items track by $index">
                 <td>
                   <div>
-                    <strong>{{item.name }}</strong>
+                    <strong>{{ ::item.name }}</strong>
                   </div>
                   <small>
-                    <span translate>Start time</span>: {{item.start || '&mdash;' | dateTime }}.
-                    <span translate>End time</span>: {{item.end || '&mdash;' | dateTime }}
+                    <span translate>Start time</span>: {{ ::item.start || '&mdash;' | dateTime }}.
+                    <span translate>End time</span>: {{ ::item.end || '&mdash;' | dateTime }}
                   </small>
                 </td>
-                <td>{{item.usage_days }}</td>
-                <td>{{item.daily_price | defaultCurrency }}</td>
-                <td>{{item.total | defaultCurrency }}</td>
+                <td>{{ ::item.usage_days }}</td>
+                <td>{{ ::item.daily_price | defaultCurrency }}</td>
+                <td>{{ ::item.total | defaultCurrency }}</td>
               </tr>
             </tbody>
           </table>
@@ -82,8 +62,11 @@
         <table class="table invoice-total">
           <tbody>
             <tr>
-              <td><strong translate>TOTAL</strong>:</td>
-              <td>{{ ::$ctrl.invoice.total | defaultCurrency }}</td>
+              <td>
+                <price-tooltip></price-tooltip>
+                <strong translate>TOTAL</strong>:
+              </td>
+              <td>{{ ::$ctrl.invoice.price | defaultCurrency }}</td>
             </tr>
           </tbody>
         </table>

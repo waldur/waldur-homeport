@@ -20,6 +20,9 @@ const ENV = {
   buildId: 'develop',
 
   currency: '€',
+  // Either 'accounting' or 'billing'
+  accountingMode: 'accounting',
+
 
   offerings: [
     {
@@ -200,9 +203,6 @@ const ENV = {
     'email'
   ],
 
-  // Either 'accounting' or 'billing'
-  accountingMode: 'accounting',
-
   languageChoices: [
     {
       code: 'en',
@@ -217,14 +217,14 @@ const ENV = {
   tenantCredentialsVisible: true,
   organizationSubnetsVisible: false,
 
-  FREEIPA_USERNAME_PREFIX: 'webtest_',
+  FREEIPA_USERNAME_PREFIX: 'waldur_',
 
   // Support email and phone is rendered at the footer
   // supportEmail: 'support@example.com',
   // supportPhone: '+1234567890'
 
   // Renders label and logo at the login page
-  // poweredByLogo: 'static/images/logo.png'
+  // poweredByLogo: 'static/images/waldur/logo.png'
 
   // Renders link to docs in header
   // docsLink: 'http://example.com/docs/'

@@ -1,4 +1,5 @@
 import template from './billing-record-details.html';
+import './billing-record-details.css';
 
 const billingRecordDetails = {
   template,
@@ -6,18 +7,13 @@ const billingRecordDetails = {
     invoice: '<'
   },
   controller: class BillingRecordDetailsController {
-    constructor($window, currentStateService) {
-      // @ngInject
-      this.$window = $window;
-      this.currentStateService = currentStateService;
+    // @ngInject
+    constructor(BillingUtils) {
+      this.BillingUtils = BillingUtils;
     }
 
     $onInit() {
-      this.customerUUID = this.currentStateService.getCustomerUuid();
-    }
-
-    printLink() {
-      this.$window.print();
+      this.projects = this.BillingUtils.groupInvoiceItems(this.invoice);
     }
   }
 };

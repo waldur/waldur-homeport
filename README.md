@@ -1,7 +1,7 @@
 ## Introduction
 
 Waldur HomePort is web-based client for the [Waldur MasterMind][4].
-It uses npm and [bower.io][1] as package manager and [grunt][2] and webpack for automation.
+It uses yarn for dependency management and webpack as module bundler.
 
 ## System Requirements
 
@@ -18,7 +18,7 @@ __Development/testing__:
 yum -y install epel-release https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
 yum -y install bzip2 git libjpeg-turbo-devel libpng-devel libtool make nasm "nodejs-4*" rubygems
 gem install sass
-npm install -g bower grunt-cli
+npm install -g yarn
 ```
 
 2. Clone project and go to its folder:
@@ -27,10 +27,9 @@ git clone <repository-url>
 cd waldur-homeport
 ```
 
-3. Build static assets:
+3. Install dependencies:
 ```
-npm install
-bower install
+yarn
 ```
 
 4. Create `/app/scripts/configs/custom-config.json`:
@@ -44,7 +43,7 @@ cp app/scripts/configs/config.json.example app/scripts/configs/config.json
 
 Server will listen on `//localhost:8000`
 
-## Backend configration
+## Backend configuration
 
 Use [Waldur MasterMind][4] for backend.
 

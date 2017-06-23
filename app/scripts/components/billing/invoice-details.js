@@ -5,20 +5,14 @@ const invoiceDetails = {
   bindings: {
     invoice: '<'
   },
-  controllerAs: 'InvoiceDetails',
   controller: class InvoiceDetailsController {
-    constructor($window, currentStateService) {
-      // @ngInject
-      this.$window = $window;
-      this.currentStateService = currentStateService;
+    // @ngInject
+    constructor(BillingUtils) {
+      this.BillingUtils = BillingUtils;
     }
 
     $onInit() {
-      this.customerUUID = this.currentStateService.getCustomerUuid();
-    }
-
-    printLink() {
-      this.$window.print();
+      this.projects = this.BillingUtils.groupInvoiceItems(this.invoice);
     }
   }
 };

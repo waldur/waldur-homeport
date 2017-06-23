@@ -94,7 +94,8 @@ export default {
           label: gettext('Fingerprint')
         }
       ],
-      warningMessage: gettext('SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile.keys">profile</a>.')
+      preselectFirst: true,
+      emptyMessage: gettext('You have not added any SSH keys to your <a ui-sref="profile.keys">profile</a>.')
     },
     security_groups: {
       type: 'multiselect',

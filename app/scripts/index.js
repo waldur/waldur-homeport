@@ -40,7 +40,9 @@ import configModule from './components/configs/module';
 import controllersModule from './components/controllers/module';
 import directivesModule from './components/directives/module';
 import servicesModule from './components/services/module';
+import freeipaModule from './components/freeipa/module';
 import rootModule from './components/module';
+import priceModule from './components/price/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -82,6 +84,7 @@ authModule(appModule);
 invitationsModule(appModule);
 appstoreModule(appModule);
 formModule(appModule);
+priceModule(appModule);
 awsModule(appModule);
 openstackModule(appModule);
 digitaloceanModule(appModule);
@@ -107,5 +110,6 @@ configModule(appModule);
 controllersModule(appModule);
 directivesModule(appModule);
 servicesModule(appModule);
+freeipaModule(appModule);
 
 bootstrap('waldur');

@@ -116,7 +116,6 @@ body.landing {
   @include bp(xs) {
     height: auto;
     position: relative;
-    padding-bottom: 90px;
   }
 }
 
@@ -129,7 +128,7 @@ body.landing {
 }
 
 .footer-indent {
-  padding-bottom: 40px;
+  padding-bottom: 90px;
 }
 
 .cursor-pointer {cursor: pointer;}
@@ -166,4 +165,30 @@ body.landing {
 .table-borderless tfoot tr th,
 .table-borderless tfoot tr td {
     border: none;
+}
+
+@media (max-width: 768px) {
+    .btn-block-sm {
+        display: block;
+        width: 100%;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+
+    .block-container-sm {
+        float: none !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .btn-block-md {
+        display: block;
+        width: 100%;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+
+    .block-container-md {
+        float: none !important;
+    }
 }

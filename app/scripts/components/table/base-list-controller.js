@@ -103,9 +103,10 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       if (!this.enableRefresh) {
         return;
       }
-      let filter = {
-        o: this.orderField,
-      };
+      let filter = {};
+      if (this.orderField) {
+        filter.o = this.orderField;
+      }
       if (this.searchInput) {
         filter[this.searchFieldName] = this.searchInput;
       }

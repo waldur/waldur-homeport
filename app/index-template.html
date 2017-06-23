@@ -8,31 +8,9 @@
     <title>Waldur | Cloud Service Management</title>
     <!-- favicon -->
     <link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon" />
-    <!-- css -->
-
-    <!-- @if NODE_ENV == 'DEVELOPMENT' || NODE_ENV == 'TEST' -->
-    <link rel="stylesheet" type="text/css" href="static/css/vendor-bundle.css">
-    <link rel="stylesheet" type="text/css" href="static/css/index-bundle.css">
-    <!-- @endif -->
-
-    <!-- @if NODE_ENV == 'PRODUCTION' -->
-    <link rel="stylesheet" type="text/css" href="static/css/app.css">
-    <!-- @endif -->
 </head>
 <body class="fixed-sidebar {{$state.current.data.bodyClass}}" id="page-top">
 <div class="flash-message-fixed" flash-message="5000"></div>
 <div ui-view id="wrapper"></div>
-<!-- @if NODE_ENV == 'DEVELOPMENT' || NODE_ENV == 'TEST' -->
-<!-- pdfmake is a serverside renderer not supposed to work in webpack. Use old version from bower -->
-<script src="scripts/class.js"></script>
-<script src="static/js/vendor-bundle.js"></script>
-<script src="static/js/datatables/pdfmake.min.js"></script>
-<script src="static/js/datatables/vfs_fonts.js"></script>
-<script src="static/js/index-bundle.js"></script>
-<!-- @endif -->
-
-<!-- @if NODE_ENV == 'PRODUCTION' -->
-<script src="static/js/app.js"></script>
-<!-- @endif -->
 </body>
 </html>

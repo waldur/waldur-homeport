@@ -6,7 +6,7 @@
 
 Name: waldur-homeport
 Summary: Waldur HomePort
-Version: 2.5.5
+Version: 2.6.0
 Release: 1.el7
 License: MIT
 Source0: %{name}-%{version}.tar.gz
@@ -37,12 +37,9 @@ VERSION=$(grep '"version":' package.json | awk '{print $2}' | sed -e "s/\"//g;s/
 # Inject package version
 sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" app/scripts/components/configs/base-config.js
 
-npm install --global bower grunt-cli
-
-npm install
-bower --allow-root --no-color install
-
-grunt prodbatch
+npm install -g yarn
+yarn
+npm run build
 
 %install
 rm -rf %{buildroot}
@@ -65,6 +62,9 @@ rm -rf %{buildroot}
 %config(noreplace) %{__conf_dir}/nginx.conf
 
 %changelog
+* Fri Jun 23 2017 Jenkins <jenkins@opennodecloud.com> - 2.6.0-1.el7
+- New upstream release
+
 * Fri Jun 9 2017 Jenkins <jenkins@opennodecloud.com> - 2.5.5-1.el7
 - New upstream release
 

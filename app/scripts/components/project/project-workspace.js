@@ -124,8 +124,9 @@ export default function ProjectWorkspaceController(
   }
 
   function getCounters(project) {
+    const fields = ['vms', 'apps', 'private_clouds', 'storages', 'users'];
     var query = angular.extend(
-      {UUID: project.uuid},
+      {UUID: project.uuid, fields},
       eventsService.defaultFilter
     );
     return projectsService.getCounters(query);
