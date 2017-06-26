@@ -26,7 +26,8 @@ const billingRecordHeader = {
         component: 'invoiceTimelineDialog',
         resolve: {
           invoice: () => this.invoice
-        }
+        },
+        size: 'lg'
       });
     }
   }

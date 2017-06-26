@@ -689,7 +689,7 @@ msgstr ""
 msgid "Civil number"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-timeline-dialog.html:24
+#: app/scripts/components/billing/invoice-timeline-dialog.html:28
 #: app/scripts/components/customer/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 msgid "Close"
@@ -4632,7 +4632,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-header.html:26
 #: app/scripts/components/billing/invoice-header.html:26
-msgid "View events timeline"
+msgid "View events"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:15

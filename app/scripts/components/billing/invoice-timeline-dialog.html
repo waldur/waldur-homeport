@@ -5,20 +5,24 @@
   <div ng-if="$ctrl.loading">
     <loading-spinner/>
   </div>
-  <div class="ibox-content inspinia-timeline" ng-if="!$ctrl.loading">
-    <div class="timeline-item" ng-repeat="event in $ctrl.events">
-      <div class="row">
-        <div class="col-xs-3 date">
-          <i class="fa fa-briefcase"></i>
-          {{ ::event.date | dateTime }}
+
+  <div id="vertical-timeline" class="vertical-container dark-timeline" ng-if="!$ctrl.loading">
+    <div class="vertical-timeline-block" ng-repeat="event in $ctrl.events">
+      <div class="vertical-timeline-icon" ng-class="::$ctrl.getEventColor(event)">
+        <i class="fa" ng-class="::$ctrl.getEventIcon(event)"></i>
+      </div>
+
+      <div class="vertical-timeline-content">
+        <p ng-bind-html="::event.message"></p>
+        <a href="#" class="btn btn-sm btn-primary"> More info</a>
+        <span class="vertical-date">
+          <span am-time-ago="::event.date"></span>
           <br/>
-        </div>
-        <div class="col-xs-7 content no-top-border">
-          <p ng-bind-html="::event.message"></p>
-        </div>
+          <small>{{ ::event.date | dateTime }}</small>
+        </span>
       </div>
     </div>
-</div>
+  </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="$ctrl.dismiss()">
       <span translate>Close</span>
