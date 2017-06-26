@@ -36,7 +36,7 @@ const invoiceTimelineDialog = {
           return {
             date: event['@timestamp'],
             message: this.eventFormatter.format(event)
-          }
+          };
         });
       })
       .finally(() => this.loading = false);
