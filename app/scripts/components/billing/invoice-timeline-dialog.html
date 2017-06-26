@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h3 class="modal-title" translate>Invoice events timeline</h3>
+</div>
+<div class="modal-body">
+  <div ng-if="$ctrl.loading">
+    <loading-spinner/>
+  </div>
+  <div class="ibox-content inspinia-timeline" ng-if="!$ctrl.loading">
+    <div class="timeline-item" ng-repeat="event in $ctrl.events">
+      <div class="row">
+        <div class="col-xs-3 date">
+          <i class="fa fa-briefcase"></i>
+          {{ ::event.date | dateTime }}
+          <br/>
+        </div>
+        <div class="col-xs-7 content no-top-border">
+          <p ng-bind-html="::event.message"></p>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="$ctrl.dismiss()">
+      <span translate>Close</span>
+  </button>
+</div>
