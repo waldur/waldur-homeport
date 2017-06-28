@@ -11,11 +11,14 @@ export const resourceBreadcrumbs = {
     $onInit() {
       this.items = [
         {
-          label: gettext('Project dashboard'),
+          label: gettext('Project workspace'),
           state: 'project.details',
           params: {
             uuid: this.resource.project_uuid
           }
+        },
+        {
+          label: gettext('Resources'),
         },
         ...this.ResourceBreadcrumbsService.get(this.resource),
       ];

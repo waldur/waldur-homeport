@@ -979,6 +979,7 @@ msgstr ""
 #: app/scripts/components/customer/routes.js:63
 #: app/scripts/components/issues/issue-navigation-service.js:11
 #: app/scripts/components/project/project-workspace.js:11
+#: app/scripts/components/project/routes.js:83
 #: app/scripts/components/user/constants.js:3
 msgid "Dashboard"
 msgstr ""
@@ -2601,12 +2602,6 @@ msgstr ""
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-header.html:6
-#: app/scripts/components/billing/invoice-header.html:6
-#: app/scripts/components/customer/customer-workspace.html:9
-msgid "Organization dashboard"
-msgstr ""
-
 #: app/scripts/components/customer/customer-manage.html:7
 msgid "Organization details"
 msgstr ""
@@ -2650,6 +2645,12 @@ msgstr ""
 
 #: app/scripts/components/customer/customer-popover.html:16
 msgid "Organization type"
+msgstr ""
+
+#: app/scripts/components/billing/billing-record-header.html:6
+#: app/scripts/components/billing/invoice-header.html:6
+#: app/scripts/components/customer/customer-workspace.html:9
+msgid "Organization workspace"
 msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:35
@@ -2985,14 +2986,6 @@ msgstr ""
 msgid "Project {project_name} has been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-header.html:10
-#: app/scripts/components/offering/offering-header.html:13
-#: app/scripts/components/project/routes.js:83
-#: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs.js:14
-#: app/views/project/base.html:13
-msgid "Project dashboard"
-msgstr ""
-
 #: app/scripts/components/project/project-create.html:26
 msgid "Project description"
 msgstr ""
@@ -3051,6 +3044,13 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js:62
 msgid "Project providers links have been updated."
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-header.html:10
+#: app/scripts/components/offering/offering-header.html:13
+#: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs.js:14
+#: app/views/project/base.html:13
+msgid "Project workspace"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:59
@@ -3391,7 +3391,7 @@ msgstr ""
 msgid "Request type"
 msgstr ""
 
-#: app/scripts/components/offering/offering-header.html:18
+#: app/scripts/components/offering/offering-header.html:21
 #: app/scripts/components/project/project-workspace.js:59
 #: app/scripts/components/project/routes.js:162
 msgid "Requested Services"
@@ -3485,9 +3485,12 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:36
 #: app/scripts/components/analytics/dashboard-cost-chart.html:13
+#: app/scripts/components/offering/offering-header.html:17
 #: app/scripts/components/project/project-workspace.js:24
 #: app/scripts/components/providers/provider-list.js:79
+#: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs.js:21
 #: app/views/directives/importable-resources.html:7
+#: app/views/project/base.html:16
 msgid "Resources"
 msgstr ""
 
