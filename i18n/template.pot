@@ -689,7 +689,7 @@ msgstr ""
 msgid "Civil number"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-events-dialog.html:42
+#: app/scripts/components/billing/invoice-events-dialog.html:45
 #: app/scripts/components/customer/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 msgid "Close"
@@ -2037,6 +2037,10 @@ msgstr ""
 
 #: app/scripts/components/quotas/filters.js:12
 msgid "Monthly cost"
+msgstr ""
+
+#: app/scripts/components/billing/invoice-events-dialog.html:33
+msgid "More info"
 msgstr ""
 
 #: app/scripts/components/appstore/category-selector.js:170
