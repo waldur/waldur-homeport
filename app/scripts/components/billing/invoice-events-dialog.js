@@ -9,8 +9,9 @@ const invoiceEventsDialog = {
   },
   controller: class InvoiceEventsDialogController {
     // @ngInject
-    constructor(InvoiceEventsService) {
+    constructor(InvoiceEventsService, EventDialogsService) {
       this.InvoiceEventsService = InvoiceEventsService;
+      this.EventDialogsService = EventDialogsService;
     }
 
     $onInit() {
@@ -20,6 +21,11 @@ const invoiceEventsDialog = {
         .then(events => this.events = events)
         .catch(() => this.erred = true)
         .finally(() => this.loading = false);
+    }
+
+    showEventDetails(event) {
+      this.close();
+      this.EventDialogsService.eventDetails(event.original);
     }
   }
 };

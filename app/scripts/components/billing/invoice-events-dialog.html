@@ -22,13 +22,16 @@
     class="vertical-container dark-timeline"
     ng-if="$ctrl.events.length">
     <div class="vertical-timeline-block" ng-repeat="event in $ctrl.events">
-      <div class="vertical-timeline-icon" ng-class="::$ctrl.getEventColor(event)">
-        <i class="fa" ng-class="::$ctrl.getEventIcon(event)"></i>
+      <div class="vertical-timeline-icon" ng-class="::event.color">
+        <i class="fa" ng-class="::event.icon"></i>
       </div>
 
       <div class="vertical-timeline-content">
         <p ng-bind-html="::event.message"></p>
-        <a href="#" class="btn btn-sm btn-primary"> More info</a>
+        <a class="btn btn-sm btn-primary" ng-click="$ctrl.showEventDetails(event)">
+          <i class="fa fa-eye"></i>
+          <span translate>More info</span>
+        </a>
         <span class="vertical-date">
           <span am-time-ago="::event.date"></span>
           <br/>

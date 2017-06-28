@@ -13,10 +13,6 @@ export default class InvoiceEventsService {
   loadTenantEvents(tenant_uuid) {
     return this.eventsService.getAll({
       scope: this.getTenantUrl(tenant_uuid),
-      event_type: [
-        'openstack_package_created',
-        'openstack_package_deleted',
-      ],
     });
   }
 
@@ -30,13 +26,20 @@ export default class InvoiceEventsService {
       message: this.eventFormatter.format(event),
       color: this.getEventColor(event),
       icon: this.getEventIcon(event),
+      original: event,
     }));
   }
 
   getEventColor(event) {
     const classes = {
-      openstack_package_created: 'navy-bg',
-      openstack_package_deleted: 'yellow-bg',
+      openstack_package_created: 'bg-success',
+      openstack_package_deleted: 'bg-success',
+      resource_creation_scheduled: 'bg-info',
+      resource_creation_succeeded: 'bg-success',
+      resource_creation_failed: 'bg-danger',
+      resource_deletion_scheduled: 'bg-info',
+      resource_deletion_succeeded: 'bg-success',
+      resource_deletion_failed: 'bg-danger',
     };
     return classes[event.event_type] || 'lazur-bg';
   }
@@ -45,6 +48,12 @@ export default class InvoiceEventsService {
     const classes = {
       openstack_package_created: 'fa-plus-circle',
       openstack_package_deleted: 'fa-trash-o',
+      resource_creation_scheduled: 'fa-plus-circle',
+      resource_creation_succeeded: 'fa-plus-circle',
+      resource_creation_failed: 'fa-plus-circle',
+      resource_deletion_scheduled: 'fa-trash-o',
+      resource_deletion_succeeded: 'fa-trash-o',
+      resource_deletion_failed: 'fa-trash-o',
     };
     return classes[event.event_type];
   }
