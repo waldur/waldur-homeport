@@ -1,26 +1,26 @@
 <div class="row wrapper border-bottom white-bg page-heading hidden-print">
-    <div class="col-lg-8">
-        <h2 translate>Invoice</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a ui-sref="organization.details({uuid: $ctrl.customerUUID})" translate>Organization workspace</a>
-            </li>
-            <li>
-                <a ui-sref="organization.billing.tabs({uuid: $ctrl.customerUUID})" translate>
-                    Invoices list
-                </a>
-            </li>
-            <li class="active">
-                <strong>{{::$ctrl.invoice.period}}</strong>
-            </li>
-        </ol>
+  <div class="col-lg-8">
+    <h2 translate>Invoice</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a ui-sref="organization.details({uuid: $ctrl.customerUUID})" translate>Organization workspace</a>
+      </li>
+      <li>
+        <a ui-sref="organization.billing.tabs({uuid: $ctrl.customerUUID})" translate>
+          Invoices list
+        </a>
+      </li>
+      <li class="active">
+        <strong>{{::$ctrl.invoice.period}}</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-4">
+    <div class="title-action">
+      <button class="btn btn-primary" ng-click="$ctrl.printLink()">
+        <i class="fa fa-print"></i>
+        <span translate>Print invoice</span>
+      </button>
     </div>
-    <div class="col-lg-4">
-        <div class="title-action">
-            <button class="btn btn-primary" ng-click="$ctrl.printLink()">
-                <i class="fa fa-print"></i>
-                <span translate>Print Invoice</span>
-            </button>
-        </div>
-    </div>
+  </div>
 </div>

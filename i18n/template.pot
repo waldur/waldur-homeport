@@ -689,6 +689,7 @@ msgstr ""
 msgid "Civil number"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-events-dialog.html:45
 #: app/scripts/components/customer/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 msgid "Close"
@@ -1725,6 +1726,10 @@ msgstr ""
 msgid "Invoice events"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-events-dialog.html:2
+msgid "Invoice events timeline"
+msgstr ""
+
 #: app/scripts/components/events/constants.js:12
 msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been created."
 msgstr ""
@@ -2032,6 +2037,10 @@ msgstr ""
 
 #: app/scripts/components/quotas/filters.js:12
 msgid "Monthly cost"
+msgstr ""
+
+#: app/scripts/components/billing/invoice-events-dialog.html:33
+msgid "More info"
 msgstr ""
 
 #: app/scripts/components/appstore/category-selector.js:170
@@ -2913,7 +2922,7 @@ msgid "Prices"
 msgstr ""
 
 #: app/scripts/components/billing/invoice-header.html:22
-msgid "Print Invoice"
+msgid "Print invoice"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-header.html:22
@@ -3497,6 +3506,10 @@ msgstr ""
 msgid "Restored volumes"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-events-dialog.html:13
+msgid "Retry"
+msgstr ""
+
 #: app/scripts/components/invitations/actions/invitation-dialog.html:29
 #: app/scripts/components/invitations/invitations-list.js:105
 #: app/scripts/components/team/add-project-member.html:27
@@ -3753,6 +3766,10 @@ msgstr ""
 msgid "Show all"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-events-toggle.html:4
+msgid "Show events"
+msgstr ""
+
 #: app/views/import/import.html:90
 msgid "Show imported resources"
 msgstr ""
@@ -4000,7 +4017,7 @@ msgstr ""
 msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
-#: app/scripts/components/billing/invoice-details.html:68
+#: app/scripts/components/billing/invoice-details.html:69
 msgid "Subtotal"
 msgstr ""
 
@@ -4068,7 +4085,7 @@ msgstr ""
 msgid "Tax"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-details.html:73
+#: app/scripts/components/billing/invoice-details.html:74
 msgid "TAX"
 msgstr ""
 
@@ -4144,6 +4161,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-comments-list.html:5
 msgid "There are no comments yet."
+msgstr ""
+
+#: app/scripts/components/billing/invoice-events-dialog.html:18
+msgid "There are no events for this resource."
 msgstr ""
 
 #: app/scripts/components/form/appstore-field-list.js:44
@@ -4257,8 +4278,8 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:67
-#: app/scripts/components/billing/invoice-details.html:78
+#: app/scripts/components/billing/billing-record-details.html:68
+#: app/scripts/components/billing/invoice-details.html:79
 msgid "TOTAL"
 msgstr ""
 
@@ -4367,6 +4388,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-comments-list.html:8
 msgid "Unable to load comments."
+msgstr ""
+
+#: app/scripts/components/billing/invoice-events-dialog.html:10
+msgid "Unable to load events for this resource."
 msgstr ""
 
 #: app/scripts/components/invitations/actions/send.js:15

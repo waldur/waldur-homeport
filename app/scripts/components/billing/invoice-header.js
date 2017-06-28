@@ -7,8 +7,9 @@ const invoiceHeader = {
   },
   controller: class InvoiceHeaderController {
     // @ngInject
-    constructor($window, currentStateService) {
+    constructor($window, $uibModal, currentStateService) {
       this.$window = $window;
+      this.$uibModal = $uibModal;
       this.currentStateService = currentStateService;
     }
 
@@ -18,6 +19,16 @@ const invoiceHeader = {
 
     printLink() {
       this.$window.print();
+    }
+
+    openTimeline() {
+      this.$uibModal.open({
+        component: 'invoiceTimelineDialog',
+        resolve: {
+          invoice: () => this.invoice
+        },
+        size: 'lg'
+      });
     }
   }
 };
