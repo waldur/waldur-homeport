@@ -12,7 +12,7 @@ export default class InvoiceEventsService {
 
   loadTenantEvents(tenant_uuid) {
     return this.eventsService.getAll({
-      scope: this.getTenantUrl(),
+      scope: this.getTenantUrl(tenant_uuid),
       event_type: [
         'openstack_package_created',
         'openstack_package_deleted',
