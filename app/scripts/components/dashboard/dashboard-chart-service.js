@@ -7,9 +7,8 @@ import {
 
 // @ngInject
 export default class DashboardChartService {
-  constructor($q, currentStateService, invoicesService, quotasService, $filter, features) {
+  constructor($q, invoicesService, quotasService, $filter, features) {
     this.$q = $q;
-    this.currentStateService = currentStateService;
     this.invoicesService = invoicesService;
     this.quotasService = quotasService;
     this.$filter = $filter;
@@ -99,34 +98,32 @@ export default class DashboardChartService {
   }
 
   getCostChart(scope) {
-    return this.currentStateService.getCustomer().then(currentCustomer => {
-      return this.invoicesService.getList({
-        customer: currentCustomer.url
-      }).then(invoices => {
-        let items = invoices.map(invoice => {
-          return {
-            value: invoice.total,
-            date: new Date(invoice.year, invoice.month - 1, 1)
-          };
-        });
-
-        items.reverse();
-        items = this.padMissingValues(items, 'month');
-        items = items.map(item => {
-          item.label = this.$filter('defaultCurrency')(item.value) +  ' at ' +
-                       this.$filter('date', 'yyyy-MM')(item.date);
-          return item;
-        });
+    return this.invoicesService.getList({
+      customer: scope.url
+    }).then(invoices => {
+      let items = invoices.map(invoice => {
         return {
-          title: gettext('Total cost'),
-          data: items,
-          current: this.$filter('defaultCurrency')(items[items.length - 1].value),
-          change: this.getRelativeChange([
-            items[items.length - 1].value,
-            items[items.length - 2].value
-          ])
+          value: invoice.total,
+          date: new Date(invoice.year, invoice.month - 1, 1)
         };
       });
+
+      items.reverse();
+      items = this.padMissingValues(items, 'month');
+      items = items.map(item => {
+        item.label = this.$filter('defaultCurrency')(item.value) +  ' at ' +
+                     this.$filter('date', 'yyyy-MM')(item.date);
+        return item;
+      });
+      return {
+        title: gettext('Total cost'),
+        data: items,
+        current: this.$filter('defaultCurrency')(items[items.length - 1].value),
+        change: this.getRelativeChange([
+          items[items.length - 1].value,
+          items[items.length - 2].value
+        ])
+      };
     });
   }
 
