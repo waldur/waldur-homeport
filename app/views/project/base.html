@@ -10,7 +10,10 @@
                 </p>
                 <ol class="breadcrumb">
                     <li>
-                        <a ui-sref="project.details({uuid: currentProject.uuid })" translate>Project dashboard</a>
+                        <a ui-sref="project.details({uuid: currentProject.uuid })" translate>Project workspace</a>
+                    </li>
+                    <li ng-if="$state.current.name.includes('resources')">
+                        <span translate>Resources</span>
                     </li>
                     <li class="active">
                         <strong>{{ ($state.current.data.pageTitle | translate) || context.project.name }}</strong>

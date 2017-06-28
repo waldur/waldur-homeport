@@ -80,7 +80,7 @@ export default function projectRoutes($stateProvider) {
       url: '',
       template: '<project-dashboard project="currentProject"></project-dashboard>',
       data: {
-        pageTitle: gettext('Project dashboard'),
+        pageTitle: gettext('Dashboard'),
         pageClass: 'gray-bg'
       }
     })

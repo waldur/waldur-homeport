@@ -1,8 +1,9 @@
 <ol class="breadcrumb">
     <li ng-repeat="item in $ctrl.items">
-        <a ng-click="$ctrl.onClick(item)">
+        <a ng-if="item.action || item.state" ng-click="$ctrl.onClick(item)">
             {{ item.label | translate }}
         </a>
+        <span ng-if="!(item.action || item.state)">{{ item.label | translate }}</span>
     </li>
     <li class="active">
         <strong>{{ $ctrl.activeItem | translate }}</strong>
