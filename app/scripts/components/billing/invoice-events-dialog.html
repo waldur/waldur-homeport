@@ -6,7 +6,21 @@
     <loading-spinner/>
   </div>
 
-  <div id="vertical-timeline" class="vertical-container dark-timeline" ng-if="!$ctrl.loading">
+  <div ng-if="$ctrl.erred">
+    <span translate>Unable to load events for this resource.</span>
+    <button class="btn btn-primary">
+      <i class="fa fa-refresh"></i>
+      <span translate>Retry</span>
+    </button>
+  </div>
+
+  <div ng-if="$ctrl.events.length === 0">
+    <span translate>There are no events for this resource.</span>
+  </div>
+
+  <div id="vertical-timeline"
+    class="vertical-container dark-timeline"
+    ng-if="$ctrl.events.length">
     <div class="vertical-timeline-block" ng-repeat="event in $ctrl.events">
       <div class="vertical-timeline-icon" ng-class="::$ctrl.getEventColor(event)">
         <i class="fa" ng-class="::$ctrl.getEventIcon(event)"></i>

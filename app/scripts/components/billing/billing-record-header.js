@@ -7,9 +7,8 @@ const billingRecordHeader = {
   },
   controller: class BillingRecordHeaderController {
     // @ngInject
-    constructor($window, $uibModal, currentStateService) {
+    constructor($window, currentStateService) {
       this.$window = $window;
-      this.$uibModal = $uibModal;
       this.currentStateService = currentStateService;
     }
 
@@ -19,16 +18,6 @@ const billingRecordHeader = {
 
     printLink() {
       this.$window.print();
-    }
-
-    openTimeline() {
-      this.$uibModal.open({
-        component: 'invoiceTimelineDialog',
-        resolve: {
-          invoice: () => this.invoice
-        },
-        size: 'lg'
-      });
     }
   }
 };
