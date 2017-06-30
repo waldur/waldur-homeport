@@ -140,7 +140,12 @@ const appstoreCategorySelector = {
           category: offerings[key].category || gettext('Custom request'),
           state: 'appstore.offering',
         })
-      ));
+      )).catch(error => {
+        if (error.status === 424) {
+          return [];
+        }
+        throw error;
+      });
     }
 
     selectOffering(offering) {
