@@ -7,6 +7,7 @@
     <sidebar items="items" context="context"></sidebar>
   </div>
   <div id="page-wrapper" ng-class="$state.current.data.pageClass || 'white-bg'">
+    <cookies-consent/>
     <nc-header></nc-header>
     <div ng-if="$ctrl.showAccountingRecords">
       <billing-record-details invoice="$ctrl.invoice"/>
