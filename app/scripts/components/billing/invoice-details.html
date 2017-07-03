@@ -49,6 +49,7 @@
                     Start time: {{ ::item.start || '&mdash;' | dateTime }}.
                     End time: {{ ::item.end || '&mdash;' | dateTime }}
                   </small>
+                  <invoice-events-toggle item="item"></invoice-events-toggle>
                 </td>
                 <td>{{ ::item.usage_days}}</td>
                 <td>{{ ::item.daily_price | defaultCurrency}}</td>

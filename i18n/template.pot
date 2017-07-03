@@ -689,6 +689,7 @@ msgstr ""
 msgid "Civil number"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-events-dialog.html:45
 #: app/scripts/components/customer/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 msgid "Close"
@@ -978,6 +979,7 @@ msgstr ""
 #: app/scripts/components/customer/routes.js:63
 #: app/scripts/components/issues/issue-navigation-service.js:11
 #: app/scripts/components/project/project-workspace.js:11
+#: app/scripts/components/project/routes.js:83
 #: app/scripts/components/user/constants.js:3
 msgid "Dashboard"
 msgstr ""
@@ -1724,6 +1726,10 @@ msgstr ""
 msgid "Invoice events"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-events-dialog.html:2
+msgid "Invoice events timeline"
+msgstr ""
+
 #: app/scripts/components/events/constants.js:12
 msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been created."
 msgstr ""
@@ -2033,7 +2039,11 @@ msgstr ""
 msgid "Monthly cost"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:170
+#: app/scripts/components/billing/invoice-events-dialog.html:33
+msgid "More info"
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector.js:175
 msgid "Motivation"
 msgstr ""
 
@@ -2596,12 +2606,6 @@ msgstr ""
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-header.html:6
-#: app/scripts/components/billing/invoice-header.html:6
-#: app/scripts/components/customer/customer-workspace.html:9
-msgid "Organization dashboard"
-msgstr ""
-
 #: app/scripts/components/customer/customer-manage.html:7
 msgid "Organization details"
 msgstr ""
@@ -2645,6 +2649,12 @@ msgstr ""
 
 #: app/scripts/components/customer/customer-popover.html:16
 msgid "Organization type"
+msgstr ""
+
+#: app/scripts/components/billing/billing-record-header.html:6
+#: app/scripts/components/billing/invoice-header.html:6
+#: app/scripts/components/customer/customer-workspace.html:9
+msgid "Organization workspace"
 msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:35
@@ -2769,7 +2779,7 @@ msgstr ""
 msgid "Plans"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:169
+#: app/scripts/components/appstore/category-selector.js:174
 msgid "Please clarify why do you need it"
 msgstr ""
 
@@ -2912,7 +2922,7 @@ msgid "Prices"
 msgstr ""
 
 #: app/scripts/components/billing/invoice-header.html:22
-msgid "Print Invoice"
+msgid "Print invoice"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-header.html:22
@@ -2980,14 +2990,6 @@ msgstr ""
 msgid "Project {project_name} has been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-header.html:10
-#: app/scripts/components/offering/offering-header.html:13
-#: app/scripts/components/project/routes.js:83
-#: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs.js:14
-#: app/views/project/base.html:13
-msgid "Project dashboard"
-msgstr ""
-
 #: app/scripts/components/project/project-create.html:26
 msgid "Project description"
 msgstr ""
@@ -3046,6 +3048,13 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js:62
 msgid "Project providers links have been updated."
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-header.html:10
+#: app/scripts/components/offering/offering-header.html:13
+#: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs.js:14
+#: app/views/project/base.html:13
+msgid "Project workspace"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:59
@@ -3336,7 +3345,7 @@ msgstr ""
 msgid "Request {requestId} has been created."
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:168
+#: app/scripts/components/appstore/category-selector.js:173
 msgid "Request a new service"
 msgstr ""
 
@@ -3386,7 +3395,7 @@ msgstr ""
 msgid "Request type"
 msgstr ""
 
-#: app/scripts/components/offering/offering-header.html:18
+#: app/scripts/components/offering/offering-header.html:21
 #: app/scripts/components/project/project-workspace.js:59
 #: app/scripts/components/project/routes.js:162
 msgid "Requested Services"
@@ -3480,9 +3489,12 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:36
 #: app/scripts/components/analytics/dashboard-cost-chart.html:13
+#: app/scripts/components/offering/offering-header.html:17
 #: app/scripts/components/project/project-workspace.js:24
 #: app/scripts/components/providers/provider-list.js:79
+#: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs.js:21
 #: app/views/directives/importable-resources.html:7
+#: app/views/project/base.html:16
 msgid "Resources"
 msgstr ""
 
@@ -3492,6 +3504,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/module.js:67
 msgid "Restored volumes"
+msgstr ""
+
+#: app/scripts/components/billing/invoice-events-dialog.html:13
+msgid "Retry"
 msgstr ""
 
 #: app/scripts/components/invitations/actions/invitation-dialog.html:29
@@ -3703,7 +3719,7 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:171
+#: app/scripts/components/appstore/category-selector.js:176
 msgid "Service name"
 msgstr ""
 
@@ -3748,6 +3764,10 @@ msgstr ""
 
 #: app/scripts/components/dashboard/dashboard-feed.html:27
 msgid "Show all"
+msgstr ""
+
+#: app/scripts/components/billing/invoice-events-toggle.html:4
+msgid "Show events"
 msgstr ""
 
 #: app/views/import/import.html:90
@@ -3997,7 +4017,7 @@ msgstr ""
 msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
-#: app/scripts/components/billing/invoice-details.html:68
+#: app/scripts/components/billing/invoice-details.html:69
 msgid "Subtotal"
 msgstr ""
 
@@ -4065,7 +4085,7 @@ msgstr ""
 msgid "Tax"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-details.html:73
+#: app/scripts/components/billing/invoice-details.html:74
 msgid "TAX"
 msgstr ""
 
@@ -4141,6 +4161,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-comments-list.html:5
 msgid "There are no comments yet."
+msgstr ""
+
+#: app/scripts/components/billing/invoice-events-dialog.html:18
+msgid "There are no events for this resource."
 msgstr ""
 
 #: app/scripts/components/form/appstore-field-list.js:44
@@ -4254,8 +4278,8 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:67
-#: app/scripts/components/billing/invoice-details.html:78
+#: app/scripts/components/billing/billing-record-details.html:68
+#: app/scripts/components/billing/invoice-details.html:79
 msgid "TOTAL"
 msgstr ""
 
@@ -4364,6 +4388,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-comments-list.html:8
 msgid "Unable to load comments."
+msgstr ""
+
+#: app/scripts/components/billing/invoice-events-dialog.html:10
+msgid "Unable to load events for this resource."
 msgstr ""
 
 #: app/scripts/components/invitations/actions/send.js:15

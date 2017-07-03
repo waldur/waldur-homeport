@@ -3,8 +3,8 @@ const MODES = {
   billing: gettext('Billing'),
 };
 
-// @ngInject
 export default class BillingUtils {
+  // @ngInject
   constructor(ENV, $filter, invoicesService, ncUtilsFlash) {
     this.ENV = ENV;
     this.$filter = $filter;

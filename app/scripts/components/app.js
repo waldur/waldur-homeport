@@ -144,7 +144,7 @@ export function httpInterceptor($q, $location, ncUtilsFlash, ENV, ErrorMessageFo
           console.error(message, rejection.config);
         }
         // handlers for excluding 404 errors are too slow
-        if (!rejection.status || rejection.status !== 404) {
+        if (!rejection.status || (rejection.status !== 404 && rejection.status !== 424)) {
           ncUtilsFlash.error(message);
         }
       }

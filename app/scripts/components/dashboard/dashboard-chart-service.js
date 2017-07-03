@@ -7,16 +7,16 @@ import {
 
 // @ngInject
 export default class DashboardChartService {
-  constructor($q, priceEstimationService, quotasService, $filter, features) {
+  constructor($q, invoicesService, quotasService, $filter, features) {
     this.$q = $q;
-    this.priceEstimationService = priceEstimationService;
+    this.invoicesService = invoicesService;
     this.quotasService = quotasService;
     this.$filter = $filter;
     this.features = features;
   }
 
   clearServiceCache() {
-    this.priceEstimationService.clearAllCacheForCurrentEndpoint();
+    this.invoicesService.clearAllCacheForCurrentEndpoint();
     this.quotasService.clearAllCacheForCurrentEndpoint();
   }
 
@@ -98,30 +98,30 @@ export default class DashboardChartService {
   }
 
   getCostChart(scope) {
-    return this.priceEstimationService.getList({
-      scope: scope.url
-    }).then(estimates => {
-      estimates = estimates.map(estimate => {
+    return this.invoicesService.getList({
+      customer: scope.url
+    }).then(invoices => {
+      let items = invoices.map(invoice => {
         return {
-          value: estimate.total,
-          date: new Date(estimate.year, estimate.month - 1, 1)
+          value: invoice.total,
+          date: new Date(invoice.year, invoice.month - 1, 1)
         };
       });
 
-      estimates.reverse();
-      estimates = this.padMissingValues(estimates, 'month');
-      estimates = estimates.map(estimate => {
-        estimate.label = this.$filter('defaultCurrency')(estimate.value) +  ' at ' +
-                         this.$filter('date', 'yyyy-MM')(estimate.date);
-        return estimate;
+      items.reverse();
+      items = this.padMissingValues(items, 'month');
+      items = items.map(item => {
+        item.label = this.$filter('defaultCurrency')(item.value) +  ' at ' +
+                     this.$filter('date', 'yyyy-MM')(item.date);
+        return item;
       });
       return {
         title: gettext('Total cost'),
-        data: estimates,
-        current: this.$filter('defaultCurrency')(estimates[estimates.length - 1].value),
+        data: items,
+        current: this.$filter('defaultCurrency')(items[items.length - 1].value),
         change: this.getRelativeChange([
-          estimates[estimates.length - 1].value,
-          estimates[estimates.length - 2].value
+          items[items.length - 1].value,
+          items[items.length - 2].value
         ])
       };
     });
