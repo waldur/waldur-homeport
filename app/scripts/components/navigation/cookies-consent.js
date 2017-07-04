@@ -10,11 +10,11 @@ const cookiesConsent = {
     }
 
     consentHidden() {
-      return this.$window.sessionStorage['hideCookiesConsent'];
+      return this.$window.localStorage['hideCookiesConsent'];
     }
 
     hideConsent() {
-      this.$window.sessionStorage['hideCookiesConsent'] = true;
+      this.$window.localStorage['hideCookiesConsent'] = true;
     }
   }
 };
