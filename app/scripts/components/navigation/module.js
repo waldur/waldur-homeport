@@ -11,6 +11,7 @@ import { breadcrumbs } from './breadcrumbs';
 import { appFooter } from './app-footer';
 import headerModule from './header/module';
 import NavigationUtilsService from './navigation-utils-service';
+import cookiesConsent from './cookies-consent';
 
 export default module => {
   module.service('NavigationUtilsService', NavigationUtilsService);
@@ -25,5 +26,6 @@ export default module => {
   module.service('WorkspaceService', WorkspaceService);
   module.component('breadcrumbs', breadcrumbs);
   module.component('appFooter', appFooter);
+  module.component('cookiesConsent', cookiesConsent);
   headerModule(module);
 };

@@ -44,6 +44,7 @@ import freeipaModule from './components/freeipa/module';
 import rootModule from './components/module';
 import priceModule from './components/price/module';
 
+
 const appModule = angular.module('waldur', [
   'satellizer',
   'ui.router',

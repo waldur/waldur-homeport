@@ -353,7 +353,7 @@ msgstr ""
 msgid "Allocation"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:114
+#: app/scripts/components/auth/auth-login.html:115
 msgid "Already have an account?"
 msgstr ""
 
@@ -845,8 +845,8 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:110
-#: app/scripts/components/auth/auth-login.html:18
+#: app/scripts/components/auth/auth-login.html:111
+#: app/scripts/components/auth/auth-login.html:19
 msgid "Create an account"
 msgstr ""
 
@@ -1090,7 +1090,7 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:108
+#: app/scripts/components/auth/auth-login.html:109
 msgid "Do not have an account?"
 msgstr ""
 
@@ -1138,7 +1138,7 @@ msgstr ""
 msgid "Edit team member"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:61
+#: app/scripts/components/auth/auth-login.html:62
 #: app/scripts/components/customer/customer-manage.html:76
 #: app/scripts/components/invitations/invitations-list.js:95
 msgid "Email"
@@ -1402,7 +1402,7 @@ msgstr ""
 msgid "From port"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:57
+#: app/scripts/components/auth/auth-login.html:58
 #: app/scripts/components/user/user-edit.html:16
 #: app/scripts/components/user/user-popover-table.html:5
 msgid "Full name"
@@ -1427,6 +1427,10 @@ msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:122
 msgid "Go to my profile"
+msgstr ""
+
+#: app/scripts/components/cookies-consent/cookies-consent.html:10
+msgid "Got it!"
 msgstr ""
 
 #: app/scripts/components/resource/tabs/constants.js:17
@@ -1923,8 +1927,8 @@ msgstr ""
 msgid "Logging user in"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:116
-#: app/scripts/components/auth/auth-login.html:41
+#: app/scripts/components/auth/auth-login.html:117
+#: app/scripts/components/auth/auth-login.html:42
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html:34
 msgid "Login"
 msgstr ""
@@ -2539,7 +2543,7 @@ msgstr ""
 msgid "Opened by"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:78
+#: app/scripts/components/auth/auth-login.html:79
 msgid "Or use social login"
 msgstr ""
 
@@ -2657,7 +2661,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-header.html:6
 #: app/scripts/components/billing/invoice-header.html:6
-#: app/scripts/components/customer/customer-workspace.html:9
+#: app/scripts/components/customer/customer-workspace.html:10
 msgid "Organization workspace"
 msgstr ""
 
@@ -2695,8 +2699,8 @@ msgstr ""
 msgid "Paid"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:35
-#: app/scripts/components/auth/auth-login.html:66
+#: app/scripts/components/auth/auth-login.html:36
+#: app/scripts/components/auth/auth-login.html:67
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
 msgstr ""
@@ -3054,10 +3058,10 @@ msgstr ""
 msgid "Project providers links have been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-header.html:10
+#: app/scripts/components/appstore/appstore-header.html:11
 #: app/scripts/components/offering/offering-header.html:13
 #: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs.js:14
-#: app/views/project/base.html:13
+#: app/views/project/base.html:14
 msgid "Project workspace"
 msgstr ""
 
@@ -3269,11 +3273,11 @@ msgstr ""
 msgid "Region name"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:74
+#: app/scripts/components/auth/auth-login.html:75
 msgid "Register"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:12
+#: app/scripts/components/auth/auth-login.html:13
 msgid "Register to"
 msgstr ""
 
@@ -3498,7 +3502,7 @@ msgstr ""
 #: app/scripts/components/providers/provider-list.js:79
 #: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs.js:21
 #: app/views/directives/importable-resources.html:7
-#: app/views/project/base.html:16
+#: app/views/project/base.html:17
 msgid "Resources"
 msgstr ""
 
@@ -3735,7 +3739,7 @@ msgstr ""
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-header.html:13
+#: app/scripts/components/appstore/appstore-header.html:14
 #: app/scripts/components/appstore/category-selector.html:2
 #: app/scripts/components/appstore/routes.js:11
 #: app/scripts/components/customer/customer-workspace.js:63
@@ -3794,11 +3798,11 @@ msgstr ""
 msgid "Sign in with eduGAIN"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:89
+#: app/scripts/components/auth/auth-login.html:90
 msgid "Sign in with Facebook"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:83
+#: app/scripts/components/auth/auth-login.html:84
 msgid "Sign in with Google"
 msgstr ""
 
@@ -3810,7 +3814,7 @@ msgstr ""
 msgid "Sign in with Mobile ID"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:95
+#: app/scripts/components/auth/auth-login.html:96
 msgid "Sign in with SmartID"
 msgstr ""
 
@@ -4036,7 +4040,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: app/scripts/components/issues/issues-workspace.html:9
+#: app/scripts/components/issues/issues-workspace.html:10
 #: app/scripts/components/issues/routes.js:19
 msgid "Support dashboard"
 msgstr ""
@@ -4232,6 +4236,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:24
 #: app/scripts/components/project/project-create.html:15
 msgid "This name will be visible in accounting data."
+msgstr ""
+
+#: app/scripts/components/cookies-consent/cookies-consent.html:4
+msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
 #: app/scripts/components/issues/issues-list.js:142
@@ -4570,7 +4578,7 @@ msgid "User {user_username} with full name {user_full_name} authenticated succes
 msgstr ""
 
 #: app/scripts/components/user/routes.js:6
-#: app/scripts/components/user/user-details.html:9
+#: app/scripts/components/user/user-details.html:10
 msgid "User dashboard"
 msgstr ""
 
@@ -4596,8 +4604,8 @@ msgstr ""
 msgid "User status"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:28
-#: app/scripts/components/auth/auth-login.html:51
+#: app/scripts/components/auth/auth-login.html:29
+#: app/scripts/components/auth/auth-login.html:52
 #: app/scripts/components/freeipa/freeipa-account-create.html:8
 #: app/scripts/components/freeipa/freeipa-account-edit.html:8
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
@@ -4922,6 +4930,6 @@ msgstr ""
 msgid "Your invitation was accepted."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:15
+#: app/scripts/components/auth/auth-login.html:16
 msgid "Your single pane of control for all cloud services. Login in to see it in action."
 msgstr ""

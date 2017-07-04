@@ -37,7 +37,7 @@
                 <td><strong translate>Job position</strong></td>
                 <td>{{ $ctrl.user.job_title || 'N/A' }}</td>
             </tr>
-            <tr>
+            <tr ng-if="$ctrl.user.is_staff || $ctrl.user.is_support">
                 <td><strong translate>Status</strong></td>
                 <td>{{ $ctrl.user | formatUserStatus }}</td>
             </tr>
