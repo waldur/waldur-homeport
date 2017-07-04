@@ -43,7 +43,6 @@ import servicesModule from './components/services/module';
 import freeipaModule from './components/freeipa/module';
 import rootModule from './components/module';
 import priceModule from './components/price/module';
-import cookiesConsentModule from './components/cookies-consent/module';
 
 
 const appModule = angular.module('waldur', [
@@ -113,6 +112,5 @@ controllersModule(appModule);
 directivesModule(appModule);
 servicesModule(appModule);
 freeipaModule(appModule);
-cookiesConsentModule(appModule);
 
 bootstrap('waldur');

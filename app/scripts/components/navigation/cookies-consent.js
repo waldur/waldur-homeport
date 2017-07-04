@@ -5,16 +5,16 @@ const cookiesConsent = {
   template,
   controller: class CookiesConsentController {
     // @ngInject
-    constructor($cookies) {
-      this.cookies = $cookies;
+    constructor($window) {
+      this.$window = $window;
     }
 
-    consentDisplayed() {
-      return this.cookies.get('consentDisplayed');
+    consentHidden() {
+      return this.$window.sessionStorage['hideCookiesConsent'];
     }
 
     hideConsent() {
-      this.cookies.put('consentDisplayed', false);
+      this.$window.sessionStorage['hideCookiesConsent'] = true;
     }
   }
 };
