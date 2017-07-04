@@ -1,5 +1,5 @@
 // @ngInject
-export default function cancelButton($state, $window) {
+export default function backButton($state, $window) {
   return {
     restrict: 'A',
     replace: true,
