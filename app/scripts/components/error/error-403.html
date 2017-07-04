@@ -5,7 +5,7 @@
     <div>
         <div bind-html-compile="$ctrl.updatePlanMessage"></div>
         <div>
-            <a href="{{ $ctrl.href }}" translate>&lt; Back</a>
+            <a ng-click="$ctrl.goBack()" translate>&lt; Back</a>
         </div>
     </div>
 </div>

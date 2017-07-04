@@ -473,6 +473,10 @@ msgstr ""
 msgid "Auto-assign floating IP"
 msgstr ""
 
+#: app/scripts/components/navigation/site-header.html:12
+msgid "Back"
+msgstr ""
+
 #: app/views/help/alerts-events-list.html:17
 msgid "Back to help topics"
 msgstr ""
@@ -1914,7 +1918,7 @@ msgid "Loading..."
 msgstr ""
 
 #: app/scripts/components/navigation/header/logout-link.html:4
-#: app/scripts/components/navigation/site-header.html:12
+#: app/scripts/components/navigation/site-header.html:18
 #: app/scripts/components/user/user-sidebar.html:24
 msgid "Log out"
 msgstr ""
