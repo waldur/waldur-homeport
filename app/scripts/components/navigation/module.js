@@ -10,8 +10,10 @@ import WorkspaceService from './workspace-service';
 import { breadcrumbs } from './breadcrumbs';
 import { appFooter } from './app-footer';
 import headerModule from './header/module';
+import NavigationUtilsService from './navigation-utils-service';
 
 export default module => {
+  module.service('NavigationUtilsService', NavigationUtilsService);
   module.component('selectWorkspaceToggle', selectWorkspaceToggle);
   module.component('selectWorkspaceDialog', selectWorkspaceDialog);
   module.component('sidebar', sidebar);
