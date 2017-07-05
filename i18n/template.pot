@@ -1429,7 +1429,7 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
-#: app/scripts/components/cookies-consent/cookies-consent.html:10
+#: app/scripts/components/navigation/cookies-consent.html:10
 msgid "Got it!"
 msgstr ""
 
@@ -3889,11 +3889,11 @@ msgid "SSH key"
 msgstr ""
 
 #: app/scripts/components/events/constants.js:43
-msgid "SSH key {ssh_key_name} has been created."
+msgid "SSH key {ssh_key_name} has been created for user {user_username}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:44
-msgid "SSH key {ssh_key_name} has been deleted."
+msgid "SSH key {ssh_key_name} has been deleted for user {user_username}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:68
@@ -4238,7 +4238,7 @@ msgstr ""
 msgid "This name will be visible in accounting data."
 msgstr ""
 
-#: app/scripts/components/cookies-consent/cookies-consent.html:4
+#: app/scripts/components/navigation/cookies-consent.html:4
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
@@ -4280,7 +4280,7 @@ msgstr ""
 msgid "To port"
 msgstr ""
 
-#: app/scripts/components/error/error-403.js:21
+#: app/scripts/components/error/error-403.js:17
 msgid "To update current plan visit <a href=\"{link}\">plans page</a>."
 msgstr ""
 
