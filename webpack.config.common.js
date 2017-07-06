@@ -7,7 +7,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var scssPath = path.resolve(__dirname, './assets/sass');
 var imagesPath = path.resolve(__dirname, './assets/images');
 var extractPlugin = new ExtractTextPlugin('css/[name]-bundle-[contenthash].css');
-var momentLocalesPlugin = new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en-gb|et)/);
+var momentLocalesPlugin = new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en-gb|et|ru|lt|lv)/);
 
 module.exports = {
   entry: {
