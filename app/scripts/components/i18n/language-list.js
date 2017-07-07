@@ -12,18 +12,13 @@ const languageList = {
     $onInit() {
       this.languageChoices = this.utils.getChoices();
       this.currentLanguage = this.utils.getCurrentLanguage();
+      this.visible = this.languageChoices.length > 1;
+      this.selectBox = this.languageChoices.length > 3;
     }
 
-    visible() {
-      return this.languageChoices.length > 1;
-    }
-
-    displayAsSelectBox() {
-      return this.languageChoices.length > 3;
-    }
-
-    selectLanguage() {
-      this.utils.setCurrentLanguage(this.currentLanguage);
+    selectLanguage(language) {
+      this.currentLanguage = language;
+      this.utils.setCurrentLanguage(language);
     }
   }
 };
