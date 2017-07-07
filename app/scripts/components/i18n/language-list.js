@@ -4,15 +4,15 @@ import './language-list.scss';
 const languageList = {
   template: template,
   controller: class LanguageListController {
+    // @ngInject
     constructor(LanguageUtilsService) {
-      // @ngInject
       this.utils = LanguageUtilsService;
     }
 
     $onInit() {
       this.languageChoices = this.utils.getChoices();
       this.currentLanguage = this.utils.getCurrentLanguage();
-      this.visible = this.languageChoices.length > 1;
+      this.inlineList = this.languageChoices.length > 1 && this.languageChoices.length < 3;
       this.selectBox = this.languageChoices.length > 3;
     }
 

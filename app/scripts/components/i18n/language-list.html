@@ -1,5 +1,5 @@
 <ul class="list-inline language-list m-t-md text-center"
-    ng-if="$ctrl.visible && !$ctrl.selectBox">
+    ng-if="::$ctrl.inlineList">
   <li ng-repeat="language in $ctrl.languageChoices | orderBy: 'code'"
       ng-click="$ctrl.selectLanguage(language)"
       class="list-inline-item cursor-pointer">
@@ -11,7 +11,7 @@
 
 <ui-select ng-model="$ctrl.currentLanguage"
            ng-change="$ctrl.selectLanguage($ctrl.currentLanguage)"
-           ng-if="$ctrl.visible && $ctrl.selectBox">
+           ng-if="::$ctrl.selectBox">
   <ui-select-match placeholder="{{'Please select your language' | translate}}">
     {{$select.selected.label}}
   </ui-select-match>
