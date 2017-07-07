@@ -1876,6 +1876,10 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:217
+msgid "Latvian"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:66
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr ""
@@ -1908,6 +1912,10 @@ msgstr ""
 #: app/scripts/components/project/project-providers-service.js:97
 #: app/scripts/components/providers/details/provider-projects.js:111
 msgid "Link removed"
+msgstr ""
+
+#: app/scripts/components/configs/base-config.js:221
+msgid "Lithuanian"
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-button-resource.html:9
@@ -2836,6 +2844,10 @@ msgstr ""
 msgid "Please select providers allowed to be used in this project."
 msgstr ""
 
+#: app/scripts/components/i18n/language-list.html:15
+msgid "Please select your language"
+msgstr ""
+
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html:17
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html:3
 msgid "Please select your organization"
@@ -3543,6 +3555,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:27
 msgid "Runtime state"
+msgstr ""
+
+#: app/scripts/components/configs/base-config.js:225
+msgid "Russian"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:52
