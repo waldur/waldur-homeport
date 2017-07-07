@@ -8,13 +8,23 @@
     <form ng-if="!$ctrl.loading" name="$ctrl.DialogForm" ng-class="{disabled: $ctrl.submitting}">
         <div class="form-group" ng-if="$ctrl.selectProject">
             <label class="control-label" translate>Projects</label>
-            <select
-                ng-options="project as project.name for project in $ctrl.projects"
-                ng-model="$ctrl.selectedProject"
-                class="form-control"
-                required="">
-                <option value="" translate>Select project</option>
-             </select>
+            <div class="row">
+                <div class="col-sm-9 col-md-10">
+                    <select
+                        ng-options="project as project.name for project in $ctrl.projects"
+                        ng-model="$ctrl.selectedProject"
+                        class="form-control"
+                        required="">
+                        <option value="" translate>Select project</option>
+                     </select>
+                </div>
+                <div class="col-sm-3 col-md-2">
+                    <a class="btn btn-default" ng-click="$ctrl.createProject()">
+                        <i class="fa fa-plus"></i>
+                        <span translate>Add project</span>
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="tabs-container">
             <category-selector-tabs

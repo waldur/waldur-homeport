@@ -160,6 +160,13 @@ const appstoreCategorySelector = {
       }
     }
 
+    createProject() {
+      this.close();
+      return this.$state.go('organization.createProject', {
+        uuid: this.currentCustomer.uuid,
+      });
+    }
+
     requestService() {
       this.close();
       return this.$uibModal.open({
