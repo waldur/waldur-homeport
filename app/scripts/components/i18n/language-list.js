@@ -14,9 +14,16 @@ const languageList = {
       this.currentLanguage = this.utils.getCurrentLanguage();
     }
 
-    selectLanguage(language) {
-      this.currentLanguage = language;
-      this.utils.setCurrentLanguage(language);
+    visible() {
+      return this.languageChoices.length > 1;
+    }
+
+    displayAsSelectBox() {
+      return this.languageChoices.length > 3;
+    }
+
+    selectLanguage() {
+      this.utils.setCurrentLanguage(this.currentLanguage);
     }
   }
 };

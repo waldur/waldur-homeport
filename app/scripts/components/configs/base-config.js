@@ -211,6 +211,18 @@ const ENV = {
     {
       code: 'et',
       label: gettext('Estonian')
+    },
+    {
+      code: 'lv',
+      label: gettext('Latvian')
+    },
+    {
+      code: 'lt',
+      label: gettext('Lithuanian')
+    },
+    {
+      code: 'ru',
+      label: gettext('Russian')
     }
   ],
   defaultLanguage: 'en',
