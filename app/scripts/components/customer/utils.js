@@ -1,16 +1,20 @@
 export default class customerUtils {
-  // ngInit
-  constructor(priceEstimatesService) {
+  // @ngInit
+  constructor(priceEstimatesService, customersService) {
     this.priceEstimatesService = priceEstimatesService;
+    this.customersService = customersService;
   }
   isHardLimit(price_estimate) {
     return price_estimate.limit > 0 && price_estimate.limit === price_estimate.threshold;
   }
-  saveLimit(isHardLimit, customer) {
-    const limit = isHardLimit ? customer.price_estimate.threshold : -1;
-    return this.priceEstimatesService.setLimit(customer.url, limit);
+  saveLimit(customer, limit) {
+    return this.priceEstimatesService.setLimit(customer.url, limit).then(() => {
+      customer.price_estimate.limit = limit;
+    });
   }
-  saveThreshold(customer) {
-    return this.priceEstimatesService.setThreshold(customer.url, customer.price_estimate.threshold);
+  saveThreshold(customer, threshold) {
+    return this.priceEstimatesService.setThreshold(customer.url, threshold).then(() => {
+      customer.price_estimate.threshold = threshold;
+    });
   }
 }

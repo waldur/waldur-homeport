@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+  <div class="panel-heading" translate>Experts</div>
+  <div class="panel-body">
+    <div ng-if="$ctrl.loading">
+      <loading-spinner/>
+    </div>
+    <div ng-if="!$ctrl.expertProvider && !$ctrl.loading">
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" ng-class="{'disabled': !$ctrl.agree_with_policy}"
+                submit-button="$ctrl.register()">
+          <span translate>Register as an expert provider</span>
+        </button>
+      </div>
+      <div class="form-group">
+        <label class="control-label">
+          <input type="checkbox" ng-model="$ctrl.agree_with_policy"/>
+          <span translate>I accept the</span>
+          <a ui-sref="tos.experts" target="_blank">
+            <i class="fa fa-external-link"></i>
+            <span translate>Terms of Service</span>
+          </a>
+        </label>
+      </div>
+    </div>
+    <div class="form-group" ng-if="$ctrl.expertProvider">
+      <span translate>Registered</span>: {{::$ctrl.expertProvider.created | dateTime}}
+    </div>
+  </div>
+</div>
