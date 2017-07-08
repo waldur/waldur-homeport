@@ -16,7 +16,8 @@
     "support.sla",
     "support.assigned_to_me",
     "support.activity_stream",
-    "support.regular_issue_filters"
+    "support.regular_issue_filters",
+    "experts"
   ],
   "featuresVisible": false,
   "appStoreCategories": [
