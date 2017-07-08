@@ -20,7 +20,8 @@ function SelectWorkspaceDialogController(
     customersService,
     currentStateService,
     usersService,
-    ncUtils
+    ncUtils,
+    ENV
   ) {
   var ctrl = this;
   ctrl.organizations = [];
@@ -94,7 +95,7 @@ function SelectWorkspaceDialogController(
 
       usersService.getCurrentUser().then(function(user) {
         ctrl.currentUser = user;
-        ctrl.canCreateOrganization = ctrl.currentUser.is_staff;
+        ctrl.canCreateOrganization = ctrl.currentUser.is_staff || ENV.ownerCanManageCustomer;
       }),
 
       customersService.getAll({
