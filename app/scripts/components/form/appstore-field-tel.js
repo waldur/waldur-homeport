@@ -1,13 +1,13 @@
-import template from './appstore-field-string.html';
+import template from './appstore-field-tel.html';
 
-const appstoreFieldString = {
+const appstoreFieldTel = {
   template: template,
   bindings: {
     field: '<',
     model: '=',
     form: '=',
   },
-  controller: class AppstoreFieldStringController {
+  controller: class AppstoreFieldTelController {
     constructor(coreUtils) {
       this.coreUtils = coreUtils;
     }
@@ -32,4 +32,4 @@ const appstoreFieldString = {
   },
 };
 
-export default appstoreFieldString;
+export default appstoreFieldTel;

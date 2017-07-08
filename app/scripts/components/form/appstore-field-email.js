@@ -1,13 +1,13 @@
-import template from './appstore-field-string.html';
+import template from './appstore-field-email.html';
 
-const appstoreFieldString = {
+const appstoreFieldEmail = {
   template: template,
   bindings: {
     field: '<',
     model: '=',
     form: '=',
   },
-  controller: class AppstoreFieldStringController {
+  controller: class AppstoreFieldEmailController {
     constructor(coreUtils) {
       this.coreUtils = coreUtils;
     }
@@ -24,6 +24,10 @@ const appstoreFieldString = {
       return this.invalid() && this.form[this.field.name].$error.maxlength;
     }
 
+    showEmailError() {
+      return this.invalid() && this.form[this.field.name].$error.email;
+    }
+
     getMaxLengthErrorMessage() {
       return this.coreUtils.templateFormatter(gettext('Field length must be less than {maxlength} symbols'), {
         maxlength: this.field.maxlength,
@@ -32,4 +36,4 @@ const appstoreFieldString = {
   },
 };
 
-export default appstoreFieldString;
+export default appstoreFieldEmail;

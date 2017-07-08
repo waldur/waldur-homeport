@@ -57,8 +57,9 @@ function SelectWorkspaceDialogController(
   };
 
   ctrl.createOrganization = function() {
-    var promise = $uibModal.open({
+    let promise = $uibModal.open({
       component: 'customerCreateDialog',
+      size: 'lg',
     }).opened;
     return blockAndClose(promise);
   };

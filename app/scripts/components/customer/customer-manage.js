@@ -30,39 +30,45 @@ function CustomerManageController(
       this._super();
       this.paymentDetails = null;
       this.organizationSubnetsVisible = ENV.organizationSubnetsVisible;
+      this.ownerCanManageCustomer = ENV.ownerCanManageCustomer;
       this.loadInitial();
     },
     loadInitial: function () {
-      let vm = this;
-      vm.loading = true;
-      return currentStateService.getCustomer().then(function (customer) {
-        vm.customer = customer;
-        vm.getPaymentDetails();
-        return vm.getCustomerPermissions(customer).then(function (result) {
-          vm.canDeleteCustomer = result.canDeleteCustomer;
-          vm.canUpdateCustomerPolicies = result.canUpdateCustomerPolicies;
-          vm.canUpdateQuota = result.canUpdateQuota;
-        });
-      }).finally(function () {
-        vm.loading = false;
+      this.loading = true;
+      return currentStateService.getCustomer().then((customer) => {
+        this.customer = customer;
+        return $q.all([
+          this.getPaymentDetails(),
+          this.loadCustomerPermissions(customer),
+        ]);
+      }).finally(() => {
+        this.loading = false;
+      });
+    },
+    loadCustomerPermissions: function(customer) {
+      return this.getCustomerPermissions(customer).then((result) => {
+        this.canDeleteCustomer = result.canDeleteCustomer;
+        this.canUpdateCustomerPolicies = result.canUpdateCustomerPolicies;
+        this.canRegisterExpertProvider = result.canRegisterExpertProvider;
+        this.canUpdateQuota = result.canUpdateQuota;
       });
     },
     getPaymentDetails: function () {
-      let vm = this;
-      paymentDetailsService.getList({
-        customer_uuid: vm.customer.uuid
-      }).then(function (result) {
+      return paymentDetailsService.getList({
+        customer_uuid: this.customer.uuid
+      }).then((result) => {
         if (result) {
-          vm.paymentDetails = result[0];
+          this.paymentDetails = result[0];
         }
       });
     },
     getCustomerPermissions: function (customer) {
-      return usersService.getCurrentUser().then(function (user) {
+      return usersService.getCurrentUser().then((user) => {
         if (user.is_staff) {
           return $q.when({
             canDeleteCustomer: true,
             canUpdateCustomerPolicies: true,
+            canRegisterExpertProvider: true,
             canUpdateQuota: true,
           });
         }
@@ -71,6 +77,7 @@ function CustomerManageController(
             return $q.when({
               canDeleteCustomer: ENV.ownerCanManageCustomer,
               canUpdateCustomerPolicies: ENV.ownerCanUpdateCustomerPolicies,
+              canRegisterExpertProvider: false,
               canUpdateQuota: false,
             });
           }
@@ -79,7 +86,6 @@ function CustomerManageController(
       });
     },
     removeCustomer: function () {
-      let vm = this;
       if (this.customer.projects.length > 0) {
         if (!features.isVisible('support')) {
           return ncUtilsFlash.error($filter('translate')(gettext('Organization contains projects. Please remove them first.')));
@@ -88,7 +94,7 @@ function CustomerManageController(
           component: 'issueCreateDialog',
           resolve: {
             issue: () => ({
-              customer: vm.customer,
+              customer: this.customer,
               type: ISSUE_IDS.CHANGE_REQUEST,
               summary: gettext('Organization removal'),
             }),
@@ -105,12 +111,10 @@ function CustomerManageController(
       let confirmDelete = confirm($filter('translate')(gettext('Confirm deletion?')));
       if (confirmDelete) {
         currentStateService.setCustomer(null);
-        this.customer.$delete().then(function () {
+        this.customer.$delete().then(() => {
           customersService.clearAllCacheForCurrentEndpoint();
           $state.go('profile.details');
-        }, function () {
-          currentStateService.setCustomer(vm.customer);
-        });
+        }, () => currentStateService.setCustomer(this.customer));
       }
     },
     reportError: function() {

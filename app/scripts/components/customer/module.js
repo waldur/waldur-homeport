@@ -1,4 +1,3 @@
-import customerCreateDialog from './customer-create-dialog';
 import customerManage from './customer-manage';
 import customerWorkspace from './customer-workspace';
 import { CustomerWorkspaceController } from './customer-workspace';
@@ -8,15 +7,24 @@ import customerIssues from './customer-issues';
 import customerEvents from './customer-events';
 import {customerUsersDetailsList} from './customer-users-details-list';
 import customerTeam from './customer-team';
-import routes from './routes';
 import PriceEstimatesService from './price-estimates-service';
 import customerPolicies from './customer-policies';
 import customerReportError from './customer-report-error';
-import customerThreshold from './customer-threshold';
 import customerUtils from './utils';
+import customerCreateDialog from './customer-create-dialog';
+import customerCreatePrompt from './customer-create-prompt';
+import CustomerCreateService from './customer-create-service';
+import customerThreshold from './customer-threshold';
+import customerCountryField from './customer-country-field';
+import customerThresholdField from './customer-threshold-field';
+import routes from './routes';
+import attachHooks from './hooks';
 
 export default module => {
-  module.directive('customerCreateDialog', customerCreateDialog);
+  module.component('customerThreshold', customerThreshold);
+  module.component('customerCreatePrompt', customerCreatePrompt);
+  module.component('customerCreateDialog', customerCreateDialog);
+  module.service('CustomerCreateService', CustomerCreateService);
   module.component('customerManage', customerManage);
   module.controller('CustomerWorkspaceController', CustomerWorkspaceController);
   module.directive('customerWorkspace', customerWorkspace);
@@ -24,12 +32,14 @@ export default module => {
   module.component('customerAlerts', customerAlerts);
   module.component('customerIssues', customerIssues);
   module.component('customerEvents', customerEvents);
+  module.component('customerCountryField', customerCountryField);
+  module.component('customerThresholdField', customerThresholdField);
   module.component('customerUsersDetailsList', customerUsersDetailsList);
   module.component('customerTeam', customerTeam);
   module.component('customerPolicies', customerPolicies);
   module.component('customerReportError', customerReportError);
-  module.component('customerThreshold', customerThreshold);
   module.service('priceEstimatesService', PriceEstimatesService);
   module.service('customerUtils', customerUtils);
   module.config(routes);
+  module.run(attachHooks);
 };

@@ -3,9 +3,9 @@ import template from './customer-threshold.html';
 const customerThreshold = {
   template: template,
   bindings: {
-    horizontal: '<',
-    priceEstimate: '=',
-    toggleHardLimit: '&',
+    field: '<',
+    form: '=',
+    model: '=',
   },
   controller: class CustomerThresholdController {
     // @ngInject
@@ -15,11 +15,21 @@ const customerThreshold = {
     }
 
     $onInit() {
-      this.isHardLimit = this.customerUtils.isHardLimit(this.priceEstimate);
+      this.model.isHardLimit = this.customerUtils.isHardLimit(this.model.priceEstimate);
+      this.updateLimit();
+    }
+
+    updateLimit() {
+      this.model.priceEstimate.limit = this.model.isHardLimit ? this.model.priceEstimate.threshold : -1;
+    }
+
+    thresholdChanged() {
+      this.validateThreshold();
+      this.updateLimit();
     }
 
     validateThreshold() {
-      let isValid = this.priceEstimate.threshold >= this.priceEstimate.total;
+      let isValid = this.model.priceEstimate.threshold >= this.model.priceEstimate.total;
       this.thresholdForm.threshold.$setValidity('exceedsThreshold', isValid);
     }
   }

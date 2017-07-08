@@ -19,20 +19,22 @@ const customerPolicies = {
     $onInit() {
       this.originalCustomer = this.customer;
       this.customer = angular.copy(this.customer);
-      this.isHardLimit = this.customerUtils.isHardLimit(this.customer.price_estimate);
+      this.thresholdModel = {
+        isHardLimit: this.customerUtils.isHardLimit(this.customer.price_estimate),
+        priceEstimate: this.customer.price_estimate
+      };
+      this.thresholdField = {
+        horizontal: true,
+      };
 
       this.currency = this.ENV.currency;
       this.quota = this.FreeIPAQuotaService.loadQuota(this.customer);
     }
 
-    toggleHardLimit() {
-      this.isHardLimit = !this.isHardLimit;
-    }
-
     updatePolicies() {
       let promises = [
-        this.customerUtils.saveLimit(this.isHardLimit, this.customer),
-        this.customerUtils.saveThreshold(this.customer),
+        this.customerUtils.saveLimit(this.originalCustomer, this.thresholdModel.priceEstimate.limit),
+        this.customerUtils.saveThreshold(this.originalCustomer, this.thresholdModel.priceEstimate.threshold),
       ];
 
       if (this.quota) {

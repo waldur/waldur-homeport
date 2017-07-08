@@ -1,15 +1,14 @@
-<ng-form name="$ctrl.thresholdForm" ng-class="{'form-horizontal': $ctrl.horizontal}">
+<ng-form name="$ctrl.thresholdForm" ng-class="{'form-horizontal': $ctrl.field.horizontal}">
   <div class="form-group">
-    <label for="threshold" class="control-label" ng-class="{'col-sm-3': $ctrl.horizontal}">
+    <label for="threshold" class="control-label" ng-class="{'col-sm-3': $ctrl.field.horizontal}">
       <span translate>Cost threshold</span>
-      <i class="fa fa-question-circle"
-         uib-tooltip="{{ 'Upper bound of monthly resource cost provisioned from shared providers.' | translate }}"></i>
+      <helpicon help-text="{{ 'Upper bound of monthly resource cost provisioned from shared providers.' | translate }}"></helpicon>
     </label>
-    <div ng-class="{'col-sm-9 col-lg-3': $ctrl.horizontal}">
+    <div ng-class="{'col-sm-9 col-lg-3': $ctrl.field.horizontal}">
       <div class="input-group">
         <input id="threshold" type="number" class="form-control" required name="threshold"
-               ng-change="$ctrl.validateThreshold()"
-               ng-model="$ctrl.priceEstimate.threshold" ng-min="0">
+               ng-change="$ctrl.thresholdChanged()"
+               ng-model="$ctrl.model.priceEstimate.threshold" ng-min="0">
         <div class="input-group-addon">
           {{ ::$ctrl.currency }}
         </div>
@@ -24,17 +23,17 @@
       </p>
     </div>
   </div>
-  <div class="form-group" ng-if="$ctrl.priceEstimate.total">
-    <div ng-class="{'col-sm-offset-3 col-sm-9': $ctrl.horizontal}">
+  <div class="form-group" ng-if="$ctrl.model.priceEstimate.total">
+    <div ng-class="{'col-sm-offset-3 col-sm-9': $ctrl.field.horizontal}">
       <price-tooltip></price-tooltip>
       <span translate>Estimated cost for current month</span>:
-      <span id="priceEstimate">{{::$ctrl.priceEstimate.total | defaultCurrency}}</span>
+      <span id="priceEstimate">{{::$ctrl.model.priceEstimate.total | defaultCurrency}}</span>
     </div>
   </div>
   <div class="form-group">
-    <div ng-class="{'col-sm-offset-3 col-sm-9': $ctrl.horizontal}">
+    <div ng-class="{'col-sm-offset-3 col-sm-9': $ctrl.field.horizontal}">
       <div class="awesome-checkbox checkbox-success">
-        <input type="checkbox" ng-click="$ctrl.toggleHardLimit()" ng-model="$ctrl.isHardLimit" id="isHardLimit"/>
+        <input type="checkbox" ng-model="$ctrl.model.isHardLimit" ng-change="$ctrl.updateLimit()" id="isHardLimit"/>
         <label for="isHardLimit" translate>Disable provisioning when threshold is reached.</label>
       </div>
     </div>

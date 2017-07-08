@@ -1,4 +1,4 @@
-<input type="text"
+<input type="email"
        class="form-control"
        id="{{ $ctrl.field.name }}"
        name="{{ ::$ctrl.field.name }}"
@@ -13,4 +13,8 @@
 <p class="text-danger"
    ng-if="$ctrl.showMaxLengthError()">
   <span>{{$ctrl.getMaxLengthErrorMessage()}}</span>.
+</p>
+<p class="text-danger"
+   ng-if="$ctrl.showEmailError()">
+  <span>Email is invalid</span>.
 </p>

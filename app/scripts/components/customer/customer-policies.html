@@ -9,9 +9,7 @@
             </freeipa-quota>
         </form>
 
-        <customer-threshold toggle-hard-limit="$ctrl.toggleHardLimit()"
-                            price-estimate="$ctrl.customer.price_estimate"
-                            horizontal="true"></customer-threshold>
+        <customer-threshold model="$ctrl.thresholdModel" field="$ctrl.thresholdField"></customer-threshold>
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
