@@ -76,6 +76,7 @@ module.exports = {
       // favicon is a part of white-labeling, store such resources separately.
       // https://opennode.atlassian.net/wiki/display/WD/HomePort+configuration#HomePortconfiguration-White-labeling
       {from: path.resolve(imagesPath, './favicon.ico'), to: './images/favicon.ico', toType: 'file'},
+      {from: './app/manifest.json', to: '../manifest.json', toType: 'file'},
     ]),
     new HtmlWebpackPlugin({
       template: './app/index-template.html',
