@@ -3,6 +3,7 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var OfflinePlugin = require('offline-plugin');
 
 var scssPath = path.resolve(__dirname, './assets/sass');
 var imagesPath = path.resolve(__dirname, './assets/images');
@@ -80,7 +81,9 @@ module.exports = {
       template: './app/index-template.html',
       filename: '../index.html',
       inject: 'body',
-    })
+    }),
+    // it's always better if OfflinePlugin is the last plugin added
+    new OfflinePlugin()
   ],
   stats: {
     children: false,

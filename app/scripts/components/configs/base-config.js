@@ -236,7 +236,7 @@ const ENV = {
   // supportPhone: '+1234567890'
 
   // Renders label and logo at the login page
-  // poweredByLogo: 'static/images/waldur/logo.png'
+  // poweredByLogo: 'static/images/waldur/logo-120x120.png'
 
   // Renders link to docs in header
   // docsLink: 'http://example.com/docs/'

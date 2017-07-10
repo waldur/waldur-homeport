@@ -98,6 +98,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
     "node-sass": "~3.10.1",
+    "offline-plugin": "^4.8.1",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.5",
     "sass-loader": "^4.0.2",
