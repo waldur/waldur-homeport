@@ -45,3 +45,6 @@ import 'angular-leaflet-directive';
 import 'angular-ui-bootstrap';
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 import 'angular-bind-html-compile-ci-dev';
+
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+OfflinePluginRuntime.install();

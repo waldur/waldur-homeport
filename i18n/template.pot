@@ -377,7 +377,7 @@ msgstr ""
 msgid "An error occurred during policy update."
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:55
+#: app/scripts/components/customer/customer-policies.js:53
 msgid "An error occurred on policies update."
 msgstr ""
 
@@ -766,7 +766,7 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:118
+#: app/scripts/components/customer/customer-manage.js:111
 #: app/scripts/components/table/base-list-controller.js:139
 msgid "Confirm deletion?"
 msgstr ""
@@ -1297,7 +1297,7 @@ msgstr ""
 msgid "Expert provider"
 msgstr ""
 
-#: app/scripts/components/experts/expert-provider-details.js:22
+#: app/scripts/components/experts/expert-provider-details.js:31
 msgid "Expert provider has been registered"
 msgstr ""
 
@@ -1534,7 +1534,7 @@ msgstr ""
 msgid "How to obtain credentials"
 msgstr ""
 
-#: app/scripts/components/experts/expert-provider-details.html:14
+#: app/scripts/components/experts/expert-provider-details.html:17
 #: app/scripts/components/form/appstore-field-tos.html:8
 #: app/scripts/components/freeipa/freeipa-account-create.html:51
 #: app/scripts/components/user/user-edit.html:157
@@ -2568,11 +2568,11 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:122
+#: app/scripts/components/customer/customer-manage.html:123
 msgid "Only staff can remove organization."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:103
+#: app/scripts/components/customer/customer-manage.html:104
 msgid "Only staff can update organization policies."
 msgstr ""
 
@@ -2650,7 +2650,7 @@ msgstr ""
 msgid "Organization {customer_name} has no providers."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:106
+#: app/scripts/components/customer/customer-manage.html:107
 msgid "Organization actions"
 msgstr ""
 
@@ -2658,7 +2658,7 @@ msgstr ""
 msgid "Organization code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:98
+#: app/scripts/components/customer/customer-manage.js:91
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
@@ -2690,7 +2690,7 @@ msgstr ""
 msgid "Organization owner role expires on"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:47
+#: app/scripts/components/customer/customer-policies.js:45
 msgid "Organization policies have been updated."
 msgstr ""
 
@@ -2698,8 +2698,8 @@ msgstr ""
 msgid "Organization registration code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:106
-#: app/scripts/components/customer/customer-manage.js:109
+#: app/scripts/components/customer/customer-manage.js:102
+#: app/scripts/components/customer/customer-manage.js:99
 msgid "Organization removal"
 msgstr ""
 
@@ -3290,7 +3290,7 @@ msgstr ""
 msgid "Read through terms and conditions."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:111
+#: app/scripts/components/customer/customer-manage.js:104
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
@@ -3335,7 +3335,7 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-#: app/scripts/components/experts/expert-provider-details.html:8
+#: app/scripts/components/experts/expert-provider-details.html:11
 msgid "Register as an expert provider"
 msgstr ""
 
@@ -3343,7 +3343,7 @@ msgstr ""
 msgid "Register to"
 msgstr ""
 
-#: app/scripts/components/experts/expert-provider-details.html:23
+#: app/scripts/components/experts/expert-provider-details.html:26
 msgid "Registered"
 msgstr ""
 
@@ -3383,7 +3383,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:117
+#: app/scripts/components/customer/customer-manage.html:118
 msgid "Remove organization"
 msgstr ""
 
@@ -3396,7 +3396,7 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:110
+#: app/scripts/components/customer/customer-manage.html:111
 msgid "Report incorrect data"
 msgstr ""
 
@@ -3450,7 +3450,7 @@ msgstr ""
 msgid "Request name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:113
+#: app/scripts/components/customer/customer-manage.js:106
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
 msgstr ""
@@ -4217,7 +4217,7 @@ msgstr ""
 msgid "Terms of service"
 msgstr ""
 
-#: app/scripts/components/experts/expert-provider-details.html:17
+#: app/scripts/components/experts/expert-provider-details.html:20
 #: app/scripts/components/form/appstore-field-tos.html:11
 #: app/scripts/components/freeipa/freeipa-account-create.html:54
 #: app/scripts/components/freeipa/freeipa-account-edit.html:20
@@ -4817,7 +4817,7 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:112
+#: app/scripts/components/customer/customer-manage.js:105
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
@@ -4845,7 +4845,7 @@ msgstr ""
 msgid "You can provision a new provider through <a href=\"{link}\">Service store</a>."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:114
+#: app/scripts/components/customer/customer-manage.html:115
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
