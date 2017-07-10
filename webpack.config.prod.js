@@ -11,13 +11,18 @@ module.exports = merge(baseConfig, {
     filename: 'js/[name]-bundle.[chunkhash].js'
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         screw_ie8: true,
         warnings: false,
       },
-      // mangle brakes angular.
+      // mangle breakes AngularJS
       mangle: false,
       output: {
         screw_ie8: true
