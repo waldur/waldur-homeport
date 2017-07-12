@@ -13,7 +13,7 @@ const appstoreFieldTel = {
     }
 
     invalid() {
-      return this.form[this.field.name].$dirty && this.form[this.field.name].$invalid;
+      return this.form && this.form[this.field.name].$dirty && this.form[this.field.name].$invalid;
     }
 
     showRequiredError() {
