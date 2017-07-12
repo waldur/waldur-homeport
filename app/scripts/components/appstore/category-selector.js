@@ -9,6 +9,7 @@ const appstoreCategorySelector = {
     resolve: '<'
   },
   controller: class AppStoreCategorySelectorController {
+    // @ngInject
     constructor(
       $q,
       $state,
@@ -19,10 +20,9 @@ const appstoreCategorySelector = {
       currentStateService,
       usersService,
       ISSUE_IDS,
-      offeringsService,
       projectPermissionsService,
+      AppstoreCategoriesService,
       ResourceProvisionPolicy) {
-      // @ngInject
       this.$q = $q;
       this.$state = $state;
       this.$scope = $scope;
@@ -32,9 +32,9 @@ const appstoreCategorySelector = {
       this.currentStateService = currentStateService;
       this.usersService = usersService;
       this.ISSUE_IDS = ISSUE_IDS;
-      this.offeringsService = offeringsService;
       this.projectPermissionsService = projectPermissionsService;
       this.ResourceProvisionPolicy = ResourceProvisionPolicy;
+      this.AppstoreCategoriesService = AppstoreCategoriesService;
     }
 
     $onInit() {
@@ -42,8 +42,8 @@ const appstoreCategorySelector = {
       this.$q.all([
         this.loadCustomer(),
         this.loadProject(),
-        this.loadOfferings(),
-      ]).then(() => this.checkPolicy()).finally(() => this.loading = false);
+        this.loadCategories(),
+      ]).finally(() => this.loading = false);
     }
 
     loadCustomer() {
@@ -80,15 +80,17 @@ const appstoreCategorySelector = {
         return;
       }
 
-      angular.forEach(this.offerings, offering => {
-        if (!this.isResource(offering.key)) {
-          return;
-        }
-        const { disabled, errorMessage } = this.ResourceProvisionPolicy.checkResource(
-          this.currentUser, this.currentCustomer, this.selectedProject, offering.key
-        );
-        offering.disabled = disabled;
-        offering.errorMessage = errorMessage;
+      angular.forEach(this.groups, group => {
+        angular.forEach(group.items, category => {
+          if (!this.isResource(category.key)) {
+            return;
+          }
+          const {disabled, errorMessage} = this.ResourceProvisionPolicy.checkResource(
+            this.currentUser, this.currentCustomer, this.selectedProject, category.key
+          );
+          category.disabled = disabled;
+          category.errorMessage = errorMessage;
+        });
       });
     }
 
@@ -96,63 +98,17 @@ const appstoreCategorySelector = {
       return angular.isDefined(this.ENV.resourcesTypes[key]);
     }
 
-    loadOfferings() {
-      return this.loadCustomOfferings().then(customOfferings => {
-        let offerings = customOfferings.concat(this.ENV.offerings);
-
-        this.offerings = offerings.reduce((map, item) => {
-          map[item.key] = item;
-          return map;
-        }, {});
-
-        const groups = this.ENV.offeringCategories.map(category => ({
-          label: category.label,
-          items: category.items.map(item => this.offerings[item]).filter(x => !!x)
-        }));
-
-        let customOfferingCategories = customOfferings.reduce((map, offering) => {
-          if (map[offering.category] !== undefined) {
-            map[offering.category].push(offering);
-          } else {
-            map[offering.category] = [offering];
-          }
-          return map;
-        }, {});
-
-        let customGroups = Object.keys(customOfferingCategories).map(key => ({
-          label: key,
-          items: customOfferingCategories[key],
-        }));
-        this.groups = groups.concat(customGroups);
-      });
+    loadCategories() {
+      return this.AppstoreCategoriesService.getGroups().then(groups => {
+        this.groups = groups;
+      }).then(() => this.checkPolicy());
     }
 
-    loadCustomOfferings() {
-      if (!this.features.isVisible('support')) {
-        return this.$q.resolve([]);
-      }
-      return this.offeringsService.getConfiguration()
-        .then(offerings => Object.keys(offerings).map(key => ({
-          key,
-          label: offerings[key].label,
-          icon: offerings[key].icon || 'fa-gear',
-          description: offerings[key].description,
-          category: offerings[key].category || gettext('Custom request'),
-          state: 'appstore.offering',
-        })
-      )).catch(error => {
-        if (error.status === 424) {
-          return [];
-        }
-        throw error;
-      });
-    }
-
-    selectOffering(offering) {
+    selectCategory(category) {
       if (this.DialogForm.$valid) {
         this.submitting = true;
-        return this.$state.go(offering.state, {
-          category: offering.key,
+        return this.$state.go(category.state, {
+          category: category.key,
           uuid: this.selectedProject.uuid
         })
         .then(() => this.close())

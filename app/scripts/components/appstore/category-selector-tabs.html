@@ -5,22 +5,22 @@
         <div class="panel-body">
             <div class="list-group appstore-category-selector row">
                 <div class="col-md-6"
-                    ng-repeat="offering in group.items"
-                    visible="{{::offering.feature}}"
-                    uib-tooltip="{{ offering.errorMessage }}">
+                    ng-repeat="category in group.items"
+                    visible="{{::category.feature}}"
+                    uib-tooltip="{{ category.errorMessage }}">
                     <button class="list-group-item"
-                        submit-button="$ctrl.onSelect({offering: offering})"
-                        ng-class="{disabled: offering.disabled}">
-                        <i class="offering-icon fa" ng-class="::offering.icon"></i>
+                        submit-button="$ctrl.onSelect({category: category})"
+                        ng-class="{disabled: category.disabled}">
+                        <i class="category-icon fa" ng-class="::category.icon"></i>
                         <h4 class="list-group-item-heading m-l-xl elipsis">
-                            {{ ::offering.label | translate }}
+                            {{ ::category.label | translate }}
                         </h4>
                         <div class="btn btn-default pull-right btn-xs">
-                            <span ng-if="!offering.comingSoon" translate>
+                            <span ng-if="!category.comingSoon" translate>
                                 Select
                             </span>
                         </div>
-                        <p class="list-group-item-text m-l-xl" ng-bind="::offering.description"></p>
+                        <p class="list-group-item-text m-l-xl" ng-bind="::category.description"></p>
                     </button>
                 </div>
              </div>

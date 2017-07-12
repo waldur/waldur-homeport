@@ -16,11 +16,11 @@ export default class AppStoreUtilsService {
     });
   }
 
-  findOffering(key) {
-    var offerings = this.ENV.offerings;
-    for (var i = 0; i < offerings.length; i++) {
-      if (offerings[i].key === key) {
-        return offerings[i];
+  findCategory(key) {
+    var categories = this.ENV.defaultCategories;
+    for (var i = 0; i < categories.length; i++) {
+      if (categories[i].key === key) {
+        return categories[i];
       }
     }
   }

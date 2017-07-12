@@ -35,3 +35,6 @@ app/scripts/configs/test/config.json
 app/index.html
 app/test.html
 dist/
+
+# npm
+package-lock.json
