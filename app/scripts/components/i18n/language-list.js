@@ -12,7 +12,7 @@ const languageList = {
     $onInit() {
       this.languageChoices = this.utils.getChoices();
       this.currentLanguage = this.utils.getCurrentLanguage();
-      this.inlineList = this.languageChoices.length > 1 && this.languageChoices.length < 3;
+      this.inlineList = this.languageChoices.length > 1 && this.languageChoices.length <= 3;
       this.selectBox = this.languageChoices.length > 3;
     }
 
