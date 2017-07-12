@@ -184,7 +184,7 @@ const ENV = {
   resourcePollingEnabled: true,
   singleResourcePollingTimeout: 1000 * 2,
 
-  ownerCanManageCustomer: true,
+  ownerCanManageCustomer: false,
   ownerCanUpdateCustomerPolicies: true,
   OWNERS_CAN_MANAGE_OWNERS: true,
   MANAGER_CAN_MANAGE_TENANTS: false,
@@ -211,6 +211,18 @@ const ENV = {
     {
       code: 'et',
       label: gettext('Estonian')
+    },
+    {
+      code: 'lv',
+      label: gettext('Latvian')
+    },
+    {
+      code: 'lt',
+      label: gettext('Lithuanian')
+    },
+    {
+      code: 'ru',
+      label: gettext('Russian')
     }
   ],
   defaultLanguage: 'en',
@@ -224,7 +236,7 @@ const ENV = {
   // supportPhone: '+1234567890'
 
   // Renders label and logo at the login page
-  // poweredByLogo: 'static/images/waldur/logo.png'
+  // poweredByLogo: 'static/images/waldur/logo-120x120.png'
 
   // Renders link to docs in header
   // docsLink: 'http://example.com/docs/'

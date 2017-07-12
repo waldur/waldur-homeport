@@ -8,10 +8,11 @@ export default userOrganizations;
 
 // @ngInject
 function UserOrganizationsController(
-  baseControllerListClass, customerPermissionsService, usersService, $state, ncUtils) {
+  baseControllerListClass, customerPermissionsService, usersService, $state, ncUtils, $uibModal, ENV) {
   var controllerScope = this;
   var ControllerListClass = baseControllerListClass.extend({
     init: function() {
+      this.ownerCanManageCustomer = ENV.ownerCanManageCustomer;
       this.service = customerPermissionsService;
       this.controllerScope = controllerScope;
       var fn = this._super.bind(this);
@@ -58,8 +59,25 @@ function UserOrganizationsController(
             },
             width: '50px'
           }
-        ]
+        ],
+        tableActions: this.getTableActions(),
       };
+    },
+    getTableActions() {
+      let actions = [];
+
+      if (this.currentUser.is_staff || this.ownerCanManageCustomer) {
+        actions.push({
+          title: gettext('Add organization'),
+          iconClass: 'fa fa-plus',
+          callback: () => $uibModal.open({
+            component: 'customerCreateDialog',
+            size: 'lg',
+          }),
+        });
+      }
+
+      return actions;
     }
   });
 

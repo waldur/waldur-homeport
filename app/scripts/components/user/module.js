@@ -22,7 +22,7 @@ export default module => {
   module.component('userSidebar', userSidebar);
   module.directive('userDetails', userDetails);
   module.component('userEdit', userEdit);
-  module.directive('userDashboard', userDashboard);
+  module.component('userDashboard', userDashboard);
   module.component('userOrganizations', userOrganizations);
   module.component('userProjects', userProjects);
   module.component('userPopover', userPopover);

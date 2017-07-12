@@ -9,7 +9,6 @@
             <dl class="dl-horizontal">
                 <dt><span translate>Name</span>:</dt>
                 <dd>{{::ManageController.customer.name}}</dd>
-
                 <span ng-if="::ManageController.customer.native_name">
                     <dt><span translate>Native name</span>:</dt>
                     <dd>{{::ManageController.customer.native_name }}</dd>
@@ -94,9 +93,13 @@
         </div>
     </div>
     <customer-policies
-            ng-if="ManageController.canUpdateCustomerPolicies"
-            customer="ManageController.customer"
-            can-update-quota="ManageController.canUpdateQuota"></customer-policies>
+        ng-if="ManageController.canUpdateCustomerPolicies"
+        customer="ManageController.customer"
+        can-update-quota="ManageController.canUpdateQuota"></customer-policies>
+    <expert-provider-details
+        visible-if="'experts'"
+        ng-if="ManageController.canRegisterExpertProvider"
+        customer="ManageController.customer"></expert-provider-details>
     <h3 ng-if="!ManageController.canUpdateCustomerPolicies">
         <span translate>Only staff can update organization policies.</span>
     </h3>

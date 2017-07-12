@@ -124,11 +124,11 @@ msgstr ""
 msgid "A profile has been created."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:19
+#: app/scripts/components/customer/customer-manage.html:18
 msgid "Abbreviation"
 msgstr ""
 
-#: app/scripts/components/routes/about.js:40
+#: app/scripts/components/routes/about.js:50
 #: app/views/about/index.html:3
 #: app/views/about/index.html:8
 msgid "About"
@@ -144,7 +144,7 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:88
+#: app/scripts/components/customer/customer-manage.html:87
 msgid "Account"
 msgstr ""
 
@@ -161,7 +161,12 @@ msgid "Account removal"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:2
+#: app/scripts/components/customer/customer-create-config.js:28
 msgid "Accounting"
+msgstr ""
+
+#: app/scripts/components/customer/customer-create-config.js:29
+msgid "Accounting details"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-header.html:3
@@ -234,10 +239,15 @@ msgstr ""
 msgid "Add notification"
 msgstr ""
 
+#: app/scripts/components/user/user-organizations.js:71
+msgid "Add organization"
+msgstr ""
+
 #: app/scripts/components/resource/list/resource-private-clouds-list.js:27
 msgid "Add private cloud"
 msgstr ""
 
+#: app/scripts/components/appstore/category-selector.html:24
 #: app/scripts/components/project/project-create.html:72
 #: app/scripts/components/project/projects-list.js:157
 msgid "Add project"
@@ -291,9 +301,9 @@ msgstr ""
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:73
-#: app/scripts/components/customer/customer-manage.html:34
-#: app/scripts/components/customer/customer-manage.html:70
+#: app/scripts/components/customer/customer-create-config.js:47
+#: app/scripts/components/customer/customer-manage.html:33
+#: app/scripts/components/customer/customer-manage.html:69
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
 msgstr ""
@@ -305,7 +315,7 @@ msgstr ""
 msgid "Affected resource"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:29
+#: app/scripts/components/customer/customer-manage.html:28
 msgid "Agreement number"
 msgstr ""
 
@@ -353,7 +363,7 @@ msgstr ""
 msgid "Allocation"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:114
+#: app/scripts/components/auth/auth-login.html:115
 msgid "Already have an account?"
 msgstr ""
 
@@ -367,7 +377,7 @@ msgstr ""
 msgid "An error occurred during policy update."
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:51
+#: app/scripts/components/customer/customer-policies.js:53
 msgid "An error occurred on policies update."
 msgstr ""
 
@@ -473,6 +483,10 @@ msgstr ""
 msgid "Auto-assign floating IP"
 msgstr ""
 
+#: app/scripts/components/navigation/site-header.html:12
+msgid "Back"
+msgstr ""
+
 #: app/views/help/alerts-events-list.html:17
 msgid "Back to help topics"
 msgstr ""
@@ -527,7 +541,7 @@ msgstr ""
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:85
+#: app/scripts/components/customer/customer-manage.html:84
 msgid "Bank"
 msgstr ""
 
@@ -586,13 +600,13 @@ msgid "Can't unlink system provider."
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:55
-#: app/scripts/components/appstore/category-selector.html:36
+#: app/scripts/components/appstore/category-selector.html:46
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html:37
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:56
-#: app/scripts/components/customer/customer-create-dialog.html:116
 #: app/scripts/components/digitalocean/droplet-resize.html:76
 #: app/scripts/components/events/event-details-dialog.html:133
 #: app/scripts/components/events/event-types-dialog.html:14
+#: app/scripts/components/form/appstore-form-wizard.html:54
 #: app/scripts/components/invitations/actions/cancel.js:8
 #: app/scripts/components/invitations/actions/invitation-dialog.html:77
 #: app/scripts/components/issues/issue-comments-form.html:22
@@ -721,7 +735,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:67
+#: app/scripts/components/customer/customer-manage.html:66
 msgid "Company"
 msgstr ""
 
@@ -752,7 +766,7 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:105
+#: app/scripts/components/customer/customer-manage.js:111
 #: app/scripts/components/table/base-list-controller.js:139
 msgid "Confirm deletion?"
 msgstr ""
@@ -769,8 +783,8 @@ msgstr ""
 msgid "Connected subnets"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:36
-#: app/scripts/components/customer/customer-manage.html:39
+#: app/scripts/components/customer/customer-create-config.js:17
+#: app/scripts/components/customer/customer-manage.html:38
 msgid "Contact e-mail"
 msgstr ""
 
@@ -778,8 +792,8 @@ msgstr ""
 msgid "Contact email"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:46
-#: app/scripts/components/customer/customer-manage.html:44
+#: app/scripts/components/customer/customer-create-config.js:23
+#: app/scripts/components/customer/customer-manage.html:43
 msgid "Contact phone"
 msgstr ""
 
@@ -808,8 +822,8 @@ msgstr ""
 msgid "Could not load a list of identity providers. Please try again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:56
-#: app/scripts/components/customer/customer-manage.html:73
+#: app/scripts/components/customer/customer-create-config.js:41
+#: app/scripts/components/customer/customer-manage.html:72
 msgid "Country"
 msgstr ""
 
@@ -841,8 +855,8 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:110
-#: app/scripts/components/auth/auth-login.html:18
+#: app/scripts/components/auth/auth-login.html:111
+#: app/scripts/components/auth/auth-login.html:19
 msgid "Create an account"
 msgstr ""
 
@@ -874,7 +888,7 @@ msgstr ""
 msgid "Create notification"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:4
+#: app/scripts/components/customer/customer-create-dialog.html:2
 msgid "Create organization"
 msgstr ""
 
@@ -1081,12 +1095,12 @@ msgstr ""
 msgid "Disable profile"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:38
+#: app/scripts/components/customer/customer-threshold.html:37
 #: app/scripts/components/project/project-policies.html:67
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:108
+#: app/scripts/components/auth/auth-login.html:109
 msgid "Do not have an account?"
 msgstr ""
 
@@ -1122,10 +1136,6 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:3
-msgid "Edit organization"
-msgstr ""
-
 #: app/scripts/components/team/add-project-member.js:56
 msgid "Edit project member"
 msgstr ""
@@ -1134,8 +1144,8 @@ msgstr ""
 msgid "Edit team member"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:61
-#: app/scripts/components/customer/customer-manage.html:76
+#: app/scripts/components/auth/auth-login.html:62
+#: app/scripts/components/customer/customer-manage.html:75
 #: app/scripts/components/invitations/invitations-list.js:95
 msgid "Email"
 msgstr ""
@@ -1160,7 +1170,7 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:51
+#: app/scripts/components/billing/billing-record-details.html:54
 msgid "End time"
 msgstr ""
 
@@ -1186,7 +1196,7 @@ msgstr ""
 msgid "Estimated cost"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:23
+#: app/scripts/components/customer/customer-threshold.html:22
 msgid "Estimated cost exceeds threshold"
 msgstr ""
 
@@ -1194,7 +1204,7 @@ msgstr ""
 msgid "Estimated cost exceeds threshold."
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:30
+#: app/scripts/components/customer/customer-threshold.html:29
 #: app/scripts/components/project/project-policies.html:59
 msgid "Estimated cost for current month"
 msgstr ""
@@ -1203,7 +1213,7 @@ msgstr ""
 msgid "Estonian"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:84
+#: app/scripts/components/customer/customer-create-config.js:53
 msgid "EU VAT ID"
 msgstr ""
 
@@ -1283,6 +1293,18 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
+#: app/scripts/components/customer/customer-create-config.js:71
+msgid "Expert provider"
+msgstr ""
+
+#: app/scripts/components/experts/expert-provider-details.js:31
+msgid "Expert provider has been registered"
+msgstr ""
+
+#: app/scripts/components/experts/expert-provider-details.html:2
+msgid "Experts"
+msgstr ""
+
 #: app/scripts/components/team/add-team-member.html:48
 #: app/scripts/components/team/customer-permissions-log-list.js:47
 #: app/scripts/components/team/project-permissions-log-list.js:42
@@ -1322,6 +1344,12 @@ msgstr ""
 msgid "Failed to operate with backend."
 msgstr ""
 
+#: app/scripts/components/form/appstore-field-email.js:32
+#: app/scripts/components/form/appstore-field-string.js:28
+#: app/scripts/components/form/appstore-field-tel.js:28
+msgid "Field length must be less than {maxlength} symbols"
+msgstr ""
+
 #: app/scripts/components/issues/issue-registration.html:151
 #: app/scripts/components/issues/issue-registration.html:36
 #: app/scripts/components/issues/issue-registration.html:73
@@ -1340,6 +1368,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:94
 #: app/scripts/components/user/keys/key-list.js:36
 msgid "Fingerprint"
+msgstr ""
+
+#: app/scripts/components/form/appstore-form-wizard.html:74
+msgid "Finish"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js:104
@@ -1373,6 +1405,10 @@ msgstr ""
 msgid "Floating IPs"
 msgstr ""
 
+#: app/scripts/components/form/appstore-form-wizard.html:46
+msgid "Following fields contain errors"
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-details.html:16
 msgid "For"
 msgstr ""
@@ -1398,7 +1434,7 @@ msgstr ""
 msgid "From port"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:57
+#: app/scripts/components/auth/auth-login.html:58
 #: app/scripts/components/user/user-edit.html:16
 #: app/scripts/components/user/user-popover-table.html:5
 msgid "Full name"
@@ -1412,8 +1448,13 @@ msgstr ""
 msgid "GB"
 msgstr ""
 
+#: app/scripts/components/customer/customer-create-config.js:3
 #: app/scripts/components/project/project-dialog.html:7
 msgid "General"
+msgstr ""
+
+#: app/scripts/components/customer/customer-create-config.js:4
+msgid "General information"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:57
@@ -1423,6 +1464,10 @@ msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:122
 msgid "Go to my profile"
+msgstr ""
+
+#: app/scripts/components/navigation/cookies-consent.html:10
+msgid "Got it!"
 msgstr ""
 
 #: app/scripts/components/resource/tabs/constants.js:17
@@ -1489,12 +1534,14 @@ msgstr ""
 msgid "How to obtain credentials"
 msgstr ""
 
+#: app/scripts/components/experts/expert-provider-details.html:17
+#: app/scripts/components/form/appstore-field-tos.html:8
 #: app/scripts/components/freeipa/freeipa-account-create.html:51
 #: app/scripts/components/user/user-edit.html:157
 msgid "I accept the"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.html:32
+#: app/scripts/components/appstore/category-selector.html:42
 msgid "I want another service"
 msgstr ""
 
@@ -1867,6 +1914,10 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:217
+msgid "Latvian"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:66
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr ""
@@ -1901,6 +1952,10 @@ msgstr ""
 msgid "Link removed"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:221
+msgid "Lithuanian"
+msgstr ""
+
 #: app/scripts/components/resource/actions/action-button-resource.html:9
 msgid "Loading actions"
 msgstr ""
@@ -1910,7 +1965,7 @@ msgid "Loading..."
 msgstr ""
 
 #: app/scripts/components/navigation/header/logout-link.html:4
-#: app/scripts/components/navigation/site-header.html:12
+#: app/scripts/components/navigation/site-header.html:18
 #: app/scripts/components/user/user-sidebar.html:24
 msgid "Log out"
 msgstr ""
@@ -1919,8 +1974,8 @@ msgstr ""
 msgid "Logging user in"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:116
-#: app/scripts/components/auth/auth-login.html:41
+#: app/scripts/components/auth/auth-login.html:117
+#: app/scripts/components/auth/auth-login.html:42
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html:34
 msgid "Login"
 msgstr ""
@@ -2026,7 +2081,7 @@ msgstr ""
 msgid "Minimal valid value is"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:19
+#: app/scripts/components/customer/customer-threshold.html:18
 msgid "Minimal valid value is 0"
 msgstr ""
 
@@ -2043,7 +2098,7 @@ msgstr ""
 msgid "More info"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:175
+#: app/scripts/components/appstore/category-selector.js:182
 msgid "Motivation"
 msgstr ""
 
@@ -2056,7 +2111,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-compare-list.js:69
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:13
 #: app/scripts/components/cost-planning/cost-plans-list.js:31
-#: app/scripts/components/customer/customer-create-dialog.html:11
+#: app/scripts/components/customer/customer-create-config.js:11
 #: app/scripts/components/customer/customer-manage.html:10
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:76
 #: app/scripts/components/offering/appstore-offering.js:40
@@ -2083,7 +2138,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:14
+#: app/scripts/components/customer/customer-manage.html:13
 msgid "Native name"
 msgstr ""
 
@@ -2115,6 +2170,7 @@ msgstr ""
 msgid "New VPC package"
 msgstr ""
 
+#: app/scripts/components/form/appstore-form-wizard.html:68
 #: app/scripts/components/table/responsive-table.js:106
 msgid "Next"
 msgstr ""
@@ -2240,11 +2296,11 @@ msgstr ""
 msgid "No notifications registered."
 msgstr ""
 
-#: app/scripts/components/user/user-organizations.js:41
+#: app/scripts/components/user/user-organizations.js:42
 msgid "No organizations found matching filter."
 msgstr ""
 
-#: app/scripts/components/user/user-organizations.js:40
+#: app/scripts/components/user/user-organizations.js:41
 msgid "No organizations yet"
 msgstr ""
 
@@ -2403,6 +2459,10 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
+#: app/scripts/components/customer/customer-create-prompt.html:9
+msgid "No, I will do it later"
+msgstr ""
+
 #: app/scripts/components/providers/create.html:144
 msgid "Not all required fields have been entered."
 msgstr ""
@@ -2508,11 +2568,11 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:120
+#: app/scripts/components/customer/customer-manage.html:123
 msgid "Only staff can remove organization."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:101
+#: app/scripts/components/customer/customer-manage.html:104
 msgid "Only staff can update organization policies."
 msgstr ""
 
@@ -2535,7 +2595,7 @@ msgstr ""
 msgid "Opened by"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:78
+#: app/scripts/components/auth/auth-login.html:79
 msgid "Or use social login"
 msgstr ""
 
@@ -2590,11 +2650,7 @@ msgstr ""
 msgid "Organization {customer_name} has no providers."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.js:66
-msgid "Organization {organizationName} is updated."
-msgstr ""
-
-#: app/scripts/components/customer/customer-manage.html:104
+#: app/scripts/components/customer/customer-manage.html:107
 msgid "Organization actions"
 msgstr ""
 
@@ -2602,7 +2658,7 @@ msgstr ""
 msgid "Organization code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:85
+#: app/scripts/components/customer/customer-manage.js:91
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
@@ -2615,14 +2671,14 @@ msgstr ""
 msgid "Organization events"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.js:74
+#: app/scripts/components/customer/customer-create-dialog.js:26
 msgid "Organization has been created."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:70
 #: app/scripts/components/issues/constants.js:47
 #: app/scripts/components/user/user-edit.html:71
-#: app/scripts/components/user/user-organizations.js:45
+#: app/scripts/components/user/user-organizations.js:46
 msgid "Organization name"
 msgstr ""
 
@@ -2634,16 +2690,16 @@ msgstr ""
 msgid "Organization owner role expires on"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:43
+#: app/scripts/components/customer/customer-policies.js:45
 msgid "Organization policies have been updated."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:26
+#: app/scripts/components/customer/customer-create-config.js:35
 msgid "Organization registration code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:93
-#: app/scripts/components/customer/customer-manage.js:96
+#: app/scripts/components/customer/customer-manage.js:102
+#: app/scripts/components/customer/customer-manage.js:99
 msgid "Organization removal"
 msgstr ""
 
@@ -2653,7 +2709,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-header.html:6
 #: app/scripts/components/billing/invoice-header.html:6
-#: app/scripts/components/customer/customer-workspace.html:9
+#: app/scripts/components/customer/customer-workspace.html:10
 msgid "Organization workspace"
 msgstr ""
 
@@ -2666,7 +2722,7 @@ msgid "Owned organizations"
 msgstr ""
 
 #: app/scripts/components/team/customer-users-list.js:77
-#: app/scripts/components/user/user-organizations.js:53
+#: app/scripts/components/user/user-organizations.js:54
 msgid "Owner"
 msgstr ""
 
@@ -2691,8 +2747,8 @@ msgstr ""
 msgid "Paid"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:35
-#: app/scripts/components/auth/auth-login.html:66
+#: app/scripts/components/auth/auth-login.html:36
+#: app/scripts/components/auth/auth-login.html:67
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
 msgstr ""
@@ -2744,7 +2800,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-customer-details.html:5
 #: app/scripts/components/billing/billing-issuer-details.html:5
-#: app/scripts/components/customer/customer-manage.html:82
+#: app/scripts/components/customer/customer-manage.html:81
 #: app/scripts/components/customer/customer-popover.html:32
 msgid "Phone"
 msgstr ""
@@ -2779,7 +2835,11 @@ msgstr ""
 msgid "Plans"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:174
+#: app/scripts/components/form/appstore-field-tos.html:17
+msgid "Please accept Terms of Services to proceed."
+msgstr ""
+
+#: app/scripts/components/appstore/category-selector.js:181
 msgid "Please clarify why do you need it"
 msgstr ""
 
@@ -2811,7 +2871,7 @@ msgstr ""
 msgid "Please provide valid quotas."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:83
+#: app/scripts/components/customer/customer-create-config.js:55
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
@@ -2827,6 +2887,10 @@ msgstr ""
 msgid "Please select providers allowed to be used in this project."
 msgstr ""
 
+#: app/scripts/components/i18n/language-list.html:15
+msgid "Please select your language"
+msgstr ""
+
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html:17
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html:3
 msgid "Please select your organization"
@@ -2840,6 +2904,7 @@ msgstr ""
 msgid "Please wait while provider is being configured."
 msgstr ""
 
+#: app/scripts/components/customer/customer-create-config.js:60
 #: app/scripts/components/customer/customer-policies.html:2
 #: app/scripts/components/project/project-dialog.html:14
 msgid "Policies"
@@ -2850,7 +2915,7 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:79
+#: app/scripts/components/customer/customer-manage.html:78
 msgid "Postal"
 msgstr ""
 
@@ -2872,6 +2937,7 @@ msgstr ""
 msgid "Premium support service."
 msgstr ""
 
+#: app/scripts/components/form/appstore-form-wizard.html:60
 #: app/scripts/components/table/responsive-table.js:107
 msgid "Previous"
 msgstr ""
@@ -2934,7 +3000,7 @@ msgid "Priority"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html:5
-#: app/scripts/components/routes/about.js:55
+#: app/scripts/components/routes/about.js:65
 msgid "Privacy policy"
 msgstr ""
 
@@ -3050,10 +3116,10 @@ msgstr ""
 msgid "Project providers links have been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-header.html:10
+#: app/scripts/components/appstore/appstore-header.html:11
 #: app/scripts/components/offering/offering-header.html:13
 #: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs.js:14
-#: app/views/project/base.html:13
+#: app/views/project/base.html:14
 msgid "Project workspace"
 msgstr ""
 
@@ -3224,7 +3290,7 @@ msgstr ""
 msgid "Read through terms and conditions."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:98
+#: app/scripts/components/customer/customer-manage.js:104
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
@@ -3265,12 +3331,20 @@ msgstr ""
 msgid "Region name"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:74
+#: app/scripts/components/auth/auth-login.html:75
 msgid "Register"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:12
+#: app/scripts/components/experts/expert-provider-details.html:11
+msgid "Register as an expert provider"
+msgstr ""
+
+#: app/scripts/components/auth/auth-login.html:13
 msgid "Register to"
+msgstr ""
+
+#: app/scripts/components/experts/expert-provider-details.html:26
+msgid "Registered"
 msgstr ""
 
 #: app/scripts/components/customer/customer-popover.html:20
@@ -3282,7 +3356,7 @@ msgstr ""
 msgid "Registration method"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:24
+#: app/scripts/components/customer/customer-manage.html:23
 msgid "Registry code"
 msgstr ""
 
@@ -3309,7 +3383,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:115
+#: app/scripts/components/customer/customer-manage.html:118
 msgid "Remove organization"
 msgstr ""
 
@@ -3322,7 +3396,7 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:108
+#: app/scripts/components/customer/customer-manage.html:111
 msgid "Report incorrect data"
 msgstr ""
 
@@ -3345,7 +3419,7 @@ msgstr ""
 msgid "Request {requestId} has been created."
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:173
+#: app/scripts/components/appstore/category-selector.js:180
 msgid "Request a new service"
 msgstr ""
 
@@ -3376,7 +3450,7 @@ msgstr ""
 msgid "Request name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:100
+#: app/scripts/components/customer/customer-manage.js:106
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
 msgstr ""
@@ -3494,7 +3568,7 @@ msgstr ""
 #: app/scripts/components/providers/provider-list.js:79
 #: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs.js:21
 #: app/views/directives/importable-resources.html:7
-#: app/views/project/base.html:16
+#: app/views/project/base.html:17
 msgid "Resources"
 msgstr ""
 
@@ -3536,8 +3610,11 @@ msgstr ""
 msgid "Runtime state"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:225
+msgid "Russian"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:52
-#: app/scripts/components/customer/customer-create-dialog.html:111
 #: app/scripts/components/project/project-providers.html:16
 #: app/scripts/components/providers/details/provider-projects.html:21
 #: app/scripts/components/providers/details/provider-settings.html:76
@@ -3633,7 +3710,7 @@ msgstr ""
 msgid "Select connected subnet"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:59
+#: app/scripts/components/customer/customer-create-config.js:43
 msgid "Select country..."
 msgstr ""
 
@@ -3642,7 +3719,7 @@ msgstr ""
 msgid "Select organization..."
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.html:16
+#: app/scripts/components/appstore/category-selector.html:18
 #: app/scripts/components/invitations/actions/invitation-dialog.html:56
 msgid "Select project"
 msgstr ""
@@ -3719,7 +3796,7 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
-#: app/scripts/components/appstore/category-selector.js:176
+#: app/scripts/components/appstore/category-selector.js:183
 msgid "Service name"
 msgstr ""
 
@@ -3731,7 +3808,7 @@ msgstr ""
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-header.html:13
+#: app/scripts/components/appstore/appstore-header.html:14
 #: app/scripts/components/appstore/category-selector.html:2
 #: app/scripts/components/appstore/routes.js:11
 #: app/scripts/components/customer/customer-workspace.js:63
@@ -3756,6 +3833,14 @@ msgstr ""
 
 #: app/scripts/components/providers/details/dialog.html:16
 msgid "Settings"
+msgstr ""
+
+#: app/scripts/components/customer/customer-create-config.js:72
+msgid "Setup expert provider"
+msgstr ""
+
+#: app/scripts/components/customer/customer-create-config.js:61
+msgid "Setup policies"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js:99
@@ -3790,11 +3875,11 @@ msgstr ""
 msgid "Sign in with eduGAIN"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:89
+#: app/scripts/components/auth/auth-login.html:90
 msgid "Sign in with Facebook"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:83
+#: app/scripts/components/auth/auth-login.html:84
 msgid "Sign in with Google"
 msgstr ""
 
@@ -3806,7 +3891,7 @@ msgstr ""
 msgid "Sign in with Mobile ID"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:95
+#: app/scripts/components/auth/auth-login.html:96
 msgid "Sign in with SmartID"
 msgstr ""
 
@@ -3881,11 +3966,11 @@ msgid "SSH key"
 msgstr ""
 
 #: app/scripts/components/events/constants.js:43
-msgid "SSH key {ssh_key_name} has been created."
+msgid "SSH key {ssh_key_name} has been created for user {user_full_name} with username {user_username}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:44
-msgid "SSH key {ssh_key_name} has been deleted."
+msgid "SSH key {ssh_key_name} has been deleted for user {user_full_name} with username {user_username}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:68
@@ -3914,7 +3999,7 @@ msgstr ""
 msgid "Staff and Support user"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:50
+#: app/scripts/components/billing/billing-record-details.html:53
 msgid "Start time"
 msgstr ""
 
@@ -4007,13 +4092,13 @@ msgstr ""
 msgid "Subnet Name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:56
+#: app/scripts/components/customer/customer-manage.html:55
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:43
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:40
 msgid "Subnets"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:55
+#: app/scripts/components/customer/customer-manage.html:54
 msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
@@ -4032,7 +4117,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: app/scripts/components/issues/issues-workspace.html:9
+#: app/scripts/components/issues/issues-workspace.html:10
 #: app/scripts/components/issues/routes.js:19
 msgid "Support dashboard"
 msgstr ""
@@ -4128,9 +4213,12 @@ msgstr ""
 
 #: app/scripts/components/routes/about.js:15
 #: app/scripts/components/routes/about.js:24
+#: app/scripts/components/routes/about.js:34
 msgid "Terms of service"
 msgstr ""
 
+#: app/scripts/components/experts/expert-provider-details.html:20
+#: app/scripts/components/form/appstore-field-tos.html:11
 #: app/scripts/components/freeipa/freeipa-account-create.html:54
 #: app/scripts/components/freeipa/freeipa-account-edit.html:20
 #: app/scripts/components/navigation/app-footer.html:8
@@ -4211,8 +4299,10 @@ msgstr ""
 msgid "There is no activity yet."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:20
-msgid "This field is required."
+#: app/scripts/components/form/appstore-field-email.html:11
+#: app/scripts/components/form/appstore-field-string.html:11
+#: app/scripts/components/form/appstore-field-tel.html:11
+msgid "This field is required"
 msgstr ""
 
 #: app/scripts/components/user/keys/key-create.js:34
@@ -4228,6 +4318,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:24
 #: app/scripts/components/project/project-create.html:15
 msgid "This name will be visible in accounting data."
+msgstr ""
+
+#: app/scripts/components/navigation/cookies-consent.html:4
+msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
 #: app/scripts/components/issues/issues-list.js:142
@@ -4268,7 +4362,7 @@ msgstr ""
 msgid "To port"
 msgstr ""
 
-#: app/scripts/components/error/error-403.js:21
+#: app/scripts/components/error/error-403.js:17
 msgid "To update current plan visit <a href=\"{link}\">plans page</a>."
 msgstr ""
 
@@ -4278,7 +4372,7 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:68
+#: app/scripts/components/billing/billing-record-details.html:71
 #: app/scripts/components/billing/invoice-details.html:79
 msgid "TOTAL"
 msgstr ""
@@ -4299,6 +4393,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:43
 msgid "Total storage"
+msgstr ""
+
+#: app/scripts/components/billing/billing-record-details.html:50
+msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
 #: app/views/import/import.html:140
@@ -4402,7 +4500,7 @@ msgstr ""
 msgid "Unable to save provider."
 msgstr ""
 
-#: app/scripts/components/auth/auth-init.js:29
+#: app/scripts/components/auth/auth-init.js:32
 msgid "Unable to save user."
 msgstr ""
 
@@ -4436,7 +4534,7 @@ msgstr ""
 msgid "Unselect all"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:21
+#: app/scripts/components/customer/customer-policies.html:19
 #: app/scripts/components/user/hooks/hook-details.html:76
 msgid "Update"
 msgstr ""
@@ -4475,7 +4573,7 @@ msgstr ""
 msgid "Upgrade"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:6
+#: app/scripts/components/customer/customer-threshold.html:5
 #: app/scripts/components/project/project-policies.html:40
 msgid "Upper bound of monthly resource cost provisioned from shared providers."
 msgstr ""
@@ -4566,7 +4664,7 @@ msgid "User {user_username} with full name {user_full_name} authenticated succes
 msgstr ""
 
 #: app/scripts/components/user/routes.js:6
-#: app/scripts/components/user/user-details.html:9
+#: app/scripts/components/user/user-details.html:10
 msgid "User dashboard"
 msgstr ""
 
@@ -4592,8 +4690,8 @@ msgstr ""
 msgid "User status"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:28
-#: app/scripts/components/auth/auth-login.html:51
+#: app/scripts/components/auth/auth-login.html:29
+#: app/scripts/components/auth/auth-login.html:52
 #: app/scripts/components/freeipa/freeipa-account-create.html:8
 #: app/scripts/components/freeipa/freeipa-account-edit.html:8
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
@@ -4626,7 +4724,7 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:49
+#: app/scripts/components/customer/customer-manage.html:48
 msgid "VAT code"
 msgstr ""
 
@@ -4634,7 +4732,7 @@ msgstr ""
 msgid "VAT is not included."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:91
+#: app/scripts/components/customer/customer-manage.html:90
 msgid "VAT rate"
 msgstr ""
 
@@ -4714,12 +4812,12 @@ msgstr ""
 msgid "VPC packages for this provider are not found."
 msgstr ""
 
-#: app/scripts/components/auth/auth-init.js:12
+#: app/scripts/components/auth/auth-init.js:13
 #: app/scripts/components/auth/auth-login.js:33
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:99
+#: app/scripts/components/customer/customer-manage.js:105
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
@@ -4727,8 +4825,16 @@ msgstr ""
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
+#: app/scripts/components/customer/customer-create-prompt.html:2
+msgid "Would you like to register your organization?"
+msgstr ""
+
 #: app/scripts/components/invitations/invitation-confirm-dialog.html:24
 msgid "Would you like to update your current email with the one from the invitation?"
+msgstr ""
+
+#: app/scripts/components/customer/customer-create-prompt.html:6
+msgid "Yes, I would"
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html:33
@@ -4739,7 +4845,7 @@ msgstr ""
 msgid "You can provision a new provider through <a href=\"{link}\">Service store</a>."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:112
+#: app/scripts/components/customer/customer-manage.html:115
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
@@ -4918,6 +5024,6 @@ msgstr ""
 msgid "Your invitation was accepted."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.html:15
+#: app/scripts/components/auth/auth-login.html:16
 msgid "Your single pane of control for all cloud services. Login in to see it in action."
 msgstr ""

@@ -3,10 +3,11 @@ import template from './auth-init.html';
 export const authInit = {
   template,
   controller: class AuthInitController {
-    constructor(usersService, $state, ENV, ncUtilsFlash, coreUtils) {
-      // @ngInject
+    // @ngInject
+    constructor(usersService, $state, $rootScope, ENV, ncUtilsFlash, coreUtils) {
       this.usersService = usersService;
       this.$state = $state;
+      this.$rootScope = $rootScope;
       this.ncUtilsFlash = ncUtilsFlash;
       this.user = {};
       this.pageTitle = coreUtils.templateFormatter(gettext('Welcome to {pageTitle}!'), {pageTitle: ENV.shortPageTitle});
@@ -24,7 +25,9 @@ export const authInit = {
     save({ user }) {
       return this.usersService.update(user).then(response => {
         this.usersService.currentUser = response.data;
-        this.$state.go('profile.details');
+        this.$state.go('profile.details').then(() => {
+          this.$rootScope.$broadcast('userInitCompleted');
+        });
       }).catch(response => {
         this.ncUtilsFlash.error(gettext('Unable to save user.'));
         if (response.status === 400) {

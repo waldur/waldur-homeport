@@ -46,6 +46,9 @@
                   <div>
                     <strong>{{ ::item.name }}</strong>
                   </div>
+                  <i class="fa fa-question-circle m-l-xs"
+                    uib-tooltip="{{'Tracked using UTC timezone, displayed with your browser’s timezone.' | translate }}">
+                  </i>
                   <small>
                     <span translate>Start time</span>: {{ ::item.start || '&mdash;' | dateTime }}.
                     <span translate>End time</span>: {{ ::item.end || '&mdash;' | dateTime }}

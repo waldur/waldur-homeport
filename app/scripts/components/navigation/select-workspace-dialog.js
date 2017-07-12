@@ -20,7 +20,8 @@ function SelectWorkspaceDialogController(
     customersService,
     currentStateService,
     usersService,
-    ncUtils
+    ncUtils,
+    ENV
   ) {
   var ctrl = this;
   ctrl.organizations = [];
@@ -57,8 +58,9 @@ function SelectWorkspaceDialogController(
   };
 
   ctrl.createOrganization = function() {
-    var promise = $uibModal.open({
+    let promise = $uibModal.open({
       component: 'customerCreateDialog',
+      size: 'lg',
     }).opened;
     return blockAndClose(promise);
   };
@@ -93,7 +95,7 @@ function SelectWorkspaceDialogController(
 
       usersService.getCurrentUser().then(function(user) {
         ctrl.currentUser = user;
-        ctrl.canCreateOrganization = ctrl.currentUser.is_staff;
+        ctrl.canCreateOrganization = ctrl.currentUser.is_staff || ENV.ownerCanManageCustomer;
       }),
 
       customersService.getAll({

@@ -10,6 +10,7 @@ import projectModule from './components/project/module';
 import navigationModule from './components/navigation/module';
 import resourceModule from './components/resource/module';
 import billingModule from './components/billing/module';
+import expertsModule from './components/experts/module';
 import authModule from './components/auth/module';
 import invitationsModule from './components/invitations/module';
 import appstoreModule from './components/appstore/module';
@@ -43,6 +44,7 @@ import servicesModule from './components/services/module';
 import freeipaModule from './components/freeipa/module';
 import rootModule from './components/module';
 import priceModule from './components/price/module';
+
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -81,6 +83,7 @@ navigationModule(appModule);
 resourceModule(appModule);
 billingModule(appModule);
 authModule(appModule);
+expertsModule(appModule);
 invitationsModule(appModule);
 appstoreModule(appModule);
 formModule(appModule);

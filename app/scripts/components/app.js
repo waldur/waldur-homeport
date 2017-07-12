@@ -143,10 +143,6 @@ export function httpInterceptor($q, $location, ncUtilsFlash, ENV, ErrorMessageFo
           // eslint-disable-next-line no-console
           console.error(message, rejection.config);
         }
-        // handlers for excluding 404 errors are too slow
-        if (!rejection.status || (rejection.status !== 404 && rejection.status !== 424)) {
-          ncUtilsFlash.error(message);
-        }
       }
       return $q.reject(rejection);
     }
