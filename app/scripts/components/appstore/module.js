@@ -10,6 +10,7 @@ import appstoreRoutes from './routes';
 import AppstoreFieldConfiguration from './field-configuration';
 import AppstoreResourceLoader from './appstore-resource-loader';
 import appstoreCompareList from './appstore-compare-list';
+import AppstoreCategoriesService from './appstore-category-service';
 
 export default module => {
   module.service('AppStoreUtilsService', AppStoreUtilsService);
@@ -25,4 +26,5 @@ export default module => {
   module.config(appstoreRoutes);
   module.provider('AppstoreFieldConfiguration', AppstoreFieldConfiguration);
   module.service('AppstoreResourceLoader', AppstoreResourceLoader);
+  module.service('AppstoreCategoriesService', AppstoreCategoriesService);
 };

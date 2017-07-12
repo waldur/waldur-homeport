@@ -23,8 +23,7 @@ const ENV = {
   // Either 'accounting' or 'billing'
   accountingMode: 'accounting',
 
-
-  offerings: [
+  defaultCategories: [
     {
       label: gettext('Virtual machines'),
       icon: 'fa-desktop',
@@ -50,14 +49,6 @@ const ENV = {
       description: gettext('Provision persistent storage volumes in available Providers.')
     },
     {
-      label: gettext('Applications'),
-      icon: 'fa-database',
-      feature: 'apps',
-      key: 'apps',
-      state: 'appstore.apps',
-      description: gettext('Oracle database and SugarCRM.')
-    },
-    {
       label: gettext('Support'),
       icon: 'fa-wrench',
       key: 'support',
@@ -67,12 +58,7 @@ const ENV = {
     },
   ],
 
-  offeringCategories: [
-    {
-      label: gettext('IaaS'),
-      items: ['private_clouds', 'vms', 'storages', 'support']
-    },
-  ],
+  defaultGroup: gettext('IaaS'),
 
   resourcesTypes: {
     vms: 'vms',

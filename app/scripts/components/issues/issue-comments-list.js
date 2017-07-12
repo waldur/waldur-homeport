@@ -37,13 +37,7 @@ export const issueCommentsList = {
 
     loadComments() {
       return this.usersService.getCurrentUser().then(user => {
-        let query = {
-          issue_uuid: this.issue.uuid
-        };
-        if (!user.is_staff && !user.is_support) {
-          query.is_public = true;
-        }
-        return this.issueCommentsService.getAll(query);
+        return this.issueCommentsService.getIssueComments(this.issue.uuid, user);
       });
     }
   }

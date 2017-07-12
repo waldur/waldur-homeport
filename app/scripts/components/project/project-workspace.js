@@ -58,6 +58,12 @@ export default function ProjectWorkspaceController(
             icon: 'fa-cog',
             label: gettext('Requested Services'),
             feature: 'offering',
+          },
+          {
+            link: 'project.resources.experts({uuid: $ctrl.context.project.uuid})',
+            icon: 'fa-vcard',
+            label: gettext('Experts'),
+            feature: 'experts',
           }
         ]
       },
@@ -125,7 +131,7 @@ export default function ProjectWorkspaceController(
 
   function getCounters(project) {
     const fields = ['vms', 'apps', 'private_clouds', 'storages', 'users'];
-    var query = angular.extend(
+    let query = angular.extend(
       {UUID: project.uuid, fields},
       eventsService.defaultFilter
     );
@@ -133,7 +139,7 @@ export default function ProjectWorkspaceController(
   }
 
   function getCountersError(error) {
-    if (error.status == 404) {
+    if (error.status === 404) {
       projectsService.getFirst().then(function(project) {
         $state.go('project.details', {uuid: project.uuid});
       });

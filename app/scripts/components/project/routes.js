@@ -164,6 +164,15 @@ export default function projectRoutes($stateProvider) {
       }
     })
 
+    .state('project.resources.experts', {
+      url: 'experts/',
+      template: '<expert-requests-list/>',
+      data: {
+        pageTitle: gettext('Experts'),
+        feature: 'experts'
+      }
+    })
+
     .state('project.team', {
       url: 'team/',
       template: '<project-team>',

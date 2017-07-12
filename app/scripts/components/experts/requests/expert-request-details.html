@@ -1,0 +1,15 @@
+<div ng-controller="ProjectWorkspaceController as ProjectCtrl">
+  <sidebar items="items" context="context"></sidebar>
+</div>
+<div id="page-wrapper" class="gray-bg">
+  <div ng-if="$ctrl.loading">
+    <loading-spinner></loading-spinner>
+  </div>
+  <div ng-if="!$ctrl.loading">
+    <nc-header></nc-header>
+    <expert-request-header expert-request="$ctrl.expertRequest"></expert-request-header>
+    <expert-request-summary expert-request="$ctrl.expertRequest"></expert-request-summary>
+  </div>
+  <div class="footer-indent"></div>
+  <app-footer></app-footer>
+</div>
