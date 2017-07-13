@@ -49,7 +49,7 @@
       </div>
       <div class="list-group" slimscroll="{alwaysVisible: true, height: '300px'}" id="organization-selector">
         <div class="list-group-item"
-          ng-repeat="organization in $ctrl.organizations | filter: {name: $ctrl.organizationSearchInput}"
+          ng-repeat="organization in $ctrl.organizations | filter: $ctrl.filterOrganization as filteredOrganizations"
           ng-class="{active: organization.uuid == $ctrl.selectedOrganization.uuid}"
           ng-click="$ctrl.selectOrganization(organization)">
           <a class="btn btn-xs btn-default pull-right"
@@ -68,6 +68,9 @@
             class="elipsis"
             ng-if="!organization.abbreviation"
             ng-bind="organization.name"></div>
+        </div>
+        <div class="list-group-item" ng-if="filteredOrganizations.length === 0">
+          <span class="elipsis" translate>There are no organizations matching filter.</span>
         </div>
       </div>
     </div>
