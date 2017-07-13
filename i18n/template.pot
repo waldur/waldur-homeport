@@ -231,7 +231,7 @@ msgstr ""
 msgid "Add new organization"
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:79
+#: app/scripts/components/navigation/select-workspace-dialog.html:82
 msgid "Add new project"
 msgstr ""
 
@@ -401,8 +401,8 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:27
 #: app/scripts/components/appstore/routes.js:42
-#: app/scripts/components/configs/base-config.js:114
-#: app/scripts/components/configs/base-config.js:95
+#: app/scripts/components/configs/base-config.js:111
+#: app/scripts/components/configs/base-config.js:92
 #: app/scripts/components/dashboard/constants.js:7
 #: app/scripts/components/project/project-workspace.js:45
 #: app/scripts/components/project/routes.js:132
@@ -566,7 +566,7 @@ msgstr ""
 msgid "Block devices"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:47
+#: app/scripts/components/configs/base-config.js:44
 msgid "Block storage"
 msgstr ""
 
@@ -611,7 +611,7 @@ msgstr ""
 #: app/scripts/components/invitations/actions/invitation-dialog.html:77
 #: app/scripts/components/issues/issue-comments-form.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:99
-#: app/scripts/components/navigation/select-workspace-dialog.html:125
+#: app/scripts/components/navigation/select-workspace-dialog.html:128
 #: app/scripts/components/offering/appstore-offering.html:19
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:54
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:43
@@ -1184,7 +1184,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:198
+#: app/scripts/components/configs/base-config.js:195
 msgid "English"
 msgstr ""
 
@@ -1219,7 +1219,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:202
+#: app/scripts/components/configs/base-config.js:199
 msgid "Estonian"
 msgstr ""
 
@@ -1382,7 +1382,7 @@ msgstr ""
 msgid "Filter organizations"
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:92
+#: app/scripts/components/navigation/select-workspace-dialog.html:95
 msgid "Filter projects"
 msgstr ""
 
@@ -1484,7 +1484,7 @@ msgstr ""
 msgid "generate automatically"
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:122
+#: app/scripts/components/navigation/select-workspace-dialog.html:125
 msgid "Go to my profile"
 msgstr ""
 
@@ -1567,10 +1567,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:30
-#: app/scripts/components/configs/base-config.js:39
-#: app/scripts/components/configs/base-config.js:48
-#: app/scripts/components/configs/base-config.js:57
+#: app/scripts/components/configs/base-config.js:61
 msgid "IaaS"
 msgstr ""
 
@@ -1943,7 +1940,7 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:206
+#: app/scripts/components/configs/base-config.js:203
 msgid "Latvian"
 msgstr ""
 
@@ -1981,7 +1978,7 @@ msgstr ""
 msgid "Link removed"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:210
+#: app/scripts/components/configs/base-config.js:207
 msgid "Lithuanian"
 msgstr ""
 
@@ -2713,7 +2710,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:183
+#: app/scripts/components/configs/base-config.js:180
 msgid "Organization owner"
 msgstr ""
 
@@ -2964,7 +2961,7 @@ msgstr ""
 msgid "Premium support"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:62
+#: app/scripts/components/configs/base-config.js:57
 msgid "Premium support service."
 msgstr ""
 
@@ -3037,8 +3034,8 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:21
 #: app/scripts/components/appstore/routes.js:22
-#: app/scripts/components/configs/base-config.js:38
-#: app/scripts/components/configs/base-config.js:88
+#: app/scripts/components/configs/base-config.js:36
+#: app/scripts/components/configs/base-config.js:85
 #: app/scripts/components/dashboard/constants.js:15
 #: app/scripts/components/project/project-workspace.js:38
 #: app/scripts/components/project/projects-list.js:117
@@ -3121,7 +3118,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:184
+#: app/scripts/components/configs/base-config.js:181
 msgid "Project manager"
 msgstr ""
 
@@ -3164,7 +3161,7 @@ msgstr ""
 #: app/scripts/components/appstore/category-selector.html:10
 #: app/scripts/components/customer/customer-workspace.js:55
 #: app/scripts/components/customer/routes.js:97
-#: app/scripts/components/navigation/select-workspace-dialog.html:82
+#: app/scripts/components/navigation/select-workspace-dialog.html:85
 #: app/scripts/components/providers/details/dialog.html:28
 msgid "Projects"
 msgstr ""
@@ -3245,11 +3242,11 @@ msgstr ""
 msgid "Providers events"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:53
+#: app/scripts/components/configs/base-config.js:49
 msgid "Provision persistent storage volumes in available Providers."
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:35
+#: app/scripts/components/configs/base-config.js:33
 msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
 
@@ -3261,7 +3258,7 @@ msgstr ""
 msgid "Purchase"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:44
+#: app/scripts/components/configs/base-config.js:41
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
@@ -3643,7 +3640,7 @@ msgstr ""
 msgid "Runtime state"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:214
+#: app/scripts/components/configs/base-config.js:211
 msgid "Russian"
 msgstr ""
 
@@ -3702,7 +3699,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.html:40
 #: app/scripts/components/appstore/category-selector-tabs.html:19
-#: app/scripts/components/navigation/select-workspace-dialog.html:112
+#: app/scripts/components/navigation/select-workspace-dialog.html:115
 #: app/scripts/components/navigation/select-workspace-dialog.html:58
 #: app/views/directives/import-resource-button.html:6
 msgid "Select"
@@ -4039,6 +4036,7 @@ msgstr ""
 #: app/scripts/components/billing/billing-records-list.js:48
 #: app/scripts/components/billing/invoices-list.js:49
 #: app/scripts/components/experts/requests/expert-request-list.js:47
+#: app/scripts/components/experts/requests/expert-request-summary.html:10
 #: app/scripts/components/offering/offering-summary.html:18
 #: app/scripts/components/offering/offerings-list.js:47
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:52
@@ -4061,7 +4059,6 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-summary.html:10
 #: app/scripts/components/invitations/invitations-list.js:122
 #: app/scripts/components/issues/constants.js:109
 #: app/scripts/components/issues/constants.js:71
@@ -4102,7 +4099,7 @@ msgid "Storage limit GB"
 msgstr ""
 
 #: app/scripts/components/appstore/routes.js:52
-#: app/scripts/components/configs/base-config.js:102
+#: app/scripts/components/configs/base-config.js:99
 msgid "Storages"
 msgstr ""
 
@@ -4146,7 +4143,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:56
+#: app/scripts/components/configs/base-config.js:52
 #: app/scripts/components/navigation/header/support-link.html:4
 #: app/scripts/components/project/project-workspace.js:73
 msgid "Support"
@@ -4189,7 +4186,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:185
+#: app/scripts/components/configs/base-config.js:182
 msgid "System administrator"
 msgstr ""
 
@@ -4294,7 +4291,11 @@ msgstr ""
 msgid "There are no items yet."
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:100
+#: app/scripts/components/navigation/select-workspace-dialog.html:73
+msgid "There are no organizations matching filter."
+msgstr ""
+
+#: app/scripts/components/navigation/select-workspace-dialog.html:103
 msgid "There are no projects yet for this organization."
 msgstr ""
 
@@ -4799,9 +4800,9 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:15
 #: app/scripts/components/appstore/routes.js:32
-#: app/scripts/components/configs/base-config.js:110
-#: app/scripts/components/configs/base-config.js:29
-#: app/scripts/components/configs/base-config.js:81
+#: app/scripts/components/configs/base-config.js:107
+#: app/scripts/components/configs/base-config.js:28
+#: app/scripts/components/configs/base-config.js:78
 #: app/scripts/components/dashboard/constants.js:11
 #: app/scripts/components/project/project-workspace.js:31
 #: app/scripts/components/project/routes.js:124
