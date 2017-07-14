@@ -92,6 +92,20 @@ export default class BillingUtils {
         projects[item.project_uuid].items.push(item);
       }
     }
+    for (i = 0; i < invoice.offering_items.length; i++) {
+      const item = invoice.offering_items[i];
+      if (!item.project_uuid) {
+        projects.default.items.push(item);
+      } else {
+        if (!projects[item.project_uuid]) {
+          projects[item.project_uuid] = {
+            items: [],
+            name: item.project_name,
+          };
+        }
+        projects[item.project_uuid].items.push(item);
+      }
+    }
     return Object.keys(projects).map(key => projects[key]);
   }
 }
