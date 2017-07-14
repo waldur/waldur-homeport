@@ -328,7 +328,7 @@ export default function baseResourceListController(
         let uuid = resource.uuid;
 
         $timeout(() => {
-          vm.service.$get(resource.resource_type, uuid).then((response) => {
+          resourcesService.$get(resource.resource_type, uuid).then((response) => {
             // do not call updateRow as it reloads a table and actions are reloaded on ENV.singleResourcePollingTimeout
             vm.setResource(resource, response);
             if (vm.resourceIsUpdating(response)) {

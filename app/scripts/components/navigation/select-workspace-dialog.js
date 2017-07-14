@@ -30,6 +30,7 @@ function SelectWorkspaceDialogController(
   ctrl.selectedProject = {};
   ctrl.currentUser = {};
   ctrl.canCreateOrganization = false;
+  ctrl.organizationSearchInput = '';
 
   ctrl.selectOrganization = function(organization) {
     ctrl.selectedOrganization = organization;
@@ -40,6 +41,16 @@ function SelectWorkspaceDialogController(
 
   ctrl.selectProject = function(project) {
     ctrl.selectedProject = project;
+  };
+
+  ctrl.filterOrganization = function(organization) {
+    if (organization.name.toLowerCase().indexOf(ctrl.organizationSearchInput.toLowerCase()) >= 0) {
+      return true;
+    }
+    if (organization.abbreviation.indexOf(ctrl.organizationSearchInput) >= 0) {
+      return true;
+    }
+    return false;
   };
 
   ctrl.gotoOrganization = function(organization) {

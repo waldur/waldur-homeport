@@ -17,7 +17,7 @@ export function AppStoreHeaderController($scope, $state, $stateParams, AppStoreU
   function refreshCategory() {
     var category = $state.current.data.category || $stateParams.category;
     if (category) {
-      $scope.category = AppStoreUtilsService.findOffering(category);
+      $scope.category = AppStoreUtilsService.findCategory(category);
     }
   }
 }
