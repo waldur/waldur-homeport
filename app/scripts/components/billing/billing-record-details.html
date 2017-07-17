@@ -56,7 +56,7 @@
                   <invoice-events-toggle item="item"></invoice-events-toggle>
                 </td>
                 <td>{{ ::item.usage_days }}</td>
-                <td>{{ ::item.daily_price | defaultCurrency }}</td>
+                <td>{{ ::item.unit_price | defaultCurrency }}</td>
                 <td>{{ ::item.total | defaultCurrency }}</td>
               </tr>
             </tbody>

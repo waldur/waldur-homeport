@@ -78,8 +78,15 @@ export default class BillingUtils {
         name: '',
       }
     };
-    for (var i = 0; i < invoice.openstack_items.length; i++) {
-      const item = invoice.openstack_items[i];
+    this.groupInvoiceSubItems(invoice.openstack_items, projects);
+    if (invoice.offering_items) {
+      this.groupInvoiceSubItems(invoice.offering_items, projects);
+    }
+    return Object.keys(projects).map(key => projects[key]);
+  }
+
+  groupInvoiceSubItems(items, projects) {
+    items.forEach(item => {
       if (!item.project_uuid) {
         projects.default.items.push(item);
       } else {
@@ -91,7 +98,6 @@ export default class BillingUtils {
         }
         projects[item.project_uuid].items.push(item);
       }
-    }
-    return Object.keys(projects).map(key => projects[key]);
+    });
   }
 }
