@@ -14,13 +14,15 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
     mergeListFieldIdentifier: null,
 
     init: function() {
-      if (!this.controllerScope) {
-        throw new Error('Please register controller scope in the init method');
-      }
+      // TODO: Fix all cases where controllerScope is not set
+      // if (!this.controllerScope) {
+      //   throw new Error('Please register controller scope in the init method');
+      // }
 
-      if (!this.service) {
-        throw new Error('Please register service in the init method');
-      }
+      // TODO: Fix all cases where service is not set
+      // if (!this.service) {
+      //   throw new Error('Please register service in the init method');
+      // }
 
       this.service.page = 1;
       this.service.cacheTime = this.cacheTime;
