@@ -78,34 +78,26 @@ export default class BillingUtils {
         name: '',
       }
     };
-    for (var i = 0; i < invoice.openstack_items.length; i++) {
-      const item = invoice.openstack_items[i];
-      if (!item.project_uuid) {
-        projects.default.items.push(item);
-      } else {
-        if (!projects[item.project_uuid]) {
-          projects[item.project_uuid] = {
-            items: [],
-            name: item.project_name,
-          };
-        }
-        projects[item.project_uuid].items.push(item);
-      }
-    }
-    for (i = 0; i < invoice.offering_items.length; i++) {
-      const item = invoice.offering_items[i];
-      if (!item.project_uuid) {
-        projects.default.items.push(item);
-      } else {
-        if (!projects[item.project_uuid]) {
-          projects[item.project_uuid] = {
-            items: [],
-            name: item.project_name,
-          };
-        }
-        projects[item.project_uuid].items.push(item);
-      }
+    this.groupInvoiceSubItems(invoice.openstack_items, projects);
+    if (invoice.offering_items) {
+      this.groupInvoiceSubItems(invoice.offering_items, projects);
     }
     return Object.keys(projects).map(key => projects[key]);
+  }
+
+  groupInvoiceSubItems(items, projects) {
+    items.forEach(item => {
+      if (!item.project_uuid) {
+        projects.default.items.push(item);
+      } else {
+        if (!projects[item.project_uuid]) {
+          projects[item.project_uuid] = {
+            items: [],
+            name: item.project_name,
+          };
+        }
+        projects[item.project_uuid].items.push(item);
+      }
+    });
   }
 }
