@@ -2,6 +2,7 @@ import selectWorkspaceToggle from './select-workspace-toggle';
 import selectWorkspaceDialog from './select-workspace-dialog';
 import sidebar from './sidebar';
 import sidebarToggle from './sidebar-toggle';
+import SidebarExtensionService from './sidebar-extension-service';
 import siteHeader from './site-header';
 import titleService from './title-service';
 import setTitleFromState from './set-title-from-state';
@@ -15,6 +16,7 @@ import cookiesConsent from './cookies-consent';
 
 export default module => {
   module.service('NavigationUtilsService', NavigationUtilsService);
+  module.service('SidebarExtensionService', SidebarExtensionService);
   module.component('selectWorkspaceToggle', selectWorkspaceToggle);
   module.component('selectWorkspaceDialog', selectWorkspaceDialog);
   module.component('sidebar', sidebar);

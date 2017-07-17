@@ -1,0 +1,69 @@
+<div class="modal-header">
+  <h3 class="modal-title" translate>Create bid</h3>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal" name="$ctrl.BidForm">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">
+        <span translate>Expert request</span>
+      </label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="request" ng-model="$ctrl.expertRequest.name" readonly>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">
+        <span translate>Team</span>
+        <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-6">
+        <ui-select ng-model="$ctrl.selectedProject" name="team" required>
+          <ui-select-match placeholder="{{'Please select a team' | translate}}">
+            {{ $select.selected.name }}
+          </ui-select-match>
+          <ui-select-choices repeat="item in $ctrl.projects | orderBy: 'name'">
+            <div ng-bind-html="item.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+        <div class="help-block text-danger"
+           ng-if="($ctrl.BidForm.$submitted || $ctrl.BidForm.team.$touched) && $ctrl.BidForm.team.$error.required">
+          <span translate>You did not enter a field.</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">
+        <span translate>Price</span>
+        <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-6">
+        <input type="number" class="form-control" name="price" min="0" ng-model="$ctrl.price">
+        <p class="help-block text-danger" ng-if="$ctrl.BidForm.price.$error.min">
+          <span translate>Minimal valid value is</span> 0
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">
+        <span translate>Description</span>
+        <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-6">
+        <textarea
+          rows="8"
+          maxlength="500"
+          name="description"
+          class="form-control"
+          ng-model="$ctrl.description"></textarea>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary" submit-button="$ctrl.save()">
+    <span translate>Create</span>
+  </button>
+  <button type="button" class="btn btn-default" ng-click="$ctrl.dismiss()">
+    <span translate>Cancel</span>
+  </button>
+</div>
