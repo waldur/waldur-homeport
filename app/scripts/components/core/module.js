@@ -1,5 +1,4 @@
 import ErrorMessageFormatter from './error-message-formatter';
-import attachTracking from './tracking';
 import submitButton from './submit-button';
 import loadingSpinner from './loading-spinner';
 import multipleSelect from './multiple-select';
@@ -17,7 +16,6 @@ export default module => {
   module.factory('listCache', listCache);
   module.service('servicesService', servicesService);
   module.service('tabCounterService', tabCounterService);
-  module.run(attachTracking);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
   module.directive('multipleSelect', multipleSelect);
