@@ -1,3 +1,7 @@
+export function flatten(lists) {
+  return Array.prototype.concat.apply([], lists);
+}
+
 // @ngInject
 export function coreUtils($filter) {
   return {

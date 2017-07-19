@@ -1,6 +1,4 @@
-function flatten(lists) {
-  return Array.prototype.concat.apply([], lists);
-}
+import {flatten} from '../core/utils';
 
 function groupBy(field, items) {
   return items.reduce(function(result, item) {

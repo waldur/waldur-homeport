@@ -57,6 +57,8 @@ const expertRequestCreate = {
         project: this.project.url,
       }, this.model);
       return this.expertRequestsService.create(expertRequest).then(expert => {
+        this.ncUtilsFlash.error(gettext('Expert request has been created.'));
+        this.expertRequestsService.clearAllCacheForCurrentEndpoint();
         this.$state.go('expertRequestDetails', {uuid: expert.uuid});
       }, response => {
         this.errors = response.data;

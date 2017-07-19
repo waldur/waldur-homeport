@@ -9,6 +9,9 @@
     <nc-header></nc-header>
     <expert-request-header expert-request="$ctrl.expertRequest"></expert-request-header>
     <expert-request-summary expert-request="$ctrl.expertRequest"></expert-request-summary>
+    <div ng-if="!$ctrl.expertRequest.contract">
+      <expert-bids-list expert-request="$ctrl.expertRequest"/>
+    </div>
   </div>
   <div class="footer-indent"></div>
   <app-footer></app-footer>
