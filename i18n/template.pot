@@ -1335,6 +1335,14 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
+#: app/scripts/components/experts/bids/expert-bid.js:32
+msgid "Expert bid could not be accepted."
+msgstr ""
+
+#: app/scripts/components/experts/bids/expert-bid.js:28
+msgid "Expert bid has been accepted."
+msgstr ""
+
 #: app/scripts/components/customer/customer-create-config.js:71
 msgid "Expert provider"
 msgstr ""
