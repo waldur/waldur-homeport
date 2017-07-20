@@ -262,7 +262,7 @@ msgid "Add project member"
 msgstr ""
 
 #: app/scripts/components/providers/create.html:155
-#: app/scripts/components/providers/provider-list.js:182
+#: app/scripts/components/providers/provider-list.js:186
 msgid "Add provider"
 msgstr ""
 
@@ -606,7 +606,7 @@ msgstr ""
 msgid "Caller"
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:141
+#: app/scripts/components/providers/provider-list.js:145
 msgid "Can't unlink system provider."
 msgstr ""
 
@@ -2624,7 +2624,7 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:175
+#: app/scripts/components/providers/provider-list.js:179
 msgid "Only customer owner or staff can create provider."
 msgstr ""
 
@@ -2636,7 +2636,7 @@ msgstr ""
 msgid "Only customer owner or staff can remove provider."
 msgstr ""
 
-#: app/scripts/components/providers/provider-list.js:138
+#: app/scripts/components/providers/provider-list.js:142
 msgid "Only customer owner or staff can unlink provider."
 msgstr ""
 
@@ -3337,7 +3337,7 @@ msgstr ""
 
 #: app/scripts/components/error/routes.js:25
 #: app/scripts/components/project/projects-list.js:153
-#: app/scripts/components/providers/provider-list.js:178
+#: app/scripts/components/providers/provider-list.js:182
 #: app/scripts/components/resource/list/resources-list.js:102
 #: app/scripts/components/resource/resource-provision-policy.js:14
 msgid "Quota has been reached."
