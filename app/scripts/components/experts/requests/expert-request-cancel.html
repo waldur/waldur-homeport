@@ -1,0 +1,11 @@
+<div
+  class="title-action"
+  ng-if="$ctrl.canCancelRequest()">
+  <button
+    type="button"
+    class="btn btn-warning"
+    submit-button="$ctrl.cancelRequest()">
+    <i class="fa fa-trash-o"></i>
+    <span translate>Cancel request</span>
+  </button>
+</div>
