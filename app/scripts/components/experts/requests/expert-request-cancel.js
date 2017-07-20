@@ -32,6 +32,6 @@ const expertRequestCancel = {
       });
     }
   }
-}
+};
 
 export default expertRequestCancel;
