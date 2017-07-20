@@ -7,8 +7,11 @@ const expertBid = {
   },
   controller: class ExpertBidDetailsController {
     // @ngInject
-    constructor($uibModal) {
+    constructor($uibModal, expertBidsService, $rootScope, ncUtilsFlash) {
       this.$uibModal = $uibModal;
+      this.expertBidsService = expertBidsService;
+      this.$rootScope = $rootScope;
+      this.ncUtilsFlash = ncUtilsFlash;
     }
 
     openUserDetails(user) {
@@ -17,6 +20,16 @@ const expertBid = {
         resolve: {
           user_uuid: () => user.uuid
         }
+      });
+    }
+
+    accept() {
+      this.expertBidsService.accept(this.bid.url).then(() => {
+        this.ncUtilsFlash.success(gettext('Expert bid has been accepted.'));
+        this.$rootScope.$broadcast('refreshExpertDetails');
+      }).catch(response => {
+        let aggregatedError = response.data.join();
+        this.ncUtilsFlash.error(gettext('Expert bid could not be accepted.') + ` Reason: ${aggregatedError}`);
       });
     }
   }

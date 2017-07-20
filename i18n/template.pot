@@ -1335,6 +1335,14 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
+#: app/scripts/components/experts/bids/expert-bid.js:32
+msgid "Expert bid could not be accepted."
+msgstr ""
+
+#: app/scripts/components/experts/bids/expert-bid.js:28
+msgid "Expert bid has been accepted."
+msgstr ""
+
 #: app/scripts/components/customer/customer-create-config.js:71
 msgid "Expert provider"
 msgstr ""
@@ -4600,7 +4608,7 @@ msgstr ""
 msgid "Unable to import resource {resourceName}."
 msgstr ""
 
-#: app/scripts/components/core/bootstrap.js:23
+#: app/scripts/components/core/bootstrap.js:25
 msgid "Unable to load application configuration. Please reload this page."
 msgstr ""
 
