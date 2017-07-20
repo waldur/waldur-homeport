@@ -129,9 +129,13 @@ function ProviderListController(
                   }
                 }.bind(this.controllerScope),
 
-                isDisabled: function(service) {
-                  return !this.canUserManageService || service.shared;
+                isDisabled: function() {
+                  return !this.canUserManageService;
                 }.bind(this.controllerScope),
+
+                isVisible: function(service) {
+                  return !service.shared;
+                },
 
                 tooltip: function(service) {
                   if (!this.canUserManageService) {
