@@ -33,11 +33,11 @@ msgid "{resource_full_name} deletion has failed."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:25
-msgid "{resource_full_name} has been created by {user_full_name}."
+msgid "{resource_full_name} has been created."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:28
-msgid "{resource_full_name} has been deleted by {user_full_name}."
+msgid "{resource_full_name} has been deleted."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:29
@@ -45,7 +45,7 @@ msgid "{resource_full_name} has been imported by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:32
-msgid "{resource_full_name} has been restarted by {user_full_name}."
+msgid "{resource_full_name} has been restarted."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:27
@@ -65,11 +65,11 @@ msgid "{resource_full_name} has been scheduled to stop by {user_full_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:35
-msgid "{resource_full_name} has been started by {user_full_name}."
+msgid "{resource_full_name} has been started."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:38
-msgid "{resource_full_name} has been stopped by {user_full_name}."
+msgid "{resource_full_name} has been stopped."
 msgstr ""
 
 #: app/scripts/components/events/constants.js:39
@@ -4600,7 +4600,7 @@ msgstr ""
 msgid "Unable to import resource {resourceName}."
 msgstr ""
 
-#: app/scripts/components/core/bootstrap.js:23
+#: app/scripts/components/core/bootstrap.js:25
 msgid "Unable to load application configuration. Please reload this page."
 msgstr ""
 
