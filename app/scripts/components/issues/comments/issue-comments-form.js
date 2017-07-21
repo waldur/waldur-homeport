@@ -2,9 +2,10 @@ import template from './issue-comments-form.html';
 
 class IssueCommentsFormController {
   // @ngInject
-  constructor($rootScope, issueCommentsService) {
+  constructor($rootScope, issueCommentsService, ncUtilsFlash) {
     this.$rootScope = $rootScope;
     this.issueCommentsService = issueCommentsService;
+    this.ncUtilsFlash = ncUtilsFlash;
   }
 
   submit() {
@@ -14,7 +15,12 @@ class IssueCommentsFormController {
     return form.$save().then(() => {
       this.description = '';
       this.$rootScope.$emit('refreshCommentsList');
-    }).finally(() => {
+      this.ncUtilsFlash.success(gettext('Comment has been added.'));
+    })
+    .catch(() => {
+      this.ncUtilsFlash.error(gettext('Unable to add comment.'));
+    })
+    .finally(() => {
       this.submitting = false;
     });
   }
