@@ -311,7 +311,7 @@
   overflow: hidden;
 }
 
-.media-body {
+.chat-element .media-body {
   display: block;
   width: auto;
 }
@@ -463,8 +463,6 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
   background: #f3f3f4;
   color: inherit;
   border-color: #e7eaec;
-  /*border-bottom: 1px solid #e7eaec;*/
-  /*border-top: 1px solid #e7eaec;*/
   border-radius: 0;
 }
 
@@ -550,15 +548,15 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 }
 
 .w-150 {
-  min-height: 150px;
+  min-width: 150px;
 }
 
 .w-200 {
-  min-height: 200px;
+  min-width: 200px;
 }
 
 .w-300 {
-  min-height: 300px;
+  min-width: 300px;
 }
 
 .legendLabel {
@@ -592,6 +590,10 @@ table.dataTable thead .sorting_desc,
 table.dataTable thead .sorting_asc_disabled,
 table.dataTable thead .sorting_desc_disabled {
   background: transparent;
+}
+
+.dataTables_wrapper {
+  padding-bottom: 30px;
 }
 
 .dataTables_length {
@@ -898,22 +900,21 @@ div.dt-button-info {
   padding: 6px 12px;
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
   width: 100%;
-  font-size: 14px
 }
 
 .form-control:focus, .single-line:focus {
-  border-color: $navy !important;
-}
-
-.has-success .form-control {
   border-color: $navy;
 }
 
-.has-warning .form-control {
+.has-success .form-control, .has-success .form-control:focus {
+  border-color: $navy;
+}
+
+.has-warning .form-control, .has-warning .form-control:focus {
   border-color: $yellow;
 }
 
-.has-error .form-control {
+.has-error .form-control, .has-error .form-control:focus {
   border-color: $red;
 }
 
@@ -1452,9 +1453,6 @@ div.dt-button-info {
   padding: 10px;
 }
 
-#nestable2 .dd-handle:hover {
-  /*background: #bbb;*/
-}
 
 #nestable2 span.label {
   margin-right: 10px;
@@ -2224,7 +2222,6 @@ a.forum-item-title:hover {
   .tabs-right > .nav-tabs .active > a:hover,
   .tabs-right > .nav-tabs .active > a:focus {
     border-color: $border-color $border-color $border-color transparent;
-    *border-left-color: #ffffff;
     z-index: 1;
   }
 
@@ -2421,6 +2418,36 @@ a.forum-item-title:hover {
   border-color: $border-color;
 }
 
+.select2-container--default.select2-container--focus .select2-selection--single,
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  border-color: $navy;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: $navy;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  border-color: $border-color;
+}
+
+.select2-dropdown {
+  border-color: $border-color;
+
+  input:focus {
+    outline: none;
+  }
+}
+
+.select2-selection {
+  outline: none;
+}
+
+
+.ui-select-container.ui-select-bootstrap .ui-select-choices-row.active > a {
+  background-color: $navy;
+}
+
 /* Tour */
 
 .tour-tour .btn.btn-default {
@@ -2488,5 +2515,118 @@ body.tour-open .animated {
   .dz-message {
     font-size: 16px;
 
+  }
+}
+
+/* Activity stream */
+
+.stream {
+
+  position: relative;
+  padding: 10px 0;
+
+  &:first-child .stream-badge:before {
+    top: 10px;
+  }
+
+  &:last-child .stream-badge:before {
+    height: 30px;
+  }
+
+
+  .stream-badge {
+    width: 50px;
+
+    i {
+      border: 1px solid $border-color;
+      border-radius: 50%;
+      padding: 6px;
+      color: lighten($text-color, 10%);
+      position: absolute;
+      background-color: #ffffff;
+      left: 8px;
+
+      &.fa-circle {
+        color: lighten($text-color, 40%);
+      }
+
+
+      &.bg-success {
+        color: #ffffff;
+        background-color: $blue;
+        border-color: $blue;
+      }
+
+      &.bg-primary {
+        color: #ffffff;
+        background-color: $navy;
+        border-color: $navy;
+      }
+
+      &.bg-warning {
+        color: #ffffff;
+        background-color: $yellow;
+        border-color: $yellow;
+      }
+
+      &.bg-info {
+        color: #ffffff;
+        background-color: $lazur;
+        border-color: $lazur;
+      }
+
+      &.bg-danger {
+        color: #ffffff;
+        background-color: $red;
+        border-color: $red;
+      }
+
+    }
+
+    &:before {
+      content: '';
+      width: 1px;
+      background-color: $border-color;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 20px;
+
+    }
+
+  }
+
+  .stream-info {
+    font-size: 12px;
+    margin-bottom: 5px;
+
+    img {
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      margin-right: 2px;
+      margin-top: -4px;
+    }
+
+    .date {
+      color: lighten($text-color, 20%);
+      font-size: 80%;
+    }
+
+  }
+
+  .stream-panel {
+    margin-left: 55px;
+  }
+
+
+}
+
+.stream-small {
+  margin: 10px 0;
+
+  .label {
+    padding: 2px 6px;
+    margin-right: 2px;
   }
 }

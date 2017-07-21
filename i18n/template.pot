@@ -556,7 +556,7 @@ msgstr ""
 msgid "Bid could be created only for pending expert request."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:16
+#: app/scripts/components/experts/bids/expert-bid.html:20
 msgid "Bid description"
 msgstr ""
 
@@ -647,6 +647,10 @@ msgstr ""
 
 #: app/scripts/components/payments/routes.js:26
 msgid "Cancel payment"
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-cancel.html:9
+msgid "Cancel request"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:37
@@ -1335,11 +1339,11 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.js:32
+#: app/scripts/components/experts/bids/expert-bid.js:38
 msgid "Expert bid could not be accepted."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.js:28
+#: app/scripts/components/experts/bids/expert-bid.js:34
 msgid "Expert bid has been accepted."
 msgstr ""
 
@@ -1358,6 +1362,10 @@ msgstr ""
 #: app/scripts/components/experts/requests/expert-request-header.html:3
 #: app/scripts/components/experts/routes.js:38
 msgid "Expert request details"
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-cancel.js:29
+msgid "Expert request has been cancelled."
 msgstr ""
 
 #: app/scripts/components/experts/requests/expert-request-create.js:60
@@ -3038,7 +3046,7 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:26
+#: app/scripts/components/experts/bids/expert-bid.html:30
 msgid "PRICE"
 msgstr ""
 
@@ -4187,7 +4195,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:20
+#: app/scripts/components/experts/bids/expert-bid.html:24
 msgid "SUBMITTED"
 msgstr ""
 
@@ -4548,6 +4556,10 @@ msgstr ""
 
 #: app/scripts/components/plans/plan-agreement-cancel.js:25
 msgid "Unable to cancel billing plan."
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-cancel.js:33
+msgid "Unable to cancel expert request."
 msgstr ""
 
 #: app/scripts/components/invitations/actions/cancel.js:17
