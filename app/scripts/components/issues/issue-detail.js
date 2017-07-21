@@ -3,12 +3,11 @@ import template from './issue-detail.html';
 const issueDetail = {
   template,
   controller: class IssueDetailController {
-    constructor($q, $stateParams, $state, $rootScope, issuesService, usersService) {
-      // @ngInject
+    // @ngInject
+    constructor($q, $stateParams, $state, issuesService, usersService) {
       this.$q = $q;
       this.$stateParams = $stateParams;
       this.$state = $state;
-      this.$rootScope = $rootScope;
       this.issuesService = issuesService;
       this.usersService = usersService;
     }
@@ -35,10 +34,6 @@ const issueDetail = {
 
     showLink() {
       return this.issue.link && (this.currentUser.is_staff || this.currentUser.is_support);
-    }
-
-    onCommentCreated() {
-      this.$rootScope.$emit('refreshCommentsList');
     }
   }
 };

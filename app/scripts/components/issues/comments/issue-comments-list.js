@@ -1,6 +1,6 @@
 import template from './issue-comments-list.html';
 
-export const issueCommentsList = {
+const issueCommentsList = {
   template,
   bindings: {
     issue: '<'
@@ -42,3 +42,5 @@ export const issueCommentsList = {
     }
   }
 };
+
+export default issueCommentsList;

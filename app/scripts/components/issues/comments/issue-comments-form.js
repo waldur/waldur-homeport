@@ -1,21 +1,9 @@
 import template from './issue-comments-form.html';
 
-export default function issueCommentsForm() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: IssueCommentsFormController,
-    controllerAs: '$ctrl',
-    scope: {
-      issue: '=',
-      onCommentCreated: '&'
-    },
-    bindToController: true
-  };
-}
-
 class IssueCommentsFormController {
-  constructor(issueCommentsService) {
+  // @ngInject
+  constructor($rootScope, issueCommentsService) {
+    this.$rootScope = $rootScope;
     this.issueCommentsService = issueCommentsService;
   }
 
@@ -25,9 +13,19 @@ class IssueCommentsFormController {
     this.submitting = true;
     return form.$save().then(() => {
       this.description = '';
-      return this.onCommentCreated();
+      this.$rootScope.$emit('refreshCommentsList');
     }).finally(() => {
       this.submitting = false;
     });
   }
 }
+
+const issueCommentsForm = {
+  template,
+  controller: IssueCommentsFormController,
+  bindings: {
+    issue: '<',
+  },
+};
+
+export default issueCommentsForm;
