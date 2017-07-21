@@ -20,15 +20,18 @@ const expertRequestCancel = {
     }
 
     canCancelRequest() {
-      return this.canManageRequest && this.expertRequest.state === 'Active';
+      const state = this.expertRequest.state;
+      return this.canManageRequest && (state === 'Active' || state === 'Pending');
     }
 
     cancelRequest() {
       return this.expertRequestsService.cancel(this.expertRequest).then(() => {
         this.ncUtilsFlash.success(gettext('Expert request has been cancelled.'));
         this.$rootScope.$broadcast('refreshExpertDetails');
-      }).catch(() => {
-        this.ncUtilsFlash.error(gettext('Unable to cancel expert request.'));
+      }).catch(response => {
+        const details = `Errors: ${JSON.stringify(response.data)}`;
+        const message = gettext('Unable to cancel expert request.') + details;
+        this.ncUtilsFlash.error(message);
       });
     }
   }
