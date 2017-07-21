@@ -1,4 +1,5 @@
 import template from './language-selector-menu-item.html';
+import './language-selector-menu-item.scss';
 
 const languageSelectorMenuItem = {
   template,
