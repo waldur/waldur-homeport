@@ -7,11 +7,17 @@ const expertBid = {
   },
   controller: class ExpertBidDetailsController {
     // @ngInject
-    constructor($uibModal, expertBidsService, $rootScope, ncUtilsFlash) {
+    constructor($uibModal, expertBidsService, $rootScope, ncUtilsFlash, customersService) {
       this.$uibModal = $uibModal;
       this.expertBidsService = expertBidsService;
       this.$rootScope = $rootScope;
       this.ncUtilsFlash = ncUtilsFlash;
+      this.customersService = customersService;
+    }
+
+    $onInit() {
+      this.customersService.isOwnerOrStaff()
+        .then(canManageRequest => this.canManageRequest = canManageRequest);
     }
 
     openUserDetails(user) {

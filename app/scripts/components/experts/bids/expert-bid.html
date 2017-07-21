@@ -1,7 +1,11 @@
 <div class="ibox">
   <div class="ibox-title">
     <h5>{{ $ctrl.bid.team_name }}</h5>
-    <button class="pull-right btn btn-primary btn-xs" ng-click="$ctrl.accept()" translate>ACCEPT</button>
+    <button
+      class="pull-right btn btn-primary btn-xs"
+      ng-click="$ctrl.accept()"
+      ng-if="$ctrl.canManageRequest"
+      translate>ACCEPT</button>
   </div>
   <div class="ibox-content">
     <div class="team-members">
