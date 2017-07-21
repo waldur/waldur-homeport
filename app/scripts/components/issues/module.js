@@ -2,10 +2,7 @@ import issuesService from './issues-service';
 import IssueTypesService from './issue-types-service';
 import IssueNavigationService from './issue-navigation-service';
 import issueUsersService from './issue-users';
-import issueCommentsService from './issue-comments-service';
 import issueDetail from './issue-detail';
-import { issueCommentsList } from './issue-comments-list';
-import issueCommentsForm from './issue-comments-form';
 import issuesList from './issues-list';
 import issueRoutes from './routes';
 import issuesWorkspace from './issues-workspace';
@@ -19,6 +16,7 @@ import issueCreateDialog from './issue-create-dialog';
 import issueRegistration from './issue-registration';
 import {ISSUE_IDS} from './constants';
 import issueTypeSelect from './issue-type-select';
+import issueCommentsModule from './comments/module';
 
 export default module => {
   module.constant('ISSUE_IDS', ISSUE_IDS);
@@ -26,11 +24,8 @@ export default module => {
   module.service('IssueTypesService', IssueTypesService);
   module.service('IssueNavigationService', IssueNavigationService);
   module.service('issueUsersService', issueUsersService);
-  module.service('issueCommentsService', issueCommentsService);
   module.directive('issuesList', issuesList);
   module.component('issueDetail', issueDetail);
-  module.component('issueCommentsList', issueCommentsList);
-  module.directive('issueCommentsForm', issueCommentsForm);
   module.component('issuesWorkspace', issuesWorkspace);
   module.component('issuesDashboard', issuesDashboard);
   module.component('issuesShortList', issuesShortList);
@@ -42,4 +37,5 @@ export default module => {
   module.directive('issueRegistration', issueRegistration);
   module.component('issueTypeSelect', issueTypeSelect);
   module.config(issueRoutes);
+  issueCommentsModule(module);
 };

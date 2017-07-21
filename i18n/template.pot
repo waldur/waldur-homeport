@@ -195,7 +195,7 @@ msgstr ""
 msgid "Activity stream"
 msgstr ""
 
-#: app/scripts/components/issues/issue-comments-form.html:17
+#: app/scripts/components/issues/comments/issue-comments-form.html:17
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:53
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:39
 #: app/scripts/components/team/add-project-member.js:22
@@ -556,7 +556,7 @@ msgstr ""
 msgid "Bid could be created only for pending expert request."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:16
+#: app/scripts/components/experts/bids/expert-bid.html:20
 msgid "Bid description"
 msgstr ""
 
@@ -622,7 +622,7 @@ msgstr ""
 #: app/scripts/components/form/appstore-form-wizard.html:54
 #: app/scripts/components/invitations/actions/cancel.js:8
 #: app/scripts/components/invitations/actions/invitation-dialog.html:77
-#: app/scripts/components/issues/issue-comments-form.html:22
+#: app/scripts/components/issues/comments/issue-comments-form.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:128
 #: app/scripts/components/offering/appstore-offering.html:19
@@ -647,6 +647,10 @@ msgstr ""
 
 #: app/scripts/components/payments/routes.js:26
 msgid "Cancel payment"
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-cancel.html:9
+msgid "Cancel request"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:37
@@ -730,12 +734,12 @@ msgstr ""
 msgid "Code"
 msgstr ""
 
-#: app/scripts/components/issues/issue-comments-form.html:10
-#: app/scripts/components/issues/issue-comments-form.html:6
+#: app/scripts/components/issues/comments/issue-comments-form.html:10
+#: app/scripts/components/issues/comments/issue-comments-form.html:6
 msgid "Comment"
 msgstr ""
 
-#: app/scripts/components/issues/issue-comments-list.html:22
+#: app/scripts/components/issues/comments/issue-comments-list.html:22
 msgid "commented"
 msgstr ""
 
@@ -743,8 +747,7 @@ msgstr ""
 msgid "commented on"
 msgstr ""
 
-#: app/scripts/components/issues/issue-detail.html:98
-#: app/scripts/components/offering/offering-summary.html:84
+#: app/scripts/components/issues/comments/issue-comments-container.html:3
 msgid "Comments"
 msgstr ""
 
@@ -1335,11 +1338,11 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.js:32
+#: app/scripts/components/experts/bids/expert-bid.js:38
 msgid "Expert bid could not be accepted."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.js:28
+#: app/scripts/components/experts/bids/expert-bid.js:34
 msgid "Expert bid has been accepted."
 msgstr ""
 
@@ -1358,6 +1361,10 @@ msgstr ""
 #: app/scripts/components/experts/requests/expert-request-header.html:3
 #: app/scripts/components/experts/routes.js:38
 msgid "Expert request details"
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-cancel.js:29
+msgid "Expert request has been cancelled."
 msgstr ""
 
 #: app/scripts/components/experts/requests/expert-request-create.js:60
@@ -3038,7 +3045,7 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:26
+#: app/scripts/components/experts/bids/expert-bid.html:30
 msgid "PRICE"
 msgstr ""
 
@@ -4187,7 +4194,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:20
+#: app/scripts/components/experts/bids/expert-bid.html:24
 msgid "SUBMITTED"
 msgstr ""
 
@@ -4363,7 +4370,7 @@ msgstr ""
 msgid "There are no bids yet."
 msgstr ""
 
-#: app/scripts/components/issues/issue-comments-list.html:5
+#: app/scripts/components/issues/comments/issue-comments-list.html:5
 msgid "There are no comments yet."
 msgstr ""
 
@@ -4550,6 +4557,10 @@ msgstr ""
 msgid "Unable to cancel billing plan."
 msgstr ""
 
+#: app/scripts/components/experts/requests/expert-request-cancel.js:33
+msgid "Unable to cancel expert request."
+msgstr ""
+
 #: app/scripts/components/invitations/actions/cancel.js:17
 msgid "Unable to cancel invitation."
 msgstr ""
@@ -4612,7 +4623,7 @@ msgstr ""
 msgid "Unable to load application configuration. Please reload this page."
 msgstr ""
 
-#: app/scripts/components/issues/issue-comments-list.html:8
+#: app/scripts/components/issues/comments/issue-comments-list.html:8
 msgid "Unable to load comments."
 msgstr ""
 

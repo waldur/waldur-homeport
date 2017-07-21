@@ -93,12 +93,6 @@
   </div>
 </div>
 
-<div class="ibox" ng-if="!$ctrl.loading && $ctrl.issue">
-  <div class="ibox-title">
-    <h4 translate>Comments</h4>
-  </div>
-  <div class="ibox-content">
-    <issue-comments-list issue="$ctrl.issue"></issue-comments-list>
-    <issue-comments-form issue="$ctrl.issue" on-comment-created="$ctrl.onCommentCreated()"></issue-comments-form>
-  </div>
+<div ng-if="!$ctrl.loading && $ctrl.issue">
+  <issue-comments-container issue="$ctrl.issue"></issue-comments-container>
 </div>
