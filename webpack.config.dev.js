@@ -4,6 +4,7 @@ const merge = require('webpack-merge');
 var path = require('path');
 
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var CleanUpStatsPlugin = require('./webpack-cleanup-stats');
 
 module.exports = merge(baseConfig, {
   output: {
@@ -19,6 +20,7 @@ module.exports = merge(baseConfig, {
       debug: true,
       failOnError: false,
     }),
+    new CleanUpStatsPlugin(),
   ],
   watch: true,
   devServer: {
