@@ -2,7 +2,7 @@
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 $sidebar-width;
-    min-height: 1200px;
+    min-height: 100vh;
   }
 
   .navbar-static-side {
@@ -23,7 +23,7 @@
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 0;
-    min-height: 1000px;
+    min-height: 100vh;
   }
 
   .body-small .navbar-static-side {
@@ -50,7 +50,7 @@
     float: left;
   }
 
-  .sidebard-panel {
+  .sidebar-panel {
     z-index: 2;
     position: relative;
     width: auto;
@@ -77,6 +77,17 @@
     float: none;
     text-align: right;
     display: block;
+  }
+
+  .navbar-static-side { display: none; }
+
+  body:not(.mini-navbar) {
+    -webkit-transition: background-color 500ms linear;
+    -moz-transition: background-color 500ms linear;
+    -o-transition: background-color 500ms linear;
+    -ms-transition: background-color 500ms linear;
+    transition: background-color 500ms linear;
+    background-color: #f3f3f4
   }
 
 }
@@ -119,4 +130,3 @@
   }
 
 }
-

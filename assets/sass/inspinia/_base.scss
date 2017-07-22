@@ -22,7 +22,7 @@ body.full-height-layout #page-wrapper {
 }
 
 body.boxed-layout {
-  background: $boxed-backgound;
+  background: $boxed-background;
 }
 
 body.boxed-layout #wrapper {
@@ -119,6 +119,12 @@ video {
 
 .note-editor.fullscreen {
   z-index: 2050;
+}
+.note-editor.note-frame.fullscreen { z-index: 2020; }
+
+.note-editor.note-frame .note-editing-area .note-editable {
+  color: $text-color;
+  padding: 15px;
 }
 
 .note-editor.note-frame {
@@ -534,10 +540,10 @@ code {
   border-color: $border-color;
   border-image: none;
   border-style: solid solid none;
-  border-width: 3px 0 0;
+  border-width: 2px 0 0;
   color: inherit;
   margin-bottom: 0;
-  padding: 14px 15px 7px;
+  padding: 15px 15px 7px;
   min-height: 48px;
 }
 
@@ -658,13 +664,13 @@ table.table-mail tr td {
   background-color: #ffffff;
 }
 
-.navy-bg, .bg-success {
-  background-color: $navy;
+.blue-bg, .bg-success {
+  background-color: $blue;
   color: #ffffff;
 }
 
-.blue-bg, .bg-primary {
-  background-color: $blue;
+.navy-bg, .bg-primary {
+  background-color: $navy;
   color: #ffffff;
 }
 
@@ -1014,6 +1020,10 @@ a.close-canvas-menu:hover {
 
 .m-xxs {
   margin: 2px 4px;
+}
+
+.m {
+  margin: 15px;
 }
 
 .m-xs {
@@ -1379,6 +1389,14 @@ body.fullscreen-ibox-mode {
 // Fix
 body.modal-open {
   padding-right: inherit !important;
+}
+
+
+// Fix modal in Safari browser
+body.modal-open .wrapper-content.animated {
+  -webkit-animation: none;
+  -ms-animation-nam: none;
+  animation: none;
 }
 
 // Fix for modal backdrop with animate.css
