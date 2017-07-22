@@ -1,0 +1,1 @@
+window.gettext = x => x;
