@@ -8,6 +8,7 @@ var OfflinePlugin = require('offline-plugin');
 module.exports = merge(baseConfig, {
   output: {
     path: path.resolve(__dirname, './dist/static/'),
+    publicPath: 'static/',
     filename: 'js/[name]-bundle.[chunkhash].js'
   },
   plugins: [

@@ -18,7 +18,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './app/static'),
-    filename: 'js/[name]-bundle.js'
+    filename: 'js/[name]-bundle.js',
+    chunkFilename: 'js/[name].[chunkhash].js',
   },
   devtool: 'source-map',
   module: {

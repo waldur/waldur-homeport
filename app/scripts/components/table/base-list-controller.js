@@ -1,3 +1,7 @@
+function loadDatatables() {
+  return import(/* webpackChunkName: "datatables" */ '../../shims/datatables');
+}
+
 // @ngInject
 export default function baseControllerListClass(baseControllerClass, ENV, $rootScope, currentStateService, ncUtils) {
   /**
@@ -31,8 +35,10 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       this._super();
       this.hideNoDataText = true;
       this.initialized = false;
-      this.listPromise = this.getList().finally(() => this.initialized = true);
-      this.blockListElement();
+      loadDatatables().then(() => {
+        this.listPromise = this.getList().finally(() => this.initialized = true);
+        this.blockListElement();
+      })
       // reset after state change
       this.enableRefresh = true;
       $rootScope.$on('resourceDeletion', this.toggleRefresh.bind(this));

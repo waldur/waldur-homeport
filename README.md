@@ -1,6 +1,6 @@
 ## Introduction
 
-Waldur HomePort is web-based client for the [Waldur MasterMind][4].
+Waldur HomePort is web-based client for the [Waldur MasterMind][1].
 It uses yarn for dependency management and webpack as module bundler.
 
 ## System Requirements
@@ -39,7 +39,7 @@ cp app/scripts/configs/config.json.example app/scripts/configs/config.json
 
 5. Configure `config.json`. Please read [Configuration guide](docs/config.md) to learn more.
 
-6. Run application: `npm start`.
+6. Run application: `yarn start`.
 
 Server will listen on `//localhost:8000`
 
@@ -70,6 +70,4 @@ CORS_EXPOSE_HEADERS = (
 
 See [Development guidelines](docs/development_guideline.md) for development policies.
 
-[1]: http://bower.io
-[2]: http://gruntjs.com
-[4]: https://github.com/opennode/nodeconductor-assembly-waldur
+[1]: https://github.com/opennode/nodeconductor-assembly-waldur

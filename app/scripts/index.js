@@ -62,14 +62,14 @@ const appModule = angular.module('waldur', [
   'angulartics',
   'angulartics.google.analytics',
   'ngFileUpload',
-  'xeditable',
   'blockUI',
   'ngSanitize',
   'leaflet-directive',
   'angular-cron-jobs',
   'ui.bootstrap',
   'ui.slimscroll',
-  'angular-bind-html-compile'
+  'angular-bind-html-compile',
+  'oc.lazyLoad',
 ]);
 
 rootModule(appModule);

@@ -624,7 +624,7 @@ msgstr ""
 #: app/scripts/components/invitations/actions/invitation-dialog.html:77
 #: app/scripts/components/issues/comments/issue-comments-form.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:99
-#: app/scripts/components/navigation/select-workspace-dialog.html:128
+#: app/scripts/components/navigation/select-workspace-dialog.html:129
 #: app/scripts/components/offering/appstore-offering.html:19
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:54
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:43
@@ -787,7 +787,6 @@ msgid "Confirm changing your plan"
 msgstr ""
 
 #: app/scripts/components/customer/customer-manage.js:111
-#: app/scripts/components/table/base-list-controller.js:149
 msgid "Confirm deletion?"
 msgstr ""
 
@@ -1548,7 +1547,7 @@ msgstr ""
 msgid "generate automatically"
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:125
+#: app/scripts/components/navigation/select-workspace-dialog.html:126
 msgid "Go to my profile"
 msgstr ""
 
@@ -3776,7 +3775,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.html:40
 #: app/scripts/components/appstore/category-selector-tabs.html:19
-#: app/scripts/components/navigation/select-workspace-dialog.html:115
+#: app/scripts/components/navigation/select-workspace-dialog.html:116
 #: app/scripts/components/navigation/select-workspace-dialog.html:58
 #: app/views/directives/import-resource-button.html:6
 msgid "Select"

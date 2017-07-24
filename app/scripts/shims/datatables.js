@@ -1,4 +1,8 @@
 import 'jszip';
+
+import '!script-loader!pdfmake/build/pdfmake.min.js';
+import '!script-loader!pdfmake/build/vfs_fonts.js';
+
 import 'datatables.net';
 import 'datatables.net-bs';
 import 'datatables.net-bs/css/dataTables.bootstrap.css';
