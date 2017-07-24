@@ -739,6 +739,10 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
+#: app/scripts/components/issues/comments/issue-comments-form.js:18
+msgid "Comment has been added."
+msgstr ""
+
 #: app/scripts/components/issues/comments/issue-comments-list.html:22
 msgid "commented"
 msgstr ""
@@ -4547,6 +4551,10 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-activation.js:22
 msgid "Unable to activate account."
+msgstr ""
+
+#: app/scripts/components/issues/comments/issue-comments-form.js:21
+msgid "Unable to add comment."
 msgstr ""
 
 #: app/scripts/components/plans/plan-agreement-approve.js:26

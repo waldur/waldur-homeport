@@ -1,1 +1,1 @@
-require('!script!../class');
+require('!script-loader!../class');

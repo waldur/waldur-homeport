@@ -1,8 +1,6 @@
 import $ from 'jquery';
 import angular from 'angular';
 import moment from 'moment';
-
-window.gettext = angular.identity;
 window.moment = moment;
 
 import './shims';
