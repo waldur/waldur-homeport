@@ -164,11 +164,6 @@ export function errorsHandler($httpProvider, blockUIConfig) {
 }
 
 // @ngInject
-export function setEditableOptions(editableOptions) {
-  editableOptions.theme = 'bs3';
-}
-
-// @ngInject
 export function closeDialogs($rootScope, $uibModalStack) {
   $rootScope.$on('$stateChangeSuccess', function() {
     $uibModalStack.dismissAll();

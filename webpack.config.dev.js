@@ -9,7 +9,7 @@ var CleanUpStatsPlugin = require('./webpack-cleanup-stats');
 module.exports = merge(baseConfig, {
   output: {
     path: path.resolve(__dirname, './app/'),
-    filename: 'js/[name]-bundle.js'
+    filename: 'static/js/[name]-bundle.js'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -26,7 +26,6 @@ module.exports = merge(baseConfig, {
   devServer: {
     // look for missing files in app folder (app has to be built one more time for this)
     contentBase: path.resolve(__dirname, './app/'),
-    publicPath: '/static/',
     hot: true,
     inline: true,
     port: 8001,

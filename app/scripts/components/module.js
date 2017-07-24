@@ -6,7 +6,6 @@ import {
   featuresProviderConfig,
   httpInterceptor,
   errorsHandler,
-  setEditableOptions,
   closeDialogs
 } from './app';
 import ncUtilsFlash from './utils';
@@ -21,7 +20,6 @@ export default module => {
   module.config(featuresProviderConfig);
   module.factory('httpInterceptor', httpInterceptor);
   module.config(errorsHandler);
-  module.run(setEditableOptions);
   module.run(closeDialogs);
   module.factory('ncUtilsFlash', ncUtilsFlash);
   module.factory('ncUtilsFlash', ncUtilsFlash);
