@@ -38,7 +38,7 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       loadDatatables().then(() => {
         this.listPromise = this.getList().finally(() => this.initialized = true);
         this.blockListElement();
-      })
+      });
       // reset after state change
       this.enableRefresh = true;
       $rootScope.$on('resourceDeletion', this.toggleRefresh.bind(this));
