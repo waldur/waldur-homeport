@@ -74,6 +74,7 @@
     "start": "webpack-dev-server --progress --config webpack.config.dev.js",
     "prebuild": "npm run locale-extract",
     "build": "webpack --config=webpack.config.prod.js",
+    "pretest": "npm run build",
     "test": "npm run lint && npm run test-single-run",
     "lint": "eslint app/scripts/components",
     "test-server": "karma start test/karma.conf.js",
