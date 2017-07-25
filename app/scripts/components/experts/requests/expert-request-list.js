@@ -45,6 +45,10 @@ function ExpertRequestListController(
           }
         },
         {
+          title: gettext('Organization'),
+          render: row => row.customer_name
+        },
+        {
           title: gettext('Project'),
           render: row => row.project_name
         },
