@@ -45,7 +45,7 @@ import servicesModule from './components/services/module';
 import freeipaModule from './components/freeipa/module';
 import rootModule from './components/module';
 import priceModule from './components/price/module';
-
+import ansibleModule from './components/ansible/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -114,5 +114,6 @@ controllersModule(appModule);
 directivesModule(appModule);
 servicesModule(appModule);
 freeipaModule(appModule);
+ansibleModule(appModule);
 
 bootstrap('waldur');
