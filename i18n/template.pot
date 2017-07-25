@@ -882,7 +882,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/module.js:57
 #: app/scripts/components/openstack/openstack-volume/module.js:71
 #: app/scripts/components/project/project-issues.js:31
-#: app/scripts/components/resource/list/resources-list.js:138
+#: app/scripts/components/resource/list/resources-list.js:141
 #: app/scripts/components/resource/tabs/resource-issues.js:26
 #: app/scripts/components/user/hooks/hook-details.html:77
 msgid "Create"
@@ -1655,7 +1655,7 @@ msgstr ""
 msgid "Image name"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:121
+#: app/scripts/components/resource/list/resources-list.js:124
 #: app/views/import/import.html:150
 msgid "Import"
 msgstr ""
@@ -1664,7 +1664,7 @@ msgstr ""
 msgid "Import application"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:105
+#: app/scripts/components/resource/list/resources-list.js:108
 msgid "Import is not possible as there are no personal provider accounts registered."
 msgstr ""
 
@@ -1676,7 +1676,7 @@ msgstr ""
 msgid "Import resources from provider"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:108
+#: app/scripts/components/resource/list/resources-list.js:111
 msgid "Import resources from the registered provider accounts."
 msgstr ""
 
@@ -2226,7 +2226,7 @@ msgstr ""
 #: app/scripts/components/providers/details/provider-settings.js:44
 #: app/scripts/components/providers/provider-list.js:55
 #: app/scripts/components/resource/actions/constants.js:20
-#: app/scripts/components/resource/list/resources-list.js:42
+#: app/scripts/components/resource/list/resources-list.js:45
 #: app/views/directives/importable-resources.html:14
 msgid "Name"
 msgstr ""
@@ -2472,7 +2472,7 @@ msgstr ""
 msgid "No requested services found matching filter."
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:37
+#: app/scripts/components/resource/list/resources-list.js:40
 msgid "No resources found matching filter."
 msgstr ""
 
@@ -2685,7 +2685,7 @@ msgstr ""
 msgid "Open in Service Desk"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:161
+#: app/scripts/components/resource/list/resources-list.js:164
 msgid "Open map"
 msgstr ""
 
@@ -3250,7 +3250,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-compare-list.js:51
 #: app/scripts/components/appstore/appstore-store.html:32
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:9
-#: app/scripts/components/resource/list/resources-list.js:51
+#: app/scripts/components/resource/list/resources-list.js:54
 #: app/scripts/components/resource/summary/resource-summary-base.html:21
 #: app/views/help/list.html:10
 msgid "Provider"
@@ -3356,7 +3356,7 @@ msgstr ""
 #: app/scripts/components/error/routes.js:25
 #: app/scripts/components/project/projects-list.js:153
 #: app/scripts/components/providers/provider-list.js:182
-#: app/scripts/components/resource/list/resources-list.js:102
+#: app/scripts/components/resource/list/resources-list.js:105
 #: app/scripts/components/resource/resource-provision-policy.js:14
 msgid "Quota has been reached."
 msgstr ""
@@ -4138,7 +4138,7 @@ msgstr ""
 #: app/scripts/components/plans/plan-agreements-list.js:26
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:38
 #: app/scripts/components/providers/provider-list.js:62
-#: app/scripts/components/resource/list/resources-list.js:60
+#: app/scripts/components/resource/list/resources-list.js:63
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
 #: app/scripts/components/user/hooks/hook-list.js:26
 msgid "State"
@@ -5097,7 +5097,7 @@ msgstr ""
 msgid "You have no requested services."
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:36
+#: app/scripts/components/resource/list/resources-list.js:39
 msgid "You have no resources yet."
 msgstr ""
 

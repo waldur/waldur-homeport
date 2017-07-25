@@ -64,7 +64,6 @@ const appModule = angular.module('waldur', [
   'ngFileUpload',
   'blockUI',
   'ngSanitize',
-  'leaflet-directive',
   'angular-cron-jobs',
   'ui.bootstrap',
   'ui.slimscroll',

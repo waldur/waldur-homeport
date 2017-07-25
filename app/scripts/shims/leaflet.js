@@ -2,7 +2,6 @@
 // see more details:
 // https://github.com/PaulLeCam/react-leaflet/issues/255
 // https://github.com/Leaflet/Leaflet/issues/4968
-import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 // remove to avoid 414 error.
 delete L.Icon.Default.prototype._getIconUrl;
@@ -16,3 +15,5 @@ L.Icon.Default.mergeOptions({
     iconUrl: 'static/images/marker-icon.png',
     shadowUrl: 'static/images/marker-shadow.png',
 });
+import 'angular-leaflet-directive';
+export default 'leaflet-directive';

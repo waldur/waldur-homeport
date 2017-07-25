@@ -1,3 +1,3 @@
 import './class';
-import './leaflet';
 import './slimscroll';
+import 'leaflet/dist/leaflet.css';

@@ -1,3 +1,5 @@
+import loadLeafleat from '../../../shims/load-leaflet';
+
 // @ngInject
 export default function baseResourceListController(
   baseControllerListClass,
@@ -10,6 +12,7 @@ export default function baseResourceListController(
   projectsService,
   ResourceProvisionPolicy,
   $uibModal,
+  $ocLazyLoad,
   $rootScope,
   $state,
   $q,
@@ -214,12 +217,15 @@ export default function baseResourceListController(
       } else {
         var scope = $rootScope.$new();
         scope.markers = markers;
-        // eslint-disable-next-line no-undef
-        scope.maxbounds = new L.LatLngBounds(markers);
-        $uibModal.open({
-          template: '<leaflet width="100%" markers="markers" maxbounds="maxbounds"></leaflet>',
-          windowClass: 'map-dialog',
-          scope: scope
+        loadLeafleat().then(module => {
+          $ocLazyLoad.load({name: module.default});
+          // eslint-disable-next-line no-undef
+          scope.maxbounds = new L.LatLngBounds(markers);
+          $uibModal.open({
+            template: '<leaflet width="100%" markers="markers" maxbounds="maxbounds"></leaflet>',
+            windowClass: 'map-dialog',
+            scope: scope
+          });
         });
       }
     },
