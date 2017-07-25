@@ -404,6 +404,8 @@ msgid "API token lifetime"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:27
+#: app/scripts/components/ansible/appstore-category.js:14
+#: app/scripts/components/ansible/routes.js:9
 #: app/scripts/components/appstore/routes.js:42
 #: app/scripts/components/configs/base-config.js:111
 #: app/scripts/components/configs/base-config.js:92
