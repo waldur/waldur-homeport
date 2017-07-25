@@ -37,8 +37,6 @@ import 'angular-translate-storage-local';
 import 'angular-translate-loader-static-files';
 import 'ng-file-upload';
 import 'angular-sanitize';
-import 'leaflet';
-import 'angular-leaflet-directive';
 import 'angular-ui-bootstrap';
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 import 'angular-bind-html-compile-ci-dev';
