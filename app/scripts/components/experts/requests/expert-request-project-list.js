@@ -1,3 +1,5 @@
+import { APPSTORE_CATEGORY } from './constants';
+
 const expertRequestList = {
   templateUrl: 'views/partials/filtered-list.html',
   controllerAs: 'ListController',
@@ -7,9 +9,12 @@ const expertRequestList = {
 // @ngInject
 function ExpertRequestListController(
   baseControllerListClass,
+  $q,
   $state,
   $filter,
   expertRequestsService,
+  AppStoreUtilsService,
+  customersService,
   currentStateService) {
   let controllerScope = this;
   let Controller = baseControllerListClass.extend({
@@ -17,11 +22,20 @@ function ExpertRequestListController(
       this.controllerScope = controllerScope;
       this.service = expertRequestsService;
       let fn = this._super.bind(this);
-      currentStateService.getProject().then(project => {
-        this.project = project;
+      this.loadContext().then(() => {
         this.tableOptions = this.getTableOptions();
         fn();
       });
+    },
+    loadContext: function() {
+      return $q.all([
+        customersService.isOwnerOrStaff().then(isOwnerOrStaff => {
+          this.isOwnerOrStaff = isOwnerOrStaff;
+        }),
+        currentStateService.getProject().then(project => {
+          this.project = project;
+        }),
+      ]);
     },
     getTableOptions: function() {
       return {
@@ -29,7 +43,7 @@ function ExpertRequestListController(
         noDataText: gettext('You have no expert requests.'),
         noMatchesText: gettext('No expert requests found matching filter.'),
         columns: this.getColumns(),
-        rowActions: [],
+        tableActions: this.getTableActions(),
       };
     },
     getColumns: function() {
@@ -61,6 +75,21 @@ function ExpertRequestListController(
           }
         }
       ];
+    },
+    getTableActions: function() {
+      let actions = [];
+      if (this.isOwnerOrStaff) {
+        actions.push({
+          title: gettext('Add request'),
+          iconClass: 'fa fa-plus',
+          callback: () => {
+            AppStoreUtilsService.openDialog({
+              currentCategory: APPSTORE_CATEGORY
+            });
+          },
+        });
+      }
+      return actions;
     },
     getFilter: function() {
       return {

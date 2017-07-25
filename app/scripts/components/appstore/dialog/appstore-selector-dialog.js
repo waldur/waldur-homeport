@@ -1,14 +1,13 @@
-import template from './category-selector.html';
-import './category-selector.scss';
+import template from './appstore-selector-dialog.html';
 
-const appstoreCategorySelector = {
+const appstoreSelectorDialog = {
   template,
   bindings: {
     dismiss: '&',
     close: '&',
     resolve: '<'
   },
-  controller: class AppStoreCategorySelectorController {
+  controller: class AppstoreSelectorDialogController {
     // @ngInject
     constructor(
       $q,
@@ -52,12 +51,12 @@ const appstoreCategorySelector = {
 
     loadProject() {
       this.$scope.$watch(() => this.selectedProject, () => this.checkPolicy());
-      this.selectProject = this.resolve.selectProject;
+      this.selectProject = this.resolve.options.selectProject;
 
       return this.usersService.getCurrentUser()
         .then(user => this.currentUser = user)
         .then(() => {
-          if (this.resolve.selectProject) {
+          if (this.selectProject) {
             return this.currentStateService.getCustomer().then(customer => {
               this.projects = customer.projects;
             });
@@ -101,7 +100,19 @@ const appstoreCategorySelector = {
     loadCategories() {
       return this.AppstoreCategoriesService.getGroups().then(groups => {
         this.groups = groups;
-      }).then(() => this.checkPolicy());
+        this.initCurrentGroup();
+        this.checkPolicy();
+      });
+    }
+
+    initCurrentGroup() {
+      this.currentGroup = 0;
+      if (this.resolve.options.currentCategory) {
+        const matches = this.groups.filter(group => group.label === this.resolve.options.currentCategory);
+        if (matches.length === 1) {
+          this.currentGroup = this.groups.indexOf(matches[0]);
+        }
+      }
     }
 
     selectCategory(category) {
@@ -144,4 +155,4 @@ const appstoreCategorySelector = {
   }
 };
 
-export default appstoreCategorySelector;
+export default appstoreSelectorDialog;

@@ -1,4 +1,4 @@
-import {flatten} from '../core/utils';
+import {flatten} from '../../core/utils';
 
 function groupBy(field, items) {
   return items.reduce(function(result, item) {

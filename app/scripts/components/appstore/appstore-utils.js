@@ -5,13 +5,14 @@ export default class AppStoreUtilsService {
   }
 
   openDialog(options) {
+    // options is an object with fields:
+    // currentCategory: string - name of category to be selected
+    // selectProject: boolean - allows to toogle display of project selector
     this.$uibModal.open({
-      component: 'appstoreCategorySelector',
+      component: 'appstoreSelectorDialog',
       size: 'lg',
       resolve: {
-        selectProject: function() {
-          return options && options.selectProject;
-        }
+        options: () => options,
       }
     });
   }
