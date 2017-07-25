@@ -16,7 +16,7 @@ export default function expertRequestsRoutes($stateProvider) {
       url: 'experts/',
       template: '<expert-requests-list/>',
       data: {
-        pageTitle: gettext('Expert requests list'),
+        pageTitle: gettext('Requests for experts'),
         feature: 'experts'
       }
     })
@@ -25,7 +25,7 @@ export default function expertRequestsRoutes($stateProvider) {
       url: 'experts/',
       template: '<expert-requests-project-list/>',
       data: {
-        pageTitle: gettext('Expert requests list'),
+        pageTitle: gettext('Requests for experts'),
         feature: 'experts'
       }
     })
