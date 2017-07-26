@@ -12,6 +12,8 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
             index: 1100,
           }
         ];
+      } else {
+        return [];
       }
     });
   });

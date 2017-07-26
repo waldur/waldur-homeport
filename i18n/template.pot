@@ -623,7 +623,7 @@ msgstr ""
 #: app/scripts/components/digitalocean/droplet-resize.html:76
 #: app/scripts/components/events/event-details-dialog.html:133
 #: app/scripts/components/events/event-types-dialog.html:14
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:67
+#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:88
 #: app/scripts/components/experts/requests/expert-request-create.html:19
 #: app/scripts/components/form/appstore-form-wizard.html:54
 #: app/scripts/components/invitations/actions/cancel.js:8
@@ -875,7 +875,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-store.html:20
 #: app/scripts/components/appstore/appstore-store.html:51
 #: app/scripts/components/customer/customer-issues.js:31
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:64
+#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:85
 #: app/scripts/components/experts/requests/expert-request-create.html:16
 #: app/scripts/components/freeipa/freeipa-account-create.html:67
 #: app/scripts/components/issues/issue-create-dialog.js:10
@@ -1081,7 +1081,7 @@ msgstr ""
 msgid "Deployment plan does not have any item yet."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:48
+#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:69
 #: app/scripts/components/experts/requests/expert-request-create.js:47
 #: app/scripts/components/experts/requests/expert-request-summary.html:22
 #: app/scripts/components/issues/issue-detail.html:89
@@ -1386,7 +1386,7 @@ msgstr ""
 msgid "Expert request has been created."
 msgstr ""
 
-#: app/scripts/components/experts/extensions/sidebar.js:24
+#: app/scripts/components/experts/extensions/sidebar.js:26
 #: app/scripts/components/experts/extensions/sidebar.js:8
 #: app/scripts/components/experts/requests/expert-request-header.html:15
 msgid "Expert requests"
@@ -2056,6 +2056,10 @@ msgstr ""
 msgid "Loading actions"
 msgstr ""
 
+#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:39
+msgid "Loading team members, please wait."
+msgstr ""
+
 #: app/scripts/components/table/responsive-table.js:100
 msgid "Loading..."
 msgstr ""
@@ -2173,7 +2177,7 @@ msgstr ""
 msgid "Min storage"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:42
+#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:63
 #: app/scripts/components/form/appstore-field-integer.html:18
 msgid "Minimal valid value is"
 msgstr ""
@@ -2977,7 +2981,7 @@ msgstr ""
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:21
+#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:22
 msgid "Please select a team"
 msgstr ""
 
@@ -3050,7 +3054,7 @@ msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:54
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:8
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:36
+#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:57
 #: app/scripts/components/offering/offering-summary.html:34
 #: app/scripts/components/plans/plan-agreements-list.js:48
 msgid "Price"
@@ -4316,6 +4320,10 @@ msgstr ""
 msgid "Team"
 msgstr ""
 
+#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:42
+msgid "Team does not have members yet."
+msgstr ""
+
 #: app/scripts/components/dashboard/constants.js:23
 msgid "Team size"
 msgstr ""
@@ -5020,7 +5028,7 @@ msgstr ""
 msgid "You cannot remove shared provider."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:30
+#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:31
 #: app/scripts/components/issues/issue-create-dialog.js:39
 #: app/scripts/components/issues/issue-quick-create.js:47
 #: app/scripts/components/issues/issue-registration.js:68

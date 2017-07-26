@@ -9,16 +9,25 @@ const expertBidCreateDialog = {
   },
   controller: class ExpertBidCreateDialogController {
     // @ngInject
-    constructor($q, $state, $rootScope, ncUtilsFlash, expertBidsService, currentStateService) {
+    constructor(
+      $q,
+      $state,
+      $rootScope,
+      ncUtilsFlash,
+      expertBidsService,
+      currentStateService,
+      projectsService) {
       this.$q = $q;
       this.$state = $state;
       this.$rootScope = $rootScope;
       this.ncUtilsFlash = ncUtilsFlash;
       this.expertBidsService = expertBidsService;
       this.currentStateService = currentStateService;
+      this.projectsService = projectsService;
     }
 
     $onInit() {
+      this.usersByProject = {};
       this.loading = true;
       this.price = 0;
       this.expertRequest = this.resolve.expertRequest;
@@ -26,9 +35,27 @@ const expertBidCreateDialog = {
         this.projects = customer.projects;
         if (this.projects.length === 1) {
           this.selectedProject = this.projects[0];
+          this.onProjectSelect(this.selectedProject);
         }
         this.loading = false;
       });
+    }
+
+    onProjectSelect(project) {
+      this.selectedProjectUsers = null;
+      if (this.usersByProject[project.uuid]) {
+        this.selectedProjectUsers = this.usersByProject[project.uuid];
+      } else {
+        this.loadingUsers = true;
+        this.projectsService.getAll({
+          operation: 'users',
+          UUID: project.uuid,
+          o: 'concatenated_name'
+        }).then(users => {
+          this.selectedProjectUsers = this.usersByProject[project.uuid] = users;
+          this.loadingUsers = false;
+        });
+      }
     }
 
     save() {
