@@ -52,7 +52,7 @@ function ExpertRequestListController(
           title: gettext('Name'),
           render: row => {
             const href = $state.href('project.expertRequestDetails', {
-              uuid: project.uuid,
+              uuid: this.project.uuid,
               requestId: row.uuid
             });
             return '<a href="{href}">{name}</a>'
