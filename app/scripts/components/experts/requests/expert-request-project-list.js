@@ -51,7 +51,10 @@ function ExpertRequestListController(
         {
           title: gettext('Name'),
           render: row => {
-            let href = $state.href('expertRequestDetails', {uuid: row.uuid});
+            const href = $state.href('project.expertRequestDetails', {
+              uuid: project.uuid,
+              requestId: row.uuid
+            });
             return '<a href="{href}">{name}</a>'
                    .replace('{href}', href)
                    .replace('{name}', row.name);

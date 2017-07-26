@@ -7,9 +7,11 @@ const expertRequestList = {
 // @ngInject
 function ExpertRequestListController(
   baseControllerListClass,
+  $q,
   $state,
   $filter,
   $uibModal,
+  currentStateService,
   expertRequestsService,
   customersService) {
   let controllerScope = this;
@@ -18,11 +20,20 @@ function ExpertRequestListController(
       this.controllerScope = controllerScope;
       this.service = expertRequestsService;
       let fn = this._super.bind(this);
-      customersService.isOwnerOrStaff().then(isOwnerOrStaff => {
-        this.isOwnerOrStaff = isOwnerOrStaff;
+      this.loadContext().then(() => {
         this.tableOptions = this.getTableOptions();
         fn();
       });
+    },
+    loadContext: function() {
+      return $q.all([
+        customersService.isOwnerOrStaff().then(isOwnerOrStaff => {
+          this.isOwnerOrStaff = isOwnerOrStaff;
+        }),
+        currentStateService.getCustomer().then(customer => {
+          this.customer = customer;
+        }),
+      ]);
     },
     getTableOptions: function() {
       return {
@@ -38,7 +49,10 @@ function ExpertRequestListController(
         {
           title: gettext('Name'),
           render: row => {
-            let href = $state.href('expertRequestDetails', {uuid: row.uuid});
+            const href = $state.href('organization.expertRequestDetails', {
+              uuid: this.customer.uuid,
+              requestId: row.uuid
+            });
             return '<a href="{href}">{name}</a>'
                    .replace('{href}', href)
                    .replace('{name}', row.name);

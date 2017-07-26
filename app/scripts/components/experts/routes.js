@@ -14,10 +14,20 @@ export default function expertRequestsRoutes($stateProvider) {
 
     .state('organization.experts', {
       url: 'experts/',
-      template: '<expert-requests-list/>',
+      template: '<expert-requests-customer-list/>',
       data: {
         pageTitle: gettext('Requests for experts'),
-        feature: 'experts'
+        feature: 'experts',
+      }
+    })
+
+    .state('organization.expertRequestDetails', {
+      url: 'experts/:requestId/',
+      template: '<expert-request-details/>',
+      data: {
+        pageTitle: gettext('Requests for experts'),
+        feature: 'experts',
+        pageClass: 'gray-bg',
       }
     })
 
@@ -30,12 +40,13 @@ export default function expertRequestsRoutes($stateProvider) {
       }
     })
 
-    .state('expertRequestDetails', {
-      url: '/experts/:uuid/',
+    .state('project.expertRequestDetails', {
+      url: 'experts/:requestId/',
       template: '<expert-request-details/>',
       data: {
         feature: 'experts',
         pageTitle: gettext('Expert request details'),
+        pageClass: 'gray-bg',
       }
     });
 }

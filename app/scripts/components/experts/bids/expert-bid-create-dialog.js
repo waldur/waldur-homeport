@@ -32,6 +32,7 @@ const expertBidCreateDialog = {
       this.price = 0;
       this.expertRequest = this.resolve.expertRequest;
       this.currentStateService.getCustomer().then(customer => {
+        this.customer = customer;
         this.projects = customer.projects;
         if (this.projects.length === 1) {
           this.selectedProject = this.projects[0];
@@ -76,7 +77,10 @@ const expertBidCreateDialog = {
       })
       .then(() => {
         this.ncUtilsFlash.success('Expert bid has been created.');
-        this.$state.go('expertRequestDetails', {uuid: this.expertRequest.uuid});
+        this.$state.go('organization.expertRequestDetails', {
+          uuid: this.customer.uuid,
+          requestId: this.expertRequest.uuid
+        });
       })
       .catch(response => {
         if (response.data) {

@@ -1,6 +1,6 @@
-<div class="title-action" ng-if="currentCustomer.is_expert_provider">
-  <button class="btn btn-default">
+<div class="title-action" ng-if="currentCustomer.is_expert_provider && $state.current.name === 'organization.dashboard'">
+  <a class="btn btn-default" ui-sref="organization.experts">
     <i class="fa fa-vcard"></i>
     <span translate>Expert provider</span>
-  </button>
+  </a>
 </div>
