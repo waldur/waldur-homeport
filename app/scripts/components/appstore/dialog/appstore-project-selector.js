@@ -4,7 +4,7 @@ const appstoreProjectSelector = {
   template,
   bindings: {
     projects: '<',
-    selectedProject: '<',
+    selectedProject: '=',
     createProject: '&'
   }
 };

@@ -23,14 +23,7 @@
     </form>
 </div>
 <div class="modal-footer">
-    <button
-        type="button"
-        class="btn btn-default"
-        visible-if="'support'"
-        ng-click="$ctrl.requestService()">
-        <i class="fa fa-question-circle"></i>
-        <span translate>I want another service</span>
-    </button>
+    <extension-point id="appstore-selector-dialog"></extension-point>
     <button class="btn btn-default"
         type="button"
         ng-click="$ctrl.dismiss()">

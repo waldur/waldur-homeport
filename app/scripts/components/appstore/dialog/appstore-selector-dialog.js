@@ -13,24 +13,18 @@ const appstoreSelectorDialog = {
       $q,
       $state,
       $scope,
-      $uibModal,
       ENV,
-      features,
       currentStateService,
       usersService,
-      ISSUE_IDS,
       projectPermissionsService,
       AppstoreCategoriesService,
       ResourceProvisionPolicy) {
       this.$q = $q;
       this.$state = $state;
       this.$scope = $scope;
-      this.$uibModal = $uibModal;
       this.ENV = ENV;
-      this.features = features;
       this.currentStateService = currentStateService;
       this.usersService = usersService;
-      this.ISSUE_IDS = ISSUE_IDS;
       this.projectPermissionsService = projectPermissionsService;
       this.ResourceProvisionPolicy = ResourceProvisionPolicy;
       this.AppstoreCategoriesService = AppstoreCategoriesService;
@@ -131,25 +125,6 @@ const appstoreSelectorDialog = {
       this.close();
       return this.$state.go('organization.createProject', {
         uuid: this.currentCustomer.uuid,
-      });
-    }
-
-    requestService() {
-      this.close();
-      return this.$uibModal.open({
-        component: 'issueCreateDialog',
-        resolve: {
-          issue: () => ({
-            customer: this.currentCustomer,
-            type: this.ISSUE_IDS.SERVICE_REQUEST
-          }),
-          options: {
-            title: gettext('Request a new service'),
-            descriptionPlaceholder: gettext('Please clarify why do you need it'),
-            descriptionLabel: gettext('Motivation'),
-            summaryLabel: gettext('Service name'),
-          }
-        }
       });
     }
   }
