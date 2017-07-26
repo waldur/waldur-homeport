@@ -12,7 +12,7 @@ export default class AppStoreUtilsService {
       component: 'appstoreSelectorDialog',
       size: 'lg',
       resolve: {
-        options: () => options,
+        options: () => options || {},
       }
     });
   }
