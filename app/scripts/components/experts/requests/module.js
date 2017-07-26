@@ -7,7 +7,6 @@ import expertRequestHeader from './expert-request-header';
 import expertRequestSummary from './expert-request-summary';
 import expertRequestCreate from './expert-request-create';
 import expertRequestCancel from './expert-request-cancel';
-import registerExpertRequestCategory from './register-expert-request-category';
 
 export default module => {
   module.service('expertRequestsService', expertRequestsService);
@@ -19,5 +18,4 @@ export default module => {
   module.component('expertRequestState', expertRequestState);
   module.component('expertRequestDetails', expertRequestDetails);
   module.component('expertRequestCancel', expertRequestCancel);
-  module.run(registerExpertRequestCategory);
 };

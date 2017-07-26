@@ -1,4 +1,4 @@
-import { APPSTORE_CATEGORY } from './constants';
+import { APPSTORE_CATEGORY } from '../constants';
 
 const expertRequestList = {
   templateUrl: 'views/partials/filtered-list.html',

@@ -7,6 +7,8 @@ import { baseServiceClass, listCache } from './base-service';
 import servicesService from './services-service';
 import tabCounterService from './tab-counters-service';
 import { ncUtils, coreUtils } from './utils';
+import extensionPoint from './extension-point-directive';
+import extensionPointService from './extension-point-service';
 
 export default module => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
@@ -19,6 +21,8 @@ export default module => {
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
   module.directive('multipleSelect', multipleSelect);
+  module.directive('extensionPoint', extensionPoint);
+  module.service('extensionPointService', extensionPointService);
   module.run(redirectToState);
   module.run(scrollToTop);
   sentryModule(module);

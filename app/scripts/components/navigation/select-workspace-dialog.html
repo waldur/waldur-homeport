@@ -57,6 +57,7 @@
             submit-button="$ctrl.gotoOrganization(organization)">
             <span translate>Select</span>
           </a>
+          <extension-point id="organization-selector"></extension-point>
           <div
             class="elipsis"
             ng-if="organization.abbreviation"
