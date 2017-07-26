@@ -42,6 +42,7 @@ const openstackBackupRestoreSummary = {
         service: {
           settings: this.resource.service_settings,
           name: this.resource.service_name,
+          service_project_link_url: this.resource.service_project_link,
         },
         flavor: this.model.flavor,
         image: {
