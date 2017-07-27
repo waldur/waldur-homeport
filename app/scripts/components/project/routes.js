@@ -125,14 +125,6 @@ export default function projectRoutes($stateProvider) {
       }
     })
 
-    .state('project.resources.apps', {
-      url: 'applications/',
-      template: '<resource-applications-list/>',
-      data: {
-        pageTitle: gettext('Applications')
-      }
-    })
-
     .state('project.resources.clouds', {
       url: 'private-clouds/',
       template: '<resource-private-clouds-list/>',

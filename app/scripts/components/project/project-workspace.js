@@ -60,14 +60,6 @@ export default function ProjectWorkspaceController(
             index: 200,
           },
           {
-            link: 'project.resources.apps({uuid: $ctrl.context.project.uuid})',
-            icon: 'fa-cube',
-            label: gettext('Applications'),
-            feature: 'apps',
-            countFieldKey: 'apps',
-            index: 300,
-          },
-          {
             link: 'project.resources.storage.tabs({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-hdd-o',
             label: gettext('Storage'),
