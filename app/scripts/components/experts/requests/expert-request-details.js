@@ -1,60 +1,27 @@
 import template from './expert-request-details.html';
 
-const expertRequestDetails = {
+const expertRequestProjectDetails = {
   template: template,
-  controller: class ExpertRequestDetailsController {
+  controller: class ExpertRequestProjectDetailsController {
     // ngInject
-    constructor(expertRequestsService,
+    constructor($rootScope,
                 $stateParams,
-                $state,
-                $q,
-                $rootScope,
-                projectsService,
-                customersService,
-                WorkspaceService,
-                usersService,
-                currentStateService) {
+                expertRequestsService) {
+      this.$rootScope = $rootScope;
       this.$stateParams = $stateParams;
-      this.$state = $state;
-      this.$q = $q;
       this.expertRequestsService = expertRequestsService;
-      this.projectsService = projectsService;
-      this.customersService = customersService;
-      this.usersService = usersService;
-      this.currentStateService = currentStateService;
-      this.WorkspaceService = WorkspaceService;
-      this.unlisten = $rootScope.$on('refreshExpertDetails', this.loadExpertRequest.bind(this));
     }
 
     $onInit() {
       this.loading = true;
-      this.loadExpertRequest().then(() => {
-        return this.projectsService.$get(this.expertRequest.project_uuid).then(project => {
-          this.currentStateService.setProject(project);
-          return { project };
-        });
-      }).then(({ project }) => {
-        return this.customersService.$get(project.customer_uuid).then(customer => {
-          this.currentStateService.setCustomer(customer);
-          return { customer, project };
-        });
-      }).then(({ customer, project }) => {
-        this.WorkspaceService.setWorkspace({
-          customer: customer,
-          project: project,
-          hasCustomer: true,
-          workspace: 'project',
-        });
-      })
-      .catch(() => {
-        this.$state.go('errorPage.notFound');
-      }).finally(() => {
+      this.loadExpertRequest().finally(() => {
         this.loading = false;
       });
+      this.unlisten = this.$rootScope.$on('refreshExpertDetails', this.loadExpertRequest.bind(this));
     }
 
     loadExpertRequest() {
-      return this.expertRequestsService.$get(this.$stateParams.uuid)
+      return this.expertRequestsService.$get(this.$stateParams.requestId)
         .then(expertRequest => {
           this.expertRequest = expertRequest;
           this.issue = {
@@ -70,4 +37,4 @@ const expertRequestDetails = {
   }
 };
 
-export default expertRequestDetails;
+export default expertRequestProjectDetails;

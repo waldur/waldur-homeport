@@ -1,4 +1,4 @@
-<uib-tabset>
+<uib-tabset active="$ctrl.currentGroup">
     <uib-tab ng-repeat="group in $ctrl.groups"
              ng-if="::group.items.length > 0"
              heading="{{ ::(group.label | translate) }}">

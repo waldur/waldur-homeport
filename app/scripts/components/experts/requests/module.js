@@ -1,5 +1,5 @@
 import expertRequestsService from './expert-requests-service';
-import expertRequestsList from './expert-request-list';
+import expertRequestsCustomerList from './expert-request-customer-list';
 import expertRequestsProjectList from './expert-request-project-list';
 import expertRequestState from './expert-request-state';
 import expertRequestDetails from './expert-request-details';
@@ -7,11 +7,10 @@ import expertRequestHeader from './expert-request-header';
 import expertRequestSummary from './expert-request-summary';
 import expertRequestCreate from './expert-request-create';
 import expertRequestCancel from './expert-request-cancel';
-import registerExpertRequestCategory from './register-expert-request-category';
 
 export default module => {
   module.service('expertRequestsService', expertRequestsService);
-  module.component('expertRequestsList', expertRequestsList);
+  module.component('expertRequestsCustomerList', expertRequestsCustomerList);
   module.component('expertRequestsProjectList', expertRequestsProjectList);
   module.component('expertRequestHeader', expertRequestHeader);
   module.component('expertRequestSummary', expertRequestSummary);
@@ -19,5 +18,4 @@ export default module => {
   module.component('expertRequestState', expertRequestState);
   module.component('expertRequestDetails', expertRequestDetails);
   module.component('expertRequestCancel', expertRequestCancel);
-  module.run(registerExpertRequestCategory);
 };

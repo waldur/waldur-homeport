@@ -91,6 +91,10 @@ export function ncUtils() {
         .replace('{gravatarSrc}', user.email);
       return avatar + ' ' + (user.full_name || user.username);
     },
+    booleanField: function(value) {
+      const cls = value ? 'fa-check' : 'fa-minus';
+      return '<a class="bool-field"><i class="fa {cls}"/></a>'.replace('{cls}', cls);
+    },
     parseQueryString: function(qs) {
       // Example input: foo=123&bar=456
       // Example output: {foo: "123", bar: "456"}

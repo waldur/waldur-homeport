@@ -1,3 +1,5 @@
+import { APPSTORE_CATEGORY } from '../constants';
+
 // @ngInject
 export default function registerExpertRequestCategory(features, $q, expertRequestsService, AppstoreCategoriesService) {
   AppstoreCategoriesService.registerCategory(() => {
@@ -11,7 +13,7 @@ export default function registerExpertRequestCategory(features, $q, expertReques
           label: experts[key].label,
           icon: experts[key].icon || 'fa-gear',
           description: experts[key].description,
-          category: experts[key].category || gettext('Experts'),
+          category: APPSTORE_CATEGORY,
           state: 'appstore.expert',
         }));
       }).catch(error => {

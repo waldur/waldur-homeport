@@ -17,6 +17,8 @@ import issueRegistration from './issue-registration';
 import {ISSUE_IDS} from './constants';
 import issueTypeSelect from './issue-type-select';
 import issueCommentsModule from './comments/module';
+import requestServiceButton from './request-service-button';
+import registerExtensionPoint from './extend-appstore-selector';
 
 export default module => {
   module.constant('ISSUE_IDS', ISSUE_IDS);
@@ -36,6 +38,8 @@ export default module => {
   module.component('issueCreateDialog', issueCreateDialog);
   module.directive('issueRegistration', issueRegistration);
   module.component('issueTypeSelect', issueTypeSelect);
+  module.component('requestServiceButton', requestServiceButton);
   module.config(issueRoutes);
+  module.run(registerExtensionPoint);
   issueCommentsModule(module);
 };

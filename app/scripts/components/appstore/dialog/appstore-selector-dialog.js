@@ -1,37 +1,30 @@
-import template from './category-selector.html';
-import './category-selector.scss';
+import template from './appstore-selector-dialog.html';
 
-const appstoreCategorySelector = {
+const appstoreSelectorDialog = {
   template,
   bindings: {
     dismiss: '&',
     close: '&',
     resolve: '<'
   },
-  controller: class AppStoreCategorySelectorController {
+  controller: class AppstoreSelectorDialogController {
     // @ngInject
     constructor(
       $q,
       $state,
       $scope,
-      $uibModal,
       ENV,
-      features,
       currentStateService,
       usersService,
-      ISSUE_IDS,
       projectPermissionsService,
       AppstoreCategoriesService,
       ResourceProvisionPolicy) {
       this.$q = $q;
       this.$state = $state;
       this.$scope = $scope;
-      this.$uibModal = $uibModal;
       this.ENV = ENV;
-      this.features = features;
       this.currentStateService = currentStateService;
       this.usersService = usersService;
-      this.ISSUE_IDS = ISSUE_IDS;
       this.projectPermissionsService = projectPermissionsService;
       this.ResourceProvisionPolicy = ResourceProvisionPolicy;
       this.AppstoreCategoriesService = AppstoreCategoriesService;
@@ -52,12 +45,12 @@ const appstoreCategorySelector = {
 
     loadProject() {
       this.$scope.$watch(() => this.selectedProject, () => this.checkPolicy());
-      this.selectProject = this.resolve.selectProject;
+      this.selectProject = this.resolve.options.selectProject;
 
       return this.usersService.getCurrentUser()
         .then(user => this.currentUser = user)
         .then(() => {
-          if (this.resolve.selectProject) {
+          if (this.selectProject) {
             return this.currentStateService.getCustomer().then(customer => {
               this.projects = customer.projects;
             });
@@ -101,7 +94,19 @@ const appstoreCategorySelector = {
     loadCategories() {
       return this.AppstoreCategoriesService.getGroups().then(groups => {
         this.groups = groups;
-      }).then(() => this.checkPolicy());
+        this.initCurrentGroup();
+        this.checkPolicy();
+      });
+    }
+
+    initCurrentGroup() {
+      this.currentGroup = 0;
+      if (this.resolve.options.currentCategory) {
+        const matches = this.groups.filter(group => group.label === this.resolve.options.currentCategory);
+        if (matches.length === 1) {
+          this.currentGroup = this.groups.indexOf(matches[0]);
+        }
+      }
     }
 
     selectCategory(category) {
@@ -122,26 +127,7 @@ const appstoreCategorySelector = {
         uuid: this.currentCustomer.uuid,
       });
     }
-
-    requestService() {
-      this.close();
-      return this.$uibModal.open({
-        component: 'issueCreateDialog',
-        resolve: {
-          issue: () => ({
-            customer: this.currentCustomer,
-            type: this.ISSUE_IDS.SERVICE_REQUEST
-          }),
-          options: {
-            title: gettext('Request a new service'),
-            descriptionPlaceholder: gettext('Please clarify why do you need it'),
-            descriptionLabel: gettext('Motivation'),
-            summaryLabel: gettext('Service name'),
-          }
-        }
-      });
-    }
   }
 };
 
-export default appstoreCategorySelector;
+export default appstoreSelectorDialog;

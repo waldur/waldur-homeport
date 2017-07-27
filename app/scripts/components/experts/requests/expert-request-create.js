@@ -59,7 +59,10 @@ const expertRequestCreate = {
       return this.expertRequestsService.create(expertRequest).then(expert => {
         this.ncUtilsFlash.success(gettext('Expert request has been created.'));
         this.expertRequestsService.clearAllCacheForCurrentEndpoint();
-        this.$state.go('expertRequestDetails', {uuid: expert.uuid});
+        this.$state.go('project.expertRequestDetails', {
+          uuid: this.project.uuid,
+          requestId: expert.uuid,
+        });
       }, response => {
         this.errors = response.data;
         // TODO [TM:7/12/17] temporary, remove when expert request feature fully implemented.

@@ -1,3 +1,5 @@
+import { APPSTORE_CATEGORY } from '../constants';
+
 const expertRequestList = {
   templateUrl: 'views/partials/filtered-list.html',
   controllerAs: 'ListController',
@@ -7,9 +9,12 @@ const expertRequestList = {
 // @ngInject
 function ExpertRequestListController(
   baseControllerListClass,
+  $q,
   $state,
   $filter,
   expertRequestsService,
+  AppStoreUtilsService,
+  customersService,
   currentStateService) {
   let controllerScope = this;
   let Controller = baseControllerListClass.extend({
@@ -17,27 +22,41 @@ function ExpertRequestListController(
       this.controllerScope = controllerScope;
       this.service = expertRequestsService;
       let fn = this._super.bind(this);
-      currentStateService.getProject().then(project => {
-        this.project = project;
+      this.loadContext().then(() => {
         this.tableOptions = this.getTableOptions();
         fn();
       });
     },
+    loadContext: function() {
+      return $q.all([
+        customersService.isOwnerOrStaff().then(isOwnerOrStaff => {
+          this.isOwnerOrStaff = isOwnerOrStaff;
+        }),
+        currentStateService.getProject().then(project => {
+          this.project = project;
+        }),
+      ]);
+    },
     getTableOptions: function() {
       return {
         searchFieldName: 'name',
-        noDataText: gettext('You have no expert requests.'),
-        noMatchesText: gettext('No expert requests found matching filter.'),
+        noDataText: gettext('There are no requests for experts yet.'),
+        noMatchesText: gettext('No requests for experts found matching filter.'),
+        enableOrdering: true,
         columns: this.getColumns(),
-        rowActions: [],
+        tableActions: this.getTableActions(),
       };
     },
     getColumns: function() {
       return [
         {
           title: gettext('Name'),
+          orderField: 'name',
           render: row => {
-            let href = $state.href('expertRequestDetails', {uuid: row.uuid});
+            const href = $state.href('project.expertRequestDetails', {
+              uuid: this.project.uuid,
+              requestId: row.uuid
+            });
             return '<a href="{href}">{name}</a>'
                    .replace('{href}', href)
                    .replace('{name}', row.name);
@@ -45,10 +64,12 @@ function ExpertRequestListController(
         },
         {
           title: gettext('Type'),
+          orderField: 'type',
           render: row => row.type_label
         },
         {
           title: gettext('State'),
+          orderField: 'state',
           render: row => {
             const index = this.findIndexById(row);
             return `<expert-request-state model="controller.list[${index}]"/>`;
@@ -56,11 +77,27 @@ function ExpertRequestListController(
         },
         {
           title: gettext('Creation date'),
+          orderField: 'created',
           render: function(row) {
             return $filter('dateTime')(row.created);
           }
         }
       ];
+    },
+    getTableActions: function() {
+      let actions = [];
+      if (this.isOwnerOrStaff) {
+        actions.push({
+          title: gettext('Add request'),
+          iconClass: 'fa fa-plus',
+          callback: () => {
+            AppStoreUtilsService.openDialog({
+              currentCategory: APPSTORE_CATEGORY
+            });
+          },
+        });
+      }
+      return actions;
     },
     getFilter: function() {
       return {

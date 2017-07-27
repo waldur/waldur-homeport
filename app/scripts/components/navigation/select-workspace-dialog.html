@@ -62,12 +62,16 @@
             ng-if="organization.abbreviation"
             uib-tooltip="{{ organization.name }}"
             tooltip-append-to-body="true"
-            tooltip-class="select-workspace-dialog__tooltip--order"
-            ng-bind="organization.abbreviation"></div>
+            tooltip-class="select-workspace-dialog__tooltip--order">
+            {{ organization.abbreviation }}
+            <extension-point id="organization-selector"></extension-point>
+          </div>
           <div
             class="elipsis"
-            ng-if="!organization.abbreviation"
-            ng-bind="organization.name"></div>
+            ng-if="!organization.abbreviation">
+            {{ organization.name }}
+            <extension-point id="organization-selector"></extension-point>
+          </div>
         </div>
         <div class="list-group-item" ng-if="filteredOrganizations.length === 0">
           <span class="elipsis" translate>There are no organizations matching filter.</span>
@@ -103,7 +107,7 @@
             <span translate>There are no projects yet for this organization.</span>
           </p>
       </div>
-      <div ng-if="$ctrl.selectedOrganization.projects.length > 0"
+      <div ng-show="$ctrl.selectedOrganization.projects.length > 0"
         class="list-group"
         slimscroll
         height="300"

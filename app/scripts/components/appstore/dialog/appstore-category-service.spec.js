@@ -1,4 +1,4 @@
-import ENV from '../configs/base-config';
+import ENV from '../../configs/base-config';
 import AppstoreCategoriesService from './appstore-category-service.js';
 
 describe('AppstoreCategoriesService', () => {
