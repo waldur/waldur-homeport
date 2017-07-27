@@ -40,8 +40,8 @@ function ExpertRequestListController(
     getTableOptions: function() {
       return {
         searchFieldName: 'name',
-        noDataText: gettext('You have no expert requests.'),
-        noMatchesText: gettext('No expert requests found matching filter.'),
+        noDataText: gettext('There are no requests for experts yet.'),
+        noMatchesText: gettext('No requests for experts found matching filter.'),
         columns: this.getColumns(),
         tableActions: this.getTableActions(),
       };
