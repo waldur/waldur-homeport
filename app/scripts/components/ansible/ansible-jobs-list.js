@@ -92,6 +92,12 @@ function AnsibleJobsListController(
         }
       ];
     },
+    getFilter: function() {
+      return {
+        project_uuid: this.project.uuid,
+      };
+    },
+
   });
   controllerScope.__proto__ = new Controller();
 }
