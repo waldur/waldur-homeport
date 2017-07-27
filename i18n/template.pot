@@ -235,7 +235,7 @@ msgstr ""
 msgid "Add new organization"
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:83
+#: app/scripts/components/navigation/select-workspace-dialog.html:86
 msgid "Add new project"
 msgstr ""
 
@@ -630,7 +630,7 @@ msgstr ""
 #: app/scripts/components/invitations/actions/invitation-dialog.html:77
 #: app/scripts/components/issues/comments/issue-comments-form.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:99
-#: app/scripts/components/navigation/select-workspace-dialog.html:130
+#: app/scripts/components/navigation/select-workspace-dialog.html:133
 #: app/scripts/components/offering/appstore-offering.html:19
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:54
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:43
@@ -1445,7 +1445,7 @@ msgstr ""
 msgid "Filter organizations"
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:96
+#: app/scripts/components/navigation/select-workspace-dialog.html:99
 msgid "Filter projects"
 msgstr ""
 
@@ -1547,7 +1547,7 @@ msgstr ""
 msgid "generate automatically"
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:127
+#: app/scripts/components/navigation/select-workspace-dialog.html:130
 msgid "Go to my profile"
 msgstr ""
 
@@ -3246,7 +3246,7 @@ msgstr ""
 #: app/scripts/components/appstore/dialog/appstore-project-selector.html:2
 #: app/scripts/components/customer/customer-workspace.js:58
 #: app/scripts/components/customer/routes.js:97
-#: app/scripts/components/navigation/select-workspace-dialog.html:86
+#: app/scripts/components/navigation/select-workspace-dialog.html:89
 #: app/scripts/components/providers/details/dialog.html:28
 msgid "Projects"
 msgstr ""
@@ -3793,7 +3793,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.html:40
 #: app/scripts/components/appstore/dialog/appstore-category-selector.html:19
-#: app/scripts/components/navigation/select-workspace-dialog.html:117
+#: app/scripts/components/navigation/select-workspace-dialog.html:120
 #: app/scripts/components/navigation/select-workspace-dialog.html:58
 #: app/views/directives/import-resource-button.html:6
 msgid "Select"
@@ -4407,11 +4407,11 @@ msgstr ""
 msgid "There are no items yet."
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:74
+#: app/scripts/components/navigation/select-workspace-dialog.html:77
 msgid "There are no organizations matching filter."
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:104
+#: app/scripts/components/navigation/select-workspace-dialog.html:107
 msgid "There are no projects yet for this organization."
 msgstr ""
 
@@ -4476,6 +4476,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:24
 #: app/scripts/components/project/project-create.html:15
 msgid "This name will be visible in accounting data."
+msgstr ""
+
+#: app/scripts/components/experts/extensions/workspace-selector.html:4
+msgid "This organization is an expert provider."
 msgstr ""
 
 #: app/scripts/components/navigation/cookies-consent.html:4
