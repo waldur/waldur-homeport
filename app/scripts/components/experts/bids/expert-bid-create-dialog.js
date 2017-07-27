@@ -13,6 +13,7 @@ const expertBidCreateDialog = {
       $q,
       $state,
       $rootScope,
+      ENV,
       ncUtilsFlash,
       expertBidsService,
       currentStateService,
@@ -24,6 +25,7 @@ const expertBidCreateDialog = {
       this.expertBidsService = expertBidsService;
       this.currentStateService = currentStateService;
       this.projectsService = projectsService;
+      this.currency = ENV.currency;
     }
 
     $onInit() {

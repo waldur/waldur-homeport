@@ -40,7 +40,7 @@
         </div>
         <div ng-if="$ctrl.selectedProjectUsers.length === 0">
           <p translate>Team does not have members yet.</p>
-          <p>Please add users or select another team.</p>
+          <p translate>Please add users or select another team.</p>
         </div>
         <div ng-if="$ctrl.selectedProjectUsers.length > 0">
           <a ng-repeat="user in $ctrl.selectedProjectUsers"
@@ -58,7 +58,12 @@
         <span class="text-danger">*</span>
       </label>
       <div class="col-sm-6">
-        <input type="number" class="form-control" name="price" min="0" ng-model="$ctrl.price">
+        <div class="input-group">
+          <input type="number" class="form-control" name="price" min="0" ng-model="$ctrl.price">
+          <div class="input-group-addon">
+            {{ ::$ctrl.currency }}
+          </div>
+        </div>
         <p class="help-block text-danger" ng-if="$ctrl.BidForm.price.$error.min">
           <span translate>Minimal valid value is</span> 0
         </p>

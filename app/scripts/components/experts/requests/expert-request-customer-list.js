@@ -40,6 +40,7 @@ function ExpertRequestListController(
         searchFieldName: 'name',
         noDataText: gettext('There are no requests for experts yet.'),
         noMatchesText: gettext('No requests for experts found matching filter.'),
+        enableOrdering: true,
         columns: this.getColumns(),
         rowActions: this.getRowActions(),
       };
@@ -48,6 +49,7 @@ function ExpertRequestListController(
       return [
         {
           title: gettext('Name'),
+          orderField: 'name',
           render: row => {
             const href = $state.href('organization.expertRequestDetails', {
               uuid: this.customer.uuid,
@@ -60,18 +62,22 @@ function ExpertRequestListController(
         },
         {
           title: gettext('Organization'),
+          orderField: 'customer_name',
           render: row => row.customer_name
         },
         {
           title: gettext('Project'),
+          orderField: 'project_name',
           render: row => row.project_name
         },
         {
           title: gettext('Type'),
+          orderField: 'type',
           render: row => row.type_label
         },
         {
           title: gettext('State'),
+          orderField: 'state',
           render: row => {
             const index = this.findIndexById(row);
             return `<expert-request-state model="controller.list[${index}]"/>`;
@@ -79,6 +85,7 @@ function ExpertRequestListController(
         },
         {
           title: gettext('Creation date'),
+          orderField: 'created',
           render: function(row) {
             return $filter('dateTime')(row.created);
           }

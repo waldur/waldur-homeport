@@ -42,6 +42,7 @@ function ExpertRequestListController(
         searchFieldName: 'name',
         noDataText: gettext('There are no requests for experts yet.'),
         noMatchesText: gettext('No requests for experts found matching filter.'),
+        enableOrdering: true,
         columns: this.getColumns(),
         tableActions: this.getTableActions(),
       };
@@ -50,6 +51,7 @@ function ExpertRequestListController(
       return [
         {
           title: gettext('Name'),
+          orderField: 'name',
           render: row => {
             const href = $state.href('project.expertRequestDetails', {
               uuid: this.project.uuid,
@@ -62,10 +64,12 @@ function ExpertRequestListController(
         },
         {
           title: gettext('Type'),
+          orderField: 'type',
           render: row => row.type_label
         },
         {
           title: gettext('State'),
+          orderField: 'state',
           render: row => {
             const index = this.findIndexById(row);
             return `<expert-request-state model="controller.list[${index}]"/>`;
@@ -73,6 +77,7 @@ function ExpertRequestListController(
         },
         {
           title: gettext('Creation date'),
+          orderField: 'created',
           render: function(row) {
             return $filter('dateTime')(row.created);
           }

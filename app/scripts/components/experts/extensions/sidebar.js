@@ -9,7 +9,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
             icon: 'fa-vcard',
             link: 'organization.experts({uuid: $ctrl.context.customer.uuid})',
             feature: 'experts',
-            index: 1100,
+            index: 110,
           }
         ];
       } else {
