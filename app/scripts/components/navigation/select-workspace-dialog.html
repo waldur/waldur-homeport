@@ -104,7 +104,7 @@
             <span translate>There are no projects yet for this organization.</span>
           </p>
       </div>
-      <div ng-if="$ctrl.selectedOrganization.projects.length > 0"
+      <div ng-show="$ctrl.selectedOrganization.projects.length > 0"
         class="list-group"
         slimscroll
         height="300"
