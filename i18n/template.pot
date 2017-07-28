@@ -202,10 +202,6 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-applications-list.js:27
-msgid "Add application"
-msgstr ""
-
 #: app/views/directives/customer-balance.html:113
 #: app/views/directives/customer-balance.html:147
 msgid "Add credit"
@@ -337,7 +333,7 @@ msgstr ""
 #: app/scripts/components/customer/routes.js:89
 #: app/scripts/components/dashboard/project-alerts-feed.js:11
 #: app/scripts/components/help/constants.js:5
-#: app/scripts/components/project/project-workspace.js:112
+#: app/scripts/components/project/project-workspace.js:104
 #: app/scripts/components/project/routes.js:110
 #: app/scripts/components/resource/tabs/constants.js:12
 msgid "Alerts"
@@ -407,15 +403,17 @@ msgstr ""
 msgid "API token lifetime"
 msgstr ""
 
+#: app/scripts/components/ansible/routes.js:36
+msgid "Application details"
+msgstr ""
+
 #: app/scripts/components/analytics/resource-chart-service.js:27
-#: app/scripts/components/ansible/appstore-category.js:14
-#: app/scripts/components/ansible/routes.js:10
+#: app/scripts/components/ansible/constants.js:1
+#: app/scripts/components/ansible/routes.js:11
+#: app/scripts/components/ansible/routes.js:27
+#: app/scripts/components/ansible/sidebar.js:8
 #: app/scripts/components/appstore/routes.js:42
-#: app/scripts/components/configs/base-config.js:111
-#: app/scripts/components/configs/base-config.js:92
 #: app/scripts/components/dashboard/constants.js:7
-#: app/scripts/components/project/project-workspace.js:65
-#: app/scripts/components/project/routes.js:132
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
 msgid "Applications"
 msgstr ""
@@ -474,7 +472,7 @@ msgstr ""
 
 #: app/scripts/components/customer/customer-workspace.js:98
 #: app/scripts/components/customer/routes.js:72
-#: app/scripts/components/project/project-workspace.js:98
+#: app/scripts/components/project/project-workspace.js:90
 #: app/scripts/components/project/routes.js:102
 #: app/scripts/components/user/constants.js:38
 #: app/scripts/components/user/constants.js:8
@@ -599,10 +597,6 @@ msgstr ""
 #: app/scripts/components/providers/create.html:113
 #: app/scripts/components/providers/details/provider-settings.html:65
 msgid "Browse"
-msgstr ""
-
-#: app/scripts/components/analytics/resource-analysis.html:23
-msgid "By provider (30d top 5)"
 msgstr ""
 
 #: app/scripts/components/issues/constants.js:100
@@ -845,8 +839,8 @@ msgstr ""
 msgid "Cost analysis"
 msgstr ""
 
-#: app/scripts/components/project/project-workspace.js:126
-#: app/scripts/components/project/routes.js:179
+#: app/scripts/components/project/project-workspace.js:118
+#: app/scripts/components/project/routes.js:171
 msgid "Cost planning"
 msgstr ""
 
@@ -888,7 +882,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/module.js:57
 #: app/scripts/components/openstack/openstack-volume/module.js:71
 #: app/scripts/components/project/project-issues.js:31
-#: app/scripts/components/resource/list/resources-list.js:141
+#: app/scripts/components/resource/list/resources-list.js:140
 #: app/scripts/components/resource/tabs/resource-issues.js:26
 #: app/scripts/components/user/hooks/hook-details.html:77
 msgid "Create"
@@ -897,6 +891,10 @@ msgstr ""
 #: app/scripts/components/auth/auth-login.html:111
 #: app/scripts/components/auth/auth-login.html:19
 msgid "Create an account"
+msgstr ""
+
+#: app/scripts/components/ansible/ansible-jobs-list.js:85
+msgid "Create application"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/actions.js:109
@@ -999,6 +997,7 @@ msgstr ""
 msgid "Created at"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-jobs-list.js:74
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:87
 #: app/scripts/components/experts/requests/expert-request-project-list.js:79
 #: app/scripts/components/offering/offerings-list.js:55
@@ -1014,10 +1013,6 @@ msgstr ""
 msgid "Current API token"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-analysis.html:13
-msgid "Current plan"
-msgstr ""
-
 #: app/scripts/components/digitalocean/droplet-resize.html:14
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:7
 msgid "Current size"
@@ -1025,10 +1020,6 @@ msgstr ""
 
 #: app/scripts/components/resource/state/resource-state-service.js:69
 msgid "current state on backend: {resourceState}."
-msgstr ""
-
-#: app/scripts/components/analytics/resource-analysis.html:10
-msgid "Current usage"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:15
@@ -1228,7 +1219,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:195
+#: app/scripts/components/configs/base-config.js:183
 msgid "English"
 msgstr ""
 
@@ -1263,7 +1254,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:199
+#: app/scripts/components/configs/base-config.js:187
 msgid "Estonian"
 msgstr ""
 
@@ -1655,16 +1646,12 @@ msgstr ""
 msgid "Image name"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:124
+#: app/scripts/components/resource/list/resources-list.js:123
 #: app/views/import/import.html:150
 msgid "Import"
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-applications-list.js:24
-msgid "Import application"
-msgstr ""
-
-#: app/scripts/components/resource/list/resources-list.js:108
+#: app/scripts/components/resource/list/resources-list.js:107
 msgid "Import is not possible as there are no personal provider accounts registered."
 msgstr ""
 
@@ -1672,11 +1659,11 @@ msgstr ""
 msgid "Import private cloud"
 msgstr ""
 
-#: app/scripts/components/project/routes.js:192
+#: app/scripts/components/project/routes.js:184
 msgid "Import resources from provider"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:111
+#: app/scripts/components/resource/list/resources-list.js:110
 msgid "Import resources from the registered provider accounts."
 msgstr ""
 
@@ -1941,7 +1928,7 @@ msgstr ""
 
 #: app/scripts/components/customer/customer-workspace.js:105
 #: app/scripts/components/customer/routes.js:81
-#: app/scripts/components/project/project-workspace.js:105
+#: app/scripts/components/project/project-workspace.js:97
 #: app/scripts/components/project/routes.js:93
 #: app/scripts/components/resource/tabs/constants.js:7
 msgid "Issues"
@@ -2003,7 +1990,7 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:203
+#: app/scripts/components/configs/base-config.js:191
 msgid "Latvian"
 msgstr ""
 
@@ -2041,7 +2028,7 @@ msgstr ""
 msgid "Link removed"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:207
+#: app/scripts/components/configs/base-config.js:195
 msgid "Lithuanian"
 msgstr ""
 
@@ -2202,6 +2189,7 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-jobs-list.js:49
 #: app/scripts/components/appstore/appstore-compare-list.js:69
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:13
 #: app/scripts/components/cost-planning/cost-plans-list.js:31
@@ -2230,7 +2218,7 @@ msgstr ""
 #: app/scripts/components/providers/details/provider-settings.js:44
 #: app/scripts/components/providers/provider-list.js:55
 #: app/scripts/components/resource/actions/constants.js:20
-#: app/scripts/components/resource/list/resources-list.js:45
+#: app/scripts/components/resource/list/resources-list.js:44
 #: app/views/directives/importable-resources.html:14
 msgid "Name"
 msgstr ""
@@ -2289,7 +2277,7 @@ msgstr ""
 msgid "No alerts yet."
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-applications-list.js:20
+#: app/scripts/components/ansible/ansible-jobs-list.js:40
 msgid "No applications found matching filter."
 msgstr ""
 
@@ -2476,7 +2464,7 @@ msgstr ""
 msgid "No requests for experts found matching filter."
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:40
+#: app/scripts/components/resource/list/resources-list.js:39
 msgid "No resources found matching filter."
 msgstr ""
 
@@ -2573,10 +2561,6 @@ msgstr ""
 msgid "Not assigned"
 msgstr ""
 
-#: app/scripts/components/analytics/resource-analysis.html:25
-msgid "Not enough data for chart"
-msgstr ""
-
 #: app/scripts/components/resource/monitoring/resource-graphs.js:20
 #: app/scripts/components/resource/monitoring/resource-graphs.js:21
 msgid "Not enough data for chart."
@@ -2588,10 +2572,6 @@ msgstr ""
 
 #: app/scripts/components/resource/monitoring/resource-graphs.html:3
 msgid "Not enough data for CPU graph."
-msgstr ""
-
-#: app/scripts/components/analytics/resource-analysis.html:2
-msgid "Not enough data for resource analysis."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:46
@@ -2689,7 +2669,7 @@ msgstr ""
 msgid "Open in Service Desk"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:164
+#: app/scripts/components/resource/list/resources-list.js:161
 msgid "Open map"
 msgstr ""
 
@@ -2781,7 +2761,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:180
+#: app/scripts/components/configs/base-config.js:168
 msgid "Organization owner"
 msgstr ""
 
@@ -2934,6 +2914,10 @@ msgstr ""
 msgid "Plans"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-jobs-list.js:62
+msgid "Playbook"
+msgstr ""
+
 #: app/scripts/components/form/appstore-field-tos.html:17
 msgid "Please accept Terms of Services to proceed."
 msgstr ""
@@ -2944,10 +2928,6 @@ msgstr ""
 
 #: app/scripts/components/issues/request-service-button.js:33
 msgid "Please clarify why do you need it"
-msgstr ""
-
-#: app/scripts/components/analytics/resource-analysis.html:3
-msgid "Please create first project."
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html:11
@@ -3119,11 +3099,11 @@ msgstr ""
 #: app/scripts/components/analytics/resource-chart-service.js:21
 #: app/scripts/components/appstore/routes.js:22
 #: app/scripts/components/configs/base-config.js:36
-#: app/scripts/components/configs/base-config.js:85
+#: app/scripts/components/configs/base-config.js:84
 #: app/scripts/components/dashboard/constants.js:15
 #: app/scripts/components/project/project-workspace.js:57
 #: app/scripts/components/project/projects-list.js:117
-#: app/scripts/components/project/routes.js:140
+#: app/scripts/components/project/routes.js:132
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
 msgid "Private clouds"
 msgstr ""
@@ -3203,7 +3183,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:181
+#: app/scripts/components/configs/base-config.js:169
 msgid "Project manager"
 msgstr ""
 
@@ -3259,7 +3239,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-compare-list.js:51
 #: app/scripts/components/appstore/appstore-store.html:32
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:9
-#: app/scripts/components/resource/list/resources-list.js:54
+#: app/scripts/components/resource/list/resources-list.js:53
 #: app/scripts/components/resource/summary/resource-summary-base.html:21
 #: app/views/help/list.html:10
 msgid "Provider"
@@ -3365,7 +3345,7 @@ msgstr ""
 #: app/scripts/components/error/routes.js:25
 #: app/scripts/components/project/projects-list.js:153
 #: app/scripts/components/providers/provider-list.js:182
-#: app/scripts/components/resource/list/resources-list.js:105
+#: app/scripts/components/resource/list/resources-list.js:104
 #: app/scripts/components/resource/resource-provision-policy.js:14
 msgid "Quota has been reached."
 msgstr ""
@@ -3584,8 +3564,8 @@ msgid "Request type"
 msgstr ""
 
 #: app/scripts/components/offering/offering-header.html:21
-#: app/scripts/components/project/project-workspace.js:81
-#: app/scripts/components/project/routes.js:162
+#: app/scripts/components/project/project-workspace.js:73
+#: app/scripts/components/project/routes.js:154
 msgid "Requested Services"
 msgstr ""
 
@@ -3734,7 +3714,7 @@ msgstr ""
 msgid "Runtime state"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:211
+#: app/scripts/components/configs/base-config.js:199
 msgid "Russian"
 msgstr ""
 
@@ -4135,6 +4115,7 @@ msgstr ""
 msgid "Start time"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-jobs-list.js:66
 #: app/scripts/components/billing/billing-records-list.js:48
 #: app/scripts/components/billing/invoices-list.js:49
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:79
@@ -4156,7 +4137,7 @@ msgstr ""
 #: app/scripts/components/plans/plan-agreements-list.js:26
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:38
 #: app/scripts/components/providers/provider-list.js:62
-#: app/scripts/components/resource/list/resources-list.js:63
+#: app/scripts/components/resource/list/resources-list.js:62
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
 #: app/scripts/components/user/hooks/hook-list.js:26
 msgid "State"
@@ -4189,9 +4170,9 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:63
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:20
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:26
-#: app/scripts/components/project/project-workspace.js:73
+#: app/scripts/components/project/project-workspace.js:65
 #: app/scripts/components/project/projects-list.js:108
-#: app/scripts/components/project/routes.js:148
+#: app/scripts/components/project/routes.js:140
 #: app/scripts/components/quotas/filters.js:7
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:11
 msgid "Storage"
@@ -4202,7 +4183,7 @@ msgid "Storage limit GB"
 msgstr ""
 
 #: app/scripts/components/appstore/routes.js:52
-#: app/scripts/components/configs/base-config.js:99
+#: app/scripts/components/configs/base-config.js:91
 msgid "Storages"
 msgstr ""
 
@@ -4252,7 +4233,7 @@ msgstr ""
 
 #: app/scripts/components/configs/base-config.js:52
 #: app/scripts/components/navigation/header/support-link.html:4
-#: app/scripts/components/project/project-workspace.js:90
+#: app/scripts/components/project/project-workspace.js:82
 msgid "Support"
 msgstr ""
 
@@ -4293,7 +4274,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:182
+#: app/scripts/components/configs/base-config.js:170
 msgid "System administrator"
 msgstr ""
 
@@ -4316,8 +4297,8 @@ msgstr ""
 #: app/scripts/components/customer/customer-workspace.js:120
 #: app/scripts/components/customer/routes.js:105
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:16
-#: app/scripts/components/project/project-workspace.js:118
-#: app/scripts/components/project/routes.js:171
+#: app/scripts/components/project/project-workspace.js:110
+#: app/scripts/components/project/routes.js:163
 msgid "Team"
 msgstr ""
 
@@ -4381,6 +4362,10 @@ msgstr ""
 
 #: app/scripts/components/resource/actions/action-button-resource.html:12
 msgid "There are no actions."
+msgstr ""
+
+#: app/scripts/components/ansible/ansible-jobs-list.js:39
+msgid "There are no applications yet."
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.html:73
@@ -4930,9 +4915,9 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:15
 #: app/scripts/components/appstore/routes.js:32
-#: app/scripts/components/configs/base-config.js:107
 #: app/scripts/components/configs/base-config.js:28
-#: app/scripts/components/configs/base-config.js:78
+#: app/scripts/components/configs/base-config.js:77
+#: app/scripts/components/configs/base-config.js:99
 #: app/scripts/components/dashboard/constants.js:11
 #: app/scripts/components/project/project-workspace.js:49
 #: app/scripts/components/project/routes.js:124
@@ -5086,10 +5071,6 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-applications-list.js:19
-msgid "You have no applications yet."
-msgstr ""
-
 #: app/scripts/components/cost-planning/cost-plans-list.js:27
 msgid "You have no cost plans yet"
 msgstr ""
@@ -5123,7 +5104,7 @@ msgstr ""
 msgid "You have no requested services."
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:39
+#: app/scripts/components/resource/list/resources-list.js:38
 msgid "You have no resources yet."
 msgstr ""
 

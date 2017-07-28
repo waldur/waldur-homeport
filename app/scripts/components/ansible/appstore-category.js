@@ -1,7 +1,9 @@
+import { APPSTORE_CATEGORY, ICON_CLASS, FEATURE } from './constants';
+
 // @ngInject
 export default function registerAppstoreCategory(features, $q, AnsiblePlaybooksService, AppstoreCategoriesService) {
   AppstoreCategoriesService.registerCategory(() => {
-    if (!features.isVisible('ansible')) {
+    if (!features.isVisible(FEATURE)) {
       return $q.when([]);
     }
     return AnsiblePlaybooksService.getAll()
@@ -9,9 +11,9 @@ export default function registerAppstoreCategory(features, $q, AnsiblePlaybooksS
         return playbooks.map(playbook => ({
           key: playbook.uuid,
           label: playbook.name,
-          icon: 'fa-book',
+          icon: ICON_CLASS,
           description: playbook.description,
-          category: gettext('Applications'),
+          category: APPSTORE_CATEGORY,
           state: 'appstore.ansible',
         }));
       });

@@ -24,7 +24,6 @@ export default function baseResourceListController(
       this.service = resourcesService;
       this.categories = {};
       this.categories[ENV.VirtualMachines] = 'vms';
-      this.categories[ENV.Applications] = 'apps';
       this.categories[ENV.PrivateClouds] = 'private_clouds';
       this.categories[ENV.Storages] = 'storages';
       this.enableRefresh = true;
@@ -153,8 +152,6 @@ export default function baseResourceListController(
         return 'appstore.vms';
       } else if (this.category === ENV.PrivateClouds) {
         return 'appstore.private_clouds';
-      } else if (this.category === ENV.Applications) {
-        return 'appstore.apps';
       } else if (this.category === ENV.Storages) {
         return 'appstore.storages';
       }

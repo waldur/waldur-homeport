@@ -1,14 +1,40 @@
+import { APPSTORE_CATEGORY } from './constants';
+
 // @ngInject
 export default function ansibleRoutes($stateProvider) {
   $stateProvider
     .state('appstore.ansible', {
       url: 'applications/',
-      template: '<appstore-store></appstore-store>',
+      template: '<ansible-job-create/>',
       data: {
-        // TODO: Replace with real route when WAL-1047 is ready
-        category: 'private_clouds',
+        category: APPSTORE_CATEGORY,
         pageTitle: gettext('Applications'),
-        sidebarState: 'project.resources'
+        sidebarState: 'project.resources',
+        feature: 'ansible'
+      }
+    })
+
+    .state('project.resources.ansible', {
+      url: 'applications/',
+      template: '<ui-view/>',
+      abstract: true,
+    })
+
+    .state('project.resources.ansible.list', {
+      url: '',
+      template: '<ansible-jobs-list/>',
+      data: {
+        pageTitle: gettext('Applications'),
+        feature: 'ansible'
+      }
+    })
+
+    .state('project.resources.ansible.details', {
+      url: ':jobId/',
+      template: '<ansible-job-details/>',
+      data: {
+        pageTitle: gettext('Application details'),
+        feature: 'ansible',
       }
     });
 }
