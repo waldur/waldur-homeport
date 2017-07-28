@@ -40,7 +40,13 @@ function CustomerManageController(
         return $q.all([
           this.getPaymentDetails(),
           this.loadCustomerPermissions(customer),
-        ]);
+        ]).then(() => {
+          if (this.paymentDetails) {
+            this.accountingStartDate = this.paymentDetails.accounting_start_date;
+          } else {
+            this.accountingStartDate = this.customer.created;
+          }
+        });
       }).finally(() => {
         this.loading = false;
       });
