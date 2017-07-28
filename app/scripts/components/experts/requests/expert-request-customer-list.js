@@ -7,6 +7,7 @@ const expertRequestList = {
 // @ngInject
 function ExpertRequestListController(
   baseControllerListClass,
+  $scope,
   $q,
   $state,
   $filter,
@@ -23,6 +24,7 @@ function ExpertRequestListController(
       this.loadContext().then(() => {
         this.tableOptions = this.getTableOptions();
         fn();
+        $scope.$emit('expertRequestCustomerList.initialized');
       });
     },
     loadContext: function() {

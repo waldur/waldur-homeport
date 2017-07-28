@@ -6,16 +6,18 @@ export const projectDashboard = {
     project: '<'
   },
   controller: class ProjectDashboardController {
-    constructor(DashboardChartService, $interval, ENV) {
+    constructor(DashboardChartService, $interval, $scope, ENV) {
       // @ngInject
       this.DashboardChartService = DashboardChartService;
       this.ENV = ENV;
       this.$interval = $interval;
       this.loading = null;
+      this.$scope = $scope;
     }
 
     $onInit() {
       this.pollingPromise = this.startPolling();
+      this.$scope.$emit('projectDashboard.initialized');
     }
 
     $onDestroy() {

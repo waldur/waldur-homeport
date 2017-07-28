@@ -1,10 +1,10 @@
 <a ng-class="{{ $ctrl.getButtonClass() }}"
-   ng-click="$ctrl.selectWorkspace()"
+   ng-click="$ctrl.changeWorkspace()"
    ng-disabled="!$ctrl.hasCustomer"
    uib-tooltip="{{ $ctrl.getTooltip() | translate }}"
    tooltip-placement="bottom">
   <i ng-class="{{ $ctrl.getIconClass() }}"></i>
-  <span ng-if="$ctrl.getTitle()">{{ $ctrl.getTitle() }}</span>
-  <span ng-if="!$ctrl.getTitle()" translate>Select workspace</span>
+  <span ng-attr-id="select-workspace-title" ng-if="$ctrl.getTitle()">{{ $ctrl.getTitle() }}</span>
+  <span ng-attr-id="select-workspace-title" ng-if="!$ctrl.getTitle()" translate>Select workspace</span>
   <i class="fa fa-angle-down"></i>
 </a>

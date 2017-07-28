@@ -1,6 +1,9 @@
 <div class="modal-header">
     <h3 class="modal-title">
       <span translate>Select workspace</span>
+      <div class="pull-right">
+        <extension-point id="select-workspace-header-action"></extension-point>
+      </div>
     </h3>
 </div>
 <div class="modal-body" ng-class="{disabled: $ctrl.loadingState}">
@@ -13,7 +16,7 @@
           <span translate>You do not belong to any organization yet.</span>
         </h3>
         <div>
-            <a class="btn btn-default"
+            <a class="btn btn-default" id="add-new-organization"
               ng-click="$ctrl.createOrganization()"
               ng-if="$ctrl.canCreateOrganization">
               <i class="fa fa-plus"></i>
@@ -25,8 +28,9 @@
   <div ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length > 0" class="row">
     <div class="col-md-6 col-xs-12 m-b-md">
       <a class="pull-right btn btn-sm btn-default"
-        ng-click="$ctrl.createOrganization()"
-        ng-if="$ctrl.canCreateOrganization">
+          id="add-new-organization"
+          ng-click="$ctrl.createOrganization()"
+          ng-if="$ctrl.canCreateOrganization">
         <i class="fa fa-plus"></i>
         <span translate>Add new</span>
         <span class="hidden-xs" translate>organization</span>

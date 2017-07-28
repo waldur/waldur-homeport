@@ -41,6 +41,9 @@ import 'angular-ui-bootstrap';
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 import 'angular-bind-html-compile-ci-dev';
 import 'oclazyload';
+import 'intro.js';
+import 'intro.js/introjs.css';
+import 'angular-intro.js';
 
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require

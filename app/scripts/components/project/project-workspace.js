@@ -111,6 +111,7 @@ export default function ProjectWorkspaceController(
         icon: 'fa-group',
         link: 'project.team({uuid: $ctrl.context.project.uuid})',
         feature: 'team',
+        key: 'team',
         countFieldKey: 'users',
         index: 800,
       },

@@ -1,8 +1,9 @@
 export default class NavigationUtilsService {
   // @ngInject
-  constructor($state, $rootScope) {
+  constructor($state, $rootScope, $uibModal) {
     this.$state = $state;
     this.$rootScope = $rootScope;
+    this.$uibModal = $uibModal;
   }
 
   goBack() {
@@ -13,5 +14,15 @@ export default class NavigationUtilsService {
     } else {
       this.$state.go('profile.details');
     }
+  }
+
+  selectWorkspace() {
+    let dialog = this.$uibModal.open({
+      component: 'selectWorkspaceDialog',
+      size: 'lg',
+    });
+    dialog.result.catch(() => {
+      this.$rootScope.$emit('selectWorkspaceDialog.dismissed');
+    });
   }
 }
