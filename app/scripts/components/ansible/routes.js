@@ -4,7 +4,7 @@ import { APPSTORE_CATEGORY } from './constants';
 export default function ansibleRoutes($stateProvider) {
   $stateProvider
     .state('appstore.ansible', {
-      url: 'applications/',
+      url: 'applications/:category/',
       template: '<ansible-job-create/>',
       data: {
         category: APPSTORE_CATEGORY,
