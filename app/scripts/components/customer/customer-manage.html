@@ -24,6 +24,11 @@
                     <dd>{{::ManageController.customer.registration_code}}</dd>
                 </span>
 
+                <span ng-if="::ManageController.accountingStartDate">
+                    <dt><span translate>Accounting start date</span>:</dt>
+                    <dd>{{::ManageController.accountingStartDate | dateTime}}</dd>
+                </span>
+
                 <span ng-if="::ManageController.customer.agreement_number">
                     <dt><span translate>Agreement number</span>:</dt>
                     <dd>{{::ManageController.customer.agreement_number}}</dd>

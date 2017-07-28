@@ -148,7 +148,7 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:87
+#: app/scripts/components/customer/customer-manage.html:92
 msgid "Account"
 msgstr ""
 
@@ -180,6 +180,10 @@ msgstr ""
 #: app/scripts/components/billing/billing-record-header.html:9
 #: app/scripts/components/billing/billing-tabs.html:10
 msgid "Accounting records"
+msgstr ""
+
+#: app/scripts/components/customer/customer-manage.html:28
+msgid "Accounting start date"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html:11
@@ -306,8 +310,8 @@ msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-config.js:47
-#: app/scripts/components/customer/customer-manage.html:33
-#: app/scripts/components/customer/customer-manage.html:69
+#: app/scripts/components/customer/customer-manage.html:38
+#: app/scripts/components/customer/customer-manage.html:74
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
 msgstr ""
@@ -319,7 +323,7 @@ msgstr ""
 msgid "Affected resource"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:28
+#: app/scripts/components/customer/customer-manage.html:33
 msgid "Agreement number"
 msgstr ""
 
@@ -548,7 +552,7 @@ msgstr ""
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:84
+#: app/scripts/components/customer/customer-manage.html:89
 msgid "Bank"
 msgstr ""
 
@@ -755,7 +759,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:66
+#: app/scripts/components/customer/customer-manage.html:71
 msgid "Company"
 msgstr ""
 
@@ -786,7 +790,7 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:111
+#: app/scripts/components/customer/customer-manage.js:117
 msgid "Confirm deletion?"
 msgstr ""
 
@@ -803,7 +807,7 @@ msgid "Connected subnets"
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-config.js:17
-#: app/scripts/components/customer/customer-manage.html:38
+#: app/scripts/components/customer/customer-manage.html:43
 msgid "Contact e-mail"
 msgstr ""
 
@@ -812,7 +816,7 @@ msgid "Contact email"
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-config.js:23
-#: app/scripts/components/customer/customer-manage.html:43
+#: app/scripts/components/customer/customer-manage.html:48
 msgid "Contact phone"
 msgstr ""
 
@@ -854,7 +858,7 @@ msgid "Could not load a list of identity providers. Please try again."
 msgstr ""
 
 #: app/scripts/components/customer/customer-create-config.js:41
-#: app/scripts/components/customer/customer-manage.html:72
+#: app/scripts/components/customer/customer-manage.html:77
 msgid "Country"
 msgstr ""
 
@@ -1190,7 +1194,7 @@ msgid "Edit team member"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:62
-#: app/scripts/components/customer/customer-manage.html:75
+#: app/scripts/components/customer/customer-manage.html:80
 #: app/scripts/components/invitations/invitations-list.js:95
 msgid "Email"
 msgstr ""
@@ -2650,11 +2654,11 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:123
+#: app/scripts/components/customer/customer-manage.html:128
 msgid "Only staff can remove organization."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:104
+#: app/scripts/components/customer/customer-manage.html:109
 msgid "Only staff can update organization policies."
 msgstr ""
 
@@ -2729,7 +2733,7 @@ msgstr ""
 msgid "Organization {customer_name} has no providers."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:107
+#: app/scripts/components/customer/customer-manage.html:112
 msgid "Organization actions"
 msgstr ""
 
@@ -2737,7 +2741,7 @@ msgstr ""
 msgid "Organization code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:91
+#: app/scripts/components/customer/customer-manage.js:97
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
@@ -2777,8 +2781,8 @@ msgstr ""
 msgid "Organization registration code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:102
-#: app/scripts/components/customer/customer-manage.js:99
+#: app/scripts/components/customer/customer-manage.js:105
+#: app/scripts/components/customer/customer-manage.js:108
 msgid "Organization removal"
 msgstr ""
 
@@ -2879,7 +2883,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-customer-details.html:5
 #: app/scripts/components/billing/billing-issuer-details.html:5
-#: app/scripts/components/customer/customer-manage.html:81
+#: app/scripts/components/customer/customer-manage.html:86
 #: app/scripts/components/customer/customer-popover.html:32
 msgid "Phone"
 msgstr ""
@@ -3002,7 +3006,7 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:78
+#: app/scripts/components/customer/customer-manage.html:83
 msgid "Postal"
 msgstr ""
 
@@ -3384,7 +3388,7 @@ msgstr ""
 msgid "Read through terms and conditions."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:104
+#: app/scripts/components/customer/customer-manage.js:110
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
@@ -3477,7 +3481,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:118
+#: app/scripts/components/customer/customer-manage.html:123
 msgid "Remove organization"
 msgstr ""
 
@@ -3490,7 +3494,7 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:111
+#: app/scripts/components/customer/customer-manage.html:116
 msgid "Report incorrect data"
 msgstr ""
 
@@ -3544,7 +3548,7 @@ msgstr ""
 msgid "Request name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:106
+#: app/scripts/components/customer/customer-manage.js:112
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
 msgstr ""
@@ -4212,13 +4216,13 @@ msgstr ""
 msgid "Subnet Name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:55
+#: app/scripts/components/customer/customer-manage.html:60
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:43
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:40
 msgid "Subnets"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:54
+#: app/scripts/components/customer/customer-manage.html:59
 msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
@@ -4886,7 +4890,7 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:48
+#: app/scripts/components/customer/customer-manage.html:53
 msgid "VAT code"
 msgstr ""
 
@@ -4894,7 +4898,7 @@ msgstr ""
 msgid "VAT is not included."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:90
+#: app/scripts/components/customer/customer-manage.html:95
 msgid "VAT rate"
 msgstr ""
 
@@ -4979,7 +4983,7 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:105
+#: app/scripts/components/customer/customer-manage.js:111
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
@@ -5007,7 +5011,7 @@ msgstr ""
 msgid "You can provision a new provider through <a href=\"{link}\">Service store</a>."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:115
+#: app/scripts/components/customer/customer-manage.html:120
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
