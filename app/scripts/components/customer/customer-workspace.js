@@ -121,6 +121,7 @@ export function CustomerWorkspaceController(
         icon: 'fa-group',
         link: 'organization.team({uuid: $ctrl.context.customer.uuid})',
         feature: 'team',
+        key: 'team',
         countFieldKey: 'users',
         index: 900,
       },

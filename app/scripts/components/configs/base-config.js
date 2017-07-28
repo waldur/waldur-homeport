@@ -164,6 +164,9 @@ const ENV = {
   MANAGER_CAN_MANAGE_TENANTS: false,
   VALIDATE_INVITATION_EMAIL: false,
 
+  // delay in milliseconds before starting intro js hints. It is recommended to set it bigger than 500.
+  introJsDelay: 1000,
+
   roles: {
     owner: gettext('Organization owner'),
     manager: gettext('Project manager'),

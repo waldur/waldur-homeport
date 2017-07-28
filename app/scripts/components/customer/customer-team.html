@@ -1,13 +1,13 @@
 <div class="tabs-container m-l-sm">
     <uib-tabset active="active">
-        <uib-tab index="0">
-            <uib-tab-heading translate>Users</uib-tab-heading>
+        <uib-tab index="0" select="$ctrl.usersTabSelected()">
+            <uib-tab-heading id="users-tab" translate>Users</uib-tab-heading>
             <div class="panel-body" ng-if="active==0">
                 <customer-users-list></customer-users-list>
             </div>
         </uib-tab>
         <uib-tab index="1">
-            <uib-tab-heading translate>Invitations</uib-tab-heading>
+            <uib-tab-heading id="invitations-tab" translate>Invitations</uib-tab-heading>
             <div class="panel-body" ng-if="active==1">
                 <invitations-list></invitations-list>
             </div>

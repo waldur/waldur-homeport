@@ -14,6 +14,7 @@ export default selectWorkspaceDialog;
 
 // @ngInject
 function SelectWorkspaceDialogController(
+    $scope,
     $uibModal,
     $state,
     $q,
@@ -125,6 +126,8 @@ function SelectWorkspaceDialogController(
           organization.canGotoDashboard = organization.ownerOrStaff || ctrl.currentUser.is_support;
           organization.projects = ncUtils.sortArrayOfObjects(organization.projects, 'name', 0);
         });
+      }).finally(() => {
+        $scope.$emit('selectWorkspaceDialog.initialized');
       })
     ]);
   }
