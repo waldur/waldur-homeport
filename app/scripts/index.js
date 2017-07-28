@@ -46,6 +46,7 @@ import freeipaModule from './components/freeipa/module';
 import rootModule from './components/module';
 import priceModule from './components/price/module';
 import ansibleModule from './components/ansible/module';
+import introModule from './components/intro/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -69,6 +70,7 @@ const appModule = angular.module('waldur', [
   'ui.slimscroll',
   'angular-bind-html-compile',
   'oc.lazyLoad',
+  'angular-intro',
 ]);
 
 rootModule(appModule);
@@ -115,5 +117,6 @@ directivesModule(appModule);
 servicesModule(appModule);
 freeipaModule(appModule);
 ansibleModule(appModule);
+introModule(appModule);
 
 bootstrap('waldur');

@@ -13,6 +13,7 @@ import { appFooter } from './app-footer';
 import headerModule from './header/module';
 import NavigationUtilsService from './navigation-utils-service';
 import cookiesConsent from './cookies-consent';
+import registerExtensionPoint from './extend-select-workspace-dialog';
 
 export default module => {
   module.service('NavigationUtilsService', NavigationUtilsService);
@@ -30,4 +31,5 @@ export default module => {
   module.component('appFooter', appFooter);
   module.component('cookiesConsent', cookiesConsent);
   headerModule(module);
+  module.run(registerExtensionPoint);
 };

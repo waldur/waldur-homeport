@@ -17,15 +17,21 @@ const workspaceButtonClasses = {
 
 // @ngInject
 class SelectWorkspaceToggleController {
-  constructor(WorkspaceService, $uibModal, $rootScope) {
+  constructor(WorkspaceService, $scope, $rootScope, NavigationUtilsService) {
     this.WorkspaceService = WorkspaceService;
-    this.$uibModal = $uibModal;
+    this.$scope = $scope;
     this.$rootScope = $rootScope;
+    this.NavigationUtilsService = NavigationUtilsService;
   }
 
   $onInit() {
-    this.$rootScope.$on('WORKSPACE_CHANGED', this.refreshWorkspace.bind(this));
+    this.unlisten = this.$rootScope.$on('WORKSPACE_CHANGED', this.refreshWorkspace.bind(this));
     this.refreshWorkspace();
+    this.$scope.$emit('selectWorkspaceToggle.initialized');
+  }
+
+  $onDestroy() {
+    this.unlisten();
   }
 
   refreshWorkspace() {
@@ -61,14 +67,12 @@ class SelectWorkspaceToggleController {
     }
   }
 
-  selectWorkspace() {
+  changeWorkspace() {
     if (!this.hasCustomer) {
       return;
     }
-    this.$uibModal.open({
-      component: 'selectWorkspaceDialog',
-      size: 'lg'
-    });
+
+    this.NavigationUtilsService.selectWorkspace();
   }
 }
 

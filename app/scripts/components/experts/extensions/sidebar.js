@@ -9,6 +9,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
             icon: 'fa-vcard',
             link: 'organization.experts({uuid: $ctrl.context.customer.uuid})',
             feature: 'experts',
+            key: 'expert-requests',
             index: 110,
           }
         ];
@@ -25,6 +26,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         icon: 'fa-vcard',
         label: gettext('Requests for experts'),
         feature: 'experts',
+        key: 'expert-requests',
         parent: 'resources',
         index: 900,
       }

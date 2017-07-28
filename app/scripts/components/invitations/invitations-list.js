@@ -14,6 +14,7 @@ function InvitationsListController(
   usersService,
   invitationService,
   ncUtils,
+  $scope,
   $state,
   $filter,
   $q,
@@ -34,6 +35,7 @@ function InvitationsListController(
         this.tableOptions = this.getTableOptions();
         fn();
       }).finally(() => {
+        $scope.$emit('invitationList.initialized');
         this.loading = false;
       });
     },
