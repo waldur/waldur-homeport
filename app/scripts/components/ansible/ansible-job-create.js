@@ -83,7 +83,7 @@ const ansibleJobCreate = {
           uuid: job.project_uuid,
           jobId: job.uuid
         });
-      }, response => {
+      }).catch(response => {
         this.errors = response.data;
         this.ncUtilsFlash.error(gettext('Unable to create application.'));
       });
