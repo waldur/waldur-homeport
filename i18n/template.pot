@@ -991,6 +991,7 @@ msgstr ""
 msgid "Create subnet"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-summary.html:23
 #: app/scripts/components/billing/billing-utils.js:41
 #: app/scripts/components/experts/requests/expert-request-summary.html:22
 #: app/scripts/components/issues/issue-detail.html:80
@@ -1086,6 +1087,7 @@ msgstr ""
 msgid "Deployment plan does not have any item yet."
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-summary.html:28
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:74
 #: app/scripts/components/experts/requests/expert-request-create.js:47
 #: app/scripts/components/experts/requests/expert-request-summary.html:24
@@ -2846,6 +2848,10 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-summary.html:39
+msgid "Output log"
+msgstr ""
+
 #: app/scripts/components/user/user-dashboard.html:6
 msgid "Owned organizations"
 msgstr ""
@@ -2874,6 +2880,10 @@ msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:91
 msgid "Paid"
+msgstr ""
+
+#: app/scripts/components/ansible/ansible-job-summary.html:33
+msgid "Parameters"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:36
@@ -2964,6 +2974,7 @@ msgstr ""
 msgid "Plans"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-summary.html:18
 #: app/scripts/components/ansible/ansible-jobs-list.js:62
 msgid "Playbook"
 msgstr ""
@@ -4173,6 +4184,7 @@ msgstr ""
 msgid "Start time"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-summary.html:13
 #: app/scripts/components/ansible/ansible-jobs-list.js:66
 #: app/scripts/components/billing/billing-records-list.js:48
 #: app/scripts/components/billing/invoices-list.js:49
