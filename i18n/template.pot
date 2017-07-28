@@ -618,6 +618,7 @@ msgstr ""
 msgid "Can't unlink system provider."
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-create.html:19
 #: app/scripts/components/appstore/appstore-store.html:55
 #: app/scripts/components/appstore/dialog/appstore-selector-dialog.html:30
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html:37
@@ -878,6 +879,7 @@ msgstr ""
 msgid "CPU limit"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-create.html:16
 #: app/scripts/components/appstore/appstore-store.html:20
 #: app/scripts/components/appstore/appstore-store.html:51
 #: app/scripts/components/customer/customer-issues.js:31
