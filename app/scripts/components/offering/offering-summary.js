@@ -6,9 +6,8 @@ const offeringSummary = {
     offering: '<'
   },
   controller: class {
-    constructor($rootScope, usersService) {
-      // @ngInject
-      this.$rootScope = $rootScope;
+    // @ngInject
+    constructor(usersService) {
       this.usersService = usersService;
     }
 
@@ -22,10 +21,6 @@ const offeringSummary = {
 
     showLink() {
       return this.offering.issue_link && this.currentUser && (this.currentUser.is_staff || this.currentUser.is_support);
-    }
-
-    onCommentCreated() {
-      this.$rootScope.$emit('refreshCommentsList');
     }
   }
 };

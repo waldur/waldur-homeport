@@ -1,5 +1,5 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
-    <div class="sidebar-collapse" slimscroll="{height: '100%'}">
+    <div class="sidebar-collapse" slimscroll height="100%">
         <ul class="nav metismenu" id="side-menu">
             <li class="brand-name hidden-xs">
                 <a>
@@ -19,7 +19,9 @@
                 ng-repeat="item in $ctrl.items"
                 ng-class="item.class"
                 visible-if="item.feature">
-                <a ui-sref="{{ item.link }}" ng-if="item.link" ng-click="$ctrl.onMenuClick($event, item)">
+                <a ui-sref="{{ item.link }}"
+                   ng-attr-id="{{item.key}}"
+                   ng-if="item.link" ng-click="$ctrl.onMenuClick($event, item)">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label">{{ item.label | translate }}</span>
                     <span class="label label-default pull-right"
@@ -27,7 +29,8 @@
                         ng-bind="item.count"/>
                     <span class="fa arrow" ng-if="::item.children"/>
                 </a>
-                <a ng-if="::item.action" ng-click="item.action()">
+                <a ng-if="::item.action"
+                   ng-click="item.action()">
                     <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
                     <span class="nav-label">{{ item.label | translate }}</span>
                 </a>
@@ -48,6 +51,11 @@
                     </li>
                 </ul>
             </li>
+        </ul>
+        <ul class="nav metismenu visible-xs">
+            <support-link visible-if="'support'"/>
+            <language-selector-menu-item/>
+            <docs-link/>
         </ul>
     </div>
 </nav>

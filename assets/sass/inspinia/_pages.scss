@@ -285,12 +285,14 @@ ul.notes li div {
   -webkit-transform: rotate(-6deg);
   -o-transform: rotate(-6deg);
   -moz-transform: rotate(-6deg);
+  -ms-transform: rotate(-6deg);
 }
 
 ul.notes li:nth-child(even) div {
   -o-transform: rotate(4deg);
   -webkit-transform: rotate(4deg);
   -moz-transform: rotate(4deg);
+  -ms-transform: rotate(4deg);
   position: relative;
   top: 5px;
 }
@@ -299,6 +301,7 @@ ul.notes li:nth-child(3n) div {
   -o-transform: rotate(-3deg);
   -webkit-transform: rotate(-3deg);
   -moz-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
   position: relative;
   top: -5px;
 }
@@ -307,6 +310,7 @@ ul.notes li:nth-child(5n) div {
   -o-transform: rotate(5deg);
   -webkit-transform: rotate(5deg);
   -moz-transform: rotate(5deg);
+  -ms-transform: rotate(5deg);
   position: relative;
   top: -10px;
 }
@@ -316,6 +320,7 @@ ul.notes li div:hover, ul.notes li div:focus {
   -webkit-transform: scale(1.1);
   -moz-transform: scale(1.1);
   -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
   position: relative;
   z-index: 5;
 }
@@ -748,7 +753,7 @@ dd.project-people {
 }
 
 .chat-avatar {
-  white: 36px;
+  width: 36px;
   height: 36px;
   float: left;
   margin-right: 10px;
@@ -1350,7 +1355,6 @@ table.shoping-cart-table {
 body.body-small .vote-icon {
   display: none;
 }
-
 
 .lightBoxGallery {
   text-align: center

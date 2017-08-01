@@ -1,3 +1,4 @@
+import './globals';
 import '../../assets/sass/style.scss';
 
 import sparkline from './components/sparkline/module';
@@ -44,7 +45,8 @@ import servicesModule from './components/services/module';
 import freeipaModule from './components/freeipa/module';
 import rootModule from './components/module';
 import priceModule from './components/price/module';
-
+import ansibleModule from './components/ansible/module';
+import introModule from './components/intro/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -61,14 +63,14 @@ const appModule = angular.module('waldur', [
   'angulartics',
   'angulartics.google.analytics',
   'ngFileUpload',
-  'xeditable',
   'blockUI',
   'ngSanitize',
-  'leaflet-directive',
   'angular-cron-jobs',
   'ui.bootstrap',
   'ui.slimscroll',
-  'angular-bind-html-compile'
+  'angular-bind-html-compile',
+  'oc.lazyLoad',
+  'angular-intro',
 ]);
 
 rootModule(appModule);
@@ -114,5 +116,7 @@ controllersModule(appModule);
 directivesModule(appModule);
 servicesModule(appModule);
 freeipaModule(appModule);
+ansibleModule(appModule);
+introModule(appModule);
 
 bootstrap('waldur');

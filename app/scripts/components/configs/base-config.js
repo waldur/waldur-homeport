@@ -70,7 +70,6 @@ const ENV = {
   AllResources: -1,
   VirtualMachines: 0,
   PrivateClouds: 1,
-  Applications: 2,
   Storages: 3,
 
   appStoreCategories: [
@@ -89,13 +88,6 @@ const ENV = {
       services: ['OpenStack'],
     },
     {
-      name: gettext('Applications'),
-      icon: 'database',
-      type: 'provider',
-      key: 'apps',
-      services: ['Oracle', 'GitLab']
-    },
-    {
       name: gettext('Storages'),
       type: 'provider',
       key: 'storages',
@@ -107,10 +99,6 @@ const ENV = {
       name: gettext('Virtual machines'),
       services: ['Amazon', 'Azure', 'DigitalOcean', 'OpenStack'],
     },
-    {
-      name: gettext('Applications'),
-      services: ['Oracle', 'GitLab']
-    }
   ],
 
   // optional list of disabled services, for example, ['Amazon', 'Azure']
@@ -175,6 +163,9 @@ const ENV = {
   OWNERS_CAN_MANAGE_OWNERS: true,
   MANAGER_CAN_MANAGE_TENANTS: false,
   VALIDATE_INVITATION_EMAIL: false,
+
+  // delay in milliseconds before starting intro js hints. It is recommended to set it bigger than 500.
+  introJsDelay: 1000,
 
   roles: {
     owner: gettext('Organization owner'),

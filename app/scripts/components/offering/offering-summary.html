@@ -78,16 +78,8 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
-      <div class="ibox" ng-if="$ctrl.issue.url">
-        <div class="ibox-title">
-          <h5 translate>Comments</h5>
-        </div>
-        <div class="ibox-content">
-          <issue-comments-list issue="$ctrl.issue"/>
-          <issue-comments-form issue="$ctrl.issue" on-comment-created="$ctrl.onCommentCreated()"/>
-        </div>
-      </div>
+    <div class="col-sm-6" ng-if="$ctrl.issue.url">
+      <issue-comments-container issue="$ctrl.issue"></issue-comments-container>
     </div>
   </div>
 </div>

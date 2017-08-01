@@ -1,15 +1,14 @@
+import 'es6-promise/auto';
+
 import $ from 'jquery';
 import angular from 'angular';
 import moment from 'moment';
-
-window.gettext = angular.identity;
 window.moment = moment;
 
 import './shims';
 
 import 'font-awesome/css/font-awesome.css';
 import 'world-flags-sprite/stylesheets/flags16.css';
-import 'html5shiv';
 import 'npm-font-open-sans';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -37,14 +36,14 @@ import 'angular-translate-storage-cookie';
 import 'angular-translate-storage-local';
 import 'angular-translate-loader-static-files';
 import 'ng-file-upload';
-import 'angular-xeditable';
-import 'angular-xeditable/dist/css/xeditable.css';
 import 'angular-sanitize';
-import 'leaflet';
-import 'angular-leaflet-directive';
 import 'angular-ui-bootstrap';
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 import 'angular-bind-html-compile-ci-dev';
+import 'oclazyload';
+import 'intro.js';
+import 'intro.js/introjs.css';
+import 'angular-intro.js';
 
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require

@@ -1,5 +1,6 @@
 import stableMode from '../../configs/modes/stable.json';
 import experimentalMode from '../../configs/modes/experimental.json';
+import attachTracking from './tracking';
 
 const files = ['scripts/configs/config.json'];
 const modes = {stableMode, experimentalMode};
@@ -17,6 +18,7 @@ export default function bootstrap(modulename) {
     function updateSettings(responses) {
       window.$$CUSTOMENV = angular.extend.apply(null, responses);
       window.$$MODES = modes;
+      attachTracking(window.$$CUSTOMENV);
     }
 
     function reportError() {

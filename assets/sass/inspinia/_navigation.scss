@@ -153,12 +153,16 @@
 .nav-header {
   padding: 33px 25px;
   background-color: $nav-bg;
-  background-image: $nav-profil-pattern;
+  background-image: $nav-profile-pattern;
 
 }
 
 .pace-done .nav-header {
   transition: all 0.4s;
+}
+
+ul.nav-second-level {
+  background: darken($nav-bg, 3%);
 }
 
 .nav > li.active {
@@ -194,7 +198,7 @@
   height: 50px;
   padding: 0;
   width: 200px;
-  display: inline-table;
+  display: block;
 }
 
 .navbar-form-custom .form-group {

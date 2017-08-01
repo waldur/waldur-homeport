@@ -11,7 +11,7 @@
 .tabcontrol
 {
     display: block;
-    /*width: 100%;*/
+    width: 100%;
     overflow: hidden;
 }
 
@@ -74,14 +74,6 @@
 .wizard > .steps > ul > li
 {
     width: 25%;
-}
-
-
-/* fix steps width on small screen in case of pop up */
-@media (max-width: 480px) {
-  .wizard > .steps > ul > li {
-    width: auto;
-  }
 }
 
 .wizard > .steps > ul > li,

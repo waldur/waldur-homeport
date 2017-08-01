@@ -2,6 +2,7 @@ import selectWorkspaceToggle from './select-workspace-toggle';
 import selectWorkspaceDialog from './select-workspace-dialog';
 import sidebar from './sidebar';
 import sidebarToggle from './sidebar-toggle';
+import SidebarExtensionService from './sidebar-extension-service';
 import siteHeader from './site-header';
 import titleService from './title-service';
 import setTitleFromState from './set-title-from-state';
@@ -12,9 +13,11 @@ import { appFooter } from './app-footer';
 import headerModule from './header/module';
 import NavigationUtilsService from './navigation-utils-service';
 import cookiesConsent from './cookies-consent';
+import registerExtensionPoint from './extend-select-workspace-dialog';
 
 export default module => {
   module.service('NavigationUtilsService', NavigationUtilsService);
+  module.service('SidebarExtensionService', SidebarExtensionService);
   module.component('selectWorkspaceToggle', selectWorkspaceToggle);
   module.component('selectWorkspaceDialog', selectWorkspaceDialog);
   module.component('sidebar', sidebar);
@@ -28,4 +31,5 @@ export default module => {
   module.component('appFooter', appFooter);
   module.component('cookiesConsent', cookiesConsent);
   headerModule(module);
+  module.run(registerExtensionPoint);
 };

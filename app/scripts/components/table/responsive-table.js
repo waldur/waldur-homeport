@@ -309,7 +309,8 @@ export default function responsiveTable($rootScope, $timeout, $interval, $compil
               return options.rowActions.call(scope.controller, row);
             }
             var template = '<button title="{tooltip}" class="btn btn-default btn-sm {cls}" {disabled} row-index="{row}" action-index="{action}">{name}</button>';
-            var buttons = spec.map(function(action, index) {
+            var visibleButtons = spec.filter((action) => !action.hasOwnProperty('isVisible') || action.isVisible(row));
+            var buttons = visibleButtons.map(function(action, index) {
               var disabled = action.isDisabled && action.isDisabled(row) && 'disabled' || '';
               var tooltip = action.tooltip && action.tooltip(row) || '';
               return template.replace('{disabled}', disabled)

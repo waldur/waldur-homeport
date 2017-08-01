@@ -1,6 +1,9 @@
 <div class="modal-header">
     <h3 class="modal-title">
       <span translate>Select workspace</span>
+      <div class="pull-right">
+        <extension-point id="select-workspace-header-action"></extension-point>
+      </div>
     </h3>
 </div>
 <div class="modal-body" ng-class="{disabled: $ctrl.loadingState}">
@@ -13,7 +16,7 @@
           <span translate>You do not belong to any organization yet.</span>
         </h3>
         <div>
-            <a class="btn btn-default"
+            <a class="btn btn-default" id="add-new-organization"
               ng-click="$ctrl.createOrganization()"
               ng-if="$ctrl.canCreateOrganization">
               <i class="fa fa-plus"></i>
@@ -25,8 +28,9 @@
   <div ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length > 0" class="row">
     <div class="col-md-6 col-xs-12 m-b-md">
       <a class="pull-right btn btn-sm btn-default"
-        ng-click="$ctrl.createOrganization()"
-        ng-if="$ctrl.canCreateOrganization">
+          id="add-new-organization"
+          ng-click="$ctrl.createOrganization()"
+          ng-if="$ctrl.canCreateOrganization">
         <i class="fa fa-plus"></i>
         <span translate>Add new</span>
         <span class="hidden-xs" translate>organization</span>
@@ -47,7 +51,7 @@
           </label>
         </div>
       </div>
-      <div class="list-group" slimscroll="{alwaysVisible: true, height: '300px'}" id="organization-selector">
+      <div class="list-group" slimscroll height="300" id="organization-selector">
         <div class="list-group-item"
           ng-repeat="organization in $ctrl.organizations | filter: $ctrl.filterOrganization as filteredOrganizations"
           ng-class="{active: organization.uuid == $ctrl.selectedOrganization.uuid}"
@@ -62,12 +66,16 @@
             ng-if="organization.abbreviation"
             uib-tooltip="{{ organization.name }}"
             tooltip-append-to-body="true"
-            tooltip-class="select-workspace-dialog__tooltip--order"
-            ng-bind="organization.abbreviation"></div>
+            tooltip-class="select-workspace-dialog__tooltip--order">
+            {{ organization.abbreviation }}
+            <extension-point id="organization-selector"></extension-point>
+          </div>
           <div
             class="elipsis"
-            ng-if="!organization.abbreviation"
-            ng-bind="organization.name"></div>
+            ng-if="!organization.abbreviation">
+            {{ organization.name }}
+            <extension-point id="organization-selector"></extension-point>
+          </div>
         </div>
         <div class="list-group-item" ng-if="filteredOrganizations.length === 0">
           <span class="elipsis" translate>There are no organizations matching filter.</span>
@@ -103,9 +111,10 @@
             <span translate>There are no projects yet for this organization.</span>
           </p>
       </div>
-      <div ng-if="$ctrl.selectedOrganization.projects.length > 0"
+      <div ng-show="$ctrl.selectedOrganization.projects.length > 0"
         class="list-group"
-        slimscroll="{alwaysVisible: true, height: '300px'}"
+        slimscroll
+        height="300"
         id="project-selector">
         <div class="list-group-item"
           ng-repeat="project in $ctrl.selectedOrganization.projects | filter: {name: $ctrl.projectSearchInput}"

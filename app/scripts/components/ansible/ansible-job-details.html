@@ -1,0 +1,6 @@
+<div ng-if="$ctrl.loading">
+  <loading-spinner/>
+</div>
+<div ng-if="!$ctrl.loading">
+  <ansible-job-summary job="$ctrl.job"></ansible-job-summary>
+</div>

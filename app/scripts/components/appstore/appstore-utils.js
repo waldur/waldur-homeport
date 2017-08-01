@@ -5,13 +5,16 @@ export default class AppStoreUtilsService {
   }
 
   openDialog(options) {
+    /**
+     * @param {Object} options Additional data for service store selector dialog.
+     * @param {string} options.currentCategory The name of the category to be selected.
+     * @param {boolean} options.selectProject Allows to toogle display of the project selector.
+     */
     this.$uibModal.open({
-      component: 'appstoreCategorySelector',
+      component: 'appstoreSelectorDialog',
       size: 'lg',
       resolve: {
-        selectProject: function() {
-          return options && options.selectProject;
-        }
+        options: () => options || {},
       }
     });
   }

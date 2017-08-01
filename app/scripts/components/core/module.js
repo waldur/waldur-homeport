@@ -1,5 +1,4 @@
 import ErrorMessageFormatter from './error-message-formatter';
-import attachTracking from './tracking';
 import submitButton from './submit-button';
 import loadingSpinner from './loading-spinner';
 import multipleSelect from './multiple-select';
@@ -8,6 +7,8 @@ import { baseServiceClass, listCache } from './base-service';
 import servicesService from './services-service';
 import tabCounterService from './tab-counters-service';
 import { ncUtils, coreUtils } from './utils';
+import extensionPoint from './extension-point-directive';
+import extensionPointService from './extension-point-service';
 
 export default module => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
@@ -17,10 +18,11 @@ export default module => {
   module.factory('listCache', listCache);
   module.service('servicesService', servicesService);
   module.service('tabCounterService', tabCounterService);
-  module.run(attachTracking);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
   module.directive('multipleSelect', multipleSelect);
+  module.directive('extensionPoint', extensionPoint);
+  module.service('extensionPointService', extensionPointService);
   module.run(redirectToState);
   module.run(scrollToTop);
   sentryModule(module);

@@ -14,6 +14,7 @@ function ProjectOfferingsListController(
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({
     init: function() {
+      this.controllerScope = controllerScope;
       this.service = offeringsService;
       let fn = this._super.bind(this);
       currentStateService.getProject().then(project => {

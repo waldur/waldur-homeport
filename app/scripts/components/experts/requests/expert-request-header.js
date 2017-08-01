@@ -4,7 +4,7 @@ const expertRequestHeader = {
   template,
   bindings: {
     expertRequest: '<',
-  },
+  }
 };
 
 export default expertRequestHeader;

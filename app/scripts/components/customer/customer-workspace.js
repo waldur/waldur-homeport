@@ -20,7 +20,8 @@ export function CustomerWorkspaceController(
   tabCounterService,
   AppStoreUtilsService,
   WorkspaceService,
-  BillingUtils) {
+  BillingUtils,
+  SidebarExtensionService) {
 
   activate();
 
@@ -37,26 +38,29 @@ export function CustomerWorkspaceController(
     refreshWorkspace();
   }
 
-  function setItems() {
+  function setItems(customItems) {
     $scope.items = [
       {
         label: gettext('Dashboard'),
         icon: 'fa-th-large',
-        link: 'organization.dashboard({uuid: $ctrl.context.customer.uuid})'
+        link: 'organization.dashboard({uuid: $ctrl.context.customer.uuid})',
+        index: 100,
       },
       {
         label: gettext('Providers'),
         icon: 'fa-database',
         link: 'organization.providers({uuid: $ctrl.context.customer.uuid})',
         feature: 'providers',
-        countFieldKey: 'services'
+        countFieldKey: 'services',
+        index: 200,
       },
       {
         label: gettext('Projects'),
         icon: 'fa-bookmark',
         link: 'organization.projects({uuid: $ctrl.context.customer.uuid})',
         feature: 'projects',
-        countFieldKey: 'projects'
+        countFieldKey: 'projects',
+        index: 300,
       },
       {
         icon: 'fa-shopping-cart',
@@ -65,24 +69,28 @@ export function CustomerWorkspaceController(
         action: function() {
           return AppStoreUtilsService.openDialog({selectProject: true});
         },
+        index: 400,
       },
       {
         label: gettext('Analytics'),
         icon: 'fa-bar-chart-o',
         link: 'organization.analysis',
         feature: 'analytics',
+        index: 500,
         children: [
           {
             label: gettext('Cost analysis'),
             icon: 'fa-pie-chart',
             link: 'organization.analysis.cost({uuid: $ctrl.context.customer.uuid})',
-            feature: 'analytics.cost'
+            feature: 'analytics.cost',
+            index: 100,
           },
           {
             label: gettext('Resource usage'),
             icon: 'fa-tachometer',
             link: 'organization.analysis.resources({uuid: $ctrl.context.customer.uuid})',
-            feature: 'analytics.resources'
+            feature: 'analytics.resources',
+            index: 200,
           }
         ]
       },
@@ -90,40 +98,48 @@ export function CustomerWorkspaceController(
         label: gettext('Audit logs'),
         icon: 'fa-bell-o',
         link: 'organization.details({uuid: $ctrl.context.customer.uuid})',
-        feature: 'eventlog'
+        feature: 'eventlog',
+        index: 600,
       },
       {
         label: gettext('Issues'),
         icon: 'fa-question-circle',
         link: 'organization.issues({uuid: $ctrl.context.customer.uuid})',
-        feature: 'support'
+        feature: 'support',
+        index: 700,
       },
       {
         label: gettext('Alerts'),
         icon: 'fa-fire',
         link: 'organization.alerts({uuid: $ctrl.context.customer.uuid})',
         feature: 'alerts',
-        countFieldKey: 'alerts'
+        countFieldKey: 'alerts',
+        index: 800,
       },
       {
         label: gettext('Team'),
         icon: 'fa-group',
         link: 'organization.team({uuid: $ctrl.context.customer.uuid})',
         feature: 'team',
-        countFieldKey: 'users'
+        key: 'team',
+        countFieldKey: 'users',
+        index: 900,
       },
       {
         label: BillingUtils.getTabTitle(),
         icon: 'fa-file-text-o',
         link: 'organization.billing.tabs({uuid: $ctrl.context.customer.uuid})',
-        feature: 'billing'
+        feature: 'billing',
+        index: 1000,
       },
       {
         label: gettext('Manage'),
         icon: 'fa-wrench',
-        link: 'organization.manage({uuid: $ctrl.context.customer.uuid})'
+        link: 'organization.manage({uuid: $ctrl.context.customer.uuid})',
+        index: 9999
       }
     ];
+    $scope.items = SidebarExtensionService.mergeItems($scope.items, customItems);
   }
 
   function refreshWorkspace() {
@@ -131,12 +147,14 @@ export function CustomerWorkspaceController(
     if (options && options.customer) {
       $scope.currentCustomer = options.customer;
       $scope.context = {customer: options.customer};
-      setItems();
-      tabCounterService.connect({
-        $scope: $scope,
-        tabs: $scope.items,
-        getCounters: getCounters.bind(null, options.customer),
-        getCountersError: getCountersError
+      SidebarExtensionService.getItems('customer').then(customItems => {
+        setItems(customItems);
+        tabCounterService.connect({
+          $scope: $scope,
+          tabs: $scope.items,
+          getCounters: getCounters.bind(null, options.customer),
+          getCountersError: getCountersError
+        });
       });
     }
   }

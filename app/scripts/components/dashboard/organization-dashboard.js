@@ -6,16 +6,18 @@ export const organizationDashboard = {
     customer: '<'
   },
   controller: class OrganizationDashboardController {
-    constructor(DashboardChartService, ENV, $interval) {
+    constructor(DashboardChartService, ENV, $interval, $scope) {
       // @ngInject
       this.DashboardChartService = DashboardChartService;
       this.ENV = ENV;
       this.$interval = $interval;
       this.loading = null;
+      this.$scope = $scope;
     }
 
     $onInit() {
       this.pollingPromise = this.startPolling();
+      this.$scope.$emit('organizationDashboard.initialized');
     }
 
     $onDestroy() {

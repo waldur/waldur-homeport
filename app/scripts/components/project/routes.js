@@ -125,14 +125,6 @@ export default function projectRoutes($stateProvider) {
       }
     })
 
-    .state('project.resources.apps', {
-      url: 'applications/',
-      template: '<resource-applications-list/>',
-      data: {
-        pageTitle: gettext('Applications')
-      }
-    })
-
     .state('project.resources.clouds', {
       url: 'private-clouds/',
       template: '<resource-private-clouds-list/>',
@@ -161,15 +153,6 @@ export default function projectRoutes($stateProvider) {
       data: {
         pageTitle: gettext('Requested Services'),
         feature: 'offering'
-      }
-    })
-
-    .state('project.resources.experts', {
-      url: 'experts/',
-      template: '<expert-requests-list/>',
-      data: {
-        pageTitle: gettext('Experts'),
-        feature: 'experts'
       }
     })
 

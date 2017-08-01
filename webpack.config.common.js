@@ -6,7 +6,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var scssPath = path.resolve(__dirname, './assets/sass');
 var imagesPath = path.resolve(__dirname, './assets/images');
-var extractPlugin = new ExtractTextPlugin('css/[name]-bundle-[contenthash].css');
+var extractPlugin = new ExtractTextPlugin({
+  filename: 'css/[name]-bundle-[contenthash].css'
+});
 var momentLocalesPlugin = new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en-gb|et|ru|lt|lv)/);
 
 module.exports = {
@@ -16,51 +18,97 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './app/static'),
-    filename: 'js/[name]-bundle.js'
+    filename: 'js/[name]-bundle.js',
+    chunkFilename: 'js/[name].[chunkhash].js',
   },
   devtool: 'source-map',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'ng-annotate!babel?cacheDirectory',
         exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+        ],
       },
       {
         test: /\.html$/,
-        loader: 'html?minimize=true'
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              minimize: true,
+            },
+          },
+        ],
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss?sourceMap!sass?sourceMap&includePaths[]=' + scssPath)
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader?sourceMap',
+            'postcss-loader?sourceMap',
+            'sass-loader?sourceMap&includePaths[]=' + scssPath,
+          ]
+        }),
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      },
-      {
-        // replace with prodivePlugin when slimscroll is migrated to webpack.
-        test: require.resolve('jquery'),
-        loader: 'expose?jQuery!expose?$'
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader?sourceMap'
+        })
       },
       {
         test: /\.(eot|svg|otf|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?/,
-        loader: 'file?publicPath=../&name=fonts/[name].[ext]?[hash]'
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              publicPath: '../',
+              name: 'fonts/[name].[ext]?[hash]'
+            }
+          },
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|ico)$/,
-        loader: 'file?publicPath=../&name=images/[name].[ext]?[hash]',
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              publicPath: '../',
+              name: 'images/[name].[ext]?[hash]'
+            },
+          },
+        ],
       },
       {
-        test: /bootstrap.+\.js$/,
-        // imports loader must be replaced with ProvidePlugin when slimscroll is gone.
-        loader: 'imports?jQuery=jquery,$=jquery,this=>window'
-      }
-    ]
+        test: require.resolve('jquery'),
+        use: [
+          {
+            loader: 'expose-loader',
+            options: 'jQuery',
+          },
+          {
+            loader: 'expose-loader',
+            options: '$',
+          },
+        ],
+      },
+      {
+        test: /datatables\.net.+\.js$/,
+        use: [
+          {
+            loader: 'imports-loader',
+            options: 'jQuery=jquery,$=jquery,define=>false,exports=>false'
+          },
+        ]
+      },
+    ],
   },
   plugins: [
     extractPlugin,
@@ -81,6 +129,10 @@ module.exports = {
       template: './app/index-template.html',
       filename: '../index.html',
       inject: 'body',
+      chunks: ['vendor', 'index'],
+      chunksSortMode: function(a, b) {
+         return (a.names[0] < b.names[0]) ? 1 : -1;
+      }
     }),
   ],
   stats: {

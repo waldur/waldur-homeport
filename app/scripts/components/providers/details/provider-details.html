@@ -42,12 +42,17 @@
   </table>
   <div ng-if="$ctrl.center">
     <h4 translate>Physical locations</h4>
-    <leaflet
-      width="100%"
-      height="300px"
-      markers="$ctrl.markers"
-      maxbounds="$ctrl.maxbounds"
-      center="$ctrl.center">
-    </leaflet>
+    <div ng-if="$ctrl.loading">
+      <loading-spinner/>
+    </div>
+    <div ng-if="!$ctrl.loading">
+      <leaflet
+        width="100%"
+        height="300px"
+        markers="$ctrl.markers"
+        maxbounds="$ctrl.maxbounds"
+        center="$ctrl.center">
+      </leaflet>
+    </div>
   </div>
 </div>
