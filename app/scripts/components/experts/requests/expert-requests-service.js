@@ -19,7 +19,7 @@ export default function expertRequestsService(baseServiceClass, $q, $http, ENV) 
     },
 
     getConfiguration: function () {
-      return $http.get(`${ENV.apiEndpoint}api${this.endpoint}configured`)
+      return $http.get(`${ENV.apiEndpoint}api${this.endpoint}configured/`)
         .then(response => response.data);
     }
   });
