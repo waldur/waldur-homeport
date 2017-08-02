@@ -2,7 +2,7 @@
 export default function registerSidebarExtension(SidebarExtensionService, currentStateService) {
   SidebarExtensionService.register('customer', () => {
     return currentStateService.getCustomer().then(customer => {
-      if (customer.is_expert_provider) {
+      if (customer && customer.is_expert_provider) {
         return [
           {
             label: gettext('Requests for experts'),

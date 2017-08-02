@@ -1,14 +1,13 @@
-<div ng-if="$ctrl.loading">
-  <loading-spinner/>
+<div ng-controller="CustomerWorkspaceController">
+  <sidebar items="items" context="context"></sidebar>
 </div>
-
-<div ng-if="!$ctrl.loading">
-  <div ng-controller="CustomerWorkspaceController">
-    <sidebar items="items" context="context"></sidebar>
+<div id="page-wrapper" ng-class="$state.current.data.pageClass || 'white-bg'">
+  <cookies-consent/>
+  <nc-header></nc-header>
+  <div ng-if="$ctrl.loading">
+    <loading-spinner/>
   </div>
-  <div id="page-wrapper" ng-class="$state.current.data.pageClass || 'white-bg'">
-    <cookies-consent/>
-    <nc-header></nc-header>
+  <div ng-if="!$ctrl.loading">
     <div ng-if="$ctrl.showAccountingRecords">
       <billing-record-details invoice="$ctrl.invoice"/>
     </div>
