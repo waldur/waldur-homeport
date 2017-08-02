@@ -63,7 +63,7 @@ const ansibleJobCreate = {
           required: parameter.required,
         };
         if (parameter.default) {
-          this.model[parameter.name] = parameter.name;
+          this.model[parameter.name] = parameter.default;
         }
       });
     }
