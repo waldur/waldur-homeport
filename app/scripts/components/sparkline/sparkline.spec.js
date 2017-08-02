@@ -1,8 +1,8 @@
-import sparklineDirective from './sparkline.js';
+import sparklineDirective from './sparkline';
 
 describe('Sparkline directive', function() {
 
-  angular.module('test', []).directive('sparkline', sparklineDirective);
+  angular.module('test', []).component('sparkline', sparklineDirective);
   beforeEach(angular.mock.module('test'));
 
   let $compile, scope, element;
@@ -38,7 +38,6 @@ describe('Sparkline directive', function() {
     ];
     render();
     expect(getColumns().length).toBe(2);
-    expect(getColumns()[0].getAttribute('uib-tooltip')).toBe('January');
     expect(getBars()[0].getAttribute('style')).toBe('height: 50%;');
     expect(getBars()[1].getAttribute('style')).toBe('height: 100%;');
   });

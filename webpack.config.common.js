@@ -21,11 +21,14 @@ module.exports = {
     filename: 'js/[name]-bundle.js',
     chunkFilename: 'js/[name].[chunkhash].js',
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   devtool: 'source-map',
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
           {
