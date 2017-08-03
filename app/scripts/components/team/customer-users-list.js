@@ -75,6 +75,7 @@ function CustomerUsersListController(
           },
           {
             title: gettext('Owner'),
+            className: 'desktop',
             render: function(row) {
               var cls = row.role == 'owner' ? 'check' : 'minus';
               var title = ENV.roles[row.role];
@@ -85,12 +86,14 @@ function CustomerUsersListController(
           },
           {
             title: ENV.roles.manager + ' in:',
+            className: 'desktop',
             render: function(row) {
               return vm.formatProjectRolesList('manager', row);
             }
           },
           {
             title: ENV.roles.admin + ' in:',
+            className: 'desktop',
             render: function(row) {
               return vm.formatProjectRolesList('admin', row);
             }
