@@ -303,7 +303,7 @@ export default function responsiveTable($rootScope, $timeout, $interval, $compil
         return {
           title: $filter('translate')(gettext('Actions')),
           orderable: false,
-          className: 'actions text-center all',
+          className: 'actions text-center min-tablet-l',
           render: function(data, type, row, meta) {
             if (options.rowActions instanceof Function) {
               return options.rowActions.call(scope.controller, row);
