@@ -3809,6 +3809,10 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+#: app/scripts/components/appstore/dialog/appstore-category-selector.html:13
+msgid "Search by name"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:4
 msgid "Security group does not contain any rule yet."
 msgstr ""
@@ -3837,7 +3841,7 @@ msgid "Segmentation ID"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.html:40
-#: app/scripts/components/appstore/dialog/appstore-category-selector.html:20
+#: app/scripts/components/appstore/dialog/appstore-category-selector.html:33
 #: app/scripts/components/navigation/select-workspace-dialog.html:124
 #: app/scripts/components/navigation/select-workspace-dialog.html:62
 #: app/views/directives/import-resource-button.html:6
