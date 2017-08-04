@@ -8,6 +8,10 @@ msgstr ""
 msgid "\"{planName}\" details"
 msgstr ""
 
+#: app/scripts/components/billing/billing-record-details.html:70
+msgid "(VAT is not included)"
+msgstr ""
+
 #: app/scripts/components/form/appstore-field-list.js:42
 msgid "{fieldLabel} is required for provisioning resource."
 msgstr ""
@@ -1133,7 +1137,7 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js:175
 #: app/scripts/components/providers/details/dialog.html:10
 #: app/scripts/components/providers/provider-list.js:92
-#: app/scripts/components/team/customer-users-list.js:121
+#: app/scripts/components/team/customer-users-list.js:124
 #: app/scripts/components/team/project-users-list.js:87
 #: app/scripts/components/user/user-sidebar.html:12
 #: app/views/directives/importable-resources.html:17
@@ -1191,7 +1195,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js:30
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:28
 #: app/scripts/components/resource/actions/constants.js:13
-#: app/scripts/components/team/customer-users-list.js:126
+#: app/scripts/components/team/customer-users-list.js:129
 #: app/scripts/components/team/project-users-list.js:95
 #: app/scripts/components/user/hooks/hook-list.js:69
 msgid "Edit"
@@ -2466,7 +2470,7 @@ msgstr ""
 msgid "No private clouds found matching filter."
 msgstr ""
 
-#: app/scripts/components/team/customer-users-list.js:107
+#: app/scripts/components/team/customer-users-list.js:110
 msgid "No projects are assigned to this role."
 msgstr ""
 
@@ -3531,7 +3535,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plans-list.js:59
 #: app/scripts/components/project/projects-list.js:180
 #: app/scripts/components/providers/provider-list.js:97
-#: app/scripts/components/team/customer-users-list.js:131
+#: app/scripts/components/team/customer-users-list.js:134
 #: app/scripts/components/team/project-users-list.js:103
 #: app/scripts/components/user/hooks/hook-list.js:74
 #: app/scripts/components/user/keys/key-list.js:51
@@ -3833,7 +3837,7 @@ msgid "Segmentation ID"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.html:40
-#: app/scripts/components/appstore/dialog/appstore-category-selector.html:19
+#: app/scripts/components/appstore/dialog/appstore-category-selector.html:20
 #: app/scripts/components/navigation/select-workspace-dialog.html:124
 #: app/scripts/components/navigation/select-workspace-dialog.html:62
 #: app/views/directives/import-resource-button.html:6
@@ -4597,7 +4601,7 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:71
+#: app/scripts/components/billing/billing-record-details.html:70
 #: app/scripts/components/billing/invoice-details.html:79
 msgid "TOTAL"
 msgstr ""

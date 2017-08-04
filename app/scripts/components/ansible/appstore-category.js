@@ -12,6 +12,7 @@ export default function registerAppstoreCategory(features, $q, AnsiblePlaybooksS
           key: playbook.uuid,
           label: playbook.name,
           icon: ICON_CLASS,
+          image: playbook.image,
           description: playbook.description,
           category: APPSTORE_CATEGORY,
           state: 'appstore.ansible',
