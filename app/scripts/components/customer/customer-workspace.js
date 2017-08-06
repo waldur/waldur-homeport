@@ -144,7 +144,7 @@ export function CustomerWorkspaceController(
 
   function refreshWorkspace() {
     const options = WorkspaceService.getWorkspace();
-    if (options && options.customer) {
+    if (options && options.customer && !angular.equals($scope.currentCustomer, options.customer)) {
       $scope.currentCustomer = options.customer;
       $scope.context = {customer: options.customer};
       SidebarExtensionService.getItems('customer').then(customItems => {

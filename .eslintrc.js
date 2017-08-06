@@ -3,7 +3,13 @@ module.exports = {
     'browser': true,
     'es6': true
   },
-  'extends': 'eslint:recommended',
+  'plugins': [
+    'react'
+  ],
+  'extends': [
+    'eslint:recommended',
+    'plugin:react/recommended'
+  ],
   'parser': 'babel-eslint',
   'parserOptions': {
     'sourceType': 'module'

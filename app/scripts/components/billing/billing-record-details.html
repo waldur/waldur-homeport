@@ -57,7 +57,7 @@
                 </td>
                 <td>{{ ::item.usage_days }}</td>
                 <td>{{ ::item.unit_price | defaultCurrency }}</td>
-                <td>{{ ::item.total | defaultCurrency }}</td>
+                <td>{{ ::item.price | defaultCurrency }}</td>
               </tr>
             </tbody>
           </table>
@@ -67,8 +67,7 @@
           <tbody>
             <tr>
               <td>
-                <price-tooltip></price-tooltip>
-                <strong translate>TOTAL</strong>:
+                <strong translate>TOTAL</strong> <small translate>(VAT is not included)</small>:
               </td>
               <td>{{ ::$ctrl.invoice.price | defaultCurrency }}</td>
             </tr>
