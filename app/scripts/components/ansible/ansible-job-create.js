@@ -5,36 +5,79 @@ const ansibleJobCreate = {
   controller: class AnsibleJobCreateController {
     // @ngInject
     constructor(
+      $q,
       $stateParams,
       $state,
       ncUtilsFlash,
       AnsibleJobsService,
       AnsiblePlaybooksService,
+      AppstoreProvidersService,
+      keysService,
+      usersService,
       currentStateService) {
+      this.$q = $q;
       this.$stateParams = $stateParams;
       this.$state = $state;
       this.ncUtilsFlash = ncUtilsFlash;
       this.AnsibleJobsService = AnsibleJobsService;
       this.AnsiblePlaybooksService = AnsiblePlaybooksService;
+      this.AppstoreProvidersService = AppstoreProvidersService;
+      this.keysService = keysService;
+      this.usersService = usersService;
       this.currentStateService = currentStateService;
+      this.loading = true;
+      this.selectedService = null;
     }
 
     $onInit() {
-      this.currentStateService.getProject().then(project => {
-        this.project = project;
-      });
-
-      this.loading = true;
-      this.AnsiblePlaybooksService.get(this.$stateParams.category)
-        .then(this.parsePlaybook.bind(this))
-        .finally(() => this.loading = false);
+      this.$q.all([
+        this.loadKeys(),
+        this.loadServices(),
+        this.loadPlaybook(),
+      ]).finally(() => this.loading = false);
     }
 
-    parsePlaybook(playbook) {
-      this.playbook = playbook;
+    loadKeys() {
+      return this.usersService.getCurrentUser().then(user => {
+        return this.keysService.getAll({
+          user_uuid: user.uuid
+        }).then(keys => {
+          this.keys = keys;
+        });
+      });
+    }
+
+    loadServices() {
+      return this.currentStateService.getProject().then(project => {
+        this.project = project;
+        this.AppstoreProvidersService.loadServices(project).then(project => {
+          this.services = project.services
+            .filter(service => service.type === 'OpenStackTenant')
+            .sort(function(a, b) {
+              return a.enabled < b.enabled;
+            });
+        });
+      });
+    }
+
+    setService(service) {
+      this.selectedService = service;
+      this.initModel();
+    }
+
+    resetService() {
+      this.selectedService = null;
+    }
+
+    loadPlaybook() {
+      return this.AnsiblePlaybooksService.get(this.$stateParams.category)
+        .then(playbook => this.playbook = playbook);
+    }
+
+    initModel() {
       this.model = {};
       this.fields = {
-        order: ['name', 'description'],
+        order: ['name', 'description', 'ssh_public_key'],
         options: {
           name: {
             name: 'name',
@@ -51,10 +94,28 @@ const ansibleJobCreate = {
             label: gettext('Description'),
             maxlength: 500,
           },
+          ssh_public_key: {
+            name: 'ssh_public_key',
+            type: 'list',
+            label: gettext('SSH public key'),
+            columns: [
+              {
+                name: 'name',
+                label: gettext('Name')
+              },
+              {
+                name: 'fingerprint',
+                label: gettext('Fingerprint')
+              }
+            ],
+            choices: this.keys,
+            preselectFirst: true,
+            emptyMessage: gettext('You have not added any SSH keys to your <a ui-sref="profile.keys">profile</a>.')
+          },
         }
       };
 
-      playbook.parameters.forEach(parameter => {
+      this.playbook.parameters.forEach(parameter => {
         this.fields.order.push(parameter.name);
         this.fields.options[parameter.name] = {
           name: parameter.name,
@@ -68,16 +129,21 @@ const ansibleJobCreate = {
       });
     }
 
-    save() {
-      const { name, description, ...parameters } = this.model;
+    createJob() {
+      const { name, description, ssh_public_key, ...parameters } = this.model;
       const job = {
         name,
         description,
         arguments: parameters,
-        project: this.project.url,
         playbook: this.playbook.url,
+        ssh_public_key: ssh_public_key.url,
+        service_project_link: this.selectedService.service_project_link_url,
       };
-      return this.AnsibleJobsService.create(job).then(job => {
+      return this.AnsibleJobsService.create(job);
+    }
+
+    save() {
+      this.createJob().then(job => {
         this.ncUtilsFlash.success(gettext('Application has been created.'));
         this.$state.go('project.resources.ansible.details', {
           uuid: job.project_uuid,

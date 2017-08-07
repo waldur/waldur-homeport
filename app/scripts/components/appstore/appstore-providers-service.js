@@ -20,7 +20,10 @@ export default function AppstoreProvidersService($filter, joinService) {
       }, {});
 
       angular.forEach(project.services, function(service) {
-        var detail = details[service.url];
+        const detail = details[service.url];
+        if (!detail) {
+          return;
+        }
         service.reachedThreshold = detail.reachedThreshold;
         service.reachedLimit = detail.reachedLimit;
         service.warning = getServiceDisabledReason(service) ||

@@ -371,7 +371,7 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:53
+#: app/scripts/components/appstore/appstore-providers-service.js:56
 msgid "All provider quotas have reached limit."
 msgstr ""
 
@@ -622,7 +622,7 @@ msgstr ""
 msgid "Can't unlink system provider."
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-job-create.html:19
+#: app/scripts/components/ansible/ansible-job-create.html:35
 #: app/scripts/components/appstore/appstore-store.html:55
 #: app/scripts/components/appstore/dialog/appstore-selector-dialog.html:30
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html:37
@@ -883,7 +883,7 @@ msgstr ""
 msgid "CPU limit"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-job-create.html:16
+#: app/scripts/components/ansible/ansible-job-create.html:32
 #: app/scripts/components/appstore/appstore-store.html:20
 #: app/scripts/components/appstore/appstore-store.html:51
 #: app/scripts/components/customer/customer-issues.js:31
@@ -3301,6 +3301,7 @@ msgstr ""
 msgid "Projects list"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-create.html:16
 #: app/scripts/components/appstore/appstore-compare-list.js:51
 #: app/scripts/components/appstore/appstore-store.html:32
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:9
@@ -3339,7 +3340,7 @@ msgstr ""
 msgid "Provider has resources. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:50
+#: app/scripts/components/appstore/appstore-providers-service.js:53
 msgid "Provider is in erred state."
 msgstr ""
 
@@ -3352,7 +3353,7 @@ msgstr ""
 msgid "Provider package is not defined."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:64
+#: app/scripts/components/appstore/appstore-providers-service.js:67
 msgid "Provider quota has reached threshold."
 msgstr ""
 
@@ -4438,7 +4439,7 @@ msgstr ""
 msgid "Thanks"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:31
+#: app/scripts/components/appstore/appstore-providers.js:34
 msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
@@ -5089,7 +5090,7 @@ msgstr ""
 msgid "Yes, use invitation email"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:40
+#: app/scripts/components/appstore/appstore-providers.js:43
 msgid "You can provision a new provider through <a href=\"{link}\">Service store</a>."
 msgstr ""
 
