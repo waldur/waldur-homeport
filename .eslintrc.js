@@ -66,6 +66,7 @@ module.exports = {
     expect: true,
     it: true,
     beforeEach: true,
-    inject: true
+    inject: true,
+    Generator: true
   }
 };

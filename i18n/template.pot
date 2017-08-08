@@ -3261,7 +3261,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: app/scripts/components/dashboard/organization-dashboard.html:15
+#: app/scripts/components/dashboard/organization-dashboard.html:10
 #: app/scripts/components/team/add-team-member.html:41
 msgid "Projects list"
 msgstr ""
@@ -4557,7 +4557,7 @@ msgid "TOTAL"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:59
-#: app/scripts/components/dashboard/dashboard-chart-service.js:119
+#: app/scripts/components/dashboard/dashboard-chart-service.js:120
 msgid "Total cost"
 msgstr ""
 

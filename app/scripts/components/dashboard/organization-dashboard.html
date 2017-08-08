@@ -1,11 +1,6 @@
 <div class="wrapper wrapper-content">
-    <div ng-if="$ctrl.loading">
-        <loading-spinner/>
-    </div>
-    <div class="row" ng-if="!$ctrl.loading">
-        <div class="col-lg-3 col-md-6" ng-repeat="chart in $ctrl.charts">
-            <dashboard-chart chart="chart"></dashboard-chart>
-        </div>
+    <div class="row">
+        <organization-chart customer="$ctrl.customer"/>
     </div>
 
     <div class="row">

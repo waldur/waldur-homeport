@@ -1,6 +1,6 @@
 import ErrorMessageFormatter from './error-message-formatter';
 import submitButton from './submit-button';
-import loadingSpinner from './loading-spinner';
+import loadingSpinner from './LoadingSpinner';
 import multipleSelect from './multiple-select';
 import sentryModule from './sentry';
 import { baseServiceClass, listCache } from './base-service';
