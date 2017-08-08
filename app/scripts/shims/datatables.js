@@ -14,3 +14,5 @@ import 'datatables.net-buttons-bs/css/buttons.bootstrap.css';
 import 'datatables.net-responsive';
 import 'datatables.net-responsive-bs';
 import 'datatables.net-responsive-bs/css/responsive.bootstrap.css';
+import 'datatables.net-select';
+import 'datatables.net-select-bs/css/select.bootstrap.css';

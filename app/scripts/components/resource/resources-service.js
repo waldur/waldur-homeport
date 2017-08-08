@@ -39,14 +39,6 @@ export default function resourcesService(baseServiceClass, ENV, $http, servicesS
         });
       }
     },
-
-    getImportedResources: function(service, project_uuid) {
-      var vm = this;
-      return servicesService.getServicesList().then(function(services) {
-        var url = services[service.type].url + service.uuid + '/managed_resources';
-        return vm.getAll({project_uuid: project_uuid}, url);
-      });
-    }
   });
   return new ServiceClass();
 }

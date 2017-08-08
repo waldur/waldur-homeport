@@ -41,9 +41,6 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
       });
       return options;
     },
-    getImportTitle: function() {
-      return gettext('Import virtual machine');
-    },
     getCreateTitle: function() {
       return gettext('Add virtual machine');
     },

@@ -16,9 +16,7 @@ export default function baseResourceListController(
   $rootScope,
   $state,
   $q,
-  $timeout,
-  resourceUtils,
-  ncUtils) {
+  $timeout) {
   var ControllerListClass = baseControllerListClass.extend({
     init: function() {
       this.service = resourcesService;
@@ -86,9 +84,6 @@ export default function baseResourceListController(
     },
     getTableActions: function() {
       var actions = [];
-      if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('import') === -1) {
-        actions.push(this.getImportAction());
-      }
       if (this.category !== undefined) {
         actions.push(this.getCreateAction());
       }
@@ -96,31 +91,6 @@ export default function baseResourceListController(
         actions.push(this.getMapAction());
       }
       return actions;
-    },
-    getImportAction: function() {
-      var disabled, tooltip;
-      if (ncUtils.isCustomerQuotaReached(this.currentCustomer, 'resource')) {
-        disabled = true;
-        tooltip = gettext('Quota has been reached.');
-      } else if (!this.projectHasNonSharedService(this.currentProject)) {
-        disabled = true;
-        tooltip = gettext('Import is not possible as there are no personal provider accounts registered.');
-      } else {
-        disabled = false;
-        tooltip = gettext('Import resources from the registered provider accounts.');
-      }
-      return {
-        title: this.getImportTitle(),
-        iconClass: 'fa fa-plus',
-        callback: function() {
-          $state.go('import.import');
-        },
-        disabled: disabled,
-        titleAttr: tooltip
-      };
-    },
-    getImportTitle: function() {
-      return gettext('Import');
     },
     getCreateAction: function() {
       const { disabled, errorMessage } = ResourceProvisionPolicy.checkResource(

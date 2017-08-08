@@ -10,7 +10,16 @@ const openstackVolumesList = {
 export default openstackVolumesList;
 
 // @ngInject
-function VolumesListController(BaseProjectResourcesTabController, ncUtils, $state, $filter, ENV) {
+function VolumesListController(
+  BaseProjectResourcesTabController,
+  ncUtils,
+  $state,
+  $scope,
+  $timeout,
+  $filter,
+  ENV,
+  TableExtensionService,
+  features) {
   var controllerScope = this;
   var ResourceController = BaseProjectResourcesTabController.extend({
     init:function() {
@@ -18,6 +27,11 @@ function VolumesListController(BaseProjectResourcesTabController, ncUtils, $stat
       this.controllerScope = controllerScope;
       this._super();
       this.addRowFields(['size', 'instance', 'instance_name']);
+      $scope.$on('refreshVolumesList', function() {
+        $timeout(function() {
+          controllerScope.resetCache();
+        });
+      });
     },
     getFilter: function() {
       return {
@@ -28,6 +42,7 @@ function VolumesListController(BaseProjectResourcesTabController, ncUtils, $stat
       var options = this._super();
       options.noDataText = gettext('You have no volumes yet.');
       options.noMatchesText = gettext('No volumes found matching filter.');
+      options.tableActions = this.getTableActions();
       options.columns.push({
         title: gettext('Size'),
         className: 'all',
@@ -57,8 +72,15 @@ function VolumesListController(BaseProjectResourcesTabController, ncUtils, $stat
       });
       return options;
     },
-    getImportTitle: function() {
-      return gettext('Import volumes');
+    getTableActions: function() {
+      let actions = TableExtensionService.getTableActions('openstack-volumes-list');
+      if (this.category !== undefined) {
+        actions.push(this.getCreateAction());
+      }
+      if (features.isVisible('openMap')) {
+        actions.push(this.getMapAction());
+      }
+      return actions;
     },
     getCreateTitle: function() {
       return gettext('Add volumes');
