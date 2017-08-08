@@ -22,7 +22,7 @@ const ansbileJobDetails = {
 
     startPolling() {
       this.fetchJob();
-      return this.$interval(this.fetchJob.bind(this), this.ENV.singleResourcePollingTimeout);
+      return this.$interval(this.fetchJob.bind(this), this.ENV.resourceDetailInterval * 1000);
     }
 
     fetchJob() {

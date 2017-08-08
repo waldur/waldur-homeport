@@ -148,6 +148,7 @@ const ENV = {
   countsCacheTime: 60, // seconds
   enablePurchaseCostDisplay: true,
 
+  resourceDetailInterval: 5, // seconds
   resourcesTimerInterval: 30, // seconds
   countersTimerInterval: 30, // seconds
 
