@@ -27,6 +27,9 @@ const appstoreProviders = {
       let category = this.$state.current.data.category || this.$stateParams.category;
       if (category) {
         category = this.AppStoreUtilsService.findCategory(category);
+        if (!category) {
+          return;
+        }
         this.noProvidersMessage = this.coreUtils.templateFormatter(
           gettext('There are no {categoryLabel} providers available for the current project.'),
           { categoryLabel: category.label.toLowerCase() });

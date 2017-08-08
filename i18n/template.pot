@@ -371,7 +371,7 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:53
+#: app/scripts/components/appstore/appstore-providers-service.js:56
 msgid "All provider quotas have reached limit."
 msgstr ""
 
@@ -622,7 +622,7 @@ msgstr ""
 msgid "Can't unlink system provider."
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-job-create.html:19
+#: app/scripts/components/ansible/ansible-job-create.html:37
 #: app/scripts/components/appstore/appstore-store.html:55
 #: app/scripts/components/appstore/dialog/appstore-selector-dialog.html:30
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html:37
@@ -883,7 +883,7 @@ msgstr ""
 msgid "CPU limit"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-job-create.html:16
+#: app/scripts/components/ansible/ansible-job-create.html:34
 #: app/scripts/components/appstore/appstore-store.html:20
 #: app/scripts/components/appstore/appstore-store.html:51
 #: app/scripts/components/customer/customer-issues.js:31
@@ -995,7 +995,7 @@ msgstr ""
 msgid "Create subnet"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-job-summary.html:23
+#: app/scripts/components/ansible/ansible-job-summary.html:27
 #: app/scripts/components/billing/billing-utils.js:41
 #: app/scripts/components/experts/requests/expert-request-summary.html:22
 #: app/scripts/components/issues/issue-detail.html:80
@@ -1091,7 +1091,7 @@ msgstr ""
 msgid "Deployment plan does not have any item yet."
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-job-summary.html:28
+#: app/scripts/components/ansible/ansible-job-summary.html:32
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:74
 #: app/scripts/components/experts/requests/expert-request-create.js:47
 #: app/scripts/components/experts/requests/expert-request-summary.html:24
@@ -1239,7 +1239,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:186
+#: app/scripts/components/configs/base-config.js:187
 msgid "English"
 msgstr ""
 
@@ -1274,7 +1274,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:190
+#: app/scripts/components/configs/base-config.js:191
 msgid "Estonian"
 msgstr ""
 
@@ -2022,7 +2022,7 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:194
+#: app/scripts/components/configs/base-config.js:195
 msgid "Latvian"
 msgstr ""
 
@@ -2072,7 +2072,7 @@ msgstr ""
 msgid "List and edit team members."
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:198
+#: app/scripts/components/configs/base-config.js:199
 msgid "Lithuanian"
 msgstr ""
 
@@ -2817,7 +2817,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:171
+#: app/scripts/components/configs/base-config.js:172
 msgid "Organization owner"
 msgstr ""
 
@@ -2852,7 +2852,7 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-job-summary.html:39
+#: app/scripts/components/ansible/ansible-job-summary.html:53
 msgid "Output log"
 msgstr ""
 
@@ -2886,7 +2886,7 @@ msgstr ""
 msgid "Paid"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-job-summary.html:33
+#: app/scripts/components/ansible/ansible-job-summary.html:47
 msgid "Parameters"
 msgstr ""
 
@@ -2978,7 +2978,6 @@ msgstr ""
 msgid "Plans"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-job-summary.html:18
 #: app/scripts/components/ansible/ansible-jobs-list.js:62
 msgid "Playbook"
 msgstr ""
@@ -3248,7 +3247,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:172
+#: app/scripts/components/configs/base-config.js:173
 msgid "Project manager"
 msgstr ""
 
@@ -3301,6 +3300,8 @@ msgstr ""
 msgid "Projects list"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-create.html:18
+#: app/scripts/components/ansible/ansible-job-summary.html:42
 #: app/scripts/components/appstore/appstore-compare-list.js:51
 #: app/scripts/components/appstore/appstore-store.html:32
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:9
@@ -3339,7 +3340,7 @@ msgstr ""
 msgid "Provider has resources. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:50
+#: app/scripts/components/appstore/appstore-providers-service.js:53
 msgid "Provider is in erred state."
 msgstr ""
 
@@ -3352,7 +3353,7 @@ msgstr ""
 msgid "Provider package is not defined."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:64
+#: app/scripts/components/appstore/appstore-providers-service.js:67
 msgid "Provider quota has reached threshold."
 msgstr ""
 
@@ -3779,7 +3780,7 @@ msgstr ""
 msgid "Runtime state"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:202
+#: app/scripts/components/configs/base-config.js:203
 msgid "Russian"
 msgstr ""
 
@@ -4175,6 +4176,7 @@ msgstr ""
 msgid "SSH Keys"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-summary.html:37
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:72
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:86
 msgid "SSH public key"
@@ -4192,7 +4194,7 @@ msgstr ""
 msgid "Start time"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-job-summary.html:13
+#: app/scripts/components/ansible/ansible-job-summary.html:22
 #: app/scripts/components/ansible/ansible-jobs-list.js:66
 #: app/scripts/components/billing/billing-records-list.js:48
 #: app/scripts/components/billing/invoices-list.js:49
@@ -4352,7 +4354,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:173
+#: app/scripts/components/configs/base-config.js:174
 msgid "System administrator"
 msgstr ""
 
@@ -4438,7 +4440,7 @@ msgstr ""
 msgid "Thanks"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:31
+#: app/scripts/components/appstore/appstore-providers.js:34
 msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
@@ -5089,7 +5091,7 @@ msgstr ""
 msgid "Yes, use invitation email"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:40
+#: app/scripts/components/appstore/appstore-providers.js:43
 msgid "You can provision a new provider through <a href=\"{link}\">Service store</a>."
 msgstr ""
 

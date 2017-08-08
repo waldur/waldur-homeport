@@ -34,6 +34,7 @@ export default function ansibleRoutes($stateProvider) {
       template: '<ansible-job-details/>',
       data: {
         pageTitle: gettext('Application details'),
+        pageClass: 'gray-bg',
         feature: 'ansible',
       }
     });
