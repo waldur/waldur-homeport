@@ -24,7 +24,7 @@
           <dd>{{ $ctrl.job.created | dateTime }}</dd>
         </div>
 
-        <div class="m-b-xs">
+        <div class="m-b-xs" ng-if="$ctrl.job.description">
           <dt translate>Description</dt>
           <dd>{{ $ctrl.job.description }}</dd>
         </div>
