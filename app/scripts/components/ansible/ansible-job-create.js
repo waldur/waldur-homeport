@@ -144,7 +144,8 @@ const ansibleJobCreate = {
 
     save() {
       this.createJob().then(job => {
-        this.ncUtilsFlash.success(gettext('Application has been created.'));
+        this.ncUtilsFlash.success(gettext('Application creation has been scheduled.'));
+        this.AnsibleJobsService.clearAllCacheForCurrentEndpoint();
         this.$state.go('project.resources.ansible.details', {
           uuid: job.project_uuid,
           jobId: job.uuid
