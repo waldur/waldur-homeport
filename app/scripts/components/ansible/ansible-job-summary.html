@@ -1,9 +1,9 @@
 <div class="row m-md">
   <div class="col-md-6">
-    <div class="profile-image">
+    <div class="profile-image" ng-if="$ctrl.job.playbook_image">
       <img ng-src="{{ $ctrl.job.playbook_image }}">
     </div>
-    <div class="profile-info">
+    <div>
       <h2 class="no-margins">
         {{ $ctrl.job.name }}
       </h2>
