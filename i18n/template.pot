@@ -210,7 +210,7 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: app/scripts/components/intro/base-intro.js:77
+#: app/scripts/components/intro/base-intro.js:105
 msgid "Add a new organization"
 msgstr ""
 
@@ -2038,10 +2038,6 @@ msgstr ""
 msgid "Legal address"
 msgstr ""
 
-#: app/scripts/components/intro/base-intro.js:85
-msgid "Let me select my workspace"
-msgstr ""
-
 #: app/scripts/components/intro/expert-manager-intro.js:94
 msgid "Let's go"
 msgstr ""
@@ -2670,7 +2666,7 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: app/scripts/components/intro/base-intro.js:61
+#: app/scripts/components/intro/base-intro.js:72
 msgid "Ok, what's next?"
 msgstr ""
 
@@ -2727,10 +2723,6 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:44
 msgid "Opened by"
-msgstr ""
-
-#: app/scripts/components/intro/base-intro.js:81
-msgid "Or select one to go to a customer workspace"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:79
@@ -3888,6 +3880,10 @@ msgstr ""
 msgid "Select country..."
 msgstr ""
 
+#: app/scripts/components/intro/base-intro.js:112
+msgid "Select one to go to a customer workspace"
+msgstr ""
+
 #: app/scripts/components/issues/issue-quick-create.html:60
 #: app/scripts/components/issues/issue-registration.html:48
 msgid "Select organization..."
@@ -4593,7 +4589,7 @@ msgstr ""
 msgid "To port"
 msgstr ""
 
-#: app/scripts/components/intro/base-intro.js:60
+#: app/scripts/components/intro/base-intro.js:71
 msgid "To start please select a workspace"
 msgstr ""
 
