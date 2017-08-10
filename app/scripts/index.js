@@ -26,7 +26,6 @@ import paymentsModule from './components/payments/module';
 import eventsModule from './components/events/module';
 import alertsModule from './components/alerts/module';
 import routesModule from './components/routes/module';
-import analyticsModule from './components/analytics/module';
 import offeringsModule from './components/offering/module';
 import helpModule from './components/help/module';
 import costPlanningModule from './components/cost-planning/module';
@@ -47,6 +46,7 @@ import rootModule from './components/module';
 import priceModule from './components/price/module';
 import ansibleModule from './components/ansible/module';
 import introModule from './components/intro/module';
+import analyticsRoutes from './components/analytics/routes';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -100,7 +100,6 @@ paymentsModule(appModule);
 eventsModule(appModule);
 alertsModule(appModule);
 routesModule(appModule);
-analyticsModule(appModule);
 offeringsModule(appModule);
 helpModule(appModule);
 costPlanningModule(appModule);
@@ -118,5 +117,6 @@ servicesModule(appModule);
 freeipaModule(appModule);
 ansibleModule(appModule);
 introModule(appModule);
+appModule.config(analyticsRoutes);
 
 bootstrap('waldur');
