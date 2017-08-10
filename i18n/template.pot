@@ -851,7 +851,7 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: app/scripts/components/analytics/routes.js:14
+#: app/scripts/components/analytics/routes.js:19
 #: app/scripts/components/customer/customer-workspace.js:82
 msgid "Cost analysis"
 msgstr ""
@@ -3713,7 +3713,7 @@ msgstr ""
 msgid "Resource type"
 msgstr ""
 
-#: app/scripts/components/analytics/routes.js:23
+#: app/scripts/components/analytics/routes.js:28
 #: app/scripts/components/customer/customer-workspace.js:89
 msgid "Resource usage"
 msgstr ""
