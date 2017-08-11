@@ -70,7 +70,7 @@ export default function ProjectWorkspaceController(
           {
             link: 'project.resources.offerings({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-cog',
-            label: gettext('Requested Services'),
+            label: gettext('Requests'),
             feature: 'offering',
             index: 500,
           },

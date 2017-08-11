@@ -1398,6 +1398,12 @@ msgstr ""
 
 #: app/scripts/components/experts/constants.js:1
 #: app/scripts/components/experts/expert-provider-details.html:2
+#: app/scripts/components/experts/extensions/sidebar.js:27
+#: app/scripts/components/experts/extensions/sidebar.js:8
+#: app/scripts/components/experts/requests/expert-request-header.html:15
+#: app/scripts/components/experts/routes.js:19
+#: app/scripts/components/experts/routes.js:28
+#: app/scripts/components/experts/routes.js:38
 msgid "Experts"
 msgstr ""
 
@@ -2361,6 +2367,11 @@ msgstr ""
 msgid "No events yet."
 msgstr ""
 
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:44
+#: app/scripts/components/experts/requests/expert-request-project-list.js:44
+msgid "No experts found matching filter."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js:32
 msgid "No floating IPs found matching filter."
 msgstr ""
@@ -2496,12 +2507,7 @@ msgid "No records found matching filter."
 msgstr ""
 
 #: app/scripts/components/offering/offerings-list.js:25
-msgid "No requested services found matching filter."
-msgstr ""
-
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:44
-#: app/scripts/components/experts/requests/expert-request-project-list.js:44
-msgid "No requests for experts found matching filter."
+msgid "No requests found matching filter."
 msgstr ""
 
 #: app/scripts/components/resource/list/resources-list.js:39
@@ -3624,16 +3630,7 @@ msgstr ""
 #: app/scripts/components/offering/offering-header.html:21
 #: app/scripts/components/project/project-workspace.js:73
 #: app/scripts/components/project/routes.js:154
-msgid "Requested Services"
-msgstr ""
-
-#: app/scripts/components/experts/extensions/sidebar.js:27
-#: app/scripts/components/experts/extensions/sidebar.js:8
-#: app/scripts/components/experts/requests/expert-request-header.html:15
-#: app/scripts/components/experts/routes.js:19
-#: app/scripts/components/experts/routes.js:28
-#: app/scripts/components/experts/routes.js:38
-msgid "Requests for experts"
+msgid "Requests"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:19
@@ -4468,6 +4465,11 @@ msgstr ""
 msgid "There are no events for this resource."
 msgstr ""
 
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:43
+#: app/scripts/components/experts/requests/expert-request-project-list.js:43
+msgid "There are no experts yet."
+msgstr ""
+
 #: app/scripts/components/form/appstore-field-list.js:44
 msgid "There are no items yet."
 msgstr ""
@@ -4490,11 +4492,6 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers.html:8
 msgid "There are no providers yet."
-msgstr ""
-
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:43
-#: app/scripts/components/experts/requests/expert-request-project-list.js:43
-msgid "There are no requests for experts yet."
 msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:20
@@ -5185,7 +5182,7 @@ msgid "You have no records yet."
 msgstr ""
 
 #: app/scripts/components/offering/offerings-list.js:24
-msgid "You have no requested services."
+msgid "You have no requests."
 msgstr ""
 
 #: app/scripts/components/resource/list/resources-list.js:38
