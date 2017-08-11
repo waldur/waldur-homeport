@@ -10,6 +10,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
             link: 'organization.experts({uuid: $ctrl.context.customer.uuid})',
             feature: 'experts',
             key: 'expert-requests',
+            countFieldKey: 'experts',
             index: 110,
           }
         ];
@@ -28,6 +29,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         feature: 'experts',
         key: 'expert-requests',
         parent: 'resources',
+        countFieldKey: 'experts',
         index: 900,
       }
     ];

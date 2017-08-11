@@ -160,7 +160,7 @@ export function CustomerWorkspaceController(
   }
 
   function getCounters(customer) {
-    const fields = ['services', 'projects', 'users'];
+    const fields = SidebarExtensionService.getCounters($scope.items);
     var query = angular.extend(
         {UUID: customer.uuid, fields},
         joinService.defaultFilter,
