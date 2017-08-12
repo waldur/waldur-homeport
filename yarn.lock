@@ -2174,6 +2174,21 @@ datatables.net-responsive@>=1.0.7, datatables.net-responsive@^2.1.1:
     datatables.net ">=1.10.9"
     jquery ">=1.7"
 
+datatables.net-select-bs@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/datatables.net-select-bs/-/datatables.net-select-bs-1.2.2.tgz#22baa97718fb73ebea28494c985c49d456ef04b5"
+  dependencies:
+    datatables.net-bs ">=1.10.9"
+    datatables.net-select ">=1.0.1"
+    jquery ">=1.7"
+
+datatables.net-select@>=1.0.1, datatables.net-select@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/datatables.net-select/-/datatables.net-select-1.2.2.tgz#9651793f52899f4e5745c0720821e8b8286fbf45"
+  dependencies:
+    datatables.net ">=1.10.9"
+    jquery ">=1.7"
+
 datatables.net@>=1.10.9:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-2.1.1.tgz#6f1103ef08054642aecf85e7e25efd592822ee78"

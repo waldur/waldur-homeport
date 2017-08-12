@@ -20,9 +20,6 @@ function ProjectPrivateCloudsTabController(BaseProjectResourcesTabController, EN
       options.noMatchesText = gettext('No private clouds found matching filter.');
       return options;
     },
-    getImportTitle: function() {
-      return gettext('Import private cloud');
-    },
     getCreateTitle: function() {
       return gettext('Add private cloud');
     }
