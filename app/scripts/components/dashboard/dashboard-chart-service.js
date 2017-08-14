@@ -99,11 +99,12 @@ export default class DashboardChartService {
 
   getCostChart(scope) {
     return this.invoicesService.getList({
-      customer: scope.url
+      customer: scope.url,
+      field: ['year', 'month', 'price']
     }).then(invoices => {
       let items = invoices.map(invoice => {
         return {
-          value: invoice.total,
+          value: invoice.price,
           date: new Date(invoice.year, invoice.month - 1, 1)
         };
       });
