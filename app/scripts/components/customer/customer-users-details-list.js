@@ -60,6 +60,7 @@ function customerUsersDetailsListController(
           {
             title: gettext('Preferred language'),
             className: 'min-tablet-l',
+            feature: 'user.preferred_language',
             render: function(row) {
               return row.preferred_language || 'N/A';
             }
@@ -67,6 +68,7 @@ function customerUsersDetailsListController(
           {
             title: gettext('Competence'),
             className: 'min-tablet-l',
+            feature: 'user.competence',
             render: function(row) {
               return row.competence || 'N/A';
             }
