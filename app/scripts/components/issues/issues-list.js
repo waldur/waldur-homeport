@@ -135,15 +135,6 @@ function IssueListController(
           width: 130
         },
         {
-          id: 'modified',
-          title: gettext('Updated'),
-          orderField: 'modified',
-          render: function(row) {
-            return $filter('shortDate')(row.modified);
-          },
-          width: 130
-        },
-        {
           id: 'in_progress',
           title: gettext('Time in progress'),
           orderable: false,
