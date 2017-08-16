@@ -317,6 +317,10 @@ msgstr ""
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:60
+msgid "Additional data that will be added to virtual machine on provisioning."
+msgstr ""
+
 #: app/scripts/components/customer/customer-create-config.js:47
 #: app/scripts/components/customer/customer-manage.html:38
 #: app/scripts/components/customer/customer-manage.html:74
@@ -1089,6 +1093,7 @@ msgid "Deployment plan does not have any item yet."
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-job-summary.html:32
+#: app/scripts/components/azure/azure-virtual-machine-config.js:20
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:74
 #: app/scripts/components/experts/requests/expert-request-create.js:47
 #: app/scripts/components/experts/requests/expert-request-summary.html:24
@@ -1134,7 +1139,7 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js:175
 #: app/scripts/components/providers/details/dialog.html:10
 #: app/scripts/components/providers/provider-list.js:92
-#: app/scripts/components/team/customer-users-list.js:124
+#: app/scripts/components/team/customer-users-list.js:123
 #: app/scripts/components/team/project-users-list.js:87
 #: app/scripts/components/user/user-sidebar.html:12
 msgid "Details"
@@ -1660,6 +1665,7 @@ msgstr ""
 msgid "Identity providers are not unavailable."
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:26
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:31
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:27
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:24
@@ -1667,6 +1673,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:30
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:35
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:28
 msgid "Image name"
@@ -2862,6 +2869,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:36
 #: app/scripts/components/auth/auth-login.html:67
+#: app/scripts/components/azure/azure-virtual-machine-config.js:54
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
 msgstr ""
@@ -3412,6 +3420,10 @@ msgstr ""
 msgid "RAM limit GB"
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-summary.html:5
+msgid "RDP credentials"
+msgstr ""
+
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:19
 msgid "Read through terms and conditions."
 msgstr ""
@@ -3502,7 +3514,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plans-list.js:59
 #: app/scripts/components/project/projects-list.js:180
 #: app/scripts/components/providers/provider-list.js:97
-#: app/scripts/components/team/customer-users-list.js:134
+#: app/scripts/components/team/customer-users-list.js:135
 #: app/scripts/components/team/project-users-list.js:103
 #: app/scripts/components/user/hooks/hook-list.js:74
 #: app/scripts/components/user/keys/key-list.js:51
@@ -4028,6 +4040,7 @@ msgstr ""
 msgid "Sign in with SmartID"
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:37
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:47
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:41
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:38
@@ -4042,6 +4055,7 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:41
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:51
 msgid "Size name"
 msgstr ""
@@ -4837,6 +4851,7 @@ msgstr ""
 msgid "User dashboard"
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:59
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:87
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:148
 msgid "User data"
@@ -4861,6 +4876,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:29
 #: app/scripts/components/auth/auth-login.html:52
+#: app/scripts/components/azure/azure-virtual-machine-config.js:48
 #: app/scripts/components/freeipa/freeipa-account-create.html:8
 #: app/scripts/components/freeipa/freeipa-account-edit.html:8
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
@@ -4936,6 +4952,7 @@ msgstr ""
 msgid "Virtual machines count"
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:15
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:14
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:23
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:18
