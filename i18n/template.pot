@@ -590,12 +590,24 @@ msgstr ""
 msgid "Billing plan agreement is being processed, please wait."
 msgstr ""
 
+#: app/scripts/components/dashboard/constants.js:19
+msgid "Block device count"
+msgstr ""
+
 #: app/scripts/components/analytics/resource-chart-service.js:33
 msgid "Block devices"
 msgstr ""
 
+#: app/scripts/components/dashboard/constants.js:27
+msgid "Block snapshot count"
+msgstr ""
+
 #: app/scripts/components/configs/base-config.js:44
 msgid "Block storage"
+msgstr ""
+
+#: app/scripts/components/dashboard/constants.js:23
+msgid "Block volume count"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:7
@@ -1134,7 +1146,7 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js:175
 #: app/scripts/components/providers/details/dialog.html:10
 #: app/scripts/components/providers/provider-list.js:92
-#: app/scripts/components/team/customer-users-list.js:124
+#: app/scripts/components/team/customer-users-list.js:123
 #: app/scripts/components/team/project-users-list.js:87
 #: app/scripts/components/user/user-sidebar.html:12
 msgid "Details"
@@ -3502,7 +3514,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plans-list.js:59
 #: app/scripts/components/project/projects-list.js:180
 #: app/scripts/components/providers/provider-list.js:97
-#: app/scripts/components/team/customer-users-list.js:134
+#: app/scripts/components/team/customer-users-list.js:135
 #: app/scripts/components/team/project-users-list.js:103
 #: app/scripts/components/user/hooks/hook-list.js:74
 #: app/scripts/components/user/keys/key-list.js:51
@@ -4193,7 +4205,6 @@ msgid "Step 2. Select resources"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-compare-list.js:90
-#: app/scripts/components/dashboard/constants.js:19
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:64
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:63
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:20
@@ -4334,7 +4345,7 @@ msgstr ""
 msgid "Team does not have members yet."
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:23
+#: app/scripts/components/dashboard/constants.js:31
 msgid "Team size"
 msgstr ""
 
@@ -4557,7 +4568,7 @@ msgid "TOTAL"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:59
-#: app/scripts/components/dashboard/dashboard-chart-service.js:120
+#: app/scripts/components/dashboard/dashboard-chart-service.js:124
 msgid "Total cost"
 msgstr ""
 
