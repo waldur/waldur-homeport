@@ -217,6 +217,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         columns = columns.filter(function(column) {
           return !column.feature || features.isVisible(column.feature);
         });
+        columns = columns.filter(column => !column.hasOwnProperty('isVisible') || column.isVisible());
         if (options.rowActions && options.rowActions.length) {
           var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
           columns.push(actionColumn);

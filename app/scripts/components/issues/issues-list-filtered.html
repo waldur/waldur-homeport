@@ -1,11 +1,11 @@
-<div class="col-lg-9">
+<div ng-class="{'col-lg-9': $ctrl.showFilters}">
     <div class="ibox">
         <div class="ibox-content">
             <issues-list></issues-list>
         </div>
     </div>
 </div>
-<div class="col-lg-3" visible-if="'support.regular_issue_filters'">
+<div class="col-lg-3" ng-if=" $ctrl.showFilters">
     <div class="ibox">
         <div class="ibox-title">
             <h5 translate>Apply filters</h5>
