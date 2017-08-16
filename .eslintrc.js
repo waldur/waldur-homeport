@@ -67,6 +67,7 @@ module.exports = {
     it: true,
     beforeEach: true,
     inject: true,
-    Generator: true
+    process: true,
+    require: true
   }
 };

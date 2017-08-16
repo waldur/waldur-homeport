@@ -1,6 +1,6 @@
 import { DashboardChartService, $rootScope } from '../services';
 
-export function fetchChart(chartId, scope) {
+function fetchChart(chartId, scope) {
   if (chartId === 'customer') {
     return DashboardChartService.getOrganizationCharts(scope);
   } else if (chartId === 'project') {
@@ -8,6 +8,11 @@ export function fetchChart(chartId, scope) {
   }
 }
 
-export function emitSignal(signal) {
+function emitSignal(signal) {
   $rootScope.$broadcast(signal);
 }
+
+export default {
+  fetchChart,
+  emitSignal,
+};

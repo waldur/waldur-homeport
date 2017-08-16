@@ -1,6 +1,6 @@
 // @flow
 import { delay, takeEvery } from 'redux-saga';
-import { call, take, put, race, fork } from 'redux-saga/effects';
+import { call, take, put, cancel, fork } from 'redux-saga/effects';
 
 import api from './api';
 import actions from './actions';
@@ -20,15 +20,12 @@ function* pullDashboardChart(chartId, scope) {
   }
 }
 
-export function* watchDashboardChart():any {
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const { chartId, scope } = yield take(actions.DASHBOARD_CHARTS_START);
-    yield race([
-      take(action => action.type === actions.DASHBOARD_CHARTS_STOP && action.chartId === chartId),
-      call(pullDashboardChart, chartId, scope),
-    ]);
-  }
+function* startDashboardChart({ chartId, scope }) {
+  const task = yield fork(pullDashboardChart, chartId, scope);
+
+  yield take(action => action.type === actions.DASHBOARD_CHARTS_STOP && action.chartId === chartId);
+
+  yield cancel(task);
 }
 
 function* watchEmit() {
@@ -36,7 +33,7 @@ function* watchEmit() {
 }
 
 function* rootSaga():any {
-  yield fork(watchDashboardChart);
+  yield takeEvery(actions.DASHBOARD_CHARTS_START, startDashboardChart);
   yield fork(watchEmit);
 }
 
