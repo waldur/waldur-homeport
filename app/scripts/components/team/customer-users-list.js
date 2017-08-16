@@ -118,25 +118,26 @@ function CustomerUsersListController(
       }).join(', ');
     },
     getRowActions: function() {
-      if (this.isOwnerOrStaff) {
-        return [
-          {
-            title: gettext('Details'),
-            iconClass: 'fa fa-eye',
-            callback: this.openDetails.bind(this)
-          },
-          {
-            title: gettext('Edit'),
-            iconClass: 'fa fa-pencil',
-            callback: this.openPopup.bind(this)
-          },
-          {
-            title: gettext('Remove'),
-            iconClass: 'fa fa-trash',
-            callback: this.remove.bind(this)
-          }
-        ];
-      }
+      return [
+        {
+          title: gettext('Details'),
+          iconClass: 'fa fa-eye',
+          callback: this.openDetails.bind(this),
+          isVisible: () => this.isOwnerOrStaff || this.currentUser.is_support
+        },
+        {
+          title: gettext('Edit'),
+          iconClass: 'fa fa-pencil',
+          callback: this.openPopup.bind(this),
+          isVisible: () => this.isOwnerOrStaff
+        },
+        {
+          title: gettext('Remove'),
+          iconClass: 'fa fa-trash',
+          callback: this.remove.bind(this),
+          isVisible: () => this.isOwnerOrStaff
+        }
+      ];
     },
     getList: function(filter) {
       return this._super(angular.extend({
