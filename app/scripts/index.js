@@ -1,7 +1,6 @@
 import './globals';
 import '../../assets/sass/style.scss';
 
-import sparkline from './components/sparkline/module';
 import featuresModule from './components/features/module';
 import teamModule from './components/team/module';
 import issuesModule from './components/issues/module';
@@ -75,7 +74,6 @@ const appModule = angular.module('waldur', [
 ]);
 
 rootModule(appModule);
-sparkline(appModule);
 featuresModule(appModule);
 teamModule(appModule);
 issuesModule(appModule);

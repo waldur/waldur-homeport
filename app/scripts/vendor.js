@@ -1,4 +1,4 @@
-import 'es6-promise/auto';
+import 'babel-polyfill';
 
 import $ from 'jquery';
 import angular from 'angular';
