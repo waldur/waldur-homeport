@@ -27,7 +27,7 @@ export default class DashboardChartService {
       return this.$q.all([
         this.getCostChart(organization),
         this.getResourceHistoryCharts(quotas, organization)
-      ]).then(charts => [charts[0]].concat(charts[1])).then(this.sortCharts.bind(this));
+      ]).then(charts => [charts[0]].concat(this.sortCharts(charts[1])));
     } else {
       return this.getResourceHistoryCharts(quotas, organization);
     }
