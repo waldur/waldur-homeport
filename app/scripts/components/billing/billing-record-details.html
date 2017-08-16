@@ -32,7 +32,7 @@
                 <th translate>Item</th>
                 <th translate>Quantity</th>
                 <th translate>Unit price</th>
-                <th translate>Total price</th>
+                <th><price-tooltip></price-tooltip><span translate>Total price</span></th>
               </tr>
             </thead>
             <tbody ng-repeat="project in $ctrl.projects | orderBy:'name' track by $index">
