@@ -8,12 +8,17 @@ const billingRecordDetails = {
   },
   controller: class BillingRecordDetailsController {
     // @ngInject
-    constructor(BillingUtils) {
+    constructor(BillingUtils, currentStateService) {
       this.BillingUtils = BillingUtils;
+      this.currentStateService = currentStateService;
     }
 
     $onInit() {
       this.projects = this.BillingUtils.groupInvoiceItems(this.invoice);
+      this.currentStateService.getCustomer().then(customer => {
+        this.customer = customer;
+      }
+      );
     }
   }
 };

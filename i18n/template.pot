@@ -13,7 +13,7 @@ msgstr ""
 msgid "&lt; Back"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:70
+#: app/scripts/components/billing/billing-record-details.html:71
 msgid "(VAT is not included)"
 msgstr ""
 
@@ -1139,7 +1139,7 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:54
+#: app/scripts/components/billing/billing-record-details.html:55
 msgid "End time"
 msgstr ""
 
@@ -1402,7 +1402,7 @@ msgstr ""
 msgid "Following fields contain errors"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:16
+#: app/scripts/components/billing/billing-record-details.html:17
 msgid "For"
 msgstr ""
 
@@ -1825,7 +1825,7 @@ msgstr ""
 msgid "Issues"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:32
+#: app/scripts/components/billing/billing-record-details.html:33
 #: app/scripts/components/billing/invoice-details.html:32
 msgid "Item"
 msgstr ""
@@ -3240,7 +3240,7 @@ msgstr ""
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:33
+#: app/scripts/components/billing/billing-record-details.html:34
 #: app/scripts/components/billing/invoice-details.html:33
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:6
 #: app/scripts/components/cost-planning/cost-plan-items.html:10
@@ -3302,7 +3302,7 @@ msgstr ""
 msgid "Reason unknown, please contact support."
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:13
+#: app/scripts/components/billing/billing-record-details.html:14
 msgid "Record no."
 msgstr ""
 
@@ -3314,7 +3314,7 @@ msgstr ""
 msgid "Record number"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:21
+#: app/scripts/components/billing/billing-record-details.html:22
 #: app/scripts/components/billing/billing-records-list.js:53
 msgid "Record period"
 msgstr ""
@@ -4019,7 +4019,7 @@ msgstr ""
 msgid "Staff and Support user"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:53
+#: app/scripts/components/billing/billing-record-details.html:54
 msgid "Start time"
 msgstr ""
 
@@ -4190,7 +4190,7 @@ msgstr ""
 msgid "TAX"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:70
+#: app/scripts/components/billing/billing-record-details.html:71
 #: app/scripts/components/billing/invoice-details.html:79
 msgid "TOTAL"
 msgstr ""
@@ -4437,7 +4437,7 @@ msgstr ""
 msgid "Total planned resource consumption"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:35
+#: app/scripts/components/billing/billing-record-details.html:36
 #: app/scripts/components/billing/invoice-details.html:36
 msgid "Total price"
 msgstr ""
@@ -4446,7 +4446,7 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:50
+#: app/scripts/components/billing/billing-record-details.html:51
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
@@ -4569,7 +4569,7 @@ msgstr ""
 msgid "Unable to validate invitation token."
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:34
+#: app/scripts/components/billing/billing-record-details.html:35
 #: app/scripts/components/billing/invoice-details.html:34
 msgid "Unit price"
 msgstr ""
