@@ -181,7 +181,7 @@ class IssueRegistrationController {
       caller: this.issue.caller.url
     };
     if (this.issue.project) {
-      issue.project: this.issue.project.url;
+      issue.project = this.issue.project.url;
     }
     if (this.issue.assignee) {
       issue.assignee = this.issue.assignee.url;
