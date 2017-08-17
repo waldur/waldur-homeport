@@ -1,10 +1,7 @@
 <virtual-machine-summary resource="$ctrl.resource"/>
 
-<div class="m-b-xs" ng-if="::$ctrl.resource.remote_desktop_port">
-  <dt>
-    <span translate>RDP credentials</span>:
-  </dt>
-  <dd>
-  <a href="{{::$ctrl.resource.rdp}}">{{::$ctrl.resource.name}}.rdp</a>
-  </dd>
+
+<div class="m-b-xs" ng-repeat="endpoint in $ctrl.resource.endpoints">
+  <ssh-details ng-if="endpoint.name === 'SSH'" endpoint="endpoint"></ssh-details>
+  <rdp-details ng-if="endpoint.name !== 'SSH'" endpoint="endpoint" resource="$ctrl.resource"></rdp-details>
 </div>

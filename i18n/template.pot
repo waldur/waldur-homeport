@@ -3420,10 +3420,6 @@ msgstr ""
 msgid "RAM limit GB"
 msgstr ""
 
-#: app/scripts/components/azure/azure-virtual-machine-summary.html:5
-msgid "RDP credentials"
-msgstr ""
-
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:19
 msgid "Read through terms and conditions."
 msgstr ""
@@ -4140,6 +4136,10 @@ msgstr ""
 #: app/scripts/components/user/constants.js:13
 #: app/scripts/components/user/constants.js:43
 msgid "SSH Keys"
+msgstr ""
+
+#: app/scripts/components/azure/ssh-details.html:2
+msgid "SSH Port"
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-job-summary.html:37
