@@ -13,7 +13,7 @@ msgstr ""
 msgid "&lt; Back"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:71
+#: app/scripts/components/billing/billing-record-details.html:72
 msgid "(VAT is not included)"
 msgstr ""
 
@@ -106,7 +106,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:18
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/components/table/responsive-table.js:332
+#: app/scripts/components/table/responsive-table.js:333
 msgid "Actions"
 msgstr ""
 
@@ -229,6 +229,10 @@ msgstr ""
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:60
+msgid "Additional data that will be added to virtual machine on provisioning."
+msgstr ""
+
 #: app/scripts/components/customer/customer-create-config.js:47
 #: app/scripts/components/customer/customer-manage.html:38
 #: app/scripts/components/customer/customer-manage.html:74
@@ -243,6 +247,7 @@ msgstr ""
 msgid "Affected resource"
 msgstr ""
 
+#: app/scripts/components/billing/billing-record-details.html:14
 #: app/scripts/components/customer/customer-manage.html:33
 msgid "Agreement number"
 msgstr ""
@@ -372,7 +377,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:25
 #: app/scripts/components/issues/issue-registration.html:191
-#: app/scripts/components/issues/issues-list.js:115
+#: app/scripts/components/issues/issues-list.js:120
 msgid "Assigned to"
 msgstr ""
 
@@ -548,7 +553,7 @@ msgstr ""
 #: app/scripts/components/issues/constants.js:100
 #: app/scripts/components/issues/issue-detail.html:15
 #: app/scripts/components/issues/issue-registration.html:6
-#: app/scripts/components/issues/issues-list.js:97
+#: app/scripts/components/issues/issues-list.js:101
 msgid "Caller"
 msgstr ""
 
@@ -904,7 +909,7 @@ msgstr ""
 #: app/scripts/components/billing/billing-utils.js:41
 #: app/scripts/components/experts/requests/expert-request-summary.html:22
 #: app/scripts/components/issues/issue-detail.html:80
-#: app/scripts/components/issues/issues-list.js:124
+#: app/scripts/components/issues/issues-list.js:130
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:45
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:45
 #: app/scripts/components/resource/summary/resource-summary-base.html:40
@@ -993,13 +998,14 @@ msgid "Deployment plan does not have any item yet."
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-job-summary.html:32
+#: app/scripts/components/azure/azure-virtual-machine-config.js:20
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:74
 #: app/scripts/components/experts/requests/expert-request-create.js:47
 #: app/scripts/components/experts/requests/expert-request-summary.html:24
 #: app/scripts/components/issues/issue-detail.html:89
 #: app/scripts/components/issues/issue-quick-create.html:39
 #: app/scripts/components/issues/issue-registration.html:110
-#: app/scripts/components/issues/issues-list.js:73
+#: app/scripts/components/issues/issues-list.js:76
 #: app/scripts/components/issues/issues-short-list.html:28
 #: app/scripts/components/offering/appstore-offering.js:47
 #: app/scripts/components/offering/offering-summary.html:65
@@ -1139,7 +1145,7 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:55
+#: app/scripts/components/billing/billing-record-details.html:56
 msgid "End time"
 msgstr ""
 
@@ -1402,7 +1408,7 @@ msgstr ""
 msgid "Following fields contain errors"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:17
+#: app/scripts/components/billing/billing-record-details.html:18
 msgid "For"
 msgstr ""
 
@@ -1563,6 +1569,7 @@ msgstr ""
 msgid "Identity providers are not unavailable."
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:26
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:31
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:27
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:24
@@ -1570,6 +1577,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:30
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:35
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:28
 msgid "Image name"
@@ -1623,6 +1631,14 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:56
 msgid "Initial admin username"
+msgstr ""
+
+#: app/scripts/components/azure/azure-virtual-machine-config.js:54
+msgid "Initial password"
+msgstr ""
+
+#: app/scripts/components/azure/azure-virtual-machine-config.js:48
+msgid "Initial username"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/openstack-backup-summary.html:5
@@ -1825,7 +1841,7 @@ msgstr ""
 msgid "Issues"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:33
+#: app/scripts/components/billing/billing-record-details.html:34
 #: app/scripts/components/billing/invoice-details.html:32
 msgid "Item"
 msgstr ""
@@ -1851,7 +1867,7 @@ msgid "Kept until"
 msgstr ""
 
 #: app/scripts/components/issues/constants.js:103
-#: app/scripts/components/issues/issues-list.js:45
+#: app/scripts/components/issues/issues-list.js:44
 #: app/scripts/components/issues/issues-short-list.html:27
 #: app/scripts/components/providers/details/provider-price-list.js:41
 msgid "Key"
@@ -2423,11 +2439,11 @@ msgstr ""
 msgid "No subnets yet."
 msgstr ""
 
-#: app/scripts/components/issues/issues-list.js:32
+#: app/scripts/components/issues/issues-list.js:33
 msgid "No support requests found matching filter."
 msgstr ""
 
-#: app/scripts/components/issues/issues-list.js:31
+#: app/scripts/components/issues/issues-list.js:32
 msgid "No support requests yet."
 msgstr ""
 
@@ -2597,7 +2613,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html:30
 #: app/scripts/components/issues/issue-quick-create.html:56
 #: app/scripts/components/issues/issue-registration.html:43
-#: app/scripts/components/issues/issues-list.js:89
+#: app/scripts/components/issues/issues-list.js:93
 #: app/scripts/components/user/user-projects.js:53
 msgid "Organization"
 msgstr ""
@@ -2743,6 +2759,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:36
 #: app/scripts/components/auth/auth-login.html:67
+#: app/scripts/components/azure/password-details.js:11
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
 msgstr ""
@@ -3240,7 +3257,7 @@ msgstr ""
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:34
+#: app/scripts/components/billing/billing-record-details.html:35
 #: app/scripts/components/billing/invoice-details.html:33
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:6
 #: app/scripts/components/cost-planning/cost-plan-items.html:10
@@ -3302,7 +3319,7 @@ msgstr ""
 msgid "Reason unknown, please contact support."
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:14
+#: app/scripts/components/billing/billing-record-details.html:15
 msgid "Record no."
 msgstr ""
 
@@ -3314,7 +3331,7 @@ msgstr ""
 msgid "Record number"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:22
+#: app/scripts/components/billing/billing-record-details.html:23
 #: app/scripts/components/billing/billing-records-list.js:53
 msgid "Record period"
 msgstr ""
@@ -3409,7 +3426,7 @@ msgstr ""
 
 #: app/scripts/components/issues/constants.js:75
 #: app/scripts/components/issues/issue-detail.html:20
-#: app/scripts/components/issues/issues-list.js:106
+#: app/scripts/components/issues/issues-list.js:110
 msgid "Reporter"
 msgstr ""
 
@@ -3633,6 +3650,10 @@ msgstr ""
 #: app/scripts/components/user/constants.js:13
 #: app/scripts/components/user/constants.js:43
 msgid "SSH Keys"
+msgstr ""
+
+#: app/scripts/components/azure/ssh-details.html:3
+msgid "SSH Port"
 msgstr ""
 
 #: app/scripts/components/resource/summary/virtual-machine-summary.html:54
@@ -3873,7 +3894,7 @@ msgstr ""
 #: app/scripts/components/issues/constants.js:59
 #: app/scripts/components/issues/issue-detail.html:45
 #: app/scripts/components/issues/issue-registration.html:157
-#: app/scripts/components/issues/issues-list.js:81
+#: app/scripts/components/issues/issues-list.js:84
 msgid "Service type"
 msgstr ""
 
@@ -3949,6 +3970,7 @@ msgstr ""
 msgid "Sign in with {provider}"
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:37
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:47
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:41
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:38
@@ -3963,6 +3985,7 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:41
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:51
 msgid "Size name"
 msgstr ""
@@ -4019,7 +4042,7 @@ msgstr ""
 msgid "Staff and Support user"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:54
+#: app/scripts/components/billing/billing-record-details.html:55
 msgid "Start time"
 msgstr ""
 
@@ -4056,7 +4079,7 @@ msgstr ""
 #: app/scripts/components/issues/constants.js:109
 #: app/scripts/components/issues/constants.js:71
 #: app/scripts/components/issues/issue-detail.html:55
-#: app/scripts/components/issues/issues-list.js:55
+#: app/scripts/components/issues/issues-list.js:54
 #: app/scripts/components/user/user-popover-table.html:41
 msgid "Status"
 msgstr ""
@@ -4190,7 +4213,7 @@ msgstr ""
 msgid "TAX"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:71
+#: app/scripts/components/billing/billing-record-details.html:72
 #: app/scripts/components/billing/invoice-details.html:79
 msgid "TOTAL"
 msgstr ""
@@ -4376,7 +4399,7 @@ msgstr ""
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
-#: app/scripts/components/issues/issues-list.js:142
+#: app/scripts/components/issues/issues-list.js:139
 #: app/scripts/components/issues/issues-short-list.html:30
 msgid "Time in progress"
 msgstr ""
@@ -4389,7 +4412,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-quick-create.html:22
 #: app/scripts/components/issues/issue-registration.html:93
-#: app/scripts/components/issues/issues-list.js:64
+#: app/scripts/components/issues/issues-list.js:68
 #: app/scripts/components/user/keys/key-list.js:29
 msgid "Title"
 msgstr ""
@@ -4437,7 +4460,7 @@ msgstr ""
 msgid "Total planned resource consumption"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:36
+#: app/scripts/components/billing/billing-record-details.html:37
 #: app/scripts/components/billing/invoice-details.html:36
 msgid "Total price"
 msgstr ""
@@ -4446,14 +4469,13 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:51
+#: app/scripts/components/billing/billing-record-details.html:52
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:76
 #: app/scripts/components/experts/requests/expert-request-project-list.js:66
 #: app/scripts/components/experts/requests/expert-request-summary.html:18
-#: app/scripts/components/issues/issues-list.js:36
 #: app/scripts/components/offering/offering-summary.html:25
 #: app/scripts/components/offering/offerings-list.js:44
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
@@ -4569,7 +4591,7 @@ msgstr ""
 msgid "Unable to validate invitation token."
 msgstr ""
 
-#: app/scripts/components/billing/billing-record-details.html:35
+#: app/scripts/components/billing/billing-record-details.html:36
 #: app/scripts/components/billing/invoice-details.html:34
 msgid "Unit price"
 msgstr ""
@@ -4612,7 +4634,6 @@ msgstr ""
 msgid "Update security groups"
 msgstr ""
 
-#: app/scripts/components/issues/issues-list.js:133
 #: app/scripts/components/issues/issues-short-list.html:29
 msgid "Updated"
 msgstr ""
@@ -4649,6 +4670,7 @@ msgstr ""
 msgid "User dashboard"
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:59
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:87
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:148
 msgid "User data"
@@ -4737,6 +4759,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:29
 #: app/scripts/components/auth/auth-login.html:52
+#: app/scripts/components/azure/azure-virtual-machine-summary.html:10
 #: app/scripts/components/freeipa/freeipa-account-create.html:8
 #: app/scripts/components/freeipa/freeipa-account-edit.html:8
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:32
@@ -4777,6 +4800,7 @@ msgstr ""
 msgid "VAT rate"
 msgstr ""
 
+#: app/scripts/components/azure/azure-virtual-machine-config.js:15
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:14
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:23
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:18

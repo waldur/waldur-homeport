@@ -15,7 +15,7 @@ export const ISSUE_CLASSES = {
 export const ISSUE_ICONS = {
   INCIDENT: 'fa-exclamation-triangle',
   CHANGE_REQUEST: 'fa-check-square',
-  SERVICE_REQUEST: 'fa-plus-square',
+  SERVICE_REQUEST: 'fa-puzzle-piece',
   INFORMATIONAL: 'fa-question-circle'
 };
 
