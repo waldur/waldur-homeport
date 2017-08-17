@@ -4,8 +4,8 @@ export default {
     'description',
     'image',
     'size',
-    'username',
-    'password',
+    'user_username',
+    'user_password',
     'user_data'
   ],
   options: {
@@ -42,16 +42,16 @@ export default {
         }
       ],
     },
-    username: {
+    user_username: {
       type: 'string',
       required: true,
-      label: gettext('Username'),
+      label: gettext('Initial username'),
       maxlength: 150
     },
-    password: {
+    user_password: {
       type: 'password',
       required: true,
-      label: gettext('Password'),
+      label: gettext('Initial password'),
       maxlength: 150
     },
     user_data: {
