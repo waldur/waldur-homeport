@@ -125,10 +125,9 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">
                     <span translate>Project</span>
-                    <span class="text-danger">*</span>
                 </label>
                 <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.customer}">
-                    <ui-select ng-model="$ctrl.issue.project" name="project" required>
+                    <ui-select ng-model="$ctrl.issue.project" name="project">
                         <ui-select-match placeholder="{{ 'Select project...' | translate }}"
                                          allow-clear="true">
                             {{ $select.selected.name }}

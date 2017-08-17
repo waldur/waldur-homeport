@@ -176,11 +176,13 @@ class IssueRegistrationController {
     let issue = {
       type: this.issue.type,
       customer: this.issue.customer.url,
-      project: this.issue.project.url,
       summary: this.issue.summary,
       description: this.issue.description,
       caller: this.issue.caller.url
     };
+    if (this.issue.project) {
+      project: this.issue.project.url;
+    }
     if (this.issue.assignee) {
       issue.assignee = this.issue.assignee.url;
     }

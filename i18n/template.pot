@@ -243,7 +243,7 @@ msgstr ""
 #: app/scripts/components/issues/constants.js:63
 #: app/scripts/components/issues/issue-detail.html:50
 #: app/scripts/components/issues/issue-quick-create.html:94
-#: app/scripts/components/issues/issue-registration.html:172
+#: app/scripts/components/issues/issue-registration.html:171
 msgid "Affected resource"
 msgstr ""
 
@@ -376,7 +376,7 @@ msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:25
-#: app/scripts/components/issues/issue-registration.html:191
+#: app/scripts/components/issues/issue-registration.html:190
 #: app/scripts/components/issues/issues-list.js:120
 msgid "Assigned to"
 msgstr ""
@@ -881,7 +881,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-create-dialog.js:4
 #: app/scripts/components/issues/issue-quick-create.html:116
 #: app/scripts/components/issues/issue-quick-create.html:3
-#: app/scripts/components/issues/issue-registration.html:217
+#: app/scripts/components/issues/issue-registration.html:216
 msgid "Create request"
 msgstr ""
 
@@ -1349,7 +1349,7 @@ msgstr ""
 msgid "Field length must be less than {maxlength} symbols"
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.html:151
+#: app/scripts/components/issues/issue-registration.html:150
 #: app/scripts/components/issues/issue-registration.html:36
 #: app/scripts/components/issues/issue-registration.html:73
 msgid "Filter"
@@ -3706,7 +3706,7 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.html:213
+#: app/scripts/components/issues/issue-registration.html:212
 #: app/scripts/components/navigation/header/main-search.html:3
 #: app/scripts/components/table/responsive-table.js:104
 msgid "Search"
@@ -3759,11 +3759,11 @@ msgid "Select a component"
 msgstr ""
 
 #: app/scripts/components/issues/issue-quick-create.html:98
-#: app/scripts/components/issues/issue-registration.html:176
+#: app/scripts/components/issues/issue-registration.html:175
 msgid "Select affected resource..."
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.html:195
+#: app/scripts/components/issues/issue-registration.html:194
 msgid "Select assignee..."
 msgstr ""
 
@@ -3800,7 +3800,7 @@ msgid "Select project"
 msgstr ""
 
 #: app/scripts/components/issues/issue-quick-create.html:79
-#: app/scripts/components/issues/issue-registration.html:132
+#: app/scripts/components/issues/issue-registration.html:131
 msgid "Select project..."
 msgstr ""
 
@@ -3822,7 +3822,7 @@ msgstr ""
 msgid "Select security groups..."
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.html:161
+#: app/scripts/components/issues/issue-registration.html:160
 msgid "Select service type..."
 msgstr ""
 
@@ -3893,7 +3893,7 @@ msgstr ""
 
 #: app/scripts/components/issues/constants.js:59
 #: app/scripts/components/issues/issue-detail.html:45
-#: app/scripts/components/issues/issue-registration.html:157
+#: app/scripts/components/issues/issue-registration.html:156
 #: app/scripts/components/issues/issues-list.js:84
 msgid "Service type"
 msgstr ""
