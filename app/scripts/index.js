@@ -47,6 +47,7 @@ import priceModule from './components/price/module';
 import ansibleModule from './components/ansible/module';
 import introModule from './components/intro/module';
 import analyticsRoutes from './components/analytics/routes';
+import azureModule from './components/azure/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -117,6 +118,7 @@ servicesModule(appModule);
 freeipaModule(appModule);
 ansibleModule(appModule);
 introModule(appModule);
+azureModule(appModule);
 appModule.config(analyticsRoutes);
 
 bootstrap('waldur');
