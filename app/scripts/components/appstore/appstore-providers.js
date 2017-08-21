@@ -6,7 +6,7 @@ const appstoreProviders = {
     services: '<',
     onSelect: '&',
     loading: '<',
-    title: '<',
+    headerTitle: '@',
     collapsible: '<',
   },
   controller: class AppstoreProvidersController {
@@ -27,7 +27,7 @@ const appstoreProviders = {
     }
 
     getTitle() {
-      return this.title || gettext('Select provider');
+      return this.headerTitle || gettext('Select provider');
     }
 
     collapse() {
