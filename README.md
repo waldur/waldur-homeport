@@ -58,7 +58,7 @@ lines at the end of the file:
 
 ```
 INSTALLED_APPS += ('corsheaders',)
-MIDDLEWARE_CLASSES = ('corsheaders.middleware.CorsMiddleware',) + MIDDLEWARE_CLASSES
+MIDDLEWARE = ('corsheaders.middleware.CorsMiddleware',) + MIDDLEWARE
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_EXPOSE_HEADERS = (
     'x-result-count',
