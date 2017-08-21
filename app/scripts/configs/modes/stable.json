@@ -17,7 +17,6 @@
     "support.assigned_to_me",
     "support.activity_stream",
     "support.regular_issue_filters",
-    "experts",
     "user.preferred_language",
     "user.competence"
   ],
