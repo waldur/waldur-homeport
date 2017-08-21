@@ -221,6 +221,10 @@ const ENV = {
 
   // Conceal "Change request" from a selection of issue types for non-staff/non-support users
   // concealChangeRequest: false
+
+  // Start intro.js implicitly. If false, intro.js is started
+  // only when user clicks on "Guide Me" button
+  introJsAutostart: false,
 };
 
 export default ENV;

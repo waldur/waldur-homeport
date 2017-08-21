@@ -3,7 +3,7 @@ export default class ncIntroUtils {
   constructor($rootScope, $timeout, $window, ngIntroService, ENV, features) {
     this.$timeout = $timeout;
     this.ngIntroService = ngIntroService;
-    this.introJsDelay = ENV.introJsDelay;
+    this.ENV = ENV;
     this.features = features;
     this.$window = $window;
     this.state = {};
@@ -26,7 +26,7 @@ export default class ncIntroUtils {
       this.$window.localStorage['INTRO_STEPS'] = angular.toJson(steps_passed);
     }
 
-    this.$timeout(this.start.bind(this), this.introJsDelay);
+    this.$timeout(this.start.bind(this), this.ENV.introJsDelay);
   }
 
   getState() {
@@ -43,7 +43,7 @@ export default class ncIntroUtils {
   }
 
   start() {
-    if (this.features.isVisible('intro')) {
+    if (this.features.isVisible('intro') && this.ENV.introJsAutostart) {
       this.ngIntroService.start();
     }
   }
