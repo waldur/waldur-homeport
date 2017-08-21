@@ -33,6 +33,10 @@ const resourceImportDialog = {
       this.componentTemplate = this.resolve.componentTemplate;
       this.selectProviderTitle = gettext('Step 1. Select provider');
       this.loadProviders().then(providers => {
+        if (this.service.getSupported) {
+          providers = this.service.getSupported(providers);
+        }
+
         this.providers = providers;
       }).finally(() => this.loadingProviders = false);
       this.unlisten = this.$rootScope.$on('selectedItemsChanged', this.onSelectedItemsChanged.bind(this));
@@ -53,7 +57,7 @@ const resourceImportDialog = {
         return;
       }
 
-      this.service.importResources(this.selectedProvider, this.selectedItems).then(() => {
+      return this.service.importResources(this.selectedProvider, this.selectedItems).then(() => {
         this.ncUtilsFlash.success(gettext('Resources import has been initiated'));
         this.close();
       }).catch(response => {
