@@ -23,10 +23,12 @@ describe('AppstoreCategoriesService', () => {
     service.registerCategory(() => {
       return $q.when([
         {
+          key: 'custom-vpc',
           category: 'Custom requests',
           label: 'Custom Virtual Private Cloud',
         },
         {
+          key: 'custom-vm',
           category: 'Custom requests',
           label: 'Custom Virtual Machine',
         }
@@ -45,10 +47,12 @@ describe('AppstoreCategoriesService', () => {
         label: 'Custom requests',
         items: [
           {
+            key: 'custom-vpc',
             category: 'Custom requests',
             label: 'Custom Virtual Private Cloud',
           },
           {
+            key: 'custom-vm',
             category: 'Custom requests',
             label: 'Custom Virtual Machine',
           }

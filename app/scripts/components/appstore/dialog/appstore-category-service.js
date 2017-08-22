@@ -11,8 +11,14 @@ function groupBy(field, items) {
   }, {});
 }
 
+function distinct(array, key) {
+  return array.filter((value, index, self) => {
+    return self.findIndex(v => v[key] === value[key]) === index;
+  });
+}
+
 function groupToList(groups) {
-  return Object.keys(groups).map(label => ({ label, items: groups[label] }));
+  return Object.keys(groups).map(label => ({ label, items: distinct(groups[label], 'key') }));
 }
 
 export default class AppstoreCategoriesService {
