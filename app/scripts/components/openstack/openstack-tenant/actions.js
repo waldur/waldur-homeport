@@ -37,6 +37,9 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         type: 'form',
         component: 'openstackTenantChangePackageDialog',
         useResolve: true,
+        isVisible: (resource) => {
+          return resource.extra_configuration && resource.extra_configuration.package_uuid;
+        },
         dialogSize: 'lg'
       },
       assign_package: {
