@@ -1,15 +1,21 @@
-import ImportUtils from './utils';
 import resourceImportDialog from './resource-import-dialog';
-import registerImportTableAction from './register-import-table-action';
+import assignPackageDialog from '../openstack/openstack-tenant/openstack-tenant-assign-package-dialog';
 import importVirtualMachinesList from './import-virtual-machines-list';
-import importVirtualMachinesService from './import-virtual-machines-service';
-import ImportVirtualMachineEndpointRegistry from './import-virtual-machine-endpoint-registry';
+import importVirtualCloudsList from './import-virtual-clouds-list';
+import registerImportInstanceTableAction from './register-import-instance-table-action';
+import registerImportVPCTableAction from './register-import-vpc-table-action';
+import ImportUtils from './utils';
+import importResourcesService from './import-resources-service';
+import ImportResourcesEndpointRegistry from './import-resources-endpoint-registry';
 
 export default module => {
   module.component('resourceImportDialog', resourceImportDialog);
+  module.component('assignPackageDialog', assignPackageDialog);
   module.component('importVirtualMachinesList', importVirtualMachinesList);
-  module.run(registerImportTableAction);
+  module.component('importVirtualCloudsList', importVirtualCloudsList);
+  module.run(registerImportInstanceTableAction);
+  module.run(registerImportVPCTableAction);
   module.service('ImportUtils', ImportUtils);
-  module.service('importVirtualMachinesService', importVirtualMachinesService);
-  module.service('ImportVirtualMachineEndpointRegistry', ImportVirtualMachineEndpointRegistry);
+  module.service('importResourcesService', importResourcesService);
+  module.service('ImportResourcesEndpointRegistry', ImportResourcesEndpointRegistry);
 };

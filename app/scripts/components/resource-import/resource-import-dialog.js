@@ -34,7 +34,7 @@ const resourceImportDialog = {
       this.selectProviderTitle = gettext('Step 1. Select provider');
       this.loadProviders().then(providers => {
         if (this.service.getSupported) {
-          providers = this.service.getSupported(providers);
+          providers = this.service.getSupported(this.resolve.category, providers);
         }
 
         this.providers = providers;

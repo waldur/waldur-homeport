@@ -1,26 +1,41 @@
 // @ngInject
 export default function actionUtilsService(
   ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils,
-  resourcesService, ActionConfiguration, ActionResourceLoader, coreUtils) {
+  resourcesService, ActionConfiguration, ActionResourceLoader, coreUtils, usersService) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
-    return resourcesService.getOption(model.url).then(response => {
-      const config = ActionConfiguration[model.resource_type];
-      const order = config && config.order || Object.keys(response.actions);
-      const options = config && config.options || {};
-      return order.reduce((result, name) => {
-        let action = angular.merge({}, response.actions[name], options[name]);
-        if (action.hasOwnProperty('enabled')) {
-          result[name] = action;
-        }
-        if (action.fields) {
-          angular.forEach(action.fields, (action, name) => {
-            action.name = name;
-          });
-        }
-        return result;
-      }, {});
+    return usersService.getCurrentUser().then(user => {
+      return resourcesService.getOption(model.url).then(response => {
+        const config = ActionConfiguration[model.resource_type];
+        const order = config && config.order || Object.keys(response.actions);
+        const options = config && config.options || {};
+        return order.reduce((result, name) => {
+          let action = angular.merge({}, response.actions[name], options[name]);
+          if (this.actionHasToBeAdded(action, model, user)) {
+            result[name] = action;
+          }
+          if (action.fields) {
+            angular.forEach(action.fields, (action, name) => {
+              action.name = name;
+            });
+          }
+          return result;
+        }, {});
+      });
     });
+  };
+
+  this.actionHasToBeAdded = function(action, model, user) {
+    if (action.staffOnly && !user.is_staff) {
+      return false;
+    }
+
+    action.isVisible = action.isVisible || function () {return true;};
+    if (!action.isVisible(model)) {
+      return false;
+    }
+
+    return action.hasOwnProperty('enabled');
   };
 
   this.buttonClick = function(controller, model, name, action) {

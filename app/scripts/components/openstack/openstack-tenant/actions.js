@@ -4,6 +4,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
     order: [
       'edit',
       'pull',
+      'assign_package',
       'change_package',
       'create_network',
       'create_security_group',
@@ -36,6 +37,18 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         type: 'form',
         component: 'openstackTenantChangePackageDialog',
         useResolve: true,
+        dialogSize: 'lg'
+      },
+      assign_package: {
+        title: gettext('Assign VPC package'),
+        type: 'form',
+        component: 'assignPackageDialog',
+        useResolve: true,
+        staffOnly: true,
+        enabled: true,
+        isVisible: (resource) => {
+          return !(resource.extra_configuration && resource.extra_configuration.package_uuid);
+        },
         dialogSize: 'lg'
       },
       create_security_group: {

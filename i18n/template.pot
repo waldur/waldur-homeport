@@ -255,7 +255,7 @@ msgstr ""
 msgid "Add organization"
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-private-clouds-list.js:24
+#: app/scripts/components/resource/list/resource-private-clouds-list.js:39
 msgid "Add private cloud"
 msgstr ""
 
@@ -451,11 +451,11 @@ msgstr ""
 msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:43
+#: app/scripts/components/resource/actions/action-utils-service.js:58
 msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}."
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:45
+#: app/scripts/components/resource/actions/action-utils-service.js:60
 msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}."
 msgstr ""
 
@@ -463,8 +463,20 @@ msgstr ""
 msgid "Are you sure you want to unlink provider and all related resources?"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:49
+#: app/scripts/components/resource/actions/action-utils-service.js:64
 msgid "Are you sure? This action cannot be undone."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:23
+msgid "Assign"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:2
+msgid "Assign package"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/actions.js:43
+msgid "Assign VPC package"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html:25
@@ -528,6 +540,7 @@ msgstr ""
 msgid "Back to project"
 msgstr ""
 
+#: app/scripts/components/resource-import/import-virtual-clouds-list.js:57
 #: app/scripts/components/resource/summary/resource-summary-base.html:59
 msgid "Backend ID"
 msgstr ""
@@ -660,6 +673,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:137
 #: app/scripts/components/offering/appstore-offering.html:19
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:26
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:54
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:43
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:34
@@ -710,7 +724,7 @@ msgstr ""
 msgid "Change Request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:34
+#: app/scripts/components/openstack/openstack-tenant/actions.js:35
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:2
 msgid "Change VPC package"
 msgstr ""
@@ -917,9 +931,9 @@ msgstr ""
 #: app/scripts/components/offering/appstore-offering.html:16
 #: app/scripts/components/openstack/openstack-instance/actions.js:108
 #: app/scripts/components/openstack/openstack-instance/actions.js:51
-#: app/scripts/components/openstack/openstack-tenant/actions.js:24
-#: app/scripts/components/openstack/openstack-tenant/actions.js:43
-#: app/scripts/components/openstack/openstack-tenant/actions.js:63
+#: app/scripts/components/openstack/openstack-tenant/actions.js:25
+#: app/scripts/components/openstack/openstack-tenant/actions.js:56
+#: app/scripts/components/openstack/openstack-tenant/actions.js:76
 #: app/scripts/components/openstack/openstack-volume/module.js:60
 #: app/scripts/components/openstack/openstack-volume/module.js:74
 #: app/scripts/components/project/project-issues.js:31
@@ -955,11 +969,11 @@ msgstr ""
 msgid "Create expert request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:64
+#: app/scripts/components/openstack/openstack-tenant/actions.js:77
 msgid "Create floating IP for"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:25
+#: app/scripts/components/openstack/openstack-tenant/actions.js:26
 msgid "Create network for"
 msgstr ""
 
@@ -990,7 +1004,7 @@ msgstr ""
 msgid "Create request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:44
+#: app/scripts/components/openstack/openstack-tenant/actions.js:57
 msgid "Create security group for"
 msgstr ""
 
@@ -1128,6 +1142,7 @@ msgstr ""
 #: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:17
 #: app/scripts/components/project/project-details.html:25
 #: app/scripts/components/project/projects-list.js:91
+#: app/scripts/components/resource-import/import-virtual-clouds-list.js:53
 #: app/scripts/components/resource/actions/constants.js:26
 #: app/scripts/components/resource/summary/resource-summary-base.html:31
 #: app/scripts/components/user/user-edit.html:93
@@ -2262,6 +2277,7 @@ msgstr ""
 #: app/scripts/components/providers/details/provider-details.html:4
 #: app/scripts/components/providers/details/provider-settings.js:44
 #: app/scripts/components/providers/provider-list.js:55
+#: app/scripts/components/resource-import/import-virtual-clouds-list.js:48
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:48
 #: app/scripts/components/resource/actions/constants.js:20
 #: app/scripts/components/resource/list/resources-list.js:42
@@ -2472,8 +2488,12 @@ msgstr ""
 msgid "No price list items yet."
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-private-clouds-list.js:20
+#: app/scripts/components/resource/list/resource-private-clouds-list.js:30
 msgid "No private clouds found matching filter."
+msgstr ""
+
+#: app/scripts/components/resource-import/import-virtual-clouds-list.js:39
+msgid "No private clouds to import."
 msgstr ""
 
 #: app/scripts/components/team/customer-users-list.js:110
@@ -2872,6 +2892,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:5
 msgid "Package"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js:43
+msgid "Package could not be assigned."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:73
@@ -3595,7 +3619,7 @@ msgstr ""
 msgid "Request detail"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:74
+#: app/scripts/components/openstack/openstack-tenant/actions.js:87
 msgid "Request direct access"
 msgstr ""
 
@@ -3618,7 +3642,7 @@ msgstr ""
 msgid "Request removal"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:82
+#: app/scripts/components/resource/actions/action-utils-service.js:97
 msgid "Request to {action} has been accepted."
 msgstr ""
 
@@ -3686,7 +3710,7 @@ msgstr ""
 msgid "Resource events"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:64
+#: app/scripts/components/resource/actions/action-utils-service.js:79
 msgid "Resource has been deleted."
 msgstr ""
 
@@ -4339,9 +4363,9 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:37
 #: app/scripts/components/openstack/openstack-snapshot/module.js:43
 #: app/scripts/components/openstack/openstack-subnet/actions.js:14
-#: app/scripts/components/openstack/openstack-tenant/actions.js:20
-#: app/scripts/components/openstack/openstack-tenant/actions.js:55
-#: app/scripts/components/openstack/openstack-tenant/actions.js:59
+#: app/scripts/components/openstack/openstack-tenant/actions.js:21
+#: app/scripts/components/openstack/openstack-tenant/actions.js:68
+#: app/scripts/components/openstack/openstack-tenant/actions.js:72
 #: app/scripts/components/openstack/openstack-volume/module.js:53
 msgid "Synchronise"
 msgstr ""
@@ -4389,7 +4413,11 @@ msgstr ""
 msgid "Tenant"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:17
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js:41
+msgid "Tenant has been assigned to the package."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/actions.js:18
 msgid "Tenant has been updated."
 msgstr ""
 
@@ -4400,7 +4428,7 @@ msgstr ""
 msgid "Tenant name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:34
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:32
 msgid "Tenant package has been changed."
 msgstr ""
 
@@ -4658,7 +4686,7 @@ msgstr ""
 msgid "Unable to cancel invitation."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:38
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js:36
 msgid "Unable to change tenant package."
 msgstr ""
 
@@ -5128,7 +5156,7 @@ msgstr ""
 msgid "You have no permissions yet."
 msgstr ""
 
-#: app/scripts/components/resource/list/resource-private-clouds-list.js:19
+#: app/scripts/components/resource/list/resource-private-clouds-list.js:29
 msgid "You have no private clouds yet."
 msgstr ""
 
