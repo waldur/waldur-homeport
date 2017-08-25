@@ -1,5 +1,5 @@
 // @ngInject
-export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION, ENV) {
+export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION, ENV, features) {
   let tenantConfig = {
     order: [
       'edit',
@@ -50,7 +50,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         staffOnly: true,
         enabled: true,
         isVisible: (resource) => {
-          return !(resource.extra_configuration && resource.extra_configuration.package_uuid);
+          return features.isVisible('import') && !(resource.extra_configuration && resource.extra_configuration.package_uuid);
         },
         dialogSize: 'lg'
       },
