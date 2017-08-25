@@ -1,16 +1,16 @@
-const importVirtualMachinesList = {
+const importVirtualCloudsList = {
   templateUrl: 'views/partials/filtered-list.html',
-  controller: ImportVirtualMachinesListController,
+  controller: ImportVirtualCloudsListController,
   controllerAs: 'ListController',
   bindings: {
     provider: '<',
   }
 };
 
-export default importVirtualMachinesList;
+export default importVirtualCloudsList;
 
 // @ngInject
-function ImportVirtualMachinesListController(
+function ImportVirtualCloudsListController(
   baseControllerListClass, importResourcesService, ENV, $scope, $state, $filter, ncUtils) {
   let controllerScope = this;
   let controllerClass = baseControllerListClass.extend({
@@ -20,7 +20,7 @@ function ImportVirtualMachinesListController(
       this.$filter = $filter;
       this.$state = $state;
       this.ncUtils = ncUtils;
-      this.service.setEndpoint(ENV.resourcesTypes.vms, controllerScope.provider);
+      this.service.setEndpoint(ENV.resourcesTypes.private_clouds, controllerScope.provider);
       $scope.$on('providerChanged', (event, args) => this.setProvider(args.data));
       this.tableOptions = this.getTableOptions();
       this.selectedItems = [];
@@ -29,14 +29,14 @@ function ImportVirtualMachinesListController(
     setProvider: function(provider) {
       this.initialized = false;
       controllerScope.provider = provider;
-      this.service.setEndpoint(ENV.resourcesTypes.vms, provider);
+      this.service.setEndpoint(ENV.resourcesTypes.private_clouds, controllerScope.provider);
       this.resetCache().then(() => this.initialized = true);
     },
     getTableOptions: function() {
       return {
         disableSearch: true,
         enableOrdering: false,
-        noDataText: gettext('No virtual machines to import.'),
+        noDataText: gettext('No private clouds to import.'),
         columns: this.getColumns(),
         tableActions: [],
         select: true,
@@ -50,34 +50,12 @@ function ImportVirtualMachinesListController(
           render: row => row.name
         },
         {
-          title: gettext('Runtime state'),
-          className: 'min-tablet-l',
-          render: row => row.runtime_state
+          title: gettext('Description'),
+          render: row => row.description
         },
         {
-          title: gettext('Flavor'),
-          render: row => row.flavor_name
-        },
-        {
-          title: gettext('Size'),
-          className: 'desktop',
-          render: function(row) {
-            return $filter('filesize')(row.size) || 'N/A';
-          }
-        },
-        {
-          title: gettext('RAM'),
-          className: 'desktop',
-          render: function(row) {
-            return $filter('filesize')(row.ram) || 'N/A';
-          }
-        },
-        {
-          title: gettext('CPU'),
-          className: 'desktop',
-          render: function(row) {
-            return row.cores || 'N/A';
-          }
+          title: gettext('Backend ID'),
+          render: row => row.backend_id
         }
       ];
     },
@@ -105,7 +83,6 @@ function ImportVirtualMachinesListController(
     getFilter: function() {
       return {
         service_project_link: controllerScope.provider.service_project_link_url,
-        service_settings_uuid: controllerScope.provider.settings_uuid,
       };
     },
   });

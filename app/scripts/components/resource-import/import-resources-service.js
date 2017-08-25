@@ -1,17 +1,17 @@
 // @ngInject
-export default function importVirtualMachinesService(
+export default function importResourcesService(
   baseServiceClass,
   $q,
   $http,
   WorkspaceService,
   ENV,
-  ImportVirtualMachineEndpointRegistry) {
+  ImportResourcesEndpointRegistry) {
   let ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
     },
-    setEndpoint(provider) {
-      this.baseEndpoint = ImportVirtualMachineEndpointRegistry.getEndpoint(provider.type);
+    setEndpoint(category, provider) {
+      this.baseEndpoint = ImportResourcesEndpointRegistry.getEndpoint(category, provider.type);
       this.endpoint = `/${this.baseEndpoint}/importable_resources/`;
     },
     importResources: function(provider, resources) {
@@ -29,10 +29,10 @@ export default function importVirtualMachinesService(
         backend_id: resource.backend_id,
       });
     },
-    getSupported: function(providers) {
+    getSupported: function(category, providers) {
       let supportedProviders = [];
       angular.forEach(providers, provider => {
-        if(ImportVirtualMachineEndpointRegistry.isRegistered(provider.type)) {
+        if(ImportResourcesEndpointRegistry.isRegistered(category, provider.type)) {
           supportedProviders.push(provider);
         }
       });

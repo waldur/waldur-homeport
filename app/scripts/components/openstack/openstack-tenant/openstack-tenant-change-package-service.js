@@ -1,5 +1,4 @@
-import { templateParser, parseQuotasUsage, parseComponents } from '../utils';
-import { templateComparator } from './openstack-template';
+import { templateParser } from '../utils';
 
 // @ngInject
 export default class openstackTenantChangePackageService {
@@ -22,8 +21,7 @@ export default class openstackTenantChangePackageService {
 
   loadData(tenant) {
     let context = { tenant };
-    return this.loadTenantQuotasUsage(context)
-          .then(this.loadTenantPackage.bind(this))
+    return this.loadTenantPackage(context)
           .then(this.loadPackageTemplate.bind(this))
           .then(this.loadTemplates.bind(this));
   }
@@ -41,12 +39,6 @@ export default class openstackTenantChangePackageService {
   }
 
   // Private API section
-
-  loadTenantQuotasUsage(context) {
-    return this.loadTenant(context).then(tenant => angular.extend(context, {
-      quotas: parseQuotasUsage(tenant.quotas)
-    }));
-  }
 
   loadTenant(context) {
     return this.resourcesService.$get(null, null, context.tenant.url);
@@ -75,29 +67,8 @@ export default class openstackTenantChangePackageService {
   }
 
   loadTemplates(context) {
-    return this.packageTemplatesService.getAll({
-      service_settings_uuid: context.tenant.service_settings_uuid,
-      archived: 'False',
-    }).then(templates => angular.extend(context, {
-      templates: templates
-        .map(templateParser)
-        .filter(this.checkTemplate.bind(this, context))
-        .sort(templateComparator)
-    }));
-  }
-
-  checkTemplate(context, template) {
-    // Exclude current package template
-    if (template.uuid === context.template.uuid) {
-      return false;
-    }
-
-    // Allow to change package only if current usage of all quotas <= new package quotas
-    const components = parseComponents(template.components);
-    return (
-      context.quotas.cores <= components.cores &&
-      context.quotas.ram <= components.ram &&
-      context.quotas.disk <= components.disk);
+    return this.packageTemplatesService.loadTemplates(context.tenant, context.template
+    ).then(templates => angular.extend(context, {templates: templates}));
   }
 
   changePackage(context) {

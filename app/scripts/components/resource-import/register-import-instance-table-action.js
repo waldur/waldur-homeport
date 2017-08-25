@@ -1,10 +1,10 @@
 // @ngInject
-export default function registerImportTableAction($rootScope,
-                                                  WorkspaceService,
-                                                  TableExtensionService,
-                                                  features,
-                                                  ImportUtils,
-                                                  importVirtualMachinesService) {
+export default function registerImportInstanceTableAction($rootScope,
+                                                          WorkspaceService,
+                                                          TableExtensionService,
+                                                          features,
+                                                          ImportUtils,
+                                                          importResourcesService) {
   if (features.isVisible('import')) {
     $rootScope.$on('WORKSPACE_CHANGED', () => {
       let workspace = WorkspaceService.getWorkspace();
@@ -15,7 +15,7 @@ export default function registerImportTableAction($rootScope,
       let callback = () => {
         ImportUtils.openImportDialog(
           '<import-virtual-machines-list provider="provider"/>',
-          importVirtualMachinesService,
+          importResourcesService,
           'vms',
           'refreshVirtualMachinesList',
         );
