@@ -148,6 +148,7 @@ const ENV = {
   countsCacheTime: 60, // seconds
   enablePurchaseCostDisplay: true,
 
+  resourceDetailInterval: 5, // seconds
   resourcesTimerInterval: 30, // seconds
   countersTimerInterval: 30, // seconds
 
@@ -220,6 +221,10 @@ const ENV = {
 
   // Conceal "Change request" from a selection of issue types for non-staff/non-support users
   // concealChangeRequest: false
+
+  // Start intro.js implicitly. If false, intro.js is started
+  // only when user clicks on "Guide Me" button
+  introJsAutostart: false,
 };
 
 export default ENV;

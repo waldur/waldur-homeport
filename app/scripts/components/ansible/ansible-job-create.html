@@ -4,18 +4,36 @@
       <div ng-if="$ctrl.loading">
         <loading-spinner/>
       </div>
-      <div class="ibox" ng-if="$ctrl.playbook">
+      <appstore-providers
+        ng-if="!$ctrl.selectedService && !$ctrl.loading"
+        services="$ctrl.services"
+        on-select="$ctrl.setService(service)">
+      </appstore-providers>
+      <div class="ibox" ng-if="$ctrl.selectedService">
         <div class="ibox-title"><h3>{{ $ctrl.playbook.name }}</h3></div>
         <div class="ibox-content">
-          <appstore-form fields="$ctrl.fields" model="$ctrl.model" errors="$ctrl.errors"/>
+          <div class="form-horizontal">
+            <div class="form-group">
+              <div class="col-sm-3 control-label">
+                <label translate>Provider</label>
+              </div>
+              <div class="col-sm-4 form-control-static">
+                {{ $ctrl.selectedService.name }}
+              </div>
+            </div>
+            <appstore-form
+              fields="$ctrl.fields"
+              model="$ctrl.model"
+              errors="$ctrl.errors">
+            </appstore-form>
+          </div>
         </div>
-
         <div class="ibox-content">
           <button class="btn btn-primary pull-right" submit-button="$ctrl.save()">
             <i class="fa fa-shopping-cart"></i>
             <span translate>Create</span>
           </button>
-          <button class="btn btn-default" back-button>
+          <button class="btn btn-default" ng-click="$ctrl.resetService()">
             <span translate>Cancel</span>
           </button>
         </div>

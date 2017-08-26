@@ -23,6 +23,11 @@ export default function ncUtilsFlash(Flash, $rootScope) {
       if (message) {
         Flash.create(type, message);
       }
+    },
+    errorFromResponse: function(response, message) {
+      const details = `Errors: ${JSON.stringify(response.data)}`;
+      const errorMessage = `${message}. ${details}`;
+      this.error(errorMessage);
     }
   };
 }

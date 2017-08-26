@@ -10,6 +10,8 @@
       <div class="p-xl">
         <div class="row">
           <div class="col-sm-6 text-right col-sm-offset-6">
+            <h4>{{ ::$ctrl.customer.name }}</h4>
+            <h4 ng-if="$ctrl.customer.agreement_number"><span translate>Agreement number</span> {{ ::$ctrl.customer.agreement_number }}</h4>
             <h4 translate>Record no.</h4>
             <h4 class="text-navy">{{ ::$ctrl.invoice.number }}</h4>
             <div ng-if="$ctrl.invoice.customer_details">
@@ -32,7 +34,7 @@
                 <th translate>Item</th>
                 <th translate>Quantity</th>
                 <th translate>Unit price</th>
-                <th translate>Total price</th>
+                <th><price-tooltip></price-tooltip><span translate>Total price</span></th>
               </tr>
             </thead>
             <tbody ng-repeat="project in $ctrl.projects | orderBy:'name' track by $index">

@@ -14,6 +14,7 @@ import openstackTenantPrices from './openstack-tenant-prices';
 import filtersModule from './filters';
 import eventsConfig from './events';
 import costPlanningConfig from './cost-planning';
+import openstackTenantAssignPackageDialog from './openstack-tenant-assign-package-dialog';
 
 export default module => {
   module.config(fieldsConfig);
@@ -21,6 +22,7 @@ export default module => {
   module.config(tabsConfig);
   module.run(eventsConfig);
   module.run(costPlanningConfig);
+  module.component('openstackTenantAssignPackageDialog', openstackTenantAssignPackageDialog);
   module.component('openstackTenantCheckoutSummary', openstackTenantCheckoutSummary);
   module.component('openstackTenantChangePackageDialog', openstackTenantChangePackageDialog);
   module.component('openstackTenantRequestDirectAccess', openstackTenantRequestDirectAccess);

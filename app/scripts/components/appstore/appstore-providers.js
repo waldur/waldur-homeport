@@ -6,6 +6,8 @@ const appstoreProviders = {
     services: '<',
     onSelect: '&',
     loading: '<',
+    headerTitle: '@',
+    collapsible: '<',
   },
   controller: class AppstoreProvidersController {
     constructor($state, $stateParams, $uibModal, AppStoreUtilsService, coreUtils, currentStateService) {
@@ -21,12 +23,28 @@ const appstoreProviders = {
     $onInit() {
       this.initNoProvidersMessage();
       this.initProvidersManagementMessage();
+      this.collapsed = false;
+    }
+
+    getTitle() {
+      return this.headerTitle || gettext('Select provider');
+    }
+
+    collapse() {
+      if(!this.collapsible) {
+        return;
+      }
+
+      this.collapsed = !this.collapsed;
     }
 
     initNoProvidersMessage() {
       let category = this.$state.current.data.category || this.$stateParams.category;
       if (category) {
         category = this.AppStoreUtilsService.findCategory(category);
+        if (!category) {
+          return;
+        }
         this.noProvidersMessage = this.coreUtils.templateFormatter(
           gettext('There are no {categoryLabel} providers available for the current project.'),
           { categoryLabel: category.label.toLowerCase() });
@@ -39,6 +57,25 @@ const appstoreProviders = {
         this.providerManagementMessage = this.coreUtils.templateFormatter(
           gettext('You can provision a new provider through <a href="{link}">Service store</a>.'), { link });
       });
+    }
+
+    select(service) {
+      if (!this.isSelected(service)) {
+        this.onSelect({service: service});
+        this.selectedService = service;
+      }
+    }
+
+    getSelectButtonText(service) {
+      if (this.isSelected(service)) {
+        return gettext('Selected');
+      } else {
+        return gettext('Select');
+      }
+    }
+
+    isSelected(service) {
+      return angular.equals(this.selectedService, service);
     }
 
     showDetails(service) {

@@ -16,7 +16,6 @@ class DialogController {
     this.loading = true;
     this.service.loadData(this.tenant).then(context => {
       this.package = context.package;
-      this.quotas = context.quotas;
       this.template = context.template;
       this.templates = context.templates;
     }).catch(response => {

@@ -7,6 +7,7 @@ import offeringDetails from './offering-details';
 import offeringEvents from './offering-events';
 import offeringState from './offering-state';
 import registerOfferingCategory from './register-offering-category';
+import registerSidebarExtension from './sidebar';
 
 export default module => {
   module.service('offeringsService', offeringsService);
@@ -18,4 +19,5 @@ export default module => {
   module.component('offeringEvents', offeringEvents);
   module.component('offeringState', offeringState);
   module.run(registerOfferingCategory);
+  module.run(registerSidebarExtension);
 };

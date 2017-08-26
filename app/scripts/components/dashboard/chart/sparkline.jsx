@@ -13,16 +13,16 @@ function normalizeData(items) {
 }
 
 type Props = {
-  sparkData: Array<{
-    label: string,
-    value: number,
+  data: Array<{
+    +label: string,
+    +value: number,
   }>
 };
 
-export const SparklineChart = ({ sparkData }: Props) => (
+export const SparklineChart = ({ data }: Props) => (
   <figure className='sparkline'>
-    {normalizeData(sparkData).map((item, index) =>
-      <Tooltip key={index} label={item.label}>
+    {normalizeData(data).map((item, index) =>
+      <Tooltip key={index} label={item.label} id='sparkline'>
         <div className='sparkline-column'>
           <div className='sparkline-bar' style={{height: `${item.value}%`}}></div>
         </div>
@@ -30,5 +30,3 @@ export const SparklineChart = ({ sparkData }: Props) => (
     )}
   </figure>
 );
-
-export default react2angular(SparklineChart, ['sparkData']);

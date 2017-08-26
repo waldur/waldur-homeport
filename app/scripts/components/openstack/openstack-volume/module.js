@@ -7,6 +7,7 @@ import openstackVolumesService from './openstack-volumes-service';
 import openstackInstanceVolumes from './openstack-instance-volumes';
 import openstackVolumeSnapshots from './openstack-volume-snapshots';
 import openstackVolumesList from './openstack-volumes-list';
+import importVolumes from './import/module';
 
 export default module => {
   module.service('openstackVolumesService', openstackVolumesService);
@@ -22,6 +23,8 @@ export default module => {
   module.config(actionConfig);
   module.config(stateConfig);
   module.config(tabsConfig);
+
+  importVolumes(module);
 };
 
 // @ngInject

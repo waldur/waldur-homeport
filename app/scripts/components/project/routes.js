@@ -151,7 +151,7 @@ export default function projectRoutes($stateProvider) {
       url: 'offerings/',
       template: '<project-offerings-list/>',
       data: {
-        pageTitle: gettext('Requested Services'),
+        pageTitle: gettext('Requests'),
         feature: 'offering'
       }
     })
@@ -171,22 +171,5 @@ export default function projectRoutes($stateProvider) {
         pageTitle: gettext('Cost planning'),
         feature: 'cost-planning'
       }
-    })
-
-    .state('import', {
-      url: 'import/',
-      parent: 'project',
-      template: '<ui-view></ui-view>',
-      abstract: true,
-      data: {
-        auth: true,
-        workspace: 'project',
-        pageTitle: gettext('Import resources from provider')
-      }
-    })
-
-    .state('import.import', {
-      url: '?service_type&service_uuid',
-      templateUrl: 'views/import/import.html',
     });
 }

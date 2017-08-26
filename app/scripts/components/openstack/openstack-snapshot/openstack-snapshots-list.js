@@ -55,9 +55,6 @@ function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $st
       });
       return options;
     },
-    getImportTitle: function() {
-      return gettext('Import snapshots');
-    },
     getCreateTitle: function() {
       return gettext('Add snapshots');
     }

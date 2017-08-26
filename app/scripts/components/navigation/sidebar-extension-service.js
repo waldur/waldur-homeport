@@ -2,8 +2,9 @@ import {flatten} from '../core/utils';
 
 export default class SidebarExtensionService {
   // @ngInject
-  constructor($q) {
+  constructor($q, features) {
     this.$q = $q;
+    this.features = features;
     this._registry = {};
   }
 
@@ -44,5 +45,21 @@ export default class SidebarExtensionService {
       }
     });
     return items;
+  }
+
+  getCounters(items) {
+    let counters = [];
+    const visitItem = item => {
+      if (item.hasOwnProperty('countFieldKey') && this.features.isVisible(item.feature)) {
+        counters.push(item.countFieldKey);
+      }
+    };
+    items.forEach(item => {
+      visitItem(item);
+      if (item.children) {
+        item.children.forEach(visitItem);
+      }
+    });
+    return counters;
   }
 }

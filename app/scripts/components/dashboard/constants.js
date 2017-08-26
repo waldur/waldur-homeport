@@ -16,7 +16,15 @@ export const DASHBOARD_QUOTAS = {
     feature: 'private_clouds',
   },
   nc_storage_count: {
-    title: gettext('Storage'),
+    title: gettext('Block device count'),
+    feature: 'storage'
+  },
+  nc_volume_count: {
+    title: gettext('Block volume count'),
+    feature: 'storage'
+  },
+  nc_snapshot_count: {
+    title: gettext('Block snapshot count'),
     feature: 'storage'
   },
   nc_user_count: {
@@ -29,7 +37,9 @@ export const PROJECT_DASHBOARD_QUOTAS = [
   'nc_app_count',
   'nc_vm_count',
   'nc_private_cloud_count',
-  'nc_storage_count'
+  'nc_storage_count',
+  'nc_volume_count',
+  'nc_snapshot_count'
 ];
 
 export const ORGANIZATION_DASHBOARD_QUOTAS = [

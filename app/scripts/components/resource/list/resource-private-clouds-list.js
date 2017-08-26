@@ -6,13 +6,23 @@ const resourcePrivateCloudsList = {
 
 export default resourcePrivateCloudsList;
 
-function ProjectPrivateCloudsTabController(BaseProjectResourcesTabController, ENV) {
+function ProjectPrivateCloudsTabController($scope,
+                                           $timeout,
+                                           BaseProjectResourcesTabController,
+                                           ENV,
+                                           TableExtensionService) {
   var controllerScope = this;
   var ResourceController = BaseProjectResourcesTabController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.category = ENV.PrivateClouds;
+      $scope.$on('PrivateCloudImported', function() {
+        $timeout(function() {
+          controllerScope.resetCache();
+        });
+      });
       this._super();
+      this.addRowFields(['extra_configuration']);
     },
     getTableOptions: function() {
       var options = this._super();
@@ -20,8 +30,10 @@ function ProjectPrivateCloudsTabController(BaseProjectResourcesTabController, EN
       options.noMatchesText = gettext('No private clouds found matching filter.');
       return options;
     },
-    getImportTitle: function() {
-      return gettext('Import private cloud');
+    getTableActions: function() {
+      let actions = this._super();
+      let tableActions = TableExtensionService.getTableActions('resource-private-clouds-list');
+      return actions.concat(tableActions);
     },
     getCreateTitle: function() {
       return gettext('Add private cloud');

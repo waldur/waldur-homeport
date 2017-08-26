@@ -12,7 +12,7 @@
 */
 
 // @ngInject
-export default function responsiveTable($rootScope, $timeout, $interval, $compile, $filter, ENV, features) {
+export default function responsiveTable($rootScope, $q, $timeout, $interval, $compile, $filter, ENV, features) {
   return {
     restrict: 'E',
     scope: {
@@ -58,6 +58,7 @@ export default function responsiveTable($rootScope, $timeout, $interval, $compil
             });
           }
           table = initTable();
+          connectEventListeners(table);
           connectRowButtons(table);
 
           if (!newTableOptions.disableAutoUpdate) {
@@ -88,6 +89,7 @@ export default function responsiveTable($rootScope, $timeout, $interval, $compil
           serverSide: true,
           ordering: !!options.enableOrdering,
           autoWidth: false,
+          select: options.select || false,
           ajax: serverDataTableCallback,
           dom: dom,
           buttons: buttons && buttons,
@@ -123,6 +125,32 @@ export default function responsiveTable($rootScope, $timeout, $interval, $compil
         }
 
         return $(element.find('.table')[0]).DataTable(tableOptions);
+      }
+
+      function connectEventListeners(table) {
+        table.on('select', function(event, datatable, type, indexes) {
+          if (type === 'row') {
+            let items = [];
+            table.rows(indexes).every(function() {
+              items.push(this.data());
+            });
+            if (scope.controller.onSelect) {
+              scope.controller.onSelect(items);
+            }
+          }
+        });
+
+        table.on('deselect', function(event, datatable, type, indexes) {
+          if (type === 'row') {
+            let items = [];
+            table.rows(indexes).every(function() {
+              items.push(this.data());
+            });
+            if (scope.controller.onDeselect) {
+              scope.controller.onDeselect(items);
+            }
+          }
+        });
       }
 
       function getDom() {
@@ -189,6 +217,7 @@ export default function responsiveTable($rootScope, $timeout, $interval, $compil
         columns = columns.filter(function(column) {
           return !column.feature || features.isVisible(column.feature);
         });
+        columns = columns.filter(column => !column.hasOwnProperty('isVisible') || column.isVisible());
         if (options.rowActions && options.rowActions.length) {
           var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
           columns.push(actionColumn);
@@ -365,15 +394,46 @@ export default function responsiveTable($rootScope, $timeout, $interval, $compil
           var orderField = options.columns[orderItem.column].orderField;
           filter.o = orderItem.dir === 'asc' ? orderField : '-' + orderField;
         });
+        let selectedItems = getSelectedItems(table);
         scope.controller.requestLoad(request, filter).then(function() {
           var total = scope.controller.getTotal();
-          drawCallback({
+          $q.when([drawCallback({
             draw: request.draw,
             recordsTotal: total,
             recordsFiltered: total,
             data: scope.controller.list
+          })]).then(function() {
+            selectItems(table, selectedItems);
           });
         });
+      }
+
+      function selectItems(table, selectedItems) {
+        if (!selectedItems) {
+          return;
+        }
+
+        table.rows().every(function(index) {
+          let data = this.data();
+          let isSelected = selectedItems.filter(function(item) {
+            return item.name === data.name;
+          })[0];
+          if (isSelected) {
+            this.row(index).select();
+          }
+        });
+      }
+
+      function getSelectedItems(table) {
+        let items = [];
+
+        if (table) {
+          table.rows({selected: true}).every(function() {
+            items.push(this.data());
+          });
+        }
+
+        return items;
       }
     }
   };

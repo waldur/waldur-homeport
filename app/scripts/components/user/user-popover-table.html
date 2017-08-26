@@ -17,11 +17,11 @@
                 <td><strong translate>E-mail</strong></td>
                 <td>{{ $ctrl.user.email }}</td>
             </tr>
-            <tr>
+            <tr visible-if="'user.preferred_language'">
                 <td><strong translate>Preferred language</strong></td>
                 <td>{{ $ctrl.user.preferred_language || 'N/A' }}</td>
             </tr>
-            <tr>
+            <tr visible-if="'user.competence'">
                 <td><strong translate>Competence</strong></td>
                 <td>{{ $ctrl.user.competence || 'N/A' }}</td>
             </tr>

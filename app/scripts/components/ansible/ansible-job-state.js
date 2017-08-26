@@ -1,15 +1,18 @@
 const labelClasses = {
-  'Run Scheduled': 'label-warning',
-  Running: 'label-primary',
-  Erred: 'label-danger',
-  OK: 'label-success',
+  Scheduled: 'progress-bar-striped active',
+  Executing: 'progress-bar-striped active',
+  Erred: 'progress-bar-danger',
+  OK: ' ',
 };
 
 const ansibleJobState = {
   template: `
-  <span class="label" ng-class="$ctrl.getLabelClass()">
-    {{ $ctrl.model.state | translate | uppercase }}
-  </span>`,
+  <div class="progress pull-left m-b-none">
+    <span class="progress-bar p-w-sm full-width" ng-class="$ctrl.getLabelClass()">
+      {{ $ctrl.model.state | translate | uppercase }}
+    </span>
+  </div>
+  `,
   bindings: {
     model: '<',
   },
@@ -19,7 +22,7 @@ const ansibleJobState = {
         return;
       }
       const { state } = this.model;
-      return labelClasses[state] || 'label-info';
+      return labelClasses[state] || 'progress-bar-info';
     }
   }
 };

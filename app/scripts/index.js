@@ -1,7 +1,6 @@
 import './globals';
 import '../../assets/sass/style.scss';
 
-import sparkline from './components/sparkline/module';
 import featuresModule from './components/features/module';
 import teamModule from './components/team/module';
 import issuesModule from './components/issues/module';
@@ -10,6 +9,7 @@ import providersModule from './components/providers/module';
 import projectModule from './components/project/module';
 import navigationModule from './components/navigation/module';
 import resourceModule from './components/resource/module';
+import resourceImportModule from './components/resource-import/module';
 import billingModule from './components/billing/module';
 import expertsModule from './components/experts/module';
 import authModule from './components/auth/module';
@@ -26,7 +26,6 @@ import paymentsModule from './components/payments/module';
 import eventsModule from './components/events/module';
 import alertsModule from './components/alerts/module';
 import routesModule from './components/routes/module';
-import analyticsModule from './components/analytics/module';
 import offeringsModule from './components/offering/module';
 import helpModule from './components/help/module';
 import costPlanningModule from './components/cost-planning/module';
@@ -47,6 +46,8 @@ import rootModule from './components/module';
 import priceModule from './components/price/module';
 import ansibleModule from './components/ansible/module';
 import introModule from './components/intro/module';
+import analyticsRoutes from './components/analytics/routes';
+import azureModule from './components/azure/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -74,7 +75,6 @@ const appModule = angular.module('waldur', [
 ]);
 
 rootModule(appModule);
-sparkline(appModule);
 featuresModule(appModule);
 teamModule(appModule);
 issuesModule(appModule);
@@ -83,6 +83,7 @@ providersModule(appModule);
 projectModule(appModule);
 navigationModule(appModule);
 resourceModule(appModule);
+resourceImportModule(appModule);
 billingModule(appModule);
 authModule(appModule);
 expertsModule(appModule);
@@ -100,7 +101,6 @@ paymentsModule(appModule);
 eventsModule(appModule);
 alertsModule(appModule);
 routesModule(appModule);
-analyticsModule(appModule);
 offeringsModule(appModule);
 helpModule(appModule);
 costPlanningModule(appModule);
@@ -118,5 +118,7 @@ servicesModule(appModule);
 freeipaModule(appModule);
 ansibleModule(appModule);
 introModule(appModule);
+azureModule(appModule);
+appModule.config(analyticsRoutes);
 
 bootstrap('waldur');

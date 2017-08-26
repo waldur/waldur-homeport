@@ -27,7 +27,7 @@ export default class DashboardChartService {
       return this.$q.all([
         this.getCostChart(organization),
         this.getResourceHistoryCharts(quotas, organization)
-      ]).then(charts => [charts[0]].concat(charts[1]));
+      ]).then(charts => [charts[0]].concat(this.sortCharts(charts[1])));
     } else {
       return this.getResourceHistoryCharts(quotas, organization);
     }
@@ -70,8 +70,12 @@ export default class DashboardChartService {
           ]);
         }
       });
-      return validCharts;
+      return this.sortCharts(validCharts);
     });
+  }
+
+  sortCharts(charts) {
+    return charts.sort((c1, c2) => c1.title.localeCompare(c2.title));
   }
 
   getQuotaHistory(url) {
@@ -99,11 +103,12 @@ export default class DashboardChartService {
 
   getCostChart(scope) {
     return this.invoicesService.getList({
-      customer: scope.url
+      customer: scope.url,
+      field: ['year', 'month', 'price']
     }).then(invoices => {
       let items = invoices.map(invoice => {
         return {
-          value: invoice.total,
+          value: invoice.price,
           date: new Date(invoice.year, invoice.month - 1, 1)
         };
       });

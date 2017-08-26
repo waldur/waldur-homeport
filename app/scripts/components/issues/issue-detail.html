@@ -16,12 +16,12 @@
           <dd>{{ ::$ctrl.issue.caller_full_name }}</dd>
         </div>
 
-        <div class="m-b-xs" ng-if="::$ctrl.issue.reporter_name">
+        <div class="m-b-xs" ng-if="::$ctrl.issue.reporter_name && $ctrl.staffOrSupport">
           <dt><span translate>Reporter</span>:</dt>
           <dd>{{ ::$ctrl.issue.reporter_name }}</dd>
         </div>
 
-        <div class="m-b-xs">
+        <div class="m-b-xs" ng-if="$ctrl.staffOrSupport">
           <dt><span translate>Assigned to</span>:</dt>
           <dd>{{ ::$ctrl.issue.assignee_name || 'N/A' }}</dd>
         </div>

@@ -45,7 +45,7 @@ Server will listen on `//localhost:8000`
 
 ## Backend configuration
 
-Use [Waldur MasterMind][4] for backend.
+Use [Waldur MasterMind][1] for backend.
 
 Also you should install django-cors-headers from pip in order to add CORS headers:
 
@@ -58,7 +58,7 @@ lines at the end of the file:
 
 ```
 INSTALLED_APPS += ('corsheaders',)
-MIDDLEWARE_CLASSES = ('corsheaders.middleware.CorsMiddleware',) + MIDDLEWARE_CLASSES
+MIDDLEWARE = ('corsheaders.middleware.CorsMiddleware',) + MIDDLEWARE
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_EXPOSE_HEADERS = (
     'x-result-count',
@@ -70,4 +70,4 @@ CORS_EXPOSE_HEADERS = (
 
 See [Development guidelines](docs/development_guideline.md) for development policies.
 
-[1]: https://github.com/opennode/nodeconductor-assembly-waldur
+[1]: https://github.com/opennode/waldur-mastermind

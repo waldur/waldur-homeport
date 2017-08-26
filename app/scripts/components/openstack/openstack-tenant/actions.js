@@ -1,9 +1,10 @@
 // @ngInject
-export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION, ENV) {
+export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION, ENV, features) {
   let tenantConfig = {
     order: [
       'edit',
       'pull',
+      'assign_package',
       'change_package',
       'create_network',
       'create_security_group',
@@ -36,6 +37,21 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         type: 'form',
         component: 'openstackTenantChangePackageDialog',
         useResolve: true,
+        isVisible: (resource) => {
+          return resource.extra_configuration && resource.extra_configuration.package_uuid;
+        },
+        dialogSize: 'lg'
+      },
+      assign_package: {
+        title: gettext('Assign VPC package'),
+        type: 'form',
+        component: 'assignPackageDialog',
+        useResolve: true,
+        staffOnly: true,
+        enabled: true,
+        isVisible: (resource) => {
+          return features.isVisible('import') && !(resource.extra_configuration && resource.extra_configuration.package_uuid);
+        },
         dialogSize: 'lg'
       },
       create_security_group: {

@@ -10,6 +10,7 @@ export default function registerSidebarExtension(SidebarExtensionService) {
         link: 'project.resources.ansible.list({uuid: $ctrl.context.project.uuid})',
         feature: FEATURE,
         parent: 'resources',
+        countFieldKey: 'ansible',
         index: 300,
       }
     ];

@@ -49,6 +49,10 @@
     <digitalocean-droplet-summary resource="$ctrl.resource"></digitalocean-droplet-summary>
   </div>
 
+  <div ng-switch-when="Azure.VirtualMachine">
+    <azure-virtual-machine-summary resource="$ctrl.resource"></azure-virtual-machine-summary>
+  </div>
+
   <div ng-switch-default>
     <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
   </div>

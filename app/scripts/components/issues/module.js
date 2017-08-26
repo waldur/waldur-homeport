@@ -26,14 +26,14 @@ export default module => {
   module.service('IssueTypesService', IssueTypesService);
   module.service('IssueNavigationService', IssueNavigationService);
   module.service('issueUsersService', issueUsersService);
-  module.directive('issuesList', issuesList);
+  module.component('issuesList', issuesList);
   module.component('issueDetail', issueDetail);
   module.component('issuesWorkspace', issuesWorkspace);
   module.component('issuesDashboard', issuesDashboard);
   module.component('issuesShortList', issuesShortList);
   module.directive('issueQuickCreate', issueQuickCreate);
   module.directive('issuesActivityStream', issuesActivityStream);
-  module.directive('issuesListFiltered', issuesListFiltered);
+  module.component('issuesListFiltered', issuesListFiltered);
   module.directive('issuesHelpdesk', issuesHelpdesk);
   module.component('issueCreateDialog', issueCreateDialog);
   module.directive('issueRegistration', issueRegistration);

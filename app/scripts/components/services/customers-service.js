@@ -54,8 +54,8 @@ export default function customersService(baseServiceClass, $state, $q, $http, EN
       }
     },
     countCustomers: function() {
-      return $http.head(ENV.apiEndpoint + 'api/customers/').success(function(data, status, header) {
-        return parseInt(header()['x-result-count']);
+      return $http.head(ENV.apiEndpoint + 'api/customers/').then(response => {
+        return parseInt(response.headers()['x-result-count']);
       });
     }
   });

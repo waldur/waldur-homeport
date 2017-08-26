@@ -67,13 +67,6 @@ export default function ProjectWorkspaceController(
             countFieldKey: 'storages',
             index: 400,
           },
-          {
-            link: 'project.resources.offerings({uuid: $ctrl.context.project.uuid})',
-            icon: 'fa-cog',
-            label: gettext('Requested Services'),
-            feature: 'offering',
-            index: 500,
-          },
         ]
       },
       {
@@ -146,7 +139,7 @@ export default function ProjectWorkspaceController(
   }
 
   function getCounters(project) {
-    const fields = ['vms', 'apps', 'private_clouds', 'storages', 'users'];
+    const fields = SidebarExtensionService.getCounters($scope.items);
     let query = angular.extend(
       {UUID: project.uuid, fields},
       eventsService.defaultFilter

@@ -11,9 +11,14 @@
 
 <div class="ibox" ng-if="!$ctrl.loading && $ctrl.services.length">
     <div class="ibox-title">
-        <h5 translate>Select provider</h5>
+        <h5 ng-bind="$ctrl.getTitle()"></h5>
+        <div class="ibox-tools" ng-if="$ctrl.collapsible">
+            <a class="collapse-link" ng-click="$ctrl.collapse()">
+                <i class='fa' ng-class="$ctrl.collapsed ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+            </a>
+        </div>
     </div>
-    <div class="ibox-content">
+    <div class="ibox-content" ng-if="!$ctrl.collapsed">
         <div class="row">
             <div class="col-md-3 col-xs-6 col-sm-4"
                  ng-repeat="service in $ctrl.services">
@@ -36,9 +41,12 @@
                                 <i class="fa fa-eye"></i>
                             </a>
                             <div class="pull-right block-container-sm block-container-md">
-                                <a class="btn btn-xs btn-block-sm btn-block-md btn-outline btn-primary" ng-click="$ctrl.onSelect({service: service})">
-                                    <span translate>Select</span>
-                                    <i class="fa fa-long-arrow-right"></i>
+                                <a class="btn btn-xs btn-block-sm btn-block-md btn-outline"
+                                   ng-class="$ctrl.isSelected(service) ? 'btn-default': 'btn-primary'"
+                                   ng-click="$ctrl.select(service)">
+                                    <span ng-bind="$ctrl.getSelectButtonText(service)"></span>
+                                    <i class="fa"
+                                       ng-class="$ctrl.isSelected(service) ? 'fa-check': 'fa-long-arrow-right'"></i>
                                 </a>
                             </div>
                         </div>

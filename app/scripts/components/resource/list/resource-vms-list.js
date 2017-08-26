@@ -6,7 +6,12 @@ const resourceVmsList = {
 
 export default resourceVmsList;
 
-function ProjectVirtualMachinesListController(BaseProjectResourcesTabController, ENV) {
+function ProjectVirtualMachinesListController(
+  BaseProjectResourcesTabController,
+  $scope,
+  $timeout,
+  ENV,
+  TableExtensionService) {
   var controllerScope = this;
   var ResourceController = BaseProjectResourcesTabController.extend({
     init: function() {
@@ -14,6 +19,11 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
       this.category = ENV.VirtualMachines;
       this._super();
       this.addRowFields(['internal_ips', 'external_ips', 'floating_ips', 'internal_ips_set']);
+      $scope.$on('refreshVirtualMachinesList', function() {
+        $timeout(function() {
+          controllerScope.resetCache();
+        });
+      });
     },
     getTableOptions: function() {
       var options = this._super();
@@ -41,8 +51,10 @@ function ProjectVirtualMachinesListController(BaseProjectResourcesTabController,
       });
       return options;
     },
-    getImportTitle: function() {
-      return gettext('Import virtual machine');
+    getTableActions: function() {
+      let actions = this._super();
+      let tableActions = TableExtensionService.getTableActions('resource-vms-list');
+      return actions.concat(tableActions);
     },
     getCreateTitle: function() {
       return gettext('Add virtual machine');
