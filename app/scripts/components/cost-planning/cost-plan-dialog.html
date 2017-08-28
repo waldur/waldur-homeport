@@ -29,7 +29,7 @@
           on-delete="$ctrl.deleteItem(item)"/>
         <p class="m-t-sm">
           <strong translate>Total planned resource consumption</strong>:
-          {{ $ctrl.getTotalConsumption() | formatFlavor }}
+          {{ $ctrl.getTotalConsumption() | formatFlavor:'GB' }}
         </p>
       </div>
     </uib-tab>

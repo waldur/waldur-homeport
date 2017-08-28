@@ -57,7 +57,7 @@
             {{ ::service.error_message }}
           </span>
           <span ng-if="service.optimized_presets">
-            <cost-plan-flavors items="service.optimized_presets"/>
+            <cost-plan-flavors service-type="service.service_settings_type" items="service.optimized_presets"/>
           </span>
           <span ng-if="service.details">{{ service.details }}</span>
         </td>
