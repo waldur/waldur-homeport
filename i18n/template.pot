@@ -451,11 +451,11 @@ msgstr ""
 msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:58
+#: app/scripts/components/resource/actions/action-utils-service.js:62
 msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}."
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:60
+#: app/scripts/components/resource/actions/action-utils-service.js:64
 msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}."
 msgstr ""
 
@@ -463,7 +463,7 @@ msgstr ""
 msgid "Are you sure you want to unlink provider and all related resources?"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:64
+#: app/scripts/components/resource/actions/action-utils-service.js:68
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
@@ -475,7 +475,7 @@ msgstr ""
 msgid "Assign package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:43
+#: app/scripts/components/openstack/openstack-tenant/actions.js:46
 msgid "Assign VPC package"
 msgstr ""
 
@@ -932,8 +932,8 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/actions.js:108
 #: app/scripts/components/openstack/openstack-instance/actions.js:51
 #: app/scripts/components/openstack/openstack-tenant/actions.js:25
-#: app/scripts/components/openstack/openstack-tenant/actions.js:56
-#: app/scripts/components/openstack/openstack-tenant/actions.js:76
+#: app/scripts/components/openstack/openstack-tenant/actions.js:60
+#: app/scripts/components/openstack/openstack-tenant/actions.js:80
 #: app/scripts/components/openstack/openstack-volume/module.js:60
 #: app/scripts/components/openstack/openstack-volume/module.js:74
 #: app/scripts/components/project/project-issues.js:31
@@ -969,7 +969,7 @@ msgstr ""
 msgid "Create expert request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:77
+#: app/scripts/components/openstack/openstack-tenant/actions.js:81
 msgid "Create floating IP for"
 msgstr ""
 
@@ -1004,7 +1004,7 @@ msgstr ""
 msgid "Create request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:57
+#: app/scripts/components/openstack/openstack-tenant/actions.js:61
 msgid "Create security group for"
 msgstr ""
 
@@ -3619,7 +3619,7 @@ msgstr ""
 msgid "Request detail"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:87
+#: app/scripts/components/openstack/openstack-tenant/actions.js:91
 msgid "Request direct access"
 msgstr ""
 
@@ -3642,7 +3642,7 @@ msgstr ""
 msgid "Request removal"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:97
+#: app/scripts/components/resource/actions/action-utils-service.js:101
 msgid "Request to {action} has been accepted."
 msgstr ""
 
@@ -3710,7 +3710,7 @@ msgstr ""
 msgid "Resource events"
 msgstr ""
 
-#: app/scripts/components/resource/actions/action-utils-service.js:79
+#: app/scripts/components/resource/actions/action-utils-service.js:83
 msgid "Resource has been deleted."
 msgstr ""
 
@@ -4364,8 +4364,8 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/module.js:43
 #: app/scripts/components/openstack/openstack-subnet/actions.js:14
 #: app/scripts/components/openstack/openstack-tenant/actions.js:21
-#: app/scripts/components/openstack/openstack-tenant/actions.js:68
 #: app/scripts/components/openstack/openstack-tenant/actions.js:72
+#: app/scripts/components/openstack/openstack-tenant/actions.js:76
 #: app/scripts/components/openstack/openstack-volume/module.js:53
 msgid "Synchronise"
 msgstr ""
