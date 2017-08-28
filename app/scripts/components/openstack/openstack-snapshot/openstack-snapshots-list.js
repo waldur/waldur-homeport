@@ -10,13 +10,25 @@ const openstackSnapshotsList = {
 export default openstackSnapshotsList;
 
 // @ngInject
-function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $state, $filter) {
-  var controllerScope = this;
-  var ResourceController = BaseProjectResourcesTabController.extend({
+function SnapshotsListController($scope,
+                                 $state,
+                                 $timeout,
+                                 $filter,
+                                 BaseProjectResourcesTabController,
+                                 ncUtils,
+                                 TableExtensionService,
+                                 features) {
+  let controllerScope = this;
+  let ResourceController = BaseProjectResourcesTabController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
       this.addRowFields(['size', 'source_volume', 'source_volume_name']);
+      $scope.$on('refreshSnapshotsList', function() {
+        $timeout(function() {
+          controllerScope.resetCache();
+        });
+      });
     },
     getFilter: function() {
       return {
@@ -24,7 +36,8 @@ function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $st
       };
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
+      options.tableActions = this.getTableActions();
       options.noDataText = gettext('You have no snapshots yet.');
       options.noMatchesText = gettext('No snapshots found matching filter.');
       options.columns.push({
@@ -54,6 +67,16 @@ function SnapshotsListController(BaseProjectResourcesTabController, ncUtils, $st
         }
       });
       return options;
+    },
+    getTableActions: function() {
+      let actions = TableExtensionService.getTableActions('openstack-snapshots-list');
+      if (this.category !== undefined) {
+        actions.push(this.getCreateAction());
+      }
+      if (features.isVisible('openMap')) {
+        actions.push(this.getMapAction());
+      }
+      return actions;
     },
     getCreateTitle: function() {
       return gettext('Add snapshots');

@@ -286,7 +286,7 @@ msgstr ""
 msgid "Add SLA"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:59
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:82
 msgid "Add snapshots"
 msgstr ""
 
@@ -540,6 +540,7 @@ msgstr ""
 msgid "Back to project"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js:57
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js:57
 #: app/scripts/components/resource/summary/resource-summary-base.html:59
 msgid "Backend ID"
@@ -1611,7 +1612,7 @@ msgstr ""
 msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/module.js:35
+#: app/scripts/components/openstack/openstack-snapshot/module.js:37
 #: app/scripts/components/openstack/openstack-volume/module.js:66
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr ""
@@ -2005,7 +2006,7 @@ msgid "Keep until"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:15
-#: app/scripts/components/openstack/openstack-snapshot/module.js:36
+#: app/scripts/components/openstack/openstack-snapshot/module.js:38
 #: app/scripts/components/openstack/openstack-volume/module.js:67
 msgid "Kept until"
 msgstr ""
@@ -2269,6 +2270,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:36
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:35
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
+#: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js:46
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:30
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:28
 #: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js:46
@@ -2563,10 +2565,14 @@ msgid "No snapshot schedules yet."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:29
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:29
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:42
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:27
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-snapshots.js:43
 msgid "No snapshots found matching filter."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js:37
+msgid "No snapshots to import."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:28
@@ -2648,7 +2654,7 @@ msgstr ""
 msgid "Not enough data for CPU graph."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:46
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:59
 msgid "Not known"
 msgstr ""
 
@@ -3037,7 +3043,7 @@ msgstr ""
 msgid "Please provide a reason"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/module.js:29
+#: app/scripts/components/openstack/openstack-snapshot/module.js:31
 msgid "Please provide details of a new volume created from snapshot."
 msgstr ""
 
@@ -3768,7 +3774,7 @@ msgstr ""
 msgid "Resources import has been initiated"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/module.js:67
+#: app/scripts/components/openstack/openstack-snapshot/module.js:69
 msgid "Restored volumes"
 msgstr ""
 
@@ -3801,6 +3807,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:27
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:53
 msgid "Runtime state"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js:61
+msgid "Runtime State"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:203
@@ -4094,9 +4104,10 @@ msgstr ""
 #: app/scripts/components/azure/azure-virtual-machine-config.js:37
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:47
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:41
+#: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js:51
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:38
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:5
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:31
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:44
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:40
 #: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js:51
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:46
@@ -4133,7 +4144,7 @@ msgstr ""
 msgid "Small"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/module.js:32
+#: app/scripts/components/openstack/openstack-snapshot/module.js:34
 msgid "Snapshot has been updated."
 msgstr ""
 
@@ -4362,7 +4373,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-network/module.js:33
 #: app/scripts/components/openstack/openstack-security-groups/module.js:55
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:37
-#: app/scripts/components/openstack/openstack-snapshot/module.js:43
+#: app/scripts/components/openstack/openstack-snapshot/module.js:45
 #: app/scripts/components/openstack/openstack-subnet/actions.js:14
 #: app/scripts/components/openstack/openstack-tenant/actions.js:21
 #: app/scripts/components/openstack/openstack-tenant/actions.js:72
@@ -5021,7 +5032,7 @@ msgid "VMs"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-summary.html:13
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:42
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:55
 msgid "Volume"
 msgstr ""
 
@@ -5189,7 +5200,7 @@ msgstr ""
 msgid "You have no SLAs yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:28
+#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:41
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-snapshots.js:42
 msgid "You have no snapshots yet."
 msgstr ""
