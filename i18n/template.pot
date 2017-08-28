@@ -2242,6 +2242,7 @@ msgstr ""
 msgid "Motivation"
 msgstr ""
 
+#: app/scripts/components/cost-planning/cost-plan-flavors.html:21
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:33
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:41
 #: app/scripts/components/project/project-create.html:55

@@ -11,6 +11,7 @@ import openstackFloatingIpsModule from './openstack-floating-ips/module';
 import openstackSnapshotModule from './openstack-snapshot/module';
 import openstackSnapshotScheduleModule from './openstack-snapshot-schedule/module';
 import openstackPrivateCloudModule from './openstack-private-cloud/module';
+import costPlanModule from './cost-plan/module';
 
 export default module => {
   module.service('OpenStackSummaryService', OpenStackSummaryService);
@@ -26,4 +27,5 @@ export default module => {
   openstackSnapshotModule(module);
   openstackSnapshotScheduleModule(module);
   openstackPrivateCloudModule(module);
+  costPlanModule(module);
 };
