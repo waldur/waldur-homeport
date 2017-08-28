@@ -1,6 +1,6 @@
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils,
+  ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils, features,
   resourcesService, ActionConfiguration, ActionResourceLoader, coreUtils, usersService) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
@@ -32,6 +32,10 @@ export default function actionUtilsService(
 
     action.isVisible = action.isVisible || function () {return true;};
     if (!action.isVisible(model)) {
+      return false;
+    }
+
+    if (action.feature && !features.isVisible(action.feature)) {
       return false;
     }
 
