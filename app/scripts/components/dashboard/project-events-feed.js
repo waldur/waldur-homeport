@@ -31,6 +31,7 @@ export const projectEventsFeed = {
       this.loading = true;
       this.DashboardFeedService.getProjectEvents(this.project).then(items => {
         this.items = items.filter(item => {
+          // filter out issue update events as there are too many of them.
           return item.event_type && item.event_type !== 'issue_update_succeeded';
         });
       }).finally(() => {
