@@ -57,6 +57,9 @@ function ActionDialogController(
         $scope.loading = false;
       });
     },
+    submitActive: function() {
+      return $scope.ActionForm.$dirty || $scope.action.method === 'DELETE';
+    },
     submitForm: function () {
       if ($scope.ActionForm.$invalid) {
         return $q.reject();

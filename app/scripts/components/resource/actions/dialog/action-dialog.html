@@ -18,7 +18,7 @@
                 <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>
             </label>
             <div>
-                <action-field field="field" model="form" context="{resource: resource}"></action-field>
+                <action-field field="field" model="form" form="ActionForm" context="{resource: resource}"></action-field>
                 <p class="text-danger" ng-repeat="error in errors[name]" ng-bind="error"></p>
             </div>
         </div>
@@ -27,6 +27,7 @@
 </div>
 <div class="modal-footer">
     <button type="submit" class="btn btn-primary"
+        ng-disabled="!submitActive()"
         submit-button="submitForm()">
         <span translate>Submit</span>
     </button>
