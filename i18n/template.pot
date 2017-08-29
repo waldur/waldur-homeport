@@ -683,7 +683,7 @@ msgstr ""
 #: app/scripts/components/project/project-create.html:75
 #: app/scripts/components/providers/create.html:160
 #: app/scripts/components/resource-import/resource-import-dialog.html:42
-#: app/scripts/components/resource/actions/dialog/action-dialog.html:35
+#: app/scripts/components/resource/actions/dialog/action-dialog.html:36
 #: app/scripts/components/team/add-project-member.html:54
 #: app/scripts/components/team/add-team-member.html:86
 #: app/scripts/components/user/hooks/hook-details.html:81
@@ -4300,7 +4300,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:40
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html:33
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:28
-#: app/scripts/components/resource/actions/dialog/action-dialog.html:31
+#: app/scripts/components/resource/actions/dialog/action-dialog.html:32
 msgid "Submit"
 msgstr ""
 
