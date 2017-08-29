@@ -52,6 +52,11 @@ export const EVENT_TEMPLATES = {
   user_organization_removed: gettext('User {affected_user_full_name} has been removed from organization {affected_organization}.'),
   user_password_updated: gettext('Password has been changed for user {affected_user_full_name}.'),
   user_update_succeeded: gettext('User {affected_user_full_name} has been updated.'),
+  issue_creation_succeeded: gettext('Issue {issue_key} has been created by {caller_full_name}.'),
+  expert_request_created: gettext('User {caller_full_name} has created request for experts under {customer_name} / {project_name}.'),
+  expert_request_activated: gettext('Expert request "{expert_request_name}" has been activated.'),
+  expert_request_cancelled: gettext('Expert request "{expert_request_name}"" has been cancelled.'),
+  expert_request_completed: gettext('Expert request "{expert_request_name}" has been completed.')
 };
 
 export const EVENT_ICONS_TYPES = {
@@ -77,6 +82,7 @@ export const EVENT_ROUTES = {
   instance: 'resources.details',
   resource: 'resources.details',
   service: 'organization.details',
+  issue: 'support.detail',
 };
 
 export const DELETION_EVENTS = [

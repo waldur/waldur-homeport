@@ -6,8 +6,9 @@ export const projectEventsFeed = {
     project: '<'
   },
   controller: class ProjectEventsFeedController {
-    constructor(DashboardFeedService, EventDialogsService) {
+    constructor(DashboardFeedService, EventDialogsService, $uibModal) {
       this.DashboardFeedService = DashboardFeedService;
+      this.$uibModal = $uibModal;
       this.title = gettext('Events');
       this.buttonTitle = gettext('Event types');
       this.emptyText = gettext('No events yet.');
@@ -29,10 +30,22 @@ export const projectEventsFeed = {
       }
       this.loading = true;
       this.DashboardFeedService.getProjectEvents(this.project).then(items => {
-        this.items = items;
+        this.items = items.filter(item => {
+          // filter out issue update events as there are too many of them.
+          return item.event_type && item.event_type !== 'issue_update_succeeded';
+        });
       }).finally(() => {
         this.loading = false;
       });
+    }
+
+    showDetails(event) {
+      return this.$uibModal.open({
+        component: 'eventDetailsDialog',
+        resolve: {
+          event: () => event,
+        }
+      }).result;
     }
   }
 };
