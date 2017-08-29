@@ -1,5 +1,5 @@
 {
-  "apiEndpoint": "http://localhost:8080/",
+  "apiEndpoint": "http://localhost/",
   "facebookClientId": "FIXME",
   "googleClientId": "FIXME"
 }
