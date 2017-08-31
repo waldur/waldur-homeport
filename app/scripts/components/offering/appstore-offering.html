@@ -1,11 +1,12 @@
 <div class="wrapper wrapper-content">
   <div class="row">
-    <div class="col-sm-12">
+    <div ng-class="{'col-sm-9': $ctrl.offering.price}">
       <div ng-if="$ctrl.loading">
         <loading-spinner/>
       </div>
       <div class="ibox" ng-if="$ctrl.offering">
-        <div class="ibox-title"><h3>{{ $ctrl.offering.label }}</h3></div>
+        <div class="ibox-title"><h3>{{ $ctrl.offering.label }}</h3>
+          <p>{{$ctrl.offering.summary}}</p></div>
         <div class="ibox-content">
           <appstore-form fields="$ctrl.offering" model="$ctrl.model" errors="$ctrl.errors"/>
         </div>
@@ -19,6 +20,38 @@
             <span translate>Cancel</span>
           </button>
         </div>
+      </div>
+    </div>
+    <div class="col-md-3" ng-if="$ctrl.offering.price">
+      <div class="ibox-title">
+        <h5>
+          <span translate>Summary</span>:
+        </h5>
+      </div>
+      <div class="ibox-content">
+        <table class="table table-bordered">
+          <tbody>
+            <tr ng-if="$ctrl.model.name">
+                <td><strong translate>Tenant name</strong></td>
+                <td>{{ $ctrl.model.name }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <price-tooltip></price-tooltip>
+                    <strong translate>Price per month</strong>
+                </td>
+                <td>{{ $ctrl.offering.price | defaultCurrency }}</td>
+            </tr>
+            <tr>
+                <td><strong translate>Invoiced to</strong></td>
+                <td>{{ $ctrl.customer.name }}</td>
+            </tr>
+            <tr>
+                <td><strong translate>Project</strong></td>
+                <td>{{ $ctrl.project.name }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

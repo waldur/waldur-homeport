@@ -14,6 +14,7 @@ export default function registerOfferingCategory(features, $q, offeringsService,
           description: offerings[key].description,
           category: offerings[key].category || gettext('Custom request'),
           state: 'appstore.offering',
+          price: offerings[key].price,
         }));
       }).catch(error => {
         if (error.status === 424) {

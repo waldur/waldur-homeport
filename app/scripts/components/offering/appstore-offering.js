@@ -26,6 +26,10 @@ const appstoreOffering = {
         this.project = project;
       });
 
+      this.currentStateService.getCustomer().then(customer => {
+        this.customer = customer;
+      });
+
       this.offeringsService.getConfiguration().then(offerings => {
         const offering = offerings[this.offeringType];
         if (!offering) {
