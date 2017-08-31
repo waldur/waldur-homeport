@@ -51,6 +51,10 @@ const appstoreOffering = {
       }).finally(() => this.loading = false);
     }
 
+    cancel() {
+      this.$state.go('project.details', {uuid: this.project.uuid});
+    }
+
     save() {
       const offering = angular.extend({
         type: this.offeringType,
