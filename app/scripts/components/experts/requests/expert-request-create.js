@@ -51,6 +51,10 @@ const expertRequestCreate = {
       }).finally(() => this.loading = false);
     }
 
+    cancel() {
+      this.$state.go('project.details', {uuid: this.project.uuid});
+    }
+
     save() {
       const expertRequest = angular.extend({
         type: this.requestType,
