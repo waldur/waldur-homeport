@@ -18,6 +18,7 @@ const appstoreOffering = {
     }
 
     $onInit() {
+      this.summaryComponent = 'appstoreOfferingSummary';
       this.model = {};
       this.offeringType = this.$stateParams.category;
       this.loading = true;

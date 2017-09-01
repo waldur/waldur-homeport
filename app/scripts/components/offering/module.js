@@ -8,9 +8,11 @@ import offeringEvents from './offering-events';
 import offeringState from './offering-state';
 import registerOfferingCategory from './register-offering-category';
 import registerSidebarExtension from './sidebar';
+import appstoreOfferingSummary from './appstore-offering-summary';
 
 export default module => {
   module.service('offeringsService', offeringsService);
+  module.component('appstoreOfferingSummary', appstoreOfferingSummary);
   module.component('projectOfferingsList', projectOfferingsList);
   module.component('offeringHeader', offeringHeader);
   module.component('offeringSummary', offeringSummary);
