@@ -14,6 +14,7 @@ import billingRecordHeader from './billing-record-header';
 import billingRecordsList from './billing-records-list';
 import billingTabs from './billing-tabs';
 import billingRoutes from './routes';
+import filtersModule from './filters';
 
 export default module => {
   module.service('invoicesService', invoicesService);
@@ -32,4 +33,5 @@ export default module => {
   module.component('billingRecordsList', billingRecordsList);
   module.component('billingTabs', billingTabs);
   module.config(billingRoutes);
+  filtersModule(module);
 };
