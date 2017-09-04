@@ -1132,7 +1132,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-registration.html:110
 #: app/scripts/components/issues/issues-list.js:76
 #: app/scripts/components/issues/issues-short-list.html:28
-#: app/scripts/components/offering/appstore-offering.js:52
+#: app/scripts/components/offering/appstore-offering.js:48
 #: app/scripts/components/offering/offering-summary.html:65
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:37
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:43
@@ -2278,7 +2278,7 @@ msgstr ""
 #: app/scripts/components/experts/requests/expert-request-create.js:40
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:53
 #: app/scripts/components/experts/requests/expert-request-project-list.js:53
-#: app/scripts/components/offering/appstore-offering.js:45
+#: app/scripts/components/offering/appstore-offering.js:41
 #: app/scripts/components/offering/offering-summary.html:11
 #: app/scripts/components/offering/offerings-list.js:35
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34
@@ -4593,7 +4593,7 @@ msgid "This month estimated costs for organization {customer_name} exceeded."
 msgstr ""
 
 #: app/scripts/components/experts/requests/expert-request-create.js:41
-#: app/scripts/components/offering/appstore-offering.js:46
+#: app/scripts/components/offering/appstore-offering.js:42
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:24
 #: app/scripts/components/project/project-create.html:15
 msgid "This name will be visible in accounting data."
@@ -4747,7 +4747,7 @@ msgstr ""
 msgid "Unable to create premium support contract."
 msgstr ""
 
-#: app/scripts/components/offering/appstore-offering.js:72
+#: app/scripts/components/offering/appstore-offering.js:68
 msgid "Unable to create request for a turnkey solution."
 msgstr ""
 
