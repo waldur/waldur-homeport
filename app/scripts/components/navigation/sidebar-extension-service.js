@@ -37,14 +37,23 @@ export default class SidebarExtensionService {
         items.push(item);
       }
     });
+    this.sortItems(items);
+    return items;
+  }
+
+  sortItems(items) {
     const compareIndex = (a, b) => a.index - b.index;
+    const compareLabel = (a, b) => a.label.localeCompare(b.label);
     items.sort(compareIndex);
     items.forEach(parent => {
       if (parent.children) {
-        parent.children.sort(compareIndex);
+        if (parent.orderByLabel) {
+          parent.children.sort(compareLabel);
+        } else {
+          parent.children.sort(compareIndex);
+        }
       }
     });
-    return items;
   }
 
   getCounters(items) {

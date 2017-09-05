@@ -42,6 +42,7 @@ export default function ProjectWorkspaceController(
         link: 'project.resources',
         key: 'resources',
         index: 300,
+        orderByLabel: true,
         children: [
           {
             link: 'project.resources.vms({uuid: $ctrl.context.project.uuid})',
