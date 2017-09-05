@@ -41,6 +41,12 @@
       "type": "provider",
       "key": "storages",
       "services": ["OpenStackTenant"]
+    },
+    {
+      "name": "Batch processing",
+      "type": "provider",
+      "key": "slurm",
+      "services": ["SLURM"]
     }
   ],
   "serviceCategories": [
