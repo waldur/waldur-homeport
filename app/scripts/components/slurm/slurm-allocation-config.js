@@ -9,6 +9,7 @@ const SlurmAllocationConfig = {
       type: 'string',
       required: true,
       label: gettext('Allocation name'),
+      form_text: gettext('This name will be visible in accounting data.'),
       maxlength: 150
     },
     description: {
