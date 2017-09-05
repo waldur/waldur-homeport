@@ -8,7 +8,7 @@ const SlurmAllocationConfig = {
     name: {
       type: 'string',
       required: true,
-      label: gettext('VM name'),
+      label: gettext('Allocation name'),
       maxlength: 150
     },
     description: {
@@ -21,6 +21,7 @@ const SlurmAllocationConfig = {
       type: 'integer',
       required: true,
       label: 'CPU limit, minutes',
+      default_value: -1,
     },
   }
 };

@@ -56,6 +56,14 @@ const ENV = {
       state: 'appstore.premiumSupport',
       description: gettext('Premium support service.')
     },
+    {
+      label: gettext('Batch processing'),
+      icon: 'fa-tasks',
+      key: 'slurm',
+      feature: 'slurm',
+      state: 'appstore.slurm',
+      description: gettext('Manage SLURM accounting.')
+    },
   ],
 
   defaultGroup: gettext('IaaS'),
@@ -63,7 +71,8 @@ const ENV = {
   resourcesTypes: {
     vms: 'vms',
     storages: 'storages',
-    private_clouds: 'private_clouds'
+    private_clouds: 'private_clouds',
+    slurm: 'slurm'
   },
 
   // Index of category inside of appStoreCategories
@@ -92,7 +101,13 @@ const ENV = {
       type: 'provider',
       key: 'storages',
       services: ['OpenStackTenant'],
-    }
+    },
+    {
+      name: gettext('Batch processing'),
+      type: 'provider',
+      key: 'slurm',
+      services: ['SLURM'],
+    },
   ],
   serviceCategories: [
     {
@@ -123,7 +138,8 @@ const ENV = {
     'Zabbix.Host': 'apps',
     'Zabbix.ITService': 'apps',
     'OpenStack.Volume': 'storages',
-    'OpenStack.Snapshot': 'storages'
+    'OpenStack.Snapshot': 'storages',
+    'SLURM.Allocation': 'slurm',
   },
   showCompare: [
     'Virtual machines'

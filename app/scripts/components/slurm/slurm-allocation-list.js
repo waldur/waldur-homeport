@@ -12,6 +12,7 @@ function SlurmAllocationListController(baseResourceListController, $filter, Slur
       this.controllerScope = controllerScope;
       this._super();
       this.service = SlurmAllocationService;
+      this.addRowFields(['cpu_limit', 'cpu_usage']);
     },
     getTableOptions: function() {
       var options = this._super();
@@ -30,7 +31,15 @@ function SlurmAllocationListController(baseResourceListController, $filter, Slur
         },
         {
           title: gettext('Created'),
-          render: row => $filter('shortDate')(row.created) || '&mdash;'
+          render: row => $filter('shortDate')(row.created),
+        },
+        {
+          title: gettext('CPU limit'),
+          render: row => row.cpu_limit + ' minutes',
+        },
+        {
+          title: gettext('CPU usage'),
+          render: row => row.cpu_usage + ' minutes',
         },
         {
           title: gettext('State'),
@@ -40,6 +49,15 @@ function SlurmAllocationListController(baseResourceListController, $filter, Slur
       ];
       return options;
     },
+    getTableActions: function() {
+      return [this.getCreateAction()];
+    },
+    getCategoryKey: function() {
+      return 'slurm';
+    },
+    getCategoryState: function() {
+      return 'appstore.slurm';
+    }
   });
 
   controllerScope.__proto__ = new controllerClass();
