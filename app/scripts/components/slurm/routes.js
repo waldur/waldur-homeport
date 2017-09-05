@@ -19,5 +19,5 @@ export default function slurmRoutes($stateProvider) {
         sidebarState: 'project.resources',
         feature: 'slurm',
       }
-    })
+    });
 }

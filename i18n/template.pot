@@ -384,6 +384,14 @@ msgstr ""
 msgid "Allocation"
 msgstr ""
 
+#: app/scripts/components/slurm/actions.js:11
+msgid "Allocation has been updated."
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-config.js:11
+msgid "Allocation name"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:115
 msgid "Already have an account?"
 msgstr ""
@@ -587,6 +595,11 @@ msgstr ""
 msgid "Base rate"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js:106
+#: app/scripts/components/configs/base-config.js:60
+#: app/scripts/components/resource/breadcrumbs/resource-categories.js:19
+#: app/scripts/components/slurm/routes.js:18
+#: app/scripts/components/slurm/routes.js:8
 #: app/scripts/components/slurm/sidebar.js:8
 msgid "Batch processing"
 msgstr ""
@@ -923,7 +936,16 @@ msgid "CPU"
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.html:8
+#: app/scripts/components/slurm/slurm-allocation-list.js:37
 msgid "CPU limit"
+msgstr ""
+
+#: app/scripts/components/slurm/actions.js:15
+msgid "CPU limit, minutes"
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-list.js:41
+msgid "CPU usage"
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-job-create.html:34
@@ -952,6 +974,10 @@ msgstr ""
 #: app/scripts/components/auth/auth-login.html:111
 #: app/scripts/components/auth/auth-login.html:19
 msgid "Create an account"
+msgstr ""
+
+#: app/scripts/components/configs/base-config.js:65
+msgid "Create an allocation for computations in batch resources."
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-jobs-list.js:85
@@ -1038,6 +1064,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:45
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:45
 #: app/scripts/components/resource/summary/resource-summary-base.html:40
+#: app/scripts/components/slurm/slurm-allocation-list.js:33
 #: app/scripts/components/team/customer-permissions-log-list.js:41
 #: app/scripts/components/team/project-permissions-log-list.js:37
 msgid "Created"
@@ -1152,6 +1179,7 @@ msgstr ""
 #: app/scripts/components/resource/actions/constants.js:26
 #: app/scripts/components/resource/summary/resource-summary-base.html:31
 #: app/scripts/components/slurm/slurm-allocation-config.js:17
+#: app/scripts/components/slurm/slurm-allocation-list.js:29
 #: app/scripts/components/user/user-edit.html:93
 msgid "Description"
 msgstr ""
@@ -1276,7 +1304,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:187
+#: app/scripts/components/configs/base-config.js:203
 msgid "English"
 msgstr ""
 
@@ -1311,7 +1339,7 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:191
+#: app/scripts/components/configs/base-config.js:207
 msgid "Estonian"
 msgstr ""
 
@@ -1701,7 +1729,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:61
+#: app/scripts/components/configs/base-config.js:69
 msgid "IaaS"
 msgstr ""
 
@@ -2065,7 +2093,7 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:195
+#: app/scripts/components/configs/base-config.js:211
 msgid "Latvian"
 msgstr ""
 
@@ -2111,7 +2139,7 @@ msgstr ""
 msgid "List and edit team members."
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:199
+#: app/scripts/components/configs/base-config.js:215
 msgid "Lithuanian"
 msgstr ""
 
@@ -2307,6 +2335,7 @@ msgstr ""
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:48
 #: app/scripts/components/resource/actions/constants.js:20
 #: app/scripts/components/resource/list/resources-list.js:42
+#: app/scripts/components/slurm/slurm-allocation-list.js:24
 msgid "Name"
 msgstr ""
 
@@ -2362,6 +2391,14 @@ msgstr ""
 
 #: app/scripts/components/dashboard/project-alerts-feed.js:13
 msgid "No alerts yet."
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-list.js:21
+msgid "No allocations found matching filter."
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-list.js:20
+msgid "No allocations yet."
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-jobs-list.js:40
@@ -2872,7 +2909,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:172
+#: app/scripts/components/configs/base-config.js:188
 msgid "Organization owner"
 msgstr ""
 
@@ -3224,7 +3261,7 @@ msgstr ""
 #: app/scripts/components/analytics/resource-chart-service.js:21
 #: app/scripts/components/appstore/routes.js:22
 #: app/scripts/components/configs/base-config.js:36
-#: app/scripts/components/configs/base-config.js:84
+#: app/scripts/components/configs/base-config.js:93
 #: app/scripts/components/dashboard/constants.js:15
 #: app/scripts/components/project/project-workspace.js:57
 #: app/scripts/components/project/projects-list.js:117
@@ -3309,7 +3346,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:173
+#: app/scripts/components/configs/base-config.js:189
 msgid "Project manager"
 msgstr ""
 
@@ -3842,7 +3879,7 @@ msgstr ""
 msgid "Runtime State"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:203
+#: app/scripts/components/configs/base-config.js:219
 msgid "Russian"
 msgstr ""
 
@@ -4281,6 +4318,7 @@ msgstr ""
 #: app/scripts/components/providers/provider-list.js:62
 #: app/scripts/components/resource/list/resources-list.js:60
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
+#: app/scripts/components/slurm/slurm-allocation-list.js:45
 #: app/scripts/components/user/hooks/hook-list.js:26
 msgid "State"
 msgstr ""
@@ -4320,7 +4358,7 @@ msgid "Storage limit GB"
 msgstr ""
 
 #: app/scripts/components/appstore/routes.js:52
-#: app/scripts/components/configs/base-config.js:91
+#: app/scripts/components/configs/base-config.js:100
 msgid "Storages"
 msgstr ""
 
@@ -4411,7 +4449,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:174
+#: app/scripts/components/configs/base-config.js:190
 msgid "System administrator"
 msgstr ""
 
@@ -5039,9 +5077,9 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:15
 #: app/scripts/components/appstore/routes.js:32
+#: app/scripts/components/configs/base-config.js:114
 #: app/scripts/components/configs/base-config.js:28
-#: app/scripts/components/configs/base-config.js:77
-#: app/scripts/components/configs/base-config.js:99
+#: app/scripts/components/configs/base-config.js:86
 #: app/scripts/components/dashboard/constants.js:11
 #: app/scripts/components/project/project-workspace.js:49
 #: app/scripts/components/project/routes.js:124
@@ -5057,7 +5095,6 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:14
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:23
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:18
-#: app/scripts/components/slurm/slurm-allocation-config.js:11
 msgid "VM name"
 msgstr ""
 

@@ -62,7 +62,7 @@ const ENV = {
       key: 'slurm',
       feature: 'slurm',
       state: 'appstore.slurm',
-      description: gettext('Manage SLURM accounting.')
+      description: gettext('Create an allocation for computations in batch resources.')
     },
   ],
 
