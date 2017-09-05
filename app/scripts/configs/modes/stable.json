@@ -52,11 +52,5 @@
   "futureCategories": [
     "support",
     "apps"
-  ],
-  "offeringCategories": [
-    {
-      "label": "IaaS",
-      "items": ["private_clouds", "vms", "storages", "support"]
-    }
   ]
 }
