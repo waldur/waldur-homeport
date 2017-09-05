@@ -587,6 +587,10 @@ msgstr ""
 msgid "Base rate"
 msgstr ""
 
+#: app/scripts/components/slurm/sidebar.js:8
+msgid "Batch processing"
+msgstr ""
+
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:107
 msgid "Bid could be created only for pending expert request."
 msgstr ""
@@ -1147,6 +1151,7 @@ msgstr ""
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js:53
 #: app/scripts/components/resource/actions/constants.js:26
 #: app/scripts/components/resource/summary/resource-summary-base.html:31
+#: app/scripts/components/slurm/slurm-allocation-config.js:17
 #: app/scripts/components/user/user-edit.html:93
 msgid "Description"
 msgstr ""
@@ -5052,6 +5057,7 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:14
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:23
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:18
+#: app/scripts/components/slurm/slurm-allocation-config.js:11
 msgid "VM name"
 msgstr ""
 
