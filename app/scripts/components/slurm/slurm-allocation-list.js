@@ -57,7 +57,12 @@ function SlurmAllocationListController(baseResourceListController, $filter, Slur
     },
     getCategoryState: function() {
       return 'appstore.slurm';
-    }
+    },
+    getFilter: function() {
+      return {
+        project_uuid: this.currentProject.uuid
+      };
+    },
   });
 
   controllerScope.__proto__ = new controllerClass();
