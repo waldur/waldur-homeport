@@ -14,6 +14,7 @@ export default function registerExpertRequestCategory(features, $q, expertReques
           key,
           label: experts[key].label,
           icon: experts[key].icon || 'fa-gear',
+          image: experts[key].image,
           description: experts[key].description,
           category: APPSTORE_CATEGORY,
           state: 'appstore.expert',
