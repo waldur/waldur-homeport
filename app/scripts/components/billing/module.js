@@ -15,14 +15,8 @@ import billingRecordsList from './billing-records-list';
 import billingTabs from './billing-tabs';
 import billingRoutes from './routes';
 import filtersModule from './filters';
-import paypalInvoiceDetails from './paypal-invoice-details';
-import paypalInvoiceState from './paypal-invoice-state';
-import paypalInvoicesList from './paypal-invoices-list';
-import paypalInvoicesService from './paypal-invoices-service';
-import paypalInvoiceActions from './paypal-invoice-actions';
 
 export default module => {
-  module.service('paypalInvoicesService', paypalInvoicesService);
   module.service('invoicesService', invoicesService);
   module.service('BillingUtils', BillingUtils);
   module.service('InvoiceEventsService', InvoiceEventsService);
@@ -38,10 +32,6 @@ export default module => {
   module.component('billingRecordHeader', billingRecordHeader);
   module.component('billingRecordsList', billingRecordsList);
   module.component('billingTabs', billingTabs);
-  module.component('paypalInvoiceActions', paypalInvoiceActions);
-  module.component('paypalInvoiceState', paypalInvoiceState);
-  module.component('paypalInvoicesList', paypalInvoicesList);
-  module.component('paypalInvoiceDetails', paypalInvoiceDetails);
   module.config(billingRoutes);
   filtersModule(module);
 };

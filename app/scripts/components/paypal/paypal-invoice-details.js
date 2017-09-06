@@ -1,4 +1,4 @@
-import template from './invoice-details.html';
+import template from '../billing/invoice-details.html';
 
 const paypalInvoiceDetails = {
   template,
