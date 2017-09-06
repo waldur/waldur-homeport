@@ -14,7 +14,7 @@ const billingRecordDetails = {
     }
 
     $onInit() {
-      this.projects = this.BillingUtils.groupInvoiceItems(this.invoice);
+      this.projects = this.BillingUtils.groupItemsInInvoice(this.invoice);
       this.currentStateService.getCustomer().then(customer => {
         this.customer = customer;
       }

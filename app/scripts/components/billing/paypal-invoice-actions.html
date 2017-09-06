@@ -1,0 +1,25 @@
+<div class="btn-group dropdown" uib-dropdown>
+  <a class="btn btn-default btn-sm" uib-dropdown-toggle>
+    <span translate>Actions</span>
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
+    <li role="menuitem" ng-if="!$ctrl.invoice.backend_id">
+        <a uib-tooltip="{{ 'Invoice has not been sent to PayPal yet' | translate }}" translate>There are no actions.</a>
+    </li>
+    <li class="cursor-pointer" ng-if="$ctrl.invoice.backend_id && $ctrl.invoice.pdf">
+      <a download="invoice-{{$ctrl.invoice.number}}.pdf"
+         ng-href="{{$ctrl.invoice.pdf}}"
+         target="_self">
+        <i class="fa fa-download"></i>
+        <span translate>Download invoice</span>
+      </a>
+    </li>
+    <li class="cursor-pointer" ng-if="$ctrl.invoice.backend_id">
+      <a target='_blank' ng-href="{{$ctrl.invoice.payment_url}}">
+        <i class="fa fa-paypal"></i>
+        <span translate>Pay invoice</span>
+      </a>
+    </li>
+  </ul>
+</div>

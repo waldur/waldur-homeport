@@ -17,10 +17,18 @@
   </div>
   <div class="col-lg-4">
     <div class="title-action">
-      <button class="btn btn-primary" ng-click="$ctrl.printLink()">
+      <button class="btn btn-primary" ng-click="$ctrl.printLink()" ng-if="!$ctrl.canDownloadInvoice()">
         <i class="fa fa-print"></i>
         <span translate>Print invoice</span>
       </button>
+      <a class="btn btn-primary"
+         download="invoice-{{$ctrl.invoice.number}}.pdf"
+         ng-href="{{$ctrl.invoice.pdf}}"
+         target="_self"
+         ng-if="$ctrl.canDownloadInvoice()">
+        <i class="fa fa-download"></i>
+        <span translate>Download invoice</span>
+      </a>
     </div>
   </div>
 </div>

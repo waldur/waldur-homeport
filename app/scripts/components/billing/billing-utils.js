@@ -71,17 +71,20 @@ export default class BillingUtils {
     });
   }
 
-  groupInvoiceItems(invoice) {
+  groupItemsInInvoice(invoice) {
+    let openstack_items = invoice.opestack_items || [];
+    let invoiceItems = openstack_items.concat(invoice.offering_items || []);
+    return this.groupInvoiceItems(invoiceItems);
+  }
+
+  groupInvoiceItems(items) {
     let projects = {
       default: {
         items: [],
         name: '',
       }
     };
-    this.groupInvoiceSubItems(invoice.openstack_items, projects);
-    if (invoice.offering_items) {
-      this.groupInvoiceSubItems(invoice.offering_items, projects);
-    }
+    this.groupInvoiceSubItems(items, projects);
     return Object.keys(projects).map(key => projects[key]);
   }
 

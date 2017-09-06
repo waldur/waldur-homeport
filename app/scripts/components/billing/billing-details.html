@@ -11,8 +11,11 @@
     <div ng-if="$ctrl.showAccountingRecords">
       <billing-record-details invoice="$ctrl.invoice"/>
     </div>
-    <div ng-if="!$ctrl.showAccountingRecords">
+    <div ng-if="!$ctrl.showAccountingRecords && !$ctrl.paypalVisible">
       <invoice-details invoice="$ctrl.invoice"/>
+    </div>
+    <div ng-if="!$ctrl.showAccountingRecords && $ctrl.paypalVisible">
+      <paypal-invoice-details invoice="$ctrl.invoice"/>
     </div>
     <div class="footer-indent"/>
     <app-footer />

@@ -1,20 +1,20 @@
 import template from './invoice-details.html';
 
-const invoiceDetails = {
+const paypalInvoiceDetails = {
   template,
   bindings: {
     invoice: '<'
   },
-  controller: class InvoiceDetailsController {
+  controller: class PayPalInvoiceDetailsController {
     // @ngInject
     constructor(BillingUtils) {
       this.BillingUtils = BillingUtils;
     }
 
     $onInit() {
-      this.projects = this.BillingUtils.groupItemsInInvoice(this.invoice);
+      this.projects = this.BillingUtils.groupInvoiceItems(this.invoice.items);
     }
   }
 };
 
-export default invoiceDetails;
+export default paypalInvoiceDetails;
