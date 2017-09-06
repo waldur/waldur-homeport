@@ -24,6 +24,7 @@ function* pullDashboardChart(chartId, scope) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 function* startDashboardChart({ chartId, scope }) {
   const task = yield fork(pullDashboardChart, chartId, scope);
 
