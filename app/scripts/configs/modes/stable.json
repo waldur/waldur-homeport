@@ -27,7 +27,7 @@
       "type": "provider",
       "icon": "desktop",
       "key": "vms",
-      "services": ["Amazon", "DigitalOcean", "OpenStackTenant"]
+      "services": ["Amazon", "Azure", "DigitalOcean", "OpenStackTenant"]
     },
     {
       "name": "Private clouds",
@@ -52,7 +52,7 @@
   "serviceCategories": [
     {
       "name": "Virtual machines",
-      "services": ["Amazon", "DigitalOcean", "OpenStack"]
+      "services": ["Amazon", "Azure", "DigitalOcean", "OpenStack"]
     }
   ],
   "futureCategories": [
