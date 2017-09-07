@@ -45,9 +45,11 @@ const billingDetails = {
     loadInvoice() {
       return this.getInvoiceService().$get(this.$stateParams.uuid).then(invoice => {
         this.invoice = angular.extend({
-          period: this.BillingUtils.formatPeriod(invoice)},
-          invoice
+          period: this.BillingUtils.formatPeriod(invoice),
+          items: this.getInvoiceItems(invoice)},
+          invoice,
         );
+
         return invoice;
       })
       .then(invoice => {
@@ -71,6 +73,12 @@ const billingDetails = {
       .catch(() => {
         this.$state.go('errorPage.notFound');
       });
+    }
+
+    getInvoiceItems(invoice) {
+      let items = invoice.items || [];
+      let openstack_items = invoice.opestack_items || [];
+      return items.concat(openstack_items.concat(invoice.offering_items || []));
     }
 
     getInvoiceService() {

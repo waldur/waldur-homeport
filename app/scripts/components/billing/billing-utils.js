@@ -71,12 +71,6 @@ export default class BillingUtils {
     });
   }
 
-  groupItemsInInvoice(invoice) {
-    let openstack_items = invoice.opestack_items || [];
-    let invoiceItems = openstack_items.concat(invoice.offering_items || []);
-    return this.groupInvoiceItems(invoiceItems);
-  }
-
   groupInvoiceItems(items) {
     let projects = {
       default: {
