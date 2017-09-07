@@ -193,6 +193,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-items.html:11
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:18
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
+#: app/scripts/components/paypal/paypal-invoice-actions.html:3
 #: app/scripts/components/resource/actions/action-button-resource.html:3
 #: app/scripts/components/table/responsive-table.js:333
 msgid "Actions"
@@ -725,6 +726,10 @@ msgstr ""
 msgid "Canceled"
 msgstr ""
 
+#: app/scripts/components/paypal/paypal-invoices-list.js:117
+msgid "Cancelled"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js:8
 msgid "Category"
 msgstr ""
@@ -1240,8 +1245,18 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
+#: app/scripts/components/billing/invoice-header.html:30
+#: app/scripts/components/paypal/paypal-invoice-actions.html:15
+msgid "Download invoice"
+msgstr ""
+
+#: app/scripts/components/paypal/paypal-invoices-list.js:97
+msgid "Draft"
+msgstr ""
+
 #: app/scripts/components/billing/invoice-details.html:21
 #: app/scripts/components/billing/invoices-list.js:74
+#: app/scripts/components/paypal/paypal-invoices-list.js:78
 msgid "Due date"
 msgstr ""
 
@@ -1938,6 +1953,7 @@ msgstr ""
 
 #: app/scripts/components/billing/invoice-details.html:19
 #: app/scripts/components/billing/invoices-list.js:69
+#: app/scripts/components/paypal/paypal-invoices-list.js:73
 msgid "Invoice date"
 msgstr ""
 
@@ -1961,11 +1977,16 @@ msgstr ""
 msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been updated."
 msgstr ""
 
+#: app/scripts/components/paypal/paypal-invoice-actions.html:8
+msgid "Invoice has not been sent to PayPal yet"
+msgstr ""
+
 #: app/scripts/components/billing/invoice-details.html:14
 msgid "Invoice No."
 msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:41
+#: app/scripts/components/paypal/paypal-invoices-list.js:42
 msgid "Invoice number"
 msgstr ""
 
@@ -1977,6 +1998,7 @@ msgstr ""
 msgid "Invoiced to"
 msgstr ""
 
+#: app/scripts/components/billing/billing-tabs.html:16
 #: app/scripts/components/billing/billing-tabs.html:4
 msgid "Invoices"
 msgstr ""
@@ -2473,6 +2495,7 @@ msgid "No invitations found matching filter."
 msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:37
+#: app/scripts/components/paypal/paypal-invoices-list.js:38
 msgid "No invoices found matching filter."
 msgstr ""
 
@@ -2981,6 +3004,7 @@ msgid "Page Not Found :/"
 msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:91
+#: app/scripts/components/paypal/paypal-invoices-list.js:105
 msgid "Paid"
 msgstr ""
 
@@ -2997,6 +3021,10 @@ msgstr ""
 
 #: app/scripts/components/events/constants.js:53
 msgid "Password has been changed for user {affected_user_full_name}."
+msgstr ""
+
+#: app/scripts/components/paypal/paypal-invoice-actions.html:21
+msgid "Pay invoice"
 msgstr ""
 
 #: app/scripts/components/events/constants.js:67
@@ -3019,6 +3047,10 @@ msgstr ""
 #: app/scripts/components/payments/payment-approve.html:2
 #: app/scripts/components/payments/payment-cancel.html:2
 msgid "Payment is being processed, please wait."
+msgstr ""
+
+#: app/scripts/components/paypal/paypal-invoices-list.js:113
+msgid "Payment pending"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:33
@@ -3192,6 +3224,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:8
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:57
 #: app/scripts/components/offering/offering-summary.html:34
+#: app/scripts/components/paypal/paypal-invoices-list.js:58
 #: app/scripts/components/plans/plan-agreements-list.js:48
 msgid "Price"
 msgstr ""
@@ -4062,6 +4095,10 @@ msgstr ""
 msgid "Sending invitation has never been simpler"
 msgstr ""
 
+#: app/scripts/components/paypal/paypal-invoices-list.js:101
+msgid "Sent"
+msgstr ""
+
 #: app/scripts/components/appstore/appstore-store.js:350
 msgid "Server error occurred."
 msgstr ""
@@ -4315,6 +4352,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:42
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:54
 #: app/scripts/components/payments/payment-list.js:27
+#: app/scripts/components/paypal/paypal-invoices-list.js:50
 #: app/scripts/components/plans/plan-agreements-list.js:26
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:38
 #: app/scripts/components/providers/provider-list.js:62
@@ -4464,6 +4502,7 @@ msgid "System volume size"
 msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:59
+#: app/scripts/components/paypal/paypal-invoices-list.js:63
 msgid "Tax"
 msgstr ""
 
@@ -4545,6 +4584,7 @@ msgstr ""
 msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
+#: app/scripts/components/paypal/paypal-invoice-actions.html:8
 #: app/scripts/components/resource/actions/action-button-resource.html:12
 msgid "There are no actions."
 msgstr ""
@@ -4702,6 +4742,7 @@ msgstr ""
 #: app/scripts/components/analytics/resource-pie-chart.html:21
 #: app/scripts/components/billing/billing-records-list.js:58
 #: app/scripts/components/billing/invoices-list.js:64
+#: app/scripts/components/paypal/paypal-invoices-list.js:68
 msgid "Total"
 msgstr ""
 
@@ -4854,6 +4895,10 @@ msgstr ""
 
 #: app/scripts/components/providers/provider-list.js:119
 msgid "Unlink"
+msgstr ""
+
+#: app/scripts/components/paypal/paypal-invoices-list.js:109
+msgid "Unpaid"
 msgstr ""
 
 #: app/scripts/components/customer/customer-policies.html:19
@@ -5234,6 +5279,7 @@ msgid "You have no cost plans yet"
 msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:36
+#: app/scripts/components/paypal/paypal-invoices-list.js:37
 msgid "You have no invoices yet."
 msgstr ""
 
