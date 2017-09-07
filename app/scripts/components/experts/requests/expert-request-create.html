@@ -7,7 +7,7 @@
       <div class="ibox" ng-if="$ctrl.expert">
         <div class="ibox-title">
           <h3>{{ $ctrl.expert.label }}</h3>
-          <p ng-bind-html="$ctrl.expert.summary"></p>
+          <p ng-if="$ctrl.expert.summary" ng-bind-html="::$ctrl.expert.summary"></p>
         </div>
         <div class="ibox-content">
           <appstore-form fields="$ctrl.expert" model="$ctrl.model" errors="$ctrl.errors"/>
