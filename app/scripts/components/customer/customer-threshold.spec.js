@@ -14,11 +14,10 @@ describe('customerThreshold', () => {
   beforeEach(angular.mock.module('customerThresholdModule'));
 
   beforeEach(angular.mock.module(function($provide) {
-    $provide.factory('customerUtils', function($q) {
+    $provide.factory('priceEstimatesService', function($q) {
       return {
         isHardLimit: jasmine.createSpy('isHardLimit').and.returnValue(false),
-        saveLimit: jasmine.createSpy('saveLimit').and.returnValue($q.when([])),
-        saveThreshold: jasmine.createSpy('saveThreshold').and.returnValue($q.when([]))
+        update: jasmine.createSpy('update').and.returnValue($q.when([])),
       };
     });
   }));

@@ -153,7 +153,7 @@ describe('OpenStack Instance Store', function() {
     description: 'Description',
     name: 'Soyuz',
     permissions: [],
-    price_estimate: {
+    billing_price_estimate: {
       limit: 5000,
       threshold: 5000,
       total: 4.16553889333333

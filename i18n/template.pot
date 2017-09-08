@@ -403,11 +403,11 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: app/scripts/components/project/project-policies.js:72
+#: app/scripts/components/project/project-policies.js:71
 msgid "An error occurred during policy update."
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:53
+#: app/scripts/components/customer/customer-policies.js:55
 msgid "An error occurred on policies update."
 msgstr ""
 
@@ -1115,7 +1115,7 @@ msgstr ""
 msgid "Current VPC package"
 msgstr ""
 
-#: app/scripts/components/offering/register-offering-category.js:15
+#: app/scripts/components/offering/register-offering-category.js:16
 msgid "Custom request"
 msgstr ""
 
@@ -2942,7 +2942,7 @@ msgstr ""
 msgid "Organization owner role expires on"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:45
+#: app/scripts/components/customer/customer-policies.js:47
 msgid "Organization policies have been updated."
 msgstr ""
 
@@ -3399,7 +3399,7 @@ msgstr ""
 msgid "Project name"
 msgstr ""
 
-#: app/scripts/components/project/project-policies.js:64
+#: app/scripts/components/project/project-policies.js:63
 msgid "Project policies have been updated."
 msgstr ""
 
