@@ -65,8 +65,8 @@ class SummaryController {
       },
       {
         name: 'cost',
-        usage: this.project.price_estimate.total,
-        limit: this.project.price_estimate.limit,
+        usage: this.project.billing_price_estimate.total,
+        limit: this.project.billing_price_estimate.limit,
         required: this.getMonthlyPrice()
       }
     ];

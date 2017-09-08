@@ -25,7 +25,7 @@ const openstackTenantCheckoutSummary = {
     updateQuotas() {
       if (!this.project ||
           !this.model.template ||
-          this.project.price_estimate.limit === -1) {
+          this.project.billing_price_estimate.limit === -1) {
         this.quotas = [];
         return;
       }
@@ -33,8 +33,8 @@ const openstackTenantCheckoutSummary = {
       this.quotas = [
         {
           name: 'cost',
-          usage: this.project.price_estimate.total,
-          limit: this.project.price_estimate.limit,
+          usage: this.project.billing_price_estimate.total,
+          limit: this.project.billing_price_estimate.limit,
           required: this.model.template.monthlyPrice,
         }
       ];

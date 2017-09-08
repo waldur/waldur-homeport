@@ -33,7 +33,7 @@ const projectPolicies = {
       this.projectCertifications = angular.copy(this.project.certifications);
       this.certificationsList = this.project.certifications.map(x => x.name).join(', ');
 
-      this.estimate = angular.copy(this.project.price_estimate);
+      this.estimate = angular.copy(this.project.billing_price_estimate);
       this.isHardLimit = this.checkIsHardLimit(this.estimate);
       this.quota = this.FreeIPAQuotaService.loadQuota(this.project);
 
@@ -51,8 +51,7 @@ const projectPolicies = {
 
     updatePolicies() {
       let promises = [
-        this.saveLimit(),
-        this.saveThreshold(),
+        this.updatePriceEstimate(),
         this.saveCertifications(),
       ];
 
@@ -74,17 +73,12 @@ const projectPolicies = {
       });
     }
 
-    saveThreshold() {
-      return this.priceEstimatesService
-        .setThreshold(this.project.url, this.estimate.threshold)
-        .then(() => this.project.price_estimate.threshold = this.estimate.threshold);
-    }
-
-    saveLimit() {
+    updatePriceEstimate() {
       const limit = this.isHardLimit ? this.estimate.threshold : -1;
-      return this.priceEstimatesService
-        .setLimit(this.project.url, limit)
-        .then(() => this.project.price_estimate.limit = limit);
+      return this.priceEstimatesService.update(this.estimate).then(() => {
+        this.project.billing_price_estimate.threshold = this.estimate.threshold;
+        this.project.billing_price_estimate.limit = limit;
+      });
     }
 
     saveCertifications() {

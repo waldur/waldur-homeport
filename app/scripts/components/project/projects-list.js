@@ -120,7 +120,7 @@ function ProjectsListController(
         {
           title: gettext('Estimated cost'),
           feature: 'projectCostDetails',
-          render: row => $filter('defaultCurrency')(row.price_estimate.total)
+          render: row => $filter('defaultCurrency')(row.billing_price_estimate.total)
         },
         {
           title: gettext('SLA'),

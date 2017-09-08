@@ -9,13 +9,13 @@ const customerThreshold = {
   },
   controller: class CustomerThresholdController {
     // @ngInject
-    constructor(ENV, customerUtils) {
+    constructor(ENV, priceEstimatesService) {
       this.currency = ENV.currency;
-      this.customerUtils = customerUtils;
+      this.priceEstimatesService = priceEstimatesService;
     }
 
     $onInit() {
-      this.model.isHardLimit = this.customerUtils.isHardLimit(this.model.priceEstimate);
+      this.model.isHardLimit = this.priceEstimatesService.isHardLimit(this.model.priceEstimate);
       this.updateLimit();
     }
 
