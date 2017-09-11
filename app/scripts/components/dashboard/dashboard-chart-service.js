@@ -7,12 +7,13 @@ import {
 
 // @ngInject
 export default class DashboardChartService {
-  constructor($q, invoicesService, quotasService, $filter, features) {
+  constructor($q, invoicesService, quotasService, $filter, features, coreUtils) {
     this.$q = $q;
     this.invoicesService = invoicesService;
     this.quotasService = quotasService;
     this.$filter = $filter;
     this.features = features;
+    this.coreUtils = coreUtils;
   }
 
   clearServiceCache() {
@@ -116,10 +117,14 @@ export default class DashboardChartService {
       items.reverse();
       items = this.padMissingValues(items, 'month');
       items = items.map(item => {
-        item.label = this.$filter('defaultCurrency')(item.value) +  ' at ' +
-                     this.$filter('date', 'yyyy-MM')(item.date);
+        item.label = this.formatCostChartLabel(item.value, item.date, false);
         return item;
       });
+
+      const lastItem = items[items.length - 1];
+      const monthEnd = moment().endOf('month').toDate();
+      lastItem.label = this.formatCostChartLabel(lastItem.value, monthEnd, true);
+
       return {
         title: gettext('Total cost'),
         data: items,
@@ -129,6 +134,17 @@ export default class DashboardChartService {
           items[items.length - 2].value
         ])
       };
+    });
+  }
+
+  formatCostChartLabel(value, date, isEstimate) {
+    let template = gettext('{value} at {date}');
+    if (isEstimate) {
+      template = gettext('{value} at {date}, estimated');
+    }
+    return this.coreUtils.templateFormatter(template, {
+      value: this.$filter('defaultCurrency')(value),
+      date: this.$filter('date', 'yyyy-MM')(date)
     });
   }
 

@@ -104,6 +104,14 @@ msgstr ""
 msgid "{usage} used"
 msgstr ""
 
+#: app/scripts/components/dashboard/dashboard-chart-service.js:141
+msgid "{value} at {date}"
+msgstr ""
+
+#: app/scripts/components/dashboard/dashboard-chart-service.js:143
+msgid "{value} at {date}, estimated"
+msgstr ""
+
 #: app/scripts/components/error/error-403.html:8
 #: app/scripts/components/error/error-404.html:6
 msgid "&lt; Back"
@@ -4752,7 +4760,7 @@ msgid "TOTAL"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:59
-#: app/scripts/components/dashboard/dashboard-chart-service.js:124
+#: app/scripts/components/dashboard/dashboard-chart-service.js:129
 msgid "Total cost"
 msgstr ""
 
