@@ -23,6 +23,12 @@ export default function usersService(baseServiceClass, $q, ENV, $rootScope) {
       });
     },
 
+    isCurrentUserValid: function() {
+      return this.getCurrentUser().then(user => {
+        return !this.mandatoryFieldsMissing(user) && user.agreement_date;
+      });
+    },
+
     mandatoryFieldsMissing: function(user) {
       return ENV.userMandatoryFields.reduce(
         (result, item) => result || !user[item], false);
