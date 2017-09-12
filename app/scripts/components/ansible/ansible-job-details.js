@@ -4,9 +4,10 @@ const ansbileJobDetails = {
   template: template,
   controller: class AnsbileJobDetailsController {
     // ngInject
-    constructor($stateParams, $interval, ENV, AnsibleJobsService) {
+    constructor($stateParams, $interval, $scope, ENV, AnsibleJobsService) {
       this.$stateParams = $stateParams;
       this.$interval = $interval;
+      this.$scope = $scope;
       this.ENV = ENV;
       this.AnsibleJobsService = AnsibleJobsService;
     }
@@ -28,6 +29,7 @@ const ansbileJobDetails = {
     fetchJob() {
       this.AnsibleJobsService.$get(this.$stateParams.jobId)
         .then(job => this.job = job)
+        .then(() => this.$scope.$emit('refreshAnsibleResourcesList'))
         .finally(() => this.loading = false);
     }
   }

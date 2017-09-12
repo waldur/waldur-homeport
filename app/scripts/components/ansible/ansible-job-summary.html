@@ -53,6 +53,11 @@
         <h3 translate>Output log</h3>
         <pre class="pre-scrollable">{{ $ctrl.job.output }}</pre>
       </div>
+
+      <div class="col-sm-12 m-t-md">
+        <h3 translate>Related resources</h3>
+        <ansible-job-resources-list job="$ctrl.job"></ansible-job-resources-list>
+      </div>
     </div>
   </div>
 </div>
