@@ -2977,7 +2977,7 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-job-summary.html:53
+#: app/scripts/components/ansible/ansible-job-summary.html:58
 msgid "Output log"
 msgstr ""
 
@@ -3665,6 +3665,10 @@ msgstr ""
 
 #: app/scripts/components/user/filters.js:24
 msgid "Regular user"
+msgstr ""
+
+#: app/scripts/components/ansible/ansible-job-summary.html:64
+msgid "Related resources"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:14
