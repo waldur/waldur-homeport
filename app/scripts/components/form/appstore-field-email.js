@@ -8,12 +8,13 @@ const appstoreFieldEmail = {
     form: '=',
   },
   controller: class AppstoreFieldEmailController {
-    constructor(coreUtils) {
+    constructor(coreUtils, formUtils) {
       this.coreUtils = coreUtils;
+      this.formUtils = formUtils;
     }
 
     invalid() {
-      return this.form && this.form[this.field.name].$dirty && this.form[this.field.name].$invalid;
+      return this.formUtils.formFieldInvalid(this.form, this.field.name);
     }
 
     showRequiredError() {
