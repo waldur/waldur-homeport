@@ -19,6 +19,8 @@ export default class CustomerCreateService {
     let customer = this.customersService.$create();
     angular.extend(customer, this.composeCustomerModel(model));
     return customer.$save().then(customer => {
+      model.threshold.priceEstimate.url = customer.billing_price_estimate.url;
+
       let promises = [
         this.priceEstimatesService.update(model.threshold.priceEstimate).then(() => {
           customer.billing_price_estimate.limit = model.threshold.priceEstimate.limit;
