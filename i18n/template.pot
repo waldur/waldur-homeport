@@ -1544,9 +1544,9 @@ msgstr ""
 msgid "Failed to operate with backend."
 msgstr ""
 
-#: app/scripts/components/form/appstore-field-email.js:32
-#: app/scripts/components/form/appstore-field-string.js:28
-#: app/scripts/components/form/appstore-field-tel.js:28
+#: app/scripts/components/form/appstore-field-email.js:33
+#: app/scripts/components/form/appstore-field-string.js:29
+#: app/scripts/components/form/appstore-field-tel.js:29
 msgid "Field length must be less than {maxlength} symbols"
 msgstr ""
 

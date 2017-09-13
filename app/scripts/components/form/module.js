@@ -15,12 +15,14 @@ import appstoreFieldMultiselect from './appstore-field-multiselect';
 import appstoreFieldSelect from './appstore-field-select';
 import appstoreListDialog from './appstore-list-dialog';
 import appstoreFormWizard from './appstore-form-wizard';
+import FormUtils from './form-utils';
 import fieldLabel from './field-label';
 import helpicon from './help-icon';
 import multiplyBy from './multiply-by';
 import choicesTable from './choices-table';
 
 export default module => {
+  module.service('formUtils', FormUtils);
   module.directive('appstoreForm', appstoreForm);
   module.directive('appstoreField', appstoreField);
   module.component('appstoreFieldString', appstoreFieldString);
