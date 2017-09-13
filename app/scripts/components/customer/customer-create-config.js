@@ -2,7 +2,6 @@ export default [
   {
     name: gettext('General'),
     title: gettext('General information'),
-    icon: 'fa-sitemap',
     fields: [
       {
         name: 'name',
@@ -10,6 +9,7 @@ export default [
         required: true,
         label: gettext('Name'),
         maxlength: 150,
+        help_text: gettext('Name of your organization.'),
       },
       {
         name: 'email',
@@ -35,6 +35,7 @@ export default [
         label: gettext('Organization registration code'),
         maxlength: 150,
         required: true,
+        help_text: gettext('Please provide registration code of your company.'),
       },
       {
         name: 'country',
@@ -52,7 +53,7 @@ export default [
         name: 'vat_code',
         label: gettext('EU VAT ID'),
         type: 'string',
-        help_text: gettext('Please provide your EU VAT ID if you are registered in the European Union.')
+        help_text: gettext('Please provide your EU VAT ID if you are registered in the European Union.'),
       },
     ]
   },

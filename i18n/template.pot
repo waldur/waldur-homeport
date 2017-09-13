@@ -330,7 +330,7 @@ msgstr ""
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:47
+#: app/scripts/components/customer/customer-create-config.js:48
 #: app/scripts/components/customer/customer-manage.html:38
 #: app/scripts/components/customer/customer-manage.html:74
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
@@ -693,7 +693,7 @@ msgstr ""
 #: app/scripts/components/events/event-types-dialog.html:14
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:93
 #: app/scripts/components/experts/requests/expert-request-create.html:22
-#: app/scripts/components/form/appstore-form-wizard.html:54
+#: app/scripts/components/form/appstore-form-wizard.html:49
 #: app/scripts/components/invitations/actions/cancel.js:8
 #: app/scripts/components/invitations/actions/invitation-dialog.html:77
 #: app/scripts/components/issues/comments/issue-comments-form.html:22
@@ -938,7 +938,7 @@ msgstr ""
 msgid "Could not load a list of identity providers. Please try again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:41
+#: app/scripts/components/customer/customer-create-config.js:42
 #: app/scripts/components/customer/customer-manage.html:77
 msgid "Country"
 msgstr ""
@@ -1368,7 +1368,7 @@ msgstr ""
 msgid "Estonian"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:53
+#: app/scripts/components/customer/customer-create-config.js:54
 msgid "EU VAT ID"
 msgstr ""
 
@@ -1460,7 +1460,7 @@ msgstr ""
 msgid "Expert bid has been accepted."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:71
+#: app/scripts/components/customer/customer-create-config.js:72
 #: app/scripts/components/experts/extensions/customer-workspace.html:4
 msgid "Expert provider"
 msgstr ""
@@ -1570,7 +1570,7 @@ msgstr ""
 msgid "Fingerprint"
 msgstr ""
 
-#: app/scripts/components/form/appstore-form-wizard.html:74
+#: app/scripts/components/form/appstore-form-wizard.html:69
 msgid "Finish"
 msgstr ""
 
@@ -1606,7 +1606,7 @@ msgstr ""
 msgid "Floating IPs"
 msgstr ""
 
-#: app/scripts/components/form/appstore-form-wizard.html:46
+#: app/scripts/components/form/appstore-form-wizard.html:41
 msgid "Following fields contain errors"
 msgstr ""
 
@@ -2337,7 +2337,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-compare-list.js:69
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:13
 #: app/scripts/components/cost-planning/cost-plans-list.js:31
-#: app/scripts/components/customer/customer-create-config.js:11
+#: app/scripts/components/customer/customer-create-config.js:10
 #: app/scripts/components/customer/customer-manage.html:10
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:76
 #: app/scripts/components/experts/requests/expert-request-create.js:40
@@ -2369,6 +2369,10 @@ msgstr ""
 #: app/scripts/components/resource/list/resources-list.js:42
 #: app/scripts/components/slurm/slurm-allocation-list.js:24
 msgid "Name"
+msgstr ""
+
+#: app/scripts/components/customer/customer-create-config.js:12
+msgid "Name of your organization."
 msgstr ""
 
 #: app/scripts/components/customer/customer-manage.html:13
@@ -2403,7 +2407,7 @@ msgstr ""
 msgid "New VPC package"
 msgstr ""
 
-#: app/scripts/components/form/appstore-form-wizard.html:68
+#: app/scripts/components/form/appstore-form-wizard.html:63
 #: app/scripts/components/table/responsive-table.js:108
 msgid "Next"
 msgstr ""
@@ -3149,11 +3153,15 @@ msgstr ""
 msgid "Please provide details of a new volume created from snapshot."
 msgstr ""
 
+#: app/scripts/components/customer/customer-create-config.js:38
+msgid "Please provide registration code of your company."
+msgstr ""
+
 #: app/scripts/components/providers/details/provider-project-link-quotas.html:24
 msgid "Please provide valid quotas."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:55
+#: app/scripts/components/customer/customer-create-config.js:56
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
@@ -3190,7 +3198,7 @@ msgstr ""
 msgid "Please wait while provider is being configured."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:60
+#: app/scripts/components/customer/customer-create-config.js:61
 #: app/scripts/components/customer/customer-policies.html:2
 #: app/scripts/components/project/project-dialog.html:14
 msgid "Policies"
@@ -3223,7 +3231,7 @@ msgstr ""
 msgid "Premium support service."
 msgstr ""
 
-#: app/scripts/components/form/appstore-form-wizard.html:60
+#: app/scripts/components/form/appstore-form-wizard.html:55
 #: app/scripts/components/table/responsive-table.js:109
 msgid "Previous"
 msgstr ""
@@ -4025,7 +4033,7 @@ msgstr ""
 msgid "Select connected subnet"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:43
+#: app/scripts/components/customer/customer-create-config.js:44
 msgid "Select country..."
 msgstr ""
 
@@ -4158,11 +4166,11 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:72
+#: app/scripts/components/customer/customer-create-config.js:73
 msgid "Setup expert provider"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:61
+#: app/scripts/components/customer/customer-create-config.js:62
 msgid "Setup policies"
 msgstr ""
 
