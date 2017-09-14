@@ -76,9 +76,16 @@ const billingDetails = {
     }
 
     getInvoiceItems(invoice) {
-      let items = invoice.items || [];
-      let openstack_items = invoice.opestack_items || [];
-      return items.concat(openstack_items.concat(invoice.offering_items || []));
+      const items = invoice.items || [];
+      const openstack_items = invoice.openstack_items || [];
+      const offering_items = invoice.offering_items || [];
+      const generic_items = invoice.generic_items || [];
+      return [
+        ...items,
+        ...openstack_items,
+        ...offering_items,
+        ...generic_items,
+      ];
     }
 
     getInvoiceService() {
