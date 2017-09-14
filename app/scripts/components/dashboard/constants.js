@@ -30,7 +30,22 @@ export const DASHBOARD_QUOTAS = {
   nc_user_count: {
     title: gettext('Team size'),
     feature: 'users'
-  }
+  },
+  nc_cpu_usage: {
+    title: gettext('Batch CPU usage, hours'),
+    feature: 'slurm',
+    formatter: x => Math.round(x / 60)
+  },
+  nc_gpu_usage: {
+    title: gettext('Batch GPU usage, hours'),
+    feature: 'slurm',
+    formatter: x => Math.round(x / 60)
+  },
+  nc_ram_usage: {
+    title: gettext('Batch RAM usage, GB'),
+    feature: 'slurm',
+    formatter: x => Math.round(x / 1024)
+  },
 };
 
 export const PROJECT_DASHBOARD_QUOTAS = [
@@ -39,7 +54,10 @@ export const PROJECT_DASHBOARD_QUOTAS = [
   'nc_private_cloud_count',
   'nc_storage_count',
   'nc_volume_count',
-  'nc_snapshot_count'
+  'nc_snapshot_count',
+  'nc_cpu_usage',
+  'nc_gpu_usage',
+  'nc_ram_usage',
 ];
 
 export const ORGANIZATION_DASHBOARD_QUOTAS = [
@@ -47,5 +65,8 @@ export const ORGANIZATION_DASHBOARD_QUOTAS = [
   'nc_vm_count',
   'nc_private_cloud_count',
   'nc_storage_count',
-  'nc_user_count'
+  'nc_user_count',
+  'nc_cpu_usage',
+  'nc_gpu_usage',
+  'nc_ram_usage',
 ];

@@ -104,11 +104,11 @@ msgstr ""
 msgid "{usage} used"
 msgstr ""
 
-#: app/scripts/components/dashboard/dashboard-chart-service.js:141
+#: app/scripts/components/dashboard/dashboard-chart-service.js:146
 msgid "{value} at {date}"
 msgstr ""
 
-#: app/scripts/components/dashboard/dashboard-chart-service.js:143
+#: app/scripts/components/dashboard/dashboard-chart-service.js:148
 msgid "{value} at {date}, estimated"
 msgstr ""
 
@@ -604,6 +604,14 @@ msgstr ""
 msgid "Base rate"
 msgstr ""
 
+#: app/scripts/components/dashboard/constants.js:35
+msgid "Batch CPU usage, hours"
+msgstr ""
+
+#: app/scripts/components/dashboard/constants.js:40
+msgid "Batch GPU usage, hours"
+msgstr ""
+
 #: app/scripts/components/configs/base-config.js:106
 #: app/scripts/components/configs/base-config.js:60
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:19
@@ -611,6 +619,10 @@ msgstr ""
 #: app/scripts/components/slurm/routes.js:8
 #: app/scripts/components/slurm/sidebar.js:8
 msgid "Batch processing"
+msgstr ""
+
+#: app/scripts/components/dashboard/constants.js:45
+msgid "Batch RAM usage, GB"
 msgstr ""
 
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:107
@@ -4772,7 +4784,7 @@ msgid "TOTAL"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:59
-#: app/scripts/components/dashboard/dashboard-chart-service.js:129
+#: app/scripts/components/dashboard/dashboard-chart-service.js:134
 msgid "Total cost"
 msgstr ""
 
