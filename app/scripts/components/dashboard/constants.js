@@ -32,17 +32,17 @@ export const DASHBOARD_QUOTAS = {
     feature: 'users'
   },
   nc_cpu_usage: {
-    title: gettext('CPU usage, hours'),
+    title: gettext('Batch CPU usage, hours'),
     feature: 'slurm',
     formatter: x => Math.round(x / 60)
   },
   nc_gpu_usage: {
-    title: gettext('GPU usage, hours'),
+    title: gettext('Batch GPU usage, hours'),
     feature: 'slurm',
     formatter: x => Math.round(x / 60)
   },
   nc_ram_usage: {
-    title: gettext('RAM usage, GB'),
+    title: gettext('Batch RAM usage, GB'),
     feature: 'slurm',
     formatter: x => Math.round(x / 1024)
   },

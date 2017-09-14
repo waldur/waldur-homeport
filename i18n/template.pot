@@ -604,6 +604,14 @@ msgstr ""
 msgid "Base rate"
 msgstr ""
 
+#: app/scripts/components/dashboard/constants.js:35
+msgid "Batch CPU usage, hours"
+msgstr ""
+
+#: app/scripts/components/dashboard/constants.js:40
+msgid "Batch GPU usage, hours"
+msgstr ""
+
 #: app/scripts/components/configs/base-config.js:106
 #: app/scripts/components/configs/base-config.js:60
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:19
@@ -611,6 +619,10 @@ msgstr ""
 #: app/scripts/components/slurm/routes.js:8
 #: app/scripts/components/slurm/sidebar.js:8
 msgid "Batch processing"
+msgstr ""
+
+#: app/scripts/components/dashboard/constants.js:45
+msgid "Batch RAM usage, GB"
 msgstr ""
 
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:107
@@ -961,10 +973,6 @@ msgstr ""
 #: app/scripts/components/slurm/slurm-allocation-list.js:41
 #: app/scripts/components/slurm/slurm-allocation-summary.html:14
 msgid "CPU usage"
-msgstr ""
-
-#: app/scripts/components/dashboard/constants.js:35
-msgid "CPU usage, hours"
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-job-create.html:34
@@ -1677,10 +1685,6 @@ msgstr ""
 
 #: app/scripts/components/navigation/cookies-consent.html:10
 msgid "Got it!"
-msgstr ""
-
-#: app/scripts/components/dashboard/constants.js:40
-msgid "GPU usage, hours"
 msgstr ""
 
 #: app/scripts/components/resource/tabs/constants.js:17
@@ -3603,10 +3607,6 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.html:7
 msgid "RAM limit GB"
-msgstr ""
-
-#: app/scripts/components/dashboard/constants.js:45
-msgid "RAM usage, GB"
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:19
