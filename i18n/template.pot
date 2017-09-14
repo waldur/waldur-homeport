@@ -104,11 +104,11 @@ msgstr ""
 msgid "{usage} used"
 msgstr ""
 
-#: app/scripts/components/dashboard/dashboard-chart-service.js:141
+#: app/scripts/components/dashboard/dashboard-chart-service.js:146
 msgid "{value} at {date}"
 msgstr ""
 
-#: app/scripts/components/dashboard/dashboard-chart-service.js:143
+#: app/scripts/components/dashboard/dashboard-chart-service.js:148
 msgid "{value} at {date}, estimated"
 msgstr ""
 
@@ -963,6 +963,10 @@ msgstr ""
 msgid "CPU usage"
 msgstr ""
 
+#: app/scripts/components/dashboard/constants.js:35
+msgid "CPU usage, hours"
+msgstr ""
+
 #: app/scripts/components/ansible/ansible-job-create.html:34
 #: app/scripts/components/appstore/appstore-store.html:20
 #: app/scripts/components/appstore/appstore-store.html:51
@@ -1673,6 +1677,10 @@ msgstr ""
 
 #: app/scripts/components/navigation/cookies-consent.html:10
 msgid "Got it!"
+msgstr ""
+
+#: app/scripts/components/dashboard/constants.js:40
+msgid "GPU usage, hours"
 msgstr ""
 
 #: app/scripts/components/resource/tabs/constants.js:17
@@ -3597,6 +3605,10 @@ msgstr ""
 msgid "RAM limit GB"
 msgstr ""
 
+#: app/scripts/components/dashboard/constants.js:45
+msgid "RAM usage, GB"
+msgstr ""
+
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:19
 msgid "Read through terms and conditions."
 msgstr ""
@@ -4772,7 +4784,7 @@ msgid "TOTAL"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:59
-#: app/scripts/components/dashboard/dashboard-chart-service.js:129
+#: app/scripts/components/dashboard/dashboard-chart-service.js:134
 msgid "Total cost"
 msgstr ""
 
