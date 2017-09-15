@@ -22,6 +22,7 @@ function ProjectsListController(
   $uibModal,
   ncUtils,
   ncUtilsFlash,
+  TableExtensionService,
   currentStateService,
   usersService) {
   var controllerScope = this;
@@ -77,7 +78,8 @@ function ProjectsListController(
       };
     },
     getColumns: function() {
-      return [
+      const extraColumns = TableExtensionService.getColumns('projects-list');
+      const baseColumns = [
         {
           title: gettext('Name'),
           render: function(row) {
@@ -136,6 +138,7 @@ function ProjectsListController(
           }
         }
       ];
+      return baseColumns.concat(extraColumns);
     },
     userCanAddProject: function() {
       const ownerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
