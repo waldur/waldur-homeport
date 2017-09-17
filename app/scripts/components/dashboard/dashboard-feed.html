@@ -18,8 +18,9 @@
             <div ng-if="$ctrl.items.length > 0">
                 <div class="feed-activity-list">
                     <div class="feed-element" ng-repeat="item in $ctrl.items">
-                        <small class="pull-right" am-time-ago="item.created"></small>
+                        <a class="pull-right" ng-if="$ctrl.showDetails" ng-click="$ctrl.showDetails(item)">Details</a>
                         <div ng-bind-html="::item.html_message"></div>
+                        <small class="pull-right" am-time-ago="item.created"></small>
                         <small class="text-muted">{{ ::item.created | date:'medium' }}</small>
                     </div>
                 </div>

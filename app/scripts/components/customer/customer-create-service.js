@@ -2,11 +2,11 @@ import wizardStepsConfig from './customer-create-config';
 
 export default class CustomerCreateService {
   // @ngInject
-  constructor($q, features, customersService, customerUtils, expertsService) {
+  constructor($q, features, customersService, priceEstimatesService, expertsService) {
     this.$q = $q;
     this.features = features;
     this.customersService = customersService;
-    this.customerUtils = customerUtils;
+    this.priceEstimatesService = priceEstimatesService;
     this.expertsService = expertsService;
   }
 
@@ -19,9 +19,13 @@ export default class CustomerCreateService {
     let customer = this.customersService.$create();
     angular.extend(customer, this.composeCustomerModel(model));
     return customer.$save().then(customer => {
+      model.threshold.priceEstimate.url = customer.billing_price_estimate.url;
+
       let promises = [
-        this.customerUtils.saveLimit(customer, model.threshold.priceEstimate.limit),
-        this.customerUtils.saveThreshold(customer, model.threshold.priceEstimate.threshold),
+        this.priceEstimatesService.update(model.threshold.priceEstimate).then(() => {
+          customer.billing_price_estimate.limit = model.threshold.priceEstimate.limit;
+          customer.billing_price_estimate.threshold = model.threshold.priceEstimate.threshold;
+        })
       ];
 
       if (model.agree_with_policy) {

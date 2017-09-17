@@ -13,6 +13,8 @@ const billingDetails = {
       usersService,
       ncUtils,
       invoicesService,
+      paypalInvoicesService,
+      features,
       titleService,
       BillingUtils) {
       // @ngInject
@@ -24,12 +26,15 @@ const billingDetails = {
       this.customersService = customersService;
       this.usersService = usersService;
       this.ncUtils = ncUtils;
-      this.invoicesService = invoicesService;
       this.titleService = titleService;
       this.BillingUtils = BillingUtils;
+      this.features = features;
+      this.invoicesService = invoicesService;
+      this.paypalInvoicesService = paypalInvoicesService;
     }
 
     $onInit() {
+      this.paypalVisible = this.features.isVisible('paypal');
       this.showAccountingRecords = this.ENV.accountingMode === 'accounting';
       this.invoice = {};
       this.loading = true;
@@ -38,11 +43,13 @@ const billingDetails = {
     }
 
     loadInvoice() {
-      return this.invoicesService.$get(this.$stateParams.uuid).then(invoice => {
+      return this.getInvoiceService().$get(this.$stateParams.uuid).then(invoice => {
         this.invoice = angular.extend({
-          period: this.BillingUtils.formatPeriod(invoice)},
-          invoice
+          period: this.BillingUtils.formatPeriod(invoice),
+          items: this.getInvoiceItems(invoice)},
+          invoice,
         );
+
         return invoice;
       })
       .then(invoice => {
@@ -66,6 +73,27 @@ const billingDetails = {
       .catch(() => {
         this.$state.go('errorPage.notFound');
       });
+    }
+
+    getInvoiceItems(invoice) {
+      const items = invoice.items || [];
+      const openstack_items = invoice.openstack_items || [];
+      const offering_items = invoice.offering_items || [];
+      const generic_items = invoice.generic_items || [];
+      return [
+        ...items,
+        ...openstack_items,
+        ...offering_items,
+        ...generic_items,
+      ];
+    }
+
+    getInvoiceService() {
+      if (!this.showAccountingRecords && this.paypalVisible) {
+        return this.paypalInvoicesService;
+      } else {
+        return this.invoicesService;
+      }
     }
   }
 };

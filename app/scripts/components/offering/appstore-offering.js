@@ -18,6 +18,7 @@ const appstoreOffering = {
     }
 
     $onInit() {
+      this.summaryComponent = 'appstoreOfferingSummary';
       this.model = {};
       this.offeringType = this.$stateParams.category;
       this.loading = true;
@@ -49,6 +50,10 @@ const appstoreOffering = {
         });
         angular.forEach(offering.options, (option, name) => option.name = name);
       }).finally(() => this.loading = false);
+    }
+
+    cancel() {
+      this.$state.go('project.details', {uuid: this.project.uuid});
     }
 
     save() {

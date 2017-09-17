@@ -11,9 +11,11 @@ export default function registerOfferingCategory(features, $q, offeringsService,
           key,
           label: offerings[key].label,
           icon: offerings[key].icon || 'fa-gear',
+          image: offerings[key].image,
           description: offerings[key].description,
           category: offerings[key].category || gettext('Custom request'),
           state: 'appstore.offering',
+          price: offerings[key].price,
         }));
       }).catch(error => {
         if (error.status === 424) {

@@ -14,5 +14,9 @@ export const CATEGORY_ITEMS = {
   vms: {
     label: gettext('Virtual machines'),
     state: 'project.resources.vms',
+  },
+  slurm: {
+    label: gettext('Batch processing'),
+    state: 'project.resources.slurm',
   }
 };

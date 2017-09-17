@@ -8,10 +8,13 @@ export default function registerExpertRequestCategory(features, $q, expertReques
     }
     return expertRequestsService.getConfiguration()
       .then(experts => {
-        return Object.keys(experts).map(key => ({
+        return Object.keys(experts).filter(
+          key => experts[key].category === APPSTORE_CATEGORY
+        ).map(key => ({
           key,
           label: experts[key].label,
           icon: experts[key].icon || 'fa-gear',
+          image: experts[key].image,
           description: experts[key].description,
           category: APPSTORE_CATEGORY,
           state: 'appstore.expert',

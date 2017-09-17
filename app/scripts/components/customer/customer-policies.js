@@ -8,11 +8,11 @@ const customerPolicies = {
   },
   controller: class CustomerPoliciesController {
     // @ngInject
-    constructor($q, ENV, ncUtilsFlash, customerUtils, FreeIPAQuotaService) {
+    constructor($q, ENV, ncUtilsFlash, priceEstimatesService, FreeIPAQuotaService) {
       this.$q = $q;
       this.ENV = ENV;
       this.ncUtilsFlash = ncUtilsFlash;
-      this.customerUtils = customerUtils;
+      this.priceEstimatesService = priceEstimatesService;
       this.FreeIPAQuotaService = FreeIPAQuotaService;
     }
 
@@ -20,8 +20,8 @@ const customerPolicies = {
       this.originalCustomer = this.customer;
       this.customer = angular.copy(this.customer);
       this.thresholdModel = {
-        isHardLimit: this.customerUtils.isHardLimit(this.customer.price_estimate),
-        priceEstimate: this.customer.price_estimate
+        isHardLimit: this.priceEstimatesService.isHardLimit(this.customer.billing_price_estimate),
+        priceEstimate: this.customer.billing_price_estimate
       };
       this.thresholdField = {
         horizontal: true,
@@ -33,8 +33,10 @@ const customerPolicies = {
 
     updatePolicies() {
       let promises = [
-        this.customerUtils.saveLimit(this.originalCustomer, this.thresholdModel.priceEstimate.limit),
-        this.customerUtils.saveThreshold(this.originalCustomer, this.thresholdModel.priceEstimate.threshold),
+        this.priceEstimatesService.update(this.thresholdModel.priceEstimate).then(() => {
+          this.originalCustomer.billing_price_estimate.limit = this.thresholdModel.priceEstimate.limit;
+          this.originalCustomer.billing_price_estimate.threshold = this.thresholdModel.priceEstimate.threshold;
+        })
       ];
 
       if (this.quota) {

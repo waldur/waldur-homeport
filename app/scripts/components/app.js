@@ -56,8 +56,8 @@ function getCurrentUser(usersService, $q) {
   // TODO: Migrate to Angular-UI Router v1.0
   // And use $transition service which supports promises
   // https://github.com/angular-ui/ui-router/issues/1153
-  return usersService.getCurrentUser().then(function(user) {
-    if (usersService.mandatoryFieldsMissing(user) || !user.agreement_date) {
+  return usersService.isCurrentUserValid().then(function(result) {
+    if (!result) {
       return $q.reject({
         redirectTo: 'initialdata.view'
       });

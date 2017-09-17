@@ -48,11 +48,23 @@
           <dd><pre>{{ $ctrl.job.arguments | json }}</pre></dd>
         </div>
       </dl>
-
-      <div class="col-sm-12" ng-if="$ctrl.job.output">
-        <h3 translate>Output log</h3>
-        <pre class="pre-scrollable">{{ $ctrl.job.output }}</pre>
-      </div>
     </div>
   </div>
+</div>
+
+<div class="tabs-container m-l-sm">
+  <uib-tabset active="active">
+    <uib-tab index="0" ng-if="$ctrl.job.output">
+      <uib-tab-heading translate>Output log</uib-tab-heading>
+      <div class="panel-body" ng-if="active==0">
+        <pre class="pre-scrollable">{{ $ctrl.job.output }}</pre>
+      </div>
+    </uib-tab>
+    <uib-tab index="1">
+      <uib-tab-heading translate>Related resources</uib-tab-heading>
+      <div class="panel-body" ng-if="active==1">
+        <ansible-job-resources-list job="$ctrl.job"></ansible-job-resources-list>
+      </div>
+    </uib-tab>
+  </uib-tabset>
 </div>

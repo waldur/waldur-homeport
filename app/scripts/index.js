@@ -48,6 +48,8 @@ import ansibleModule from './components/ansible/module';
 import introModule from './components/intro/module';
 import analyticsRoutes from './components/analytics/routes';
 import azureModule from './components/azure/module';
+import slurmModule from './components/slurm/module';
+import paypalModule from './components/paypal/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -119,6 +121,8 @@ freeipaModule(appModule);
 ansibleModule(appModule);
 introModule(appModule);
 azureModule(appModule);
+slurmModule(appModule);
+paypalModule(appModule);
 appModule.config(analyticsRoutes);
 
 bootstrap('waldur');

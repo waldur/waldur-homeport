@@ -10,7 +10,6 @@ import customerTeam from './customer-team';
 import PriceEstimatesService from './price-estimates-service';
 import customerPolicies from './customer-policies';
 import customerReportError from './customer-report-error';
-import customerUtils from './utils';
 import customerCreateDialog from './customer-create-dialog';
 import customerCreatePrompt from './customer-create-prompt';
 import CustomerCreateService from './customer-create-service';
@@ -39,7 +38,6 @@ export default module => {
   module.component('customerPolicies', customerPolicies);
   module.component('customerReportError', customerReportError);
   module.service('priceEstimatesService', PriceEstimatesService);
-  module.service('customerUtils', customerUtils);
   module.config(routes);
   module.run(attachHooks);
 };

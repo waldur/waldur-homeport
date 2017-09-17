@@ -1,11 +1,14 @@
 <div class="wrapper wrapper-content">
   <div class="row">
-    <div class="col-sm-12">
+    <div ng-class="{'col-sm-9': $ctrl.offering.price}">
       <div ng-if="$ctrl.loading">
         <loading-spinner/>
       </div>
       <div class="ibox" ng-if="$ctrl.offering">
-        <div class="ibox-title"><h3>{{ $ctrl.offering.label }}</h3></div>
+        <div class="ibox-title">
+          <h3>{{ $ctrl.offering.label }}</h3>
+          <p ng-if="$ctrl.offering.summary" ng-bind-html="::$ctrl.offering.summary"></p>
+        </div>
         <div class="ibox-content">
           <appstore-form fields="$ctrl.offering" model="$ctrl.model" errors="$ctrl.errors"/>
         </div>
@@ -15,11 +18,17 @@
             <i class="fa fa-shopping-cart"></i>
             <span translate>Create</span>
           </button>
-          <button class="btn btn-default" back-button>
+          <button class="btn btn-default" ng-click="$ctrl.cancel()">
             <span translate>Cancel</span>
           </button>
         </div>
       </div>
+    </div>
+    <div class="col-md-3" ng-if="$ctrl.offering.price">
+      <appstore-summary
+          component="$ctrl.summaryComponent"
+          model="$ctrl.offering">
+      </appstore-summary>
     </div>
   </div>
 </div>

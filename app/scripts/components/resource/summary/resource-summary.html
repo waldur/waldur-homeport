@@ -53,6 +53,10 @@
     <azure-virtual-machine-summary resource="$ctrl.resource"></azure-virtual-machine-summary>
   </div>
 
+  <div ng-switch-when="SLURM.Allocation">
+    <slurm-allocation-summary resource="$ctrl.resource"></slurm-allocation-summary>
+  </div>
+
   <div ng-switch-default>
     <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
   </div>

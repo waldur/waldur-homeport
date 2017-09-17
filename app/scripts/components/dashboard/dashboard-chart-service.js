@@ -7,12 +7,13 @@ import {
 
 // @ngInject
 export default class DashboardChartService {
-  constructor($q, invoicesService, quotasService, $filter, features) {
+  constructor($q, invoicesService, quotasService, $filter, features, coreUtils) {
     this.$q = $q;
     this.invoicesService = invoicesService;
     this.quotasService = quotasService;
     this.$filter = $filter;
     this.features = features;
+    this.coreUtils = coreUtils;
   }
 
   clearServiceCache() {
@@ -55,7 +56,7 @@ export default class DashboardChartService {
 
     var promises = validCharts.map(chart => {
       chart.quota = quotaMap[chart.quota];
-      return this.getQuotaHistory(chart.quota.url).then(data => {
+      return this.getQuotaHistory(chart).then(data => {
         chart.current = data[data.length - 1].value;
         chart.data = data;
       });
@@ -78,17 +79,22 @@ export default class DashboardChartService {
     return charts.sort((c1, c2) => c1.title.localeCompare(c2.title));
   }
 
-  getQuotaHistory(url) {
-    var end = moment.utc().add(1, 'day').unix();
-    var start = moment.utc().subtract(1, 'month').unix();
+  getQuotaHistory(chart) {
+    const url = chart.quota.url;
+    const end = moment.utc().add(1, 'day').unix();
+    const start = moment.utc().subtract(1, 'month').unix();
 
     return this.quotasService.getHistory(url, start, end, POINTS_COUNT).then(items => {
       items = items.filter(item => {
         return !!item.object;
       }).map(item => {
+        let value = item.object.usage;
+        if (chart.formatter) {
+          value = chart.formatter(value);
+        }
         return {
           date: moment.unix(item.point).toDate(),
-          value: item.object.usage
+          value
         };
       });
 
@@ -116,10 +122,14 @@ export default class DashboardChartService {
       items.reverse();
       items = this.padMissingValues(items, 'month');
       items = items.map(item => {
-        item.label = this.$filter('defaultCurrency')(item.value) +  ' at ' +
-                     this.$filter('date', 'yyyy-MM')(item.date);
+        item.label = this.formatCostChartLabel(item.value, item.date, false);
         return item;
       });
+
+      const lastItem = items[items.length - 1];
+      const monthEnd = moment().endOf('month').toDate();
+      lastItem.label = this.formatCostChartLabel(lastItem.value, monthEnd, true);
+
       return {
         title: gettext('Total cost'),
         data: items,
@@ -129,6 +139,17 @@ export default class DashboardChartService {
           items[items.length - 2].value
         ])
       };
+    });
+  }
+
+  formatCostChartLabel(value, date, isEstimate) {
+    let template = gettext('{value} at {date}');
+    if (isEstimate) {
+      template = gettext('{value} at {date}, estimated');
+    }
+    return this.coreUtils.templateFormatter(template, {
+      value: this.$filter('defaultCurrency')(value),
+      date: this.$filter('date', 'yyyy-MM')(date)
     });
   }
 

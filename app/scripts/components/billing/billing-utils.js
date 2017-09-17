@@ -71,17 +71,14 @@ export default class BillingUtils {
     });
   }
 
-  groupInvoiceItems(invoice) {
+  groupInvoiceItems(items) {
     let projects = {
       default: {
         items: [],
         name: '',
       }
     };
-    this.groupInvoiceSubItems(invoice.openstack_items, projects);
-    if (invoice.offering_items) {
-      this.groupInvoiceSubItems(invoice.offering_items, projects);
-    }
+    this.groupInvoiceSubItems(items, projects);
     return Object.keys(projects).map(key => projects[key]);
   }
 

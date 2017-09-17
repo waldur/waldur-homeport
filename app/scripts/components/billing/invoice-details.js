@@ -12,7 +12,7 @@ const invoiceDetails = {
     }
 
     $onInit() {
-      this.projects = this.BillingUtils.groupInvoiceItems(this.invoice);
+      this.projects = this.BillingUtils.groupInvoiceItems(this.invoice.items);
     }
   }
 };

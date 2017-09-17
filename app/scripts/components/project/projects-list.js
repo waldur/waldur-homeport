@@ -22,6 +22,7 @@ function ProjectsListController(
   $uibModal,
   ncUtils,
   ncUtilsFlash,
+  TableExtensionService,
   currentStateService,
   usersService) {
   var controllerScope = this;
@@ -77,7 +78,8 @@ function ProjectsListController(
       };
     },
     getColumns: function() {
-      return [
+      const extraColumns = TableExtensionService.getColumns('projects-list');
+      const baseColumns = [
         {
           title: gettext('Name'),
           render: function(row) {
@@ -120,7 +122,7 @@ function ProjectsListController(
         {
           title: gettext('Estimated cost'),
           feature: 'projectCostDetails',
-          render: row => $filter('defaultCurrency')(row.price_estimate.total)
+          render: row => $filter('defaultCurrency')(row.billing_price_estimate.total)
         },
         {
           title: gettext('SLA'),
@@ -136,6 +138,7 @@ function ProjectsListController(
           }
         }
       ];
+      return baseColumns.concat(extraColumns);
     },
     userCanAddProject: function() {
       const ownerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);

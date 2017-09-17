@@ -12,7 +12,8 @@ const openstackInstanceFloatingIps = {
   template,
   bindings: {
     model: '<',
-    field: '<'
+    field: '<',
+    form: '<',
   },
   controller: class ComponentController {
     constructor($scope) {
@@ -61,6 +62,7 @@ const openstackInstanceFloatingIps = {
     deleteItem(item) {
       const index = this.items.indexOf(item);
       this.items.splice(index);
+      this.form.$setDirty();
     }
   }
 };

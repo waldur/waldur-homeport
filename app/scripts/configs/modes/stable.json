@@ -9,6 +9,7 @@
     "analytics.cost",
     "monitoring",
     "import",
+    "intro",
     "openMap",
     "help",
     "resource.applications",
@@ -27,7 +28,7 @@
       "type": "provider",
       "icon": "desktop",
       "key": "vms",
-      "services": ["Amazon", "DigitalOcean", "OpenStackTenant"]
+      "services": ["Amazon", "Azure", "DigitalOcean", "OpenStackTenant"]
     },
     {
       "name": "Private clouds",
@@ -41,22 +42,22 @@
       "type": "provider",
       "key": "storages",
       "services": ["OpenStackTenant"]
+    },
+    {
+      "name": "Batch processing",
+      "type": "provider",
+      "key": "slurm",
+      "services": ["SLURM"]
     }
   ],
   "serviceCategories": [
     {
       "name": "Virtual machines",
-      "services": ["Amazon", "DigitalOcean", "OpenStack"]
+      "services": ["Amazon", "Azure", "DigitalOcean", "OpenStack"]
     }
   ],
   "futureCategories": [
     "support",
     "apps"
-  ],
-  "offeringCategories": [
-    {
-      "label": "IaaS",
-      "items": ["private_clouds", "vms", "storages", "support"]
-    }
   ]
 }
