@@ -39,27 +39,27 @@ function SlurmAllocationListController(baseResourceListController, $filter, Slur
         },
         {
           title: gettext('CPU limit'),
-          render: row => row.cpu_limit + ' minutes',
+          render: row => $filter('minutesToHours')(row.cpu_limit),
         },
         {
           title: gettext('CPU usage'),
-          render: row => row.cpu_usage + ' minutes',
+          render: row => $filter('minutesToHours')(row.cpu_usage),
         },
         {
           title: gettext('GPU limit'),
-          render: row => row.gpu_limit + ' minutes',
+          render: row => $filter('minutesToHours')(row.gpu_limit),
         },
         {
           title: gettext('GPU usage'),
-          render: row => row.gpu_usage + ' minutes',
+          render: row => $filter('minutesToHours')(row.gpu_usage),
         },
         {
           title: gettext('RAM limit'),
-          render: row => row.ram_limit + ' MB',
+          render: row => $filter('filesize')(row.ram_limit),
         },
         {
           title: gettext('RAM usage'),
-          render: row => row.ram_usage + ' MB',
+          render: row => $filter('filesize')(row.ram_usage),
         },
 
         {

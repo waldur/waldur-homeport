@@ -18,7 +18,7 @@
     <span translate>CPU limit</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.cpu_limit }}
+    {{ $ctrl.resource.cpu_limit | minutesToHours }}
   </dd>
 </div>
 
@@ -27,7 +27,7 @@
     <span translate>CPU usage</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.cpu_usage }}
+    {{ $ctrl.resource.cpu_usage | minutesToHours }}
   </dd>
 </div>
 
@@ -36,7 +36,7 @@
     <span translate>GPU limit</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.gpu_limit }}
+    {{ $ctrl.resource.gpu_limit | minutesToHours }}
   </dd>
 </div>
 
@@ -45,7 +45,7 @@
     <span translate>GPU usage</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.gpu_usage }}
+    {{ $ctrl.resource.gpu_usage | minutesToHours }}
   </dd>
 </div>
 
@@ -54,7 +54,7 @@
     <span translate>RAM limit</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.ram_limit }}
+    {{ $ctrl.resource.ram_limit | filesize }}
   </dd>
 </div>
 
@@ -63,6 +63,6 @@
     <span translate>RAM usage</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.ram_usage }}
+    {{ $ctrl.resource.ram_usage | filesize }}
   </dd>
 </div>
