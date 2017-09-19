@@ -35,7 +35,8 @@ function minutesToHours() {
       return '∞';
     }
 
-    return Math.ceil(input / 60) + ' H';
+    const hours = input / 60;
+    return hours.toFixed(2) + ' H';
   };
 }
 
