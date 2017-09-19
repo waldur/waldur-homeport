@@ -31,21 +31,30 @@ function ProviderStateController($scope) {
   );
 
   function getProviderState(provider) {
+    let providerState;
+
+    if (provider) {
+      providerState = provider.state;
+    }
+
     let context = {
       className: '',
-      label: provider.state,
+      label: providerState || 'N/A',
       tooltip: '',
       movementClassName: ''
     };
 
-    const cls = SERVICE_STATES[provider.state];
+    const cls = SERVICE_STATES[providerState] || 'erred';
 
     if (cls === 'processing') {
       context.movementClassName = 'progress-striped active';
     } else if (cls === 'erred') {
       context.className = 'progress-bar-danger';
-      context.tooltip = provider.error_message;
+      if (provider && provider.tooltip) {
+        context.tooltip = provider.error_message;
+      }
     }
+
     return context;
   }
 }
