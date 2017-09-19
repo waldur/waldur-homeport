@@ -3,6 +3,9 @@ const SlurmAllocationConfig = {
     'name',
     'description',
     'cpu_limit',
+    'gpu_limit',
+    'ram_limit',
+    'billing_label',
   ],
   options: {
     name: {
@@ -21,8 +24,24 @@ const SlurmAllocationConfig = {
     cpu_limit: {
       type: 'integer',
       required: true,
-      label: 'CPU limit, minutes',
+      label: gettext('CPU limit, minutes'),
       default_value: -1,
+    },
+    gpu_limit: {
+      type: 'integer',
+      required: true,
+      label: gettext('GPU limit, minutes'),
+      default_value: -1,
+    },
+    ram_limit: {
+      type: 'integer',
+      required: true,
+      label: gettext('RAM limit, MB'),
+      default_value: -1,
+    },
+    billing_label: {
+      type: 'label',
+      label: gettext('Please note, that actual billing will be usage based.'),
     },
   }
 };

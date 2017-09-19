@@ -19,7 +19,9 @@ export default {
 
     checkUser() {
       this.isAuthenticated = this.authService.isAuthenticated();
-      this.usersService.isCurrentUserValid().then(result => this.isValidUser = result);
+      if (this.isAuthenticated) {
+        this.usersService.isCurrentUserValid().then(result => this.isValidUser = result);
+      }
     }
 
     logout() {
