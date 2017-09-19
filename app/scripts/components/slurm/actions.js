@@ -15,6 +15,18 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
             label: gettext('CPU limit, minutes'),
             required: true,
             resource_default_value: true,
+          },
+          gpu_limit: {
+            type: 'integer',
+            label: gettext('GPU limit, minutes'),
+            required: true,
+            resource_default_value: true,
+          },
+          ram_limit: {
+            type: 'integer',
+            label: gettext('RAM limit, MB'),
+            required: true,
+            resource_default_value: true,
           }
         }
       }),

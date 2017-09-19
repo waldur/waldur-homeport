@@ -5,9 +5,15 @@ function filesize() {
     if (isNaN(parseFloat(input)) || ! isFinite(input)) {
       return '?';
     }
+
+    if (input === -1) {
+      return '∞';
+    }
+
     if (input === 0) {
       return input;
     }
+
     let unit = 0;
 
     while (input >= 1024) {
@@ -16,6 +22,21 @@ function filesize() {
     }
 
     return Math.floor(input * 10) / 10 + ' ' + units[unit];
+  };
+}
+
+function minutesToHours() {
+  return function(input) {
+    if (isNaN(parseInt(input)) || ! isFinite(input)) {
+      return '?';
+    }
+
+    if (input === -1) {
+      return '∞';
+    }
+
+    const hours = input / 60;
+    return hours.toFixed(2) + ' H';
   };
 }
 
@@ -82,4 +103,5 @@ export default module => {
   module.filter('defaultCurrency', defaultCurrency);
   module.filter('shortDate', shortDate);
   module.filter('dateTime', dateTime);
+  module.filter('minutesToHours', minutesToHours);
 };

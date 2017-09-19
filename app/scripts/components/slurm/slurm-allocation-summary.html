@@ -2,10 +2,23 @@
 
 <div class="m-b-xs">
   <dt>
+    <span translate>Login details</span>:
+  </dt>
+  <dd>
+    <span ng-if="!$ctrl.resource.username" translate>
+      <a ui-sref="profile.freeipa">FreeIPA account needs to be set up</a>.
+    </span>
+    <span ng-if="$ctrl.resource.username">
+      {{ $ctrl.resource.username }}@{{ $ctrl.resource.gateway }}
+  </dd>
+</div>
+
+<div class="m-b-xs">
+  <dt>
     <span translate>CPU limit</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.cpu_limit }}
+    {{ $ctrl.resource.cpu_limit | minutesToHours }}
   </dd>
 </div>
 
@@ -14,6 +27,42 @@
     <span translate>CPU usage</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.cpu_usage }}
+    {{ $ctrl.resource.cpu_usage | minutesToHours }}
+  </dd>
+</div>
+
+<div class="m-b-xs">
+  <dt>
+    <span translate>GPU limit</span>:
+  </dt>
+  <dd>
+    {{ $ctrl.resource.gpu_limit | minutesToHours }}
+  </dd>
+</div>
+
+<div class="m-b-xs">
+  <dt>
+    <span translate>GPU usage</span>:
+  </dt>
+  <dd>
+    {{ $ctrl.resource.gpu_usage | minutesToHours }}
+  </dd>
+</div>
+
+<div class="m-b-xs">
+  <dt>
+    <span translate>RAM limit</span>:
+  </dt>
+  <dd>
+    {{ $ctrl.resource.ram_limit | filesize }}
+  </dd>
+</div>
+
+<div class="m-b-xs">
+  <dt>
+    <span translate>RAM usage</span>:
+  </dt>
+  <dd>
+    {{ $ctrl.resource.ram_usage | filesize }}
   </dd>
 </div>

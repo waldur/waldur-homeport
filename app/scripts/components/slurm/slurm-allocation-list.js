@@ -12,7 +12,11 @@ function SlurmAllocationListController(baseResourceListController, $filter, Slur
       this.controllerScope = controllerScope;
       this._super();
       this.service = SlurmAllocationService;
-      this.addRowFields(['cpu_limit', 'cpu_usage']);
+      this.addRowFields([
+        'cpu_limit', 'cpu_usage',
+        'gpu_limit', 'gpu_usage',
+        'ram_limit', 'ram_usage',
+      ]);
     },
     getTableOptions: function() {
       var options = this._super();
@@ -35,12 +39,29 @@ function SlurmAllocationListController(baseResourceListController, $filter, Slur
         },
         {
           title: gettext('CPU limit'),
-          render: row => row.cpu_limit + ' minutes',
+          render: row => $filter('minutesToHours')(row.cpu_limit),
         },
         {
           title: gettext('CPU usage'),
-          render: row => row.cpu_usage + ' minutes',
+          render: row => $filter('minutesToHours')(row.cpu_usage),
         },
+        {
+          title: gettext('GPU limit'),
+          render: row => $filter('minutesToHours')(row.gpu_limit),
+        },
+        {
+          title: gettext('GPU usage'),
+          render: row => $filter('minutesToHours')(row.gpu_usage),
+        },
+        {
+          title: gettext('RAM limit'),
+          render: row => $filter('filesize')(row.ram_limit),
+        },
+        {
+          title: gettext('RAM usage'),
+          render: row => $filter('filesize')(row.ram_usage),
+        },
+
         {
           title: gettext('State'),
           className: 'min-tablet-l',
