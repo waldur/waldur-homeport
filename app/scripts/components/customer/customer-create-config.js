@@ -58,22 +58,16 @@ export default [
     ]
   },
   {
-    name: gettext('Policies'),
-    title: gettext('Setup policies'),
-    icon: 'fa-sitemap',
-    fields: [
-      {
-        name: 'threshold',
-        component: 'customer-threshold-field',
-      },
-    ]
-  },
-  {
     name: gettext('Expert provider'),
     title: gettext('Setup expert provider'),
     icon: 'fa-sitemap',
     feature: 'experts',
     fields: [
+      {
+        name: 'description',
+        type: 'description',
+        description: gettext('Lorem ipsum'),
+      },
       {
         name: 'agree_with_policy',
         type: 'tos',

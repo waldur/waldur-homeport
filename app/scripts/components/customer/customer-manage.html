@@ -105,9 +105,6 @@
         visible-if="'experts'"
         ng-if="ManageController.canRegisterExpertProvider"
         customer="ManageController.customer"></expert-provider-details>
-    <h3 ng-if="!ManageController.canUpdateCustomerPolicies">
-        <span translate>Only staff can update organization policies.</span>
-    </h3>
     <div class="panel panel-default">
         <div class="panel-heading" translate>Organization actions</div>
         <div class="panel-body">

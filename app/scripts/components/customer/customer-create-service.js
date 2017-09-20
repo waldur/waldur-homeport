@@ -2,37 +2,25 @@ import wizardStepsConfig from './customer-create-config';
 
 export default class CustomerCreateService {
   // @ngInject
-  constructor($q, features, customersService, priceEstimatesService, expertsService) {
-    this.$q = $q;
+  constructor(features, customersService, expertsService) {
     this.features = features;
     this.customersService = customersService;
-    this.priceEstimatesService = priceEstimatesService;
     this.expertsService = expertsService;
   }
 
   getSteps() {
-    let steps = angular.copy(wizardStepsConfig);
+    const steps = angular.copy(wizardStepsConfig);
     return steps.filter(step => !step.feature || this.features.isVisible(step.feature));
   }
 
   createCustomer(model) {
-    let customer = this.customersService.$create();
+    const customer = this.customersService.$create();
     angular.extend(customer, this.composeCustomerModel(model));
     return customer.$save().then(customer => {
-      model.threshold.priceEstimate.url = customer.billing_price_estimate.url;
-
-      let promises = [
-        this.priceEstimatesService.update(model.threshold.priceEstimate).then(() => {
-          customer.billing_price_estimate.limit = model.threshold.priceEstimate.limit;
-          customer.billing_price_estimate.threshold = model.threshold.priceEstimate.threshold;
-        })
-      ];
-
-      if (model.agree_with_policy) {
-        promises.push(this.expertsService.register(customer));
+      if (!model.agree_with_policy) {
+        return customer;
       }
-
-      return this.$q.all(promises).then(() => customer);
+      return this.expertsService.register(customer).then(() => customer);
     });
   }
 
