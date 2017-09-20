@@ -92,7 +92,7 @@ msgstr ""
 msgid "{resource_full_name} stop has failed."
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:60
+#: app/scripts/components/resource/state/resource-state-service.js:62
 msgid "{resourceType} has state {resourceState}."
 msgstr ""
 
@@ -209,6 +209,10 @@ msgstr ""
 #: app/scripts/components/resource/actions/action-button-resource.html:3
 #: app/scripts/components/table/responsive-table.js:333
 msgid "Actions"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:21
+msgid "Activating"
 msgstr ""
 
 #: app/scripts/components/issues/issue-navigation-service.js:21
@@ -520,6 +524,10 @@ msgstr ""
 msgid "Attached to"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:2
+msgid "Attaching"
+msgstr ""
+
 #: app/scripts/components/resource/tabs/constants.js:3
 msgid "Audit log"
 msgstr ""
@@ -569,6 +577,10 @@ msgstr ""
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js:57
 #: app/scripts/components/resource/summary/resource-summary-base.html:59
 msgid "Backend ID"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:17
+msgid "Backing up"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:11
@@ -778,6 +790,14 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/actions.js:35
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:2
 msgid "Change VPC package"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:12
+msgid "Changing flavor"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:29
+msgid "Changing password"
 msgstr ""
 
 #: app/scripts/components/resource/monitoring/resource-graphs.js:55
@@ -1114,6 +1134,30 @@ msgstr ""
 msgid "Created at"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:18
+msgid "Creating a backup schedule"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:27
+msgid "Creating a floating IP"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:25
+msgid "Creating a new network"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:28
+msgid "Creating a security group"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:26
+msgid "Creating a subnet"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:3
+msgid "Creating snapshot schedule"
+msgstr ""
+
 #: app/scripts/components/ansible/ansible-jobs-list.js:74
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:89
 #: app/scripts/components/experts/requests/expert-request-project-list.js:79
@@ -1135,7 +1179,7 @@ msgstr ""
 msgid "Current size"
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:69
+#: app/scripts/components/resource/state/resource-state-service.js:71
 msgid "current state on backend: {resourceState}."
 msgstr ""
 
@@ -1172,6 +1216,10 @@ msgstr ""
 
 #: app/scripts/components/user/user-popover-table.html:33
 msgid "Date joined"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:22
+msgid "Deactivating"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html:46
@@ -1226,6 +1274,14 @@ msgstr ""
 
 #: app/scripts/components/user/hooks/hook-details.html:56
 msgid "Destination URL"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:10
+msgid "Destroying"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:9
+msgid "Detaching"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-providers.html:40
@@ -1363,8 +1419,8 @@ msgstr ""
 msgid "Error message"
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:35
-#: app/scripts/components/resource/state/resource-state-service.js:46
+#: app/scripts/components/resource/state/resource-state-service.js:37
+#: app/scripts/components/resource/state/resource-state-service.js:48
 msgid "error message: {errorMessage}"
 msgstr ""
 
@@ -1556,12 +1612,16 @@ msgstr ""
 msgid "Extend OpenStack volume"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:8
+msgid "Extending"
+msgstr ""
+
 #: app/scripts/components/resource/list/resource-vms-list.js:43
 #: app/scripts/components/resource/summary/virtual-machine-summary.html:42
 msgid "External IP"
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:43
+#: app/scripts/components/resource/state/resource-state-service.js:45
 msgid "Failed to operate with backend."
 msgstr ""
 
@@ -1836,6 +1896,10 @@ msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:35
 msgid "Importance"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:7
+msgid "Importing resources"
 msgstr ""
 
 #: app/scripts/components/issues/constants.js:2
@@ -3580,6 +3644,14 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:6
+msgid "Pulling"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:30
+msgid "Pulling quotas"
+msgstr ""
+
 #: app/scripts/components/appstore/appstore-store.html:50
 msgid "Purchase"
 msgstr ""
@@ -3910,7 +3982,7 @@ msgstr ""
 msgid "Resource is gone."
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:28
+#: app/scripts/components/resource/state/resource-state-service.js:30
 msgid "Resource is in sync"
 msgstr ""
 
@@ -3955,8 +4027,16 @@ msgstr ""
 msgid "Resources import has been initiated"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:15
+msgid "Restarting"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-snapshot/module.js:69
 msgid "Restored volumes"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:11
+msgid "Restroing"
 msgstr ""
 
 #: app/scripts/components/billing/invoice-events-dialog.html:13
@@ -4195,7 +4275,7 @@ msgstr ""
 msgid "Service Request"
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:33
+#: app/scripts/components/resource/state/resource-state-service.js:35
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
@@ -4412,6 +4492,10 @@ msgstr ""
 msgid "Start time"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:13
+msgid "Starting"
+msgstr ""
+
 #: app/scripts/components/ansible/ansible-job-summary.html:22
 #: app/scripts/components/ansible/ansible-jobs-list.js:66
 #: app/scripts/components/billing/billing-records-list.js:48
@@ -4458,6 +4542,10 @@ msgstr ""
 
 #: app/scripts/components/resource-import/resource-import-dialog.html:23
 msgid "Step 2. Select resources"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:14
+msgid "Stopping"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-compare-list.js:90
@@ -4579,6 +4667,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:71
 msgid "System volume size"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:5
+msgid "Taking a snapshot"
 msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:59
@@ -5012,6 +5104,30 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:29
 msgid "Updated"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:4
+msgid "Updating"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:20
+msgid "Updating floaating IPs"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:19
+msgid "Updating internal IPs"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:24
+msgid "Updating quotas"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:23
+msgid "Updating rules"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:16
+msgid "Updating security groups"
 msgstr ""
 
 #: app/views/directives/customer-balance.html:36
