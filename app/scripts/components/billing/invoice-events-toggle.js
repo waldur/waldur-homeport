@@ -10,7 +10,7 @@ class InvoiceEventsToggleController {
     return this.$uibModal.open({
       component: 'invoiceEventsDialog',
       resolve: {
-        tenant_uuid: () => this.item.tenant_uuid,
+        item: () => this.item,
       },
       size: 'lg',
     });
