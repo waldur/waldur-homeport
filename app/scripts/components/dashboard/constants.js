@@ -3,6 +3,9 @@
 export const POINTS_COUNT = 25;
 
 export const DASHBOARD_QUOTAS = {
+  nc_project_count: {
+    title: gettext('Projects'),
+  },
   nc_app_count: {
     title: gettext('Applications'),
     feature: 'apps'
@@ -61,6 +64,7 @@ export const PROJECT_DASHBOARD_QUOTAS = [
 ];
 
 export const ORGANIZATION_DASHBOARD_QUOTAS = [
+  'nc_project_count',
   'nc_app_count',
   'nc_vm_count',
   'nc_private_cloud_count',
