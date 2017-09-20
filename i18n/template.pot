@@ -455,7 +455,7 @@ msgstr ""
 #: app/scripts/components/ansible/routes.js:27
 #: app/scripts/components/ansible/sidebar.js:8
 #: app/scripts/components/appstore/routes.js:42
-#: app/scripts/components/dashboard/constants.js:7
+#: app/scripts/components/dashboard/constants.js:10
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
 msgid "Applications"
 msgstr ""
@@ -612,11 +612,11 @@ msgstr ""
 msgid "Base rate"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:35
+#: app/scripts/components/dashboard/constants.js:38
 msgid "Batch CPU usage, hours"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:40
+#: app/scripts/components/dashboard/constants.js:43
 msgid "Batch GPU usage, hours"
 msgstr ""
 
@@ -629,7 +629,7 @@ msgstr ""
 msgid "Batch processing"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:45
+#: app/scripts/components/dashboard/constants.js:48
 msgid "Batch RAM usage, GB"
 msgstr ""
 
@@ -655,7 +655,7 @@ msgstr ""
 msgid "Billing plan agreement is being processed, please wait."
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:19
+#: app/scripts/components/dashboard/constants.js:22
 msgid "Block device count"
 msgstr ""
 
@@ -663,7 +663,7 @@ msgstr ""
 msgid "Block devices"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:27
+#: app/scripts/components/dashboard/constants.js:30
 msgid "Block snapshot count"
 msgstr ""
 
@@ -671,7 +671,7 @@ msgstr ""
 msgid "Block storage"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:23
+#: app/scripts/components/dashboard/constants.js:26
 msgid "Block volume count"
 msgstr ""
 
@@ -3357,7 +3357,7 @@ msgstr ""
 #: app/scripts/components/appstore/routes.js:22
 #: app/scripts/components/configs/base-config.js:36
 #: app/scripts/components/configs/base-config.js:93
-#: app/scripts/components/dashboard/constants.js:15
+#: app/scripts/components/dashboard/constants.js:18
 #: app/scripts/components/project/project-workspace.js:58
 #: app/scripts/components/project/projects-list.js:119
 #: app/scripts/components/project/routes.js:132
@@ -3484,6 +3484,7 @@ msgstr ""
 #: app/scripts/components/appstore/dialog/appstore-project-selector.html:2
 #: app/scripts/components/customer/customer-workspace.js:58
 #: app/scripts/components/customer/routes.js:97
+#: app/scripts/components/dashboard/constants.js:7
 #: app/scripts/components/navigation/select-workspace-dialog.html:93
 #: app/scripts/components/providers/details/dialog.html:28
 msgid "Projects"
@@ -4601,7 +4602,7 @@ msgstr ""
 msgid "Team does not have members yet."
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:31
+#: app/scripts/components/dashboard/constants.js:34
 msgid "Team size"
 msgstr ""
 
@@ -5207,7 +5208,7 @@ msgstr ""
 #: app/scripts/components/configs/base-config.js:114
 #: app/scripts/components/configs/base-config.js:28
 #: app/scripts/components/configs/base-config.js:86
-#: app/scripts/components/dashboard/constants.js:11
+#: app/scripts/components/dashboard/constants.js:14
 #: app/scripts/components/project/project-workspace.js:50
 #: app/scripts/components/project/routes.js:124
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
