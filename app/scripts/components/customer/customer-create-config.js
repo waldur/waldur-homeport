@@ -56,24 +56,25 @@ export default [
         help_text: gettext('Please provide your EU VAT ID if you are registered in the European Union.'),
       },
     ]
-  },
-  {
-    name: gettext('Expert provider'),
-    title: gettext('Setup expert provider'),
-    icon: 'fa-sitemap',
-    feature: 'experts',
-    fields: [
-      {
-        name: 'description',
-        type: 'description',
-        description: gettext('Lorem ipsum'),
-      },
-      {
-        name: 'agree_with_policy',
-        type: 'tos',
-        sref: 'tos.experts',
-        required: false,
-      },
-    ]
   }
+  // Ilja: disabled expert registration on creation for the time being. Should only be done through "Manage" tab
+  // {
+  //   name: gettext('Expert provider'),
+  //   title: gettext('Register as expert provider'),
+  //   icon: 'fa-sitemap',
+  //   feature: 'experts',
+  //   fields: [
+  //     {
+  //       name: 'description',
+  //       type: 'description',
+  //       description: gettext('If you would like to offer services to other organization, please register as Expert provider.'),
+  //     },
+  //     {
+  //       name: 'agree_with_policy',
+  //       type: 'tos',
+  //       sref: 'tos.experts',
+  //       required: false,
+  //     },
+  //   ]
+  // }
 ];
