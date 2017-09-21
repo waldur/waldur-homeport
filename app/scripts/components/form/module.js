@@ -10,6 +10,7 @@ import appstoreFieldInteger from './appstore-field-integer';
 import appstoreFieldBoolean from './appstore-field-boolean';
 import appstoreFieldErrors from './appstore-field-errors';
 import appstoreFieldLabel from './appstore-field-label';
+import appstoreFieldDescription from './appstore-field-description';
 import appstoreFieldList from './appstore-field-list';
 import appstoreFieldMultiselect from './appstore-field-multiselect';
 import appstoreFieldSelect from './appstore-field-select';
@@ -36,6 +37,7 @@ export default module => {
   module.component('appstoreFieldBoolean', appstoreFieldBoolean);
   module.directive('appstoreFieldErrors', appstoreFieldErrors);
   module.directive('appstoreFieldLabel', appstoreFieldLabel);
+  module.directive('appstoreFieldDescription', appstoreFieldDescription);
   module.directive('appstoreFieldList', appstoreFieldList);
   module.component('appstoreFieldMultiselect', appstoreFieldMultiselect);
   module.component('appstoreFieldSelect', appstoreFieldSelect);
