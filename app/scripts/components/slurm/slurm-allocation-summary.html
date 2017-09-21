@@ -15,54 +15,36 @@
 
 <div class="m-b-xs">
   <dt>
-    <span translate>CPU limit</span>:
+    <span translate>Submit with</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.cpu_limit | minutesToHours }}
+    <span class="html-description">sbatch -A {{ $ctrl.resource.backend_id }}</span>
   </dd>
 </div>
 
 <div class="m-b-xs">
   <dt>
-    <span translate>CPU usage</span>:
+    <span translate>CPU</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.cpu_usage | minutesToHours }}
+    {{ $ctrl.resource.cpu_usage | minutesToHours }} of {{ $ctrl.resource.cpu_limit | minutesToHours }}
   </dd>
 </div>
 
 <div class="m-b-xs">
   <dt>
-    <span translate>GPU limit</span>:
+    <span translate>GPU</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.gpu_limit | minutesToHours }}
+    {{ $ctrl.resource.gpu_usage | minutesToHours }} of {{ $ctrl.resource.gpu_limit | minutesToHours }}
   </dd>
 </div>
 
 <div class="m-b-xs">
   <dt>
-    <span translate>GPU usage</span>:
+    <span translate>RAM</span>:
   </dt>
   <dd>
-    {{ $ctrl.resource.gpu_usage | minutesToHours }}
-  </dd>
-</div>
-
-<div class="m-b-xs">
-  <dt>
-    <span translate>RAM limit</span>:
-  </dt>
-  <dd>
-    {{ $ctrl.resource.ram_limit | filesize }}
-  </dd>
-</div>
-
-<div class="m-b-xs">
-  <dt>
-    <span translate>RAM usage</span>:
-  </dt>
-  <dd>
-    {{ $ctrl.resource.ram_usage | filesize }}
+  {{ $ctrl.resource.ram_usage | filesize }} of {{ $ctrl.resource.ram_limit | filesize }}
   </dd>
 </div>

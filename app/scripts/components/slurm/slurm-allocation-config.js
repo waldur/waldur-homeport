@@ -24,26 +24,32 @@ const SlurmAllocationConfig = {
     cpu_limit: {
       type: 'integer',
       required: true,
-      label: gettext('CPU limit, minutes'),
-      default_value: -1,
+      label: gettext('CPU limit'),
+      default_value: 60,
+      factor: 60,
+      units: 'hours',
+      min: 0,
     },
     gpu_limit: {
       type: 'integer',
       required: true,
-      label: gettext('GPU limit, minutes'),
-      default_value: -1,
+      label: gettext('GPU limit'),
+      default_value: 60,
+      factor: 60,
+      units: 'hours',
+      min: 0,
     },
     ram_limit: {
       type: 'integer',
       required: true,
-      label: gettext('RAM limit, MB'),
-      default_value: -1,
+      label: gettext('RAM limit'),
+      default_value: 1024,
+      factor: 1024,
+      units: 'GB',
+      min: 0,
     },
-    billing_label: {
-      type: 'label',
-      label: gettext('Please note, that actual billing will be usage based.'),
-    },
-  }
+  },
+  summaryComponent: 'slurmAllocationCheckoutSummary',
 };
 
 // @ngInject
