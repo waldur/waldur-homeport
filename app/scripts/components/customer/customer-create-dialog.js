@@ -27,7 +27,11 @@ const customerCreateDialog = {
         this.ncUtilsFlash.success(this.$filter('translate')(message));
         this.$state.go('organization.details', {uuid: customer.uuid});
       }).catch(response => {
-        this.model.errors = response.data;
+        if (response.status === 400) {
+          this.model.errors = response.data;
+        } else {
+          this.ncUtilsFlash.errorFromResponse(response, gettext('Could not create organization'));
+        }
       });
     }
   }

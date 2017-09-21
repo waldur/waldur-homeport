@@ -974,6 +974,10 @@ msgstr ""
 msgid "Cost threshold"
 msgstr ""
 
+#: app/scripts/components/customer/customer-create-dialog.js:33
+msgid "Could not create organization"
+msgstr ""
+
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.js:24
 msgid "Could not load a list of identity providers. Please try again."
 msgstr ""
