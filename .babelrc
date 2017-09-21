@@ -3,6 +3,6 @@
     "plugins": [
       "syntax-dynamic-import",
       "transform-object-rest-spread",
-      "transform-es2015-shorthand-properties"
+      "transform-async-to-generator"
     ]
 }

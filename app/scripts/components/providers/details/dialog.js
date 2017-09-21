@@ -23,7 +23,7 @@ const providerDialog = {
           this.settingsVisible = settingsVisible;
           this.loading = false;
           this.$scope.$digest();
-        })
+        });
     }
   }
 };
