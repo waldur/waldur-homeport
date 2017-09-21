@@ -2,6 +2,7 @@
     "presets": ["es2015", "react"],
     "plugins": [
       "syntax-dynamic-import",
-      "transform-object-rest-spread"
+      "transform-object-rest-spread",
+      "transform-async-to-generator"
     ]
 }
