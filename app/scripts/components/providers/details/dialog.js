@@ -8,20 +8,22 @@ const providerDialog = {
     resolve: '<'
   },
   controller: class ProviderDialogController {
-    constructor(joinService) {
-      this.joinService = joinService;
-      this.editable = this.resolve.editable;
+    constructor(ProviderUtilsService, $scope) {
+      this.ProviderUtilsService = ProviderUtilsService;
+      this.$scope = $scope;
     }
 
     $onInit() {
-      if (this.resolve.provider_uuid) {
-        this.loading = true;
-        this.joinService.$get(this.resolve.provider_type, this.resolve.provider_uuid)
-          .then(provider => this.provider = provider)
-          .finally(() => this.loading = false);
-      } else {
-        this.provider = this.resolve.provider;
-      }
+      this.editable = this.resolve.editable;
+      this.loading = true;
+      this.ProviderUtilsService.loadData(this.resolve)
+        .then(({ provider, settings, settingsVisible }) => {
+          this.provider = provider;
+          this.settings = settings;
+          this.settingsVisible = settingsVisible;
+          this.loading = false;
+          this.$scope.$digest();
+        })
     }
   }
 };
