@@ -405,6 +405,7 @@ msgstr ""
 msgid "Allocation has been updated."
 msgstr ""
 
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:14
 #: app/scripts/components/slurm/slurm-allocation-config.js:14
 msgid "Allocation name"
 msgstr ""
@@ -816,6 +817,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:4
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:7
 #: app/scripts/components/premiumSupport/premium-support-summary.html:3
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:7
 msgid "Checkout summary"
 msgstr ""
 
@@ -1000,13 +1002,13 @@ msgid "CPU"
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.html:8
+#: app/scripts/components/slurm/slurm-allocation-config.js:27
 #: app/scripts/components/slurm/slurm-allocation-list.js:41
 #: app/scripts/components/slurm/slurm-allocation-summary.html:18
 msgid "CPU limit"
 msgstr ""
 
 #: app/scripts/components/slurm/actions.js:15
-#: app/scripts/components/slurm/slurm-allocation-config.js:27
 msgid "CPU limit, minutes"
 msgstr ""
 
@@ -1463,6 +1465,10 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:35
+msgid "Estimated maximum price"
+msgstr ""
+
 #: app/scripts/components/configs/base-config.js:206
 msgid "Estonian"
 msgstr ""
@@ -1793,13 +1799,13 @@ msgstr ""
 msgid "Got it!"
 msgstr ""
 
+#: app/scripts/components/slurm/slurm-allocation-config.js:36
 #: app/scripts/components/slurm/slurm-allocation-list.js:49
 #: app/scripts/components/slurm/slurm-allocation-summary.html:36
 msgid "GPU limit"
 msgstr ""
 
 #: app/scripts/components/slurm/actions.js:21
-#: app/scripts/components/slurm/slurm-allocation-config.js:33
 msgid "GPU limit, minutes"
 msgstr ""
 
@@ -2140,6 +2146,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:48
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:44
 #: app/scripts/components/premiumSupport/premium-support-summary.html:31
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:41
 msgid "Invoiced to"
 msgstr ""
 
@@ -3283,7 +3290,7 @@ msgstr ""
 msgid "Please note that request should specify tenant and provide a reason."
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-config.js:44
+#: app/scripts/components/slurm/slurm-allocation-config.js:53
 msgid "Please note, that actual billing will be usage based."
 msgstr ""
 
@@ -3407,6 +3414,22 @@ msgstr ""
 msgid "Price is estimated."
 msgstr ""
 
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:22
+msgid "Price of CPU hour"
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:26
+msgid "Price of GPU hour"
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:30
+msgid "Price of RAM GB"
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:18
+msgid "Price package name"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:11
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:48
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:36
@@ -3490,6 +3513,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:52
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:48
 #: app/scripts/components/premiumSupport/premium-support-summary.html:35
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:45
 msgid "Project"
 msgstr ""
 
@@ -3744,6 +3768,7 @@ msgstr ""
 msgid "RAM"
 msgstr ""
 
+#: app/scripts/components/slurm/slurm-allocation-config.js:45
 #: app/scripts/components/slurm/slurm-allocation-list.js:57
 #: app/scripts/components/slurm/slurm-allocation-summary.html:54
 msgid "RAM limit"
@@ -3754,7 +3779,6 @@ msgid "RAM limit GB"
 msgstr ""
 
 #: app/scripts/components/slurm/actions.js:27
-#: app/scripts/components/slurm/slurm-allocation-config.js:39
 msgid "RAM limit, MB"
 msgstr ""
 
