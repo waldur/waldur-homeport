@@ -60,11 +60,7 @@ function ExpertBidsList(
       return [
         {
           title: gettext('Organization'),
-          render: row => {
-            let avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
-              .replace('{gravatarSrc}', row.customer_email);
-            return avatar + ' ' + row.customer_email || row.name;
-          }
+          render: row => row.customer_name,
         },
         {
           title: gettext('Team'),

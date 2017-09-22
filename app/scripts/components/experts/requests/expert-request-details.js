@@ -5,25 +5,28 @@ const expertRequestProjectDetails = {
   controller: class ExpertRequestProjectDetailsController {
     // ngInject
     constructor($rootScope,
+                $scope,
                 $stateParams,
                 expertRequestsService) {
       this.$rootScope = $rootScope;
+      this.$scope = $scope;
       this.$stateParams = $stateParams;
       this.expertRequestsService = expertRequestsService;
     }
 
     $onInit() {
-      this.loading = true;
-      this.loadExpertRequest().finally(() => {
-        this.loading = false;
-      });
+      this.$scope.$on('reloadExpertRequest', this.loadExpertRequest.bind(this));
+      this.loadExpertRequest();
       this.unlisten = this.$rootScope.$on('refreshExpertDetails', this.loadExpertRequest.bind(this));
     }
 
     loadExpertRequest() {
+      this.loading = true;
       return this.expertRequestsService.$get(this.$stateParams.requestId)
         .then(expertRequest => {
           this.expertRequest = expertRequest;
+        }).finally(() => {
+          this.loading = false;
         });
     }
 
