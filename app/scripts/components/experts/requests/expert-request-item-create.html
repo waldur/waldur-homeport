@@ -1,0 +1,20 @@
+<div ng-if="$ctrl.loading">
+  <loading-spinner/>
+</div>
+<div ng-if="!$ctrl.loading">
+  <expert-contract-create
+      ng-if="$ctrl.contractTemplate"
+      contract-template="$ctrl.contractTemplate"
+      expert="$ctrl.expert"
+      model="$ctrl.model"
+      save="$ctrl.save()"
+      cancle="$ctrl.cancel()"
+      errors="$ctrl.errors"></expert-contract-create>
+  <expert-request-create
+      ng-if="!$ctrl.contractTemplate"
+      expert="$ctrl.expert"
+      model="$ctrl.model"
+      save="$ctrl.save()"
+      cancle="$ctrl.cancel()"
+      errors="$ctrl.errors"></expert-request-create>
+</div>

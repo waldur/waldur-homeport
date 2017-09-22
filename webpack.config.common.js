@@ -134,7 +134,7 @@ module.exports = {
       inject: 'body',
       chunks: ['vendor', 'index'],
       chunksSortMode: function(a, b) {
-         return (a.names[0] < b.names[0]) ? 1 : -1;
+        return (a.names[0] < b.names[0]) ? 1 : -1;
       }
     }),
   ],

@@ -1,18 +1,13 @@
 <div class="wrapper wrapper-content">
   <div class="row">
     <div class="col-sm-12">
-      <div ng-if="$ctrl.loading">
-        <loading-spinner/>
-      </div>
-      <div class="ibox" ng-if="$ctrl.expert">
+      <div class="ibox">
         <div class="ibox-title">
-          <h3>{{ $ctrl.expert.label }}</h3>
-          <p ng-if="$ctrl.expert.summary" ng-bind-html="::$ctrl.expert.summary"></p>
+          <expert-request-create-title expert="$ctrl.expert"></expert-request-create-title>
         </div>
         <div class="ibox-content">
           <appstore-form fields="$ctrl.expert" model="$ctrl.model" errors="$ctrl.errors"/>
         </div>
-
         <div class="ibox-content">
           <button class="btn btn-primary pull-right" submit-button="$ctrl.save()">
             <i class="fa fa-shopping-cart"></i>

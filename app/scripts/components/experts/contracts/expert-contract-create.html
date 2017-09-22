@@ -1,0 +1,35 @@
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox">
+        <div class="ibox-title">
+          <expert-request-create-title expert="$ctrl.expert"></expert-request-create-title>
+        </div>
+        <div class="ibox-content">
+          <form name="$ctrl.mainForm" class="form-horizontal" ng-if="!$ctrl.loading">
+            <expert-contract-form
+                form="$ctrl.mainForm"
+                model="$ctrl.model"
+                expert="$ctrl.expert"
+                errors="$ctrl.errors"
+                contract-template="$ctrl.contractTemplate"></expert-contract-form>
+          </form>
+          <div ng-if="$ctrl.loading">
+            <loading-spinner></loading-spinner>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <button class="btn btn-primary pull-right"
+                  ng-disabled="$ctrl.createButtonDisabled()"
+                  submit-button="$ctrl.submit()">
+            <i class="fa fa-shopping-cart"></i>
+            <span translate>Create</span>
+          </button>
+          <button class="btn btn-default" ng-click="$ctrl.cancel()">
+            <span translate>Cancel</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

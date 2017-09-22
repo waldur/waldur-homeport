@@ -1,47 +1,114 @@
-import template from './expert-bids-list.html';
 
 const expertBidsList = {
-  template,
-  bindings: {
-    expertRequest: '<',
-  },
-  controller: class ExpertBidsListController {
-    // @ngInject
-    constructor($rootScope, expertBidsService) {
-      this.$rootScope = $rootScope;
-      this.expertBidsService = expertBidsService;
-      this.orderBy = 'date';
-      this.orderingFields = [
+  templateUrl: 'views/partials/filtered-list.html',
+  controllerAs: 'ListController',
+  controller: ExpertBidsList,
+};
+
+// @ngInject
+function ExpertBidsList(
+  baseControllerListClass,
+  $q,
+  $scope,
+  $state,
+  $timeout,
+  $filter,
+  $uibModal,
+  customersService,
+  currentStateService,
+  expertRequestsService,
+  expertBidsService) {
+  let controllerScope = this;
+  let Controller = baseControllerListClass.extend({
+    init: function() {
+      this.controllerScope = controllerScope;
+      this.service = expertBidsService;
+      let fn = this._super.bind(this);
+      $scope.$on('refreshBidsList', function() {
+        $timeout(function() {
+          controllerScope.resetCache();
+        });
+      });
+      this.loadContext().then(() => {
+        this.tableOptions = this.getTableOptions();
+        fn();
+      });
+    },
+    loadContext: function() {
+      return $q.all([
+        currentStateService.getProject().then(project => {
+          this.project = project;
+        }),
+        expertRequestsService.$get($state.params.requestId).then(expertRequest => {
+          this.expertRequest = expertRequest;
+        }),
+        customersService.isOwnerOrStaff()
+          .then(canManageRequest => this.canManageRequest = canManageRequest),
+      ]);
+    },
+    getTableOptions: function() {
+      return {
+        searchFieldName: 'team_name',
+        disableSearch: true,
+        noDataText: gettext('There are no bids yet.'),
+        enableOrdering: false,
+        columns: this.getColumns(),
+        rowActions: this.getRowActions(),
+      };
+    },
+    getColumns: function() {
+      return [
         {
-          name: 'date',
-          label: gettext('Sort by date'),
+          title: gettext('Organization'),
+          render: row => {
+            let avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+              .replace('{gravatarSrc}', row.customer_email);
+            return avatar + ' ' + row.customer_email || row.name;
+          }
         },
         {
-          name: 'price',
-          label: gettext('Sort by price'),
-        }
+          title: gettext('Team'),
+          render: row => row.team_name,
+        },
+        {
+          title: gettext('Price'),
+          render: row => $filter('defaultCurrency')(row.price) || 'N/A',
+        },
+        {
+          title: gettext('Created'),
+          render: row => $filter('dateTime')(row.created) || 'N/A'
+        },
       ];
-    }
+    },
+    getRowActions: function() {
+      let expertRequest = this.expertRequest;
 
-    $onInit() {
-      this.fetchData();
-      this.unlisten = this.$rootScope.$on('refreshBidsList', this.fetchData.bind(this));
-    }
-
-    $onDestroy() {
-      this.unlisten();
-    }
-
-    fetchData() {
-      this.loading = true;
-      const filter = {
+      if (this.canManageRequest) {
+        return [
+          {
+            title: gettext('View details'),
+            iconClass: 'fa fa-info',
+            callback: row => {
+              $uibModal.open({
+                component: 'expert-bid',
+                resolve: {
+                  bid: () => row,
+                  expertRequest: () => expertRequest,
+                }
+              });
+            },
+          },
+        ];
+      }
+    },
+    getFilter: function() {
+      return {
         request_uuid: this.expertRequest.uuid,
       };
-      return this.expertBidsService.getAll(filter)
-      .then(list => this.list = list)
-      .finally(() => this.loading = false);
-    }
-  }
-};
+    },
+
+  });
+  controllerScope.__proto__ = new Controller();
+}
 
 export default expertBidsList;

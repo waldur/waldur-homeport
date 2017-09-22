@@ -7,7 +7,7 @@ export default function appstoreForm() {
     scope: {
       fields: '=',
       model: '=',
-      errors: '='
+      errors: '<'
     },
     controller: AppstoreFormController,
     controllerAs: '$ctrl',
@@ -35,9 +35,5 @@ class AppstoreFormController {
         field.init(field, model);
       }
     });
-  }
-
-  renderLabel(field) {
-    return field.type != 'boolean' && field.type != 'label';
   }
 }

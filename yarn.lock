@@ -225,6 +225,10 @@ angular-scroll@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/angular-scroll/-/angular-scroll-1.0.2.tgz#2768ff35dbe1ce40e0c3fbedd4534888299c3e2d"
 
+angular-summernote@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/angular-summernote/-/angular-summernote-0.8.1.tgz#13886e03a20281bb735d8547cfbc0f8851ab6a2b"
+
 angular-translate-loader-static-files@~2.7.2:
   version "2.7.2"
   resolved "https://registry.yarnpkg.com/angular-translate-loader-static-files/-/angular-translate-loader-static-files-2.7.2.tgz#1254c6b90a231ba7f0eb846ccb13c5afee09807f"
@@ -1514,6 +1518,10 @@ coa@~1.0.1:
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
+
+codemirror@^5.29.0:
+  version "5.29.0"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.29.0.tgz#e68de1350e2f0ce804a3930576d0ae318736e967"
 
 coffee-script@~1.3.3:
   version "1.3.3"
@@ -6940,6 +6948,12 @@ style-loader@^0.13.1:
   resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-0.13.2.tgz#74533384cf698c7104c7951150b49717adc2f3bb"
   dependencies:
     loader-utils "^1.0.2"
+
+summernote@^0.8.8:
+  version "0.8.8"
+  resolved "https://registry.yarnpkg.com/summernote/-/summernote-0.8.8.tgz#3244ff945e5ac1670519d4b0c418e403411cae3e"
+  dependencies:
+    bootstrap "^3.3.7"
 
 supports-color@^2.0.0:
   version "2.0.0"

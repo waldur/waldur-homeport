@@ -1,35 +1,37 @@
-<div class="ibox">
-  <div class="ibox-title">
-    <h5>{{ $ctrl.bid.team_name }}</h5>
-    <button
-      class="pull-right btn btn-primary btn-xs"
-      ng-click="$ctrl.accept()"
-      ng-if="$ctrl.canManageRequest"
-      translate>ACCEPT</button>
-  </div>
-  <div class="ibox-content">
-    <div class="team-members">
-      <a ng-repeat="user in $ctrl.bid.team_members"
-         ng-click="$ctrl.openUserDetails(user)">
+<div class="modal-header">
+  <h3>{{$ctrl.bid.customer_name}} | {{ $ctrl.bid.team_name }}</h3>
+</div>
+<div class="modal-body">
+  <div class="team-members">
+      <span ng-repeat="user in $ctrl.bid.team_members">
         <img class="img-circle m-r-sm img-sm"
-             gravatar-src="user.email"
-             gravatar-size="32"
-             uib-tooltip="{{ user.full_name }}">
-      </a>
+         gravatar-src="user.email"
+         gravatar-size="32"
+         uib-tooltip="{{ user.full_name }}">
+      </span>
+  </div>
+  <h4 translate ng-if="$ctrl.bid.description">Bid description</h4>
+  <p slimscroll height="200">{{ $ctrl.bid.description }}</p>
+  <div class="row m-t-sm">
+    <div class="col-sm-6">
+      <div class="font-bold" translate>SUBMITTED</div>
+      <span uib-tooltip="{{ ::$ctrl.bid.created | dateTime }}"
+        am-time-ago="::$ctrl.bid.created"></span>
     </div>
-    <h4 translate ng-if="$ctrl.bid.description">Bid description</h4>
-    <p slimscroll height="200">{{ $ctrl.bid.description }}</p>
-    <div class="row m-t-sm">
-      <div class="col-sm-6">
-        <div class="font-bold" translate>SUBMITTED</div>
-        <span
-          uib-tooltip="{{ ::$ctrl.bid.created | dateTime }}"
-          am-time-ago="::$ctrl.bid.created"></span>
-      </div>
-      <div class="col-sm-6 text-right">
-        <div class="font-bold" translate>PRICE</div>
-        {{ $ctrl.bid.price | defaultCurrency }}
-      </div>
+    <div class="col-sm-6 text-right">
+      <div class="font-bold" translate>PRICE</div>
+      {{ $ctrl.bid.price | defaultCurrency }}
     </div>
   </div>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary"
+    ng-disabled="$ctrl.loading"
+    ng-if="$ctrl.canAccept()"
+    submit-button="$ctrl.accept()">
+    <span translate>Accept</span>
+  </button>
+  <button type="button" class="btn btn-default" ng-click="$ctrl.dismiss()">
+    <span translate>Cancel</span>
+  </button>
 </div>

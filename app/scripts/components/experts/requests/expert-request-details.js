@@ -24,10 +24,6 @@ const expertRequestProjectDetails = {
       return this.expertRequestsService.$get(this.$stateParams.requestId)
         .then(expertRequest => {
           this.expertRequest = expertRequest;
-          this.issue = {
-            uuid: this.expertRequest.issue_uuid,
-            url: this.expertRequest.issue,
-          };
         });
     }
 

@@ -95,7 +95,15 @@ function dateTime() {
   };
 }
 
+// @ngInject
+function decodeHtml($sce) {
+  return function(value) {
+    return $sce.trustAsHtml(angular.element('<span>').html(value).text());
+  };
+}
+
 export default module => {
+  module.filter('decodeHtml', decodeHtml);
   module.filter('filesize', filesize);
   module.filter('titleCase', titleCase);
   module.filter('snakeCase', snakeCase);

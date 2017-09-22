@@ -1,0 +1,18 @@
+<div>
+  <div ng-if="$ctrl.loading">
+    <loading-spinner/>
+  </div>
+  <uib-tabset ng-if="!$ctrl.loading" active="active">
+    <uib-tab index="$index" ng-repeat="tab in $ctrl.tabs" select="$ctrl.tabSelectionChanged()">
+      <uib-tab-heading>{{tab.label}}
+        <span ng-if="tab.required" class="text-danger">*</span>
+      </uib-tab-heading>
+      <div class="panel-body">
+        <appstore-form-fieldset fields="tab.options"
+                                model="$ctrl.model"
+                                errors="$ctrl.errors"
+                                form="$ctrl.form"></appstore-form-fieldset>
+      </div>
+    </uib-tab>
+  </uib-tabset>
+</div>

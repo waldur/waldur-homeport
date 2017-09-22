@@ -7,9 +7,16 @@ import expertRequestHeader from './expert-request-header';
 import expertRequestSummary from './expert-request-summary';
 import expertRequestCreate from './expert-request-create';
 import expertRequestCancel from './expert-request-cancel';
+import expertRequestComplete from './expert-request-complete';
+import expertRequestComplain from './expert-request-complain';
+import expertRequestCreateTitle from './expert-request-create-title';
+import expertRequestItemCreate from './expert-request-item-create';
+import expertRequestTabs from './expert-request-tabs';
+import billingType from './billing-type';
 
 export default module => {
   module.service('expertRequestsService', expertRequestsService);
+  module.component('billingType', billingType);
   module.component('expertRequestsCustomerList', expertRequestsCustomerList);
   module.component('expertRequestsProjectList', expertRequestsProjectList);
   module.component('expertRequestHeader', expertRequestHeader);
@@ -18,4 +25,9 @@ export default module => {
   module.component('expertRequestState', expertRequestState);
   module.component('expertRequestDetails', expertRequestDetails);
   module.component('expertRequestCancel', expertRequestCancel);
+  module.component('expertRequestComplete', expertRequestComplete);
+  module.component('expertRequestComplain', expertRequestComplain);
+  module.component('expertRequestCreateTitle', expertRequestCreateTitle);
+  module.component('expertRequestItemCreate', expertRequestItemCreate);
+  module.component('expertRequestTabs', expertRequestTabs);
 };

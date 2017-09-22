@@ -1,5 +1,6 @@
 import appstoreForm from './appstore-form';
 import appstoreField from './appstore-field';
+import appstoreFieldHtmlText from './appstore-field-html-text';
 import appstoreFieldString from './appstore-field-string';
 import appstoreFieldEmail from './appstore-field-email';
 import appstoreFieldTel from './appstore-field-tel';
@@ -7,6 +8,7 @@ import appstoreFieldTos from './appstore-field-tos';
 import appstoreFieldPassword from './appstore-field-password';
 import appstoreFieldText from './appstore-field-text';
 import appstoreFieldInteger from './appstore-field-integer';
+import appstoreFieldMoney from './appstore-field-money';
 import appstoreFieldBoolean from './appstore-field-boolean';
 import appstoreFieldErrors from './appstore-field-errors';
 import appstoreFieldLabel from './appstore-field-label';
@@ -21,11 +23,14 @@ import fieldLabel from './field-label';
 import helpicon from './help-icon';
 import multiplyBy from './multiply-by';
 import choicesTable from './choices-table';
+import appstoreFormFieldset from './appstore-form-fieldset';
 
 export default module => {
   module.service('formUtils', FormUtils);
   module.directive('appstoreForm', appstoreForm);
   module.directive('appstoreField', appstoreField);
+  module.component('appstoreFormFieldset', appstoreFormFieldset);
+  module.component('appstoreFieldHtmlText', appstoreFieldHtmlText);
   module.component('appstoreFieldString', appstoreFieldString);
   module.component('appstoreFieldEmail', appstoreFieldEmail);
   module.component('appstoreFieldTel', appstoreFieldTel);
@@ -34,6 +39,7 @@ export default module => {
   module.directive('appstoreFieldText', appstoreFieldText);
   module.component('appstoreFormWizard', appstoreFormWizard);
   module.component('appstoreFieldInteger', appstoreFieldInteger);
+  module.component('appstoreFieldMoney', appstoreFieldMoney);
   module.component('appstoreFieldBoolean', appstoreFieldBoolean);
   module.directive('appstoreFieldErrors', appstoreFieldErrors);
   module.directive('appstoreFieldLabel', appstoreFieldLabel);

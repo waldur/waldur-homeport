@@ -40,6 +40,14 @@ const issueCreateDialog = {
       });
     }
 
+    getDescription() {
+      if (this.resolve.issue.additionalDetails) {
+        return `${this.issue.description}. \n\nRequest details: ${this.resolve.issue.additionalDetails}`;
+      }
+
+      return this.issue.description;
+    }
+
     save() {
       this.IssueForm.$submitted = true;
       if (this.IssueForm.$invalid) {
@@ -48,7 +56,7 @@ const issueCreateDialog = {
       let issue = {
         type: this.issue.type,
         summary: this.issue.summary,
-        description: this.issue.description,
+        description: this.getDescription(),
         is_reported_manually: true
       };
       if (this.issue.customer) {

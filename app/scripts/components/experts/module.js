@@ -4,6 +4,7 @@ import bidsModule from './bids/module';
 import requestsModule from './requests/module';
 import extensionsModule from './extensions/module';
 import expertRequestRoutes from './routes';
+import contracts from './contracts/module';
 
 export default module => {
   module.service('expertsService', expertsService);
@@ -12,4 +13,5 @@ export default module => {
   requestsModule(module);
   bidsModule(module);
   extensionsModule(module);
+  contracts(module);
 };

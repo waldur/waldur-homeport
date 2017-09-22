@@ -1,41 +1,45 @@
 import template from './expert-bid.html';
+import { STATE } from './../requests/constants';
 
 const expertBid = {
   template,
   bindings: {
-    bid: '<',
+    resolve: '<',
+    dismiss: '&',
+    close: '&',
   },
   controller: class ExpertBidDetailsController {
     // @ngInject
-    constructor($uibModal, expertBidsService, $rootScope, ncUtilsFlash, customersService) {
+    constructor($uibModal, expertBidsService, ncUtilsFlash, customersService) {
       this.$uibModal = $uibModal;
       this.expertBidsService = expertBidsService;
-      this.$rootScope = $rootScope;
       this.ncUtilsFlash = ncUtilsFlash;
       this.customersService = customersService;
     }
 
     $onInit() {
+      this.loading = false;
+      this.bid = this.resolve.bid;
+      this.expertRequest = this.resolve.expertRequest;
       this.customersService.isOwnerOrStaff()
         .then(canManageRequest => this.canManageRequest = canManageRequest);
     }
 
-    openUserDetails(user) {
-      this.$uibModal.open({
-        component: 'userPopover',
-        resolve: {
-          user_uuid: () => user.uuid
-        }
-      });
+    canAccept() {
+      return this.canManageRequest && this.expertRequest.state === STATE.PENDING;
     }
 
     accept() {
+      this.loading = true;
       this.expertBidsService.accept(this.bid.url).then(() => {
+        this.expertBidsService.clearAllCacheForCurrentEndpoint();
         this.ncUtilsFlash.success(gettext('Expert bid has been accepted.'));
-        this.$rootScope.$broadcast('refreshExpertDetails');
       }).catch(response => {
         let aggregatedError = response.data.join();
         this.ncUtilsFlash.error(gettext('Expert bid could not be accepted.') + ` Reason: ${aggregatedError}`);
+      }).finally(() => {
+        this.loading = false;
+        this.close();
       });
     }
   }
