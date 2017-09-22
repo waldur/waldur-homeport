@@ -3,7 +3,7 @@ export default function expertRequestsRoutes($stateProvider) {
   $stateProvider
     .state('appstore.expert', {
       url: 'experts/:category/',
-      template: '<expert-request-item-create></expert-request-item-create>',
+      template: '<expert-request-create></expert-request-create>',
       data: {
         category: 'experts',
         pageTitle: gettext('Create expert request'),

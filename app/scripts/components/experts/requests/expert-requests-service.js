@@ -27,11 +27,6 @@ export default function expertRequestsService(baseServiceClass, $q, $http, ENV) 
       return $http.get(`${ENV.apiEndpoint}api${this.endpoint}configured/`)
         .then(response => response.data);
     },
-
-    getContractTemplate: function () {
-      return $http.get(`${ENV.apiEndpoint}api${this.endpoint}contract_template/`)
-        .then(response => response.data);
-    }
   });
   return new ServiceClass();
 }
