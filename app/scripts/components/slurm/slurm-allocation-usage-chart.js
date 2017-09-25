@@ -22,6 +22,9 @@ export default function slurmAllocationUsageChart() {
               mode: 'index',
               intersect: false
             },
+            legend: {
+              display: false
+            },
             scales: {
               xAxes: [{
                 stacked: true,
