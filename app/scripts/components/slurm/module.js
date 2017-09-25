@@ -8,6 +8,7 @@ import SlurmPackagesService from './slurm-packages-service';
 import slurmAllocationList from './slurm-allocation-list';
 import slurmAllocationSummary from './slurm-allocation-summary';
 import slurmAllocationCheckoutSummary from './slurm-allocation-checkout-summary';
+import quotaPie from './quota-pie';
 
 export default module => {
   module.config(slurmRoutes);
@@ -20,4 +21,5 @@ export default module => {
   module.component('slurmAllocationList', slurmAllocationList);
   module.component('slurmAllocationSummary', slurmAllocationSummary);
   module.component('slurmAllocationCheckoutSummary', slurmAllocationCheckoutSummary);
+  module.directive('quotaPie', quotaPie);
 };
