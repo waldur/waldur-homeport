@@ -859,7 +859,7 @@ msgstr ""
 #: app/scripts/components/billing/invoice-events-dialog.html:45
 #: app/scripts/components/customer/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
-#: app/scripts/components/slurm/slurm-allocation-details-dialog.html:39
+#: app/scripts/components/slurm/slurm-allocation-details-dialog.html:10
 msgid "Close"
 msgstr ""
 
@@ -991,7 +991,7 @@ msgstr ""
 msgid "Cost threshold"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-details-dialog.js:40
+#: app/scripts/components/slurm/slurm-allocation-usage-table.js:40
 msgid "Costs"
 msgstr ""
 
@@ -1024,7 +1024,7 @@ msgstr ""
 msgid "CPU limit, minutes"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-details-dialog.js:44
+#: app/scripts/components/slurm/slurm-allocation-usage-table.js:44
 msgid "CPU usage"
 msgstr ""
 
@@ -1734,6 +1734,7 @@ msgid "Floating IP count"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/breadcrumbs.js:21
+#: app/scripts/components/openstack/openstack-tenant/tabs.js:21
 msgid "Floating IPs"
 msgstr ""
 
@@ -1823,7 +1824,7 @@ msgstr ""
 msgid "GPU limit, minutes"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-details-dialog.js:48
+#: app/scripts/components/slurm/slurm-allocation-usage-table.js:48
 msgid "GPU usage"
 msgstr ""
 
@@ -2551,6 +2552,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:122
 #: app/scripts/components/openstack/openstack-network/breadcrumbs.js:22
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:23
+#: app/scripts/components/openstack/openstack-tenant/tabs.js:13
 msgid "Networks"
 msgstr ""
 
@@ -3758,6 +3760,7 @@ msgstr ""
 msgid "Quota usage exceeds limit."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/tabs.js:25
 #: app/scripts/components/providers/details/dialog.html:22
 msgid "Quotas"
 msgstr ""
@@ -3790,7 +3793,7 @@ msgstr ""
 msgid "RAM limit, MB"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-details-dialog.js:52
+#: app/scripts/components/slurm/slurm-allocation-usage-table.js:52
 msgid "RAM usage"
 msgstr ""
 
@@ -4197,6 +4200,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:102
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 #: app/scripts/components/openstack/openstack-security-groups/breadcrumbs.js:21
+#: app/scripts/components/openstack/openstack-tenant/tabs.js:17
 msgid "Security groups"
 msgstr ""
 

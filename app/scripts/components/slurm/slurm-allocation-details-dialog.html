@@ -3,30 +3,7 @@
 </div>
 <div>
   <div class="modal-body">
-    <div class="row">
-      <div class="col-md-9">
-        <div class="tabs-container" ng-if="!$ctrl.loading">
-          <uib-tabset active="active">
-            <uib-tab ng-repeat="chart in $ctrl.charts" index="$index">
-              <uib-tab-heading>{{ chart.name }}</uib-tab-heading>
-              <div class="panel-body" ng-if="active==$index">
-                <slurm-allocation-usage-chart items="chart.items"/></slurm-allocation-usage-chart>
-              </div>
-            </uib-tab>
-          </uib-tabset>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <ul class="list-unstyled">
-          <li ng-repeat="user in $ctrl.users" uib-tooltip="{{ user.freeipa_name }}">
-            <span
-              class="slurm-allocation-usage-chart-indicator"
-              ng-style="{'background-color': user.color}"></span>
-            {{ user.full_name }}
-          </li>
-        </ul>
-      </div>
-    </div>
+    <slurm-allocation-usage-table/>
   </div>
   <div class="modal-footer">
     <button class="btn btn-default" type="button" ng-click="$ctrl.close()">
