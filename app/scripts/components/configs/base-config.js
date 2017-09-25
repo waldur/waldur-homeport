@@ -196,6 +196,12 @@ const ENV = {
     'email'
   ],
 
+  userRegistrationHiddenFields: [
+    'registration_method',
+    'job_title',
+    'phone_number',
+  ],
+
   languageChoices: [
     {
       code: 'en',
