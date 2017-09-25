@@ -70,7 +70,7 @@ function SlurmAllocationListController(
       const template = usage >= 0 ? gettext('{usage} of {limit}') : '0';
       const tooltip = coreUtils.templateFormatter(template, context);
       const percent = Math.min(1, limit > 0 ? usage / limit : 0);
-      return `<quota-pie value="${percent}" title="${tooltip}"/>`;
+      return `<span uib-tooltip="${tooltip}"><quota-pie value="${percent}"/></span>`;
     },
     getTableActions: function() {
       return [this.getCreateAction()];
