@@ -25,8 +25,8 @@ export default [
     ]
   },
   {
-    name: gettext('Accounting'),
-    title: gettext('Accounting details'),
+    name: gettext('Billing'),
+    title: gettext('Billing details'),
     icon: 'fa-sitemap',
     fields: [
       {
