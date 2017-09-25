@@ -21,7 +21,10 @@ module.exports = {
     ],
     'quotes': [
       'error',
-      'single'
+      'single',
+      {
+        'allowTemplateLiterals': true
+      }
     ],
     'semi': [
       'error',
