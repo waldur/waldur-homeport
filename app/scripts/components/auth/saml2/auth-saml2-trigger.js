@@ -2,6 +2,9 @@ import template from './auth-saml2-trigger.html';
 
 const authSaml2Trigger = {
   template,
+  bindings: {
+    mode: '<',
+  },
   controller: class AuthSaml2TriggerController {
     constructor($uibModal) {
       this.$uibModal = $uibModal;
