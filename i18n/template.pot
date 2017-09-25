@@ -4299,7 +4299,7 @@ msgid "Select Virtual Private Cloud package"
 msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:3
-#: app/scripts/components/navigation/select-workspace-toggle.html:8
+#: app/scripts/components/navigation/select-workspace-toggle.html:10
 msgid "Select workspace"
 msgstr ""
 
@@ -5482,7 +5482,7 @@ msgstr ""
 msgid "You do not have permissions to create private cloud for current project."
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-toggle.js:66
+#: app/scripts/components/navigation/select-workspace-toggle.js:67
 msgid "You don't have any organization yet."
 msgstr ""
 
