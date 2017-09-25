@@ -11,9 +11,11 @@ import storeLastState from './store-state';
 import callbacksModule from './callbacks/module';
 import estonianIdModule from './estonianId/module';
 import saml2Module from './saml2/module';
+import authButtonText from './auth-button-text';
 
 export default module => {
   module.service('authService', authService);
+  module.component('authButtonText', authButtonText);
   module.component('authLogin', authLogin);
   module.component('poweredBy', poweredBy);
   module.component('authInit', authInit);

@@ -41,7 +41,7 @@ export const userEdit = {
       if (this.UserForm.$invalid) {
         return this.$q.reject();
       }
-      if (!this.user.agreement_date) {
+      if (this.initial) {
         this.user.agree_with_policy = true;
       }
 
@@ -57,7 +57,7 @@ export const userEdit = {
     }
 
     isVisible(field) {
-      if (this.user.agreement_date) {
+      if (!this.initial) {
         return true;
       }
 

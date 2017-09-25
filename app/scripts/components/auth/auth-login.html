@@ -81,29 +81,29 @@
     <div ng-if="auth.showGoogle()" class="m-b-sm">
         <button ng-click="auth.authenticate('google')" class="btn btn-google btn-block">
             <i class="fa fa-google-plus-square" aria-hidden="true"></i>
-            <span translate>Sign in with Google</span>
+            <auth-button-text mode="auth.mode" provider="Google"/>
         </button>
     </div>
     <div ng-if="auth.showFacebook()" class="m-b-sm">
         <button ng-click="auth.authenticate('facebook')" class="btn btn-facebook btn-block">
             <i class="fa fa-facebook-square" aria-hidden="true"></i>
-            <span translate>Sign in with Facebook</span>
+            <auth-button-text mode="auth.mode" provider="Facebook"/>
         </button>
     </div>
     <div ng-if="auth.showSmartId()" class="m-b-sm">
         <button ng-click="auth.authenticate('smartid')" class="btn btn-smartid btn-block">
             <i class="fa fa-id-card-o" aria-hidden="true"></i>
-            <span translate>Sign in with SmartID</span>
+            <auth-button-text mode="auth.mode" provider="SmartID"/>
         </button>
     </div>
     <div ng-if="auth.showSaml2()">
-        <auth-saml2/>
+        <auth-saml2 mode="auth.mode"/>
     </div>
     <div ng-if="auth.showSaml2Providers()">
-        <auth-saml2-trigger/>
+        <auth-saml2-trigger mode="auth.mode"/>
     </div>
     <div ng-if="auth.showEstonianId()">
-        <auth-estonian-id/>
+        <auth-estonian-id mode="auth.mode"/>
     </div>
     <div class="form-group m-b-sm" ng-if="auth.showRegisterButton()">
         <p><small translate>Do not have an account?</small></p>

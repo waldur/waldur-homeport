@@ -3,7 +3,7 @@
         <input type="hidden" name="idp" value="{{ $ctrl.provider }}" />
         <button type="submit" class="btn btn-saml2 btn-block">
             <i class="fa fa-university" aria-hidden="true"></i>
-            {{ ::$ctrl.buttonLabel }}
+            <auth-button-text mode="$ctrl.mode" provider="{{$ctrl.providerLabel}}"/>
         </button>
     </form>
 </div>

@@ -3834,6 +3834,10 @@ msgstr ""
 msgid "Register to"
 msgstr ""
 
+#: app/scripts/components/auth/auth-button-text.js:9
+msgid "Register with"
+msgstr ""
+
 #: app/scripts/components/experts/expert-provider-details.html:26
 msgid "Registered"
 msgstr ""
@@ -4386,32 +4390,8 @@ msgstr ""
 msgid "Sign a support agreement"
 msgstr ""
 
-#: app/scripts/components/auth/saml2/auth-saml2.js:15
-msgid "Sign in with {provider}"
-msgstr ""
-
-#: app/scripts/components/auth/saml2/auth-saml2-trigger.html:4
-msgid "Sign in with eduGAIN"
-msgstr ""
-
-#: app/scripts/components/auth/auth-login.html:90
-msgid "Sign in with Facebook"
-msgstr ""
-
-#: app/scripts/components/auth/auth-login.html:84
-msgid "Sign in with Google"
-msgstr ""
-
-#: app/scripts/components/auth/estonianId/auth-estonian-id.html:6
-msgid "Sign in with ID card"
-msgstr ""
-
-#: app/scripts/components/auth/estonianId/auth-estonian-id.html:15
-msgid "Sign in with Mobile ID"
-msgstr ""
-
-#: app/scripts/components/auth/auth-login.html:96
-msgid "Sign in with SmartID"
+#: app/scripts/components/auth/auth-button-text.js:9
+msgid "Sign in with"
 msgstr ""
 
 #: app/scripts/components/azure/azure-virtual-machine-config.js:37
