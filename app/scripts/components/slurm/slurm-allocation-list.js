@@ -52,7 +52,7 @@ function SlurmAllocationListController(
         },
         {
           title: gettext('RAM'),
-          render: row => this.formatQuota('filesize', row.ram_limit, row.ram_limit),
+          render: row => this.formatQuota('filesize', row.ram_limit, row.ram_usage),
         },
         {
           title: gettext('State'),
@@ -67,8 +67,10 @@ function SlurmAllocationListController(
         limit: $filter(filter)(limit),
         usage: $filter(filter)(usage),
       };
-      const template = gettext('{usage} of {limit}');
-      return coreUtils.templateFormatter(template, context);
+      const template = usage >= 0 ? gettext('{usage} of {limit}') : '0';
+      const tooltip = coreUtils.templateFormatter(template, context);
+      const percent = Math.min(1, limit > 0 ? usage / limit : 0);
+      return `<span uib-tooltip="${tooltip}"><quota-pie value="${percent}"/></span>`;
     },
     getTableActions: function() {
       return [this.getCreateAction()];
