@@ -2,11 +2,20 @@
 export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('SLURM.Allocation', {
     order: [
+      'details',
       'edit',
       'cancel',
       'destroy'
     ],
     options: {
+      details: {
+        title: gettext('Details'),
+        component: 'slurmAllocationDetailsDialog',
+        enabled: true,
+        useResolve: true,
+        type: 'form',
+        dialogSize: 'lg',
+      },
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: gettext('Allocation has been updated.'),
         fields: {

@@ -14,3 +14,11 @@ export function randomInteger(start, end) {
 export function randomId() {
   return Math.floor((1 + Math.random()) * 0x100000).toString(10).toUpperCase();
 }
+
+export function getRandomDataset(n, start, end) {
+  let points = [];
+  for (let i = 0; i < n; i++) {
+    points.push(randomInteger(start, end));
+  }
+  return points;
+}
