@@ -8,6 +8,8 @@ import SlurmPackagesService from './slurm-packages-service';
 import slurmAllocationList from './slurm-allocation-list';
 import slurmAllocationSummary from './slurm-allocation-summary';
 import slurmAllocationCheckoutSummary from './slurm-allocation-checkout-summary';
+import slurmAllocationDetailsDialog from './slurm-allocation-details-dialog';
+import slurmAllocationUsageChart from './slurm-allocation-usage-chart';
 import quotaPie from './quota-pie';
 
 export default module => {
@@ -21,5 +23,7 @@ export default module => {
   module.component('slurmAllocationList', slurmAllocationList);
   module.component('slurmAllocationSummary', slurmAllocationSummary);
   module.component('slurmAllocationCheckoutSummary', slurmAllocationCheckoutSummary);
+  module.component('slurmAllocationDetailsDialog', slurmAllocationDetailsDialog);
+  module.directive('slurmAllocationUsageChart', slurmAllocationUsageChart);
   module.directive('quotaPie', quotaPie);
 };

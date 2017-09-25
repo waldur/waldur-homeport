@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h3 class="modal-title" translate>SLURM allocation usage</h3>
+</div>
+<div>
+  <div class="modal-body">
+    <div class="tabs-container" ng-if="!$ctrl.loading">
+      <uib-tabset active="active">
+        <uib-tab ng-repeat="chart in $ctrl.charts" index="$index">
+          <uib-tab-heading>{{ chart.name }}</uib-tab-heading>
+          <div class="panel-body" ng-if="active==$index">
+            <slurm-allocation-usage-chart items="chart.items"/>
+          </div>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$ctrl.close()">
+      <span translate>Close</span>
+    </button>
+  </div>
+</div>
