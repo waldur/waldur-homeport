@@ -7,7 +7,7 @@ const labelClasses = {
 
 const ansibleJobState = {
   template: `
-  <div class="progress pull-left m-b-none">
+  <div class="progress state-indicator m-b-none">
     <span class="progress-bar p-w-sm full-width" ng-class="$ctrl.getLabelClass()">
       {{ $ctrl.model.state | translate | uppercase }}
     </span>
