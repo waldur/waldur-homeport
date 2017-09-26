@@ -206,7 +206,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/paypal/paypal-invoice-actions.html:3
 #: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/components/table/responsive-table.js:333
+#: app/scripts/components/table/responsive-table.js:337
 msgid "Actions"
 msgstr ""
 
@@ -518,7 +518,7 @@ msgstr ""
 msgid "Assignee"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:50
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:55
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:16
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:58
 msgid "Attached to"
@@ -697,6 +697,7 @@ msgid "bootable"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js:57
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:51
 msgid "Bootable"
 msgstr ""
 
@@ -1657,7 +1658,7 @@ msgstr ""
 msgid "Explain plan"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:171
+#: app/scripts/components/table/responsive-table.js:175
 msgid "Export as"
 msgstr ""
 
@@ -2521,7 +2522,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:30
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:28
 #: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js:46
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:41
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:42
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:31
 #: app/scripts/components/project/projects-list.js:84
 #: app/scripts/components/providers/details/provider-details.html:4
@@ -2878,7 +2879,7 @@ msgstr ""
 msgid "No virtual machines to import."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:38
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:39
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:44
 msgid "No volumes found matching filter."
 msgstr ""
@@ -3833,7 +3834,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-activity-stream.html:11
 #: app/scripts/components/issues/issues-short-list.html:11
-#: app/scripts/components/table/responsive-table.js:174
+#: app/scripts/components/table/responsive-table.js:178
 msgid "Refresh"
 msgstr ""
 
@@ -4428,7 +4429,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:44
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:40
 #: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js:51
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:46
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:47
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:17
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:5
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:47
@@ -4563,7 +4564,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:52
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:35
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:42
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:54
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:59
 #: app/scripts/components/payments/payment-list.js:27
 #: app/scripts/components/paypal/paypal-invoices-list.js:50
 #: app/scripts/components/plans/plan-agreements-list.js:26
@@ -5604,7 +5605,7 @@ msgstr ""
 msgid "You have no virtual machines yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:37
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:38
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:43
 msgid "You have no volumes yet."
 msgstr ""
