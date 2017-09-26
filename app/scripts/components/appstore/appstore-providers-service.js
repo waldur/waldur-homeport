@@ -19,9 +19,11 @@ export default function AppstoreProvidersService($filter, joinService) {
         return result;
       }, {});
 
+      let serviceUrlsToRemove = [];
       angular.forEach(project.services, function(service) {
         const detail = details[service.url];
         if (!detail) {
+          serviceUrlsToRemove.push(service.url);
           return;
         }
         service.reachedThreshold = detail.reachedThreshold;
@@ -30,6 +32,8 @@ export default function AppstoreProvidersService($filter, joinService) {
                           getServiceWarningMessage(service);
         service.enabled = getServiceDisabledReason(service) === '';
       });
+
+      project.services = project.services.filter(item => serviceUrlsToRemove.indexOf(item.url) === -1);
 
       return project;
     });

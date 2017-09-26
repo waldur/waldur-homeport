@@ -392,7 +392,7 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:56
+#: app/scripts/components/appstore/appstore-providers-service.js:60
 msgid "All provider quotas have reached limit."
 msgstr ""
 
@@ -3667,7 +3667,7 @@ msgstr ""
 msgid "Provider has resources. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:53
+#: app/scripts/components/appstore/appstore-providers-service.js:57
 msgid "Provider is in erred state."
 msgstr ""
 
@@ -3680,7 +3680,7 @@ msgstr ""
 msgid "Provider package is not defined."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:67
+#: app/scripts/components/appstore/appstore-providers-service.js:71
 msgid "Provider quota has reached threshold."
 msgstr ""
 
