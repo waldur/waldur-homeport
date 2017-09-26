@@ -5,7 +5,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
       if (customer && customer.is_expert_provider) {
         return [
           {
-            label: gettext('Experts'),
+            label: gettext('Expert requests'),
             icon: 'fa-vcard',
             link: 'organization.experts({uuid: $ctrl.context.customer.uuid})',
             feature: 'experts',

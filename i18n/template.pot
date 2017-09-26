@@ -1621,6 +1621,10 @@ msgstr ""
 msgid "Expert request has been created."
 msgstr ""
 
+#: app/scripts/components/experts/extensions/sidebar.js:8
+msgid "Expert requests"
+msgstr ""
+
 #: app/scripts/components/experts/requests/expert-request-summary.html:35
 msgid "Expert team"
 msgstr ""
@@ -1628,7 +1632,6 @@ msgstr ""
 #: app/scripts/components/experts/constants.js:1
 #: app/scripts/components/experts/expert-provider-details.html:2
 #: app/scripts/components/experts/extensions/sidebar.js:28
-#: app/scripts/components/experts/extensions/sidebar.js:8
 #: app/scripts/components/experts/requests/expert-request-header.html:15
 #: app/scripts/components/experts/routes.js:19
 #: app/scripts/components/experts/routes.js:28
@@ -1906,10 +1909,6 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:69
-msgid "IaaS"
-msgstr ""
-
 #: app/scripts/components/user/user-edit.html:62
 #: app/scripts/components/user/user-popover-table.html:9
 msgid "ID code"
@@ -1977,6 +1976,10 @@ msgstr ""
 
 #: app/scripts/components/issues/constants.js:5
 msgid "Informational"
+msgstr ""
+
+#: app/scripts/components/configs/base-config.js:69
+msgid "Infrastructure"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:64
