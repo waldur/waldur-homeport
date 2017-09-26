@@ -15,6 +15,7 @@ function OpenstackVolumesList(
   $scope,
   $filter,
   $timeout,
+  ncUtils,
   openstackVolumesService) {
   var controllerScope = this;
   var ResourceController = baseResourceListController.extend({
@@ -22,7 +23,7 @@ function OpenstackVolumesList(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackVolumesService;
-      this.addRowFields(['size', 'device']);
+      this.addRowFields(['size', 'device', 'bootable']);
 
       $scope.$on('actionApplied', function(event, name) {
         if (name === 'volume') {
@@ -45,6 +46,10 @@ function OpenstackVolumesList(
         {
           title: gettext('Size'),
           render: row => $filter('filesize')(row.size)
+        },
+        {
+          title: gettext('Bootable'),
+          render: row => ncUtils.booleanField(row.bootable),
         },
         {
           title: gettext('Attached to'),
