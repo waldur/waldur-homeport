@@ -66,7 +66,7 @@ const ENV = {
     },
   ],
 
-  defaultGroup: gettext('IaaS'),
+  defaultGroup: gettext('Infrastructure'),
 
   resourcesTypes: {
     vms: 'vms',
