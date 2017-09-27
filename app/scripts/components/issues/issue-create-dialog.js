@@ -18,13 +18,14 @@ const issueCreateDialog = {
     resolve: '<'
   },
   controller: class IssueCreateDialogController {
-    constructor(issuesService, $q, $state, ncUtilsFlash, IssueTypesService, coreUtils) {
+    constructor(issuesService, $q, $state, ncUtilsFlash, IssueTypesService, ErrorMessageFormatter, coreUtils) {
       // @ngInject
       this.service = issuesService;
       this.$q = $q;
       this.$state = $state;
       this.ncUtilsFlash = ncUtilsFlash;
       this.IssueTypesService = IssueTypesService;
+      this.ErrorMessageFormatter = ErrorMessageFormatter;
       this.coreUtils = coreUtils;
     }
 
@@ -75,6 +76,8 @@ const issueCreateDialog = {
         return this.$state.go('support.detail', {uuid: issue.uuid}).then(() => {
           this.close();
         });
+      }).catch(response => {
+        this.ncUtilsFlash.error(this.ErrorMessageFormatter.format(response));
       }).finally(() => {
         this.saving = false;
       });

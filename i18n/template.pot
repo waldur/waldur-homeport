@@ -206,7 +206,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/paypal/paypal-invoice-actions.html:3
 #: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/components/table/responsive-table.js:337
+#: app/scripts/components/table/responsive-table.js:340
 msgid "Actions"
 msgstr ""
 
@@ -344,7 +344,7 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:63
+#: app/scripts/components/issues/constants.js:71
 #: app/scripts/components/issues/issue-detail.html:50
 #: app/scripts/components/issues/issue-quick-create.html:94
 #: app/scripts/components/issues/issue-registration.html:171
@@ -514,7 +514,7 @@ msgstr ""
 msgid "Assigned to"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:79
+#: app/scripts/components/issues/constants.js:87
 msgid "Assignee"
 msgstr ""
 
@@ -714,7 +714,7 @@ msgstr ""
 msgid "By submitting the form you are agreeing to the"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:100
+#: app/scripts/components/issues/constants.js:108
 #: app/scripts/components/issues/issue-detail.html:15
 #: app/scripts/components/issues/issue-registration.html:6
 #: app/scripts/components/issues/issues-list.js:101
@@ -1658,7 +1658,7 @@ msgstr ""
 msgid "Explain plan"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:175
+#: app/scripts/components/table/responsive-table.js:178
 msgid "Export as"
 msgstr ""
 
@@ -1962,6 +1962,10 @@ msgstr ""
 msgid "Incident"
 msgstr ""
 
+#: app/scripts/components/issues/constants.js:30
+msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
+msgstr ""
+
 #: app/scripts/components/customer/customer-report-error.html:2
 #: app/scripts/components/customer/customer-report-error.js:21
 msgid "Incorrect organization details"
@@ -1977,6 +1981,10 @@ msgstr ""
 
 #: app/scripts/components/issues/constants.js:5
 msgid "Informational"
+msgstr ""
+
+#: app/scripts/components/issues/constants.js:32
+msgid "Informational - client’s request to get or provide additional information related to a service."
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js:69
@@ -2255,7 +2263,7 @@ msgstr ""
 msgid "Kept until"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:103
+#: app/scripts/components/issues/constants.js:111
 #: app/scripts/components/issues/issues-list.js:44
 #: app/scripts/components/issues/issues-short-list.html:27
 #: app/scripts/components/providers/details/provider-price-list.js:41
@@ -3035,7 +3043,7 @@ msgstr ""
 #: app/scripts/components/events/event-details-dialog.html:59
 #: app/scripts/components/experts/bids/expert-bids-list.js:62
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:66
-#: app/scripts/components/issues/constants.js:94
+#: app/scripts/components/issues/constants.js:102
 #: app/scripts/components/issues/issue-create-dialog.html:12
 #: app/scripts/components/issues/issue-create-dialog.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:7
@@ -3081,7 +3089,7 @@ msgstr ""
 msgid "Organization actions"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:51
+#: app/scripts/components/issues/constants.js:59
 msgid "Organization code"
 msgstr ""
 
@@ -3103,7 +3111,7 @@ msgid "Organization has been created."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:69
-#: app/scripts/components/issues/constants.js:47
+#: app/scripts/components/issues/constants.js:55
 #: app/scripts/components/user/user-edit.html:71
 #: app/scripts/components/user/user-organizations.js:54
 msgid "Organization name"
@@ -3516,7 +3524,7 @@ msgstr ""
 #: app/scripts/components/events/event-details-dialog.html:69
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:71
 #: app/scripts/components/invitations/actions/invitation-dialog.html:46
-#: app/scripts/components/issues/constants.js:97
+#: app/scripts/components/issues/constants.js:105
 #: app/scripts/components/issues/issue-create-dialog.html:17
 #: app/scripts/components/issues/issue-create-dialog.html:27
 #: app/scripts/components/issues/issue-detail.html:40
@@ -3586,7 +3594,7 @@ msgid "Project manager cannot edit users with same role."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:68
-#: app/scripts/components/issues/constants.js:55
+#: app/scripts/components/issues/constants.js:63
 #: app/scripts/components/project/project-create.html:8
 #: app/scripts/components/project/project-details.html:9
 #: app/scripts/components/providers/details/provider-project-link-quotas.html:6
@@ -3834,7 +3842,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-activity-stream.html:11
 #: app/scripts/components/issues/issues-short-list.html:11
-#: app/scripts/components/table/responsive-table.js:178
+#: app/scripts/components/table/responsive-table.js:181
 msgid "Refresh"
 msgstr ""
 
@@ -3928,18 +3936,18 @@ msgstr ""
 msgid "Reported by me"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:75
+#: app/scripts/components/issues/constants.js:83
 #: app/scripts/components/issues/issue-detail.html:20
 #: app/scripts/components/issues/issues-list.js:110
 msgid "Reporter"
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.js:195
+#: app/scripts/components/issues/issue-registration.js:197
 msgid "Request {key} has been created."
 msgstr ""
 
-#: app/scripts/components/issues/issue-create-dialog.js:74
-#: app/scripts/components/issues/issue-quick-create.js:115
+#: app/scripts/components/issues/issue-create-dialog.js:75
+#: app/scripts/components/issues/issue-quick-create.js:117
 msgid "Request {requestId} has been created."
 msgstr ""
 
@@ -3991,8 +3999,8 @@ msgstr ""
 msgid "Request to {action} has been accepted."
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:106
-#: app/scripts/components/issues/constants.js:67
+#: app/scripts/components/issues/constants.js:114
+#: app/scripts/components/issues/constants.js:75
 #: app/scripts/components/issues/issue-create-dialog.html:37
 #: app/scripts/components/issues/issue-create-dialog.html:42
 #: app/scripts/components/issues/issue-detail.html:35
@@ -4361,6 +4369,10 @@ msgstr ""
 msgid "Service Request"
 msgstr ""
 
+#: app/scripts/components/issues/constants.js:31
+msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
+msgstr ""
+
 #: app/scripts/components/resource/state/resource-state-service.js:35
 msgid "Service settings of this resource are in state erred."
 msgstr ""
@@ -4373,7 +4385,7 @@ msgstr ""
 msgid "Service store"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:59
+#: app/scripts/components/issues/constants.js:67
 #: app/scripts/components/issues/issue-detail.html:45
 #: app/scripts/components/issues/issue-registration.html:156
 #: app/scripts/components/issues/issues-list.js:84
@@ -4578,8 +4590,8 @@ msgid "State"
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js:124
-#: app/scripts/components/issues/constants.js:109
-#: app/scripts/components/issues/constants.js:71
+#: app/scripts/components/issues/constants.js:117
+#: app/scripts/components/issues/constants.js:79
 #: app/scripts/components/issues/issue-detail.html:55
 #: app/scripts/components/issues/issues-list.js:54
 #: app/scripts/components/user/user-popover-table.html:41
@@ -5498,9 +5510,9 @@ msgid "You cannot remove shared provider."
 msgstr ""
 
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:31
-#: app/scripts/components/issues/issue-create-dialog.js:39
-#: app/scripts/components/issues/issue-quick-create.js:47
-#: app/scripts/components/issues/issue-registration.js:68
+#: app/scripts/components/issues/issue-create-dialog.js:40
+#: app/scripts/components/issues/issue-quick-create.js:49
+#: app/scripts/components/issues/issue-registration.js:70
 msgid "You did not enter a field."
 msgstr ""
 
