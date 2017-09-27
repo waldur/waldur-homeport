@@ -1838,6 +1838,10 @@ msgstr "Tähtsus"
 msgid "Incident"
 msgstr "Vahejuhtum"
 
+#: app/scripts/components/issues/constants.js:30
+msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
+msgstr "Incident - teenuse kasutamise ja toimimisega (katkemine, kvaliteedi langus) seotud kliendi mure."
+
 #: app/scripts/components/customer/customer-report-error.html:2
 #: app/scripts/components/customer/customer-report-error.js:21
 msgid "Incorrect organization details"
@@ -1846,6 +1850,10 @@ msgstr "Ebakorrektsed organisatsiooni andmed"
 #: app/scripts/components/issues/constants.js:5
 msgid "Informational"
 msgstr "Informatsiooniline"
+
+#: app/scripts/components/issues/constants.js:32
+msgid "Informational - client’s request to get or provide additional information related to a service."
+msgstr "Informational - kliendi soov saada või anda mistahes teenusega seotud infot"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:64
 msgid "Initial admin password"
@@ -4168,7 +4176,11 @@ msgstr "Teenuse nimi"
 
 #: app/scripts/components/issues/constants.js:4
 msgid "Service Request"
-msgstr "Teenuse päringud"
+msgstr "Teenuse päring"
+
+#: app/scripts/components/issues/constants.js:31
+msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
+msgstr "Service Request – kliendi soov teenuse osalise või täieliku funktsionaalsuse, ligipääsu või komponentide muutmiseks, lisamiseks, liigutamiseks või eemaldamiseks"
 
 #: app/scripts/components/resource/state/resource-state-service.js:33
 msgid "Service settings of this resource are in state erred."
