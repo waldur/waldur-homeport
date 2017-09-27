@@ -1,6 +1,7 @@
 import issuesService from './issues-service';
 import IssueTypesService from './issue-types-service';
 import IssueNavigationService from './issue-navigation-service';
+import { attachStateUtils } from './issue-navigation-service';
 import issueUsersService from './issue-users';
 import issueDetail from './issue-detail';
 import issuesList from './issues-list';
@@ -25,6 +26,7 @@ export default module => {
   module.service('issuesService', issuesService);
   module.service('IssueTypesService', IssueTypesService);
   module.service('IssueNavigationService', IssueNavigationService);
+  module.run(attachStateUtils);
   module.service('issueUsersService', issueUsersService);
   module.component('issuesList', issuesList);
   module.component('issueDetail', issueDetail);
