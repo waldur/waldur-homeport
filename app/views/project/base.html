@@ -4,7 +4,7 @@
         <cookies-consent/>
         <nc-header/>
         <div class="row wrapper white-bg page-heading">
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <h2>{{ $state.current.data.pageTitle | translate }}</h2>
                 <p ng-if="currentProject.description">
                     {{ currentProject.description }}
@@ -21,8 +21,12 @@
                     </li>
                 </ol>
             </div>
-            <div class="col-lg-4" ng-if="$state.current.name === 'project.details'">
-                <project-details-button project="currentProject"></project-details-button>
+            <div class="col-lg-6" ng-if="$state.current.name === 'project.details'">
+                <div class="title-action">
+                    <create-vm-button/>
+                    <extension-point id="project-dashboard-button"></extension-point>
+                    <project-details-button project="currentProject"></project-details-button>
+                </div>
             </div>
         </div>
        <div class="footer-indent" ui-view></div>
