@@ -565,10 +565,16 @@ msgstr ""
 msgid "Back to login"
 msgstr ""
 
+#: app/scripts/components/issues/issue-navigation-service.js:94
 #: app/scripts/components/user/user-details.js:27
 msgid "Back to organization"
 msgstr ""
 
+#: app/scripts/components/issues/issue-navigation-service.js:96
+msgid "Back to personal dashboard"
+msgstr ""
+
+#: app/scripts/components/issues/issue-navigation-service.js:91
 #: app/scripts/components/user/user-details.js:20
 msgid "Back to project"
 msgstr ""
