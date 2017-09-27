@@ -780,7 +780,7 @@ msgstr "Muuda tüüpi"
 
 #: app/scripts/components/issues/constants.js:3
 msgid "Change Request"
-msgstr "Muutuse Päring"
+msgstr "Muutuse päring"
 
 #: app/scripts/components/openstack/openstack-tenant/actions.js:35
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:2
