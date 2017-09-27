@@ -82,7 +82,7 @@ function CustomerManageController(
           if (user.uuid === customer.owners[i].uuid) {
             return $q.when({
               canDeleteCustomer: ENV.ownerCanManageCustomer,
-              canUpdateCustomerPolicies: ENV.ownerCanUpdateCustomerPolicies,
+              canUpdateCustomerPolicies: false,
               canRegisterExpertProvider: false,
               canUpdateQuota: false,
             });

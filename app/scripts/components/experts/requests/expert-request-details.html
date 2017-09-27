@@ -3,10 +3,4 @@
 </div>
 <div ng-if="!$ctrl.loading">
   <expert-request-summary expert-request="$ctrl.expertRequest"></expert-request-summary>
-  <div ng-if="!$ctrl.expertRequest.contract">
-    <expert-bids-list expert-request="$ctrl.expertRequest"></expert-bids-list>
-  </div>
-  <div ng-if="$ctrl.issue.url">
-    <issue-comments-container issue="$ctrl.issue"></issue-comments-container>
-  </div>
 </div>

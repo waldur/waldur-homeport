@@ -10,19 +10,19 @@ export default function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RE
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       networks: {
-        heading: 'Networks',
+        heading: gettext('Networks'),
         component: 'openstackTenantNetworks'
       },
       security_groups: {
-        heading: 'Security groups',
+        heading: gettext('Security groups'),
         component: 'openstackSecurityGroupsList'
       },
       floating_ips: {
-        heading: 'Floating IPs',
+        heading: gettext('Floating IPs'),
         component: 'openstackFloatingIpsList'
       },
       quotas: {
-        heading: 'Quotas',
+        heading: gettext('Quotas'),
         component: 'quotasTable'
       },
     })

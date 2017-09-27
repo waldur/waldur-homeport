@@ -1,3 +1,5 @@
+import { STATE_TEMPLATES } from './constants';
+
 // @ngInject
 export default function resourceStateService(resourceUtils, ResourceStateConfiguration, coreUtils) {
   return {
@@ -52,7 +54,7 @@ export default function resourceStateService(resourceUtils, ResourceStateConfigu
         context.className = 'progress-bar-primary';
         context.movementClassName = 'progress-striped active';
         if (resource.action) {
-          context.label = resource.action;
+          context.label = STATE_TEMPLATES[resource.action.toLowerCase()] || resource.action;
           context.tooltip = gettext(resource.action_details.message) || `${resource.action} ${resourceType}`;
         } else {
           context.label = resource.state;

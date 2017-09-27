@@ -66,7 +66,7 @@ const ENV = {
     },
   ],
 
-  defaultGroup: gettext('IaaS'),
+  defaultGroup: gettext('Infrastructure'),
 
   resourcesTypes: {
     vms: 'vms',
@@ -176,7 +176,6 @@ const ENV = {
   singleResourcePollingTimeout: 1000 * 2,
 
   ownerCanManageCustomer: false,
-  ownerCanUpdateCustomerPolicies: true,
   OWNERS_CAN_MANAGE_OWNERS: true,
   MANAGER_CAN_MANAGE_TENANTS: false,
   VALIDATE_INVITATION_EMAIL: false,
@@ -195,6 +194,12 @@ const ENV = {
   userMandatoryFields: [
     'full_name',
     'email'
+  ],
+
+  userRegistrationHiddenFields: [
+    'registration_method',
+    'job_title',
+    'phone_number',
   ],
 
   languageChoices: [

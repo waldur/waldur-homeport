@@ -13,7 +13,6 @@
           <dt translate>State</dt>
           <dd class="m-b-xs">
             <expert-request-state model="$ctrl.expertRequest"></expert-request-state>
-            <expert-request-cancel expert-request="$ctrl.expertRequest"></expert-request-cancel>
           </dd>
           <dt translate>Type</dt>
           <dd ng-bind="$ctrl.expertRequest.type_label"></dd>
@@ -22,7 +21,7 @@
           <dt translate>Created</dt>
           <dd>{{ $ctrl.expertRequest.modified | dateTime }}</dd>
           <dt translate>Description</dt>
-          <dd class="project-people" ng-bind="$ctrl.expertRequest.description"></dd>
+          <dd class="project-people html-description" ng-bind-html="$ctrl.expertRequest.description | decodeHtml"></dd>
         </dl>
       </div>
     </div>
@@ -33,10 +32,20 @@
           <dd>{{ $ctrl.expertRequest.contract.price | defaultCurrency }}</dd>
           <dt translate>Contract description</dt>
           <dd>{{ $ctrl.expertRequest.contract.description }}</dd>
-          <dt translate>Contract team</dt>
+          <dt translate>Expert team</dt>
           <dd>{{ $ctrl.expertRequest.contract.team_name }}</dd>
         </dl>
       </div>
+    </div>
+    <div class="row">
+      <span class="pull-right">
+        <expert-request-complete expert-request="$ctrl.expertRequest"></expert-request-complete>
+        <expert-request-complain expert-request="$ctrl.expertRequest"></expert-request-complain>
+        <expert-request-cancel expert-request="$ctrl.expertRequest"></expert-request-cancel>
+      </span>
+    </div>
+    <div class="row">
+      <expert-request-tabs expert-request="$ctrl.expertRequest"></expert-request-tabs>
     </div>
   </div>
 </div>

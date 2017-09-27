@@ -5,7 +5,12 @@ const slurmAllocationList = {
 };
 
 // @ngInject
-function SlurmAllocationListController(baseResourceListController, $filter, SlurmAllocationService) {
+function SlurmAllocationListController(
+  baseResourceListController,
+  $filter,
+  coreUtils,
+  SlurmAllocationService
+  ) {
   var controllerScope = this;
   var controllerClass = baseResourceListController.extend({
     init: function() {
@@ -38,30 +43,17 @@ function SlurmAllocationListController(baseResourceListController, $filter, Slur
           render: row => $filter('shortDate')(row.created),
         },
         {
-          title: gettext('CPU limit'),
-          render: row => $filter('minutesToHours')(row.cpu_limit),
+          title: gettext('CPU'),
+          render: row => this.formatQuota('minutesToHours', row.cpu_limit, row.cpu_usage),
         },
         {
-          title: gettext('CPU usage'),
-          render: row => $filter('minutesToHours')(row.cpu_usage),
+          title: gettext('GPU'),
+          render: row => this.formatQuota('minutesToHours', row.gpu_limit, row.gpu_usage),
         },
         {
-          title: gettext('GPU limit'),
-          render: row => $filter('minutesToHours')(row.gpu_limit),
+          title: gettext('RAM'),
+          render: row => this.formatQuota('filesize', row.ram_limit, row.ram_usage),
         },
-        {
-          title: gettext('GPU usage'),
-          render: row => $filter('minutesToHours')(row.gpu_usage),
-        },
-        {
-          title: gettext('RAM limit'),
-          render: row => $filter('filesize')(row.ram_limit),
-        },
-        {
-          title: gettext('RAM usage'),
-          render: row => $filter('filesize')(row.ram_usage),
-        },
-
         {
           title: gettext('State'),
           className: 'min-tablet-l',
@@ -69,6 +61,16 @@ function SlurmAllocationListController(baseResourceListController, $filter, Slur
         },
       ];
       return options;
+    },
+    formatQuota: function(filter, limit, usage) {
+      const context = {
+        limit: $filter(filter)(limit),
+        usage: $filter(filter)(usage),
+      };
+      const template = usage >= 0 ? gettext('{usage} of {limit}') : '0';
+      const tooltip = coreUtils.templateFormatter(template, context);
+      const percent = Math.min(1, limit > 0 ? usage / limit : 0);
+      return `<span uib-tooltip="${tooltip}"><quota-pie value="${percent}"/></span>`;
     },
     getTableActions: function() {
       return [this.getCreateAction()];

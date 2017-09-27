@@ -151,6 +151,13 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
             }
           }
         });
+
+        // eslint-disable-next-line no-unused-vars
+        table.on('responsive-display.dt', function(event, datatable, row, show) {
+          if (show) {
+            $compile(row.node().nextSibling)(scope);
+          }
+        });
       }
 
       function getDom() {

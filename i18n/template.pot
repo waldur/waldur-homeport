@@ -92,8 +92,12 @@ msgstr ""
 msgid "{resource_full_name} stop has failed."
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:60
+#: app/scripts/components/resource/state/resource-state-service.js:62
 msgid "{resourceType} has state {resourceState}."
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-list.js:70
+msgid "{usage} of {limit}"
 msgstr ""
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js:19
@@ -150,8 +154,8 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:4
-msgid "ACCEPT"
+#: app/scripts/components/experts/bids/expert-bid.html:32
+msgid "Accept"
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js:84
@@ -181,12 +185,7 @@ msgid "Account removal"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:2
-#: app/scripts/components/customer/customer-create-config.js:28
 msgid "Accounting"
-msgstr ""
-
-#: app/scripts/components/customer/customer-create-config.js:29
-msgid "Accounting details"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-header.html:3
@@ -207,8 +206,12 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/paypal/paypal-invoice-actions.html:3
 #: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/components/table/responsive-table.js:333
+#: app/scripts/components/table/responsive-table.js:340
 msgid "Actions"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:21
+msgid "Activating"
 msgstr ""
 
 #: app/scripts/components/issues/issue-navigation-service.js:21
@@ -341,7 +344,7 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:63
+#: app/scripts/components/issues/constants.js:71
 #: app/scripts/components/issues/issue-detail.html:50
 #: app/scripts/components/issues/issue-quick-create.html:94
 #: app/scripts/components/issues/issue-registration.html:171
@@ -389,7 +392,7 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:56
+#: app/scripts/components/appstore/appstore-providers-service.js:60
 msgid "All provider quotas have reached limit."
 msgstr ""
 
@@ -397,10 +400,11 @@ msgstr ""
 msgid "Allocation"
 msgstr ""
 
-#: app/scripts/components/slurm/actions.js:11
+#: app/scripts/components/slurm/actions.js:20
 msgid "Allocation has been updated."
 msgstr ""
 
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:14
 #: app/scripts/components/slurm/slurm-allocation-config.js:14
 msgid "Allocation name"
 msgstr ""
@@ -455,7 +459,7 @@ msgstr ""
 #: app/scripts/components/ansible/routes.js:27
 #: app/scripts/components/ansible/sidebar.js:8
 #: app/scripts/components/appstore/routes.js:42
-#: app/scripts/components/dashboard/constants.js:7
+#: app/scripts/components/dashboard/constants.js:10
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
 msgid "Applications"
 msgstr ""
@@ -510,14 +514,18 @@ msgstr ""
 msgid "Assigned to"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:79
+#: app/scripts/components/issues/constants.js:87
 msgid "Assignee"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:50
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:55
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:16
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:58
 msgid "Attached to"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:2
+msgid "Attaching"
 msgstr ""
 
 #: app/scripts/components/resource/tabs/constants.js:3
@@ -557,10 +565,16 @@ msgstr ""
 msgid "Back to login"
 msgstr ""
 
+#: app/scripts/components/issues/issue-navigation-service.js:94
 #: app/scripts/components/user/user-details.js:27
 msgid "Back to organization"
 msgstr ""
 
+#: app/scripts/components/issues/issue-navigation-service.js:96
+msgid "Back to personal dashboard"
+msgstr ""
+
+#: app/scripts/components/issues/issue-navigation-service.js:91
 #: app/scripts/components/user/user-details.js:20
 msgid "Back to project"
 msgstr ""
@@ -569,6 +583,10 @@ msgstr ""
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js:57
 #: app/scripts/components/resource/summary/resource-summary-base.html:59
 msgid "Backend ID"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:17
+msgid "Backing up"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:11
@@ -612,11 +630,11 @@ msgstr ""
 msgid "Base rate"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:35
+#: app/scripts/components/dashboard/constants.js:38
 msgid "Batch CPU usage, hours"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:40
+#: app/scripts/components/dashboard/constants.js:43
 msgid "Batch GPU usage, hours"
 msgstr ""
 
@@ -629,7 +647,7 @@ msgstr ""
 msgid "Batch processing"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:45
+#: app/scripts/components/dashboard/constants.js:48
 msgid "Batch RAM usage, GB"
 msgstr ""
 
@@ -637,12 +655,17 @@ msgstr ""
 msgid "Bid could be created only for pending expert request."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:20
+#: app/scripts/components/experts/bids/expert-bid.html:13
 msgid "Bid description"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:3
+#: app/scripts/components/customer/customer-create-config.js:28
 msgid "Billing"
+msgstr ""
+
+#: app/scripts/components/customer/customer-create-config.js:29
+msgid "Billing details"
 msgstr ""
 
 #: app/scripts/components/plans/plan-agreement-approve.js:19
@@ -655,7 +678,7 @@ msgstr ""
 msgid "Billing plan agreement is being processed, please wait."
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:19
+#: app/scripts/components/dashboard/constants.js:22
 msgid "Block device count"
 msgstr ""
 
@@ -663,7 +686,7 @@ msgstr ""
 msgid "Block devices"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:27
+#: app/scripts/components/dashboard/constants.js:30
 msgid "Block snapshot count"
 msgstr ""
 
@@ -671,7 +694,7 @@ msgstr ""
 msgid "Block storage"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:23
+#: app/scripts/components/dashboard/constants.js:26
 msgid "Block volume count"
 msgstr ""
 
@@ -680,6 +703,7 @@ msgid "bootable"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js:57
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:51
 msgid "Bootable"
 msgstr ""
 
@@ -692,7 +716,11 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:100
+#: app/scripts/components/user/user-edit.html:152
+msgid "By submitting the form you are agreeing to the"
+msgstr ""
+
+#: app/scripts/components/issues/constants.js:108
 #: app/scripts/components/issues/issue-detail.html:15
 #: app/scripts/components/issues/issue-registration.html:6
 #: app/scripts/components/issues/issues-list.js:101
@@ -712,7 +740,8 @@ msgstr ""
 #: app/scripts/components/events/event-details-dialog.html:133
 #: app/scripts/components/events/event-types-dialog.html:14
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:93
-#: app/scripts/components/experts/requests/expert-request-create.html:22
+#: app/scripts/components/experts/bids/expert-bid.html:35
+#: app/scripts/components/experts/contracts/expert-contract-create.html:29
 #: app/scripts/components/form/appstore-form-wizard.html:49
 #: app/scripts/components/invitations/actions/cancel.js:8
 #: app/scripts/components/invitations/actions/invitation-dialog.html:77
@@ -780,6 +809,14 @@ msgstr ""
 msgid "Change VPC package"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:12
+msgid "Changing flavor"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:29
+msgid "Changing password"
+msgstr ""
+
 #: app/scripts/components/resource/monitoring/resource-graphs.js:55
 #: app/scripts/components/resource/monitoring/resource-graphs.js:66
 msgid "Chart is not available at this moment."
@@ -794,6 +831,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:4
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:7
 #: app/scripts/components/premiumSupport/premium-support-summary.html:3
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:7
 msgid "Checkout summary"
 msgstr ""
 
@@ -828,6 +866,7 @@ msgstr ""
 #: app/scripts/components/billing/invoice-events-dialog.html:45
 #: app/scripts/components/customer/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
+#: app/scripts/components/slurm/slurm-allocation-details-dialog.html:10
 msgid "Close"
 msgstr ""
 
@@ -856,6 +895,7 @@ msgstr ""
 msgid "commented on"
 msgstr ""
 
+#: app/scripts/components/experts/requests/expert-request-tabs.html:4
 #: app/scripts/components/issues/comments/issue-comments-container.html:3
 msgid "Comments"
 msgstr ""
@@ -872,6 +912,14 @@ msgstr ""
 #: app/scripts/components/customer/customer-users-details-list.js:69
 #: app/scripts/components/user/user-popover-table.html:25
 msgid "Competence"
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-complain.html:7
+msgid "Complain"
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-complete.html:7
+msgid "Complete"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:4
@@ -921,16 +969,12 @@ msgstr ""
 msgid "Contact phone"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-summary.html:34
+#: app/scripts/components/experts/requests/expert-request-summary.html:33
 msgid "Contract description"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-summary.html:32
+#: app/scripts/components/experts/requests/expert-request-summary.html:31
 msgid "Contract price"
-msgstr ""
-
-#: app/scripts/components/experts/requests/expert-request-summary.html:36
-msgid "Contract team"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:114
@@ -954,6 +998,14 @@ msgstr ""
 msgid "Cost threshold"
 msgstr ""
 
+#: app/scripts/components/slurm/slurm-allocation-usage-table.js:40
+msgid "Costs"
+msgstr ""
+
+#: app/scripts/components/customer/customer-create-dialog.js:33
+msgid "Could not create organization"
+msgstr ""
+
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.js:24
 msgid "Could not load a list of identity providers. Please try again."
 msgstr ""
@@ -965,22 +1017,21 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-compare-list.js:76
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:76
+#: app/scripts/components/slurm/slurm-allocation-list.js:46
+#: app/scripts/components/slurm/slurm-allocation-summary.html:27
 msgid "CPU"
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.html:8
-#: app/scripts/components/slurm/slurm-allocation-list.js:41
-#: app/scripts/components/slurm/slurm-allocation-summary.html:18
+#: app/scripts/components/slurm/slurm-allocation-config.js:27
 msgid "CPU limit"
 msgstr ""
 
-#: app/scripts/components/slurm/actions.js:15
-#: app/scripts/components/slurm/slurm-allocation-config.js:27
+#: app/scripts/components/slurm/actions.js:24
 msgid "CPU limit, minutes"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:45
-#: app/scripts/components/slurm/slurm-allocation-summary.html:27
+#: app/scripts/components/slurm/slurm-allocation-usage-table.js:44
 msgid "CPU usage"
 msgstr ""
 
@@ -989,7 +1040,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-store.html:51
 #: app/scripts/components/customer/customer-issues.js:31
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:90
-#: app/scripts/components/experts/requests/expert-request-create.html:19
+#: app/scripts/components/experts/contracts/expert-contract-create.html:26
 #: app/scripts/components/freeipa/freeipa-account-create.html:67
 #: app/scripts/components/issues/issue-create-dialog.js:10
 #: app/scripts/components/offering/appstore-offering.html:19
@@ -1092,15 +1143,20 @@ msgstr ""
 msgid "Create subnet"
 msgstr ""
 
+#: app/scripts/components/resource/actions/create-vm-button.html:3
+msgid "Create VM"
+msgstr ""
+
 #: app/scripts/components/ansible/ansible-job-summary.html:27
 #: app/scripts/components/billing/billing-utils.js:41
-#: app/scripts/components/experts/requests/expert-request-summary.html:22
+#: app/scripts/components/experts/bids/expert-bids-list.js:74
+#: app/scripts/components/experts/requests/expert-request-summary.html:21
 #: app/scripts/components/issues/issue-detail.html:80
 #: app/scripts/components/issues/issues-list.js:130
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:45
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:45
 #: app/scripts/components/resource/summary/resource-summary-base.html:40
-#: app/scripts/components/slurm/slurm-allocation-list.js:37
+#: app/scripts/components/slurm/slurm-allocation-list.js:42
 #: app/scripts/components/team/customer-permissions-log-list.js:41
 #: app/scripts/components/team/project-permissions-log-list.js:37
 msgid "Created"
@@ -1112,6 +1168,30 @@ msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js:132
 msgid "Created at"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:18
+msgid "Creating a backup schedule"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:27
+msgid "Creating a floating IP"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:25
+msgid "Creating a new network"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:28
+msgid "Creating a security group"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:26
+msgid "Creating a subnet"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:3
+msgid "Creating snapshot schedule"
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-jobs-list.js:74
@@ -1135,7 +1215,7 @@ msgstr ""
 msgid "Current size"
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:69
+#: app/scripts/components/resource/state/resource-state-service.js:71
 msgid "current state on backend: {resourceState}."
 msgstr ""
 
@@ -1146,6 +1226,14 @@ msgstr ""
 
 #: app/scripts/components/offering/register-offering-category.js:16
 msgid "Custom request"
+msgstr ""
+
+#: app/scripts/components/experts/requests/billing-type.js:12
+msgid "Customer is billed on monthly basis."
+msgstr ""
+
+#: app/scripts/components/experts/requests/billing-type.js:12
+msgid "Customer is billed on project completion."
 msgstr ""
 
 #: app/scripts/components/customer/customer-workspace.js:44
@@ -1174,6 +1262,10 @@ msgstr ""
 msgid "Date joined"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:22
+msgid "Deactivating"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-items.html:46
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:39
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
@@ -1192,8 +1284,8 @@ msgstr ""
 #: app/scripts/components/ansible/ansible-job-summary.html:32
 #: app/scripts/components/azure/azure-virtual-machine-config.js:20
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:74
-#: app/scripts/components/experts/requests/expert-request-create.js:47
-#: app/scripts/components/experts/requests/expert-request-summary.html:24
+#: app/scripts/components/experts/requests/expert-request-create.js:50
+#: app/scripts/components/experts/requests/expert-request-summary.html:23
 #: app/scripts/components/issues/issue-detail.html:89
 #: app/scripts/components/issues/issue-quick-create.html:39
 #: app/scripts/components/issues/issue-registration.html:110
@@ -1215,7 +1307,7 @@ msgstr ""
 #: app/scripts/components/resource/actions/constants.js:26
 #: app/scripts/components/resource/summary/resource-summary-base.html:31
 #: app/scripts/components/slurm/slurm-allocation-config.js:21
-#: app/scripts/components/slurm/slurm-allocation-list.js:33
+#: app/scripts/components/slurm/slurm-allocation-list.js:38
 #: app/scripts/components/user/user-edit.html:93
 msgid "Description"
 msgstr ""
@@ -1228,17 +1320,27 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:40
+#: app/scripts/components/resource/state/constants.js:10
+msgid "Destroying"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:9
+msgid "Detaching"
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-providers.html:55
 #: app/scripts/components/cost-planning/cost-plans-list.js:54
 #: app/scripts/components/events/base-event-list.js:43
+#: app/scripts/components/experts/contracts/expert-contract-form.js:22
 #: app/scripts/components/issues/issue-registration.html:32
 #: app/scripts/components/issues/issue-registration.html:69
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
-#: app/scripts/components/project/project-details-button.html:4
+#: app/scripts/components/project/project-details-button.html:3
 #: app/scripts/components/project/projects-list.js:178
 #: app/scripts/components/providers/details/dialog.html:10
 #: app/scripts/components/providers/provider-list.js:92
+#: app/scripts/components/slurm/actions.js:12
 #: app/scripts/components/team/customer-users-list.js:123
 #: app/scripts/components/team/project-users-list.js:87
 #: app/scripts/components/user/user-sidebar.html:12
@@ -1350,7 +1452,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:203
+#: app/scripts/components/configs/base-config.js:208
 msgid "English"
 msgstr ""
 
@@ -1363,8 +1465,8 @@ msgstr ""
 msgid "Error message"
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:35
-#: app/scripts/components/resource/state/resource-state-service.js:46
+#: app/scripts/components/resource/state/resource-state-service.js:37
+#: app/scripts/components/resource/state/resource-state-service.js:48
 msgid "error message: {errorMessage}"
 msgstr ""
 
@@ -1385,7 +1487,11 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:207
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:35
+msgid "Estimated maximum price"
+msgstr ""
+
+#: app/scripts/components/configs/base-config.js:212
 msgid "Estonian"
 msgstr ""
 
@@ -1473,15 +1579,14 @@ msgstr ""
 msgid "Expert"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.js:38
+#: app/scripts/components/experts/bids/expert-bid.js:41
 msgid "Expert bid could not be accepted."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.js:34
+#: app/scripts/components/experts/bids/expert-bid.js:38
 msgid "Expert bid has been accepted."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:72
 #: app/scripts/components/experts/extensions/customer-workspace.html:4
 msgid "Expert provider"
 msgstr ""
@@ -1506,23 +1611,38 @@ msgstr ""
 msgid "Expert request \"{expert_request_name}\"\" has been cancelled."
 msgstr ""
 
+#: app/scripts/components/experts/requests/expert-request-create.js:76
+msgid "Expert request could not be created"
+msgstr ""
+
 #: app/scripts/components/experts/requests/expert-request-header.html:3
 #: app/scripts/components/experts/routes.js:48
 msgid "Expert request details"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-cancel.js:29
+#: app/scripts/components/experts/requests/expert-request-cancel.js:30
 msgid "Expert request has been cancelled."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-create.js:64
+#: app/scripts/components/experts/requests/expert-request-complete.js:31
+msgid "Expert request has been completed."
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-create.js:68
 msgid "Expert request has been created."
+msgstr ""
+
+#: app/scripts/components/experts/extensions/sidebar.js:8
+msgid "Expert requests"
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-summary.html:35
+msgid "Expert team"
 msgstr ""
 
 #: app/scripts/components/experts/constants.js:1
 #: app/scripts/components/experts/expert-provider-details.html:2
 #: app/scripts/components/experts/extensions/sidebar.js:28
-#: app/scripts/components/experts/extensions/sidebar.js:8
 #: app/scripts/components/experts/requests/expert-request-header.html:15
 #: app/scripts/components/experts/routes.js:19
 #: app/scripts/components/experts/routes.js:28
@@ -1548,7 +1668,7 @@ msgstr ""
 msgid "Explain plan"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:171
+#: app/scripts/components/table/responsive-table.js:178
 msgid "Export as"
 msgstr ""
 
@@ -1556,12 +1676,16 @@ msgstr ""
 msgid "Extend OpenStack volume"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:8
+msgid "Extending"
+msgstr ""
+
 #: app/scripts/components/resource/list/resource-vms-list.js:43
 #: app/scripts/components/resource/summary/virtual-machine-summary.html:42
 msgid "External IP"
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:43
+#: app/scripts/components/resource/state/resource-state-service.js:45
 msgid "Failed to operate with backend."
 msgstr ""
 
@@ -1624,6 +1748,7 @@ msgid "Floating IP count"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/breadcrumbs.js:21
+#: app/scripts/components/openstack/openstack-tenant/tabs.js:21
 msgid "Floating IPs"
 msgstr ""
 
@@ -1633,6 +1758,10 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:18
 msgid "For"
+msgstr ""
+
+#: app/scripts/components/experts/contracts/expert-contract-create.js:46
+msgid "Form has not been filled correctly. Please check your input."
 msgstr ""
 
 #: app/scripts/components/user/constants.js:29
@@ -1684,6 +1813,10 @@ msgstr ""
 msgid "generate automatically"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-providers.html:21
+msgid "Get a virtual private cloud from a service store"
+msgstr ""
+
 #: app/scripts/components/intro/expert-manager-intro.js:88
 msgid "Go to a Team view to manage team members"
 msgstr ""
@@ -1696,18 +1829,20 @@ msgstr ""
 msgid "Got it!"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:49
+#: app/scripts/components/slurm/slurm-allocation-list.js:50
 #: app/scripts/components/slurm/slurm-allocation-summary.html:36
+msgid "GPU"
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-config.js:36
 msgid "GPU limit"
 msgstr ""
 
-#: app/scripts/components/slurm/actions.js:21
-#: app/scripts/components/slurm/slurm-allocation-config.js:33
+#: app/scripts/components/slurm/actions.js:30
 msgid "GPU limit, minutes"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:53
-#: app/scripts/components/slurm/slurm-allocation-summary.html:45
+#: app/scripts/components/slurm/slurm-allocation-usage-table.js:48
 msgid "GPU usage"
 msgstr ""
 
@@ -1782,16 +1917,11 @@ msgstr ""
 #: app/scripts/components/experts/expert-provider-details.html:17
 #: app/scripts/components/form/appstore-field-tos.html:8
 #: app/scripts/components/freeipa/freeipa-account-create.html:51
-#: app/scripts/components/user/user-edit.html:157
 msgid "I accept the"
 msgstr ""
 
 #: app/scripts/components/issues/request-service-button.html:7
 msgid "I want another service"
-msgstr ""
-
-#: app/scripts/components/configs/base-config.js:69
-msgid "IaaS"
 msgstr ""
 
 #: app/scripts/components/user/user-edit.html:62
@@ -1838,8 +1968,16 @@ msgstr ""
 msgid "Importance"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:7
+msgid "Importing resources"
+msgstr ""
+
 #: app/scripts/components/issues/constants.js:2
 msgid "Incident"
+msgstr ""
+
+#: app/scripts/components/issues/constants.js:30
+msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
 #: app/scripts/components/customer/customer-report-error.html:2
@@ -1857,6 +1995,14 @@ msgstr ""
 
 #: app/scripts/components/issues/constants.js:5
 msgid "Informational"
+msgstr ""
+
+#: app/scripts/components/issues/constants.js:32
+msgid "Informational - client’s request to get or provide additional information related to a service."
+msgstr ""
+
+#: app/scripts/components/configs/base-config.js:69
+msgid "Infrastructure"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:64
@@ -2039,6 +2185,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:48
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:44
 #: app/scripts/components/premiumSupport/premium-support-summary.html:31
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:44
 msgid "Invoiced to"
 msgstr ""
 
@@ -2130,7 +2277,7 @@ msgstr ""
 msgid "Kept until"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:103
+#: app/scripts/components/issues/constants.js:111
 #: app/scripts/components/issues/issues-list.js:44
 #: app/scripts/components/issues/issues-short-list.html:27
 #: app/scripts/components/providers/details/provider-price-list.js:41
@@ -2153,7 +2300,7 @@ msgstr ""
 msgid "Last"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-summary.html:20
+#: app/scripts/components/experts/requests/expert-request-summary.html:19
 msgid "Last updated"
 msgstr ""
 
@@ -2161,7 +2308,7 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:211
+#: app/scripts/components/configs/base-config.js:216
 msgid "Latvian"
 msgstr ""
 
@@ -2181,7 +2328,7 @@ msgstr ""
 msgid "Let's go"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:171
+#: app/scripts/components/user/user-edit.html:164
 msgid "Let’s get started"
 msgstr ""
 
@@ -2207,7 +2354,7 @@ msgstr ""
 msgid "List and edit team members."
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:215
+#: app/scripts/components/configs/base-config.js:220
 msgid "Lithuanian"
 msgstr ""
 
@@ -2304,7 +2451,7 @@ msgstr ""
 msgid "Max vCPU"
 msgstr ""
 
-#: app/scripts/components/form/appstore-field-integer.html:22
+#: app/scripts/components/form/appstore-field-integer.html:23
 msgid "Maximal valid value is"
 msgstr ""
 
@@ -2341,7 +2488,7 @@ msgid "Min storage"
 msgstr ""
 
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:68
-#: app/scripts/components/form/appstore-field-integer.html:18
+#: app/scripts/components/form/appstore-field-integer.html:19
 msgid "Minimal valid value is"
 msgstr ""
 
@@ -2380,7 +2527,7 @@ msgstr ""
 #: app/scripts/components/customer/customer-create-config.js:10
 #: app/scripts/components/customer/customer-manage.html:10
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:76
-#: app/scripts/components/experts/requests/expert-request-create.js:40
+#: app/scripts/components/experts/requests/expert-request-create.js:43
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:53
 #: app/scripts/components/experts/requests/expert-request-project-list.js:53
 #: app/scripts/components/offering/appstore-offering.js:41
@@ -2397,7 +2544,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:30
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:28
 #: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js:46
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:41
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:42
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:31
 #: app/scripts/components/project/projects-list.js:84
 #: app/scripts/components/providers/details/provider-details.html:4
@@ -2407,7 +2554,7 @@ msgstr ""
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:48
 #: app/scripts/components/resource/actions/constants.js:20
 #: app/scripts/components/resource/list/resources-list.js:42
-#: app/scripts/components/slurm/slurm-allocation-list.js:28
+#: app/scripts/components/slurm/slurm-allocation-list.js:33
 msgid "Name"
 msgstr ""
 
@@ -2431,6 +2578,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:122
 #: app/scripts/components/openstack/openstack-network/breadcrumbs.js:22
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:23
+#: app/scripts/components/openstack/openstack-tenant/tabs.js:13
 msgid "Networks"
 msgstr ""
 
@@ -2469,11 +2617,11 @@ msgstr ""
 msgid "No alerts yet."
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:25
+#: app/scripts/components/slurm/slurm-allocation-list.js:30
 msgid "No allocations found matching filter."
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:24
+#: app/scripts/components/slurm/slurm-allocation-list.js:29
 msgid "No allocations yet."
 msgstr ""
 
@@ -2753,7 +2901,7 @@ msgstr ""
 msgid "No virtual machines to import."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:38
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:39
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:44
 msgid "No volumes found matching filter."
 msgstr ""
@@ -2875,12 +3023,8 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:128
+#: app/scripts/components/customer/customer-manage.html:125
 msgid "Only staff can remove organization."
-msgstr ""
-
-#: app/scripts/components/customer/customer-manage.html:109
-msgid "Only staff can update organization policies."
 msgstr ""
 
 #: app/scripts/components/alerts/alert-filter.html:1
@@ -2902,6 +3046,10 @@ msgstr ""
 msgid "Opened by"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-providers.html:17
+msgid "OR"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:79
 msgid "Or use social login"
 msgstr ""
@@ -2911,8 +3059,9 @@ msgid "organization"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:59
+#: app/scripts/components/experts/bids/expert-bids-list.js:62
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:66
-#: app/scripts/components/issues/constants.js:94
+#: app/scripts/components/issues/constants.js:102
 #: app/scripts/components/issues/issue-create-dialog.html:12
 #: app/scripts/components/issues/issue-create-dialog.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:7
@@ -2954,11 +3103,11 @@ msgstr ""
 msgid "Organization {customer_name} has no providers."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:112
+#: app/scripts/components/customer/customer-manage.html:109
 msgid "Organization actions"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:51
+#: app/scripts/components/issues/constants.js:59
 msgid "Organization code"
 msgstr ""
 
@@ -2980,13 +3129,13 @@ msgid "Organization has been created."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:69
-#: app/scripts/components/issues/constants.js:47
+#: app/scripts/components/issues/constants.js:55
 #: app/scripts/components/user/user-edit.html:71
 #: app/scripts/components/user/user-organizations.js:54
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:188
+#: app/scripts/components/configs/base-config.js:187
 msgid "Organization owner"
 msgstr ""
 
@@ -3185,10 +3334,6 @@ msgstr ""
 msgid "Please note that request should specify tenant and provide a reason."
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-config.js:44
-msgid "Please note, that actual billing will be usage based."
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:29
 msgid "Please provide a reason"
 msgstr ""
@@ -3242,7 +3387,6 @@ msgstr ""
 msgid "Please wait while provider is being configured."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:61
 #: app/scripts/components/customer/customer-policies.html:2
 #: app/scripts/components/project/project-dialog.html:14
 msgid "Policies"
@@ -3283,13 +3427,14 @@ msgstr ""
 #: app/scripts/components/billing/invoices-list.js:54
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:8
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:57
+#: app/scripts/components/experts/bids/expert-bids-list.js:70
 #: app/scripts/components/offering/offering-summary.html:34
 #: app/scripts/components/paypal/paypal-invoices-list.js:58
 #: app/scripts/components/plans/plan-agreements-list.js:48
 msgid "Price"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:30
+#: app/scripts/components/experts/bids/expert-bid.html:22
 msgid "PRICE"
 msgstr ""
 
@@ -3307,6 +3452,26 @@ msgstr ""
 
 #: app/scripts/components/price/price-tooltip.js:18
 msgid "Price is estimated."
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:22
+#: app/scripts/components/slurm/slurm-prices.html:14
+msgid "Price of CPU hour"
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:26
+#: app/scripts/components/slurm/slurm-prices.html:18
+msgid "Price of GPU hour"
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:30
+#: app/scripts/components/slurm/slurm-prices.html:22
+msgid "Price of RAM GB"
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:18
+#: app/scripts/components/slurm/slurm-prices.html:10
+msgid "Price package name"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:11
@@ -3357,7 +3522,7 @@ msgstr ""
 #: app/scripts/components/appstore/routes.js:22
 #: app/scripts/components/configs/base-config.js:36
 #: app/scripts/components/configs/base-config.js:93
-#: app/scripts/components/dashboard/constants.js:15
+#: app/scripts/components/dashboard/constants.js:18
 #: app/scripts/components/project/project-workspace.js:58
 #: app/scripts/components/project/projects-list.js:119
 #: app/scripts/components/project/routes.js:132
@@ -3381,7 +3546,7 @@ msgstr ""
 #: app/scripts/components/events/event-details-dialog.html:69
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:71
 #: app/scripts/components/invitations/actions/invitation-dialog.html:46
-#: app/scripts/components/issues/constants.js:97
+#: app/scripts/components/issues/constants.js:105
 #: app/scripts/components/issues/issue-create-dialog.html:17
 #: app/scripts/components/issues/issue-create-dialog.html:27
 #: app/scripts/components/issues/issue-detail.html:40
@@ -3392,6 +3557,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:52
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:48
 #: app/scripts/components/premiumSupport/premium-support-summary.html:35
+#: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:48
 msgid "Project"
 msgstr ""
 
@@ -3441,7 +3607,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:189
+#: app/scripts/components/configs/base-config.js:188
 msgid "Project manager"
 msgstr ""
 
@@ -3450,7 +3616,7 @@ msgid "Project manager cannot edit users with same role."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:68
-#: app/scripts/components/issues/constants.js:55
+#: app/scripts/components/issues/constants.js:63
 #: app/scripts/components/project/project-create.html:8
 #: app/scripts/components/project/project-details.html:9
 #: app/scripts/components/providers/details/provider-project-link-quotas.html:6
@@ -3484,6 +3650,7 @@ msgstr ""
 #: app/scripts/components/appstore/dialog/appstore-project-selector.html:2
 #: app/scripts/components/customer/customer-workspace.js:58
 #: app/scripts/components/customer/routes.js:97
+#: app/scripts/components/dashboard/constants.js:7
 #: app/scripts/components/navigation/select-workspace-dialog.html:93
 #: app/scripts/components/providers/details/dialog.html:28
 msgid "Projects"
@@ -3534,7 +3701,7 @@ msgstr ""
 msgid "Provider has resources. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:53
+#: app/scripts/components/appstore/appstore-providers-service.js:57
 msgid "Provider is in erred state."
 msgstr ""
 
@@ -3547,7 +3714,7 @@ msgstr ""
 msgid "Provider package is not defined."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers-service.js:67
+#: app/scripts/components/appstore/appstore-providers-service.js:71
 msgid "Provider quota has reached threshold."
 msgstr ""
 
@@ -3577,6 +3744,14 @@ msgstr ""
 
 #: app/scripts/components/user/keys/key-create.html:23
 msgid "Public key"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:6
+msgid "Pulling"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:30
+msgid "Pulling quotas"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html:50
@@ -3619,6 +3794,7 @@ msgstr ""
 msgid "Quota usage exceeds limit."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/tabs.js:25
 #: app/scripts/components/providers/details/dialog.html:22
 msgid "Quotas"
 msgstr ""
@@ -3634,11 +3810,12 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:15
 #: app/scripts/components/quotas/filters.js:6
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:69
+#: app/scripts/components/slurm/slurm-allocation-list.js:54
+#: app/scripts/components/slurm/slurm-allocation-summary.html:45
 msgid "RAM"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:57
-#: app/scripts/components/slurm/slurm-allocation-summary.html:54
+#: app/scripts/components/slurm/slurm-allocation-config.js:45
 msgid "RAM limit"
 msgstr ""
 
@@ -3646,13 +3823,11 @@ msgstr ""
 msgid "RAM limit GB"
 msgstr ""
 
-#: app/scripts/components/slurm/actions.js:27
-#: app/scripts/components/slurm/slurm-allocation-config.js:39
+#: app/scripts/components/slurm/actions.js:36
 msgid "RAM limit, MB"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:61
-#: app/scripts/components/slurm/slurm-allocation-summary.html:63
+#: app/scripts/components/slurm/slurm-allocation-usage-table.js:52
 msgid "RAM usage"
 msgstr ""
 
@@ -3661,6 +3836,7 @@ msgid "Read through terms and conditions."
 msgstr ""
 
 #: app/scripts/components/customer/customer-manage.js:110
+#: app/scripts/components/experts/requests/expert-request-complain.js:57
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
@@ -3688,7 +3864,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-activity-stream.html:11
 #: app/scripts/components/issues/issues-short-list.html:11
-#: app/scripts/components/table/responsive-table.js:174
+#: app/scripts/components/table/responsive-table.js:181
 msgid "Refresh"
 msgstr ""
 
@@ -3711,6 +3887,14 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:13
 msgid "Register to"
+msgstr ""
+
+#: app/scripts/components/auth/auth-button-text.js:9
+msgid "Register with"
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-providers.html:14
+msgid "Register your own cloud account"
 msgstr ""
 
 #: app/scripts/components/experts/expert-provider-details.html:26
@@ -3757,11 +3941,11 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:123
+#: app/scripts/components/customer/customer-manage.html:120
 msgid "Remove organization"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:187
+#: app/scripts/components/user/user-edit.html:180
 msgid "Remove profile"
 msgstr ""
 
@@ -3770,7 +3954,7 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:116
+#: app/scripts/components/customer/customer-manage.html:113
 msgid "Report incorrect data"
 msgstr ""
 
@@ -3778,23 +3962,31 @@ msgstr ""
 msgid "Reported by me"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:75
+#: app/scripts/components/issues/constants.js:83
 #: app/scripts/components/issues/issue-detail.html:20
 #: app/scripts/components/issues/issues-list.js:110
 msgid "Reporter"
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.js:195
+#: app/scripts/components/issues/issue-registration.js:197
 msgid "Request {key} has been created."
 msgstr ""
 
-#: app/scripts/components/issues/issue-create-dialog.js:66
-#: app/scripts/components/issues/issue-quick-create.js:115
+#: app/scripts/components/issues/issue-create-dialog.js:75
+#: app/scripts/components/issues/issue-quick-create.js:117
 msgid "Request {requestId} has been created."
 msgstr ""
 
 #: app/scripts/components/issues/request-service-button.js:32
 msgid "Request a new service"
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-tabs.html:11
+msgid "Request bids"
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-complain.js:54
+msgid "Request complaint"
 msgstr ""
 
 #: app/scripts/components/issues/issue-create-dialog.js:6
@@ -3819,6 +4011,10 @@ msgstr ""
 msgid "Request direct access to OpenStack Tenant"
 msgstr ""
 
+#: app/scripts/components/experts/requests/expert-request-button.html:3
+msgid "Request expert"
+msgstr ""
+
 #: app/scripts/components/issues/issue-create-dialog.js:8
 #: app/scripts/components/issues/issue-create-dialog.js:9
 msgid "Request name"
@@ -3833,8 +4029,8 @@ msgstr ""
 msgid "Request to {action} has been accepted."
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:106
-#: app/scripts/components/issues/constants.js:67
+#: app/scripts/components/issues/constants.js:114
+#: app/scripts/components/issues/constants.js:75
 #: app/scripts/components/issues/issue-create-dialog.html:37
 #: app/scripts/components/issues/issue-create-dialog.html:42
 #: app/scripts/components/issues/issue-detail.html:35
@@ -3909,7 +4105,7 @@ msgstr ""
 msgid "Resource is gone."
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:28
+#: app/scripts/components/resource/state/resource-state-service.js:30
 msgid "Resource is in sync"
 msgstr ""
 
@@ -3954,8 +4150,16 @@ msgstr ""
 msgid "Resources import has been initiated"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:15
+msgid "Restarting"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-snapshot/module.js:69
 msgid "Restored volumes"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:11
+msgid "Restroing"
 msgstr ""
 
 #: app/scripts/components/billing/invoice-events-dialog.html:13
@@ -3993,7 +4197,7 @@ msgstr ""
 msgid "Runtime State"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:219
+#: app/scripts/components/configs/base-config.js:224
 msgid "Russian"
 msgstr ""
 
@@ -4038,6 +4242,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:102
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-summary.html:5
 #: app/scripts/components/openstack/openstack-security-groups/breadcrumbs.js:21
+#: app/scripts/components/openstack/openstack-tenant/tabs.js:17
 msgid "Security groups"
 msgstr ""
 
@@ -4054,7 +4259,7 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:73
+#: app/scripts/components/appstore/appstore-providers.js:84
 #: app/scripts/components/appstore/dialog/appstore-category-selector.html:37
 #: app/scripts/components/navigation/select-workspace-dialog.html:124
 #: app/scripts/components/navigation/select-workspace-dialog.html:62
@@ -4115,7 +4320,7 @@ msgstr ""
 msgid "Select project..."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:30
+#: app/scripts/components/appstore/appstore-providers.js:36
 msgid "Select provider"
 msgstr ""
 
@@ -4158,11 +4363,11 @@ msgid "Select Virtual Private Cloud package"
 msgstr ""
 
 #: app/scripts/components/navigation/select-workspace-dialog.html:3
-#: app/scripts/components/navigation/select-workspace-toggle.html:8
+#: app/scripts/components/navigation/select-workspace-toggle.html:10
 msgid "Select workspace"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:71
+#: app/scripts/components/appstore/appstore-providers.js:82
 msgid "Selected"
 msgstr ""
 
@@ -4194,7 +4399,11 @@ msgstr ""
 msgid "Service Request"
 msgstr ""
 
-#: app/scripts/components/resource/state/resource-state-service.js:33
+#: app/scripts/components/issues/constants.js:31
+msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
+msgstr ""
+
+#: app/scripts/components/resource/state/resource-state-service.js:35
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
@@ -4206,7 +4415,7 @@ msgstr ""
 msgid "Service store"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:59
+#: app/scripts/components/issues/constants.js:67
 #: app/scripts/components/issues/issue-detail.html:45
 #: app/scripts/components/issues/issue-registration.html:156
 #: app/scripts/components/issues/issues-list.js:84
@@ -4223,14 +4432,6 @@ msgstr ""
 
 #: app/scripts/components/providers/details/dialog.html:16
 msgid "Settings"
-msgstr ""
-
-#: app/scripts/components/customer/customer-create-config.js:73
-msgid "Setup expert provider"
-msgstr ""
-
-#: app/scripts/components/customer/customer-create-config.js:62
-msgid "Setup policies"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js:101
@@ -4257,32 +4458,8 @@ msgstr ""
 msgid "Sign a support agreement"
 msgstr ""
 
-#: app/scripts/components/auth/saml2/auth-saml2.js:15
-msgid "Sign in with {provider}"
-msgstr ""
-
-#: app/scripts/components/auth/saml2/auth-saml2-trigger.html:4
-msgid "Sign in with eduGAIN"
-msgstr ""
-
-#: app/scripts/components/auth/auth-login.html:90
-msgid "Sign in with Facebook"
-msgstr ""
-
-#: app/scripts/components/auth/auth-login.html:84
-msgid "Sign in with Google"
-msgstr ""
-
-#: app/scripts/components/auth/estonianId/auth-estonian-id.html:6
-msgid "Sign in with ID card"
-msgstr ""
-
-#: app/scripts/components/auth/estonianId/auth-estonian-id.html:15
-msgid "Sign in with Mobile ID"
-msgstr ""
-
-#: app/scripts/components/auth/auth-login.html:96
-msgid "Sign in with SmartID"
+#: app/scripts/components/auth/auth-button-text.js:9
+msgid "Sign in with"
 msgstr ""
 
 #: app/scripts/components/azure/azure-virtual-machine-config.js:37
@@ -4294,7 +4471,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:44
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:40
 #: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js:51
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:46
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:47
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:17
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:5
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:47
@@ -4322,6 +4499,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-navigation-service.js:27
 msgid "SLAs"
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-details-dialog.html:2
+msgid "SLURM allocation usage"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.js:7
@@ -4354,14 +4535,6 @@ msgstr ""
 
 #: app/scripts/components/quotas/filters.js:11
 msgid "Snapshots count"
-msgstr ""
-
-#: app/scripts/components/experts/bids/expert-bids-list.js:17
-msgid "Sort by date"
-msgstr ""
-
-#: app/scripts/components/experts/bids/expert-bids-list.js:21
-msgid "Sort by price"
 msgstr ""
 
 #: app/scripts/components/resource/summary/virtual-machine-summary.html:54
@@ -4411,6 +4584,10 @@ msgstr ""
 msgid "Start time"
 msgstr ""
 
+#: app/scripts/components/resource/state/constants.js:13
+msgid "Starting"
+msgstr ""
+
 #: app/scripts/components/ansible/ansible-job-summary.html:22
 #: app/scripts/components/ansible/ansible-jobs-list.js:66
 #: app/scripts/components/billing/billing-records-list.js:48
@@ -4429,7 +4606,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:52
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:35
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:42
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:54
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:59
 #: app/scripts/components/payments/payment-list.js:27
 #: app/scripts/components/paypal/paypal-invoices-list.js:50
 #: app/scripts/components/plans/plan-agreements-list.js:26
@@ -4437,14 +4614,14 @@ msgstr ""
 #: app/scripts/components/providers/provider-list.js:62
 #: app/scripts/components/resource/list/resources-list.js:60
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
-#: app/scripts/components/slurm/slurm-allocation-list.js:66
+#: app/scripts/components/slurm/slurm-allocation-list.js:58
 #: app/scripts/components/user/hooks/hook-list.js:26
 msgid "State"
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js:124
-#: app/scripts/components/issues/constants.js:109
-#: app/scripts/components/issues/constants.js:71
+#: app/scripts/components/issues/constants.js:117
+#: app/scripts/components/issues/constants.js:79
 #: app/scripts/components/issues/issue-detail.html:55
 #: app/scripts/components/issues/issues-list.js:54
 #: app/scripts/components/user/user-popover-table.html:41
@@ -4457,6 +4634,10 @@ msgstr ""
 
 #: app/scripts/components/resource-import/resource-import-dialog.html:23
 msgid "Step 2. Select resources"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:14
+msgid "Stopping"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-compare-list.js:90
@@ -4490,7 +4671,15 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:24
+#: app/scripts/components/experts/requests/expert-request-complain.js:58
+msgid "Submit complaint"
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-allocation-summary.html:18
+msgid "Submit with"
+msgstr ""
+
+#: app/scripts/components/experts/bids/expert-bid.html:17
 msgid "SUBMITTED"
 msgstr ""
 
@@ -4568,7 +4757,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:190
+#: app/scripts/components/configs/base-config.js:189
 msgid "System administrator"
 msgstr ""
 
@@ -4578,6 +4767,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:71
 msgid "System volume size"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:5
+msgid "Taking a snapshot"
 msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:59
@@ -4592,6 +4785,7 @@ msgstr ""
 #: app/scripts/components/customer/customer-workspace.js:120
 #: app/scripts/components/customer/routes.js:105
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:16
+#: app/scripts/components/experts/bids/expert-bids-list.js:66
 #: app/scripts/components/project/project-workspace.js:104
 #: app/scripts/components/project/routes.js:163
 msgid "Team"
@@ -4601,7 +4795,7 @@ msgstr ""
 msgid "Team does not have members yet."
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js:31
+#: app/scripts/components/dashboard/constants.js:34
 msgid "Team size"
 msgstr ""
 
@@ -4647,7 +4841,7 @@ msgstr ""
 #: app/scripts/components/freeipa/freeipa-account-edit.html:20
 #: app/scripts/components/navigation/app-footer.html:8
 #: app/scripts/components/user/user-edit.html:143
-#: app/scripts/components/user/user-edit.html:159
+#: app/scripts/components/user/user-edit.html:154
 msgid "Terms of Service"
 msgstr ""
 
@@ -4659,7 +4853,7 @@ msgstr ""
 msgid "Thanks"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:49
+#: app/scripts/components/appstore/appstore-providers.js:59
 msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
@@ -4680,7 +4874,7 @@ msgstr ""
 msgid "There are no available users."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bids-list.html:2
+#: app/scripts/components/experts/bids/expert-bids-list.js:53
 msgid "There are no bids yet."
 msgstr ""
 
@@ -4741,6 +4935,10 @@ msgstr ""
 msgid "There is no activity yet."
 msgstr ""
 
+#: app/scripts/components/slurm/slurm-prices.html:4
+msgid "There's no pricing package for the batch processing provider."
+msgstr ""
+
 #: app/scripts/components/form/appstore-field-email.html:11
 #: app/scripts/components/form/appstore-field-string.html:12
 #: app/scripts/components/form/appstore-field-tel.html:11
@@ -4756,7 +4954,7 @@ msgstr ""
 msgid "This month estimated costs for organization {customer_name} exceeded."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-create.js:41
+#: app/scripts/components/experts/requests/expert-request-create.js:44
 #: app/scripts/components/offering/appstore-offering.js:42
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:24
 #: app/scripts/components/project/project-create.html:15
@@ -4854,7 +5052,7 @@ msgstr ""
 
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:76
 #: app/scripts/components/experts/requests/expert-request-project-list.js:66
-#: app/scripts/components/experts/requests/expert-request-summary.html:18
+#: app/scripts/components/experts/requests/expert-request-summary.html:17
 #: app/scripts/components/offering/offering-summary.html:25
 #: app/scripts/components/offering/offerings-list.js:44
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
@@ -4892,12 +5090,12 @@ msgstr ""
 msgid "Unable to change tenant package."
 msgstr ""
 
-#: app/scripts/components/freeipa/freeipa-account-create.js:55
-msgid "Unable to create a FreeIPA profile."
+#: app/scripts/components/experts/requests/expert-request-complete.js:34
+msgid "Unable to complete expert request."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-create.js:77
-msgid "Unable to create expert request."
+#: app/scripts/components/freeipa/freeipa-account-create.js:55
+msgid "Unable to create a FreeIPA profile."
 msgstr ""
 
 #: app/scripts/components/invitations/actions/invitation-dialog-service.js:56
@@ -4997,7 +5195,7 @@ msgstr ""
 msgid "Update policies"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html:181
+#: app/scripts/components/user/user-edit.html:174
 msgid "Update profile"
 msgstr ""
 
@@ -5011,6 +5209,30 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-short-list.html:29
 msgid "Updated"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:4
+msgid "Updating"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:20
+msgid "Updating floaating IPs"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:19
+msgid "Updating internal IPs"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:24
+msgid "Updating quotas"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:23
+msgid "Updating rules"
+msgstr ""
+
+#: app/scripts/components/resource/state/constants.js:16
+msgid "Updating security groups"
 msgstr ""
 
 #: app/views/directives/customer-balance.html:36
@@ -5202,12 +5424,16 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
+#: app/scripts/components/experts/bids/expert-bids-list.js:85
+msgid "View details"
+msgstr ""
+
 #: app/scripts/components/analytics/resource-chart-service.js:15
 #: app/scripts/components/appstore/routes.js:32
 #: app/scripts/components/configs/base-config.js:114
 #: app/scripts/components/configs/base-config.js:28
 #: app/scripts/components/configs/base-config.js:86
-#: app/scripts/components/dashboard/constants.js:11
+#: app/scripts/components/dashboard/constants.js:14
 #: app/scripts/components/project/project-workspace.js:50
 #: app/scripts/components/project/routes.js:124
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:15
@@ -5264,6 +5490,10 @@ msgstr ""
 msgid "VPC packages for this provider are not found."
 msgstr ""
 
+#: app/scripts/components/experts/requests/expert-request-complain.js:56
+msgid "We are sorry you had a bad experience. Tell us what happend?"
+msgstr ""
+
 #: app/scripts/components/auth/auth-init.js:13
 #: app/scripts/components/auth/auth-login.js:33
 msgid "Welcome to {pageTitle}!"
@@ -5293,11 +5523,11 @@ msgstr ""
 msgid "Yes, use invitation email"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:58
+#: app/scripts/components/appstore/appstore-providers.js:69
 msgid "You can provision a new provider through <a href=\"{link}\">Service store</a>."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:120
+#: app/scripts/components/customer/customer-manage.html:117
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
@@ -5314,9 +5544,9 @@ msgid "You cannot remove shared provider."
 msgstr ""
 
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:31
-#: app/scripts/components/issues/issue-create-dialog.js:39
-#: app/scripts/components/issues/issue-quick-create.js:47
-#: app/scripts/components/issues/issue-registration.js:68
+#: app/scripts/components/issues/issue-create-dialog.js:40
+#: app/scripts/components/issues/issue-quick-create.js:49
+#: app/scripts/components/issues/issue-registration.js:70
 msgid "You did not enter a field."
 msgstr ""
 
@@ -5328,7 +5558,7 @@ msgstr ""
 msgid "You do not have permissions to create private cloud for current project."
 msgstr ""
 
-#: app/scripts/components/navigation/select-workspace-toggle.js:66
+#: app/scripts/components/navigation/select-workspace-toggle.js:67
 msgid "You don't have any organization yet."
 msgstr ""
 
@@ -5421,7 +5651,7 @@ msgstr ""
 msgid "You have no virtual machines yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:37
+#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:38
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js:43
 msgid "You have no volumes yet."
 msgstr ""

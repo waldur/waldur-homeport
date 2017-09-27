@@ -18,10 +18,15 @@ export default function expertRequestsService(baseServiceClass, $q, $http, ENV) 
         .then(response => response.data);
     },
 
+    complete: function (expertRequest) {
+      return $http.post(`${expertRequest.url}complete/`)
+        .then(response => response.data);
+    },
+
     getConfiguration: function () {
       return $http.get(`${ENV.apiEndpoint}api${this.endpoint}configured/`)
         .then(response => response.data);
-    }
+    },
   });
   return new ServiceClass();
 }

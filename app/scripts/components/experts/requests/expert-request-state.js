@@ -1,10 +1,10 @@
 import template from './expert-request-state.html';
 
 const labelClasses = {
-  Pending: 'label-warning',
-  Active: 'label-primary',
-  Cancelled: 'label-danger',
-  Finished: 'label-success',
+  Pending: 'progress-bar-warning',
+  Active: '',
+  Cancelled: 'progress-bar-danger',
+  Finished: 'progress-bar-success',
 };
 
 const expertRequestState = {

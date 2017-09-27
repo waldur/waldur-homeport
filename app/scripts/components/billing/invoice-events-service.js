@@ -1,23 +1,28 @@
 export default class InvoiceEventsService {
   // @ngInject
-  constructor(ENV, eventsService, eventFormatter) {
+  constructor($q, ENV, eventsService, eventFormatter) {
+    this.$q = $q;
     this.ENV = ENV;
     this.eventsService = eventsService;
     this.eventFormatter = eventFormatter;
   }
 
-  loadEvents(tenant_uuid) {
-    return this.loadTenantEvents(tenant_uuid).then(this.parseEvents.bind(this));
-  }
-
-  loadTenantEvents(tenant_uuid) {
+  loadEvents(item) {
+    let resource_type, resource_uuid;
+    if (item.tenant_uuid) {
+      resource_type = 'OpenStack.Tenant';
+      resource_uuid = item.tenant_uuid;
+    }
+    else if (item.scope_type) {
+      resource_type = item.scope_type;
+      resource_uuid = item.scope_uuid;
+    } else {
+      return this.$q.resolve([]);
+    }
     return this.eventsService.getAll({
-      scope: this.getTenantUrl(tenant_uuid),
-    });
-  }
-
-  getTenantUrl(tenant_uuid) {
-    return `${this.ENV.apiEndpoint}api/openstack-tenants/${tenant_uuid}/`;
+      resource_type,
+      resource_uuid
+    }).then(this.parseEvents.bind(this));
   }
 
   parseEvents(events) {

@@ -7,10 +7,9 @@ export default function registerExpertRequestCategory(features, $q, expertReques
       return $q.when([]);
     }
     return expertRequestsService.getConfiguration()
-      .then(experts => {
-        return Object.keys(experts).filter(
-          key => experts[key].category === APPSTORE_CATEGORY
-        ).map(key => ({
+      .then(config => {
+        const experts = config.offerings || [];
+        return Object.keys(experts).map(key => ({
           key,
           label: experts[key].label,
           icon: experts[key].icon || 'fa-gear',

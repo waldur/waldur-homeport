@@ -1,22 +1,6 @@
 <form class="form-horizontal" name="$ctrl.Form">
-    <div ng-repeat="field in $ctrl.fieldsList" class="form-group">
-        <div ng-if="$ctrl.renderLabel(field)">
-            <div class="col-sm-3 control-label">
-                <label for="{{ field.name }}" uib-tooltip="{{ field.help_text | translate }}">
-                    <i class="fa fa-question-circle" ng-if="field.help_text"></i>
-                    <field-label field="field"></field-label>
-                </label>
-            </div>
-            <div class="col-sm-6">
-                <appstore-field field="field" model="$ctrl.model" form="$ctrl.Form"></appstore-field>
-                <p class="help-block m-b-n-xs text-muted" ng-if="field.form_text">
-                  {{ field.form_text | translate }}
-                </p>
-                <appstore-field-errors field="field" errors="$ctrl.errors"></appstore-field-errors>
-            </div>
-        </div>
-        <div ng-if="!$ctrl.renderLabel(field)" class="col-sm-offset-3 col-sm-6">
-            <appstore-field field="field" model="$ctrl.model"></appstore-field>
-        </div>
-    </div>
+  <appstore-form-fieldset fields="$ctrl.fieldsList"
+                          model="$ctrl.model"
+                          errors="$ctrl.errors"
+                          form="$ctrl.Form"></appstore-form-fieldset>
 </form>

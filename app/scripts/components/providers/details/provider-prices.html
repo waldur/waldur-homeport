@@ -5,6 +5,9 @@
   <div ng-switch-when="OpenStackTenant">
     <openstack-tenant-prices provider="$ctrl.provider"/>
   </div>
+  <div ng-switch-when="SLURM">
+    <slurm-prices provider="$ctrl.provider"/>
+  </div>
   <div ng-switch-default>
     <provider-price-list provider="$ctrl.provider"/>
   </div>

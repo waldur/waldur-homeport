@@ -1,6 +1,7 @@
 import OpenStackInstanceConfig from './openstack-instance-config';
 import appstoreStore from '../../appstore/appstore-store';
 import fieldLabel from './../../form/field-label';
+import appstoreFormFieldset from './../../form/appstore-form-fieldset';
 import appstoreForm from './../../form/appstore-form';
 import appstoreField from './../../form/appstore-field';
 import appstoreFieldLabel from './../../form/appstore-field-label';
@@ -37,6 +38,7 @@ describe('OpenStack Instance Store', function() {
     module.component('openstackInstanceInternalIpsList', openstackInstanceInternalIpsList);
     module.component('openstackInstanceNetworks', openstackInstanceNetworks);
     module.component('openstackInstanceFloatingIps', openstackInstanceFloatingIps);
+    module.component('appstoreFormFieldset', appstoreFormFieldset);
     module.directive('appstoreForm', appstoreForm);
     module.directive('appstoreStore', appstoreStore);
     module.constant('ENV', {
@@ -373,6 +375,8 @@ describe('OpenStack Instance Store', function() {
         renderedLabels.push(label);
       }
     }
+
+    expect(renderedLabels.length).not.toBe(0);
 
     let expectedLabels = [];
     for (let i=0; i<controller.fields.order.length; i++) {

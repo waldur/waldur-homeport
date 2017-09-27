@@ -5,8 +5,9 @@ describe('IssueNavigationService', () => {
   let deferred;
   let $state;
   let service;
+  let isOwnerOrStaff;
 
-  const hasLink = (items, link) => items.filter(item => item.link === link).length === 1;
+  const hasLink = (items, link) => items.filter(item => item.link === link).length >= 1;
 
   beforeEach(inject((_$rootScope_, _$q_) => {
     $scope = _$rootScope_.$new();
@@ -14,8 +15,12 @@ describe('IssueNavigationService', () => {
     const usersService = {
       getCurrentUser: () => deferred.promise
     };
+    const currentStateService = {
+      getOwnerOrStaff: () => isOwnerOrStaff
+    };
     $state = jasmine.createSpyObj('$state', ['go']);
-    service = new IssueNavigationService(usersService, $state);
+    service = new IssueNavigationService($state, usersService, currentStateService);
+    isOwnerOrStaff = false;
   }));
 
   it('redirects to helpdesk if user is staff', () => {
@@ -48,6 +53,7 @@ describe('IssueNavigationService', () => {
   });
 
   it('returns sidebar with dashboard link if user is staff', () => {
+    isOwnerOrStaff = true;
     deferred.resolve({ is_staff: true });
     let sidebar;
     service.getSidebarItems().then(items => sidebar = items);
@@ -56,6 +62,7 @@ describe('IssueNavigationService', () => {
   });
 
   it('returns sidebar with dashboard and helpdesk link if user is staff and support', () => {
+    isOwnerOrStaff = true;
     deferred.resolve({ is_staff: true, is_support: true });
     let sidebar;
     service.getSidebarItems().then(items => sidebar = items);

@@ -19,6 +19,7 @@ export const userEdit = {
         this.currentUser = user;
       });
       this.userMandatoryFields = ENV.userMandatoryFields;
+      this.userRegistrationHiddenFields = ENV.userRegistrationHiddenFields;
       this.userTokenLifetimeOptions = [
         { name: '10 min', value: 600 },
         { name: '30 min', value: 1800 },
@@ -40,6 +41,10 @@ export const userEdit = {
       if (this.UserForm.$invalid) {
         return this.$q.reject();
       }
+      if (this.initial) {
+        this.user.agree_with_policy = true;
+      }
+
       return this.onSave({
         $event: {
           user: this.user
@@ -49,6 +54,14 @@ export const userEdit = {
 
     isRequired(field) {
       return this.userMandatoryFields.indexOf(field) !== -1;
+    }
+
+    isVisible(field) {
+      if (!this.initial) {
+        return true;
+      }
+
+      return this.userRegistrationHiddenFields.indexOf(field) === -1;
     }
 
     mergeLifeTimeOptions(options, option) {

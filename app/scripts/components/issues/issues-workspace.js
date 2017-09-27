@@ -17,13 +17,12 @@ export default {
         workspace: 'support',
       });
 
-      this.IssueNavigationService.getSidebarItems().then(items => this.items = items);
-
-      this.unlisten = this.$rootScope.$on('$stateChangeSuccess', this.syncHeader.bind(this));
-      this.syncHeader();
+      this.unlisten = this.$rootScope.$on('$stateChangeSuccess', this.syncNavigation.bind(this));
+      this.syncNavigation();
     }
 
-    syncHeader() {
+    syncNavigation() {
+      this.IssueNavigationService.getSidebarItems().then(items => this.items = items);
       this.pageTitle = this.$state.current.data.pageTitle;
       this.hideBreadcrumbs = this.$state.current.data.hideBreadcrumbs;
     }

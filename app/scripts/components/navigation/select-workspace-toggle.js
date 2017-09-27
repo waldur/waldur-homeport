@@ -37,6 +37,7 @@ class SelectWorkspaceToggleController {
   refreshWorkspace() {
     const options = this.WorkspaceService.getWorkspace();
     if (options) {
+      this.$scope.organization = options.customer;
       this.hasCustomer = options.hasCustomer;
       this.customer = options.customer;
       this.project = options.project;

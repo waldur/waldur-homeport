@@ -17,7 +17,7 @@ const invoiceEventsDialog = {
     $onInit() {
       this.loading = true;
       this.erred = false;
-      this.InvoiceEventsService.loadEvents(this.resolve.tenant_uuid)
+      this.InvoiceEventsService.loadEvents(this.resolve.item)
         .then(events => this.events = events)
         .catch(() => this.erred = true)
         .finally(() => this.loading = false);

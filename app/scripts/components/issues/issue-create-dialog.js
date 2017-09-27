@@ -18,13 +18,14 @@ const issueCreateDialog = {
     resolve: '<'
   },
   controller: class IssueCreateDialogController {
-    constructor(issuesService, $q, $state, ncUtilsFlash, IssueTypesService, coreUtils) {
+    constructor(issuesService, $q, $state, ncUtilsFlash, IssueTypesService, ErrorMessageFormatter, coreUtils) {
       // @ngInject
       this.service = issuesService;
       this.$q = $q;
       this.$state = $state;
       this.ncUtilsFlash = ncUtilsFlash;
       this.IssueTypesService = IssueTypesService;
+      this.ErrorMessageFormatter = ErrorMessageFormatter;
       this.coreUtils = coreUtils;
     }
 
@@ -40,6 +41,14 @@ const issueCreateDialog = {
       });
     }
 
+    getDescription() {
+      if (this.resolve.issue.additionalDetails) {
+        return `${this.issue.description}. \n\nRequest details: ${this.resolve.issue.additionalDetails}`;
+      }
+
+      return this.issue.description;
+    }
+
     save() {
       this.IssueForm.$submitted = true;
       if (this.IssueForm.$invalid) {
@@ -48,7 +57,7 @@ const issueCreateDialog = {
       let issue = {
         type: this.issue.type,
         summary: this.issue.summary,
-        description: this.issue.description,
+        description: this.getDescription(),
         is_reported_manually: true
       };
       if (this.issue.customer) {
@@ -67,6 +76,8 @@ const issueCreateDialog = {
         return this.$state.go('support.detail', {uuid: issue.uuid}).then(() => {
           this.close();
         });
+      }).catch(response => {
+        this.ncUtilsFlash.error(this.ErrorMessageFormatter.format(response));
       }).finally(() => {
         this.saving = false;
       });

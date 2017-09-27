@@ -1,3 +1,7 @@
+.html-description {
+    white-space: pre-wrap;
+}
+
 img {
     max-width: 100%;
     vertical-align: top;
@@ -191,4 +195,8 @@ body.landing {
     .block-container-md {
         float: none !important;
     }
+}
+
+.state-indicator {
+  display: inline-block;
 }
