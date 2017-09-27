@@ -11,7 +11,9 @@ import expertRequestComplete from './expert-request-complete';
 import expertRequestComplain from './expert-request-complain';
 import expertRequestCreateTitle from './expert-request-create-title';
 import expertRequestTabs from './expert-request-tabs';
+import expertRequestButton from './expert-request-button';
 import billingType from './billing-type';
+import extendProjectDashborad from './extend-project-dashboard';
 
 export default module => {
   module.service('expertRequestsService', expertRequestsService);
@@ -28,4 +30,6 @@ export default module => {
   module.component('expertRequestCreateTitle', expertRequestCreateTitle);
   module.component('expertRequestCreate', expertRequestCreate);
   module.component('expertRequestTabs', expertRequestTabs);
+  module.component('expertRequestButton', expertRequestButton);
+  module.run(extendProjectDashborad);
 };
