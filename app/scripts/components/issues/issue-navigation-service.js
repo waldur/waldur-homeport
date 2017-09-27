@@ -33,11 +33,11 @@ const DASHBOARD_ITEMS = [
 
 // This service checks users status and returns different sidebar items and router state
 export default class IssueNavigationService {
-  constructor($state, currentStateService, usersService) {
+  constructor($state, usersService, currentStateService) {
     // @ngInject
     this.$state = $state;
-    this.currentStateService = currentStateService;
     this.usersService = usersService;
+    this.currentStateService = currentStateService;
   }
 
   gotoDashboard() {
