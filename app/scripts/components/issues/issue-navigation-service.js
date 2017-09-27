@@ -75,7 +75,7 @@ export default class IssueNavigationService {
       this.prevParams = params;
       this.prevWorkspace = state.data.workspace;
     }
-  };
+  }
 
   getBackItem() {
     return {
