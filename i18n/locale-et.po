@@ -704,7 +704,7 @@ msgstr "Sirvi"
 #: app/scripts/components/issues/issue-registration.html:6
 #: app/scripts/components/issues/issues-list.js:101
 msgid "Caller"
-msgstr "Väljakutsuja"
+msgstr "Pöörduja"
 
 #: app/scripts/components/providers/provider-list.js:145
 msgid "Can't unlink system provider."
@@ -4064,7 +4064,7 @@ msgstr "Kellele määratud..."
 
 #: app/scripts/components/issues/issue-registration.html:11
 msgid "Select caller..."
-msgstr "Valige väljakutsuja..."
+msgstr "Valige pöörduja..."
 
 #: app/scripts/components/cost-planning/cost-plan-certifications.html:2
 #: app/scripts/components/project/project-create.html:48
