@@ -13,6 +13,7 @@ import slurmAllocationDetailsDialog from './slurm-allocation-details-dialog';
 import slurmAllocationUsageChart from './slurm-allocation-usage-chart';
 import slurmAllocationUsageTable from './slurm-allocation-usage-table';
 import quotaPie from './quota-pie';
+import slurmPrices from './slurm-prices';
 
 export default module => {
   module.config(slurmRoutes);
@@ -30,4 +31,5 @@ export default module => {
   module.component('slurmAllocationUsageTable', slurmAllocationUsageTable);
   module.directive('slurmAllocationUsageChart', slurmAllocationUsageChart);
   module.directive('quotaPie', quotaPie);
+  module.component('slurmPrices', slurmPrices);
 };

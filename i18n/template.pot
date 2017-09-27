@@ -3445,18 +3445,22 @@ msgid "Price is estimated."
 msgstr ""
 
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:22
+#: app/scripts/components/slurm/slurm-prices.html:14
 msgid "Price of CPU hour"
 msgstr ""
 
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:26
+#: app/scripts/components/slurm/slurm-prices.html:18
 msgid "Price of GPU hour"
 msgstr ""
 
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:30
+#: app/scripts/components/slurm/slurm-prices.html:22
 msgid "Price of RAM GB"
 msgstr ""
 
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:18
+#: app/scripts/components/slurm/slurm-prices.html:10
 msgid "Price package name"
 msgstr ""
 
@@ -4915,6 +4919,10 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-activity-stream.html:22
 msgid "There is no activity yet."
+msgstr ""
+
+#: app/scripts/components/slurm/slurm-prices.html:4
+msgid "There's no pricing package for the batch processing provider."
 msgstr ""
 
 #: app/scripts/components/form/appstore-field-email.html:11
