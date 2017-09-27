@@ -21,6 +21,7 @@ class IssueQuickCreateController {
               customersService,
               projectsService,
               resourcesService,
+              ErrorMessageFormatter,
               coreUtils) {
     this.$state = $state;
     this.$scope = $scope;
@@ -31,6 +32,7 @@ class IssueQuickCreateController {
     this.customersService = customersService;
     this.projectsService = projectsService;
     this.resourcesService = resourcesService;
+    this.ErrorMessageFormatter = ErrorMessageFormatter;
     this.coreUtils = coreUtils;
     this.init();
   }
@@ -114,6 +116,8 @@ class IssueQuickCreateController {
       this.service.clearAllCacheForCurrentEndpoint();
       this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {requestId} has been created.'), {requestId: issue.key}));
       return this.$state.go('support.detail', {uuid: issue.uuid});
+    }).catch(response => {
+      this.ncUtilsFlash.error(this.ErrorMessageFormatter.format(response));
     }).finally(() => {
       this.saving = false;
     });

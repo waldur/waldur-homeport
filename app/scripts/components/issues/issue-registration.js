@@ -28,6 +28,7 @@ class IssueRegistrationController {
               customersService,
               projectsService,
               resourcesService,
+              ErrorMessageFormatter,
               coreUtils) {
     this.$state = $state;
     this.$scope = $scope;
@@ -43,6 +44,7 @@ class IssueRegistrationController {
     this.customersService = customersService;
     this.projectsService = projectsService;
     this.resourcesService = resourcesService;
+    this.ErrorMessageFormatter = ErrorMessageFormatter;
     this.coreUtils = coreUtils;
     this.init();
   }
@@ -194,6 +196,8 @@ class IssueRegistrationController {
       this.service.clearAllCacheForCurrentEndpoint();
       this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {key} has been created.'), {key: issue.key}));
       return this.$state.go('support.detail', {uuid: issue.uuid});
+    }).catch(response => {
+      this.ncUtilsFlash.error(this.ErrorMessageFormatter.format(response));
     }).finally(() => {
       this.saving = false;
     });
