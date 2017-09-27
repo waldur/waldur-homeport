@@ -26,14 +26,9 @@ class SummaryController {
   }
 
   loadPackage() {
-    return this.SlurmPackagesService.getList({
-      service_settings: this.model.service_settings
-    }).then(packages => {
-      this.package = packages[0];
-      this.package.cpu_price = parseFloat(this.package.cpu_price);
-      this.package.gpu_price = parseFloat(this.package.gpu_price);
-      this.package.ram_price = parseFloat(this.package.ram_price);
-    });
+    return this.SlurmPackagesService
+      .loadPackage(this.model.service_settings)
+      .then(result => this.package = result);
   }
 
   getEstimatedPrice() {
