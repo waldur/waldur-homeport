@@ -1318,7 +1318,7 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.html:40
+#: app/scripts/components/appstore/appstore-providers.html:55
 #: app/scripts/components/cost-planning/cost-plans-list.js:54
 #: app/scripts/components/events/base-event-list.js:43
 #: app/scripts/components/experts/contracts/expert-contract-form.js:22
@@ -1801,6 +1801,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:57
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:65
 msgid "generate automatically"
+msgstr ""
+
+#: app/scripts/components/appstore/appstore-providers.html:21
+msgid "Get a virtual private cloud from a service store"
 msgstr ""
 
 #: app/scripts/components/intro/expert-manager-intro.js:88
@@ -3032,6 +3036,10 @@ msgstr ""
 msgid "Opened by"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-providers.html:17
+msgid "OR"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html:79
 msgid "Or use social login"
 msgstr ""
@@ -3871,6 +3879,10 @@ msgstr ""
 msgid "Register with"
 msgstr ""
 
+#: app/scripts/components/appstore/appstore-providers.html:14
+msgid "Register your own cloud account"
+msgstr ""
+
 #: app/scripts/components/experts/expert-provider-details.html:26
 msgid "Registered"
 msgstr ""
@@ -4229,7 +4241,7 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:73
+#: app/scripts/components/appstore/appstore-providers.js:84
 #: app/scripts/components/appstore/dialog/appstore-category-selector.html:37
 #: app/scripts/components/navigation/select-workspace-dialog.html:124
 #: app/scripts/components/navigation/select-workspace-dialog.html:62
@@ -4290,7 +4302,7 @@ msgstr ""
 msgid "Select project..."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:30
+#: app/scripts/components/appstore/appstore-providers.js:36
 msgid "Select provider"
 msgstr ""
 
@@ -4337,7 +4349,7 @@ msgstr ""
 msgid "Select workspace"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:71
+#: app/scripts/components/appstore/appstore-providers.js:82
 msgid "Selected"
 msgstr ""
 
@@ -4823,7 +4835,7 @@ msgstr ""
 msgid "Thanks"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:49
+#: app/scripts/components/appstore/appstore-providers.js:59
 msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
@@ -5489,7 +5501,7 @@ msgstr ""
 msgid "Yes, use invitation email"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-providers.js:58
+#: app/scripts/components/appstore/appstore-providers.js:69
 msgid "You can provision a new provider through <a href=\"{link}\">Service store</a>."
 msgstr ""
 

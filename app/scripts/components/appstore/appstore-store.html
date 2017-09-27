@@ -6,14 +6,14 @@
     </div>
     <div class="row" ng-if="!AppStore.policyErrorMessage">
         <div ng-class="{'col-md-9': AppStore.selectedResourceType}">
-
-            <appstore-providers
-                ng-if="!AppStore.selectedResourceType"
-                loading="AppStore.loadingProviders"
-                services="AppStore.getServices()"
-                on-select="AppStore.setService(service)">
-            </appstore-providers>
-
+            <div ng-if="!AppStore.selectedResourceType">
+                <loading-spinner ng-if="$ctrl.loadingProviders"/>
+                <appstore-providers
+                  ng-if="!AppStore.loadingProviders"
+                  services="AppStore.getSegrvices()"
+                  on-select="AppStore.setService(service)">
+                </appstore-providers>
+            </div>
             <div class="ibox" ng-if="AppStore.selectedResourceType">
                 <div class="ibox-title">
                     <h5>

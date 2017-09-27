@@ -5,14 +5,14 @@ const appstoreProviders = {
   bindings: {
     services: '<',
     onSelect: '&',
-    loading: '<',
     headerTitle: '@',
     collapsible: '<',
   },
   controller: class AppstoreProvidersController {
-    constructor($state, $stateParams, $uibModal, AppStoreUtilsService, coreUtils, currentStateService) {
+    constructor($state, $q, $stateParams, $uibModal, AppStoreUtilsService, coreUtils, currentStateService) {
       // @ngInject
       this.$state = $state;
+      this.$q = $q;
       this.$stateParams = $stateParams;
       this.$uibModal = $uibModal;
       this.AppStoreUtilsService = AppStoreUtilsService;
@@ -21,9 +21,15 @@ const appstoreProviders = {
     }
 
     $onInit() {
-      this.initNoProvidersMessage();
-      this.initProvidersManagementMessage();
-      this.collapsed = false;
+      this.loading = true;
+
+      this.$q.all([
+        this.initNoProvidersMessage(),
+        this.initProvidersManagementMessage(),
+      ]).then(() => {
+        this.collapsed = false;
+        this.loading = false;
+      });
     }
 
     getTitle() {
@@ -39,20 +45,25 @@ const appstoreProviders = {
     }
 
     initNoProvidersMessage() {
-      let category = this.$state.current.data.category || this.$stateParams.category;
-      if (category) {
-        category = this.AppStoreUtilsService.findCategory(category);
-        if (!category) {
-          return;
+      return this.currentStateService.getCustomer().then(customer => {
+        this.currentCustomer = customer;
+        this.createProviderLink = this.$state.href('organization.createProvider', {uuid: this.currentCustomer.uuid});
+      }).then(() => {
+        let category = this.$state.current.data.category || this.$stateParams.category;
+        if (category) {
+          category = this.AppStoreUtilsService.findCategory(category);
+          if (!category) {
+            return this.$q.when([]);
+          }
+          this.noProvidersMessage = this.coreUtils.templateFormatter(
+            gettext('There are no {categoryLabel} providers available for the current project.'),
+            { categoryLabel: category.label.toLowerCase() });
         }
-        this.noProvidersMessage = this.coreUtils.templateFormatter(
-          gettext('There are no {categoryLabel} providers available for the current project.'),
-          { categoryLabel: category.label.toLowerCase() });
-      }
+      });
     }
 
     initProvidersManagementMessage() {
-      this.currentStateService.getProject().then(project => {
+      return this.currentStateService.getProject().then(project => {
         const link = this.$state.href('appstore.private_clouds', { uuid: project.uuid });
         this.providerManagementMessage = this.coreUtils.templateFormatter(
           gettext('You can provision a new provider through <a href="{link}">Service store</a>.'), { link });
@@ -87,6 +98,10 @@ const appstoreProviders = {
           provider_type: () => service.type,
         }
       });
+    }
+
+    showServiceStoreDialog() {
+      return this.AppStoreUtilsService.openDialog();
     }
   }
 };
