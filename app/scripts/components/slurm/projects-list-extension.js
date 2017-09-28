@@ -12,6 +12,7 @@ export default function extendTable(TableExtensionService) {
       title: gettext('Allocations'),
       render: row => getAllocationCount(row),
       feature: 'slurm',
+      index: 140,
     }
   ]);
 }
