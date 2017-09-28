@@ -4,7 +4,8 @@ export default class ExtensionPointService {
   }
 
   register(pointId, template) {
-    this._points[pointId] = template;
+    this._points[pointId] = this._points[pointId] || [];
+    this._points[pointId].push(template);
   }
 
   get(pointId) {
