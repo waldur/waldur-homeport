@@ -87,42 +87,50 @@ function ProjectsListController(
             return '<a href="{href}">{name}</a>'
                    .replace('{href}', href)
                    .replace('{name}', row.name);
-          }
+          },
+          index: 10,
         },
         {
           title: gettext('Description'),
           width: '200px',
           render: function(row) {
             return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.description}">${row.description}</span>`;
-          }
+          },
+          index: 20,
         },
         {
           title: gettext('Creation date'),
           render: function(row) {
             return $filter('dateTime')(row.created);
-          }
+          },
+          index: 30,
         },
         {
           title: gettext('VMs'),
-          render: row => row.vm_count || 0
+          render: row => row.vm_count || 0,
+          index: 100,
         },
         {
           title: gettext('Storage'),
-          render: row => row.storage_count || 0
+          render: row => row.storage_count || 0,
+          index: 110,
         },
         {
           title: gettext('Apps'),
           feature: ResourceFeatures.APPLICATIONS,
-          render: row => row.app_count || 0
+          render: row => row.app_count || 0,
+          index: 120,
         },
         {
           title: gettext('Private clouds'),
-          render: row => row.private_cloud_count || 0
+          render: row => row.private_cloud_count || 0,
+          index: 130,
         },
         {
           title: gettext('Estimated cost'),
           feature: 'projectCostDetails',
-          render: row => $filter('defaultCurrency')(row.billing_price_estimate.total)
+          render: row => $filter('defaultCurrency')(row.billing_price_estimate.total),
+          index: 310,
         },
         {
           title: gettext('SLA'),
@@ -135,10 +143,11 @@ function ProjectsListController(
             } else {
               return gettext('No plan');
             }
-          }
+          },
+          index: 320,
         }
       ];
-      return baseColumns.concat(extraColumns);
+      return baseColumns.concat(extraColumns).sort((a, b) => a.index - b.index);
     },
     userCanAddProject: function() {
       const ownerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);

@@ -50,8 +50,8 @@ function ExpertRequestListController(
     getColumns: function() {
       return [
         {
-          title: gettext('Name'),
-          orderField: 'name',
+          title: gettext('Organization'),
+          orderField: 'customer_name',
           render: row => {
             const href = $state.href('organization.expertRequestDetails', {
               uuid: this.customer.uuid,
@@ -59,23 +59,22 @@ function ExpertRequestListController(
             });
             return '<a href="{href}">{name}</a>'
                    .replace('{href}', href)
-                   .replace('{name}', row.name);
+                   .replace('{name}', row.customer_name);
           }
-        },
-        {
-          title: gettext('Organization'),
-          orderField: 'customer_name',
-          render: row => row.customer_name
-        },
-        {
-          title: gettext('Project'),
-          orderField: 'project_name',
-          render: row => row.project_name
         },
         {
           title: gettext('Type'),
           orderField: 'type',
           render: row => row.type_label
+        },
+        {
+          title: gettext('Objectives'),
+          orderField: 'objectives',
+          render: row => {
+            return '<span uib-tooltip="{tooltip}">{value}</span>'
+              .replace('{tooltip}', row.objectives)
+              .replace('{value}', row.objectives.substring(0,30));
+          }
         },
         {
           title: gettext('State'),
