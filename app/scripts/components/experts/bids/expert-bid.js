@@ -10,11 +10,10 @@ const expertBid = {
   },
   controller: class ExpertBidDetailsController {
     // @ngInject
-    constructor($uibModal, $rootScope, expertBidsService, ncUtilsFlash, customersService) {
+    constructor($uibModal, $rootScope, ExpertBidUtilsService, customersService) {
       this.$uibModal = $uibModal;
       this.$rootScope = $rootScope;
-      this.expertBidsService = expertBidsService;
-      this.ncUtilsFlash = ncUtilsFlash;
+      this.ExpertBidUtilsService = ExpertBidUtilsService;
       this.customersService = customersService;
     }
 
@@ -32,14 +31,7 @@ const expertBid = {
 
     accept() {
       this.loading = true;
-      this.expertBidsService.accept(this.bid.url).then(() => {
-        this.expertBidsService.clearAllCacheForCurrentEndpoint();
-        this.$rootScope.$broadcast('reloadExpertRequest');
-        this.ncUtilsFlash.success(gettext('Expert bid has been accepted.'));
-      }).catch(response => {
-        let aggregatedError = response.data.join();
-        this.ncUtilsFlash.error(gettext('Expert bid could not be accepted.') + ` Reason: ${aggregatedError}`);
-      }).finally(() => {
+      this.ExpertBidUtilsService.acceptBid(this.bid.url).finally(() => {
         this.loading = false;
         this.close();
       });

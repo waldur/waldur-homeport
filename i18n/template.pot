@@ -155,6 +155,7 @@ msgid "About"
 msgstr ""
 
 #: app/scripts/components/experts/bids/expert-bid.html:32
+#: app/scripts/components/experts/bids/expert-bids-list.js:99
 msgid "Accept"
 msgstr ""
 
@@ -1166,7 +1167,7 @@ msgstr ""
 
 #: app/scripts/components/ansible/ansible-job-summary.html:27
 #: app/scripts/components/billing/billing-utils.js:41
-#: app/scripts/components/experts/bids/expert-bids-list.js:74
+#: app/scripts/components/experts/bids/expert-bids-list.js:75
 #: app/scripts/components/experts/requests/expert-request-summary.html:21
 #: app/scripts/components/issues/issue-detail.html:80
 #: app/scripts/components/issues/issues-list.js:130
@@ -1596,12 +1597,8 @@ msgstr ""
 msgid "Expert"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.js:41
+#: app/scripts/components/experts/bids/expert-bid-utils.js:14
 msgid "Expert bid could not be accepted."
-msgstr ""
-
-#: app/scripts/components/experts/bids/expert-bid.js:38
-msgid "Expert bid has been accepted."
 msgstr ""
 
 #: app/scripts/components/experts/expert-provider-details.js:31
@@ -3076,7 +3073,7 @@ msgid "organization"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:59
-#: app/scripts/components/experts/bids/expert-bids-list.js:62
+#: app/scripts/components/experts/bids/expert-bids-list.js:63
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:62
 #: app/scripts/components/issues/constants.js:102
 #: app/scripts/components/issues/issue-create-dialog.html:12
@@ -3445,7 +3442,7 @@ msgstr ""
 #: app/scripts/components/billing/invoices-list.js:54
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:8
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:57
-#: app/scripts/components/experts/bids/expert-bids-list.js:70
+#: app/scripts/components/experts/bids/expert-bids-list.js:71
 #: app/scripts/components/offering/offering-summary.html:34
 #: app/scripts/components/paypal/paypal-invoices-list.js:58
 #: app/scripts/components/plans/plan-agreements-list.js:48
@@ -4802,7 +4799,7 @@ msgstr ""
 #: app/scripts/components/customer/customer-workspace.js:120
 #: app/scripts/components/customer/routes.js:105
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:16
-#: app/scripts/components/experts/bids/expert-bids-list.js:66
+#: app/scripts/components/experts/bids/expert-bids-list.js:67
 #: app/scripts/components/project/project-workspace.js:104
 #: app/scripts/components/project/routes.js:163
 msgid "Team"
@@ -4891,7 +4888,7 @@ msgstr ""
 msgid "There are no available users."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bids-list.js:53
+#: app/scripts/components/experts/bids/expert-bids-list.js:54
 msgid "There are no bids yet."
 msgstr ""
 
@@ -5441,7 +5438,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bids-list.js:85
+#: app/scripts/components/experts/bids/expert-bids-list.js:86
 msgid "View details"
 msgstr ""
 
