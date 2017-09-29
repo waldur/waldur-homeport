@@ -111,6 +111,31 @@ function ExpertRequestListController(
 
       return actions;
     },
+    getUserFilter: function() {
+      return {
+        name: 'state',
+        choices: [
+          {
+            title: gettext('Completed'),
+            value: 'completed',
+          },
+          {
+            title: gettext('Cancelled'),
+            value: 'cancelled'
+          },
+          {
+            title: gettext('Active'),
+            value: 'active',
+            chosen: true,
+          },
+          {
+            title: gettext('Pending'),
+            value: 'pending',
+            chosen: true,
+          }
+        ]
+      };
+    },
     createBid: function(expertRequest) {
       return $uibModal.open({
         component: 'expertBidCreateDialog',
