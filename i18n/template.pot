@@ -214,6 +214,10 @@ msgstr ""
 msgid "Activating"
 msgstr ""
 
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:144
+msgid "Active"
+msgstr ""
+
 #: app/scripts/components/issues/issue-navigation-service.js:21
 #: app/scripts/components/issues/issues-activity-stream.html:15
 msgid "Activity stream"
@@ -651,7 +655,7 @@ msgstr ""
 msgid "Batch RAM usage, GB"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:106
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:121
 msgid "Bid could be created only for pending expert request."
 msgstr ""
 
@@ -787,6 +791,7 @@ msgstr ""
 msgid "Canceled"
 msgstr ""
 
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:140
 #: app/scripts/components/paypal/paypal-invoices-list.js:117
 msgid "Cancelled"
 msgstr ""
@@ -924,6 +929,10 @@ msgstr ""
 
 #: app/scripts/components/experts/requests/expert-request-complete.html:7
 msgid "Complete"
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:136
+msgid "Completed"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:4
@@ -1088,7 +1097,7 @@ msgid "Create backup schedule for OpenStack instance"
 msgstr ""
 
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:2
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:100
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:113
 msgid "Create bid"
 msgstr ""
 
@@ -1203,7 +1212,7 @@ msgid "Creating snapshot schedule"
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-jobs-list.js:74
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:88
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:97
 #: app/scripts/components/experts/requests/expert-request-project-list.js:79
 #: app/scripts/components/offering/offerings-list.js:55
 #: app/scripts/components/project/projects-list.js:102
@@ -2673,7 +2682,7 @@ msgstr ""
 msgid "No events yet."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:44
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:50
 #: app/scripts/components/experts/requests/expert-request-project-list.js:44
 msgid "No experts found matching filter."
 msgstr ""
@@ -2976,7 +2985,7 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:71
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:80
 msgid "Objectives"
 msgstr ""
 
@@ -3068,7 +3077,7 @@ msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:59
 #: app/scripts/components/experts/bids/expert-bids-list.js:62
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:53
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:62
 #: app/scripts/components/issues/constants.js:102
 #: app/scripts/components/issues/issue-create-dialog.html:12
 #: app/scripts/components/issues/issue-create-dialog.html:22
@@ -3263,6 +3272,7 @@ msgid "Payment pending"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:33
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:149
 #: app/scripts/components/invitations/invitations-list.js:71
 #: app/scripts/components/project/projects-list.js:142
 msgid "Pending"
@@ -4599,7 +4609,7 @@ msgstr ""
 #: app/scripts/components/ansible/ansible-jobs-list.js:66
 #: app/scripts/components/billing/billing-records-list.js:48
 #: app/scripts/components/billing/invoices-list.js:49
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:80
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:89
 #: app/scripts/components/experts/requests/expert-request-project-list.js:71
 #: app/scripts/components/experts/requests/expert-request-summary.html:13
 #: app/scripts/components/offering/offering-summary.html:18
@@ -4893,7 +4903,7 @@ msgstr ""
 msgid "There are no events for this resource."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:43
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:49
 #: app/scripts/components/experts/requests/expert-request-project-list.js:43
 msgid "There are no experts yet."
 msgstr ""
@@ -5057,7 +5067,7 @@ msgstr ""
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:66
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:75
 #: app/scripts/components/experts/requests/expert-request-project-list.js:66
 #: app/scripts/components/experts/requests/expert-request-summary.html:17
 #: app/scripts/components/offering/offering-summary.html:25
@@ -5665,6 +5675,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:98
 msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
+msgstr ""
+
+#: app/scripts/components/experts/requests/expert-request-customer-list.js:123
+msgid "You have placed a bid already."
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.js:36
