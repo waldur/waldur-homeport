@@ -1,353 +1,549 @@
-/*
- * AngularJS Slimscroll directive
- * Originally developed by Piotr Rochala (http://rocha.la) (jQuery version)
+/*! Copyright (c) 2011 Piotr Rochala (http://rocha.la)
+ * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
+ * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
  *
- * This is a rewritten version of original jQuery slimsSroll (http://rocha.la/jQuery-slimScroll)
+ * Version: 1.3.8
  *
- * This version required AngularJS but does NOT require jQuery
- *
- * Author: Jan Kuri (jkuri88@gmail.com)
- * Licence: GPL (http://www.opensource.org/licenses/gpl-license.php)
- * Version 0.6.0
  */
+(function($) {
 
-// See also: https://github.com/jkuri/ngSlimscroll/blob/master/src/js/ngSlimscroll.js
+  $.fn.extend({
+    slimScroll: function(options) {
 
-angular.module('ui.slimscroll', []).directive('slimscroll', slimScroll);
+      var defaults = {
 
-slimScroll.$inject = ['$document', '$window', '$compile'];
+        // width in pixels of the visible scroll area
+        width : 'auto',
 
-function slimScroll($document, $window, $compile) {
-    return {
-        restrict: 'A',
-        scope: true,
-        link: linkFn
-    };
+        // height in pixels of the visible scroll area
+        height : '250px',
 
-    function linkFn(scope, element, attrs) {
-        setScopeValues(scope, element, attrs);
+        // width in pixels of the scrollbar and rail
+        size : '7px',
 
-        var el = element[0];
+        // scrollbar color, accepts any hex/color value
+        color: '#000',
 
-        var minBarHeight = 30,
-            releaseScroll = false,
-            touchDiff,
-            minBarWidth = 30;
+        // scrollbar position - left/right
+        position : 'right',
 
-        element.css({
-            'overflow': 'hidden',
-            'width': scope.width,
-            'height': scope.height
-        });
+        // distance in pixels between the side edge and the scrollbar
+        distance : '1px',
 
-        var wrapper = angular.element('<div></div>');
-        wrapper.css({
-            'position': 'relative',
-            'overflow': 'hidden',
-            'width': scope.width,
-            'height': scope.height
-        });
+        // default scroll position on load - top / bottom / $('selector')
+        start : 'top',
 
-        var bar = getBaseBar(scope);
+        // sets scrollbar opacity
+        opacity : .4,
 
-        element.wrap(wrapper);
-        element.append(bar);
-        $compile(bar)(scope);
+        // enables always-on mode for the scrollbar
+        alwaysVisible : false,
 
-        element.on('mouseenter', function () {
-            if (!scope.horizontalScroll) {
-                scope.getBarHeight();
-            } else {
-                scope.getBarWidth();
-            }
-        });
+        // check if we should hide the scrollbar when user is hovering over
+        disableFadeOut : false,
 
-        element.on('mouseleave', function() {
-            if(!scope.alwaysVisible) {
-                bar.css({ display: 'none' });
-            }
-        });
+        // sets visibility of the rail
+        railVisible : false,
 
-        scope.makeBarDraggable = function () {
-            bar.bind('mousedown', function (e) {
-                var top = parseFloat(bar.css('top')),
-                    pageY = e.pageY,
-                    isDrag = true;
+        // sets rail color
+        railColor : '#333',
 
-                $document.bind('mousemove', function (e) {
-                    bar.css({'top': top + e.pageY - pageY + 'px'});
-                    scope.scrollContent(0, bar[0].offsetTop, false);
-                });
+        // sets rail opacity
+        railOpacity : .2,
 
-                $document.bind('mouseup', function (e) {
-                    isDrag = false;
-                    $document.unbind('mousemove');
-                });
-            }).bind('selectstart', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            });
-        };
+        // whether  we should use jQuery UI Draggable to enable bar dragging
+        railDraggable : true,
 
-        scope.makeBarDraggableHorizontal = function () {
-            bar.bind('mousedown', function (e) {
-                var left = parseFloat(bar.css('left')),
-                    pageX = e.pageX,
-                    isDrag = true;
+        // defautlt CSS class of the slimscroll rail
+        railClass : 'slimScrollRail',
 
-                $document.bind('mousemove', function (e) {
-                    bar.css({'left': left + e.pageX - pageX + 'px'});
-                    scope.scrollContentHorizontal(0, bar[0].offsetLeft, false);
-                });
+        // defautlt CSS class of the slimscroll bar
+        barClass : 'slimScrollBar',
 
-                $document.bind('mouseup', function (e) {
-                    isDrag = false;
-                    $document.unbind('mousemove');
-                });
-            }).bind('selectstart', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            });
-        };
+        // defautlt CSS class of the slimscroll wrapper
+        wrapperClass : 'slimScrollDiv',
 
-        scope.getBarHeight = function () {
-            var barHeight = Math.max((el.offsetHeight / el.scrollHeight) * el.offsetHeight, minBarHeight);
-            var display = barHeight === el.offsetHeight ? 'none' : 'block';
-            bar.css({
-                height: barHeight + 'px',
-                display: display
-            });
-        };
+        // check if mousewheel should scroll the window if we reach top/bottom
+        allowPageScroll : false,
 
-        scope.getBarWidth = function () {
-            var barWidth = Math.max((el.offsetWidth / el.scrollWidth) * el.offsetWidth, minBarWidth);
-            var display = barWidth === el.offsetWidth ? 'none' : 'block';
-            bar.css({
-                width: barWidth + 'px',
-                display: display
-            });
-        };
+        // scroll amount applied to each mouse wheel step
+        wheelStep : 20,
 
-        scope.attachWheel = function (target) {
-            if ($window.addEventListener) {
-                target.addEventListener('DOMMouseScroll', scope.onWheel, false);
-                target.addEventListener('mousewheel', scope.onWheel, false);
-            } else {
-                $document.addEventListener('onmousewheel', scope.onWheel);
-            }
-        };
+        // scroll amount applied when user is using gestures
+        touchScrollStep : 200,
 
-        scope.detachWheel = function (target) {
-            if ($window.removeEventListener) {
-                target.removeEventListener('DOMMouseScroll', scope.onWheel, false);
-                target.removeEventListener('mousewheel', scope.onWheel, false);
-            } else {
-                $document.removeEventListener('onmousewheel', scope.wheel);
-            }
-        };
+        // sets border radius
+        borderRadius: '7px',
 
-        scope.onWheel = function (e) {
-            e = e || $window.event;
+        // sets border radius of the rail
+        railBorderRadius : '7px'
+      };
 
-            var delta = 0;
+      var o = $.extend(defaults, options);
 
-            if (e.wheelDelta) {
-                delta = -e.wheelDelta / 120;
-            }
+      // do it for every element that matches selector
+      this.each(function(){
 
-            if (e.detail) {
-                delta = e.detail / 3;
-            }
+      var isOverPanel, isOverBar, isDragg, queueHide, touchDif,
+        barHeight, percentScroll, lastScroll,
+        divS = '<div></div>',
+        minBarHeight = 30,
+        releaseScroll = false;
 
-            if (!scope.horizontalScroll) {
-                scope.scrollContent(delta, true);
-            } else {
-                scope.scrollContentHorizontal(delta, true);
-            }
+        // used in event handlers and for better minification
+        var me = $(this);
 
-            if (e.preventDefault && !releaseScroll) {
-                e.preventDefault();
-            }
+        // ensure we are not binding it again
+        if (me.parent().hasClass(o.wrapperClass))
+        {
+            // start from last bar position
+            var offset = me.scrollTop();
 
-            if (!releaseScroll) {
-                e.returnValue = false;
-            }
-        };
+            // find bar and rail
+            bar = me.siblings('.' + o.barClass);
+            rail = me.siblings('.' + o.railClass);
 
-        scope.scrollContent = function (y, isWheel) {
-            releaseScroll = false;
-            var delta = y,
-                maxTop = el.offsetHeight - bar[0].offsetHeight,
-                percentScroll;
+            getBarHeight();
 
-            if (isWheel) {
-                delta = parseInt(bar.css('top'), 10) + y * parseInt(scope.wheelStep, 10) / 100 * bar[0].offsetHeight;
-                delta = Math.min(Math.max(delta, 0), maxTop);
-                delta = (y > 0) ? Math.ceil(delta) : Math.floor(delta);
-                bar.css({top: delta + 'px'});
-            }
+            // check if we should scroll existing instance
+            if ($.isPlainObject(options))
+            {
+              // Pass height: auto to an existing slimscroll object to force a resize after contents have changed
+              if ( 'height' in options && options.height == 'auto' ) {
+                me.parent().css('height', 'auto');
+                me.css('height', 'auto');
+                var height = me.parent().parent().height();
+                me.parent().css('height', height);
+                me.css('height', height);
+              } else if ('height' in options) {
+                var h = options.height;
+                me.parent().css('height', h);
+                me.css('height', h);
+              }
 
-            percentScroll = parseInt(bar.css('top'), 10) / (el.offsetHeight - bar[0].offsetHeight);
-            delta = percentScroll * (el.scrollHeight - el.offsetHeight);
-
-            el.scrollTop = delta;
-        };
-
-        scope.scrollContentHorizontal = function (x, isWheel) {
-            releaseScroll = false;
-            var delta = x,
-                maxLeft = el.offsetWidth - bar[0].offsetWidth,
-                percentScroll;
-
-            if (isWheel) {
-                delta = parseInt(bar.css('left'), 10) + x * parseInt(scope.wheelStep, 10) / 100 * bar[0].offsetWidth;
-                delta = Math.min(Math.max(delta, 0), maxLeft);
-                delta = (x > 0) ? Math.ceil(delta) : Math.floor(delta);
-                bar.css({left: delta + 'px'});
-            }
-
-            percentScroll = parseInt(bar.css('left'), 10) / (el.offsetWidth - bar[0].offsetWidth);
-            delta = percentScroll * (el.scrollWidth - el.offsetWidth);
-
-            el.scrollLeft = delta;
-        };
-
-        // mobile
-        element.bind('touchstart', function (e, b) {
-            if (e.touches.length) {
-                touchDiff = e.touches[0].pageY;
-            }
-        });
-
-        element.bind('touchmove', function (e) {
-            if (!releaseScroll) {
-                e.preventDefault();
-            }
-
-            if (e.touches.length) {
-                var diff = (touchDiff - e.touches[0].pageY) / scope.touchScrollStep;
-                if (!scope.horizontalScroll) {
-                    scope.scrollContent(diff, true);
-                } else {
-                    scope.scrollContentHorizontal(diff, true);
-                }
-                touchDiff = e.touches[0].pageY;
-            }
-        });
-
-        attrs.$observe('enabled', function () {
-            scope.enabled = scope.$eval(attrs.enabled);
-
-            if (scope.enabled === false) {
+              if ('scrollTo' in options)
+              {
+                // jump to a static point
+                offset = parseInt(o.scrollTo);
+              }
+              else if ('scrollBy' in options)
+              {
+                // jump by value pixels
+                offset += parseInt(o.scrollBy);
+              }
+              else if ('destroy' in options)
+              {
+                // remove slimscroll elements
                 bar.remove();
-                scope.detachWheel(el);
-            } else {
-                element.append(bar);
-                scope.attachWheel(el);
+                rail.remove();
+                me.unwrap();
+                return;
+              }
+
+              // scroll content by the given offset
+              scrollContent(offset, false, true);
             }
+
+            return;
+        }
+        else if ($.isPlainObject(options))
+        {
+            if ('destroy' in options)
+            {
+                return;
+            }
+        }
+
+        // optionally set height to the parent's height
+        o.height = (o.height == 'auto') ? me.parent().height() : o.height;
+
+        // wrap content
+        var wrapper = $(divS)
+          .addClass(o.wrapperClass)
+          .css({
+            position: 'relative',
+            overflow: 'hidden',
+            width: o.width,
+            height: o.height
+          });
+
+        // update style for the div
+        me.css({
+          overflow: 'hidden',
+          width: o.width,
+          height: o.height
         });
 
-        if (scope.watchContent) {
-            var contentWatcher = scope.$watch(
-                function () {
-                    return element.html();
-                },
-                function () {
-                    init();
-                }
-            );
-            scope.$on("$destroy", function () {
-                contentWatcher();
+        // create scrollbar rail
+        var rail = $(divS)
+          .addClass(o.railClass)
+          .css({
+            width: o.size,
+            height: '100%',
+            position: 'absolute',
+            top: 0,
+            display: (o.alwaysVisible && o.railVisible) ? 'block' : 'none',
+            'border-radius': o.railBorderRadius,
+            background: o.railColor,
+            opacity: o.railOpacity,
+            zIndex: 90
+          });
+
+        // create scrollbar
+        var bar = $(divS)
+          .addClass(o.barClass)
+          .css({
+            background: o.color,
+            width: o.size,
+            position: 'absolute',
+            top: 0,
+            opacity: o.opacity,
+            display: o.alwaysVisible ? 'block' : 'none',
+            'border-radius' : o.borderRadius,
+            BorderRadius: o.borderRadius,
+            MozBorderRadius: o.borderRadius,
+            WebkitBorderRadius: o.borderRadius,
+            zIndex: 99
+          });
+
+        // set position
+        var posCss = (o.position == 'right') ? { right: o.distance } : { left: o.distance };
+        rail.css(posCss);
+        bar.css(posCss);
+
+        // wrap it
+        me.wrap(wrapper);
+
+        // append to parent div
+        me.parent().append(bar);
+        me.parent().append(rail);
+
+        // make it draggable and no longer dependent on the jqueryUI
+        if (o.railDraggable){
+          bar.bind("mousedown", function(e) {
+            var $doc = $(document);
+            isDragg = true;
+            t = parseFloat(bar.css('top'));
+            pageY = e.pageY;
+
+            $doc.bind("mousemove.slimscroll", function(e){
+              currTop = t + e.pageY - pageY;
+              bar.css('top', currTop);
+              scrollContent(0, bar.position().top, false);// scroll content
             });
+
+            $doc.bind("mouseup.slimscroll", function(e) {
+              isDragg = false;hideBar();
+              $doc.unbind('.slimscroll');
+            });
+            return false;
+          }).bind("selectstart.slimscroll", function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            return false;
+          });
         }
 
-        function init() {
-            bar.css('top');
-            if (!scope.horizontalScroll) {
-                scope.getBarHeight();
-                scope.makeBarDraggable();
-            } else {
-                scope.getBarWidth();
-                scope.makeBarDraggableHorizontal();
+        // on rail over
+        rail.hover(function(){
+          showBar();
+        }, function(){
+          hideBar();
+        });
+
+        // on bar over
+        bar.hover(function(){
+          isOverBar = true;
+        }, function(){
+          isOverBar = false;
+        });
+
+        // show on parent mouseover
+        me.hover(function(){
+          isOverPanel = true;
+          showBar();
+          hideBar();
+        }, function(){
+          isOverPanel = false;
+          hideBar();
+        });
+
+        // support for mobile
+        me.bind('touchstart', function(e,b){
+          if (e.originalEvent.touches.length)
+          {
+            // record where touch started
+            touchDif = e.originalEvent.touches[0].pageY;
+          }
+        });
+
+        me.bind('touchmove', function(e){
+          // prevent scrolling the page if necessary
+          if(!releaseScroll)
+          {
+              e.originalEvent.preventDefault();
+              }
+          if (e.originalEvent.touches.length)
+          {
+            // see how far user swiped
+            var diff = (touchDif - e.originalEvent.touches[0].pageY) / o.touchScrollStep;
+            // scroll content
+            scrollContent(diff, true);
+            touchDif = e.originalEvent.touches[0].pageY;
+          }
+        });
+
+        // set up initial height
+        getBarHeight();
+
+        // check start position
+        if (o.start === 'bottom')
+        {
+          // scroll content to bottom
+          bar.css({ top: me.outerHeight() - bar.outerHeight() });
+          scrollContent(0, true);
+        }
+        else if (o.start !== 'top')
+        {
+          // assume jQuery selector
+          scrollContent($(o.start).position().top, null, true);
+
+          // make sure bar stays hidden
+          if (!o.alwaysVisible) { bar.hide(); }
+        }
+
+        // attach scroll events
+        attachWheel(this);
+
+        function _onWheel(e)
+        {
+          // use mouse wheel only when mouse is over
+          if (!isOverPanel) { return; }
+
+          var e = e || window.event;
+
+          var delta = 0;
+          if (e.wheelDelta) { delta = -e.wheelDelta/120; }
+          if (e.detail) { delta = e.detail / 3; }
+
+          var target = e.target || e.srcTarget || e.srcElement;
+          if ($(target).closest('.' + o.wrapperClass).is(me.parent())) {
+            // scroll content
+            scrollContent(delta, true);
+          }
+
+          // stop window scroll
+          if (e.preventDefault && !releaseScroll) { e.preventDefault(); }
+          if (!releaseScroll) { e.returnValue = false; }
+        }
+
+        function scrollContent(y, isWheel, isJump)
+        {
+          releaseScroll = false;
+          var delta = y;
+          var maxTop = me.outerHeight() - bar.outerHeight();
+
+          if (isWheel)
+          {
+            // move bar with mouse wheel
+            delta = parseInt(bar.css('top')) + y * parseInt(o.wheelStep) / 100 * bar.outerHeight();
+
+            // move bar, make sure it doesn't go out
+            delta = Math.min(Math.max(delta, 0), maxTop);
+
+            // if scrolling down, make sure a fractional change to the
+            // scroll position isn't rounded away when the scrollbar's CSS is set
+            // this flooring of delta would happened automatically when
+            // bar.css is set below, but we floor here for clarity
+            delta = (y > 0) ? Math.ceil(delta) : Math.floor(delta);
+
+            // scroll the scrollbar
+            bar.css({ top: delta + 'px' });
+          }
+
+          // calculate actual scroll amount
+          percentScroll = parseInt(bar.css('top')) / (me.outerHeight() - bar.outerHeight());
+          delta = percentScroll * (me[0].scrollHeight - me.outerHeight());
+
+          if (isJump)
+          {
+            delta = y;
+            var offsetTop = delta / me[0].scrollHeight * me.outerHeight();
+            offsetTop = Math.min(Math.max(offsetTop, 0), maxTop);
+            bar.css({ top: offsetTop + 'px' });
+          }
+
+          // scroll content
+          me.scrollTop(delta);
+
+          // fire scrolling event
+          me.trigger('slimscrolling', ~~delta);
+
+          // ensure bar is visible
+          showBar();
+
+          // trigger hide when scroll is stopped
+          hideBar();
+        }
+
+        function attachWheel(target)
+        {
+          if (window.addEventListener)
+          {
+            target.addEventListener('DOMMouseScroll', _onWheel, false );
+            target.addEventListener('mousewheel', _onWheel, false );
+          }
+          else
+          {
+            document.attachEvent("onmousewheel", _onWheel)
+          }
+        }
+
+        function getBarHeight()
+        {
+          // calculate scrollbar height and make sure it is not too small
+          barHeight = Math.max((me.outerHeight() / me[0].scrollHeight) * me.outerHeight(), minBarHeight);
+          bar.css({ height: barHeight + 'px' });
+
+          // hide scrollbar if content is not long enough
+          var display = barHeight == me.outerHeight() ? 'none' : 'block';
+          bar.css({ display: display });
+        }
+
+        function showBar()
+        {
+          // recalculate bar height
+          getBarHeight();
+          clearTimeout(queueHide);
+
+          // when bar reached top or bottom
+          if (percentScroll == ~~percentScroll)
+          {
+            //release wheel
+            releaseScroll = o.allowPageScroll;
+
+            // publish approporiate event
+            if (lastScroll != percentScroll)
+            {
+                var msg = (~~percentScroll == 0) ? 'top' : 'bottom';
+                me.trigger('slimscroll', msg);
             }
-            if(!scope.alwaysVisible) {
-                bar.css({ display: 'none' });
+          }
+          else
+          {
+            releaseScroll = false;
+          }
+          lastScroll = percentScroll;
+
+          // show only when required
+          if(barHeight >= me.outerHeight()) {
+            //allow window scroll
+            releaseScroll = true;
+            return;
+          }
+          bar.stop(true,true).fadeIn('fast');
+          if (o.railVisible) { rail.stop(true,true).fadeIn('fast'); }
+        }
+
+        function hideBar()
+        {
+          // only hide when options allow it
+          if (!o.alwaysVisible)
+          {
+            queueHide = setTimeout(function(){
+              if (!(o.disableFadeOut && isOverPanel) && !isOverBar && !isDragg)
+              {
+                bar.fadeOut('slow');
+                rail.fadeOut('slow');
+              }
+            }, 1000);
+          }
+        }
+
+      });
+
+      // maintain chainability
+      return this;
+    }
+  });
+
+  $.fn.extend({
+    slimscroll: $.fn.slimScroll
+  });
+
+})(jQuery);
+
+
+angular.module('ui.slimscroll', []).directive('slimscroll', ['$timeout', '$window', function ($timeout, $window) {
+  'use strict';
+
+  return {
+    restrict: 'A',
+    link: function ($scope, $elem, $attr) {
+      var off = [];
+      var option = {};
+
+      var refresh = function () {
+
+          var isEventBound = false;
+
+          $timeout(function () {
+              if (angular.isDefined($attr.slimscroll)) {
+                  option = $scope.$eval($attr.slimscroll) || {};
+              } else if ($attr.slimscrollOption) {
+                  option = $scope.$eval($attr.slimscrollOption) || {};
+              }
+
+              var el = angular.element($elem);
+
+              el.slimScroll({ destroy: true });
+
+              if (option.onScroll && !isEventBound) {
+                el.slimScroll(option).bind('slimscrolling', function(e, pos) {
+                  option.onScroll();
+                  isEventBound = true;
+                });
+              } else {
+                el.slimScroll(option);
+              }
+          });
+      };
+
+      angular.element($window).bind('resize', function() {
+          if ($attr.slimscroll) {
+              option = $scope.$eval($attr.slimscroll);
+            } else if ($attr.slimscrollOption) {
+              option = $scope.$eval($attr.slimscrollOption);
             }
-            scope.attachWheel(el);
-            return true;
+
+           $($elem).slimScroll(option);
+       });
+
+      var registerWatch = function () {
+        if (angular.isDefined($attr.slimscroll) && !option.noWatch) {
+          off.push($scope.$watchCollection($attr.slimscroll, refresh));
         }
 
-        init();
-    }
-
-    function getBaseBar(scope) {
-        var bar,
-            positionCss,
-            commonCssProperty = {
-                'background': scope.color,
-                'position': 'absolute',
-                'opacity': scope.opacity,
-                'display': scope.alwaysVisible ? 'block' : 'none',
-                'border-radius': scope.borderRadius,
-                'z-index': scope.zIndex,
-                'cursor': 'pointer'
-            };
-
-        if (scope.horizontalScroll) {
-            bar = angular.element('<div ng-mousedown="makeBarDraggableHorizontal($event)"></div>');
-            commonCssProperty = angular.extend(commonCssProperty, {
-                'height': scope.size,
-                'left': '0'
-            });
-            positionCss = (scope.horizontalScrollPosition === 'bottom')
-                ? {bottom: scope.distance}
-                : {top: scope.distance};
-        } else {
-            bar = angular.element('<div ng-mousedown="makeBarDraggable($event)""></div>');
-            commonCssProperty = angular.extend(commonCssProperty, {
-                'width': scope.size,
-                'top': '0'
-            });
-            positionCss = (scope.position === 'right')
-                ? {right: scope.distance}
-                : {left: scope.distance};
+        if ($attr.slimscrollWatch) {
+          off.push($scope.$watchCollection($attr.slimscrollWatch, refresh));
         }
 
-        commonCssProperty = angular.extend(commonCssProperty, positionCss);
-        bar.css(commonCssProperty);
-        return bar;
-    }
-
-    function setScopeValues(scope, element, attrs) {
-        var height = undefined;
-
-        if (attrs.height !== 0 && attrs.height !== undefined) {
-            height = attrs.height;
-        } else if (element[0].clientHeight !== 0) {
-            height = element[0].clientHeight;
-        } else {
-            height = 250;
+        if ($attr.slimscrolllistento) {
+          off.push($scope.$on($attr.slimscrolllistento, refresh));
         }
+      };
 
-        scope.width = attrs['width'] || element[0].clientWidth || 'auto';
-        scope.height = height;
-        scope.size = attrs['size'] || '7px';
-        scope.color = attrs['color'] || '#000';
-        scope.position = attrs['position'] || 'right';
-        scope.distance = attrs['distance'] || '1px';
-        scope.borderRadius = attrs['borderRadius'] || '3px';
-        scope.start = attrs['start'] || 'top';
-        scope.alwaysVisible = scope.$eval(attrs['alwaysVisible']) !== false;
-        scope.barDraggable = scope.$eval(attrs['barDraggable']) !== false;
-        scope.wheelStep = attrs['wheelStep'] || 20;
-        scope.opacity = attrs['opacity'] || 0.5;
-        scope.enabled = scope.$eval(attrs['enabled']) !== false;
-        scope.horizontalScroll = scope.$eval(attrs['horizontalScroll']) || false;
-        scope.horizontalScrollPosition = attrs['horizontalScrollPosition'] || 'bottom';
-        scope.touchScrollStep = attrs['touchScrollStep'] || 200;
-        scope.watchContent = scope.$eval(attrs['watchContent']) || false;
-        scope.zIndex = attrs['zIndex'] || '99';
+      var destructor = function () {
+        angular.element($elem).slimScroll({destroy: true});
+        off.forEach(function (unbind) {
+          unbind();
+        });
+        off = null;
+      };
+
+      off.push($scope.$on('$destroy', destructor));
+
+      registerWatch();
     }
-}
+  };
+}]);

@@ -13,6 +13,8 @@ function ExpertRequestListController(
   $filter,
   $uibModal,
   currentStateService,
+  expertUtilsService,
+  expertBidsService,
   expertRequestsService,
   customersService) {
   let controllerScope = this;
@@ -37,6 +39,11 @@ function ExpertRequestListController(
         }),
       ]);
     },
+    loadExpertBids() {
+      return expertBidsService.getAll({customer_uuid: this.customer.uuid}).then(bids => {
+        this.expertBids = bids;
+      });
+    },
     getTableOptions: function() {
       return {
         searchFieldName: 'name',
@@ -47,11 +54,14 @@ function ExpertRequestListController(
         rowActions: this.getRowActions(),
       };
     },
+    afterGetList: function() {
+      return this.loadExpertBids();
+    },
     getColumns: function() {
       return [
         {
-          title: gettext('Name'),
-          orderField: 'name',
+          title: gettext('Organization'),
+          orderField: 'customer_name',
           render: row => {
             const href = $state.href('organization.expertRequestDetails', {
               uuid: this.customer.uuid,
@@ -59,23 +69,22 @@ function ExpertRequestListController(
             });
             return '<a href="{href}">{name}</a>'
                    .replace('{href}', href)
-                   .replace('{name}', row.name);
+                   .replace('{name}', row.customer_name);
           }
-        },
-        {
-          title: gettext('Organization'),
-          orderField: 'customer_name',
-          render: row => row.customer_name
-        },
-        {
-          title: gettext('Project'),
-          orderField: 'project_name',
-          render: row => row.project_name
         },
         {
           title: gettext('Type'),
           orderField: 'type',
           render: row => row.type_label
+        },
+        {
+          title: gettext('Objectives'),
+          orderField: 'objectives',
+          render: row => {
+            return '<span uib-tooltip="{tooltip}">{value}</span>'
+              .replace('{tooltip}', row.objectives)
+              .replace('{value}', row.objectives.substring(0,30));
+          }
         },
         {
           title: gettext('State'),
@@ -94,23 +103,62 @@ function ExpertRequestListController(
         }
       ];
     },
+    requestHasBids: function(request_uuid) {
+      return this.expertBids.filter(bid => bid.request_uuid === request_uuid)[0];
+    },
     getRowActions: function() {
-      let actions = [];
+      let vm = this;
+      let actions = [
+        {
+          title: gettext('Details'),
+          iconClass: 'fa fa-info-circle',
+          callback: expertUtilsService.openDialog.bind(this),
+        }
+      ];
       if (this.isOwnerOrStaff) {
         actions.push({
           title: gettext('Create bid'),
           iconClass: 'fa fa-plus',
           callback: this.createBid.bind(this),
-          isDisabled: row => row.state !== 'Pending',
+          isDisabled: row => {
+            return row.state !== 'Pending' || vm.requestHasBids(row.uuid);
+          },
           tooltip: function(row) {
             if (row.state !== 'Pending') {
               return gettext('Bid could be created only for pending expert request.');
+            } else if (vm.requestHasBids(row.uuid)) {
+              return gettext('You have placed a bid already.');
             }
           }
         });
       }
 
       return actions;
+    },
+    getUserFilter: function() {
+      return {
+        name: 'state',
+        choices: [
+          {
+            title: gettext('Completed'),
+            value: 'completed',
+          },
+          {
+            title: gettext('Cancelled'),
+            value: 'cancelled'
+          },
+          {
+            title: gettext('Active'),
+            value: 'active',
+            chosen: true,
+          },
+          {
+            title: gettext('Pending'),
+            value: 'pending',
+            chosen: true,
+          }
+        ]
+      };
     },
     createBid: function(expertRequest) {
       return $uibModal.open({
@@ -120,7 +168,7 @@ function ExpertRequestListController(
           expertRequest: expertRequest,
         }
       });
-    }
+    },
   });
   controllerScope.__proto__ = new Controller();
 }

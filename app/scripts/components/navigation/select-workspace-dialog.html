@@ -51,7 +51,7 @@
           </label>
         </div>
       </div>
-      <div class="list-group" slimscroll height="300" id="organization-selector">
+      <div class="list-group" slimscroll="{height:300}" id="organization-selector">
         <div class="list-group-item"
           ng-repeat="organization in $ctrl.organizations | filter: $ctrl.filterOrganization as filteredOrganizations"
           ng-class="{active: organization.uuid == $ctrl.selectedOrganization.uuid}"

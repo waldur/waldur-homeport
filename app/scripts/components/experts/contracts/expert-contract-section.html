@@ -1,0 +1,12 @@
+<dl class="dl-horizontal">
+  <div class="m-b-xs" ng-repeat="field in $ctrl.config.order">
+    <dt uib-tooltip="{{:: $ctrl.config.options[field].label}}">
+      {{::$ctrl.config.options[field].label}}
+    </dt>
+    <dd ng-if="$ctrl.config.options[field].type !== 'html_text'">
+      {{:: $ctrl.model[field] || 'N/A'}}
+    </dd>
+    <dd class="html-description" ng-if="$ctrl.config.options[field].type === 'html_text'"
+      ng-bind-html="$ctrl.model[field] | trustAsHtml"></dd>
+  </div>
+</dl>

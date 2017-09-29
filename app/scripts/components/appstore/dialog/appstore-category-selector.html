@@ -16,7 +16,7 @@
           </label>
         </div>
       </div>
-      <div class="list-group appstore-category-selector row" slimscroll height="270">
+      <div class="list-group appstore-category-selector row" slimscroll="{height:270}">
         <div class="col-md-6"
           ng-repeat="category in group.items | filter:{label: $ctrl.categorySearchInput}"
           visible="{{::category.feature}}"

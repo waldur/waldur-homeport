@@ -2,9 +2,9 @@ export default function extensionPoint($compile, extensionPointService) {
   return {
     restrict: 'E',
     link: function(scope, element, attributes) {
-      const template = extensionPointService.get(attributes.id);
-      if (template) {
-        element.html(template);
+      const templates = extensionPointService.get(attributes.id);
+      if (templates) {
+        element.html(templates.join(''));
         $compile(element.contents())(scope);
       }
     }

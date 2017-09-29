@@ -4,9 +4,13 @@ import registerAppstoreCategory from './appstore-category';
 import workspaceSelector from './workspace-selector.html';
 import customerWorkspace from './customer-workspace.html';
 
-function registerExtensionPoint(extensionPointService) {
-  extensionPointService.register('organization-selector', workspaceSelector);
-  extensionPointService.register('customer-workspace-header', customerWorkspace);
+function registerExtensionPoint(extensionPointService, features) {
+  if (features.isVisible('experts')) {
+    extensionPointService.register('project-dashboard-button', '<expert-request-button/>');
+    extensionPointService.register('organization-dashboard-button', '<expert-request-button/>');
+    extensionPointService.register('organization-selector', workspaceSelector);
+    extensionPointService.register('organization-dashboard-button', customerWorkspace);
+  }
 }
 
 export default module => {

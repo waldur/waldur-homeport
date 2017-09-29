@@ -14,6 +14,7 @@ function ExpertBidsList(
   $timeout,
   $filter,
   $uibModal,
+  ExpertBidUtilsService,
   customersService,
   currentStateService,
   expertRequestsService,
@@ -94,6 +95,13 @@ function ExpertBidsList(
               });
             },
           },
+          {
+            title: gettext('Accept'),
+            iconClass: 'fa fa-check',
+            callback: row => {
+              return ExpertBidUtilsService.acceptBid(row.url);
+            },
+          }
         ];
       }
     },
