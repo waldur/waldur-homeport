@@ -516,7 +516,7 @@ angular.module('ui.slimscroll', []).directive('slimscroll', ['$timeout', '$windo
               option = $scope.$eval($attr.slimscrollOption);
             }
 
-           $($elem).slimScroll(option);
+           angular.element($elem).slimScroll(option);
        });
 
       var registerWatch = function () {
