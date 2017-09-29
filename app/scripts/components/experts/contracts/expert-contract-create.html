@@ -3,16 +3,23 @@
     <div class="col-sm-12">
       <div class="ibox">
         <div class="ibox-title">
-          <expert-request-create-title expert="$ctrl.expert"></expert-request-create-title>
+          <h3>
+            <span>{{ $ctrl.expert.label }}</span>
+            <billing-type model="$ctrl.model"></billing-type>
+            <button class="btn btn-info pull-right" ng-click="$ctrl.previewContract()">
+              <span translate>Preview contract</span>
+            </button>
+          </h3>
+          <p ng-if="$ctrl.expert.summary" ng-bind-html="::$ctrl.expert.summary"></p>
         </div>
         <div class="ibox-content">
           <form name="$ctrl.mainForm" class="form-horizontal" ng-if="!$ctrl.loading">
             <expert-contract-form
-                form="$ctrl.mainForm"
-                model="$ctrl.model"
-                expert="$ctrl.expert"
-                errors="$ctrl.errors"
-                contract-template="$ctrl.contractTemplate"></expert-contract-form>
+              form="$ctrl.mainForm"
+              model="$ctrl.model"
+              expert="$ctrl.expert"
+              errors="$ctrl.errors"
+              contract-template="$ctrl.contractTemplate"></expert-contract-form>
           </form>
           <div ng-if="$ctrl.loading">
             <loading-spinner></loading-spinner>
@@ -20,8 +27,8 @@
         </div>
         <div class="ibox-content">
           <button class="btn btn-primary pull-right"
-                  ng-disabled="$ctrl.createButtonDisabled()"
-                  submit-button="$ctrl.submit()">
+            ng-disabled="$ctrl.createButtonDisabled()"
+            submit-button="$ctrl.submit()">
             <i class="fa fa-shopping-cart"></i>
             <span translate>Create</span>
           </button>

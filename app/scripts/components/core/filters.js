@@ -25,6 +25,13 @@ function filesize() {
   };
 }
 
+function trustAsHtml($sce) {
+  return function(value) {
+    return $sce.trustAsHtml(value);
+  };
+}
+
+
 function minutesToHours() {
   return function(input) {
     if (isNaN(parseInt(input)) || ! isFinite(input)) {
@@ -103,6 +110,7 @@ function decodeHtml($sce) {
 }
 
 export default module => {
+  module.filter('trustAsHtml', trustAsHtml);
   module.filter('decodeHtml', decodeHtml);
   module.filter('filesize', filesize);
   module.filter('titleCase', titleCase);

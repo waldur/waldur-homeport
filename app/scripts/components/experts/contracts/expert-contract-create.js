@@ -12,8 +12,10 @@ const expertContractCreate = {
   },
   controller: class ExpertContractCreateController {
     // @ngInject
-    constructor(ncUtilsFlash) {
+    constructor($stateParams, ncUtilsFlash, expertUtilsService) {
+      this.$stateParams = $stateParams;
       this.ncUtilsFlash = ncUtilsFlash;
+      this.expertUtilsService = expertUtilsService;
     }
 
     $onInit() {
@@ -45,6 +47,12 @@ const expertContractCreate = {
       } else {
         this.ncUtilsFlash.error(gettext('Form has not been filled correctly. Please check your input.'));
       }
+    }
+
+    previewContract() {
+      let expertRequest = angular.copy(this.model);
+      expertRequest.type = this.$stateParams.category;
+      return this.expertUtilsService.openDialog(expertRequest);
     }
   }
 };

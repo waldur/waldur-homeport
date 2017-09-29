@@ -1,0 +1,14 @@
+<dl class="dl-horizontal">
+  <dt translate>State</dt>
+  <dd class="m-b-xs">
+    <expert-request-state model="$ctrl.expertRequest"></expert-request-state>
+  </dd>
+  <dt translate>Type</dt>
+  <dd>{{:: $ctrl.expertRequest.type_label}}</dd>
+  <dt translate>Last updated</dt>
+  <dd>{{ $ctrl.expertRequest.created | dateTime}}</dd>
+  <dt translate>Created</dt>
+  <dd>{{ $ctrl.expertRequest.modified | dateTime}}</dd>
+  <dt translate>Description</dt>
+  <dd class="project-people html-description" ng-bind-html="$ctrl.expertRequest.description | decodeHtml"></dd>
+</dl>
