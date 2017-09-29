@@ -13,6 +13,7 @@ function ExpertRequestListController(
   $filter,
   $uibModal,
   currentStateService,
+  expertBidsService,
   expertRequestsService,
   customersService) {
   let controllerScope = this;
@@ -37,6 +38,11 @@ function ExpertRequestListController(
         }),
       ]);
     },
+    loadExpertBids() {
+      return expertBidsService.getAll({customer_uuid: this.customer.uuid}).then(bids => {
+        this.expertBids = bids;
+      });
+    },
     getTableOptions: function() {
       return {
         searchFieldName: 'name',
@@ -46,6 +52,9 @@ function ExpertRequestListController(
         columns: this.getColumns(),
         rowActions: this.getRowActions(),
       };
+    },
+    afterGetList: function() {
+      return this.loadExpertBids();
     },
     getColumns: function() {
       return [
@@ -93,17 +102,25 @@ function ExpertRequestListController(
         }
       ];
     },
+    requestHasBids: function(request_uuid) {
+      return this.expertBids.filter(bid => bid.request_uuid === request_uuid)[0];
+    },
     getRowActions: function() {
+      let vm = this;
       let actions = [];
       if (this.isOwnerOrStaff) {
         actions.push({
           title: gettext('Create bid'),
           iconClass: 'fa fa-plus',
           callback: this.createBid.bind(this),
-          isDisabled: row => row.state !== 'Pending',
+          isDisabled: row => {
+            return row.state !== 'Pending' || vm.requestHasBids(row.uuid);
+          },
           tooltip: function(row) {
             if (row.state !== 'Pending') {
               return gettext('Bid could be created only for pending expert request.');
+            } else if (vm.requestHasBids(row.uuid)) {
+              return gettext('You have placed a bid already.');
             }
           }
         });
