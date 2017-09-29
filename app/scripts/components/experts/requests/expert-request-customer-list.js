@@ -13,6 +13,7 @@ function ExpertRequestListController(
   $filter,
   $uibModal,
   currentStateService,
+  expertUtilsService,
   expertBidsService,
   expertRequestsService,
   customersService) {
@@ -107,7 +108,13 @@ function ExpertRequestListController(
     },
     getRowActions: function() {
       let vm = this;
-      let actions = [];
+      let actions = [
+        {
+          title: gettext('Details'),
+          iconClass: 'fa fa-info-circle',
+          callback: expertUtilsService.openDialog.bind(this),
+        }
+      ];
       if (this.isOwnerOrStaff) {
         actions.push({
           title: gettext('Create bid'),
@@ -161,7 +168,7 @@ function ExpertRequestListController(
           expertRequest: expertRequest,
         }
       });
-    }
+    },
   });
   controllerScope.__proto__ = new Controller();
 }

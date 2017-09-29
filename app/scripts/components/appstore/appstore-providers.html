@@ -1,7 +1,7 @@
 <div ng-if="$ctrl.loading">
     <loading-spinner/>
 </div>
-<div class="ibox-content" ng-if="!$ctrl.loading && !ctrl.services.length">
+<div class="ibox-content" ng-if="!$ctrl.loading && !$ctrl.services.length">
   <div class="row m-md">
     <div class="text-center">
       <h2>{{ ::$ctrl.noProvidersMessage }}</h2>
