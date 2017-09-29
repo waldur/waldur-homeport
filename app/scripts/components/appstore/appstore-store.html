@@ -10,7 +10,7 @@
                 <loading-spinner ng-if="$ctrl.loadingProviders"/>
                 <appstore-providers
                   ng-if="!AppStore.loadingProviders"
-                  services="AppStore.getSegrvices()"
+                  services="AppStore.getServices()"
                   on-select="AppStore.setService(service)">
                 </appstore-providers>
             </div>
