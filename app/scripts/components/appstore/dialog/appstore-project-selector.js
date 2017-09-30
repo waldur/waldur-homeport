@@ -6,6 +6,13 @@ const appstoreProjectSelector = {
     projects: '<',
     selectedProject: '=',
     createProject: '&'
+  },
+  controller: class {
+    $onInit() {
+      if(this.projects && this.projects.length && this.projects.length === 1) {
+        this.selectedProject = this.projects[0];
+      }
+    }
   }
 };
 
