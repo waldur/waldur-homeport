@@ -43,7 +43,7 @@ export default function issueRoutes($stateProvider) {
       data: {
         pageTitle: gettext('Support requests')
       }
-    });
+    })
 
     .state('support.resources', {
       url: 'resources/',
