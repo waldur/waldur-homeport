@@ -3008,7 +3008,7 @@ msgstr ""
 #: app/scripts/components/experts/contracts/expert-contract-details.html:8
 #: app/scripts/components/project/project-dialog.html:30
 #: app/scripts/components/providers/details/dialog.html:44
-#: app/scripts/components/user/user-popover.html:16
+#: app/scripts/components/user/user-popover.html:24
 msgid "OK"
 msgstr ""
 
@@ -5075,6 +5075,10 @@ msgstr ""
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
+#: app/scripts/components/user/user-popover.html:17
+msgid "Try again"
+msgstr ""
+
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:76
 #: app/scripts/components/experts/requests/expert-request-general-info.html:6
 #: app/scripts/components/experts/requests/expert-request-project-list.js:66
@@ -5159,6 +5163,10 @@ msgstr ""
 
 #: app/scripts/components/billing/invoice-events-dialog.html:10
 msgid "Unable to load events for this resource."
+msgstr ""
+
+#: app/scripts/components/user/user-popover.html:14
+msgid "Unable to load user."
 msgstr ""
 
 #: app/scripts/components/invitations/actions/send.js:15
