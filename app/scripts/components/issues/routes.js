@@ -44,4 +44,12 @@ export default function issueRoutes($stateProvider) {
         pageTitle: gettext('Support requests')
       }
     });
+
+    .state('support.resources', {
+      url: 'resources/',
+      template: '<issues-resources></issues-resources>',
+      data: {
+        pageTitle: gettext('Resources'),
+      }
+    });
 }

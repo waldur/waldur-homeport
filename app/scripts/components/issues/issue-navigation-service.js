@@ -18,17 +18,11 @@ const DASHBOARD_ITEMS = [
     link: 'support.list'
   },
   {
-    label: gettext('Activity stream'),
-    icon: 'fa-rss',
-    link: 'support.dashboard',
-    feature: 'support.activity'
+    label: gettext('Resources'),
+    icon: 'fa-files-o',
+    link: 'support.resources',
+    feature: 'support.resources'
   },
-  {
-    label: gettext('SLAs'),
-    icon: 'fa-book',
-    link: 'support.dashboard',
-    feature: 'support.sla'
-  }
 ];
 
 // This service checks users status and returns different sidebar items and router state
