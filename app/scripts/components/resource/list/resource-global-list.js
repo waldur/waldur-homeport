@@ -41,20 +41,23 @@ function ResourceGlobalListController($scope, baseResourceListController) {
           render: row => this.renderResourceState(row)
         },
         {
-          id: 'monitoring_state',
-          title: gettext('Monitoring'),
-          className: 'min-tablet-l',
-          render: row => this.renderComponent('resource-state-monitoring', row)
-        },
-        {
           id: 'backup_state',
           title: gettext('Backup'),
+          feature: 'backup',
           className: 'min-tablet-l',
           render: row => this.renderComponent('resource-state-backup', row),
         },
         {
+          id: 'monitoring_state',
+          title: gettext('Monitoring'),
+          feature: 'monitoring_state',
+          className: 'min-tablet-l',
+          render: row => this.renderComponent('resource-state-monitoring', row)
+        },
+        {
           id: 'issues',
           title: gettext('Issues'),
+          feature: 'connected_issues',
           className: 'min-tablet-l',
           render: row => `${row.issues_open} / ${row.issues_total}`,
         },

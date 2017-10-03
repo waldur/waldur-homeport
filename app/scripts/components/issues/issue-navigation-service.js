@@ -16,13 +16,16 @@ const DASHBOARD_ITEMS = [
     label: gettext('Support requests'),
     icon: 'fa-list',
     link: 'support.list'
-  },
+  }
+];
+
+const REPORT_ITEMS = [
   {
     label: gettext('Resources'),
     icon: 'fa-files-o',
     link: 'support.resources',
     feature: 'support.resources'
-  },
+  }
 ];
 
 // This service checks users status and returns different sidebar items and router state
@@ -58,6 +61,11 @@ export default class IssueNavigationService {
       items = angular.copy(items);
       if (this.getBackItemLabel()) {
         items.unshift(this.getBackItem());
+      }
+      return items;
+    }).then(items => {
+      if (this.currentUser.is_support || this.currentUser.is_staff) {
+        return [...items, ...REPORT_ITEMS];
       }
       return items;
     });

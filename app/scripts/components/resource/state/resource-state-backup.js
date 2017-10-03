@@ -2,7 +2,7 @@ const labelClasses = {
   Unsupported: 'progress-bar-plain',
   Unset: 'progress-bar-danger',
   Warning: 'progress-bar-warning',
-  OK: 'progress-bar-success',
+  OK: ' ',
 };
 
 const resourceStateBackup = {

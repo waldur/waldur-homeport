@@ -2,7 +2,7 @@ const labelClasses = {
   Unregistered: 'progress-bar-plain',
   Erred: 'progress-bar-danger',
   Warning: 'progress-bar-warning',
-  OK: 'progress-bar-success',
+  OK: ' ',
 };
 
 const resourceStateMonitoring = {
