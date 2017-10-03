@@ -1,5 +1,3 @@
-import { ISSUE_ICONS, ISSUE_TEXT_CLASSES } from './constants';
-
 const issueList = {
   templateUrl: 'views/partials/filtered-list.html',
   controllerAs: 'ListController',
@@ -13,7 +11,7 @@ const issueList = {
 export default issueList;
 
 // @ngInject
-function IssueListController(
+function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
     baseControllerListClass, usersService, issuesService, $filter, $scope, $rootScope, $state, ncUtils) {
   var controllerScope = this;
   var controllerClass = baseControllerListClass.extend({
