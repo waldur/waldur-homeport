@@ -47,7 +47,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.resources', {
       url: 'resources/',
-      template: '<issues-resources></issues-resources>',
+      template: '<resource-global-list-filtered/>',
       data: {
         pageTitle: gettext('Resources'),
       }

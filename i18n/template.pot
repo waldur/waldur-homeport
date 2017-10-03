@@ -469,6 +469,7 @@ msgid "Applications"
 msgstr ""
 
 #: app/scripts/components/issues/list/issues-list-filtered.html:11
+#: app/scripts/components/resource/list/resource-global-list-filtered.html:11
 msgid "Apply filters"
 msgstr ""
 
@@ -591,6 +592,10 @@ msgstr ""
 
 #: app/scripts/components/resource/state/constants.js:17
 msgid "Backing up"
+msgstr ""
+
+#: app/scripts/components/resource/list/resource-global-list.js:51
+msgid "Backup"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:11
@@ -1471,7 +1476,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:208
+#: app/scripts/components/configs/base-config.js:201
 msgid "English"
 msgstr ""
 
@@ -1510,7 +1515,7 @@ msgstr ""
 msgid "Estimated maximum price"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:212
+#: app/scripts/components/configs/base-config.js:205
 msgid "Estonian"
 msgstr ""
 
@@ -2264,6 +2269,7 @@ msgstr ""
 #: app/scripts/components/customer/routes.js:81
 #: app/scripts/components/project/project-workspace.js:91
 #: app/scripts/components/project/routes.js:93
+#: app/scripts/components/resource/list/resource-global-list.js:57
 #: app/scripts/components/resource/tabs/constants.js:7
 msgid "Issues"
 msgstr ""
@@ -2324,7 +2330,7 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:216
+#: app/scripts/components/configs/base-config.js:209
 msgid "Latvian"
 msgstr ""
 
@@ -2370,7 +2376,7 @@ msgstr ""
 msgid "List and edit team members."
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:220
+#: app/scripts/components/configs/base-config.js:213
 msgid "Lithuanian"
 msgstr ""
 
@@ -2512,6 +2518,10 @@ msgstr ""
 msgid "Minimal valid value is 0"
 msgstr ""
 
+#: app/scripts/components/resource/list/resource-global-list.js:45
+msgid "Monitoring"
+msgstr ""
+
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:10
 #: app/scripts/components/premiumSupport/premium-support-summary.html:18
 msgid "Monthly base price"
@@ -2568,6 +2578,7 @@ msgstr ""
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js:48
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:48
 #: app/scripts/components/resource/actions/constants.js:20
+#: app/scripts/components/resource/list/resource-global-list.js:17
 #: app/scripts/components/resource/list/resources-list.js:42
 #: app/scripts/components/slurm/slurm-allocation-list.js:33
 msgid "Name"
@@ -3089,6 +3100,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html:30
 #: app/scripts/components/issues/list/constants.js:51
 #: app/scripts/components/issues/list/issues-list.js:91
+#: app/scripts/components/resource/list/resource-global-list.js:24
 #: app/scripts/components/user/user-projects.js:53
 msgid "Organization"
 msgstr ""
@@ -3155,7 +3167,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:187
+#: app/scripts/components/configs/base-config.js:180
 msgid "Organization owner"
 msgstr ""
 
@@ -3581,6 +3593,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:52
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:48
 #: app/scripts/components/premiumSupport/premium-support-summary.html:35
+#: app/scripts/components/resource/list/resource-global-list.js:31
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:48
 msgid "Project"
 msgstr ""
@@ -3631,7 +3644,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:188
+#: app/scripts/components/configs/base-config.js:181
 msgid "Project manager"
 msgstr ""
 
@@ -4139,6 +4152,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:112
 #: app/scripts/components/providers/details/provider-price-list.js:33
+#: app/scripts/components/resource/list/resource-global-list-filtered.html:15
 msgid "Resource type"
 msgstr ""
 
@@ -4223,7 +4237,7 @@ msgstr ""
 msgid "Runtime State"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:224
+#: app/scripts/components/configs/base-config.js:217
 msgid "Russian"
 msgstr ""
 
@@ -4356,6 +4370,10 @@ msgstr ""
 
 #: app/scripts/components/issues/create/issue-type-select.html:2
 msgid "Select request type"
+msgstr ""
+
+#: app/scripts/components/resource/list/resource-global-list-filtered.html:20
+msgid "Select resource type"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:34
@@ -4634,6 +4652,7 @@ msgstr ""
 #: app/scripts/components/plans/plan-agreements-list.js:26
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:38
 #: app/scripts/components/providers/provider-list.js:62
+#: app/scripts/components/resource/list/resource-global-list.js:38
 #: app/scripts/components/resource/list/resources-list.js:60
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
 #: app/scripts/components/slurm/slurm-allocation-list.js:58
@@ -4779,7 +4798,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:189
+#: app/scripts/components/configs/base-config.js:182
 msgid "System administrator"
 msgstr ""
 

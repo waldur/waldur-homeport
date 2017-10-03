@@ -73,14 +73,14 @@ export default function baseResourceListController(
       };
     },
     renderResourceName: function(row) {
-      var index = this.findIndexById(row);
-      return '<resource-name resource="controller.list[{index}]"></resource-name>'
-        .replace('{index}', index);
+      return this.renderComponent('resource-name', row);
     },
     renderResourceState: function(row) {
-      var index = this.findIndexById(row);
-      return '<resource-state resource="controller.list[{index}]"></resource-state>'
-        .replace('{index}', index);
+      return this.renderComponent('resource-state', row);
+    },
+    renderComponent: function(component, row) {
+      const index = this.findIndexById(row);
+      return `<${component} resource="controller.list[${index}]"></${component}>`;
     },
     getTableActions: function() {
       var actions = [];
