@@ -1,7 +1,7 @@
 import { randomDate, randomInteger, randomChoice } from '../../core/fixtures';
 
 // @ngInject
-function ResourceGlobalListController($scope, baseResourceListController) {
+function ResourceGlobalListController($rootScope, $scope, baseResourceListController) {
   var controllerScope = this;
   var ResourceController = baseResourceListController.extend({
     init: function() {
@@ -82,6 +82,7 @@ function ResourceGlobalListController($scope, baseResourceListController) {
     },
     connectWatchers: function() {
       $scope.$watch(() => controllerScope.filter, () => {
+        $rootScope.$broadcast('gotoFirstPage');
         controllerScope.getList();
       }, true);
     },
