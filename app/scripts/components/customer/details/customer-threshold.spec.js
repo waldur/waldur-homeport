@@ -1,5 +1,5 @@
 import customerThreshold from './customer-threshold';
-import filtersModule from '../core/filters';
+import filtersModule from '../../core/filters';
 
 describe('customerThreshold', () => {
 

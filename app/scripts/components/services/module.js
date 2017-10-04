@@ -1,12 +1,8 @@
 import agreementsService from './agreements-service';
 import currentStateService from './current-state-service';
-import customerImageService from './customer-image-service';
-import customerPermissionsService from './customer-permissions-service';
-import customersService from './customers-service';
 import defaultPriceListItemsService from './default-price-list-items-service';
 import joinService from './join-service';
 import joinServiceProjectLinkService from './join-service-project-link-service';
-import paymentDetailsService from './payment-details';
 import priceEstimationService from './price-estimation-service';
 import priceListItemsService from './price-list-items-service';
 import projectPermissionsService from './project-permissions-service';
@@ -15,14 +11,9 @@ import quotasService from './quotas-service';
 export default module => {
   module.service('agreementsService', agreementsService);
   module.service('currentStateService', currentStateService);
-  module.service('customerImageService', customerImageService);
-  module.service('customerPermissionsService', customerPermissionsService);
-  module.service('customersService', customersService);
   module.service('defaultPriceListItemsService', defaultPriceListItemsService);
   module.service('joinService', joinService);
   module.service('joinServiceProjectLinkService', joinServiceProjectLinkService);
-  module.service('paymentDetailsService', paymentDetailsService);
-  module.service('priceEstimationService', priceEstimationService);
   module.service('priceEstimationService', priceEstimationService);
   module.service('priceListItemsService', priceListItemsService);
   module.service('projectPermissionsService', projectPermissionsService);

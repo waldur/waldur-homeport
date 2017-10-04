@@ -1,4 +1,4 @@
-export const customerUsersDetailsList = {
+const customerUsersDetailsList = {
   controller: customerUsersDetailsListController,
   controllerAs: 'ListController',
   templateUrl: 'views/partials/filtered-list.html',
@@ -7,6 +7,8 @@ export const customerUsersDetailsList = {
     options: '<'
   }
 };
+
+export default customerUsersDetailsList;
 
 // @ngInject
 function customerUsersDetailsListController(

@@ -1,6 +1,6 @@
 import template from './customer-popover.html';
 
-export const customerPopover = {
+const customerPopover = {
   template,
   bindings: {
     dismiss: '&',
@@ -50,3 +50,5 @@ export const customerPopover = {
     }
   }
 };
+
+export default customerPopover;

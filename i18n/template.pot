@@ -144,7 +144,8 @@ msgstr ""
 msgid "A profile has been created."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:18
+#: app/scripts/components/customer/customer-list.js:47
+#: app/scripts/components/customer/details/customer-manage.html:18
 msgid "Abbreviation"
 msgstr ""
 
@@ -169,7 +170,7 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:92
+#: app/scripts/components/customer/details/customer-manage.html:92
 msgid "Account"
 msgstr ""
 
@@ -198,7 +199,7 @@ msgstr ""
 msgid "Accounting records"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:28
+#: app/scripts/components/customer/details/customer-manage.html:28
 msgid "Accounting start date"
 msgstr ""
 
@@ -281,7 +282,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/dialog/appstore-project-selector.html:16
 #: app/scripts/components/project/project-create.html:72
-#: app/scripts/components/project/projects-list.js:169
+#: app/scripts/components/project/projects-list.js:170
 msgid "Add project"
 msgstr ""
 
@@ -341,9 +342,9 @@ msgstr ""
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:48
-#: app/scripts/components/customer/customer-manage.html:38
-#: app/scripts/components/customer/customer-manage.html:74
+#: app/scripts/components/customer/create/customer-create-config.js:48
+#: app/scripts/components/customer/details/customer-manage.html:38
+#: app/scripts/components/customer/details/customer-manage.html:74
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
 msgstr ""
@@ -356,7 +357,7 @@ msgid "Affected resource"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:14
-#: app/scripts/components/customer/customer-manage.html:33
+#: app/scripts/components/customer/details/customer-manage.html:33
 msgid "Agreement number"
 msgstr ""
 
@@ -366,8 +367,8 @@ msgstr ""
 msgid "Alert types"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:112
 #: app/scripts/components/customer/routes.js:89
+#: app/scripts/components/customer/workspace/customer-workspace.js:112
 #: app/scripts/components/dashboard/project-alerts-feed.js:11
 #: app/scripts/components/help/constants.js:5
 #: app/scripts/components/project/project-workspace.js:98
@@ -404,7 +405,7 @@ msgstr ""
 msgid "Allocation"
 msgstr ""
 
-#: app/scripts/components/slurm/actions.js:20
+#: app/scripts/components/slurm/actions.js:24
 msgid "Allocation has been updated."
 msgstr ""
 
@@ -413,7 +414,7 @@ msgstr ""
 msgid "Allocation name"
 msgstr ""
 
-#: app/scripts/components/slurm/projects-list-extension.js:12
+#: app/scripts/components/slurm/table-extension.js:3
 msgid "Allocations"
 msgstr ""
 
@@ -431,15 +432,15 @@ msgstr ""
 msgid "An error occurred during policy update."
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:55
+#: app/scripts/components/customer/details/customer-policies.js:55
 msgid "An error occurred on policies update."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:249
+#: app/scripts/components/project/projects-list.js:233
 msgid "An error occurred on project removal."
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:75
+#: app/scripts/components/customer/workspace/customer-workspace.js:75
 msgid "Analytics"
 msgstr ""
 
@@ -477,7 +478,8 @@ msgstr ""
 msgid "Approve payment"
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:119
+#: app/scripts/components/customer/customer-list.js:72
+#: app/scripts/components/project/projects-list.js:120
 msgid "Apps"
 msgstr ""
 
@@ -537,8 +539,8 @@ msgstr ""
 msgid "Audit log"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:98
 #: app/scripts/components/customer/routes.js:72
+#: app/scripts/components/customer/workspace/customer-workspace.js:98
 #: app/scripts/components/project/project-workspace.js:84
 #: app/scripts/components/project/routes.js:102
 #: app/scripts/components/user/constants.js:38
@@ -570,16 +572,16 @@ msgstr ""
 msgid "Back to login"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js:96
+#: app/scripts/components/issues/issue-navigation-service.js:102
 #: app/scripts/components/user/user-details.js:27
 msgid "Back to organization"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js:98
+#: app/scripts/components/issues/issue-navigation-service.js:104
 msgid "Back to personal dashboard"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js:93
+#: app/scripts/components/issues/issue-navigation-service.js:99
 #: app/scripts/components/user/user-details.js:20
 msgid "Back to project"
 msgstr ""
@@ -631,7 +633,7 @@ msgstr ""
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:89
+#: app/scripts/components/customer/details/customer-manage.html:89
 msgid "Bank"
 msgstr ""
 
@@ -669,11 +671,11 @@ msgid "Bid description"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:3
-#: app/scripts/components/customer/customer-create-config.js:28
+#: app/scripts/components/customer/create/customer-create-config.js:28
 msgid "Billing"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:29
+#: app/scripts/components/customer/create/customer-create-config.js:29
 msgid "Billing details"
 msgstr ""
 
@@ -867,7 +869,7 @@ msgstr ""
 msgid "CIDR"
 msgstr ""
 
-#: app/scripts/components/customer/customer-users-details-list.js:47
+#: app/scripts/components/customer/popover/customer-users-details-list.js:49
 #: app/scripts/components/invitations/actions/invitation-dialog.html:21
 #: app/scripts/components/team/user-selector.html:15
 msgid "Civil number"
@@ -878,7 +880,7 @@ msgid "Click on a 'Create bid' button when you are ready to fulfill expert reque
 msgstr ""
 
 #: app/scripts/components/billing/invoice-events-dialog.html:45
-#: app/scripts/components/customer/customer-report-error.html:10
+#: app/scripts/components/customer/details/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 #: app/scripts/components/slurm/slurm-allocation-details-dialog.html:10
 msgid "Close"
@@ -914,7 +916,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:71
+#: app/scripts/components/customer/details/customer-manage.html:71
 msgid "Company"
 msgstr ""
 
@@ -923,7 +925,7 @@ msgstr ""
 msgid "Compare flavors"
 msgstr ""
 
-#: app/scripts/components/customer/customer-users-details-list.js:69
+#: app/scripts/components/customer/popover/customer-users-details-list.js:71
 #: app/scripts/components/user/user-popover-table.html:25
 msgid "Competence"
 msgstr ""
@@ -957,7 +959,7 @@ msgstr ""
 msgid "Confirm changing your plan"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:117
+#: app/scripts/components/customer/details/customer-manage.js:117
 msgid "Confirm deletion?"
 msgstr ""
 
@@ -973,17 +975,17 @@ msgstr ""
 msgid "Connected subnets"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:17
-#: app/scripts/components/customer/customer-manage.html:43
+#: app/scripts/components/customer/create/customer-create-config.js:17
+#: app/scripts/components/customer/details/customer-manage.html:43
 msgid "Contact e-mail"
 msgstr ""
 
-#: app/scripts/components/customer/customer-popover.html:28
+#: app/scripts/components/customer/popover/customer-popover.html:28
 msgid "Contact email"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:23
-#: app/scripts/components/customer/customer-manage.html:48
+#: app/scripts/components/customer/create/customer-create-config.js:23
+#: app/scripts/components/customer/details/customer-manage.html:48
 msgid "Contact phone"
 msgstr ""
 
@@ -1002,7 +1004,7 @@ msgid "Cost"
 msgstr ""
 
 #: app/scripts/components/analytics/routes.js:19
-#: app/scripts/components/customer/customer-workspace.js:82
+#: app/scripts/components/customer/workspace/customer-workspace.js:82
 msgid "Cost analysis"
 msgstr ""
 
@@ -1011,7 +1013,7 @@ msgstr ""
 msgid "Cost planning"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:4
+#: app/scripts/components/customer/details/customer-threshold.html:4
 #: app/scripts/components/project/project-policies.html:39
 msgid "Cost threshold"
 msgstr ""
@@ -1020,7 +1022,7 @@ msgstr ""
 msgid "Costs"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.js:33
+#: app/scripts/components/customer/create/customer-create-dialog.js:33
 msgid "Could not create organization"
 msgstr ""
 
@@ -1028,8 +1030,8 @@ msgstr ""
 msgid "Could not load a list of identity providers. Please try again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:42
-#: app/scripts/components/customer/customer-manage.html:77
+#: app/scripts/components/customer/create/customer-create-config.js:42
+#: app/scripts/components/customer/details/customer-manage.html:77
 msgid "Country"
 msgstr ""
 
@@ -1045,7 +1047,7 @@ msgstr ""
 msgid "CPU limit"
 msgstr ""
 
-#: app/scripts/components/slurm/actions.js:24
+#: app/scripts/components/slurm/actions.js:28
 msgid "CPU limit, minutes"
 msgstr ""
 
@@ -1056,7 +1058,7 @@ msgstr ""
 #: app/scripts/components/ansible/ansible-job-create.html:34
 #: app/scripts/components/appstore/appstore-store.html:20
 #: app/scripts/components/appstore/appstore-store.html:51
-#: app/scripts/components/customer/customer-issues.js:31
+#: app/scripts/components/customer/workspace/customer-issues.js:31
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:90
 #: app/scripts/components/experts/contracts/expert-contract-create.html:33
 #: app/scripts/components/freeipa/freeipa-account-create.html:67
@@ -1122,7 +1124,7 @@ msgstr ""
 msgid "Create notification"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.html:2
+#: app/scripts/components/customer/create/customer-create-dialog.html:2
 msgid "Create organization"
 msgstr ""
 
@@ -1171,6 +1173,7 @@ msgstr ""
 
 #: app/scripts/components/ansible/ansible-job-summary.html:27
 #: app/scripts/components/billing/billing-utils.js:41
+#: app/scripts/components/customer/customer-list.js:52
 #: app/scripts/components/experts/bids/expert-bids-list.js:75
 #: app/scripts/components/experts/requests/expert-request-general-info.html:10
 #: app/scripts/components/issues/issue-detail.html:80
@@ -1220,7 +1223,7 @@ msgstr ""
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:98
 #: app/scripts/components/experts/requests/expert-request-project-list.js:79
 #: app/scripts/components/offering/offerings-list.js:55
-#: app/scripts/components/project/projects-list.js:102
+#: app/scripts/components/project/projects-list.js:103
 msgid "Creation date"
 msgstr ""
 
@@ -1258,8 +1261,8 @@ msgstr ""
 msgid "Customer is billed on project completion."
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:44
 #: app/scripts/components/customer/routes.js:63
+#: app/scripts/components/customer/workspace/customer-workspace.js:44
 #: app/scripts/components/issues/issue-navigation-service.js:11
 #: app/scripts/components/project/project-workspace.js:25
 #: app/scripts/components/project/routes.js:83
@@ -1324,7 +1327,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:20
 #: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:17
 #: app/scripts/components/project/project-details.html:25
-#: app/scripts/components/project/projects-list.js:94
+#: app/scripts/components/project/projects-list.js:95
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js:53
 #: app/scripts/components/resource/actions/constants.js:26
 #: app/scripts/components/resource/summary/resource-summary-base.html:31
@@ -1361,10 +1364,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
 #: app/scripts/components/project/project-details-button.html:3
-#: app/scripts/components/project/projects-list.js:187
+#: app/scripts/components/project/projects-list.js:188
 #: app/scripts/components/providers/details/dialog.html:10
 #: app/scripts/components/providers/provider-list.js:92
-#: app/scripts/components/slurm/actions.js:12
+#: app/scripts/components/slurm/actions.js:16
 #: app/scripts/components/team/customer-users-list.js:123
 #: app/scripts/components/team/project-users-list.js:87
 #: app/scripts/components/user/user-sidebar.html:12
@@ -1387,7 +1390,7 @@ msgstr ""
 msgid "Disable profile"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:37
+#: app/scripts/components/customer/details/customer-threshold.html:37
 #: app/scripts/components/project/project-policies.html:67
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
@@ -1415,7 +1418,7 @@ msgstr ""
 msgid "Due date"
 msgstr ""
 
-#: app/scripts/components/customer/customer-users-details-list.js:40
+#: app/scripts/components/customer/popover/customer-users-details-list.js:42
 #: app/scripts/components/invitations/actions/invitation-dialog.html:12
 #: app/scripts/components/team/customer-users-list.js:71
 #: app/scripts/components/team/project-users-list.js:56
@@ -1447,7 +1450,7 @@ msgid "Edit team member"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:62
-#: app/scripts/components/customer/customer-manage.html:80
+#: app/scripts/components/customer/details/customer-manage.html:80
 #: app/scripts/components/invitations/invitations-list.js:97
 msgid "Email"
 msgstr ""
@@ -1494,11 +1497,12 @@ msgstr ""
 msgid "error message: {errorMessage}"
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:130
+#: app/scripts/components/customer/customer-list.js:83
+#: app/scripts/components/project/projects-list.js:131
 msgid "Estimated cost"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:22
+#: app/scripts/components/customer/details/customer-threshold.html:22
 msgid "Estimated cost exceeds threshold"
 msgstr ""
 
@@ -1506,7 +1510,7 @@ msgstr ""
 msgid "Estimated cost exceeds threshold."
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:29
+#: app/scripts/components/customer/details/customer-threshold.html:29
 #: app/scripts/components/project/project-policies.html:59
 msgid "Estimated cost for current month"
 msgstr ""
@@ -1519,7 +1523,7 @@ msgstr ""
 msgid "Estonian"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:54
+#: app/scripts/components/customer/create/customer-create-config.js:54
 msgid "EU VAT ID"
 msgstr ""
 
@@ -1730,6 +1734,11 @@ msgstr ""
 msgid "Filter projects"
 msgstr ""
 
+#: app/scripts/components/issues/issue-navigation-service.js:30
+#: app/scripts/components/issues/routes.js:74
+msgid "Financial overview"
+msgstr ""
+
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:80
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:94
 #: app/scripts/components/user/keys/key-list.js:36
@@ -1820,12 +1829,12 @@ msgstr ""
 msgid "GB"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:3
+#: app/scripts/components/customer/create/customer-create-config.js:3
 #: app/scripts/components/project/project-dialog.html:7
 msgid "General"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:4
+#: app/scripts/components/customer/create/customer-create-config.js:4
 msgid "General information"
 msgstr ""
 
@@ -1859,7 +1868,7 @@ msgstr ""
 msgid "GPU limit"
 msgstr ""
 
-#: app/scripts/components/slurm/actions.js:30
+#: app/scripts/components/slurm/actions.js:34
 msgid "GPU limit, minutes"
 msgstr ""
 
@@ -1902,7 +1911,7 @@ msgstr ""
 msgid "Helpdesk"
 msgstr ""
 
-#: app/scripts/components/issues/routes.js:28
+#: app/scripts/components/issues/routes.js:37
 msgid "Helpdesk dashboard"
 msgstr ""
 
@@ -2001,8 +2010,8 @@ msgstr ""
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
-#: app/scripts/components/customer/customer-report-error.html:2
-#: app/scripts/components/customer/customer-report-error.js:21
+#: app/scripts/components/customer/details/customer-report-error.html:2
+#: app/scripts/components/customer/details/customer-report-error.js:21
 msgid "Incorrect organization details"
 msgstr ""
 
@@ -2144,7 +2153,7 @@ msgstr ""
 msgid "Invitation token is not found."
 msgstr ""
 
-#: app/scripts/components/customer/customer-team.html:10
+#: app/scripts/components/customer/workspace/customer-team.html:10
 msgid "Invitations"
 msgstr ""
 
@@ -2265,8 +2274,8 @@ msgstr ""
 msgid "Issue status"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:105
 #: app/scripts/components/customer/routes.js:81
+#: app/scripts/components/customer/workspace/customer-workspace.js:105
 #: app/scripts/components/project/project-workspace.js:91
 #: app/scripts/components/project/routes.js:93
 #: app/scripts/components/resource/list/resource-global-list.js:59
@@ -2283,7 +2292,7 @@ msgstr ""
 msgid "Item type"
 msgstr ""
 
-#: app/scripts/components/customer/customer-users-details-list.js:77
+#: app/scripts/components/customer/popover/customer-users-details-list.js:79
 #: app/scripts/components/user/user-edit.html:82
 #: app/scripts/components/user/user-popover-table.html:37
 msgid "Job position"
@@ -2342,7 +2351,7 @@ msgstr ""
 msgid "Leave blank if you want admin username to be auto-generated."
 msgstr ""
 
-#: app/scripts/components/customer/customer-popover.html:24
+#: app/scripts/components/customer/popover/customer-popover.html:24
 msgid "Legal address"
 msgstr ""
 
@@ -2424,7 +2433,7 @@ msgstr ""
 msgid "MAC address"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:136
+#: app/scripts/components/customer/workspace/customer-workspace.js:136
 #: app/scripts/components/user/constants.js:24
 #: app/scripts/components/user/routes.js:36
 msgid "Manage"
@@ -2485,7 +2494,7 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
-#: app/scripts/components/customer/customer-users-details-list.js:30
+#: app/scripts/components/customer/popover/customer-users-details-list.js:32
 #: app/scripts/components/team/customer-users-list.js:67
 #: app/scripts/components/team/project-users-list.js:52
 msgid "Member"
@@ -2514,7 +2523,7 @@ msgstr ""
 msgid "Minimal valid value is"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:18
+#: app/scripts/components/customer/details/customer-threshold.html:18
 msgid "Minimal valid value is 0"
 msgstr ""
 
@@ -2550,8 +2559,8 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-compare-list.js:69
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:13
 #: app/scripts/components/cost-planning/cost-plans-list.js:31
-#: app/scripts/components/customer/customer-create-config.js:10
-#: app/scripts/components/customer/customer-manage.html:10
+#: app/scripts/components/customer/create/customer-create-config.js:10
+#: app/scripts/components/customer/details/customer-manage.html:10
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:76
 #: app/scripts/components/experts/requests/expert-request-create.js:43
 #: app/scripts/components/experts/requests/expert-request-project-list.js:53
@@ -2571,7 +2580,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js:46
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:42
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:31
-#: app/scripts/components/project/projects-list.js:84
+#: app/scripts/components/project/projects-list.js:85
 #: app/scripts/components/providers/details/provider-details.html:4
 #: app/scripts/components/providers/details/provider-settings.js:44
 #: app/scripts/components/providers/provider-list.js:55
@@ -2584,11 +2593,11 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:12
+#: app/scripts/components/customer/create/customer-create-config.js:12
 msgid "Name of your organization."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:13
+#: app/scripts/components/customer/details/customer-manage.html:13
 msgid "Native name"
 msgstr ""
 
@@ -2761,10 +2770,12 @@ msgstr ""
 msgid "No notifications registered."
 msgstr ""
 
+#: app/scripts/components/customer/customer-list.js:30
 #: app/scripts/components/user/user-organizations.js:50
 msgid "No organizations found matching filter."
 msgstr ""
 
+#: app/scripts/components/customer/customer-list.js:29
 #: app/scripts/components/user/user-organizations.js:49
 msgid "No organizations yet"
 msgstr ""
@@ -2782,7 +2793,7 @@ msgstr ""
 msgid "No permissions found matching filter."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:144
+#: app/scripts/components/project/projects-list.js:145
 msgid "No plan"
 msgstr ""
 
@@ -2814,7 +2825,7 @@ msgstr ""
 msgid "No projects are assigned to this role."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:60
+#: app/scripts/components/project/projects-list.js:61
 #: app/scripts/components/user/user-projects.js:41
 msgid "No projects found matching filter."
 msgstr ""
@@ -2915,7 +2926,7 @@ msgstr ""
 msgid "No support requests yet."
 msgstr ""
 
-#: app/scripts/components/customer/customer-users-details-list.js:26
+#: app/scripts/components/customer/popover/customer-users-details-list.js:28
 msgid "No users found matching filter."
 msgstr ""
 
@@ -2940,7 +2951,7 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-prompt.html:9
+#: app/scripts/components/customer/create/customer-create-prompt.html:9
 msgid "No, I will do it later"
 msgstr ""
 
@@ -3014,7 +3025,7 @@ msgstr ""
 msgid "Offerings"
 msgstr ""
 
-#: app/scripts/components/customer/customer-popover.html:53
+#: app/scripts/components/customer/popover/customer-popover.html:53
 #: app/scripts/components/experts/contracts/expert-contract-details.html:8
 #: app/scripts/components/project/project-dialog.html:30
 #: app/scripts/components/providers/details/dialog.html:44
@@ -3054,7 +3065,7 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:125
+#: app/scripts/components/customer/details/customer-manage.html:125
 msgid "Only staff can remove organization."
 msgstr ""
 
@@ -3135,7 +3146,7 @@ msgstr ""
 msgid "Organization {customer_name} has no providers."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:109
+#: app/scripts/components/customer/details/customer-manage.html:109
 msgid "Organization actions"
 msgstr ""
 
@@ -3143,24 +3154,25 @@ msgstr ""
 msgid "Organization code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:97
+#: app/scripts/components/customer/details/customer-manage.js:97
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:7
+#: app/scripts/components/customer/details/customer-manage.html:7
 msgid "Organization details"
 msgstr ""
 
-#: app/scripts/components/customer/customer-events.js:25
+#: app/scripts/components/customer/workspace/customer-events.js:25
 #: app/scripts/components/events/constants.js:66
 msgid "Organization events"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-dialog.js:26
+#: app/scripts/components/customer/create/customer-create-dialog.js:26
 msgid "Organization has been created."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:69
+#: app/scripts/components/customer/customer-list.js:38
 #: app/scripts/components/issues/list/constants.js:4
 #: app/scripts/components/user/user-edit.html:71
 #: app/scripts/components/user/user-organizations.js:54
@@ -3175,26 +3187,26 @@ msgstr ""
 msgid "Organization owner role expires on"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.js:47
+#: app/scripts/components/customer/details/customer-policies.js:47
 msgid "Organization policies have been updated."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:35
+#: app/scripts/components/customer/create/customer-create-config.js:35
 msgid "Organization registration code"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:105
-#: app/scripts/components/customer/customer-manage.js:108
+#: app/scripts/components/customer/details/customer-manage.js:105
+#: app/scripts/components/customer/details/customer-manage.js:108
 msgid "Organization removal"
 msgstr ""
 
-#: app/scripts/components/customer/customer-popover.html:16
+#: app/scripts/components/customer/popover/customer-popover.html:16
 msgid "Organization type"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-header.html:6
 #: app/scripts/components/billing/invoice-header.html:6
-#: app/scripts/components/customer/customer-workspace.html:10
+#: app/scripts/components/customer/workspace/customer-workspace.html:10
 msgid "Organization workspace"
 msgstr ""
 
@@ -3289,7 +3301,7 @@ msgstr ""
 #: app/scripts/components/billing/billing-utils.js:33
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:156
 #: app/scripts/components/invitations/invitations-list.js:71
-#: app/scripts/components/project/projects-list.js:142
+#: app/scripts/components/project/projects-list.js:143
 msgid "Pending"
 msgstr ""
 
@@ -3297,7 +3309,7 @@ msgstr ""
 msgid "Permanent"
 msgstr ""
 
-#: app/scripts/components/customer/customer-team.html:16
+#: app/scripts/components/customer/workspace/customer-team.html:16
 #: app/scripts/components/project/project-team.html:10
 msgid "Permissions log"
 msgstr ""
@@ -3308,12 +3320,12 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-customer-details.html:5
 #: app/scripts/components/billing/billing-issuer-details.html:5
-#: app/scripts/components/customer/customer-manage.html:86
-#: app/scripts/components/customer/customer-popover.html:32
+#: app/scripts/components/customer/details/customer-manage.html:86
+#: app/scripts/components/customer/popover/customer-popover.html:32
 msgid "Phone"
 msgstr ""
 
-#: app/scripts/components/customer/customer-users-details-list.js:54
+#: app/scripts/components/customer/popover/customer-users-details-list.js:56
 #: app/scripts/components/user/user-edit.html:104
 msgid "Phone number"
 msgstr ""
@@ -3375,7 +3387,7 @@ msgstr ""
 msgid "Please provide details of a new volume created from snapshot."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:38
+#: app/scripts/components/customer/create/customer-create-config.js:38
 msgid "Please provide registration code of your company."
 msgstr ""
 
@@ -3383,7 +3395,7 @@ msgstr ""
 msgid "Please provide valid quotas."
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:56
+#: app/scripts/components/customer/create/customer-create-config.js:56
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
@@ -3420,7 +3432,7 @@ msgstr ""
 msgid "Please wait while provider is being configured."
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:2
+#: app/scripts/components/customer/details/customer-policies.html:2
 #: app/scripts/components/project/project-dialog.html:14
 msgid "Policies"
 msgstr ""
@@ -3430,7 +3442,7 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:83
+#: app/scripts/components/customer/details/customer-manage.html:83
 msgid "Postal"
 msgstr ""
 
@@ -3438,7 +3450,7 @@ msgstr ""
 msgid "Powered by"
 msgstr ""
 
-#: app/scripts/components/customer/customer-users-details-list.js:61
+#: app/scripts/components/customer/popover/customer-users-details-list.js:63
 #: app/scripts/components/user/user-popover-table.html:21
 msgid "Preferred language"
 msgstr ""
@@ -3559,9 +3571,10 @@ msgstr ""
 #: app/scripts/components/appstore/routes.js:22
 #: app/scripts/components/configs/base-config.js:36
 #: app/scripts/components/configs/base-config.js:93
+#: app/scripts/components/customer/customer-list.js:78
 #: app/scripts/components/dashboard/constants.js:18
 #: app/scripts/components/project/project-workspace.js:58
-#: app/scripts/components/project/projects-list.js:125
+#: app/scripts/components/project/projects-list.js:126
 #: app/scripts/components/project/routes.js:132
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:7
 msgid "Private clouds"
@@ -3618,13 +3631,13 @@ msgstr ""
 msgid "Project details"
 msgstr ""
 
-#: app/scripts/components/customer/customer-events.js:30
+#: app/scripts/components/customer/workspace/customer-events.js:30
 #: app/scripts/components/events/constants.js:68
 #: app/scripts/components/project/project-events.js:25
 msgid "Project events"
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:245
+#: app/scripts/components/project/projects-list.js:229
 msgid "Project has been removed successfully."
 msgstr ""
 
@@ -3636,7 +3649,7 @@ msgstr ""
 msgid "Project has been updated."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:202
+#: app/scripts/components/project/projects-list.js:203
 msgid "Project has connected resources and can't be removed"
 msgstr ""
 
@@ -3685,8 +3698,8 @@ msgstr ""
 #: app/scripts/components/analytics/cost-analysis.html:27
 #: app/scripts/components/analytics/dashboard-cost-chart.html:12
 #: app/scripts/components/appstore/dialog/appstore-project-selector.html:2
-#: app/scripts/components/customer/customer-workspace.js:58
 #: app/scripts/components/customer/routes.js:97
+#: app/scripts/components/customer/workspace/customer-workspace.js:58
 #: app/scripts/components/dashboard/constants.js:7
 #: app/scripts/components/navigation/select-workspace-dialog.html:93
 #: app/scripts/components/providers/details/dialog.html:28
@@ -3761,8 +3774,8 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:43
 #: app/scripts/components/analytics/dashboard-cost-chart.html:14
-#: app/scripts/components/customer/customer-workspace.js:50
 #: app/scripts/components/customer/routes.js:113
+#: app/scripts/components/customer/workspace/customer-workspace.js:50
 #: app/scripts/components/project/project-dialog.html:21
 msgid "Providers"
 msgstr ""
@@ -3815,7 +3828,7 @@ msgid "Quota events"
 msgstr ""
 
 #: app/scripts/components/error/routes.js:25
-#: app/scripts/components/project/projects-list.js:165
+#: app/scripts/components/project/projects-list.js:166
 #: app/scripts/components/providers/provider-list.js:182
 #: app/scripts/components/resource-import/utils.js:36
 #: app/scripts/components/resource/resource-provision-policy.js:14
@@ -3860,7 +3873,7 @@ msgstr ""
 msgid "RAM limit GB"
 msgstr ""
 
-#: app/scripts/components/slurm/actions.js:36
+#: app/scripts/components/slurm/actions.js:40
 msgid "RAM limit, MB"
 msgstr ""
 
@@ -3872,7 +3885,7 @@ msgstr ""
 msgid "Read through terms and conditions."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:110
+#: app/scripts/components/customer/details/customer-manage.js:110
 #: app/scripts/components/experts/requests/expert-request-complain.js:57
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
@@ -3938,7 +3951,7 @@ msgstr ""
 msgid "Registered"
 msgstr ""
 
-#: app/scripts/components/customer/customer-popover.html:20
+#: app/scripts/components/customer/popover/customer-popover.html:20
 msgid "Registration code"
 msgstr ""
 
@@ -3947,7 +3960,7 @@ msgstr ""
 msgid "Registration method"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:23
+#: app/scripts/components/customer/details/customer-manage.html:23
 msgid "Registry code"
 msgstr ""
 
@@ -3969,7 +3982,7 @@ msgid "Remote network"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plans-list.js:59
-#: app/scripts/components/project/projects-list.js:192
+#: app/scripts/components/project/projects-list.js:193
 #: app/scripts/components/providers/provider-list.js:97
 #: app/scripts/components/team/customer-users-list.js:135
 #: app/scripts/components/team/project-users-list.js:103
@@ -3978,7 +3991,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:120
+#: app/scripts/components/customer/details/customer-manage.html:120
 msgid "Remove organization"
 msgstr ""
 
@@ -3991,7 +4004,7 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:113
+#: app/scripts/components/customer/details/customer-manage.html:113
 msgid "Report incorrect data"
 msgstr ""
 
@@ -4035,7 +4048,7 @@ msgstr ""
 msgid "Request description"
 msgstr ""
 
-#: app/scripts/components/issues/routes.js:36
+#: app/scripts/components/issues/routes.js:45
 msgid "Request detail"
 msgstr ""
 
@@ -4057,7 +4070,7 @@ msgstr ""
 msgid "Request name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:112
+#: app/scripts/components/customer/details/customer-manage.js:112
 #: app/scripts/components/user/user-manage.js:58
 msgid "Request removal"
 msgstr ""
@@ -4124,7 +4137,7 @@ msgstr ""
 msgid "Resource doesn't have SLA yet. Please connect it to monitoring system."
 msgstr ""
 
-#: app/scripts/components/customer/customer-events.js:34
+#: app/scripts/components/customer/workspace/customer-events.js:34
 #: app/scripts/components/events/constants.js:70
 #: app/scripts/components/project/project-events.js:30
 msgid "Resource events"
@@ -4157,7 +4170,7 @@ msgid "Resource type"
 msgstr ""
 
 #: app/scripts/components/analytics/routes.js:28
-#: app/scripts/components/customer/customer-workspace.js:89
+#: app/scripts/components/customer/workspace/customer-workspace.js:89
 msgid "Resource usage"
 msgstr ""
 
@@ -4169,7 +4182,7 @@ msgstr ""
 #: app/scripts/components/analytics/dashboard-cost-chart.html:13
 #: app/scripts/components/experts/requests/expert-request-header.html:11
 #: app/scripts/components/issues/issue-navigation-service.js:24
-#: app/scripts/components/issues/routes.js:52
+#: app/scripts/components/issues/routes.js:62
 #: app/scripts/components/offering/offering-header.html:17
 #: app/scripts/components/project/project-workspace.js:40
 #: app/scripts/components/providers/provider-list.js:79
@@ -4337,7 +4350,7 @@ msgstr ""
 msgid "Select connected subnet"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-config.js:44
+#: app/scripts/components/customer/create/customer-create-config.js:44
 msgid "Select country..."
 msgstr ""
 
@@ -4458,7 +4471,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-header.html:14
 #: app/scripts/components/appstore/dialog/appstore-selector-dialog.html:2
 #: app/scripts/components/appstore/routes.js:11
-#: app/scripts/components/customer/customer-workspace.js:67
+#: app/scripts/components/customer/workspace/customer-workspace.js:67
 #: app/scripts/components/project/project-workspace.js:31
 msgid "Service store"
 msgstr ""
@@ -4536,7 +4549,7 @@ msgstr ""
 msgid "Skip floating IP assignment"
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:136
+#: app/scripts/components/project/projects-list.js:137
 #: app/scripts/components/resource/tabs/constants.js:22
 msgid "SLA"
 msgstr ""
@@ -4624,6 +4637,10 @@ msgstr ""
 msgid "Staff and Support user"
 msgstr ""
 
+#: app/scripts/components/customer/customer-list.js:57
+msgid "Start day of accounting"
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-details.html:55
 msgid "Start time"
 msgstr ""
@@ -4687,12 +4704,13 @@ msgid "Stopping"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-compare-list.js:90
+#: app/scripts/components/customer/customer-list.js:67
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:64
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:63
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:20
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:26
 #: app/scripts/components/project/project-workspace.js:66
-#: app/scripts/components/project/projects-list.js:114
+#: app/scripts/components/project/projects-list.js:115
 #: app/scripts/components/project/routes.js:140
 #: app/scripts/components/quotas/filters.js:7
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:11
@@ -4741,13 +4759,13 @@ msgstr ""
 msgid "Subnet Name"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:60
+#: app/scripts/components/customer/details/customer-manage.html:60
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:43
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:40
 msgid "Subnets"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:59
+#: app/scripts/components/customer/details/customer-manage.html:59
 msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
@@ -4767,7 +4785,7 @@ msgid "Support"
 msgstr ""
 
 #: app/scripts/components/issues/issues-workspace.html:10
-#: app/scripts/components/issues/routes.js:19
+#: app/scripts/components/issues/routes.js:28
 msgid "Support dashboard"
 msgstr ""
 
@@ -4776,7 +4794,7 @@ msgid "Support package"
 msgstr ""
 
 #: app/scripts/components/issues/issue-navigation-service.js:16
-#: app/scripts/components/issues/routes.js:44
+#: app/scripts/components/issues/routes.js:53
 msgid "Support requests"
 msgstr ""
 
@@ -4800,6 +4818,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/actions.js:72
 #: app/scripts/components/openstack/openstack-tenant/actions.js:76
 #: app/scripts/components/openstack/openstack-volume/module.js:53
+#: app/scripts/components/slurm/actions.js:13
 msgid "Synchronise"
 msgstr ""
 
@@ -4828,8 +4847,8 @@ msgstr ""
 msgid "TAX"
 msgstr ""
 
-#: app/scripts/components/customer/customer-workspace.js:120
 #: app/scripts/components/customer/routes.js:105
+#: app/scripts/components/customer/workspace/customer-workspace.js:120
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:16
 #: app/scripts/components/experts/bids/expert-bids-list.js:67
 #: app/scripts/components/project/project-workspace.js:104
@@ -5038,7 +5057,7 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-#: app/scripts/components/customer/customer-report-error.js:28
+#: app/scripts/components/customer/details/customer-report-error.js:28
 msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
 msgstr ""
 
@@ -5232,7 +5251,7 @@ msgstr ""
 msgid "Unpaid"
 msgstr ""
 
-#: app/scripts/components/customer/customer-policies.html:19
+#: app/scripts/components/customer/details/customer-policies.html:19
 #: app/scripts/components/user/hooks/hook-details.html:76
 msgid "Update"
 msgstr ""
@@ -5294,7 +5313,7 @@ msgstr ""
 msgid "Upgrade"
 msgstr ""
 
-#: app/scripts/components/customer/customer-threshold.html:5
+#: app/scripts/components/customer/details/customer-threshold.html:5
 #: app/scripts/components/project/project-policies.html:40
 msgid "Upper bound of monthly resource cost provisioned from shared providers."
 msgstr ""
@@ -5438,7 +5457,7 @@ msgstr ""
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
-#: app/scripts/components/customer/customer-team.html:4
+#: app/scripts/components/customer/workspace/customer-team.html:4
 #: app/scripts/components/project/project-team.html:4
 msgid "Users"
 msgstr ""
@@ -5451,7 +5470,7 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:53
+#: app/scripts/components/customer/details/customer-manage.html:53
 msgid "VAT code"
 msgstr ""
 
@@ -5459,7 +5478,7 @@ msgstr ""
 msgid "VAT is not included."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:95
+#: app/scripts/components/customer/details/customer-manage.html:95
 msgid "VAT rate"
 msgstr ""
 
@@ -5505,7 +5524,8 @@ msgstr ""
 msgid "VM name"
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:109
+#: app/scripts/components/customer/customer-list.js:62
+#: app/scripts/components/project/projects-list.js:110
 msgid "VMs"
 msgstr ""
 
@@ -5553,7 +5573,7 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.js:111
+#: app/scripts/components/customer/details/customer-manage.js:111
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
@@ -5561,7 +5581,7 @@ msgstr ""
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-prompt.html:2
+#: app/scripts/components/customer/create/customer-create-prompt.html:2
 msgid "Would you like to register your organization?"
 msgstr ""
 
@@ -5569,7 +5589,7 @@ msgstr ""
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr ""
 
-#: app/scripts/components/customer/customer-create-prompt.html:6
+#: app/scripts/components/customer/create/customer-create-prompt.html:6
 msgid "Yes, I would"
 msgstr ""
 
@@ -5581,7 +5601,7 @@ msgstr ""
 msgid "You can provision a new provider through <a href=\"{link}\">Service store</a>."
 msgstr ""
 
-#: app/scripts/components/customer/customer-manage.html:117
+#: app/scripts/components/customer/details/customer-manage.html:117
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
@@ -5620,8 +5640,8 @@ msgstr ""
 msgid "You don't have enough permission to edit providers for current project."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:163
-#: app/scripts/components/project/projects-list.js:200
+#: app/scripts/components/project/projects-list.js:164
+#: app/scripts/components/project/projects-list.js:201
 msgid "You don't have enough privileges to perform this operation."
 msgstr ""
 
@@ -5655,7 +5675,7 @@ msgstr ""
 msgid "You have no private clouds yet."
 msgstr ""
 
-#: app/scripts/components/project/projects-list.js:59
+#: app/scripts/components/project/projects-list.js:60
 msgid "You have no projects yet."
 msgstr ""
 
@@ -5697,7 +5717,7 @@ msgstr ""
 msgid "You have no team members yet."
 msgstr ""
 
-#: app/scripts/components/customer/customer-users-details-list.js:25
+#: app/scripts/components/customer/popover/customer-users-details-list.js:27
 msgid "You have no users yet."
 msgstr ""
 

@@ -45,6 +45,10 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         });
       });
 
+      scope.$on('gotoFirstPage', () => {
+        table.page('first').draw();
+      });
+
       scope.$watch('controller.tableOptions', function(newTableOptions) {
         if (table) {
           // Table should be initialized once
