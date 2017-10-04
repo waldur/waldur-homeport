@@ -25,6 +25,12 @@ const REPORT_ITEMS = [
     icon: 'fa-files-o',
     link: 'support.resources',
     feature: 'support.resources'
+  },
+  {
+    label: gettext('Financial overview'),
+    icon: 'fa-university',
+    link: 'support.organizations',
+    feature: 'support.organizations'
   }
 ];
 
