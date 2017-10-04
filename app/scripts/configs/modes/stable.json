@@ -8,6 +8,7 @@
     "mainSearch",
     "analytics.cost",
     "monitoring",
+    "monitoring_state",
     "import",
     "intro",
     "openMap",
