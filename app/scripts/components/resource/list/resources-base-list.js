@@ -5,7 +5,9 @@ export default function BaseProjectResourcesTabController(baseResourceListContro
       var vm = this;
       var fn = this._super.bind(vm);
       return currentStateService.getProject().then(function(project){
-        vm.service.defaultFilter.project_uuid = project.uuid;
+        if (project) {
+          vm.service.defaultFilter.project_uuid = project.uuid;
+        }
         return fn(filter);
       });
     }

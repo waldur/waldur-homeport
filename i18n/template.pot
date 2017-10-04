@@ -219,7 +219,6 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js:21
 #: app/scripts/components/issues/issues-activity-stream.html:15
 msgid "Activity stream"
 msgstr ""
@@ -349,10 +348,10 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:71
+#: app/scripts/components/issues/create/issue-quick-create.html:94
+#: app/scripts/components/issues/create/issue-registration.html:171
 #: app/scripts/components/issues/issue-detail.html:50
-#: app/scripts/components/issues/issue-quick-create.html:94
-#: app/scripts/components/issues/issue-registration.html:171
+#: app/scripts/components/issues/list/constants.js:20
 msgid "Affected resource"
 msgstr ""
 
@@ -469,7 +468,8 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
-#: app/scripts/components/issues/issues-list-filtered.html:11
+#: app/scripts/components/issues/list/issues-list-filtered.html:11
+#: app/scripts/components/resource/list/resource-global-list-filtered.html:11
 msgid "Apply filters"
 msgstr ""
 
@@ -513,13 +513,13 @@ msgstr ""
 msgid "Assign VPC package"
 msgstr ""
 
+#: app/scripts/components/issues/create/issue-registration.html:190
 #: app/scripts/components/issues/issue-detail.html:25
-#: app/scripts/components/issues/issue-registration.html:190
-#: app/scripts/components/issues/issues-list.js:120
+#: app/scripts/components/issues/list/issues-list.js:118
 msgid "Assigned to"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:87
+#: app/scripts/components/issues/list/constants.js:36
 msgid "Assignee"
 msgstr ""
 
@@ -570,16 +570,16 @@ msgstr ""
 msgid "Back to login"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js:94
+#: app/scripts/components/issues/issue-navigation-service.js:96
 #: app/scripts/components/user/user-details.js:27
 msgid "Back to organization"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js:96
+#: app/scripts/components/issues/issue-navigation-service.js:98
 msgid "Back to personal dashboard"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js:91
+#: app/scripts/components/issues/issue-navigation-service.js:93
 #: app/scripts/components/user/user-details.js:20
 msgid "Back to project"
 msgstr ""
@@ -592,6 +592,10 @@ msgstr ""
 
 #: app/scripts/components/resource/state/constants.js:17
 msgid "Backing up"
+msgstr ""
+
+#: app/scripts/components/resource/list/resource-global-list.js:45
+msgid "Backup"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:11
@@ -729,10 +733,10 @@ msgstr ""
 msgid "By submitting the form you are agreeing to the"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:108
+#: app/scripts/components/issues/create/issue-registration.html:6
 #: app/scripts/components/issues/issue-detail.html:15
-#: app/scripts/components/issues/issue-registration.html:6
-#: app/scripts/components/issues/issues-list.js:101
+#: app/scripts/components/issues/list/constants.js:57
+#: app/scripts/components/issues/list/issues-list.js:99
 msgid "Caller"
 msgstr ""
 
@@ -755,7 +759,7 @@ msgstr ""
 #: app/scripts/components/invitations/actions/cancel.js:8
 #: app/scripts/components/invitations/actions/invitation-dialog.html:77
 #: app/scripts/components/issues/comments/issue-comments-form.html:22
-#: app/scripts/components/issues/issue-create-dialog.html:99
+#: app/scripts/components/issues/create/issue-create-dialog.html:99
 #: app/scripts/components/navigation/select-workspace-dialog.html:137
 #: app/scripts/components/offering/appstore-offering.html:22
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:26
@@ -810,7 +814,7 @@ msgstr ""
 msgid "Change flavor"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:3
+#: app/scripts/components/issues/create/constants.js:3
 msgid "Change Request"
 msgstr ""
 
@@ -1056,7 +1060,7 @@ msgstr ""
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:90
 #: app/scripts/components/experts/contracts/expert-contract-create.html:33
 #: app/scripts/components/freeipa/freeipa-account-create.html:67
-#: app/scripts/components/issues/issue-create-dialog.js:10
+#: app/scripts/components/issues/create/issue-create-dialog.js:10
 #: app/scripts/components/offering/appstore-offering.html:19
 #: app/scripts/components/openstack/openstack-instance/actions.js:108
 #: app/scripts/components/openstack/openstack-instance/actions.js:51
@@ -1066,7 +1070,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/module.js:60
 #: app/scripts/components/openstack/openstack-volume/module.js:74
 #: app/scripts/components/project/project-issues.js:31
-#: app/scripts/components/resource/list/resources-list.js:110
+#: app/scripts/components/resource/list/resources-list.js:118
 #: app/scripts/components/resource/tabs/resource-issues.js:26
 #: app/scripts/components/user/hooks/hook-details.html:77
 msgid "Create"
@@ -1134,10 +1138,10 @@ msgstr ""
 msgid "Create provider"
 msgstr ""
 
-#: app/scripts/components/issues/issue-create-dialog.js:4
-#: app/scripts/components/issues/issue-quick-create.html:116
-#: app/scripts/components/issues/issue-quick-create.html:3
-#: app/scripts/components/issues/issue-registration.html:216
+#: app/scripts/components/issues/create/issue-create-dialog.js:4
+#: app/scripts/components/issues/create/issue-quick-create.html:116
+#: app/scripts/components/issues/create/issue-quick-create.html:3
+#: app/scripts/components/issues/create/issue-registration.html:216
 msgid "Create request"
 msgstr ""
 
@@ -1170,7 +1174,7 @@ msgstr ""
 #: app/scripts/components/experts/bids/expert-bids-list.js:75
 #: app/scripts/components/experts/requests/expert-request-general-info.html:10
 #: app/scripts/components/issues/issue-detail.html:80
-#: app/scripts/components/issues/issues-list.js:130
+#: app/scripts/components/issues/list/issues-list.js:128
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:45
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:45
 #: app/scripts/components/resource/summary/resource-summary-base.html:40
@@ -1304,11 +1308,11 @@ msgstr ""
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:74
 #: app/scripts/components/experts/requests/expert-request-create.js:50
 #: app/scripts/components/experts/requests/expert-request-general-info.html:12
+#: app/scripts/components/issues/create/issue-quick-create.html:39
+#: app/scripts/components/issues/create/issue-registration.html:110
 #: app/scripts/components/issues/issue-detail.html:89
-#: app/scripts/components/issues/issue-quick-create.html:39
-#: app/scripts/components/issues/issue-registration.html:110
-#: app/scripts/components/issues/issues-list.js:76
-#: app/scripts/components/issues/issues-short-list.html:28
+#: app/scripts/components/issues/list/issues-list.js:74
+#: app/scripts/components/issues/list/issues-short-list.html:28
 #: app/scripts/components/offering/appstore-offering.js:48
 #: app/scripts/components/offering/offering-summary.html:65
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:37
@@ -1352,8 +1356,8 @@ msgstr ""
 #: app/scripts/components/experts/contracts/expert-contract-form.js:22
 #: app/scripts/components/experts/contracts/expert-contract.html:9
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:113
-#: app/scripts/components/issues/issue-registration.html:32
-#: app/scripts/components/issues/issue-registration.html:69
+#: app/scripts/components/issues/create/issue-registration.html:32
+#: app/scripts/components/issues/create/issue-registration.html:69
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
 #: app/scripts/components/project/project-details-button.html:3
@@ -1472,7 +1476,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:208
+#: app/scripts/components/configs/base-config.js:201
 msgid "English"
 msgstr ""
 
@@ -1511,7 +1515,7 @@ msgstr ""
 msgid "Estimated maximum price"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:212
+#: app/scripts/components/configs/base-config.js:205
 msgid "Estonian"
 msgstr ""
 
@@ -1712,9 +1716,9 @@ msgstr ""
 msgid "Field length must be less than {maxlength} symbols"
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.html:150
-#: app/scripts/components/issues/issue-registration.html:36
-#: app/scripts/components/issues/issue-registration.html:73
+#: app/scripts/components/issues/create/issue-registration.html:150
+#: app/scripts/components/issues/create/issue-registration.html:36
+#: app/scripts/components/issues/create/issue-registration.html:73
 msgid "Filter"
 msgstr ""
 
@@ -1790,7 +1794,7 @@ msgstr ""
 msgid "FreeIPA group quota"
 msgstr ""
 
-#: app/scripts/components/issues/issues-short-list.html:49
+#: app/scripts/components/issues/list/issues-short-list.html:49
 msgid "from"
 msgstr ""
 
@@ -1989,11 +1993,11 @@ msgstr ""
 msgid "Importing resources"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:2
+#: app/scripts/components/issues/create/constants.js:2
 msgid "Incident"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:30
+#: app/scripts/components/issues/create/constants.js:30
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
@@ -2010,11 +2014,11 @@ msgstr ""
 msgid "Increase a droplet's RAM, CPU and SSD disk."
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:5
+#: app/scripts/components/issues/create/constants.js:5
 msgid "Informational"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:32
+#: app/scripts/components/issues/create/constants.js:32
 msgid "Informational - client’s request to get or provide additional information related to a service."
 msgstr ""
 
@@ -2265,6 +2269,7 @@ msgstr ""
 #: app/scripts/components/customer/routes.js:81
 #: app/scripts/components/project/project-workspace.js:91
 #: app/scripts/components/project/routes.js:93
+#: app/scripts/components/resource/list/resource-global-list.js:59
 #: app/scripts/components/resource/tabs/constants.js:7
 msgid "Issues"
 msgstr ""
@@ -2294,9 +2299,9 @@ msgstr ""
 msgid "Kept until"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:111
-#: app/scripts/components/issues/issues-list.js:44
-#: app/scripts/components/issues/issues-short-list.html:27
+#: app/scripts/components/issues/list/constants.js:60
+#: app/scripts/components/issues/list/issues-list.js:42
+#: app/scripts/components/issues/list/issues-short-list.html:27
 #: app/scripts/components/providers/details/provider-price-list.js:41
 msgid "Key"
 msgstr ""
@@ -2325,7 +2330,7 @@ msgstr ""
 msgid "Latest SLA events"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:216
+#: app/scripts/components/configs/base-config.js:209
 msgid "Latvian"
 msgstr ""
 
@@ -2371,7 +2376,7 @@ msgstr ""
 msgid "List and edit team members."
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:220
+#: app/scripts/components/configs/base-config.js:213
 msgid "Lithuanian"
 msgstr ""
 
@@ -2513,6 +2518,10 @@ msgstr ""
 msgid "Minimal valid value is 0"
 msgstr ""
 
+#: app/scripts/components/resource/list/resource-global-list.js:52
+msgid "Monitoring"
+msgstr ""
+
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:10
 #: app/scripts/components/premiumSupport/premium-support-summary.html:18
 msgid "Monthly base price"
@@ -2569,7 +2578,8 @@ msgstr ""
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js:48
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:48
 #: app/scripts/components/resource/actions/constants.js:20
-#: app/scripts/components/resource/list/resources-list.js:42
+#: app/scripts/components/resource/list/resource-global-list.js:17
+#: app/scripts/components/resource/list/resources-list.js:46
 #: app/scripts/components/slurm/slurm-allocation-list.js:33
 msgid "Name"
 msgstr ""
@@ -2833,7 +2843,7 @@ msgstr ""
 msgid "No requests found matching filter."
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:37
+#: app/scripts/components/resource/list/resources-list.js:41
 msgid "No resources found matching filter."
 msgstr ""
 
@@ -2897,11 +2907,11 @@ msgstr ""
 msgid "No subnets yet."
 msgstr ""
 
-#: app/scripts/components/issues/issues-list.js:33
+#: app/scripts/components/issues/list/issues-list.js:31
 msgid "No support requests found matching filter."
 msgstr ""
 
-#: app/scripts/components/issues/issues-list.js:32
+#: app/scripts/components/issues/list/issues-list.js:30
 msgid "No support requests yet."
 msgstr ""
 
@@ -3008,7 +3018,7 @@ msgstr ""
 #: app/scripts/components/experts/contracts/expert-contract-details.html:8
 #: app/scripts/components/project/project-dialog.html:30
 #: app/scripts/components/providers/details/dialog.html:44
-#: app/scripts/components/user/user-popover.html:16
+#: app/scripts/components/user/user-popover.html:24
 msgid "OK"
 msgstr ""
 
@@ -3059,11 +3069,11 @@ msgstr ""
 msgid "Open in Service Desk"
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:131
+#: app/scripts/components/resource/list/resources-list.js:139
 msgid "Open map"
 msgstr ""
 
-#: app/scripts/components/issues/issues-short-list.html:44
+#: app/scripts/components/issues/list/issues-short-list.html:44
 msgid "Opened by"
 msgstr ""
 
@@ -3082,14 +3092,15 @@ msgstr ""
 #: app/scripts/components/events/event-details-dialog.html:59
 #: app/scripts/components/experts/bids/expert-bids-list.js:63
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:63
-#: app/scripts/components/issues/constants.js:102
-#: app/scripts/components/issues/issue-create-dialog.html:12
-#: app/scripts/components/issues/issue-create-dialog.html:22
-#: app/scripts/components/issues/issue-create-dialog.html:7
+#: app/scripts/components/issues/create/issue-create-dialog.html:12
+#: app/scripts/components/issues/create/issue-create-dialog.html:22
+#: app/scripts/components/issues/create/issue-create-dialog.html:7
+#: app/scripts/components/issues/create/issue-quick-create.html:56
+#: app/scripts/components/issues/create/issue-registration.html:43
 #: app/scripts/components/issues/issue-detail.html:30
-#: app/scripts/components/issues/issue-quick-create.html:56
-#: app/scripts/components/issues/issue-registration.html:43
-#: app/scripts/components/issues/issues-list.js:93
+#: app/scripts/components/issues/list/constants.js:51
+#: app/scripts/components/issues/list/issues-list.js:91
+#: app/scripts/components/resource/list/resource-global-list.js:24
 #: app/scripts/components/user/user-projects.js:53
 msgid "Organization"
 msgstr ""
@@ -3128,7 +3139,7 @@ msgstr ""
 msgid "Organization actions"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:59
+#: app/scripts/components/issues/list/constants.js:8
 msgid "Organization code"
 msgstr ""
 
@@ -3150,13 +3161,13 @@ msgid "Organization has been created."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:69
-#: app/scripts/components/issues/constants.js:55
+#: app/scripts/components/issues/list/constants.js:4
 #: app/scripts/components/user/user-edit.html:71
 #: app/scripts/components/user/user-organizations.js:54
 msgid "Organization name"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:187
+#: app/scripts/components/configs/base-config.js:180
 msgid "Organization owner"
 msgstr ""
 
@@ -3571,17 +3582,18 @@ msgstr ""
 #: app/scripts/components/analytics/cost-analysis.html:113
 #: app/scripts/components/events/event-details-dialog.html:69
 #: app/scripts/components/invitations/actions/invitation-dialog.html:46
-#: app/scripts/components/issues/constants.js:105
-#: app/scripts/components/issues/issue-create-dialog.html:17
-#: app/scripts/components/issues/issue-create-dialog.html:27
+#: app/scripts/components/issues/create/issue-create-dialog.html:17
+#: app/scripts/components/issues/create/issue-create-dialog.html:27
+#: app/scripts/components/issues/create/issue-quick-create.html:75
+#: app/scripts/components/issues/create/issue-registration.html:127
 #: app/scripts/components/issues/issue-detail.html:40
-#: app/scripts/components/issues/issue-quick-create.html:75
-#: app/scripts/components/issues/issue-registration.html:127
+#: app/scripts/components/issues/list/constants.js:54
 #: app/scripts/components/offering/appstore-offering-summary.html:25
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:65
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:52
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:48
 #: app/scripts/components/premiumSupport/premium-support-summary.html:35
+#: app/scripts/components/resource/list/resource-global-list.js:31
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html:48
 msgid "Project"
 msgstr ""
@@ -3632,7 +3644,7 @@ msgstr ""
 msgid "Project limits"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:188
+#: app/scripts/components/configs/base-config.js:181
 msgid "Project manager"
 msgstr ""
 
@@ -3641,7 +3653,7 @@ msgid "Project manager cannot edit users with same role."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:68
-#: app/scripts/components/issues/constants.js:63
+#: app/scripts/components/issues/list/constants.js:12
 #: app/scripts/components/project/project-create.html:8
 #: app/scripts/components/project/project-details.html:9
 #: app/scripts/components/providers/details/provider-project-link-quotas.html:6
@@ -3691,7 +3703,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-compare-list.js:51
 #: app/scripts/components/appstore/appstore-store.html:32
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:9
-#: app/scripts/components/resource/list/resources-list.js:51
+#: app/scripts/components/resource/list/resources-list.js:55
 #: app/scripts/components/resource/summary/resource-summary-base.html:21
 #: app/views/help/list.html:10
 msgid "Provider"
@@ -3888,7 +3900,7 @@ msgid "Record period"
 msgstr ""
 
 #: app/scripts/components/issues/issues-activity-stream.html:11
-#: app/scripts/components/issues/issues-short-list.html:11
+#: app/scripts/components/issues/list/issues-short-list.html:11
 #: app/scripts/components/table/responsive-table.js:181
 msgid "Refresh"
 msgstr ""
@@ -3983,22 +3995,22 @@ msgstr ""
 msgid "Report incorrect data"
 msgstr ""
 
-#: app/scripts/components/issues/issues-short-list.html:14
+#: app/scripts/components/issues/list/issues-short-list.html:14
 msgid "Reported by me"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:83
 #: app/scripts/components/issues/issue-detail.html:20
-#: app/scripts/components/issues/issues-list.js:110
+#: app/scripts/components/issues/list/constants.js:32
+#: app/scripts/components/issues/list/issues-list.js:108
 msgid "Reporter"
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.js:197
+#: app/scripts/components/issues/create/issue-registration.js:197
 msgid "Request {key} has been created."
 msgstr ""
 
-#: app/scripts/components/issues/issue-create-dialog.js:75
-#: app/scripts/components/issues/issue-quick-create.js:117
+#: app/scripts/components/issues/create/issue-create-dialog.js:75
+#: app/scripts/components/issues/create/issue-quick-create.js:117
 msgid "Request {requestId} has been created."
 msgstr ""
 
@@ -4018,8 +4030,8 @@ msgstr ""
 msgid "Request complaint"
 msgstr ""
 
-#: app/scripts/components/issues/issue-create-dialog.js:6
-#: app/scripts/components/issues/issue-create-dialog.js:7
+#: app/scripts/components/issues/create/issue-create-dialog.js:6
+#: app/scripts/components/issues/create/issue-create-dialog.js:7
 msgid "Request description"
 msgstr ""
 
@@ -4040,8 +4052,8 @@ msgstr ""
 msgid "Request direct access to OpenStack Tenant"
 msgstr ""
 
-#: app/scripts/components/issues/issue-create-dialog.js:8
-#: app/scripts/components/issues/issue-create-dialog.js:9
+#: app/scripts/components/issues/create/issue-create-dialog.js:8
+#: app/scripts/components/issues/create/issue-create-dialog.js:9
 msgid "Request name"
 msgstr ""
 
@@ -4054,13 +4066,13 @@ msgstr ""
 msgid "Request to {action} has been accepted."
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:114
-#: app/scripts/components/issues/constants.js:75
-#: app/scripts/components/issues/issue-create-dialog.html:37
-#: app/scripts/components/issues/issue-create-dialog.html:42
+#: app/scripts/components/issues/create/issue-create-dialog.html:37
+#: app/scripts/components/issues/create/issue-create-dialog.html:42
+#: app/scripts/components/issues/create/issue-quick-create.html:9
+#: app/scripts/components/issues/create/issue-registration.html:80
 #: app/scripts/components/issues/issue-detail.html:35
-#: app/scripts/components/issues/issue-quick-create.html:9
-#: app/scripts/components/issues/issue-registration.html:80
+#: app/scripts/components/issues/list/constants.js:24
+#: app/scripts/components/issues/list/constants.js:63
 msgid "Request type"
 msgstr ""
 
@@ -4088,7 +4100,7 @@ msgid "Resolution"
 msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:93
-#: app/scripts/components/issues/issue-create-dialog.html:32
+#: app/scripts/components/issues/create/issue-create-dialog.html:32
 msgid "Resource"
 msgstr ""
 
@@ -4140,6 +4152,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:112
 #: app/scripts/components/providers/details/provider-price-list.js:33
+#: app/scripts/components/resource/list/resource-global-list-filtered.html:15
 msgid "Resource type"
 msgstr ""
 
@@ -4155,6 +4168,8 @@ msgstr ""
 #: app/scripts/components/analytics/cost-analysis.html:35
 #: app/scripts/components/analytics/dashboard-cost-chart.html:13
 #: app/scripts/components/experts/requests/expert-request-header.html:11
+#: app/scripts/components/issues/issue-navigation-service.js:24
+#: app/scripts/components/issues/routes.js:52
 #: app/scripts/components/offering/offering-header.html:17
 #: app/scripts/components/project/project-workspace.js:40
 #: app/scripts/components/providers/provider-list.js:79
@@ -4222,7 +4237,7 @@ msgstr ""
 msgid "Runtime State"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:224
+#: app/scripts/components/configs/base-config.js:217
 msgid "Russian"
 msgstr ""
 
@@ -4246,7 +4261,7 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.html:212
+#: app/scripts/components/issues/create/issue-registration.html:212
 #: app/scripts/components/navigation/header/main-search.html:3
 #: app/scripts/components/table/responsive-table.js:104
 msgid "Search"
@@ -4276,7 +4291,7 @@ msgid "Security groups details"
 msgstr ""
 
 #: app/scripts/components/issues/issues-activity-stream.html:6
-#: app/scripts/components/issues/issues-short-list.html:6
+#: app/scripts/components/issues/list/issues-short-list.html:6
 msgid "See all"
 msgstr ""
 
@@ -4299,16 +4314,16 @@ msgstr ""
 msgid "Select a component"
 msgstr ""
 
-#: app/scripts/components/issues/issue-quick-create.html:98
-#: app/scripts/components/issues/issue-registration.html:175
+#: app/scripts/components/issues/create/issue-quick-create.html:98
+#: app/scripts/components/issues/create/issue-registration.html:175
 msgid "Select affected resource..."
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.html:194
+#: app/scripts/components/issues/create/issue-registration.html:194
 msgid "Select assignee..."
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.html:11
+#: app/scripts/components/issues/create/issue-registration.html:11
 msgid "Select caller..."
 msgstr ""
 
@@ -4330,8 +4345,8 @@ msgstr ""
 msgid "Select one to go to a customer workspace"
 msgstr ""
 
-#: app/scripts/components/issues/issue-quick-create.html:60
-#: app/scripts/components/issues/issue-registration.html:48
+#: app/scripts/components/issues/create/issue-quick-create.html:60
+#: app/scripts/components/issues/create/issue-registration.html:48
 msgid "Select organization..."
 msgstr ""
 
@@ -4340,8 +4355,8 @@ msgstr ""
 msgid "Select project"
 msgstr ""
 
-#: app/scripts/components/issues/issue-quick-create.html:79
-#: app/scripts/components/issues/issue-registration.html:131
+#: app/scripts/components/issues/create/issue-quick-create.html:79
+#: app/scripts/components/issues/create/issue-registration.html:131
 msgid "Select project..."
 msgstr ""
 
@@ -4353,8 +4368,12 @@ msgstr ""
 msgid "Select provider type..."
 msgstr ""
 
-#: app/scripts/components/issues/issue-type-select.html:2
+#: app/scripts/components/issues/create/issue-type-select.html:2
 msgid "Select request type"
+msgstr ""
+
+#: app/scripts/components/resource/list/resource-global-list-filtered.html:20
+msgid "Select resource type"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js:34
@@ -4363,12 +4382,16 @@ msgstr ""
 msgid "Select security groups..."
 msgstr ""
 
-#: app/scripts/components/issues/issue-registration.html:160
+#: app/scripts/components/issues/create/issue-registration.html:160
 msgid "Select service type..."
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html:22
 msgid "Select size..."
+msgstr ""
+
+#: app/scripts/components/resource/list/resource-global-list-filtered.html:36
+msgid "Select state"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:9
@@ -4420,11 +4443,11 @@ msgstr ""
 msgid "Service name"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:4
+#: app/scripts/components/issues/create/constants.js:4
 msgid "Service Request"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:31
+#: app/scripts/components/issues/create/constants.js:31
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
@@ -4440,10 +4463,10 @@ msgstr ""
 msgid "Service store"
 msgstr ""
 
-#: app/scripts/components/issues/constants.js:67
+#: app/scripts/components/issues/create/issue-registration.html:156
 #: app/scripts/components/issues/issue-detail.html:45
-#: app/scripts/components/issues/issue-registration.html:156
-#: app/scripts/components/issues/issues-list.js:84
+#: app/scripts/components/issues/list/constants.js:16
+#: app/scripts/components/issues/list/issues-list.js:82
 msgid "Service type"
 msgstr ""
 
@@ -4520,10 +4543,6 @@ msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-agreement.html:28
 msgid "SLA request"
-msgstr ""
-
-#: app/scripts/components/issues/issue-navigation-service.js:27
-msgid "SLAs"
 msgstr ""
 
 #: app/scripts/components/slurm/slurm-allocation-details-dialog.html:2
@@ -4637,7 +4656,9 @@ msgstr ""
 #: app/scripts/components/plans/plan-agreements-list.js:26
 #: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:38
 #: app/scripts/components/providers/provider-list.js:62
-#: app/scripts/components/resource/list/resources-list.js:60
+#: app/scripts/components/resource/list/resource-global-list-filtered.html:31
+#: app/scripts/components/resource/list/resource-global-list.js:38
+#: app/scripts/components/resource/list/resources-list.js:64
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
 #: app/scripts/components/slurm/slurm-allocation-list.js:58
 #: app/scripts/components/user/hooks/hook-list.js:26
@@ -4645,10 +4666,10 @@ msgid "State"
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js:124
-#: app/scripts/components/issues/constants.js:117
-#: app/scripts/components/issues/constants.js:79
 #: app/scripts/components/issues/issue-detail.html:55
-#: app/scripts/components/issues/issues-list.js:54
+#: app/scripts/components/issues/list/constants.js:28
+#: app/scripts/components/issues/list/constants.js:66
+#: app/scripts/components/issues/list/issues-list.js:52
 #: app/scripts/components/user/user-popover-table.html:41
 msgid "Status"
 msgstr ""
@@ -4782,7 +4803,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: app/scripts/components/configs/base-config.js:189
+#: app/scripts/components/configs/base-config.js:182
 msgid "System administrator"
 msgstr ""
 
@@ -4940,7 +4961,7 @@ msgstr ""
 msgid "There are no providers yet."
 msgstr ""
 
-#: app/scripts/components/issues/issues-short-list.html:20
+#: app/scripts/components/issues/list/issues-short-list.html:20
 msgid "There are no requests yet."
 msgstr ""
 
@@ -4995,8 +5016,8 @@ msgstr ""
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
-#: app/scripts/components/issues/issues-list.js:139
-#: app/scripts/components/issues/issues-short-list.html:30
+#: app/scripts/components/issues/list/issues-list.js:137
+#: app/scripts/components/issues/list/issues-short-list.html:30
 msgid "Time in progress"
 msgstr ""
 
@@ -5006,9 +5027,9 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
-#: app/scripts/components/issues/issue-quick-create.html:22
-#: app/scripts/components/issues/issue-registration.html:93
-#: app/scripts/components/issues/issues-list.js:68
+#: app/scripts/components/issues/create/issue-quick-create.html:22
+#: app/scripts/components/issues/create/issue-registration.html:93
+#: app/scripts/components/issues/list/issues-list.js:66
 #: app/scripts/components/user/keys/key-list.js:29
 msgid "Title"
 msgstr ""
@@ -5073,6 +5094,10 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html:52
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
+msgstr ""
+
+#: app/scripts/components/user/user-popover.html:17
+msgid "Try again"
 msgstr ""
 
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:76
@@ -5161,6 +5186,10 @@ msgstr ""
 msgid "Unable to load events for this resource."
 msgstr ""
 
+#: app/scripts/components/user/user-popover.html:14
+msgid "Unable to load user."
+msgstr ""
+
 #: app/scripts/components/invitations/actions/send.js:15
 msgid "Unable to resend invitation."
 msgstr ""
@@ -5232,7 +5261,7 @@ msgstr ""
 msgid "Update security groups"
 msgstr ""
 
-#: app/scripts/components/issues/issues-short-list.html:29
+#: app/scripts/components/issues/list/issues-short-list.html:29
 msgid "Updated"
 msgstr ""
 
@@ -5569,9 +5598,9 @@ msgid "You cannot remove shared provider."
 msgstr ""
 
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:31
-#: app/scripts/components/issues/issue-create-dialog.js:40
-#: app/scripts/components/issues/issue-quick-create.js:49
-#: app/scripts/components/issues/issue-registration.js:70
+#: app/scripts/components/issues/create/issue-create-dialog.js:40
+#: app/scripts/components/issues/create/issue-quick-create.js:49
+#: app/scripts/components/issues/create/issue-registration.js:70
 msgid "You did not enter a field."
 msgstr ""
 
@@ -5642,7 +5671,7 @@ msgstr ""
 msgid "You have no requests."
 msgstr ""
 
-#: app/scripts/components/resource/list/resources-list.js:36
+#: app/scripts/components/resource/list/resources-list.js:40
 msgid "You have no resources yet."
 msgstr ""
 

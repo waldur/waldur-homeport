@@ -3,11 +3,15 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
   ActionConfigurationProvider.register('SLURM.Allocation', {
     order: [
       'details',
+      'pull',
       'edit',
       'cancel',
       'destroy'
     ],
     options: {
+      pull: {
+        title: gettext('Synchronise')
+      },
       details: {
         title: gettext('Details'),
         component: 'slurmAllocationDetailsDialog',

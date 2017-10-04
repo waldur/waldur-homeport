@@ -8,6 +8,7 @@
     "mainSearch",
     "analytics.cost",
     "monitoring",
+    "monitoring_state",
     "import",
     "intro",
     "openMap",
@@ -19,7 +20,9 @@
     "support.activity_stream",
     "support.regular_issue_filters",
     "user.preferred_language",
-    "user.competence"
+    "user.competence",
+    "backup",
+    "connected_issues"
   ],
   "featuresVisible": false,
   "appStoreCategories": [

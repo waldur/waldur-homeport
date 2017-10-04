@@ -3,6 +3,8 @@ import BaseProjectResourcesTabController from './resources-base-list';
 import resourceStorageTabs from './resource-storage-tabs';
 import resourceVmsList from './resource-vms-list';
 import resourcePrivateCloudsList from './resource-private-clouds-list';
+import resourceGlobalList from './resource-global-list';
+import resourceGlobalListFiltered from './resource-global-list-filtered';
 
 export default module => {
   module.service('baseResourceListController', baseResourceListController);
@@ -10,4 +12,6 @@ export default module => {
   module.component('resourceStorageTabs', resourceStorageTabs);
   module.component('resourceVmsList', resourceVmsList);
   module.component('resourcePrivateCloudsList', resourcePrivateCloudsList);
+  module.component('resourceGlobalList', resourceGlobalList);
+  module.component('resourceGlobalListFiltered', resourceGlobalListFiltered);
 };

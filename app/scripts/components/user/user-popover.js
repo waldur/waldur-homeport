@@ -13,6 +13,10 @@ export const userPopover = {
     }
 
     $onInit() {
+      this.loadUser();
+    }
+
+    loadUser() {
       if (this.resolve.user_uuid) {
         this.loading = true;
         this.usersService.$get(this.resolve.user_uuid).then(user => {

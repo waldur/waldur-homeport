@@ -223,7 +223,7 @@
           bar.bind("mousedown", function(e) {
             var $doc = $(document);
             isDragg = true;
-            t = parseFloat(bar.css('top'));
+            var t = parseFloat(bar.css('top'));
             pageY = e.pageY;
 
             $doc.bind("mousemove.slimscroll", function(e){

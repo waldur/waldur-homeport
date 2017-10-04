@@ -26,12 +26,16 @@ export default function baseResourceListController(
       this.categories[ENV.Storages] = 'storages';
       this.enableRefresh = true;
 
-      this._super();
+      var fn = this._super.bind(this);
+      this.loadInitialContext().then(() => {
+        this.tableOptions = this.getTableOptions();
+        fn();
+      });
       this.hasCustomFilters = false;
     },
     getTableOptions: function() {
       var vm = this.controllerScope;
-      return {
+      const options = {
         searchFieldName: 'name',
         noDataText: gettext('You have no resources yet.'),
         noMatchesText: gettext('No resources found matching filter.'),
@@ -71,16 +75,20 @@ export default function baseResourceListController(
           return '<action-button-resource button-controller="controller" button-model="controller.list[' + index + ']"/>';
         }
       };
+      if (this.currentUser.is_support) {
+        delete options.rowActions;
+      }
+      return options;
     },
     renderResourceName: function(row) {
-      var index = this.findIndexById(row);
-      return '<resource-name resource="controller.list[{index}]"></resource-name>'
-        .replace('{index}', index);
+      return this.renderComponent('resource-name', row);
     },
     renderResourceState: function(row) {
-      var index = this.findIndexById(row);
-      return '<resource-state resource="controller.list[{index}]"></resource-state>'
-        .replace('{index}', index);
+      return this.renderComponent('resource-state', row);
+    },
+    renderComponent: function(component, row) {
+      const index = this.findIndexById(row);
+      return `<${component} resource="controller.list[${index}]"></${component}>`;
     },
     getTableActions: function() {
       var actions = [];
@@ -205,30 +213,22 @@ export default function baseResourceListController(
       }
       return false;
     },
-    getList: function(filter) {
-      var vm = this;
-      var fn = this._super.bind(this);
+    loadInitialContext: function() {
       return $q.all([
-        currentStateService.getCustomer().then(function(customer) {
-          vm.currentCustomer = customer;
-        }),
-        currentStateService.getProject().then(function(project) {
-          vm.currentProject = project;
-        }),
-        usersService.getCurrentUser().then(function(user) {
-          vm.currentUser = user;
-        })
-      ]).then(function() {
-        vm.tableOptions = vm.getTableOptions();
-        var query = angular.extend({}, filter, {
-          field: vm.rowFields
-        });
-        if (angular.isDefined(vm.category) && !vm.getFilter().resource_type) {
-          query.resource_category = vm.getCategoryKey();
-          vm.updateFilters(filter);
-        }
-        return fn(query);
+        currentStateService.getCustomer().then(customer => this.currentCustomer = customer),
+        currentStateService.getProject().then(project => this.currentProject = project),
+        usersService.getCurrentUser().then(user => this.currentUser = user)
+      ]);
+    },
+    getList: function(filter) {
+      var query = angular.extend({}, filter, {
+        field: this.rowFields
       });
+      if (angular.isDefined(this.category) && !this.getFilter().resource_type) {
+        query.resource_category = this.getCategoryKey();
+        this.updateFilters(filter);
+      }
+      return this._super(query);
     },
     updateFilters: function(filter) {
       var query = angular.extend({
