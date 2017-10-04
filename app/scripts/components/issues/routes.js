@@ -1,4 +1,13 @@
 // @ngInject
+function checkPermission(usersService, $q) {
+  return usersService.getCurrentUser().then(user => {
+    if (!user.is_staff && !user.is_support) {
+      return $q.reject();
+    }
+  });
+}
+
+// @ngInject
 export default function issueRoutes($stateProvider) {
   $stateProvider
     .state('support', {
@@ -49,7 +58,23 @@ export default function issueRoutes($stateProvider) {
       url: 'resources/',
       template: '<resource-global-list-filtered/>',
       data: {
+        feature: 'support.resources',
         pageTitle: gettext('Resources'),
+      },
+      resolve: {
+        permission: checkPermission
+      }
+    })
+
+    .state('support.organizations', {
+      url: 'organizations/',
+      template: '<div class="ibox-content"><customer-list/></div>',
+      data: {
+        feature: 'support.organizations',
+        pageTitle: gettext('Financial overview'),
+      },
+      resolve: {
+        permission: checkPermission
       }
     });
 }

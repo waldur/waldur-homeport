@@ -24,6 +24,7 @@ function ProjectsListController(
   ncUtilsFlash,
   TableExtensionService,
   currentStateService,
+  QuotaUtilsService,
   usersService) {
   var controllerScope = this;
   var Controller = baseControllerListClass.extend({
@@ -107,23 +108,23 @@ function ProjectsListController(
         },
         {
           title: gettext('VMs'),
-          render: row => row.vm_count || 0,
+          render: row => row.vm_count,
           index: 100,
         },
         {
           title: gettext('Storage'),
-          render: row => row.storage_count || 0,
+          render: row => row.storage_count,
           index: 110,
         },
         {
           title: gettext('Apps'),
           feature: ResourceFeatures.APPLICATIONS,
-          render: row => row.app_count || 0,
+          render: row => row.app_count,
           index: 120,
         },
         {
           title: gettext('Private clouds'),
-          render: row => row.private_cloud_count || 0,
+          render: row => row.private_cloud_count,
           index: 130,
         },
         {
@@ -215,25 +216,8 @@ function ProjectsListController(
       });
     },
     afterGetList: function() {
-      for (var i = 0; i < this.list.length; i++) {
-        var item = this.list[i];
-        this.setProjectCounters(item);
-      }
+      this.list.forEach(item => angular.extend(item, QuotaUtilsService.parseCounters(item)));
       this._super();
-    },
-    setProjectCounters: function(project) {
-      for (var i = 0; i < project.quotas.length; i++) {
-        var quota = project.quotas[i];
-        if (quota.name == 'nc_app_count') {
-          project.app_count = quota.usage;
-        } else if (quota.name == 'nc_vm_count') {
-          project.vm_count = quota.usage;
-        } else if (quota.name == 'nc_private_cloud_count') {
-          project.private_cloud_count = quota.usage;
-        } else if (quota.name == 'nc_storage_count') {
-          project.storage_count = quota.usage;
-        }
-      }
     },
     hasConnectedResources: function(project) {
       return ncUtils.getQuotaUsage(project.quotas).nc_resource_count !== 0;
