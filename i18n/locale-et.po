@@ -1362,10 +1362,6 @@ msgstr "Lubatud"
 msgid "End time"
 msgstr "Lõppaeg"
 
-#: app/scripts/components/configs/base-config.js:203
-msgid "English"
-msgstr "English (inglise)"
-
 #: app/scripts/components/resource/actions/dialog/action-field-datetime.html:6
 msgid "Enter date"
 msgstr "Sisestage kuupäev"
