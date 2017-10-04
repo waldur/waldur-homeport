@@ -1167,7 +1167,7 @@ msgstr "Andmed pole saadaval."
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html:13
 msgid "Data volume size:"
-msgstr "Andmete köite suurus:"
+msgstr "Andmete volüümi suurus:"
 
 #: app/scripts/components/payments/payment-list.js:43
 #: app/scripts/components/plans/plan-agreements-list.js:41
