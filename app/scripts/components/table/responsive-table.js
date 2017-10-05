@@ -21,6 +21,9 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
     },
     template: '<table class="table table-striped"></table>',
     link: function(scope, element) {
+      // Inject scope so that timers are cancelled
+      scope.controller.controllerScope.$$scope = scope;
+
       var options = scope.controller.tableOptions;
       var table;
       var rootScopeListener;
