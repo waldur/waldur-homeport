@@ -320,7 +320,6 @@ export default function baseResourceListController(
             removeItem(vm.monitoredResources, uuid);
           });
         }, ENV.singleResourcePollingTimeout);
-        console.log(vm.controllerScope);
         // Use injected scope to cancel timer
         if (vm.controllerScope && vm.controllerScope.$$scope) {
           vm.controllerScope.$$scope.$on('$destroy', () => $timeout.cancel(timer));
