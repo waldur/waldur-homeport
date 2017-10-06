@@ -19,8 +19,8 @@ function ProjectAddController(
   $state,
   ncUtils,
   ncUtilsFlash) {
-  var controllerScope = this;
-  var ProjectController = baseControllerAddClass.extend({
+  let controllerScope = this;
+  let ProjectController = baseControllerAddClass.extend({
     userRole: 'admin',
     init: function() {
       this.service = projectsService;
@@ -54,6 +54,24 @@ function ProjectAddController(
     },
     beforeSave: function() {
       this.project.certifications = this.projectCertifications.map(item => ({url: item.url}));
+    },
+    save: function () {
+      //validation needed
+      if(!this.project.name) {
+        ncUtilsFlash.error('Enter the project name');
+        return;
+      }
+      currentStateService.getCustomer().then(organization => {
+        let projects = organization.projects;
+        for (let i = 0; i < projects.length; i++) {
+          if(projects[i].name === this.project.name) {
+            //send error message
+            ncUtilsFlash.error('Change project name');
+            return;
+          }
+        }
+        baseControllerAddClass.prototype.save.call(this);
+      });
     },
     afterSave: function(project) {
       $rootScope.$broadcast('refreshProjectList', {
