@@ -1,11 +1,8 @@
-<div ng-if="$ctrl.loading">
-    <loading-spinner/>
-</div>
-<div class="ibox-content" ng-if="!$ctrl.loading && !$ctrl.services.length">
+<div class="ibox-content" ng-if="!$ctrl.services.length">
     <appstore-providers-empty-message/>
 </div>
 
-<div class="ibox" ng-if="!$ctrl.loading && $ctrl.services.length">
+<div class="ibox" ng-if="$ctrl.services.length">
     <div class="ibox-title">
         <h5 ng-bind="$ctrl.getTitle()"></h5>
         <div class="ibox-tools" ng-if="$ctrl.collapsible">
