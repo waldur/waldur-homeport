@@ -43,13 +43,13 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStack.SecurityGroup', {
     order: [
       'edit',
-      'pull',
       'set_rules',
       'destroy'
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: gettext('Security group has been updated.')
+        successMessage: gettext('Security group has been updated.'),
+        isVisible: model => model.name !== 'default',
       }),
       pull: {
         title: gettext('Synchronise')
