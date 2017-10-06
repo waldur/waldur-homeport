@@ -154,12 +154,8 @@ function ProviderListController(
       });
     },
     renderProviderState: function(row) {
-      var uuids = this.list.map(function(item) {
-        return item.uuid;
-      });
-      var index = uuids.indexOf(row.uuid);
-      return '<provider-state provider="controller.list[{index}]"></provider-state>'
-        .replace('{index}', index);
+      const index = this.findIndexById(row);
+      return `<provider-state provider="controller.list[${index}]"/>`;
     },
     openDialog: function(row) {
       $uibModal.open({
