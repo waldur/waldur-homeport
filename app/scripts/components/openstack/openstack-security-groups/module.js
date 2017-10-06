@@ -51,6 +51,10 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         successMessage: gettext('Security group has been updated.'),
         isVisible: model => model.name !== 'default',
       }),
+      destroy: {
+        title: gettext('Destroy'),
+        isVisible: model => model.name !== 'default',
+      },
       pull: {
         title: gettext('Synchronise')
       },
