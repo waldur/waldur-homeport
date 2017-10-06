@@ -208,7 +208,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
 #: app/scripts/components/paypal/paypal-invoice-actions.html:3
 #: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/components/table/responsive-table.js:340
+#: app/scripts/components/table/responsive-table.js:344
 msgid "Actions"
 msgstr ""
 
@@ -452,6 +452,10 @@ msgstr ""
 
 #: app/scripts/components/user/user-edit.html:125
 msgid "API token lifetime"
+msgstr ""
+
+#: app/scripts/components/ansible/ansible-job-create.js:140
+msgid "Application creation has been scheduled."
 msgstr ""
 
 #: app/scripts/components/ansible/routes.js:36
@@ -842,6 +846,7 @@ msgstr ""
 msgid "Check terms"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-checkout-summary.html:7
 #: app/scripts/components/offering/appstore-offering-summary.html:7
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:7
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:4
@@ -1306,6 +1311,7 @@ msgstr ""
 msgid "Deployment plan does not have any item yet."
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-create.js:94
 #: app/scripts/components/ansible/ansible-job-summary.html:32
 #: app/scripts/components/azure/azure-virtual-machine-config.js:20
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:74
@@ -1693,7 +1699,7 @@ msgstr ""
 msgid "Explain plan"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:178
+#: app/scripts/components/table/responsive-table.js:182
 msgid "Export as"
 msgstr ""
 
@@ -1739,6 +1745,7 @@ msgstr ""
 msgid "Financial overview"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-create.js:108
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:80
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:94
 #: app/scripts/components/user/keys/key-list.js:36
@@ -1749,7 +1756,7 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:106
+#: app/scripts/components/table/responsive-table.js:110
 msgid "First"
 msgstr ""
 
@@ -2210,6 +2217,7 @@ msgstr ""
 msgid "Invoice number"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-checkout-summary.html:29
 #: app/scripts/components/offering/appstore-offering-summary.html:21
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:61
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:48
@@ -2327,7 +2335,7 @@ msgstr ""
 msgid "Large"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:107
+#: app/scripts/components/table/responsive-table.js:111
 msgid "Last"
 msgstr ""
 
@@ -2397,7 +2405,7 @@ msgstr ""
 msgid "Loading team members, please wait."
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:102
+#: app/scripts/components/table/responsive-table.js:106
 msgid "Loading..."
 msgstr ""
 
@@ -2555,6 +2563,8 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-create.js:104
+#: app/scripts/components/ansible/ansible-job-create.js:86
 #: app/scripts/components/ansible/ansible-jobs-list.js:49
 #: app/scripts/components/appstore/appstore-compare-list.js:69
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:13
@@ -2631,7 +2641,7 @@ msgid "New VPC package"
 msgstr ""
 
 #: app/scripts/components/form/appstore-form-wizard.html:63
-#: app/scripts/components/table/responsive-table.js:108
+#: app/scripts/components/table/responsive-table.js:112
 msgid "Next"
 msgstr ""
 
@@ -3469,7 +3479,7 @@ msgid "Preview contract"
 msgstr ""
 
 #: app/scripts/components/form/appstore-form-wizard.html:55
-#: app/scripts/components/table/responsive-table.js:109
+#: app/scripts/components/table/responsive-table.js:113
 msgid "Previous"
 msgstr ""
 
@@ -3523,6 +3533,7 @@ msgstr ""
 msgid "Price package name"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-checkout-summary.html:16
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:11
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:48
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:36
@@ -3530,6 +3541,7 @@ msgstr ""
 msgid "Price per day"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-checkout-summary.html:23
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html:15
 #: app/scripts/components/offering/appstore-offering-summary.html:16
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:55
@@ -3580,7 +3592,7 @@ msgstr ""
 msgid "Private clouds"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:103
+#: app/scripts/components/table/responsive-table.js:107
 msgid "Processing..."
 msgstr ""
 
@@ -3593,6 +3605,7 @@ msgid "Profile has been updated."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:113
+#: app/scripts/components/ansible/ansible-job-checkout-summary.html:33
 #: app/scripts/components/events/event-details-dialog.html:69
 #: app/scripts/components/invitations/actions/invitation-dialog.html:46
 #: app/scripts/components/issues/create/issue-create-dialog.html:17
@@ -3914,7 +3927,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-activity-stream.html:11
 #: app/scripts/components/issues/list/issues-short-list.html:11
-#: app/scripts/components/table/responsive-table.js:181
+#: app/scripts/components/table/responsive-table.js:185
 msgid "Refresh"
 msgstr ""
 
@@ -4276,7 +4289,7 @@ msgstr ""
 
 #: app/scripts/components/issues/create/issue-registration.html:212
 #: app/scripts/components/navigation/header/main-search.html:3
-#: app/scripts/components/table/responsive-table.js:104
+#: app/scripts/components/table/responsive-table.js:108
 msgid "Search"
 msgstr ""
 
@@ -4495,7 +4508,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:101
+#: app/scripts/components/table/responsive-table.js:105
 msgid "Show _MENU_ entries"
 msgstr ""
 
@@ -4511,7 +4524,7 @@ msgstr ""
 msgid "Show me invitations"
 msgstr ""
 
-#: app/scripts/components/table/responsive-table.js:100
+#: app/scripts/components/table/responsive-table.js:104
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
@@ -4623,6 +4636,7 @@ msgstr ""
 msgid "SSH Port"
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-create.js:100
 #: app/scripts/components/ansible/ansible-job-summary.html:37
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:72
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:86
@@ -5019,6 +5033,7 @@ msgstr ""
 msgid "This month estimated costs for organization {customer_name} exceeded."
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-create.js:87
 #: app/scripts/components/experts/requests/expert-request-create.js:44
 #: app/scripts/components/offering/appstore-offering.js:42
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:24
@@ -5165,6 +5180,10 @@ msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.js:55
 msgid "Unable to create a FreeIPA profile."
+msgstr ""
+
+#: app/scripts/components/ansible/ansible-job-create.js:148
+msgid "Unable to create application."
 msgstr ""
 
 #: app/scripts/components/invitations/actions/invitation-dialog-service.js:56
@@ -5730,6 +5749,7 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-create.js:113
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:98
 msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr ""

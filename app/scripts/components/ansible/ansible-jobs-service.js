@@ -6,10 +6,28 @@ export default function AnsibleJobsService(ENV, $http, baseServiceClass) {
       this.endpoint = '/ansible-jobs/';
     },
 
-    create: function(ansibleJob) {
-      return $http.post(`${ENV.apiEndpoint}api${this.endpoint}`, ansibleJob)
+    create: function(payload) {
+      return $http.post(`${ENV.apiEndpoint}api${this.endpoint}`, payload)
         .then(response => response.data);
     },
+
+    estimate: function(payload) {
+      return $http.post(`${ENV.apiEndpoint}api${this.endpoint}estimate/`, payload)
+        .then(response => response.data);
+    },
+
+    getPayload(job, playbook, provider) {
+      const { name, description, ssh_public_key, ...parameters } = job;
+      const payload = {
+        name,
+        description,
+        arguments: parameters,
+        playbook: playbook.url,
+        ssh_public_key: ssh_public_key.url,
+        service_project_link: provider.service_project_link_url,
+      };
+      return payload;
+    }
   });
   return new ServiceClass();
 }

@@ -4,6 +4,7 @@ import AnsibleJobsService from './ansible-jobs-service';
 import ansibleJobState from './ansible-job-state';
 import ansibleJobsList from './ansible-jobs-list';
 import ansibleJobCreate from './ansible-job-create';
+import ansibleJobCheckoutSummary from './ansible-job-checkout-summary';
 import ansibleJobDetails from './ansible-job-details';
 import ansibleJobResourcesList from './ansible-job-resources';
 import ansibleJobSummary from './ansible-job-summary';
@@ -17,6 +18,7 @@ export default module => {
   module.component('ansibleJobState', ansibleJobState);
   module.component('ansibleJobsList', ansibleJobsList);
   module.component('ansibleJobCreate', ansibleJobCreate);
+  module.component('ansibleJobCheckoutSummary', ansibleJobCheckoutSummary);
   module.component('ansibleJobDetails', ansibleJobDetails);
   module.component('ansibleJobResourcesList', ansibleJobResourcesList);
   module.component('ansibleJobSummary', ansibleJobSummary);

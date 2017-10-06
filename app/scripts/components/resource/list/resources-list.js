@@ -300,7 +300,7 @@ export default function baseResourceListController(
       function internalPollResource(resource) {
         let uuid = resource.uuid;
 
-        $timeout(() => {
+        const timer = $timeout(() => {
           resourcesService.$get(resource.resource_type, uuid).then((response) => {
             // do not call updateRow as it reloads a table and actions are reloaded on ENV.singleResourcePollingTimeout
             vm.setResource(resource, response);
@@ -320,6 +320,10 @@ export default function baseResourceListController(
             removeItem(vm.monitoredResources, uuid);
           });
         }, ENV.singleResourcePollingTimeout);
+        // Use injected scope to cancel timer
+        if (vm.controllerScope && vm.controllerScope.$$scope) {
+          vm.controllerScope.$$scope.$on('$destroy', () => $timeout.cancel(timer));
+        }
       }
 
       if (vm.monitoredResources.indexOf(resource.uuid) === -1) {
