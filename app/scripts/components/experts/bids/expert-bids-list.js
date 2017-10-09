@@ -55,6 +55,7 @@ function ExpertBidsList(
         enableOrdering: false,
         columns: this.getColumns(),
         rowActions: this.getRowActions(),
+        actionsColumnWidth: '200px',
       };
     },
     getColumns: function() {
