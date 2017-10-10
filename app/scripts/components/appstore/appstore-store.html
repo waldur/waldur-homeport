@@ -4,10 +4,10 @@
             <p>{{ ::AppStore.policyErrorMessage }}</p>
         </div>
     </div>
+    <loading-spinner ng-if="AppStore.loading"/>
     <div class="row" ng-if="!AppStore.policyErrorMessage">
         <div ng-class="{'col-md-9': AppStore.selectedResourceType}">
             <div ng-if="!AppStore.selectedResourceType">
-                <loading-spinner ng-if="$ctrl.loadingProviders"/>
                 <appstore-providers
                   ng-if="!AppStore.loadingProviders"
                   services="AppStore.getServices()"

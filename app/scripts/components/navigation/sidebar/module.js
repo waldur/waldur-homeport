@@ -6,4 +6,4 @@ export default module => {
   module.service('SidebarExtensionService', SidebarExtensionService);
   module.component('sidebar', sidebar);
   module.component('sidebarToggle', sidebarToggle);
-}
+};

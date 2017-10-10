@@ -29,7 +29,7 @@ export default function ProjectWorkspaceController(
       if (!BreadcrumbsService.activeItem) {
         BreadcrumbsService.activeItem = $scope.currentProject.name;
       }
-      BreadcrumbsService.items = [
+      let items = [
         {
           label: gettext('Project workspace'),
           state: 'project.details',
@@ -38,6 +38,12 @@ export default function ProjectWorkspaceController(
           }
         },
       ];
+      if ($state.current.name.includes('resources')) {
+        items.push({
+          label: gettext('Resources')
+        });
+      }
+      BreadcrumbsService.items = items;
     }
   }
 

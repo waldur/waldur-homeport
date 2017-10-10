@@ -1,5 +1,4 @@
 import AppStoreUtilsService from './appstore-utils';
-import { AppStoreHeaderController, appstoreHeader } from './appstore-header';
 import appstoreSummary from './appstore-summary';
 import appstoreStore from './appstore-store';
 import appstoreRoutes from './routes';
@@ -11,11 +10,9 @@ import providersModule from './providers/module';
 
 export default module => {
   module.service('AppStoreUtilsService', AppStoreUtilsService);
-  module.controller('AppStoreHeaderController', AppStoreHeaderController);
-  module.directive('appstoreHeader', appstoreHeader);
   module.component('appstoreCompareList', appstoreCompareList);
   module.directive('appstoreSummary', appstoreSummary);
-  module.directive('appstoreStore', appstoreStore);
+  module.component('appstoreStore', appstoreStore);
   module.config(appstoreRoutes);
   module.provider('AppstoreFieldConfiguration', AppstoreFieldConfiguration);
   module.service('AppstoreResourceLoader', AppstoreResourceLoader);

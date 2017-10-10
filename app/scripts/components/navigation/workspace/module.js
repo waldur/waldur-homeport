@@ -6,4 +6,4 @@ export default module => {
   module.component('selectWorkspaceToggle', selectWorkspaceToggle);
   module.component('selectWorkspaceDialog', selectWorkspaceDialog);
   module.service('WorkspaceService', WorkspaceService);
-}
+};

@@ -6,4 +6,4 @@ export default module => {
   module.component('breadcrumbs', breadcrumbs);
   module.component('breadcrumbsContainer', breadcrumbsContainer);
   module.service('BreadcrumbsService', BreadcrumbsService);
-}
+};
