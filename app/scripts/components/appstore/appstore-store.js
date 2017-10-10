@@ -1,14 +1,12 @@
 import template from './appstore-store.html';
 
-export default function appstoreStore() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: AppStoreController,
-    controllerAs: 'AppStore',
-    scope: {},
-  };
-}
+const appstoreStore = {
+  template,
+  controller: AppStoreController,
+  controllerAs: 'AppStore',
+};
+
+export default appstoreStore;
 
 // @ngInject
 function AppStoreController(
@@ -32,6 +30,8 @@ function AppStoreController(
   AppstoreFieldConfiguration,
   AppstoreResourceLoader,
   AppstoreProvidersService,
+  AppStoreUtilsService,
+  BreadcrumbsService,
   ResourceProvisionPolicy) {
   var controllerScope = this;
   var Controller = baseControllerAddClass.extend({
@@ -65,6 +65,7 @@ function AppStoreController(
       this._super();
     },
     activate:function() {
+      this.loading = true;
       $q.all([
         usersService.getCurrentUser().then(user =>
           this.currentUser = user),
@@ -72,7 +73,28 @@ function AppStoreController(
           this.currentCustomer = customer),
         servicesService.getServicesList().then(servicesMetadata =>
           this.servicesMetadata = servicesMetadata)
-      ]).then(() => this.setCurrentProject());
+      ])
+      .then(() => this.setCurrentProject())
+      .then(() => this.refreshBreadcrumbs())
+      .finally(() => this.loading = false);
+    },
+    refreshBreadcrumbs: function() {
+      BreadcrumbsService.items = [
+        {
+          label: gettext('Project workspace'),
+          state: 'project.details',
+          params: {
+            uuid: this.currentProject.uuid
+          }
+        },
+        {
+          label: gettext('Service store'),
+          action: () => AppStoreUtilsService.openDialog(),
+        }
+      ];
+      if (this.selectedCategory) {
+        BreadcrumbsService.activeItem = this.selectedCategory.name;
+      }
     },
     setCategory: function(category) {
       if (category === this.selectedCategory) {
@@ -103,6 +125,8 @@ function AppStoreController(
       if (services && services.length == 1) {
         this.setService(services[0]);
       }
+
+      this.refreshBreadcrumbs();
     },
     getServices: function() {
       if (this.selectedCategory) {
@@ -222,7 +246,7 @@ function AppStoreController(
       vm.renderStore = false;
       vm.loadingProviders = true;
 
-      currentStateService.getProject().then(function(project) {
+      return currentStateService.getProject().then(function(project) {
         vm.currentProject = project;
         return AppstoreProvidersService.loadServices(project).then(function() {
           for (var j = 0; j < categories.length; j++) {

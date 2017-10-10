@@ -1,4 +1,4 @@
-import {flatten} from '../core/utils';
+import {flatten} from '../../core/utils';
 
 export default class SidebarExtensionService {
   // @ngInject

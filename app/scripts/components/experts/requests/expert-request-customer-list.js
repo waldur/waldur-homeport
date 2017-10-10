@@ -36,6 +36,7 @@ function ExpertRequestListController(
         }),
         currentStateService.getCustomer().then(customer => {
           this.customer = customer;
+          return this.loadExpertBids();
         }),
       ]);
     },
@@ -53,9 +54,6 @@ function ExpertRequestListController(
         columns: this.getColumns(),
         rowActions: this.getRowActions(),
       };
-    },
-    afterGetList: function() {
-      return this.loadExpertBids();
     },
     getColumns: function() {
       return [
@@ -112,7 +110,7 @@ function ExpertRequestListController(
         {
           title: gettext('Details'),
           iconClass: 'fa fa-info-circle',
-          callback: expertUtilsService.openDialog.bind(this),
+          callback: request => expertUtilsService.openDialog(request),
         }
       ];
       if (this.isOwnerOrStaff) {

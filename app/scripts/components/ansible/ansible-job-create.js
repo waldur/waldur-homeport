@@ -50,7 +50,7 @@ const ansibleJobCreate = {
     loadServices() {
       return this.currentStateService.getProject().then(project => {
         this.project = project;
-        this.AppstoreProvidersService.loadServices(project).then(project => {
+        return this.AppstoreProvidersService.loadServices(project).then(project => {
           this.services = project.services
             .filter(service => service.type === 'OpenStackTenant')
             .sort(function(a, b) {
@@ -130,16 +130,9 @@ const ansibleJobCreate = {
     }
 
     createJob() {
-      const { name, description, ssh_public_key, ...parameters } = this.model;
-      const job = {
-        name,
-        description,
-        arguments: parameters,
-        playbook: this.playbook.url,
-        ssh_public_key: ssh_public_key.url,
-        service_project_link: this.selectedService.service_project_link_url,
-      };
-      return this.AnsibleJobsService.create(job);
+      const payload = this.AnsibleJobsService.getPayload(
+        this.model, this.playbook, this.selectedService);
+      return this.AnsibleJobsService.create(payload);
     }
 
     save() {

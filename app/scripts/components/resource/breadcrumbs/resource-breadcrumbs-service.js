@@ -9,19 +9,37 @@ export default class ResourceBreadcrumbsService {
     this.breadcrumbs[type] = breadcrumbs;
   }
 
-  get(resource) {
+  getItems(resource) {
+    const items = [
+      {
+        label: gettext('Project workspace'),
+        state: 'project.details',
+        params: {
+          uuid: resource.project_uuid
+        }
+      }
+    ];
+
     const func = this.breadcrumbs[resource.resource_type];
     if (func) {
-      return func(resource);
+      return items.concat(func(resource));
     }
+
     const category = this.ENV.resourceCategory[resource.resource_type];
-    if (!category) {
-      return [];
+    if (category) {
+      return items.concat([
+        {
+          label: gettext('Resources'),
+        },
+        {
+          params: {
+            uuid: resource.project_uuid
+          },
+          ...this.CATEGORY_ITEMS[category],
+        }
+      ]);
     }
-    return [angular.extend({
-      params: {
-        uuid: resource.project_uuid
-      },
-    }, this.CATEGORY_ITEMS[category])];
+
+    return items;
   }
 }

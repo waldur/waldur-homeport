@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-9">
       <div ng-if="$ctrl.loading">
         <loading-spinner/>
       </div>
@@ -38,6 +38,13 @@
           </button>
         </div>
       </div>
+    </div>
+    <div class="col-md-3" ng-if="$ctrl.selectedService">
+      <ansible-job-checkout-summary
+        job="$ctrl.model"
+        playbook="$ctrl.playbook"
+        provider="$ctrl.selectedService"
+      />
     </div>
   </div>
 </div>

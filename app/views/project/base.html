@@ -9,17 +9,7 @@
                 <p ng-if="currentProject.description">
                     {{ currentProject.description }}
                 </p>
-                <ol class="breadcrumb">
-                    <li>
-                        <a ui-sref="project.details({uuid: currentProject.uuid })" translate>Project workspace</a>
-                    </li>
-                    <li ng-if="$state.current.name.includes('resources')">
-                        <span translate>Resources</span>
-                    </li>
-                    <li class="active">
-                        <strong>{{ ($state.current.data.pageTitle | translate) || context.project.name }}</strong>
-                    </li>
-                </ol>
+                <breadcrumbs-container/>
             </div>
             <div class="col-lg-6" ng-if="$state.current.name === 'project.details'">
                 <div class="title-action">
