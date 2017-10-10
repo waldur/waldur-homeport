@@ -1,6 +1,6 @@
 import template from './breadcrumbs.html';
 
-export const breadcrumbs = {
+const breadcrumbs = {
   template,
   bindings: {
     items: '<',
@@ -21,3 +21,5 @@ export const breadcrumbs = {
     }
   }
 };
+
+export default breadcrumbs;

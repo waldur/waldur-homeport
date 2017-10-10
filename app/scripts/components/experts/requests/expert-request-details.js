@@ -6,11 +6,17 @@ const expertRequestProjectDetails = {
     // ngInject
     constructor($rootScope,
                 $scope,
+                $state,
                 $stateParams,
+                currentStateService,
+                BreadcrumbsService,
                 expertRequestsService) {
       this.$rootScope = $rootScope;
       this.$scope = $scope;
+      this.$state = $state;
       this.$stateParams = $stateParams;
+      this.currentStateService = currentStateService;
+      this.BreadcrumbsService = BreadcrumbsService;
       this.expertRequestsService = expertRequestsService;
     }
 
@@ -22,12 +28,41 @@ const expertRequestProjectDetails = {
 
     loadExpertRequest() {
       this.loading = true;
-      return this.expertRequestsService.$get(this.$stateParams.requestId)
-        .then(expertRequest => {
-          this.expertRequest = expertRequest;
-        }).finally(() => {
-          this.loading = false;
-        });
+      this.currentStateService.getCustomer().then(customer => {
+        return this.expertRequestsService.$get(this.$stateParams.requestId)
+          .then(expertRequest => {
+            this.expertRequest = expertRequest;
+            this.refreshBreadcrumbs(customer);
+          }).catch(response => {
+            if (response.status === 404) {
+              this.$state.go('errorPage.notFound');
+            } else {
+              this.erred = true;
+            }
+          }).finally(() => {
+            this.loading = false;
+          });
+      });
+    }
+
+    refreshBreadcrumbs(customer) {
+      this.BreadcrumbsService.items = [
+        {
+          label: gettext('Organization workspace'),
+          state: 'organization.dashboard',
+          params: {
+            uuid: customer.uuid
+          }
+        },
+        {
+          label: gettext('Experts'),
+          state: 'organization.experts',
+          params: {
+            uuid: customer.uuid
+          }
+        }
+      ];
+      this.BreadcrumbsService.activeItem = this.expertRequest.name;
     }
 
     $onDestroy() {

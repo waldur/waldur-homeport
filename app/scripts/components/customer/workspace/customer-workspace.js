@@ -21,6 +21,7 @@ export function CustomerWorkspaceController(
   AppStoreUtilsService,
   WorkspaceService,
   BillingUtils,
+  BreadcrumbsService,
   SidebarExtensionService) {
 
   activate();
@@ -31,11 +32,23 @@ export function CustomerWorkspaceController(
       if ($state.current.data && $state.current.data) {
         $scope.pageTitle = $state.current.data.pageTitle;
       }
-    });
-    $scope.$on('breadcrumbChanged', (event, pageTitle) => {
-      $scope.pageTitle = pageTitle;
+      refreshBreadcrumbs();
     });
     refreshWorkspace();
+    refreshBreadcrumbs();
+  }
+
+  function refreshBreadcrumbs() {
+    BreadcrumbsService.activeItem = $scope.pageTitle;
+    BreadcrumbsService.items = [
+      {
+        label: gettext('Organization workspace'),
+        state: 'organization.dashboard',
+        params: {
+          uuid: $scope.currentCustomer.uuid
+        }
+      },
+    ];
   }
 
   function setItems(customItems) {
