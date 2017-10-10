@@ -1,5 +1,5 @@
 // @ngInject
-export default function ncUtilsFlash(Flash, $rootScope) {
+export default function ncUtilsFlash(Flash, $rootScope, ErrorMessageFormatter) {
   var dismiss = Flash.dismiss;
   Flash.dismiss = function() {
     // for hasFlash variable change emit for ng-show directive in flash block
@@ -25,7 +25,7 @@ export default function ncUtilsFlash(Flash, $rootScope) {
       }
     },
     errorFromResponse: function(response, message) {
-      const details = `Errors: ${JSON.stringify(response.data)}`;
+      const details = ErrorMessageFormatter.format(response);
       const errorMessage = `${message}. ${details}`;
       this.error(errorMessage);
     }

@@ -4,7 +4,10 @@ export default function billingRoutes($stateProvider) {
     .state('organization.billing', {
       url: 'billing/',
       template: '<ui-view/>',
-      abstract: true
+      abstract: true,
+      data: {
+        pageTitle: gettext('Accounting'),
+      }
     })
 
     .state('organization.billing.tabs', {

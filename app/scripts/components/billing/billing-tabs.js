@@ -2,10 +2,10 @@ import template from './billing-tabs.html';
 
 const billingTabs = {
   template,
-  controller: class {
-    constructor($rootScope, titleService, BillingUtils, ENV, features) {
+  controller: class BillingTabsController {
+    constructor(BreadcrumbsService, titleService, BillingUtils, ENV, features) {
       // @ngInject
-      this.$rootScope = $rootScope;
+      this.BreadcrumbsService = BreadcrumbsService;
       this.titleService = titleService;
       this.utils = BillingUtils;
       this.ENV = ENV;
@@ -14,7 +14,7 @@ const billingTabs = {
 
     $onInit() {
       this.titleService.setTitle(this.utils.getPageTitle());
-      this.$rootScope.$broadcast('breadcrumbChanged', this.utils.getTabTitle());
+      this.BreadcrumbsService.activeItem = this.utils.getTabTitle();
       this.showAccountingRecords = this.ENV.accountingMode === 'accounting';
       this.payPalVisible = this.features.isVisible('paypal');
     }

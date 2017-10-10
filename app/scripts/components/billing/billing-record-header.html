@@ -1,19 +1,7 @@
 <div class="row wrapper border-bottom white-bg page-heading hidden-print">
   <div class="col-lg-8">
     <h2><span translate>Accounting record</span></h2>
-    <ol class="breadcrumb">
-      <li>
-        <a ui-sref="organization.details({uuid: $ctrl.customerUUID})" translate>Organization workspace</a>
-      </li>
-      <li>
-        <a ui-sref="organization.billing.tabs({uuid: $ctrl.customerUUID})" translate>
-          Accounting records
-        </a>
-      </li>
-      <li class="active">
-        <strong>{{ ::$ctrl.invoice.period }}</strong>
-      </li>
-    </ol>
+    <breadcrumbs-container/>
   </div>
   <div class="col-lg-4">
     <div class="title-action">

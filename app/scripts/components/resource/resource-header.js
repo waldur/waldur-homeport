@@ -2,17 +2,28 @@ import template from './resource-header.html';
 
 const resourceHeader = {
   template: template,
-  controller: class {
-    constructor($stateParams, $state, $interval, ENV,
-      resourcesService, baseControllerClass, resourceUtils, ncUtilsFlash) {
+  controller: class ResourceHeaderController{
+    constructor(
+      $stateParams,
+      $state,
+      $scope,
+      $interval,
+      ENV,
+      resourcesService,
+      resourceUtils,
+      ResourceBreadcrumbsService,
+      BreadcrumbsService,
+      ncUtilsFlash) {
       // @ngInject
       this.$stateParams = $stateParams;
       this.$state = $state;
+      this.$scope = $scope;
       this.$interval = $interval;
       this.ENV = ENV;
       this.resourcesService = resourcesService;
-      this.baseControllerClass = baseControllerClass;
       this.resourceUtils = resourceUtils;
+      this.ResourceBreadcrumbsService = ResourceBreadcrumbsService;
+      this.BreadcrumbsService = BreadcrumbsService;
       this.ncUtilsFlash = ncUtilsFlash;
 
       this.model = null;
@@ -28,6 +39,7 @@ const resourceHeader = {
     }
 
     activate() {
+      this.$scope.$watch(() => this.model, () => this.refreshBreadcrumbs(), true);
       this.loading = true;
       this.getModel().then(response => {
         this.model = response;
@@ -36,6 +48,14 @@ const resourceHeader = {
         .finally(() => {
           this.loading = false;
         });
+    }
+
+    refreshBreadcrumbs() {
+      if (!this.model) {
+        return;
+      }
+      this.BreadcrumbsService.items = this.ResourceBreadcrumbsService.getItems(this.model);
+      this.BreadcrumbsService.activeItem = this.model.name;
     }
 
     afterActivate() {

@@ -9,6 +9,7 @@ const offeringDetails = {
       customersService,
       currentStateService,
       WorkspaceService,
+      BreadcrumbsService,
       $stateParams,
       $state) {
       // @ngInject
@@ -17,6 +18,7 @@ const offeringDetails = {
       this.customersService = customersService;
       this.currentStateService = currentStateService;
       this.WorkspaceService = WorkspaceService;
+      this.BreadcrumbsService = BreadcrumbsService;
       this.$stateParams = $stateParams;
       this.$state = $state;
     }
@@ -43,6 +45,7 @@ const offeringDetails = {
             workspace: 'project',
           });
         })
+        .then(() => this.refreshBreadcrumbs())
         .catch(() => {
           this.$state.go('errorPage.notFound');
         });
@@ -51,7 +54,31 @@ const offeringDetails = {
     reInitResource(offering) {
       return this.offeringsService.$get(offering.uuid).then(response => {
         this.offering = response;
+        this.refreshBreadcrumbs();
       });
+    }
+
+    refreshBreadcrumbs() {
+      this.BreadcrumbsService.items = [
+        {
+          label: gettext('Project workspace'),
+          state: 'project.details',
+          params: {
+            uuid: this.offering.project_uuid
+          }
+        },
+        {
+          label: gettext('Resources'),
+        },
+        {
+          label: gettext('Requests'),
+          state: 'project.resources.offerings',
+          params: {
+            uuid: this.offering.project_uuid
+          }
+        }
+      ];
+      this.BreadcrumbsService.activeItem = this.offering.name;
     }
   }
 };
