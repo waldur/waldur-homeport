@@ -71,8 +71,6 @@ function AppStoreController(
           this.currentUser = user),
         currentStateService.getCustomer().then(customer =>
           this.currentCustomer = customer),
-        currentStateService.getProject().then(project =>
-          this.currentProject = project),
         servicesService.getServicesList().then(servicesMetadata =>
           this.servicesMetadata = servicesMetadata)
       ])
