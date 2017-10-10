@@ -84,11 +84,11 @@
       // do it for every element that matches selector
       this.each(function(){
 
-      var isOverPanel, isOverBar, isDragg, queueHide, touchDif,
-        barHeight, percentScroll, lastScroll,
-        divS = '<div></div>',
-        minBarHeight = 30,
-        releaseScroll = false;
+        var isOverPanel, isOverBar, isDragg, queueHide, touchDif,
+          barHeight, percentScroll, lastScroll,
+          divS = '<div></div>',
+          minBarHeight = 30,
+          releaseScroll = false;
 
         // used in event handlers and for better minification
         var me = $(this);
@@ -97,61 +97,61 @@
         if (me.parent().hasClass(o.wrapperClass))
         {
             // start from last bar position
-            var offset = me.scrollTop();
+          var offset = me.scrollTop();
 
             // find bar and rail
-            bar = me.siblings('.' + o.barClass);
-            rail = me.siblings('.' + o.railClass);
+          bar = me.siblings('.' + o.barClass);
+          rail = me.siblings('.' + o.railClass);
 
-            getBarHeight();
+          getBarHeight();
 
             // check if we should scroll existing instance
-            if ($.isPlainObject(options))
+          if ($.isPlainObject(options))
             {
               // Pass height: auto to an existing slimscroll object to force a resize after contents have changed
-              if ( 'height' in options && options.height == 'auto' ) {
-                me.parent().css('height', 'auto');
-                me.css('height', 'auto');
-                var height = me.parent().parent().height();
-                me.parent().css('height', height);
-                me.css('height', height);
-              } else if ('height' in options) {
-                var h = options.height;
-                me.parent().css('height', h);
-                me.css('height', h);
-              }
-
-              if ('scrollTo' in options)
-              {
-                // jump to a static point
-                offset = parseInt(o.scrollTo);
-              }
-              else if ('scrollBy' in options)
-              {
-                // jump by value pixels
-                offset += parseInt(o.scrollBy);
-              }
-              else if ('destroy' in options)
-              {
-                // remove slimscroll elements
-                bar.remove();
-                rail.remove();
-                me.unwrap();
-                return;
-              }
-
-              // scroll content by the given offset
-              scrollContent(offset, false, true);
+            if ( 'height' in options && options.height == 'auto' ) {
+              me.parent().css('height', 'auto');
+              me.css('height', 'auto');
+              var height = me.parent().parent().height();
+              me.parent().css('height', height);
+              me.css('height', height);
+            } else if ('height' in options) {
+              var h = options.height;
+              me.parent().css('height', h);
+              me.css('height', h);
             }
 
-            return;
+            if ('scrollTo' in options)
+              {
+                // jump to a static point
+              offset = parseInt(o.scrollTo);
+            }
+            else if ('scrollBy' in options)
+              {
+                // jump by value pixels
+              offset += parseInt(o.scrollBy);
+            }
+            else if ('destroy' in options)
+              {
+                // remove slimscroll elements
+              bar.remove();
+              rail.remove();
+              me.unwrap();
+              return;
+            }
+
+              // scroll content by the given offset
+            scrollContent(offset, false, true);
+          }
+
+          return;
         }
         else if ($.isPlainObject(options))
         {
-            if ('destroy' in options)
+          if ('destroy' in options)
             {
-                return;
-            }
+            return;
+          }
         }
 
         // optionally set height to the parent's height
@@ -220,24 +220,24 @@
 
         // make it draggable and no longer dependent on the jqueryUI
         if (o.railDraggable){
-          bar.bind("mousedown", function(e) {
+          bar.bind('mousedown', function(e) {
             var $doc = $(document);
             isDragg = true;
             var t = parseFloat(bar.css('top'));
-            pageY = e.pageY;
+            var pageY = e.pageY;
 
-            $doc.bind("mousemove.slimscroll", function(e){
-              currTop = t + e.pageY - pageY;
+            $doc.bind('mousemove.slimscroll', function(e){
+              var currTop = t + e.pageY - pageY;
               bar.css('top', currTop);
               scrollContent(0, bar.position().top, false);// scroll content
             });
 
-            $doc.bind("mouseup.slimscroll", function(e) {
+            $doc.bind('mouseup.slimscroll', function(e) {
               isDragg = false;hideBar();
               $doc.unbind('.slimscroll');
             });
             return false;
-          }).bind("selectstart.slimscroll", function(e){
+          }).bind('selectstart.slimscroll', function(e){
             e.stopPropagation();
             e.preventDefault();
             return false;
@@ -281,8 +281,8 @@
           // prevent scrolling the page if necessary
           if(!releaseScroll)
           {
-              e.originalEvent.preventDefault();
-              }
+            e.originalEvent.preventDefault();
+          }
           if (e.originalEvent.touches.length)
           {
             // see how far user swiped
@@ -395,7 +395,7 @@
           }
           else
           {
-            document.attachEvent("onmousewheel", _onWheel)
+            document.attachEvent('onmousewheel', _onWheel);
           }
         }
 
@@ -425,8 +425,8 @@
             // publish approporiate event
             if (lastScroll != percentScroll)
             {
-                var msg = (~~percentScroll == 0) ? 'top' : 'bottom';
-                me.trigger('slimscroll', msg);
+              var msg = (~~percentScroll == 0) ? 'top' : 'bottom';
+              me.trigger('slimscroll', msg);
             }
           }
           else
@@ -485,39 +485,39 @@ angular.module('ui.slimscroll', []).directive('slimscroll', ['$timeout', '$windo
 
       var refresh = function () {
 
-          var isEventBound = false;
+        var isEventBound = false;
 
-          $timeout(function () {
-              if (angular.isDefined($attr.slimscroll)) {
-                  option = $scope.$eval($attr.slimscroll) || {};
-              } else if ($attr.slimscrollOption) {
-                  option = $scope.$eval($attr.slimscrollOption) || {};
-              }
+        $timeout(function () {
+          if (angular.isDefined($attr.slimscroll)) {
+            option = $scope.$eval($attr.slimscroll) || {};
+          } else if ($attr.slimscrollOption) {
+            option = $scope.$eval($attr.slimscrollOption) || {};
+          }
 
-              var el = angular.element($elem);
+          var el = angular.element($elem);
 
-              el.slimScroll({ destroy: true });
+          el.slimScroll({ destroy: true });
 
-              if (option.onScroll && !isEventBound) {
-                el.slimScroll(option).bind('slimscrolling', function(e, pos) {
-                  option.onScroll();
-                  isEventBound = true;
-                });
-              } else {
-                el.slimScroll(option);
-              }
-          });
+          if (option.onScroll && !isEventBound) {
+            el.slimScroll(option).bind('slimscrolling', function(e, pos) {
+              option.onScroll();
+              isEventBound = true;
+            });
+          } else {
+            el.slimScroll(option);
+          }
+        });
       };
 
       angular.element($window).bind('resize', function() {
-          if ($attr.slimscroll) {
-              option = $scope.$eval($attr.slimscroll);
-            } else if ($attr.slimscrollOption) {
-              option = $scope.$eval($attr.slimscrollOption);
-            }
+        if ($attr.slimscroll) {
+          option = $scope.$eval($attr.slimscroll);
+        } else if ($attr.slimscrollOption) {
+          option = $scope.$eval($attr.slimscrollOption);
+        }
 
-           angular.element($elem).slimScroll(option);
-       });
+        angular.element($elem).slimScroll(option);
+      });
 
       var registerWatch = function () {
         if (angular.isDefined($attr.slimscroll) && !option.noWatch) {
