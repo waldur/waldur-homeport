@@ -10,6 +10,7 @@ const expertRequestProjectDetails = {
                 $stateParams,
                 currentStateService,
                 BreadcrumbsService,
+                WorkspaceService,
                 expertRequestsService) {
       this.$rootScope = $rootScope;
       this.$scope = $scope;
@@ -17,6 +18,7 @@ const expertRequestProjectDetails = {
       this.$stateParams = $stateParams;
       this.currentStateService = currentStateService;
       this.BreadcrumbsService = BreadcrumbsService;
+      this.WorkspaceService = WorkspaceService;
       this.expertRequestsService = expertRequestsService;
     }
 
@@ -46,22 +48,44 @@ const expertRequestProjectDetails = {
     }
 
     refreshBreadcrumbs(customer) {
-      this.BreadcrumbsService.items = [
-        {
-          label: gettext('Organization workspace'),
-          state: 'organization.dashboard',
-          params: {
-            uuid: customer.uuid
+      if (this.WorkspaceService.options.workspace === 'project') {
+        this.BreadcrumbsService.items = [
+          {
+            label: gettext('Project workspace'),
+            state: 'project.details',
+            params: {
+              uuid: this.expertRequest.project_uuid
+            }
+          },
+          {
+            label: gettext('Resources')
+          },
+          {
+            label: gettext('Experts'),
+            state: 'project.resources.experts',
+            params: {
+              uuid: this.expertRequest.project_uuid
+            }
           }
-        },
-        {
-          label: gettext('Experts'),
-          state: 'organization.experts',
-          params: {
-            uuid: customer.uuid
+        ];
+      } else {
+        this.BreadcrumbsService.items = [
+          {
+            label: gettext('Organization workspace'),
+            state: 'organization.dashboard',
+            params: {
+              uuid: customer.uuid
+            }
+          },
+          {
+            label: gettext('Experts'),
+            state: 'organization.experts',
+            params: {
+              uuid: customer.uuid
+            }
           }
-        }
-      ];
+        ];
+      }
       this.BreadcrumbsService.activeItem = this.expertRequest.name;
     }
 

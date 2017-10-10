@@ -7,15 +7,38 @@ export default function ProjectWorkspaceController(
   projectsService,
   $state,
   AppStoreUtilsService,
+  BreadcrumbsService,
   SidebarExtensionService) {
 
   activate();
 
   function activate() {
-    $scope.$on('WORKSPACE_CHANGED', function() {
-      refreshProject();
-    });
+    $scope.$on('WORKSPACE_CHANGED', () => refreshProject());
     refreshProject();
+
+    $scope.$on('$stateChangeSuccess', () => refreshBreadcrumbs());
+    refreshBreadcrumbs();
+  }
+
+  function refreshBreadcrumbs() {
+    if ($state.current.data && $state.current.data) {
+      BreadcrumbsService.activeItem = $state.current.data.pageTitle;
+    }
+
+    if ($scope.currentProject) {
+      if (!BreadcrumbsService.activeItem) {
+        BreadcrumbsService.activeItem = $scope.currentProject.name;
+      }
+      BreadcrumbsService.items = [
+        {
+          label: gettext('Project workspace'),
+          state: 'project.details',
+          params: {
+            uuid: $scope.currentProject.uuid
+          }
+        },
+      ];
+    }
   }
 
   function setItems(customItems) {
@@ -136,6 +159,7 @@ export default function ProjectWorkspaceController(
           getCountersError: getCountersError
         });
       });
+      refreshBreadcrumbs();
     });
   }
 
