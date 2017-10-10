@@ -10,5 +10,5 @@
   <dt translate>Created</dt>
   <dd>{{ $ctrl.expertRequest.modified | dateTime}}</dd>
   <dt translate>Description</dt>
-  <dd class="project-people html-description" ng-bind-html="$ctrl.expertRequest.description | decodeHtml"></dd>
+  <dd ng-bind="$ctrl.expertRequest.description"></dd>
 </dl>

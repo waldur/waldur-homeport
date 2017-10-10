@@ -33,7 +33,7 @@ const expertRequestProjectDetails = {
       this.currentStateService.getCustomer().then(customer => {
         return this.expertRequestsService.$get(this.$stateParams.requestId)
           .then(expertRequest => {
-            this.expertRequest = expertRequest;
+            this.expertRequest = {...expertRequest, ...expertRequest.extra};
             this.refreshBreadcrumbs(customer);
           }).catch(response => {
             if (response.status === 404) {

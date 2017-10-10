@@ -68,6 +68,7 @@ module.exports = {
     describe: true,
     expect: true,
     it: true,
+    xit: true,
     beforeEach: true,
     inject: true,
     process: true,
