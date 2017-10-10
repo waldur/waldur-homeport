@@ -35,11 +35,13 @@ export function CustomerWorkspaceController(
       refreshBreadcrumbs();
     });
     refreshWorkspace();
-    refreshBreadcrumbs();
   }
 
   function refreshBreadcrumbs() {
     BreadcrumbsService.activeItem = $scope.pageTitle;
+    if (!$scope.currentCustomer) {
+      return;
+    }
     BreadcrumbsService.items = [
       {
         label: gettext('Organization workspace'),
@@ -169,6 +171,7 @@ export function CustomerWorkspaceController(
           getCountersError: getCountersError
         });
       });
+      refreshBreadcrumbs();
     }
   }
 

@@ -6,14 +6,17 @@ const breadcrumbsContainer = {
     }
 
     $onInit() {
-      this.unlisten = this.BreadcrumbsService.listen(() => {
-        this.activeItem = this.BreadcrumbsService.activeItem;
-        this.items = this.BreadcrumbsService.items;
-      });
+      this.refresh();
+      this.unlisten = this.BreadcrumbsService.listen(() => this.refresh());
     }
 
     $onDestroy() {
       this.unlisten();
+    }
+
+    refresh() {
+      this.activeItem = this.BreadcrumbsService.activeItem;
+      this.items = this.BreadcrumbsService.items;
     }
   }
 };
