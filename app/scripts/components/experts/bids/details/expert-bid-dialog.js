@@ -1,14 +1,14 @@
-import template from './expert-bid.html';
-import { STATE } from './../requests/constants';
+import template from './expert-bid-dialog.html';
+import { STATE } from '../../requests/constants';
 
-const expertBid = {
+const expertBidDialog = {
   template,
   bindings: {
     resolve: '<',
     dismiss: '&',
     close: '&',
   },
-  controller: class ExpertBidDetailsController {
+  controller: class ExpertBidDialogController {
     // @ngInject
     constructor($uibModal, $rootScope, ExpertBidUtilsService, customersService) {
       this.$uibModal = $uibModal;
@@ -39,4 +39,4 @@ const expertBid = {
   }
 };
 
-export default expertBid;
+export default expertBidDialog;

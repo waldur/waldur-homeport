@@ -1,12 +1,12 @@
-import template from './expert-request-complete.html';
-import { STATE } from './constants';
+import template from './expert-request-cancel.html';
+import { STATE } from '../constants';
 
-const expertRequestComplete = {
+const expertRequestCancel = {
   template,
   bindings: {
     expertRequest: '<'
   },
-  controller: class ExpertRequestCompleteController {
+  controller: class ExpertRequestCancelController {
     // @ngInject
     constructor($rootScope, expertRequestsService, customersService, ncUtilsFlash) {
       this.$rootScope = $rootScope;
@@ -21,20 +21,19 @@ const expertRequestComplete = {
     }
 
     isVisible() {
-      return this.canManageRequest &&
-        this.expertRequest.state === STATE.ACTIVE &&
-        !this.expertRequest.recurring_billing;
+      const state = this.expertRequest.state;
+      return this.canManageRequest && (state === STATE.ACTIVE || state === STATE.PENDING);
     }
 
     submit() {
-      return this.expertRequestsService.complete(this.expertRequest).then(() => {
-        this.ncUtilsFlash.success(gettext('Expert request has been completed.'));
+      return this.expertRequestsService.cancel(this.expertRequest).then(() => {
+        this.ncUtilsFlash.success(gettext('Expert request has been cancelled.'));
         this.$rootScope.$broadcast('refreshExpertDetails');
       }).catch(response => {
-        this.ncUtilsFlash.errorFromResponse(response, gettext('Unable to complete expert request.'));
+        this.ncUtilsFlash.errorFromResponse(response, gettext('Unable to cancel expert request.'));
       });
     }
   }
 };
 
-export default expertRequestComplete;
+export default expertRequestCancel;

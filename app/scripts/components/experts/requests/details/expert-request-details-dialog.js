@@ -1,12 +1,12 @@
-import template from './expert-contract-details.html';
+import template from './expert-request-details-dialog.html';
 
-const expertContractDetails = {
+const expertRequestDetailsDialog = {
   template,
   bindings: {
     resolve: '<',
     dismiss: '&',
   },
-  controller: class {
+  controller: class ExpertRequestDetailsDialogController {
     $onInit() {
       this.expertRequest = this.resolve.expertRequest;
       if (!this.expertRequest.type && this.resolve.requestType) {
@@ -16,4 +16,4 @@ const expertContractDetails = {
   }
 };
 
-export default expertContractDetails;
+export default expertRequestDetailsDialog;

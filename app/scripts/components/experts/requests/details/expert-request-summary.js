@@ -1,11 +1,11 @@
-import template from './expert-contract.html';
+import template from './expert-request-summary.html';
 
-const expertContract = {
+const expertRequestSummary = {
   template,
   bindings: {
     model: '<',
   },
-  controller: class {
+  controller: class ExpertRequestSummaryController {
     // @ngInject
     constructor(expertRequestsService) {
       this.expertRequestsService = expertRequestsService;
@@ -23,4 +23,4 @@ const expertContract = {
   }
 };
 
-export default expertContract;
+export default expertRequestSummary;

@@ -88,7 +88,7 @@ function ExpertBidsList(
             iconClass: 'fa fa-info',
             callback: row => {
               $uibModal.open({
-                component: 'expert-bid',
+                component: 'expert-bid-dialog',
                 resolve: {
                   bid: () => row,
                   expertRequest: () => expertRequest,

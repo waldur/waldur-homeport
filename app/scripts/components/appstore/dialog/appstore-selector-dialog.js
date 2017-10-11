@@ -110,6 +110,9 @@ const appstoreSelectorDialog = {
     }
 
     selectCategory(category) {
+      if (!this.selectedProject) {
+        return;
+      }
       if (this.DialogForm.$valid) {
         this.submitting = true;
         return this.$state.go(category.state, {

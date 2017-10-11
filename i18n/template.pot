@@ -155,7 +155,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:32
+#: app/scripts/components/experts/bids/details/expert-bid-dialog.html:14
 #: app/scripts/components/experts/bids/expert-bids-list.js:100
 msgid "Accept"
 msgstr ""
@@ -217,7 +217,7 @@ msgstr ""
 msgid "Activating"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:149
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:149
 msgid "Active"
 msgstr ""
 
@@ -296,7 +296,7 @@ msgstr ""
 msgid "Add provider"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-project-list.js:91
+#: app/scripts/components/experts/requests/list/expert-request-project-list.js:91
 msgid "Add request"
 msgstr ""
 
@@ -667,11 +667,11 @@ msgstr ""
 msgid "Batch RAM usage, GB"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:126
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:126
 msgid "Bid could be created only for pending expert request."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:13
+#: app/scripts/components/experts/bids/details/expert-bid-summary.html:10
 msgid "Bid description"
 msgstr ""
 
@@ -763,9 +763,9 @@ msgstr ""
 #: app/scripts/components/digitalocean/droplet-resize.html:76
 #: app/scripts/components/events/event-details-dialog.html:133
 #: app/scripts/components/events/event-types-dialog.html:14
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:93
-#: app/scripts/components/experts/bids/expert-bid.html:35
-#: app/scripts/components/experts/contracts/expert-contract-create.html:37
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:93
+#: app/scripts/components/experts/bids/details/expert-bid-dialog.html:17
+#: app/scripts/components/experts/requests/create/expert-contract-create.html:37
 #: app/scripts/components/form/appstore-form-wizard.html:49
 #: app/scripts/components/invitations/actions/cancel.js:8
 #: app/scripts/components/invitations/actions/invitation-dialog.html:77
@@ -798,7 +798,7 @@ msgstr ""
 msgid "Cancel payment"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-cancel.html:7
+#: app/scripts/components/experts/requests/actions/expert-request-cancel.html:7
 msgid "Cancel request"
 msgstr ""
 
@@ -807,7 +807,7 @@ msgstr ""
 msgid "Canceled"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:145
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:145
 #: app/scripts/components/paypal/paypal-invoices-list.js:117
 msgid "Cancelled"
 msgstr ""
@@ -921,7 +921,7 @@ msgstr ""
 msgid "commented on"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-tabs.html:4
+#: app/scripts/components/experts/requests/details/expert-request-details.html:45
 #: app/scripts/components/issues/comments/issue-comments-container.html:3
 msgid "Comments"
 msgstr ""
@@ -940,15 +940,15 @@ msgstr ""
 msgid "Competence"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-complain.html:7
+#: app/scripts/components/experts/requests/actions/expert-request-complain.html:7
 msgid "Complain"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-complete.html:7
+#: app/scripts/components/experts/requests/actions/expert-request-complete.html:7
 msgid "Complete"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:141
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:141
 msgid "Completed"
 msgstr ""
 
@@ -999,11 +999,11 @@ msgstr ""
 msgid "Contact phone"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-summary.html:20
+#: app/scripts/components/experts/requests/details/expert-request-details.html:35
 msgid "Contract description"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-summary.html:18
+#: app/scripts/components/experts/requests/details/expert-request-details.html:33
 msgid "Contract price"
 msgstr ""
 
@@ -1069,8 +1069,8 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-store.html:20
 #: app/scripts/components/appstore/appstore-store.html:51
 #: app/scripts/components/customer/workspace/customer-issues.js:31
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:90
-#: app/scripts/components/experts/contracts/expert-contract-create.html:34
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:90
+#: app/scripts/components/experts/requests/create/expert-contract-create.html:34
 #: app/scripts/components/freeipa/freeipa-account-create.html:67
 #: app/scripts/components/issues/create/issue-create-dialog.js:10
 #: app/scripts/components/offering/appstore-offering.html:19
@@ -1088,7 +1088,7 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-button.html:3
+#: app/scripts/components/experts/extensions/expert-request-create-button.html:3
 msgid "Create a request for an expert"
 msgstr ""
 
@@ -1113,8 +1113,9 @@ msgstr ""
 msgid "Create backup schedule for OpenStack instance"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:2
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:118
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:2
+#: app/scripts/components/experts/bids/details/expert-bid-details.html:31
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:118
 msgid "Create bid"
 msgstr ""
 
@@ -1185,7 +1186,7 @@ msgstr ""
 #: app/scripts/components/billing/billing-utils.js:41
 #: app/scripts/components/customer/customer-list.js:52
 #: app/scripts/components/experts/bids/expert-bids-list.js:76
-#: app/scripts/components/experts/requests/expert-request-general-info.html:10
+#: app/scripts/components/experts/requests/details/expert-request-general-info.html:10
 #: app/scripts/components/issues/issue-detail.html:80
 #: app/scripts/components/issues/list/issues-list.js:128
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:45
@@ -1230,8 +1231,8 @@ msgid "Creating snapshot schedule"
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-jobs-list.js:74
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:96
-#: app/scripts/components/experts/requests/expert-request-project-list.js:79
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:96
+#: app/scripts/components/experts/requests/list/expert-request-project-list.js:79
 #: app/scripts/components/offering/offerings-list.js:55
 #: app/scripts/components/project/projects-list.js:103
 msgid "Creation date"
@@ -1302,6 +1303,7 @@ msgid "Deactivating"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html:46
+#: app/scripts/components/experts/bids/details/expert-bid-details.html:20
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:39
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
@@ -1319,9 +1321,9 @@ msgstr ""
 #: app/scripts/components/ansible/ansible-job-create.js:94
 #: app/scripts/components/ansible/ansible-job-summary.html:32
 #: app/scripts/components/azure/azure-virtual-machine-config.js:20
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:74
-#: app/scripts/components/experts/requests/expert-request-create.js:50
-#: app/scripts/components/experts/requests/expert-request-general-info.html:12
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:74
+#: app/scripts/components/experts/requests/create/expert-request-create.js:50
+#: app/scripts/components/experts/requests/details/expert-request-general-info.html:12
 #: app/scripts/components/issues/create/issue-quick-create.html:39
 #: app/scripts/components/issues/create/issue-registration.html:110
 #: app/scripts/components/issues/issue-detail.html:89
@@ -1371,9 +1373,9 @@ msgstr ""
 #: app/scripts/components/appstore/providers/appstore-providers.html:33
 #: app/scripts/components/cost-planning/cost-plans-list.js:54
 #: app/scripts/components/events/base-event-list.js:43
-#: app/scripts/components/experts/contracts/expert-contract-form.js:22
-#: app/scripts/components/experts/contracts/expert-contract.html:27
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:111
+#: app/scripts/components/experts/requests/create/expert-contract-form.js:22
+#: app/scripts/components/experts/requests/details/expert-request-summary.html:27
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:111
 #: app/scripts/components/issues/create/issue-registration.html:32
 #: app/scripts/components/issues/create/issue-registration.html:69
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
@@ -1412,6 +1414,10 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html:109
 msgid "Do not have an account?"
+msgstr ""
+
+#: app/scripts/components/experts/bids/expert-bid-utils.js:19
+msgid "Do you really want to delete this bid? This action cannot be undone."
 msgstr ""
 
 #: app/scripts/components/navigation/header/docs-link.html:3
@@ -1622,11 +1628,23 @@ msgstr ""
 msgid "Expert"
 msgstr ""
 
+#: app/scripts/components/experts/bids/details/expert-bid-details.html:7
+msgid "Expert bid"
+msgstr ""
+
 #: app/scripts/components/experts/bids/expert-bid-utils.js:14
 msgid "Expert bid could not be accepted."
 msgstr ""
 
-#: app/scripts/components/experts/contracts/expert-contract-details.html:2
+#: app/scripts/components/experts/bids/expert-bid-utils.js:26
+msgid "Expert bid could not be cancelled."
+msgstr ""
+
+#: app/scripts/components/experts/bids/details/expert-bid-details.js:48
+msgid "Expert bid could not be fetched."
+msgstr ""
+
+#: app/scripts/components/experts/requests/details/expert-request-details-dialog.html:2
 msgid "Expert contract details"
 msgstr ""
 
@@ -1634,7 +1652,7 @@ msgstr ""
 msgid "Expert provider has been registered"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:8
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:8
 msgid "Expert request"
 msgstr ""
 
@@ -1650,7 +1668,7 @@ msgstr ""
 msgid "Expert request \"{expert_request_name}\"\" has been cancelled."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-create.js:76
+#: app/scripts/components/experts/requests/create/expert-request-create.js:76
 msgid "Expert request could not be created"
 msgstr ""
 
@@ -1658,15 +1676,15 @@ msgstr ""
 msgid "Expert request details"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-cancel.js:30
+#: app/scripts/components/experts/requests/actions/expert-request-cancel.js:30
 msgid "Expert request has been cancelled."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-complete.js:31
+#: app/scripts/components/experts/requests/actions/expert-request-complete.js:31
 msgid "Expert request has been completed."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-create.js:68
+#: app/scripts/components/experts/requests/create/expert-request-create.js:68
 msgid "Expert request has been created."
 msgstr ""
 
@@ -1675,15 +1693,13 @@ msgstr ""
 msgid "Expert requests"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-summary.html:22
+#: app/scripts/components/experts/requests/details/expert-request-details.html:37
 msgid "Expert team"
 msgstr ""
 
 #: app/scripts/components/experts/constants.js:1
 #: app/scripts/components/experts/expert-provider-details.html:2
 #: app/scripts/components/experts/extensions/sidebar.js:28
-#: app/scripts/components/experts/requests/expert-request-details.js:64
-#: app/scripts/components/experts/requests/expert-request-details.js:81
 #: app/scripts/components/experts/routes.js:19
 #: app/scripts/components/experts/routes.js:28
 #: app/scripts/components/experts/routes.js:38
@@ -1806,7 +1822,7 @@ msgstr ""
 msgid "For"
 msgstr ""
 
-#: app/scripts/components/experts/contracts/expert-contract-create.js:48
+#: app/scripts/components/experts/requests/create/expert-contract-create.js:48
 msgid "Form has not been filled correctly. Please check your input."
 msgstr ""
 
@@ -2084,7 +2100,7 @@ msgstr ""
 msgid "Instance has been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:302
+#: app/scripts/components/appstore/appstore-store.js:300
 msgid "Instance is not configured."
 msgstr ""
 
@@ -2348,7 +2364,7 @@ msgstr ""
 msgid "Last"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-general-info.html:8
+#: app/scripts/components/experts/requests/details/expert-request-general-info.html:8
 msgid "Last updated"
 msgstr ""
 
@@ -2410,7 +2426,7 @@ msgstr ""
 msgid "Loading actions"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:39
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:39
 msgid "Loading team members, please wait."
 msgstr ""
 
@@ -2535,7 +2551,7 @@ msgstr ""
 msgid "Min storage"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:68
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:68
 #: app/scripts/components/form/appstore-field-integer.html:19
 msgid "Minimal valid value is"
 msgstr ""
@@ -2581,8 +2597,8 @@ msgstr ""
 #: app/scripts/components/customer/create/customer-create-config.js:10
 #: app/scripts/components/customer/details/customer-manage.html:10
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:76
-#: app/scripts/components/experts/requests/expert-request-create.js:43
-#: app/scripts/components/experts/requests/expert-request-project-list.js:53
+#: app/scripts/components/experts/requests/create/expert-request-create.js:43
+#: app/scripts/components/experts/requests/list/expert-request-project-list.js:53
 #: app/scripts/components/offering/appstore-offering.js:41
 #: app/scripts/components/offering/offering-summary.html:11
 #: app/scripts/components/offering/offerings-list.js:35
@@ -2723,8 +2739,8 @@ msgstr ""
 msgid "No events yet."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:52
-#: app/scripts/components/experts/requests/expert-request-project-list.js:44
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:52
+#: app/scripts/components/experts/requests/list/expert-request-project-list.js:44
 msgid "No experts found matching filter."
 msgstr ""
 
@@ -3028,7 +3044,7 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:79
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:79
 msgid "Objectives"
 msgstr ""
 
@@ -3045,7 +3061,7 @@ msgid "Offerings"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-popover.html:53
-#: app/scripts/components/experts/contracts/expert-contract-details.html:8
+#: app/scripts/components/experts/requests/details/expert-request-details-dialog.html:8
 #: app/scripts/components/project/project-dialog.html:30
 #: app/scripts/components/providers/details/dialog.html:44
 #: app/scripts/components/user/user-popover.html:24
@@ -3121,7 +3137,7 @@ msgstr ""
 
 #: app/scripts/components/events/event-details-dialog.html:59
 #: app/scripts/components/experts/bids/expert-bids-list.js:64
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:61
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:61
 #: app/scripts/components/issues/create/issue-create-dialog.html:12
 #: app/scripts/components/issues/create/issue-create-dialog.html:22
 #: app/scripts/components/issues/create/issue-create-dialog.html:7
@@ -3226,7 +3242,6 @@ msgstr ""
 #: app/scripts/components/billing/billing-record-header.js:25
 #: app/scripts/components/billing/invoice-header.html:6
 #: app/scripts/components/customer/workspace/customer-workspace.js:47
-#: app/scripts/components/experts/requests/expert-request-details.js:74
 msgid "Organization workspace"
 msgstr ""
 
@@ -3319,7 +3334,7 @@ msgid "Payment pending"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js:33
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:154
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:154
 #: app/scripts/components/invitations/invitations-list.js:71
 #: app/scripts/components/project/projects-list.js:143
 msgid "Pending"
@@ -3383,7 +3398,7 @@ msgstr ""
 msgid "Please accept Terms of Services to proceed."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:43
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:43
 msgid "Please add users or select another team."
 msgstr ""
 
@@ -3419,7 +3434,7 @@ msgstr ""
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:22
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:22
 msgid "Please select a team"
 msgstr ""
 
@@ -3444,7 +3459,7 @@ msgstr ""
 msgid "Please select your organization"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:312
+#: app/scripts/components/appstore/appstore-store.js:310
 msgid "Please specify {fields}."
 msgstr ""
 
@@ -3484,7 +3499,7 @@ msgstr ""
 msgid "Premium support service."
 msgstr ""
 
-#: app/scripts/components/experts/contracts/expert-contract-create.html:11
+#: app/scripts/components/experts/requests/create/expert-contract-create.html:11
 msgid "Preview contract"
 msgstr ""
 
@@ -3495,7 +3510,7 @@ msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js:54
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:8
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:57
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:57
 #: app/scripts/components/experts/bids/expert-bids-list.js:72
 #: app/scripts/components/offering/offering-summary.html:34
 #: app/scripts/components/paypal/paypal-invoices-list.js:58
@@ -3503,7 +3518,7 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:22
+#: app/scripts/components/experts/bids/details/expert-bid-summary.html:20
 msgid "PRICE"
 msgstr ""
 
@@ -3706,8 +3721,7 @@ msgstr ""
 msgid "Project providers links have been updated."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:86
-#: app/scripts/components/experts/requests/expert-request-details.js:54
+#: app/scripts/components/appstore/appstore-store.js:84
 #: app/scripts/components/offering/offering-details.js:64
 #: app/scripts/components/project/project-workspace.js:34
 msgid "Project workspace"
@@ -3908,7 +3922,7 @@ msgid "Read through terms and conditions."
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.js:110
-#: app/scripts/components/experts/requests/expert-request-complain.js:57
+#: app/scripts/components/experts/requests/actions/expert-request-complain.js:57
 #: app/scripts/components/user/user-manage.js:57
 msgid "Reason"
 msgstr ""
@@ -4053,15 +4067,15 @@ msgstr ""
 msgid "Request a new service"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-button.html:3
+#: app/scripts/components/experts/extensions/expert-request-create-button.html:3
 msgid "Request an expert"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-tabs.html:11
+#: app/scripts/components/experts/requests/details/expert-request-details.html:52
 msgid "Request bids"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-complain.js:54
+#: app/scripts/components/experts/requests/actions/expert-request-complain.js:54
 msgid "Request complaint"
 msgstr ""
 
@@ -4202,7 +4216,6 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html:35
 #: app/scripts/components/analytics/dashboard-cost-chart.html:13
-#: app/scripts/components/experts/requests/expert-request-details.js:61
 #: app/scripts/components/issues/issue-navigation-service.js:24
 #: app/scripts/components/issues/routes.js:62
 #: app/scripts/components/offering/offering-details.js:71
@@ -4465,7 +4478,7 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:376
+#: app/scripts/components/appstore/appstore-store.js:374
 msgid "Server error occurred."
 msgstr ""
 
@@ -4489,7 +4502,7 @@ msgstr ""
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.js:93
+#: app/scripts/components/appstore/appstore-store.js:91
 #: app/scripts/components/appstore/dialog/appstore-selector-dialog.html:2
 #: app/scripts/components/appstore/routes.js:11
 #: app/scripts/components/customer/workspace/customer-workspace.js:82
@@ -4675,9 +4688,9 @@ msgstr ""
 #: app/scripts/components/ansible/ansible-jobs-list.js:66
 #: app/scripts/components/billing/billing-records-list.js:48
 #: app/scripts/components/billing/invoices-list.js:49
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:88
-#: app/scripts/components/experts/requests/expert-request-general-info.html:2
-#: app/scripts/components/experts/requests/expert-request-project-list.js:71
+#: app/scripts/components/experts/requests/details/expert-request-general-info.html:2
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:88
+#: app/scripts/components/experts/requests/list/expert-request-project-list.js:71
 #: app/scripts/components/offering/offering-summary.html:18
 #: app/scripts/components/offering/offerings-list.js:48
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:52
@@ -4757,7 +4770,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-complain.js:58
+#: app/scripts/components/experts/requests/actions/expert-request-complain.js:58
 msgid "Submit complaint"
 msgstr ""
 
@@ -4765,7 +4778,7 @@ msgstr ""
 msgid "Submit with"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid.html:17
+#: app/scripts/components/experts/bids/details/expert-bid-summary.html:15
 msgid "SUBMITTED"
 msgstr ""
 
@@ -4871,14 +4884,14 @@ msgstr ""
 
 #: app/scripts/components/customer/routes.js:105
 #: app/scripts/components/customer/workspace/customer-workspace.js:135
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:16
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:16
 #: app/scripts/components/experts/bids/expert-bids-list.js:68
 #: app/scripts/components/project/project-workspace.js:133
 #: app/scripts/components/project/routes.js:163
 msgid "Team"
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:42
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:42
 msgid "Team does not have members yet."
 msgstr ""
 
@@ -4973,8 +4986,8 @@ msgstr ""
 msgid "There are no events for this resource."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:51
-#: app/scripts/components/experts/requests/expert-request-project-list.js:43
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:51
+#: app/scripts/components/experts/requests/list/expert-request-project-list.js:43
 msgid "There are no experts yet."
 msgstr ""
 
@@ -5042,7 +5055,7 @@ msgid "This month estimated costs for organization {customer_name} exceeded."
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-job-create.js:87
-#: app/scripts/components/experts/requests/expert-request-create.js:44
+#: app/scripts/components/experts/requests/create/expert-request-create.js:44
 #: app/scripts/components/offering/appstore-offering.js:42
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:24
 #: app/scripts/components/project/project-create.html:15
@@ -5138,14 +5151,14 @@ msgstr ""
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-details.html:8
+#: app/scripts/components/experts/requests/details/expert-request-details.html:8
 #: app/scripts/components/user/user-popover.html:17
 msgid "Try again"
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:74
-#: app/scripts/components/experts/requests/expert-request-general-info.html:6
-#: app/scripts/components/experts/requests/expert-request-project-list.js:66
+#: app/scripts/components/experts/requests/details/expert-request-general-info.html:6
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:74
+#: app/scripts/components/experts/requests/list/expert-request-project-list.js:66
 #: app/scripts/components/offering/offering-summary.html:25
 #: app/scripts/components/offering/offerings-list.js:44
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html:19
@@ -5171,7 +5184,7 @@ msgstr ""
 msgid "Unable to cancel billing plan."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-cancel.js:33
+#: app/scripts/components/experts/requests/actions/expert-request-cancel.js:33
 msgid "Unable to cancel expert request."
 msgstr ""
 
@@ -5183,7 +5196,7 @@ msgstr ""
 msgid "Unable to change tenant package."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-complete.js:34
+#: app/scripts/components/experts/requests/actions/expert-request-complete.js:34
 msgid "Unable to complete expert request."
 msgstr ""
 
@@ -5233,7 +5246,7 @@ msgstr ""
 msgid "Unable to load events for this resource."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-details.html:5
+#: app/scripts/components/experts/requests/details/expert-request-details.html:5
 msgid "Unable to load expert request."
 msgstr ""
 
@@ -5596,7 +5609,7 @@ msgstr ""
 msgid "VPC packages for this provider are not found."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-complain.js:56
+#: app/scripts/components/experts/requests/actions/expert-request-complain.js:56
 msgid "We are sorry you had a bad experience. Tell us what happend?"
 msgstr ""
 
@@ -5645,7 +5658,7 @@ msgstr ""
 msgid "You cannot remove shared provider."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:31
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:31
 #: app/scripts/components/issues/create/issue-create-dialog.js:40
 #: app/scripts/components/issues/create/issue-quick-create.js:49
 #: app/scripts/components/issues/create/issue-registration.js:70
@@ -5763,7 +5776,11 @@ msgstr ""
 msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr ""
 
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:128
+#: app/scripts/components/experts/bids/details/expert-bid-details.html:25
+msgid "You have not submitted bid yet."
+msgstr ""
+
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js:128
 msgid "You have placed a bid already."
 msgstr ""
 

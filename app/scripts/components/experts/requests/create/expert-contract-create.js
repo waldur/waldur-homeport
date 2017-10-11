@@ -12,10 +12,10 @@ const expertContractCreate = {
   },
   controller: class ExpertContractCreateController {
     // @ngInject
-    constructor($stateParams, ncUtilsFlash, expertUtilsService) {
+    constructor($stateParams, ncUtilsFlash, ExpertUtilsService) {
       this.$stateParams = $stateParams;
       this.ncUtilsFlash = ncUtilsFlash;
-      this.expertUtilsService = expertUtilsService;
+      this.ExpertUtilsService = ExpertUtilsService;
     }
 
     $onInit() {
@@ -52,7 +52,7 @@ const expertContractCreate = {
     previewContract() {
       let expertRequest = angular.copy(this.model);
       expertRequest.type = this.$stateParams.category;
-      return this.expertUtilsService.openDialog(expertRequest);
+      return this.ExpertUtilsService.showRequest(expertRequest);
     }
   }
 };

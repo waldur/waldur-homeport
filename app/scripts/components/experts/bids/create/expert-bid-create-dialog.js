@@ -74,6 +74,7 @@ const expertBidCreateDialog = {
       instance.price = this.price;
       return instance.$save().then(() => {
         this.ncUtilsFlash.success('Expert bid has been created.');
+        this.expertBidsService.clearAllCacheForCurrentEndpoint();
         this.$rootScope.$broadcast('refreshBidsList');
         this.close();
       })
