@@ -1,54 +1,54 @@
 .html-description {
-    white-space: pre-wrap;
+  white-space: pre-wrap;
 }
 
 img {
-    max-width: 100%;
-    vertical-align: top;
+  max-width: 100%;
+  vertical-align: top;
 }
 
 .fb_iframe_widget {
-    padding-bottom: 4px;
+  padding-bottom: 4px;
 }
 
 .f16 {
-    display: inline-block;
-    vertical-align: middle;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .list-group-item.awesome-checkbox {
-    background-color: $white;
-    padding-left: 35px;
-    label {
-        width: 100%;
-    }
+  background-color: $white;
+  padding-left: 35px;
+  label {
+    width: 100%;
+  }
 }
 
 .form-group .awesome-checkbox {
-    padding-left: 0px;
+  padding-left: 0px;
 }
 
 .old {
-    background-color: $gray;
-    &.fixed-nav #wrapper {
-        margin-top: 40px;
-        height: 100%;
-    }
+  background-color: $gray;
+  &.fixed-nav #wrapper {
+    margin-top: 40px;
+    height: 100%;
+  }
 }
 
 .elipsis {
-    @include elipsis;
+  @include elipsis;
 }
 
 .fixed-width-icon {
-    width: 16px;
+  width: 16px;
 }
 
 .list-group-item.active .btn-default {
+  color: $text-color;
+  &:hover {
     color: $text-color;
-    &:hover {
-        color: $text-color;
-    }
+  }
 }
 
 .brand-name {
@@ -80,8 +80,9 @@ body.landing {
   padding-top: 50px;
 }
 
-.white-bg .navbar-fixed-top, .white-bg .navbar-static-top {
-    background: $gray;
+.white-bg .navbar-fixed-top,
+.white-bg .navbar-static-top {
+  background: $gray;
 }
 
 .img-xs {
@@ -135,7 +136,9 @@ body.landing {
   padding-bottom: 90px;
 }
 
-.cursor-pointer {cursor: pointer;}
+.cursor-pointer {
+  cursor: pointer;
+}
 
 .progress-bar-plain {
   background-color: $light-gray;
@@ -168,35 +171,39 @@ body.landing {
 .table-borderless thead tr td,
 .table-borderless tfoot tr th,
 .table-borderless tfoot tr td {
-    border: none;
+  border: none;
 }
 
 @media (max-width: 768px) {
-    .btn-block-sm {
-        display: block;
-        width: 100%;
-        padding: 5px 10px;
-        margin-bottom: 10px;
-    }
+  .btn-block-sm {
+    display: block;
+    width: 100%;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+  }
 
-    .block-container-sm {
-        float: none !important;
-    }
+  .block-container-sm {
+    float: none !important;
+  }
 }
 
 @media (max-width: 992px) {
-    .btn-block-md {
-        display: block;
-        width: 100%;
-        padding: 5px 10px;
-        margin-bottom: 10px;
-    }
+  .btn-block-md {
+    display: block;
+    width: 100%;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+  }
 
-    .block-container-md {
-        float: none !important;
-    }
+  .block-container-md {
+    float: none !important;
+  }
 }
 
 .state-indicator {
   display: inline-block;
+}
+
+.white-panel-heading .panel-heading {
+  background: #fff;
 }

@@ -1,5 +1,5 @@
 import template from './expert-request-complain.html';
-import { STATE } from './constants';
+import { STATE } from '../constants';
 
 const expertRequestComplain = {
   template,

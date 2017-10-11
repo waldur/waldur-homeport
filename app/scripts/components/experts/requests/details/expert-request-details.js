@@ -1,8 +1,14 @@
+import { STATE } from '../constants';
 import template from './expert-request-details.html';
 
-const expertRequestProjectDetails = {
+const TABS = {
+  COMMENTS: 0,
+  BIDS: 1,
+};
+
+const expertRequestDetails = {
   template: template,
-  controller: class ExpertRequestProjectDetailsController {
+  controller: class ExpertRequestDetailsController {
     // ngInject
     constructor($rootScope,
                 $scope,
@@ -34,6 +40,8 @@ const expertRequestProjectDetails = {
         return this.expertRequestsService.$get(this.$stateParams.requestId)
           .then(expertRequest => {
             this.expertRequest = {...expertRequest, ...expertRequest.extra};
+            this.workspace = this.WorkspaceService.getWorkspace().workspace;
+            this.initTabs();
             this.refreshBreadcrumbs(customer);
           }).catch(response => {
             if (response.status === 404) {
@@ -47,8 +55,25 @@ const expertRequestProjectDetails = {
       });
     }
 
+    get showBidDetails() {
+      return this.workspace === 'organization' && this.expertRequest.state === 'Pending';
+    }
+
+    initTabs() {
+      if (this.expertRequest.state === STATE.PENDING && !this.showBidDetails) {
+        this.activeTab = TABS.BIDS;
+      } else {
+        this.activeTab = TABS.COMMENTS;
+      }
+
+      this.issue = {
+        uuid: this.expertRequest.issue_uuid,
+        url: this.expertRequest.issue,
+      };
+    }
+
     refreshBreadcrumbs(customer) {
-      if (this.WorkspaceService.options.workspace === 'project') {
+      if (this.workspace === 'project') {
         this.BreadcrumbsService.items = [
           {
             label: gettext('Project workspace'),
@@ -78,7 +103,7 @@ const expertRequestProjectDetails = {
             }
           },
           {
-            label: gettext('Experts'),
+            label: gettext('Expert requests'),
             state: 'organization.experts',
             params: {
               uuid: customer.uuid
@@ -95,4 +120,4 @@ const expertRequestProjectDetails = {
   }
 };
 
-export default expertRequestProjectDetails;
+export default expertRequestDetails;

@@ -13,9 +13,9 @@ function ExpertRequestListController(
   $filter,
   $uibModal,
   currentStateService,
-  expertUtilsService,
   expertBidsService,
   expertRequestsService,
+  ExpertUtilsService,
   customersService) {
   let controllerScope = this;
   let Controller = baseControllerListClass.extend({
@@ -110,14 +110,14 @@ function ExpertRequestListController(
         {
           title: gettext('Details'),
           iconClass: 'fa fa-info-circle',
-          callback: request => expertUtilsService.openDialog(request),
+          callback: request => ExpertUtilsService.openDialog(request),
         }
       ];
       if (this.isOwnerOrStaff) {
         actions.push({
           title: gettext('Create bid'),
           iconClass: 'fa fa-plus',
-          callback: this.createBid.bind(this),
+          callback: expertRequest => ExpertUtilsService.createBid(expertRequest),
           isDisabled: row => {
             return row.state !== 'Pending' || vm.requestHasBids(row.uuid);
           },
@@ -157,15 +157,6 @@ function ExpertRequestListController(
           }
         ]
       };
-    },
-    createBid: function(expertRequest) {
-      return $uibModal.open({
-        component: 'expertBidCreateDialog',
-        size: 'lg',
-        resolve: {
-          expertRequest: expertRequest,
-        }
-      });
     },
   });
   controllerScope.__proto__ = new Controller();

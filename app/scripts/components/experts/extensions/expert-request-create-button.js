@@ -1,9 +1,9 @@
-import template from './expert-request-button.html';
+import template from './expert-request-create-button.html';
 import { APPSTORE_CATEGORY } from './../constants';
 
-const expertRequestButton = {
+const expertRequestCreateButton = {
   template,
-  controller: class {
+  controller: class ExpertRequestCreateButtonController {
     // @ngInject
     constructor(AppStoreUtilsService) {
       this.AppStoreUtilsService = AppStoreUtilsService;
@@ -15,4 +15,4 @@ const expertRequestButton = {
   }
 };
 
-export default expertRequestButton;
+export default expertRequestCreateButton;

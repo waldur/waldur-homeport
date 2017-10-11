@@ -1,0 +1,66 @@
+<div ng-if="$ctrl.loading">
+  <loading-spinner/>
+</div>
+<div ng-if="!$ctrl.loading && $ctrl.erred">
+  <p translate>Unable to load expert request.</p>
+  <button type="button" class="btn btn-default" ng-click="$ctrl.loadExpertRequest()">
+    <i class="fa fa-refresh"></i>
+    <span translate>Try again</span>
+  </button>
+</div>
+<div ng-if="!$ctrl.loading && !$ctrl.erred">
+  <div class="ibox m-t-md">
+    <div class="ibox-content">
+      <div class="row">
+        <div class="col-lg-6">
+          <h2 ng-bind="$ctrl.expertRequest.name"></h2>
+        </div>
+        <div class="col-lg-6">
+          <div class="pull-right">
+            <expert-request-actions expert-request="$ctrl.expertRequest"></expert-request-actions>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div ng-class="{'col-lg-9': $ctrl.showBidDetails, 'col-lg-12': !$ctrl.showBidDetails}">
+
+      <expert-request-summary class="white-panel-heading" model="$ctrl.expertRequest"></expert-request-summary>
+
+      <div class="ibox-content" ng-if="$ctrl.expertRequest.contract">
+        <dl class="dl-horizontal">
+          <dt translate>Contract price</dt>
+          <dd>{{ $ctrl.expertRequest.contract.price | defaultCurrency }}</dd>
+          <dt translate>Contract description</dt>
+          <dd>{{ $ctrl.expertRequest.contract.description }}</dd>
+          <dt translate>Expert team</dt>
+          <dd>{{ $ctrl.expertRequest.contract.team_name }}</dd>
+        </dl>
+      </div>
+
+      <div class="tabs-container m-l-xxs m-t-md">
+        <uib-tabset active="$ctrl.activeTab">
+          <uib-tab index="0" ng-if="$ctrl.issue.url">
+            <uib-tab-heading translate>Comments</uib-tab-heading>
+            <div class="panel-body" ng-if="$ctrl.activeTab==0">
+              <issue-comments-list issue="$ctrl.issue"></issue-comments-list>
+              <issue-comments-form issue="$ctrl.issue"></issue-comments-form>
+            </div>
+          </uib-tab>
+          <uib-tab index="1" ng-if="!$ctrl.expertRequest.contract && !$ctrl.showBidDetails">
+            <uib-tab-heading translate>Request bids</uib-tab-heading>
+            <div class="panel-body" ng-if="$ctrl.activeTab==1">
+              <expert-bids-list expert-request="$ctrl.expertRequest"></expert-bids-list>
+            </div>
+          </uib-tab>
+        </uib-tabset>
+      </div>
+    </div>
+
+    <div class="col-lg-3" ng-if="$ctrl.showBidDetails">
+      <expert-bid-details expert-request="$ctrl.expertRequest"></expert-bid-details>
+    </div>
+
+  </div>
+</div>
