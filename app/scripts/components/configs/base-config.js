@@ -112,7 +112,7 @@ const ENV = {
   serviceCategories: [
     {
       name: gettext('Virtual machines'),
-      services: ['Amazon', 'Azure', 'DigitalOcean', 'OpenStack'],
+      services: ['Amazon', 'Azure', 'DigitalOcean', 'OpenStackTenant'],
     },
   ],
 
