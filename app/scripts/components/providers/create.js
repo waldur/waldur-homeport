@@ -8,6 +8,7 @@ const providerCreate = {
 
 export default providerCreate;
 
+// TODO: Migrate to ES6 class, explicitly specify form field configuration for each provider.
 // @ngInject
 function ServiceAddController(
   servicesService,
@@ -89,7 +90,7 @@ function ServiceAddController(
       this.model.serviceName = model.name;
       this.loadingService = true;
       this.getOptions(model.name).then(function(options) {
-        this.model.options = options;
+        this.model.options = angular.copy(options);
         angular.forEach(options, function(option) {
           if (option.default_value) {
             option.value = option.default_value;

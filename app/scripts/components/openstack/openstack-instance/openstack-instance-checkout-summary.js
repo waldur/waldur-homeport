@@ -12,7 +12,7 @@ class SummaryController {
 
   $onInit() {
     this.loading = true;
-    this.components = {};
+    this.components = null;
     this.quotas = [];
     this.$q.all([this.loadProject(), this.loadQuotas()])
       .then(() => this.setupWatchers())

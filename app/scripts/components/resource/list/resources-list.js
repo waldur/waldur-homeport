@@ -75,7 +75,7 @@ export default function baseResourceListController(
           return '<action-button-resource button-controller="controller" button-model="controller.list[' + index + ']"/>';
         }
       };
-      if (this.currentUser.is_support) {
+      if (this.currentUser.is_support && !this.currentUser.is_staff) {
         delete options.rowActions;
       }
       return options;

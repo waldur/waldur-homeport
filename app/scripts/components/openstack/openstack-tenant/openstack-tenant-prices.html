@@ -4,7 +4,7 @@
 
 <div class="text-danger" ng-bind="$ctrl.error"/>
 
-<div ng-if="!$ctrl.loading">
+<div ng-if="!$ctrl.loading && !$ctrl.error">
   <p>
     <strong><span translate>Current VPC package</span>:</strong>
     {{ ::$ctrl.template | formatPackage }}
