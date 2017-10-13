@@ -130,7 +130,7 @@ function ProjectsListController(
         {
           title: gettext('Estimated cost'),
           feature: 'projectCostDetails',
-          render: row => $filter('defaultCurrency')(row.billing_price_estimate.total),
+          render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.total),
           index: 310,
         },
         {
