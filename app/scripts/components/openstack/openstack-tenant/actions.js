@@ -6,6 +6,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
       'pull',
       'assign_package',
       'change_package',
+      'request_custom_flavour',
       'create_network',
       'create_security_group',
       'pull_security_groups',
@@ -80,6 +81,13 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         title: gettext('Create'),
         dialogTitle: gettext('Create floating IP for '),
         iconClass: 'fa fa-plus',
+      },
+      request_custom_flavour: {
+        title: gettext('Request custom flavour'),
+        component: 'openstackTenantRequestCustomFlavour',
+        enabled: true,
+        useResolve: true,
+        type: 'form',
       },
     },
     delete_message: 'All tenant resources will be deleted.'

@@ -10,7 +10,6 @@ import openstackSecurityGroupsModule from './openstack-security-groups/module';
 import openstackFloatingIpsModule from './openstack-floating-ips/module';
 import openstackSnapshotModule from './openstack-snapshot/module';
 import openstackSnapshotScheduleModule from './openstack-snapshot-schedule/module';
-import openstackPrivateCloudModule from './openstack-private-cloud/module';
 import costPlanModule from './cost-plan/module';
 
 export default module => {
@@ -26,6 +25,5 @@ export default module => {
   openstackFloatingIpsModule(module);
   openstackSnapshotModule(module);
   openstackSnapshotScheduleModule(module);
-  openstackPrivateCloudModule(module);
   costPlanModule(module);
 };
