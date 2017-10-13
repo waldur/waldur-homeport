@@ -4,9 +4,6 @@ import billingDetails from './billing-details';
 import invoiceHeader from './invoice-header';
 import invoiceDetails from './invoice-details';
 import invoicesList from './invoices-list';
-import invoiceEventsDialog from './invoice-events-dialog';
-import invoiceEventsToggle from './invoice-events-toggle';
-import InvoiceEventsService from './invoice-events-service';
 import billingIssuerDetails from './billing-issuer-details';
 import billingCustomerDetails from './billing-customer-details';
 import billingRecordDetails from './billing-record-details';
@@ -14,18 +11,16 @@ import billingRecordHeader from './billing-record-header';
 import billingRecordsList from './billing-records-list';
 import billingTabs from './billing-tabs';
 import billingRoutes from './routes';
+import eventsModule from './events/module';
 import filtersModule from './filters';
 
 export default module => {
   module.service('invoicesService', invoicesService);
   module.service('BillingUtils', BillingUtils);
-  module.service('InvoiceEventsService', InvoiceEventsService);
   module.component('billingDetails', billingDetails);
   module.component('invoiceHeader', invoiceHeader);
   module.component('invoiceDetails', invoiceDetails);
   module.component('invoicesList', invoicesList);
-  module.component('invoiceEventsDialog', invoiceEventsDialog);
-  module.component('invoiceEventsToggle', invoiceEventsToggle);
   module.component('billingIssuerDetails', billingIssuerDetails);
   module.component('billingCustomerDetails', billingCustomerDetails);
   module.component('billingRecordDetails', billingRecordDetails);
@@ -33,5 +28,6 @@ export default module => {
   module.component('billingRecordsList', billingRecordsList);
   module.component('billingTabs', billingTabs);
   module.config(billingRoutes);
+  eventsModule(module);
   filtersModule(module);
 };
