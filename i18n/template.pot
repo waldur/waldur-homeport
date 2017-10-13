@@ -516,7 +516,7 @@ msgstr ""
 msgid "Assign package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:46
+#: app/scripts/components/openstack/openstack-tenant/actions.js:47
 msgid "Assign VPC package"
 msgstr ""
 
@@ -614,13 +614,13 @@ msgid "Backup schedule has been updated"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:66
+#: app/scripts/components/openstack/openstack-instance/module.js:65
 msgid "Backup schedules"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js:63
 #: app/scripts/components/openstack/openstack-backup/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:62
+#: app/scripts/components/openstack/openstack-instance/module.js:61
 msgid "Backups"
 msgstr ""
 
@@ -829,7 +829,7 @@ msgstr ""
 msgid "Change Request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:35
+#: app/scripts/components/openstack/openstack-tenant/actions.js:36
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:2
 msgid "Change VPC package"
 msgstr ""
@@ -891,6 +891,7 @@ msgstr ""
 
 #: app/scripts/components/billing/invoice-events-dialog.html:45
 #: app/scripts/components/customer/details/customer-report-error.html:10
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html:11
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 #: app/scripts/components/slurm/slurm-allocation-details-dialog.html:10
 msgid "Close"
@@ -1076,9 +1077,9 @@ msgstr ""
 #: app/scripts/components/offering/appstore-offering.html:19
 #: app/scripts/components/openstack/openstack-instance/actions.js:108
 #: app/scripts/components/openstack/openstack-instance/actions.js:51
-#: app/scripts/components/openstack/openstack-tenant/actions.js:25
-#: app/scripts/components/openstack/openstack-tenant/actions.js:60
-#: app/scripts/components/openstack/openstack-tenant/actions.js:80
+#: app/scripts/components/openstack/openstack-tenant/actions.js:26
+#: app/scripts/components/openstack/openstack-tenant/actions.js:61
+#: app/scripts/components/openstack/openstack-tenant/actions.js:81
 #: app/scripts/components/openstack/openstack-volume/module.js:60
 #: app/scripts/components/openstack/openstack-volume/module.js:74
 #: app/scripts/components/project/project-issues.js:31
@@ -1123,11 +1124,11 @@ msgstr ""
 msgid "Create expert request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:81
+#: app/scripts/components/openstack/openstack-tenant/actions.js:82
 msgid "Create floating IP for"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:26
+#: app/scripts/components/openstack/openstack-tenant/actions.js:27
 msgid "Create network for"
 msgstr ""
 
@@ -1158,7 +1159,7 @@ msgstr ""
 msgid "Create request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:61
+#: app/scripts/components/openstack/openstack-tenant/actions.js:62
 msgid "Create security group for"
 msgstr ""
 
@@ -1335,6 +1336,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:43
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:143
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:47
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js:30
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:30
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:25
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html:20
@@ -2117,7 +2119,7 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:70
+#: app/scripts/components/openstack/openstack-instance/module.js:69
 msgid "Internal IPs"
 msgstr ""
 
@@ -3410,10 +3412,12 @@ msgstr ""
 msgid "Please give us a moment to validate your invitation."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html:7
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:7
 msgid "Please note that request should specify tenant and provide a reason."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js:29
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:29
 msgid "Please provide a reason"
 msgstr ""
@@ -3775,7 +3779,7 @@ msgstr ""
 msgid "Provider does not comply with project policies"
 msgstr ""
 
-#: app/scripts/components/providers/create.js:74
+#: app/scripts/components/providers/create.js:75
 msgid "Provider has been created."
 msgstr ""
 
@@ -4079,6 +4083,19 @@ msgstr ""
 msgid "Request complaint"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/actions.js:86
+msgid "Request custom flavour"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html:2
+msgid "Request custom flavour for {{ $ctrl.tenant.name }}"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js:24
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js:28
+msgid "Request custom flavour for OpenStack Tenant"
+msgstr ""
+
 #: app/scripts/components/issues/create/issue-create-dialog.js:6
 #: app/scripts/components/issues/create/issue-create-dialog.js:7
 msgid "Request description"
@@ -4088,7 +4105,7 @@ msgstr ""
 msgid "Request detail"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:91
+#: app/scripts/components/openstack/openstack-tenant/actions.js:99
 msgid "Request direct access"
 msgstr ""
 
@@ -4849,9 +4866,9 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:37
 #: app/scripts/components/openstack/openstack-snapshot/module.js:45
 #: app/scripts/components/openstack/openstack-subnet/actions.js:14
-#: app/scripts/components/openstack/openstack-tenant/actions.js:21
-#: app/scripts/components/openstack/openstack-tenant/actions.js:72
-#: app/scripts/components/openstack/openstack-tenant/actions.js:76
+#: app/scripts/components/openstack/openstack-tenant/actions.js:22
+#: app/scripts/components/openstack/openstack-tenant/actions.js:73
+#: app/scripts/components/openstack/openstack-tenant/actions.js:77
 #: app/scripts/components/openstack/openstack-volume/module.js:53
 #: app/scripts/components/slurm/actions.js:13
 msgid "Synchronise"
@@ -4910,13 +4927,14 @@ msgstr ""
 msgid "Tenant has been assigned to the package."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:18
+#: app/scripts/components/openstack/openstack-tenant/actions.js:19
 msgid "Tenant has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:23
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js:31
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:31
 msgid "Tenant name"
 msgstr ""
@@ -5095,6 +5113,10 @@ msgstr ""
 
 #: app/scripts/components/customer/details/customer-report-error.js:28
 msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html:6
+msgid "To create custom flavour, please send a request to {{$ctrl.supportEmail}}."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:6
@@ -5590,7 +5612,7 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/module.js:58
+#: app/scripts/components/openstack/openstack-instance/module.js:57
 #: app/scripts/components/resource/list/resource-storage-tabs.html:5
 msgid "Volumes"
 msgstr ""
