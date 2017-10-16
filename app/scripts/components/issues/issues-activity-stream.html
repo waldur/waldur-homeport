@@ -1,47 +1,47 @@
 <div class="ibox float-e-margins">
-    <div class="ibox-title">
-        <span class="pull-right">
-            <button class="btn btn-default btn-xs">
-                <small><i class="fa fa-list"></i></small>
-                <span translate>See all</span>
-            </button>
+  <div class="ibox-title">
+    <span class="pull-right">
+      <button class="btn btn-default btn-xs">
+        <small><i class="fa fa-list"></i></small>
+        <span translate>See all</span>
+      </button>
 
-            <button class="btn btn-default btn-xs">
-                <small><i class="fa fa-refresh"></i></small>
-                <span translate>Refresh</span>
-            </button>
-        </span>
+      <button class="btn btn-default btn-xs">
+        <small><i class="fa fa-refresh"></i></small>
+        <span translate>Refresh</span>
+      </button>
+    </span>
 
-        <h5 translate>Activity stream</h5>
+    <h5 translate>Activity stream</h5>
+  </div>
+  <div class="ibox-content">
+    <div ng-if="$ctrl.loading">
+      <loading-spinner/>
     </div>
-    <div class="ibox-content">
-        <div ng-if="$ctrl.loading">
-            <loading-spinner/>
-        </div>
-        <div ng-if="!$ctrl.loading && $ctrl.items.length == 0">
-            <span translate>There is no activity yet.</span>
-        </div>
-        <div ng-if="!$ctrl.loading && $ctrl.items.length > 0"
-             id="vertical-timeline"
-             class="vertical-container dark-timeline">
-            <div class="vertical-timeline-block" ng-repeat="item in $ctrl.items">
-                <div class="vertical-timeline-icon">
-                    <img gravatar-src="item.user.email" class="b-r-xl img-sm" gravatar-size="32">
-                </div>
-                <div class="vertical-timeline-content">
-                    <p class="m-n">
-                        <a ng-click="$ctrl.openUserDialog(item.user)">
-                            {{ item.user.username }}
-                        </a>
-                        <span translate>commented on</span>
-                        <a href="issue.details">{{ item.key }}</a>
-                        {{ item.text }}
-                    </p>
-                    <span class="vertical-date small text-muted">
-                        {{ ::item.created | date:'medium' }}
-                    </span>
-                </div>
-            </div>
-        </div>
+    <div ng-if="!$ctrl.loading && $ctrl.items.length == 0">
+      <span translate>There is no activity yet.</span>
     </div>
+    <div ng-if="!$ctrl.loading && $ctrl.items.length > 0"
+      id="vertical-timeline"
+      class="vertical-container dark-timeline">
+      <div class="vertical-timeline-block" ng-repeat="item in $ctrl.items">
+        <div class="vertical-timeline-icon">
+          <img gravatar-src="item.user.email" class="b-r-xl img-sm" gravatar-size="32">
+        </div>
+        <div class="vertical-timeline-content">
+          <p class="m-n">
+            <a ng-click="$ctrl.openUserDialog(item.user)">
+              {{ item.user.username }}
+            </a>
+            <span translate>commented on</span>
+            <a href="issue.details">{{ item.key }}</a>
+            {{ item.text }}
+          </p>
+          <span class="vertical-date small text-muted">
+            {{ ::item.created | date:'medium' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

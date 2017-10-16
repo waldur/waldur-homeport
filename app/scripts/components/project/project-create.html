@@ -1,80 +1,82 @@
 <div ng-if="$ctrl.loading">
-    <loading-spinner/>
+  <loading-spinner/>
 </div>
 <div ng-if="!$ctrl.loading">
-    <div class="form-horizontal">
-        <div class="form-group">
-            <label for="projectName" class="col-sm-3 control-label">
-                <span translate>Project name</span>
-            </label>
-            <div class="col-sm-5">
-                <input type="text"
-                    id="projectName"
-                    ng-model="ProjectAdd.project.name"
-                    class="form-control">
-                <p class="help-block m-b-n-xs text-muted" translate>
-                  This name will be visible in accounting data.
-                </p>
-                <p class="text-danger"
-                   ng-repeat="error in ProjectAdd.errors.name"
-                   ng-bind="error"></p>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="projectDescription" class="col-sm-3 control-label">
-                <span translate>Project description</span>
-            </label>
-            <div class="col-sm-5">
-                <textarea id="projectDescription"
-                    class="form-control"
-                    ng-model="ProjectAdd.project.description"></textarea>
-                <p class="text-danger"
-                   ng-repeat="error in ProjectAdd.errors.description"
-                   ng-bind="error"></p>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="projectCertifications" class="col-sm-3 control-label">
-                <span translate>Certifications</span>
-                <i class="fa fa-question-circle" uib-tooltip="{{ 'Provider certification required by this project' | translate }}"></i>
-            </label>
-            <div class="col-sm-5">
-                <ui-select
-                  multiple
-                  ng-model="ProjectAdd.projectCertifications"
-                  ng-if="ProjectAdd.certifications">
-                  <ui-select-match placeholder="{{ 'Select certifications' | translate }}">
-                    {{ $item.name }}
-                  </ui-select-match>
-                  <ui-select-choices repeat="item in ProjectAdd.certifications | filter: {name: $select.search} track by item.url">
-                    <div ng-bind-html="item.name | highlight: $select.search"></div>
-                  </ui-select-choices>
-                </ui-select>
-                <div
-                  class="form-control-static"
-                  ng-if="!ProjectAdd.certifications" translate>
-                  N/A
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <p class="help-block text-danger col-sm-offset-3 col-sm-5"
-               ng-repeat="error in ProjectAdd.errors.non_field_errors"
-               ng-bind="error"></p>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-5">
-                <button class="btn btn-primary" submit-button="ProjectAdd.save()">
-                    <span translate>Add project</span>
-                </button>
-                <button class="btn btn-default" ng-click="ProjectAdd.cancel()">
-                    <span translate>Cancel</span>
-                </button>
-            </div>
-        </div>
+  <div class="form-horizontal">
+    <div class="form-group">
+      <label for="projectName" class="col-sm-3 control-label">
+        <span translate>Project name</span>
+      </label>
+      <div class="col-sm-5">
+        <input type="text"
+          id="projectName"
+          ng-model="ProjectAdd.project.name"
+          class="form-control">
+        <p class="help-block m-b-n-xs text-muted" translate>
+          This name will be visible in accounting data.
+        </p>
+        <p class="text-danger"
+          ng-repeat="error in ProjectAdd.errors.name"
+          ng-bind="error"></p>
+      </div>
     </div>
+
+    <div class="form-group">
+      <label for="projectDescription" class="col-sm-3 control-label">
+        <span translate>Project description</span>
+      </label>
+      <div class="col-sm-5">
+                <textarea id="projectDescription"
+                  class="form-control"
+                  ng-model="ProjectAdd.project.description"></textarea>
+        <p class="text-danger"
+          ng-repeat="error in ProjectAdd.errors.description"
+          ng-bind="error"></p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="projectCertifications" class="col-sm-3 control-label">
+        <span translate>Certifications</span>
+        <i class="fa fa-question-circle"
+          uib-tooltip="{{ 'Provider certification required by this project' | translate }}"></i>
+      </label>
+      <div class="col-sm-5">
+        <ui-select
+          multiple
+          ng-model="ProjectAdd.projectCertifications"
+          ng-if="ProjectAdd.certifications">
+          <ui-select-match placeholder="{{ 'Select certifications' | translate }}">
+            {{ $item.name }}
+          </ui-select-match>
+          <ui-select-choices
+            repeat="item in ProjectAdd.certifications | filter: {name: $select.search} track by item.url">
+            <div ng-bind-html="item.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+        <div
+          class="form-control-static"
+          ng-if="!ProjectAdd.certifications" translate>
+          N/A
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p class="help-block text-danger col-sm-offset-3 col-sm-5"
+        ng-repeat="error in ProjectAdd.errors.non_field_errors"
+        ng-bind="error"></p>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-5">
+        <button class="btn btn-primary" submit-button="ProjectAdd.save()">
+          <span translate>Add project</span>
+        </button>
+        <button class="btn btn-default" ng-click="ProjectAdd.cancel()">
+          <span translate>Cancel</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

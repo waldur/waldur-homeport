@@ -1,36 +1,36 @@
 <div class="modal-header">
-    <h3 class="modal-title">
-      <span translate>Select workspace</span>
-      <div class="pull-right">
-        <extension-point id="select-workspace-header-action"></extension-point>
-      </div>
-    </h3>
+  <h3 class="modal-title">
+    <span translate>Select workspace</span>
+    <div class="pull-right">
+      <extension-point id="select-workspace-header-action"></extension-point>
+    </div>
+  </h3>
 </div>
 <div class="modal-body" ng-class="{disabled: $ctrl.loadingState}">
   <div ng-if="$ctrl.loadingOrganizations">
-      <loading-spinner/>
+    <loading-spinner/>
   </div>
   <div ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length === 0" class="row">
     <div class="middle-box text-center">
-        <h3 class="font-bold m-b-lg">
-          <span translate>You do not belong to any organization yet.</span>
-        </h3>
-        <div>
-            <a class="btn btn-default" id="add-new-organization"
-              ng-click="$ctrl.createOrganization()"
-              ng-if="$ctrl.canCreateOrganization">
-              <i class="fa fa-plus"></i>
-              <span translate>Add new organization</span>
-            </a>
-        </div>
+      <h3 class="font-bold m-b-lg">
+        <span translate>You do not belong to any organization yet.</span>
+      </h3>
+      <div>
+        <a class="btn btn-default" id="add-new-organization"
+          ng-click="$ctrl.createOrganization()"
+          ng-if="$ctrl.canCreateOrganization">
+          <i class="fa fa-plus"></i>
+          <span translate>Add new organization</span>
+        </a>
+      </div>
     </div>
   </div>
   <div ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length > 0" class="row">
     <div class="col-md-6 col-xs-12 m-b-md">
       <a class="pull-right btn btn-sm btn-default"
-          id="add-new-organization"
-          ng-click="$ctrl.createOrganization()"
-          ng-if="$ctrl.canCreateOrganization">
+        id="add-new-organization"
+        ng-click="$ctrl.createOrganization()"
+        ng-if="$ctrl.canCreateOrganization">
         <i class="fa fa-plus"></i>
         <span translate>Add new</span>
         <span class="hidden-xs" translate>organization</span>
@@ -41,11 +41,11 @@
       <div class="form-group">
         <div class="search-box">
           <input id="organization-search-box"
-                 type="text"
-                 class="form-control"
-                 ng-model="$ctrl.organizationSearchInput"
-                 ng-model-options="{ debounce: 500 }"
-                 placeholder="{{ 'Filter organizations' | translate }}">
+            type="text"
+            class="form-control"
+            ng-model="$ctrl.organizationSearchInput"
+            ng-model-options="{ debounce: 500 }"
+            placeholder="{{ 'Filter organizations' | translate }}">
           <label for="organization-search-box">
             <i class="fa fa-search"></i>
           </label>
@@ -96,20 +96,20 @@
       <div class="form-group">
         <div class="search-box">
           <input id="project-search-box"
-                 type="text"
-                 class="form-control"
-                 ng-model="$ctrl.projectSearchInput"
-                 ng-model-options="{ debounce: 500 }"
-                 placeholder="{{ 'Filter projects' | translate }}">
+            type="text"
+            class="form-control"
+            ng-model="$ctrl.projectSearchInput"
+            ng-model-options="{ debounce: 500 }"
+            placeholder="{{ 'Filter projects' | translate }}">
           <label for="project-search-box">
             <i class="fa fa-search"></i>
           </label>
         </div>
       </div>
       <div ng-if="$ctrl.selectedOrganization.projects.length == 0">
-          <p class="text-center text-danger">
-            <span translate>There are no projects yet for this organization.</span>
-          </p>
+        <p class="text-center text-danger">
+          <span translate>There are no projects yet for this organization.</span>
+        </p>
       </div>
       <div ng-show="$ctrl.selectedOrganization.projects.length > 0"
         class="list-group"
@@ -130,10 +130,10 @@
   </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default" ng-click="$ctrl.gotoProfile()">
-      <span translate>Go to my profile</span>
-    </button>
-    <button class="btn btn-default" ng-click="$ctrl.dismiss()">
-      <span translate>Cancel</span>
-    </button>
+  <button class="btn btn-default" ng-click="$ctrl.gotoProfile()">
+    <span translate>Go to my profile</span>
+  </button>
+  <button class="btn btn-default" ng-click="$ctrl.dismiss()">
+    <span translate>Cancel</span>
+  </button>
 </div>

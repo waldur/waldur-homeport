@@ -28,18 +28,18 @@
 <div class="modal-footer">
   <div ng-if="$ctrl.invitationChecked()">
     <button
-        class="btn btn-primary"
-        ng-click="$ctrl.closeAcceptingNewEmail()">
+      class="btn btn-primary"
+      ng-click="$ctrl.closeAcceptingNewEmail()">
       <span translate>Yes, use invitation email</span>
     </button>
     <button class="btn btn-default"
-            ng-click="$ctrl.closeDecliningNewEmail()">
+      ng-click="$ctrl.closeDecliningNewEmail()">
       <span translate>No, continue using current email</span>
     </button>
   </div>
   <div ng-if="!$ctrl.invitationChecked()">
     <button class="btn btn-default"
-            ng-click="$ctrl.dismiss()">
+      ng-click="$ctrl.dismiss()">
       <span translate>Cancel invitation</span>
     </button>
   </div>

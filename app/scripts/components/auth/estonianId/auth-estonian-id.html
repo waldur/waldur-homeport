@@ -1,18 +1,18 @@
 <div class="m-b-sm">
-    <form action="{{ $ctrl.openidUrl }}" method="post">
-        <input type="hidden" name="openid_identifier" value="https://openid.ee/server/xrds/eid" />
-        <button type="submit" class="btn btn-eid btn-block">
-            <i class="fa fa-openid" aria-hidden="true"></i>
-            <auth-button-text mode="$ctrl.mode" provider="ID card"/>
-        </button>
-    </form>
+  <form action="{{ $ctrl.openidUrl }}" method="post">
+    <input type="hidden" name="openid_identifier" value="https://openid.ee/server/xrds/eid"/>
+    <button type="submit" class="btn btn-eid btn-block">
+      <i class="fa fa-openid" aria-hidden="true"></i>
+      <auth-button-text mode="$ctrl.mode" provider="ID card"/>
+    </button>
+  </form>
 </div>
 <div class="m-b-sm">
-    <form action="{{ $ctrl.openidUrl }}" method="post">
-        <input type="hidden" name="openid_identifier" value="https://openid.ee/server/xrds/mid" />
-        <button type="submit" class="btn btn-mid btn-block">
-            <i class="fa fa-phone-square" aria-hidden="true"></i>
-            <auth-button-text mode="$ctrl.mode" provider="Mobile ID"/>
-        </button>
-    </form>
+  <form action="{{ $ctrl.openidUrl }}" method="post">
+    <input type="hidden" name="openid_identifier" value="https://openid.ee/server/xrds/mid"/>
+    <button type="submit" class="btn btn-mid btn-block">
+      <i class="fa fa-phone-square" aria-hidden="true"></i>
+      <auth-button-text mode="$ctrl.mode" provider="Mobile ID"/>
+    </button>
+  </form>
 </div>

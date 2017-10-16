@@ -1,15 +1,18 @@
 <div class="table-responsive">
   <table class="table table-borderless">
     <tr>
-      <th translate>Name</td>
+      <th translate>Name
+      </td>
       <td>{{ $ctrl.provider.name }}</td>
     </tr>
     <tr>
-      <th translate>Type</td>
+      <th translate>Type
+      </td>
       <td>{{ $ctrl.provider.service_type }}</td>
     </tr>
     <tr ng-if="$ctrl.provider.homepage">
-      <th translate>Homepage</td>
+      <th translate>Homepage
+      </td>
       <td>
         <a ng-href="{{ $ctrl.provider.homepage }}" target="_blank">
           <i class="fa fa-external-link"></i>
@@ -18,7 +21,8 @@
       </td>
     </tr>
     <tr ng-if="$ctrl.provider.terms_of_services">
-      <th translate>Terms of Services</td>
+      <th translate>Terms of Services
+      </td>
       <td>
         <a ng-href="{{ ::$ctrl.provider.terms_of_services }}" target="_blank">
           <i class="fa fa-external-link"></i>
@@ -27,7 +31,8 @@
       </td>
     </tr>
     <tr ng-if="$ctrl.provider.certifications.length > 0">
-      <th translate>Certifications</td>
+      <th translate>Certifications
+      </td>
       <td>
         <ul class="list-inline">
           <li ng-repeat="certification in $ctrl.provider.certifications">

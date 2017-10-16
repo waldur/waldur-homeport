@@ -1,9 +1,9 @@
 <div class="team-members">
   <span ng-repeat="user in $ctrl.expertBid.team_members">
     <img class="img-circle m-r-sm img-sm"
-     gravatar-src="user.email"
-     gravatar-size="32"
-     uib-tooltip="{{ user.full_name }}">
+      gravatar-src="user.email"
+      gravatar-size="32"
+      uib-tooltip="{{ user.full_name }}">
   </span>
 </div>
 <span ng-if="$ctrl.expertBid.description">

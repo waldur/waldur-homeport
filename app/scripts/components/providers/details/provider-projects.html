@@ -2,22 +2,22 @@
   <loading-spinner/>
 </div>
 <div ng-if="!loading && !canManage" class="empty-list-message">
-    You don't have enough permission to edit projects for <strong>{{ service.name }}</strong> provider.
+  You don't have enough permission to edit projects for <strong>{{ service.name }}</strong> provider.
 </div>
 <div ng-if="!loading && canManage && !choices.length" class="empty-list-message">
-    <span translate>There are no projects yet.</span>
+  <span translate>There are no projects yet.</span>
 </div>
 <div ng-switch="service.service_type" ng-if="choices.length" ng-form name="splForm">
-    <p translate>Please select projects where usage of the provider is permitted.</p>
-    <div ng-switch-default>
-        <div multiple-select choices="choices"></div>
-    </div>
-    <div ng-switch-when="OpenStackTenant|Amazon|DigitalOcean" ng-switch-when-separator="|">
-        <provider-project-link-quotas choices="choices"></provider-project-link-quotas>
-    </div>
-    <button class="btn btn-primary center-block"
-        ng-disabled="splForm.$invalid"
-        submit-button="save()">
-        <span translate>Save</span>
-    </button>
+  <p translate>Please select projects where usage of the provider is permitted.</p>
+  <div ng-switch-default>
+    <div multiple-select choices="choices"></div>
+  </div>
+  <div ng-switch-when="OpenStackTenant|Amazon|DigitalOcean" ng-switch-when-separator="|">
+    <provider-project-link-quotas choices="choices"></provider-project-link-quotas>
+  </div>
+  <button class="btn btn-primary center-block"
+    ng-disabled="splForm.$invalid"
+    submit-button="save()">
+    <span translate>Save</span>
+  </button>
 </div>

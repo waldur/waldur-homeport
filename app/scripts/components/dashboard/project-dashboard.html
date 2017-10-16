@@ -1,14 +1,14 @@
 <div class="wrapper wrapper-content">
-    <div class="row">
-        <project-chart project="$ctrl.project"/>
-    </div>
+  <div class="row">
+    <project-chart project="$ctrl.project"/>
+  </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <project-events-feed project="$ctrl.project"/>
-        </div>
-        <div class="col-md-6" visible-if="'alerts'">
-            <project-alerts-feed project="$ctrl.project"/>
-        </div>
+  <div class="row">
+    <div class="col-md-6">
+      <project-events-feed project="$ctrl.project"/>
     </div>
+    <div class="col-md-6" visible-if="'alerts'">
+      <project-alerts-feed project="$ctrl.project"/>
+    </div>
+  </div>
 </div>

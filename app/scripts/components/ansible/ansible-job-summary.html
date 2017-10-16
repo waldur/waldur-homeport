@@ -20,7 +20,9 @@
       <dl class="dl-horizontal col-sm-12">
         <div class="m-b-xs">
           <dt translate>State</dt>
-          <dd><ansible-job-state model="$ctrl.job"></ansible-job-state></dd>
+          <dd>
+            <ansible-job-state model="$ctrl.job"></ansible-job-state>
+          </dd>
         </div>
 
         <div class="m-b-xs">
@@ -45,7 +47,9 @@
 
         <div class="m-b-xs">
           <dt translate>Parameters</dt>
-          <dd><pre>{{ $ctrl.job.arguments | json }}</pre></dd>
+          <dd>
+            <pre>{{ $ctrl.job.arguments | json }}</pre>
+          </dd>
         </div>
       </dl>
     </div>

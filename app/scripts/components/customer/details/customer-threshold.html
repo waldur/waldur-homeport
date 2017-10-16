@@ -2,23 +2,24 @@
   <div class="form-group">
     <label for="threshold" class="control-label" ng-class="{'col-sm-3': $ctrl.field.horizontal}">
       <span translate>Cost threshold</span>
-      <helpicon help-text="{{ 'Upper bound of monthly resource cost provisioned from shared providers.' | translate }}"></helpicon>
+      <helpicon
+        help-text="{{ 'Upper bound of monthly resource cost provisioned from shared providers.' | translate }}"></helpicon>
     </label>
     <div ng-class="{'col-sm-9 col-lg-3': $ctrl.field.horizontal}">
       <div class="input-group">
         <input id="threshold" type="number" class="form-control" required name="threshold"
-               ng-change="$ctrl.thresholdChanged()"
-               ng-model="$ctrl.model.priceEstimate.threshold" ng-min="0">
+          ng-change="$ctrl.thresholdChanged()"
+          ng-model="$ctrl.model.priceEstimate.threshold" ng-min="0">
         <div class="input-group-addon">
           {{ ::$ctrl.currency }}
         </div>
       </div>
       <p class="help-block text-danger"
-         ng-if="$ctrl.thresholdForm.threshold.$error.min">
+        ng-if="$ctrl.thresholdForm.threshold.$error.min">
         <span translate>Minimal valid value is 0</span>
       </p>
       <p class="help-block text-danger"
-         ng-if="$ctrl.thresholdForm.threshold.$error.exceedsThreshold">
+        ng-if="$ctrl.thresholdForm.threshold.$error.exceedsThreshold">
         <span translate>Estimated cost exceeds threshold</span>
       </p>
     </div>

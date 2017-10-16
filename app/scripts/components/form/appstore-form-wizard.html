@@ -2,12 +2,12 @@
   <div class="steps clearfix">
     <ul role="tablist">
       <li role="tab"
-          ng-class="$ctrl.getCurrentStepClass($index)"
-          ng-repeat="step in $ctrl.steps track by $index"
-          aria-disabled="{{ !$ctrl.selected($index) }}"
-          aria-selected="{{ $ctrl.selected($index) }}">
+        ng-class="$ctrl.getCurrentStepClass($index)"
+        ng-repeat="step in $ctrl.steps track by $index"
+        aria-disabled="{{ !$ctrl.selected($index) }}"
+        aria-selected="{{ $ctrl.selected($index) }}">
         <a id="form-t-{{ $index }}"
-           aria-controls="form-p-{{ $index }}">
+          aria-controls="form-p-{{ $index }}">
           <span class="number">{{ $index+1 }}. </span>{{ ::step.name }}
         </a>
       </li>
@@ -15,13 +15,13 @@
   </div>
   <div class="content clearfix">
     <fieldset role="tabpanel" class="p-md"
-              ng-form="$ctrl.form{{ $index }}"
-              ng-repeat="step in $ctrl.steps"
-              id="form-p-{{ $index }}"
-              aria-labelledby="form-h-{{ $index }}"
-              aria-hidden="{{ !$ctrl.selected($index) }}"
-              ng-if="$ctrl.selected($index)"
-              ng-class="{'current': $ctrl.selected($index)}">
+      ng-form="$ctrl.form{{ $index }}"
+      ng-repeat="step in $ctrl.steps"
+      id="form-p-{{ $index }}"
+      aria-labelledby="form-h-{{ $index }}"
+      aria-hidden="{{ !$ctrl.selected($index) }}"
+      ng-if="$ctrl.selected($index)"
+      ng-class="{'current': $ctrl.selected($index)}">
       <h2>{{ ::step.title }}</h2>
       <div class="row">
         <div class="col-lg-8" ng-init="formIndex = $index">

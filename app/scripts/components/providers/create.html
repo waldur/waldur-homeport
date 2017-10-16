@@ -1,166 +1,166 @@
 <div class="form-horizontal">
-    <div class="form-group" ng-if="ServiceAdd.loadingCustomer">
+  <div class="form-group" ng-if="ServiceAdd.loadingCustomer">
+    <div class="col-sm-offset-3 col-sm-4">
+      <loading-spinner/>
+    </div>
+  </div>
+
+  <div ng-if="!ServiceAdd.loadingCustomer">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">
+        <span translate>Provider type</span>
+      </label>
+      <div class="col-sm-4">
+        <ui-select
+          ng-model="ServiceAdd.serviceChoice"
+          theme="bootstrap">
+          <ui-select-match placeholder="{{ 'Select provider type...' | translate }}">
+            <provider-icon type="$select.selected.name" size="img-xs"/>
+            {{ $select.selected.name }}
+          </ui-select-match>
+          <ui-select-choices repeat="service in ServiceAdd.choices" group-by="'category'">
+            <provider-icon type="service.name" size="img-xs"/>
+            {{ service.name }}
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
+    <div class="form-group" ng-if="ServiceAdd.loadingService">
+      <div class="col-sm-offset-3 col-sm-4">
+        <loading-spinner/>
+      </div>
+    </div>
+
+    <div ng-if="!ServiceAdd.loadingService">
+      <div class="form-group" visible-if="'help'">
         <div class="col-sm-offset-3 col-sm-4">
-            <loading-spinner/>
+          <a ui-sref="help.details({name: ServiceAdd.model.name})"
+            target="_blank">
+            <i class="fa fa-question-circle"></i>
+            <span translate>How to obtain credentials</span>
+          </a>
         </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': ServiceAdd.errors.name}">
+        <label for="serviceName" class="col-sm-3 control-label">
+          <span translate>Provider name</span>
+        </label>
+        <div class="col-sm-4">
+          <input type="text"
+            ng-model="ServiceAdd.model.serviceName"
+            id="serviceName"
+            class="form-control">
+          <p class="help-block text-danger"
+            ng-repeat="error in ServiceAdd.errors.name"
+            ng-bind="error"></p>
+        </div>
+      </div>
+
+      <div class="form-group"
+        ng-repeat="option in ServiceAdd.model.options"
+        ng-class="{'has-error': ServiceAdd.errors[option.key]}">
+        <label ng-if="option.type!='boolean'"
+          for="{{ ServiceAdd.model.name }}_{{ option.key }}"
+          class="col-sm-3 control-label">
+          <field-label field="option"></field-label>
+        </label>
+
+        <div ng-if="option.type == 'boolean'"
+          class="col-sm-offset-3 col-sm-4 checkbox">
+          <label>
+            <input type="checkbox" ng-model="option.value"/>
+            {{ option.label | translate }}
+            <small class="form-text text-muted" ng-bind="option.help_text"></small>
+          </label>
+        </div>
+
+        <div class="col-sm-4" ng-if="option.type != 'boolean'">
+          <div ng-if="option.secret" class="has-password">
+            <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
+              type="{{showSecret ? 'text' : 'password'}}"
+              autocomplete="new-password"
+              ng-model="option.value"
+              class="form-control">
+            <a class="icon password-icon"
+              ng-class="{'fa-eye-slash': showSecret, 'fa-eye': !showSecret}"
+              title="{{showSecret ? 'Hide' : 'Show'}}"
+              ng-click="showSecret=!showSecret">
+            </a>
+          </div>
+          <div ng-if="!option.secret">
+            <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
+              type="text"
+              ng-if="option.type == 'string'"
+              ng-model="option.value"
+              placeholder="{{ option.placeholder }}"
+              class="form-control">
+
+            <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
+              type="text"
+              ng-if="option.type == 'url'"
+              ng-model="option.value"
+              class="form-control">
+
+            <div ng-if="option.type == 'file upload'">
+              {{ ServiceAdd.getFilename(option.value) || 'None' }}
+              <a class="btn btn-sm btn-primary"
+                ngf-select
+                ngf-accept="'application/x-x509-ca-cert'"
+                ng-model="option.value">
+                <i class="fa fa-upload"></i>
+                <span translate>Browse</span>
+              </a>
+            </div>
+
+            <select id="{{ ServiceAdd.model.name }}_{{ option.key }}"
+              ng-if="option.type == 'choice'"
+              ng-model="option.value"
+              ng-init="option.value=option.choices[0].value"
+              ng-options="item.value as item.display_name for item in option.choices"
+              class="form-control">
+            </select>
+
+            <small class="form-text text-muted" ng-bind="option.help_text"></small>
+
+            <p class="text-danger"
+              ng-repeat="error in ServiceAdd.errors[option.key]"
+              ng-bind="error"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group"
+        ng-if="ServiceAdd.errors.non_field_errors">
+        <p class="text-danger col-sm-offset-3 col-sm-4"
+          ng-repeat="error in ServiceAdd.errors.non_field_errors"
+          ng-bind="error">
+        </p>
+      </div>
+
+      <div class="form-group"
+        ng-if="ServiceAdd.isDisabled()">
+        <p class="help-block col-sm-offset-3 col-sm-4" translate>
+          Not all required fields have been entered.
+        </p>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-4" ng-show="ServiceAdd.model">
+          <button
+            class="btn btn-primary"
+            ng-class="{'disabled': ServiceAdd.isDisabled()}"
+            submit-button="ServiceAdd.save()">
+            <span translate>Add provider</span>
+          </button>
+          <button
+            class="btn btn-default"
+            ng-click="ServiceAdd.cancel()">
+            <span translate>Cancel</span>
+          </button>
+        </div>
+      </div>
     </div>
-
-    <div ng-if="!ServiceAdd.loadingCustomer">
-        <div class="form-group">
-            <label class="col-sm-3 control-label">
-              <span translate>Provider type</span>
-            </label>
-            <div class="col-sm-4">
-              <ui-select 
-                ng-model="ServiceAdd.serviceChoice"
-                theme="bootstrap">
-                <ui-select-match placeholder="{{ 'Select provider type...' | translate }}">
-                    <provider-icon type="$select.selected.name" size="img-xs"/>
-                    {{ $select.selected.name }}
-                </ui-select-match>
-                <ui-select-choices repeat="service in ServiceAdd.choices" group-by="'category'">
-                    <provider-icon type="service.name" size="img-xs"/>
-                    {{ service.name }}
-                </ui-select-choices>
-              </ui-select>
-            </div>
-        </div>
-
-        <div class="form-group" ng-if="ServiceAdd.loadingService">
-            <div class="col-sm-offset-3 col-sm-4">
-                <loading-spinner/>
-            </div>
-        </div>
-
-        <div ng-if="!ServiceAdd.loadingService">
-            <div class="form-group" visible-if="'help'">
-                <div class="col-sm-offset-3 col-sm-4">
-                    <a ui-sref="help.details({name: ServiceAdd.model.name})"
-                       target="_blank">
-                       <i class="fa fa-question-circle"></i>
-                       <span translate>How to obtain credentials</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': ServiceAdd.errors.name}">
-                <label for="serviceName" class="col-sm-3 control-label">
-                  <span translate>Provider name</span>
-                </label>
-                <div class="col-sm-4">
-                    <input type="text"
-                        ng-model="ServiceAdd.model.serviceName"
-                        id="serviceName"
-                        class="form-control">
-                    <p class="help-block text-danger" 
-                      ng-repeat="error in ServiceAdd.errors.name"
-                      ng-bind="error"></p>
-                </div>
-            </div>
-
-            <div class="form-group"
-                ng-repeat="option in ServiceAdd.model.options"
-                ng-class="{'has-error': ServiceAdd.errors[option.key]}">
-                <label ng-if="option.type!='boolean'"
-                    for="{{ ServiceAdd.model.name }}_{{ option.key }}"
-                    class="col-sm-3 control-label">
-                    <field-label field="option"></field-label>
-                </label>
-
-                <div ng-if="option.type == 'boolean'"
-                    class="col-sm-offset-3 col-sm-4 checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="option.value"/>
-                        {{ option.label | translate }}
-                        <small class="form-text text-muted" ng-bind="option.help_text"></small>
-                    </label>
-                </div>
-
-                <div class="col-sm-4" ng-if="option.type != 'boolean'">
-                    <div ng-if="option.secret" class="has-password">
-                        <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
-                               type="{{showSecret ? 'text' : 'password'}}"
-                               autocomplete="new-password"
-                               ng-model="option.value"
-                               class="form-control">
-                        <a class="icon password-icon"
-                           ng-class="{'fa-eye-slash': showSecret, 'fa-eye': !showSecret}"
-                           title="{{showSecret ? 'Hide' : 'Show'}}"
-                           ng-click="showSecret=!showSecret">
-                        </a>
-                    </div>
-                    <div ng-if="!option.secret">
-                        <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
-                               type="text"
-                               ng-if="option.type == 'string'"
-                               ng-model="option.value"
-                               placeholder="{{ option.placeholder }}"
-                               class="form-control">
-
-                        <input id="{{ ServiceAdd.model.name }}_{{ option.key }}"
-                               type="text"
-                               ng-if="option.type == 'url'"
-                               ng-model="option.value"
-                               class="form-control">
-
-                        <div ng-if="option.type == 'file upload'">
-                            {{ ServiceAdd.getFilename(option.value) || 'None' }}
-                            <a class="btn btn-sm btn-primary"
-                               ngf-select
-                               ngf-accept="'application/x-x509-ca-cert'"
-                               ng-model="option.value">
-                               <i class="fa fa-upload"></i>
-                               <span translate>Browse</span>
-                            </a>
-                        </div>
-
-                        <select id="{{ ServiceAdd.model.name }}_{{ option.key }}"
-                                ng-if="option.type == 'choice'"
-                                ng-model="option.value"
-                                ng-init="option.value=option.choices[0].value"
-                                ng-options="item.value as item.display_name for item in option.choices"
-                                class="form-control">
-                        </select>
-
-                        <small class="form-text text-muted" ng-bind="option.help_text"></small>
-
-                        <p class="text-danger"
-                            ng-repeat="error in ServiceAdd.errors[option.key]"
-                            ng-bind="error"></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group"
-                ng-if="ServiceAdd.errors.non_field_errors">
-                <p class="text-danger col-sm-offset-3 col-sm-4"
-                   ng-repeat="error in ServiceAdd.errors.non_field_errors"
-                   ng-bind="error">
-                </p>
-            </div>
-
-            <div class="form-group"
-                ng-if="ServiceAdd.isDisabled()">
-                <p class="help-block col-sm-offset-3 col-sm-4" translate>
-                    Not all required fields have been entered.
-                </p>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-4" ng-show="ServiceAdd.model">
-                    <button
-                       class="btn btn-primary"
-                       ng-class="{'disabled': ServiceAdd.isDisabled()}"
-                       submit-button="ServiceAdd.save()">
-                       <span translate>Add provider</span>
-                    </button>
-                    <button
-                       class="btn btn-default"
-                       ng-click="ServiceAdd.cancel()">
-                       <span translate>Cancel</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

@@ -1,14 +1,14 @@
 <div ng-if="$ctrl.resource.quotas.length === 0">
-    <div class="row text-center" translate>You have no quotas yet.</div>
+  <div class="row text-center" translate>You have no quotas yet.</div>
 </div>
 <div class="provider-quotas" ng-if="$ctrl.resource.quotas.length > 0">
-    <div class="details-table__row" ng-repeat="quota in $ctrl.resource.quotas | orderBy:'name'">
-        <div class="details-table__key">
-            {{ ::quota.name | quotaName }}:
-        </div>
-        <div class="details-table__value">
-            {{ quota.usage | quotaValue:quota.name }} <span translate>of</span>
-            {{ quota.limit | quotaValue:quota.name }}
-        </div>
+  <div class="details-table__row" ng-repeat="quota in $ctrl.resource.quotas | orderBy:'name'">
+    <div class="details-table__key">
+      {{ ::quota.name | quotaName }}:
     </div>
+    <div class="details-table__value">
+      {{ quota.usage | quotaValue:quota.name }} <span translate>of</span>
+      {{ quota.limit | quotaValue:quota.name }}
+    </div>
+  </div>
 </div>

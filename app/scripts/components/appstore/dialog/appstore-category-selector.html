@@ -7,10 +7,10 @@
       <div class="form-group" ng-if="group.items.length > 4">
         <div class="search-box">
           <input type="text"
-                 class="form-control"
-                 ng-model="$ctrl.categorySearchInput"
-                 ng-model-options="{ debounce: 500 }"
-                 placeholder="{{ 'Search by name' | translate }}">
+            class="form-control"
+            ng-model="$ctrl.categorySearchInput"
+            ng-model-options="{ debounce: 500 }"
+            placeholder="{{ 'Search by name' | translate }}">
           <label for="project-search-box">
             <i class="fa fa-search"></i>
           </label>
@@ -26,8 +26,9 @@
             ng-class="{disabled: category.disabled}">
             <img class="category-icon" ng-src="{{::category.image}}" ng-if="::category.image">
             <span class="pull-right" ng-if="category.price">
-              <i uib-tooltip="{{'Price per month (VAT not included)' | translate }}" tooltip-placement="left" class="fa fa-info-circle"></i>
-               <small>{{category.price | defaultCurrency}}</small>
+              <i uib-tooltip="{{'Price per month (VAT not included)' | translate }}" tooltip-placement="left"
+                class="fa fa-info-circle"></i>
+              <small>{{category.price | defaultCurrency}}</small>
             </span>
             <i class="category-icon fa" ng-class="::category.icon" ng-if="::!category.image"></i>
             <h4 class="list-group-item-heading m-l-xl elipsis">
@@ -41,7 +42,7 @@
             <p class="list-group-item-text m-l-xl" ng-bind="::category.description"></p>
           </button>
         </div>
-       </div>
+      </div>
     </div>
   </uib-tab>
 </uib-tabset>

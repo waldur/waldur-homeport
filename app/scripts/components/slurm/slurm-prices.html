@@ -7,20 +7,20 @@
 <table class="table table-bordered" ng-if="!$ctrl.loading && $ctrl.package">
   <tbody>
     <tr>
-        <td><strong translate>Price package name</strong></td>
-        <td>{{ $ctrl.package.name }}</td>
+      <td><strong translate>Price package name</strong></td>
+      <td>{{ $ctrl.package.name }}</td>
     </tr>
     <tr>
-        <td><strong translate>Price of CPU hour</strong></td>
-        <td>{{ $ctrl.package.cpu_price | defaultCurrency }}</td>
+      <td><strong translate>Price of CPU hour</strong></td>
+      <td>{{ $ctrl.package.cpu_price | defaultCurrency }}</td>
     </tr>
     <tr>
-        <td><strong translate>Price of GPU hour</strong></td>
-        <td>{{ $ctrl.package.gpu_price | defaultCurrency }}</td>
+      <td><strong translate>Price of GPU hour</strong></td>
+      <td>{{ $ctrl.package.gpu_price | defaultCurrency }}</td>
     </tr>
     <tr>
-        <td><strong translate>Price of RAM GB</strong></td>
-        <td>{{ $ctrl.package.ram_price | defaultCurrency }}</td>
+      <td><strong translate>Price of RAM GB</strong></td>
+      <td>{{ $ctrl.package.ram_price | defaultCurrency }}</td>
     </tr>
   </tbody>
 </table>
