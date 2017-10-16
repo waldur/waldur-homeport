@@ -17,10 +17,10 @@
       <div class="checkbox">
         <label>
           <input type="checkbox"
-             ng-disabled="!$ctrl.canChangeRole || !$ctrl.canManageOwner"
-             ng-model="$ctrl.userModel.role"
-             ng-true-value="'owner'"
-             ng-false-value="''">
+            ng-disabled="!$ctrl.canChangeRole || !$ctrl.canManageOwner"
+            ng-model="$ctrl.userModel.role"
+            ng-true-value="'owner'"
+            ng-false-value="''">
           </input>
           {{ ::$ctrl.roles.owner }}
           <helpicon
@@ -42,29 +42,29 @@
       <div slimscroll="{height:150}">
         <table class="table">
           <thead>
-          <tr>
-            <td translate>Project name</td>
-            <td translate>Role</td>
-            <td class="col-xs-4" translate>Expiration time</td>
-          </tr>
+            <tr>
+              <td translate>Project name</td>
+              <td translate>Role</td>
+              <td class="col-xs-4" translate>Expiration time</td>
+            </tr>
           </thead>
           <tbody>
-          <tr ng-repeat="project in $ctrl.projects track by project.uuid">
-            <td class="align-middle">
-              {{ ::project.name }}
-            </td>
-            <td>
-              <action-field-select
-                model="project"
-                field="$ctrl.roleField"
-                disable-input="!$ctrl.canChangeRole"></action-field-select>
-            </td>
-            <td>
-              <action-field-datetime
-                model="project"
-                field="$ctrl.projectExpirationTimeField"/>
-            </td>
-          </tr>
+            <tr ng-repeat="project in $ctrl.projects track by project.uuid">
+              <td class="align-middle">
+                {{ ::project.name }}
+              </td>
+              <td>
+                <action-field-select
+                  model="project"
+                  field="$ctrl.roleField"
+                  disable-input="!$ctrl.canChangeRole"></action-field-select>
+              </td>
+              <td>
+                <action-field-datetime
+                  model="project"
+                  field="$ctrl.projectExpirationTimeField"/>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

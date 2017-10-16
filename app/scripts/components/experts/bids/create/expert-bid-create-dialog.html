@@ -27,7 +27,7 @@
           </ui-select-choices>
         </ui-select>
         <div class="help-block text-danger"
-           ng-if="($ctrl.BidForm.$submitted || $ctrl.BidForm.team.$touched) && $ctrl.BidForm.team.$error.required">
+          ng-if="($ctrl.BidForm.$submitted || $ctrl.BidForm.team.$touched) && $ctrl.BidForm.team.$error.required">
           <span translate>You did not enter a field.</span>
         </div>
       </div>
@@ -46,8 +46,8 @@
           <a ng-repeat="user in $ctrl.selectedProjectUsers"
             uib-tooltip="{{ user.full_name }}">
             <img class="img-circle m-r-sm img-sm"
-                 gravatar-src="user.email"
-                 gravatar-size="32">
+              gravatar-src="user.email"
+              gravatar-size="32">
           </a>
         </div>
       </div>

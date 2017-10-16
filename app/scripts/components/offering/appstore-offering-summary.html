@@ -1,5 +1,5 @@
 <div ng-if="$ctrl.loading">
-    <loading-spinner/>
+  <loading-spinner/>
 </div>
 <div class="ibox" ng-if="!$ctrl.loading">
   <div class="ibox-title">
@@ -10,21 +10,21 @@
   <div class="ibox-content">
     <table class="table table-bordered">
       <tbody>
-      <tr>
-        <td>
-          <price-tooltip></price-tooltip>
-          <strong translate>Price per month</strong>
-        </td>
-        <td>{{ $ctrl.model.price | defaultCurrency }}</td>
-      </tr>
-      <tr>
-        <td><strong translate>Invoiced to</strong></td>
-        <td>{{ $ctrl.customer.name }}</td>
-      </tr>
-      <tr>
-        <td><strong translate>Project</strong></td>
-        <td>{{ $ctrl.project.name }}</td>
-      </tr>
+        <tr>
+          <td>
+            <price-tooltip></price-tooltip>
+            <strong translate>Price per month</strong>
+          </td>
+          <td>{{ $ctrl.model.price | defaultCurrency }}</td>
+        </tr>
+        <tr>
+          <td><strong translate>Invoiced to</strong></td>
+          <td>{{ $ctrl.customer.name }}</td>
+        </tr>
+        <tr>
+          <td><strong translate>Project</strong></td>
+          <td>{{ $ctrl.project.name }}</td>
+        </tr>
       </tbody>
     </table>
   </div>

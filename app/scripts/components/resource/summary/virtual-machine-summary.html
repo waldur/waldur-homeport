@@ -2,7 +2,8 @@
 
 <div class="m-b-xs" ng-if="::$ctrl.resource.summary">
   <dt>
-    <span translate>Summary</span>:</dt>
+    <span translate>Summary</span>:
+  </dt>
   <dd>
     {{ ::$ctrl.resource.summary }}
   </dd>
@@ -14,10 +15,10 @@
   </dt>
   <dd>
     <a ng-if="$ctrl.resource.access_info_url"
-       href="{{ $ctrl.resource.access_info_url }}"
-       target="_blank">
-        <i class="fa fa-external-link"></i>
-        {{ $ctrl.resource.access_info_text }}
+      href="{{ $ctrl.resource.access_info_url }}"
+      target="_blank">
+      <i class="fa fa-external-link"></i>
+      {{ $ctrl.resource.access_info_text }}
     </a>
     <span ng-if="!$ctrl.resource.access_info_url">
       {{ $ctrl.resource.access_info_text }}

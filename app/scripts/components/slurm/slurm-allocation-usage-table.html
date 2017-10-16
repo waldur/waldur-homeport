@@ -5,7 +5,8 @@
         <uib-tab ng-repeat="chart in $ctrl.charts" index="$index">
           <uib-tab-heading>{{ chart.name }}</uib-tab-heading>
           <div class="panel-body" ng-if="active==$index">
-            <slurm-allocation-usage-chart items="chart.items"/></slurm-allocation-usage-chart>
+            <slurm-allocation-usage-chart items="chart.items"/>
+            </slurm-allocation-usage-chart>
           </div>
         </uib-tab>
       </uib-tabset>

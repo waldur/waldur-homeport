@@ -1,129 +1,130 @@
 <div ng-if="ManageController.loading">
-    <loading-spinner/>
+  <loading-spinner/>
 </div>
 
 <div ng-if="!ManageController.loading">
-    <div class="panel panel-default">
-        <div class="panel-heading" translate>Organization details</div>
-        <div class="panel-body">
-            <dl class="dl-horizontal">
-                <dt><span translate>Name</span>:</dt>
-                <dd>{{::ManageController.customer.name}}</dd>
-                <span ng-if="::ManageController.customer.native_name">
-                    <dt><span translate>Native name</span>:</dt>
-                    <dd>{{::ManageController.customer.native_name }}</dd>
-                </span>
+  <div class="panel panel-default">
+    <div class="panel-heading" translate>Organization details</div>
+    <div class="panel-body">
+      <dl class="dl-horizontal">
+        <dt><span translate>Name</span>:</dt>
+        <dd>{{::ManageController.customer.name}}</dd>
+        <span ng-if="::ManageController.customer.native_name">
+          <dt><span translate>Native name</span>:</dt>
+          <dd>{{::ManageController.customer.native_name }}</dd>
+        </span>
 
-                <span ng-if="::ManageController.customer.abbreviation">
-                    <dt><span translate>Abbreviation</span>:</dt>
-                    <dd>{{::ManageController.customer.abbreviation}}</dd>
-                </span>
+        <span ng-if="::ManageController.customer.abbreviation">
+          <dt><span translate>Abbreviation</span>:</dt>
+          <dd>{{::ManageController.customer.abbreviation}}</dd>
+        </span>
 
-                <span ng-if="::ManageController.customer.registration_code">
-                    <dt><span translate>Registry code</span>:</dt>
-                    <dd>{{::ManageController.customer.registration_code}}</dd>
-                </span>
+        <span ng-if="::ManageController.customer.registration_code">
+          <dt><span translate>Registry code</span>:</dt>
+          <dd>{{::ManageController.customer.registration_code}}</dd>
+        </span>
 
-                <span ng-if="::ManageController.accountingStartDate">
-                    <dt><span translate>Accounting start date</span>:</dt>
-                    <dd>{{::ManageController.accountingStartDate | dateTime}}</dd>
-                </span>
+        <span ng-if="::ManageController.accountingStartDate">
+          <dt><span translate>Accounting start date</span>:</dt>
+          <dd>{{::ManageController.accountingStartDate | dateTime}}</dd>
+        </span>
 
-                <span ng-if="::ManageController.customer.agreement_number">
-                    <dt><span translate>Agreement number</span>:</dt>
-                    <dd>{{::ManageController.customer.agreement_number}}</dd>
-                </span>
+        <span ng-if="::ManageController.customer.agreement_number">
+          <dt><span translate>Agreement number</span>:</dt>
+          <dd>{{::ManageController.customer.agreement_number}}</dd>
+        </span>
 
-                <span ng-if="::ManageController.customer.contact_details">
-                    <dt><span translate>Address</span>:</dt>
-                    <dd>{{::ManageController.customer.contact_details}}</dd>
-                </span>
+        <span ng-if="::ManageController.customer.contact_details">
+          <dt><span translate>Address</span>:</dt>
+          <dd>{{::ManageController.customer.contact_details}}</dd>
+        </span>
 
-                <span ng-if="::ManageController.customer.email">
-                    <dt><span translate>Contact e-mail</span>:</dt>
-                    <dd>{{::ManageController.customer.email}}</dd>
-                </span>
+        <span ng-if="::ManageController.customer.email">
+          <dt><span translate>Contact e-mail</span>:</dt>
+          <dd>{{::ManageController.customer.email}}</dd>
+        </span>
 
-                <span ng-if="::ManageController.customer.phone_number">
-                    <dt><span translate>Contact phone</span>:</dt>
-                    <dd>{{::ManageController.customer.phone_number}}</dd>
-                </span>
+        <span ng-if="::ManageController.customer.phone_number">
+          <dt><span translate>Contact phone</span>:</dt>
+          <dd>{{::ManageController.customer.phone_number}}</dd>
+        </span>
 
-                <span ng-if="::ManageController.customer.vat_code">
-                    <dt><span translate>VAT code</span>:</dt>
-                    <dd>{{::ManageController.customer.vat_code}}</dd>
-                </span>
+        <span ng-if="::ManageController.customer.vat_code">
+          <dt><span translate>VAT code</span>:</dt>
+          <dd>{{::ManageController.customer.vat_code}}</dd>
+        </span>
 
-                <span ng-if="::ManageController.customer.access_subnets && ManageController.organizationSubnetsVisible">
-                    <dt>
-                        <helpicon help-text="{{ 'Subnets from where connection to self-service is allowed.' | translate }}"></helpicon>
-                        <span translate>Subnets</span>:
-                    </dt>
-                    <dd>{{::ManageController.customer.access_subnets}}</dd>
-                </span>
-            </dl>
-        </div>
+        <span ng-if="::ManageController.customer.access_subnets && ManageController.organizationSubnetsVisible">
+          <dt>
+            <helpicon
+              help-text="{{ 'Subnets from where connection to self-service is allowed.' | translate }}"></helpicon>
+            <span translate>Subnets</span>:
+          </dt>
+          <dd>{{::ManageController.customer.access_subnets}}</dd>
+        </span>
+      </dl>
     </div>
-    <div class="panel panel-default" ng-if="ManageController.paymentDetails">
-        <div class="panel-heading">Payment details</div>
-        <div class="panel-body">
-            <dl class="dl-horizontal">
-                <dt><span translate>Company</span>:</dt>
-                <dd>{{::ManageController.paymentDetails.company}}</dd>
+  </div>
+  <div class="panel panel-default" ng-if="ManageController.paymentDetails">
+    <div class="panel-heading">Payment details</div>
+    <div class="panel-body">
+      <dl class="dl-horizontal">
+        <dt><span translate>Company</span>:</dt>
+        <dd>{{::ManageController.paymentDetails.company}}</dd>
 
-                <dt><span translate>Address</span>:</dt>
-                <dd>{{::ManageController.paymentDetails.address}}</dd>
+        <dt><span translate>Address</span>:</dt>
+        <dd>{{::ManageController.paymentDetails.address}}</dd>
 
-                <dt><span translate>Country</span>:</dt>
-                <dd>{{::ManageController.paymentDetails.country}}</dd>
+        <dt><span translate>Country</span>:</dt>
+        <dd>{{::ManageController.paymentDetails.country}}</dd>
 
-                <dt><span translate>Email</span>:</dt>
-                <dd>{{::ManageController.paymentDetails.email}}</dd>
+        <dt><span translate>Email</span>:</dt>
+        <dd>{{::ManageController.paymentDetails.email}}</dd>
 
-                <dt><span translate>Postal</span>:</dt>
-                <dd>{{::ManageController.paymentDetails.postal}}</dd>
+        <dt><span translate>Postal</span>:</dt>
+        <dd>{{::ManageController.paymentDetails.postal}}</dd>
 
-                <dt><span translate>Phone</span>:</dt>
-                <dd>{{::ManageController.paymentDetails.phone}}</dd>
+        <dt><span translate>Phone</span>:</dt>
+        <dd>{{::ManageController.paymentDetails.phone}}</dd>
 
-                <dt><span translate>Bank</span>:</dt>
-                <dd>{{::ManageController.paymentDetails.bank}}</dd>
+        <dt><span translate>Bank</span>:</dt>
+        <dd>{{::ManageController.paymentDetails.bank}}</dd>
 
-                <dt><span translate>Account</span>:</dt>
-                <dd>{{::ManageController.paymentDetails.account}}</dd>
+        <dt><span translate>Account</span>:</dt>
+        <dd>{{::ManageController.paymentDetails.account}}</dd>
 
-                <dt><span translate>VAT rate</span>:</dt>
-                <dd>{{::ManageController.paymentDetails.default_tax_percent}}</dd>
-            </dl>
-        </div>
+        <dt><span translate>VAT rate</span>:</dt>
+        <dd>{{::ManageController.paymentDetails.default_tax_percent}}</dd>
+      </dl>
     </div>
-    <customer-policies
-        ng-if="ManageController.canUpdateCustomerPolicies"
-        customer="ManageController.customer"
-        can-update-quota="ManageController.canUpdateQuota"></customer-policies>
-    <expert-provider-details
-        visible-if="'experts'"
-        ng-if="ManageController.canRegisterExpertProvider"
-        customer="ManageController.customer"></expert-provider-details>
-    <div class="panel panel-default">
-        <div class="panel-heading" translate>Organization actions</div>
-        <div class="panel-body">
-            <a ng-click="ManageController.reportError()" class="btn btn-success">
-                <i class="fa fa-bug"></i>
-                <span translate>Report incorrect data</span>
-            </a>
-        </div>
-        <div class="panel-body" ng-if="ManageController.canDeleteCustomer">
-            <p translate>You can remove this organization by pressing the button</p>
-            <a ng-click="ManageController.removeCustomer()" class="btn btn-danger">
-                <i class="fa fa-trash"></i>
-                <span translate>Remove organization</span>
-            </a>
-        </div>
-        <div class="panel-body" ng-if="!ManageController.canDeleteCustomer">
-            <h3>
-                <span translate>Only staff can remove organization.</span>
-            </h3>
-        </div>
+  </div>
+  <customer-policies
+    ng-if="ManageController.canUpdateCustomerPolicies"
+    customer="ManageController.customer"
+    can-update-quota="ManageController.canUpdateQuota"></customer-policies>
+  <expert-provider-details
+    visible-if="'experts'"
+    ng-if="ManageController.canRegisterExpertProvider"
+    customer="ManageController.customer"></expert-provider-details>
+  <div class="panel panel-default">
+    <div class="panel-heading" translate>Organization actions</div>
+    <div class="panel-body">
+      <a ng-click="ManageController.reportError()" class="btn btn-success">
+        <i class="fa fa-bug"></i>
+        <span translate>Report incorrect data</span>
+      </a>
     </div>
+    <div class="panel-body" ng-if="ManageController.canDeleteCustomer">
+      <p translate>You can remove this organization by pressing the button</p>
+      <a ng-click="ManageController.removeCustomer()" class="btn btn-danger">
+        <i class="fa fa-trash"></i>
+        <span translate>Remove organization</span>
+      </a>
+    </div>
+    <div class="panel-body" ng-if="!ManageController.canDeleteCustomer">
+      <h3>
+        <span translate>Only staff can remove organization.</span>
+      </h3>
+    </div>
+  </div>
 </div>

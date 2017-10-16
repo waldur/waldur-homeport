@@ -2,17 +2,17 @@
   <loading-spinner/>
 </div>
 <div ng-if="!$ctrl.loading && !$ctrl.canManage" class="empty-list-message" translate="">
-    You don't have enough permission to edit providers for current project.
+  You don't have enough permission to edit providers for current project.
 </div>
 <div ng-if="!$ctrl.loading && $ctrl.canManage && !$ctrl.choices.length" class="empty-list-message">
-    <span translate>There are no providers yet.</span>
+  <span translate>There are no providers yet.</span>
 </div>
 <div ng-if="$ctrl.choices.length && $ctrl.canManage">
-    <p translate>Please select providers allowed to be used in this project.</p>
-    <div multiple-select choices="$ctrl.choices"></div>
-    <button
-        class="btn btn-primary center-block"
-        submit-button="$ctrl.save()">
-        <span translate>Save</span>
-    </button>
+  <p translate>Please select providers allowed to be used in this project.</p>
+  <div multiple-select choices="$ctrl.choices"></div>
+  <button
+    class="btn btn-primary center-block"
+    submit-button="$ctrl.save()">
+    <span translate>Save</span>
+  </button>
 </div>

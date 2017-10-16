@@ -3,8 +3,8 @@
     {{ $select.selected.display_name }}
   </ui-select-match>
   <ui-select-choices
-      repeat="country in $ctrl.countryChoices | filter: $select.search"
-      refresh-delay="0">
+    repeat="country in $ctrl.countryChoices | filter: $select.search"
+    refresh-delay="0">
     <span class="f16"><span class="flag {{ country.value | lowercase }}"></span></span>
     {{ ::country.display_name }}
   </ui-select-choices>
