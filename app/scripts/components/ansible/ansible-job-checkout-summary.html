@@ -9,7 +9,7 @@
     </h5>
   </div>
   <div class="ibox-content">
-    <p>{{ $ctrl.error }}</p>
+    <p ng-if="$ctrl.error" translate>Unable to fetch summary.</p>
     <table class="table table-bordered" ng-if="$ctrl.isValid()">
       <tbody>
       <tr>

@@ -26,7 +26,7 @@ class SummaryController {
       this.$scope.$digest();
     }).catch(response => {
       this.loading = false;
-      this.error = this.ErrorMessageFormatter.format(response);
+      this.error = true;
       this.$scope.$digest();
     });
   }

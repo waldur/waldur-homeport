@@ -889,7 +889,7 @@ msgstr ""
 msgid "Click on a 'Create bid' button when you are ready to fulfill expert request"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-events-dialog.html:45
+#: app/scripts/components/billing/events/invoice-events-dialog.html:45
 #: app/scripts/components/customer/details/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html:11
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
@@ -2215,7 +2215,7 @@ msgstr ""
 msgid "Invoice events"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-events-dialog.html:2
+#: app/scripts/components/billing/events/invoice-events-dialog.html:2
 msgid "Invoice events timeline"
 msgstr ""
 
@@ -2575,7 +2575,7 @@ msgstr ""
 msgid "Monthly cost"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-events-dialog.html:33
+#: app/scripts/components/billing/events/invoice-events-dialog.html:33
 msgid "More info"
 msgstr ""
 
@@ -4266,7 +4266,7 @@ msgstr ""
 msgid "Restroing"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-events-dialog.html:13
+#: app/scripts/components/billing/events/invoice-events-dialog.html:13
 msgid "Retry"
 msgstr ""
 
@@ -4554,7 +4554,7 @@ msgstr ""
 msgid "Show all"
 msgstr ""
 
-#: app/scripts/components/billing/invoice-events-toggle.html:4
+#: app/scripts/components/billing/events/invoice-events-toggle.html:4
 msgid "Show events"
 msgstr ""
 
@@ -5000,7 +5000,7 @@ msgstr ""
 msgid "There are no comments yet."
 msgstr ""
 
-#: app/scripts/components/billing/invoice-events-dialog.html:18
+#: app/scripts/components/billing/events/invoice-events-dialog.html:18
 msgid "There are no events for this resource."
 msgstr ""
 
@@ -5256,6 +5256,10 @@ msgstr ""
 msgid "Unable to fetch project providers."
 msgstr ""
 
+#: app/scripts/components/ansible/ansible-job-checkout-summary.html:12
+msgid "Unable to fetch summary."
+msgstr ""
+
 #: app/scripts/components/core/bootstrap.js:25
 msgid "Unable to load application configuration. Please reload this page."
 msgstr ""
@@ -5264,7 +5268,7 @@ msgstr ""
 msgid "Unable to load comments."
 msgstr ""
 
-#: app/scripts/components/billing/invoice-events-dialog.html:10
+#: app/scripts/components/billing/events/invoice-events-dialog.html:10
 msgid "Unable to load events for this resource."
 msgstr ""
 
