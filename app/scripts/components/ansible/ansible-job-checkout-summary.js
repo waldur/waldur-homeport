@@ -24,7 +24,7 @@ class SummaryController {
     this.loadData().then(() => {
       this.loading = false;
       this.$scope.$digest();
-    }).catch(response => {
+    }).catch(() => {
       this.loading = false;
       this.error = true;
       this.$scope.$digest();
