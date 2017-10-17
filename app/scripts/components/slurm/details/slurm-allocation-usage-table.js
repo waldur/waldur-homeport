@@ -25,7 +25,6 @@ class SlurmAllocationUsageTableController {
           const { users, charts } = formatCharts(palette, chartSpec, rows, pricePackage);
           this.users = users;
           this.charts = charts;
-          console.log(JSON.stringify({ users, charts }));
         });
       })
       .catch(() => this.erred = false)
