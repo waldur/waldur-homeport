@@ -1,20 +1,7 @@
 import template from './security-groups-link.html';
 
-export default function securityGroupsLink() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: securityGroupsLinkController,
-    controllerAs: '$ctrl',
-    bindToController: true,
-    scope: {
-      securityGroups: '='
-    }
-  };
-}
-
 // @ngInject
-class securityGroupsLinkController {
+class SecurityGroupsLinkController {
   constructor($uibModal, $scope) {
     this.$uibModal = $uibModal;
     $scope.$watch('$ctrl.securityGroups', ((newGroups) => {
@@ -35,3 +22,13 @@ class securityGroupsLinkController {
     });
   }
 }
+
+const securityGroupsLink = {
+  template: template,
+  controller: SecurityGroupsLinkController,
+  bindings: {
+    securityGroups: '<'
+  }
+};
+
+export default securityGroupsLink;

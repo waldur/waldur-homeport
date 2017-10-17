@@ -16,7 +16,8 @@ const openstackInstanceNetworks = {
   template,
   bindings: {
     model: '<',
-    field: '<'
+    field: '<',
+    form: '<',
   },
   controller: class ComponentController {
     constructor($scope) {
@@ -122,11 +123,13 @@ const openstackInstanceNetworks = {
       this.items.push({
         floating_ip: ''
       });
+      this.form.$setDirty();
     }
 
     deleteItem(item) {
       const index = this.items.indexOf(item);
       this.items.splice(index, 1);
+      this.form.$setDirty();
     }
   }
 };
