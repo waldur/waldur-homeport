@@ -23,18 +23,18 @@
         {
           "label": "hpc_ilja",
           "data": [
-            99,
-            66,
-            0
+            363,
+            396,
+            396
           ],
           "backgroundColor": "#eee8d5"
         },
         {
           "label": "hpc_victor",
           "data": [
-            66,
+            396,
             0,
-            99
+            363
           ],
           "backgroundColor": "#1c84c6"
         }

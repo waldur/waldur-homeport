@@ -67,7 +67,7 @@ const getUserCost = (report, username, label, pricePackage) =>
   getEstimatedPrice({
     cpu: getValue([username, label, 'cpu_usage'], report) || 0,
     gpu: getValue([username, label, 'gpu_usage'], report) || 0,
-    ram: getValue([username, label, 'gpu_usage'], report) || 0,
+    ram: getValue([username, label, 'ram_usage'], report) || 0,
   }, pricePackage);
 
 const getCostChart = (report, userMap, labels, pricePackage) => {
