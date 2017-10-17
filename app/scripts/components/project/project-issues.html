@@ -1,16 +1,16 @@
 <div class="wrapper wrapper-content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="ibox">
-                <div class="ibox-content">
-                    <div ng-if="$ctrl.loading">
-                        <loading-spinner/>
-                    </div>
-                    <div ng-if="!$ctrl.loading">
-                      <issues-list filter="$ctrl.filter" options="$ctrl.options"></issues-list>
-                    </div>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div ng-if="$ctrl.loading">
+            <loading-spinner/>
+          </div>
+          <div ng-if="!$ctrl.loading">
+            <issues-list filter="$ctrl.filter" options="$ctrl.options"></issues-list>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

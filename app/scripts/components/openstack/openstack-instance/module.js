@@ -7,7 +7,6 @@ import openstackInstanceNetworks from './openstack-instance-networks';
 import openstackInstanceFloatingIps from './openstack-instance-floating-ips';
 import openstackInstanceDataVolume from './openstack-instance-data-volume';
 import actionConfig from './actions';
-import importModule from './import/module';
 
 export default module => {
   module.component('openstackInstanceSummary', openstackInstanceSummary);
@@ -21,7 +20,7 @@ export default module => {
   module.config(actionConfig);
   module.config(stateConfig);
   module.config(tabsConfig);
-  importModule(module);
+  module.run(registerImportEndpoint);
 };
 
 // @ngInject
@@ -72,4 +71,9 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       }
     })
   });
+}
+
+// @ngInject
+function registerImportEndpoint(ImportResourcesEndpointRegistry, ENV) {
+  ImportResourcesEndpointRegistry.registerEndpoint(ENV.resourcesTypes.vms, 'OpenStackTenant', 'openstacktenant-instances');
 }

@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h3>{{$ctrl.bid.customer_name}} | {{ $ctrl.bid.team_name }}</h3>
+</div>
+<div class="modal-body">
+  <expert-bid-summary expert-bid="$ctrl.bid"/>
+</div>
+<div class="modal-footer">
+  <button type="submit"
+    class="btn btn-primary"
+    ng-disabled="$ctrl.loading"
+    ng-if="$ctrl.canAccept()"
+    submit-button="$ctrl.accept()">
+    <i class="fa fa-check"></i>
+    <span translate>Accept</span>
+  </button>
+  <button type="button" class="btn btn-default" ng-click="$ctrl.dismiss()">
+    <span translate>Cancel</span>
+  </button>
+</div>

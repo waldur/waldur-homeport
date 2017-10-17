@@ -13,20 +13,20 @@
     </div>
     <table class="table" ng-if="$ctrl.plan">
       <thead>
-      <tr>
-        <th translate>Description</th>
-        <th translate>Terms</th>
-        <th translate>Base rate</th>
-        <th translate>Hour rate</th>
-      </tr>
+        <tr>
+          <th translate>Description</th>
+          <th translate>Terms</th>
+          <th translate>Base rate</th>
+          <th translate>Hour rate</th>
+        </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>{{ ::$ctrl.plan.description }}</td>
-        <td>{{ ::$ctrl.plan.terms }}</td>
-        <td>{{ ::$ctrl.plan.base_rate | defaultCurrency }}</td>
-        <td>{{ ::$ctrl.plan.hour_rate | defaultCurrency }}</td>
-      </tr>
+        <tr>
+          <td>{{ ::$ctrl.plan.description }}</td>
+          <td>{{ ::$ctrl.plan.terms }}</td>
+          <td>{{ ::$ctrl.plan.base_rate | defaultCurrency }}</td>
+          <td>{{ ::$ctrl.plan.hour_rate | defaultCurrency }}</td>
+        </tr>
       </tbody>
     </table>
   </div>

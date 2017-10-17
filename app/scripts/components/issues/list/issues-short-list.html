@@ -1,67 +1,67 @@
 <div class="ibox float-e-margins">
-    <div class="ibox-title">
-        <span class="pull-right">
-            <a class="btn btn-default btn-xs" ui-sref="support.list">
-                <small><i class="fa fa-list"></i></small>
-                <span translate>See all</span>
-            </a>
+  <div class="ibox-title">
+    <span class="pull-right">
+      <a class="btn btn-default btn-xs" ui-sref="support.list">
+        <small><i class="fa fa-list"></i></small>
+        <span translate>See all</span>
+      </a>
 
-            <a class="btn btn-default btn-xs" ng-click="$ctrl.loadIssues()">
-                <small><i class="fa fa-refresh"></i></small>
-                <span translate>Refresh</span>
+      <a class="btn btn-default btn-xs" ng-click="$ctrl.loadIssues()">
+        <small><i class="fa fa-refresh"></i></small>
+        <span translate>Refresh</span>
+      </a>
+    </span>
+    <h5 translate>Reported by me</h5>
+  </div>
+  <div class="ibox-content">
+    <div ng-if="$ctrl.loading">
+      <loading-spinner/>
+    </div>
+    <div ng-if="!$ctrl.loading && $ctrl.items.length == 0" translate>
+      There are no requests yet.
+    </div>
+    <table ng-if="!$ctrl.loading && $ctrl.items.length > 0"
+      class="table table-hover no-margins">
+      <thead>
+        <tr>
+          <th width="80" translate>Key</th>
+          <th translate>Description</th>
+          <th width="100" translate class="hidden-xs">Updated</th>
+          <th width="100" translate class="hidden-xs">Time in progress</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in $ctrl.items">
+          <td>
+            <a ng-bind="::item.key"
+              ui-sref="support.detail({uuid: item.uuid})"
+              uib-tooltip="{{ ::item.type }}">
             </a>
-        </span>
-        <h5 translate>Reported by me</h5>
-    </div>
-    <div class="ibox-content">
-        <div ng-if="$ctrl.loading">
-            <loading-spinner/>
-        </div>
-        <div ng-if="!$ctrl.loading && $ctrl.items.length == 0" translate>
-            There are no requests yet.
-        </div>
-        <table ng-if="!$ctrl.loading && $ctrl.items.length > 0"
-               class="table table-hover no-margins">
-            <thead>
-                <tr>
-                    <th width="80" translate>Key</th>
-                    <th translate>Description</th>
-                    <th width="100" translate class="hidden-xs">Updated</th>
-                    <th width="100" translate class="hidden-xs">Time in progress</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in $ctrl.items">
-                    <td>
-                        <a ng-bind="::item.key"
-                           ui-sref="support.detail({uuid: item.uuid})"
-                           uib-tooltip="{{ ::item.type }}">
-                        </a>
-                    </td>
-                    <td>
-                        {{ item.summary }}<br>
-                        <small class="text-muted">
-                            <span translate>Opened by</span>
-                            <a ng-click="$ctrl.openUserDialog(item.caller_uuid)">
-                                {{ item.caller_full_name }}
-                            </a>
-                            <span ng-if="item.customer_uuid">
-                                <span translate>from</span>
-                                <a ng-click="$ctrl.openCustomerDialog(item.customer_uuid)">
-                                    {{ item.customer_name }}
-                                </a>
-                            </span>
-                            at {{ item.created | shortDate }}
-                        </small>
-                    </td>
-                    <td class="hidden-xs">
-                        <small>{{ item.modified | shortDate }}</small>
-                    </td>
-                    <td class="hidden-xs">
-                        <small>{{ item.timeSpent }}</small>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+          </td>
+          <td>
+            {{ item.summary }}<br>
+            <small class="text-muted">
+              <span translate>Opened by</span>
+              <a ng-click="$ctrl.openUserDialog(item.caller_uuid)">
+                {{ item.caller_full_name }}
+              </a>
+              <span ng-if="item.customer_uuid">
+                <span translate>from</span>
+                <a ng-click="$ctrl.openCustomerDialog(item.customer_uuid)">
+                  {{ item.customer_name }}
+                </a>
+              </span>
+              at {{ item.created | shortDate }}
+            </small>
+          </td>
+          <td class="hidden-xs">
+            <small>{{ item.modified | shortDate }}</small>
+          </td>
+          <td class="hidden-xs">
+            <small>{{ item.timeSpent }}</small>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

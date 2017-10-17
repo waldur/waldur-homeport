@@ -10,14 +10,15 @@
       </label>
       <div class="col-sm-9 col-md-8">
         <input id="project_name"
-               type="text"
-               class="form-control"
-               ng-if="$ctrl.canManage"
-               ng-model="$ctrl.projectModel.name"
-               required/>
+          type="text"
+          class="form-control"
+          ng-if="$ctrl.canManage"
+          ng-model="$ctrl.projectModel.name"
+          required/>
         <p class="form-control-static" ng-if="!$ctrl.canManage">{{::$ctrl.projectModel.name}}</p>
         <div class="error"
-             ng-if="$ctrl.errors.name">{{::$ctrl.errors.name}}</div>
+          ng-if="$ctrl.errors.name">{{::$ctrl.errors.name}}
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -26,10 +27,10 @@
       </label>
       <div class="col-sm-9 col-md-8">
         <input id="description"
-               type="text"
-               class="form-control"
-               ng-if="$ctrl.canManage"
-               ng-model="$ctrl.projectModel.description"/>
+          type="text"
+          class="form-control"
+          ng-if="$ctrl.canManage"
+          ng-model="$ctrl.projectModel.description"/>
         <p class="form-control-static" ng-if="!$ctrl.canManage">{{::$ctrl.projectModel.description || '&mdash;'}}</p>
       </div>
     </div>

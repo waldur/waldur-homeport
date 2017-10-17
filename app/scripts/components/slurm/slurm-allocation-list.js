@@ -21,6 +21,7 @@ function SlurmAllocationListController(
         'cpu_limit', 'cpu_usage',
         'gpu_limit', 'gpu_usage',
         'ram_limit', 'ram_usage',
+        'service_settings',
       ]);
     },
     getTableOptions: function() {

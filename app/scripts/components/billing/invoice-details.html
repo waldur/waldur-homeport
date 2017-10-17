@@ -64,22 +64,22 @@
 
         <table class="table invoice-total">
           <tbody>
-          <tr>
-            <td>
-              <strong><span translate>Subtotal</span>: </strong>
-            </td>
-            <td>{{ ::$ctrl.invoice.price | defaultCurrency}}</td>
-          </tr>
-          <tr ng-if="$ctrl.invoice.issuer_details.vat_code">
-            <td><strong><span translate>TAX</span>: </strong></td>
-            <td>{{ ::$ctrl.invoice.tax | defaultCurrency}}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong><span translate>TOTAL</span>: </strong>
-            </td>
-            <td>{{ ::$ctrl.invoice.total | defaultCurrency}}</td>
-          </tr>
+            <tr>
+              <td>
+                <strong><span translate>Subtotal</span>: </strong>
+              </td>
+              <td>{{ ::$ctrl.invoice.price | defaultCurrency}}</td>
+            </tr>
+            <tr ng-if="$ctrl.invoice.issuer_details.vat_code">
+              <td><strong><span translate>TAX</span>: </strong></td>
+              <td>{{ ::$ctrl.invoice.tax | defaultCurrency}}</td>
+            </tr>
+            <tr>
+              <td>
+                <strong><span translate>TOTAL</span>: </strong>
+              </td>
+              <td>{{ ::$ctrl.invoice.total | defaultCurrency}}</td>
+            </tr>
           </tbody>
         </table>
       </div>

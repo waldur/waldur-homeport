@@ -1,26 +1,26 @@
 <div class="modal-header">
-    <h3 class="modal-title" translate>User details</h3>
+  <h3 class="modal-title" translate>User details</h3>
 </div>
 <div class="modal-body">
-    <div ng-if="$ctrl.loading">
-        <loading-spinner/>
-    </div>
+  <div ng-if="$ctrl.loading">
+    <loading-spinner/>
+  </div>
 
-    <div ng-if="!$ctrl.loading && $ctrl.user">
-        <user-popover-table user="$ctrl.user"></user-popover-table>
-    </div>
+  <div ng-if="!$ctrl.loading && $ctrl.user">
+    <user-popover-table user="$ctrl.user"></user-popover-table>
+  </div>
 
-    <div ng-if="!$ctrl.loading && !$ctrl.user">
-        <p translate>Unable to load user.</p>
-        <button type="button" class="btn btn-default" ng-click="$ctrl.loadUser()">
-            <i class="fa fa-refresh"></i>
-            <span translate>Try again</span>
-        </button>
-    </div>
+  <div ng-if="!$ctrl.loading && !$ctrl.user">
+    <p translate>Unable to load user.</p>
+    <button type="button" class="btn btn-default" ng-click="$ctrl.loadUser()">
+      <i class="fa fa-refresh"></i>
+      <span translate>Try again</span>
+    </button>
+  </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default"
-        ng-click="$ctrl.dismiss()">
-        <span translate>OK</span>
-    </button>
+  <button class="btn btn-default"
+    ng-click="$ctrl.dismiss()">
+    <span translate>OK</span>
+  </button>
 </div>

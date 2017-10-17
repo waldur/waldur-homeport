@@ -1,21 +1,21 @@
 <div class="empty-data-block"
-     ng-if="$ctrl.noGraphsData">
-    <h1 translate>Not enough data for CPU graph.</h1>
+  ng-if="$ctrl.noGraphsData">
+  <h1 translate>Not enough data for CPU graph.</h1>
 </div>
 <div ng-if="!$ctrl.noGraphsData">
-    <div class="resource-graphs">
-        <div class="graph">
-            <span class="chart-name">CPU</span>
-            <div ng-if="$ctrl.cpuGraphError">{{$ctrl.cpuGraphError}}</div>
-            <multi-line-chart chart-data="$ctrl.cpuGraphData"
-                              chart-controller="$ctrl"></multi-line-chart>
-        </div>
-
-        <div class="graph">
-            <span class="chart-name">RAM</span>
-            <div ng-if="$ctrl.ramGraphError">{{$ctrl.ramGraphError}}</div>
-            <multi-line-chart chart-data="$ctrl.ramGraphData"
-                              chart-controller="$ctrl"></multi-line-chart>
-        </div>
+  <div class="resource-graphs">
+    <div class="graph">
+      <span class="chart-name">CPU</span>
+      <div ng-if="$ctrl.cpuGraphError">{{$ctrl.cpuGraphError}}</div>
+      <multi-line-chart chart-data="$ctrl.cpuGraphData"
+        chart-controller="$ctrl"></multi-line-chart>
     </div>
+
+    <div class="graph">
+      <span class="chart-name">RAM</span>
+      <div ng-if="$ctrl.ramGraphError">{{$ctrl.ramGraphError}}</div>
+      <multi-line-chart chart-data="$ctrl.ramGraphData"
+        chart-controller="$ctrl"></multi-line-chart>
+    </div>
+  </div>
 </div>

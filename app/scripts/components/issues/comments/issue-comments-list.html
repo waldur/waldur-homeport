@@ -1,30 +1,30 @@
 <div ng-if="$ctrl.loading">
-    <loading-spinner/>
+  <loading-spinner/>
 </div>
 <div ng-if="!$ctrl.loading && $ctrl.comments.length == 0">
-    <span translate>There are no comments yet.</span>
+  <span translate>There are no comments yet.</span>
 </div>
 <div ng-if="!$ctrl.loading && $ctrl.erred">
-    <span translate>Unable to load comments.</span>
+  <span translate>Unable to load comments.</span>
 </div>
 <div ng-if="!$ctrl.loading && $ctrl.comments.length > 0"
-     id="vertical-timeline"
-     class="vertical-container dark-timeline">
-    <div class="vertical-timeline-block" ng-repeat="comment in $ctrl.comments">
-        <div class="vertical-timeline-icon">
-            <img gravatar-src="comment.author_email" class="b-r-xl img-sm" gravatar-size="32">
-        </div>
-        <div class="vertical-timeline-content">
-            <p class="m-n">
-                <a ng-click="$ctrl.openUserDialog(item.user)">
-                    {{ comment.author_name }}
-                </a>
-                <span translate>commented</span>:
-                {{ comment.description }}
-            </p>
-            <span class="vertical-date small text-muted">
-                {{ ::comment.created | date:'medium' }}
-            </span>
-        </div>
+  id="vertical-timeline"
+  class="vertical-container dark-timeline">
+  <div class="vertical-timeline-block" ng-repeat="comment in $ctrl.comments">
+    <div class="vertical-timeline-icon">
+      <img gravatar-src="comment.author_email" class="b-r-xl img-sm" gravatar-size="32">
     </div>
+    <div class="vertical-timeline-content">
+      <p class="m-n">
+        <a ng-click="$ctrl.openUserDialog(item.user)">
+          {{ comment.author_name }}
+        </a>
+        <span translate>commented</span>:
+        {{ comment.description }}
+      </p>
+      <span class="vertical-date small text-muted">
+        {{ ::comment.created | date:'medium' }}
+      </span>
+    </div>
+  </div>
 </div>

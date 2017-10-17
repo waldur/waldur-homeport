@@ -1,26 +1,26 @@
 <div class="wrapper wrapper-content">
-    <div class="row">
-        <div class="col-md-9">
-            <premium-support-plans
-                loading="$ctrl.loading"
-                plans="$ctrl.plans"
-                selected="$ctrl.selectedPlan"
-                on-select="$ctrl.selectPlan(plan)">
-            </premium-support-plans>
+  <div class="row">
+    <div class="col-md-9">
+      <premium-support-plans
+        loading="$ctrl.loading"
+        plans="$ctrl.plans"
+        selected="$ctrl.selectedPlan"
+        on-select="$ctrl.selectPlan(plan)">
+      </premium-support-plans>
 
-            <div ng-if="$ctrl.selectedPlan">
-                <premium-support-agreement
-                    plan="$ctrl.selectedPlan"
-                    on-submit="$ctrl.submit()">
-                </premium-support-agreement>
-            </div>
-        </div>
-        <div class="col-md-3" ng-if="!$ctrl.loading">
-            <premium-support-summary
-                plan="$ctrl.selectedPlan"
-                customer="$ctrl.currentCustomer"
-                project="$ctrl.currentProject">
-            </premium-support-summary>
-        </div>
+      <div ng-if="$ctrl.selectedPlan">
+        <premium-support-agreement
+          plan="$ctrl.selectedPlan"
+          on-submit="$ctrl.submit()">
+        </premium-support-agreement>
+      </div>
     </div>
+    <div class="col-md-3" ng-if="!$ctrl.loading">
+      <premium-support-summary
+        plan="$ctrl.selectedPlan"
+        customer="$ctrl.currentCustomer"
+        project="$ctrl.currentProject">
+      </premium-support-summary>
+    </div>
+  </div>
 </div>

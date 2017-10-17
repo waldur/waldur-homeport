@@ -1,27 +1,27 @@
 <table class="table table-borderless m-b-xs">
-    <tbody>
+  <tbody>
     <tr ng-hide="$ctrl.active">
-        <td class="no-padding">
-            <button type="button" class="btn btn-default"
-                    ng-click="$ctrl.toggleField()">
-                <i class="fa fa-plus"></i>
-                <span translate>Add data volume</span>
-            </button>
-        </td>
+      <td class="no-padding">
+        <button type="button" class="btn btn-default"
+          ng-click="$ctrl.toggleField()">
+          <i class="fa fa-plus"></i>
+          <span translate>Add data volume</span>
+        </button>
+      </td>
     </tr>
     <tr>
-        <label ng-show="$ctrl.active" translate>Data volume size:</label>
+      <label ng-show="$ctrl.active" translate>Data volume size:</label>
     </tr>
     <tr ng-show="$ctrl.active">
-        <td class="no-padding">
-            <appstore-field-integer model="$ctrl.model" field="$ctrl.field" form="$ctrl.form"></appstore-field-integer>
-        </td>
-        <td class="no-padding">
-            <button type="button" class="btn btn-default"
-                    ng-click="$ctrl.toggleField()">
-                <i class="fa fa-trash-o" uib-tooltip="{{ 'Disable data volume' | translate}}"></i>
-            </button>
-        </td>
+      <td class="no-padding">
+        <appstore-field-integer model="$ctrl.model" field="$ctrl.field" form="$ctrl.form"></appstore-field-integer>
+      </td>
+      <td class="no-padding">
+        <button type="button" class="btn btn-default"
+          ng-click="$ctrl.toggleField()">
+          <i class="fa fa-trash-o" uib-tooltip="{{ 'Disable data volume' | translate}}"></i>
+        </button>
+      </td>
     </tr>
-    </tbody>
+  </tbody>
 </table>

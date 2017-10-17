@@ -1,55 +1,55 @@
 <div class="modal-header">
-    <h3 class="modal-title">{{ $ctrl.customer.name }}</h3>
+  <h3 class="modal-title">{{ $ctrl.customer.name }}</h3>
 </div>
 <div class="modal-body">
-    <div ng-if="$ctrl.loading">
-        <loading-spinner/>
-    </div>
+  <div ng-if="$ctrl.loading">
+    <loading-spinner/>
+  </div>
 
-    <uib-tabset ng-if="!$ctrl.loading" active="active">
-        <uib-tab heading="Company data" index="'summary'">
-            <div class="panel-body m-l-n m-r-n" ng-if="active === 'summary'">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-3"><strong translate>Organization type</strong></td>
-                                <td class="col-md-9">{{ $ctrl.paymentDetails.type || 'N/A' }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong translate>Registration code</strong></td>
-                                <td>{{ $ctrl.customer.registration_code || 'N/A' }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong translate>Legal address</strong></td>
-                                <td>{{ $ctrl.paymentDetails.address || 'N/A' }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong translate>Contact email</strong></td>
-                                <td>{{ $ctrl.paymentDetails.email || 'N/A' }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong translate>Phone</strong></td>
-                                <td>{{ $ctrl.paymentDetails.phone || 'N/A' }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </uib-tab>
-        <uib-tab heading="Authorized personnel" index="'users'">
-            <div class="panel-body m-l-n m-r-n" ng-if="active === 'users'">
-                <customer-users-details-list
-                        customer="$ctrl.customer"
-                        options="$ctrl.options">
-                </customer-users-details-list>
-            </div>
-        </uib-tab>
-    </uib-tabset>
+  <uib-tabset ng-if="!$ctrl.loading" active="active">
+    <uib-tab heading="Company data" index="'summary'">
+      <div class="panel-body m-l-n m-r-n" ng-if="active === 'summary'">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td class="col-md-3"><strong translate>Organization type</strong></td>
+                <td class="col-md-9">{{ $ctrl.paymentDetails.type || 'N/A' }}</td>
+              </tr>
+              <tr>
+                <td><strong translate>Registration code</strong></td>
+                <td>{{ $ctrl.customer.registration_code || 'N/A' }}</td>
+              </tr>
+              <tr>
+                <td><strong translate>Legal address</strong></td>
+                <td>{{ $ctrl.paymentDetails.address || 'N/A' }}</td>
+              </tr>
+              <tr>
+                <td><strong translate>Contact email</strong></td>
+                <td>{{ $ctrl.paymentDetails.email || 'N/A' }}</td>
+              </tr>
+              <tr>
+                <td><strong translate>Phone</strong></td>
+                <td>{{ $ctrl.paymentDetails.phone || 'N/A' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </uib-tab>
+    <uib-tab heading="Authorized personnel" index="'users'">
+      <div class="panel-body m-l-n m-r-n" ng-if="active === 'users'">
+        <customer-users-details-list
+          customer="$ctrl.customer"
+          options="$ctrl.options">
+        </customer-users-details-list>
+      </div>
+    </uib-tab>
+  </uib-tabset>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default"
-        ng-click="$ctrl.dismiss()">
-        <span translate>OK</span>
-    </button>
+  <button class="btn btn-default"
+    ng-click="$ctrl.dismiss()">
+    <span translate>OK</span>
+  </button>
 </div>

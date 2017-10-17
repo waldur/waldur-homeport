@@ -1,46 +1,46 @@
 <div class="table-responsive">
-    <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <td><strong translate>Full name</strong></td>
-                <td>{{ $ctrl.user.full_name || 'N/A' }}</td>
-            </tr>
-            <tr>
-                <td><strong translate>ID code</strong></td>
-                <td>{{ $ctrl.user.civil_number || 'N/A' }}</td>
-            </tr>
-            <tr>
-                <td><strong translate>Phone numbers</strong></td>
-                <td>{{ $ctrl.user.phone_number || 'N/A' }}</td>
-            </tr>
-            <tr>
-                <td><strong translate>E-mail</strong></td>
-                <td>{{ $ctrl.user.email }}</td>
-            </tr>
-            <tr visible-if="'user.preferred_language'">
-                <td><strong translate>Preferred language</strong></td>
-                <td>{{ $ctrl.user.preferred_language || 'N/A' }}</td>
-            </tr>
-            <tr visible-if="'user.competence'">
-                <td><strong translate>Competence</strong></td>
-                <td>{{ $ctrl.user.competence || 'N/A' }}</td>
-            </tr>
-            <tr>
-                <td><strong translate>Registration method</strong></td>
-                <td>{{ $ctrl.user | formatRegistrationMethod }}</td>
-            </tr>
-            <tr>
-                <td><strong translate>Date joined</strong></td>
-                <td>{{ $ctrl.user.date_joined | dateTime}}</td>
-            </tr>
-            <tr>
-                <td><strong translate>Job position</strong></td>
-                <td>{{ $ctrl.user.job_title || 'N/A' }}</td>
-            </tr>
-            <tr ng-if="$ctrl.user.is_staff || $ctrl.user.is_support">
-                <td><strong translate>Status</strong></td>
-                <td>{{ $ctrl.user | formatUserStatus }}</td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td><strong translate>Full name</strong></td>
+        <td>{{ $ctrl.user.full_name || 'N/A' }}</td>
+      </tr>
+      <tr>
+        <td><strong translate>ID code</strong></td>
+        <td>{{ $ctrl.user.civil_number || 'N/A' }}</td>
+      </tr>
+      <tr>
+        <td><strong translate>Phone numbers</strong></td>
+        <td>{{ $ctrl.user.phone_number || 'N/A' }}</td>
+      </tr>
+      <tr>
+        <td><strong translate>E-mail</strong></td>
+        <td>{{ $ctrl.user.email }}</td>
+      </tr>
+      <tr visible-if="'user.preferred_language'">
+        <td><strong translate>Preferred language</strong></td>
+        <td>{{ $ctrl.user.preferred_language || 'N/A' }}</td>
+      </tr>
+      <tr visible-if="'user.competence'">
+        <td><strong translate>Competence</strong></td>
+        <td>{{ $ctrl.user.competence || 'N/A' }}</td>
+      </tr>
+      <tr>
+        <td><strong translate>Registration method</strong></td>
+        <td>{{ $ctrl.user | formatRegistrationMethod }}</td>
+      </tr>
+      <tr>
+        <td><strong translate>Date joined</strong></td>
+        <td>{{ $ctrl.user.date_joined | dateTime}}</td>
+      </tr>
+      <tr>
+        <td><strong translate>Job position</strong></td>
+        <td>{{ $ctrl.user.job_title || 'N/A' }}</td>
+      </tr>
+      <tr ng-if="$ctrl.user.is_staff || $ctrl.user.is_support">
+        <td><strong translate>Status</strong></td>
+        <td>{{ $ctrl.user | formatUserStatus }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

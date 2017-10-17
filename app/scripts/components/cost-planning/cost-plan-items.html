@@ -26,7 +26,7 @@
                     track by preset.uuid">
             {{ preset.variant | translate }}
             <span ng-bind-html="preset.name | highlight: $select.search"></span>
-            (<small>{{ preset | formatFlavor }}</small>)
+            <small>({{ preset | formatFlavor }})</small>
           </ui-select-choices>
         </ui-select>
       </td>

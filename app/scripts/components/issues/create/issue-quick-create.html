@@ -1,121 +1,121 @@
 <div class="ibox float-e-margins">
-    <div class="ibox-title">
-        <h5 translate>Create request</h5>
-    </div>
-    <div class="ibox-content">
-        <form name="$ctrl.IssueForm" ng-disabled="$ctrl.saving">
-            <div class="form-group">
-                <label for="issueType" class="control-label">
-                    <span translate>Request type</span>
-                    <span class="text-danger">*</span>
-                </label>
-                <div>
-                    <issue-type-select model="$ctrl.issue" field="{name: 'type'}"></issue-type-select>
-                    <div class="help-block text-danger"
-                         ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.type.$touched) && $ctrl.IssueForm.type.$error.required">
-                        <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="issueSummary" class="control-label">
-                    <span translate>Title</span>
-                    <span class="text-danger">*</span>
-                </label>
-                <div>
-                    <input type="text"
-                        id="issueSummary"
-                        ng-model="$ctrl.issue.summary"
-                        class="form-control"
-                        name="summary" required>
-                    <div class="help-block text-danger"
-                         ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.summary.$touched) && $ctrl.IssueForm.summary.$error.required">
-                        <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="issueDescription" class="control-label">
-                    <span translate>Description</span>
-                    <span class="text-danger">*</span>
-                </label>
-                <div>
+  <div class="ibox-title">
+    <h5 translate>Create request</h5>
+  </div>
+  <div class="ibox-content">
+    <form name="$ctrl.IssueForm" ng-disabled="$ctrl.saving">
+      <div class="form-group">
+        <label for="issueType" class="control-label">
+          <span translate>Request type</span>
+          <span class="text-danger">*</span>
+        </label>
+        <div>
+          <issue-type-select model="$ctrl.issue" field="{name: 'type'}"></issue-type-select>
+          <div class="help-block text-danger"
+            ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.type.$touched) && $ctrl.IssueForm.type.$error.required">
+            <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="issueSummary" class="control-label">
+          <span translate>Title</span>
+          <span class="text-danger">*</span>
+        </label>
+        <div>
+          <input type="text"
+            id="issueSummary"
+            ng-model="$ctrl.issue.summary"
+            class="form-control"
+            name="summary" required>
+          <div class="help-block text-danger"
+            ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.summary.$touched) && $ctrl.IssueForm.summary.$error.required">
+            <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="issueDescription" class="control-label">
+          <span translate>Description</span>
+          <span class="text-danger">*</span>
+        </label>
+        <div>
                     <textarea type="text"
-                        id="issueDescription"
-                        ng-model="$ctrl.issue.description"
-                        class="form-control"
-                        name="description" required/>
-                    <div class="help-block text-danger"
-                         ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
-                        <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label">
-                    <span translate>Organization</span>
-                </label>
-                <div>
-                    <ui-select ng-model="$ctrl.issue.customer" name="customer">
-                        <ui-select-match placeholder="{{ 'Select organization...' | translate }}"
-                                         allow-clear="true">
-                            {{ $select.selected.name }}
-                        </ui-select-match>
-                        <ui-select-choices repeat="option in $ctrl.customers"
-                                           refresh="$ctrl.refreshCustomers($select.search)"
-                                           refresh-delay="0"
-                                           spinner-enabled="true">
-                            {{ option.name }}
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label">
-                    <span translate>Project</span>
-                </label>
-                <div ng-class="{disabled: !$ctrl.issue.customer}">
-                    <ui-select ng-model="$ctrl.issue.project" name="project">
-                        <ui-select-match placeholder="{{ 'Select project...' | translate }}"
-                                         allow-clear="true">
-                            {{ $select.selected.name }}
-                        </ui-select-match>
-                        <ui-select-choices repeat="option in $ctrl.projects"
-                                           refresh="$ctrl.refreshProjects($select.search)"
-                                           refresh-delay="0"
-                                           spinner-enabled="true">
-                            {{ option.name }}
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label">
-                    <span translate>Affected resource</span>
-                </label>
-                <div ng-class="{disabled: !$ctrl.issue.project}">
-                    <ui-select ng-model="$ctrl.issue.resource">
-                        <ui-select-match placeholder="{{ 'Select affected resource...' | translate }}"
-                                         allow-clear="true">
-                            {{ $select.selected.name }}
-                        </ui-select-match>
-                        <ui-select-choices repeat="option in $ctrl.resources"
-                                           refresh="$ctrl.refreshResources($select.search)"
-                                           refresh-delay="0"
-                                           spinner-enabled="true">
-                            {{ option.name }}
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
-            </div>
-            <div class="text-right">
-                <a class="btn btn-primary"
-                    submit-button="$ctrl.save()"
-                    type="submit">
-                    <i class="fa fa fa-plus"></i>
-                    <span translate>Create request</span>
-                </a>
-            </div>
-        </form>
-    </div>
+                      id="issueDescription"
+                      ng-model="$ctrl.issue.description"
+                      class="form-control"
+                      name="description" required/>
+          <div class="help-block text-danger"
+            ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
+            <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">
+          <span translate>Organization</span>
+        </label>
+        <div>
+          <ui-select ng-model="$ctrl.issue.customer" name="customer">
+            <ui-select-match placeholder="{{ 'Select organization...' | translate }}"
+              allow-clear="true">
+              {{ $select.selected.name }}
+            </ui-select-match>
+            <ui-select-choices repeat="option in $ctrl.customers"
+              refresh="$ctrl.refreshCustomers($select.search)"
+              refresh-delay="0"
+              spinner-enabled="true">
+              {{ option.name }}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">
+          <span translate>Project</span>
+        </label>
+        <div ng-class="{disabled: !$ctrl.issue.customer}">
+          <ui-select ng-model="$ctrl.issue.project" name="project">
+            <ui-select-match placeholder="{{ 'Select project...' | translate }}"
+              allow-clear="true">
+              {{ $select.selected.name }}
+            </ui-select-match>
+            <ui-select-choices repeat="option in $ctrl.projects"
+              refresh="$ctrl.refreshProjects($select.search)"
+              refresh-delay="0"
+              spinner-enabled="true">
+              {{ option.name }}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">
+          <span translate>Affected resource</span>
+        </label>
+        <div ng-class="{disabled: !$ctrl.issue.project}">
+          <ui-select ng-model="$ctrl.issue.resource">
+            <ui-select-match placeholder="{{ 'Select affected resource...' | translate }}"
+              allow-clear="true">
+              {{ $select.selected.name }}
+            </ui-select-match>
+            <ui-select-choices repeat="option in $ctrl.resources"
+              refresh="$ctrl.refreshResources($select.search)"
+              refresh-delay="0"
+              spinner-enabled="true">
+              {{ option.name }}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>
+      <div class="text-right">
+        <a class="btn btn-primary"
+          submit-button="$ctrl.save()"
+          type="submit">
+          <i class="fa fa fa-plus"></i>
+          <span translate>Create request</span>
+        </a>
+      </div>
+    </form>
+  </div>
 </div>

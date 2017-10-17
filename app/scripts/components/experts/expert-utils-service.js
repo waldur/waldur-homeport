@@ -1,11 +1,21 @@
-export default class ExpertsUtilsService {
+export default class ExpertUtilsService {
   constructor($uibModal) {
     this.$uibModal = $uibModal;
   }
 
-  openDialog(expertRequest) {
+  showRequest(expertRequest) {
     return this.$uibModal.open({
-      component: 'expertContractDetails',
+      component: 'expertRequestDetailsDialog',
+      size: 'lg',
+      resolve: {
+        expertRequest: expertRequest,
+      }
+    });
+  }
+
+  createBid(expertRequest) {
+    return this.$uibModal.open({
+      component: 'expertBidCreateDialog',
       size: 'lg',
       resolve: {
         expertRequest: expertRequest,
