@@ -7,13 +7,10 @@ import registerTableExtension from './table-extension';
 import SlurmAllocationService from './slurm-allocation-service';
 import SlurmPackagesService from './slurm-packages-service';
 import slurmAllocationList from './slurm-allocation-list';
-import slurmAllocationSummary from './slurm-allocation-summary';
 import slurmAllocationCheckoutSummary from './slurm-allocation-checkout-summary';
-import slurmAllocationDetailsDialog from './slurm-allocation-details-dialog';
-import slurmAllocationUsageChart from './slurm-allocation-usage-chart';
-import slurmAllocationUsageTable from './slurm-allocation-usage-table';
 import quotaPie from './quota-pie';
 import slurmPrices from './slurm-prices';
+import detailsModule from './details/module';
 
 export default module => {
   module.config(slurmRoutes);
@@ -25,11 +22,8 @@ export default module => {
   module.service('SlurmAllocationService', SlurmAllocationService);
   module.service('SlurmPackagesService', SlurmPackagesService);
   module.component('slurmAllocationList', slurmAllocationList);
-  module.component('slurmAllocationSummary', slurmAllocationSummary);
   module.component('slurmAllocationCheckoutSummary', slurmAllocationCheckoutSummary);
-  module.component('slurmAllocationDetailsDialog', slurmAllocationDetailsDialog);
-  module.component('slurmAllocationUsageTable', slurmAllocationUsageTable);
-  module.directive('slurmAllocationUsageChart', slurmAllocationUsageChart);
   module.directive('quotaPie', quotaPie);
   module.component('slurmPrices', slurmPrices);
+  detailsModule(module);
 };

@@ -1,10 +1,10 @@
-import { loadChartjs } from './utils';
+import { loadChartjs } from '../utils';
 
 export default function slurmAllocationUsageChart() {
   return {
     restrict: 'E',
     scope: {
-      items: '=',
+      chart: '=',
     },
     template: `<loading-spinner ng-show="loading"/><div style="width: 100%" ng-show="!loading"><canvas/></div>`,
     link: function(scope, element) {
@@ -15,7 +15,7 @@ export default function slurmAllocationUsageChart() {
         const ctx = element[0].querySelector('canvas').getContext('2d');
         const options = {
           type: 'bar',
-          data: scope.items,
+          data: scope.chart,
           options: {
             responsive: true,
             tooltips: {
