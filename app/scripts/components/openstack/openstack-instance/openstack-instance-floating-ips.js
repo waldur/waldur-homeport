@@ -57,6 +57,7 @@ const openstackInstanceFloatingIps = {
       this.items.push({
         floating_ip: true
       });
+      this.form.$setDirty();
     }
 
     deleteItem(item) {

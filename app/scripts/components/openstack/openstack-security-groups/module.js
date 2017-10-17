@@ -1,11 +1,11 @@
 import openstackSecurityGroupsService from './security-groups-service';
 import openstackSecurityGroupsList from './security-groups-list';
-import { securityGroupRulesList } from './security-group-rules-list';
+import securityGroupRulesList from './security-group-rules-list';
 import securityGroupsLink from './security-groups-link';
 import securityGroupsDialog from './security-groups-dialog';
 import filtersModule from './filters';
-import { securityGroupRuleEditor } from './security-group-rule-editor';
-import { securityGroupSummary } from './security-group-summary';
+import securityGroupRuleEditor from './security-group-rule-editor';
+import securityGroupSummary from './security-group-summary';
 import breadcrumbsConfig from './breadcrumbs';
 
 export default module => {
@@ -14,8 +14,8 @@ export default module => {
   module.component('securityGroupRulesList', securityGroupRulesList);
   module.component('securityGroupRuleEditor', securityGroupRuleEditor);
   module.component('securityGroupSummary', securityGroupSummary);
-  module.directive('securityGroupsLink', securityGroupsLink);
-  module.directive('securityGroupsDialog', securityGroupsDialog);
+  module.component('securityGroupsLink', securityGroupsLink);
+  module.component('securityGroupsDialog', securityGroupsDialog);
   filtersModule(module);
   module.config(tabsConfig);
   module.config(actionConfig);

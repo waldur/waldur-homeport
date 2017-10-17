@@ -4,11 +4,12 @@ const CIDR_RE = '^(\\d{1,3}\\.){0,3}\\d{1,3}/\\d{1,2}$';
 
 const PROTOCOLS = ['tcp', 'udp', 'icmp'];
 
-export const securityGroupRuleEditor = {
+const securityGroupRuleEditor = {
   template,
   bindings: {
     model: '<',
     field: '<',
+    form: '<',
   },
   controller: class securityGroupRuleEditorController {
     $onInit() {
@@ -40,6 +41,7 @@ export const securityGroupRuleEditor = {
       this.target.push({
         protocol: PROTOCOLS[0]
       });
+      this.form.$setDirty();
     }
 
     deleteRule(rule) {
@@ -47,6 +49,9 @@ export const securityGroupRuleEditor = {
       if (index !== -1) {
         this.target.splice(index, 1);
       }
+      this.form.$setDirty();
     }
   }
 };
+
+export default securityGroupRuleEditor;

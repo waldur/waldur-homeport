@@ -1,8 +1,10 @@
 import template from './security-group-summary.html';
 
-export const securityGroupSummary = {
+const securityGroupSummary = {
   template,
   bindings: {
     resource: '<'
   }
 };
+
+export default securityGroupSummary;
