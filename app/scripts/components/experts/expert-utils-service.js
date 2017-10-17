@@ -5,7 +5,7 @@ export default class ExpertUtilsService {
 
   showRequest(expertRequest) {
     return this.$uibModal.open({
-      component: 'expertContractDetails',
+      component: 'expertRequestDetailsDialog',
       size: 'lg',
       resolve: {
         expertRequest: expertRequest,

@@ -27,7 +27,10 @@ const expertContract = {
 
         angular.forEach(tab.options, (option, name) => {
           option.name = name;
-          if (option.default) {
+          if (this.expert.options_overrides[name] && this.expert.options_overrides[name].default_value !== undefined) {
+            this.model[name] = this.expert.options_overrides[name].default_value;
+          }
+          else if (option.default) {
             this.model[name] = option.default;
           }
         });
