@@ -1,12 +1,14 @@
-<div class="row">
+<div ng-if="$ctrl.loading">
+  <loading-spinner/>
+</div>
+<div ng-if="!$ctrl.loading" class="row">
   <div class="col-md-9">
     <div class="tabs-container">
       <uib-tabset active="active">
         <uib-tab ng-repeat="chart in $ctrl.charts" index="$index">
           <uib-tab-heading>{{ chart.name }}</uib-tab-heading>
           <div class="panel-body" ng-if="active==$index">
-            <slurm-allocation-usage-chart items="chart.items"/>
-            </slurm-allocation-usage-chart>
+            <slurm-allocation-usage-chart chart="chart"></slurm-allocation-usage-chart>
           </div>
         </uib-tab>
       </uib-tabset>
@@ -18,7 +20,7 @@
         <span
           class="slurm-allocation-usage-table__indicator"
           ng-style="{'background-color': user.color}"></span>
-        {{ user.full_name }}
+        {{ user.full_name || user.freeipa_name }}
       </li>
     </ul>
   </div>

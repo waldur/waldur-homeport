@@ -18,7 +18,7 @@ export default function SlurmPackagesService(baseServiceClass) {
           ram_price: parseFloat(result.ram_price),
         };
       });
-    }
+    },
   });
   return new ServiceClass();
 }

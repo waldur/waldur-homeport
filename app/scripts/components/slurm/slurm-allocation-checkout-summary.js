@@ -1,4 +1,5 @@
 import template from './slurm-allocation-checkout-summary.html';
+import { getEstimatedPrice } from './utils';
 
 // @ngInject
 class SummaryController {
@@ -27,7 +28,7 @@ class SummaryController {
 
   loadPackage() {
     return this.SlurmPackagesService
-      .loadPackage(this.model.service_settings)
+      .loadPackage(this.model.service.settings)
       .then(result => this.package = result);
   }
 
@@ -40,14 +41,11 @@ class SummaryController {
       return 0;
     }
 
-    const cpu_limit = this.model.cpu_limit / 60;
-    const gpu_limit = this.model.gpu_limit / 60;
-    const ram_limit = this.model.ram_limit / 1024;
-
-    const cpu_price = this.package.cpu_price * cpu_limit;
-    const gpu_price = this.package.gpu_price * gpu_limit;
-    const ram_price = this.package.ram_price * ram_limit;
-    return cpu_price + gpu_price + ram_price;
+    return getEstimatedPrice({
+      cpu: this.model.cpu_limit,
+      gpu: this.model.gpu_limit,
+      ram: this.model.ram_limit,
+    }, this.package);
   }
 }
 

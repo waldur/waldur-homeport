@@ -96,7 +96,7 @@ msgstr ""
 msgid "{resourceType} has state {resourceState}."
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:70
+#: app/scripts/components/slurm/slurm-allocation-list.js:71
 msgid "{usage} of {limit}"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgstr ""
 msgid "&lt; Back"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-summary.html:8
+#: app/scripts/components/slurm/details/slurm-allocation-summary.html:8
 msgid "<a ui-sref=\"profile.freeipa\">FreeIPA account needs to be set up</a>."
 msgstr ""
 
@@ -893,7 +893,7 @@ msgstr ""
 #: app/scripts/components/customer/details/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html:11
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
-#: app/scripts/components/slurm/slurm-allocation-details-dialog.html:10
+#: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html:10
 msgid "Close"
 msgstr ""
 
@@ -1029,10 +1029,6 @@ msgstr ""
 msgid "Cost threshold"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-usage-table.js:40
-msgid "Costs"
-msgstr ""
-
 #: app/scripts/components/customer/create/customer-create-dialog.js:33
 msgid "Could not create organization"
 msgstr ""
@@ -1048,8 +1044,8 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-compare-list.js:76
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:76
-#: app/scripts/components/slurm/slurm-allocation-list.js:46
-#: app/scripts/components/slurm/slurm-allocation-summary.html:27
+#: app/scripts/components/slurm/details/slurm-allocation-summary.html:27
+#: app/scripts/components/slurm/slurm-allocation-list.js:47
 msgid "CPU"
 msgstr ""
 
@@ -1062,7 +1058,7 @@ msgstr ""
 msgid "CPU limit, minutes"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-usage-table.js:44
+#: app/scripts/components/slurm/details/constants.js:3
 msgid "CPU usage"
 msgstr ""
 
@@ -1193,7 +1189,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:45
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:45
 #: app/scripts/components/resource/summary/resource-summary-base.html:40
-#: app/scripts/components/slurm/slurm-allocation-list.js:42
+#: app/scripts/components/slurm/slurm-allocation-list.js:43
 #: app/scripts/components/team/customer-permissions-log-list.js:41
 #: app/scripts/components/team/project-permissions-log-list.js:37
 msgid "Created"
@@ -1347,7 +1343,7 @@ msgstr ""
 #: app/scripts/components/resource/actions/constants.js:26
 #: app/scripts/components/resource/summary/resource-summary-base.html:31
 #: app/scripts/components/slurm/slurm-allocation-config.js:21
-#: app/scripts/components/slurm/slurm-allocation-list.js:38
+#: app/scripts/components/slurm/slurm-allocation-list.js:39
 #: app/scripts/components/user/user-edit.html:93
 msgid "Description"
 msgstr ""
@@ -1893,8 +1889,8 @@ msgstr ""
 msgid "Got it!"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:50
-#: app/scripts/components/slurm/slurm-allocation-summary.html:36
+#: app/scripts/components/slurm/details/slurm-allocation-summary.html:36
+#: app/scripts/components/slurm/slurm-allocation-list.js:51
 msgid "GPU"
 msgstr ""
 
@@ -1906,7 +1902,7 @@ msgstr ""
 msgid "GPU limit, minutes"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-usage-table.js:48
+#: app/scripts/components/slurm/details/constants.js:8
 msgid "GPU usage"
 msgstr ""
 
@@ -2452,7 +2448,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-summary.html:5
+#: app/scripts/components/slurm/details/slurm-allocation-summary.html:5
 msgid "Login details"
 msgstr ""
 
@@ -2626,7 +2622,7 @@ msgstr ""
 #: app/scripts/components/resource/actions/constants.js:20
 #: app/scripts/components/resource/list/resource-global-list.js:17
 #: app/scripts/components/resource/list/resources-list.js:46
-#: app/scripts/components/slurm/slurm-allocation-list.js:33
+#: app/scripts/components/slurm/slurm-allocation-list.js:34
 msgid "Name"
 msgstr ""
 
@@ -2689,11 +2685,11 @@ msgstr ""
 msgid "No alerts yet."
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:30
+#: app/scripts/components/slurm/slurm-allocation-list.js:31
 msgid "No allocations found matching filter."
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:29
+#: app/scripts/components/slurm/slurm-allocation-list.js:30
 msgid "No allocations yet."
 msgstr ""
 
@@ -3900,8 +3896,8 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:15
 #: app/scripts/components/quotas/filters.js:6
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:69
-#: app/scripts/components/slurm/slurm-allocation-list.js:54
-#: app/scripts/components/slurm/slurm-allocation-summary.html:45
+#: app/scripts/components/slurm/details/slurm-allocation-summary.html:45
+#: app/scripts/components/slurm/slurm-allocation-list.js:55
 msgid "RAM"
 msgstr ""
 
@@ -3917,7 +3913,7 @@ msgstr ""
 msgid "RAM limit, MB"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-usage-table.js:52
+#: app/scripts/components/slurm/details/constants.js:13
 msgid "RAM usage"
 msgstr ""
 
@@ -4609,7 +4605,7 @@ msgstr ""
 msgid "SLA request"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-details-dialog.html:2
+#: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html:2
 msgid "SLURM allocation usage"
 msgstr ""
 
@@ -4729,7 +4725,7 @@ msgstr ""
 #: app/scripts/components/resource/list/resource-global-list.js:38
 #: app/scripts/components/resource/list/resources-list.js:64
 #: app/scripts/components/resource/summary/resource-summary-base.html:3
-#: app/scripts/components/slurm/slurm-allocation-list.js:58
+#: app/scripts/components/slurm/slurm-allocation-list.js:59
 #: app/scripts/components/user/hooks/hook-list.js:26
 msgid "State"
 msgstr ""
@@ -4791,7 +4787,7 @@ msgstr ""
 msgid "Submit complaint"
 msgstr ""
 
-#: app/scripts/components/slurm/slurm-allocation-summary.html:18
+#: app/scripts/components/slurm/details/slurm-allocation-summary.html:18
 msgid "Submit with"
 msgstr ""
 
