@@ -463,7 +463,7 @@ msgstr ""
 msgid "Application details"
 msgstr ""
 
-#: app/scripts/components/ansible/details/ansible-job-summary.js:26
+#: app/scripts/components/ansible/details/ansible-job-summary.js:29
 msgid "Application has been deleted"
 msgstr ""
 
@@ -5259,7 +5259,7 @@ msgstr ""
 msgid "Unable to create request for a turnkey solution."
 msgstr ""
 
-#: app/scripts/components/ansible/details/ansible-job-summary.js:31
+#: app/scripts/components/ansible/details/ansible-job-summary.js:34
 msgid "Unable to delete application"
 msgstr ""
 

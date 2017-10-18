@@ -6,9 +6,10 @@ const ansibleJobSummary = {
     job: '<',
   },
   controller: class Controller {
-    controller($state, AnsibleJobsService, ncUtilsFlash) {
+    controller($state, AnsibleJobsService, resourcesService, ncUtilsFlash) {
       this.$state = $state;
       this.AnsibleJobsService = AnsibleJobsService;
+      this.resourcesService = resourcesService;
       this.ncUtilsFlash = ncUtilsFlash;
     }
 
@@ -21,9 +22,10 @@ const ansibleJobSummary = {
     }
 
     remove() {
-      if (confirm('Please confirm application deletion.')) {
+      if (confirm('Please confirm that you want to delete this application. All related virtual machines will be removed.')) {
         return this.AnsibleJobsService.$deleteByUrl(this.job.url).then(() => {
           this.AnsibleJobsService.clearAllCacheForCurrentEndpoint();
+          this.resourcesService.clearAllCacheForCurrentEndpoint();
           this.ncUtilsFlash.success(gettext('Application has been deleted'));
           return this.$state.go('project.resources.ansible.list', {
             uuid: this.job.project_uuid
