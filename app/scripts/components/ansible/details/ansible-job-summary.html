@@ -45,10 +45,24 @@
           <dd>{{ $ctrl.job.service_name }}</dd>
         </div>
 
-        <div class="m-b-xs">
+        <div class="m-b-xs" ng-if="$ctrl.hasArguments">
           <dt translate>Parameters</dt>
           <dd>
             <pre>{{ $ctrl.job.arguments | json }}</pre>
+          </dd>
+        </div>
+
+        <div class="m-t-md">
+          <dt></dt>
+          <dd>
+            <button
+              type="button"
+              class="btn btn-danger btn-xs"
+              ng-class="{'disabled': !$ctrl.canRemove}"
+              submit-button="$ctrl.remove()">
+              <i class="fa fa-trash"></i>
+              <span translate>Remove application</span>
+            </button>
           </dd>
         </div>
       </dl>
