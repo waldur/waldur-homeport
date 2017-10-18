@@ -110,7 +110,7 @@ function ExpertRequestListController(
         {
           title: gettext('Details'),
           iconClass: 'fa fa-info-circle',
-          callback: request => ExpertUtilsService.openDialog(request),
+          callback: request => ExpertUtilsService.showRequest(request),
         }
       ];
       if (this.isOwnerOrStaff) {

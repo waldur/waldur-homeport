@@ -62,7 +62,7 @@ class SummaryController {
   }
 
   isValid() {
-    return this.prices && this.requirements;
+    return !this.error && this.prices && this.requirements;
   }
 
   getDailyPrice() {

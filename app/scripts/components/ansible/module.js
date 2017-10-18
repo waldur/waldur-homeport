@@ -3,13 +3,10 @@ import AnsiblePlaybooksService from './ansible-playbook-service';
 import AnsibleJobsService from './ansible-jobs-service';
 import ansibleJobState from './ansible-job-state';
 import ansibleJobsList from './ansible-jobs-list';
-import ansibleJobCreate from './ansible-job-create';
-import ansibleJobCheckoutSummary from './ansible-job-checkout-summary';
-import ansibleJobDetails from './ansible-job-details';
-import ansibleJobResourcesList from './ansible-job-resources';
-import ansibleJobSummary from './ansible-job-summary';
 import registerAppstoreCategory from './appstore-category';
 import registerSidebarExtension from './sidebar';
+import createModule from './create/module';
+import detailsModule from './details/module';
 
 export default module => {
   module.config(ansibleRoutes);
@@ -17,11 +14,8 @@ export default module => {
   module.service('AnsibleJobsService', AnsibleJobsService);
   module.component('ansibleJobState', ansibleJobState);
   module.component('ansibleJobsList', ansibleJobsList);
-  module.component('ansibleJobCreate', ansibleJobCreate);
-  module.component('ansibleJobCheckoutSummary', ansibleJobCheckoutSummary);
-  module.component('ansibleJobDetails', ansibleJobDetails);
-  module.component('ansibleJobResourcesList', ansibleJobResourcesList);
-  module.component('ansibleJobSummary', ansibleJobSummary);
   module.run(registerAppstoreCategory);
   module.run(registerSidebarExtension);
+  createModule(module);
+  detailsModule(module);
 };
