@@ -6,22 +6,23 @@ class SummaryController {
     $q,
     $uibModal,
     currentStateService,
+    ErrorMessageFormatter,
     AnsibleJobsService) {
     this.$q = $q;
     this.$uibModal = $uibModal;
     this.currentStateService = currentStateService;
+    this.ErrorMessageFormatter = ErrorMessageFormatter;
     this.AnsibleJobsService = AnsibleJobsService;
   }
 
   $onInit() {
     this.prices = {};
-    this.requirements = {};
     this.loading = true;
     this.loadData().then(() => {
       this.loading = false;
-    }).catch(() => {
+    }).catch(response => {
+      this.error = this.ErrorMessageFormatter.format(response);
       this.loading = false;
-      this.error = true;
     });
   }
 
