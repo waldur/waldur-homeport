@@ -24,7 +24,7 @@ const ansiblePriceExplanation = {
         cpu: prices.cpu * requirements.cpu,
         ram: prices.ram * requirements.ram,
         disk: prices.disk * requirements.disk,
-      }
+      };
     }
   }
 };
