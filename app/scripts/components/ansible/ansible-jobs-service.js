@@ -12,7 +12,7 @@ export default function AnsibleJobsService(ENV, $http, baseServiceClass) {
     },
 
     estimate: function(payload) {
-      return $http.post(`${ENV.apiEndpoint}api${this.endpoint}estimate/`, payload)
+      return $http.post(`${ENV.apiEndpoint}api/ansible-estimator/`, payload)
         .then(response => response.data);
     },
 

@@ -27,7 +27,7 @@ export default class ErrorMessageFormatter {
       return NETWORK_ERROR_MESSAGE.replace('{apiEndpoint}', this.ENV.apiEndpoint);
     }
 
-    let message = response.status + ': ' + response.statusText;
+    let message = `${response.status}: ${response.statusText}. `;
 
     if (response.data) {
       if (response.data.non_field_errors) {
@@ -35,6 +35,15 @@ export default class ErrorMessageFormatter {
       }
       if (response.data.detail) {
         message += ' ' + response.data.detail;
+      }
+      if (Array.isArray(response.data)) {
+        message += response.data.map(item => {
+          if (typeof item === 'object') {
+            return Object.keys(item).map(key => `${key}: ${item[key]}}`);
+          } else {
+            return item;
+          }
+        }).join('. ');
       }
     }
 

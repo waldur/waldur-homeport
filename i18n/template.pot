@@ -455,7 +455,7 @@ msgstr ""
 msgid "API token lifetime"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js:145
+#: app/scripts/components/ansible/create/ansible-job-create.js:146
 msgid "Application creation has been scheduled."
 msgstr ""
 
@@ -465,6 +465,10 @@ msgstr ""
 
 #: app/scripts/components/ansible/details/ansible-job-summary.js:29
 msgid "Application has been deleted"
+msgstr ""
+
+#: app/scripts/components/ansible/create/ansible-price-explanation.html:3
+msgid "Application price explanation"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js:27
@@ -894,6 +898,7 @@ msgstr ""
 msgid "Click on a 'Create bid' button when you are ready to fulfill expert request"
 msgstr ""
 
+#: app/scripts/components/ansible/create/ansible-price-explanation.html:43
 #: app/scripts/components/billing/events/invoice-events-dialog.html:45
 #: app/scripts/components/customer/details/customer-report-error.html:10
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html:11
@@ -958,6 +963,7 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
+#: app/scripts/components/ansible/create/ansible-price-explanation.html:10
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:4
 msgid "Component"
 msgstr ""
@@ -1047,6 +1053,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
+#: app/scripts/components/ansible/create/ansible-price-explanation.html:18
 #: app/scripts/components/appstore/appstore-compare-list.js:76
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:76
 #: app/scripts/components/slurm/details/slurm-allocation-summary.html:27
@@ -1312,7 +1319,7 @@ msgstr ""
 msgid "Deployment plan does not have any item yet."
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js:94
+#: app/scripts/components/ansible/create/ansible-job-create.js:95
 #: app/scripts/components/ansible/details/ansible-job-summary.html:34
 #: app/scripts/components/azure/azure-virtual-machine-config.js:20
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:74
@@ -1719,6 +1726,10 @@ msgstr ""
 msgid "Explain plan"
 msgstr ""
 
+#: app/scripts/components/ansible/create/ansible-job-checkout-summary.html:45
+msgid "Explain price"
+msgstr ""
+
 #: app/scripts/components/table/responsive-table.js:189
 msgid "Export as"
 msgstr ""
@@ -1765,7 +1776,7 @@ msgstr ""
 msgid "Financial overview"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js:108
+#: app/scripts/components/ansible/create/ansible-job-create.js:109
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:80
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:94
 #: app/scripts/components/user/keys/key-list.js:36
@@ -2584,8 +2595,8 @@ msgid "N/A"
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-jobs-list.js:50
-#: app/scripts/components/ansible/create/ansible-job-create.js:104
-#: app/scripts/components/ansible/create/ansible-job-create.js:86
+#: app/scripts/components/ansible/create/ansible-job-create.js:105
+#: app/scripts/components/ansible/create/ansible-job-create.js:87
 #: app/scripts/components/appstore/appstore-compare-list.js:69
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:13
 #: app/scripts/components/cost-planning/cost-plans-list.js:31
@@ -3517,6 +3528,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
+#: app/scripts/components/ansible/create/ansible-price-explanation.html:12
 #: app/scripts/components/billing/invoices-list.js:54
 #: app/scripts/components/cost-planning/cost-plan-flavors.html:8
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html:57
@@ -3899,6 +3911,7 @@ msgstr ""
 msgid "Quotas updated."
 msgstr ""
 
+#: app/scripts/components/ansible/create/ansible-price-explanation.html:24
 #: app/scripts/components/appstore/appstore-compare-list.js:83
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:59
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:39
@@ -4162,6 +4175,10 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-dialog.html:19
 #: app/scripts/components/project/project-policies.html:9
 msgid "Required certifications"
+msgstr ""
+
+#: app/scripts/components/ansible/create/ansible-price-explanation.html:11
+msgid "Requirements"
 msgstr ""
 
 #: app/scripts/components/invitations/actions/send.js:8
@@ -4686,7 +4703,7 @@ msgstr ""
 msgid "SSH Port"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js:100
+#: app/scripts/components/ansible/create/ansible-job-create.js:101
 #: app/scripts/components/ansible/details/ansible-job-summary.html:39
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:72
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:86
@@ -4767,6 +4784,7 @@ msgstr ""
 msgid "Stopping"
 msgstr ""
 
+#: app/scripts/components/ansible/create/ansible-price-explanation.html:30
 #: app/scripts/components/appstore/appstore-compare-list.js:90
 #: app/scripts/components/customer/customer-list.js:67
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js:64
@@ -5084,7 +5102,7 @@ msgstr ""
 msgid "This month estimated costs for organization {customer_name} exceeded."
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js:87
+#: app/scripts/components/ansible/create/ansible-job-create.js:88
 #: app/scripts/components/experts/requests/create/expert-request-create.js:44
 #: app/scripts/components/offering/appstore-offering.js:42
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:24
@@ -5152,6 +5170,7 @@ msgid "To update current plan visit <a href=\"{link}\">plans page</a>."
 msgstr ""
 
 #: app/scripts/components/analytics/resource-pie-chart.html:21
+#: app/scripts/components/ansible/create/ansible-price-explanation.html:13
 #: app/scripts/components/billing/billing-records-list.js:58
 #: app/scripts/components/billing/invoices-list.js:64
 #: app/scripts/components/paypal/paypal-invoices-list.js:68
@@ -5238,7 +5257,7 @@ msgstr ""
 msgid "Unable to create a FreeIPA profile."
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js:153
+#: app/scripts/components/ansible/create/ansible-job-create.js:154
 msgid "Unable to create application."
 msgstr ""
 
@@ -5813,7 +5832,7 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js:114
+#: app/scripts/components/ansible/create/ansible-job-create.js:115
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:98
 msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr ""
