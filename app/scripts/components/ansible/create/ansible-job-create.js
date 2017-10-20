@@ -40,7 +40,8 @@ const ansibleJobCreate = {
     loadKeys() {
       return this.usersService.getCurrentUser().then(user => {
         return this.keysService.getAll({
-          user_uuid: user.uuid
+          user_uuid: user.uuid,
+          is_shared: false
         }).then(keys => {
           this.keys = keys;
         });

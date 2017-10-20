@@ -1,0 +1,45 @@
+<div class="modal-header">
+  <h3 class="modal-title">
+    <span translate>Application price explanation</span>
+  </h3>
+</div>
+<div class="modal-body">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th translate>Component</th>
+        <th translate>Requirements</th>
+        <th translate>Price</th>
+        <th translate>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td translate>CPU</td>
+        <td>{{ $ctrl.requirements.cpu }} vCPU</td>
+        <td>{{ $ctrl.prices.cpu | defaultCurrency }}</td>
+        <td>{{ $ctrl.costs.cpu | defaultCurrency }}</td>
+      </tr>
+      <tr>
+        <td translate>RAM</td>
+        <td>{{ $ctrl.requirements.ram }} GB</td>
+        <td>{{ $ctrl.prices.ram | defaultCurrency }}</td>
+        <td>{{ $ctrl.costs.ram | defaultCurrency }}</td>
+      </tr>
+      <tr>
+        <td translate>Storage</td>
+        <td>{{ $ctrl.requirements.disk }} GB</td>
+        <td>{{ $ctrl.prices.disk | defaultCurrency }}</td>
+        <td>{{ $ctrl.costs.disk | defaultCurrency }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+  <button
+    class="btn btn-default"
+    type="button"
+    ng-click="$ctrl.dismiss()">
+    <span translate>Close</span>
+  </button>
+</div>
