@@ -1613,11 +1613,11 @@ msgstr "Esimene"
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:7
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:58
 msgid "Flavor"
-msgstr "Maitse"
+msgstr "Variant"
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:50
 msgid "Flavor name"
-msgstr "Maitse nimi"
+msgstr "Variandi nimi"
 
 #: app/scripts/components/digitalocean/droplet-resize.html:41
 msgid "Flexible"
