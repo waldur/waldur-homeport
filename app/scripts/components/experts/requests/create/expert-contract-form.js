@@ -27,16 +27,17 @@ const expertContract = {
 
         angular.forEach(tab.options, (option, name) => {
           option.name = name;
-          if (this.expert.options_overrides[name] && this.expert.options_overrides[name].default_value !== undefined) {
-            this.model[name] = this.expert.options_overrides[name].default_value;
-          }
-          else if (option.default) {
-            this.model[name] = option.default;
-          }
+          this.model[name] = this.getDefaultValue(option);
         });
       });
 
       this.loading = false;
+    }
+
+    getDefaultValue(option) {
+      const overrides = this.expert.options_overrides || {};
+      const extra = overrides[option.name] || {};
+      return extra.default_value || option.default_value;
     }
 
     createTab(name, options) {

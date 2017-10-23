@@ -1726,7 +1726,7 @@ msgstr ""
 msgid "Explain plan"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-checkout-summary.html:45
+#: app/scripts/components/ansible/create/ansible-job-checkout-summary.html:46
 msgid "Explain price"
 msgstr ""
 
@@ -5289,10 +5289,6 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js:24
 msgid "Unable to fetch project providers."
-msgstr ""
-
-#: app/scripts/components/ansible/create/ansible-job-checkout-summary.html:12
-msgid "Unable to fetch summary."
 msgstr ""
 
 #: app/scripts/components/core/bootstrap.js:25
