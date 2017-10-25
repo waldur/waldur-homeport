@@ -155,6 +155,7 @@ export default {
   },
   summaryComponent: 'openstackInstanceCheckoutSummary',
   saveConfirmation: saveConfirmation,
+  onSuccess: onSuccess,
 };
 
 export function internalIpFormatter(subnet) {
@@ -231,4 +232,9 @@ function flavorValidator(model, choice) {
     return true;
   }
   return false;
+}
+
+function onSuccess($injector) {
+  const openstackFloatingIpsService = $injector.get('openstackFloatingIpsService');
+  openstackFloatingIpsService.clearAllCacheForCurrentEndpoint();
 }

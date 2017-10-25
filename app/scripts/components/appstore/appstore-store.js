@@ -17,6 +17,7 @@ function AppStoreController(
   ENV,
   ncUtils,
   $q,
+  $injector,
   $state,
   resourcesService,
   joinService,
@@ -359,6 +360,9 @@ function AppStoreController(
       projectsService.clearAllCacheForCurrentEndpoint();
       priceEstimationService.clearAllCacheForCurrentEndpoint();
       joinService.clearAllCacheForCurrentEndpoint();
+      if (this.fields.onSuccess) {
+        this.fields.onSuccess($injector);
+      }
     },
     onError: function() {
       var message = '';

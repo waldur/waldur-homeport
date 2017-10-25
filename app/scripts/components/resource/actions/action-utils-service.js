@@ -1,6 +1,6 @@
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, $http, $q, $uibModal, ncUtils, features,
+  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $injector, ncUtils, features,
   resourcesService, ActionConfiguration, ActionResourceLoader, coreUtils, usersService) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
@@ -100,6 +100,9 @@ export default function actionUtilsService(
     var template = action.successMessage ||
         coreUtils.templateFormatter(gettext('Request to {action} has been accepted.'), { action: action.title.toLowerCase() });
     ncUtilsFlash.success(template);
+    if (action.onSuccess) {
+      action.onSuccess($injector);
+    }
   };
 
   this.openActionDialog = function(controller, resource, name, action) {
