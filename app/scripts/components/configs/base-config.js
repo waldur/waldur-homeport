@@ -193,6 +193,7 @@ const ENV = {
     'registration_method',
     'job_title',
     'phone_number',
+    'organization'
   ],
 
   languageChoices: [
