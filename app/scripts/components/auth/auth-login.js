@@ -56,9 +56,8 @@ export const authLogin = {
     }
 
     showRegisterButton() {
-      return this.methods.LOCAL_SIGNUP && !this.isSignupFormVisible && (
-        !this.ENV.invitationsEnabled || this.ENV.allowSignupWithoutInvitation
-      );
+      return !this.isSignupFormVisible &&
+          (!this.ENV.invitationsEnabled || this.ENV.allowSignupWithoutInvitation);
     }
 
     showRegisterForm() {
@@ -68,6 +67,11 @@ export const authLogin = {
     showSocialSignup() {
       return this.methods.SOCIAL_SIGNUP && !this.civilNumberRequired;
     }
+
+    showSocialSignupLabel() {
+      return this.showSocialSignup() && this.SOCIAL_SIGNUP;
+    }
+
 
     showGoogle() {
       return this.showSocialSignup() && !!this.ENV.googleClientId;

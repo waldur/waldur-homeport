@@ -886,7 +886,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:204
+#: app/scripts/components/auth/auth-login.js:203
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
@@ -2066,7 +2066,7 @@ msgstr ""
 msgid "Invitation is not valid."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:129
+#: app/scripts/components/auth/auth-login.js:128
 msgid "Invitation token is not found."
 msgstr ""
 
@@ -5196,7 +5196,7 @@ msgstr ""
 msgid "Unable to set quotas."
 msgstr ""
 
-#: app/scripts/components/auth/auth-login.js:139
+#: app/scripts/components/auth/auth-login.js:138
 msgid "Unable to validate invitation token."
 msgstr ""
 
