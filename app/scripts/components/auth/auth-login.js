@@ -72,7 +72,6 @@ export const authLogin = {
       return this.showSocialSignup() && this.SOCIAL_SIGNUP;
     }
 
-
     showGoogle() {
       return this.showSocialSignup() && !!this.ENV.googleClientId;
     }
