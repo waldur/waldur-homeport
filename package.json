@@ -79,9 +79,8 @@
     "world-flags-sprite": "^0.0.2"
   },
   "scripts": {
-    "prestart": "npm run locale-extract && webpack --config=webpack.config.common.js",
+    "prestart": "webpack --config=webpack.config.common.js",
     "start": "webpack-dev-server --progress --config webpack.config.dev.js",
-    "prebuild": "npm run locale-extract",
     "build": "webpack --config=webpack.config.prod.js",
     "pretest": "npm run build",
     "test": "npm run lint && npm run test-single-run",
