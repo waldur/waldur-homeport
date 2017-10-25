@@ -7,6 +7,7 @@ const Extractor = require('./angular-gettext-extractor');
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
+var shell = require('shelljs');
 
 function AngularGetTextPlugin(options) {
   this.compileTranslations = options.compileTranslations;
@@ -46,6 +47,7 @@ AngularGetTextPlugin.prototype.apply = function(compiler) {
       results.forEach( (result) => {
         const { fileName, content } = result;
         const outPath = path.join(options.compileTranslations.outputFolder, fileName);
+        shell.mkdir('-p', options.compileTranslations.outputFolder);
         fs.writeFileSync(outPath, content);
         compilation.assets[outPath] = {
           source: function() {

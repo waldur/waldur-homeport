@@ -139,6 +139,7 @@ module.exports = {
     // some files are not referenced explicitly, copy them.
     new CopyWebpackPlugin([
       {from: './app/views', to: '../views'},
+      {from: './app/static/js/i18n/', to: './js/i18n/'},
       {from: path.resolve(imagesPath, './appstore'), to: './images/appstore'},
       {from: path.resolve(imagesPath, './help'), to: './images/help'},
       {from: path.resolve(imagesPath, './waldur'), to: './images/waldur'},
