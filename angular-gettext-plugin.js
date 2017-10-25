@@ -43,11 +43,11 @@ AngularGetTextPlugin.prototype.apply = function(compiler) {
   compiler.plugin('emit', (compilation, done) => {
 
     if (options.compileTranslations) {
+      shell.mkdir('-p', options.compileTranslations.outputFolder);
       const results = compile(options.compileTranslations);
       results.forEach( (result) => {
         const { fileName, content } = result;
         const outPath = path.join(options.compileTranslations.outputFolder, fileName);
-        shell.mkdir('-p', options.compileTranslations.outputFolder);
         fs.writeFileSync(outPath, content);
         compilation.assets[outPath] = {
           source: function() {

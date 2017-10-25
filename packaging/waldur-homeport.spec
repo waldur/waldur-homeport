@@ -1,5 +1,5 @@
 # BuildRequiresRepo: epel-release
-# BuildRequiresRepo: https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
+# BuildRequiresRepo: https://rpm.nodesource.com/pub_6.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
 
 %define __conf_dir %{_sysconfdir}/%{name}
 %define __data_dir %{_datadir}/%{name}
@@ -21,7 +21,7 @@ BuildRequires: libpng-devel
 BuildRequires: libtool
 BuildRequires: make
 BuildRequires: nasm
-BuildRequires: nodejs < 6
+BuildRequires: nodejs
 BuildRequires: rubygem-sass
 
 %description
