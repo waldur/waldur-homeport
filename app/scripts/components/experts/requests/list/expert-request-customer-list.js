@@ -89,7 +89,12 @@ function ExpertRequestListController(
           orderField: 'state',
           render: row => {
             const index = this.findIndexById(row);
-            return `<expert-request-state model="controller.list[${index}]"/>`;
+            let submittedProposal = '';
+            if (this.requestHasBids(row.uuid)) {
+              submittedProposal = `<span class="m-l-sm">` +
+                `<i class="fa fa-thumbs-o-up" uib-tooltip="${gettext('You have placed a bid already.')}"></i></span>`;
+            }
+            return `<expert-request-state model="controller.list[${index}]"></expert-request-state>` + submittedProposal;
           }
         },
         {
