@@ -77,7 +77,7 @@ function ExpertRequestListController(
         },
         {
           title: gettext('Objectives'),
-          orderField: 'objectives',
+          orderable: false,
           render: row => {
             return '<span uib-tooltip="{tooltip}">{value}</span>'
               .replace('{tooltip}', row.objectives)
