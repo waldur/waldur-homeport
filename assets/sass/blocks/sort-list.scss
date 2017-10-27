@@ -1,47 +1,57 @@
 .sort-list {
-    @include clear-list;
-    display: flex;
-    -webkit-flex-flow: row wrap;
-    position: relative;
-    min-height: 30px;
-    li {
-        @include property(padding, 0 10);
-        @include bp(xs) {
-            @include property(padding, 0);
-            @include property(margin-top, 5);
-        }
-        @include property(padding-right, 0);
-        &:nth-child(1) {
-            @include property(padding-left, 0);
-        } // &:nth-child(1)
-        &.title {
-            @include bp(xs) {
-                flex: 1 100%;
-                @include property(padding-left, 0);
-                @include property(margin-bottom, 14);
-            } // xs
-        } // &.title
-        &.search {
-            @include bp(xs) {
-                flex: 1 100%;
-                border-left: none;
-                @include property(padding-left, 0);
-                @include property(margin-top, 14);
-            } // xs
-        } // &.search
-        &.right-sort {
-            @include bp(xs) {
-                position: static;
-                padding-top: 5px;
-                margin-top: 10px;
-            } // xs
-        } // &.right-sort
-        .app-title {
-            @include inline-middle;
-            @include property(margin-bottom, -4);
-        }
-        &.full-width {
-            flex-grow: 1;
-        }
-    } // li
-} // sort-list
+  @include clear-list;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  position: relative;
+  min-height: 30px;
+  li {
+    @include property(padding, 0 10);
+    @include bp(xs) {
+      @include property(padding, 0);
+      @include property(margin-top, 5);
+    }
+    @include property(padding-right, 0);
+    &:nth-child(1) {
+      @include property(padding-left, 0);
+    }
+    // &:nth-child(1)
+    &.title {
+      @include bp(xs) {
+        flex: 1 100%;
+        @include property(padding-left, 0);
+        @include property(margin-bottom, 14);
+      }
+      // xs
+    }
+    // &.title
+    &.search {
+      @include bp(xs) {
+        flex: 1 100%;
+        border-left: none;
+        @include property(padding-left, 0);
+        @include property(margin-top, 14);
+      }
+      // xs
+    }
+    // &.search
+    &.right-sort {
+      @include bp(xs) {
+        position: static;
+        padding-top: 5px;
+        margin-top: 10px;
+      }
+      // xs
+    }
+    // &.right-sort
+    .app-title {
+      @include inline-middle;
+      @include property(margin-bottom, -4);
+    }
+    &.full-width {
+      flex-grow: 1;
+    }
+  }
+  // li
+}
+
+// sort-list

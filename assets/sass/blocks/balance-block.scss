@@ -10,12 +10,12 @@
 .dropdown__menu {
   z-index: 21;
   position: absolute;
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 5px;
   background: #fff;
   left: auto;
   right: 0;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
   width: 300px;
   margin-top: 5px;
 
@@ -24,7 +24,7 @@
     display: inline-block;
     content: "";
     border: 8px solid transparent;
-    border-bottom-color: rgba(0,0,0,0.15);
+    border-bottom-color: rgba(0, 0, 0, 0.15);
     top: -16px;
     left: auto;
     right: 9px;
@@ -43,7 +43,7 @@
 }
 
 .dropdown__header {
-  border-bottom: 1px solid rgba(200,200,200,0.4);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.4);
   padding: 10px;
   font-weight: bold;
   color: #888;
@@ -127,7 +127,7 @@
     vertical-align: middle;
     border-radius: 3px;
     border: 1px solid #D8D8D8;
-  }  
+  }
 }
 
 .tab-link__item {
@@ -137,13 +137,13 @@
   color: $text-color;
 
   &:hover {
-    background-color: rgba(255,255,255,.5);
+    background-color: rgba(255, 255, 255, .5);
     text-decoration: none;
   }
 
   &.active {
     background: #FFF;
-    box-shadow: -2px 2px 2px 0px rgba(237,237,237,1);
+    box-shadow: -2px 2px 2px 0px rgba(237, 237, 237, 1);
     font-weight: bold;
   }
 }
