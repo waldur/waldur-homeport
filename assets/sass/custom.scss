@@ -120,6 +120,7 @@ body.landing {
 
   @include bp(xs) {
     height: auto;
+    min-height: 100%;
     position: relative;
   }
 }
