@@ -1,48 +1,59 @@
 .white-box {
-    margin: auto;
-    @include property(margin, 20 60);
-    @include property(padding, 20);
-    border-radius: 1px;
-    background: #FFFFFF;
-    border: 0px solid #D8D8D8;
-    box-shadow: 0px 2px 2px 0px rgba(223,223,223,0.50);
-    &.no-styles {
-        background: transparent;
-        border: none;
-        box-shadow: none;
-        text-align: center;
-    } // empty
-    &.clear {
-        padding: 0;
-    } // &.clear
-    &.active {
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
-    } // &.top-level
-    @include bp(xs) {
-        @include property(margin, 0);
-        @include property(padding, 10 10);
-    } // xs
-    @include bp(sm) {
-        @include property(margin, 20 10);
-    } // sm
-    @include bp(md) {
-        @include property(margin, 20 30);
-    } // md
-    .simple-line {
-        @include property(padding, 0 10);
-        @include property(margin, 20 0);
-        &.first {
-            @include property(margin-top, 0);
-        } // &.first
-    } // simple-line
-    &.empty-data-block {
-        text-align: center;
-        h2 {
-            float: none;
-        }
+  margin: auto;
+  @include property(margin, 20 60);
+  @include property(padding, 20);
+  border-radius: 1px;
+  background: #FFFFFF;
+  border: 0px solid #D8D8D8;
+  box-shadow: 0px 2px 2px 0px rgba(223, 223, 223, 0.50);
+  &.no-styles {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+  }
+  // empty
+  &.clear {
+    padding: 0;
+  }
+  // &.clear
+  &.active {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+  }
+  // &.top-level
+  @include bp(xs) {
+    @include property(margin, 0);
+    @include property(padding, 10 10);
+  }
+  // xs
+  @include bp(sm) {
+    @include property(margin, 20 10);
+  }
+  // sm
+  @include bp(md) {
+    @include property(margin, 20 30);
+  }
+  // md
+  .simple-line {
+    @include property(padding, 0 10);
+    @include property(margin, 20 0);
+    &.first {
+      @include property(margin-top, 0);
     }
-    &.text-page {
-        text-align: justify;
-        padding: 50px 80px;
-    } // tos-page
-} // white-box
+    // &.first
+  }
+  // simple-line
+  &.empty-data-block {
+    text-align: center;
+    h2 {
+      float: none;
+    }
+  }
+  &.text-page {
+    text-align: justify;
+    padding: 50px 80px;
+  }
+  // tos-page
+}
+
+// white-box

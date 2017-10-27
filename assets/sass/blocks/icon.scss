@@ -1,101 +1,103 @@
 .icon {
-    @include inline-middle;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transform: translate(0, 0);
-    position: relative;
-    top: -2px;
-    &.plus:before {
-        content: '\f067';
-    }
-    &.bars:before {
-        content: '\f0c9';
-    }
-    &.gear:before {
-        content: '\f013';
-    }
-    &.cloud:before {
-        content: '\f0c2';
-    }
-    &.lock:before {
-        content: '\f023';
-    }
-    &.wrench:before {
-        content: '\f0ad';
-    }
-    &.desktop:before, &.resource:before {
-        content: '\f108';
-    }
-    &.database:before, &.service:before {
-        content: '\f1c0';
-    }
-    &.close:before {
-        content: '\f00d';
-    }
-    &.external-link:before {
-        content: '\f08e';
-    }
-    &.group:before, &.customer:before {
-        content: '\f0c0';
-    }
-    &.project:before {
-        content: '\f115';
-    }
-    &.user:before {
-        content: '\f007';
-    }
-    &.key:before {
-        content: '\f084';
-    }
-    &.cart-plus:before {
-        content: '\f217';
-    }
-    &.zoom:before {
-        content: '\f002';
-    }
-    &.chevron-circle-down:before {
-        content: '\f13a';
-    }
-    &.chevron-circle-up:before {
-        content: '\f139';
-    }
-    &.check:before {
-        content: "\f00c";
-    }
-    &.minus:before {
-        content: "\f068";
-    }
-    &.refresh:before {
-        content: '\f021';
-    }
-    &.exclamation-triangle:before {
-        content: "\f071";
-    }
-    &.pencil-square-o:before {
-        content: "\f044";
-    }
-    &.alerts:before {
-        content: '\f06d';
-    }
-    &.event:before {
-        content: '\f0a2';
-    }
-    &.application:before {
-        content: '\f1b2';
-    }
-    &.invoice:before {
-        content: '\f0f6';
-    }
-    &.help:before {
-        content: '\f059';
-    }
-    &.map-marker:before {
-        content: '\f041';
-    }
-    &.calculator:before {
-        content: "\f1ec";
-    }
-} // icons
+  @include inline-middle;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+  position: relative;
+  top: -2px;
+  &.plus:before {
+    content: '\f067';
+  }
+  &.bars:before {
+    content: '\f0c9';
+  }
+  &.gear:before {
+    content: '\f013';
+  }
+  &.cloud:before {
+    content: '\f0c2';
+  }
+  &.lock:before {
+    content: '\f023';
+  }
+  &.wrench:before {
+    content: '\f0ad';
+  }
+  &.desktop:before, &.resource:before {
+    content: '\f108';
+  }
+  &.database:before, &.service:before {
+    content: '\f1c0';
+  }
+  &.close:before {
+    content: '\f00d';
+  }
+  &.external-link:before {
+    content: '\f08e';
+  }
+  &.group:before, &.customer:before {
+    content: '\f0c0';
+  }
+  &.project:before {
+    content: '\f115';
+  }
+  &.user:before {
+    content: '\f007';
+  }
+  &.key:before {
+    content: '\f084';
+  }
+  &.cart-plus:before {
+    content: '\f217';
+  }
+  &.zoom:before {
+    content: '\f002';
+  }
+  &.chevron-circle-down:before {
+    content: '\f13a';
+  }
+  &.chevron-circle-up:before {
+    content: '\f139';
+  }
+  &.check:before {
+    content: "\f00c";
+  }
+  &.minus:before {
+    content: "\f068";
+  }
+  &.refresh:before {
+    content: '\f021';
+  }
+  &.exclamation-triangle:before {
+    content: "\f071";
+  }
+  &.pencil-square-o:before {
+    content: "\f044";
+  }
+  &.alerts:before {
+    content: '\f06d';
+  }
+  &.event:before {
+    content: '\f0a2';
+  }
+  &.application:before {
+    content: '\f1b2';
+  }
+  &.invoice:before {
+    content: '\f0f6';
+  }
+  &.help:before {
+    content: '\f059';
+  }
+  &.map-marker:before {
+    content: '\f041';
+  }
+  &.calculator:before {
+    content: "\f1ec";
+  }
+}
+
+// icons

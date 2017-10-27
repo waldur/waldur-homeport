@@ -1,52 +1,64 @@
 .landing .footer {
-    position: relative;
-    background-color: #565656;
+  position: relative;
+  background-color: #565656;
+  color: white;
+  box-sizing: border-box;
+  @include property(font-size, $small-font);
+  @include property(height, 50);
+  @include property(padding-top, 13);
+  width: 100%;
+  @include bp(xs) {
+    height: auto;
+  }
+  // xs
+  @include bp(sm) {
+    height: auto;
+  }
+  // sm
+  a {
     color: white;
-    box-sizing: border-box;
-    @include property(font-size, $small-font);
-    @include property(height, 50);
-    @include property(padding-top, 13);
-    width: 100%;
+    text-decoration: none;
+  }
+  // a
+  .copy {
+    float: left;
     @include bp(xs) {
-        height: auto;
-    } // xs
+      display: block;
+      float: none;
+      text-align: center;
+    }
+    // xs
     @include bp(sm) {
-        height: auto;
-    } // sm
-    a {
-        color: white;
-        text-decoration: none;
-    } // a
-    .copy {
-        float: left;
-        @include bp(xs) {
-            display: block;
-            float: none;
-            text-align: center;
-        } // xs
-        @include bp(sm) {
-            display: block;
-        } // sm
-    } // copy
-} // app-footer
+      display: block;
+    }
+    // sm
+  }
+  // copy
+}
+
+// app-footer
 
 .footer-nav {
-    float: right;
-    @include clear-list-inline;
-    li + li {
-        &:before {
-            @include inline-middle;
-            content: '|';
-            opacity: 0.4;
-        }
+  float: right;
+  @include clear-list-inline;
+  li + li {
+    &:before {
+      @include inline-middle;
+      content: '|';
+      opacity: 0.4;
     }
-    @include bp(xs) {
-        display: block;
-        font-size: 12px;
-        float: none;
-        text-align: center;
-    } // xs
-    @include bp(sm) {
-        display: block;
-    } // sm
-} // footer-nav
+  }
+  @include bp(xs) {
+    display: block;
+    font-size: 12px;
+    float: none;
+    text-align: center;
+  }
+  // xs
+  @include bp(sm) {
+    display: block;
+  }
+  // sm
+}
+
+// footer-nav

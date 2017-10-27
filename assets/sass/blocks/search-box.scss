@@ -1,11 +1,11 @@
 .search-box {
-    position: relative;
-    input {
-        @include property(padding-left, 30);
-    }
-    label {
-        position: absolute;
-        top: 7px;
-        left: 10px;
-    }
+  position: relative;
+  input {
+    @include property(padding-left, 30);
+  }
+  label {
+    position: absolute;
+    top: 7px;
+    left: 10px;
+  }
 }

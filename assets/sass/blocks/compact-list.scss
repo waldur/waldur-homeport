@@ -1,37 +1,37 @@
 $compact-list-border-color: #e5e5e5;
 
 .mobile-show {
-    display: none;
-    @include bp(xs) {
-        display: initial;
-    }
-    @include bp(sm) {
-        display: initial;
-    }
+  display: none;
+  @include bp(xs) {
+    display: initial;
+  }
+  @include bp(sm) {
+    display: initial;
+  }
 }
 
 .mobile-hide {
-    display: initial;
-    @include bp(xs) {
-        display: none;
-    }
-    @include bp(sm) {
-        display: none;
-    }
+  display: initial;
+  @include bp(xs) {
+    display: none;
+  }
+  @include bp(sm) {
+    display: none;
+  }
 }
 
 .xs-show {
-    display: none;
-    @include bp(xs) {
-        display: initial;
-    }
+  display: none;
+  @include bp(xs) {
+    display: initial;
+  }
 }
 
 .xs-hide {
-    display: initial;
-    @include bp(xs) {
-        display: none;
-    }
+  display: initial;
+  @include bp(xs) {
+    display: none;
+  }
 }
 
 .compact-list {
