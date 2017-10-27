@@ -4,8 +4,8 @@ import template from './sidebar-toggle.html';
 export default {
   template: template,
   controller: class SidebarToggleController {
+    // @ngInject
     constructor($rootScope) {
-      // @ngInject
       this.$rootScope = $rootScope;
     }
 

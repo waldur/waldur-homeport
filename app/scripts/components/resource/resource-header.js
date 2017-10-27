@@ -3,6 +3,7 @@ import template from './resource-header.html';
 const resourceHeader = {
   template: template,
   controller: class ResourceHeaderController{
+    // @ngInject
     constructor(
       $stateParams,
       $state,

@@ -3,7 +3,7 @@ import template from './ansible-job-details.html';
 const ansbileJobDetails = {
   template: template,
   controller: class AnsbileJobDetailsController {
-    // ngInject
+    // @ngInject
     constructor($stateParams, $interval, $scope, ENV, AnsibleJobsService, BreadcrumbsService) {
       this.$stateParams = $stateParams;
       this.$interval = $interval;

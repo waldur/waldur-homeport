@@ -6,6 +6,7 @@ const quotaUsageBarChart = {
     quotas: '<',
   },
   controller: class ComponentController {
+    // @ngInject
     constructor(coreUtils, $filter) {
       this.coreUtils = coreUtils;
       this.$filter = $filter;

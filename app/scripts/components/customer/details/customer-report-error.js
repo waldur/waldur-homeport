@@ -1,7 +1,7 @@
 import template from './customer-report-error.html';
 
-// @ngInject
 class DialogController {
+  // @ngInject
   constructor(features, $uibModal, ISSUE_IDS, ENV, coreUtils) {
     this.features = features;
     this.$uibModal = $uibModal;

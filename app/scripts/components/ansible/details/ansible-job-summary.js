@@ -6,6 +6,7 @@ const ansibleJobSummary = {
     job: '<',
   },
   controller: class Controller {
+    // @ngInject
     controller($state, AnsibleJobsService, resourcesService, ncUtilsFlash) {
       this.$state = $state;
       this.AnsibleJobsService = AnsibleJobsService;

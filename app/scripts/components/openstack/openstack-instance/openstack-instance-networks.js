@@ -20,8 +20,8 @@ const openstackInstanceNetworks = {
     form: '<',
   },
   controller: class ComponentController {
+    // @ngInject
     constructor($scope) {
-      // @ngInject
       this.items = [];
       this.addItem();
       this.$scope = $scope;

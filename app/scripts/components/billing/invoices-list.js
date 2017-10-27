@@ -14,7 +14,6 @@ function InvoicesListController(
   invoicesService,
   BillingUtils,
   ncUtils,
-  ncUtilsFlash,
   $state,
   $filter) {
   var controllerScope = this;

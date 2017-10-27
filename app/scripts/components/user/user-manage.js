@@ -11,8 +11,8 @@ export default function userManage() {
   };
 }
 
-// @ngInject
 class UserManageController {
+  // @ngInject
   constructor(usersService, $state, ncUtilsFlash, $uibModal, $q, ISSUE_IDS) {
     this.usersService = usersService;
     this.$state = $state;

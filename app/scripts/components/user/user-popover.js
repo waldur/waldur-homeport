@@ -8,6 +8,7 @@ export const userPopover = {
     resolve: '<'
   },
   controller: class UserPopoverController {
+    // @ngInject
     constructor(usersService) {
       this.usersService = usersService;
     }

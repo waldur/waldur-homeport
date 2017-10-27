@@ -4,6 +4,7 @@ export default class HttpUtils {
     Ideally it should not be a class, because it doesn't have any internal state.
     The only reason to implement this class is to use AngularJS dependency injection.
   */
+  // @ngInject
   constructor($http) {
     this.$http = $http;
   }

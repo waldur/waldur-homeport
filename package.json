@@ -91,6 +91,7 @@
   "devDependencies": {
     "angular-intro.js": "~3.1.3",
     "babel-eslint": "^7.2.3",
+    "babel-plugin-angularjs-annotate": "^0.8.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",

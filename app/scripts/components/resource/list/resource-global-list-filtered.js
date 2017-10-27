@@ -14,6 +14,7 @@ const RESOURCE_STATES = [
 const resourceGlobalListFiltered = {
   template,
   controller: class ResourceGlobalListFilteredController {
+    // @ngInject
     constructor(ENV) {
       this.ENV = ENV;
 

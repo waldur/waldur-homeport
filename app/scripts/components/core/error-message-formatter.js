@@ -1,8 +1,8 @@
 const NETWORK_ERROR_MESSAGE = 'Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues.';
 
-//@ngInject
 export default class ErrorMessageFormatter {
 
+  //@ngInject
   constructor(ENV, $filter) {
     this.ENV = ENV;
     this.$filter = $filter;

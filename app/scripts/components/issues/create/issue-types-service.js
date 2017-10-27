@@ -1,5 +1,6 @@
 import { ISSUE_TYPE_CHOICES, ISSUE_IDS } from './constants';
 
+// @ngInject
 export default function IssueTypesService(ENV, usersService) {
   return {
     getAllTypes,

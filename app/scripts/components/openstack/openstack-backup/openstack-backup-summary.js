@@ -6,8 +6,8 @@ export const openstackBackupSummary = {
     resource: '<'
   },
   controller: class openstackBackupSummaryController {
+    // @ngInject
     constructor($scope, ncUtils) {
-      // @ngInject
       this.ncUtils = ncUtils;
       $scope.$watch(() => this.resource, () => {
         this.update();

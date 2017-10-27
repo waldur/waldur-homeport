@@ -1,5 +1,5 @@
-// @ngInject
 export default class FreeIPAQuotaService {
+  // @ngInject
   constructor(quotasService, features) {
     this.quotasService = quotasService;
     this.features = features;

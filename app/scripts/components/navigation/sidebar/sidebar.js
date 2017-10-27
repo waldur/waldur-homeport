@@ -1,7 +1,7 @@
 import template from './sidebar.html';
 
-// @ngInject
 class SidebarController {
+  // @ngInject
   constructor(ENV, $state, $scope) {
     this.shortPageTitle = ENV.shortPageTitle;
     this.sidebarLogo = ENV.sidebarLogo;

@@ -7,6 +7,7 @@ const breadcrumbs = {
     activeItem: '<'
   },
   controller: class BreadcrumbsController {
+    // @ngInject
     constructor($state) {
       this.$state = $state;
     }

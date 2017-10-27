@@ -7,8 +7,8 @@ const providerDetails = {
     provider: '<'
   },
   controller: class ProviderDetailsController {
+    // @ngInject
     constructor($injector, $timeout, $ocLazyLoad) {
-      // @ngInject
       this.$injector = $injector;
       this.$timeout = $timeout;
       this.$ocLazyLoad = $ocLazyLoad;

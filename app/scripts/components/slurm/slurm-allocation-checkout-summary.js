@@ -1,8 +1,8 @@
 import template from './slurm-allocation-checkout-summary.html';
 import { getEstimatedPrice } from './utils';
 
-// @ngInject
 class SummaryController {
+  // @ngInject
   constructor($q, $scope, coreUtils, currentStateService, SlurmPackagesService) {
     this.$q = $q;
     this.$scope = $scope;

@@ -6,6 +6,7 @@ const resourcePrivateCloudsList = {
 
 export default resourcePrivateCloudsList;
 
+// @ngInject
 function ProjectPrivateCloudsTabController($scope,
                                            $timeout,
                                            BaseProjectResourcesTabController,

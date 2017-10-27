@@ -1,5 +1,5 @@
-// @ngInject
 export default class EventDialogsService {
+  // @ngInject
   constructor($uibModal, eventsService) {
     this.$uibModal = $uibModal;
     this.eventsService = eventsService;

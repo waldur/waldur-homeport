@@ -5,8 +5,8 @@ const providerIcon = {
   },
   template: '<img ng-src="{{ $ctrl.getIcon() }}" ng-class="::$ctrl.size"/>',
   controller: class ComponentController {
+    // @ngInject
     constructor(ncServiceUtils) {
-      // @ngInject
       this.utils = ncServiceUtils;
     }
     getIcon() {

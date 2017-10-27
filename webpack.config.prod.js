@@ -23,8 +23,7 @@ module.exports = merge(baseConfig, {
         screw_ie8: true,
         warnings: false,
       },
-      // mangle breakes AngularJS
-      mangle: false,
+      mangle: true,
       output: {
         screw_ie8: true
       },

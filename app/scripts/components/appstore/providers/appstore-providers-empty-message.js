@@ -3,8 +3,8 @@ import template from './appstore-providers-empty-message.html';
 const appstoreProvidersEmptyMessage = {
   template: template,
   controller: class AppstoreProvidersEmptyMessageController {
+    // @ngInject
     constructor($state, $stateParams, coreUtils, currentStateService, AppStoreUtilsService) {
-      // @ngInject
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.coreUtils = coreUtils;

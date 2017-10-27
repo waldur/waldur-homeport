@@ -3,6 +3,7 @@ import template from './offering-details.html';
 const offeringDetails = {
   template,
   controller: class OfferingDetailsController {
+    // @ngInject
     constructor(
       offeringsService,
       projectsService,
@@ -12,7 +13,6 @@ const offeringDetails = {
       BreadcrumbsService,
       $stateParams,
       $state) {
-      // @ngInject
       this.offeringsService = offeringsService;
       this.projectsService = projectsService;
       this.customersService = customersService;

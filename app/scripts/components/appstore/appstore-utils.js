@@ -1,4 +1,5 @@
 export default class AppStoreUtilsService {
+  // @ngInject
   constructor($uibModal, ENV) {
     this.$uibModal = $uibModal;
     this.ENV = ENV;

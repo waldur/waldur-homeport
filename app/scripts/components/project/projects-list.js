@@ -13,7 +13,6 @@ function ProjectsListController(
   baseControllerListClass,
   projectsService,
   customersService,
-  features,
   $filter,
   $q,
   $state,

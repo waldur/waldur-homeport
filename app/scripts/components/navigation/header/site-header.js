@@ -4,8 +4,8 @@ import './site-header.scss';
 export default {
   template: template,
   controller: class SiteHeader {
+    // @ngInject
     constructor(authService, usersService, ENV, $scope) {
-      // @ngInject
       this.authService = authService;
       this.headerLogo = ENV.loginLogo;
       this.usersService = usersService;

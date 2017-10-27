@@ -1,5 +1,5 @@
-// @ngInject
 export default class AlertDialogsService {
+  // @ngInject
   constructor($uibModal, alertsService) {
     this.$uibModal = $uibModal;
     this.alertsService = alertsService;

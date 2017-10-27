@@ -7,8 +7,8 @@ const resourceDetails = {
     controller: '<',
   },
   controller: class {
+    // @ngInject
     constructor(resourceUtils) {
-      // @ngInject
       this.resourceUtils = resourceUtils;
     }
     $onInit() {

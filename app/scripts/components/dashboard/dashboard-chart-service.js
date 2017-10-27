@@ -5,8 +5,8 @@ import {
   ORGANIZATION_DASHBOARD_QUOTAS
 } from './constants';
 
-// @ngInject
 export default class DashboardChartService {
+  // @ngInject
   constructor($q, invoicesService, quotasService, $filter, features, coreUtils) {
     this.$q = $q;
     this.invoicesService = invoicesService;

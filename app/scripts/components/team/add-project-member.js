@@ -7,8 +7,8 @@ const addProjectMember = {
     resolve: '<'
   },
   controller: class AddProjectMemberDialogController {
+    // @ngInject
     constructor(projectPermissionsService, customersService, blockUI, $q, ENV, ErrorMessageFormatter) {
-      // @ngInject
       this.$q = $q;
       this.projectPermissionsService = projectPermissionsService;
       this.customersService = customersService;

@@ -7,8 +7,8 @@ const resourceSla = {
     resource: '<'
   },
   controller: class ResourceSla {
+    // @ngInject
     constructor($q, zabbixItservicesService, zabbixHostsService) {
-      // @ngInject
       this.$q = $q;
       this.zabbixItservicesService = zabbixItservicesService;
       this.zabbixHostsService = zabbixHostsService;

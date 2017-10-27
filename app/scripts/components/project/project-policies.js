@@ -6,6 +6,7 @@ const projectPolicies = {
     project: '<'
   },
   controller: class ProjectPoliciesController {
+    // @ngInject
     constructor(
       ENV,
       projectsService,

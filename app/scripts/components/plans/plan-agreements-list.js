@@ -6,6 +6,7 @@ const agreementsList = {
 
 export default agreementsList;
 
+// @ngInject
 function CustomerAgreementsTabController(
   baseControllerListClass,
   agreementsService,

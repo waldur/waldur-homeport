@@ -2,7 +2,8 @@ import template from './billing-details.html';
 
 const billingDetails = {
   template,
-  controller: class {
+  controller: class BillingDetailsController {
+    // @ngInject
     constructor(
       ENV,
       $state,
@@ -17,7 +18,6 @@ const billingDetails = {
       features,
       titleService,
       BillingUtils) {
-      // @ngInject
       this.ENV = ENV;
       this.$state = $state;
       this.$stateParams = $stateParams;

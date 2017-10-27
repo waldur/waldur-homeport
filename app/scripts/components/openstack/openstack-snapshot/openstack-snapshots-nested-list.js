@@ -9,6 +9,7 @@ const openstackSnapshotsNestedList = {
 
 export default openstackSnapshotsNestedList;
 
+// @ngInject
 function OpenstackSnapshotsNestedListController(
   baseResourceListController, openstackSnapshotsService, $filter) {
   // @ngInject

@@ -8,7 +8,7 @@ const customerCountryField = {
     form: '=',
   },
   controller: class CustomerCountryFieldController {
-    // ngInject
+    // @ngInject
     constructor(customersService) {
       this.customersService = customersService;
     }

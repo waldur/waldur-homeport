@@ -1,4 +1,5 @@
 export default class ExpertUtilsService {
+  // @ngInject
   constructor($uibModal) {
     this.$uibModal = $uibModal;
   }

@@ -16,9 +16,9 @@ export const authLogin = {
   },
   controllerAs: 'auth',
   controller: class AuthLoginController {
+    // @ngInject
     constructor(ENV, $q, $state, authService,
                 ncUtilsFlash, invitationService, usersService, UserSettings, coreUtils) {
-      // @ngInject
       this.ENV = ENV;
       this.$q = $q;
       this.$state = $state;

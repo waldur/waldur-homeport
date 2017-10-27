@@ -14,8 +14,8 @@ export default function appstoreFieldList() {
   };
 }
 
-// @ngInject
 class FieldController {
+  // @ngInject
   constructor($uibModal, $filter, coreUtils) {
     this.$uibModal = $uibModal;
     this.$filter = $filter;
