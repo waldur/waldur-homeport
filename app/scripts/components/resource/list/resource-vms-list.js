@@ -6,6 +6,7 @@ const resourceVmsList = {
 
 export default resourceVmsList;
 
+// @ngInject
 function ProjectVirtualMachinesListController(
   BaseProjectResourcesTabController,
   $scope,

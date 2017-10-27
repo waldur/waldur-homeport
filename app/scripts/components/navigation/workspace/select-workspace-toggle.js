@@ -15,8 +15,8 @@ const workspaceButtonClasses = {
   support: 'btn-warning'
 };
 
-// @ngInject
 class SelectWorkspaceToggleController {
+  // @ngInject
   constructor(WorkspaceService, $scope, $rootScope, NavigationUtilsService) {
     this.WorkspaceService = WorkspaceService;
     this.$scope = $scope;

@@ -1,4 +1,5 @@
 class ProviderUtilsService {
+  // @ngInject
   constructor($q, ENV, joinService, servicesService, usersService, customersService) {
     this.$q = $q;
     this.ENV = ENV;

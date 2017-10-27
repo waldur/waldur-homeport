@@ -6,6 +6,7 @@ const issueCommentsList = {
     issue: '<'
   },
   controller: class IssueCommentsListController {
+    // @ngInject
     constructor(issueCommentsService, usersService, $rootScope) {
       this.issueCommentsService = issueCommentsService;
       this.usersService = usersService;

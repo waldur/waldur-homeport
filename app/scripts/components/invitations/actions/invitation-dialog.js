@@ -9,8 +9,8 @@ const invitationDialog = {
   },
   controllerAs: 'DialogCtrl',
   controller: class InvitationDialogController {
+    // @ngInject
     constructor(InvitationDialogService) {
-      // @ngInject
       this.service = InvitationDialogService;
     }
 

@@ -1,14 +1,16 @@
 import template from './docs-link.html';
 
+// @ngInject
+function docsLinkController(ENV) {
+  this.link = ENV.docsLink;
+}
+
 export default function docsLink() {
   return {
     template: template,
     replace: true,
     scope: {},
     controllerAs: '$ctrl',
-    controller: function(ENV) {
-      // @ngInject
-      this.link = ENV.docsLink;
-    }
+    controller: docsLinkController,
   };
 }

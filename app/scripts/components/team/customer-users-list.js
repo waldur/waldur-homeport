@@ -22,7 +22,6 @@ function CustomerUsersListController(
     usersService,
     ncUtils,
     $q,
-    $rootScope,
     $uibModal,
     $state,
     ENV) {

@@ -8,6 +8,7 @@ const appstoreFieldTel = {
     form: '=',
   },
   controller: class AppstoreFieldTelController {
+    // @ngInject
     constructor(coreUtils, formUtils) {
       this.coreUtils = coreUtils;
       this.formUtils = formUtils;

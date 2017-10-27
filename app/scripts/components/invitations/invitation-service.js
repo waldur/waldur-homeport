@@ -1,5 +1,6 @@
 const invitationStorageToken = 'ncInvitationToken';
 
+// @ngInject
 export default function invitationService(baseServiceClass, $http, ENV, $window) {
   var ServiceClass = baseServiceClass.extend({
     init: function() {

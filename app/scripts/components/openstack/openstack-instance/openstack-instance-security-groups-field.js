@@ -7,6 +7,7 @@ const openstackInstanceSecurityGroupsField = {
     field: '<'
   },
   controller: class FieldController {
+    // @ngInject
     constructor($uibModal) {
       this.$uibModal = $uibModal;
     }

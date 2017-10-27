@@ -9,7 +9,7 @@ const TABS = {
 const expertRequestDetails = {
   template: template,
   controller: class ExpertRequestDetailsController {
-    // ngInject
+    // @ngInject
     constructor($rootScope,
                 $scope,
                 $state,

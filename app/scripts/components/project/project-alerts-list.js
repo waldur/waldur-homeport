@@ -6,6 +6,7 @@ const projectAlertsList = {
 
 export default projectAlertsList;
 
+// @ngInject
 function ProjectAlertTabController(
   BaseAlertsListController,
   currentStateService

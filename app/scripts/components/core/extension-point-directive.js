@@ -1,3 +1,4 @@
+// @ngInject
 export default function extensionPoint($compile, extensionPointService) {
   return {
     restrict: 'E',

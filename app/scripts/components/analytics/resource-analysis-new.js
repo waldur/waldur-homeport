@@ -3,8 +3,8 @@ import template from './resource-analysis-new.html';
 const resourceAnalysis = {
   template,
   controller: class ResourceAnalysisController {
+    // @ngInject
     constructor(currentStateService, projectsService, ResourceChartService) {
-      // @ngInject
       this.ResourceChartService = ResourceChartService;
       this.currentStateService = currentStateService;
       this.projectsService = projectsService;

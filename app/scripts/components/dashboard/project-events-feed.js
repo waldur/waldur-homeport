@@ -6,6 +6,7 @@ export const projectEventsFeed = {
     project: '<'
   },
   controller: class ProjectEventsFeedController {
+    // @ngInject
     constructor(DashboardFeedService, EventDialogsService, $uibModal) {
       this.DashboardFeedService = DashboardFeedService;
       this.$uibModal = $uibModal;

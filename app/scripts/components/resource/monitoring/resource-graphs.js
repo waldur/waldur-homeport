@@ -7,6 +7,7 @@ const resourceGraphs = {
     resource: '<'
   },
   controller: class ResourceGraphs {
+    // @ngInject
     constructor(zabbixHostsService) {
       this.zabbixHostsService = zabbixHostsService;
     }

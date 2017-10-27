@@ -3,13 +3,13 @@ import template from './appstore-offering.html';
 const appstoreOffering = {
   template: template,
   controller: class AppStoreOfferingController {
+    // @ngInject
     constructor(
       $stateParams,
       $state,
       ncUtilsFlash,
       offeringsService,
       currentStateService) {
-      // @ngInject
       this.$stateParams = $stateParams;
       this.$state = $state;
       this.ncUtilsFlash = ncUtilsFlash;

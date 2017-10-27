@@ -25,6 +25,7 @@ function filesize() {
   };
 }
 
+// @ngInject
 function trustAsHtml($sce) {
   return function(value) {
     return $sce.trustAsHtml(value);

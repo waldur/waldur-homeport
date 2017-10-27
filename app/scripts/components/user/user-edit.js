@@ -11,8 +11,8 @@ export const userEdit = {
     initial: '<',
   },
   controller: class UserEditController {
+    // @ngInject
     constructor($q, usersService, $filter, ENV) {
-      // @ngInject
       this.$q = $q;
       this.$filter = $filter;
       usersService.getCurrentUser().then(user => {

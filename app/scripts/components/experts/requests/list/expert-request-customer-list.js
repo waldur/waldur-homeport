@@ -11,7 +11,6 @@ function ExpertRequestListController(
   $q,
   $state,
   $filter,
-  $uibModal,
   currentStateService,
   expertBidsService,
   expertRequestsService,

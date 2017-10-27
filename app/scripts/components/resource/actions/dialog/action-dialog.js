@@ -11,7 +11,7 @@ export default function actionDialog() {
 
 // @ngInject
 function ActionDialogController(
-  $scope, $q, $http, $state, resourcesService, actionUtilsService,
+  $scope, $q, $http, $state, actionUtilsService,
   ActionResourceLoader, ncUtils, DEFAULT_FIELD_OPTIONS) {
   angular.extend($scope, {
     init: function () {

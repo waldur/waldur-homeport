@@ -7,8 +7,8 @@ const issueTypeSelect = {
     field: '<',
   },
   controller: class IssueTypeSelectController{
+    // @ngInject
     constructor(IssueTypesService) {
-      // @ngInject
       this.service = IssueTypesService;
     }
 

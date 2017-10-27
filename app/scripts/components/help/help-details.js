@@ -5,8 +5,8 @@ const helpDetails = {
   templateUrl: 'views/help/details.html',
   controllerAs: 'HelpDetails',
   controller: class HelpDetailsController {
+    // @ngInject
     constructor($stateParams, alertsService, eventsService) {
-      // @ngInject
       this.$stateParams = $stateParams;
       this.alertsService = alertsService;
       this.eventsService = eventsService;

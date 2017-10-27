@@ -8,6 +8,7 @@ const addTeamMember = {
     resolve: '<'
   },
   controller: class AddTeamMemberDialogController {
+    // @ngInject
     constructor(
       $q,
       customersService,
@@ -17,7 +18,6 @@ const addTeamMember = {
       ENV,
       ErrorMessageFormatter,
       $filter) {
-      // @ngInject
       this.$q = $q;
       this.customersService = customersService;
       this.customerPermissionsService = customerPermissionsService;

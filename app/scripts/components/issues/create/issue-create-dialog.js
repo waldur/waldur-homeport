@@ -18,8 +18,8 @@ const issueCreateDialog = {
     resolve: '<'
   },
   controller: class IssueCreateDialogController {
+    // @ngInject
     constructor(issuesService, $q, $state, ncUtilsFlash, IssueTypesService, ErrorMessageFormatter, coreUtils) {
-      // @ngInject
       this.service = issuesService;
       this.$q = $q;
       this.$state = $state;

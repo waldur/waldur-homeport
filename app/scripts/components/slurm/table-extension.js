@@ -1,3 +1,4 @@
+// @ngInject
 export default function extendTable(TableExtensionService) {
   const column = {
     title: gettext('Allocations'),

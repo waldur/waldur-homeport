@@ -12,7 +12,6 @@ export default function customerWorkspace() {
 // @ngInject
 export function CustomerWorkspaceController(
   $scope,
-  currentStateService,
   joinService,
   eventsService,
   customersService,

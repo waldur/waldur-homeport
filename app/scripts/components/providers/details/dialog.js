@@ -8,6 +8,7 @@ const providerDialog = {
     resolve: '<'
   },
   controller: class ProviderDialogController {
+    // @ngInject
     constructor(ProviderUtilsService, $scope) {
       this.ProviderUtilsService = ProviderUtilsService;
       this.$scope = $scope;

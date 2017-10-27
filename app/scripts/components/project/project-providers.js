@@ -6,8 +6,8 @@ const projectProviders = {
     project: '<',
   },
   controller: class ProjectProvidersController {
+    // @ngInject
     constructor(ProviderProjectsService) {
-      // @ngInject
       this.service = ProviderProjectsService;
     }
 

@@ -1,7 +1,7 @@
 const KEY = 'USER_SETTINGS';
 
-// @ngInject
 export default class UserSettings {
+  // @ngInject
   constructor($window) {
     this.$window = $window;
   }

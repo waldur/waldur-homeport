@@ -6,6 +6,7 @@ const openstackTenantCheckoutSummary = {
     model: '<',
   },
   controller: class OpenstackTenantCheckoutSummaryController {
+    // @ngInject
     constructor($scope, currentStateService) {
       this.$scope = $scope;
       this.currentStateService = currentStateService;

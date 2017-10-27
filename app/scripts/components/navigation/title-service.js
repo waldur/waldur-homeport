@@ -1,5 +1,5 @@
-// @ngInject
 export default class titleService {
+  // @ngInject
   constructor($document) {
     this.$document = $document;
   }

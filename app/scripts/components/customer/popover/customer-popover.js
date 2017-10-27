@@ -8,8 +8,8 @@ const customerPopover = {
     resolve: '<'
   },
   controller: class CustomerPopoverController {
+    // @ngInject
     constructor($q, customersService, paymentDetailsService) {
-      // @ngInject
       this.$q = $q;
       this.customersService = customersService;
       this.paymentDetailsService = paymentDetailsService;

@@ -7,8 +7,8 @@ const openstackTenantSummary = {
     resource: '<'
   },
   controller: class OpenstackTenantSummaryController {
+    // @ngInject
     constructor($scope, ENV) {
-      // @ngInject
       this.tenantCredentialsVisible = ENV.tenantCredentialsVisible;
 
       $scope.$watch(() => this.resource, () => {

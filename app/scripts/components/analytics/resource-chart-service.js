@@ -42,8 +42,8 @@ const parseUsage = listToDict(
   item => item.usage
 );
 
-// @ngInject
 export default class ResourceChartService {
+  // @ngInject
   constructor(features) {
     this.features = features;
   }

@@ -9,6 +9,7 @@ const ansibleJobResourcesList = {
 
 export default ansibleJobResourcesList;
 
+// @ngInject
 function AnsibleJobResourcesController($scope, baseResourceListController, resourcesService) {
   const controllerScope = this;
   const ResourceController = baseResourceListController.extend({

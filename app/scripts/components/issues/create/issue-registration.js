@@ -13,8 +13,8 @@ export default function issueRegistration() {
   };
 }
 
-// @ngInject
 class IssueRegistrationController {
+  // @ngInject
   constructor($state,
               $scope,
               $q,

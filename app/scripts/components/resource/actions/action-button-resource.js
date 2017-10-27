@@ -1,8 +1,8 @@
 import template from './action-button-resource.html';
 import './action-button-resource.scss';
 
-// @ngInject
 class ActionButtonController {
+  // @ngInject
   constructor(actionUtilsService) {
     this.actionUtilsService = actionUtilsService;
     this.actions = [];

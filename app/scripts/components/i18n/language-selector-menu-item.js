@@ -4,8 +4,8 @@ import './language-selector-menu-item.scss';
 const languageSelectorMenuItem = {
   template,
   controller: class LanguageSelectorMenuItemController {
+    // @ngInject
     constructor(LanguageUtilsService) {
-      // @ngInject
       this.utils = LanguageUtilsService;
       this.languageChoices = this.utils.getChoices();
       this.currentLanguage = this.utils.getCurrentLanguage();

@@ -11,7 +11,7 @@ export default class ExpertManagerIntro {
    * @param ncIntroUtils a service used to communicate with angular-intro.js.
    * @param features used to check whether 'intro' feature is enabled.
    */
-  // @ngInit
+  // @ngInject
   constructor(
     $rootScope,
     $state,

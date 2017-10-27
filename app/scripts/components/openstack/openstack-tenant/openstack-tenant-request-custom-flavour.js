@@ -1,7 +1,7 @@
 import template from './openstack-tenant-request-custom-flavour.html';
 
-// @ngInject
 class DialogController {
+  // @ngInject
   constructor(features, $uibModal, ISSUE_IDS, ENV) {
     this.features = features;
     this.$uibModal = $uibModal;

@@ -7,8 +7,8 @@ export default function languageSelector() {
     scope: {},
     controllerAs: '$ctrl',
     controller: class LanguageSelectorController {
+      // @ngInject
       constructor(LanguageUtilsService) {
-        // @ngInject
         this.utils = LanguageUtilsService;
         this.languageChoices = this.utils.getChoices();
         this.currentLanguage = this.utils.getCurrentLanguage();

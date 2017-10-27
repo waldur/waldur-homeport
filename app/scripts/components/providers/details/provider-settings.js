@@ -21,7 +21,6 @@ function ProviderSettingsController(
   customersService,
   ncUtils,
   ncUtilsFlash,
-  ncServiceUtils,
   joinService,
   ENV) {
   angular.extend($scope, {

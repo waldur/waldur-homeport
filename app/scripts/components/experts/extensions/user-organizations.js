@@ -1,3 +1,4 @@
+// @ngInject
 export default function extendTable(TableExtensionService, ncUtils) {
   TableExtensionService.registerColumns('user-organizations', [
     {

@@ -1,6 +1,7 @@
 import template from './customer-issues.html';
 
 class CustomerIssuesController {
+  // @ngInject
   constructor(currentStateService, $uibModal, $rootScope) {
     this.currentStateService = currentStateService;
     this.$uibModal = $uibModal;

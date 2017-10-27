@@ -8,8 +8,8 @@ const filterList = {
     onSelect: '&'
   },
   controller: class FilterListController {
+    // @ngInject
     constructor($scope) {
-      // @ngInject
       this.$scope = $scope;
     }
 

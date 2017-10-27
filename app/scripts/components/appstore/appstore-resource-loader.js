@@ -1,5 +1,5 @@
-// @ngInject
 export default class AppstoreResourceLoader {
+  // @ngInject
   constructor(ENV, $http, $q, ncUtils, servicesService) {
     this.ENV = ENV;
     this.$http = $http;

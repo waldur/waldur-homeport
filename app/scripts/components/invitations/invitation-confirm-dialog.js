@@ -8,7 +8,7 @@ const invitationConfirmDialog = {
     dismiss: '&',
   },
   controller: class InvitationConfirmController {
-    // ngInject
+    // @ngInject
     constructor(invitationService, usersService, $timeout, ENV) {
       this.invitationService = invitationService;
       this.usersService = usersService;

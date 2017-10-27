@@ -3,8 +3,8 @@ import template from './issues-short-list.html';
 export const issuesShortList = {
   template,
   controller: class IssuesShortListController {
+    // @ngInject
     constructor(issuesService, usersService, $uibModal, ncUtils) {
-      // @ngInject
       this.service = issuesService;
       this.usersService = usersService;
       this.$uibModal = $uibModal;

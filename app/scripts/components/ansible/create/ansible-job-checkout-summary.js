@@ -1,7 +1,7 @@
 import template from './ansible-job-checkout-summary.html';
 
-// @ngInject
 class SummaryController {
+  // @ngInject
   constructor(
     $q,
     $uibModal,

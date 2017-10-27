@@ -1,4 +1,5 @@
 export default class WorkspaceService {
+  // @ngInject
   constructor($rootScope) {
     this.$rootScope = $rootScope;
   }

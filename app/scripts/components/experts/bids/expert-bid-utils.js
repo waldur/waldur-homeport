@@ -1,5 +1,5 @@
-// @ngInject
 export default class ExpertBidUtilsService {
+  // @ngInject
   constructor($rootScope, expertBidsService, ncUtilsFlash) {
     this.$rootScope = $rootScope;
     this.expertBidsService = expertBidsService;

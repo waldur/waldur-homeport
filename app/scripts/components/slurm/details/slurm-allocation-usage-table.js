@@ -4,6 +4,7 @@ import { formatCharts } from './utils';
 import { palette, chartSpec } from './constants';
 
 class SlurmAllocationUsageTableController {
+  // @ngInject
   constructor(SlurmAllocationUsageService, SlurmPackagesService) {
     this.SlurmAllocationUsageService = SlurmAllocationUsageService;
     this.SlurmPackagesService = SlurmPackagesService;

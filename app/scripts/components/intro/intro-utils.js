@@ -1,5 +1,5 @@
 export default class ncIntroUtils {
-  // @ngInit
+  // @ngInject
   constructor($rootScope, $timeout, $window, ngIntroService, ENV, features) {
     this.$timeout = $timeout;
     this.ngIntroService = ngIntroService;
