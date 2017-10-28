@@ -22,8 +22,8 @@ function ServiceAddController(
   $scope,
   $q,
   ncUtils) {
-  var controllerScope = this;
-  var ServiceController = baseControllerAddClass.extend({
+  let controllerScope = this;
+  let ServiceController = baseControllerAddClass.extend({
     predefinedOptions: {
       available_for_all: true
     },
@@ -73,12 +73,12 @@ function ServiceAddController(
       this.service = joinService;
       this.controllerScope = controllerScope;
       this.successMessage = gettext('Provider has been created.');
-      var vm = this;
+      let vm = this;
       $scope.$watch('ServiceAdd.serviceChoice', function(choice) {
         if (!choice) {
           return;
         }
-        var service = vm.services[choice.name];
+        let service = vm.services[choice.name];
         if (service) {
           vm.setModel(service);
         }
@@ -116,7 +116,7 @@ function ServiceAddController(
     },
 
     getCustomer: function() {
-      var vm = this;
+      let vm = this;
       return currentStateService.getCustomer().then(function(customer) {
         vm.customer = customer;
         if (ncUtils.isCustomerQuotaReached(customer, 'service')) {
@@ -126,12 +126,12 @@ function ServiceAddController(
     },
 
     getServices: function() {
-      var vm = this;
+      let vm = this;
       return servicesService.getServicesList().then(function(services) {
         vm.choices = [];
         angular.forEach(services, function(service, name) {
           service.name = name;
-          var category = CategoriesService.getServiceCategories().filter(function(category) {
+          let category = CategoriesService.getServiceCategories().filter(function(category) {
             return category.services.indexOf(name) !== -1;
           })[0];
           if (category) {
@@ -148,12 +148,12 @@ function ServiceAddController(
 
     getOptions: function(service_type) {
       return joinService.getOptions(service_type).then(function(options) {
-        var items = [];
+        let items = [];
         angular.forEach(options, function(option, key) {
           if (this.isValidOption(option, key)) {
             option.key = key;
             option.secret = this.secretFields.indexOf(key) !== -1;
-            var extra = this.extraOptions[service_type];
+            let extra = this.extraOptions[service_type];
             if (extra) {
               option = angular.extend(option, extra[key]);
             }
@@ -165,7 +165,7 @@ function ServiceAddController(
     },
 
     orderOptions: function(service_type, options) {
-      var ordering = this.optionsOrder[service_type];
+      let ordering = this.optionsOrder[service_type];
       if (!ordering) {
         return options;
       }
@@ -184,8 +184,8 @@ function ServiceAddController(
     },
 
     saveInstance: function() {
-      var data = this.getData();
-      var vm = this;
+      let data = this.getData();
+      let vm = this;
       return this.service.create(this.model.url, data).then(function(response) {
         vm.instance = response;
         $rootScope.$broadcast('refreshProjectList');
@@ -194,10 +194,10 @@ function ServiceAddController(
     },
     getFilename: ncUtils.getFilename,
     getData: function() {
-      var data = {};
-      for (var i = 0; i < this.model.options.length; i++) {
-        var option = this.model.options[i];
-        var value = option.value;
+      let data = {};
+      for (let i = 0; i < this.model.options.length; i++) {
+        let option = this.model.options[i];
+        let value = option.value;
         if (angular.isUndefined(value)) {
           continue;
         }
@@ -233,8 +233,8 @@ function ServiceAddController(
       if (!this.model || !this.model.options) {
         return true;
       }
-      for (var i = 0; i < this.model.options.length; i++) {
-        var option = this.model.options[i];
+      for (let i = 0; i < this.model.options.length; i++) {
+        let option = this.model.options[i];
         if (angular.isUndefined(option.value) && option.required) {
           return true;
         }

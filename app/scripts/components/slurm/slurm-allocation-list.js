@@ -11,8 +11,8 @@ function SlurmAllocationListController(
   coreUtils,
   SlurmAllocationService
   ) {
-  var controllerScope = this;
-  var controllerClass = baseResourceListController.extend({
+  let controllerScope = this;
+  let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
@@ -25,7 +25,7 @@ function SlurmAllocationListController(
       ]);
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.disableSearch = true;
       options.noDataText = gettext('No allocations yet.');
       options.noMatchesText = gettext('No allocations found matching filter.');

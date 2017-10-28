@@ -17,8 +17,8 @@ function ProviderPriceListController(
   usersService,
   customersService,
   $filter) {
-  var controllerScope = this;
-  var Controller = baseControllerListClass.extend({
+  let controllerScope = this;
+  let Controller = baseControllerListClass.extend({
     init: function() {
       this.service = priceListItemsService;
       this._super();

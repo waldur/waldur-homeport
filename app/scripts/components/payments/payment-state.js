@@ -2,7 +2,7 @@ import template from './payment-state.html';
 
 // @ngInject
 function PaymentStateController($scope) {
-  var classes = {
+  let classes = {
     Erred: 'erred',
     Approved: 'online',
     Created: 'processing',
@@ -14,7 +14,7 @@ function PaymentStateController($scope) {
   $scope.$watch(() => this.payment, () => {
     if (this.payment) {
       this.state = this.payment.state;
-      var cls = classes[this.state];
+      let cls = classes[this.state];
       switch (cls) {
       case 'erred':
         this.className = 'progress-bar-warning';

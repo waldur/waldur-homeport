@@ -14,8 +14,8 @@ function AppstoreCompareListController(
   $filter,
   $state,
   ENV) {
-  var controllerScope = this;
-  var Controller = baseControllerListClass.extend({
+  let controllerScope = this;
+  let Controller = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = defaultPriceListItemsService;
@@ -26,8 +26,8 @@ function AppstoreCompareListController(
       this.tableOptions = this.getTableOptions();
     },
     getUserFilter: function() {
-      var choices = [];
-      for (var i in ENV.resourceCategory) {
+      let choices = [];
+      for (let i in ENV.resourceCategory) {
         if (ENV.resourceCategory[i] === this.category) {
           choices.push({
             title: resourceUtils.formatResourceType({ resource_type: i }),
@@ -51,7 +51,7 @@ function AppstoreCompareListController(
             title: gettext('Provider'),
             className: 'all',
             render: function(row) {
-              var imageSource = resourceUtils.getIcon(row);
+              let imageSource = resourceUtils.getIcon(row);
               if (imageSource) {
                 return `<img src="${imageSource}" title="${row.resource_type}" class="img-xs m-r-xs"> ${row.resource_type}`;
               }

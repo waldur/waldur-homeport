@@ -24,23 +24,23 @@ const resourceSla = {
         return;
       }
 
-      var dataSla = [angular.extend(this.resource.sla, {
+      let dataSla = [angular.extend(this.resource.sla, {
         date: new Date(this.resource.sla.period)
       })];
-      var requests = [];
+      let requests = [];
 
-      var slaEndDate = new Date(this.resource.sla.period);
+      let slaEndDate = new Date(this.resource.sla.period);
 
-      for (var i = 1; i < 10; i++) {
-        var month = slaEndDate.getMonth() + 1 - i;
-        var year = slaEndDate.getFullYear();
+      for (let i = 1; i < 10; i++) {
+        let month = slaEndDate.getMonth() + 1 - i;
+        let year = slaEndDate.getFullYear();
 
         if (month < 1) {
           year -= 1;
           month = 12 + month;
         }
 
-        var request = this.zabbixHostsService.$get(null, this.resource.url, {
+        let request = this.zabbixHostsService.$get(null, this.resource.url, {
           period: year + '-' + (month < 10 ? '0' + month : month ),
           field: 'sla'
         }).then(function(response) {

@@ -11,8 +11,8 @@ export default offeringEvents;
 
 // @ngInject
 function offeringEventsController(baseEventListController) {
-  var controllerScope = this;
-  var EventController = baseEventListController.extend({
+  let controllerScope = this;
+  let EventController = baseEventListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();

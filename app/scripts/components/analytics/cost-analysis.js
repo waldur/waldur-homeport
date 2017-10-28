@@ -18,8 +18,8 @@ function CostAnalysisController(
   ENV,
   customersService,
   resourcesService) {
-  var controllerScope = this;
-  var EventController = baseControllerClass.extend({
+  let controllerScope = this;
+  let EventController = baseControllerClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.activate();
@@ -28,14 +28,14 @@ function CostAnalysisController(
       this.checkQuotasResource = 'resource';
       this.checkQuotasProvider = 'service';
 
-      var vm = this;
+      let vm = this;
       customersService.isOwnerOrStaff().then(function(hasRole) {
         vm.showProviderButton = hasRole;
       });
     },
 
     activate: function() {
-      var vm = this;
+      let vm = this;
       priceEstimationService.cacheTime = 1000 * 60 * 10;
       priceEstimationService.pageSize = 1000;
       priceEstimationService.getList().then(function(rows) {
@@ -55,8 +55,8 @@ function CostAnalysisController(
     },
 
     getResourceDetails: function(row) {
-      for (var i = 0; i < row.resources.length; i++) {
-        var resource = row.resources[i];
+      for (let i = 0; i < row.resources.length; i++) {
+        let resource = row.resources[i];
         if (resource.scope && (!resource.resource_type || !resource.project_uuid)) {
           resourcesService.$get(null, null, resource.scope).then(function(response) {
             resource.resource_uuid = response.uuid;
@@ -69,11 +69,11 @@ function CostAnalysisController(
     },
 
     processChartData: function(rows) {
-      var result = {};
+      let result = {};
       rows.forEach(function(row) {
         if (['customer', 'service', 'project', 'resource'].indexOf(row.scope_type) >= 0) {
-          var date = moment(row.month + ' ' + row.year, 'MM YYYY');
-          var key = date.format('YYYYMM');
+          let date = moment(row.month + ' ' + row.year, 'MM YYYY');
+          let key = date.format('YYYYMM');
 
           if (!result[key]) {
 
@@ -98,12 +98,12 @@ function CostAnalysisController(
     },
 
     processTableData: function(rows) {
-      var results = {},
+      let results = {},
         scopeArray,
         currentDate = new Date();
-      for (var i = 0; i < rows.length; i++) {
-        var row = rows[i];
-        var date = moment(row.month, 'MM').format('MMMM') + ' ' + row.year;
+      for (let i = 0; i < rows.length; i++) {
+        let row = rows[i];
+        let date = moment(row.month, 'MM').format('MMMM') + ' ' + row.year;
         if (!results.hasOwnProperty(date)) {
           results[date] = {
             total: 0,
@@ -129,9 +129,9 @@ function CostAnalysisController(
           results[date].services.push(row);
         }
       }
-      var table = [];
-      for (var key in results) {
-        var val = results[key];
+      let table = [];
+      for (let key in results) {
+        let val = results[key];
         table.push({
           date: key,
           total: val.total,

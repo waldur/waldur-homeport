@@ -1,7 +1,7 @@
 // @ngInject
 export default function authService(
   $http, $auth, $rootScope, $window, $state, usersService, currentStateService,  ENV) {
-  var vm = this;
+  let vm = this;
 
   vm.signin = signin;
   vm.signup = signup;

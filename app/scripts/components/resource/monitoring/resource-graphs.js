@@ -24,7 +24,7 @@ const resourceGraphs = {
     }
 
     findHost(resources) {
-      for (var i = 0; i < resources.length; i++) {
+      for (let i = 0; i < resources.length; i++) {
         if (resources[i].resource_type === 'Zabbix.Host') {
           return resources[i];
         }

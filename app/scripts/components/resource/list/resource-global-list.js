@@ -2,15 +2,15 @@ import { randomDate, randomInteger, randomChoice } from '../../core/fixtures';
 
 // @ngInject
 function ResourceGlobalListController($rootScope, $scope, baseResourceListController) {
-  var controllerScope = this;
-  var ResourceController = baseResourceListController.extend({
+  let controllerScope = this;
+  let ResourceController = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.connectWatchers();
       this._super();
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.columns = [
         {
           id: 'name',

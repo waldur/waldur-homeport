@@ -1,11 +1,11 @@
 // This class is deprecated. Use ES6 class instead.
 // @ngInject
 export function baseControllerClass(ncUtilsFlash) {
-  var ControllerClass = Class.extend({
+  let ControllerClass = Class.extend({
     init: function() {},
     handleActionException: function(response) {
       if (response.status === 409) {
-        var message = response.data.detail || response.data.status;
+        let message = response.data.detail || response.data.status;
         ncUtilsFlash.error(message);
       }
     }
@@ -21,7 +21,7 @@ export function baseControllerAddClass($rootScope, $state, baseControllerClass, 
    * use this.controllerScope for changes in event handler
    * sеt events in this._signals
    */
-  var ControllerAddClass = baseControllerClass.extend({
+  let ControllerAddClass = baseControllerClass.extend({
     service: null, // required in init
     instance: null,
     listState: null, // required in init
@@ -37,7 +37,7 @@ export function baseControllerAddClass($rootScope, $state, baseControllerClass, 
       this._super();
     },
     save: function() {
-      var vm = this;
+      let vm = this;
       vm.beforeSave();
       return vm.saveInstance().then(function(model) {
         vm.afterSave(model);
@@ -51,7 +51,7 @@ export function baseControllerAddClass($rootScope, $state, baseControllerClass, 
       });
     },
     cancel: function() {
-      var vm = this;
+      let vm = this;
       $state.go(vm.listState);
     },
     beforeSave: function() {},

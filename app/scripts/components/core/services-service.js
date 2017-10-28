@@ -1,13 +1,13 @@
 // @ngInject
 export default function servicesService(baseServiceClass, $q) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     services: null,
 
     init:function() {
       this._super();
     },
     getServicesList: function() {
-      var vm = this,
+      let vm = this,
         deferred = $q.defer();
       vm.endpoint = '/service-metadata/';
       if (vm.services) {

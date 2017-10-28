@@ -13,8 +13,8 @@ function KeyListController(
   baseControllerListClass,
   usersService,
   $state) {
-  var controllerScope = this;
-  var Controller = baseControllerListClass.extend({
+  let controllerScope = this;
+  let Controller = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = keysService;

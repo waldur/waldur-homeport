@@ -65,7 +65,7 @@ export const userEdit = {
     }
 
     mergeLifeTimeOptions(options, option) {
-      var exists = false,
+      let exists = false,
         resultOptions = options;
 
       resultOptions.forEach(item => {

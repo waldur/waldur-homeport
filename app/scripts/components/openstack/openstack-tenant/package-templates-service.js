@@ -23,7 +23,7 @@ export default function packageTemplatesService(baseServiceClass, resourcesServi
           service_settings_uuid: tenant.service_settings_uuid,
           archived: 'False',
         }).then(templates => {
-          var result = templates.map(templateParser)
+          let result = templates.map(templateParser)
             .filter(this.checkTemplate.bind(this, template, quotas))
             .sort(templateComparator);
           return result;

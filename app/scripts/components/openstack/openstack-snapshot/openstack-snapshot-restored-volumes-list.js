@@ -11,8 +11,8 @@ export default restoredVolumesList;
 
 // @ngInject
 function RestoredVolumesListController($filter, baseResourceListController, openstackVolumesService) {
-  var controllerScope = this;
-  var ResourceController = baseResourceListController.extend({
+  let controllerScope = this;
+  let ResourceController = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
@@ -25,7 +25,7 @@ function RestoredVolumesListController($filter, baseResourceListController, open
       };
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.noDataText = gettext('You have no restored volumes yet.');
       options.noMatchesText = gettext('No restored volumes found matching filter.');
       options.hiddenColumns = [

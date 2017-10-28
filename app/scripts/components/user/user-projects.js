@@ -9,12 +9,12 @@ export default userProjects;
 // @ngInject
 function UserProjectsController(
   baseControllerListClass, projectPermissionsService, usersService, $state, ncUtils) {
-  var controllerScope = this;
-  var ControllerListClass = baseControllerListClass.extend({
+  let controllerScope = this;
+  let ControllerListClass = baseControllerListClass.extend({
     init: function() {
       this.service = projectPermissionsService;
       this.controllerScope = controllerScope;
-      var fn = this._super.bind(this);
+      let fn = this._super.bind(this);
       this.loading = true;
       this.loadContext().then(() => {
         this.tableOptions = this.getTableOptions();

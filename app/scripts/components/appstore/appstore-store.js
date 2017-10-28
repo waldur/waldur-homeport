@@ -34,8 +34,8 @@ function AppStoreController(
   AppStoreUtilsService,
   BreadcrumbsService,
   ResourceProvisionPolicy) {
-  var controllerScope = this;
-  var Controller = baseControllerAddClass.extend({
+  let controllerScope = this;
+  let Controller = baseControllerAddClass.extend({
     enablePurchaseCostDisplay: ENV.enablePurchaseCostDisplay,
 
     secondStep: false,
@@ -120,7 +120,7 @@ function AppStoreController(
       this.selectedService = null;
       this.fields = [];
 
-      var services = this.getServices();
+      let services = this.getServices();
       this.renderStore = services && services.length > 0;
 
       if (services && services.length == 1) {
@@ -145,7 +145,7 @@ function AppStoreController(
       this.selectedResourceType = null;
 
       if (this.serviceMetadata) {
-        var types = this.getResourceTypes(this.selectedCategory.key, this.serviceType);
+        let types = this.getResourceTypes(this.selectedCategory.key, this.serviceType);
         if (types.length === 1) {
           this.setResourceType(types[0]);
           this.resourceTypesBlock = false;
@@ -157,8 +157,8 @@ function AppStoreController(
       }
     },
     getResourceTypes: function(category, serviceType) {
-      var types = ENV.resourceCategory;
-      var blacklisted = ['OpenStackTenant.Snapshot'];
+      let types = ENV.resourceCategory;
+      let blacklisted = ['OpenStackTenant.Snapshot'];
       return Object.keys(types).filter(function(resource) {
         return types[resource] == category &&
                resource.split('.')[0] == serviceType &&
@@ -168,7 +168,7 @@ function AppStoreController(
       });
     },
     resetResourceType: function() {
-      var vm = this;
+      let vm = this;
       vm.selectedResourceType = null;
       vm.selectedResourceTypeName = null;
       vm.fields = [];
@@ -233,8 +233,8 @@ function AppStoreController(
     getServiceTypeDisplay: ncServiceUtils.getTypeDisplay,
     formatResourceType: resourceUtils.formatResourceType,
     setCurrentProject: function() {
-      var vm = this;
-      var categories = CategoriesService.getResourceCategories();
+      let vm = this;
+      let categories = CategoriesService.getResourceCategories();
       vm.categories = [];
       vm.selectedCategory = null;
       vm.secondStep = false;
@@ -250,11 +250,11 @@ function AppStoreController(
       return currentStateService.getProject().then(function(project) {
         vm.currentProject = project;
         return AppstoreProvidersService.loadServices(project).then(function() {
-          for (var j = 0; j < categories.length; j++) {
-            var category = categories[j];
+          for (let j = 0; j < categories.length; j++) {
+            let category = categories[j];
             vm.categoryServices[category.name] = [];
-            for (var i = 0; i < vm.currentProject.services.length; i++) {
-              var service = vm.currentProject.services[i];
+            for (let i = 0; i < vm.currentProject.services.length; i++) {
+              let service = vm.currentProject.services[i];
               if (category.services && (category.services.indexOf(service.type) + 1)) {
                 vm.categoryServices[category.name].push(service);
               }
@@ -273,11 +273,11 @@ function AppStoreController(
       });
     },
     setCategoryFromParams: function() {
-      var vm = this;
-      var key = $state.$current.data.category;
+      let vm = this;
+      let key = $state.$current.data.category;
       if (key) {
-        for (var i = 0; i < vm.categories.length; i++) {
-          var category = vm.categories[i];
+        for (let i = 0; i < vm.categories.length; i++) {
+          let category = vm.categories[i];
           if (category.key === key) {
             vm.setCategory(category);
             return;
@@ -289,7 +289,7 @@ function AppStoreController(
       if (!this.instance) {
         return false;
       }
-      for (var name in this.allFormOptions) {
+      for (let name in this.allFormOptions) {
         if (this.allFormOptions[name].required && (!this.instance[name] && this.instance[name] !== 0)) {
           return false;
         }
@@ -300,9 +300,9 @@ function AppStoreController(
       if (!this.instance) {
         return gettext('Instance is not configured.');
       }
-      var fields = [];
-      for (var name in this.allFormOptions) {
-        var options = this.allFormOptions[name];
+      let fields = [];
+      for (let name in this.allFormOptions) {
+        let options = this.allFormOptions[name];
         if (options.required && !this.instance[name]) {
           fields.push(options.label);
         }
@@ -336,14 +336,14 @@ function AppStoreController(
       return callback();
     },
     saveInstance: function() {
-      var resourceUrl = this.getResourceUrl();
-      var instance = servicesService.$create(resourceUrl);
+      let resourceUrl = this.getResourceUrl();
+      let instance = servicesService.$create(resourceUrl);
       instance.service_project_link = this.selectedService.service_project_link_url;
 
-      for (var name in this.allFormOptions) {
+      for (let name in this.allFormOptions) {
         if (this.instance.hasOwnProperty(name)) {
-          var value = this.instance[name];
-          var option = this.allFormOptions[name];
+          let value = this.instance[name];
+          let option = this.allFormOptions[name];
           if (value && value.hasOwnProperty('url')) {
             value = value.url;
           }
@@ -365,9 +365,9 @@ function AppStoreController(
       }
     },
     onError: function() {
-      var message = '';
+      let message = '';
       if (angular.isObject(this.errors)) {
-        for (var name in this.errors) {
+        for (let name in this.errors) {
           if (this.allFormOptions[name]) {
             message += this.allFormOptions[name].label + ': ' + this.errors[name] + '<br/>';
           } else {

@@ -47,6 +47,9 @@ module.exports = {
     'no-console': [
       'warn'
     ],
+    'no-var': [
+      'error'
+    ],
     'quote-props': [
       'error',
       'as-needed',

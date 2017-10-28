@@ -10,8 +10,8 @@ const openstackSubnetsList = {
 // @ngInject
 function OpenstackSubnetsListController(
   baseResourceListController, openstackSubnetsService) {
-  var controllerScope = this;
-  var controllerClass = baseResourceListController.extend({
+  let controllerScope = this;
+  let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
@@ -19,8 +19,8 @@ function OpenstackSubnetsListController(
       this.addRowFields(['cidr']);
     },
     getTableOptions: function() {
-      var options = this._super();
-      var vm = this;
+      let options = this._super();
+      let vm = this;
       options.noDataText = gettext('No subnets yet.');
       options.noMatchesText = gettext('No subnets found matching filter.');
       options.columns = [

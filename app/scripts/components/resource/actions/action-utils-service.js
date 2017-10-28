@@ -58,7 +58,7 @@ export default function actionUtilsService(
     const custom = ActionConfiguration[model.resource_type];
     let confirmTextSuffix = custom && custom.delete_message || '';
     if (name === 'destroy') {
-      var confirmText = (model.state === 'Erred')
+      let confirmText = (model.state === 'Erred')
         ?  coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}.'),
           { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix })
         : coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType}? {confirmTextSuffix}.'),
@@ -70,8 +70,8 @@ export default function actionUtilsService(
   };
 
   this.applyAction = function(controller, resource, action) {
-    var vm = this;
-    var promise = (action.method === 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
+    let vm = this;
+    let promise = (action.method === 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
 
     function onSuccess(response) {
       if (response.status === 201 || response.status === 202) {
@@ -97,7 +97,7 @@ export default function actionUtilsService(
   };
 
   this.handleActionSuccess = function(action) {
-    var template = action.successMessage ||
+    let template = action.successMessage ||
         coreUtils.templateFormatter(gettext('Request to {action} has been accepted.'), { action: action.title.toLowerCase() });
     ncUtilsFlash.success(template);
     if (action.onSuccess) {
@@ -106,7 +106,7 @@ export default function actionUtilsService(
   };
 
   this.openActionDialog = function(controller, resource, name, action) {
-    var component = action.component || 'actionDialog';
+    let component = action.component || 'actionDialog';
     const params = {component, size: action.dialogSize};
     if (action.useResolve) {
       angular.extend(params, {
@@ -117,7 +117,7 @@ export default function actionUtilsService(
         }
       });
     } else {
-      var dialogScope = $rootScope.$new();
+      let dialogScope = $rootScope.$new();
       angular.extend(dialogScope, {
         action,
         controller,
@@ -132,7 +132,7 @@ export default function actionUtilsService(
 
   this.loadNestedActions = function(controller, model, tab) {
     return this.loadActions(model).then(actions => {
-      var nestedActions = [];
+      let nestedActions = [];
       angular.forEach(actions, (action, key) => {
         if (action.tab && action.tab === tab) {
           nestedActions.push({

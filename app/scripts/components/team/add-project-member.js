@@ -18,7 +18,7 @@ const addProjectMember = {
     }
 
     $onInit() {
-      var roles = this.ENV.roles;
+      let roles = this.ENV.roles;
       this.addText = gettext('Add');
       this.addTitle = gettext('Add project member');
       this.projectModel = {
@@ -73,7 +73,7 @@ const addProjectMember = {
 
     saveUser() {
       this.errors = [];
-      var block = this.blockUI.instances.get('add-team-member-dialog');
+      let block = this.blockUI.instances.get('add-team-member-dialog');
       block.start({delay: 0});
 
       return this.saveProjectPermissions()
@@ -114,7 +114,7 @@ const addProjectMember = {
     }
 
     updatePermission(permission) {
-      var model = {};
+      let model = {};
       model.user = this.projectModel.user.url;
       model.role = this.projectModel.role;
       model.expiration_time = this.projectModel.expiration_time;
@@ -124,7 +124,7 @@ const addProjectMember = {
     }
 
     createPermission(role) {
-      var instance = this.projectPermissionsService.$create();
+      let instance = this.projectPermissionsService.$create();
       instance.user = this.projectModel.user.url;
       instance.project = this.resolve.currentProject.url;
       instance.expiration_time = this.projectModel.expiration_time;

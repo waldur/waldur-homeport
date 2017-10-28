@@ -1,6 +1,6 @@
 // @ngInject
 export function stateUtilsService($state) {
-  var vm = this;
+  let vm = this;
 
   vm.setPrevState = function(state, params) {
     if (state.data && state.data.workspace && state.data.workspace !== 'user') {

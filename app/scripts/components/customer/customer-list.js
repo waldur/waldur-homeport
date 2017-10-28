@@ -16,8 +16,8 @@ function CustomerListController(
   $state,
   $filter,
   ncUtils) {
-  var controllerScope = this;
-  var ControllerListClass = baseControllerListClass.extend({
+  let controllerScope = this;
+  let ControllerListClass = baseControllerListClass.extend({
     init: function() {
       this.service = customersService;
       this.controllerScope = controllerScope;

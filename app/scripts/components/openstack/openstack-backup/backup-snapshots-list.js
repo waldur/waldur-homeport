@@ -14,8 +14,8 @@ export default function openStackBackupsList() {
 // @ngInject
 function backupSnapshotsListController(
   baseResourceListController, openstackSnapshotsService, $filter) {
-  var controllerScope = this;
-  var controllerClass = baseResourceListController.extend({
+  let controllerScope = this;
+  let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
@@ -23,7 +23,7 @@ function backupSnapshotsListController(
       this.addRowFields(['size', 'created']);
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.disableSearch = true;
       options.noDataText = gettext('No snapshots yet.');
       options.noMatchesText = gettext('No snapshots found matching filter.');

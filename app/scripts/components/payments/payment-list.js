@@ -11,12 +11,12 @@ function PaymentsListController(
   baseControllerListClass,
   paymentsService,
   $filter) {
-  var controllerScope = this;
-  var PaymentsController = baseControllerListClass.extend({
+  let controllerScope = this;
+  let PaymentsController = baseControllerListClass.extend({
     init: function() {
       this.service = paymentsService;
       this._super();
-      var vm = this;
+      let vm = this;
 
       this.tableOptions = {
         searchFieldName: 'type',
@@ -27,7 +27,7 @@ function PaymentsListController(
             title: gettext('State'),
             className: 'all',
             render: function(row) {
-              var index = vm.findIndexById(row);
+              let index = vm.findIndexById(row);
               return '<payment-state payment="controller.list[{index}]"></payment-state>'
                 .replace('{index}', index);
             }

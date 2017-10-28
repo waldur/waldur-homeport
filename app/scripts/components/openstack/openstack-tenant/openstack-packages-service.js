@@ -1,6 +1,6 @@
 // @ngInject
 export default function openstackPackagesService(baseServiceClass, ENV, $http) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/openstack-packages/';

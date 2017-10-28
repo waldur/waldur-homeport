@@ -13,8 +13,8 @@ export default issueList;
 // @ngInject
 function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
     baseControllerListClass, usersService, issuesService, $filter, $scope, $rootScope, $state, ncUtils) {
-  var controllerScope = this;
-  var controllerClass = baseControllerListClass.extend({
+  let controllerScope = this;
+  let controllerClass = baseControllerListClass.extend({
     init: function() {
       this.service = issuesService;
       this.controllerScope = controllerScope;
@@ -148,7 +148,7 @@ function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
       $scope.$watch(() => controllerScope.filter, () => {
         controllerScope.getList();
       }, true);
-      var unbind = $rootScope.$on('refreshIssuesList', () => {
+      let unbind = $rootScope.$on('refreshIssuesList', () => {
         this.service.clearAllCacheForCurrentEndpoint();
         controllerScope.getList();
       });

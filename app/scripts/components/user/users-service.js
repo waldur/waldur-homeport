@@ -1,6 +1,6 @@
 // @ngInject
 export default function usersService(baseServiceClass, $q, ENV, $rootScope) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     currentUser: null,
     init: function() {
       this._super();

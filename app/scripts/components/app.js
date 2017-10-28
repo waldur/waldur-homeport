@@ -12,14 +12,14 @@ export function protectStates($rootScope, $state, $auth, features) {
 
   $rootScope.$on('$stateChangeStart',
     function(event, toState, toParams, fromState, fromParams) {
-      var nextState = getNextState();
+      let nextState = getNextState();
       if (nextState) {
         event.preventDefault();
         $state.go(nextState);
       }
 
       function getNextState() {
-        var data = toState.data;
+        let data = toState.data;
         if (!data) {
           return;
         } else if (data.disabled) {
@@ -39,7 +39,7 @@ export function protectStates($rootScope, $state, $auth, features) {
 // @ngInject
 function decorateState($stateProvider, decorator) {
   $stateProvider.decorator('views', function(state, parent) {
-    var result = {}, views = parent(state);
+    let result = {}, views = parent(state);
 
     angular.forEach(views, function(config, name) {
       config.resolve = config.resolve || {};
@@ -98,7 +98,7 @@ export function featuresProviderConfig(ENV, featuresProvider) {
 
 // @ngInject
 export function httpInterceptor($q, $location, ncUtilsFlash, ENV, ErrorMessageFormatter, $rootScope) {
-  var timeouts = {},
+  let timeouts = {},
     abortRequests;
   function getKey(config) {
     return config.url + config.method + JSON.stringify(config.params);
@@ -113,7 +113,7 @@ export function httpInterceptor($q, $location, ncUtilsFlash, ENV, ErrorMessageFo
   return {
     request: function(config) {
       if (abortRequests && !(/^views.*\/(.*?).html$/.test(config.url))) {
-        var canceler = $q.defer();
+        let canceler = $q.defer();
         config.timeout = canceler.promise;
         canceler.resolve();
       } else {
@@ -121,7 +121,7 @@ export function httpInterceptor($q, $location, ncUtilsFlash, ENV, ErrorMessageFo
           clearTimeout(timeouts[getKey(config)]);
         }
         timeouts[getKey(config)] = setTimeout(function() {
-          var errorMessage = 'Problem getting response from the server.';
+          let errorMessage = 'Problem getting response from the server.';
           ncUtilsFlash.error(errorMessage);
           // eslint-disable-next-line no-console
           console.error(errorMessage, config);
@@ -137,7 +137,7 @@ export function httpInterceptor($q, $location, ncUtilsFlash, ENV, ErrorMessageFo
     },
     responseError: function(rejection) {
       if (!abortRequests) {
-        var message = ErrorMessageFormatter.format(rejection);
+        let message = ErrorMessageFormatter.format(rejection);
         if (rejection.config) {
           clearTimeout(timeouts[getKey(rejection.config)]);
           // eslint-disable-next-line no-console

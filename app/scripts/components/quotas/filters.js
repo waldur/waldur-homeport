@@ -1,6 +1,6 @@
 // @ngInject
 export function quotaName($filter) {
-  var names = {
+  let names = {
     floating_ip_count: gettext('Floating IP count'),
     vcpu: gettext('vCPU count'),
     ram: gettext('RAM'),
@@ -22,7 +22,7 @@ export function quotaName($filter) {
 
 // @ngInject
 export function quotaValue($filter) {
-  var filters = {
+  let filters = {
     ram: 'filesize',
     storage: 'filesize',
     volumes_size: 'filesize',
@@ -34,7 +34,7 @@ export function quotaValue($filter) {
     if (value == -1) {
       return '∞';
     }
-    var filter = filters[name];
+    let filter = filters[name];
     if (filter) {
       return $filter(filter)(value);
     } else {

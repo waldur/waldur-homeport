@@ -10,11 +10,11 @@ const openstackSnapshotSchedulesList = {
 // @ngInject
 function openstackSnapshotSchedulesListController(
   baseResourceListController, openstackSnapshotSchedulesService, actionUtilsService, $filter) {
-  var controllerScope = this;
-  var controllerClass = baseResourceListController.extend({
+  let controllerScope = this;
+  let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      var fn = this._super.bind(this);
+      let fn = this._super.bind(this);
       this.loading = true;
       actionUtilsService.loadNestedActions(this, controllerScope.resource, 'snapshot_schedules').then(result => {
         this.listActions = result;
@@ -24,7 +24,7 @@ function openstackSnapshotSchedulesListController(
       });
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.disableSearch = true;
       options.noDataText = gettext('No snapshot schedules yet.');
       options.noMatchesText = gettext('No snapshot schedules found matching filter.');
