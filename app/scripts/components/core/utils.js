@@ -38,7 +38,7 @@ export function ncUtils() {
       else if (value.length == 1) {
         return value[0].name;
       } else if (angular.isString(value)) {
-        var parts = value.split('/');
+        let parts = value.split('/');
         return parts[parts.length - 1];
       }
     },
@@ -46,10 +46,10 @@ export function ncUtils() {
       return name.replace(/nc_|_count/g, '').replace(/_/g, ' ');
     },
     isCustomerQuotaReached: function(customer, quotaName) {
-      var quotas = customer.quotas || [];
-      for (var i = 0; i < quotas.length; i++) {
-        var value = quotas[i];
-        var name = this.getPrettyQuotaName(value.name);
+      let quotas = customer.quotas || [];
+      for (let i = 0; i < quotas.length; i++) {
+        let value = quotas[i];
+        let name = this.getPrettyQuotaName(value.name);
         if (name === quotaName && value.limit > -1 && (value.limit === value.usage || value.limit === 0)) {
           return {name: name, usage: [value.limit, value.usage]};
         }
@@ -57,9 +57,9 @@ export function ncUtils() {
       return false;
     },
     getQuotaUsage: function(quotas) {
-      var usage = {};
-      for (var i = 0; i < quotas.length; i++) {
-        var quota = quotas[i];
+      let usage = {};
+      for (let i = 0; i < quotas.length; i++) {
+        let quota = quotas[i];
         usage[quota.name] = Math.max(0, quota.usage);
       }
       return usage;
@@ -68,8 +68,8 @@ export function ncUtils() {
       // Example input: http://example.com/#/approve/?foo=123&bar=456
       // Example output: foo=123&bar=456
 
-      var hash = document.location.hash;
-      var parts = hash.split('?');
+      let hash = document.location.hash;
+      let parts = hash.split('?');
       if (parts.length > 1) {
         return parts[1];
       }
@@ -87,7 +87,7 @@ export function ncUtils() {
               .replace('{name}', name);
     },
     renderAvatar: function(user) {
-      var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+      let avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
         .replace('{gravatarSrc}', user.email);
       return avatar + ' ' + (user.full_name || user.username);
     },
@@ -100,17 +100,17 @@ export function ncUtils() {
       // Example output: {foo: "123", bar: "456"}
 
       return qs.split('&').reduce(function(result, part){
-        var tokens = part.split('=');
+        let tokens = part.split('=');
         if (tokens.length > 1) {
-          var key = tokens[0];
-          var value = tokens[1];
+          let key = tokens[0];
+          let value = tokens[1];
           result[key] = value;
         }
         return result;
       }, {});
     },
     toKeyValue: function (obj) {
-      var parts = [];
+      let parts = [];
       angular.forEach(obj, function(value, key) {
         parts.push(key + '=' + encodeURIComponent(value));
       });
@@ -126,12 +126,12 @@ export function ncUtils() {
       list1 = list1 || [];
       list2 = list2 || [];
       fieldIdentifier = fieldIdentifier || 'uuid';
-      var itemByUuid = {},
+      let itemByUuid = {},
         newListUiids = list2.map(function(item) {
           return item[fieldIdentifier];
         });
       for (let i = 0; i < list1.length; i++) {
-        var item = list1[i];
+        let item = list1[i];
         itemByUuid[item[fieldIdentifier]] = item;
       }
 
@@ -142,20 +142,20 @@ export function ncUtils() {
 
       // Add or update remaining items
       for (let i = 0; i < list2.length; i++) {
-        var item2 = list2[i];
-        var item1 = itemByUuid[item2[fieldIdentifier]];
+        let item2 = list2[i];
+        let item1 = itemByUuid[item2[fieldIdentifier]];
         if (!item1) {
           list1.push(item2);
           continue;
         }
-        for (var key in item2) {
+        for (let key in item2) {
           item2.hasOwnProperty(key) && (item1[key] = item2[key]);
         }
       }
       return list1;
     },
     sortObj: function(obj, order) {
-      var i,
+      let i,
         tempArry = Object.keys(obj),
         tempObj = {};
 
@@ -182,7 +182,7 @@ export function ncUtils() {
     },
     // @param order - 0 for asc, 1 for desc
     sortArrayOfObjects: function(arr, field, desc) {
-      var vm = this;
+      let vm = this;
       vm.field = field;
       vm.desc = desc;
       function compare(a,b) {

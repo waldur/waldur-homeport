@@ -11,8 +11,8 @@ export default function hookList() {
 // @ngInject
 function HookListController(
   baseControllerListClass, $filter, $uibModal, hooksService, usersService) {
-  var controllerScope = this;
-  var Controller = baseControllerListClass.extend({
+  let controllerScope = this;
+  let Controller = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = hooksService;
@@ -26,8 +26,8 @@ function HookListController(
             title: gettext('State'),
             className: 'text-center all',
             render: function(row) {
-              var cls = row.is_active && 'online' || '';
-              var title = row.is_active && 'Enabled' || 'Disabled';
+              let cls = row.is_active && 'online' || '';
+              let title = row.is_active && 'Enabled' || 'Disabled';
               return '<a class="status-circle {cls}" title="{title}"></a>'
                         .replace('{cls}', cls).replace('{title}', title);
             },
@@ -103,7 +103,7 @@ function HookListController(
     },
 
     search: function() {
-      var vm = this,
+      let vm = this,
         searchInput = vm.searchInput.toLowerCase();
 
       vm.list = vm.service.list.filter(function(item) {

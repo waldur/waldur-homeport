@@ -13,8 +13,8 @@ export default openstackSnapshotsNestedList;
 function OpenstackSnapshotsNestedListController(
   baseResourceListController, openstackSnapshotsService, $filter) {
   // @ngInject
-  var controllerScope = this;
-  var controllerClass = baseResourceListController.extend({
+  let controllerScope = this;
+  let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
@@ -22,7 +22,7 @@ function OpenstackSnapshotsNestedListController(
       this.addRowFields(['size']);
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.disableSearch = true;
       options.noDataText = gettext('No snapshots yet.');
       options.noMatchesText = gettext('No snapshots found matching filter.');

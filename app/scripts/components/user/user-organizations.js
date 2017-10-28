@@ -16,13 +16,13 @@ function UserOrganizationsController(
   ncUtils,
   $uibModal,
   ENV) {
-  var controllerScope = this;
-  var ControllerListClass = baseControllerListClass.extend({
+  let controllerScope = this;
+  let ControllerListClass = baseControllerListClass.extend({
     init: function() {
       this.ownerCanManageCustomer = ENV.ownerCanManageCustomer;
       this.service = customerPermissionsService;
       this.controllerScope = controllerScope;
-      var fn = this._super.bind(this);
+      let fn = this._super.bind(this);
       this.loading = true;
       this.loadContext().then(() => {
         this.tableOptions = this.getTableOptions();

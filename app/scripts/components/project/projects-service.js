@@ -1,13 +1,13 @@
 // @ngInject
 export default function projectsService($q, $http, baseServiceClass) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/projects/';
     },
     getFirst: function() {
-      var deferred = $q.defer();
-      var savePageSize = this.pageSize;
+      let deferred = $q.defer();
+      let savePageSize = this.pageSize;
       this.pageSize = 1;
       /*jshint camelcase: false */
       this.getList().then(function(projects) {
@@ -18,7 +18,7 @@ export default function projectsService($q, $http, baseServiceClass) {
       return deferred.promise;
     },
     getCounters: function(defaultQuery) {
-      var query = angular.extend({operation: 'counters'}, defaultQuery);
+      let query = angular.extend({operation: 'counters'}, defaultQuery);
       return this.getFactory(false).get(query).$promise;
     },
     updateProject: function(project_url, fields) {

@@ -25,8 +25,8 @@ export function CustomerBalanceController(
   }
 
   $scope.addCredit = function(amount) {
-    var vm = this;
-    var payment = paymentsService.$create();
+    let vm = this;
+    let payment = paymentsService.$create();
     payment.customer = vm.model.url;
     payment.amount = amount;
     payment.return_url = $state.href('payment.approve', {}, {absolute: true});
@@ -43,15 +43,15 @@ export function CustomerBalanceController(
   }
 
   function getPlan(customer) {
-    var usage = ncUtils.getQuotaUsage(customer.quotas),
+    let usage = ncUtils.getQuotaUsage(customer.quotas),
       currentPlan, currentPlanQuotas;
 
     if (customer.plan) {
       currentPlan = customer.plan.name;
       currentPlanQuotas = customer.plan.quotas.map(function(quota) {
-        var name = ncUtils.getPrettyQuotaName(quota.name);
-        var limit = quota.value < 0 ? '∞' : quota.value;
-        var quotaUsageMessage = coreUtils.templateFormatter(gettext('{quotaUsage} out of {quotaLimit}.'),
+        let name = ncUtils.getPrettyQuotaName(quota.name);
+        let limit = quota.value < 0 ? '∞' : quota.value;
+        let quotaUsageMessage = coreUtils.templateFormatter(gettext('{quotaUsage} out of {quotaLimit}.'),
           { quotaUsage: usage[quota.name], quotaLimit: limit });
         return {
           name: name + (quota.value > 1 || quota.value == -1 ? 's' : ''),
@@ -64,7 +64,7 @@ export function CustomerBalanceController(
     } else {
       currentPlan = 'Default';
       currentPlanQuotas = customer.quotas.map(function(quota) {
-        var name = ncUtils.getPrettyQuotaName(quota.name);
+        let name = ncUtils.getPrettyQuotaName(quota.name);
         return {
           name: name + (quota.limit > 1 || quota.limit == -1 ? 's' : ''),
           limit: quota.limit < 0 ? '∞' : quota.limit,
@@ -83,10 +83,10 @@ export function CustomerBalanceController(
     customersService.getBalanceHistory(customer.uuid).then(function(rows) {
       $scope.showChart = rows.length > 0;
 
-      var labels = rows.map(function(row) {
+      let labels = rows.map(function(row) {
         return moment(row.created).format('D.MM');
       });
-      var totals = rows.map(function(row) {
+      let totals = rows.map(function(row) {
         return row.amount;
       });
 
@@ -112,7 +112,7 @@ export function CustomerBalanceController(
       $scope.shown[id] = false;
     }
 
-    for (var i in $scope.shown) {
+    for (let i in $scope.shown) {
       if (id != i) {
         $scope.shown[i] = false;
       }

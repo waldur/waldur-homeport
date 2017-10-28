@@ -1,6 +1,6 @@
 // @ngInject
 export default function issuesService(baseServiceClass) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/support-issues/';
@@ -10,7 +10,7 @@ export default function issuesService(baseServiceClass) {
       this.defaultFilter = {o: '-created'};
     },
     createIssue: function(instance) {
-      var issue = this.$create();
+      let issue = this.$create();
       angular.extend(issue, instance);
       return issue.$save();
     }

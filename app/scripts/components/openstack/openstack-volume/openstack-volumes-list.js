@@ -20,8 +20,8 @@ function VolumesListController(
   ENV,
   TableExtensionService,
   features) {
-  var controllerScope = this;
-  var ResourceController = BaseProjectResourcesTabController.extend({
+  let controllerScope = this;
+  let ResourceController = BaseProjectResourcesTabController.extend({
     init:function() {
       this.category = ENV.Storages;
       this.controllerScope = controllerScope;
@@ -39,7 +39,7 @@ function VolumesListController(
       };
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.noDataText = gettext('You have no volumes yet.');
       options.noMatchesText = gettext('No volumes found matching filter.');
       options.tableActions = this.getTableActions();
@@ -62,8 +62,8 @@ function VolumesListController(
           if (!row.instance) {
             return '&ndash;';
           }
-          var uuid = ncUtils.getUUID(row.instance);
-          var href = $state.href('resources.details', {
+          let uuid = ncUtils.getUUID(row.instance);
+          let href = $state.href('resources.details', {
             uuid: uuid,
             resource_type: 'OpenStackTenant.Instance'
           });

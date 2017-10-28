@@ -13,8 +13,8 @@ function ProjectVirtualMachinesListController(
   $timeout,
   ENV,
   TableExtensionService) {
-  var controllerScope = this;
-  var ResourceController = BaseProjectResourcesTabController.extend({
+  let controllerScope = this;
+  let ResourceController = BaseProjectResourcesTabController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.category = ENV.VirtualMachines;
@@ -27,7 +27,7 @@ function ProjectVirtualMachinesListController(
       });
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.noDataText = gettext('You have no virtual machines yet.');
       options.noMatchesText = gettext('No virtual machines found matching filter.');
       options.columns.push({

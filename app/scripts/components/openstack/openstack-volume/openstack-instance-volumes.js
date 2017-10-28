@@ -17,8 +17,8 @@ function OpenstackVolumesList(
   $timeout,
   ncUtils,
   openstackVolumesService) {
-  var controllerScope = this;
-  var ResourceController = baseResourceListController.extend({
+  let controllerScope = this;
+  let ResourceController = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
@@ -34,7 +34,7 @@ function OpenstackVolumesList(
       });
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.noDataText = gettext('You have no volumes yet.');
       options.noMatchesText = gettext('No volumes found matching filter.');
       options.columns = [

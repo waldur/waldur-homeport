@@ -38,14 +38,14 @@ function attachSentry(ENV) {
 }
 
 // See https://github.com/angular/angular.js/blob/v1.4.7/src/minErr.js
-var angularPattern = /^\[((?:[$a-zA-Z0-9]+:)?(?:[$a-zA-Z0-9]+))\] (.*?)\n?(\S+)$/;
+let angularPattern = /^\[((?:[$a-zA-Z0-9]+:)?(?:[$a-zA-Z0-9]+))\] (.*?)\n?(\S+)$/;
 
 function _normalizeData(data) {
   // We only care about mutating an exception
-  var exception = data.exception;
+  let exception = data.exception;
   if (exception) {
     exception = exception.values[0];
-    var matches = angularPattern.exec(exception.value);
+    let matches = angularPattern.exec(exception.value);
 
     if (matches) {
       // This type now becomes something like: $rootScope:inprog

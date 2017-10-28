@@ -1,6 +1,6 @@
 // @ngInject
 export default function paymentsService(baseServiceClass, ENV, $http) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     init:function() {
       this._super();
       this.endpoint = '/paypal-payments/';

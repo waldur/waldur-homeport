@@ -4,7 +4,7 @@
  */
 // @ngInject
 export default function currentStateService($q, ENV, ncUtils, $rootScope) {
-  var vm = this;
+  let vm = this;
   vm.getCustomer = getCustomer;
   vm.setCustomer = setCustomer;
   vm.reloadCurrentCustomer = reloadCurrentCustomer;
@@ -23,10 +23,10 @@ export default function currentStateService($q, ENV, ncUtils, $rootScope) {
   vm.setOwnerOrStaff = setOwnerOrStaff;
 
   // private variables:
-  var customer = null;
-  var project = null;
-  var hasCustomer = undefined;
-  var ownerOrStaff = undefined;
+  let customer = null;
+  let project = null;
+  let hasCustomer = undefined;
+  let ownerOrStaff = undefined;
 
   $rootScope.$on('logoutStart', function() {
     vm.setCustomer(null);

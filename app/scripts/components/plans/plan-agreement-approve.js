@@ -10,7 +10,7 @@ export default planAgreementApprove;
 // @ngInject
 function AgreementApproveController(
   ncUtils, ncUtilsFlash, agreementsService, $state, currentStateService) {
-  var qs = ncUtils.parseQueryString(ncUtils.getQueryString());
+  let qs = ncUtils.parseQueryString(ncUtils.getQueryString());
   if (!qs.token) {
     ncUtilsFlash.error(gettext('Invalid URL. Unable to parse billing plan agreement details.'));
     return;

@@ -1,6 +1,6 @@
 // @ngInject
 export default function projectPermissionsService(baseServiceClass, ncUtils) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     init:function() {
       this._super();
       this.endpoint = '/project-permissions/';

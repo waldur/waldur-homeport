@@ -14,8 +14,8 @@ export default customerUsersDetailsList;
 function customerUsersDetailsListController(
     baseControllerListClass,
     usersService) {
-  var controllerScope = this;
-  var UsersController = baseControllerListClass.extend({
+  let controllerScope = this;
+  let UsersController = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = usersService;
@@ -33,7 +33,7 @@ function customerUsersDetailsListController(
             className: 'all',
             width: '20%',
             render: function(row) {
-              var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+              let avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                 .replace('{gravatarSrc}', row.email);
               return avatar + ' ' + (row.full_name || row.username);
             }

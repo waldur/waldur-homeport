@@ -1,6 +1,6 @@
 // @ngInject
 export default function ncUtilsFlash(Flash, $rootScope, ErrorMessageFormatter) {
-  var dismiss = Flash.dismiss;
+  let dismiss = Flash.dismiss;
   Flash.dismiss = function() {
     // for hasFlash variable change emit for ng-show directive in flash block
     $rootScope.hasFlash = !$rootScope.hasFlash;

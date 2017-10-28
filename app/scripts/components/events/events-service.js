@@ -2,7 +2,7 @@ import { EVENT_ICONS_TYPES, EVENT_TEMPLATES } from './constants';
 
 // @ngInject
 export default function eventsService($q, baseServiceClass, ENV) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/events/';
@@ -11,11 +11,11 @@ export default function eventsService($q, baseServiceClass, ENV) {
       this.defaultFilter = {exclude_extra: true};
     },
     getEventGroups: function() {
-      var vm = this;
+      let vm = this;
       if (this.eventGroups) {
         return $q.resolve(this.eventGroups);
       } else {
-        var url = ENV.apiEndpoint + 'api/events/event_groups/';
+        let url = ENV.apiEndpoint + 'api/events/event_groups/';
         return this.$get(null, url).then(function(eventGroups) {
           delete eventGroups.$promise;
           delete eventGroups.$resolved;
@@ -35,15 +35,15 @@ export default function eventsService($q, baseServiceClass, ENV) {
       });
     },
     getAvailableIconTypes: function() {
-      var icons = [],
+      let icons = [],
         icon,
         descriptions = [],
         description;
-      for (var i in EVENT_ICONS_TYPES) {
+      for (let i in EVENT_ICONS_TYPES) {
         if (ENV.toBeFeatures.indexOf(i) === -1 && EVENT_ICONS_TYPES.hasOwnProperty(i)) {
           icon = EVENT_ICONS_TYPES[i][1];
           icon = (icon === 'provider') ? 'service' : icon;
-          for (var j in EVENT_TEMPLATES) {
+          for (let j in EVENT_TEMPLATES) {
             description = EVENT_TEMPLATES[j].replace(/_/gi, ' ');
             if (j.split('_')[0] === i && EVENT_TEMPLATES.hasOwnProperty(j)
                 && descriptions.indexOf(description) === -1

@@ -5,7 +5,7 @@ export default function baseEventListController(
   EventDialogsService,
   eventFormatter,
   $filter) {
-  var ControllerListClass = baseControllerListClass.extend({
+  let ControllerListClass = baseControllerListClass.extend({
     init:function() {
       this.service = eventsService;
       this.tableOptions = {

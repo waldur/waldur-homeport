@@ -16,8 +16,8 @@ function InvoicesListController(
   ncUtils,
   $state,
   $filter) {
-  var controllerScope = this;
-  var InvoicesController = baseControllerListClass.extend({
+  let controllerScope = this;
+  let InvoicesController = baseControllerListClass.extend({
     init: function() {
       this.service = invoicesService;
       let fn = this._super.bind(this);

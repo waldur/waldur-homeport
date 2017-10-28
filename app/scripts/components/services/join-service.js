@@ -1,6 +1,6 @@
 // @ngInject
 export default function joinService(baseServiceClass, servicesService, $http, $q) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     init:function() {
       this._super();
       this.endpoint = '/services/';
@@ -19,8 +19,8 @@ export default function joinService(baseServiceClass, servicesService, $http, $q
     },
 
     createOrUpdate: function(method, url, options) {
-      var fd = new FormData();
-      for(var name in options) {
+      let fd = new FormData();
+      for(let name in options) {
         fd.append(name, options[name]);
       }
       return $http({
@@ -37,7 +37,7 @@ export default function joinService(baseServiceClass, servicesService, $http, $q
     },
 
     $get: function(service_type, uuid) {
-      var get = this._super.bind(this);
+      let get = this._super.bind(this);
       return this.getUrlByType(service_type).then(function(url) {
         return get(uuid, url);
       });

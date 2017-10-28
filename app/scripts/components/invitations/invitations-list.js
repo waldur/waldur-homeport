@@ -23,12 +23,12 @@ function InvitationsListController(
   InvitationCancelAction,
   ENV
 ) {
-  var controllerScope = this;
-  var InvitationController = baseControllerListClass.extend({
+  let controllerScope = this;
+  let InvitationController = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = invitationService;
-      var fn = this._super.bind(this);
+      let fn = this._super.bind(this);
       this.loading = true;
       this.loadContext().then(() => {
         this.actionContext = this.getActionContext();
@@ -98,7 +98,7 @@ function InvitationsListController(
             className: 'all',
             orderField: 'email',
             render: function(row) {
-              var avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+              let avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                 .replace('{gravatarSrc}', row.email);
               return avatar + ' ' + row.email;
             }
@@ -111,11 +111,11 @@ function InvitationsListController(
               if (row.customer_role) {
                 return ENV.roles.owner;
               } else if (row.project_role) {
-                var href = $state.href('project.details', {
+                let href = $state.href('project.details', {
                   uuid: ncUtils.getUUID(row.project)
                 });
-                var roleTitle = ENV.roles[row.project_role] || 'Unknown';
-                var title = roleTitle + ' in ' + row.project_name;
+                let roleTitle = ENV.roles[row.project_role] || 'Unknown';
+                let title = roleTitle + ' in ' + row.project_name;
                 return ncUtils.renderLink(href, title);
               }
             }

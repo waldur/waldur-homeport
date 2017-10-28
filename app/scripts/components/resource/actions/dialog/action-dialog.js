@@ -64,25 +64,25 @@ function ActionDialogController(
       if ($scope.ActionForm.$invalid) {
         return $q.reject();
       }
-      var fields = $scope.action.fields;
+      let fields = $scope.action.fields;
       if (!$scope.action.url) {
         $scope.action.url = $scope.resource.url + $scope.action.name + '/';
       }
-      var form = {};
+      let form = {};
       if ($scope.action.serializer) {
         form = $scope.action.serializer($scope.form);
       } else {
-        for (var name in fields) {
+        for (let name in fields) {
           if ($scope.form[name] != null) {
-            var field = fields[name];
-            var serializer = field.serializer || angular.identity;
+            let field = fields[name];
+            let serializer = field.serializer || angular.identity;
             form[name] = serializer($scope.form[name], field);
           }
         }
       }
 
-      var promise;
-      var url;
+      let promise;
+      let url;
       if ($scope.action.method === 'DELETE') {
         url = $scope.action.url + '?' + ncUtils.toKeyValue($scope.form);
         promise = $http.delete(url);

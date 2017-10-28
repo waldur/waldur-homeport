@@ -2,7 +2,7 @@ import { ALERT_ICONS_TYPES, ALERT_TEMPLATES } from './constants';
 
 // @ngInject
 export default function alertsService(baseServiceClass, ENV) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/alerts/';
@@ -18,15 +18,15 @@ export default function alertsService(baseServiceClass, ENV) {
       }
     },
     getAvailableIconTypes: function() {
-      var icons = [],
+      let icons = [],
         icon,
         descriptions = [],
         description;
-      for (var i in ALERT_ICONS_TYPES) {
+      for (let i in ALERT_ICONS_TYPES) {
         if (ENV.toBeFeatures.indexOf(i) === -1 && ALERT_ICONS_TYPES.hasOwnProperty(i)) {
           icon = i.slice(0, -1);
           icon = (icon === 'provider') ? 'service' : icon;
-          for (var j in ALERT_TEMPLATES) {
+          for (let j in ALERT_TEMPLATES) {
             description = ALERT_TEMPLATES[j]
               .replace(/ {\w+}|\./gi, '');
             description.replace('{'+ icon +'_name} ', '');

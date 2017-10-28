@@ -51,12 +51,12 @@ export default class ErrorMessageFormatter {
   }
 
   formatErrorFields(error) {
-    var errors = [];
+    let errors = [];
     if (!(error.data instanceof Object)) {
       return [error.data];
     }
 
-    for (var i in error.data) {
+    for (let i in error.data) {
       if (error.data.hasOwnProperty(i)) {
         errors = errors.concat(i + ': ' + error.data[i]);
       }

@@ -24,7 +24,7 @@ function SelectWorkspaceDialogController(
     ncUtils,
     ENV
   ) {
-  var ctrl = this;
+  let ctrl = this;
   ctrl.organizations = [];
   ctrl.projects = [];
   ctrl.selectedOrganization = {};
@@ -55,17 +55,17 @@ function SelectWorkspaceDialogController(
   };
 
   ctrl.gotoOrganization = function(organization) {
-    var promise = $state.go('organization.dashboard', {uuid: organization.uuid}, {reload: true});
+    let promise = $state.go('organization.dashboard', {uuid: organization.uuid}, {reload: true});
     return blockAndClose(promise);
   };
 
   ctrl.gotoProject = function(project) {
-    var promise = $state.go('project.details', {uuid: project.uuid}, {reload: true});
+    let promise = $state.go('project.details', {uuid: project.uuid}, {reload: true});
     return blockAndClose(promise);
   };
 
   ctrl.gotoProfile = function() {
-    var promise = $state.go('profile.details');
+    let promise = $state.go('profile.details');
     return blockAndClose(promise);
   };
 
@@ -78,7 +78,7 @@ function SelectWorkspaceDialogController(
   };
 
   ctrl.createProject = function() {
-    var promise = $state.go('organization.createProject', {
+    let promise = $state.go('organization.createProject', {
       uuid: ctrl.selectedOrganization.uuid
     });
     return blockAndClose(promise);

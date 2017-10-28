@@ -10,7 +10,7 @@ export default planAgreementCancel;
 // @ngInject
 function AgreementCancelController(
   ncUtils, ncUtilsFlash, agreementsService, $state) {
-  var qs = ncUtils.parseQueryString(ncUtils.getQueryString());
+  let qs = ncUtils.parseQueryString(ncUtils.getQueryString());
   if (!qs.token) {
     ncUtilsFlash.error(gettext('Invalid URL. Unable to parse billing plan agreement details.'));
     return;

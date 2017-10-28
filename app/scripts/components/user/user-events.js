@@ -13,8 +13,8 @@ export default function userEvents() {
 
 // @ngInject
 function UserEventsListController(baseEventListController) {
-  var controllerScope = this;
-  var EventController = baseEventListController.extend({
+  let controllerScope = this;
+  let EventController = baseEventListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();

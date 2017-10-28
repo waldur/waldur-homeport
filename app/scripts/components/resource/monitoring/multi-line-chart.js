@@ -29,42 +29,42 @@ export default function multiLineChart($window) {
     function init() {
       element.children().html('');
 
-      var margin = {top: 20, right: 80, bottom: 30, left: 50},
+      let margin = {top: 20, right: 80, bottom: 30, left: 50},
         width = element[0].getBoundingClientRect().width - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
-      var x = d3.time.scale()
+      let x = d3.time.scale()
         .range([0, width]);
 
-      var y = d3.scale.linear()
+      let y = d3.scale.linear()
         .range([height, 0]);
 
-      var color = d3.scale.category10();
+      let color = d3.scale.category10();
 
-      var xAxis = d3.svg.axis()
+      let xAxis = d3.svg.axis()
         .scale(x).innerTickSize(-height).tickSubdivide(true)
         .orient('bottom');
 
-      var yAxis = d3.svg.axis()
+      let yAxis = d3.svg.axis()
         .scale(y)
         .orient('left').innerTickSize(-width).tickSubdivide(true).ticks(5);
 
-      var line = d3.svg.line()
+      let line = d3.svg.line()
         .interpolate('basis')
         .x(function(d) { return x(d.date); })
         .y(function(d) { return y(d.cpuUtilization); });
 
-      var svg = d3.select(element.children()[0]).append('svg')
+      let svg = d3.select(element.children()[0]).append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
         .append('g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-      var data = scope.data;
+      let data = scope.data;
 
       color.domain(d3.keys(data[0]).filter(function(key) { return key !== 'date'; }));
 
-      var cores = color.domain().map(function(name) {
+      let cores = color.domain().map(function(name) {
         return {
           name: name,
           values: data.map(function(d) {
@@ -95,7 +95,7 @@ export default function multiLineChart($window) {
         .style('text-anchor', 'end')
         .text('');
 
-      var core = svg.selectAll('.core')
+      let core = svg.selectAll('.core')
         .data(cores)
         .enter().append('g')
         .attr('class', 'core');

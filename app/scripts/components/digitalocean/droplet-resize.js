@@ -55,14 +55,14 @@ function DropletResizeDialogController($scope, resourcesService, resourceUtils,
     isValidSize: function(size) {
       // 1. New size should not be the same as the current size
       // 2. New size disk should not be lower then current size disk
-      var droplet = $scope.resource;
+      let droplet = $scope.resource;
       return size.disk !== droplet.disk &&
              size.cores !== droplet.cores &&
              size.ram !== droplet.ram &&
              size.disk >= droplet.disk;
     },
     submitForm: function() {
-      var form = resourcesService.$create($scope.action.url);
+      let form = resourcesService.$create($scope.action.url);
       form.size = $scope.options.newSize.url;
       form.disk = $scope.options.resizeType === 'permanent';
       return form.$save().then(function() {

@@ -10,13 +10,13 @@ const openstackInternalIpsList = {
 // @ngInject
 function OpenstackInternalIpsListController(
   baseResourceListController, actionUtilsService) {
-  var controllerScope = this;
-  var controllerClass = baseResourceListController.extend({
+  let controllerScope = this;
+  let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.listActions = null;
-      var list_type = 'internal_ips';
-      var fn = this._super.bind(this);
+      let list_type = 'internal_ips';
+      let fn = this._super.bind(this);
 
       this.loading = true;
       actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {

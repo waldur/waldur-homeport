@@ -13,8 +13,8 @@ export default plansList;
 function PlansListController(
     baseControllerListClass, plansService, customersService, usersService, customerPermissionsService,
     agreementsService, ncUtils, $stateParams, $state, $window, $q) {
-  var controllerScope = this;
-  var Controller = baseControllerListClass.extend({
+  let controllerScope = this;
+  let Controller = baseControllerListClass.extend({
     init:function() {
       this.service = plansService;
       this.controllerScope = controllerScope;
@@ -28,7 +28,7 @@ function PlansListController(
 
     loadInitial: function() {
       // check is current user - customer owner and load page if he is
-      var vm = this;
+      let vm = this;
       return usersService.getCurrentUser().then(function(user) {
         /*jshint camelcase: false */
         return customerPermissionsService.userHasCustomerRole(user.username, 'owner', $stateParams.uuid).then(
@@ -48,7 +48,7 @@ function PlansListController(
     },
 
     getLimitsAndUsages: function() {
-      var vm = this;
+      let vm = this;
       return customersService.$get($stateParams.uuid).then(function(customer) {
         vm.customer = customer;
         vm.currentPlan = customer.plan;
@@ -71,7 +71,7 @@ function PlansListController(
     },
 
     createOrder: function() {
-      var vm = this,
+      let vm = this,
         order = agreementsService.$create();
       if (vm.selectedPlan !== null) {
         order.plan = vm.selectedPlan.url;

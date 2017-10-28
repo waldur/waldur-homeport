@@ -14,7 +14,7 @@ export default function AppstoreProvidersService($filter, joinService) {
       angular.forEach(services, checkQuotaThreshold);
       angular.forEach(services, checkQuotaLimit);
 
-      var details = services.reduce(function(result, service) {
+      let details = services.reduce(function(result, service) {
         result[service.url] = service;
         return result;
       }, {});
