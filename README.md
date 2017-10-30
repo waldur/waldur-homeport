@@ -12,34 +12,48 @@ __Development/testing__:
 
 ## Installation
 
+1. Update system and install basic dependencies:
+Example for CentOS 7:
 
-1. Install dependencies. Example for CentOS 7:
 ```
-yum -y install epel-release https://rpm.nodesource.com/pub_6.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
-yum -y install bzip2 git libjpeg-turbo-devel libpng-devel libtool make nasm nodejs rubygems
-gem install sass
+yum --assumeyes update
+yum install --assumeyes bzip2 git wget
+```
+
+Example for Ubuntu 14.04 LTS:
+```
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install git wget
+```
+
+2. Install stable Node.js and yarn:
+```
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+source ~/.bashrc
+nvm install --lts
 npm install -g yarn
 ```
 
-2. Clone project and go to its folder:
+3. Clone project and go to its folder:
 ```
 git clone <repository-url>
 cd waldur-homeport
 ```
 
-3. Install dependencies:
+4. Install dependencies via yarn:
 ```
 yarn
 ```
 
-4. Create `/app/scripts/configs/custom-config.json`:
+5. Create `/app/scripts/configs/custom-config.json`:
 ```
 cp app/scripts/configs/config.json.example app/scripts/configs/config.json
 ```
 
-5. Configure `config.json`. Please read [Configuration guide](docs/config.md) to learn more.
+6. Configure `config.json`. Please read [Configuration guide](docs/config.md) to learn more.
 
-6. Run application: `yarn start`.
+7. Run application: `yarn start`.
 
 Server will listen on `//localhost:8000`
 
