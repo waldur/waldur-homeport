@@ -3,6 +3,7 @@ var webpack = require('webpack');
 const merge = require('webpack-merge');
 var path = require('path');
 
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var OfflinePlugin = require('offline-plugin');
 
 module.exports = merge(baseConfig, {
@@ -29,6 +30,9 @@ module.exports = merge(baseConfig, {
       },
       exclude: [/\.min\.js$/gi]
     }),
+    new CopyWebpackPlugin([
+      {from: './app/static/js/i18n/', to: './js/i18n/'}
+    ]),
     // it's always better if OfflinePlugin is the last plugin added
     new OfflinePlugin({
       ServiceWorker: {
