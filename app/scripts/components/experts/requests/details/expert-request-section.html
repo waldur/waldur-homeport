@@ -3,14 +3,19 @@
     <dt uib-tooltip="{{:: $ctrl.config.options[field].label}}">
       {{::$ctrl.config.options[field].label}}
     </dt>
-    <dd ng-if="$ctrl.model[field] === ''">
-      N/A
-    </dd>
-    <dd ng-if="$ctrl.model[field] !== ''">
-      <span ng-if="$ctrl.config.options[field].type !== 'html_text'"
-        ng-bind="$ctrl.model[field]"></span>
-      <span ng-if="$ctrl.config.options[field].type === 'html_text'"
-        ng-bind-html="$ctrl.model[field] | trustAsHtml"></span>
+    <dd ng-switch="$ctrl.config.options[field].type">
+      <span
+        ng-switch-when="money"
+        ng-bind="$ctrl.model[field] | defaultCurrency">
+      </span>
+      <span
+        ng-switch-when="html_text"
+        ng-bind="$ctrl.model[field] | trustAsHtml">
+      </span>
+      <span
+        ng-switch-default
+        ng-bind="$ctrl.model[field] || 'N/A'">
+      </span>
     </dd>
   </div>
 </dl>
