@@ -6,26 +6,42 @@ const TABS = {
   BIDS: 1,
 };
 
+const USER_ROLE_STAFF = gettext('staff');
+
+const USER_ROLE_SUPPORT = gettext('support');
+
+const USER_ROLE_EXPERT = gettext('expert');
+
+const USER_ROLE_OWNER = gettext('owner');
+
+
 const expertRequestDetails = {
   template: template,
   controller: class ExpertRequestDetailsController {
     // @ngInject
-    constructor($rootScope,
-                $scope,
-                $state,
-                $stateParams,
-                currentStateService,
-                BreadcrumbsService,
-                WorkspaceService,
-                expertRequestsService) {
+    constructor(
+      $q,
+      $rootScope,
+      $scope,
+      $state,
+      $stateParams,
+      customersService,
+      currentStateService,
+      BreadcrumbsService,
+      WorkspaceService,
+      expertRequestsService,
+      usersService) {
+      this.$q = $q;
       this.$rootScope = $rootScope;
       this.$scope = $scope;
       this.$state = $state;
       this.$stateParams = $stateParams;
+      this.customersService = customersService;
       this.currentStateService = currentStateService;
       this.BreadcrumbsService = BreadcrumbsService;
       this.WorkspaceService = WorkspaceService;
       this.expertRequestsService = expertRequestsService;
+      this.usersService = usersService;
     }
 
     $onInit() {
@@ -36,23 +52,52 @@ const expertRequestDetails = {
 
     loadExpertRequest() {
       this.loading = true;
-      this.currentStateService.getCustomer().then(customer => {
-        return this.expertRequestsService.$get(this.$stateParams.requestId)
-          .then(expertRequest => {
-            this.expertRequest = {...expertRequest, ...expertRequest.extra};
-            this.workspace = this.WorkspaceService.getWorkspace().workspace;
-            this.initTabs();
-            this.refreshBreadcrumbs(customer);
-          }).catch(response => {
-            if (response.status === 404) {
-              this.$state.go('errorPage.notFound');
-            } else {
-              this.erred = true;
-            }
-          }).finally(() => {
-            this.loading = false;
-          });
+      this.workspace = this.WorkspaceService.getWorkspace().workspace;
+
+      this.loadContext().then(() => {
+        this.initTabs();
+        this.refreshBreadcrumbs(this.currentCustomer);
+        this.loading = false;
+        this.$scope.$digest();
+      }).catch(response => {
+        if (response.status === 404) {
+          this.$state.go('errorPage.notFound');
+        } else {
+          this.erred = true;
+        }
+        this.loading = false;
+        this.$scope.$digest();
       });
+    }
+
+    async loadContext() {
+      const expertRequest = await this.expertRequestsService.$get(this.$stateParams.requestId);
+      this.expertRequest = {...expertRequest, ...expertRequest.extra};
+
+      this.currentCustomer = await this.currentStateService.getCustomer();
+      this.currentUser = await this.usersService.getCurrentUser();
+
+      this.users = await this.expertRequestsService.getUsers(this.expertRequest);
+      this.populateCurrentUser();
+    }
+
+    populateCurrentUser() {
+      if (this.users[this.currentUser.uuid]) {
+        return;
+      }
+      let roles = this.users[this.currentUser.uuid] = [];
+      if (this.currentUser.is_staff) {
+        roles.push(USER_ROLE_STAFF);
+      }
+      if (this.currentUser.is_support) {
+        roles.push(USER_ROLE_SUPPORT);
+      }
+      if (this.workspace === 'project' && this.customersService.isOwner(this.currentCustomer, this.currentUser)) {
+        roles.push(USER_ROLE_OWNER);
+      }
+      if (this.workspace === 'organization') {
+        roles.push(USER_ROLE_EXPERT);
+      }
     }
 
     get showBidDetails() {
