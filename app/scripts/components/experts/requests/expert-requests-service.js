@@ -27,6 +27,11 @@ export default function expertRequestsService(baseServiceClass, $q, $http, ENV) 
       return $http.get(`${ENV.apiEndpoint}api${this.endpoint}configured/`)
         .then(response => response.data);
     },
+
+    getUsers: function (expertRequest) {
+      return $http.get(`${expertRequest.url}users/`)
+        .then(response => response.data);
+    },
   });
   return new ServiceClass();
 }

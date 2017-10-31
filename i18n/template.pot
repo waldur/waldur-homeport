@@ -5696,6 +5696,10 @@ msgstr ""
 msgid "error message: {errorMessage}"
 msgstr ""
 
+#: app/scripts/components/experts/requests/details/expert-request-details.js
+msgid "expert"
+msgstr ""
+
 #: app/scripts/components/issues/list/issues-short-list.html
 msgid "from"
 msgstr ""
@@ -5717,8 +5721,20 @@ msgstr ""
 msgid "organization"
 msgstr ""
 
+#: app/scripts/components/experts/requests/details/expert-request-details.js
+msgid "owner"
+msgstr ""
+
 #: app/scripts/components/analytics/resource-bar-chart.html
 msgid "resources"
+msgstr ""
+
+#: app/scripts/components/experts/requests/details/expert-request-details.js
+msgid "staff"
+msgstr ""
+
+#: app/scripts/components/experts/requests/details/expert-request-details.js
+msgid "support"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
