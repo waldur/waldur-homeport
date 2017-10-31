@@ -52,8 +52,9 @@ const expertRequestDetails = {
 
     loadExpertRequest() {
       this.loading = true;
+      this.workspace = this.WorkspaceService.getWorkspace().workspace;
+
       this.loadContext().then(() => {
-        this.workspace = this.WorkspaceService.getWorkspace().workspace;
         this.initTabs();
         this.refreshBreadcrumbs(this.currentCustomer);
         this.loading = false;
@@ -91,8 +92,11 @@ const expertRequestDetails = {
       if (this.currentUser.is_support) {
         roles.push(USER_ROLE_SUPPORT);
       }
-      if (this.customersService.isOwner(this.currentCustomer, this.currentUser)) {
+      if (this.workspace === 'project' && this.customersService.isOwner(this.currentCustomer, this.currentUser)) {
         roles.push(USER_ROLE_OWNER);
+      }
+      if (this.workspace === 'organization') {
+        roles.push(USER_ROLE_EXPERT);
       }
     }
 
