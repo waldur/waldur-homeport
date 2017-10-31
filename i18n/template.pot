@@ -2995,7 +2995,11 @@ msgstr ""
 msgid "Organization code"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.js
+#: app/scripts/components/customer/details/customer-delete.js
+msgid "Organization contains invoices. Please remove them first."
+msgstr ""
+
+#: app/scripts/components/customer/details/customer-delete.js
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
