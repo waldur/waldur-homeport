@@ -175,6 +175,10 @@ body.landing {
   border: none;
 }
 
+.visible-xs-stable {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .btn-block-sm {
     display: block;
@@ -185,6 +189,14 @@ body.landing {
 
   .block-container-sm {
     float: none !important;
+  }
+
+  .hidden-xs-stable {
+    display: none!important;
+  }
+
+  .visible-xs-stable {
+    display: block;
   }
 }
 
