@@ -29,6 +29,7 @@ const expertRequestComplete = {
     submit() {
       return this.expertRequestsService.complete(this.expertRequest).then(() => {
         this.ncUtilsFlash.success(gettext('Expert request has been completed.'));
+        this.expertRequestsService.clearAllCacheForCurrentEndpoint();
         this.$rootScope.$broadcast('refreshExpertDetails');
       }).catch(response => {
         this.ncUtilsFlash.errorFromResponse(response, gettext('Unable to complete expert request.'));

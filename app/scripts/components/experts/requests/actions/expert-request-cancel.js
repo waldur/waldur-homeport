@@ -28,6 +28,7 @@ const expertRequestCancel = {
     submit() {
       return this.expertRequestsService.cancel(this.expertRequest).then(() => {
         this.ncUtilsFlash.success(gettext('Expert request has been cancelled.'));
+        this.expertRequestsService.clearAllCacheForCurrentEndpoint();
         this.$rootScope.$broadcast('refreshExpertDetails');
       }).catch(response => {
         this.ncUtilsFlash.errorFromResponse(response, gettext('Unable to cancel expert request.'));
