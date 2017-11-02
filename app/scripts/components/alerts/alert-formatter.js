@@ -23,7 +23,7 @@ export default function alertFormatter(BaseEventFormatter, $state, ncUtils) {
         plan_url: $state.href('organization.plans', {uuid: alert.context.scope_uuid})
       };
       let template;
-      if (alert.context.quota_limit == alert.context.quota_usage) {
+      if (alert.context.quota_limit === alert.context.quota_usage) {
         template = 'Customer {customer_name} has reached {quota_name} quota limit ({quota_limit}). <a href="{plan_url}">Upgrade your plan</a>';
       } else {
         template = 'Customer {customer_name} has exceeded the {quota_threshold}% {quota_name} quota threshold. The quota limit is {quota_limit}, and current usage is {quota_use} ({quota_usage}% of limit). <a href="{plan_url}">Upgrade your plan</a>';

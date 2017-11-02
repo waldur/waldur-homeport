@@ -123,7 +123,7 @@ function AppStoreController(
       let services = this.getServices();
       this.renderStore = services && services.length > 0;
 
-      if (services && services.length == 1) {
+      if (services && services.length === 1) {
         this.setService(services[0]);
       }
 
@@ -160,8 +160,8 @@ function AppStoreController(
       let types = ENV.resourceCategory;
       let blacklisted = ['OpenStackTenant.Snapshot'];
       return Object.keys(types).filter(function(resource) {
-        return types[resource] == category &&
-               resource.split('.')[0] == serviceType &&
+        return types[resource] === category &&
+               resource.split('.')[0] === serviceType &&
                blacklisted.indexOf(resource) === -1;
       }).map(function(resource) {
         return resource.split('.')[1];
@@ -187,7 +187,7 @@ function AppStoreController(
         let fields = angular.copy(AppstoreFieldConfiguration[key]);
         if (!fields) {
           fields = {
-            order: Object.keys(response.actions.POST).filter(key => key != 'service_project_link'),
+            order: Object.keys(response.actions.POST).filter(key => key !== 'service_project_link'),
             options: response.actions.POST
           };
         } else {

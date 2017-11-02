@@ -99,7 +99,7 @@ const projectPolicies = {
     }
 
     checkIsHardLimit(estimate) {
-      return estimate.limit > 0 && estimate.limit == estimate.threshold;
+      return estimate.limit > 0 && estimate.limit === estimate.threshold;
     }
 
     isOverThreshold() {

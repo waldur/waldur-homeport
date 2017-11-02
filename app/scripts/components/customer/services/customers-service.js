@@ -41,7 +41,7 @@ export default function customersService(baseServiceClass, $state, $q, $http, EN
     },
     loadCountries: function() {
       let vm = this;
-      if (vm.countryChoices.length != 0) {
+      if (vm.countryChoices.length !== 0) {
         return $q.when(vm.countryChoices);
       } else {
         return $http({

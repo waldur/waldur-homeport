@@ -16,7 +16,7 @@ export default function eventRegistry() {
     let entities = [];
     for (let i = 0; i < types.length; i++) {
       let entity = type_to_entity(types[i]);
-      if (entities.indexOf(entity) == -1) {
+      if (entities.indexOf(entity) === -1) {
         entities.push(entity);
       }
     }
@@ -28,7 +28,7 @@ export default function eventRegistry() {
     let types = [];
     for(let type in EVENTTYPE) {
       let entity = type_to_entity(type);
-      if (entities.indexOf(entity) != -1) {
+      if (entities.indexOf(entity) !== -1) {
         types.push(type);
       }
     }

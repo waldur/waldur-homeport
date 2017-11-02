@@ -31,7 +31,7 @@ export function quotaValue($filter) {
     cost: 'defaultCurrency',
   };
   return function(value, name) {
-    if (value == -1) {
+    if (value === -1) {
       return '∞';
     }
     let filter = filters[name];

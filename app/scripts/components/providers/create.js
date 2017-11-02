@@ -202,7 +202,7 @@ function ServiceAddController(
           continue;
         }
         if (ncUtils.isFileOption(option)) {
-          if (value.length != 1 || !ncUtils.isFileValue(value[0])) {
+          if (value.length !== 1 || !ncUtils.isFileValue(value[0])) {
             continue;
           }
           value = value[0];

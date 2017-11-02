@@ -126,7 +126,7 @@ function imageValidator(model, choice) {
   let regions = choice.regions || [choice.region];
   for (let j = 0; j < regions.length; j++) {
     let choice_region = regions[j];
-    if (choice_region.url == region) {
+    if (choice_region.url === region) {
       found = true;
       break;
     }

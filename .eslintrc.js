@@ -50,6 +50,13 @@ module.exports = {
     'no-var': [
       'error'
     ],
+    'eqeqeq': [
+      'error',
+      'always',
+      {
+        null: 'ignore'
+      }
+    ],
     'quote-props': [
       'error',
       'as-needed',

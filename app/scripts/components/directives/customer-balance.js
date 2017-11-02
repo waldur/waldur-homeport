@@ -54,7 +54,7 @@ export function CustomerBalanceController(
         let quotaUsageMessage = coreUtils.templateFormatter(gettext('{quotaUsage} out of {quotaLimit}.'),
           { quotaUsage: usage[quota.name], quotaLimit: limit });
         return {
-          name: name + (quota.value > 1 || quota.value == -1 ? 's' : ''),
+          name: name + (quota.value > 1 || quota.value === -1 ? 's' : ''),
           limit: limit,
           usage: usage[quota.name],
           percent: getPercent(usage[quota.name], quota.value),
@@ -66,7 +66,7 @@ export function CustomerBalanceController(
       currentPlanQuotas = customer.quotas.map(function(quota) {
         let name = ncUtils.getPrettyQuotaName(quota.name);
         return {
-          name: name + (quota.limit > 1 || quota.limit == -1 ? 's' : ''),
+          name: name + (quota.limit > 1 || quota.limit === -1 ? 's' : ''),
           limit: quota.limit < 0 ? '∞' : quota.limit,
           usage: usage[quota.name],
           percent: getPercent(usage[quota.name], quota.limit)
@@ -113,7 +113,7 @@ export function CustomerBalanceController(
     }
 
     for (let i in $scope.shown) {
-      if (id != i) {
+      if (id !== i) {
         $scope.shown[i] = false;
       }
     }

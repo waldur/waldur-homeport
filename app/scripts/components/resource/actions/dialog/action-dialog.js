@@ -73,7 +73,7 @@ function ActionDialogController(
         form = $scope.action.serializer($scope.form);
       } else {
         for (let name in fields) {
-          if ($scope.form[name] != null) {
+          if ($scope.form[name] !== null) {
             let field = fields[name];
             let serializer = field.serializer || angular.identity;
             form[name] = serializer($scope.form[name], field);

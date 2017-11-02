@@ -158,7 +158,7 @@ export default function baseResourceListController(
     },
     getMarkers: function() {
       let items = this.controllerScope.list.filter(function hasCoordinates(item) {
-        return item.latitude != null && item.longitude != null;
+        return item.latitude !== null && item.longitude !== null;
       });
 
       let points = {};
@@ -236,7 +236,7 @@ export default function baseResourceListController(
         customer: currentStateService.getCustomerUuid()
       }, filter);
       angular.forEach(this.service.defaultFilter, function(val, key) {
-        if (key != 'resource_type') {
+        if (key !== 'resource_type') {
           query[key] = val;
         }
       });

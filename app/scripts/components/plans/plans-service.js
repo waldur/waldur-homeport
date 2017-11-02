@@ -8,7 +8,7 @@ export default function plansService(baseServiceClass) {
     getFreePlan: function() {
       return this.getList().then(function(plans) {
         for (let i = 0; i < plans.length; i++) {
-          if (plans[i].price == '0.00') {
+          if (plans[i].price === '0.00') {
             return plans[i];
           }
         }
