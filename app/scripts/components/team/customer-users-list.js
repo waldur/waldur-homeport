@@ -76,7 +76,7 @@ function CustomerUsersListController(
             title: gettext('Owner'),
             className: 'desktop',
             render: function(row) {
-              let cls = row.role == 'owner' ? 'check' : 'minus';
+              let cls = row.role === 'owner' ? 'check' : 'minus';
               let title = ENV.roles[row.role];
               return '<span class="icon {cls}" title="{title}"></span>'
                 .replace('{cls}', cls)

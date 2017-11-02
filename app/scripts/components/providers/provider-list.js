@@ -223,7 +223,7 @@ function ProviderListController(
     findItem: function(service_type, uuid) {
       for (let i = 0; i < this.list.length; i++) {
         let item = this.list[i];
-        if (item.uuid == uuid && item.service_type == service_type) {
+        if (item.uuid === uuid && item.service_type === service_type) {
           return item;
         }
       }

@@ -26,16 +26,16 @@ export const listToDict = (key, value) => list => {
 export function ncUtils() {
   return {
     isFileOption: function(option) {
-      return option.type == 'file upload';
+      return option.type === 'file upload';
     },
     isFileValue: function(value) {
-      return value.toString() == '[object File]';
+      return value.toString() === '[object File]';
     },
     getFilename: function(value) {
       if (!value) {
         return '';
       }
-      else if (value.length == 1) {
+      else if (value.length === 1) {
         return value[0].name;
       } else if (angular.isString(value)) {
         let parts = value.split('/');

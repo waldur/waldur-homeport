@@ -23,7 +23,7 @@ export default function eventFormatter(ENV, BaseEventFormatter) {
       let parts = route.split('.');
       for (let i = 0; i < parts.length; i++) {
         let part = parts[i];
-        if (ENV.toBeFeatures.indexOf(part) != -1) {
+        if (ENV.toBeFeatures.indexOf(part) !== -1) {
           return false;
         }
       }

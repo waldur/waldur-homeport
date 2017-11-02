@@ -71,10 +71,10 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
         .append('svg:path')
         .attr('stroke-width', 2)
         .style('fill', 'none')
-        .style('stroke', color != null ? color : 'black')
+        .style('stroke', color !== null ? color : 'black')
         .attr('d', lineGenerator(data))
-        .attr('id', id != null ? id : '')
-        .attr('class', attrClass != null ? attrClass : '');
+        .attr('id', id !== null ? id : '')
+        .attr('class', attrClass !== null ? attrClass : '');
     };
 
     let drawPathArea = function(canvas, lineGenerator, data, color, id, attrClass) {
@@ -82,11 +82,11 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
       return canvas
         .append('svg:path')
         .attr('stroke-width', 1)
-        .style('stroke', color != null ? color : 'black')
+        .style('stroke', color !== null ? color : 'black')
         .style('fill', 'rgba(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', .4)')
         .attr('d', lineGenerator(data))
-        .attr('id', id != null ? id : '')
-        .attr('class', attrClass != null ? attrClass : '');
+        .attr('id', id !== null ? id : '')
+        .attr('class', attrClass !== null ? attrClass : '');
     };
 
     let color = d3.scale.category20();

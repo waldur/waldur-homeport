@@ -31,7 +31,7 @@ export default function BaseEventFormatter($state) {
       for (let i = 0; i < fields.length; i++) {
         let field = fields[i];
         if (!templateContext[field]) {
-          if (eventContext[field] != undefined) {
+          if (eventContext[field] !== undefined) {
             templateContext[field] = eventContext[field];
           } else {
             templateContext[field] = '';
@@ -61,7 +61,7 @@ export default function BaseEventFormatter($state) {
       }
       let uuid = context[entity + '_uuid'];
       let args = {uuid: uuid};
-      if (entity == 'service') {
+      if (entity === 'service') {
         route = 'organization.providers';
         args = {
           uuid: context.customer_uuid,
@@ -69,7 +69,7 @@ export default function BaseEventFormatter($state) {
           providerType: context.service_type
         };
       }
-      if (entity == 'resource') {
+      if (entity === 'resource') {
         args.resource_type = context.resource_type;
       }
       return $state.href(route, args);

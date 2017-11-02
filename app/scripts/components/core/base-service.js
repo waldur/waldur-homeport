@@ -123,7 +123,7 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
     setCache: function(time, response, cacheKey, endpoint) {
       let allCacheKeys = listCache.get(this.ALL_CACHE_KEYS) ? listCache.get(this.ALL_CACHE_KEYS) : {};
       let keysForCurrentEndpoint = allCacheKeys[endpoint] ? allCacheKeys[endpoint] : [];
-      if (keysForCurrentEndpoint.indexOf(cacheKey) == -1) {
+      if (keysForCurrentEndpoint.indexOf(cacheKey) === -1) {
         keysForCurrentEndpoint.push(cacheKey);
         allCacheKeys[endpoint] = keysForCurrentEndpoint;
         listCache.put(this.ALL_CACHE_KEYS, allCacheKeys);

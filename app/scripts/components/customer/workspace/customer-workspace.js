@@ -185,7 +185,7 @@ export function CustomerWorkspaceController(
   }
 
   function getCountersError(error) {
-    if (error.status == 404) {
+    if (error.status === 404) {
       $state.go('errorPage.notFound');
     }
   }
