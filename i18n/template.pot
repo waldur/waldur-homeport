@@ -27,8 +27,14 @@ msgstr ""
 msgid "365 days"
 msgstr ""
 
-#: app/scripts/components/error/error-403.html
-#: app/scripts/components/error/error-404.html
+#: app/scripts/components/error/invalid-object-page.html
+#: app/scripts/components/error/invalid-route-page.html
+msgid "404"
+msgstr ""
+
+#: app/scripts/components/error/invalid-object-page.html
+#: app/scripts/components/error/invalid-quota-page.html
+#: app/scripts/components/error/invalid-route-page.html
 msgid "< Back"
 msgstr ""
 
@@ -2907,6 +2913,10 @@ msgstr ""
 msgid "OR"
 msgstr ""
 
+#: app/scripts/components/error/routes.js
+msgid "Object is not found."
+msgstr ""
+
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 msgid "Objectives"
 msgstr ""
@@ -3125,12 +3135,16 @@ msgstr ""
 msgid "Package limits"
 msgstr ""
 
-#: app/scripts/components/error/error-404.html
-msgid "Page Not Found :/"
+#: app/scripts/components/error/routes.js
+msgid "Page is not found."
 msgstr ""
 
-#: app/scripts/components/error/routes.js
-msgid "Page not found"
+#: app/scripts/components/error/invalid-object-page.html
+msgid "Page is not found. You've either entered invalid URL or don't have enough permissions to view this page."
+msgstr ""
+
+#: app/scripts/components/error/invalid-route-page.html
+msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js
@@ -4983,7 +4997,7 @@ msgstr ""
 msgid "To start please select a workspace"
 msgstr ""
 
-#: app/scripts/components/error/error-403.js
+#: app/scripts/components/error/invalid-quota-page.js
 msgid "To update current plan visit <a href=\"{link}\">plans page</a>."
 msgstr ""
 
@@ -5546,7 +5560,7 @@ msgstr ""
 msgid "You don't have permission to send this invitation."
 msgstr ""
 
-#: app/scripts/components/error/error-403.html
+#: app/scripts/components/error/invalid-quota-page.html
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 

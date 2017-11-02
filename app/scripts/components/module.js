@@ -22,5 +22,4 @@ export default module => {
   module.config(errorsHandler);
   module.run(closeDialogs);
   module.factory('ncUtilsFlash', ncUtilsFlash);
-  module.factory('ncUtilsFlash', ncUtilsFlash);
 };

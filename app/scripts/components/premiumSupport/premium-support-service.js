@@ -1,3 +1,4 @@
+// @ngInject
 export function premiumSupportPlansService(baseServiceClass) {
   let ServiceClass = baseServiceClass.extend({
     init: function() {
@@ -8,6 +9,7 @@ export function premiumSupportPlansService(baseServiceClass) {
   return new ServiceClass();
 }
 
+// @ngInject
 export function premiumSupportContractsService(baseServiceClass) {
   let ServiceClass = baseServiceClass.extend({
     init: function() {

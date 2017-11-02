@@ -23,11 +23,11 @@ export function protectStates($rootScope, $state, $auth, features) {
         if (!data) {
           return;
         } else if (data.disabled) {
-          return 'errorPage.notFound';
+          return 'errorPage.otherwise';
         } else if (data.anonymous && $auth.isAuthenticated()) {
           return 'profile.details';
         } else if (data.feature && !features.isVisible(data.feature)) {
-          return 'errorPage.notFound';
+          return 'errorPage.otherwise';
         }
       }
 
@@ -76,8 +76,8 @@ export function decorateStates($stateProvider) {
 
 // @ngInject
 export function urlRouterProvider($urlRouterProvider) {
+  $urlRouterProvider.when('', '/profile/');
   $urlRouterProvider.when('/', '/profile/');
-  $urlRouterProvider.otherwise('/login/');
 }
 
 // @ngInject
@@ -97,7 +97,7 @@ export function featuresProviderConfig(ENV, featuresProvider) {
 }
 
 // @ngInject
-export function httpInterceptor($q, $location, ncUtilsFlash, ENV, ErrorMessageFormatter, $rootScope) {
+export function httpInterceptor($q, ncUtilsFlash, ENV, ErrorMessageFormatter, $rootScope) {
   let timeouts = {},
     abortRequests;
   function getKey(config) {
