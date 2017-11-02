@@ -1,8 +1,8 @@
-import template from './error-403.html';
+import template from './invalid-quota-page.html';
 
-export const error403 = {
+const invalidQuotaPage = {
   template,
-  controller: class error403Controller {
+  controller: class InvalidQuotaPageController {
     // @ngInject
     constructor(currentStateService, NavigationUtilsService, coreUtils, $state) {
       this.currentStateService = currentStateService;
@@ -23,3 +23,5 @@ export const error403 = {
     }
   }
 };
+
+export default invalidQuotaPage;

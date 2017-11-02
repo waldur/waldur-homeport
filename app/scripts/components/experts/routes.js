@@ -9,7 +9,18 @@ export default function expertRequestsRoutes($stateProvider) {
         pageTitle: gettext('Create expert request'),
         sidebarState: 'project.resources',
         feature: 'experts',
-      }
+      },
+      resolve: {
+        // @ngInject
+        expert: function getExpert($state, $stateParams, expertRequestsService) {
+          return expertRequestsService.getConfiguration().then(response => {
+            const expert = response.offerings[$stateParams.category];
+            if (!expert) {
+              return $state.go('errorPage.notFound');
+            }
+          });
+        }
+      },
     })
 
     .state('organization.experts', {

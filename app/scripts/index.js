@@ -113,7 +113,6 @@ filtersModule(appModule);
 quotasModule(appModule);
 tableModule(appModule);
 i18nModule(appModule);
-errorModule(appModule);
 configModule(appModule);
 controllersModule(appModule);
 directivesModule(appModule);
@@ -125,5 +124,8 @@ azureModule(appModule);
 slurmModule(appModule);
 paypalModule(appModule);
 appModule.config(analyticsRoutes);
+// Errors module should be the last, because it contains special route.
+// Route with url='*path' allows to display error page without redirect.
+errorModule(appModule);
 
 bootstrap('waldur');

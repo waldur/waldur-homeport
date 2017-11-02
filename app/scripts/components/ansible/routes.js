@@ -11,6 +11,16 @@ export default function ansibleRoutes($stateProvider) {
         pageTitle: gettext('Applications'),
         sidebarState: 'project.resources',
         feature: 'ansible'
+      },
+      resolve: {
+        // @ngInject
+        application: function (AnsiblePlaybooksService, $stateParams, $state) {
+          return AnsiblePlaybooksService.get($stateParams.category).catch(response => {
+            if (response.status === 404) {
+              $state.go('errorPage.notFound');
+            }
+          });
+        }
       }
     })
 

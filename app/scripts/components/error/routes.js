@@ -2,7 +2,6 @@
 export default function errorRoutes($stateProvider) {
   $stateProvider
     .state('errorPage', {
-      url: '/error/',
       templateUrl: 'views/partials/base.html',
       abstract: true,
       data: {
@@ -11,16 +10,22 @@ export default function errorRoutes($stateProvider) {
     })
 
     .state('errorPage.notFound', {
-      url: '404/',
-      template: '<error404></error404>',
+      template: '<invalid-object-page></invalid-object-page>',
       data: {
-        pageTitle: gettext('Page not found')
+        pageTitle: gettext('Page is not found.')
+      }
+    })
+
+    .state('errorPage.otherwise', {
+      url: '*path',
+      template: '<invalid-route-page></invalid-route-page-page>',
+      data: {
+        pageTitle: gettext('Object is not found.')
       }
     })
 
     .state('errorPage.limitQuota', {
-      url: '403/',
-      template: '<error403></error403>',
+      template: '<invalid-quota-page></invalid-quota-page>',
       data: {
         pageTitle: gettext('Quota has been reached.')
       }
