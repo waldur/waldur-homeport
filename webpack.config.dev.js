@@ -5,6 +5,7 @@ var path = require('path');
 
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CleanUpStatsPlugin = require('./webpack-cleanup-stats');
+var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 module.exports = merge(baseConfig, {
   output: {
@@ -21,6 +22,9 @@ module.exports = merge(baseConfig, {
       failOnError: false,
     }),
     new CleanUpStatsPlugin(),
+    new HtmlWebpackHarddiskPlugin({
+      outputPath: path.resolve(__dirname, './app'),
+    }),
   ],
   watch: true,
   devServer: {

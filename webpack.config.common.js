@@ -149,9 +149,10 @@ module.exports = {
     ]),
     new HtmlWebpackPlugin({
       template: './app/index-template.html',
-      filename: '../index.html',
+      filename: path.resolve(__dirname, './app/index.html'),
       inject: 'body',
       chunks: ['vendor', 'index'],
+      alwaysWriteToDisk: true,
       chunksSortMode: function(a, b) {
         return (a.names[0] < b.names[0]) ? 1 : -1;
       }
