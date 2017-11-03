@@ -17,13 +17,13 @@ const costPlanDialog = {
     close: '&',
   },
   controller: class CostPlanDialogController {
+    // @ngInject
     constructor(
       costPlansService,
       costPresetsService,
       certificationsService,
       costPlanOptimizerService,
       $q) {
-      // @ngInject
       this.costPlansService = costPlansService;
       this.costPresetsService = costPresetsService;
       this.certificationsService = certificationsService;

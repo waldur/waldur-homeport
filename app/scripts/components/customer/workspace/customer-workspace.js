@@ -12,7 +12,6 @@ export default function customerWorkspace() {
 // @ngInject
 export function CustomerWorkspaceController(
   $scope,
-  currentStateService,
   joinService,
   eventsService,
   customersService,
@@ -177,7 +176,7 @@ export function CustomerWorkspaceController(
 
   function getCounters(customer) {
     const fields = SidebarExtensionService.getCounters($scope.items);
-    var query = angular.extend(
+    let query = angular.extend(
         {UUID: customer.uuid, fields},
         joinService.defaultFilter,
         eventsService.defaultFilter
@@ -186,7 +185,7 @@ export function CustomerWorkspaceController(
   }
 
   function getCountersError(error) {
-    if (error.status == 404) {
+    if (error.status === 404) {
       $state.go('errorPage.notFound');
     }
   }

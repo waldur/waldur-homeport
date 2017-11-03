@@ -14,9 +14,9 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
   };
 
   function dashboardCostChartLink(scope, element) {
-    var bindId = '#chart';
+    let bindId = '#chart';
 
-    var onResize = function() {
+    let onResize = function() {
       scope.$apply();
     };
 
@@ -25,7 +25,7 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
       angular.element($window).unbind('resize', onResize);
     });
 
-    var getContainerWidth = function() {
+    let getContainerWidth = function() {
       return element[0].getBoundingClientRect().width;
     };
 
@@ -33,7 +33,7 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
       scope.width = newWidth;
     });
 
-    var createCanvas = function(el, width, height, margin) {
+    let createCanvas = function(el, width, height, margin) {
       return d3.select(el).html('').append('svg:svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
@@ -41,7 +41,7 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
     };
 
-    var drawHorizontalAxis = function(canvas, component, width, height, title, id) {
+    let drawHorizontalAxis = function(canvas, component, width, height, title, id) {
       canvas.append('g').attr('id', (id) ? id : '')
         .attr('class', '_x _axis')
         .attr('transform', 'translate(0,' + height + ')')
@@ -54,7 +54,7 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
         .text(title);
     };
 
-    var drawVerticalAxis = function(canvas, component, title, id) {
+    let drawVerticalAxis = function(canvas, component, title, id) {
       return canvas.append('g')
         .attr('id', id)
         .attr('class', '_y _axis axisLeft')
@@ -66,36 +66,36 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
         .text(title);
     };
 
-    var drawPathLine = function(canvas, lineGenerator, data, color, id, attrClass) {
+    let drawPathLine = function(canvas, lineGenerator, data, color, id, attrClass) {
       return canvas
         .append('svg:path')
         .attr('stroke-width', 2)
         .style('fill', 'none')
-        .style('stroke', color != null ? color : 'black')
+        .style('stroke', color !== null ? color : 'black')
         .attr('d', lineGenerator(data))
-        .attr('id', id != null ? id : '')
-        .attr('class', attrClass != null ? attrClass : '');
+        .attr('id', id !== null ? id : '')
+        .attr('class', attrClass !== null ? attrClass : '');
     };
 
-    var drawPathArea = function(canvas, lineGenerator, data, color, id, attrClass) {
-      var rgb = d3.rgb(color);
+    let drawPathArea = function(canvas, lineGenerator, data, color, id, attrClass) {
+      let rgb = d3.rgb(color);
       return canvas
         .append('svg:path')
         .attr('stroke-width', 1)
-        .style('stroke', color != null ? color : 'black')
+        .style('stroke', color !== null ? color : 'black')
         .style('fill', 'rgba(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', .4)')
         .attr('d', lineGenerator(data))
-        .attr('id', id != null ? id : '')
-        .attr('class', attrClass != null ? attrClass : '');
+        .attr('id', id !== null ? id : '')
+        .attr('class', attrClass !== null ? attrClass : '');
     };
 
-    var color = d3.scale.category20();
+    let color = d3.scale.category20();
 
-    var initData = ncUtils.sortObj(scope.data);
+    let initData = ncUtils.sortObj(scope.data);
 
     scope.projectSelect = 'project';
 
-    var tmp = init(initData, scope.projectSelect),
+    let tmp = init(initData, scope.projectSelect),
       rData = tmp.rData,
       legendList = tmp.legendList;
 
@@ -104,7 +104,7 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
     scope.$watch('[entities, width, projectSelect]', draw, true);
 
     function draw(newValue, oldValue) {
-      var
+      let
         newEntities = newValue[0],
         newWidth = newValue[1],
         sourceType = newValue[2];
@@ -119,55 +119,55 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
         d3.select('.legend .date').text('');
       }
 
-      var margin = {
+      let margin = {
         top: 10,
         right: 40,
         bottom: 120,
         left: 20
       };
-      var margin2 = {
+      let margin2 = {
         top: 360,
         right: 60,
         bottom: 30,
         left: 20
       };
-      var marginLegend = 325;
-      var inlineMode = newWidth > 600;
+      let marginLegend = 325;
+      let inlineMode = newWidth > 600;
 
-      var xTicksCount = (newWidth - marginLegend) > 640 ? 8 : 3;
-      var width = (inlineMode  ? newWidth - marginLegend : newWidth) - margin.left - margin.right;
-      var height = 450 - margin.top - margin.bottom;
-      var height2 = 450 - margin2.top - margin2.bottom;
+      let xTicksCount = (newWidth - marginLegend) > 640 ? 8 : 3;
+      let width = (inlineMode  ? newWidth - marginLegend : newWidth) - margin.left - margin.right;
+      let height = 450 - margin.top - margin.bottom;
+      let height2 = 450 - margin2.top - margin2.bottom;
 
-      var entities = angular.copy(newEntities.filter(function(e) { return e.on; }));
+      let entities = angular.copy(newEntities.filter(function(e) { return e.on; }));
 
-      var data = getDataByEntities(entities, rData);
+      let data = getDataByEntities(entities, rData);
 
-      var xScale = d3.time.scale().range([0, width]).domain(d3.extent(data, function(d) { return d.date; }));
-      var xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(xTicksCount);
+      let xScale = d3.time.scale().range([0, width]).domain(d3.extent(data, function(d) { return d.date; }));
+      let xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(xTicksCount);
 
-      var min = [], max = [];
+      let min = [], max = [];
       entities.forEach(function(entity) {
         min.push(d3.min(data, function(d) { return parseFloat(d[entity.name]); }));
         max.push(d3.max(data, function(d) { return parseFloat(d[entity.name]); }));
       });
 
-      var yLeftMin = d3.min(min);
-      var yLeftMax = d3.max(max);
+      let yLeftMin = d3.min(min);
+      let yLeftMax = d3.max(max);
       if (yLeftMin === yLeftMax) {
         yLeftMin -= 0.1;
         yLeftMax += 0.1;
       }
 
-      var yLeftScale = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height, 0]);
-      var yLeftAxis = d3.svg.axis().scale(yLeftScale).orient('left');
+      let yLeftScale = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height, 0]);
+      let yLeftAxis = d3.svg.axis().scale(yLeftScale).orient('left');
 
-      var makeYAxis = function() {
+      let makeYAxis = function() {
         return d3.svg.axis().scale(yLeftScale).orient('left').ticks(10);
       };
 
-      var area = [];
-      var lineTotal;
+      let area = [];
+      let lineTotal;
       entities.forEach(function(entity, i) {
         if (entity.name === 'total') {
           lineTotal = d3.svg.line()
@@ -195,9 +195,9 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
         });
       });
 
-      var canvas = createCanvas(bindId, width, height, margin);
+      let canvas = createCanvas(bindId, width, height, margin);
 
-      var focus = canvas.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+      let focus = canvas.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
       focus.append('svg:rect').attr('width', width).attr('height', height).attr('class', 'plot');
       focus.append('svg:clipPath')
@@ -216,7 +216,7 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
         .attr('class', 'y grid')
         .call(makeYAxis().tickSize(-width, 0, 0).tickFormat(''));
 
-      var chartBody = focus.append('g')
+      let chartBody = focus.append('g')
         .attr('clip-path', 'url(#clip)');
 
       area.forEach(function(v) {
@@ -227,22 +227,22 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
 
       // --- Below chart ---
 
-      var xScale2 = d3.time.scale().range([0, width]).domain(d3.extent(data, function(d) {
+      let xScale2 = d3.time.scale().range([0, width]).domain(d3.extent(data, function(d) {
         return d.date;
       }));
 
-      var xAxis2 = d3.svg.axis().scale(xScale).orient('bottom').ticks(xTicksCount);
+      let xAxis2 = d3.svg.axis().scale(xScale).orient('bottom').ticks(xTicksCount);
 
-      var yScale2 = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height2, 0]);
+      let yScale2 = d3.scale.linear().domain([yLeftMin, yLeftMax]).range([height2, 0]);
 
-      var areaBrush = d3.svg.area()
+      let areaBrush = d3.svg.area()
         .x(function(d) { return xScale2(d.date); })
         .y0(height2)
         .y1(function(d) {
           return yScale2(d[entities[entities.length - 1].name]);
         });
 
-      var brushed = function() {
+      let brushed = function() {
         xScale.domain((brush.empty() ? xScale2.domain() : brush.extent()));
         focus.select('._x._axis').call(xAxis);
 
@@ -253,14 +253,14 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
 
       };
 
-      var brush = d3.svg.brush()
+      let brush = d3.svg.brush()
         .x(xScale2)
         .extent(getBrushExtent(data))
         .on('brush', brushed);
 
       brushed();
 
-      var context = canvas.append('g').attr('transform', 'translate(' + margin2.left + ',' + margin2.top + ')');
+      let context = canvas.append('g').attr('transform', 'translate(' + margin2.left + ',' + margin2.top + ')');
       context.append('path')
         .datum(data)
         .attr('class', 'area')
@@ -293,19 +293,19 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
   }
 
   function init(initData, type) {
-    var formatDate = d3.time.format('%Y%m');
-    var parseDate = formatDate.parse;
-    var legendList = getLegendList(initData, type);
-    var rd, rData = [];
+    let formatDate = d3.time.format('%Y%m');
+    let parseDate = formatDate.parse;
+    let legendList = getLegendList(initData, type);
+    let rd, rData = [];
 
-    for (var k in initData) {
+    for (let k in initData) {
       if (initData.hasOwnProperty(k)) {
 
         rd = {};
         rd.date = parseDate(k);
         rd.total = initData[k].customer[0] ? initData[k].customer[0].value : 0;
 
-        var currentProjects = initData[k][type];
+        let currentProjects = initData[k][type];
 
         legendList.forEach(function(pl) {
           rd[pl.name] = currentProjects.reduce(function(sum, cp) {
@@ -326,18 +326,18 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
   }
 
   function getLegendList(data, type) {
-    var list = [],
+    let list = [],
       exist = {},
       count = 0;
 
     type = type ? type : 'project';
 
-    for (var k in data) {
+    for (let k in data) {
       if (data.hasOwnProperty(k)) {
         data[k][type].forEach(function(p) {
           if (!exist[p.name]) {
             exist[p.name] = true;
-            var projectTitle = getShortProjectName(p.name);
+            let projectTitle = getShortProjectName(p.name);
             list.push({
               full: p.name,
               title: projectTitle,
@@ -354,9 +354,9 @@ export default function dashboardCostChart($window, $filter, ENV, ncUtils) {
 }
 
 function getBrushExtent(data) {
-  var firstDate = moment(data[0].date);
-  var lastDate = moment(data[data.length - 1].date);
-  var lastYear = moment(data[data.length - 1].date).subtract('years', 1);
+  let firstDate = moment(data[0].date);
+  let lastDate = moment(data[data.length - 1].date);
+  let lastYear = moment(data[data.length - 1].date).subtract('years', 1);
 
   return [(firstDate < lastYear ? lastYear : firstDate).toDate(), lastDate.toDate()];
 }
@@ -378,7 +378,7 @@ function getInitEntities(projectList, color) {
 }
 
 function getDataByEntities(entities, rData) {
-  var onCharts = [], d, data = [];
+  let onCharts = [], d, data = [];
 
   entities.forEach(function(e) {
     if (e.name !== 'total') {
@@ -392,11 +392,11 @@ function getDataByEntities(entities, rData) {
     d.date = rd.date;
     d.total = rd.total;
 
-    var previousValue = 0;
-    for (var k in rd) {
+    let previousValue = 0;
+    for (let k in rd) {
       if (rd.hasOwnProperty(k) && onCharts.indexOf(k) >= 0) {
 
-        var val = rd[k] + previousValue;
+        let val = rd[k] + previousValue;
         d[k] = val;
         previousValue = val;
 
@@ -409,18 +409,18 @@ function getDataByEntities(entities, rData) {
 }
 
 function hover(bindId, color, data, rData, entities, focus, width, height, xScale, yLeftScale, onMove) {
-  var bisectX = d3.bisector(function(d) { return d.date; }).right;
-  var bisect = d3.bisector(function(d) { return d; }).right;
+  let bisectX = d3.bisector(function(d) { return d.date; }).right;
+  let bisect = d3.bisector(function(d) { return d; }).right;
 
-  var rectSize, x, y;
+  let rectSize, x, y;
 
   // Define the div for the tooltip
-  var tooltip = d3.select(bindId).append('div')
+  let tooltip = d3.select(bindId).append('div')
     .attr('class', 'tooltip-cost')
     .style('opacity', 0);
 
-  var hoverTool = function() {
-    var mouse = d3.mouse(this);
+  let hoverTool = function() {
+    let mouse = d3.mouse(this);
     x = mouse[0];
     y = mouse[1];
 
@@ -433,15 +433,15 @@ function hover(bindId, color, data, rData, entities, focus, width, height, xScal
 
     hoverLineGroup.style('opacity', 1).attr('transform', 'translate(' + x + ',' + 0 + ')');
 
-    var timestamp = xScale.invert(x);
-    var focusDataIndex = bisectX(data, timestamp);
+    let timestamp = xScale.invert(x);
+    let focusDataIndex = bisectX(data, timestamp);
 
     if ((focusDataIndex > 0) && (focusDataIndex < data.length)) {
       entities.forEach(function(entity, i) {
         entities[i].currentValue = rData[focusDataIndex][entity.name];
         entities[i].currentDate = rData[focusDataIndex].date;
 
-        var
+        let
           startDatum = data[focusDataIndex - 1],
           endDatum = data[focusDataIndex],
           distance = xScale(endDatum.date) - xScale(startDatum.date),
@@ -449,11 +449,11 @@ function hover(bindId, color, data, rData, entities, focus, width, height, xScal
 
         range.push(1);
 
-        var lineDataX = range.map(d3.interpolateNumber(+startDatum.date, +endDatum.date));
-        var lineDataY = range.map(d3.interpolateNumber(startDatum[entity.name], endDatum[entity.name]));
+        let lineDataX = range.map(d3.interpolateNumber(+startDatum.date, +endDatum.date));
+        let lineDataY = range.map(d3.interpolateNumber(startDatum[entity.name], endDatum[entity.name]));
 
-        var idx = bisect(lineDataX, +timestamp);
-        var valueY = lineDataY[idx];
+        let idx = bisect(lineDataX, +timestamp);
+        let valueY = lineDataY[idx];
 
         (entity.name !== 'total') && hoverPoints[i].attr('cy', yLeftScale(valueY));
       });
@@ -476,7 +476,7 @@ function hover(bindId, color, data, rData, entities, focus, width, height, xScal
   }).on('touchmove', function() {
     hoverTool.call(this);
   }).on('mouseout', function() {
-    var mouse = d3.mouse(this);
+    let mouse = d3.mouse(this);
     x = mouse[0];
     y = mouse[1];
 
@@ -488,7 +488,7 @@ function hover(bindId, color, data, rData, entities, focus, width, height, xScal
   });
 
   // Hover line group. Hide hover group by default.
-  var hoverLineGroup = focus.append('g')
+  let hoverLineGroup = focus.append('g')
     .attr('transform', 'translate(0,0)')
     .attr('class', 'hover-line')
     .style('opacity', 0);
@@ -505,7 +505,7 @@ function hover(bindId, color, data, rData, entities, focus, width, height, xScal
       }
     });
 
-  var hoverPoints = entities
+  let hoverPoints = entities
     .filter(function(entity) { return entity.name !== 'total'; })
     .map(function(entity) {
       return hoverLineGroup

@@ -1,4 +1,5 @@
 export default class AppStoreUtilsService {
+  // @ngInject
   constructor($uibModal, ENV) {
     this.$uibModal = $uibModal;
     this.ENV = ENV;
@@ -20,8 +21,8 @@ export default class AppStoreUtilsService {
   }
 
   findCategory(key) {
-    var categories = this.ENV.defaultCategories;
-    for (var i = 0; i < categories.length; i++) {
+    let categories = this.ENV.defaultCategories;
+    for (let i = 0; i < categories.length; i++) {
       if (categories[i].key === key) {
         return categories[i];
       }

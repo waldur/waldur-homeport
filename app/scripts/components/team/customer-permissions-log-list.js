@@ -7,8 +7,8 @@ const customerPermissionsLogList = {
 // @ngInject
 function customerPermissionsLogListController(
   baseControllerListClass, customerPermissionsLogService, currentStateService, $filter) {
-  var controllerScope = this;
-  var controllerClass = baseControllerListClass.extend({
+  let controllerScope = this;
+  let controllerClass = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = customerPermissionsLogService;

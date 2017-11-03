@@ -38,7 +38,6 @@ export function securityGroupRulePortRange($filter) {
   };
 }
 
-// @ngInject
 export function securityGroupProtocol() {
   return function(rule) {
     if (!rule.protocol) {
@@ -49,7 +48,6 @@ export function securityGroupProtocol() {
   };
 }
 
-// @ngInject
 export function securityGroupCIDR() {
   return function(rule) {
     if (!rule.cidr) {

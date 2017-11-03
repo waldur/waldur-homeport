@@ -22,17 +22,16 @@ function CustomerUsersListController(
     usersService,
     ncUtils,
     $q,
-    $rootScope,
     $uibModal,
     $state,
     ENV) {
-  var controllerScope = this;
-  var TeamController = baseControllerListClass.extend({
+  let controllerScope = this;
+  let TeamController = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = customersService;
 
-      var fn = this._super.bind(this);
+      let fn = this._super.bind(this);
       this.loading = true;
       $q.all([
         this.loadCustomer(),
@@ -57,7 +56,7 @@ function CustomerUsersListController(
       }
     },
     getTableOptions: function() {
-      var vm = this;
+      let vm = this;
       return {
         noDataText: gettext('You have no team members yet.'),
         noMatchesText: gettext('No members found matching filter.'),
@@ -77,8 +76,8 @@ function CustomerUsersListController(
             title: gettext('Owner'),
             className: 'desktop',
             render: function(row) {
-              var cls = row.role == 'owner' ? 'check' : 'minus';
-              var title = ENV.roles[row.role];
+              let cls = row.role === 'owner' ? 'check' : 'minus';
+              let title = ENV.roles[row.role];
               return '<span class="icon {cls}" title="{title}"></span>'
                 .replace('{cls}', cls)
                 .replace('{title}', title);
@@ -103,15 +102,15 @@ function CustomerUsersListController(
       };
     },
     formatProjectRolesList: function (roleName, row) {
-      var filteredProjects = row.projects.filter(function(item) {
+      let filteredProjects = row.projects.filter(function(item) {
         return item.role === roleName;
       });
       if (filteredProjects.length === 0) {
         return gettext('No projects are assigned to this role.');
       }
       return filteredProjects.map(function(item) {
-        var projectName = item.name;
-        var href = $state.href('project.details', { uuid: item.uuid });
+        let projectName = item.name;
+        let href = $state.href('project.details', { uuid: item.uuid });
         return '<a href="{href}">{projectName}</a>'
           .replace('{projectName}', projectName)
           .replace('{href}', href);
@@ -147,8 +146,8 @@ function CustomerUsersListController(
       }, filter));
     },
     removeInstance: function(user) {
-      var deferred = $q.defer();
-      var promises = user.projects.map(function(project) {
+      let deferred = $q.defer();
+      let promises = user.projects.map(function(project) {
         return projectPermissionsService.deletePermission(project.permission);
       });
       $q.all(promises).then(function() {
@@ -176,7 +175,7 @@ function CustomerUsersListController(
       });
     },
     openPopup: function(user) {
-      var currentCustomer = this.currentCustomer,
+      let currentCustomer = this.currentCustomer,
         currentUser = this.currentUser,
         editUser = user;
       $uibModal.open({

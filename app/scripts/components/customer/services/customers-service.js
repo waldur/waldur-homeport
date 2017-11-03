@@ -1,6 +1,6 @@
 // @ngInject
 export default function customersService(baseServiceClass, $state, $q, $http, ENV, currentStateService, usersService) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     filterByCustomer: false,
     countryChoices: [],
 
@@ -9,15 +9,15 @@ export default function customersService(baseServiceClass, $state, $q, $http, EN
       this.endpoint = '/customers/';
     },
     getBalanceHistory: function(uuid) {
-      var query = {UUID: uuid, operation: 'balance_history'};
+      let query = {UUID: uuid, operation: 'balance_history'};
       return this.getList(query);
     },
     getCounters: function(query) {
-      var extendedQuery = angular.extend({operation: 'counters'}, query);
+      let extendedQuery = angular.extend({operation: 'counters'}, query);
       return this.getFactory(false).get(extendedQuery).$promise;
     },
     isOwnerOrStaff: function() {
-      var vm = this;
+      let vm = this;
       return $q.all([
         currentStateService.getCustomer(),
         usersService.getCurrentUser()
@@ -32,7 +32,7 @@ export default function customersService(baseServiceClass, $state, $q, $http, EN
       return customer && this.isOwner(customer, user);
     },
     isOwner: function(customer, user) {
-      for (var i = 0; i < customer.owners.length; i++) {
+      for (let i = 0; i < customer.owners.length; i++) {
         if (user && user.uuid === customer.owners[i].uuid) {
           return true;
         }
@@ -40,8 +40,8 @@ export default function customersService(baseServiceClass, $state, $q, $http, EN
       return false;
     },
     loadCountries: function() {
-      var vm = this;
-      if (vm.countryChoices.length != 0) {
+      let vm = this;
+      if (vm.countryChoices.length !== 0) {
         return $q.when(vm.countryChoices);
       } else {
         return $http({

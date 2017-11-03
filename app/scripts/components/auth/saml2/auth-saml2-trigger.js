@@ -6,6 +6,7 @@ const authSaml2Trigger = {
     mode: '<',
   },
   controller: class AuthSaml2TriggerController {
+    // @ngInject
     constructor($uibModal) {
       this.$uibModal = $uibModal;
     }

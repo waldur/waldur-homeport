@@ -1,5 +1,5 @@
 export default class BaseIntro {
-  // @ngInit
+  // @ngInject
   constructor($rootScope,
               $q,
               ncIntroUtils,

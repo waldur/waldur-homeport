@@ -6,16 +6,17 @@ const agreementsList = {
 
 export default agreementsList;
 
+// @ngInject
 function CustomerAgreementsTabController(
   baseControllerListClass,
   agreementsService,
   $filter) {
-  var controllerScope = this;
-  var AgreementsController = baseControllerListClass.extend({
+  let controllerScope = this;
+  let AgreementsController = baseControllerListClass.extend({
     init: function() {
       this.service = agreementsService;
       this._super();
-      var vm = this;
+      let vm = this;
 
       this.tableOptions = {
         searchFieldName: 'plan_name',
@@ -26,7 +27,7 @@ function CustomerAgreementsTabController(
             title: gettext('State'),
             className: 'all',
             render: function(row) {
-              var index = vm.findIndexById(row);
+              let index = vm.findIndexById(row);
               return '<plan-agreement-state agreement="controller.list[{index}]"></plan-agreement-state>'
                 .replace('{index}', index);
             }

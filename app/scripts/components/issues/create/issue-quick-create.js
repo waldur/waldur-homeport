@@ -11,8 +11,8 @@ export default function issueQuickCreate() {
   };
 }
 
-// @ngInject
 class IssueQuickCreateController {
+  // @ngInject
   constructor($state,
               $scope,
               $q,

@@ -16,6 +16,7 @@ export default function appstoreForm() {
 }
 
 class AppstoreFormController {
+  // @ngInject
   constructor($scope) {
     const options = this.fields.options;
     const watchers = this.fields.watchers;

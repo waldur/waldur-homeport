@@ -1,4 +1,3 @@
-// @ngInject
 export default function expandableIndicator() {
   return {
     restrict: 'E',

@@ -28,7 +28,7 @@ export default function bootstrap(modulename) {
 
   function bootstrapApplication() {
     angular.element(document).ready(function() {
-      angular.bootstrap(document, [modulename]);
+      angular.bootstrap(document, [modulename], {strictDi: true});
     });
   }
 }

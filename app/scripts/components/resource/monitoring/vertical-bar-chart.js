@@ -30,27 +30,27 @@ export default function verticalBarChart($window) {
     function init() {
       element.children().html('');
 
-      var data = scope.data;
+      let data = scope.data;
 
-      var margin = {top: 20, right: 20, bottom: 90, left: 80},
+      let margin = {top: 20, right: 20, bottom: 90, left: 80},
         width = element[0].getBoundingClientRect().width - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
 
-      var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+      let x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
 
-      var y = d3.scale.linear().range([height, 0]);
+      let y = d3.scale.linear().range([height, 0]);
 
-      var xAxis = d3.svg.axis()
+      let xAxis = d3.svg.axis()
         .scale(x)
         .orient('bottom')
         .tickFormat(d3.time.format('%B'));
 
-      var yAxis = d3.svg.axis()
+      let yAxis = d3.svg.axis()
         .scale(y)
         .orient('left')
         .ticks(10);
 
-      var svg = d3.select(element.children()[0]).append('svg')
+      let svg = d3.select(element.children()[0]).append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
         .append('g')
@@ -92,7 +92,7 @@ export default function verticalBarChart($window) {
           return height;
         });
 
-      var barGroups = svg.selectAll('bar')
+      let barGroups = svg.selectAll('bar')
         .data(data)
         .enter().append('g')
         .attr('width', x.rangeBand())
@@ -113,7 +113,7 @@ export default function verticalBarChart($window) {
           return d.value ? d.value + 5 : d.value;
         })
         .style('font-size', function() {
-          var size = x.rangeBand() / 3;
+          let size = x.rangeBand() / 3;
           return size > 120 ? 120 : size;
         })
         .attr('width', x.rangeBand())

@@ -1,5 +1,5 @@
-// @ngInject
 export default class FreeIPAService{
+  // @ngInject
   constructor($http, ENV) {
     this.endpoint = `${ENV.apiEndpoint}api/freeipa-profiles/`;
     this.$http = $http;

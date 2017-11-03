@@ -11,7 +11,6 @@ function ExpertRequestListController(
   $q,
   $state,
   $filter,
-  $uibModal,
   currentStateService,
   expertBidsService,
   expertRequestsService,
@@ -77,7 +76,7 @@ function ExpertRequestListController(
         },
         {
           title: gettext('Objectives'),
-          orderField: 'objectives',
+          orderable: false,
           render: row => {
             return '<span uib-tooltip="{tooltip}">{value}</span>'
               .replace('{tooltip}', row.objectives)
@@ -89,7 +88,12 @@ function ExpertRequestListController(
           orderField: 'state',
           render: row => {
             const index = this.findIndexById(row);
-            return `<expert-request-state model="controller.list[${index}]"/>`;
+            let submittedProposal = '';
+            if (this.requestHasBids(row.uuid)) {
+              submittedProposal = `<span class="m-l-sm">` +
+                `<i class="fa fa-thumbs-o-up" uib-tooltip="${gettext('You have placed a bid already.')}"></i></span>`;
+            }
+            return `<expert-request-state model="controller.list[${index}]"></expert-request-state>` + submittedProposal;
           }
         },
         {
@@ -110,7 +114,7 @@ function ExpertRequestListController(
         {
           title: gettext('Details'),
           iconClass: 'fa fa-info-circle',
-          callback: request => ExpertUtilsService.openDialog(request),
+          callback: request => ExpertUtilsService.showRequest(request),
         }
       ];
       if (this.isOwnerOrStaff) {

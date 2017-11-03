@@ -1,11 +1,11 @@
 import { templateParser } from '../utils';
 
-// @ngInject
 export default class openstackTenantChangePackageService {
   // Public API consists of two methods:
   // * loadData - returns promise with fields {package, template, templates}
   // * saveData - accepts dictionary with fields {tenant, package, template, newTemplate}
 
+  // @ngInject
   constructor(
     $q,
     resourcesService,

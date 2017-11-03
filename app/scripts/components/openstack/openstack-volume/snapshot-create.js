@@ -17,7 +17,7 @@ function SnapshotCreateDialogController($q, $rootScope, $scope, resourcesService
     if ($scope.SnapshotForm.$invalid) {
       return $q.reject();
     }
-    var form = resourcesService.$create($scope.action.url);
+    let form = resourcesService.$create($scope.action.url);
     form.name = $scope.snapshot.name;
     form.description = $scope.snapshot.description;
     return form.$save().then(() => {

@@ -16,6 +16,7 @@ export default function appstoreListDialog() {
 }
 
 class DialogController {
+  // @ngInject
   constructor(coreUtils) {
     this.field = this.resolve.field;
     this.model = this.resolve.model;

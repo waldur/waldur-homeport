@@ -1,5 +1,5 @@
-// @ngInject
 export class invitationUtilsService {
+  // @ngInject
   constructor(
     invitationService,
     usersService,

@@ -3,8 +3,8 @@ import template from './resource-storage-tabs.html';
 const resourceStorageTabs = {
   template,
   controller: class StorageTabController {
+    // @ngInject
     constructor($scope, resourcesService, currentStateService) {
-      // @ngInject
       this.$scope = $scope;
       this.resourcesService = resourcesService;
       this.currentStateService = currentStateService;

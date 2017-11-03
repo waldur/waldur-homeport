@@ -1,8 +1,8 @@
 const NETWORK_ERROR_MESSAGE = 'Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues.';
 
-//@ngInject
 export default class ErrorMessageFormatter {
 
+  //@ngInject
   constructor(ENV, $filter) {
     this.ENV = ENV;
     this.$filter = $filter;
@@ -27,7 +27,7 @@ export default class ErrorMessageFormatter {
       return NETWORK_ERROR_MESSAGE.replace('{apiEndpoint}', this.ENV.apiEndpoint);
     }
 
-    let message = response.status + ': ' + response.statusText;
+    let message = `${response.status}: ${response.statusText}. `;
 
     if (response.data) {
       if (response.data.non_field_errors) {
@@ -36,18 +36,27 @@ export default class ErrorMessageFormatter {
       if (response.data.detail) {
         message += ' ' + response.data.detail;
       }
+      if (Array.isArray(response.data)) {
+        message += response.data.map(item => {
+          if (typeof item === 'object') {
+            return Object.keys(item).map(key => `${key}: ${item[key]}}`);
+          } else {
+            return item;
+          }
+        }).join('. ');
+      }
     }
 
     return message;
   }
 
   formatErrorFields(error) {
-    var errors = [];
+    let errors = [];
     if (!(error.data instanceof Object)) {
       return [error.data];
     }
 
-    for (var i in error.data) {
+    for (let i in error.data) {
       if (error.data.hasOwnProperty(i)) {
         errors = errors.concat(i + ': ' + error.data[i]);
       }

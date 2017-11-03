@@ -1,3 +1,4 @@
+// @ngInject
 export default function registerSidebarExtension(SidebarExtensionService) {
   SidebarExtensionService.register('project', () => {
     return [

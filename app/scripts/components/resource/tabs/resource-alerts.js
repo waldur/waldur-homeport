@@ -11,8 +11,8 @@ export default resourceAlerts;
 
 // @ngInject
 function ResourceAlertsListController(BaseAlertsListController) {
-  var controllerScope = this;
-  var controllerClass = BaseAlertsListController.extend({
+  let controllerScope = this;
+  let controllerClass = BaseAlertsListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();

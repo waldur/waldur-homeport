@@ -1,6 +1,6 @@
 // @ngInject
 export default function costPlansService($http, baseServiceClass) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/deployment-plans/';

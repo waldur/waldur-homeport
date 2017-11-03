@@ -1,5 +1,6 @@
 // @ngInject
 export default class LanguageUtilsService {
+  // @ngInject
   constructor($translate, $http, ENV) {
     this.$translate = $translate;
     this.$http = $http;

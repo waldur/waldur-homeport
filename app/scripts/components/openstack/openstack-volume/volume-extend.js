@@ -13,7 +13,7 @@ function VolumeExtendDialogController($scope, resourcesService, actionUtilsServi
   $scope.minSize = Math.round($scope.resource.size / 1024) + 1;
   $scope.options = {newSize: $scope.minSize};
   $scope.submitForm = function() {
-    var form = resourcesService.$create($scope.action.url);
+    let form = resourcesService.$create($scope.action.url);
     form.disk_size = $scope.options.newSize * 1024;
     return form.$save().then(() => {
       actionUtilsService.handleActionSuccess($scope.action);

@@ -21,7 +21,6 @@ function ProviderSettingsController(
   customersService,
   ncUtils,
   ncUtilsFlash,
-  ncServiceUtils,
   joinService,
   ENV) {
   angular.extend($scope, {
@@ -73,11 +72,11 @@ function ProviderSettingsController(
       });
     },
     getFields: function(options) {
-      var fields = [];
-      var blacklist = ['customer', 'settings', 'available_for_all', 'scope', 'project'];
-      var secretFields = ['password', 'token'];
-      for (var name in options) {
-        var option = options[name];
+      let fields = [];
+      let blacklist = ['customer', 'settings', 'available_for_all', 'scope', 'project'];
+      let secretFields = ['password', 'token'];
+      for (let name in options) {
+        let option = options[name];
         if (!option.read_only && blacklist.indexOf(name) === -1) {
           option.name = name;
           option.secret = secretFields.indexOf(name) !== -1;
@@ -88,11 +87,11 @@ function ProviderSettingsController(
     },
     getFilename: ncUtils.getFilename,
     isDisabled: function() {
-      var service = $scope.service;
-      for (var index in service.fields) {
-        var name = service.fields[index].name;
-        var option = service.options[name];
-        var value = service.values[name];
+      let service = $scope.service;
+      for (let index in service.fields) {
+        let name = service.fields[index].name;
+        let option = service.options[name];
+        let value = service.values[name];
         if (option && option.required && !value && angular.isUndefined(option.default_value)) {
           return true;
         }
@@ -100,19 +99,19 @@ function ProviderSettingsController(
       return false;
     },
     getData: function(service) {
-      var values = {};
-      for (var index in service.fields) {
-        var name = service.fields[index].name;
-        var option = service.options[name];
+      let values = {};
+      for (let index in service.fields) {
+        let name = service.fields[index].name;
+        let option = service.options[name];
         if (!option || option.read_only) {
           continue;
         }
-        var value = service.values[name];
+        let value = service.values[name];
         if (!value) {
           continue;
         }
         if (ncUtils.isFileOption(option)) {
-          if (value.length != 1 || !ncUtils.isFileValue(value[0])) {
+          if (value.length !== 1 || !ncUtils.isFileValue(value[0])) {
             continue;
           }
           value = value[0];
@@ -122,10 +121,10 @@ function ProviderSettingsController(
       return values;
     },
     updateSettings: function() {
-      var service = $scope.service;
-      var url = service.settings;
-      var data = this.getData(service);
-      var promises = [];
+      let service = $scope.service;
+      let url = service.settings;
+      let data = this.getData(service);
+      let promises = [];
       if (service.editable) {
         promises.push(joinService.update(url, data));
       }
@@ -143,8 +142,8 @@ function ProviderSettingsController(
       }
     },
     onSaveError: function(service, response) {
-      var message = '';
-      for (var name in response.data) {
+      let message = '';
+      for (let name in response.data) {
         message += (service.options[name] ? service.options[name].label : name) + ': ' + response.data[name];
       }
       if (message) {
@@ -152,7 +151,7 @@ function ProviderSettingsController(
       }
     },
     hasChanged: function() {
-      var model = $scope.service;
+      let model = $scope.service;
       if (!model.values) {
         return false;
       }

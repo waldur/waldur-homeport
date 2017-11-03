@@ -17,7 +17,7 @@ export default function hookDetails() {
 
 // @ngInject
 function HookDetailsController(hooksService, eventsService, ncUtilsFlash, $filter) {
-  var vm = this;
+  let vm = this;
   vm.save = save;
 
   function init() {
@@ -59,7 +59,7 @@ function HookDetailsController(hooksService, eventsService, ncUtilsFlash, $filte
   }
 
   function save() {
-    var promise, message;
+    let promise, message;
     vm.instance.event_groups = getSelected();
     if (vm.instance.uuid) {
       promise = hooksService.update(vm.instance);

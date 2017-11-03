@@ -1,10 +1,11 @@
+// @ngInject
 export default function joinServiceProjectLinkService(baseServiceClass, joinService) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     addLink: function(service_type, service_uuid, project_url) {
-      var vm = this;
+      let vm = this;
       return joinService.$get(service_type, service_uuid).then(function(service) {
         return joinService.getServiceProjectLinkUrlByType(service_type).then(function(url) {
-          var instance = vm.$create(url);
+          let instance = vm.$create(url);
           instance.project = project_url;
           instance.service = service.url;
           return instance.$save();

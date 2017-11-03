@@ -6,8 +6,8 @@ const projectDetailsButton = {
     project: '<',
   },
   controller: class ProjectDetailsButtonController {
+    // @ngInject
     constructor($uibModal) {
-      // @ngInject
       this.$uibModal = $uibModal;
     }
 

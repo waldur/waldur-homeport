@@ -15,13 +15,13 @@ function VolumeSnapshotsListController(
   $scope,
   $timeout,
   actionUtilsService) {
-  var controllerScope = this;
-  var ResourceController = baseResourceListController.extend({
+  let controllerScope = this;
+  let ResourceController = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.listActions = null;
-      var list_type = 'snapshots';
-      var fn = this._super.bind(this);
+      let list_type = 'snapshots';
+      let fn = this._super.bind(this);
 
       this.loading = true;
       actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
@@ -38,7 +38,7 @@ function VolumeSnapshotsListController(
       });
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.noDataText = gettext('You have no snapshots yet.');
       options.noMatchesText = gettext('No snapshots found matching filter.');
       return options;

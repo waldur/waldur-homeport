@@ -2,7 +2,7 @@ import { EVENT_TEMPLATES, DELETION_EVENTS } from './constants';
 
 // @ngInject
 export default function eventFormatter(ENV, BaseEventFormatter) {
-  var cls = BaseEventFormatter.extend({
+  let cls = BaseEventFormatter.extend({
     getTemplate: function(event) {
       return EVENT_TEMPLATES[event.event_type];
     },
@@ -20,10 +20,10 @@ export default function eventFormatter(ENV, BaseEventFormatter) {
       if (ENV.featuresVisible) {
         return true;
       }
-      var parts = route.split('.');
-      for (var i = 0; i < parts.length; i++) {
-        var part = parts[i];
-        if (ENV.toBeFeatures.indexOf(part) != -1) {
+      let parts = route.split('.');
+      for (let i = 0; i < parts.length; i++) {
+        let part = parts[i];
+        if (ENV.toBeFeatures.indexOf(part) !== -1) {
           return false;
         }
       }

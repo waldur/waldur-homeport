@@ -6,8 +6,8 @@ const resourceTabs = {
     resource: '<'
   },
   controller: class ResourceTabs {
+    // @ngInject
     constructor(ResourceTabsConfiguration, DEFAULT_RESOURCE_TABS, $stateParams) {
-      // @ngInject
       this.registry = ResourceTabsConfiguration;
       this.defaults = DEFAULT_RESOURCE_TABS;
       this.selectedTabName = $stateParams.tab;

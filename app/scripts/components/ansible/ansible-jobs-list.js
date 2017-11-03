@@ -41,6 +41,7 @@ function AnsibleJobsListController(
         enableOrdering: true,
         columns: this.getColumns(),
         tableActions: this.getTableActions(),
+        rowActions: this.getRowActions(),
       };
     },
     getColumns: function() {
@@ -75,6 +76,22 @@ function AnsibleJobsListController(
           orderField: 'created',
           render: function(row) {
             return $filter('dateTime')(row.created);
+          }
+        }
+      ];
+    },
+    getRowActions: function() {
+      const checkState = app => ['OK', 'Erred'].includes(app.state);
+      return [
+        {
+          title: gettext('Remove application'),
+          iconClass: 'fa fa-trash',
+          callback: this.remove.bind(controllerScope),
+          isDisabled: (app) => !checkState(app),
+          tooltip: (app) => {
+            if (!checkState(app)) {
+              return gettext('Please wait until provisioning is completed.');
+            }
           }
         }
       ];

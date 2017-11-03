@@ -1,5 +1,5 @@
-// @ngInject
 export default class DashboardFeedService {
+  // @ngInject
   constructor(alertsService, eventsService, alertFormatter, eventFormatter) {
     this.alertsService = alertsService;
     this.eventsService = eventsService;

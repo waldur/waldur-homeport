@@ -10,13 +10,13 @@ const openstackSecurityGroupsList = {
 // @ngInject
 function OpenstackSecurityGroupsListController(
   baseResourceListController, openstackSecurityGroupsService, actionUtilsService) {
-  var controllerScope = this;
-  var controllerClass = baseResourceListController.extend({
+  let controllerScope = this;
+  let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.listActions = null;
-      var list_type = 'security_groups';
-      var fn = this._super.bind(this);
+      let list_type = 'security_groups';
+      let fn = this._super.bind(this);
 
       this.loading = true;
       actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
@@ -27,7 +27,7 @@ function OpenstackSecurityGroupsListController(
       });
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.noDataText = gettext('No security groups yet.');
       options.noMatchesText = gettext('No security groups found matching filter.');
       options.columns = [

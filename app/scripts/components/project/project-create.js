@@ -19,8 +19,8 @@ function ProjectAddController(
   $state,
   ncUtils,
   ncUtilsFlash) {
-  var controllerScope = this;
-  var ProjectController = baseControllerAddClass.extend({
+  let controllerScope = this;
+  let ProjectController = baseControllerAddClass.extend({
     userRole: 'admin',
     init: function() {
       this.service = projectsService;

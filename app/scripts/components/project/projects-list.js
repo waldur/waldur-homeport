@@ -13,7 +13,6 @@ function ProjectsListController(
   baseControllerListClass,
   projectsService,
   customersService,
-  features,
   $filter,
   $q,
   $state,
@@ -26,12 +25,12 @@ function ProjectsListController(
   currentStateService,
   QuotaUtilsService,
   usersService) {
-  var controllerScope = this;
-  var Controller = baseControllerListClass.extend({
+  let controllerScope = this;
+  let Controller = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = projectsService;
-      var fn = this._super.bind(this);
+      let fn = this._super.bind(this);
       this.activate().then(function() {
         fn();
       });
@@ -42,7 +41,7 @@ function ProjectsListController(
       });
     },
     activate: function() {
-      var vm = this;
+      let vm = this;
       vm.loading = true;
       return $q.all([
         currentStateService.getCustomer().then(function(customer) {
@@ -84,7 +83,7 @@ function ProjectsListController(
         {
           title: gettext('Name'),
           render: function(row) {
-            var href = $state.href('project.details', {uuid: row.uuid});
+            let href = $state.href('project.details', {uuid: row.uuid});
             return '<a href="{href}">{name}</a>'
                    .replace('{href}', href)
                    .replace('{name}', row.name);

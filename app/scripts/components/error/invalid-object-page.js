@@ -1,8 +1,8 @@
-import template from './error-404.html';
+import template from './invalid-object-page.html';
 
-export const error404 = {
+const invalidObjectPage = {
   template,
-  controller: class error404Controller {
+  controller: class InvalidObjectPageController {
     // @ngInject
     constructor(NavigationUtilsService) {
       this.NavigationUtilsService = NavigationUtilsService;
@@ -13,3 +13,5 @@ export const error404 = {
     }
   }
 };
+
+export default invalidObjectPage;

@@ -25,6 +25,7 @@ function filesize() {
   };
 }
 
+// @ngInject
 function trustAsHtml($sce) {
   return function(value) {
     return $sce.trustAsHtml(value);
@@ -79,8 +80,11 @@ function defaultCurrency(ENV, $filter) {
       return value;
     }
     let fractionSize = 2;
-    if (value != 0 && value < 0.01) {
+    if (value !== 0 && value < 0.01) {
       fractionSize = 3;
+    }
+    if (value !== 0 && value < 0.001) {
+      fractionSize = 4;
     }
     return $filter('currency')(value, ENV.currency, fractionSize);
   };

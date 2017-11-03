@@ -40,7 +40,8 @@ const ansibleJobCreate = {
     loadKeys() {
       return this.usersService.getCurrentUser().then(user => {
         return this.keysService.getAll({
-          user_uuid: user.uuid
+          user_uuid: user.uuid,
+          is_shared: false
         }).then(keys => {
           this.keys = keys;
         });
@@ -108,6 +109,7 @@ const ansibleJobCreate = {
                 label: gettext('Fingerprint')
               }
             ],
+            required: true,
             choices: this.keys,
             preselectFirst: true,
             emptyMessage: gettext('You have not added any SSH keys to your <a ui-sref="profile.keys">profile</a>.')
@@ -127,6 +129,10 @@ const ansibleJobCreate = {
           this.model[parameter.name] = parameter.default;
         }
       });
+    }
+
+    get isValid() {
+      return this.model.ssh_public_key && this.model.name;
     }
 
     createJob() {

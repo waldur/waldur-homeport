@@ -1,4 +1,5 @@
 export default class ResourceBreadcrumbsService {
+  // @ngInject
   constructor(ENV, CATEGORY_ITEMS) {
     this.ENV = ENV;
     this.CATEGORY_ITEMS = CATEGORY_ITEMS;

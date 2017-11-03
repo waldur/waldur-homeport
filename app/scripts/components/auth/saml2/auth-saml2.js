@@ -6,6 +6,7 @@ const authSaml2 = {
     mode: '<',
   },
   controller: class AuthSaml2Controller {
+    // @ngInject
     constructor(ENV, coreUtils, Saml2Service) {
       this.Saml2Service = Saml2Service;
       this.ENV = ENV;

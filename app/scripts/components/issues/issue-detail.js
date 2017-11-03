@@ -16,7 +16,7 @@ const issueDetail = {
       this.loading = true;
       this.loadData()
         .catch(response => {
-          if (response.status == 404) {
+          if (response.status === 404) {
             this.$state.go('errorPage.notFound');
           }
         })

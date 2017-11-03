@@ -16,7 +16,7 @@ function AlertFilterController($scope) {
   $scope.openedOnly = true;
 
   function updateDefaultFilter() {
-    var defaultFilter = $scope.filterController.service.defaultFilter;
+    let defaultFilter = $scope.filterController.service.defaultFilter;
     if ($scope.openedOnly) {
       defaultFilter.opened = true;
     } else {

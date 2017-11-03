@@ -1,40 +1,51 @@
 .status {
-    color: silver;
-    &.online {
-        color: #6abb6a;
-    } // online
-    &.offline {
-        color: #e74c3c;
-    } // offline
-} // status
+  color: silver;
+  &.online {
+    color: #6abb6a;
+  }
+  // online
+  &.offline {
+    color: #e74c3c;
+  }
+  // offline
+}
+
+// status
 
 .status-circle {
-    @include inline-middle;
-    @include property(width, 10);
-    @include property(height, 10);
-    border-radius: 100%;
-    background-color: silver;
-    &.online,
-    &.green {
-        background-color: #6abb6a;
-    } // online
-    &.offline,
-    &.gray {
-        background-color: #cccaca;
-    } // offline
-    &.erred {
-        background-color: #990000;
+  @include inline-middle;
+  @include property(width, 10);
+  @include property(height, 10);
+  border-radius: 100%;
+  background-color: silver;
+  &.online,
+  &.green {
+    background-color: #6abb6a;
+  }
+  // online
+  &.offline,
+  &.gray {
+    background-color: #cccaca;
+  }
+  // offline
+  &.erred {
+    background-color: #990000;
+  }
+  &.resource {
+    display: none;
+    position: relative;
+    @include property(left, 5);
+    @include property(top, -1);
+    @include bp(xs) {
+      @include inline-middle;
     }
-    &.resource {
-        display: none;
-        position: relative;
-        @include property(left, 5);
-        @include property(top, -1);
-        @include bp(xs) {
-            @include inline-middle;
-        } // xs
-        @include bp(sm) {
-            @include inline-middle;
-        } // sm
-    } // &.resource
-} // status-circle
+    // xs
+    @include bp(sm) {
+      @include inline-middle;
+    }
+    // sm
+  }
+  // &.resource
+}
+
+// status-circle

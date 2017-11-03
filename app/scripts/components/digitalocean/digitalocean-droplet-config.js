@@ -121,12 +121,12 @@ function imageValidator(model, choice) {
   if (!model.region) {
     return true;
   }
-  var region = model.region.url;
-  var found = false;
-  var regions = choice.regions || [choice.region];
-  for (var j = 0; j < regions.length; j++) {
-    var choice_region = regions[j];
-    if (choice_region.url == region) {
+  let region = model.region.url;
+  let found = false;
+  let regions = choice.regions || [choice.region];
+  for (let j = 0; j < regions.length; j++) {
+    let choice_region = regions[j];
+    if (choice_region.url === region) {
       found = true;
       break;
     }

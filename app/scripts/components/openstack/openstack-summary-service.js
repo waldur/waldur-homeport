@@ -1,7 +1,7 @@
 import { parsePrices, parseQuotas, parseQuotasUsage } from './utils';
 
-// @ngInject
 export default class OpenStackSummaryService {
+  // @ngInject
   constructor($http, $q, ENV) {
     this.$http = $http;
     this.$q = $q;

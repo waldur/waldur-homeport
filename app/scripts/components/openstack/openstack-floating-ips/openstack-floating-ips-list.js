@@ -10,14 +10,14 @@ const openstackFloatingIpsList = {
 // @ngInject
 function OpenstackFloatingIpsListController(
   baseResourceListController, openstackFloatingIpsService, actionUtilsService, $state, ncUtils) {
-  var controllerScope = this;
-  var controllerClass = baseResourceListController.extend({
+  let controllerScope = this;
+  let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.listActions = null;
       this.addRowFields(['instance_uuid', 'instance_name']);
-      var list_type = 'floating_ips';
-      var fn = this._super.bind(this);
+      let list_type = 'floating_ips';
+      let fn = this._super.bind(this);
 
       this.loading = true;
       actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
@@ -27,7 +27,7 @@ function OpenstackFloatingIpsListController(
       });
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.noDataText = gettext('No floating IPs yet.');
       options.noMatchesText = gettext('No floating IPs found matching filter.');
       options.columns = [

@@ -1,7 +1,7 @@
 // @ngInject
 export default function formatEventTitle($filter) {
   return function(choice) {
-    var map = {
+    let map = {
       ssh: 'SSH',
       jira: 'JIRA',
       vms: 'Resources',

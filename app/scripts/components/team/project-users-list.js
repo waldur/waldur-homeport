@@ -17,12 +17,12 @@ export default function ProjectUsersListController(
   $q,
   $rootScope,
   $uibModal) {
-  var controllerScope = this;
-  var TeamController = baseControllerListClass.extend({
+  let controllerScope = this;
+  let TeamController = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = projectsService;
-      var fn = this._super.bind(this);
+      let fn = this._super.bind(this);
       $q.all([
         currentStateService.getCustomer().then(customer => {
           controllerScope.currentCustomer = customer;
@@ -81,8 +81,8 @@ export default function ProjectUsersListController(
       }
     },
     getRowActions: function() {
-      var vm = this;
-      var actions = [
+      let vm = this;
+      let actions = [
         {
           title: gettext('Details'),
           iconClass: 'fa fa-eye',
@@ -128,7 +128,7 @@ export default function ProjectUsersListController(
       });
     },
     openPopup: function(user) {
-      var isProjectManager = this.isProjectManager,
+      let isProjectManager = this.isProjectManager,
         addedUsers = this.list.map(function(users) {
           return users.uuid;
         });

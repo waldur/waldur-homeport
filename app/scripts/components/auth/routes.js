@@ -77,6 +77,7 @@ export default function authRoutes($stateProvider) {
         bodyClass: 'old'
       },
       resolve: {
+        // @ngInject
         currentUser: usersService => usersService.getCurrentUser()
       }
     });

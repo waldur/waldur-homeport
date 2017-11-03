@@ -16,8 +16,8 @@ const openstackInstanceFloatingIps = {
     form: '<',
   },
   controller: class ComponentController {
+    // @ngInject
     constructor($scope) {
-      // @ngInject
       this.$scope = $scope;
     }
 

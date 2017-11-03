@@ -3,13 +3,16 @@ import template from './issue-comments-list.html';
 const issueCommentsList = {
   template,
   bindings: {
-    issue: '<'
+    issue: '<',
+    users: '<',
   },
   controller: class IssueCommentsListController {
-    constructor(issueCommentsService, usersService, $rootScope) {
+    // @ngInject
+    constructor(issueCommentsService, usersService, $rootScope, $uibModal) {
       this.issueCommentsService = issueCommentsService;
       this.usersService = usersService;
       this.$rootScope = $rootScope;
+      this.$uibModal = $uibModal;
     }
 
     $onInit() {
@@ -32,6 +35,15 @@ const issueCommentsList = {
         this.erred = true;
       }).finally(() => {
         this.loading = false;
+      });
+    }
+
+    openUserDialog(user_uuid) {
+      this.$uibModal.open({
+        component: 'userPopover',
+        resolve: {
+          user_uuid: () => user_uuid
+        }
       });
     }
 

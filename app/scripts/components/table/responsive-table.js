@@ -28,9 +28,9 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         scope.controller.$$scope = scope;
       }
 
-      var options = scope.controller.tableOptions;
-      var table;
-      var rootScopeListener;
+      let options = scope.controller.tableOptions;
+      let table;
+      let rootScopeListener;
 
       scope.$on('updateRow', (event, args) => {
         let data = args.data;
@@ -90,11 +90,11 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       });
 
       function initTable() {
-        var buttons = getButtons();
-        var columns = getColumns();
-        var dom = getDom();
+        let buttons = getButtons();
+        let columns = getColumns();
+        let dom = getDom();
 
-        var tableOptions = {
+        let tableOptions = {
           responsive: true,
           processing: true,
           serverSide: true,
@@ -186,27 +186,27 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
           return;
         }
 
-        var exportButtonTitle = $filter('translate')(gettext('Export as'));
-        var exportButtonText = '<i class="fa fa-download"></i> ' + exportButtonTitle + ' <i class="caret"></i>';
+        let exportButtonTitle = $filter('translate')(gettext('Export as'));
+        let exportButtonText = '<i class="fa fa-download"></i> ' + exportButtonTitle + ' <i class="caret"></i>';
 
-        var refreshButtonTitle = $filter('translate')(gettext('Refresh'));
-        var refreshButtonText = '<i class="fa fa-refresh"></i> ' + refreshButtonTitle;
+        let refreshButtonTitle = $filter('translate')(gettext('Refresh'));
+        let refreshButtonText = '<i class="fa fa-refresh"></i> ' + refreshButtonTitle;
 
-        var exportButtons = getExportButtons(
+        let exportButtons = getExportButtons(
           options.columns.length,
           options.rowActions,
           ['copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'print']
         );
-        var exportCollection = {
+        let exportCollection = {
           extend: 'collection',
           text: exportButtonText,
           autoClose: true,
           fade: 0,
           buttons: exportButtons
         };
-        var buttons = [exportCollection];
+        let buttons = [exportCollection];
         if (options.tableActions) {
-          var tableButtons = getTableButtons(options.tableActions);
+          let tableButtons = getTableButtons(options.tableActions);
           buttons = buttons.concat(tableButtons);
         }
         buttons.push({
@@ -221,8 +221,8 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       }
 
       function getColumns() {
-        var columns = options.columns.map(function(column) {
-          var title = $filter('translate')(column.title);
+        let columns = options.columns.map(function(column) {
+          let title = $filter('translate')(column.title);
           // eslint-disable-next-line no-unused-vars
           function render(data, type, row, meta) {
             return column.render(row);
@@ -237,7 +237,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         });
         columns = columns.filter(column => !column.hasOwnProperty('isVisible') || column.isVisible());
         if (options.rowActions && options.rowActions.length) {
-          var actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
+          let actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
           columns.push(actionColumn);
         }
         return columns;
@@ -269,7 +269,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
           table.draw(false);
         });
 
-        var timer = $interval(
+        let timer = $interval(
           scope.controller.resetCache.bind(scope.controller),
           ENV.countersTimerInterval * 1000
         );
@@ -311,7 +311,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
 
       function registerEvents(table) {
         table.on('click', 'tr', function() {
-          var rowShown = false;
+          let rowShown = false;
           table.rows().every(function(rowIndex){
             if (table.row(rowIndex).child.isShown()) {
               rowShown = true;
@@ -332,11 +332,11 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         }
         table.on('click', 'button', function(event) {
           $(this).blur();
-          var target = $(event.target).closest('button');
-          var rowIndex = parseInt(target.attr('row-index'));
-          var actionIndex = parseInt(target.attr('action-index'));
-          var action = options.rowActions[actionIndex];
-          var row = scope.controller.list[rowIndex];
+          let target = $(event.target).closest('button');
+          let rowIndex = parseInt(target.attr('row-index'));
+          let actionIndex = parseInt(target.attr('action-index'));
+          let action = options.rowActions[actionIndex];
+          let row = scope.controller.list[rowIndex];
           $timeout(function() {
             if (action.isDisabled && action.isDisabled(row)) {
               return;
@@ -355,11 +355,11 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
             if (options.rowActions instanceof Function) {
               return options.rowActions.call(scope.controller, row);
             }
-            var template = '<button title="{tooltip}" class="btn btn-default btn-sm {cls}" {disabled} row-index="{row}" action-index="{action}">{name}</button>';
-            var visibleButtons = spec.filter((action) => !action.hasOwnProperty('isVisible') || action.isVisible(row));
-            var buttons = visibleButtons.map(function(action, index) {
-              var disabled = action.isDisabled && action.isDisabled(row) && 'disabled' || '';
-              var tooltip = action.tooltip && action.tooltip(row) || '';
+            let template = '<button title="{tooltip}" class="btn btn-default btn-sm {cls}" {disabled} row-index="{row}" action-index="{action}">{name}</button>';
+            let visibleButtons = spec.filter((action) => !action.hasOwnProperty('isVisible') || action.isVisible(row));
+            let buttons = visibleButtons.map(function(action, index) {
+              let disabled = action.isDisabled && action.isDisabled(row) && 'disabled' || '';
+              let tooltip = action.tooltip && action.tooltip(row) || '';
               return template.replace('{disabled}', disabled)
                              .replace('{cls}', action.className)
                              .replace('{row}', meta.row)
@@ -374,7 +374,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       }
 
       function formatActionName(action) {
-        var name = '';
+        let name = '';
         if (action.iconClass) {
           name = '<i class="' + action.iconClass + '"></i> ';
         }
@@ -383,8 +383,8 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       }
 
       function getExportButtons(columnsCount, rowActions, formats) {
-        var title = document.title + ' - ' + moment().format('YYYY-MM-DD');
-        var exportOptions = {};
+        let title = document.title + ' - ' + moment().format('YYYY-MM-DD');
+        let exportOptions = {};
         if (rowActions) {
           exportOptions.columns = range(columnsCount);
         }
@@ -398,8 +398,8 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       }
 
       function range(n) {
-        var x = [];
-        for (var i = 0; i < n; i++) {
+        let x = [];
+        for (let i = 0; i < n; i++) {
           x.push(i);
         }
         return x;
@@ -407,14 +407,14 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
 
       // eslint-disable-next-line no-unused-vars
       function serverDataTableCallback(request, drawCallback, settings) {
-        var filter = {};
+        let filter = {};
         request.order.forEach(function(orderItem) {
-          var orderField = options.columns[orderItem.column].orderField;
+          let orderField = options.columns[orderItem.column].orderField;
           filter.o = orderItem.dir === 'asc' ? orderField : '-' + orderField;
         });
         let selectedItems = getSelectedItems(table);
         scope.controller.requestLoad(request, filter).then(function() {
-          var total = scope.controller.getTotal();
+          let total = scope.controller.getTotal();
           $q.when([drawCallback({
             draw: request.draw,
             recordsTotal: total,

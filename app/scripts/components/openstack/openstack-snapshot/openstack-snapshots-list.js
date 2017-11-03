@@ -58,8 +58,8 @@ function SnapshotsListController($scope,
           if (!row.source_volume) {
             return gettext('Not known');
           }
-          var uuid = ncUtils.getUUID(row.source_volume);
-          var href = $state.href('resources.details', {
+          let uuid = ncUtils.getUUID(row.source_volume);
+          let href = $state.href('resources.details', {
             uuid: uuid,
             resource_type: 'OpenStackTenant.Volume'
           });

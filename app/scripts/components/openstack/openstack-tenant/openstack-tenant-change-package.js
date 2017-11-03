@@ -1,8 +1,8 @@
 import template from './openstack-tenant-change-package.html';
 import { openstackTemplateColumns, openstackTemplateFilters } from './openstack-template';
 
-// @ngInject
 class DialogController {
+  // @ngInject
   constructor(openstackTenantChangePackageService) {
     this.service = openstackTenantChangePackageService;
   }

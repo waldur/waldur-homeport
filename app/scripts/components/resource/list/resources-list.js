@@ -17,7 +17,7 @@ export default function baseResourceListController(
   $state,
   $q,
   $timeout) {
-  var ControllerListClass = baseControllerListClass.extend({
+  let ControllerListClass = baseControllerListClass.extend({
     init: function() {
       this.service = resourcesService;
       this.categories = {};
@@ -26,7 +26,7 @@ export default function baseResourceListController(
       this.categories[ENV.Storages] = 'storages';
       this.enableRefresh = true;
 
-      var fn = this._super.bind(this);
+      let fn = this._super.bind(this);
       this.loadInitialContext().then(() => {
         this.tableOptions = this.getTableOptions();
         fn();
@@ -34,7 +34,7 @@ export default function baseResourceListController(
       this.hasCustomFilters = false;
     },
     getTableOptions: function() {
-      var vm = this.controllerScope;
+      let vm = this.controllerScope;
       const options = {
         searchFieldName: 'name',
         noDataText: gettext('You have no resources yet.'),
@@ -71,7 +71,7 @@ export default function baseResourceListController(
         ],
         tableActions: this.getTableActions(),
         rowActions: function(row) {
-          var index = this.findIndexById(row);
+          let index = this.findIndexById(row);
           return '<action-button-resource button-controller="controller" button-model="controller.list[' + index + ']"/>';
         }
       };
@@ -91,7 +91,7 @@ export default function baseResourceListController(
       return `<${component} resource="controller.list[${index}]"></${component}>`;
     },
     getTableActions: function() {
-      var actions = [];
+      let actions = [];
       if (this.category !== undefined) {
         actions.push(this.getCreateAction());
       }
@@ -157,23 +157,23 @@ export default function baseResourceListController(
       }
     },
     getMarkers: function() {
-      var items = this.controllerScope.list.filter(function hasCoordinates(item) {
-        return item.latitude != null && item.longitude != null;
+      let items = this.controllerScope.list.filter(function hasCoordinates(item) {
+        return item.latitude !== null && item.longitude !== null;
       });
 
-      var points = {};
+      let points = {};
       items.forEach(function groupMarkersByCoordinates(item) {
-        var key = [item.latitude, item.longitude];
+        let key = [item.latitude, item.longitude];
         if (!points[key]) {
           points[key] = [];
         }
         points[key].push(item);
       });
 
-      var markers = [];
+      let markers = [];
       angular.forEach(points, function createMarker(items) {
-        var item = items[0];
-        var message = items.map(function(item) {
+        let item = items[0];
+        let message = items.map(function(item) {
           return item.name;
         }).join('<br/>');
         markers.push({
@@ -185,12 +185,12 @@ export default function baseResourceListController(
       return markers;
     },
     openMap: function() {
-      var markers = this.getMarkers();
+      let markers = this.getMarkers();
 
       if(!markers) {
         alert('No virtual machines with coordinates.');
       } else {
-        var scope = $rootScope.$new();
+        let scope = $rootScope.$new();
         scope.markers = markers;
         loadLeafleat().then(module => {
           $ocLazyLoad.load({name: module.default});
@@ -205,8 +205,8 @@ export default function baseResourceListController(
       }
     },
     projectHasNonSharedService: function(project) {
-      for (var i = 0; i < project.services.length; i++) {
-        var service = project.services[i];
+      for (let i = 0; i < project.services.length; i++) {
+        let service = project.services[i];
         if (!service.shared) {
           return true;
         }
@@ -221,7 +221,7 @@ export default function baseResourceListController(
       ]);
     },
     getList: function(filter) {
-      var query = angular.extend({}, filter, {
+      let query = angular.extend({}, filter, {
         field: this.rowFields
       });
       if (angular.isDefined(this.category) && !this.getFilter().resource_type) {
@@ -231,12 +231,12 @@ export default function baseResourceListController(
       return this._super(query);
     },
     updateFilters: function(filter) {
-      var query = angular.extend({
+      let query = angular.extend({
         resource_category: this.getCategoryKey(),
         customer: currentStateService.getCustomerUuid()
       }, filter);
       angular.forEach(this.service.defaultFilter, function(val, key) {
-        if (key != 'resource_type') {
+        if (key !== 'resource_type') {
           query[key] = val;
         }
       });
@@ -245,7 +245,7 @@ export default function baseResourceListController(
       }.bind(this));
     },
     getFilterByCounts: function(counts) {
-      var filters = [];
+      let filters = [];
       angular.forEach(counts, function(count, resourceType) {
         if (count > 0) {
           filters.push({
@@ -271,7 +271,7 @@ export default function baseResourceListController(
       priceEstimationService.clearAllCacheForCurrentEndpoint();
     },
     reInitResource:function(resource) {
-      var vm = this;
+      let vm = this;
       return resourcesService.$get(resource.resource_type, resource.uuid).then(function(response) {
         vm.setResource(resource, response);
         // when row is updated in the list it is not refreshed in the datatable. Do it manually.
@@ -280,7 +280,7 @@ export default function baseResourceListController(
       });
     },
     setResource: function(resource, response) {
-      var index = this.list.indexOf(resource);
+      let index = this.list.indexOf(resource);
       this.list[index] = response;
     },
     resourceIsUpdating: function(resource) {

@@ -5,7 +5,7 @@ export default function uiSrefActiveIf($state) {
   return {
     restrict: 'A',
     link: function($scope, $element, $attrs) {
-      var state = $attrs.uiSrefActiveIf;
+      let state = $attrs.uiSrefActiveIf;
 
       function update() {
         if ($state.includes(state) || $state.is(state)) {

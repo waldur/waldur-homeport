@@ -6,6 +6,7 @@ const providerProjectLinkQuotas = {
     choices: '<',
   },
   controller: class ProviderProjectLinkQuotasController {
+    // @ngInject
     constructor ($scope, quotasService, $q) {
       this.multiplyFactor = 1024;
       this.quotaNames = ['ram', 'vcpu', 'storage'];

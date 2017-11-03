@@ -6,6 +6,7 @@ export const projectAlertsFeed = {
     project: '<',
   },
   controller: class ProjectAlertsFeedController {
+    // @ngInject
     constructor(DashboardFeedService, AlertDialogsService) {
       this.DashboardFeedService = DashboardFeedService;
       this.title = gettext('Alerts');

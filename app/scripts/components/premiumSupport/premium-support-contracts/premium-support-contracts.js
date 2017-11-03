@@ -14,8 +14,8 @@ function ContractsListController(
   $stateParams,
   $uibModal,
   $state) {
-  var controllerScope = this;
-  var ResourceController = baseControllerListClass.extend({
+  let controllerScope = this;
+  let ResourceController = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = premiumSupportContractsService;
@@ -76,8 +76,8 @@ function ContractsListController(
       this.tableOptions = this.getTableOptions();
     },
     getList: function(filter) {
-      var vm = this;
-      var fn = this._super.bind(vm);
+      let vm = this;
+      let fn = this._super.bind(vm);
       if ($stateParams.uuid) {
         this.service.defaultFilter.project_uuid = $stateParams.uuid;
         return fn(filter);

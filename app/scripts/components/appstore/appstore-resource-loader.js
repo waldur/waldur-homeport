@@ -1,5 +1,5 @@
-// @ngInject
 export default class AppstoreResourceLoader {
+  // @ngInject
   constructor(ENV, $http, $q, ncUtils, servicesService) {
     this.ENV = ENV;
     this.$http = $http;
@@ -25,7 +25,7 @@ export default class AppstoreResourceLoader {
         }));
       }
 
-      if (field.url && name != 'service_project_link') {
+      if (field.url && name !== 'service_project_link') {
         promises.push(this.loadUrl(context, field).then(response => {
           validChoices[name] = response;
         }));

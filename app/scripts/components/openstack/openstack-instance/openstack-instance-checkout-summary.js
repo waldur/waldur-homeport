@@ -2,6 +2,7 @@ import template from './openstack-instance-checkout-summary.html';
 
 // @ngInject
 class SummaryController {
+  // @ngInject
   constructor(OpenStackSummaryService, currentStateService, coreUtils, $q, $scope) {
     this.OpenStackSummaryService = OpenStackSummaryService;
     this.currentStateService = currentStateService;

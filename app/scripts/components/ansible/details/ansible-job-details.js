@@ -3,13 +3,14 @@ import template from './ansible-job-details.html';
 const ansbileJobDetails = {
   template: template,
   controller: class AnsbileJobDetailsController {
-    // ngInject
-    constructor($stateParams, $interval, $scope, ENV, AnsibleJobsService) {
+    // @ngInject
+    constructor($stateParams, $interval, $scope, ENV, AnsibleJobsService, BreadcrumbsService) {
       this.$stateParams = $stateParams;
       this.$interval = $interval;
       this.$scope = $scope;
       this.ENV = ENV;
       this.AnsibleJobsService = AnsibleJobsService;
+      this.BreadcrumbsService = BreadcrumbsService;
     }
 
     $onInit() {
@@ -29,8 +30,31 @@ const ansbileJobDetails = {
     fetchJob() {
       this.AnsibleJobsService.$get(this.$stateParams.jobId)
         .then(job => this.job = job)
+        .then(() => this.refreshBreadcrumbs())
         .then(() => this.$scope.$emit('refreshAnsibleResourcesList'))
         .finally(() => this.loading = false);
+    }
+
+    refreshBreadcrumbs() {
+      this.BreadcrumbsService.items = [
+        {
+          label: gettext('Project workspace'),
+          state: 'project.details',
+          params: {
+            uuid: this.job.project_uuid
+          }
+        },
+        {
+          label: gettext('Resources')
+        },
+        {
+          label: gettext('Applications'),
+          state: 'project.resources.ansible.list',
+          params: {
+            uuid: this.job.project_uuid
+          }
+        }
+      ];
     }
   }
 };

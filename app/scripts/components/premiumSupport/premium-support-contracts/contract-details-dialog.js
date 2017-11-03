@@ -6,8 +6,8 @@ const contractDetailsDialog = {
     resolve: '<',
   },
   controller: class contractDetailsController {
+    // @ngInject
     constructor($filter, premiumSupportPlansService, ENV, coreUtils) {
-      // @ngInject
       this.$filter = $filter;
       this.premiumSupportPlansService = premiumSupportPlansService;
       this.ENV = ENV;

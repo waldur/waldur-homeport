@@ -11,6 +11,25 @@ var extractPlugin = new ExtractTextPlugin({
 });
 var momentLocalesPlugin = new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en-gb|et|ru|lt|lv)/);
 
+var AngularGetTextPlugin = require('./angular-gettext-plugin');
+var gettextPlugin = new AngularGetTextPlugin({
+  compileTranslations: {
+    input: 'i18n/*.po',
+    outputFolder: 'app/static/js/i18n/',
+    format: 'json'
+  },
+  extractStrings: {
+    patterns: [
+      'app/views/**/*.html',
+      'app/scripts/components/**/*.html',
+      'app/scripts/**/*.js',
+      'app/scripts/**/*.jsx'
+    ],
+    destination: 'i18n/template.pot',
+    lineNumbers: false
+  }
+});
+
 module.exports = {
   entry: {
     index: './app/scripts/index.js',
@@ -114,12 +133,12 @@ module.exports = {
     ],
   },
   plugins: [
+    gettextPlugin,
     extractPlugin,
     momentLocalesPlugin,
     // some files are not referenced explicitly, copy them.
     new CopyWebpackPlugin([
       {from: './app/views', to: '../views'},
-      {from: './app/static/js/i18n/', to: './js/i18n/'},
       {from: path.resolve(imagesPath, './appstore'), to: './images/appstore'},
       {from: path.resolve(imagesPath, './help'), to: './images/help'},
       {from: path.resolve(imagesPath, './waldur'), to: './images/waldur'},

@@ -24,7 +24,7 @@ export default function tabCounterService($q) {
 
   function updateCounters(options) {
     function updateTab(response, tab) {
-      var key = tab.countFieldKey;
+      let key = tab.countFieldKey;
       if (key) {
         tab.count = response[key];
       }

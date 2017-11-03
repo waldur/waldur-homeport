@@ -21,8 +21,8 @@ function ProviderListController(
   currentStateService,
   customersService,
   usersService) {
-  var controllerScope = this;
-  var Controller = baseControllerListClass.extend({
+  let controllerScope = this;
+  let Controller = baseControllerListClass.extend({
     defaultErrorMessage: ENV.defaultErrorMessage,
     init: function() {
       this.controllerScope = controllerScope;
@@ -36,7 +36,7 @@ function ProviderListController(
       usersService.getCurrentUser().then(currentUser => {
         this.currentUser = currentUser;
         currentStateService.getCustomer().then(customer => {
-          var vm = this;
+          let vm = this;
           this.currentCustomer = customer;
           this.checkPermissions();
           this.tableOptions = {
@@ -70,7 +70,7 @@ function ProviderListController(
                 title: gettext('System provider'),
                 className: 'text-center min-tablet-l',
                 render: function(row) {
-                  var cls = row.shared && 'fa-check' || 'fa-minus';
+                  let cls = row.shared && 'fa-check' || 'fa-minus';
                   return '<a class="bool-field"><i class="fa {cls}"/></a>'.replace('{cls}', cls);
                 },
                 width: '100px'
@@ -120,8 +120,8 @@ function ProviderListController(
                 iconClass: 'fa fa-chain-broken',
 
                 callback: function(service) {
-                  var vm = this.controllerScope;
-                  var confirmDelete = confirm(gettext('Are you sure you want to unlink provider and all related resources?'));
+                  let vm = this.controllerScope;
+                  let confirmDelete = confirm(gettext('Are you sure you want to unlink provider and all related resources?'));
                   if (confirmDelete) {
                     vm.unlinkService(service).then(function() {
                       vm.afterInstanceRemove(service);
@@ -169,7 +169,7 @@ function ProviderListController(
     },
     getTableActions: function() {
       let vm = this;
-      var quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'service');
+      let quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'service');
       let title;
       if (!this.canUserManageService) {
         title = gettext('Only customer owner or staff can create provider.');
@@ -205,12 +205,12 @@ function ProviderListController(
       $location.search({tab: 'providers'});
     },
     showSelectedProvider: function() {
-      var vm = this;
-      var service_type = $stateParams.providerType;
-      var uuid = $stateParams.providerUuid;
+      let vm = this;
+      let service_type = $stateParams.providerType;
+      let uuid = $stateParams.providerUuid;
 
       if (service_type && uuid) {
-        var row = vm.findItem(service_type, uuid);
+        let row = vm.findItem(service_type, uuid);
         if (row) {
           this.openDialog(row);
         } else {
@@ -221,9 +221,9 @@ function ProviderListController(
       }
     },
     findItem: function(service_type, uuid) {
-      for (var i = 0; i < this.list.length; i++) {
-        var item = this.list[i];
-        if (item.uuid == uuid && item.service_type == service_type) {
+      for (let i = 0; i < this.list.length; i++) {
+        let item = this.list[i];
+        if (item.uuid === uuid && item.service_type === service_type) {
           return item;
         }
       }

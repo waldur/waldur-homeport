@@ -9,7 +9,7 @@
     </h5>
   </div>
   <div class="ibox-content">
-    <p ng-if="$ctrl.error" translate>Unable to fetch summary.</p>
+    <p ng-if="$ctrl.error" ng-bind="$ctrl.error"></p>
     <table class="table table-bordered" ng-if="$ctrl.isValid()">
       <tbody>
         <tr>
@@ -36,5 +36,15 @@
         </tr>
       </tbody>
     </table>
+
+    <button
+      type="button"
+      class="btn btn-primary btn-sm"
+      ng-if="!$ctrl.error"
+      ng-click="$ctrl.showExplanation()">
+      <i class="fa fa-balance-scale"></i>
+      <span translate>Explain price</span>
+    </button>
+
   </div>
 </div>

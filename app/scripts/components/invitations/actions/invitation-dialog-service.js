@@ -36,7 +36,7 @@ export default function InvitationDialogService(
   }
 
   function createInvite(customer, project, email, civil_number, role) {
-    var invite = invitationService.$create();
+    let invite = invitationService.$create();
     invite.link_template = getTemplateUrl();
     invite.email = email;
     invite.civil_number = civil_number;
@@ -59,7 +59,7 @@ export default function InvitationDialogService(
   }
 
   function getTemplateUrl() {
-    var path = $state.href('invitation', {uuid: 'TEMPLATE'});
+    let path = $state.href('invitation', {uuid: 'TEMPLATE'});
     return location.origin + '/' + path.replace('TEMPLATE', '{uuid}');
   }
 }

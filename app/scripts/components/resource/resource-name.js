@@ -6,8 +6,8 @@ const resourceName = {
     resource: '<'
   },
   controller: class ResourceName {
+    // @ngInject
     constructor(resourceUtils) {
-      // @ngInject
       this.resourceUtils = resourceUtils;
     }
 

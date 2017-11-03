@@ -8,7 +8,7 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
    * Use controllerScope.__proto__ = new Controller() in needed controller
    * use this.controllerScope for changes in event handler
    */
-  var ControllerListClass = baseControllerClass.extend({
+  let ControllerListClass = baseControllerClass.extend({
     list: [],
     service: null, // required in init
     searchInput: '',
@@ -145,14 +145,14 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
     },
     afterGetList: function() {},
     search: function() {
-      var filter = {};
+      let filter = {};
       filter[this.searchFieldName] = this.searchInput;
       this.currentPage = this.service.page = 1;
       this.getList(filter);
     },
     remove: function(model) {
-      var vm = this.controllerScope;
-      var confirmDelete = confirm(gettext('Confirm deletion?'));
+      let vm = this.controllerScope;
+      let confirmDelete = confirm(gettext('Confirm deletion?'));
       if (confirmDelete) {
         vm.removeInstance(model).then(function() {
           vm.afterInstanceRemove(model);
@@ -166,7 +166,7 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
     afterInstanceRemove: function(instance) {
       this.service.setPagesCount(this.service.resultCount - 1);
       this.service.clearAllCacheForCurrentEndpoint();
-      var index = this.list.indexOf(instance);
+      let index = this.list.indexOf(instance);
       if (index !== -1) {
         this.list.splice(index, 1);
       }
@@ -186,9 +186,9 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       this.enableRefresh = !open;
     },
     findIndexById: function(row) {
-      var index;
-      var list = this.controllerScope.list;
-      for (var i = 0; i < list.length; i++) {
+      let index;
+      let list = this.controllerScope.list;
+      for (let i = 0; i < list.length; i++) {
         if (list[i].uuid === row.uuid) {
           index = i;
         }

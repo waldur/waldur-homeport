@@ -10,7 +10,7 @@
 // @ngInject
 export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCache) {
   // pageSize, page, pages - default variables, you can change this in your init method or call this._super() in init
-  var BaseServiceClass = Class.extend({
+  let BaseServiceClass = Class.extend({
     ALL_CACHE_KEYS: 'ALL_CACHE_KEYS',
     pageSize:null,
     page:null,
@@ -32,7 +32,7 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
       this.pageChangingReset();
       this.cacheTime = 0;
 
-      var vm = this;
+      let vm = this;
       $rootScope.$on('logoutStart', function() {
         vm.clearAllCacheForCurrentEndpoint();
       });
@@ -43,7 +43,7 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
     },
 
     applyPostprocessors: function(items) {
-      var vm = this;
+      let vm = this;
       return items.map(function(item) {
         return vm.postprocessors.reduce(function(result, postprocessor) {
           return postprocessor(result);
@@ -52,15 +52,15 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
     },
 
     getList:function(filter, endpointUrl) {
-      var vm = this;
-      var deferred = $q.defer();
+      let vm = this;
+      let deferred = $q.defer();
       filter = angular.extend({}, this.defaultFilter, filter);
-      var queryList = function() {
+      let queryList = function() {
         filter.page = filter.page || vm.page;
         /*jshint camelcase: false */
         filter.page_size = vm.pageSize;
-        var cacheKey = (endpointUrl || vm.endpoint) + JSON.stringify(filter);
-        var cache = vm.getCache(cacheKey);
+        let cacheKey = (endpointUrl || vm.endpoint) + JSON.stringify(filter);
+        let cache = vm.getCache(cacheKey);
 
         if (!vm.cacheReset && vm.cacheTime > 0 && cache && cache.time > new Date().getTime()) {
           vm.setPagesCount(cache.count);
@@ -70,8 +70,8 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
           listCache.put(cacheKey, {data: null, time: 0});
           vm.getFactory(true, null, endpointUrl).query(filter, function(response, responseHeaders) {
             response = vm.applyPostprocessors(response);
-            var header = responseHeaders();
-            var resultCount = !header['x-result-count'] ? null : header['x-result-count'];
+            let header = responseHeaders();
+            let resultCount = !header['x-result-count'] ? null : header['x-result-count'];
             response.resultCount = resultCount;
             vm.setPagesCount(resultCount);
             if (vm.cacheTime > 0) {
@@ -88,27 +88,27 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
       return deferred.promise;
     },
     getAll: function(filter, endpointUrl) {
-      var vm = this;
-      var oldPageSize = vm.pageSize;
+      let vm = this;
+      let oldPageSize = vm.pageSize;
       vm.pageSize = 100;
       return vm.getList(filter, endpointUrl).then(function(response) {
         if (vm.pages > 1) {
-          var pages = {1: response};
-          var promises = [];
-          for (var page = 2; page < vm.pages + 1; page++) {
+          let pages = {1: response};
+          let promises = [];
+          for (let page = 2; page < vm.pages + 1; page++) {
             (function(page) {
-              var query = angular.extend({}, filter, {page: page});
-              var promise = vm.getList(query, endpointUrl).then(function(response) {
+              let query = angular.extend({}, filter, {page: page});
+              let promise = vm.getList(query, endpointUrl).then(function(response) {
                 pages[page] = response;
               });
               promises.push(promise);
             })(page);
           }
           return $q.all(promises).then(function() {
-            var result = [];
-            for (var i = 1; i < vm.pages + 1; i++) {
-              var page = pages[i];
-              for (var j = 0; j < page.length; j++) {
+            let result = [];
+            for (let i = 1; i < vm.pages + 1; i++) {
+              let page = pages[i];
+              for (let j = 0; j < page.length; j++) {
                 result.push(page[j]);
               }
             }
@@ -121,14 +121,14 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
       });
     },
     setCache: function(time, response, cacheKey, endpoint) {
-      var allCacheKeys = listCache.get(this.ALL_CACHE_KEYS) ? listCache.get(this.ALL_CACHE_KEYS) : {};
-      var keysForCurrentEndpoint = allCacheKeys[endpoint] ? allCacheKeys[endpoint] : [];
-      if (keysForCurrentEndpoint.indexOf(cacheKey) == -1) {
+      let allCacheKeys = listCache.get(this.ALL_CACHE_KEYS) ? listCache.get(this.ALL_CACHE_KEYS) : {};
+      let keysForCurrentEndpoint = allCacheKeys[endpoint] ? allCacheKeys[endpoint] : [];
+      if (keysForCurrentEndpoint.indexOf(cacheKey) === -1) {
         keysForCurrentEndpoint.push(cacheKey);
         allCacheKeys[endpoint] = keysForCurrentEndpoint;
         listCache.put(this.ALL_CACHE_KEYS, allCacheKeys);
       }
-      var cacheTime = new Date().getTime() + (time * 1000);
+      let cacheTime = new Date().getTime() + (time * 1000);
       listCache.put(cacheKey, {data: response, time: cacheTime, count: this.resultCount});
     },
     getCache: function(cacheKey) {
@@ -143,19 +143,19 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
       }
     },
     clearAllCacheForCurrentEndpoint: function() {
-      var allKeys = listCache.get(this.ALL_CACHE_KEYS);
+      let allKeys = listCache.get(this.ALL_CACHE_KEYS);
       if (!allKeys) {
         return;
       }
-      var currentKeys = allKeys[this.endpoint];
+      let currentKeys = allKeys[this.endpoint];
       if (currentKeys) {
-        for (var i = 0; i < currentKeys.length; i++) {
+        for (let i = 0; i < currentKeys.length; i++) {
           listCache.remove(currentKeys[i]);
         }
       }
     },
     $create:function(endpointUrl) {
-      var Instance = this.getFactory(false, null, endpointUrl);
+      let Instance = this.getFactory(false, null, endpointUrl);
       return new Instance();
     },
 
@@ -174,7 +174,7 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
     },
 
     operation: function(operation, url) {
-      var factory = this.getFactory(false, null, url);
+      let factory = this.getFactory(false, null, url);
       return factory.operation({ operation }).$promise;
     },
 
@@ -210,7 +210,7 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
     },
 
     $update: function(uuid, url, fields) {
-      var modelObject = JSON.parse(JSON.stringify(fields));
+      let modelObject = JSON.parse(JSON.stringify(fields));
       if (url) {
         delete modelObject.uuid;
       } else {
@@ -230,11 +230,11 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
 
     // helper, that adds functions to promise
     chainFunctionsToPromise:function(promise, functions) {
-      var deferred = $q.defer();
+      let deferred = $q.defer();
       promise.then(
         function(response) {
-          for (var i=0; i < functions.length; i++) {
-            var f = functions[i];
+          for (let i=0; i < functions.length; i++) {
+            let f = functions[i];
             f(response);
             deferred.resolve(response);
           }
@@ -246,7 +246,7 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
       return deferred.promise;
     },
     pageChangingReset: function() {
-      var vm = this;
+      let vm = this;
       $rootScope.$on('$stateChangeSuccess', function() {
         vm.setDefaultFilter();
         vm.page = 1;
@@ -256,10 +256,10 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
       this.defaultFilter = {};
     },
     getOption: function(endpointUrl) {
-      var deferred = $q.defer();
-      var cacheKey = [endpointUrl, 'OPTIONS'].join('');
-      var vm = this;
-      var cache = vm.getCache(cacheKey);
+      let deferred = $q.defer();
+      let cacheKey = [endpointUrl, 'OPTIONS'].join('');
+      let vm = this;
+      let cache = vm.getCache(cacheKey);
 
       if (cache && cache.time > new Date().getTime()) {
         deferred.resolve(cache.data);
@@ -273,7 +273,7 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
       return deferred.promise;
     },
     cleanOptionsCache: function(endpointUrl) {
-      var cacheKey = [endpointUrl, 'OPTIONS'].join('');
+      let cacheKey = [endpointUrl, 'OPTIONS'].join('');
       listCache.remove(cacheKey);
     },
     cleanAllCache: function() {

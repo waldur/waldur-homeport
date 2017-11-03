@@ -31,6 +31,10 @@ export default module => {
 // @ngInject
 function redirectToState($rootScope, $state) {
   $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+    if (error) {
+      // eslint-disable-next-line no-console
+      console.log('$stateChangeError', error);
+    }
     if (error && error.redirectTo) {
       $state.go(error.redirectTo);
     } else {

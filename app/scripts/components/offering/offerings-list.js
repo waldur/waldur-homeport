@@ -11,8 +11,8 @@ function ProjectOfferingsListController(
   $filter,
   offeringsService,
   currentStateService) {
-  var controllerScope = this;
-  var Controller = baseControllerListClass.extend({
+  let controllerScope = this;
+  let Controller = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.service = offeringsService;
@@ -34,7 +34,7 @@ function ProjectOfferingsListController(
         {
           title: gettext('Name'),
           render: function(row) {
-            var href = $state.href('offeringDetails', {uuid: row.uuid});
+            let href = $state.href('offeringDetails', {uuid: row.uuid});
             return '<a href="{href}">{name}</a>'
                    .replace('{href}', href)
                    .replace('{name}', row.name);
@@ -65,7 +65,7 @@ function ProjectOfferingsListController(
     },
     reInitResource:function(offering) {
       return this.service.$get(offering.uuid).then(response => {
-        var index = this.list.indexOf(offering);
+        let index = this.list.indexOf(offering);
         this.list[index] = response;
       });
     },

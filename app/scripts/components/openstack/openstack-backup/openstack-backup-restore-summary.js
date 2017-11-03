@@ -6,8 +6,8 @@ const openstackBackupRestoreSummary = {
     context: '<',
   },
   controller: class ComponentController {
+    // @ngInject
     constructor($scope, resourcesService) {
-      // @ngInject
       this.$scope = $scope;
       this.resourcesService = resourcesService;
       this.summaryModel = {};

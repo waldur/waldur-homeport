@@ -4,23 +4,23 @@ import { EVENT_ROUTES } from './constants';
 export default function BaseEventFormatter($state) {
   return Class.extend({
     format: function(event) {
-      var template = this.getTemplate(event);
+      let template = this.getTemplate(event);
       if (!template) {
         return event.message;
       }
-      var eventContext = this.getEventContext(event);
-      var fields = this.findFields(template);
-      var templateContext = this.getTemplateContext(eventContext, fields);
+      let eventContext = this.getEventContext(event);
+      let fields = this.findFields(template);
+      let templateContext = this.getTemplateContext(eventContext, fields);
       return this.renderTemplate(template, templateContext);
     },
     getTemplateContext: function(eventContext, fields) {
-      var entities = this.fieldsToEntities(eventContext, fields);
-      var templateContext = {};
+      let entities = this.fieldsToEntities(eventContext, fields);
+      let templateContext = {};
       // Fill hyperlinks for entities
       if (this.showLinks(eventContext)) {
         for (let field in entities) {
-          var entity = entities[field];
-          var url = this.formatUrl(entity, eventContext);
+          let entity = entities[field];
+          let url = this.formatUrl(entity, eventContext);
           if (url) {
             templateContext[field] = '<a href="' + url + '" class="name">' + eventContext[field] + '</a>';
           }
@@ -28,10 +28,10 @@ export default function BaseEventFormatter($state) {
       }
 
       // Fill other fields
-      for (var i = 0; i < fields.length; i++) {
+      for (let i = 0; i < fields.length; i++) {
         let field = fields[i];
         if (!templateContext[field]) {
-          if (eventContext[field] != undefined) {
+          if (eventContext[field] !== undefined) {
             templateContext[field] = eventContext[field];
           } else {
             templateContext[field] = '';
@@ -55,13 +55,13 @@ export default function BaseEventFormatter($state) {
     },
     /* eslint-enable no-unused-vars */
     formatUrl: function(entity, context) {
-      var route = EVENT_ROUTES[entity];
+      let route = EVENT_ROUTES[entity];
       if (!this.routeEnabled(route)) {
         return;
       }
-      var uuid = context[entity + '_uuid'];
-      var args = {uuid: uuid};
-      if (entity == 'service') {
+      let uuid = context[entity + '_uuid'];
+      let args = {uuid: uuid};
+      if (entity === 'service') {
         route = 'organization.providers';
         args = {
           uuid: context.customer_uuid,
@@ -69,15 +69,15 @@ export default function BaseEventFormatter($state) {
           providerType: context.service_type
         };
       }
-      if (entity == 'resource') {
+      if (entity === 'resource') {
         args.resource_type = context.resource_type;
       }
       return $state.href(route, args);
     },
     findAll: function(re, s) {
       // Find all matches of regular expression pattern in the string
-      var match;
-      var matches = [];
+      let match;
+      let matches = [];
       do {
         match = re.exec(s);
         if (match) {
@@ -101,18 +101,18 @@ export default function BaseEventFormatter($state) {
       // Example output:
       // {"affected_user_username": "affected_user", "project_name": "project"}
 
-      var entities = {};
-      for(var key in event) {
+      let entities = {};
+      for(let key in event) {
         if (/_uuid$/.test(key)) {
           let name = key.replace(/_uuid$/, '');
           entities[name] = true;
         }
       }
 
-      var table = {};
+      let table = {};
       for (let name in entities) {
-        for (var i = 0; i < fields.length; i++) {
-          var field = fields[i];
+        for (let i = 0; i < fields.length; i++) {
+          let field = fields[i];
           if ((field.lastIndexOf(name) === 0) && !table[field]) {
             table[field] = name;
           }
@@ -121,7 +121,7 @@ export default function BaseEventFormatter($state) {
       return table;
     },
     renderTemplate: function(template, params) {
-      for (var key in params) {
+      for (let key in params) {
         template = template.replace('{' + key + '}', params[key]);
       }
       return template;

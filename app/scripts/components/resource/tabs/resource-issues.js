@@ -4,8 +4,8 @@ export default {
     resource: '<'
   },
   controller: class ResourceIssuesController {
+    // @ngInject
     constructor($uibModal, $rootScope) {
-      // @ngInject
       this.$uibModal = $uibModal;
       this.$rootScope = $rootScope;
     }

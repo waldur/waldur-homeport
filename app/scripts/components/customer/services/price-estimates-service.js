@@ -1,5 +1,5 @@
-// @ngInject
 export default class PriceEstimatesService {
+  // @ngInject
   constructor($http, ENV) {
     this.$http = $http;
     this.endpoint = ENV.apiEndpoint + 'api/price-estimates/';

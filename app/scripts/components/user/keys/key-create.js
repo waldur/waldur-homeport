@@ -10,8 +10,8 @@ export default keyCreate;
 
 // @ngInject
 function KeyAddController(baseControllerAddClass, keysService, $state, $q) {
-  var controllerScope = this;
-  var Controller = baseControllerAddClass.extend({
+  let controllerScope = this;
+  let Controller = baseControllerAddClass.extend({
     init: function() {
       this.service = keysService;
       this.controllerScope = controllerScope;
@@ -26,7 +26,7 @@ function KeyAddController(baseControllerAddClass, keysService, $state, $q) {
         return this._super();
       } else {
         if (this.instance.public_key) {
-          var key = this.instance.public_key.split(' ');
+          let key = this.instance.public_key.split(' ');
           if (key[2]) {
             this.instance.name = key[2].trim();
             return this._super();

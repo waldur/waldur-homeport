@@ -6,13 +6,14 @@ const resourcePrivateCloudsList = {
 
 export default resourcePrivateCloudsList;
 
+// @ngInject
 function ProjectPrivateCloudsTabController($scope,
                                            $timeout,
                                            BaseProjectResourcesTabController,
                                            ENV,
                                            TableExtensionService) {
-  var controllerScope = this;
-  var ResourceController = BaseProjectResourcesTabController.extend({
+  let controllerScope = this;
+  let ResourceController = BaseProjectResourcesTabController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.category = ENV.PrivateClouds;
@@ -25,7 +26,7 @@ function ProjectPrivateCloudsTabController($scope,
       this.addRowFields(['extra_configuration']);
     },
     getTableOptions: function() {
-      var options = this._super();
+      let options = this._super();
       options.noDataText = gettext('You have no private clouds yet.');
       options.noMatchesText = gettext('No private clouds found matching filter.');
       return options;

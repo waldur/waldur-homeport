@@ -15,8 +15,8 @@ const workspaceButtonClasses = {
   support: 'btn-warning'
 };
 
-// @ngInject
 class SelectWorkspaceToggleController {
+  // @ngInject
   constructor(WorkspaceService, $scope, $rootScope, NavigationUtilsService) {
     this.WorkspaceService = WorkspaceService;
     this.$scope = $scope;
@@ -46,9 +46,9 @@ class SelectWorkspaceToggleController {
   }
 
   getTitle() {
-    if (this.customer && this.workspace == 'organization') {
+    if (this.customer && this.workspace === 'organization') {
       return this.customer.name;
-    } else if (this.project && this.workspace == 'project') {
+    } else if (this.project && this.workspace === 'project') {
       return this.customer.name + ' > ' + this.project.name;
     }
   }

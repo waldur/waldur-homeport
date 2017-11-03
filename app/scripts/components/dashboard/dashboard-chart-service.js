@@ -5,8 +5,8 @@ import {
   ORGANIZATION_DASHBOARD_QUOTAS
 } from './constants';
 
-// @ngInject
 export default class DashboardChartService {
+  // @ngInject
   constructor($q, invoicesService, quotasService, $filter, features, coreUtils) {
     this.$q = $q;
     this.invoicesService = invoicesService;
@@ -47,14 +47,14 @@ export default class DashboardChartService {
   getResourceHistoryCharts(charts, scope) {
     charts = charts.filter(chart => !chart.feature || this.features.isVisible(chart.feature));
 
-    var quotaMap = scope.quotas.reduce((map, quota) => {
+    let quotaMap = scope.quotas.reduce((map, quota) => {
       map[quota.name] = quota;
       return map;
     }, {});
 
-    var validCharts = charts.filter(chart => !!quotaMap[chart.quota]);
+    let validCharts = charts.filter(chart => !!quotaMap[chart.quota]);
 
-    var promises = validCharts.map(chart => {
+    let promises = validCharts.map(chart => {
       chart.quota = quotaMap[chart.quota];
       return this.getQuotaHistory(chart).then(data => {
         chart.current = data[data.length - 1].value;
@@ -154,11 +154,11 @@ export default class DashboardChartService {
   }
 
   padMissingValues(items, interval) {
-    var i = 1, end = moment();
+    let i = 1, end = moment();
     if (items.length > 0) {
       end = moment(items[items.length - 1].date);
     }
-    while(items.length != POINTS_COUNT) {
+    while(items.length !== POINTS_COUNT) {
       items.unshift({
         value: 0,
         date: new Date(end.subtract(i, interval).toDate())
@@ -172,9 +172,9 @@ export default class DashboardChartService {
       return null;
     }
     // Latest values come first
-    var last = items[0];
-    var prev = items[1];
-    var change = Math.round(100 * (last - prev) / prev);
+    let last = items[0];
+    let prev = items[1];
+    let change = Math.round(100 * (last - prev) / prev);
     return Math.min(100, Math.max(-100, change));
   }
 }

@@ -101,7 +101,11 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
           delete_volumes: {
             default_value: true
           }
-        }
+        },
+        onSuccess: function($injector) {
+          const openstackFloatingIpsService = $injector.get('openstackFloatingIpsService');
+          openstackFloatingIpsService.clearAllCacheForCurrentEndpoint();
+        },
       },
       backup: {
         tab: 'backups',

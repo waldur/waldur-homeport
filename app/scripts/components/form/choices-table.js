@@ -18,8 +18,8 @@ export default function choicesTable() {
   };
 }
 
-// @ngInject
 class TableController {
+  // @ngInject
   constructor($filter, $scope) {
     this.$filter = $filter;
     if (this.filterOptions) {

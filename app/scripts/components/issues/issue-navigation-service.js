@@ -36,8 +36,8 @@ const REPORT_ITEMS = [
 
 // This service checks users status and returns different sidebar items and router state
 export default class IssueNavigationService {
+  // @ngInject
   constructor($state, usersService, currentStateService) {
-    // @ngInject
     this.$state = $state;
     this.usersService = usersService;
     this.currentStateService = currentStateService;

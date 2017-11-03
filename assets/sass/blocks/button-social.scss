@@ -1,43 +1,43 @@
 @mixin btn-social($color) {
-    text-align: left;
-    color: white;
-    background-color: $color;
-    border-color: $color;
+  text-align: left;
+  color: white;
+  background-color: $color;
+  border-color: $color;
 
-    &:hover, &:focus, &:active, &:active:hover {
-        color: $color;
-        background-color: white;
-    }
+  &:hover, &:focus, &:active, &:active:hover {
+    color: $color;
+    background-color: white;
+  }
 }
 
 .btn-facebook {
-    @include btn-social(#2980b9);
+  @include btn-social(#2980b9);
 }
 
 .btn-google {
-    @include btn-social(#e74c3c);
+  @include btn-social(#e74c3c);
 }
 
 .btn-email {
-    @include btn-social(#62b651);
+  @include btn-social(#62b651);
 }
 
 .btn-eid {
-    @include btn-social(#9ecf5d);
+  @include btn-social(#9ecf5d);
 }
 
 .btn-mid {
-    @include btn-social(#6abb6a);
+  @include btn-social(#6abb6a);
 }
 
 .btn-saml2 {
-    @include btn-social(#42b3f1);
+  @include btn-social(#42b3f1);
 }
 
 .btn-saml2-edu {
-    @include btn-social(#F8AC59);
+  @include btn-social(#F8AC59);
 }
 
 .btn-smartid {
-    @include btn-social(#6E4CD3);
+  @include btn-social(#6E4CD3);
 }

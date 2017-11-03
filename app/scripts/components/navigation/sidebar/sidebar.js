@@ -1,7 +1,7 @@
 import template from './sidebar.html';
 
-// @ngInject
 class SidebarController {
+  // @ngInject
   constructor(ENV, $state, $scope) {
     this.shortPageTitle = ENV.shortPageTitle;
     this.sidebarLogo = ENV.sidebarLogo;
@@ -25,7 +25,7 @@ class SidebarController {
     if (!this.items) {
       return;
     }
-    var data = this.$state.$current.data;
+    let data = this.$state.$current.data;
     this.items.map(item => {
       if (data && data.sidebarState) {
         item.expanded = item.link === data.sidebarState;

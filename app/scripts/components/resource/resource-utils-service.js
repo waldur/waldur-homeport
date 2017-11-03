@@ -23,23 +23,23 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
       }
     },
     getSummary: function(resource) {
-      var parts = [];
+      let parts = [];
       if (resource.image_name) {
         parts.push(resource.image_name);
       }
-      var flavor = this.formatFlavor(resource);
+      let flavor = this.formatFlavor(resource);
       if (flavor) {
         parts.push(flavor);
       }
-      var summary = parts.join(', ');
+      let summary = parts.join(', ');
       return summary;
     },
     formatFlavor: function(resource) {
       return $filter('formatFlavor')(resource);
     },
     formatResourceType: function(resource) {
-      var parts = resource.resource_type.split('.');
-      var service = ncServiceUtils.getTypeDisplay(parts[0]);
+      let parts = resource.resource_type.split('.');
+      let service = ncServiceUtils.getTypeDisplay(parts[0]);
       return service + ' ' + parts[1];
     },
     getUptime: function(resource) {
@@ -48,7 +48,7 @@ export default function resourceUtils(ncUtils, ncServiceUtils, authService, $fil
       }
     },
     getIcon: function(item) {
-      var type = item.resource_type || item.type;
+      let type = item.resource_type || item.type;
       if (type) {
         return ncServiceUtils.getServiceIcon(type.split('.')[0]);
       }

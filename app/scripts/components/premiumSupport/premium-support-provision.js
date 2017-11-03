@@ -11,8 +11,8 @@ export default function premiumSupportProvision() {
   };
 }
 
-// @ngInject
 class PremiumSupportProvisionController {
+  // @ngInject
   constructor(
     premiumSupportPlansService,
     premiumSupportContractsService,

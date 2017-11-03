@@ -3,8 +3,8 @@ import template from './billing-tabs.html';
 const billingTabs = {
   template,
   controller: class BillingTabsController {
+    // @ngInject
     constructor(BreadcrumbsService, titleService, BillingUtils, ENV, features) {
-      // @ngInject
       this.BreadcrumbsService = BreadcrumbsService;
       this.titleService = titleService;
       this.utils = BillingUtils;

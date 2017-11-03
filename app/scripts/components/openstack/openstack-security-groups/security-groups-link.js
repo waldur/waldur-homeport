@@ -2,6 +2,7 @@ import template from './security-groups-link.html';
 
 // @ngInject
 class SecurityGroupsLinkController {
+  // @ngInject
   constructor($uibModal, $scope) {
     this.$uibModal = $uibModal;
     $scope.$watch('$ctrl.securityGroups', ((newGroups) => {

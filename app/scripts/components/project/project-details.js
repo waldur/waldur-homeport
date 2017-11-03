@@ -1,7 +1,7 @@
 import template from './project-details.html';
 
-// @ngInject
 class ProjectDetailsController {
+  // @ngInject
   constructor(projectsService,
               currentStateService,
               customersService,

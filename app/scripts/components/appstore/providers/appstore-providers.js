@@ -9,8 +9,8 @@ const appstoreProviders = {
     collapsible: '<',
   },
   controller: class AppstoreProvidersController {
+    // @ngInject
     constructor($uibModal) {
-      // @ngInject
       this.$uibModal = $uibModal;
     }
 

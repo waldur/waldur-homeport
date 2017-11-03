@@ -1,6 +1,6 @@
 // @ngInject
 export default function priceListItemsService(baseServiceClass, $http, ENV) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/merged-price-list-items/';

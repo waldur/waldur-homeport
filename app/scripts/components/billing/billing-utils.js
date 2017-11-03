@@ -52,10 +52,10 @@ export default class BillingUtils {
         iconClass: 'fa fa-envelope-o',
         callback: this.sendNotification.bind(this),
 
-        isDisabled: row => row.state != 'created',
+        isDisabled: row => row.state !== 'created',
 
         tooltip: function(row) {
-          if (row.state != 'created') {
+          if (row.state !== 'created') {
             return gettext('Notification only for the created invoice can be sent.');
           }
         }

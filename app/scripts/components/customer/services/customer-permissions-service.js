@@ -1,6 +1,6 @@
 // @ngInject
 export default function customerPermissionsService($q, baseServiceClass, ncUtils) {
-  var ServiceClass = baseServiceClass.extend({
+  let ServiceClass = baseServiceClass.extend({
     init:function() {
       this._super();
       this.endpoint = '/customer-permissions/';
@@ -13,14 +13,14 @@ export default function customerPermissionsService($q, baseServiceClass, ncUtils
     getPermissionKey: ncUtils.getUUID,
 
     userHasCustomerRole: function(username, role, customerUUID) {
-      var deferred = $q.defer(),
+      let deferred = $q.defer(),
         filter = {username: username};
       if (customerUUID) {
         filter.customer = customerUUID;
       }
 
       this.getList(filter).then(function(permissions) {
-        for (var i = 0; i < permissions.length; i++) {
+        for (let i = 0; i < permissions.length; i++) {
           if (permissions[i].role === role) {
             deferred.resolve(true);
           }

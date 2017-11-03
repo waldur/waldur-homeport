@@ -17,11 +17,11 @@ function updateSidebar() {
 
 // Full height of sidebar
 function fix_height() {
-  var heightWithoutNavbar = $('body > #wrapper').height() - 61;
+  let heightWithoutNavbar = $('body > #wrapper').height() - 61;
   $('.sidebard-panel').css('min-height', heightWithoutNavbar + 'px');
 
-  var navbarHeight = $('nav.navbar-default').height();
-  var wrapperHeight = $('#page-wrapper').height();
+  let navbarHeight = $('nav.navbar-default').height();
+  let wrapperHeight = $('#page-wrapper').height();
 
   if(navbarHeight > wrapperHeight){
     $('#page-wrapper').css('min-height', navbarHeight + 'px');

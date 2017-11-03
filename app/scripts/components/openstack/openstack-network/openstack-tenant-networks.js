@@ -10,14 +10,14 @@ const openstackTenantNetworks = {
 // @ngInject
 function TenantNetworksController(
   baseResourceListController, openstackNetworksService, actionUtilsService) {
-  var controllerScope = this;
-  var controllerClass = baseResourceListController.extend({
+  let controllerScope = this;
+  let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this.listActions = null;
-      var list_type = 'networks';
-      var fn = this._super.bind(this);
-      var vm = this;
+      let list_type = 'networks';
+      let fn = this._super.bind(this);
+      let vm = this;
 
       actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
         vm.listActions = result;
@@ -27,8 +27,8 @@ function TenantNetworksController(
       });
     },
     getTableOptions: function() {
-      var options = this._super();
-      var vm = this;
+      let options = this._super();
+      let vm = this;
       options.noDataText = gettext('No networks yet.');
       options.noMatchesText = gettext('No networks found matching filter.');
       options.columns = [
