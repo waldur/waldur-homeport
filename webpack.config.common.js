@@ -147,16 +147,6 @@ module.exports = {
       {from: path.resolve(imagesPath, './favicon.ico'), to: './images/favicon.ico', toType: 'file'},
       {from: './app/manifest.json', to: '../manifest.json', toType: 'file'},
     ]),
-    new HtmlWebpackPlugin({
-      template: './app/index-template.html',
-      filename: path.resolve(__dirname, './app/index.html'),
-      inject: 'body',
-      chunks: ['vendor', 'index'],
-      alwaysWriteToDisk: true,
-      chunksSortMode: function(a, b) {
-        return (a.names[0] < b.names[0]) ? 1 : -1;
-      }
-    }),
   ],
   stats: {
     children: false,
