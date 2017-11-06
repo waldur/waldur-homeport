@@ -3,6 +3,7 @@ var webpack = require('webpack');
 const merge = require('webpack-merge');
 var path = require('path');
 
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var OfflinePlugin = require('offline-plugin');
 
@@ -13,6 +14,16 @@ module.exports = merge(baseConfig, {
     filename: 'js/[name]-bundle.[chunkhash].js'
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: './app/index-template.html',
+      filename: path.resolve(__dirname, './dist/index.html'),
+      inject: 'body',
+      chunks: ['vendor', 'index'],
+      alwaysWriteToDisk: true,
+      chunksSortMode: function(a, b) {
+        return (a.names[0] < b.names[0]) ? 1 : -1;
+      }
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
