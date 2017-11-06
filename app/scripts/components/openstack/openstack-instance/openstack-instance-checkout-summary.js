@@ -1,6 +1,5 @@
 import template from './openstack-instance-checkout-summary.html';
 
-// @ngInject
 class SummaryController {
   // @ngInject
   constructor(OpenStackSummaryService, currentStateService, coreUtils, $q, $scope) {
@@ -31,6 +30,7 @@ class SummaryController {
         this.components = result.components;
         this.usages = result.usages;
         this.limits = result.limits;
+        this.limitsType = result.limitsType;
       });
   }
 
@@ -47,21 +47,24 @@ class SummaryController {
   updateQuotas() {
     this.quotas = [
       {
-        name: 'ram',
-        usage: this.usages.ram,
-        limit: this.limits.ram,
-        required: this.model.flavor ? this.model.flavor.ram : 0
-      },
-      {
         name: 'vcpu',
         usage: this.usages.cores,
         limit: this.limits.cores,
+        limitType: this.limitsType.cores,
         required: this.model.flavor ? this.model.flavor.cores : 0
+      },
+      {
+        name: 'ram',
+        usage: this.usages.ram,
+        limit: this.limits.ram,
+        limitType: this.limitsType.ram,
+        required: this.model.flavor ? this.model.flavor.ram : 0
       },
       {
         name: 'storage',
         usage: this.usages.disk,
         limit: this.limits.disk,
+        limitType: this.limitsType.disk,
         required: this.getTotalStorage() || 0
       },
       {
