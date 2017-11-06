@@ -1,4 +1,5 @@
 import { parsePrices, parseQuotas, parseQuotasUsage } from './utils';
+import {QUOTA_PACKAGE_TYPE, QUOTA_SPL_TYPE, QUOTA_NAMES_MAPPING} from './../quotas/constants';
 
 export default class OpenStackSummaryService {
   // @ngInject
@@ -43,21 +44,24 @@ export default class OpenStackSummaryService {
   }
 
   aggregateQuotasFromSPL(service, components) {
-    let quotaNamesMapping = {
-      vcpu: 'cores',
-      storage: 'disk',
-      ram: 'ram',
-    };
+    components.limitsType = {};
 
     return this.$http.get(service.service_project_link_url).then((response) => {
       angular.forEach(response.data.quotas, (quota) => {
-        let componentQuotaName = quotaNamesMapping[quota.name];
+        let componentQuotaName = QUOTA_NAMES_MAPPING[quota.name];
         if (quota.limit !== -1) {
-          components.limits[componentQuotaName] = Math.min(quota.limit, components.limits[componentQuotaName]);
+          if (quota.limit < components.limits[componentQuotaName]) {
+            components.limits[componentQuotaName] = quota.limit;
+            components.limitsType[componentQuotaName] = QUOTA_SPL_TYPE;
+          } else {
+            components.limits[componentQuotaName] = components.limits[componentQuotaName];
+            components.limitsType[componentQuotaName] = QUOTA_PACKAGE_TYPE;
+          }
+        } else {
+          components.limitsType[componentQuotaName] = QUOTA_PACKAGE_TYPE;
         }
         components.usages[componentQuotaName] = Math.max(quota.usage, components.usages[componentQuotaName]);
       });
-
       return components;
     });
   }

@@ -460,6 +460,10 @@ msgstr ""
 msgid "Auto-assign floating IP"
 msgstr ""
 
+#: app/scripts/components/quotas/quota-usage-bar-chart.js
+msgid "Available quota usage: {usage}"
+msgstr ""
+
 #: app/scripts/components/navigation/header/site-header.html
 msgid "Back"
 msgstr ""
@@ -1658,7 +1662,7 @@ msgstr ""
 msgid "Floating IP"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Floating IP count"
 msgstr ""
 
@@ -1985,7 +1989,7 @@ msgstr ""
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Instances count"
 msgstr ""
 
@@ -2425,7 +2429,7 @@ msgstr ""
 msgid "Monthly base price"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Monthly cost"
 msgstr ""
 
@@ -3126,6 +3130,10 @@ msgstr ""
 msgid "Package"
 msgstr ""
 
+#: app/scripts/components/quotas/constants.js
+msgid "Package amount"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js
 msgid "Package could not be assigned."
 msgstr ""
@@ -3568,6 +3576,10 @@ msgstr ""
 msgid "Project providers links have been updated."
 msgstr ""
 
+#: app/scripts/components/quotas/constants.js
+msgid "Project service"
+msgstr ""
+
 #: app/scripts/components/ansible/details/ansible-job-details.js
 #: app/scripts/components/appstore/appstore-store.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
@@ -3738,7 +3750,6 @@ msgid "Quota usage"
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-project-link-quota.html
-#: app/scripts/components/quotas/quota-usage-bar-chart.html
 msgid "Quota usage exceeds limit."
 msgstr ""
 
@@ -3757,7 +3768,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 #: app/scripts/components/slurm/details/slurm-allocation-summary.html
 #: app/scripts/components/slurm/slurm-allocation-list.js
@@ -4544,7 +4555,7 @@ msgstr ""
 msgid "Snapshots"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Snapshots count"
 msgstr ""
 
@@ -4631,7 +4642,7 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/project/routes.js
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Storage"
 msgstr ""
@@ -5447,7 +5458,7 @@ msgstr ""
 msgid "Virtual machines"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Virtual machines count"
 msgstr ""
 
@@ -5472,7 +5483,7 @@ msgstr ""
 msgid "Volumes"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Volumes count"
 msgstr ""
 
@@ -5758,7 +5769,7 @@ msgstr ""
 msgid "vCPU"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "vCPU count"
 msgstr ""
 
@@ -5844,6 +5855,10 @@ msgstr ""
 
 #: app/scripts/components/events/constants.js
 msgid "{resource_full_name} stop has failed."
+msgstr ""
+
+#: app/scripts/components/quotas/quota-usage-bar-chart.js
+msgid "{type} quota usage exceeds available limit."
 msgstr ""
 
 #: app/scripts/components/slurm/slurm-allocation-list.js

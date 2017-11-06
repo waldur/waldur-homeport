@@ -34,6 +34,19 @@ const quotaUsageBarChart = {
         usage: this.$filter('quotaValue')(quota.required, quota.name),
       });
     }
+
+    getAvailable(quota) {
+      let availableQuota = quota.limit - quota.usage;
+      return this.coreUtils.templateFormatter(gettext('Available quota usage: {usage}'), {
+        usage: this.$filter('quotaValue')(availableQuota, quota.name),
+      });
+    }
+
+    getExceeds(quota) {
+      return this.coreUtils.templateFormatter(gettext('{type} quota usage exceeds available limit.'), {
+        type: this.$filter('quotaType')(quota.limitType)
+      });
+    }
   }
 };
 
