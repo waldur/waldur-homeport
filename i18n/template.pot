@@ -680,7 +680,6 @@ msgstr ""
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/digitalocean/droplet-resize.html
-#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/events/event-types-dialog.html
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/details/expert-bid-dialog.html
@@ -1069,8 +1068,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 #: app/scripts/components/resource/summary/resource-summary-base.html
 #: app/scripts/components/slurm/slurm-allocation-list.js
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 msgid "Created"
 msgstr ""
 
@@ -1562,8 +1559,6 @@ msgid "Experts"
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 msgid "Expiration time"
 msgstr ""
 
@@ -2693,11 +2688,6 @@ msgstr ""
 msgid "No payments yet"
 msgstr ""
 
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
-msgid "No permissions found matching filter."
-msgstr ""
-
 #: app/scripts/components/project/projects-list.js
 msgid "No plan"
 msgstr ""
@@ -2902,6 +2892,7 @@ msgid "Notifications"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/experts/requests/details/expert-request-details-dialog.html
 #: app/scripts/components/project/project-dialog.html
 #: app/scripts/components/providers/details/dialog.html
@@ -4149,8 +4140,6 @@ msgstr ""
 #: app/scripts/components/invitations/invitations-list.js
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 #: app/scripts/components/user/user-projects.js
 msgid "Role"
 msgstr ""
@@ -5275,8 +5264,6 @@ msgstr ""
 #: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 msgid "User"
 msgstr ""
 
@@ -5293,11 +5280,6 @@ msgstr ""
 
 #: app/scripts/components/user/user-popover.html
 msgid "User details"
-msgstr ""
-
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
-msgid "User email"
 msgstr ""
 
 #: app/scripts/components/user/user-sidebar.html
@@ -5354,6 +5336,38 @@ msgstr ""
 
 #: app/scripts/components/events/constants.js
 msgid "User {caller_full_name} has created request for experts under {customer_name} / {project_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted organization owner role in {customer_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted organization support role in {customer_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted project administrator role in project {project_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted project manager role in project {project_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked organization owner {affected_user_username} from {customer_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked organization support {affected_user_username} from {customer_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked project administrator {affected_user_username} from project {project_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked project manager {affected_user_username} from project {project_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js
@@ -5586,11 +5600,6 @@ msgstr ""
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "You have no invoices yet."
-msgstr ""
-
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
-msgid "You have no permissions yet."
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-private-clouds-list.js

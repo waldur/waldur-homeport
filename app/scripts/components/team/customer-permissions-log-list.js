@@ -1,66 +1,35 @@
 const customerPermissionsLogList = {
   templateUrl: 'views/partials/filtered-list.html',
-  controller: customerPermissionsLogListController,
+  controller: CustomerPermissionsLogListController,
   controllerAs: 'ListController'
 };
 
 // @ngInject
-function customerPermissionsLogListController(
-  baseControllerListClass, customerPermissionsLogService, currentStateService, $filter) {
+function CustomerPermissionsLogListController(
+  baseEventListController, currentStateService) {
   let controllerScope = this;
-  let controllerClass = baseControllerListClass.extend({
+  let EventController = baseEventListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this.service = customerPermissionsLogService;
-      this.currentCustomerUuid = currentStateService.getCustomerUuid();
-      this.tableOptions = {
-        searchFieldName: 'username',
-        noDataText: gettext('You have no permissions yet.'),
-        noMatchesText: gettext('No permissions found matching filter.'),
-        enableOrdering: true,
-        columns: [
-          {
-            title: gettext('User'),
-            className: 'all',
-            orderField: 'full_name',
-            render: row => row.user_full_name || row.user_username
-          },
-          {
-            title: gettext('User email'),
-            className: 'desktop',
-            orderField: 'email',
-            render: row => row.user_email
-          },
-          {
-            title: gettext('Role'),
-            className: 'min-tablet-l',
-            orderField: 'role',
-            render: row => $filter('translate')(row.role)
-          },
-          {
-            title: gettext('Created'),
-            className: 'min-tablet-l',
-            orderField: 'created',
-            render: row => $filter('dateTime')(row.created)
-          },
-          {
-            title: gettext('Expiration time'),
-            className: 'min-tablet-l',
-            orderField: 'expiration_time',
-            render: row => $filter('dateTime')(row.expiration_time)
-          }
-        ],
-      };
-      this._super();
+      const fn = this._super.bind(this);
+      currentStateService.getCustomer().then(customer => {
+        this.customer = customer;
+        fn();
+      });
     },
     getFilter: function() {
       return {
-        customer: this.currentCustomerUuid
+        scope: this.customer.url,
+        event_type: [
+          'role_granted',
+          'role_revoked',
+          'role_updated',
+        ]
       };
-    },
+    }
   });
 
-  controllerScope.__proto__ = new controllerClass();
+  controllerScope.__proto__ = new EventController();
 }
 
 export default customerPermissionsLogList;
