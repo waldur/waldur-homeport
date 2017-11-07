@@ -680,7 +680,6 @@ msgstr ""
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/digitalocean/droplet-resize.html
-#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/events/event-types-dialog.html
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/details/expert-bid-dialog.html
@@ -2893,6 +2892,7 @@ msgid "Notifications"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/experts/requests/details/expert-request-details-dialog.html
 #: app/scripts/components/project/project-dialog.html
 #: app/scripts/components/providers/details/dialog.html
@@ -5336,6 +5336,38 @@ msgstr ""
 
 #: app/scripts/components/events/constants.js
 msgid "User {caller_full_name} has created request for experts under {customer_name} / {project_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted organization owner role in {customer_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted organization support role in {customer_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted project administrator role in project {project_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted project manager role in project {project_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked organization owner {affected_user_username} from {customer_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked organization support {affected_user_username} from {customer_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked project administrator {affected_user_username} from project {project_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked project manager {affected_user_username} from project {project_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js
