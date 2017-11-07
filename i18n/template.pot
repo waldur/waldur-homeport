@@ -1069,8 +1069,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 #: app/scripts/components/resource/summary/resource-summary-base.html
 #: app/scripts/components/slurm/slurm-allocation-list.js
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 msgid "Created"
 msgstr ""
 
@@ -1562,8 +1560,6 @@ msgid "Experts"
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 msgid "Expiration time"
 msgstr ""
 
@@ -2691,11 +2687,6 @@ msgstr ""
 
 #: app/scripts/components/payments/payment-list.js
 msgid "No payments yet"
-msgstr ""
-
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
-msgid "No permissions found matching filter."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js
@@ -4149,8 +4140,6 @@ msgstr ""
 #: app/scripts/components/invitations/invitations-list.js
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 #: app/scripts/components/user/user-projects.js
 msgid "Role"
 msgstr ""
@@ -5275,8 +5264,6 @@ msgstr ""
 #: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 msgid "User"
 msgstr ""
 
@@ -5293,11 +5280,6 @@ msgstr ""
 
 #: app/scripts/components/user/user-popover.html
 msgid "User details"
-msgstr ""
-
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
-msgid "User email"
 msgstr ""
 
 #: app/scripts/components/user/user-sidebar.html
@@ -5586,11 +5568,6 @@ msgstr ""
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "You have no invoices yet."
-msgstr ""
-
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
-msgid "You have no permissions yet."
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-private-clouds-list.js
