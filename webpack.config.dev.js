@@ -3,8 +3,10 @@ var webpack = require('webpack');
 const merge = require('webpack-merge');
 var path = require('path');
 
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CleanUpStatsPlugin = require('./webpack-cleanup-stats');
+var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 module.exports = merge(baseConfig, {
   output: {
@@ -12,6 +14,16 @@ module.exports = merge(baseConfig, {
     filename: 'static/js/[name]-bundle.js'
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: './app/index-template.html',
+      filename: path.resolve(__dirname, './app/index.html'),
+      inject: 'body',
+      chunks: ['vendor', 'index'],
+      alwaysWriteToDisk: true,
+      chunksSortMode: function(a, b) {
+        return (a.names[0] < b.names[0]) ? 1 : -1;
+      }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin([
       {from: './app/scripts/configs/config.json', to: './scripts/configs/config.json', toType: 'file'},
@@ -21,6 +33,9 @@ module.exports = merge(baseConfig, {
       failOnError: false,
     }),
     new CleanUpStatsPlugin(),
+    new HtmlWebpackHarddiskPlugin({
+      outputPath: path.resolve(__dirname, './app'),
+    }),
   ],
   watch: true,
   devServer: {

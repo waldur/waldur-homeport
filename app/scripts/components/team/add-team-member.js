@@ -36,8 +36,8 @@ const addTeamMember = {
         expiration_time: null
       };
 
-      this.canChangeRole = this.resolve.currentUser.is_staff ||
-        this.resolve.editUser.uuid !== this.resolve.currentUser.uuid;
+      this.canChangeRole = this.customersService.checkCustomerUser(
+        this.resolve.currentCustomer, this.resolve.currentUser);
 
       this.canManageOwner = this.resolve.currentUser.is_staff ||
         (this.customersService.isOwner(this.resolve.currentCustomer, this.resolve.editUser) &&

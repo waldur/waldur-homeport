@@ -1,7 +1,7 @@
 import { EVENT_ROUTES } from './constants';
 
 // @ngInject
-export default function BaseEventFormatter($state) {
+export default function BaseEventFormatter($state, coreUtils) {
   return Class.extend({
     format: function(event) {
       let template = this.getTemplate(event);
@@ -11,7 +11,7 @@ export default function BaseEventFormatter($state) {
       let eventContext = this.getEventContext(event);
       let fields = this.findFields(template);
       let templateContext = this.getTemplateContext(eventContext, fields);
-      return this.renderTemplate(template, templateContext);
+      return coreUtils.templateFormatter(template, templateContext);
     },
     getTemplateContext: function(eventContext, fields) {
       let entities = this.fieldsToEntities(eventContext, fields);
@@ -120,11 +120,5 @@ export default function BaseEventFormatter($state) {
       }
       return table;
     },
-    renderTemplate: function(template, params) {
-      for (let key in params) {
-        template = template.replace('{' + key + '}', params[key]);
-      }
-      return template;
-    }
   });
 }

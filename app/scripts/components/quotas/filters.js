@@ -1,19 +1,10 @@
+import {QUOTA_NAMES, QUOTA_FILTERS, QUOTA_TYPES} from './constants';
+
 // @ngInject
 export function quotaName($filter) {
-  let names = {
-    floating_ip_count: gettext('Floating IP count'),
-    vcpu: gettext('vCPU count'),
-    ram: gettext('RAM'),
-    storage: gettext('Storage'),
-    vm_count: gettext('Virtual machines count'),
-    instances: gettext('Instances count'),
-    volumes: gettext('Volumes count'),
-    snapshots: gettext('Snapshots count'),
-    cost: gettext('Monthly cost'),
-  };
   return function(name) {
-    if (names[name]) {
-      return names[name];
+    if (QUOTA_NAMES[name]) {
+      return QUOTA_NAMES[name];
     }
     name = name.replace(/_/g, ' ');
     return $filter('titleCase')(name);
@@ -22,23 +13,26 @@ export function quotaName($filter) {
 
 // @ngInject
 export function quotaValue($filter) {
-  let filters = {
-    ram: 'filesize',
-    storage: 'filesize',
-    volumes_size: 'filesize',
-    snapshots_size: 'filesize',
-    backup_storage: 'filesize',
-    cost: 'defaultCurrency',
-  };
   return function(value, name) {
     if (value === -1) {
       return '∞';
     }
-    let filter = filters[name];
+    let filter = QUOTA_FILTERS[name];
     if (filter) {
       return $filter(filter)(value);
     } else {
       return value;
+    }
+  };
+}
+
+// @ngInject
+export function quotaType($filter) {
+  return function (type) {
+    if (QUOTA_TYPES[type]) {
+      return QUOTA_TYPES[type];
+    } else {
+      return $filter('titleCase')(type);
     }
   };
 }

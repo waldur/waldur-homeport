@@ -10,7 +10,7 @@
       </span>
       <span
         ng-switch-when="html_text"
-        ng-bind="$ctrl.model[field] | trustAsHtml">
+        ng-bind-html="$ctrl.model[field]">
       </span>
       <span
         ng-switch-default

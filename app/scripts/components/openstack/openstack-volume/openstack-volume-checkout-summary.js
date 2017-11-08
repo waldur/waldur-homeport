@@ -30,6 +30,7 @@ class SummaryController {
         this.components = result.components;
         this.usages = result.usages;
         this.limits = result.limits;
+        this.limitsType = result.limitsType;
       });
   }
 
@@ -49,6 +50,7 @@ class SummaryController {
         name: 'storage',
         usage: this.usages.disk,
         limit: this.limits.disk,
+        limitType: this.limitsType.disk,
         required: this.model.size || 0
       },
       {

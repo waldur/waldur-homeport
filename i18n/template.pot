@@ -460,6 +460,10 @@ msgstr ""
 msgid "Auto-assign floating IP"
 msgstr ""
 
+#: app/scripts/components/quotas/quota-usage-bar-chart.js
+msgid "Available quota usage: {usage}"
+msgstr ""
+
 #: app/scripts/components/navigation/header/site-header.html
 msgid "Back"
 msgstr ""
@@ -676,7 +680,6 @@ msgstr ""
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/digitalocean/droplet-resize.html
-#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/events/event-types-dialog.html
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/details/expert-bid-dialog.html
@@ -1065,8 +1068,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 #: app/scripts/components/resource/summary/resource-summary-base.html
 #: app/scripts/components/slurm/slurm-allocation-list.js
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 msgid "Created"
 msgstr ""
 
@@ -1558,8 +1559,6 @@ msgid "Experts"
 msgstr ""
 
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 msgid "Expiration time"
 msgstr ""
 
@@ -1658,7 +1657,7 @@ msgstr ""
 msgid "Floating IP"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Floating IP count"
 msgstr ""
 
@@ -1985,7 +1984,7 @@ msgstr ""
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Instances count"
 msgstr ""
 
@@ -2425,7 +2424,7 @@ msgstr ""
 msgid "Monthly base price"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Monthly cost"
 msgstr ""
 
@@ -2689,11 +2688,6 @@ msgstr ""
 msgid "No payments yet"
 msgstr ""
 
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
-msgid "No permissions found matching filter."
-msgstr ""
-
 #: app/scripts/components/project/projects-list.js
 msgid "No plan"
 msgstr ""
@@ -2898,6 +2892,7 @@ msgid "Notifications"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/experts/requests/details/expert-request-details-dialog.html
 #: app/scripts/components/project/project-dialog.html
 #: app/scripts/components/providers/details/dialog.html
@@ -3124,6 +3119,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html
 msgid "Package"
+msgstr ""
+
+#: app/scripts/components/quotas/constants.js
+msgid "Package amount"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js
@@ -3568,6 +3567,10 @@ msgstr ""
 msgid "Project providers links have been updated."
 msgstr ""
 
+#: app/scripts/components/quotas/constants.js
+msgid "Project service"
+msgstr ""
+
 #: app/scripts/components/ansible/details/ansible-job-details.js
 #: app/scripts/components/appstore/appstore-store.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
@@ -3738,7 +3741,6 @@ msgid "Quota usage"
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-project-link-quota.html
-#: app/scripts/components/quotas/quota-usage-bar-chart.html
 msgid "Quota usage exceeds limit."
 msgstr ""
 
@@ -3757,7 +3759,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 #: app/scripts/components/slurm/details/slurm-allocation-summary.html
 #: app/scripts/components/slurm/slurm-allocation-list.js
@@ -4138,8 +4140,6 @@ msgstr ""
 #: app/scripts/components/invitations/invitations-list.js
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 #: app/scripts/components/user/user-projects.js
 msgid "Role"
 msgstr ""
@@ -4544,7 +4544,7 @@ msgstr ""
 msgid "Snapshots"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Snapshots count"
 msgstr ""
 
@@ -4631,7 +4631,7 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/project/routes.js
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Storage"
 msgstr ""
@@ -5264,8 +5264,6 @@ msgstr ""
 #: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
 msgid "User"
 msgstr ""
 
@@ -5282,11 +5280,6 @@ msgstr ""
 
 #: app/scripts/components/user/user-popover.html
 msgid "User details"
-msgstr ""
-
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
-msgid "User email"
 msgstr ""
 
 #: app/scripts/components/user/user-sidebar.html
@@ -5343,6 +5336,38 @@ msgstr ""
 
 #: app/scripts/components/events/constants.js
 msgid "User {caller_full_name} has created request for experts under {customer_name} / {project_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted organization owner role in {customer_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted organization support role in {customer_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted project administrator role in project {project_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has granted project manager role in project {project_name} to {affected_user_username}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked organization owner {affected_user_username} from {customer_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked organization support {affected_user_username} from {customer_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked project administrator {affected_user_username} from project {project_name}."
+msgstr ""
+
+#: app/scripts/components/events/event-formatter.js
+msgid "User {user_username} has revoked project manager {affected_user_username} from project {project_name}."
 msgstr ""
 
 #: app/scripts/components/events/constants.js
@@ -5447,7 +5472,7 @@ msgstr ""
 msgid "Virtual machines"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Virtual machines count"
 msgstr ""
 
@@ -5472,7 +5497,7 @@ msgstr ""
 msgid "Volumes"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "Volumes count"
 msgstr ""
 
@@ -5575,11 +5600,6 @@ msgstr ""
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "You have no invoices yet."
-msgstr ""
-
-#: app/scripts/components/team/customer-permissions-log-list.js
-#: app/scripts/components/team/project-permissions-log-list.js
-msgid "You have no permissions yet."
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-private-clouds-list.js
@@ -5758,7 +5778,7 @@ msgstr ""
 msgid "vCPU"
 msgstr ""
 
-#: app/scripts/components/quotas/filters.js
+#: app/scripts/components/quotas/constants.js
 msgid "vCPU count"
 msgstr ""
 
@@ -5844,6 +5864,10 @@ msgstr ""
 
 #: app/scripts/components/events/constants.js
 msgid "{resource_full_name} stop has failed."
+msgstr ""
+
+#: app/scripts/components/quotas/quota-usage-bar-chart.js
+msgid "{type} quota usage exceeds available limit."
 msgstr ""
 
 #: app/scripts/components/slurm/slurm-allocation-list.js
