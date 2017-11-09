@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 
-import $ from 'jquery';
+import 'expose-loader?$!expose-loader?jQuery!jquery';
 import angular from 'angular';
 import moment from 'moment';
 window.moment = moment;

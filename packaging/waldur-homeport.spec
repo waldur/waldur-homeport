@@ -50,7 +50,7 @@ mkdir -p %{buildroot}%{__conf_dir}
 cp packaging%{__conf_dir}/config.json %{buildroot}%{__conf_dir}
 cp packaging%{__conf_dir}/nginx.conf %{buildroot}%{__conf_dir}
 
-cp -r dist %{buildroot}%{__data_dir}
+cp -r build %{buildroot}%{__data_dir}
 
 %clean
 rm -rf %{buildroot}
