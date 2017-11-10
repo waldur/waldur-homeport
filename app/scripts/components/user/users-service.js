@@ -18,7 +18,7 @@ export default function usersService(baseServiceClass, $q, ENV, $rootScope) {
         return $q.when(this.currentUser);
       }
       return this.getList({current:''}).then(response => {
-        this.currentUser = response[0];
+        this.setCurrentUser(response[0]);
         return this.currentUser;
       });
     },

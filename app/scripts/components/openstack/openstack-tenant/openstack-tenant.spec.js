@@ -5,6 +5,7 @@ import coreModule from '../../core/module';
 describe('OpenStack Tenant Provision Form', function() {
 
   function initModule(module) {
+    module.service('$uibModal', function(){});
     module.service('AppstoreResourceLoader', AppstoreResourceLoader);
     module.constant('ENV', {
       apiEndpoint: 'https://example.com/'

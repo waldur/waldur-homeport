@@ -21,7 +21,10 @@ module.exports = {
     chunkFilename: 'scripts/[name].js?[chunkhash]',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '@waldur': path.resolve('./app/scripts/components/')
+    }
   },
   devtool: 'source-map',
   module: {
@@ -34,6 +37,15 @@ module.exports = {
             loader: 'babel-loader',
           },
         ],
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader'
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader'
       },
       {
         test: /\.html$/,
@@ -142,9 +154,12 @@ module.exports = {
           'app/scripts/components/**/*.html',
           'app/scripts/**/*.js',
           'app/scripts/**/*.jsx',
+          'app/scripts/**/*.ts',
+          'app/scripts/**/*.tsx',
         ],
         destination: path.resolve('./i18n/template.pot'),
-        lineNumbers: false
+        lineNumbers: false,
+        markerNames: ['gettext', 'translate']
       }
     }),
   ],

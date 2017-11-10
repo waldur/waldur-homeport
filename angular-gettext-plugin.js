@@ -7,7 +7,7 @@ const Extractor = require('./angular-gettext-extractor');
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
-var shell = require('shelljs');
+const shell = require('shelljs');
 
 function AngularGetTextPlugin(options) {
   this.compileTranslations = options.compileTranslations;
@@ -24,7 +24,7 @@ function compile(options) {
     format: options.format
   });
 
-  const filePaths = glob.sync(options.input)
+  const filePaths = glob.sync(options.input);
   const outputs = filePaths.map( (filePath) => {
     const content = fs.readFileSync(filePath, options.encoding || 'utf-8');
     const fullFileName = path.basename(filePath);
@@ -58,16 +58,16 @@ AngularGetTextPlugin.prototype.apply = function(compiler) {
     }
 
     if (options.extractStrings) {
-      var extractor = new Extractor(options.extractStrings);
+      const extractor = new Extractor(options.extractStrings);
 
       options.extractStrings.patterns.forEach(pattern => {
         const filePaths = glob.sync(pattern);
         filePaths.forEach( (fileName) => {
-            var content = fs.readFileSync(fileName, 'utf8');
-            extractor.parse(fileName, content);
+          const content = fs.readFileSync(fileName, 'utf8');
+          extractor.parse(fileName, content);
         });
       });
-      fs.writeFileSync(options.extractStrings.destination, extractor.toString())
+      fs.writeFileSync(options.extractStrings.destination, extractor.toString());
     }
 
     done();

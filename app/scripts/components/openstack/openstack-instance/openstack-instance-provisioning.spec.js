@@ -23,6 +23,7 @@ describe('OpenStack Instance Store', function() {
   const CATEGORY_KEY = 'vms';
 
   function initModule(module) {
+    module.service('$uibModal', function(){});
     module.service('AppStoreUtilsService', function(){});
     module.service('BreadcrumbsService', function(){});
     module.service('baseControllerClass', baseControllerClass);

@@ -9,6 +9,7 @@ import tabCounterService from './tab-counters-service';
 import { ncUtils, coreUtils } from './utils';
 import extensionPoint from './extension-point-directive';
 import extensionPointService from './extension-point-service';
+import injectServices from './services';
 
 export default module => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
@@ -25,6 +26,7 @@ export default module => {
   module.service('extensionPointService', extensionPointService);
   module.run(redirectToState);
   module.run(scrollToTop);
+  module.run(injectServices);
   sentryModule(module);
 };
 

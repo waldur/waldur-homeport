@@ -1,17 +1,12 @@
 export default class AlertDialogsService {
   // @ngInject
-  constructor($uibModal, alertsService) {
+  constructor($uibModal) {
     this.$uibModal = $uibModal;
-    this.alertsService = alertsService;
   }
 
   alertTypes() {
     this.$uibModal.open({
-      component: 'eventTypesDialog',
-      resolve: {
-        type: () => 'Alerts',
-        types: () => this.alertsService.getAvailableIconTypes()
-      }
+      component: 'alertTypesDialog',
     });
   }
 }

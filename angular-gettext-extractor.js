@@ -1,6 +1,5 @@
 // Based on https://raw.githubusercontent.com/rubenv/angular-gettext-tools/master/lib/extract.js
-// It enables extra Babel plugins, such as jsx, flow and dynamicImport
-// Also it doesn't support TypeScript
+// It enables extra Babel plugins, such as jsx and dynamicImport
 'use strict';
 
 var cheerio = require('cheerio');
@@ -16,7 +15,6 @@ var BABEL_PARSING_OPTS = {
     sourceType: 'module',
     plugins: [
         'jsx',
-        'flow',
         'asyncFunctions',
         'classConstructorCall',
         'doExpressions',
@@ -118,6 +116,9 @@ var Extractor = (function () {
                 ejs: 'html',
                 erb: 'html',
                 js: 'js',
+                jsx: 'js',
+                ts: 'js',
+                tsx: 'js',
                 tag: 'html',
                 jsp: 'html',
             },
@@ -203,7 +204,7 @@ var Extractor = (function () {
         var syntax;
         var extension = filename.split('.').pop();
         try {
-            syntax = babylon.parse(src, BABEL_PARSING_OPTS);
+          syntax = babylon.parse(src, BABEL_PARSING_OPTS);
         } catch (err) {
             var errMsg = 'Error parsing';
             if (filename) {

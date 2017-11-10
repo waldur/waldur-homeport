@@ -5,6 +5,7 @@ import userFilterModule from './filters';
 describe('User edit', () => {
 
   function initModule(module) {
+    module.service('$uibModal', function(){});
     module.component('userEdit', userEdit);
     module.constant('ENV', {
       userMandatoryFields: [
