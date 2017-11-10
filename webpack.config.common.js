@@ -93,11 +93,11 @@ module.exports = {
   plugins: [
     new webpack.DllReferencePlugin({
       context: path.resolve('.'),
-      manifest: require(`./build.dll/vendor-manifest.json`),
+      manifest: require('./build.dll/vendor-manifest.json'),
     }),
     new HtmlWebpackPlugin({
       template: './app/index-template.html',
-      filename: utils.formatPath(`index.html`),
+      filename: utils.formatPath('index.html'),
       inject: 'body',
       chunks: ['index'],
       alwaysWriteToDisk: true,
@@ -106,7 +106,7 @@ module.exports = {
       }
     }),
     new AddAssetHtmlPlugin({
-      filepath: path.resolve(`./build.dll/vendor.bundle.js`),
+      filepath: path.resolve('./build.dll/vendor.bundle.js'),
       includeSourcemap: !utils.isProd,
       outputPath: 'scripts/',
       publicPath: 'scripts/',
@@ -120,20 +120,20 @@ module.exports = {
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en-gb|et|ru|lt|lv)/),
     // some files are not referenced explicitly, copy them.
     new CopyWebpackPlugin([
-      {from: `./app/views`, to: utils.formatPath(`./views`)},
-      {from: path.resolve(imagesPath, './appstore'), to: utils.formatPath(`images/appstore`)},
-      {from: path.resolve(imagesPath, './help'), to: utils.formatPath(`images/help`)},
-      {from: path.resolve(imagesPath, './waldur'), to: utils.formatPath(`images/waldur`)},
+      {from: './app/views', to: utils.formatPath('./views')},
+      {from: path.resolve(imagesPath, './appstore'), to: utils.formatPath('images/appstore')},
+      {from: path.resolve(imagesPath, './help'), to: utils.formatPath('images/help')},
+      {from: path.resolve(imagesPath, './waldur'), to: utils.formatPath('images/waldur')},
       // favicon is a part of white-labeling, store such resources separately.
       // https://opennode.atlassian.net/wiki/display/WD/HomePort+configuration#HomePortconfiguration-White-labeling
-      {from: path.resolve(imagesPath, './favicon.ico'), to: utils.formatPath(`images/favicon.ico`), toType: 'file'},
-      {from:  `./app/manifest.json`, to: utils.formatPath(`manifest.json`), toType: 'file'},
+      {from: path.resolve(imagesPath, './favicon.ico'), to: utils.formatPath('images/favicon.ico'), toType: 'file'},
+      {from:  './app/manifest.json', to: utils.formatPath('manifest.json'), toType: 'file'},
     ]),
     // Internationalization plugin, extracts strings for translation, and generates JSON dictionaries based on the already translated ones.
     new AngularGetTextPlugin({
       compileTranslations: {
         input: path.resolve('./i18n/*.po'),
-        outputFolder: `scripts/i18n`,
+        outputFolder: 'scripts/i18n',
         format: 'json',
       },
       extractStrings: {
