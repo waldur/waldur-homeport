@@ -5,6 +5,7 @@
 var cheerio = require('cheerio');
 var Po = require('pofile');
 var babylon = require('babylon');
+var tsParser = require('typescript-eslint-parser');
 var search = require('binary-search');
 var _ = require('lodash');
 
@@ -110,17 +111,10 @@ var Extractor = (function () {
             extensions: {
                 htm: 'html',
                 html: 'html',
-                php: 'html',
-                phtml: 'html',
-                tml: 'html',
-                ejs: 'html',
-                erb: 'html',
                 js: 'js',
                 jsx: 'js',
                 ts: 'js',
                 tsx: 'js',
-                tag: 'html',
-                jsp: 'html',
             },
             postProcess: function (po) {}
         }, options);
@@ -204,7 +198,17 @@ var Extractor = (function () {
         var syntax;
         var extension = filename.split('.').pop();
         try {
-          syntax = babylon.parse(src, BABEL_PARSING_OPTS);
+            if (extension === 'ts' || extension === 'tsx') {
+                syntax = tsParser.parse(src, {
+                    sourceType: 'module',
+                    useJSXTextNode: true,
+                    ecmaFeatures: {
+                        jsx: true
+                    }
+                });
+            } else {
+                syntax = babylon.parse(src, BABEL_PARSING_OPTS);
+            }
         } catch (err) {
             var errMsg = 'Error parsing';
             if (filename) {
@@ -214,6 +218,8 @@ var Extractor = (function () {
                 errMsg += ' at line ' + err.lineNumber;
                 errMsg += ' column ' + err.column;
             }
+
+            errMsg += err;
 
             console.warn(errMsg);
             return;

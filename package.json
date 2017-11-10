@@ -155,7 +155,7 @@
     "style-loader": "^0.13.1",
     "tslint": "^5.8.0",
     "typescript": "^2.6.1",
-    "typescript-eslint-parser": "^8.0.1",
+    "typescript-eslint-parser": "^9.0.0",
     "webpack-merge": "^4.1.0"
   }
 }
