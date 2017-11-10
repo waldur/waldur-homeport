@@ -4,6 +4,22 @@
   "description": "Web interface for Waldur MasterMind cloud orchestrator",
   "repository": "https://github.com/opennode/waldur-homeport",
   "license": "MIT",
+  "scripts": {
+    "start": "npm run build-dll && npm run start-lite",
+    "start-lite": "webpack-dev-server --progress --config webpack.config.dev.js",
+    "build": "cross-env NODE_ENV=production npm run build-dll && cross-env NODE_ENV=production webpack --config=webpack.config.prod.js",
+    "build-lite": "cross-env NODE_ENV=production webpack --config=webpack.config.prod.js",
+    "build-dev": "npm run build-dll && webpack --config=webpack.config.dev.js",
+    "build-dev-lite": "webpack --config=webpack.config.dev.js",
+    "build-stats": "cross-env NODE_ENV=production webpack --config=webpack.config.prod.js --profile --json > stats.json",
+    "build-dll": "webpack --config webpack.config.dll.js -p --hide-modules",
+    "build-dll-dev": "webpack --config webpack.config.dll.js --hide-modules",
+    "pretest": "npm run build",
+    "test": "npm run lint && npm run test-single-run",
+    "lint": "eslint app/scripts/components && flow",
+    "test-server": "karma start test/karma.conf.js",
+    "test-single-run": "karma start test/karma.conf.js --single-run"
+  },
   "dependencies": {
     "angular": "~1.5.11",
     "angular-animate": "~1.5.11",
@@ -78,17 +94,8 @@
     "webpack-dev-server": "^2.5.1",
     "world-flags-sprite": "^0.0.2"
   },
-  "scripts": {
-    "prestart": "webpack --config=webpack.config.common.js",
-    "start": "webpack-dev-server --progress --config webpack.config.dev.js",
-    "build": "webpack --config=webpack.config.prod.js",
-    "pretest": "npm run build",
-    "test": "npm run lint && npm run test-single-run",
-    "lint": "eslint app/scripts/components && flow",
-    "test-server": "karma start test/karma.conf.js",
-    "test-single-run": "karma start test/karma.conf.js --single-run"
-  },
   "devDependencies": {
+    "add-asset-html-webpack-plugin": "^2.1.2",
     "angular-intro.js": "~3.1.3",
     "babel-eslint": "^7.2.3",
     "babel-plugin-angularjs-annotate": "^0.8.2",
@@ -99,6 +106,7 @@
     "binary-search": "^1.3.2",
     "cheerio": "^1.0.0-rc.2",
     "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^5.1.1",
     "css-loader": "^0.25.0",
     "cssnano": "^3.10.0",
     "enzyme": "^2.9.1",

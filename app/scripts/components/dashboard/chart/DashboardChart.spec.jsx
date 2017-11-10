@@ -11,7 +11,7 @@ describe('DashboardChart', () => {
       change: 10,
       data: [],
     };
-    const wrapper = render(<DashboardChart chart={chart} />);
+    const wrapper = mount(<DashboardChart chart={chart} />);
     expect(wrapper.find('h5').text()).toBe('Applications');
     expect(wrapper.find('h1').text()).toBe('100');
     expect(wrapper.find('.text-info').length).toBe(1);

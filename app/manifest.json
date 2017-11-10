@@ -10,17 +10,17 @@
   "lang": "en-US",
   "icons": [
     {
-      "src": "static/images/waldur/logo-96x96.png",
+      "src": "images/waldur/logo-96x96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "static/images/waldur/logo-144x144.png",
+      "src": "images/waldur/logo-144x144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "static/images/waldur/logo-192x192.png",
+      "src": "images/waldur/logo-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     }

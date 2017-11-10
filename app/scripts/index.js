@@ -1,3 +1,4 @@
+import './vendor';
 import './globals';
 import '../../assets/sass/style.scss';
 

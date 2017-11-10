@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { mount } from 'enzyme';
 
 import { SparklineChart } from './sparkline';
 
@@ -10,7 +10,7 @@ describe('SparklineChart', () => {
 
   it('renders empty figure if list is empty', () => {
     const data = [];
-    const wrapper = render(<SparklineChart data={data}/>);
+    const wrapper = mount(<SparklineChart data={data}/>);
     expect(getColumns(wrapper).length).toBe(0);
   });
 
@@ -25,9 +25,9 @@ describe('SparklineChart', () => {
         label: 'February'
       }
     ];
-    const wrapper = render(<SparklineChart data={data}/>);
+    const wrapper = mount(<SparklineChart data={data}/>);
     expect(getColumns(wrapper).length).toBe(2);
-    expect(getBars(wrapper)[0].attribs.style).toBe('height:50%;');
-    expect(getBars(wrapper)[1].attribs.style).toBe('height:100%;');
+    expect(getBars(wrapper).at(0).prop('style').height).toBe('50%');
+    expect(getBars(wrapper).at(1).prop('style').height).toBe('100%');
   });
 });
