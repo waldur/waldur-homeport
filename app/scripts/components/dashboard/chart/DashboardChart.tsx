@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Panel from '@waldur/core/Panel';
 import SparklineChart from './sparkline';
 import { Chart } from './types';

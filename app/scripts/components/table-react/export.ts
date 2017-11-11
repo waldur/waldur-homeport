@@ -1,6 +1,6 @@
 import { select } from 'redux-saga/effects';
 import FileSaver from 'file-saver';
-import * as Papa from 'papaparse';
+import Papa from 'papaparse';
 
 import { getTableState } from './store';
 import { getTableOptions } from './registry';

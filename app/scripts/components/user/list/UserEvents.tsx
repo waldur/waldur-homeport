@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as moment from 'moment';
+import React from 'react';
+import moment from 'moment';
 
 import { eventFormatter } from '@waldur/events/services';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
