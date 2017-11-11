@@ -30,7 +30,7 @@ const dashboardChartError = (chartId: string, error: string) => ({
 });
 
 const emitSignal = (signal: string) => ({
-  type: 'EMIT_SIGNAL',
+  type: EMIT_SIGNAL,
   signal
 });
 

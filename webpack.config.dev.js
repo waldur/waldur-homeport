@@ -6,10 +6,23 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanUpStatsPlugin = require('./webpack-cleanup-stats');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+
 const utils = require('./webpack.utils');
 
 module.exports = merge(baseConfig, {
   plugins: [
+    new webpack.DllReferencePlugin({
+      context: path.resolve('.'),
+      manifest: require(utils.vendorManifest),
+    }),
+    new AddAssetHtmlPlugin({
+      filepath: path.resolve(utils.vendorBundle),
+      includeSourcemap: !utils.isProd,
+      outputPath: 'scripts/',
+      publicPath: 'scripts/',
+      hash: true,
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin([
       {

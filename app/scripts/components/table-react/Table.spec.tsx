@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, render, mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import Table from './Table';
@@ -8,22 +8,39 @@ import { formatTemplate } from './translate';
 describe('Table', () => {
   const fetch = jasmine.createSpy('fetch');
   const gotoPage = x => {};
+  const defaultProps = {
+    translate: formatTemplate,
+    loading: false,
+    error: null,
+    fetch
+  };
 
   describe('special states', () => {
     it('renders spinner if list is loading', () => {
-      const wrapper = shallow(<Table translate={formatTemplate} loading={true} fetch={fetch}/>);
+      const wrapper = shallow(<Table {...defaultProps} loading={true}/>);
       expect(wrapper.contains(<LoadingSpinner/>)).toBe(true);
     });
 
     it('renders message if loading failed', () => {
-      const wrapper = shallow(<Table translate={formatTemplate} fetch={fetch} loading={false} error="Not found"/>);
+      const wrapper = shallow(<Table {...defaultProps} error="Not found"/>);
       expect(wrapper.contains('Unable to fetch data.')).toBe(true);
     });
 
     it('renders message if list is empty', () => {
-      const wrapper = mount(<Table translate={formatTemplate} fetch={fetch} loading={false} error={null}/>);
+      const wrapper = mount(<Table {...defaultProps}/>);
       expect(wrapper.contains('There are no items yet.')).toBe(true);
     });
+
+    it('renders custom message if list is empty and verboseName is set', () => {
+      const wrapper = mount(<Table {...defaultProps} verboseName='projects'/>);
+      expect(wrapper.contains('There are no projects yet.')).toBe(true);
+    });
+
+    it('renders custom message if list is empty and verboseName is set and query is set', () => {
+      const wrapper = mount(<Table {...defaultProps} verboseName='projects' query='my projects'/>);
+      expect(wrapper.contains('There are no projects found matching the filter.')).toBe(true);
+    });
+
   });
 
   describe('data rendering', () => {

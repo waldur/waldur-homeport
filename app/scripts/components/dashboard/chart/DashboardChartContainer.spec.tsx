@@ -53,7 +53,7 @@ describe('DashboardChartContainer', () => {
         scope: customer,
       },
       {
-        type: 'EMIT_SIGNAL',
+        type: actions.EMIT_SIGNAL,
         signal: 'organizationDashboard.initialized',
       }
     ];

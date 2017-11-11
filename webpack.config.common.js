@@ -4,7 +4,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AngularGetTextPlugin = require('./angular-gettext-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const utils = require('./webpack.utils');
 
 const scssPath = path.resolve('./assets/sass');
@@ -99,14 +98,10 @@ module.exports = {
             },
           },
         ],
-      },
+      }
     ],
   },
   plugins: [
-    new webpack.DllReferencePlugin({
-      context: path.resolve('.'),
-      manifest: require('./build.dll/vendor-manifest.json'),
-    }),
     new HtmlWebpackPlugin({
       template: './app/index-template.html',
       filename: utils.formatPath('index.html'),
@@ -117,14 +112,6 @@ module.exports = {
         return (a.names[0] < b.names[0]) ? 1 : -1;
       }
     }),
-    new AddAssetHtmlPlugin({
-      filepath: path.resolve('./build.dll/vendor.bundle.js'),
-      includeSourcemap: !utils.isProd,
-      outputPath: 'scripts/',
-      publicPath: 'scripts/',
-      hash: true,
-    }),
-    //
     new ExtractTextPlugin({
       filename: 'css/[name]-bundle.css?[contenthash]'
     }),
