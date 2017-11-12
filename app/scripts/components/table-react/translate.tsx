@@ -21,7 +21,7 @@ const withLocale = connect(getLocale);
 
 // eslint-disable-next-line react/display-name
 const withTranslationPure = WrappedComponent => props => (
-  <WrappedComponent {...props} translate={formatTemplate}/>
+  <WrappedComponent {...props} translate={translate}/>
 );
 
 export const withTranslation = compose(withLocale, withTranslationPure);

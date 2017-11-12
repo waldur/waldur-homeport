@@ -65,7 +65,7 @@ export const reducer = createByKey(
   action => action.payload.table
 )(pagination);
 
-type TableSelector = (table: string) => (state: {[key: string]: TableState}) => TableState;
+type TableSelector = (table: string) => (state: {tables: {[key: string]: TableState}}) => TableState;
 
 export const getTableState: TableSelector = table => state => {
   if (state.tables && state.tables[table]) {

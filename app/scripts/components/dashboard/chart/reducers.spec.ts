@@ -2,10 +2,6 @@ import { dashboardChart as reducer, getChart } from './reducers';
 import actions from './actions';
 
 describe('Dashboard chart reducer', () => {
-  it('should return inital state', () => {
-    expect(reducer(undefined, {})).toEqual({});
-  });
-
   it('should return default state', () => {
     const state = {'dashboardChart': reducer(undefined, {})};
     expect(getChart(state, 'customer')).toEqual({

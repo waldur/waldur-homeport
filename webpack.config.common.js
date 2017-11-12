@@ -42,11 +42,6 @@ module.exports = {
         loader: 'awesome-typescript-loader'
       },
       {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'source-map-loader'
-      },
-      {
         test: /\.html$/,
         use: [
           {
