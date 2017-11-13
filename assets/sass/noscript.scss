@@ -1,0 +1,43 @@
+/*noscript message*/
+
+.noscript {
+  background-color: #fff;
+  padding: 50px;
+  margin-top: 20px;
+
+  @include bp(xs) {
+    padding: 20px;
+    margin-top: 0;
+  }
+}
+
+.noscript-img {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px;
+  background: url("./../images/help/oops.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.noscript-content {
+
+  li {
+    margin-bottom: 5px;
+
+    a {
+      display: inline-block;
+
+      @include bp(md) {
+        padding: 5px 0;
+      }
+
+      @include bp(sm) {
+        padding: 5px 0;
+      }
+
+      @include bp(xs) {
+        padding: 5px 0;
+      }
+    }
+  }
+}
