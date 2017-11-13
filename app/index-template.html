@@ -12,6 +12,30 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body class="fixed-sidebar {{$state.current.data.bodyClass}}" id="page-top">
+  <noscript>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+          <div class="noscript">
+            <div class="noscript-img"></div>
+            <div class="noscript-content">
+              <h4>It seems javascript is disabled. To display the content, enable javascript in your browser.</h4>
+              <p>Review and follow the instructions provided by your browser:</p>
+              <ul>
+                <li><a href="http://activatejavascript.org/instructions/chrome#instructions" target="_blank">Chrome</a></li>
+                <li><a href="http://activatejavascript.org/instructions/firefox#instructions" target="_blank">Firefox</a></li>
+                <li><a href="http://activatejavascript.org/instructions/opera#instructions" target="_blank">Opera</a></li>
+                <li><a href="http://activatejavascript.org/instructions/safari#instructions" target="_blank">Safari</a></li>
+                <li><a href="http://activatejavascript.org/instructions/ie#instructions" target="_blank">Internet Explorer</a></li>
+                <li><a href="http://activatejavascript.org/instructions/ios#instructions" target="_blank">IOS</a></li>
+                <li><a href="http://activatejavascript.org/instructions/android#instructions" target="_blank">Android</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </noscript>
   <div class="flash-message-fixed" flash-message="5000"></div>
   <div ui-view id="wrapper"></div>
 </body>
