@@ -1,16 +1,5 @@
 import template from './user-manage.html';
 
-export default function userManage() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: UserManageController,
-    controllerAs: '$ctrl',
-    scope: {},
-    bindToController: true
-  };
-}
-
 class UserManageController {
   // @ngInject
   constructor(usersService, $state, ncUtilsFlash, $uibModal, $q, ISSUE_IDS) {
@@ -33,12 +22,25 @@ class UserManageController {
   }
 
   saveUser({ user }) {
+    this.errors = {};
     return this.usersService.update(user).then(response => {
       this.usersService.setCurrentUser(response.data);
     }).then(() => {
       this.ncUtilsFlash.success(gettext('Profile has been updated.'));
     }).catch(response => {
-      this.errors = response.data;
+      this.ncUtilsFlash.errorFromResponse(response, gettext('Profile could not be updated.'));
+      if (response.data && typeof response.data === 'object') {
+        let errors = {};
+        for (let key in response.data) {
+          let errorValue = response.data[key];
+          if (Array.isArray(errorValue)) {
+            errors[key] = errorValue;
+          } else {
+            errors[key] = [errorValue];
+          }
+        }
+        Object.assign(this.errors, errors);
+      }
     });
   }
 
@@ -61,3 +63,11 @@ class UserManageController {
     });
   }
 }
+
+const userManage = {
+  restrict: 'E',
+  template: template,
+  controller: UserManageController
+};
+
+export default userManage;
