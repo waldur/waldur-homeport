@@ -3,7 +3,7 @@ import actions from './actions';
 
 describe('Dashboard chart reducer', () => {
   it('should return default state', () => {
-    const state = {'dashboardChart': reducer(undefined, {})};
+    const state = {dashboardChart: reducer(undefined, {})};
     expect(getChart(state, 'customer')).toEqual({
       loading: false,
       erred: false,
