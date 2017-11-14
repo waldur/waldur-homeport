@@ -4,6 +4,7 @@ import Papa from 'papaparse';
 
 import { getTableState } from './store';
 import { getTableOptions } from './registry';
+import exportExcel from './excel';
 
 export function* exportTable(action) {
   const { table, format } = action.payload;
@@ -21,6 +22,7 @@ const exporters = {
   csv: saveAsCsv,
   clipboard: exportToClipboard,
   pdf: exportAsPdf,
+  excel: exportExcel,
 };
 
 async function exportAsPdf(table, data) {

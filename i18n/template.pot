@@ -1496,6 +1496,10 @@ msgstr ""
 msgid "Every year"
 msgstr ""
 
+#: app/scripts/components/table-react/TableExportButton.tsx
+msgid "Excel"
+msgstr ""
+
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
 msgid "Existing quota usage: {usage}"
 msgstr ""
@@ -5593,10 +5597,6 @@ msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html
 msgid "Would you like to update your current email with the one from the invitation?"
-msgstr ""
-
-#: app/scripts/components/table-react/TableExportButton.tsx
-msgid "XSLX"
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-prompt.html

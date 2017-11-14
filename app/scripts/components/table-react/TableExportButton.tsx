@@ -26,8 +26,8 @@ const TableExportButton = ({ translate, exportAs }: Props) => {
       format: 'pdf',
     },
     {
-      label: translate('XSLX'),
-      format: 'xsls',
+      label: translate('Excel'),
+      format: 'excel',
     }
   ];
 
