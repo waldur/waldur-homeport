@@ -451,8 +451,16 @@ msgstr ""
 msgid "Audit logs"
 msgstr ""
 
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.html
+msgid "Autenticate using Mobile ID"
+msgstr ""
+
 #: app/scripts/components/events/constants.js
 msgid "Authentication events"
+msgstr ""
+
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.js
+msgid "Authentication with Mobile ID has been canceled by user or time out. Details:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.js
@@ -678,6 +686,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/appstore/dialog/appstore-selector-dialog.html
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.html
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/digitalocean/droplet-resize.html
 #: app/scripts/components/events/event-types-dialog.html
@@ -736,6 +745,10 @@ msgstr ""
 #: app/scripts/components/project/project-create.html
 #: app/scripts/components/providers/details/provider-details.html
 msgid "Certifications"
+msgstr ""
+
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.html
+msgid "Challenge code"
 msgstr ""
 
 #: app/scripts/components/issues/create/constants.js
@@ -2415,6 +2428,10 @@ msgstr ""
 msgid "Minimal valid value is 0"
 msgstr ""
 
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.html
+msgid "Mobile phone number"
+msgstr ""
+
 #: app/scripts/components/resource/list/resource-global-list.js
 msgid "Monitoring"
 msgstr ""
@@ -3487,6 +3504,10 @@ msgid "Profile"
 msgstr ""
 
 #: app/scripts/components/user/user-manage.js
+msgid "Profile could not be updated."
+msgstr ""
+
+#: app/scripts/components/user/user-manage.js
 msgid "Profile has been updated."
 msgstr ""
 
@@ -4482,6 +4503,10 @@ msgstr ""
 msgid "Sign a support agreement"
 msgstr ""
 
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.html
+msgid "Sign in"
+msgstr ""
+
 #: app/scripts/components/auth/auth-button-text.js
 msgid "Sign in with"
 msgstr ""
@@ -5068,6 +5093,10 @@ msgstr ""
 msgid "Unable to approve billing plan."
 msgstr ""
 
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.js
+msgid "Unable to authenticate using Mobile ID."
+msgstr ""
+
 #: app/scripts/components/plans/plan-agreement-cancel.js
 msgid "Unable to cancel billing plan."
 msgstr ""
@@ -5168,6 +5197,10 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.js
 msgid "Unable to validate invitation token."
+msgstr ""
+
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.js
+msgid "Unexpected exception happened during login process."
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html

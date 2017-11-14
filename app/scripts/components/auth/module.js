@@ -11,6 +11,7 @@ import storeLastState from './store-state';
 import callbacksModule from './callbacks/module';
 import estonianIdModule from './estonianId/module';
 import saml2Module from './saml2/module';
+import valimoModule from './valimo/module';
 import authButtonText from './auth-button-text';
 
 export default module => {
@@ -26,6 +27,7 @@ export default module => {
   callbacksModule(module);
   estonianIdModule(module);
   saml2Module(module);
+  valimoModule(module);
   module.service('UserSettings', UserSettings);
   module.run(storeLastState);
 };
