@@ -148,6 +148,7 @@ const ENV = {
     'SAML2',
     'VALIMO'
   ],
+  VALIMO_LABEL: 'Mobile ID',
   SAML2_IDENTITY_PROVIDER: 'https://reos.taat.edu.ee/saml2/idp/metadata.php',
   SAML2_LABEL: 'TAAT',
   allowToSelectSAML2Provider: true,

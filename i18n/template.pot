@@ -452,7 +452,7 @@ msgid "Audit logs"
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.html
-msgid "Authenticate using mobile phone via Valimo"
+msgid "Autenticate using Mobile ID"
 msgstr ""
 
 #: app/scripts/components/events/constants.js
@@ -460,7 +460,7 @@ msgid "Authentication events"
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
-msgid "Authentication via Valimo was canceled by user or timed out. Cancelation details:"
+msgid "Authentication with Mobile ID has been canceled by user or time out. Details:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.js
@@ -748,7 +748,7 @@ msgid "Certifications"
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.html
-msgid "Challange code"
+msgid "Challenge code"
 msgstr ""
 
 #: app/scripts/components/issues/create/constants.js
@@ -5093,12 +5093,8 @@ msgstr ""
 msgid "Unable to approve billing plan."
 msgstr ""
 
-#: app/scripts/components/auth/valimo/auth-valimo-dialog.html
-msgid "Unable to authenticate using Valimo."
-msgstr ""
-
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
-msgid "Unable to authenticate via Valimo."
+msgid "Unable to authenticate using Mobile ID."
 msgstr ""
 
 #: app/scripts/components/plans/plan-agreement-cancel.js

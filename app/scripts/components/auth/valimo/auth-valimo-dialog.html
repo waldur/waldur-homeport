@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h3 class="modal-title">
-    <span translate>Authenticate using mobile phone via Valimo</span>
+    <span translate>Autenticate using Mobile ID</span>
   </h3>
 </div>
 <div class="modal-body">
@@ -10,29 +10,21 @@
       <label for="phoneNumber" class="control-label">
         <span translate>Mobile phone number</span>
       </label>
-      <div>
-        <input type="tel"
-          id="phoneNumber"
-          ng-model="$ctrl.phoneNumber"
-          class="form-control"
-          required>
-        <p class="text-danger"
-          ng-repeat="error in $ctrl.errors.name"
-          ng-bind="error"></p>
-      </div>
+      <input type="tel"
+        id="phoneNumber"
+        ng-model="$ctrl.phoneNumber"
+        class="form-control"
+        required>
     </div>
-    <div class="form-group" ng-if="$ctrl.challangeCode">
-      <label for="challangeCode" class="control-label">
-        <span translate>Challange code</span>
+    <div class="form-group" ng-if="$ctrl.challengeCode">
+      <label for="challengeCode" class="control-label">
+        <span translate>Challenge code</span>
       </label>
       <div class="form-control-static">
-        {{ $ctrl.challangeCode }}
+        {{ $ctrl.challengeCode }}
       </div>
     </div>
   </form>
-  <div ng-if="$ctrl.error">
-    <span translate>Unable to authenticate using Valimo.</span>
-  </div>
 </div>
 <div class="modal-footer">
   <button

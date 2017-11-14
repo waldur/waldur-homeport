@@ -30,12 +30,12 @@ const authValimoDialog = {
     submit() {
       this.isAuthenticating = true;
       return this.AuthValimoService.login(this.phoneNumber).then(result => {
-        this.challangeCode = result.message;
+        this.challengeCode = result.message;
         this.authResultId = result.uuid;
       }).then(() => {
         return this.pollAuthResult(this.authResultId).then(result => this.parseAuthResult(result));
       }).catch(response => {
-        this.ncUtilsFlash.errorFromResponse(response, gettext('Unable to authenticate via Valimo.'));
+        this.ncUtilsFlash.errorFromResponse(response, gettext('Unable to authenticate using Mobile ID.'));
       }).finally(() => {
         this.isAuthenticating = false;
       });
@@ -59,7 +59,7 @@ const authValimoDialog = {
         this.authService.loginSuccess({data: {token: result.token}});
         this.$state.go('profile.details');
       } else if (result.state === 'Canceled') {
-        const message = gettext('Authentication via Valimo was canceled by user or timed out. Cancelation details:');
+        const message = gettext('Authentication with Mobile ID has been canceled by user or time out. Details:');
         this.ncUtilsFlash.error(message + result.details);
       } else {
         this.ncUtilsFlash.error(gettext('Unexpected exception happened during login process.'));

@@ -7,8 +7,9 @@ const authValimoTrigger = {
   },
   controller: class AuthValimoTriggerController {
     // @ngInject
-    constructor($uibModal) {
+    constructor($uibModal, ENV) {
       this.$uibModal = $uibModal;
+      this.provider = ENV.VALIMO_LABEL;
     }
 
     showDialog() {
