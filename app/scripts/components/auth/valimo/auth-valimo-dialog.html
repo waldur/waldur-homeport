@@ -1,0 +1,51 @@
+<div class="modal-header">
+  <h3 class="modal-title">
+    <span translate>Authenticate using mobile phone via Valimo</span>
+  </h3>
+</div>
+<div class="modal-body">
+  <form name="$ctrl.LoginForm">
+    <div class="form-group"
+      ng-class="{disabled: $ctrl.isAuthenticating}">
+      <label for="phoneNumber" class="control-label">
+        <span translate>Mobile phone number</span>
+      </label>
+      <div>
+        <input type="tel"
+          id="phoneNumber"
+          ng-model="$ctrl.phoneNumber"
+          class="form-control"
+          required>
+        <p class="text-danger"
+          ng-repeat="error in $ctrl.errors.name"
+          ng-bind="error"></p>
+      </div>
+    </div>
+    <div class="form-group" ng-if="$ctrl.challangeCode">
+      <label for="challangeCode" class="control-label">
+        <span translate>Challange code</span>
+      </label>
+      <div class="form-control-static">
+        {{ $ctrl.challangeCode }}
+      </div>
+    </div>
+  </form>
+  <div ng-if="$ctrl.error">
+    <span translate>Unable to authenticate using Valimo.</span>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+    type="submit"
+    class="btn btn-primary"
+    ng-disabled="$ctrl.LoginForm.$invalid"
+    submit-button="$ctrl.submit()">
+    <i class="fa fa-sign-in"></i>
+    <span translate>Sign in</span>
+  </button>
+  <button class="btn btn-default"
+    type="button"
+    ng-click="$ctrl.dismiss()">
+    <span translate>Cancel</span>
+  </button>
+</div>

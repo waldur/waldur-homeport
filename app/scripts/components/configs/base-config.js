@@ -145,7 +145,8 @@ const ENV = {
     'LOCAL_SIGNUP',
     'SOCIAL_SIGNUP',
     'ESTONIAN_ID',
-    'SAML2'
+    'SAML2',
+    'VALIMO'
   ],
   SAML2_IDENTITY_PROVIDER: 'https://reos.taat.edu.ee/saml2/idp/metadata.php',
   SAML2_LABEL: 'TAAT',
