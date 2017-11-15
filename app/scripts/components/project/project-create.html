@@ -2,7 +2,7 @@
   <loading-spinner/>
 </div>
 <div ng-if="!$ctrl.loading">
-  <div class="form-horizontal">
+  <form class="form-horizontal" name="$ctrl.form" novalidate>
     <div class="form-group">
       <label for="projectName" class="col-sm-3 control-label">
         <span translate>Project name</span>
@@ -10,14 +10,15 @@
       <div class="col-sm-5">
         <input type="text"
           id="projectName"
-          ng-model="ProjectAdd.project.name"
-          class="form-control">
-        <p class="help-block m-b-n-xs text-muted" translate>
+          name="name"
+          ng-model="$ctrl.project.name"
+          ng-blur="$ctrl.validate()"
+          class="form-control"
+          required/>
+        <p class="help-block m-b-none text-muted" translate>
           This name will be visible in accounting data.
         </p>
-        <p class="text-danger"
-          ng-repeat="error in ProjectAdd.errors.name"
-          ng-bind="error"></p>
+        <div class="error" ng-repeat="error in $ctrl.errors.name" ng-bind="error"></div>
       </div>
     </div>
 
@@ -26,57 +27,53 @@
         <span translate>Project description</span>
       </label>
       <div class="col-sm-5">
-                <textarea id="projectDescription"
-                  class="form-control"
-                  ng-model="ProjectAdd.project.description"></textarea>
-        <p class="text-danger"
-          ng-repeat="error in ProjectAdd.errors.description"
-          ng-bind="error"></p>
+        <textarea id="projectDescription"
+          class="form-control"
+          ng-model="$ctrl.project.description">
+        </textarea>
+        <div class="error" ng-repeat="error in $ctrl.errors.description" ng-bind="error"></div>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="projectCertifications" class="col-sm-3 control-label">
+      <label class="col-sm-3 control-label">
         <span translate>Certifications</span>
-        <i class="fa fa-question-circle"
-          uib-tooltip="{{ 'Provider certification required by this project' | translate }}"></i>
+        <i class="fa fa-question-circle" uib-tooltip="{{ 'Provider certification required by this project' | translate }}"></i>
       </label>
       <div class="col-sm-5">
         <ui-select
           multiple
-          ng-model="ProjectAdd.projectCertifications"
-          ng-if="ProjectAdd.certifications">
+          ng-model="$ctrl.projectCertifications"
+          ng-if="$ctrl.certifications">
           <ui-select-match placeholder="{{ 'Select certifications' | translate }}">
             {{ $item.name }}
           </ui-select-match>
-          <ui-select-choices
-            repeat="item in ProjectAdd.certifications | filter: {name: $select.search} track by item.url">
+          <ui-select-choices repeat="item in $ctrl.certifications | filter: {name: $select.search} track by item.url">
             <div ng-bind-html="item.name | highlight: $select.search"></div>
           </ui-select-choices>
         </ui-select>
-        <div
-          class="form-control-static"
-          ng-if="!ProjectAdd.certifications" translate>
+        <div class="form-control-static"
+          ng-if="!$ctrl.certifications" translate>
           N/A
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <p class="help-block text-danger col-sm-offset-3 col-sm-5"
-        ng-repeat="error in ProjectAdd.errors.non_field_errors"
-        ng-bind="error"></p>
+      <div class="col-sm-offset-3 col-sm-5 help-block ">
+        <div class="error" ng-repeat="error in $ctrl.errors.nonFieldErrors" ng-bind="error"></div>
+      </div>
     </div>
 
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-5">
-        <button class="btn btn-primary" submit-button="ProjectAdd.save()">
+        <button class="btn btn-primary" submit-button="$ctrl.save()">
           <span translate>Add project</span>
         </button>
-        <button class="btn btn-default" ng-click="ProjectAdd.cancel()">
+        <button class="btn btn-default" ng-click="$ctrl.cancel()">
           <span translate>Cancel</span>
         </button>
       </div>
     </div>
-  </div>
+  </form>
 </div>
