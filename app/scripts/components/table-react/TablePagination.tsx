@@ -1,5 +1,5 @@
-import React from 'react';
-import Pagination from 'react-bootstrap/lib/Pagination';
+import * as React from 'react';
+import * as Pagination from 'react-bootstrap/lib/Pagination';
 import { TranslateProps, Pagination as PaginationProps } from './types';
 
 type Props = TranslateProps & PaginationProps & {

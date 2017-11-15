@@ -1,5 +1,4 @@
-import React from 'react';
-import { react2angular } from 'react2angular';
+import * as React from 'react';
 import { Tooltip } from './tooltip';
 import { ChartData } from './types';
 import './sparkline.scss';

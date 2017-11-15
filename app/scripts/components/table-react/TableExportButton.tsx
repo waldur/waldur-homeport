@@ -1,6 +1,6 @@
-import React from 'react';
-import Dropdown from 'react-bootstrap/lib/Dropdown';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
+import * as React from 'react';
+import * as Dropdown from 'react-bootstrap/lib/Dropdown';
+import * as MenuItem from 'react-bootstrap/lib/MenuItem';
 import { TranslateProps } from './types';
 
 type Props = TranslateProps & {

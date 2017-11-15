@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { TranslateProps, Pagination } from './types';
 
 type Props = TranslateProps & Pagination;

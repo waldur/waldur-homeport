@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { react2angular } from 'react2angular';
 
 export const LoadingSpinner = () =>

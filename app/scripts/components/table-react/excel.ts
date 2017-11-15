@@ -1,5 +1,4 @@
 import FileSaver from 'file-saver';
-import JSZip from 'jszip';
 
 const templates = {
   '[Content_Types].xml':
@@ -126,6 +125,7 @@ export function getSheet(sharedStrings: SharedStrings, rows: Array<Array<any>>) 
 }
 
 export default async function exportExcel(table, data) {
+  const JSZip = await import(/* webpackChunkName: "jszip" */ 'jszip');
   let zip = new JSZip();
   for(const path in templates) {
     addToZip(zip, path, templates[path]);

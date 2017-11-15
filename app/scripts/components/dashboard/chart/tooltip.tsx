@@ -1,6 +1,6 @@
-import React from 'react';
-import BootstrapTooltip from 'react-bootstrap/lib/Tooltip';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import * as React from 'react';
+import * as BootstrapTooltip from 'react-bootstrap/lib/Tooltip';
+import * as OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 
 type Props = {
   label: any,
