@@ -1,23 +1,18 @@
-import template from './event-types-dialog.html';
-import './event-types-dialog.scss';
-
-export default function eventTypesDialog() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: EventTypesDialogController,
-    controllerAs: '$ctrl',
-    scope: {},
-    bindToController: {
-      dismiss: '&',
-      resolve: '='
+const eventTypesDialog = {
+  template: '<types-list-dialog types="$ctrl.types" dialog-title="$ctrl.title" dismiss="$ctrl.dismiss()"/>',
+  bindings: {
+    dismiss: '&'
+  },
+  controller: class EventTypesDialog {
+    // @ngInject
+    constructor(eventsService) {
+      this.eventsService = eventsService;
     }
-  };
-}
-
-class EventTypesDialogController {
-  constructor() {
-    this.dialogTitle = this.resolve.type === 'Events' ? gettext('Event types') : gettext('Alert types');
-    this.types = this.resolve.types;
+    $onInit() {
+      this.title = gettext('Event types');
+      this.types = this.eventsService.getAvailableIconTypes();
+    }
   }
-}
+};
+
+export default eventTypesDialog;

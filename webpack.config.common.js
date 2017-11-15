@@ -4,7 +4,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AngularGetTextPlugin = require('./angular-gettext-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const utils = require('./webpack.utils');
 
 const scssPath = path.resolve('./assets/sass');
@@ -21,7 +20,10 @@ module.exports = {
     chunkFilename: 'scripts/[name].js?[chunkhash]',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '@waldur': path.resolve('./app/scripts/components/')
+    }
   },
   devtool: 'source-map',
   module: {
@@ -34,6 +36,10 @@ module.exports = {
             loader: 'babel-loader',
           },
         ],
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader'
       },
       {
         test: /\.html$/,
@@ -87,14 +93,10 @@ module.exports = {
             },
           },
         ],
-      },
+      }
     ],
   },
   plugins: [
-    new webpack.DllReferencePlugin({
-      context: path.resolve('.'),
-      manifest: require('./build.dll/vendor-manifest.json'),
-    }),
     new HtmlWebpackPlugin({
       template: './app/index-template.html',
       filename: utils.formatPath('index.html'),
@@ -105,14 +107,6 @@ module.exports = {
         return (a.names[0] < b.names[0]) ? 1 : -1;
       }
     }),
-    new AddAssetHtmlPlugin({
-      filepath: path.resolve('./build.dll/vendor.bundle.js'),
-      includeSourcemap: !utils.isProd,
-      outputPath: 'scripts/',
-      publicPath: 'scripts/',
-      hash: true,
-    }),
-    //
     new ExtractTextPlugin({
       filename: 'css/[name]-bundle.css?[contenthash]'
     }),
@@ -142,9 +136,12 @@ module.exports = {
           'app/scripts/components/**/*.html',
           'app/scripts/**/*.js',
           'app/scripts/**/*.jsx',
+          'app/scripts/**/*.ts',
+          'app/scripts/**/*.tsx',
         ],
         destination: path.resolve('./i18n/template.pot'),
-        lineNumbers: false
+        lineNumbers: false,
+        markerNames: ['gettext', 'translate']
       }
     }),
   ],

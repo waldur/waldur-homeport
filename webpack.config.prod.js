@@ -1,13 +1,27 @@
-const baseConfig = require('./webpack.config.common.js');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const path = require('path');
 
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
+
+const baseConfig = require('./webpack.config.common.js');
+const utils = require('./webpack.utils');
 
 module.exports = merge(baseConfig, {
   devtool: '',
   plugins: [
+    new webpack.DllReferencePlugin({
+      context: path.resolve('.'),
+      manifest: require(utils.vendorManifest),
+    }),
+    new AddAssetHtmlPlugin({
+      filepath: path.resolve(utils.vendorBundle),
+      includeSourcemap: !utils.isProd,
+      outputPath: 'scripts/',
+      publicPath: 'scripts/',
+      hash: true,
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),

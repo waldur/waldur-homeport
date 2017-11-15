@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{ $ctrl.dialogTitle | translate }}</h3>
+</div>
+<div class="modal-body types-list-dialog" slimscroll="{height:300}">
+  <div ng-repeat="item in $ctrl.types">
+    <b class="icon" ng-class="::item[0]"></b>
+    <span class="left-padding" ng-bind-html="::item[1]"></span>
+    <ul>
+      <li ng-repeat="message in item[2]">{{ message }}</li>
+    </ul>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="$ctrl.dismiss()" translate>
+    Cancel
+  </button>
+</div>

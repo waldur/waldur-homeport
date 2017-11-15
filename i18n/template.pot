@@ -111,6 +111,7 @@ msgstr ""
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 #: app/scripts/components/resource/actions/action-button-resource.html
 #: app/scripts/components/table/responsive-table.js
+#: app/scripts/components/user/list/UserEvents.tsx
 msgid "Actions"
 msgstr ""
 
@@ -186,7 +187,7 @@ msgstr ""
 msgid "Add notification"
 msgstr ""
 
-#: app/scripts/components/user/user-organizations.js
+#: app/scripts/components/user/list/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr ""
 
@@ -259,9 +260,9 @@ msgstr ""
 msgid "Agreement number"
 msgstr ""
 
+#: app/scripts/components/alerts/alert-types-dialog.js
 #: app/scripts/components/alerts/base-alerts-list.js
 #: app/scripts/components/dashboard/project-alerts-feed.js
-#: app/scripts/components/events/event-types-dialog.js
 msgid "Alert types"
 msgstr ""
 
@@ -446,8 +447,8 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/routes.js
 #: app/scripts/components/user/constants.js
+#: app/scripts/components/user/list/UserDashboard.tsx
 #: app/scripts/components/user/routes.js
-#: app/scripts/components/user/user-dashboard.html
 msgid "Audit logs"
 msgstr ""
 
@@ -667,6 +668,10 @@ msgstr ""
 msgid "CPU usage"
 msgstr ""
 
+#: app/scripts/components/table-react/TableExportButton.tsx
+msgid "CSV"
+msgstr ""
+
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
 msgid "Calculating costs"
 msgstr ""
@@ -689,7 +694,7 @@ msgstr ""
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.html
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/digitalocean/droplet-resize.html
-#: app/scripts/components/events/event-types-dialog.html
+#: app/scripts/components/events/types-list-dialog.html
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/details/expert-bid-dialog.html
 #: app/scripts/components/experts/requests/create/expert-contract-create.html
@@ -923,6 +928,10 @@ msgstr ""
 
 #: app/scripts/components/experts/requests/details/expert-request-details.html
 msgid "Contract price"
+msgstr ""
+
+#: app/scripts/components/table-react/TableExportButton.tsx
+msgid "Copy to clipboard"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html
@@ -1261,6 +1270,7 @@ msgstr ""
 #: app/scripts/components/slurm/actions.js
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
+#: app/scripts/components/user/list/EventDetailsButton.tsx
 #: app/scripts/components/user/user-sidebar.html
 msgid "Details"
 msgstr ""
@@ -1432,6 +1442,7 @@ msgstr ""
 #: app/scripts/components/dashboard/project-events-feed.js
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/events/event-types-dialog.js
+#: app/scripts/components/user/list/EventTypesButton.tsx
 msgid "Event types"
 msgstr ""
 
@@ -1485,11 +1496,16 @@ msgstr ""
 msgid "Every year"
 msgstr ""
 
+#: app/scripts/components/table-react/TableExportButton.tsx
+msgid "Excel"
+msgstr ""
+
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
 #: app/scripts/components/experts/extensions/user-organizations.js
+#: app/scripts/components/user/list/CustomerPermissions.tsx
 msgid "Expert"
 msgstr ""
 
@@ -1591,6 +1607,7 @@ msgstr ""
 msgid "Explain price"
 msgstr ""
 
+#: app/scripts/components/table-react/TableExportButton.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Export as"
 msgstr ""
@@ -2348,7 +2365,7 @@ msgstr ""
 msgid "Manage organization"
 msgstr ""
 
-#: app/scripts/components/user/user-dashboard.html
+#: app/scripts/components/user/list/UserDashboard.tsx
 msgid "Managed projects"
 msgstr ""
 
@@ -2404,6 +2421,7 @@ msgstr ""
 #: app/scripts/components/alerts/base-alerts-list.js
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/user/list/UserEvents.tsx
 msgid "Message"
 msgstr ""
 
@@ -2536,6 +2554,7 @@ msgid "New size"
 msgstr ""
 
 #: app/scripts/components/form/appstore-form-wizard.html
+#: app/scripts/components/table-react/TablePagination.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Next"
 msgstr ""
@@ -2688,12 +2707,10 @@ msgid "No notifications registered."
 msgstr ""
 
 #: app/scripts/components/customer/customer-list.js
-#: app/scripts/components/user/user-organizations.js
 msgid "No organizations found matching filter."
 msgstr ""
 
 #: app/scripts/components/customer/customer-list.js
-#: app/scripts/components/user/user-organizations.js
 msgid "No organizations yet"
 msgstr ""
 
@@ -2738,12 +2755,7 @@ msgid "No projects are assigned to this role."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js
-#: app/scripts/components/user/user-projects.js
 msgid "No projects found matching filter."
-msgstr ""
-
-#: app/scripts/components/user/user-projects.js
-msgid "No projects yet"
 msgstr ""
 
 #: app/scripts/components/providers/provider-list.js
@@ -3005,7 +3017,7 @@ msgstr ""
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/resource/list/resource-global-list.js
-#: app/scripts/components/user/user-projects.js
+#: app/scripts/components/user/list/ProjectPermissions.tsx
 msgid "Organization"
 msgstr ""
 
@@ -3049,8 +3061,8 @@ msgstr ""
 #: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/issues/list/constants.js
+#: app/scripts/components/user/list/CustomerPermissions.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-organizations.js
 msgid "Organization name"
 msgstr ""
 
@@ -3121,13 +3133,17 @@ msgstr ""
 msgid "Output log"
 msgstr ""
 
-#: app/scripts/components/user/user-dashboard.html
+#: app/scripts/components/user/list/UserDashboard.tsx
 msgid "Owned organizations"
 msgstr ""
 
 #: app/scripts/components/team/customer-users-list.js
-#: app/scripts/components/user/user-organizations.js
+#: app/scripts/components/user/list/CustomerPermissions.tsx
 msgid "Owner"
+msgstr ""
+
+#: app/scripts/components/table-react/TableExportButton.tsx
+msgid "PDF"
 msgstr ""
 
 #: app/scripts/components/experts/bids/details/expert-bid-summary.html
@@ -3386,6 +3402,7 @@ msgid "Preview contract"
 msgstr ""
 
 #: app/scripts/components/form/appstore-form-wizard.html
+#: app/scripts/components/table-react/TablePagination.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Previous"
 msgstr ""
@@ -3464,6 +3481,10 @@ msgstr ""
 
 #: app/scripts/components/providers/details/dialog.html
 msgid "Prices"
+msgstr ""
+
+#: app/scripts/components/table-react/TableExportButton.tsx
+msgid "Print"
 msgstr ""
 
 #: app/scripts/components/billing/invoice-header.html
@@ -3576,7 +3597,7 @@ msgstr ""
 #: app/scripts/components/project/project-details.html
 #: app/scripts/components/providers/details/provider-project-link-quotas.html
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/user/user-projects.js
+#: app/scripts/components/user/list/ProjectPermissions.tsx
 msgid "Project name"
 msgstr ""
 
@@ -3836,6 +3857,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-activity-stream.html
 #: app/scripts/components/issues/list/issues-short-list.html
+#: app/scripts/components/table-react/TableRefreshButton.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Refresh"
 msgstr ""
@@ -4161,7 +4183,7 @@ msgstr ""
 #: app/scripts/components/invitations/invitations-list.js
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/user/user-projects.js
+#: app/scripts/components/user/list/ProjectPermissions.tsx
 msgid "Role"
 msgstr ""
 
@@ -4263,6 +4285,7 @@ msgid "Schedule"
 msgstr ""
 
 #: app/scripts/components/navigation/header/main-search.html
+#: app/scripts/components/table-react/TableQuery.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Search"
 msgstr ""
@@ -4497,6 +4520,10 @@ msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr ""
+
+#: app/scripts/components/table-react/TableInfo.tsx
+msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries"
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-agreement.html
@@ -4937,6 +4964,14 @@ msgstr ""
 msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
+#: app/scripts/components/table-react/TablePlaceholder.tsx
+msgid "There are no {verboseName} found matching the filter."
+msgstr ""
+
+#: app/scripts/components/table-react/TablePlaceholder.tsx
+msgid "There are no {verboseName} yet."
+msgstr ""
+
 #: app/scripts/components/issues/issues-activity-stream.html
 msgid "There is no activity yet."
 msgstr ""
@@ -4984,6 +5019,7 @@ msgstr ""
 #: app/scripts/components/alerts/base-alerts-list.js
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/user/list/UserEvents.tsx
 msgid "Timestamp"
 msgstr ""
 
@@ -5149,6 +5185,10 @@ msgstr ""
 #: app/scripts/components/project/project-providers-service.js
 #: app/scripts/components/providers/details/provider-projects.js
 msgid "Unable to delete link."
+msgstr ""
+
+#: app/scripts/components/table-react/Table.tsx
+msgid "Unable to fetch data."
 msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js
@@ -5763,6 +5803,10 @@ msgstr ""
 msgid "error message: {errorMessage}"
 msgstr ""
 
+#: app/scripts/components/user/list/UserEvents.tsx
+msgid "events"
+msgstr ""
+
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 msgid "expert"
 msgstr ""
@@ -5780,6 +5824,10 @@ msgstr ""
 msgid "have been accepted on"
 msgstr ""
 
+#: app/scripts/components/table-react/TablePlaceholder.tsx
+msgid "items"
+msgstr ""
+
 #: app/scripts/components/quotas/quotas-table.html
 msgid "of"
 msgstr ""
@@ -5788,8 +5836,16 @@ msgstr ""
 msgid "organization"
 msgstr ""
 
+#: app/scripts/components/user/list/CustomerPermissions.tsx
+msgid "organizations"
+msgstr ""
+
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 msgid "owner"
+msgstr ""
+
+#: app/scripts/components/user/list/ProjectPermissions.tsx
+msgid "projects"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-bar-chart.html

@@ -1,6 +1,6 @@
 import template from './event-details-dialog.html';
 
-export const eventDetailsDialog = {
+const eventDetailsDialog = {
   template,
   controller: class EventDetailsDialogController {
     $onInit() {
@@ -13,3 +13,5 @@ export const eventDetailsDialog = {
     resolve: '<'
   }
 };
+
+export default eventDetailsDialog;

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "./build/",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": ".",
+    "paths": {
+      "@waldur/*": ["app/scripts/components/*"]
+    }
+  },
+  "types": ["jasmine"],
+  "lib": [
+    "es2015",
+    "dom"
+  ],
+  "include": [
+    "./app/scripts/components/**/*"
+  ]
+}
