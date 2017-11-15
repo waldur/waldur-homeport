@@ -50,10 +50,6 @@ module.exports = {
       'angular-ui-bootstrap',
       'angular-bind-html-compile-ci-dev',
       'oclazyload',
-
-      'summernote/dist/summernote',
-      'angular-summernote/dist/angular-summernote',
-
       'angular-intro.js',
 
       'react2angular',

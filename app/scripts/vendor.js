@@ -49,8 +49,6 @@ import 'intro.js/introjs.css';
 import 'angular-intro.js';
 
 import 'summernote/dist/summernote.css';
-import 'summernote/dist/summernote';
-import 'angular-summernote/dist/angular-summernote';
 
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require

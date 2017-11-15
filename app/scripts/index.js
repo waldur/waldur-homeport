@@ -76,7 +76,6 @@ const appModule = angular.module('waldur', [
   'angular-bind-html-compile',
   'oc.lazyLoad',
   'angular-intro',
-  'summernote',
 ]);
 
 rootModule(appModule);

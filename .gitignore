@@ -5,6 +5,7 @@
 /.pydevproject
 /.settings
 /.sublime
+/.vscode
 *.sw*
 /atlassian-ide-plugin.xml
 .todo
