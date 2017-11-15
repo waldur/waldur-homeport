@@ -1,4 +1,5 @@
 import FileSaver from 'file-saver';
+import JSZip from 'jszip';
 
 const templates = {
   '[Content_Types].xml':
@@ -33,7 +34,7 @@ const templates = {
 		'</workbook>',
 };
 
-class SharedStrings {
+export class SharedStrings {
   private strings: Array<string> = [];
 
   getIndex(value: string) {
@@ -52,7 +53,7 @@ class SharedStrings {
   }
 
   formatStrings() {
-    return this.strings.map(value => `<si><t>${this.escapeValue(value)}</t></si>`).join('\n');
+    return this.strings.map(value => `<si><t>${this.escapeValue(value)}</t></si>`).join('');
   }
 
   serialize() {
@@ -95,8 +96,8 @@ function formatCell(ref, type, value) {
   return `<c r="${ref}" t="${type}"><v>${value}</v></c>`;
 }
 
-function getSheet(sharedStrings: SharedStrings, rows: Array<Array<any>>) {
-  const xmlRows = rows.map((row, rowIndex) => {
+export function getSheetData(sharedStrings: SharedStrings, rows: Array<Array<any>>) {
+  return rows.map((row, rowIndex) => {
     const rowRef = rowIndex + 1;
     const cells = row.map((value, cellIndex) => {
       const colRef = getColumnLetter(cellIndex + 1) + rowRef;
@@ -108,21 +109,23 @@ function getSheet(sharedStrings: SharedStrings, rows: Array<Array<any>>) {
       default:
         return formatCell(colRef, 's', sharedStrings.getIndex(value + ''));
       }
-    }).join('\n');
+    }).join('');
     return `<row r="${rowRef}">${cells}</row>`;
-  }).join('\n');
+  }).join('');
+}
+
+export function getSheet(sharedStrings: SharedStrings, rows: Array<Array<any>>) {
   return (
     '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'+
 		'<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="x14ac" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac">'+
       '<sheetData>'+
-        xmlRows+
+      getSheetData(sharedStrings, rows)+
       '</sheetData>'+
 		'</worksheet>'
   );
 }
 
 export default async function exportExcel(table, data) {
-  const JSZip = await import(/* webpackChunkName: "jszip" */ 'jszip');
   let zip = new JSZip();
   for(const path in templates) {
     addToZip(zip, path, templates[path]);
