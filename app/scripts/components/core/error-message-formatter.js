@@ -64,4 +64,20 @@ export default class ErrorMessageFormatter {
     return errors;
   }
 
+  parseError(error) {
+    let errors = {};
+    if (error.data && typeof error.data === 'object') {
+      for (let key in error.data) {
+        let errorValue = error.data[key];
+        if (Array.isArray(errorValue)) {
+          errors[key] = errorValue;
+        } else {
+          errors[key] = [errorValue];
+        }
+      }
+    } else if (error.data) {
+      errors.nonFieldErrors = [].concat(error.data);
+    }
+    return errors;
+  }
 }

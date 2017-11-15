@@ -2,12 +2,19 @@ import template from './user-manage.html';
 
 class UserManageController {
   // @ngInject
-  constructor(usersService, $state, ncUtilsFlash, $uibModal, $q, ISSUE_IDS) {
+  constructor(usersService,
+              $state,
+              ncUtilsFlash,
+              $uibModal,
+              ErrorMessageFormatter,
+              $q,
+              ISSUE_IDS) {
     this.usersService = usersService;
     this.$state = $state;
     this.ncUtilsFlash = ncUtilsFlash;
     this.$uibModal = $uibModal;
     this.ISSUE_IDS = ISSUE_IDS;
+    this.ErrorMessageFormatter = ErrorMessageFormatter;
     this.$q = $q;
     this.init();
   }
@@ -29,18 +36,7 @@ class UserManageController {
       this.ncUtilsFlash.success(gettext('Profile has been updated.'));
     }).catch(response => {
       this.ncUtilsFlash.errorFromResponse(response, gettext('Profile could not be updated.'));
-      if (response.data && typeof response.data === 'object') {
-        let errors = {};
-        for (let key in response.data) {
-          let errorValue = response.data[key];
-          if (Array.isArray(errorValue)) {
-            errors[key] = errorValue;
-          } else {
-            errors[key] = [errorValue];
-          }
-        }
-        Object.assign(this.errors, errors);
-      }
+      angular.merge(this.errors, this.ErrorMessageFormatter.parseError(response));
     });
   }
 
