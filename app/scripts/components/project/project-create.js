@@ -75,7 +75,7 @@ class ProjectAddController extends BaseControllerAddClass {
 
   save() {
     if (!this.validate()) return;
-    super.save();
+    return super.save();
   }
 
   afterSave(project) {

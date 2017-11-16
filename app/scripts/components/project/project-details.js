@@ -69,7 +69,8 @@ class ProjectDetailsController {
       this.ncUtilsFlash.success(gettext('Project has been updated.'));
 
       let item = this.customer.projects.filter(item => item.uuid === project.uuid)[0];
-      item.name = project.name;
+      this.project.name = item.name = project.name;
+      this.project.description = item.description = project.description;
 
       this.$rootScope.$broadcast('refreshProjectList');
     }, response => {
