@@ -92,6 +92,21 @@ function CustomerListController(
       this.list.forEach(item => angular.extend(item, QuotaUtilsService.parseCounters(item)));
       this._super();
     },
+    getUserFilter: function() {
+      return {
+        name: 'accounting_is_running',
+        choices: [
+          {
+            title: gettext('Accounting is running'),
+            value: true,
+          },
+          {
+            title: gettext('Accounting is not running'),
+            value: false
+          },
+        ]
+      };
+    },
   });
 
   controllerScope.__proto__ = new ControllerListClass();
