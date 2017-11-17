@@ -37,13 +37,25 @@ const REPORT_ITEMS = [
 // This service checks users status and returns different sidebar items and router state
 export default class IssueNavigationService {
   // @ngInject
-  constructor($state, usersService, currentStateService) {
+  constructor($state, usersService, currentStateService, features) {
     this.$state = $state;
     this.usersService = usersService;
     this.currentStateService = currentStateService;
+    this.features = features;
+  }
+
+  get isVisible() {
+    if (this.features.isVisible('support')) {
+      return true;
+    }
+    const user = this.usersService.currentUser;
+    return user && (user.is_staff || user.is_support);
   }
 
   gotoDashboard() {
+    if (!this.features.isVisible('support')) {
+      return this.$state.go('support.resources');
+    }
     return this.usersService.getCurrentUser().then(user => {
       if (user.is_staff || user.is_support) {
         this.$state.go('support.helpdesk');
@@ -56,6 +68,9 @@ export default class IssueNavigationService {
   getSidebarItems() {
     return this.usersService.getCurrentUser().then(user => {
       this.currentUser = user;
+      if (!this.features.isVisible('support')) {
+        return [];
+      }
       if (user.is_support && !user.is_staff) {
         return HELPDESK_ITEMS;
       } else if (user.is_support && user.is_staff) {
