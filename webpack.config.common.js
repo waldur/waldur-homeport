@@ -22,7 +22,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
-      '@waldur': path.resolve('./app/scripts/components/')
+      '@waldur': path.resolve('./app/scripts/components/'),
     }
   },
   devtool: 'source-map',
