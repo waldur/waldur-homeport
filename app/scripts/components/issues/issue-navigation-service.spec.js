@@ -18,8 +18,11 @@ describe('IssueNavigationService', () => {
     const currentStateService = {
       getOwnerOrStaff: () => isOwnerOrStaff
     };
+    const features = {
+      isVisible: () => true
+    };
     $state = jasmine.createSpyObj('$state', ['go']);
-    service = new IssueNavigationService($state, usersService, currentStateService);
+    service = new IssueNavigationService($state, usersService, currentStateService, features);
     isOwnerOrStaff = false;
   }));
 
