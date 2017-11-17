@@ -16,7 +16,6 @@ export default function issueRoutes($stateProvider) {
       abstract: true,
       data: {
         auth: true,
-        feature: 'support',
         workspace: 'support'
       }
     })
@@ -26,7 +25,8 @@ export default function issueRoutes($stateProvider) {
       template: '<issues-dashboard></issue-dashboard>',
       data: {
         pageTitle: gettext('Support dashboard'),
-        hideBreadcrumbs: true
+        hideBreadcrumbs: true,
+        feature: 'support'
       }
     })
 
@@ -34,7 +34,8 @@ export default function issueRoutes($stateProvider) {
       url: 'helpdesk/',
       template: '<issues-helpdesk></issues-helpdesk>',
       data: {
-        pageTitle: gettext('Helpdesk dashboard')
+        pageTitle: gettext('Helpdesk dashboard'),
+        feature: 'support'
       }
     })
 
@@ -42,7 +43,8 @@ export default function issueRoutes($stateProvider) {
       url: 'issue/:uuid/',
       template: '<issue-detail></issue-detail>',
       data: {
-        pageTitle: gettext('Request detail')
+        pageTitle: gettext('Request detail'),
+        feature: 'support'
       }
     })
 
@@ -50,7 +52,8 @@ export default function issueRoutes($stateProvider) {
       url: 'list/',
       template: '<issues-list-filtered></issues-list-filtered>',
       data: {
-        pageTitle: gettext('Support requests')
+        pageTitle: gettext('Support requests'),
+        feature: 'support'
       }
     })
 
