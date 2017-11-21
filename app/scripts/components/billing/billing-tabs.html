@@ -16,7 +16,7 @@
       <uib-tab-heading translate>Invoices</uib-tab-heading>
       <div class="panel-body">
         <p ng-if="$ctrl.customer">
-          <span translate>Estimated cost of organization's resources:</span>
+          <span translate>Estimated cost for the current month:</span>
           {{ $ctrl.customer.billing_price_estimate.total | defaultCurrency }}
         </p>
         <paypal-invoices-list/>

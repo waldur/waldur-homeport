@@ -1428,7 +1428,7 @@ msgid "Estimated cost for current month"
 msgstr ""
 
 #: app/scripts/components/billing/billing-tabs.html
-msgid "Estimated cost of organization's resources:"
+msgid "Estimated cost for the current month:"
 msgstr ""
 
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html
