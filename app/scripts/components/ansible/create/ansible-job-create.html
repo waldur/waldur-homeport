@@ -46,12 +46,23 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3" ng-if="$ctrl.selectedService && $ctrl.isValid">
-      <ansible-job-checkout-summary
-        job="$ctrl.model"
-        playbook="$ctrl.playbook"
-        provider="$ctrl.selectedService"
-      />
+    <div class="col-md-3" ng-if="$ctrl.selectedService">
+      <div
+        ng-if="!$ctrl.keys.length"
+        class="ibox-content"
+        ng-bind-html="$ctrl.sshKeysNotAvailable">
+      </div>
+      <div
+        ng-if="$ctrl.keys.length && !$ctrl.model.ssh_public_key"
+        class="ibox-content"
+        ng-bind-html="$ctrl.sshKeyNotSelected">
+      </div>
+      <div ng-if="$ctrl.model.ssh_public_key">
+        <ansible-job-checkout-summary
+          job="$ctrl.model"
+          playbook="$ctrl.playbook"
+          provider="$ctrl.selectedService"/>
+      </div>
     </div>
   </div>
 </div>

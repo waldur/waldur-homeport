@@ -8,6 +8,7 @@ const ansibleJobCreate = {
       $q,
       $stateParams,
       $state,
+      $filter,
       ncUtilsFlash,
       AnsibleJobsService,
       AnsiblePlaybooksService,
@@ -18,6 +19,7 @@ const ansibleJobCreate = {
       this.$q = $q;
       this.$stateParams = $stateParams;
       this.$state = $state;
+      this.$filter = $filter;
       this.ncUtilsFlash = ncUtilsFlash;
       this.AnsibleJobsService = AnsibleJobsService;
       this.AnsiblePlaybooksService = AnsiblePlaybooksService;
@@ -35,6 +37,8 @@ const ansibleJobCreate = {
         this.loadServices(),
         this.loadPlaybook(),
       ]).finally(() => this.loading = false);
+      this.sshKeysNotAvailable = this.$filter('translate')(gettext('You have not added any SSH keys to your <a ui-sref="profile.keys">profile</a>.'));
+      this.sshKeyNotSelected = this.$filter('translate')(gettext('You have not selected any SSH key yet.'));
     }
 
     loadKeys() {
@@ -127,6 +131,9 @@ const ansibleJobCreate = {
         };
         if (parameter.default) {
           this.model[parameter.name] = parameter.default;
+        }
+        if (parameter.preselectFirst && parameter.choices.length > 0) {
+          this.model[parameter.name] = parameter.choices[0];
         }
       });
     }

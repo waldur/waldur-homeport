@@ -5760,6 +5760,10 @@ msgstr ""
 msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr ""
 
+#: app/scripts/components/ansible/create/ansible-job-create.js
+msgid "You have not selected any SSH key yet."
+msgstr ""
+
 #: app/scripts/components/experts/bids/details/expert-bid-details.html
 msgid "You have not submitted bid yet."
 msgstr ""
