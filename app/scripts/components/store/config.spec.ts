@@ -12,13 +12,13 @@ describe('Configuration reducer', () => {
   });
 
   it('should check disabled feature', () => {
-    const state = {features, featuresVisible: false};
+    const state = {config: {features, featuresVisible: false}};
     expect(isVisible(state, 'experts')).toBe(false);
     expect(isVisible(state, 'billing')).toBe(true);
   });
 
   it('should skip check if all features are visible', () => {
-    const state = {features, featuresVisible: true};
+    const state = {config: {features, featuresVisible: true}};
     expect(isVisible(state, 'experts')).toBe(true);
     expect(isVisible(state, 'billing')).toBe(true);
   });

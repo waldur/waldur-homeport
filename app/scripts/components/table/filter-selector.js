@@ -14,11 +14,10 @@ const filterSelector = {
     }
 
     $onInit() {
+      this.chosenItem = this.options.choices[0];
       this.$scope.$watch(() => this.chosenItem, () => {
         if (this.chosenItem) {
           this.options.value = this.chosenItem.value;
-        } else {
-          this.options.value = undefined;
         }
         this.onSelect();
       }, true);
