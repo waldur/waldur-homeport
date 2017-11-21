@@ -1,20 +1,24 @@
 <div class="tabs-container m-l-sm">
   <uib-tabset active="active">
-    <uib-tab index="0" ng-if="!$ctrl.showAccountingRecords && !$ctrl.payPalVisible">
+    <uib-tab ng-if="!$ctrl.showAccountingRecords && !$ctrl.payPalVisible">
       <uib-tab-heading translate>Invoices</uib-tab-heading>
-      <div class="panel-body" ng-if="active==0">
+      <div class="panel-body">
         <invoices-list/>
       </div>
     </uib-tab>
-    <uib-tab index="1" ng-if="$ctrl.showAccountingRecords">
+    <uib-tab ng-if="$ctrl.showAccountingRecords">
       <uib-tab-heading translate>Accounting records</uib-tab-heading>
-      <div class="panel-body" ng-if="active==1">
+      <div class="panel-body">
         <billing-records-list/>
       </div>
     </uib-tab>
-    <uib-tab index="2" ng-if="!$ctrl.showAccountingRecords && $ctrl.payPalVisible">
+    <uib-tab ng-if="!$ctrl.showAccountingRecords && $ctrl.payPalVisible">
       <uib-tab-heading translate>Invoices</uib-tab-heading>
-      <div class="panel-body" ng-if="active==2">
+      <div class="panel-body">
+        <p ng-if="$ctrl.customer">
+          <span translate>Estimated cost of organization's resources:</span>
+          {{ $ctrl.customer.billing_price_estimate.total | defaultCurrency }}
+        </p>
         <paypal-invoices-list/>
       </div>
     </uib-tab>
