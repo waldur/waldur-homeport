@@ -107,6 +107,24 @@ function CustomerListController(
         ]
       };
     },
+    getSelectFilter: function() {
+      let date = moment().startOf('month');
+      let choices = [];
+      for(let i=0; i<12; i++) {
+        const month = date.month() + 1;
+        const year = date.year();
+        const label = date.format('MMMM, YYYY');
+        choices.push({
+          label,
+          value: { year, month}
+        });
+        date = date.subtract(1, 'month');
+      }
+      return {
+        label: gettext('Accounting period'),
+        choices
+      };
+    }
   });
 
   controllerScope.__proto__ = new ControllerListClass();

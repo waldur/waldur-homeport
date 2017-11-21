@@ -100,6 +100,10 @@ msgstr ""
 msgid "Accounting is running"
 msgstr ""
 
+#: app/scripts/components/customer/customer-list.js
+msgid "Accounting period"
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-header.html
 msgid "Accounting record"
 msgstr ""
@@ -3501,10 +3505,6 @@ msgstr ""
 
 #: app/scripts/components/providers/details/dialog.html
 msgid "Prices"
-msgstr ""
-
-#: app/scripts/components/table-react/TableExportButton.tsx
-msgid "Print"
 msgstr ""
 
 #: app/scripts/components/billing/invoice-header.html

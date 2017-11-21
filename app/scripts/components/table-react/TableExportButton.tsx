@@ -14,10 +14,6 @@ const TableExportButton = ({ translate, exportAs }: Props) => {
       format: 'clipboard',
     },
     {
-      label: translate('Print'),
-      format: 'print',
-    },
-    {
       label: translate('CSV'),
       format: 'csv',
     },

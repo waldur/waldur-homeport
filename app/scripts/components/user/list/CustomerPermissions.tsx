@@ -9,8 +9,8 @@ import CustomerCreateButton from './CustomerCreateButton';
 import CustomerExpertField from './CustomerExpertField';
 
 const TableComponent = props => {
-  const { translate } = props
-  return <Table {...props} columns={[
+  const { translate, filterByFeature } = props;
+  return <Table {...props} columns={filterByFeature([
     {
       title: translate('Organization name'),
       render: CustomerLink,
@@ -23,9 +23,10 @@ const TableComponent = props => {
     {
       title: translate('Expert'),
       render: CustomerExpertField,
-      className: 'text-center col-md-1'
+      className: 'text-center col-md-1',
+      feature: 'experts'
     }
-  ]}
+  ])}
   verboseName={translate('organizations')}
   actions={<CustomerCreateButton/>}/>;
 };
