@@ -20,7 +20,7 @@
           {{ comment.author_name }}
         </a>
         <span translate>commented</span>:
-        {{ comment.description }}
+        <span ng-bind-html="comment.description | formatJiraMarkup"></span>
       </p>
       <span class="vertical-date small text-muted m-t-xs">
         <span

@@ -145,8 +145,10 @@ const ENV = {
     'LOCAL_SIGNUP',
     'SOCIAL_SIGNUP',
     'ESTONIAN_ID',
-    'SAML2'
+    'SAML2',
+    'VALIMO'
   ],
+  VALIMO_LABEL: 'Mobile ID',
   SAML2_IDENTITY_PROVIDER: 'https://reos.taat.edu.ee/saml2/idp/metadata.php',
   SAML2_LABEL: 'TAAT',
   allowToSelectSAML2Provider: true,
@@ -229,7 +231,7 @@ const ENV = {
   // supportPhone: '+1234567890'
 
   // Renders label and logo at the login page
-  // poweredByLogo: 'static/images/waldur/logo-120x120.png'
+  // poweredByLogo: 'images/waldur/logo-120x120.png'
 
   // Renders link to docs in header
   // docsLink: 'http://example.com/docs/'

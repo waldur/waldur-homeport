@@ -92,6 +92,18 @@ msgstr ""
 msgid "Accounting"
 msgstr ""
 
+#: app/scripts/components/customer/customer-list.js
+msgid "Accounting is not running"
+msgstr ""
+
+#: app/scripts/components/customer/customer-list.js
+msgid "Accounting is running"
+msgstr ""
+
+#: app/scripts/components/customer/customer-list.js
+msgid "Accounting period"
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-header.html
 msgid "Accounting record"
 msgstr ""
@@ -111,6 +123,7 @@ msgstr ""
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 #: app/scripts/components/resource/actions/action-button-resource.html
 #: app/scripts/components/table/responsive-table.js
+#: app/scripts/components/user/list/UserEvents.tsx
 msgid "Actions"
 msgstr ""
 
@@ -186,7 +199,7 @@ msgstr ""
 msgid "Add notification"
 msgstr ""
 
-#: app/scripts/components/user/user-organizations.js
+#: app/scripts/components/user/list/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr ""
 
@@ -259,9 +272,9 @@ msgstr ""
 msgid "Agreement number"
 msgstr ""
 
+#: app/scripts/components/alerts/alert-types-dialog.js
 #: app/scripts/components/alerts/base-alerts-list.js
 #: app/scripts/components/dashboard/project-alerts-feed.js
-#: app/scripts/components/events/event-types-dialog.js
 msgid "Alert types"
 msgstr ""
 
@@ -446,13 +459,21 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/routes.js
 #: app/scripts/components/user/constants.js
+#: app/scripts/components/user/list/UserDashboard.tsx
 #: app/scripts/components/user/routes.js
-#: app/scripts/components/user/user-dashboard.html
 msgid "Audit logs"
+msgstr ""
+
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.html
+msgid "Autenticate using Mobile ID"
 msgstr ""
 
 #: app/scripts/components/events/constants.js
 msgid "Authentication events"
+msgstr ""
+
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.js
+msgid "Authentication with Mobile ID has been canceled by user or time out. Details:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.js
@@ -659,6 +680,10 @@ msgstr ""
 msgid "CPU usage"
 msgstr ""
 
+#: app/scripts/components/table-react/TableExportButton.tsx
+msgid "CSV"
+msgstr ""
+
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
 msgid "Calculating costs"
 msgstr ""
@@ -678,9 +703,10 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/appstore/dialog/appstore-selector-dialog.html
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.html
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/digitalocean/droplet-resize.html
-#: app/scripts/components/events/event-types-dialog.html
+#: app/scripts/components/events/types-list-dialog.html
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/details/expert-bid-dialog.html
 #: app/scripts/components/experts/requests/create/expert-contract-create.html
@@ -736,6 +762,10 @@ msgstr ""
 #: app/scripts/components/project/project-create.html
 #: app/scripts/components/providers/details/provider-details.html
 msgid "Certifications"
+msgstr ""
+
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.html
+msgid "Challenge code"
 msgstr ""
 
 #: app/scripts/components/issues/create/constants.js
@@ -910,6 +940,10 @@ msgstr ""
 
 #: app/scripts/components/experts/requests/details/expert-request-details.html
 msgid "Contract price"
+msgstr ""
+
+#: app/scripts/components/table-react/TableExportButton.tsx
+msgid "Copy to clipboard"
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html
@@ -1248,6 +1282,7 @@ msgstr ""
 #: app/scripts/components/slurm/actions.js
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
+#: app/scripts/components/user/list/EventDetailsButton.tsx
 #: app/scripts/components/user/user-sidebar.html
 msgid "Details"
 msgstr ""
@@ -1396,6 +1431,10 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
+#: app/scripts/components/billing/billing-tabs.html
+msgid "Estimated cost for the current month:"
+msgstr ""
+
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html
 msgid "Estimated maximum price"
 msgstr ""
@@ -1419,6 +1458,7 @@ msgstr ""
 #: app/scripts/components/dashboard/project-events-feed.js
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/events/event-types-dialog.js
+#: app/scripts/components/user/list/EventTypesButton.tsx
 msgid "Event types"
 msgstr ""
 
@@ -1472,11 +1512,16 @@ msgstr ""
 msgid "Every year"
 msgstr ""
 
+#: app/scripts/components/table-react/TableExportButton.tsx
+msgid "Excel"
+msgstr ""
+
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
 #: app/scripts/components/experts/extensions/user-organizations.js
+#: app/scripts/components/user/list/CustomerPermissions.tsx
 msgid "Expert"
 msgstr ""
 
@@ -1578,6 +1623,7 @@ msgstr ""
 msgid "Explain price"
 msgstr ""
 
+#: app/scripts/components/table-react/TableExportButton.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Export as"
 msgstr ""
@@ -1603,6 +1649,10 @@ msgstr ""
 #: app/scripts/components/form/appstore-field-string.js
 #: app/scripts/components/form/appstore-field-tel.js
 msgid "Field length must be less than {maxlength} symbols"
+msgstr ""
+
+#: app/scripts/components/project/project-validation-service.js
+msgid "Fill up the name."
 msgstr ""
 
 #: app/scripts/components/issues/create/issue-registration.html
@@ -2335,7 +2385,7 @@ msgstr ""
 msgid "Manage organization"
 msgstr ""
 
-#: app/scripts/components/user/user-dashboard.html
+#: app/scripts/components/user/list/UserDashboard.tsx
 msgid "Managed projects"
 msgstr ""
 
@@ -2391,6 +2441,7 @@ msgstr ""
 #: app/scripts/components/alerts/base-alerts-list.js
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/user/list/UserEvents.tsx
 msgid "Message"
 msgstr ""
 
@@ -2413,6 +2464,10 @@ msgstr ""
 
 #: app/scripts/components/customer/details/customer-threshold.html
 msgid "Minimal valid value is 0"
+msgstr ""
+
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.html
+msgid "Mobile phone number"
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-global-list.js
@@ -2481,6 +2536,10 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+#: app/scripts/components/project/project-validation-service.js
+msgid "Name is duplicated. Choose other name."
+msgstr ""
+
 #: app/scripts/components/customer/create/customer-create-config.js
 msgid "Name of your organization."
 msgstr ""
@@ -2519,6 +2578,7 @@ msgid "New size"
 msgstr ""
 
 #: app/scripts/components/form/appstore-form-wizard.html
+#: app/scripts/components/table-react/TablePagination.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Next"
 msgstr ""
@@ -2671,12 +2731,10 @@ msgid "No notifications registered."
 msgstr ""
 
 #: app/scripts/components/customer/customer-list.js
-#: app/scripts/components/user/user-organizations.js
 msgid "No organizations found matching filter."
 msgstr ""
 
 #: app/scripts/components/customer/customer-list.js
-#: app/scripts/components/user/user-organizations.js
 msgid "No organizations yet"
 msgstr ""
 
@@ -2721,12 +2779,7 @@ msgid "No projects are assigned to this role."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js
-#: app/scripts/components/user/user-projects.js
 msgid "No projects found matching filter."
-msgstr ""
-
-#: app/scripts/components/user/user-projects.js
-msgid "No projects yet"
 msgstr ""
 
 #: app/scripts/components/providers/provider-list.js
@@ -2988,7 +3041,7 @@ msgstr ""
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/resource/list/resource-global-list.js
-#: app/scripts/components/user/user-projects.js
+#: app/scripts/components/user/list/ProjectPermissions.tsx
 msgid "Organization"
 msgstr ""
 
@@ -3032,8 +3085,8 @@ msgstr ""
 #: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/issues/list/constants.js
+#: app/scripts/components/user/list/CustomerPermissions.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-organizations.js
 msgid "Organization name"
 msgstr ""
 
@@ -3104,13 +3157,17 @@ msgstr ""
 msgid "Output log"
 msgstr ""
 
-#: app/scripts/components/user/user-dashboard.html
+#: app/scripts/components/user/list/UserDashboard.tsx
 msgid "Owned organizations"
 msgstr ""
 
 #: app/scripts/components/team/customer-users-list.js
-#: app/scripts/components/user/user-organizations.js
+#: app/scripts/components/user/list/CustomerPermissions.tsx
 msgid "Owner"
+msgstr ""
+
+#: app/scripts/components/table-react/TableExportButton.tsx
+msgid "PDF"
 msgstr ""
 
 #: app/scripts/components/experts/bids/details/expert-bid-summary.html
@@ -3369,6 +3426,7 @@ msgid "Preview contract"
 msgstr ""
 
 #: app/scripts/components/form/appstore-form-wizard.html
+#: app/scripts/components/table-react/TablePagination.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Previous"
 msgstr ""
@@ -3487,6 +3545,10 @@ msgid "Profile"
 msgstr ""
 
 #: app/scripts/components/user/user-manage.js
+msgid "Profile could not be updated."
+msgstr ""
+
+#: app/scripts/components/user/user-manage.js
 msgid "Profile has been updated."
 msgstr ""
 
@@ -3505,6 +3567,14 @@ msgstr ""
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html
 msgid "Project"
+msgstr ""
+
+#: app/scripts/components/project/project-create.js
+msgid "Project could not be created."
+msgstr ""
+
+#: app/scripts/components/project/project-details.js
+msgid "Project could not be updated."
 msgstr ""
 
 #: app/scripts/components/project/project-create.html
@@ -3555,7 +3625,7 @@ msgstr ""
 #: app/scripts/components/project/project-details.html
 #: app/scripts/components/providers/details/provider-project-link-quotas.html
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/user/user-projects.js
+#: app/scripts/components/user/list/ProjectPermissions.tsx
 msgid "Project name"
 msgstr ""
 
@@ -3815,6 +3885,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issues-activity-stream.html
 #: app/scripts/components/issues/list/issues-short-list.html
+#: app/scripts/components/table-react/TableRefreshButton.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Refresh"
 msgstr ""
@@ -4140,7 +4211,7 @@ msgstr ""
 #: app/scripts/components/invitations/invitations-list.js
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
-#: app/scripts/components/user/user-projects.js
+#: app/scripts/components/user/list/ProjectPermissions.tsx
 msgid "Role"
 msgstr ""
 
@@ -4230,6 +4301,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: app/scripts/components/controllers/base-controller-class-es6.js
 #: app/scripts/components/controllers/base-controller-class.js
 msgid "Saving of {vm_name} was successful."
 msgstr ""
@@ -4242,6 +4314,7 @@ msgid "Schedule"
 msgstr ""
 
 #: app/scripts/components/navigation/header/main-search.html
+#: app/scripts/components/table-react/TableQuery.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Search"
 msgstr ""
@@ -4478,8 +4551,16 @@ msgstr ""
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
+#: app/scripts/components/table-react/TableInfo.tsx
+msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
+msgstr ""
+
 #: app/scripts/components/premiumSupport/premium-support-agreement.html
 msgid "Sign a support agreement"
+msgstr ""
+
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.html
+msgid "Sign in"
 msgstr ""
 
 #: app/scripts/components/auth/auth-button-text.js
@@ -4912,6 +4993,14 @@ msgstr ""
 msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
+#: app/scripts/components/table-react/TablePlaceholder.tsx
+msgid "There are no {verboseName} found matching the filter."
+msgstr ""
+
+#: app/scripts/components/table-react/TablePlaceholder.tsx
+msgid "There are no {verboseName} yet."
+msgstr ""
+
 #: app/scripts/components/issues/issues-activity-stream.html
 msgid "There is no activity yet."
 msgstr ""
@@ -4959,6 +5048,7 @@ msgstr ""
 #: app/scripts/components/alerts/base-alerts-list.js
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/user/list/UserEvents.tsx
 msgid "Timestamp"
 msgstr ""
 
@@ -5068,6 +5158,10 @@ msgstr ""
 msgid "Unable to approve billing plan."
 msgstr ""
 
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.js
+msgid "Unable to authenticate using Mobile ID."
+msgstr ""
+
 #: app/scripts/components/plans/plan-agreement-cancel.js
 msgid "Unable to cancel billing plan."
 msgstr ""
@@ -5122,6 +5216,10 @@ msgstr ""
 msgid "Unable to delete link."
 msgstr ""
 
+#: app/scripts/components/table-react/Table.tsx
+msgid "Unable to fetch data."
+msgstr ""
+
 #: app/scripts/components/project/project-providers-service.js
 msgid "Unable to fetch project providers."
 msgstr ""
@@ -5168,6 +5266,10 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.js
 msgid "Unable to validate invitation token."
+msgstr ""
+
+#: app/scripts/components/auth/valimo/auth-valimo-dialog.js
+msgid "Unexpected exception happened during login process."
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
@@ -5662,6 +5764,10 @@ msgstr ""
 msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr ""
 
+#: app/scripts/components/ansible/create/ansible-job-create.js
+msgid "You have not selected any SSH key yet."
+msgstr ""
+
 #: app/scripts/components/experts/bids/details/expert-bid-details.html
 msgid "You have not submitted bid yet."
 msgstr ""
@@ -5730,6 +5836,10 @@ msgstr ""
 msgid "error message: {errorMessage}"
 msgstr ""
 
+#: app/scripts/components/user/list/UserEvents.tsx
+msgid "events"
+msgstr ""
+
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 msgid "expert"
 msgstr ""
@@ -5747,6 +5857,10 @@ msgstr ""
 msgid "have been accepted on"
 msgstr ""
 
+#: app/scripts/components/table-react/TablePlaceholder.tsx
+msgid "items"
+msgstr ""
+
 #: app/scripts/components/quotas/quotas-table.html
 msgid "of"
 msgstr ""
@@ -5755,8 +5869,16 @@ msgstr ""
 msgid "organization"
 msgstr ""
 
+#: app/scripts/components/user/list/CustomerPermissions.tsx
+msgid "organizations"
+msgstr ""
+
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 msgid "owner"
+msgstr ""
+
+#: app/scripts/components/user/list/ProjectPermissions.tsx
+msgid "projects"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-bar-chart.html

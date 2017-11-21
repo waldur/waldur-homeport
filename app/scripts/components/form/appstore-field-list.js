@@ -31,7 +31,7 @@ class FieldController {
       this.field = angular.extend({}, this.field, {choices});
     }
 
-    if (this.field.preselectFirst && this.field.choices.length === 1) {
+    if (this.field.preselectFirst && this.field.choices.length > 0) {
       this.model[this.field.name] = this.field.choices[0];
     }
 

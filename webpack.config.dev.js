@@ -1,32 +1,35 @@
-var baseConfig = require('./webpack.config.common.js');
-var webpack = require('webpack');
+const baseConfig = require('./webpack.config.common.js');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
-var path = require('path');
+const path = require('path');
 
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var CleanUpStatsPlugin = require('./webpack-cleanup-stats');
-var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanUpStatsPlugin = require('./webpack-cleanup-stats');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+
+const utils = require('./webpack.utils');
 
 module.exports = merge(baseConfig, {
-  output: {
-    path: path.resolve(__dirname, './app/'),
-    filename: 'static/js/[name]-bundle.js'
-  },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './app/index-template.html',
-      filename: path.resolve(__dirname, './app/index.html'),
-      inject: 'body',
-      chunks: ['vendor', 'index'],
-      alwaysWriteToDisk: true,
-      chunksSortMode: function(a, b) {
-        return (a.names[0] < b.names[0]) ? 1 : -1;
-      }
+    new webpack.DllReferencePlugin({
+      context: path.resolve('.'),
+      manifest: require(utils.vendorManifest),
+    }),
+    new AddAssetHtmlPlugin({
+      filepath: path.resolve(utils.vendorBundle),
+      includeSourcemap: !utils.isProd,
+      outputPath: 'scripts/',
+      publicPath: 'scripts/',
+      hash: true,
     }),
     new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin([
-      {from: './app/scripts/configs/config.json', to: './scripts/configs/config.json', toType: 'file'},
+      {
+        from: './app/scripts/configs/config.json',
+        to: utils.formatPath('scripts/configs/config.json'),
+        toType: 'file',
+      },
     ]),
     new webpack.LoaderOptionsPlugin({
       debug: true,
@@ -34,15 +37,15 @@ module.exports = merge(baseConfig, {
     }),
     new CleanUpStatsPlugin(),
     new HtmlWebpackHarddiskPlugin({
-      outputPath: path.resolve(__dirname, './app'),
+      outputPath: utils.formatPath('.'),
     }),
   ],
-  watch: true,
   devServer: {
     // look for missing files in app folder (app has to be built one more time for this)
-    contentBase: path.resolve(__dirname, './app/'),
+    contentBase: utils.formatPath('.'),
     hot: true,
     inline: true,
     port: 8001,
+    publicPath: '/',
   }
 });

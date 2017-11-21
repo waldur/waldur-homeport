@@ -92,6 +92,39 @@ function CustomerListController(
       this.list.forEach(item => angular.extend(item, QuotaUtilsService.parseCounters(item)));
       this._super();
     },
+    getUserFilter: function() {
+      return {
+        name: 'accounting_is_running',
+        choices: [
+          {
+            title: gettext('Accounting is running'),
+            value: true,
+          },
+          {
+            title: gettext('Accounting is not running'),
+            value: false
+          },
+        ]
+      };
+    },
+    getSelectFilter: function() {
+      let date = moment().startOf('month');
+      let choices = [];
+      for(let i=0; i<12; i++) {
+        const month = date.month() + 1;
+        const year = date.year();
+        const label = date.format('MMMM, YYYY');
+        choices.push({
+          label,
+          value: { year, month}
+        });
+        date = date.subtract(1, 'month');
+      }
+      return {
+        label: gettext('Accounting period'),
+        choices
+      };
+    }
   });
 
   controllerScope.__proto__ = new ControllerListClass();

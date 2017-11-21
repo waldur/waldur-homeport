@@ -1,17 +1,12 @@
 export default class EventDialogsService {
   // @ngInject
-  constructor($uibModal, eventsService) {
+  constructor($uibModal) {
     this.$uibModal = $uibModal;
-    this.eventsService = eventsService;
   }
 
   eventTypes() {
     return this.$uibModal.open({
       component: 'eventTypesDialog',
-      resolve: {
-        type: () => 'Events',
-        types: () => this.eventsService.getAvailableIconTypes()
-      }
     });
   }
 

@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 
-import $ from 'jquery';
+import 'expose-loader?$!expose-loader?jQuery!jquery';
 import angular from 'angular';
 import moment from 'moment';
 window.moment = moment;
@@ -49,8 +49,6 @@ import 'intro.js/introjs.css';
 import 'angular-intro.js';
 
 import 'summernote/dist/summernote.css';
-import 'summernote/dist/summernote';
-import 'angular-summernote/dist/angular-summernote';
 
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require

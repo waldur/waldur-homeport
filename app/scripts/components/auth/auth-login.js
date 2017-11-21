@@ -88,6 +88,11 @@ export const authLogin = {
       return this.methods.ESTONIAN_ID;
     }
 
+    showValimo() {
+      // Currently Valimo doesn't provide registration, only authentication is available
+      return this.methods.VALIMO && this.mode !== 'register';
+    }
+
     showSaml2() {
       return this.methods.SAML2 && !!this.ENV.SAML2_IDENTITY_PROVIDER;
     }

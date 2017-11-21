@@ -20,7 +20,7 @@
         <input id="full_name" type="text" class="form-control"
           ng-model="$ctrl.user.full_name" name="full_name"
           ng-required="$ctrl.isRequired('full_name')"/>
-        <div class="error" ng-if="$ctrl.errors.full_name">{{::$ctrl.errors.full_name}}</div>
+        <div class="error" ng-repeat="error in $ctrl.errors.full_name" ng-bind="error"></div>
       </div>
     </div>
 

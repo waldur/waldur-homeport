@@ -31,6 +31,7 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       this.service.page = 1;
       this.service.cacheTime = this.cacheTime;
       this.userFilter = this.getUserFilter();
+      this.selectFilter = this.getSelectFilter();
       this.orderField = '';
       this._super();
       this.hideNoDataText = true;
@@ -68,14 +69,19 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       */
       return {};
     },
+    getSelectFilter: function() {
+      /* It is expected that subclass returns object with the same format as getUserFilter method.
+       * The only difference is that filter is rendered as select box.
+       */
+      return {};
+    },
     getChosenUserFilter: function() {
-      if (!this.userFilter.choices) {
-        return {};
+      let filters = {...this.selectFilter.value};
+      if (this.userFilter.choices) {
+        const values = this.userFilter.choices.filter(x => x.chosen).map(x => x.value);
+        filters[this.userFilter.name] = values;
       }
-      const values = this.userFilter.choices.filter(x => x.chosen).map(x => x.value);
-      return {
-        [this.userFilter.name]: values
-      };
+      return filters;
     },
     getList: function(filter) {
       // It should return promise

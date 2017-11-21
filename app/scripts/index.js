@@ -1,3 +1,4 @@
+import './vendor';
 import './globals';
 import '../../assets/sass/style.scss';
 
@@ -50,6 +51,7 @@ import analyticsRoutes from './components/analytics/routes';
 import azureModule from './components/azure/module';
 import slurmModule from './components/slurm/module';
 import paypalModule from './components/paypal/module';
+import storeModule from './components/store/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -74,7 +76,6 @@ const appModule = angular.module('waldur', [
   'angular-bind-html-compile',
   'oc.lazyLoad',
   'angular-intro',
-  'summernote',
 ]);
 
 rootModule(appModule);
@@ -123,6 +124,7 @@ introModule(appModule);
 azureModule(appModule);
 slurmModule(appModule);
 paypalModule(appModule);
+storeModule(appModule);
 appModule.config(analyticsRoutes);
 // Errors module should be the last, because it contains special route.
 // Route with url='*path' allows to display error page without redirect.

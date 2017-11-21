@@ -11,9 +11,9 @@ import 'leaflet/dist/images/marker-shadow.png';
 
 // register images
 L.Icon.Default.mergeOptions({
-    iconRetinaUrl: 'static/images/marker-icon-2x.png',
-    iconUrl: 'static/images/marker-icon.png',
-    shadowUrl: 'static/images/marker-shadow.png',
+    iconRetinaUrl: 'images/marker-icon-2x.png',
+    iconUrl: 'images/marker-icon.png',
+    shadowUrl: 'images/marker-shadow.png',
 });
 import 'angular-leaflet-directive';
 export default 'leaflet-directive';

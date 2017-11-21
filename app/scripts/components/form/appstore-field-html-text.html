@@ -1,5 +1,10 @@
-<summernote class="form-control"
-  config="$ctrl.options"
-  id="{{ $ctrl.field.name }}"
-  name="{{ ::$ctrl.field.name }}"
-  ng-model="$ctrl.model[$ctrl.field.name]"></summernote>
+<div ng-if="$ctrl.loading">
+  <loading-spinner/>
+</div>
+<div ng-if="!$ctrl.loading">
+  <summernote class="form-control"
+    config="$ctrl.options"
+    id="{{ $ctrl.field.name }}"
+    name="{{ ::$ctrl.field.name }}"
+    ng-model="$ctrl.model[$ctrl.field.name]"></summernote>
+</div>

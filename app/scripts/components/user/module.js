@@ -3,9 +3,9 @@ import userManage from './user-manage';
 import userSidebar from './user-sidebar';
 import userDetails from './user-details';
 import { userEdit } from './user-edit';
-import userDashboard from './user-dashboard';
-import userOrganizations from './user-organizations';
-import userProjects from './user-projects';
+import userDashboard from './list/UserDashboard';
+import userOrganizations from './list/CustomerPermissions';
+import userProjects from './list/ProjectPermissions';
 import { userPopover } from './user-popover';
 import userPopoverTable from './user-popover-table';
 import { stateUtilsService, attachStateUtils } from './utils';
@@ -18,7 +18,7 @@ import keysModule from './keys/module';
 
 export default module => {
   module.directive('userEvents', userEvents);
-  module.directive('userManage', userManage);
+  module.component('userManage', userManage);
   module.component('userSidebar', userSidebar);
   module.directive('userDetails', userDetails);
   module.component('userEdit', userEdit);

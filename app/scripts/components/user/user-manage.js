@@ -1,24 +1,20 @@
 import template from './user-manage.html';
 
-export default function userManage() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: UserManageController,
-    controllerAs: '$ctrl',
-    scope: {},
-    bindToController: true
-  };
-}
-
 class UserManageController {
   // @ngInject
-  constructor(usersService, $state, ncUtilsFlash, $uibModal, $q, ISSUE_IDS) {
+  constructor(usersService,
+              $state,
+              ncUtilsFlash,
+              $uibModal,
+              ErrorMessageFormatter,
+              $q,
+              ISSUE_IDS) {
     this.usersService = usersService;
     this.$state = $state;
     this.ncUtilsFlash = ncUtilsFlash;
     this.$uibModal = $uibModal;
     this.ISSUE_IDS = ISSUE_IDS;
+    this.ErrorMessageFormatter = ErrorMessageFormatter;
     this.$q = $q;
     this.init();
   }
@@ -33,12 +29,14 @@ class UserManageController {
   }
 
   saveUser({ user }) {
+    this.errors = {};
     return this.usersService.update(user).then(response => {
       this.usersService.setCurrentUser(response.data);
     }).then(() => {
       this.ncUtilsFlash.success(gettext('Profile has been updated.'));
     }).catch(response => {
-      this.errors = response.data;
+      this.ncUtilsFlash.errorFromResponse(response, gettext('Profile could not be updated.'));
+      angular.merge(this.errors, this.ErrorMessageFormatter.parseError(response));
     });
   }
 
@@ -61,3 +59,11 @@ class UserManageController {
     });
   }
 }
+
+const userManage = {
+  restrict: 'E',
+  template: template,
+  controller: UserManageController
+};
+
+export default userManage;
