@@ -1427,6 +1427,10 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
+#: app/scripts/components/billing/billing-tabs.html
+msgid "Estimated cost for the current month:"
+msgstr ""
+
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html
 msgid "Estimated maximum price"
 msgstr ""
@@ -4548,7 +4552,7 @@ msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
 #: app/scripts/components/table-react/TableInfo.tsx
-msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries"
+msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
 msgstr ""
 
 #: app/scripts/components/premiumSupport/premium-support-agreement.html

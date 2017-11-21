@@ -2,14 +2,13 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { $filter } from '@waldur/core/services';
+import { Translate } from './types';
 
-type Formatter = (template: string, context?: any) => string;
-
-export const formatTemplate: Formatter = (template, context) => (
+export const formatTemplate: Translate = (template, context) => (
   context ? template.replace(/{(.+?)}/g, (match, key) => context[key]) : template
 );
 
-const translate: Formatter = (template, context) => (
+const translate: Translate = (template, context) => (
   formatTemplate($filter('translate')(template), context)
 );
 
