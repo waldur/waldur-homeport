@@ -132,20 +132,6 @@ function ProjectsListController(
           render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.total),
           index: 310,
         },
-        {
-          title: gettext('SLA'),
-          feature: 'premiumSupport',
-          render: function(row) {
-            if (row.plan) {
-              return row.plan.name;
-            } else if (row.has_pending_contracts) {
-              return gettext('Pending');
-            } else {
-              return gettext('No plan');
-            }
-          },
-          index: 320,
-        }
       ];
       return baseColumns.concat(extraColumns).sort((a, b) => a.index - b.index);
     },
