@@ -100,14 +100,6 @@ export default function ProjectWorkspaceController(
         ]
       },
       {
-        link: 'project.support({uuid: $ctrl.context.project.uuid})',
-        icon: 'fa-question-circle',
-        label: gettext('Support'),
-        feature: 'premiumSupport',
-        countFieldKey: 'premium_support_contracts',
-        index: 400,
-      },
-      {
         link: 'project.events({uuid: $ctrl.context.project.uuid})',
         icon: 'fa-bell-o',
         label: gettext('Audit logs'),
