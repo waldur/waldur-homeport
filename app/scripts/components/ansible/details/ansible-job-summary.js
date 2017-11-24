@@ -7,7 +7,7 @@ const ansibleJobSummary = {
   },
   controller: class Controller {
     // @ngInject
-    controller($state, AnsibleJobsService, resourcesService, ncUtilsFlash) {
+    constructor($state, AnsibleJobsService, resourcesService, ncUtilsFlash) {
       this.$state = $state;
       this.AnsibleJobsService = AnsibleJobsService;
       this.resourcesService = resourcesService;
