@@ -49,14 +49,6 @@ const ENV = {
       description: gettext('Provision persistent storage volumes in available Providers.')
     },
     {
-      label: gettext('Support'),
-      icon: 'fa-wrench',
-      key: 'support',
-      feature: 'premiumSupport',
-      state: 'appstore.premiumSupport',
-      description: gettext('Premium support service.')
-    },
-    {
       label: gettext('Batch processing'),
       icon: 'fa-tasks',
       key: 'slurm',
