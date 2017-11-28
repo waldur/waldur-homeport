@@ -190,15 +190,28 @@ function validateAndSort(model, options, validator, comparator, name) {
   }
 }
 
-function imageWatcher(model, options) {
-  validateAndSort(model, options, flavorValidator, flavorComparator, 'flavor');
+function getMinSystemVolumeSize(model) {
+  const imageMinValue = model.image ? model.image.min_disk : 0;
+  const flavorMinValue = model.flavor ? model.flavor.disk : 0;
+  return Math.max(imageMinValue, flavorMinValue);
 }
 
-function flavorWatcher(model, options, newFlavor) {
-  if (newFlavor) {
-    model.system_volume_size = Math.max(model.system_volume_size || 0, newFlavor.disk);
-    options.system_volume_size.min = newFlavor.disk;
-  }
+function updateSystemVolumeSize(model, options) {
+  const minValue = getMinSystemVolumeSize(model);
+  const currentValue = model.system_volume_size || 0;
+  const value = Math.max(currentValue, minValue);
+
+  model.system_volume_size = value;
+  options.system_volume_size.min = minValue;
+}
+
+function imageWatcher(model, options) {
+  validateAndSort(model, options, flavorValidator, flavorComparator, 'flavor');
+  updateSystemVolumeSize(model, options);
+}
+
+function flavorWatcher(model, options) {
+  updateSystemVolumeSize(model, options);
 }
 
 export function flavorFormatter($filter, flavor) {
@@ -226,9 +239,6 @@ function flavorValidator(model, choice) {
     return true;
   }
   if (model.image.min_ram > choice.ram) {
-    return true;
-  }
-  if (model.image.min_disk > choice.disk) {
     return true;
   }
   return false;
