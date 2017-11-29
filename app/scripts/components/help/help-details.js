@@ -23,12 +23,12 @@ const helpDetails = {
 
       case dashboardHelp.alertsList.name:
         return angular.extend({
-          types: this.alertsService.getAvailableIconTypes()
+          types: this.alertsService.getAvailableEventGroups()
         }, dashboardHelp.alertsList);
 
       case dashboardHelp.eventsList.name:
         return angular.extend({
-          types: this.eventsService.getAvailableIconTypes()
+          types: this.eventsService.getAvailableEventGroups()
         }, dashboardHelp.eventsList);
 
       default:

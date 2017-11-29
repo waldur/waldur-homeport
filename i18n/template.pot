@@ -264,7 +264,7 @@ msgstr ""
 msgid "Agreement number"
 msgstr ""
 
-#: app/scripts/components/alerts/alert-types-dialog.js
+#: app/scripts/components/alerts/AlertTypesDialog.tsx
 #: app/scripts/components/alerts/base-alerts-list.js
 #: app/scripts/components/dashboard/project-alerts-feed.js
 msgid "Alert types"
@@ -460,7 +460,7 @@ msgstr ""
 msgid "Autenticate using Mobile ID"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Authentication events"
 msgstr ""
 
@@ -541,11 +541,11 @@ msgstr ""
 msgid "Balance"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Balance has been decreased by {amount} for customer {customer_name}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr ""
 
@@ -694,7 +694,7 @@ msgstr ""
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.html
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/digitalocean/droplet-resize.html
-#: app/scripts/components/events/types-list-dialog.html
+#: app/scripts/components/events/TypeListDialog.tsx
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/details/expert-bid-dialog.html
 #: app/scripts/components/experts/requests/create/expert-contract-create.html
@@ -1083,7 +1083,7 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Created a new payment for {customer_name}."
 msgstr ""
 
@@ -1123,7 +1123,7 @@ msgstr ""
 msgid "Creation date"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Creation of service project link {service_name} has failed."
 msgstr ""
 
@@ -1428,8 +1428,8 @@ msgid "Event type"
 msgstr ""
 
 #: app/scripts/components/dashboard/project-events-feed.js
+#: app/scripts/components/events/EventTypesDialog.tsx
 #: app/scripts/components/events/base-event-list.js
-#: app/scripts/components/events/event-types-dialog.js
 #: app/scripts/components/user/list/EventTypesButton.tsx
 msgid "Event types"
 msgstr ""
@@ -1525,15 +1525,15 @@ msgstr ""
 msgid "Expert request"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Expert request \"{expert_request_name}\" has been activated."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Expert request \"{expert_request_name}\" has been completed."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Expert request \"{expert_request_name}\"\" has been cancelled."
 msgstr ""
 
@@ -2101,7 +2101,7 @@ msgstr ""
 msgid "Invoice date"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Invoice events"
 msgstr ""
 
@@ -2109,15 +2109,15 @@ msgstr ""
 msgid "Invoice events timeline"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been created."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been deleted."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been updated."
 msgstr ""
 
@@ -2171,7 +2171,7 @@ msgstr ""
 msgid "Issue status"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Issue {issue_key} has been created by {caller_full_name}."
 msgstr ""
 
@@ -2216,7 +2216,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Key management events"
 msgstr ""
 
@@ -3013,7 +3013,7 @@ msgid "Organization details"
 msgstr ""
 
 #: app/scripts/components/customer/workspace/customer-events.js
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Organization events"
 msgstr ""
 
@@ -3076,15 +3076,15 @@ msgstr ""
 msgid "Organization {customer_name} does not have any resources."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Organization {customer_name} has been created."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Organization {customer_name} has been updated."
 msgstr ""
 
@@ -3165,7 +3165,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Password has been changed for user {affected_user_full_name}."
 msgstr ""
 
@@ -3173,15 +3173,15 @@ msgstr ""
 msgid "Pay invoice"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Payment events"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Payment for {customer_name} has been approved."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Payment for {customer_name} has been cancelled."
 msgstr ""
 
@@ -3523,7 +3523,7 @@ msgid "Project details"
 msgstr ""
 
 #: app/scripts/components/customer/workspace/customer-events.js
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 #: app/scripts/components/project/project-events.js
 msgid "Project events"
 msgstr ""
@@ -3532,7 +3532,7 @@ msgstr ""
 msgid "Project has been removed successfully."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Project has been renamed from {project_previous_name} to {project_name}."
 msgstr ""
 
@@ -3587,15 +3587,15 @@ msgstr ""
 msgid "Project workspace"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Project {project_name} has been created."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Project {project_name} has been deleted."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Project {project_name} has been updated."
 msgstr ""
 
@@ -3688,7 +3688,7 @@ msgstr ""
 msgid "Providers"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Providers events"
 msgstr ""
 
@@ -3731,7 +3731,7 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Quota events"
 msgstr ""
 
@@ -4059,7 +4059,7 @@ msgid "Resource doesn't have SLA yet. Please connect it to monitoring system."
 msgstr ""
 
 #: app/scripts/components/customer/workspace/customer-events.js
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 #: app/scripts/components/project/project-events.js
 msgid "Resource events"
 msgstr ""
@@ -4156,7 +4156,7 @@ msgstr ""
 msgid "Role in project"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "Role management events"
 msgstr ""
 
@@ -4193,15 +4193,15 @@ msgstr ""
 msgid "SSH key"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "SSH key events"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "SSH key {ssh_key_name} has been created for user {user_full_name} with username {user_username}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "SSH key {ssh_key_name} has been deleted for user {user_full_name} with username {user_username}."
 msgstr ""
 
@@ -5296,51 +5296,51 @@ msgstr ""
 msgid "User status"
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} claim for organization {affected_organization} has been rejected."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} has been activated."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} has been approved for organization {affected_organization}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} has been created."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} has been deactivated."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} has been deleted."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} has been removed from organization {affected_organization}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} has been updated."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} has claimed organization {affected_organization}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} has gained role of {role_name}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} has revoked role of {role_name}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {caller_full_name} has created request for experts under {customer_name} / {project_name}."
 msgstr ""
 
@@ -5376,23 +5376,23 @@ msgstr ""
 msgid "User {user_username} has revoked project manager {affected_user_username} from project {project_name}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {user_username} with full name {user_full_name} authenticated successfully with Facebook."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {user_username} with full name {user_full_name} authenticated successfully with Google."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {user_username} with full name {user_full_name} authenticated successfully with OpenID."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {user_username} with full name {user_full_name} authenticated successfully with Smart ID EE."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "User {user_username} with full name {user_full_name} authenticated successfully with username and password."
 msgstr ""
 
@@ -5812,7 +5812,7 @@ msgstr ""
 msgid "{quotaUsage} out of {quotaLimit}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{quota_name} quota threshold has been reached for project {project_name}."
 msgstr ""
 
@@ -5820,71 +5820,71 @@ msgstr ""
 msgid "{resourceType} has state {resourceState}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} creation has been scheduled by {user_full_name}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} creation has failed."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} deletion has failed."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} has been created."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} has been deleted."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} has been imported by {user_full_name}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} has been restarted."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} has been scheduled to deletion by {user_full_name}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} has been scheduled to restart by {user_full_name}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} has been scheduled to start by {user_full_name}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} has been scheduled to stop by {user_full_name}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} has been started."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} has been stopped."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} has been updated by {user_full_name}."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} restart has failed."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} start has failed."
 msgstr ""
 
-#: app/scripts/components/events/constants.js
+#: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} stop has failed."
 msgstr ""
 

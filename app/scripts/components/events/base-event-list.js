@@ -1,3 +1,5 @@
+import { gettext } from '@waldur/i18n/utils';
+
 // @ngInject
 export default function baseEventListController(
   baseControllerListClass,

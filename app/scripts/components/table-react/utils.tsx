@@ -4,10 +4,11 @@ import { connect, Provider } from 'react-redux';
 
 import store from '@waldur/store/store';
 import { isVisible } from '@waldur/store/config';
+import { withTranslation } from '@waldur/i18n/translate';
+
 import * as actions from './actions';
 import { getTableState } from './store';
 import { registerTable } from './registry';
-import { withTranslation } from './translate';
 import { TableOptions } from './types';
 
 export function withStore(Component) {
