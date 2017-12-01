@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { TranslateProps } from '@waldur/i18n/types';
+
 import TableInfo from './TableInfo';
 import TablePagination from './TablePagination';
 import TableBody from './TableBody';
@@ -9,7 +11,7 @@ import TableRefreshButton from './TableRefreshButton';
 import TableHeader from './TableHeader';
 import TablePlaceholder from './TablePlaceholder';
 import TableQuery from './TableQuery';
-import { Column, Pagination, TranslateProps, TableState } from './types';
+import { Column, Pagination, TableState } from './types';
 
 type Props = TranslateProps & TableState & {
   fetch: () => void,

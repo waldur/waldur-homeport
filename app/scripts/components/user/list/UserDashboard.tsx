@@ -2,7 +2,7 @@ import * as React from 'react';
 import { react2angular } from 'react2angular';
 
 import Panel from '@waldur/core/Panel';
-import { withTranslation } from '@waldur/table-react/translate';
+import { withTranslation } from '@waldur/i18n/translate';
 import { withStore } from '@waldur/table-react/utils';
 
 import CustomerPermissions from './CustomerPermissions';

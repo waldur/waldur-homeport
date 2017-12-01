@@ -1,3 +1,4 @@
+import { gettext } from '@waldur/i18n/utils';
 import { EVENT_TEMPLATES, DELETION_EVENTS } from './constants';
 
 // @ngInject

@@ -2,8 +2,9 @@ import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { formatTemplate } from '@waldur/i18n/translate';
+
 import Table from './Table';
-import { formatTemplate } from './translate';
 
 describe('Table', () => {
   const fetch = jasmine.createSpy('fetch');

@@ -39,12 +39,6 @@ export type Pagination = {
   pageSize: number,
 };
 
-export type Translate = (template: string, context?: any) => string;
-
-export type TranslateProps = {
-  translate: Translate
-};
-
 export type TableState = {
   rows?: Array<any>,
   loading?: boolean,

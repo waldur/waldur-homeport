@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import TableInfo from './TableInfo';
-import { formatTemplate } from './translate';
+import { formatTemplate } from '@waldur/i18n/translate';
 
 describe('TableInfo', () => {
   const defaultProps = {

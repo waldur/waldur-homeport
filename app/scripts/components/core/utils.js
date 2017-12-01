@@ -196,3 +196,13 @@ export function ncUtils() {
     },
   };
 }
+
+export function generateModalContentComponent(componentName) {
+  return {
+    template: `<${componentName} dismiss="$ctrl.dismiss" close="$ctrl.close" />`,
+    bindings: {
+      close: '&',
+      dismiss: '&',
+    },
+  };
+}
