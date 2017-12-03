@@ -1,3 +1,6 @@
+import { IconType } from './types';
+import { gettext } from '@waldur/i18n';
+
 export const EVENT_TEMPLATES = {
   auth_logged_in_with_username: gettext('User {user_username} with full name {user_full_name} authenticated successfully with username and password.'),
   auth_logged_in_with_openid: gettext('User {user_username} with full name {user_full_name} authenticated successfully with OpenID.'),
@@ -59,18 +62,18 @@ export const EVENT_TEMPLATES = {
   expert_request_completed: gettext('Expert request "{expert_request_name}" has been completed.')
 };
 
-export const EVENT_ICONS_TYPES = {
-  auth: [gettext('Authentication events'), 'user'],
-  invoice: [gettext('Invoice events'), 'customer'],
-  user: [gettext('Key management events'), 'user'],
-  customer: [gettext('Organization events'), 'customer'],
-  payment: [gettext('Payment events'), 'customer'],
-  project: [gettext('Project events'), 'project'],
-  service: [gettext('Providers events'), 'service'],
-  resource: [gettext('Resource events'), 'resource'],
-  role: [gettext('Role management events'), 'user'],
-  quota: [gettext('Quota events'), 'customer'],
-  ssh: [gettext('SSH key events'), 'key'],
+export const EVENT_ICONS_TYPES: { [propName: string]: IconType } = {
+  auth: { text: gettext('Authentication events'), imageId: 'user' },
+  invoice: { text: gettext('Invoice events'), imageId: 'customer'},
+  user: { text: gettext('Key management events'), imageId: 'user'},
+  customer: { text: gettext('Organization events'), imageId: 'customer'},
+  payment: { text: gettext('Payment events'), imageId: 'customer'},
+  project: { text: gettext('Project events'), imageId: 'project'},
+  service: { text: gettext('Providers events'), imageId: 'service'},
+  resource: { text: gettext('Resource events'), imageId: 'resource'},
+  role: { text: gettext('Role management events'), imageId: 'user'},
+  quota: { text: gettext('Quota events'), imageId: 'customer'},
+  ssh: { text: gettext('SSH key events'), imageId: 'key'},
 };
 
 export const EVENT_ROUTES = {

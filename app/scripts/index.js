@@ -124,6 +124,17 @@ slurmModule(appModule);
 paypalModule(appModule);
 storeModule(appModule);
 appModule.config(analyticsRoutes);
+
+function requirePlugins(module) {
+  const context = require.context('./plugins', true, /module\.js$/);
+  context.keys().forEach(key => {
+    const plugin = context(key).default;
+    plugin(module);
+  });
+}
+
+requirePlugins(appModule);
+
 // Errors module should be the last, because it contains special route.
 // Route with url='*path' allows to display error page without redirect.
 errorModule(appModule);

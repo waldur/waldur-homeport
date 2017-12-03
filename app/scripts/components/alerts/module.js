@@ -1,6 +1,6 @@
 import alertFormatter from './alert-formatter';
 import alertsService from './alerts-service';
-import alertTypesDialog from './alert-types-dialog';
+import alertTypesDialog from './AlertTypesDialog';
 import AlertDialogsService from './alert-dialogs-service';
 import alertFilter from './alert-filter';
 import BaseAlertsListController from './base-alerts-list';

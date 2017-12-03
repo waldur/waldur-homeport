@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { TranslateProps } from './types';
+import { TranslateProps } from '@waldur/i18n/types';
 
 type Props = TranslateProps & {
   query?: string,

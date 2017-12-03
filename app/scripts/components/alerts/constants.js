@@ -1,3 +1,5 @@
+import { gettext } from '@waldur/i18n';
+
 export const ALERT_TEMPLATES = {
   customer_has_zero_services: gettext('Organization {customer_name} has no providers.'),
   customer_has_zero_resources: gettext('Organization {customer_name} does not have any resources.'),

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Dropdown from 'react-bootstrap/lib/Dropdown';
 import * as MenuItem from 'react-bootstrap/lib/MenuItem';
-import { TranslateProps } from './types';
+import { TranslateProps } from '@waldur/i18n/types';
 
 type Props = TranslateProps & {
   exportAs: Function,

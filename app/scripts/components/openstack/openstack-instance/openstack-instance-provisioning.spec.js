@@ -24,6 +24,7 @@ describe('OpenStack Instance Store', function() {
 
   function initModule(module) {
     module.service('$uibModal', function(){});
+    module.service('$uibModalStack', function(){});
     module.service('AppStoreUtilsService', function(){});
     module.service('BreadcrumbsService', function(){});
     module.service('baseControllerClass', baseControllerClass);

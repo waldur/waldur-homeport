@@ -50,7 +50,7 @@
       <div
         ng-if="!$ctrl.keys.length"
         class="ibox-content"
-        ng-bind-html="$ctrl.sshKeysNotAvailable">
+        bind-html-compile="$ctrl.sshKeysNotAvailable">
       </div>
       <div
         ng-if="$ctrl.keys.length && !$ctrl.model.ssh_public_key"

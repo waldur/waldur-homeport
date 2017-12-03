@@ -1,4 +1,4 @@
-import { EVENT_ICONS_TYPES, EVENT_TEMPLATES } from './constants';
+import { getAvailableEventGroups } from './utils';
 
 // @ngInject
 export default function eventsService($q, baseServiceClass, ENV) {
@@ -34,29 +34,7 @@ export default function eventsService($q, baseServiceClass, ENV) {
         });
       });
     },
-    getAvailableIconTypes: function() {
-      let icons = [],
-        icon,
-        descriptions = [],
-        description;
-      for (let i in EVENT_ICONS_TYPES) {
-        if (ENV.toBeFeatures.indexOf(i) === -1 && EVENT_ICONS_TYPES.hasOwnProperty(i)) {
-          icon = EVENT_ICONS_TYPES[i][1];
-          icon = (icon === 'provider') ? 'service' : icon;
-          for (let j in EVENT_TEMPLATES) {
-            description = EVENT_TEMPLATES[j].replace(/_/gi, ' ');
-            if (j.split('_')[0] === i && EVENT_TEMPLATES.hasOwnProperty(j)
-                && descriptions.indexOf(description) === -1
-            ) {
-              descriptions.push(description);
-            }
-          }
-          icons.push([icon, EVENT_ICONS_TYPES[i][0], descriptions]);
-          descriptions = [];
-        }
-      }
-      return icons;
-    }
+    getAvailableEventGroups,
   });
   return new ServiceClass();
 }

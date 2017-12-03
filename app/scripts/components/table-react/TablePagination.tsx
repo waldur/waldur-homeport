@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as Pagination from 'react-bootstrap/lib/Pagination';
-import { TranslateProps, Pagination as PaginationProps } from './types';
+
+import { TranslateProps } from '@waldur/i18n/types';
+import { Pagination as PaginationProps } from './types';
 
 type Props = TranslateProps & PaginationProps & {
   gotoPage: (number) => void,

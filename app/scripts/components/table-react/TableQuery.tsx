@@ -1,6 +1,6 @@
 import * as React from 'react';
 import debounce from 'lodash.debounce';
-import { TranslateProps } from './types';
+import { TranslateProps } from '@waldur/i18n/types';
 import './TableQuery.scss';
 
 type Props = TranslateProps & {
