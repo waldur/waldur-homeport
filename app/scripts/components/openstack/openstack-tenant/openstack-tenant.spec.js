@@ -6,6 +6,7 @@ describe('OpenStack Tenant Provision Form', function() {
 
   function initModule(module) {
     module.service('$uibModal', function(){});
+    module.service('$uibModalStack', function(){});
     module.service('AppstoreResourceLoader', AppstoreResourceLoader);
     module.constant('ENV', {
       apiEndpoint: 'https://example.com/'

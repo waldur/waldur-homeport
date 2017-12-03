@@ -6,6 +6,7 @@ describe('User edit', () => {
 
   function initModule(module) {
     module.service('$uibModal', function(){});
+    module.service('$uibModalStack', function(){});
     module.component('userEdit', userEdit);
     module.constant('ENV', {
       userMandatoryFields: [

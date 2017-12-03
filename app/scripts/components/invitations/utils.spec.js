@@ -66,6 +66,7 @@ describe('invitationUtilsService', () => {
         open: jasmine.createSpy('open').and.returnValue(emailConfirmedDialogResult)
       };
     });
+    $provide.service('$uibModalStack', function () {});
     $provide.factory('$state', function () {
       return {
         go: jasmine.createSpy('go')

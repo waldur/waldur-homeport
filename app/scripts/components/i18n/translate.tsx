@@ -10,7 +10,7 @@ export const formatTemplate: Translate = (template, context) => (
 );
 
 export const translate: Translate = (template, context) => (
-  formatTemplate($filter('translate')(template), context) || template
+  formatTemplate($filter('translate')(template), context)
 );
 
 const getLocale = (state) => ({
@@ -19,9 +19,8 @@ const getLocale = (state) => ({
 
 const withLocale = connect(getLocale);
 
-// eslint-disable-next-line react/display-name
 const withTranslationPure = WrappedComponent => props => (
   <WrappedComponent {...props} translate={translate}/>
 );
 
-export const withTranslation = compose(withLocale, withTranslationPure);
+export const withTranslation = compose(withTranslationPure, withLocale);

@@ -16,6 +16,7 @@ describe('Appstore field list', () => {
       return {
       };
     });
+    $provide.service('$uibModalStack', function(){});
     $provide.factory('coreUtils', function () {
       return {
         templateFormatter: jasmine.createSpy('templateFormatter'),

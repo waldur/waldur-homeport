@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { react2angular } from 'react2angular';
 
 import Panel from '@waldur/core/Panel';
-import { withTranslation } from '@waldur/i18n/translate';
-import { withStore } from '@waldur/table-react/utils';
+import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { connectAngularComponent } from '@waldur/table-react/utils';
 
 import CustomerPermissions from './CustomerPermissions';
 import ProjectPermissions from './ProjectPermissions';
 import UserEvents from './UserEvents';
 
-const UserDashboard = ({ translate }) => (
+const PureUserDashboard = ({ translate }: TranslateProps) => (
   <div className="wrapper wrapper-content">
     <div className="row">
       <div className="col-md-6">
@@ -33,4 +32,6 @@ const UserDashboard = ({ translate }) => (
   </div>
 );
 
-export default react2angular(withStore(withTranslation(UserDashboard)));
+const UserDashboard = withTranslation(PureUserDashboard);
+
+export default connectAngularComponent(UserDashboard);

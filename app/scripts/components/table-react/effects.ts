@@ -1,6 +1,6 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
-import { $uibModal } from '@waldur/core/services';
+import { $uibModal, $uibModalStack } from '@waldur/core/services';
 import * as actions from './actions';
 import { getTableState } from './store';
 import { getTableOptions } from './registry';
@@ -30,7 +30,6 @@ function* fetchList(action) {
   }
 }
 
-
 function openModalDialog(action) {
   const { component, params } = action.payload;
   let resolve = {};
@@ -42,8 +41,13 @@ function openModalDialog(action) {
   $uibModal.open({ component, resolve, size: params && params.size });
 }
 
+function closeModalDialog() {
+  $uibModalStack.dismissAll();
+}
+
 export default function* watchFetchList() {
   yield takeEvery(actions.FETCH_LIST_START, fetchList);
   yield takeEvery(actions.EXPORT_TABLE_AS, exportTable);
   yield takeEvery(actions.OPEN_MODAL_DIALOG, openModalDialog);
+  yield takeEvery(actions.CLOSE_MODAL_DIALOG, closeModalDialog);
 }
