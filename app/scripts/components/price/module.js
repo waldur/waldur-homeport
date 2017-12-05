@@ -1,4 +1,4 @@
-import priceTooltip from './price-tooltip';
+import priceTooltip from './PriceTooltip';
 
 export default module => {
   module.component('priceTooltip', priceTooltip);

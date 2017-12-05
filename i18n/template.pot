@@ -3392,7 +3392,7 @@ msgstr ""
 msgid "Price for 1 vCPU per day"
 msgstr ""
 
-#: app/scripts/components/price/price-tooltip.js
+#: app/scripts/components/price/PriceTooltip.tsx
 msgid "Price is estimated."
 msgstr ""
 
@@ -5434,7 +5434,7 @@ msgstr ""
 msgid "VAT code"
 msgstr ""
 
-#: app/scripts/components/price/price-tooltip.js
+#: app/scripts/components/price/PriceTooltip.tsx
 msgid "VAT is not included."
 msgstr ""
 

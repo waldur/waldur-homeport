@@ -9,8 +9,14 @@ export const formatTemplate: Translate = (template, context) => (
   context ? template.replace(/{(.+?)}/g, (match, key) => context[key]) : template
 );
 
+// AngularJS filter is not defined in ReactJS testing mode
+// Although we could use Jest mock, it makes sense
+// to fallback to identity function by default
+const translateFilter = template =>
+  $filter ? $filter('translate')(template) : template;
+
 export const translate: Translate = (template, context) => (
-  formatTemplate($filter('translate')(template), context)
+  formatTemplate(translateFilter(template), context)
 );
 
 const getLocale = (state) => ({
