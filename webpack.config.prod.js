@@ -3,7 +3,7 @@ const merge = require('webpack-merge');
 const path = require('path');
 
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
+// const OfflinePlugin = require('offline-plugin');
 
 const baseConfig = require('./webpack.config.common.js');
 const utils = require('./webpack.utils');
@@ -40,10 +40,10 @@ module.exports = merge(baseConfig, {
       exclude: [/\.min\.js$/gi]
     }),
     // it's always better if OfflinePlugin is the last plugin added
-    new OfflinePlugin({
-      ServiceWorker: {
-        output: './sw.js',
-      },
-    }),
+    // new OfflinePlugin({
+    //   ServiceWorker: {
+    //     output: './sw.js',
+    //   },
+    // }),
   ],
 });
