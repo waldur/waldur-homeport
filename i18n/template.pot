@@ -5012,6 +5012,10 @@ msgstr ""
 msgid "Total cost"
 msgstr ""
 
+#: app/scripts/components/customer/customer-list.html
+msgid "Total cost:"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 msgid "Total planned resource consumption"
 msgstr ""
