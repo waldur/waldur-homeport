@@ -2,7 +2,7 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-import { openModalDialog } from '@waldur/table-react/actions';
+import { openModalDialog } from '@waldur/modal/actions';
 import { withTranslation } from '@waldur/i18n/translate';
 import ActionButton from '@waldur/table-react/ActionButton';
 import { canCreateOrganization } from '@waldur/table-react/selectors';

@@ -266,13 +266,13 @@ msgstr ""
 
 #: app/scripts/components/alerts/AlertTypesDialog.tsx
 #: app/scripts/components/alerts/base-alerts-list.js
-#: app/scripts/components/dashboard/project-alerts-feed.js
+#: app/scripts/components/dashboard/ProjectAlertsFeed.tsx
 msgid "Alert types"
 msgstr ""
 
 #: app/scripts/components/customer/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
-#: app/scripts/components/dashboard/project-alerts-feed.js
+#: app/scripts/components/dashboard/ProjectAlertsFeed.tsx
 #: app/scripts/components/help/constants.js
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/routes.js
@@ -1241,6 +1241,7 @@ msgstr ""
 
 #: app/scripts/components/appstore/providers/appstore-providers.html
 #: app/scripts/components/cost-planning/cost-plans-list.js
+#: app/scripts/components/dashboard/DashboardFeed.tsx
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/experts/requests/create/expert-contract-form.js
 #: app/scripts/components/experts/requests/details/expert-request-summary.html
@@ -1427,14 +1428,14 @@ msgstr ""
 msgid "Event type"
 msgstr ""
 
-#: app/scripts/components/dashboard/project-events-feed.js
+#: app/scripts/components/dashboard/ProjectEventsFeed.tsx
 #: app/scripts/components/events/EventTypesDialog.tsx
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/user/list/EventTypesButton.tsx
 msgid "Event types"
 msgstr ""
 
-#: app/scripts/components/dashboard/project-events-feed.js
+#: app/scripts/components/dashboard/ProjectEventsFeed.tsx
 #: app/scripts/components/help/constants.js
 #: app/scripts/components/user/hooks/hook-list.js
 msgid "Events"
@@ -2560,7 +2561,7 @@ msgstr ""
 msgid "No alerts yet"
 msgstr ""
 
-#: app/scripts/components/dashboard/project-alerts-feed.js
+#: app/scripts/components/dashboard/ProjectAlertsFeed.tsx
 msgid "No alerts yet."
 msgstr ""
 
@@ -2612,7 +2613,7 @@ msgstr ""
 msgid "No events yet"
 msgstr ""
 
-#: app/scripts/components/dashboard/project-events-feed.js
+#: app/scripts/components/dashboard/ProjectEventsFeed.tsx
 msgid "No events yet."
 msgstr ""
 
@@ -4483,7 +4484,7 @@ msgstr ""
 msgid "Show _MENU_ entries"
 msgstr ""
 
-#: app/scripts/components/dashboard/dashboard-feed.html
+#: app/scripts/components/dashboard/DashboardFeed.tsx
 msgid "Show all"
 msgstr ""
 

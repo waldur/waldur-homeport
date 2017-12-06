@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { connectAngularComponent } from '@waldur/table-react/utils';
+import { connectAngularComponent } from '@waldur/core/reactHelper';
 import DashboardChartContainer from './DashboardChartContainer';
 
 const App = ({ customer }) => (

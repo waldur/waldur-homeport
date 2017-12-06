@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/table-react/actions';
+import { closeModalDialog } from '@waldur/modal/actions';
 
 import { EventGroup } from './types';
 import './TypeListDialog.scss';

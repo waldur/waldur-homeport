@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { compose } from 'redux';
 import { connect, Provider } from 'react-redux';
-import { react2angular } from 'react2angular';
 
 import store from '@waldur/store/store';
 import { isVisible } from '@waldur/store/config';
@@ -11,17 +10,6 @@ import * as actions from './actions';
 import { getTableState } from './store';
 import { registerTable } from './registry';
 import { TableOptions } from './types';
-
-export function withStore(Component) {
-  return props => (
-    <Provider store={store}>
-      <Component {...props}/>
-    </Provider>
-  );
-};
-
-export const connectAngularComponent = (WrappedComponent, bindings?) =>
-  react2angular(withStore(WrappedComponent), bindings);
 
 export function connectTable(options: TableOptions) {
   return Component => {

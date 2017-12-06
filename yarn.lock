@@ -25,9 +25,9 @@
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/@types/es6-promise/-/es6-promise-0.0.33.tgz#280a707e62b1b6bef1a86cc0861ec63cd06c7ff3"
 
-"@types/jasmine@^2.6.2":
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.6.2.tgz#6e6d4cb183cd55c7a1ad6270bced10fdd5367a3c"
+"@types/jest@^21.1.8":
+  version "21.1.8"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-21.1.8.tgz#d497213725684f1e5a37900b17a47c9c018f1a97"
 
 "@types/lodash.frompairs@^4.0.3":
   version "4.0.3"

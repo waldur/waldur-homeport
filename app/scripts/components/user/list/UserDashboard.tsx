@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Panel from '@waldur/core/Panel';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/table-react/utils';
+import { connectAngularComponent } from '@waldur/core/reactHelper';
 
 import CustomerPermissions from './CustomerPermissions';
 import ProjectPermissions from './ProjectPermissions';

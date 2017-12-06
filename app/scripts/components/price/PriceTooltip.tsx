@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/table-react/utils';
+import { connectAngularComponent } from '@waldur/core/reactHelper';
 
 type AccountingMode = 'billing' | 'accounting';
 

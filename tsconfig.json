@@ -14,12 +14,14 @@
       "@waldur/*": ["app/scripts/components/*"]
     }
   },
-  "types": ["jasmine"],
   "lib": [
     "es2015",
     "dom"
   ],
   "include": [
     "./app/scripts/components/**/*"
+  ],
+  "exclude": [
+    "**/*.spec.*"
   ]
 }
