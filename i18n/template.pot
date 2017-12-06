@@ -4425,6 +4425,10 @@ msgstr ""
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js
+msgid "Service desk"
+msgstr ""
+
 #: app/scripts/components/issues/request-service-button.js
 msgid "Service name"
 msgstr ""
