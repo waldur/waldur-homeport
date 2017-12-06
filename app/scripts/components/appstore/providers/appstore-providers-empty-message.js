@@ -4,11 +4,13 @@ const appstoreProvidersEmptyMessage = {
   template: template,
   controller: class AppstoreProvidersEmptyMessageController {
     // @ngInject
-    constructor($state, $stateParams, coreUtils, currentStateService, AppStoreUtilsService) {
+    constructor($state, $stateParams, coreUtils, currentStateService, usersService, ENV, AppStoreUtilsService) {
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.coreUtils = coreUtils;
       this.currentStateService = currentStateService;
+      this.usersService = usersService;
+      this.ENV = ENV;
       this.AppStoreUtilsService = AppStoreUtilsService;
     }
 
@@ -31,6 +33,13 @@ const appstoreProvidersEmptyMessage = {
 
     showServiceStoreDialog() {
       return this.AppStoreUtilsService.openDialog();
+    }
+
+    get canCreateProvider() {
+      if (this.ENV.onlyStaffManagesServices && !this.usersService.currentUser.is_staff) {
+        return false;
+      }
+      return true;
     }
   }
 };

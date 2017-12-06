@@ -166,6 +166,7 @@ const ENV = {
   resourcePollingEnabled: true,
   singleResourcePollingTimeout: 1000 * 2,
 
+  onlyStaffManagesServices: false,
   ownerCanManageCustomer: false,
   OWNERS_CAN_MANAGE_OWNERS: true,
   MANAGER_CAN_MANAGE_TENANTS: false,

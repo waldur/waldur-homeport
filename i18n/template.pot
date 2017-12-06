@@ -2952,8 +2952,24 @@ msgstr ""
 msgid "Only pending invitation can be sent again."
 msgstr ""
 
+#: app/scripts/components/providers/provider-list.js
+msgid "Only staff can create provider."
+msgstr ""
+
+#: app/scripts/components/resource/resource-provision-policy.js
+msgid "Only staff can create virtual private cloud."
+msgstr ""
+
 #: app/scripts/components/customer/details/customer-manage.html
 msgid "Only staff can remove organization."
+msgstr ""
+
+#: app/scripts/components/providers/provider-list.js
+msgid "Only staff can remove provider."
+msgstr ""
+
+#: app/scripts/components/providers/provider-list.js
+msgid "Only staff can unlink provider."
 msgstr ""
 
 #: app/scripts/components/alerts/alert-filter.html

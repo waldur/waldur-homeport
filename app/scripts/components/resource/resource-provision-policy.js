@@ -17,6 +17,10 @@ export default function ResourceProvisionPolicy(ENV, ncUtils, customersService) 
         // 1) user is staff;
         // 2) user is organization owner;
         // 3) user is project manager and MANAGER_CAN_MANAGE_TENANTS is true.
+        if (ENV.onlyStaffManagesServices && !user.is_staff) {
+          disabled = true;
+          errorMessage = gettext('Only staff can create virtual private cloud.');
+        }
         if (!customersService.checkCustomerUser(customer, user)) {
           if (!ENV.MANAGER_CAN_MANAGE_TENANTS || !isProjectManager(project)) {
             disabled = true;

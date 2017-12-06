@@ -107,7 +107,9 @@ function ProviderListController(
                     return gettext('You cannot remove shared provider.');
                   }
                   if (!this.canUserManageService) {
-                    return gettext('Only customer owner or staff can remove provider.');
+                    return ENV.onlyStaffManagesServices ?
+                      gettext('Only staff can remove provider.') :
+                      gettext('Only customer owner or staff can remove provider.');
                   }
                   if (service.resources_count > 0) {
                     return gettext('Provider has resources. Please remove them first.');
@@ -139,7 +141,9 @@ function ProviderListController(
 
                 tooltip: function(service) {
                   if (!this.canUserManageService) {
-                    return gettext('Only customer owner or staff can unlink provider.');
+                    return ENV.onlyStaffManagesServices ?
+                      gettext('Only staff can unlink provider.') :
+                      gettext('Only customer owner or staff can unlink provider.');
                   }
                   if (service.shared) {
                     return gettext('Can\'t unlink system provider.');
@@ -172,7 +176,9 @@ function ProviderListController(
       let quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'service');
       let title;
       if (!this.canUserManageService) {
-        title = gettext('Only customer owner or staff can create provider.');
+        title = ENV.onlyStaffManagesServices ?
+          gettext('Only staff can create provider.') :
+          gettext('Only customer owner or staff can create provider.');
       }
       if (quotaReached) {
         title = gettext('Quota has been reached.');
@@ -198,6 +204,10 @@ function ProviderListController(
       return this.service.operation('unlink', service.url);
     },
     checkPermissions: function() {
+      if (ENV.onlyStaffManagesServices && !this.currentUser.is_staff) {
+        this.canUserManageService = false;
+        return;
+      }
       this.canUserManageService = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
     },
     afterInstanceRemove: function(instance) {
