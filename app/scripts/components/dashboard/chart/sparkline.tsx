@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Tooltip } from './tooltip';
+import { Tooltip } from '@waldur/core/Tooltip';
 import { ChartData } from './types';
 import './sparkline.scss';
 

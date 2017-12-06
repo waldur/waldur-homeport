@@ -1,11 +1,13 @@
+import template from './customer-list.html';
+import {getTotal} from './customer-total-cost-service';
+
 const customerList = {
-  templateUrl: 'views/partials/filtered-list.html',
+  template,
   controller: CustomerListController,
   controllerAs: 'ListController',
 };
 
 export default customerList;
-
 
 // @ngInject
 function CustomerListController(
@@ -88,9 +90,13 @@ function CustomerListController(
       const extraColumns = TableExtensionService.getColumns('customer-list');
       return baseColumns.concat(extraColumns).sort((a, b) => a.index - b.index);
     },
-    afterGetList: function() {
+    afterGetList: function(filter) {
+      let fn = this._super.bind(this);
       this.list.forEach(item => angular.extend(item, QuotaUtilsService.parseCounters(item)));
-      this._super();
+      return getTotal(filter).then(totalCost => {
+        this.controllerScope.totalCost = totalCost;
+        fn();
+      });
     },
     getUserFilter: function() {
       return {

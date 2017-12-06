@@ -3392,7 +3392,7 @@ msgstr ""
 msgid "Price for 1 vCPU per day"
 msgstr ""
 
-#: app/scripts/components/price/price-tooltip.js
+#: app/scripts/components/price/PriceTooltip.tsx
 msgid "Price is estimated."
 msgstr ""
 
@@ -5012,6 +5012,10 @@ msgstr ""
 msgid "Total cost"
 msgstr ""
 
+#: app/scripts/components/customer/customer-list.html
+msgid "Total cost:"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 msgid "Total planned resource consumption"
 msgstr ""
@@ -5430,7 +5434,7 @@ msgstr ""
 msgid "VAT code"
 msgstr ""
 
-#: app/scripts/components/price/price-tooltip.js
+#: app/scripts/components/price/PriceTooltip.tsx
 msgid "VAT is not included."
 msgstr ""
 

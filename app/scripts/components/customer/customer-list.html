@@ -1,0 +1,6 @@
+<div ng-include="'views/partials/filtered-list.html'"></div>
+<div ng-if="!ListController.loading" class="text-right">
+  <span translate>Total cost:</span>
+  <price-tooltip></price-tooltip>
+  {{ ListController.totalCost | defaultCurrency }}
+</div>
