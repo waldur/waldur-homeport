@@ -106,6 +106,10 @@ const ENV = {
       name: gettext('Virtual machines'),
       services: ['Amazon', 'Azure', 'DigitalOcean', 'OpenStackTenant'],
     },
+    {
+      name: gettext('Service desk'),
+      services: ['JIRA'],
+    }
   ],
 
   // optional list of disabled services, for example, ['Amazon', 'Azure']
