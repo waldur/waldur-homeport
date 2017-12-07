@@ -5172,6 +5172,10 @@ msgstr ""
 msgid "Unable to load user."
 msgstr ""
 
+#: app/scripts/components/resource/actions/dialog/action-dialog.js
+msgid "Unable to perform action"
+msgstr ""
+
 #: app/scripts/components/invitations/actions/send.js
 msgid "Unable to resend invitation."
 msgstr ""
