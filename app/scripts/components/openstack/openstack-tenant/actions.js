@@ -1,5 +1,7 @@
 // @ngInject
 export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION, ENV) {
+  const userCanModifyTenant = user => !(ENV.onlyStaffManagesServices && !user.is_staff);
+
   let tenantConfig = {
     order: [
       'edit',
@@ -16,7 +18,8 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: gettext('Tenant has been updated.')
+        successMessage: gettext('Tenant has been updated.'),
+        isVisible: (resource, user) => userCanModifyTenant(user)
       }),
       pull: {
         title: gettext('Synchronise')
@@ -38,8 +41,8 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         type: 'form',
         component: 'openstackTenantChangePackageDialog',
         useResolve: true,
-        isVisible: (resource) => {
-          return resource.extra_configuration && resource.extra_configuration.package_uuid;
+        isVisible: (resource, user) => {
+          return userCanModifyTenant(user) && resource.extra_configuration && resource.extra_configuration.package_uuid;
         },
         dialogSize: 'lg'
       },
@@ -51,8 +54,8 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         staffOnly: true,
         enabled: true,
         feature: 'import',
-        isVisible: (resource) => {
-          return !(resource.extra_configuration && resource.extra_configuration.package_uuid);
+        isVisible: (resource, user) => {
+          return userCanModifyTenant(user) && !(resource.extra_configuration && resource.extra_configuration.package_uuid);
         },
         dialogSize: 'lg'
       },
@@ -88,6 +91,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         enabled: true,
         useResolve: true,
         type: 'form',
+        isVisible: (resource, user) => userCanModifyTenant(user)
       },
     },
     delete_message: 'All tenant resources will be deleted.'
