@@ -1,3 +1,5 @@
+import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+
 // @ngInject
 function loadCustomer($q, $stateParams, $state, customersService, currentStateService, WorkspaceService) {
   if (!$stateParams.uuid) {
@@ -12,7 +14,7 @@ function loadCustomer($q, $stateParams, $state, customersService, currentStateSe
         customer: customer,
         project: null,
         hasCustomer: true,
-        workspace: 'organization',
+        workspace: WOKSPACE_NAMES.organization,
       });
       return customer;
     }).catch(error => {
@@ -47,7 +49,7 @@ export default function organizationRoutes($stateProvider) {
       abstract: true,
       data: {
         auth: true,
-        workspace: 'organization'
+        workspace: WOKSPACE_NAMES.organization
       },
       template: '<customer-workspace><ui-view></ui-view></customer-workspace>',
       resolve: {

@@ -1,12 +1,17 @@
 import template from './sidebar.html';
+import {WOKSPACE_NAMES} from '../workspace/constants';
 
 class SidebarController {
   // @ngInject
-  constructor(ENV, $state, $scope) {
+  constructor(ENV,
+              $state,
+              $scope,
+              WorkspaceService) {
     this.shortPageTitle = ENV.shortPageTitle;
     this.sidebarLogo = ENV.sidebarLogo;
     this.$state = $state;
     this.$scope = $scope;
+    this.WorkspaceService = WorkspaceService;
   }
 
   $onInit() {
@@ -33,6 +38,29 @@ class SidebarController {
       }
       item.expanded = this.$state.includes(item.link);
     });
+  }
+
+  onLogoClick(e) {
+    let workspaceData = this.WorkspaceService.getWorkspace();
+    let {workspace} = workspaceData;
+    e.preventDefault();
+    switch (workspace) {
+    case WOKSPACE_NAMES.organization:
+      this.$state.go('organization.dashboard', {uuid: workspaceData.customer.uuid}, {reload: true});
+      break;
+    case WOKSPACE_NAMES.support:
+      this.$state.go('support.dashboard', {reload: true});
+      break;
+    case WOKSPACE_NAMES.project:
+      this.$state.go('project.details', {uuid: workspaceData.project.uuid}, {reload: true});
+      break;
+    case WOKSPACE_NAMES.user:
+      this.$state.go('profile.details', {reload: true});
+      break;
+    default:
+      this.$state.go('profile.details', {reload: true});
+      break;
+    }
   }
 }
 

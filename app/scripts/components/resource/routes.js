@@ -1,3 +1,5 @@
+import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+
 // @ngInject
 function loadResource(
   $stateParams, $q, $state, currentStateService, resourcesService, projectsService, customersService, WorkspaceService) {
@@ -21,7 +23,7 @@ function loadResource(
       customer: customer,
       project: project,
       hasCustomer: true,
-      workspace: 'project',
+      workspace: WOKSPACE_NAMES.project,
     });
   }).catch(response => {
     if (response.status === 404) {
@@ -49,7 +51,7 @@ export default function resourceRoutes($stateProvider) {
       template: '<ui-view></ui-view>',
       data: {
         auth: true,
-        workspace: 'project',
+        workspace: WOKSPACE_NAMES.project,
         sidebarState: 'project.resources',
         pageClass: 'gray-bg'
       }

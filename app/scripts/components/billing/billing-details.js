@@ -1,4 +1,5 @@
 import template from './billing-details.html';
+import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 const billingDetails = {
   template,
@@ -61,7 +62,7 @@ const billingDetails = {
           customer: currentCustomer,
           project: null,
           hasCustomer: true,
-          workspace: 'organization',
+          workspace: WOKSPACE_NAMES.organization,
         });
 
         return this.usersService.getCurrentUser().then(currentUser => {

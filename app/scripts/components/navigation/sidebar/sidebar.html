@@ -2,7 +2,7 @@
   <div class="sidebar-collapse" slimscroll="{height:'100%'}">
     <ul class="nav metismenu" id="side-menu">
       <li class="brand-name hidden-xs">
-        <a>
+        <a ng-click="$ctrl.onLogoClick($event)">
           <span ng-if="::!$ctrl.sidebarLogo">
             <i class="fa fa-th-large"></i>
             {{ ::$ctrl.shortPageTitle }}
