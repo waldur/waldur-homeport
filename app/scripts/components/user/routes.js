@@ -1,3 +1,5 @@
+import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+
 const tabs = {
   dashboard: {
     url: '',
@@ -54,7 +56,7 @@ export default function($stateProvider) {
       abstract: true,
       data: {
         auth: true,
-        workspace: 'user'
+        workspace: WOKSPACE_NAMES.user
       },
       template: '<user-details></user-details>',
     })
@@ -71,7 +73,7 @@ export default function($stateProvider) {
       abstract: true,
       data: {
         auth: true,
-        workspace: 'user'
+        workspace: WOKSPACE_NAMES.user
       },
       template: '<user-details></user-details>',
     })
@@ -89,7 +91,7 @@ export default function($stateProvider) {
       data: {
         auth: true,
         pageTitle: gettext('Add SSH key'),
-        workspace: 'user'
+        workspace: WOKSPACE_NAMES.user
       }
     })
 

@@ -1,4 +1,5 @@
 import template from './issues-workspace.html';
+import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 export default {
   template: template,
@@ -14,7 +15,7 @@ export default {
     $onInit() {
       this.WorkspaceService.setWorkspace({
         hasCustomer: true,
-        workspace: 'support',
+        workspace: WOKSPACE_NAMES.support,
       });
 
       this.IssueNavigationService.getSidebarItems().then(items => this.items = items);

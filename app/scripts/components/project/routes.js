@@ -1,3 +1,5 @@
+import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+
 // @ngInject
 function loadProject(
   $stateParams,
@@ -35,7 +37,7 @@ function loadProject(
       customer: customer,
       project: project,
       hasCustomer: true,
-      workspace: 'project',
+      workspace: WOKSPACE_NAMES.project,
     });
     return project;
   }).catch(response => {
@@ -68,7 +70,7 @@ export default function projectRoutes($stateProvider) {
       templateUrl: 'views/project/base.html',
       data: {
         auth: true,
-        workspace: 'project',
+        workspace: WOKSPACE_NAMES.project,
       },
       resolve: {
         currentProject: loadProject,

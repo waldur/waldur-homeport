@@ -1,4 +1,5 @@
 import template from './offering-details.html';
+import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 const offeringDetails = {
   template,
@@ -42,7 +43,7 @@ const offeringDetails = {
             customer: customer,
             project: project,
             hasCustomer: true,
-            workspace: 'project',
+            workspace: WOKSPACE_NAMES.project,
           });
         })
         .then(() => this.refreshBreadcrumbs())
