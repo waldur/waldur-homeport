@@ -55,7 +55,7 @@ class DashboardFeed extends React.PureComponent<Props> {
       <div>
         <div className="feed-activity-list">
           {props.items.map((item, index) => this.renderItem(item, index))}
-        </div>,
+        </div>
         <a className="btn btn-default btn-block m-t" href={props.listLink}>
           {props.translate('Show all')}
         </a>
