@@ -11,7 +11,7 @@ import TableRefreshButton from './TableRefreshButton';
 import TableHeader from './TableHeader';
 import TablePlaceholder from './TablePlaceholder';
 import TableQuery from './TableQuery';
-import { Column, Pagination, TableState } from './types';
+import { Column, TableState } from './types';
 
 type Props = TranslateProps & TableState & {
   fetch: () => void,

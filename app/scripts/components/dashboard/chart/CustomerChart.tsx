@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import { connectAngularComponent } from '@waldur/core/reactHelper';
+import { connectAngularComponent } from '@waldur/store/connect';
 import DashboardChartContainer from './DashboardChartContainer';
 
-const App = ({ customer }) => (
+const CustomerChart = ({ customer }) => (
   <DashboardChartContainer
     scope={customer}
     signal='organizationDashboard.initialized'
     chartId='customer'/>
 );
 
-export default connectAngularComponent(App, ['customer']);
+export default connectAngularComponent(CustomerChart, ['customer']);

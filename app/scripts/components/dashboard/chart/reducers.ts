@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-
 import { createByKey } from '@waldur/store/utils';
 import actions from './actions';
 import { ChartsState } from './types';

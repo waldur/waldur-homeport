@@ -1,8 +1,6 @@
-import * as React from 'react';
 import { compose } from 'redux';
-import { connect, Provider } from 'react-redux';
+import { connect, ReactNode } from 'react-redux';
 
-import store from '@waldur/store/store';
 import { isVisible } from '@waldur/store/config';
 import { withTranslation } from '@waldur/i18n/translate';
 
@@ -12,7 +10,7 @@ import { registerTable } from './registry';
 import { TableOptions } from './types';
 
 export function connectTable(options: TableOptions) {
-  return Component => {
+  return (Component: ReactNode) => {
     const {table} = options;
     registerTable(options);
 

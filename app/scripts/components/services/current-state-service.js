@@ -38,6 +38,7 @@ export default function currentStateService($q, ENV, ncUtils, $rootScope) {
 
   function setProject(newProject) {
     project = newProject;
+    $rootScope.$broadcast('setCurrentProject', { project });
   }
 
   function getProject() {

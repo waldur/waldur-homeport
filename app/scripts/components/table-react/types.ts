@@ -22,8 +22,8 @@ export type TableOptions = {
   table: string,
   fetchData: any,
   queryField?: string,
-  exportFields: Array<string>,
-  exportRow: (Entity) => Array<string>,
+  exportFields?: Array<string>,
+  exportRow?: (Entity) => Array<string>,
   getDefaultFilter?: (any) => any
 };
 

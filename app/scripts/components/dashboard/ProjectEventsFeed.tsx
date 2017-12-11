@@ -1,35 +1,32 @@
 import * as React from 'react';
-import { connect, Provider } from 'react-redux';
-import { Dispatch, compose } from 'redux';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-import { withStore } from '@waldur/core/reactHelper';
+import { fetchEvents } from '@waldur/events/api';
 import { $state } from '@waldur/core/services';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { getTableState } from '@waldur/table-react/store';
+import { showEventTypes, showEventDetails } from '@waldur/events/actions';
+import { TranslateProps } from '@waldur/i18n';
+import { getCurrentProject } from '@waldur/store/currentProject';
+import { connectTable, TableState } from '@waldur/table-react';
 
-import * as actions from './actions';
 import { DashboardFeed } from './DashboardFeed';
-import { Project, FeedItem, TABLE_ID_DASHBOARD_EVENTS } from './types';
+import { Project } from './types';
 
-type Props = TranslateProps & {
+type Props = TranslateProps & TableState & {
   project: Project;
-  loading: boolean;
-  erred: boolean;
-  dataList: FeedItem[];
   showTypes: () => void;
   showDetails: (event) => void;
-  onFetch: () => void;
+  fetch: () => void;
 };
 
 class PureProjectEventsFeed extends React.PureComponent<Props> {
   componentWillMount() {
-    this.props.onFetch();
+    this.props.fetch();
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (this.props.project !== nextProps.project) {
-      this.props.onFetch();
+      this.props.fetch();
     }
   }
 
@@ -39,11 +36,11 @@ class PureProjectEventsFeed extends React.PureComponent<Props> {
       <DashboardFeed
         translate={props.translate}
         title={props.translate('Events')}
-        buttonTitle={props.translate('Event types')}
+        typesTitle={props.translate('Event types')}
         emptyText={props.translate('No events yet.')}
-        showAllUrl={$state.href('project.events', { uuid: props.project.uuid })}
+        listLink={$state.href('project.events', { uuid: props.project.uuid })}
         loading={props.loading}
-        items={props.dataList}
+        items={props.rows}
         showTypes={props.showTypes}
         showDetails={props.showDetails}
       />
@@ -51,24 +48,23 @@ class PureProjectEventsFeed extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = (state) => {
-  const eventsState = getTableState(TABLE_ID_DASHBOARD_EVENTS)(state);
-  return {
-    loading: eventsState.loading,
-    erred: !!eventsState.error,
-    dataList: eventsState.rows,
-  };
-}
+const TableOptions = {
+  table: 'projectEvents',
+  fetchData: fetchEvents,
+  getDefaultFilter: state => ({
+    exclude_extra: true,
+    scope: getCurrentProject(state).url
+  }),
+};
 
-const mapDispatchToProps = (dispatch: Dispatch<{}>, ownProps: Props) => ({
-  showTypes: () => dispatch(openModalDialog('eventTypesDialog')),
-  showDetails: (event) => dispatch(openModalDialog('eventDetailsDialog', { resolve: { event } })),
-  onFetch: () => dispatch(actions.fetchEventsFeed(ownProps.project)),
+const mapDispatchToProps = dispatch => ({
+  showTypes: () => dispatch(showEventTypes()),
+  showDetails: event => dispatch(showEventDetails(event)),
 });
 
 const ProjectEventsFeed = compose(
-  withTranslation,
-  connect(mapStateToProps, mapDispatchToProps),
+  connectTable(TableOptions),
+  connect(null, mapDispatchToProps),
 )(PureProjectEventsFeed);
 
 export {

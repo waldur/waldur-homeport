@@ -4,14 +4,16 @@ import * as actions from './actions';
 import { getTableState } from './store';
 import { getTableOptions } from './registry';
 import { exportTable } from './export';
-import { TableOptions } from './types';
 
 function* fetchList(action) {
   const table = action.payload.table;
   try {
     const state = yield select(getTableState(table));
     const options = getTableOptions(table);
-    const filter = yield select(options.getDefaultFilter);
+    let filter;
+    if (options.getDefaultFilter) {
+      filter = yield select(options.getDefaultFilter);
+    }
     const request = {
       pagination: state.pagination,
       filter: {

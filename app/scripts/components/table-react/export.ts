@@ -82,7 +82,7 @@ function saveAsCsv(table, data) {
   FileSaver.saveAs(blob, `${table}.csv`);
 }
 
-function exportToClipboard(table, data) {
+function exportToClipboard(_, data) {
   const text = Papa.unparse(data);
   copyToClipboard(text);
 }

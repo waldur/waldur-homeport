@@ -8,56 +8,74 @@ import { TranslateProps } from '@waldur/i18n';
 import { FeedItem } from './types';
 
 type Props = TranslateProps & {
-  title?: string;
-  buttonTitle?: string;
-  emptyText?: string;
+  title: string;
+  typesTitle: string;
+  emptyText: string;
   loading: boolean;
   items: FeedItem[];
-  showAllUrl: string;
-
+  listLink: string;
   showDetails?: (item: FeedItem) => void;
-  showTypes?: () => void;
+  showTypes: () => void;
 };
 
-const DashboardFeed = (props: Props) => {
-  const titleAppendix = props.showTypes && (
-    <div className="pull-right">
-      <a className="btn btn-xs btn-link" onClick={props.showTypes}>
-        <i className="fa fa-question-circle"></i> {props.buttonTitle}
-      </a>
-    </div>);
+class DashboardFeed extends React.PureComponent<Props> {
+  render() {
+    return (
+      <Panel
+        title={this.props.title}
+        actions={this.renderTypesButton()}
+        className="float-e-margins"
+        children={this.renderList()}
+      />
+    );
+  }
 
-  return (
-    <Panel title={props.title} titleAppendix={titleAppendix} className="float-e-margins">
-      {props.loading && (
-        <LoadingSpinner />
-      ) || (
-        props.items.length === 0 && (
-          <div>
-            {props.emptyText}
-          </div>
-        ) || (
-          <div>
-            <div className="feed-activity-list">
-              {props.items.map((item, i) => (
-                <div key={i} className="feed-element">
-                  {props.showDetails && (
-                    <a className="pull-right" onClick={() => props.showDetails(item)}>{props.translate('Details')}</a>
-                  )}
-                  <div dangerouslySetInnerHTML={{__html: item.html_message}}></div>
-                  <small className="pull-right">{moment(item.created).fromNow()}</small>
-                  <small className="text-muted">{moment(item.created).format('MMM d, y h:mm:ss a')}</small>
-                </div>
-              ))}
-            </div>
-            <a className="btn btn-default btn-block m-t" href={props.showAllUrl}>
-              <span>{props.translate('Show all')}</span>
-            </a>
-          </div>
-        )
-      )}
-    </Panel>
-  );
+  renderTypesButton() {
+    const { showTypes, typesTitle } = this.props;
+    return (
+      <div className="pull-right">
+        <a className="btn btn-xs btn-link" onClick={showTypes}>
+          <i className="fa fa-question-circle"></i> {typesTitle}
+        </a>
+      </div>
+    );
+  }
+
+  renderList() {
+    const { props } = this;
+    if (props.loading) {
+      return <LoadingSpinner />;
+    }
+
+    if (props.items.length === 0) {
+      return props.emptyText;
+    }
+
+    return [
+      <div className="feed-activity-list">
+        {props.items.map((item, index) => this.renderItem(item, index))}
+      </div>,
+      <a className="btn btn-default btn-block m-t" href={props.listLink}>
+        {props.translate('Show all')}
+      </a>
+    ];
+  }
+
+  renderItem(item, index) {
+    const { props } = this;
+    return (
+      <div className="feed-element" key={index}>
+        {props.showDetails && (
+          <a className="pull-right" onClick={() => props.showDetails(item)}>
+            {props.translate('Details')}
+          </a>
+        )}
+        <div dangerouslySetInnerHTML={{__html: item.html_message}}></div>
+        <small className="pull-right">{moment(item.created).fromNow()}</small>
+        <small className="text-muted">{moment(item.created).format('MMM D, Y h:mm:ss A')}</small>
+      </div>
+    );
+  }
 }
 
 export { DashboardFeed };

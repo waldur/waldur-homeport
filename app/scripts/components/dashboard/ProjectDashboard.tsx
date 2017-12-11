@@ -1,45 +1,34 @@
 import * as React from 'react';
-import { connect, Provider } from 'react-redux';
-import { Dispatch, compose } from 'redux';
 
-import { $state } from '@waldur/core/services';
-import { withVisible, connectAngularComponent, IfVisibleProps } from '@waldur/core/reactHelper';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { getTableState } from '@waldur/table-react/store';
+import { withFeature, FeatureProps } from '@waldur/features/connect';
+import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ProjectChart } from './chart/ProjectChart';
-import { DashboardFeed } from './DashboardFeed';
 import { ProjectAlertsFeed } from './ProjectAlertsFeed';
 import { ProjectEventsFeed } from './ProjectEventsFeed';
 import { Project } from './types';
 
-type Props = TranslateProps & IfVisibleProps & {
+type Props = FeatureProps & {
   project: Project;
 };
 
-const PureProjectDashboard = (props: Props) => {
-  return (
-    <div className="wrapper wrapper-content">
-      <ProjectChart project={props.project} />
-      <div className="row">
-        <div className="col-md-6">
-          <ProjectEventsFeed project={props.project} />
-        </div>
-        {props.isVisible('alerts') && (
-          <div className="col-md-6">
-            <ProjectAlertsFeed project={props.project} />
-          </div>
-        )}
+const PureProjectDashboard = ({ isVisible, project }: Props) => (
+  <div className="wrapper wrapper-content">
+    <ProjectChart project={project} />
+    <div className="row">
+      <div className="col-md-6">
+        <ProjectEventsFeed project={project} />
       </div>
+      {isVisible('alerts') && (
+        <div className="col-md-6">
+          <ProjectAlertsFeed project={project} />
+        </div>
+      )}
     </div>
-  );
-};
+  </div>
+);
 
-const ProjectDashboard = compose(
-  withTranslation,
-  withVisible,
-)(PureProjectDashboard);
+const ProjectDashboard = withFeature(PureProjectDashboard);
 
 export {
   PureProjectDashboard,

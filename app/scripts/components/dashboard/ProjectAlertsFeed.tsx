@@ -1,34 +1,31 @@
 import * as React from 'react';
-import { connect, Provider } from 'react-redux';
-import { Dispatch, compose } from 'redux';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-import { withStore } from '@waldur/core/reactHelper';
 import { $state } from '@waldur/core/services';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { getTableState } from '@waldur/table-react/store';
+import { TranslateProps } from '@waldur/i18n';
+import { getCurrentProject } from '@waldur/store/currentProject';
+import { connectTable, TableState } from '@waldur/table-react';
 
-import * as actions from './actions';
+import { showAlertTypes } from '@waldur/alerts/actions';
+import { fetchAlerts } from '@waldur/alerts/api';
 import { DashboardFeed } from './DashboardFeed';
-import { Project, FeedItem, TABLE_ID_DASHBOARD_ALERTS } from './types';
+import { Project } from './types';
 
-type Props = TranslateProps & {
+type Props = TranslateProps & TableState & {
   project: Project;
-  loading: boolean;
-  erred: boolean;
-  dataList: FeedItem[];
   showTypes: () => void;
-  onFetch: () => void;
+  fetch: () => void;
 };
 
 class PureProjectAlertsFeed extends React.PureComponent<Props> {
   componentWillMount() {
-    this.props.onFetch();
+    this.props.fetch();
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (this.props.project !== nextProps.project) {
-      this.props.onFetch();
+      this.props.fetch();
     }
   }
 
@@ -38,34 +35,35 @@ class PureProjectAlertsFeed extends React.PureComponent<Props> {
       <DashboardFeed
         translate={props.translate}
         title={props.translate('Alerts')}
-        buttonTitle={props.translate('Alert types')}
+        typesTitle={props.translate('Alert types')}
         emptyText={props.translate('No alerts yet.')}
-        showAllUrl={$state.href('project.alerts', { uuid: props.project.uuid })}
+        listLink={$state.href('project.alerts', { uuid: props.project.uuid })}
         loading={props.loading}
-        items={props.dataList}
+        items={props.rows}
         showTypes={props.showTypes}
       />
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  const alertsState = getTableState(TABLE_ID_DASHBOARD_ALERTS)(state);
-  return {
-    loading: alertsState.loading,
-    erred: !!alertsState.error,
-    dataList: alertsState.rows,
-  };
-}
+const TableOptions = {
+  table: 'projectAlerts',
+  fetchData: fetchAlerts,
+  getDefaultFilter: state => ({
+    aggregate: 'project',
+    uuid: getCurrentProject(state).uuid,
+    opened: true,
+    o: '-created',
+  })
+};
 
-const mapDispatchToProps = (dispatch: Dispatch<{}>, ownProps: Props) => ({
-  showTypes: () => dispatch(openModalDialog('alertTypesDialog')),
-  onFetch: () => dispatch(actions.fetchAlertsFeed(ownProps.project)),
+const mapDispatchToProps = dispatch => ({
+  showTypes: () => dispatch(showAlertTypes()),
 });
 
 const ProjectAlertsFeed = compose(
-  withTranslation,
-  connect(mapStateToProps, mapDispatchToProps),
+  connectTable(TableOptions),
+  connect(null, mapDispatchToProps),
 )(PureProjectAlertsFeed);
 
 export {

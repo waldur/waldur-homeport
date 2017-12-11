@@ -1,83 +1,64 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 
+import { formatTemplate } from '@waldur/i18n';
 import { DashboardFeed } from './DashboardFeed';
 import { FeedItem } from './types';
 
-const title = 'Title text';
-const emptyText = 'Empty text';
-const buttonTitle = 'Button Title';
-const message1 = 'message 1';
-const message2 = 'message 2';
-const message3 = 'message 3';
-const showAllUrl = 'https://example.com';
-
-const onTranslate = x => x;
-
 const items: FeedItem[] = [
-  { html_message: `<span>${message1}</span>`, created: new Date('2015-05-21') },
-  { html_message: `<a href="#">${message2}</a>`, created: new Date('2016-05-21') },
-  { html_message: `<div>${message3}</div>`, created: new Date('2017-05-21') },
+  {
+    html_message: 'User has logged in',
+    created: new Date('2017-11-21')
+  },
+  {
+    html_message: 'User has created project',
+    created: new Date('2017-11-22')
+  },
 ];
 
-const createComponent = (loading, items, onShowDetails?, onShowTypes?) => {
-  return mount(
-    <DashboardFeed
-      title={title}
-      emptyText={emptyText}
-      buttonTitle={buttonTitle}
-      loading={loading}
-      items={items}
-      translate={onTranslate}
-      showAllUrl={showAllUrl}
-      showDetails={onShowDetails}
-      showTypes={onShowTypes}
-    />
-  );
-};
+const renderFeed = props => mount(
+  <DashboardFeed
+    title='Events feed'
+    emptyText='No events yet'
+    items={items}
+    translate={formatTemplate}
+    {...props}
+  />
+);
+
+const getItems = wrapper => wrapper.find('.feed-element');
+const hasSpinner = wrapper => wrapper.find('.fa-spinner').length === 1;
+const hasPlaceholder = wrapper => wrapper.html().includes('No events yet');
+const clickTypesButton = wrapper => wrapper.find('.btn-link').first().simulate('click');
+const clickDetailsButton = wrapper => wrapper.find('a.pull-right').first().simulate('click');
 
 describe('DashboardFeed', () => {
-  it('renders items if list is not empty', () => {
-    const component = createComponent(false, items, undefined, () => { /* */ });
-
-    const componentHtml = component.html();
-    expect(componentHtml.includes(buttonTitle)).toBe(true);
-    expect(componentHtml.includes(showAllUrl)).toBe(true);
-    expect(componentHtml.includes(message1)).toBe(true);
-    expect(componentHtml.includes(message2)).toBe(true);
-    expect(componentHtml.includes(message3)).toBe(true);
-  });
-
   it('renders spinner if list is loading', () => {
-    const component = createComponent(true, items);
-
-    const componentHtml = component.html();
-    expect(componentHtml.includes(showAllUrl)).toBe(false);
-    expect(componentHtml.includes(message1)).toBe(false);
-    expect(componentHtml.includes(emptyText)).toBe(false);
-    expect(componentHtml.includes('fa-spinner')).toBe(true);
+    const wrapper = renderFeed({loading: true});
+    expect(hasSpinner(wrapper)).toBe(true);
   });
 
-  it('renders the placeholder if list is empty', () => {
-    const component = createComponent(false, []);
-
-    const componentHtml = component.html();
-    expect(componentHtml.includes(emptyText)).toBe(true);
+  it('renders placeholder if list is empty', () => {
+    const wrapper = renderFeed({loading: false, items: []});
+    expect(hasPlaceholder(wrapper)).toBe(true);
   });
 
-  it('the component\'s showTypes function gets called', () => {
-    const onShowTypes = jest.fn();
-    const component = createComponent(false, items, undefined, onShowTypes);
-
-    component.find('.btn-link').first().simulate('click');
-    expect(onShowTypes).toHaveBeenCalledTimes(1);
+  it('renders items if list is not empty', () => {
+    const wrapper = renderFeed({loading: false, items});
+    expect(getItems(wrapper).length).toBe(items.length);
   });
 
-  it('the component\'s showDetails function gets called', () => {
-    const onShowDetails = jest.fn();
-    const component = createComponent(false, items, onShowDetails, undefined);
+  it('when types button is clicked showTypes is called', () => {
+    const showTypes = jest.fn();
+    const wrapper = renderFeed({loading: false, items, showTypes});
+    clickTypesButton(wrapper);
+    expect(showTypes).toHaveBeenCalled();
+  });
 
-    component.find('a.pull-right').first().simulate('click');
-    expect(onShowDetails).toHaveBeenCalledTimes(1);
+  it('when details button is clicked showDetails is called', () => {
+    const showDetails = jest.fn();
+    const wrapper = renderFeed({loading: false, items, showDetails});
+    clickDetailsButton(wrapper);
+    expect(showDetails).toHaveBeenCalled();
   });
 });
