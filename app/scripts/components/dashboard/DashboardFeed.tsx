@@ -51,14 +51,16 @@ class DashboardFeed extends React.PureComponent<Props> {
       return props.emptyText;
     }
 
-    return [
-      <div className="feed-activity-list">
-        {props.items.map((item, index) => this.renderItem(item, index))}
-      </div>,
-      <a className="btn btn-default btn-block m-t" href={props.listLink}>
-        {props.translate('Show all')}
-      </a>
-    ];
+    return (
+      <div>
+        <div className="feed-activity-list">
+          {props.items.map((item, index) => this.renderItem(item, index))}
+        </div>,
+        <a className="btn btn-default btn-block m-t" href={props.listLink}>
+          {props.translate('Show all')}
+        </a>
+      </div>
+    );
   }
 
   renderItem(item, index) {
