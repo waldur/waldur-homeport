@@ -2194,6 +2194,11 @@ msgstr ""
 msgid "Item type"
 msgstr ""
 
+#: app/scripts/components/jira/routes.js
+#: app/scripts/components/jira/sidebar.js
+msgid "JIRA projects"
+msgstr ""
+
 #: app/scripts/components/customer/popover/customer-users-details-list.js
 #: app/scripts/components/user/user-edit.html
 #: app/scripts/components/user/user-popover-table.html
@@ -2538,6 +2543,10 @@ msgstr ""
 #: app/scripts/components/table-react/TablePagination.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Next"
+msgstr ""
+
+#: app/scripts/components/jira/jira-projects-list.js
+msgid "No JIRA projects found matching filter."
 msgstr ""
 
 #: app/scripts/components/user/keys/key-list.js
@@ -5622,6 +5631,10 @@ msgstr ""
 
 #: app/scripts/components/error/invalid-quota-page.html
 msgid "You have exceeded maximum number of quotas."
+msgstr ""
+
+#: app/scripts/components/jira/jira-projects-list.js
+msgid "You have no JIRA projects yet."
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plans-list.js

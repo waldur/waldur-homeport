@@ -13,7 +13,7 @@ type Props = FeatureProps & {
 };
 
 const PureProjectDashboard = ({ isVisible, project }: Props) => (
-  <div className="wrapper wrapper-content">
+  <div className="wrapper wrapper-content m-l-n">
     <ProjectChart project={project} />
     <div className="row">
       <div className="col-md-6">
