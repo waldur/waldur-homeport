@@ -1,14 +1,17 @@
 import * as React from 'react';
 
 type Props = {
-  title: string,
-  children: React.ReactNode,
+  title: string;
+  className?: string;
+  children: React.ReactNode;
+  actions?: React.ReactNode;
 };
 
-const Panel = ({ title, children }: Props) => (
-  <div className='ibox'>
+const Panel = ({ title, children, className, actions }: Props) => (
+  <div className={'ibox ' + className}>
     <div className='ibox-title'>
       <h5>{title}</h5>
+      {actions}
     </div>
     <div className='ibox-content'>
       {children}

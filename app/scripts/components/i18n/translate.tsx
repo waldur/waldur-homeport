@@ -6,7 +6,7 @@ import { $filter } from '@waldur/core/services';
 import { Translate } from './types';
 
 export const formatTemplate: Translate = (template, context) => (
-  context ? template.replace(/{(.+?)}/g, (match, key) => context[key]) : template
+  context ? template.replace(/{(.+?)}/g, (_, key) => context[key]) : template
 );
 
 // AngularJS filter is not defined in ReactJS testing mode

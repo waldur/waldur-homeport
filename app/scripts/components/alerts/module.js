@@ -4,6 +4,7 @@ import alertTypesDialog from './AlertTypesDialog';
 import AlertDialogsService from './alert-dialogs-service';
 import alertFilter from './alert-filter';
 import BaseAlertsListController from './base-alerts-list';
+import attachServices from './services';
 
 export default module => {
   module.service('alertFormatter', alertFormatter);
@@ -12,4 +13,5 @@ export default module => {
   module.service('AlertDialogsService', AlertDialogsService);
   module.directive('alertFilter', alertFilter);
   module.service('BaseAlertsListController', BaseAlertsListController);
+  module.run(attachServices);
 };

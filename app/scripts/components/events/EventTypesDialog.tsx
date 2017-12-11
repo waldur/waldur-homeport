@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/table-react/utils';
+import { connectAngularComponent } from '@waldur/store/connect';
 
 import { TypeListDialog } from './TypeListDialog';
 import { getAvailableEventGroups } from './utils';

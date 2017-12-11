@@ -8,7 +8,6 @@ import Table from './Table';
 
 describe('Table', () => {
   const fetch = jasmine.createSpy('fetch');
-  const gotoPage = x => {};
   const defaultProps = {
     translate: formatTemplate,
     loading: false,
