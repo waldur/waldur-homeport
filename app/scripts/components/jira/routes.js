@@ -5,7 +5,7 @@ export default function jiraRoutes($stateProvider) {
       url: 'jira-projects/',
       template: '<jira-projects-list/>',
       data: {
-        pageTitle: gettext('JIRA projects')
+        pageTitle: gettext('Service desk projects')
       }
     });
 }

@@ -19,8 +19,8 @@ function JiraProjectsListController(
     },
     getTableOptions: function() {
       let options = this._super();
-      options.noDataText = gettext('You have no JIRA projects yet.');
-      options.noMatchesText = gettext('No JIRA projects found matching filter.');
+      options.noDataText = gettext('You have no service desk projects yet.');
+      options.noMatchesText = gettext('No service desk projects found matching filter.');
       return options;
     },
     getFilter: function() {

@@ -2194,11 +2194,6 @@ msgstr ""
 msgid "Item type"
 msgstr ""
 
-#: app/scripts/components/jira/routes.js
-#: app/scripts/components/jira/sidebar.js
-msgid "JIRA projects"
-msgstr ""
-
 #: app/scripts/components/customer/popover/customer-users-details-list.js
 #: app/scripts/components/user/user-edit.html
 #: app/scripts/components/user/user-popover-table.html
@@ -2545,10 +2540,6 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: app/scripts/components/jira/jira-projects-list.js
-msgid "No JIRA projects found matching filter."
-msgstr ""
-
 #: app/scripts/components/user/keys/key-list.js
 msgid "No SSH keys found matching filter."
 msgstr ""
@@ -2777,6 +2768,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js
 msgid "No security groups yet."
+msgstr ""
+
+#: app/scripts/components/jira/jira-projects-list.js
+msgid "No service desk projects found matching filter."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
@@ -4443,6 +4438,10 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
+#: app/scripts/components/jira/sidebar.js
+msgid "Service Desk projects"
+msgstr ""
+
 #: app/scripts/components/issues/create/constants.js
 msgid "Service Request"
 msgstr ""
@@ -4453,6 +4452,10 @@ msgstr ""
 
 #: app/scripts/components/configs/base-config.js
 msgid "Service desk"
+msgstr ""
+
+#: app/scripts/components/jira/routes.js
+msgid "Service desk projects"
 msgstr ""
 
 #: app/scripts/components/issues/request-service-button.js
@@ -5633,10 +5636,6 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
-#: app/scripts/components/jira/jira-projects-list.js
-msgid "You have no JIRA projects yet."
-msgstr ""
-
 #: app/scripts/components/cost-planning/cost-plans-list.js
 msgid "You have no cost plans yet"
 msgstr ""
@@ -5672,6 +5671,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 msgid "You have no restored volumes yet."
+msgstr ""
+
+#: app/scripts/components/jira/jira-projects-list.js
+msgid "You have no service desk projects yet."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js

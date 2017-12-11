@@ -3,7 +3,7 @@ export default function registerSidebarExtension(SidebarExtensionService) {
   SidebarExtensionService.register('project', () => {
     return [
       {
-        label: gettext('JIRA projects'),
+        label: gettext('Service Desk projects'),
         icon: 'fa-list-alt',
         link: 'project.resources.jira-projects({uuid: $ctrl.context.project.uuid})',
         feature: 'jira',
