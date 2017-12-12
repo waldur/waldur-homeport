@@ -3,14 +3,14 @@ import * as React from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TranslateProps } from '@waldur/i18n/types';
 
-import TableInfo from './TableInfo';
-import TablePagination from './TablePagination';
 import TableBody from './TableBody';
 import TableButtons from './TableButtons';
-import TableRefreshButton from './TableRefreshButton';
 import TableHeader from './TableHeader';
+import TableInfo from './TableInfo';
+import TablePagination from './TablePagination';
 import TablePlaceholder from './TablePlaceholder';
 import TableQuery from './TableQuery';
+import TableRefreshButton from './TableRefreshButton';
 import { Column, TableState } from './types';
 
 type Props = TranslateProps & TableState & {
@@ -18,8 +18,8 @@ type Props = TranslateProps & TableState & {
   gotoPage?: (page: number) => void,
   hasQuery?: boolean,
   setQuery?: (query: string) => void,
-  columns?: Array<Column>,
-  exportAs?: Function,
+  columns?: Column[],
+  exportAs?: (format: string) => void,
   actions?: React.ReactNode,
   verboseName?: string,
 };
@@ -33,7 +33,7 @@ class Table extends React.Component<Props> {
 
   render() {
     return (
-      <div className='dataTables_wrapper'>
+      <div className="dataTables_wrapper">
         <TableButtons {...this.props}/>
         {this.props.hasQuery && (
           <TableQuery
@@ -75,7 +75,7 @@ class Table extends React.Component<Props> {
     }
 
     return (
-      <table className='table table-striped dataTable'>
+      <table className="table table-striped dataTable">
         <TableHeader columns={this.props.columns}/>
         <TableBody rows={this.props.rows} columns={this.props.columns}/>
       </table>

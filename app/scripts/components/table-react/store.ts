@@ -1,4 +1,5 @@
 import { createByKey } from '@waldur/store/utils';
+
 import * as actions from './actions';
 import { TableState } from './types';
 
@@ -13,7 +14,7 @@ const INITIAL_STATE: TableState = {
   },
 };
 
-const pagination = (state=INITIAL_STATE, action): TableState => {
+const pagination = (state = INITIAL_STATE, action): TableState => {
   switch (action.type) {
   case actions.FETCH_LIST_START:
     return {
@@ -46,7 +47,7 @@ const pagination = (state=INITIAL_STATE, action): TableState => {
       pagination: {
         ...state.pagination,
         currentPage: action.payload.page,
-      }
+      },
     };
 
   case actions.SET_FILTER_QUERY:
@@ -62,7 +63,7 @@ const pagination = (state=INITIAL_STATE, action): TableState => {
 
 export const reducer = createByKey(
   action => action.payload && action.payload.table,
-  action => action.payload.table
+  action => action.payload.table,
 )(pagination);
 
 type TableSelector = (table: string) => (state: {tables: {[key: string]: TableState}}) => TableState;

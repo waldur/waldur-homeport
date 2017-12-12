@@ -1,8 +1,9 @@
 import * as React from 'react';
+
 import { Column } from './types';
 
 type Props = {
-  columns: Array<Column>,
+  columns: Column[],
 };
 
 const TableHeader = ({ columns }: Props) => (

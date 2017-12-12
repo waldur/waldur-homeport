@@ -2,13 +2,13 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import { showAlertTypes } from '@waldur/alerts/actions';
+import { fetchAlerts } from '@waldur/alerts/api';
 import { $state } from '@waldur/core/services';
 import { TranslateProps } from '@waldur/i18n';
 import { getCurrentProject } from '@waldur/store/currentProject';
 import { connectTable, TableState } from '@waldur/table-react';
 
-import { showAlertTypes } from '@waldur/alerts/actions';
-import { fetchAlerts } from '@waldur/alerts/api';
 import { DashboardFeed } from './DashboardFeed';
 import { Project } from './types';
 
@@ -54,7 +54,7 @@ const TableOptions = {
     uuid: getCurrentProject(state).uuid,
     opened: true,
     o: '-created',
-  })
+  }),
 };
 
 const mapDispatchToProps = dispatch => ({

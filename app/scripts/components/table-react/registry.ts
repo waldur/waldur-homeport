@@ -1,6 +1,6 @@
 import { TableOptions } from './types';
 
-let registry = {};
+const registry = {};
 
 export const registerTable = (options: TableOptions) => {
   registry[options.table] = options;

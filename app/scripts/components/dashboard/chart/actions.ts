@@ -17,7 +17,7 @@ const dashboardChartStop = (chartId: string) => ({
   chartId,
 });
 
-const dashboardChartSuccess = (chartId: string, charts: Array<Chart>) => ({
+const dashboardChartSuccess = (chartId: string, charts: Chart[]) => ({
   type: DASHBOARD_CHARTS_SUCCESS,
   chartId,
   charts,
@@ -26,12 +26,12 @@ const dashboardChartSuccess = (chartId: string, charts: Array<Chart>) => ({
 const dashboardChartError = (chartId: string, error: string) => ({
   type: DASHBOARD_CHARTS_ERROR,
   chartId,
-  error
+  error,
 });
 
 const emitSignal = (signal: string) => ({
   type: EMIT_SIGNAL,
-  signal
+  signal,
 });
 
 export default {

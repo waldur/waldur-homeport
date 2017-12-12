@@ -1,9 +1,9 @@
 import * as actions from './actions';
-import { reducer, getTableState } from './store'
+import { reducer, getTableState } from './store';
 
 describe('Table reducer', () => {
   it('should return default state', () => {
-    const state = {'tables': {}};
+    const state = { tables: {} };
     expect(getTableState('users')(state)).toEqual({
       rows: [],
       loading: false,
@@ -12,7 +12,7 @@ describe('Table reducer', () => {
         pageSize: 10,
         resultCount: 0,
         currentPage: 1,
-      }
+      },
     });
   });
 
@@ -20,8 +20,8 @@ describe('Table reducer', () => {
     const state = reducer({}, {
       type: actions.FETCH_LIST_START,
       payload: {
-        table: 'users'
-      }
+        table: 'users',
+      },
     });
     expect(state.users.loading).toBe(true);
   });
@@ -33,10 +33,10 @@ describe('Table reducer', () => {
         table: 'users',
         rows: [{
           name: 'Alice',
-          id: 1
+          id: 1,
         }],
         resultCount: 1,
-      }
+      },
     });
     expect(state.users.loading).toBe(false);
     expect(state.users.error).toBe(null);
@@ -48,8 +48,8 @@ describe('Table reducer', () => {
       type: actions.FETCH_LIST_ERROR,
       payload: {
         table: 'users',
-        error: 'Unable to fetch data.'
-      }
+        error: 'Unable to fetch data.',
+      },
     });
     expect(state.users.loading).toBe(false);
     expect(state.users.error).toBe('Unable to fetch data.');
@@ -60,8 +60,8 @@ describe('Table reducer', () => {
       type: actions.FETCH_LIST_GOTO_PAGE,
       payload: {
         table: 'users',
-        page: 3
-      }
+        page: 3,
+      },
     });
     expect(state.users.pagination.currentPage).toBe(3);
   });

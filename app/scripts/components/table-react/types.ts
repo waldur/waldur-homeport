@@ -12,7 +12,7 @@ type TableRequest = {
 type Entity = any;
 
 type TableResponse = {
-  rows: Array<Entity>,
+  rows: Entity[],
   resultCount: number,
 };
 
@@ -22,9 +22,9 @@ export type TableOptions = {
   table: string,
   fetchData: any,
   queryField?: string,
-  exportFields?: Array<string>,
-  exportRow?: (Entity) => Array<string>,
-  getDefaultFilter?: (any) => any
+  exportFields?: string[],
+  exportRow?: (Entity) => string[],
+  getDefaultFilter?: (state) => any,
 };
 
 export type Column = {
@@ -40,7 +40,7 @@ export type Pagination = {
 };
 
 export type TableState = {
-  rows?: Array<any>,
+  rows?: any[],
   loading?: boolean,
   error?: any,
   pagination?: Pagination,

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import * as BootstrapTooltip from 'react-bootstrap/lib/Tooltip';
 import * as OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import * as BootstrapTooltip from 'react-bootstrap/lib/Tooltip';
 
 type Props = {
   label: any,
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const Tooltip = ({ label, children, id }: Props) => (
-  <OverlayTrigger placement='top' overlay={<BootstrapTooltip id={id}>{label}</BootstrapTooltip>}>
+  <OverlayTrigger placement="top" overlay={<BootstrapTooltip id={id}>{label}</BootstrapTooltip>}>
     {children}
   </OverlayTrigger>
 );

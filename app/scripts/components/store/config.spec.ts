@@ -6,7 +6,7 @@ describe('Configuration reducer', () => {
   it('should merge experimental and disabled features', () => {
     const actual = reducer(undefined, initConfig({
       disabledFeatures: ['experts'],
-      toBeFeatures: ['paypal']
+      toBeFeatures: ['paypal'],
     }));
     expect(actual.features).toEqual(features);
   });

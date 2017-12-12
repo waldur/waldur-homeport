@@ -9,11 +9,11 @@ type Props = {
 
 const Panel = ({ title, children, className, actions }: Props) => (
   <div className={'ibox ' + className}>
-    <div className='ibox-title'>
+    <div className="ibox-title">
       <h5>{title}</h5>
       {actions}
     </div>
-    <div className='ibox-content'>
+    <div className="ibox-content">
       {children}
     </div>
   </div>

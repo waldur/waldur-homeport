@@ -1,4 +1,5 @@
 import { ENV, $http } from '@waldur/core/services';
+
 import { Fetcher } from './types';
 
 export function createFetcher(endpoint: string): Fetcher {
@@ -12,9 +13,9 @@ export function createFetcher(endpoint: string): Fetcher {
     return $http({
       method: 'GET',
       url,
-      params
+      params,
     }).then(response => {
-      const resultCount = parseInt(response.headers()['x-result-count']);
+      const resultCount = parseInt(response.headers()['x-result-count'], 10);
       return {
         rows: response.data,
         resultCount,

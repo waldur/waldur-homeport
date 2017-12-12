@@ -6,7 +6,7 @@ export const openModalDialog = (component: string, params?: any) => ({
   payload: {
     component,
     params,
-  }
+  },
 });
 
 export const closeModalDialog = () => ({

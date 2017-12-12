@@ -1,12 +1,11 @@
-import { takeEvery } from "redux-saga";
-
-import { $uibModal, $uibModalStack } from './services';
+import { takeEvery } from 'redux-saga';
 
 import * as actions from './actions';
+import { $uibModal, $uibModalStack } from './services';
 
 function openModalDialog(action) {
   const { component, params } = action.payload;
-  let resolve = {};
+  const resolve = {};
   if (params && params.resolve) {
     Object.keys(params.resolve).forEach(key => {
       resolve[key] = () => params.resolve[key];

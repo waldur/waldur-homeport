@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-import { openModalDialog } from '@waldur/modal/actions';
 import { withTranslation } from '@waldur/i18n/translate';
+import { openModalDialog } from '@waldur/modal/actions';
 import ActionButton from '@waldur/table-react/ActionButton';
 import { canCreateOrganization } from '@waldur/table-react/selectors';
 
@@ -21,7 +21,7 @@ const customerCreateDialog = () => openModalDialog('customerCreateDialog', {size
 const enhance = compose(
   withTranslation,
   connect(state => ({
-    isVisible: canCreateOrganization(state)
+    isVisible: canCreateOrganization(state),
   }), {
     onClick: customerCreateDialog,
   })

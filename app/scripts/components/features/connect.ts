@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { isVisible } from '@waldur/store/config';
 
 export function withFeature(Component) {
-  const mapStateToProps = (state) => ({
+  const mapStateToProps = state => ({
     isVisible: feature => isVisible(state, feature),
   });
 

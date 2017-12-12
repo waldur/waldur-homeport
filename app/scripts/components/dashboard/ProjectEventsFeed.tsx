@@ -2,9 +2,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { fetchEvents } from '@waldur/events/api';
 import { $state } from '@waldur/core/services';
 import { showEventTypes, showEventDetails } from '@waldur/events/actions';
+import { fetchEvents } from '@waldur/events/api';
 import { TranslateProps } from '@waldur/i18n';
 import { getCurrentProject } from '@waldur/store/currentProject';
 import { connectTable, TableState } from '@waldur/table-react';
@@ -53,7 +53,7 @@ const TableOptions = {
   fetchData: fetchEvents,
   getDefaultFilter: state => ({
     exclude_extra: true,
-    scope: getCurrentProject(state).url
+    scope: getCurrentProject(state).url,
   }),
 };
 

@@ -22,5 +22,5 @@ export type Scope = {
 export type ChartsState = {
   loading: boolean,
   erred: boolean,
-  charts: Array<Chart>,
+  charts: Chart[],
 };
