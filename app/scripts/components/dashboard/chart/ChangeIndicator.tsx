@@ -1,8 +1,8 @@
-import * as React from 'react';
 import * as classNames from 'classnames';
+import * as React from 'react';
 
 type Props = {
-  change: number
+  change: number;
 };
 
 const textClass = change => (
@@ -24,7 +24,7 @@ const iconClass = change => (
 const ChangeIndicator = ({ change }: Props) => {
   return (
     <div className={textClass(change)}>
-      <span className='pull-right'>
+      <span className="pull-right">
         {change || 0}%
         <i className={iconClass(change)}/>
       </span>

@@ -14,8 +14,10 @@
     "build-stats": "cross-env NODE_ENV=production webpack --config=webpack.config.prod.js --profile --json > stats.json",
     "build-dll": "webpack --config webpack.config.dll.js -p --hide-modules",
     "build-dll-dev": "webpack --config webpack.config.dll.js --hide-modules",
-    "test": "npm run lint && npm run test-single-run && yarn jest",
-    "lint": "eslint app/scripts/components",
+    "test": "npm run eslint && npm run tslint && npm run test-single-run && jest",
+    "eslint": "eslint app/scripts/components",
+    "tslint-build": "tsc -p ./tslint/tsconfig.json",
+    "tslint": "npm run tslint-build && tslint -c tslint.json -p tsconfig.json",
     "test-server": "karma start test/karma.conf.js",
     "test-single-run": "karma start test/karma.conf.js --single-run"
   },

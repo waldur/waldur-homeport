@@ -1,9 +1,9 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import * as actions from './actions';
-import { getTableState } from './store';
-import { getTableOptions } from './registry';
 import { exportTable } from './export';
+import { getTableOptions } from './registry';
+import { getTableState } from './store';
 
 function* fetchList(action) {
   const table = action.payload.table;
@@ -17,7 +17,7 @@ function* fetchList(action) {
     const request = {
       pagination: state.pagination,
       filter: {
-        ...filter
+        ...filter,
       },
     };
     if (options.queryField && state.query !== '') {
@@ -26,7 +26,7 @@ function* fetchList(action) {
 
     const { rows, resultCount } = yield call(options.fetchData, request);
     yield put(actions.fetchListDone(table, rows, resultCount));
-  } catch(error) {
+  } catch (error) {
     yield put(actions.fetchListError(table, error));
   }
 }

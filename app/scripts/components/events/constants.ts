@@ -1,8 +1,10 @@
-import { IconType } from './types';
 import { gettext } from '@waldur/i18n';
 
+import { IconType } from './types';
+
 export const EVENT_TEMPLATES = {
-  auth_logged_in_with_username: gettext('User {user_username} with full name {user_full_name} authenticated successfully with username and password.'),
+  auth_logged_in_with_username: gettext(
+    'User {user_username} with full name {user_full_name} authenticated successfully with username and password.'),
   auth_logged_in_with_openid: gettext('User {user_username} with full name {user_full_name} authenticated successfully with OpenID.'),
   auth_logged_in_with_google: gettext('User {user_username} with full name {user_full_name} authenticated successfully with Google.'),
   auth_logged_in_with_facebook: gettext('User {user_username} with full name {user_full_name} authenticated successfully with Facebook.'),
@@ -59,7 +61,7 @@ export const EVENT_TEMPLATES = {
   expert_request_created: gettext('User {caller_full_name} has created request for experts under {customer_name} / {project_name}.'),
   expert_request_activated: gettext('Expert request "{expert_request_name}" has been activated.'),
   expert_request_cancelled: gettext('Expert request "{expert_request_name}"" has been cancelled.'),
-  expert_request_completed: gettext('Expert request "{expert_request_name}" has been completed.')
+  expert_request_completed: gettext('Expert request "{expert_request_name}" has been completed.'),
 };
 
 export const EVENT_ICONS_TYPES: { [propName: string]: IconType } = {
@@ -95,5 +97,5 @@ export const DELETION_EVENTS = [
   'project_group_deletion_succeeded',
   'resource_deleted',
   'ssh_key_deletion_succeeded',
-  'user_deletion_succeeded'
+  'user_deletion_succeeded',
 ];

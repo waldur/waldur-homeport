@@ -1,7 +1,9 @@
 import * as React from 'react';
+
 import { Tooltip } from '@waldur/core/Tooltip';
-import { ChartData } from './types';
+
 import './sparkline.scss';
+import { ChartData } from './types';
 
 type Props = {
   data: ChartData
@@ -16,11 +18,11 @@ const normalizeData = items => {
 };
 
 const SparklineChart = ({ data }: Props) => (
-  <figure className='sparkline'>
+  <figure className="sparkline">
     {normalizeData(data).map((item, index) =>
-      <Tooltip key={index} label={item.label} id='sparkline'>
-        <div className='sparkline-column'>
-          <div className='sparkline-bar' style={{height: `${item.value}%`}}></div>
+      <Tooltip key={index} label={item.label} id="sparkline">
+        <div className="sparkline-column">
+          <div className="sparkline-bar" style={{height: `${item.value}%`}}></div>
         </div>
       </Tooltip>
     )}

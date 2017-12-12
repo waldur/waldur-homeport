@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { mount } from 'enzyme';
+import * as React from 'react';
 
 import SparklineChart from './sparkline';
 
@@ -13,16 +13,16 @@ describe('SparklineChart', () => {
     expect(getColumns(wrapper).length).toBe(0);
   });
 
-  it('renders two columns with proportional height', function() {
+  it('renders two columns with proportional height', () => {
     const data = [
       {
         value: 1,
-        label: 'January'
+        label: 'January',
       },
       {
         value: 2,
-        label: 'February'
-      }
+        label: 'February',
+      },
     ];
     const wrapper = mount(<SparklineChart data={data}/>);
     expect(getColumns(wrapper).length).toBe(2);

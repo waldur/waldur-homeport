@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { TranslateProps } from '@waldur/i18n/types';
 
 type Props = TranslateProps & {
@@ -6,8 +7,8 @@ type Props = TranslateProps & {
 };
 
 const TableRefreshButton = ({ fetch, translate }: Props) => (
-  <a className='btn btn-default btn-sm' onClick={fetch}>
-    <i className='fa fa-refresh'/>
+  <a className="btn btn-default btn-sm" onClick={fetch}>
+    <i className="fa fa-refresh"/>
     &nbsp;{translate('Refresh')}
   </a>
 );

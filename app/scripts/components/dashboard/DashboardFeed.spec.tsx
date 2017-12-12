@@ -1,25 +1,26 @@
-import * as React from 'react';
 import { mount } from 'enzyme';
+import * as React from 'react';
 
 import { formatTemplate } from '@waldur/i18n';
+
 import { DashboardFeed } from './DashboardFeed';
 import { FeedItem } from './types';
 
 const items: FeedItem[] = [
   {
     html_message: 'User has logged in',
-    created: new Date('2017-11-21')
+    created: new Date('2017-11-21'),
   },
   {
     html_message: 'User has created project',
-    created: new Date('2017-11-22')
+    created: new Date('2017-11-22'),
   },
 ];
 
 const renderFeed = props => mount(
   <DashboardFeed
-    title='Events feed'
-    emptyText='No events yet'
+    title="Events feed"
+    emptyText="No events yet"
     items={items}
     translate={formatTemplate}
     {...props}

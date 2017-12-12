@@ -1,14 +1,14 @@
 const SET_CURRENT_PROJECT = 'waldur/project/SET_CURRENT';
 
-export const setCurrentProject = (project) => ({
+export const setCurrentProject = project => ({
   type: SET_CURRENT_PROJECT,
   payload: {
-    project
-  }
+    project,
+  },
 });
 
-export const reducer = (state=null, action) => {
-  switch(action.type) {
+export const reducer = (state = null, action) => {
+  switch (action.type) {
 
   case SET_CURRENT_PROJECT:
     return action.payload.project;
@@ -23,4 +23,4 @@ type Project = {
   url: string,
 };
 
-export const getCurrentProject: (any) => Project = state => state.currentProject;
+export const getCurrentProject: (p) => Project = state => state.currentProject;

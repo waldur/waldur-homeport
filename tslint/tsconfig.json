@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "baseUrl": "./",
+    "outDir": "./rules",
+    "noImplicitAny": false,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "target": "es5"
+  },
+  "paths": {
+    "*": ["*", "../node_modules"]
+  },
+  "include": [
+    "./rules/*.ts"
+  ],
+  "exclude": [
+    "./**/*.spec.*"
+  ]
+}

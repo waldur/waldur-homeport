@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import actions from './actions';
+import DashboardChartList from './DashboardChartList';
 import { getChart } from './reducers';
 import { Scope } from './types';
-import DashboardChartList from './DashboardChartList';
 
 type Props = {
   scope: Scope,
@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch: Dispatch<{}>, ownProps: Props) => ({
     dispatch(actions.emitSignal(ownProps.signal));
   },
   onStop: () => {
-    dispatch(actions.dashboardChartStop(ownProps.chartId))
+    dispatch(actions.dashboardChartStop(ownProps.chartId));
   },
 });
 

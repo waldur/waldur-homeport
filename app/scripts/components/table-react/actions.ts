@@ -8,17 +8,17 @@ export const EXPORT_TABLE_AS = 'waldur/table/EXPORT';
 export const fetchListStart = (table: string) => ({
   type: FETCH_LIST_START,
   payload: {
-    table
-  }
+    table,
+  },
 });
 
-export const fetchListDone = (table: string, rows: Array<any>, resultCount: number) => ({
+export const fetchListDone = (table: string, rows: any[], resultCount: number) => ({
   type: FETCH_LIST_DONE,
   payload: {
     table,
     rows,
     resultCount,
-  }
+  },
 });
 
 export const fetchListError = (table: string, error: any) => ({
@@ -26,7 +26,7 @@ export const fetchListError = (table: string, error: any) => ({
   payload: {
     table,
     error,
-  }
+  },
 });
 
 export const fetchListGotoPage = (table: string, page: number) => ({
@@ -34,7 +34,7 @@ export const fetchListGotoPage = (table: string, page: number) => ({
   payload: {
     table,
     page,
-  }
+  },
 });
 
 export const exportTableAs = (table: string, format: string) => ({
@@ -42,13 +42,13 @@ export const exportTableAs = (table: string, format: string) => ({
   payload: {
     table,
     format,
-  }
+  },
 });
 
 export const setFilterQuery = (table: string, query: string) => ({
   type: SET_FILTER_QUERY,
   payload: {
     table,
-    query
-  }
+    query,
+  },
 });

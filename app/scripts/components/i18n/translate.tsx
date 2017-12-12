@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { $filter } from '@waldur/core/services';
+
 import { Translate } from './types';
 
 export const formatTemplate: Translate = (template, context) => (
@@ -19,7 +20,7 @@ export const translate: Translate = (template, context) => (
   formatTemplate(translateFilter(template), context)
 );
 
-const getLocale = (state) => ({
+const getLocale = state => ({
   locale: state.locale,
 });
 

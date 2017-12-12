@@ -5,8 +5,8 @@ import DashboardChartContainer from './DashboardChartContainer';
 const ProjectChart = ({ project }) => (
   <DashboardChartContainer
     scope={project}
-    signal='projectDashboard.initialized'
-    chartId='project'/>
+    signal="projectDashboard.initialized"
+    chartId="project"/>
 );
 
 export {

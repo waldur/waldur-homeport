@@ -1,12 +1,13 @@
-import * as React from 'react';
 import { shallow } from 'enzyme';
+import * as React from 'react';
+
+import { formatTemplate } from '@waldur/i18n/translate';
 
 import TableInfo from './TableInfo';
-import { formatTemplate } from '@waldur/i18n/translate';
 
 describe('TableInfo', () => {
   const defaultProps = {
-    translate: formatTemplate
+    translate: formatTemplate,
   };
 
   it('renders message for empty list', () => {

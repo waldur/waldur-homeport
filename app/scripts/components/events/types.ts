@@ -7,4 +7,4 @@ export type EventGroup = {
 export type IconType = {
   imageId: string
   text: string,
-}
+};

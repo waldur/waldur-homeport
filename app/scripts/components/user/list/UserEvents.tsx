@@ -1,5 +1,5 @@
-import * as React from 'react';
 import * as moment from 'moment';
+import * as React from 'react';
 
 import { eventFormatter } from '@waldur/events/services';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
@@ -30,8 +30,8 @@ const TableComponent = props => {
     {
       title: translate('Actions'),
       render: EventDetailsButton,
-      className: 'text-center col-md-2'
-    }
+      className: 'text-center col-md-2',
+    },
   ]}
   hasQuery={true}
   verboseName={translate('events')}

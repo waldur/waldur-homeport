@@ -1,4 +1,5 @@
 import { createFetcher } from '@waldur/table-react';
+
 import { eventFormatter } from './services';
 
 export const fetchEvents = request => createFetcher('events')(request).then(response => {
