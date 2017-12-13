@@ -781,6 +781,7 @@ msgid "Chart is not available at this moment."
 msgstr ""
 
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
+#: app/scripts/components/jira/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -1076,6 +1077,7 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/expert-request-general-info.html
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
+#: app/scripts/components/jira/jira-projects-list.js
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 #: app/scripts/components/resource/summary/resource-summary-base.html
@@ -1198,6 +1200,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/issues/list/issues-short-list.html
+#: app/scripts/components/jira/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
@@ -1701,6 +1704,10 @@ msgstr ""
 msgid "Form has not been filled correctly. Please check your input."
 msgstr ""
 
+#: app/scripts/components/jira/jira-project-checkout-summary.html
+msgid "Free"
+msgstr ""
+
 #: app/scripts/components/user/constants.js
 #: app/scripts/components/user/routes.js
 msgid "FreeIPA account"
@@ -2132,6 +2139,7 @@ msgid "Invoice number"
 msgstr ""
 
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
+#: app/scripts/components/jira/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -2223,6 +2231,10 @@ msgstr ""
 
 #: app/scripts/components/user/keys/key-create.html
 msgid "Key name"
+msgstr ""
+
+#: app/scripts/components/jira/jira-project-config.js
+msgid "Key should consist of uppercase letters."
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.js
@@ -2465,6 +2477,8 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
+#: app/scripts/components/jira/jira-project-config.js
+#: app/scripts/components/jira/jira-projects-list.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/offering/offerings-list.js
@@ -3395,6 +3409,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-flavors.html
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/expert-bids-list.js
+#: app/scripts/components/jira/jira-project-checkout-summary.html
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/paypal/paypal-invoices-list.js
 #: app/scripts/components/plans/plan-agreements-list.js
@@ -3518,6 +3533,7 @@ msgstr ""
 #: app/scripts/components/issues/create/issue-create-dialog.html
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
+#: app/scripts/components/jira/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -3599,6 +3615,10 @@ msgstr ""
 msgid "Project service"
 msgstr ""
 
+#: app/scripts/components/jira/jira-project-summary.html
+msgid "Project type"
+msgstr ""
+
 #: app/scripts/components/ansible/details/ansible-job-details.js
 #: app/scripts/components/appstore/appstore-store.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
@@ -3645,6 +3665,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
+#: app/scripts/components/jira/jira-projects-list.js
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/summary/resource-summary-base.html
 #: app/views/help/list.html
@@ -4438,10 +4459,6 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
-#: app/scripts/components/jira/sidebar.js
-msgid "Service Desk projects"
-msgstr ""
-
 #: app/scripts/components/issues/create/constants.js
 msgid "Service Request"
 msgstr ""
@@ -4451,7 +4468,21 @@ msgid "Service Request - client’s request to modify, add, change or remove par
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js
+#: app/scripts/components/jira/sidebar.js
+#: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Service desk"
+msgstr ""
+
+#: app/scripts/components/jira/routes.js
+msgid "Service desk project"
+msgstr ""
+
+#: app/scripts/components/jira/jira-project-checkout-summary.html
+msgid "Service desk project name"
+msgstr ""
+
+#: app/scripts/components/jira/jira-project-checkout-summary.html
+msgid "Service desk project type"
 msgstr ""
 
 #: app/scripts/components/jira/routes.js
@@ -4966,6 +4997,7 @@ msgstr ""
 
 #: app/scripts/components/ansible/create/ansible-job-create.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
+#: app/scripts/components/jira/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 #: app/scripts/components/project/project-create.html
@@ -5074,6 +5106,8 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/expert-request-general-info.html
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
+#: app/scripts/components/jira/jira-project-config.js
+#: app/scripts/components/jira/jira-projects-list.js
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/offering/offerings-list.js
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html
