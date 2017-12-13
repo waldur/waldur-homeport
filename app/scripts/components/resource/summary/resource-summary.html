@@ -57,6 +57,10 @@
     <slurm-allocation-summary resource="$ctrl.resource"></slurm-allocation-summary>
   </div>
 
+  <div ng-switch-when="JIRA.Project">
+    <jira-project-summary resource="$ctrl.resource"></jira-project-summary>
+  </div>
+
   <div ng-switch-default>
     <resource-summary-base resource="$ctrl.resource"></resource-summary-base>
   </div>

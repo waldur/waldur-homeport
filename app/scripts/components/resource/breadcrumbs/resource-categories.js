@@ -20,7 +20,7 @@ export const CATEGORY_ITEMS = {
     state: 'project.resources.slurm',
   },
   jiraProject: {
-    label: gettext('Service desk projects'),
+    label: gettext('Service desk'),
     state: 'project.resources.jira-projects',
   }
 };
