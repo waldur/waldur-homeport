@@ -781,6 +781,7 @@ msgid "Chart is not available at this moment."
 msgstr ""
 
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
+#: app/scripts/components/jira/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -1703,6 +1704,10 @@ msgstr ""
 msgid "Form has not been filled correctly. Please check your input."
 msgstr ""
 
+#: app/scripts/components/jira/jira-project-checkout-summary.html
+msgid "Free"
+msgstr ""
+
 #: app/scripts/components/user/constants.js
 #: app/scripts/components/user/routes.js
 msgid "FreeIPA account"
@@ -2134,6 +2139,7 @@ msgid "Invoice number"
 msgstr ""
 
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
+#: app/scripts/components/jira/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -3403,6 +3409,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-flavors.html
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/expert-bids-list.js
+#: app/scripts/components/jira/jira-project-checkout-summary.html
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/paypal/paypal-invoices-list.js
 #: app/scripts/components/plans/plan-agreements-list.js
@@ -3526,6 +3533,7 @@ msgstr ""
 #: app/scripts/components/issues/create/issue-create-dialog.html
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
+#: app/scripts/components/jira/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -4467,6 +4475,14 @@ msgstr ""
 
 #: app/scripts/components/jira/routes.js
 msgid "Service desk project"
+msgstr ""
+
+#: app/scripts/components/jira/jira-project-checkout-summary.html
+msgid "Service desk project name"
+msgstr ""
+
+#: app/scripts/components/jira/jira-project-checkout-summary.html
+msgid "Service desk project type"
 msgstr ""
 
 #: app/scripts/components/jira/routes.js

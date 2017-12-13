@@ -45,6 +45,7 @@ const JiraProjectConfig = {
       maxlength: 500,
     },
   },
+  summaryComponent: 'jiraProjectCheckoutSummary',
   onSuccess: onSuccess,
 };
 
