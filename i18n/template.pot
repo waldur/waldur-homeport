@@ -1198,6 +1198,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/issues/list/issues-short-list.html
+#: app/scripts/components/jira/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
@@ -2225,6 +2226,10 @@ msgstr ""
 msgid "Key name"
 msgstr ""
 
+#: app/scripts/components/jira/jira-project-config.js
+msgid "Key should consist of uppercase letters."
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.js
 msgid "Large"
 msgstr ""
@@ -2465,6 +2470,7 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
+#: app/scripts/components/jira/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/offering/offerings-list.js
@@ -4438,10 +4444,6 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
-#: app/scripts/components/jira/sidebar.js
-msgid "Service Desk projects"
-msgstr ""
-
 #: app/scripts/components/issues/create/constants.js
 msgid "Service Request"
 msgstr ""
@@ -4455,6 +4457,12 @@ msgid "Service desk"
 msgstr ""
 
 #: app/scripts/components/jira/routes.js
+msgid "Service desk project"
+msgstr ""
+
+#: app/scripts/components/jira/routes.js
+#: app/scripts/components/jira/sidebar.js
+#: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Service desk projects"
 msgstr ""
 
@@ -4966,6 +4974,7 @@ msgstr ""
 
 #: app/scripts/components/ansible/create/ansible-job-create.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
+#: app/scripts/components/jira/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 #: app/scripts/components/project/project-create.html
@@ -5074,6 +5083,7 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/expert-request-general-info.html
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
+#: app/scripts/components/jira/jira-project-config.js
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/offering/offerings-list.js
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html

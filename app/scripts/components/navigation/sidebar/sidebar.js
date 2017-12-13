@@ -1,5 +1,6 @@
 import template from './sidebar.html';
 import {WOKSPACE_NAMES} from '../workspace/constants';
+import './sidebar.css';
 
 class SidebarController {
   // @ngInject

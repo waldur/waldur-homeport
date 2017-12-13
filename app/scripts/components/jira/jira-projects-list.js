@@ -23,6 +23,15 @@ function JiraProjectsListController(
       options.noMatchesText = gettext('No service desk projects found matching filter.');
       return options;
     },
+    getTableActions: function() {
+      return [this.getCreateAction()];
+    },
+    getCategoryKey: function() {
+      return 'jiraProject';
+    },
+    getCategoryState: function() {
+      return 'appstore.jira-project';
+    },
     getFilter: function() {
       return {
         project_uuid: this.currentProject.uuid

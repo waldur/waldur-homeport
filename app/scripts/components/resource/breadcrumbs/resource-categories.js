@@ -18,5 +18,9 @@ export const CATEGORY_ITEMS = {
   slurm: {
     label: gettext('Batch processing'),
     state: 'project.resources.slurm',
+  },
+  jiraProject: {
+    label: gettext('Service desk projects'),
+    state: 'project.resources.jira-projects',
   }
 };

@@ -64,7 +64,8 @@ const ENV = {
     vms: 'vms',
     storages: 'storages',
     private_clouds: 'private_clouds',
-    slurm: 'slurm'
+    slurm: 'slurm',
+    jiraProject: 'jiraProject',
   },
 
   // Index of category inside of appStoreCategories
@@ -100,6 +101,12 @@ const ENV = {
       key: 'slurm',
       services: ['SLURM'],
     },
+    {
+      name: gettext('Service desk'),
+      type: 'provider',
+      key: 'jiraProject',
+      services: ['JIRA'],
+    },
   ],
   serviceCategories: [
     {
@@ -129,6 +136,7 @@ const ENV = {
     'OpenStack.Volume': 'storages',
     'OpenStack.Snapshot': 'storages',
     'SLURM.Allocation': 'slurm',
+    'JIRA.Project': 'jiraProject',
   },
   showCompare: [
     'Virtual machines'

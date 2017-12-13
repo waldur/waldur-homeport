@@ -43,7 +43,7 @@
             visible-if="child.feature">
             <a ui-sref="{{ child.link }}">
               <i class="fa {{ ::child.icon }}"></i>
-              {{ child.label | translate }}
+              <span class="nav-label">{{ child.label | translate }}</span>
               <span class="label label-info pull-right"
                 ng-if="::child.countFieldKey"
                 ng-bind="child.count"/>
