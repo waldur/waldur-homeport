@@ -3,6 +3,7 @@ import { organizationDashboard } from './organization-dashboard';
 import organizationChart from './chart/CustomerChart';
 import projectDashboard from './ProjectDashboard';
 import injectServices from './services';
+import './base-quotas';
 
 export default module => {
   module.service('DashboardChartService', DashboardChartService);

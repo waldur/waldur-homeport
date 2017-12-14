@@ -1,5 +1,12 @@
 // @ngInject
 export default function extendTable(TableExtensionService, ncUtils) {
+  TableExtensionService.registerColumns('projects-list', [{
+    title: gettext('Experts'),
+    render: row => row.expert_count,
+    feature: 'experts',
+    index: 150,
+  }]);
+
   TableExtensionService.registerColumns('user-organizations', [
     {
       title: gettext('Expert'),
