@@ -372,7 +372,7 @@ msgstr ""
 #: app/scripts/components/ansible/routes.js
 #: app/scripts/components/ansible/sidebar.js
 #: app/scripts/components/appstore/routes.js
-#: app/scripts/components/dashboard/constants.js
+#: app/scripts/components/dashboard/base-quotas.ts
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Applications"
 msgstr ""
@@ -554,15 +554,15 @@ msgstr ""
 msgid "Bank"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js
+#: app/scripts/components/slurm/dashboard-quotas.ts
 msgid "Batch CPU usage, hours"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js
+#: app/scripts/components/slurm/dashboard-quotas.ts
 msgid "Batch GPU usage, hours"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js
+#: app/scripts/components/slurm/dashboard-quotas.ts
 msgid "Batch RAM usage, GB"
 msgstr ""
 
@@ -600,7 +600,7 @@ msgstr ""
 msgid "Billing plan agreement is being processed, please wait."
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js
+#: app/scripts/components/dashboard/base-quotas.ts
 msgid "Block device count"
 msgstr ""
 
@@ -608,7 +608,7 @@ msgstr ""
 msgid "Block devices"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js
+#: app/scripts/components/dashboard/base-quotas.ts
 msgid "Block snapshot count"
 msgstr ""
 
@@ -616,7 +616,7 @@ msgstr ""
 msgid "Block storage"
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js
+#: app/scripts/components/dashboard/base-quotas.ts
 msgid "Block volume count"
 msgstr ""
 
@@ -1499,7 +1499,7 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
-#: app/scripts/components/experts/extensions/user-organizations.js
+#: app/scripts/components/experts/extensions/table-extension.js
 #: app/scripts/components/user/list/CustomerPermissions.tsx
 msgid "Expert"
 msgstr ""
@@ -1565,6 +1565,7 @@ msgid "Expert request has been created."
 msgstr ""
 
 #: app/scripts/components/experts/extensions/customer-workspace.html
+#: app/scripts/components/experts/extensions/dashboard-quotas.ts
 #: app/scripts/components/experts/extensions/sidebar.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 msgid "Expert requests"
@@ -1577,6 +1578,7 @@ msgstr ""
 #: app/scripts/components/experts/constants.js
 #: app/scripts/components/experts/expert-provider-details.html
 #: app/scripts/components/experts/extensions/sidebar.js
+#: app/scripts/components/experts/extensions/table-extension.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 #: app/scripts/components/experts/routes.js
 msgid "Experts"
@@ -3511,7 +3513,7 @@ msgstr ""
 #: app/scripts/components/appstore/routes.js
 #: app/scripts/components/configs/base-config.js
 #: app/scripts/components/customer/customer-list.js
-#: app/scripts/components/dashboard/constants.js
+#: app/scripts/components/dashboard/base-quotas.ts
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/project/routes.js
@@ -3658,7 +3660,7 @@ msgstr ""
 #: app/scripts/components/appstore/dialog/appstore-project-selector.html
 #: app/scripts/components/customer/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
-#: app/scripts/components/dashboard/constants.js
+#: app/scripts/components/dashboard/base-quotas.ts
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/providers/details/dialog.html
 msgid "Projects"
@@ -4853,7 +4855,7 @@ msgstr ""
 msgid "Team does not have members yet."
 msgstr ""
 
-#: app/scripts/components/dashboard/constants.js
+#: app/scripts/components/dashboard/base-quotas.ts
 msgid "Team size"
 msgstr ""
 
@@ -5565,7 +5567,7 @@ msgstr ""
 #: app/scripts/components/analytics/resource-chart-service.js
 #: app/scripts/components/appstore/routes.js
 #: app/scripts/components/configs/base-config.js
-#: app/scripts/components/dashboard/constants.js
+#: app/scripts/components/dashboard/base-quotas.ts
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/routes.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js

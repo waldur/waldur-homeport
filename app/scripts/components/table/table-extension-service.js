@@ -23,7 +23,8 @@ export default class TableExtensionService {
 
   registerItems(table, key, items) {
     this._tables[table] = this._tables[table] || {};
-    this._tables[table][key] = items;
+    this._tables[table][key] = this._tables[table][key] || [];
+    this._tables[table][key] = this._tables[table][key].concat(items);
   }
 
   getItems(table, key) {
