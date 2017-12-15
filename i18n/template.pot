@@ -131,7 +131,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: app/scripts/components/issues/issues-activity-stream.html
+#: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "Activity stream"
 msgstr ""
 
@@ -490,16 +490,16 @@ msgstr ""
 msgid "Back to login"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/user/user-details.js
 msgid "Back to organization"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Back to personal dashboard"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/user/user-details.js
 msgid "Back to project"
 msgstr ""
@@ -1150,7 +1150,7 @@ msgstr ""
 
 #: app/scripts/components/customer/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
-#: app/scripts/components/issues/issue-navigation-service.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/routes.js
 #: app/scripts/components/user/constants.js
@@ -1645,8 +1645,8 @@ msgstr ""
 msgid "Filter projects"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
 #: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Financial overview"
 msgstr ""
 
@@ -1813,7 +1813,7 @@ msgstr ""
 msgid "Help topics"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Helpdesk"
 msgstr ""
 
@@ -3866,8 +3866,8 @@ msgstr ""
 msgid "Record period"
 msgstr ""
 
-#: app/scripts/components/issues/issues-activity-stream.html
 #: app/scripts/components/issues/list/issues-short-list.html
+#: app/scripts/components/issues/workspace/issues-activity-stream.html
 #: app/scripts/components/table-react/TableRefreshButton.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Refresh"
@@ -4153,8 +4153,8 @@ msgstr ""
 #: app/scripts/components/analytics/dashboard-cost-chart.html
 #: app/scripts/components/ansible/details/ansible-job-details.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
-#: app/scripts/components/issues/issue-navigation-service.js
 #: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/offering/offering-details.js
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/providers/provider-list.js
@@ -4320,8 +4320,8 @@ msgstr ""
 msgid "Security groups details"
 msgstr ""
 
-#: app/scripts/components/issues/issues-activity-stream.html
 #: app/scripts/components/issues/list/issues-short-list.html
+#: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "See all"
 msgstr ""
 
@@ -4778,8 +4778,8 @@ msgstr ""
 msgid "Support dashboard"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
 #: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Support requests"
 msgstr ""
 
@@ -4982,7 +4982,7 @@ msgstr ""
 msgid "There are no {verboseName} yet."
 msgstr ""
 
-#: app/scripts/components/issues/issues-activity-stream.html
+#: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "There is no activity yet."
 msgstr ""
 
@@ -5817,7 +5817,7 @@ msgstr ""
 msgid "commented"
 msgstr ""
 
-#: app/scripts/components/issues/issues-activity-stream.html
+#: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "commented on"
 msgstr ""
 
