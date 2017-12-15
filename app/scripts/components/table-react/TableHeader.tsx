@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { Column } from './types';
 
-type Props = {
-  columns: Column[],
-};
+interface Props {
+  columns: Column[];
+}
 
 const TableHeader = ({ columns }: Props) => (
   <thead>

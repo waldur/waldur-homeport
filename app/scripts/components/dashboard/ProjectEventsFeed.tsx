@@ -12,12 +12,12 @@ import { connectTable, TableState } from '@waldur/table-react';
 import { DashboardFeed } from './DashboardFeed';
 import { Project } from './types';
 
-type Props = TranslateProps & TableState & {
+interface Props extends TranslateProps, TableState {
   project: Project;
   showTypes: () => void;
   showDetails: (event) => void;
   fetch: () => void;
-};
+}
 
 class PureProjectEventsFeed extends React.PureComponent<Props> {
   componentWillMount() {

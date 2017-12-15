@@ -18,9 +18,9 @@ export const reducer = (state = null, action) => {
   }
 };
 
-type Project = {
-  uuid: string,
-  url: string,
-};
+interface Project {
+  uuid: string;
+  url: string;
+}
 
 export const getCurrentProject: (p) => Project = state => state.currentProject;

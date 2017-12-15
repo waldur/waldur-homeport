@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-type Props = {
+interface Props {
   title: string;
   className?: string;
   children: React.ReactNode;
   actions?: React.ReactNode;
-};
+}
 
 const Panel = ({ title, children, className, actions }: Props) => (
   <div className={'ibox ' + className}>

@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-type Props = {
+interface Props {
   title: string;
   action: () => void;
   icon: string;
-};
+}
 
 const ActionButton = ({ title, action, icon }: Props) => (
   <button

@@ -1,9 +1,9 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 
-type Props = {
+interface Props {
   change: number;
-};
+}
 
 const textClass = change => (
   classNames('font-bold m-b-sm', {

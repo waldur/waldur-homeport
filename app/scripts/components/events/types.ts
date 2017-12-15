@@ -1,10 +1,10 @@
-export type EventGroup = {
-  icon: string,
-  name: string,
-  descriptions: string[],
-};
+export interface EventGroup {
+  icon: string;
+  name: string;
+  descriptions: string[];
+}
 
-export type IconType = {
-  imageId: string
-  text: string,
-};
+export interface IconType {
+  imageId: string;
+  text: string;
+}

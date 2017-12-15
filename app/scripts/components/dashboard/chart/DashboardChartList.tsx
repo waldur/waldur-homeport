@@ -5,10 +5,10 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import DashboardChart from './DashboardChart';
 import { ChartsState } from './types';
 
-type Props = ChartsState & {
-  onStart: () => void,
-  onStop: () => void,
-};
+interface Props extends ChartsState {
+  onStart: () => void;
+  onStop: () => void;
+}
 
 class DashboardChartList extends React.PureComponent<Props> {
   componentWillMount() {

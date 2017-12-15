@@ -7,11 +7,11 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import './TypeListDialog.scss';
 import { EventGroup } from './types';
 
-type Props = TranslateProps & {
+interface Props extends TranslateProps {
   types: EventGroup[];
   dialogTitle: string;
   dismiss(): void;
-};
+}
 
 const PureTypeListDialog = (props: Props) => (
   <div>

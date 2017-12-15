@@ -7,10 +7,10 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 type AccountingMode = 'billing' | 'accounting';
 
-type Props = TranslateProps & {
-  estimated: boolean,
-  accountingMode: AccountingMode
-};
+interface Props extends TranslateProps {
+  estimated: boolean;
+  accountingMode: AccountingMode;
+}
 
 class PurePriceTooltip extends React.PureComponent<Props> {
   getTooltipMessage() {

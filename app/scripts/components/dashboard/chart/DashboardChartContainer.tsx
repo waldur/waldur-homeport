@@ -6,11 +6,11 @@ import DashboardChartList from './DashboardChartList';
 import { getChart } from './reducers';
 import { Scope } from './types';
 
-type Props = {
-  scope: Scope,
-  signal: string,
-  chartId: string,
-};
+interface Props {
+  scope: Scope;
+  signal: string;
+  chartId: string;
+}
 
 const mapStateToProps = (state, ownProps: Props) => getChart(state, ownProps.chartId);
 
