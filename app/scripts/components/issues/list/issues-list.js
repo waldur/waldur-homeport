@@ -65,17 +65,13 @@ function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
           id: 'title',
           title: gettext('Title'),
           orderField: 'summary',
-          render: function(row) {
-            return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.summary}">${row.summary}</span>`;
-          }
+          render: row => this.renderLongText(row.summary)
         },
         {
           id: 'description',
           title: gettext('Description'),
           orderable: false,
-          render: function(row) {
-            return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.description}">${row.description}</span>`;
-          }
+          render: row => this.renderLongText(row.description)
         },
         {
           id: 'resource_type',
