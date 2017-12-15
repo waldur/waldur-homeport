@@ -755,7 +755,7 @@ msgstr ""
 msgid "Challenge code"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Change Request"
 msgstr ""
 
@@ -1933,11 +1933,11 @@ msgstr ""
 msgid "Importing resources"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Incident"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
@@ -1954,11 +1954,11 @@ msgstr ""
 msgid "Increase a droplet's RAM, CPU and SSD disk."
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Informational"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Informational - client’s request to get or provide additional information related to a service."
 msgstr ""
 
@@ -4396,7 +4396,7 @@ msgstr ""
 msgid "Select provider type..."
 msgstr ""
 
-#: app/scripts/components/issues/create/issue-type-select.html
+#: app/scripts/components/issues/types/issue-type-select.html
 msgid "Select request type"
 msgstr ""
 
@@ -4467,11 +4467,11 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Service Request"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 

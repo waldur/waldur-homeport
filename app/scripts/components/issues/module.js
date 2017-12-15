@@ -10,6 +10,7 @@ import issuesHelpdesk from './issues-helpdesk';
 import issueCommentsModule from './comments/module';
 import issueCreateModule from './create/module';
 import issueListModule from './list/module';
+import issueTypesModule from './types/module';
 import requestServiceButton from './request-service-button';
 import registerExtensionPoint from './extend-appstore-selector';
 
@@ -25,6 +26,7 @@ export default module => {
   module.component('requestServiceButton', requestServiceButton);
   module.config(issueRoutes);
   module.run(registerExtensionPoint);
+  issueTypesModule(module);
   issueCommentsModule(module);
   issueCreateModule(module);
   issueListModule(module);

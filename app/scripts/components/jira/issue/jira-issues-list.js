@@ -34,7 +34,7 @@ function JiraIssuesListController(
           },
           {
             title: gettext('Status'),
-            render: row => row.status
+            render: row => `<issue-type-icon type="${row.type}"></issue-type-icon> ${row.status || 'N/A'}`,
           },
           {
             title: gettext('Title'),
@@ -46,7 +46,7 @@ function JiraIssuesListController(
           },
           {
             title: gettext('Created'),
-            render: row => $filter('shortDate')(row.created),
+            render: row => $filter('dateTime')(row.created),
           },
         ]
       };

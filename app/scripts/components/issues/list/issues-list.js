@@ -51,14 +51,7 @@ function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
           id: 'status',
           title: gettext('Status'),
           orderField: 'status',
-          render: function(row) {
-            const type = row.type.toUpperCase().replace(' ', '_');
-            const iconClass = ISSUE_ICONS[type];
-            const textClass = ISSUE_TEXT_CLASSES[type];
-            const title = $filter('translate')(row.type).toUpperCase();
-            const status = row.status || 'N/A';
-            return `<i class="fa ${iconClass} ${textClass}" uib-tooltip="${title}"></i> ${status}`;
-          },
+          render: row => `<issue-type-icon type="${row.type}"/> ${row.status || 'N/A'}`,
           width: 50
         },
         {
