@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
+import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import './TypeListDialog.scss';
 import { EventGroup } from './types';
@@ -13,12 +14,14 @@ interface Props extends TranslateProps {
   dismiss(): void;
 }
 
-const PureTypeListDialog = (props: Props) => (
-  <div>
-    <div className="modal-header">
-      <h3 className="modal-title">{props.dialogTitle}</h3>
-    </div>
-    <div className="modal-body types-list-dialog">
+const PureTypeListDialog = (props: Props) => {
+  const footer = (
+    <button className="btn btn-default" onClick={props.dismiss}>
+      {props.translate('Cancel')}
+    </button>
+  );
+  return (
+    <ModalDialog title={props.dialogTitle} bodyClassName="types-list-dialog" footer={footer}>
       {props.types.map((type, i) => (
         <div key={i}>
           <b className={'icon ' + type.icon}></b>
@@ -30,14 +33,9 @@ const PureTypeListDialog = (props: Props) => (
           </ul>
         </div>
       ))}
-    </div>
-    <div className="modal-footer">
-      <button className="btn btn-default" onClick={props.dismiss}>
-        {props.translate('Cancel')}
-      </button>
-    </div>
-  </div>
-);
+    </ModalDialog>
+  );
+};
 
 const mapDispatchToProps = dispatch => ({
   dismiss: () => dispatch(closeModalDialog()),

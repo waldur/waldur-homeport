@@ -1404,8 +1404,8 @@ msgstr ""
 msgid "Enter date"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
+#: app/scripts/components/events/EventDetailsDialog.tsx
 msgid "Error message"
 msgstr ""
 
@@ -1443,11 +1443,11 @@ msgstr ""
 msgid "Evaluate"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 msgid "Event details"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 msgid "Event type"
 msgstr ""
 
@@ -1885,7 +1885,7 @@ msgstr ""
 msgid "ID code"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 msgid "IP address"
 msgstr ""
 
@@ -1954,7 +1954,7 @@ msgstr ""
 msgid "Import volume"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 msgid "Importance"
 msgstr ""
 
@@ -2202,7 +2202,7 @@ msgstr ""
 msgid "Issue key"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 #: app/scripts/components/offering/offering-summary.html
 msgid "Issue link"
 msgstr ""
@@ -2452,8 +2452,8 @@ msgid "Member"
 msgstr ""
 
 #: app/scripts/components/alerts/base-alerts-list.js
+#: app/scripts/components/events/EventDetailsDialog.tsx
 #: app/scripts/components/events/base-event-list.js
-#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/user/list/UserEvents.tsx
 msgid "Message"
 msgstr ""
@@ -2955,7 +2955,7 @@ msgid "Notifications"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-popover.html
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 #: app/scripts/components/experts/requests/details/expert-request-details-dialog.html
 #: app/scripts/components/project/project-dialog.html
 #: app/scripts/components/providers/details/dialog.html
@@ -3058,7 +3058,7 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 #: app/scripts/components/experts/bids/expert-bids-list.js
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/issues/create/issue-create-dialog.html
@@ -3576,7 +3576,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 #: app/scripts/components/invitations/actions/invitation-dialog.html
 #: app/scripts/components/issues/create/issue-create-dialog.html
 #: app/scripts/components/issues/issue-detail.html
@@ -4139,12 +4139,12 @@ msgstr ""
 msgid "Resolution SLA"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 #: app/scripts/components/issues/create/issue-create-dialog.html
 msgid "Resource"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 msgid "Resource configuration"
 msgstr ""
 
@@ -4515,7 +4515,7 @@ msgstr ""
 msgid "Server error occurred."
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 msgid "Service"
 msgstr ""
 
@@ -5090,8 +5090,8 @@ msgid "Time to resolution"
 msgstr ""
 
 #: app/scripts/components/alerts/base-alerts-list.js
+#: app/scripts/components/events/EventDetailsDialog.tsx
 #: app/scripts/components/events/base-event-list.js
-#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/user/list/UserEvents.tsx
 msgid "Timestamp"
 msgstr ""
@@ -5419,7 +5419,7 @@ msgstr ""
 msgid "Usage"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
 msgid "User"
