@@ -26,6 +26,8 @@ function JiraIssuesListController(
       return {
         noDataText: gettext('You have no issues yet.'),
         noMatchesText: gettext('No issues found matching filter.'),
+        enableOrdering: true,
+        searchFieldName: 'summary',
         columns: [
           {
             title: gettext('Key'),
@@ -43,6 +45,20 @@ function JiraIssuesListController(
           {
             title: gettext('Description'),
             render: row => this.renderLongText(row.description)
+          },
+          {
+            title: gettext('Assigned to'),
+            orderField: 'assignee_name',
+            render: row => row.assignee_name || 'N/A'
+          },
+          {
+            title: gettext('Resolution SLA'),
+            orderField: 'first_response_sla',
+            render: row => {
+              const value = row.first_response_sla ? $filter('dateTime')(row.first_response_sla) : 'N/A';
+              const tooltip = gettext('Time to resolution');
+              return `<span uib-tooltip="${tooltip}">${value}</span>`;
+            },
           },
           {
             title: gettext('Created'),

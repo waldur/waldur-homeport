@@ -425,6 +425,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
+#: app/scripts/components/jira/issue/jira-issues-list.js
 msgid "Assigned to"
 msgstr ""
 
@@ -4087,6 +4088,10 @@ msgstr ""
 msgid "Resolution"
 msgstr ""
 
+#: app/scripts/components/jira/issue/jira-issues-list.js
+msgid "Resolution SLA"
+msgstr ""
+
 #: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/issues/create/issue-create-dialog.html
 msgid "Resource"
@@ -4773,8 +4778,8 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: app/scripts/components/issues/issues-workspace.html
 #: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issues-workspace.html
 msgid "Support dashboard"
 msgstr ""
 
@@ -5025,6 +5030,10 @@ msgstr ""
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/issues/list/issues-short-list.html
 msgid "Time in progress"
+msgstr ""
+
+#: app/scripts/components/jira/issue/jira-issues-list.js
+msgid "Time to resolution"
 msgstr ""
 
 #: app/scripts/components/alerts/base-alerts-list.js
