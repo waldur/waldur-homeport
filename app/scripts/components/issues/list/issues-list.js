@@ -51,7 +51,7 @@ function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
           id: 'status',
           title: gettext('Status'),
           orderField: 'status',
-          render: row => `<issue-type-icon type="${row.type}"/> ${row.status || 'N/A'}`,
+          render: row => `<issue-type-icon type="${row.type}"></issue-type-icon> ${row.status || 'N/A'}`,
           width: 50
         },
         {
