@@ -5,9 +5,9 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import './sparkline.scss';
 import { ChartData } from './types';
 
-type Props = {
-  data: ChartData
-};
+interface Props {
+  data: ChartData;
+}
 
 const normalizeData = items => {
   const max = Math.max.apply(null, items.map(item => item.value || 1));

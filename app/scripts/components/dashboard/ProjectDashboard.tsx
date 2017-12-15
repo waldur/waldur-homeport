@@ -8,9 +8,9 @@ import { ProjectAlertsFeed } from './ProjectAlertsFeed';
 import { ProjectEventsFeed } from './ProjectEventsFeed';
 import { Project } from './types';
 
-type Props = FeatureProps & {
+interface Props extends FeatureProps {
   project: Project;
-};
+}
 
 const PureProjectDashboard = ({ isVisible, project }: Props) => (
   <div className="wrapper wrapper-content m-l-n">

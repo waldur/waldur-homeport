@@ -2,10 +2,10 @@ import * as React from 'react';
 
 import { Column } from './types';
 
-type Props = {
-  rows: any[],
-  columns: Column[],
-};
+interface Props {
+  rows: any[];
+  columns: Column[];
+}
 
 const TableBody = ({ rows, columns }: Props) => (
   <tbody>

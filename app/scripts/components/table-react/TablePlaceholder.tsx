@@ -2,10 +2,10 @@ import * as React from 'react';
 
 import { TranslateProps } from '@waldur/i18n/types';
 
-type Props = TranslateProps & {
-  query?: string,
-  verboseName?: string
-};
+interface Props extends TranslateProps {
+  query?: string;
+  verboseName?: string;
+}
 
 const TablePlaceholder = ({ query, translate, verboseName }: Props) => {
   const context = {verboseName: verboseName || translate('items')};

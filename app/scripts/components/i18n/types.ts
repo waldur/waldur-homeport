@@ -1,5 +1,5 @@
-export type Translate = (template: string, context?: any) => string;
+export type Translate = (template: string, context?: {}) => string;
 
-export type TranslateProps = {
-  translate: Translate
-};
+export interface TranslateProps {
+  translate: Translate;
+}

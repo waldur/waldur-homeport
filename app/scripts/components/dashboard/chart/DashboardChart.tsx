@@ -6,9 +6,9 @@ import ChangeIndicator from './ChangeIndicator';
 import SparklineChart from './sparkline';
 import { Chart } from './types';
 
-type Props = {
-  chart: Chart
-};
+interface Props {
+  chart: Chart;
+}
 
 const DashboardChart = (props: Props) => {
   const { title, current, change, data } = props.chart;

@@ -4,7 +4,7 @@ import { TranslateProps } from '@waldur/i18n/types';
 
 import { Pagination } from './types';
 
-type Props = TranslateProps & Pagination;
+interface Props  extends TranslateProps, Pagination {}
 
 const TableInfo = ({ translate, currentPage, pageSize, resultCount }: Props) => {
   const context = {

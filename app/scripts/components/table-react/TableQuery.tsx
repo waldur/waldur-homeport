@@ -5,14 +5,14 @@ import { TranslateProps } from '@waldur/i18n/types';
 
 import './TableQuery.scss';
 
-type Props = TranslateProps & {
-  query: string,
-  setQuery: (query: string) => void,
-};
-
-type State = {
+interface Props extends TranslateProps {
   query: string;
-};
+  setQuery: (query: string) => void;
+}
+
+interface State {
+  query: string;
+}
 
 class TableQuery extends React.Component<Props, State> {
   state = {query: ''};

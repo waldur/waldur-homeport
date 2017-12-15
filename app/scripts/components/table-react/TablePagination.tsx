@@ -5,9 +5,9 @@ import { TranslateProps } from '@waldur/i18n/types';
 
 import { Pagination as PaginationProps } from './types';
 
-type Props = TranslateProps & PaginationProps & {
-  gotoPage: (num) => void,
-};
+interface Props extends TranslateProps, PaginationProps {
+  gotoPage: (num) => void;
+}
 
 const TablePagination = (props: Props) => (
   <div className="text-right">

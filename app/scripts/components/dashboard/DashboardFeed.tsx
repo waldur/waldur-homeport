@@ -7,7 +7,7 @@ import { TranslateProps } from '@waldur/i18n';
 
 import { FeedItem } from './types';
 
-type Props = TranslateProps & {
+interface Props extends TranslateProps {
   title: string;
   typesTitle: string;
   emptyText: string;
@@ -16,7 +16,7 @@ type Props = TranslateProps & {
   listLink: string;
   showDetails?: (item: FeedItem) => void;
   showTypes: () => void;
-};
+}
 
 class DashboardFeed extends React.PureComponent<Props> {
   render() {

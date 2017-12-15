@@ -4,9 +4,9 @@ import * as MenuItem from 'react-bootstrap/lib/MenuItem';
 
 import { TranslateProps } from '@waldur/i18n/types';
 
-type Props = TranslateProps & {
-  exportAs?: (format: string) => void,
-};
+interface Props extends TranslateProps {
+  exportAs?: (format: string) => void;
+}
 
 const TableExportButton = ({ translate, exportAs }: Props) => {
   const exporters = [

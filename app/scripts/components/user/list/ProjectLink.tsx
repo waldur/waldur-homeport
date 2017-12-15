@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { $state } from '@waldur/core/services';
 
-type Props = {
+interface Props {
   row: {
     project_name: string,
     project_uuid: string,
-  }
-};
+  };
+}
 
 const ProjectLink = ({ row }: Props) => {
   const href = $state.href('project', {uuid: row.project_uuid});

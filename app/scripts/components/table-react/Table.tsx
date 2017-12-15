@@ -13,16 +13,16 @@ import TableQuery from './TableQuery';
 import TableRefreshButton from './TableRefreshButton';
 import { Column, TableState } from './types';
 
-type Props = TranslateProps & TableState & {
-  fetch: () => void,
-  gotoPage?: (page: number) => void,
-  hasQuery?: boolean,
-  setQuery?: (query: string) => void,
-  columns?: Column[],
-  exportAs?: (format: string) => void,
-  actions?: React.ReactNode,
-  verboseName?: string,
-};
+interface Props extends TranslateProps, TableState {
+  fetch: () => void;
+  gotoPage?: (page: number) => void;
+  hasQuery?: boolean;
+  setQuery?: (query: string) => void;
+  columns?: Column[];
+  exportAs?: (format: string) => void;
+  actions?: React.ReactNode;
+  verboseName?: string;
+}
 
 class Table extends React.Component<Props> {
   static defaultProps = {

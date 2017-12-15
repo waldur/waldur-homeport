@@ -1,26 +1,26 @@
 export type ChartData = Array<{
-  label: string,
-  value: number,
+  label: string;
+  value: number;
 }>;
 
-export type Chart = {
-  title: string,
-  feature?: string,
-  current: number,
-  change: number,
-  data: ChartData
-};
+export interface Chart {
+  title: string;
+  feature?: string;
+  current: number;
+  change: number;
+  data: ChartData;
+}
 
-export type Scope = {
-  url: string,
+export interface Scope {
+  url: string;
   quotas: Array<{
-    name: string,
-    url: string,
-  }>,
-};
+    name: string;
+    url: string;
+  }>;
+}
 
-export type ChartsState = {
-  loading: boolean,
-  erred: boolean,
-  charts: Chart[],
-};
+export interface ChartsState {
+  loading: boolean;
+  erred: boolean;
+  charts: Chart[];
+}
