@@ -93,9 +93,7 @@ function ProjectsListController(
         {
           title: gettext('Description'),
           width: '200px',
-          render: function(row) {
-            return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.description}">${row.description}</span>`;
-          },
+          render: row => this.renderLongText(row.description),
           index: 20,
         },
         {

@@ -131,7 +131,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: app/scripts/components/issues/issues-activity-stream.html
+#: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "Activity stream"
 msgstr ""
 
@@ -425,6 +425,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
+#: app/scripts/components/jira/issue/jira-issues-list.js
 msgid "Assigned to"
 msgstr ""
 
@@ -490,16 +491,16 @@ msgstr ""
 msgid "Back to login"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/user/user-details.js
 msgid "Back to organization"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Back to personal dashboard"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/user/user-details.js
 msgid "Back to project"
 msgstr ""
@@ -755,7 +756,7 @@ msgstr ""
 msgid "Challenge code"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Change Request"
 msgstr ""
 
@@ -781,7 +782,7 @@ msgid "Chart is not available at this moment."
 msgstr ""
 
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
-#: app/scripts/components/jira/jira-project-checkout-summary.html
+#: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -1077,7 +1078,8 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/expert-request-general-info.html
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
-#: app/scripts/components/jira/jira-projects-list.js
+#: app/scripts/components/jira/issue/jira-issues-list.js
+#: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 #: app/scripts/components/resource/summary/resource-summary-base.html
@@ -1149,7 +1151,7 @@ msgstr ""
 
 #: app/scripts/components/customer/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
-#: app/scripts/components/issues/issue-navigation-service.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/routes.js
 #: app/scripts/components/user/constants.js
@@ -1200,7 +1202,8 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/issues/list/issues-short-list.html
-#: app/scripts/components/jira/jira-project-config.js
+#: app/scripts/components/jira/issue/jira-issues-list.js
+#: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
@@ -1643,8 +1646,8 @@ msgstr ""
 msgid "Filter projects"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
 #: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Financial overview"
 msgstr ""
 
@@ -1704,7 +1707,7 @@ msgstr ""
 msgid "Form has not been filled correctly. Please check your input."
 msgstr ""
 
-#: app/scripts/components/jira/jira-project-checkout-summary.html
+#: app/scripts/components/jira/project/jira-project-checkout-summary.html
 msgid "Free"
 msgstr ""
 
@@ -1811,7 +1814,7 @@ msgstr ""
 msgid "Help topics"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Helpdesk"
 msgstr ""
 
@@ -1931,11 +1934,11 @@ msgstr ""
 msgid "Importing resources"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Incident"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
@@ -1952,11 +1955,11 @@ msgstr ""
 msgid "Increase a droplet's RAM, CPU and SSD disk."
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Informational"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Informational - client’s request to get or provide additional information related to a service."
 msgstr ""
 
@@ -2139,7 +2142,7 @@ msgid "Invoice number"
 msgstr ""
 
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
-#: app/scripts/components/jira/jira-project-checkout-summary.html
+#: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -2186,6 +2189,7 @@ msgstr ""
 
 #: app/scripts/components/customer/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
+#: app/scripts/components/jira/project/tabs.js
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/routes.js
 #: app/scripts/components/resource/list/resource-global-list.js
@@ -2221,6 +2225,7 @@ msgstr ""
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/issues/list/issues-short-list.html
+#: app/scripts/components/jira/issue/jira-issues-list.js
 #: app/scripts/components/providers/details/provider-price-list.js
 msgid "Key"
 msgstr ""
@@ -2233,7 +2238,7 @@ msgstr ""
 msgid "Key name"
 msgstr ""
 
-#: app/scripts/components/jira/jira-project-config.js
+#: app/scripts/components/jira/project/jira-project-config.js
 msgid "Key should consist of uppercase letters."
 msgstr ""
 
@@ -2477,8 +2482,8 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
-#: app/scripts/components/jira/jira-project-config.js
-#: app/scripts/components/jira/jira-projects-list.js
+#: app/scripts/components/jira/project/jira-project-config.js
+#: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/offering/offerings-list.js
@@ -2661,6 +2666,10 @@ msgstr ""
 msgid "No invoices found matching filter."
 msgstr ""
 
+#: app/scripts/components/jira/issue/jira-issues-list.js
+msgid "No issues found matching filter."
+msgstr ""
+
 #: app/scripts/components/appstore/appstore-compare-list.js
 msgid "No items found matching filter."
 msgstr ""
@@ -2784,7 +2793,7 @@ msgstr ""
 msgid "No security groups yet."
 msgstr ""
 
-#: app/scripts/components/jira/jira-projects-list.js
+#: app/scripts/components/jira/project/jira-projects-list.js
 msgid "No service desk projects found matching filter."
 msgstr ""
 
@@ -3409,7 +3418,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-flavors.html
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/expert-bids-list.js
-#: app/scripts/components/jira/jira-project-checkout-summary.html
+#: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/paypal/paypal-invoices-list.js
 #: app/scripts/components/plans/plan-agreements-list.js
@@ -3533,7 +3542,7 @@ msgstr ""
 #: app/scripts/components/issues/create/issue-create-dialog.html
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
-#: app/scripts/components/jira/jira-project-checkout-summary.html
+#: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -3615,7 +3624,7 @@ msgstr ""
 msgid "Project service"
 msgstr ""
 
-#: app/scripts/components/jira/jira-project-summary.html
+#: app/scripts/components/jira/project/jira-project-summary.html
 msgid "Project type"
 msgstr ""
 
@@ -3665,7 +3674,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
-#: app/scripts/components/jira/jira-projects-list.js
+#: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/summary/resource-summary-base.html
 #: app/views/help/list.html
@@ -3858,8 +3867,8 @@ msgstr ""
 msgid "Record period"
 msgstr ""
 
-#: app/scripts/components/issues/issues-activity-stream.html
 #: app/scripts/components/issues/list/issues-short-list.html
+#: app/scripts/components/issues/workspace/issues-activity-stream.html
 #: app/scripts/components/table-react/TableRefreshButton.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Refresh"
@@ -4079,6 +4088,10 @@ msgstr ""
 msgid "Resolution"
 msgstr ""
 
+#: app/scripts/components/jira/issue/jira-issues-list.js
+msgid "Resolution SLA"
+msgstr ""
+
 #: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/issues/create/issue-create-dialog.html
 msgid "Resource"
@@ -4145,8 +4158,8 @@ msgstr ""
 #: app/scripts/components/analytics/dashboard-cost-chart.html
 #: app/scripts/components/ansible/details/ansible-job-details.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
-#: app/scripts/components/issues/issue-navigation-service.js
 #: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/offering/offering-details.js
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/providers/provider-list.js
@@ -4312,8 +4325,8 @@ msgstr ""
 msgid "Security groups details"
 msgstr ""
 
-#: app/scripts/components/issues/issues-activity-stream.html
 #: app/scripts/components/issues/list/issues-short-list.html
+#: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "See all"
 msgstr ""
 
@@ -4388,7 +4401,7 @@ msgstr ""
 msgid "Select provider type..."
 msgstr ""
 
-#: app/scripts/components/issues/create/issue-type-select.html
+#: app/scripts/components/issues/types/issue-type-select.html
 msgid "Select request type"
 msgstr ""
 
@@ -4459,11 +4472,11 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Service Request"
 msgstr ""
 
-#: app/scripts/components/issues/create/constants.js
+#: app/scripts/components/issues/types/constants.js
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
@@ -4477,11 +4490,11 @@ msgstr ""
 msgid "Service desk project"
 msgstr ""
 
-#: app/scripts/components/jira/jira-project-checkout-summary.html
+#: app/scripts/components/jira/project/jira-project-checkout-summary.html
 msgid "Service desk project name"
 msgstr ""
 
-#: app/scripts/components/jira/jira-project-checkout-summary.html
+#: app/scripts/components/jira/project/jira-project-checkout-summary.html
 msgid "Service desk project type"
 msgstr ""
 
@@ -4673,6 +4686,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/issues/list/issues-list.js
+#: app/scripts/components/jira/issue/jira-issues-list.js
 #: app/scripts/components/user/user-popover-table.html
 msgid "Status"
 msgstr ""
@@ -4764,13 +4778,13 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: app/scripts/components/issues/issues-workspace.html
 #: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issues-workspace.html
 msgid "Support dashboard"
 msgstr ""
 
-#: app/scripts/components/issues/issue-navigation-service.js
 #: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Support requests"
 msgstr ""
 
@@ -4973,7 +4987,7 @@ msgstr ""
 msgid "There are no {verboseName} yet."
 msgstr ""
 
-#: app/scripts/components/issues/issues-activity-stream.html
+#: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "There is no activity yet."
 msgstr ""
 
@@ -4997,7 +5011,7 @@ msgstr ""
 
 #: app/scripts/components/ansible/create/ansible-job-create.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
-#: app/scripts/components/jira/jira-project-config.js
+#: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 #: app/scripts/components/project/project-create.html
@@ -5018,6 +5032,10 @@ msgstr ""
 msgid "Time in progress"
 msgstr ""
 
+#: app/scripts/components/jira/issue/jira-issues-list.js
+msgid "Time to resolution"
+msgstr ""
+
 #: app/scripts/components/alerts/base-alerts-list.js
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/events/event-details-dialog.html
@@ -5028,6 +5046,7 @@ msgstr ""
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/list/issues-list.js
+#: app/scripts/components/jira/issue/jira-issues-list.js
 #: app/scripts/components/user/keys/key-list.js
 msgid "Title"
 msgstr ""
@@ -5106,8 +5125,8 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/expert-request-general-info.html
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
-#: app/scripts/components/jira/jira-project-config.js
-#: app/scripts/components/jira/jira-projects-list.js
+#: app/scripts/components/jira/project/jira-project-config.js
+#: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/offering/offerings-list.js
 #: app/scripts/components/openstack/openstack-network/openstack-network-summary.html
@@ -5679,6 +5698,10 @@ msgstr ""
 msgid "You have no invoices yet."
 msgstr ""
 
+#: app/scripts/components/jira/issue/jira-issues-list.js
+msgid "You have no issues yet."
+msgstr ""
+
 #: app/scripts/components/resource/list/resource-private-clouds-list.js
 msgid "You have no private clouds yet."
 msgstr ""
@@ -5707,7 +5730,7 @@ msgstr ""
 msgid "You have no restored volumes yet."
 msgstr ""
 
-#: app/scripts/components/jira/jira-projects-list.js
+#: app/scripts/components/jira/project/jira-projects-list.js
 msgid "You have no service desk projects yet."
 msgstr ""
 
@@ -5803,7 +5826,7 @@ msgstr ""
 msgid "commented"
 msgstr ""
 
-#: app/scripts/components/issues/issues-activity-stream.html
+#: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "commented on"
 msgstr ""
 

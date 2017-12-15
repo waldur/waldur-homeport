@@ -1,5 +1,5 @@
 import template from './issues-workspace.html';
-import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
 
 export default {
   template: template,
