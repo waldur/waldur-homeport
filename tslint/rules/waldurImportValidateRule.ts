@@ -1,5 +1,5 @@
-import * as ts from 'typescript';
 import * as Lint from 'tslint';
+import * as ts from 'typescript';
 
 class Rule extends Lint.Rules.AbstractRule {
   public static FAILURE_STRING = 'import statement forbidden';
@@ -16,14 +16,21 @@ enum Category {
 }
 
 // The walker takes care of all the work.
+// tslint:disable-next-line max-classes-per-file
 class ImportsWalker extends Lint.RuleWalker {
   private lastFrom: string;
   private lastFromCategory?: Category;
 
   private getCategory(importFrom: string): Category {
-    if (!importFrom) throw Error('importFrom must be defined');
-    if (importFrom.substr(0, 2) === './') return Category.Local;
-    if (importFrom.substr(0, 7) === '@waldur') return Category.App;
+    if (!importFrom) {
+      throw Error('importFrom must be defined');
+    }
+    if (importFrom.substr(0, 2) === './') {
+      return Category.Local;
+    }
+    if (importFrom.substr(0, 7) === '@waldur') {
+      return Category.App;
+    }
     return Category.Global;
   }
 

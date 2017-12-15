@@ -17,7 +17,7 @@
     "test": "npm run eslint && npm run tslint && npm run test-single-run && jest",
     "eslint": "eslint app/scripts/components",
     "tslint-build": "tsc -p ./tslint/tsconfig.json",
-    "tslint": "npm run tslint-build && tslint -c tslint.json -p tsconfig.json",
+    "tslint": "npm run tslint-build && tslint -c tslint.json -p tsconfig.json && tslint -c tslint.json -p tslint/tsconfig.json",
     "test-server": "karma start test/karma.conf.js",
     "test-single-run": "karma start test/karma.conf.js --single-run"
   },
