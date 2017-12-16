@@ -7,14 +7,14 @@ export interface EventGroup {
 export interface IconType {
   imageId: string;
   text: string;
-};
+}
 
 export interface Event {
   user_uuid: string;
   user_full_name: string;
   user_username: string;
   importance: string;
-  timestamp: Date;
+  timestamp: string;
   ip_address: string;
   event_type: string;
   error_message: string;
