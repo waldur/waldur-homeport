@@ -83,7 +83,7 @@ function CustomerListController(
         },
         {
           title: gettext('Estimated cost'),
-          render: row => $filter('defaultCurrency')(row.billing_price_estimate.total),
+          render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.total),
           index: 310,
         },
       ];
