@@ -31,5 +31,15 @@ describe('Resource filters', () => {
       expect(formatFlavorFilter(flavor)).toBe('900 GB storage');
     });
 
+    it('accepts storage as disk but does not render it twice', () => {
+      const flavor = {
+        cores: 1,
+        ram: 2 * 1024,
+        disk: 1.29 * 1024 * 1024,
+        storage: 1.29 * 1024 * 1024,
+      };
+      expect(formatFlavorFilter(flavor)).toBe('1 vCPU, 2 GB RAM, 1.2 TB storage');
+    });
+
   });
 });
