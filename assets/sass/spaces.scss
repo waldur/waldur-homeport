@@ -1,0 +1,35 @@
+/*custom spaces*/
+
+.p-r-n {
+  padding-right: 0 !important;
+}
+
+.p-l-n {
+  padding-left: 0 !important;
+}
+
+.p-b-n {
+  padding-bottom: 0 !important;
+}
+
+.p-b-xl {
+  padding: 40px !important;
+}
+
+@media (min-width: 768px) {
+  .m-l-sm-xl {
+    margin-left: 40px;
+  }
+
+  .m-r-sm-xl {
+    margin-right: 40px;
+  }
+
+  .m-t-sm-xl {
+    margin-top: 40px;
+  }
+
+  .m-b-sm-xl {
+    margin-bottom: 40px;
+  }
+}

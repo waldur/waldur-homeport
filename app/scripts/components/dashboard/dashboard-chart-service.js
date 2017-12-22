@@ -1,9 +1,5 @@
-import {
-  POINTS_COUNT,
-  DASHBOARD_QUOTAS,
-  PROJECT_DASHBOARD_QUOTAS,
-  ORGANIZATION_DASHBOARD_QUOTAS
-} from './constants';
+import { POINTS_COUNT, PROJECT_DASHBOARD, CUSTOMER_DASHBOARD } from './constants';
+import { getDashboardQuotas } from './registry';
 
 export default class DashboardChartService {
   // @ngInject
@@ -22,7 +18,7 @@ export default class DashboardChartService {
   }
 
   getOrganizationCharts(organization) {
-    const quotas = this.getDashboardQuotas(ORGANIZATION_DASHBOARD_QUOTAS);
+    const quotas = angular.copy(getDashboardQuotas(CUSTOMER_DASHBOARD));
     this.clearServiceCache();
     if (this.features.isVisible('dashboard.total_cost')) {
       return this.$q.all([
@@ -35,13 +31,9 @@ export default class DashboardChartService {
   }
 
   getProjectCharts(project) {
-    const quotas = this.getDashboardQuotas(PROJECT_DASHBOARD_QUOTAS);
+    const quotas = angular.copy(getDashboardQuotas(PROJECT_DASHBOARD));
     this.clearServiceCache();
     return this.getResourceHistoryCharts(quotas, project);
-  }
-
-  getDashboardQuotas(items) {
-    return items.map(quota => angular.extend({quota: quota}, DASHBOARD_QUOTAS[quota]));
   }
 
   getResourceHistoryCharts(charts, scope) {

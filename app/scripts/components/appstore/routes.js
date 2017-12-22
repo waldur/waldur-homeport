@@ -1,3 +1,5 @@
+import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+
 // @ngInject
 export default function appstoreRoutes($stateProvider) {
   $stateProvider
@@ -9,7 +11,7 @@ export default function appstoreRoutes($stateProvider) {
       data: {
         auth: true,
         pageTitle: gettext('Service store'),
-        workspace: 'project',
+        workspace: WOKSPACE_NAMES.project,
         pageClass: 'gray-bg'
       }
     })

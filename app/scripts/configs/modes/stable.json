@@ -21,7 +21,8 @@
     "user.preferred_language",
     "user.competence",
     "backup",
-    "connected_issues"
+    "connected_issues",
+    "jira"
   ],
   "featuresVisible": false,
   "appStoreCategories": [

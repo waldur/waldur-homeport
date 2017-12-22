@@ -1,3 +1,5 @@
+import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+
 // @ngInject
 function checkPermission(usersService, $q) {
   return usersService.getCurrentUser().then(user => {
@@ -16,7 +18,7 @@ export default function issueRoutes($stateProvider) {
       abstract: true,
       data: {
         auth: true,
-        workspace: 'support'
+        workspace: WOKSPACE_NAMES.support
       }
     })
 

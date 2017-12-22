@@ -32,6 +32,11 @@ class ProviderUtilsService {
       if (provider.service_type === 'OpenStackTenant') {
         settingsVisible = settingsVisible && this.ENV.tenantCredentialsVisible;
       }
+
+      // Do not display provider settings if only staff manages services but user is not staff
+      if (this.ENV.onlyStaffManagesServices && !user.is_staff) {
+        settingsVisible = false;
+      }
     }
 
     return { provider, settings, settingsVisible };

@@ -75,14 +75,14 @@
         {{ ::$ctrl.options.descriptionLabel | translate }}
       </label>
       <div>
-                <textarea type="text"
-                  id="issueDescription"
-                  ng-model="$ctrl.issue.description"
-                  class="form-control h-150"
-                  name="description"
-                  placeholder="{{ $ctrl.options.descriptionPlaceholder | translate }}"
-                  required
-                  ng-class="{disabled: $ctrl.saving}"/>
+        <textarea type="text"
+          id="issueDescription"
+          ng-model="$ctrl.issue.description"
+          class="form-control h-150"
+          name="description"
+          placeholder="{{ $ctrl.options.descriptionPlaceholder | translate }}"
+          required
+          ng-class="{disabled: $ctrl.saving}"/>
         <div class="help-block text-danger"
           ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
           <span>{{ $ctrl.emptyFieldMessage | translate }}</span>

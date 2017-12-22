@@ -1,11 +1,12 @@
 import * as React from 'react';
 import * as Dropdown from 'react-bootstrap/lib/Dropdown';
 import * as MenuItem from 'react-bootstrap/lib/MenuItem';
+
 import { TranslateProps } from '@waldur/i18n/types';
 
-type Props = TranslateProps & {
-  exportAs: Function,
-};
+interface Props extends TranslateProps {
+  exportAs?: (format: string) => void;
+}
 
 const TableExportButton = ({ translate, exportAs }: Props) => {
   const exporters = [
@@ -24,13 +25,13 @@ const TableExportButton = ({ translate, exportAs }: Props) => {
     {
       label: translate('Excel'),
       format: 'excel',
-    }
+    },
   ];
 
   return (
-    <Dropdown id='export-button'>
-      <Dropdown.Toggle className='btn-sm'>
-        <i className='fa fa-download'/>&nbsp;
+    <Dropdown id="export-button">
+      <Dropdown.Toggle className="btn-sm">
+        <i className="fa fa-download"/>&nbsp;
         {translate('Export as')}
       </Dropdown.Toggle>
       <Dropdown.Menu>

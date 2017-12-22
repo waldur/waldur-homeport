@@ -64,7 +64,8 @@ const ENV = {
     vms: 'vms',
     storages: 'storages',
     private_clouds: 'private_clouds',
-    slurm: 'slurm'
+    slurm: 'slurm',
+    jiraProject: 'jiraProject',
   },
 
   // Index of category inside of appStoreCategories
@@ -100,12 +101,22 @@ const ENV = {
       key: 'slurm',
       services: ['SLURM'],
     },
+    {
+      name: gettext('Service desk'),
+      type: 'provider',
+      key: 'jiraProject',
+      services: ['JIRA'],
+    },
   ],
   serviceCategories: [
     {
       name: gettext('Virtual machines'),
       services: ['Amazon', 'Azure', 'DigitalOcean', 'OpenStackTenant'],
     },
+    {
+      name: gettext('Service desk'),
+      services: ['JIRA'],
+    }
   ],
 
   // optional list of disabled services, for example, ['Amazon', 'Azure']
@@ -125,6 +136,7 @@ const ENV = {
     'OpenStack.Volume': 'storages',
     'OpenStack.Snapshot': 'storages',
     'SLURM.Allocation': 'slurm',
+    'JIRA.Project': 'jiraProject',
   },
   showCompare: [
     'Virtual machines'
@@ -162,6 +174,7 @@ const ENV = {
   resourcePollingEnabled: true,
   singleResourcePollingTimeout: 1000 * 2,
 
+  onlyStaffManagesServices: false,
   ownerCanManageCustomer: false,
   OWNERS_CAN_MANAGE_OWNERS: true,
   MANAGER_CAN_MANAGE_TENANTS: false,

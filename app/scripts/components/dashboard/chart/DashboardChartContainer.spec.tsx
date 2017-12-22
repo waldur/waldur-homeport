@@ -1,11 +1,11 @@
-import * as React from 'react';
 import { mount } from 'enzyme';
+import * as React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 import actions from './actions';
-import DashboardChartList from './DashboardChartList';
 import DashboardChartContainer from './DashboardChartContainer';
+import DashboardChartList from './DashboardChartList';
 
 describe('DashboardChartContainer', () => {
   const mockStore = configureStore();
@@ -20,12 +20,13 @@ describe('DashboardChartContainer', () => {
     dashboardChart: {
       customer: {
         loading: false,
-        charts: [chart]
-      }
-    }
+        charts: [chart],
+      },
+    },
   };
   const customer = null;
-  let store, container;
+  let store;
+  let container;
 
   beforeEach(() => {
     store = mockStore(initialState);
@@ -33,8 +34,8 @@ describe('DashboardChartContainer', () => {
       <Provider store={store}>
         <DashboardChartContainer
           scope={customer}
-          signal='organizationDashboard.initialized'
-          chartId='customer'/>
+          signal="organizationDashboard.initialized"
+          chartId="customer"/>
       </Provider>
     );
   });
@@ -55,7 +56,7 @@ describe('DashboardChartContainer', () => {
       {
         type: actions.EMIT_SIGNAL,
         signal: 'organizationDashboard.initialized',
-      }
+      },
     ];
     expect(currentActions).toEqual(expectedPayload);
   });

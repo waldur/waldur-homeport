@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import { Table, connectTable, createFetcher } from '../../table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { filterByUser } from '@waldur/table-react/selectors';
 
-import CustomerRole from './CustomerRole';
-import CustomerLink from './CustomerLink';
 import CustomerCreateButton from './CustomerCreateButton';
 import CustomerExpertField from './CustomerExpertField';
+import CustomerLink from './CustomerLink';
+import CustomerRole from './CustomerRole';
 
 const TableComponent = props => {
   const { translate, filterByFeature } = props;
@@ -18,14 +18,14 @@ const TableComponent = props => {
     {
       title: translate('Owner'),
       render: CustomerRole,
-      className: 'text-center col-md-1'
+      className: 'text-center col-md-1',
     },
     {
       title: translate('Expert'),
       render: CustomerExpertField,
       className: 'text-center col-md-1',
-      feature: 'experts'
-    }
+      feature: 'experts',
+    },
   ])}
   verboseName={translate('organizations')}
   actions={<CustomerCreateButton/>}/>;

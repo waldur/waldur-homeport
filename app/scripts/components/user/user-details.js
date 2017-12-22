@@ -1,5 +1,6 @@
 import template from './user-details.html';
 import { PRIVATE_USER_TABS, PUBLIC_USER_TABS } from './constants';
+import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 export default function userDetails() {
   return {
@@ -32,10 +33,6 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
   }
 
   function updateSidebar() {
-    WorkspaceService.setWorkspace({
-      hasCustomer: true,
-      workspace: 'user',
-    });
     usersService.getCurrentUser().then(function(user) {
       let dashboardTab = getDashboardTab(user);
       if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
@@ -47,6 +44,11 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
         $scope.isPrivate = true;
         $scope.currentUser = user;
         $scope.context = {user: user};
+        WorkspaceService.setWorkspace({
+          hasCustomer: true,
+          workspace: WOKSPACE_NAMES.user,
+          currentUser: user
+        });
       } else {
         usersService.$get($stateParams.uuid).then(function(user) {
           if (dashboardTab) {
@@ -57,6 +59,11 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
           $scope.currentUser = user;
           $scope.isPrivate = false;
           $scope.context = {user: user};
+          WorkspaceService.setWorkspace({
+            hasCustomer: true,
+            workspace: WOKSPACE_NAMES.user,
+            currentUser: user
+          });
         }).catch(function(response) {
           if (response.status === 404) {
             $state.go('errorPage.notFound');

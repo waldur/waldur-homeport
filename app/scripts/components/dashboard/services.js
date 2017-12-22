@@ -1,4 +1,4 @@
-export let DashboardChartService = null;
+export let DashboardChartService;
 
 // @ngInject
 export default function injectServices($injector) {

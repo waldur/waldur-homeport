@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { Tooltip } from './tooltip';
-import { ChartData } from './types';
-import './sparkline.scss';
 
-type Props = {
-  data: ChartData
-};
+import { Tooltip } from '@waldur/core/Tooltip';
+
+import './sparkline.scss';
+import { ChartData } from './types';
+
+interface Props {
+  data: ChartData;
+}
 
 const normalizeData = items => {
   const max = Math.max.apply(null, items.map(item => item.value || 1));
@@ -16,11 +18,11 @@ const normalizeData = items => {
 };
 
 const SparklineChart = ({ data }: Props) => (
-  <figure className='sparkline'>
+  <figure className="sparkline">
     {normalizeData(data).map((item, index) =>
-      <Tooltip key={index} label={item.label} id='sparkline'>
-        <div className='sparkline-column'>
-          <div className='sparkline-bar' style={{height: `${item.value}%`}}></div>
+      <Tooltip key={index} label={item.label} id="sparkline">
+        <div className="sparkline-column">
+          <div className="sparkline-bar" style={{height: `${item.value}%`}}></div>
         </div>
       </Tooltip>
     )}

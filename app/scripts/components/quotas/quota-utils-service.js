@@ -18,6 +18,8 @@ export default class QuotaUtilsService {
         counters.storage_count = quota.usage;
       } else if (quota.name === 'nc_allocation_count') {
         counters.allocation_count = quota.usage;
+      } else if (quota.name === 'nc_expert_count') {
+        counters.expert_count = quota.usage;
       }
     });
     return counters;

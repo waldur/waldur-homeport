@@ -1,10 +1,10 @@
-import { select } from 'redux-saga/effects';
 import FileSaver from 'file-saver';
 import Papa from 'papaparse';
+import { select } from 'redux-saga/effects';
 
-import { getTableState } from './store';
-import { getTableOptions } from './registry';
 import exportExcel from './excel';
+import { getTableOptions } from './registry';
+import { getTableState } from './store';
 
 export function* exportTable(action) {
   const { table, format } = action.payload;
@@ -29,10 +29,10 @@ async function exportAsPdf(table, data) {
   const pdfmake = await loadPdfMake();
   const header = data.fields.map(field => ({
     text: field + '',
-    style: 'tableHeader'
+    style: 'tableHeader',
   }));
   const rows = data.data.map(row => row.map(cell => ({
-    text: cell + ''
+    text: cell + '',
   })));
   const doc = {
     content: [
@@ -42,9 +42,9 @@ async function exportAsPdf(table, data) {
       },
       {
         table: {
-          body: [header].concat(rows)
-        }
-      }
+          body: [header].concat(rows),
+        },
+      },
     ],
     styles: {
       tableHeader: {
@@ -52,13 +52,13 @@ async function exportAsPdf(table, data) {
         fontSize: 11,
         color: 'white',
         fillColor: '#2d4154',
-        alignment: 'center'
+        alignment: 'center',
       },
       title: {
         alignment: 'center',
-        fontSize: 15
+        fontSize: 15,
       },
-    }
+    },
   };
   const pdf = pdfmake.createPdf(doc);
   pdf.getBuffer(buffer => saveAsPdf(table, buffer));
@@ -82,14 +82,14 @@ function saveAsCsv(table, data) {
   FileSaver.saveAs(blob, `${table}.csv`);
 }
 
-function exportToClipboard(table, data) {
+function exportToClipboard(_, data) {
   const text = Papa.unparse(data);
   copyToClipboard(text);
 }
 
 function copyToClipboard(text) {
   const hiddenDiv = document.createElement('div');
-  let style = hiddenDiv.style;
+  const style = hiddenDiv.style;
   style.height = '1px';
   style.width = '1px';
   style.overflow = 'hidden';

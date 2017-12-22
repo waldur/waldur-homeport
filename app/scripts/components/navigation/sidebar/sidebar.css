@@ -1,0 +1,14 @@
+.sidebar-collapse .nav-label {
+  width: 115px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+.sidebar-collapse .nav>li>a i {
+  margin-right: 6px;
+  display: block;
+  float: left;
+  margin-top: 4px;
+}

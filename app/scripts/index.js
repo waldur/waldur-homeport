@@ -35,6 +35,7 @@ import filtersModule from './components/core/filters';
 import quotasModule from './components/quotas/module';
 import tableModule from './components/table/module';
 import i18nModule from './components/i18n/module';
+import modalModule from './components/modal/module';
 import bootstrap from './components/core/bootstrap';
 import errorModule from './components/error/module';
 import configModule from './components/configs/module';
@@ -51,6 +52,7 @@ import azureModule from './components/azure/module';
 import slurmModule from './components/slurm/module';
 import paypalModule from './components/paypal/module';
 import storeModule from './components/store/module';
+import jiraModule from './components/jira/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -112,6 +114,7 @@ filtersModule(appModule);
 quotasModule(appModule);
 tableModule(appModule);
 i18nModule(appModule);
+modalModule(appModule);
 configModule(appModule);
 controllersModule(appModule);
 directivesModule(appModule);
@@ -123,6 +126,7 @@ azureModule(appModule);
 slurmModule(appModule);
 paypalModule(appModule);
 storeModule(appModule);
+jiraModule(appModule);
 appModule.config(analyticsRoutes);
 
 function requirePlugins(module) {

@@ -1,9 +1,10 @@
 import registerSidebarExtension from './sidebar';
-import registerTableExtension from './user-organizations';
+import registerTableExtension from './table-extension';
 import registerAppstoreCategory from './appstore-category';
 import workspaceSelector from './workspace-selector.html';
 import customerWorkspace from './customer-workspace.html';
 import expertRequestCreateButton from './expert-request-create-button';
+import './dashboard-quotas';
 
 // @ngInject
 function registerExtensionPoint(extensionPointService, features) {

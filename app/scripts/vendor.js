@@ -50,6 +50,6 @@ import 'angular-intro.js';
 
 import 'summernote/dist/summernote.css';
 
-if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install(); // eslint-disable-line global-require
-}
+// if (process.env.NODE_ENV === 'production') {
+//   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
+// }

@@ -31,7 +31,7 @@ export default function actionUtilsService(
     }
 
     action.isVisible = action.isVisible || function () {return true;};
-    if (!action.isVisible(model)) {
+    if (!action.isVisible(model, usersService.currentUser)) {
       return false;
     }
 

@@ -3,7 +3,7 @@
     <h2>{{ ::$ctrl.noProvidersMessage }}</h2>
   </div>
 </div>
-<div class="row">
+<div class="row" ng-if="$ctrl.canCreateProvider">
   <div ng-class="{'col-md-5': $ctrl.isVPC, 'col-md-6 col-md-offset-3': !$ctrl.isVPC}">
     <a class="btn btn-success btn-rounded btn-block"
       ui-sref="organization.createProvider({uuid: $ctrl.customer.uuid})">

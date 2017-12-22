@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { shallow, mount } from 'enzyme';
+import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { formatTemplate } from '@waldur/i18n/translate';
@@ -8,12 +8,11 @@ import Table from './Table';
 
 describe('Table', () => {
   const fetch = jasmine.createSpy('fetch');
-  const gotoPage = x => {};
   const defaultProps = {
     translate: formatTemplate,
     loading: false,
     error: null,
-    fetch
+    fetch,
   };
 
   describe('special states', () => {
@@ -33,12 +32,12 @@ describe('Table', () => {
     });
 
     it('renders custom message if list is empty and verboseName is set', () => {
-      const wrapper = mount(<Table {...defaultProps} verboseName='projects'/>);
+      const wrapper = mount(<Table {...defaultProps} verboseName="projects" />);
       expect(wrapper.contains('There are no projects yet.')).toBe(true);
     });
 
     it('renders custom message if list is empty and verboseName is set and query is set', () => {
-      const wrapper = mount(<Table {...defaultProps} verboseName='projects' query='my projects'/>);
+      const wrapper = mount(<Table {...defaultProps} verboseName="projects" query="my projects" />);
       expect(wrapper.contains('There are no projects found matching the filter.')).toBe(true);
     });
 
@@ -62,18 +61,18 @@ describe('Table', () => {
           columns={[
             {
               title: 'Resource type',
-              render: ({ row }) => row.type
+              render: ({ row }) => row.type,
             },
             {
               title: 'Resource name',
               render: ({ row }) => row.name,
-            }
+            },
           ]}
           rows={[
             {
               type: 'OpenStack Instance',
               name: 'Web server',
-            }
+            },
           ]}/>
         );
     });

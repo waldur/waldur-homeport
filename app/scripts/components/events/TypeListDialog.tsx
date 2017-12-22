@@ -2,16 +2,16 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/table-react/actions';
+import { closeModalDialog } from '@waldur/modal/actions';
 
-import { EventGroup } from './types';
 import './TypeListDialog.scss';
+import { EventGroup } from './types';
 
-type Props = TranslateProps & {
+interface Props extends TranslateProps {
   types: EventGroup[];
   dialogTitle: string;
   dismiss(): void;
-};
+}
 
 const PureTypeListDialog = (props: Props) => (
   <div>
@@ -24,8 +24,8 @@ const PureTypeListDialog = (props: Props) => (
           <b className={'icon ' + type.icon}></b>
           <span className="left-padding">{type.name}</span>
           <ul>
-            {type.descriptions.map((description, i) => (
-              <li key={i}>{description}</li>
+            {type.descriptions.map((description, j) => (
+              <li key={j}>{description}</li>
             ))}
           </ul>
         </div>
@@ -40,7 +40,7 @@ const PureTypeListDialog = (props: Props) => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  dismiss: () => dispatch(closeModalDialog())
+  dismiss: () => dispatch(closeModalDialog()),
 });
 
 export const TypeListDialog = withTranslation(connect(undefined, mapDispatchToProps)(PureTypeListDialog));

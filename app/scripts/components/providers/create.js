@@ -12,6 +12,7 @@ export default providerCreate;
 // @ngInject
 function ServiceAddController(
   servicesService,
+  usersService,
   joinService,
   currentStateService,
   baseControllerAddClass,
@@ -73,6 +74,9 @@ function ServiceAddController(
       this.service = joinService;
       this.controllerScope = controllerScope;
       this.successMessage = gettext('Provider has been created.');
+      if (ENV.onlyStaffManagesServices && !usersService.currentUser.is_staff) {
+        $state.go('invalidRoutePage');
+      }
       let vm = this;
       $scope.$watch('ServiceAdd.serviceChoice', function(choice) {
         if (!choice) {

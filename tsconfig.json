@@ -3,6 +3,8 @@
     "outDir": "./build/",
     "sourceMap": true,
     "noImplicitAny": false,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
     "module": "esnext",
     "moduleResolution": "node",
     "target": "es5",
@@ -12,13 +14,12 @@
     "baseUrl": ".",
     "paths": {
       "@waldur/*": ["app/scripts/components/*"]
-    }
+    },
+    "lib": [
+      "es2015",
+      "dom"
+    ]
   },
-  "types": ["jasmine"],
-  "lib": [
-    "es2015",
-    "dom"
-  ],
   "include": [
     "./app/scripts/components/**/*"
   ]

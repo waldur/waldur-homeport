@@ -52,6 +52,11 @@
   &.text-page {
     text-align: justify;
     padding: 50px 80px;
+
+    @include bp(xs) {
+      @include property(padding, 50 20);
+    }
+    //xs
   }
   // tos-page
 }

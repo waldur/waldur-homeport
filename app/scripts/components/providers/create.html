@@ -15,11 +15,11 @@
           ng-model="ServiceAdd.serviceChoice"
           theme="bootstrap">
           <ui-select-match placeholder="{{ 'Select provider type...' | translate }}">
-            <provider-icon type="$select.selected.name" size="img-xs"/>
+            <provider-icon type="$select.selected.name" size="img-xxs" style="vertical-align: middle"/>
             {{ $select.selected.name }}
           </ui-select-match>
           <ui-select-choices repeat="service in ServiceAdd.choices" group-by="'category'">
-            <provider-icon type="service.name" size="img-xs"/>
+            <provider-icon type="service.name" size="img-xxs" style="vertical-align: middle"/>
             {{ service.name }}
           </ui-select-choices>
         </ui-select>

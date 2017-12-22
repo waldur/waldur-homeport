@@ -11,7 +11,7 @@ export default function actionDialog() {
 
 // @ngInject
 function ActionDialogController(
-  $scope, $q, $http, $state, actionUtilsService,
+  $scope, $q, $http, $state, actionUtilsService, ncUtilsFlash,
   ActionResourceLoader, ncUtils, DEFAULT_FIELD_OPTIONS) {
   angular.extend($scope, {
     init: function () {
@@ -109,6 +109,7 @@ function ActionDialogController(
         $scope.$close();
       }, function(response) {
         $scope.errors = response.data;
+        ncUtilsFlash.errorFromResponse(response, gettext('Unable to perform action'));
       });
     },
     cancel: function() {

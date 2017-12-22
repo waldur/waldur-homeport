@@ -1,5 +1,5 @@
-import { dashboardChart as reducer, getChart } from './reducers';
 import actions from './actions';
+import { dashboardChart as reducer, getChart } from './reducers';
 
 describe('Dashboard chart reducer', () => {
   it('should return default state', () => {
@@ -7,20 +7,20 @@ describe('Dashboard chart reducer', () => {
     expect(getChart(state, 'customer')).toEqual({
       loading: false,
       erred: false,
-      charts: []
+      charts: [],
     });
   });
 
   it('should handle start action', () => {
     expect(reducer(undefined, {
       type: actions.DASHBOARD_CHARTS_START,
-      chartId: 'customer'
+      chartId: 'customer',
     })).toEqual({
       customer: {
         loading: true,
         erred: false,
-        charts: []
-      }
+        charts: [],
+      },
     });
   });
 
@@ -32,8 +32,8 @@ describe('Dashboard chart reducer', () => {
         {
           label: 'Today',
           value: 100,
-        }
-      ]
+        },
+      ],
     })).toEqual({
       customer: {
         loading: false,
@@ -42,9 +42,9 @@ describe('Dashboard chart reducer', () => {
           {
             label: 'Today',
             value: 100,
-          }
-        ]
-      }
+          },
+        ],
+      },
     });
   });
 });

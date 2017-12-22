@@ -51,31 +51,20 @@ function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
           id: 'status',
           title: gettext('Status'),
           orderField: 'status',
-          render: function(row) {
-            const type = row.type.toUpperCase().replace(' ', '_');
-            const iconClass = ISSUE_ICONS[type];
-            const textClass = ISSUE_TEXT_CLASSES[type];
-            const title = $filter('translate')(row.type).toUpperCase();
-            const status = row.status || 'N/A';
-            return `<i class="fa ${iconClass} ${textClass}" uib-tooltip="${title}"></i> ${status}`;
-          },
+          render: row => `<issue-type-icon type="${row.type}"></issue-type-icon> ${row.status || 'N/A'}`,
           width: 50
         },
         {
           id: 'title',
           title: gettext('Title'),
           orderField: 'summary',
-          render: function(row) {
-            return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.summary}">${row.summary}</span>`;
-          }
+          render: row => this.renderLongText(row.summary)
         },
         {
           id: 'description',
           title: gettext('Description'),
           orderable: false,
-          render: function(row) {
-            return `<span class="elipsis" style="width: 150px;" uib-tooltip="${row.description}">${row.description}</span>`;
-          }
+          render: row => this.renderLongText(row.description)
         },
         {
           id: 'resource_type',

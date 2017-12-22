@@ -1,12 +1,14 @@
 import * as React from 'react';
+
 import Panel from '@waldur/core/Panel';
+
+import ChangeIndicator from './ChangeIndicator';
 import SparklineChart from './sparkline';
 import { Chart } from './types';
-import ChangeIndicator from './ChangeIndicator';
 
-type Props = {
-  chart: Chart
-};
+interface Props {
+  chart: Chart;
+}
 
 const DashboardChart = (props: Props) => {
   const { title, current, change, data } = props.chart;

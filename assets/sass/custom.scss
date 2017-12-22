@@ -89,6 +89,10 @@ body.landing {
   width: 25px;
 }
 
+.img-xxs {
+  width: 19px;
+}
+
 .dt-buttons .btn.disabled {
   pointer-events: auto;
 }
@@ -148,22 +152,6 @@ body.landing {
 
 .nav.navbar-right > li > a.active {
   color: $blue;
-}
-
-.p-r-n {
-  padding-right: 0 !important;
-}
-
-.p-l-n {
-  padding-left: 0 !important;
-}
-
-.p-b-n {
-  padding-bottom: 0 !important;
-}
-
-.p-b-xl {
-  padding: 40px !important;
 }
 
 .table-borderless tbody tr td,
