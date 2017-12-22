@@ -19,7 +19,9 @@ function* handleCreateIssueSaga(action) {
     yield put(createIssue.success());
   } catch (error) {
     const formError = new SubmissionError({
-      _error: 'Unable to create request, please check your credentials and try again', // global form error
+      _error: 'Unable to create request, please check your credentials and try again',
+      summary: error.data.summary,
+      type: error.data.type,
     });
 
     yield put(createIssue.failure(formError));
