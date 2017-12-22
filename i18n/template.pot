@@ -1205,7 +1205,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/issues/list/issues-short-list.html
-#: app/scripts/components/jira/issue/IssueCreateForm.tsx
+#: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 #: app/scripts/components/jira/issue/jira-issues-list.js
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
@@ -4055,7 +4055,7 @@ msgstr ""
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
-#: app/scripts/components/jira/issue/IssueCreateForm.tsx
+#: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 msgid "Request type"
 msgstr ""
 
@@ -4776,7 +4776,7 @@ msgstr ""
 msgid "Subtotal"
 msgstr ""
 
-#: app/scripts/components/jira/issue/IssueCreateForm.tsx
+#: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/resource/summary/virtual-machine-summary.html
 msgid "Summary"

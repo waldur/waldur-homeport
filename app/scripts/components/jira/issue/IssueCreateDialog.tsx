@@ -2,14 +2,20 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import { SubmitButton } from '@waldur/form-react/SubmitButton';
+import {
+  FieldError,
+  StringField,
+  TextField,
+  FormContainer,
+  SubmitButton
+} from '@waldur/form-react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { createIssue } from './actions';
-import { IssueCreateForm } from './IssueCreateForm';
+import { IssueTypeField } from './IssueTypeField';
 import { JiraProject } from './types';
 
 interface Props extends TranslateProps {
@@ -18,13 +24,13 @@ interface Props extends TranslateProps {
   };
 }
 
-const PureFooter = props => {
+const Dialog = props => {
   const submit = props.handleSubmit((data, dispatch) => createIssue({
     ...data,
     project: props.project,
   }, dispatch));
 
-  return (
+  const footer = (
     <form onSubmit={submit}>
       <SubmitButton
         submitting={props.submitting}
@@ -33,6 +39,31 @@ const PureFooter = props => {
       <CloseDialogButton/>
     </form>
   );
+
+  return (
+    <ModalDialog
+      title={props.translate('Create request')}
+      footer={footer}>
+      <FormContainer submitting={props.submitting}>
+        <IssueTypeField
+          name="type"
+          label={props.translate('Request type')}
+          options={props.project.issue_types}
+          required={true}
+        />
+        <StringField
+          name="summary"
+          label={props.translate('Summary')}
+          required={true}
+        />
+        <TextField
+          name="description"
+          label={props.translate('Description')}
+        />
+      </FormContainer>
+      <FieldError error={props.error}/>
+    </ModalDialog>
+  );
 };
 
 const enhance = compose(
@@ -40,21 +71,13 @@ const enhance = compose(
   reduxForm({form: 'issueCreate'}),
 );
 
-const Footer = enhance(PureFooter);
+const DialogComponent = enhance(Dialog);
 
-const PureIssueCreateDialog = (props: Props) => {
-  const project = props.resolve.project;
-  return (
-    <ModalDialog title={props.translate('Create request')} footer={<Footer project={project}/>}>
-      <IssueCreateForm
-        issueTypes={project.issue_types}
-        initialValues={{type: project.issue_types[0]}}
-        project={project}
-      />
-    </ModalDialog>
-  );
-};
-
-export const IssueCreateDialog = withTranslation(PureIssueCreateDialog);
+export const IssueCreateDialog = withTranslation((props: Props) => (
+  <DialogComponent
+    project={props.resolve.project}
+    initialValues={{type: props.resolve.project.issue_types[0]}}
+  />
+));
 
 export default connectAngularComponent(IssueCreateDialog, ['resolve']);
