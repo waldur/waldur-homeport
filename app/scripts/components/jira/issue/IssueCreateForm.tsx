@@ -9,13 +9,7 @@ import { FieldError } from './FieldError';
 import { StringField, TextField } from './fields';
 import { IssueTypeField } from './IssueTypeField';
 import { SubmitButton } from './SubmitButton';
-import { JiraIssueType, JiraProject } from './types';
-
-interface FormData {
-  type: JiraIssueType;
-  summary: string;
-  description?: string;
-}
+import { JiraIssueType, JiraProject, FormData } from './types';
 
 interface Props {
   initialValues: Partial<FormData>;
@@ -24,23 +18,17 @@ interface Props {
 }
 
 const PureIssueCreateForm = props => {
-  const {
-    handleSubmit,
-    submitting,
-    translate,
-    issueTypes,
-    project,
-  } = props;
-  const submit = handleSubmit((data, dispatch) => createIssue({
+  const { translate } = props;
+  const submit = props.handleSubmit((data, dispatch) => createIssue({
     ...data,
-    project,
+    project: props.project,
   }, dispatch));
   return (
     <form onSubmit={submit}>
       <IssueTypeField
         name="type"
         label={translate('Request type')}
-        options={issueTypes}
+        options={props.issueTypes}
       />
       <StringField
         name="summary"
@@ -52,7 +40,7 @@ const PureIssueCreateForm = props => {
       />
       <FieldError error={props.error}/>
       <SubmitButton
-        submitting={submitting}
+        submitting={props.submitting}
         label={translate('Submit')}
       />
     </form>
