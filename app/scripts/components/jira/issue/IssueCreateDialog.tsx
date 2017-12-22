@@ -2,13 +2,12 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import { StringField, TextField } from '@waldur/form-react';
+import { StringField, TextField, SelectIconField } from '@waldur/form-react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { createIssue } from './actions';
-import { IssueTypeField } from './IssueTypeField';
 import { JiraProject } from './types';
 
 interface Props extends TranslateProps {
@@ -30,11 +29,15 @@ const Dialog = props => {
       onSubmit={submit}
       submitting={props.submitting}
       error={props.error}>
-      <IssueTypeField
+      <SelectIconField
         name="type"
         label={props.translate('Request type')}
         options={props.project.issue_types}
         required={true}
+        clearable={false}
+        labelKey="name"
+        valueKey="url"
+        iconKey="icon_url"
       />
       <StringField
         name="summary"
