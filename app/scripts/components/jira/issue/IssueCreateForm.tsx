@@ -6,6 +6,7 @@ import { withTranslation } from '@waldur/i18n';
 
 import { FieldError } from './FieldError';
 import { StringField, TextField } from './fields';
+import { FormContainer } from './FormContainer';
 import { IssueTypeField } from './IssueTypeField';
 import { JiraIssueType, JiraProject, JiraIssue } from './types';
 
@@ -18,24 +19,26 @@ interface Props {
 const PureIssueCreateForm = props => {
   const { translate } = props;
   return (
-    <form>
-      <IssueTypeField
-        name="type"
-        label={translate('Request type')}
-        options={props.issueTypes}
-        required={true}
-      />
-      <StringField
-        name="summary"
-        label={translate('Summary')}
-        required={true}
-      />
-      <TextField
-        name="description"
-        label={translate('Description')}
-      />
+    <div>
+      <FormContainer submitting={props.submitting}>
+        <IssueTypeField
+          name="type"
+          label={translate('Request type')}
+          options={props.issueTypes}
+          required={true}
+        />
+        <StringField
+          name="summary"
+          label={translate('Summary')}
+          required={true}
+        />
+        <TextField
+          name="description"
+          label={translate('Description')}
+        />
+      </FormContainer>
       <FieldError error={props.error}/>
-    </form>
+    </div>
   );
 };
 
