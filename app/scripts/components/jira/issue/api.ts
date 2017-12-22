@@ -1,13 +1,13 @@
 import { $http, ENV } from '@waldur/core/services';
 
-import { IssueCreateRequest } from './types';
+import { JiraIssue } from './types';
 
-export const createIssueApi = (request: IssueCreateRequest) => (
+export const createIssueApi = (issue: JiraIssue) => (
   $http.post(`${ENV.apiEndpoint}api/jira-issues/`, {
-    project: request.project.url,
-    type: request.type.url,
-    summary: request.summary,
-    description: request.description,
+    project: issue.project.url,
+    type: issue.type.url,
+    summary: issue.summary,
+    description: issue.description,
     impact: 'n/a',
     priority: 'n/a',
   })

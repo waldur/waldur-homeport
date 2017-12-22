@@ -10,7 +10,7 @@ const renderField = ({input, label, meta: {error}, children, ...rest}) => (
       {label}:
     </label>
     {children({ input, ...rest })}
-    {<FieldError error={error}/>}
+    <FieldError error={error}/>
   </div>
 );
 
@@ -28,13 +28,13 @@ export const TextField = wrapField(({input}) =>
   <textarea {...input} rows={5} className="form-control"/>
 );
 
-export const SelectField = componentProps => wrapField(({input, ...rest}) =>
+export const SelectField = options => wrapField(({input, ...rest}) =>
   <Select
     {...rest}
     name={input.name}
     value={input.value}
     onChange={value => input.onChange(value)}
     onBlur={() => input.onBlur(input.value)}
-    {...componentProps}
+    {...options}
   />
 );

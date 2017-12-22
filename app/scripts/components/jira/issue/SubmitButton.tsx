@@ -8,7 +8,7 @@ interface Props {
 export const SubmitButton = (props: Props) => (
   <button
     type="submit"
-    className="btn btn-default"
+    className="btn btn-primary"
     disabled={props.submitting}>
     {props.submitting && (
       <i className="fa fa-spinner fa-spin m-r-xs"/>

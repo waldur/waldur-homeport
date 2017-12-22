@@ -703,6 +703,7 @@ msgstr ""
 #: app/scripts/components/invitations/actions/cancel.js
 #: app/scripts/components/invitations/actions/invitation-dialog.html
 #: app/scripts/components/issues/comments/issue-comments-form.html
+#: app/scripts/components/modal/CloseDialogButton.tsx
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/offering/appstore-offering.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html
@@ -2927,7 +2928,6 @@ msgstr ""
 #: app/scripts/components/customer/popover/customer-popover.html
 #: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/experts/requests/details/expert-request-details-dialog.html
-#: app/scripts/components/modal/CloseDialogButton.tsx
 #: app/scripts/components/project/project-dialog.html
 #: app/scripts/components/providers/details/dialog.html
 #: app/scripts/components/user/user-popover.html
@@ -4735,7 +4735,6 @@ msgid "Storages"
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html
-#: app/scripts/components/jira/issue/IssueCreateForm.tsx
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html

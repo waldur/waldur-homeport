@@ -10,12 +10,9 @@ export interface JiraProject {
   issue_types: JiraIssueType[];
 }
 
-export interface FormData {
+export interface JiraIssue {
+  project: JiraProject;
   type: JiraIssueType;
   summary: string;
   description?: string;
-}
-
-export interface IssueCreateRequest extends FormData {
-  project: JiraProject;
 }

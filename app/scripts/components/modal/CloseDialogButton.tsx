@@ -11,7 +11,7 @@ interface Props extends TranslateProps {
 
 const PureCloseDialogButton = ({translate, dismiss}: Props) => (
   <button className="btn btn-default" onClick={dismiss}>
-    <span>{translate('OK')}</span>
+    <span>{translate('Cancel')}</span>
   </button>
 );
 
