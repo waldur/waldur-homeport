@@ -2,11 +2,11 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
+import { FieldError } from '@waldur/form-react/FieldError';
+import { StringField, TextField } from '@waldur/form-react/fields';
+import { FormContainer } from '@waldur/form-react/FormContainer';
 import { withTranslation } from '@waldur/i18n';
 
-import { FieldError } from './FieldError';
-import { StringField, TextField } from './fields';
-import { FormContainer } from './FormContainer';
 import { IssueTypeField } from './IssueTypeField';
 import { JiraIssueType, JiraProject, JiraIssue } from './types';
 

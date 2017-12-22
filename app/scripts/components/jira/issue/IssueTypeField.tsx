@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { SelectField } from './fields';
+import { SelectField } from '@waldur/form-react/fields';
 
 const optionRenderer = option => (
   <div>

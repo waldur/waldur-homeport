@@ -2,6 +2,7 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
+import { SubmitButton } from '@waldur/form-react/SubmitButton';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -9,7 +10,6 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { createIssue } from './actions';
 import { IssueCreateForm } from './IssueCreateForm';
-import { SubmitButton } from './SubmitButton';
 import { JiraProject } from './types';
 
 interface Props extends TranslateProps {
