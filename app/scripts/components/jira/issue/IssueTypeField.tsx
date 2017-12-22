@@ -1,46 +1,31 @@
 import * as React from 'react';
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 
-import { JiraIssueType } from './types';
+import { SelectField } from './fields';
 
-interface Props {
-  issueTypes: JiraIssueType[];
-}
+const optionRenderer = option => (
+  <div>
+    <img src={option.icon_url} style={{
+      display: 'inline-block',
+      marginRight: 10,
+      position: 'relative',
+      top: -2,
+      verticalAlign: 'middle',
+    }}/>
+    {option.name}
+  </div>
+);
 
-export class IssueTypeField extends React.Component<Props> {
-  state = {
-    value: null,
-  };
+const componentProps = {
+  optionRenderer,
+  valueRenderer: optionRenderer,
+  clearable: false,
+  valueKey: 'url',
+  labelKey: 'name',
+};
 
-  render() {
-    return (
-      <Select
-        name="issueType"
-        options={this.props.issueTypes}
-        value={this.state.value}
-        onChange={this.setValue}
-        optionRenderer={this.optionRenderer}
-        valueRenderer={this.optionRenderer}
-        clearable={false}
-        valueKey="url"
-        labelKey="name"
-      />
-    );
-  }
-
-  setValue = value => this.setState({value});
-
-  optionRenderer = option => (
-    <div>
-      <img src={option.icon_url} style={{
-        display: 'inline-block',
-        marginRight: 10,
-        position: 'relative',
-        top: -2,
-        verticalAlign: 'middle',
-      }}/>
-      {option.name}
-    </div>
-  )
-}
+export const IssueTypeField = props => (
+  <SelectField
+    {...props}
+    componentProps={componentProps}
+  />
+);
