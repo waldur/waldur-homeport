@@ -2,16 +2,9 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import {
-  FieldError,
-  StringField,
-  TextField,
-  FormContainer,
-  SubmitButton
-} from '@waldur/form-react';
+import { StringField, TextField } from '@waldur/form-react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { createIssue } from './actions';
@@ -30,39 +23,29 @@ const Dialog = props => {
     project: props.project,
   }, dispatch));
 
-  const footer = (
-    <form onSubmit={submit}>
-      <SubmitButton
-        submitting={props.submitting}
-        label={props.translate('Create request')}
-      />
-      <CloseDialogButton/>
-    </form>
-  );
-
   return (
-    <ModalDialog
+    <ActionDialog
       title={props.translate('Create request')}
-      footer={footer}>
-      <FormContainer submitting={props.submitting}>
-        <IssueTypeField
-          name="type"
-          label={props.translate('Request type')}
-          options={props.project.issue_types}
-          required={true}
-        />
-        <StringField
-          name="summary"
-          label={props.translate('Summary')}
-          required={true}
-        />
-        <TextField
-          name="description"
-          label={props.translate('Description')}
-        />
-      </FormContainer>
-      <FieldError error={props.error}/>
-    </ModalDialog>
+      submitLabel={props.translate('Create request')}
+      onSubmit={submit}
+      submitting={props.submitting}
+      error={props.error}>
+      <IssueTypeField
+        name="type"
+        label={props.translate('Request type')}
+        options={props.project.issue_types}
+        required={true}
+      />
+      <StringField
+        name="summary"
+        label={props.translate('Summary')}
+        required={true}
+      />
+      <TextField
+        name="description"
+        label={props.translate('Description')}
+      />
+    </ActionDialog>
   );
 };
 
@@ -73,11 +56,11 @@ const enhance = compose(
 
 const DialogComponent = enhance(Dialog);
 
-export const IssueCreateDialog = withTranslation((props: Props) => (
+export const IssueCreateDialog = (props: Props) => (
   <DialogComponent
     project={props.resolve.project}
     initialValues={{type: props.resolve.project.issue_types[0]}}
   />
-));
+);
 
 export default connectAngularComponent(IssueCreateDialog, ['resolve']);
