@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Select from 'react-select';
 
-export const SelectField = options => props => {
+export const SelectField = props => {
   const {input, ...rest} = props;
   return (
     <Select
@@ -10,7 +10,6 @@ export const SelectField = options => props => {
       value={input.value}
       onChange={value => input.onChange(value)}
       onBlur={() => input.onBlur(input.value)}
-      {...options}
-      />
+    />
   );
 };

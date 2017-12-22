@@ -15,12 +15,13 @@ const optionRenderer = option => (
   </div>
 );
 
-const componentProps = {
-  optionRenderer,
-  valueRenderer: optionRenderer,
-  clearable: false,
-  valueKey: 'url',
-  labelKey: 'name',
-};
-
-export const IssueTypeField = SelectField(componentProps);
+export const IssueTypeField = props => (
+  <SelectField
+    optionRenderer={optionRenderer}
+    valueRenderer={optionRenderer}
+    clearable={false}
+    valueKey="url"
+    labelKey="name"
+    {...props}
+  />
+);
