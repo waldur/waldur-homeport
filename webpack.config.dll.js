@@ -17,11 +17,13 @@ module.exports = {
       'papaparse',
 
       'redux',
+      'redux-form',
       'redux-saga',
       'react',
       'react-dom',
       'react-overlays',
       'react-redux',
+      'react-select',
       'react-bootstrap/lib/Tooltip',
       'react-bootstrap/lib/OverlayTrigger',
       'intro.js',

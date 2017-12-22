@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 import { Field } from 'redux-form';
 
 import { withLabel } from './utils';

@@ -81,7 +81,7 @@ function JiraIssuesListController(
           iconClass: 'fa fa-plus',
           callback: () => {
             $uibModal.open({
-              component: 'jiraCreateDialog',
+              component: 'jiraIssueCreateDialog',
               resolve: {
                 project: () => controllerScope.resource,
               }

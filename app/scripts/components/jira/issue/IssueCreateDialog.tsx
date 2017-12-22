@@ -14,7 +14,7 @@ interface Props extends TranslateProps {
   };
 }
 
-const PureJiraCreateDialog = (props: Props) => {
+const PureIssueCreateDialog = (props: Props) => {
   const issueTypes = props.resolve.project.issue_types;
   return (
     <ModalDialog title={props.translate('Create request')} footer={<CloseDialogButton/>}>
@@ -28,6 +28,6 @@ const PureJiraCreateDialog = (props: Props) => {
   );
 };
 
-export const JiraCreateDialog = withTranslation(PureJiraCreateDialog);
+export const IssueCreateDialog = withTranslation(PureIssueCreateDialog);
 
-export default connectAngularComponent(JiraCreateDialog, ['resolve']);
+export default connectAngularComponent(IssueCreateDialog, ['resolve']);
