@@ -90,6 +90,7 @@
     "react-select": "^1.1.0",
     "redux": "^3.7.2",
     "redux-form": "^7.2.0",
+    "redux-form-saga": "^0.2.0",
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.15.6",
     "satellizer": "^0.15.5",

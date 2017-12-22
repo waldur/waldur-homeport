@@ -18,6 +18,7 @@ module.exports = {
 
       'redux',
       'redux-form',
+      'redux-form-saga',
       'redux-saga',
       'react',
       'react-dom',

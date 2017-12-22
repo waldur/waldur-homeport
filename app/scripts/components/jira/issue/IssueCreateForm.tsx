@@ -4,9 +4,10 @@ import { reduxForm } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
 
+import { createIssue } from './actions';
 import { StringField, TextField } from './fields';
 import { IssueTypeField } from './IssueTypeField';
-import { JiraIssueType } from './types';
+import { JiraIssueType, JiraProject } from './types';
 
 interface FormData {
   type: JiraIssueType;
@@ -16,14 +17,18 @@ interface FormData {
 
 interface Props {
   initialValues: Partial<FormData>;
-  onSubmit: (data: FormData) => void;
   issueTypes: JiraIssueType[];
+  project: JiraProject;
 }
 
 const PureIssueCreateForm = props => {
-  const { handleSubmit, translate, issueTypes } = props;
+  const { handleSubmit, translate, issueTypes, project } = props;
+  const submit = handleSubmit((data, dispatch) => createIssue({
+    ...data,
+    project,
+  }, dispatch));
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submit}>
       <IssueTypeField
         name="type"
         label={translate('Request type')}

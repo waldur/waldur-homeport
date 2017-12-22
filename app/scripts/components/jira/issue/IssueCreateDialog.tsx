@@ -15,14 +15,13 @@ interface Props extends TranslateProps {
 }
 
 const PureIssueCreateDialog = (props: Props) => {
-  const issueTypes = props.resolve.project.issue_types;
+  const project = props.resolve.project;
   return (
     <ModalDialog title={props.translate('Create request')} footer={<CloseDialogButton/>}>
       <IssueCreateForm
-        issueTypes={issueTypes}
-        initialValues={{type: issueTypes[0]}}
-        // tslint:disable no-console
-        onSubmit={values => console.log(values)}
+        issueTypes={project.issue_types}
+        initialValues={{type: project.issue_types[0]}}
+        project={project}
       />
     </ModalDialog>
   );
