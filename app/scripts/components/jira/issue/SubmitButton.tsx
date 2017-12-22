@@ -11,7 +11,7 @@ export const SubmitButton = (props: Props) => (
     className="btn btn-default"
     disabled={props.submitting}>
     {props.submitting && (
-      <i className="fa fa-spinner fa-spin p-r-xs"/>
+      <i className="fa fa-spinner fa-spin m-r-xs"/>
     )}
     {props.label}
   </button>

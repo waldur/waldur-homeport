@@ -2,38 +2,39 @@ import * as React from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
-import { withLabel } from './utils';
+import { FieldError } from './FieldError';
 
-export const StringField = withLabel(props => (
-  <Field
-    {...props}
-    component="input"
-    type="text"
-    className="form-control"
-  />
+const renderField = ({input, label, meta: {error}, children, ...rest}) => (
+  <div className="form-group">
+    <label className="control-label">
+      {label}:
+    </label>
+    {children({ input, ...rest })}
+    {<FieldError error={error}/>}
+  </div>
+);
+
+const wrapField = Component => props => (
+  <Field {...props} component={renderField}>
+    {Component}
+  </Field>
+);
+
+export const StringField = wrapField(({input}) => (
+  <input {...input} type="text" className="form-control"/>
 ));
 
-export const TextField = withLabel(props => (
-  <Field
-    {...props}
-    component="textarea"
-    rows={5}
-    className="form-control"
-  />
-));
+export const TextField = wrapField(({input}) =>
+  <textarea {...input} rows={5} className="form-control"/>
+);
 
-export const SelectField = withLabel(props => (
-  <Field
-    {...props}
-    component={ownProps =>
-      <Select
-        {...ownProps}
-        name={ownProps.input.name}
-        value={ownProps.input.value}
-        onChange={value => ownProps.input.onChange(value)}
-        onBlur={() => ownProps.input.onBlur(ownProps.input.value)}
-        {...props.componentProps}
-      />
-    }
+export const SelectField = componentProps => wrapField(({input, ...rest}) =>
+  <Select
+    {...rest}
+    name={input.name}
+    value={input.value}
+    onChange={value => input.onChange(value)}
+    onBlur={() => input.onBlur(input.value)}
+    {...componentProps}
   />
-));
+);

@@ -23,9 +23,4 @@ const componentProps = {
   labelKey: 'name',
 };
 
-export const IssueTypeField = props => (
-  <SelectField
-    {...props}
-    componentProps={componentProps}
-  />
-);
+export const IssueTypeField = SelectField(componentProps);
