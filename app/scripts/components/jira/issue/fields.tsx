@@ -4,10 +4,10 @@ import { Field } from 'redux-form';
 
 import { FieldError } from './FieldError';
 
-const renderField = ({input, label, meta: {error}, children, ...rest}) => (
+const renderField = ({input, required, label, meta: {error}, children, ...rest}) => (
   <div className="form-group">
     <label className="control-label">
-      {label}:
+      {label}{required && <span className="text-danger"> *</span>}
     </label>
     {children({ input, ...rest })}
     <FieldError error={error}/>

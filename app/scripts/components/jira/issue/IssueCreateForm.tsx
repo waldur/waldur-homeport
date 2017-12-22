@@ -23,10 +23,12 @@ const PureIssueCreateForm = props => {
         name="type"
         label={translate('Request type')}
         options={props.issueTypes}
+        required={true}
       />
       <StringField
         name="summary"
         label={translate('Summary')}
+        required={true}
       />
       <TextField
         name="description"
