@@ -15,6 +15,7 @@ interface FormData {
 }
 
 interface Props {
+  initialValues: Partial<FormData>;
   onSubmit: (data: FormData) => void;
   issueTypes: JiraIssueType[];
 }

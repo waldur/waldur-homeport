@@ -14,15 +14,19 @@ interface Props extends TranslateProps {
   };
 }
 
-const PureJiraCreateDialog = (props: Props) => (
-  <ModalDialog title={props.translate('Create request')} footer={<CloseDialogButton/>}>
-    <IssueCreateForm
-      issueTypes={props.resolve.project.issue_types}
-      // tslint:disable no-console
-      onSubmit={values => console.log(values)}
-    />
-  </ModalDialog>
-);
+const PureJiraCreateDialog = (props: Props) => {
+  const issueTypes = props.resolve.project.issue_types;
+  return (
+    <ModalDialog title={props.translate('Create request')} footer={<CloseDialogButton/>}>
+      <IssueCreateForm
+        issueTypes={issueTypes}
+        initialValues={{type: issueTypes[0]}}
+        // tslint:disable no-console
+        onSubmit={values => console.log(values)}
+      />
+    </ModalDialog>
+  );
+};
 
 export const JiraCreateDialog = withTranslation(PureJiraCreateDialog);
 
