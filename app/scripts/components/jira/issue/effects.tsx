@@ -2,11 +2,11 @@ import { SubmissionError } from 'redux-form';
 import { takeEvery, put, call } from 'redux-saga/effects';
 
 import { createIssue } from './actions';
-import { createIssueApi } from './api';
+import * as api from './api';
 
 function* handleCreateIssueSaga(action) {
   try {
-    yield call(createIssueApi, action.payload);
+    yield call(api.createIssue, action.payload);
     yield put(createIssue.success());
   } catch (error) {
     const formError = new SubmissionError({
