@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-export const TextField = props => {
+import { FormField } from './types';
+
+export const TextField = (props: FormField) => {
   const { input, ...rest } = props;
   return (
     <textarea

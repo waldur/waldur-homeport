@@ -5,7 +5,16 @@ import { SubmitButton, FormContainer, FieldError } from '@waldur/form-react';
 import { CloseDialogButton } from './CloseDialogButton';
 import { ModalDialog } from './ModalDialog';
 
-export const ActionDialog = props => (
+interface ActionDialogProps {
+  title: string;
+  submitLabel: string;
+  submitting: boolean;
+  onSubmit: any;
+  children: React.ReactNode;
+  error?: string;
+}
+
+export const ActionDialog = (props: ActionDialogProps) => (
   <form onSubmit={props.onSubmit}>
     <ModalDialog
       title={props.title}

@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-import { SelectField } from './SelectField';
+import { SelectField, SelectFieldProps } from './SelectField';
+
+interface SelectIconFieldProps extends SelectFieldProps {
+  iconKey: string;
+}
 
 const optionRenderer = (iconKey, labelKey) => option => (
   <div>
@@ -15,7 +19,7 @@ const optionRenderer = (iconKey, labelKey) => option => (
   </div>
 );
 
-export const SelectIconField = props => {
+export const SelectIconField = (props: SelectIconFieldProps) => {
   const renderer = optionRenderer(props.iconKey, props.labelKey);
   return (
     <SelectField

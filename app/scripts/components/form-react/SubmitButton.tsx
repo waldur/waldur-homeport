@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-interface Props {
+interface SubmitButtonProps {
   submitting: boolean;
   label: string;
 }
 
-export const SubmitButton = (props: Props) => (
+export const SubmitButton = (props: SubmitButtonProps) => (
   <button
     type="submit"
     className="btn btn-primary"

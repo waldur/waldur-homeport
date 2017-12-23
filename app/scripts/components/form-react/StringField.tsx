@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-export const StringField = props => {
+import { FormField } from './types';
+
+export const StringField = (props: FormField) => {
   const { input, ...rest } = props;
   return (
     <input

@@ -1,22 +1,19 @@
 import * as React from 'react';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import { StringField, TextField, SelectIconField } from '@waldur/form-react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { createIssue } from './actions';
 import { JiraProject } from './types';
 
-interface Props extends TranslateProps {
-  resolve: {
-    project: JiraProject
-  };
+interface IssueCreateDialogProps extends TranslateProps, InjectedFormProps {
+  project: JiraProject;
 }
 
-const Dialog = props => {
+const Dialog = (props: IssueCreateDialogProps) => {
   const submit = props.handleSubmit((data, dispatch) => createIssue({
     ...data,
     project: props.project,
@@ -57,13 +54,4 @@ const enhance = compose(
   reduxForm({form: 'issueCreate'}),
 );
 
-const DialogComponent = enhance(Dialog);
-
-export const IssueCreateDialog = (props: Props) => (
-  <DialogComponent
-    project={props.resolve.project}
-    initialValues={{type: props.resolve.project.issue_types[0]}}
-  />
-);
-
-export default connectAngularComponent(IssueCreateDialog, ['resolve']);
+export const IssueCreateDialog = enhance(Dialog);

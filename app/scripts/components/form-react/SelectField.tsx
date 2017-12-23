@@ -1,7 +1,13 @@
 import * as React from 'react';
-import Select from 'react-select';
+import Select, {ReactSelectProps} from 'react-select';
 
-export const SelectField = props => {
+import { FormField } from './types';
+
+export interface SelectFieldProps extends ReactSelectProps, FormField {
+  name: string;
+}
+
+export const SelectField = (props: SelectFieldProps) => {
   const {input, ...rest} = props;
   return (
     <Select

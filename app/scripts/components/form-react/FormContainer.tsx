@@ -3,7 +3,12 @@ import { Field } from 'redux-form';
 
 import { FormGroup } from './FormGroup';
 
-export const FormContainer = props => (
+interface FormContainerProps {
+  children: React.ReactNode;
+  submitting: boolean;
+}
+
+export const FormContainer = (props: FormContainerProps) => (
   <div>
     {React.Children.map(props.children, input => (
       <Field
