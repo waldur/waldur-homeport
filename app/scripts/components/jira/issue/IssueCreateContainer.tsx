@@ -1,12 +1,11 @@
 import * as React from 'react';
 
-import { TranslateProps } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { IssueCreateDialog } from './IssueCreateDialog';
 import { JiraProject } from './types';
 
-interface IssueCreateDialogContainerProps extends TranslateProps {
+interface IssueCreateDialogContainerProps {
   resolve: {
     project: JiraProject
   };
