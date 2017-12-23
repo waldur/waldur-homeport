@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
+import { emitSignal } from '@waldur/store/coreSaga';
+
 import actions from './actions';
 import DashboardChartList from './DashboardChartList';
 import { getChart } from './reducers';
@@ -17,7 +19,7 @@ const mapStateToProps = (state, ownProps: Props) => getChart(state, ownProps.cha
 const mapDispatchToProps = (dispatch: Dispatch<{}>, ownProps: Props) => ({
   onStart: () => {
     dispatch(actions.dashboardChartStart(ownProps.chartId, ownProps.scope));
-    dispatch(actions.emitSignal(ownProps.signal));
+    dispatch(emitSignal(ownProps.signal));
   },
   onStop: () => {
     dispatch(actions.dashboardChartStop(ownProps.chartId));

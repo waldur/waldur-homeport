@@ -3,6 +3,8 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
+import { EMIT_SIGNAL } from '@waldur/store/coreSaga';
+
 import actions from './actions';
 import DashboardChartContainer from './DashboardChartContainer';
 import DashboardChartList from './DashboardChartList';
@@ -54,7 +56,7 @@ describe('DashboardChartContainer', () => {
         scope: customer,
       },
       {
-        type: actions.EMIT_SIGNAL,
+        type: EMIT_SIGNAL,
         signal: 'organizationDashboard.initialized',
       },
     ];

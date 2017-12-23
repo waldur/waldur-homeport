@@ -1,3 +1,5 @@
+import { REFRESH_ISSUES_LIST } from './actions';
+
 const jiraIssuesList = {
   bindings: {
     resource: '<'
@@ -12,6 +14,8 @@ export default jiraIssuesList;
 // @ngInject
 function JiraIssuesListController(
   $filter,
+  $scope,
+  $timeout,
   $uibModal,
   baseControllerListClass,
   JiraIssuesService) {
@@ -22,6 +26,9 @@ function JiraIssuesListController(
       this.service = JiraIssuesService;
       this.tableOptions = this.getTableOptions();
       this._super();
+      $scope.$on(REFRESH_ISSUES_LIST, () => {
+        $timeout(() => controllerScope.resetCache());
+      });
     },
     getTableOptions: function() {
       return {
