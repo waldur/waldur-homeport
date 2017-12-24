@@ -4,7 +4,6 @@ const DASHBOARD_CHARTS_START = 'waldur/dashboard/START';
 const DASHBOARD_CHARTS_STOP = 'waldur/dashboard/STOP';
 const DASHBOARD_CHARTS_SUCCESS = 'waldur/dashboard/SUCCESS';
 const DASHBOARD_CHARTS_ERROR = 'waldur/dashboard/ERROR';
-const EMIT_SIGNAL = 'waldur/core/EMIT_SIGNAL';
 
 const dashboardChartStart = (chartId: string, scope: Scope) => ({
   type: DASHBOARD_CHARTS_START,
@@ -29,20 +28,13 @@ const dashboardChartError = (chartId: string, error: string) => ({
   error,
 });
 
-const emitSignal = (signal: string) => ({
-  type: EMIT_SIGNAL,
-  signal,
-});
-
 export default {
   DASHBOARD_CHARTS_START,
   DASHBOARD_CHARTS_STOP,
   DASHBOARD_CHARTS_SUCCESS,
   DASHBOARD_CHARTS_ERROR,
-  EMIT_SIGNAL,
   dashboardChartStart,
   dashboardChartStop,
   dashboardChartSuccess,
   dashboardChartError,
-  emitSignal,
 };

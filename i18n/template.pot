@@ -703,6 +703,7 @@ msgstr ""
 #: app/scripts/components/invitations/actions/cancel.js
 #: app/scripts/components/invitations/actions/invitation-dialog.html
 #: app/scripts/components/issues/comments/issue-comments-form.html
+#: app/scripts/components/modal/CloseDialogButton.tsx
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/offering/appstore-offering.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html
@@ -1048,6 +1049,8 @@ msgstr ""
 
 #: app/scripts/components/issues/create/issue-create-dialog.js
 #: app/scripts/components/issues/create/issue-quick-create.html
+#: app/scripts/components/jira/issue/IssueCreateDialog.tsx
+#: app/scripts/components/jira/issue/jira-issues-list.js
 msgid "Create request"
 msgstr ""
 
@@ -1202,6 +1205,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/issues/list/issues-short-list.html
+#: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 #: app/scripts/components/jira/issue/jira-issues-list.js
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
@@ -4051,6 +4055,7 @@ msgstr ""
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
+#: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 msgid "Request type"
 msgstr ""
 
@@ -4771,6 +4776,7 @@ msgstr ""
 msgid "Subtotal"
 msgstr ""
 
+#: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/resource/summary/virtual-machine-summary.html
 msgid "Summary"

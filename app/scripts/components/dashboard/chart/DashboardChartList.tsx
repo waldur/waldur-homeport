@@ -26,12 +26,11 @@ class DashboardChartList extends React.PureComponent<Props> {
     }
     return (
       <div className="row">
-        {
-          charts.map((chart, index) => (
-            <div key={index} className="col-lg-3 col-md-6">
-              <DashboardChart chart={chart}/>
-            </div>))
-        }
+        {charts.map((chart, index) => (
+          <div key={index} className="col-lg-3 col-md-6">
+            <DashboardChart chart={chart}/>
+          </div>
+        ))}
       </div>
     );
   }

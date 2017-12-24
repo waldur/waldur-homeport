@@ -1,3 +1,5 @@
+import { REFRESH_ISSUES_LIST } from './actions';
+
 const jiraIssuesList = {
   bindings: {
     resource: '<'
@@ -12,6 +14,9 @@ export default jiraIssuesList;
 // @ngInject
 function JiraIssuesListController(
   $filter,
+  $scope,
+  $timeout,
+  $uibModal,
   baseControllerListClass,
   JiraIssuesService) {
   let controllerScope = this;
@@ -21,6 +26,9 @@ function JiraIssuesListController(
       this.service = JiraIssuesService;
       this.tableOptions = this.getTableOptions();
       this._super();
+      $scope.$on(REFRESH_ISSUES_LIST, () => {
+        $timeout(() => controllerScope.resetCache());
+      });
     },
     getTableOptions: function() {
       return {
@@ -64,7 +72,8 @@ function JiraIssuesListController(
             title: gettext('Created'),
             render: row => $filter('dateTime')(row.created),
           },
-        ]
+        ],
+        tableActions: this.getTableActions(),
       };
     },
     getFilter: function() {
@@ -72,6 +81,22 @@ function JiraIssuesListController(
         project_uuid: controllerScope.resource.uuid
       };
     },
+    getTableActions: function() {
+      return [
+        {
+          title: gettext('Create request'),
+          iconClass: 'fa fa-plus',
+          callback: () => {
+            $uibModal.open({
+              component: 'jiraIssueCreateDialog',
+              resolve: {
+                project: () => controllerScope.resource,
+              }
+            });
+          },
+        }
+      ];
+    }
   });
   controllerScope.__proto__ = new ResourceController();
 }
