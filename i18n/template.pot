@@ -3209,6 +3209,10 @@ msgstr ""
 msgid "Parameters"
 msgstr ""
 
+#: app/scripts/components/jira/issue/IssueCreateDialog.tsx
+msgid "Parent request"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html
 #: app/scripts/components/azure/password-details.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html

@@ -2,9 +2,7 @@ import { mount } from 'enzyme';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { compose, createStore, combineReducers } from 'redux';
-import { reducer as formReducer, SubmissionError } from 'redux-form';
-
-import reduxForm from 'redux-form/lib/reduxForm';
+import { reducer as formReducer, SubmissionError, reduxForm } from 'redux-form';
 
 export const withTestStore = store => WrappedComponent => (
   <Provider store={store}>
