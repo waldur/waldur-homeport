@@ -1,12 +1,11 @@
-import {profileHelp, dashboardHelp, providersHelp} from './constants';
+import template from './help-list.html';
+import HelpRegistry from './help-registry';
 
 const helpList = {
-  templateUrl: 'views/help/list.html',
+  template: template,
   controller: class HelpListController {
-    constructor() {
-      this.providersHelp = providersHelp;
-      this.profileHelp = profileHelp;
-      this.dashboardHelp = dashboardHelp;
+    $onInit() {
+      this.helpData = HelpRegistry.getSorted();
     }
   }
 };

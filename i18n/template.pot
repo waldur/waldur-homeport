@@ -270,17 +270,17 @@ msgstr ""
 msgid "Alert types"
 msgstr ""
 
+#: app/scripts/components/alerts/help.js
 #: app/scripts/components/customer/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/dashboard/ProjectAlertsFeed.tsx
-#: app/scripts/components/help/constants.js
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/routes.js
 #: app/scripts/components/resource/tabs/constants.js
 msgid "Alerts"
 msgstr ""
 
-#: app/views/help/list.html
+#: app/scripts/components/help/constants.js
 msgid "Alerts & events"
 msgstr ""
 
@@ -323,6 +323,10 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
 msgid "Already have an account?"
+msgstr ""
+
+#: app/scripts/components/aws/help.js
+msgid "Amazon EC2 provider"
 msgstr ""
 
 #: app/scripts/components/payments/payment-list.js
@@ -478,12 +482,12 @@ msgstr ""
 msgid "Available quota usage: {usage}"
 msgstr ""
 
-#: app/scripts/components/navigation/header/site-header.html
-msgid "Back"
+#: app/scripts/components/azure/help.js
+msgid "Azure provider"
 msgstr ""
 
-#: app/views/help/alerts-events-list.html
-msgid "Back to help topics"
+#: app/scripts/components/navigation/header/site-header.html
+msgid "Back"
 msgstr ""
 
 #: app/scripts/components/auth/callbacks/auth-login-failed.html
@@ -1278,6 +1282,10 @@ msgstr ""
 msgid "Device"
 msgstr ""
 
+#: app/scripts/components/digitalocean/help.js
+msgid "DigitalOcean provider"
+msgstr ""
+
 #: app/scripts/components/freeipa/freeipa-account-edit.html
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr ""
@@ -1450,7 +1458,7 @@ msgid "Event types"
 msgstr ""
 
 #: app/scripts/components/dashboard/ProjectEventsFeed.tsx
-#: app/scripts/components/help/constants.js
+#: app/scripts/components/events/help.js
 #: app/scripts/components/user/hooks/hook-list.js
 msgid "Events"
 msgstr ""
@@ -1820,7 +1828,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: app/views/help/list.html
+#: app/scripts/components/help/help-list.html
 msgid "Help topics"
 msgstr ""
 
@@ -1840,16 +1848,25 @@ msgstr ""
 msgid "Hourly rate"
 msgstr ""
 
-#: app/scripts/components/user/keys/key-create.html
-msgid "How to generate RSA keys"
-msgstr ""
-
 #: app/scripts/components/help/constants.js
+#: app/scripts/components/user/keys/help.js
 msgid "How to generate SSH key"
 msgstr ""
 
 #: app/scripts/components/providers/create.html
 msgid "How to obtain credentials"
+msgstr ""
+
+#: app/scripts/components/aws/help.js
+msgid "How to obtain credentials for Amazon EC2 provider"
+msgstr ""
+
+#: app/scripts/components/azure/help.js
+msgid "How to obtain credentials for Azure provider"
+msgstr ""
+
+#: app/scripts/components/digitalocean/help.js
+msgid "How to obtain credentials for DigitalOcean provider"
 msgstr ""
 
 #: app/scripts/components/experts/expert-provider-details.html
@@ -2252,6 +2269,10 @@ msgstr ""
 msgid "Key should consist of uppercase letters."
 msgstr ""
 
+#: app/scripts/components/user/keys/help.js
+msgid "Keys"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.js
 msgid "Large"
 msgstr ""
@@ -2624,10 +2645,6 @@ msgstr ""
 
 #: app/views/directives/customer-balance.html
 msgid "No changes for a month."
-msgstr ""
-
-#: app/views/help/alerts-events-list.html
-msgid "No contents"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plans-list.js
@@ -3538,10 +3555,6 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
-#: app/views/help/list.html
-msgid "Profile"
-msgstr ""
-
 #: app/scripts/components/user/user-manage.js
 msgid "Profile could not be updated."
 msgstr ""
@@ -3692,7 +3705,6 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/summary/resource-summary-base.html
-#: app/views/help/list.html
 msgid "Provider"
 msgstr ""
 
@@ -3750,6 +3762,7 @@ msgstr ""
 #: app/scripts/components/analytics/dashboard-cost-chart.html
 #: app/scripts/components/customer/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
+#: app/scripts/components/help/constants.js
 #: app/scripts/components/project/project-dialog.html
 msgid "Providers"
 msgstr ""

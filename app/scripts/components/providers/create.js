@@ -1,4 +1,5 @@
 import template from './create.html';
+import {HELP_TYPE_NAMES} from '@waldur/help/constants';
 
 const providerCreate = {
   template: template,
@@ -73,6 +74,7 @@ function ServiceAddController(
     init: function() {
       this.service = joinService;
       this.controllerScope = controllerScope;
+      this.HELP_TYPE_NAMES = HELP_TYPE_NAMES;
       this.successMessage = gettext('Provider has been created.');
       if (ENV.onlyStaffManagesServices && !usersService.currentUser.is_staff) {
         $state.go('invalidRoutePage');

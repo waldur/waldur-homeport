@@ -15,11 +15,14 @@
   </div>
   <div class="form-group">
     <label for="publicKey" class="col-sm-3 control-label">
-      <a visible-if="'help'"
-        title="{{ 'How to generate RSA keys' | translate }}"
-        href="#/help/keys/">
+      <help-link url-data="
+            {
+              name: KeyAdd.HELP_KEYS.sshKeys,
+              type: KeyAdd.HELP_TYPE_NAMES.sshKeys
+            }
+          ">
         <i class="fa fa-question-circle"></i>
-      </a>
+      </help-link>
       <span translate>Public key</span>
     </label>
     <div class="col-sm-5">

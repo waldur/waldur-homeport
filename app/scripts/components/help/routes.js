@@ -19,7 +19,7 @@ export default function helpRoutes($stateProvider) {
     })
 
     .state('help.details', {
-      url: ':name/',
+      url: ':type/:name/',
       template: '<help-details/>',
     });
 }

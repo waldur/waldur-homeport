@@ -130,11 +130,6 @@ body.landing {
 }
 
 .app-content {
-  padding-bottom: 50px;
-
-  @include bp(xs) {
-    padding-bottom: 0;
-  }
 }
 
 .footer-indent {

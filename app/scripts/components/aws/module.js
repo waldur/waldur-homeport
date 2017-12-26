@@ -1,3 +1,6 @@
+import './help';
+
+
 export default module => {
   module.run(costPlanningConfig);
 };
