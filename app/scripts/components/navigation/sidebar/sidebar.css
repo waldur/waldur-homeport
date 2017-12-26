@@ -1,5 +1,5 @@
 .sidebar-collapse .nav-label {
-  width: 115px;
+  max-width: 153px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
