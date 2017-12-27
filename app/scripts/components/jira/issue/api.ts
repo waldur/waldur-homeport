@@ -21,6 +21,7 @@ export const loadIssues = request => (
     params: {
       name: request.query,
       project_uuid: request.project.uuid,
+      field: ['summary', 'key', 'url'],
     },
   })
 );

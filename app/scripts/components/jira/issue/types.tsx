@@ -2,6 +2,7 @@ export interface JiraIssueType {
   url: string;
   name: string;
   icon_url: string;
+  subtask: boolean;
 }
 
 export interface JiraProject {

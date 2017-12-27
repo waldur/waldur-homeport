@@ -17,13 +17,12 @@ interface IssueCreateDialogContainerProps {
 }
 
 const FORM_ID = 'issueCreate';
-const SUBTASK_ISSUE_TYPE = 'Sub-task';
 
 const mapStateToProps = state => {
   const selector = formValueSelector(FORM_ID);
   const issueType = selector(state, 'type');
-  const isSubtask = issueType && issueType.name === SUBTASK_ISSUE_TYPE;
-  return { isSubtask };
+  const showParentField = issueType && issueType.subtask;
+  return { showParentField };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

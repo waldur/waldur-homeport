@@ -11,7 +11,7 @@ interface IssueCreateDialogProps extends TranslateProps, InjectedFormProps {
   project: JiraProject;
   loadProjectIssues: any;
   createIssue: any;
-  isSubtask: boolean;
+  showParentField: boolean;
 }
 
 const issueOptionRenderer = (option: JiraIssue) => (
@@ -35,7 +35,7 @@ export const IssueCreateDialog = (props: IssueCreateDialogProps) => (
       valueKey="url"
       iconKey="icon_url"
     />
-    {props.isSubtask && (
+    {props.showParentField && (
       <SelectAsyncField
         name="parent"
         label={props.translate('Parent request')}
