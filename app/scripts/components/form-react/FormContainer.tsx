@@ -10,7 +10,7 @@ interface FormContainerProps {
 
 export const FormContainer = (props: FormContainerProps) => (
   <div>
-    {React.Children.map(props.children, input => (
+    {React.Children.map(props.children, input => (input &&
       <Field
         {...(input as any).props}
         component={FormGroup}

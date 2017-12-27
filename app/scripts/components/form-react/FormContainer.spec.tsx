@@ -6,8 +6,13 @@ import {
   getRequiredFields,
   getErrors,
   submitForm,
+  renderOptionalFieldForm,
 } from './FormContainer.fixture';
-import { errorOnSubmit } from './testUtils';
+import {
+  errorOnSubmit,
+  setFieldValue,
+  getTestFormValues,
+} from './testUtils';
 
 describe('FormContainer', () => {
   it('renders form group for each field', () => {
@@ -58,5 +63,18 @@ describe('FormContainer', () => {
         expect(getErrors(wrapper)).toHaveLength(2);
       });
     });
+  });
+
+  it('resets value of field when it is unmounted', () => {
+    const wrapper = renderOptionalFieldForm();
+    setFieldValue(wrapper, 'type', 'subtask');
+    setFieldValue(wrapper, 'parent', 'New value');
+    expect(getTestFormValues(wrapper)).toEqual({
+      type: 'subtask',
+      parent: 'New value',
+    });
+
+    setFieldValue(wrapper, 'type', 'task');
+    expect(getTestFormValues(wrapper)).toEqual({type: 'task'});
   });
 });

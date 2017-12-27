@@ -1,8 +1,8 @@
 export interface JiraIssueType {
   url: string;
   name: string;
-  description: string;
   icon_url: string;
+  subtask: boolean;
 }
 
 export interface JiraProject {
@@ -11,7 +11,10 @@ export interface JiraProject {
 }
 
 export interface JiraIssue {
+  url?: string;
+  key?: string;
   project: JiraProject;
+  parent?: JiraIssue;
   type: JiraIssueType;
   summary: string;
   description?: string;

@@ -1,5 +1,6 @@
 import { ReactWrapper } from 'enzyme';
 import * as React from 'react';
+import { formValues } from 'redux-form';
 
 import { FormContainer } from './FormContainer';
 import { StringField } from './StringField';
@@ -33,3 +34,20 @@ export const getRequiredFields = (wrapper: ReactWrapper) => wrapper.find('.text-
 export const submitForm = (wrapper: ReactWrapper) => wrapper.find('form').simulate('submit');
 export const getErrors = (wrapper: ReactWrapper) => wrapper.find('.help-block');
 export const renderTestForm = options => mountTestForm(Component(options));
+
+export const OptionalFieldForm = formValues('type')(props => (
+  <FormContainer submitting={false}>
+    <StringField
+      name="type"
+      label="Type"
+    />
+    {(props as any).type === 'subtask' && (
+      <StringField
+        name="parent"
+        label="Parent"
+      />
+    )}
+  </FormContainer>
+));
+
+export const renderOptionalFieldForm = () => mountTestForm(OptionalFieldForm);
