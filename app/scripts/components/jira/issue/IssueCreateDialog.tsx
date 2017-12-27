@@ -5,11 +5,12 @@ import { StringField, TextField, SelectIconField, SelectAsyncField } from '@wald
 import { TranslateProps } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 
-import { JiraProject, JiraIssue } from './types';
+import { JiraProject, JiraIssue, Resource } from './types';
 
 interface IssueCreateDialogProps extends TranslateProps, InjectedFormProps {
   project: JiraProject;
-  loadProjectIssues: any;
+  loadProjectIssues: (query: string) => Promise<JiraIssue[]>;
+  loadProjectResources: (query: string) => Promise<Resource[]>;
   createIssue: any;
   showParentField: boolean;
 }
@@ -55,6 +56,13 @@ export const IssueCreateDialog = (props: IssueCreateDialogProps) => (
     <TextField
       name="description"
       label={props.translate('Description')}
+    />
+    <SelectAsyncField
+      name="resource"
+      label={props.translate('Related resource')}
+      labelKey="name"
+      valueKey="url"
+      loadOptions={props.loadProjectResources}
     />
   </ActionDialog>
 );

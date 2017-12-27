@@ -3938,6 +3938,10 @@ msgstr ""
 msgid "Regular user"
 msgstr ""
 
+#: app/scripts/components/jira/issue/IssueCreateDialog.tsx
+msgid "Related resource"
+msgstr ""
+
 #: app/scripts/components/ansible/details/ansible-job-summary.html
 msgid "Related resources"
 msgstr ""
