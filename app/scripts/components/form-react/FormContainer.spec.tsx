@@ -7,10 +7,12 @@ import {
   getErrors,
   submitForm,
   renderOptionalFieldForm,
+} from './FormContainer.fixture';
+import {
+  errorOnSubmit,
   setFieldValue,
   getTestFormValues,
-} from './FormContainer.fixture';
-import { errorOnSubmit } from './testUtils';
+} from './testUtils';
 
 describe('FormContainer', () => {
   it('renders form group for each field', () => {

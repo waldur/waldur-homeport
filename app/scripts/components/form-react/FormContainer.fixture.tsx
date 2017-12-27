@@ -1,6 +1,6 @@
 import { ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import { formValues, change, getFormValues } from 'redux-form';
+import { formValues } from 'redux-form';
 
 import { FormContainer } from './FormContainer';
 import { StringField } from './StringField';
@@ -51,9 +51,3 @@ export const OptionalFieldForm = formValues('type')(props => (
 ));
 
 export const renderOptionalFieldForm = () => mountTestForm(OptionalFieldForm);
-
-export const setFieldValue = (wrapper, field, value) =>
-  wrapper.props().store.dispatch(change('testForm', field, value));
-
-export const getTestFormValues = wrapper =>
-  getFormValues('testForm')(wrapper.props().store.getState());
