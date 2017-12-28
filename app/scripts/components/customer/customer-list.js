@@ -82,9 +82,14 @@ function CustomerListController(
           index: 130,
         },
         {
+          title: gettext('Current cost'),
+          render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.current),
+          index: 310,
+        },
+        {
           title: gettext('Estimated cost'),
           render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.total),
-          index: 310,
+          index: 320,
         },
       ];
       const extraColumns = TableExtensionService.getColumns('customer-list');

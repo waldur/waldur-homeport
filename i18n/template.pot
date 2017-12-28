@@ -1143,6 +1143,10 @@ msgstr ""
 msgid "Current VPC package"
 msgstr ""
 
+#: app/scripts/components/customer/customer-list.js
+msgid "Current cost"
+msgstr ""
+
 #: app/scripts/components/digitalocean/droplet-resize.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 msgid "Current size"
