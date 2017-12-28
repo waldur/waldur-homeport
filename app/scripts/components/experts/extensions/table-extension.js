@@ -2,7 +2,7 @@
 export default function extendTable(TableExtensionService, ncUtils) {
   TableExtensionService.registerColumns('projects-list', [{
     title: gettext('Experts'),
-    render: row => row.expert_count,
+    render: row => row.expert_count || 0,
     feature: 'experts',
     index: 150,
   }]);
