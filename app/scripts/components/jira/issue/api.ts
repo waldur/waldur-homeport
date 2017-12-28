@@ -32,7 +32,7 @@ export const loadResources = request => (
     params: {
       name: request.query,
       project_uuid: request.project.project_uuid,
-      field: ['name', 'url'],
+      field: ['name', 'url', 'resource_type'],
     },
   })
 );

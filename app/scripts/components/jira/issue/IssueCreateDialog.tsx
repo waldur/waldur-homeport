@@ -2,8 +2,10 @@ import * as React from 'react';
 import { InjectedFormProps } from 'redux-form';
 
 import { StringField, TextField, SelectIconField, SelectAsyncField } from '@waldur/form-react';
+import { optionRenderer } from '@waldur/form-react/optionRenderer';
 import { TranslateProps } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
+import { getResourceIcon } from '@waldur/resource/utils';
 
 import { JiraProject, JiraIssue, Resource } from './types';
 
@@ -18,6 +20,13 @@ interface IssueCreateDialogProps extends TranslateProps, InjectedFormProps {
 const issueOptionRenderer = (option: JiraIssue) => (
   <span>{option.key || 'N/A'}: {option.summary}</span>
 );
+
+const resourceOptionRenderer = optionRenderer({
+  labelKey: 'name',
+  tooltipKey: 'resource_type',
+  iconKey: (resource: Resource) => getResourceIcon(resource.resource_type),
+  imgStyle: {width: 19},
+});
 
 export const IssueCreateDialog = (props: IssueCreateDialogProps) => (
   <ActionDialog
@@ -63,6 +72,8 @@ export const IssueCreateDialog = (props: IssueCreateDialogProps) => (
       labelKey="name"
       valueKey="url"
       loadOptions={props.loadProjectResources}
+      optionRenderer={resourceOptionRenderer}
+      valueRenderer={resourceOptionRenderer}
     />
   </ActionDialog>
 );

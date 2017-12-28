@@ -14,6 +14,7 @@ export interface JiraProject {
 export interface Resource {
   url: string;
   name: string;
+  resource_type: string;
 }
 
 export interface JiraIssue {
