@@ -66,6 +66,18 @@ export const IssueCreateDialog = (props: IssueCreateDialogProps) => (
       name="description"
       label={props.translate('Description')}
     />
+    <SelectIconField
+      name="priority"
+      label={props.translate('Priority')}
+      options={props.project.priorities}
+      required={true}
+      clearable={false}
+      labelKey="name"
+      valueKey="url"
+      iconKey="icon_url"
+      tooltipKey="description"
+      imgStyle={{width: 19}}
+    />
     <SelectAsyncField
       name="resource"
       label={props.translate('Related resource')}

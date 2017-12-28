@@ -49,7 +49,10 @@ const IssueCreateDialogComponent = enhance(IssueCreateDialog);
 export const IssueCreateDialogContainer = (props: IssueCreateDialogContainerProps) => (
   <IssueCreateDialogComponent
     project={props.resolve.project}
-    initialValues={{type: props.resolve.project.issue_types[0]}}
+    initialValues={{
+      type: props.resolve.project.issue_types[0],
+      priority: props.resolve.project.priorities[0],
+    }}
   />
 );
 

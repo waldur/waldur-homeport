@@ -17,7 +17,7 @@ import {
 describe('FormContainer', () => {
   it('renders form group for each field', () => {
     const wrapper = renderTestForm({});
-    expect(getFieldGroups(wrapper)).toHaveLength(2);
+    expect(getFieldGroups(wrapper).length).toBe(2);
   });
 
   describe('disable fields on submit', () => {
@@ -37,19 +37,19 @@ describe('FormContainer', () => {
   describe('required fields indication', () => {
     it('does not indicate required field by default', () => {
       const wrapper = renderTestForm({});
-      expect(getRequiredFields(wrapper)).toHaveLength(0);
+      expect(getRequiredFields(wrapper).length).toBe(0);
     });
 
     it('indicates required field', () => {
       const wrapper = renderTestForm({required: true});
-      expect(getRequiredFields(wrapper)).toHaveLength(2);
+      expect(getRequiredFields(wrapper).length).toBe(2);
     });
   });
 
   describe('error rendering', () => {
     it('does not render errors by default', () => {
       const wrapper = renderTestForm({});
-      expect(getErrors(wrapper)).toHaveLength(0);
+      expect(getErrors(wrapper).length).toBe(0);
     });
 
     it('renders errors for each field individually', () => {
@@ -59,8 +59,8 @@ describe('FormContainer', () => {
       });
       const wrapper = renderTestForm({onSubmit});
       submitForm(wrapper);
-      promise.then(() => {
-        expect(getErrors(wrapper)).toHaveLength(2);
+      return promise.then(() => {
+        expect(getErrors(wrapper).length).toBe(2);
       });
     });
   });
