@@ -3,7 +3,7 @@ import { takeEvery, put, call } from 'redux-saga/effects';
 
 import { closeModalDialog } from '@waldur/modal/actions';
 
-import { createIssue, refreshIssueList, loadProjectIssues } from './actions';
+import { createIssue, refreshIssueList, loadProjectIssues, loadProjectResources } from './actions';
 
 import * as api from './api';
 
@@ -25,15 +25,25 @@ function* handleCreateIssueSaga(action) {
 }
 
 function* handleLoadIssuesSaga(action) {
-  const response = yield call(api.loadIssues, action.payload);
   try {
+    const response = yield call(api.loadIssues, action.payload);
     yield put(loadProjectIssues.success({options: response.data}));
   } catch (error) {
     yield put(loadProjectIssues.success({options: []}));
   }
 }
 
+function* handleLoadResourcesSaga(action) {
+  try {
+    const response = yield call(api.loadResources, action.payload);
+    yield put(loadProjectResources.success({options: response.data}));
+  } catch (error) {
+    yield put(loadProjectResources.success({options: []}));
+  }
+}
+
 export default function* issueSaga() {
   yield takeEvery(createIssue.REQUEST, handleCreateIssueSaga);
   yield takeEvery(loadProjectIssues.REQUEST, handleLoadIssuesSaga);
+  yield takeEvery(loadProjectResources.REQUEST, handleLoadResourcesSaga);
 }

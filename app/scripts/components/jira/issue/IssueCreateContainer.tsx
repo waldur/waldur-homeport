@@ -6,7 +6,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { createIssue, loadProjectIssues } from './actions';
+import * as actions from './actions';
 import { IssueCreateDialog } from './IssueCreateDialog';
 import { JiraProject } from './types';
 
@@ -27,10 +27,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadProjectIssues: query =>
-    loadProjectIssues({query, project: ownProps.project}, dispatch),
+    actions.loadProjectIssues({query, project: ownProps.project}, dispatch),
+
+  loadProjectResources: query =>
+    actions.loadProjectResources({query, project: ownProps.project}, dispatch),
 
   createIssue: data =>
-    createIssue({...data, project: ownProps.project}, dispatch),
+    actions.createIssue({...data, project: ownProps.project}, dispatch),
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

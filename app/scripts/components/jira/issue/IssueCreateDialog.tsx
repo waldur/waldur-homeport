@@ -2,14 +2,17 @@ import * as React from 'react';
 import { InjectedFormProps } from 'redux-form';
 
 import { StringField, TextField, SelectIconField, SelectAsyncField } from '@waldur/form-react';
+import { optionRenderer } from '@waldur/form-react/optionRenderer';
 import { TranslateProps } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
+import { getResourceIcon } from '@waldur/resource/utils';
 
-import { JiraProject, JiraIssue } from './types';
+import { JiraProject, JiraIssue, Resource } from './types';
 
 interface IssueCreateDialogProps extends TranslateProps, InjectedFormProps {
   project: JiraProject;
-  loadProjectIssues: any;
+  loadProjectIssues: (query: string) => Promise<JiraIssue[]>;
+  loadProjectResources: (query: string) => Promise<Resource[]>;
   createIssue: any;
   showParentField: boolean;
 }
@@ -17,6 +20,13 @@ interface IssueCreateDialogProps extends TranslateProps, InjectedFormProps {
 const issueOptionRenderer = (option: JiraIssue) => (
   <span>{option.key || 'N/A'}: {option.summary}</span>
 );
+
+const resourceOptionRenderer = optionRenderer({
+  labelKey: 'name',
+  tooltipKey: 'resource_type',
+  iconKey: (resource: Resource) => getResourceIcon(resource.resource_type),
+  imgStyle: {width: 19},
+});
 
 export const IssueCreateDialog = (props: IssueCreateDialogProps) => (
   <ActionDialog
@@ -55,6 +65,15 @@ export const IssueCreateDialog = (props: IssueCreateDialogProps) => (
     <TextField
       name="description"
       label={props.translate('Description')}
+    />
+    <SelectAsyncField
+      name="resource"
+      label={props.translate('Related resource')}
+      labelKey="name"
+      valueKey="url"
+      loadOptions={props.loadProjectResources}
+      optionRenderer={resourceOptionRenderer}
+      valueRenderer={resourceOptionRenderer}
     />
   </ActionDialog>
 );
