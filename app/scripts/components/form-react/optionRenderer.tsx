@@ -4,7 +4,7 @@ import { Tooltip } from '@waldur/core/Tooltip';
 
 export type IconGetter = (option: any) => string;
 
-interface RendererConfig {
+export interface RendererConfig {
   iconKey: string | IconGetter;
   labelKey: string;
   tooltipKey?: string;

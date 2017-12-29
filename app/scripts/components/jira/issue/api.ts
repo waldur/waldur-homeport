@@ -9,11 +9,10 @@ export const createIssue = (issue: JiraIssue) => (
     project: issue.project.url,
     parent: issue.parent && issue.parent.url,
     resource: issue.resource && issue.resource.url,
+    priority: issue.priority.url,
     type: issue.type.url,
     summary: issue.summary,
     description: issue.description,
-    impact: 'n/a',
-    priority: 'n/a',
   })
 );
 

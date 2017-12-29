@@ -3513,6 +3513,7 @@ msgid "Print record"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html
+#: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 msgid "Priority"
 msgstr ""
 

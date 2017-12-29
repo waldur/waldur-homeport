@@ -1,10 +1,9 @@
 import * as React from 'react';
 
-import { optionRenderer, IconGetter } from './optionRenderer';
+import { optionRenderer, RendererConfig } from './optionRenderer';
 import { SelectField, SelectFieldProps } from './SelectField';
 
-interface SelectIconFieldProps extends SelectFieldProps {
-  iconKey: string | IconGetter;
+interface SelectIconFieldProps extends SelectFieldProps, RendererConfig {
   labelKey: string;
 }
 
