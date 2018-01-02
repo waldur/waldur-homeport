@@ -1,10 +1,10 @@
 import content from './help.html';
-import {HELP_TYPE_NAMES, HELP_KEYS} from '@waldur/help/constants';
+import {HELP_CATEGORIES} from '@waldur/help/constants';
 import HelpRegistry from '@waldur/help/help-registry';
 
 const helpData = {
-  type: HELP_TYPE_NAMES.sshKeys,
-  key: HELP_KEYS.sshKeys,
+  type: HELP_CATEGORIES.keys,
+  key: 'ssh',
   name: gettext('Keys'),
   title: gettext('How to generate SSH key'),
   content: content,

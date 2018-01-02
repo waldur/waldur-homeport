@@ -1,9 +1,9 @@
-import {HELP_TYPE_NAMES, HELP_KEYS} from '@waldur/help/constants';
+import {HELP_CATEGORIES} from '@waldur/help/constants';
 import HelpRegistry from '@waldur/help/help-registry';
 
 const helpData = {
-  type: HELP_TYPE_NAMES.alertsList,
-  key: HELP_KEYS.alerts,
+  type: HELP_CATEGORIES.logging,
+  key: 'alerts',
   name: gettext('Alerts'),
   title: gettext('Alerts'),
   content: '<alert-event-groups></alert-event-groups>',

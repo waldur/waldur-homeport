@@ -5,7 +5,8 @@ const helpLink = {
   template: template,
   transclude: true,
   bindings: {
-    urlData: '<'
+    type: '<',
+    name: '<',
   },
   controller: class HelpListController {
     // @ngInject
@@ -14,7 +15,7 @@ const helpLink = {
     }
 
     $onInit() {
-      const {type = null, name = null} = this.urlData;
+      const {type, name} = this;
       const helpData = HelpRegistry.get();
       const helpItems = helpData[type] && helpData[type].helpItems;
       if (!helpItems) return;

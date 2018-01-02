@@ -35,12 +35,7 @@
     <div ng-if="!ServiceAdd.loadingService">
       <div class="form-group" visible-if="'help'">
         <div class="col-sm-offset-3 col-sm-4">
-          <help-link url-data="
-            {
-              name: ServiceAdd.model.name,
-              type: ServiceAdd.HELP_TYPE_NAMES.providers
-            }
-          ">
+          <help-link name="ServiceAdd.model.name" type="'providers'">
             <i class="fa fa-question-circle"></i>
             <span translate>How to obtain credentials</span>
           </help-link>
