@@ -3,6 +3,7 @@ import azureVirtualMachineSummary from './azure-virtual-machine-summary';
 import sshDetails from './ssh-details';
 import rdpDetails from './rdp-details';
 import passwordDetails from './password-details';
+import './help';
 
 export default module => {
   module.component('passwordDetails', passwordDetails);

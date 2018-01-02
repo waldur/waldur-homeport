@@ -23,7 +23,6 @@
   // &.top-level
   @include bp(xs) {
     @include property(margin, 0);
-    @include property(padding, 10 10);
   }
   // xs
   @include bp(sm) {

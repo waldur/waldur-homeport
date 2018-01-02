@@ -1,41 +1,11 @@
-export const dashboardHelp = {
-  alertsList: {
-    type: 'alertsList',
-    name: 'alerts',
-    title: gettext('Alerts')
-  },
-  eventsList: {
-    type: 'eventsList',
-    name: 'events',
-    title: gettext('Events')
-  }
+export const HELP_CATEGORIES = {
+  providers: 'providers',
+  keys: 'keys',
+  logging: 'logging',
 };
 
-export const profileHelp = {
-  sshKeys: {
-    type: 'sshKeys',
-    name: 'keys',
-    title: gettext('How to generate SSH key')
-  }
+export const HELP_TITLES = {
+  [HELP_CATEGORIES.providers]: gettext('Providers'),
+  [HELP_CATEGORIES.sshKeys]: gettext('How to generate SSH key'),
+  [HELP_CATEGORIES.logging]: gettext('Alerts & events')
 };
-
-export const providersHelp = [
-  {
-    type: 'providers',
-    key: 'Azure',
-    name: 'Azure provider',
-    link: null
-  },
-  {
-    type: 'providers',
-    key: 'Amazon',
-    name: 'Amazon EC2 provider',
-    link: 'http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html'
-  },
-  {
-    type: 'providers',
-    key: 'DigitalOcean',
-    name: 'DigitalOcean provider',
-    link: 'https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2'
-  }
-];

@@ -3,6 +3,7 @@ import digitaloceanDropletSummary from './digitalocean-droplet-summary';
 import DigitalOceanDropletConfig from './digitalocean-droplet-config';
 import actionConfig from './actions';
 import costPlanningConfig from './cost-planning';
+import './help';
 
 export default module => {
   module.directive('dropletResizeDialog', dropletResizeDialog);

@@ -1,39 +1,27 @@
-import {profileHelp, dashboardHelp, providersHelp} from './constants';
+import HelpRegistry from '../help/help-registry';
+import template from './help-details.html';
 import './help-details.scss';
 
 const helpDetails = {
-  templateUrl: 'views/help/details.html',
-  controllerAs: 'HelpDetails',
+  template: template,
   controller: class HelpDetailsController {
     // @ngInject
-    constructor($stateParams, alertsService, eventsService) {
+    constructor($stateParams) {
       this.$stateParams = $stateParams;
-      this.alertsService = alertsService;
-      this.eventsService = eventsService;
     }
 
     $onInit() {
-      this.model = this.getItem();
+      this.model = this.getModel();
     }
 
-    getItem() {
-      switch(this.$stateParams.name) {
-      case profileHelp.sshKeys.name:
-        return profileHelp.sshKeys;
-
-      case dashboardHelp.alertsList.name:
-        return angular.extend({
-          types: this.alertsService.getAvailableEventGroups()
-        }, dashboardHelp.alertsList);
-
-      case dashboardHelp.eventsList.name:
-        return angular.extend({
-          types: this.eventsService.getAvailableEventGroups()
-        }, dashboardHelp.eventsList);
-
-      default:
-        return providersHelp.filter(item => item.key === this.$stateParams.name)[0];
+    getModel() {
+      const helpData = HelpRegistry.get();
+      const helpItems = helpData[this.$stateParams.type].helpItems;
+      for(let item of helpItems) {
+        if (item.key !== this.$stateParams.name) continue;
+        return item;
       }
+      return null;
     }
   }
 };
