@@ -6,15 +6,16 @@ import sentryModule from './sentry';
 import { baseServiceClass, listCache } from './base-service';
 import servicesService from './services-service';
 import tabCounterService from './tab-counters-service';
-import { ncUtils, coreUtils } from './utils';
+import ncUtils from './ncUtils';
 import extensionPoint from './extension-point-directive';
 import extensionPointService from './extension-point-service';
 import injectServices from './services';
+import { translate } from '../i18n/translate';
 
 export default module => {
+  module.service('coreUtils', () => ({templateFormatter: translate}));
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
   module.service('ncUtils', ncUtils);
-  module.service('coreUtils', coreUtils);
   module.service('baseServiceClass', baseServiceClass);
   module.factory('listCache', listCache);
   module.service('servicesService', servicesService);

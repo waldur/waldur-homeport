@@ -1,14 +1,15 @@
 import openstackSnapshotsService from './openstack-snapshots-service';
-import { openstackSnapshotSummary } from './openstack-snapshot-summary';
 import openstackSnapshotsList from './openstack-snapshots-list';
 import openstackSnapshotsNestedList from './openstack-snapshots-nested-list';
 import restoredVolumesList from './openstack-snapshot-restored-volumes-list';
 import importModule from './import/module';
+import { OpenStackSnapshotSummary } from './OpenStackSnapshotSummary';
+import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
+  ResourceSummary.register('OpenStackTenant.Snapshot', OpenStackSnapshotSummary);
   module.config(tabsConfig);
   module.service('openstackSnapshotsService', openstackSnapshotsService);
-  module.component('openstackSnapshotSummary', openstackSnapshotSummary);
   module.component('openstackSnapshotsList', openstackSnapshotsList);
   module.component('openstackSnapshotsNestedList', openstackSnapshotsNestedList);
   module.component('restoredVolumesList', restoredVolumesList);

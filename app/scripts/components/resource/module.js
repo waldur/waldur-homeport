@@ -2,7 +2,7 @@ import resourceUtils from './resource-utils-service';
 import resourceDetails from './resource-details';
 import resourceRoutes from './routes';
 import resourceHeader from './resource-header';
-import resourceName from './resource-name';
+import resourceName from './ResourceName';
 import resourcesService from './resources-service';
 import ResourceProvisionPolicy from './resource-provision-policy';
 import resourceSummaryModule from './summary/module';

@@ -1,12 +1,13 @@
 import openstackSnapshotSchedulesList from './openstack-snapshot-schedules-list';
 import openstackSnapshotSchedulesService from './openstack-snapshot-schedules-service';
-import openstackSnapshotScheduleSummary from './openstack-snapshot-schedule-summary';
 import breadcrumbsConfig from './breadcrumbs';
+import { OpenStackSnapshotScheduleSummary } from './OpenStackSnapshotScheduleSummary';
+import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
+  ResourceSummary.register('OpenStackTenant.SnapshotSchedule', OpenStackSnapshotScheduleSummary);
   module.service('openstackSnapshotSchedulesService', openstackSnapshotSchedulesService);
   module.component('openstackSnapshotSchedulesList', openstackSnapshotSchedulesList);
-  module.component('openstackSnapshotScheduleSummary', openstackSnapshotScheduleSummary);
   module.config(actionConfig);
   module.config(tabsConfig);
   module.run(breadcrumbsConfig);

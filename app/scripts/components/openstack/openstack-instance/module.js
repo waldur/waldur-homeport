@@ -1,4 +1,3 @@
-import openstackInstanceSummary from './openstack-instance-summary';
 import openstackInstanceCheckoutSummary from './openstack-instance-checkout-summary';
 import OpenStackInstanceConfig from './openstack-instance-config';
 import openstackInstanceSecurityGroupsField from './openstack-instance-security-groups-field';
@@ -7,9 +6,11 @@ import openstackInstanceNetworks from './openstack-instance-networks';
 import openstackInstanceFloatingIps from './openstack-instance-floating-ips';
 import openstackInstanceDataVolume from './openstack-instance-data-volume';
 import actionConfig from './actions';
+import { OpenStackInstanceSummary } from './OpenStackInstanceSummary';
+import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
-  module.component('openstackInstanceSummary', openstackInstanceSummary);
+  ResourceSummary.register('OpenStackTenant.Instance', OpenStackInstanceSummary);
   module.component('openstackInstanceCheckoutSummary', openstackInstanceCheckoutSummary);
   module.component('openstackInstanceSecurityGroupsField', openstackInstanceSecurityGroupsField);
   module.component('openstackInstanceInternalIpsList', openstackInstanceInternalIpsList);

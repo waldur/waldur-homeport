@@ -5,15 +5,16 @@ import securityGroupsLink from './security-groups-link';
 import securityGroupsDialog from './security-groups-dialog';
 import filtersModule from './filters';
 import securityGroupRuleEditor from './security-group-rule-editor';
-import securityGroupSummary from './security-group-summary';
 import breadcrumbsConfig from './breadcrumbs';
+import { OpenStackSecurityGroupSummary } from './OpenStackSecurityGroupSummary';
+import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
+  ResourceSummary.register('OpenStack.SecurityGroup', OpenStackSecurityGroupSummary);
   module.service('openstackSecurityGroupsService', openstackSecurityGroupsService);
   module.component('openstackSecurityGroupsList', openstackSecurityGroupsList);
   module.component('securityGroupRulesList', securityGroupRulesList);
   module.component('securityGroupRuleEditor', securityGroupRuleEditor);
-  module.component('securityGroupSummary', securityGroupSummary);
   module.component('securityGroupsLink', securityGroupsLink);
   module.component('securityGroupsDialog', securityGroupsDialog);
   filtersModule(module);
