@@ -16,6 +16,9 @@ const resourceTabs = {
     $onInit() {
       const config = this.registry[this.resource.resource_type] || this.defaults;
       this.tabs = config.order.map(tab => angular.extend({name: tab}, config.options[tab]));
+      if (this.tabs.length === 0) {
+        return;
+      }
       let selectedTab = this.tabs.filter(tab => tab.name === this.selectedTabName)[0] || this.tabs[0];
       this.active = selectedTab.name;
     }

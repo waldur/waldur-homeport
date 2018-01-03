@@ -3,18 +3,14 @@ import * as React from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation } from '@waldur/i18n';
+import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { formatLongText } from '@waldur/table-react/utils';
 
 import { JiraIssueCreateButton } from './JiraIssueCreateButton';
-
-const IssueStatusField = props => (
-  <Tooltip label={props.row.type_description} id="issueType">
-    <img src={props.row.type_icon_url} style={{width: 16}} className="m-r-xs"/>
-    {props.row.status}
-  </Tooltip>
-);
+import { JiraIssuePriorityField } from './JiraIssuePriorityField';
+import { JiraIssueStatusField } from './JiraIssueStatusField';
 
 const IssueSlaField = withTranslation(props => (
   <Tooltip label={props.translate('Time to resolution')} id="slaField">
@@ -22,16 +18,28 @@ const IssueSlaField = withTranslation(props => (
   </Tooltip>
 ));
 
+const formatIssueKey = props => (
+  <ResourceLink
+    type="JIRA.Issue"
+    uuid={props.row.uuid}
+    label={props.row.key}
+  />
+);
+
 const TableComponent = props => {
   const { translate } = props;
   const columns = [
     {
       title: translate('Key'),
-      render: ({ row }) => row.key,
+      render: formatIssueKey,
     },
     {
       title: translate('Status'),
-      render: IssueStatusField,
+      render: ({ row }) => <JiraIssueStatusField {...row}/>,
+    },
+    {
+      title: translate('Priority'),
+      render: ({ row }) => <JiraIssuePriorityField {...row}/>,
     },
     {
       title: translate('Title'),

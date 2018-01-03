@@ -6,9 +6,9 @@ const getUrl = () => `${ENV.apiEndpoint}api/jira-issues/`;
 
 export const createIssue = (issue: JiraIssue) => (
   $http.post(getUrl(), {
-    project: issue.project.url,
+    jira_project: issue.project.url,
     parent: issue.parent && issue.parent.url,
-    resource: issue.resource && issue.resource.url,
+    scope: issue.resource && issue.resource.url,
     priority: issue.priority.url,
     type: issue.type.url,
     summary: issue.summary,

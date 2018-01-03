@@ -8,6 +8,7 @@ export function getResourceState(resource: Resource, translate: Translate): Stat
   const resourceType = formatResourceType(resource);
   const runtimeShutdownStates = ['SHUTOFF', 'STOPPED', 'SUSPENDED'];
   const runtimeErrorStates = ['ERROR', 'ERRED'];
+  const state = resource.state && resource.state.toLowerCase();
   const runtimeState = resource.runtime_state && resource.runtime_state.toUpperCase();
   let messageSuffix = null;
   const context = {
@@ -21,7 +22,7 @@ export function getResourceState(resource: Resource, translate: Translate): Stat
   if (runtimeErrorStates.indexOf(runtimeState) !== -1) {
     context.className = 'progress-bar-danger';
   }
-  if (resource.state.toLowerCase() === 'ok') {
+  if (state === 'ok') {
     if (runtimeShutdownStates.indexOf(runtimeState) !== -1) {
       context.className = 'progress-bar-plain';
     }
@@ -39,7 +40,7 @@ export function getResourceState(resource: Resource, translate: Translate): Stat
         context.tooltip += (', ' + messageSuffix);
       }
     }
-  } else if (resource.state.toLowerCase() === 'erred') {
+  } else if (state === 'erred') {
     context.className = 'progress-bar-warning';
     context.label = runtimeState || resource.state;
     context.tooltip = translate('Failed to operate with backend.');
