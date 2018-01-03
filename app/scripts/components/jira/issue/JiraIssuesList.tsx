@@ -85,9 +85,9 @@ const TableOptions = {
     row.type_name,
     row.status,
     row.summary,
-    row.description,
-    row.assignee_name,
-    row.first_response_sla,
+    row.description || 'N/A',
+    row.assignee_name || 'N/A',
+    row.first_response_sla || 'N/A',
     formatDateTime(row.created),
   ],
 };
