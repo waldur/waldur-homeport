@@ -1,7 +1,6 @@
 import openstackSecurityGroupsService from './security-groups-service';
 import openstackSecurityGroupsList from './security-groups-list';
 import securityGroupRulesList from './security-group-rules-list';
-import securityGroupsLink from './security-groups-link';
 import securityGroupsDialog from './security-groups-dialog';
 import filtersModule from './filters';
 import securityGroupRuleEditor from './security-group-rule-editor';
@@ -15,7 +14,6 @@ export default module => {
   module.component('openstackSecurityGroupsList', openstackSecurityGroupsList);
   module.component('securityGroupRulesList', securityGroupRulesList);
   module.component('securityGroupRuleEditor', securityGroupRuleEditor);
-  module.component('securityGroupsLink', securityGroupsLink);
   module.component('securityGroupsDialog', securityGroupsDialog);
   filtersModule(module);
   module.config(tabsConfig);

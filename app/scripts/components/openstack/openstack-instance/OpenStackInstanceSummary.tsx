@@ -1,20 +1,25 @@
 import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
+import { OpenStackSecurityGroupsLink } from '@waldur/openstack/openstack-security-groups/OpenStackSecurityGroupsLink';
 import { Field, ResourceSummaryProps, PureVirtualMachineSummary } from '@waldur/resource/summary';
 
-const SecurityGroupsLink = props => (
-  <span>{JSON.stringify(props.items)}</span>
-);
+const formatSecurityGroups = props => {
+  if (props.resource.security_groups) {
+    return <OpenStackSecurityGroupsLink items={props.resource.security_groups}/>;
+  } else {
+    return null;
+  }
+};
 
 const PureOpenStackInstanceSummary = (props: ResourceSummaryProps) => {
-  const { translate, resource } = props;
+  const { translate } = props;
   return (
     <span>
       <PureVirtualMachineSummary {...props}/>
       <Field
         label={translate('Security groups')}
-        value={resource.security_groups && <SecurityGroupsLink items={resource.security_groups}/>}
+        value={formatSecurityGroups(props)}
       />
     </span>
   );
