@@ -429,7 +429,7 @@ msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
-#: app/scripts/components/jira/issue/jira-issues-list.js
+#: app/scripts/components/jira/issue/JiraIssuesList.tsx
 msgid "Assigned to"
 msgstr ""
 
@@ -1054,7 +1054,7 @@ msgstr ""
 #: app/scripts/components/issues/create/issue-create-dialog.js
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/jira/issue/IssueCreateDialog.tsx
-#: app/scripts/components/jira/issue/jira-issues-list.js
+#: app/scripts/components/jira/issue/JiraIssueCreateButton.tsx
 msgid "Create request"
 msgstr ""
 
@@ -1085,7 +1085,7 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/expert-request-general-info.html
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
-#: app/scripts/components/jira/issue/jira-issues-list.js
+#: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
@@ -1214,7 +1214,7 @@ msgstr ""
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/issues/list/issues-short-list.html
 #: app/scripts/components/jira/issue/IssueCreateDialog.tsx
-#: app/scripts/components/jira/issue/jira-issues-list.js
+#: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/offering/offering-summary.html
@@ -2252,7 +2252,7 @@ msgstr ""
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/issues/list/issues-short-list.html
-#: app/scripts/components/jira/issue/jira-issues-list.js
+#: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/providers/details/provider-price-list.js
 msgid "Key"
 msgstr ""
@@ -2513,6 +2513,7 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
+#: app/scripts/components/jira/project/JiraProjectSummary.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/offering/appstore-offering.js
@@ -2700,10 +2701,6 @@ msgstr ""
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "No invoices found matching filter."
-msgstr ""
-
-#: app/scripts/components/jira/issue/jira-issues-list.js
-msgid "No issues found matching filter."
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-compare-list.js
@@ -4131,7 +4128,7 @@ msgstr ""
 msgid "Resolution"
 msgstr ""
 
-#: app/scripts/components/jira/issue/jira-issues-list.js
+#: app/scripts/components/jira/issue/JiraIssuesList.tsx
 msgid "Resolution SLA"
 msgstr ""
 
@@ -4733,7 +4730,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/issues/list/issues-list.js
-#: app/scripts/components/jira/issue/jira-issues-list.js
+#: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/user/user-popover-table.html
 msgid "Status"
 msgstr ""
@@ -5080,7 +5077,7 @@ msgstr ""
 msgid "Time in progress"
 msgstr ""
 
-#: app/scripts/components/jira/issue/jira-issues-list.js
+#: app/scripts/components/jira/issue/JiraIssuesList.tsx
 msgid "Time to resolution"
 msgstr ""
 
@@ -5094,7 +5091,7 @@ msgstr ""
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/list/issues-list.js
-#: app/scripts/components/jira/issue/jira-issues-list.js
+#: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/user/keys/key-list.js
 msgid "Title"
 msgstr ""
@@ -5752,10 +5749,6 @@ msgstr ""
 msgid "You have no invoices yet."
 msgstr ""
 
-#: app/scripts/components/jira/issue/jira-issues-list.js
-msgid "You have no issues yet."
-msgstr ""
-
 #: app/scripts/components/resource/list/resource-private-clouds-list.js
 msgid "You have no private clouds yet."
 msgstr ""
@@ -5935,6 +5928,10 @@ msgstr ""
 
 #: app/scripts/components/user/list/ProjectPermissions.tsx
 msgid "projects"
+msgstr ""
+
+#: app/scripts/components/jira/issue/JiraIssuesList.tsx
+msgid "requests"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-bar-chart.html

@@ -7,6 +7,7 @@ import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/re
 const formatProjectType = resource => (
   <Tooltip label={resource.template_description} id="projectType">
     <i className="fa fa-question-circle"></i>
+    {' '}
     {resource.template_name}
   </Tooltip>
 );
@@ -16,6 +17,10 @@ const PureJiraProjectSummary = (props: ResourceSummaryProps) => {
   return (
     <span>
       <PureResourceSummaryBase {...props}/>
+      <Field
+        label={translate('Name')}
+        value={resource.name}
+      />
       <Field
         label={translate('Project type')}
         value={formatProjectType(resource)}
