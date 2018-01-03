@@ -1,15 +1,14 @@
+export function getTypeDisplay(type) {
+  if (type === 'OpenStackTenant') {
+    type = 'OpenStack';
+  }
+  return type;
+}
+
+export function getServiceIcon(type) {
+  return `images/appstore/icon-${getTypeDisplay(type).toLowerCase()}.png`;
+}
+
 export default function ncServiceUtils() {
-  function getTypeDisplay(type) {
-    if (type === 'OpenStackTenant') {
-      type = 'OpenStack';
-    }
-    return type;
-  }
-  function getServiceIcon(type) {
-    return 'images/appstore/icon-' + getTypeDisplay(type).toLowerCase() + '.png';
-  }
-  return {
-    getTypeDisplay: getTypeDisplay,
-    getServiceIcon: getServiceIcon
-  };
+  return { getTypeDisplay, getServiceIcon };
 }

@@ -6,7 +6,7 @@ import { getTableOptions } from './registry';
 import { getTableState } from './store';
 
 function* fetchList(action) {
-  const table = action.payload.table;
+  const {table, extraFilter} = action.payload;
   try {
     const state = yield select(getTableState(table));
     const options = getTableOptions(table);
@@ -18,6 +18,7 @@ function* fetchList(action) {
       pagination: state.pagination,
       filter: {
         ...filter,
+        ...extraFilter,
       },
     };
     if (options.queryField && state.query !== '') {

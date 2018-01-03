@@ -9,7 +9,7 @@ export default function dropletResizeDialog() {
 }
 
 // @ngInject
-function DropletResizeDialogController($scope, resourcesService, resourceUtils,
+function DropletResizeDialogController($scope, $filter, resourcesService, resourceUtils,
   actionUtilsService, ActionResourceLoader) {
   angular.extend($scope, {
     loading: true,
@@ -27,7 +27,7 @@ function DropletResizeDialogController($scope, resourcesService, resourceUtils,
         $scope.error = error.message;
       });
     },
-    formatSize: resourceUtils.formatFlavor,
+    formatSize: resource => $filter('formatFlavor')(resource),
     loadDroplet: function() {
       return resourcesService.$get(null, null, $scope.resource.url, {
         field: ['cores', 'ram', 'disk']

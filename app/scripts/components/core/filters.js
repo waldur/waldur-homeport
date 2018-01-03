@@ -1,29 +1,5 @@
-function filesize() {
-  const units = ['MB', 'GB', 'TB', 'PB'];
-
-  return function(input) {
-    if (isNaN(parseFloat(input)) || ! isFinite(input)) {
-      return '?';
-    }
-
-    if (input === -1) {
-      return '∞';
-    }
-
-    if (input === 0) {
-      return input;
-    }
-
-    let unit = 0;
-
-    while (input >= 1024) {
-      input /= 1024;
-      unit++;
-    }
-
-    return Math.floor(input * 10) / 10 + ' ' + units[unit];
-  };
-}
+import { formatFilesize, formatSnakeCase } from './utils';
+import { formatDate, formatDateTime, minutesToHours } from './dateUtils';
 
 // @ngInject
 function trustAsHtml($sce) {
@@ -32,38 +8,11 @@ function trustAsHtml($sce) {
   };
 }
 
-
-function minutesToHours() {
-  return function(input) {
-    if (isNaN(parseInt(input)) || ! isFinite(input)) {
-      return '?';
-    }
-
-    if (input === -1) {
-      return '∞';
-    }
-
-    const hours = input / 60;
-    return hours.toFixed(2) + ' H';
-  };
-}
-
 function titleCase() {
   return function(input) {
     if (input) {
       return input.charAt(0).toUpperCase() + input.slice(1);
     }
-  };
-}
-
-function snakeCase() {
-  const SNAKE_CASE_REGEXP = /[A-Z]/g;
-  const separator = '-';
-
-  return function(input) {
-    return input.replace(SNAKE_CASE_REGEXP, function(letter, pos) {
-      return (pos ? separator : '') + letter.toLowerCase();
-    });
   };
 }
 
@@ -93,7 +42,7 @@ function defaultCurrency(ENV, $filter) {
 function shortDate() {
   return function(input) {
     if (input) {
-      return moment(input).format('YYYY-MM-DD');
+      return formatDate(input);
     }
   };
 }
@@ -101,7 +50,7 @@ function shortDate() {
 function dateTime() {
   return function(input) {
     if (input) {
-      return moment(input).format('YYYY-MM-DD HH:mm');
+      return formatDateTime(input);
     }
   };
 }
@@ -116,12 +65,12 @@ function decodeHtml($sce) {
 export default module => {
   module.filter('trustAsHtml', trustAsHtml);
   module.filter('decodeHtml', decodeHtml);
-  module.filter('filesize', filesize);
+  module.filter('filesize', () => formatFilesize);
   module.filter('titleCase', titleCase);
-  module.filter('snakeCase', snakeCase);
+  module.filter('snakeCase', () => formatSnakeCase);
   module.filter('replace', replace);
   module.filter('defaultCurrency', defaultCurrency);
   module.filter('shortDate', shortDate);
   module.filter('dateTime', dateTime);
-  module.filter('minutesToHours', minutesToHours);
+  module.filter('minutesToHours', () => minutesToHours);
 };

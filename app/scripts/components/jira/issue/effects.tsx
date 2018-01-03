@@ -1,18 +1,16 @@
 import { SubmissionError } from 'redux-form';
 import { takeEvery, put, call } from 'redux-saga/effects';
 
-import { closeModalDialog } from '@waldur/modal/actions';
+import { gotoResource } from '@waldur/resource/actions';
 
-import { createIssue, refreshIssueList, loadProjectIssues, loadProjectResources } from './actions';
-
+import { createIssue, loadProjectIssues, loadProjectResources } from './actions';
 import * as api from './api';
 
 function* handleCreateIssueSaga(action) {
   try {
-    yield call(api.createIssue, action.payload);
+    const response = yield call(api.createIssue, action.payload);
+    yield call(gotoResource, 'JIRA.Issue', response.data.uuid);
     yield put(createIssue.success());
-    yield put(refreshIssueList());
-    yield put(closeModalDialog());
   } catch (error) {
     const formError = new SubmissionError({
       _error: 'Unable to create request, please check your credentials and try again',

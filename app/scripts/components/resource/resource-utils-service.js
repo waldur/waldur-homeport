@@ -1,70 +1,14 @@
+import { getResourceIcon, formatResourceType, getListState } from './utils';
+
+const getIcon = item => {
+  const type = item.resource_type || item.type;
+  if (type) {
+    return getResourceIcon(type);
+  }
+  return null;
+};
+
 // @ngInject
-export default function resourceUtils(ncUtils, ncServiceUtils, authService, $filter) {
-  return {
-    setAccessInfo: function(resource) {
-      resource.access_info_text = gettext('No access info');
-      if (!resource.access_url) {
-        return;
-      }
-
-      if (ncUtils.startsWith(resource.access_url, 'http')) {
-        resource.access_info_url = resource.access_url;
-        resource.access_info_text = gettext('Open');
-
-        if (ncUtils.endsWith(resource.access_url, '/rdp/')) {
-          resource.access_info_text = gettext('Connect');
-          resource.access_info_url = authService.getDownloadLink(resource.access_url);
-        }
-      } else if (angular.isArray(resource.access_url)) {
-        // IP addresses
-        resource.access_info_text = resource.access_url.join(', ');
-      } else {
-        resource.access_info_text = resource.access_url;
-      }
-    },
-    getSummary: function(resource) {
-      let parts = [];
-      if (resource.image_name) {
-        parts.push(resource.image_name);
-      }
-      let flavor = this.formatFlavor(resource);
-      if (flavor) {
-        parts.push(flavor);
-      }
-      let summary = parts.join(', ');
-      return summary;
-    },
-    formatFlavor: function(resource) {
-      return $filter('formatFlavor')(resource);
-    },
-    formatResourceType: function(resource) {
-      let parts = resource.resource_type.split('.');
-      let service = ncServiceUtils.getTypeDisplay(parts[0]);
-      return service + ' ' + parts[1];
-    },
-    getUptime: function(resource) {
-      if (resource.start_time) {
-        return ncUtils.relativeDate(resource.start_time);
-      }
-    },
-    getIcon: function(item) {
-      let type = item.resource_type || item.type;
-      if (type) {
-        return ncServiceUtils.getServiceIcon(type.split('.')[0]);
-      }
-      return null;
-    },
-    getListState: function(resourceCategory) {
-      if (resourceCategory === 'apps') {
-        return 'project.resources.apps';
-      } else if (resourceCategory === 'private_clouds') {
-        return 'project.resources.clouds';
-      } else if (resourceCategory === 'storages') {
-        return 'project.resources.storage.tabs';
-      } else if(resourceCategory === 'vms') {
-        return 'project.resources.vms';
-      }
-      return 'project.resources.vms';
-    },
-  };
+export default function resourceUtils() {
+  return {formatResourceType, getIcon, getListState};
 }

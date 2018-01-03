@@ -61,9 +61,9 @@ const mapDispatchToProps = dispatch => ({
   showTypes: () => dispatch(showAlertTypes()),
 });
 
-const ProjectAlertsFeed = compose(
-  connectTable(TableOptions),
+const ProjectAlertsFeed: any = compose(
   connect(null, mapDispatchToProps),
+  connectTable(TableOptions),
 )(PureProjectAlertsFeed);
 
 export {

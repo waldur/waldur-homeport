@@ -62,9 +62,9 @@ const mapDispatchToProps = dispatch => ({
   showDetails: event => dispatch(showEventDetails(event)),
 });
 
-const ProjectEventsFeed = compose(
-  connectTable(TableOptions),
+const ProjectEventsFeed: any = compose(
   connect(null, mapDispatchToProps),
+  connectTable(TableOptions),
 )(PureProjectEventsFeed);
 
 export {

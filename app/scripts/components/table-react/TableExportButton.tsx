@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as Dropdown from 'react-bootstrap/lib/Dropdown';
-import * as MenuItem from 'react-bootstrap/lib/MenuItem';
 
 import { TranslateProps } from '@waldur/i18n/types';
 
@@ -36,9 +35,9 @@ const TableExportButton = ({ translate, exportAs }: Props) => {
       </Dropdown.Toggle>
       <Dropdown.Menu>
         {exporters.map(({ label, format }) => (
-          <MenuItem key={format} eventKey={format} onClick={() => exportAs(format)}>
-            {label}
-          </MenuItem>
+          <li role="presentation" key={format} onClick={() => exportAs(format)}>
+            <a role="menuitem" tabIndex={-1}>{label}</a>
+          </li>
         ))}
       </Dropdown.Menu>
     </Dropdown>

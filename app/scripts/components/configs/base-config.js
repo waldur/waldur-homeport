@@ -137,6 +137,7 @@ const ENV = {
     'OpenStack.Snapshot': 'storages',
     'SLURM.Allocation': 'slurm',
     'JIRA.Project': 'jiraProject',
+    'JIRA.Issue': 'jiraProject',
   },
   showCompare: [
     'Virtual machines'

@@ -1,18 +1,17 @@
 import openstackBackupSchedulesList from './openstack-backup-schedules-list';
 import openstackBackupSchedulesService from './openstack-backup-schedules-service';
-import openstackBackupScheduleSummary from './openstack-backup-schedule-summary';
 import breadcrumbsConfig from './breadcrumbs';
-import filtersModule from './filters';
+import { OpenStackBackupScheduleSummary } from './OpenStackBackupScheduleSummary';
+import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
+  ResourceSummary.register('OpenStackTenant.BackupSchedule', OpenStackBackupScheduleSummary);
   module.service('openstackBackupSchedulesService', openstackBackupSchedulesService);
   module.component('openstackBackupSchedulesList', openstackBackupSchedulesList);
-  module.component('openstackBackupScheduleSummary', openstackBackupScheduleSummary);
   module.config(actionConfig);
   module.config(tabsConfig);
   module.config(stateConfig);
   module.run(breadcrumbsConfig);
-  filtersModule(module);
 };
 
 // @ngInject
