@@ -5,7 +5,7 @@ import { withTranslation } from '@waldur/i18n';
 import { formatCrontab } from '@waldur/resource/crontab';
 import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
 
-const PureOpenStackSnapshotScheduleSummary = (props: ResourceSummaryProps) => {
+const PureOpenStackBackupScheduleSummary = (props: ResourceSummaryProps) => {
   const { translate, resource } = props;
   return (
     <span>
@@ -30,4 +30,4 @@ const PureOpenStackSnapshotScheduleSummary = (props: ResourceSummaryProps) => {
   );
 };
 
-export const OpenStackSnapshotScheduleSummary = withTranslation(PureOpenStackSnapshotScheduleSummary);
+export const OpenStackBackupScheduleSummary = withTranslation(PureOpenStackBackupScheduleSummary);
