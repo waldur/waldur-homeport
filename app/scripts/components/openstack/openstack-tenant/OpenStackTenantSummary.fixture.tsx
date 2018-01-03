@@ -14,10 +14,7 @@ export const renderSummary = props => {
   const store = mockStore({config: {tenantCredentialsVisible}});
   return mount(
     <Provider store={store}>
-      <OpenStackTenantSummary
-        {...rest}
-        translate={translate}
-      />
+      <OpenStackTenantSummary {...rest} translate={translate}/>
     </Provider>
   );
 };

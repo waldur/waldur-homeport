@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { formatFilesize } from '@waldur/core/utils';
+import { formatFilesize, minutesToHours } from '@waldur/core/utils';
 import { withTranslation } from '@waldur/i18n';
 import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
 
@@ -18,8 +18,6 @@ const formatSubmitDetails = props => (
     sbatch -A {props.resource.backend_id}
   </span>
 );
-
-const minutesToHours = value => (value / 60).toFixed(2) + ' H';
 
 const formatQuota = (translate, usage, limit) =>
   translate('{usage} of {limit}', {usage, limit});

@@ -40,3 +40,16 @@ export const listToDict = (key, value) => list => {
 };
 
 export const getUUID = url => url.split('/').splice(-2)[0];
+
+export const minutesToHours = input => {
+  if (isNaN(parseInt(input, 10)) || ! isFinite(input)) {
+    return '?';
+  }
+
+  if (input === -1) {
+    return '∞';
+  }
+
+  const hours = input / 60;
+  return hours.toFixed(2) + ' H';
+};

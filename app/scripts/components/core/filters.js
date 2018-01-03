@@ -1,25 +1,10 @@
 import { formatFilesize, formatSnakeCase } from './utils';
-import { formatDate, formatDateTime } from './dateUtils';
+import { formatDate, formatDateTime, minutesToHours } from './dateUtils';
 
 // @ngInject
 function trustAsHtml($sce) {
   return function(value) {
     return $sce.trustAsHtml(value);
-  };
-}
-
-function minutesToHours() {
-  return function(input) {
-    if (isNaN(parseInt(input)) || ! isFinite(input)) {
-      return '?';
-    }
-
-    if (input === -1) {
-      return '∞';
-    }
-
-    const hours = input / 60;
-    return hours.toFixed(2) + ' H';
   };
 }
 
@@ -87,5 +72,5 @@ export default module => {
   module.filter('defaultCurrency', defaultCurrency);
   module.filter('shortDate', shortDate);
   module.filter('dateTime', dateTime);
-  module.filter('minutesToHours', minutesToHours);
+  module.filter('minutesToHours', () => minutesToHours);
 };
