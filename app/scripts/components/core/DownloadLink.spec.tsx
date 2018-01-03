@@ -7,7 +7,7 @@ import { DownloadLink } from './DownloadLink';
 
 const renderLink = props => {
   const mockStore = configureStore();
-  const store = mockStore({authToken: 'VALID_TOKEN'});
+  const store = mockStore({currentUser: {token: 'VALID_TOKEN'}});
   const component = (
     <Provider store={store}>
       <DownloadLink {...props}/>

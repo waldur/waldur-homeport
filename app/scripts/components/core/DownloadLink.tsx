@@ -13,6 +13,6 @@ const PureDownloadLink = (props: DownloadLinkProps) => (
     url={`${props.url}?x-auth-token=${props.authToken}&download=true`}/>
 );
 
-const mapStateToProps = ({ authToken }) => ({ authToken });
+const mapStateToProps = state => ({ authToken: state.currentUser.token });
 
 export const DownloadLink = connect(mapStateToProps, null)(PureDownloadLink);
