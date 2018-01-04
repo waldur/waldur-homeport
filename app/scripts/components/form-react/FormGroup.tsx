@@ -1,3 +1,4 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 // @ts-ignore
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
@@ -12,14 +13,27 @@ interface FormGroupProps extends FormField {
 
 export class FormGroup extends React.PureComponent<FormGroupProps> {
   render() {
-    const { input, required, label, meta: {error}, children, ...rest } = this.props;
+    const {
+      input,
+      required,
+      label,
+      description,
+      labelClass,
+      controlClass,
+      meta: {error},
+      children,
+      ...rest,
+    } = this.props;
     return (
       <div className="form-group">
-        <label className="control-label">
+        <label className={classNames('control-label', labelClass)}>
           {label}{required && <span className="text-danger"> *</span>}
         </label>
-        {React.cloneElement((children as any), {input, ...rest})}
-        <FieldError error={error}/>
+        <div className={classNames(controlClass)}>
+          {React.cloneElement((children as any), {input, ...rest})}
+          {description && <p className="help-block m-b-none text-muted">{description}</p>}
+          <FieldError error={error}/>
+        </div>
       </div>
     );
   }
