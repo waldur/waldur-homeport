@@ -1,4 +1,4 @@
-import { ReactWrapper, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
