@@ -1,6 +1,6 @@
 import projectDetails from './project-details';
 import projectDetailsButton from './project-details-button';
-import projectCreate from './project-create';
+import projectCreate from './ProjectCreateContainer';
 import ProjectWorkspaceController from './project-workspace';
 import projectPolicies from './project-policies';
 import ProviderProjectsService from './project-providers-service';

@@ -1,4 +1,5 @@
 import store from './store';
+import { setCurrentCustomer } from './currentCustomer';
 import { setCurrentProject } from './currentProject';
 import { userLoggedIn, userUpdated, userLoggedOut } from './currentUser';
 import { localeUpdated } from './locale';
@@ -18,6 +19,10 @@ export function attachHooks($rootScope, authService, ENV) {
 
   $rootScope.$on('setCurrentProject', (event, { project }) => {
     store.dispatch(setCurrentProject(project));
+  });
+
+  $rootScope.$on('setCurrentCustomer', (event, { customer }) => {
+    store.dispatch(setCurrentCustomer(customer));
   });
 
   $rootScope.$on('logoutStart', () => {

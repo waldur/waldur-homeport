@@ -6,6 +6,8 @@ import { FormGroup } from './FormGroup';
 interface FormContainerProps {
   children: React.ReactNode;
   submitting: boolean;
+  labelClass?: string;
+  controlClass?: string;
 }
 
 export const FormContainer = (props: FormContainerProps) => (
@@ -16,6 +18,8 @@ export const FormContainer = (props: FormContainerProps) => (
         component={FormGroup}
         children={input}
         disabled={props.submitting}
+        labelClass={props.labelClass}
+        controlClass={props.controlClass}
       />
     ))}
   </div>

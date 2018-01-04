@@ -8,10 +8,13 @@ import { mountTestForm } from './testUtils';
 import { TextField } from './TextField';
 
 export const Component = options => props => {
-  const { submitting, required, onSubmit } = options;
+  const { submitting, required, onSubmit, description, labelClass, controlClass } = options;
   return (
     <form onSubmit={onSubmit && props.handleSubmit(onSubmit)}>
-      <FormContainer submitting={submitting}>
+      <FormContainer
+        submitting={submitting}
+        labelClass={labelClass}
+        controlClass={controlClass}>
         <StringField
           name="name"
           label="Project name"
@@ -21,6 +24,7 @@ export const Component = options => props => {
           name="description"
           label="Project description"
           required={required}
+          description={description}
         />
       </FormContainer>
     </form>
@@ -33,6 +37,7 @@ export const getFieldGroups = (wrapper: ReactWrapper) => wrapper.find('.form-gro
 export const getRequiredFields = (wrapper: ReactWrapper) => wrapper.find('.text-danger');
 export const submitForm = (wrapper: ReactWrapper) => wrapper.find('form').simulate('submit');
 export const getErrors = (wrapper: ReactWrapper) => wrapper.find('.help-block');
+export const getDescriptions = (wrapper: ReactWrapper) => wrapper.find('.text-muted');
 export const renderTestForm = options => mountTestForm(Component(options));
 
 export const OptionalFieldForm = formValues('type')(props => (

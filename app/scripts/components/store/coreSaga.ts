@@ -4,11 +4,12 @@ import { $rootScope } from '@waldur/core/services';
 
 export const EMIT_SIGNAL = 'waldur/core/EMIT_SIGNAL';
 
-export const emitSignal = (signal: string) => ({
+export const emitSignal = (signal: string, params?: {}) => ({
   type: EMIT_SIGNAL,
   signal,
+  params,
 });
 
 export default function* watchEmit() {
-  yield takeEvery<any>(EMIT_SIGNAL, action => $rootScope.$broadcast(action.signal));
+  yield takeEvery<any>(EMIT_SIGNAL, action => $rootScope.$broadcast(action.signal, action.params));
 }
