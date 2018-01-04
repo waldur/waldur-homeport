@@ -13,14 +13,12 @@ export const createProject = project =>
 export const loadCertifications = () =>
   $http
     .get(`${ENV.apiEndpoint}api/service-certifications/`)
-    .then(response => response.data)
-    .then(options => ({options}));
+    .then(response => response.data);
 
 export const loadProjectTypes = () =>
   $http
     .get(`${ENV.apiEndpoint}api/project-types/`)
-    .then(response => response.data)
-    .then(options => ({options}));
+    .then(response => response.data);
 
 export const gotoProjectDetails = project =>
   $state.go('project.details', {uuid: project.uuid});

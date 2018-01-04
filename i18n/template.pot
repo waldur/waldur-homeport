@@ -5288,6 +5288,10 @@ msgstr ""
 msgid "Unable to load expert request."
 msgstr ""
 
+#: app/scripts/components/project/ProjectCreateContainer.tsx
+msgid "Unable to load project types or certifications."
+msgstr ""
+
 #: app/scripts/components/user/user-popover.html
 msgid "Unable to load user."
 msgstr ""

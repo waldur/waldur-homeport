@@ -3,14 +3,14 @@ import * as React from 'react';
 import {
   StringField,
   TextField,
-  SelectAsyncField,
+  SelectField,
   FormContainer,
   FieldError,
   SubmitButton
 } from '@waldur/form-react';
 
 const validateProjectName = (value, _, props) =>
-  (props.customer.projects.find(project => project.name === value)) ?
+  props.customer.projects.find(project => project.name === value) ?
   props.translate('Name is duplicated. Choose other name.') :
   undefined;
 
@@ -33,23 +33,27 @@ export const ProjectCreateForm = props => (
         label={props.translate('Project description')}
         name="description"
       />
-      <SelectAsyncField
-        label={props.translate('Project type')}
-        name="type"
-        loadOptions={props.loadProjectTypes}
-        labelKey="name"
-        valueKey="url"
-      />
-      <SelectAsyncField
-        label={props.translate('Certifications')}
-        name="certifications"
-        description={props.translate('Provider certification required by this project.')}
-        placeholder={props.translate('Select certifications')}
-        loadOptions={props.loadCertifications}
-        labelKey="name"
-        valueKey="url"
-        multi={true}
-      />
+      {props.projectTypes.length >= 1 && (
+        <SelectField
+          label={props.translate('Project type')}
+          name="type"
+          options={props.projectTypes}
+          labelKey="name"
+          valueKey="url"
+        />
+      )}
+      {props.certifications.length >= 1 && (
+        <SelectField
+          label={props.translate('Certifications')}
+          name="certifications"
+          description={props.translate('Provider certification required by this project.')}
+          placeholder={props.translate('Select certifications')}
+          options={props.certifications}
+          labelKey="name"
+          valueKey="url"
+          multi={true}
+        />
+      )}
     </FormContainer>
     <div className="form-group">
       <div className="col-sm-offset-3 col-sm-5">
