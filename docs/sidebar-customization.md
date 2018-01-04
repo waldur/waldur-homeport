@@ -25,12 +25,12 @@ Plugins are allowed to inject custom items into sidebar. Sidebar item has follow
 Consider the following example:
 ```json
   {
-    label: gettext('Providers'),
-    icon: 'fa-database',
-    link: 'organization.providers({uuid: $ctrl.context.customer.uuid})',
-    feature: 'providers',
-    countFieldKey: 'services',
-    index: 200,
+    "label": "Providers",
+    "icon": "fa-database",
+    "link": "organization.providers({uuid: $ctrl.context.customer.uuid})",
+    "feature": "providers",
+    "countFieldKey": "services",
+    "index": 200,
   }
 ```
 
