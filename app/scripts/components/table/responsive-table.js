@@ -11,6 +11,8 @@
     field according to configuration parameter `toBeFeatures`.
 */
 
+import { formatDateShort } from '@waldur/core/dateUtils';
+
 // @ngInject
 export default function responsiveTable($rootScope, $q, $timeout, $interval, $compile, $filter, ENV, features) {
   return {
@@ -383,7 +385,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       }
 
       function getExportButtons(columnsCount, rowActions, formats) {
-        let title = document.title + ' - ' + moment().format('YYYY-MM-DD');
+        let title = document.title + ' - ' + formatDateShort(new Date());
         let exportOptions = {};
         if (rowActions) {
           exportOptions.columns = range(columnsCount);

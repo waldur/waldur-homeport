@@ -14,7 +14,7 @@ export interface Event {
   user_full_name: string;
   user_username: string;
   importance: string;
-  timestamp: string;
+  ['@timestamp']: string;
   ip_address: string;
   event_type: string;
   error_message: string;

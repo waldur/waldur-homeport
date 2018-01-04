@@ -1,8 +1,8 @@
-import * as moment from 'moment';
 import * as React from 'react';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { $state } from '@waldur/core/services';
-import { gettext } from '@waldur/i18n';
+import { Translate } from '@waldur/i18n';
 
 import { Event } from './types';
 
@@ -10,47 +10,51 @@ interface EventField {
   key: string;
   title: string;
   href?: (event: Event) => string;
+  render?: (event: Event) => React.ReactNode;
 }
 
-const FIELDS: EventField[] = [
+const getFields: (translate: Translate) => EventField[] = translate => [
   {
-    key: 'timestamp',
-    title: gettext('Timestamp'),
+    key: '@timestamp',
+    title: translate('Timestamp'),
+    render: event => formatDateTime(event['@timestamp']),
   },
   {
     key: 'username',
-    title: gettext('User'),
+    title: translate('User'),
     href: event => $state.href('users.details', { uuid: event.user_uuid }),
+    render: event => event.user_full_name || event.user_username,
   },
   {
     key: 'ip_address',
-    title: gettext('IP address'),
+    title: translate('IP address'),
   },
   {
     key: 'importance',
-    title: gettext('Importance'),
+    title: translate('Importance'),
+    render: event => <span style={{ textTransform: 'capitalize' }}>{event.importance}</span>,
   },
   {
     key: 'event_type',
-    title: gettext('Event type'),
+    title: translate('Event type'),
   },
   {
     key: 'error_message',
-    title: gettext('Error message'),
+    title: translate('Error message'),
   },
   {
     key: 'customer_name',
-    title: gettext('Organization'),
+    title: translate('Organization'),
     href: event => $state.href('organization.details', { uuid: event.customer_uuid }),
   },
   {
     key: 'project_name',
-    title: gettext('Project'),
+    title: translate('Project'),
     href: event => $state.href('project.details', { uuid: event.project_uuid }),
   },
   {
     key: 'service_name',
-    title: gettext('Provider'),
+    title: translate('Provider'),
     href: event => $state.href('organization.providers', {
       uuid: event.customer_uuid,
       providerUuid: event.service_uuid,
@@ -59,7 +63,7 @@ const FIELDS: EventField[] = [
   },
   {
     key: 'resource_full_name',
-    title: gettext('Resource'),
+    title: translate('Resource'),
     href: event => $state.href('resources.details', {
       uuid: event.resource_uuid,
       resource_type: event.resource_type,
@@ -67,38 +71,42 @@ const FIELDS: EventField[] = [
   },
   {
     key: 'resource_configuration',
-    title: gettext('Resource configuration'),
+    title: translate('Resource configuration'),
   },
   {
     key: 'message',
-    title: gettext('Message'),
+    title: translate('Message'),
   },
   {
     key: 'issue_link',
-    title: gettext('Issue link'),
+    title: translate('Issue link'),
   },
 ];
 
-const formatEvent = (event: Event) => ({
-  ...event,
-  timestamp: moment(event['@timestamp']).format('YYYY-MM-DD HH:mm'),
-  username: event.user_full_name || event.user_username,
-  importance: event.importance.toUpperCase(),
-});
+const renderField = (field: EventField, event: Event) => {
+  const renderValue = () => (
+    field.render ?
+      field.render(event) :
+      event[field.key]
+  );
+  return (
+    field.href ?
+      <a href={field.href(event)}>{renderValue()}</a> :
+      renderValue()
+  );
+};
 
-const renderField = (field: EventField, event: Event) => (
-  field.href ?
-    <a href={field.href(event)}>{event[field.key]}</a> :
-    event[field.key]
-);
+interface Props {
+  event: Event;
+  translate: Translate;
+}
 
-export const EventDetailsTable = ({event}: {event: Event}) => {
-  const data = formatEvent(event);
-  const fields = FIELDS.filter(field => data.hasOwnProperty(field.key));
+export const EventDetailsTable = ({event, translate}: Props) => {
+  const fields = getFields(translate).filter(field => event[field.key] !== undefined);
   const rows = fields.map(field =>
     <tr key={field.key}>
       <td>{field.title}</td>
-      <td>{renderField(field, data)}</td>
+      <td>{renderField(field, event)}</td>
     </tr>
   );
   return (

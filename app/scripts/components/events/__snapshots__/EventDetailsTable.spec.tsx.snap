@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventDetailsDialog renders shallow with ordinary values as expected 1`] = `
+<table
+  className="table table-borderless"
+>
+  <tbody>
+    <tr
+      key="@timestamp"
+    >
+      <td>
+        Timestamp
+      </td>
+      <td>
+        2016-01-05 00:00
+      </td>
+    </tr>
+    <tr
+      key="ip_address"
+    >
+      <td>
+        IP address
+      </td>
+      <td>
+        192.168.11.101
+      </td>
+    </tr>
+    <tr
+      key="importance"
+    >
+      <td>
+        Importance
+      </td>
+      <td>
+        <span
+          style={
+            Object {
+              "textTransform": "capitalize",
+            }
+          }
+        >
+          normal
+        </span>
+      </td>
+    </tr>
+    <tr
+      key="event_type"
+    >
+      <td>
+        Event type
+      </td>
+      <td>
+        role_granted
+      </td>
+    </tr>
+    <tr
+      key="error_message"
+    >
+      <td>
+        Error message
+      </td>
+      <td>
+        Extreme mistake
+      </td>
+    </tr>
+    <tr
+      key="customer_name"
+    >
+      <td>
+        Organization
+      </td>
+      <td>
+        <a
+          href="organization.details"
+        >
+          Oxford University
+        </a>
+      </td>
+    </tr>
+    <tr
+      key="project_name"
+    >
+      <td>
+        Project
+      </td>
+      <td>
+        <a
+          href="project.details"
+        >
+          Waldur Gate
+        </a>
+      </td>
+    </tr>
+    <tr
+      key="service_name"
+    >
+      <td>
+        Provider
+      </td>
+      <td>
+        <a
+          href="organization.providers"
+        >
+          Service
+        </a>
+      </td>
+    </tr>
+    <tr
+      key="resource_full_name"
+    >
+      <td>
+        Resource
+      </td>
+      <td>
+        <a
+          href="resources.details"
+        >
+          Particular Resource
+        </a>
+      </td>
+    </tr>
+    <tr
+      key="resource_configuration"
+    >
+      <td>
+        Resource configuration
+      </td>
+      <td>
+        ResConf
+      </td>
+    </tr>
+    <tr
+      key="message"
+    >
+      <td>
+        Message
+      </td>
+      <td>
+        Oh no, I have to write a message down!
+      </td>
+    </tr>
+    <tr
+      key="issue_link"
+    >
+      <td>
+        Issue link
+      </td>
+      <td>
+        http://domain.com/123
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

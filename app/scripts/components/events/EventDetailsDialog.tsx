@@ -14,7 +14,7 @@ interface Props extends TranslateProps {
 
 const PureEventDetailsDialog = (props: Props) => (
   <ModalDialog title={props.translate('Event details')} footer={<CloseDialogButton/>}>
-    <EventDetailsTable event={props.resolve.event}/>
+    <EventDetailsTable event={props.resolve.event} translate={props.translate} />
   </ModalDialog>
 );
 

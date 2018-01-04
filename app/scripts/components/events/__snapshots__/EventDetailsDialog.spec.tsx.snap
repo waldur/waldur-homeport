@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventDetailsDialog renders fully with ordinary values as expected 1`] = `
+<div>
+  <div
+    class="modal-header"
+  >
+    <h3
+      class="modal-title"
+    >
+      Event details
+    </h3>
+  </div>
+  <div
+    class="modal-body"
+  >
+    <table
+      class="table table-borderless"
+    >
+      <tbody>
+        <tr>
+          <td>
+            Timestamp
+          </td>
+          <td>
+            2016-01-05 00:00
+          </td>
+        </tr>
+        <tr>
+          <td>
+            IP address
+          </td>
+          <td>
+            192.168.11.101
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Importance
+          </td>
+          <td>
+            <span
+              style="text-transform:capitalize"
+            >
+              normal
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Event type
+          </td>
+          <td>
+            role_granted
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Error message
+          </td>
+          <td>
+            Extreme mistake
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Organization
+          </td>
+          <td>
+            <a
+              href="organization.details"
+            >
+              Oxford University
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Project
+          </td>
+          <td>
+            <a
+              href="project.details"
+            >
+              Waldur Gate
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Provider
+          </td>
+          <td>
+            <a
+              href="organization.providers"
+            >
+              Service
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Resource
+          </td>
+          <td>
+            <a
+              href="resources.details"
+            >
+              Particular Resource
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Resource configuration
+          </td>
+          <td>
+            ResConf
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Message
+          </td>
+          <td>
+            Oh no, I have to write a message down!
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Issue link
+          </td>
+          <td>
+            http://domain.com/123
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    class="modal-footer"
+  >
+    <button
+      class="btn btn-default"
+      type="button"
+    >
+      <span>
+        Cancel
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`EventDetailsDialog renders shallow with ordinary values as expected 1`] = `
+<Connect(PureEventDetailsDialog)
+  resolve={
+    Object {
+      "event": Object {
+        "@timestamp": "2016-01-05",
+        "customer_name": "Oxford University",
+        "customer_uuid": "345",
+        "error_message": "Extreme mistake",
+        "event_type": "role_granted",
+        "importance": "normal",
+        "ip_address": "192.168.11.101",
+        "issue_link": "http://domain.com/123",
+        "link": "http://domain.com",
+        "message": "Oh no, I have to write a message down!",
+        "project_name": "Waldur Gate",
+        "project_uuid": "234",
+        "resource_configuration": "ResConf",
+        "resource_full_name": "Particular Resource",
+        "resource_type": "ResType",
+        "resource_uuid": "567",
+        "service_name": "Service",
+        "service_type": "Specific",
+        "service_uuid": "456",
+        "user_full_name": "Some One",
+        "user_username": "someone",
+        "user_uuid": "123",
+      },
+    }
+  }
+  translate={[Function]}
+/>
+`;

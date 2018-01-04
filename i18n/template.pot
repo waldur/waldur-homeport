@@ -1403,9 +1403,8 @@ msgstr ""
 msgid "Enter date"
 msgstr ""
 
-#: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
-#: app/scripts/components/events/EventDetailsDialog.tsx
 #: app/scripts/components/events/EventDetailsTable.tsx
+#: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 msgid "Error message"
 msgstr ""
 
@@ -2956,7 +2955,6 @@ msgstr ""
 
 #: app/scripts/components/customer/popover/customer-popover.html
 #: app/scripts/components/experts/requests/details/expert-request-details-dialog.html
-#: app/scripts/components/modal/CloseDialogButton.tsx
 #: app/scripts/components/project/project-dialog.html
 #: app/scripts/components/providers/details/dialog.html
 #: app/scripts/components/user/user-popover.html
