@@ -1,6 +1,7 @@
 // @ngInject
 export default function ProjectWorkspaceController(
   $scope,
+  ENV,
   currentStateService,
   tabCounterService,
   eventsService,
@@ -50,12 +51,14 @@ export default function ProjectWorkspaceController(
   function setItems(customItems) {
     $scope.items = [
       {
+        key: 'dashboard',
         icon: 'fa-th-large',
         label: gettext('Dashboard'),
         link: 'project.details({uuid: $ctrl.context.project.uuid})',
         index: 100,
       },
       {
+        key: 'appstore',
         icon: 'fa-shopping-cart',
         label: gettext('Service store'),
         feature: 'appstore',
@@ -74,6 +77,7 @@ export default function ProjectWorkspaceController(
         orderByLabel: true,
         children: [
           {
+            key: 'vms',
             link: 'project.resources.vms({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-desktop',
             label: gettext('Virtual machines'),
@@ -82,6 +86,7 @@ export default function ProjectWorkspaceController(
             index: 100,
           },
           {
+            key: 'private_clouds',
             link: 'project.resources.clouds({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-cloud',
             label: gettext('Private clouds'),
@@ -90,6 +95,7 @@ export default function ProjectWorkspaceController(
             index: 200,
           },
           {
+            key: 'storages',
             link: 'project.resources.storage.tabs({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-hdd-o',
             label: gettext('Storage'),
@@ -100,6 +106,7 @@ export default function ProjectWorkspaceController(
         ]
       },
       {
+        key: 'eventlog',
         link: 'project.events({uuid: $ctrl.context.project.uuid})',
         icon: 'fa-bell-o',
         label: gettext('Audit logs'),
@@ -107,6 +114,7 @@ export default function ProjectWorkspaceController(
         index: 500,
       },
       {
+        key: 'support',
         link: 'project.issues({uuid: $ctrl.context.project.uuid})',
         icon: 'fa-question-circle',
         label: gettext('Issues'),
@@ -114,6 +122,7 @@ export default function ProjectWorkspaceController(
         index: 600,
       },
       {
+        key: 'alerts',
         link: 'project.alerts({uuid: $ctrl.context.project.uuid})',
         icon: 'fa-fire',
         label: gettext('Alerts'),
@@ -131,6 +140,7 @@ export default function ProjectWorkspaceController(
         index: 800,
       },
       {
+        key: 'cost-planning',
         label: gettext('Cost planning'),
         icon: 'fa-calculator',
         link: 'project.cost-planning({uuid: $ctrl.context.project.uuid})',
@@ -139,6 +149,32 @@ export default function ProjectWorkspaceController(
       }
     ];
     $scope.items = SidebarExtensionService.mergeItems($scope.items, customItems);
+    $scope.items = filterItemsByProjectType($scope.items);
+  }
+
+  function filterItemsByProjectType(items) {
+    const fn = getFilterFunction();
+    if (!fn) {
+      return items;
+    }
+    return fn(items).map(parent => {
+      if (parent.children) {
+        return {...parent, children: fn(parent.children)};
+      } else {
+        return parent;
+      }
+    });
+  }
+
+  function getFilterFunction() {
+    const conf = ENV.sidebarItemsByProjectType;
+    const sidebarItems = conf && conf[$scope.currentProject.type_name];
+    if (!sidebarItems) {
+      return;
+    }
+    const itemsMap = sidebarItems.reduce((map, item) => ({...map, [item]: true}), {});
+    const filterItems = items => items.filter(item => itemsMap[item.key]);
+    return filterItems;
   }
 
   function refreshProject() {
