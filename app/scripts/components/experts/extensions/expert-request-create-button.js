@@ -3,6 +3,9 @@ import { APPSTORE_CATEGORY } from './../constants';
 
 const expertRequestCreateButton = {
   template,
+  bindings: {
+    selectProject: '<',
+  },
   controller: class ExpertRequestCreateButtonController {
     // @ngInject
     constructor(AppStoreUtilsService) {
@@ -10,7 +13,7 @@ const expertRequestCreateButton = {
     }
 
     openExpertsStore() {
-      return this.AppStoreUtilsService.openDialog({currentCategory: APPSTORE_CATEGORY});
+      return this.AppStoreUtilsService.openDialog({currentCategory: APPSTORE_CATEGORY, selectProject: this.selectProject});
     }
   }
 };

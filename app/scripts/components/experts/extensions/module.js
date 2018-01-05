@@ -10,7 +10,7 @@ import './dashboard-quotas';
 function registerExtensionPoint(extensionPointService, features) {
   if (features.isVisible('experts')) {
     extensionPointService.register('project-dashboard-button', '<expert-request-create-button/>');
-    extensionPointService.register('organization-dashboard-button', '<expert-request-create-button/>');
+    extensionPointService.register('organization-dashboard-button', '<expert-request-create-button select-project=true />');
     extensionPointService.register('organization-selector', workspaceSelector);
     extensionPointService.register('organization-dashboard-button', customerWorkspace);
   }
