@@ -699,7 +699,6 @@ msgstr ""
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.html
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/digitalocean/droplet-resize.html
-#: app/scripts/components/events/TypeListDialog.tsx
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/details/expert-bid-dialog.html
 #: app/scripts/components/experts/requests/create/expert-contract-create.html
@@ -1404,7 +1403,7 @@ msgstr ""
 msgid "Enter date"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 msgid "Error message"
 msgstr ""
@@ -1443,11 +1442,11 @@ msgstr ""
 msgid "Evaluate"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsDialog.tsx
 msgid "Event details"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 msgid "Event type"
 msgstr ""
 
@@ -1885,7 +1884,7 @@ msgstr ""
 msgid "ID code"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 msgid "IP address"
 msgstr ""
 
@@ -1954,7 +1953,7 @@ msgstr ""
 msgid "Import volume"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 msgid "Importance"
 msgstr ""
 
@@ -2202,7 +2201,7 @@ msgstr ""
 msgid "Issue key"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/offering/offering-summary.html
 msgid "Issue link"
 msgstr ""
@@ -2452,8 +2451,8 @@ msgid "Member"
 msgstr ""
 
 #: app/scripts/components/alerts/base-alerts-list.js
+#: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/events/base-event-list.js
-#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/user/list/UserEvents.tsx
 msgid "Message"
 msgstr ""
@@ -2955,7 +2954,6 @@ msgid "Notifications"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-popover.html
-#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/experts/requests/details/expert-request-details-dialog.html
 #: app/scripts/components/project/project-dialog.html
 #: app/scripts/components/providers/details/dialog.html
@@ -3036,6 +3034,7 @@ msgid "Only staff can unlink provider."
 msgstr ""
 
 #: app/scripts/components/alerts/alert-filter.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: app/scripts/components/resource/summary/ResourceAccessInfo.tsx
 msgid "Open"
@@ -3058,7 +3057,7 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/experts/bids/expert-bids-list.js
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/issues/create/issue-create-dialog.html
@@ -3576,7 +3575,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/invitations/actions/invitation-dialog.html
 #: app/scripts/components/issues/create/issue-create-dialog.html
 #: app/scripts/components/issues/issue-detail.html
@@ -3711,6 +3710,7 @@ msgstr ""
 #: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
@@ -4139,12 +4139,12 @@ msgstr ""
 msgid "Resolution SLA"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/issues/create/issue-create-dialog.html
 msgid "Resource"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 msgid "Resource configuration"
 msgstr ""
 
@@ -4513,10 +4513,6 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.js
 msgid "Server error occurred."
-msgstr ""
-
-#: app/scripts/components/events/event-details-dialog.html
-msgid "Service"
 msgstr ""
 
 #: app/scripts/components/issues/types/constants.js
@@ -5090,8 +5086,8 @@ msgid "Time to resolution"
 msgstr ""
 
 #: app/scripts/components/alerts/base-alerts-list.js
+#: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/events/base-event-list.js
-#: app/scripts/components/events/event-details-dialog.html
 #: app/scripts/components/user/list/UserEvents.tsx
 msgid "Timestamp"
 msgstr ""
@@ -5419,7 +5415,7 @@ msgstr ""
 msgid "Usage"
 msgstr ""
 
-#: app/scripts/components/events/event-details-dialog.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
 msgid "User"

@@ -25,7 +25,7 @@ class ImportsWalker extends Lint.RuleWalker {
     if (!importFrom) {
       throw Error('importFrom must be defined');
     }
-    if (importFrom.substr(0, 2) === './') {
+    if (importFrom.substr(0, 2) === './' || importFrom.substr(0, 3) === '../') {
       return Category.Local;
     }
     if (importFrom.substr(0, 7) === '@waldur') {
@@ -39,12 +39,11 @@ class ImportsWalker extends Lint.RuleWalker {
     if (importFromDirty) {
       const importFrom = importFromDirty.replace(/['"]+/g, '');
       const fromCategory = this.getCategory(importFrom);
-      // console.log('import > ' + importFrom + ' / ' + fromCategory);
 
       if (this.lastFromCategory && this.lastFromCategory > fromCategory) {
         this.addFailure(this.createFailure(
           node.getStart(), node.getWidth(),
-          'incorrect order of import categories, make sure imports are ordered global first, then @waldur, then local (./)'));
+          'incorrect order of import categories, make sure imports are ordered global first, then @waldur, then local (./ or ../)'));
       }
 
       if (this.lastFromCategory && this.lastFromCategory !== fromCategory) {

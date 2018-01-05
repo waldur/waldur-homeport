@@ -16,4 +16,9 @@ describe('dateUtils', () => {
   it('strips suffix for relative date formatting', () => {
     expect(dateUtils.formatRelative(new Date())).toBe('a few seconds');
   });
+
+  it('formats medium date and time given a date-only string', () => {
+    expect(dateUtils.formatMediumDateTime('2014-12-21')).toEqual('Dec 21, 2014 12:00:00 AM');
+  });
+
 });

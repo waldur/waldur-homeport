@@ -1,6 +1,6 @@
-import * as moment from 'moment';
 import * as React from 'react';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { eventFormatter } from '@waldur/events/services';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getCurrentUser } from '@waldur/table-react/selectors';
@@ -13,7 +13,7 @@ const EventMessageField = ({ row }) => (
 );
 
 const EventDateField = ({ row }) => (
-  <span>{moment(row['@timestamp']).format('YYYY-MM-DD HH:mm')}</span>
+  <span>{formatDateTime(row['@timestamp'])}</span>
 );
 
 const TableComponent = props => {

@@ -13,3 +13,6 @@ export const formatFromNow: DateFormatter = date =>
 
 export const formatRelative: DateFormatter = date =>
   moment(date).fromNow(true);
+
+export const formatMediumDateTime: DateFormatter = date =>
+  moment(date).format('MMM D, Y h:mm:ss A');

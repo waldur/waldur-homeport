@@ -152,7 +152,6 @@
     "pofile": "^1.0.9",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.5",
-    "react-test-renderer": "^16.0.0",
     "react2angular": "^3.0.1",
     "redux-mock-store": "^1.2.3",
     "sass-loader": "^6.0.6",
