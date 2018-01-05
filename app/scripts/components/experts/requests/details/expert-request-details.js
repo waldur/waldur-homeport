@@ -62,9 +62,8 @@ const expertRequestDetails = {
       }).catch(response => {
         if (response.status === 404) {
           this.$state.go('errorPage.notFound');
-        } else {
-          this.erred = true;
         }
+        this.erred = true;
         this.loading = false;
         this.$scope.$digest();
       });
@@ -101,7 +100,7 @@ const expertRequestDetails = {
     }
 
     get showBidDetails() {
-      return this.workspace === 'organization' && this.expertRequest.state === 'Pending';
+      return this.workspace === 'organization' && this.expertRequest.state === STATE.PENDING;
     }
 
     initTabs() {
