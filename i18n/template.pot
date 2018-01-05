@@ -3034,6 +3034,7 @@ msgid "Only staff can unlink provider."
 msgstr ""
 
 #: app/scripts/components/alerts/alert-filter.html
+#: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: app/scripts/components/resource/summary/ResourceAccessInfo.tsx
 msgid "Open"

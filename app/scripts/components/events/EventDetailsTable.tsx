@@ -1,117 +1,88 @@
 import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { $state } from '@waldur/core/services';
-import { Translate } from '@waldur/i18n';
+import { ExternalLink } from '@waldur/core/ExternalLink';
+import { TranslateProps } from '@waldur/i18n';
 
+import { EventField } from './EventField';
 import { Event } from './types';
 
-interface EventField {
-  key: string;
-  title: string;
-  href?: (event: Event) => string;
-  render?: (event: Event) => React.ReactNode;
-}
-
-const getFields: (translate: Translate) => EventField[] = translate => [
-  {
-    key: '@timestamp',
-    title: translate('Timestamp'),
-    render: event => formatDateTime(event['@timestamp']),
-  },
-  {
-    key: 'username',
-    title: translate('User'),
-    href: event => $state.href('users.details', { uuid: event.user_uuid }),
-    render: event => event.user_full_name || event.user_username,
-  },
-  {
-    key: 'ip_address',
-    title: translate('IP address'),
-  },
-  {
-    key: 'importance',
-    title: translate('Importance'),
-    render: event => <span style={{ textTransform: 'capitalize' }}>{event.importance}</span>,
-  },
-  {
-    key: 'event_type',
-    title: translate('Event type'),
-  },
-  {
-    key: 'error_message',
-    title: translate('Error message'),
-  },
-  {
-    key: 'customer_name',
-    title: translate('Organization'),
-    href: event => $state.href('organization.details', { uuid: event.customer_uuid }),
-  },
-  {
-    key: 'project_name',
-    title: translate('Project'),
-    href: event => $state.href('project.details', { uuid: event.project_uuid }),
-  },
-  {
-    key: 'service_name',
-    title: translate('Provider'),
-    href: event => $state.href('organization.providers', {
-      uuid: event.customer_uuid,
-      providerUuid: event.service_uuid,
-      providerType: event.service_type,
-    }),
-  },
-  {
-    key: 'resource_full_name',
-    title: translate('Resource'),
-    href: event => $state.href('resources.details', {
-      uuid: event.resource_uuid,
-      resource_type: event.resource_type,
-    }),
-  },
-  {
-    key: 'resource_configuration',
-    title: translate('Resource configuration'),
-  },
-  {
-    key: 'message',
-    title: translate('Message'),
-  },
-  {
-    key: 'issue_link',
-    title: translate('Issue link'),
-  },
-];
-
-const renderField = (field: EventField, event: Event) => {
-  const renderValue = () => (
-    field.render ?
-      field.render(event) :
-      event[field.key]
-  );
-  return (
-    field.href ?
-      <a href={field.href(event)}>{renderValue()}</a> :
-      renderValue()
-  );
-};
-
-interface Props {
+interface EventDetailsTableProps extends TranslateProps {
   event: Event;
-  translate: Translate;
 }
 
-export const EventDetailsTable = ({event, translate}: Props) => {
-  const fields = getFields(translate).filter(field => event[field.key] !== undefined);
-  const rows = fields.map(field =>
-    <tr key={field.key}>
-      <td>{field.title}</td>
-      <td>{renderField(field, event)}</td>
-    </tr>
-  );
-  return (
-    <table className="table table-borderless">
-      <tbody>{rows}</tbody>
-    </table>
-  );
-};
+export const EventDetailsTable = ({ translate, event }: EventDetailsTableProps) => (
+  <table className="table table-borderless">
+    <tbody>
+      <EventField
+        label={translate('Timestamp')}
+        value={formatDateTime(event['@timestamp'])}
+      />
+      <EventField
+        label={translate('User')}
+        state="users.details"
+        params={{ uuid: event.user_uuid }}
+        value={event.user_full_name || event.user_username}
+      />
+      <EventField
+        label={translate('IP address')}
+        value={event.ip_address}
+      />
+      <EventField
+        label={translate('Importance')}
+        value={<span style={{ textTransform: 'capitalize' }}>{event.importance}</span>}
+      />
+      <EventField
+        label={translate('Event type')}
+        value={event.event_type}
+      />
+      <EventField
+        label={translate('Error message')}
+        value={event.error_message}
+      />
+      <EventField
+        label={translate('Organization')}
+        value={event.customer_name}
+        state="organization.details"
+        params={{ uuid: event.customer_uuid }}
+      />
+      <EventField
+        label={translate('Project')}
+        value={event.project_name}
+        state="project.details"
+        params={{ uuid: event.project_uuid }}
+      />
+      <EventField
+        label={translate('Provider')}
+        value={event.service_name}
+        state="organization.providers"
+        params={{
+          uuid: event.customer_uuid,
+          providerUuid: event.service_uuid,
+          providerType: event.service_type,
+        }}
+      />
+      <EventField
+        label={translate('Resource')}
+        value={event.resource_full_name}
+        state="resources.details"
+        params={{
+          uuid: event.resource_uuid,
+          resource_type: event.resource_type,
+        }}
+      />
+      <EventField
+        label={translate('Resource configuration')}
+        value={event.resource_configuration}
+      />
+      <EventField
+        label={translate('Message')}
+        value={event.message}
+      />
+      <EventField
+        label={translate('Issue link')}
+        value={event.issue_link && <ExternalLink label={translate('Open')} url={event.issue_link}/>}
+      />
+    </tbody>
+  </table>
+);
