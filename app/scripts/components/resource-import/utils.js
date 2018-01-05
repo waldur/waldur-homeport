@@ -43,6 +43,7 @@ export default class ImportUtils {
     }
 
     return {
+      key: 'import',
       title: title || gettext('Import'),
       iconClass: 'fa fa-plus',
       callback: callback || function() {
