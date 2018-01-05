@@ -23,8 +23,9 @@ export default class TableExtensionService {
 
   registerItems(table, key, items) {
     this._tables[table] = this._tables[table] || {};
-    this._tables[table][key] = this._tables[table][key] || [];
-    this._tables[table][key] = this._tables[table][key].concat(items);
+    this._tables[table][key] = this._tables[table][key] || {};
+    const map = items.reduce((result, item) => ({...result, [item.key]: item}), {});
+    this._tables[table][key] = {...this._tables[table][key], ...map};
   }
 
   getItems(table, key) {
@@ -34,6 +35,6 @@ export default class TableExtensionService {
     }
 
     // always immutable
-    return angular.copy(result);
+    return angular.copy(Object.values(result));
   }
 }
