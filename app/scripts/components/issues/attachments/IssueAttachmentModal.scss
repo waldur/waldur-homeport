@@ -1,0 +1,32 @@
+
+
+.attachment-modal {
+  .modal-title h3 {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 275px;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.attachment-modal__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-height: 100%;
+  }
+}
+
+.attachment-modal__close {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  padding: 5px 9px;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 28px;
+}

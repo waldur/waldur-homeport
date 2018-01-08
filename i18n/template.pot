@@ -456,6 +456,10 @@ msgstr ""
 msgid "Attaching"
 msgstr ""
 
+#: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
+msgid "Attachments"
+msgstr ""
+
 #: app/scripts/components/resource/tabs/constants.js
 msgid "Audit log"
 msgstr ""
@@ -1377,6 +1381,14 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
+#: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
+msgid "Drop files to attach them to the issue"
+msgstr ""
+
+#: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
+msgid "Drop files to attach, or"
+msgstr ""
+
 #: app/scripts/components/billing/invoice-details.html
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
@@ -1690,12 +1702,20 @@ msgstr ""
 msgid "Field length must be less than {maxlength} symbols"
 msgstr ""
 
+#: app/scripts/components/issues/attachments/utils.ts
+msgid "File"
+msgstr ""
+
 #: app/scripts/components/core/DownloadLink/effects.tsx
 msgid "File download has been started."
 msgstr ""
 
 #: app/scripts/components/core/DownloadLink/effects.tsx
 msgid "File has been downloaded."
+msgstr ""
+
+#: app/scripts/components/issues/attachments/utils.ts
+msgid "Files"
 msgstr ""
 
 #: app/scripts/components/issues/create/issue-registration.html
@@ -4384,6 +4404,10 @@ msgstr ""
 msgid "Restored volumes"
 msgstr ""
 
+#: app/scripts/components/issues/attachments/utils.ts
+msgid "Restricted, because of type."
+msgstr ""
+
 #: app/scripts/components/resource/state/constants.js
 msgid "Restroing"
 msgstr ""
@@ -5436,9 +5460,17 @@ msgstr ""
 msgid "Unable to delete application"
 msgstr ""
 
+#: app/scripts/components/issues/attachments/effects.ts
+msgid "Unable to delete attachment"
+msgstr ""
+
 #: app/scripts/components/project/project-providers-service.js
 #: app/scripts/components/providers/details/provider-projects.js
 msgid "Unable to delete link."
+msgstr ""
+
+#: app/scripts/components/issues/attachments/effects.ts
+msgid "Unable to fetch attachment"
 msgstr ""
 
 #: app/scripts/components/table-react/Table.tsx
@@ -5503,6 +5535,10 @@ msgstr ""
 
 #: app/scripts/components/providers/effects.tsx
 msgid "Unable to update provider."
+msgstr ""
+
+#: app/scripts/components/issues/attachments/effects.ts
+msgid "Unable to upload attachment"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.js
@@ -6081,6 +6117,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "bootable"
+msgstr ""
+
+#: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
+msgid "browse"
 msgstr ""
 
 #: app/scripts/components/issues/comments/issue-comments-list.html
