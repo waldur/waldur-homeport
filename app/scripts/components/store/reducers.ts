@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
 import { dashboardChart } from '@waldur/dashboard/chart/reducers';
+import { reducer as provider } from '@waldur/providers/reducers';
 import { reducer as tables } from '@waldur/table-react/store';
 
 import { reducer as config } from './config';
@@ -19,4 +20,5 @@ export default combineReducers({
   currentProject,
   currentUser,
   locale,
+  provider,
 });

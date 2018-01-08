@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
-import { getTypeDisplay, getServiceIcon } from '@waldur/providers/utils';
+import { getTypeDisplay, getServiceIcon } from '@waldur/providers/registry';
 
 export const getResourceIcon = type =>
   getServiceIcon(type.split('.')[0]);

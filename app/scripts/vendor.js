@@ -38,7 +38,6 @@ import 'angular-translate';
 import 'angular-translate-storage-cookie';
 import 'angular-translate-storage-local';
 import 'angular-translate-loader-static-files';
-import 'ng-file-upload';
 import 'angular-sanitize';
 import 'angular-ui-bootstrap';
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';

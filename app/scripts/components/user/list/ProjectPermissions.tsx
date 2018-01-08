@@ -7,21 +7,25 @@ import ProjectLink from './ProjectLink';
 
 const TableComponent = props => {
   const { translate } = props;
-  return <Table {...props} columns={[
-    {
-      title: translate('Project name'),
-      render: ProjectLink,
-    },
-    {
-      title: translate('Organization'),
-      render: ({ row }) => <span>{row.customer_name}</span>,
-    },
-    {
-      title: translate('Role'),
-      render: ({ row }) => <span>{translate(row.role)}</span>,
-    },
-  ]}
-  verboseName={translate('projects')}/>;
+  return (
+    <Table
+      {...props}
+      columns={[
+        {
+          title: translate('Project name'),
+          render: ProjectLink,
+        },
+        {
+          title: translate('Organization'),
+          render: ({ row }) => <span>{row.customer_name}</span>,
+        },
+        {
+          title: translate('Role'),
+          render: ({ row }) => <span>{translate(row.role)}</span>,
+        },
+      ]}
+      verboseName={translate('projects')}/>
+  );
 };
 
 const TableOptions = {

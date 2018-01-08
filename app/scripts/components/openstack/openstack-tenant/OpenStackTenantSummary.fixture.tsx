@@ -5,6 +5,7 @@ import configureStore from 'redux-mock-store';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { translate } from '@waldur/i18n';
+import '@waldur/openstack/provider';
 
 import { OpenStackTenantSummary } from './OpenStackTenantSummary';
 

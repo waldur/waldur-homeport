@@ -1,24 +1,5 @@
 import { formatRelative } from './dateUtils';
-
-function isFileOption(option) {
-  return option.type === 'file upload';
-}
-
-function isFileValue(value) {
-  return value.toString() === '[object File]';
-}
-
-function getFilename(value) {
-  if (!value) {
-    return '';
-  }
-  else if (value.length === 1) {
-    return value[0].name;
-  } else if (angular.isString(value)) {
-    let parts = value.split('/');
-    return parts[parts.length - 1];
-  }
-}
+import { getUUID } from './utils';
 
 function getPrettyQuotaName(name) {
   return name.replace(/nc_|_count/g, '').replace(/_/g, ' ');
@@ -55,10 +36,6 @@ function getQueryString() {
     return parts[1];
   }
   return '';
-}
-
-function getUUID(url) {
-  return url.split('/').splice(-2)[0];
 }
 
 function renderLink(href, name) {
@@ -176,9 +153,6 @@ function sortArrayOfObjects(arr, field, desc) {
 }
 
 export default () => ({
-  isFileOption,
-  isFileValue,
-  getFilename,
   getPrettyQuotaName,
   isCustomerQuotaReached,
   getQuotaUsage,

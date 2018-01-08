@@ -38,6 +38,11 @@ msgstr ""
 msgid "A profile has been created."
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackForm.tsx
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "API URL"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html
 msgid "API token lifetime"
 msgstr ""
@@ -65,6 +70,14 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 #: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
 msgid "Access"
+msgstr ""
+
+#: app/scripts/components/aws/AmazonForm.tsx
+msgid "Access key ID"
+msgstr ""
+
+#: app/scripts/components/digitalocean/DigitalOceanForm.tsx
+msgid "Access token"
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.html
@@ -209,7 +222,7 @@ msgstr ""
 msgid "Add project member"
 msgstr ""
 
-#: app/scripts/components/providers/create.html
+#: app/scripts/components/providers/ProviderCreateForm.tsx
 #: app/scripts/components/providers/provider-list.js
 msgid "Add provider"
 msgstr ""
@@ -478,12 +491,21 @@ msgstr ""
 msgid "Auto-assign floating IP"
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackForm.tsx
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "Availability zone"
+msgstr ""
+
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
 msgid "Available quota usage: {usage}"
 msgstr ""
 
 #: app/scripts/components/azure/help.js
 msgid "Azure provider"
+msgstr ""
+
+#: app/scripts/components/azure/AzureForm.tsx
+msgid "Azure region where to provision resources (default: \"Central US\")"
 msgstr ""
 
 #: app/scripts/components/navigation/header/site-header.html
@@ -513,6 +535,10 @@ msgstr ""
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 msgid "Backend ID"
+msgstr ""
+
+#: app/scripts/components/jira/JiraForm.tsx
+msgid "Backend URL"
 msgstr ""
 
 #: app/scripts/components/resource/state/constants.js
@@ -625,8 +651,7 @@ msgstr ""
 msgid "Both VMs and applications are counted as resources."
 msgstr ""
 
-#: app/scripts/components/providers/create.html
-#: app/scripts/components/providers/details/provider-settings.html
+#: app/scripts/components/azure/AzureForm.tsx
 msgid "Browse"
 msgstr ""
 
@@ -707,7 +732,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 #: app/scripts/components/plans/plans-list.html
 #: app/scripts/components/project/ProjectCreateForm.tsx
-#: app/scripts/components/providers/create.html
+#: app/scripts/components/providers/ProviderCreateForm.tsx
 #: app/scripts/components/resource-import/resource-import-dialog.html
 #: app/scripts/components/resource/actions/dialog/action-dialog.html
 #: app/scripts/components/team/add-project-member.html
@@ -816,6 +841,14 @@ msgstr ""
 
 #: app/scripts/components/alerts/alert-filter.html
 msgid "Closed"
+msgstr ""
+
+#: app/scripts/components/azure/AzureForm.tsx
+msgid "Cloud service group to assign all connected SPLs to"
+msgstr ""
+
+#: app/scripts/components/azure/AzureForm.tsx
+msgid "Cloud service name"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-compare-list.js
@@ -1038,7 +1071,7 @@ msgstr ""
 msgid "Create proposal"
 msgstr ""
 
-#: app/scripts/components/customer/routes.js
+#: app/scripts/components/providers/routes.js
 msgid "Create provider"
 msgstr ""
 
@@ -1177,6 +1210,19 @@ msgstr ""
 msgid "Deactivating"
 msgstr ""
 
+#: app/scripts/components/slurm/SlurmForm.tsx
+msgid "Default SLURM account for user"
+msgstr ""
+
+#: app/scripts/components/slurm/SlurmForm.tsx
+msgid "Default account"
+msgstr ""
+
+#: app/scripts/components/openstack/OpenStackForm.tsx
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "Default availability zone for provisioned instances."
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-items.html
 #: app/scripts/components/experts/bids/details/expert-bid-details.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
@@ -1305,6 +1351,14 @@ msgstr ""
 
 #: app/scripts/components/navigation/header/docs-link.html
 msgid "Documentation"
+msgstr ""
+
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "Domain"
+msgstr ""
+
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
 #: app/scripts/components/billing/invoice-header.html
@@ -1614,6 +1668,11 @@ msgstr ""
 msgid "External IP"
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackForm.tsx
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "External network ID"
+msgstr ""
+
 #: app/scripts/components/resource/state/utils.ts
 msgid "Failed to operate with backend."
 msgstr ""
@@ -1668,8 +1727,16 @@ msgstr ""
 msgid "Flavor"
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "Flavor exclude regex"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "Flavor name"
+msgstr ""
+
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "Flavors matching this regex expression will not be pulled from the backend."
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html
@@ -1753,6 +1820,10 @@ msgstr ""
 msgid "GPU usage"
 msgstr ""
 
+#: app/scripts/components/slurm/SlurmForm.tsx
+msgid "Gateway"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 msgid "Gateway IP"
 msgstr ""
@@ -1820,6 +1891,18 @@ msgstr ""
 msgid "Homepage"
 msgstr ""
 
+#: app/scripts/components/slurm/SlurmForm.tsx
+msgid "Hostname"
+msgstr ""
+
+#: app/scripts/components/slurm/SlurmForm.tsx
+msgid "Hostname or IP address of gateway node"
+msgstr ""
+
+#: app/scripts/components/slurm/SlurmForm.tsx
+msgid "Hostname or IP address of master node"
+msgstr ""
+
 #: app/scripts/components/providers/details/provider-price-list.js
 msgid "Hourly rate"
 msgstr ""
@@ -1829,7 +1912,7 @@ msgstr ""
 msgid "How to generate SSH key"
 msgstr ""
 
-#: app/scripts/components/providers/create.html
+#: app/scripts/components/providers/ProviderHelpLink.tsx
 msgid "How to obtain credentials"
 msgstr ""
 
@@ -1935,6 +2018,10 @@ msgstr ""
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Importing resources"
+msgstr ""
+
+#: app/scripts/components/azure/AzureForm.tsx
+msgid "In the format of GUID"
 msgstr ""
 
 #: app/scripts/components/issues/types/constants.js
@@ -2200,6 +2287,11 @@ msgstr ""
 msgid "Issues"
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackForm.tsx
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "It is used to automatically assign floating IP to your virtual machine."
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
 msgid "Item"
@@ -2207,6 +2299,14 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-price-list.js
 msgid "Item type"
+msgstr ""
+
+#: app/scripts/components/jira/JiraForm.tsx
+msgid "JIRA host (e.g. https://jira.example.com/)"
+msgstr ""
+
+#: app/scripts/components/jira/JiraForm.tsx
+msgid "JIRA user with excessive privileges"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
@@ -2248,6 +2348,11 @@ msgstr ""
 
 #: app/scripts/components/user/keys/help.js
 msgid "Keys"
+msgstr ""
+
+#: app/scripts/components/openstack/OpenStackForm.tsx
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.js
@@ -2326,6 +2431,10 @@ msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
 msgid "Loading..."
+msgstr ""
+
+#: app/scripts/components/azure/AzureForm.tsx
+msgid "Location"
 msgstr ""
 
 #: app/scripts/components/navigation/header/logout-link.html
@@ -2509,7 +2618,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/details/provider-details.html
-#: app/scripts/components/providers/details/provider-settings.js
 #: app/scripts/components/providers/provider-list.js
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
@@ -2876,10 +2984,6 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
-#: app/scripts/components/providers/create.html
-msgid "Not all required fields have been entered."
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 msgid "Not assigned"
 msgstr ""
@@ -3220,6 +3324,9 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
 #: app/scripts/components/azure/AzureVirtualMachineSummary.tsx
+#: app/scripts/components/jira/JiraForm.tsx
+#: app/scripts/components/openstack/OpenStackForm.tsx
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
 #: app/scripts/components/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "Password"
 msgstr ""
@@ -3391,13 +3498,17 @@ msgstr ""
 msgid "Please wait until provisioning is completed."
 msgstr ""
 
-#: app/scripts/components/providers/details/provider-settings.html
+#: app/scripts/components/providers/ProviderUpdateComponent.tsx
 msgid "Please wait while provider is being configured."
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-policies.html
 #: app/scripts/components/project/project-dialog.html
 msgid "Policies"
+msgstr ""
+
+#: app/scripts/components/slurm/SlurmForm.tsx
+msgid "Port"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rules-list.html
@@ -3523,6 +3634,10 @@ msgstr ""
 #: app/scripts/components/navigation/app-footer.html
 #: app/scripts/components/routes/about.js
 msgid "Privacy policy"
+msgstr ""
+
+#: app/scripts/components/azure/AzureForm.tsx
+msgid "Private certificate file"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js
@@ -3741,14 +3856,6 @@ msgstr ""
 msgid "Provider does not comply with project policies"
 msgstr ""
 
-#: app/scripts/components/providers/create.js
-msgid "Provider has been created."
-msgstr ""
-
-#: app/scripts/components/providers/details/provider-settings.js
-msgid "Provider has been updated."
-msgstr ""
-
 #: app/scripts/components/providers/provider-list.js
 msgid "Provider has resources. Please remove them first."
 msgstr ""
@@ -3758,7 +3865,7 @@ msgid "Provider is in erred state."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html
-#: app/scripts/components/providers/create.html
+#: app/scripts/components/providers/ProviderNameField.tsx
 msgid "Provider name"
 msgstr ""
 
@@ -3770,7 +3877,7 @@ msgstr ""
 msgid "Provider quota has reached threshold."
 msgstr ""
 
-#: app/scripts/components/providers/create.html
+#: app/scripts/components/providers/ProviderTypeField.tsx
 msgid "Provider type"
 msgstr ""
 
@@ -3780,10 +3887,10 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/analytics/dashboard-cost-chart.html
-#: app/scripts/components/customer/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/help/constants.js
 #: app/scripts/components/project/project-dialog.html
+#: app/scripts/components/providers/routes.js
 msgid "Providers"
 msgstr ""
 
@@ -4328,8 +4435,8 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/project/project-providers.html
+#: app/scripts/components/providers/ProviderUpdateForm.tsx
 #: app/scripts/components/providers/details/provider-projects.html
-#: app/scripts/components/providers/details/provider-settings.html
 #: app/scripts/components/team/add-project-member.js
 #: app/scripts/components/team/add-team-member.js
 msgid "Save"
@@ -4355,6 +4462,10 @@ msgstr ""
 
 #: app/scripts/components/appstore/dialog/appstore-category-selector.html
 msgid "Search by name"
+msgstr ""
+
+#: app/scripts/components/aws/AmazonForm.tsx
+msgid "Secret access key"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -4448,8 +4559,8 @@ msgstr ""
 msgid "Select provider"
 msgstr ""
 
-#: app/scripts/components/providers/create.html
-msgid "Select provider type..."
+#: app/scripts/components/providers/ProviderTypeField.tsx
+msgid "Select provider type"
 msgstr ""
 
 #: app/scripts/components/issues/types/issue-type-select.html
@@ -4577,6 +4688,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/module.js
 msgid "Set rules"
+msgstr ""
+
+#: app/scripts/components/slurm/SlurmForm.tsx
+msgid "Set to true to activate privilege escalation"
 msgstr ""
 
 #: app/scripts/components/providers/details/dialog.html
@@ -4817,6 +4932,10 @@ msgstr ""
 msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
+#: app/scripts/components/azure/AzureForm.tsx
+msgid "Subscription ID"
+msgstr ""
+
 #: app/scripts/components/billing/invoice-details.html
 msgid "Subtotal"
 msgstr ""
@@ -4917,6 +5036,10 @@ msgstr ""
 msgid "Tenant"
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "Tenant ID"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js
 msgid "Tenant has been assigned to the package."
 msgstr ""
@@ -4925,6 +5048,7 @@ msgstr ""
 msgid "Tenant has been updated."
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackForm.tsx
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
@@ -4935,6 +5059,16 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js
 msgid "Tenant package has been changed."
+msgstr ""
+
+#: app/scripts/components/openstack/OpenStackForm.tsx
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "Tenant user password"
+msgstr ""
+
+#: app/scripts/components/openstack/OpenStackForm.tsx
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
+msgid "Tenant user username"
 msgstr ""
 
 #: app/scripts/components/experts/expert-provider-details.html
@@ -5292,6 +5426,10 @@ msgstr ""
 msgid "Unable to load project types or certifications."
 msgstr ""
 
+#: app/scripts/components/providers/ProviderUpdateComponent.tsx
+msgid "Unable to load provider."
+msgstr ""
+
 #: app/scripts/components/user/user-popover.html
 msgid "Unable to load user."
 msgstr ""
@@ -5302,10 +5440,6 @@ msgstr ""
 
 #: app/scripts/components/invitations/actions/send.js
 msgid "Unable to resend invitation."
-msgstr ""
-
-#: app/scripts/components/providers/details/provider-settings.js
-msgid "Unable to save provider."
 msgstr ""
 
 #: app/scripts/components/auth/auth-init.js
@@ -5417,6 +5551,10 @@ msgstr ""
 
 #: app/scripts/components/plans/plans-list.html
 msgid "Usage"
+msgstr ""
+
+#: app/scripts/components/slurm/SlurmForm.tsx
+msgid "Use sudo"
 msgstr ""
 
 #: app/scripts/components/events/EventDetailsTable.tsx
@@ -5552,7 +5690,11 @@ msgstr ""
 #: app/scripts/components/azure/AzureVirtualMachineSummary.tsx
 #: app/scripts/components/freeipa/freeipa-account-create.html
 #: app/scripts/components/freeipa/freeipa-account-edit.html
+#: app/scripts/components/jira/JiraForm.tsx
+#: app/scripts/components/openstack/OpenStackForm.tsx
+#: app/scripts/components/openstack/OpenStackTenantForm.tsx
 #: app/scripts/components/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: app/scripts/components/slurm/SlurmForm.tsx
 #: app/scripts/components/team/user-selector.html
 msgid "Username"
 msgstr ""
@@ -5684,6 +5826,10 @@ msgstr ""
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr ""
 
+#: app/scripts/components/azure/AzureForm.tsx
+msgid "X509 certificate in .PEM format"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -5735,6 +5881,10 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers.html
 msgid "You don't have enough permission to edit providers for current project."
+msgstr ""
+
+#: app/scripts/components/providers/ProviderUpdateComponent.tsx
+msgid "You don't have enough permissions to edit settings for <strong>{name}</strong> provider."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js

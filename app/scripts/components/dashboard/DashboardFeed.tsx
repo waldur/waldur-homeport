@@ -35,7 +35,7 @@ class DashboardFeed extends React.PureComponent<Props> {
     return (
       <div className="pull-right">
         <a className="btn btn-xs btn-link" onClick={showTypes}>
-          <i className="fa fa-question-circle"></i> {typesTitle}
+          <i className="fa fa-question-circle"/> {typesTitle}
         </a>
       </div>
     );
@@ -72,7 +72,7 @@ class DashboardFeed extends React.PureComponent<Props> {
             {props.translate('Details')}
           </a>
         )}
-        <div dangerouslySetInnerHTML={{__html: item.html_message}}></div>
+        <div dangerouslySetInnerHTML={{__html: item.html_message}}/>
         <small className="pull-right">{formatFromNow(item.created)}</small>
         <small className="text-muted">{formatMediumDateTime(item.created)}</small>
       </div>

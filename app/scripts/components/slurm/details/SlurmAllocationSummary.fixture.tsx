@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 import { translate } from '@waldur/i18n';
+import '@waldur/slurm/provider';
 
 import { SlurmAllocationSummary } from './SlurmAllocationSummary';
 

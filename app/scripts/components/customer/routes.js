@@ -108,14 +108,6 @@ export default function organizationRoutes($stateProvider) {
       }
     })
 
-    .state('organization.providers', {
-      url: 'providers/?providerUuid&providerType',
-      template: '<providers-list/>',
-      data: {
-        pageTitle: gettext('Providers')
-      }
-    })
-
     .state('organization.manage', {
       url: 'manage/',
       template: '<customer-manage></customer-manage>',
@@ -137,14 +129,6 @@ export default function organizationRoutes($stateProvider) {
       template: '<project-create></project-create>',
       data: {
         pageTitle: gettext('Create project'),
-      }
-    })
-
-    .state('organization.createProvider', {
-      url: 'createProvider/',
-      template: '<provider-create></provider-create>',
-      data: {
-        pageTitle: gettext('Create provider')
       }
     });
 }

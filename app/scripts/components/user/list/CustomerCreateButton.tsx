@@ -8,12 +8,12 @@ import ActionButton from '@waldur/table-react/ActionButton';
 import { canCreateOrganization } from '@waldur/table-react/selectors';
 
 const CustomerCreateButton = ({ isVisible, onClick, translate }) => (
-  isVisible ?
+  isVisible ? (
     <ActionButton
       title={translate('Add organization')}
       action={onClick}
       icon={'fa fa-plus'}/>
-    : null
+  ) : null
 );
 
 const customerCreateDialog = () => openModalDialog('customerCreateDialog', {size: 'lg'});

@@ -7,3 +7,5 @@ export { SubmitButton } from './SubmitButton';
 export { FormContainer } from './FormContainer';
 export { FieldError } from './FieldError';
 export { FormGroup } from './FormGroup';
+export { SecretField } from './SecretField';
+export { FileUploadField } from './FileUploadField';

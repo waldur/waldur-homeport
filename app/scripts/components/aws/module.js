@@ -1,5 +1,5 @@
 import './help';
-
+import './provider';
 
 export default module => {
   module.run(costPlanningConfig);

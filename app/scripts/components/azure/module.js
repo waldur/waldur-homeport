@@ -1,5 +1,6 @@
 import azureVirtualMachineConfig from './azure-virtual-machine-config';
 import './help';
+import './provider';
 import { AzureVirtualMachineSummary } from './AzureVirtualMachineSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 

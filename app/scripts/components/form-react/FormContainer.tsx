@@ -12,7 +12,7 @@ interface FormContainerProps {
 
 export const FormContainer = (props: FormContainerProps) => (
   <div>
-    {React.Children.map(props.children, input => (input &&
+    {React.Children.map(props.children, input => (input && (input as any).props.name ?
       <Field
         {...(input as any).props}
         component={FormGroup}
@@ -20,7 +20,7 @@ export const FormContainer = (props: FormContainerProps) => (
         disabled={props.submitting}
         labelClass={props.labelClass}
         controlClass={props.controlClass}
-      />
+      /> : input
     ))}
   </div>
 );

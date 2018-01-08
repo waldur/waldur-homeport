@@ -54,6 +54,18 @@ class HelpRegistry {
 
     return sortedHelpData;
   }
+
+  hasItem(type, name) {
+    const helpItems = this.helpData[type] && this.helpData[type].helpItems;
+    if (!helpItems) return false;
+
+    for (const item of helpItems) {
+      if (item.key === name) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 const HelpRegistryController = new HelpRegistry();

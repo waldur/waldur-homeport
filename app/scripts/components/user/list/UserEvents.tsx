@@ -18,24 +18,26 @@ const EventDateField = ({ row }) => (
 
 const TableComponent = props => {
   const { translate } = props;
-  return <Table {...props} columns={[
-    {
-      title: translate('Message'),
-      render: EventMessageField,
-    },
-    {
-      title: translate('Timestamp'),
-      render: EventDateField,
-    },
-    {
-      title: translate('Actions'),
-      render: EventDetailsButton,
-      className: 'text-center col-md-2',
-    },
-  ]}
-  hasQuery={true}
-  verboseName={translate('events')}
-  actions={<EventTypesButton/>}/>;
+  return (
+    <Table {...props} columns={[
+      {
+        title: translate('Message'),
+        render: EventMessageField,
+      },
+      {
+        title: translate('Timestamp'),
+        render: EventDateField,
+      },
+      {
+        title: translate('Actions'),
+        render: EventDetailsButton,
+        className: 'text-center col-md-2',
+      },
+    ]}
+    hasQuery={true}
+    verboseName={translate('events')}
+    actions={<EventTypesButton/>}/>
+  );
 };
 
 const TableOptions = {

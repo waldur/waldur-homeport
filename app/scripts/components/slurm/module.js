@@ -12,6 +12,7 @@ import quotaPie from './quota-pie';
 import slurmPrices from './slurm-prices';
 import detailsModule from './details/module';
 import './dashboard-quotas';
+import './provider';
 
 export default module => {
   module.config(slurmRoutes);

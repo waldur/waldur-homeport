@@ -16,7 +16,7 @@ const PureTypeListDialog = (props: Props) => (
   <ModalDialog title={props.dialogTitle} bodyClassName="types-list-dialog" footer={<CloseDialogButton/>}>
     {props.types.map((type, i) => (
       <div key={i}>
-        <b className={'icon ' + type.icon}></b>
+        <b className={'icon ' + type.icon}/>
         <span className="left-padding">{type.name}</span>
         <ul>
           {type.descriptions.map((description, j) => (
