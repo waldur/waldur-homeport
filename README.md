@@ -67,7 +67,7 @@ Also you should install django-cors-headers from pip in order to add CORS header
 pip install django-cors-headers
 ```
 
-Then you should update `nodeconductor/server/settings.py` and add the following 
+Then you should update `waldur_core/server/settings.py` and add the following
 lines at the end of the file:
 
 ```
