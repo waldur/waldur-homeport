@@ -577,14 +577,6 @@ msgstr ""
 msgid "Batch processing"
 msgstr ""
 
-#: app/scripts/components/experts/requests/list/expert-request-customer-list.js
-msgid "Bid could be created only for pending expert request."
-msgstr ""
-
-#: app/scripts/components/experts/bids/details/expert-bid-summary.html
-msgid "Bid description"
-msgstr ""
-
 #: app/scripts/components/billing/billing-utils.js
 #: app/scripts/components/customer/create/customer-create-config.js
 msgid "Billing"
@@ -810,7 +802,7 @@ msgid "Civil number"
 msgstr ""
 
 #: app/scripts/components/intro/expert-manager-intro.js
-msgid "Click on a 'Create bid' button when you are ready to fulfill expert request"
+msgid "Click on a 'Create proposal' button when you are ready to fulfill expert request"
 msgstr ""
 
 #: app/scripts/components/ansible/create/ansible-price-explanation.html
@@ -1012,12 +1004,6 @@ msgstr ""
 msgid "Create backup schedule for OpenStack instance"
 msgstr ""
 
-#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
-#: app/scripts/components/experts/bids/details/expert-bid-details.html
-#: app/scripts/components/experts/requests/list/expert-request-customer-list.js
-msgid "Create bid"
-msgstr ""
-
 #: app/scripts/components/experts/routes.js
 msgid "Create expert request"
 msgstr ""
@@ -1044,6 +1030,12 @@ msgstr ""
 
 #: app/scripts/components/customer/routes.js
 msgid "Create project"
+msgstr ""
+
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
+#: app/scripts/components/experts/bids/details/expert-bid-details.html
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js
+msgid "Create proposal"
 msgstr ""
 
 #: app/scripts/components/customer/routes.js
@@ -1308,7 +1300,7 @@ msgid "Do not have an account?"
 msgstr ""
 
 #: app/scripts/components/experts/bids/expert-bid-utils.js
-msgid "Do you really want to delete this bid? This action cannot be undone."
+msgid "Do you really want to delete this proposal? This action cannot be undone."
 msgstr ""
 
 #: app/scripts/components/navigation/header/docs-link.html
@@ -1518,22 +1510,6 @@ msgstr ""
 #: app/scripts/components/experts/extensions/table-extension.js
 #: app/scripts/components/user/list/CustomerPermissions.tsx
 msgid "Expert"
-msgstr ""
-
-#: app/scripts/components/experts/bids/details/expert-bid-details.html
-msgid "Expert bid"
-msgstr ""
-
-#: app/scripts/components/experts/bids/expert-bid-utils.js
-msgid "Expert bid could not be accepted."
-msgstr ""
-
-#: app/scripts/components/experts/bids/expert-bid-utils.js
-msgid "Expert bid could not be cancelled."
-msgstr ""
-
-#: app/scripts/components/experts/bids/details/expert-bid-details.js
-msgid "Expert bid could not be fetched."
 msgstr ""
 
 #: app/scripts/components/experts/requests/details/expert-request-details-dialog.html
@@ -3705,6 +3681,38 @@ msgstr ""
 msgid "Projects list"
 msgstr ""
 
+#: app/scripts/components/experts/bids/details/expert-bid-details.html
+msgid "Proposal"
+msgstr ""
+
+#: app/scripts/components/experts/requests/list/expert-request-customer-list.js
+msgid "Proposal could be created only for pending expert request."
+msgstr ""
+
+#: app/scripts/components/experts/bids/expert-bid-utils.js
+msgid "Proposal could not be accepted."
+msgstr ""
+
+#: app/scripts/components/experts/bids/expert-bid-utils.js
+msgid "Proposal could not be cancelled."
+msgstr ""
+
+#: app/scripts/components/experts/bids/details/expert-bid-details.js
+msgid "Proposal could not be fetched."
+msgstr ""
+
+#: app/scripts/components/experts/bids/details/expert-bid-summary.html
+msgid "Proposal description"
+msgstr ""
+
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.js
+msgid "Proposal has been created."
+msgstr ""
+
+#: app/scripts/components/experts/requests/details/expert-request-details.html
+msgid "Proposals"
+msgstr ""
+
 #: app/scripts/components/ansible/create/ansible-job-create.html
 #: app/scripts/components/ansible/details/ansible-job-summary.html
 #: app/scripts/components/appstore/appstore-compare-list.js
@@ -4035,10 +4043,6 @@ msgstr ""
 
 #: app/scripts/components/experts/extensions/expert-request-create-button.html
 msgid "Request an expert"
-msgstr ""
-
-#: app/scripts/components/experts/requests/details/expert-request-details.html
-msgid "Request bids"
 msgstr ""
 
 #: app/scripts/components/experts/requests/actions/expert-request-complain.js
@@ -4971,10 +4975,6 @@ msgstr ""
 msgid "There are no available users."
 msgstr ""
 
-#: app/scripts/components/experts/bids/expert-bids-list.js
-msgid "There are no bids yet."
-msgstr ""
-
 #: app/scripts/components/issues/comments/issue-comments-list.html
 msgid "There are no comments yet."
 msgstr ""
@@ -5002,6 +5002,10 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-projects.html
 msgid "There are no projects yet."
+msgstr ""
+
+#: app/scripts/components/experts/bids/expert-bids-list.js
+msgid "There are no proposals yet."
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
@@ -5827,11 +5831,11 @@ msgid "You have not selected any SSH key yet."
 msgstr ""
 
 #: app/scripts/components/experts/bids/details/expert-bid-details.html
-msgid "You have not submitted bid yet."
+msgid "You have not submitted proposal yet."
 msgstr ""
 
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
-msgid "You have placed a bid already."
+msgid "You have placed a proposal already."
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.js
