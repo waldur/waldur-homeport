@@ -4,7 +4,7 @@
 <div class="ibox" ng-if="!$ctrl.loading">
   <div class="ibox-title">
     <h5>
-      <span translate>Expert bid</span>
+      <span translate>Proposal</span>
     </h5>
   </div>
   <div class="ibox-content" ng-if="$ctrl.expertBid">
@@ -22,13 +22,13 @@
     </div>
   </div>
   <div class="ibox-content" ng-if="!$ctrl.expertBid">
-    <p class="m-b-md" translate>You have not submitted bid yet.</p>
+    <p class="m-b-md" translate>You have not submitted proposal yet.</p>
     <button
       type="button"
       class="btn btn-primary"
       ng-if="$ctrl.canManage()"
       submit-button="$ctrl.createBid()">
-      <span translate>Create bid</span>
+      <span translate>Create proposal</span>
     </button>
   </div>
 </div>

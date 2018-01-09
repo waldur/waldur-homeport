@@ -51,7 +51,7 @@ function ExpertBidsList(
       return {
         searchFieldName: 'team_name',
         disableSearch: true,
-        noDataText: gettext('There are no bids yet.'),
+        noDataText: gettext('There are no proposals yet.'),
         enableOrdering: false,
         columns: this.getColumns(),
         rowActions: this.getRowActions(),

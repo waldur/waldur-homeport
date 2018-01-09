@@ -73,13 +73,12 @@ const expertBidCreateDialog = {
       instance.description = this.description;
       instance.price = this.price;
       return instance.$save().then(() => {
-        this.ncUtilsFlash.success('Expert bid has been created.');
         this.expertBidsService.clearAllCacheForCurrentEndpoint();
         this.$rootScope.$broadcast('refreshBidsList');
         this.close();
       })
       .then(() => {
-        this.ncUtilsFlash.success('Expert bid has been created.');
+        this.ncUtilsFlash.success(gettext('Proposal has been created.'));
         this.$state.go('organization.expertRequestDetails', {
           uuid: this.customer.uuid,
           requestId: this.expertRequest.uuid

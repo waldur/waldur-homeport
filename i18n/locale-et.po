@@ -641,11 +641,11 @@ msgid "Batch processing"
 msgstr "Pakktöötlus"
 
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:107
-msgid "Bid could be created only for pending expert request."
+msgid "Proposal could be created only for pending expert request."
 msgstr "Pakkumine on võimalik teha ainult ootel olevale eksperdi taotlusele."
 
 #: app/scripts/components/experts/bids/expert-bid.html:20
-msgid "Bid description"
+msgid "Proposal description"
 msgstr "Pakkumise kirjeldus"
 
 #: app/scripts/components/billing/billing-utils.js:3
@@ -830,7 +830,7 @@ msgstr "ID kood"
 
 #: app/scripts/components/intro/expert-manager-intro.js:161
 msgid ""
-"Click on a 'Create bid' button when you are ready to fulfill expert request"
+"Click on a 'Create proposal' button when you are ready to fulfill expert request"
 msgstr "Vajuta \"Koosta pakkumine\" nupul, kui saate täita eksperdi päringut"
 
 #: app/scripts/components/billing/invoice-events-dialog.html:45
@@ -1034,7 +1034,7 @@ msgstr "Loo varunduse ajakava OpenStack instantsile"
 
 #: app/scripts/components/experts/bids/expert-bid-create-dialog.html:2
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:101
-msgid "Create bid"
+msgid "Create proposal"
 msgstr "Koosta pakkumine"
 
 #: app/scripts/components/experts/routes.js:9
@@ -1482,11 +1482,11 @@ msgid "Expert"
 msgstr "Ekspert"
 
 #: app/scripts/components/experts/bids/expert-bid.js:38
-msgid "Expert bid could not be accepted."
+msgid "Proposal could not be accepted."
 msgstr "Eksperdi pakkumist ei saanud aksepteerida."
 
 #: app/scripts/components/experts/bids/expert-bid.js:34
-msgid "Expert bid has been accepted."
+msgid "Proposal has been accepted."
 msgstr "Ekserdi pakkumine on vastuvõetud."
 
 #: app/scripts/components/customer/customer-create-config.js:71
@@ -4670,7 +4670,7 @@ msgid "There are no available users."
 msgstr "Kasutajaid ei ole."
 
 #: app/scripts/components/experts/bids/expert-bids-list.html:2
-msgid "There are no bids yet."
+msgid "There are no proposals yet."
 msgstr "Pakkumisi ei ole veel."
 
 #: app/scripts/components/issues/comments/issue-comments-list.html:5
