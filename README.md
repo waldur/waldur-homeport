@@ -55,7 +55,7 @@ cp app/scripts/configs/config.json.example app/scripts/configs/config.json
 
 7. Run application: `yarn start`.
 
-Server will listen on `//localhost:8000`
+Server will listen on `//localhost:8001`
 
 ## Backend configuration
 
