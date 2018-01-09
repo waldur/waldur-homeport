@@ -32,6 +32,7 @@ const mapStateToProps = (state, ownProps) => {
     type,
     initialValues,
     editable,
+    defaultErrorMessage: ownProps.translate(state.config.defaultErrorMessage),
   };
 };
 
@@ -41,8 +42,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
   withTranslation,
+  connect(mapStateToProps, mapDispatchToProps),
 );
 
 export const ProviderUpdateContainer = enhance(ProviderUpdateComponent);

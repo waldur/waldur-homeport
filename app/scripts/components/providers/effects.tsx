@@ -14,7 +14,7 @@ import {
 } from './actions';
 import * as api from './api';
 
-function* handleCreateProvider(action) {
+export function* handleCreateProvider(action) {
   try {
     const customer = yield select(getCurrentCustomer);
     const response = yield call(api.createProvider, {...action.payload, customer});
@@ -43,15 +43,15 @@ function* handleFetchProvider(action) {
   const { uuid } = action.payload;
   try {
     const response = yield call(api.fetchProvider, uuid);
-    const { name, ...details } = response.data;
-    const provider = {name, details};
+    const { name, state, error_message, ...details } = response.data;
+    const provider = {name, state, error_message, details};
     yield put(fetchProviderSuccess(provider));
   } catch {
     yield fetchProviderFailure();
   }
 }
 
-function* handleUpdateProvider(action) {
+export function* handleUpdateProvider(action) {
   try {
     yield call(api.updateProvider, action.payload);
     yield put(showSuccess('Provider has been updated.'));

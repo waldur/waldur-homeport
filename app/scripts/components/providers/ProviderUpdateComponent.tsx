@@ -31,28 +31,35 @@ export class ProviderUpdateComponent extends React.Component<ProviderUpdateCompo
 
     if (!editable) {
       return (
-        <div className="empty-list-message">
+        <div className="bs-callout bs-callout-info">
           {translate('You don\'t have enough permissions to edit settings for <strong>{name}</strong> provider.', {name: provider.name})}
         </div>
       );
     }
 
-    if (provider.state === 'PROCESSING') {
+    switch (provider.state) {
+      case 'OK':
+      return <ProviderUpdateForm {...this.props}/>;
+
+      case 'Erred':
       return (
-        <div className="success-message">
-          {translate('Please wait while provider is being configured.')}
+        <div>
+          <div className="bs-callout bs-callout-danger">
+            {provider.error_message || this.props.defaultErrorMessage}
+          </div>
+          <ProviderUpdateForm {...this.props}/>
+        </div>
+      );
+
+      default:
+      return (
+        <div>
+          <div className="bs-callout bs-callout-success">
+            {translate('Please wait while provider is being configured.')}
+          </div>
+          <ProviderUpdateForm {...this.props}/>
         </div>
       );
     }
-
-    if (provider.state === 'Erred') {
-      return (
-        <div className="error-message">
-          {provider.error_message || this.props.defaultErrorMessage}
-        </div>
-      );
-    }
-
-    return <ProviderUpdateForm {...this.props}/>;
   }
 }
