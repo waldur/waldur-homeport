@@ -16,7 +16,7 @@ import filtersModule from './filters';
 import hooksModule from './hooks/module';
 import keysModule from './keys/module';
 
-export default module => {
+export default (module) => {
   module.directive('userEvents', userEvents);
   module.component('userManage', userManage);
   module.component('userSidebar', userSidebar);
