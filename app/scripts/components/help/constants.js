@@ -1,3 +1,5 @@
+import { gettext } from '@waldur/i18n';
+
 export const HELP_CATEGORIES = {
   providers: 'providers',
   keys: 'keys',

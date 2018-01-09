@@ -10,25 +10,29 @@ import CustomerRole from './CustomerRole';
 
 const TableComponent = props => {
   const { translate, filterByFeature } = props;
-  return <Table {...props} columns={filterByFeature([
-    {
-      title: translate('Organization name'),
-      render: CustomerLink,
-    },
-    {
-      title: translate('Owner'),
-      render: CustomerRole,
-      className: 'text-center col-md-1',
-    },
-    {
-      title: translate('Expert'),
-      render: CustomerExpertField,
-      className: 'text-center col-md-1',
-      feature: 'experts',
-    },
-  ])}
-  verboseName={translate('organizations')}
-  actions={<CustomerCreateButton/>}/>;
+  return (
+    <Table {...props}
+      columns={filterByFeature([
+        {
+          title: translate('Organization name'),
+          render: CustomerLink,
+        },
+        {
+          title: translate('Owner'),
+          render: CustomerRole,
+          className: 'text-center col-md-1',
+        },
+        {
+          title: translate('Expert'),
+          render: CustomerExpertField,
+          className: 'text-center col-md-1',
+          feature: 'experts',
+        },
+      ])}
+      verboseName={translate('organizations')}
+      actions={<CustomerCreateButton/>}
+    />
+  );
 };
 
 const TableOptions = {

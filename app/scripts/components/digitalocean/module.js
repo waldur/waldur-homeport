@@ -3,6 +3,7 @@ import DigitalOceanDropletConfig from './digitalocean-droplet-config';
 import actionConfig from './actions';
 import costPlanningConfig from './cost-planning';
 import './help';
+import './provider';
 import { DigitalOceanDropletSummary } from './DigitalOceanDropletSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 

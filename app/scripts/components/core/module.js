@@ -38,7 +38,7 @@ function redirectToState($rootScope, $state) {
       // eslint-disable-next-line no-console
       console.log('$stateChangeError', error);
     }
-    if (error && error.redirectTo) {
+    if (error && error.redirectTo && error.status !== -1) {
       $state.go(error.redirectTo);
     } else {
       $state.go('errorPage.notFound');

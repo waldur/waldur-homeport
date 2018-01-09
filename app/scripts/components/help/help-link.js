@@ -9,22 +9,8 @@ const helpLink = {
     name: '<',
   },
   controller: class HelpListController {
-    // @ngInject
-    constructor() {
-      this.hasHelp = false;
-    }
-
     $onInit() {
-      const {type, name} = this;
-      const helpData = HelpRegistry.get();
-      const helpItems = helpData[type] && helpData[type].helpItems;
-      if (!helpItems) return;
-
-      for (const item of helpItems) {
-        if (item.key !== name) continue;
-        this.hasHelp = true;
-        return;
-      }
+      this.hasHelp = HelpRegistry.hasItem(this.type, this.name);
     }
   }
 };

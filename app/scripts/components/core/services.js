@@ -4,6 +4,7 @@ export let $http = null;
 export let $rootScope = null;
 export let $state = null;
 export let $filter = null;
+export let ngInjector = null;
 
 // @ngInject
 export default function injectServices($injector) {
@@ -13,4 +14,5 @@ export default function injectServices($injector) {
   $rootScope = $injector.get('$rootScope');
   $state = $injector.get('$state');
   $filter = $injector.get('$filter');
+  ngInjector = $injector;
 }

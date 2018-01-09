@@ -4,7 +4,6 @@ import providerProjectLinkQuotas from './provider-project-link-quotas';
 import providerProjects from './provider-projects';
 import providerPrices from './provider-prices';
 import providerPriceList from './provider-price-list';
-import providerSettings from './provider-settings';
 import providerProjectLinkQuota from './provider-project-link-quota';
 import ProviderUtilsService from './provider-utils-service';
 
@@ -16,6 +15,5 @@ export default module => {
   module.directive('providerProjects', providerProjects);
   module.component('providerPrices', providerPrices);
   module.component('providerPriceList', providerPriceList);
-  module.directive('providerSettings', providerSettings);
   module.service('ProviderUtilsService', ProviderUtilsService);
 };

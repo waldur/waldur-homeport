@@ -6,7 +6,7 @@ import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/re
 
 const formatProjectType = resource => (
   <Tooltip label={resource.template_description} id="projectType">
-    <i className="fa fa-question-circle"></i>
+    <i className="fa fa-question-circle"/>
     {' '}
     {resource.template_name}
   </Tooltip>

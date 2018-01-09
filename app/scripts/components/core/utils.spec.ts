@@ -3,6 +3,7 @@ import {
   formatSnakeCase,
   listToDict,
   getUUID,
+  pick,
 } from './utils';
 
 describe('formatFilesize', () => {
@@ -56,5 +57,15 @@ describe('listToDict', () => {
 describe('getUUID', () => {
   it('extracts UUID from URL', () => {
     expect(getUUID('http://example.com/api/projects/uuid/')).toBe('uuid');
+  });
+});
+
+describe('pick', () => {
+  it('selects fields from object', () => {
+    const source = {username: 'admin', password: 'secret', domain: 'default'};
+    const fields = ['username', 'password'];
+    const expected = {username: 'admin', password: 'secret'};
+    const picker = pick(fields);
+    expect(picker((source))).toEqual(expected);
   });
 });

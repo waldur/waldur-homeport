@@ -1,3 +1,5 @@
+import { Customer } from './types';
+
 const SET_CURRENT_CUSTOMER = 'waldur/customer/SET_CURRENT';
 
 export const setCurrentCustomer = project => ({
@@ -17,10 +19,5 @@ export const reducer = (state = null, action) => {
     return state;
   }
 };
-
-interface Customer {
-  uuid: string;
-  url: string;
-}
 
 export const getCurrentCustomer: (state: any) => Customer = state => state.currentCustomer;

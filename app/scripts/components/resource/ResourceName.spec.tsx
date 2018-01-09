@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 import { Tooltip } from '@waldur/core/Tooltip';
+import '@waldur/openstack/provider';
 
 import { ResourceName } from './ResourceName';
 

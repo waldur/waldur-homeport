@@ -3,7 +3,6 @@ import * as React from 'react';
 import { withTranslation } from '@waldur/i18n';
 import { Field, ResourceSummaryProps, PureVirtualMachineSummary } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 const formatEndpoints = props =>
   props.resource.endpoints.map((endpoint, index) => (
@@ -37,5 +36,3 @@ const PureAzureVirtualMachineSummary = (props: ResourceSummaryProps) => {
 };
 
 export const AzureVirtualMachineSummary = withTranslation(PureAzureVirtualMachineSummary);
-
-export default connectAngularComponent(AzureVirtualMachineSummary, ['resource']);
