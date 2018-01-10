@@ -3062,6 +3062,7 @@ msgid "Offering details"
 msgstr ""
 
 #: app/scripts/components/appstore/routes.js
+#: app/scripts/components/offering/table-extension.js
 msgid "Offerings"
 msgstr ""
 
