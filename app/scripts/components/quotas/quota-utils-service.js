@@ -6,21 +6,11 @@ export default class QuotaUtilsService {
       private_cloud_count: 0,
       storage_count: 0,
       allocation_count: 0,
+      offering_count: 0,
     };
     scope.quotas.forEach(quota => {
-      if (quota.name === 'nc_app_count') {
-        counters.app_count = quota.usage;
-      } else if (quota.name === 'nc_vm_count') {
-        counters.vm_count = quota.usage;
-      } else if (quota.name === 'nc_private_cloud_count') {
-        counters.private_cloud_count = quota.usage;
-      } else if (quota.name === 'nc_storage_count') {
-        counters.storage_count = quota.usage;
-      } else if (quota.name === 'nc_allocation_count') {
-        counters.allocation_count = quota.usage;
-      } else if (quota.name === 'nc_expert_count') {
-        counters.expert_count = quota.usage;
-      }
+      // nc_app_count => app_count
+      counters[quota.name.substr(3)] = quota.usage;
     });
     return counters;
   }

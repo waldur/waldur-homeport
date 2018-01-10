@@ -8,6 +8,7 @@ import offeringState from './offering-state';
 import registerOfferingCategory from './register-offering-category';
 import registerSidebarExtension from './sidebar';
 import appstoreOfferingSummary from './appstore-offering-summary';
+import registerTableExtension from './table-extension';
 
 export default module => {
   module.service('offeringsService', offeringsService);
@@ -20,4 +21,5 @@ export default module => {
   module.component('offeringState', offeringState);
   module.run(registerOfferingCategory);
   module.run(registerSidebarExtension);
+  module.run(registerTableExtension);
 };
