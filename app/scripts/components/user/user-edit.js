@@ -52,6 +52,12 @@ export const userEdit = {
       });
     }
 
+    hasCivilCode() {
+      if (this.currentUser) {
+        return !!this.currentUser.civil_number;
+      }
+    }
+
     isRequired(field) {
       return this.userMandatoryFields.indexOf(field) !== -1;
     }
