@@ -8,6 +8,14 @@ export default function extendTable(TableExtensionService, ncUtils) {
     index: 150,
   }]);
 
+  TableExtensionService.registerColumns('customer-list', [{
+    key: 'experts',
+    title: gettext('Experts'),
+    render: row => row.expert_count || 0,
+    feature: 'experts',
+    index: 150,
+  }]);
+
   TableExtensionService.registerColumns('user-organizations', [
     {
       key: 'experts',

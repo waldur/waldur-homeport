@@ -83,12 +83,12 @@ function CustomerListController(
         },
         {
           title: gettext('Current cost'),
-          render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.current),
+          render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.current || 0),
           index: 310,
         },
         {
           title: gettext('Estimated cost'),
-          render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.total),
+          render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.total || 0),
           index: 320,
         },
       ];
@@ -99,7 +99,7 @@ function CustomerListController(
       let fn = this._super.bind(this);
       this.list.forEach(item => angular.extend(item, QuotaUtilsService.parseCounters(item)));
       return getTotal(filter).then(totalCost => {
-        this.controllerScope.totalCost = totalCost;
+        this.controllerScope.totalCost = totalCost || 0;
         fn();
       });
     },
