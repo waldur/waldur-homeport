@@ -943,11 +943,15 @@ msgstr ""
 msgid "Contact phone"
 msgstr ""
 
-#: app/scripts/components/experts/requests/details/expert-request-details.html
+#: app/scripts/components/experts/requests/details/ExpertContractDetails.tsx
 msgid "Contract description"
 msgstr ""
 
-#: app/scripts/components/experts/requests/details/expert-request-details.html
+#: app/scripts/components/experts/requests/details/ExpertContractDetails.tsx
+msgid "Contract file"
+msgstr ""
+
+#: app/scripts/components/experts/requests/details/ExpertContractDetails.tsx
 msgid "Contract price"
 msgstr ""
 
@@ -1361,6 +1365,10 @@ msgstr ""
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
+#: app/scripts/components/experts/requests/details/ExpertContractDetails.tsx
+msgid "Download PDF"
+msgstr ""
+
 #: app/scripts/components/billing/invoice-header.html
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 msgid "Download invoice"
@@ -1617,7 +1625,7 @@ msgstr ""
 msgid "Expert requests"
 msgstr ""
 
-#: app/scripts/components/experts/requests/details/expert-request-details.html
+#: app/scripts/components/experts/requests/details/ExpertContractDetails.tsx
 msgid "Expert team"
 msgstr ""
 

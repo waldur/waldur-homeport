@@ -16,7 +16,7 @@ interface TableResponse {
   resultCount: number;
 }
 
-export type Fetcher = (request: TableRequest) => Promise<TableResponse>;
+export type Fetcher = (request: TableRequest) => angular.IPromise<TableResponse>;
 
 export interface TableOptions {
   table: string;

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
+import { reducer as downloadLink} from '@waldur/core/DownloadLink/reducers';
 import { dashboardChart } from '@waldur/dashboard/chart/reducers';
 import { reducer as provider } from '@waldur/providers/reducers';
 import { reducer as tables } from '@waldur/table-react/store';
@@ -21,4 +22,5 @@ export default combineReducers({
   currentUser,
   locale,
   provider,
+  downloadLink,
 });

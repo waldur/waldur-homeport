@@ -17,7 +17,7 @@ export function createFetcher(endpoint: string): Fetcher {
     }).then(response => {
       const resultCount = parseInt(response.headers()['x-result-count'], 10);
       return {
-        rows: response.data,
+        rows: Array.isArray(response.data) ? response.data : [],
         resultCount,
       };
     });

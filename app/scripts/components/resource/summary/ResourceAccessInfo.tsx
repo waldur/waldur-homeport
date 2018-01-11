@@ -20,7 +20,7 @@ export const ResourceAccessInfo = (props: ResourceAccessInfoProps) => {
 
   if (resource.access_url.startsWith('http')) {
     if (resource.access_url.endsWith('/rdp/')) {
-      return <DownloadLink label={translate('Connect')} url={resource.access_url}/>;
+      return <DownloadLink label={translate('Connect')} url={resource.access_url} filename="azure.rdp"/>;
     } else {
       return <ExternalLink label={translate('Open')} url={resource.access_url}/>;
     }
