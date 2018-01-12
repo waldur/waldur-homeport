@@ -1,4 +1,4 @@
-import { DOWNLOAD_REQUEST, DOWNLOAD_SUCCESS, DOWNLOAD_FAILURE } from './constants';
+import { DOWNLOAD_REQUEST, DOWNLOAD_SUCCESS, DOWNLOAD_FAILURE, DOWNLOAD_RESET } from './constants';
 
 export const downloadRequest = (url, filename) => ({
   type: DOWNLOAD_REQUEST,
@@ -11,4 +11,8 @@ export const downloadSuccess = () => ({
 
 export const downloadFailure = () => ({
   type: DOWNLOAD_FAILURE,
+});
+
+export const downloadReset = () => ({
+  type: DOWNLOAD_RESET,
 });

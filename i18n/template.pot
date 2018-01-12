@@ -1691,6 +1691,14 @@ msgstr ""
 msgid "Field length must be less than {maxlength} symbols"
 msgstr ""
 
+#: app/scripts/components/core/DownloadLink/effects.tsx
+msgid "File download has been started."
+msgstr ""
+
+#: app/scripts/components/core/DownloadLink/effects.tsx
+msgid "File has been downloaded."
+msgstr ""
+
 #: app/scripts/components/project/project-validation-service.js
 msgid "Fill up the name."
 msgstr ""
@@ -5429,6 +5437,10 @@ msgstr ""
 
 #: app/scripts/components/experts/requests/details/expert-request-details.html
 msgid "Unable to load expert request."
+msgstr ""
+
+#: app/scripts/components/core/DownloadLink/effects.tsx
+msgid "Unable to load file."
 msgstr ""
 
 #: app/scripts/components/project/ProjectCreateContainer.tsx

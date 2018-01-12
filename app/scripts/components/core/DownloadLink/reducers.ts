@@ -1,4 +1,4 @@
-import { DOWNLOAD_REQUEST, DOWNLOAD_SUCCESS, DOWNLOAD_FAILURE } from './constants';
+import { DOWNLOAD_REQUEST, DOWNLOAD_SUCCESS, DOWNLOAD_FAILURE, DOWNLOAD_RESET } from './constants';
 
 const INITIAL_STATE = {
   loading: false,
@@ -28,6 +28,9 @@ export function reducer(state = INITIAL_STATE, action) {
       loaded: false,
       erred: true,
     };
+
+    case DOWNLOAD_RESET:
+    return INITIAL_STATE;
 
     default:
     return state;

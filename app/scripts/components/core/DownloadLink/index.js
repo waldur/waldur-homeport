@@ -1,1 +1,1 @@
-export { DownloadLink } from './component';
+export { DownloadLink } from './container';
