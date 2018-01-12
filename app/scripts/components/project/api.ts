@@ -10,6 +10,13 @@ export const createProject = project =>
       certifications: project.certifications && project.certifications.map(item => ({ url: item.url })),
     });
 
+export const updateProject = project =>
+  $http
+    .patch(`${ENV.apiEndpoint}api/projects/${project.uuid}/`, {
+      name: project.name,
+      description: project.description,
+    });
+
 export const loadCertifications = () =>
   $http
     .get(`${ENV.apiEndpoint}api/service-certifications/`)

@@ -1,4 +1,10 @@
-export const getCurrentUser = state => state.currentUser;
+interface User {
+  is_staff: boolean;
+  url: string;
+  uuid: string;
+}
+
+export const getCurrentUser = (state: any): User => state.currentUser;
 
 export const filterByUser = state => ({
   user_url: getCurrentUser(state).url,

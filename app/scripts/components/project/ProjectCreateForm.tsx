@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import {
-  StringField,
   TextField,
   SelectField,
   FormContainer,
@@ -9,10 +8,7 @@ import {
   SubmitButton
 } from '@waldur/form-react';
 
-const validateProjectName = (value, _, props) =>
-  props.customer.projects.find(project => project.name === value) ?
-  props.translate('Name is duplicated. Choose other name.') :
-  undefined;
+import { ProjectNameField } from './ProjectNameField';
 
 export const ProjectCreateForm = props => (
   <form
@@ -22,13 +18,7 @@ export const ProjectCreateForm = props => (
       submitting={props.submitting}
       labelClass="col-sm-3"
       controlClass="col-sm-5">
-      <StringField
-        label={props.translate('Project name')}
-        name="name"
-        description={props.translate('This name will be visible in accounting data.')}
-        required={true}
-        validate={validateProjectName}
-      />
+      {ProjectNameField(props)}
       <TextField
         label={props.translate('Project description')}
         name="description"
