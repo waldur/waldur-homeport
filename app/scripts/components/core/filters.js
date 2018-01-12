@@ -1,5 +1,5 @@
-import { formatFilesize, formatSnakeCase } from './utils';
-import { formatDate, formatDateTime, minutesToHours } from './dateUtils';
+import { formatFilesize, formatSnakeCase, minutesToHours } from './utils';
+import { formatDate, formatDateTime } from './dateUtils';
 
 // @ngInject
 function trustAsHtml($sce) {
