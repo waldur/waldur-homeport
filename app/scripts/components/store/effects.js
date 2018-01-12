@@ -1,5 +1,6 @@
 import formActionSaga from 'redux-form-saga';
 
+import downloadLinkSaga from '@waldur/core/DownloadLink/effects';
 import chartSaga from '@waldur/dashboard/chart/effects';
 import jiraSaga from '@waldur/jira/issue/effects';
 import modalSaga from '@waldur/modal/effects';
@@ -11,6 +12,7 @@ import coreSaga from './coreSaga';
 
 export default [
   coreSaga,
+  downloadLinkSaga,
   formActionSaga,
   chartSaga,
   jiraSaga,

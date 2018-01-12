@@ -1,22 +1,7 @@
+import { sendForm } from '@waldur/core/api';
 import { $http, $state, $rootScope, ENV } from '@waldur/core/services';
 
 import { ProviderCreateFormData } from './types';
-
-const sendForm = (method, url, options) => {
-  const data = new FormData();
-  for (const name of Object.keys(options)) {
-    if (options[name] !== undefined) {
-      data.append(name, options[name]);
-    }
-  }
-  return $http({
-    method,
-    url,
-    data,
-    transformRequest: x => x,
-    headers: {'Content-Type': undefined},
-  });
-};
 
 const serializeDetails = (provider: ProviderCreateFormData) => {
   const serializer = provider.type.serializer || (x => x);

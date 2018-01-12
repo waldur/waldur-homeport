@@ -12,7 +12,7 @@ export const emitSignal = (signal: string, params?: {}) => ({
 });
 
 export const showSuccess = message => showNotification('success', message);
-export const showError = message => showNotification('error', message);
+export const showError = message => showNotification('danger', message);
 
 const showNotification = (type, message) => ({
   type: SHOW_NOTIFICATION,
