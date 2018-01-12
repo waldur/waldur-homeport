@@ -48,6 +48,7 @@ const appstoreOffering = {
             label: gettext('Description'),
           },
         });
+        this.model.name = this.offering.label;
         angular.forEach(offering.options, (option, name) => option.name = name);
       }).finally(() => this.loading = false);
     }
