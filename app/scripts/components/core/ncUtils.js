@@ -43,7 +43,7 @@ function renderLink(href, name) {
 }
 
 function renderAvatar(user) {
-  const avatar = `<img gravatar-src="${user.email}" gravatar-size="100" class="avatar-img img-xs">`;
+  const avatar = `<img gravatar-src="'${user.email}'" gravatar-size="100" class="avatar-img img-xs">`;
   return avatar + ' ' + (user.full_name || user.username);
 }
 
