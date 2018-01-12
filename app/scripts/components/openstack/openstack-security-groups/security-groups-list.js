@@ -9,7 +9,7 @@ const openstackSecurityGroupsList = {
 
 // @ngInject
 function OpenstackSecurityGroupsListController(
-  baseResourceListController, openstackSecurityGroupsService, actionUtilsService) {
+  baseResourceListController, openstackSecurityGroupsService, actionUtilsService, $scope, $timeout) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -24,6 +24,12 @@ function OpenstackSecurityGroupsListController(
         fn();
         this.addRowFields(['rules']);
         this.service = openstackSecurityGroupsService;
+      });
+
+      $scope.$on('refreshSecurityGroupsList', function() {
+        $timeout(function() {
+          controllerScope.resetCache();
+        });
       });
     },
     getTableOptions: function() {
