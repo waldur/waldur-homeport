@@ -3,4 +3,5 @@ export interface ExpertContract {
   description: string;
   team_name: string;
   file?: string;
+  filename?: string;
 }

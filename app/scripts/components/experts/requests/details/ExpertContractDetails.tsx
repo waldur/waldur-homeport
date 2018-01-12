@@ -33,7 +33,7 @@ const ExpertContractDetails = ({contract, translate}: ExpertContractDetailsProps
             <DownloadLink
               label={translate('Download PDF')}
               url={contract.file}
-              filename="contract.pdf"
+              filename={contract.filename}
             />
           </dd>
         </span>
