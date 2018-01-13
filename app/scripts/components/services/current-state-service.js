@@ -52,6 +52,7 @@ export default function currentStateService($q, ENV, ncUtils, $rootScope) {
 
   function setCustomer(newCustomer) {
     customer = newCustomer;
+    $rootScope.$broadcast('setCurrentCustomer', { customer });
   }
 
   function getCustomer() {

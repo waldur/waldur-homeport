@@ -1,4 +1,5 @@
 import template from './key-create.html';
+import {HELP_CATEGORIES} from '@waldur/help/constants';
 
 const keyCreate = {
   template: template,
@@ -17,6 +18,7 @@ function KeyAddController(baseControllerAddClass, keysService, $state, $q) {
       this.controllerScope = controllerScope;
       this._super();
       this.listState = 'profile.keys';
+      this.HELP_CATEGORIES = HELP_CATEGORIES;
     },
     successRedirect: function() {
       $state.go('profile.keys');

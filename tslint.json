@@ -1,5 +1,5 @@
 {
-  "extends": "tslint:recommended",
+  "extends": ["tslint:recommended", "tslint-react"],
   "rules": {
     "quotemark": [true, "single", "jsx-double"],
     "ordered-imports": false,
@@ -21,6 +21,9 @@
     "member-ordering": false,
     "interface-name": [true, "never-prefix"],
     "no-unused-variable": true,
+    "jsx-no-multiline-js": false,
+    "jsx-alignment": false,
+    "jsx-no-lambda": false,
 
     "waldur-import-validate": true
   },

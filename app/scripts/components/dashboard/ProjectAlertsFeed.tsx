@@ -6,8 +6,8 @@ import { showAlertTypes } from '@waldur/alerts/actions';
 import { fetchAlerts } from '@waldur/alerts/api';
 import { $state } from '@waldur/core/services';
 import { TranslateProps } from '@waldur/i18n';
-import { getCurrentProject } from '@waldur/store/currentProject';
 import { connectTable, TableState } from '@waldur/table-react';
+import { getProject } from '@waldur/workspace/selectors';
 
 import { DashboardFeed } from './DashboardFeed';
 import { Project } from './types';
@@ -51,7 +51,7 @@ const TableOptions = {
   fetchData: fetchAlerts,
   getDefaultFilter: state => ({
     aggregate: 'project',
-    uuid: getCurrentProject(state).uuid,
+    uuid: getProject(state).uuid,
     opened: true,
     o: '-created',
   }),
@@ -61,9 +61,9 @@ const mapDispatchToProps = dispatch => ({
   showTypes: () => dispatch(showAlertTypes()),
 });
 
-const ProjectAlertsFeed = compose(
-  connectTable(TableOptions),
+const ProjectAlertsFeed: any = compose(
   connect(null, mapDispatchToProps),
+  connectTable(TableOptions),
 )(PureProjectAlertsFeed);
 
 export {

@@ -121,7 +121,8 @@ module.exports = {
       // favicon is a part of white-labeling, store such resources separately.
       // https://opennode.atlassian.net/wiki/display/WD/HomePort+configuration#HomePortconfiguration-White-labeling
       {from: path.resolve(imagesPath, './favicon.ico'), to: utils.formatPath('images/favicon.ico'), toType: 'file'},
-      {from:  './app/manifest.json', to: utils.formatPath('manifest.json'), toType: 'file'},
+      // manifest.json is an experimental feature that is currently breaking caching
+      // {from:  './app/manifest.json', to: utils.formatPath('manifest.json'), toType: 'file'},
     ]),
     // Internationalization plugin, extracts strings for translation, and generates JSON dictionaries based on the already translated ones.
     new AngularGetTextPlugin({

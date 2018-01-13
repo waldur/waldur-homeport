@@ -6,8 +6,8 @@ import { $state } from '@waldur/core/services';
 import { showEventTypes, showEventDetails } from '@waldur/events/actions';
 import { fetchEvents } from '@waldur/events/api';
 import { TranslateProps } from '@waldur/i18n';
-import { getCurrentProject } from '@waldur/store/currentProject';
 import { connectTable, TableState } from '@waldur/table-react';
+import { getProject } from '@waldur/workspace/selectors';
 
 import { DashboardFeed } from './DashboardFeed';
 import { Project } from './types';
@@ -53,7 +53,7 @@ const TableOptions = {
   fetchData: fetchEvents,
   getDefaultFilter: state => ({
     exclude_extra: true,
-    scope: getCurrentProject(state).url,
+    scope: getProject(state).url,
   }),
 };
 
@@ -62,9 +62,9 @@ const mapDispatchToProps = dispatch => ({
   showDetails: event => dispatch(showEventDetails(event)),
 });
 
-const ProjectEventsFeed = compose(
-  connectTable(TableOptions),
+const ProjectEventsFeed: any = compose(
   connect(null, mapDispatchToProps),
+  connectTable(TableOptions),
 )(PureProjectEventsFeed);
 
 export {

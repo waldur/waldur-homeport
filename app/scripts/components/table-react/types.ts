@@ -16,7 +16,7 @@ interface TableResponse {
   resultCount: number;
 }
 
-export type Fetcher = (request: TableRequest) => Promise<TableResponse>;
+export type Fetcher = (request: TableRequest) => angular.IPromise<TableResponse>;
 
 export interface TableOptions {
   table: string;
@@ -24,7 +24,8 @@ export interface TableOptions {
   queryField?: string;
   exportFields?: string[];
   exportRow?: (Entity) => string[];
-  getDefaultFilter?: (state) => any;
+  getDefaultFilter?: (state: any) => any;
+  mapPropsToFilter?: (props: any) => any;
 }
 
 export interface Column {

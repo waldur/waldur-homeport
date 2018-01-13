@@ -5,15 +5,15 @@ import { compose } from 'redux';
 import { withTranslation } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
 import ActionButton from '@waldur/table-react/ActionButton';
-import { canCreateOrganization } from '@waldur/table-react/selectors';
+import { canCreateOrganization } from '@waldur/workspace/selectors';
 
 const CustomerCreateButton = ({ isVisible, onClick, translate }) => (
-  isVisible ?
+  isVisible ? (
     <ActionButton
       title={translate('Add organization')}
       action={onClick}
       icon={'fa fa-plus'}/>
-    : null
+  ) : null
 );
 
 const customerCreateDialog = () => openModalDialog('customerCreateDialog', {size: 'lg'});

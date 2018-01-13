@@ -1,12 +1,15 @@
 import dropletResizeDialog from './droplet-resize';
-import digitaloceanDropletSummary from './digitalocean-droplet-summary';
 import DigitalOceanDropletConfig from './digitalocean-droplet-config';
 import actionConfig from './actions';
 import costPlanningConfig from './cost-planning';
+import './help';
+import './provider';
+import { DigitalOceanDropletSummary } from './DigitalOceanDropletSummary';
+import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
+  ResourceSummary.register('DigitalOcean.Droplet', DigitalOceanDropletSummary);
   module.directive('dropletResizeDialog', dropletResizeDialog);
-  module.component('digitaloceanDropletSummary', digitaloceanDropletSummary);
   module.config(actionConfig);
   module.config(fieldsConfig);
   module.run(costPlanningConfig);

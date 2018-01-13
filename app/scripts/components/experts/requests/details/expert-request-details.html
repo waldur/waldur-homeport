@@ -28,16 +28,10 @@
 
       <expert-request-summary class="white-panel-heading" model="$ctrl.expertRequest"></expert-request-summary>
 
-      <div class="ibox-content" ng-if="$ctrl.expertRequest.contract">
-        <dl class="dl-horizontal">
-          <dt translate>Contract price</dt>
-          <dd>{{ $ctrl.expertRequest.contract.price | defaultCurrency }}</dd>
-          <dt translate>Contract description</dt>
-          <dd>{{ $ctrl.expertRequest.contract.description }}</dd>
-          <dt translate>Expert team</dt>
-          <dd>{{ $ctrl.expertRequest.contract.team_name }}</dd>
-        </dl>
-      </div>
+      <expert-contract-details
+        ng-if="$ctrl.expertRequest.contract"
+        contract="$ctrl.expertRequest.contract">
+      </expert-contract-details>
 
       <div class="tabs-container m-l-xxs m-t-md">
         <uib-tabset active="$ctrl.activeTab">
@@ -49,7 +43,7 @@
             </div>
           </uib-tab>
           <uib-tab index="1" ng-if="!$ctrl.expertRequest.contract && !$ctrl.showBidDetails">
-            <uib-tab-heading translate>Request bids</uib-tab-heading>
+            <uib-tab-heading translate>Proposals</uib-tab-heading>
             <div class="panel-body" ng-if="$ctrl.activeTab==1">
               <expert-bids-list expert-request="$ctrl.expertRequest"></expert-bids-list>
             </div>

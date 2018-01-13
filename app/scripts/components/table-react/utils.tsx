@@ -1,6 +1,8 @@
+import * as React from 'react';
 import { connect, ReactNode } from 'react-redux';
 import { compose } from 'redux';
 
+import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation } from '@waldur/i18n/translate';
 import { isVisible } from '@waldur/store/config';
 
@@ -10,12 +12,20 @@ import { getTableState } from './store';
 import { TableOptions } from './types';
 
 export function connectTable(options: TableOptions) {
-  return (Component: ReactNode) => {
+  return (Component: ReactNode) => props => {
     const {table} = options;
     registerTable(options);
 
+    const handleFetch = () => {
+      let propFilter;
+      if (options.mapPropsToFilter) {
+        propFilter = options.mapPropsToFilter(props);
+      }
+      return actions.fetchListStart(table, propFilter);
+    };
+
     const mapDispatchToProps = dispatch => ({
-      fetch: () => dispatch(actions.fetchListStart(table)),
+      fetch: () => dispatch(handleFetch()),
       gotoPage: page => dispatch(actions.fetchListGotoPage(table, page)),
       exportAs: format => dispatch(actions.exportTableAs(table, format)),
       setQuery: query => dispatch(actions.setFilterQuery(table, query)),
@@ -35,6 +45,14 @@ export function connectTable(options: TableOptions) {
       connect(mapStateToProps, mapDispatchToProps)
     );
 
-    return enhance(Component);
+    const WrappedComponent = enhance(Component);
+    return <WrappedComponent {...props}/>;
   };
 }
+
+export const formatLongText = value =>
+  value.length > 100 ? (
+    <Tooltip label={value} id="longText">
+      <span className="elipsis" style={{width: 150}}>{value}</span>
+    </Tooltip>
+  ) : value;

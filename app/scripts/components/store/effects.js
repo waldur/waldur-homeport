@@ -1,13 +1,23 @@
-import { fork } from 'redux-saga/effects';
+import formActionSaga from 'redux-form-saga';
 
+import downloadLinkSaga from '@waldur/core/DownloadLink/effects';
 import chartSaga from '@waldur/dashboard/chart/effects';
+import jiraSaga from '@waldur/jira/issue/effects';
 import modalSaga from '@waldur/modal/effects';
+import projectSaga from '@waldur/project/effects';
+import providerSaga from '@waldur/providers/effects';
 import tableSaga from '@waldur/table-react/effects';
 
-function* rootSaga() {
-  yield fork(chartSaga);
-  yield fork(modalSaga);
-  yield fork(tableSaga);
-}
+import coreSaga from './coreSaga';
 
-export default rootSaga;
+export default [
+  coreSaga,
+  downloadLinkSaga,
+  formActionSaga,
+  chartSaga,
+  jiraSaga,
+  projectSaga,
+  providerSaga,
+  modalSaga,
+  tableSaga,
+];

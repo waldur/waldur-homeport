@@ -38,7 +38,6 @@ import 'angular-translate';
 import 'angular-translate-storage-cookie';
 import 'angular-translate-storage-local';
 import 'angular-translate-loader-static-files';
-import 'ng-file-upload';
 import 'angular-sanitize';
 import 'angular-ui-bootstrap';
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
@@ -49,6 +48,7 @@ import 'intro.js/introjs.css';
 import 'angular-intro.js';
 
 import 'summernote/dist/summernote.css';
+import 'react-select/dist/react-select.css';
 
 // if (process.env.NODE_ENV === 'production') {
 //   require('offline-plugin/runtime').install(); // eslint-disable-line global-require

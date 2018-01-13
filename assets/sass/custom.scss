@@ -130,11 +130,6 @@ body.landing {
 }
 
 .app-content {
-  padding-bottom: 50px;
-
-  @include bp(xs) {
-    padding-bottom: 0;
-  }
 }
 
 .footer-indent {
@@ -207,4 +202,8 @@ body.landing {
 
 .white-panel-heading .panel-heading {
   background: #fff;
+}
+
+.tooltip {
+  z-index: 3000 !important;
 }

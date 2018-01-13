@@ -45,7 +45,7 @@ const expertBidDetails = {
               this.expertBid = bids[0];
             }
           }).catch(response => {
-            this.ncUtilsFlash.errorFromResponse(response, gettext('Expert bid could not be fetched.'));
+            this.ncUtilsFlash.errorFromResponse(response, gettext('Proposal could not be fetched.'));
           }).finally(() => {
             this.loading = false;
           });

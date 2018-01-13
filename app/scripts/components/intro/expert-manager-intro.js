@@ -158,7 +158,7 @@ export default class ExpertManagerIntro {
     const options = {
       steps: [
         {
-          intro: gettext('Click on a \'Create bid\' button when you are ready to fulfill expert request'),
+          intro: gettext('Click on a \'Create proposal\' button when you are ready to fulfill expert request'),
         },
       ],
       showStepNumbers: false,

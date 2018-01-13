@@ -452,7 +452,7 @@ msgstr "Проверить сроки"
 
 #: app/scripts/components/intro/expert-manager-intro.js:161
 msgid ""
-"Click on a 'Create bid' button when you are ready to fulfill expert request"
+"Click on a 'Create proposal' button when you are ready to fulfill expert request"
 msgstr ""
 "Нажмите на кнопку 'Создать предложение', когда будете готовы заполнить "
 "заявку на эксперта"

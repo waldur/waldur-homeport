@@ -10,6 +10,8 @@ interface Props {
 
 export const Tooltip = ({ label, children, id }: Props) => (
   <OverlayTrigger placement="top" overlay={<BootstrapTooltip id={id}>{label}</BootstrapTooltip>}>
-    {children}
+    <span>
+      {children}
+    </span>
   </OverlayTrigger>
 );

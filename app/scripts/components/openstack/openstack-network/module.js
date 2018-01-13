@@ -1,15 +1,16 @@
 import openstackAllocationPool from './openstack-allocation-pool';
 import openstackNetworksService from './openstack-networks-service';
 import openstackTenantNetworks from './openstack-tenant-networks';
-import { openstackNetworkSummary } from './openstack-network-summary';
 import { formatAllocationPool } from './filters';
 import breadcrumbsConfig from './breadcrumbs';
+import { OpenStackNetworkSummary } from './OpenStackNetworkSummary';
+import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
+  ResourceSummary.register('OpenStack.Network', OpenStackNetworkSummary);
   module.service('openstackNetworksService', openstackNetworksService);
   module.component('openstackAllocationPool', openstackAllocationPool);
   module.component('openstackTenantNetworks', openstackTenantNetworks);
-  module.component('openstackNetworkSummary', openstackNetworkSummary);
   module.filter('formatAllocationPool', formatAllocationPool);
   module.config(actionConfig);
   module.config(tabsConfig);

@@ -1,6 +1,7 @@
 // @ngInject
 export default function extendTable(TableExtensionService) {
   const column = {
+    key: 'allocations',
     title: gettext('Allocations'),
     render: row => row.allocation_count,
     feature: 'slurm',

@@ -69,6 +69,9 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
             component: 'securityGroupRuleEditor'
           }
         },
+        onSuccess: function($injector) {
+          $injector.get('$rootScope').$broadcast('refreshSecurityGroupsList');
+        },
         dialogSize: 'lg'
       },
       pull_security_groups: {

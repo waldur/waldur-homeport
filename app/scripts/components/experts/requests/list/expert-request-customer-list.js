@@ -91,7 +91,7 @@ function ExpertRequestListController(
             let submittedProposal = '';
             if (this.requestHasBids(row.uuid)) {
               submittedProposal = `<span class="m-l-sm">` +
-                `<i class="fa fa-thumbs-o-up" uib-tooltip="${gettext('You have placed a bid already.')}"></i></span>`;
+                `<i class="fa fa-thumbs-o-up" uib-tooltip="${gettext('You have placed a proposal already.')}"></i></span>`;
             }
             return `<expert-request-state model="controller.list[${index}]"></expert-request-state>` + submittedProposal;
           }
@@ -119,7 +119,7 @@ function ExpertRequestListController(
       ];
       if (this.isOwnerOrStaff) {
         actions.push({
-          title: gettext('Create bid'),
+          title: gettext('Create proposal'),
           iconClass: 'fa fa-plus',
           callback: expertRequest => ExpertUtilsService.createBid(expertRequest),
           isDisabled: row => {
@@ -127,9 +127,9 @@ function ExpertRequestListController(
           },
           tooltip: function(row) {
             if (row.state !== 'Pending') {
-              return gettext('Bid could be created only for pending expert request.');
+              return gettext('Proposal could be created only for pending expert request.');
             } else if (vm.requestHasBids(row.uuid)) {
-              return gettext('You have placed a bid already.');
+              return gettext('You have placed a proposal already.');
             }
           }
         });

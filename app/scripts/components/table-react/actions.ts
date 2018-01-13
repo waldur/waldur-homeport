@@ -5,10 +5,11 @@ export const FETCH_LIST_GOTO_PAGE = 'waldur/table/GOTO_PAGE';
 export const SET_FILTER_QUERY = 'waldur/table/SET_QUERY';
 export const EXPORT_TABLE_AS = 'waldur/table/EXPORT';
 
-export const fetchListStart = (table: string) => ({
+export const fetchListStart = (table: string, extraFilter?: any) => ({
   type: FETCH_LIST_START,
   payload: {
     table,
+    extraFilter,
   },
 });
 

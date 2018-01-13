@@ -51,6 +51,7 @@ const expertRequestCreate = {
             },
           });
           angular.forEach(this.expert.options, (option, name) => option.name = name);
+          this.model.name = this.expert.label;
         })
       ]).finally(() => this.loading = false);
     }

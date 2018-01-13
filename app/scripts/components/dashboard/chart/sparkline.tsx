@@ -22,7 +22,7 @@ const SparklineChart = ({ data }: Props) => (
     {normalizeData(data).map((item, index) =>
       <Tooltip key={index} label={item.label} id="sparkline">
         <div className="sparkline-column">
-          <div className="sparkline-bar" style={{height: `${item.value}%`}}></div>
+          <div className="sparkline-bar" style={{height: `${item.value}%`}}/>
         </div>
       </Tooltip>
     )}
