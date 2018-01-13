@@ -3,7 +3,7 @@ import * as React from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { eventFormatter } from '@waldur/events/services';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { getCurrentUser } from '@waldur/table-react/selectors';
+import { getUser } from '@waldur/workspace/selectors';
 
 import EventDetailsButton from './EventDetailsButton';
 import EventTypesButton from './EventTypesButton';
@@ -44,7 +44,7 @@ const TableOptions = {
   table: 'userEvents',
   fetchData: createFetcher('events'),
   getDefaultFilter: state => ({
-    scope: getCurrentUser(state).url,
+    scope: getUser(state).url,
     feature: 'users',
     exclude_extra: true,
   }),

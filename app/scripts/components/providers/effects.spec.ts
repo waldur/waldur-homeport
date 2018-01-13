@@ -5,7 +5,7 @@ import { setupFixture } from './effects.fixture';
 
 describe('Provider saga', () => {
   const provider = {uuid: 'VALID_PROVIDER_UUID'};
-  const state = {currentCustomer: {url: 'VALID_CUSTOMER_URL'}};
+  const state = {workspace: {customer: {url: 'VALID_CUSTOMER_URL'}}};
   const action = {payload: {name: 'Cloud provider'}};
 
   let fixture;

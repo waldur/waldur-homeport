@@ -34,8 +34,17 @@ export const gotoProjectList = customer =>
   $state.go('organization.projects', {uuid: customer.uuid});
 
 export const refreshProjectList = project =>
-  $rootScope.$broadcast('refreshProjectList', {
-    model: project,
-    new: true,
-    current: true,
-  });
+  $rootScope.$broadcast('refreshProjectList', {project});
+
+export const dangerouslyUpdateProject = (cache, project) => {
+  cache.name = project.name;
+  cache.description = project.description;
+};
+
+export const dangerouslyUpdateCustomer = (customer, project) => {
+  const item = customer.projects.find(p => p.uuid === project.uuid);
+  if (item) {
+    item.name = project.name;
+    item.description = project.description;
+  }
+};

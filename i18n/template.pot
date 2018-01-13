@@ -3877,6 +3877,14 @@ msgstr ""
 msgid "Provider does not comply with project policies"
 msgstr ""
 
+#: app/scripts/components/providers/effects.tsx
+msgid "Provider has been created."
+msgstr ""
+
+#: app/scripts/components/providers/effects.tsx
+msgid "Provider has been updated."
+msgstr ""
+
 #: app/scripts/components/providers/provider-list.js
 msgid "Provider has resources. Please remove them first."
 msgstr ""
@@ -5406,6 +5414,10 @@ msgstr ""
 msgid "Unable to create link."
 msgstr ""
 
+#: app/scripts/components/providers/effects.tsx
+msgid "Unable to create provider, please check your credentials and try again."
+msgstr ""
+
 #: app/scripts/components/offering/appstore-offering.js
 msgid "Unable to create request for a turnkey solution."
 msgstr ""
@@ -5477,6 +5489,10 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.js
 msgid "Unable to set quotas."
+msgstr ""
+
+#: app/scripts/components/providers/effects.tsx
+msgid "Unable to update provider."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.js

@@ -3,17 +3,17 @@ import { takeEvery, put, call, select } from 'redux-saga/effects';
 
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/coreSaga';
-import { getCurrentCustomer } from '@waldur/store/currentCustomer';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { createProject, gotoProjectList, updateProject } from './actions';
 import * as api from './api';
 
-function* handleCreateProject(action) {
+export function* handleCreateProject(action) {
   const successMessage = translate('Project has been created.');
   const errorMessage = translate('Project could not be created.');
 
   try {
-    const customer = yield select(getCurrentCustomer);
+    const customer = yield select(getCustomer);
     const response = yield call(api.createProject, {...action.payload, customer});
     const project = response.data;
     yield call(api.gotoProjectDetails, project);
@@ -31,17 +31,18 @@ function* handleCreateProject(action) {
 }
 
 function* handleGotoProjectList() {
-  const customer = yield select(getCurrentCustomer);
+  const customer = yield select(getCustomer);
   yield call(api.gotoProjectList, customer);
 }
 
-function* handleUpdateProject(action) {
+export function* handleUpdateProject(action) {
   const successMessage = translate('Project has been updated.');
   const errorMessage = translate('Project could not be updated.');
 
   try {
     const response = yield call(api.updateProject, action.payload);
     const project = response.data;
+    yield call(api.dangerouslyUpdateProject, action.payload.cache, project);
     yield call(api.refreshProjectList, project);
     yield put(updateProject.success());
     yield put(showSuccess(successMessage));

@@ -53,6 +53,7 @@ import slurmModule from './components/slurm/module';
 import paypalModule from './components/paypal/module';
 import storeModule from './components/store/module';
 import jiraModule from './components/jira/module';
+import workspaceModule from './components/workspace/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -126,6 +127,7 @@ slurmModule(appModule);
 paypalModule(appModule);
 storeModule(appModule);
 jiraModule(appModule);
+workspaceModule(appModule);
 appModule.config(analyticsRoutes);
 
 function requirePlugins(module) {
