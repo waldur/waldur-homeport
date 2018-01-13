@@ -21,9 +21,6 @@ export default function projectsService($q, $http, baseServiceClass) {
       let query = angular.extend({operation: 'counters'}, defaultQuery);
       return this.getFactory(false).get(query).$promise;
     },
-    updateProject: function(project_url, fields) {
-      return $http.patch(project_url, fields);
-    },
     updateCertifications: function(project_url, certifications) {
       return $http.post(project_url + 'update_certifications/', { certifications });
     },

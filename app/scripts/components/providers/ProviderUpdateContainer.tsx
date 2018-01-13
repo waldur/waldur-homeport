@@ -3,8 +3,7 @@ import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
-import { getCurrentCustomer } from '@waldur/store/currentCustomer';
-import { getCurrentUser } from '@waldur/table-react/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import * as actions from './actions';
 import { ProviderUpdateComponent } from './ProviderUpdateComponent';
@@ -19,8 +18,8 @@ const mapStateToProps = (state, ownProps) => {
   let editable = false;
   // User can update settings only if he is an owner of their customer or a staff
   if (provider) {
-    const user = getCurrentUser(state);
-    const customer = getCurrentCustomer(state);
+    const user = getUser(state);
+    const customer = getCustomer(state);
     const isOwner = customer.owners.find(owner => owner.uuid === user.uuid) !== undefined;
     editable = (!provider.customer && user.is_staff) || isOwner;
   }

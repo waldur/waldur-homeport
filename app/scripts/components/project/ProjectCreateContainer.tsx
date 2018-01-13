@@ -6,7 +6,7 @@ import { reduxForm, InjectedFormProps } from 'redux-form';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
-import { getCurrentCustomer } from '@waldur/store/currentCustomer';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as actions from './actions';
 import * as api from './api';
@@ -67,7 +67,7 @@ class ProjectCreateComponent extends React.Component<ProjectCreateProps> {
 }
 
 const mapStateToProps = state => ({
-  customer: getCurrentCustomer(state),
+  customer: getCustomer(state),
 });
 
 const mapDispatchToProps = dispatch => ({

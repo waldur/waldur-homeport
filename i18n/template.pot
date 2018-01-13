@@ -1268,7 +1268,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
-#: app/scripts/components/project/project-details.html
+#: app/scripts/components/project/ProjectDetails.tsx
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js
 #: app/scripts/components/resource/actions/constants.js
@@ -1697,10 +1697,6 @@ msgstr ""
 
 #: app/scripts/components/core/DownloadLink/effects.tsx
 msgid "File has been downloaded."
-msgstr ""
-
-#: app/scripts/components/project/project-validation-service.js
-msgid "Fill up the name."
 msgstr ""
 
 #: app/scripts/components/issues/create/issue-registration.html
@@ -2632,6 +2628,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js
 #: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
+#: app/scripts/components/project/ProjectDetails.tsx
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/details/provider-details.html
 #: app/scripts/components/providers/provider-list.js
@@ -2644,8 +2641,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: app/scripts/components/project/ProjectCreateForm.tsx
-#: app/scripts/components/project/project-validation-service.js
+#: app/scripts/components/project/ProjectNameField.tsx
 msgid "Name is duplicated. Choose other name."
 msgstr ""
 
@@ -3699,11 +3695,16 @@ msgstr ""
 msgid "Project"
 msgstr ""
 
-#: app/scripts/components/project/project-details.js
+#: app/scripts/components/project/effects.ts
+msgid "Project could not be created."
+msgstr ""
+
+#: app/scripts/components/project/effects.ts
 msgid "Project could not be updated."
 msgstr ""
 
 #: app/scripts/components/project/ProjectCreateForm.tsx
+#: app/scripts/components/project/ProjectUpdateForm.tsx
 msgid "Project description"
 msgstr ""
 
@@ -3717,6 +3718,10 @@ msgstr ""
 msgid "Project events"
 msgstr ""
 
+#: app/scripts/components/project/effects.ts
+msgid "Project has been created."
+msgstr ""
+
 #: app/scripts/components/project/projects-list.js
 msgid "Project has been removed successfully."
 msgstr ""
@@ -3725,7 +3730,7 @@ msgstr ""
 msgid "Project has been renamed from {project_previous_name} to {project_name}."
 msgstr ""
 
-#: app/scripts/components/project/project-details.js
+#: app/scripts/components/project/effects.ts
 msgid "Project has been updated."
 msgstr ""
 
@@ -3747,8 +3752,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/issues/list/constants.js
-#: app/scripts/components/project/ProjectCreateForm.tsx
-#: app/scripts/components/project/project-details.html
+#: app/scripts/components/project/ProjectNameField.tsx
 #: app/scripts/components/providers/details/provider-project-link-quotas.html
 #: app/scripts/components/team/add-team-member.html
 #: app/scripts/components/user/list/ProjectPermissions.tsx
@@ -3871,6 +3875,14 @@ msgstr ""
 
 #: app/scripts/components/resource/ResourceName.tsx
 msgid "Provider does not comply with project policies"
+msgstr ""
+
+#: app/scripts/components/providers/effects.tsx
+msgid "Provider has been created."
+msgstr ""
+
+#: app/scripts/components/providers/effects.tsx
+msgid "Provider has been updated."
 msgstr ""
 
 #: app/scripts/components/providers/provider-list.js
@@ -5218,7 +5230,7 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
-#: app/scripts/components/project/ProjectCreateForm.tsx
+#: app/scripts/components/project/ProjectNameField.tsx
 #: app/scripts/components/slurm/slurm-allocation-config.js
 msgid "This name will be visible in accounting data."
 msgstr ""
@@ -5402,6 +5414,10 @@ msgstr ""
 msgid "Unable to create link."
 msgstr ""
 
+#: app/scripts/components/providers/effects.tsx
+msgid "Unable to create provider, please check your credentials and try again."
+msgstr ""
+
 #: app/scripts/components/offering/appstore-offering.js
 msgid "Unable to create request for a turnkey solution."
 msgstr ""
@@ -5475,6 +5491,10 @@ msgstr ""
 msgid "Unable to set quotas."
 msgstr ""
 
+#: app/scripts/components/providers/effects.tsx
+msgid "Unable to update provider."
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.js
 msgid "Unable to validate invitation token."
 msgstr ""
@@ -5521,7 +5541,7 @@ msgstr ""
 msgid "Update profile"
 msgstr ""
 
-#: app/scripts/components/project/project-details.html
+#: app/scripts/components/project/ProjectUpdateForm.tsx
 msgid "Update project details"
 msgstr ""
 

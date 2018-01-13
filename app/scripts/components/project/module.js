@@ -1,4 +1,4 @@
-import projectDetails from './project-details';
+import projectDetails from './ProjectUpdateContainer';
 import projectDetailsButton from './project-details-button';
 import projectCreate from './ProjectCreateContainer';
 import ProjectWorkspaceController from './project-workspace';
@@ -12,7 +12,6 @@ import projectsList from './projects-list';
 import projectAlertsList from './project-alerts-list';
 import projectTeam from './project-team';
 import projectsService from './projects-service';
-import projectValidationService from './project-validation-service';
 import projectRoutes from './routes';
 
 export default module => {
@@ -30,6 +29,5 @@ export default module => {
   module.component('projectAlertsList', projectAlertsList);
   module.component('projectTeam', projectTeam);
   module.service('projectsService', projectsService);
-  module.service('projectValidationService', projectValidationService);
   module.config(projectRoutes);
 };

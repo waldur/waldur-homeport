@@ -10,6 +10,13 @@ export const createProject = project =>
       certifications: project.certifications && project.certifications.map(item => ({ url: item.url })),
     });
 
+export const updateProject = project =>
+  $http
+    .patch(`${ENV.apiEndpoint}api/projects/${project.uuid}/`, {
+      name: project.name,
+      description: project.description,
+    });
+
 export const loadCertifications = () =>
   $http
     .get(`${ENV.apiEndpoint}api/service-certifications/`)
@@ -27,8 +34,17 @@ export const gotoProjectList = customer =>
   $state.go('organization.projects', {uuid: customer.uuid});
 
 export const refreshProjectList = project =>
-  $rootScope.$broadcast('refreshProjectList', {
-    model: project,
-    new: true,
-    current: true,
-  });
+  $rootScope.$broadcast('refreshProjectList', {project});
+
+export const dangerouslyUpdateProject = (cache, project) => {
+  cache.name = project.name;
+  cache.description = project.description;
+};
+
+export const dangerouslyUpdateCustomer = (customer, project) => {
+  const item = customer.projects.find(p => p.uuid === project.uuid);
+  if (item) {
+    item.name = project.name;
+    item.description = project.description;
+  }
+};
