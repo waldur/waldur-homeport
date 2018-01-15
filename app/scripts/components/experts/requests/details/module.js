@@ -1,7 +1,7 @@
 import expertRequestDetails from './expert-request-details';
 import expertRequestDetailsDialog from './expert-request-details-dialog';
 import expertRequestGeneralInfo from './ExpertRequestGeneralInfo';
-import expertRequestSection from './expert-request-section';
+import expertRequestSection from './ExpertRequestSection';
 import expertRequestSummary from './expert-request-summary';
 import expertContractDetails from './ExpertContractDetails';
 
