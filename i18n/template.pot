@@ -3858,6 +3858,7 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
+#: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "Provider"
 msgstr ""
 
