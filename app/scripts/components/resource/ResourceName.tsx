@@ -39,7 +39,8 @@ const ResourceWarning = withTranslation(props =>
     </Tooltip>
   ) : null);
 
-export const ResourceName = (props: ResourceNameProps) => (
+// TODO: remove extra check after resources list is migrated to ReactJS
+export const ResourceName = (props: ResourceNameProps) => props.resource ? (
   <span>
     <ResourceLink
       uuid={props.resource.uuid}
@@ -48,6 +49,6 @@ export const ResourceName = (props: ResourceNameProps) => (
     />
     <ResourceWarning resource={props.resource}/>
   </span>
-);
+) : null;
 
 export default connectAngularComponent(ResourceName, ['resource']);
