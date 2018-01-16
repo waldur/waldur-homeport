@@ -14,7 +14,7 @@
             <h4 translate>Invoice No.</h4>
             <h4 class="text-navy">{{ ::$ctrl.invoice.number}}</h4>
             <span><span translate>To</span>:</span>
-            <billing-customer-details customer="$ctrl.invoice.customer_details"/>
+            <billing-customer-details customer="$ctrl.invoice.customer_details || $ctrl.invoice.payment_details"/>
             <div>
               <span><strong><span translate>Invoice date</span>:</strong> {{ ::$ctrl.invoice.invoice_date || '&mdash;'}}</span><br>
               <span>
@@ -56,7 +56,7 @@
                 <td ng-if="$ctrl.invoice.issuer_details.vat_code">
                   {{ ::item.tax | defaultCurrency}}
                 </td>
-                <td>{{ ::item.total | defaultCurrency}}</td>
+                <td>{{ (item.total || item.price) | defaultCurrency}}</td>
               </tr>
             </tbody>
           </table>
