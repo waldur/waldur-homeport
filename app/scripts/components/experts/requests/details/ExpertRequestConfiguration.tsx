@@ -3,12 +3,11 @@ import * as React from 'react';
 import { defaultCurrency } from '@waldur/core/services';
 import { Field } from '@waldur/resource/summary';
 
-import { ExpertRequest } from '../types';
 import { RequestConfiguration } from './types';
 
 export interface ExpertRequestConfigurationProps {
   config: RequestConfiguration;
-  model: ExpertRequest;
+  model: {[key: string]: any};
 }
 
 const formatField = (type: string, value: any) => {

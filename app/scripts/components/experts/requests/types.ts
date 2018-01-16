@@ -1,7 +1,7 @@
-type ExpertRequestState = 'Active' | 'Pending' | 'Cancelled' | 'Finished';
+export type RequestState = 'Active' | 'Pending' | 'Cancelled' | 'Finished';
 
 export interface ExpertRequest {
-  state: ExpertRequestState;
+  state: RequestState;
   type_label: string;
   customer_name: string;
   customer_uuid: string;
