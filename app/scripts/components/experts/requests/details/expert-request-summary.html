@@ -29,10 +29,8 @@
     </uib-accordion-heading>
     <expert-request-general-info
       ng-if="$ctrl.model.state"
-      expert-request="$ctrl.model"/>
-    <expert-request-section
-      config="$ctrl.offeringConfig"
-      model="$ctrl.model"/>
+      expert-request="$ctrl.model"
+      config="$ctrl.offeringConfig"/>
   </div>
   <div uib-accordion-group
     class="panel-default"

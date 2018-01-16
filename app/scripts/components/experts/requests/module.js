@@ -1,5 +1,5 @@
 import expertRequestsService from './expert-requests-service';
-import expertRequestState from './expert-request-state';
+import expertRequestState from './ExpertRequestState';
 import billingType from './billing-type';
 import actionsModule from './actions/module';
 import createModule from './create/module';

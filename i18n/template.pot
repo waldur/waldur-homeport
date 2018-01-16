@@ -1110,7 +1110,7 @@ msgstr ""
 #: app/scripts/components/billing/billing-utils.js
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/experts/bids/expert-bids-list.js
-#: app/scripts/components/experts/requests/details/expert-request-general-info.html
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
@@ -1248,7 +1248,7 @@ msgstr ""
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/requests/create/expert-request-create.js
-#: app/scripts/components/experts/requests/details/expert-request-general-info.html
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/issue-detail.html
@@ -2375,7 +2375,7 @@ msgstr ""
 msgid "Last"
 msgstr ""
 
-#: app/scripts/components/experts/requests/details/expert-request-general-info.html
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 msgid "Last updated"
 msgstr ""
 
@@ -3152,6 +3152,7 @@ msgstr ""
 
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/experts/bids/expert-bids-list.js
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/issues/create/issue-create-dialog.html
 #: app/scripts/components/issues/create/issue-registration.html
@@ -3680,6 +3681,7 @@ msgstr ""
 #: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
 #: app/scripts/components/events/EventDetailsTable.tsx
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/invitations/actions/invitation-dialog.html
 #: app/scripts/components/issues/create/issue-create-dialog.html
 #: app/scripts/components/issues/issue-detail.html
@@ -4850,7 +4852,7 @@ msgstr ""
 #: app/scripts/components/ansible/details/ansible-job-summary.html
 #: app/scripts/components/billing/billing-records-list.js
 #: app/scripts/components/billing/invoices-list.js
-#: app/scripts/components/experts/requests/details/expert-request-general-info.html
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
 #: app/scripts/components/offering/offering-summary.html
@@ -5340,7 +5342,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
-#: app/scripts/components/experts/requests/details/expert-request-general-info.html
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
 #: app/scripts/components/jira/project/jira-project-config.js
