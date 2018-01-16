@@ -54,12 +54,11 @@ class SelectWorkspaceToggleController {
   }
 
   getIconClass() {
-    return ['fa', 'm-r-xs', workspaceIconClasses[this.workspace]];
+    return workspaceIconClasses[this.workspace];
   }
 
   getButtonClass() {
-    const cls = workspaceButtonClasses[this.workspace] || 'btn-default';
-    return ['btn', 'select-workspace-toggle', cls];
+    return workspaceButtonClasses[this.workspace] || 'btn-default';
   }
 
   getTooltip() {
