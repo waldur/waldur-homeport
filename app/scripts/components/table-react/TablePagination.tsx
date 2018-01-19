@@ -5,11 +5,11 @@ import { TranslateProps } from '@waldur/i18n/types';
 
 import { Pagination as PaginationProps } from './types';
 
-interface Props extends TranslateProps, PaginationProps {
-  gotoPage: (num) => void;
+interface TablePaginationProps extends TranslateProps, PaginationProps {
+  gotoPage: (page: any) => void;
 }
 
-const TablePagination = (props: Props) => (
+const TablePagination = (props: TablePaginationProps) => (
   <div className="text-right">
     <Pagination
       prev={props.translate('Previous')}
@@ -19,6 +19,7 @@ const TablePagination = (props: Props) => (
       onSelect={props.gotoPage}
       maxButtons={3}
       boundaryLinks={true}
+      buttonComponentClass="a"
     />
   </div>
 );
