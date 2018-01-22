@@ -56,23 +56,6 @@ export default function appstoreRoutes($stateProvider) {
       }
     })
 
-    .state('appstore.offering', {
-      url: 'offering/:category/',
-      template: '<appstore-offering></appstore-offering>',
-      data: {
-        category: 'offerings',
-        pageTitle: gettext('Offerings'),
-        sidebarState: 'project.resources',
-        feature: 'offering',
-      }
-    })
-
-    .state('offeringDetails', {
-      url: '/offering/:uuid/',
-      template: '<offering-details/>',
-      feature: 'offering',
-    })
-
     .state('compare', {
       url: '/compare/:category/',
       templateUrl: 'views/project/base.html',

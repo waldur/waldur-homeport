@@ -149,15 +149,6 @@ export default function projectRoutes($stateProvider) {
       template: '<resource-storage-tabs/>'
     })
 
-    .state('project.resources.offerings', {
-      url: 'offerings/',
-      template: '<project-offerings-list/>',
-      data: {
-        pageTitle: gettext('Requests'),
-        feature: 'offering'
-      }
-    })
-
     .state('project.team', {
       url: 'team/',
       template: '<project-team>',
