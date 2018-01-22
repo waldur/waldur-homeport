@@ -3073,7 +3073,7 @@ msgstr ""
 msgid "Offering details"
 msgstr ""
 
-#: app/scripts/components/appstore/routes.js
+#: app/scripts/components/offering/routes.js
 #: app/scripts/components/offering/table-extension.js
 msgid "Offerings"
 msgstr ""
@@ -4252,8 +4252,8 @@ msgid "Request {requestId} has been created."
 msgstr ""
 
 #: app/scripts/components/offering/offering-details.js
+#: app/scripts/components/offering/routes.js
 #: app/scripts/components/offering/sidebar.js
-#: app/scripts/components/project/routes.js
 msgid "Requests"
 msgstr ""
 
