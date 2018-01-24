@@ -105,7 +105,7 @@ module.exports = {
     // Temporary workaround for Angular UI router and React Bootstrap integration
     new webpack.NormalModuleReplacementPlugin(
       /SafeAnchor.js/,
-      path.resolve('./app/scripts/shims/AngularRouterAnchor.tsx'),
+      path.resolve('./app/scripts/shims/AngularRouterAnchor.tsx')
     ),
     new HtmlWebpackPlugin({
       template: './app/index-template.html',
