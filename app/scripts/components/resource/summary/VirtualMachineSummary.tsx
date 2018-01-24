@@ -2,28 +2,25 @@ import * as React from 'react';
 
 import { formatRelative } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';
-import { formatSummary, formatCommaList } from '@waldur/resource/utils';
+import { formatCommaList } from '@waldur/resource/utils';
 
 import { Field } from './Field';
 import { ResourceAccessInfo } from './ResourceAccessInfo';
 import { PureResourceSummaryBase } from './ResourceSummaryBase';
+import { ResourceSummaryField } from './ResourceSummaryField';
 import { ResourceSummaryProps } from './types';
 
 const formatUptime = props =>
   props.resource.start_time ? formatRelative(props.resource.start_time) : null;
 
 export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
-  const { translate, resource } = props;
+  const { translate } = props;
   return (
     <span>
       <PureResourceSummaryBase {...props}/>
       <Field
         label={translate('Summary')}
-        value={formatSummary(resource)}
-      />
-      <Field
-        label={translate('Flavor name')}
-        value={resource.flavor_name}
+        value={<ResourceSummaryField {...props}/>}
       />
       <Field
         label={translate('Access')}
