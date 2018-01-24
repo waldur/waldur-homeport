@@ -22,6 +22,10 @@ export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
         value={formatSummary(resource)}
       />
       <Field
+        label={translate('Flavor name')}
+        value={resource.flavor_name}
+      />
+      <Field
         label={translate('Access')}
         value={<ResourceAccessInfo {...props}/>}
       />

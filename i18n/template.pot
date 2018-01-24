@@ -1744,6 +1744,7 @@ msgid "Flavor exclude regex"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
 msgid "Flavor name"
 msgstr ""
 
