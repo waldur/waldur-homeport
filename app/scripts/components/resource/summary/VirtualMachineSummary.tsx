@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { formatRelative } from '@waldur/core/dateUtils';
+import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation } from '@waldur/i18n';
 import { formatSummary, formatCommaList } from '@waldur/resource/utils';
 
@@ -12,14 +13,28 @@ import { ResourceSummaryProps } from './types';
 const formatUptime = props =>
   props.resource.start_time ? formatRelative(props.resource.start_time) : null;
 
+const ResourceSummaryField = ({ translate, resource }) => (
+  <span>
+    {formatSummary(resource)}
+    {resource.flavor_name && (
+      <Tooltip
+        id="resourceSummary"
+        label={translate('Flavor name: {flavor_name}', {flavor_name: resource.flavor_name})}>
+        {' '}
+        <i className="fa fa-question-circle"/>
+      </Tooltip>
+    )}
+  </span>
+);
+
 export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
-  const { translate, resource } = props;
+  const { translate } = props;
   return (
     <span>
       <PureResourceSummaryBase {...props}/>
       <Field
         label={translate('Summary')}
-        value={formatSummary(resource)}
+        value={<ResourceSummaryField {...props}/>}
       />
       <Field
         label={translate('Access')}

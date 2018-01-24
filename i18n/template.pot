@@ -1747,6 +1747,10 @@ msgstr ""
 msgid "Flavor name"
 msgstr ""
 
+#: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
+msgid "Flavor name: {flavor_name}"
+msgstr ""
+
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
 msgid "Flavors matching this regex expression will not be pulled from the backend."
 msgstr ""
