@@ -41,6 +41,11 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader'
       },
+      // Temporary workaround for Angular UI router and React Bootstrap integration
+      {
+        test: /SafeAnchor\.js$/,
+        loader: 'awesome-typescript-loader'
+      },
       {
         test: /\.html$/,
         use: [
@@ -97,6 +102,11 @@ module.exports = {
     ],
   },
   plugins: [
+    // Temporary workaround for Angular UI router and React Bootstrap integration
+    new webpack.NormalModuleReplacementPlugin(
+      /SafeAnchor.js/,
+      path.resolve('./app/scripts/shims/AngularRouterAnchor.tsx'),
+    ),
     new HtmlWebpackPlugin({
       template: './app/index-template.html',
       filename: utils.formatPath('index.html'),

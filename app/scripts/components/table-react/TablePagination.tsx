@@ -19,7 +19,6 @@ const TablePagination = (props: TablePaginationProps) => (
       onSelect={props.gotoPage}
       maxButtons={3}
       boundaryLinks={true}
-      buttonComponentClass="a"
     />
   </div>
 );
