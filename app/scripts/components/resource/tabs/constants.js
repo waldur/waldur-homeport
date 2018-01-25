@@ -13,16 +13,6 @@ const TABS = {
     component: 'resourceAlerts',
     feature: 'alerts',
   },
-  graphs: {
-    heading: gettext('Graphs'),
-    component: 'resourceGraphs',
-    feature: 'monitoring',
-  },
-  sla: {
-    heading: gettext('SLA'),
-    component: 'resourceSla',
-    feature: 'monitoring',
-  },
 };
 
 export const DEFAULT_RESOURCE_TABS = {

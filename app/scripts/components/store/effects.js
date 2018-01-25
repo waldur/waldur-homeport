@@ -8,6 +8,7 @@ import modalSaga from '@waldur/modal/effects';
 import projectSaga from '@waldur/project/effects';
 import providerSaga from '@waldur/providers/effects';
 import tableSaga from '@waldur/table-react/effects';
+import monitoringSaga from '@waldur/resource/monitoring/effects';
 
 import coreSaga from './coreSaga';
 
@@ -22,4 +23,5 @@ export default [
   issueAttachmentsSaga,
   modalSaga,
   tableSaga,
+  monitoringSaga,
 ];
