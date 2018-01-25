@@ -6184,6 +6184,10 @@ msgstr ""
 msgid "{quota_name} quota threshold has been reached for project {project_name}."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/package-templates-service.js
+msgid "{quota} usage exceeds quota limit by {amount}."
+msgstr ""
+
 #: app/scripts/components/resource/state/utils.ts
 msgid "{resourceType} has state {resourceState}"
 msgstr ""

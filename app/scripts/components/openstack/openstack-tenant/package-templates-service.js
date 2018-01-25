@@ -54,11 +54,45 @@ export default function packageTemplatesService($filter, baseServiceClass, resou
         };
       }
 
-      const message = coreUtils.templateFormatter(gettext('Package is not available because current VPC resource usage exceeds package quota limits.'));
+      let disabledReason = coreUtils.templateFormatter(gettext('Package is not available because current VPC resource usage exceeds package quota limits.'));
+
+      const parts = [
+        {
+          quota: 'cores',
+          label: 'vCPU',
+        },
+        {
+          quota: 'ram',
+          label: 'RAM',
+          filter: 'filesize',
+        },
+        {
+          quota: 'disk',
+          label: 'Storage',
+          filter: 'filesize',
+        },
+      ];
+
+      const messageTemplate = gettext('{quota} usage exceeds quota limit by {amount}.');
+
+      parts.forEach(part => {
+        const amount = quotas[part.quota] - components[part.quota];
+        if (amount > 0) {
+          let formattedAmount = amount;
+          if (part.filter) {
+            formattedAmount = $filter(part.filter)(amount);
+          }
+          const messageContext = {
+            amount: formattedAmount,
+            quota: part.label,
+          };
+          disabledReason += ' ' + coreUtils.templateFormatter(messageTemplate, messageContext);
+        }
+      });
 
       return {
         disabled: !enabled,
-        disabledReason: message,
+        disabledReason,
       };
     }
   });
