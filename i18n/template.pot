@@ -3309,6 +3309,10 @@ msgstr ""
 msgid "Package could not be assigned."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/package-templates-service.js
+msgid "Package is not available because current VPC resource usage exceeds package quota limits."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Package limits"

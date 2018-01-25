@@ -2,7 +2,7 @@ import { templateParser, parseQuotasUsage, parseComponents } from '../utils';
 import { templateComparator } from './openstack-template';
 
 // @ngInject
-export default function packageTemplatesService(baseServiceClass, resourcesService) {
+export default function packageTemplatesService($filter, baseServiceClass, resourcesService, coreUtils) {
   let ServiceClass = baseServiceClass.extend({
     init: function () {
       this._super();
@@ -24,7 +24,10 @@ export default function packageTemplatesService(baseServiceClass, resourcesServi
           archived: 'False',
         }).then(templates => {
           let result = templates.map(templateParser)
-            .filter(this.checkTemplate.bind(this, template, quotas))
+            .map(choice => {
+              const check = this.checkTemplate(template, quotas, choice);
+              return {...choice, ...check};
+            })
             .sort(templateComparator);
           return result;
         });
@@ -39,10 +42,24 @@ export default function packageTemplatesService(baseServiceClass, resourcesServi
 
       // Allow to change package only if current usage of all quotas <= new package quotas
       const components = parseComponents(template.components);
-      return (
+      const enabled = (
         quotas.cores <= components.cores &&
         quotas.ram <= components.ram &&
         quotas.disk <= components.disk);
+
+      if (enabled) {
+        return {
+          disabled: false,
+          disabledReason: ''
+        };
+      }
+
+      const message = coreUtils.templateFormatter(gettext('Package is not available because current VPC resource usage exceeds package quota limits.'));
+
+      return {
+        disabled: !enabled,
+        disabledReason: message,
+      };
     }
   });
   return new ServiceClass();
