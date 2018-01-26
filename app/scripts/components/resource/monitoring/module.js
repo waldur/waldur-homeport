@@ -1,3 +1,4 @@
+import monitoringCreateDialog from './MonitoringCreateDialog';
 import monitoringDetailsDialog from './MonitoringDetailsDialog';
 import multiLineChart from './multi-line-chart';
 import verticalBarChart from './vertical-bar-chart';
@@ -8,6 +9,7 @@ import zabbixItservicesService from './zabbix-itservices-service';
 
 export default module => {
   module.component('monitoringDetailsDialog', monitoringDetailsDialog);
+  module.component('monitoringCreateDialog', monitoringCreateDialog);
   module.directive('multiLineChart', multiLineChart);
   module.directive('verticalBarChart', verticalBarChart);
   module.component('resourceGraphs', resourceGraphs);

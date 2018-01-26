@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
-import { fetchMonitoring, openDetailsDialog } from './actions';
+import { fetchMonitoring, openDetailsDialog, openCreateDialog } from './actions';
 import { getMonitoringState } from './selectors';
 
 interface ResourceMonitoringIndicatorProps extends TranslateProps {
   resource: any;
   onFetch: () => void;
   onOpenDetailsDialog: (host: any) => void;
+  onOpenCreateDialog: () => void;
   loading: boolean;
   erred: boolean;
   host?: any;
@@ -29,9 +30,17 @@ class PureResourceMonitoringIndicator extends React.Component<ResourceMonitoring
       return this.props.translate('Unable to load monitoring data');
     }
     if (!this.props.host) {
-      return this.props.translate('Resource is not monitored yet.');
+      return (
+        <a onClick={this.props.onOpenCreateDialog}>
+          {this.props.translate('Resource is not monitored yet.')}
+        </a>
+      );
     }
-    return <a onClick={() => this.props.onOpenDetailsDialog(this.props.host)}>{this.renderState()}</a>;
+    return (
+      <a onClick={() => this.props.onOpenDetailsDialog(this.props.host)}>
+        {this.renderState()}
+      </a>
+    );
   }
 
   renderState() {
@@ -67,6 +76,7 @@ const mapStateToProps = state => getMonitoringState(state);
 const mapStateToDispatch = (dispatch, ownProps) => ({
   onFetch: () => dispatch(fetchMonitoring(ownProps.resource.url)),
   onOpenDetailsDialog: host => dispatch(openDetailsDialog(host)),
+  onOpenCreateDialog: () => dispatch(openCreateDialog(ownProps.resource)),
 });
 
 export const ResourceMonitoringIndicator = connect(mapStateToProps, mapStateToDispatch)(withTranslation(PureResourceMonitoringIndicator));
