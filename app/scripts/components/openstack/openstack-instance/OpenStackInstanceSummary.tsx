@@ -27,5 +27,4 @@ const PureOpenStackInstanceSummary = (props: ResourceSummaryProps) => {
   );
 };
 
-
 export const OpenStackInstanceSummary = withTranslation(PureOpenStackInstanceSummary);
