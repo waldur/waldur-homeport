@@ -10,6 +10,9 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as actions from './actions';
 
+// tslint:disable-next-line
+const MonitoringGuide = require('./MonitoringGuide.md');
+
 const MonitoringCreateDialog = props => (
   <ActionDialog
     title={props.translate('Create Zabbix host')}
@@ -36,6 +39,7 @@ const MonitoringCreateDialog = props => (
       valueKey="url"
       loadOptions={props.loadTemplates}
     />
+    <span dangerouslySetInnerHTML={{__html: MonitoringGuide}}/>
   </ActionDialog>
 );
 
