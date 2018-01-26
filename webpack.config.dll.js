@@ -25,6 +25,8 @@ module.exports = {
       'react-overlays',
       'react-redux',
       'react-select',
+      'react-bootstrap/lib/Tab',
+      'react-bootstrap/lib/Tabs',
       'react-bootstrap/lib/Tooltip',
       'react-bootstrap/lib/OverlayTrigger',
       'intro.js',

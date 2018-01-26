@@ -808,6 +808,10 @@ msgstr ""
 msgid "Chart is not available at this moment."
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/MonitoringDetailsDialog.tsx
+msgid "Charts"
+msgstr ""
+
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
@@ -1315,6 +1319,7 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/details/dialog.html
 #: app/scripts/components/providers/provider-list.js
+#: app/scripts/components/resource/monitoring/MonitoringDetailsDialog.tsx
 #: app/scripts/components/slurm/actions.js
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js

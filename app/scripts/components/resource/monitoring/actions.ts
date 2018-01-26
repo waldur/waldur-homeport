@@ -21,4 +21,4 @@ export const fetchFailure = () => ({
 });
 
 export const openDetailsDialog = resource =>
-  openModalDialog('monitoringDetailsDialog', {resolve: {resource}});
+  openModalDialog('monitoringDetailsDialog', {resolve: {resource}, size: 'lg'});
