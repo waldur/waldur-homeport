@@ -52,7 +52,6 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       'backups',
       'backup_schedules',
       'internal_ips_set',
-      'monitoring',
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       volumes: {
@@ -70,11 +69,6 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       internal_ips_set: {
         heading: gettext('Internal IPs'),
         component: 'openstackInstanceInternalIpsList'
-      },
-      monitoring: {
-        heading: gettext('Monitoring'),
-        component: 'resourceMonitoringTab',
-        feature: 'monitoring',
       },
     })
   });

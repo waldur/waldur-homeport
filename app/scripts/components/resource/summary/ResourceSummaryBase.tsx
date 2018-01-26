@@ -30,7 +30,7 @@ const formatCreatedField = (props: ResourceSummaryProps) => (
 export const PureResourceSummaryBase = (props: ResourceSummaryProps) => {
   const { translate, resource } = props;
   return (
-    <span>
+    <>
       <Field
         label={translate('State')}
         value={<ResourceState {...props}/>}
@@ -61,7 +61,7 @@ export const PureResourceSummaryBase = (props: ResourceSummaryProps) => {
         value={resource.backend_id}
         valueClass="elipsis"
       />
-    </span>
+    </>
   );
 };
 

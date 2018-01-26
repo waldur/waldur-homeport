@@ -8,7 +8,7 @@ export function* handleFetchMonitoring(action) {
   const { scope } = action.payload;
   try {
     const host = yield call(fetchHost, scope);
-    yield put(fetchSuccess());
+    yield put(fetchSuccess(host));
   } catch {
     yield put(fetchFailure());
   }

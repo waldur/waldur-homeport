@@ -5,6 +5,7 @@ import { reducer as downloadLink } from '@waldur/core/DownloadLink/reducers';
 import { dashboardChart } from '@waldur/dashboard/chart/reducers';
 import { reducer as issues } from '@waldur/issues/reducers';
 import { reducer as provider } from '@waldur/providers/reducers';
+import { reducer as monitoring } from '@waldur/resource/monitoring/reducers';
 import { reducer as tables } from '@waldur/table-react/store';
 import { reducer as workspace } from '@waldur/workspace/reducers';
 
@@ -21,4 +22,5 @@ export default combineReducers({
   locale,
   provider,
   downloadLink,
+  monitoring,
 });

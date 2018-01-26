@@ -1696,6 +1696,10 @@ msgstr ""
 msgid "Failed to operate with backend."
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+msgid "Fetching data."
+msgstr ""
+
 #: app/scripts/components/form/appstore-field-email.js
 #: app/scripts/components/form/appstore-field-string.js
 #: app/scripts/components/form/appstore-field-tel.js
@@ -1888,10 +1892,6 @@ msgstr ""
 msgid "Got it!"
 msgstr ""
 
-#: app/scripts/components/resource/tabs/constants.js
-msgid "Graphs"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-backup/actions.js
 msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr ""
@@ -1924,6 +1924,22 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-details.html
 msgid "Homepage"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host IP address"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host group name"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host name"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host status"
 msgstr ""
 
 #: app/scripts/components/slurm/SlurmForm.tsx
@@ -2603,7 +2619,28 @@ msgid "Mobile phone number"
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-global-list.js
+#: app/scripts/components/resource/monitoring/ResourceMonitoringField.tsx
 msgid "Monitoring"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/MonitoringDetailsDialog.tsx
+msgid "Monitoring details"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+msgid "Monitoring system has failed."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+msgid "Monitoring system is being deleted."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+msgid "Monitoring system is being provisioned."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+msgid "Monitoring system is being updated."
 msgstr ""
 
 #: app/scripts/components/quotas/constants.js
@@ -4352,6 +4389,14 @@ msgstr ""
 msgid "Resource is in sync"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+msgid "Resource is monitored using Zabbix."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+msgid "Resource is not monitored yet."
+msgstr ""
+
 #: app/scripts/components/analytics/cost-analysis.html
 msgid "Resource name"
 msgstr ""
@@ -4447,10 +4492,6 @@ msgstr ""
 
 #: app/scripts/components/configs/base-config.js
 msgid "Russian"
-msgstr ""
-
-#: app/scripts/components/resource/tabs/constants.js
-msgid "SLA"
 msgstr ""
 
 #: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html
@@ -5499,6 +5540,10 @@ msgstr ""
 
 #: app/scripts/components/core/DownloadLink/effects.tsx
 msgid "Unable to load file."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+msgid "Unable to load monitoring data"
 msgstr ""
 
 #: app/scripts/components/project/ProjectCreateContainer.tsx

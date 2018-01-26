@@ -1,11 +1,9 @@
-import { $http, ENV } from '@waldur/core/services';
+import { get, post } from '@waldur/core/api';
 
 import { JiraIssue } from './types';
 
-const getUrl = () => `${ENV.apiEndpoint}api/jira-issues/`;
-
 export const createIssue = (issue: JiraIssue) => (
-  $http.post(getUrl(), {
+  post('/jira-issues/', {
     jira_project: issue.project.url,
     parent: issue.parent && issue.parent.url,
     scope: issue.resource && issue.resource.url,
@@ -17,7 +15,7 @@ export const createIssue = (issue: JiraIssue) => (
 );
 
 export const loadIssues = request => (
-  $http.get(getUrl(), {
+  get('/jira-issues/', {
     params: {
       name: request.query,
       project_uuid: request.project.uuid,
@@ -27,7 +25,7 @@ export const loadIssues = request => (
 );
 
 export const loadResources = request => (
-  $http.get(`${ENV.apiEndpoint}api/resources/`, {
+  get('/resources/', {
     params: {
       name: request.query,
       project_uuid: request.project.project_uuid,

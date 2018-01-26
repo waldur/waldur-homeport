@@ -1,2 +1,1 @@
-export const getMonitoringState = scope => state =>
-  state.monitoring[scope];
+export const getMonitoringState = state => state.monitoring;

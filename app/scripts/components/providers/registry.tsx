@@ -24,6 +24,6 @@ export const getEnabledProviders = state => {
   return types;
 };
 
-export const getTypeDisplay = type => providers[type].name;
+export const getTypeDisplay = type => providers[type] ? providers[type].name : type;
 
 export const getServiceIcon = type => `images/appstore/${providers[type].icon}`;

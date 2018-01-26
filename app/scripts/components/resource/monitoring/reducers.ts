@@ -1,9 +1,10 @@
-import { FETCH_REQUEST, FETCH_SUCCESS, FETCH_FAILURE, FETCH_RESET } from './constants';
+import { FETCH_REQUEST, FETCH_SUCCESS, FETCH_FAILURE } from './constants';
 
 const INITIAL_STATE = {
   loading: false,
   loaded: false,
   erred: false,
+  host: undefined,
 };
 
 export function reducer(state = INITIAL_STATE, action) {
@@ -20,6 +21,7 @@ export function reducer(state = INITIAL_STATE, action) {
       loading: false,
       loaded: true,
       erred: false,
+      host: action.payload.host,
     };
 
     case FETCH_FAILURE:
@@ -28,9 +30,6 @@ export function reducer(state = INITIAL_STATE, action) {
       loaded: false,
       erred: true,
     };
-
-    case FETCH_RESET:
-    return INITIAL_STATE;
 
     default:
     return state;

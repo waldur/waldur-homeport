@@ -1,14 +1,10 @@
 import { $http, ENV } from './services';
 
-export const getList = (endpoint: string, params?: any) => {
-  const options = params ? {params} : undefined;
-  return $http
-    .get(`${ENV.apiEndpoint}api${endpoint}`, options)
-    .then(response => response.data);
-};
+export const get = (endpoint: string, options?: any) =>
+  $http.get(`${ENV.apiEndpoint}api${endpoint}`, options);
 
-export const getFirst = (endpoint: string, params?: any) =>
-  getList(endpoint, params).then(list => list[0]);
+export const post = (endpoint: string, options?: any) =>
+  $http.post(`${ENV.apiEndpoint}api${endpoint}`, options);
 
 export const sendForm = (method: string, url: string, options) => {
   const data = new FormData();
