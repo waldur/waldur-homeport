@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { reduxForm, formValues } from 'redux-form';
 
 import { SelectAsyncField } from '@waldur/form-react';
 import { withTranslation } from '@waldur/i18n';
@@ -27,16 +27,18 @@ const MonitoringCreateDialog = props => (
       valueKey="url"
       loadOptions={props.loadProviders}
     />
-    <SelectAsyncField
-      name="templates"
-      label={props.translate('Templates')}
-      required={true}
-      clearable={false}
-      multi={true}
-      labelKey="name"
-      valueKey="url"
-      loadOptions={props.loadTemplates}
-    />
+    {props.link && (
+      <SelectAsyncField
+        name="templates"
+        label={props.translate('Templates')}
+        required={true}
+        clearable={false}
+        multi={true}
+        labelKey="name"
+        valueKey="url"
+        loadOptions={props.loadTemplates}
+      />
+    )}
     {props.link && (
       <MonitoringGuide
         translate={props.translate}
@@ -49,25 +51,28 @@ const MonitoringCreateDialog = props => (
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadProviders: () =>
-    actions.loadProviders({project_uuid: ownProps.resolve.resource.project_uuid}, dispatch),
+    actions.loadProviders({resource: ownProps.resolve.resource.url}, dispatch),
 
-  loadTemplates: query =>
-    actions.loadTemplates(query, dispatch),
+  loadTemplates: query => {
+    const params: any = {};
+    if (ownProps.link) {
+      params.service = ownProps.link.settings;
+    }
+    if (query) {
+      params.name = query;
+    }
+    return actions.loadTemplates(params, dispatch);
+  },
 
   createHost: data =>
     actions.createHost({...data, resource: ownProps.resolve.resource}, dispatch),
 });
 
-const mapStateToProps = state => ({
-  link: formValueSelector('monitoringCreate')(state, 'service_project_link'),
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
 const enhance = compose(
-  connector,
   withTranslation,
   reduxForm({form: 'monitoringCreate'}),
+  formValues({link: 'service_project_link'}),
+  connect(null, mapDispatchToProps),
 );
 
 const MonitoringCreateContainer = enhance(MonitoringCreateDialog);
