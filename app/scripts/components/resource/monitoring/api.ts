@@ -5,9 +5,11 @@ export const fetchHost = (scope: string) =>
     .then(response => response.data)
     .then(list => list[0]);
 
-export const loadProviders = () => get('/zabbix-service-project-link/');
+export const loadProviders = params =>
+  get('/zabbix-service-project-link/', {params});
 
-export const loadTemplates = () => get('/zabbix-templates/');
+export const loadTemplates = params =>
+  get('/zabbix-templates/', {params});
 
 export const createHost = request =>
   post('/zabbix-hosts/', {

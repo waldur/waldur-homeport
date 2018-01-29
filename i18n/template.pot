@@ -2080,6 +2080,10 @@ msgstr ""
 msgid "Importing resources"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/MonitoringGuide.tsx
+msgid "In order to enable monitoring you should install and configure Zabbix agent on monitored virtual machine."
+msgstr ""
+
 #: app/scripts/components/azure/AzureForm.tsx
 msgid "In the format of GUID"
 msgstr ""

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 
 import { SelectAsyncField } from '@waldur/form-react';
 import { withTranslation } from '@waldur/i18n';
@@ -37,22 +37,32 @@ const MonitoringCreateDialog = props => (
       valueKey="url"
       loadOptions={props.loadTemplates}
     />
-    <MonitoringGuide/>
+    {props.link && (
+      <MonitoringGuide
+        translate={props.translate}
+        resource={props.resolve.resource}
+        link={props.link}
+      />
+    )}
   </ActionDialog>
 );
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadProviders: query =>
-    actions.loadProviders({query}, dispatch),
+  loadProviders: () =>
+    actions.loadProviders({project_uuid: ownProps.resolve.resource.project_uuid}, dispatch),
 
   loadTemplates: query =>
-    actions.loadTemplates({query}, dispatch),
+    actions.loadTemplates(query, dispatch),
 
   createHost: data =>
     actions.createHost({...data, resource: ownProps.resolve.resource}, dispatch),
 });
 
-const connector = connect(null, mapDispatchToProps);
+const mapStateToProps = state => ({
+  link: formValueSelector('monitoringCreate')(state, 'service_project_link'),
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const enhance = compose(
   connector,
