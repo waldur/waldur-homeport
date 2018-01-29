@@ -1,69 +1,55 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
-import { fetchMonitoring, openDetailsDialog, openCreateDialog } from './actions';
+import { fetchMonitoring } from './actions';
 import { getMonitoringState } from './selectors';
+import { ZabbixHostCreateButton } from './ZabbixHostCreateButton';
+import { ZabbixHostStateButton } from './ZabbixHostStateButton';
 
 interface ResourceMonitoringIndicatorProps extends TranslateProps {
   resource: any;
   onFetch: () => void;
-  onOpenDetailsDialog: (host: any) => void;
-  onOpenCreateDialog: () => void;
   loading: boolean;
   erred: boolean;
   host?: any;
 }
 
+const LoadingPlaceholder = withTranslation(props => (
+  <>
+    <i className="text-info fa fa-spinner fa-spin"/>
+    {' '}
+    {props.translate('Fetching data.')}
+  </>
+));
+
+const ErredPlaceholder = withTranslation(props => (
+  <>
+    <i className="text-danger fa fa-line-chart"/>
+    {' '}
+    {props.translate('Unable to load monitoring data.')}
+  </>
+));
+
 class PureResourceMonitoringIndicator extends React.Component<ResourceMonitoringIndicatorProps> {
   render() {
-    if (this.props.loading) {
-      return (
-        <>
-          {this.props.translate('Fetching data.')}
-          <i className="text-info fa fa-spinner fa-spin"/>
-        </>
-      );
+    const { loading, erred, resource, host } = this.props;
+
+    if (loading) {
+      return <LoadingPlaceholder/>;
     }
-    if (this.props.erred) {
-      return this.props.translate('Unable to load monitoring data');
+
+    if (erred) {
+      return <ErredPlaceholder/>;
     }
-    if (!this.props.host) {
-      return (
-        <a onClick={this.props.onOpenCreateDialog}>
-          {this.props.translate('Resource is not monitored yet.')}
-        </a>
-      );
+
+    if (!host) {
+      return <ZabbixHostCreateButton resource={resource}/>;
     }
-    return (
-      <a onClick={() => this.props.onOpenDetailsDialog(this.props.host)}>
-        {this.renderState()}
-      </a>
-    );
-  }
 
-  renderState() {
-    switch (this.props.host.state) {
-
-      case 'OK':
-        return this.props.translate('Resource is monitored using Zabbix.');
-
-      case 'Erred':
-        return this.props.translate('Monitoring system has failed.');
-
-      case 'Creation Scheduled':
-      case 'Creating':
-        return this.props.translate('Monitoring system is being provisioned.');
-
-      case 'Update Scheduled':
-      case 'Updating':
-        return this.props.translate('Monitoring system is being updated.');
-
-      case 'Deletion Scheduled':
-      case 'Deleting':
-        return this.props.translate('Monitoring system is being deleted.');
-    }
+    return <ZabbixHostStateButton host={host}/>;
   }
 
   componentWillMount() {
@@ -71,12 +57,10 @@ class PureResourceMonitoringIndicator extends React.Component<ResourceMonitoring
   }
 }
 
-const mapStateToProps = state => getMonitoringState(state);
-
 const mapStateToDispatch = (dispatch, ownProps) => ({
   onFetch: () => dispatch(fetchMonitoring(ownProps.resource.url)),
-  onOpenDetailsDialog: host => dispatch(openDetailsDialog(host)),
-  onOpenCreateDialog: () => dispatch(openCreateDialog(ownProps.resource)),
 });
 
-export const ResourceMonitoringIndicator = connect(mapStateToProps, mapStateToDispatch)(withTranslation(PureResourceMonitoringIndicator));
+const enhance = compose(connect(getMonitoringState, mapStateToDispatch), withTranslation);
+
+export const ResourceMonitoringIndicator = enhance(PureResourceMonitoringIndicator);

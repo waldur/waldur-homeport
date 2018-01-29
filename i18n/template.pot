@@ -2636,19 +2636,19 @@ msgstr ""
 msgid "Monitoring details"
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
 msgid "Monitoring system has failed."
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
 msgid "Monitoring system is being deleted."
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
 msgid "Monitoring system is being provisioned."
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
 msgid "Monitoring system is being updated."
 msgstr ""
 
@@ -4398,11 +4398,11 @@ msgstr ""
 msgid "Resource is in sync"
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
 msgid "Resource is monitored using Zabbix."
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateButton.tsx
 msgid "Resource is not monitored yet."
 msgstr ""
 
@@ -5556,7 +5556,7 @@ msgid "Unable to load file."
 msgstr ""
 
 #: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
-msgid "Unable to load monitoring data"
+msgid "Unable to load monitoring data."
 msgstr ""
 
 #: app/scripts/components/project/ProjectCreateContainer.tsx
