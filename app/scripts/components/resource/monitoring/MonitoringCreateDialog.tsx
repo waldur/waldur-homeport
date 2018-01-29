@@ -9,9 +9,7 @@ import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as actions from './actions';
-
-// tslint:disable-next-line
-const MonitoringGuide = require('./MonitoringGuide.md');
+import { MonitoringGuide } from './MonitoringGuide';
 
 const MonitoringCreateDialog = props => (
   <ActionDialog
@@ -39,7 +37,7 @@ const MonitoringCreateDialog = props => (
       valueKey="url"
       loadOptions={props.loadTemplates}
     />
-    <span dangerouslySetInnerHTML={{__html: MonitoringGuide}}/>
+    <MonitoringGuide/>
   </ActionDialog>
 );
 
