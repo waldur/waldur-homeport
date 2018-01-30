@@ -65,21 +65,18 @@ export default ENV => [
         name: 'postal',
         label: gettext('Postal code'),
         type: 'string',
-        required: true,
         maxlength: 20,
       },
       {
         name: 'bank_name',
         label: gettext('Bank name'),
         type: 'string',
-        required: true,
         maxlength: 150,
       },
       {
         name: 'bank_account',
         label: gettext('Bank account'),
         type: 'string',
-        required: true,
         maxlength: 50,
       },
       {
