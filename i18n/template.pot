@@ -880,10 +880,6 @@ msgstr ""
 msgid "Company"
 msgstr ""
 
-#: app/scripts/components/customer/create/customer-create-config.js
-msgid "Company type"
-msgstr ""
-
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/appstore/routes.js
 msgid "Compare flavors"
@@ -3245,6 +3241,7 @@ msgstr ""
 msgid "Organization removal"
 msgstr ""
 
+#: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/popover/customer-popover.html
 msgid "Organization type"
 msgstr ""

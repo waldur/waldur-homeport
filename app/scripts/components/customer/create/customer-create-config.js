@@ -18,8 +18,9 @@ export default ENV => [
       {
         name: 'type',
         type: 'select',
-        label: gettext('Company type'),
+        label: gettext('Organization type'),
         choices: formatCompanyTypes(ENV),
+        hidden: formatCompanyTypes(ENV).length === 0,
       },
       {
         name: 'email',

@@ -25,7 +25,7 @@
       <h2>{{ ::step.title }}</h2>
       <div class="row">
         <div class="col-lg-8" ng-init="formIndex = $index">
-          <div class="form-group" ng-repeat="(name, field) in step.fields">
+          <div class="form-group" ng-repeat="(name, field) in step.fields" ng-if="!field.hidden">
             <helpicon ng-if="field.help_text" help-text="{{ field.help_text }}"></helpicon>
             <label ng-if="field.label" for="{{ field.name }}" class="control-label">
               <field-label field="field"></field-label>
