@@ -4,15 +4,15 @@ import billingDetails from './billing-details';
 import invoiceHeader from './invoice-header';
 import invoiceDetails from './invoice-details';
 import invoicesList from './invoices-list';
-import billingIssuerDetails from './billing-issuer-details';
-import billingCustomerDetails from './billing-customer-details';
+import billingIssuerDetails from './CustomerDetails';
+import billingCustomerDetails from './CustomerDetails';
 import billingRecordDetails from './billing-record-details';
 import billingRecordHeader from './billing-record-header';
 import billingRecordsList from './billing-records-list';
 import billingTabs from './billing-tabs';
 import billingRoutes from './routes';
 import eventsModule from './events/module';
-import filtersModule from './filters';
+import { formatPhone } from './filters';
 
 export default module => {
   module.service('invoicesService', invoicesService);
@@ -29,5 +29,5 @@ export default module => {
   module.component('billingTabs', billingTabs);
   module.config(billingRoutes);
   eventsModule(module);
-  filtersModule(module);
+  module.filter('formatPhone', () => formatPhone);
 };

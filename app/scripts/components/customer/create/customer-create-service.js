@@ -32,8 +32,12 @@ export default class CustomerCreateService {
       'phone_number',
       'registration_code',
       'country',
-      'contact_details',
+      'address',
       'vat_code',
+      'type',
+      'postal',
+      'bank_name',
+      'bank_account',
     ];
 
     let model = {};

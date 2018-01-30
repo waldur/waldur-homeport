@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomerDetails renders all rows 1`] = `"<div><strong>OpenNode</strong></div><div>Lille 4-205</div><div>Estonia, 80041</div><div><abbr title=\\"Phone\\">P:</abbr> (+372)-555-55-55</div><div>Estonian Bank, 123456789</div><div><abbr>VAT:</abbr> EE123456789</div>info@opennodecloud.com"`;

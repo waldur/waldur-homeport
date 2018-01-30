@@ -3415,8 +3415,7 @@ msgstr ""
 msgid "Permitted"
 msgstr ""
 
-#: app/scripts/components/billing/billing-customer-details.html
-#: app/scripts/components/billing/billing-issuer-details.html
+#: app/scripts/components/billing/CustomerDetails.tsx
 #: app/scripts/components/customer/details/customer-manage.html
 #: app/scripts/components/customer/popover/customer-popover.html
 msgid "Phone"
@@ -5781,7 +5780,7 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: app/scripts/components/billing/billing-issuer-details.html
+#: app/scripts/components/billing/CustomerDetails.tsx
 msgid "VAT"
 msgstr ""
 
