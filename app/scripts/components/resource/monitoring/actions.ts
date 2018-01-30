@@ -28,7 +28,7 @@ export const openDetailsDialog = resource =>
 export const openCreateDialog = resource =>
   openModalDialog('monitoringCreateDialog', {resolve: {resource}});
 
-export const loadProviders = createFormAction('waldur/monitoring/LOAD_PROVIDERS');
+export const loadLinks = createFormAction('waldur/monitoring/LOAD_LINKS');
 
 export const loadTemplates = createFormAction('waldur/monitoring/LOAD_TEMPLATES');
 

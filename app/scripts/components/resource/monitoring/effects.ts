@@ -35,19 +35,19 @@ function* handleCreateHost(action) {
   }
 }
 
-function* handleLoadProviders(action) {
+function* handleLoadLinks(action) {
   try {
-    const response = yield call(api.loadProviders, action.payload);
-    yield put(actions.loadProviders.success({options: response.data}));
+    const options = yield call(api.loadLinks, action.payload);
+    yield put(actions.loadLinks.success({options}));
   } catch (error) {
-    yield put(actions.loadProviders.success({options: []}));
+    yield put(actions.loadLinks.success({options: []}));
   }
 }
 
 function* handleLoadTemplates(action) {
   try {
-    const response = yield call(api.loadTemplates, action.payload);
-    yield put(actions.loadTemplates.success({options: response.data}));
+    const options = yield call(api.loadTemplates, action.payload);
+    yield put(actions.loadTemplates.success({options}));
   } catch (error) {
     yield put(actions.loadTemplates.success({options: []}));
   }
@@ -56,6 +56,6 @@ function* handleLoadTemplates(action) {
 export default function*() {
   yield takeEvery(FETCH_REQUEST, handleFetchHost);
   yield takeEvery(actions.createHost.REQUEST, handleCreateHost);
-  yield takeEvery(actions.loadProviders.REQUEST, handleLoadProviders);
+  yield takeEvery(actions.loadLinks.REQUEST, handleLoadLinks);
   yield takeEvery(actions.loadTemplates.REQUEST, handleLoadTemplates);
 }

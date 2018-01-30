@@ -1,15 +1,15 @@
-import { get, post } from '@waldur/core/api';
+import { getList, getFirst, post } from '@waldur/core/api';
+
+import { ZabbixLinkApi, ZabbixTemplateApi } from './types';
 
 export const fetchHost = (scope: string) =>
-  get('/zabbix-hosts/', {params: {scope}})
-    .then(response => response.data)
-    .then(list => list[0]);
+  getFirst('/zabbix-hosts/', {scope});
 
-export const loadProviders = params =>
-  get('/zabbix-service-project-link/', {params});
+export const loadLinks: ZabbixLinkApi = request =>
+  getList('/zabbix-openstack-links/', request);
 
-export const loadTemplates = params =>
-  get('/zabbix-templates/', {params});
+export const loadTemplates: ZabbixTemplateApi = request =>
+  getList('/zabbix-templates/', request);
 
 export const createHost = request =>
   post('/zabbix-hosts/', {

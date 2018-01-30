@@ -10,6 +10,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as actions from './actions';
 import { MonitoringGuide } from './MonitoringGuide';
+import { ZabbixTemplateRequest } from './types';
 
 const MonitoringCreateDialog = props => (
   <ActionDialog
@@ -25,7 +26,7 @@ const MonitoringCreateDialog = props => (
       clearable={false}
       labelKey="service_name"
       valueKey="url"
-      loadOptions={props.loadProviders}
+      loadOptions={props.loadLinks}
     />
     {props.link && (
       <SelectAsyncField
@@ -50,18 +51,17 @@ const MonitoringCreateDialog = props => (
 );
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadProviders: () =>
-    actions.loadProviders({resource: ownProps.resolve.resource.url}, dispatch),
+  loadLinks: () =>
+    actions.loadLinks({resource: ownProps.resolve.resource.url}, dispatch),
 
   loadTemplates: query => {
-    const params: any = {};
-    if (ownProps.link) {
-      params.service = ownProps.link.settings;
-    }
+    const request: ZabbixTemplateRequest = {
+      settings_uuid: ownProps.link.service_settings_uuid,
+    };
     if (query) {
-      params.name = query;
+      request.name = query;
     }
-    return actions.loadTemplates(params, dispatch);
+    return actions.loadTemplates(request, dispatch);
   },
 
   createHost: data =>
