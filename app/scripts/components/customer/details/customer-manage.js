@@ -5,7 +5,6 @@ class CustomerManageController {
   // @ngInject
   constructor(
     customersService,
-    paymentDetailsService,
     invoicesService,
     usersService,
     currentStateService,
@@ -19,7 +18,6 @@ class CustomerManageController {
     ISSUE_IDS
   ) {
     this.customersService = customersService;
-    this.paymentDetailsService = paymentDetailsService;
     this.invoicesService = invoicesService;
     this.usersService = usersService;
     this.currentStateService = currentStateService;
@@ -31,7 +29,6 @@ class CustomerManageController {
     this.$filter = $filter;
     this.ENV = ENV;
     this.ISSUE_IDS = ISSUE_IDS;
-    this.paymentDetails = null;
     this.organizationSubnetsVisible = ENV.organizationSubnetsVisible;
     this.ownerCanManageCustomer = ENV.ownerCanManageCustomer;
   }
@@ -40,16 +37,7 @@ class CustomerManageController {
     this.loading = true;
     return this.currentStateService.getCustomer().then((customer) => {
       this.customer = customer;
-      return this.$q.all([
-        this.getPaymentDetails(),
-        this.loadCustomerPermissions(customer),
-      ]).then(() => {
-        if (this.paymentDetails) {
-          this.accountingStartDate = this.paymentDetails.accounting_start_date;
-        } else {
-          this.accountingStartDate = this.customer.created;
-        }
-      });
+      return this.loadCustomerPermissions(customer);
     }).finally(() => {
       this.loading = false;
     });
@@ -66,16 +54,6 @@ class CustomerManageController {
         this.canRegisterExpertProvider = user.is_staff;
         this.canUpdateQuota = user.is_staff;
       });
-    });
-  }
-
-  getPaymentDetails() {
-    return this.paymentDetailsService.getList({
-      customer_uuid: this.customer.uuid
-    }).then((result) => {
-      if (result) {
-        this.paymentDetails = result[0];
-      }
     });
   }
 

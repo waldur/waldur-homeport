@@ -49,4 +49,4 @@ export const PureCustomerDetails = (props: CustomerDetailsProps) => {
 
 export const CustomerDetails = withTranslation(PureCustomerDetails);
 
-export default connectAngularComponent(CustomerDetails);
+export default connectAngularComponent(CustomerDetails, ['customer']);

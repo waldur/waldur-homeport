@@ -9,32 +9,7 @@
   <uib-tabset ng-if="!$ctrl.loading" active="active">
     <uib-tab heading="Company data" index="'summary'">
       <div class="panel-body m-l-n m-r-n" ng-if="active === 'summary'">
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <tbody>
-              <tr>
-                <td class="col-md-3"><strong translate>Organization type</strong></td>
-                <td class="col-md-9">{{ $ctrl.paymentDetails.type || 'N/A' }}</td>
-              </tr>
-              <tr>
-                <td><strong translate>Registration code</strong></td>
-                <td>{{ $ctrl.customer.registration_code || 'N/A' }}</td>
-              </tr>
-              <tr>
-                <td><strong translate>Legal address</strong></td>
-                <td>{{ $ctrl.paymentDetails.address || 'N/A' }}</td>
-              </tr>
-              <tr>
-                <td><strong translate>Contact email</strong></td>
-                <td>{{ $ctrl.paymentDetails.email || 'N/A' }}</td>
-              </tr>
-              <tr>
-                <td><strong translate>Phone</strong></td>
-                <td>{{ $ctrl.paymentDetails.phone || 'N/A' }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <customer-summary customer="$ctrl.customer">
       </div>
     </uib-tab>
     <uib-tab heading="Authorized personnel" index="'users'">
