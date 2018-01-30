@@ -584,6 +584,14 @@ msgstr ""
 msgid "Bank"
 msgstr ""
 
+#: app/scripts/components/customer/create/customer-create-config.js
+msgid "Bank account"
+msgstr ""
+
+#: app/scripts/components/customer/create/customer-create-config.js
+msgid "Bank name"
+msgstr ""
+
 #: app/scripts/components/slurm/dashboard-quotas.ts
 msgid "Batch CPU usage, hours"
 msgstr ""
@@ -870,6 +878,10 @@ msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.html
 msgid "Company"
+msgstr ""
+
+#: app/scripts/components/customer/create/customer-create-config.js
+msgid "Company type"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.html
@@ -3540,6 +3552,10 @@ msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.html
 msgid "Postal"
+msgstr ""
+
+#: app/scripts/components/customer/create/customer-create-config.js
+msgid "Postal code"
 msgstr ""
 
 #: app/scripts/components/auth/powered-by.html
