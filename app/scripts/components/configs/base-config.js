@@ -248,6 +248,18 @@ const ENV = {
   // Start intro.js implicitly. If false, intro.js is started
   // only when user clicks on "Guide Me" button
   introJsAutostart: false,
+
+  // Provide exclude file types for issue attachments uploading
+  // Based on https://github.com/okonet/attr-accept
+  // Reffered to https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input#Attributes
+  // Available value types: string or string array
+  // Available value format:
+  // A file extension starting with the STOP character (U+002E). (e.g. .jpg, .png, .doc).
+  // A valid MIME type with no extensions.
+  // audio/* representing sound files.
+  // video/* representing video files.
+  // image/* representing image files.
+  excludedAttachmentTypes : [],
 };
 
 export default ENV;

@@ -6,6 +6,7 @@
 /.settings
 /.sublime
 /.vscode
+launch.json
 *.sw*
 /atlassian-ide-plugin.xml
 .todo

@@ -1,6 +1,7 @@
 import issuesService from './issues-service';
 import issueDetail from './issue-detail';
 import issueRoutes from './routes';
+import issueAttachmentsModule from './attachments/module';
 import issueCommentsModule from './comments/module';
 import issueCreateModule from './create/module';
 import issueListModule from './list/module';
@@ -20,4 +21,5 @@ export default module => {
   issueCreateModule(module);
   issueListModule(module);
   issueWorkspaceModule(module);
+  issueAttachmentsModule(module);
 };

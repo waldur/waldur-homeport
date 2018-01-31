@@ -93,6 +93,10 @@
   </div>
 </div>
 
+<div ng-if="!$ctrl.loading">
+  <issue-attachments-container issue="$ctrl.issue"></issue-attachments-container>
+</div>
+
 <div ng-if="!$ctrl.loading && $ctrl.issue">
   <issue-comments-container issue="$ctrl.issue"></issue-comments-container>
 </div>
