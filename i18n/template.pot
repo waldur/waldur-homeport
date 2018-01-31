@@ -479,7 +479,7 @@ msgid "Authentication events"
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
-msgid "Authentication with Mobile ID has been canceled by user or time out. Details:"
+msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.js

@@ -48,7 +48,7 @@ export const PureCustomerDetails = ({ translate, customer, organizationSubnetsVi
 
         <Field
           label={translate('Accounting start date')}
-          value={formatDateTime(customer.accounting_start_date)}
+          value={customer.accounting_start_date && formatDateTime(customer.accounting_start_date)}
         />
 
         <Field
@@ -88,7 +88,7 @@ export const PureCustomerDetails = ({ translate, customer, organizationSubnetsVi
 
         <Field
           label={translate('Country')}
-          value={customer.country}
+          value={customer.country_name}
         />
 
         <Field

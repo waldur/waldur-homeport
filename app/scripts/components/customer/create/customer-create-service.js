@@ -48,6 +48,9 @@ export default class CustomerCreateService {
     if (formModel.country) {
       model.country = formModel.country.value;
     }
+    if (formModel.type) {
+      model.type = formModel.type.value;
+    }
 
     return model;
   }

@@ -22,7 +22,7 @@ export const normalizeCustomerDetails = details => {
   // tslint:disable variable-name
   const name = details.name || details.company;
   const address = details.address || details.contact_details;
-  const country = details.country;
+  const country = details.country_name || details.country;
   const postal = details.postal;
   const email = details.email;
   const vat_code = details.vat_code;
