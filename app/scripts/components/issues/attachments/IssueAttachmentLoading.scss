@@ -10,19 +10,3 @@
   height: 216px;
   padding: 0 0 10px;
 }
-
-.attachment-item__overlay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 20px;
-  background: transparentize($white, 0.5);
-  border: 1px dashed $yellow;
-  text-align: center;
-  z-index: 2;
-}
