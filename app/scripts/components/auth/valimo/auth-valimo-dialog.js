@@ -63,7 +63,7 @@ const authValimoDialog = {
           this.ncUtilsFlash.error(result.details);
           return;
         }
-        const message = gettext('Authentication with Mobile ID has been canceled by user or time out. Details:');
+        const message = gettext('Authentication with Mobile ID has been canceled by user or timed out. Details:');
         this.ncUtilsFlash.error(message + result.details);
       } else {
         this.ncUtilsFlash.error(gettext('Unexpected exception happened during login process.'));
