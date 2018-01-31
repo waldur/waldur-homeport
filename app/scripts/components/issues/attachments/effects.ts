@@ -1,6 +1,6 @@
 import { call, put, takeEvery, select, spawn } from 'redux-saga/effects';
 
-import { format } from '@waldur/core/error-message-formatter';
+import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { showError } from '@waldur/store/coreSaga';
 

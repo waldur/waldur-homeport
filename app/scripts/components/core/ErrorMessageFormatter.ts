@@ -1,4 +1,5 @@
-const NETWORK_ERROR_MESSAGE = 'Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues.';
+import { ENV } from '@waldur/core/services';
+import { translate } from '@waldur/i18n';
 
 export const format = response => {
   /*
@@ -16,10 +17,11 @@ export const format = response => {
   */
 
   if (response.status === -1) {
-    return NETWORK_ERROR_MESSAGE.replace('{apiEndpoint}', this.ENV.apiEndpoint);
+    // tslint:disable-next-line max-line-length
+    return translate('Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues.', {apiEndpoint: ENV.apiEndpoint});
   }
 
-  let message = `${response.status}: ${response.statusText}. `;
+  let message = `${response.status}: ${response.statusText}.`;
 
   if (response.data) {
     if (response.data.non_field_errors) {
@@ -29,9 +31,9 @@ export const format = response => {
       message += ' ' + response.data.detail;
     }
     if (Array.isArray(response.data)) {
-      message += response.data.map(item => {
+      message += ' ' + response.data.map(item => {
         if (typeof item === 'object') {
-          return Object.keys(item).map(key => `${key}: ${item[key]}}`);
+          return Object.keys(item).map(key => `${key}: ${item[key]}`).join(', ');
         } else {
           return item;
         }
@@ -42,15 +44,9 @@ export const format = response => {
   return message;
 };
 
-
 export default class ErrorMessageFormatter {
 
-  //@ngInject
-  constructor(ENV, $filter) {
-    this.ENV = ENV;
-    this.$filter = $filter;
-    this.format = format;
-  }
+  format = format;
 
   formatErrorFields(error) {
     let errors = [];
@@ -58,7 +54,7 @@ export default class ErrorMessageFormatter {
       return [error.data];
     }
 
-    for (let i in error.data) {
+    for (const i in error.data) {
       if (error.data.hasOwnProperty(i)) {
         errors = errors.concat(i + ': ' + error.data[i]);
       }
@@ -67,10 +63,10 @@ export default class ErrorMessageFormatter {
   }
 
   parseError(error) {
-    let errors = {};
+    const errors: any = {};
     if (error.data && typeof error.data === 'object') {
-      for (let key in error.data) {
-        let errorValue = error.data[key];
+      for (const key of Object.keys(error.data)) {
+        const errorValue = error.data[key];
         if (Array.isArray(errorValue)) {
           errors[key] = errorValue;
         } else {
