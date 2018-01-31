@@ -2,6 +2,7 @@ export interface Attachment {
   created: string;
   file: string;
   file_size: number;
+  thumbnail: string;
   issue: string;
   issue_key: string;
   url: string;

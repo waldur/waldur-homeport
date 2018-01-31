@@ -18,12 +18,12 @@ interface PureIssueAttachmentProps {
   openModal(): void;
 }
 
-const getThumbnail = (attachmentData: Attachment, openModalHandler) => {
-  if (attachmentData.file.match(/\.(png|jpg|jpeg|gif)/g)) {
-    return <img src={attachmentData.file} onClick={openModalHandler} />;
+const getThumbnail = (attachment: Attachment, openModalHandler) => {
+  if (attachment.file.match(/\.(png|jpg|jpeg|gif)/g)) {
+    return <img src={attachment.thumbnail} onClick={openModalHandler} />;
   } else {
     return (
-      <a href={attachmentData.file} download="true">
+      <a href={attachment.file} download="true">
         <i className="fa fa-file" aria-hidden="true" />
       </a>
     );
