@@ -1,4 +1,8 @@
-export default [
+const formatCompanyTypes = ENV =>
+  (ENV.plugins.WALDUR_CORE.COMPANY_TYPES || [])
+    .map(item => ({ value: item, display_name: item }));
+
+export default ENV => [
   {
     name: gettext('General'),
     title: gettext('General information'),
@@ -10,6 +14,13 @@ export default [
         label: gettext('Name'),
         maxlength: 150,
         help_text: gettext('Name of your organization.'),
+      },
+      {
+        name: 'type',
+        type: 'select',
+        label: gettext('Organization type'),
+        choices: formatCompanyTypes(ENV),
+        hidden: formatCompanyTypes(ENV).length === 0,
       },
       {
         name: 'email',
@@ -44,10 +55,29 @@ export default [
         placeholder: gettext('Select country...'),
       },
       {
-        name: 'contact_details',
+        name: 'address',
         label: gettext('Address'),
         type: 'string',
         required: true,
+        maxlength: 300,
+      },
+      {
+        name: 'postal',
+        label: gettext('Postal code'),
+        type: 'string',
+        maxlength: 20,
+      },
+      {
+        name: 'bank_name',
+        label: gettext('Bank name'),
+        type: 'string',
+        maxlength: 150,
+      },
+      {
+        name: 'bank_account',
+        label: gettext('Bank account'),
+        type: 'string',
+        maxlength: 50,
       },
       {
         name: 'vat_code',

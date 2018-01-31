@@ -2,14 +2,15 @@ import wizardStepsConfig from './customer-create-config';
 
 export default class CustomerCreateService {
   // @ngInject
-  constructor(features, customersService, expertsService) {
+  constructor(features, customersService, expertsService, ENV) {
     this.features = features;
     this.customersService = customersService;
     this.expertsService = expertsService;
+    this.ENV = ENV;
   }
 
   getSteps() {
-    const steps = angular.copy(wizardStepsConfig);
+    const steps = wizardStepsConfig(this.ENV);
     return steps.filter(step => !step.feature || this.features.isVisible(step.feature));
   }
 
@@ -31,8 +32,12 @@ export default class CustomerCreateService {
       'phone_number',
       'registration_code',
       'country',
-      'contact_details',
+      'address',
       'vat_code',
+      'type',
+      'postal',
+      'bank_name',
+      'bank_account',
     ];
 
     let model = {};
@@ -42,6 +47,9 @@ export default class CustomerCreateService {
     }
     if (formModel.country) {
       model.country = formModel.country.value;
+    }
+    if (formModel.type) {
+      model.type = formModel.type.value;
     }
 
     return model;

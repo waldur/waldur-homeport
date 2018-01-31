@@ -48,7 +48,7 @@ msgid "API token lifetime"
 msgstr ""
 
 #: app/scripts/components/customer/customer-list.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Abbreviation"
 msgstr ""
 
@@ -78,10 +78,6 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/DigitalOceanForm.tsx
 msgid "Access token"
-msgstr ""
-
-#: app/scripts/components/customer/details/customer-manage.html
-msgid "Account"
 msgstr ""
 
 #: app/scripts/components/auth/auth-activation.html
@@ -122,7 +118,7 @@ msgstr ""
 msgid "Accounting records"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Accounting start date"
 msgstr ""
 
@@ -262,7 +258,7 @@ msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
 msgstr ""
@@ -273,7 +269,7 @@ msgid "Affected resource"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Agreement number"
 msgstr ""
 
@@ -483,7 +479,7 @@ msgid "Authentication events"
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
-msgid "Authentication with Mobile ID has been canceled by user or time out. Details:"
+msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.js
@@ -580,8 +576,14 @@ msgstr ""
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
-msgid "Bank"
+#: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/customer/details/CustomerDetails.tsx
+msgid "Bank account"
+msgstr ""
+
+#: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/customer/details/CustomerDetails.tsx
+msgid "Bank name"
 msgstr ""
 
 #: app/scripts/components/slurm/dashboard-quotas.ts
@@ -868,10 +870,6 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
-msgid "Company"
-msgstr ""
-
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/appstore/routes.js
 msgid "Compare flavors"
@@ -930,16 +928,17 @@ msgid "Connected subnets"
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Contact e-mail"
 msgstr ""
 
-#: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Contact email"
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Contact phone"
 msgstr ""
 
@@ -991,7 +990,7 @@ msgid "Could not load a list of identity providers. Please try again."
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Country"
 msgstr ""
 
@@ -1420,7 +1419,6 @@ msgid "Edit team member"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
-#: app/scripts/components/customer/details/customer-manage.html
 #: app/scripts/components/invitations/invitations-list.js
 msgid "Email"
 msgstr ""
@@ -1446,6 +1444,7 @@ msgid "Enabled"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
+#: app/scripts/components/billing/invoice-details.html
 msgid "End time"
 msgstr ""
 
@@ -2399,7 +2398,7 @@ msgstr ""
 msgid "Leave blank if you want admin username to be auto-generated."
 msgstr ""
 
-#: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Legal address"
 msgstr ""
 
@@ -2610,7 +2609,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/cost-planning/cost-plans-list.js
 #: app/scripts/components/customer/create/customer-create-config.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
@@ -2653,7 +2652,7 @@ msgstr ""
 msgid "Name of your organization."
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Native name"
 msgstr ""
 
@@ -3184,7 +3183,7 @@ msgstr ""
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Organization details"
 msgstr ""
 
@@ -3233,7 +3232,9 @@ msgstr ""
 msgid "Organization removal"
 msgstr ""
 
-#: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Organization type"
 msgstr ""
 
@@ -3406,10 +3407,7 @@ msgstr ""
 msgid "Permitted"
 msgstr ""
 
-#: app/scripts/components/billing/billing-customer-details.html
-#: app/scripts/components/billing/billing-issuer-details.html
-#: app/scripts/components/customer/details/customer-manage.html
-#: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/billing/CustomerDetails.tsx
 msgid "Phone"
 msgstr ""
 
@@ -3538,8 +3536,9 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
-msgid "Postal"
+#: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/customer/details/CustomerDetails.tsx
+msgid "Postal code"
 msgstr ""
 
 #: app/scripts/components/auth/powered-by.html
@@ -4107,7 +4106,7 @@ msgstr ""
 msgid "Registered"
 msgstr ""
 
-#: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Registration code"
 msgstr ""
 
@@ -4116,7 +4115,7 @@ msgstr ""
 msgid "Registration method"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Registry code"
 msgstr ""
 
@@ -4849,6 +4848,7 @@ msgid "Start day of accounting"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
+#: app/scripts/components/billing/invoice-details.html
 msgid "Start time"
 msgstr ""
 
@@ -4962,13 +4962,12 @@ msgstr ""
 msgid "Subnet has been updated."
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js
 msgid "Subnets"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
@@ -5768,11 +5767,11 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: app/scripts/components/billing/billing-issuer-details.html
+#: app/scripts/components/billing/CustomerDetails.tsx
 msgid "VAT"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "VAT code"
 msgstr ""
 
@@ -5780,7 +5779,7 @@ msgstr ""
 msgid "VAT is not included."
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "VAT rate"
 msgstr ""
 
