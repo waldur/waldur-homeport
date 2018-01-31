@@ -20,7 +20,7 @@ interface PureIssueAttachmentProps {
 
 const getThumbnail = (attachment: Attachment, openModalHandler) => {
   if (attachment.file.match(/\.(png|jpg|jpeg|gif)/g)) {
-    return <img src={attachment.thumbnail} onClick={openModalHandler} />;
+    return <img src={attachment.file} onClick={openModalHandler} />;
   } else {
     return (
       <a href={attachment.file} download="true">

@@ -18,7 +18,7 @@ describe('IssueAttachment', () => {
 
   it('renders thumbnail', () => {
     const wrapper = renderWrapper({ attachment });
-    expect(wrapper.find('.attachment-item__thumb img').prop('src')).toBe(attachment.thumbnail);
+    expect(wrapper.find('.attachment-item__thumb img').prop('src')).toBe(attachment.file);
   });
 
   it('renders file icon', () => {
