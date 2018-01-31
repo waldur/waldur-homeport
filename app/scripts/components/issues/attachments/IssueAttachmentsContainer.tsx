@@ -27,7 +27,7 @@ export class PureIssueAttachmentsContainer extends React.Component<PureIssueAtta
     dropzoneActive: false,
   };
 
-  dropzoneNode: any = null;
+  dropzoneNode: Dropzone;
 
   componentWillMount() { this.props.getAttachments(); }
 
@@ -58,7 +58,7 @@ export class PureIssueAttachmentsContainer extends React.Component<PureIssueAtta
         {dropzoneActive &&
           <div className="dropzone__overlay">
             <div className="dropzone__overlay-message">
-              {translate('Drop files to attach them to the issue')}.
+              {translate('Drop files to attach them to the issue.')}
             </div>
           </div>
         }
@@ -98,10 +98,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   putAttachments: (files: File[]): void => dispatch(actions.issueAttachmentsPut(ownProps.issue.url, files)),
 });
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
 const enhance = compose(
-  connector,
+  connect(mapStateToProps, mapDispatchToProps),
   withTranslation,
 );
 
