@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Dropzone from 'react-dropzone';
+import * as Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 

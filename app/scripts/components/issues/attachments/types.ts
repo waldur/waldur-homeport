@@ -1,6 +1,7 @@
 export interface Attachment {
   created: string;
   file: string;
+  file_size: number;
   issue: string;
   issue_key: string;
   url: string;

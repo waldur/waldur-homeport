@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { translate } from '@waldur/i18n';
 
 import { PureIssueAttachmentsContainer } from './IssueAttachmentsContainer';
 import { IssueAttachmentsList } from './IssueAttachmentsList';
@@ -25,7 +26,7 @@ describe('IssueAttachmentsContainer', () => {
     attachments: [attachment],
     uploading: 0,
     getAttachments: () => undefined,
-    translate: x => x,
+    translate,
   };
   const renderWrapper = (props?) => shallow(<PureIssueAttachmentsContainer {...initialProps} {...props} />);
 

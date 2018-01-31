@@ -1,6 +1,6 @@
-export const FILESIZE_UNITS = ['MB', 'GB', 'TB', 'PB'];
+export const FILESIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
-export const formatFilesize = input => {
+export const formatFilesize = (input, fromUnit = 'MB') => {
   if (isNaN(parseFloat(input)) || ! isFinite(input)) {
     return '?';
   }
@@ -13,7 +13,10 @@ export const formatFilesize = input => {
     return input;
   }
 
-  let unit = 0;
+  let unit = FILESIZE_UNITS.indexOf(fromUnit);
+  if (unit === -1) {
+    return '?';
+  }
 
   while (input >= 1024) {
     input /= 1024;

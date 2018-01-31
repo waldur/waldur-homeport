@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { formatFilesize } from '@waldur/core/utils';
 
 import * as actions from './actions';
 import './IssueAttachment.scss';
@@ -59,7 +60,7 @@ export const PureIssueAttachment = (props: PureIssueAttachmentProps) => {
             {formatDateTime(attachment.created)}
           </div>
           <div className="attachment-item__description-size">
-            200kb
+            {formatFilesize(attachment.file_size, 'B')}
           </div>
         </div>
       </div>
