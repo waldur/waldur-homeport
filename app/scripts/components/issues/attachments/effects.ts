@@ -17,7 +17,7 @@ export function* issueAttachmentsGet(action) {
     yield put(actions.issueAttachmentsGetSuccess(response.data));
   } catch (error) {
     yield put(actions.issueAttachmentsGetError(error));
-    const message = `${translate('Unable to fetch attachment')}. ${format(error)}`;
+    const message = `${translate('Unable to fetch attachment.')} ${format(error)}`;
     yield put(showError(message));
   }
 }
@@ -44,7 +44,7 @@ export function* issueAttachmentUpload(action) {
     yield put(actions.issueAttachmentsPutSuccess(response.data));
   } catch (error) {
     yield put(actions.issueAttachmentsPutError(error));
-    const message = `${translate('Unable to upload attachment')}. ${format(error)}`;
+    const message = `${translate('Unable to upload attachment.')} ${format(error)}`;
     yield put(showError(message));
   }
 }
@@ -59,7 +59,7 @@ export function* issueAttachmentsDelete(action) {
     yield put(actions.issueAttachmentsDeleteSuccess(uuid));
   } catch (error) {
     yield put(actions.issueAttachmentsDeleteError(error, uuid));
-    const message = `${translate('Unable to delete attachment')}. ${format(error)}`;
+    const message = `${translate('Unable to delete attachment.')} ${format(error)}`;
     yield put(showError(message));
   }
 }

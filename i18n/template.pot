@@ -1382,7 +1382,7 @@ msgid "Draft"
 msgstr ""
 
 #: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
-msgid "Drop files to attach them to the issue"
+msgid "Drop files to attach them to the issue."
 msgstr ""
 
 #: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
@@ -5461,7 +5461,7 @@ msgid "Unable to delete application"
 msgstr ""
 
 #: app/scripts/components/issues/attachments/effects.ts
-msgid "Unable to delete attachment"
+msgid "Unable to delete attachment."
 msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js
@@ -5470,7 +5470,7 @@ msgid "Unable to delete link."
 msgstr ""
 
 #: app/scripts/components/issues/attachments/effects.ts
-msgid "Unable to fetch attachment"
+msgid "Unable to fetch attachment."
 msgstr ""
 
 #: app/scripts/components/table-react/Table.tsx
@@ -5538,7 +5538,7 @@ msgid "Unable to update provider."
 msgstr ""
 
 #: app/scripts/components/issues/attachments/effects.ts
-msgid "Unable to upload attachment"
+msgid "Unable to upload attachment."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.js
@@ -5547,6 +5547,10 @@ msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
 msgid "Unexpected exception happened during login process."
+msgstr ""
+
+#: app/scripts/components/core/ErrorMessageFormatter.ts
+msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
