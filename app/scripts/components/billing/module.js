@@ -4,7 +4,6 @@ import billingDetails from './billing-details';
 import invoiceHeader from './invoice-header';
 import invoiceDetails from './invoice-details';
 import invoicesList from './invoices-list';
-import billingIssuerDetails from './CustomerDetails';
 import billingCustomerDetails from './CustomerDetails';
 import billingRecordDetails from './billing-record-details';
 import billingRecordHeader from './billing-record-header';
@@ -21,7 +20,6 @@ export default module => {
   module.component('invoiceHeader', invoiceHeader);
   module.component('invoiceDetails', invoiceDetails);
   module.component('invoicesList', invoicesList);
-  module.component('billingIssuerDetails', billingIssuerDetails);
   module.component('billingCustomerDetails', billingCustomerDetails);
   module.component('billingRecordDetails', billingRecordDetails);
   module.component('billingRecordHeader', billingRecordHeader);

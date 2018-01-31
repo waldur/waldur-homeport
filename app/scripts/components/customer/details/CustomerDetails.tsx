@@ -19,7 +19,7 @@ export const PureCustomerDetails = ({ translate, customer, organizationSubnetsVi
     </div>
 
     <div className="panel-body">
-      <dl className="dl-horizontal">
+      <dl className="dl-horizontal resource-details-table">
 
         <Field
           label={translate('Name')}
@@ -78,7 +78,7 @@ export const PureCustomerDetails = ({ translate, customer, organizationSubnetsVi
 
         <Field
           label={translate('VAT rate')}
-          value={customer.default_tax_percent}
+          value={`${customer.default_tax_percent}%`}
         />
 
         <Field
@@ -92,17 +92,17 @@ export const PureCustomerDetails = ({ translate, customer, organizationSubnetsVi
         />
 
         <Field
-          label={translate('Postal')}
+          label={translate('Postal code')}
           value={customer.postal}
         />
 
         <Field
-          label={translate('Bank')}
+          label={translate('Bank name')}
           value={customer.bank_name}
         />
 
         <Field
-          label={translate('Account')}
+          label={translate('Bank account')}
           value={customer.bank_account}
         />
       </dl>

@@ -31,7 +31,7 @@ export const PureCustomerSummary = ({ customer, translate }) => (
           value={customer.email}
         />
         <Row
-          label={translate('Phone')}
+          label={translate('Contact phone')}
           value={customer.phone_number}
         />
       </tbody>

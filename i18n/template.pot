@@ -80,10 +80,6 @@ msgstr ""
 msgid "Access token"
 msgstr ""
 
-#: app/scripts/components/customer/details/CustomerDetails.tsx
-msgid "Account"
-msgstr ""
-
 #: app/scripts/components/auth/auth-activation.html
 msgid "Account activation"
 msgstr ""
@@ -580,15 +576,13 @@ msgstr ""
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr ""
 
-#: app/scripts/components/customer/details/CustomerDetails.tsx
-msgid "Bank"
-msgstr ""
-
 #: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Bank account"
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Bank name"
 msgstr ""
 
@@ -944,6 +938,7 @@ msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Contact phone"
 msgstr ""
 
@@ -1449,6 +1444,7 @@ msgid "Enabled"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
+#: app/scripts/components/billing/invoice-details.html
 msgid "End time"
 msgstr ""
 
@@ -3412,7 +3408,6 @@ msgid "Permitted"
 msgstr ""
 
 #: app/scripts/components/billing/CustomerDetails.tsx
-#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Phone"
 msgstr ""
 
@@ -3541,11 +3536,8 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/components/customer/details/CustomerDetails.tsx
-msgid "Postal"
-msgstr ""
-
 #: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Postal code"
 msgstr ""
 
@@ -4856,6 +4848,7 @@ msgid "Start day of accounting"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
+#: app/scripts/components/billing/invoice-details.html
 msgid "Start time"
 msgstr ""
 
