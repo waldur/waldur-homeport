@@ -2,13 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Customer } from '@waldur/customer/types';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { getConfig } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 interface  CustomerDetailsProps extends TranslateProps {
-  customer: any;
+  customer: Customer;
   organizationSubnetsVisible: boolean;
 }
 

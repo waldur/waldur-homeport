@@ -1,7 +1,12 @@
 import * as React from 'react';
 
-import { withTranslation } from '@waldur/i18n';
+import { Customer } from '@waldur/customer/types';
+import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
+
+interface CustomerSummaryProps extends TranslateProps {
+  customer: Customer;
+}
 
 const Row = ({ label, value }) => value ? (
   <tr>
@@ -10,7 +15,7 @@ const Row = ({ label, value }) => value ? (
   </tr>
 ) : null;
 
-export const PureCustomerSummary = ({ customer, translate }) => (
+export const PureCustomerSummary = ({ customer, translate }: CustomerSummaryProps) => (
   <div className="table-responsive">
     <table className="table table-bordered">
       <tbody>

@@ -1,10 +1,10 @@
 import * as React from 'react';
 
+import { Customer } from '@waldur/customer/types';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { formatPhone, normalizeCustomerDetails } from './filters';
-import { Customer } from './types';
 
 interface CustomerDetailsProps extends TranslateProps {
   customer: Customer;

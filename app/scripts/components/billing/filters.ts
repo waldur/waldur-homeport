@@ -1,4 +1,4 @@
-import { Customer } from './types';
+import { Customer } from '@waldur/customer/types';
 
 // phone numbers specification https://www.itu.int/rec/T-REC-E.164-201011-I
 export function formatPhone(value) {
