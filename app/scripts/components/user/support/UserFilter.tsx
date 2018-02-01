@@ -6,14 +6,10 @@ import { withTranslation } from '@waldur/i18n/translate';
 
 import { UserFilterContainer } from './UserFilterContainer';
 
-const PureUserFilter = (props: TranslateProps) => {
-  return (
-    <div className="filter-view">
-      <Panel title={props.translate('Apply filters')}>
-        <UserFilterContainer />
-      </Panel>
-    </div>
-  );
-};
+const PureUserFilter = ({translate}: TranslateProps) => (
+  <Panel title={translate('Apply filters')}>
+    <UserFilterContainer />
+  </Panel>
+);
 
 export const UserFilter = withTranslation(PureUserFilter);
