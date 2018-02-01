@@ -7,6 +7,7 @@ import { showSuccess } from '@waldur/store/coreSaga';
 import * as actions from './actions';
 import * as api from './api';
 import { FETCH_REQUEST } from './constants';
+import { closeModalDialog } from '@waldur/modal/actions';
 
 export function* handleFetchHost(action) {
   const { scope } = action.payload;
@@ -26,6 +27,7 @@ function* handleCreateHost(action) {
     yield call(api.createHost, action.payload);
     yield put(actions.createHost.success());
     yield put(showSuccess(successMessage));
+    yield put(closeModalDialog());
   } catch (error) {
     const formError = new SubmissionError({
       _error: errorMessage,
