@@ -40,11 +40,13 @@ export function reducer(state = INITIAL_STATE, action) {
 
     case DELETE_REQUEST:
     return {
+      ...state,
       deleting: true,
     };
 
     case DELETE_FAILURE:
     return {
+      ...state,
       deleting: false,
     };
 

@@ -16,7 +16,7 @@ export const getFirst = (endpoint, params?) =>
   getList(endpoint, params).then(data => data[0]);
 
 export const getById = (endpoint, id) =>
-  get(`${endpoint}${id}/`);
+  get(`${endpoint}${id}/`).then(response => response.data);
 
 export const deleteById = (endpoint, id, options?) =>
   $http.delete(`${ENV.apiEndpoint}api${endpoint}${id}/`, options);

@@ -27,9 +27,10 @@ export function* handleDeleteHost(action) {
   try {
     yield call(api.deleteHost, uuid);
     yield put(closeModalDialog());
-    showSuccess(successMessage);
+    yield put(showSuccess(successMessage));
+    yield api.refreshResource();
   } catch {
-    showError(errorMessage);
+    yield put(showError(errorMessage));
     yield put(actions.deleteFailure());
   }
 }
@@ -43,6 +44,7 @@ function* handleCreateHost(action) {
     yield put(actions.createHost.success());
     yield put(showSuccess(successMessage));
     yield put(closeModalDialog());
+    yield api.refreshResource();
   } catch (error) {
     const formError = new SubmissionError({
       _error: errorMessage,

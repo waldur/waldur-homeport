@@ -25,11 +25,19 @@ interface ZabbixHostDetailsDialogProps extends TranslateProps {
   host?: any;
 }
 
+const DialogFooter = ({ host }) => (
+  <>
+    <ZabbixHostDeleteButton host={host}/>
+    {' '}
+    <CloseDialogButton/>
+  </>
+);
+
 class ZabbixHostDetailsDialog extends React.Component<ZabbixHostDetailsDialogProps> {
   render() {
     const { translate, host, loading, erred } = this.props;
     return (
-      <ModalDialog title={translate('Monitoring details')} footer={<CloseDialogButton/>}>
+      <ModalDialog title={translate('Monitoring details')} footer={<DialogFooter host={host}/>}>
         {loading && <LoadingSpinner/>}
         {erred && translate('Unable to load Zabbix host details')}
         {host && (
@@ -38,7 +46,6 @@ class ZabbixHostDetailsDialog extends React.Component<ZabbixHostDetailsDialogPro
               <div className="row m-t-md">
                 <dl className="dl-horizontal resource-details-table col-sm-12">
                   <ZabbixHostSummary resource={host}/>
-                  <ZabbixHostDeleteButton resource={host}/>
                 </dl>
               </div>
             </Tab>
@@ -57,7 +64,7 @@ class ZabbixHostDetailsDialog extends React.Component<ZabbixHostDetailsDialogPro
 }
 
 const mapStateToDispatch = (dispatch, ownProps) => ({
-  onFetch: () => dispatch(fetchZabbixHost(ownProps.resource.uuid)),
+  onFetch: () => dispatch(fetchZabbixHost(ownProps.resolve.resource.uuid)),
 });
 
 const enhance = compose(

@@ -17,7 +17,7 @@ export const ZabbixHostSummary = withTranslation(({ resource, translate }) => (
     />
     <Field
       label={translate('Host IP address')}
-      value={resource.interface_parameters.ip}
+      value={resource.interface_parameters && resource.interface_parameters.ip}
     />
     <Field
       label={translate('Host group name')}

@@ -1,4 +1,5 @@
 import { getById, getList, post, deleteById } from '@waldur/core/api';
+import { $rootScope } from '@waldur/core/services';
 
 import { ZabbixLinkApi, ZabbixTemplateApi } from './types';
 
@@ -21,3 +22,6 @@ export const createHost = request =>
     scope: request.resource.url,
     templates: request.templates.map(template => ({ url: template.url })),
   });
+
+export const refreshResource = () =>
+  $rootScope.$broadcast('refreshResource');
