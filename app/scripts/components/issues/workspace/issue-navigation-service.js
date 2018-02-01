@@ -3,6 +3,11 @@ const HELPDESK_ITEMS = [
     label: gettext('Helpdesk'),
     icon: 'fa-headphones',
     link: 'support.helpdesk'
+  },
+  {
+    label: gettext('Users'),
+    icon: 'fa-users',
+    link: 'support.users'
   }
 ];
 
