@@ -12,7 +12,7 @@ import * as actions from './actions';
 import { MonitoringGuide } from './MonitoringGuide';
 import { ZabbixTemplateRequest } from './types';
 
-const MonitoringCreateDialog = props => (
+const ZabbixHostCreateDialog = props => (
   <ActionDialog
     title={props.translate('Create Zabbix host')}
     submitLabel={props.translate('Create Zabbix host')}
@@ -75,6 +75,4 @@ const enhance = compose(
   connect(null, mapDispatchToProps),
 );
 
-const MonitoringCreateContainer = enhance(MonitoringCreateDialog);
-
-export default connectAngularComponent(MonitoringCreateContainer, ['resolve']);
+export default connectAngularComponent(enhance(ZabbixHostCreateDialog), ['resolve']);

@@ -2,12 +2,18 @@ import { createFormAction } from 'redux-form-saga';
 
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { FETCH_REQUEST, FETCH_SUCCESS, FETCH_FAILURE } from './constants';
+import {
+  FETCH_REQUEST,
+  FETCH_SUCCESS,
+  FETCH_FAILURE,
+  DELETE_REQUEST,
+  DELETE_FAILURE,
+} from './constants';
 
-export const fetchMonitoring = scope => ({
+export const fetchZabbixHost = uuid => ({
   type: FETCH_REQUEST,
   payload: {
-    scope,
+    uuid,
   },
 });
 
@@ -20,6 +26,17 @@ export const fetchSuccess = host => ({
 
 export const fetchFailure = () => ({
   type: FETCH_FAILURE,
+});
+
+export const deleteRequest = uuid => ({
+  type: DELETE_REQUEST,
+  payload: {
+    uuid,
+  },
+});
+
+export const deleteFailure = () => ({
+  type: DELETE_FAILURE,
 });
 
 export const openDetailsDialog = resource =>

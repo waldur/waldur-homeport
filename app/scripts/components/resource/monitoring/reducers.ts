@@ -1,10 +1,17 @@
-import { FETCH_REQUEST, FETCH_SUCCESS, FETCH_FAILURE } from './constants';
+import {
+  FETCH_REQUEST,
+  FETCH_SUCCESS,
+  FETCH_FAILURE,
+  DELETE_REQUEST,
+  DELETE_FAILURE,
+} from './constants';
 
 const INITIAL_STATE = {
   loading: false,
   loaded: false,
   erred: false,
   host: undefined,
+  deleting: false,
 };
 
 export function reducer(state = INITIAL_STATE, action) {
@@ -29,6 +36,16 @@ export function reducer(state = INITIAL_STATE, action) {
       loading: false,
       loaded: false,
       erred: true,
+    };
+
+    case DELETE_REQUEST:
+    return {
+      deleting: true,
+    };
+
+    case DELETE_FAILURE:
+    return {
+      deleting: false,
     };
 
     default:

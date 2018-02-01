@@ -2,20 +2,35 @@ import { SubmissionError } from 'redux-form';
 import { takeEvery, put, call } from 'redux-saga/effects';
 
 import { translate } from '@waldur/i18n';
-import { showSuccess } from '@waldur/store/coreSaga';
+import { closeModalDialog } from '@waldur/modal/actions';
+import { showSuccess, showError } from '@waldur/store/coreSaga';
 
 import * as actions from './actions';
 import * as api from './api';
-import { FETCH_REQUEST } from './constants';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { FETCH_REQUEST, DELETE_REQUEST } from './constants';
 
 export function* handleFetchHost(action) {
-  const { scope } = action.payload;
+  const { uuid } = action.payload;
   try {
-    const host = yield call(api.fetchHost, scope);
+    const host = yield call(api.fetchHost, uuid);
     yield put(actions.fetchSuccess(host));
   } catch {
     yield put(actions.fetchFailure());
+  }
+}
+
+export function* handleDeleteHost(action) {
+  const successMessage = translate('Zabbix host has been deleted.');
+  const errorMessage = translate('Zabbix host could not be deleted.');
+
+  const { uuid } = action.payload;
+  try {
+    yield call(api.deleteHost, uuid);
+    yield put(closeModalDialog());
+    showSuccess(successMessage);
+  } catch {
+    showError(errorMessage);
+    yield put(actions.deleteFailure());
   }
 }
 
@@ -57,6 +72,7 @@ function* handleLoadTemplates(action) {
 
 export default function*() {
   yield takeEvery(FETCH_REQUEST, handleFetchHost);
+  yield takeEvery(DELETE_REQUEST, handleDeleteHost);
   yield takeEvery(actions.createHost.REQUEST, handleCreateHost);
   yield takeEvery(actions.loadLinks.REQUEST, handleLoadLinks);
   yield takeEvery(actions.loadTemplates.REQUEST, handleLoadTemplates);

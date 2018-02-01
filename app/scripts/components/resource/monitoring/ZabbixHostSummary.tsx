@@ -1,9 +1,10 @@
 import * as React from 'react';
 
+import { withTranslation } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary/Field';
 import { ResourceSummaryBase } from '@waldur/resource/summary/ResourceSummaryBase';
 
-export const ZabbixHostSummary = ({ resource, translate }) => (
+export const ZabbixHostSummary = withTranslation(({ resource, translate }) => (
   <>
     <ResourceSummaryBase resource={resource}/>
     <Field
@@ -23,4 +24,4 @@ export const ZabbixHostSummary = ({ resource, translate }) => (
       value={resource.host_group_name}
     />
   </>
-);
+));

@@ -29,6 +29,8 @@ module.exports = {
       'react-bootstrap/lib/Tabs',
       'react-bootstrap/lib/Tooltip',
       'react-bootstrap/lib/OverlayTrigger',
+      'react-dropzone',
+      'attr-accept',
       'intro.js',
 
       'angular',

@@ -15,6 +15,12 @@ export const getList = (endpoint, params?) => {
 export const getFirst = (endpoint, params?) =>
   getList(endpoint, params).then(data => data[0]);
 
+export const getById = (endpoint, id) =>
+  get(`${endpoint}${id}/`);
+
+export const deleteById = (endpoint, id, options?) =>
+  $http.delete(`${ENV.apiEndpoint}api${endpoint}${id}/`, options);
+
 export const post = (endpoint: string, options?: any) =>
   $http.post(`${ENV.apiEndpoint}api${endpoint}`, options);
 

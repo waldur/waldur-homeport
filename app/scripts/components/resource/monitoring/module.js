@@ -1,5 +1,5 @@
-import monitoringCreateDialog from './MonitoringCreateDialog';
-import monitoringDetailsDialog from './MonitoringDetailsDialog';
+import monitoringCreateDialog from './ZabbixHostCreateDialog';
+import monitoringDetailsDialog from './ZabbixHostDetailsDialog';
 import multiLineChart from './multi-line-chart';
 import verticalBarChart from './vertical-bar-chart';
 import resourceGraphs from './resource-graphs';

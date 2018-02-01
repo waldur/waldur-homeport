@@ -808,7 +808,7 @@ msgstr ""
 msgid "Chart is not available at this moment."
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/MonitoringDetailsDialog.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Charts"
 msgstr ""
 
@@ -1024,7 +1024,7 @@ msgstr ""
 msgid "Create VM"
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/MonitoringCreateDialog.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
 msgid "Create Zabbix host"
 msgstr ""
 
@@ -1246,6 +1246,10 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ZabbixHostDeleteButton.tsx
+msgid "Delete Zabbix host"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 msgid "Deployment plan"
 msgstr ""
@@ -1323,7 +1327,7 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/details/dialog.html
 #: app/scripts/components/providers/provider-list.js
-#: app/scripts/components/resource/monitoring/MonitoringDetailsDialog.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: app/scripts/components/slurm/actions.js
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
@@ -1703,10 +1707,6 @@ msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts
 msgid "Failed to operate with backend."
-msgstr ""
-
-#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
-msgid "Fetching data."
 msgstr ""
 
 #: app/scripts/components/form/appstore-field-email.js
@@ -2632,11 +2632,11 @@ msgid "Mobile phone number"
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-global-list.js
-#: app/scripts/components/resource/monitoring/ResourceMonitoringField.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostField.tsx
 msgid "Monitoring"
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/MonitoringDetailsDialog.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Monitoring details"
 msgstr ""
 
@@ -5146,7 +5146,7 @@ msgstr ""
 msgid "Team size"
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/MonitoringCreateDialog.tsx
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
 msgid "Templates"
 msgstr ""
 
@@ -5539,6 +5539,10 @@ msgstr ""
 msgid "Unable to fetch project providers."
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
+msgid "Unable to load Zabbix host details"
+msgstr ""
+
 #: app/scripts/components/core/bootstrap.js
 msgid "Unable to load application configuration. Please reload this page."
 msgstr ""
@@ -5557,10 +5561,6 @@ msgstr ""
 
 #: app/scripts/components/core/DownloadLink/effects.tsx
 msgid "Unable to load file."
-msgstr ""
-
-#: app/scripts/components/resource/monitoring/ResourceMonitoringIndicator.tsx
-msgid "Unable to load monitoring data."
 msgstr ""
 
 #: app/scripts/components/project/ProjectCreateContainer.tsx
@@ -6186,10 +6186,18 @@ msgid "Zabbix host could not be created."
 msgstr ""
 
 #: app/scripts/components/resource/monitoring/effects.ts
+msgid "Zabbix host could not be deleted."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/effects.ts
 msgid "Zabbix host has been created."
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/MonitoringCreateDialog.tsx
+#: app/scripts/components/resource/monitoring/effects.ts
+msgid "Zabbix host has been deleted."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
 msgid "Zabbix provider"
 msgstr ""
 

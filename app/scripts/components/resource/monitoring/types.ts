@@ -1,3 +1,5 @@
+import { ResourceState } from '@waldur/resource/state/types';
+
 export interface ZabbixLink {
   name: string;
   url: string;
@@ -22,3 +24,7 @@ export interface ZabbixTemplateRequest {
 }
 
 export type ZabbixTemplateApi = (request: ZabbixTemplateRequest) => angular.IPromise<ZabbixTemplate[]>;
+
+export interface ZabbixHost {
+  state: ResourceState;
+}

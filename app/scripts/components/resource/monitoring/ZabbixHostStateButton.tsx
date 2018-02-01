@@ -47,8 +47,10 @@ const mapStateToParams = (state: ResourceState, translate: Translate) => {
   }
 };
 
+export const PureZabbixHostStateButton = props => {
+  const params = mapStateToParams(props.host.state, props.translate);
+  return <ZabbixHostDetailsButton host={props.host} {...params}/>;
+};
+
 export const ZabbixHostStateButton: React.ComponentType<ZabbixHostStateButtonProps> =
-  withTranslation(props => {
-    const params = mapStateToParams(props.host.state, props.translate);
-    return <ZabbixHostDetailsButton host={props.host} {...params}/>;
-  });
+  withTranslation(PureZabbixHostStateButton);
