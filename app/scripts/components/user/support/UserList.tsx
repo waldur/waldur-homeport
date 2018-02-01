@@ -1,9 +1,12 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 
 import BooleanField from '@waldur/table-react/BooleanField';
 import { Table, connectTable, createFetcher } from '@waldur/table-react/index';
 
-import UserDetailsButton from './UserDetailsButton';
+import { UserDetailsButton } from './UserDetailsButton';
 
 const PhoneNumberField = ({ row }) => (
   <span>{row.phone_number}</span>
@@ -62,16 +65,21 @@ const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => {
-  return props.userFilter;
-};
-
 const TableOptions = {
   table: 'userList',
   fetchData: createFetcher('users'),
-  mapPropsToFilter,
+  mapPropsToFilter: props => props.userFilter,
   exportFields: ['username', 'email'],
   exportRow: row => [row.username, row.email],
 };
 
-export default connectTable(TableOptions)(TableComponent);
+const mapStateToProps = state => ({
+  userFilter: getFormValues('userFilter')(state),
+});
+
+const enhance = compose(
+  connect(mapStateToProps),
+  connectTable(TableOptions),
+);
+
+export const UserList = enhance(TableComponent);

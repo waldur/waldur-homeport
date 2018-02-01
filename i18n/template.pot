@@ -1452,7 +1452,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
 #: app/scripts/components/invitations/invitations-list.js
-#: app/scripts/components/user/support/UserFilterForm.tsx
+#: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/support/UserList.tsx
 msgid "Email"
 msgstr ""
@@ -1851,7 +1851,7 @@ msgid "From port"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
-#: app/scripts/components/user/support/UserFilterForm.tsx
+#: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/support/UserList.tsx
 #: app/scripts/components/user/user-edit.html
 #: app/scripts/components/user/user-popover-table.html
@@ -2009,7 +2009,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
-#: app/scripts/components/user/support/UserFilterForm.tsx
+#: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/user-edit.html
 #: app/scripts/components/user/user-popover-table.html
 msgid "ID code"
@@ -2735,7 +2735,7 @@ msgid "Name of your organization."
 msgstr ""
 
 #: app/scripts/components/customer/details/CustomerDetails.tsx
-#: app/scripts/components/user/support/UserFilterForm.tsx
+#: app/scripts/components/user/support/UserFilter.tsx
 msgid "Native name"
 msgstr ""
 
