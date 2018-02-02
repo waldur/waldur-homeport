@@ -12,6 +12,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { fetchZabbixHost } from './actions';
 import { getMonitoringState } from './selectors';
+import { ZabbixHost } from './types';
 import { ZabbixHostDeleteButton } from './ZabbixHostDeleteButton';
 import { ZabbixHostSummary } from './ZabbixHostSummary';
 
@@ -22,7 +23,7 @@ interface ZabbixHostDetailsDialogProps extends TranslateProps {
   loading: boolean;
   erred: boolean;
   onFetch: () => void;
-  host?: any;
+  host?: ZabbixHost;
 }
 
 const DialogFooter = ({ host }) => (
@@ -33,28 +34,41 @@ const DialogFooter = ({ host }) => (
   </>
 );
 
+export const DialogBody = props => {
+  if (props.loading) {
+    return <LoadingSpinner/>;
+  } else if (props.host) {
+    let defaultTab = 1;
+    if (props.host.state === 'OK') {
+      defaultTab = 2;
+    }
+    return (
+      <Tabs defaultActiveKey={defaultTab} id="monitoringDetails">
+        <Tab eventKey={1} title={props.translate('Details')}>
+          <div className="row m-t-md">
+            <dl className="dl-horizontal resource-details-table col-sm-12">
+              <ZabbixHostSummary resource={props.host}/>
+            </dl>
+          </div>
+        </Tab>
+        <Tab eventKey={2} title={props.translate('Charts')}>
+          TODO.
+        </Tab>
+      </Tabs>
+    );
+  } else {
+    return props.translate('Unable to load Zabbix host details.');
+  }
+};
+
 class ZabbixHostDetailsDialog extends React.Component<ZabbixHostDetailsDialogProps> {
   render() {
-    const { translate, host, loading, erred } = this.props;
     return (
-      <ModalDialog title={translate('Monitoring details')} footer={<DialogFooter host={host}/>}>
-        {loading && <LoadingSpinner/>}
-        {erred && translate('Unable to load Zabbix host details')}
-        {host && (
-          <Tabs defaultActiveKey={1} id="monitoringDetails">
-            <Tab eventKey={1} title={translate('Details')}>
-              <div className="row m-t-md">
-                <dl className="dl-horizontal resource-details-table col-sm-12">
-                  <ZabbixHostSummary resource={host}/>
-                </dl>
-              </div>
-            </Tab>
-            <Tab eventKey={2} title={translate('Charts')}>
-              TODO.
-            </Tab>
-          </Tabs>
-        )}
-      </ModalDialog>
+      <ModalDialog
+        title={this.props.translate('Monitoring details')}
+        footer={<DialogFooter host={this.props.host}/>}
+        children={<DialogBody {...this.props}/>}
+      />
     );
   }
 

@@ -1,21 +1,17 @@
-import * as classNames from 'classnames';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { ResourceState } from '@waldur/resource/state/types';
+import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
 
 import { deleteRequest } from './actions';
 import { getMonitoringState } from './selectors';
+import { ZabbixHost } from './types';
 
 interface ZabbixHostDeleteButtonProps extends TranslateProps {
   onClick: () => void;
   deleting: boolean;
-  host: {
-    state: ResourceState;
-  };
-  isEnabled: boolean;
+  host: ZabbixHost;
 }
 
 const canDeleteHost = host => host && (host.state === 'OK' || host.state === 'Erred');
@@ -24,7 +20,8 @@ export const PureZabbixHostDeleteButton = (props: ZabbixHostDeleteButtonProps) =
   canDeleteHost(props.host) ? (
     <button
       type="button"
-      className={classNames('btn btn-danger', {disabled: props.deleting})}
+      className="btn btn-danger"
+      disabled={props.deleting}
       onClick={props.onClick}>
       {props.deleting ?
         <i className="fa fa-spinner fa-spin m-r-xs"/> :
@@ -36,12 +33,18 @@ export const PureZabbixHostDeleteButton = (props: ZabbixHostDeleteButtonProps) =
   ) : null;
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onClick: () => dispatch(deleteRequest(ownProps.host.uuid)),
+  onClick: () => {
+    const confirmMessage = translate('Do you really want to delete Zabbix host?');
+    const confirm = window.confirm(confirmMessage);
+    if (confirm) {
+      dispatch(deleteRequest(ownProps.host.uuid));
+    }
+  },
 });
 
 const enhance = compose(
-  withTranslation,
   connect(getMonitoringState, mapDispatchToProps),
+  withTranslation,
 );
 
 export const ZabbixHostDeleteButton = enhance(PureZabbixHostDeleteButton);

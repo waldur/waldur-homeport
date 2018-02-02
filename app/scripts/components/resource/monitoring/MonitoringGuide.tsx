@@ -6,8 +6,12 @@ import { formatTemplate } from '@waldur/i18n/translate';
 import { HtmlTabList } from './HtmlTabList';
 
 interface MonitoringGuideProps extends TranslateProps {
-  resource: any;
-  link: any;
+  resource: {
+    uuid: string;
+  };
+  link: {
+    internal_ip: string;
+  };
 }
 
 export const MonitoringGuide = (props: MonitoringGuideProps) => {

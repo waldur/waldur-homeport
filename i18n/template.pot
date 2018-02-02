@@ -1365,6 +1365,10 @@ msgstr ""
 msgid "Do not have an account?"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ZabbixHostDeleteButton.tsx
+msgid "Do you really want to delete Zabbix host?"
+msgstr ""
+
 #: app/scripts/components/experts/bids/expert-bid-utils.js
 msgid "Do you really want to delete this proposal? This action cannot be undone."
 msgstr ""
@@ -5540,7 +5544,7 @@ msgid "Unable to fetch project providers."
 msgstr ""
 
 #: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
-msgid "Unable to load Zabbix host details"
+msgid "Unable to load Zabbix host details."
 msgstr ""
 
 #: app/scripts/components/core/bootstrap.js
