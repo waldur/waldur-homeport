@@ -69,7 +69,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       internal_ips_set: {
         heading: gettext('Internal IPs'),
         component: 'openstackInstanceInternalIpsList'
-      }
+      },
     })
   });
 }

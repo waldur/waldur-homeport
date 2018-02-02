@@ -49,6 +49,7 @@ const resourceHeader = {
         .finally(() => {
           this.loading = false;
         });
+      this.$scope.$on('refreshResource', () => this.reInitResource());
     }
 
     refreshBreadcrumbs() {

@@ -808,6 +808,10 @@ msgstr ""
 msgid "Chart is not available at this moment."
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
+msgid "Charts"
+msgstr ""
+
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
@@ -1018,6 +1022,10 @@ msgstr ""
 
 #: app/scripts/components/resource/actions/create-vm-button.html
 msgid "Create VM"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
+msgid "Create Zabbix host"
 msgstr ""
 
 #: app/scripts/components/experts/extensions/expert-request-create-button.html
@@ -1238,6 +1246,10 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ZabbixHostDeleteButton.tsx
+msgid "Delete Zabbix host"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 msgid "Deployment plan"
 msgstr ""
@@ -1315,6 +1327,7 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/details/dialog.html
 #: app/scripts/components/providers/provider-list.js
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: app/scripts/components/slurm/actions.js
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
@@ -1350,6 +1363,10 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
 msgid "Do not have an account?"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostDeleteButton.tsx
+msgid "Do you really want to delete Zabbix host?"
 msgstr ""
 
 #: app/scripts/components/experts/bids/expert-bid-utils.js
@@ -1888,10 +1905,6 @@ msgstr ""
 msgid "Got it!"
 msgstr ""
 
-#: app/scripts/components/resource/tabs/constants.js
-msgid "Graphs"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-backup/actions.js
 msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr ""
@@ -1924,6 +1937,22 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-details.html
 msgid "Homepage"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host IP address"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host group name"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host name"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host status"
 msgstr ""
 
 #: app/scripts/components/slurm/SlurmForm.tsx
@@ -2053,6 +2082,10 @@ msgstr ""
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Importing resources"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/MonitoringGuide.tsx
+msgid "In order to enable monitoring you should install and configure Zabbix agent on monitored virtual machine."
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
@@ -2603,7 +2636,28 @@ msgid "Mobile phone number"
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-global-list.js
+#: app/scripts/components/resource/monitoring/ZabbixHostField.tsx
 msgid "Monitoring"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
+msgid "Monitoring details"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
+msgid "Monitoring system has failed."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
+msgid "Monitoring system is being deleted."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
+msgid "Monitoring system is being provisioned."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
+msgid "Monitoring system is being updated."
 msgstr ""
 
 #: app/scripts/components/quotas/constants.js
@@ -4352,6 +4406,14 @@ msgstr ""
 msgid "Resource is in sync"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
+msgid "Resource is monitored using Zabbix."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateButton.tsx
+msgid "Resource is not monitored yet."
+msgstr ""
+
 #: app/scripts/components/analytics/cost-analysis.html
 msgid "Resource name"
 msgstr ""
@@ -4447,10 +4509,6 @@ msgstr ""
 
 #: app/scripts/components/configs/base-config.js
 msgid "Russian"
-msgstr ""
-
-#: app/scripts/components/resource/tabs/constants.js
-msgid "SLA"
 msgstr ""
 
 #: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html
@@ -5092,6 +5150,10 @@ msgstr ""
 msgid "Team size"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
+msgid "Templates"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 #: app/scripts/components/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: app/scripts/components/openstack/openstack-security-groups/OpenStackSecurityGroupSummary.tsx
@@ -5479,6 +5541,10 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js
 msgid "Unable to fetch project providers."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
+msgid "Unable to load Zabbix host details."
 msgstr ""
 
 #: app/scripts/components/core/bootstrap.js
@@ -6117,6 +6183,26 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
 msgid "Your single pane of control for all cloud services. Login in to see it in action."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/effects.ts
+msgid "Zabbix host could not be created."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/effects.ts
+msgid "Zabbix host could not be deleted."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/effects.ts
+msgid "Zabbix host has been created."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/effects.ts
+msgid "Zabbix host has been deleted."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
+msgid "Zabbix provider"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/OpenStackVolumeSummary.tsx

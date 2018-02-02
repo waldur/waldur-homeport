@@ -14,7 +14,7 @@ const formatUptime = props =>
   props.resource.start_time ? formatRelative(props.resource.start_time) : null;
 
 const ResourceSummaryField = ({ translate, resource }) => (
-  <span>
+  <>
     {formatSummary(resource)}
     {resource.flavor_name && (
       <Tooltip
@@ -24,13 +24,13 @@ const ResourceSummaryField = ({ translate, resource }) => (
         <i className="fa fa-question-circle"/>
       </Tooltip>
     )}
-  </span>
+  </>
 );
 
 export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
   const { translate } = props;
   return (
-    <span>
+    <>
       <PureResourceSummaryBase {...props}/>
       <Field
         label={translate('Summary')}
@@ -56,7 +56,7 @@ export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
         label={translate('Uptime')}
         value={formatUptime(props)}
       />
-    </span>
+    </>
   );
 };
 
