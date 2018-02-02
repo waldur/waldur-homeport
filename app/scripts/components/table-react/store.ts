@@ -56,6 +56,15 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
       query: action.payload.query,
     };
 
+  case actions.RESET_PAGINATION:
+    return {
+      ...state,
+      pagination: {
+        ...state.pagination,
+        currentPage: 1,
+      },
+    };
+
   default:
     return state;
   }

@@ -129,6 +129,7 @@ msgstr ""
 #: app/scripts/components/resource/actions/action-button-resource.html
 #: app/scripts/components/table/responsive-table.js
 #: app/scripts/components/user/list/UserEvents.tsx
+#: app/scripts/components/user/support/UserList.tsx
 msgid "Actions"
 msgstr ""
 
@@ -392,6 +393,7 @@ msgstr ""
 
 #: app/scripts/components/issues/list/issues-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
+#: app/scripts/components/user/support/UserFilter.tsx
 msgid "Apply filters"
 msgstr ""
 
@@ -1332,6 +1334,7 @@ msgstr ""
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
 #: app/scripts/components/user/list/EventDetailsButton.tsx
+#: app/scripts/components/user/support/UserDetailsButton.tsx
 #: app/scripts/components/user/user-sidebar.html
 msgid "Details"
 msgstr ""
@@ -1449,6 +1452,8 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
 #: app/scripts/components/invitations/invitations-list.js
+#: app/scripts/components/user/support/UserFilter.tsx
+#: app/scripts/components/user/support/UserList.tsx
 msgid "Email"
 msgstr ""
 
@@ -1846,6 +1851,8 @@ msgid "From port"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
+#: app/scripts/components/user/support/UserFilter.tsx
+#: app/scripts/components/user/support/UserList.tsx
 #: app/scripts/components/user/user-edit.html
 #: app/scripts/components/user/user-popover-table.html
 msgid "Full name"
@@ -2002,6 +2009,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
+#: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/user-edit.html
 #: app/scripts/components/user/user-popover-table.html
 msgid "ID code"
@@ -2727,6 +2735,7 @@ msgid "Name of your organization."
 msgstr ""
 
 #: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/user/support/UserFilter.tsx
 msgid "Native name"
 msgstr ""
 
@@ -3486,6 +3495,7 @@ msgid "Phone"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
+#: app/scripts/components/user/support/UserList.tsx
 #: app/scripts/components/user/user-edit.html
 msgid "Phone number"
 msgstr ""
@@ -4918,6 +4928,7 @@ msgid "Snapshots count"
 msgstr ""
 
 #: app/scripts/components/user/filters.js
+#: app/scripts/components/user/support/UserList.tsx
 msgid "Staff"
 msgstr ""
 
@@ -5068,6 +5079,7 @@ msgid "Summary"
 msgstr ""
 
 #: app/scripts/components/navigation/header/support-link.html
+#: app/scripts/components/user/support/UserList.tsx
 msgid "Support"
 msgstr ""
 
@@ -5869,6 +5881,8 @@ msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscor
 msgstr ""
 
 #: app/scripts/components/customer/workspace/customer-team.html
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/project/project-team.html
 msgid "Users"
 msgstr ""
@@ -6288,6 +6302,10 @@ msgstr ""
 
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 msgid "support"
+msgstr ""
+
+#: app/scripts/components/user/support/UserList.tsx
+msgid "users"
 msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js

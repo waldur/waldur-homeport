@@ -21,6 +21,11 @@ const DASHBOARD_ITEMS = [
 
 const REPORT_ITEMS = [
   {
+    label: gettext('Users'),
+    icon: 'fa-users',
+    link: 'support.users'
+  },
+  {
     label: gettext('Resources'),
     icon: 'fa-files-o',
     link: 'support.resources',
