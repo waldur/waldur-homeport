@@ -20,6 +20,9 @@ export function connectTable(options: TableOptions) {
       let propFilter;
       if (options.mapPropsToFilter) {
         propFilter = options.mapPropsToFilter(props);
+        if (propFilter) {
+          props.dispatch(actions.resetPagination(table));
+        }
       }
       return actions.fetchListStart(table, propFilter);
     };
