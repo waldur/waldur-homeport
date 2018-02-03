@@ -1,9 +1,9 @@
-<a ng-class="{{ $ctrl.getButtonClass() }}"
+<a ng-class="['btn', 'select-workspace-toggle', $ctrl.getButtonClass()]"
   ng-click="$ctrl.changeWorkspace()"
   ng-disabled="!$ctrl.hasCustomer"
   uib-tooltip="{{ $ctrl.getTooltip() | translate }}"
   tooltip-placement="bottom">
-  <i ng-class="{{ $ctrl.getIconClass() }}"></i>
+  <i ng-class="['fa', 'm-r-xs', $ctrl.getIconClass()]"></i>
   <span ng-attr-id="select-workspace-title" ng-if="$ctrl.getTitle()">{{ $ctrl.getTitle() }}
     <extension-point id="organization-selector"/>
   </span>

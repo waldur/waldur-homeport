@@ -1,3 +1,4 @@
+import offeringRoutes from './routes';
 import offeringsService from './offerings-service';
 import projectOfferingsList from './offerings-list';
 import appstoreOffering from './appstore-offering';
@@ -11,6 +12,7 @@ import appstoreOfferingSummary from './appstore-offering-summary';
 import registerTableExtension from './table-extension';
 
 export default module => {
+  module.config(offeringRoutes);
   module.service('offeringsService', offeringsService);
   module.component('appstoreOfferingSummary', appstoreOfferingSummary);
   module.component('projectOfferingsList', projectOfferingsList);

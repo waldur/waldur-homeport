@@ -15,7 +15,8 @@ function* fetchList(action) {
       filter = yield select(options.getDefaultFilter);
     }
     const request = {
-      pagination: state.pagination,
+      currentPage: state.pagination.currentPage,
+      pageSize: state.pagination.pageSize,
       filter: {
         ...filter,
         ...extraFilter,

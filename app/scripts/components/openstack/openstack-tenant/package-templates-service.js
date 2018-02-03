@@ -2,7 +2,7 @@ import { templateParser, parseQuotasUsage, parseComponents } from '../utils';
 import { templateComparator } from './openstack-template';
 
 // @ngInject
-export default function packageTemplatesService(baseServiceClass, resourcesService) {
+export default function packageTemplatesService($filter, baseServiceClass, resourcesService, coreUtils) {
   let ServiceClass = baseServiceClass.extend({
     init: function () {
       this._super();
@@ -24,7 +24,10 @@ export default function packageTemplatesService(baseServiceClass, resourcesServi
           archived: 'False',
         }).then(templates => {
           let result = templates.map(templateParser)
-            .filter(this.checkTemplate.bind(this, template, quotas))
+            .map(choice => {
+              const check = this.checkTemplate(template, quotas, choice);
+              return {...choice, ...check};
+            })
             .sort(templateComparator);
           return result;
         });
@@ -39,10 +42,58 @@ export default function packageTemplatesService(baseServiceClass, resourcesServi
 
       // Allow to change package only if current usage of all quotas <= new package quotas
       const components = parseComponents(template.components);
-      return (
+      const enabled = (
         quotas.cores <= components.cores &&
         quotas.ram <= components.ram &&
         quotas.disk <= components.disk);
+
+      if (enabled) {
+        return {
+          disabled: false,
+          disabledReason: ''
+        };
+      }
+
+      let disabledReason = coreUtils.templateFormatter(gettext('Package is not available because current VPC resource usage exceeds package quota limits.'));
+
+      const parts = [
+        {
+          quota: 'cores',
+          label: 'vCPU',
+        },
+        {
+          quota: 'ram',
+          label: 'RAM',
+          filter: 'filesize',
+        },
+        {
+          quota: 'disk',
+          label: 'Storage',
+          filter: 'filesize',
+        },
+      ];
+
+      const messageTemplate = gettext('{quota} usage exceeds quota limit by {amount}.');
+
+      parts.forEach(part => {
+        const amount = quotas[part.quota] - components[part.quota];
+        if (amount > 0) {
+          let formattedAmount = amount;
+          if (part.filter) {
+            formattedAmount = $filter(part.filter)(amount);
+          }
+          const messageContext = {
+            amount: formattedAmount,
+            quota: part.label,
+          };
+          disabledReason += ' ' + coreUtils.templateFormatter(messageTemplate, messageContext);
+        }
+      });
+
+      return {
+        disabled: !enabled,
+        disabledReason,
+      };
     }
   });
   return new ServiceClass();

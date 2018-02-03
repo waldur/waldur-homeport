@@ -1,4 +1,4 @@
-import ErrorMessageFormatter from './error-message-formatter';
+import ErrorMessageFormatter from './ErrorMessageFormatter';
 import submitButton from './submit-button';
 import loadingSpinner from './LoadingSpinner';
 import multipleSelect from './multiple-select';

@@ -36,6 +36,10 @@ function SlurmAllocationListController(
           render: row => this.renderResourceName(row)
         },
         {
+          title: gettext('Provider'),
+          render: row => row.service_name,
+        },
+        {
           title: gettext('Description'),
           render: row => row.description || 'N/A'
         },

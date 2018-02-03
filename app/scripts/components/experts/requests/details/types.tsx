@@ -5,3 +5,8 @@ export interface ExpertContract {
   file?: string;
   filename?: string;
 }
+
+export interface RequestConfiguration {
+  order: string[];
+  options: {};
+}

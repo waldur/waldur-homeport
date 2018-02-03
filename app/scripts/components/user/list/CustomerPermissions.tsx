@@ -1,11 +1,11 @@
 import * as React from 'react';
 
+import { CustomerLink } from '@waldur/customer/CustomerLink';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { filterByUser } from '@waldur/workspace/selectors';
 
 import CustomerCreateButton from './CustomerCreateButton';
 import CustomerExpertField from './CustomerExpertField';
-import CustomerLink from './CustomerLink';
 import CustomerRole from './CustomerRole';
 
 const TableComponent = props => {

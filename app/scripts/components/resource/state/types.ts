@@ -17,3 +17,14 @@ export interface StateIndicator {
   movementClassName: string;
   tooltip: string;
 }
+
+export type ResourceState =
+  | 'OK'
+  | 'Erred'
+  | 'Creation Scheduled'
+  | 'Creating'
+  | 'Update Scheduled'
+  | 'Updating'
+  | 'Deletion Scheduled'
+  | 'Deleting'
+  ;

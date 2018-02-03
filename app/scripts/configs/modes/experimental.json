@@ -1,7 +1,5 @@
 {
-  "toBeFeatures": [
-    "monitoring"
-  ],
-  "featuresVisible": false,
+  "toBeFeatures": [],
+  "featuresVisible": true,
   "invitationsEnabled": true
 }

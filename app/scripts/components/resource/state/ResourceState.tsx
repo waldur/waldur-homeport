@@ -21,9 +21,10 @@ export const ResourceStateIndicator = (props: StateIndicator) => (
   </Tooltip>
 );
 
-export const PureResourceState = (props: ResourceStateProps) => (
+// TODO: remove extra check after resources list is migrated to ReactJS
+export const PureResourceState = (props: ResourceStateProps) => props.resource ? (
   <ResourceStateIndicator {...getResourceState(props.resource, props.translate)}/>
-);
+) : null;
 
 export const ResourceState = withTranslation(PureResourceState);
 

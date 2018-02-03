@@ -5,6 +5,8 @@ export let $state = null;
 export let $filter = null;
 export let ngInjector = null;
 
+export const defaultCurrency = value => $filter('defaultCurrency')(value);
+
 export default function injectServices($injector) {
   ENV = $injector.get('ENV');
   $http = $injector.get('$http');

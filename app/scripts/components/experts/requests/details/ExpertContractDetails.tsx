@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { DownloadLink } from '@waldur/core/DownloadLink';
-import { $filter } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/services';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -10,8 +10,6 @@ import { ExpertContract } from './types';
 interface ExpertContractDetailsProps extends TranslateProps {
   contract: ExpertContract;
 }
-
-const defaultCurrency = value => $filter('defaultCurrency')(value);
 
 const ExpertContractDetails = ({contract, translate}: ExpertContractDetailsProps) => (
   <div className="ibox-content">

@@ -48,7 +48,7 @@ msgid "API token lifetime"
 msgstr ""
 
 #: app/scripts/components/customer/customer-list.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Abbreviation"
 msgstr ""
 
@@ -78,10 +78,6 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/DigitalOceanForm.tsx
 msgid "Access token"
-msgstr ""
-
-#: app/scripts/components/customer/details/customer-manage.html
-msgid "Account"
 msgstr ""
 
 #: app/scripts/components/auth/auth-activation.html
@@ -122,7 +118,7 @@ msgstr ""
 msgid "Accounting records"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Accounting start date"
 msgstr ""
 
@@ -133,6 +129,7 @@ msgstr ""
 #: app/scripts/components/resource/actions/action-button-resource.html
 #: app/scripts/components/table/responsive-table.js
 #: app/scripts/components/user/list/UserEvents.tsx
+#: app/scripts/components/user/support/UserList.tsx
 msgid "Actions"
 msgstr ""
 
@@ -262,7 +259,7 @@ msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
 msgstr ""
@@ -273,7 +270,7 @@ msgid "Affected resource"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Agreement number"
 msgstr ""
 
@@ -396,6 +393,7 @@ msgstr ""
 
 #: app/scripts/components/issues/list/issues-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
+#: app/scripts/components/user/support/UserFilter.tsx
 msgid "Apply filters"
 msgstr ""
 
@@ -460,6 +458,10 @@ msgstr ""
 msgid "Attaching"
 msgstr ""
 
+#: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
+msgid "Attachments"
+msgstr ""
+
 #: app/scripts/components/resource/tabs/constants.js
 msgid "Audit log"
 msgstr ""
@@ -483,7 +485,7 @@ msgid "Authentication events"
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
-msgid "Authentication with Mobile ID has been canceled by user or time out. Details:"
+msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.js
@@ -580,8 +582,14 @@ msgstr ""
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
-msgid "Bank"
+#: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/customer/details/CustomerDetails.tsx
+msgid "Bank account"
+msgstr ""
+
+#: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/customer/details/CustomerDetails.tsx
+msgid "Bank name"
 msgstr ""
 
 #: app/scripts/components/slurm/dashboard-quotas.ts
@@ -802,6 +810,10 @@ msgstr ""
 msgid "Chart is not available at this moment."
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
+msgid "Charts"
+msgstr ""
+
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
@@ -868,10 +880,6 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
-msgid "Company"
-msgstr ""
-
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/appstore/routes.js
 msgid "Compare flavors"
@@ -930,16 +938,17 @@ msgid "Connected subnets"
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Contact e-mail"
 msgstr ""
 
-#: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Contact email"
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Contact phone"
 msgstr ""
 
@@ -991,7 +1000,7 @@ msgid "Could not load a list of identity providers. Please try again."
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Country"
 msgstr ""
 
@@ -1015,6 +1024,10 @@ msgstr ""
 
 #: app/scripts/components/resource/actions/create-vm-button.html
 msgid "Create VM"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
+msgid "Create Zabbix host"
 msgstr ""
 
 #: app/scripts/components/experts/extensions/expert-request-create-button.html
@@ -1110,7 +1123,7 @@ msgstr ""
 #: app/scripts/components/billing/billing-utils.js
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/experts/bids/expert-bids-list.js
-#: app/scripts/components/experts/requests/details/expert-request-general-info.html
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
@@ -1235,6 +1248,10 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ZabbixHostDeleteButton.tsx
+msgid "Delete Zabbix host"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 msgid "Deployment plan"
 msgstr ""
@@ -1248,7 +1265,7 @@ msgstr ""
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/requests/create/expert-request-create.js
-#: app/scripts/components/experts/requests/details/expert-request-general-info.html
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/issue-detail.html
@@ -1312,10 +1329,12 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/details/dialog.html
 #: app/scripts/components/providers/provider-list.js
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: app/scripts/components/slurm/actions.js
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
 #: app/scripts/components/user/list/EventDetailsButton.tsx
+#: app/scripts/components/user/support/UserDetailsButton.tsx
 #: app/scripts/components/user/user-sidebar.html
 msgid "Details"
 msgstr ""
@@ -1349,6 +1368,10 @@ msgstr ""
 msgid "Do not have an account?"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ZabbixHostDeleteButton.tsx
+msgid "Do you really want to delete Zabbix host?"
+msgstr ""
+
 #: app/scripts/components/experts/bids/expert-bid-utils.js
 msgid "Do you really want to delete this proposal? This action cannot be undone."
 msgstr ""
@@ -1376,6 +1399,14 @@ msgstr ""
 
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Draft"
+msgstr ""
+
+#: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
+msgid "Drop files to attach them to the issue."
+msgstr ""
+
+#: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
+msgid "Drop files to attach, or"
 msgstr ""
 
 #: app/scripts/components/billing/invoice-details.html
@@ -1420,8 +1451,9 @@ msgid "Edit team member"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
-#: app/scripts/components/customer/details/customer-manage.html
 #: app/scripts/components/invitations/invitations-list.js
+#: app/scripts/components/user/support/UserFilter.tsx
+#: app/scripts/components/user/support/UserList.tsx
 msgid "Email"
 msgstr ""
 
@@ -1446,6 +1478,7 @@ msgid "Enabled"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
+#: app/scripts/components/billing/invoice-details.html
 msgid "End time"
 msgstr ""
 
@@ -1691,12 +1724,20 @@ msgstr ""
 msgid "Field length must be less than {maxlength} symbols"
 msgstr ""
 
+#: app/scripts/components/issues/attachments/utils.ts
+msgid "File"
+msgstr ""
+
 #: app/scripts/components/core/DownloadLink/effects.tsx
 msgid "File download has been started."
 msgstr ""
 
 #: app/scripts/components/core/DownloadLink/effects.tsx
 msgid "File has been downloaded."
+msgstr ""
+
+#: app/scripts/components/issues/attachments/utils.ts
+msgid "Files"
 msgstr ""
 
 #: app/scripts/components/issues/create/issue-registration.html
@@ -1745,6 +1786,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "Flavor name"
+msgstr ""
+
+#: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
+msgid "Flavor name: {flavor_name}"
 msgstr ""
 
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
@@ -1806,6 +1851,8 @@ msgid "From port"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
+#: app/scripts/components/user/support/UserFilter.tsx
+#: app/scripts/components/user/support/UserList.tsx
 #: app/scripts/components/user/user-edit.html
 #: app/scripts/components/user/user-popover-table.html
 msgid "Full name"
@@ -1865,10 +1912,6 @@ msgstr ""
 msgid "Got it!"
 msgstr ""
 
-#: app/scripts/components/resource/tabs/constants.js
-msgid "Graphs"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-backup/actions.js
 msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr ""
@@ -1901,6 +1944,22 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-details.html
 msgid "Homepage"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host IP address"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host group name"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host name"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostSummary.tsx
+msgid "Host status"
 msgstr ""
 
 #: app/scripts/components/slurm/SlurmForm.tsx
@@ -1950,6 +2009,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
+#: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/user-edit.html
 #: app/scripts/components/user/user-popover-table.html
 msgid "ID code"
@@ -2030,6 +2090,10 @@ msgstr ""
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Importing resources"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/MonitoringGuide.tsx
+msgid "In order to enable monitoring you should install and configure Zabbix agent on monitored virtual machine."
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
@@ -2375,7 +2439,7 @@ msgstr ""
 msgid "Last"
 msgstr ""
 
-#: app/scripts/components/experts/requests/details/expert-request-general-info.html
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 msgid "Last updated"
 msgstr ""
 
@@ -2395,7 +2459,7 @@ msgstr ""
 msgid "Leave blank if you want admin username to be auto-generated."
 msgstr ""
 
-#: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Legal address"
 msgstr ""
 
@@ -2580,7 +2644,28 @@ msgid "Mobile phone number"
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-global-list.js
+#: app/scripts/components/resource/monitoring/ZabbixHostField.tsx
 msgid "Monitoring"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
+msgid "Monitoring details"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
+msgid "Monitoring system has failed."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
+msgid "Monitoring system is being deleted."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
+msgid "Monitoring system is being provisioned."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
+msgid "Monitoring system is being updated."
 msgstr ""
 
 #: app/scripts/components/quotas/constants.js
@@ -2606,7 +2691,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/cost-planning/cost-plans-list.js
 #: app/scripts/components/customer/create/customer-create-config.js
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
@@ -2649,7 +2734,8 @@ msgstr ""
 msgid "Name of your organization."
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/user/support/UserFilter.tsx
 msgid "Native name"
 msgstr ""
 
@@ -3073,7 +3159,7 @@ msgstr ""
 msgid "Offering details"
 msgstr ""
 
-#: app/scripts/components/appstore/routes.js
+#: app/scripts/components/offering/routes.js
 #: app/scripts/components/offering/table-extension.js
 msgid "Offerings"
 msgstr ""
@@ -3152,6 +3238,7 @@ msgstr ""
 
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/experts/bids/expert-bids-list.js
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/issues/create/issue-create-dialog.html
 #: app/scripts/components/issues/create/issue-registration.html
@@ -3179,7 +3266,7 @@ msgstr ""
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Organization details"
 msgstr ""
 
@@ -3228,7 +3315,9 @@ msgstr ""
 msgid "Organization removal"
 msgstr ""
 
-#: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Organization type"
 msgstr ""
 
@@ -3302,6 +3391,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js
 msgid "Package could not be assigned."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/package-templates-service.js
+msgid "Package is not available because current VPC resource usage exceeds package quota limits."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -3397,14 +3490,12 @@ msgstr ""
 msgid "Permitted"
 msgstr ""
 
-#: app/scripts/components/billing/billing-customer-details.html
-#: app/scripts/components/billing/billing-issuer-details.html
-#: app/scripts/components/customer/details/customer-manage.html
-#: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/billing/CustomerDetails.tsx
 msgid "Phone"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
+#: app/scripts/components/user/support/UserList.tsx
 #: app/scripts/components/user/user-edit.html
 msgid "Phone number"
 msgstr ""
@@ -3529,8 +3620,9 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
-msgid "Postal"
+#: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/customer/details/CustomerDetails.tsx
+msgid "Postal code"
 msgstr ""
 
 #: app/scripts/components/auth/powered-by.html
@@ -3680,6 +3772,7 @@ msgstr ""
 #: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
 #: app/scripts/components/events/EventDetailsTable.tsx
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/invitations/actions/invitation-dialog.html
 #: app/scripts/components/issues/create/issue-create-dialog.html
 #: app/scripts/components/issues/issue-detail.html
@@ -3858,6 +3951,7 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
+#: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "Provider"
 msgstr ""
 
@@ -4096,7 +4190,7 @@ msgstr ""
 msgid "Registered"
 msgstr ""
 
-#: app/scripts/components/customer/popover/customer-popover.html
+#: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Registration code"
 msgstr ""
 
@@ -4105,7 +4199,7 @@ msgstr ""
 msgid "Registration method"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Registry code"
 msgstr ""
 
@@ -4249,8 +4343,8 @@ msgid "Request {requestId} has been created."
 msgstr ""
 
 #: app/scripts/components/offering/offering-details.js
+#: app/scripts/components/offering/routes.js
 #: app/scripts/components/offering/sidebar.js
-#: app/scripts/components/project/routes.js
 msgid "Requests"
 msgstr ""
 
@@ -4322,6 +4416,14 @@ msgstr ""
 msgid "Resource is in sync"
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
+msgid "Resource is monitored using Zabbix."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateButton.tsx
+msgid "Resource is not monitored yet."
+msgstr ""
+
 #: app/scripts/components/analytics/cost-analysis.html
 msgid "Resource name"
 msgstr ""
@@ -4374,6 +4476,10 @@ msgstr ""
 msgid "Restored volumes"
 msgstr ""
 
+#: app/scripts/components/issues/attachments/utils.ts
+msgid "Restricted, because of type."
+msgstr ""
+
 #: app/scripts/components/resource/state/constants.js
 msgid "Restroing"
 msgstr ""
@@ -4413,10 +4519,6 @@ msgstr ""
 
 #: app/scripts/components/configs/base-config.js
 msgid "Russian"
-msgstr ""
-
-#: app/scripts/components/resource/tabs/constants.js
-msgid "SLA"
 msgstr ""
 
 #: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html
@@ -4826,6 +4928,7 @@ msgid "Snapshots count"
 msgstr ""
 
 #: app/scripts/components/user/filters.js
+#: app/scripts/components/user/support/UserList.tsx
 msgid "Staff"
 msgstr ""
 
@@ -4838,6 +4941,7 @@ msgid "Start day of accounting"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
+#: app/scripts/components/billing/invoice-details.html
 msgid "Start time"
 msgstr ""
 
@@ -4849,7 +4953,7 @@ msgstr ""
 #: app/scripts/components/ansible/details/ansible-job-summary.html
 #: app/scripts/components/billing/billing-records-list.js
 #: app/scripts/components/billing/invoices-list.js
-#: app/scripts/components/experts/requests/details/expert-request-general-info.html
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
 #: app/scripts/components/offering/offering-summary.html
@@ -4951,13 +5055,12 @@ msgstr ""
 msgid "Subnet has been updated."
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js
 msgid "Subnets"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
@@ -4976,6 +5079,7 @@ msgid "Summary"
 msgstr ""
 
 #: app/scripts/components/navigation/header/support-link.html
+#: app/scripts/components/user/support/UserList.tsx
 msgid "Support"
 msgstr ""
 
@@ -5056,6 +5160,10 @@ msgstr ""
 
 #: app/scripts/components/dashboard/base-quotas.ts
 msgid "Team size"
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
+msgid "Templates"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
@@ -5339,7 +5447,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
-#: app/scripts/components/experts/requests/details/expert-request-general-info.html
+#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
 #: app/scripts/components/jira/project/jira-project-config.js
@@ -5426,9 +5534,17 @@ msgstr ""
 msgid "Unable to delete application"
 msgstr ""
 
+#: app/scripts/components/issues/attachments/effects.ts
+msgid "Unable to delete attachment."
+msgstr ""
+
 #: app/scripts/components/project/project-providers-service.js
 #: app/scripts/components/providers/details/provider-projects.js
 msgid "Unable to delete link."
+msgstr ""
+
+#: app/scripts/components/issues/attachments/effects.ts
+msgid "Unable to fetch attachment."
 msgstr ""
 
 #: app/scripts/components/table-react/Table.tsx
@@ -5437,6 +5553,10 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js
 msgid "Unable to fetch project providers."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
+msgid "Unable to load Zabbix host details."
 msgstr ""
 
 #: app/scripts/components/core/bootstrap.js
@@ -5495,12 +5615,20 @@ msgstr ""
 msgid "Unable to update provider."
 msgstr ""
 
+#: app/scripts/components/issues/attachments/effects.ts
+msgid "Unable to upload attachment."
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.js
 msgid "Unable to validate invitation token."
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
 msgid "Unexpected exception happened during login process."
+msgstr ""
+
+#: app/scripts/components/core/ErrorMessageFormatter.ts
+msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
@@ -5753,15 +5881,17 @@ msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscor
 msgstr ""
 
 #: app/scripts/components/customer/workspace/customer-team.html
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/project/project-team.html
 msgid "Users"
 msgstr ""
 
-#: app/scripts/components/billing/billing-issuer-details.html
+#: app/scripts/components/billing/CustomerDetails.tsx
 msgid "VAT"
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "VAT code"
 msgstr ""
 
@@ -5769,7 +5899,7 @@ msgstr ""
 msgid "VAT is not included."
 msgstr ""
 
-#: app/scripts/components/customer/details/customer-manage.html
+#: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "VAT rate"
 msgstr ""
 
@@ -6069,8 +6199,32 @@ msgstr ""
 msgid "Your single pane of control for all cloud services. Login in to see it in action."
 msgstr ""
 
+#: app/scripts/components/resource/monitoring/effects.ts
+msgid "Zabbix host could not be created."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/effects.ts
+msgid "Zabbix host could not be deleted."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/effects.ts
+msgid "Zabbix host has been created."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/effects.ts
+msgid "Zabbix host has been deleted."
+msgstr ""
+
+#: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
+msgid "Zabbix provider"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "bootable"
+msgstr ""
+
+#: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
+msgid "browse"
 msgstr ""
 
 #: app/scripts/components/issues/comments/issue-comments-list.html
@@ -6150,6 +6304,10 @@ msgstr ""
 msgid "support"
 msgstr ""
 
+#: app/scripts/components/user/support/UserList.tsx
+msgid "users"
+msgstr ""
+
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
@@ -6171,6 +6329,10 @@ msgstr ""
 
 #: app/scripts/components/events/constants.ts
 msgid "{quota_name} quota threshold has been reached for project {project_name}."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/package-templates-service.js
+msgid "{quota} usage exceeds quota limit by {amount}."
 msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts

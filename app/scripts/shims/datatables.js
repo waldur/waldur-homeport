@@ -1,4 +1,4 @@
-import 'jszip';
+window.JSZip = require('jszip');
 
 import '!script-loader!pdfmake/build/pdfmake.min.js';
 import '!script-loader!pdfmake/build/vfs_fonts.js';

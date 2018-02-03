@@ -25,8 +25,12 @@ module.exports = {
       'react-overlays',
       'react-redux',
       'react-select',
+      'react-bootstrap/lib/Tab',
+      'react-bootstrap/lib/Tabs',
       'react-bootstrap/lib/Tooltip',
       'react-bootstrap/lib/OverlayTrigger',
+      'react-dropzone',
+      'attr-accept',
       'intro.js',
 
       'angular',
@@ -71,7 +75,22 @@ module.exports = {
     library: '[name]_[hash]_lib',
   },
 
+  module: {
+    rules: [
+      // Temporary workaround for Angular UI router and React Bootstrap integration
+      {
+        test: /SafeAnchor\.js$/,
+        loader: 'awesome-typescript-loader'
+      },
+    ],
+  },
+
   plugins: [
+    // Temporary workaround for Angular UI router and React Bootstrap integration
+    new webpack.NormalModuleReplacementPlugin(
+      /SafeAnchor\.js/,
+      path.resolve('./app/scripts/shims/AngularRouterAnchor.tsx')
+    ),
     new webpack.DllPlugin({
       // The path to the manifest file which maps between
       // modules included in a bundle and the internal IDs

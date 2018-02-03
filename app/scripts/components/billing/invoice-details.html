@@ -7,12 +7,14 @@
         <div class="row">
           <div class="col-sm-6">
             <h5><span translate>From</span>:</h5>
-            <billing-issuer-details issuer="$ctrl.invoice.issuer_details"/>
+            <billing-customer-details customer="$ctrl.invoice.issuer_details"/>
           </div>
 
           <div class="col-sm-6 text-right">
-            <h4 translate>Invoice No.</h4>
-            <h4 class="text-navy">{{ ::$ctrl.invoice.number}}</h4>
+            <span ng-if="$ctrl.invoice.number">
+              <h4 translate>Invoice No.</h4>
+              <h4 class="text-navy">{{ ::$ctrl.invoice.number}}</h4>
+            </span>
             <span><span translate>To</span>:</span>
             <billing-customer-details customer="$ctrl.invoice.customer_details"/>
             <div>
@@ -46,8 +48,8 @@
                 <td>
                   <div><strong>{{ ::item.name}}</strong></div>
                   <small>
-                    Start time: {{ ::item.start || '&mdash;' | dateTime }}.
-                    End time: {{ ::item.end || '&mdash;' | dateTime }}
+                    <span translate>Start time</span>: {{ ::item.start || '&mdash;' | dateTime }}.
+                    <span translate>End time</span>: {{ ::item.end || '&mdash;' | dateTime }}.
                   </small>
                   <invoice-events-toggle item="item"></invoice-events-toggle>
                 </td>
@@ -56,7 +58,7 @@
                 <td ng-if="$ctrl.invoice.issuer_details.vat_code">
                   {{ ::item.tax | defaultCurrency}}
                 </td>
-                <td>{{ ::item.total | defaultCurrency}}</td>
+                <td>{{ (item.total || item.price) | defaultCurrency}}</td>
               </tr>
             </tbody>
           </table>

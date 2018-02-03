@@ -9,10 +9,9 @@ const customerPopover = {
   },
   controller: class CustomerPopoverController {
     // @ngInject
-    constructor($q, customersService, paymentDetailsService) {
+    constructor($q, customersService) {
       this.$q = $q;
       this.customersService = customersService;
-      this.paymentDetailsService = paymentDetailsService;
       this.options = {
         scrollY: '400px',
         scrollCollapse: true
@@ -27,25 +26,10 @@ const customerPopover = {
     }
 
     loadData() {
-      return this.$q.all([
-        this.loadCustomer(),
-        this.loadPaymentDetails(),
-      ]);
-    }
-
-    loadCustomer() {
       return this.customersService.$get(
         this.resolve.customer_uuid
       ).then(customer => {
         this.customer = customer;
-      });
-    }
-
-    loadPaymentDetails() {
-      return this.paymentDetailsService.getList({
-        customer_uuid: this.resolve.customer_uuid
-      }).then(result => {
-        this.paymentDetails = result[0];
       });
     }
   }

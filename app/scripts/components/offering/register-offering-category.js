@@ -1,7 +1,7 @@
 // @ngInject
 export default function registerOfferingCategory(features, $q, offeringsService, AppstoreCategoriesService) {
   AppstoreCategoriesService.registerCategory(() => {
-    if (!features.isVisible('support')) {
+    if (!features.isVisible('support') || !features.isVisible('offering')) {
       return $q.when([]);
     }
 
