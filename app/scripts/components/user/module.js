@@ -8,6 +8,7 @@ import userOrganizations from './list/CustomerPermissions';
 import userProjects from './list/ProjectPermissions';
 import { userPopover } from './user-popover';
 import userPopoverTable from './user-popover-table';
+import userDetailsDialog from './support/UserDetailsDialog';
 import userListView from './support/UserListView';
 import { stateUtilsService, attachStateUtils } from './utils';
 import userRoutes from './routes';
@@ -28,6 +29,7 @@ export default (module) => {
   module.component('userProjects', userProjects);
   module.component('userPopover', userPopover);
   module.component('userPopoverTable', userPopoverTable);
+  module.component('userDetailsDialog', userDetailsDialog);
   module.component('userListView', userListView);
   module.service('stateUtilsService', stateUtilsService);
   module.service('usersService', usersService);
