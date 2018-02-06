@@ -5522,6 +5522,10 @@ msgstr ""
 msgid "Unable to create link."
 msgstr ""
 
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.js
+msgid "Unable to create proposal"
+msgstr ""
+
 #: app/scripts/components/providers/effects.tsx
 msgid "Unable to create provider, please check your credentials and try again."
 msgstr ""
