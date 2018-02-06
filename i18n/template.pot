@@ -5523,7 +5523,7 @@ msgid "Unable to create link."
 msgstr ""
 
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.js
-msgid "Unable to create proposal"
+msgid "Unable to create proposal."
 msgstr ""
 
 #: app/scripts/components/providers/effects.tsx

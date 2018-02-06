@@ -61,7 +61,7 @@ const expertBidCreateDialog = {
       }
     }
 
-    isSubmitEnabled() {
+    isSubmitDisabled() {
       return this.selectedProjectUsers.length === 0;
     }
 
@@ -90,7 +90,7 @@ const expertBidCreateDialog = {
       })
       .catch(response => {
         if (response.data) {
-          this.ncUtilsFlash.errorFromResponse(response, gettext('Unable to create proposal'));
+          this.ncUtilsFlash.errorFromResponse(response, gettext('Unable to create proposal.'));
           this.errors = response.data;
         }
       });
