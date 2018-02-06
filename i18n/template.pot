@@ -463,6 +463,7 @@ msgid "Attachments"
 msgstr ""
 
 #: app/scripts/components/resource/tabs/constants.js
+#: app/scripts/components/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr ""
 
@@ -1335,6 +1336,7 @@ msgstr ""
 #: app/scripts/components/team/project-users-list.js
 #: app/scripts/components/user/list/EventDetailsButton.tsx
 #: app/scripts/components/user/support/UserDetailsButton.tsx
+#: app/scripts/components/user/support/UserDetailsView.tsx
 #: app/scripts/components/user/user-sidebar.html
 msgid "Details"
 msgstr ""
@@ -2547,6 +2549,7 @@ msgstr ""
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/user/constants.js
 #: app/scripts/components/user/routes.js
+#: app/scripts/components/user/support/UserDetailsView.tsx
 msgid "Manage"
 msgstr ""
 
@@ -5743,6 +5746,7 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
+#: app/scripts/components/user/support/UserDetailsDialog.tsx
 #: app/scripts/components/user/user-popover.html
 msgid "User details"
 msgstr ""

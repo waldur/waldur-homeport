@@ -3,12 +3,14 @@ import { isOwnerOrStaff } from './selectors';
 describe('isOwnerOrStaff selector', () => {
   const staff = {
     is_staff: true,
+    is_support: false,
     url: 'staff_url',
     uuid: 'staff_uuid',
   };
 
   const owner = {
     is_staff: false,
+    is_support: false,
     url: 'owner_url',
     uuid: 'owner_uuid',
   };
