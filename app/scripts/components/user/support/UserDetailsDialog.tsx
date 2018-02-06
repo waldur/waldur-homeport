@@ -4,13 +4,12 @@ import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
+import { UserDetails } from '@waldur/workspace/types';
 
-import { UserDetails } from './types';
 import { UserDetailsView } from './UserDetailsView';
 
 interface UserDetailsDialogProps extends TranslateProps {
   resolve: { user: UserDetails };
-  currentUser: UserDetails;
 }
 
 const PureUserDetailsDialog = (props: UserDetailsDialogProps) => {

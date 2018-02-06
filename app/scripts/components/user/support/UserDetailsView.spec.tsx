@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
 
-import { PureUserDetailsView, UserDetailsViewProps } from './UserDetailsView';
+import { PureUserDetailsView } from './UserDetailsView';
 
 const staffUser = {
   is_support: false,
@@ -20,34 +20,28 @@ const ordinaryUser = {
   is_staff: false,
 };
 
-const renderUserDetailsView = (props: UserDetailsViewProps) => (
-  shallow(
-    <PureUserDetailsView {...props} />
-  )
+const renderUserDetailsView = props => (
+  shallow(<PureUserDetailsView {...props} translate={translate}/>)
 );
 
 describe('UserDetailsView', () => {
   it('should conceal "Manage" tab for support user', () => {
-    const wrapper = renderUserDetailsView({currentUser: supportUser, translate});
-    const manageTab = wrapper.findWhere(n => n.prop('title') === 'Manage');
-    expect(manageTab).toHaveLength(0);
+    const wrapper = renderUserDetailsView({currentUser: supportUser});
+    expect(wrapper.find({title: 'Manage'}).length).toBe(0);
   });
 
   it('should conceal "Manage" tab for ordinary user', () => {
-    const wrapper = renderUserDetailsView({currentUser: ordinaryUser, translate});
-    const manageTab = wrapper.findWhere(n => n.prop('title') === 'Manage');
-    expect(manageTab).toHaveLength(0);
+    const wrapper = renderUserDetailsView({currentUser: ordinaryUser});
+    expect(wrapper.find({title: 'Manage'}).length).toBe(0);
   });
 
-  it('should conceal "User Details" tab for ordinary user', () => {
-    const wrapper = renderUserDetailsView({currentUser: ordinaryUser, translate});
-    const manageTab = wrapper.findWhere(n => n.prop('title') === 'User Details');
-    expect(manageTab).toHaveLength(0);
+  it('should conceal "Details" tab for ordinary user', () => {
+    const wrapper = renderUserDetailsView({currentUser: ordinaryUser});
+    expect(wrapper.find({title: 'Details'}).length).toBe(0);
   });
 
   it('should display "Manage" tab for staff user', () => {
-    const wrapper = renderUserDetailsView({currentUser: staffUser, translate});
-    const manageTab = wrapper.findWhere(n => n.prop('title') === 'Manage');
-    expect(manageTab).toHaveLength(1);
+    const wrapper = renderUserDetailsView({currentUser: staffUser});
+    expect(wrapper.find({title: 'Manage'}).length).toBe(1);
   });
 });

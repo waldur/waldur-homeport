@@ -1335,8 +1335,8 @@ msgstr ""
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
 #: app/scripts/components/user/list/EventDetailsButton.tsx
-#: app/scripts/components/user/support/UserDetailsView.tsx
 #: app/scripts/components/user/support/UserDetailsButton.tsx
+#: app/scripts/components/user/support/UserDetailsView.tsx
 #: app/scripts/components/user/user-sidebar.html
 msgid "Details"
 msgstr ""
