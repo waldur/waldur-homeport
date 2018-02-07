@@ -8,7 +8,7 @@ import { refreshResource } from './actions';
 
 export const PureResourceRefreshButton = props => (
   <ActionButton
-    title={props.translate('Refresh resource')}
+    title={props.translate('Refresh')}
     icon="fa fa-refresh"
     action={refreshResource}
   />
