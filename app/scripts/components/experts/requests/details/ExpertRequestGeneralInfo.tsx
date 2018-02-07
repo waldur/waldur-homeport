@@ -45,10 +45,6 @@ const PureExpertRequestGeneralInfo = (
       label={translate('Created')}
       value={formatDateTime(expertRequest.modified)}
     />
-    <Field
-      label={translate('Description')}
-      value={expertRequest.description}
-    />
     <ExpertRequestConfiguration
       model={expertRequest}
       config={config}

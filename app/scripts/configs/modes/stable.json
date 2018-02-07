@@ -22,7 +22,8 @@
     "user.competence",
     "backup",
     "connected_issues",
-    "jira"
+    "jira",
+    "experts.preview_contract"
   ],
   "featuresVisible": false,
   "appStoreCategories": [

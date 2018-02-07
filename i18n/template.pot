@@ -1269,8 +1269,6 @@ msgstr ""
 #: app/scripts/components/ansible/details/ansible-job-summary.html
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
-#: app/scripts/components/experts/requests/create/expert-request-create.js
-#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/issue-detail.html
