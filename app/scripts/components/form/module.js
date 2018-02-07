@@ -16,6 +16,7 @@ import appstoreFieldDescription from './appstore-field-description';
 import appstoreFieldList from './appstore-field-list';
 import appstoreFieldMultiselect from './appstore-field-multiselect';
 import appstoreFieldSelect from './appstore-field-select';
+import appstoreFieldSelectString from './appstore-field-select-string';
 import appstoreListDialog from './appstore-list-dialog';
 import appstoreFormWizard from './appstore-form-wizard';
 import FormUtils from './form-utils';
@@ -47,6 +48,7 @@ export default module => {
   module.directive('appstoreFieldList', appstoreFieldList);
   module.component('appstoreFieldMultiselect', appstoreFieldMultiselect);
   module.component('appstoreFieldSelect', appstoreFieldSelect);
+  module.component('appstoreFieldSelectString', appstoreFieldSelectString);
   module.directive('appstoreListDialog', appstoreListDialog);
   module.directive('fieldLabel', fieldLabel);
   module.directive('helpicon', helpicon);
