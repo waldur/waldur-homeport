@@ -46,13 +46,13 @@ const expertRequestCreate = {
             },
             objectives: {
               type: 'html_text',
-              label: 'Objectives',
+              label: gettext('Objectives'),
               required: true,
-              default_value: 'This is an objective.',
+              default_value: gettext('This is an objective.'),
             },
             price: {
               type: 'money',
-              label: 'Planned budget',
+              label: gettext('Planned budget'),
             },
           });
           angular.forEach(this.expert.options, (option, name) => option.name = name);
