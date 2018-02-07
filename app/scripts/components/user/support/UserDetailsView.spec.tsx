@@ -21,7 +21,7 @@ const ordinaryUser = {
 };
 
 const renderUserDetailsView = props => (
-  shallow(<PureUserDetailsView {...props} translate={translate}/>)
+  shallow(<PureUserDetailsView {...props} translate={translate} userDetailsIsVisible={true} userManageIsVisible={true}/>)
 );
 
 describe('UserDetailsView', () => {
