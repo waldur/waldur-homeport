@@ -1,7 +1,5 @@
-import {
-  flavorFormatter,
-  internalIpFormatter
-} from './openstack-instance-config';
+import { $filter } from '@waldur/core/services';
+import { flavorFormatter, internalIpFormatter } from './openstack-instance-config';
 
 // @ngInject
 export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
@@ -30,9 +28,21 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
       },
       change_flavor: {
         title: gettext('Change flavor'),
+        order: ['currentFlavor', 'flavor'],
         fields: {
+          currentFlavor: {
+            component: 'openstackInstanceCurrentFlavor',
+          },
           flavor: {
-            formatter: flavorFormatter
+            label: gettext('New flavor'),
+            init: function(field, resource) {
+              field.choices = field.rawChoices
+                .filter(choice => choice.name !== resource.flavor_name)
+                .map(flavor => ({
+                  display_name: flavorFormatter($filter, flavor),
+                  value: flavor.url,
+                }));
+            },
           }
         }
       },
