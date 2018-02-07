@@ -4164,6 +4164,10 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
+#: app/scripts/components/resource/ResourceRefreshButton.tsx
+msgid "Refresh resource"
+msgstr ""
+
 #: app/scripts/components/digitalocean/DigitalOceanDropletSummary.tsx
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 msgid "Region"

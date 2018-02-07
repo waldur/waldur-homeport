@@ -3,6 +3,7 @@ import { takeEvery, put, call } from 'redux-saga/effects';
 
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
+import { refreshResource } from '@waldur/resource/actions';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 
 import * as actions from './actions';
@@ -28,7 +29,7 @@ export function* handleDeleteHost(action) {
     yield call(api.deleteHost, uuid);
     yield put(closeModalDialog());
     yield put(showSuccess(successMessage));
-    yield api.refreshResource();
+    yield refreshResource();
   } catch {
     yield put(showError(errorMessage));
     yield put(actions.deleteFailure());
@@ -44,7 +45,7 @@ function* handleCreateHost(action) {
     yield put(actions.createHost.success());
     yield put(showSuccess(successMessage));
     yield put(closeModalDialog());
-    yield api.refreshResource();
+    yield refreshResource();
   } catch (error) {
     const formError = new SubmissionError({
       _error: errorMessage,

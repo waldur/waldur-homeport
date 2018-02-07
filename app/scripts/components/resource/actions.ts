@@ -1,4 +1,4 @@
-import { $state } from '@waldur/core/services';
+import { $rootScope, $state } from '@waldur/core/services';
 
 export const gotoResource = (type, uuid) => {
   $state.go('resources.details', {
@@ -6,3 +6,6 @@ export const gotoResource = (type, uuid) => {
     uuid,
   });
 };
+
+export const refreshResource = () =>
+  $rootScope.$broadcast('refreshResource');

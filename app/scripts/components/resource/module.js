@@ -3,6 +3,7 @@ import resourceDetails from './resource-details';
 import resourceRoutes from './routes';
 import resourceHeader from './resource-header';
 import resourceName from './ResourceName';
+import resourceRefreshButton from './ResourceRefreshButton';
 import resourcesService from './resources-service';
 import ResourceProvisionPolicy from './resource-provision-policy';
 import resourceSummaryModule from './summary/module';
@@ -19,6 +20,7 @@ export default module => {
   module.component('resourceDetails', resourceDetails);
   module.component('resourceHeader', resourceHeader);
   module.component('resourceName', resourceName);
+  module.component('resourceRefreshButton', resourceRefreshButton);
   module.config(resourceRoutes);
   module.service('resourcesService', resourcesService);
   module.service('ResourceProvisionPolicy', ResourceProvisionPolicy);
