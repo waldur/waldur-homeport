@@ -1193,6 +1193,10 @@ msgstr ""
 msgid "Current cost"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-current-flavor.tsx
+msgid "Current flavor"
+msgstr ""
+
 #: app/scripts/components/digitalocean/droplet-resize.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 msgid "Current size"
@@ -2762,6 +2766,10 @@ msgstr ""
 msgid "New VPC package"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions.js
+msgid "New flavor"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.js
 msgid "New plan"
 msgstr ""
@@ -4151,6 +4159,7 @@ msgstr ""
 
 #: app/scripts/components/issues/list/issues-short-list.html
 #: app/scripts/components/issues/workspace/issues-activity-stream.html
+#: app/scripts/components/resource/ResourceRefreshButton.tsx
 #: app/scripts/components/table-react/TableRefreshButton.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Refresh"
