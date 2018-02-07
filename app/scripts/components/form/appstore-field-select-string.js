@@ -1,6 +1,6 @@
 import template from './appstore-field-select-string.html';
 
-const offeringFieldSelectString = {
+const appstoreFieldSelectString = {
   template,
   bindings: {
     field: '<',
@@ -8,4 +8,4 @@ const offeringFieldSelectString = {
   },
 };
 
-export default offeringFieldSelectString;
+export default appstoreFieldSelectString;
