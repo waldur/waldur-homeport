@@ -35,7 +35,7 @@ const expertRequestCreate = {
             return this.$state.go('errorPage.notFound');
           }
           this.expert = offerings[this.requestType];
-          this.expert.order.unshift('name', 'description');
+          this.expert.order.unshift('name', 'objectives', 'price');
           angular.extend(this.expert.options, {
             name: {
               type: 'string',
@@ -44,10 +44,15 @@ const expertRequestCreate = {
               form_text: gettext('This name will be visible in accounting data.'),
               max_length: 150
             },
-            description: {
-              type: 'string',
-              required: false,
-              label: gettext('Description'),
+            objectives: {
+              type: 'html_text',
+              label: gettext('Objectives'),
+              required: true,
+              default_value: gettext('This is an objective.'),
+            },
+            price: {
+              type: 'money',
+              label: gettext('Planned budget'),
             },
           });
           angular.forEach(this.expert.options, (option, name) => option.name = name);

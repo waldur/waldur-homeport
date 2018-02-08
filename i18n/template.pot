@@ -1269,8 +1269,6 @@ msgstr ""
 #: app/scripts/components/ansible/details/ansible-job-summary.html
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
-#: app/scripts/components/experts/requests/create/expert-request-create.js
-#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/issue-detail.html
@@ -3162,6 +3160,7 @@ msgstr ""
 msgid "Object is not found."
 msgstr ""
 
+#: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 msgid "Objectives"
 msgstr ""
@@ -3525,6 +3524,10 @@ msgstr ""
 
 #: app/scripts/components/plans/plan-agreements-list.js
 msgid "Plan name"
+msgstr ""
+
+#: app/scripts/components/experts/requests/create/expert-request-create.js
+msgid "Planned budget"
 msgstr ""
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
@@ -5339,6 +5342,10 @@ msgstr ""
 
 #: app/scripts/components/user/keys/key-create.js
 msgid "This field may not be blank."
+msgstr ""
+
+#: app/scripts/components/experts/requests/create/expert-request-create.js
+msgid "This is an objective."
 msgstr ""
 
 #: app/scripts/components/alerts/constants.js
