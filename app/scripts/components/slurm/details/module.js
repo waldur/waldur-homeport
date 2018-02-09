@@ -6,7 +6,7 @@ import { SlurmAllocationSummary } from './SlurmAllocationSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
-  ResourceSummary.register('Slurm.Allocation', SlurmAllocationSummary);
+  ResourceSummary.register('SLURM.Allocation', SlurmAllocationSummary);
   module.component('slurmAllocationDetailsDialog', slurmAllocationDetailsDialog);
   module.directive('slurmAllocationUsageChart', slurmAllocationUsageChart);
   module.component('slurmAllocationUsageTable', slurmAllocationUsageTable);
