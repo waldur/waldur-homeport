@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { compose, createStore, combineReducers } from 'redux';
@@ -24,7 +24,7 @@ export const withReduxForm = WrappedComponent => {
 
 export const withTestForm = WrappedComponent => reduxForm({form: 'testForm'})(WrappedComponent);
 
-export const mountTestForm = compose(mount, withReduxForm, withTestForm);
+export const mountTestForm: (component: React.ComponentType) => ReactWrapper = compose(mount, withReduxForm, withTestForm);
 
 export const errorOnSubmit = error => {
   const formError = new SubmissionError(error);
