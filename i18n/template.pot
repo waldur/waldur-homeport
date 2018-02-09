@@ -3165,15 +3165,6 @@ msgstr ""
 msgid "Objectives"
 msgstr ""
 
-#: app/scripts/components/offering/offering-details.html
-msgid "Offering details"
-msgstr ""
-
-#: app/scripts/components/offering/routes.js
-#: app/scripts/components/offering/table-extension.js
-msgid "Offerings"
-msgstr ""
-
 #: app/scripts/components/intro/base-intro.js
 msgid "Ok, what's next?"
 msgstr ""
@@ -4314,6 +4305,10 @@ msgstr ""
 msgid "Request detail"
 msgstr ""
 
+#: app/scripts/components/offering/offering-details.html
+msgid "Request details"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/actions.js
 msgid "Request direct access"
 msgstr ""
@@ -4360,6 +4355,7 @@ msgstr ""
 #: app/scripts/components/offering/offering-details.js
 #: app/scripts/components/offering/routes.js
 #: app/scripts/components/offering/sidebar.js
+#: app/scripts/components/offering/table-extension.js
 msgid "Requests"
 msgstr ""
 

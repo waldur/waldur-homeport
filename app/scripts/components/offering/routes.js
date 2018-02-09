@@ -7,7 +7,7 @@ export default function offeringRoutes($stateProvider) {
     template: '<appstore-offering></appstore-offering>',
     data: {
       category: 'offerings',
-      pageTitle: gettext('Offerings'),
+      pageTitle: gettext('Requests'),
       sidebarState: 'project.resources',
       feature: 'offering',
     }
