@@ -6,7 +6,10 @@
           <h3>
             <span>{{ $ctrl.expert.label }}</span>
             <billing-type model="$ctrl.expert"></billing-type>
-            <button class="btn btn-info pull-right" ng-click="$ctrl.previewContract()">
+            <button
+              class="btn btn-info pull-right"
+              ng-click="$ctrl.previewContract()"
+              visible-if="'experts.preview_contract'">
               <i class="fa fa-book"></i>
               <span translate>Preview contract</span>
             </button>

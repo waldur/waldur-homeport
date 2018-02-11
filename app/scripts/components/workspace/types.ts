@@ -1,7 +1,19 @@
 export interface User {
   is_staff: boolean;
+  is_support: boolean;
   url: string;
   uuid: string;
+}
+
+export interface UserDetails extends User {
+  full_name: string;
+  civil_number: string;
+  phone_number: string;
+  email: string;
+  registration_method: string;
+  date_joined: string;
+  job_title: string;
+  is_support: boolean;
 }
 
 export interface Customer {

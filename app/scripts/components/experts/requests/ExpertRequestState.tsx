@@ -19,10 +19,17 @@ const LabelClasses = {
 
 const getLabelClass = (state: RequestState): string => LabelClasses[state] || 'label-info';
 
+const getLabel = (state: RequestState): string => {
+  if (state === 'Pending') {
+    return 'Waiting for proposals'.toUpperCase();
+  }
+  return state.toUpperCase();
+};
+
 export const ExpertRequestState = (props: ExpertRequestStateProps) => (
   <div className="progress pull-left state-indicator m-b-none">
     <span className={classNames(getLabelClass(props.model.state), 'progress-bar', 'p-w-sm', 'full-width')}>
-      {props.model.state.toUpperCase()}
+      {getLabel(props.model.state)}
     </span>
   </div>
 );

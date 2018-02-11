@@ -463,6 +463,7 @@ msgid "Attachments"
 msgstr ""
 
 #: app/scripts/components/resource/tabs/constants.js
+#: app/scripts/components/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr ""
 
@@ -1192,6 +1193,10 @@ msgstr ""
 msgid "Current cost"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/openstack-instance-current-flavor.tsx
+msgid "Current flavor"
+msgstr ""
+
 #: app/scripts/components/digitalocean/droplet-resize.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 msgid "Current size"
@@ -1264,8 +1269,6 @@ msgstr ""
 #: app/scripts/components/ansible/details/ansible-job-summary.html
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
-#: app/scripts/components/experts/requests/create/expert-request-create.js
-#: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/issue-detail.html
@@ -1335,6 +1338,7 @@ msgstr ""
 #: app/scripts/components/team/project-users-list.js
 #: app/scripts/components/user/list/EventDetailsButton.tsx
 #: app/scripts/components/user/support/UserDetailsButton.tsx
+#: app/scripts/components/user/support/UserDetailsView.tsx
 #: app/scripts/components/user/user-sidebar.html
 msgid "Details"
 msgstr ""
@@ -2547,6 +2551,7 @@ msgstr ""
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/user/constants.js
 #: app/scripts/components/user/routes.js
+#: app/scripts/components/user/support/UserDetailsView.tsx
 msgid "Manage"
 msgstr ""
 
@@ -2757,6 +2762,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
 msgid "New VPC package"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions.js
+msgid "New flavor"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.js
@@ -3151,17 +3160,9 @@ msgstr ""
 msgid "Object is not found."
 msgstr ""
 
+#: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 msgid "Objectives"
-msgstr ""
-
-#: app/scripts/components/offering/offering-details.html
-msgid "Offering details"
-msgstr ""
-
-#: app/scripts/components/offering/routes.js
-#: app/scripts/components/offering/table-extension.js
-msgid "Offerings"
 msgstr ""
 
 #: app/scripts/components/intro/base-intro.js
@@ -3514,6 +3515,10 @@ msgstr ""
 
 #: app/scripts/components/plans/plan-agreements-list.js
 msgid "Plan name"
+msgstr ""
+
+#: app/scripts/components/experts/requests/create/expert-request-create.js
+msgid "Planned budget"
 msgstr ""
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
@@ -4148,6 +4153,7 @@ msgstr ""
 
 #: app/scripts/components/issues/list/issues-short-list.html
 #: app/scripts/components/issues/workspace/issues-activity-stream.html
+#: app/scripts/components/resource/ResourceRefreshButton.tsx
 #: app/scripts/components/table-react/TableRefreshButton.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Refresh"
@@ -4299,6 +4305,10 @@ msgstr ""
 msgid "Request detail"
 msgstr ""
 
+#: app/scripts/components/offering/offering-details.html
+msgid "Request details"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/actions.js
 msgid "Request direct access"
 msgstr ""
@@ -4345,6 +4355,7 @@ msgstr ""
 #: app/scripts/components/offering/offering-details.js
 #: app/scripts/components/offering/routes.js
 #: app/scripts/components/offering/sidebar.js
+#: app/scripts/components/offering/table-extension.js
 msgid "Requests"
 msgstr ""
 
@@ -5329,6 +5340,10 @@ msgstr ""
 msgid "This field may not be blank."
 msgstr ""
 
+#: app/scripts/components/experts/requests/create/expert-request-create.js
+msgid "This is an objective."
+msgstr ""
+
 #: app/scripts/components/alerts/constants.js
 msgid "This month estimated costs for organization {customer_name} exceeded."
 msgstr ""
@@ -5520,6 +5535,10 @@ msgstr ""
 #: app/scripts/components/project/project-providers-service.js
 #: app/scripts/components/providers/details/provider-projects.js
 msgid "Unable to create link."
+msgstr ""
+
+#: app/scripts/components/experts/bids/create/expert-bid-create-dialog.js
+msgid "Unable to create proposal."
 msgstr ""
 
 #: app/scripts/components/providers/effects.tsx
@@ -5743,6 +5762,7 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
+#: app/scripts/components/user/support/UserDetailsDialog.tsx
 #: app/scripts/components/user/user-popover.html
 msgid "User details"
 msgstr ""
