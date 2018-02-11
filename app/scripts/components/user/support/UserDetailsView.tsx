@@ -6,7 +6,8 @@ import { compose } from 'redux';
 
 import {TranslateProps, withTranslation} from '@waldur/i18n';
 import UserEvents from '@waldur/user/list/UserEvents';
-import {userDetailsIsVisible, userManageIsVisible} from '@waldur/user/support/selectors';
+import { userDetailsIsVisible, userManageIsVisible } from '@waldur/user/support/selectors';
+import { UserDetailsTable } from '@waldur/user/support/UserDetailsTable';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails, User } from '@waldur/workspace/types';
 
@@ -27,7 +28,7 @@ export const PureUserDetailsView = (props: UserDetailsViewProps) => (
     {(props.userDetailsIsVisible && props.currentUser.is_support && !props.currentUser.is_staff) && (
       <Tab eventKey={2} title={props.translate('Details')}>
         <div className="m-t-sm">
-          # todo in WAL-1379
+          <UserDetailsTable user={props.user} currentUser={props.currentUser}/>
         </div>
       </Tab>
     )}

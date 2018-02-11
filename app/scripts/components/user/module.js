@@ -7,7 +7,7 @@ import userDashboard from './list/UserDashboard';
 import userOrganizations from './list/CustomerPermissions';
 import userProjects from './list/ProjectPermissions';
 import { userPopover } from './user-popover';
-import userPopoverTable from './user-popover-table';
+import userPopoverTable from './support/UserDetailsTable';
 import userDetailsDialog from './support/UserDetailsDialog';
 import userListView from './support/UserListView';
 import { stateUtilsService, attachStateUtils } from './utils';

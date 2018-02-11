@@ -1,3 +1,5 @@
+import {formatDateTime} from '@waldur/core/dateUtils';
+
 export const FILESIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
 export const formatFilesize = (input, fromUnit = 'MB') => {
@@ -59,3 +61,15 @@ export const minutesToHours = input => {
 
 export const pick = fields => source =>
   fields.reduce((target, field) => ({...target, [field]: source[field]}), {});
+
+export const titleCase = input => {
+  if (input) {
+    return input.charAt(0).toUpperCase() + input.slice(1);
+  }
+};
+
+export const dateTime = input => {
+  if (input) {
+    return formatDateTime(input);
+  }
+};

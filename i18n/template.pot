@@ -892,7 +892,7 @@ msgid "Compare flavors"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
-#: app/scripts/components/user/user-popover-table.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Competence"
 msgstr ""
 
@@ -1229,12 +1229,16 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: app/scripts/components/user/user-popover-table.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Date joined"
 msgstr ""
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Deactivating"
+msgstr ""
+
+#: app/scripts/components/user/support/utils.ts
+msgid "Default"
 msgstr ""
 
 #: app/scripts/components/slurm/SlurmForm.tsx
@@ -1429,8 +1433,8 @@ msgstr ""
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
 #: app/scripts/components/team/user-selector.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-popover-table.html
 msgid "E-mail"
 msgstr ""
 
@@ -1532,6 +1536,10 @@ msgstr ""
 
 #: app/scripts/components/configs/base-config.js
 msgid "Estonian"
+msgstr ""
+
+#: app/scripts/components/user/support/utils.ts
+msgid "Estonian ID"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
@@ -1860,10 +1868,10 @@ msgid "From port"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/support/UserList.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-popover-table.html
 msgid "Full name"
 msgstr ""
 
@@ -2018,9 +2026,9 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-popover-table.html
 msgid "ID code"
 msgstr ""
 
@@ -2395,8 +2403,8 @@ msgid "JIRA user with excessive privileges"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-popover-table.html
 msgid "Job position"
 msgstr ""
 
@@ -3506,7 +3514,7 @@ msgstr ""
 msgid "Phone number"
 msgstr ""
 
-#: app/scripts/components/user/user-popover-table.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Phone numbers"
 msgstr ""
 
@@ -3640,7 +3648,7 @@ msgid "Powered by"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
-#: app/scripts/components/user/user-popover-table.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Preferred language"
 msgstr ""
 
@@ -4205,8 +4213,8 @@ msgstr ""
 msgid "Registration code"
 msgstr ""
 
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-popover-table.html
 msgid "Registration method"
 msgstr ""
 
@@ -4214,7 +4222,7 @@ msgstr ""
 msgid "Registry code"
 msgstr ""
 
-#: app/scripts/components/user/filters.js
+#: app/scripts/components/user/support/utils.ts
 msgid "Regular user"
 msgstr ""
 
@@ -4947,12 +4955,12 @@ msgstr ""
 msgid "Snapshots count"
 msgstr ""
 
-#: app/scripts/components/user/filters.js
 #: app/scripts/components/user/support/UserList.tsx
+#: app/scripts/components/user/support/utils.ts
 msgid "Staff"
 msgstr ""
 
-#: app/scripts/components/user/filters.js
+#: app/scripts/components/user/support/utils.ts
 msgid "Staff and Support user"
 msgstr ""
 
@@ -5007,7 +5015,7 @@ msgstr ""
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
-#: app/scripts/components/user/user-popover-table.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Status"
 msgstr ""
 
@@ -5113,7 +5121,7 @@ msgstr ""
 msgid "Support requests"
 msgstr ""
 
-#: app/scripts/components/user/filters.js
+#: app/scripts/components/user/support/utils.ts
 msgid "Support user"
 msgstr ""
 
