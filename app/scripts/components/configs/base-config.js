@@ -260,6 +260,10 @@ const ENV = {
   // video/* representing video files.
   // image/* representing image files.
   excludedAttachmentTypes : [],
+
+  logoutUrlMap: {
+    saml2: 'api-auth/saml2/logout/',
+  },
 };
 
 export default ENV;

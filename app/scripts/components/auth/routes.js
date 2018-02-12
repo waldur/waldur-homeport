@@ -34,33 +34,6 @@ export default function authRoutes($stateProvider) {
       }
     })
 
-    .state('home.login_complete', {
-      url: '/login_complete/:token/',
-      template: '<auth-login-complete></auth-login-complete>',
-      data: {
-        anonymous: true,
-        bodyClass: 'old',
-      }
-    })
-
-    .state('home.login_failed', {
-      url: '/login_failed/',
-      template: '<auth-login-failed></auth-login-failed>',
-      data: {
-        anonymous: true,
-        bodyClass: 'old',
-      }
-    })
-
-    .state('home.logout_failed', {
-      url: '/logout_failed/',
-      template: '<auth-logout-failed/>',
-      data: {
-        anonymous: true,
-        bodyClass: 'old',
-      }
-    })
-
     .state('initialdata', {
       parent: 'home',
       url: '/initial-data/',

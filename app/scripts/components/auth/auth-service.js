@@ -1,3 +1,24 @@
+/*
+ * For security reasons, third-party authentication backends, such as SAML2 or OpenID,
+ * expect that when user is logged out, he is redirected to the logout URL so that
+ * user session would be cleaned both in Waldur and authentication backend.
+ *
+ * Consider the following workflow:
+ *
+ * 1) When login is completed, authentication method is persisted in the localStorage
+ *    with key authenticationMethod so that it wouldn't be reset when page is refreshed.
+ *
+ * 2) When logout is initiated, it is first checked whether there's authentication method and
+ *    corresponding logout link in the environment configuration with key logoutUrlMap.
+ *
+ * 3) User is redirected to the logout URL if it is defined.
+ *
+ * 4) After user is successfully logged out from third-party authentication backend, such as SAML2,
+ *    he is redirected back to the HomePort.
+ *
+ * 5) Authentication token and authentication method is cleaned up in the local storage.
+*/
+
 // @ngInject
 export default function authService(
   $http, $auth, $rootScope, $window, $state, usersService, currentStateService,  ENV) {
@@ -25,6 +46,7 @@ export default function authService(
 
   function loginSuccess(response) {
     vm.user = response.data;
+    setAuthenticationMethod(response.data.method);
     setAuthHeader(vm.user.token);
     $auth.setToken(vm.user.token);
     vm.user.isAuthenticated = true;
@@ -40,7 +62,27 @@ export default function authService(
     return $http.post(ENV.apiEndpoint + 'api-auth/activation/', user).then(loginSuccess);
   }
 
+  function setAuthenticationMethod(method) {
+    localStorage['authenticationMethod'] = method;
+  }
+
+  function resetAuthenticationMethod() {
+    localStorage.removeItem('authenticationMethod');
+  }
+
+  function getLogoutUrl() {
+    const method = localStorage['authenticationMethod'];
+    if (method) {
+      return ENV.logoutUrlMap[method];
+    }
+  }
+
   function logout() {
+    const logoutUrl = getLogoutUrl();
+    if (logoutUrl) {
+      $window.location = ENV.apiEndpoint + logoutUrl;
+      return;
+    }
     $rootScope.$broadcast('logoutStart');
     delete $http.defaults.headers.common.Authorization;
     vm.user = {isAuthenticated: false};
@@ -49,6 +91,7 @@ export default function authService(
     $auth.logout();
     $rootScope.$broadcast('abortRequests');
     $state.go('login');
+    resetAuthenticationMethod();
   }
 
   function setAuthHeader(token) {
