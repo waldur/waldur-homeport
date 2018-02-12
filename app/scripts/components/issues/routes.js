@@ -88,7 +88,7 @@ export default function issueRoutes($stateProvider) {
       template: '<user-list-view></user-list-view>',
       data: {
         pageTitle: gettext('Users'),
-        feature: 'support'
+        feature: 'support.users'
       },
       resolve: {
         permission: checkPermission
