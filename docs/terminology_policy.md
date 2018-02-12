@@ -1,5 +1,7 @@
 # Terminology policy
 
+We prefer British English over American English. For example, we use `cancelled` instead of `canceled`.
+
 Should be applied for naming buttons, separate pages of the process and in list of actions.
 
 **Add** / **Remove**

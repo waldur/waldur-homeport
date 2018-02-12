@@ -2523,7 +2523,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: app/scripts/components/auth/callbacks/auth-login-complete.html
+#: app/scripts/components/auth/callbacks/auth-login-completed.html
 msgid "Logging user in"
 msgstr ""
 
@@ -5765,6 +5765,10 @@ msgstr ""
 #: app/scripts/components/user/support/UserDetailsDialog.tsx
 #: app/scripts/components/user/user-popover.html
 msgid "User details"
+msgstr ""
+
+#: app/scripts/components/auth/callbacks/auth-logout-completed.html
+msgid "User has been logged out. You will be redirected to the login page soon."
 msgstr ""
 
 #: app/scripts/components/user/user-sidebar.html

@@ -56,7 +56,7 @@ const authValimoDialog = {
         return;
       }
       if (result.state === 'OK') {
-        this.authService.loginSuccess({data: {token: result.token}});
+        this.authService.loginSuccess({data: {token: result.token, method: 'valimo'}});
         this.$state.go('profile.details');
       } else if (result.state === 'Canceled') {
         if (result.details === 'User is not registered.') {
