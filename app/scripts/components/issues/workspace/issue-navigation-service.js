@@ -23,7 +23,8 @@ const REPORT_ITEMS = [
   {
     label: gettext('Users'),
     icon: 'fa-users',
-    link: 'support.users'
+    link: 'support.users',
+    feature: 'support.users'
   },
   {
     label: gettext('Resources'),

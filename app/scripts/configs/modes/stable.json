@@ -18,6 +18,8 @@
     "support.assigned_to_me",
     "support.activity_stream",
     "support.regular_issue_filters",
+    "support.user_manage",
+    "support.user_details",
     "user.preferred_language",
     "user.competence",
     "backup",
