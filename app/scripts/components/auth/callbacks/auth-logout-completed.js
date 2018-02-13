@@ -2,7 +2,7 @@ import template from './auth-logout-completed.html';
 
 // @ngInject
 function AuthLogoutCompletedController(authService) {
-  authService.logout();
+  authService.localLogout();
 }
 
 export default {
