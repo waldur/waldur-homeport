@@ -15,7 +15,11 @@ export const ResourceAccessInfo = (props: ResourceAccessInfoProps) => {
   }
 
   if (Array.isArray(resource.access_url)) {
-    return resource.access_url.join(', ');
+    const parts = resource.access_url.filter(p => p !== null);
+    if (parts.length === 0) {
+      return translate('No access info');
+    }
+    return parts.join(', ');
   }
 
   if (resource.access_url.startsWith('http')) {

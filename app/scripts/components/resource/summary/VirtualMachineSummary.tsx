@@ -27,6 +27,13 @@ const ResourceSummaryField = ({ translate, resource }) => (
   </>
 );
 
+const formatIpList = value => {
+  if (Array.isArray(value)) {
+    return formatCommaList(value.filter(p => p !== null));
+  }
+  return '–';
+};
+
 export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
   const { translate } = props;
   return (
@@ -42,11 +49,11 @@ export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
       />
       <Field
         label={translate('Internal IP')}
-        value={formatCommaList(props.resource.internal_ips)}
+        value={formatIpList(props.resource.internal_ips)}
       />
       <Field
         label={translate('External IP')}
-        value={formatCommaList(props.resource.external_ips)}
+        value={formatIpList(props.resource.external_ips)}
       />
       <Field
         label={translate('SSH key')}
