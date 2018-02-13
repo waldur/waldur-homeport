@@ -87,7 +87,9 @@ export default function authService(
     return $http.post(ENV.apiEndpoint + logoutUrl).then(response => {
       $window.location = response.data.location;
     }).catch(response => {
-      ncUtilsFlash.errorFromResponse(response, gettext('Unable to logout.'));
+      // eslint-disable-next-line no-console
+      console.error('Unable to logout from SAML2.', response);
+      localLogout();
     });
   }
 

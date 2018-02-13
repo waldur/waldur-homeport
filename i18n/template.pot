@@ -5614,10 +5614,6 @@ msgstr ""
 msgid "Unable to load user."
 msgstr ""
 
-#: app/scripts/components/auth/auth-service.js
-msgid "Unable to logout."
-msgstr ""
-
 #: app/scripts/components/resource/actions/dialog/action-dialog.js
 msgid "Unable to perform action"
 msgstr ""
