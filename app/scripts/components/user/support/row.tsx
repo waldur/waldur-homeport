@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-export const Row = ({ label, value, visibleIf= '' }) => value ? (
-  <tr visible-if={`"${visibleIf}"`}>
+export const Row = ({ label, value }) => value ? (
+  <tr>
     <td><strong>{label}</strong></td>
     <td>{value}</td>
   </tr>
