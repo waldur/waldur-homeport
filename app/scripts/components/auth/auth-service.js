@@ -21,13 +21,14 @@
 
 // @ngInject
 export default function authService(
-  $http, $auth, $rootScope, $window, $state, usersService, currentStateService,  ENV) {
+  $http, $auth, $rootScope, $window, $state, usersService, currentStateService, ncUtilsFlash, ENV) {
   let vm = this;
 
   vm.signin = signin;
   vm.signup = signup;
   vm.activate = activate;
   vm.logout = logout;
+  vm.localLogout = localLogout;
   vm.isAuthenticated = isAuthenticated;
   vm.authenticate = authenticate;
   vm.getDownloadLink = getDownloadLink;
@@ -79,10 +80,18 @@ export default function authService(
 
   function logout() {
     const logoutUrl = getLogoutUrl();
-    if (logoutUrl) {
-      $window.location = ENV.apiEndpoint + logoutUrl;
-      return;
+    if (!logoutUrl) {
+      return localLogout();
     }
+    ncUtilsFlash.success(gettext('Logout has been started. Please wait until it completes.'));
+    return $http.post(ENV.apiEndpoint + logoutUrl).then(response => {
+      $window.location = response.data.location;
+    }).catch(response => {
+      ncUtilsFlash.errorFromResponse(response, gettext('Unable to logout.'));
+    });
+  }
+
+  function localLogout() {
     $rootScope.$broadcast('logoutStart');
     delete $http.defaults.headers.common.Authorization;
     vm.user = {isAuthenticated: false};
