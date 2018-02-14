@@ -77,7 +77,7 @@ export default function authService(
 
   function logout() {
     const authenticationMethod = getAuthenticationMethod();
-    if (authenticationMethod === 'saml2' && ENV.enableSaml2SingleLogout) {
+    if (authenticationMethod === 'saml2' && ENV.plugins.WALDUR_AUTH_SAML2.ENABLE_SINGLE_LOGOUT) {
       ncUtilsFlash.success(gettext('SAML2 single logout has been started. Please wait until it completes.'));
       $window.location = ENV.apiEndpoint + 'api-auth/saml2/logout/';
     } else {
