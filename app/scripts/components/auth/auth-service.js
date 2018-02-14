@@ -71,26 +71,18 @@ export default function authService(
     localStorage.removeItem('authenticationMethod');
   }
 
-  function getLogoutUrl() {
-    const method = localStorage['authenticationMethod'];
-    if (method) {
-      return ENV.logoutUrlMap[method];
-    }
+  function getAuthenticationMethod() {
+    return localStorage['authenticationMethod'];
   }
 
   function logout() {
-    const logoutUrl = getLogoutUrl();
-    if (!logoutUrl) {
-      return localLogout();
-    }
-    ncUtilsFlash.success(gettext('Logout has been started. Please wait until it completes.'));
-    return $http.post(ENV.apiEndpoint + logoutUrl).then(response => {
-      $window.location = response.data.location;
-    }).catch(response => {
-      // eslint-disable-next-line no-console
-      console.error('Unable to logout from SAML2.', response);
+    const authenticationMethod = getAuthenticationMethod();
+    if (authenticationMethod === 'saml2' && ENV.plugins.WALDUR_AUTH_SAML2.ENABLE_SINGLE_LOGOUT) {
+      ncUtilsFlash.success(gettext('SAML2 single logout has been started. Please wait until it completes.'));
+      $window.location = ENV.apiEndpoint + 'api-auth/saml2/logout/';
+    } else {
       localLogout();
-    });
+    }
   }
 
   function localLogout() {

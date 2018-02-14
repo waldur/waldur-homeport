@@ -2544,10 +2544,6 @@ msgstr ""
 msgid "Logout failed"
 msgstr ""
 
-#: app/scripts/components/auth/auth-service.js
-msgid "Logout has been started. Please wait until it completes."
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js
 msgid "MAC address"
 msgstr ""
@@ -4534,6 +4530,10 @@ msgstr ""
 
 #: app/scripts/components/configs/base-config.js
 msgid "Russian"
+msgstr ""
+
+#: app/scripts/components/auth/auth-service.js
+msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr ""
 
 #: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html
