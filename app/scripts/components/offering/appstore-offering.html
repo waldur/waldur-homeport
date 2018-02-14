@@ -11,6 +11,18 @@
         </div>
         <div class="ibox-content">
           <appstore-form fields="$ctrl.offering" model="$ctrl.model" errors="$ctrl.errors"/>
+          <div class="form-group">
+            <div class="control-label col-sm-offset-3">
+              <label>
+                <input type="checkbox" ng-model="$ctrl.agreeWithPolicy" ng-change="$ctrl.toggleCreateBtnStatus()"/>
+                <span translate>By creating I agree with the</span>
+                <a ng-click="$ctrl.openPolicy()">
+                  <i class="fa fa-external-link"></i>
+                  <span translate>Terms of Service</span>
+                </a>
+              </label>
+            </div>
+          </div>
         </div>
 
         <div class="ibox-content">
@@ -21,14 +33,6 @@
           <button class="btn btn-default" ng-click="$ctrl.cancel()">
             <span translate>Cancel</span>
           </button>
-          <label class="control-label pull-right m-r-sm m-t-xs">
-            <input type="checkbox" ng-model="$ctrl.agreeWithPolicy" ng-change="$ctrl.toggleCreateBtnStatus()"/>
-            <span translate>By creating I agree with the</span>
-            <a ui-sref="" target="_blank">
-              <i class="fa fa-external-link"></i>
-              <span translate>Terms of Service</span>
-            </a>
-          </label>
         </div>
       </div>
     </div>

@@ -9,12 +9,14 @@ const appstoreOffering = {
       $state,
       ncUtilsFlash,
       offeringsService,
-      currentStateService) {
+      currentStateService,
+      $uibModal) {
       this.$stateParams = $stateParams;
       this.$state = $state;
       this.ncUtilsFlash = ncUtilsFlash;
       this.offeringsService = offeringsService;
       this.currentStateService = currentStateService;
+      this.$uibModal = $uibModal;
       this.createButtonStatus = false;
     }
 
@@ -56,6 +58,15 @@ const appstoreOffering = {
 
     toggleCreateBtnStatus() {
       this.createButtonStatus = !this.createButtonStatus;
+    }
+
+    openPolicy() {
+      this.$uibModal.open({
+        component: 'offeringPolicy',
+        resolve: {
+          terms_of_service: () => this.offering.terms_of_service
+        }
+      });
     }
 
     cancel() {
