@@ -65,7 +65,7 @@
           <h5 translate>Description</h5>
           <textarea
             class="form-control h-150"
-            ng-bind="$ctrl.offering.issue_description"
+            ng-bind-html="$ctrl.offering.issue_description | decodeHtml"
             readonly/>
         </div>
       </div>
