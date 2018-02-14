@@ -261,9 +261,7 @@ const ENV = {
   // image/* representing image files.
   excludedAttachmentTypes : [],
 
-  logoutUrlMap: {
-    saml2: 'api-auth/saml2/logout/',
-  },
+  enableSaml2SingleLogout: false,
 };
 
 export default ENV;
