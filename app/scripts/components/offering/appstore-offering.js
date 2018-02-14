@@ -15,6 +15,7 @@ const appstoreOffering = {
       this.ncUtilsFlash = ncUtilsFlash;
       this.offeringsService = offeringsService;
       this.currentStateService = currentStateService;
+      this.createButtonStatus = false;
     }
 
     $onInit() {
@@ -51,6 +52,10 @@ const appstoreOffering = {
         this.model.name = this.offering.label;
         angular.forEach(offering.options, (option, name) => option.name = name);
       }).finally(() => this.loading = false);
+    }
+
+    toggleCreateBtnStatus() {
+      this.createButtonStatus = !this.createButtonStatus;
     }
 
     cancel() {
