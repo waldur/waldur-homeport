@@ -106,7 +106,7 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
         }
         this.hideNoDataText = false;
       });
-      this.blockListElement(this.listPromise);
+      this.blockListElement();
       return this.listPromise;
     },
     getFilter: function() {
