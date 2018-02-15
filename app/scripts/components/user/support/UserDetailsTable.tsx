@@ -5,71 +5,81 @@ import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { isVisible } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { formatRegistrationMethod, formatUserStatus } from '@waldur/user/support/utils';
-import { User, UserDetails } from '@waldur/workspace/types';
+import { UserDetails } from '@waldur/workspace/types';
 
-import { Row } from './row';
+import { Row } from './Row';
+import { userLanguageIsVisible, userCompetenceIsVisible, userStatusIsVisible } from './selectors';
 
 export interface UserDetailsTableProps extends TranslateProps {
   user: UserDetails;
-  currentUser: User;
-  rowIsVisible: (feature: string) => boolean;
+  userLanguageIsVisible: boolean;
+  userCompetenceIsVisible: boolean;
+  userStatusIsVisible: boolean;
 }
 
 const PureUserDetailsTable = (props: UserDetailsTableProps) => {
   return (
-    <Table responsive={true}>
+    <Table responsive={true} bordered={true}>
       <tbody>
         <Row
           label={props.translate('Full name')}
-          value={props.user.full_name}/>
+          value={props.user.full_name}
+        />
         <Row
           label={props.translate('ID code')}
-          value={props.user.civil_number}/>
+          value={props.user.civil_number}
+        />
         <Row
           label={props.translate('Phone numbers')}
-          value={props.user.phone_number}/>
+          value={props.user.phone_number}
+        />
         <Row
           label={props.translate('E-mail')}
-          value={props.user.email}/>
-        {
-          props.rowIsVisible('user.preferred_language') &&
-          <Row
-            label={props.translate('Preferred language')}
-            value={props.user.preferred_language}/>
-        }
-        {
-          props.rowIsVisible('user.competence') &&
-          <Row
-            label={props.translate('Competence')}
-            value={props.user.competence}/>
-        }
+          value={props.user.email}
+        />
+        <Row
+          label={props.translate('Preferred language')}
+          value={props.user.preferred_language}
+          isVisible={props.userLanguageIsVisible}
+        />
+        <Row
+          label={props.translate('Competence')}
+          value={props.user.competence}
+          isVisible={props.userCompetenceIsVisible}
+        />
         <Row
           label={props.translate('Registration method')}
-          value={formatRegistrationMethod(props.user.registration_method)}/>
+          value={formatRegistrationMethod(props.user.registration_method)}
+        />
         <Row
           label={props.translate('Date joined')}
-          value={formatDateTime(props.user.date_joined)}/>
+          value={formatDateTime(props.user.date_joined)}
+        />
         <Row
           label={props.translate('Job position')}
-          value={props.user.job_title}/>
-        {(props.currentUser.is_staff || props.currentUser.is_support) &&
-          <Row
-            label={props.translate('Status')}
-            value={formatUserStatus(props.user)}/>
-        }
+          value={props.user.job_title}
+        />
+        <Row
+          label={props.translate('Status')}
+          value={formatUserStatus(props.user)}
+          isVisible={props.userStatusIsVisible}
+        />
       </tbody>
     </Table>
   );
 };
 
+const mapStateToProps = state => ({
+  userLanguageIsVisible: userLanguageIsVisible(state),
+  userCompetenceIsVisible: userCompetenceIsVisible(state),
+  userStatusIsVisible: userStatusIsVisible(state),
+});
+
 const enhance = compose(
   withTranslation,
-  connect(state => ({
-    rowIsVisible: feature => isVisible(state, feature),
-  }))
+  connect(mapStateToProps),
 );
 
 export const UserDetailsTable = enhance(PureUserDetailsTable);

@@ -8,7 +8,6 @@ import {TranslateProps, withTranslation} from '@waldur/i18n';
 import UserEvents from '@waldur/user/list/UserEvents';
 import { userDetailsIsVisible, userManageIsVisible } from '@waldur/user/support/selectors';
 import { UserDetailsTable } from '@waldur/user/support/UserDetailsTable';
-import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails, User } from '@waldur/workspace/types';
 
 export interface UserDetailsViewProps extends TranslateProps {
@@ -25,14 +24,14 @@ export const PureUserDetailsView = (props: UserDetailsViewProps) => (
         <UserEvents />
       </div>
     </Tab>
-    {(props.userDetailsIsVisible && props.currentUser.is_support && !props.currentUser.is_staff) && (
+    {props.userDetailsIsVisible && (
       <Tab eventKey={2} title={props.translate('Details')}>
         <div className="m-t-sm">
-          <UserDetailsTable user={props.user} currentUser={props.currentUser}/>
+          <UserDetailsTable user={props.user}/>
         </div>
       </Tab>
     )}
-    {(props.userManageIsVisible && props.currentUser.is_staff && !props.currentUser.is_support) && (
+    {props.userManageIsVisible && (
       <Tab eventKey={3} title={props.translate('Manage')}>
         <div className="m-t-sm">
           # todo in WAL-1380
@@ -43,7 +42,6 @@ export const PureUserDetailsView = (props: UserDetailsViewProps) => (
 );
 
 const mapStateToProps = state => ({
-  currentUser: getUser(state),
   userManageIsVisible: userManageIsVisible(state),
   userDetailsIsVisible: userDetailsIsVisible(state),
 });
