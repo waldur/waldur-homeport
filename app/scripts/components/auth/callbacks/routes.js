@@ -14,7 +14,6 @@ export default function authCallbackRoutes($stateProvider) {
       url: '/login_failed/',
       template: '<auth-login-failed></auth-login-failed>',
       data: {
-        anonymous: true,
         bodyClass: 'old',
       }
     })
@@ -23,7 +22,6 @@ export default function authCallbackRoutes($stateProvider) {
       url: '/logout_completed/',
       template: '<auth-logout-completed></auth-logout-completed>',
       data: {
-        anonymous: true,
         bodyClass: 'old',
       }
     })
@@ -32,7 +30,6 @@ export default function authCallbackRoutes($stateProvider) {
       url: '/logout_failed/',
       template: '<auth-logout-failed></auth-logout-failed>',
       data: {
-        anonymous: true,
         bodyClass: 'old',
       }
     });
