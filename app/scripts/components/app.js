@@ -122,7 +122,7 @@ export function httpInterceptor($q, ncUtilsFlash, ENV, ErrorMessageFormatter, $r
         }
         timeouts[getKey(config)] = setTimeout(function() {
           let errorMessage = 'Problem getting response from the server.';
-          ncUtilsFlash.error(errorMessage);
+          // ncUtilsFlash.error(errorMessage);
           // eslint-disable-next-line no-console
           console.error(errorMessage, config);
         }, ENV.requestTimeout);
