@@ -9,6 +9,7 @@ import packageTemplatesService from './package-templates-service';
 import openstackPackagesService from './openstack-packages-service';
 import openstackTenantChangePackageService from './openstack-tenant-change-package-service';
 import openstackFlavorsService from './openstack-flavors-service';
+import openstackTenantsService from './openstack-tenants-service';
 import openstackPrices from './openstack-prices';
 import openstackTenantPrices from './openstack-tenant-prices';
 import filtersModule from './filters';
@@ -17,6 +18,7 @@ import costPlanningConfig from './cost-planning';
 import openstackTenantAssignPackageDialog from './openstack-tenant-assign-package-dialog';
 import { OpenStackTenantSummary } from './OpenStackTenantSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
+import appstoreFieldSelectOpenstackTenant from './appstore-field-select-openstack-tenant';
 
 export default module => {
   ResourceSummary.register('OpenStack.Tenant', OpenStackTenantSummary);
@@ -35,8 +37,10 @@ export default module => {
   module.service('openstackPackagesService', openstackPackagesService);
   module.service('openstackTenantChangePackageService', openstackTenantChangePackageService);
   module.service('openstackFlavorsService', openstackFlavorsService);
+  module.service('openstackTenantsService', openstackTenantsService);
   module.component('openstackPrices', openstackPrices);
   module.component('openstackTenantPrices', openstackTenantPrices);
+  module.component('appstoreFieldSelectOpenstackTenant', appstoreFieldSelectOpenstackTenant);
   filtersModule(module);
 };
 
