@@ -32,14 +32,14 @@ export default module => {
 };
 
 // @ngInject
-function redirectToState($rootScope, $state, authService) {
+function redirectToState($rootScope, $state, $injector) {
   $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
     if (error) {
       // eslint-disable-next-line no-console
       console.log('$stateChangeError', error);
     }
     if (error && error.status === 401) {
-      return authService.localLogout();
+      return $injector.get('authService').localLogout();
     }
     if (error && error.redirectTo && error.status !== -1) {
       $state.go(error.redirectTo);
