@@ -1,9 +1,4 @@
-import { shallow } from 'enzyme';
-import * as React from 'react';
-
-import { translate } from '@waldur/i18n';
-
-import { PureUserDetailsView } from './UserDetailsView';
+import { userManageIsVisible, userDetailsIsVisible } from './selectors';
 
 const staffUser = {
   is_support: false,
@@ -20,28 +15,33 @@ const ordinaryUser = {
   is_staff: false,
 };
 
-const renderUserDetailsView = props => (
-  shallow(<PureUserDetailsView {...props} translate={translate} userDetailsIsVisible={true} userManageIsVisible={true}/>)
-);
+const createState = user => ({
+  workspace: {
+    user,
+  },
+  config: {
+    featuresVisible: true,
+  },
+});
 
 describe('UserDetailsView', () => {
   it('should conceal "Manage" tab for support user', () => {
-    const wrapper = renderUserDetailsView({currentUser: supportUser});
-    expect(wrapper.find({title: 'Manage'}).length).toBe(0);
+    const state = createState(supportUser);
+    expect(userManageIsVisible(state)).toBe(false);
   });
 
   it('should conceal "Manage" tab for ordinary user', () => {
-    const wrapper = renderUserDetailsView({currentUser: ordinaryUser});
-    expect(wrapper.find({title: 'Manage'}).length).toBe(0);
+    const state = createState(ordinaryUser);
+    expect(userManageIsVisible(state)).toBe(false);
   });
 
   it('should conceal "Details" tab for ordinary user', () => {
-    const wrapper = renderUserDetailsView({currentUser: ordinaryUser});
-    expect(wrapper.find({title: 'Details'}).length).toBe(0);
+    const state = createState(ordinaryUser);
+    expect(userDetailsIsVisible(state)).toBe(false);
   });
 
   it('should display "Manage" tab for staff user', () => {
-    const wrapper = renderUserDetailsView({currentUser: staffUser});
-    expect(wrapper.find({title: 'Manage'}).length).toBe(1);
+    const state = createState(staffUser);
+    expect(userManageIsVisible(state)).toBe(true);
   });
 });

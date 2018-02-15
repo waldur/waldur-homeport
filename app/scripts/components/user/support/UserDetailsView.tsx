@@ -8,11 +8,10 @@ import {TranslateProps, withTranslation} from '@waldur/i18n';
 import UserEvents from '@waldur/user/list/UserEvents';
 import { userDetailsIsVisible, userManageIsVisible } from '@waldur/user/support/selectors';
 import { UserDetailsTable } from '@waldur/user/support/UserDetailsTable';
-import { UserDetails, User } from '@waldur/workspace/types';
+import { UserDetails } from '@waldur/workspace/types';
 
 export interface UserDetailsViewProps extends TranslateProps {
   user: UserDetails;
-  currentUser: User;
   userDetailsIsVisible: boolean;
   userManageIsVisible: boolean;
 }
