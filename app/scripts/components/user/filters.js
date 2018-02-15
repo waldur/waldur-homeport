@@ -1,31 +1,5 @@
-// @ngInject
-function formatRegistrationMethod($filter) {
-  return function(user) {
-    if (!user.registration_method) {
-      return 'Default';
-    } else if (user.registration_method === 'openid') {
-      return 'Estonian ID';
-    } else {
-      return $filter('titleCase')(user.registration_method);
-    }
-  };
-}
-
-// @ngInject
-function formatUserStatus($filter) {
-  function getStatus(user) {
-    if (user.is_staff && !user.is_support) {
-      return gettext('Staff');
-    } else if (user.is_staff && user.is_support) {
-      return gettext('Staff and Support user');
-    } else if (!user.is_staff && user.is_support) {
-      return gettext('Support user');
-    } else {
-      return gettext('Regular user');
-    }
-  }
-  return user => $filter('translate')(getStatus(user));
-}
+import { formatRegistrationMethod } from './support/utils';
+import { formatUserStatus } from './support/utils';
 
 function formatLifetime() {
   return function(input) {
@@ -51,7 +25,7 @@ function formatLifetime() {
 }
 
 export default module => {
-  module.filter('formatRegistrationMethod', formatRegistrationMethod);
-  module.filter('formatUserStatus', formatUserStatus);
+  module.filter('formatRegistrationMethod', () => formatRegistrationMethod);
+  module.filter('formatUserStatus', () => formatUserStatus);
   module.filter('formatLifetime', formatLifetime);
 };
