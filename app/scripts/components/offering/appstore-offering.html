@@ -10,7 +10,7 @@
           <p ng-if="$ctrl.offering.summary" ng-bind-html="::$ctrl.offering.summary"></p>
         </div>
         <div class="ibox-content">
-          <appstore-form fields="$ctrl.offering" model="$ctrl.model" errors="$ctrl.errors"/>
+          <appstore-form form="$ctrl.form" fields="$ctrl.offering" model="$ctrl.model" errors="$ctrl.errors"/>
           <div class="form-group">
             <div class="control-label col-sm-offset-3">
               <label>
@@ -26,7 +26,7 @@
         </div>
 
         <div class="ibox-content">
-          <button class="btn btn-primary pull-right" ng-disabled="!$ctrl.createButtonStatus" submit-button="$ctrl.save()">
+          <button class="btn btn-primary pull-right" ng-disabled="$ctrl.createBtnDisabled()" submit-button="$ctrl.save()">
             <i class="fa fa-shopping-cart"></i>
             <span translate>Create</span>
           </button>

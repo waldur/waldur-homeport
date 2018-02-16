@@ -7,7 +7,8 @@ export default function appstoreForm() {
     scope: {
       fields: '=',
       model: '=',
-      errors: '<'
+      errors: '<',
+      form: '=',
     },
     controller: AppstoreFormController,
     controllerAs: '$ctrl',

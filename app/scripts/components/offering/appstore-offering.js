@@ -18,6 +18,7 @@ const appstoreOffering = {
       this.currentStateService = currentStateService;
       this.$uibModal = $uibModal;
       this.createButtonStatus = false;
+      this.form = null;
     }
 
     $onInit() {
@@ -58,6 +59,16 @@ const appstoreOffering = {
 
     toggleCreateBtnStatus() {
       this.createButtonStatus = !this.createButtonStatus;
+    }
+
+    createBtnDisabled() {
+      if (this.form) {
+        if (this.form.$invalid) {
+          return true;
+        }
+        return !this.createButtonStatus;
+      }
+      return !this.createButtonStatus;
     }
 
     openPolicy() {
