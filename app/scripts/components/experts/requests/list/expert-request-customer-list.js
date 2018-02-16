@@ -11,6 +11,7 @@ function ExpertRequestListController(
   $q,
   $state,
   $filter,
+  $sanitize,
   currentStateService,
   expertBidsService,
   expertRequestsService,
@@ -21,6 +22,7 @@ function ExpertRequestListController(
     init: function() {
       this.controllerScope = controllerScope;
       this.service = expertRequestsService;
+      this.$sanitize = $sanitize;
       let fn = this._super.bind(this);
       this.loadContext().then(() => {
         this.tableOptions = this.getTableOptions();
@@ -65,8 +67,8 @@ function ExpertRequestListController(
               requestId: row.uuid
             });
             return '<a href="{href}">{name}</a>'
-                   .replace('{href}', href)
-                   .replace('{name}', row.customer_name);
+              .replace('{href}', href)
+              .replace('{name}', row.customer_name);
           }
         },
         {
@@ -78,9 +80,8 @@ function ExpertRequestListController(
           title: gettext('Objectives'),
           orderable: false,
           render: row => {
-            return '<span uib-tooltip="{tooltip}">{value}</span>'
-              .replace('{tooltip}', row.objectives)
-              .replace('{value}', row.objectives.substring(0,30));
+            return `<span uib-tooltip-html="'<div>${this.$sanitize(row.objectives)}</div>'">` +
+              `${this.$sanitize(row.objectives.substring(0, 30))}</span>`;
           }
         },
         {
