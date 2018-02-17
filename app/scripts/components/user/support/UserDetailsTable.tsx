@@ -10,13 +10,13 @@ import { formatRegistrationMethod, formatUserStatus } from '@waldur/user/support
 import { UserDetails } from '@waldur/workspace/types';
 
 import { Row } from './Row';
-import { userLanguageIsVisible, userCompetenceIsVisible, userStatusIsVisible } from './selectors';
+import { userLanguageIsVisible, userCompetenceIsVisible, isVisibleForSupportOrStaff } from './selectors';
 
 export interface UserDetailsTableProps extends TranslateProps {
   user: UserDetails;
   userLanguageIsVisible: boolean;
   userCompetenceIsVisible: boolean;
-  userStatusIsVisible: boolean;
+  isVisibleForSupportOrStaff: boolean;
 }
 
 const PureUserDetailsTable = (props: UserDetailsTableProps) => {
@@ -64,7 +64,7 @@ const PureUserDetailsTable = (props: UserDetailsTableProps) => {
         <Row
           label={props.translate('Status')}
           value={formatUserStatus(props.user)}
-          isVisible={props.userStatusIsVisible}
+          isVisible={props.isVisibleForSupportOrStaff}
         />
       </tbody>
     </Table>
@@ -74,7 +74,7 @@ const PureUserDetailsTable = (props: UserDetailsTableProps) => {
 const mapStateToProps = state => ({
   userLanguageIsVisible: userLanguageIsVisible(state),
   userCompetenceIsVisible: userCompetenceIsVisible(state),
-  userStatusIsVisible: userStatusIsVisible(state),
+  isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
 });
 
 const enhance = compose(
