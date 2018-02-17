@@ -6,20 +6,16 @@ export const userManageIsVisible = state => {
     return false;
   }
   const user = getUser(state);
-  return user.is_staff && !user.is_support;
+  return user.is_staff;
 };
 
-export const userDetailsIsVisible = state => {
-  if (!isVisible(state, 'support.user_details')) {
-    return false;
-  }
-  const user = getUser(state);
-  return user.is_support && !user.is_staff;
+export const userEventsIsVisible = state => {
+  return isVisible(state, 'support.user_events');
 };
 
-export const userStatusIsVisible = state => {
+export const isVisibleForSupportOrStaff = state => {
   const user = getUser(state);
-  return user.is_staff || user.is_support;
+  return user.is_support || user.is_staff;
 };
 
 export const userLanguageIsVisible = state => isVisible(state, 'user.preferred_language');

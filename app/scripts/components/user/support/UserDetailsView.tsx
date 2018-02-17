@@ -6,27 +6,30 @@ import { compose } from 'redux';
 
 import {TranslateProps, withTranslation} from '@waldur/i18n';
 import UserEvents from '@waldur/user/list/UserEvents';
-import { userDetailsIsVisible, userManageIsVisible } from '@waldur/user/support/selectors';
+import {isVisibleForSupportOrStaff, userEventsIsVisible, userManageIsVisible} from '@waldur/user/support/selectors';
 import { UserDetailsTable } from '@waldur/user/support/UserDetailsTable';
 import { UserDetails } from '@waldur/workspace/types';
 
 export interface UserDetailsViewProps extends TranslateProps {
   user: UserDetails;
-  userDetailsIsVisible: boolean;
+  isVisibleForSupportOrStaff: boolean;
   userManageIsVisible: boolean;
+  userEventsIsVisible: boolean;
 }
 
 export const PureUserDetailsView = (props: UserDetailsViewProps) => (
   <Tabs defaultActiveKey={1} id="user-details">
-    <Tab eventKey={1} title={props.translate('Audit log')}>
-      <div className="m-t-sm">
-        <UserEvents />
-      </div>
-    </Tab>
-    {props.userDetailsIsVisible && (
-      <Tab eventKey={2} title={props.translate('Details')}>
+    {props.isVisibleForSupportOrStaff && (
+      <Tab eventKey={1} title={props.translate('Details')}>
         <div className="m-t-sm">
           <UserDetailsTable user={props.user}/>
+        </div>
+      </Tab>
+    )}
+    {props.userEventsIsVisible && (
+      <Tab eventKey={2} title={props.translate('Audit log')}>
+        <div className="m-t-sm">
+          <UserEvents />
         </div>
       </Tab>
     )}
@@ -42,7 +45,8 @@ export const PureUserDetailsView = (props: UserDetailsViewProps) => (
 
 const mapStateToProps = state => ({
   userManageIsVisible: userManageIsVisible(state),
-  userDetailsIsVisible: userDetailsIsVisible(state),
+  isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
+  userEventsIsVisible: userEventsIsVisible(state),
 });
 
 const enhance = compose(withTranslation, connect(mapStateToProps));

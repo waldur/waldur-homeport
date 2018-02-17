@@ -1,4 +1,4 @@
-import { userManageIsVisible, userDetailsIsVisible } from './selectors';
+import { userManageIsVisible, isVisibleForSupportOrStaff } from './selectors';
 
 const staffUser = {
   is_support: false,
@@ -37,7 +37,7 @@ describe('UserDetailsView', () => {
 
   it('should conceal "Details" tab for ordinary user', () => {
     const state = createState(ordinaryUser);
-    expect(userDetailsIsVisible(state)).toBe(false);
+    expect(isVisibleForSupportOrStaff(state)).toBe(false);
   });
 
   it('should display "Manage" tab for staff user', () => {
