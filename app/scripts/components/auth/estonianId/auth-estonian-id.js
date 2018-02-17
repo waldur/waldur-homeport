@@ -8,7 +8,7 @@ const authEstonianId = {
   controller: class AuthEstonianIdController {
     // @ngInject
     constructor($sce, ENV) {
-      const callbackUrl = 'api-auth/openid/login/?next=/api-auth/login_complete';
+      const callbackUrl = 'api-auth/openid/login/?next=/api-auth/openid/login_completed/';
       this.openidUrl = $sce.trustAsResourceUrl(ENV.apiEndpoint + callbackUrl);
     }
   }

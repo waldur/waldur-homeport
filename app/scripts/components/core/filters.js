@@ -1,18 +1,10 @@
-import { formatFilesize, formatSnakeCase, minutesToHours } from './utils';
-import { formatDate, formatDateTime } from './dateUtils';
+import { formatFilesize, formatSnakeCase, minutesToHours, titleCase, dateTime } from './utils';
+import { formatDate } from './dateUtils';
 
 // @ngInject
 function trustAsHtml($sce) {
   return function(value) {
     return $sce.trustAsHtml(value);
-  };
-}
-
-function titleCase() {
-  return function(input) {
-    if (input) {
-      return input.charAt(0).toUpperCase() + input.slice(1);
-    }
   };
 }
 
@@ -47,14 +39,6 @@ function shortDate() {
   };
 }
 
-function dateTime() {
-  return function(input) {
-    if (input) {
-      return formatDateTime(input);
-    }
-  };
-}
-
 // @ngInject
 function decodeHtml($sce) {
   return function(value) {
@@ -66,11 +50,11 @@ export default module => {
   module.filter('trustAsHtml', trustAsHtml);
   module.filter('decodeHtml', decodeHtml);
   module.filter('filesize', () => formatFilesize);
-  module.filter('titleCase', titleCase);
+  module.filter('titleCase', () => titleCase);
   module.filter('snakeCase', () => formatSnakeCase);
   module.filter('replace', replace);
   module.filter('defaultCurrency', defaultCurrency);
   module.filter('shortDate', shortDate);
-  module.filter('dateTime', dateTime);
+  module.filter('dateTime', () => dateTime);
   module.filter('minutesToHours', () => minutesToHours);
 };

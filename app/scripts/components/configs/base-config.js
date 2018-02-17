@@ -260,6 +260,8 @@ const ENV = {
   // video/* representing video files.
   // image/* representing image files.
   excludedAttachmentTypes : [],
+
+  enableSaml2SingleLogout: false,
 };
 
 export default ENV;

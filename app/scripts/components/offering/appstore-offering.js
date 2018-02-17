@@ -9,12 +9,16 @@ const appstoreOffering = {
       $state,
       ncUtilsFlash,
       offeringsService,
-      currentStateService) {
+      currentStateService,
+      $uibModal) {
       this.$stateParams = $stateParams;
       this.$state = $state;
       this.ncUtilsFlash = ncUtilsFlash;
       this.offeringsService = offeringsService;
       this.currentStateService = currentStateService;
+      this.$uibModal = $uibModal;
+      this.createButtonStatus = false;
+      this.form = null;
     }
 
     $onInit() {
@@ -51,6 +55,29 @@ const appstoreOffering = {
         this.model.name = this.offering.label;
         angular.forEach(offering.options, (option, name) => option.name = name);
       }).finally(() => this.loading = false);
+    }
+
+    toggleCreateBtnStatus() {
+      this.createButtonStatus = !this.createButtonStatus;
+    }
+
+    createBtnDisabled() {
+      if (this.form) {
+        if (this.form.$invalid) {
+          return true;
+        }
+        return !this.createButtonStatus;
+      }
+      return !this.createButtonStatus;
+    }
+
+    openPolicy() {
+      this.$uibModal.open({
+        component: 'offeringPolicy',
+        resolve: {
+          terms_of_service: () => this.offering.terms_of_service
+        }
+      });
     }
 
     cancel() {

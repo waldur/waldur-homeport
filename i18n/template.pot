@@ -668,6 +668,10 @@ msgstr ""
 msgid "Browse expert requests"
 msgstr ""
 
+#: app/scripts/components/offering/appstore-offering.html
+msgid "By creating I agree with the"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html
 msgid "By submitting the form you are agreeing to the"
 msgstr ""
@@ -735,6 +739,7 @@ msgstr ""
 #: app/scripts/components/modal/CloseDialogButton.tsx
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/offering/appstore-offering.html
+#: app/scripts/components/offering/offering-policy.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
@@ -887,7 +892,7 @@ msgid "Compare flavors"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
-#: app/scripts/components/user/user-popover-table.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Competence"
 msgstr ""
 
@@ -1224,12 +1229,16 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: app/scripts/components/user/user-popover-table.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Date joined"
 msgstr ""
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Deactivating"
+msgstr ""
+
+#: app/scripts/components/user/support/utils.ts
+msgid "Default"
 msgstr ""
 
 #: app/scripts/components/slurm/SlurmForm.tsx
@@ -1424,8 +1433,8 @@ msgstr ""
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
 #: app/scripts/components/team/user-selector.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-popover-table.html
 msgid "E-mail"
 msgstr ""
 
@@ -1527,6 +1536,10 @@ msgstr ""
 
 #: app/scripts/components/configs/base-config.js
 msgid "Estonian"
+msgstr ""
+
+#: app/scripts/components/user/support/utils.ts
+msgid "Estonian ID"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
@@ -1855,10 +1868,10 @@ msgid "From port"
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/support/UserList.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-popover-table.html
 msgid "Full name"
 msgstr ""
 
@@ -2013,9 +2026,9 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-popover-table.html
 msgid "ID code"
 msgstr ""
 
@@ -2390,8 +2403,8 @@ msgid "JIRA user with excessive privileges"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-popover-table.html
 msgid "Job position"
 msgstr ""
 
@@ -2523,7 +2536,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: app/scripts/components/auth/callbacks/auth-login-complete.html
+#: app/scripts/components/auth/callbacks/auth-login-completed.html
 msgid "Logging user in"
 msgstr ""
 
@@ -3501,7 +3514,7 @@ msgstr ""
 msgid "Phone number"
 msgstr ""
 
-#: app/scripts/components/user/user-popover-table.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Phone numbers"
 msgstr ""
 
@@ -3635,7 +3648,7 @@ msgid "Powered by"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
-#: app/scripts/components/user/user-popover-table.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Preferred language"
 msgstr ""
 
@@ -4200,8 +4213,8 @@ msgstr ""
 msgid "Registration code"
 msgstr ""
 
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/user-edit.html
-#: app/scripts/components/user/user-popover-table.html
 msgid "Registration method"
 msgstr ""
 
@@ -4209,7 +4222,7 @@ msgstr ""
 msgid "Registry code"
 msgstr ""
 
-#: app/scripts/components/user/filters.js
+#: app/scripts/components/user/support/utils.ts
 msgid "Regular user"
 msgstr ""
 
@@ -4532,6 +4545,10 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
+#: app/scripts/components/auth/auth-service.js
+msgid "SAML2 single logout has been started. Please wait until it completes."
+msgstr ""
+
 #: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html
 msgid "SLURM allocation usage"
 msgstr ""
@@ -4642,6 +4659,10 @@ msgstr ""
 #: app/scripts/components/appstore/providers/appstore-providers.js
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "Select"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/appstore-field-select-openstack-tenant.html
+msgid "Select OpenStack tenant..."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
@@ -4938,12 +4959,12 @@ msgstr ""
 msgid "Snapshots count"
 msgstr ""
 
-#: app/scripts/components/user/filters.js
 #: app/scripts/components/user/support/UserList.tsx
+#: app/scripts/components/user/support/utils.ts
 msgid "Staff"
 msgstr ""
 
-#: app/scripts/components/user/filters.js
+#: app/scripts/components/user/support/utils.ts
 msgid "Staff and Support user"
 msgstr ""
 
@@ -4998,7 +5019,7 @@ msgstr ""
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
-#: app/scripts/components/user/user-popover-table.html
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Status"
 msgstr ""
 
@@ -5104,7 +5125,7 @@ msgstr ""
 msgid "Support requests"
 msgstr ""
 
-#: app/scripts/components/user/filters.js
+#: app/scripts/components/user/support/utils.ts
 msgid "Support user"
 msgstr ""
 
@@ -5224,6 +5245,7 @@ msgstr ""
 #: app/scripts/components/freeipa/freeipa-account-create.html
 #: app/scripts/components/freeipa/freeipa-account-edit.html
 #: app/scripts/components/navigation/app-footer.html
+#: app/scripts/components/offering/appstore-offering.html
 #: app/scripts/components/user/user-edit.html
 msgid "Terms of Service"
 msgstr ""
@@ -5238,6 +5260,10 @@ msgstr ""
 
 #: app/scripts/components/intro/expert-manager-intro.js
 msgid "Thanks"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/appstore-field-select-openstack-tenant.html
+msgid "There are no OpenStack tenants yet."
 msgstr ""
 
 #: app/scripts/components/paypal/paypal-invoice-actions.html
@@ -5574,6 +5600,10 @@ msgstr ""
 msgid "Unable to fetch project providers."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/appstore-field-select-openstack-tenant.js
+msgid "Unable to get list of OpenStack tenants."
+msgstr ""
+
 #: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Unable to load Zabbix host details."
 msgstr ""
@@ -5765,6 +5795,10 @@ msgstr ""
 #: app/scripts/components/user/support/UserDetailsDialog.tsx
 #: app/scripts/components/user/user-popover.html
 msgid "User details"
+msgstr ""
+
+#: app/scripts/components/auth/callbacks/auth-logout-completed.html
+msgid "User has been logged out. You will be redirected to the login page soon."
 msgstr ""
 
 #: app/scripts/components/user/user-sidebar.html

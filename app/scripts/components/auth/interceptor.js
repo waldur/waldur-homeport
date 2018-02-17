@@ -17,7 +17,7 @@ function invalidTokenInterceptor($injector, $q) {
     responseError: function(response) {
       const authService = $injector.get('authService');
       if (response.status === 401) {
-        authService.logout();
+        authService.localLogout();
       }
       return $q.reject(response);
     }
