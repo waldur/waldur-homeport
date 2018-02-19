@@ -9,7 +9,7 @@ const authValimoTrigger = {
     // @ngInject
     constructor($uibModal, ENV) {
       this.$uibModal = $uibModal;
-      this.provider = ENV.VALIMO_LABEL;
+      this.provider = ENV.plugins.WALDUR_AUTH_VALIMO.LABEL;
     }
 
     showDialog() {

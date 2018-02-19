@@ -20,7 +20,7 @@ export class invitationUtilsService {
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
     this.$uibModal = $uibModal;
-    this.validateInvitationEmail = ENV.VALIDATE_INVITATION_EMAIL;
+    this.validateInvitationEmail = ENV.plugins.WALDUR_CORE.VALIDATE_INVITATION_EMAIL;
   }
 
   init() {
