@@ -1,4 +1,4 @@
-import { APPLICAION_TYPE, APPSTORE_CATEGORY } from './constants';
+import {APPLICAION_TYPE, APPSTORE_CATEGORY} from './constants';
 
 const ansibleJobsList = {
   templateUrl: 'views/partials/filtered-list.html',
@@ -53,8 +53,16 @@ function AnsibleJobsListController(
         },
         {
           title: gettext('Playbook'),
-          render: row => this.getApplicationType(row) === APPLICAION_TYPE.ANSIBLE_PLAYBOOK
-            ? row.playbook_name : $filter('translate')('Python Management')
+          render: row => {
+            const applicationType = this.getApplicationType(row);
+            if (applicationType === APPLICAION_TYPE.PLAYBOOK_JOB) {
+              return row.playbook_name;
+            } else if (applicationType === APPLICAION_TYPE.PYTHON_MANAGEMENT) {
+              return $filter('translate')('Python Management');
+            } else if (applicationType === APPLICAION_TYPE.JUPYTER_HUB_MANAGEMENT) {
+              return $filter('translate')('JupyterHub Management');
+            }
+          }
         },
         {
           title: gettext('State'),
@@ -75,9 +83,9 @@ function AnsibleJobsListController(
       ];
     },
     buildStateTag: function (index, applicationType) {
-      if (applicationType === APPLICAION_TYPE.ANSIBLE_PLAYBOOK) {
+      if (applicationType === APPLICAION_TYPE.PLAYBOOK_JOB) {
         return `<ansible-job-state model="controller.list[${index}]"/>`;
-      } else {
+      } else if ([APPLICAION_TYPE.PYTHON_MANAGEMENT, APPLICAION_TYPE.JUPYTER_HUB_MANAGEMENT].includes(applicationType)) {
         return `<python-management-state model="controller.list[${index}]"/>`;
       }
     },
@@ -91,7 +99,7 @@ function AnsibleJobsListController(
       return row.name;
     },
     buildStateTransition: function (row, applicationType) {
-      if (applicationType === APPLICAION_TYPE.ANSIBLE_PLAYBOOK) {
+      if (applicationType === APPLICAION_TYPE.PLAYBOOK_JOB) {
         return $state.href('project.resources.ansible.details', {
           uuid: this.project.uuid,
           jobId: row.uuid
@@ -100,6 +108,11 @@ function AnsibleJobsListController(
         return $state.href('project.resources.pythonManagement.details', {
           uuid: this.project.uuid,
           pythonManagementUuid: row.uuid
+        });
+      } else if (applicationType === APPLICAION_TYPE.JUPYTER_HUB_MANAGEMENT) {
+        return $state.href('project.resources.jupyterHubManagement.details', {
+          uuid: this.project.uuid,
+          jupyterHubManagementUuid: row.uuid
         });
       }
     },
@@ -141,8 +154,10 @@ function AnsibleJobsListController(
     getApplicationType(row) {
       if (row.type === 'python_management') {
         return APPLICAION_TYPE.PYTHON_MANAGEMENT;
+      } else if (row.type === 'playbook_job') {
+        return APPLICAION_TYPE.PLAYBOOK_JOB;
       } else {
-        return APPLICAION_TYPE.ANSIBLE_PLAYBOOK;
+        return APPLICAION_TYPE.JUPYTER_HUB_MANAGEMENT;
       }
     }
 

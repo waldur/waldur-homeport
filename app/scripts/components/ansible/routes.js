@@ -1,4 +1,4 @@
-import { APPSTORE_CATEGORY } from './constants';
+import {APPSTORE_CATEGORY} from './constants';
 
 // @ngInject
 export default function ansibleRoutes($stateProvider) {
@@ -47,5 +47,6 @@ export default function ansibleRoutes($stateProvider) {
         pageClass: 'gray-bg',
         feature: 'ansible',
       }
-    });
+    })
+  ;
 }

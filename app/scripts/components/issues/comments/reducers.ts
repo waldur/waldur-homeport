@@ -1,9 +1,9 @@
+import { Action } from '@waldur/core/reducerActions';
 import { omit } from '@waldur/core/utils';
-import { ISSUE_ATTACHMENTS_PUT_SUCCESS, ISSUE_ATTACHMENTS_DELETE_SUCCESS } from '@waldur/issues/attachments/constants';
-import { Action } from '@waldur/issues/attachments/types';
+import { ISSUE_ATTACHMENTS_DELETE_SUCCESS, ISSUE_ATTACHMENTS_PUT_SUCCESS } from '@waldur/issues/attachments/constants';
 
 import * as constants from './constants';
-import { State, Payload } from './types';
+import { Payload, State } from './types';
 
 const INITIAL_STATE: State = {
   loading: false,

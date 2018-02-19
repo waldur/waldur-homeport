@@ -186,7 +186,7 @@ msgstr ""
 msgid "Add key"
 msgstr ""
 
-#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+#: app/scripts/components/ansible/python-management/form/InstalledLibrariesForm.tsx
 msgid "Add library"
 msgstr ""
 
@@ -245,7 +245,11 @@ msgstr ""
 msgid "Add snapshots"
 msgstr ""
 
-#: app/scripts/components/python-management/form/AddVirtualEnvironmentButton.tsx
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
+msgid "Add user"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/form/AddVirtualEnvironmentButton.tsx
 msgid "Add virtual environment"
 msgstr ""
 
@@ -271,10 +275,18 @@ msgstr ""
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "Additional information"
+msgstr ""
+
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
+msgid "Admin rights"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html
@@ -377,7 +389,7 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 msgid "Application creation has been scheduled."
 msgstr ""
 
@@ -385,24 +397,29 @@ msgstr ""
 msgid "Application details"
 msgstr ""
 
-#: app/scripts/components/ansible/details/ansible-job-summary.js
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.js
 msgid "Application has been deleted"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-price-explanation.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 msgid "Application price explanation"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js
 #: app/scripts/components/ansible/constants.js
-#: app/scripts/components/ansible/details/ansible-job-details.js
+#: app/scripts/components/ansible/jupyter-hub-management/routes.js
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-details.js
+#: app/scripts/components/ansible/python-management/routes.js
 #: app/scripts/components/ansible/routes.js
 #: app/scripts/components/ansible/sidebar.js
 #: app/scripts/components/appstore/routes.js
 #: app/scripts/components/dashboard/base-quotas.ts
-#: app/scripts/components/python-management/routes.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Applications"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "Apply JupyterHub configuration"
 msgstr ""
 
 #: app/scripts/components/issues/list/issues-list-filtered.html
@@ -462,6 +479,14 @@ msgstr ""
 msgid "Assignee"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+msgid "Associated python management"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Associated virtual machine was deleted!"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
 #: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js
@@ -499,6 +524,11 @@ msgstr ""
 msgid "Authentication events"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "Authentication method"
+msgstr ""
+
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
@@ -517,12 +547,20 @@ msgstr ""
 msgid "Available quota usage: {usage}"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "Azure Active Directory ID"
+msgstr ""
+
 #: app/scripts/components/azure/help.js
 msgid "Azure provider"
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
 msgid "Azure region where to provision resources (default: \"Central US\")"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
+msgid "Azure username should not contain @domain.com part. All spaces or dots should be replaced with underscores: firstname_lastname"
 msgstr ""
 
 #: app/scripts/components/navigation/header/site-header.html
@@ -700,7 +738,7 @@ msgstr ""
 msgid "CIDR"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-price-explanation.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
@@ -725,8 +763,12 @@ msgstr ""
 msgid "CSV"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 msgid "Calculating costs"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "Callback URL"
 msgstr ""
 
 #: app/scripts/components/issues/create/issue-registration.html
@@ -740,7 +782,9 @@ msgstr ""
 msgid "Can't unlink system provider."
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.html
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.html
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/appstore/dialog/appstore-selector-dialog.html
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html
@@ -765,7 +809,6 @@ msgstr ""
 #: app/scripts/components/plans/plans-list.html
 #: app/scripts/components/project/ProjectCreateForm.tsx
 #: app/scripts/components/providers/ProviderCreateForm.tsx
-#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
 #: app/scripts/components/resource-import/resource-import-dialog.html
 #: app/scripts/components/resource/actions/dialog/action-dialog.html
 #: app/scripts/components/team/add-project-member.html
@@ -839,7 +882,7 @@ msgstr ""
 msgid "Charts"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -871,7 +914,15 @@ msgstr ""
 msgid "Click on a 'Create proposal' button when you are ready to fulfill expert request"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-price-explanation.html
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "Client ID"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "Client Secret"
+msgstr ""
+
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/billing/events/invoice-events-dialog.html
 #: app/scripts/components/customer/details/customer-report-error.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
@@ -928,7 +979,7 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-price-explanation.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/cost-planning/cost-plan-flavors.html
 msgid "Component"
 msgstr ""
@@ -1030,7 +1081,9 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.html
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.html
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/customer/workspace/customer-issues.js
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
@@ -1042,7 +1095,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/actions.js
 #: app/scripts/components/openstack/openstack-volume/module.js
 #: app/scripts/components/project/project-issues.js
-#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/tabs/resource-issues.js
 #: app/scripts/components/user/hooks/hook-details.html
@@ -1146,7 +1198,8 @@ msgstr ""
 msgid "Create subnet"
 msgstr ""
 
-#: app/scripts/components/ansible/details/ansible-job-summary.html
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
+#: app/scripts/components/ansible/python-management/details/PythonManagementActionsHistory.tsx
 #: app/scripts/components/billing/billing-utils.js
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/experts/bids/expert-bids-list.js
@@ -1157,7 +1210,6 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
-#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "Created"
@@ -1289,11 +1341,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "Delete JupyterHub & all its users with all their data"
+msgstr ""
+
 #: app/scripts/components/resource/monitoring/ZabbixHostDeleteButton.tsx
 msgid "Delete Zabbix host"
 msgstr ""
 
-#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Delete python management & virtual environments"
 msgstr ""
 
@@ -1305,8 +1361,8 @@ msgstr ""
 msgid "Deployment plan does not have any item yet."
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js
-#: app/scripts/components/ansible/details/ansible-job-summary.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/issues/create/issue-quick-create.html
@@ -1391,7 +1447,7 @@ msgstr ""
 msgid "DigitalOcean provider"
 msgstr ""
 
-#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Directory will be created in home directory of default system user."
 msgstr ""
 
@@ -1502,6 +1558,11 @@ msgstr ""
 msgid "Edit team member"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "Either manually define credentials or enable OAuth authentication"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html
 #: app/scripts/components/invitations/invitations-list.js
 #: app/scripts/components/user/support/UserEditForm.tsx
@@ -1537,6 +1598,14 @@ msgstr ""
 
 #: app/scripts/components/configs/base-config.js
 msgid "English"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+msgid "Ensure that the following public key is present in /home/SYSTEM_DEFAULT_USER/.ssh/authorized_keys file."
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+msgid "Ensure that the following public key is present in authorized_keys file on the selected instance"
 msgstr ""
 
 #: app/scripts/components/resource/actions/dialog/action-field-datetime.html
@@ -1744,7 +1813,7 @@ msgstr ""
 msgid "Explain plan"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 msgid "Explain price"
 msgstr ""
 
@@ -1814,15 +1883,15 @@ msgstr ""
 msgid "Financial overview"
 msgstr ""
 
-#: app/scripts/components/python-management/form/VirtualEnvironmentsForm.tsx
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "Find installed virtual environments & libraries"
 msgstr ""
 
-#: app/scripts/components/python-management/form/FindMissingLibrariesButton.tsx
+#: app/scripts/components/ansible/python-management/form/FindMissingLibrariesButton.tsx
 msgid "Find missing installed libraries"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/user/keys/key-list.js
@@ -1965,7 +2034,15 @@ msgstr ""
 msgid "Get a virtual private cloud from a service store"
 msgstr ""
 
-#: app/scripts/components/python-management/details/PythonManagementActionHistoryRow.tsx
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "GitLab host URL"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironment.tsx
+msgid "Global"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/details/PythonManagementActionHistoryRow.tsx
 msgid "Global request"
 msgstr ""
 
@@ -2047,9 +2124,18 @@ msgstr ""
 msgid "Hourly rate"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "Hours. Once notebook instance is not active for this time it is terminated"
+msgstr ""
+
 #: app/scripts/components/help/constants.js
 #: app/scripts/components/user/keys/help.js
 msgid "How to generate SSH key"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "How to obtain Client ID and Client secret from Azure"
 msgstr ""
 
 #: app/scripts/components/providers/ProviderHelpLink.tsx
@@ -2106,6 +2192,22 @@ msgstr ""
 msgid "Identity providers are not unavailable."
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "If no additional whitelisted users are specified, only admins will have access to JupyterHub."
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "If nobody is whitelisted, any OAuth user can log in to JupyterHub."
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+msgid "If not, append it there. If file is not present, create new file with the key."
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "If you use on-premise GitLab please specify the URl"
+msgstr ""
+
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -2114,10 +2216,11 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
-#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 msgid "Image name"
 msgstr ""
 
@@ -2170,6 +2273,11 @@ msgstr ""
 msgid "In the format of GUID"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "Inactive notebook instance time to live"
+msgstr ""
+
 #: app/scripts/components/issues/types/constants.ts
 msgid "Incident"
 msgstr ""
@@ -2219,9 +2327,9 @@ msgstr ""
 msgid "Initial username"
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 #: app/scripts/components/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Instance"
 msgstr ""
 
@@ -2243,6 +2351,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
+msgid "Instance state"
 msgstr ""
 
 #: app/scripts/components/quotas/constants.js
@@ -2378,7 +2490,7 @@ msgstr ""
 msgid "Invoice number"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -2462,6 +2574,30 @@ msgstr ""
 msgid "Job position"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/routes.js
+msgid "JupyterHub Management details"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/effects.ts
+msgid "JupyterHub configuration update could not be scheduled."
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/effects.ts
+msgid "JupyterHub configuration update have been scheduled."
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/effects.ts
+msgid "JupyterHub environment could not be created."
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/effects.ts
+msgid "JupyterHub environment has been created."
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "JupyterHub management details"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js
 msgid "Keep until"
 msgstr ""
@@ -2542,19 +2678,23 @@ msgstr ""
 msgid "Let’s get started"
 msgstr ""
 
-#: app/scripts/components/python-management/details/RequestOutputRow.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Libraries to install"
 msgstr ""
 
-#: app/scripts/components/python-management/details/RequestOutputRow.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Libraries to remove"
 msgstr ""
 
-#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+#: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
+msgid "Library has not yet been saved"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
 msgid "Library name"
 msgstr ""
 
-#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+#: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
 msgid "Library version"
 msgstr ""
 
@@ -2596,8 +2736,8 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
-msgid "Located in home directory of default system user."
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Located in home directory of the specified system user."
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
@@ -2778,7 +2918,9 @@ msgid "N/A"
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-jobs-list.js
-#: app/scripts/components/ansible/create/ansible-job-create.js
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
@@ -2810,7 +2952,6 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/details/provider-details.html
 #: app/scripts/components/providers/provider-list.js
-#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 #: app/scripts/components/resource/actions/constants.js
@@ -2879,6 +3020,10 @@ msgstr ""
 #: app/scripts/components/digitalocean/droplet-resize.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 msgid "New size"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/validation.ts
+msgid "New user needs password"
 msgstr ""
 
 #: app/scripts/components/form/appstore-form-wizard.html
@@ -3244,6 +3389,10 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "OAuth2 type"
+msgstr ""
+
 #: app/scripts/components/customer/popover/customer-popover.html
 #: app/scripts/components/experts/requests/details/expert-request-details-dialog.html
 #: app/scripts/components/project/project-dialog.html
@@ -3273,7 +3422,7 @@ msgstr ""
 msgid "Ok, what's next?"
 msgstr ""
 
-#: app/scripts/components/python-management/utils.ts
+#: app/scripts/components/ansible/python-management/validation.ts
 msgid "Only alphanumeric characters, dashes or underscores"
 msgstr ""
 
@@ -3291,6 +3440,10 @@ msgstr ""
 
 #: app/scripts/components/providers/provider-list.js
 msgid "Only customer owner or staff can unlink provider."
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "Only distributions with APT package manager are supported (Debian, Ubuntu...)"
 msgstr ""
 
 #: app/scripts/components/invitations/actions/cancel.js
@@ -3469,7 +3622,7 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: app/scripts/components/ansible/details/ansible-job-summary.html
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Output log"
 msgstr ""
 
@@ -3528,7 +3681,7 @@ msgstr ""
 msgid "Paid"
 msgstr ""
 
-#: app/scripts/components/ansible/details/ansible-job-summary.html
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Parameters"
 msgstr ""
 
@@ -3537,6 +3690,7 @@ msgstr ""
 msgid "Parent request"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: app/scripts/components/auth/auth-login.html
 #: app/scripts/components/azure/AzureVirtualMachineSummary.tsx
 #: app/scripts/components/jira/JiraForm.tsx
@@ -3761,7 +3915,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-price-explanation.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/cost-planning/cost-plan-flavors.html
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
@@ -3813,7 +3967,7 @@ msgstr ""
 msgid "Price package name"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -3821,7 +3975,7 @@ msgstr ""
 msgid "Price per day"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -3883,7 +4037,7 @@ msgid "Processing..."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html
-#: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/invitations/actions/invitation-dialog.html
@@ -3983,7 +4137,7 @@ msgstr ""
 msgid "Project type"
 msgstr ""
 
-#: app/scripts/components/ansible/details/ansible-job-details.js
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-details.js
 #: app/scripts/components/appstore/appstore-store.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 #: app/scripts/components/offering/offering-details.js
@@ -4056,8 +4210,8 @@ msgstr ""
 msgid "Proposals"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.html
-#: app/scripts/components/ansible/details/ansible-job-summary.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.html
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 #: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
@@ -4167,25 +4321,34 @@ msgstr ""
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
-#: app/scripts/components/python-management/routes.js
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "Python Management"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/routes.js
 msgid "Python Management details"
 msgstr ""
 
-#: app/scripts/components/python-management/effects.ts
+#: app/scripts/components/ansible/python-management/effects.ts
 msgid "Python environment could not be created."
 msgstr ""
 
-#: app/scripts/components/python-management/effects.ts
+#: app/scripts/components/ansible/python-management/effects.ts
 msgid "Python environment has been created."
 msgstr ""
 
-#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
-#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Python management details"
 msgstr ""
 
-#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Python version"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "Python virtual environments folder will be installed in the home folder of this user."
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
@@ -4224,13 +4387,14 @@ msgstr ""
 msgid "Quotas updated."
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-price-explanation.html
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
-#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
@@ -4349,7 +4513,7 @@ msgstr ""
 msgid "Related resource"
 msgstr ""
 
-#: app/scripts/components/ansible/details/ansible-job-summary.html
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Related resources"
 msgstr ""
 
@@ -4376,8 +4540,12 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
+msgid "Remove JupyterHub user"
+msgstr ""
+
 #: app/scripts/components/ansible/ansible-jobs-list.js
-#: app/scripts/components/ansible/details/ansible-job-summary.html
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Remove application"
 msgstr ""
 
@@ -4385,7 +4553,7 @@ msgstr ""
 msgid "Remove organization"
 msgstr ""
 
-#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+#: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
 msgid "Remove package"
 msgstr ""
 
@@ -4393,7 +4561,7 @@ msgstr ""
 msgid "Remove profile"
 msgstr ""
 
-#: app/scripts/components/python-management/form/RemoveVirtualEnvironmentButton.tsx
+#: app/scripts/components/ansible/python-management/form/RemoveVirtualEnvironmentButton.tsx
 msgid "Remove virtual environment"
 msgstr ""
 
@@ -4468,7 +4636,7 @@ msgstr ""
 msgid "Request direct access to {{ $ctrl.tenant.name }}"
 msgstr ""
 
-#: app/scripts/components/python-management/effects.ts
+#: app/scripts/components/ansible/python-management/effects.ts
 msgid "Request for search for installed libraries in the virtual environments could not be created."
 msgstr ""
 
@@ -4485,13 +4653,13 @@ msgstr ""
 msgid "Request to {action} has been accepted."
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/details/PythonManagementActionsHistory.tsx
 #: app/scripts/components/issues/create/issue-create-dialog.html
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/jira/issue/IssueCreateDialog.tsx
-#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
 msgid "Request type"
 msgstr ""
 
@@ -4516,7 +4684,7 @@ msgstr ""
 msgid "Required certifications"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-price-explanation.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 msgid "Requirements"
 msgstr ""
 
@@ -4608,7 +4776,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/analytics/dashboard-cost-chart.html
-#: app/scripts/components/ansible/details/ansible-job-details.js
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-details.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 #: app/scripts/components/issues/routes.js
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
@@ -4720,8 +4888,8 @@ msgstr ""
 msgid "SSH port"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js
-#: app/scripts/components/ansible/details/ansible-job-summary.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "SSH public key"
@@ -4740,7 +4908,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Save virtual environments"
 msgstr ""
 
@@ -4766,7 +4934,7 @@ msgstr ""
 msgid "Search by name"
 msgstr ""
 
-#: app/scripts/components/python-management/effects.ts
+#: app/scripts/components/ansible/python-management/effects.ts
 msgid "Search for installed libraries in the virtual environment has been scheduled."
 msgstr ""
 
@@ -4996,6 +5164,10 @@ msgstr ""
 msgid "Service type"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/validation.ts
+msgid "Session time to live should be creater than 1 hour"
+msgstr ""
+
 #: app/scripts/components/freeipa/freeipa-quota.html
 msgid "Set limit"
 msgstr ""
@@ -5010,6 +5182,14 @@ msgstr ""
 
 #: app/scripts/components/providers/details/dialog.html
 msgid "Settings"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "Should be given to OAuth service provider. Example: https://VM_EXTERNAL_IP/hub/oauth_callback"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "Should be obtained from OAuth service provider"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
@@ -5145,7 +5325,11 @@ msgid "Starting"
 msgstr ""
 
 #: app/scripts/components/ansible/ansible-jobs-list.js
-#: app/scripts/components/ansible/details/ansible-job-summary.html
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementActionsHistory.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 #: app/scripts/components/billing/billing-records-list.js
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
@@ -5167,9 +5351,6 @@ msgstr ""
 #: app/scripts/components/paypal/paypal-invoices-list.js
 #: app/scripts/components/plans/plan-agreements-list.js
 #: app/scripts/components/providers/provider-list.js
-#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
-#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
-#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/resource/list/resources-list.js
@@ -5201,7 +5382,9 @@ msgstr ""
 msgid "Stopping"
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-price-explanation.html
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
@@ -5211,7 +5394,6 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/project/routes.js
-#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Storage"
@@ -5322,6 +5504,11 @@ msgstr ""
 msgid "System provider"
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "System user"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "System volume size"
 msgstr ""
@@ -5372,6 +5559,7 @@ msgstr ""
 msgid "Tenant"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
 msgid "Tenant ID"
 msgstr ""
@@ -5554,7 +5742,7 @@ msgstr ""
 msgid "This month estimated costs for organization {customer_name} exceeded."
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
@@ -5631,7 +5819,7 @@ msgid "To update current plan visit <a href=\"{link}\">plans page</a>."
 msgstr ""
 
 #: app/scripts/components/analytics/resource-pie-chart.html
-#: app/scripts/components/ansible/create/ansible-price-explanation.html
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/billing/billing-records-list.js
 #: app/scripts/components/billing/invoices-list.js
@@ -5685,6 +5873,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 #: app/scripts/components/invitations/invitations-list.js
 msgid "URL"
 msgstr ""
@@ -5729,7 +5918,7 @@ msgstr ""
 msgid "Unable to create a FreeIPA profile."
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 msgid "Unable to create application."
 msgstr ""
 
@@ -5754,7 +5943,7 @@ msgstr ""
 msgid "Unable to create request for a turnkey solution."
 msgstr ""
 
-#: app/scripts/components/ansible/details/ansible-job-summary.js
+#: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.js
 msgid "Unable to delete application"
 msgstr ""
 
@@ -5803,6 +5992,11 @@ msgstr ""
 msgid "Unable to get list of SSH public keys."
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsContainer.tsx
+msgid "Unable to load JupyterHub management details."
+msgstr ""
+
 #: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Unable to load Zabbix host details."
 msgstr ""
@@ -5836,8 +6030,8 @@ msgstr ""
 msgid "Unable to load provider."
 msgstr ""
 
-#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
-#: app/scripts/components/python-management/details/PythonManagementDetailsContainer.tsx
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsContainer.tsx
 msgid "Unable to load python management details."
 msgstr ""
 
@@ -5971,6 +6165,10 @@ msgstr ""
 msgid "Upgrade"
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironment.tsx
+msgid "Upload Requirements.txt"
+msgstr ""
+
 #: app/scripts/components/customer/details/customer-threshold.html
 #: app/scripts/components/project/project-policies.html
 msgid "Upper bound of monthly resource cost provisioned from shared providers."
@@ -6020,6 +6218,10 @@ msgstr ""
 
 #: app/scripts/components/user/support/effects.ts
 msgid "User has been updated"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
+msgid "User has not yet been saved."
 msgstr ""
 
 #: app/scripts/components/user/user-sidebar.html
@@ -6130,6 +6332,7 @@ msgstr ""
 msgid "User {user_username} with full name {user_full_name} authenticated successfully with username and password."
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: app/scripts/components/auth/auth-login.html
 #: app/scripts/components/azure/AzureVirtualMachineSummary.tsx
 #: app/scripts/components/freeipa/freeipa-account-create.html
@@ -6147,8 +6350,16 @@ msgstr ""
 msgid "Username is required."
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/validation.ts
+msgid "Username may contain only characters, numbers and underscores"
+msgstr ""
+
 #: app/scripts/components/freeipa/freeipa-account-create.html
 msgid "Username prefix"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
+msgid "Username should be provided"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
@@ -6208,60 +6419,71 @@ msgstr ""
 msgid "View details"
 msgstr ""
 
-#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementActionsHistory.tsx
 msgid "Virtual environment"
 msgstr ""
 
-#: app/scripts/components/python-management/form/VirtualEnvironment.tsx
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironment.tsx
 msgid "Virtual environment has not yet been saved."
 msgstr ""
 
-#: app/scripts/components/python-management/form/VirtualEnvironment.tsx
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironment.tsx
 msgid "Virtual environment name"
 msgstr ""
 
-#: app/scripts/components/python-management/form/VirtualEnvironmentsForm.tsx
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "Virtual environments"
 msgstr ""
 
-#: app/scripts/components/python-management/effects.ts
+#: app/scripts/components/ansible/jupyter-hub-management/effects.ts
+#: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments deletion has been scheduled."
 msgstr ""
 
-#: app/scripts/components/python-management/effects.ts
+#: app/scripts/components/ansible/jupyter-hub-management/effects.ts
+#: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments deletion request could not be created."
 msgstr ""
 
-#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Virtual environments directory"
 msgstr ""
 
-#: app/scripts/components/python-management/effects.ts
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
+msgid "Virtual environments directory name"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments requests could not be created."
 msgstr ""
 
-#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+#: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Virtual environments root directory"
 msgstr ""
 
-#: app/scripts/components/python-management/effects.ts
+#: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments search has been scheduled."
 msgstr ""
 
-#: app/scripts/components/python-management/effects.ts
+#: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments search request could not be created."
 msgstr ""
 
-#: app/scripts/components/python-management/effects.ts
+#: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments updates have been scheduled."
 msgstr ""
 
-#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Virtual machine"
 msgstr ""
 
-#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Virtual machine has cloud broker public key"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "Virtual machine has no floating ips assigned!"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js
@@ -6307,7 +6529,7 @@ msgstr ""
 msgid "Volumes count"
 msgstr ""
 
-#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 msgid "Was the correct cloud broker public key UUID specified in the properties?"
 msgstr ""
 
@@ -6318,6 +6540,14 @@ msgstr ""
 #: app/scripts/components/auth/auth-init.js
 #: app/scripts/components/auth/auth-login.js
 msgid "Welcome to {pageTitle}!"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "Where to get required values from?"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+msgid "Whitelist admins"
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.js
@@ -6481,12 +6711,12 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr ""
 
-#: app/scripts/components/ansible/create/ansible-job-create.js
+#: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 msgid "You have not selected any SSH key yet."
 msgstr ""
 
@@ -6651,11 +6881,12 @@ msgstr ""
 msgid "users"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
-#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 msgid "vCPU"
 msgstr ""
 
