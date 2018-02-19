@@ -1,4 +1,4 @@
-import { APPSTORE_CATEGORY } from './constants';
+import {APPSTORE_CATEGORY} from './constants';
 
 // @ngInject
 export default function ansibleRoutes($stateProvider) {
@@ -47,5 +47,32 @@ export default function ansibleRoutes($stateProvider) {
         pageClass: 'gray-bg',
         feature: 'ansible',
       }
-    });
+    })
+
+    .state('appstore.pythonManagement', {
+      url: 'pythonManagement/',
+      template: '<python-management-create-container/>',
+      data: {
+        pageTitle: gettext('Applications'),
+        sidebarState: 'project.resources',
+        feature: 'pythonManagement'
+      }
+    })
+
+    .state('project.resources.pythonManagement', {
+      url: 'pythonManagement/',
+      template: '<ui-view/>',
+      abstract: true,
+    })
+
+    .state('project.resources.pythonManagement.details', {
+      url: ':pythonManagementUuid/',
+      template: '<python-management-details-container/>',
+      data: {
+        pageTitle: gettext('Python Management details'),
+        pageClass: 'gray-bg',
+        feature: 'pythonManagement',
+      }
+    })
+  ;
 }

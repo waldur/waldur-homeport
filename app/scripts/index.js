@@ -54,6 +54,7 @@ import paypalModule from './components/paypal/module';
 import storeModule from './components/store/module';
 import jiraModule from './components/jira/module';
 import workspaceModule from './components/workspace/module';
+import formReactModule from './components/form-react/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -95,6 +96,7 @@ expertsModule(appModule);
 invitationsModule(appModule);
 appstoreModule(appModule);
 formModule(appModule);
+formReactModule(appModule);
 priceModule(appModule);
 awsModule(appModule);
 openstackModule(appModule);
