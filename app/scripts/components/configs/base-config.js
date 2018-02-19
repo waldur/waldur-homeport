@@ -5,11 +5,6 @@ const ENV = {
   modePageTitle: 'Waldur | Cloud Service Management',
   shortPageTitle: 'Waldur',
 
-  // Social login config
-  // googleClientId: 'CHANGE_ME_TO_GOOGLE_SECRET',
-  // facebookClientId: 'CHANGE_ME_TO_FACEBOOK_SECRET',
-  // smartIdClientId: 'CHANGE_ME_TO_SMARTIDEE_SECRET',
-
   pageSizes: [5, 10, 20, 50],
   pageSize: 10,
   dashboardEventsCacheTime: 60, // seconds
@@ -145,19 +140,6 @@ const ENV = {
   defaultListCacheTime: 60 * 10,
   optionsCacheTime: 10 * 1000,
   disabledFeatures: [],
-  authenticationMethods: [
-    'LOCAL_SIGNIN',
-    'LOCAL_SIGNUP',
-    'SOCIAL_SIGNUP',
-    'ESTONIAN_ID',
-    'SAML2',
-    'VALIMO'
-  ],
-  VALIMO_LABEL: 'Mobile ID',
-  SAML2_IDENTITY_PROVIDER: 'https://reos.taat.edu.ee/saml2/idp/metadata.php',
-  SAML2_LABEL: 'TAAT',
-  allowToSelectSAML2Provider: true,
-  estoniaIdLogoutUrl: 'https://openid.ee/auth/logout',
   featuresVisible: false,
 
   requestTimeout: 1000 * 20,
@@ -179,7 +161,6 @@ const ENV = {
   ownerCanManageCustomer: false,
   OWNERS_CAN_MANAGE_OWNERS: true,
   MANAGER_CAN_MANAGE_TENANTS: false,
-  VALIDATE_INVITATION_EMAIL: false,
 
   // delay in milliseconds before starting intro js hints. It is recommended to set it bigger than 500.
   introJsDelay: 1000,
@@ -190,8 +171,6 @@ const ENV = {
     admin: gettext('System administrator')
   },
   invitationRedirectTime: 5000,
-  invitationsEnabled: true,
-  allowSignupWithoutInvitation: true,
   userMandatoryFields: [
     'full_name',
     'email'
@@ -260,8 +239,6 @@ const ENV = {
   // video/* representing video files.
   // image/* representing image files.
   excludedAttachmentTypes : [],
-
-  enableSaml2SingleLogout: false,
 };
 
 export default ENV;

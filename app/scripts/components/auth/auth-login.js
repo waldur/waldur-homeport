@@ -33,7 +33,7 @@ export const authLogin = {
       this.pageTitle = this.coreUtils.templateFormatter(gettext('Welcome to {pageTitle}!'), { pageTitle: ENV.shortPageTitle });
       this.shortPageTitle = ENV.shortPageTitle;
 
-      this.methods = ENV.authenticationMethods.reduce((result, item) => {
+      this.methods = ENV.plugins.WALDUR_CORE.AUTHENTICATION_METHODS.reduce((result, item) => {
         result[item] = true;
         return result;
       }, {});
@@ -57,7 +57,7 @@ export const authLogin = {
 
     showRegisterButton() {
       return !this.isSignupFormVisible &&
-          (!this.ENV.invitationsEnabled || this.ENV.allowSignupWithoutInvitation);
+          (!this.ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED || this.ENV.plugins.WALDUR_CORE.ALLOW_SIGNUP_WITHOUT_INVITATION);
     }
 
     showRegisterForm() {
@@ -73,15 +73,15 @@ export const authLogin = {
     }
 
     showGoogle() {
-      return this.showSocialSignup() && !!this.ENV.googleClientId;
+      return this.showSocialSignup() && !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.GOOGLE_CLIENT_ID;
     }
 
     showFacebook() {
-      return this.showSocialSignup() && !!this.ENV.facebookClientId;
+      return this.showSocialSignup() && !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.FACEBOOK_CLIENT_ID;
     }
 
     showSmartId() {
-      return this.showSocialSignup() && !!this.ENV.smartIdClientId;
+      return this.showSocialSignup() && !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.SMARTIDEE_CLIENT_ID;
     }
 
     showEstonianId() {
@@ -94,11 +94,11 @@ export const authLogin = {
     }
 
     showSaml2() {
-      return this.methods.SAML2 && !!this.ENV.SAML2_IDENTITY_PROVIDER;
+      return this.methods.SAML2 && !!this.ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_URL;
     }
 
     showSaml2Providers() {
-      return this.methods.SAML2 && this.ENV.allowToSelectSAML2Provider;
+      return this.methods.SAML2 && this.ENV.plugins.WALDUR_AUTH_SAML2.ALLOW_TO_SELECT_IDENTITY_PROVIDER;
     }
 
     gotoRegister() {
@@ -124,11 +124,11 @@ export const authLogin = {
        4) check if invitation token is valid using REST API.
       */
 
-      if (!this.ENV.invitationsEnabled || this.mode !== 'register') {
+      if (!this.ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED || this.mode !== 'register') {
         return;
       }
 
-      if (this.ENV.allowSignupWithoutInvitation) {
+      if (this.ENV.plugins.WALDUR_CORE.ALLOW_SIGNUP_WITHOUT_INVITATION) {
         return;
       }
 

@@ -14,7 +14,7 @@ const invitationConfirmDialog = {
       this.usersService = usersService;
       this.$timeout = $timeout;
       this.invitationCheckInterval = ENV.invitationCheckInterval;
-      this.validateInvitationEmail = ENV.VALIDATE_INVITATION_EMAIL;
+      this.validateInvitationEmail = ENV.plugins.WALDUR_CORE.VALIDATE_INVITATION_EMAIL;
     }
 
     $onInit() {

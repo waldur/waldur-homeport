@@ -14,8 +14,8 @@ const authSaml2 = {
     }
 
     $onInit(){
-      this.provider = this.ENV.SAML2_IDENTITY_PROVIDER;
-      this.providerLabel = this.ENV.SAML2_LABEL;
+      this.provider = this.ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_URL;
+      this.providerLabel = this.ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_LABEL;
       this.loginUrl = this.Saml2Service.getLoginUrl();
     }
   }
