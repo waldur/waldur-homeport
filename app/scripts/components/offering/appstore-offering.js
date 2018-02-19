@@ -18,7 +18,6 @@ const appstoreOffering = {
       this.currentStateService = currentStateService;
       this.$uibModal = $uibModal;
       this.createButtonStatus = false;
-      this.form = null;
     }
 
     $onInit() {
