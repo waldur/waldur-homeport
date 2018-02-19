@@ -6,6 +6,13 @@ describe('invitationUtilsService', () => {
   function initModule(module) {
     module.constant('ENV', {
       apiEndpoint: 'https://example.com/',
+      plugins: {
+        WALDUR_CORE: {
+          AUTHENTICATION_METHODS: [
+            'LOCAL_SIGNIN',
+          ]
+        }
+      }
     });
     module.service('invitationUtilsService', invitationUtilsService);
     module.run(attachInvitationUtils);
