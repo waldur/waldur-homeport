@@ -5,9 +5,9 @@ import { withTranslation } from '@waldur/i18n';
 import { formatCrontab } from '@waldur/resource/crontab';
 import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
 
-const formatSchedule = ({ resource, translate }) => (
+const formatSchedule = ({ resource }) => (
   <Tooltip label={resource.schedule} id="scheduleTooltip">
-    {formatCrontab(resource.schedule, translate)}
+    {formatCrontab(resource.schedule)}
   </Tooltip>
 );
 

@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 const Frequency = {
   MINUTE: 1,
   HOUR: 2,
@@ -149,7 +151,7 @@ const cronNumeral = input => {
   }
 };
 
-export const formatCrontab = (crontab, translate) => {
+export const formatCrontab = crontab => {
   const schedule = parseCrontab(crontab, false);
   const { base, minuteValues, hourValues, dayOfMonthValues, dayValues, monthValues } = schedule;
   const zeroPad = value => value < 10 ? '0' + value : String(value);
