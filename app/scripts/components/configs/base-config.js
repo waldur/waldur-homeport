@@ -128,8 +128,6 @@ const ENV = {
     'OpenStackTenant.Snapshot': 'storages',
     'Zabbix.Host': 'apps',
     'Zabbix.ITService': 'apps',
-    'OpenStack.Volume': 'storages',
-    'OpenStack.Snapshot': 'storages',
     'SLURM.Allocation': 'slurm',
     'JIRA.Project': 'jiraProject',
     'JIRA.Issue': 'jiraProject',
