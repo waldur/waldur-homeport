@@ -28,6 +28,7 @@ export const userEdit = {
         { name: '12 h', value: 43200 },
         { name: 'token will not timeout', value: null }
       ];
+      this.nativeNameEnabled = ENV.plugins.WALDUR_CORE.NATIVE_NAME_ENABLED === true;
     }
 
     $onInit() {

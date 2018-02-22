@@ -28,6 +28,7 @@ export default class CustomerCreateService {
   composeCustomerModel(formModel) {
     const fields = [
       'name',
+      'native_name',
       'email',
       'phone_number',
       'registration_code',

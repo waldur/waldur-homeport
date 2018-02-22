@@ -37,3 +37,6 @@ export const getConfig = state => state.config;
 export const isVisible = (state, feature) => (
   state.config.featuresVisible || !state.config.features[feature]
 );
+
+export const getNativeNameVisible = state =>
+  state.config.plugins.WALDUR_CORE.NATIVE_NAME_ENABLED === true;
