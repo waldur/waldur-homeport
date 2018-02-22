@@ -1,12 +1,19 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import Panel from '@waldur/core/Panel';
 import { StringField, FormContainer } from '@waldur/form-react';
-import { withTranslation } from '@waldur/i18n';
+import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { getNativeNameVisible } from '@waldur/store/config';
 
-const PureUserFilter = props => (
+interface UserFilterProps extends TranslateProps {
+  submitting: boolean;
+  nativeNameVisible: boolean;
+}
+
+const PureUserFilter = (props: UserFilterProps) => (
   <Panel title={props.translate('Apply filters')}>
     <form>
       <FormContainer
@@ -14,9 +21,11 @@ const PureUserFilter = props => (
         <StringField
           label={props.translate('Full name')}
           name="full_name"/>
-        <StringField
-          label={props.translate('Native name')}
-          name="native_name"/>
+        {props.nativeNameVisible && (
+          <StringField
+            label={props.translate('Native name')}
+            name="native_name"/>
+        )}
         <StringField
           label={props.translate('ID code')}
           name="civil_number"/>
@@ -28,9 +37,14 @@ const PureUserFilter = props => (
   </Panel>
 );
 
+const mapStateToProps = state => ({
+  nativeNameVisible: getNativeNameVisible(state),
+});
+
 const enhance = compose(
   withTranslation,
   reduxForm({form: 'userFilter'}),
+  connect(mapStateToProps),
 );
 
 export const UserFilter = enhance(PureUserFilter);

@@ -16,6 +16,13 @@ export default ENV => [
         help_text: gettext('Name of your organization.'),
       },
       {
+        name: 'native_name',
+        type: 'string',
+        label: gettext('Native name'),
+        maxlength: 160,
+        hidden: ENV.plugins.WALDUR_CORE.NATIVE_NAME_ENABLED !== true,
+      },
+      {
         name: 'type',
         type: 'select',
         label: gettext('Organization type'),

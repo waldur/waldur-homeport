@@ -13,6 +13,11 @@ describe('User edit', () => {
         'full_name',
         'email',
       ],
+      plugins: {
+        WALDUR_CORE: {
+          NATIVE_NAME_ENABLED: true,
+        }
+      }
     });
     coreModule(module);
     userFilterModule(module);

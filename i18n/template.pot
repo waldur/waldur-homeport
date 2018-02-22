@@ -2752,8 +2752,11 @@ msgstr ""
 msgid "Name of your organization."
 msgstr ""
 
+#: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
+#: app/scripts/components/user/user-edit.html
 msgid "Native name"
 msgstr ""
 
