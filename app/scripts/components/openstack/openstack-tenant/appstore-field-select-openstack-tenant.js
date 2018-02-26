@@ -12,12 +12,12 @@ class AppstoreFieldSelectOpenstackTenantController {
     this.loading = true;
     this.currentStateService.getProject().then(project => {
       this.openstackTenantsService.getAll({
-        field: ['name', 'uuid'],
+        field: ['name', 'backend_id'],
         project_uuid: project.uuid,
       }).then(tenants => {
         this.choices = tenants.map(tenant => ({
           display_name: tenant.name,
-          value: `UUID: ${tenant.uuid}. Name: ${tenant.name}`
+          value: `Tenant UUID: ${tenant.backend_id}. Name: ${tenant.name}`
         }));
         this.loading = false;
         this.loaded = true;

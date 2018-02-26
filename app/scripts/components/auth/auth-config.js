@@ -4,24 +4,24 @@ export default function initAuthProvider(ENV, $authProvider) {
 
   $authProvider.loginUrl = ENV.apiEndpoint + 'api-auth/password/';
 
-  if (ENV.facebookClientId) {
+  if (ENV.plugins.WALDUR_AUTH_SOCIAL.FACEBOOK_CLIENT_ID) {
     $authProvider.facebook({
-      clientId: ENV.facebookClientId,
+      clientId: ENV.plugins.WALDUR_AUTH_SOCIAL.FACEBOOK_CLIENT_ID,
       url: ENV.apiEndpoint + 'api-auth/facebook/',
     });
   }
 
-  if (ENV.googleClientId) {
+  if (ENV.plugins.WALDUR_AUTH_SOCIAL.GOOGLE_CLIENT_ID) {
     $authProvider.google({
-      clientId: ENV.googleClientId,
+      clientId: ENV.plugins.WALDUR_AUTH_SOCIAL.GOOGLE_CLIENT_ID,
       url: ENV.apiEndpoint + 'api-auth/google/'
     });
   }
 
-  if (ENV.smartIdClientId) {
+  if (ENV.plugins.WALDUR_AUTH_SOCIAL.SMARTIDEE_CLIENT_ID) {
     $authProvider.oauth2({
       name: 'smartid',
-      clientId: ENV.smartIdClientId,
+      clientId: ENV.plugins.WALDUR_AUTH_SOCIAL.SMARTIDEE_CLIENT_ID,
       url: ENV.apiEndpoint + 'api-auth/smartidee/',
       authorizationEndpoint: 'https://id.smartid.ee/oauth/authorize',
       redirectUri: window.location.origin,

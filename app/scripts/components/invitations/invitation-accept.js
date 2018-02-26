@@ -13,7 +13,7 @@ export default function invitationAccept() {
 
 // @ngInject
 function InvitationAcceptController(ENV, $state, invitationUtilsService) {
-  if (!ENV.invitationsEnabled) {
+  if (!ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED) {
     $state.go('errorPage.notFound');
     return;
   }

@@ -5,15 +5,18 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Customer } from '@waldur/customer/types';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
-import { getConfig } from '@waldur/store/config';
+import { getConfig, getNativeNameVisible } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 interface  CustomerDetailsProps extends TranslateProps {
   customer: Customer;
   organizationSubnetsVisible: boolean;
+  nativeNameVisible: boolean;
 }
 
-export const PureCustomerDetails = ({ translate, customer, organizationSubnetsVisible }: CustomerDetailsProps) => (
+export const PureCustomerDetails = (
+  { translate, customer, organizationSubnetsVisible, nativeNameVisible }: CustomerDetailsProps
+) => (
   <div className="panel panel-default">
     <div className="panel-heading">
       {translate('Organization details')}
@@ -32,10 +35,12 @@ export const PureCustomerDetails = ({ translate, customer, organizationSubnetsVi
           value={customer.type}
         />
 
-        <Field
-          label={translate('Native name')}
-          value={customer.native_name}
-        />
+        {nativeNameVisible && (
+          <Field
+            label={translate('Native name')}
+            value={customer.native_name}
+          />
+        )}
 
         <Field
           label={translate('Abbreviation')}
@@ -113,6 +118,7 @@ export const PureCustomerDetails = ({ translate, customer, organizationSubnetsVi
 
 const mapStateToProps = state => ({
   organizationSubnetsVisible: getConfig(state).organizationSubnetsVisible,
+  nativeNameVisible: getNativeNameVisible(state),
 });
 
 export const CustomerDetails = connect(mapStateToProps)(withTranslation(PureCustomerDetails));

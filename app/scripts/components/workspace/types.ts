@@ -7,6 +7,7 @@ export interface User {
 
 export interface UserDetails extends User {
   full_name: string;
+  native_name?: string;
   civil_number: string;
   phone_number: string;
   email: string;

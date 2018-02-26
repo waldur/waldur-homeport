@@ -62,7 +62,7 @@
                   </small>
                   <invoice-events-toggle item="item"></invoice-events-toggle>
                 </td>
-                <td>{{ ::item.usage_days }}</td>
+                <td>{{ item.factor || item.quantity }}</td>
                 <td>{{ ::item.unit_price | defaultCurrency }}</td>
                 <td>{{ ::item.price | defaultCurrency }}</td>
               </tr>
