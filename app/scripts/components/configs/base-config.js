@@ -129,6 +129,7 @@ const ENV = {
     'Zabbix.ITService': 'apps',
     'SLURM.Allocation': 'slurm',
     'JIRA.Project': 'jiraProject',
+    'JIRA.Issue': 'jiraProject',
   },
   showCompare: [
     'Virtual machines'
