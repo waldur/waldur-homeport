@@ -121,7 +121,6 @@ const ENV = {
     'Amazon.Instance': 'vms',
     'Azure.VirtualMachine': 'vms',
     'DigitalOcean.Droplet': 'vms',
-    'OpenStack.Instance': 'vms',
     'OpenStack.Tenant': 'private_clouds',
     'OpenStackTenant.Instance': 'vms',
     'OpenStackTenant.Volume': 'storages',
