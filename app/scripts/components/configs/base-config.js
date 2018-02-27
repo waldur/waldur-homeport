@@ -121,7 +121,6 @@ const ENV = {
     'Amazon.Instance': 'vms',
     'Azure.VirtualMachine': 'vms',
     'DigitalOcean.Droplet': 'vms',
-    'OpenStack.Instance': 'vms',
     'OpenStack.Tenant': 'private_clouds',
     'OpenStackTenant.Instance': 'vms',
     'OpenStackTenant.Volume': 'storages',
@@ -130,7 +129,6 @@ const ENV = {
     'Zabbix.ITService': 'apps',
     'SLURM.Allocation': 'slurm',
     'JIRA.Project': 'jiraProject',
-    'JIRA.Issue': 'jiraProject',
   },
   showCompare: [
     'Virtual machines'
