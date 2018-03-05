@@ -23,7 +23,9 @@ const expertContract = {
 
       angular.forEach(this.contractTemplate.order, tabName => {
         let tab = this.contractTemplate.options[tabName];
-        this.tabs.push(this.createTab(tab.label, tab.options));
+        if (!tab.hiddenInCreateForm) {
+          this.tabs.push(this.createTab(tab.label, tab.options));
+        }
 
         angular.forEach(tab.options, (option, name) => {
           option.name = name;
