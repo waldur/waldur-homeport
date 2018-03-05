@@ -62,7 +62,7 @@ const expertBidCreateDialog = {
     }
 
     isSubmitDisabled() {
-      return this.selectedProjectUsers.length === 0;
+      return this.selectedProjectUsers && this.selectedProjectUsers.length === 0;
     }
 
     save() {
