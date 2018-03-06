@@ -10,7 +10,7 @@ export const SubmitButton = (props: SubmitButtonProps) => (
   <button
     type="submit"
     className="btn btn-primary"
-    disabled={props.submitting || props.disabled}>
+    disabled={props.submitting || props.disabled === true}>
     {props.submitting && (
       <i className="fa fa-spinner fa-spin m-r-xs"/>
     )}
