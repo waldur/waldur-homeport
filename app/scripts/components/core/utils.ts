@@ -73,3 +73,5 @@ export const dateTime = input => {
     return formatDateTime(input);
   }
 };
+
+export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z][A-Za-z0-9-._ ()]+$');

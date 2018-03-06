@@ -26,6 +26,10 @@ const appstoreFieldString = {
       return this.invalid() && this.form[this.field.name].$error.maxlength;
     }
 
+    showPatternError() {
+      return this.invalid() && this.form[this.field.name].$error.pattern;
+    }
+
     getMaxLengthErrorMessage() {
       return this.coreUtils.templateFormatter(gettext('Field length must be less than {maxlength} symbols'), {
         maxlength: this.field.maxlength,

@@ -34,6 +34,7 @@ export const PureProjectUpdateForm = (props: ProjectUpdateFormProps) => (
         <FieldError error={props.error}/>
         <SubmitButton
           submitting={props.submitting}
+          disabled={props.invalid}
           label={props.translate('Update project details')}
         />
       </div>

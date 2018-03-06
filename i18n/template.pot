@@ -2745,11 +2745,23 @@ msgid "Name"
 msgstr ""
 
 #: app/scripts/components/project/ProjectNameField.tsx
+msgid "Name contains invalid symbols."
+msgstr ""
+
+#: app/scripts/components/project/ProjectNameField.tsx
 msgid "Name is duplicated. Choose other name."
+msgstr ""
+
+#: app/scripts/components/project/ProjectNameField.tsx
+msgid "Name is required field."
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 msgid "Name of your organization."
+msgstr ""
+
+#: app/scripts/components/project/ProjectNameField.tsx
+msgid "Name should contain at least 3 symbols."
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
@@ -5359,10 +5371,17 @@ msgstr ""
 msgid "There's no pricing package for the batch processing provider."
 msgstr ""
 
-#: app/scripts/components/form/appstore-field-email.html
 #: app/scripts/components/form/appstore-field-string.html
+msgid "This field contains invalid characters."
+msgstr ""
+
+#: app/scripts/components/form/appstore-field-email.html
 #: app/scripts/components/form/appstore-field-tel.html
 msgid "This field is required"
+msgstr ""
+
+#: app/scripts/components/form/appstore-field-string.html
+msgid "This field is required."
 msgstr ""
 
 #: app/scripts/components/user/keys/key-create.js
