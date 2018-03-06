@@ -1,3 +1,6 @@
+import { ENV } from '@waldur/core/services';
+import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
+
 import { templateParser } from '../utils';
 import {
   openstackTemplateColumns,
@@ -22,6 +25,9 @@ export default {
       required: true,
       label: gettext('Tenant name'),
       form_text: gettext('This name will be visible in accounting data.'),
+      init: field => {
+        field.pattern = ENV.enforceLatinName && LATIN_NAME_PATTERN;
+      },
     },
     template: {
       type: 'list',

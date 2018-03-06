@@ -1,3 +1,5 @@
+import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
+
 const formatCompanyTypes = ENV =>
   (ENV.plugins.WALDUR_CORE.COMPANY_TYPES || [])
     .map(item => ({ value: item, display_name: item }));
@@ -14,6 +16,7 @@ export default ENV => [
         label: gettext('Name'),
         maxlength: 150,
         help_text: gettext('Name of your organization.'),
+        pattern: ENV.enforceLatinName && LATIN_NAME_PATTERN,
       },
       {
         name: 'native_name',

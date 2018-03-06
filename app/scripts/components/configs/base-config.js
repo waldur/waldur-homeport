@@ -236,6 +236,9 @@ const ENV = {
   // video/* representing video files.
   // image/* representing image files.
   excludedAttachmentTypes : [],
+
+  // Ensure that customer, project and resource name contains only ASCII chars
+  enforceLatinName: true,
 };
 
 export default ENV;

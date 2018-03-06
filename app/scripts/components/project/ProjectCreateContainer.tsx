@@ -5,6 +5,7 @@ import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { getConfig } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -68,6 +69,7 @@ class ProjectCreateComponent extends React.Component<ProjectCreateProps> {
 
 const mapStateToProps = state => ({
   customer: getCustomer(state),
+  enforceLatinName: getConfig(state).enforceLatinName,
 });
 
 const mapDispatchToProps = dispatch => ({
