@@ -87,12 +87,8 @@ function AnsibleJobsListController(
         .replace('{href}', this.buildStateTransition(row, applicationType))
         .replace('{name}', this.buildLinkName(row, applicationType));
     },
-    buildLinkName: function (row, applicationType) {
-      if (applicationType === APPLICAION_TYPE.ANSIBLE_PLAYBOOK) {
-        return row.name;
-      } else if (applicationType === APPLICAION_TYPE.PYTHON_MANAGEMENT) {
-        return 'Python Environment Management';
-      }
+    buildLinkName: function (row) {
+      return row.name;
     },
     buildStateTransition: function (row, applicationType) {
       if (applicationType === APPLICAION_TYPE.ANSIBLE_PLAYBOOK) {
@@ -143,7 +139,7 @@ function AnsibleJobsListController(
     },
 
     getApplicationType(row) {
-      if (row.virtual_envs_dir_path !== undefined) {
+      if (row.type === 'python_management') {
         return APPLICAION_TYPE.PYTHON_MANAGEMENT;
       } else {
         return APPLICAION_TYPE.ANSIBLE_PLAYBOOK;

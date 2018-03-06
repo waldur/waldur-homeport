@@ -24,11 +24,11 @@ export default function registerAppstoreCategory(features, $q, AnsiblePlaybooksS
 
   function addPythonManagementCategoryIfEnabled(mappedPlaybooks) {
     if (features.isVisible('pythonManagement')) {
-      mappedPlaybooks.push.apply(mappedPlaybooks, buildAlwaysVisibleCategories());
+      mappedPlaybooks.push.apply(mappedPlaybooks, buildPythonManagementCategory());
     }
   }
 
-  function buildAlwaysVisibleCategories() {
+  function buildPythonManagementCategory() {
     const alwaysVisibleCategories = [];
     alwaysVisibleCategories.push({
       key: '',
