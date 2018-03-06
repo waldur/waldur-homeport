@@ -1,7 +1,7 @@
 import {APPSTORE_CATEGORY, FEATURE, ICON_CLASS} from './constants';
 
 // @ngInject
-export default function registerAppstoreCategory(features, $q, AnsiblePlaybooksService, AppstoreCategoriesService, ENV) {
+export default function registerAppstoreCategory(features, $q, AnsiblePlaybooksService, AppstoreCategoriesService) {
   AppstoreCategoriesService.registerCategory(() => {
     if (!features.isVisible(FEATURE)) {
       return $q.when([]);
@@ -17,13 +17,13 @@ export default function registerAppstoreCategory(features, $q, AnsiblePlaybooksS
           category: APPSTORE_CATEGORY,
           state: 'appstore.ansible',
         }));
-        addAnsibleCategoryIfEnabled(mappedPlaybooks);
+        addPythonManagementCategoryIfEnabled(mappedPlaybooks);
         return mappedPlaybooks;
       });
   });
 
-  function addAnsibleCategoryIfEnabled(mappedPlaybooks) {
-    if (!ENV.disabledFeatures.includes('ansible')) {
+  function addPythonManagementCategoryIfEnabled(mappedPlaybooks) {
+    if (features.isVisible('pythonManagement')) {
       mappedPlaybooks.push.apply(mappedPlaybooks, buildAlwaysVisibleCategories());
     }
   }

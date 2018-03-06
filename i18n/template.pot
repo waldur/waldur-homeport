@@ -6147,6 +6147,10 @@ msgstr ""
 msgid "Virtual environments deletion has been scheduled."
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/effects.ts
+msgid "Virtual environments deletion request could not be created."
+msgstr ""
+
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Virtual environments directory"
 msgstr ""
