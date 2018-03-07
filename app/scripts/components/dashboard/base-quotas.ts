@@ -46,9 +46,21 @@ registerQuotas([
     dashboards: [PROJECT_DASHBOARD],
   },
   {
+    quota: 'nc_volume_size',
+    title: gettext('Volume size'),
+    feature: 'storage',
+    dashboards: [PROJECT_DASHBOARD, CUSTOMER_DASHBOARD],
+  },
+  {
     quota: 'nc_snapshot_count',
     title: gettext('Block snapshot count'),
     feature: 'storage',
     dashboards: [PROJECT_DASHBOARD],
+  },
+  {
+    quota: 'nc_snapshot_size',
+    title: gettext('Snapshot size'),
+    feature: 'storage',
+    dashboards: [PROJECT_DASHBOARD, CUSTOMER_DASHBOARD],
   },
 ]);

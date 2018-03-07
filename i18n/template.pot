@@ -5073,6 +5073,10 @@ msgstr ""
 msgid "Snapshot schedules"
 msgstr ""
 
+#: app/scripts/components/dashboard/base-quotas.ts
+msgid "Snapshot size"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup/tabs.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
 #: app/scripts/components/openstack/openstack-volume/module.js
@@ -6212,6 +6216,10 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 msgid "Volume name"
+msgstr ""
+
+#: app/scripts/components/dashboard/base-quotas.ts
+msgid "Volume size"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/module.js
