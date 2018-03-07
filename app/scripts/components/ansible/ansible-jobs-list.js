@@ -1,4 +1,4 @@
-import {APPLICAION_TYPE, APPSTORE_CATEGORY} from './constants';
+import { APPLICAION_TYPE, APPSTORE_CATEGORY } from './constants';
 
 const ansibleJobsList = {
   templateUrl: 'views/partials/filtered-list.html',

@@ -1,4 +1,4 @@
-import {APPSTORE_CATEGORY, FEATURE, ICON_CLASS} from './constants';
+import { APPSTORE_CATEGORY, ICON_CLASS, FEATURE } from './constants';
 
 // @ngInject
 export default function registerAppstoreCategory(features, $q, AnsiblePlaybooksService, AppstoreCategoriesService) {
@@ -8,7 +8,7 @@ export default function registerAppstoreCategory(features, $q, AnsiblePlaybooksS
     }
     return AnsiblePlaybooksService.getAll()
       .then(playbooks => {
-        const mappedPlaybooks = playbooks.map(playbook => ({
+        return playbooks.map(playbook => ({
           key: playbook.uuid,
           label: playbook.name,
           icon: ICON_CLASS,
@@ -17,28 +17,6 @@ export default function registerAppstoreCategory(features, $q, AnsiblePlaybooksS
           category: APPSTORE_CATEGORY,
           state: 'appstore.ansible',
         }));
-        addPythonManagementCategoryIfEnabled(mappedPlaybooks);
-        return mappedPlaybooks;
       });
   });
-
-  function addPythonManagementCategoryIfEnabled(mappedPlaybooks) {
-    if (features.isVisible('pythonManagement')) {
-      mappedPlaybooks.push.apply(mappedPlaybooks, buildPythonManagementCategory());
-    }
-  }
-
-  function buildPythonManagementCategory() {
-    const alwaysVisibleCategories = [];
-    alwaysVisibleCategories.push({
-      key: '',
-      label: 'Python management',
-      icon: ICON_CLASS,
-      image: '',
-      description: 'Create manageable python environment',
-      category: APPSTORE_CATEGORY,
-      state: 'appstore.pythonManagement',
-    });
-    return alwaysVisibleCategories;
-  }
 }
