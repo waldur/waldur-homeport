@@ -46,6 +46,7 @@ import freeipaModule from './components/freeipa/module';
 import rootModule from './components/module';
 import priceModule from './components/price/module';
 import ansibleModule from './components/ansible/module';
+import pythonManagementModule from './components/python-management/module';
 import introModule from './components/intro/module';
 import analyticsRoutes from './components/analytics/routes';
 import azureModule from './components/azure/module';
@@ -54,6 +55,7 @@ import paypalModule from './components/paypal/module';
 import storeModule from './components/store/module';
 import jiraModule from './components/jira/module';
 import workspaceModule from './components/workspace/module';
+import formReactModule from './components/form-react/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -95,6 +97,7 @@ expertsModule(appModule);
 invitationsModule(appModule);
 appstoreModule(appModule);
 formModule(appModule);
+formReactModule(appModule);
 priceModule(appModule);
 awsModule(appModule);
 openstackModule(appModule);
@@ -121,6 +124,7 @@ directivesModule(appModule);
 servicesModule(appModule);
 freeipaModule(appModule);
 ansibleModule(appModule);
+pythonManagementModule(appModule);
 introModule(appModule);
 azureModule(appModule);
 slurmModule(appModule);

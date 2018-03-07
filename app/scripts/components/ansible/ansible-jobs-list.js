@@ -1,4 +1,4 @@
-import { APPSTORE_CATEGORY } from './constants';
+import { APPLICAION_TYPE, APPSTORE_CATEGORY } from './constants';
 
 const ansibleJobsList = {
   templateUrl: 'views/partials/filtered-list.html',
@@ -13,13 +13,13 @@ function AnsibleJobsListController(
   $state,
   $filter,
   currentStateService,
-  AnsibleJobsService,
+  ApplicationService,
   AppStoreUtilsService) {
   let controllerScope = this;
   let Controller = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this.service = AnsibleJobsService;
+      this.service = ApplicationService;
       let fn = this._super.bind(this);
       this.loadContext().then(() => {
         this.tableOptions = this.getTableOptions();
@@ -49,26 +49,20 @@ function AnsibleJobsListController(
         {
           title: gettext('Name'),
           orderField: 'name',
-          render: row => {
-            const href = $state.href('project.resources.ansible.details', {
-              uuid: this.project.uuid,
-              jobId: row.uuid
-            });
-            return '<a href="{href}">{name}</a>'
-                   .replace('{href}', href)
-                   .replace('{name}', row.name);
-          }
+          render: row => this.buildLinkTag(row)
         },
         {
           title: gettext('Playbook'),
-          render: row => row.playbook_name
+          render: row => this.getApplicationType(row) === APPLICAION_TYPE.ANSIBLE_PLAYBOOK
+            ? row.playbook_name : $filter('translate')('Python Management')
         },
         {
           title: gettext('State'),
           orderField: 'state',
           render: row => {
             const index = this.findIndexById(row);
-            return `<ansible-job-state model="controller.list[${index}]"/>`;
+            const applicationType = this.getApplicationType(row);
+            return this.buildStateTag(index, applicationType);
           }
         },
         {
@@ -79,6 +73,35 @@ function AnsibleJobsListController(
           }
         }
       ];
+    },
+    buildStateTag: function (index, applicationType) {
+      if (applicationType === APPLICAION_TYPE.ANSIBLE_PLAYBOOK) {
+        return `<ansible-job-state model="controller.list[${index}]"/>`;
+      } else {
+        return `<python-management-state model="controller.list[${index}]"/>`;
+      }
+    },
+    buildLinkTag: function (row) {
+      const applicationType = this.getApplicationType(row);
+      return '<a href="{href}">{name}</a>'
+        .replace('{href}', this.buildStateTransition(row, applicationType))
+        .replace('{name}', this.buildLinkName(row, applicationType));
+    },
+    buildLinkName: function (row) {
+      return row.name;
+    },
+    buildStateTransition: function (row, applicationType) {
+      if (applicationType === APPLICAION_TYPE.ANSIBLE_PLAYBOOK) {
+        return $state.href('project.resources.ansible.details', {
+          uuid: this.project.uuid,
+          jobId: row.uuid
+        });
+      } else if (applicationType === APPLICAION_TYPE.PYTHON_MANAGEMENT) {
+        return $state.href('project.resources.pythonManagement.details', {
+          uuid: this.project.uuid,
+          pythonManagementUuid: row.uuid
+        });
+      }
     },
     getRowActions: function() {
       const checkState = app => ['OK', 'Erred'].includes(app.state);
@@ -114,6 +137,14 @@ function AnsibleJobsListController(
         project_uuid: this.project.uuid,
       };
     },
+
+    getApplicationType(row) {
+      if (row.type === 'python_management') {
+        return APPLICAION_TYPE.PYTHON_MANAGEMENT;
+      } else {
+        return APPLICAION_TYPE.ANSIBLE_PLAYBOOK;
+      }
+    }
 
   });
   controllerScope.__proto__ = new Controller();

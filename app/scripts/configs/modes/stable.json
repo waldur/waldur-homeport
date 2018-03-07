@@ -25,7 +25,8 @@
     "backup",
     "connected_issues",
     "jira",
-    "experts.preview_contract"
+    "experts.preview_contract",
+    "pythonManagement"
   ],
   "featuresVisible": false,
   "appStoreCategories": [

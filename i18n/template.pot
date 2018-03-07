@@ -181,6 +181,10 @@ msgstr ""
 msgid "Add key"
 msgstr ""
 
+#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+msgid "Add library"
+msgstr ""
+
 #: app/scripts/components/team/project-users-list.js
 msgid "Add member"
 msgstr ""
@@ -234,6 +238,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Add snapshots"
+msgstr ""
+
+#: app/scripts/components/python-management/form/AddVirtualEnvironmentButton.tsx
+msgid "Add virtual environment"
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-vms-list.js
@@ -387,6 +395,7 @@ msgstr ""
 #: app/scripts/components/ansible/sidebar.js
 #: app/scripts/components/appstore/routes.js
 #: app/scripts/components/dashboard/base-quotas.ts
+#: app/scripts/components/python-management/routes.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Applications"
 msgstr ""
@@ -747,6 +756,7 @@ msgstr ""
 #: app/scripts/components/plans/plans-list.html
 #: app/scripts/components/project/ProjectCreateForm.tsx
 #: app/scripts/components/providers/ProviderCreateForm.tsx
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
 #: app/scripts/components/resource-import/resource-import-dialog.html
 #: app/scripts/components/resource/actions/dialog/action-dialog.html
 #: app/scripts/components/team/add-project-member.html
@@ -836,6 +846,10 @@ msgstr ""
 
 #: app/scripts/components/plans/plans-list.html
 msgid "Choose new plan"
+msgstr ""
+
+#: app/scripts/components/form-react/list-field/ListFieldInternal.tsx
+msgid "Choose option"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
@@ -1022,6 +1036,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/actions.js
 #: app/scripts/components/openstack/openstack-volume/module.js
 #: app/scripts/components/project/project-issues.js
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/tabs/resource-issues.js
 #: app/scripts/components/user/hooks/hook-details.html
@@ -1136,6 +1151,7 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
+#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "Created"
@@ -1266,6 +1282,10 @@ msgstr ""
 msgid "Delete Zabbix host"
 msgstr ""
 
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Delete python management & virtual environments"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 msgid "Deployment plan"
 msgstr ""
@@ -1358,6 +1378,10 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/help.js
 msgid "DigitalOcean provider"
+msgstr ""
+
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+msgid "Directory will be created in home directory of default system user."
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-edit.html
@@ -1774,6 +1798,14 @@ msgstr ""
 msgid "Financial overview"
 msgstr ""
 
+#: app/scripts/components/python-management/form/VirtualEnvironmentsForm.tsx
+msgid "Find installed virtual environments & libraries"
+msgstr ""
+
+#: app/scripts/components/python-management/form/FindMissingLibrariesButton.tsx
+msgid "Find missing installed libraries"
+msgstr ""
+
 #: app/scripts/components/ansible/create/ansible-job-create.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
@@ -1915,6 +1947,10 @@ msgstr ""
 
 #: app/scripts/components/appstore/providers/appstore-providers-empty-message.html
 msgid "Get a virtual private cloud from a service store"
+msgstr ""
+
+#: app/scripts/components/python-management/details/PythonManagementActionHistoryRow.tsx
+msgid "Global request"
 msgstr ""
 
 #: app/scripts/components/intro/expert-manager-intro.js
@@ -2065,6 +2101,7 @@ msgstr ""
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 msgid "Image name"
 msgstr ""
 
@@ -2168,6 +2205,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Instance"
 msgstr ""
 
@@ -2488,6 +2526,22 @@ msgstr ""
 msgid "Let’s get started"
 msgstr ""
 
+#: app/scripts/components/python-management/details/RequestOutputRow.tsx
+msgid "Libraries to install"
+msgstr ""
+
+#: app/scripts/components/python-management/details/RequestOutputRow.tsx
+msgid "Libraries to remove"
+msgstr ""
+
+#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+msgid "Library name"
+msgstr ""
+
+#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+msgid "Library version"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
@@ -2524,6 +2578,10 @@ msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
 msgid "Loading..."
+msgstr ""
+
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Located in home directory of default system user."
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
@@ -2735,6 +2793,7 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/details/provider-details.html
 #: app/scripts/components/providers/provider-list.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 #: app/scripts/components/resource/actions/constants.js
@@ -3197,6 +3256,10 @@ msgstr ""
 msgid "Ok, what's next?"
 msgstr ""
 
+#: app/scripts/components/python-management/utils.ts
+msgid "Only alphanumeric characters, dashes or underscores"
+msgstr ""
+
 #: app/scripts/components/providers/provider-list.js
 msgid "Only customer owner or staff can create provider."
 msgstr ""
@@ -3609,6 +3672,10 @@ msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
 msgid "Please select a username that you will use for login into the Linux systems."
+msgstr ""
+
+#: app/scripts/components/form-react/list-field/ListFieldModal.tsx
+msgid "Please select one"
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-projects.html
@@ -4086,6 +4153,27 @@ msgstr ""
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
+#: app/scripts/components/python-management/routes.js
+msgid "Python Management details"
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Python environment could not be created."
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Python environment has been created."
+msgstr ""
+
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Python management details"
+msgstr ""
+
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Python version"
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
 #: app/scripts/components/cost-planning/cost-plan-flavors.html
@@ -4128,6 +4216,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
@@ -4278,8 +4367,16 @@ msgstr ""
 msgid "Remove organization"
 msgstr ""
 
+#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+msgid "Remove package"
+msgstr ""
+
 #: app/scripts/components/user/user-edit.html
 msgid "Remove profile"
+msgstr ""
+
+#: app/scripts/components/python-management/form/RemoveVirtualEnvironmentButton.tsx
+msgid "Remove virtual environment"
 msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js
@@ -4349,6 +4446,10 @@ msgstr ""
 msgid "Request direct access to {{ $ctrl.tenant.name }}"
 msgstr ""
 
+#: app/scripts/components/python-management/effects.ts
+msgid "Request for search for installed libraries in the virtual environments could not be created."
+msgstr ""
+
 #: app/scripts/components/issues/create/issue-create-dialog.js
 msgid "Request name"
 msgstr ""
@@ -4368,6 +4469,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/jira/issue/IssueCreateDialog.tsx
+#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
 msgid "Request type"
 msgstr ""
 
@@ -4616,6 +4718,10 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Save virtual environments"
+msgstr ""
+
 #: app/scripts/components/controllers/base-controller-class-es6.js
 #: app/scripts/components/controllers/base-controller-class.js
 msgid "Saving of {vm_name} was successful."
@@ -4636,6 +4742,10 @@ msgstr ""
 
 #: app/scripts/components/appstore/dialog/appstore-category-selector.html
 msgid "Search by name"
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Search for installed libraries in the virtual environment has been scheduled."
 msgstr ""
 
 #: app/scripts/components/aws/AmazonForm.tsx
@@ -5019,6 +5129,9 @@ msgstr ""
 #: app/scripts/components/paypal/paypal-invoices-list.js
 #: app/scripts/components/plans/plan-agreements-list.js
 #: app/scripts/components/providers/provider-list.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
+#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/resource/list/resources-list.js
@@ -5060,6 +5173,7 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/project/routes.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Storage"
@@ -5658,6 +5772,11 @@ msgstr ""
 msgid "Unable to load provider."
 msgstr ""
 
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
+#: app/scripts/components/python-management/details/PythonManagementDetailsContainer.tsx
+msgid "Unable to load python management details."
+msgstr ""
+
 #: app/scripts/components/user/user-popover.html
 msgid "Unable to load user."
 msgstr ""
@@ -6009,6 +6128,62 @@ msgstr ""
 msgid "View details"
 msgstr ""
 
+#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
+msgid "Virtual environment"
+msgstr ""
+
+#: app/scripts/components/python-management/form/VirtualEnvironment.tsx
+msgid "Virtual environment has not yet been saved."
+msgstr ""
+
+#: app/scripts/components/python-management/form/VirtualEnvironment.tsx
+msgid "Virtual environment name"
+msgstr ""
+
+#: app/scripts/components/python-management/form/VirtualEnvironmentsForm.tsx
+msgid "Virtual environments"
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments deletion has been scheduled."
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments deletion request could not be created."
+msgstr ""
+
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+msgid "Virtual environments directory"
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments requests could not be created."
+msgstr ""
+
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Virtual environments root directory"
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments search has been scheduled."
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments search request could not be created."
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments updates have been scheduled."
+msgstr ""
+
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+msgid "Virtual machine"
+msgstr ""
+
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+msgid "Virtual machine has cloud broker public key"
+msgstr ""
+
 #: app/scripts/components/analytics/resource-chart-service.js
 #: app/scripts/components/appstore/routes.js
 #: app/scripts/components/configs/base-config.js
@@ -6046,6 +6221,10 @@ msgstr ""
 
 #: app/scripts/components/quotas/constants.js
 msgid "Volumes count"
+msgstr ""
+
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
+msgid "Was the correct cloud broker public key UUID specified in the properties?"
 msgstr ""
 
 #: app/scripts/components/experts/requests/actions/expert-request-complain.js
@@ -6388,6 +6567,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 msgid "vCPU"
 msgstr ""
 

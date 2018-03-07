@@ -129,9 +129,6 @@ body.landing {
   }
 }
 
-.app-content {
-}
-
 .footer-indent {
   padding-bottom: 90px;
 }
@@ -206,4 +203,14 @@ body.landing {
 
 .tooltip {
   z-index: 3000 !important;
+}
+
+.same-padding-as-control-label {
+  padding-top: 7px;
+}
+
+.btn-add-option {
+  width: 100%;
+  height: 40px;
+  text-align: center;
 }
