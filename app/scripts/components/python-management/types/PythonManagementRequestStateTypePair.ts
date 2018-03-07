@@ -2,5 +2,5 @@ import { PythonManagementRequestState } from '@waldur/python-management/types/Py
 import { PythonManagementRequestType } from '@waldur/python-management/types/PythonManagementRequestType';
 
 export class PythonManagementRequestStateTypePair {
-  constructor(public requestState: PythonManagementRequestState, public requestType: PythonManagementRequestType) {};
+  constructor(public requestState: PythonManagementRequestState, public requestType: PythonManagementRequestType) {}
 }
