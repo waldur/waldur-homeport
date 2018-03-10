@@ -1210,6 +1210,10 @@ msgstr ""
 msgid "Current VPC package"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+msgid "Current VPC usage"
+msgstr ""
+
 #: app/scripts/components/customer/customer-list.js
 msgid "Current cost"
 msgstr ""

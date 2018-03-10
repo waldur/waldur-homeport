@@ -3,8 +3,10 @@ import { openstackTemplateColumns, openstackTemplateFilters } from './openstack-
 
 class DialogController {
   // @ngInject
-  constructor(openstackTenantChangePackageService) {
+  constructor(openstackTenantChangePackageService, packageTemplatesService, $q) {
     this.service = openstackTenantChangePackageService;
+    this.packageTemplatesService = packageTemplatesService;
+    this.$q = $q;
   }
 
   $onInit() {
@@ -14,11 +16,17 @@ class DialogController {
     this.filterOptions = openstackTemplateFilters;
     this.templates = [];
     this.loading = true;
-    this.service.loadData(this.tenant).then(context => {
-      this.package = context.package;
-      this.template = context.template;
-      this.templates = context.templates;
-    }).catch(response => {
+
+    this.$q.all([
+      this.packageTemplatesService.loadTenantQuotasUsage(this.tenant).then(quotas => {
+        this.quotasUsage = quotas;
+      }),
+      this.service.loadData(this.tenant).then(context => {
+        this.package = context.package;
+        this.template = context.template;
+        this.templates = context.templates;
+      }),
+    ]).catch(response => {
       if (response) {
         this.errors = response.data;
       }
