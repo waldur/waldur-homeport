@@ -13,6 +13,7 @@ describe('Table', () => {
     loading: false,
     error: null,
     fetch,
+    rows: [],
   };
 
   describe('special states', () => {

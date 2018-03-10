@@ -5,6 +5,9 @@ export const FETCH_LIST_GOTO_PAGE = 'waldur/table/GOTO_PAGE';
 export const SET_FILTER_QUERY = 'waldur/table/SET_QUERY';
 export const EXPORT_TABLE_AS = 'waldur/table/EXPORT';
 export const RESET_PAGINATION = 'waldur/table/RESET_PAGINATION';
+export const ENTITY_CREATE = 'waldur/table/ENTITY_CREATE';
+export const ENTITY_UPDATE = 'waldur/table/ENTITY_UPDATE';
+export const ENTITY_DELETE = 'waldur/table/ENTITY_DELETE';
 
 export const fetchListStart = (table: string, extraFilter?: any) => ({
   type: FETCH_LIST_START,
@@ -14,11 +17,12 @@ export const fetchListStart = (table: string, extraFilter?: any) => ({
   },
 });
 
-export const fetchListDone = (table: string, rows: any[], resultCount: number) => ({
+export const fetchListDone = (table: string, entities: object, order: number[], resultCount: number) => ({
   type: FETCH_LIST_DONE,
   payload: {
     table,
-    rows,
+    entities,
+    order,
     resultCount,
   },
 });
@@ -59,5 +63,31 @@ export const resetPagination = (table: string) => ({
   type: RESET_PAGINATION,
   payload: {
     table,
+  },
+});
+
+export const createEntity = (table: string, uuid: string, content: object) => ({
+  type: ENTITY_CREATE,
+  payload: {
+    table,
+    uuid,
+    content,
+  },
+});
+
+export const updateEntity = (table: string, uuid: string, content: object) => ({
+  type: ENTITY_UPDATE,
+  payload: {
+    table,
+    uuid,
+    content,
+  },
+});
+
+export const deleteEntity = (table: string, uuid: string) => ({
+  type: ENTITY_DELETE,
+  payload: {
+    table,
+    uuid,
   },
 });

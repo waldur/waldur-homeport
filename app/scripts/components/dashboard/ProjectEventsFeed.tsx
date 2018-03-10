@@ -17,6 +17,7 @@ interface Props extends TranslateProps, TableState {
   showTypes: () => void;
   showDetails: (event) => void;
   fetch: () => void;
+  rows: any[];
 }
 
 class PureProjectEventsFeed extends React.PureComponent<Props> {

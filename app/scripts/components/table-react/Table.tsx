@@ -14,6 +14,7 @@ import TableRefreshButton from './TableRefreshButton';
 import { Column, TableState } from './types';
 
 interface Props extends TranslateProps, TableState {
+  rows: any[];
   fetch: () => void;
   gotoPage?: (page: number) => void;
   hasQuery?: boolean;
