@@ -48,6 +48,11 @@ export const reducer = (state: State = INITIAL_STATE, action: Action<Payload>) =
         errors: [...state.errors, payload.error],
         uploading: uploading > 0 ? uploading - 1 : 0,
       };
+    case constants.ISSUE_ATTACHMENTS_PUT_REJECT:
+      return {
+        ...state,
+        uploading: uploading > 0 ? uploading - 1 : 0,
+      };
     case constants.ISSUE_ATTACHMENTS_DELETE_START:
       return {
         ...state,

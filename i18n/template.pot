@@ -145,7 +145,7 @@ msgstr ""
 msgid "Activity stream"
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-form.html
+#: app/scripts/components/issues/comments/IssueCommentsForm.tsx
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html
 #: app/scripts/components/team/add-project-member.js
@@ -163,6 +163,11 @@ msgstr ""
 
 #: app/scripts/components/intro/base-intro.js
 msgid "Add a new organization"
+msgstr ""
+
+#: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.spec.tsx
+#: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.tsx
+msgid "Add comment"
 msgstr ""
 
 #: app/views/directives/customer-balance.html
@@ -744,7 +749,7 @@ msgstr ""
 #: app/scripts/components/form/appstore-form-wizard.html
 #: app/scripts/components/invitations/actions/cancel.js
 #: app/scripts/components/invitations/actions/invitation-dialog.html
-#: app/scripts/components/issues/comments/issue-comments-form.html
+#: app/scripts/components/issues/comments/IssueCommentsForm.tsx
 #: app/scripts/components/modal/CloseDialogButton.tsx
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/offering/appstore-offering.html
@@ -887,16 +892,13 @@ msgstr ""
 msgid "Code"
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-form.html
+#: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.spec.tsx
+#: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.tsx
 msgid "Comment"
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-form.js
-msgid "Comment has been added."
-msgstr ""
-
 #: app/scripts/components/experts/requests/details/expert-request-details.html
-#: app/scripts/components/issues/comments/issue-comments-container.html
+#: app/scripts/components/issues/comments/IssueCommentsContainer.tsx
 msgid "Comments"
 msgstr ""
 
@@ -1443,6 +1445,7 @@ msgid "Draft"
 msgstr ""
 
 #: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
+#: app/scripts/components/issues/comments/IssueCommentsContainer.tsx
 msgid "Drop files to attach them to the issue."
 msgstr ""
 
@@ -4343,6 +4346,10 @@ msgstr ""
 msgid "Related resources"
 msgstr ""
 
+#: app/scripts/components/issues/IssueReload.tsx
+msgid "Reload issue data"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rules-list.html
 msgid "Remote CIDR"
@@ -5420,7 +5427,8 @@ msgstr ""
 msgid "There are no available users."
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-list.html
+#: app/scripts/components/issues/comments/IssueCommentsList.spec.tsx
+#: app/scripts/components/issues/comments/IssueCommentsList.tsx
 msgid "There are no comments yet."
 msgstr ""
 
@@ -5658,10 +5666,6 @@ msgstr ""
 msgid "Unable to activate account."
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-form.js
-msgid "Unable to add comment."
-msgstr ""
-
 #: app/scripts/components/plans/plan-agreement-approve.js
 msgid "Unable to approve billing plan."
 msgstr ""
@@ -5727,13 +5731,25 @@ msgstr ""
 msgid "Unable to delete attachment."
 msgstr ""
 
+#: app/scripts/components/issues/comments/effects.ts
+msgid "Unable to delete comment."
+msgstr ""
+
 #: app/scripts/components/project/project-providers-service.js
 #: app/scripts/components/providers/details/provider-projects.js
 msgid "Unable to delete link."
 msgstr ""
 
+#: app/scripts/components/issues/comments/effects.ts
+msgid "Unable to edit comment."
+msgstr ""
+
 #: app/scripts/components/issues/attachments/effects.ts
 msgid "Unable to fetch attachment."
+msgstr ""
+
+#: app/scripts/components/issues/comments/effects.ts
+msgid "Unable to fetch comments."
 msgstr ""
 
 #: app/scripts/components/table-react/Table.tsx
@@ -5742,6 +5758,10 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js
 msgid "Unable to fetch project providers."
+msgstr ""
+
+#: app/scripts/components/issues/comments/utils.ts
+msgid "Unable to find:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/appstore-field-select-openstack-tenant.js
@@ -5756,7 +5776,8 @@ msgstr ""
 msgid "Unable to load application configuration. Please reload this page."
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-list.html
+#: app/scripts/components/issues/comments/IssueCommentsList.spec.tsx
+#: app/scripts/components/issues/comments/IssueCommentsList.tsx
 msgid "Unable to load comments."
 msgstr ""
 
@@ -5793,6 +5814,10 @@ msgstr ""
 msgid "Unable to perform action"
 msgstr ""
 
+#: app/scripts/components/issues/comments/effects.ts
+msgid "Unable to post comment."
+msgstr ""
+
 #: app/scripts/components/invitations/actions/send.js
 msgid "Unable to resend invitation."
 msgstr ""
@@ -5807,6 +5832,10 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.js
 msgid "Unable to set quotas."
+msgstr ""
+
+#: app/scripts/components/issues/comments/effects.ts
+msgid "Unable to submit empty comment."
 msgstr ""
 
 #: app/scripts/components/providers/effects.tsx
@@ -6494,12 +6523,12 @@ msgstr ""
 msgid "browse"
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-list.html
-msgid "commented"
-msgstr ""
-
 #: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "commented on"
+msgstr ""
+
+#: app/scripts/components/issues/comments/IssueCommentItem.tsx
+msgid "commented:"
 msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts

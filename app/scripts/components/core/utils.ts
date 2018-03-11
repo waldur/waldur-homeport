@@ -74,4 +74,9 @@ export const dateTime = input => {
   }
 };
 
+export const omit = (object, prop) => {
+  const { [prop]: _, ...rest } = object;
+  return rest;
+};
+
 export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z][A-Za-z0-9-._ ()]+$');

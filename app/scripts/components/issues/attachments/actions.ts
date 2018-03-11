@@ -37,11 +37,8 @@ export const issueAttachmentsPutStart = (uploading: number): Action<{ uploading:
   },
 });
 
-export const issueAttachmentsPutReject = (files: File[]): Action<{ files: File[] }> => ({
+export const issueAttachmentsPutReject = (): Action<{}> => ({
   type: constants.ISSUE_ATTACHMENTS_PUT_REJECT,
-  payload: {
-    files,
-  },
 });
 
 export const issueAttachmentsPutSuccess = (item: Attachment): Action<{ item: Attachment }> => ({

@@ -20,14 +20,14 @@ export const ActionDialog = (props: ActionDialogProps) => (
       title={props.title}
       footer={
         <div>
-          <SubmitButton submitting={props.submitting} label={props.submitLabel}/>
-          <CloseDialogButton/>
+          <SubmitButton submitting={props.submitting} label={props.submitLabel} />
+          <CloseDialogButton />
         </div>
       }>
       <FormContainer submitting={props.submitting}>
         {props.children}
       </FormContainer>
-      <FieldError error={props.error}/>
+      <FieldError error={props.error} />
     </ModalDialog>
   </form>
 );

@@ -2,8 +2,8 @@ import * as React from 'react';
 
 interface SubmitButtonProps {
   submitting: boolean;
-  label: string;
   disabled?: boolean;
+  label: string;
 }
 
 export const SubmitButton = (props: SubmitButtonProps) => (
