@@ -16,6 +16,11 @@
       {{ ::$ctrl.template | formatPackage }}
     </p>
 
+    <p ng-if="$ctrl.quotasUsage">
+      <strong><span translate>Current VPC usage</span>:</strong>
+      {{ ::$ctrl.quotasUsage | formatFlavor }}
+    </p>
+
     <p class="text-danger"
       ng-repeat="error in $ctrl.errors.package"
       ng-bind="error"></p>
