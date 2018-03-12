@@ -63,11 +63,12 @@ export const formatLongText = value =>
   ) : value;
 
 export const transformRows = (rows: any[]) => {
+  const id = rows[0].uuid ? 'uuid' : 'pk';
   const entities: object = {};
   const order: any[] = [];
   rows.map(row => {
-    entities[row.uuid] = row;
-    order.push(row.uuid);
+    entities[row[id]] = row;
+    order.push(row[id]);
   });
   return { entities, order };
 };
