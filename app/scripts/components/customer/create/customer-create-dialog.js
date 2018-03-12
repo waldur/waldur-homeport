@@ -25,7 +25,7 @@ const customerCreateDialog = {
       return this.CustomerCreateService.createCustomer(this.model).then(customer => {
         const message = gettext('Organization has been created.');
         this.ncUtilsFlash.success(this.$filter('translate')(message));
-        this.$state.go('organization.details', {uuid: customer.uuid});
+        this.$state.go('organization.dashboard', {uuid: customer.uuid});
       }).catch(response => {
         if (response.status === 400) {
           this.model.errors = response.data;
