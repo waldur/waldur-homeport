@@ -1,5 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
+import { transformRows } from '@waldur/table-react/utils';
+
 import * as actions from './actions';
 import { exportTable } from './export';
 import { getTableOptions } from './registry';
@@ -27,7 +29,8 @@ function* fetchList(action) {
     }
 
     const { rows, resultCount } = yield call(options.fetchData, request);
-    yield put(actions.fetchListDone(table, rows, resultCount));
+    const { entities, order } = transformRows(rows);
+    yield put(actions.fetchListDone(table, entities, order, resultCount));
   } catch (error) {
     yield put(actions.fetchListError(table, error));
   }

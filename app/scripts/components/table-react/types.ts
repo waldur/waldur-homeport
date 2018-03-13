@@ -41,7 +41,8 @@ export interface Pagination {
 }
 
 export interface TableState {
-  rows?: any[];
+  entities?: object;
+  order?: number[];
   loading?: boolean;
   error?: any;
   pagination?: Pagination;
