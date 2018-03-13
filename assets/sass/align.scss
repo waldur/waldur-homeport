@@ -1,8 +1,133 @@
 /* https://github.com/twbs/bootstrap/blob/v4-dev/scss/utilities/_align.scss */
 
-.align-baseline    { vertical-align: baseline !important; }
-.align-top         { vertical-align: top !important; }
-.align-middle      { vertical-align: middle !important; }
-.align-bottom      { vertical-align: bottom !important; }
-.align-text-bottom { vertical-align: text-bottom !important; }
-.align-text-top    { vertical-align: text-top !important; }
+.align-baseline {
+  vertical-align: baseline !important;
+}
+
+.align-top {
+  vertical-align: top !important;
+}
+
+.align-middle {
+  vertical-align: middle !important;
+}
+
+.align-bottom {
+  vertical-align: bottom !important;
+}
+
+.align-text-bottom {
+  vertical-align: text-bottom !important;
+}
+
+.align-text-top {
+  vertical-align: text-top !important;
+}
+
+/*flex align*/
+.content-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-between-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.content-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-between-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.content-between-baseline {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.content-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.content-around-top {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.content-around-center {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.content-around-bottom {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.content-around-baseline {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+.content-center {
+  display: flex;
+  justify-content: center;
+}
+
+.content-center-top {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.content-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-center-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.content-center-baseline {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.content-top {
+  display: flex;
+  align-items: flex-start;
+}
+
+.content-center {
+  display: flex;
+  align-items: center;
+}
+
+.content-bottom {
+  display: flex;
+  align-items: flex-end;
+}
+
+.content-baseline {
+  display: flex;
+  align-items: baseline;
+}

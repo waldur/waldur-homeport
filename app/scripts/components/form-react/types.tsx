@@ -4,8 +4,8 @@ export interface FormField {
   name: string;
   input?: WrappedFieldInputProps;
   required?: boolean;
-  label: string;
-  description?: any;
+  label?: string;
+  description?: string;
   labelClass?: string;
   controlClass?: string;
   validate?: Validator | Validator[];

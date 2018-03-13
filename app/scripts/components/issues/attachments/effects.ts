@@ -1,7 +1,8 @@
-import { call, put, takeEvery, select, spawn } from 'redux-saga/effects';
+import { call, put, take, takeEvery, select, spawn, race } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
+import { ISSUE_COMMENTS_FORM_SUBMIT_CANCEL } from '@waldur/issues/comments/constants';
 import { showError } from '@waldur/store/coreSaga';
 
 import * as actions from './actions';
@@ -39,13 +40,21 @@ export function* issueAttachmentsPut(action) {
 
 export function* issueAttachmentUpload(action) {
   const { issueUrl, file } = action;
-  try {
-    const response = yield call(api.putAttachments, issueUrl, file);
-    yield put(actions.issueAttachmentsPutSuccess(response.data));
-  } catch (error) {
-    yield put(actions.issueAttachmentsPutError(error));
-    const message = `${translate('Unable to upload attachment.')} ${format(error)}`;
-    yield put(showError(message));
+  const { cancel } = yield race({
+    sync: call(function*() {
+      try {
+        const response = yield call(api.putAttachments, issueUrl, file);
+        yield put(actions.issueAttachmentsPutSuccess(response.data));
+      } catch (error) {
+        yield put(actions.issueAttachmentsPutError(error));
+        const message = `${translate('Unable to upload attachment.')} ${format(error)}`;
+        yield put(showError(message));
+      }
+    }),
+    cancel: take(ISSUE_COMMENTS_FORM_SUBMIT_CANCEL),
+  });
+  if (cancel) {
+    yield put(actions.issueAttachmentsPutReject());
   }
 }
 
