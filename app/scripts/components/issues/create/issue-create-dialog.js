@@ -5,8 +5,8 @@ const DEFAULT_OPTIONS = {
   hideTitle: false,
   descriptionLabel: gettext('Request description'),
   descriptionPlaceholder: gettext('Request description'),
-  summaryLabel: gettext('Request name'),
-  summaryPlaceholder: gettext('Request name'),
+  summaryLabel: gettext('Title'),
+  summaryPlaceholder: gettext('Request title'),
   submitTitle: gettext('Create')
 };
 

@@ -4454,13 +4454,13 @@ msgstr ""
 msgid "Request for search for installed libraries in the virtual environments could not be created."
 msgstr ""
 
-#: app/scripts/components/issues/create/issue-create-dialog.js
-msgid "Request name"
-msgstr ""
-
 #: app/scripts/components/customer/details/customer-manage.js
 #: app/scripts/components/user/user-manage.js
 msgid "Request removal"
+msgstr ""
+
+#: app/scripts/components/issues/create/issue-create-dialog.js
+msgid "Request title"
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js
@@ -5552,6 +5552,7 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
+#: app/scripts/components/issues/create/issue-create-dialog.js
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/list/issues-list.js
