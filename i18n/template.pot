@@ -1278,6 +1278,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html
 #: app/scripts/components/experts/bids/details/expert-bid-details.html
+#: app/scripts/components/issues/comments/IssueCommentDeleteDialog.tsx
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -1413,6 +1414,10 @@ msgstr ""
 
 #: app/scripts/components/resource/monitoring/ZabbixHostDeleteButton.tsx
 msgid "Do you really want to delete Zabbix host?"
+msgstr ""
+
+#: app/scripts/components/issues/comments/IssueCommentDeleteDialog.tsx
+msgid "Do you really want to delete comment?"
 msgstr ""
 
 #: app/scripts/components/experts/bids/expert-bid-utils.js

@@ -9,6 +9,7 @@ import { getAttachments } from '@waldur/issues/attachments/selectors';
 import { Attachment } from '@waldur/issues/attachments/types';
 import { openAttachmentModal } from '@waldur/issues/attachments/utils';
 import { LoadingOverlay } from '@waldur/issues/LoadingOverlay';
+import { openModalDialog } from '@waldur/modal/actions';
 
 import * as actions from './actions';
 import './IssueCommentItem.scss';
@@ -25,10 +26,10 @@ interface PureIssueCommentItemProps extends TranslateProps {
   deleting: boolean;
   uiDisabled: boolean;
   formToggleDisabled: boolean;
+  openDeleteDialog(): void;
   openUserDialog(): void;
   openAttachmentPreview(url: string): void;
   toggleForm(): void;
-  deleteComment(): void;
 }
 
 export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
@@ -40,10 +41,10 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
     deleting,
     uiDisabled,
     formToggleDisabled,
+    openDeleteDialog,
     openUserDialog,
     openAttachmentPreview,
     toggleForm,
-    deleteComment,
     translate,
   } = props;
   const userList = users && users[comment.author_uuid] && users[comment.author_uuid].map(currentUser =>
@@ -83,7 +84,7 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
               <button
                 className="comment-item__delete btn btn-link"
                 disabled={uiDisabled}
-                onClick={deleteComment}
+                onClick={openDeleteDialog}
               >
                 <i className="fa fa-trash" aria-hidden="true" />
               </button>
@@ -105,6 +106,9 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
   );
 };
 
+const createDeleteDialog = uuid =>
+  openModalDialog('IssueCommentDeleteDialog', { resolve: { uuid } });
+
 const mapStateToProps = (state, ownProps) => ({
   attachments: getAttachments(state),
   user: getUser(state),
@@ -115,7 +119,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   toggleForm: (): void => dispatch(actions.issueCommentsFormToggle(ownProps.comment.uuid)),
-  deleteComment: (): void => dispatch(actions.issueCommentsDelete(ownProps.comment.uuid)),
+  openDeleteDialog: (): void => dispatch(createDeleteDialog(ownProps.comment.uuid)),
   openUserDialog: (): void => dispatch(utils.openUserModal(ownProps.comment.author_uuid)),
   openAttachmentPreview: (url: string): void => dispatch(openAttachmentModal(url)),
 });

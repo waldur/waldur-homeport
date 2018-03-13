@@ -64,7 +64,7 @@ export const formatJiraMarkup = (text: string = '', attachments: Attachment[] = 
     .replace(/\{\{([^}]+)\}\}/g, '<code>$1</code>')
 
     // Un-named Links
-    .replace(/\[([^|]+)\]/g, (_, fileName) => {
+    .replace(/\[\^?([^|]+)\]/g, (_, fileName) => {
       const url = getUrl(fileName);
       if (url) {
         return renderLink(url);

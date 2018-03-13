@@ -6,9 +6,9 @@ import { CloseDialogButton } from './CloseDialogButton';
 import { ModalDialog } from './ModalDialog';
 
 interface ActionDialogProps {
-  title: string;
+  title?: string;
   submitLabel: string;
-  submitting: boolean;
+  submitting?: boolean;
   onSubmit: any;
   children: React.ReactNode;
   error?: string;

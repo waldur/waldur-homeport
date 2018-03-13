@@ -36,10 +36,10 @@ describe('IssueCommentItem', () => {
   });
 
   it('delete comment', () => {
-    const deleteComment = jest.fn();
-    const wrapper = renderWrapper({ deleteComment });
+    const openDeleteDialog = jest.fn();
+    const wrapper = renderWrapper({ openDeleteDialog });
     getDeleteButton(wrapper).simulate('click');
-    expect(deleteComment).toBeCalled();
+    expect(openDeleteDialog).toBeCalled();
   });
 
   it('renders UI disabled', () => {

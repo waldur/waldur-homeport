@@ -1,7 +1,9 @@
+import { attachment } from '@waldur/issues/attachments/fixture';
+
 import { formatJiraMarkup, getUrl } from './utils';
 
 describe('JIRA markup formatter', () => {
-  const test = (input, output) => expect(formatJiraMarkup(input)).toBe(output);
+  const test = (input, output) => expect(formatJiraMarkup(input, [attachment])).toBe(output);
 
   it('makes text *strong', () => {
     test('Makes text *strong*.', 'Makes text <b>strong</b>.');
@@ -20,9 +22,29 @@ describe('JIRA markup formatter', () => {
       'See also: <a href="http://jira.atlassian.com" download="false">http://jira.atlassian.com</a>');
   });
 
+  it('creates a link to an internal resource', () => {
+    test('See also: [^panda.jpg]',
+      'See also: <a href="https://example.com/media/support_attachments/panda.jpg" download="true">panda.jpg</a>');
+  });
+
+  it('creates a message to not founded internal resource', () => {
+    test('See also: [^test.jpg]',
+      'See also: Unable to find: test.jpg');
+  });
+
   it('creates a named link to an external resource', () => {
     test('See also: [Atlassian|http://jira.atlassian.com]',
       'See also: <a href="http://jira.atlassian.com" download="false">Atlassian</a>');
+  });
+
+  it('creates an image to an internal resource', () => {
+    test('See also: !panda.jpg|thumbnail!',
+      'See also: <img src="https://example.com/media/support_attachments/panda.jpg" title="panda.jpg" />');
+  });
+
+  it('creates a message to not founded internal resource', () => {
+    test('See also: !test.jpg|thumbnail!',
+      'See also: Unable to find: test.jpg');
   });
 
   it('inserts line breaks', () => {
