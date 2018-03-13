@@ -58,7 +58,7 @@ export const formatJiraMarkup = (text: string = '', attachments: Attachment[] = 
     .replace(/\*(\S.*)\*/g, '<b>$1</b>')
 
     // Italic
-    .replace(/\_(\S.*)\_/g, '<i>$1</i>')
+    .replace(/\b\_(\S.*)\_\b/g, '<i>$1</i>')
 
     // Monospaced text
     .replace(/\{\{([^}]+)\}\}/g, '<code>$1</code>')
