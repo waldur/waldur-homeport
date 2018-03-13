@@ -3795,9 +3795,8 @@ msgstr "Küsi otseligipääsu rentnikule {{ $ctrl.tenant.name }}"
 msgid "Request direct access to OpenStack Tenant"
 msgstr "Küsi otseligipääsu OpenStack rentnikule"
 
-#: app/scripts/components/issues/issue-create-dialog.js:8
 #: app/scripts/components/issues/issue-create-dialog.js:9
-msgid "Request name"
+msgid "Request title"
 msgstr "Päringu nimi"
 
 #: app/scripts/components/customer/customer-manage.js:112
