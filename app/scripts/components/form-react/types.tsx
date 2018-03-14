@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { WrappedFieldInputProps, Validator } from 'redux-form';
 
 export interface FormField {
@@ -5,7 +6,7 @@ export interface FormField {
   input?: WrappedFieldInputProps;
   required?: boolean;
   label?: string;
-  description?: string;
+  description?: ReactNode;
   labelClass?: string;
   controlClass?: string;
   validate?: Validator | Validator[];
