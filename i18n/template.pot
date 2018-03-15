@@ -5090,7 +5090,7 @@ msgid "Snapshot schedules"
 msgstr ""
 
 #: app/scripts/components/dashboard/base-quotas.ts
-msgid "Snapshot size"
+msgid "Snapshot size, GB"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/tabs.js
@@ -6258,7 +6258,7 @@ msgid "Volume name"
 msgstr ""
 
 #: app/scripts/components/dashboard/base-quotas.ts
-msgid "Volume size"
+msgid "Volume size, GB"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/module.js
