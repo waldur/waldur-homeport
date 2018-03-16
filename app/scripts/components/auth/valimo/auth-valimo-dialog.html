@@ -1,20 +1,23 @@
 <div class="modal-header">
   <h3 class="modal-title">
-    <span translate>Autenticate using Mobile ID</span>
+    <span translate>Authenticate using Mobile ID</span>
   </h3>
 </div>
 <div class="modal-body">
   <form name="$ctrl.LoginForm">
     <div class="form-group"
-      ng-class="{disabled: $ctrl.isAuthenticating}">
+         ng-class="{disabled: $ctrl.isAuthenticating}">
       <label for="phoneNumber" class="control-label">
         <span translate>Mobile phone number</span>
       </label>
-      <input type="tel"
-        id="phoneNumber"
-        ng-model="$ctrl.phoneNumber"
-        class="form-control"
-        required>
+      <div class="input-group">
+        <span class="input-group-addon">{{::$ctrl.mobilePrefix}}</span>
+        <input type="tel"
+               id="phoneNumber"
+               ng-model="$ctrl.phoneNumber"
+               class="form-control"
+               required>
+      </div>
     </div>
     <div class="form-group" ng-if="$ctrl.challengeCode">
       <label for="challengeCode" class="control-label">
