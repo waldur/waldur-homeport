@@ -492,7 +492,7 @@ msgid "Audit logs"
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.html
-msgid "Autenticate using Mobile ID"
+msgid "Authenticate using Mobile ID"
 msgstr ""
 
 #: app/scripts/components/events/constants.ts
