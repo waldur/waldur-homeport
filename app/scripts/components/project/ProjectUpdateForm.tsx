@@ -2,6 +2,7 @@ import * as React from 'react';
 import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import { TextField, FormContainer, FieldError, SubmitButton } from '@waldur/form-react';
+import { StaticField } from '@waldur/form-react/StaticField';
 import { TranslateProps } from '@waldur/i18n';
 
 import { ProjectNameField } from './ProjectNameField';
@@ -13,6 +14,7 @@ interface ProjectUpdateFormData {
 
 interface ProjectUpdateFormProps extends TranslateProps, InjectedFormProps {
   updateProject(data: ProjectUpdateFormData): Promise<void>;
+  project_type?: string;
 }
 
 export const PureProjectUpdateForm = (props: ProjectUpdateFormProps) => (
@@ -28,6 +30,12 @@ export const PureProjectUpdateForm = (props: ProjectUpdateFormProps) => (
         label={props.translate('Project description')}
         name="description"
       />
+      {props.project_type &&
+        <StaticField
+          label={props.translate('Project type')}
+          value={props.project_type}
+        />
+      }
     </FormContainer>
     <div className="form-group">
       <div className="col-sm-offset-3 col-sm-9">

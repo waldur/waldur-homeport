@@ -29,6 +29,7 @@ const mapStateToProps = (state, ownProps) => ({
     name: ownProps.project.name,
     description: ownProps.project.description,
   },
+  project_type: ownProps.project.type_name,
   canManage: isOwnerOrStaff(state),
   enforceLatinName: getConfig(state).enforceLatinName,
 });
