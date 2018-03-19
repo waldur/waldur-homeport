@@ -21,7 +21,7 @@ msgstr "\"{planName}\" detaļas"
 msgid "(VAT is not included)"
 msgstr "(PVN nav iekļauts)"
 
-#: app/scripts/components/events/constants.js:22
+#: app/scripts/components/events/constants.ts:22
 msgid ""
 "{quota_name} quota threshold has been reached for project {project_name}."
 msgstr "{quota_name} ir sasniegts projekta {project_name} kvotas slieksnis."
@@ -30,11 +30,11 @@ msgstr "{quota_name} ir sasniegts projekta {project_name} kvotas slieksnis."
 msgid "{quotaUsage} out of {quotaLimit}."
 msgstr "{quotaUsage} no {quotaLimit}."
 
-#: app/scripts/components/events/constants.js:25
+#: app/scripts/components/events/constants.ts:25
 msgid "{resource_full_name} has been created."
 msgstr "{resource_full_name} tika izveidots."
 
-#: app/scripts/components/events/constants.js:28
+#: app/scripts/components/events/constants.ts:28
 msgid "{resource_full_name} has been deleted."
 msgstr "{resource_full_name} tika nodzēsts."
 
@@ -416,7 +416,7 @@ msgstr "Izveidot pakalpojumu sniedzēju"
 msgid "Create request"
 msgstr "Izveidot pieprasījumu"
 
-#: app/scripts/components/events/constants.js:17
+#: app/scripts/components/events/constants.ts:17
 msgid "Created a new payment for {customer_name}."
 msgstr "Izveidot jaunu maksājumu par {customer_name}."
 
@@ -517,7 +517,7 @@ msgid "EU VAT ID"
 msgstr "ES PVN reģistrācijas numurs"
 
 #: app/scripts/components/dashboard/project-events-feed.js:12
-#: app/scripts/components/help/constants.js:10
+#: app/scripts/components/help/constants.ts:10
 #: app/scripts/components/user/hooks/hook-list.js:53
 msgid "Events"
 msgstr "Notikumi"
@@ -554,7 +554,7 @@ msgstr "Katru gadu"
 msgid "Expert"
 msgstr "Eksperts"
 
-#: app/scripts/components/experts/constants.js:1
+#: app/scripts/components/experts/constants.ts:1
 #: app/scripts/components/experts/expert-provider-details.html:2
 #: app/scripts/components/experts/extensions/sidebar.js:28
 #: app/scripts/components/experts/extensions/sidebar.js:8
@@ -580,7 +580,7 @@ msgstr "Filtrs"
 msgid "General information"
 msgstr "Vispārējā informācija"
 
-#: app/scripts/components/resource/tabs/constants.js:17
+#: app/scripts/components/resource/tabs/constants.ts:17
 msgid "Graphs"
 msgstr "Grafiki"
 
@@ -838,7 +838,7 @@ msgstr "Pagaidām nav SSH atslēgu."
 msgid "No, I will do it later"
 msgstr "Nē, es izdarīšu to vēlāk"
 
-#: app/scripts/components/user/constants.js:18
+#: app/scripts/components/user/constants.ts:18
 #: app/scripts/components/user/routes.js:29
 msgid "Notifications"
 msgstr "Paziņojumi"
@@ -855,7 +855,7 @@ msgstr "uzņēmums"
 
 #: app/scripts/components/events/event-details-dialog.html:59
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:66
-#: app/scripts/components/issues/constants.js:94
+#: app/scripts/components/issues/constants.ts:94
 #: app/scripts/components/issues/issue-create-dialog.html:12
 #: app/scripts/components/issues/issue-create-dialog.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:7
@@ -867,27 +867,27 @@ msgstr "uzņēmums"
 msgid "Organization"
 msgstr "Uzņēmums"
 
-#: app/scripts/components/alerts/constants.js:4
+#: app/scripts/components/alerts/constants.ts:4
 msgid "Organization {customer_name} does not have any projects."
 msgstr "Uzņēmumam {customer_name} nav neviena projekta."
 
-#: app/scripts/components/alerts/constants.js:3
+#: app/scripts/components/alerts/constants.ts:3
 msgid "Organization {customer_name} does not have any resources."
 msgstr "Uzņēmumam {customer_name} nav neviena resursa."
 
-#: app/scripts/components/events/constants.js:9
+#: app/scripts/components/events/constants.ts:9
 msgid "Organization {customer_name} has been created."
 msgstr "Uzņēmums {customer_name} tika izveidots."
 
-#: app/scripts/components/events/constants.js:10
+#: app/scripts/components/events/constants.ts:10
 msgid "Organization {customer_name} has been deleted."
 msgstr "Uzņēmums {customer_name} tika nodzēsts."
 
-#: app/scripts/components/events/constants.js:11
+#: app/scripts/components/events/constants.ts:11
 msgid "Organization {customer_name} has been updated."
 msgstr "Uzņēmums {customer_name} tika izmanīts."
 
-#: app/scripts/components/alerts/constants.js:2
+#: app/scripts/components/alerts/constants.ts:2
 msgid "Organization {customer_name} has no providers."
 msgstr "Uzņēmumam {customer_name} nav pakalpojumu sniedzējau."
 
@@ -900,7 +900,7 @@ msgid "Organization has been created."
 msgstr "Uzņēmums tika izveidots."
 
 #: app/scripts/components/analytics/cost-analysis.html:69
-#: app/scripts/components/issues/constants.js:47
+#: app/scripts/components/issues/constants.ts:47
 #: app/scripts/components/user/user-edit.html:71
 #: app/scripts/components/user/user-organizations.js:54
 msgid "Organization name"
@@ -939,7 +939,7 @@ msgstr "Apmaksāts"
 msgid "Password"
 msgstr "Parole"
 
-#: app/scripts/components/events/constants.js:53
+#: app/scripts/components/events/constants.ts:53
 msgid "Password has been changed for user {affected_user_full_name}."
 msgstr "Parole lietotājam {affected_user_full_name} tika nomainīta."
 

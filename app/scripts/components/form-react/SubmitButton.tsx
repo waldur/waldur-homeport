@@ -2,14 +2,15 @@ import * as React from 'react';
 
 interface SubmitButtonProps {
   submitting: boolean;
-  disabled?: boolean;
   label: string;
+  disabled?: boolean;
+  className?: string;
 }
 
-export const SubmitButton = (props: SubmitButtonProps) => (
+export const SubmitButton: React.SFC<SubmitButtonProps> = (props: SubmitButtonProps) => (
   <button
     type="submit"
-    className="btn btn-primary"
+    className={props.className}
     disabled={props.submitting || props.disabled === true}>
     {props.submitting && (
       <i className="fa fa-spinner fa-spin m-r-xs"/>
@@ -17,3 +18,7 @@ export const SubmitButton = (props: SubmitButtonProps) => (
     {props.label}
   </button>
 );
+
+SubmitButton.defaultProps = {
+  className: 'btn btn-primary',
+};

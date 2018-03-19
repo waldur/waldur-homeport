@@ -1,3 +1,5 @@
+import { duration } from 'moment';
+
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
@@ -20,5 +22,25 @@ export const formatRegistrationMethod = user => {
     return translate('Estonian ID');
   } else {
     return titleCase(user.registration_method);
+  }
+};
+
+export const formatLifetime = input => {
+  const time = duration(input, 'seconds');
+  const hours = time.hours();
+  const minutes = time.minutes();
+  const seconds = time.seconds();
+
+  if (input === null || input === 0) {
+    return translate('token will not timeout');
+  }
+  if (hours === 0 && minutes === 0) {
+    return `${seconds} sec`;
+  }
+  if (hours === 0 && minutes !== 0) {
+    return `${minutes} min`;
+  }
+  if (hours !== 0) {
+    return minutes !== 0 ? `${hours} h ${minutes} min` : `${hours} h`;
   }
 };
