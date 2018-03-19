@@ -21,7 +21,10 @@ const PureUserDetailsButton = (props: UserDetailsButtonProps) => (
 );
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onClick: () => dispatch(actions.showUserDetails(ownProps.row)),
+  onClick: e => {
+    e.target.blur();
+    return dispatch(actions.showUserDetails(ownProps.row));
+  },
 });
 
 const enhance = compose(

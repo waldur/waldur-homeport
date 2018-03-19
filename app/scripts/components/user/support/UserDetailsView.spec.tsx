@@ -1,19 +1,6 @@
+import { ordinaryUser, staffUser, supportUser } from '@waldur/user/support/fixtures';
+
 import { userManageIsVisible, isVisibleForSupportOrStaff } from './selectors';
-
-const staffUser = {
-  is_support: false,
-  is_staff: true,
-};
-
-const supportUser = {
-  is_support: true,
-  is_staff: false,
-};
-
-const ordinaryUser = {
-  is_support: false,
-  is_staff: false,
-};
 
 const createState = user => ({
   workspace: {

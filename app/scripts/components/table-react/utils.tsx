@@ -63,7 +63,6 @@ export const formatLongText = value =>
   ) : value;
 
 export const transformRows = (rows: any[]) => {
-
   const entities: object = {};
   const order: any[] = [];
   rows.map((row, index) => {

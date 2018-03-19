@@ -43,7 +43,7 @@ msgstr ""
 msgid "API URL"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "API token lifetime"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Account has been activated."
 msgstr ""
 
-#: app/scripts/components/user/user-manage.js
+#: app/scripts/components/user/support/actions.ts
 msgid "Account removal"
 msgstr ""
 
@@ -686,7 +686,7 @@ msgstr ""
 msgid "By creating I agree with the"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/TermsOfService.tsx
 msgid "By submitting the form you are agreeing to the"
 msgstr ""
 
@@ -806,7 +806,7 @@ msgstr ""
 msgid "Challenge code"
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Change Request"
 msgstr ""
 
@@ -1203,7 +1203,7 @@ msgstr ""
 msgid "Creation of service project link {service_name} has failed."
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Current API token"
 msgstr ""
 
@@ -1331,7 +1331,7 @@ msgstr ""
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 #: app/scripts/components/slurm/slurm-allocation-config.js
 #: app/scripts/components/slurm/slurm-allocation-list.js
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Description"
 msgstr ""
 
@@ -1470,7 +1470,6 @@ msgstr ""
 #: app/scripts/components/team/project-users-list.js
 #: app/scripts/components/team/user-selector.html
 #: app/scripts/components/user/support/UserDetailsTable.tsx
-#: app/scripts/components/user/user-edit.html
 msgid "E-mail"
 msgstr ""
 
@@ -1501,6 +1500,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
 #: app/scripts/components/invitations/invitations-list.js
+#: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/support/UserList.tsx
 msgid "Email"
@@ -1913,9 +1913,9 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
 #: app/scripts/components/user/support/UserDetailsTable.tsx
+#: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/support/UserList.tsx
-#: app/scripts/components/user/user-edit.html
 msgid "Full name"
 msgstr ""
 
@@ -2075,8 +2075,8 @@ msgid "I want another service"
 msgstr ""
 
 #: app/scripts/components/user/support/UserDetailsTable.tsx
+#: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
-#: app/scripts/components/user/user-edit.html
 msgid "ID code"
 msgstr ""
 
@@ -2166,11 +2166,11 @@ msgstr ""
 msgid "In the format of GUID"
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Incident"
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
@@ -2187,11 +2187,11 @@ msgstr ""
 msgid "Increase a droplet's RAM, CPU and SSD disk."
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Informational"
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Informational - client’s request to get or provide additional information related to a service."
 msgstr ""
 
@@ -2454,7 +2454,7 @@ msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
 #: app/scripts/components/user/support/UserDetailsTable.tsx
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Job position"
 msgstr ""
 
@@ -2534,7 +2534,7 @@ msgstr ""
 msgid "Let's go"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Let’s get started"
 msgstr ""
 
@@ -2554,7 +2554,7 @@ msgstr ""
 msgid "Library version"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
 
@@ -2638,7 +2638,7 @@ msgstr ""
 msgid "Manage"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditContainer.tsx
 msgid "Manage at"
 msgstr ""
 
@@ -2838,8 +2838,8 @@ msgstr ""
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/user/support/UserDetailsTable.tsx
+#: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
-#: app/scripts/components/user/user-edit.html
 msgid "Native name"
 msgstr ""
 
@@ -3395,7 +3395,7 @@ msgstr ""
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/user/list/CustomerPermissions.tsx
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Organization name"
 msgstr ""
 
@@ -3599,8 +3599,8 @@ msgid "Phone"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
+#: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserList.tsx
-#: app/scripts/components/user/user-edit.html
 msgid "Phone number"
 msgstr ""
 
@@ -3871,14 +3871,6 @@ msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
 msgid "Processing..."
-msgstr ""
-
-#: app/scripts/components/user/user-manage.js
-msgid "Profile could not be updated."
-msgstr ""
-
-#: app/scripts/components/user/user-manage.js
-msgid "Profile has been updated."
 msgstr ""
 
 #: app/scripts/components/analytics/cost-analysis.html
@@ -4255,7 +4247,7 @@ msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.js
 #: app/scripts/components/experts/requests/actions/expert-request-complain.js
-#: app/scripts/components/user/user-manage.js
+#: app/scripts/components/user/support/actions.ts
 msgid "Reason"
 msgstr ""
 
@@ -4331,7 +4323,7 @@ msgid "Registration code"
 msgstr ""
 
 #: app/scripts/components/user/support/UserDetailsTable.tsx
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Registration method"
 msgstr ""
 
@@ -4388,7 +4380,7 @@ msgstr ""
 msgid "Remove package"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Remove profile"
 msgstr ""
 
@@ -4468,7 +4460,7 @@ msgid "Request for search for installed libraries in the virtual environments co
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.js
-#: app/scripts/components/user/user-manage.js
+#: app/scripts/components/user/support/actions.ts
 msgid "Request removal"
 msgstr ""
 
@@ -4935,11 +4927,11 @@ msgstr ""
 msgid "Server error occurred."
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Service Request"
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
@@ -5396,7 +5388,7 @@ msgstr ""
 #: app/scripts/components/freeipa/freeipa-account-edit.html
 #: app/scripts/components/navigation/app-footer.html
 #: app/scripts/components/offering/appstore-offering.html
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/TermsOfService.tsx
 msgid "Terms of Service"
 msgstr ""
 
@@ -5899,7 +5891,7 @@ msgstr ""
 msgid "Update policies"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Update profile"
 msgstr ""
 
@@ -5966,6 +5958,10 @@ msgstr ""
 msgid "User"
 msgstr ""
 
+#: app/scripts/components/user/support/effects.ts
+msgid "User could not been updated"
+msgstr ""
+
 #: app/scripts/components/user/routes.js
 #: app/scripts/components/user/user-details.html
 msgid "User dashboard"
@@ -5986,11 +5982,15 @@ msgstr ""
 msgid "User has been logged out. You will be redirected to the login page soon."
 msgstr ""
 
+#: app/scripts/components/user/support/effects.ts
+msgid "User has been updated"
+msgstr ""
+
 #: app/scripts/components/user/user-sidebar.html
 msgid "User profile"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "User status"
 msgstr ""
 
@@ -6288,7 +6288,7 @@ msgstr ""
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
-#: app/scripts/components/user/user-manage.js
+#: app/scripts/components/user/support/actions.ts
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
@@ -6563,7 +6563,7 @@ msgid "generate automatically"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-edit.html
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/TermsOfService.tsx
 msgid "have been accepted on"
 msgstr ""
 
@@ -6605,6 +6605,10 @@ msgstr ""
 
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 msgid "support"
+msgstr ""
+
+#: app/scripts/components/user/support/utils.ts
+msgid "token will not timeout"
 msgstr ""
 
 #: app/scripts/components/user/support/UserList.tsx

@@ -5,7 +5,7 @@ export interface FormField {
   name: string;
   input?: WrappedFieldInputProps;
   required?: boolean;
-  label?: string;
+  label?: ReactNode;
   description?: ReactNode;
   labelClass?: string;
   controlClass?: string;
