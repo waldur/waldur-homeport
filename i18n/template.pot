@@ -3978,6 +3978,7 @@ msgstr ""
 
 #: app/scripts/components/jira/project/JiraProjectSummary.tsx
 #: app/scripts/components/project/ProjectCreateForm.tsx
+#: app/scripts/components/project/ProjectUpdateForm.tsx
 msgid "Project type"
 msgstr ""
 
