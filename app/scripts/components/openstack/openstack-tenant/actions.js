@@ -53,7 +53,6 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         useResolve: true,
         staffOnly: true,
         enabled: true,
-        feature: 'import',
         isVisible: (resource, user) => {
           return userCanModifyTenant(user) && !(resource.extra_configuration && resource.extra_configuration.package_uuid);
         },
