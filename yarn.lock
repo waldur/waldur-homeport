@@ -5150,6 +5150,10 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
+lodash-es@^4.0.0:
+  version "4.17.7"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.7.tgz#db240a3252c3dd8360201ac9feef91ac977ea856"
+
 lodash-es@^4.17.3, lodash-es@^4.2.0, lodash-es@^4.2.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
@@ -6830,6 +6834,14 @@ react-input-autosize@^2.1.0:
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.1.2.tgz#a3dc11a5517c434db25229925541309de3f7a8f5"
   dependencies:
     prop-types "^15.5.8"
+
+react-leaflet@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-1.9.0.tgz#eaad329d6c35b0ee988ce17383b91fd61ae9329e"
+  dependencies:
+    lodash "^4.0.0"
+    lodash-es "^4.0.0"
+    warning "^3.0.0"
 
 react-overlays@^0.7.4:
   version "0.7.4"

@@ -43,7 +43,13 @@ const REPORT_ITEMS = [
     icon: 'fa-university',
     link: 'support.organizations',
     feature: 'support.organizations'
-  }
+  },
+  {
+    label: gettext('Usage overview'),
+    icon: 'fa-map',
+    link: 'support.usage',
+    feature: 'support.usage'
+  },
 ];
 
 // This service checks users status and returns different sidebar items and router state

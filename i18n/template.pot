@@ -6231,6 +6231,15 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/plans/plans-list.html
+msgid "Usage"
+msgstr ""
+
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Usage overview"
+msgstr ""
+
 #: app/scripts/components/slurm/SlurmForm.tsx
 msgid "Use sudo"
 msgstr ""
@@ -6412,7 +6421,6 @@ msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscor
 msgstr ""
 
 #: app/scripts/components/customer/workspace/customer-team.html
-#: app/scripts/components/issues/routes.js
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/project/project-team.html
 msgid "Users"

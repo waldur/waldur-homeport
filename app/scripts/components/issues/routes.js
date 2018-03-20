@@ -95,12 +95,12 @@ export default function issueRoutes($stateProvider) {
       }
     })
 
-    .state('support.users', {
-      url: 'users/',
-      template: '<user-list-view></user-list-view>',
+    .state('support.usage', {
+      url: 'usage/',
+      template: '<usage-map-view></usage-map-view>',
       data: {
-        pageTitle: gettext('Users'),
-        feature: 'support.users'
+        pageTitle: gettext('Usage'),
+        feature: 'support.usage'
       },
       resolve: {
         permission: checkPermission
