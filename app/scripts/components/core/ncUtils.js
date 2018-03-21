@@ -1,5 +1,5 @@
 import { formatRelative } from './dateUtils';
-import { getUUID } from './utils';
+import { getUUID, toKeyValue } from './utils';
 
 function getPrettyQuotaName(name) {
   return name.replace(/nc_|_count/g, '').replace(/_/g, ' ');
@@ -65,14 +65,6 @@ function parseQueryString(qs) {
     }
     return result;
   }, {});
-}
-
-function toKeyValue (obj) {
-  const parts = [];
-  Object.keys(obj).forEach(function(value, key) {
-    parts.push(key + '=' + encodeURIComponent(value));
-  });
-  return parts.length ? parts.join('&') : '';
 }
 
 function mergeLists(list1, list2, fieldIdentifier) {

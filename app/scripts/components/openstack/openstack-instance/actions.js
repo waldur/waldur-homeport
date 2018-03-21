@@ -110,7 +110,10 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         fields: {
           delete_volumes: {
             default_value: true
-          }
+          },
+          release_floating_ips: {
+            default_value: true,
+          },
         },
         onSuccess: function($injector) {
           const openstackFloatingIpsService = $injector.get('openstackFloatingIpsService');
