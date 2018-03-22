@@ -7,6 +7,8 @@ import offeringDetails from './offering-details';
 import offeringEvents from './offering-events';
 import offeringState from './offering-state';
 import offeringPolicy from './offering-policy';
+import offeringReportButton from './OfferingReportButton';
+import offeringReportDialog from './OfferingReportDialog';
 import registerOfferingCategory from './register-offering-category';
 import registerSidebarExtension from './sidebar';
 import appstoreOfferingSummary from './appstore-offering-summary';
@@ -23,6 +25,8 @@ export default module => {
   module.component('offeringEvents', offeringEvents);
   module.component('offeringState', offeringState);
   module.component('offeringPolicy', offeringPolicy);
+  module.component('offeringReportButton', offeringReportButton);
+  module.component('offeringReportDialog', offeringReportDialog);
   module.run(registerOfferingCategory);
   module.run(registerSidebarExtension);
   module.run(registerTableExtension);
