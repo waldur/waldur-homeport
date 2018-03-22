@@ -1,76 +1,96 @@
-import { latLngBounds, icon } from 'leaflet';
+import { basemapLayer } from 'esri-leaflet';
+import L from 'leaflet';
 import * as React from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+
+import './CanvasFlowmapLayer';
 
 import './providers-support.scss';
-
-interface Marker {
-  latitude: number;
-  longitude: number;
-  uuid: string;
-  type: string;
-  usageCount: number;
-}
 
 interface UsageMapProps {
   center?: number[];
   zoom?: number;
   id: string;
-  data: Marker[];
+  data: any;
 }
 
-const attribution = '&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors';
-const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-
-const openstackIcon = 'images/appstore/icon-openstack.png';
-const slurmIcon = 'images/appstore/icon-slurm.png';
-const amazonIcon = 'images/appstore/icon-amazon.png';
-
-const mapProvidersToIcons = {
-  openstack: openstackIcon,
-  slurm: slurmIcon,
-  amazon: amazonIcon,
-};
-
 export default class UsageMap extends React.Component<UsageMapProps, any> {
-  render() {
+
+  componentDidMount() {
     const { center, zoom, id, data } = this.props;
-    const bounds = latLngBounds(center);
 
-    data.map(marker => {
-      bounds.extend([marker.latitude, marker.longitude]);
+    const bounds = L.latLngBounds(center);
+
+    for (const key in data.service_providers) {
+      if (data.service_providers.hasOwnProperty(key)) {
+        bounds.extend([
+          data.service_providers[key].latitude,
+          data.service_providers[key].longitude,
+        ]);
+      }
+    }
+
+    for (const key in data.service_consumers) {
+      if (data.service_consumers.hasOwnProperty(key)) {
+        bounds.extend([
+          data.service_consumers[key].latitude,
+          data.service_consumers[key].longitude,
+        ]);
+      }
+    }
+
+    const map = L.map(id);
+    map.setView(center, zoom);
+
+    map.fitBounds(bounds);
+
+    basemapLayer('Gray').addTo(map);
+
+    const geoJsonFeatureCollection = {
+      type: 'FeatureCollection',
+      features: data.usage.map(entry => ({
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [
+            entry.provider_to_consumer.provider_lon,
+            entry.provider_to_consumer.provider_lat,
+          ],
+        },
+        properties: entry.provider_to_consumer,
+      })),
+    };
+
+    const oneToManyFlowmapLayer = L.canvasFlowmapLayer(geoJsonFeatureCollection, {
+      originAndDestinationFieldIds: {
+        originUniqueIdField: 'provider_uuid',
+        originGeometry: {
+          x: 'provider_lon',
+          y: 'provider_lat',
+        },
+        destinationUniqueIdField: 'consumer_uuid',
+        destinationGeometry: {
+          x: 'consumer_lon',
+          y: 'consumer_lat',
+        },
+      },
+      pathDisplayMode: 'selection',
+      animationStarted: true,
+      animationEasingFamily: 'Cubic',
+      animationEasingType: 'In',
+      animationDuration: 2000,
+    }).addTo(map);
+
+    oneToManyFlowmapLayer.on('click', e => {
+      if (e.sharedOriginFeatures.length) {
+        oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
+      }
+      if (e.sharedDestinationFeatures.length) {
+        oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedDestinationFeatures, 'SELECTION_NEW');
+      }
     });
+  }
 
-    return (
-      <Map
-        bounds={bounds}
-        center={center}
-        zoom={zoom}
-        id={id}
-      >
-        <TileLayer
-          attribution={attribution}
-          url={url}
-        />
-        {data.map(entry => {
-          const markerIcon = icon({
-            iconUrl: mapProvidersToIcons[entry.type],
-            iconSize: [entry.usageCount, entry.usageCount],
-          });
-          return (
-            <Marker
-              key={entry.uuid}
-              icon={markerIcon}
-              position={[entry.latitude, entry.longitude]}>
-              <Popup>
-                <span>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </span>
-              </Popup>
-            </Marker>
-          );
-        })}
-      </Map>
-    );
+  render() {
+    return (<div id="usage-map"/>);
   }
 }
