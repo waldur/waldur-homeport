@@ -3768,6 +3768,10 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
+#: app/scripts/components/billing/PriceEstimateDialog.tsx
+msgid "Price estimate details"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html
 msgid "Price for 1 GB of RAM per day"
 msgstr ""
@@ -5005,6 +5009,10 @@ msgstr ""
 
 #: app/scripts/components/dashboard/DashboardFeed.tsx
 msgid "Show all"
+msgstr ""
+
+#: app/scripts/components/billing/price-estimate-button.html
+msgid "Show details"
 msgstr ""
 
 #: app/scripts/components/billing/events/invoice-events-toggle.html
