@@ -18,6 +18,7 @@
         <p ng-if="$ctrl.customer">
           <span translate>Estimated cost for the current month:</span>
           {{ $ctrl.customer.billing_price_estimate.total | defaultCurrency }}
+          <price-estimate-button customer="$ctrl.customer"></price-estimate-button>
         </p>
         <paypal-invoices-list/>
       </div>
