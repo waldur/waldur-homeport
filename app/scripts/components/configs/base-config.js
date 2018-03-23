@@ -111,6 +111,10 @@ const ENV = {
     {
       name: gettext('Service desk'),
       services: ['JIRA'],
+    },
+    {
+      name: gettext('Batch processing'),
+      services: ['SLURM'],
     }
   ],
 

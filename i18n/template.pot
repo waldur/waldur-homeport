@@ -626,6 +626,10 @@ msgstr ""
 msgid "Batch processing"
 msgstr ""
 
+#: app/scripts/components/slurm/SlurmForm.tsx
+msgid "Batch service"
+msgstr ""
+
 #: app/scripts/components/billing/billing-utils.js
 #: app/scripts/components/customer/create/customer-create-config.js
 msgid "Billing"
