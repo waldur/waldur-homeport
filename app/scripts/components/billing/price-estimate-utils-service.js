@@ -37,16 +37,23 @@ export default class PriceEstimateUtilsService {
   }
 
   parseInvoiceItems(items) {
+    /* Extract name, type and total price.
+     * Omit empty invoice items.
+     * Sort items by total in descending order.
+     * Format total price with currency symbol.
+     */
     const filter = this.$filter('defaultCurrency');
-    const result = [];
-    items.forEach(item => {
-      const name = item.name;
-      const total = parseFloat(item.total);
-      if (!total) {
-        return;
-      }
-      result.push({name, total: filter(total)});
-    });
-    return result;
+    return items
+      .map(item => ({
+        name: item.name,
+        scope_type: item.scope_type.replace('.', ' '),
+        total: parseFloat(item.total)
+      }))
+      .filter(item => item.total > 0)
+      .sort((x, y) => x.total < y.total ? 1 : x.total > y.total ? -1 : 0)
+      .map(item => ({
+        ...item,
+        total: filter(item.total),
+      }));
   }
 }

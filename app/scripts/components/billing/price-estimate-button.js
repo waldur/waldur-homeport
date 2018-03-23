@@ -15,6 +15,7 @@ export default {
     openPriceEstimateDialog() {
       return this.$uibModal.open({
         component: 'priceEstimateDialog',
+        size: 'lg',
         resolve: {
           items: this.PriceEstimateUtilsService.loadInvoiceItems(this.customer.uuid),
         }

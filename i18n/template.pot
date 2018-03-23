@@ -2776,6 +2776,7 @@ msgstr ""
 #: app/scripts/components/ansible/ansible-jobs-list.js
 #: app/scripts/components/ansible/create/ansible-job-create.js
 #: app/scripts/components/appstore/appstore-compare-list.js
+#: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/cost-planning/cost-plans-list.js
 #: app/scripts/components/customer/create/customer-create-config.js
@@ -5618,6 +5619,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-pie-chart.html
 #: app/scripts/components/ansible/create/ansible-price-explanation.html
+#: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/billing/billing-records-list.js
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
@@ -5655,6 +5657,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
+#: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
