@@ -30,6 +30,7 @@ module.exports = {
       'react-bootstrap/lib/Tooltip',
       'react-bootstrap/lib/OverlayTrigger',
       'react-dropzone',
+      'react-gravatar',
       'attr-accept',
       'intro.js',
 

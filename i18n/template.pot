@@ -43,7 +43,7 @@ msgstr ""
 msgid "API URL"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "API token lifetime"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Account has been activated."
 msgstr ""
 
-#: app/scripts/components/user/user-manage.js
+#: app/scripts/components/user/support/actions.ts
 msgid "Account removal"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgstr ""
 msgid "Activity stream"
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-form.html
+#: app/scripts/components/issues/comments/IssueCommentsForm.tsx
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html
 #: app/scripts/components/team/add-project-member.js
@@ -165,6 +165,11 @@ msgstr ""
 msgid "Add a new organization"
 msgstr ""
 
+#: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.spec.tsx
+#: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.tsx
+msgid "Add comment"
+msgstr ""
+
 #: app/views/directives/customer-balance.html
 msgid "Add credit"
 msgstr ""
@@ -179,6 +184,10 @@ msgstr ""
 
 #: app/scripts/components/user/keys/key-create.html
 msgid "Add key"
+msgstr ""
+
+#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+msgid "Add library"
 msgstr ""
 
 #: app/scripts/components/team/project-users-list.js
@@ -234,6 +243,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Add snapshots"
+msgstr ""
+
+#: app/scripts/components/python-management/form/AddVirtualEnvironmentButton.tsx
+msgid "Add virtual environment"
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-vms-list.js
@@ -387,6 +400,7 @@ msgstr ""
 #: app/scripts/components/ansible/sidebar.js
 #: app/scripts/components/appstore/routes.js
 #: app/scripts/components/dashboard/base-quotas.ts
+#: app/scripts/components/python-management/routes.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Applications"
 msgstr ""
@@ -478,7 +492,7 @@ msgid "Audit logs"
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.html
-msgid "Autenticate using Mobile ID"
+msgid "Authenticate using Mobile ID"
 msgstr ""
 
 #: app/scripts/components/events/constants.ts
@@ -672,7 +686,7 @@ msgstr ""
 msgid "By creating I agree with the"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/TermsOfService.tsx
 msgid "By submitting the form you are agreeing to the"
 msgstr ""
 
@@ -735,7 +749,7 @@ msgstr ""
 #: app/scripts/components/form/appstore-form-wizard.html
 #: app/scripts/components/invitations/actions/cancel.js
 #: app/scripts/components/invitations/actions/invitation-dialog.html
-#: app/scripts/components/issues/comments/issue-comments-form.html
+#: app/scripts/components/issues/comments/IssueCommentsForm.tsx
 #: app/scripts/components/modal/CloseDialogButton.tsx
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/offering/appstore-offering.html
@@ -747,6 +761,7 @@ msgstr ""
 #: app/scripts/components/plans/plans-list.html
 #: app/scripts/components/project/ProjectCreateForm.tsx
 #: app/scripts/components/providers/ProviderCreateForm.tsx
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
 #: app/scripts/components/resource-import/resource-import-dialog.html
 #: app/scripts/components/resource/actions/dialog/action-dialog.html
 #: app/scripts/components/team/add-project-member.html
@@ -791,7 +806,7 @@ msgstr ""
 msgid "Challenge code"
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Change Request"
 msgstr ""
 
@@ -838,6 +853,10 @@ msgstr ""
 msgid "Choose new plan"
 msgstr ""
 
+#: app/scripts/components/form-react/list-field/ListFieldInternal.tsx
+msgid "Choose option"
+msgstr ""
+
 #: app/scripts/components/customer/popover/customer-users-details-list.js
 #: app/scripts/components/invitations/actions/invitation-dialog.html
 #: app/scripts/components/team/user-selector.html
@@ -873,16 +892,13 @@ msgstr ""
 msgid "Code"
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-form.html
+#: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.spec.tsx
+#: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.tsx
 msgid "Comment"
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-form.js
-msgid "Comment has been added."
-msgstr ""
-
 #: app/scripts/components/experts/requests/details/expert-request-details.html
-#: app/scripts/components/issues/comments/issue-comments-container.html
+#: app/scripts/components/issues/comments/IssueCommentsContainer.tsx
 msgid "Comments"
 msgstr ""
 
@@ -1022,6 +1038,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/actions.js
 #: app/scripts/components/openstack/openstack-volume/module.js
 #: app/scripts/components/project/project-issues.js
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/tabs/resource-issues.js
 #: app/scripts/components/user/hooks/hook-details.html
@@ -1136,6 +1153,7 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
+#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "Created"
@@ -1185,13 +1203,17 @@ msgstr ""
 msgid "Creation of service project link {service_name} has failed."
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Current API token"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html
 msgid "Current VPC package"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+msgid "Current VPC usage"
 msgstr ""
 
 #: app/scripts/components/customer/customer-list.js
@@ -1256,6 +1278,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html
 #: app/scripts/components/experts/bids/details/expert-bid-details.html
+#: app/scripts/components/issues/comments/IssueCommentDeleteDialog.tsx
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -1264,6 +1287,10 @@ msgstr ""
 
 #: app/scripts/components/resource/monitoring/ZabbixHostDeleteButton.tsx
 msgid "Delete Zabbix host"
+msgstr ""
+
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Delete python management & virtual environments"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
@@ -1304,7 +1331,7 @@ msgstr ""
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 #: app/scripts/components/slurm/slurm-allocation-config.js
 #: app/scripts/components/slurm/slurm-allocation-list.js
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Description"
 msgstr ""
 
@@ -1360,6 +1387,10 @@ msgstr ""
 msgid "DigitalOcean provider"
 msgstr ""
 
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+msgid "Directory will be created in home directory of default system user."
+msgstr ""
+
 #: app/scripts/components/freeipa/freeipa-account-edit.html
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr ""
@@ -1383,6 +1414,10 @@ msgstr ""
 
 #: app/scripts/components/resource/monitoring/ZabbixHostDeleteButton.tsx
 msgid "Do you really want to delete Zabbix host?"
+msgstr ""
+
+#: app/scripts/components/issues/comments/IssueCommentDeleteDialog.tsx
+msgid "Do you really want to delete comment?"
 msgstr ""
 
 #: app/scripts/components/experts/bids/expert-bid-utils.js
@@ -1415,6 +1450,7 @@ msgid "Draft"
 msgstr ""
 
 #: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
+#: app/scripts/components/issues/comments/IssueCommentsContainer.tsx
 msgid "Drop files to attach them to the issue."
 msgstr ""
 
@@ -1434,7 +1470,6 @@ msgstr ""
 #: app/scripts/components/team/project-users-list.js
 #: app/scripts/components/team/user-selector.html
 #: app/scripts/components/user/support/UserDetailsTable.tsx
-#: app/scripts/components/user/user-edit.html
 msgid "E-mail"
 msgstr ""
 
@@ -1465,6 +1500,7 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
 #: app/scripts/components/invitations/invitations-list.js
+#: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/support/UserList.tsx
 msgid "Email"
@@ -1774,6 +1810,14 @@ msgstr ""
 msgid "Financial overview"
 msgstr ""
 
+#: app/scripts/components/python-management/form/VirtualEnvironmentsForm.tsx
+msgid "Find installed virtual environments & libraries"
+msgstr ""
+
+#: app/scripts/components/python-management/form/FindMissingLibrariesButton.tsx
+msgid "Find missing installed libraries"
+msgstr ""
+
 #: app/scripts/components/ansible/create/ansible-job-create.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
@@ -1869,9 +1913,9 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
 #: app/scripts/components/user/support/UserDetailsTable.tsx
+#: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
 #: app/scripts/components/user/support/UserList.tsx
-#: app/scripts/components/user/user-edit.html
 msgid "Full name"
 msgstr ""
 
@@ -1915,6 +1959,10 @@ msgstr ""
 
 #: app/scripts/components/appstore/providers/appstore-providers-empty-message.html
 msgid "Get a virtual private cloud from a service store"
+msgstr ""
+
+#: app/scripts/components/python-management/details/PythonManagementActionHistoryRow.tsx
+msgid "Global request"
 msgstr ""
 
 #: app/scripts/components/intro/expert-manager-intro.js
@@ -2027,8 +2075,8 @@ msgid "I want another service"
 msgstr ""
 
 #: app/scripts/components/user/support/UserDetailsTable.tsx
+#: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
-#: app/scripts/components/user/user-edit.html
 msgid "ID code"
 msgstr ""
 
@@ -2065,6 +2113,7 @@ msgstr ""
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 msgid "Image name"
 msgstr ""
 
@@ -2117,11 +2166,11 @@ msgstr ""
 msgid "In the format of GUID"
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Incident"
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
@@ -2138,11 +2187,11 @@ msgstr ""
 msgid "Increase a droplet's RAM, CPU and SSD disk."
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Informational"
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Informational - client’s request to get or provide additional information related to a service."
 msgstr ""
 
@@ -2168,6 +2217,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Instance"
 msgstr ""
 
@@ -2404,7 +2454,7 @@ msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
 #: app/scripts/components/user/support/UserDetailsTable.tsx
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Job position"
 msgstr ""
 
@@ -2484,11 +2534,27 @@ msgstr ""
 msgid "Let's go"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Let’s get started"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/python-management/details/RequestOutputRow.tsx
+msgid "Libraries to install"
+msgstr ""
+
+#: app/scripts/components/python-management/details/RequestOutputRow.tsx
+msgid "Libraries to remove"
+msgstr ""
+
+#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+msgid "Library name"
+msgstr ""
+
+#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+msgid "Library version"
+msgstr ""
+
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
 
@@ -2524,6 +2590,10 @@ msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
 msgid "Loading..."
+msgstr ""
+
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Located in home directory of default system user."
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
@@ -2568,7 +2638,7 @@ msgstr ""
 msgid "Manage"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditContainer.tsx
 msgid "Manage at"
 msgstr ""
 
@@ -2706,6 +2776,7 @@ msgstr ""
 #: app/scripts/components/ansible/ansible-jobs-list.js
 #: app/scripts/components/ansible/create/ansible-job-create.js
 #: app/scripts/components/appstore/appstore-compare-list.js
+#: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/cost-planning/cost-plans-list.js
 #: app/scripts/components/customer/create/customer-create-config.js
@@ -2735,6 +2806,7 @@ msgstr ""
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/details/provider-details.html
 #: app/scripts/components/providers/provider-list.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 #: app/scripts/components/resource/actions/constants.js
@@ -2745,18 +2817,30 @@ msgid "Name"
 msgstr ""
 
 #: app/scripts/components/project/ProjectNameField.tsx
+msgid "Name contains invalid symbols."
+msgstr ""
+
+#: app/scripts/components/project/ProjectNameField.tsx
 msgid "Name is duplicated. Choose other name."
+msgstr ""
+
+#: app/scripts/components/project/ProjectNameField.tsx
+msgid "Name is required field."
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 msgid "Name of your organization."
 msgstr ""
 
+#: app/scripts/components/project/ProjectNameField.tsx
+msgid "Name should contain at least 3 symbols."
+msgstr ""
+
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/user/support/UserDetailsTable.tsx
+#: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
-#: app/scripts/components/user/user-edit.html
 msgid "Native name"
 msgstr ""
 
@@ -3185,6 +3269,10 @@ msgstr ""
 msgid "Ok, what's next?"
 msgstr ""
 
+#: app/scripts/components/python-management/utils.ts
+msgid "Only alphanumeric characters, dashes or underscores"
+msgstr ""
+
 #: app/scripts/components/providers/provider-list.js
 msgid "Only customer owner or staff can create provider."
 msgstr ""
@@ -3308,7 +3396,7 @@ msgstr ""
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/user/list/CustomerPermissions.tsx
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Organization name"
 msgstr ""
 
@@ -3512,8 +3600,8 @@ msgid "Phone"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
+#: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserList.tsx
-#: app/scripts/components/user/user-edit.html
 msgid "Phone number"
 msgstr ""
 
@@ -3599,6 +3687,10 @@ msgstr ""
 msgid "Please select a username that you will use for login into the Linux systems."
 msgstr ""
 
+#: app/scripts/components/form-react/list-field/ListFieldModal.tsx
+msgid "Please select one"
+msgstr ""
+
 #: app/scripts/components/providers/details/provider-projects.html
 msgid "Please select projects where usage of the provider is permitted."
 msgstr ""
@@ -3675,6 +3767,10 @@ msgstr ""
 #: app/scripts/components/paypal/paypal-invoices-list.js
 #: app/scripts/components/plans/plan-agreements-list.js
 msgid "Price"
+msgstr ""
+
+#: app/scripts/components/billing/PriceEstimateDialog.tsx
+msgid "Price estimate details"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html
@@ -3782,14 +3878,6 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
-#: app/scripts/components/user/user-manage.js
-msgid "Profile could not be updated."
-msgstr ""
-
-#: app/scripts/components/user/user-manage.js
-msgid "Profile has been updated."
-msgstr ""
-
 #: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/ansible/create/ansible-job-checkout-summary.html
 #: app/scripts/components/events/EventDetailsTable.tsx
@@ -3887,6 +3975,7 @@ msgstr ""
 
 #: app/scripts/components/jira/project/JiraProjectSummary.tsx
 #: app/scripts/components/project/ProjectCreateForm.tsx
+#: app/scripts/components/project/ProjectUpdateForm.tsx
 msgid "Project type"
 msgstr ""
 
@@ -4074,6 +4163,27 @@ msgstr ""
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
+#: app/scripts/components/python-management/routes.js
+msgid "Python Management details"
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Python environment could not be created."
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Python environment has been created."
+msgstr ""
+
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Python management details"
+msgstr ""
+
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Python version"
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
 #: app/scripts/components/cost-planning/cost-plan-flavors.html
@@ -4116,6 +4226,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
@@ -4141,7 +4252,7 @@ msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.js
 #: app/scripts/components/experts/requests/actions/expert-request-complain.js
-#: app/scripts/components/user/user-manage.js
+#: app/scripts/components/user/support/actions.ts
 msgid "Reason"
 msgstr ""
 
@@ -4217,7 +4328,7 @@ msgid "Registration code"
 msgstr ""
 
 #: app/scripts/components/user/support/UserDetailsTable.tsx
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Registration method"
 msgstr ""
 
@@ -4236,6 +4347,10 @@ msgstr ""
 
 #: app/scripts/components/ansible/details/ansible-job-summary.html
 msgid "Related resources"
+msgstr ""
+
+#: app/scripts/components/issues/IssueReload.tsx
+msgid "Reload issue data"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -4266,13 +4381,25 @@ msgstr ""
 msgid "Remove organization"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/python-management/form/InstalledPackagesForm.tsx
+msgid "Remove package"
+msgstr ""
+
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Remove profile"
+msgstr ""
+
+#: app/scripts/components/python-management/form/RemoveVirtualEnvironmentButton.tsx
+msgid "Remove virtual environment"
 msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js
 #: app/scripts/components/providers/details/provider-projects.js
 msgid "Removing link"
+msgstr ""
+
+#: app/scripts/components/offering/OfferingReportDialog.tsx
+msgid "Report details"
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.html
@@ -4337,13 +4464,17 @@ msgstr ""
 msgid "Request direct access to {{ $ctrl.tenant.name }}"
 msgstr ""
 
-#: app/scripts/components/issues/create/issue-create-dialog.js
-msgid "Request name"
+#: app/scripts/components/python-management/effects.ts
+msgid "Request for search for installed libraries in the virtual environments could not be created."
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.js
-#: app/scripts/components/user/user-manage.js
+#: app/scripts/components/user/support/actions.ts
 msgid "Request removal"
+msgstr ""
+
+#: app/scripts/components/issues/create/issue-create-dialog.js
+msgid "Request title"
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js
@@ -4356,6 +4487,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/jira/issue/IssueCreateDialog.tsx
+#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
 msgid "Request type"
 msgstr ""
 
@@ -4604,6 +4736,10 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Save virtual environments"
+msgstr ""
+
 #: app/scripts/components/controllers/base-controller-class-es6.js
 #: app/scripts/components/controllers/base-controller-class.js
 msgid "Saving of {vm_name} was successful."
@@ -4624,6 +4760,10 @@ msgstr ""
 
 #: app/scripts/components/appstore/dialog/appstore-category-selector.html
 msgid "Search by name"
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Search for installed libraries in the virtual environment has been scheduled."
 msgstr ""
 
 #: app/scripts/components/aws/AmazonForm.tsx
@@ -4796,11 +4936,11 @@ msgstr ""
 msgid "Server error occurred."
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Service Request"
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
@@ -4872,6 +5012,10 @@ msgstr ""
 msgid "Show all"
 msgstr ""
 
+#: app/scripts/components/billing/price-estimate-button.html
+msgid "Show details"
+msgstr ""
+
 #: app/scripts/components/billing/events/invoice-events-toggle.html
 msgid "Show events"
 msgstr ""
@@ -4882,6 +5026,10 @@ msgstr ""
 
 #: app/scripts/components/resource/UserPassword.tsx
 msgid "Show password"
+msgstr ""
+
+#: app/scripts/components/offering/OfferingReportButton.tsx
+msgid "Show report"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
@@ -4951,6 +5099,10 @@ msgstr ""
 msgid "Snapshot schedules"
 msgstr ""
 
+#: app/scripts/components/dashboard/base-quotas.ts
+msgid "Snapshot size, GB"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup/tabs.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
 #: app/scripts/components/openstack/openstack-volume/module.js
@@ -5007,6 +5159,9 @@ msgstr ""
 #: app/scripts/components/paypal/paypal-invoices-list.js
 #: app/scripts/components/plans/plan-agreements-list.js
 #: app/scripts/components/providers/provider-list.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
+#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/resource/list/resources-list.js
@@ -5048,6 +5203,7 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/project/routes.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Storage"
@@ -5249,7 +5405,7 @@ msgstr ""
 #: app/scripts/components/freeipa/freeipa-account-edit.html
 #: app/scripts/components/navigation/app-footer.html
 #: app/scripts/components/offering/appstore-offering.html
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/TermsOfService.tsx
 msgid "Terms of Service"
 msgstr ""
 
@@ -5286,7 +5442,8 @@ msgstr ""
 msgid "There are no available users."
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-list.html
+#: app/scripts/components/issues/comments/IssueCommentsList.spec.tsx
+#: app/scripts/components/issues/comments/IssueCommentsList.tsx
 msgid "There are no comments yet."
 msgstr ""
 
@@ -5359,10 +5516,17 @@ msgstr ""
 msgid "There's no pricing package for the batch processing provider."
 msgstr ""
 
-#: app/scripts/components/form/appstore-field-email.html
 #: app/scripts/components/form/appstore-field-string.html
+msgid "This field contains invalid characters."
+msgstr ""
+
+#: app/scripts/components/form/appstore-field-email.html
 #: app/scripts/components/form/appstore-field-tel.html
 msgid "This field is required"
+msgstr ""
+
+#: app/scripts/components/form/appstore-field-string.html
+msgid "This field is required."
 msgstr ""
 
 #: app/scripts/components/user/keys/key-create.js
@@ -5411,6 +5575,7 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
+#: app/scripts/components/issues/create/issue-create-dialog.js
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 #: app/scripts/components/issues/list/issues-list.js
@@ -5454,6 +5619,7 @@ msgstr ""
 
 #: app/scripts/components/analytics/resource-pie-chart.html
 #: app/scripts/components/ansible/create/ansible-price-explanation.html
+#: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/billing/billing-records-list.js
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
@@ -5491,6 +5657,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
+#: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
@@ -5515,10 +5682,6 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-activation.js
 msgid "Unable to activate account."
-msgstr ""
-
-#: app/scripts/components/issues/comments/issue-comments-form.js
-msgid "Unable to add comment."
 msgstr ""
 
 #: app/scripts/components/plans/plan-agreement-approve.js
@@ -5586,13 +5749,25 @@ msgstr ""
 msgid "Unable to delete attachment."
 msgstr ""
 
+#: app/scripts/components/issues/comments/effects.ts
+msgid "Unable to delete comment."
+msgstr ""
+
 #: app/scripts/components/project/project-providers-service.js
 #: app/scripts/components/providers/details/provider-projects.js
 msgid "Unable to delete link."
 msgstr ""
 
+#: app/scripts/components/issues/comments/effects.ts
+msgid "Unable to edit comment."
+msgstr ""
+
 #: app/scripts/components/issues/attachments/effects.ts
 msgid "Unable to fetch attachment."
+msgstr ""
+
+#: app/scripts/components/issues/comments/effects.ts
+msgid "Unable to fetch comments."
 msgstr ""
 
 #: app/scripts/components/table-react/Table.tsx
@@ -5601,6 +5776,10 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js
 msgid "Unable to fetch project providers."
+msgstr ""
+
+#: app/scripts/components/issues/comments/utils.ts
+msgid "Unable to find:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/appstore-field-select-openstack-tenant.js
@@ -5615,7 +5794,8 @@ msgstr ""
 msgid "Unable to load application configuration. Please reload this page."
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-list.html
+#: app/scripts/components/issues/comments/IssueCommentsList.spec.tsx
+#: app/scripts/components/issues/comments/IssueCommentsList.tsx
 msgid "Unable to load comments."
 msgstr ""
 
@@ -5639,12 +5819,21 @@ msgstr ""
 msgid "Unable to load provider."
 msgstr ""
 
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
+#: app/scripts/components/python-management/details/PythonManagementDetailsContainer.tsx
+msgid "Unable to load python management details."
+msgstr ""
+
 #: app/scripts/components/user/user-popover.html
 msgid "Unable to load user."
 msgstr ""
 
 #: app/scripts/components/resource/actions/dialog/action-dialog.js
 msgid "Unable to perform action"
+msgstr ""
+
+#: app/scripts/components/issues/comments/effects.ts
+msgid "Unable to post comment."
 msgstr ""
 
 #: app/scripts/components/invitations/actions/send.js
@@ -5661,6 +5850,10 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.js
 msgid "Unable to set quotas."
+msgstr ""
+
+#: app/scripts/components/issues/comments/effects.ts
+msgid "Unable to submit empty comment."
 msgstr ""
 
 #: app/scripts/components/providers/effects.tsx
@@ -5717,7 +5910,7 @@ msgstr ""
 msgid "Update policies"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Update profile"
 msgstr ""
 
@@ -5784,6 +5977,10 @@ msgstr ""
 msgid "User"
 msgstr ""
 
+#: app/scripts/components/user/support/effects.ts
+msgid "User could not been updated"
+msgstr ""
+
 #: app/scripts/components/user/routes.js
 #: app/scripts/components/user/user-details.html
 msgid "User dashboard"
@@ -5804,11 +6001,15 @@ msgstr ""
 msgid "User has been logged out. You will be redirected to the login page soon."
 msgstr ""
 
+#: app/scripts/components/user/support/effects.ts
+msgid "User has been updated"
+msgstr ""
+
 #: app/scripts/components/user/user-sidebar.html
 msgid "User profile"
 msgstr ""
 
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/UserEditForm.tsx
 msgid "User status"
 msgstr ""
 
@@ -5990,6 +6191,62 @@ msgstr ""
 msgid "View details"
 msgstr ""
 
+#: app/scripts/components/python-management/details/PythonManagementActionsHistory.tsx
+msgid "Virtual environment"
+msgstr ""
+
+#: app/scripts/components/python-management/form/VirtualEnvironment.tsx
+msgid "Virtual environment has not yet been saved."
+msgstr ""
+
+#: app/scripts/components/python-management/form/VirtualEnvironment.tsx
+msgid "Virtual environment name"
+msgstr ""
+
+#: app/scripts/components/python-management/form/VirtualEnvironmentsForm.tsx
+msgid "Virtual environments"
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments deletion has been scheduled."
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments deletion request could not be created."
+msgstr ""
+
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+msgid "Virtual environments directory"
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments requests could not be created."
+msgstr ""
+
+#: app/scripts/components/python-management/details/PythonManagementDetailsSummary.tsx
+msgid "Virtual environments root directory"
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments search has been scheduled."
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments search request could not be created."
+msgstr ""
+
+#: app/scripts/components/python-management/effects.ts
+msgid "Virtual environments updates have been scheduled."
+msgstr ""
+
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+msgid "Virtual machine"
+msgstr ""
+
+#: app/scripts/components/python-management/create/PythonManagementCreateForm.tsx
+msgid "Virtual machine has cloud broker public key"
+msgstr ""
+
 #: app/scripts/components/analytics/resource-chart-service.js
 #: app/scripts/components/appstore/routes.js
 #: app/scripts/components/configs/base-config.js
@@ -6020,6 +6277,10 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
+#: app/scripts/components/dashboard/base-quotas.ts
+msgid "Volume size, GB"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/module.js
 #: app/scripts/components/resource/list/resource-storage-tabs.html
 msgid "Volumes"
@@ -6027,6 +6288,10 @@ msgstr ""
 
 #: app/scripts/components/quotas/constants.js
 msgid "Volumes count"
+msgstr ""
+
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
+msgid "Was the correct cloud broker public key UUID specified in the properties?"
 msgstr ""
 
 #: app/scripts/components/experts/requests/actions/expert-request-complain.js
@@ -6042,7 +6307,7 @@ msgstr ""
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
-#: app/scripts/components/user/user-manage.js
+#: app/scripts/components/user/support/actions.ts
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
@@ -6284,12 +6549,12 @@ msgstr ""
 msgid "browse"
 msgstr ""
 
-#: app/scripts/components/issues/comments/issue-comments-list.html
-msgid "commented"
-msgstr ""
-
 #: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "commented on"
+msgstr ""
+
+#: app/scripts/components/issues/comments/IssueCommentItem.tsx
+msgid "commented:"
 msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts
@@ -6317,7 +6582,7 @@ msgid "generate automatically"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-edit.html
-#: app/scripts/components/user/user-edit.html
+#: app/scripts/components/user/support/TermsOfService.tsx
 msgid "have been accepted on"
 msgstr ""
 
@@ -6361,6 +6626,10 @@ msgstr ""
 msgid "support"
 msgstr ""
 
+#: app/scripts/components/user/support/utils.ts
+msgid "token will not timeout"
+msgstr ""
+
 #: app/scripts/components/user/support/UserList.tsx
 msgid "users"
 msgstr ""
@@ -6369,6 +6638,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
+#: app/scripts/components/python-management/create/PythonManagementCreateContainer.tsx
 msgid "vCPU"
 msgstr ""
 

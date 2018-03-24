@@ -4,10 +4,11 @@ import * as Tabs from 'react-bootstrap/lib/Tabs';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import {TranslateProps, withTranslation} from '@waldur/i18n';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 import UserEvents from '@waldur/user/list/UserEvents';
-import {isVisibleForSupportOrStaff, userEventsIsVisible, userManageIsVisible} from '@waldur/user/support/selectors';
+import { isVisibleForSupportOrStaff, userEventsIsVisible, userManageIsVisible } from '@waldur/user/support/selectors';
 import { UserDetailsTable } from '@waldur/user/support/UserDetailsTable';
+import { UserEditContainer } from '@waldur/user/support/UserEditContainer';
 import { UserDetails } from '@waldur/workspace/types';
 
 export interface UserDetailsViewProps extends TranslateProps {
@@ -36,7 +37,7 @@ export const PureUserDetailsView = (props: UserDetailsViewProps) => (
     {props.userManageIsVisible && (
       <Tab eventKey={3} title={props.translate('Manage')}>
         <div className="m-t-sm">
-          # todo in WAL-1380
+          <UserEditContainer user={props.user} showDeleteButton={false}/>
         </div>
       </Tab>
     )}

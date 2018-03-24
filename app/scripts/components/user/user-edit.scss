@@ -1,6 +1,7 @@
 @import 'variables.scss';
 
 .user-edit {
+  padding-bottom: 10px;
   .manage-gravatar {
     display: block;
     width: 100px;
@@ -12,21 +13,6 @@
       text-decoration: none;
       text-align: center;
       width: 200px;
-    }
-  }
-
-  .img-wrapper {
-    position: relative;
-    width: 67px;
-    height: 67px;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 7px;
-
-    img {
-      position: absolute;
-      left: 0;
-      top: 0;
     }
   }
 }

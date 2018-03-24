@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
+import { getConfig } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
@@ -28,7 +29,9 @@ const mapStateToProps = (state, ownProps) => ({
     name: ownProps.project.name,
     description: ownProps.project.description,
   },
+  project_type: ownProps.project.type_name,
   canManage: isOwnerOrStaff(state),
+  enforceLatinName: getConfig(state).enforceLatinName,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

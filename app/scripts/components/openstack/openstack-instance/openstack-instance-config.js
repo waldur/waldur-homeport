@@ -1,3 +1,6 @@
+import { ENV } from '@waldur/core/services';
+import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
+
 export default {
   order: [
     'name',
@@ -16,7 +19,10 @@ export default {
       type: 'string',
       required: true,
       label: gettext('VM name'),
-      maxlength: 150
+      maxlength: 150,
+      init: field => {
+        field.pattern = ENV.enforceLatinName && LATIN_NAME_PATTERN;
+      },
     },
     image: {
       type: 'list',

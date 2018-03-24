@@ -23,7 +23,7 @@ msgstr "(ei sisalda KM)"
 msgid "{fieldLabel} is required for provisioning resource."
 msgstr "{fieldLabel} on vajalik ressursi eraldamiseks."
 
-#: app/scripts/components/events/constants.js:22
+#: app/scripts/components/events/constants.ts:22
 msgid ""
 "{quota_name} quota threshold has been reached for project {project_name}."
 msgstr ""
@@ -33,80 +33,80 @@ msgstr ""
 msgid "{quotaUsage} out of {quotaLimit}."
 msgstr "{quotaUsage} kasutusel {quotaLimit} -st."
 
-#: app/scripts/components/events/constants.js:24
+#: app/scripts/components/events/constants.ts:24
 msgid "{resource_full_name} creation has been scheduled by {user_full_name}."
 msgstr "{resource_full_name} loomine on ajastatud {user_full_name} poolt."
 
-#: app/scripts/components/events/constants.js:23
+#: app/scripts/components/events/constants.ts:23
 msgid "{resource_full_name} creation has failed."
 msgstr "{resource_full_name} loomine nurjus."
 
-#: app/scripts/components/events/constants.js:26
+#: app/scripts/components/events/constants.ts:26
 msgid "{resource_full_name} deletion has failed."
 msgstr "{resource_full_name} kustutamine nurjus."
 
-#: app/scripts/components/events/constants.js:25
+#: app/scripts/components/events/constants.ts:25
 msgid "{resource_full_name} has been created."
 msgstr "{resource_full_name} on loodud."
 
-#: app/scripts/components/events/constants.js:28
+#: app/scripts/components/events/constants.ts:28
 msgid "{resource_full_name} has been deleted."
 msgstr "{resource_full_name} on kustutatud."
 
-#: app/scripts/components/events/constants.js:29
+#: app/scripts/components/events/constants.ts:29
 msgid "{resource_full_name} has been imported by {user_full_name}."
 msgstr "{resource_full_name} on kasutaja {user_full_name} poolt imporditud."
 
-#: app/scripts/components/events/constants.js:32
+#: app/scripts/components/events/constants.ts:32
 msgid "{resource_full_name} has been restarted."
 msgstr "{resource_full_name} on taaskäivitatud."
 
-#: app/scripts/components/events/constants.js:27
+#: app/scripts/components/events/constants.ts:27
 msgid ""
 "{resource_full_name} has been scheduled to deletion by {user_full_name}."
 msgstr ""
 "{resource_full_name} on planeeritud kustutamiseks kasutaja {user_full_name} "
 "poolt."
 
-#: app/scripts/components/events/constants.js:31
+#: app/scripts/components/events/constants.ts:31
 msgid "{resource_full_name} has been scheduled to restart by {user_full_name}."
 msgstr ""
 "{resource_full_name} on planeeritud ajastatud restardiks kasutaja "
 "{user_full_name} poolt."
 
-#: app/scripts/components/events/constants.js:34
+#: app/scripts/components/events/constants.ts:34
 msgid "{resource_full_name} has been scheduled to start by {user_full_name}."
 msgstr ""
 "{resource_full_name} on planeeritud ajastatud käivitamiseks kasutaja "
 "{user_full_name} poolt."
 
-#: app/scripts/components/events/constants.js:37
+#: app/scripts/components/events/constants.ts:37
 msgid "{resource_full_name} has been scheduled to stop by {user_full_name}."
 msgstr ""
 "{resource_full_name} on planeeritud ajastatud peatamiseks kasutaja "
 "{user_full_name} poolt."
 
-#: app/scripts/components/events/constants.js:35
+#: app/scripts/components/events/constants.ts:35
 msgid "{resource_full_name} has been started."
 msgstr "{resource_full_name} on käivitatud."
 
-#: app/scripts/components/events/constants.js:38
+#: app/scripts/components/events/constants.ts:38
 msgid "{resource_full_name} has been stopped."
 msgstr "{resource_full_name} on peatatud."
 
-#: app/scripts/components/events/constants.js:39
+#: app/scripts/components/events/constants.ts:39
 msgid "{resource_full_name} has been updated by {user_full_name}."
 msgstr "{resource_full_name} on uuendatud kasutaja {user_full_name} poolt."
 
-#: app/scripts/components/events/constants.js:30
+#: app/scripts/components/events/constants.ts:30
 msgid "{resource_full_name} restart has failed."
 msgstr "{resource_full_name} restart on nurjunud."
 
-#: app/scripts/components/events/constants.js:33
+#: app/scripts/components/events/constants.ts:33
 msgid "{resource_full_name} start has failed."
 msgstr "{resource_full_name} start ei õnnestunud."
 
-#: app/scripts/components/events/constants.js:36
+#: app/scripts/components/events/constants.ts:36
 msgid "{resource_full_name} stop has failed."
 msgstr "{resource_full_name} peatamine on nurjunud."
 
@@ -354,7 +354,7 @@ msgstr "Täiendavad andmed mida lisatakse virtuaalmasina eraldamisel."
 msgid "Address"
 msgstr "Aadress"
 
-#: app/scripts/components/issues/constants.js:63
+#: app/scripts/components/issues/constants.ts:63
 #: app/scripts/components/issues/issue-detail.html:50
 #: app/scripts/components/issues/issue-quick-create.html:94
 #: app/scripts/components/issues/issue-registration.html:171
@@ -375,10 +375,10 @@ msgstr "Märguande tüübid"
 #: app/scripts/components/customer/customer-workspace.js:112
 #: app/scripts/components/customer/routes.js:89
 #: app/scripts/components/dashboard/project-alerts-feed.js:11
-#: app/scripts/components/help/constants.js:5
+#: app/scripts/components/help/constants.ts:5
 #: app/scripts/components/project/project-workspace.js:98
 #: app/scripts/components/project/routes.js:110
-#: app/scripts/components/resource/tabs/constants.js:12
+#: app/scripts/components/resource/tabs/constants.ts:12
 msgid "Alerts"
 msgstr "Hoiatused"
 
@@ -386,15 +386,15 @@ msgstr "Hoiatused"
 msgid "Alerts & events"
 msgstr "Märguanded & sündmused"
 
-#: app/scripts/components/alerts/constants.js:14
+#: app/scripts/components/alerts/constants.ts:14
 msgid "Alerts about organization"
 msgstr "Märguanded ettevõtte kohta"
 
-#: app/scripts/components/alerts/constants.js:16
+#: app/scripts/components/alerts/constants.ts:16
 msgid "Alerts about providers"
 msgstr "Märguanded teenusepakkujate kohta"
 
-#: app/scripts/components/alerts/constants.js:15
+#: app/scripts/components/alerts/constants.ts:15
 msgid "Alerts about resources (VMs and applications)"
 msgstr "Märguanded ressursside kohta (VM-id ja rakendused)"
 
@@ -459,12 +459,12 @@ msgid "Application details"
 msgstr "Rakenduse detailid"
 
 #: app/scripts/components/analytics/resource-chart-service.js:27
-#: app/scripts/components/ansible/constants.js:1
+#: app/scripts/components/ansible/constants.ts:1
 #: app/scripts/components/ansible/routes.js:11
 #: app/scripts/components/ansible/routes.js:27
 #: app/scripts/components/ansible/sidebar.js:8
 #: app/scripts/components/appstore/routes.js:42
-#: app/scripts/components/dashboard/constants.js:7
+#: app/scripts/components/dashboard/constants.ts:7
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:3
 msgid "Applications"
 msgstr "Rakendused"
@@ -529,7 +529,7 @@ msgstr "Määrata VPC pakett"
 msgid "Assigned to"
 msgstr "Kellele määratud"
 
-#: app/scripts/components/issues/constants.js:79
+#: app/scripts/components/issues/constants.ts:79
 msgid "Assignee"
 msgstr "Kellele määratud"
 
@@ -539,7 +539,7 @@ msgstr "Kellele määratud"
 msgid "Attached to"
 msgstr "Lisatud"
 
-#: app/scripts/components/resource/tabs/constants.js:3
+#: app/scripts/components/resource/tabs/constants.ts:3
 msgid "Audit log"
 msgstr "Auditi logi"
 
@@ -547,14 +547,14 @@ msgstr "Auditi logi"
 #: app/scripts/components/customer/routes.js:72
 #: app/scripts/components/project/project-workspace.js:84
 #: app/scripts/components/project/routes.js:102
-#: app/scripts/components/user/constants.js:38
-#: app/scripts/components/user/constants.js:8
+#: app/scripts/components/user/constants.ts:38
+#: app/scripts/components/user/constants.ts:8
 #: app/scripts/components/user/routes.js:15
 #: app/scripts/components/user/user-dashboard.html:28
 msgid "Audit logs"
 msgstr "Auditi logid"
 
-#: app/scripts/components/events/constants.js:63
+#: app/scripts/components/events/constants.ts:63
 msgid "Authentication events"
 msgstr "Autentimise sündmused"
 
@@ -615,11 +615,11 @@ msgstr "Varundamine"
 msgid "Balance"
 msgstr "Saldojääk"
 
-#: app/scripts/components/events/constants.js:8
+#: app/scripts/components/events/constants.ts:8
 msgid "Balance has been decreased by {amount} for customer {customer_name}."
 msgstr "Saldo on suurendatud summa {amount} võrra kasutajale {customer_name}."
 
-#: app/scripts/components/events/constants.js:7
+#: app/scripts/components/events/constants.ts:7
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr "Saldo on vähendatud summa {amount} võrra kasutajale {customer_name}."
 
@@ -662,7 +662,7 @@ msgstr "Arvelduse plaani leping on edukalt töödeldud."
 msgid "Billing plan agreement is being processed, please wait."
 msgstr "Arvelduse plaani lepingut töödeldakse, palun oodake."
 
-#: app/scripts/components/dashboard/constants.js:19
+#: app/scripts/components/dashboard/constants.ts:19
 msgid "Block device count"
 msgstr "Plokkseadmete arv"
 
@@ -670,7 +670,7 @@ msgstr "Plokkseadmete arv"
 msgid "Block devices"
 msgstr "Plokkseadmed"
 
-#: app/scripts/components/dashboard/constants.js:27
+#: app/scripts/components/dashboard/constants.ts:27
 msgid "Block snapshot count"
 msgstr "Tõmmiste arv"
 
@@ -678,7 +678,7 @@ msgstr "Tõmmiste arv"
 msgid "Block storage"
 msgstr "Plokkseadmed"
 
-#: app/scripts/components/dashboard/constants.js:23
+#: app/scripts/components/dashboard/constants.ts:23
 msgid "Block volume count"
 msgstr "Plokkseadmete arv"
 
@@ -699,7 +699,7 @@ msgstr "Nii VM-e kui rakendusi loetakse kui ressursse."
 msgid "Browse"
 msgstr "Sirvi"
 
-#: app/scripts/components/issues/constants.js:100
+#: app/scripts/components/issues/constants.ts:100
 #: app/scripts/components/issues/issue-detail.html:15
 #: app/scripts/components/issues/issue-registration.html:6
 #: app/scripts/components/issues/issues-list.js:101
@@ -778,7 +778,7 @@ msgstr "Sertifitseerimine"
 msgid "Change flavor"
 msgstr "Muuda tüüpi"
 
-#: app/scripts/components/issues/constants.js:3
+#: app/scripts/components/issues/constants.ts:3
 msgid "Change Request"
 msgstr "Muutuse päring"
 
@@ -1110,7 +1110,7 @@ msgstr "Loo alamvõrk"
 msgid "Created"
 msgstr "Loodud"
 
-#: app/scripts/components/events/constants.js:17
+#: app/scripts/components/events/constants.ts:17
 msgid "Created a new payment for {customer_name}."
 msgstr "Loo uus makse kliendile {customer_name}."
 
@@ -1126,7 +1126,7 @@ msgstr "Loodud"
 msgid "Creation date"
 msgstr "Loomisaeg"
 
-#: app/scripts/components/events/constants.js:42
+#: app/scripts/components/events/constants.ts:42
 msgid "Creation of service project link {service_name} has failed."
 msgstr "Teenuse projekti lingi {service_name} loomine nurjus."
 
@@ -1157,7 +1157,7 @@ msgstr "Kohandatud päring"
 #: app/scripts/components/issues/issue-navigation-service.js:11
 #: app/scripts/components/project/project-workspace.js:25
 #: app/scripts/components/project/routes.js:83
-#: app/scripts/components/user/constants.js:3
+#: app/scripts/components/user/constants.ts:3
 msgid "Dashboard"
 msgstr "Töölaud"
 
@@ -1216,7 +1216,7 @@ msgstr "Kasutuselevõtu plaanis ei ole elemente."
 #: app/scripts/components/project/project-details.html:25
 #: app/scripts/components/project/projects-list.js:91
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js:53
-#: app/scripts/components/resource/actions/constants.js:26
+#: app/scripts/components/resource/actions/constants.ts:26
 #: app/scripts/components/resource/summary/resource-summary-base.html:31
 #: app/scripts/components/slurm/slurm-allocation-config.js:18
 #: app/scripts/components/slurm/slurm-allocation-list.js:29
@@ -1313,7 +1313,7 @@ msgstr "E-posti aadress"
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js:30
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:28
-#: app/scripts/components/resource/actions/constants.js:13
+#: app/scripts/components/resource/actions/constants.ts:13
 #: app/scripts/components/team/customer-users-list.js:129
 #: app/scripts/components/team/project-users-list.js:95
 #: app/scripts/components/user/hooks/hook-list.js:69
@@ -1424,7 +1424,7 @@ msgid "Event types"
 msgstr "Sündmuste tüübid"
 
 #: app/scripts/components/dashboard/project-events-feed.js:12
-#: app/scripts/components/help/constants.js:10
+#: app/scripts/components/help/constants.ts:10
 #: app/scripts/components/user/hooks/hook-list.js:53
 msgid "Events"
 msgstr "Sündmused"
@@ -1502,15 +1502,15 @@ msgstr "Eksperdi pakkuja on registreeritud"
 msgid "Expert request"
 msgstr "Eksperdi päringut"
 
-#: app/scripts/components/events/constants.js:57
+#: app/scripts/components/events/constants.ts:57
 msgid "Expert request \"{expert_request_name}\" has been activated."
 msgstr "Eksperdi taotlus \"{expert_request_name}\" on aktiveeritud."
 
-#: app/scripts/components/events/constants.js:59
+#: app/scripts/components/events/constants.ts:59
 msgid "Expert request \"{expert_request_name}\" has been completed."
 msgstr "Eksperdi taotlus \"{expert_request_name}\" on täidetud."
 
-#: app/scripts/components/events/constants.js:58
+#: app/scripts/components/events/constants.ts:58
 msgid "Expert request \"{expert_request_name}\"\" has been cancelled."
 msgstr "Eksperdi taotlus \"{expert_request_name}\" on katkestatud."
 
@@ -1527,7 +1527,7 @@ msgstr "Ekseperdi päring on katkestatud."
 msgid "Expert request has been created."
 msgstr "Eksperdi päring on loodud."
 
-#: app/scripts/components/experts/constants.js:1
+#: app/scripts/components/experts/constants.ts:1
 #: app/scripts/components/experts/expert-provider-details.html:2
 #: app/scripts/components/experts/extensions/sidebar.js:28
 #: app/scripts/components/experts/extensions/sidebar.js:8
@@ -1639,7 +1639,7 @@ msgstr "Ujuvad IPd"
 msgid "Following fields contain errors"
 msgstr "Järgmised väljad on vigased"
 
-#: app/scripts/components/user/constants.js:29
+#: app/scripts/components/user/constants.ts:29
 #: app/scripts/components/user/routes.js:43
 msgid "FreeIPA account"
 msgstr "FreeIPA konto"
@@ -1700,7 +1700,7 @@ msgstr "Minu profiil"
 msgid "Got it!"
 msgstr "Korras!"
 
-#: app/scripts/components/resource/tabs/constants.js:17
+#: app/scripts/components/resource/tabs/constants.ts:17
 msgid "Graphs"
 msgstr "Graafikud"
 
@@ -1760,7 +1760,7 @@ msgstr "Tunnitasu"
 msgid "How to generate RSA keys"
 msgstr "Kuidas luua RSA võtmed"
 
-#: app/scripts/components/help/constants.js:18
+#: app/scripts/components/help/constants.ts:18
 msgid "How to generate SSH key"
 msgstr "Kuidas luua SSH võti"
 
@@ -1830,11 +1830,11 @@ msgstr "Impordi ressursid registreeritud teenusepakkujate kontodelt."
 msgid "Importance"
 msgstr "Tähtsus"
 
-#: app/scripts/components/issues/constants.js:2
+#: app/scripts/components/issues/constants.ts:2
 msgid "Incident"
 msgstr "Vahejuhtum"
 
-#: app/scripts/components/issues/constants.js:30
+#: app/scripts/components/issues/constants.ts:30
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr "Incident - teenuse kasutamise ja toimimisega (katkemine, kvaliteedi langus) seotud kliendi mure."
 
@@ -1843,11 +1843,11 @@ msgstr "Incident - teenuse kasutamise ja toimimisega (katkemine, kvaliteedi lang
 msgid "Incorrect organization details"
 msgstr "Ebakorrektsed organisatsiooni andmed"
 
-#: app/scripts/components/issues/constants.js:5
+#: app/scripts/components/issues/constants.ts:5
 msgid "Informational"
 msgstr "Informatsiooniline"
 
-#: app/scripts/components/issues/constants.js:32
+#: app/scripts/components/issues/constants.ts:32
 msgid "Informational - client’s request to get or provide additional information related to a service."
 msgstr "Informational - kliendi soov saada või anda mistahes teenusega seotud infot"
 
@@ -1999,7 +1999,7 @@ msgstr "Arve"
 msgid "Invoice date"
 msgstr "Arve kuupäev"
 
-#: app/scripts/components/events/constants.js:64
+#: app/scripts/components/events/constants.ts:64
 msgid "Invoice events"
 msgstr "Arve sündmused"
 
@@ -2007,7 +2007,7 @@ msgstr "Arve sündmused"
 msgid "Invoice events timeline"
 msgstr "Arve sündmuste ajakava"
 
-#: app/scripts/components/events/constants.js:12
+#: app/scripts/components/events/constants.ts:12
 msgid ""
 "Invoice for organization {customer_name} for the period of {invoice_date} "
 "has been created."
@@ -2015,7 +2015,7 @@ msgstr ""
 "Arve organisatsioonile {customer_name} perioodi {invoice_date} eest on "
 "loodud."
 
-#: app/scripts/components/events/constants.js:13
+#: app/scripts/components/events/constants.ts:13
 msgid ""
 "Invoice for organization {customer_name} for the period of {invoice_date} "
 "has been deleted."
@@ -2023,7 +2023,7 @@ msgstr ""
 "Arve organisatsioonile {customer_name} perioodi {invoice_date} eest on "
 "kustutatud."
 
-#: app/scripts/components/events/constants.js:14
+#: app/scripts/components/events/constants.ts:14
 msgid ""
 "Invoice for organization {customer_name} for the period of {invoice_date} "
 "has been updated."
@@ -2090,7 +2090,7 @@ msgstr "On aktiivne"
 msgid "Is official"
 msgstr "On ametlik"
 
-#: app/scripts/components/events/constants.js:55
+#: app/scripts/components/events/constants.ts:55
 msgid "Issue {issue_key} has been created by {caller_full_name}."
 msgstr "{Caller_full_name} on loonud juhtumi {issue_key}."
 
@@ -2111,7 +2111,7 @@ msgstr "Juhtumi staatus"
 #: app/scripts/components/customer/routes.js:81
 #: app/scripts/components/project/project-workspace.js:91
 #: app/scripts/components/project/routes.js:93
-#: app/scripts/components/resource/tabs/constants.js:7
+#: app/scripts/components/resource/tabs/constants.ts:7
 msgid "Issues"
 msgstr "Juhtumid"
 
@@ -2140,14 +2140,14 @@ msgstr "Hoia kuni"
 msgid "Kept until"
 msgstr "Hoitud kuni"
 
-#: app/scripts/components/issues/constants.js:103
+#: app/scripts/components/issues/constants.ts:103
 #: app/scripts/components/issues/issues-list.js:44
 #: app/scripts/components/issues/issues-short-list.html:27
 #: app/scripts/components/providers/details/provider-price-list.js:41
 msgid "Key"
 msgstr "Võti"
 
-#: app/scripts/components/events/constants.js:65
+#: app/scripts/components/events/constants.ts:65
 msgid "Key management events"
 msgstr "Võtmete halduse sündmused"
 
@@ -2262,7 +2262,7 @@ msgid "MAC address"
 msgstr "MAC- aadress"
 
 #: app/scripts/components/customer/customer-workspace.js:136
-#: app/scripts/components/user/constants.js:24
+#: app/scripts/components/user/constants.ts:24
 #: app/scripts/components/user/routes.js:36
 msgid "Manage"
 msgstr "Haldus"
@@ -2410,7 +2410,7 @@ msgstr "N/A"
 #: app/scripts/components/providers/provider-list.js:55
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js:48
 #: app/scripts/components/resource-import/import-virtual-machines-list.js:48
-#: app/scripts/components/resource/actions/constants.js:20
+#: app/scripts/components/resource/actions/constants.ts:20
 #: app/scripts/components/resource/list/resources-list.js:42
 #: app/scripts/components/slurm/slurm-allocation-list.js:24
 msgid "Name"
@@ -2828,7 +2828,7 @@ msgstr "Teate edastamise viis"
 msgid "Notification only for the created invoice can be sent."
 msgstr "Teate saab saata ainult loodud arve kohta."
 
-#: app/scripts/components/user/constants.js:18
+#: app/scripts/components/user/constants.ts:18
 #: app/scripts/components/user/routes.js:29
 msgid "Notifications"
 msgstr "Teavitused"
@@ -2917,7 +2917,7 @@ msgstr "asutus"
 
 #: app/scripts/components/events/event-details-dialog.html:59
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:66
-#: app/scripts/components/issues/constants.js:94
+#: app/scripts/components/issues/constants.ts:94
 #: app/scripts/components/issues/issue-create-dialog.html:12
 #: app/scripts/components/issues/issue-create-dialog.html:22
 #: app/scripts/components/issues/issue-create-dialog.html:7
@@ -2929,33 +2929,33 @@ msgstr "asutus"
 msgid "Organization"
 msgstr "Asutus"
 
-#: app/scripts/components/alerts/constants.js:4
+#: app/scripts/components/alerts/constants.ts:4
 msgid "Organization {customer_name} does not have any projects."
 msgstr "Organisatsioonil {customer_name} ei ole ühtegi projekti."
 
-#: app/scripts/components/alerts/constants.js:3
+#: app/scripts/components/alerts/constants.ts:3
 msgid "Organization {customer_name} does not have any resources."
 msgstr "Organisatsioonil {customer_name} ei ole ühtegi projekti."
 
-#: app/scripts/components/events/constants.js:9
+#: app/scripts/components/events/constants.ts:9
 msgid "Organization {customer_name} has been created."
 msgstr "Organisatsioon {customer_name} on loodud."
 
-#: app/scripts/components/events/constants.js:10
+#: app/scripts/components/events/constants.ts:10
 msgid "Organization {customer_name} has been deleted."
 msgstr "Organisatsioon {customer_name} on kustutatud."
 
-#: app/scripts/components/events/constants.js:11
+#: app/scripts/components/events/constants.ts:11
 msgid "Organization {customer_name} has been updated."
 msgstr "Organisatsioon {customer_name} on muudetud."
 
-#: app/scripts/components/alerts/constants.js:10
-#: app/scripts/components/alerts/constants.js:8
-#: app/scripts/components/alerts/constants.js:9
+#: app/scripts/components/alerts/constants.ts:10
+#: app/scripts/components/alerts/constants.ts:8
+#: app/scripts/components/alerts/constants.ts:9
 msgid "Organization {customer_name} has exhausted quota {quota_name}."
 msgstr "Organisatsioon {customer_name} on ületanud oma kvoodi {quota_name}."
 
-#: app/scripts/components/alerts/constants.js:2
+#: app/scripts/components/alerts/constants.ts:2
 msgid "Organization {customer_name} has no providers."
 msgstr "Organisatsioonil {customer_name} ei ole teenusepakkujaid."
 
@@ -2963,7 +2963,7 @@ msgstr "Organisatsioonil {customer_name} ei ole teenusepakkujaid."
 msgid "Organization actions"
 msgstr "Organisatiooni tegevused"
 
-#: app/scripts/components/issues/constants.js:51
+#: app/scripts/components/issues/constants.ts:51
 msgid "Organization code"
 msgstr "Organisatsiooni kood"
 
@@ -2976,7 +2976,7 @@ msgid "Organization details"
 msgstr "Organisatsiooni andmed"
 
 #: app/scripts/components/customer/customer-events.js:25
-#: app/scripts/components/events/constants.js:66
+#: app/scripts/components/events/constants.ts:66
 msgid "Organization events"
 msgstr "Organisatsiooni sündmused"
 
@@ -2985,7 +2985,7 @@ msgid "Organization has been created."
 msgstr "Organisatsioon on loodud."
 
 #: app/scripts/components/analytics/cost-analysis.html:69
-#: app/scripts/components/issues/constants.js:47
+#: app/scripts/components/issues/constants.ts:47
 #: app/scripts/components/user/user-edit.html:71
 #: app/scripts/components/user/user-organizations.js:54
 msgid "Organization name"
@@ -3076,7 +3076,7 @@ msgstr "Parameetrid"
 msgid "Password"
 msgstr "Parool"
 
-#: app/scripts/components/events/constants.js:53
+#: app/scripts/components/events/constants.ts:53
 msgid "Password has been changed for user {affected_user_full_name}."
 msgstr "Parool on muudetud kasutajale {affected_user_full_name}."
 
@@ -3084,15 +3084,15 @@ msgstr "Parool on muudetud kasutajale {affected_user_full_name}."
 msgid "Pay invoice"
 msgstr "Maksa arve"
 
-#: app/scripts/components/events/constants.js:67
+#: app/scripts/components/events/constants.ts:67
 msgid "Payment events"
 msgstr "Makse sündmused"
 
-#: app/scripts/components/events/constants.js:15
+#: app/scripts/components/events/constants.ts:15
 msgid "Payment for {customer_name} has been approved."
 msgstr "Maksed kliendile {customer_name} on kinnitatud."
 
-#: app/scripts/components/events/constants.js:16
+#: app/scripts/components/events/constants.ts:16
 msgid "Payment for {customer_name} has been cancelled."
 msgstr "Maksed kliendile {customer_name} on katkestatud."
 
@@ -3358,7 +3358,7 @@ msgstr "Privaatsuspoliitika"
 #: app/scripts/components/appstore/routes.js:22
 #: app/scripts/components/configs/base-config.js:36
 #: app/scripts/components/configs/base-config.js:93
-#: app/scripts/components/dashboard/constants.js:15
+#: app/scripts/components/dashboard/constants.ts:15
 #: app/scripts/components/project/project-workspace.js:58
 #: app/scripts/components/project/projects-list.js:117
 #: app/scripts/components/project/routes.js:132
@@ -3382,7 +3382,7 @@ msgstr "Profiil on uuendatud."
 #: app/scripts/components/events/event-details-dialog.html:69
 #: app/scripts/components/experts/requests/expert-request-customer-list.js:71
 #: app/scripts/components/invitations/actions/invitation-dialog.html:46
-#: app/scripts/components/issues/constants.js:97
+#: app/scripts/components/issues/constants.ts:97
 #: app/scripts/components/issues/issue-create-dialog.html:17
 #: app/scripts/components/issues/issue-create-dialog.html:27
 #: app/scripts/components/issues/issue-detail.html:40
@@ -3396,15 +3396,15 @@ msgstr "Profiil on uuendatud."
 msgid "Project"
 msgstr "Projekt"
 
-#: app/scripts/components/events/constants.js:18
+#: app/scripts/components/events/constants.ts:18
 msgid "Project {project_name} has been created."
 msgstr "Projekt {project_name} on loodud."
 
-#: app/scripts/components/events/constants.js:19
+#: app/scripts/components/events/constants.ts:19
 msgid "Project {project_name} has been deleted."
 msgstr "Projekt {project_name} on kustutatud."
 
-#: app/scripts/components/events/constants.js:21
+#: app/scripts/components/events/constants.ts:21
 msgid "Project {project_name} has been updated."
 msgstr "Projekt {project_name} on muudetud."
 
@@ -3417,7 +3417,7 @@ msgid "Project details"
 msgstr "Projekti üksikasjad"
 
 #: app/scripts/components/customer/customer-events.js:30
-#: app/scripts/components/events/constants.js:68
+#: app/scripts/components/events/constants.ts:68
 #: app/scripts/components/project/project-events.js:25
 msgid "Project events"
 msgstr "Projekti sündmused"
@@ -3426,7 +3426,7 @@ msgstr "Projekti sündmused"
 msgid "Project has been removed successfully."
 msgstr "Projekt on edukalt eemaldatud."
 
-#: app/scripts/components/events/constants.js:20
+#: app/scripts/components/events/constants.ts:20
 msgid ""
 "Project has been renamed from {project_previous_name} to {project_name}."
 msgstr ""
@@ -3453,7 +3453,7 @@ msgid "Project manager cannot edit users with same role."
 msgstr "Projektijuht ei saa muuta kasutajaid kes on samas rollis."
 
 #: app/scripts/components/analytics/cost-analysis.html:68
-#: app/scripts/components/issues/constants.js:55
+#: app/scripts/components/issues/constants.ts:55
 #: app/scripts/components/project/project-create.html:8
 #: app/scripts/components/project/project-details.html:9
 #: app/scripts/components/providers/details/provider-project-link-quotas.html:6
@@ -3508,7 +3508,7 @@ msgstr "Projektide nimekiri"
 msgid "Provider"
 msgstr "Teenusepakkuja"
 
-#: app/scripts/components/alerts/constants.js:5
+#: app/scripts/components/alerts/constants.ts:5
 msgid "Provider {service_name} is not responding."
 msgstr "Teenusepakkuja {service_name} ei vasta."
 
@@ -3566,7 +3566,7 @@ msgstr "Teenusepakkuja tüüp"
 msgid "Providers"
 msgstr "Teenusepakkujad"
 
-#: app/scripts/components/events/constants.js:69
+#: app/scripts/components/events/constants.ts:69
 msgid "Providers events"
 msgstr "Teenusepakkuja sündmused."
 
@@ -3593,7 +3593,7 @@ msgstr "{Vm_name} ost oli edukas."
 msgid "Quantity"
 msgstr "Hulk"
 
-#: app/scripts/components/events/constants.js:72
+#: app/scripts/components/events/constants.ts:72
 msgid "Quota events"
 msgstr "Kvoodi sündmused"
 
@@ -3754,7 +3754,7 @@ msgstr "Anna teada ebakorrektsetest andmetest"
 msgid "Reported by me"
 msgstr "Minu poolt raporteeritud"
 
-#: app/scripts/components/issues/constants.js:75
+#: app/scripts/components/issues/constants.ts:75
 #: app/scripts/components/issues/issue-detail.html:20
 #: app/scripts/components/issues/issues-list.js:110
 msgid "Reporter"
@@ -3809,8 +3809,8 @@ msgstr "Päringu eemaldamine"
 msgid "Request to {action} has been accepted."
 msgstr "Päring {action} on vastuvõetud."
 
-#: app/scripts/components/issues/constants.js:106
-#: app/scripts/components/issues/constants.js:67
+#: app/scripts/components/issues/constants.ts:106
+#: app/scripts/components/issues/constants.ts:67
 #: app/scripts/components/issues/issue-create-dialog.html:37
 #: app/scripts/components/issues/issue-create-dialog.html:42
 #: app/scripts/components/issues/issue-detail.html:35
@@ -3847,7 +3847,7 @@ msgstr "Resolutsioon"
 msgid "Resource"
 msgstr "Ressurss"
 
-#: app/scripts/components/alerts/constants.js:6
+#: app/scripts/components/alerts/constants.ts:6
 msgid ""
 "Resource {resource_name} has disappeared from the {service_name} provider in "
 "{project_name} project."
@@ -3872,7 +3872,7 @@ msgid "Resource doesn't have SLA yet. Please connect it to monitoring system."
 msgstr "Ressurssil ei ole veel SLA-d. Palun ühendage see järelevalve süsteemi."
 
 #: app/scripts/components/customer/customer-events.js:34
-#: app/scripts/components/events/constants.js:70
+#: app/scripts/components/events/constants.ts:70
 #: app/scripts/components/project/project-events.js:30
 msgid "Resource events"
 msgstr "Ressurssi sündmused"
@@ -3881,7 +3881,7 @@ msgstr "Ressurssi sündmused"
 msgid "Resource has been deleted."
 msgstr "Ressurss on kustutatud."
 
-#: app/scripts/components/resource/actions/constants.js:17
+#: app/scripts/components/resource/actions/constants.ts:17
 msgid "Resource has been updated."
 msgstr "Ressurss on muudetud."
 
@@ -3960,7 +3960,7 @@ msgstr "Roll vananeb"
 msgid "Role in project"
 msgstr "Roll projekti juures"
 
-#: app/scripts/components/events/constants.js:71
+#: app/scripts/components/events/constants.ts:71
 msgid "Role management events"
 msgstr "Rollide halduse sündmused"
 
@@ -4170,11 +4170,11 @@ msgstr "Teenus"
 msgid "Service name"
 msgstr "Teenuse nimi"
 
-#: app/scripts/components/issues/constants.js:4
+#: app/scripts/components/issues/constants.ts:4
 msgid "Service Request"
 msgstr "Teenuse päring"
 
-#: app/scripts/components/issues/constants.js:31
+#: app/scripts/components/issues/constants.ts:31
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr "Service Request – kliendi soov teenuse osalise või täieliku funktsionaalsuse, ligipääsu või komponentide muutmiseks, lisamiseks, liigutamiseks või eemaldamiseks"
 
@@ -4190,7 +4190,7 @@ msgstr "Teenuse seaded sellel ressursil on veastaatuses."
 msgid "Service store"
 msgstr "Teenuste kataloog"
 
-#: app/scripts/components/issues/constants.js:59
+#: app/scripts/components/issues/constants.ts:59
 #: app/scripts/components/issues/issue-detail.html:45
 #: app/scripts/components/issues/issue-registration.html:156
 #: app/scripts/components/issues/issues-list.js:84
@@ -4292,7 +4292,7 @@ msgid "Skip floating IP assignment"
 msgstr "Jäta vahele ujuva IP omistamine"
 
 #: app/scripts/components/project/projects-list.js:126
-#: app/scripts/components/resource/tabs/constants.js:22
+#: app/scripts/components/resource/tabs/constants.ts:22
 msgid "SLA"
 msgstr "SLA"
 
@@ -4348,7 +4348,7 @@ msgstr "Järesta hinna järgi"
 msgid "SSH key"
 msgstr "SSH võti"
 
-#: app/scripts/components/events/constants.js:43
+#: app/scripts/components/events/constants.ts:43
 msgid ""
 "SSH key {ssh_key_name} has been created for user {user_full_name} with "
 "username {user_username}."
@@ -4356,7 +4356,7 @@ msgstr ""
 "SSH võti {ssh_key_name} on loodud kasutajale {user_full_name} kasutajanimega "
 "{user_username}."
 
-#: app/scripts/components/events/constants.js:44
+#: app/scripts/components/events/constants.ts:44
 msgid ""
 "SSH key {ssh_key_name} has been deleted for user {user_full_name} with "
 "username {user_username}."
@@ -4364,7 +4364,7 @@ msgstr ""
 "SSH võti {ssh_key_name} on kustutatud kasutajale {user_full_name} "
 "kasutajanimega {user_username}."
 
-#: app/scripts/components/events/constants.js:73
+#: app/scripts/components/events/constants.ts:73
 msgid "SSH key events"
 msgstr "SSH võtme sündmused"
 
@@ -4372,8 +4372,8 @@ msgstr "SSH võtme sündmused"
 msgid "SSH keys"
 msgstr "SSH võtmed"
 
-#: app/scripts/components/user/constants.js:13
-#: app/scripts/components/user/constants.js:43
+#: app/scripts/components/user/constants.ts:13
+#: app/scripts/components/user/constants.ts:43
 msgid "SSH Keys"
 msgstr "SSH võtmed"
 
@@ -4431,8 +4431,8 @@ msgid "State"
 msgstr "Olek"
 
 #: app/scripts/components/invitations/invitations-list.js:124
-#: app/scripts/components/issues/constants.js:109
-#: app/scripts/components/issues/constants.js:71
+#: app/scripts/components/issues/constants.ts:109
+#: app/scripts/components/issues/constants.ts:71
 #: app/scripts/components/issues/issue-detail.html:55
 #: app/scripts/components/issues/issues-list.js:54
 #: app/scripts/components/user/user-popover-table.html:41
@@ -4589,7 +4589,7 @@ msgstr "Kasutajad"
 msgid "Team does not have members yet."
 msgstr "Meeskonnas ei ole veel liikmeid."
 
-#: app/scripts/components/dashboard/constants.js:31
+#: app/scripts/components/dashboard/constants.ts:31
 msgid "Team size"
 msgstr "Meeskonna suurus"
 
@@ -4745,7 +4745,7 @@ msgstr "See väli on kohustuslik"
 msgid "This field may not be blank."
 msgstr "See väli ei tohi olla tühi."
 
-#: app/scripts/components/alerts/constants.js:7
+#: app/scripts/components/alerts/constants.ts:7
 msgid "This month estimated costs for organization {customer_name} exceeded."
 msgstr ""
 "Selle kuu ennustatavad kulud organisatsioonile {customer_name} on ületatud."
@@ -5048,7 +5048,7 @@ msgstr "Kasutus"
 msgid "User"
 msgstr "Kasutaja"
 
-#: app/scripts/components/events/constants.js:51
+#: app/scripts/components/events/constants.ts:51
 msgid ""
 "User {affected_user_full_name} claim for organization "
 "{affected_organization} has been rejected."
@@ -5056,11 +5056,11 @@ msgstr ""
 "Organisatsiooni {affected_organization} {affected_user_full_name} kasutaja "
 "taotlus on tagasi lükatud."
 
-#: app/scripts/components/events/constants.js:45
+#: app/scripts/components/events/constants.ts:45
 msgid "User {affected_user_full_name} has been activated."
 msgstr "Kasutaja {affected_user_full_name} on aktiveeritud."
 
-#: app/scripts/components/events/constants.js:49
+#: app/scripts/components/events/constants.ts:49
 msgid ""
 "User {affected_user_full_name} has been approved for organization "
 "{affected_organization}."
@@ -5068,19 +5068,19 @@ msgstr ""
 "Kasutaja {affected_user_full_name} on kinnitatud organisatsiooni juurde "
 "{affected_organization}."
 
-#: app/scripts/components/events/constants.js:46
+#: app/scripts/components/events/constants.ts:46
 msgid "User {affected_user_full_name} has been created."
 msgstr "Kasutaja {affected_user_full_name} on loodud."
 
-#: app/scripts/components/events/constants.js:47
+#: app/scripts/components/events/constants.ts:47
 msgid "User {affected_user_full_name} has been deactivated."
 msgstr "Kasutaja {affected_user_full_name} on deaktiveeritud."
 
-#: app/scripts/components/events/constants.js:48
+#: app/scripts/components/events/constants.ts:48
 msgid "User {affected_user_full_name} has been deleted."
 msgstr "Kasutaja {affected_user_full_name} on kustutatud."
 
-#: app/scripts/components/events/constants.js:52
+#: app/scripts/components/events/constants.ts:52
 msgid ""
 "User {affected_user_full_name} has been removed from organization "
 "{affected_organization}."
@@ -5088,11 +5088,11 @@ msgstr ""
 "Kasutaja {affected_user_full_name} on eemaldatud organisatsiooni juurest "
 "{affected_organization}."
 
-#: app/scripts/components/events/constants.js:54
+#: app/scripts/components/events/constants.ts:54
 msgid "User {affected_user_full_name} has been updated."
 msgstr "Kasutaja {affected_user_full_name} on muudetud."
 
-#: app/scripts/components/events/constants.js:50
+#: app/scripts/components/events/constants.ts:50
 msgid ""
 "User {affected_user_full_name} has claimed organization "
 "{affected_organization}."
@@ -5100,15 +5100,15 @@ msgstr ""
 "Kasutaja {affected_user_full_name} on nõudnud endale organisatsiooni "
 "{affected_organization}."
 
-#: app/scripts/components/events/constants.js:40
+#: app/scripts/components/events/constants.ts:40
 msgid "User {affected_user_full_name} has gained role of {role_name}."
 msgstr "Kasutaja {affected_user_full_name} on saanud endale rolli {role_name}."
 
-#: app/scripts/components/events/constants.js:41
+#: app/scripts/components/events/constants.ts:41
 msgid "User {affected_user_full_name} has revoked role of {role_name}."
 msgstr "Kasutaja {affected_user_full_name} on eemaldanud rolli {role_name}."
 
-#: app/scripts/components/events/constants.js:56
+#: app/scripts/components/events/constants.ts:56
 msgid ""
 "User {caller_full_name} has created request for experts under "
 "{customer_name} / {project_name}."
@@ -5116,7 +5116,7 @@ msgstr ""
 "Kasutaja {caller_full_name} on loonud eksperdi päringu projektis "
 "{customer_name} / {project_name}."
 
-#: app/scripts/components/events/constants.js:5
+#: app/scripts/components/events/constants.ts:5
 msgid ""
 "User {user_username} with full name {user_full_name} authenticated "
 "successfully with Facebook."
@@ -5124,7 +5124,7 @@ msgstr ""
 "Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud "
 "ennast Facebook kaudu."
 
-#: app/scripts/components/events/constants.js:4
+#: app/scripts/components/events/constants.ts:4
 msgid ""
 "User {user_username} with full name {user_full_name} authenticated "
 "successfully with Google."
@@ -5132,7 +5132,7 @@ msgstr ""
 "Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud "
 "ennast Google kaudu."
 
-#: app/scripts/components/events/constants.js:3
+#: app/scripts/components/events/constants.ts:3
 msgid ""
 "User {user_username} with full name {user_full_name} authenticated "
 "successfully with OpenID."
@@ -5140,7 +5140,7 @@ msgstr ""
 "Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud "
 "ennast OpenID kaudu."
 
-#: app/scripts/components/events/constants.js:6
+#: app/scripts/components/events/constants.ts:6
 msgid ""
 "User {user_username} with full name {user_full_name} authenticated "
 "successfully with Smart ID EE."
@@ -5148,7 +5148,7 @@ msgstr ""
 "Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud "
 "ennast Smart ID EE kaudu."
 
-#: app/scripts/components/events/constants.js:2
+#: app/scripts/components/events/constants.ts:2
 msgid ""
 "User {user_username} with full name {user_full_name} authenticated "
 "successfully with username and password."
@@ -5255,7 +5255,7 @@ msgstr "Versioon"
 #: app/scripts/components/configs/base-config.js:114
 #: app/scripts/components/configs/base-config.js:28
 #: app/scripts/components/configs/base-config.js:86
-#: app/scripts/components/dashboard/constants.js:11
+#: app/scripts/components/dashboard/constants.ts:11
 #: app/scripts/components/project/project-workspace.js:50
 #: app/scripts/components/project/routes.js:124
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js:15

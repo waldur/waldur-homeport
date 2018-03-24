@@ -1,8 +1,16 @@
 import template from './support-link.html';
 
-// @ngInject
-function SupportLinkController(IssueNavigationService) {
-  this.gotoSupport = () => IssueNavigationService.gotoDashboard();
+class SupportLinkController {
+  // @ngInject
+  constructor (IssueNavigationService) {
+    this.IssueNavigationService = IssueNavigationService;
+  }
+
+  gotoSupport() { this.IssueNavigationService.gotoDashboard(); }
+
+  get supportIsVisible() {
+    return this.IssueNavigationService.isVisible;
+  }
 }
 
 export default function supportLink() {

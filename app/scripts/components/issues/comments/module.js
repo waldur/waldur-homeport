@@ -1,13 +1,7 @@
-import issueCommentsService from './issue-comments-service';
-import issueCommentsList from './issue-comments-list';
-import issueCommentsForm from './issue-comments-form';
-import issueCommentsContainer from './issue-comments-container';
-import formatJiraMarkupFilter from './filters';
+import IssueCommentsContainer from './IssueCommentsContainer';
+import IssueCommentDeleteDialog from './IssueCommentDeleteDialog';
 
 export default module => {
-  module.service('issueCommentsService', issueCommentsService);
-  module.component('issueCommentsList', issueCommentsList);
-  module.component('issueCommentsForm', issueCommentsForm);
-  module.component('issueCommentsContainer', issueCommentsContainer);
-  module.filter('formatJiraMarkup', formatJiraMarkupFilter);
+  module.component('issueCommentsContainer', IssueCommentsContainer);
+  module.component('issueCommentDeleteDialog', IssueCommentDeleteDialog);
 };

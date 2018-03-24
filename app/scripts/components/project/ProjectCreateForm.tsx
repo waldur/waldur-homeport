@@ -49,6 +49,7 @@ export const ProjectCreateForm = props => (
       <div className="col-sm-offset-3 col-sm-5">
         <FieldError error={props.error}/>
         <SubmitButton
+          disabled={props.invalid}
           submitting={props.submitting}
           label={props.translate('Add project')}
         />

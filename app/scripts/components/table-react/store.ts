@@ -4,7 +4,8 @@ import * as actions from './actions';
 import { TableState } from './types';
 
 const INITIAL_STATE: TableState = {
-  rows: [],
+  entities: {},
+  order: [],
   loading: false,
   error: null,
   pagination: {
@@ -25,7 +26,8 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
   case actions.FETCH_LIST_DONE:
     return {
       ...state,
-      rows: action.payload.rows,
+      entities: action.payload.entities,
+      order: action.payload.order,
       pagination: {
         ...state.pagination,
         resultCount: action.payload.resultCount,
@@ -64,6 +66,34 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         currentPage: 1,
       },
     };
+
+  case actions.ENTITY_CREATE:
+    return {
+      ...state,
+      entities: {
+        ...state.entities,
+        [action.payload.uuid]: action.payload.content,
+      },
+      order: [...state.order, action.payload.uuid],
+    };
+
+  case actions.ENTITY_UPDATE:
+    return {
+      ...state,
+      entities: {
+        ...state.entities,
+        [action.payload.uuid]: action.payload.content,
+      },
+    };
+
+    case actions.ENTITY_DELETE:
+      const {[action.payload.uuid]: _, ...entities} = state.entities;
+      const index = state.order.indexOf(action.payload.uuid);
+      return {
+        ...state,
+        entities,
+        order: [...state.order.slice(0, index), ...state.order.slice(index + 1)],
+      };
 
   default:
     return state;

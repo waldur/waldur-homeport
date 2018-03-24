@@ -11,6 +11,7 @@ export const authInit = {
       this.ncUtilsFlash = ncUtilsFlash;
       this.user = {};
       this.pageTitle = coreUtils.templateFormatter(gettext('Welcome to {pageTitle}!'), {pageTitle: ENV.shortPageTitle});
+      this.save = this.save.bind(this);
     }
 
     $onInit() {
@@ -22,7 +23,7 @@ export const authInit = {
       });
     }
 
-    save({ user }) {
+    save(user) {
       return this.usersService.update(user).then(response => {
         this.usersService.currentUser = response.data;
         this.$state.go('profile.details').then(() => {

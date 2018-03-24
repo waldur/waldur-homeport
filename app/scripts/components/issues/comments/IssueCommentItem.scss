@@ -1,0 +1,60 @@
+.comment-item__controls {
+  .btn {
+    float: none;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 2px 5px 5px;
+  }
+  .btn-link {
+    &:focus {
+      color: inherit;
+    }
+  }
+}
+
+.comment-item__header {
+  position: relative;
+}
+
+.comment-item__title {
+  padding-right: 70px;
+}
+
+.comment-item__controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.comment-item__content {
+  line-height: 25px;
+
+  a {
+    max-width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: underline;
+    white-space: nowrap;
+    position: relative;
+    padding-right: 20px;
+
+    &::before {
+      content: "\F0ED";
+      font-family: FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 2px;
+    }
+  }
+
+  img {
+    width: 150px;
+    max-width: 100%;
+    cursor: pointer;
+  }
+}

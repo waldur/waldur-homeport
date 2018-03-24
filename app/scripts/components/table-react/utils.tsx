@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation } from '@waldur/i18n/translate';
 import { isVisible } from '@waldur/store/config';
+import { selectTableRows } from '@waldur/table-react/selectors';
 
 import * as actions from './actions';
 import { registerTable } from './registry';
@@ -41,6 +42,7 @@ export function connectTable(options: TableOptions) {
     const mapStateToProps = state => ({
       filterByFeature: filterColumns(state),
       ...getTableState(table)(state),
+      rows: selectTableRows(state, table),
     });
 
     const enhance = compose(
@@ -59,3 +61,22 @@ export const formatLongText = value =>
       <span className="elipsis" style={{width: 150}}>{value}</span>
     </Tooltip>
   ) : value;
+
+export const transformRows = (rows: any[]) => {
+  const entities: object = {};
+  const order: any[] = [];
+  rows.map((row, index) => {
+    entities[getId(row, index)] = row;
+    order.push(getId(row, index));
+  });
+  return { entities, order };
+};
+
+const getId = (row, index) => {
+  if (row.uuid) {
+    return row.uuid;
+  } else if (row.pk) {
+    return row.pk;
+  }
+  return index;
+};

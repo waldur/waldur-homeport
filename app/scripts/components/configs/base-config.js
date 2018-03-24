@@ -121,7 +121,6 @@ const ENV = {
     'Amazon.Instance': 'vms',
     'Azure.VirtualMachine': 'vms',
     'DigitalOcean.Droplet': 'vms',
-    'OpenStack.Instance': 'vms',
     'OpenStack.Tenant': 'private_clouds',
     'OpenStackTenant.Instance': 'vms',
     'OpenStackTenant.Volume': 'storages',
@@ -237,6 +236,9 @@ const ENV = {
   // video/* representing video files.
   // image/* representing image files.
   excludedAttachmentTypes : [],
+
+  // Ensure that customer, project and resource name contains only ASCII chars
+  enforceLatinName: true,
 };
 
 export default ENV;

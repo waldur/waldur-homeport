@@ -9,18 +9,20 @@ const authValimoDialog = {
   },
   controller: class AuthValimoDialogController {
     // @ngInject
-    constructor($scope, $rootScope, $state, authService, AuthValimoService, ncUtilsFlash) {
+    constructor($scope, $rootScope, $state, authService, AuthValimoService, ncUtilsFlash, ENV) {
       this.$scope = $scope;
       this.$rootScope = $rootScope;
       this.$state = $state;
       this.authService = authService;
       this.AuthValimoService = AuthValimoService;
       this.ncUtilsFlash = ncUtilsFlash;
+      this.ENV = ENV;
     }
 
     $onInit() {
       this.$rootScope.$broadcast('enableRequests');
       this.isAlive = true;
+      this.mobilePrefix = this.ENV.plugins.WALDUR_AUTH_VALIMO.MOBILE_PREFIX;
     }
 
     $onDestroy() {
@@ -29,7 +31,7 @@ const authValimoDialog = {
 
     submit() {
       this.isAuthenticating = true;
-      return this.AuthValimoService.login(this.phoneNumber).then(result => {
+      return this.AuthValimoService.login(this.mobilePrefix.concat(this.phoneNumber)).then(result => {
         this.challengeCode = result.message;
         this.authResultId = result.uuid;
       }).then(() => {

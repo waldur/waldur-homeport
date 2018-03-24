@@ -1,6 +1,7 @@
 export interface Attachment {
   created: string;
   file: string;
+  mime_type: string;
   file_size: number;
   thumbnail: string;
   issue: string;

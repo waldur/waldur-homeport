@@ -2,7 +2,7 @@ import userEvents from './user-events';
 import userManage from './user-manage';
 import userSidebar from './user-sidebar';
 import userDetails from './user-details';
-import { userEdit } from './user-edit';
+import userEdit from './support/UserEditContainer';
 import userDashboard from './list/UserDashboard';
 import userOrganizations from './list/CustomerPermissions';
 import userProjects from './list/ProjectPermissions';

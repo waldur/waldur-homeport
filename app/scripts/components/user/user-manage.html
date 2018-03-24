@@ -3,10 +3,6 @@
 </div>
 <div class="row wrapper p-b-xl" ng-if="!$ctrl.loading">
   <div class="col-lg-10">
-    <user-edit user="$ctrl.user"
-      errors="$ctrl.errors"
-      on-save="$ctrl.saveUser($event)"
-      on-remove="$ctrl.removeUser()">
-    </user-edit>
+    <user-edit user="$ctrl.user"></user-edit>
   </div>
 </div>

@@ -4,6 +4,7 @@ import {
   listToDict,
   getUUID,
   pick,
+  toKeyValue,
 } from './utils';
 
 describe('formatFilesize', () => {
@@ -67,5 +68,23 @@ describe('pick', () => {
     const expected = {username: 'admin', password: 'secret'};
     const picker = pick(fields);
     expect(picker((source))).toEqual(expected);
+  });
+});
+
+describe('toKeyValue', () => {
+  it('formats empty object to empty string', () => {
+    expect(toKeyValue({})).toBe('');
+  });
+
+  it('formats object to query parameter string', () => {
+    const actual = toKeyValue({release_floating_ips: false, delete_volumes: true});
+    const expected = 'release_floating_ips=false&delete_volumes=true';
+    expect(actual).toBe(expected);
+  });
+
+  it('encodes escape sequences for special characters', () => {
+    const actual = toKeyValue({title: 'Valid string?'});
+    const expected = 'title=Valid%20string%3F';
+    expect(actual).toBe(expected);
   });
 });

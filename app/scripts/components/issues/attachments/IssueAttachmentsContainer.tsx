@@ -5,12 +5,13 @@ import { compose } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { IssueReload } from '@waldur/issues/IssueReload';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as actions from './actions';
 import './IssueAttachmentsContainer.scss';
 import { IssueAttachmentsList } from './IssueAttachmentsList';
-import { getItems, getUploading, getLoading } from './selectors';
+import { getAttachments, getUploading, getIsLoading } from './selectors';
 import { Attachment } from './types';
 
 interface PureIssueAttachmentsContainerProps extends TranslateProps {
@@ -43,7 +44,7 @@ export class PureIssueAttachmentsContainer extends React.Component<PureIssueAtta
   openDownloadModal = () => this.dropzoneNode.open();
 
   render() {
-    const { attachments, loading, uploading, translate } = this.props;
+    const { attachments, loading, uploading, issue, translate } = this.props;
     const { dropzoneActive } = this.state;
 
     return (
@@ -63,8 +64,11 @@ export class PureIssueAttachmentsContainer extends React.Component<PureIssueAtta
           </div>
         }
         <div className="ibox">
-          <div className="ibox-title attachments__title">
+          <div className="ibox-title content-between-center">
             <h4>{translate('Attachments')}</h4>
+            <div>
+              <IssueReload issueUrl={issue.url} />
+            </div>
           </div>
           <div className="ibox-content">
             {loading ?
@@ -88,8 +92,8 @@ export class PureIssueAttachmentsContainer extends React.Component<PureIssueAtta
 }
 
 const mapStateToProps = state => ({
-  attachments: getItems(state),
-  loading: getLoading(state),
+  attachments: getAttachments(state),
+  loading: getIsLoading(state),
   uploading: getUploading(state),
 });
 
