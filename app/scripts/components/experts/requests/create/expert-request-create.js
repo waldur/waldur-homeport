@@ -42,7 +42,7 @@ const expertRequestCreate = {
               required: true,
               label: gettext('Name'),
               form_text: gettext('This name will be visible in accounting data.'),
-              max_length: 150
+              maxlength: 150
             },
             objectives: {
               type: 'html_text',

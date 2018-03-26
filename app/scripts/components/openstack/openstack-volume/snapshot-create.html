@@ -11,8 +11,17 @@
       <label class="control-label" for="snapshotName">
         <span translate>Snapshot name</span>:
       </label>
-      <input class="form-control" id="snapshotName" type="text" ng-model="snapshot.name" required>
+      <input
+        class="form-control"
+        id="snapshotName"
+        type="text"
+        ng-model="snapshot.name"
+        ng-pattern="pattern"
+        required>
       <p class="text-danger" ng-if="errors.name" ng-bind="errors.name"></p>
+      <p class="text-danger" ng-if="SnapshotForm.$error.pattern">
+        <span translate>This field contains invalid characters.</span>
+      </p>
     </div>
 
     <div class="form-group">

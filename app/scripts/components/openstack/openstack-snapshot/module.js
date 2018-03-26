@@ -5,6 +5,7 @@ import restoredVolumesList from './openstack-snapshot-restored-volumes-list';
 import importModule from './import/module';
 import { OpenStackSnapshotSummary } from './OpenStackSnapshotSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
+import { latinName } from '@waldur/resource/actions/constants';
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.Snapshot', OpenStackSnapshotSummary);
@@ -34,6 +35,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: gettext('Snapshot has been updated.'),
         fields: {
+          name: latinName,
           kept_until: {
             help_text: gettext('Guaranteed time of snapshot retention. If null - keep forever.'),
             label: gettext('Kept until'),

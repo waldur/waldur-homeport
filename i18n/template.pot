@@ -5521,6 +5521,7 @@ msgid "There's no pricing package for the batch processing provider."
 msgstr ""
 
 #: app/scripts/components/form/appstore-field-string.html
+#: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 msgid "This field contains invalid characters."
 msgstr ""
 
