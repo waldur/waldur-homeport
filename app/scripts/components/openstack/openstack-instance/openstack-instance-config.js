@@ -1,4 +1,4 @@
-import { asciiName } from '@waldur/resource/actions/constants';
+import { latinName } from '@waldur/resource/actions/constants';
 
 export default {
   order: [
@@ -15,7 +15,7 @@ export default {
   ],
   options: {
     name: {
-      ...asciiName,
+      ...latinName,
       label: gettext('VM name'),
     },
     image: {

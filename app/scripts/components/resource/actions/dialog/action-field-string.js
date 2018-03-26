@@ -1,9 +1,8 @@
-import template from './action-field-string.html';
-
 export default {
-  template,
+  template: '<appstore-field-string model="$ctrl.model" field="$ctrl.field" form="$ctrl.form"/>',
   bindings: {
     model: '<',
-    field: '<'
+    field: '<',
+    form: '<',
   },
 };

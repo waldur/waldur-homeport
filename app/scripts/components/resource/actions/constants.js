@@ -21,22 +21,22 @@ export const defaultEditAction = {
   fields: {
     name: {
       label: gettext('Name'),
-      max_length: 150,
+      maxlength: 150,
       required: true,
       type: 'string'
     },
     description: {
       label: gettext('Description'),
-      max_length: 500,
+      maxlength: 500,
       required: false,
       type: 'text'
     }
   }
 };
 
-export const asciiName = {
+export const latinName = {
   label: gettext('Name'),
-  max_length: 150,
+  maxlength: 150,
   required: true,
   type: 'string',
   init: field => {

@@ -9,7 +9,7 @@ import openstackVolumesList from './openstack-volumes-list';
 import importVolumes from './import/module';
 import { OpenStackVolumeSummary } from './OpenStackVolumeSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
-import { asciiName } from '@waldur/resource/actions/constants';
+import { latinName } from '@waldur/resource/actions/constants';
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.Volume', OpenStackVolumeSummary);
@@ -51,7 +51,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: gettext('Volume has been updated.'),
         fields: {
-          name: asciiName
+          name: latinName
         },
       }),
       pull: {
@@ -67,7 +67,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         iconClass: 'fa fa-plus',
         component: 'snapshotCreateDialog',
         fields: {
-          name: asciiName,
+          name: latinName,
           kept_until: {
             help_text: gettext('Guaranteed time of snapshot retention. If null - keep forever.'),
             label: gettext('Kept until'),

@@ -1,5 +1,5 @@
 import { $filter } from '@waldur/core/services';
-import { asciiName } from '@waldur/resource/actions/constants';
+import { latinName } from '@waldur/resource/actions/constants';
 
 import { flavorFormatter, internalIpFormatter } from './openstack-instance-config';
 
@@ -25,7 +25,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: gettext('Instance has been updated.'),
         fields: {
-          name: asciiName,
+          name: latinName,
         }
       }),
       pull: {

@@ -1,4 +1,4 @@
-import { asciiName } from '@waldur/resource/actions/constants';
+import { latinName } from '@waldur/resource/actions/constants';
 
 // @ngInject
 export default {
@@ -9,7 +9,7 @@ export default {
   ],
   options: {
     name: {
-      ...asciiName,
+      ...latinName,
       label: gettext('Volume name'),
     },
     size: {

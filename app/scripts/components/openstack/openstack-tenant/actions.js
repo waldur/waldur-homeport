@@ -1,4 +1,4 @@
-import { asciiName } from '@waldur/resource/actions/constants';
+import { latinName } from '@waldur/resource/actions/constants';
 
 // @ngInject
 export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION, ENV) {
@@ -23,7 +23,7 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         successMessage: gettext('Tenant has been updated.'),
         isVisible: (resource, user) => userCanModifyTenant(user),
         fields: {
-          name: asciiName
+          name: latinName
         }
       }),
       pull: {

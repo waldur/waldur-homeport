@@ -1,4 +1,4 @@
-import { asciiName } from '@waldur/resource/actions/constants';
+import { latinName } from '@waldur/resource/actions/constants';
 
 import { templateParser } from '../utils';
 import {
@@ -20,7 +20,7 @@ export default {
   ],
   options: {
     name: {
-      ...asciiName,
+      ...latinName,
       label: gettext('Tenant name'),
       form_text: gettext('This name will be visible in accounting data.'),
     },
