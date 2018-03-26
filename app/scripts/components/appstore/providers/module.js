@@ -1,7 +1,7 @@
 import AppstoreProvidersService from './appstore-providers-service';
 import appstoreProviders from './appstore-providers';
 import appstoreProvidersEmptyMessage from './appstore-providers-empty-message';
-import usageMapView from './support/UsageMapView';
+import usageMapView from './support/UsageMapViewContainer';
 
 export default module => {
   module.service('AppstoreProvidersService', AppstoreProvidersService);

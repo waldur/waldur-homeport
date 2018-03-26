@@ -11,13 +11,22 @@ interface UsageMapProps {
   zoom?: number;
   id: string;
   data: any;
+  serviceProviderSelect: (uuid: string) => void;
 }
 
-export default class UsageMap extends React.Component<UsageMapProps, any> {
+interface UsageMapState {
+  map: any;
+}
+
+export default class UsageMap extends React.Component<UsageMapProps, UsageMapState> {
+  map: any;
 
   componentDidMount() {
-    const { center, zoom, id, data } = this.props;
+    this.map = L.map(this.props.id);
+  }
 
+  updateMap() {
+    const { center, zoom, data } = this.props;
     const bounds = L.latLngBounds(center);
 
     for (const key in data.service_providers) {
@@ -38,12 +47,11 @@ export default class UsageMap extends React.Component<UsageMapProps, any> {
       }
     }
 
-    const map = L.map(id);
-    map.setView(center, zoom);
+    this.map.setView(center, zoom);
 
-    map.fitBounds(bounds);
+    this.map.fitBounds(bounds);
 
-    basemapLayer('Gray').addTo(map);
+    basemapLayer('Gray').addTo(this.map);
 
     const geoJsonFeatureCollection = {
       type: 'FeatureCollection',
@@ -78,16 +86,21 @@ export default class UsageMap extends React.Component<UsageMapProps, any> {
       animationEasingFamily: 'Cubic',
       animationEasingType: 'In',
       animationDuration: 2000,
-    }).addTo(map);
+    }).addTo(this.map);
 
     oneToManyFlowmapLayer.on('click', e => {
       if (e.sharedOriginFeatures.length) {
+        this.props.serviceProviderSelect(e.layer.feature.properties.provider_uuid);
         oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
       }
       if (e.sharedDestinationFeatures.length) {
         oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedDestinationFeatures, 'SELECTION_NEW');
       }
     });
+  }
+
+  componentDidUpdate() {
+    this.updateMap();
   }
 
   render() {
