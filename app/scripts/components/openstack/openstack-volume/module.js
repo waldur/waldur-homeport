@@ -9,7 +9,7 @@ import openstackVolumesList from './openstack-volumes-list';
 import importVolumes from './import/module';
 import { OpenStackVolumeSummary } from './OpenStackVolumeSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
-import { asciiName } from '@waldur/resource/constants';
+import { asciiName } from '@waldur/resource/actions/constants';
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.Volume', OpenStackVolumeSummary);

@@ -1,4 +1,4 @@
-import { asciiName } from '@waldur/resource/constants';
+import { asciiName } from '@waldur/resource/actions/constants';
 
 import { templateParser } from '../utils';
 import {
