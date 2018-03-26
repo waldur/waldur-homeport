@@ -171,7 +171,7 @@ export class VirtualEnvironmentComponent<R extends ManagementRequest<R, RSP>, RS
               {this.props.jupyterHubMode &&
               <>
                 <div className="col-xs-1 same-padding-as-control-label">
-                  {translate('Global')}
+                  {translate('Available as Jupyter kernel?')}
                 </div>
                 <div className="col-xs-1">
                   <Field name={`${virtualEnvironment}.jupyterHubGlobal`}

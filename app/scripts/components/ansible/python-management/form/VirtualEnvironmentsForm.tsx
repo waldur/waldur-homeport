@@ -23,7 +23,9 @@ export class VirtualEnvironmentsForm<R extends ManagementRequest<R, RSP>, RSP ex
   render() {
     return (
       <div className="form-group">
-        <label className="control-label col-sm-2">{translate('Virtual environments')}</label>
+        <label className="control-label col-sm-2">
+          {this.props.jupyterHubMode ? translate('Jupyter kernels (Python virtual environments)') : translate('Virtual environments')}
+        </label>
         {!this.props.jupyterHubMode &&
         <div className="row form-group">
           <div className="col-sm-2">

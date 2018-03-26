@@ -543,6 +543,10 @@ msgstr ""
 msgid "Availability zone"
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironment.tsx
+msgid "Available as Jupyter kernel?"
+msgstr ""
+
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
 msgid "Available quota usage: {usage}"
 msgstr ""
@@ -2038,10 +2042,6 @@ msgstr ""
 msgid "GitLab host URL"
 msgstr ""
 
-#: app/scripts/components/ansible/python-management/form/VirtualEnvironment.tsx
-msgid "Global"
-msgstr ""
-
 #: app/scripts/components/ansible/python-management/details/PythonManagementActionHistoryRow.tsx
 msgid "Global request"
 msgstr ""
@@ -2572,6 +2572,10 @@ msgstr ""
 #: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Job position"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
+msgid "Jupyter kernels (Python virtual environments)"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/routes.js
