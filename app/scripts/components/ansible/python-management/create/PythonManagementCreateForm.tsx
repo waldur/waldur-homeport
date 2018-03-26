@@ -27,22 +27,27 @@ export class PythonManagementCreateForm extends React.Component<PythonManagement
 
   render() {
     const waldurPublicKeyHelp = (
-      <>
-        Ensure that the following public key is present in authorized_keys file on the selected instance
-        <br/>
-        <a onClick={this.unwrapOrCollapsePublicKeyHelp}>Help</a>
-        {this.state.publicKeyHelpCollaped ? null :
-          <>
-            <br/>
-            Ensure that the following public key is present in /home/SYSTEM_DEFAULT_USER/.ssh/authorized_keys file.
-            <br/>
-            If not, append it there. If file is not present, create new file with the key.
-            <pre style={{whiteSpace: 'pre-wrap'}}>
-              {this.props.waldurPublicKey}
-            </pre>
-          </>
-        }
-      </>
+      <ul>
+        <li>
+          Target virtual machine should have 'SSH' security group assigned (to allow SSH connections).
+        </li>
+        <li>
+          Ensure that the following public key is present in authorized_keys file on the selected instance
+          <br/>
+          <a onClick={this.unwrapOrCollapsePublicKeyHelp}>Help</a>
+          {this.state.publicKeyHelpCollaped ? null :
+            <>
+              <br/>
+              Ensure that the following public key is present in /home/TARGET_SYSTEM_USER/.ssh/authorized_keys file.
+              <br/>
+              If not, append it there. If file is not present, create new file with the key.
+              <pre style={{whiteSpace: 'pre-wrap'}}>
+                {this.props.waldurPublicKey}
+              </pre>
+            </>
+          }
+        </li>
+      </ul>
     );
     return (
       <div className="wrapper wrapper-content">
