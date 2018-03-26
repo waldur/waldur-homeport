@@ -1,4 +1,6 @@
 import { $filter } from '@waldur/core/services';
+import { asciiName } from '@waldur/resource/actions/constants';
+
 import { flavorFormatter, internalIpFormatter } from './openstack-instance-config';
 
 // @ngInject
@@ -21,7 +23,10 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
     ],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: gettext('Instance has been updated.')
+        successMessage: gettext('Instance has been updated.'),
+        fields: {
+          name: asciiName,
+        }
       }),
       pull: {
         title: gettext('Synchronise')

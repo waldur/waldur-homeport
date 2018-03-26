@@ -1,3 +1,6 @@
+import { ENV } from '@waldur/core/services';
+import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
+
 export const defaultFieldOptions = {
   datetime: {
     format: 'dd.MM.yyyy',
@@ -29,4 +32,14 @@ export const defaultEditAction = {
       type: 'text'
     }
   }
+};
+
+export const asciiName = {
+  label: gettext('Name'),
+  max_length: 150,
+  required: true,
+  type: 'string',
+  init: field => {
+    field.pattern = ENV.enforceLatinName && LATIN_NAME_PATTERN;
+  },
 };

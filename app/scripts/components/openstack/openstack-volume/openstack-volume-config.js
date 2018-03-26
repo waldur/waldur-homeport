@@ -1,3 +1,5 @@
+import { asciiName } from '@waldur/resource/constants';
+
 // @ngInject
 export default {
   order: [
@@ -7,10 +9,8 @@ export default {
   ],
   options: {
     name: {
+      ...asciiName,
       label: gettext('Volume name'),
-      type: 'string',
-      required: true,
-      maxlength: 150
     },
     size: {
       type: 'integer',
