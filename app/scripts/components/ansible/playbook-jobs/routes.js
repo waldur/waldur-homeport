@@ -32,7 +32,7 @@ export default function ansibleRoutes($stateProvider) {
 
     .state('project.resources.ansible.list', {
       url: '',
-      template: '<ansible-jobs-list/>',
+      template: '<application-list/>',
       data: {
         pageTitle: gettext('Applications'),
         feature: 'ansible'

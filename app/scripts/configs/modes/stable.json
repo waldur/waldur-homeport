@@ -26,7 +26,8 @@
     "connected_issues",
     "jira",
     "experts.preview_contract",
-    "pythonManagement"
+    "pythonManagement",
+    "jupyterHubManagement"
   ],
   "featuresVisible": false,
   "appStoreCategories": [

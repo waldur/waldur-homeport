@@ -1,9 +1,9 @@
-import {APPSTORE_CATEGORY, ICON_CLASS} from '../constants';
+import { APPSTORE_CATEGORY, ICON_CLASS } from '../constants';
 
 // @ngInject
 export default function registerAppstoreCategory(features, $q, AppstoreCategoriesService) {
   AppstoreCategoriesService.registerCategory(() => {
-    if (!features.isVisible('pythonManagement')) {
+    if (!features.isVisible('jupyterHubManagement')) {
       return $q.when([]);
     }
     return {
