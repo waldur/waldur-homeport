@@ -4812,6 +4812,10 @@ msgstr ""
 msgid "Select OpenStack tenant..."
 msgstr ""
 
+#: app/scripts/components/user/keys/appstore-field-select-ssh-key.html
+msgid "Select SSH public key..."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Select Virtual Private Cloud package"
 msgstr ""
@@ -5429,6 +5433,10 @@ msgstr ""
 msgid "There are no OpenStack tenants yet."
 msgstr ""
 
+#: app/scripts/components/user/keys/appstore-field-select-ssh-key.html
+msgid "There are no SSH public keys yet."
+msgstr ""
+
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 #: app/scripts/components/resource/actions/action-button-resource.html
 msgid "There are no actions."
@@ -5789,6 +5797,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/appstore-field-select-openstack-tenant.js
 msgid "Unable to get list of OpenStack tenants."
+msgstr ""
+
+#: app/scripts/components/user/keys/appstore-field-select-ssh-key.js
+msgid "Unable to get list of SSH public keys."
 msgstr ""
 
 #: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
