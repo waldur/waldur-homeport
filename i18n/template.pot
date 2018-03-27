@@ -393,7 +393,7 @@ msgstr ""
 msgid "Application creation has been scheduled."
 msgstr ""
 
-#: app/scripts/components/ansible/routes.js
+#: app/scripts/components/ansible/playbook-jobs/routes.js
 msgid "Application details"
 msgstr ""
 
@@ -409,9 +409,9 @@ msgstr ""
 #: app/scripts/components/ansible/constants.js
 #: app/scripts/components/ansible/jupyter-hub-management/routes.js
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-details.js
+#: app/scripts/components/ansible/playbook-jobs/routes.js
+#: app/scripts/components/ansible/playbook-jobs/sidebar.js
 #: app/scripts/components/ansible/python-management/routes.js
-#: app/scripts/components/ansible/routes.js
-#: app/scripts/components/ansible/sidebar.js
 #: app/scripts/components/appstore/routes.js
 #: app/scripts/components/dashboard/base-quotas.ts
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
@@ -561,10 +561,6 @@ msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
 msgid "Azure region where to provision resources (default: \"Central US\")"
-msgstr ""
-
-#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
-msgid "Azure username should not contain @domain.com part. All spaces or dots should be replaced with underscores: firstname_lastname"
 msgstr ""
 
 #: app/scripts/components/navigation/header/site-header.html
@@ -1105,6 +1101,14 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+msgid "Create JupyterHub management"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "Create Python management"
+msgstr ""
+
 #: app/scripts/components/resource/actions/create-vm-button.html
 msgid "Create VM"
 msgstr ""
@@ -1125,7 +1129,7 @@ msgstr ""
 msgid "Create an allocation for computations in batch resources."
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-jobs-list.js
+#: app/scripts/components/ansible/application-list.js
 msgid "Create application"
 msgstr ""
 
@@ -1251,7 +1255,7 @@ msgstr ""
 msgid "Creating snapshot schedule"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-jobs-list.js
+#: app/scripts/components/ansible/application-list.js
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
 #: app/scripts/components/offering/offerings-list.js
@@ -2602,6 +2606,10 @@ msgstr ""
 msgid "JupyterHub management details"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "JupyterHub runtime logs location"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js
 msgid "Keep until"
 msgstr ""
@@ -2921,7 +2929,7 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-jobs-list.js
+#: app/scripts/components/ansible/application-list.js
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
@@ -3078,7 +3086,7 @@ msgstr ""
 msgid "No allocations yet."
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-jobs-list.js
+#: app/scripts/components/ansible/application-list.js
 msgid "No applications found matching filter."
 msgstr ""
 
@@ -3795,7 +3803,7 @@ msgstr ""
 msgid "Plans"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-jobs-list.js
+#: app/scripts/components/ansible/application-list.js
 msgid "Playbook"
 msgstr ""
 
@@ -3873,7 +3881,7 @@ msgstr ""
 msgid "Please specify {fields}."
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-jobs-list.js
+#: app/scripts/components/ansible/application-list.js
 msgid "Please wait until provisioning is completed."
 msgstr ""
 
@@ -4341,8 +4349,6 @@ msgstr ""
 msgid "Python environment has been created."
 msgstr ""
 
-#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 #: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Python management details"
 msgstr ""
@@ -4548,7 +4554,7 @@ msgstr ""
 msgid "Remove JupyterHub user"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-jobs-list.js
+#: app/scripts/components/ansible/application-list.js
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Remove application"
 msgstr ""
@@ -5328,7 +5334,7 @@ msgstr ""
 msgid "Starting"
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-jobs-list.js
+#: app/scripts/components/ansible/application-list.js
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
@@ -5634,7 +5640,7 @@ msgstr ""
 msgid "There are no actions."
 msgstr ""
 
-#: app/scripts/components/ansible/ansible-jobs-list.js
+#: app/scripts/components/ansible/application-list.js
 msgid "There are no applications yet."
 msgstr ""
 
@@ -6547,7 +6553,7 @@ msgid "Welcome to {pageTitle}!"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "Where to get required values from?"
+msgid "Where to get the required values from?"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
@@ -6754,6 +6760,10 @@ msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-edit.js
 msgid "Your FreeIPA profile has been disabled."
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
+msgid "Your Microsoft Account full username. It should not contain @domain.com part. All spaces or dots should be replaced with underscores: firstname_lastname"
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html

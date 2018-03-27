@@ -24,7 +24,7 @@ export const JupyterOAuthForm = (props: JupyterOAuthFormProps) => (
     {props.jupyterHubManagement.authenticationConfig.authenticationMethod === JupyterHubAuthenticationMethod.OAUTH &&
     <FormContainer
       submitting={props.submitting}
-      labelClass="col-sm-3"
+      labelClass="col-sm-2"
       controlClass="col-sm-5">
 
       <RadioButtonField
@@ -40,7 +40,7 @@ export const JupyterOAuthForm = (props: JupyterOAuthFormProps) => (
         <label className="control-label col-sm-3">{translate('Additional information')}</label>
         <div className="same-padding-as-control-label col-sm-5">
           <a href="https://github.com/jupyterhub/oauthenticator"
-             target="_blank">{translate('Where to get required values from?')}</a>
+             target="_blank">{translate('Where to get the required values from?')}</a>
           <br/>
           {props.jupyterHubManagement.authenticationConfig.jupyterHubOAuthConfig.type === JupyterHubOAuthType.AZURE &&
           <>

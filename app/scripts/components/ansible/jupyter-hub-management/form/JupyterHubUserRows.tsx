@@ -61,14 +61,16 @@ export class JupyterHubUserRowsComponent extends React.Component<JupyterHubUserR
                 {this.props.jupyterHubManagement.authenticationConfig.jupyterHubOAuthConfig
                 && this.props.jupyterHubManagement.authenticationConfig.jupyterHubOAuthConfig.type === JupyterHubOAuthType.AZURE &&
                 <p className="help-block m-b-none text-muted">
-                  {translate('Azure username should not contain @domain.com part. All spaces or dots should be replaced with underscores: firstname_lastname')}
+                  {translate(
+                    'Your Microsoft Account full username. It should not contain @domain.com part. ' +
+                    'All spaces or dots should be replaced with underscores: firstname_lastname')}
                 </p>}
               </div>
               {this.props.passwordEnabled &&
               <div className="col-xs-4">
                 <Field
                   name={`${jupyterHubUser}.password`}
-                  type="text"
+                  type="password"
                   placeholder={translate('Password')}
                   validate={this.passwordValidation}
                   disabled={this.props.isGlobalRequestRunning}

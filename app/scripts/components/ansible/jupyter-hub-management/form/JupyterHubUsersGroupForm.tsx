@@ -22,7 +22,7 @@ export interface JupyterHubUsersGroupProps {
 
 export const JupyterHubUsersGroupForm = (props: JupyterHubUsersGroupProps) => (
   <div className="form-group">
-    <label className="control-label col-sm-3">{translate(props.label)}</label>
+    <label className="control-label col-sm-2">{translate(props.label)}</label>
     <div className="row">
       <div className="col-sm-5">
         {props.description && <p className="help-block m-b-none text-muted">{translate(props.description)}</p>}

@@ -53,6 +53,7 @@ export function* handleCreateJupyterHubManagement(action) {
     const project = yield select(getProject);
     const response = yield call(api.createJupyterHubManagement, action.payload);
     const createdJupyterHubManagement = response.data;
+    yield put(jupyterHubManagementErred());
     yield call(api.gotoJupyterHubManagementDetails, createdJupyterHubManagement, project);
     yield put(createJupyterHubManagement.success());
     yield put(showSuccess(successMessage));

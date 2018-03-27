@@ -64,6 +64,12 @@ export class JupyterHubManagementDetailsForm extends React.Component<JupyterHubM
                             : translate('Virtual machine has no floating ips assigned!')}
                         </div>
                       </div>
+                      <div className="form-group">
+                        <label className="control-label col-sm-2">{translate('JupyterHub runtime logs location')}</label>
+                        <div className="same-padding-as-control-label">
+                          /var/log/jupyterhub/jupyterhub.log
+                        </div>
+                      </div>
                       <StringField
                         name="sessionTimeToLiveHours"
                         label={this.props.translate('Inactive notebook instance time to live')}

@@ -55,7 +55,7 @@ export class JupyterHubManagementCreateForm extends React.Component<JupyterHubMa
             <div className="col-md-6">
               <div>
                 <h2 className="no-margins">
-                  {translate('Python management details')}
+                  {translate('Create JupyterHub management')}
                 </h2>
               </div>
             </div>

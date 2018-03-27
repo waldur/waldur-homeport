@@ -56,7 +56,7 @@ export class PythonManagementCreateForm extends React.Component<PythonManagement
             <div className="col-md-6">
               <div>
                 <h2 className="no-margins">
-                  {translate('Python management details')}
+                  {translate('Create Python management')}
                 </h2>
               </div>
             </div>

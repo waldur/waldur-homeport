@@ -1,4 +1,4 @@
-import {APPSTORE_CATEGORY} from './constants';
+import {APPSTORE_CATEGORY} from '../constants';
 
 // @ngInject
 export default function ansibleRoutes($stateProvider) {

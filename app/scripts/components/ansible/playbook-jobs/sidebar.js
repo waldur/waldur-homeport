@@ -1,4 +1,4 @@
-import { ICON_CLASS, FEATURE } from './constants';
+import {FEATURE, ICON_CLASS} from '../constants';
 
 // @ngInject
 export default function registerSidebarExtension(SidebarExtensionService) {
