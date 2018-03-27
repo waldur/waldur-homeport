@@ -2,7 +2,7 @@ import { ManagementRequestState } from '@waldur/ansible/common/types/ManagementR
 
 type PythonManagementRequestStateReadabilityMap = {[key in ManagementRequestState]: string};
 
-export const STATE_READABLE_TEXT_MAPPING: PythonManagementRequestStateReadabilityMap = Object.freeze({
+export const STATE_READABLE_TEXT_MAPPING: PythonManagementRequestStateReadabilityMap = {
   [ManagementRequestState.OK]: 'OK',
   [ManagementRequestState.ERRED]: 'Erred',
   [ManagementRequestState.CREATION_SCHEDULED]: 'Execution Scheduled',
@@ -12,4 +12,4 @@ export const STATE_READABLE_TEXT_MAPPING: PythonManagementRequestStateReadabilit
   [ManagementRequestState.UPDATING]: 'Updating',
   [ManagementRequestState.DELETION_SCHEDULED]: 'Deletion Scheduled',
   [ManagementRequestState.DELETING]: 'Deleting',
-});
+};

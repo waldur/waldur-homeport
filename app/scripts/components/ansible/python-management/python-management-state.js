@@ -1,16 +1,16 @@
-const LABEL_CLASSES = Object.freeze({
+const LABEL_CLASSES = {
   Scheduled: 'progress-bar-striped active',
   Executing: 'progress-bar-striped active',
   Erred: 'progress-bar-danger',
   OK: ' '
-});
+};
 
-const STATE_READABLE_TEXT_MAPPING = Object.freeze({
+const STATE_READABLE_TEXT_MAPPING = {
   OK: 'OK',
   Erred: 'Erred',
   'Creation Scheduled': 'Execution Scheduled',
   Creating: 'Executing',
-});
+};
 
 const pythonManagementState = {
   template: `

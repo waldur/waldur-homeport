@@ -52,10 +52,10 @@ class CommonStateIndicatorBuilder {
     };
   }
 
-  REQUEST_STATE_STATE_INDICATOR_MAPPER: PythonManagementRequestStateIndicatorBuilderMap = Object.freeze({
+  REQUEST_STATE_STATE_INDICATOR_MAPPER: PythonManagementRequestStateIndicatorBuilderMap = {
     [ManagementRequestState.OK]: this.buildOkStateIndicator,
     [ManagementRequestState.ERRED]: this.buildErredStateIndicator,
-  });
+  };
 }
 
 export const commonStateIndicatorBuilder = new CommonStateIndicatorBuilder();

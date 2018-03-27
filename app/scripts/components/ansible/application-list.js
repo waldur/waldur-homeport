@@ -1,13 +1,13 @@
-import {APPLICAION_TYPE, APPSTORE_CATEGORY} from './constants';
+import { APPLICAION_TYPE, APPSTORE_CATEGORY } from './constants';
 
-const ansibleJobsList = {
+const applicationList = {
   templateUrl: 'views/partials/filtered-list.html',
   controllerAs: 'ListController',
-  controller: AnsibleJobsListController,
+  controller: ApplicationListController,
 };
 
 // @ngInject
-function AnsibleJobsListController(
+function ApplicationListController(
   baseControllerListClass,
   $q,
   $state,
@@ -160,9 +160,8 @@ function AnsibleJobsListController(
         return APPLICAION_TYPE.JUPYTER_HUB_MANAGEMENT;
       }
     }
-
   });
   controllerScope.__proto__ = new Controller();
 }
 
-export default ansibleJobsList;
+export default applicationList;
