@@ -1,19 +1,20 @@
+import * as React from 'react';
+import { Field } from 'redux-form';
+import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
+
 import { JupyterHubUsersGroupProps } from '@waldur/ansible/jupyter-hub-management/form/JupyterHubUsersGroupForm';
 import { JupyterHubOAuthType } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubOAuthType';
 import { JupyterHubUser } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUser';
 import { JupyterHubUserAdminMode } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUserAdminMode';
 import { JupyterHubUsersHolder } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUsersHolder';
 import {
-  isNotBlank,
-  validateJupyterHubUserPassword,
-  validateJupyterHubUserUsernameFormat
+isNotBlank,
+validateJupyterHubUserPassword,
+validateJupyterHubUserUsernameFormat
 } from '@waldur/ansible/jupyter-hub-management/validation';
 import '@waldur/ansible/python-management/styles/AnsibleApplications.scss';
 import { FieldError } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
-import * as React from 'react';
-import { Field } from 'redux-form';
-import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
 
 interface JupyterHubUserRowsComponentProps extends JupyterHubUsersGroupProps, WrappedFieldArrayProps<any> {
 }
