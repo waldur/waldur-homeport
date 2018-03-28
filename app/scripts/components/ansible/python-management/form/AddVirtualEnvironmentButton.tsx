@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import '@waldur/ansible/common/styles/AnsibleApplications.scss';
 import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
 import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
 import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/common/types/VirtualEnvAndRequestsContainer';

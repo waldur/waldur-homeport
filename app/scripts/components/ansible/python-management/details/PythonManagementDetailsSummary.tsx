@@ -73,7 +73,7 @@ export const PythonManagementDetailsSummary = (props: PythonManagementDetailsPro
                       <label className="control-label col-sm-2">{translate('Virtual environments root directory')}</label>
                       <div className="same-padding-as-control-label">
                         {props.pythonManagement.virtualEnvironmentsDirectory}
-                        <span className="fa fa-exclamation-triangle"
+                        <span className="fa fa-info-circle"
                               style={{marginLeft: '10px' }}
                               title={translate('Located in home directory of the specified system user.')}/>
                       </div>

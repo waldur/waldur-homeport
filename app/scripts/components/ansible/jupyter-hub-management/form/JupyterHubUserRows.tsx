@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
 
+import '@waldur/ansible/common/styles/AnsibleApplications.scss';
 import { JupyterHubUsersHolder } from '@waldur/ansible/common/types/JupyterHubUsersHolder';
 import { JupyterHubUsersGroupProps } from '@waldur/ansible/jupyter-hub-management/form/JupyterHubUsersGroupForm';
 import { JupyterHubOAuthType } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubOAuthType';
