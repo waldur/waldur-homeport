@@ -1,18 +1,15 @@
-import { commonStateIndicatorBuilder } from '@waldur/ansible/python-management/state-builder/StateIndicatorBuilder';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
-import { ResourceStateIndicator } from '@waldur/resource/state/ResourceState';
 import * as React from 'react';
 
-interface ManagementStateProps<R extends ManagementRequestStateTypePair<R>> {
-  requestsStates: R[];
+import { commonStateIndicatorBuilder } from '@waldur/ansible/python-management/state-builder/StateIndicatorBuilder';
+import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
+import { ResourceStateIndicator } from '@waldur/resource/state/ResourceState';
+
+interface ManagementStateProps {
+  managementState: ManagementRequestState;
 }
 
-export const PureManagementStatesIndicator = <R extends ManagementRequestStateTypePair<R>>(props: ManagementStateProps<R>) => {
+export const PureManagementStatesIndicator = (props: ManagementStateProps) => {
   return (
-      <>
-        {props.requestsStates.map((state, index) =>
-          <ResourceStateIndicator {...commonStateIndicatorBuilder.buildStateIndicator(state)} key={index}/>
-        )}
-      </>
+        <ResourceStateIndicator {...commonStateIndicatorBuilder.buildStateIndicator(props.managementState)}/>
   );
 };

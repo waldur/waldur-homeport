@@ -2,10 +2,8 @@ import { Instance } from '@waldur/ansible/python-management/types/Instance';
 import { Library } from '@waldur/ansible/python-management/types/Library';
 import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
 import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
 import { PythonManagementFormData } from '@waldur/ansible/python-management/types/PythonManagementFormData';
 import { PythonManagementRequest } from '@waldur/ansible/python-management/types/PythonManagementRequest';
-import { PythonManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/PythonManagementRequestStateTypePair';
 import { PythonManagementRequestType } from '@waldur/ansible/python-management/types/PythonManagementRequestType';
 import { VirtualEnvironment } from '@waldur/ansible/python-management/types/VirtualEnvironment';
 
@@ -42,17 +40,11 @@ export function buildPythonManagementFormData(serverPayload, instance?): PythonM
   if (instance) {
     formData.instance = buildInstance(instance);
   }
-  formData.requestsStateTypePairs = pythonManagementPayload.requests_states.map(state => buildRequestsStatesStateTypePairs(state));
+  formData.managementState = pythonManagementPayload.state as ManagementRequestState;
   formData.requests = buildPythonManagementRequestsFull(serverPayload.requests);
   formData.pythonVersion = pythonManagementPayload.python_version;
   formData.systemUser = pythonManagementPayload.system_user;
   return formData;
-}
-
-export function buildRequestsStatesStateTypePairs(stateServerPayload): PythonManagementRequestStateTypePair {
-  return new PythonManagementRequestStateTypePair(
-    stateServerPayload.state as ManagementRequestState,
-    stateServerPayload.request_type as PythonManagementRequestType);
 }
 
 export function buildInstance(instanceServerPayload) {
@@ -94,7 +86,7 @@ export function buildPythonManagementRequestFull(requestServerPayload: any): Pyt
   return result;
 }
 
-export function fillCommonManagementRequestFields<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>>(
+export function fillCommonManagementRequestFields<R extends ManagementRequest<R>>(
   requestServerPayload: any, targetRequest: R): void {
   targetRequest.created = new Date(requestServerPayload.created);
   targetRequest.uuid = requestServerPayload.uuid;

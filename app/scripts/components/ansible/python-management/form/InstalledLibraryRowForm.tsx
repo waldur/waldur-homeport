@@ -1,28 +1,28 @@
-import { autocompleteLibraryName, findLibraryVersions } from '@waldur/ansible/python-management/api';
-import { InstalledPackagesProps } from '@waldur/ansible/python-management/form/InstalledLibrariesForm';
-import {
-  isVirtualEnvironmentNotEditable,
-  VirtualEnvironmentNotEditableDs
-} from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
-import { Library } from '@waldur/ansible/python-management/types/Library';
-import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
-import { AutosuggestField } from '@waldur/form-react/autosuggest-field/AutosuggestField';
-import { OptionDs } from '@waldur/form-react/autosuggest-field/OptionDs';
-import { translate } from '@waldur/i18n';
 import * as React from 'react';
 import { AsyncCreatable } from 'react-select';
 import { Field } from 'redux-form';
 import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
 
-interface InstalledPackageProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>>
-  extends InstalledPackagesProps<R, RSP>, WrappedFieldArrayProps<any> {
+import { autocompleteLibraryName, findLibraryVersions } from '@waldur/ansible/python-management/api';
+import { InstalledPackagesProps } from '@waldur/ansible/python-management/form/InstalledLibrariesForm';
+import {
+isVirtualEnvironmentNotEditable,
+VirtualEnvironmentNotEditableDs
+} from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
+import { Library } from '@waldur/ansible/python-management/types/Library';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { AutosuggestField } from '@waldur/form-react/autosuggest-field/AutosuggestField';
+import { OptionDs } from '@waldur/form-react/autosuggest-field/OptionDs';
+import { translate } from '@waldur/i18n';
+
+interface InstalledPackageProps<R extends ManagementRequest<R>>
+  extends InstalledPackagesProps<R>, WrappedFieldArrayProps<any> {
   libraryIndex: number;
   library: any;
 }
 
-export class InstalledLibraryRowForm<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>>
-  extends React.Component<InstalledPackageProps<R, RSP>> {
+export class InstalledLibraryRowForm<R extends ManagementRequest<R>>
+  extends React.Component<InstalledPackageProps<R>> {
 
   state = {
     libraryVersions: [],

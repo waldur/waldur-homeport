@@ -1,23 +1,23 @@
-import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
-import { UnfoldedRequest } from '@waldur/ansible/python-management/types/UnfoldedRequest';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import * as React from 'react';
 
-interface RequestOutputRowProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> {
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { UnfoldedRequest } from '@waldur/ansible/python-management/types/UnfoldedRequest';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+
+interface RequestOutputRowProps<R extends ManagementRequest<R>> {
   request: R;
   unfoldedRequests: UnfoldedRequest[];
 
   additionalInformationSectionBuilder(request: R);
 }
 
-export class RequestOutputRow<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> extends React.Component<RequestOutputRowProps<R, RSP>> {
+export class RequestOutputRow<R extends ManagementRequest<R>> extends React.Component<RequestOutputRowProps<R>> {
 
   state = {
     taskPosition: -1,
   };
 
-  componentWillReceiveProps(nextProps: RequestOutputRowProps<R, RSP>) {
+  componentWillReceiveProps(nextProps: RequestOutputRowProps<R>) {
     this.setState({
       taskPosition: this.findTaskPosition(nextProps.request, nextProps.unfoldedRequests),
     });

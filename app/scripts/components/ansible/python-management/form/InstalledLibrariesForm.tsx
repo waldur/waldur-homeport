@@ -1,26 +1,26 @@
-import { InstalledLibraryRowForm } from '@waldur/ansible/python-management/form/InstalledLibraryRowForm';
-import {
-  isVirtualEnvironmentNotEditable,
-  VirtualEnvironmentNotEditableDs
-} from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
-import '@waldur/ansible/python-management/styles/AnsibleApplications.scss';
-import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
-import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
-import { translate } from '@waldur/i18n';
 import * as React from 'react';
 import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
 
-export interface InstalledPackagesProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> {
+import { InstalledLibraryRowForm } from '@waldur/ansible/python-management/form/InstalledLibraryRowForm';
+import {
+isVirtualEnvironmentNotEditable,
+VirtualEnvironmentNotEditableDs
+} from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
+import '@waldur/ansible/python-management/styles/AnsibleApplications.scss';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
+import { translate } from '@waldur/i18n';
+
+export interface InstalledPackagesProps<R extends ManagementRequest<R>> {
   virtualEnvironmentIndex: number;
   reduxFormChange: (field: string, value: any) => void;
-  pythonManagement: VirtualEnvAndRequestsContainer<R, RSP>;
+  pythonManagement: VirtualEnvAndRequestsContainer<R>;
   managementRequestTimeout: number;
   jupyterHubMode: boolean;
 }
 
-export class InstalledLibraries<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>>
-  extends React.Component<InstalledPackagesProps<R, RSP> & WrappedFieldArrayProps<any>> {
+export class InstalledLibraries<R extends ManagementRequest<R>>
+  extends React.Component<InstalledPackagesProps<R> & WrappedFieldArrayProps<any>> {
   render() {
     return (
       <div>

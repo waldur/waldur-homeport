@@ -1,22 +1,22 @@
-import {
-  isVirtualEnvironmentNotEditable,
-  VirtualEnvironmentNotEditableDs
-} from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
-import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
-import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
-import { translate } from '@waldur/i18n';
 import * as React from 'react';
 
-interface RemoveVirtualEnvironmentButtonProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> {
-  pythonManagement: VirtualEnvAndRequestsContainer<R, RSP>;
+import {
+isVirtualEnvironmentNotEditable,
+VirtualEnvironmentNotEditableDs
+} from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
+import { translate } from '@waldur/i18n';
+
+interface RemoveVirtualEnvironmentButtonProps<R extends ManagementRequest<R>> {
+  pythonManagement: VirtualEnvAndRequestsContainer<R>;
   managementRequestTimeout: number;
   index: number;
   removeVirtualEnvironment: () => void;
 }
 
-export class RemoveVirtualEnvironmentButton<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>>
-  extends React.Component<RemoveVirtualEnvironmentButtonProps<R, RSP>> {
+export class RemoveVirtualEnvironmentButton<R extends ManagementRequest<R>>
+  extends React.Component<RemoveVirtualEnvironmentButtonProps<R>> {
   render() {
     return (
       <button

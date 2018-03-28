@@ -1,11 +1,11 @@
-import { PythonManagementActionHistoryRow } from '@waldur/ansible/python-management/details/PythonManagementActionHistoryRow';
-import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
-import { UnfoldedRequest } from '@waldur/ansible/python-management/types/UnfoldedRequest';
-import { translate } from '@waldur/i18n';
 import * as React from 'react';
 
-interface PythonManagementDetailsActionsHistoryProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> {
+import { PythonManagementActionHistoryRow } from '@waldur/ansible/python-management/details/PythonManagementActionHistoryRow';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { UnfoldedRequest } from '@waldur/ansible/python-management/types/UnfoldedRequest';
+import { translate } from '@waldur/i18n';
+
+interface PythonManagementDetailsActionsHistoryProps<R extends ManagementRequest<R>> {
   requests: R[];
   triggerRequestOutputPollingTask: (request: R) => void;
   unfoldedRequests: UnfoldedRequest[];
@@ -13,8 +13,8 @@ interface PythonManagementDetailsActionsHistoryProps<R extends ManagementRequest
   additionalInformationSectionBuilder(request: R);
 }
 
-export class PythonManagementActionsHistory<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>>
-  extends React.Component<PythonManagementDetailsActionsHistoryProps<R, RSP>> {
+export class PythonManagementActionsHistory<R extends ManagementRequest<R>>
+  extends React.Component<PythonManagementDetailsActionsHistoryProps<R>> {
 
   render() {
     return (

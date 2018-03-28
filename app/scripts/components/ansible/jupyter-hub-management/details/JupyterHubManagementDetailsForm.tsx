@@ -1,3 +1,7 @@
+import * as React from 'react';
+import { Tab } from 'react-bootstrap';
+import * as Tabs from 'react-bootstrap/lib/Tabs';
+
 import { JupyterHubManagementDetailsProps } from '@waldur/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsContainer';
 import { JupyterHubUsersGroupForm } from '@waldur/ansible/jupyter-hub-management/form/JupyterHubUsersGroupForm';
 import { JupyterOAuthForm } from '@waldur/ansible/jupyter-hub-management/form/JupyterOAuthForm';
@@ -13,9 +17,6 @@ import { PureManagementStatesIndicator } from '@waldur/ansible/python-management
 import { FormContainer, StringField } from '@waldur/form-react';
 import { RadioButtonChoice, RadioButtonField } from '@waldur/form-react/RadioButtonField';
 import { translate } from '@waldur/i18n';
-import * as React from 'react';
-import { Tab } from 'react-bootstrap';
-import * as Tabs from 'react-bootstrap/lib/Tabs';
 
 export class JupyterHubManagementDetailsForm extends React.Component<JupyterHubManagementDetailsProps> {
   render() {
@@ -49,10 +50,7 @@ export class JupyterHubManagementDetailsForm extends React.Component<JupyterHubM
                       <div className="form-group">
                         <label className="control-label col-sm-2">{translate('State')}</label>
                         <div className="same-padding-as-control-label">
-                          <PureManagementStatesIndicator
-                            requestsStates={this.props.jupyterHubManagement.requestsStateTypePairs}/>
-                          <PureManagementStatesIndicator
-                            requestsStates={this.props.jupyterHubManagement.pythonManagementRequests.map(r => r.toStateTypePair(r))}/>
+                          <PureManagementStatesIndicator managementState={this.props.jupyterHubManagement.managementState}/>
                         </div>
                       </div>
                       <div className="form-group">

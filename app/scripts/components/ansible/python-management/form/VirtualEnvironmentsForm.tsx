@@ -1,15 +1,15 @@
-import { VirtualEnvironmentComponent } from '@waldur/ansible/python-management/form/VirtualEnvironment';
-import { existsExecutingGlobalRequest } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
-import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
-import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
-import { translate } from '@waldur/i18n';
 import * as React from 'react';
 import { FieldArray } from 'redux-form';
 
-interface VirtualEnvironmentsFormProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> {
+import { VirtualEnvironmentComponent } from '@waldur/ansible/python-management/form/VirtualEnvironment';
+import { existsExecutingGlobalRequest } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
+import { translate } from '@waldur/i18n';
+
+interface VirtualEnvironmentsFormProps<R extends ManagementRequest<R>> {
   reduxFormChange: (field: string, value: any) => void;
-  pythonManagement: VirtualEnvAndRequestsContainer<R, RSP>;
+  pythonManagement: VirtualEnvAndRequestsContainer<R>;
   findVirtualEnvironments: (uuid: string) => void;
   findInstalledLibsInVirtualEnvironment: (pythonManagementUuid: string, virtualEnvironmentName: string) => void;
   managementRequestTimeout: number;
@@ -17,8 +17,8 @@ interface VirtualEnvironmentsFormProps<R extends ManagementRequest<R, RSP>, RSP 
   pathToVirtualEnvironments: string;
 }
 
-export class VirtualEnvironmentsForm<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>>
-  extends React.Component<VirtualEnvironmentsFormProps<R, RSP>> {
+export class VirtualEnvironmentsForm<R extends ManagementRequest<R>>
+  extends React.Component<VirtualEnvironmentsFormProps<R>> {
   render() {
     return (
       <div className="form-group">

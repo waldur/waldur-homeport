@@ -1,41 +1,41 @@
-import * as actionNames from '@waldur/ansible/python-management/actionNames';
-import {
-  createPythonManagement,
-  deletePythonManagement,
-  findInstalledLibsInVirtualEnvironment,
-  findVirtualEnvironments,
-  gotoApplicationsList,
-  goToInstanceDetails,
-  goToPythonManagementDetails,
-  initializePythonManagementDetailsDialogue,
-  pythonManagementErred,
-  pythonManagementLoaded,
-  triggerRequestOutputPollingTask,
-  updatePythonManagement
-} from '@waldur/ansible/python-management/actions';
-import * as pythonManagementApi from '@waldur/ansible/python-management/api';
-import {
-  DETAILS_POLLING_INTERVAL,
-  mergeRequests,
-  mergeVirtualEnvironments,
-  setRequestsStateTypePairs,
-  startRequestOutputPollingTask
-} from '@waldur/ansible/python-management/commonEffects';
-import { PYTHON_MANAGEMENT_DETAILS_FORM_NAME } from '@waldur/ansible/python-management/constants';
-import {
-  buildPythonManagementFormData,
-  buildPythonManagementRequestFull,
-  buildRequestsStatesStateTypePairs
-} from '@waldur/ansible/python-management/mappers';
-import { ManagementEffectsConfig } from '@waldur/ansible/python-management/types/ManagementEffectsConfig';
-import { PythonManagementRequest } from '@waldur/ansible/python-management/types/PythonManagementRequest';
-import { PythonManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/PythonManagementRequestStateTypePair';
-import { translate } from '@waldur/i18n/index';
-import { showSuccess } from '@waldur/store/coreSaga';
-import { getProject } from '@waldur/workspace/selectors';
 import { initialize, SubmissionError } from 'redux-form';
 import { delay } from 'redux-saga';
 import { call, put, race, select, take, takeEvery } from 'redux-saga/effects';
+
+import * as actionNames from '@waldur/ansible/python-management/actionNames';
+import {
+createPythonManagement,
+deletePythonManagement,
+findInstalledLibsInVirtualEnvironment,
+findVirtualEnvironments,
+gotoApplicationsList,
+goToInstanceDetails,
+goToPythonManagementDetails,
+initializePythonManagementDetailsDialogue,
+pythonManagementErred,
+pythonManagementLoaded,
+triggerRequestOutputPollingTask,
+updatePythonManagement
+} from '@waldur/ansible/python-management/actions';
+import * as pythonManagementApi from '@waldur/ansible/python-management/api';
+import {
+DETAILS_POLLING_INTERVAL,
+mergeRequests,
+mergeVirtualEnvironments,
+setRequestsStateTypePairs,
+startRequestOutputPollingTask
+} from '@waldur/ansible/python-management/commonEffects';
+import { PYTHON_MANAGEMENT_DETAILS_FORM_NAME } from '@waldur/ansible/python-management/constants';
+import {
+buildPythonManagementFormData,
+buildPythonManagementRequestFull,
+} from '@waldur/ansible/python-management/mappers';
+import { ManagementEffectsConfig } from '@waldur/ansible/python-management/types/ManagementEffectsConfig';
+import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
+import { PythonManagementRequest } from '@waldur/ansible/python-management/types/PythonManagementRequest';
+import { translate } from '@waldur/i18n/index';
+import { showSuccess } from '@waldur/store/coreSaga';
+import { getProject } from '@waldur/workspace/selectors';
 
 export function* handleCreatePythonManagement(action) {
   const successMessage = translate('Python environment has been created.');
@@ -170,13 +170,13 @@ function* reloadPythonManagementDetailsWithDelay(pythonManagementUuid: string) {
 export function* reloadPythonManagementDetails(pythonManagementUuid: string) {
   const updatedPythonManagement = yield call(pythonManagementApi.loadPythonManagement, pythonManagementUuid);
   const config = buildPythonManagementConfig();
-  yield call(setRequestsStateTypePairs, updatedPythonManagement.python_management.requests_states.map(r => buildRequestsStatesStateTypePairs(r)), config);
+  yield call(setRequestsStateTypePairs, updatedPythonManagement.python_management.state as ManagementRequestState, config);
   yield call(mergeVirtualEnvironments, updatedPythonManagement, config);
   yield call(mergeRequests, updatedPythonManagement.requests, config);
 }
 
-function buildPythonManagementConfig(): ManagementEffectsConfig<PythonManagementRequest, PythonManagementRequestStateTypePair> {
-  const config = new ManagementEffectsConfig<PythonManagementRequest, PythonManagementRequestStateTypePair>();
+function buildPythonManagementConfig(): ManagementEffectsConfig<PythonManagementRequest> {
+  const config = new ManagementEffectsConfig<PythonManagementRequest>();
   config.formName = PYTHON_MANAGEMENT_DETAILS_FORM_NAME;
   config.loadRequestApiCall = pythonManagementApi.loadPythonManagementRequest;
   config.requestBuilder = buildPythonManagementRequestFull;

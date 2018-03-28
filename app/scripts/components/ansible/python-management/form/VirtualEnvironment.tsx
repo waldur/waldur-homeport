@@ -1,28 +1,28 @@
-import { AddVirtualEnvironmentButton } from '@waldur/ansible/python-management/form/AddVirtualEnvironmentButton';
-import { FindMissingLibrariesButton } from '@waldur/ansible/python-management/form/FindMissingLibrariesButton';
-import { InstalledLibraries } from '@waldur/ansible/python-management/form/InstalledLibrariesForm';
-import { RemoveVirtualEnvironmentButton } from '@waldur/ansible/python-management/form/RemoveVirtualEnvironmentButton';
-import {
-  isVirtualEnvironmentNotEditable,
-  VirtualEnvironmentNotEditableDs
-} from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
-import { Library } from '@waldur/ansible/python-management/types/Library';
-import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
-import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
-import { VirtualEnvironment } from '@waldur/ansible/python-management/types/VirtualEnvironment';
-import { validateVirtualEnvironmentDirectory } from '@waldur/ansible/python-management/validation';
-import { FieldError, FileUploadField } from '@waldur/form-react';
-import { translate } from '@waldur/i18n';
 import * as classNames from 'classnames';
 import FileSaver from 'file-saver';
 import * as React from 'react';
 import { Field, FieldArray } from 'redux-form';
 import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
 
-interface VirtualEnvironmentProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> extends WrappedFieldArrayProps<any> {
+import { AddVirtualEnvironmentButton } from '@waldur/ansible/python-management/form/AddVirtualEnvironmentButton';
+import { FindMissingLibrariesButton } from '@waldur/ansible/python-management/form/FindMissingLibrariesButton';
+import { InstalledLibraries } from '@waldur/ansible/python-management/form/InstalledLibrariesForm';
+import { RemoveVirtualEnvironmentButton } from '@waldur/ansible/python-management/form/RemoveVirtualEnvironmentButton';
+import {
+isVirtualEnvironmentNotEditable,
+VirtualEnvironmentNotEditableDs
+} from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
+import { Library } from '@waldur/ansible/python-management/types/Library';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
+import { VirtualEnvironment } from '@waldur/ansible/python-management/types/VirtualEnvironment';
+import { validateVirtualEnvironmentDirectory } from '@waldur/ansible/python-management/validation';
+import { FieldError, FileUploadField } from '@waldur/form-react';
+import { translate } from '@waldur/i18n';
+
+interface VirtualEnvironmentProps<R extends ManagementRequest<R>> extends WrappedFieldArrayProps<any> {
   reduxFormChange: (field: string, value: any) => void;
-  pythonManagement: VirtualEnvAndRequestsContainer<R, RSP>;
+  pythonManagement: VirtualEnvAndRequestsContainer<R>;
   findVirtualEnvironments: (uuid: string) => Promise<void>;
   findInstalledLibsInVirtualEnvironment: (pythonManagementUuid: string, virtualEnvironmentName: string) => Promise<void>;
   managementRequestTimeout: number;
@@ -30,8 +30,8 @@ interface VirtualEnvironmentProps<R extends ManagementRequest<R, RSP>, RSP exten
   pathToVirtualEnvironments: string;
 }
 
-export class VirtualEnvironmentComponent<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>>
-  extends React.Component<VirtualEnvironmentProps<R, RSP>> {
+export class VirtualEnvironmentComponent<R extends ManagementRequest<R>>
+  extends React.Component<VirtualEnvironmentProps<R>> {
 
   state = {
     expandedVirtualEnvironments: [],
@@ -61,7 +61,7 @@ export class VirtualEnvironmentComponent<R extends ManagementRequest<R, RSP>, RS
     });
   }
 
-  getVirtualEnvironments = (formData: VirtualEnvAndRequestsContainer<R, RSP>) => {
+  getVirtualEnvironments = (formData: VirtualEnvAndRequestsContainer<R>) => {
     return formData.getVirtualEnvironments(formData);
   }
 

@@ -3,7 +3,6 @@ import { JupyterHubAuthenticationMethod } from '@waldur/ansible/jupyter-hub-mana
 import { JupyterHubManagementDetailsFormData } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementDetailsFormData';
 import { JupyterHubManagementFormData } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementFormData';
 import { JupyterHubManagementRequest } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementRequest';
-import { JupyterHubManagementRequestStateTypePair } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementRequestStateTypePair';
 import { JupyterHubManagementRequestType } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementRequestType';
 import { JupyterHubOAuthConfig } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubOAuthConfig';
 import { JupyterHubOAuthType } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubOAuthType';
@@ -93,7 +92,7 @@ export function buildJupyterHubManagementDetailsFormData(serverPayload: any): Ju
   formData.uuid = jupyterHubManagement.uuid;
   formData.jupyterHubUrl = jupyterHubManagement.jupyter_hub_url ? 'https://' + jupyterHubManagement.jupyter_hub_url : null;
   formData.sessionTimeToLiveHours = jupyterHubManagement.session_time_to_live_hours;
-  formData.requestsStateTypePairs = jupyterHubManagement.requests_states.map(r => buildJupyterRequestsStatesStateTypePairs(r));
+  formData.managementState = jupyterHubManagement.state as ManagementRequestState;
   formData.requests = serverPayload.requests.map(r => buildJupyterRequest(r));
 
   formData.authenticationConfig = buildAuthenticationConfig(jupyterHubManagement);
@@ -160,10 +159,4 @@ export function buildJupyterHubUser(serverPayload: any): JupyterHubUser {
     password: '',
     admin: serverPayload.admin,
   });
-}
-
-export function buildJupyterRequestsStatesStateTypePairs(requestStateTypePair: any): JupyterHubManagementRequestStateTypePair {
-  return new JupyterHubManagementRequestStateTypePair(
-    requestStateTypePair.state as ManagementRequestState,
-    requestStateTypePair.request_type as JupyterHubManagementRequestType);
 }

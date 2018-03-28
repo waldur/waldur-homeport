@@ -1,3 +1,7 @@
+import * as React from 'react';
+import * as Tab from 'react-bootstrap/lib/Tab';
+import * as Tabs from 'react-bootstrap/lib/Tabs';
+
 import { PythonManagementActionsHistory } from '@waldur/ansible/python-management/details/PythonManagementActionsHistory';
 import { PythonManagementDetailsProps } from '@waldur/ansible/python-management/details/PythonManagementDetailsContainer';
 import { VirtualEnvironmentsForm } from '@waldur/ansible/python-management/form/VirtualEnvironmentsForm';
@@ -7,9 +11,6 @@ import { PythonManagementRequest } from '@waldur/ansible/python-management/types
 import { PythonManagementRequestType } from '@waldur/ansible/python-management/types/PythonManagementRequestType';
 import { FormContainer } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
-import * as React from 'react';
-import * as Tab from 'react-bootstrap/lib/Tab';
-import * as Tabs from 'react-bootstrap/lib/Tabs';
 
 export const PythonManagementDetailsSummary = (props: PythonManagementDetailsProps) => {
   const buildRequestAdditionalInfo = (request: PythonManagementRequest) => {
@@ -59,7 +60,7 @@ export const PythonManagementDetailsSummary = (props: PythonManagementDetailsPro
                     <div className="form-group">
                       <label className="control-label col-sm-2">{translate('State')}</label>
                       <div className="same-padding-as-control-label">
-                        <PureManagementStatesIndicator requestsStates={props.pythonManagement.requestsStateTypePairs}/>
+                        <PureManagementStatesIndicator managementState={props.pythonManagement.managementState}/>
                       </div>
                     </div>
                     <div className="form-group">

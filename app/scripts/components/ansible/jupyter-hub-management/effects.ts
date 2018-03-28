@@ -1,49 +1,49 @@
+import { getFormValues, initialize, SubmissionError } from 'redux-form';
+import { delay } from 'redux-saga';
+import { call, put, race, select, take, takeEvery } from 'redux-saga/effects';
+
 import {
-  createJupyterHubManagement,
-  deleteJupyterHubManagement,
-  initializeJupyterHubManagementCreate,
-  initializeJupyterHubManagementDetails,
-  jupyterHubManagementErred,
-  jupyterHubManagementLoaded,
-  saveAvailablePythonManagements,
-  triggerJupyterHubRequestOutputPollingTask,
-  updateJupyterHubManagement
+createJupyterHubManagement,
+deleteJupyterHubManagement,
+initializeJupyterHubManagementCreate,
+initializeJupyterHubManagementDetails,
+jupyterHubManagementErred,
+jupyterHubManagementLoaded,
+saveAvailablePythonManagements,
+triggerJupyterHubRequestOutputPollingTask,
+updateJupyterHubManagement
 } from '@waldur/ansible/jupyter-hub-management/actions';
 import * as api from '@waldur/ansible/jupyter-hub-management/api';
 import {
-  JUPYTER_HUB_MANAGEMENT_CREATE_FORM_NAME,
-  JUPYTER_HUB_MANAGEMENT_DETAILS_FORM_NAME
+JUPYTER_HUB_MANAGEMENT_CREATE_FORM_NAME,
+JUPYTER_HUB_MANAGEMENT_DETAILS_FORM_NAME
 } from '@waldur/ansible/jupyter-hub-management/constants';
 import {
-  buildJupyterHubManagementDetailsFormData,
-  buildJupyterRequest,
-  buildJupyterRequestsStatesStateTypePairs
+buildJupyterHubManagementDetailsFormData,
+buildJupyterRequest,
 } from '@waldur/ansible/jupyter-hub-management/mappers';
 import { JupyterHubManagementDetailsFormData } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementDetailsFormData';
 import { JupyterHubManagementFormData } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementFormData';
 import { JupyterHubManagementRequest } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementRequest';
-import { JupyterHubManagementRequestStateTypePair } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementRequestStateTypePair';
 import { JupyterHubManagementRequestType } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementRequestType';
 import * as actionNames from '@waldur/ansible/python-management/actionNames';
 import { saveWaldurPublicKey } from '@waldur/ansible/python-management/actions';
 import { findPythonManagementsWithInstance } from '@waldur/ansible/python-management/api';
 import {
-  DETAILS_POLLING_INTERVAL,
-  mergeRequests,
-  mergeVirtualEnvironments,
-  setRequestsStateTypePairs,
-  startRequestOutputPollingTask
+DETAILS_POLLING_INTERVAL,
+mergeRequests,
+mergeVirtualEnvironments,
+setRequestsStateTypePairs,
+startRequestOutputPollingTask
 } from '@waldur/ansible/python-management/commonEffects';
 import { isExecuting } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
 import { getAnsibleRequestTimeout, getWaldurPublicKeyUuid } from '@waldur/ansible/python-management/selectors';
 import { ManagementEffectsConfig } from '@waldur/ansible/python-management/types/ManagementEffectsConfig';
+import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
 import { findPublicKeyByUuid } from '@waldur/core/SshKeysApi';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/coreSaga';
 import { getProject } from '@waldur/workspace/selectors';
-import { getFormValues, initialize, SubmissionError } from 'redux-form';
-import { delay } from 'redux-saga';
-import { call, put, race, select, take, takeEvery } from 'redux-saga/effects';
 
 export function* handleCreateJupyterHubManagement(action) {
   const successMessage = translate('JupyterHub environment has been created.');
@@ -90,7 +90,7 @@ export function* reloadJupyterHubManagementDetails(jupyterHubManagementUuid: str
   yield call(mergeVirtualEnvironments, updatedJupyterHubManagement, config);
   yield call(
     setRequestsStateTypePairs,
-    updatedJupyterHubManagement.jupyter_hub_management.requests_states.map(r => buildJupyterRequestsStatesStateTypePairs(r)),
+    updatedJupyterHubManagement.jupyter_hub_management.state as ManagementRequestState,
     config);
   yield call(mergeRequests, updatedJupyterHubManagement.requests, config);
 }
@@ -108,8 +108,8 @@ function* updateOnlyJupyterConfigRelatedFields(updatedManagementFormData: Jupyte
   }
 }
 
-function buildJupyterHubManagementConfig(): ManagementEffectsConfig<JupyterHubManagementRequest, JupyterHubManagementRequestStateTypePair> {
-  const config = new ManagementEffectsConfig<JupyterHubManagementRequest, JupyterHubManagementRequestStateTypePair>();
+function buildJupyterHubManagementConfig(): ManagementEffectsConfig<JupyterHubManagementRequest> {
+  const config = new ManagementEffectsConfig<JupyterHubManagementRequest>();
   config.formName = JUPYTER_HUB_MANAGEMENT_DETAILS_FORM_NAME;
   config.loadRequestApiCall = api.loadJupyterHubManagementRequest;
   config.requestBuilder = buildJupyterRequest;

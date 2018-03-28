@@ -14,14 +14,11 @@ const STATE_READABLE_TEXT_MAPPING = {
 
 const pythonManagementState = {
   template: `
-  <div ng-repeat="requestState in $ctrl.model.requests_states">
     <div class="progress state-indicator m-b-none">
-      <span class="progress-bar p-w-sm full-width" ng-class="$ctrl.getLabelClass(requestState)">
-        {{ $ctrl.getStateText(requestState.state) | translate | uppercase }}
+      <span class="progress-bar p-w-sm full-width" ng-class="$ctrl.getLabelClass($ctrl.model.state)">
+        {{ $ctrl.getStateText($ctrl.model.state) | translate | uppercase }}
       </span>
     </div>
-    <br/>
-  </div>
   `,
   bindings: {
     model: '<',
@@ -32,7 +29,7 @@ const pythonManagementState = {
     }
 
     getLabelClass(requestState) {
-      return LABEL_CLASSES[requestState.state] || 'progress-bar-info';
+      return LABEL_CLASSES[requestState] || 'progress-bar-info';
     }
   }
 };
