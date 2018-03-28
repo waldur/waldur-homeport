@@ -84,7 +84,11 @@ import TWEEN from '@tweenjs/tween.js/src/Tween';
         animationDuration: 2000,
 
         pointToLayer: function(geoJsonPoint, latlng) {
-            return L.circleMarker(latlng);
+            var marker = L.circleMarker(latlng);
+            if (!geoJsonPoint.properties.isOrigin) {
+                marker.bindPopup();
+            }
+            return marker;
         },
 
         style: function(geoJsonFeature) {

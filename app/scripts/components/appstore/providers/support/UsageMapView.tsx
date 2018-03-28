@@ -21,9 +21,11 @@ export const UsageMapView = (props: UsageMapViewProps) => (
       data={props.serviceUsage}
       serviceProviderSelect={props.serviceProviderSelect}
     />
-    <div id="usage-map-panel">
-      <MapInfoPanel data={props.selectedServiceProvider}/>
-    </div>
+    {props.selectedServiceProvider.uuid &&
+      <div id="usage-map-panel">
+        <MapInfoPanel data={props.selectedServiceProvider}/>
+      </div>
+    }
   </>
 );
 

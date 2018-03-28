@@ -25,6 +25,13 @@ export default class UsageMap extends React.Component<UsageMapProps, UsageMapSta
     this.map = L.map(this.props.id);
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.data != this.props.data){
+      return true;
+    }
+    return false;
+  }
+
   updateMap() {
     const { center, zoom, data } = this.props;
     const bounds = L.latLngBounds(center);
@@ -94,7 +101,8 @@ export default class UsageMap extends React.Component<UsageMapProps, UsageMapSta
         oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
       }
       if (e.sharedDestinationFeatures.length) {
-        oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedDestinationFeatures, 'SELECTION_NEW');
+        const content = e.layer.feature.properties.consumer_name;
+        e.layer.setPopupContent(content);
       }
     });
   }
