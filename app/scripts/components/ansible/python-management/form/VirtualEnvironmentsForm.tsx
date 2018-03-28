@@ -1,12 +1,11 @@
-import * as React from 'react';
-import { FieldArray } from 'redux-form';
-
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
-import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/common/types/VirtualEnvAndRequestsContainer';
 import { VirtualEnvironmentComponent } from '@waldur/ansible/python-management/form/VirtualEnvironment';
 import { existsExecutingGlobalRequest } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
+import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
 import { translate } from '@waldur/i18n';
+import * as React from 'react';
+import { FieldArray } from 'redux-form';
 
 interface VirtualEnvironmentsFormProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> {
   reduxFormChange: (field: string, value: any) => void;

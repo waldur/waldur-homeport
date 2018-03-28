@@ -1,6 +1,6 @@
-import { STATE_READABLE_TEXT_MAPPING } from '@waldur/ansible/common/state-builder/RequestTypeReadableTextMappings';
-import { ManagementRequestState } from '@waldur/ansible/common/types/ManagementRequestState';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
+import { STATE_READABLE_TEXT_MAPPING } from '@waldur/ansible/python-management/state-builder/RequestTypeReadableTextMappings';
+import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
 import { StateIndicator } from '@waldur/resource/state/types';
 
 interface PythonManagementRequestStateIndicatorBuilderMap {

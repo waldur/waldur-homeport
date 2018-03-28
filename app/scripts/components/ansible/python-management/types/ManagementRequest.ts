@@ -1,5 +1,5 @@
-import { ManagementRequestState } from '@waldur/ansible/common/types/ManagementRequestState';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
+import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
 
 export abstract class ManagementRequest<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> {
   uuid: string;

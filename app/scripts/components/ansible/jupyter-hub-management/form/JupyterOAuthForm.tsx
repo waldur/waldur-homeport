@@ -1,16 +1,15 @@
-import * as React from 'react';
-
-import { JupyterHubUsersHolder } from '@waldur/ansible/common/types/JupyterHubUsersHolder';
 import { JupyterHubUsersGroupForm } from '@waldur/ansible/jupyter-hub-management/form/JupyterHubUsersGroupForm';
 import { JupyterHubAuthenticationMethod } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubAuthenticationMethod';
 import { JupyterHubManagementFormData } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementFormData';
 import { JupyterHubOAuthType } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubOAuthType';
 import { JupyterHubUserAdminMode } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUserAdminMode';
+import { JupyterHubUsersHolder } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUsersHolder';
 import { isNotBlank } from '@waldur/ansible/jupyter-hub-management/validation';
 import { FormContainer, StringField } from '@waldur/form-react';
 import { CheckboxField } from '@waldur/form-react/CheckboxField';
 import { RadioButtonChoice, RadioButtonField } from '@waldur/form-react/RadioButtonField';
 import { translate } from '@waldur/i18n';
+import * as React from 'react';
 
 export interface JupyterOAuthFormProps {
   jupyterHubManagement: JupyterHubUsersHolder;

@@ -1,6 +1,6 @@
-import { JupyterHubUsersHolder } from '@waldur/ansible/common/types/JupyterHubUsersHolder';
 import { JupyterHubAuthenticationMethod } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubAuthenticationMethod';
 import { JupyterHubUser } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUser';
+import { JupyterHubUsersHolder } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUsersHolder';
 import { translate } from '@waldur/i18n';
 
 export const validateJupyterHubUserPassword = (password: string, user: JupyterHubUser) =>

@@ -1,16 +1,15 @@
-import * as React from 'react';
-import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
-
-import '@waldur/ansible/common/styles/AnsibleApplications.scss';
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
-import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/common/types/VirtualEnvAndRequestsContainer';
 import { InstalledLibraryRowForm } from '@waldur/ansible/python-management/form/InstalledLibraryRowForm';
 import {
   isVirtualEnvironmentNotEditable,
   VirtualEnvironmentNotEditableDs
 } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
+import '@waldur/ansible/python-management/styles/AnsibleApplications.scss';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
+import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
 import { translate } from '@waldur/i18n';
+import * as React from 'react';
+import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
 
 export interface InstalledPackagesProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> {
   virtualEnvironmentIndex: number;

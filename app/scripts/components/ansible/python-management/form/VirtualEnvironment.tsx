@@ -1,12 +1,3 @@
-import * as classNames from 'classnames';
-import FileSaver from 'file-saver';
-import * as React from 'react';
-import { Field, FieldArray } from 'redux-form';
-import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
-
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
-import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/common/types/VirtualEnvAndRequestsContainer';
 import { AddVirtualEnvironmentButton } from '@waldur/ansible/python-management/form/AddVirtualEnvironmentButton';
 import { FindMissingLibrariesButton } from '@waldur/ansible/python-management/form/FindMissingLibrariesButton';
 import { InstalledLibraries } from '@waldur/ansible/python-management/form/InstalledLibrariesForm';
@@ -16,10 +7,18 @@ import {
   VirtualEnvironmentNotEditableDs
 } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
 import { Library } from '@waldur/ansible/python-management/types/Library';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
+import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
 import { VirtualEnvironment } from '@waldur/ansible/python-management/types/VirtualEnvironment';
 import { validateVirtualEnvironmentDirectory } from '@waldur/ansible/python-management/validation';
 import { FieldError, FileUploadField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
+import * as classNames from 'classnames';
+import FileSaver from 'file-saver';
+import * as React from 'react';
+import { Field, FieldArray } from 'redux-form';
+import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
 
 interface VirtualEnvironmentProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> extends WrappedFieldArrayProps<any> {
   reduxFormChange: (field: string, value: any) => void;

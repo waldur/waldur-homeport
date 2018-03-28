@@ -1,4 +1,4 @@
-import { ManagementRequestState } from '@waldur/ansible/common/types/ManagementRequestState';
+import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
 
 type PythonManagementRequestStateReadabilityMap = {[key in ManagementRequestState]: string};
 

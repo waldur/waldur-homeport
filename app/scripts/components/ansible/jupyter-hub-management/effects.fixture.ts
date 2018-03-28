@@ -1,6 +1,6 @@
+import * as commonEffects from '@waldur/ansible/python-management/commonEffects';
 import { runSaga } from 'redux-saga';
 
-import * as commonEffects from '../common/effects/commonEffects';
 import * as api from './api';
 import * as effects from './effects';
 import * as mappers from './mappers';

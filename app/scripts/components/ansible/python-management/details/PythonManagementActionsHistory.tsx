@@ -1,10 +1,9 @@
-import * as React from 'react';
-
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
 import { PythonManagementActionHistoryRow } from '@waldur/ansible/python-management/details/PythonManagementActionHistoryRow';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
 import { UnfoldedRequest } from '@waldur/ansible/python-management/types/UnfoldedRequest';
 import { translate } from '@waldur/i18n';
+import * as React from 'react';
 
 interface PythonManagementDetailsActionsHistoryProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> {
   requests: R[];

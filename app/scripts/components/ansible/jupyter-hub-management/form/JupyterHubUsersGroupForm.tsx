@@ -1,11 +1,10 @@
-import * as React from 'react';
-import { FieldArray } from 'redux-form';
-
-import { JupyterHubUsersHolder } from '@waldur/ansible/common/types/JupyterHubUsersHolder';
 import { JupyterHubUserRowsComponent } from '@waldur/ansible/jupyter-hub-management/form/JupyterHubUserRows';
 import { JupyterHubUser } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUser';
 import { JupyterHubUserAdminMode } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUserAdminMode';
+import { JupyterHubUsersHolder } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUsersHolder';
 import { translate } from '@waldur/i18n';
+import * as React from 'react';
+import { FieldArray } from 'redux-form';
 
 export interface JupyterHubUsersGroupProps {
   jupyterHubManagement: JupyterHubUsersHolder;

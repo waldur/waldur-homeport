@@ -1,8 +1,8 @@
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
-import { ManagementRequestState } from '@waldur/ansible/common/types/ManagementRequestState';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
 import { Instance } from '@waldur/ansible/python-management/types/Instance';
 import { Library } from '@waldur/ansible/python-management/types/Library';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
 import { PythonManagementFormData } from '@waldur/ansible/python-management/types/PythonManagementFormData';
 import { PythonManagementRequest } from '@waldur/ansible/python-management/types/PythonManagementRequest';
 import { PythonManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/PythonManagementRequestStateTypePair';

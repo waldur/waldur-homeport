@@ -1,8 +1,7 @@
-import * as React from 'react';
-
-import { commonStateIndicatorBuilder } from '@waldur/ansible/common/state-builder/StateIndicatorBuilder';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
+import { commonStateIndicatorBuilder } from '@waldur/ansible/python-management/state-builder/StateIndicatorBuilder';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
 import { ResourceStateIndicator } from '@waldur/resource/state/ResourceState';
+import * as React from 'react';
 
 interface ManagementStateProps<R extends ManagementRequestStateTypePair<R>> {
   requestsStates: R[];

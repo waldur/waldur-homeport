@@ -1,8 +1,8 @@
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
-import { ManagementRequestsHolder } from '@waldur/ansible/common/types/ManagementRequestsHolder';
-import { ManagementRequestState } from '@waldur/ansible/common/types/ManagementRequestState';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
-import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/common/types/VirtualEnvAndRequestsContainer';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { ManagementRequestsHolder } from '@waldur/ansible/python-management/types/ManagementRequestsHolder';
+import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
+import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
 import { VirtualEnvironment } from '@waldur/ansible/python-management/types/VirtualEnvironment';
 
 export class VirtualEnvironmentNotEditableDs<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> {

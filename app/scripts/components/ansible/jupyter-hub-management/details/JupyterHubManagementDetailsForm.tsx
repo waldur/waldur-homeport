@@ -1,8 +1,3 @@
-import * as React from 'react';
-import { Tab } from 'react-bootstrap';
-import * as Tabs from 'react-bootstrap/lib/Tabs';
-
-import { PureManagementStatesIndicator } from '@waldur/ansible/common/state-builder/PythonManagementState';
 import { JupyterHubManagementDetailsProps } from '@waldur/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsContainer';
 import { JupyterHubUsersGroupForm } from '@waldur/ansible/jupyter-hub-management/form/JupyterHubUsersGroupForm';
 import { JupyterOAuthForm } from '@waldur/ansible/jupyter-hub-management/form/JupyterOAuthForm';
@@ -14,9 +9,13 @@ import { JupyterHubUserAdminMode } from '@waldur/ansible/jupyter-hub-management/
 import { validateSessionTimeoutHours } from '@waldur/ansible/jupyter-hub-management/validation';
 import { PythonManagementActionsHistory } from '@waldur/ansible/python-management/details/PythonManagementActionsHistory';
 import { VirtualEnvironmentsForm } from '@waldur/ansible/python-management/form/VirtualEnvironmentsForm';
+import { PureManagementStatesIndicator } from '@waldur/ansible/python-management/state-builder/ManagementStatesIndicator';
 import { FormContainer, StringField } from '@waldur/form-react';
 import { RadioButtonChoice, RadioButtonField } from '@waldur/form-react/RadioButtonField';
 import { translate } from '@waldur/i18n';
+import * as React from 'react';
+import { Tab } from 'react-bootstrap';
+import * as Tabs from 'react-bootstrap/lib/Tabs';
 
 export class JupyterHubManagementDetailsForm extends React.Component<JupyterHubManagementDetailsProps> {
   render() {

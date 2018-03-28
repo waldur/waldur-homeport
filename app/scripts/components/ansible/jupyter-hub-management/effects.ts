@@ -1,15 +1,3 @@
-import { getFormValues, initialize, SubmissionError } from 'redux-form';
-import { delay } from 'redux-saga';
-import { call, put, race, select, take, takeEvery } from 'redux-saga/effects';
-
-import {
-  DETAILS_POLLING_INTERVAL,
-  mergeRequests,
-  mergeVirtualEnvironments,
-  setRequestsStateTypePairs,
-  startRequestOutputPollingTask
-} from '@waldur/ansible/common/effects/commonEffects';
-import { ManagementEffectsConfig } from '@waldur/ansible/common/types/ManagementEffectsConfig';
 import {
   createJupyterHubManagement,
   deleteJupyterHubManagement,
@@ -39,12 +27,23 @@ import { JupyterHubManagementRequestType } from '@waldur/ansible/jupyter-hub-man
 import * as actionNames from '@waldur/ansible/python-management/actionNames';
 import { saveWaldurPublicKey } from '@waldur/ansible/python-management/actions';
 import { findPythonManagementsWithInstance } from '@waldur/ansible/python-management/api';
+import {
+  DETAILS_POLLING_INTERVAL,
+  mergeRequests,
+  mergeVirtualEnvironments,
+  setRequestsStateTypePairs,
+  startRequestOutputPollingTask
+} from '@waldur/ansible/python-management/commonEffects';
 import { isExecuting } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
 import { getAnsibleRequestTimeout, getWaldurPublicKeyUuid } from '@waldur/ansible/python-management/selectors';
+import { ManagementEffectsConfig } from '@waldur/ansible/python-management/types/ManagementEffectsConfig';
 import { findPublicKeyByUuid } from '@waldur/core/SshKeysApi';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/coreSaga';
 import { getProject } from '@waldur/workspace/selectors';
+import { getFormValues, initialize, SubmissionError } from 'redux-form';
+import { delay } from 'redux-saga';
+import { call, put, race, select, take, takeEvery } from 'redux-saga/effects';
 
 export function* handleCreateJupyterHubManagement(action) {
   const successMessage = translate('JupyterHub environment has been created.');

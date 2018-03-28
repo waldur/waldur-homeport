@@ -1,5 +1,3 @@
-import { JupyterHubUsersHolder } from '@waldur/ansible/common/types/JupyterHubUsersHolder';
-import { ManagementRequestState } from '@waldur/ansible/common/types/ManagementRequestState';
 import { JupyterHubAuthenticationConfig } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubAuthenticationConfig';
 import { JupyterHubAuthenticationMethod } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubAuthenticationMethod';
 import { JupyterHubManagementDetailsFormData } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementDetailsFormData';
@@ -10,6 +8,7 @@ import { JupyterHubManagementRequestType } from '@waldur/ansible/jupyter-hub-man
 import { JupyterHubOAuthConfig } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubOAuthConfig';
 import { JupyterHubOAuthType } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubOAuthType';
 import { JupyterHubUser } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUser';
+import { JupyterHubUsersHolder } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUsersHolder';
 import { PythonManagementDs } from '@waldur/ansible/jupyter-hub-management/types/PythonManagementDs';
 import { PythonManagementWithInstance } from '@waldur/ansible/jupyter-hub-management/types/PythonManagementWithInstance';
 import {
@@ -19,6 +18,7 @@ import {
   buildVirtualEnvironmentPayload,
   fillCommonManagementRequestFields
 } from '@waldur/ansible/python-management/mappers';
+import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
 
 export function buildJupyterHubManagementCreatePayload(formData: JupyterHubManagementFormData) {
   return {

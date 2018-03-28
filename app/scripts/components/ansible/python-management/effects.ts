@@ -1,15 +1,3 @@
-import { initialize, SubmissionError } from 'redux-form';
-import { delay } from 'redux-saga';
-import { call, put, race, select, take, takeEvery } from 'redux-saga/effects';
-
-import {
-  DETAILS_POLLING_INTERVAL,
-  mergeRequests,
-  mergeVirtualEnvironments,
-  setRequestsStateTypePairs,
-  startRequestOutputPollingTask
-} from '@waldur/ansible/common/effects/commonEffects';
-import { ManagementEffectsConfig } from '@waldur/ansible/common/types/ManagementEffectsConfig';
 import * as actionNames from '@waldur/ansible/python-management/actionNames';
 import {
   createPythonManagement,
@@ -26,17 +14,28 @@ import {
   updatePythonManagement
 } from '@waldur/ansible/python-management/actions';
 import * as pythonManagementApi from '@waldur/ansible/python-management/api';
+import {
+  DETAILS_POLLING_INTERVAL,
+  mergeRequests,
+  mergeVirtualEnvironments,
+  setRequestsStateTypePairs,
+  startRequestOutputPollingTask
+} from '@waldur/ansible/python-management/commonEffects';
 import { PYTHON_MANAGEMENT_DETAILS_FORM_NAME } from '@waldur/ansible/python-management/constants';
 import {
   buildPythonManagementFormData,
   buildPythonManagementRequestFull,
   buildRequestsStatesStateTypePairs
 } from '@waldur/ansible/python-management/mappers';
+import { ManagementEffectsConfig } from '@waldur/ansible/python-management/types/ManagementEffectsConfig';
 import { PythonManagementRequest } from '@waldur/ansible/python-management/types/PythonManagementRequest';
 import { PythonManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/PythonManagementRequestStateTypePair';
-import { translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n/index';
 import { showSuccess } from '@waldur/store/coreSaga';
 import { getProject } from '@waldur/workspace/selectors';
+import { initialize, SubmissionError } from 'redux-form';
+import { delay } from 'redux-saga';
+import { call, put, race, select, take, takeEvery } from 'redux-saga/effects';
 
 export function* handleCreatePythonManagement(action) {
   const successMessage = translate('Python environment has been created.');

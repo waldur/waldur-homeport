@@ -1,12 +1,12 @@
-import { JupyterHubUsersHolder } from '@waldur/ansible/common/types/JupyterHubUsersHolder';
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
-import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/common/types/VirtualEnvAndRequestsContainer';
 import { JupyterHubAuthenticationConfig } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubAuthenticationConfig';
 import { JupyterHubManagementRequest } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementRequest';
 import { JupyterHubManagementRequestStateTypePair } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementRequestStateTypePair';
 import { JupyterHubManagementRequestType } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementRequestType';
+import { JupyterHubUsersHolder } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUsersHolder';
 import { PythonManagementDs } from '@waldur/ansible/jupyter-hub-management/types/PythonManagementDs';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
 import { PythonManagementRequest } from '@waldur/ansible/python-management/types/PythonManagementRequest';
+import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
 import { VirtualEnvironment } from '@waldur/ansible/python-management/types/VirtualEnvironment';
 
 export class JupyterHubManagementDetailsFormData

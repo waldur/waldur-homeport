@@ -1,6 +1,6 @@
+import * as actions from '@waldur/ansible/python-management/actions';
 import { showSuccess } from '@waldur/store/coreSaga';
 
-import * as actions from './actions';
 import { setupFixture } from './effects.fixture';
 
 describe('Python Management side-effects', () => {

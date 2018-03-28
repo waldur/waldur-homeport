@@ -1,13 +1,12 @@
-import * as React from 'react';
-
-import { commonStateIndicatorBuilder } from '@waldur/ansible/common/state-builder/StateIndicatorBuilder';
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
 import { RequestOutputRow } from '@waldur/ansible/python-management/details/RequestOutputRow';
+import { commonStateIndicatorBuilder } from '@waldur/ansible/python-management/state-builder/StateIndicatorBuilder';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
 import { UnfoldedRequest } from '@waldur/ansible/python-management/types/UnfoldedRequest';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ResourceStateIndicator } from '@waldur/resource/state/ResourceState';
+import * as React from 'react';
 
 interface PythonManagementDetailsActionsHistoryRowProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>> {
   request: R;

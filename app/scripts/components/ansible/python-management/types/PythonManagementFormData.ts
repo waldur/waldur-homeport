@@ -1,8 +1,8 @@
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
-import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/common/types/VirtualEnvAndRequestsContainer';
 import { Instance } from '@waldur/ansible/python-management/types/Instance';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
 import { PythonManagementRequest } from '@waldur/ansible/python-management/types/PythonManagementRequest';
 import { PythonManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/PythonManagementRequestStateTypePair';
+import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
 import { VirtualEnvironment } from '@waldur/ansible/python-management/types/VirtualEnvironment';
 
 export class PythonManagementFormData extends VirtualEnvAndRequestsContainer<PythonManagementRequest, PythonManagementRequestStateTypePair> {

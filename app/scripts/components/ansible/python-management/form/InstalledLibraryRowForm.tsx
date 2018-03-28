@@ -1,10 +1,3 @@
-import * as React from 'react';
-import { AsyncCreatable } from 'react-select';
-import { Field } from 'redux-form';
-import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
-
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
 import { autocompleteLibraryName, findLibraryVersions } from '@waldur/ansible/python-management/api';
 import { InstalledPackagesProps } from '@waldur/ansible/python-management/form/InstalledLibrariesForm';
 import {
@@ -12,9 +5,15 @@ import {
   VirtualEnvironmentNotEditableDs
 } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
 import { Library } from '@waldur/ansible/python-management/types/Library';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
 import { AutosuggestField } from '@waldur/form-react/autosuggest-field/AutosuggestField';
 import { OptionDs } from '@waldur/form-react/autosuggest-field/OptionDs';
 import { translate } from '@waldur/i18n';
+import * as React from 'react';
+import { AsyncCreatable } from 'react-select';
+import { Field } from 'redux-form';
+import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
 
 interface InstalledPackageProps<R extends ManagementRequest<R, RSP>, RSP extends ManagementRequestStateTypePair<RSP>>
   extends InstalledPackagesProps<R, RSP>, WrappedFieldArrayProps<any> {

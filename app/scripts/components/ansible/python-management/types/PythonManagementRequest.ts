@@ -1,5 +1,5 @@
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
 import { Library } from '@waldur/ansible/python-management/types/Library';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
 import { PythonManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/PythonManagementRequestStateTypePair';
 import { PythonManagementRequestType } from '@waldur/ansible/python-management/types/PythonManagementRequestType';
 

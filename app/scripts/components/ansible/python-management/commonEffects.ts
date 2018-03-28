@@ -1,11 +1,3 @@
-import { change, getFormValues } from 'redux-form';
-import { delay } from 'redux-saga';
-import { call, put, race, select, take } from 'redux-saga/effects';
-
-import { ManagementEffectsConfig } from '@waldur/ansible/common/types/ManagementEffectsConfig';
-import { ManagementRequest } from '@waldur/ansible/common/types/ManagementRequest';
-import { ManagementRequestStateTypePair } from '@waldur/ansible/common/types/ManagementRequestStateTypePair';
-import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/common/types/VirtualEnvAndRequestsContainer';
 import * as actionNames from '@waldur/ansible/python-management/actionNames';
 import {
   markUnfoldedRequestAsLoaded,
@@ -18,8 +10,15 @@ import {
   VirtualEnvironmentNotEditableDs
 } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
 import { getAnsibleRequestTimeout, getUnfoldedRequests } from '@waldur/ansible/python-management/selectors';
+import { ManagementEffectsConfig } from '@waldur/ansible/python-management/types/ManagementEffectsConfig';
+import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { ManagementRequestStateTypePair } from '@waldur/ansible/python-management/types/ManagementRequestStateTypePair';
 import { UnfoldedRequest } from '@waldur/ansible/python-management/types/UnfoldedRequest';
+import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
 import { VirtualEnvironment } from '@waldur/ansible/python-management/types/VirtualEnvironment';
+import { change, getFormValues } from 'redux-form';
+import { delay } from 'redux-saga';
+import { call, put, race, select, take } from 'redux-saga/effects';
 
 export const DETAILS_POLLING_INTERVAL = 20 * 1000;
 

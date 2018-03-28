@@ -1,16 +1,15 @@
-import * as React from 'react';
-import * as Tab from 'react-bootstrap/lib/Tab';
-import * as Tabs from 'react-bootstrap/lib/Tabs';
-
-import { PureManagementStatesIndicator } from '@waldur/ansible/common/state-builder/PythonManagementState';
 import { PythonManagementActionsHistory } from '@waldur/ansible/python-management/details/PythonManagementActionsHistory';
 import { PythonManagementDetailsProps } from '@waldur/ansible/python-management/details/PythonManagementDetailsContainer';
 import { VirtualEnvironmentsForm } from '@waldur/ansible/python-management/form/VirtualEnvironmentsForm';
 import { existsExecutingGlobalRequest } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
+import { PureManagementStatesIndicator } from '@waldur/ansible/python-management/state-builder/ManagementStatesIndicator';
 import { PythonManagementRequest } from '@waldur/ansible/python-management/types/PythonManagementRequest';
 import { PythonManagementRequestType } from '@waldur/ansible/python-management/types/PythonManagementRequestType';
 import { FormContainer } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
+import * as React from 'react';
+import * as Tab from 'react-bootstrap/lib/Tab';
+import * as Tabs from 'react-bootstrap/lib/Tabs';
 
 export const PythonManagementDetailsSummary = (props: PythonManagementDetailsProps) => {
   const buildRequestAdditionalInfo = (request: PythonManagementRequest) => {
