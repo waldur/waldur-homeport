@@ -16,14 +16,14 @@ export const PureUserRemovalMessageDialog = (props: UserRemovalMessageDialogProp
   const { resolve: { supportEmail, userName }, translate } = props;
   return (
     <ModalDialog
-      title={`${translate('Request account removal for')} ${userName}.`}
+      title={translate('Request account removal for {userName}.', {userName})}
       footer={
         <div>
           <CloseDialogButton label={translate('Close')} />
         </div>
       }
     >
-      <p>{`${translate('To remove account, please send a request to')} ${supportEmail || translate('support')}.`}</p>
+      <p>{translate('To remove account, please send a request to {support}.', {support: supportEmail || translate('support')})}</p>
       <p>{translate('Please note that request should specify user name and provide a reason.')}</p>
     </ModalDialog>
   );

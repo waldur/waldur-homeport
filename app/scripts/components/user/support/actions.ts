@@ -24,4 +24,8 @@ export const showUserRemoval = () => {
   return openModalDialog('issueCreateDialog', {resolve});
 };
 
+export const showUserRemovalMessage = resolve => {
+  return openModalDialog('UserRemovalMessageDialog', {resolve});
+};
+
 export const updateUser = createFormAction('waldur/user/UPDATE');

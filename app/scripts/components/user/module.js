@@ -2,7 +2,6 @@ import userEvents from './user-events';
 import userManage from './user-manage';
 import userSidebar from './user-sidebar';
 import userDetails from './user-details';
-import UserRemovalMessageDialog from './UserRemovalMessageDialog';
 import userEdit from './support/UserEditContainer';
 import userDashboard from './list/UserDashboard';
 import userOrganizations from './list/CustomerPermissions';
@@ -18,13 +17,13 @@ import userToken from './user-token';
 import filtersModule from './filters';
 import hooksModule from './hooks/module';
 import keysModule from './keys/module';
+import supportModule from './support/module';
 
 export default (module) => {
   module.directive('userEvents', userEvents);
   module.component('userManage', userManage);
   module.component('userSidebar', userSidebar);
   module.directive('userDetails', userDetails);
-  module.component('userRemovalMessageDialog', UserRemovalMessageDialog);
   module.component('userEdit', userEdit);
   module.component('userDashboard', userDashboard);
   module.component('userOrganizations', userOrganizations);
@@ -41,4 +40,5 @@ export default (module) => {
   filtersModule(module);
   hooksModule(module);
   keysModule(module);
+  supportModule(module);
 };
