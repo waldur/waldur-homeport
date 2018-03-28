@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StringField, SelectField, FileUploadField, FormContainer} from '@waldur/form-react';
+import { FileUploadField, FormContainer, SelectField, StringField } from '@waldur/form-react';
 
 const AzureRegions = [
   'Central US',
@@ -26,6 +26,7 @@ export const AzureForm = ({ translate, container }) => (
       description={translate('X509 certificate in .PEM format')}
       accept="application/x-x509-ca-cert"
       buttonLabel={translate('Browse')}
+      showFileName={true}
       required={true}
     />
     <StringField

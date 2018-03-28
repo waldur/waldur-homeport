@@ -1,5 +1,7 @@
+import { Action } from '@waldur/core/reducerActions';
+
 import * as constants from './constants';
-import { Attachment, Action } from './types';
+import { Attachment } from './types';
 
 export const issueAttachmentsGet = (issueUrl: string): Action<{ issueUrl: string }> => ({
   type: constants.ISSUE_ATTACHMENTS_GET,

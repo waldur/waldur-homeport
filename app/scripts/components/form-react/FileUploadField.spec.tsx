@@ -8,6 +8,7 @@ const renderField = (props?) => mount(
     name="password"
     label="Password"
     buttonLabel="Browse"
+    showFileName={true}
     {...props}
   />
 );

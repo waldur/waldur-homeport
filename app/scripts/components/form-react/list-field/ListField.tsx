@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {Field} from 'redux-form';
+import { Field } from 'redux-form';
 
-import {InternalListField} from '@waldur/form-react/list-field/ListFieldInternal';
-import {ListFieldParameters} from '@waldur/form-react/list-field/types';
+import { InternalListField } from '@waldur/form-react/list-field/ListFieldInternal';
+import { ListFieldParameters } from '@waldur/form-react/list-field/types';
 
 export const ListField = (params: ListFieldParameters) => {
   return (
     <div className="form-group">
-      <label className="control-label col-sm-3">{params.label}</label>
+      <label className="control-label col-sm-2">{params.label}</label>
       <div className="col-sm-5 same-padding-as-control-label">
         <Field name={params.formFieldName}
                component={fieldProps =>
@@ -15,6 +15,7 @@ export const ListField = (params: ListFieldParameters) => {
                                     selectedOption={fieldProps.input.value}
                                     onOptionSelected={newValue => fieldProps.input.onChange(newValue)}/>}
         />
+        {params.description && <p className="help-block m-b-none text-muted">{params.description}</p>}
       </div>
     </div>
   );
