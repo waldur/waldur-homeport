@@ -7,14 +7,15 @@ import { closeModalDialog } from '@waldur/modal/actions';
 
 interface Props extends TranslateProps {
   dismiss(): void;
+  label?: string;
 }
 
-const PureCloseDialogButton = ({translate, dismiss}: Props) => (
+const PureCloseDialogButton = ({ translate, dismiss, label }: Props) => (
   <button
     type="button"
     className="btn btn-default"
     onClick={dismiss}>
-    <span>{translate('Cancel')}</span>
+    <span>{label || translate('Cancel')}</span>
   </button>
 );
 

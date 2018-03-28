@@ -928,6 +928,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
 #: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html
+#: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
 msgid "Close"
 msgstr ""
 
@@ -3828,6 +3829,10 @@ msgstr ""
 msgid "Please note that request should specify tenant and provide a reason."
 msgstr ""
 
+#: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
+msgid "Please note that request should specify user name and provide a reason."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
 msgid "Please provide a reason"
@@ -4600,6 +4605,10 @@ msgstr ""
 
 #: app/scripts/components/issues/request-service-button.js
 msgid "Request a new service"
+msgstr ""
+
+#: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
+msgid "Request account removal for {userName}."
 msgstr ""
 
 #: app/scripts/components/experts/extensions/expert-request-create-button.html
@@ -5820,6 +5829,10 @@ msgstr ""
 msgid "To port"
 msgstr ""
 
+#: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
+msgid "To remove account, please send a request to {support}."
+msgstr ""
+
 #: app/scripts/components/intro/base-intro.js
 msgid "To start please select a workspace"
 msgstr ""
@@ -6884,6 +6897,7 @@ msgid "staff"
 msgstr ""
 
 #: app/scripts/components/experts/requests/details/expert-request-details.js
+#: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
 msgid "support"
 msgstr ""
 

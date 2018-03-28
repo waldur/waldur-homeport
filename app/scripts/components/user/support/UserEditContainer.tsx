@@ -3,12 +3,14 @@ import * as Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import { ENV } from '@waldur/core/services';
 import { translate, withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 import {
   fieldIsVisible,
   isRequired,
   isVisibleForSupportOrStaff,
+  isVisibleSupport,
   nativeNameIsVisible,
   userTokenIsVisible
 } from '@waldur/user/support/selectors';
@@ -29,15 +31,15 @@ const UserUpdateComponent: React.SFC<UserUpdateComponentProps> = props => {
       <div className="col-sm-2 col-xs-12 user-edit">
         <div className="logo">
           <div className="img-wrapper">
-            <Gravatar email={props.user.email} size={100}/>
+            <Gravatar email={props.user.email} size={100} />
           </div>
           <span className="manage-gravatar">
-            {translate('Manage at')}<br/>
+            {translate('Manage at')}<br />
             <a href="https://gravatar.com" target="_blank">gravatar.com</a>
           </span>
         </div>
       </div>
-      <UserEditForm {...props}/>
+      <UserEditForm {...props} />
     </div>
   );
 };
@@ -48,6 +50,7 @@ UserUpdateComponent.defaultProps = {
 
 const mapStateToProps = (state, ownProps) => ({
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
+  isVisibleSupportFeature: isVisibleSupport(state),
   initialValues: ownProps.user,
   userTokenIsVisible: userTokenIsVisible(state, ownProps),
   fieldIsVisible: fieldIsVisible(ownProps),
@@ -69,15 +72,38 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       agree_with_policy: true,
     }, dispatch);
   }
+
   return {
     updateUser,
-    showUserRemoval: () => dispatch(actions.showUserRemoval()),
+  };
+};
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { isVisibleSupportFeature } = stateProps;
+  const { user, dispatch } = ownProps;
+  let showUserRemoval;
+
+  if (isVisibleSupportFeature) {
+    showUserRemoval = () => dispatch(actions.showUserRemoval());
+  } else {
+    const resolve = {
+      supportEmail: ENV.supportEmail,
+      userName: user.full_name,
+    };
+    showUserRemoval = () => dispatch(actions.showUserRemovalMessage(resolve));
+  }
+
+  return {
+    ...ownProps,
+    ...stateProps,
+    ...dispatchProps,
+    showUserRemoval,
   };
 };
 
 const enhance = compose(
   withTranslation,
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps, mergeProps),
 );
 
 export const UserEditContainer = enhance(UserUpdateComponent);

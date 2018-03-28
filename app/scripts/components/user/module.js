@@ -17,6 +17,7 @@ import userToken from './user-token';
 import filtersModule from './filters';
 import hooksModule from './hooks/module';
 import keysModule from './keys/module';
+import supportModule from './support/module';
 
 export default (module) => {
   module.directive('userEvents', userEvents);
@@ -39,4 +40,5 @@ export default (module) => {
   filtersModule(module);
   hooksModule(module);
   keysModule(module);
+  supportModule(module);
 };
