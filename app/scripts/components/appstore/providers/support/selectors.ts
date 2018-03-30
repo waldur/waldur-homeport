@@ -5,3 +5,7 @@ export const serviceUsageSelector = state => {
 export const selectedServiceProviderSelector = state => {
   return state.serviceUsage.selectedServiceProvider;
 };
+
+export const filterSelector = state => {
+  return state.serviceUsage.filter;
+};

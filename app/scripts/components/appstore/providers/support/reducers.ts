@@ -12,10 +12,11 @@ const INITIAL_STATE = {
     service_providers: {},
     service_consumers: {},
   },
-  loading: false,
   selectedServiceProvider: {
     consumers: [],
   },
+  loading: false,
+  filter: true,
 };
 
 export function reducer(state = INITIAL_STATE, action) {
@@ -52,6 +53,18 @@ export function reducer(state = INITIAL_STATE, action) {
         ...state,
         loading: false,
         error: action.payload.error,
+      };
+
+    case actions.FILTER_SHOW:
+      return {
+        ...state,
+        filter: true,
+      };
+
+    case actions.FILTER_HIDE:
+      return {
+        ...state,
+        filter: false,
       };
 
     default:

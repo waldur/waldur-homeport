@@ -11,14 +11,11 @@ interface UsageMapProps {
   zoom?: number;
   id: string;
   data: any;
-  serviceProviderSelect: (uuid: string) => void;
+  selectServiceProvider: (uuid: string) => void;
+  hideFilter: () => void;
 }
 
-interface UsageMapState {
-  map: any;
-}
-
-export default class UsageMap extends React.Component<UsageMapProps, UsageMapState> {
+export default class UsageMap extends React.Component<UsageMapProps> {
   map: any;
 
   componentDidMount() {
@@ -26,7 +23,7 @@ export default class UsageMap extends React.Component<UsageMapProps, UsageMapSta
   }
 
   shouldComponentUpdate(nextProps) {
-    if (nextProps.data != this.props.data){
+    if (nextProps.data !== this.props.data) {
       return true;
     }
     return false;
@@ -97,7 +94,8 @@ export default class UsageMap extends React.Component<UsageMapProps, UsageMapSta
 
     oneToManyFlowmapLayer.on('click', e => {
       if (e.sharedOriginFeatures.length) {
-        this.props.serviceProviderSelect(e.layer.feature.properties.provider_uuid);
+        this.props.selectServiceProvider(e.layer.feature.properties.provider_uuid);
+        this.props.hideFilter();
         oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
       }
       if (e.sharedDestinationFeatures.length) {

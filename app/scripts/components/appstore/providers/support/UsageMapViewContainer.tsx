@@ -3,27 +3,36 @@ import { connect } from 'react-redux';
 
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { fetchServiceUsageStart, serviceProviderSelect } from './actions';
-import { selectedServiceProviderSelector, serviceUsageSelector } from './selectors';
+import {
+  fetchServiceUsageStart,
+  serviceProviderSelect,
+  showFilter,
+  hideFilter,
+} from './actions';
+import {
+  selectedServiceProviderSelector,
+  serviceUsageSelector,
+  filterSelector
+} from './selectors';
 import UsageMapView from './UsageMapView';
 
-class UsageMapViewComponent extends React.Component<any, any> {
+interface UsageMapViewComponentProps {
+  fetchServiceUsageStart: () => void;
+  serviceUsage: any;
+  selectedServiceProvider: any;
+  selectServiceProvider: () => void;
+  showFilter: () => void;
+  hideFilter: () => void;
+  filter: boolean;
+}
+
+class UsageMapViewComponent extends React.Component<UsageMapViewComponentProps> {
   componentWillMount() {
     this.props.fetchServiceUsageStart();
   }
-
   render() {
-    const {
-      serviceUsage,
-      selectServiceProvider,
-      selectedServiceProvider,
-    } = this.props;
-
     return (
-      <UsageMapView
-      serviceProviderSelect={selectServiceProvider}
-      serviceUsage={serviceUsage}
-      selectedServiceProvider={selectedServiceProvider}/>
+      <UsageMapView {...this.props} />
     );
   }
 }
@@ -31,11 +40,14 @@ class UsageMapViewComponent extends React.Component<any, any> {
 const mapStateToProps = state => ({
   serviceUsage: serviceUsageSelector(state),
   selectedServiceProvider: selectedServiceProviderSelector(state),
+  filter: filterSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchServiceUsageStart: () => dispatch(fetchServiceUsageStart()),
   selectServiceProvider: (uuid: string) => dispatch(serviceProviderSelect(uuid)),
+  showFilter: () => dispatch(showFilter()),
+  hideFilter: () => dispatch(hideFilter()),
 });
 
 const UsageMapViewContainer = connect(mapStateToProps, mapDispatchToProps)(UsageMapViewComponent);

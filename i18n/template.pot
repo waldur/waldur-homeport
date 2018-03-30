@@ -425,6 +425,7 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
+#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
 #: app/scripts/components/issues/list/issues-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 #: app/scripts/components/user/support/UserFilter.tsx
@@ -2917,6 +2918,10 @@ msgstr ""
 msgid "Method"
 msgstr ""
 
+#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+msgid "Metric"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "Min RAM"
 msgstr ""
@@ -2961,6 +2966,10 @@ msgstr ""
 
 #: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
 msgid "Monitoring system is being updated."
+msgstr ""
+
+#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+msgid "Month"
 msgstr ""
 
 #: app/scripts/components/quotas/constants.js
@@ -5167,7 +5176,11 @@ msgstr ""
 msgid "Server error occurred."
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.ts
+#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+msgid "Service Provider Type"
+msgstr ""
+
+#: app/scripts/components/issues/types/constants.js
 msgid "Service Request"
 msgstr ""
 
@@ -5269,6 +5282,14 @@ msgstr ""
 
 #: app/scripts/components/resource/UserPassword.tsx
 msgid "Show password"
+msgstr ""
+
+#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+msgid "Show private"
+msgstr ""
+
+#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+msgid "Show shared"
 msgstr ""
 
 #: app/scripts/components/offering/OfferingReportButton.tsx

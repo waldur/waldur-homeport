@@ -25,15 +25,15 @@ export const MapInfoPanel = ({data}) => {
                 <small className="pull-right">{consumer.data.period}</small>
               </div>
               <div>
-                <span>Cpu</span>
+                <span>CPU</span>
                 <small className="pull-right">{consumer.data.cpu} hours</small>
               </div>
               <div>
-                <span>Ram</span>
+                <span>RAM</span>
                 <small className="pull-right">{consumer.data.ram} hours</small>
               </div>
               <div>
-                <span>Gpu</span>
+                <span>GPU</span>
                 <small className="pull-right">{consumer.data.gpu} hours</small>
               </div>
             </div>

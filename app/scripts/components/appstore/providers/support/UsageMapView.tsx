@@ -1,32 +1,65 @@
 import * as React from 'react';
 
+import { MapInfoPanel } from '@waldur/appstore/providers/support/MapInfoPanel';
 import UsageMap from '@waldur/appstore/providers/support/UsageMap';
 
-import { MapInfoPanel } from './MapInfoPanel';
-
 import './providers-support.scss';
+import { UsageMapFilter } from './UsageMapFilter';
 
-interface UsageMapViewProps {
+export interface UsageMapViewProps {
   serviceUsage: any;
   selectedServiceProvider: any;
-  serviceProviderSelect: (uuid: string) => void;
+  selectServiceProvider: () => void;
+  filter: boolean;
+  showFilter: () => void;
+  hideFilter: () => void;
 }
 
-export const UsageMapView = (props: UsageMapViewProps) => (
-  <>
-    <UsageMap
-      center={[0, 0]}
-      zoom={5}
-      id="usage-map"
-      data={props.serviceUsage}
-      serviceProviderSelect={props.serviceProviderSelect}
-    />
-    {props.selectedServiceProvider.uuid &&
-      <div id="usage-map-panel">
-        <MapInfoPanel data={props.selectedServiceProvider}/>
-      </div>
+export class UsageMapView extends React.Component<UsageMapViewProps, any> {
+  serviceUsage: any;
+
+  handleFilterClick = () => {
+    this.props.showFilter();
+  }
+
+  renderInfoPanelContent = () => {
+    if (this.props.selectedServiceProvider && !this.props.filter) {
+      this.props.hideFilter();
+      return <MapInfoPanel data={this.props.selectedServiceProvider} />;
     }
-  </>
-);
+    return <UsageMapFilter />;
+  }
+
+  render() {
+    const {
+      serviceUsage,
+      selectServiceProvider,
+      hideFilter,
+      filter,
+    } = this.props;
+    return (
+      <>
+        <UsageMap
+          center={[0, 0]}
+          zoom={5}
+          id="usage-map"
+          data={serviceUsage}
+          selectServiceProvider={selectServiceProvider}
+          hideFilter={hideFilter}
+        />
+        <div id="usage-map-panel">
+          {!filter &&
+            <button
+              type="button"
+              className="btn btn-outline btn-primary m-xxs"
+              onClick={this.handleFilterClick}>Filter
+            </button>
+          }
+          {this.renderInfoPanelContent()}
+        </div>
+      </>
+    );
+  }
+}
 
 export default UsageMapView;

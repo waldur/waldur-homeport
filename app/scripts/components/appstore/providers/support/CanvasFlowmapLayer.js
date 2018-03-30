@@ -1,5 +1,7 @@
 import TWEEN from '@tweenjs/tween.js/src/Tween';
 
+/*eslint-disable */
+
 (function(factory, window) {
     // module loaders support for LeafletJS plugins, see:
     // https://github.com/Leaflet/Leaflet/blob/master/PLUGIN-GUIDE.md#module-loaders
