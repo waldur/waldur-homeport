@@ -7,9 +7,16 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
+interface ReportSection {
+  header: string;
+  body: string;
+}
+
+type Report = ReportSection[];
+
 interface OfferingReportDialogProps extends TranslateProps {
   resolve: {
-    report: object
+    report: Report;
   };
 }
 
@@ -19,9 +26,9 @@ const OfferingReportDialog = (props: OfferingReportDialogProps) => (
     footer={<CloseDialogButton />}
   >
     <Accordion>
-      {Object.keys(props.resolve.report).map((key, index) => (
-        <Panel header={key} eventKey={index} key={index}>
-          <pre>{JSON.stringify(props.resolve.report[key])}</pre>
+      {props.resolve.report.map((section, index) => (
+        <Panel header={section.header} eventKey={index} key={index}>
+          <pre>{section.body}</pre>
         </Panel>
       ))}
     </Accordion>

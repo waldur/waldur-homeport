@@ -24,7 +24,7 @@ export const PureOfferingReportButton = (props: OfferingReportButtonProps) => (
   ) : null
 );
 
-export const openReport = report => openModalDialog('offeringReportDialog', {resolve: {report}});
+export const openReport = report => openModalDialog('offeringReportDialog', {resolve: {report}, size: 'lg'});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   openReport: () => dispatch(openReport(ownProps.offering.report)),
