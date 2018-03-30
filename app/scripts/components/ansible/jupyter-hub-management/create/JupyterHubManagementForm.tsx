@@ -9,7 +9,6 @@ import { JupyterHubUserAdminMode } from '@waldur/ansible/jupyter-hub-management/
 import { validateSessionTimeoutHours } from '@waldur/ansible/jupyter-hub-management/validation';
 import { VirtualEnvironmentsForm } from '@waldur/ansible/python-management/form/VirtualEnvironmentsForm';
 import { FieldError, FormContainer, StringField, SubmitButton } from '@waldur/form-react';
-import { CheckboxField } from '@waldur/form-react/CheckboxField';
 import { ListField } from '@waldur/form-react/list-field/ListField';
 import { ListConfiguration } from '@waldur/form-react/list-field/types';
 import { RadioButtonChoice, RadioButtonField } from '@waldur/form-react/RadioButtonField';
@@ -20,34 +19,7 @@ export interface JupyterHubManagementCreateFormProps extends JupyterHubManagemen
 }
 
 export class JupyterHubManagementCreateForm extends React.Component<JupyterHubManagementCreateFormProps> {
-
-  state = {
-    publicKeyHelpCollaped: true,
-  };
-
-  unwrapOrCollapsePublicKeyHelp = () => {
-    this.setState({publicKeyHelpCollaped: !this.state.publicKeyHelpCollaped});
-  }
-
   render() {
-    const waldurPublicKeyHelp = (
-      <>
-        {translate('Ensure that the following public key is present in authorized_keys file on the selected instance')}
-        <br/>
-        <a onClick={this.unwrapOrCollapsePublicKeyHelp}>Help</a>
-        {this.state.publicKeyHelpCollaped ? null :
-          <>
-            <br/>
-            {translate('Ensure that the following public key is present in /home/SYSTEM_DEFAULT_USER/.ssh/authorized_keys file.')}
-            <br/>
-            {translate('If not, append it there. If file is not present, create new file with the key.')}
-            <pre style={{whiteSpace: 'pre-wrap'}}>
-              {this.props.waldurPublicKey}
-            </pre>
-          </>
-        }
-      </>
-    );
     return (
       <div className="wrapper wrapper-content">
         <div className="ibox-content">
@@ -111,12 +83,6 @@ export class JupyterHubManagementCreateForm extends React.Component<JupyterHubMa
                         pathToJupyterHubUsers={'authenticationConfig.jupyterHubLinuxUsers'}
                         getJupyterHubUsers={(formData: JupyterHubManagementFormData) => formData.authenticationConfig.jupyterHubLinuxUsers}/>
                       }
-                      <CheckboxField
-                        name="waldurPublicKeyInstalled"
-                        label={this.props.translate('Virtual machine has cloud broker public key')}
-                        description={waldurPublicKeyHelp}
-                        checked={this.props.jupyterHubManagement.waldurPublicKeyInstalled === true}
-                        required={true}/>
                     </FormContainer>
                     <div className="form-group">
                       <div className="col-sm-offset-2 col-sm-5">

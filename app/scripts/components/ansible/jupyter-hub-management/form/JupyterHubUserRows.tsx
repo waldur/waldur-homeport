@@ -94,7 +94,7 @@ export class JupyterHubUserRowsComponent extends React.Component<JupyterHubUserR
               <button
                 type="button"
                 title={translate('Remove JupyterHub user')}
-                className="btn btn-default"
+                className="btn btn-danger"
                 disabled={this.props.isGlobalRequestRunning}
                 onClick={() => this.props.fields.remove(index)}>X
               </button>

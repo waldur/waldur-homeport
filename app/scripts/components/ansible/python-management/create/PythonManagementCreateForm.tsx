@@ -26,29 +26,39 @@ export class PythonManagementCreateForm extends React.Component<PythonManagement
   }
 
   render() {
+    const systemUser = this.props.pythonManagement.systemUser
+      ? this.props.pythonManagement.systemUser : 'TARGET_SYSTEM_USER';
+    const selectedInstance = (this.props.pythonManagement as any).selectedInstance;
+    const instanceExternalIp = selectedInstance && selectedInstance.floating_ips ? selectedInstance.floating_ips[0].address : 'VM_EXTERNAL_IP';
     const waldurPublicKeyHelp = (
       <ul>
         <li>
-          Target virtual machine should have 'SSH' security group assigned (to allow SSH connections).
+          {translate('Target virtual machine should have \'SSH\' security group assigned (to allow SSH connections).')}
         </li>
         <li>
-          Ensure that the following public key is present in authorized_keys file on the selected instance
+          {translate('Ensure that the following public key is present in authorized_keys file on the selected instance.')}
           <br/>
-          <a onClick={this.unwrapOrCollapsePublicKeyHelp}>Help</a>
+          <a onClick={this.unwrapOrCollapsePublicKeyHelp}>Show key</a>
           {this.state.publicKeyHelpCollaped ? null :
-            <>
-              <br/>
-              Ensure that the following public key is present in /home/TARGET_SYSTEM_USER/.ssh/authorized_keys file.
-              <br/>
-              If not, append it there. If file is not present, create new file with the key.
-              <pre style={{whiteSpace: 'pre-wrap'}}>
+            <ul>
+              <li>{translate(`Connect to a virtual machine: ${instanceExternalIp}:22`)}</li>
+              <li>{translate(`Ensure that the following public key is present in /home/${systemUser}/.ssh/authorized_keys file.`)}</li>
+              <li>
+                {translate('If not, append it there on a new line. If file is not present, create a new file with the key.')}
+                <pre style={{whiteSpace: 'pre-wrap'}}>
                 {this.props.waldurPublicKey}
               </pre>
-            </>
+              </li>
+            </ul>
           }
         </li>
       </ul>
     );
+    const virtualEnvironmentsDirectory = this.props.pythonManagement.virtualEnvironmentsDirectory
+      ? this.props.pythonManagement.virtualEnvironmentsDirectory : 'VIRTUAL_ENVS_DIRECTORY';
+    const virtualEnvironmentsDirectoryDescription = translate(
+      'Directory will be created in home directory of the specified system user:'
+      + '/home/' + systemUser + '/' + virtualEnvironmentsDirectory);
     return (
       <div className="wrapper wrapper-content">
         <div className="ibox-content">
@@ -71,12 +81,12 @@ export class PythonManagementCreateForm extends React.Component<PythonManagement
                     <FormContainer
                       submitting={this.props.submitting}
                       labelClass="col-sm-2"
-                      controlClass="col-sm-8">
+                      controlClass="col-sm-10">
                       <StringField
                         name="virtualEnvironmentsDirectory"
                         label={this.props.translate('Virtual environments directory')}
                         required={true}
-                        description={translate('Directory will be created in home directory of default system user.')}
+                        description={virtualEnvironmentsDirectoryDescription}
                         validate={validateVirtualEnvironmentDirectory}/>
                       <ListField formFieldName={'selectedInstance'}
                                  label={translate('Virtual machine')}
@@ -86,7 +96,7 @@ export class PythonManagementCreateForm extends React.Component<PythonManagement
                         name="systemUser"
                         label={this.props.translate('System user')}
                         required={true}
-                        description={translate('Python virtual environments folder will be installed in the home folder of this user.')}/>
+                        description={translate('User should be able to run commands as root')}/>
                       <VirtualEnvironmentsForm reduxFormChange={this.props.change}
                                                pythonManagement={this.props.pythonManagement}
                                                findVirtualEnvironments={_ => Promise.resolve()}

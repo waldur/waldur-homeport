@@ -120,7 +120,7 @@ export class InstalledLibraryRowForm<R extends ManagementRequest<R>>
         <div className="col-xs-1 same-padding-as-control-label">
           {this.isLibraryNameSelected() ?
             <a href={'https://pypi.python.org/pypi/' + this.getSelectedLibrary().name.value} target="_blank">
-              <span className="fa fa-link"/>
+              <span className="fa fa-external-link-alt"/>
             </a>
             : null}
         </div>
@@ -146,17 +146,19 @@ export class InstalledLibraryRowForm<R extends ManagementRequest<R>>
             }/>
         </div>
         {!this.props.jupyterHubMode &&
-        <button
-          type="button"
-          title={translate('Remove package')}
-          className="btn btn-default"
-          disabled={isVirtualEnvironmentNotEditable(
-            new VirtualEnvironmentNotEditableDs(this.props.pythonManagement), this.props.virtualEnvironmentIndex, this.props.managementRequestTimeout)}
-          onClick={() => this.props.fields.remove(this.props.libraryIndex)}>X
-        </button>
+        <>
+          <button
+            type="button"
+            title={translate('Remove package')}
+            className="btn btn-danger"
+            disabled={isVirtualEnvironmentNotEditable(
+              new VirtualEnvironmentNotEditableDs(this.props.pythonManagement), this.props.virtualEnvironmentIndex, this.props.managementRequestTimeout)}
+            onClick={() => this.props.fields.remove(this.props.libraryIndex)}>X
+          </button>
+          {this.isLibraryRequiresSaving()
+            ? <span className="fa fa-exclamation-triangle" title={translate('Library has not yet been saved')}/> : null}
+        </>
         }
-        {this.isLibraryRequiresSaving()
-          ? <span className="fa fa-exclamation-triangle" title={translate('Library has not yet been saved')}/> : null}
       </div>
     );
   }

@@ -10,10 +10,10 @@ import { resourcesService } from '@waldur/ansible/python-management/services.js'
 import { PythonManagementFormData } from '@waldur/ansible/python-management/types/PythonManagementFormData';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { findPublicKeyByUuid } from '@waldur/core/SshKeysApi';
+import { formatFilesize } from '@waldur/core/utils';
 import { ListConfiguration } from '@waldur/form-react/list-field/types';
 import { translate, TranslateProps, withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
-
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
@@ -47,11 +47,11 @@ class PythonManagementCreateComponent extends React.Component<PythonManagementCr
           label: translate('vCPU'),
         },
         {
-          name: (row: any) => row.ram,
+          name: (row: any) => formatFilesize(row.ram),
           label: translate('RAM'),
         },
         {
-          name: (row: any) => row.disk,
+          name: (row: any) => formatFilesize(row.disk),
           label: translate('Storage'),
         },
         {
@@ -68,7 +68,7 @@ class PythonManagementCreateComponent extends React.Component<PythonManagementCr
     const params = {
       project_uuid: this.props.project.uuid,
       resource_category: 'vms',
-      field: ['name', 'image_name', 'ram', 'cores', 'disk', 'url', 'service_project_link', 'state'],
+      field: ['name', 'image_name', 'ram', 'cores', 'disk', 'url', 'service_project_link', 'state', 'floating_ips'],
     };
     Promise.all([resourcesService.getList(params), findPublicKeyByUuid(this.props.waldurPublicKeyUuid)])
       .then(([instances, waldurPublicKey]) => {

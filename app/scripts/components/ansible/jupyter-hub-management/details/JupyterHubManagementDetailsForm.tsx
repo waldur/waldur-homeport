@@ -118,20 +118,24 @@ export class JupyterHubManagementDetailsForm extends React.Component<JupyterHubM
                       }
                     </FormContainer>
                     <div className="form-group">
-                      <div className="col-sm-offset-2 col-sm-7">
-                        <button type="submit"
-                                className="btn btn-btn-primary btn-xs">
-                          <i className="fa fa-shopping-cart"/>
-                          {translate('Apply JupyterHub configuration')}
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-danger btn-xs"
-                          disabled={areJupyterConfigFieldsDisabled(this.props.jupyterHubManagement, this.props.managementRequestTimeout)}
-                          onClick={() => this.props.deleteJupyterHubManagement(this.props.jupyterHubManagement)}>
-                          <i className="fa fa-trash"/>
-                          {translate('Delete JupyterHub & all its users with all their data')}
-                        </button>
+                      <div className="col-sm-offset-2">
+                        <div className="col-sm-3">
+                          <button type="submit"
+                                  className="btn btn-btn-primary btn-xs">
+                            <i className="fa fa-save"/>
+                            {translate('Apply JupyterHub configuration')}
+                          </button>
+                        </div>
+                        <div className="col-sm-3">
+                          <button
+                            type="button"
+                            className="btn btn-danger btn-xs"
+                            disabled={areJupyterConfigFieldsDisabled(this.props.jupyterHubManagement, this.props.managementRequestTimeout)}
+                            onClick={() => this.props.deleteJupyterHubManagement(this.props.jupyterHubManagement)}>
+                            <i className="fa fa-trash"/>
+                            {translate('Delete JupyterHub & all its users with all their data')}
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </form>

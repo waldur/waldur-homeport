@@ -41,7 +41,7 @@ export class VirtualEnvironmentsForm<R extends ManagementRequest<R>>
           </div>
         </div>
         }
-        <div className="col-sm-10">
+        <div className="col-sm-12">
           <FieldArray name={this.props.pathToVirtualEnvironments}
                       component={VirtualEnvironmentComponent} {...this.props}/>
         </div>

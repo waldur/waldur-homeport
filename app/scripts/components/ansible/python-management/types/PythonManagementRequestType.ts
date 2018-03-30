@@ -1,5 +1,4 @@
 export enum PythonManagementRequestType {
-  OVERALL = 'overall',
   SYNCHRONIZATION = 'synchronization',
   INITIALIZATION = 'initialization',
   VIRTUAL_ENVS_SEARCH = 'virtual_envs_search',

@@ -5,7 +5,7 @@ import { ManagementRequest } from '@waldur/ansible/python-management/types/Manag
 export class JupyterHubManagementRequest extends ManagementRequest<JupyterHubManagementRequest> {
   requestType: JupyterHubManagementRequestType;
 
-  buildReadableTooltip(request: JupyterHubManagementRequest): string {
+  buildRequestTypeTooltip(request: JupyterHubManagementRequest): string {
     return JUPYTER_REQUEST_TYPE_READABLE_TEXT_MAPPING[request.requestType];
   }
 }

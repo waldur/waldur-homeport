@@ -20,13 +20,13 @@ export const PythonManagementDetailsSummary = (props: PythonManagementDetailsPro
         {translate('Libraries to install')}:
         <ul>
           {request.librariesToInstall.map((lib, index) => (
-            <li key={index}>{lib.name} == {lib.version}</li>
+            <li key={index}>{lib.name}=={lib.version}</li>
           ))}
         </ul>
         {translate('Libraries to remove')}:
         <ul>
           {request.librariesToRemove.map((lib, index) => (
-            <li key={index}>{lib.name} == {lib.version}</li>
+            <li key={index}>{lib.name}=={lib.version}</li>
           ))}
         </ul>
         </>
@@ -56,7 +56,7 @@ export const PythonManagementDetailsSummary = (props: PythonManagementDetailsPro
                   <FormContainer
                     submitting={props.submitting}
                     labelClass="col-sm-2"
-                    controlClass="col-sm-8">
+                    controlClass="col-sm-10">
                     <div className="form-group">
                       <label className="control-label col-sm-2">{translate('State')}</label>
                       <div className="same-padding-as-control-label">
@@ -107,21 +107,25 @@ export const PythonManagementDetailsSummary = (props: PythonManagementDetailsPro
                   </FormContainer>
 
                   <div className="form-group">
-                    <div className="col-sm-offset-2 col-sm-7">
-                      <button type="submit"
-                              className="btn btn-btn-primary btn-xs"
-                              disabled={props.submitting || existsExecutingGlobalRequest(props.pythonManagement, props.pythonManagementRequestTimeout)}>
-                        <i className="fa fa-shopping-cart"/>
-                        {props.translate('Save virtual environments')}
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger btn-xs"
-                        onClick={() => props.deletePythonEnvironment(props.pythonManagement)}
-                        disabled={props.submitting || existsExecutingGlobalRequest(props.pythonManagement, props.pythonManagementRequestTimeout)}>
-                        <i className="fa fa-trash"/>
-                        {translate('Delete python management & virtual environments')}
-                      </button>
+                    <div className="col-sm-offset-2">
+                      <div className="col-sm-3">
+                        <button type="submit"
+                                className="btn btn-btn-primary btn-xs"
+                                disabled={props.submitting || existsExecutingGlobalRequest(props.pythonManagement, props.pythonManagementRequestTimeout)}>
+                          <i className="fa fa-save"/>
+                          {props.translate('Save virtual environments')}
+                        </button>
+                      </div>
+                      <div className="col-sm-3">
+                        <button
+                          type="button"
+                          className="btn btn-danger btn-xs"
+                          onClick={() => props.deletePythonEnvironment(props.pythonManagement)}
+                          disabled={props.submitting || existsExecutingGlobalRequest(props.pythonManagement, props.pythonManagementRequestTimeout)}>
+                          <i className="fa fa-trash"/>
+                          {translate('Delete python management & virtual environments')}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </form>

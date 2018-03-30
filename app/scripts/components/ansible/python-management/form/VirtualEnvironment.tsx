@@ -190,7 +190,7 @@ export class VirtualEnvironmentComponent<R extends ManagementRequest<R>>
                   <a onClick={() => this.downloadRequirementsFile(index)}>Download requirements.txt</a>
                 </div>
                 }
-                <div className="col-xs-2">
+                <div className="col-xs-3">
                   <Field
                     name={`${virtualEnvironment}.requirements`}
                     onChange={this.buildOnRequirementsFileSelectedCallback(index) as any}
@@ -199,17 +199,17 @@ export class VirtualEnvironmentComponent<R extends ManagementRequest<R>>
                 </div>
               </>
               }
-
-              {!this.getVirtualEnvironments(this.props.pythonManagement)[index].uuid
-              && this.getVirtualEnvironments(this.props.pythonManagement)[index].name
-                ?
-                <span className="fa fa-exclamation-triangle"
-                      title={translate('Virtual environment has not yet been saved.')}/> : null}
-
-              <a className="collapse-link" style={{marginLeft: '10px'}}
-                 onClick={() => this.collapseOrExpandVirtualEnv(index)}>
-                <i className={chevronClass(index)}/>
-              </a>
+              <div className="col-xs-1">
+                {!this.getVirtualEnvironments(this.props.pythonManagement)[index].uuid
+                && this.getVirtualEnvironments(this.props.pythonManagement)[index].name
+                  ? <span className="fa fa-exclamation-triangle"
+                          title={translate('Virtual environment has not yet been saved.')}/>
+                  : null}
+                <a className="collapse-link" style={{marginLeft: '10px'}}
+                   onClick={() => this.collapseOrExpandVirtualEnv(index)}>
+                  <i className={chevronClass(index)}/>
+                </a>
+              </div>
             </div>
             {this.isVirtualEnvExpanded(index) &&
             <FieldArray name={`${virtualEnvironment}.installedLibraries`}
