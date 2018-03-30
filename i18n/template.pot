@@ -664,6 +664,10 @@ msgstr ""
 msgid "Batch processing"
 msgstr ""
 
+#: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
+msgid "Batch processing documentation"
+msgstr ""
+
 #: app/scripts/components/slurm/SlurmForm.tsx
 msgid "Batch service"
 msgstr ""
@@ -2788,6 +2792,10 @@ msgstr ""
 msgid "MAC address"
 msgstr ""
 
+#: app/scripts/components/slurm/register-header.ts
+msgid "MOAB allocation"
+msgstr ""
+
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/user/constants.js
 #: app/scripts/components/user/routes.js
@@ -4873,6 +4881,10 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-service.js
 msgid "SAML2 single logout has been started. Please wait until it completes."
+msgstr ""
+
+#: app/scripts/components/slurm/register-header.ts
+msgid "SLURM allocation"
 msgstr ""
 
 #: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html

@@ -1,3 +1,4 @@
+import * as registry from './resource-configuration';
 import template from './resource-details.html';
 
 const resourceDetails = {
@@ -12,6 +13,11 @@ const resourceDetails = {
       this.resourceUtils = resourceUtils;
     }
     $onInit() {
+      const config = registry.get(this.resource.resource_type);
+      if (config) {
+        this.header = config.getHeader(this.resource);
+        return;
+      }
       this.header = this.resourceUtils.formatResourceType(this.resource);
     }
   }
