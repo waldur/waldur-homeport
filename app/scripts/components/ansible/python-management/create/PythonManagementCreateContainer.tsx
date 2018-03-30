@@ -1,4 +1,3 @@
-import { formatFilesize } from '@waldur/core/utils';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -11,10 +10,10 @@ import { resourcesService } from '@waldur/ansible/python-management/services.js'
 import { PythonManagementFormData } from '@waldur/ansible/python-management/types/PythonManagementFormData';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { findPublicKeyByUuid } from '@waldur/core/SshKeysApi';
+import { formatFilesize } from '@waldur/core/utils';
 import { ListConfiguration } from '@waldur/form-react/list-field/types';
 import { translate, TranslateProps, withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
-
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 

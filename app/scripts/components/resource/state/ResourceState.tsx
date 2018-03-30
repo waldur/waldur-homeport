@@ -12,12 +12,12 @@ interface ResourceStateProps extends TranslateProps {
 }
 
 export const ResourceStateIndicator = (props: StateIndicator) => {
-  const stateIndicator =
+  const stateIndicator = (
     <div className={`progress ${props.movementClassName} state-indicator m-b-none`}>
       <span className={`progress-bar ${props.className} p-w-sm full-width`}>
         {props.label.toUpperCase()}
       </span>
-    </div>;
+    </div>);
   if (props.tooltip) {
     return (
       <Tooltip label={props.tooltip} id="resourceState">
