@@ -15,7 +15,15 @@ const formatLoginDetails = props =>
 
 const formatSubmitDetails = props => (
   <span className="html-description">
-    sbatch -A {props.resource.backend_id}
+    {props.resource.batch_service === 'MOAB' ? 'qsub' : 'sbatch'} -A {props.resource.backend_id}
+    {props.resource.homepage && (
+      <a href={props.resource.homepage}
+        target="_blank"
+        title={props.translate('Batch processing documentation')}>
+        &nbsp;
+        <i className="fa fa-info-circle"/>
+      </a>
+    )}
   </span>
 );
 

@@ -664,6 +664,10 @@ msgstr ""
 msgid "Batch processing"
 msgstr ""
 
+#: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
+msgid "Batch processing documentation"
+msgstr ""
+
 #: app/scripts/components/slurm/SlurmForm.tsx
 msgid "Batch service"
 msgstr ""
