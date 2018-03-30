@@ -1,8 +1,8 @@
-import { translate } from '@waldur/i18n';
 import * as React from 'react';
 
 import { commonStateIndicatorBuilder } from '@waldur/ansible/python-management/state-builder/StateIndicatorBuilder';
 import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
+import { translate } from '@waldur/i18n';
 import { ResourceStateIndicator } from '@waldur/resource/state/ResourceState';
 
 interface ManagementStateProps {
