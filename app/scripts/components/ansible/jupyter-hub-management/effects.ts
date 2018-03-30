@@ -27,7 +27,6 @@ import { JupyterHubManagementFormData } from '@waldur/ansible/jupyter-hub-manage
 import { JupyterHubManagementRequest } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementRequest';
 import { JupyterHubManagementRequestType } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementRequestType';
 import * as actionNames from '@waldur/ansible/python-management/actionNames';
-import { saveWaldurPublicKey } from '@waldur/ansible/python-management/actions';
 import { findPythonManagementsWithInstance } from '@waldur/ansible/python-management/api';
 import {
 DETAILS_POLLING_INTERVAL,
@@ -37,10 +36,9 @@ setRequestsStateTypePairs,
 startRequestOutputPollingTask
 } from '@waldur/ansible/python-management/commonEffects';
 import { isExecuting } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
-import { getAnsibleRequestTimeout, getWaldurPublicKeyUuid } from '@waldur/ansible/python-management/selectors';
+import { getAnsibleRequestTimeout } from '@waldur/ansible/python-management/selectors';
 import { ManagementEffectsConfig } from '@waldur/ansible/python-management/types/ManagementEffectsConfig';
 import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
-import { findPublicKeyByUuid } from '@waldur/core/SshKeysApi';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/coreSaga';
 import { getProject } from '@waldur/workspace/selectors';
@@ -174,10 +172,6 @@ function* handleInitializeJupyterHubManagementCreate() {
   try {
     const pythonManagementResponse = yield call(findPythonManagementsWithInstance);
     yield put(saveAvailablePythonManagements(pythonManagementResponse));
-
-    const waldurPublicKeyUuid = yield select(getWaldurPublicKeyUuid);
-    const foundWaldurPublicKey = yield call(findPublicKeyByUuid, waldurPublicKeyUuid);
-    yield put(saveWaldurPublicKey(foundWaldurPublicKey));
 
     yield put(initialize(JUPYTER_HUB_MANAGEMENT_CREATE_FORM_NAME, new JupyterHubManagementFormData()));
 

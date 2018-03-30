@@ -1011,6 +1011,10 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "Connect to a virtual machine: :22"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/actions.js
 msgid "Connected subnets"
 msgstr ""
@@ -1457,7 +1461,7 @@ msgid "DigitalOcean provider"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Directory will be created in home directory of default system user."
+msgid "Directory will be created in home directory of the specified system user:/home//"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-edit.html
@@ -1609,12 +1613,12 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-msgid "Ensure that the following public key is present in /home/SYSTEM_DEFAULT_USER/.ssh/authorized_keys file."
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "Ensure that the following public key is present in /home//.ssh/authorized_keys file."
 msgstr ""
 
-#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-msgid "Ensure that the following public key is present in authorized_keys file on the selected instance"
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "Ensure that the following public key is present in authorized_keys file on the selected instance."
 msgstr ""
 
 #: app/scripts/components/resource/actions/dialog/action-field-datetime.html
@@ -2205,8 +2209,8 @@ msgstr ""
 msgid "If nobody is whitelisted, any OAuth user can log in to JupyterHub."
 msgstr ""
 
-#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-msgid "If not, append it there. If file is not present, create new file with the key."
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "If not, append it there on a new line. If file is not present, create a new file with the key."
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
@@ -4362,10 +4366,6 @@ msgstr ""
 msgid "Python version"
 msgstr ""
 
-#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Python virtual environments folder will be installed in the home folder of this user."
-msgstr ""
-
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
 #: app/scripts/components/cost-planning/cost-plan-flavors.html
@@ -5545,6 +5545,10 @@ msgstr ""
 msgid "Taking a snapshot"
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "Target virtual machine should have 'SSH' security group assigned (to allow SSH connections)."
+msgstr ""
+
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Tax"
@@ -6251,6 +6255,10 @@ msgstr ""
 msgid "User profile"
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "User should be able to run commands as root"
+msgstr ""
+
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "User status"
 msgstr ""
@@ -6500,7 +6508,6 @@ msgstr ""
 msgid "Virtual machine"
 msgstr ""
 
-#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Virtual machine has cloud broker public key"
 msgstr ""

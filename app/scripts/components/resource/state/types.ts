@@ -15,7 +15,7 @@ export interface StateIndicator {
   className: string;
   label: string;
   movementClassName: string;
-  tooltip: string;
+  tooltip?: string;
 }
 
 export type ResourceState =

@@ -1,3 +1,4 @@
+import { formatFilesize } from '@waldur/core/utils';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -47,11 +48,11 @@ class PythonManagementCreateComponent extends React.Component<PythonManagementCr
           label: translate('vCPU'),
         },
         {
-          name: (row: any) => row.ram,
+          name: (row: any) => formatFilesize(row.ram),
           label: translate('RAM'),
         },
         {
-          name: (row: any) => row.disk,
+          name: (row: any) => formatFilesize(row.disk),
           label: translate('Storage'),
         },
         {
@@ -68,7 +69,7 @@ class PythonManagementCreateComponent extends React.Component<PythonManagementCr
     const params = {
       project_uuid: this.props.project.uuid,
       resource_category: 'vms',
-      field: ['name', 'image_name', 'ram', 'cores', 'disk', 'url', 'service_project_link', 'state'],
+      field: ['name', 'image_name', 'ram', 'cores', 'disk', 'url', 'service_project_link', 'state', 'floating_ips'],
     };
     Promise.all([resourcesService.getList(params), findPublicKeyByUuid(this.props.waldurPublicKeyUuid)])
       .then(([instances, waldurPublicKey]) => {
