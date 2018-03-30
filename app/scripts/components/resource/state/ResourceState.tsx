@@ -11,22 +11,15 @@ interface ResourceStateProps extends TranslateProps {
   resource: Resource;
 }
 
-export const ResourceStateIndicator = (props: StateIndicator) => {
-  const stateIndicator = (
+export const ResourceStateIndicator = (props: StateIndicator) => (
+  <Tooltip label={props.tooltip} id="resourceState">
     <div className={`progress ${props.movementClassName} state-indicator m-b-none`}>
       <span className={`progress-bar ${props.className} p-w-sm full-width`}>
         {props.label.toUpperCase()}
       </span>
-    </div>);
-  if (props.tooltip) {
-    return (
-      <Tooltip label={props.tooltip} id="resourceState">
-        {stateIndicator}
-      </Tooltip>
-    );
-  }
-  return stateIndicator;
-};
+    </div>
+  </Tooltip>
+);
 
 // TODO: remove extra check after resources list is migrated to ReactJS
 export const PureResourceState = (props: ResourceStateProps) => props.resource ? (

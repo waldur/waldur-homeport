@@ -7,9 +7,4 @@ export const STATE_READABLE_TEXT_MAPPING: PythonManagementRequestStateReadabilit
   [ManagementRequestState.ERRED]: 'Erred',
   [ManagementRequestState.CREATION_SCHEDULED]: 'Execution Scheduled',
   [ManagementRequestState.CREATING]: 'Executing',
-  // currently not used states
-  [ManagementRequestState.UPDATE_SCHEDULED]: 'Update Scheduled',
-  [ManagementRequestState.UPDATING]: 'Updating',
-  [ManagementRequestState.DELETION_SCHEDULED]: 'Deletion Scheduled',
-  [ManagementRequestState.DELETING]: 'Deleting',
 };

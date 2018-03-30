@@ -24,9 +24,11 @@ export class PythonManagementActionHistoryRow<R extends ManagementRequest<R>>
       <>
         <tr onClick={() => this.props.triggerRequestOutputPollingTask(this.props.request)}
             style={{cursor: 'pointer'}}>
-          <td>{this.props.request.buildReadableTooltip(this.props.request)}</td>
+          <td>{this.props.request.buildRequestTypeTooltip(this.props.request)}</td>
           <td>
-            <ResourceStateIndicator {...commonStateIndicatorBuilder.buildStateIndicator(this.props.request.requestState)}/>
+            <ResourceStateIndicator
+              {...commonStateIndicatorBuilder.buildStateIndicator(
+                this.props.request.requestState, this.props.request.buildReadableTooltip(this.props.request))}/>
           </td>
           <td>
             {this.props.request.virtualEnvironmentName ? this.props.request.virtualEnvironmentName : translate('Global request')}

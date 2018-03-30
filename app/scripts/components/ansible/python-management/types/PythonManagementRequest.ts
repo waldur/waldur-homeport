@@ -10,7 +10,7 @@ export class PythonManagementRequest extends ManagementRequest<PythonManagementR
   librariesToInstall: Library[];
   librariesToRemove: Library[];
 
-  buildReadableTooltip(request: PythonManagementRequest): string {
+  buildRequestTypeTooltip(request: PythonManagementRequest): string {
     return PYTHON_REQUEST_TYPE_READABLE_TEXT_MAPPING[request.requestType];
   }
 }

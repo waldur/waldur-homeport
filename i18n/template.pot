@@ -3643,6 +3643,10 @@ msgstr ""
 msgid "Output log"
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/state-builder/ManagementStatesIndicator.tsx
+msgid "Overall state of the service"
+msgstr ""
+
 #: app/scripts/components/user/list/UserDashboard.tsx
 msgid "Owned organizations"
 msgstr ""
@@ -6889,6 +6893,10 @@ msgstr ""
 
 #: app/scripts/components/user/list/ProjectPermissions.tsx
 msgid "projects"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/types/ManagementRequest.ts
+msgid "request"
 msgstr ""
 
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
