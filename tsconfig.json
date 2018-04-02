@@ -21,6 +21,10 @@
     ]
   },
   "include": [
-    "./app/scripts/components/**/*"
+    "./app/scripts/components/**/*",
+  ],
+  "typeRoots": [
+    "./node_modules/@types",
+    "./typings.d.ts"
   ]
 }

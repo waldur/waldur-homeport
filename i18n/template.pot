@@ -4830,6 +4830,11 @@ msgstr ""
 msgid "Resources import has been initiated"
 msgstr ""
 
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Resources usage"
+msgstr ""
+
 #: app/scripts/components/resource/state/constants.js
 msgid "Restarting"
 msgstr ""
