@@ -121,7 +121,7 @@ class DynamicTreemapExample extends React.Component {
     this.chart.setOption({
 
       title: {
-          text: 'Waldur resources usage',
+          text: 'Resources usage',
           left: 'center',
       },
 
@@ -137,14 +137,14 @@ class DynamicTreemapExample extends React.Component {
 
               return [
                   '<div class="tooltip-title">' + formatUtil.encodeHTML(treePath.join('/')) + '</div>',
-                  'Waldur resources usage: ' + formatUtil.addCommas(value) + ' resources',
+                  'Resources usage: ' + formatUtil.addCommas(value) + ' resources',
               ].join('');
           },
       },
 
       series: [
           {
-              name: 'Waldur resources usage',
+              name: 'Resources usage',
               type: 'treemap',
               visibleMin: 300,
               label: {
