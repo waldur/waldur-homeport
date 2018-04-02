@@ -48,7 +48,31 @@ const REPORT_ITEMS = [
     label: gettext('Usage overview'),
     icon: 'fa-map',
     link: 'support.usage',
-    feature: 'support.usage'
+    feature: 'support.usage',
+    index: 500,
+    children: [
+      {
+        label: gettext('Flowmap'),
+        icon: 'fa-sitemap',
+        link: 'support.flowmap',
+        feature: 'support.flowmap',
+        index: 100,
+      },
+      {
+        label: gettext('Heatmap'),
+        icon: 'fa-fire',
+        link: 'support.heatmap',
+        feature: 'support.heatmap',
+        index: 100,
+      },
+      {
+        label: gettext('Sankey diagram'),
+        icon: 'fa-chart-area',
+        link: 'support.sankey-diagram',
+        feature: 'support.sankey-diagram',
+        index: 200,
+      }
+    ]
   },
 ];
 

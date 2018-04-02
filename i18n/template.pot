@@ -1982,6 +1982,11 @@ msgstr ""
 msgid "Floating IPs"
 msgstr ""
 
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Flowmap"
+msgstr ""
+
 #: app/scripts/components/form/appstore-form-wizard.html
 msgid "Following fields contain errors"
 msgstr ""
@@ -2101,6 +2106,11 @@ msgstr ""
 
 #: app/scripts/components/navigation/header/intro-button.html
 msgid "Guide me"
+msgstr ""
+
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Heatmap"
 msgstr ""
 
 #: app/scripts/components/help/routes.js
@@ -4961,6 +4971,10 @@ msgstr ""
 msgid "SUBMITTED"
 msgstr ""
 
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Sankey diagram"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/project/project-providers.html
 #: app/scripts/components/providers/ProviderUpdateForm.tsx
@@ -6252,7 +6266,6 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
-#: app/scripts/components/issues/routes.js
 #: app/scripts/components/plans/plans-list.html
 msgid "Usage"
 msgstr ""

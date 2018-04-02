@@ -100,7 +100,7 @@ const data = {
   service_consumers: {
     hi: {
       name: 'University of Iceland',
-      country: 'IS',
+      country: 'Iceland',
       latitude: '64.1396203',
       longitude: '-21.9869085',
       description: 'The University of Iceland is a progressive educational and scientific institution, renowned in the global scientific community for its research. ' +
@@ -109,7 +109,16 @@ const data = {
     },
     tampere: {
       name: 'University of Tampere',
-      country: 'FI',
+      country: 'Finland',
+      latitude: '61.4717588',
+      longitude: '23.7836417',
+      description: 'The University of Tampere (UTA) is a culturally-committed higher education institution with the ' +
+      'social mission of educating visionaries who understand the world and change it.',
+      logo: 'http://www.uta.fi/sites/default/files/inline-images/logo_eng_small.jpg',
+    },
+    tamperama: {
+      name: 'University of Tamperama',
+      country: 'Finland',
       latitude: '61.4717588',
       longitude: '23.7836417',
       description: 'The University of Tampere (UTA) is a culturally-committed higher education institution with the ' +
@@ -118,7 +127,7 @@ const data = {
     },
     kth: {
       name: 'KTH Royal Institute of Technology',
-      country: 'SE',
+      country: 'Sweden',
       latitude: '59.3498092',
       longitude: '18.0684706',
       description: 'KTH Royal Institute of Technology in Stockholm has grown to become one of Europe’s leading ' +

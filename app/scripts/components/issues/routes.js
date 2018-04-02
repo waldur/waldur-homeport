@@ -95,12 +95,24 @@ export default function issueRoutes($stateProvider) {
       }
     })
 
-    .state('support.usage', {
-      url: 'usage/',
+    .state('support.flowmap', {
+      url: 'flowmap/',
       template: '<usage-map-view></usage-map-view>',
       data: {
-        pageTitle: gettext('Usage'),
-        feature: 'support.usage'
+        pageTitle: gettext('Flowmap'),
+        feature: 'support.flowmap'
+      },
+      resolve: {
+        permission: checkPermission
+      }
+    })
+
+    .state('support.heatmap', {
+      url: 'heatmap/',
+      template: '<heat-map></heat-map>',
+      data: {
+        pageTitle: gettext('Heatmap'),
+        feature: 'support.heatmap'
       },
       resolve: {
         permission: checkPermission

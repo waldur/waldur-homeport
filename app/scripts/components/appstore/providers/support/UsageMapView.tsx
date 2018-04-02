@@ -9,8 +9,8 @@ import { UsageMapFilter } from './UsageMapFilter';
 export interface UsageMapViewProps {
   serviceUsage: any;
   selectedServiceProvider: any;
-  selectServiceProvider: () => void;
   filter: boolean;
+  selectServiceProvider: () => void;
   showFilter: () => void;
   hideFilter: () => void;
 }
