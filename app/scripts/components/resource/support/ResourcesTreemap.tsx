@@ -1,11 +1,7 @@
-import * as React from 'react';
 import echarts from 'echarts';
+import * as React from 'react';
 
 import { ngInjector, ENV } from '@waldur/core/services';
-
-// tslint:disable
-// const diskData = require('./disk.tree.json');
-
 import { connectAngularComponent } from '@waldur/store/connect';
 
 const formatUtil = echarts.format;
@@ -84,7 +80,7 @@ class DynamicTreemapExample extends React.Component {
     return request.then(projects => {
         const customers = {};
 
-        for(const project of projects) {
+        for (const project of projects) {
             const quotas = {};
             for (const quota of project.quotas) {
                 quotas[quota.name] = quota.usage;
@@ -96,18 +92,18 @@ class DynamicTreemapExample extends React.Component {
         }
 
         const tree = [];
-        for(const customer in customers) {
-            const projects = customers[customer];
+        for (const customer of Object.keys(customers)) {
+            const customerProjects = customers[customer];
             let total = 0;
             const children = [];
-            for(const project in projects) {
-                const quotas = projects[project];
+            for (const project of Object.keys(customerProjects)) {
+                const quotas = customerProjects[project];
                 const value = quotas.nc_resource_count;
                 total += value;
                 children.push({
                     name: project,
                     path: `${customer}/${project}`,
-                    value: value,
+                    value,
                 });
             }
             tree.push({
