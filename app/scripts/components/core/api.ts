@@ -39,3 +39,36 @@ export const sendForm = (method: string, url: string, options) => {
     headers: {'Content-Type': undefined},
   });
 };
+
+export async function getAll(endpoint, options?) {
+  let response = await get(endpoint, options);
+  let result = [];
+
+  while (true) {
+    if (Array.isArray(response.data)) {
+      result = result.concat(response.data);
+    }
+    const url = getNextPageUrl(response);
+    if (url) {
+      response = await $http.get(url);
+    } else {
+      break;
+    }
+  }
+  return result;
+}
+
+const getNextPageUrl = response =>  {
+  // Extract next page URL from header links
+  const link = response.headers('link');
+  if (!link) {
+    return null;
+  }
+
+  const nextLink = link.split(', ').filter(s => s.indexOf('rel="next"') > -1)[0];
+  if (!nextLink) {
+    return null;
+  }
+
+  return nextLink.split(';')[0].slice(1, -1);
+};
