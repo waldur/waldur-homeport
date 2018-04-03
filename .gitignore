@@ -10,6 +10,7 @@ launch.json
 *.sw*
 /atlassian-ide-plugin.xml
 .todo
+yarn-error.log
 
 # OS X
 .DS_Store

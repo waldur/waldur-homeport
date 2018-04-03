@@ -1256,6 +1256,10 @@ msgstr ""
 msgid "Current flavor"
 msgstr ""
 
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Current price per month"
+msgstr ""
+
 #: app/scripts/components/digitalocean/droplet-resize.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 msgid "Current size"
@@ -1590,6 +1594,10 @@ msgstr ""
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 msgid "Error message"
+msgstr ""
+
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Esimated price per month"
 msgstr ""
 
 #: app/scripts/components/customer/customer-list.js
@@ -4316,6 +4324,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
+#: app/scripts/components/resource/support/ChartContainer.tsx
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "RAM"
@@ -4696,6 +4705,7 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/providers/provider-list.js
 #: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs-service.js
+#: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "Resources"
 msgstr ""
 
@@ -4709,6 +4719,11 @@ msgstr ""
 
 #: app/scripts/components/resource-import/resource-import-dialog.js
 msgid "Resources import has been initiated"
+msgstr ""
+
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Resources usage"
 msgstr ""
 
 #: app/scripts/components/resource/state/constants.js
@@ -6421,6 +6436,10 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Volume size"
+msgstr ""
+
 #: app/scripts/components/dashboard/base-quotas.ts
 msgid "Volume size, GB"
 msgstr ""
@@ -6806,6 +6825,10 @@ msgstr ""
 
 #: app/scripts/components/quotas/constants.js
 msgid "vCPU count"
+msgstr ""
+
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "vCPU, cores"
 msgstr ""
 
 #: app/scripts/components/form/appstore-field-list.js

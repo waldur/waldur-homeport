@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseProjects parses quotas for projects 1`] = `
+Object {
+  "current_price": Array [
+    Object {
+      "children": Array [
+        Object {
+          "name": "Project 1",
+          "path": "LCN/Project 1",
+          "value": 60,
+        },
+        Object {
+          "name": "Project 2",
+          "path": "LCN/Project 2",
+          "value": 0,
+        },
+      ],
+      "name": "LCN",
+      "path": "LCN",
+      "value": 60,
+    },
+  ],
+  "nc_cpu_usage": Array [
+    Object {
+      "children": Array [
+        Object {
+          "name": "Project 1",
+          "path": "LCN/Project 1",
+          "value": 100,
+        },
+        Object {
+          "name": "Project 2",
+          "path": "LCN/Project 2",
+          "value": 50,
+        },
+      ],
+      "name": "LCN",
+      "path": "LCN",
+      "value": 150,
+    },
+  ],
+  "nc_ram_usage": Array [
+    Object {
+      "children": Array [
+        Object {
+          "name": "Project 1",
+          "path": "LCN/Project 1",
+          "value": 102400,
+        },
+        Object {
+          "name": "Project 2",
+          "path": "LCN/Project 2",
+          "value": 204800,
+        },
+      ],
+      "name": "LCN",
+      "path": "LCN",
+      "value": 307200,
+    },
+  ],
+}
+`;

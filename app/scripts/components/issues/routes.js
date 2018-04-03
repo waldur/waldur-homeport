@@ -71,6 +71,18 @@ export default function issueRoutes($stateProvider) {
       }
     })
 
+    .state('support.resources-treemap', {
+      url: 'resources-treemap/',
+      template: '<resources-treemap/>',
+      data: {
+        feature: 'support.resources-treemap',
+        pageTitle: gettext('Resources usage'),
+      },
+      resolve: {
+        permission: checkPermission
+      }
+    })
+
     .state('support.organizations', {
       url: 'organizations/',
       template: '<div class="ibox-content"><customer-list/></div>',
