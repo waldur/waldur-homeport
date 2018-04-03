@@ -1297,6 +1297,10 @@ msgstr ""
 msgid "Current flavor"
 msgstr ""
 
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Current price per month"
+msgstr ""
+
 #: app/scripts/components/digitalocean/droplet-resize.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 msgid "Current size"
@@ -1632,6 +1636,10 @@ msgstr ""
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 msgid "Error message"
+msgstr ""
+
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Esimated price per month"
 msgstr ""
 
 #: app/scripts/components/customer/customer-list.js
@@ -4014,7 +4022,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html
-#: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "Price per month"
 msgstr ""
 
@@ -4425,6 +4432,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
+#: app/scripts/components/resource/support/ChartContainer.tsx
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "RAM"
@@ -4444,10 +4452,6 @@ msgstr ""
 
 #: app/scripts/components/slurm/details/constants.js
 msgid "RAM usage"
-msgstr ""
-
-#: app/scripts/components/resource/support/ChartContainer.tsx
-msgid "RAM, GB"
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.js
@@ -6573,6 +6577,10 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Volume size"
+msgstr ""
+
 #: app/scripts/components/dashboard/base-quotas.ts
 msgid "Volume size, GB"
 msgstr ""
@@ -6583,7 +6591,6 @@ msgid "Volumes"
 msgstr ""
 
 #: app/scripts/components/quotas/constants.js
-#: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "Volumes count"
 msgstr ""
 

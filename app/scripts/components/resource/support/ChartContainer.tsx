@@ -26,7 +26,7 @@ class TreemapContainer extends React.Component<TranslateProps> {
     return [
       {
         key: 'nc_ram_usage',
-        title: translate('RAM, GB'),
+        title: translate('RAM'),
         tooltipValueFormatter: formatFilesize,
       },
       {
@@ -34,16 +34,22 @@ class TreemapContainer extends React.Component<TranslateProps> {
         title: translate('vCPU, cores'),
       },
       {
+        key: 'nc_volume_size',
+        title: translate('Volume size'),
+        tooltipValueFormatter: formatFilesize,
+      },
+      {
         key: 'nc_resource_count',
         title: translate('Resources'),
       },
       {
-        key: 'nc_volume_count',
-        title: translate('Volumes count'),
+        key: 'current_price',
+        title: translate('Current price per month'),
+        tooltipValueFormatter: value => $filter('defaultCurrency')(value),
       },
       {
-        key: 'current_price',
-        title: translate('Price per month'),
+        key: 'estimated_price',
+        title: translate('Esimated price per month'),
         tooltipValueFormatter: value => $filter('defaultCurrency')(value),
       },
     ];
