@@ -79,13 +79,16 @@ export default class HeatMap extends React.Component<HeatMapProps> {
       return acc;
     }, []);
 
-    const layer = L.geoJson(consumers, {style: this.setStyle});
-    this.map.fitBounds(layer.getBounds());
-    layer.addTo(this.map);
+    if (consumers.length > 0) {
+      const layer = L.geoJson(consumers, {style: this.setStyle});
+      this.map.fitBounds(layer.getBounds());
+      layer.addTo(this.map);
+    }
   }
   componentDidUpdate() {
     this.updateMap();
   }
+
   componentDidMount() {
     const { id, center, zoom } = this.props;
     this.map = L.map(id).setView(center, zoom);
@@ -93,6 +96,7 @@ export default class HeatMap extends React.Component<HeatMapProps> {
     const layerAttrib = 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
 
     L.tileLayer(layerUrl, {attribution: layerAttrib}).addTo(this.map);
+    this.updateMap();
   }
 
   render() {
