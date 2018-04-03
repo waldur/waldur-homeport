@@ -170,10 +170,6 @@ msgstr ""
 msgid "Add comment"
 msgstr ""
 
-#: app/views/directives/customer-balance.html
-msgid "Add credit"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Add data volume"
 msgstr ""
@@ -365,7 +361,6 @@ msgid "Amazon EC2 provider"
 msgstr ""
 
 #: app/scripts/components/payments/payment-list.js
-#: app/views/directives/customer-balance.html
 msgid "Amount"
 msgstr ""
 
@@ -623,10 +618,6 @@ msgstr ""
 msgid "Backups"
 msgstr ""
 
-#: app/views/directives/customer-balance.html
-msgid "Balance"
-msgstr ""
-
 #: app/scripts/components/events/constants.ts
 msgid "Balance has been decreased by {amount} for customer {customer_name}."
 msgstr ""
@@ -681,16 +672,6 @@ msgstr ""
 msgid "Billing details"
 msgstr ""
 
-#: app/scripts/components/plans/plan-agreement-approve.js
-#: app/scripts/components/plans/plan-agreement-cancel.js
-msgid "Billing plan agreement has been processed successfully."
-msgstr ""
-
-#: app/scripts/components/plans/plan-agreement-approve.html
-#: app/scripts/components/plans/plan-agreement-cancel.html
-msgid "Billing plan agreement is being processed, please wait."
-msgstr ""
-
 #: app/scripts/components/dashboard/base-quotas.ts
 msgid "Block device count"
 msgstr ""
@@ -714,10 +695,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
 msgid "Bootable"
-msgstr ""
-
-#: app/scripts/components/plans/plans-list.js
-msgid "Both VMs and applications are counted as resources."
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
@@ -810,7 +787,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
-#: app/scripts/components/plans/plans-list.html
 #: app/scripts/components/project/ProjectCreateForm.tsx
 #: app/scripts/components/providers/ProviderCreateForm.tsx
 #: app/scripts/components/resource-import/resource-import-dialog.html
@@ -878,10 +854,6 @@ msgstr ""
 msgid "Changing password"
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/resource-graphs.js
-msgid "Chart is not available at this moment."
-msgstr ""
-
 #: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Charts"
 msgstr ""
@@ -898,10 +870,6 @@ msgstr ""
 
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html
 msgid "Choose an organization"
-msgstr ""
-
-#: app/scripts/components/plans/plans-list.html
-msgid "Choose new plan"
 msgstr ""
 
 #: app/scripts/components/form-react/list-field/ListFieldInternal.tsx
@@ -998,10 +966,6 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
-#: app/scripts/components/plans/plans-list.html
-msgid "Confirm changing your plan"
-msgstr ""
-
 #: app/scripts/components/customer/details/customer-manage.js
 #: app/scripts/components/table/base-list-controller.js
 msgid "Confirm deletion?"
@@ -1054,11 +1018,6 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
-#: app/scripts/components/analytics/cost-analysis.html
-msgid "Cost"
-msgstr ""
-
-#: app/scripts/components/analytics/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
 msgid "Cost analysis"
 msgstr ""
@@ -1320,7 +1279,6 @@ msgid "Data volume size:"
 msgstr ""
 
 #: app/scripts/components/payments/payment-list.js
-#: app/scripts/components/plans/plan-agreements-list.js
 msgid "Date"
 msgstr ""
 
@@ -2397,11 +2355,6 @@ msgstr ""
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
-#: app/scripts/components/plans/plan-agreement-approve.js
-#: app/scripts/components/plans/plan-agreement-cancel.js
-msgid "Invalid URL. Unable to parse billing plan agreement details."
-msgstr ""
-
 #: app/scripts/components/payments/payment-approve.js
 #: app/scripts/components/payments/payment-cancel.js
 msgid "Invalid URL. Unable to parse payment details."
@@ -2669,10 +2622,6 @@ msgstr ""
 
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 msgid "Last updated"
-msgstr ""
-
-#: app/scripts/components/resource/monitoring/resource-sla.html
-msgid "Latest SLA events"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js
@@ -3119,10 +3068,6 @@ msgstr ""
 msgid "No backups yet."
 msgstr ""
 
-#: app/views/directives/customer-balance.html
-msgid "No changes for a month."
-msgstr ""
-
 #: app/scripts/components/cost-planning/cost-plans-list.js
 msgid "No cost plans found matching filter."
 msgstr ""
@@ -3220,14 +3165,6 @@ msgstr ""
 msgid "No payments yet"
 msgstr ""
 
-#: app/scripts/components/plans/plan-agreements-list.js
-msgid "No plans found matching filter."
-msgstr ""
-
-#: app/scripts/components/plans/plan-agreements-list.js
-msgid "No plans yet."
-msgstr ""
-
 #: app/scripts/components/providers/details/provider-price-list.js
 msgid "No price list items found matching filter."
 msgstr ""
@@ -3274,10 +3211,6 @@ msgstr ""
 
 #: app/scripts/components/resource/list/resources-list.js
 msgid "No resources found matching filter."
-msgstr ""
-
-#: app/scripts/components/analytics/cost-analysis.html
-msgid "No resources used during this month."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
@@ -3367,18 +3300,6 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 msgid "Not assigned"
-msgstr ""
-
-#: app/scripts/components/resource/monitoring/resource-graphs.html
-msgid "Not enough data for CPU graph."
-msgstr ""
-
-#: app/scripts/components/resource/monitoring/resource-graphs.js
-msgid "Not enough data for chart."
-msgstr ""
-
-#: app/scripts/components/analytics/cost-analysis.html
-msgid "Not enough data for cost analysis."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js
@@ -3574,7 +3495,6 @@ msgstr ""
 msgid "Organization is billed on project completion."
 msgstr ""
 
-#: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/user/list/CustomerPermissions.tsx
@@ -3800,24 +3720,12 @@ msgstr ""
 msgid "Physical locations"
 msgstr ""
 
-#: app/views/directives/customer-balance.html
-msgid "Plan"
-msgstr ""
-
-#: app/scripts/components/plans/plan-agreements-list.js
-msgid "Plan name"
-msgstr ""
-
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 msgid "Planned budget"
 msgstr ""
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
 msgid "Planned quota usage: {usage}"
-msgstr ""
-
-#: app/scripts/components/customer/routes.js
-msgid "Plans"
 msgstr ""
 
 #: app/scripts/components/ansible/application-list.js
@@ -3956,7 +3864,6 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/paypal/paypal-invoices-list.js
-#: app/scripts/components/plans/plan-agreements-list.js
 msgid "Price"
 msgstr ""
 
@@ -4069,7 +3976,6 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
-#: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
@@ -4143,7 +4049,6 @@ msgstr ""
 msgid "Project manager cannot edit users with same role."
 msgstr ""
 
-#: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/project/ProjectNameField.tsx
 #: app/scripts/components/providers/details/provider-project-link-quotas.html
@@ -4191,12 +4096,6 @@ msgstr ""
 msgid "Project {project_name} has been updated."
 msgstr ""
 
-#: app/scripts/components/analytics/cost-analysis.html
-msgid "Projected cost"
-msgstr ""
-
-#: app/scripts/components/analytics/cost-analysis.html
-#: app/scripts/components/analytics/dashboard-cost-chart.html
 #: app/scripts/components/appstore/dialog/appstore-project-selector.html
 #: app/scripts/components/customer/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
@@ -4288,7 +4187,6 @@ msgstr ""
 msgid "Provider is in erred state."
 msgstr ""
 
-#: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/providers/ProviderNameField.tsx
 msgid "Provider name"
 msgstr ""
@@ -4309,8 +4207,6 @@ msgstr ""
 msgid "Provider {service_name} is not responding."
 msgstr ""
 
-#: app/scripts/components/analytics/cost-analysis.html
-#: app/scripts/components/analytics/dashboard-cost-chart.html
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/help/constants.js
 #: app/scripts/components/project/project-dialog.html
@@ -4395,10 +4291,6 @@ msgstr ""
 #: app/scripts/components/resource-import/utils.js
 #: app/scripts/components/resource/resource-provision-policy.js
 msgid "Quota has been reached."
-msgstr ""
-
-#: app/views/directives/customer-balance.html
-msgid "Quota usage"
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-project-link-quota.html
@@ -4752,10 +4644,6 @@ msgstr ""
 msgid "Resource count in"
 msgstr ""
 
-#: app/scripts/components/resource/monitoring/resource-sla.html
-msgid "Resource doesn't have SLA yet. Please connect it to monitoring system."
-msgstr ""
-
 #: app/scripts/components/customer/workspace/customer-events.js
 #: app/scripts/components/events/constants.ts
 #: app/scripts/components/project/project-events.js
@@ -4786,11 +4674,6 @@ msgstr ""
 msgid "Resource is not monitored yet."
 msgstr ""
 
-#: app/scripts/components/analytics/cost-analysis.html
-msgid "Resource name"
-msgstr ""
-
-#: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/providers/details/provider-price-list.js
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 msgid "Resource type"
@@ -4805,8 +4688,6 @@ msgstr ""
 msgid "Resource {resource_name} has disappeared from the {service_name} provider in {project_name} project."
 msgstr ""
 
-#: app/scripts/components/analytics/cost-analysis.html
-#: app/scripts/components/analytics/dashboard-cost-chart.html
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-details.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 #: app/scripts/components/issues/routes.js
@@ -5384,7 +5265,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
 #: app/scripts/components/payments/payment-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
-#: app/scripts/components/plans/plan-agreements-list.js
 #: app/scripts/components/providers/provider-list.js
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list.js
@@ -5857,10 +5737,6 @@ msgstr ""
 msgid "To start please select a workspace"
 msgstr ""
 
-#: app/scripts/components/error/invalid-quota-page.js
-msgid "To update current plan visit <a href=\"{link}\">plans page</a>."
-msgstr ""
-
 #: app/scripts/components/analytics/resource-pie-chart.html
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/billing/PriceEstimateDialog.tsx
@@ -5870,7 +5746,6 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: app/scripts/components/analytics/cost-analysis.html
 #: app/scripts/components/dashboard/dashboard-chart-service.js
 msgid "Total cost"
 msgstr ""
@@ -5929,16 +5804,8 @@ msgstr ""
 msgid "Unable to activate account."
 msgstr ""
 
-#: app/scripts/components/plans/plan-agreement-approve.js
-msgid "Unable to approve billing plan."
-msgstr ""
-
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
 msgid "Unable to authenticate using Mobile ID."
-msgstr ""
-
-#: app/scripts/components/plans/plan-agreement-cancel.js
-msgid "Unable to cancel billing plan."
 msgstr ""
 
 #: app/scripts/components/experts/requests/actions/expert-request-cancel.js
@@ -6204,10 +6071,6 @@ msgstr ""
 msgid "Updating security groups"
 msgstr ""
 
-#: app/views/directives/customer-balance.html
-msgid "Upgrade"
-msgstr ""
-
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironment.tsx
 msgid "Upload Requirements.txt"
 msgstr ""
@@ -6219,10 +6082,6 @@ msgstr ""
 
 #: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
 msgid "Uptime"
-msgstr ""
-
-#: app/scripts/components/plans/plans-list.html
-msgid "Usage"
 msgstr ""
 
 #: app/scripts/components/slurm/SlurmForm.tsx
@@ -6951,10 +6810,6 @@ msgstr ""
 
 #: app/scripts/components/form/appstore-field-list.js
 msgid "{fieldLabel} is required for provisioning resource."
-msgstr ""
-
-#: app/scripts/components/directives/customer-balance.js
-msgid "{quotaUsage} out of {quotaLimit}."
 msgstr ""
 
 #: app/scripts/components/events/constants.ts

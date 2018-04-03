@@ -20,7 +20,6 @@ export default function alertFormatter(BaseEventFormatter, $state, ncUtils) {
         quota_threshold: 80,
         quota_use: alert.context.quota_usage,
         quota_usage: Math.round(alert.context.quota_usage * 100.0 / alert.context.quota_limit),
-        plan_url: $state.href('organization.plans', {uuid: alert.context.scope_uuid})
       };
       let template;
       if (alert.context.quota_limit === alert.context.quota_usage) {
