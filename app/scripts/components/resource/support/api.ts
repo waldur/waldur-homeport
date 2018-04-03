@@ -13,10 +13,11 @@ function parseProjects(projects, quotaNames) {
     for (const quota of project.quotas) {
       quotas[quota.name] = quota.usage;
     }
-    if (!customers[project.customer_name]) {
-      customers[project.customer_name] = {};
+    const name = project.customer_abbreviation || project.customer_name;
+    if (!customers[name]) {
+      customers[name] = {};
     }
-    customers[project.customer_name][project.name] = quotas;
+    customers[name][project.name] = quotas;
   }
 
   const quotaTrees = {};
