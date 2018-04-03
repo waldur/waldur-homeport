@@ -1,10 +1,9 @@
-import echarts from 'echarts';
 import * as React from 'react';
+
+import loadEcharts from '../../../shims/load-echarts';
 
 import { levelOptions } from './styles';
 import { TreemapData } from './types';
-
-const formatUtil = echarts.format;
 
 interface TreemapChartProps {
   height: number | string;
@@ -20,7 +19,7 @@ export class TreemapChart extends React.Component<TreemapChartProps> {
   chart = undefined;
 
   static defaultProps = {
-    tooltipValueFormatter: value =>  `${formatUtil.addCommas(value)} resources`,
+    tooltipValueFormatter: value =>  `${value} resources`,
   };
 
   componentDidMount() {
@@ -39,12 +38,14 @@ export class TreemapChart extends React.Component<TreemapChartProps> {
   }
 
   drawChart() {
-    const chart = echarts.getInstanceByDom(this.container);
-    if (!chart) {
-      this.chart = echarts.init(this.container);
-    }
-
-    this.renderChart();
+    loadEcharts().then(module => {
+      const echarts = module.default;
+      const chart = echarts.getInstanceByDom(this.container);
+      if (!chart) {
+        this.chart = echarts.init(this.container);
+      }
+      this.renderChart();
+    });
   }
 
   renderChart() {
@@ -62,7 +63,7 @@ export class TreemapChart extends React.Component<TreemapChartProps> {
       tooltip: {
         formatter: info => {
           const treePath = info.treePathInfo.map(part => part.name);
-          const path = formatUtil.encodeHTML(treePath.join('/'));
+          const path = treePath.join('/');
           const value = this.props.tooltipValueFormatter(info.value);
           return `<div class="tooltip-title">${path}</div>${value}`;
         },

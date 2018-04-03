@@ -4014,6 +4014,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html
+#: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "Price per month"
 msgstr ""
 
@@ -4445,6 +4446,10 @@ msgstr ""
 msgid "RAM usage"
 msgstr ""
 
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "RAM, GB"
+msgstr ""
+
 #: app/scripts/components/customer/details/customer-manage.js
 #: app/scripts/components/experts/requests/actions/expert-request-complain.js
 #: app/scripts/components/user/support/actions.ts
@@ -4815,6 +4820,7 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/providers/provider-list.js
 #: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs-service.js
+#: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "Resources"
 msgstr ""
 
@@ -6577,6 +6583,7 @@ msgid "Volumes"
 msgstr ""
 
 #: app/scripts/components/quotas/constants.js
+#: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "Volumes count"
 msgstr ""
 
@@ -6952,6 +6959,10 @@ msgstr ""
 
 #: app/scripts/components/quotas/constants.js
 msgid "vCPU count"
+msgstr ""
+
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "vCPU, cores"
 msgstr ""
 
 #: app/scripts/components/form/appstore-field-list.js

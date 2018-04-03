@@ -3,6 +3,7 @@ import * as React from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $filter } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { loadData } from './api';
@@ -10,7 +11,7 @@ import { QuotaSelector } from './QuotaSelector';
 import { TreemapChart } from './TreemapChart';
 import { QuotaList } from './types';
 
-class TreemapContainer extends React.Component {
+class TreemapContainer extends React.Component<TranslateProps> {
   state = {
     loading: true,
     loaded: false,
@@ -18,32 +19,38 @@ class TreemapContainer extends React.Component {
     selectedQuota: undefined,
   };
 
-  quotas: QuotaList = [
-    {
-      key: 'nc_ram_usage',
-      title: 'RAM, GB',
-      tooltipValueFormatter: formatFilesize,
-    },
-    {
-      key: 'nc_cpu_usage',
-      title: 'vCPU, cores',
-    },
-    {
-      key: 'nc_resource_count',
-      title: 'Resources',
-    },
-    {
-      key: 'nc_volume_count',
-      title: 'Volumes count',
-    },
-    {
-      key: 'current_price',
-      title: 'Price per month',
-      tooltipValueFormatter: value => $filter('defaultCurrency')(value),
-    },
-  ];
+  quotas = [];
+
+  getQuotas(): QuotaList {
+    const { translate } = this.props;
+    return [
+      {
+        key: 'nc_ram_usage',
+        title: translate('RAM, GB'),
+        tooltipValueFormatter: formatFilesize,
+      },
+      {
+        key: 'nc_cpu_usage',
+        title: translate('vCPU, cores'),
+      },
+      {
+        key: 'nc_resource_count',
+        title: translate('Resources'),
+      },
+      {
+        key: 'nc_volume_count',
+        title: translate('Volumes count'),
+      },
+      {
+        key: 'current_price',
+        title: translate('Price per month'),
+        tooltipValueFormatter: value => $filter('defaultCurrency')(value),
+      },
+    ];
+  }
 
   componentDidMount() {
+    this.quotas = this.getQuotas();
     const keys = this.quotas.map(quota => quota.key);
     const selectedQuota = 'nc_resource_count';
     loadData(keys).then(quotasMap => {
@@ -54,6 +61,10 @@ class TreemapContainer extends React.Component {
         loaded: true,
       });
     });
+  }
+
+  componentDidUpdate() {
+    this.quotas = this.getQuotas();
   }
 
   render() {
@@ -90,4 +101,4 @@ class TreemapContainer extends React.Component {
   }
 }
 
-export default connectAngularComponent(TreemapContainer);
+export default connectAngularComponent(withTranslation(TreemapContainer));

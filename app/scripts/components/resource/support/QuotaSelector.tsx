@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ButtonToolbar, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import * as ToggleButton from 'react-bootstrap/lib/ToggleButton';
+import * as ToggleButtonGroup from 'react-bootstrap/lib/ToggleButtonGroup';
 
 import { QuotaList } from './types';
 
@@ -12,7 +13,7 @@ interface QuotaSelectorProps {
 export class QuotaSelector extends React.Component<QuotaSelectorProps> {
   render() {
     return (
-      <ButtonToolbar>
+      <div className="text-center m-b-md">
         <ToggleButtonGroup
           type="radio"
           name="options"
@@ -23,7 +24,7 @@ export class QuotaSelector extends React.Component<QuotaSelectorProps> {
             <ToggleButton key={index} value={quota.key}>{quota.title}</ToggleButton>
           ))}
         </ToggleButtonGroup>
-      </ButtonToolbar>
+      </div>
     );
   }
 }
