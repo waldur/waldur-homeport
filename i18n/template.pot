@@ -133,6 +133,10 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
+msgid "Activate a virtual environment with following command:"
+msgstr ""
+
 #: app/scripts/components/resource/state/constants.js
 msgid "Activating"
 msgstr ""
@@ -977,6 +981,10 @@ msgstr ""
 
 #: app/scripts/components/resource/summary/ResourceAccessInfo.tsx
 msgid "Connect"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
+msgid "Connect to a VM via SSH"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
@@ -2186,6 +2194,10 @@ msgstr ""
 msgid "If not, append it there on a new line. If file is not present, create a new file with the key."
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
+msgid "If you need to manually install a library, please follow these steps:"
+msgstr ""
+
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "If you use on-premise GitLab please specify the URl"
 msgstr ""
@@ -2307,6 +2319,10 @@ msgstr ""
 
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 msgid "Initial username"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
+msgid "Install your library with pip"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
@@ -4769,6 +4785,10 @@ msgstr ""
 msgid "Role management events"
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
+msgid "Run 'Find missing installed libraries' command to synchronize cloud broker state"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js
 msgid "Runtime State"
 msgstr ""
@@ -6828,6 +6848,10 @@ msgstr ""
 
 #: app/scripts/components/quotas/constants.js
 msgid "vCPU count"
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
+msgid "virtualenv and virtualenvwrapper utilities are used to manage Python virtual environments."
 msgstr ""
 
 #: app/scripts/components/resource/support/ChartContainer.tsx
