@@ -21,7 +21,7 @@ import { UnfoldedRequest } from '@waldur/ansible/python-management/types/Unfolde
 import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
 import { VirtualEnvironment } from '@waldur/ansible/python-management/types/VirtualEnvironment';
 
-export const DETAILS_POLLING_INTERVAL = 20 * 1000;
+export const DETAILS_POLLING_INTERVAL = 12 * 1000;
 
 export function* setRequestsStateTypePairs<R extends ManagementRequest<R>>(
   managementState: ManagementRequestState, config: ManagementEffectsConfig<R>) {
@@ -53,13 +53,13 @@ function findRequestByUuid<R extends ManagementRequest<R>>(requests: R[], reques
   return requests.find(r => r.uuid === requestUuid);
 }
 
-function hasRequestBeenPulling<R extends ManagementRequest<R>>(request: R, pythonManagementRequestTimeout: number) {
-  return isExecuting(request, pythonManagementRequestTimeout);
+function hasRequestBeenPulling<R extends ManagementRequest<R>>(request: R, managementRequestTimeout: number) {
+  return isExecuting(request, managementRequestTimeout);
 }
 
 function* ensureRequestHasLatestOutput<R extends ManagementRequest<R>>(
-  pythonManagementUuid: string, requestUuid: string, config: ManagementEffectsConfig<R>) {
-  const requestWithOutput = yield call(config.loadRequestApiCall, pythonManagementUuid, requestUuid);
+  managementUuid: string, requestUuid: string, config: ManagementEffectsConfig<R>) {
+  const requestWithOutput = yield call(config.loadRequestApiCall, managementUuid, requestUuid);
   yield call(copyAndUpdateRequests, requestUuid, requestWithOutput, config);
 }
 
@@ -73,8 +73,8 @@ function* copyAndUpdateRequests<R extends ManagementRequest<R>>(
 }
 
 function hasRequestFinishedExecution<R extends ManagementRequest<R>>(
-  updatedRequest: R, pythonManagementRequestTimeout: number) {
-  return !isExecuting(updatedRequest, pythonManagementRequestTimeout);
+  updatedRequest: R, managementRequestTimeout: number) {
+  return !isExecuting(updatedRequest, managementRequestTimeout);
 }
 
 function isRequestOpened(requestUuid: string, unfoldedRequests: UnfoldedRequest[]) {
@@ -82,17 +82,17 @@ function isRequestOpened(requestUuid: string, unfoldedRequests: UnfoldedRequest[
 }
 
 export function* mergeVirtualEnvironments<R extends ManagementRequest<R>>(
-  updatedPythonManagementPayload: any, config: ManagementEffectsConfig<R>) {
-  const pythonManagementDetails: VirtualEnvAndRequestsContainer<R> = yield select(getFormValues(config.formName));
+  updatedManagementDetailsPayload: any, config: ManagementEffectsConfig<R>) {
+  const managementDetails: VirtualEnvAndRequestsContainer<R> = yield select(getFormValues(config.formName));
   const ansibleRequestTimeout = yield select(getAnsibleRequestTimeout);
-  const virtualEnvironmentsFormCopy = pythonManagementDetails.getVirtualEnvironments(pythonManagementDetails).slice();
+  const virtualEnvironmentsFormCopy = managementDetails.getVirtualEnvironments(managementDetails).slice();
 
-  const updatedPythonManagement = config.formDataBuilder(updatedPythonManagementPayload);
+  const updatedManagementDetails = config.formDataBuilder(updatedManagementDetailsPayload);
 
-  removeDeletedVirtualEnvironments(virtualEnvironmentsFormCopy, updatedPythonManagement);
+  removeDeletedVirtualEnvironments(virtualEnvironmentsFormCopy, updatedManagementDetails);
 
-  updatedPythonManagement.getVirtualEnvironments(updatedPythonManagement).forEach((virtualEnv, virtualEnvIndex) => {
-    const virtualEnvNotEditable = isVirtualEnvironmentNotEditable(new VirtualEnvironmentNotEditableDs(pythonManagementDetails), virtualEnvIndex, ansibleRequestTimeout);
+  updatedManagementDetails.getVirtualEnvironments(updatedManagementDetails).forEach((virtualEnv, virtualEnvIndex) => {
+    const virtualEnvNotEditable = isVirtualEnvironmentNotEditable(new VirtualEnvironmentNotEditableDs(managementDetails), virtualEnvIndex, ansibleRequestTimeout);
     if (virtualEnvNotEditable) {
       virtualEnvironmentsFormCopy[virtualEnvIndex] = virtualEnv;
     }
@@ -101,24 +101,24 @@ export function* mergeVirtualEnvironments<R extends ManagementRequest<R>>(
 }
 
 function removeDeletedVirtualEnvironments<R extends ManagementRequest<R>>(
-  virtualEnvironmentsFormCopy: VirtualEnvironment[], updatedPythonManagement: VirtualEnvAndRequestsContainer<R>) {
+  virtualEnvironmentsFormCopy: VirtualEnvironment[], updatedManagementDetails: VirtualEnvAndRequestsContainer<R>) {
   for (let i = virtualEnvironmentsFormCopy.length - 1; i >= 0; i--) {
     const virtualEnvironment = virtualEnvironmentsFormCopy[i];
-    if (virtualEnvironment.uuid && !existsVirtualEnvironment(updatedPythonManagement, virtualEnvironment)) {
+    if (virtualEnvironment.uuid && !existsVirtualEnvironment(updatedManagementDetails, virtualEnvironment)) {
       virtualEnvironmentsFormCopy.splice(i, 1);
     }
   }
 }
 
 function existsVirtualEnvironment<R extends ManagementRequest<R>>(
-  updatedPythonManagement: VirtualEnvAndRequestsContainer<R>, virtualEnvironment: VirtualEnvironment) {
-  return updatedPythonManagement.getVirtualEnvironments(updatedPythonManagement).some((ve => ve.name === virtualEnvironment.name || ve.uuid === virtualEnvironment.uuid));
+  updatedManagementDetails: VirtualEnvAndRequestsContainer<R>, virtualEnvironment: VirtualEnvironment) {
+  return updatedManagementDetails.getVirtualEnvironments(updatedManagementDetails).some((ve => ve.name === virtualEnvironment.name || ve.uuid === virtualEnvironment.uuid));
 }
 
 function* reloadRequestWithDelay<R extends ManagementRequest<R>>(
   requestUuid: string, config: ManagementEffectsConfig<R>) {
   yield call(delay, DETAILS_POLLING_INTERVAL);
-  yield call(loadPythonManagementRequestAndSetState, requestUuid, config);
+  yield call(loadManagementRequestAndSetState, requestUuid, config);
 }
 
 function buildUnfoldedRequest<R extends ManagementRequest<R>>(request: ManagementRequest<R>): UnfoldedRequest {
@@ -128,12 +128,25 @@ function buildUnfoldedRequest<R extends ManagementRequest<R>>(request: Managemen
   return unfoldedRequest;
 }
 
-function* loadPythonManagementRequestAndSetState<R extends ManagementRequest<R>>(
+function* loadManagementRequestAndSetState<R extends ManagementRequest<R>>(
   requestUuid: string, config: ManagementEffectsConfig<R>) {
   const virtualEnvAndRequestsFormData: VirtualEnvAndRequestsContainer<R> = yield select(getFormValues(config.formName));
   const requestWithOutput = yield call(config.loadRequestApiCall, virtualEnvAndRequestsFormData.uuid, requestUuid);
-  yield call(copyAndUpdateRequests, requestUuid, requestWithOutput, config);
+  yield call(updateOutputOfTheRequest, requestUuid, requestWithOutput, config);
   yield put(markUnfoldedRequestAsLoaded(requestUuid));
+}
+
+function* updateOutputOfTheRequest<R extends ManagementRequest<R>>(requestUuid: string, requestWithOutput: any, config: ManagementEffectsConfig<R>) {
+  const virtualEnvsAndRequestsFormData: VirtualEnvAndRequestsContainer<R> = yield select(getFormValues(config.formName));
+  const updatedRequestsCopy = virtualEnvsAndRequestsFormData.requests.slice();
+  const requestIndex = updatedRequestsCopy.findIndex(request => request.uuid === requestUuid);
+  const correspondingRequest = updatedRequestsCopy[requestIndex];
+
+  const copiedRequest = Object.assign( Object.create( Object.getPrototypeOf(correspondingRequest)), correspondingRequest);
+  copiedRequest.output = config.requestBuilder(requestWithOutput[0]).output;
+
+  updatedRequestsCopy[requestIndex] = copiedRequest;
+  yield put(change(config.formName, 'requests', updatedRequestsCopy));
 }
 
 export function* startRequestOutputPollingTask<R extends ManagementRequest<R>>(
@@ -145,7 +158,7 @@ export function* startRequestOutputPollingTask<R extends ManagementRequest<R>>(
     yield put(removeUnfoldedRequest(request.uuid));
   } else {
     yield put(saveUnfoldedRequest(buildUnfoldedRequest(request)));
-    yield call(loadPythonManagementRequestAndSetState, request.uuid, config);
+    yield call(loadManagementRequestAndSetState, request.uuid, config);
     while (true) {
       if (!isExecuting(request, ansibleRequestTimeout)) {
         break;

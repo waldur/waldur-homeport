@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Tab } from 'react-bootstrap';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 
+import { authenticationMethodDescription } from '@waldur/ansible/jupyter-hub-management/create/JupyterHubManagementForm';
 import { JupyterHubManagementDetailsProps } from '@waldur/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsContainer';
 import { JupyterHubUsersGroupForm } from '@waldur/ansible/jupyter-hub-management/form/JupyterHubUsersGroupForm';
 import { JupyterOAuthForm } from '@waldur/ansible/jupyter-hub-management/form/JupyterOAuthForm';
@@ -93,7 +94,7 @@ export class JupyterHubManagementDetailsForm extends React.Component<JupyterHubM
                       <RadioButtonField
                         name="authenticationConfig.authenticationMethod"
                         label={translate('Authentication method')}
-                        description={translate('Either manually define credentials or enable OAuth authentication')}
+                        description={authenticationMethodDescription}
                         disabled={true}
                         choices={[
                           new RadioButtonChoice(JupyterHubAuthenticationMethod.LINUX_PAM, 'Linux PAM'),

@@ -139,6 +139,7 @@ export class InstalledLibraryRowForm<R extends ManagementRequest<R>>
                 onChange={value => fieldProps.input.onChange(value)}
                 options={this.state.libraryVersions}
                 onFocus={(_: any) => this.initializeOptionsIfNeeded()}
+                onBlur={() => fieldProps.input.onBlur(this.getSelectedLibrary().version)}
                 loadOptions={(_, callback: any) => {
                   callback(null, {options: this.state.libraryVersions});
                 }}
