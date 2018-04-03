@@ -1520,6 +1520,10 @@ msgstr ""
 msgid "EU VAT ID"
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
+msgid "Each JupyterHub user is mapped to a corresponding system user. Appropriate system user will be created on a first login."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
 #: app/scripts/components/resource/actions/constants.js
@@ -1538,8 +1542,7 @@ msgid "Edit team member"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "Either manually define credentials or enable OAuth authentication"
+msgid "Either manually define credentials or enable OAuth authentication."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html

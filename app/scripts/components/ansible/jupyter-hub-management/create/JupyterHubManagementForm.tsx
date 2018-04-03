@@ -18,6 +18,15 @@ export interface JupyterHubManagementCreateFormProps extends JupyterHubManagemen
   pythonManagementListProperties: ListConfiguration;
 }
 
+export const authenticationMethodDescription = (
+  <>
+    {translate('Either manually define credentials or enable OAuth authentication.')}
+    <span className="fa fa-info-circle"
+          style={{marginLeft: '10px'}}
+          title={translate('Each JupyterHub user is mapped to a corresponding system user. Appropriate system user will be created on a first login.')}/>
+  </>
+);
+
 export class JupyterHubManagementCreateForm extends React.Component<JupyterHubManagementCreateFormProps> {
   render() {
     return (
@@ -62,7 +71,7 @@ export class JupyterHubManagementCreateForm extends React.Component<JupyterHubMa
                       <RadioButtonField
                         name="authenticationConfig.authenticationMethod"
                         label={translate('Authentication method')}
-                        description={translate('Either manually define credentials or enable OAuth authentication')}
+                        description={authenticationMethodDescription}
                         choices={[
                           new RadioButtonChoice(JupyterHubAuthenticationMethod.LINUX_PAM, 'Linux PAM'),
                           new RadioButtonChoice(JupyterHubAuthenticationMethod.OAUTH, 'OAuth'),
