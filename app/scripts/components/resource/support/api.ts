@@ -13,6 +13,12 @@ export function parseProjects(projects, quotaNames) {
     for (const quota of project.quotas) {
       quotas[quota.name] = quota.usage;
     }
+    let currentPrice = 0;
+    if (project.billing_price_estimate) {
+      currentPrice = project.billing_price_estimate.current;
+    }
+    // tslint:disable-next-line no-string-literal
+    quotas['current_price'] = currentPrice;
     const name = project.customer_abbreviation || project.customer_name;
     if (!customers[name]) {
       customers[name] = {};
@@ -50,6 +56,12 @@ export function parseProjects(projects, quotaNames) {
 }
 
 export function loadData(quotaNames: string[]): Promise<QuotasMap> {
-  const params = {field: ['name', 'customer_name', 'customer_abbreviation', 'quotas']};
-  return getAll('/projects/', {params}).then(projects => parseProjects(projects, quotaNames));
+  const field = [
+    'name',
+    'customer_name',
+    'customer_abbreviation',
+    'quotas',
+    'billing_price_estimate',
+  ];
+  return getAll('/projects/', {params: {field}}).then(projects => parseProjects(projects, quotaNames));
 }

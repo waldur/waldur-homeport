@@ -1,11 +1,14 @@
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { $filter } from '@waldur/core/services';
+import { formatFilesize } from '@waldur/core/utils';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { loadData } from './api';
 import { QuotaSelector } from './QuotaSelector';
 import { TreemapChart } from './TreemapChart';
+import { QuotaList } from './types';
 
 class TreemapContainer extends React.Component {
   state = {
@@ -15,10 +18,11 @@ class TreemapContainer extends React.Component {
     selectedQuota: undefined,
   };
 
-  quotas = [
+  quotas: QuotaList = [
     {
       key: 'nc_ram_usage',
       title: 'RAM, GB',
+      tooltipValueFormatter: formatFilesize,
     },
     {
       key: 'nc_cpu_usage',
@@ -31,6 +35,11 @@ class TreemapContainer extends React.Component {
     {
       key: 'nc_volume_count',
       title: 'Volumes count',
+    },
+    {
+      key: 'current_price',
+      title: 'Price per month',
+      tooltipValueFormatter: value => $filter('defaultCurrency')(value),
     },
   ];
 
@@ -52,6 +61,13 @@ class TreemapContainer extends React.Component {
       return <LoadingSpinner/>;
     }
     if (this.state.loaded) {
+      const quota = this.quotas.find(item => item.key === this.state.selectedQuota);
+      let tooltipValueFormatter;
+      if (quota) {
+        tooltipValueFormatter = quota.tooltipValueFormatter;
+      }
+      const chartData = this.state.quotasMap[this.state.selectedQuota];
+
       return (
         <>
           <QuotaSelector
@@ -65,7 +81,8 @@ class TreemapContainer extends React.Component {
             title="Resource usage"
             width="100%"
             height={500}
-            data={this.state.quotasMap[this.state.selectedQuota]}
+            data={chartData}
+            tooltipValueFormatter={tooltipValueFormatter}
           />
         </>
       );

@@ -12,7 +12,11 @@
         "name": "nc_cpu_usage",
         "usage": 100
       }
-    ]
+    ],
+    "billing_price_estimate": {
+      "current": 60.0,
+      "limit": -1.0
+    }
   },
   {
     "name": "Project 2",

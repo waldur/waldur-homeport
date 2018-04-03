@@ -12,11 +12,16 @@ interface TreemapChartProps {
   title: string;
   theme?: string;
   data: TreemapData;
+  tooltipValueFormatter?(value: number): string;
 }
 
 export class TreemapChart extends React.Component<TreemapChartProps> {
   container = undefined;
   chart = undefined;
+
+  static defaultProps = {
+    tooltipValueFormatter: value =>  `${formatUtil.addCommas(value)} resources`,
+  };
 
   componentDidMount() {
     this.drawChart();
@@ -56,16 +61,10 @@ export class TreemapChart extends React.Component<TreemapChartProps> {
 
       tooltip: {
         formatter: info => {
-          const treePathInfo = info.treePathInfo;
-          const treePath = [];
-
-          for (let i = 1; i < treePathInfo.length; i++) {
-            treePath.push(treePathInfo[i].name);
-          }
-
+          const treePath = info.treePathInfo.map(part => part.name);
           const path = formatUtil.encodeHTML(treePath.join('/'));
-          const value = formatUtil.addCommas(info.value);
-          return `<div class="tooltip-title">${path}</div> ${this.props.title}: ${value} resources`;
+          const value = this.props.tooltipValueFormatter(info.value);
+          return `<div class="tooltip-title">${path}</div>${value}`;
         },
       },
 
