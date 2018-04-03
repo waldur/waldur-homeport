@@ -5,7 +5,7 @@ interface QuotasMap {
   [key: string]: TreemapData;
 }
 
-function parseProjects(projects, quotaNames) {
+export function parseProjects(projects, quotaNames) {
   const customers = {};
 
   for (const project of projects) {

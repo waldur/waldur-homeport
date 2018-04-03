@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Project 1",
+    "customer_name": "Long customer name",
+    "customer_abbreviation": "LCN",
+    "quotas": [
+      {
+        "name": "nc_ram_usage",
+        "usage": 102400
+      },
+      {
+        "name": "nc_cpu_usage",
+        "usage": 100
+      }
+    ]
+  },
+  {
+    "name": "Project 2",
+    "customer_name": "Long customer name",
+    "customer_abbreviation": "LCN",
+    "quotas": [
+      {
+        "name": "nc_ram_usage",
+        "usage": 204800
+      },
+      {
+        "name": "nc_cpu_usage",
+        "usage": 50
+      }
+    ]
+  }
+]

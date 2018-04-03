@@ -58,7 +58,7 @@ export async function getAll(endpoint, options?) {
   return result;
 }
 
-const getNextPageUrl = response =>  {
+export const getNextPageUrl = response =>  {
   // Extract next page URL from header links
   const link = response.headers('link');
   if (!link) {
