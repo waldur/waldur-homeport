@@ -46,20 +46,11 @@ class SelectWorkspaceToggleController {
   }
 
   getTitle() {
-    const customerName = this.getName(this.customer);
     if (this.customer && this.workspace === 'organization') {
-      return customerName;
+      return this.customer.name;
     } else if (this.project && this.workspace === 'project') {
-      return `${customerName} > ${this.project.name}`;
+      return this.customer.name + ' > ' + this.project.name;
     }
-  }
-
-  getName(entity) {
-    return this.isMobile() && entity.abbreviation ? entity.abbreviation : entity.name;
-  }
-
-  isMobile() {
-    return window.document.documentElement.clientWidth <= 640;
   }
 
   getIconClass() {
