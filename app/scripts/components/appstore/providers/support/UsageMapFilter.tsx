@@ -56,10 +56,12 @@ const PureUsageMapFilter = (props: UsageMapFilterProps) => (
           valueKey="value"
         />
         <CheckboxField
+          checked={false}
           label={props.translate('Show shared')}
           name="show_shared"
         />
         <CheckboxField
+          checked={false}
           label={props.translate('Show private')}
           name="show_private"
         />

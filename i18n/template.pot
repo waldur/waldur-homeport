@@ -5194,7 +5194,7 @@ msgstr ""
 msgid "Service Provider Type"
 msgstr ""
 
-#: app/scripts/components/issues/types/constants.js
+#: app/scripts/components/issues/types/constants.ts
 msgid "Service Request"
 msgstr ""
 
@@ -5302,12 +5302,12 @@ msgstr ""
 msgid "Show private"
 msgstr ""
 
-#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
-msgid "Show shared"
-msgstr ""
-
 #: app/scripts/components/offering/OfferingReportButton.tsx
 msgid "Show report"
+msgstr ""
+
+#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+msgid "Show shared"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
