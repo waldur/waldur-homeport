@@ -648,8 +648,16 @@ msgstr ""
 msgid "Batch GPU usage, hours"
 msgstr ""
 
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Batch RAM"
+msgstr ""
+
 #: app/scripts/components/slurm/dashboard-quotas.ts
 msgid "Batch RAM usage, GB"
+msgstr ""
+
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Batch block storage size"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js
@@ -665,6 +673,10 @@ msgstr ""
 
 #: app/scripts/components/slurm/SlurmForm.tsx
 msgid "Batch service"
+msgstr ""
+
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Batch vCPU"
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js
@@ -912,12 +924,24 @@ msgstr ""
 msgid "Closed"
 msgstr ""
 
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Cloud RAM"
+msgstr ""
+
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Cloud block storage size"
+msgstr ""
+
 #: app/scripts/components/azure/AzureForm.tsx
 msgid "Cloud service group to assign all connected SPLs to"
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
 msgid "Cloud service name"
+msgstr ""
+
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "Cloud vCPU"
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-compare-list.js
@@ -4343,7 +4367,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
-#: app/scripts/components/resource/support/ChartContainer.tsx
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "RAM"
@@ -6345,6 +6368,18 @@ msgstr ""
 msgid "VMs"
 msgstr ""
 
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "VPC RAM"
+msgstr ""
+
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "VPC block storage size"
+msgstr ""
+
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "VPC floating IP count"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
@@ -6353,6 +6388,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-prices.html
 msgid "VPC packages for this provider are not found."
+msgstr ""
+
+#: app/scripts/components/resource/support/ChartContainer.tsx
+msgid "VPC vCPU"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html
@@ -6457,10 +6496,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 msgid "Volume name"
-msgstr ""
-
-#: app/scripts/components/resource/support/ChartContainer.tsx
-msgid "Volume size"
 msgstr ""
 
 #: app/scripts/components/dashboard/base-quotas.ts
@@ -6852,10 +6887,6 @@ msgstr ""
 
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "virtualenv and virtualenvwrapper utilities are used to manage Python virtual environments."
-msgstr ""
-
-#: app/scripts/components/resource/support/ChartContainer.tsx
-msgid "vCPU, cores"
 msgstr ""
 
 #: app/scripts/components/form/appstore-field-list.js

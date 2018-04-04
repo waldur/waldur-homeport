@@ -25,20 +25,6 @@ class TreemapContainer extends React.Component<TranslateProps> {
     const { translate } = this.props;
     return [
       {
-        key: 'nc_ram_usage',
-        title: translate('RAM'),
-        tooltipValueFormatter: formatFilesize,
-      },
-      {
-        key: 'nc_cpu_usage',
-        title: translate('vCPU, cores'),
-      },
-      {
-        key: 'nc_volume_size',
-        title: translate('Volume size'),
-        tooltipValueFormatter: formatFilesize,
-      },
-      {
         key: 'nc_resource_count',
         title: translate('Resources'),
       },
@@ -51,6 +37,52 @@ class TreemapContainer extends React.Component<TranslateProps> {
         key: 'estimated_price',
         title: translate('Esimated price per month'),
         tooltipValueFormatter: value => $filter('defaultCurrency')(value),
+      },
+      {
+        key: 'vpc_cpu_count',
+        title: translate('VPC vCPU'),
+      },
+      {
+        key: 'vpc_ram_size',
+        title: translate('VPC RAM'),
+        tooltipValueFormatter: formatFilesize,
+      },
+      {
+        key: 'vpc_storage_size',
+        title: translate('VPC block storage size'),
+        tooltipValueFormatter: formatFilesize,
+      },
+      {
+        key: 'vpc_floating_ip_count',
+        title: translate('VPC floating IP count'),
+      },
+      {
+        key: 'os_cpu_count',
+        title: translate('Cloud vCPU'),
+      },
+      {
+        key: 'os_ram_size',
+        title: translate('Cloud RAM'),
+        tooltipValueFormatter: formatFilesize,
+      },
+      {
+        key: 'os_storage_size',
+        title: translate('Cloud block storage size'),
+        tooltipValueFormatter: formatFilesize,
+      },
+      {
+        key: 'nc_cpu_count',
+        title: translate('Batch vCPU'),
+      },
+      {
+        key: 'nc_ram_size',
+        title: translate('Batch RAM'),
+        tooltipValueFormatter: formatFilesize,
+      },
+      {
+        key: 'nc_storage_size',
+        title: translate('Batch block storage size'),
+        tooltipValueFormatter: formatFilesize,
       },
     ];
   }
