@@ -121,9 +121,9 @@ class TreemapContainer extends React.Component<TranslateProps> {
         <>
           <QuotaSelector
             quotas={this.quotas}
-            value={this.state.selectedQuota}
+            value={quota}
             handleChange={value => {
-              this.setState({ selectedQuota: value });
+              this.setState({ selectedQuota: value.key });
             }}
           />
           <TreemapChart
