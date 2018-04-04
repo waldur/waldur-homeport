@@ -12,14 +12,29 @@ interface UsageMapProps {
   id: string;
   data: any;
   selectServiceProvider: (uuid: string) => void;
-  hideFilter: () => void;
+  showInfoPanel: () => void;
 }
 
 export default class UsageMap extends React.Component<UsageMapProps> {
   map: any;
+  oneToManyFlowmapLayer: any;
 
   componentDidMount() {
-    this.map = L.map(this.props.id);
+    console.log('Mounted');
+    this.initMap();
+    this.updateMap();
+  }
+
+  initMap() {
+    const { id, center, zoom } = this.props;
+    this.map = L.map(id);
+    this.map.setView(center, zoom);
+    basemapLayer('Gray').addTo(this.map);
+  }
+
+  componentDidUpdate() {
+    console.log('Updated');
+    this.updateMap();
   }
 
   shouldComponentUpdate(nextProps) {
@@ -29,8 +44,56 @@ export default class UsageMap extends React.Component<UsageMapProps> {
     return false;
   }
 
-  updateMap() {
-    const { center, zoom, data } = this.props;
+  composeFeatureCollection = data => ({
+    type: 'FeatureCollection',
+    features: data.usage.map(entry => ({
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [
+          entry.provider_to_consumer.provider_lon,
+          entry.provider_to_consumer.provider_lat,
+        ],
+      },
+      properties: entry.provider_to_consumer,
+    })),
+  })
+
+  setFlowmapLayer(data) {
+    return L.canvasFlowmapLayer(data, {
+      originAndDestinationFieldIds: {
+        originUniqueIdField: 'provider_uuid',
+        originGeometry: {
+          x: 'provider_lon',
+          y: 'provider_lat',
+        },
+        destinationUniqueIdField: 'consumer_uuid',
+        destinationGeometry: {
+          x: 'consumer_lon',
+          y: 'consumer_lat',
+        },
+      },
+      pathDisplayMode: 'selection',
+      animationStarted: true,
+      animationEasingFamily: 'Cubic',
+      animationEasingType: 'In',
+      animationDuration: 2000,
+    });
+  }
+
+  flowmapLaterClickHandler = e => {
+    if (e.sharedOriginFeatures.length) {
+      this.props.selectServiceProvider(e.layer.feature.properties.provider_uuid);
+      this.props.showInfoPanel();
+      this.oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
+    }
+    if (e.sharedDestinationFeatures.length) {
+      const content = e.layer.feature.properties.consumer_name;
+      e.layer.setPopupContent(content);
+    }
+  }
+
+  extendViewport(data, center) {
     const bounds = L.latLngBounds(center);
 
     for (const key in data.service_providers) {
@@ -50,63 +113,31 @@ export default class UsageMap extends React.Component<UsageMapProps> {
         ]);
       }
     }
-
-    this.map.setView(center, zoom);
-
-    this.map.fitBounds(bounds);
-
-    basemapLayer('Gray').addTo(this.map);
-
-    const geoJsonFeatureCollection = {
-      type: 'FeatureCollection',
-      features: data.usage.map(entry => ({
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [
-            entry.provider_to_consumer.provider_lon,
-            entry.provider_to_consumer.provider_lat,
-          ],
-        },
-        properties: entry.provider_to_consumer,
-      })),
-    };
-
-    const oneToManyFlowmapLayer = L.canvasFlowmapLayer(geoJsonFeatureCollection, {
-      originAndDestinationFieldIds: {
-        originUniqueIdField: 'provider_uuid',
-        originGeometry: {
-          x: 'provider_lon',
-          y: 'provider_lat',
-        },
-        destinationUniqueIdField: 'consumer_uuid',
-        destinationGeometry: {
-          x: 'consumer_lon',
-          y: 'consumer_lat',
-        },
-      },
-      pathDisplayMode: 'selection',
-      animationStarted: true,
-      animationEasingFamily: 'Cubic',
-      animationEasingType: 'In',
-      animationDuration: 2000,
-    }).addTo(this.map);
-
-    oneToManyFlowmapLayer.on('click', e => {
-      if (e.sharedOriginFeatures.length) {
-        this.props.selectServiceProvider(e.layer.feature.properties.provider_uuid);
-        this.props.hideFilter();
-        oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
-      }
-      if (e.sharedDestinationFeatures.length) {
-        const content = e.layer.feature.properties.consumer_name;
-        e.layer.setPopupContent(content);
-      }
-    });
+    return bounds;
   }
 
-  componentDidUpdate() {
-    this.updateMap();
+  updateMapShallow() {
+    const { center, data } = this.props;
+    const bounds = this.extendViewport(data, center);
+    if (this.oneToManyFlowmapLayer) {
+      this.oneToManyFlowmapLayer.addTo(this.map);
+    }
+    if (Object.keys(bounds).length > 0) {
+      this.map.fitBounds(bounds);
+    }
+  }
+
+  updateMap() {
+    const { center, data } = this.props;
+    const bounds = this.extendViewport(data, center);
+    const geoJsonFeatureCollection = this.composeFeatureCollection(data);
+    this.oneToManyFlowmapLayer = this.setFlowmapLayer(geoJsonFeatureCollection);
+    this.oneToManyFlowmapLayer.addTo(this.map);
+    this.oneToManyFlowmapLayer.on('click', this.flowmapLaterClickHandler);
+
+    if (Object.keys(bounds).length > 0) {
+      this.map.fitBounds(bounds);
+    }
   }
 
   render() {

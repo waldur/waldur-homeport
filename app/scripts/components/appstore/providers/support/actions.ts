@@ -2,8 +2,8 @@ export const SERVICE_USAGE_FETCH_START = 'waldur/appstore/providers/support/FETC
 export const SERVICE_USAGE_FETCH_DONE = 'waldur/appstore/providers/support/FETCH_DONE';
 export const SERVICE_USAGE_FETCH_ERROR = 'waldur/appstore/providers/support/FETCH_ERROR';
 export const SERVICE_SELECT = 'waldur/appstore/providers/support/SERVICE_SELECT';
-export const FILTER_SHOW = 'waldur/appstore/providers/support/FILTER_SHOW';
-export const FILTER_HIDE = 'waldur/appstore/providers/support/FILTER_HIDE';
+export const INFO_PANEL_SHOW = 'waldur/appstore/providers/support/INFO_PANEL_SHOW';
+export const INFO_PANEL_HIDE = 'waldur/appstore/providers/support/INFO_PANEL_HIDE';
 
 export const fetchServiceUsageStart = () => ({
   type: SERVICE_USAGE_FETCH_START,
@@ -30,14 +30,14 @@ export const serviceProviderSelect = (uuid: string) => {
   };
 };
 
-export const showFilter = () => {
+export const showInfoPanel = () => {
   return {
-    type: FILTER_SHOW,
+    type: INFO_PANEL_SHOW,
   };
 };
 
-export const hideFilter = () => {
+export const hideInfoPanel = () => {
   return {
-    type: FILTER_HIDE,
+    type: INFO_PANEL_HIDE,
   };
 };

@@ -7,5 +7,5 @@ export const selectedServiceProviderSelector = state => {
 };
 
 export const filterSelector = state => {
-  return state.serviceUsage.filter;
+  return state.serviceUsage.infoPanelIsVisible;
 };

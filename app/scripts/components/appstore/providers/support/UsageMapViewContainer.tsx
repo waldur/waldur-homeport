@@ -6,8 +6,8 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import {
   fetchServiceUsageStart,
   serviceProviderSelect,
-  showFilter,
-  hideFilter,
+  showInfoPanel,
+  hideInfoPanel,
 } from './actions';
 import {
   selectedServiceProviderSelector,
@@ -21,9 +21,9 @@ interface UsageMapViewComponentProps {
   serviceUsage: any;
   selectedServiceProvider: any;
   selectServiceProvider: () => void;
-  showFilter: () => void;
-  hideFilter: () => void;
-  filter: boolean;
+  showInfoPanel: () => void;
+  hideInfoPanel: () => void;
+  infoPanelIsVisible: boolean;
 }
 
 class UsageMapViewComponent extends React.Component<UsageMapViewComponentProps> {
@@ -40,14 +40,14 @@ class UsageMapViewComponent extends React.Component<UsageMapViewComponentProps> 
 const mapStateToProps = state => ({
   serviceUsage: serviceUsageSelector(state),
   selectedServiceProvider: selectedServiceProviderSelector(state),
-  filter: filterSelector(state),
+  infoPanelIsVisible: filterSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchServiceUsageStart: () => dispatch(fetchServiceUsageStart()),
   selectServiceProvider: (uuid: string) => dispatch(serviceProviderSelect(uuid)),
-  showFilter: () => dispatch(showFilter()),
-  hideFilter: () => dispatch(hideFilter()),
+  showInfoPanel: () => dispatch(showInfoPanel()),
+  hideInfoPanel: () => dispatch(hideInfoPanel()),
 });
 
 const UsageMapViewContainer = connect(mapStateToProps, mapDispatchToProps)(UsageMapViewComponent);

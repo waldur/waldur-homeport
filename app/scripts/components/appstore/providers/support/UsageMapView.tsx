@@ -4,38 +4,29 @@ import { MapInfoPanel } from '@waldur/appstore/providers/support/MapInfoPanel';
 import UsageMap from '@waldur/appstore/providers/support/UsageMap';
 
 import './providers-support.scss';
-import { UsageMapFilter } from './UsageMapFilter';
 
 export interface UsageMapViewProps {
   serviceUsage: any;
   selectedServiceProvider: any;
-  filter: boolean;
+  infoPanelIsVisible: boolean;
   selectServiceProvider: () => void;
-  showFilter: () => void;
-  hideFilter: () => void;
+  showInfoPanel: () => void;
+  hideInfoPanel: () => void;
 }
 
 export class UsageMapView extends React.Component<UsageMapViewProps, any> {
   serviceUsage: any;
 
-  handleFilterClick = () => {
-    this.props.showFilter();
-  }
-
-  renderInfoPanelContent = () => {
-    if (this.props.selectedServiceProvider && !this.props.filter) {
-      this.props.hideFilter();
-      return <MapInfoPanel data={this.props.selectedServiceProvider} />;
-    }
-    return <UsageMapFilter />;
+  handleCloseClick = () => {
+    this.props.hideInfoPanel();
   }
 
   render() {
     const {
       serviceUsage,
       selectServiceProvider,
-      hideFilter,
-      filter,
+      infoPanelIsVisible,
+      showInfoPanel,
     } = this.props;
     return (
       <>
@@ -45,18 +36,16 @@ export class UsageMapView extends React.Component<UsageMapViewProps, any> {
           id="usage-map"
           data={serviceUsage}
           selectServiceProvider={selectServiceProvider}
-          hideFilter={hideFilter}
+          showInfoPanel={showInfoPanel}
         />
-        <div id="usage-map-panel">
-          {!filter &&
-            <button
-              type="button"
-              className="btn btn-outline btn-primary m-xxs"
-              onClick={this.handleFilterClick}>Filter
-            </button>
-          }
-          {this.renderInfoPanelContent()}
-        </div>
+        {infoPanelIsVisible &&
+          <div id="usage-map-panel">
+            <MapInfoPanel
+              onPanelClose={this.handleCloseClick}
+              data={this.props.selectedServiceProvider}
+            />
+          </div>
+        }
       </>
     );
   }

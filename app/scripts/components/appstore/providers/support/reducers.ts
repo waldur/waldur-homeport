@@ -55,16 +55,16 @@ export function reducer(state = INITIAL_STATE, action) {
         error: action.payload.error,
       };
 
-    case actions.FILTER_SHOW:
+    case actions.INFO_PANEL_SHOW:
       return {
         ...state,
-        filter: true,
+        infoPanelIsVisible: true,
       };
 
-    case actions.FILTER_HIDE:
+    case actions.INFO_PANEL_HIDE:
       return {
         ...state,
-        filter: false,
+        infoPanelIsVisible: false,
       };
 
     default:

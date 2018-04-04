@@ -14,11 +14,6 @@ import {
 interface HeatMapComponentProps {
   fetchServiceUsageStart: () => void;
   serviceUsage: any;
-  selectedServiceProvider: any;
-  selectServiceProvider: () => void;
-  showFilter: () => void;
-  hideFilter: () => void;
-  filter: boolean;
 }
 
 class HeatMapComponent extends React.Component<HeatMapComponentProps> {
