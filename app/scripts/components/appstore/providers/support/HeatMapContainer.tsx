@@ -26,7 +26,7 @@ class HeatMapComponent extends React.Component<HeatMapComponentProps> {
       <HeatMap
         center={[0, 0]}
         zoom={3}
-        id="usage-map"
+        id="heat-map"
         data={serviceUsage}
       />
     );

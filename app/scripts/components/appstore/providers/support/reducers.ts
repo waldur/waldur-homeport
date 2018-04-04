@@ -8,15 +8,13 @@ import * as actions from './actions';
 
 const INITIAL_STATE = {
   data: {
-    usage: [],
+    organizations: {},
     service_providers: {},
-    service_consumers: {},
+    usage: [],
   },
-  selectedServiceProvider: {
-    consumers: [],
-  },
+  selectedServiceProvider: {},
   loading: false,
-  filter: true,
+  infoPanelIsVisible: false,
 };
 
 export function reducer(state = INITIAL_STATE, action) {
@@ -36,13 +34,23 @@ export function reducer(state = INITIAL_STATE, action) {
 
     case actions.SERVICE_SELECT:
       let selectedServiceProvider;
-      for (const key in state.data.service_providers) {
-        if (state.data.service_providers.hasOwnProperty(key)) {
-          if (state.data.service_providers[key].uuid === action.payload.uuid) {
-            selectedServiceProvider = state.data.service_providers[key];
-          }
+      const providerUuid = action.payload.uuid;
+      const serviceProvider = state.data.organizations[providerUuid];
+      const selectedServiceConsumers = [];
+
+      state.data.usage.forEach(entry => {
+        const consumerUuid = entry.provider_to_consumer.consumer_uuid;
+        if (providerUuid === entry.provider_to_consumer.provider_uuid) {
+            selectedServiceConsumers.push({
+              ...entry.data,
+              name: state.data.organizations[consumerUuid].name,
+            });
         }
-      }
+      });
+      selectedServiceProvider = {
+        ...serviceProvider,
+        consumers: selectedServiceConsumers,
+      };
       return {
         ...state,
         selectedServiceProvider,
@@ -65,6 +73,12 @@ export function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         infoPanelIsVisible: false,
+      };
+
+    case actions.USAGE_DATA_CLEAN:
+      return {
+        ...state,
+        INITIAL_STATE,
       };
 
     default:

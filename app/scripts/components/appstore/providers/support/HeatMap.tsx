@@ -19,7 +19,7 @@ export default class HeatMap extends React.Component<HeatMapProps> {
     super(props);
     this.getColor = this.getColor.bind(this);
     this.setStyle = this.setStyle.bind(this);
-    this.getConsumerToProviderDiff = this.getConsumerToProviderDiff.bind(this);
+    this.getTotalMetricsDiff = this.getTotalMetricsDiff.bind(this);
   }
 
   getColor(diff) {
@@ -43,39 +43,32 @@ export default class HeatMap extends React.Component<HeatMapProps> {
     };
   }
 
-  getConsumerToProviderDiff(data, country) {
-    let numOfProviders = 0;
-    let numOfConsumers = 0;
-    Object.keys(data.service_providers).forEach(key => {
-      if (data.service_providers[key].country === country) {
-        numOfProviders += 1;
-      }
-    });
-    Object.keys(data.service_consumers).forEach(key => {
-      if (data.service_consumers[key].country === country) {
-        numOfConsumers += 1;
-      }
-    });
-    return numOfProviders - numOfConsumers;
+  calculateTotalConsumerResources(data, country) {
+    console.log(data, country);
+    // needs to be implemented yet
+  }
+
+  getTotalMetricsDiff(data, country) {
+    console.log(data, country);
+    return 0;
+    // needs to be implemented yet
   }
 
   updateMap() {
     const { data } = this.props;
 
-    const consumers = Object.keys(data.service_consumers).reduce((acc, key) => {
-      if (!data.service_providers[key]) {
-        countries.features.map(country => {
-          if (country.properties.name === data.service_consumers[key].country) {
-            acc.push({
-              ...country,
-              properties: {
-                ...country.properties,
-                diff: this.getConsumerToProviderDiff(data, country.properties.name),
-              },
-            });
-          }
-        });
-      }
+    const consumers = Object.keys(data.service_providers).reduce((acc, providerUuid) => {
+      countries.features.map(country => {
+        if (country.properties.name === data.organizations[providerUuid].country) {
+          acc.push({
+            ...country,
+            properties: {
+              ...country.properties,
+              diff: this.getTotalMetricsDiff(data, country.properties.name),
+            },
+          });
+        }
+      });
       return acc;
     }, []);
 
@@ -100,6 +93,6 @@ export default class HeatMap extends React.Component<HeatMapProps> {
   }
 
   render() {
-    return (<div id="usage-map"/>);
+    return (<div id="heat-map"/>);
   }
 }

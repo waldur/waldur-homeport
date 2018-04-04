@@ -22,7 +22,7 @@ export const MapInfoPanel = ({data, onPanelClose}) => {
         </div>
         <hr/>
         <h3>Used in the period -</h3>
-        <h4>{data.consumers[0].data.period}</h4>
+        <h4>{data.consumers[0].period}</h4>
         <h3>by:</h3>
       </div>
       {data.consumers.map((consumer, index) => {
@@ -32,15 +32,15 @@ export const MapInfoPanel = ({data, onPanelClose}) => {
             <div>
               <div>
                 <span>CPU</span>
-                <small className="pull-right">{consumer.data.cpu} hours</small>
+                <small className="pull-right">{consumer.cpu} hours</small>
               </div>
               <div>
                 <span>RAM</span>
-                <small className="pull-right">{consumer.data.ram} hours</small>
+                <small className="pull-right">{consumer.ram} hours</small>
               </div>
               <div>
                 <span>GPU</span>
-                <small className="pull-right">{consumer.data.gpu} hours</small>
+                <small className="pull-right">{consumer.gpu} hours</small>
               </div>
             </div>
           </div>

@@ -33,7 +33,6 @@ export class UsageMapView extends React.Component<UsageMapViewProps, any> {
         <UsageMap
           center={[0, 0]}
           zoom={5}
-          id="usage-map"
           data={serviceUsage}
           selectServiceProvider={selectServiceProvider}
           showInfoPanel={showInfoPanel}

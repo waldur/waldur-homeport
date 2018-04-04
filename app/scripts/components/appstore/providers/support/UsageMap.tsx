@@ -9,32 +9,51 @@ import './providers-support.scss';
 interface UsageMapProps {
   center?: number[];
   zoom?: number;
-  id: string;
   data: any;
   selectServiceProvider: (uuid: string) => void;
   showInfoPanel: () => void;
 }
 
-export default class UsageMap extends React.Component<UsageMapProps> {
+interface UsageMapState {
   map: any;
   oneToManyFlowmapLayer: any;
+}
 
-  componentDidMount() {
-    console.log('Mounted');
-    this.initMap();
-    this.updateMap();
+export default class UsageMap extends React.Component<UsageMapProps, UsageMapState> {
+  mapNode: any;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      map: null,
+      oneToManyFlowmapLayer: null,
+    };
   }
 
-  initMap() {
-    const { id, center, zoom } = this.props;
-    this.map = L.map(id);
-    this.map.setView(center, zoom);
-    basemapLayer('Gray').addTo(this.map);
+  componentDidMount() {
+    if (!this.state.map) {
+      this.initMap(this.mapNode);
+    }
+  }
+
+  initMap(node) {
+    if (this.state.map) {
+      return;
+    }
+    const map = L.map(node);
+    const { center, zoom } = this.props;
+    map.setView(center, zoom);
+    basemapLayer('Gray').addTo(map);
+
+    this.setState({map}, this.updateMap);
   }
 
   componentDidUpdate() {
-    console.log('Updated');
     this.updateMap();
+  }
+
+  componentWillUnmount() {
+    this.state.map.remove();
   }
 
   shouldComponentUpdate(nextProps) {
@@ -46,17 +65,29 @@ export default class UsageMap extends React.Component<UsageMapProps> {
 
   composeFeatureCollection = data => ({
     type: 'FeatureCollection',
-    features: data.usage.map(entry => ({
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [
-          entry.provider_to_consumer.provider_lon,
-          entry.provider_to_consumer.provider_lat,
-        ],
-      },
-      properties: entry.provider_to_consumer,
-    })),
+    features: data.usage.map(entry => {
+      const provider_uuid = entry.provider_to_consumer.provider_uuid;
+      const consumer_uuid = entry.provider_to_consumer.consumer_uuid;
+      return {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [
+            data.organizations[provider_uuid].longitude,
+            data.organizations[provider_uuid].latitude,
+          ],
+        },
+        properties: {
+          ...entry.provider_to_consumer,
+          provider_longitude: data.organizations[provider_uuid].longitude,
+          provider_latitude: data.organizations[provider_uuid].latitude,
+          consumer_longitude: data.organizations[consumer_uuid].longitude,
+          consumer_latitude: data.organizations[consumer_uuid].latitude,
+          consumer_name: data.organizations[consumer_uuid].name,
+        },
+      };
+    },
+    ),
   })
 
   setFlowmapLayer(data) {
@@ -64,13 +95,13 @@ export default class UsageMap extends React.Component<UsageMapProps> {
       originAndDestinationFieldIds: {
         originUniqueIdField: 'provider_uuid',
         originGeometry: {
-          x: 'provider_lon',
-          y: 'provider_lat',
+          x: 'provider_longitude',
+          y: 'provider_latitude',
         },
         destinationUniqueIdField: 'consumer_uuid',
         destinationGeometry: {
-          x: 'consumer_lon',
-          y: 'consumer_lat',
+          x: 'consumer_longitude',
+          y: 'consumer_latitude',
         },
       },
       pathDisplayMode: 'selection',
@@ -85,7 +116,7 @@ export default class UsageMap extends React.Component<UsageMapProps> {
     if (e.sharedOriginFeatures.length) {
       this.props.selectServiceProvider(e.layer.feature.properties.provider_uuid);
       this.props.showInfoPanel();
-      this.oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
+      this.state.oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
     }
     if (e.sharedDestinationFeatures.length) {
       const content = e.layer.feature.properties.consumer_name;
@@ -96,51 +127,34 @@ export default class UsageMap extends React.Component<UsageMapProps> {
   extendViewport(data, center) {
     const bounds = L.latLngBounds(center);
 
-    for (const key in data.service_providers) {
-      if (data.service_providers.hasOwnProperty(key)) {
+    for (const key in data.organizations) {
+      if (data.organizations.hasOwnProperty(key)) {
         bounds.extend([
-          data.service_providers[key].latitude,
-          data.service_providers[key].longitude,
-        ]);
-      }
-    }
-
-    for (const key in data.service_consumers) {
-      if (data.service_consumers.hasOwnProperty(key)) {
-        bounds.extend([
-          data.service_consumers[key].latitude,
-          data.service_consumers[key].longitude,
+          data.organizations[key].latitude,
+          data.organizations[key].longitude,
         ]);
       }
     }
     return bounds;
   }
 
-  updateMapShallow() {
-    const { center, data } = this.props;
-    const bounds = this.extendViewport(data, center);
-    if (this.oneToManyFlowmapLayer) {
-      this.oneToManyFlowmapLayer.addTo(this.map);
-    }
-    if (Object.keys(bounds).length > 0) {
-      this.map.fitBounds(bounds);
-    }
-  }
-
   updateMap() {
     const { center, data } = this.props;
     const bounds = this.extendViewport(data, center);
     const geoJsonFeatureCollection = this.composeFeatureCollection(data);
-    this.oneToManyFlowmapLayer = this.setFlowmapLayer(geoJsonFeatureCollection);
-    this.oneToManyFlowmapLayer.addTo(this.map);
-    this.oneToManyFlowmapLayer.on('click', this.flowmapLaterClickHandler);
-
+    console.log("GeoData", geoJsonFeatureCollection);
+    this.setState({
+      oneToManyFlowmapLayer: this.setFlowmapLayer(geoJsonFeatureCollection),
+    }, () => {
+      this.state.oneToManyFlowmapLayer.addTo(this.state.map);
+      this.state.oneToManyFlowmapLayer.on('click', this.flowmapLaterClickHandler);
+    });
     if (Object.keys(bounds).length > 0) {
-      this.map.fitBounds(bounds);
+      this.state.map.fitBounds(bounds);
     }
   }
 
   render() {
-    return (<div id="usage-map"/>);
+    return (<div ref={node => this.mapNode = node} id="usage-map" />);
   }
 }

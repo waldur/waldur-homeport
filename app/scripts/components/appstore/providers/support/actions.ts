@@ -4,6 +4,7 @@ export const SERVICE_USAGE_FETCH_ERROR = 'waldur/appstore/providers/support/FETC
 export const SERVICE_SELECT = 'waldur/appstore/providers/support/SERVICE_SELECT';
 export const INFO_PANEL_SHOW = 'waldur/appstore/providers/support/INFO_PANEL_SHOW';
 export const INFO_PANEL_HIDE = 'waldur/appstore/providers/support/INFO_PANEL_HIDE';
+export const USAGE_DATA_CLEAN = 'waldur/appstore/providers/support/USAGE_DATA_CLEAN';
 
 export const fetchServiceUsageStart = () => ({
   type: SERVICE_USAGE_FETCH_START,
@@ -39,5 +40,11 @@ export const showInfoPanel = () => {
 export const hideInfoPanel = () => {
   return {
     type: INFO_PANEL_HIDE,
+  };
+};
+
+export const cleanUsageData = () => {
+  return {
+    type: USAGE_DATA_CLEAN,
   };
 };
