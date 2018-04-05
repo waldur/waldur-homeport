@@ -120,7 +120,7 @@ export class InstalledLibraryRowForm<R extends ManagementRequest<R>>
         <div className="col-xs-1 same-padding-as-control-label">
           {this.isLibraryNameSelected() ?
             <a href={'https://pypi.python.org/pypi/' + this.getSelectedLibrary().name.value} target="_blank">
-              <span className="fa fa-external-link-alt"/>
+              <span className="fa fa-external-link"/>
             </a>
             : null}
         </div>

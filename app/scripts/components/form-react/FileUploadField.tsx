@@ -37,7 +37,9 @@ export class FileUploadField extends React.Component<FileUploadFieldProps> {
     return (
       <span>
         {this.props.showFileName ? this.state.fileName || 'None' : null}
-        <button className="btn btn-sm btn-primary m-l-sm"
+        <button
+          type="button"
+          className="btn btn-sm btn-primary m-l-sm"
           onClick={this.openFileDialog}
           disabled={this.props.disabled}>
           <i className="fa fa-upload"/>

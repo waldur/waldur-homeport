@@ -10,7 +10,6 @@ import { JupyterHubUsersHolder } from '@waldur/ansible/jupyter-hub-management/ty
 import {
 isNotBlank,
 validateJupyterHubUserPassword,
-validateJupyterHubUserUsernameFormat
 } from '@waldur/ansible/jupyter-hub-management/validation';
 import '@waldur/ansible/python-management/styles/AnsibleApplications.scss';
 import { FieldError } from '@waldur/form-react';
@@ -24,7 +23,7 @@ export class JupyterHubUserRowsComponent extends React.Component<JupyterHubUserR
   passwordValidation = (value, formData: JupyterHubUsersHolder) =>
     validateJupyterHubUserPassword(value, this.props.getJupyterHubUsers(formData).find(u => u.password === value))
   usernameValidation = (username, _) => isNotBlank(username)
-    ? validateJupyterHubUserUsernameFormat(username)
+    ? undefined
     : translate('Username should be provided')
 
   addUser = () => {
@@ -63,9 +62,9 @@ export class JupyterHubUserRowsComponent extends React.Component<JupyterHubUserR
                 && this.props.jupyterHubManagement.authenticationConfig.jupyterHubOAuthConfig.type === JupyterHubOAuthType.AZURE &&
                 <p className="help-block m-b-none text-muted">
                   {translate(
-                    'Your Microsoft Account full username. It should not contain @domain.com part. ' +
-                    'All spaces or dots should be replaced with underscores: firstname_lastname')}
+                    'Your Microsoft Account full username. It should not contain @domain.com part. ')}
                 </p>}
+                {this.props.jupyterHubManagement.authenticationConfig.jupyterHubOAuthConfig && translate('All spaces, hyphens and dots will be replaced with underscores.')}
               </div>
               {this.props.passwordEnabled &&
               <div className="col-xs-4">

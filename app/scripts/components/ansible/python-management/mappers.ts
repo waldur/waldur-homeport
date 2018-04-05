@@ -52,6 +52,7 @@ export function buildInstance(instanceServerPayload) {
   instance.uuid = instanceServerPayload.uuid;
   instance.name = instanceServerPayload.name;
   instance.imageName = instanceServerPayload.image_name;
+  instance.firstExternalIp = instanceServerPayload.floating_ips ? instanceServerPayload.floating_ips[0].address : null;
   instance.ram = instanceServerPayload.ram;
   instance.cores = instanceServerPayload.cores;
   instance.disk = instanceServerPayload.disk;

@@ -1,3 +1,4 @@
+import { Library } from '@waldur/ansible/python-management/types/Library';
 import * as React from 'react';
 import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
 
@@ -35,7 +36,7 @@ export class InstalledLibraries<R extends ManagementRequest<R>>
               className="btn btn-default btn-add-option"
               disabled={isVirtualEnvironmentNotEditable(
                 new VirtualEnvironmentNotEditableDs(this.props.pythonManagement), this.props.virtualEnvironmentIndex, this.props.managementRequestTimeout)}
-              onClick={() => this.props.fields.push({})}>
+              onClick={() => this.props.fields.push(new Library('', '', ''))}>
               {translate('Add library')}
             </button>
           </div>

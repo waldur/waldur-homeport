@@ -8,9 +8,6 @@ export const validateJupyterHubUserPassword = (password: string, user: JupyterHu
     ? undefined
     : translate('New user needs password');
 
-export const validateJupyterHubUserUsernameFormat = (username: string) =>
-  username.match('^[a-zA-Z0-9_]+$') ? undefined : translate('Username may contain only characters, numbers and underscores');
-
 export const validateSessionTimeoutHours = (timeToLive: number) => timeToLive >= 1 ? undefined : translate('Session time to live should be creater than 1 hour');
 
 const ADMIN_SHOULD_BE_SPECIFIED = 'At least one admin should be specified!';

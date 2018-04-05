@@ -335,6 +335,10 @@ msgstr ""
 msgid "All provider quotas have reached limit."
 msgstr ""
 
+#: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
+msgid "All spaces, hyphens and dots will be replaced with underscores."
+msgstr ""
+
 #: app/scripts/components/slurm/actions.js
 msgid "Allocation has been updated."
 msgstr ""
@@ -384,6 +388,10 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "Any default system user (ubuntu, debian...). The user should be able to run commands as root"
+msgstr ""
+
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 msgid "Application creation has been scheduled."
 msgstr ""
@@ -413,14 +421,14 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
-#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "Apply JupyterHub configuration"
-msgstr ""
-
 #: app/scripts/components/issues/list/issues-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 #: app/scripts/components/user/support/UserFilter.tsx
 msgid "Apply filters"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "Apply or rerun JupyterHub configuration"
 msgstr ""
 
 #: app/scripts/components/payments/routes.js
@@ -1581,10 +1589,6 @@ msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Ensure that the following public key is present in /home//.ssh/authorized_keys file."
-msgstr ""
-
-#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Ensure that the following public key is present in authorized_keys file on the selected instance."
 msgstr ""
 
 #: app/scripts/components/resource/actions/dialog/action-field-datetime.html
@@ -3744,8 +3748,16 @@ msgstr ""
 msgid "Please accept Terms of Services to proceed."
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "Please add following public key to authorized_keys file on the selected instance."
+msgstr ""
+
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 msgid "Please add users or select another team."
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
+msgid "Please assign 'SSH' security group to the virtual machine (to allow SSH connections)."
 msgstr ""
 
 #: app/scripts/components/issues/request-service-button.js
@@ -5456,10 +5468,6 @@ msgstr ""
 msgid "Taking a snapshot"
 msgstr ""
 
-#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Target virtual machine should have 'SSH' security group assigned (to allow SSH connections)."
-msgstr ""
-
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Tax"
@@ -6145,10 +6153,6 @@ msgstr ""
 msgid "User profile"
 msgstr ""
 
-#: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "User should be able to run commands as root"
-msgstr ""
-
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "User status"
 msgstr ""
@@ -6269,10 +6273,6 @@ msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
 msgid "Username is required."
-msgstr ""
-
-#: app/scripts/components/ansible/jupyter-hub-management/validation.ts
-msgid "Username may contain only characters, numbers and underscores"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
@@ -6399,11 +6399,15 @@ msgid "Virtual machine"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Virtual machine has cloud broker public key"
+msgid "Virtual machine contains a public key of the cloud broker"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 msgid "Virtual machine has no floating ips assigned!"
+msgstr ""
+
+#: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
+msgid "Virtual machine should have Web security group assigned"
 msgstr ""
 
 #: app/scripts/components/analytics/resource-chart-service.js
@@ -6677,7 +6681,7 @@ msgid "Your FreeIPA profile has been disabled."
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
-msgid "Your Microsoft Account full username. It should not contain @domain.com part. All spaces or dots should be replaced with underscores: firstname_lastname"
+msgid "Your Microsoft Account full username. It should not contain @domain.com part."
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html
