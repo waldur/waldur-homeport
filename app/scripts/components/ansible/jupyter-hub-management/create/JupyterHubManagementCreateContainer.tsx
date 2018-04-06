@@ -1,4 +1,3 @@
-import { Instance } from '@waldur/ansible/python-management/types/Instance';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -19,6 +18,7 @@ import { PythonManagementWithInstance } from '@waldur/ansible/jupyter-hub-manage
 import { validateJupyterHubManagementForm } from '@waldur/ansible/jupyter-hub-management/validation';
 import * as pythonActions from '@waldur/ansible/python-management/actions';
 import { getWaldurPublicKey, getWaldurPublicKeyUuid } from '@waldur/ansible/python-management/selectors';
+import { Instance } from '@waldur/ansible/python-management/types/Instance';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ListConfiguration } from '@waldur/form-react/list-field/types';
 import { translate, TranslateProps, withTranslation } from '@waldur/i18n';

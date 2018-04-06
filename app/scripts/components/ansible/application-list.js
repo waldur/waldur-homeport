@@ -129,7 +129,7 @@ function ApplicationListController(
         return $http.delete(`${ENV.apiEndpoint}api/jupyter-hub-management/${model.uuid}/`);
       }
     },
-    handleActionException: function(_) {
+    handleActionException: function() {
       alert('Action failed or is not allowed!');
     },
     getRowActions: function() {

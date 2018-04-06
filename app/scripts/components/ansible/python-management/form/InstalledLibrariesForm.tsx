@@ -1,4 +1,3 @@
-import { Library } from '@waldur/ansible/python-management/types/Library';
 import * as React from 'react';
 import { WrappedFieldArrayProps } from 'redux-form/lib/FieldArray';
 
@@ -8,6 +7,7 @@ isVirtualEnvironmentNotEditable,
 VirtualEnvironmentNotEditableDs
 } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
 import '@waldur/ansible/python-management/styles/AnsibleApplications.scss';
+import { Library } from '@waldur/ansible/python-management/types/Library';
 import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
 import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
 import { translate } from '@waldur/i18n';
