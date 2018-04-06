@@ -10,7 +10,6 @@ const data = {
       longitude: '26.7124485',
       description: 'University of Tartu is the 2nd oldest university in Swedish Empire.',
       logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Tartu_%C3%9Clikool_logo.svg/1200px-Tartu_%C3%9Clikool_logo.svg.png',
-      consumers: ['hi', 'tampere'],
     },
     csc: {
       uuid: '9b12hb12l',
@@ -53,7 +52,7 @@ const data = {
   },
   service_providers: {
     uni_of_tartu: ['hi', 'tampere'],
-    csc: ['hi', 'kth'],
+    csc: ['hi', 'kth', 'uni_of_tartu'],
   },
   usage: [
     {
@@ -102,6 +101,18 @@ const data = {
         cpu: 100000,
         ram: 3000000,
         gpu: 20000,
+      },
+    },
+    {
+      provider_to_consumer: {
+        provider_uuid: 'csc',
+        consumer_uuid: 'uni_of_tartu',
+      },
+      data: {
+        period: '03-2018',
+        cpu: 400000,
+        ram: 3500000,
+        gpu: 10000,
       },
     },
   ],
