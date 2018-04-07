@@ -2,6 +2,7 @@ import L from 'leaflet';
 import * as React from 'react';
 
 import countries from './countries.geo.js';
+import { countryInfo } from './countryInfo';
 
 import './providers-support.scss';
 
@@ -93,10 +94,16 @@ export default class HeatMap extends React.Component<HeatMapProps> {
   getDataForCountry(data, countryName) {
     return Object.keys(data.service_providers).reduce((acc, uuid) => {
       if (data.organizations[uuid].country === countryName) {
-        acc.push(data.organizations[uuid]);
+        acc.providers.push(data.organizations[uuid]);
       }
+      data.service_providers[uuid].map(consumerUuid => {
+        if (data.organizations[consumerUuid].country === countryName
+          && acc.consumers.indexOf(data.organizations[consumerUuid]) === -1) {
+          acc.consumers.push(data.organizations[consumerUuid]);
+        }
+      });
       return acc;
-    }, []);
+    }, {providers: [], consumers: []});
   }
 
   updateMap() {
@@ -131,8 +138,8 @@ export default class HeatMap extends React.Component<HeatMapProps> {
   }
 
   onEachFeature(feature, layer) {
-    console.log('feature', feature);
-    layer.bindPopup('Provider\'s data');
+    const content = countryInfo({data: feature.properties.data});
+    layer.bindPopup(content);
   }
 
   componentDidMount() {

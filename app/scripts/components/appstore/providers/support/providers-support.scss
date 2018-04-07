@@ -36,3 +36,13 @@
     margin-bottom: 0;
   }
 }
+
+#heat-map {
+  #country-info {
+    max-height: 400px;
+    overflow-y: scroll;
+  }
+  .ibox-title {
+    border-style: none;
+  }
+}

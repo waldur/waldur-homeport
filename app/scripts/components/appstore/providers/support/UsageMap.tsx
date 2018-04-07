@@ -142,7 +142,6 @@ export default class UsageMap extends React.Component<UsageMapProps, UsageMapSta
     const { center, data } = this.props;
     const bounds = this.extendViewport(data, center);
     const geoJsonFeatureCollection = this.composeFeatureCollection(data);
-    console.log("GeoData", geoJsonFeatureCollection);
     this.setState({
       oneToManyFlowmapLayer: this.setFlowmapLayer(geoJsonFeatureCollection),
     }, () => {
