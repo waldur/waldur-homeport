@@ -37,7 +37,7 @@ export const JupyterOAuthForm = (props: JupyterOAuthFormProps) => (
         disabled={props.isGlobalRequestRunning}
         required={true}/>
       <div className="form-group">
-        <label className="control-label col-sm-3">{translate('Additional information')}</label>
+        <label className="control-label col-sm-2">{translate('Additional information')}</label>
         <div className="same-padding-as-control-label col-sm-5">
           <a href="https://github.com/jupyterhub/oauthenticator"
              target="_blank">{translate('Where to get the required values from?')}</a>

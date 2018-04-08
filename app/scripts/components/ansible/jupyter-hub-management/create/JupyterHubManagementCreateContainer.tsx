@@ -7,15 +7,18 @@ import * as jupyterHubActions from '@waldur/ansible/jupyter-hub-management/actio
 import { JUPYTER_HUB_MANAGEMENT_CREATE_FORM_NAME } from '@waldur/ansible/jupyter-hub-management/constants';
 import { JupyterHubManagementCreateForm } from '@waldur/ansible/jupyter-hub-management/create/JupyterHubManagementForm';
 import {
-  getAvailablePythonManagements,
-  getJupyterHubManagementCreateErred,
-  getJupyterHubManagementCreateLoaded
+getAvailablePythonManagements,
+getJupyterHubManagementCreateErred,
+getJupyterHubManagementCreateLoaded
 } from '@waldur/ansible/jupyter-hub-management/selectors';
+import { JupyterHubAuthenticationMethod } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubAuthenticationMethod';
 import { JupyterHubManagementFormData } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubManagementFormData';
+import { JupyterHubOAuthConfig } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubOAuthConfig';
 import { PythonManagementWithInstance } from '@waldur/ansible/jupyter-hub-management/types/PythonManagementWithInstance';
 import { validateJupyterHubManagementForm } from '@waldur/ansible/jupyter-hub-management/validation';
 import * as pythonActions from '@waldur/ansible/python-management/actions';
 import { getWaldurPublicKey, getWaldurPublicKeyUuid } from '@waldur/ansible/python-management/selectors';
+import { Instance } from '@waldur/ansible/python-management/types/Instance';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ListConfiguration } from '@waldur/form-react/list-field/types';
 import { translate, TranslateProps, withTranslation } from '@waldur/i18n';
@@ -85,7 +88,29 @@ class JupyterHubManagementCreateComponent extends React.Component<JupyterHubMana
           choices: nextProps.availablePythonManagements,
         },
       });
+    } else if (this.props.jupyterHubManagement) {
+      if (this.props.jupyterHubManagement.selectedPythonManagement && this.hasAuthenticationMethodChangedToOAuth(nextProps)) {
+        this.defaultCallbackUrl(this.props.jupyterHubManagement.selectedPythonManagement.instance);
+      } else if (this.hasNewPythonManagementBeenSelected(nextProps)) {
+        this.defaultCallbackUrl(nextProps.jupyterHubManagement.selectedPythonManagement.instance);
+      }
     }
+  }
+
+  private defaultCallbackUrl(newInstance: Instance) {
+    const jupyterHubOAuthConfig = new JupyterHubOAuthConfig();
+    jupyterHubOAuthConfig.oauthCallbackUrl = newInstance ? `https://${newInstance.firstExternalIp}/hub/oauth_callback` : null;
+    this.props.change('authenticationConfig.jupyterHubOAuthConfig', jupyterHubOAuthConfig);
+  }
+
+  private hasNewPythonManagementBeenSelected(nextProps: JupyterHubManagementCreateProps) {
+    return this.props.jupyterHubManagement.selectedPythonManagement
+      && this.props.jupyterHubManagement.selectedPythonManagement.uuid !== nextProps.jupyterHubManagement.selectedPythonManagement.uuid;
+  }
+
+  private hasAuthenticationMethodChangedToOAuth(nextProps: JupyterHubManagementCreateProps) {
+    return this.props.jupyterHubManagement.authenticationConfig.authenticationMethod !== nextProps.jupyterHubManagement.authenticationConfig.authenticationMethod
+      && nextProps.jupyterHubManagement.authenticationConfig.authenticationMethod === JupyterHubAuthenticationMethod.OAUTH;
   }
 
   componentDidMount() {

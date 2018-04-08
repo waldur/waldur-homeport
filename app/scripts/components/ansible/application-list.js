@@ -12,9 +12,12 @@ function ApplicationListController(
   $q,
   $state,
   $filter,
+  $http,
+  ENV,
   currentStateService,
   ApplicationService,
-  AppStoreUtilsService) {
+  AppStoreUtilsService,
+  AnsibleJobsService) {
   let controllerScope = this;
   let Controller = baseControllerListClass.extend({
     init: function() {
@@ -115,6 +118,19 @@ function ApplicationListController(
           jupyterHubManagementUuid: row.uuid
         });
       }
+    },
+    removeInstance: function(model) {
+      const applicationType = this.getApplicationType(model);
+      if (applicationType === APPLICAION_TYPE.PLAYBOOK_JOB) {
+        return AnsibleJobsService.$delete(model.jobId);
+      } else if (applicationType === APPLICAION_TYPE.PYTHON_MANAGEMENT) {
+        return $http.delete(`${ENV.apiEndpoint}api/python-management/${model.uuid}/`);
+      } else if (applicationType === APPLICAION_TYPE.JUPYTER_HUB_MANAGEMENT) {
+        return $http.delete(`${ENV.apiEndpoint}api/jupyter-hub-management/${model.uuid}/`);
+      }
+    },
+    handleActionException: function() {
+      alert('Action failed or is not allowed!');
     },
     getRowActions: function() {
       const checkState = app => ['OK', 'Erred'].includes(app.state);

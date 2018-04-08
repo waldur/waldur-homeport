@@ -61,6 +61,9 @@ export class JupyterHubManagementDetailsForm extends React.Component<JupyterHubM
                             ? <a href={this.props.jupyterHubManagement.jupyterHubUrl} target="_blank">JupyterHub</a>
                             : translate('Virtual machine has no floating ips assigned!')}
                         </div>
+                        <p className="help-block m-b-none text-muted col-sm-offset-2">
+                          {translate('Virtual machine should have Web security group assigned')}
+                        </p>
                       </div>
                       <div className="form-group">
                         <label className="control-label col-sm-2">{translate('JupyterHub runtime logs location')}</label>
@@ -124,7 +127,7 @@ export class JupyterHubManagementDetailsForm extends React.Component<JupyterHubM
                           <button type="submit"
                                   className="btn btn-btn-primary btn-xs">
                             <i className="fa fa-save"/>
-                            {translate('Apply JupyterHub configuration')}
+                            {translate('Apply or rerun JupyterHub configuration')}
                           </button>
                         </div>
                         <div className="col-sm-3">

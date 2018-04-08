@@ -33,10 +33,10 @@ export class PythonManagementCreateForm extends React.Component<PythonManagement
     const waldurPublicKeyHelp = (
       <ul>
         <li>
-          {translate('Target virtual machine should have \'SSH\' security group assigned (to allow SSH connections).')}
+          {translate('Please assign \'SSH\' security group to the virtual machine (to allow SSH connections).')}
         </li>
         <li>
-          {translate('Ensure that the following public key is present in authorized_keys file on the selected instance.')}
+          {translate('Please add following public key to authorized_keys file on the selected instance.')}
           <br/>
           <a onClick={this.unwrapOrCollapsePublicKeyHelp}>Show key</a>
           {this.state.publicKeyHelpCollaped ? null :
@@ -96,7 +96,7 @@ export class PythonManagementCreateForm extends React.Component<PythonManagement
                         name="systemUser"
                         label={this.props.translate('System user')}
                         required={true}
-                        description={translate('User should be able to run commands as root')}/>
+                        description={translate('Any default system user (ubuntu, debian...). The user should be able to run commands as root')}/>
                       <VirtualEnvironmentsForm reduxFormChange={this.props.change}
                                                pythonManagement={this.props.pythonManagement}
                                                findVirtualEnvironments={_ => Promise.resolve()}
@@ -106,7 +106,7 @@ export class PythonManagementCreateForm extends React.Component<PythonManagement
                                                pathToVirtualEnvironments={'virtualEnvironments'}/>
                       <CheckboxField
                         name="waldurPublicKeyInstalled"
-                        label={this.props.translate('Virtual machine has cloud broker public key')}
+                        label={this.props.translate('Virtual machine contains a public key of the cloud broker')}
                         description={waldurPublicKeyHelp}
                         checked={this.props.pythonManagement.waldurPublicKeyInstalled === true}
                         required={true}/>

@@ -7,6 +7,7 @@ isVirtualEnvironmentNotEditable,
 VirtualEnvironmentNotEditableDs
 } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
 import '@waldur/ansible/python-management/styles/AnsibleApplications.scss';
+import { Library } from '@waldur/ansible/python-management/types/Library';
 import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
 import { VirtualEnvAndRequestsContainer } from '@waldur/ansible/python-management/types/VirtualEnvAndRequestsContainer';
 import { translate } from '@waldur/i18n';
@@ -35,7 +36,7 @@ export class InstalledLibraries<R extends ManagementRequest<R>>
               className="btn btn-default btn-add-option"
               disabled={isVirtualEnvironmentNotEditable(
                 new VirtualEnvironmentNotEditableDs(this.props.pythonManagement), this.props.virtualEnvironmentIndex, this.props.managementRequestTimeout)}
-              onClick={() => this.props.fields.push({})}>
+              onClick={() => this.props.fields.push(new Library('', '', ''))}>
               {translate('Add library')}
             </button>
           </div>
