@@ -13,7 +13,7 @@ export const MapInfoPanel = ({data, onPanelClose}) => {
       </div>
       <div className="ibox-content text-center">
         <div className="m-b-sm">
-          <img alt="image" className="img-circle" src={data.logo}/>
+          <img alt="image" className="img-responsive img-circle" src={data.logo}/>
         </div>
         <h3 className="font-bold">{data.name}</h3>
 
