@@ -3,6 +3,7 @@ import appstoreProviders from './appstore-providers';
 import appstoreProvidersEmptyMessage from './appstore-providers-empty-message';
 import usageMapView from './support/UsageMapViewContainer';
 import heatMap from './support/HeatMapContainer';
+import sankeyDiagram from './support/SankeyDiagramContainer';
 
 export default module => {
   module.service('AppstoreProvidersService', AppstoreProvidersService);
@@ -10,4 +11,5 @@ export default module => {
   module.component('appstoreProvidersEmptyMessage', appstoreProvidersEmptyMessage);
   module.component('usageMapView', usageMapView);
   module.component('heatMap', heatMap);
+  module.component('sankeyDiagram', sankeyDiagram);
 };

@@ -3,13 +3,9 @@ import { connect } from 'react-redux';
 
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import {
-  fetchServiceUsageStart,
-} from './actions';
+import { fetchServiceUsageStart } from './actions';
 import HeatMap from './HeatMap';
-import {
-  serviceUsageSelector,
-} from './selectors';
+import { serviceUsageSelector } from './selectors';
 
 interface HeatMapComponentProps {
   fetchServiceUsageStart: () => void;

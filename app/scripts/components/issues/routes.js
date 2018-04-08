@@ -117,5 +117,17 @@ export default function issueRoutes($stateProvider) {
       resolve: {
         permission: checkPermission
       }
+    })
+
+    .state('support.sankey-diagram', {
+      url: 'sankey-diagram/',
+      template: '<sankey-diagram></sankey-diagram>',
+      data: {
+        pageTitle: gettext('Sankey Diagram'),
+        feature: 'support.sankey-diagram'
+      },
+      resolve: {
+        permission: checkPermission
+      }
     });
 }

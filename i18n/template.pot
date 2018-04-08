@@ -4971,6 +4971,10 @@ msgstr ""
 msgid "SUBMITTED"
 msgstr ""
 
+#: app/scripts/components/issues/routes.js
+msgid "Sankey Diagram"
+msgstr ""
+
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Sankey diagram"
 msgstr ""
@@ -6264,10 +6268,6 @@ msgstr ""
 
 #: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
 msgid "Uptime"
-msgstr ""
-
-#: app/scripts/components/plans/plans-list.html
-msgid "Usage"
 msgstr ""
 
 #: app/scripts/components/issues/workspace/issue-navigation-service.js

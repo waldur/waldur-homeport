@@ -67,7 +67,7 @@ const REPORT_ITEMS = [
       },
       {
         label: gettext('Sankey diagram'),
-        icon: 'fa-chart-area',
+        icon: 'fa-code-fork',
         link: 'support.sankey-diagram',
         feature: 'support.sankey-diagram',
         index: 200,
