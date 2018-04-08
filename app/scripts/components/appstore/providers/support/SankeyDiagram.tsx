@@ -19,6 +19,10 @@ export default class SankeyDiagram extends React.Component<SankeyDiagramProps> {
         data: this.props.data.data,
         links: this.props.data.links,
       },
+      tooltip: {
+        trigger: 'item',
+        triggerOn: 'mousemove'
+        },
     };
   }
 
