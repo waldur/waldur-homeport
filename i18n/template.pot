@@ -1058,6 +1058,10 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
+#: app/scripts/components/customer/customer-list.js
+msgid "Cost"
+msgstr ""
+
 #: app/scripts/components/customer/workspace/customer-workspace.js
 msgid "Cost analysis"
 msgstr ""
