@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import { FlowMapFilter } from '@waldur/appstore/providers/support/FlowMapFilter';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { fetchServiceUsageStart } from './actions';
@@ -19,12 +20,15 @@ class HeatMapComponent extends React.Component<HeatMapComponentProps> {
   render() {
     const { serviceUsage } = this.props;
     return (
-      <HeatMap
-        center={[0, 0]}
-        zoom={3}
-        id="heat-map"
-        data={serviceUsage}
-      />
+      <>
+        <FlowMapFilter />
+        <HeatMap
+          center={[0, 0]}
+          zoom={3}
+          id="heat-map"
+          data={serviceUsage}
+        />
+      </>
     );
   }
 }

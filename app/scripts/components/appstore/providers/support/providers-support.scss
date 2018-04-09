@@ -1,6 +1,6 @@
 #usage-map {
   position: absolute;
-  top: 320px;
+  top: 270px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -8,7 +8,7 @@
 
 #heat-map {
   position: absolute;
-  top: 155px;
+  top: 270px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -49,7 +49,7 @@
 
 #sankey-diagram {
   position: absolute;
-  top: 140px;
+  top: 270px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -57,4 +57,18 @@
 
 #flow-map-form {
   z-index: 1000;
+}
+
+.metrics-select {
+  min-width: 100px;
+  z-index: 1000;
+}
+
+#usage-filter-title {
+  display: inline;
+  margin-right: 30px; 
+}
+
+.img-center {
+  margin: 0 auto;
 }

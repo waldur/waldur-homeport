@@ -425,11 +425,14 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
-#: app/scripts/components/appstore/providers/support/FlowMapFilter.tsx
 #: app/scripts/components/issues/list/issues-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 #: app/scripts/components/user/support/UserFilter.tsx
 msgid "Apply filters"
+msgstr ""
+
+#: app/scripts/components/appstore/providers/support/FlowMapFilter.tsx
+msgid "Apply filters:"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx

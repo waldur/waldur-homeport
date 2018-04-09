@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { connect } from 'react-redux';
 
+import { FlowMapFilter } from '@waldur/appstore/providers/support/FlowMapFilter';
 import { serviceUsageSelector } from '@waldur/appstore/providers/support/selectors';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -100,6 +101,28 @@ class SankeyDiagramComponent extends React.Component<SankeyDiagramComponentProps
     return Math.round(providerResources * 10 / totalProviderResources);
   }
 
+  getResourcesSumForCountry(usage, countryName) {
+    return usage.reduce((total, entry) => {
+      const country = this.props.serviceUsage.organizations[entry.provider_to_consumer.provider_uuid].country;
+      if (countryName === country) {
+        total += entry.data.cpu;
+      }
+      return total;
+    }, 0);
+  }
+
+  calculateValueForCountry(usage, providerUuid) {
+    const country = this.props.serviceUsage.organizations[providerUuid].country;
+    const totalProviderResourcesForCountry = this.getResourcesSumForCountry(usage, country);
+    const providerResources = usage.reduce((value, entry) => {
+      if (entry.provider_to_consumer.provider_uuid === providerUuid) {
+        value += entry.data.cpu;
+      }
+      return value;
+    }, 0);
+    return Math.round(providerResources * 10 / totalProviderResourcesForCountry);
+  }
+
   formatProvidersToConsumersLink() {
     const links = [];
     Object.keys(this.props.serviceUsage.service_providers).map(providerUuid => {
@@ -121,7 +144,7 @@ class SankeyDiagramComponent extends React.Component<SankeyDiagramComponentProps
       links.push({
         source: provider.name,
         target: provider.country,
-        value: 1,
+        value: this.calculateValueForCountry(this.props.serviceUsage.usage, providerUuid),
       });
     });
     return links;
@@ -130,7 +153,10 @@ class SankeyDiagramComponent extends React.Component<SankeyDiagramComponentProps
   render() {
     const data = this.formatData();
     return (
-      <SankeyDiagram data={data} {...this.props}/>
+      <>
+        <FlowMapFilter />
+        <SankeyDiagram data={data} {...this.props}/>
+      </>
     );
   }
 }

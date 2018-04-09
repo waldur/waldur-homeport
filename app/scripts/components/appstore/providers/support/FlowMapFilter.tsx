@@ -2,7 +2,7 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import Panel from '@waldur/core/Panel';
+// import Panel from '@waldur/core/Panel';
 import { StringField, FormContainer, SelectField } from '@waldur/form-react';
 import { CheckboxField } from '@waldur/form-react/CheckboxField';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
@@ -41,49 +41,48 @@ const serviceProviderTypeOptions = [
   },
 ];
 
-const actions = (
-  <div className="ibox-tools">
-    <a className="collapse-link">
-      <i className="fa fa-chevron-up"/>
-    </a>
-  </div>
-);
 const PureFlowMapFilter = (props: FlowMapFilterProps) => (
-  <Panel actions={actions} title={props.translate('Apply filters')}>
-    <form className="form-inline" id="flow-map-form">
-      <FormContainer
-        submitting={props.submitting}>
-        <StringField
-          label={props.translate('Month')}
-          name="month"/>
-        <SelectField
-          className="m-r-md"
-          label={props.translate('Metric')}
-          name="metric"
-          options={metricOptions}
-          labelKey="name"
-          valueKey="value"
-        />
-        <CheckboxField
-          checked={false}
-          label={props.translate('Show shared')}
-          name="show_shared"
-        />
-        <CheckboxField
-          checked={false}
-          label={props.translate('Show private')}
-          name="show_private"
-        />
-        <SelectField
-          label={props.translate('Service Provider Type')}
-          name="service_provider_type"
-          options={serviceProviderTypeOptions}
-          labelKey="name"
-          valueKey="value"
-        />
-      </FormContainer>
-    </form>
-  </Panel>
+  <div className="ibox">
+    <div className="ibox-content">
+      <form className="form-inline" id="flow-map-form">
+        <FormContainer
+          labelClass="m-r-md"
+          controlClass="m-r-md"
+          submitting={props.submitting}>
+          <h4 id="usage-filter-title">{props.translate('Apply filters:')}</h4>
+          <StringField
+            label={props.translate('Month')}
+            name="month"/>
+          <SelectField
+            className="metrics-select"
+            label={props.translate('Metric')}
+            name="metric"
+            options={metricOptions}
+            labelKey="name"
+            valueKey="value"
+          />
+          <CheckboxField
+            checked={false}
+            label={props.translate('Show shared')}
+            name="show_shared"
+          />
+          <CheckboxField
+            checked={false}
+            label={props.translate('Show private')}
+            name="show_private"
+          />
+          <SelectField
+            className="metrics-select"
+            label={props.translate('Service Provider Type')}
+            name="service_provider_type"
+            options={serviceProviderTypeOptions}
+            labelKey="name"
+            valueKey="value"
+          />
+        </FormContainer>
+      </form>
+    </div>
+  </div>
 );
 
 const enhance = compose(
