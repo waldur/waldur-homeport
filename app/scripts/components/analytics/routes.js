@@ -12,14 +12,6 @@ export default function analyticsRoutes($stateProvider) {
       }
     })
 
-    .state('organization.analysis.cost', {
-      url: 'cost-analysis/',
-      template: '<cost-analysis></cost-analysis>',
-      data: {
-        pageTitle: gettext('Cost analysis')
-      }
-    })
-
     .state('organization.analysis.resources', {
       url: 'resource-usage/',
       template: '<resource-analysis/>',

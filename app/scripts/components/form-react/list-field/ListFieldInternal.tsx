@@ -18,7 +18,7 @@ class PureInternalListFieldForm extends React.Component<InternalListFieldProps> 
     return (
       <div>
           <a onClick={this.props.openModal}>
-            {this.props.selectedOption ? this.props.selectedOption[this.props.configuration.attributeToShow] : translate('Choose option')}
+            {this.props.selectedOption ? this.props.configuration.selectedValueToShow(this.props.selectedOption) : translate('Choose option')}
           </a>
       </div>
     );

@@ -46,3 +46,5 @@ export const isVisibleForSupportOrStaff = state => {
 export const userLanguageIsVisible = state => isVisible(state, 'user.preferred_language');
 
 export const userCompetenceIsVisible = state => isVisible(state, 'user.competence');
+
+export const isVisibleSupport = state => isVisible(state, 'support');

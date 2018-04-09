@@ -13,6 +13,7 @@ import resourceTabsModule from './tabs/module';
 import resourcesListModule from './list/module';
 import monitoringModule from './monitoring/module';
 import actionsModule from './actions/module';
+import supportModule from './support/module';
 import filtersModule from './filters';
 
 export default module => {
@@ -32,4 +33,5 @@ export default module => {
   monitoringModule(module);
   actionsModule(module);
   filtersModule(module);
+  supportModule(module);
 };

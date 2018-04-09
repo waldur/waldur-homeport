@@ -11,7 +11,8 @@ import userSaga from '@waldur/user/support/effects';
 import providerSaga from '@waldur/providers/effects';
 import tableSaga from '@waldur/table-react/effects';
 import monitoringSaga from '@waldur/resource/monitoring/effects';
-import pythonManagementSaga from '@waldur/python-management/effects';
+import pythonManagementSaga from '@waldur/ansible/python-management/effects';
+import jupyterHubManagementSaga from '@waldur/ansible/jupyter-hub-management/effects';
 
 import coreSaga from './coreSaga';
 
@@ -30,4 +31,5 @@ export default [
   tableSaga,
   monitoringSaga,
   pythonManagementSaga,
+  jupyterHubManagementSaga,
 ];

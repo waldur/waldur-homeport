@@ -16,6 +16,7 @@ function CustomerListController(
   QuotaUtilsService,
   TableExtensionService,
   $state,
+  $scope,
   $filter,
   ncUtils) {
   let controllerScope = this;
@@ -24,6 +25,11 @@ function CustomerListController(
       this.service = customersService;
       this.controllerScope = controllerScope;
       this.tableOptions = this.getTableOptions();
+
+      $scope.$watch(() => !this.selectFilter || (this.selectFilter.value && this.selectFilter.value.current),
+        value => {
+          this.tableOptions.hiddenColumns = this.getHiddenColumns(value);
+        });
       this._super();
     },
     getTableOptions: function() {
@@ -33,6 +39,13 @@ function CustomerListController(
         searchFieldName: 'name',
         columns: this.getColumns(),
       };
+    },
+    getHiddenColumns: function(value) {
+      if (value) {
+        return ['prev_cost'];
+      } else {
+        return ['current_cost', 'estimated_cost'];
+      }
     },
     getColumns: function() {
       const baseColumns = [
@@ -82,14 +95,22 @@ function CustomerListController(
           index: 130,
         },
         {
+          title: gettext('Cost'),
+          render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.total || 0),
+          index: 310,
+          id: 'prev_cost'
+        },
+        {
           title: gettext('Current cost'),
           render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.current || 0),
           index: 310,
+          id: 'current_cost'
         },
         {
           title: gettext('Estimated cost'),
           render: row => $filter('defaultCurrency')(row.billing_price_estimate && row.billing_price_estimate.total || 0),
           index: 320,
+          id: 'estimated_cost'
         },
       ];
       const extraColumns = TableExtensionService.getColumns('customer-list');
@@ -127,7 +148,7 @@ function CustomerListController(
         const label = date.format('MMMM, YYYY');
         choices.push({
           label,
-          value: { year, month}
+          value: { year, month, current: i === 0},
         });
         date = date.subtract(1, 'month');
       }

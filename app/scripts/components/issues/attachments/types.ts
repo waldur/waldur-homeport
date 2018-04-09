@@ -10,11 +10,6 @@ export interface Attachment {
   uuid: string;
 }
 
-export interface Action<T> {
-  type: string;
-  payload?: T;
-}
-
 export interface State {
   loading: boolean;
   errors: any[];

@@ -13,6 +13,7 @@ import slurmPrices from './slurm-prices';
 import detailsModule from './details/module';
 import './dashboard-quotas';
 import './provider';
+import './register-header';
 
 export default module => {
   module.config(slurmRoutes);

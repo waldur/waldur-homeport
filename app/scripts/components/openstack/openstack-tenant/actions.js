@@ -1,3 +1,5 @@
+import { latinName } from '@waldur/resource/actions/constants';
+
 // @ngInject
 export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION, ENV) {
   const userCanModifyTenant = user => !(ENV.onlyStaffManagesServices && !user.is_staff);
@@ -19,7 +21,10 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: gettext('Tenant has been updated.'),
-        isVisible: (resource, user) => userCanModifyTenant(user)
+        isVisible: (resource, user) => userCanModifyTenant(user),
+        fields: {
+          name: latinName
+        }
       }),
       pull: {
         title: gettext('Synchronise')

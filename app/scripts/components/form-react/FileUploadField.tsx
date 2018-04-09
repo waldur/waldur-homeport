@@ -4,6 +4,7 @@ import { FormField } from './types';
 
 interface FileUploadFieldProps extends FormField {
   accept?: string;
+  showFileName?: boolean;
   buttonLabel: string;
 }
 
@@ -35,19 +36,23 @@ export class FileUploadField extends React.Component<FileUploadFieldProps> {
   render() {
     return (
       <span>
-        {this.state.fileName || 'None'}
-        <a className="btn btn-sm btn-primary m-l-sm"
-          onClick={this.openFileDialog} >
+        {this.props.showFileName ? this.state.fileName || 'None' : null}
+        <button
+          type="button"
+          className="btn btn-sm btn-primary m-l-sm"
+          onClick={this.openFileDialog}
+          disabled={this.props.disabled}>
           <i className="fa fa-upload"/>
           {' '}
           {this.props.buttonLabel}
-        </a>
+        </button>
         <input
           type="file"
           style={{ display: 'none' }}
           ref={input => this.fileInput = input}
           accept={this.props.accept}
           onChange={this.handleFile}
+          disabled={this.props.disabled}
         />
       </span>
     );

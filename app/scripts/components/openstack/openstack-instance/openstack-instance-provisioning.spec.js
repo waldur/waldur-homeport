@@ -75,7 +75,7 @@ describe('OpenStack Instance Store', function() {
     },
     description: {
       label: 'Description',
-      max_length: 500,
+      maxlength: 500,
       required: false,
       type: 'string'
     },
@@ -109,7 +109,7 @@ describe('OpenStack Instance Store', function() {
     },
     name: {
       label: 'Name',
-      max_length: 150,
+      maxlength: 150,
       required: true,
       type: 'string'
     },

@@ -33,6 +33,12 @@ const REPORT_ITEMS = [
     feature: 'support.resources'
   },
   {
+    label: gettext('Resources usage'),
+    icon: 'fa-map',
+    link: 'support.resources-treemap',
+    feature: 'support.resources-treemap'
+  },
+  {
     label: gettext('Financial overview'),
     icon: 'fa-university',
     link: 'support.organizations',

@@ -1,9 +1,24 @@
 import * as React from 'react';
 
-import { StringField, FormContainer} from '@waldur/form-react';
+import { StringField, SelectField, FormContainer} from '@waldur/form-react';
 
 export const SlurmForm = ({ translate, container }) => (
   <FormContainer {...container}>
+    <SelectField
+      name="batch_service"
+      label={translate('Batch service')}
+      options={[
+        {
+          label: 'SLURM',
+          value: 'SLURM',
+        },
+        {
+          label: 'MOAB',
+          value: 'MOAB',
+        },
+      ]}
+      required={true}
+    />
     <StringField
       name="hostname"
       label={translate('Hostname')}
@@ -33,6 +48,7 @@ export const SlurmForm = ({ translate, container }) => (
       name="default_account"
       label={translate('Default account')}
       description={translate('Default SLURM account for user')}
+      required={true}
     />
   </FormContainer>
 );

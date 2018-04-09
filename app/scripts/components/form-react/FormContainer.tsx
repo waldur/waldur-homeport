@@ -13,12 +13,12 @@ interface FormContainerProps {
 
 export const FormContainer = (props: FormContainerProps) => (
   <div>
-    {React.Children.map(props.children, input => (input && (input as any).props.name ?
+    {React.Children.map(props.children, (input: any) => (input && input.props.name ?
       <Field
-        {...(input as any).props}
+        {...input.props}
         component={FormGroup}
         children={input}
-        disabled={props.submitting}
+        disabled={props.submitting || input.props.disabled}
         labelClass={props.labelClass}
         controlClass={props.controlClass}
         clearOnUnmount={props.clearOnUnmount}

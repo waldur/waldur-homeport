@@ -1,3 +1,5 @@
+import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
+
 import template from './snapshot-create.html';
 
 export default function snapshotCreateDialog() {
@@ -9,7 +11,8 @@ export default function snapshotCreateDialog() {
 }
 
 // @ngInject
-function SnapshotCreateDialogController($q, $rootScope, $scope, resourcesService, actionUtilsService) {
+function SnapshotCreateDialogController(ENV, $q, $rootScope, $scope, resourcesService, actionUtilsService) {
+  $scope.pattern = ENV.enforceLatinName && LATIN_NAME_PATTERN;
   $scope.snapshot = {
     name: $scope.resource.name + '-snapshot'
   };

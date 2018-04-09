@@ -78,7 +78,7 @@ export class PureListFieldModal extends React.Component<PureListFieldModalProps>
                   <tr style={{cursor: 'pointer'}} onClick={() => this.selectRow(choicesIndex)} key={choicesIndex}>
                     {columns.map((column, columnIndex) => (
                       <td key={columnIndex}>
-                        {choice[column.name]}
+                        {column.name(choice)}
                       </td>
                     ))}
                     <td>

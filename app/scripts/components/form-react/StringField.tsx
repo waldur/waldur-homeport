@@ -2,7 +2,11 @@ import * as React from 'react';
 
 import { FormField } from './types';
 
-export const StringField = (props: FormField) => {
+interface StringFieldProps extends FormField {
+  placeholder?: string;
+}
+
+export const StringField = (props: StringFieldProps) => {
   const { input, label, validate, ...rest } = props;
   return (
     <input
