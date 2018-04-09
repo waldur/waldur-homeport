@@ -90,7 +90,7 @@ const data = {
     csc: ['hi', 'kth', 'uni_of_tartu'],
     sdudk: ['suse', 'chalmers'],
     uiono: ['tampere', 'hi', 'sdudk'],
-    bergen: ['uni_of_tartu', 'kth']
+    bergen: ['uni_of_tartu', 'kth'],
   },
   usage: [
     {

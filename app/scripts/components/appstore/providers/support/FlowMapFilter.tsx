@@ -7,7 +7,7 @@ import { StringField, FormContainer, SelectField } from '@waldur/form-react';
 import { CheckboxField } from '@waldur/form-react/CheckboxField';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
-interface UsageMapFilterProps extends TranslateProps {
+interface FlowMapFilterProps extends TranslateProps {
   submitting: boolean;
 }
 
@@ -40,15 +40,24 @@ const serviceProviderTypeOptions = [
     value: 'vpc',
   },
 ];
-const PureUsageMapFilter = (props: UsageMapFilterProps) => (
-  <Panel title={props.translate('Apply filters')}>
-    <form>
+
+const actions = (
+  <div className="ibox-tools">
+    <a className="collapse-link">
+      <i className="fa fa-chevron-up"/>
+    </a>
+  </div>
+);
+const PureFlowMapFilter = (props: FlowMapFilterProps) => (
+  <Panel actions={actions} title={props.translate('Apply filters')}>
+    <form className="form-inline" id="flow-map-form">
       <FormContainer
         submitting={props.submitting}>
         <StringField
           label={props.translate('Month')}
           name="month"/>
         <SelectField
+          className="m-r-md"
           label={props.translate('Metric')}
           name="metric"
           options={metricOptions}
@@ -78,8 +87,8 @@ const PureUsageMapFilter = (props: UsageMapFilterProps) => (
 );
 
 const enhance = compose(
-  reduxForm({form: 'usageMapFilter'}),
+  reduxForm({form: 'flowMapFilter'}),
   withTranslation,
 );
 
-export const UsageMapFilter = enhance(PureUsageMapFilter);
+export const FlowMapFilter = enhance(PureFlowMapFilter);

@@ -21,7 +21,7 @@ export default class SankeyDiagram extends React.Component<SankeyDiagramProps> {
       },
       tooltip: {
         trigger: 'item',
-        triggerOn: 'mousemove'
+        triggerOn: 'mousemove',
         },
     };
   }

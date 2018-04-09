@@ -97,7 +97,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.flowmap', {
       url: 'flowmap/',
-      template: '<usage-map-view></usage-map-view>',
+      template: '<flow-map-view></flow-map-view>',
       data: {
         pageTitle: gettext('Flowmap'),
         feature: 'support.flowmap'

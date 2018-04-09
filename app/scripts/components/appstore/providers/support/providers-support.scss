@@ -1,6 +1,6 @@
 #usage-map {
   position: absolute;
-  top: 155px;
+  top: 320px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -53,4 +53,8 @@
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+#flow-map-form {
+  z-index: 1000;
 }

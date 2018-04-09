@@ -1,11 +1,12 @@
 import * as React from 'react';
 
+import FlowMap from '@waldur/appstore/providers/support/FlowMap';
+import { FlowMapFilter } from '@waldur/appstore/providers/support/FlowMapFilter';
 import { MapInfoPanel } from '@waldur/appstore/providers/support/MapInfoPanel';
-import UsageMap from '@waldur/appstore/providers/support/UsageMap';
 
 import './providers-support.scss';
 
-export interface UsageMapViewProps {
+export interface FlowMapViewProps {
   serviceUsage: any;
   selectedServiceProvider: any;
   infoPanelIsVisible: boolean;
@@ -14,7 +15,7 @@ export interface UsageMapViewProps {
   hideInfoPanel: () => void;
 }
 
-export class UsageMapView extends React.Component<UsageMapViewProps, any> {
+export class FlowMapView extends React.Component<FlowMapViewProps, any> {
   serviceUsage: any;
 
   handleCloseClick = () => {
@@ -30,7 +31,8 @@ export class UsageMapView extends React.Component<UsageMapViewProps, any> {
     } = this.props;
     return (
       <>
-        <UsageMap
+        <FlowMapFilter />
+        <FlowMap
           center={[0, 0]}
           zoom={5}
           data={serviceUsage}
@@ -50,4 +52,4 @@ export class UsageMapView extends React.Component<UsageMapViewProps, any> {
   }
 }
 
-export default UsageMapView;
+export default FlowMapView;

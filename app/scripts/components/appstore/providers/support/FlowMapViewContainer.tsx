@@ -9,14 +9,14 @@ import {
   showInfoPanel,
   hideInfoPanel,
 } from './actions';
+import FlowMapView from './FlowMapView';
 import {
   selectedServiceProviderSelector,
   serviceUsageSelector,
   filterSelector
 } from './selectors';
-import UsageMapView from './UsageMapView';
 
-interface UsageMapViewComponentProps {
+interface FlowMapViewComponentProps {
   fetchServiceUsageStart: () => void;
   serviceUsage: any;
   selectedServiceProvider: any;
@@ -26,13 +26,13 @@ interface UsageMapViewComponentProps {
   infoPanelIsVisible: boolean;
 }
 
-class UsageMapViewComponent extends React.Component<UsageMapViewComponentProps> {
+class FlowMapViewComponent extends React.Component<FlowMapViewComponentProps> {
   componentWillMount() {
     this.props.fetchServiceUsageStart();
   }
   render() {
     return (
-      <UsageMapView {...this.props} />
+      <FlowMapView {...this.props} />
     );
   }
 }
@@ -50,6 +50,6 @@ const mapDispatchToProps = dispatch => ({
   hideInfoPanel: () => dispatch(hideInfoPanel()),
 });
 
-const UsageMapViewContainer = connect(mapStateToProps, mapDispatchToProps)(UsageMapViewComponent);
+const FlowMapViewContainer = connect(mapStateToProps, mapDispatchToProps)(FlowMapViewComponent);
 
-export default connectAngularComponent(UsageMapViewContainer);
+export default connectAngularComponent(FlowMapViewContainer);

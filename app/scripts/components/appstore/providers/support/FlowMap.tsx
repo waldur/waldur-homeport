@@ -6,7 +6,7 @@ import './CanvasFlowmapLayer';
 
 import './providers-support.scss';
 
-interface UsageMapProps {
+interface FlowMapProps {
   center?: number[];
   zoom?: number;
   data: any;
@@ -14,12 +14,12 @@ interface UsageMapProps {
   showInfoPanel: () => void;
 }
 
-interface UsageMapState {
+interface FlowMapState {
   map: any;
   oneToManyFlowmapLayer: any;
 }
 
-export default class UsageMap extends React.Component<UsageMapProps, UsageMapState> {
+export default class FlowMap extends React.Component<FlowMapProps, FlowMapState> {
   mapNode: any;
 
   constructor(props) {
@@ -68,26 +68,26 @@ export default class UsageMap extends React.Component<UsageMapProps, UsageMapSta
     features: data.usage.reduce((features, entry) => {
       const provider_uuid = entry.provider_to_consumer.provider_uuid;
       const consumer_uuid = entry.provider_to_consumer.consumer_uuid;
-      if (!data.service_providers[consumer_uuid]) {
-        features.push({
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [
-              data.organizations[provider_uuid].longitude,
-              data.organizations[provider_uuid].latitude,
-            ],
-          },
-          properties: {
-            ...entry.provider_to_consumer,
-            provider_longitude: data.organizations[provider_uuid].longitude,
-            provider_latitude: data.organizations[provider_uuid].latitude,
-            consumer_longitude: data.organizations[consumer_uuid].longitude,
-            consumer_latitude: data.organizations[consumer_uuid].latitude,
-            consumer_name: data.organizations[consumer_uuid].name,
-          },
-        });
-      }
+      // if (!data.service_providers[consumer_uuid]) {
+      features.push({
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [
+            data.organizations[provider_uuid].longitude,
+            data.organizations[provider_uuid].latitude,
+          ],
+        },
+        properties: {
+          ...entry.provider_to_consumer,
+          provider_longitude: data.organizations[provider_uuid].longitude,
+          provider_latitude: data.organizations[provider_uuid].latitude,
+          consumer_longitude: data.organizations[consumer_uuid].longitude,
+          consumer_latitude: data.organizations[consumer_uuid].latitude,
+          consumer_name: data.organizations[consumer_uuid].name,
+        },
+      });
+      // }
       return features;
     }, []),
   })
@@ -144,7 +144,6 @@ export default class UsageMap extends React.Component<UsageMapProps, UsageMapSta
     const { center, data } = this.props;
     const bounds = this.extendViewport(data, center);
     const geoJsonFeatureCollection = this.composeFeatureCollection(data);
-    console.log('GeoData', geoJsonFeatureCollection);
     this.setState({
       oneToManyFlowmapLayer: this.setFlowmapLayer(geoJsonFeatureCollection),
     }, () => {

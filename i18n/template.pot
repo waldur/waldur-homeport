@@ -425,7 +425,7 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
-#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+#: app/scripts/components/appstore/providers/support/FlowMapFilter.tsx
 #: app/scripts/components/issues/list/issues-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 #: app/scripts/components/user/support/UserFilter.tsx
@@ -2928,7 +2928,7 @@ msgstr ""
 msgid "Method"
 msgstr ""
 
-#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+#: app/scripts/components/appstore/providers/support/FlowMapFilter.tsx
 msgid "Metric"
 msgstr ""
 
@@ -2978,7 +2978,7 @@ msgstr ""
 msgid "Monitoring system is being updated."
 msgstr ""
 
-#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+#: app/scripts/components/appstore/providers/support/FlowMapFilter.tsx
 msgid "Month"
 msgstr ""
 
@@ -5194,7 +5194,7 @@ msgstr ""
 msgid "Server error occurred."
 msgstr ""
 
-#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+#: app/scripts/components/appstore/providers/support/FlowMapFilter.tsx
 msgid "Service Provider Type"
 msgstr ""
 
@@ -5302,7 +5302,7 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
-#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+#: app/scripts/components/appstore/providers/support/FlowMapFilter.tsx
 msgid "Show private"
 msgstr ""
 
@@ -5310,7 +5310,7 @@ msgstr ""
 msgid "Show report"
 msgstr ""
 
-#: app/scripts/components/appstore/providers/support/UsageMapFilter.tsx
+#: app/scripts/components/appstore/providers/support/FlowMapFilter.tsx
 msgid "Show shared"
 msgstr ""
 

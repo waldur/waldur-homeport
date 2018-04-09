@@ -4,6 +4,7 @@ import { FormField } from './types';
 
 interface CheckboxFieldProps extends FormField {
   checked: boolean;
+  className?: string;
 }
 
 export const CheckboxField = (props: CheckboxFieldProps) => {
