@@ -76,12 +76,21 @@ const data = {
       description: 'Chalmers University of Technology is one of the best universities in Scandinavia.',
       logo: 'https://www.chalmers.se/SiteCollectionImages/Logotyper/Chalmers%20logotyp/ChalmersU_black.png',
      },
+    bergen: {
+      name: 'University of Bergen',
+      country: 'Norway',
+      latitude: '60.3878586',
+      longitude: '5.3217549',
+      description: 'The University of Bergen is a public university located in Bergen, Norway.',
+      logo: 'https://en.wikipedia.org/wiki/University_of_Bergen#/media/File:Uni-Bergen-emblem.png',
+     },
   },
   service_providers: {
     uni_of_tartu: ['hi', 'tampere'],
     csc: ['hi', 'kth', 'uni_of_tartu'],
     sdudk: ['suse', 'chalmers'],
-    uiono: ['tampere', 'hi', 'sdudk']
+    uiono: ['tampere', 'hi', 'sdudk'],
+    bergen: ['uni_of_tartu', 'kth']
   },
   usage: [
     {
@@ -202,6 +211,30 @@ const data = {
         cpu: 400000,
         ram: 3500000,
         gpu: 10000,
+      },
+    },
+    {
+      provider_to_consumer: {
+        provider_uuid: 'bergen',
+        consumer_uuid: 'uni_of_tartu',
+      },
+      data: {
+        period: '03-2018',
+        cpu: 400000,
+        ram: 100000,
+        gpu: 30000,
+      },
+    },
+    {
+      provider_to_consumer: {
+        provider_uuid: 'bergen',
+        consumer_uuid: 'kth',
+      },
+      data: {
+        period: '03-2018',
+        cpu: 800000,
+        ram: 200000,
+        gpu: 30000,
       },
     },
   ],
