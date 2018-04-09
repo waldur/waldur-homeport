@@ -82,7 +82,7 @@ class SankeyDiagramComponent extends React.Component<SankeyDiagramComponentProps
   getResourcesSum(usage, providerUuid) {
     return usage.reduce((total, entry) => {
       if (entry.provider_to_consumer.provider_uuid === providerUuid) {
-        total += (entry.data.cpu + entry.data.gpu + entry.data.ram);
+        total += entry.data.cpu;
       }
       return total;
     }, 0);
@@ -93,7 +93,7 @@ class SankeyDiagramComponent extends React.Component<SankeyDiagramComponentProps
     const providerResources = usage.reduce((value, entry) => {
       if (entry.provider_to_consumer.provider_uuid === providerUuid &&
         entry.provider_to_consumer.consumer_uuid === consumerUuid) {
-        value += (entry.data.cpu + entry.data.gpu + entry.data.ram);
+        value += entry.data.cpu;
       }
       return value;
     }, 0);
@@ -129,7 +129,6 @@ class SankeyDiagramComponent extends React.Component<SankeyDiagramComponentProps
 
   render() {
     const data = this.formatData();
-    console.log('Data', data);
     return (
       <SankeyDiagram data={data} {...this.props}/>
     );
