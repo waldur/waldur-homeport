@@ -65,11 +65,6 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         }
         if (newTableOptions && newTableOptions.columns) {
           options = newTableOptions;
-          if (options.hiddenColumns) {
-            options.columns = options.columns.filter(function(column) {
-              return options.hiddenColumns.indexOf(column.id) === -1;
-            });
-          }
           table = initTable();
           connectEventListeners(table);
           connectRowButtons(table);
@@ -80,6 +75,12 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
           connectTranslate(table);
           registerEvents(table);
         }
+      });
+
+      scope.$watchCollection('controller.tableOptions.hiddenColumns', cols => {
+        scope.controller.tableOptions.columns.forEach((col, index) => {
+          table.column(index).visible(cols.indexOf(col.id) === -1);
+        });
       });
 
       // http://www.gyrocode.com/articles/jquery-datatables-column-width-issues-with-bootstrap-tabs
