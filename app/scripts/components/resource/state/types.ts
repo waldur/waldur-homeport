@@ -1,6 +1,9 @@
-export interface Resource {
-  state: string;
+export interface BaseResource {
+  state: ResourceState;
   runtime_state: string;
+}
+
+export interface Resource extends BaseResource {
   resource_type: string;
   service_settings_state: string;
   service_settings_error_message?: string;
