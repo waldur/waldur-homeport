@@ -1,7 +1,7 @@
 import { basemapLayer } from 'esri-leaflet';
-import L from 'leaflet';
 import * as React from 'react';
 
+import loadLeafleat from '../../../../shims/load-leaflet';
 import './CanvasFlowmapLayer';
 
 import './providers-support.scss';
@@ -20,7 +20,8 @@ interface FlowMapState {
 }
 
 export default class FlowMap extends React.Component<FlowMapProps, FlowMapState> {
-  mapNode: any;
+  mapNode = undefined;
+  leaflet = undefined;
 
   constructor(props) {
     super(props);
@@ -30,8 +31,15 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
     };
   }
 
+  componentWillMount() {
+    loadLeafleat().then(module => {
+      this.leaflet = module.leaflet;
+      this.forceUpdate();
+    });
+  }
+
   componentDidMount() {
-    if (!this.state.map) {
+    if (!this.state.map && this.leaflet) {
       this.initMap(this.mapNode);
     }
   }
@@ -40,7 +48,7 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
     if (this.state.map) {
       return;
     }
-    const map = L.map(node);
+    const map = this.leaflet.map(node);
     const { center, zoom } = this.props;
     map.setView(center, zoom);
     basemapLayer('Gray').addTo(map);
@@ -49,7 +57,12 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
   }
 
   componentDidUpdate() {
-    this.updateMap();
+    if (!this.state.map && this.leaflet) {
+      this.initMap(this.mapNode);
+    }
+    if (this.state.map && this.leaflet) {
+      this.updateMap();
+    }
   }
 
   componentWillUnmount() {
@@ -93,25 +106,27 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
   })
 
   setFlowmapLayer(data) {
-    return L.canvasFlowmapLayer(data, {
-      originAndDestinationFieldIds: {
-        originUniqueIdField: 'provider_uuid',
-        originGeometry: {
-          x: 'provider_longitude',
-          y: 'provider_latitude',
+    if (this.leaflet) {
+      return this.leaflet.canvasFlowmapLayer(data, {
+        originAndDestinationFieldIds: {
+          originUniqueIdField: 'provider_uuid',
+          originGeometry: {
+            x: 'provider_longitude',
+            y: 'provider_latitude',
+          },
+          destinationUniqueIdField: 'consumer_uuid',
+          destinationGeometry: {
+            x: 'consumer_longitude',
+            y: 'consumer_latitude',
+          },
         },
-        destinationUniqueIdField: 'consumer_uuid',
-        destinationGeometry: {
-          x: 'consumer_longitude',
-          y: 'consumer_latitude',
-        },
-      },
-      pathDisplayMode: 'selection',
-      animationStarted: true,
-      animationEasingFamily: 'Cubic',
-      animationEasingType: 'In',
-      animationDuration: 2000,
-    });
+        pathDisplayMode: 'selection',
+        animationStarted: true,
+        animationEasingFamily: 'Cubic',
+        animationEasingType: 'In',
+        animationDuration: 2000,
+      });
+    }
   }
 
   flowmapLaterClickHandler = e => {
@@ -127,17 +142,19 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
   }
 
   extendViewport(data, center) {
-    const bounds = L.latLngBounds(center);
+    if (this.leaflet) {
+      const bounds = this.leaflet.latLngBounds(center);
 
-    for (const key in data.organizations) {
-      if (data.organizations.hasOwnProperty(key)) {
-        bounds.extend([
-          data.organizations[key].latitude,
-          data.organizations[key].longitude,
-        ]);
+      for (const key in data.organizations) {
+        if (data.organizations.hasOwnProperty(key)) {
+          bounds.extend([
+            data.organizations[key].latitude,
+            data.organizations[key].longitude,
+          ]);
+        }
       }
+      return bounds;
     }
-    return bounds;
   }
 
   updateMap() {
@@ -150,7 +167,8 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
       this.state.oneToManyFlowmapLayer.addTo(this.state.map);
       this.state.oneToManyFlowmapLayer.on('click', this.flowmapLaterClickHandler);
     });
-    if (Object.keys(bounds).length > 0) {
+    if (bounds) {
+      console.log('Bounds', bounds);
       this.state.map.fitBounds(bounds);
     }
   }
