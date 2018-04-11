@@ -19,7 +19,10 @@ function ProjectVirtualMachinesListController(
       this.controllerScope = controllerScope;
       this.category = ENV.VirtualMachines;
       this._super();
-      this.addRowFields(['internal_ips', 'external_ips', 'floating_ips', 'internal_ips_set']);
+      this.addRowFields([
+        'internal_ips', 'external_ips', 'floating_ips', 'internal_ips_set',
+        'flavor_name', 'cores', 'ram', 'disk'
+      ]);
       $scope.$on('refreshVirtualMachinesList', function() {
         $timeout(function() {
           controllerScope.resetCache();
