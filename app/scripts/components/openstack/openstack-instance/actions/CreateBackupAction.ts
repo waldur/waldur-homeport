@@ -5,7 +5,7 @@ import { ResourceAction } from '@waldur/resource/actions/types';
 export default function createAction(): ResourceAction {
   return {
     name: 'backup',
-    type: 'button',
+    type: 'form',
     method: 'POST',
     tab: 'backups',
     title: translate('Create'),

@@ -28,6 +28,10 @@ export default function createAction(): ResourceAction {
         name: 'timezone',
         default_value: 'UTC',
         label: translate('Timezone'),
+        type: 'choice',
+        choices: [
+          {value: 'UTC', display_name: 'UTC'},
+        ],
       },
       {
         name: 'maximal_number_of_resources',

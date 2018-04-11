@@ -14,6 +14,11 @@ interface BaseField<Resource> {
   help_text?: string;
 }
 
+interface SelectOption {
+  value: string;
+  display_name: string;
+}
+
 interface SelectField<Resource> extends BaseField<Resource> {
   serializer?: (items: any[]) => any[];
   formatter?: ($filter, item) => string;
@@ -21,6 +26,7 @@ interface SelectField<Resource> extends BaseField<Resource> {
   display_name_field?: string;
   value_field?: string;
   url?: string;
+  choices?: SelectOption[];
 }
 
 interface TextField<Resource> extends BaseField<Resource> {
