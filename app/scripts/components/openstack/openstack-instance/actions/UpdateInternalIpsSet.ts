@@ -22,7 +22,7 @@ function createSubnetField() {
   };
 }
 
-export default function createAction(_): ResourceAction {
+export default function createAction(): ResourceAction {
   return {
     key: 'update_internal_ips_set',
     type: 'form',

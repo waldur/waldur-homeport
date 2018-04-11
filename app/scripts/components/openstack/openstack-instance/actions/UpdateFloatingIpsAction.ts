@@ -16,7 +16,7 @@ function createField(): ActionField<OpenStackInstance> {
   };
 }
 
-export default function createAction(_): ResourceAction<OpenStackInstance> {
+export default function createAction(): ResourceAction<OpenStackInstance> {
   return {
     key: 'update_floating_ips',
     type: 'form',

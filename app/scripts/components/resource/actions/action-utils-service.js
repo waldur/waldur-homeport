@@ -5,8 +5,11 @@ export default function actionUtilsService(
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return usersService.getCurrentUser().then(user => {
+      const config = ActionConfiguration[model.resource_type];
+      if (Array.isArray(config)) {
+        return this.parseActions(config, {resource: model, user});
+      }
       return resourcesService.getOption(model.url).then(response => {
-        const config = ActionConfiguration[model.resource_type];
         const order = config && config.order || Object.keys(response.actions);
         const options = config && config.options || {};
         return order.reduce((result, name) => {
@@ -23,6 +26,43 @@ export default function actionUtilsService(
         }, {});
       });
     });
+  };
+
+  this.parseActions = function(actions, context) {
+    const result = {};
+    for(const func of actions) {
+      const {key, fields, validators, ...rest} = func();
+      const reason = this.parseValidators(validators, context);
+      result[key] = {
+        ...rest,
+        fields: this.parseFields(fields),
+        enabled: !reason,
+        reason,
+      };
+    }
+    return result;
+  };
+
+  this.parseValidators = function(validators, context) {
+    let reason = '';
+    if (validators) {
+      for(const validator of validators) {
+        reason = validator(context);
+        if (reason) {
+          return reason;
+        }
+      }
+    }
+  };
+
+  this.parseFields = function(fields) {
+    if (fields) {
+      const options = {};
+      for(const field of fields) {
+        options[field.key] = {...field, name: field.key};
+      }
+      return options;
+    }
   };
 
   this.actionHasToBeAdded = function(action, model, user) {

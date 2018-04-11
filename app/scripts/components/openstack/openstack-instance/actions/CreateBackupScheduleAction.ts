@@ -2,7 +2,7 @@ import { translate } from '@waldur/i18n';
 import { validateState, createNameField, createDescriptionField } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
-export default function createAction(_): ResourceAction {
+export default function createAction(): ResourceAction {
   return {
     key: 'create_backup_schedule',
     title: translate('Create'),

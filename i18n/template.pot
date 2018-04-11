@@ -866,7 +866,7 @@ msgstr ""
 msgid "Change VPC package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/ChangeFlavorAction.ts
 msgid "Change flavor"
 msgstr ""
 
@@ -998,7 +998,7 @@ msgid "Components"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Configure"
 msgstr ""
 
@@ -1023,7 +1023,7 @@ msgstr ""
 msgid "Connect to a virtual machine: :22"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Connected subnets"
 msgstr ""
 
@@ -1103,7 +1103,8 @@ msgstr ""
 #: app/scripts/components/freeipa/freeipa-account-create.html
 #: app/scripts/components/issues/create/issue-create-dialog.js
 #: app/scripts/components/offering/appstore-offering.html
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupAction.ts
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 #: app/scripts/components/openstack/openstack-tenant/actions.js
 #: app/scripts/components/openstack/openstack-volume/module.js
 #: app/scripts/components/project/project-issues.js
@@ -1145,11 +1146,11 @@ msgstr ""
 msgid "Create application"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupAction.ts
 msgid "Create backup for"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 msgid "Create backup schedule for OpenStack instance"
 msgstr ""
 
@@ -1376,6 +1377,10 @@ msgstr ""
 msgid "Delete python management & virtual environments"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
+msgid "Delete volumes"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 msgid "Deployment plan"
 msgstr ""
@@ -1410,6 +1415,7 @@ msgstr ""
 #: app/scripts/components/project/ProjectDetails.tsx
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js
+#: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/resource/actions/constants.js
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 #: app/scripts/components/slurm/slurm-allocation-config.js
@@ -1426,6 +1432,7 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
 #: app/scripts/components/openstack/openstack-security-groups/module.js
 msgid "Destroy"
 msgstr ""
@@ -1570,6 +1577,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
+#: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/resource/actions/constants.js
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
@@ -2081,6 +2089,7 @@ msgid "Got it!"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupAction.ts
 msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr ""
 
@@ -2371,8 +2380,16 @@ msgstr ""
 msgid "Instance does not have any security groups yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/EditAction.ts
 msgid "Instance has been updated."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/StartAction.ts
+msgid "Instance is already active."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/StopAction.ts
+msgid "Instance is already stopped."
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.js
@@ -2381,6 +2398,14 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
+msgid "Instance should be shutoff and OK or erred. Please contact support."
+msgstr ""
+
+#: app/scripts/components/resource/actions/base.ts
+msgid "Instance should be {state}."
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
@@ -2636,6 +2661,7 @@ msgid "Keep until"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupAction.ts
 #: app/scripts/components/openstack/openstack-snapshot/module.js
 #: app/scripts/components/openstack/openstack-volume/module.js
 msgid "Kept until"
@@ -2858,6 +2884,10 @@ msgstr ""
 msgid "Max vCPU"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+msgid "Maximal number of resources"
+msgstr ""
+
 #: app/scripts/components/form/appstore-field-integer.html
 msgid "Maximal valid value is"
 msgstr ""
@@ -2987,6 +3017,7 @@ msgstr ""
 #: app/scripts/components/providers/provider-list.js
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
+#: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/resource/actions/constants.js
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/resource/list/resources-list.js
@@ -3042,7 +3073,7 @@ msgstr ""
 msgid "New VPC package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/ChangeFlavorAction.ts
 msgid "New flavor"
 msgstr ""
 
@@ -3877,6 +3908,18 @@ msgstr ""
 msgid "Please specify {fields}."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/RestartAction.ts
+msgid "Please start instance first."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/ChangeFlavorAction.ts
+msgid "Please stop the instance before changing its flavor."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
+msgid "Please stop the instance before its removal."
+msgstr ""
+
 #: app/scripts/components/ansible/application-list.js
 msgid "Please wait until provisioning is completed."
 msgstr ""
@@ -4503,6 +4546,10 @@ msgstr ""
 msgid "Related resources"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
+msgid "Release floating IPs"
+msgstr ""
+
 #: app/scripts/components/issues/IssueReload.tsx
 msgid "Reload issue data"
 msgstr ""
@@ -4721,6 +4768,7 @@ msgstr ""
 msgid "Resource has been deleted."
 msgstr ""
 
+#: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/resource/actions/constants.js
 msgid "Resource has been updated."
 msgstr ""
@@ -4784,6 +4832,10 @@ msgstr ""
 msgid "Resources usage"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/RestartAction.ts
+msgid "Restart"
+msgstr ""
+
 #: app/scripts/components/resource/state/constants.js
 msgid "Restarting"
 msgstr ""
@@ -4798,6 +4850,14 @@ msgstr ""
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Restroing"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+msgid "Retention time"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+msgid "Retention time in days, if 0 - resource will be kept forever"
 msgstr ""
 
 #: app/scripts/components/billing/events/invoice-events-dialog.html
@@ -4912,6 +4972,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 #: app/scripts/components/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 msgid "Schedule"
@@ -4944,6 +5005,7 @@ msgid "Security group has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/OpenStackInstanceSummary.tsx
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-security-groups/breadcrumbs.js
 #: app/scripts/components/openstack/openstack-tenant/tabs.js
@@ -5047,7 +5109,7 @@ msgid "Select resource type"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "Select security groups..."
 msgstr ""
@@ -5068,7 +5130,7 @@ msgstr ""
 msgid "Select subnet"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Select subnets to connect to..."
 msgstr ""
 
@@ -5304,6 +5366,10 @@ msgstr ""
 msgid "Staff and Support user"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/StartAction.ts
+msgid "Start"
+msgstr ""
+
 #: app/scripts/components/customer/customer-list.js
 msgid "Start day of accounting"
 msgstr ""
@@ -5368,6 +5434,10 @@ msgstr ""
 
 #: app/scripts/components/resource-import/resource-import-dialog.html
 msgid "Step 2. Select resources"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/StopAction.ts
+msgid "Stop"
 msgstr ""
 
 #: app/scripts/components/resource/state/constants.js
@@ -5476,7 +5546,6 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js
 #: app/scripts/components/openstack/openstack-floating-ips/module.js
-#: app/scripts/components/openstack/openstack-instance/actions.js
 #: app/scripts/components/openstack/openstack-network/module.js
 #: app/scripts/components/openstack/openstack-security-groups/module.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
@@ -5484,6 +5553,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-subnet/actions.js
 #: app/scripts/components/openstack/openstack-tenant/actions.js
 #: app/scripts/components/openstack/openstack-volume/module.js
+#: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/slurm/actions.js
 msgid "Synchronise"
 msgstr ""
@@ -5766,6 +5836,10 @@ msgstr ""
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/user/list/UserEvents.tsx
 msgid "Timestamp"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+msgid "Timezone"
 msgstr ""
 
 #: app/scripts/components/issues/create/issue-create-dialog.js
@@ -6092,7 +6166,7 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateFloatingIpsAction.ts
 msgid "Update floating IPs"
 msgstr ""
 
@@ -6112,7 +6186,7 @@ msgstr ""
 msgid "Update project details"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 msgid "Update security groups"
 msgstr ""
 

@@ -1,11 +1,13 @@
 import { translate } from '@waldur/i18n';
 import '@waldur/openstack/provider';
 
+import { Resource } from './types';
+
 import { getResourceState } from './utils';
 
 describe('getResourceState', () => {
   it('renders OK state', () => {
-    const resource = {
+    const resource: Resource = {
       resource_type: 'OpenStackTenant.Instance',
       state: 'OK',
       runtime_state: 'ONLINE',
@@ -20,9 +22,9 @@ describe('getResourceState', () => {
   });
 
   it('renders error state', () => {
-    const resource = {
+    const resource: Resource = {
       resource_type: 'OpenStackTenant.Instance',
-      state: 'ERRED',
+      state: 'Erred',
       runtime_state: 'ONLINE',
       service_settings_state: 'OK',
     };
@@ -35,7 +37,7 @@ describe('getResourceState', () => {
   });
 
   it('renders error runtime state', () => {
-    const resource = {
+    const resource: Resource = {
       resource_type: 'OpenStackTenant.Instance',
       state: 'OK',
       runtime_state: 'ERROR',
@@ -50,7 +52,7 @@ describe('getResourceState', () => {
   });
 
   it('renders error for service settings state', () => {
-    const resource = {
+    const resource: Resource = {
       resource_type: 'OpenStackTenant.Instance',
       state: 'OK',
       runtime_state: 'ONLINE',
@@ -66,9 +68,9 @@ describe('getResourceState', () => {
   });
 
   it('renders progress state', () => {
-    const resource = {
+    const resource: Resource = {
       resource_type: 'OpenStackTenant.Instance',
-      state: 'UPDATING',
+      state: 'Updating',
       runtime_state: 'RESIZING',
       service_settings_state: 'OK',
     };
@@ -81,9 +83,9 @@ describe('getResourceState', () => {
   });
 
   it('renders action details', () => {
-    const resource = {
+    const resource: Resource = {
       resource_type: 'OpenStackTenant.Instance',
-      state: 'UPDATING',
+      state: 'Updating',
       runtime_state: 'RESIZING',
       service_settings_state: 'OK',
       action: 'change_flavor',

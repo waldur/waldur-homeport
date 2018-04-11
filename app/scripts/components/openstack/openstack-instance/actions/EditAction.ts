@@ -3,7 +3,7 @@ import { createDefaultEditAction, createLatinNameField, validateState } from '@w
 import { ResourceAction } from '@waldur/resource/actions/types';
 import { mergeActions } from '@waldur/resource/actions/utils';
 
-export default function createAction(_): ResourceAction {
+export default function createAction(): ResourceAction {
   return mergeActions(createDefaultEditAction(), {
     successMessage: translate('Instance has been updated.'),
     fields: [createLatinNameField()],

@@ -2,7 +2,7 @@ import { translate } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
-export default function createAction(_): ResourceAction {
+export default function createAction(): ResourceAction {
   return {
     key: 'update_security_groups',
     title: translate('Update security groups'),

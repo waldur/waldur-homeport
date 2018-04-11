@@ -34,7 +34,7 @@ function validate(ctx: ActionContext<OpenStackInstance>): string {
   }
 }
 
-export default function createAction(_): ResourceAction {
+export default function createAction(): ResourceAction {
   return {
     key: 'change_flavor',
     type: 'form',

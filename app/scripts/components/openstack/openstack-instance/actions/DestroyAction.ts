@@ -16,7 +16,7 @@ function validate(ctx: ActionContext<OpenStackInstance>): string {
   return translate('Instance should be shutoff and OK or erred. Please contact support.');
 }
 
-export default function createAction(_): ResourceAction<OpenStackInstance> {
+export default function createAction(): ResourceAction<OpenStackInstance> {
   return {
     key: 'destroy',
     type: 'button',
