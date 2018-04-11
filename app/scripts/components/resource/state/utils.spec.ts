@@ -76,9 +76,9 @@ describe('getResourceState', () => {
     };
     expect(getResourceState(resource, translate)).toEqual({
       className: 'progress-bar-primary',
-      label: 'UPDATING',
+      label: 'Updating',
       movementClassName: 'progress-striped active',
-      tooltip: 'UPDATING OpenStack Instance, current state on backend: RESIZING.',
+      tooltip: 'Updating OpenStack Instance, current state on backend: RESIZING.',
     });
   });
 
