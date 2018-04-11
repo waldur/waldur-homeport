@@ -19,7 +19,7 @@ function validate(ctx: ActionContext<OpenStackInstance>): string {
 export default function createAction(): ResourceAction<OpenStackInstance> {
   return {
     name: 'destroy',
-    type: 'button',
+    type: 'form',
     method: 'DELETE',
     destructive: true,
     title: translate('Destroy'),
