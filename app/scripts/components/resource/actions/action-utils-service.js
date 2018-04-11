@@ -31,13 +31,18 @@ export default function actionUtilsService(
   this.parseActions = function(actions, context) {
     const result = {};
     for(const func of actions) {
-      const {key, fields, validators, ...rest} = func();
+      const {name, fields, validators, ...rest} = func(context);
       const reason = this.parseValidators(validators, context);
-      result[key] = {
+      const url = rest.method === 'DELETE'
+        ? context.resource.url
+        : context.resource.url + name + '/';
+      result[name] = {
         ...rest,
+        name,
         fields: this.parseFields(fields),
         enabled: !reason,
         reason,
+        url,
       };
     }
     return result;
@@ -59,7 +64,7 @@ export default function actionUtilsService(
     if (fields) {
       const options = {};
       for(const field of fields) {
-        options[field.key] = {...field, name: field.key};
+        options[field.name] = field;
       }
       return options;
     }

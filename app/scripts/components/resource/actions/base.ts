@@ -7,7 +7,7 @@ import { ResourceAction, ActionField, ActionContext } from './types';
 
 export function createLatinNameField(): ActionField {
   return {
-    key: 'name',
+    name: 'name',
     label: translate('Name'),
     maxlength: 150,
     required: true,
@@ -18,7 +18,7 @@ export function createLatinNameField(): ActionField {
 
 export function createNameField(): ActionField {
   return {
-    key: 'name',
+    name: 'name',
     label: translate('Name'),
     maxlength: 150,
     required: true,
@@ -28,7 +28,7 @@ export function createNameField(): ActionField {
 
 export function createDescriptionField(): ActionField {
   return {
-    key: 'description',
+    name: 'description',
     label: translate('Description'),
     maxlength: 500,
     required: false,
@@ -38,7 +38,7 @@ export function createDescriptionField(): ActionField {
 
 export function createDefaultEditAction(): ResourceAction {
   return {
-    key: 'edit',
+    name: 'update',
     title: translate('Edit'),
     type: 'form',
     method: 'PUT',
@@ -52,7 +52,7 @@ export function createDefaultEditAction(): ResourceAction {
 
 export function createPullAction(_): ResourceAction {
   return {
-    key: 'pull',
+    name: 'pull',
     title: translate('Synchronise'),
     method: 'POST',
     type: 'button',

@@ -18,7 +18,7 @@ function validate(ctx: ActionContext<OpenStackInstance>): string {
 
 export default function createAction(): ResourceAction<OpenStackInstance> {
   return {
-    key: 'destroy',
+    name: 'destroy',
     type: 'button',
     method: 'DELETE',
     destructive: true,
@@ -26,13 +26,13 @@ export default function createAction(): ResourceAction<OpenStackInstance> {
     validators: [validate],
     fields: [
       {
-        key: 'delete_volumes',
+        name: 'delete_volumes',
         label: translate('Delete volumes'),
         type: 'boolean',
         default_value: true,
       },
       {
-        key: 'release_floating_ips',
+        name: 'release_floating_ips',
         label: translate('Release floating IPs'),
         type: 'boolean',
         default_value: true,

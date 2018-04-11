@@ -1,7 +1,7 @@
 import { ResourceAction, ActionField } from './types';
 
 function createMap(items: ActionField[]) {
-  return items.reduce((map, item) => ({...map, [item.key]: item}), {});
+  return items.reduce((map, item) => ({...map, [item.name]: item}), {});
 }
 
 function mergeFields(xs: ActionField[], ys: ActionField[]): ActionField[] {
@@ -13,8 +13,8 @@ function mergeFields(xs: ActionField[], ys: ActionField[]): ActionField[] {
   const ymap = createMap(ys);
 
   return [
-    ...xs.map(item => ymap[item.key] || item),
-    ...ys.filter(item => !xmap[item.key]),
+    ...xs.map(item => ymap[item.name] || item),
+    ...ys.filter(item => !xmap[item.name]),
   ];
 }
 

@@ -15,14 +15,14 @@ import updateSecurityGroupsAction from './UpdateSecurityGroupsAction';
 export default [
   editAction,
   createPullAction,
-  changeFlavorAction,
   startAction,
   stopAction,
   restartAction,
-  updateSecurityGroupsAction,
+  changeFlavorAction,
+  createBackupAction,
   createBackupScheduleAction,
+  updateSecurityGroupsAction,
   updateInternalIpsSet,
   updateFloatingIpsAction,
   destroyAction,
-  createBackupAction,
 ];

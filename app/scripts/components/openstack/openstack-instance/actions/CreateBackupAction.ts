@@ -4,7 +4,7 @@ import { ResourceAction } from '@waldur/resource/actions/types';
 
 export default function createAction(): ResourceAction {
   return {
-    key: 'backup',
+    name: 'backup',
     type: 'button',
     method: 'POST',
     tab: 'backups',
@@ -16,7 +16,7 @@ export default function createAction(): ResourceAction {
       createLatinNameField(),
       createDescriptionField(),
       {
-        key: 'kept_until',
+        name: 'kept_until',
         type: 'datetime',
         required: false,
         label: translate('Kept until'),

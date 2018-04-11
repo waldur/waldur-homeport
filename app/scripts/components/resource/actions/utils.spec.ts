@@ -4,13 +4,13 @@ import { mergeActions } from './utils';
 
 describe('Marge action', () => {
   const base: ResourceAction = {
-    key: 'backup',
+    name: 'backup',
     type: 'form',
     method: 'POST',
     title: 'Create backup',
     fields: [
       {
-        key: 'name',
+        name: 'name',
         label: 'Name',
         type: 'string',
       },
@@ -19,32 +19,32 @@ describe('Marge action', () => {
   const enhancer = {
     fields: [
       {
-        key: 'name',
+        name: 'name',
         label: 'Name',
         type: 'string',
         pattern: '[A-Za-z]+',
       },
       {
-        key: 'description',
+        name: 'description',
         label: 'Description',
         type: 'text',
       },
     ],
   };
   const expected = {
-    key: 'backup',
+    name: 'backup',
     type: 'form',
     method: 'POST',
     title: 'Create backup',
     fields: [
       {
-        key: 'name',
+        name: 'name',
         label: 'Name',
         type: 'string',
         pattern: '[A-Za-z]+',
       },
       {
-        key: 'description',
+        name: 'description',
         label: 'Description',
         type: 'text',
       },

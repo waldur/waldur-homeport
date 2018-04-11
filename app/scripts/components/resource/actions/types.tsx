@@ -2,7 +2,7 @@ import { BaseResource } from '@waldur/resource/types';
 import { User } from '@waldur/workspace/types';
 
 interface BaseField<Resource> {
-  key: string;
+  name: string;
   label?: string;
   type?: string;
   required?: boolean;
@@ -20,6 +20,7 @@ interface SelectField<Resource> extends BaseField<Resource> {
   modelParser?: (field, items) => any[];
   display_name_field?: string;
   value_field?: string;
+  url?: string;
 }
 
 interface TextField<Resource> extends BaseField<Resource> {
@@ -48,7 +49,7 @@ type ActionMethod = 'POST' | 'PUT' | 'DELETE';
 type ActionValidator<Resource> = (ctx: ActionContext<Resource>) => string;
 
 export interface ResourceAction<Resource = BaseResource> {
-  key: string;
+  name: string;
   title: string;
   dialogTitle?: string;
   tab?: string;

@@ -5,7 +5,7 @@ import { ResourceAction, ActionField } from '@waldur/resource/actions/types';
 
 function createField(): ActionField<OpenStackInstance> {
   return {
-    key: 'floating_ips',
+    name: 'floating_ips',
     resource_default_value: true,
     component: 'openstackInstanceFloatingIps',
     init: (field, resource) => {
@@ -18,7 +18,7 @@ function createField(): ActionField<OpenStackInstance> {
 
 export default function createAction(): ResourceAction<OpenStackInstance> {
   return {
-    key: 'update_floating_ips',
+    name: 'update_floating_ips',
     type: 'form',
     method: 'POST',
     title: translate('Update floating IPs'),

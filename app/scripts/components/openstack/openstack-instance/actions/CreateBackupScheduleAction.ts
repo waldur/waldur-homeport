@@ -4,7 +4,7 @@ import { ResourceAction } from '@waldur/resource/actions/types';
 
 export default function createAction(): ResourceAction {
   return {
-    key: 'create_backup_schedule',
+    name: 'create_backup_schedule',
     title: translate('Create'),
     dialogTitle: translate('Create backup schedule for OpenStack instance'),
     tab: 'backup_schedules',
@@ -16,7 +16,7 @@ export default function createAction(): ResourceAction {
       createNameField(),
       createDescriptionField(),
       {
-        key: 'retention_time',
+        name: 'retention_time',
         type: 'integer',
         required: true,
         label: translate('Retention time'),
@@ -25,12 +25,12 @@ export default function createAction(): ResourceAction {
         max_value: 2147483647,
       },
       {
-        key: 'timezone',
+        name: 'timezone',
         default_value: 'UTC',
         label: translate('Timezone'),
       },
       {
-        key: 'maximal_number_of_resources',
+        name: 'maximal_number_of_resources',
         type: 'integer',
         required: true,
         label: translate('Maximal number of resources'),
@@ -38,7 +38,7 @@ export default function createAction(): ResourceAction {
         max_value: 32767,
       },
       {
-        key: 'schedule',
+        name: 'schedule',
         type: 'crontab',
         required: true,
         label: translate('Schedule'),

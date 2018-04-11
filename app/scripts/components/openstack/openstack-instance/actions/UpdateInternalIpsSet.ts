@@ -6,7 +6,7 @@ import { internalIpFormatter } from '../openstack-instance-config';
 
 function createSubnetField() {
   return {
-    key: 'internal_ips_set',
+    name: 'internal_ips_set',
     type: 'multiselect',
     label: translate('Connected subnets'),
     placeholder: translate('Select subnets to connect to...'),
@@ -24,7 +24,7 @@ function createSubnetField() {
 
 export default function createAction(): ResourceAction {
   return {
-    key: 'update_internal_ips_set',
+    name: 'update_internal_ips_set',
     type: 'form',
     method: 'POST',
     tab: 'internal_ips',

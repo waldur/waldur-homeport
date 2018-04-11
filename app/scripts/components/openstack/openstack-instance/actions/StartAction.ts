@@ -11,7 +11,7 @@ function validate(ctx: ActionContext<OpenStackInstance>): string {
 
 export default function createAction(): ResourceAction {
   return {
-    key: 'start',
+    name: 'start',
     type: 'button',
     method: 'POST',
     title: translate('Start'),

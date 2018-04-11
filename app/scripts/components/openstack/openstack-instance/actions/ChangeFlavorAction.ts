@@ -1,3 +1,4 @@
+import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
 import { validateState, validateRuntimeState } from '@waldur/resource/actions/base';
@@ -18,13 +19,17 @@ function formatFlavorChoices(choices, resource) {
     }));
 }
 
-function createNewFlavorField(): ActionField {
+function createNewFlavorField(ctx: ActionContext<OpenStackInstance>): ActionField {
   return {
-    key: 'flavor',
+    name: 'flavor',
+    type: 'select',
     label: translate('New flavor'),
     init: (field, resource) => {
       field.choices = formatFlavorChoices(field.rawChoices, resource);
     },
+    url: `${ENV.apiEndpoint}api/openstacktenant-flavors/?settings_uuid=${ctx.resource.service_settings_uuid}`,
+    value_field: 'url',
+    display_name_field: 'display_name',
   };
 }
 
@@ -34,9 +39,9 @@ function validate(ctx: ActionContext<OpenStackInstance>): string {
   }
 }
 
-export default function createAction(): ResourceAction {
+export default function createAction(ctx: ActionContext<OpenStackInstance>): ResourceAction {
   return {
-    key: 'change_flavor',
+    name: 'change_flavor',
     type: 'form',
     method: 'POST',
     title: translate('Change flavor'),
@@ -47,10 +52,10 @@ export default function createAction(): ResourceAction {
     ],
     fields: [
       {
-        key: 'currentFlavor',
+        name: 'currentFlavor',
         component: 'openstackInstanceCurrentFlavor',
       },
-      createNewFlavorField(),
+      createNewFlavorField(ctx),
     ],
   };
 }
