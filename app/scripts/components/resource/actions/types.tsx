@@ -1,4 +1,4 @@
-import { BaseResource } from '@waldur/resource/state/types';
+import { BaseResource } from '@waldur/resource/types';
 import { User } from '@waldur/workspace/types';
 
 interface BaseField<Resource> {
@@ -57,6 +57,7 @@ export interface ResourceAction<Resource = BaseResource> {
   fields?: Array<ActionField<Resource>>;
   type: ActionType;
   successMessage?: string;
+  onSuccess?: () => void;
   method: ActionMethod;
   destructive?: boolean;
   validators?: Array<ActionValidator<Resource>>;

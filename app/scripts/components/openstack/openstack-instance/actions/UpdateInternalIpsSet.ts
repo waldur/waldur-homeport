@@ -1,8 +1,8 @@
 import { translate } from '@waldur/i18n';
+import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
 import { internalIpFormatter } from '../openstack-instance-config';
-import { validateState } from './base';
 
 function createSubnetField() {
   return {

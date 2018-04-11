@@ -1,7 +1,6 @@
 import { translate } from '@waldur/i18n';
+import { validateState, createNameField, createDescriptionField } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
-
-import { validateState, createNameField, createDescriptionField } from './base';
 
 export default function createAction(_): ResourceAction {
   return {

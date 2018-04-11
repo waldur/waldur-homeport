@@ -1,4 +1,4 @@
-import { ResourceAction, ActionField } from '@waldur/resource/actions/types';
+import { ResourceAction, ActionField } from './types';
 
 function createMap(items: ActionField[]) {
   return items.reduce((map, item) => ({...map, [item.key]: item}), {});
