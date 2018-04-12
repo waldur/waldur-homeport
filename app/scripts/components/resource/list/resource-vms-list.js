@@ -37,20 +37,22 @@ function ProjectVirtualMachinesListController(
         title: gettext('Internal IP'),
         orderField: 'internal_ips',
         render: function(row) {
-          if (row.internal_ips.length === 0) {
+          const ips = row.internal_ips.filter(angular.identity);
+          if (ips.length === 0) {
             return '&ndash;';
           }
-          return row.internal_ips.join(', ');
+          return ips.join(', ');
         }
       });
       options.columns.push({
         title: gettext('External IP'),
         orderField: 'external_ips',
         render: function(row) {
-          if (row.external_ips.length === 0) {
+          const ips = row.external_ips.filter(angular.identity);
+          if (ips.length === 0) {
             return '&ndash;';
           }
-          return row.external_ips.join(', ');
+          return ips.join(', ');
         }
       });
       return options;
