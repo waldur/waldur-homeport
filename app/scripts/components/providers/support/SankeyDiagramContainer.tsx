@@ -1,13 +1,12 @@
 import * as React from 'react';
-
 import { connect } from 'react-redux';
 
-import { FlowMapFilter } from '@waldur/appstore/providers/support/FlowMapFilter';
-import { serviceUsageSelector } from '@waldur/appstore/providers/support/selectors';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { fetchServiceUsageStart } from './actions';
+import { FlowMapFilter } from './FlowMapFilter';
 import SankeyDiagram from './SankeyDiagram';
+import { selectServiceUsage } from './selectors';
 
 interface SankeyDiagramComponentProps {
   fetchServiceUsageStart: () => void;
@@ -162,7 +161,7 @@ class SankeyDiagramComponent extends React.Component<SankeyDiagramComponentProps
 }
 
 const mapStateToProps = state => ({
-  serviceUsage: serviceUsageSelector(state),
+  serviceUsage: selectServiceUsage(state),
 });
 
 const matchDispatchToProps = dispatch => ({

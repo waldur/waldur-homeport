@@ -1,18 +1,25 @@
+import { Organizations, ServiceProviders, Usage } from '@waldur/providers/support/types';
+
 import * as actions from './actions';
 
-// interface InitialStateInterface {
-//   data: ServiceProvidersInterface;
-//   loading: boolean;
-//   selectedServiceProvider: any;
-// }
+export interface InitialState {
+  data: {
+    organizations: Organizations;
+    service_providers: ServiceProviders;
+    usage: Usage[];
+  };
+  selectedServiceProviderUuid: string;
+  loading: boolean;
+  infoPanelIsVisible: boolean;
+}
 
-const INITIAL_STATE = {
+const INITIAL_STATE: InitialState = {
   data: {
     organizations: {},
     service_providers: {},
     usage: [],
   },
-  selectedServiceProvider: {},
+  selectedServiceProviderUuid: null,
   loading: false,
   infoPanelIsVisible: false,
 };
@@ -33,27 +40,9 @@ export function reducer(state = INITIAL_STATE, action) {
       };
 
     case actions.SERVICE_SELECT:
-      let selectedServiceProvider;
-      const providerUuid = action.payload.uuid;
-      const serviceProvider = state.data.organizations[providerUuid];
-      const selectedServiceConsumers = [];
-
-      state.data.usage.forEach(entry => {
-        const consumerUuid = entry.provider_to_consumer.consumer_uuid;
-        if (providerUuid === entry.provider_to_consumer.provider_uuid) {
-            selectedServiceConsumers.push({
-              ...entry.data,
-              name: state.data.organizations[consumerUuid].name,
-            });
-        }
-      });
-      selectedServiceProvider = {
-        ...serviceProvider,
-        consumers: selectedServiceConsumers,
-      };
       return {
         ...state,
-        selectedServiceProvider,
+        selectedServiceProviderUuid: action.payload.uuid,
       };
 
     case actions.SERVICE_USAGE_FETCH_ERROR:

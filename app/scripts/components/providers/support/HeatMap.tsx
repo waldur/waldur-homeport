@@ -14,16 +14,9 @@ interface HeatMapProps {
 }
 
 export default class HeatMap extends React.Component<HeatMapProps> {
-  map: any;
+  map = undefined;
 
-  constructor(props) {
-    super(props);
-    this.getColor = this.getColor.bind(this);
-    this.setStyle = this.setStyle.bind(this);
-    this.getTotalMetricsDiff = this.getTotalMetricsDiff.bind(this);
-  }
-
-  getColor(diff) {
+  getColor = diff => {
     if (diff > 0) {
       return '#1BBBE3';
     } else if (diff < 0) {
@@ -33,7 +26,7 @@ export default class HeatMap extends React.Component<HeatMapProps> {
     }
   }
 
-  setStyle(feature) {
+  setStyle = feature => {
     return {
       fillColor: this.getColor(feature.properties.diff),
       weight: 2,
@@ -68,7 +61,7 @@ export default class HeatMap extends React.Component<HeatMapProps> {
     }, 0);
   }
 
-  getTotalMetricsDiff(data, country) {
+  getTotalMetricsDiff = (data, country) => {
     const totalProviderMetrics = this.calculateTotalProviderResources(data, country);
     const totalConsumerMetrics = this.calculateTotalConsumerResources(data, country);
     return totalProviderMetrics - totalConsumerMetrics;

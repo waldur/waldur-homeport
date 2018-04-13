@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { FlowMapFilter } from '@waldur/appstore/providers/support/FlowMapFilter';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { fetchServiceUsageStart } from './actions';
+import { FlowMapFilter } from './FlowMapFilter';
 import HeatMap from './HeatMap';
-import { serviceUsageSelector } from './selectors';
+import { selectServiceUsage } from './selectors';
 
 interface HeatMapComponentProps {
   fetchServiceUsageStart: () => void;
@@ -34,7 +34,7 @@ class HeatMapComponent extends React.Component<HeatMapComponentProps> {
 }
 
 const mapStateToProps = state => ({
-  serviceUsage: serviceUsageSelector(state),
+  serviceUsage: selectServiceUsage(state),
 });
 
 const mapDispatchToProps = dispatch => ({

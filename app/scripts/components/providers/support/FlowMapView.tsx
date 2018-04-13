@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import FlowMap from '@waldur/appstore/providers/support/FlowMap';
-import { FlowMapFilter } from '@waldur/appstore/providers/support/FlowMapFilter';
-import { MapInfoPanel } from '@waldur/appstore/providers/support/MapInfoPanel';
+import FlowMap from './FlowMap';
+import { FlowMapFilter } from './FlowMapFilter';
+import { MapInfoPanel } from './MapInfoPanel';
 
 import './providers-support.scss';
 

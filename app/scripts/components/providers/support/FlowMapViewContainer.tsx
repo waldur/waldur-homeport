@@ -11,19 +11,20 @@ import {
 } from './actions';
 import FlowMapView from './FlowMapView';
 import {
-  selectedServiceProviderSelector,
-  serviceUsageSelector,
-  filterSelector
+  selectServiceProvider,
+  selectServiceUsage,
+  selectInfoPanelStatus,
+  selectServiceProviderConsumers,
 } from './selectors';
 
 interface FlowMapViewComponentProps {
-  fetchServiceUsageStart: () => void;
   serviceUsage: any;
   selectedServiceProvider: any;
+  infoPanelIsVisible: boolean;
+  fetchServiceUsageStart: () => void;
   selectServiceProvider: () => void;
   showInfoPanel: () => void;
   hideInfoPanel: () => void;
-  infoPanelIsVisible: boolean;
 }
 
 class FlowMapViewComponent extends React.Component<FlowMapViewComponentProps> {
@@ -38,9 +39,12 @@ class FlowMapViewComponent extends React.Component<FlowMapViewComponentProps> {
 }
 
 const mapStateToProps = state => ({
-  serviceUsage: serviceUsageSelector(state),
-  selectedServiceProvider: selectedServiceProviderSelector(state),
-  infoPanelIsVisible: filterSelector(state),
+  serviceUsage: selectServiceUsage(state),
+  selectedServiceProvider: {
+    ...selectServiceProvider(state),
+    consumers: selectServiceProviderConsumers(state),
+  },
+  infoPanelIsVisible: selectInfoPanelStatus(state),
 });
 
 const mapDispatchToProps = dispatch => ({

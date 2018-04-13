@@ -1,7 +1,7 @@
 import { basemapLayer } from 'esri-leaflet';
 import * as React from 'react';
 
-import loadLeafleat from '../../../../shims/load-leaflet';
+import loadLeafleat from '../../../shims/load-leaflet';
 import './CanvasFlowmapLayer';
 
 import './providers-support.scss';
@@ -52,7 +52,6 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
     const { center, zoom } = this.props;
     map.setView(center, zoom);
     basemapLayer('Gray').addTo(map);
-
     this.setState({map}, this.updateMap);
   }
 
@@ -144,7 +143,6 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
   extendViewport(data, center) {
     if (this.leaflet) {
       const bounds = this.leaflet.latLngBounds(center);
-
       for (const key in data.organizations) {
         if (data.organizations.hasOwnProperty(key)) {
           bounds.extend([
@@ -168,7 +166,6 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
       this.state.oneToManyFlowmapLayer.on('click', this.flowmapLaterClickHandler);
     });
     if (bounds) {
-      console.log('Bounds', bounds);
       this.state.map.fitBounds(bounds);
     }
   }

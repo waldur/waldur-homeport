@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
 
-import loadEcharts from '../../../../shims/load-echarts';
+import loadEcharts from '../../../shims/load-echarts';
 
 interface SankeyDiagramProps {
   data: any;

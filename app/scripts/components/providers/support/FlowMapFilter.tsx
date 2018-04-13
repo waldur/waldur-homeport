@@ -2,7 +2,6 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-// import Panel from '@waldur/core/Panel';
 import { StringField, FormContainer, SelectField } from '@waldur/form-react';
 import { CheckboxField } from '@waldur/form-react/CheckboxField';
 import { withTranslation, TranslateProps } from '@waldur/i18n';

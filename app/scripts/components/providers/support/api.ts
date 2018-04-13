@@ -1,6 +1,6 @@
 // import { $http, $state, $rootScope, ENV } from '@waldur/core/services';
 
-const data = {
+export const data = {
   organizations: {
     uni_of_tartu: {
       name: 'University of Tartu',
