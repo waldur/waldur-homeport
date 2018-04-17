@@ -123,7 +123,7 @@ export default function issueRoutes($stateProvider) {
       url: 'sankey-diagram/',
       template: '<sankey-diagram></sankey-diagram>',
       data: {
-        pageTitle: gettext('Sankey Diagram'),
+        pageTitle: gettext('Sankey diagram'),
         feature: 'support.sankey-diagram'
       },
       resolve: {

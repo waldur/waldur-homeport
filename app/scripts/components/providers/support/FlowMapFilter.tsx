@@ -24,7 +24,7 @@ const metricOptions = [
     value: 'ram',
   },
   {
-    name: 'DISK',
+    name: 'Disk',
     value: 'disk',
   },
 ];
@@ -72,7 +72,7 @@ const PureFlowMapFilter = (props: FlowMapFilterProps) => (
           />
           <SelectField
             className="metrics-select"
-            label={props.translate('Service Provider Type')}
+            label={props.translate('Service provider type')}
             name="service_provider_type"
             options={serviceProviderTypeOptions}
             labelKey="name"

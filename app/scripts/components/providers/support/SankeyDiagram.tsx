@@ -1,15 +1,27 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
 
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+
 import loadEcharts from '../../../shims/load-echarts';
+import './sankey-diagram.scss';
 
 interface SankeyDiagramProps {
   data: any;
 }
 
-export default class SankeyDiagram extends React.Component<SankeyDiagramProps> {
+interface SankeyDiagramState {
+  loading: boolean;
+}
+
+export default class SankeyDiagram extends React.Component<SankeyDiagramProps, SankeyDiagramState> {
   container: ReactNode;
-  diagram = undefined;
+  chart = undefined;
+
+  constructor(props) {
+    super(props);
+    this.state = {loading: true};
+  }
 
   getChartsOptions() {
     return {
@@ -26,31 +38,45 @@ export default class SankeyDiagram extends React.Component<SankeyDiagramProps> {
     };
   }
 
-  renderDiagram() {
+  renderChart() {
     const options = this.getChartsOptions();
-    this.diagram.setOption(options);
+    this.chart.setOption(options);
   }
 
-  drawDiagram() {
+  drawChart = () => {
     loadEcharts().then(module => {
       const echarts = module.default;
-      const diagram = echarts.getInstanceByDom(this.container);
-      if (!diagram) {
-        this.diagram = echarts.init(this.container, );
+      let chart;
+      if (this.container) {
+        chart = echarts.getInstanceByDom(this.container);
       }
-      this.renderDiagram();
+      if (!chart && this.container) {
+        this.chart = echarts.init(this.container);
+        this.renderChart();
+      }
     });
   }
 
+  componentDidUpdate() {
+    this.drawChart();
+  }
+
   componentDidMount() {
-    this.drawDiagram();
+    this.drawChart();
+    this.setState({loading: false});
+    this.forceUpdate();
   }
 
   componentWillUnmount() {
-    this.diagram.dispose();
+    if (this.chart) {
+      this.chart.dispose();
+    }
   }
 
   render() {
+    if (this.state.loading) {
+      return <LoadingSpinner />;
+    }
     return (
       <div id="sankey-diagram" ref={container => this.container = container} />
     );

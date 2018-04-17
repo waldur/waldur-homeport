@@ -1964,6 +1964,10 @@ msgstr ""
 msgid "Flavor name: {flavor_name}"
 msgstr ""
 
+#: app/scripts/components/analytics/VMTypeOverview.tsx
+msgid "Flavors"
+msgstr ""
+
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
 msgid "Flavors matching this regex expression will not be pulled from the backend."
 msgstr ""
@@ -2271,6 +2275,10 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "Image name"
+msgstr ""
+
+#: app/scripts/components/analytics/VMTypeOverview.tsx
+msgid "Images"
 msgstr ""
 
 #: app/scripts/components/resource-import/resource-import-dialog.html
@@ -4281,6 +4289,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/jira/project/jira-projects-list.js
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
@@ -4975,9 +4984,6 @@ msgid "SUBMITTED"
 msgstr ""
 
 #: app/scripts/components/issues/routes.js
-msgid "Sankey Diagram"
-msgstr ""
-
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Sankey diagram"
 msgstr ""
@@ -5197,10 +5203,6 @@ msgstr ""
 msgid "Server error occurred."
 msgstr ""
 
-#: app/scripts/components/providers/support/FlowMapFilter.tsx
-msgid "Service Provider Type"
-msgstr ""
-
 #: app/scripts/components/issues/types/constants.ts
 msgid "Service Request"
 msgstr ""
@@ -5233,6 +5235,10 @@ msgstr ""
 
 #: app/scripts/components/issues/request-service-button.js
 msgid "Service name"
+msgstr ""
+
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Service provider type"
 msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts
@@ -6281,6 +6287,10 @@ msgstr ""
 msgid "Use sudo"
 msgstr ""
 
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
+msgid "Used in the period"
+msgstr ""
+
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
@@ -6909,6 +6919,10 @@ msgstr ""
 msgid "browse"
 msgstr ""
 
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
+msgid "by"
+msgstr ""
+
 #: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "commented on"
 msgstr ""
@@ -6944,6 +6958,10 @@ msgstr ""
 #: app/scripts/components/freeipa/freeipa-account-edit.html
 #: app/scripts/components/user/support/TermsOfService.tsx
 msgid "have been accepted on"
+msgstr ""
+
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
+msgid "hours"
 msgstr ""
 
 #: app/scripts/components/table-react/TablePlaceholder.tsx

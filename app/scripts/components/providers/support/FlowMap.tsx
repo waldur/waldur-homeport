@@ -4,7 +4,7 @@ import * as React from 'react';
 import loadLeafleat from '../../../shims/load-leaflet';
 import './CanvasFlowmapLayer';
 
-import './providers-support.scss';
+import './flow-map.scss';
 
 interface FlowMapProps {
   center?: number[];

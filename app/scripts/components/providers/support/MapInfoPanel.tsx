@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-export const MapInfoPanel = ({data, onPanelClose}) => {
+export const MapInfoPanel = ({data, onPanelClose, translate}) => {
   return (
     <div className="ibox">
       <div className="ibox-title">
-          <h5>Provider</h5>
+          <h5>{translate('Provider')}</h5>
           <div className="ibox-tools">
               <a className="close-link m-r-xs" onClick={onPanelClose}>
                   <i className="fa fa-times"/>
@@ -21,9 +21,9 @@ export const MapInfoPanel = ({data, onPanelClose}) => {
           <p>{data.description}</p>
         </div>
         <hr/>
-        <h3>Used in the period -</h3>
+        <h3>{translate('Used in the period')} -</h3>
         <h4>{data.consumers[0].period}</h4>
-        <h3>by:</h3>
+        <h3>{translate('by')}:</h3>
       </div>
       {data.consumers.map((consumer, index) => {
         return (
@@ -31,16 +31,16 @@ export const MapInfoPanel = ({data, onPanelClose}) => {
             <h4 className="font-bold">{consumer.name}</h4>
             <div>
               <div>
-                <span>CPU</span>
-                <small className="pull-right">{consumer.cpu} hours</small>
+                CPU
+                <small className="pull-right">{consumer.cpu} {translate('hours')}</small>
               </div>
               <div>
-                <span>RAM</span>
-                <small className="pull-right">{consumer.ram} hours</small>
+                RAM
+                <small className="pull-right">{consumer.ram} {translate('hours')}</small>
               </div>
               <div>
-                <span>GPU</span>
-                <small className="pull-right">{consumer.gpu} hours</small>
+                GPU
+                <small className="pull-right">{consumer.gpu} {translate('hours')}</small>
               </div>
             </div>
           </div>

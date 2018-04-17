@@ -3,9 +3,8 @@ import * as React from 'react';
 
 import countries from './countries.geo.js';
 import { countryInfo } from './countryInfo';
+import './heat-map.scss';
 import HeatMapCalculator from './HeatMapCalculator';
-
-import './providers-support.scss';
 
 interface HeatMapProps {
   center?: number[];

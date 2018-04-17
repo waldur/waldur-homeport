@@ -1,12 +1,14 @@
 import * as React from 'react';
 
+import { TranslateProps } from '@waldur/i18n';
+
+import './flow-map.scss';
+
 import FlowMap from './FlowMap';
 import { FlowMapFilter } from './FlowMapFilter';
 import { MapInfoPanel } from './MapInfoPanel';
 
-import './providers-support.scss';
-
-export interface FlowMapViewProps {
+export interface FlowMapViewProps extends TranslateProps {
   serviceUsage: any;
   selectedServiceProvider: any;
   infoPanelIsVisible: boolean;
@@ -28,6 +30,7 @@ export class FlowMapView extends React.Component<FlowMapViewProps, any> {
       selectServiceProvider,
       infoPanelIsVisible,
       showInfoPanel,
+      translate,
     } = this.props;
     return (
       <>
@@ -44,6 +47,7 @@ export class FlowMapView extends React.Component<FlowMapViewProps, any> {
             <MapInfoPanel
               onPanelClose={this.handleCloseClick}
               data={this.props.selectedServiceProvider}
+              translate={translate}
             />
           </div>
         }
