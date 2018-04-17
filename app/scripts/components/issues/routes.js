@@ -95,6 +95,18 @@ export default function issueRoutes($stateProvider) {
       }
     })
 
+    .state('support.users', {
+      url: 'users/',
+      template: '<user-list-view></user-list-view>',
+      data: {
+        pageTitle: gettext('Users'),
+        feature: 'support.users'
+      },
+      resolve: {
+        permission: checkPermission
+      }
+    })
+
     .state('support.flowmap', {
       url: 'flowmap/',
       template: '<flow-map-view></flow-map-view>',

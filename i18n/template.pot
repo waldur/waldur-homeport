@@ -1964,10 +1964,6 @@ msgstr ""
 msgid "Flavor name: {flavor_name}"
 msgstr ""
 
-#: app/scripts/components/analytics/VMTypeOverview.tsx
-msgid "Flavors"
-msgstr ""
-
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
 msgid "Flavors matching this regex expression will not be pulled from the backend."
 msgstr ""
@@ -2275,10 +2271,6 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "Image name"
-msgstr ""
-
-#: app/scripts/components/analytics/VMTypeOverview.tsx
-msgid "Images"
 msgstr ""
 
 #: app/scripts/components/resource-import/resource-import-dialog.html
@@ -6468,6 +6460,7 @@ msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscor
 msgstr ""
 
 #: app/scripts/components/customer/workspace/customer-team.html
+#: app/scripts/components/issues/routes.js
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/project/project-team.html
 msgid "Users"
