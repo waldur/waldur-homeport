@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import countries from './countries.geo.js';
 import { countryInfo } from './countryInfo';
+import HeatMapCalculator from './HeatMapCalculator';
 
 import './providers-support.scss';
 
@@ -11,77 +12,27 @@ interface HeatMapProps {
   zoom?: number;
   id: string;
   data: any;
+  countriesToRender: any[];
 }
 
 export default class HeatMap extends React.Component<HeatMapProps> {
   map = undefined;
+  heatMapCalculator = undefined;
 
-  getColor = diff => {
-    if (diff > 0) {
-      return '#1BBBE3';
-    } else if (diff < 0) {
-      return '#FF4233';
-    } else {
-      return '#FF4233';
-    }
+  constructor(props) {
+    super(props);
+    this.heatMapCalculator = new HeatMapCalculator();
   }
 
   setStyle = feature => {
     return {
-      fillColor: this.getColor(feature.properties.diff),
+      fillColor: this.heatMapCalculator.getColor(feature.properties.diff),
       weight: 2,
       opacity: 1,
       color: 'white',
       dashArray: '3',
       fillOpacity: 0.7,
     };
-  }
-
-  calculateTotalConsumerResources(data, country) {
-    return data.usage.reduce((total, entry) => {
-      const consumerUuid = entry.provider_to_consumer.consumer_uuid;
-      if (data.organizations[consumerUuid].country === country) {
-        total += entry.data.cpu;
-        total += entry.data.gpu;
-        total += entry.data.ram;
-      }
-      return total;
-    }, 0);
-  }
-
-  calculateTotalProviderResources(data, country) {
-    return data.usage.reduce((total, entry) => {
-      const providerUuid = entry.provider_to_consumer.provider_uuid;
-      if (data.organizations[providerUuid].country === country) {
-        total += entry.data.cpu;
-        total += entry.data.gpu;
-        total += entry.data.ram;
-      }
-      return total;
-    }, 0);
-  }
-
-  getTotalMetricsDiff = (data, country) => {
-    const totalProviderMetrics = this.calculateTotalProviderResources(data, country);
-    const totalConsumerMetrics = this.calculateTotalConsumerResources(data, country);
-    return totalProviderMetrics - totalConsumerMetrics;
-  }
-
-  getCountriesToRender(data) {
-    return Object.keys(data.service_providers).reduce((acc, providerUuid) => {
-      const countryOfProvider = data.organizations[providerUuid].country;
-      if (acc.indexOf(countryOfProvider) === -1) {
-        acc.push(countryOfProvider);
-      }
-      const countriesOfConsumers = data.service_providers[providerUuid];
-      countriesOfConsumers.map(consumerUuid => {
-        const countryOfConsumer = data.organizations[consumerUuid].country;
-        if (acc.indexOf(countryOfConsumer) === -1) {
-          acc.push(countryOfConsumer);
-        }
-      });
-      return acc;
-    }, []);
   }
 
   getDataForCountry(data, countryName) {
@@ -101,7 +52,7 @@ export default class HeatMap extends React.Component<HeatMapProps> {
 
   updateMap() {
     const { data } = this.props;
-    const nameOfCountries = this.getCountriesToRender(data);
+    const nameOfCountries = this.props.countriesToRender;
     const countriesToRender = [];
     nameOfCountries.map(countryName => {
       countries.features.map(country => {
@@ -110,7 +61,7 @@ export default class HeatMap extends React.Component<HeatMapProps> {
               ...country,
               properties: {
                 ...country.properties,
-                diff: this.getTotalMetricsDiff(data, countryName),
+                diff: this.heatMapCalculator.getTotalMetricsDiff(data, countryName),
                 data: this.getDataForCountry(data, countryName),
               },
             });

@@ -6,11 +6,12 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import { fetchServiceUsageStart } from './actions';
 import { FlowMapFilter } from './FlowMapFilter';
 import HeatMap from './HeatMap';
-import { selectServiceUsage } from './selectors';
+import { selectServiceUsage, selectCountriesToRender } from './selectors';
 
 interface HeatMapComponentProps {
   fetchServiceUsageStart: () => void;
   serviceUsage: any;
+  countriesToRender: any[];
 }
 
 class HeatMapComponent extends React.Component<HeatMapComponentProps> {
@@ -18,7 +19,7 @@ class HeatMapComponent extends React.Component<HeatMapComponentProps> {
     this.props.fetchServiceUsageStart();
   }
   render() {
-    const { serviceUsage } = this.props;
+    const { serviceUsage, countriesToRender } = this.props;
     return (
       <>
         <FlowMapFilter />
@@ -27,6 +28,7 @@ class HeatMapComponent extends React.Component<HeatMapComponentProps> {
           zoom={3}
           id="heat-map"
           data={serviceUsage}
+          countriesToRender={countriesToRender}
         />
       </>
     );
@@ -35,6 +37,7 @@ class HeatMapComponent extends React.Component<HeatMapComponentProps> {
 
 const mapStateToProps = state => ({
   serviceUsage: selectServiceUsage(state),
+  countriesToRender: selectCountriesToRender(state),
 });
 
 const mapDispatchToProps = dispatch => ({

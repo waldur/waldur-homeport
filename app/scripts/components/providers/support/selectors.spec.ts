@@ -1,5 +1,10 @@
 import { data } from './api';
-import { selectServiceProvider, selectServiceProviderConsumers } from './selectors';
+import {
+  selectServiceProvider,
+  selectServiceProviderConsumers,
+  selectCountriesToRender,
+  propertySelectorFactory,
+} from './selectors';
 
 const state = {
   serviceUsage: {
@@ -48,5 +53,22 @@ describe('Selectors', () => {
       },
     ];
     expect(selectServiceProviderConsumers(state)).toEqual(expected);
+  });
+
+  it('should return countries to render', () => {
+    const expected = [ 'Estonia', 'Iceland', 'Finland', 'Sweden', 'Denmark', 'Norway' ];
+    expect(selectCountriesToRender(state)).toEqual(expected);
+  });
+
+  it('it should create selector factory that creates selector for accumulation of properties(name or country) among organizations', () => {
+    const expected = [
+      {name: 'Estonia'},
+      {name: 'Iceland'},
+      {name: 'Finland'},
+      {name: 'Sweden'},
+      {name: 'Denmark'},
+      {name: 'Norway'},
+    ];
+    expect(propertySelectorFactory('country')(state)).toEqual(expected);
   });
 });
