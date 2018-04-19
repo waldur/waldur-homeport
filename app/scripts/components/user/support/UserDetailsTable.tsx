@@ -58,7 +58,7 @@ const PureUserDetailsTable = (props: UserDetailsTableProps) => (
       />
       <Row
         label={props.translate('Registration method')}
-        value={formatRegistrationMethod(props.user.registration_method)}
+        value={formatRegistrationMethod(props.user)}
       />
       <Row
         label={props.translate('Date joined')}
