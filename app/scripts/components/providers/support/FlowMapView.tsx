@@ -2,8 +2,6 @@ import * as React from 'react';
 
 import { TranslateProps } from '@waldur/i18n';
 
-import './flow-map.scss';
-
 import FlowMap from './FlowMap';
 import { FlowMapFilter } from './FlowMapFilter';
 import { MapInfoPanel } from './MapInfoPanel';

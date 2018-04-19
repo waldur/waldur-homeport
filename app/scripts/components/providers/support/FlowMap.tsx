@@ -1,10 +1,12 @@
 import { basemapLayer } from 'esri-leaflet';
 import * as React from 'react';
 
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+
 import loadLeafleat from '../../../shims/load-leaflet';
 import './CanvasFlowmapLayer';
 
-import './flow-map.scss';
+import './flowMap.scss';
 
 interface FlowMapProps {
   center?: number[];
@@ -31,17 +33,14 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     loadLeafleat().then(module => {
       this.leaflet = module.leaflet;
+      if (!this.state.map && this.mapNode) {
+        this.initMap(this.mapNode);
+      }
       this.forceUpdate();
     });
-  }
-
-  componentDidMount() {
-    if (!this.state.map && this.leaflet) {
-      this.initMap(this.mapNode);
-    }
   }
 
   initMap(node) {
@@ -65,7 +64,9 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
   }
 
   componentWillUnmount() {
-    this.state.map.remove();
+    if (this.state.map) {
+      this.state.map.remove();
+    }
   }
 
   shouldComponentUpdate(nextProps) {
@@ -80,7 +81,6 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
     features: data.usage.reduce((features, entry) => {
       const provider_uuid = entry.provider_to_consumer.provider_uuid;
       const consumer_uuid = entry.provider_to_consumer.consumer_uuid;
-      // if (!data.service_providers[consumer_uuid]) {
       features.push({
         type: 'Feature',
         geometry: {
@@ -99,7 +99,6 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
           consumer_name: data.organizations[consumer_uuid].name,
         },
       });
-      // }
       return features;
     }, []),
   })
@@ -171,6 +170,9 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
   }
 
   render() {
+    if (!this.leaflet) {
+      return  <LoadingSpinner />;
+    }
     return (<div ref={node => this.mapNode = node} id="usage-map" />);
   }
 }
