@@ -24,7 +24,7 @@ interface FlowMapViewComponentProps extends TranslateProps {
   selectedServiceProvider: any;
   infoPanelIsVisible: boolean;
   fetchServiceUsageStart: () => void;
-  selectServiceProvider: () => void;
+  serviceProviderSelect: () => void;
   showInfoPanel: () => void;
   hideInfoPanel: () => void;
 }
@@ -49,12 +49,12 @@ const mapStateToProps = state => ({
   infoPanelIsVisible: selectInfoPanelStatus(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchServiceUsageStart: () => dispatch(fetchServiceUsageStart()),
-  selectServiceProvider: (uuid: string) => dispatch(serviceProviderSelect(uuid)),
-  showInfoPanel: () => dispatch(showInfoPanel()),
-  hideInfoPanel: () => dispatch(hideInfoPanel()),
-});
+const mapDispatchToProps = {
+  fetchServiceUsageStart,
+  serviceProviderSelect,
+  showInfoPanel,
+  hideInfoPanel,
+};
 
 const enhance = compose(
   withTranslation,

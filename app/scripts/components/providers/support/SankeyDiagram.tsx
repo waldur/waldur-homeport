@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 
 import loadEcharts from '../../../shims/load-echarts';
-import './sankeyDiagram.scss';
+import './SankeyDiagram.scss';
 
 interface SankeyDiagramProps {
   data: any;

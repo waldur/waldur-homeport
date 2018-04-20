@@ -10,7 +10,7 @@ export interface FlowMapViewProps extends TranslateProps {
   serviceUsage: any;
   selectedServiceProvider: any;
   infoPanelIsVisible: boolean;
-  selectServiceProvider: () => void;
+  serviceProviderSelect: () => void;
   showInfoPanel: () => void;
   hideInfoPanel: () => void;
 }
@@ -25,7 +25,7 @@ export class FlowMapView extends React.Component<FlowMapViewProps, any> {
   render() {
     const {
       serviceUsage,
-      selectServiceProvider,
+      serviceProviderSelect,
       infoPanelIsVisible,
       showInfoPanel,
       translate,
@@ -37,7 +37,7 @@ export class FlowMapView extends React.Component<FlowMapViewProps, any> {
           center={[0, 0]}
           zoom={5}
           data={serviceUsage}
-          selectServiceProvider={selectServiceProvider}
+          selectServiceProvider={serviceProviderSelect}
           showInfoPanel={showInfoPanel}
         />
         {infoPanelIsVisible &&

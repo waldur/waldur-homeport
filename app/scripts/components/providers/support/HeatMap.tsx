@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import countries from './countries.geo.js';
 import { countryInfo } from './countryInfo';
-import './heatMap.scss';
+import './HeatMap.scss';
 import HeatMapCalculator from './HeatMapCalculator';
 
 interface HeatMapProps {

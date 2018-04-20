@@ -6,7 +6,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import loadLeafleat from '../../../shims/load-leaflet';
 import './CanvasFlowmapLayer';
 
-import './flowMap.scss';
+import './FlowMap.scss';
 
 interface FlowMapProps {
   center?: number[];
