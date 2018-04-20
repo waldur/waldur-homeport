@@ -1,4 +1,4 @@
-#usage-map {
+#flow-map {
   position: absolute;
   top: 270px;
   bottom: 0;
@@ -6,7 +6,7 @@
   right: 0;
 }
 
-#usage-map-panel {
+#flow-map-panel {
   position: absolute;
   right: 10px;
   bottom: 10px;
@@ -20,7 +20,7 @@
   overflow-y: auto;
 }
 
-#usage-map-panel {
+#flow-map-panel {
   .ibox-content {
     padding-bottom: 1px;
   }
@@ -29,7 +29,7 @@
   }
 }
 
-#usage-filter-title {
+#flow-map-filter-title {
   display: inline;
   margin-right: 30px; 
 }

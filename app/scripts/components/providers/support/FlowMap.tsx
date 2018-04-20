@@ -16,27 +16,16 @@ interface FlowMapProps {
   showInfoPanel: () => void;
 }
 
-interface FlowMapState {
-  map: any;
-  oneToManyFlowmapLayer: any;
-}
-
-export default class FlowMap extends React.Component<FlowMapProps, FlowMapState> {
+export default class FlowMap extends React.Component<FlowMapProps> {
   mapNode = undefined;
   leaflet = undefined;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      map: null,
-      oneToManyFlowmapLayer: null,
-    };
-  }
+  map = undefined;
+  oneToManyFlowmapLayer = undefined;
 
   componentDidMount() {
     loadLeafleat().then(module => {
       this.leaflet = module.leaflet;
-      if (!this.state.map && this.mapNode) {
+      if (this.mapNode) {
         this.initMap(this.mapNode);
       }
       this.forceUpdate();
@@ -44,28 +33,27 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
   }
 
   initMap(node) {
-    if (this.state.map) {
-      return;
-    }
-    const map = this.leaflet.map(node);
+    this.map = this.leaflet.map(node);
     const { center, zoom } = this.props;
-    map.setView(center, zoom);
-    basemapLayer('Gray').addTo(map);
-    this.setState({map}, this.updateMap);
+    this.map.setView(center, zoom);
+    basemapLayer('Gray').addTo(this.map);
+    this.updateMap();
   }
 
   componentDidUpdate() {
-    if (!this.state.map && this.leaflet) {
+    if (this.leaflet) {
+      if (!this.map) {
       this.initMap(this.mapNode);
     }
-    if (this.state.map && this.leaflet) {
+      if (this.map) {
       this.updateMap();
     }
   }
+  }
 
   componentWillUnmount() {
-    if (this.state.map) {
-      this.state.map.remove();
+    if (this.map) {
+      this.map.remove();
     }
   }
 
@@ -131,7 +119,7 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
     if (e.sharedOriginFeatures.length) {
       this.props.selectServiceProvider(e.layer.feature.properties.provider_uuid);
       this.props.showInfoPanel();
-      this.state.oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
+      this.oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
     }
     if (e.sharedDestinationFeatures.length) {
       const content = e.layer.feature.properties.consumer_name;
@@ -158,14 +146,11 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
     const { center, data } = this.props;
     const bounds = this.extendViewport(data, center);
     const geoJsonFeatureCollection = this.composeFeatureCollection(data);
-    this.setState({
-      oneToManyFlowmapLayer: this.setFlowmapLayer(geoJsonFeatureCollection),
-    }, () => {
-      this.state.oneToManyFlowmapLayer.addTo(this.state.map);
-      this.state.oneToManyFlowmapLayer.on('click', this.flowmapLaterClickHandler);
-    });
+    this.oneToManyFlowmapLayer = this.setFlowmapLayer(geoJsonFeatureCollection);
+    this.oneToManyFlowmapLayer.addTo(this.map);
+    this.oneToManyFlowmapLayer.on('click', this.flowmapLaterClickHandler);
     if (bounds) {
-      this.state.map.fitBounds(bounds);
+      this.map.fitBounds(bounds);
     }
   }
 
@@ -173,6 +158,6 @@ export default class FlowMap extends React.Component<FlowMapProps, FlowMapState>
     if (!this.leaflet) {
       return  <LoadingSpinner />;
     }
-    return (<div ref={node => this.mapNode = node} id="usage-map" />);
+    return (<div ref={node => this.mapNode = node} id="flow-map" />);
   }
 }

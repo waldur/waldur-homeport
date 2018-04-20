@@ -41,7 +41,7 @@ export class FlowMapView extends React.Component<FlowMapViewProps, any> {
           showInfoPanel={showInfoPanel}
         />
         {infoPanelIsVisible &&
-          <div id="usage-map-panel">
+          <div id="flow-map-panel">
             <MapInfoPanel
               onPanelClose={this.handleCloseClick}
               data={this.props.selectedServiceProvider}
