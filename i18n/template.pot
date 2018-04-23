@@ -431,6 +431,10 @@ msgstr ""
 msgid "Apply filters"
 msgstr ""
 
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Apply filters:"
+msgstr ""
+
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 msgid "Apply or rerun JupyterHub configuration"
 msgstr ""
@@ -1981,6 +1985,11 @@ msgstr ""
 msgid "Floating IPs"
 msgstr ""
 
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Flowmap"
+msgstr ""
+
 #: app/scripts/components/form/appstore-form-wizard.html
 msgid "Following fields contain errors"
 msgstr ""
@@ -2100,6 +2109,11 @@ msgstr ""
 
 #: app/scripts/components/navigation/header/intro-button.html
 msgid "Guide me"
+msgstr ""
+
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Heatmap"
 msgstr ""
 
 #: app/scripts/components/help/routes.js
@@ -2917,6 +2931,10 @@ msgstr ""
 msgid "Method"
 msgstr ""
 
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Metric"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "Min RAM"
 msgstr ""
@@ -2961,6 +2979,10 @@ msgstr ""
 
 #: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
 msgid "Monitoring system is being updated."
+msgstr ""
+
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Month"
 msgstr ""
 
 #: app/scripts/components/quotas/constants.js
@@ -4259,6 +4281,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/jira/project/jira-projects-list.js
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
@@ -4952,6 +4975,11 @@ msgstr ""
 msgid "SUBMITTED"
 msgstr ""
 
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Sankey diagram"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/project/project-providers.html
 #: app/scripts/components/providers/ProviderUpdateForm.tsx
@@ -5201,6 +5229,10 @@ msgstr ""
 msgid "Service name"
 msgstr ""
 
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Service provider type"
+msgstr ""
+
 #: app/scripts/components/resource/state/utils.ts
 msgid "Service settings of this resource are in state erred."
 msgstr ""
@@ -5271,8 +5303,16 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Show private"
+msgstr ""
+
 #: app/scripts/components/offering/OfferingReportButton.tsx
 msgid "Show report"
+msgstr ""
+
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Show shared"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
@@ -6231,8 +6271,16 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Usage overview"
+msgstr ""
+
 #: app/scripts/components/slurm/SlurmForm.tsx
 msgid "Use sudo"
+msgstr ""
+
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
+msgid "Used in the period"
 msgstr ""
 
 #: app/scripts/components/events/EventDetailsTable.tsx
@@ -6864,6 +6912,10 @@ msgstr ""
 msgid "browse"
 msgstr ""
 
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
+msgid "by"
+msgstr ""
+
 #: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "commented on"
 msgstr ""
@@ -6899,6 +6951,10 @@ msgstr ""
 #: app/scripts/components/freeipa/freeipa-account-edit.html
 #: app/scripts/components/user/support/TermsOfService.tsx
 msgid "have been accepted on"
+msgstr ""
+
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
+msgid "hours"
 msgstr ""
 
 #: app/scripts/components/table-react/TablePlaceholder.tsx

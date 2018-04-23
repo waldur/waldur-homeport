@@ -105,5 +105,41 @@ export default function issueRoutes($stateProvider) {
       resolve: {
         permission: checkPermission
       }
+    })
+
+    .state('support.flowmap', {
+      url: 'flowmap/',
+      template: '<flow-map-view></flow-map-view>',
+      data: {
+        pageTitle: gettext('Flowmap'),
+        feature: 'support.flowmap'
+      },
+      resolve: {
+        permission: checkPermission
+      }
+    })
+
+    .state('support.heatmap', {
+      url: 'heatmap/',
+      template: '<heat-map></heat-map>',
+      data: {
+        pageTitle: gettext('Heatmap'),
+        feature: 'support.heatmap'
+      },
+      resolve: {
+        permission: checkPermission
+      }
+    })
+
+    .state('support.sankey-diagram', {
+      url: 'sankey-diagram/',
+      template: '<sankey-diagram></sankey-diagram>',
+      data: {
+        pageTitle: gettext('Sankey diagram'),
+        feature: 'support.sankey-diagram'
+      },
+      resolve: {
+        permission: checkPermission
+      }
     });
 }

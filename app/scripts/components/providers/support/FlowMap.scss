@@ -1,0 +1,40 @@
+#flow-map {
+  position: absolute;
+  top: 270px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#flow-map-panel {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  opacity: 0.85;
+  z-index: 1000;
+  border-top: 3px solid #23c6c8;
+  border-bottom: 3px solid #23c6c8;
+  max-width: 250px;
+  max-height: 440px;
+  min-width: 250px;
+  overflow-y: auto;
+}
+
+#flow-map-panel {
+  .ibox-content {
+    padding-bottom: 1px;
+  }
+  .ibox {
+    margin-bottom: 0;
+  }
+}
+
+#flow-map-filter-title {
+  display: inline;
+  margin-right: 30px; 
+}
+
+#flow-map-form {
+  z-index: 1000;
+}
+

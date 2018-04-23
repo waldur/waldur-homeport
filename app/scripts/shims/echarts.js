@@ -7,4 +7,7 @@ import 'echarts/lib/chart/treemap';
 // include tooltip component
 import 'echarts/lib/component/tooltip';
 
+// include sankey-diagram component
+import 'echarts/lib/chart/sankey';
+
 export default echarts;

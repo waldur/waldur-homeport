@@ -43,7 +43,33 @@ const REPORT_ITEMS = [
     icon: 'fa-university',
     link: 'support.organizations',
     feature: 'support.organizations'
-  }
+  },
+  {
+    label: gettext('Usage overview'),
+    icon: 'fa-map',
+    link: 'support.usage',
+    feature: 'support.usage',
+    children: [
+      {
+        label: gettext('Flowmap'),
+        icon: 'fa-sitemap',
+        link: 'support.flowmap',
+        feature: 'support.flowmap',
+      },
+      {
+        label: gettext('Heatmap'),
+        icon: 'fa-fire',
+        link: 'support.heatmap',
+        feature: 'support.heatmap',
+      },
+      {
+        label: gettext('Sankey diagram'),
+        icon: 'fa-code-fork',
+        link: 'support.sankey-diagram',
+        feature: 'support.sankey-diagram',
+      }
+    ]
+  },
 ];
 
 // This service checks users status and returns different sidebar items and router state
