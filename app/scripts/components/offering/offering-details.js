@@ -38,7 +38,8 @@ const offeringDetails = {
             this.currentStateService.setCustomer(customer);
             return { customer, project };
           });
-        }).then(({ customer, project }) => {
+        })
+        .then(({ customer, project }) => {
           this.WorkspaceService.setWorkspace({
             customer: customer,
             project: project,
@@ -46,6 +47,9 @@ const offeringDetails = {
             workspace: WOKSPACE_NAMES.project,
           });
         })
+        .then(() => this.offeringsService.getConfiguration().then(configs => {
+          this.offeringConfig = configs[this.offering.type];
+        }))
         .then(() => this.refreshBreadcrumbs())
         .catch(() => {
           this.$state.go('errorPage.notFound');

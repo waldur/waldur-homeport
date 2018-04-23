@@ -3,7 +3,8 @@ import template from './offering-summary.html';
 const offeringSummary = {
   template,
   bindings: {
-    offering: '<'
+    offering: '<',
+    offeringConfig: '<',
   },
   controller: class {
     // @ngInject
