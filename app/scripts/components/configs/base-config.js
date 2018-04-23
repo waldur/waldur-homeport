@@ -134,6 +134,8 @@ const ENV = {
     'SLURM.Allocation': 'slurm',
     'JIRA.Project': 'jiraProject',
     'JIRA.Issue': 'jiraProject',
+    'Rijkscloud.Instance': 'vms',
+    'Rijkscloud.Volume': 'storages',
   },
   showCompare: [
     'Virtual machines'
