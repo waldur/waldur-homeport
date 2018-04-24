@@ -1,5 +1,3 @@
-import { ENV } from '@waldur/core/services';
-
 const InstanceCreateConfig = {
   order: [
     'name',
