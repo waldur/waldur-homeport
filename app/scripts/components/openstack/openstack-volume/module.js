@@ -5,8 +5,6 @@ import openstackVolumeCheckoutSummary from './openstack-volume-checkout-summary'
 import openstackVolumesService from './openstack-volumes-service';
 import openstackInstanceVolumes from './openstack-instance-volumes';
 import openstackVolumeSnapshots from './openstack-volume-snapshots';
-import openstackVolumesList from './openstack-volumes-list';
-import importVolumes from './import/module';
 import { OpenStackVolumeSummary } from './OpenStackVolumeSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { latinName } from '@waldur/resource/actions/constants';
@@ -19,14 +17,11 @@ export default module => {
   module.component('openstackVolumeCheckoutSummary', openstackVolumeCheckoutSummary);
   module.component('openstackInstanceVolumes', openstackInstanceVolumes);
   module.component('openstackVolumeSnapshots', openstackVolumeSnapshots);
-  module.component('openstackVolumesList', openstackVolumesList);
 
   module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(stateConfig);
   module.config(tabsConfig);
-
-  importVolumes(module);
 };
 
 // @ngInject

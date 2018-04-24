@@ -11,15 +11,16 @@ export default importVolumesList;
 
 // @ngInject
 function ImportVolumesListController(
-  baseControllerListClass, importVolumesService, $scope, $state, $filter, ncUtils) {
+  baseControllerListClass, importResourcesService, $scope, $state, $filter, ncUtils, ENV) {
   let controllerScope = this;
   let controllerClass = baseControllerListClass.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this.service = importVolumesService;
+      this.service = importResourcesService;
       this.$filter = $filter;
       this.$state = $state;
       this.ncUtils = ncUtils;
+      this.service.setEndpoint(ENV.resourcesTypes.volumes, controllerScope.provider);
       $scope.$on('providerChanged', (event, args) => this.changeProvider(args.data));
       this.tableOptions = this.getTableOptions();
       this.selectedItems = [];
@@ -28,6 +29,7 @@ function ImportVolumesListController(
     changeProvider: function(provider) {
       this.initialized = false;
       controllerScope.provider = provider;
+      this.service.setEndpoint(ENV.resourcesTypes.volumes, provider);
       this.resetCache().then(() => this.initialized = true);
     },
     getTableOptions: function() {

@@ -43,6 +43,10 @@ msgstr ""
 msgid "API URL"
 msgstr ""
 
+#: app/scripts/components/rijkscloud/ProviderForm.tsx
+msgid "API key"
+msgstr ""
+
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "API token lifetime"
 msgstr ""
@@ -257,7 +261,7 @@ msgstr ""
 msgid "Add virtual machine"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js
+#: app/scripts/components/resource/list/resource-volumes-list.js
 msgid "Add volumes"
 msgstr ""
 
@@ -268,6 +272,7 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
@@ -500,7 +505,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js
+#: app/scripts/components/resource/list/resource-volumes-list.js
 msgid "Attached to"
 msgstr ""
 
@@ -720,8 +725,8 @@ msgstr ""
 msgid "Block volume count"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
+#: app/scripts/components/resource-import/import-volumes-list.js
 msgid "Bootable"
 msgstr ""
 
@@ -1422,6 +1427,7 @@ msgstr ""
 #: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/resource/actions/constants.js
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
+#: app/scripts/components/rijkscloud/VolumeCreateConfig.js
 #: app/scripts/components/slurm/slurm-allocation-config.js
 #: app/scripts/components/slurm/slurm-allocation-list.js
 #: app/scripts/components/user/support/UserEditForm.tsx
@@ -1949,6 +1955,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
 msgstr ""
 
@@ -1957,6 +1964,7 @@ msgid "Flavor exclude regex"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
 msgstr ""
 
@@ -1973,6 +1981,7 @@ msgid "Flexible"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Floating IP"
 msgstr ""
 
@@ -2216,6 +2225,7 @@ msgid "ID code"
 msgstr ""
 
 #: app/scripts/components/events/EventDetailsTable.tsx
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "IP address"
 msgstr ""
 
@@ -2302,7 +2312,7 @@ msgstr ""
 msgid "Import virtual machine"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/import/register-import-table-action.js
+#: app/scripts/components/resource-import/register-import-volume-table-action.js
 msgid "Import volume"
 msgstr ""
 
@@ -2432,6 +2442,7 @@ msgstr ""
 
 #: app/scripts/components/resource/list/resource-vms-list.js
 #: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Internal IP"
 msgstr ""
 
@@ -3031,7 +3042,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js
-#: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
 #: app/scripts/components/project/ProjectDetails.tsx
 #: app/scripts/components/project/projects-list.js
@@ -3039,10 +3049,12 @@ msgstr ""
 #: app/scripts/components/providers/provider-list.js
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
+#: app/scripts/components/resource-import/import-volumes-list.js
 #: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/resource/actions/constants.js
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/resource/list/resources-list.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "Name"
 msgstr ""
@@ -3394,11 +3406,11 @@ msgid "No virtual machines to import."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js
+#: app/scripts/components/resource/list/resource-volumes-list.js
 msgid "No volumes found matching filter."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js
+#: app/scripts/components/resource-import/import-volumes-list.js
 msgid "No volumes to import."
 msgstr ""
 
@@ -4449,6 +4461,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "RAM"
@@ -5344,11 +5357,12 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: app/scripts/components/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
+#: app/scripts/components/resource-import/import-volumes-list.js
+#: app/scripts/components/resource/list/resource-volumes-list.js
+#: app/scripts/components/rijkscloud/VolumeSummary.tsx
 msgid "Size"
 msgstr ""
 
@@ -5594,6 +5608,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/actions.js
 #: app/scripts/components/openstack/openstack-volume/module.js
 #: app/scripts/components/resource/actions/base.ts
+#: app/scripts/components/rijkscloud/module.js
 #: app/scripts/components/slurm/actions.js
 msgid "Synchronise"
 msgstr ""
@@ -5850,6 +5865,7 @@ msgstr ""
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 #: app/scripts/components/project/ProjectNameField.tsx
+#: app/scripts/components/rijkscloud/VolumeCreateConfig.js
 #: app/scripts/components/slurm/slurm-allocation-config.js
 msgid "This name will be visible in accounting data."
 msgstr ""
@@ -6289,6 +6305,10 @@ msgstr ""
 msgid "User"
 msgstr ""
 
+#: app/scripts/components/rijkscloud/ProviderForm.tsx
+msgid "User ID"
+msgstr ""
+
 #: app/scripts/components/user/support/effects.ts
 msgid "User could not been updated"
 msgstr ""
@@ -6301,6 +6321,7 @@ msgstr ""
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "User data"
 msgstr ""
 
@@ -6486,6 +6507,7 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "VM name"
 msgstr ""
 
@@ -6625,13 +6647,19 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
+#: app/scripts/components/rijkscloud/VolumeCreateConfig.js
 msgid "Volume name"
+msgstr ""
+
+#: app/scripts/components/rijkscloud/VolumeCreateConfig.js
+msgid "Volume size"
 msgstr ""
 
 #: app/scripts/components/dashboard/base-quotas.ts
 msgid "Volume size, GB"
 msgstr ""
 
+#: app/scripts/components/configs/base-config.js
 #: app/scripts/components/openstack/openstack-instance/module.js
 #: app/scripts/components/resource/list/resource-storage-tabs.html
 msgid "Volumes"
@@ -6819,7 +6847,7 @@ msgid "You have no virtual machines yet."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js
+#: app/scripts/components/resource/list/resource-volumes-list.js
 msgid "You have no volumes yet."
 msgstr ""
 
@@ -7016,6 +7044,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "vCPU"
 msgstr ""
 
