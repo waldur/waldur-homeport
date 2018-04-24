@@ -54,6 +54,7 @@ import storeModule from './components/store/module';
 import jiraModule from './components/jira/module';
 import workspaceModule from './components/workspace/module';
 import formReactModule from './components/form-react/module';
+import rijkscloudModule from './components/rijkscloud/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -128,6 +129,7 @@ paypalModule(appModule);
 storeModule(appModule);
 jiraModule(appModule);
 workspaceModule(appModule);
+rijkscloudModule(appModule);
 appModule.config(analyticsRoutes);
 
 function requirePlugins(module) {

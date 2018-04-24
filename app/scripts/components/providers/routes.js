@@ -8,7 +8,7 @@ function validateProviderCreation($q, $state, currentStateService, ENV, usersSer
       return $state.go('invalidRoutePage');
     }
 
-    if (ncUtils.isCustomerQuotaReached(customer, 'service')) {
+    if (customer && ncUtils.isCustomerQuotaReached(customer, 'service')) {
       return $state.go('errorPage.limitQuota');
     }
   });

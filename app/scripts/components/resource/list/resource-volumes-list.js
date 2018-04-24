@@ -1,4 +1,4 @@
-const openstackVolumesList = {
+const resourceVolumesList = {
   controller: VolumesListController,
   controllerAs: 'ListController',
   templateUrl: 'views/partials/filtered-list.html',
@@ -7,7 +7,7 @@ const openstackVolumesList = {
   }
 };
 
-export default openstackVolumesList;
+export default resourceVolumesList;
 
 // @ngInject
 function VolumesListController(
@@ -23,7 +23,7 @@ function VolumesListController(
   let controllerScope = this;
   let ResourceController = BaseProjectResourcesTabController.extend({
     init:function() {
-      this.category = ENV.Storages;
+      this.category = ENV.Volumes;
       this.controllerScope = controllerScope;
       this._super();
       this.addRowFields(['size', 'instance', 'instance_name']);
@@ -32,11 +32,6 @@ function VolumesListController(
           controllerScope.resetCache();
         });
       });
-    },
-    getFilter: function() {
-      return {
-        resource_type: 'OpenStackTenant.Volume'
-      };
     },
     getTableOptions: function() {
       let options = this._super();
@@ -73,7 +68,7 @@ function VolumesListController(
       return options;
     },
     getTableActions: function() {
-      let actions = TableExtensionService.getTableActions('openstack-volumes-list');
+      let actions = TableExtensionService.getTableActions('resource-volumes-list');
       if (this.category !== undefined) {
         actions.push(this.getCreateAction());
       }

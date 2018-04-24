@@ -7,9 +7,6 @@ export default function importResourcesService(
   ENV,
   ImportResourcesEndpointRegistry) {
   let ServiceClass = baseServiceClass.extend({
-    init: function() {
-      this._super();
-    },
     setEndpoint(category, provider) {
       this.baseEndpoint = ImportResourcesEndpointRegistry.getEndpoint(category, provider.type);
       this.endpoint = `/${this.baseEndpoint}/importable_resources/`;

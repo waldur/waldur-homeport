@@ -14,6 +14,10 @@ export interface BaseResource {
   runtime_state: string;
 }
 
+export interface Volume extends BaseResource {
+  size: number;
+}
+
 export interface VirtualMachine extends BaseResource {
   cores: number;
   disk: number;
