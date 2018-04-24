@@ -1,3 +1,5 @@
+import { ENV } from '@waldur/core/services';
+
 const InstanceCreateConfig = {
   order: [
     'name',
@@ -35,32 +37,36 @@ const InstanceCreateConfig = {
       formatter: flavorFormatter
     },
     internal_ip: {
-      type: 'list',
+      type: 'select',
       label: gettext('Internal IP'),
-      columns: [
-        {
-          name: 'name',
-          label: gettext('Name')
-        },
-        {
-          name: 'address',
-          label: gettext('IP address')
+      parser: item => ({
+        value: item.url,
+        display_name: item.address
+      }),
+      serializer: item => item.value,
+      resource: context => ({
+        endpoint: 'rijkscloud-internal-ips',
+        params: {
+          settings_uuid: context.settings_uuid,
+          is_available: true,
         }
-      ],
+      }),
     },
     floating_ip: {
-      type: 'list',
+      type: 'select',
       label: gettext('Floating IP'),
-      columns: [
-        {
-          name: 'name',
-          label: gettext('Name')
-        },
-        {
-          name: 'address',
-          label: gettext('IP address')
+      parser: item => ({
+        value: item.url,
+        display_name: item.address
+      }),
+      serializer: item => item.value,
+      resource: context => ({
+        endpoint: 'rijkscloud-floating-ips',
+        params: {
+          settings_uuid: context.settings_uuid,
+          is_available: true,
         }
-      ],
+      }),
     },
     user_data: {
       type: 'text',
