@@ -7,6 +7,7 @@ const appstoreProviders = {
     onSelect: '&',
     headerTitle: '@',
     collapsible: '<',
+    detailsHidden: '<',
   },
   controller: class AppstoreProvidersController {
     // @ngInject
