@@ -1249,6 +1249,10 @@ msgstr ""
 msgid "Created a new payment for {customer_name}."
 msgstr ""
 
+#: app/scripts/components/paypal/events.ts
+msgid "Created a new payment for {customer}."
+msgstr ""
+
 #: app/scripts/components/invitations/invitations-list.js
 msgid "Created at"
 msgstr ""
@@ -1799,6 +1803,18 @@ msgstr ""
 
 #: app/scripts/components/events/constants.ts
 msgid "Expert request \"{expert_request_name}\"\" has been cancelled."
+msgstr ""
+
+#: app/scripts/components/experts/events.ts
+msgid "Expert request \"{request}\" has been activated."
+msgstr ""
+
+#: app/scripts/components/experts/events.ts
+msgid "Expert request \"{request}\" has been cancelled."
+msgstr ""
+
+#: app/scripts/components/experts/events.ts
+msgid "Expert request \"{request}\" has been completed."
 msgstr ""
 
 #: app/scripts/components/experts/requests/create/expert-request-create.js
@@ -2555,6 +2571,18 @@ msgstr ""
 msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been updated."
 msgstr ""
 
+#: app/scripts/components/billing/events.ts
+msgid "Invoice for organization {customer} for the period of {period} has been created."
+msgstr ""
+
+#: app/scripts/components/billing/events.ts
+msgid "Invoice for organization {customer} for the period of {period} has been deleted."
+msgstr ""
+
+#: app/scripts/components/billing/events.ts
+msgid "Invoice for organization {customer} for the period of {period} has been updated."
+msgstr ""
+
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
@@ -2608,6 +2636,10 @@ msgstr ""
 
 #: app/scripts/components/events/constants.ts
 msgid "Issue {issue_key} has been created by {caller_full_name}."
+msgstr ""
+
+#: app/scripts/components/issues/events.ts
+msgid "Issue {issue} has been created by {caller}."
 msgstr ""
 
 #: app/scripts/components/customer/routes.js
@@ -3685,6 +3717,18 @@ msgstr ""
 msgid "Organization {customer_name} has no providers."
 msgstr ""
 
+#: app/scripts/components/customer/events.ts
+msgid "Organization {customer} has been created."
+msgstr ""
+
+#: app/scripts/components/customer/events.ts
+msgid "Organization {customer} has been deleted."
+msgstr ""
+
+#: app/scripts/components/customer/events.ts
+msgid "Organization {customer} has been updated."
+msgstr ""
+
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "Organizations"
 msgstr ""
@@ -3771,6 +3815,10 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: app/scripts/components/user/events.ts
+msgid "Password has been changed for user {affectedUser}."
+msgstr ""
+
 #: app/scripts/components/events/constants.ts
 msgid "Password has been changed for user {affected_user_full_name}."
 msgstr ""
@@ -3789,6 +3837,14 @@ msgstr ""
 
 #: app/scripts/components/events/constants.ts
 msgid "Payment for {customer_name} has been cancelled."
+msgstr ""
+
+#: app/scripts/components/paypal/events.ts
+msgid "Payment for {customer} has been approved."
+msgstr ""
+
+#: app/scripts/components/paypal/events.ts
+msgid "Payment for {customer} has been cancelled."
 msgstr ""
 
 #: app/scripts/components/payments/payment-approve.js
@@ -4171,6 +4227,10 @@ msgstr ""
 msgid "Project has been renamed from {project_previous_name} to {project_name}."
 msgstr ""
 
+#: app/scripts/components/project/events.ts
+msgid "Project has been renamed from {project_previous_name} to {project}."
+msgstr ""
+
 #: app/scripts/components/project/effects.ts
 msgid "Project has been updated."
 msgstr ""
@@ -4236,6 +4296,18 @@ msgstr ""
 
 #: app/scripts/components/events/constants.ts
 msgid "Project {project_name} has been updated."
+msgstr ""
+
+#: app/scripts/components/project/events.ts
+msgid "Project {project} has been created."
+msgstr ""
+
+#: app/scripts/components/project/events.ts
+msgid "Project {project} has been deleted."
+msgstr ""
+
+#: app/scripts/components/project/events.ts
+msgid "Project {project} has been updated."
 msgstr ""
 
 #: app/scripts/components/appstore/dialog/appstore-project-selector.html
@@ -4964,8 +5036,16 @@ msgstr ""
 msgid "SSH key {ssh_key_name} has been created for user {user_full_name} with username {user_username}."
 msgstr ""
 
+#: app/scripts/components/user/events.ts
+msgid "SSH key {ssh_key_name} has been created for user {user}."
+msgstr ""
+
 #: app/scripts/components/events/constants.ts
 msgid "SSH key {ssh_key_name} has been deleted for user {user_full_name} with username {user_username}."
+msgstr ""
+
+#: app/scripts/components/user/events.ts
+msgid "SSH key {ssh_key_name} has been deleted for user {user}."
 msgstr ""
 
 #: app/scripts/components/user/routes.js
@@ -6352,6 +6432,26 @@ msgstr ""
 msgid "User status"
 msgstr ""
 
+#: app/scripts/components/user/events.ts
+msgid "User {affectedUser} has been activated."
+msgstr ""
+
+#: app/scripts/components/user/events.ts
+msgid "User {affectedUser} has been created."
+msgstr ""
+
+#: app/scripts/components/user/events.ts
+msgid "User {affectedUser} has been deactivated."
+msgstr ""
+
+#: app/scripts/components/user/events.ts
+msgid "User {affectedUser} has been deleted."
+msgstr ""
+
+#: app/scripts/components/user/events.ts
+msgid "User {affectedUser} has been updated."
+msgstr ""
+
 #: app/scripts/components/events/constants.ts
 msgid "User {affected_user_full_name} claim for organization {affected_organization} has been rejected."
 msgstr ""
@@ -6400,36 +6500,8 @@ msgstr ""
 msgid "User {caller_full_name} has created request for experts under {customer_name} / {project_name}."
 msgstr ""
 
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has granted organization owner role in {customer_name} to {affected_user_username}."
-msgstr ""
-
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has granted organization support role in {customer_name} to {affected_user_username}."
-msgstr ""
-
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has granted project administrator role in project {project_name} to {affected_user_username}."
-msgstr ""
-
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has granted project manager role in project {project_name} to {affected_user_username}."
-msgstr ""
-
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has revoked organization owner {affected_user_username} from {customer_name}."
-msgstr ""
-
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has revoked organization support {affected_user_username} from {customer_name}."
-msgstr ""
-
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has revoked project administrator {affected_user_username} from project {project_name}."
-msgstr ""
-
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has revoked project manager {affected_user_username} from project {project_name}."
+#: app/scripts/components/experts/events.ts
+msgid "User {caller} has created request for experts under {customer} / {project}."
 msgstr ""
 
 #: app/scripts/components/events/constants.ts
@@ -6450,6 +6522,58 @@ msgstr ""
 
 #: app/scripts/components/events/constants.ts
 msgid "User {user_username} with full name {user_full_name} authenticated successfully with username and password."
+msgstr ""
+
+#: app/scripts/components/auth/events.ts
+msgid "User {user} authenticated successfully with Facebook."
+msgstr ""
+
+#: app/scripts/components/auth/events.ts
+msgid "User {user} authenticated successfully with Google."
+msgstr ""
+
+#: app/scripts/components/auth/events.ts
+msgid "User {user} authenticated successfully with OpenID."
+msgstr ""
+
+#: app/scripts/components/auth/events.ts
+msgid "User {user} authenticated successfully with Smart ID EE."
+msgstr ""
+
+#: app/scripts/components/auth/events.ts
+msgid "User {user} authenticated successfully with username and password."
+msgstr ""
+
+#: app/scripts/components/team/events.ts
+msgid "User {user} has granted organization owner role in {customer} to {affectedUser}."
+msgstr ""
+
+#: app/scripts/components/team/events.ts
+msgid "User {user} has granted organization support role in {customer} to {affectedUser}."
+msgstr ""
+
+#: app/scripts/components/team/events.ts
+msgid "User {user} has granted project administrator role in project {project} to {affectedUser}."
+msgstr ""
+
+#: app/scripts/components/team/events.ts
+msgid "User {user} has granted project manager role in project {project} to {affectedUser}."
+msgstr ""
+
+#: app/scripts/components/team/events.ts
+msgid "User {user} has revoked organization owner {affectedUser} from {customer}."
+msgstr ""
+
+#: app/scripts/components/team/events.ts
+msgid "User {user} has revoked organization support {affectedUser} from {customer}."
+msgstr ""
+
+#: app/scripts/components/team/events.ts
+msgid "User {user} has revoked project administrator {affectedUser} from project {project}."
+msgstr ""
+
+#: app/scripts/components/team/events.ts
+msgid "User {user} has revoked project manager {affectedUser} from project {project}."
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
@@ -7140,6 +7264,74 @@ msgstr ""
 
 #: app/scripts/components/events/constants.ts
 msgid "{resource_full_name} stop has failed."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} creation has been scheduled by {user}."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} creation has failed."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} deletion has failed."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} has been created."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} has been deleted."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} has been imported by {user}."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} has been restarted."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} has been scheduled to deletion by {user}."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} has been scheduled to restart by {user}."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} has been scheduled to start by {user}."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} has been scheduled to stop by {user}."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} has been started."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} has been stopped."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} has been updated by {user}."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} restart has failed."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} start has failed."
+msgstr ""
+
+#: app/scripts/components/resource/events.ts
+msgid "{resource} stop has failed."
 msgstr ""
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js

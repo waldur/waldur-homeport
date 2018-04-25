@@ -13,6 +13,7 @@ import projectAlertsList from './project-alerts-list';
 import projectTeam from './project-team';
 import projectsService from './projects-service';
 import projectRoutes from './routes';
+import './events';
 
 export default module => {
   module.component('projectDetails', projectDetails);

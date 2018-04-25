@@ -1,6 +1,6 @@
 import { createFetcher } from '@waldur/table-react';
 
-import { eventFormatter } from './services';
+import { eventFormatter } from './event-formatter';
 
 export const fetchEvents = request => createFetcher('events')(request).then(response => {
   const rows = response.rows.filter(
@@ -8,7 +8,7 @@ export const fetchEvents = request => createFetcher('events')(request).then(resp
     event => event.event_type && event.event_type !== 'issue_update_succeeded'
   ).map(event => ({
     ...event,
-    html_message: eventFormatter.format(event),
+    html_message: eventFormatter(event),
     created: event['@timestamp'],
   }));
   return {...response, rows};

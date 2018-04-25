@@ -1,11 +1,11 @@
 import { gettext } from '@waldur/i18n/utils';
+import { eventFormatter } from '@waldur/events/event-formatter';
 
 // @ngInject
 export default function baseEventListController(
   baseControllerListClass,
   eventsService,
   EventDialogsService,
-  eventFormatter,
   $filter) {
   let ControllerListClass = baseControllerListClass.extend({
     init:function() {
@@ -20,7 +20,7 @@ export default function baseEventListController(
             title: gettext('Message'),
             className: 'all',
             render: function(row) {
-              return eventFormatter.format(row);
+              return eventFormatter(row);
             }
           },
           {
