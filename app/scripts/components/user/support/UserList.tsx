@@ -65,10 +65,25 @@ const TableComponent = props => {
   );
 };
 
+export const formatRoleFilter = filter => {
+  if (filter && filter.role) {
+    const formattedRole = {};
+    filter.role.map(item => {
+      formattedRole[item.value] = true;
+    });
+    const { role, ...rest } = filter;
+    return {
+      ...rest,
+      ...formattedRole,
+    };
+  }
+  return filter;
+};
+
 const TableOptions = {
   table: 'userList',
   fetchData: createFetcher('users'),
-  mapPropsToFilter: props => props.userFilter,
+  mapPropsToFilter: props => formatRoleFilter(props.userFilter),
   exportFields: ['username', 'email'],
   exportRow: row => [row.username, row.email],
 };
