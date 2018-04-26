@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import Panel from '@waldur/core/Panel';
-import { StringField, FormContainer } from '@waldur/form-react';
+import { StringField, FormContainer, SelectField } from '@waldur/form-react';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 
@@ -12,6 +12,17 @@ interface UserFilterProps extends TranslateProps {
   submitting: boolean;
   nativeNameVisible: boolean;
 }
+
+const statusOptions = [
+  {
+    name: 'Staff',
+    value: 'is_staff',
+  },
+  {
+    name: 'Support',
+    value: 'is_support',
+  },
+];
 
 const PureUserFilter = (props: UserFilterProps) => (
   <Panel title={props.translate('Apply filters')}>
@@ -32,6 +43,15 @@ const PureUserFilter = (props: UserFilterProps) => (
         <StringField
           label={props.translate('Email')}
           name="email"/>
+        <SelectField
+          label={props.translate('Role')}
+          name="role"
+          placeholder={props.translate('Select role')}
+          options={statusOptions}
+          labelKey="name"
+          valueKey="value"
+          multi={true}
+          onBlur={e => e.preventDefault()}/>
       </FormContainer>
     </form>
   </Panel>

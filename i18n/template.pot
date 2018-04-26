@@ -4903,6 +4903,7 @@ msgstr ""
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
 #: app/scripts/components/user/list/ProjectPermissions.tsx
+#: app/scripts/components/user/support/UserFilter.tsx
 msgid "Role"
 msgstr ""
 
@@ -5145,6 +5146,10 @@ msgstr ""
 
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 msgid "Select resource type"
+msgstr ""
+
+#: app/scripts/components/user/support/UserFilter.tsx
+msgid "Select role"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js
