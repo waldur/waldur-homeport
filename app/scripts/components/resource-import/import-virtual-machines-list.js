@@ -52,18 +52,11 @@ function ImportVirtualMachinesListController(
         {
           title: gettext('Runtime state'),
           className: 'min-tablet-l',
-          render: row => row.runtime_state
+          render: row => row.runtime_state || 'N/A'
         },
         {
           title: gettext('Flavor'),
           render: row => row.flavor_name
-        },
-        {
-          title: gettext('Size'),
-          className: 'desktop',
-          render: function(row) {
-            return $filter('filesize')(row.size) || 'N/A';
-          }
         },
         {
           title: gettext('RAM'),

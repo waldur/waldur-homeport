@@ -22,7 +22,14 @@ export default module => {
   module.config(actionConfig);
   module.config(stateConfig);
   module.config(tabsConfig);
+  module.run(registerImportEndpoint);
 };
+
+// @ngInject
+function registerImportEndpoint(ImportResourcesEndpointRegistry, ENV) {
+  ImportResourcesEndpointRegistry.registerEndpoint(
+    ENV.resourcesTypes.volumes, 'OpenStackTenant', 'openstacktenant-volumes');
+}
 
 // @ngInject
 function fieldsConfig(AppstoreFieldConfigurationProvider) {
