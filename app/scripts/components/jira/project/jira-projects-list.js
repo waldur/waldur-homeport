@@ -47,6 +47,9 @@ function JiraProjectsListController(
       return options;
     },
     formatType: function(row) {
+      if (!row.template_name) {
+        return 'N/A';
+      }
       return `<span uib-tooltip="${row.template_description}">${row.template_name}</span>`;
     },
     getTableActions: function() {
