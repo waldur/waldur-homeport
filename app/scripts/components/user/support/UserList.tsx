@@ -65,16 +65,16 @@ const TableComponent = props => {
   );
 };
 
-const formatRoleFilter = filter => {
+export const formatRoleFilter = filter => {
   if (filter && filter.role) {
-    const formatedRole = {};
+    const formattedRole = {};
     filter.role.map(item => {
-      formatedRole[item.value] = true;
+      formattedRole[item.value] = true;
     });
-    const { status, ...rest } = filter;
+    const { role, ...rest } = filter;
     return {
       ...rest,
-      ...formatedRole,
+      ...formattedRole,
     };
   }
   return filter;
