@@ -1,29 +1,42 @@
 import { getAffectedUserContext } from '@waldur/events/event-formatter';
 import * as eventsRegistry from '@waldur/events/registry';
-import { translate } from '@waldur/i18n';
+import { gettext } from '@waldur/i18n';
 
 eventsRegistry.register({
-  user_activated: event =>
-    translate('User {affectedUser} has been activated.', getAffectedUserContext(event)),
-
-  user_creation_succeeded: event =>
-    translate('User {affectedUser} has been created.', getAffectedUserContext(event)),
-
-  user_deactivated: event =>
-    translate('User {affectedUser} has been deactivated.', getAffectedUserContext(event)),
-
-  user_deletion_succeeded: event =>
-    translate('User {affectedUser} has been deleted.', getAffectedUserContext(event)),
-
-  user_password_updated: event =>
-    translate('Password has been changed for user {affectedUser}.', getAffectedUserContext(event)),
-
-  user_update_succeeded: event =>
-    translate('User {affectedUser} has been updated.', getAffectedUserContext(event)),
-
-  ssh_key_creation_succeeded: event =>
-    translate('SSH key {ssh_key_name} has been created for user {user}.', event),
-
-  ssh_key_deletion_succeeded: event =>
-    translate('SSH key {ssh_key_name} has been deleted for user {user}.', event),
+  title: gettext('User management events'),
+  context: getAffectedUserContext,
+  events: [
+    {
+      key: 'user_activated',
+      title: gettext('User {affected_user_link} has been activated.'),
+    },
+    {
+      key: 'user_creation_succeeded',
+      title: gettext('User {affected_user_link} has been created.'),
+    },
+    {
+      key: 'user_deactivated',
+      title: gettext('User {affected_user_link} has been deactivated.'),
+    },
+    {
+      key: 'user_deletion_succeeded',
+      title: gettext('User {affected_user_name} has been deleted.'),
+    },
+    {
+      key: 'user_password_updated',
+      title: gettext('Password has been changed for user {affected_user_link}.'),
+    },
+    {
+      key: 'user_update_succeeded',
+      title: gettext('User {affected_user_link} has been updated.'),
+    },
+    {
+      key: 'ssh_key_creation_succeeded',
+      title: gettext('SSH key {ssh_key_name} has been created for user {affected_user_link}'),
+    },
+    {
+      key: 'ssh_key_deletion_succeeded',
+      title: gettext('SSH key {ssh_key_name} has been deleted for user {affected_user_link}'),
+    },
+  ],
 });

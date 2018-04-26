@@ -1,5 +1,3 @@
-import { getAvailableEventGroups } from './utils';
-
 // @ngInject
 export default function alertsService(baseServiceClass, ENV) {
   let ServiceClass = baseServiceClass.extend({
@@ -17,7 +15,6 @@ export default function alertsService(baseServiceClass, ENV) {
         this.defaultFilter.exclude_features = ENV.toBeFeatures;
       }
     },
-    getAvailableEventGroups,
   });
   return new ServiceClass();
 }

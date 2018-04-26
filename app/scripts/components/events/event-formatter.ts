@@ -1,5 +1,6 @@
 import { $state } from '@waldur/core/services';
 import * as eventsRegistry from '@waldur/events/registry';
+import { translate } from '@waldur/i18n';
 
 export const getLink = (route, params, label) =>
   `<a href="${$state.href(route, params)}">${label}</a>`;
@@ -43,9 +44,13 @@ export const getProjectContext = event => ({
 });
 
 export const eventFormatter = event => {
-  const formatter = eventsRegistry.get(event.event_type);
-  if (formatter) {
-    return formatter(event);
+  const groups = eventsRegistry.get();
+  for (const group of groups) {
+    for (const eventType of group.events) {
+      if (eventType.key === event.event_type) {
+        return translate(eventType.title(event), group.context(event));
+      }
+    }
   }
   return event.message;
 };

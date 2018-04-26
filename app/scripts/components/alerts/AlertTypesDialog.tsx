@@ -4,11 +4,11 @@ import { TypeListDialog } from '@waldur/events/TypeListDialog';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { getAvailableEventGroups } from './utils';
+import * as eventRegistry from './registry';
 
 const PureAlertTypesDialog = ({ translate }: TranslateProps) => (
   <TypeListDialog
-    types={getAvailableEventGroups()}
+    types={eventRegistry.get()}
     dialogTitle={translate('Alert types')}
   />
 );

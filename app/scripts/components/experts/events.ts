@@ -1,6 +1,6 @@
 import { getCustomerContext, getProjectContext, getLink } from '@waldur/events/event-formatter';
 import * as eventsRegistry from '@waldur/events/registry';
-import { translate } from '@waldur/i18n';
+import { gettext } from '@waldur/i18n';
 
 const getExpertRequestLink = event => {
   const ctx = {requestId: event.expert_request_uuid};
@@ -16,15 +16,24 @@ const getExpertRequestContext = event => {
 };
 
 eventsRegistry.register({
-  expert_request_created: event =>
-    translate('User {caller} has created request for experts under {customer} / {project}.', event),
-
-  expert_request_activated: event =>
-    translate('Expert request "{request}" has been activated.', getExpertRequestContext(event)),
-
-  expert_request_cancelled: event =>
-    translate('Expert request "{request}" has been cancelled.', getExpertRequestContext(event)),
-
-  expert_request_completed: event =>
-    translate('Expert request "{request}" has been completed.', getExpertRequestContext(event)),
+  title: gettext('Expert request events'),
+  context: getExpertRequestContext,
+  events: [
+    {
+      key: 'expert_request_created',
+      title: gettext('User {caller_link} has created request for experts under {customer_link} / {project_link}.'),
+    },
+    {
+      key: 'expert_request_activated',
+      title: gettext('Expert request "{request_link}" has been activated.'),
+    },
+    {
+      key: 'expert_request_cancelled',
+      title: gettext('Expert request "{request_link}" has been cancelled.'),
+    },
+    {
+      key: 'expert_request_completed',
+      title: gettext('Expert request "{request_link}" has been completed.'),
+    },
+  ],
 });

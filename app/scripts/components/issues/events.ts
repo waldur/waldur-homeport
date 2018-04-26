@@ -1,6 +1,6 @@
 import { getLink } from '@waldur/events/event-formatter';
 import * as eventsRegistry from '@waldur/events/registry';
-import { translate } from '@waldur/i18n';
+import { gettext } from '@waldur/i18n';
 
 const getCallerLink = event => {
   const name = event.caller_fullname || event.caller_username;
@@ -16,6 +16,12 @@ const getIssueContext = event => {
 };
 
 eventsRegistry.register({
-  issue_creation_succeeded: event =>
-    translate('Issue {issue} has been created by {caller}.', getIssueContext(event)),
+  title: gettext('Support request events'),
+  context: getIssueContext,
+  events: [
+    {
+      key: 'issue_creation_succeeded',
+      title: gettext('Issue {issue} has been created by {caller}.'),
+    },
+  ],
 });

@@ -1,14 +1,22 @@
 import { getCustomerContext } from '@waldur/events/event-formatter';
 import * as eventsRegistry from '@waldur/events/registry';
-import { translate } from '@waldur/i18n';
+import { gettext } from '@waldur/i18n';
 
 eventsRegistry.register({
-  payment_approval_succeeded: event =>
-    translate('Payment for {customer} has been approved.', getCustomerContext(event)),
-
-  payment_cancel_succeeded: event =>
-    translate('Payment for {customer} has been cancelled.', getCustomerContext(event)),
-
-  payment_creation_succeeded: event =>
-    translate('Created a new payment for {customer}.', getCustomerContext(event)),
+  title: gettext('Payment events'),
+  context: getCustomerContext,
+  events: [
+    {
+      key: 'payment_approval_succeeded',
+      title: gettext('Payment for {customer_link} has been approved.'),
+    },
+    {
+      key: 'payment_cancel_succeeded',
+      title: gettext('Payment for {customer_link} has been cancelled.'),
+    },
+    {
+      key: 'payment_creation_succeeded',
+      title: gettext('Created a new payment for {customer_link}.'),
+    },
+  ],
 });

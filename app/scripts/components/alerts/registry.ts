@@ -1,4 +1,4 @@
-import { EventGroup } from './types';
+import { EventGroup } from '@waldur/events/types';
 
 const registry = [];
 

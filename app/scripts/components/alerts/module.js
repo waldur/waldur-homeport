@@ -1,4 +1,3 @@
-import alertFormatter from './alert-formatter';
 import alertsService from './alerts-service';
 import alertTypesDialog from './AlertTypesDialog';
 import AlertDialogsService from './alert-dialogs-service';
@@ -9,7 +8,6 @@ import alertEventGroups from './alert-event-groups';
 import './help';
 
 export default module => {
-  module.service('alertFormatter', alertFormatter);
   module.service('alertsService', alertsService);
   module.component('alertTypesDialog', alertTypesDialog);
   module.component('alertEventGroups', alertEventGroups);
