@@ -6342,6 +6342,10 @@ msgstr ""
 msgid "User {user_link} authenticated successfully with username and password."
 msgstr ""
 
+#: app/scripts/components/experts/events.ts
+msgid "User {user_link} has created bid for request {request_link} under {customer_link} / {project_link}."
+msgstr ""
+
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
 msgstr ""

@@ -4,19 +4,19 @@ export const getLink = (route, params, label) =>
   `<a href="${$state.href(route, params)}">${label}</a>`;
 
 const getUserLink = event => {
-  const name = event.user_fullname || event.user_username;
+  const name = event.user_full_name || event.user_username;
   const ctx = {uuid: event.user_uuid};
   return getLink('users.details', ctx, name);
 };
 
 const getAffectedUserLink = event => {
-  const name = event.affected_user_fullname || event.affected_user_username;
+  const name = event.affected_user_full_name || event.affected_user_username;
   const ctx = {uuid: event.affected_user_uuid};
   return getLink('users.details', ctx, name);
 };
 
 const getCallerLink = event => {
-  const name = event.caller_fullname || event.caller_username;
+  const name = event.caller_full_name || event.caller_username;
   const ctx = {uuid: event.caller_uuid};
   return getLink('users.details', ctx, name);
 };
