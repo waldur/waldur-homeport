@@ -6295,6 +6295,10 @@ msgid "User {user_link} authenticated successfully with OpenID."
 msgstr ""
 
 #: app/scripts/components/auth/events.ts
+msgid "User {user_link} authenticated successfully with SAML2."
+msgstr ""
+
+#: app/scripts/components/auth/events.ts
 msgid "User {user_link} authenticated successfully with Smart ID EE."
 msgstr ""
 
@@ -6340,6 +6344,10 @@ msgstr ""
 
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has revoked {affected_user_link}."
+msgstr ""
+
+#: app/scripts/components/auth/events.ts
+msgid "User {user_link} logged out  successfully with SAML2."
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx

@@ -26,5 +26,13 @@ eventsRegistry.registerGroup({
       key: 'auth_logged_in_with_smart_id_ee',
       title: gettext('User {user_link} authenticated successfully with Smart ID EE.'),
     },
+    {
+      key: 'auth_logged_in_with_saml2',
+      title: gettext('User {user_link} authenticated successfully with SAML2.'),
+    },
+    {
+      key: 'auth_logged_out_with_saml2',
+      title: gettext('User {user_link} logged out  successfully with SAML2.'),
+    },
   ],
 });
