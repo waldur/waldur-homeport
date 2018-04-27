@@ -1,3 +1,4 @@
+import { FieldError } from '@waldur/form-react';
 import * as React from 'react';
 import {AsyncCreatable, AutocompleteResult} from 'react-select';
 import {Field, Validator} from 'redux-form';
@@ -22,15 +23,18 @@ export const AutosuggestField = (props: AutosuggestFieldProps) => {
            required={props.required}
            validate={props.validate}
            component={fieldProps =>
-             <AsyncCreatable
-               disabled={props.disabled}
-               multi={false}
-               value={fieldProps.input.value}
-               onChange={(option: OptionDs) => {
-                 fieldProps.input.onChange(option);
-                 props.onOptionSelected(option);
-               }}
-               loadOptions={props.onSuggestionsFetchRequested}/>
+             <>
+               <AsyncCreatable
+                 disabled={props.disabled}
+                 multi={false}
+                 value={fieldProps.input.value}
+                 onChange={(option: OptionDs) => {
+                   fieldProps.input.onChange(option);
+                   props.onOptionSelected(option);
+                 }}
+                 loadOptions={props.onSuggestionsFetchRequested}/>
+               <FieldError error={fieldProps.meta.error}/>
+             </>
            }
     />
   );

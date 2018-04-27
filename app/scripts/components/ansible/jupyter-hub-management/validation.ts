@@ -50,7 +50,3 @@ function createAuthConfigIfNotPresent(errors: any) {
     errors.authenticationConfig = {};
   }
 }
-
-export function isNotBlank(username) {
-  return username && !/^\s*$/.test(username);
-}
