@@ -7,8 +7,10 @@ const getResourceContext = event => {
     resource_type: event.resource_type,
     uuid: event.resource_uuid,
   };
-  const resource_link = getLink('resources.details', ctx, event.resource_name);
-  return { ...getUserContext(event), resource_link };
+  return {
+    ...getUserContext(event),
+    resource_link: getLink('resources.details', ctx, event.resource_name),
+  };
 };
 
 eventsRegistry.registerGroup({
