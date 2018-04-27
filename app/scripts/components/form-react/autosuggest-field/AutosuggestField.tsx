@@ -1,8 +1,8 @@
-import { FieldError } from '@waldur/form-react';
 import * as React from 'react';
 import {AsyncCreatable, AutocompleteResult} from 'react-select';
 import {Field, Validator} from 'redux-form';
 
+import { FieldError } from '@waldur/form-react';
 import {OptionDs} from '@waldur/form-react/autosuggest-field/OptionDs';
 
 interface AutosuggestFieldProps {

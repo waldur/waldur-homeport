@@ -1,4 +1,3 @@
-import { FieldError } from '@waldur/form-react';
 import * as React from 'react';
 import { AsyncCreatable } from 'react-select';
 import { Field } from 'redux-form';
@@ -13,6 +12,7 @@ VirtualEnvironmentNotEditableDs
 import { Library } from '@waldur/ansible/python-management/types/Library';
 import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
 import { isBlank } from '@waldur/ansible/python-management/validation';
+import { FieldError } from '@waldur/form-react';
 import { AutosuggestField } from '@waldur/form-react/autosuggest-field/AutosuggestField';
 import { OptionDs } from '@waldur/form-react/autosuggest-field/OptionDs';
 import { translate } from '@waldur/i18n';
