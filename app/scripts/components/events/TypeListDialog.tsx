@@ -1,18 +1,17 @@
 import * as React from 'react';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import './TypeListDialog.scss';
 import { EventGroup } from './types';
 
-interface Props extends TranslateProps {
+interface TypeListDialogProps {
   types: EventGroup[];
   dialogTitle: string;
 }
 
-const PureTypeListDialog = (props: Props) => (
+export const TypeListDialog = (props: TypeListDialogProps) => (
   <ModalDialog title={props.dialogTitle} bodyClassName="types-list-dialog" footer={<CloseDialogButton/>}>
     {props.types.map((type, i) => (
       <div key={i}>
@@ -26,5 +25,3 @@ const PureTypeListDialog = (props: Props) => (
     ))}
   </ModalDialog>
 );
-
-export const TypeListDialog = withTranslation(PureTypeListDialog);

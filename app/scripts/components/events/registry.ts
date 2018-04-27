@@ -2,34 +2,38 @@ import { translate } from '@waldur/i18n';
 
 import { EventGroup } from './types';
 
-const groups = [];
-const formatters = {};
+export class EventRegistry {
+  private groups = [];
+  private formatters = {};
 
-const registerGroup = (group: EventGroup) => {
-  groups.push(group);
-  for (const type of group.events) {
-    const defaultFormatter = event => {
-      const mapper = group.context || (x => x);
-      const context = {event, ...mapper(event)};
-      return translate(type.title, context);
-    };
-    formatters[type.key] = type.formatter || defaultFormatter;
+  registerGroup(group: EventGroup) {
+    this.groups.push(group);
+    for (const type of group.events) {
+      const defaultFormatter = event => {
+        let context = event;
+        if (group.context) {
+          context = {...context, ...group.context(event)};
+        }
+        return translate(type.title, context);
+      };
+      this.formatters[type.key] = type.formatter || defaultFormatter;
+    }
   }
-};
 
-const getGroups = () => groups;
-
-const formatEvent = event => {
-  const formatter = formatters[event.event_type];
-  if (formatter) {
-    return formatter(event);
-  } else {
-    return event.message;
+  formatEvent(event) {
+    const formatter = this.formatters[event.event_type];
+    if (formatter) {
+      return formatter(event);
+    } else {
+      return event.message;
+    }
   }
-};
 
-export default {
-  registerGroup,
-  getGroups,
-  formatEvent,
-};
+  getGroups() {
+    return this.groups;
+  }
+}
+
+const registry = new EventRegistry();
+
+export default registry;

@@ -304,10 +304,6 @@ msgstr ""
 msgid "Agreement number"
 msgstr ""
 
-#: app/scripts/components/resource/tabs/constants.js
-msgid "Alerts"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js
 msgid "All categories"
 msgstr ""
