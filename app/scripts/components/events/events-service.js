@@ -1,5 +1,3 @@
-import { getAvailableEventGroups } from './utils';
-
 // @ngInject
 export default function eventsService($q, baseServiceClass, ENV) {
   let ServiceClass = baseServiceClass.extend({
@@ -34,7 +32,6 @@ export default function eventsService($q, baseServiceClass, ENV) {
         });
       });
     },
-    getAvailableEventGroups,
   });
   return new ServiceClass();
 }

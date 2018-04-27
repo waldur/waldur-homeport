@@ -18,6 +18,7 @@ import filtersModule from './filters';
 import hooksModule from './hooks/module';
 import keysModule from './keys/module';
 import supportModule from './support/module';
+import './events';
 
 export default (module) => {
   module.directive('userEvents', userEvents);

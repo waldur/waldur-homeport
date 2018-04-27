@@ -1,11 +1,11 @@
 import { gettext } from '@waldur/i18n/utils';
+import eventsRegistry from '@waldur/events/registry';
 
 // @ngInject
 export default function baseEventListController(
   baseControllerListClass,
   eventsService,
   EventDialogsService,
-  eventFormatter,
   $filter) {
   let ControllerListClass = baseControllerListClass.extend({
     init:function() {
@@ -19,9 +19,7 @@ export default function baseEventListController(
           {
             title: gettext('Message'),
             className: 'all',
-            render: function(row) {
-              return eventFormatter.format(row);
-            }
+            render: row => eventsRegistry.formatEvent(row),
           },
           {
             title: gettext('Timestamp'),

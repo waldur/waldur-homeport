@@ -9,6 +9,7 @@ import issueTypesModule from './types/module';
 import issueWorkspaceModule from './workspace/module';
 import requestServiceButton from './request-service-button';
 import registerExtensionPoint from './extend-appstore-selector';
+import './events';
 
 export default module => {
   module.service('issuesService', issuesService);

@@ -122,15 +122,6 @@ export default function ProjectWorkspaceController(
         index: 600,
       },
       {
-        key: 'alerts',
-        link: 'project.alerts({uuid: $ctrl.context.project.uuid})',
-        icon: 'fa-fire',
-        label: gettext('Alerts'),
-        feature: 'alerts',
-        countFieldKey: 'alerts',
-        index: 700,
-      },
-      {
         label: gettext('Team'),
         icon: 'fa-group',
         link: 'project.team({uuid: $ctrl.context.project.uuid})',

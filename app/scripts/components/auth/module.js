@@ -13,6 +13,7 @@ import estonianIdModule from './estonianId/module';
 import saml2Module from './saml2/module';
 import valimoModule from './valimo/module';
 import authButtonText from './auth-button-text';
+import './events';
 
 export default module => {
   module.service('authService', authService);

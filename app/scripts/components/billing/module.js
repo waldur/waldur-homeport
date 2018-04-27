@@ -15,6 +15,7 @@ import priceEstimateDialog from './PriceEstimateDialog';
 import billingRoutes from './routes';
 import eventsModule from './events/module';
 import { formatPhone } from './filters';
+import './events';
 
 export default module => {
   module.service('invoicesService', invoicesService);

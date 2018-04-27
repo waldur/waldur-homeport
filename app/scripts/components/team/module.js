@@ -7,6 +7,7 @@ import customerPermissionsLogService from './customer-permissions-log-service';
 import projectPermissionsLogService from './project-permissions-log-service';
 import customerPermissionsLogList from './customer-permissions-log-list';
 import projectPermissionsLogList from './project-permissions-log-list';
+import './events';
 
 export default module => {
   module.service('customerPermissionsLogService', customerPermissionsLogService);

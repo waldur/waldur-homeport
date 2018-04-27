@@ -123,14 +123,6 @@ export function CustomerWorkspaceController(
         index: 700,
       },
       {
-        label: gettext('Alerts'),
-        icon: 'fa-fire',
-        link: 'organization.alerts({uuid: $ctrl.context.customer.uuid})',
-        feature: 'alerts',
-        countFieldKey: 'alerts',
-        index: 800,
-      },
-      {
         label: gettext('Team'),
         icon: 'fa-group',
         link: 'organization.team({uuid: $ctrl.context.customer.uuid})',

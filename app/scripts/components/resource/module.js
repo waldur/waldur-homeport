@@ -15,6 +15,7 @@ import monitoringModule from './monitoring/module';
 import actionsModule from './actions/module';
 import supportModule from './support/module';
 import filtersModule from './filters';
+import './events';
 
 export default module => {
   module.service('resourceUtils', resourceUtils);
