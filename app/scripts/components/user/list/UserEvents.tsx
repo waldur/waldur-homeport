@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { eventFormatter } from '@waldur/events/event-formatter';
+import eventsRegistry from '@waldur/events/registry';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -9,7 +9,7 @@ import EventDetailsButton from './EventDetailsButton';
 import EventTypesButton from './EventTypesButton';
 
 const EventMessageField = ({ row }) => (
-  <span dangerouslySetInnerHTML={{__html: eventFormatter(row)}}/>
+  <span dangerouslySetInnerHTML={{__html: eventsRegistry.formatEvent(row)}}/>
 );
 
 const EventDateField = ({ row }) => (

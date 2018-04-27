@@ -2599,7 +2599,7 @@ msgid "Issue status"
 msgstr ""
 
 #: app/scripts/components/issues/events.ts
-msgid "Issue {issue} has been created by {caller}."
+msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
 
 #: app/scripts/components/customer/routes.js

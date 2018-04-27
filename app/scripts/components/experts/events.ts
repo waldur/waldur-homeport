@@ -1,5 +1,5 @@
-import { getCustomerContext, getProjectContext, getLink } from '@waldur/events/event-formatter';
-import * as eventsRegistry from '@waldur/events/registry';
+import eventsRegistry from '@waldur/events/registry';
+import { getCustomerContext, getProjectContext, getLink } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
 const getExpertRequestLink = event => {
@@ -15,7 +15,7 @@ const getExpertRequestContext = event => {
   };
 };
 
-eventsRegistry.register({
+eventsRegistry.registerGroup({
   title: gettext('Expert request events'),
   context: getExpertRequestContext,
   events: [

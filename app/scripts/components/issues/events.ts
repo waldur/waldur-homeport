@@ -1,27 +1,19 @@
-import { getLink } from '@waldur/events/event-formatter';
-import * as eventsRegistry from '@waldur/events/registry';
+import eventsRegistry from '@waldur/events/registry';
+import { getLink, getCallerContext } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
-const getCallerLink = event => {
-  const name = event.caller_fullname || event.caller_username;
-  const ctx = {uuid: event.caller_uuid};
-  return getLink('users.details', ctx, name);
-};
+const getIssueContext = event => ({
+  ...getCallerContext(event),
+  issue_link: getLink('support.detail', {uuid: event.uuid}, event.issue_key),
+});
 
-const getIssueContext = event => {
-  return {
-    issue: getLink('support.detail', {uuid: event.uuid}, event.issue_key),
-    caller: getCallerLink(event),
-  };
-};
-
-eventsRegistry.register({
+eventsRegistry.registerGroup({
   title: gettext('Support request events'),
   context: getIssueContext,
   events: [
     {
       key: 'issue_creation_succeeded',
-      title: gettext('Issue {issue} has been created by {caller}.'),
+      title: gettext('Issue {issue_link} has been created by {caller_link}.'),
     },
   ],
 });

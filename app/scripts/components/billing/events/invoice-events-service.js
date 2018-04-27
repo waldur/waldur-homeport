@@ -1,4 +1,4 @@
-import { eventFormatter } from '@waldur/events/event-formatter';
+import eventsRegistry from '@waldur/events/registry';
 
 export default class InvoiceEventsService {
   // @ngInject
@@ -23,7 +23,7 @@ export default class InvoiceEventsService {
   parseEvents(events) {
     return events.map(event => ({
       date: event['@timestamp'],
-      message: eventFormatter(event),
+      message: eventsRegistry.formatEvent(event),
       color: this.getEventColor(event),
       icon: this.getEventIcon(event),
       original: event,

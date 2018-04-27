@@ -1,8 +1,8 @@
-import { getCustomerContext } from '@waldur/events/event-formatter';
-import * as eventsRegistry from '@waldur/events/registry';
+import eventsRegistry from '@waldur/events/registry';
+import { getCustomerContext } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
-eventsRegistry.register({
+eventsRegistry.registerGroup({
   title: gettext('Organization events'),
   context: getCustomerContext,
   events: [

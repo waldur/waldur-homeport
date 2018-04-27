@@ -1,8 +1,8 @@
-import { getProjectContext } from '@waldur/events/event-formatter';
-import * as eventsRegistry from '@waldur/events/registry';
+import eventsRegistry from '@waldur/events/registry';
+import { getProjectContext } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
-eventsRegistry.register({
+eventsRegistry.registerGroup({
   title: gettext('Project events'),
   context: getProjectContext,
   events: [

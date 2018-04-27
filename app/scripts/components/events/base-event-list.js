@@ -1,5 +1,5 @@
 import { gettext } from '@waldur/i18n/utils';
-import { eventFormatter } from '@waldur/events/event-formatter';
+import eventsRegistry from '@waldur/events/registry';
 
 // @ngInject
 export default function baseEventListController(
@@ -19,9 +19,7 @@ export default function baseEventListController(
           {
             title: gettext('Message'),
             className: 'all',
-            render: function(row) {
-              return eventFormatter(row);
-            }
+            render: row => eventsRegistry.formatEvent(row),
           },
           {
             title: gettext('Timestamp'),

@@ -1,5 +1,5 @@
-import { getLink, getUserContext } from '@waldur/events/event-formatter';
-import * as eventsRegistry from '@waldur/events/registry';
+import eventsRegistry from '@waldur/events/registry';
+import { getLink, getUserContext } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
 const getResourceContext = event => {
@@ -11,7 +11,7 @@ const getResourceContext = event => {
   return { ...getUserContext(event), resource };
 };
 
-eventsRegistry.register({
+eventsRegistry.registerGroup({
   title: gettext('Resource events'),
   context: getResourceContext,
   events: [

@@ -1,10 +1,10 @@
+import eventsRegistry from '@waldur/events/registry';
 import {
   getUserContext,
   getAffectedUserContext,
   getCustomerContext,
   getProjectContext
-} from '@waldur/events/event-formatter';
-import * as eventsRegistry from '@waldur/events/registry';
+} from '@waldur/events/utils';
 import { translate, gettext } from '@waldur/i18n';
 
 const getRoleContext = event => ({
@@ -58,7 +58,7 @@ const formatRoleRevokedEvent = event => {
   }
 };
 
-eventsRegistry.register({
+eventsRegistry.registerGroup({
   title: gettext('Role management events'),
   events: [
     {

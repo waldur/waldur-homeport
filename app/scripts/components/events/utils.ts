@@ -1,6 +1,4 @@
 import { $state } from '@waldur/core/services';
-import * as eventsRegistry from '@waldur/events/registry';
-import { translate } from '@waldur/i18n';
 
 export const getLink = (route, params, label) =>
   `<a href="${$state.href(route, params)}">${label}</a>`;
@@ -17,6 +15,12 @@ const getAffectedUserLink = event => {
   return getLink('users.details', ctx, name);
 };
 
+const getCallerLink = event => {
+  const name = event.caller_fullname || event.caller_username;
+  const ctx = {uuid: event.caller_uuid};
+  return getLink('users.details', ctx, name);
+};
+
 const getCustomerLink = event => {
   const ctx = {uuid: event.customer_uuid};
   return getLink('organization.details', ctx, event.customer_name);
@@ -28,29 +32,21 @@ const getProjectLink = event => {
 };
 
 export const getUserContext = event => ({
-  user: getUserLink(event),
+  user_link: getUserLink(event),
 });
 
 export const getAffectedUserContext = event => ({
-  affectedUser: getAffectedUserLink(event),
+  affected_user_link: getAffectedUserLink(event),
 });
 
 export const getCustomerContext = event => ({
-  customer: getCustomerLink(event),
+  customer_link: getCustomerLink(event),
 });
 
 export const getProjectContext = event => ({
-  project: getProjectLink(event),
+  project_link: getProjectLink(event),
 });
 
-export const eventFormatter = event => {
-  const groups = eventsRegistry.get();
-  for (const group of groups) {
-    for (const eventType of group.events) {
-      if (eventType.key === event.event_type) {
-        return translate(eventType.title(event), group.context(event));
-      }
-    }
-  }
-  return event.message;
-};
+export const getCallerContext = event => ({
+  caller_link: getCallerLink(event),
+});
