@@ -304,36 +304,8 @@ msgstr ""
 msgid "Agreement number"
 msgstr ""
 
-#: app/scripts/components/alerts/AlertTypesDialog.tsx
-#: app/scripts/components/alerts/base-alerts-list.js
-#: app/scripts/components/dashboard/ProjectAlertsFeed.tsx
-msgid "Alert types"
-msgstr ""
-
-#: app/scripts/components/alerts/help.js
-#: app/scripts/components/customer/routes.js
-#: app/scripts/components/customer/workspace/customer-workspace.js
-#: app/scripts/components/dashboard/ProjectAlertsFeed.tsx
-#: app/scripts/components/project/project-workspace.js
-#: app/scripts/components/project/routes.js
 #: app/scripts/components/resource/tabs/constants.js
 msgid "Alerts"
-msgstr ""
-
-#: app/scripts/components/help/constants.js
-msgid "Alerts & events"
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Alerts about organization"
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Alerts about providers"
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Alerts about resources (VMs and applications)"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js
@@ -927,10 +899,6 @@ msgstr ""
 #: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html
 #: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
 msgid "Close"
-msgstr ""
-
-#: app/scripts/components/alerts/alert-filter.html
-msgid "Closed"
 msgstr ""
 
 #: app/scripts/components/resource/support/ChartContainer.tsx
@@ -1704,6 +1672,7 @@ msgstr ""
 
 #: app/scripts/components/dashboard/ProjectEventsFeed.tsx
 #: app/scripts/components/events/help.js
+#: app/scripts/components/help/constants.js
 #: app/scripts/components/user/hooks/hook-list.js
 msgid "Events"
 msgstr ""
@@ -2918,7 +2887,6 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
-#: app/scripts/components/alerts/base-alerts-list.js
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/user/list/UserEvents.tsx
@@ -3136,18 +3104,6 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "No access info."
-msgstr ""
-
-#: app/scripts/components/alerts/base-alerts-list.js
-msgid "No alerts found matching filter."
-msgstr ""
-
-#: app/scripts/components/alerts/base-alerts-list.js
-msgid "No alerts yet"
-msgstr ""
-
-#: app/scripts/components/dashboard/ProjectAlertsFeed.tsx
-msgid "No alerts yet."
 msgstr ""
 
 #: app/scripts/components/slurm/slurm-allocation-list.js
@@ -3530,7 +3486,6 @@ msgstr ""
 msgid "Only staff can unlink provider."
 msgstr ""
 
-#: app/scripts/components/alerts/alert-filter.html
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: app/scripts/components/resource/summary/ResourceAccessInfo.tsx
@@ -3653,24 +3608,8 @@ msgstr ""
 msgid "Organization {customer_link} has been updated."
 msgstr ""
 
-#: app/scripts/components/alerts/constants.js
-msgid "Organization {customer_name} does not have any projects."
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Organization {customer_name} does not have any resources."
-msgstr ""
-
 #: app/scripts/components/customer/events.ts
 msgid "Organization {customer_name} has been deleted."
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Organization {customer_name} has exhausted quota {quota_name}."
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Organization {customer_name} has no providers."
 msgstr ""
 
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
@@ -4334,10 +4273,6 @@ msgstr ""
 msgid "Provider type"
 msgstr ""
 
-#: app/scripts/components/alerts/constants.js
-msgid "Provider {service_name} is not responding."
-msgstr ""
-
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/help/constants.js
 #: app/scripts/components/project/project-dialog.html
@@ -4811,10 +4746,6 @@ msgstr ""
 #: app/scripts/components/analytics/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
 msgid "Resource usage"
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Resource {resource_name} has disappeared from the {service_name} provider in {project_name} project."
 msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-details.js
@@ -5837,10 +5768,6 @@ msgstr ""
 msgid "This is an objective."
 msgstr ""
 
-#: app/scripts/components/alerts/constants.js
-msgid "This month estimated costs for organization {customer_name} exceeded."
-msgstr ""
-
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/jira/project/jira-project-config.js
@@ -5869,7 +5796,6 @@ msgstr ""
 msgid "Time to resolution"
 msgstr ""
 
-#: app/scripts/components/alerts/base-alerts-list.js
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/user/list/UserEvents.tsx

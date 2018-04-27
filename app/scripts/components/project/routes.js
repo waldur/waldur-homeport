@@ -105,14 +105,6 @@ export default function projectRoutes($stateProvider) {
       }
     })
 
-    .state('project.alerts', {
-      url: 'alerts/',
-      template: '<project-alerts-list/>',
-      data: {
-        pageTitle: gettext('Alerts')
-      }
-    })
-
     .state('project.resources', {
       url: '',
       abstract: true,
