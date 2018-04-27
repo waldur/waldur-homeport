@@ -18,7 +18,6 @@
     "support.activity_stream",
     "support.regular_issue_filters",
     "support.user_events",
-    "support.user_manage",
     "support.usage",
     "support.flowmap",
     "support.heatmap",
