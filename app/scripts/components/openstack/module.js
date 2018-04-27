@@ -12,6 +12,7 @@ import openstackSnapshotModule from './openstack-snapshot/module';
 import openstackSnapshotScheduleModule from './openstack-snapshot-schedule/module';
 import costPlanModule from './cost-plan/module';
 import './provider';
+import './events';
 
 export default module => {
   module.service('OpenStackSummaryService', OpenStackSummaryService);

@@ -1,5 +1,5 @@
 import eventsRegistry from '@waldur/events/registry';
-import { getCustomerContext, getProjectContext, getLink } from '@waldur/events/utils';
+import { getCustomerContext, getProjectContext, getLink, getCallerContext } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
 const getExpertRequestLink = event => {
@@ -12,6 +12,7 @@ const getExpertRequestContext = event => {
     request: getExpertRequestLink(event),
     ...getCustomerContext(event),
     ...getProjectContext(event),
+    ...getCallerContext(event),
   };
 };
 
@@ -34,6 +35,10 @@ eventsRegistry.registerGroup({
     {
       key: 'expert_request_completed',
       title: gettext('Expert request "{request_link}" has been completed.'),
+    },
+    {
+      key: 'expert_bid_created',
+      title: gettext('User {user_link} has created bid for request {request_link} under {customer_link} / {project_link}.'),
     },
   ],
 });

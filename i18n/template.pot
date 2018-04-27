@@ -3426,6 +3426,22 @@ msgstr ""
 msgid "Objectives"
 msgstr ""
 
+#: app/scripts/components/offering/events.ts
+msgid "Offering events"
+msgstr ""
+
+#: app/scripts/components/offering/events.ts
+msgid "Offering state has changed to {offering_state}."
+msgstr ""
+
+#: app/scripts/components/offering/events.ts
+msgid "Offering {offering_link} has been created."
+msgstr ""
+
+#: app/scripts/components/offering/events.ts
+msgid "Offering {offering_name} has been deleted."
+msgstr ""
+
 #: app/scripts/components/intro/base-intro.js
 msgid "Ok, what's next?"
 msgstr ""
@@ -3495,6 +3511,18 @@ msgstr ""
 
 #: app/scripts/components/resource/list/resources-list.js
 msgid "Open map"
+msgstr ""
+
+#: app/scripts/components/openstack/events.ts
+msgid "OpenStack events"
+msgstr ""
+
+#: app/scripts/components/openstack/events.ts
+msgid "OpenStack package {tenant_link} has been created."
+msgstr ""
+
+#: app/scripts/components/openstack/events.ts
+msgid "OpenStack package {tenant_name} has been deleted."
 msgstr ""
 
 #: app/scripts/components/issues/list/issues-short-list.html
