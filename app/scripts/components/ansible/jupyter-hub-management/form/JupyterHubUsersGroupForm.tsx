@@ -16,7 +16,6 @@ export interface JupyterHubUsersGroupProps {
   adminCheckboxMode: JupyterHubUserAdminMode;
   pathToJupyterHubUsers: string;
   getJupyterHubUsers: (formData: JupyterHubUsersHolder) => JupyterHubUser[];
-  description?: string;
   isGlobalRequestRunning?: boolean;
 }
 
@@ -25,7 +24,6 @@ export const JupyterHubUsersGroupForm = (props: JupyterHubUsersGroupProps) => (
     <label className="control-label col-sm-2">{translate(props.label)}</label>
     <div className="row">
       <div className="col-sm-5">
-        {props.description && <p className="help-block m-b-none text-muted">{translate(props.description)}</p>}
         <FieldArray name={props.pathToJupyterHubUsers} component={JupyterHubUserRowsComponent} {...props} />
       </div>
     </div>

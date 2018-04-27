@@ -3859,12 +3859,20 @@ msgstr ""
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
+msgid "Please select a library"
+msgstr ""
+
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 msgid "Please select a team"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
 msgid "Please select a username that you will use for login into the Linux systems."
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
+msgid "Please select a version"
 msgstr ""
 
 #: app/scripts/components/form-react/list-field/ListFieldModal.tsx

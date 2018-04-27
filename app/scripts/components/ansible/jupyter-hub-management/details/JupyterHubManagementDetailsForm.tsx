@@ -112,7 +112,6 @@ export class JupyterHubManagementDetailsForm extends React.Component<JupyterHubM
                         jupyterHubManagement={this.props.jupyterHubManagement}
                         managementRequestTimeout={this.props.managementRequestTimeout}
                         label={'JupyterHub Linux users'}
-                        description={'NB! All removed users will be removed from the VM with all files in their home directory!'}
                         adminCheckboxMode={JupyterHubUserAdminMode.ENABLED}
                         passwordEnabled={true}
                         whitelisting={false}

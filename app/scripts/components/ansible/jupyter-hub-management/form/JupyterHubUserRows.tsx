@@ -7,11 +7,9 @@ import { JupyterHubOAuthType } from '@waldur/ansible/jupyter-hub-management/type
 import { JupyterHubUser } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUser';
 import { JupyterHubUserAdminMode } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUserAdminMode';
 import { JupyterHubUsersHolder } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUsersHolder';
-import {
-isNotBlank,
-validateJupyterHubUserPassword,
-} from '@waldur/ansible/jupyter-hub-management/validation';
+import { validateJupyterHubUserPassword } from '@waldur/ansible/jupyter-hub-management/validation';
 import '@waldur/ansible/python-management/styles/AnsibleApplications.scss';
+import { isNotBlank } from '@waldur/ansible/python-management/validation';
 import { FieldError } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 
@@ -82,11 +80,13 @@ export class JupyterHubUserRowsComponent extends React.Component<JupyterHubUserR
                 <div className="col-xs-1">
                   {translate('Admin rights')}
                 </div>
-                <div className="col-xs-1">
-                  <Field name={`${jupyterHubUser}.admin`}
-                         type="checkbox"
-                         disabled={this.props.isGlobalRequestRunning}
-                         component={renderField}/>
+                <div className="col-xs-1" style={{'min-width': '15px'}}>
+                  <div style={{width: '15px'}}>
+                    <Field name={`${jupyterHubUser}.admin`}
+                           type="checkbox"
+                           disabled={this.props.isGlobalRequestRunning}
+                           component={renderField}/>
+                  </div>
                 </div>
               </>
               }

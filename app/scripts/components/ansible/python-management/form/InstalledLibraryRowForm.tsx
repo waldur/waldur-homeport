@@ -11,6 +11,8 @@ VirtualEnvironmentNotEditableDs
 } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
 import { Library } from '@waldur/ansible/python-management/types/Library';
 import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
+import { isBlank } from '@waldur/ansible/python-management/validation';
+import { FieldError } from '@waldur/form-react';
 import { AutosuggestField } from '@waldur/form-react/autosuggest-field/AutosuggestField';
 import { OptionDs } from '@waldur/form-react/autosuggest-field/OptionDs';
 import { translate } from '@waldur/i18n';
@@ -20,6 +22,10 @@ interface InstalledPackageProps<R extends ManagementRequest<R>>
   libraryIndex: number;
   library: any;
 }
+
+const isLibrarySelected = (value: OptionDs) => isValueSelected(value, translate('Please select a library'));
+const isLibraryVersionSelected = (value: OptionDs) => isValueSelected(value, translate('Please select a version'));
+const isValueSelected = (value: OptionDs, message: string) => !value || isBlank(value.value) ? message : undefined;
 
 export class InstalledLibraryRowForm<R extends ManagementRequest<R>>
   extends React.Component<InstalledPackageProps<R>> {
@@ -115,6 +121,7 @@ export class InstalledLibraryRowForm<R extends ManagementRequest<R>>
               new VirtualEnvironmentNotEditableDs(this.props.pythonManagement), this.props.virtualEnvironmentIndex, this.props.managementRequestTimeout)}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onOptionSelected={this.onOptionSelected}
+            validate={isLibrarySelected}
           />
         </div>
         <div className="col-xs-1 same-padding-as-control-label">
@@ -129,21 +136,25 @@ export class InstalledLibraryRowForm<R extends ManagementRequest<R>>
             name={`${this.props.library}.version`}
             placeholder={translate('Library version')}
             required={true}
+            validate={isLibraryVersionSelected}
             component={fieldProps =>
-              <AsyncCreatable
-                {...fieldProps.input}
-                value={fieldProps.input.value}
-                disabled={this.props.jupyterHubMode
-                || isVirtualEnvironmentNotEditable(
-                  new VirtualEnvironmentNotEditableDs(this.props.pythonManagement), this.props.virtualEnvironmentIndex, this.props.managementRequestTimeout)}
-                onChange={value => fieldProps.input.onChange(value)}
-                options={this.state.libraryVersions}
-                onFocus={(_: any) => this.initializeOptionsIfNeeded()}
-                onBlur={() => fieldProps.input.onBlur(this.getSelectedLibrary().version)}
-                loadOptions={(_, callback: any) => {
-                  callback(null, {options: this.state.libraryVersions});
-                }}
-              />
+              <>
+                <AsyncCreatable
+                  {...fieldProps.input}
+                  value={fieldProps.input.value}
+                  disabled={this.props.jupyterHubMode
+                  || isVirtualEnvironmentNotEditable(
+                    new VirtualEnvironmentNotEditableDs(this.props.pythonManagement), this.props.virtualEnvironmentIndex, this.props.managementRequestTimeout)}
+                  onChange={value => fieldProps.input.onChange(value)}
+                  options={this.state.libraryVersions}
+                  onFocus={(_: any) => this.initializeOptionsIfNeeded()}
+                  onBlur={() => fieldProps.input.onBlur(this.getSelectedLibrary().version)}
+                  loadOptions={(_, callback: any) => {
+                    callback(null, {options: this.state.libraryVersions});
+                  }}
+                />
+                <FieldError error={fieldProps.meta.error}/>
+              </>
             }/>
         </div>
         {!this.props.jupyterHubMode &&
