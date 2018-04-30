@@ -95,6 +95,15 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         order: [...state.order.slice(0, index), ...state.order.slice(index + 1)],
       };
 
+    case actions.PAGE_SIZE_UPDATE:
+      return {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          pageSize: action.payload.size.value,
+        },
+      };
+
   default:
     return state;
   }

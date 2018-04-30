@@ -8,6 +8,7 @@ export const RESET_PAGINATION = 'waldur/table/RESET_PAGINATION';
 export const ENTITY_CREATE = 'waldur/table/ENTITY_CREATE';
 export const ENTITY_UPDATE = 'waldur/table/ENTITY_UPDATE';
 export const ENTITY_DELETE = 'waldur/table/ENTITY_DELETE';
+export const PAGE_SIZE_UPDATE = 'waldur/table/PAGE_SIZE_UPDATE';
 
 export const fetchListStart = (table: string, extraFilter?: any) => ({
   type: FETCH_LIST_START,
@@ -63,6 +64,14 @@ export const resetPagination = (table: string) => ({
   type: RESET_PAGINATION,
   payload: {
     table,
+  },
+});
+
+export const updatePageSize = (table: string, size: string) => ({
+  type: PAGE_SIZE_UPDATE,
+  payload: {
+    table,
+    size,
   },
 });
 
