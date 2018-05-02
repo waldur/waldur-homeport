@@ -6,16 +6,11 @@ import { UserFilter } from './UserFilter';
 import { UserList } from './UserList';
 
 const PureUserListView = () => (
-  <>
-    <div className="col-md-9">
-      <div className="ibox-content">
-        <UserList />
-      </div>
-    </div>
-    <div className="col-md-3">
-      <UserFilter />
-    </div>
-  </>
+  <div className="ibox-content">
+    <UserFilter />
+    <hr/>
+    <UserList />
+  </div>
 );
 
 export default connectAngularComponent(PureUserListView);

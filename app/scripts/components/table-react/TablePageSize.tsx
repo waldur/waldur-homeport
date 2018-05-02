@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Select from 'react-select';
 
+import './TablePageSize.scss';
+
 const options = [
   {
     name: 10,
@@ -23,7 +25,7 @@ const options = [
 const TablePageSize = props => {
   const pageSize = props.pagination ? props.pagination.pageSize : 10;
   return (
-    <>
+    <div className="page-size-info">
       <span className="m-r-sm">Show</span>
       <div id="row-manager">
         <Select
@@ -38,10 +40,10 @@ const TablePageSize = props => {
               props.updatePageSize(value);
             }
           }}
-          multi={false}/>
+        />
       </div>
       <span className="m-l-sm">entries</span>
-    </>
+    </div>
   );
 };
 

@@ -1,0 +1,16 @@
+#row-manager {
+  display: inline-block;
+  vertical-align: middle;
+
+  .Select-clear-zone {
+    display: none !important;
+  }
+
+  .page-size-selector {
+    min-width: 60px;
+  }
+
+  .dataTables_info {
+    margin-bottom: 8px;
+  }
+}
