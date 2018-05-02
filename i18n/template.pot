@@ -404,7 +404,6 @@ msgid "Apply filters"
 msgstr ""
 
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
-#: app/scripts/components/user/support/UserFilter.tsx
 msgid "Apply filters:"
 msgstr ""
 

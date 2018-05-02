@@ -36,7 +36,7 @@ const OrganizationRolesField = ({row}) => {
           <Tooltip key={index} label={permission.role} id="customer-role">
             {permission.customer_name}
             {' '}
-            <i className="fa fa-info"/>
+            <i className="fa fa-question-circle"/>
           </Tooltip><br/>
         </span>
       );
@@ -50,7 +50,7 @@ const ProjectRolesField = ({row}) => {
         <Tooltip key={index} label={permission.role} id="project-role">
           {permission.project_name}
           {' '}
-          <i className="fa fa-info"/>
+          <i className="fa fa-question-circle"/>
         </Tooltip><br/>
       </span>
     );

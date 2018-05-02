@@ -31,7 +31,6 @@ const PureUserFilter = (props: UserFilterProps) => (
       labelClass="m-r-md"
       controlClass="m-r-md"
       submitting={props.submitting}>
-      <h4 id="user-filter-title">{props.translate('Apply filters:')}</h4>
       <StringField
         label={props.translate('Full name')}
         name="full_name"/>
