@@ -1,7 +1,7 @@
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 // @ngInject
-function checkPermission(usersService, $q) {
+export function checkPermission(usersService, $q) {
   return usersService.getCurrentUser().then(user => {
     if (!user.is_staff && !user.is_support) {
       return $q.reject();
@@ -137,6 +137,18 @@ export default function issueRoutes($stateProvider) {
       data: {
         pageTitle: gettext('Sankey diagram'),
         feature: 'support.sankey-diagram'
+      },
+      resolve: {
+        permission: checkPermission
+      }
+    })
+
+    .state('support.vw-type-overview', {
+      url: 'vw-type-overview/',
+      template: '<div class="ibox-content"><customer-list/></div>',
+      data: {
+        feature: 'support.vw-type-overview',
+        pageTitle: gettext('VM type overview'),
       },
       resolve: {
         permission: checkPermission
