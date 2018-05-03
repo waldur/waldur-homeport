@@ -24,6 +24,7 @@ export interface TableOptions {
   queryField?: string;
   exportFields?: string[];
   exportRow?: (Entity) => string[];
+  exportEndpoint?: string;
   getDefaultFilter?: (state: any) => any;
   mapPropsToFilter?: (props: any) => any;
 }

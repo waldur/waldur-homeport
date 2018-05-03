@@ -30,7 +30,8 @@ const StaffStatusField: any = ({ row }) => {
 };
 
 const OrganizationRolesField = ({row}) => {
-  return row.customer_permissions.length > 0 ? row.customer_permissions.map((permission, index) => {
+  if (row.customer_permissions && row.customer_permissions.length > 0) {
+    return row.customer_permissions.map((permission, index) => {
       return (
         <span key={index}>
           <Tooltip key={index} label={permission.role} id="customer-role">
@@ -40,21 +41,28 @@ const OrganizationRolesField = ({row}) => {
           </Tooltip><br/>
         </span>
       );
-    }) : '\u2014';
+    });
+  } else {
+    return '\u2014';
+  }
 };
 
 const ProjectRolesField = ({row}) => {
-  return row.project_permissions.length > 0 ? row.project_permissions.map((permission, index) => {
-    return (
-      <span key={index}>
-        <Tooltip key={index} label={permission.role} id="project-role">
-          {permission.project_name}
-          {' '}
-          <i className="fa fa-question-circle"/>
-        </Tooltip><br/>
-      </span>
-    );
-  }) : '\u2014';
+  if (row.project_permissions && row.project_permissions.length > 0) {
+    return row.project_permissions.map((permission, index) => {
+      return (
+        <span key={index}>
+          <Tooltip key={index} label={permission.role} id="project-role">
+            {permission.project_name}
+            {' '}
+            <i className="fa fa-question-circle"/>
+          </Tooltip><br/>
+        </span>
+      );
+    });
+  } else {
+    return '\u2014';
+  }
 };
 
 const SupportStatusField = ({ row }) => {
@@ -68,27 +76,22 @@ const TableComponent = props => {
       {
         title: translate('Full name'),
         render: FullNameField,
-        className: 'text-center',
       },
       {
         title: translate('Email'),
         render: EmailField,
-        className: 'text-center',
       },
       {
         title: translate('Phone number'),
         render: PhoneNumberField,
-        className: 'text-center',
       },
       {
         title: translate('Organization roles'),
         render: OrganizationRolesField,
-        className: 'text-center',
       },
       {
         title: translate('Project roles'),
         render: ProjectRolesField,
-        className: 'text-center',
       },
       {
         title: translate('Staff'),
@@ -132,6 +135,7 @@ const TableOptions = {
   mapPropsToFilter: props => formatRoleFilter(props.userFilter),
   exportFields: ['username', 'email'],
   exportRow: row => [row.username, row.email],
+  exportEndpoint: '/users',
 };
 
 const mapStateToProps = state => ({

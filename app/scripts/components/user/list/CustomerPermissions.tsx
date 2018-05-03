@@ -41,6 +41,7 @@ const TableOptions = {
   getDefaultFilter: filterByUser,
   exportFields: ['customer', 'role'],
   exportRow: row => [row.customer_name, row.role],
+  exportEndpoint: '/customer-permissions',
 };
 
 export default connectTable(TableOptions)(TableComponent);

@@ -104,6 +104,18 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         },
       };
 
+    case actions.EXPORT_DATA_FETCH_START:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case actions.EXPORT_DATA_FETCH_DONE:
+      return {
+        ...state,
+        loading: false,
+      };
+
   default:
     return state;
   }

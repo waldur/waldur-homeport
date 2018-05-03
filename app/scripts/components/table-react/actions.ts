@@ -4,6 +4,8 @@ export const FETCH_LIST_ERROR = 'waldur/table/FETCH_ERROR';
 export const FETCH_LIST_GOTO_PAGE = 'waldur/table/GOTO_PAGE';
 export const SET_FILTER_QUERY = 'waldur/table/SET_QUERY';
 export const EXPORT_TABLE_AS = 'waldur/table/EXPORT';
+export const EXPORT_DATA_FETCH_START = 'waldur/table/EXPORT_DATA_FETCH_START';
+export const EXPORT_DATA_FETCH_DONE = 'waldur/table/EXPORT_DATA_FETCH_DONE';
 export const RESET_PAGINATION = 'waldur/table/RESET_PAGINATION';
 export const ENTITY_CREATE = 'waldur/table/ENTITY_CREATE';
 export const ENTITY_UPDATE = 'waldur/table/ENTITY_UPDATE';
@@ -49,6 +51,20 @@ export const exportTableAs = (table: string, format: string) => ({
   payload: {
     table,
     format,
+  },
+});
+
+export const exportDataFetchStart = (table: string) => ({
+  type: EXPORT_DATA_FETCH_START,
+  payload: {
+    table,
+  },
+});
+
+export const exportDataFetchDone = (table: string) => ({
+  type: EXPORT_DATA_FETCH_DONE,
+  payload: {
+    table,
   },
 });
 

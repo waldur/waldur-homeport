@@ -51,6 +51,7 @@ const TableOptions = {
   queryField: 'search',
   exportFields: ['message', 'timestamp'],
   exportRow: row => [row.message, row['@timestamp']],
+  exportEndpoint: '/events',
 };
 
 export default connectTable(TableOptions)(TableComponent);

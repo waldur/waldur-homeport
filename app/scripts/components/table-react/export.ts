@@ -1,16 +1,21 @@
 import FileSaver from 'file-saver';
 import Papa from 'papaparse';
-import { select } from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 
+import { getAll } from '@waldur/core/api';
+
+import { exportDataFetchStart, exportDataFetchDone } from './actions';
 import exportExcel from './excel';
 import { getTableOptions } from './registry';
-import { getTableState } from './store';
 
 export function* exportTable(action) {
   const { table, format } = action.payload;
-  const { rows } = yield select(getTableState(table));
+  const { exportFields, exportRow, exportEndpoint } = getTableOptions(table);
 
-  const { exportFields, exportRow } = getTableOptions(table);
+  yield put(exportDataFetchStart(table));
+  const rows = yield getAll(exportEndpoint);
+  yield put(exportDataFetchDone(table));
+
   const data = {
     fields: exportFields,
     data: rows.map(exportRow),
