@@ -7,14 +7,11 @@ export default function submitButton($q) {
     },
     link: function(scope, element) {
       element.bind('click', function() {
-        scope.$apply(click);
-      });
-      function click() {
         element.addClass('disabled').addClass('button-spinner');
         $q.when(scope.submit()).finally(function() {
           element.removeClass('disabled').removeClass('button-spinner');
         });
-      }
+      });
     }
   };
 }
