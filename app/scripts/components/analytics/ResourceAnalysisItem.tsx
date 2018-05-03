@@ -1,0 +1,113 @@
+import * as classNames from 'classnames';
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+
+import { Chart } from '@waldur/core/Chart';
+import { ToggleOpenProps, toggleOpen } from '@waldur/core/HOC/toggleOpen';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Tooltip } from '@waldur/core/Tooltip';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
+
+import { getPieChartsDataSelector, getBarChartsDataSelector, getExceededQuotasSelector } from './selectors';
+import { Project, Quota, ChartData } from './types';
+
+interface PureResourceAnalysisItemProps extends TranslateProps, ToggleOpenProps {
+  exceededQuotas: Quota[];
+  project: Project;
+  pieChartsData: ChartData[];
+  barChartsData: ChartData[];
+}
+
+export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) => {
+  const { project, isOpen, handleToggleOpen, pieChartsData, barChartsData, translate, exceededQuotas } = props;
+  const usagePieCharts = pieChartsData.map(pieChart => {
+    const { limit, options, id, label, exceeds } = pieChart;
+    const content = limit === -1 ? translate('Unlimited') : (<Chart options={options} />);
+
+    return (
+      <li key={id}>
+        <span className={`chart-title ${exceeds ? 'text-danger' : ''}`}>{`${label} :`}</span>
+        <span className="chart-content">{content}</span>
+      </li>
+    );
+  });
+  const usageBarCharts = barChartsData.map(barChart => {
+    const { options, id, label, exceeds, loading, erred } = barChart;
+    let content;
+
+    if (loading) {
+      content = (<LoadingSpinner />);
+    } else if (erred) {
+      content = translate('Unable to get {title}.', { label });
+    } else {
+      content = (<Chart options={options} />);
+    }
+
+    return (
+      <li key={id}>
+        <span className={`chart-title ${exceeds ? 'text-danger' : ''}`}>{label}</span>
+        <span className="chart-content">{content}</span>
+      </li>
+    );
+  });
+  const tooltipLabelContent = exceededQuotas.length && exceededQuotas.map(quota => (
+    <p key={`exceeds-quota-${quota.uuid}`}>{translate('{quota} usage exceeds quota limit.', { quota: quota.label })}</p>
+  ));
+
+  return (
+    <div>
+      <div
+        className={classNames({
+          'resource-analysis-item__title': true,
+          'content-between-center': true,
+          'opened': isOpen,
+        })}
+        onClick={handleToggleOpen}
+      >
+        <h4 className={exceededQuotas.length > 0 ? 'text-danger' : ''}>
+          <span>{project.name}</span>
+          {!!exceededQuotas.length &&
+            <Tooltip
+              id={project.uuid}
+              label={tooltipLabelContent}
+            >
+              <i className="fa fa-exclamation-triangle" />
+            </Tooltip>
+          }
+        </h4>
+        <div>
+          <i
+            className={classNames({
+              'fa': true,
+              'fa-angle-up': isOpen,
+              'fa-angle-down': !isOpen,
+            })}
+          />
+        </div>
+      </div>
+      <div className="resource-analysis-item__content">
+        {isOpen &&
+          <ul className="resource-analysis-item__bar-chart-list">{usageBarCharts}</ul>
+        }
+        {!isOpen &&
+          <ul className="resource-analysis-item__pie-chart-list">{usagePieCharts}</ul>
+        }
+      </div>
+    </div>
+  );
+};
+
+const mapStateToProps = (state, ownProps) => ({
+  pieChartsData: getPieChartsDataSelector(state, ownProps),
+  barChartsData: getBarChartsDataSelector(state, ownProps),
+  exceededQuotas: getExceededQuotasSelector(state, ownProps),
+});
+
+const enhance = compose(
+  toggleOpen,
+  withTranslation,
+  connect(mapStateToProps),
+);
+
+export const ResourceAnalysisItem = enhance(PureResourceAnalysisItem);

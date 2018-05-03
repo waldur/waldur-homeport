@@ -1,9 +1,9 @@
-import {formatDateTime} from '@waldur/core/dateUtils';
+import { formatDateTime } from '@waldur/core/dateUtils';
 
 export const FILESIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
 export const formatFilesize = (input, fromUnit = 'MB') => {
-  if (isNaN(parseFloat(input)) || ! isFinite(input)) {
+  if (isNaN(parseFloat(input)) || !isFinite(input)) {
     return '?';
   }
 
@@ -44,10 +44,19 @@ export const listToDict = (key, value) => list => {
   return dict;
 };
 
+export const dictToList = dict => {
+  const list = [];
+  for (const key in dict) {
+    if (!dict.hasOwnProperty(key)) { continue; }
+    list.push(dict[key]);
+  }
+  return list;
+};
+
 export const getUUID = url => url.split('/').splice(-2)[0];
 
 export const minutesToHours = input => {
-  if (isNaN(parseInt(input, 10)) || ! isFinite(input)) {
+  if (isNaN(parseInt(input, 10)) || !isFinite(input)) {
     return '?';
   }
 
@@ -60,7 +69,7 @@ export const minutesToHours = input => {
 };
 
 export const pick = fields => source =>
-  fields.reduce((target, field) => ({...target, [field]: source[field]}), {});
+  fields.reduce((target, field) => ({ ...target, [field]: source[field] }), {});
 
 export const titleCase = input => {
   if (input) {
