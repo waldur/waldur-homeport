@@ -23,6 +23,7 @@
     "test-single-run": "karma start test/karma.conf.js --single-run"
   },
   "dependencies": {
+    "@tweenjs/tween.js": "^17.2.0",
     "angular": "~1.5.11",
     "angular-animate": "~1.5.11",
     "angular-bind-html-compile-ci-dev": "^1.2.2",
@@ -102,7 +103,6 @@
     "reselect": "^3.0.1",
     "satellizer": "^0.15.5",
     "summernote": "^0.8.8",
-    "@tweenjs/tween.js": "^17.2.0",
     "uglify-js": "^2.7.5",
     "ui-select": "^0.18.1",
     "webpack": "^3.3.0",
@@ -155,7 +155,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.4",
     "lodash": "^4.17.4",
-    "node-sass": "^4.5.3",
+    "node-sass": "4.9.0",
     "offline-plugin": "^4.8.1",
     "pofile": "^1.0.9",
     "postcss-import": "^10.0.0",
