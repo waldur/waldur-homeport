@@ -1,7 +1,7 @@
 <div class="instruction-content-alerts">
     <div>
         <div ng-repeat="item in $ctrl.types">
-            <h3><b class="icon" ng-class="::item.icon"></b>{{item.name}}</h3>
+            <h3>{{item.name}}</h3>
             <ul class="m-b-lg">
                 <li ng-repeat="message in item.descriptions">{{ message }}</li>
             </ul>
