@@ -6,7 +6,7 @@ import { FormContainer, SelectField } from '@waldur/form-react';
 import { CheckboxField } from '@waldur/form-react/CheckboxField';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
-import './vmOverview.scss';
+import './VmOverviewFilter.scss';
 
 interface VMOverviewFilterProps extends TranslateProps {
   submitting: boolean;
@@ -23,7 +23,7 @@ const serviceProviderOptions = [
   },
 ];
 
-const PureVMOverviewFilter = (props: VMOverviewFilterProps) => (
+const PureVmOverviewFilter = (props: VMOverviewFilterProps) => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
       <form className="form-inline" id="vm-overview-filter">
@@ -40,7 +40,7 @@ const PureVMOverviewFilter = (props: VMOverviewFilterProps) => (
             name="show_private"
           />
           <SelectField
-            className="service-provider-select"
+            className="service-provider-selector"
             label={props.translate('Service provider')}
             name="service_provider"
             options={serviceProviderOptions}
@@ -58,4 +58,4 @@ const enhance = compose(
   withTranslation,
 );
 
-export const VMOverviewFilter = enhance(PureVMOverviewFilter);
+export const VmOverviewFilter = enhance(PureVmOverviewFilter);

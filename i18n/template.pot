@@ -1920,7 +1920,7 @@ msgstr ""
 msgid "Flavor exclude regex"
 msgstr ""
 
-#: app/scripts/components/analytics/VMFlavors.tsx
+#: app/scripts/components/analytics/FlavorsList.tsx
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
@@ -1930,8 +1930,12 @@ msgstr ""
 msgid "Flavor name: {flavor_name}"
 msgstr ""
 
-#: app/scripts/components/analytics/VMTypeOverview.tsx
+#: app/scripts/components/analytics/VmTypeOverview.tsx
 msgid "Flavors"
+msgstr ""
+
+#: app/scripts/components/analytics/FlavorsList.tsx
+msgid "Flavors List"
 msgstr ""
 
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
@@ -2236,7 +2240,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: app/scripts/components/analytics/VMImages.tsx
+#: app/scripts/components/analytics/ImagesList.tsx
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/azure/azure-virtual-machine-config.js
@@ -2245,8 +2249,12 @@ msgstr ""
 msgid "Image name"
 msgstr ""
 
-#: app/scripts/components/analytics/VMTypeOverview.tsx
+#: app/scripts/components/analytics/VmTypeOverview.tsx
 msgid "Images"
+msgstr ""
+
+#: app/scripts/components/analytics/ImagesList.tsx
+msgid "Images List"
 msgstr ""
 
 #: app/scripts/components/resource-import/resource-import-dialog.html
@@ -3407,13 +3415,13 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
-#: app/scripts/components/analytics/VMFlavors.tsx
-#: app/scripts/components/analytics/VMImages.tsx
+#: app/scripts/components/analytics/FlavorsList.tsx
+#: app/scripts/components/analytics/ImagesList.tsx
 msgid "Number of created instances"
 msgstr ""
 
-#: app/scripts/components/analytics/VMFlavors.tsx
-#: app/scripts/components/analytics/VMImages.tsx
+#: app/scripts/components/analytics/FlavorsList.tsx
+#: app/scripts/components/analytics/ImagesList.tsx
 msgid "Number of running instances"
 msgstr ""
 
@@ -5204,7 +5212,7 @@ msgstr ""
 msgid "Service name"
 msgstr ""
 
-#: app/scripts/components/analytics/VMOverviewFilter.tsx
+#: app/scripts/components/analytics/VmOverviewFilter.tsx
 msgid "Service provider"
 msgstr ""
 
@@ -5282,7 +5290,7 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
-#: app/scripts/components/analytics/VMOverviewFilter.tsx
+#: app/scripts/components/analytics/VmOverviewFilter.tsx
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
 msgid "Show private"
 msgstr ""
@@ -5291,7 +5299,7 @@ msgstr ""
 msgid "Show report"
 msgstr ""
 
-#: app/scripts/components/analytics/VMOverviewFilter.tsx
+#: app/scripts/components/analytics/VmOverviewFilter.tsx
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
 msgid "Show shared"
 msgstr ""
@@ -7026,14 +7034,6 @@ msgstr ""
 
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "virtualenv and virtualenvwrapper utilities are used to manage Python virtual environments."
-msgstr ""
-
-#: app/scripts/components/analytics/VMFlavors.tsx
-msgid "vmFlavors"
-msgstr ""
-
-#: app/scripts/components/analytics/VMImages.tsx
-msgid "vmImages"
 msgstr ""
 
 #: app/scripts/components/form/appstore-field-list.js

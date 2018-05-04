@@ -2,19 +2,20 @@ import * as React from 'react';
 import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 
-import { VMFlavors } from '@waldur/analytics/VMFlavors';
-import { VMImages } from '@waldur/analytics/VMImages';
+import { FlavorsList } from '@waldur/analytics/FlavorsList';
+import { ImagesList } from '@waldur/analytics/ImagesList';
+import { TranslateProps } from '@waldur/i18n';
 
-export const VMTypeOverview = props => (
+export const VmTypeOverview = (props: TranslateProps) => (
   <Tabs defaultActiveKey={1} id="vm-type-overview">
     <Tab eventKey={1} title={props.translate('Images')}>
       <div className="m-t-sm">
-        <VMImages />
+        <ImagesList />
       </div>
     </Tab>
     <Tab eventKey={2} title={props.translate('Flavors')}>
       <div className="m-t-sm">
-        <VMFlavors />
+        <FlavorsList />
       </div>
     </Tab>
   </Tabs>
