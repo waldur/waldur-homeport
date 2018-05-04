@@ -6486,7 +6486,6 @@ msgid "VM name"
 msgstr ""
 
 #: app/scripts/components/analytics/routes.js
-#: app/scripts/components/issues/routes.js
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "VM type overview"
 msgstr ""

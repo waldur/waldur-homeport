@@ -141,17 +141,5 @@ export default function issueRoutes($stateProvider) {
       resolve: {
         permission: checkPermission
       }
-    })
-
-    .state('support.vw-type-overview', {
-      url: 'vw-type-overview/',
-      template: '<div class="ibox-content"><customer-list/></div>',
-      data: {
-        feature: 'support.vw-type-overview',
-        pageTitle: gettext('VM type overview'),
-      },
-      resolve: {
-        permission: checkPermission
-      }
     });
 }
