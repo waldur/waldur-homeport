@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Select from 'react-select';
 
+import { TranslateProps } from '@waldur/i18n';
+
 import './TablePageSize.scss';
 
 const options = [
@@ -22,12 +24,16 @@ const options = [
   },
 ];
 
-const TablePageSize = props => {
-  const pageSize = props.pagination ? props.pagination.pageSize : 10;
+interface TablePageSizeProps extends TranslateProps {
+  pageSize: number;
+  updatePageSize: (value: {}) => void;
+}
+
+export const TablePageSize = (props: TablePageSizeProps) => {
+  const pageSize = props.pageSize ? props.pageSize : 10;
   return (
-    <div className="page-size-info">
-      <span className="m-r-sm">Show</span>
-      <div id="row-manager">
+    <div className="table-page-size">
+      <span className="text-wrapper m-r-sm">{props.translate('Show')}</span>
         <Select
           className="page-size-selector"
           name="numOfRows"
@@ -35,16 +41,10 @@ const TablePageSize = props => {
           labelKey="name"
           valueKey="value"
           options={options}
-          onChange={value => {
-            if (value) {
-              props.updatePageSize(value);
-            }
-          }}
+          clearable={false}
+          onChange={value => props.updatePageSize(value)}
         />
-      </div>
-      <span className="m-l-sm">entries</span>
+      <span className="text-wrapper m-l-sm">{props.translate('entries')}</span>
     </div>
   );
 };
-
-export default TablePageSize;

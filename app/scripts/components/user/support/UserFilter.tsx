@@ -26,7 +26,7 @@ const statusOptions = [
 ];
 
 const PureUserFilter = (props: UserFilterProps) => (
-  <form className="form-inline" id="user-filter-form">
+  <form className="form-inline" id="user-filter">
     <FormContainer
       labelClass="m-r-md"
       controlClass="m-r-md"

@@ -5231,6 +5231,10 @@ msgstr ""
 msgid "Should be obtained from OAuth service provider"
 msgstr ""
 
+#: app/scripts/components/table-react/TablePageSize.tsx
+msgid "Show"
+msgstr ""
+
 #: app/scripts/components/table/responsive-table.js
 msgid "Show _MENU_ entries"
 msgstr ""
@@ -6891,6 +6895,10 @@ msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts
 msgid "current state on backend: {resourceState}."
+msgstr ""
+
+#: app/scripts/components/table-react/TablePageSize.tsx
+msgid "entries"
 msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts

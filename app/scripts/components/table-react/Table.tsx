@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TranslateProps } from '@waldur/i18n/types';
-import TablePageSize from '@waldur/table-react/TablePageSize';
+import { TablePageSize } from '@waldur/table-react/TablePageSize';
 
 import TableBody from './TableBody';
 import TableButtons from './TableButtons';
@@ -24,6 +24,7 @@ interface Props extends TranslateProps, TableState {
   exportAs?: (format: string) => void;
   actions?: React.ReactNode;
   verboseName?: string;
+  showPageSizeSelector?: boolean;
   updatePageSize?: (size: number) => void;
 }
 
@@ -44,13 +45,14 @@ class Table extends React.Component<Props> {
             setQuery={this.props.setQuery}
             translate={this.props.translate}/>
         )}
-        <div id="row-manager" className="pull-left">
+        {this.props.showPageSizeSelector &&
           <TablePageSize
-            pagination={this.props.pagination}
+            translate={this.props.translate}
+            pageSize={this.props.pagination.pageSize}
             updatePageSize={this.props.updatePageSize}
           />
-          <TableInfo {...this.props.pagination} translate={this.props.translate}/>
-        </div>
+        }
+        <TableInfo {...this.props.pagination} translate={this.props.translate}/>
         {this.renderBody()}
         <TablePagination
           {...this.props.pagination}

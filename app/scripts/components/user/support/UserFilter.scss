@@ -1,14 +1,8 @@
-#user-filter-title {
-  display: inline;
-  margin-right: 30px;
-}
-
-#user-filter-form {
+#user-filter {
   .Select {
     min-width: 100px;
   }
-}
-
-.page-size-info {
-  margin-bottom: 7px;
+  label {
+    margin-bottom: 5px;
+  }
 }

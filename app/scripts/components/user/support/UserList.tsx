@@ -109,7 +109,7 @@ const TableComponent = props => {
         className: 'text-center col-md-2',
       },
     ]}
-    hasQuery={false}
+    showPageSizeSelector={true}
     verboseName={translate('users')}/>
   );
 };
