@@ -7,7 +7,7 @@ import { ImagesList } from '@waldur/analytics/ImagesList';
 import { TranslateProps } from '@waldur/i18n';
 
 export const VmTypeOverview = (props: TranslateProps) => (
-  <Tabs defaultActiveKey={1} id="vm-type-overview">
+  <Tabs defaultActiveKey={1}>
     <Tab eventKey={1} title={props.translate('Images')}>
       <div className="m-t-sm">
         <ImagesList />

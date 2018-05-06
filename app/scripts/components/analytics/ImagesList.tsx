@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 
 import { Table, connectTable } from '@waldur/table-react/index';
 
@@ -55,9 +57,15 @@ const TableComponent = props => {
 const TableOptions = {
   table: 'imagesList',
   fetchData: createFakeFetcher(),
+  mapPropsToFilter: props => props.vmOverviewFilter,
 };
 
+const mapStateToProps = state => ({
+  vmOverviewFilter: getFormValues('vmOverviewFilter')(state),
+});
+
 const enhance = compose(
+  connect(mapStateToProps),
   connectTable(TableOptions),
 );
 
