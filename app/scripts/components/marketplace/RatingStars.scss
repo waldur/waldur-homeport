@@ -5,10 +5,13 @@
   right: 12px;
 
   i {
-    color: #ffa000;
+    color: #bfbfbf;
     display: inline-block;
     margin-right: 2px;
-    color: #bfbfbf;
     font-size: 12px;
+
+    &.filled {
+      color: #ffa000;
+    }
   }
 }

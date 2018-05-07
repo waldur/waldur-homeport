@@ -11,8 +11,13 @@
   .product-thumb {
     display: block;
     width: 100%;
-    padding-top: 20px;
+    padding: 20px;
     overflow: hidden;
+
+    &>img {
+      display: block;
+      width: 100%;
+    }
   }
 
   .product-card-body {
@@ -25,6 +30,10 @@
     width: 100%;
     margin-bottom: 6px;
     font-size: 12px;
+
+    &>a {
+      color: #999;
+    }
   }
 
   .product-title {

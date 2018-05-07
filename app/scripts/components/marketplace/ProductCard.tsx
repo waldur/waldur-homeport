@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import { connectAngularComponent } from '@waldur/store/connect';
-
 import { ProductButton } from './ProductButton';
 import './ProductCard.scss';
 import { RatingStars } from './RatingStars';
@@ -27,14 +25,12 @@ export const ProductCard = (props: ProductCardProps) => (
       <h3 className="product-title">
         <a>{props.title}</a>
       </h3>
-      <h4 className="product-price">{props.price}</h4>
+      <h4 className="product-price">${props.price}</h4>
     </div>
     <div className="product-button-group">
-      <ProductButton icon="icon-heart" title="Wishlist"/>
-      <ProductButton icon="icon-repeat" title="Compare"/>
-      <ProductButton icon="icon-shopping-cart" title="To Cart"/>
+      <ProductButton icon="fa fa-heart" title="Wishlist"/>
+      <ProductButton icon="fa fa-balance-scale" title="Compare"/>
+      <ProductButton icon="fa fa-shopping-cart" title="To Cart"/>
     </div>
   </div>
 );
-
-export default connectAngularComponent(ProductCard);

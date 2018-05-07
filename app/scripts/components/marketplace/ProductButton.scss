@@ -19,7 +19,25 @@
     text-align: center;
     text-decoration: none;
 
+    &:last-child {
+      border-right: 0;
+    }
+
+    &:hover {
+      background-color: #f5f5f5;
+
+      &>i {
+        transform: translateY(-10px);
+      }
+
+      &>span {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
     &>i {
+      transition: all .3s;
       display: inline-block;
       position: relative;
       margin-top: 5px;
@@ -27,6 +45,7 @@
     }
 
     &>span {
+      transition: all .3s;
       display: block;
       position: absolute;
       bottom: 9px;
