@@ -1,0 +1,14 @@
+.rating-stars {
+  display: inline-block;
+  position: absolute;
+  top: 9px;
+  right: 12px;
+
+  i {
+    color: #ffa000;
+    display: inline-block;
+    margin-right: 2px;
+    color: #bfbfbf;
+    font-size: 12px;
+  }
+}

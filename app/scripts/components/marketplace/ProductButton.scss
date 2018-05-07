@@ -1,0 +1,41 @@
+.product-button-group {
+  display: table;
+  width: 100%;
+  border-top: 1px solid #e5e5e5;
+  table-layout: fixed;
+
+  .product-button {
+    display: table-cell;
+    position: relative;
+    height: 62px;
+    padding: 10px;
+    transition: background-color .3s;
+    border: 0;
+    border-right: 1px solid #e5e5e5;
+    background: none;
+    color: #505050;
+    overflow: hidden;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+
+    &>i {
+      display: inline-block;
+      position: relative;
+      margin-top: 5px;
+      font-size: 18px;
+    }
+
+    &>span {
+      display: block;
+      position: absolute;
+      bottom: 9px;
+      left: 0;
+      width: 100%;
+      transform: translateY(12px);
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+    }
+  }
+}
