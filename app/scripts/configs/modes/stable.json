@@ -22,6 +22,7 @@
     "support.flowmap",
     "support.heatmap",
     "support.sankey-diagram",
+    "support.vm-type-overview",
     "user.preferred_language",
     "user.competence",
     "backup",
