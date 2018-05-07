@@ -51,7 +51,6 @@ function AppStoreController(
     selectedResourceType: null,
     currentCustomer: {},
     currentProject: {},
-    showCompare: ENV.showCompare,
     services: {},
     renderStore: false,
     loadingProviders: true,

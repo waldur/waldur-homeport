@@ -54,20 +54,5 @@ export default function appstoreRoutes($stateProvider) {
         pageTitle: gettext('Storages'),
         sidebarState: 'project.resources'
       }
-    })
-
-    .state('compare', {
-      url: '/compare/:category/',
-      templateUrl: 'views/project/base.html',
-      abstract: true,
-      data: {
-        auth: true,
-        pageTitle: gettext('Compare flavors'),
-      }
-    })
-
-    .state('compare.compare', {
-      url: '',
-      template: '<appstore-compare-list/>',
     });
 }
