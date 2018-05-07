@@ -7,6 +7,7 @@ export default function InvitationSendAction(
   return context => ({
     title: gettext('Resend'),
     iconClass: 'fa fa-envelope-o',
+    statesForResend: ['pending', 'expired'],
 
     callback: function(invitation) {
       invitationService.resend(invitation.uuid).then(function() {
@@ -20,7 +21,7 @@ export default function InvitationSendAction(
       if (!InvitationPolicyService.canManageInvitation(context, invitation)) {
         return true;
       }
-      if (invitation.state !== 'pending') {
+      if (this.statesForResend.indexOf(invitation.state) === -1) {
         return true;
       }
       return false;
@@ -30,8 +31,8 @@ export default function InvitationSendAction(
       if (!InvitationPolicyService.canManageInvitation(context, invitation)) {
         return $filter('translate')(gettext('You don\'t have permission to send this invitation.'));
       }
-      if (invitation.state !== 'pending') {
-        return $filter('translate')(gettext('Only pending invitation can be sent again.'));
+      if (this.statesForResend.indexOf(invitation.state) === -1) {
+        return $filter('translate')(gettext('Only pending and expired invitations can be sent again.'));
       }
     }
   });
