@@ -29,7 +29,8 @@
     "jira",
     "experts.preview_contract",
     "pythonManagement",
-    "jupyterHubManagement"
+    "jupyterHubManagement",
+    "marketplace"
   ],
   "featuresVisible": false,
   "appStoreCategories": [

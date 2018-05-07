@@ -72,6 +72,7 @@ export default function ProjectWorkspaceController(
         key: 'marketplace',
         icon: 'fa-shopping-cart',
         label: gettext('Marketplace'),
+        feature: 'marketplace',
         link: 'marketplace-list({uuid: $ctrl.context.project.uuid})',
         index: 210,
       },
