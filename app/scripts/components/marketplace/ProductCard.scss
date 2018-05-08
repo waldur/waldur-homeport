@@ -14,9 +14,9 @@
 
     &>img {
       display: block;
-      height: 8em;
-      width: 8em;
-      margin: 20px auto;
+      height: 6em;
+      width: 6em;
+      margin: 10px auto;
       margin-bottom: 0px;
     }
   }
@@ -41,5 +41,10 @@
     &>a {
       color: #999;
     }
+  }
+
+  .product-installs {
+    font-size: 11px;
+    margin-left: 5px;
   }
 }

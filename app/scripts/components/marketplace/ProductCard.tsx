@@ -22,6 +22,9 @@ export const ProductCard = (props: ProductCardProps) => (
         {props.product.subtitle}
       </div>
       <RatingStars rating={props.product.rating}/>
+      <span className="product-installs">
+        {props.product.installs} installs
+      </span>
     </div>
     <div className="product-button-group">
       <ProductButton icon="fa fa-comments" title="Write review"/>

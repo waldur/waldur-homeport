@@ -3,4 +3,5 @@ export interface Product {
   thumb: string;
   title: string;
   subtitle: string;
+  installs: number;
 }
