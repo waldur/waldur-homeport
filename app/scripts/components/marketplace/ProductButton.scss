@@ -7,7 +7,6 @@
   .product-button {
     display: table-cell;
     position: relative;
-    height: 62px;
     padding: 10px;
     transition: background-color .3s;
     border: 0;
@@ -19,42 +18,12 @@
     text-align: center;
     text-decoration: none;
 
-    &:last-child {
-      border-right: 0;
-    }
-
     &:hover {
       background-color: #f5f5f5;
-
-      &>i {
-        transform: translateY(-10px);
-      }
-
-      &>span {
-        transform: translateY(0);
-        opacity: 1;
-      }
     }
 
-    &>i {
-      transition: all .3s;
-      display: inline-block;
-      position: relative;
-      margin-top: 5px;
-      font-size: 18px;
-    }
-
-    &>span {
-      transition: all .3s;
-      display: block;
-      position: absolute;
-      bottom: 9px;
-      left: 0;
-      width: 100%;
-      transform: translateY(12px);
-      font-size: 12px;
-      white-space: nowrap;
-      opacity: 0;
+    &:last-child {
+      border-right: 0;
     }
   }
 }

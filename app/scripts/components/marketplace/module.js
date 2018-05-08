@@ -1,5 +1,5 @@
 import routes from './routes';
-import productGrid from './ProductGrid';
+import productGrid from './IndexPage';
 
 export default module => {
   module.component('productGrid', productGrid);

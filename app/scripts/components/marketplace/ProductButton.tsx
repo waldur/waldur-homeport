@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { Tooltip } from '@waldur/core/Tooltip';
+
 import './ProductButton.scss';
 
 interface ProductButtonProps {
@@ -8,8 +10,7 @@ interface ProductButtonProps {
 }
 
 export const ProductButton = (props: ProductButtonProps) => (
-  <a className="product-button">
+  <Tooltip label={props.title} id="product-button" className="product-button">
     <i className={props.icon}/>
-    <span>{props.title}</span>
-  </a>
+  </Tooltip>
 );

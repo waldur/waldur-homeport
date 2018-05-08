@@ -3,34 +3,30 @@ import * as React from 'react';
 import { ProductButton } from './ProductButton';
 import './ProductCard.scss';
 import { RatingStars } from './RatingStars';
+import { Product } from './types';
 
 interface ProductCardProps {
-  rating: number;
-  thumb: string;
-  category: string;
-  title: string;
-  price: number;
+  product: Product;
 }
 
 export const ProductCard = (props: ProductCardProps) => (
   <div className="product-card">
-    <RatingStars rating={props.rating}/>
     <a className="product-thumb">
-      <img src={props.thumb}/>
+      <img src={props.product.thumb}/>
     </a>
     <div className="product-card-body">
-      <div className="product-category">
-        <a>{props.category}</a>
-      </div>
       <h3 className="product-title">
-        <a>{props.title}</a>
+        <a>{props.product.title}</a>
       </h3>
-      <h4 className="product-price">${props.price}</h4>
+      <div className="product-subtitle elipsis">
+        {props.product.subtitle}
+      </div>
+      <RatingStars rating={props.product.rating}/>
     </div>
     <div className="product-button-group">
-      <ProductButton icon="fa fa-heart" title="Wishlist"/>
-      <ProductButton icon="fa fa-balance-scale" title="Compare"/>
-      <ProductButton icon="fa fa-shopping-cart" title="To Cart"/>
+      <ProductButton icon="fa fa-comments" title="Write review"/>
+      <ProductButton icon="fa fa-balance-scale" title="Add to comparison"/>
+      <ProductButton icon="fa fa-shopping-cart" title="Add to cart"/>
     </div>
   </div>
 );
