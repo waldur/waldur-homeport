@@ -9,3 +9,10 @@
     column-count: initial;
   }
 }
+
+.modal-body {
+  .resource-details-table {
+    column-count: auto;
+    float: none;
+  }
+}

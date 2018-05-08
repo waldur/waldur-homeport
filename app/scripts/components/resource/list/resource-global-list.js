@@ -17,7 +17,7 @@ function ResourceGlobalListController($rootScope, $scope, baseResourceListContro
           title: gettext('Name'),
           className: 'all',
           orderField: 'name',
-          render: row => this.renderResourceName(row)
+          render: row => this.renderResourceName(row),
         },
         {
           id: 'customer',
@@ -38,7 +38,7 @@ function ResourceGlobalListController($rootScope, $scope, baseResourceListContro
           title: gettext('State'),
           className: 'min-tablet-l',
           orderField: 'state',
-          render: row => this.renderResourceState(row)
+          render: row => this.renderResourceState(row),
         },
         {
           id: 'backup_state',
@@ -52,7 +52,7 @@ function ResourceGlobalListController($rootScope, $scope, baseResourceListContro
           title: gettext('Monitoring'),
           feature: 'monitoring_state',
           className: 'min-tablet-l',
-          render: row => this.renderComponent('resource-state-monitoring', row)
+          render: row => this.renderComponent('resource-state-monitoring', row),
         },
         {
           id: 'issues',

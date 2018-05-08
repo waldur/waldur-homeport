@@ -11,14 +11,14 @@
     <li role="menuitem" ng-show="!$ctrl.loading && !$ctrl.actions">
       <a translate>There are no actions.</a>
     </li>
-    <li ng-repeat="(name, action) in $ctrl.actions"
-      uib-tooltip="{{ action.reason }}"
-      class="cursor-pointer">
-      <a ng-click="$ctrl.onClick(name, action)"
-        ng-class="$ctrl.buttonClass(action)">
+    <li ng-repeat="(name, action) in $ctrl.actions" uib-tooltip="{{ action.reason }}" class="cursor-pointer">
+      <a ng-click="$ctrl.onClick(name, action)" ng-class="$ctrl.buttonClass(action)">
         <i ng-if="action.reason" class="fa fa-question-circle"></i>
         {{ action.title | translate }}
       </a>
     </li>
   </ul>
+</div>
+<div class="m-t-sm">
+  <resource-summary-button resource="$ctrl.buttonModel"></resource-summary-button>
 </div>
