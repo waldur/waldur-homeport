@@ -3,7 +3,10 @@ export default function routes($stateProvider) {
   $stateProvider
     .state('marketplace-list', {
       url: 'marketplace/',
-      template: '<product-grid></product-grid>',
+      template: '<marketplace-landing></marketplace-landing>',
       parent: 'project',
+      data: {
+        hideHeader: true,
+      }
     });
 }

@@ -1,0 +1,29 @@
+.marketplace-hero__background {
+  width: 100%;
+  background-color: #2f4050;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 300px;
+  background: url(./marketplace-background.jpg);
+  display: table;
+}
+
+.marketplace-hero__table {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.marketplace-hero__main {
+  max-width: 800px;
+  margin-right: auto;
+  margin-left: auto;
+
+  h1 {
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    color: #fff;
+    font-size: 44px;
+    line-height: 42px;
+    padding-bottom: 10px;
+  }
+}

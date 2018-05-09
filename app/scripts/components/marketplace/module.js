@@ -1,7 +1,7 @@
 import routes from './routes';
-import productGrid from './IndexPage';
+import marketplaceLanding from './LandingPage';
 
 export default module => {
-  module.component('productGrid', productGrid);
+  module.component('marketplaceLanding', marketplaceLanding);
   module.config(routes);
 };

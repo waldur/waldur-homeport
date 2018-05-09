@@ -1,16 +1,11 @@
-import * as React from 'react';
-
-import { connectAngularComponent } from '@waldur/store/connect';
-
-import { ProductCategory } from './ProductCategory';
-import { Product } from './types';
+import { Product } from '../types';
 
 const ZohoIcon = require('./zoho-crm.svg'); // tslint:disable-line
 const SalesForceIcon = require('./salesforce-crm.svg'); // tslint:disable-line
 const RedtailIcon = require('./redtail-crm.png'); // tslint:disable-line
 const Dynamics365Icon = require('./microsoft-dynamics-365.png'); // tslint:disable-line
 
-const products: Product[] = [
+export const products: Product[] = [
   {
     title: 'Salesforce CRM',
     subtitle: 'It covers every customer touch point and every stage of the customer lifecycle.',
@@ -41,7 +36,7 @@ const products: Product[] = [
   },
 ];
 
-const categories = [
+export const categories = [
   {
     header: 'Staff picks',
     subheader: `Try out any of these apps curated by our team for free.`,
@@ -53,9 +48,3 @@ const categories = [
     products,
   },
 ];
-
-export const IndexPage = () => categories.map((category, index) => (
-  <ProductCategory category={category} key={index}/>
-));
-
-export default connectAngularComponent(IndexPage);
