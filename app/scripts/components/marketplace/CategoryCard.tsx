@@ -11,9 +11,7 @@ export const CategoryCard = props => (
       <h3 className="category-title">
         <a>{props.category.title}</a>
       </h3>
-      <span className="category-counter">
-        {props.category.counter} items
-      </span>
+      {props.category.counter} items
     </div>
   </div>
 );
