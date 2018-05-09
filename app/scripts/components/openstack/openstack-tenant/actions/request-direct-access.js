@@ -1,4 +1,4 @@
-import template from './openstack-tenant-request-direct-access.html';
+import template from './request-direct-access.html';
 
 class DialogController {
   // @ngInject

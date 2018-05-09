@@ -62,7 +62,7 @@ export function createPullAction(_): ResourceAction {
 export function validateState(state: ResourceState): (ctx: ActionContext) => string {
   return ctx => {
     if (ctx.resource.state !== state) {
-      return translate('Instance should be {state}.', {state});
+      return translate('Resource should be {state}.', {state});
     }
   };
 }
@@ -70,7 +70,7 @@ export function validateState(state: ResourceState): (ctx: ActionContext) => str
 export function validateRuntimeState(state: string): (ctx: ActionContext) => string {
   return ctx => {
     if (ctx.resource.runtime_state !== state) {
-      return translate('Instance should be {state}.', {state});
+      return translate('Resource should be {state}.', {state});
     }
   };
 }

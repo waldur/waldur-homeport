@@ -1,5 +1,5 @@
-import template from './openstack-tenant-assign-package-dialog.html';
-import { openstackTemplateColumns, openstackTemplateFilters } from './openstack-template';
+import template from './assign-package-dialog.html';
+import { openstackTemplateColumns, openstackTemplateFilters } from '../openstack-template';
 
 const openstackTenantAssignPackageDialog = {
   template,

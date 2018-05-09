@@ -1,4 +1,4 @@
-import { templateParser } from '../utils';
+import { templateParser } from '../../utils';
 
 export default class openstackTenantChangePackageService {
   // Public API consists of two methods:
