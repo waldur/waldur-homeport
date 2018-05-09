@@ -441,15 +441,15 @@ msgstr ""
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html
+#: app/scripts/components/openstack/openstack-tenant/actions/assign-package-dialog.html
 msgid "Assign"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/AssignPackageAction.ts
 msgid "Assign VPC package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html
+#: app/scripts/components/openstack/openstack-tenant/actions/assign-package-dialog.html
 msgid "Assign package"
 msgstr ""
 
@@ -776,8 +776,8 @@ msgstr ""
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/offering/appstore-offering.html
 #: app/scripts/components/offering/offering-policy.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/assign-package-dialog.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 #: app/scripts/components/project/ProjectCreateForm.tsx
@@ -813,6 +813,10 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
+msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js
 msgid "Category"
 msgstr ""
@@ -830,8 +834,8 @@ msgstr ""
 msgid "Change Request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/ChangePackageAction.ts
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 msgid "Change VPC package"
 msgstr ""
 
@@ -890,8 +894,8 @@ msgstr ""
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/billing/events/invoice-events-dialog.html
 #: app/scripts/components/customer/details/customer-report-error.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.html
 #: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html
 #: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
 msgid "Close"
@@ -1070,7 +1074,9 @@ msgstr ""
 #: app/scripts/components/offering/appstore-offering.html
 #: app/scripts/components/openstack/openstack-instance/actions/CreateBackupAction.ts
 #: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateNetworkAction.ts
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
 #: app/scripts/components/openstack/openstack-volume/module.js
 #: app/scripts/components/project/project-issues.js
 #: app/scripts/components/resource/list/resources-list.js
@@ -1123,11 +1129,11 @@ msgstr ""
 msgid "Create expert request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
 msgid "Create floating IP for"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateNetworkAction.ts
 msgid "Create network for"
 msgstr ""
 
@@ -1164,7 +1170,7 @@ msgstr ""
 msgid "Create request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
 msgid "Create security group for"
 msgstr ""
 
@@ -1245,12 +1251,12 @@ msgstr ""
 msgid "Current API token"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html
 msgid "Current VPC package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 msgid "Current VPC usage"
 msgstr ""
 
@@ -1368,9 +1374,9 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/project/ProjectDetails.tsx
@@ -1396,6 +1402,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
 #: app/scripts/components/openstack/openstack-security-groups/module.js
+#: app/scripts/components/openstack/openstack-tenant/actions/DestroyAction.ts
 msgid "Destroy"
 msgstr ""
 
@@ -2384,10 +2391,6 @@ msgstr ""
 msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr ""
 
-#: app/scripts/components/resource/actions/base.ts
-msgid "Instance should be {state}."
-msgstr ""
-
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 msgid "Instance state"
 msgstr ""
@@ -3053,7 +3056,7 @@ msgstr ""
 msgid "Networks"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 msgid "New VPC package"
 msgstr ""
 
@@ -3486,6 +3489,10 @@ msgstr ""
 msgid "Only staff can create virtual private cloud."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/actions/utils.ts
+msgid "Only staff can manage OpenStack tenant."
+msgstr ""
+
 #: app/scripts/components/customer/details/customer-manage.html
 msgid "Only staff can remove organization."
 msgstr ""
@@ -3673,7 +3680,7 @@ msgstr ""
 msgid "Package amount"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js
+#: app/scripts/components/openstack/openstack-tenant/actions/assign-package-dialog.js
 msgid "Package could not be assigned."
 msgstr ""
 
@@ -3829,8 +3836,8 @@ msgstr ""
 msgid "Please give us a moment to validate your invitation."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.html
 msgid "Please note that request should specify tenant and provide a reason."
 msgstr ""
 
@@ -3838,8 +3845,8 @@ msgstr ""
 msgid "Please note that request should specify user name and provide a reason."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.js
 msgid "Please provide a reason"
 msgstr ""
 
@@ -4618,15 +4625,15 @@ msgstr ""
 msgid "Request complaint"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/RequestCustomFlavorAction.ts
 msgid "Request custom flavour"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.js
 msgid "Request custom flavour for OpenStack Tenant"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.html
 msgid "Request custom flavour for {{ $ctrl.tenant.name }}"
 msgstr ""
 
@@ -4642,15 +4649,15 @@ msgstr ""
 msgid "Request details"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/RequestDirectAccessAction.ts
 msgid "Request direct access"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.js
 msgid "Request direct access to OpenStack Tenant"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.html
 msgid "Request direct access to {{ $ctrl.tenant.name }}"
 msgstr ""
 
@@ -4768,6 +4775,10 @@ msgstr ""
 
 #: app/scripts/components/resource/monitoring/ZabbixHostCreateButton.tsx
 msgid "Resource is not monitored yet."
+msgstr ""
+
+#: app/scripts/components/resource/actions/base.ts
+msgid "Resource should be {state}."
 msgstr ""
 
 #: app/scripts/components/providers/details/provider-price-list.js
@@ -5466,7 +5477,7 @@ msgid "Storages"
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 #: app/scripts/components/resource/actions/dialog/action-dialog.html
@@ -5550,7 +5561,8 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
 #: app/scripts/components/openstack/openstack-snapshot/module.js
 #: app/scripts/components/openstack/openstack-subnet/actions.js
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts
+#: app/scripts/components/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
 #: app/scripts/components/openstack/openstack-volume/module.js
 #: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/rijkscloud/module.js
@@ -5626,24 +5638,24 @@ msgstr ""
 msgid "Tenant ID"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js
+#: app/scripts/components/openstack/openstack-tenant/actions/assign-package-dialog.js
 msgid "Tenant has been assigned to the package."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/EditAction.ts
 msgid "Tenant has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/OpenStackForm.tsx
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
 msgid "Tenant name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-service.js
 msgid "Tenant package has been changed."
 msgstr ""
 
@@ -5754,7 +5766,7 @@ msgstr ""
 msgid "There are no resources in the organization."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 msgid "There are no suitable VPC packages for this tenant."
 msgstr ""
 
@@ -5856,11 +5868,11 @@ msgstr ""
 msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.html
 msgid "To create custom flavour, please send a request to {{$ctrl.supportEmail}}."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.html
 msgid "To get access, please send a request to {{$ctrl.supportEmail}}."
 msgstr ""
 
@@ -5959,7 +5971,7 @@ msgstr ""
 msgid "Unable to cancel invitation."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-service.js
 msgid "Unable to change tenant package."
 msgstr ""
 

@@ -1,5 +1,5 @@
-import template from './openstack-tenant-change-package.html';
-import { openstackTemplateColumns, openstackTemplateFilters } from './openstack-template';
+import template from './change-package-dialog.html';
+import { openstackTemplateColumns, openstackTemplateFilters } from '../openstack-template';
 
 class DialogController {
   // @ngInject

@@ -1,5 +1,4 @@
 import resourceImportDialog from './resource-import-dialog';
-import assignPackageDialog from '../openstack/openstack-tenant/openstack-tenant-assign-package-dialog';
 import importVirtualMachinesList from './import-virtual-machines-list';
 import importVirtualCloudsList from './import-virtual-clouds-list';
 import importVolumesList from './import-volumes-list';
@@ -12,7 +11,6 @@ import ImportResourcesEndpointRegistry from './import-resources-endpoint-registr
 
 export default module => {
   module.component('resourceImportDialog', resourceImportDialog);
-  module.component('assignPackageDialog', assignPackageDialog);
   module.component('importVirtualMachinesList', importVirtualMachinesList);
   module.component('importVirtualCloudsList', importVirtualCloudsList);
   module.component('importVolumesList', importVolumesList);

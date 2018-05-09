@@ -16,7 +16,7 @@ describe('Base actions', () => {
   const ctx = {resource, user};
 
   it('validates resource state', () => {
-    expect(validateState('OK')(ctx)).toBe('Instance should be OK.');
+    expect(validateState('OK')(ctx)).toBe('Resource should be OK.');
   });
 
   it('skips validation if resource is in target state', () => {

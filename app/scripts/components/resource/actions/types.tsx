@@ -68,6 +68,10 @@ export interface ResourceAction<Resource = BaseResource> {
   method: ActionMethod;
   destructive?: boolean;
   validators?: Array<ActionValidator<Resource>>;
+  dialogSize?: 'lg';
+  component?: string;
+  useResolve?: boolean;
+  isVisible?: boolean;
 }
 
 export interface ActionContext<Resource = BaseResource> {

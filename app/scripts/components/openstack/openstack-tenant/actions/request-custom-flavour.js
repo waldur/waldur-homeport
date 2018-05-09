@@ -1,4 +1,4 @@
-import template from './openstack-tenant-request-custom-flavour.html';
+import template from './request-custom-flavour.html';
 
 class DialogController {
   // @ngInject
