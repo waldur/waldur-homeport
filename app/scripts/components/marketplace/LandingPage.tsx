@@ -3,9 +3,9 @@ import * as React from 'react';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { CategoryCard } from './CategoryCard';
-import { features, categories } from './fixtures';
+import { categories, products } from './fixtures';
 import { HeroSection } from './HeroSection';
-import { ProductCategory } from './ProductCategory';
+import { ProductGrid } from './ProductGrid';
 
 export const LandingPage = () => (
   <div>
@@ -21,7 +21,8 @@ export const LandingPage = () => (
         </div>
       ))}
     </div>
-    <ProductCategory category={features}/>
+    <h2 className="m-b-md">Recent additions</h2>
+    <ProductGrid products={products}/>
   </div>
 );
 

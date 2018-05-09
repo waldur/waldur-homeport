@@ -12,7 +12,7 @@ export const CategoryCard = props => (
         <a>{props.category.title}</a>
       </h3>
       <span className="category-counter">
-        {props.category.counter} products
+        {props.category.counter} items
       </span>
     </div>
   </div>

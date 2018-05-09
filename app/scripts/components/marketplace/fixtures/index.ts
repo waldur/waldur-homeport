@@ -45,22 +45,16 @@ export const products: Product[] = [
   },
 ];
 
-export const features = {
-  header: 'Staff picks',
-  subheader: `Try out any of these apps curated by our team for free.`,
-  products,
-};
-
 export const categories = [
   {
-    icon: VpcIcon,
-    title: 'Virtual private cloud',
-    counter: 100,
+    icon: BillingIcon,
+    title: 'Billing',
+    counter: 90,
   },
   {
-    icon: PublicCloudIcon,
-    title: 'Public cloud',
-    counter: 300,
+    icon: CrmIcon,
+    title: 'Customer relationship management',
+    counter: 100,
   },
   {
     icon: HpcIcon,
@@ -73,18 +67,18 @@ export const categories = [
     counter: 10,
   },
   {
+    icon: PublicCloudIcon,
+    title: 'Public cloud',
+    counter: 300,
+  },
+  {
     icon: ServiceDeskIcon,
     title: 'Service desk',
     counter: 1000,
   },
   {
-    icon: BillingIcon,
-    title: 'Billing',
-    counter: 90,
-  },
-  {
-    icon: CrmIcon,
-    title: 'Customer relationship management',
+    icon: VpcIcon,
+    title: 'Virtual private cloud',
     counter: 100,
   },
 ];
