@@ -1,12 +1,16 @@
 .marketplace-hero__background {
+  height: 300px;
   width: 100%;
   background-color: #2f4050;
+  background: url(./marketplace-background.jpg);
   background-position: center top;
   background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  height: 300px;
-  background: url(./marketplace-background.jpg);
   display: table;
+  margin-bottom: 20px;
 }
 
 .marketplace-hero__table {
@@ -20,7 +24,6 @@
   margin-left: auto;
 
   h1 {
-    font-family: "Roboto", Helvetica, Arial, sans-serif;
     color: #fff;
     font-size: 44px;
     line-height: 42px;

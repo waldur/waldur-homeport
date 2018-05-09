@@ -1,9 +1,18 @@
 import { Product } from '../types';
 
-const ZohoIcon = require('./zoho-crm.svg'); // tslint:disable-line
-const SalesForceIcon = require('./salesforce-crm.svg'); // tslint:disable-line
-const RedtailIcon = require('./redtail-crm.png'); // tslint:disable-line
-const Dynamics365Icon = require('./microsoft-dynamics-365.png'); // tslint:disable-line
+// tslint:disable
+const ZohoIcon = require('./zoho-crm.svg'); 
+const SalesForceIcon = require('./salesforce-crm.svg');
+const RedtailIcon = require('./redtail-crm.png');
+const Dynamics365Icon = require('./microsoft-dynamics-365.png');
+
+const BillingIcon = require('./category-billing.svg');
+const CrmIcon = require('./category-crm.svg');
+const HpcIcon = require('./category-hpc.svg');
+const IdentityIcon = require('./category-identity.svg');
+const PublicCloudIcon = require('./category-public-cloud.svg');
+const ServiceDeskIcon = require('./category-service-desk.svg');
+const VpcIcon = require('./category-vpc.svg');
 
 export const products: Product[] = [
   {
@@ -36,15 +45,46 @@ export const products: Product[] = [
   },
 ];
 
+export const features = {
+  header: 'Staff picks',
+  subheader: `Try out any of these apps curated by our team for free.`,
+  products,
+};
+
 export const categories = [
   {
-    header: 'Staff picks',
-    subheader: `Try out any of these apps curated by our team for free.`,
-    products,
+    icon: VpcIcon,
+    title: 'Virtual private cloud',
+    counter: 100,
   },
   {
-    header: 'Monitoring',
-    subheader: `Measure performance, track errors, and analyze your application.`,
-    products,
+    icon: PublicCloudIcon,
+    title: 'Public cloud',
+    counter: 300,
+  },
+  {
+    icon: HpcIcon,
+    title: 'High performance computing',
+    counter: 50,
+  },
+  {
+    icon: IdentityIcon,
+    title: 'Identity management',
+    counter: 10,
+  },
+  {
+    icon: ServiceDeskIcon,
+    title: 'Service desk',
+    counter: 1000,
+  },
+  {
+    icon: BillingIcon,
+    title: 'Billing',
+    counter: 90,
+  },
+  {
+    icon: CrmIcon,
+    title: 'Customer relationship management',
+    counter: 100,
   },
 ];
