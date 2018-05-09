@@ -1,6 +1,7 @@
 @import 'inspinia/_variables.scss';
 
 .provider-box {
+  padding: 0px;
   border: 1px solid $border-color;
 
   &:hover {
