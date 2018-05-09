@@ -16,7 +16,7 @@
       <div class="col-md-3 col-xs-6 col-sm-4"
         ng-repeat="service in $ctrl.services">
         <div class="ibox" uib-tooltip="{{ service.warning }}">
-          <div class="ibox-content product-box cursor-pointer">
+          <div class="ibox-content provider-box cursor-pointer">
             <div class="m-md" ng-class="{disabled: !service.enabled}">
               <a class="h5 elipsis" uib-tooltip="{{ ::service.name }}">
                 <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>

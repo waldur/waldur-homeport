@@ -1,4 +1,5 @@
 import template from './appstore-providers.html';
+import './appstore-providers.scss';
 
 const appstoreProviders = {
   template: template,
