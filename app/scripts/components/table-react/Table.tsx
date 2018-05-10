@@ -103,6 +103,9 @@ class Table extends React.Component<Props> {
     if (nextProps.pagination.currentPage !== this.props.pagination.currentPage) {
       this.props.fetch();
     }
+    if (nextProps.pagination.pageSize !== this.props.pagination.pageSize) {
+      this.props.fetch();
+    }
     if (nextProps.query !== this.props.query) {
       this.props.fetch();
     }

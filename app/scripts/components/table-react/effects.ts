@@ -1,4 +1,4 @@
-import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { transformRows } from '@waldur/table-react/utils';
 
@@ -39,5 +39,4 @@ function* fetchList(action) {
 export default function* watchFetchList() {
   yield takeEvery(actions.FETCH_LIST_START, fetchList);
   yield takeEvery(actions.EXPORT_TABLE_AS, exportTable);
-  yield takeLatest(actions.PAGE_SIZE_UPDATE, fetchList);
 }

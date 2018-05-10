@@ -85,3 +85,18 @@ export const toKeyValue = obj =>
 export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z][A-Za-z0-9-._ ()]+$');
 
 export const range = n => Array.from(Array(n).keys());
+
+export function parseQueryString(qs) {
+  // Example input: foo=123&bar=456
+  // Example output: {foo: "123", bar: "456"}
+
+  return qs.split('&').reduce((result, part) => {
+    const tokens = part.split('=');
+    if (tokens.length > 1) {
+      const key = tokens[0];
+      const value = tokens[1];
+      result[key] = value;
+    }
+    return result;
+  }, {});
+}

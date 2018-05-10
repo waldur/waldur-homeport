@@ -1,5 +1,5 @@
 import { formatRelative } from './dateUtils';
-import { getUUID, toKeyValue } from './utils';
+import { getUUID, toKeyValue, parseQueryString } from './utils';
 
 function getPrettyQuotaName(name) {
   return name.replace(/nc_|_count/g, '').replace(/_/g, ' ');
@@ -50,21 +50,6 @@ function renderAvatar(user) {
 function booleanField(value) {
   const cls = value ? 'fa-check' : 'fa-minus';
   return `<a class="bool-field"><i class="fa ${cls}"/></a>`;
-}
-
-function parseQueryString(qs) {
-  // Example input: foo=123&bar=456
-  // Example output: {foo: "123", bar: "456"}
-
-  return qs.split('&').reduce(function(result, part){
-    let tokens = part.split('=');
-    if (tokens.length > 1) {
-      let key = tokens[0];
-      let value = tokens[1];
-      result[key] = value;
-    }
-    return result;
-  }, {});
 }
 
 function mergeLists(list1, list2, fieldIdentifier) {

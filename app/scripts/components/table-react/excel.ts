@@ -136,7 +136,8 @@ export default async function exportExcel(table, data) {
     }
   }
   const sharedStrings = new SharedStrings();
-  const sheet = getSheet(sharedStrings, data.data);
+  const rows = [data.fields].concat(data.data);
+  const sheet = getSheet(sharedStrings, rows);
   addToZip(zip, 'xl/worksheets/sheet1.xml', sheet);
   addToZip(zip, 'xl/sharedStrings.xml', sharedStrings.serialize());
   zip.generateAsync({

@@ -5,24 +5,7 @@ import { TranslateProps } from '@waldur/i18n';
 
 import './TablePageSize.scss';
 
-const options = [
-  {
-    name: 10,
-    value: 10,
-  },
-  {
-    name: 25,
-    value: 25,
-  },
-  {
-    name: 50,
-    value: 50,
-  },
-  {
-    name: 100,
-    value: 100,
-  },
-];
+const options = [10, 25, 50, 100].map(v => ({name: v, value: v}));
 
 interface TablePageSizeProps extends TranslateProps {
   pageSize: number;
@@ -32,11 +15,10 @@ interface TablePageSizeProps extends TranslateProps {
 export const TablePageSize = (props: TablePageSizeProps) => {
   const pageSize = props.pageSize ? props.pageSize : 10;
   return (
-    <div className="table-page-size">
-      <span className="text-wrapper m-r-sm">{props.translate('Show')}</span>
+    <div>
+      <span className="m-r-sm">{props.translate('Show')}</span>
         <Select
-          className="page-size-selector"
-          name="numOfRows"
+          className="table-page-size"
           value={pageSize}
           labelKey="name"
           valueKey="value"
@@ -44,7 +26,7 @@ export const TablePageSize = (props: TablePageSizeProps) => {
           clearable={false}
           onChange={value => props.updatePageSize(value)}
         />
-      <span className="text-wrapper m-l-sm">{props.translate('entries')}</span>
+      <span className="m-l-sm">{props.translate('entries')}</span>
     </div>
   );
 };

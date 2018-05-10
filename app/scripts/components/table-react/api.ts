@@ -1,5 +1,6 @@
 import { getNextPageUrl } from '@waldur/core/api';
 import { ENV, $http } from '@waldur/core/services';
+import { parseQueryString } from '@waldur/core/utils';
 
 import { Fetcher, TableRequest } from './types';
 
@@ -50,7 +51,10 @@ export async function fetchAll(fetch: Fetcher) {
 
 export function getNextPageNumber(link: string): number {
   if (link) {
-    return parseInt(link.split('/?page=')[1].split('&')[0], 10);
+    const parts = parseQueryString(link.split('/?')[1]);
+    if (parts && parts.page) {
+      return parseInt(parts.page, 10);
+    }
   } else {
     return null;
   }
