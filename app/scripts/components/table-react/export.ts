@@ -5,7 +5,7 @@ import { put, call, select } from 'redux-saga/effects';
 import { fetchAll } from '@waldur/table-react/api';
 import { getTableState } from '@waldur/table-react/store';
 
-import { exportDataFetchStart, exportDataFetchDone } from './actions';
+import { blockStart, blockStop } from './actions';
 import exportExcel from './excel';
 import { getTableOptions } from './registry';
 
@@ -15,9 +15,9 @@ export function* exportTable(action) {
   const { exportFields, exportRow, fetchData, exportAll } = getTableOptions(table);
 
   if (exportAll) {
-    yield put(exportDataFetchStart(table));
+    yield put(blockStart(table));
     rows = yield call(fetchAll, fetchData);
-    yield put(exportDataFetchDone(table));
+    yield put(blockStop(table));
   }
 
   const data = {
