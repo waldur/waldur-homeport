@@ -52,8 +52,7 @@ const PureUserFilter = (props: UserFilterProps) => (
         options={statusOptions}
         labelKey="name"
         valueKey="value"
-        multi={true}
-        onBlur={e => e.preventDefault()}/>
+        multi={true} />
     </FormContainer>
   </form>
 );
