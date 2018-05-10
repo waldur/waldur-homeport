@@ -713,7 +713,6 @@ msgid "CIDR"
 msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
@@ -921,10 +920,6 @@ msgstr ""
 msgid "Cloud vCPU"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-compare-list.js
-msgid "Code"
-msgstr ""
-
 #: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.tsx
 msgid "Comment"
@@ -933,11 +928,6 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/expert-request-details.html
 #: app/scripts/components/issues/comments/IssueCommentsContainer.tsx
 msgid "Comments"
-msgstr ""
-
-#: app/scripts/components/appstore/appstore-store.html
-#: app/scripts/components/appstore/routes.js
-msgid "Compare flavors"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
@@ -2833,6 +2823,10 @@ msgstr ""
 msgid "Managed projects"
 msgstr ""
 
+#: app/scripts/components/project/project-workspace.js
+msgid "Marketplace"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 msgid "Max # of backups"
 msgstr ""
@@ -2971,7 +2965,6 @@ msgstr ""
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/cost-planning/cost-plans-list.js
@@ -3177,14 +3170,6 @@ msgstr ""
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "No invoices found matching filter."
-msgstr ""
-
-#: app/scripts/components/appstore/appstore-compare-list.js
-msgid "No items found matching filter."
-msgstr ""
-
-#: app/scripts/components/appstore/appstore-compare-list.js
-msgid "No items to compare yet."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -4036,10 +4021,6 @@ msgstr ""
 msgid "Price per month (VAT not included)"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-compare-list.js
-msgid "Price/hour"
-msgstr ""
-
 #: app/scripts/components/providers/details/dialog.html
 msgid "Prices"
 msgstr ""
@@ -4252,7 +4233,6 @@ msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.html
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
-#: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/events/EventDetailsTable.tsx
@@ -4406,7 +4386,6 @@ msgstr ""
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
@@ -5453,7 +5432,6 @@ msgstr ""
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js

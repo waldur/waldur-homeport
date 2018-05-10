@@ -69,6 +69,14 @@ export default function ProjectWorkspaceController(
         index: 200,
       },
       {
+        key: 'marketplace',
+        icon: 'fa-shopping-cart',
+        label: gettext('Marketplace'),
+        feature: 'marketplace',
+        link: 'marketplace-list({uuid: $ctrl.context.project.uuid})',
+        index: 210,
+      },
+      {
         label: gettext('Resources'),
         icon: 'fa-files-o',
         link: 'project.resources',

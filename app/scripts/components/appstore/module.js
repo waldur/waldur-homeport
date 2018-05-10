@@ -4,13 +4,11 @@ import appstoreStore from './appstore-store';
 import appstoreRoutes from './routes';
 import AppstoreFieldConfiguration from './field-configuration';
 import AppstoreResourceLoader from './appstore-resource-loader';
-import appstoreCompareList from './appstore-compare-list';
 import dialogModule from './dialog/module';
 import providersModule from './providers/module';
 
 export default module => {
   module.service('AppStoreUtilsService', AppStoreUtilsService);
-  module.component('appstoreCompareList', appstoreCompareList);
   module.directive('appstoreSummary', appstoreSummary);
   module.component('appstoreStore', appstoreStore);
   module.config(appstoreRoutes);

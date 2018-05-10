@@ -145,9 +145,6 @@ const ENV = {
     'Rijkscloud.Instance': 'vms',
     'Rijkscloud.Volume': 'storages',
   },
-  showCompare: [
-    'Virtual machines'
-  ],
   defaultListCacheTime: 60 * 10,
   optionsCacheTime: 10 * 1000,
   disabledFeatures: [],

@@ -83,3 +83,5 @@ export const toKeyValue = obj =>
   Object.keys(obj).map(key => `${key}=${encodeURIComponent(obj[key])}`).join('&');
 
 export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z][A-Za-z0-9-._ ()]+$');
+
+export const range = n => Array.from(Array(n).keys());
