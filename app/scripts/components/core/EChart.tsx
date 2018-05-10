@@ -12,12 +12,12 @@ interface ChartProps {
   options: any;
 }
 
-export class Chart extends React.Component<ChartProps> {
+export class EChart extends React.Component<ChartProps> {
   container = undefined;
   chart = undefined;
 
   state = {
-    drawing: false,
+    loading: false,
   };
 
   static defaultProps = {
@@ -40,18 +40,18 @@ export class Chart extends React.Component<ChartProps> {
     if (options === prevProps.options) { return; }
     if (this.chart) {
       this.renderChart();
-    } else if (!this.chart && !this.state.drawing) {
+    } else if (!this.chart && !this.state.loading) {
       this.drawChart();
     }
   }
 
   drawChart() {
     this.setState({
-      drawing: true,
+      loading: true,
     });
     loadEcharts().then(module => {
       this.setState({
-        drawing: false,
+        loading: false,
       });
       if (!this.container) { return; }
       const echarts = module.default;
@@ -68,19 +68,16 @@ export class Chart extends React.Component<ChartProps> {
   }
   render() {
     const { width, height } = this.props;
-    const { drawing } = this.state;
+    const { loading } = this.state;
     const style = { width, height };
     return (
       <div
         className="content-center-center"
         style={style}
       >
-        {drawing && <LoadingSpinner />}
+        {loading && <LoadingSpinner />}
         < div
-          className={classNames({
-            'bar-chart': true,
-            'hidden': drawing,
-          })}
+          className={classNames({ hidden: loading })}
           style={style}
           ref={container => this.container = container}
         />

@@ -3,13 +3,13 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { Chart } from '@waldur/core/Chart';
+import { EChart } from '@waldur/core/EChart';
 import { ToggleOpenProps, toggleOpen } from '@waldur/core/HOC/toggleOpen';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
-import { getPieChartsDataSelector, getBarChartsDataSelector, getExceededQuotasSelector } from './selectors';
+import { getPieChartsDataSelector, getBarChartsDataSelector, getExceededQuotasSelector, getBarChartsLoadingSelector } from './selectors';
 import { Project, Quota, ChartData } from './types';
 
 interface PureResourceAnalysisItemProps extends TranslateProps, ToggleOpenProps {
@@ -17,13 +17,14 @@ interface PureResourceAnalysisItemProps extends TranslateProps, ToggleOpenProps 
   project: Project;
   pieChartsData: ChartData[];
   barChartsData: ChartData[];
+  barChartsLoading: boolean;
 }
 
 export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) => {
-  const { project, isOpen, handleToggleOpen, pieChartsData, barChartsData, translate, exceededQuotas } = props;
+  const { project, isOpen, handleToggleOpen, pieChartsData, barChartsData, translate, exceededQuotas, barChartsLoading } = props;
   const usagePieCharts = pieChartsData.map(pieChart => {
     const { limit, options, id, label, exceeds } = pieChart;
-    const content = limit === -1 ? translate('Unlimited') : (<Chart options={options} />);
+    const content = limit === -1 ? translate('Unlimited') : (<EChart options={options} />);
 
     return (
       <li key={id}>
@@ -33,21 +34,19 @@ export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) =
     );
   });
   const usageBarCharts = barChartsData.map(barChart => {
-    const { options, id, label, exceeds, loading, erred } = barChart;
-    let content;
-
-    if (loading) {
-      content = (<LoadingSpinner />);
-    } else if (erred) {
-      content = translate('Unable to get {title}.', { label });
-    } else {
-      content = (<Chart options={options} />);
-    }
+    const { options, id, label, exceeds } = barChart;
 
     return (
       <li key={id}>
-        <span className={`chart-title ${exceeds ? 'text-danger' : ''}`}>{label}</span>
-        <span className="chart-content">{content}</span>
+        <span className={classNames({
+          'chart-title': true,
+          'text-danger': exceeds,
+        })}>
+          {label}
+        </span>
+        <span className="chart-content">
+          <EChart options={options} />
+        </span>
       </li>
     );
   });
@@ -65,7 +64,7 @@ export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) =
         })}
         onClick={handleToggleOpen}
       >
-        <h4 className={exceededQuotas.length > 0 ? 'text-danger' : ''}>
+        <h4 className={classNames({ 'text-danger': !!exceededQuotas.length })}>
           <span>{project.name}</span>
           {!!exceededQuotas.length &&
             <Tooltip
@@ -88,7 +87,16 @@ export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) =
       </div>
       <div className="resource-analysis-item__content">
         {isOpen &&
-          <ul className="resource-analysis-item__bar-chart-list">{usageBarCharts}</ul>
+          <ul className={
+            classNames({
+              'resource-analysis-item__bar-chart-list': true,
+              'content-center-center': barChartsLoading,
+            })
+          }>
+            {
+              barChartsLoading ? (<LoadingSpinner />) : usageBarCharts
+            }
+          </ul>
         }
         {!isOpen &&
           <ul className="resource-analysis-item__pie-chart-list">{usagePieCharts}</ul>
@@ -101,6 +109,7 @@ export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) =
 const mapStateToProps = (state, ownProps) => ({
   pieChartsData: getPieChartsDataSelector(state, ownProps),
   barChartsData: getBarChartsDataSelector(state, ownProps),
+  barChartsLoading: getBarChartsLoadingSelector(state, ownProps),
   exceededQuotas: getExceededQuotasSelector(state, ownProps),
 });
 

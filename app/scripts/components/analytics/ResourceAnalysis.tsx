@@ -21,7 +21,7 @@ interface PureResourceAnalysisProps extends TranslateProps {
 }
 
 export class PureResourceAnalysis extends React.Component<PureResourceAnalysisProps> {
-  componentWillMount() { this.props.fetchProjects(); }
+  componentDidMount() { this.props.fetchProjects(); }
 
   render() {
     const { searchValue, translate, projects, onSearchFilterChange, loading } = this.props;

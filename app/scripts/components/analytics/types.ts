@@ -8,22 +8,9 @@ export interface Quota {
 }
 
 export interface Project {
-  url: string;
   uuid: string;
   name: string;
-  customer: string;
-  customer_uuid: string;
-  customer_name: string;
-  customer_native_name: string;
-  customer_abbreviation: string;
-  description: string;
   quotas: Quota[];
-  services: Array<{ [key: string]: string | boolean }>;
-  created: Date;
-  certifications: any[];
-  type: string;
-  type_name: string;
-  billing_price_estimate: { [key: string]: string | number };
 }
 
 export interface Payload {

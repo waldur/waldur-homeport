@@ -1,7 +1,7 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 
-import { Chart } from '@waldur/core/Chart';
+import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -22,10 +22,10 @@ const renderWrapper = (props?) => shallow(<PureResourceAnalysisItem {...initialP
 
 const getPieChartsListContent = (container: ShallowWrapper) => container.find('.resource-analysis-item__pie-chart-list .chart-content');
 const getPieChartsListTitle = (container: ShallowWrapper) => container.find('.resource-analysis-item__pie-chart-list .chart-title');
-const getBarChartsListContent = (container: ShallowWrapper) => container.find('.resource-analysis-item__bar-chart-list .chart-content');
+const getBarChartsList = (container: ShallowWrapper) => container.find('.resource-analysis-item__bar-chart-list');
 const getBarChartsListTitle = (container: ShallowWrapper) => container.find('.resource-analysis-item__bar-chart-list .chart-title');
-const getPieCharts = (container: ShallowWrapper) => getPieChartsListContent(container).find(Chart);
-const getBarCharts = (container: ShallowWrapper) => getBarChartsListContent(container).find(Chart);
+const getPieCharts = (container: ShallowWrapper) => getPieChartsListContent(container).find(EChart);
+const getBarCharts = (container: ShallowWrapper) => getBarChartsList(container).find(EChart);
 const getTitle = (container: ShallowWrapper) => container.find('.resource-analysis-item__title');
 const getTooltip = (container: ShallowWrapper) => getTitle(container).find(Tooltip);
 
@@ -70,8 +70,8 @@ describe('PureResourceAnalysisItem', () => {
   it('renders loading spinner on bar chart data fetching', () => {
     const wrapper = renderWrapper({
       isOpen: true,
-      barChartsData: [barCharts.loading],
+      barChartsLoading: true,
     });
-    expect(getBarChartsListContent(wrapper).find(LoadingSpinner).length).toBe(1);
+    expect(getBarChartsList(wrapper).find(LoadingSpinner).length).toBe(1);
   });
 });

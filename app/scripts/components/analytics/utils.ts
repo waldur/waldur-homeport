@@ -1,12 +1,14 @@
 import * as moment from 'moment';
-import 'moment/min/locales.min';
 
 import { translate } from '@waldur/i18n';
 
 import * as constants from './constants';
 import { getRegisteredQuota } from './registry';
 
-export const sortObjecstByProp = propName => objects => [...objects].sort((a, b) => a[propName] >= b[propName] ? 1 : -1);
+export const sortObjecstByProp =
+  (propName: string) =>
+    (objects: Array<{[key: string]: string}>, locale?: string | string[], options?: { [key: string]: string | boolean }) =>
+      [...objects].sort((a, b) => a[propName].localeCompare(b[propName], locale, options));
 
 export const sortQuotasByLabel = sortObjecstByProp('label');
 
@@ -69,16 +71,14 @@ export const getPieChartsData = quotas => quotas.map(quota => ({
   },
 }));
 
-export const getBarChartsData = (quotas, locale) => quotas.map(quota => {
+export const getBarChartsData = quotas => quotas.map(quota => {
   if (!quota.data) { return quota; }
   const dateData = [];
   const limitData = [];
   const usageData = [];
-  moment.locale(locale);
   for (const item of quota.data) {
     const { point, object: { limit, usage } = { limit: 0, usage: 0 } } = item;
-    const date = moment(point * 1000);
-    dateData.push(date.format('Do MMMM'));
+    dateData.push(moment(point * 1000).format('Do MMMM'));
     limitData.push(limit === -1 ? 0 : limit);
     usageData.push(usage);
   }
@@ -87,7 +87,7 @@ export const getBarChartsData = (quotas, locale) => quotas.map(quota => {
     label: quota.label,
     loading: quota.loading,
     erred: quota.erred,
-    exceeds: isQuotaExceeds(quota),
+    exceeds: isQuotaExceeds(quota.data.slice(-1)[0].object),
     options: {
       color: [constants.chartColors.orange, constants.chartColors.blue],
       title: {
@@ -152,4 +152,12 @@ export const getExceededQuotas = quotas => {
     exceededQuotas.push(quota);
   }
   return exceededQuotas;
+};
+
+export const getIsHistoryQuotasLoading = quotas => {
+  for (const qouta of quotas) {
+    if (!qouta.loading) { continue; }
+    return true;
+  }
+  return false;
 };

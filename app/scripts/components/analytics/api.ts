@@ -7,7 +7,7 @@ export const fetchProjects = (organizationUuid: string) =>
 
 export const fetchQuotaHistory = (quotaUuid: string) => {
   const url = `/quotas/${quotaUuid}/history/`;
-  const end = +moment().format('X'); // Math.round(Date.now() / 1000); // should be unix timestamp
+  const end = +moment().format('X');
   const start = end - 60 * 60 * 24 * 30;
   const pointsCount = 15;
   return getList(url, {

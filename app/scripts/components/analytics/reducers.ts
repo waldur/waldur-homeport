@@ -2,7 +2,6 @@ import { Action } from '@waldur/core/reducerActions';
 
 import * as constants from './constants';
 import { Payload, State } from './types';
-// import { omit } from '@waldur/core/utils';
 
 const INITIAL_STATE: State = {
   loading: false,

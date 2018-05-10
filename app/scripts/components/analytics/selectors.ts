@@ -10,41 +10,42 @@ export const getLoading = state => state.analytics.loading;
 export const getProjects = state => state.analytics.projects;
 export const getHistoryQuota = (state, props) => state.analytics.quotasHistory[props.project.uuid];
 export const getQuotas = (_, props) => props.project.quotas;
-export const getVisibleQuotasFilter = state => quotas => quotas.filter(quota => isVisible(state, quota.name));
 export const getLocale = state => state.locale;
+export const getVisibleQuotasFilter = state => quotas => quotas.filter(quota => isVisible(state, quota.name));
 
 export const getProjectsSelector = createSelector(
   getProjects,
   getSearchValue,
-  (projects, searchValue) => {
+  getLocale,
+  (projects, searchValue, locale) => {
     const resultingProjects = projects.filter(project => project.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1);
-    return utils.sortProjectsByName(resultingProjects);
+    return utils.sortProjectsByName(resultingProjects, locale);
   },
 );
 
 export const getPieChartsDataSelector = createSelector(
   getQuotas,
   getVisibleQuotasFilter,
-  (quotas, quotasVisibilityFilter) => {
+  getLocale,
+  (quotas, quotasVisibilityFilter, locale) => {
     let resultingQuotas = utils.quotasRegitryFilter(quotas);
     resultingQuotas = quotasVisibilityFilter(resultingQuotas);
     resultingQuotas = utils.setQuotasLabel(resultingQuotas);
-    resultingQuotas = utils.sortQuotasByLabel(resultingQuotas);
+    resultingQuotas = utils.sortQuotasByLabel(resultingQuotas, locale);
     return utils.getPieChartsData(resultingQuotas);
   },
 );
 
 export const getBarChartsDataSelector = createSelector(
   getHistoryQuota,
-  getVisibleQuotasFilter,
   getLocale,
-  (quotas, quotasVisibilityFilter, locale) => {
+  (quotas, locale) => {
     if (!quotas) { return []; }
     let resultingQuotas = dictToList(quotas);
     resultingQuotas = utils.setHistoryQuotasName(resultingQuotas);
-    resultingQuotas = quotasVisibilityFilter(resultingQuotas);
     resultingQuotas = utils.setQuotasLabel(resultingQuotas);
-    return utils.getBarChartsData(resultingQuotas, locale);
+    resultingQuotas = utils.sortQuotasByLabel(resultingQuotas, locale);
+    return utils.getBarChartsData(resultingQuotas);
   },
 );
 
@@ -57,4 +58,9 @@ export const getExceededQuotasSelector = createSelector(
     resultingQuotas = utils.setQuotasLabel(resultingQuotas);
     return utils.getExceededQuotas(resultingQuotas);
   }
+);
+
+export const getBarChartsLoadingSelector = createSelector(
+  getHistoryQuota,
+  quotas => quotas ? utils.getIsHistoryQuotasLoading(dictToList(quotas)) : true,
 );
