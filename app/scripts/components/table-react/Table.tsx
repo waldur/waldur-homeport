@@ -38,6 +38,7 @@ class Table extends React.Component<Props> {
   render() {
     return (
       <div className="dataTables_wrapper">
+        {this.props.blocked && <div className="table-block"/>}
         <TableButtons {...this.props}/>
         {this.props.hasQuery && (
           <TableQuery

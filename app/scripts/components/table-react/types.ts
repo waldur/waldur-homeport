@@ -46,6 +46,7 @@ export interface TableState {
   entities?: object;
   order?: number[];
   loading?: boolean;
+  blocked?: boolean;
   error?: any;
   pagination?: Pagination;
   query?: string;
