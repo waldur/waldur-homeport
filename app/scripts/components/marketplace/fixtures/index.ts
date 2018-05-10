@@ -82,3 +82,15 @@ export const categories = [
     counter: 100,
   },
 ];
+
+export const sections = [
+  {
+    title: 'Summary',
+    features: [
+      {
+        key: 'installs',
+        title: 'Installation count',
+      },
+    ],
+  },
+];

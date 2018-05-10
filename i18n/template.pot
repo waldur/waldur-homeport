@@ -929,6 +929,10 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
+#: app/scripts/components/marketplace/routes.js
+msgid "Compare items"
+msgstr ""
+
 #: app/scripts/components/customer/popover/customer-users-details-list.js
 #: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Competence"
@@ -2827,6 +2831,7 @@ msgstr ""
 msgid "Managed projects"
 msgstr ""
 
+#: app/scripts/components/marketplace/routes.js
 #: app/scripts/components/project/project-workspace.js
 msgid "Marketplace"
 msgstr ""
