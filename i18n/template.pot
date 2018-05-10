@@ -1871,6 +1871,7 @@ msgstr ""
 msgid "Filter organizations"
 msgstr ""
 
+#: app/scripts/components/analytics/ResourceAnalysis.tsx
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "Filter projects"
 msgstr ""
@@ -2724,6 +2725,10 @@ msgstr ""
 
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
+msgstr ""
+
+#: app/scripts/components/analytics/utils.ts
+msgid "Limit"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html
@@ -4201,6 +4206,10 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
+#: app/scripts/components/analytics/ResourceAnalysis.tsx
+msgid "Projects ({count})"
+msgstr ""
+
 #: app/scripts/components/dashboard/organization-dashboard.html
 #: app/scripts/components/team/add-team-member.html
 msgid "Projects list"
@@ -4390,6 +4399,7 @@ msgstr ""
 msgid "Quotas updated."
 msgstr ""
 
+#: app/scripts/components/analytics/registry.ts
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
@@ -4526,6 +4536,10 @@ msgstr ""
 
 #: app/scripts/components/issues/IssueReload.tsx
 msgid "Reload issue data"
+msgstr ""
+
+#: app/scripts/components/analytics/utils.ts
+msgid "Remaining limit"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -5342,6 +5356,7 @@ msgstr ""
 msgid "Snapshot size, GB"
 msgstr ""
 
+#: app/scripts/components/analytics/registry.ts
 #: app/scripts/components/openstack/openstack-backup/tabs.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
 #: app/scripts/components/openstack/openstack-volume/module.js
@@ -6034,6 +6049,14 @@ msgstr ""
 msgid "Unable to fetch project providers."
 msgstr ""
 
+#: app/scripts/components/analytics/effects.ts
+msgid "Unable to fetch projects."
+msgstr ""
+
+#: app/scripts/components/analytics/effects.ts
+msgid "Unable to fetch quota history."
+msgstr ""
+
 #: app/scripts/components/issues/comments/utils.ts
 msgid "Unable to find:"
 msgstr ""
@@ -6146,6 +6169,7 @@ msgstr ""
 msgid "Unit price"
 msgstr ""
 
+#: app/scripts/components/analytics/ResourceAnalysisItem.tsx
 #: app/scripts/components/freeipa/freeipa-quota.html
 msgid "Unlimited"
 msgstr ""
@@ -6226,6 +6250,10 @@ msgstr ""
 
 #: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
 msgid "Uptime"
+msgstr ""
+
+#: app/scripts/components/analytics/utils.ts
+msgid "Usage"
 msgstr ""
 
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
@@ -6600,6 +6628,7 @@ msgstr ""
 msgid "Volume size, GB"
 msgstr ""
 
+#: app/scripts/components/analytics/registry.ts
 #: app/scripts/components/configs/base-config.js
 #: app/scripts/components/openstack/openstack-instance/module.js
 #: app/scripts/components/resource/list/resource-storage-tabs.html
@@ -7007,6 +7036,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/package-templates-service.js
 msgid "{quota} usage exceeds quota limit by {amount}."
+msgstr ""
+
+#: app/scripts/components/analytics/ResourceAnalysisItem.tsx
+msgid "{quota} usage exceeds quota limit."
 msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts

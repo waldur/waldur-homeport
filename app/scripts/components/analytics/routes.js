@@ -14,7 +14,7 @@ export default function analyticsRoutes($stateProvider) {
 
     .state('organization.analysis.resources', {
       url: 'resource-usage/',
-      template: '<resource-analysis/>',
+      template: '<resource-analysis-container/>',
       data: {
         pageClass: 'gray-bg',
         pageTitle: gettext('Resource usage')
