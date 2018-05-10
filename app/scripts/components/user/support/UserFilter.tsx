@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import Panel from '@waldur/core/Panel';
 import { StringField, FormContainer, SelectField } from '@waldur/form-react';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
+
+import './UserFilter.scss';
 
 interface UserFilterProps extends TranslateProps {
   submitting: boolean;
@@ -25,36 +26,35 @@ const statusOptions = [
 ];
 
 const PureUserFilter = (props: UserFilterProps) => (
-  <Panel title={props.translate('Apply filters')}>
-    <form>
-      <FormContainer
-        submitting={props.submitting}>
+  <form className="form-inline" id="user-filter">
+    <FormContainer
+      labelClass="m-r-md"
+      controlClass="m-r-md"
+      submitting={props.submitting}>
+      <StringField
+        label={props.translate('Full name')}
+        name="full_name"/>
+      {props.nativeNameVisible && (
         <StringField
-          label={props.translate('Full name')}
-          name="full_name"/>
-        {props.nativeNameVisible && (
-          <StringField
-            label={props.translate('Native name')}
-            name="native_name"/>
-        )}
-        <StringField
-          label={props.translate('ID code')}
-          name="civil_number"/>
-        <StringField
-          label={props.translate('Email')}
-          name="email"/>
-        <SelectField
-          label={props.translate('Role')}
-          name="role"
-          placeholder={props.translate('Select role')}
-          options={statusOptions}
-          labelKey="name"
-          valueKey="value"
-          multi={true}
-          onBlur={e => e.preventDefault()}/>
-      </FormContainer>
-    </form>
-  </Panel>
+          label={props.translate('Native name')}
+          name="native_name"/>
+      )}
+      <StringField
+        label={props.translate('ID code')}
+        name="civil_number"/>
+      <StringField
+        label={props.translate('Email')}
+        name="email"/>
+      <SelectField
+        label={props.translate('Role')}
+        name="role"
+        placeholder={props.translate('Select role')}
+        options={statusOptions}
+        labelKey="name"
+        valueKey="value"
+        multi={true}/>
+    </FormContainer>
+  </form>
 );
 
 const mapStateToProps = state => ({

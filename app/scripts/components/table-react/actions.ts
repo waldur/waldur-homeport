@@ -4,10 +4,13 @@ export const FETCH_LIST_ERROR = 'waldur/table/FETCH_ERROR';
 export const FETCH_LIST_GOTO_PAGE = 'waldur/table/GOTO_PAGE';
 export const SET_FILTER_QUERY = 'waldur/table/SET_QUERY';
 export const EXPORT_TABLE_AS = 'waldur/table/EXPORT';
+export const BLOCK_START = 'waldur/table/BLOCK_START';
+export const BLOCK_STOP = 'waldur/table/BLOCK_STOP';
 export const RESET_PAGINATION = 'waldur/table/RESET_PAGINATION';
 export const ENTITY_CREATE = 'waldur/table/ENTITY_CREATE';
 export const ENTITY_UPDATE = 'waldur/table/ENTITY_UPDATE';
 export const ENTITY_DELETE = 'waldur/table/ENTITY_DELETE';
+export const PAGE_SIZE_UPDATE = 'waldur/table/PAGE_SIZE_UPDATE';
 
 export const fetchListStart = (table: string, extraFilter?: any) => ({
   type: FETCH_LIST_START,
@@ -51,6 +54,20 @@ export const exportTableAs = (table: string, format: string) => ({
   },
 });
 
+export const blockStart = (table: string) => ({
+  type: BLOCK_START,
+  payload: {
+    table,
+  },
+});
+
+export const blockStop = (table: string) => ({
+  type: BLOCK_STOP,
+  payload: {
+    table,
+  },
+});
+
 export const setFilterQuery = (table: string, query: string) => ({
   type: SET_FILTER_QUERY,
   payload: {
@@ -63,6 +80,14 @@ export const resetPagination = (table: string) => ({
   type: RESET_PAGINATION,
   payload: {
     table,
+  },
+});
+
+export const updatePageSize = (table: string, size: string) => ({
+  type: PAGE_SIZE_UPDATE,
+  payload: {
+    table,
+    size,
   },
 });
 

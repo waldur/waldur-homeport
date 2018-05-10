@@ -400,7 +400,6 @@ msgstr ""
 
 #: app/scripts/components/issues/list/issues-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
-#: app/scripts/components/user/support/UserFilter.tsx
 msgid "Apply filters"
 msgstr ""
 
@@ -3603,6 +3602,10 @@ msgstr ""
 msgid "Organization removal"
 msgstr ""
 
+#: app/scripts/components/user/support/UserList.tsx
+msgid "Organization roles"
+msgstr ""
+
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/customer/popover/CustomerSummary.tsx
@@ -4152,6 +4155,10 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js
 msgid "Project providers links have been updated."
+msgstr ""
+
+#: app/scripts/components/user/support/UserList.tsx
+msgid "Project roles"
 msgstr ""
 
 #: app/scripts/components/quotas/constants.js
@@ -5222,6 +5229,10 @@ msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Should be obtained from OAuth service provider"
+msgstr ""
+
+#: app/scripts/components/table-react/TablePageSize.tsx
+msgid "Show"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
@@ -6884,6 +6895,10 @@ msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts
 msgid "current state on backend: {resourceState}."
+msgstr ""
+
+#: app/scripts/components/table-react/TablePageSize.tsx
+msgid "entries"
 msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts

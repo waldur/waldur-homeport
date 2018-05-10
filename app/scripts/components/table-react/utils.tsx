@@ -33,6 +33,7 @@ export function connectTable(options: TableOptions) {
       gotoPage: page => dispatch(actions.fetchListGotoPage(table, page)),
       exportAs: format => dispatch(actions.exportTableAs(table, format)),
       setQuery: query => dispatch(actions.setFilterQuery(table, query)),
+      updatePageSize: size => dispatch(actions.updatePageSize(table, size)),
     });
 
     const filterColumns = state => columns => columns.filter(
