@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface TableRequest {
+export interface TableRequest {
   pageSize: number;
   currentPage: number;
   filter?: any;
@@ -11,9 +11,10 @@ interface TableRequest {
 
 type Entity = any;
 
-interface TableResponse {
+export interface TableResponse {
   rows: Entity[];
   resultCount: number;
+  link: string;
 }
 
 export type Fetcher = (request: TableRequest) => angular.IPromise<TableResponse>;
@@ -24,7 +25,7 @@ export interface TableOptions {
   queryField?: string;
   exportFields?: string[];
   exportRow?: (Entity) => string[];
-  exportEndpoint?: string;
+  exportAll?: boolean;
   getDefaultFilter?: (state: any) => any;
   mapPropsToFilter?: (props: any) => any;
 }

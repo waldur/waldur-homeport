@@ -98,7 +98,6 @@ const TableOptions = {
     row.first_response_sla || 'N/A',
     formatDateTime(row.created),
   ],
-  exportEndpoint: '/jira-issues',
 };
 
 const JiraIssuesList = connectTable(TableOptions)(TableComponent);

@@ -133,9 +133,9 @@ const TableOptions = {
   table: 'userList',
   fetchData: createFetcher('users'),
   mapPropsToFilter: props => formatRoleFilter(props.userFilter),
-  exportFields: ['username', 'email'],
-  exportRow: row => [row.username, row.email],
-  exportEndpoint: '/users',
+  exportFields: ['Full name', 'Username', 'Email', 'Phone number'],
+  exportAll: true,
+  exportRow: row => [row.full_name, row.username, row.email, row.phone_number],
 };
 
 const mapStateToProps = state => ({
