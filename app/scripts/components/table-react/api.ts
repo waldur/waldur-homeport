@@ -1,31 +1,32 @@
 import { getNextPageUrl } from '@waldur/core/api';
 import { ENV, $http } from '@waldur/core/services';
 
-import { Fetcher } from './types';
+import { Fetcher, TableRequest } from './types';
 
 export function createFetcher(endpoint: string): Fetcher {
-  return request => {
+  return (request: TableRequest) => {
     const url = `${ENV.apiEndpoint}api/${endpoint}/`;
     const params = {
       page: request.currentPage,
       page_size: request.pageSize,
       ...request.filter,
-    }; // TO_DO: In the next release params should consider filters for exporting.
+    };
     return $http({
       method: 'GET',
       url,
       params,
-    }).then(response => {
+    }).then((response: angular.IHttpResponse<any>) => {
       const resultCount = parseInt(response.headers()['x-result-count'], 10);
       return {
         rows: Array.isArray(response.data) ? response.data : [],
         resultCount,
-        obj: response,
+        nextPage: getNextPageNumber(getNextPageUrl(response)),
       };
     });
   };
 }
 
+// TODO: Implement support for filtering
 export async function fetchAll(fetch: Fetcher) {
   const request = {
     pageSize: 50,
@@ -37,10 +38,8 @@ export async function fetchAll(fetch: Fetcher) {
 
   while (true) {
     result = result.concat(response.rows);
-    const nextLink = getNextPageUrl(response.obj);
-    const nextPage = parseInt(getNextPageNumber(nextLink), 10);
-    if (nextPage) {
-      request.currentPage = nextPage;
+    if (response.nextPage) {
+      request.currentPage = response.nextPage;
       response = await fetch(request);
     } else {
       break;
@@ -49,10 +48,10 @@ export async function fetchAll(fetch: Fetcher) {
   return result;
 }
 
-export const getNextPageNumber = link => {
+export function getNextPageNumber(link: string): number {
   if (link) {
-    return link.split('/?page=')[1].split('&')[0];
+    return parseInt(link.split('/?page=')[1].split('&')[0], 10);
   } else {
     return null;
   }
-};
+}

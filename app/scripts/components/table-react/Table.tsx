@@ -4,6 +4,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TranslateProps } from '@waldur/i18n/types';
 import { TablePageSize } from '@waldur/table-react/TablePageSize';
 
+import './Table.scss';
 import TableBody from './TableBody';
 import TableButtons from './TableButtons';
 import TableHeader from './TableHeader';

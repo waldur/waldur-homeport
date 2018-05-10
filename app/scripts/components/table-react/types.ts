@@ -14,7 +14,7 @@ type Entity = any;
 interface TableResponse {
   rows: Entity[];
   resultCount: number;
-  obj: any;
+  nextPage: number;
 }
 
 export type Fetcher = (request: TableRequest) => angular.IPromise<TableResponse>;
