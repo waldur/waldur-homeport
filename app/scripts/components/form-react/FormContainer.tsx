@@ -12,7 +12,7 @@ interface FormContainerProps {
 }
 
 export const FormContainer = (props: FormContainerProps) => (
-  <>
+  <div>
     {React.Children.map(props.children, (input: any) => (input && input.props.name ?
       <Field
         {...input.props}
@@ -24,5 +24,5 @@ export const FormContainer = (props: FormContainerProps) => (
         clearOnUnmount={props.clearOnUnmount}
       /> : input
     ))}
-  </>
+  </div>
 );

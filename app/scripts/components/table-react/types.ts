@@ -11,10 +11,10 @@ export interface TableRequest {
 
 type Entity = any;
 
-export interface TableResponse {
+interface TableResponse {
   rows: Entity[];
   resultCount: number;
-  link: string;
+  obj: any;
 }
 
 export type Fetcher = (request: TableRequest) => angular.IPromise<TableResponse>;

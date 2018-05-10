@@ -52,7 +52,7 @@ const PureUserFilter = (props: UserFilterProps) => (
         options={statusOptions}
         labelKey="name"
         valueKey="value"
-        multi={true} />
+        multi={true}/>
     </FormContainer>
   </form>
 );

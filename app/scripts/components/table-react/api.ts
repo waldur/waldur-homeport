@@ -1,3 +1,4 @@
+import { getNextPageUrl } from '@waldur/core/api';
 import { ENV, $http } from '@waldur/core/services';
 
 import { Fetcher } from './types';
@@ -9,18 +10,17 @@ export function createFetcher(endpoint: string): Fetcher {
       page: request.currentPage,
       page_size: request.pageSize,
       ...request.filter,
-    };
+    }; // TO_DO: In the next release params should consider filters for exporting.
     return $http({
       method: 'GET',
       url,
       params,
     }).then(response => {
       const resultCount = parseInt(response.headers()['x-result-count'], 10);
-      const link = response.headers('link');
       return {
         rows: Array.isArray(response.data) ? response.data : [],
         resultCount,
-        link,
+        obj: response,
       };
     });
   };
@@ -28,7 +28,7 @@ export function createFetcher(endpoint: string): Fetcher {
 
 export async function fetchAll(fetch: Fetcher) {
   const request = {
-    pageSize: 10,
+    pageSize: 50,
     currentPage: 1,
   };
 
@@ -37,7 +37,8 @@ export async function fetchAll(fetch: Fetcher) {
 
   while (true) {
     result = result.concat(response.rows);
-    const nextPage = parseInt(parseNextPage(response.link), 10);
+    const nextLink = getNextPageUrl(response.obj);
+    const nextPage = parseInt(getNextPageNumber(nextLink), 10);
     if (nextPage) {
       request.currentPage = nextPage;
       response = await fetch(request);
@@ -48,11 +49,10 @@ export async function fetchAll(fetch: Fetcher) {
   return result;
 }
 
-export const parseNextPage = link => {
-  const nextLink = link.split(', ').filter(s => s.indexOf('rel="next"') > -1)[0];
-  if (!nextLink) {
+export const getNextPageNumber = link => {
+  if (link) {
+    return link.split('/?page=')[1].split('&')[0];
+  } else {
     return null;
   }
-  const parsedLink = nextLink.split(';')[0].slice(1, -1);
-  return parsedLink.split('/?page=')[1].split('&')[0];
 };
