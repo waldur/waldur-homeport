@@ -11,17 +11,15 @@ interface ComparisonTableProps {
 
 export const ComparisonTable = (props: ComparisonTableProps) => (
   <table className="table table-bordered">
-    <thead>
+  <tbody>
       <tr>
         <td/>
         {props.items.map((item, index) => (
-          <td key={index} className="col-md-3">
+          <td key={index} style={{width: '20%'}}>
             <ComparisonItem item={item}/>
           </td>
         ))}
       </tr>
-    </thead>
-    <tbody>
       {props.sections.map((section, index) => (
         <ComparisonSection
           key={index}

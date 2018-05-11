@@ -9,12 +9,12 @@ interface ComparisonSectionProps {
 
 export const ComparisonSection = (props: ComparisonSectionProps) => (
   <>
-    <tr>
+    <tr className="gray-bg">
       <th>{props.section.title}</th>
       {props.items.map((item, index) => (
-        <td key={index}>
+        <th key={index}>
           {item.title}
-        </td>
+        </th>
       ))}
     </tr>
     {props.section.features.map((feature, index1) => (
@@ -24,7 +24,11 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
         </td>
         {props.items.map((item, index2) => (
           <td key={index2}>
-            {item[feature.key]}
+            {
+              feature.render ?
+              feature.render(item[feature.key]) :
+              item[feature.key]
+            }
           </td>
         ))}
       </tr>

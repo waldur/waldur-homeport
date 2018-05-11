@@ -1,10 +1,15 @@
 .comparison-item {
-  text-align: center;
+  position: relative;
+}
+
+.comparison-item-close {
+  position: absolute;
+  right: 17px;
 }
 
 .comparison-item-thumb {
-  height: 5em;
-  width: 5em;
+  height: 6em;
+  width: 6em;
   display: block;
   margin: 10px auto;
 }

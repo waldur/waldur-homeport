@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import './ComparisonItem.scss';
+import { RatingStars } from './RatingStars';
 import { ProductDetails } from './types';
 
 interface ComparisonItemProps {
@@ -8,23 +9,17 @@ interface ComparisonItemProps {
 }
 
 export const ComparisonItem = (props: ComparisonItemProps) => (
-  <div className="comparison-item">
-    <button
-      type="button"
-      className="btn btn-default btn-sm">
-      <i className="fa fa-trash"/>
-      {' '}
-      Remove from comparison
-    </button>
+  <div className="text-center comparison-item">
+    <a className="text-muted comparison-item-close"
+      title="Remove from comparison">
+      <i className="fa fa-close"/>
+    </a>
     <a className="comparison-item-thumb">
       <img src={props.item.thumb}/>
     </a>
-    <button
-      type="button"
-      className="btn btn-default btn-sm">
-      <i className="fa fa-shopping-cart"/>
-      {' '}
-      Add to cart
-    </button>
+    <h3>{props.item.title}</h3>
+    <p>by {props.item.vendor}</p>
+    <RatingStars rating={props.item.rating} size="medium"/>
+    <p>Based on <a>{props.item.reviews} reviews</a></p>
   </div>
 );
