@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import './ComparisonItem.scss';
+import { ComparisonItemRemoveButtonContainer } from './ComparisonItemRemoveButtonContainer';
 import { RatingStars } from './RatingStars';
 import { ProductDetails } from './types';
 
@@ -10,10 +11,7 @@ interface ComparisonItemProps {
 
 export const ComparisonItem = (props: ComparisonItemProps) => (
   <div className="text-center comparison-item">
-    <a className="text-muted comparison-item-close"
-      title="Remove from comparison">
-      <i className="fa fa-close"/>
-    </a>
+    <ComparisonItemRemoveButtonContainer product={props.item}/>
     <a className="comparison-item-thumb">
       <img src={props.item.thumb}/>
     </a>

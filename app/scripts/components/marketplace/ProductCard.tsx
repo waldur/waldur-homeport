@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { ProductButton } from './ProductButton';
 import './ProductCard.scss';
+import { ProductCompareButtonContainer } from './ProductCompareButtonContainer';
 import { RatingStars } from './RatingStars';
 import { Product } from './types';
 
@@ -28,7 +29,7 @@ export const ProductCard = (props: ProductCardProps) => (
     </div>
     <div className="product-button-group">
       <ProductButton icon="fa fa-comments" title="Write review"/>
-      <ProductButton icon="fa fa-balance-scale" title="Add to comparison"/>
+      <ProductCompareButtonContainer product={props.product}/>
       <ProductButton icon="fa fa-shopping-cart" title="Add to cart"/>
     </div>
   </div>

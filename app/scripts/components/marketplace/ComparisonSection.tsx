@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { range } from '@waldur/core/utils';
+
 import { ProductDetails, Section } from './types';
 
 interface ComparisonSectionProps {
@@ -16,6 +18,9 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
           {item.title}
         </th>
       ))}
+      {range(4 - props.items.length).map(index =>
+        <td key={index}/>
+      )}
     </tr>
     {props.section.features.map((feature, index1) => (
       <tr key={index1}>
@@ -31,6 +36,9 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
             }
           </td>
         ))}
+        {range(4 - props.items.length).map(index =>
+          <td key={index}/>
+        )}
       </tr>
     ))}
   </>

@@ -1,12 +1,18 @@
-import * as React from 'react';
+import { connect } from 'react-redux';
 
+import { getItems } from '@waldur/marketplace/store/selectors';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ComparisonTable } from './ComparisonTable';
-import { products, sections } from './fixtures';
+import { sections } from './fixtures';
 
-const MarketplaceComparison = () => (
-  <ComparisonTable sections={sections} items={products}/>
-);
+const mapStateToProps = state => ({
+  sections,
+  items: getItems(state),
+});
+
+const enhance = connect(mapStateToProps);
+
+const MarketplaceComparison = enhance(ComparisonTable);
 
 export default connectAngularComponent(MarketplaceComparison);
