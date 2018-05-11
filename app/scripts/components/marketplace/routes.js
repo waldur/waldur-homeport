@@ -8,7 +8,7 @@ export default function routes($stateProvider) {
       feature: 'marketplace',
       data: {
         pageTitle: gettext('Marketplace'),
-        hideHeader: true,
+        hideBreadcrumbs: true,
       }
     })
 
