@@ -1,16 +1,11 @@
 import * as React from 'react';
+import Select from 'react-select';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 
-import { FormContainer, SelectField } from '@waldur/form-react';
-import { CheckboxField } from '@waldur/form-react/CheckboxField';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
 import './VmOverviewFilter.scss';
-
-interface VMOverviewFilterProps extends TranslateProps {
-  submitting: boolean;
-}
 
 const serviceProviderOptions = [
   {
@@ -23,31 +18,39 @@ const serviceProviderOptions = [
   },
 ];
 
-const PureVmOverviewFilter = (props: VMOverviewFilterProps) => (
+const PureVmOverviewFilter = (props: TranslateProps) => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
       <form className="form-inline" id="vm-overview-filter">
-        <FormContainer
-          labelClass="m-r-md"
-          controlClass="m-r-md"
-          submitting={props.submitting}>
-          <CheckboxField
-            label={props.translate('Show shared')}
-            name="show_shared"
+        <div className="checkbox awesome-checkbox">
+          <Field name="show_shared" component="input" type="checkbox" id="show-shared"/>
+          <label htmlFor="show-shared">
+            {props.translate('Show shared')}
+          </label>
+        </div>
+        <div className="checkbox awesome-checkbox m-r-sm">
+          <Field name="show_private" component="input" type="checkbox" id="show-private"/>
+          <label htmlFor="show-private">
+            {props.translate('Show private')}
+          </label>
+        </div>
+        <div className="form-group">
+          <Field name="service_provider"
+            component={prop =>
+              <Select
+                className="service-provider-selector"
+                placeholder={props.translate('Select service provider')}
+                labelKey="name"
+                valueKey="value"
+                value={prop.input.value}
+                onChange={prop.input.onChange}
+                onBlur={() => prop.input.onBlur(prop.input.value)}
+                options={serviceProviderOptions}
+                multi={true}
+              />
+            }
           />
-          <CheckboxField
-            label={props.translate('Show private')}
-            name="show_private"
-          />
-          <SelectField
-            className="service-provider-selector"
-            label={props.translate('Service provider')}
-            name="service_provider"
-            options={serviceProviderOptions}
-            labelKey="name"
-            valueKey="value"
-          />
-        </FormContainer>
+        </div>
       </form>
     </div>
   </div>

@@ -10,7 +10,9 @@ const VmTypeOverviewComponent = props => {
   return (
     <>
       <VmOverviewFilter {...props}/>
-      <VmTypeOverview {...props}/>
+      <div className="ibox-content">
+        <VmTypeOverview {...props}/>
+      </div>
     </>
   );
 };

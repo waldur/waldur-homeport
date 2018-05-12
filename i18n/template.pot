@@ -5125,6 +5125,10 @@ msgstr ""
 msgid "Select security groups..."
 msgstr ""
 
+#: app/scripts/components/analytics/VmOverviewFilter.tsx
+msgid "Select service provider"
+msgstr ""
+
 #: app/scripts/components/issues/create/issue-registration.html
 msgid "Select service type..."
 msgstr ""
@@ -5210,10 +5214,6 @@ msgstr ""
 
 #: app/scripts/components/issues/request-service-button.js
 msgid "Service name"
-msgstr ""
-
-#: app/scripts/components/analytics/VmOverviewFilter.tsx
-msgid "Service provider"
 msgstr ""
 
 #: app/scripts/components/providers/support/FlowMapFilter.tsx

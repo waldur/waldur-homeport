@@ -1,9 +1,11 @@
 #vm-overview-filter {
   .form-group {
-    vertical-align: top;
+    vertical-align: middle;
   }
   .service-provider-selector {
     min-width: 200px;
-    margin-top: 4px;
+  }
+  .awesome-checkbox label:after {
+    color: #111111;
   }
 }
