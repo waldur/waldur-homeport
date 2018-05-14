@@ -4,10 +4,11 @@ import { compose } from 'redux';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { BaseResource } from '@waldur/resource/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 interface PureResorceSummaryButtonProps extends TranslateProps {
-  resource: any;
+  resource: BaseResource;
   showDetailsModal(): void;
 }
 
@@ -19,7 +20,7 @@ export const PureResorceSummaryButton = (props: PureResorceSummaryButtonProps) =
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  showDetailsModal: (): void => dispatch(openModalDialog('resource-summary-modal', { resolve: { resource: ownProps.resource } })),
+  showDetailsModal: (): void => dispatch(openModalDialog('resource-summary-modal', { resolve: { url: ownProps.resource.url } })),
 });
 
 const enhance = compose(

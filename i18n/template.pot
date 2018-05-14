@@ -6036,6 +6036,7 @@ msgid "Unable to edit comment."
 msgstr ""
 
 #: app/scripts/components/issues/attachments/effects.ts
+#: app/scripts/components/resource/summary/effects.ts
 msgid "Unable to fetch attachment."
 msgstr ""
 

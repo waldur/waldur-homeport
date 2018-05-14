@@ -15,6 +15,7 @@ import monitoringSaga from '@waldur/resource/monitoring/effects';
 import pythonManagementSaga from '@waldur/ansible/python-management/effects';
 import jupyterHubManagementSaga from '@waldur/ansible/jupyter-hub-management/effects';
 import serviceUsageSaga from '@waldur/providers/support/effects';
+import resourceSummarySaga from '@waldur/resource/summary/effects';
 
 import coreSaga from './coreSaga';
 
@@ -36,4 +37,5 @@ export default [
   pythonManagementSaga,
   jupyterHubManagementSaga,
   serviceUsageSaga,
+  resourceSummarySaga,
 ];
