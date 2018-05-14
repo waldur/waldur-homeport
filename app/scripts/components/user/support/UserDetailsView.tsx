@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import UserEvents from '@waldur/user/list/UserEvents';
+import { UserEvents } from '@waldur/user/list/UserEvents';
 import { isVisibleForSupportOrStaff, userEventsIsVisible, userManageIsVisible } from '@waldur/user/support/selectors';
 import { UserDetailsTable } from '@waldur/user/support/UserDetailsTable';
 import { UserEditContainer } from '@waldur/user/support/UserEditContainer';
@@ -30,7 +30,7 @@ export const PureUserDetailsView = (props: UserDetailsViewProps) => (
     {props.userEventsIsVisible && (
       <Tab eventKey={2} title={props.translate('Audit log')}>
         <div className="m-t-sm">
-          <UserEvents />
+          <UserEvents user={props.user}/>
         </div>
       </Tab>
     )}

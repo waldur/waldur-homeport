@@ -17,23 +17,19 @@ export function connectTable(options: TableOptions) {
     const {table} = options;
     registerTable(options);
 
-    const handleFetch = () => {
-      let propFilter;
-      if (options.mapPropsToFilter) {
-        propFilter = options.mapPropsToFilter(props);
-        if (propFilter) {
-          props.dispatch(actions.resetPagination(table));
-        }
-      }
-      return actions.fetchListStart(table, propFilter);
-    };
-
     const mapDispatchToProps = dispatch => ({
-      fetch: () => dispatch(handleFetch()),
+      fetch: () => {
+        let propFilter;
+        if (options.mapPropsToFilter) {
+          propFilter = options.mapPropsToFilter(props);
+        }
+        return dispatch(actions.fetchListStart(table, propFilter));
+      },
       gotoPage: page => dispatch(actions.fetchListGotoPage(table, page)),
       exportAs: format => dispatch(actions.exportTableAs(table, format)),
       setQuery: query => dispatch(actions.setFilterQuery(table, query)),
       updatePageSize: size => dispatch(actions.updatePageSize(table, size)),
+      resetPagination: () => dispatch(actions.resetPagination(table)),
     });
 
     const filterColumns = state => columns => columns.filter(

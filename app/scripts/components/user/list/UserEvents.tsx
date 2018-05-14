@@ -1,56 +1,15 @@
 import * as React from 'react';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import eventsRegistry from '@waldur/events/registry';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { getUser } from '@waldur/workspace/selectors';
+import { getEventsList } from '@waldur/events/BaseEventsList';
+import { connectAngularComponent } from '@waldur/store/connect';
+import { User } from '@waldur/workspace/types';
 
-import EventDetailsButton from './EventDetailsButton';
-import EventTypesButton from './EventTypesButton';
-
-const EventMessageField = ({ row }) => (
-  <span dangerouslySetInnerHTML={{__html: eventsRegistry.formatEvent(row)}}/>
-);
-
-const EventDateField = ({ row }) => (
-  <span>{formatDateTime(row['@timestamp'])}</span>
-);
-
-const TableComponent = props => {
-  const { translate } = props;
-  return (
-    <Table {...props} columns={[
-      {
-        title: translate('Message'),
-        render: EventMessageField,
-      },
-      {
-        title: translate('Timestamp'),
-        render: EventDateField,
-      },
-      {
-        title: translate('Actions'),
-        render: EventDetailsButton,
-        className: 'text-center col-md-2',
-      },
-    ]}
-    hasQuery={true}
-    verboseName={translate('events')}
-    actions={<EventTypesButton/>}/>
-  );
-};
-
-const TableOptions = {
-  table: 'userEvents',
-  fetchData: createFetcher('events'),
-  getDefaultFilter: state => ({
-    scope: getUser(state).url,
+export const UserEvents: React.SFC<{user: User}> = getEventsList({
+  mapPropsToFilter: props => ({
+    scope: props.user.url,
     feature: 'users',
     exclude_extra: true,
   }),
-  queryField: 'search',
-  exportFields: ['message', 'timestamp'],
-  exportRow: row => [row.message, row['@timestamp']],
-};
+});
 
-export default connectTable(TableOptions)(TableComponent);
+export default connectAngularComponent(UserEvents, ['user']);
