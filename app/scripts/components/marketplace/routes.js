@@ -5,10 +5,10 @@ export default function routes($stateProvider) {
       url: 'marketplace/',
       template: '<marketplace-landing></marketplace-landing>',
       parent: 'project',
-      feature: 'marketplace',
       data: {
         pageTitle: gettext('Marketplace'),
         hideBreadcrumbs: true,
+        feature: 'marketplace',
       }
     })
 

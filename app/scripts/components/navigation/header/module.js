@@ -5,7 +5,6 @@ import docsLink from './docs-link';
 import mainSearch from './main-search';
 import ncHeader from './nc-header';
 import introButton from './intro-button';
-import compareLink from './compare-link';
 
 export default module => {
   module.component('siteHeader', siteHeader);
@@ -14,6 +13,5 @@ export default module => {
   module.directive('docsLink', docsLink);
   module.directive('mainSearch', mainSearch);
   module.directive('introButton', introButton);
-  module.directive('compareLink', compareLink);
   module.component('ncHeader', ncHeader);
 };
