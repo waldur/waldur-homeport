@@ -6,11 +6,15 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import './resource-summary.scss';
 import { ResourceSummaryBase } from './ResourceSummaryBase';
 
-const ResourceSummary = props => {
+interface ResourceSummaryProps {
+  resource: any;
+}
+
+export const ResourceSummary = (props: ResourceSummaryProps) => {
   const SummaryComponent = ResourceSummaryRegistry.get(props.resource.resource_type) || ResourceSummaryBase;
   return (
     <dl className="dl-horizontal resource-details-table col-sm-12">
-      <SummaryComponent resource={props.resource}/>
+      <SummaryComponent resource={props.resource} />
     </dl>
   );
 };
