@@ -1,9 +1,9 @@
-import {formatDateTime} from '@waldur/core/dateUtils';
+import { formatDateTime } from '@waldur/core/dateUtils';
 
 export const FILESIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
 export const formatFilesize = (input, fromUnit = 'MB') => {
-  if (isNaN(parseFloat(input)) || ! isFinite(input)) {
+  if (isNaN(parseFloat(input)) || !isFinite(input)) {
     return '?';
   }
 
@@ -44,10 +44,19 @@ export const listToDict = (key, value) => list => {
   return dict;
 };
 
+export const dictToList = dict => {
+  const list = [];
+  for (const key in dict) {
+    if (!dict.hasOwnProperty(key)) { continue; }
+    list.push(dict[key]);
+  }
+  return list;
+};
+
 export const getUUID = url => url.split('/').splice(-2)[0];
 
 export const minutesToHours = input => {
-  if (isNaN(parseInt(input, 10)) || ! isFinite(input)) {
+  if (isNaN(parseInt(input, 10)) || !isFinite(input)) {
     return '?';
   }
 
@@ -60,7 +69,7 @@ export const minutesToHours = input => {
 };
 
 export const pick = fields => source =>
-  fields.reduce((target, field) => ({...target, [field]: source[field]}), {});
+  fields.reduce((target, field) => ({ ...target, [field]: source[field] }), {});
 
 export const titleCase = input => {
   if (input) {
@@ -83,3 +92,20 @@ export const toKeyValue = obj =>
   Object.keys(obj).map(key => `${key}=${encodeURIComponent(obj[key])}`).join('&');
 
 export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z][A-Za-z0-9-._ ()]+$');
+
+export const range = n => Array.from(Array(n).keys());
+
+export function parseQueryString(qs) {
+  // Example input: foo=123&bar=456
+  // Example output: {foo: "123", bar: "456"}
+
+  return qs.split('&').reduce((result, part) => {
+    const tokens = part.split('=');
+    if (tokens.length > 1) {
+      const key = tokens[0];
+      const value = tokens[1];
+      result[key] = value;
+    }
+    return result;
+  }, {});
+}

@@ -19,7 +19,10 @@ function ProjectVirtualMachinesListController(
       this.controllerScope = controllerScope;
       this.category = ENV.VirtualMachines;
       this._super();
-      this.addRowFields(['internal_ips', 'external_ips', 'floating_ips', 'internal_ips_set']);
+      this.addRowFields([
+        'internal_ips', 'external_ips', 'floating_ips', 'internal_ips_set',
+        'flavor_name', 'cores', 'ram', 'disk'
+      ]);
       $scope.$on('refreshVirtualMachinesList', function() {
         $timeout(function() {
           controllerScope.resetCache();
@@ -34,20 +37,22 @@ function ProjectVirtualMachinesListController(
         title: gettext('Internal IP'),
         orderField: 'internal_ips',
         render: function(row) {
-          if (row.internal_ips.length === 0) {
+          const ips = row.internal_ips.filter(angular.identity);
+          if (ips.length === 0) {
             return '&ndash;';
           }
-          return row.internal_ips.join(', ');
+          return ips.join(', ');
         }
       });
       options.columns.push({
         title: gettext('External IP'),
         orderField: 'external_ips',
         render: function(row) {
-          if (row.external_ips.length === 0) {
+          const ips = (row.external_ips || []).filter(angular.identity);
+          if (ips.length === 0) {
             return '&ndash;';
           }
-          return row.external_ips.join(', ');
+          return ips.join(', ');
         }
       });
       return options;

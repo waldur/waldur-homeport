@@ -5,8 +5,11 @@ export default function actionUtilsService(
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return usersService.getCurrentUser().then(user => {
+      const config = ActionConfiguration[model.resource_type];
+      if (Array.isArray(config)) {
+        return this.parseActions(config, {resource: model, user});
+      }
       return resourcesService.getOption(model.url).then(response => {
-        const config = ActionConfiguration[model.resource_type];
         const order = config && config.order || Object.keys(response.actions);
         const options = config && config.options || {};
         return order.reduce((result, name) => {
@@ -25,11 +28,56 @@ export default function actionUtilsService(
     });
   };
 
+  this.parseActions = function(actions, context) {
+    const result = {};
+    for(const func of actions) {
+      const {name, fields, validators, ...rest} = func(context);
+      const reason = this.parseValidators(validators, context);
+      const url = rest.method === 'DELETE'
+        ? context.resource.url
+        : context.resource.url + name + '/';
+      result[name] = {
+        ...rest,
+        name,
+        fields: this.parseFields(fields),
+        enabled: !reason,
+        reason,
+        url,
+      };
+    }
+    return result;
+  };
+
+  this.parseValidators = function(validators, context) {
+    let reason = '';
+    if (validators) {
+      for(const validator of validators) {
+        reason = validator(context);
+        if (reason) {
+          return reason;
+        }
+      }
+    }
+  };
+
+  this.parseFields = function(fields) {
+    if (fields) {
+      const options = {};
+      for(const field of fields) {
+        options[field.name] = field;
+      }
+      return options;
+    }
+  };
+
   this.actionHasToBeAdded = function(action, model, user) {
     if (action.staffOnly && !user.is_staff) {
       return false;
     }
 
+    if (typeof action.isVisible === 'boolean') {
+      return !action.isVisible;
+    }
     action.isVisible = action.isVisible || function () {return true;};
     if (!action.isVisible(model, usersService.currentUser)) {
       return false;

@@ -1,4 +1,5 @@
 import template from './appstore-providers.html';
+import './appstore-providers.scss';
 
 const appstoreProviders = {
   template: template,
@@ -7,6 +8,7 @@ const appstoreProviders = {
     onSelect: '&',
     headerTitle: '@',
     collapsible: '<',
+    detailsHidden: '<',
   },
   controller: class AppstoreProvidersController {
     // @ngInject

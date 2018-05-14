@@ -58,6 +58,7 @@ const ENV = {
   resourcesTypes: {
     vms: 'vms',
     storages: 'storages',
+    volumes: 'volumes',
     private_clouds: 'private_clouds',
     slurm: 'slurm',
     jiraProject: 'jiraProject',
@@ -68,6 +69,7 @@ const ENV = {
   VirtualMachines: 0,
   PrivateClouds: 1,
   Storages: 3,
+  Volumes: 4,
 
   appStoreCategories: [
     {
@@ -75,7 +77,7 @@ const ENV = {
       type: 'provider',
       icon: 'desktop',
       key: 'vms',
-      services: ['DigitalOcean', 'Azure', 'Amazon', 'OpenStackTenant']
+      services: ['DigitalOcean', 'Azure', 'Amazon', 'OpenStackTenant', 'Rijkscloud']
     },
     {
       name: gettext('Private clouds'),
@@ -88,7 +90,13 @@ const ENV = {
       name: gettext('Storages'),
       type: 'provider',
       key: 'storages',
-      services: ['OpenStackTenant'],
+      services: ['OpenStackTenant', 'Rijkscloud'],
+    },
+    {
+      name: gettext('Volumes'),
+      type: 'provider',
+      key: 'volumes',
+      services: ['OpenStackTenant', 'Rijkscloud'],
     },
     {
       name: gettext('Batch processing'),
@@ -106,7 +114,7 @@ const ENV = {
   serviceCategories: [
     {
       name: gettext('Virtual machines'),
-      services: ['Amazon', 'Azure', 'DigitalOcean', 'OpenStackTenant'],
+      services: ['Amazon', 'Azure', 'DigitalOcean', 'OpenStackTenant', 'Rijkscloud'],
     },
     {
       name: gettext('Service desk'),
@@ -134,10 +142,9 @@ const ENV = {
     'SLURM.Allocation': 'slurm',
     'JIRA.Project': 'jiraProject',
     'JIRA.Issue': 'jiraProject',
+    'Rijkscloud.Instance': 'vms',
+    'Rijkscloud.Volume': 'storages',
   },
-  showCompare: [
-    'Virtual machines'
-  ],
   defaultListCacheTime: 60 * 10,
   optionsCacheTime: 10 * 1000,
   disabledFeatures: [],

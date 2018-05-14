@@ -3,25 +3,66 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { Tooltip } from '@waldur/core/Tooltip';
 import BooleanField from '@waldur/table-react/BooleanField';
 import { Table, connectTable, createFetcher } from '@waldur/table-react/index';
 
 import { UserDetailsButton } from './UserDetailsButton';
 
+const renderFieldOrDash = field => {
+  return field ? field : '\u2014';
+};
+
 const PhoneNumberField = ({ row }) => (
-  <span>{row.phone_number}</span>
+  <span>{renderFieldOrDash(row.phone_number)}</span>
 );
 
 const EmailField = ({ row }) => (
-  <span>{row.email}</span>
+  <span>{renderFieldOrDash(row.email)}</span>
 );
 
 const FullNameField = ({ row }) => (
-  <span>{row.full_name}</span>
+  <span>{renderFieldOrDash(row.full_name)}</span>
 );
 
 const StaffStatusField: any = ({ row }) => {
   return <BooleanField value={row.is_staff}/>;
+};
+
+const OrganizationRolesField = ({row}) => {
+  if (row.customer_permissions && row.customer_permissions.length > 0) {
+    return row.customer_permissions.map((permission, index) => {
+      return (
+        <span key={index}>
+          <Tooltip key={index} label={permission.role} id="customer-role">
+            {permission.customer_name}
+            {' '}
+            <i className="fa fa-question-circle"/>
+          </Tooltip><br/>
+        </span>
+      );
+    });
+  } else {
+    return '\u2014';
+  }
+};
+
+const ProjectRolesField = ({row}) => {
+  if (row.project_permissions && row.project_permissions.length > 0) {
+    return row.project_permissions.map((permission, index) => {
+      return (
+        <span key={index}>
+          <Tooltip key={index} label={permission.role} id="project-role">
+            {permission.project_name}
+            {' '}
+            <i className="fa fa-question-circle"/>
+          </Tooltip><br/>
+        </span>
+      );
+    });
+  } else {
+    return '\u2014';
+  }
 };
 
 const SupportStatusField = ({ row }) => {
@@ -45,6 +86,14 @@ const TableComponent = props => {
         render: PhoneNumberField,
       },
       {
+        title: translate('Organization roles'),
+        render: OrganizationRolesField,
+      },
+      {
+        title: translate('Project roles'),
+        render: ProjectRolesField,
+      },
+      {
         title: translate('Staff'),
         render: StaffStatusField,
         className: 'text-center',
@@ -60,17 +109,33 @@ const TableComponent = props => {
         className: 'text-center col-md-2',
       },
     ]}
-    hasQuery={false}
+    showPageSizeSelector={true}
     verboseName={translate('users')}/>
   );
+};
+
+export const formatRoleFilter = filter => {
+  if (filter && filter.role) {
+    const formattedRole = {};
+    filter.role.map(item => {
+      formattedRole[item.value] = true;
+    });
+    const { role, ...rest } = filter;
+    return {
+      ...rest,
+      ...formattedRole,
+    };
+  }
+  return filter;
 };
 
 const TableOptions = {
   table: 'userList',
   fetchData: createFetcher('users'),
-  mapPropsToFilter: props => props.userFilter,
-  exportFields: ['username', 'email'],
-  exportRow: row => [row.username, row.email],
+  mapPropsToFilter: props => formatRoleFilter(props.userFilter),
+  exportFields: ['Full name', 'Username', 'Email', 'Phone number'],
+  exportAll: true,
+  exportRow: row => [row.full_name, row.username, row.email, row.phone_number],
 };
 
 const mapStateToProps = state => ({

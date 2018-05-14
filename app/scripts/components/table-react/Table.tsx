@@ -2,7 +2,9 @@ import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TranslateProps } from '@waldur/i18n/types';
+import { TablePageSize } from '@waldur/table-react/TablePageSize';
 
+import './Table.scss';
 import TableBody from './TableBody';
 import TableButtons from './TableButtons';
 import TableHeader from './TableHeader';
@@ -23,6 +25,9 @@ interface Props extends TranslateProps, TableState {
   exportAs?: (format: string) => void;
   actions?: React.ReactNode;
   verboseName?: string;
+  showPageSizeSelector?: boolean;
+  updatePageSize?: (size: number) => void;
+  resetPagination?: () => void;
 }
 
 class Table extends React.Component<Props> {
@@ -34,7 +39,8 @@ class Table extends React.Component<Props> {
 
   render() {
     return (
-      <div className="dataTables_wrapper">
+      <div className="table-responsive dataTables_wrapper">
+        {this.props.blocked && <div className="table-block"/>}
         <TableButtons {...this.props}/>
         {this.props.hasQuery && (
           <TableQuery
@@ -42,6 +48,13 @@ class Table extends React.Component<Props> {
             setQuery={this.props.setQuery}
             translate={this.props.translate}/>
         )}
+        {this.props.showPageSizeSelector &&
+          <TablePageSize
+            translate={this.props.translate}
+            pageSize={this.props.pagination.pageSize}
+            updatePageSize={this.props.updatePageSize}
+          />
+        }
         <TableInfo {...this.props.pagination} translate={this.props.translate}/>
         {this.renderBody()}
         <TablePagination
@@ -83,15 +96,23 @@ class Table extends React.Component<Props> {
     );
   }
 
-  componentWillMount() {
-    this.props.fetch();
+  componentDidMount() {
+    if (!this.props.loading) {
+      this.props.fetch();
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.resetPagination();
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.pagination.currentPage !== this.props.pagination.currentPage) {
       this.props.fetch();
-    }
-    if (nextProps.query !== this.props.query) {
+    } else if (nextProps.pagination.pageSize !== this.props.pagination.pageSize) {
+      this.props.fetch();
+    } else if (nextProps.query !== this.props.query) {
+      this.props.resetPagination();
       this.props.fetch();
     }
   }

@@ -6,12 +6,10 @@ interface Props {
 }
 
 const BooleanField = ({ value }: Props) => (
-  <a className="bool-field">
-    <i className={classNames('fa', {
-      'fa-check': value,
-      'fa-minus': !value,
-    })}/>
-  </a>
+  <i className={classNames('fa', {
+    'fa-check': value,
+    'fa-minus': !value,
+  })}/>
 );
 
 export default BooleanField;

@@ -43,6 +43,10 @@ msgstr ""
 msgid "API URL"
 msgstr ""
 
+#: app/scripts/components/rijkscloud/ProviderForm.tsx
+msgid "API key"
+msgstr ""
+
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "API token lifetime"
 msgstr ""
@@ -124,11 +128,11 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
+#: app/scripts/components/events/BaseEventsList.tsx
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 #: app/scripts/components/resource/actions/action-button-resource.html
 #: app/scripts/components/table/responsive-table.js
-#: app/scripts/components/user/list/UserEvents.tsx
 #: app/scripts/components/user/support/UserList.tsx
 msgid "Actions"
 msgstr ""
@@ -257,7 +261,7 @@ msgstr ""
 msgid "Add virtual machine"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js
+#: app/scripts/components/resource/list/resource-volumes-list.js
 msgid "Add volumes"
 msgstr ""
 
@@ -268,6 +272,7 @@ msgstr ""
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
@@ -297,38 +302,6 @@ msgstr ""
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Agreement number"
-msgstr ""
-
-#: app/scripts/components/alerts/AlertTypesDialog.tsx
-#: app/scripts/components/alerts/base-alerts-list.js
-#: app/scripts/components/dashboard/ProjectAlertsFeed.tsx
-msgid "Alert types"
-msgstr ""
-
-#: app/scripts/components/alerts/help.js
-#: app/scripts/components/customer/routes.js
-#: app/scripts/components/customer/workspace/customer-workspace.js
-#: app/scripts/components/dashboard/ProjectAlertsFeed.tsx
-#: app/scripts/components/project/project-workspace.js
-#: app/scripts/components/project/routes.js
-#: app/scripts/components/resource/tabs/constants.js
-msgid "Alerts"
-msgstr ""
-
-#: app/scripts/components/help/constants.js
-msgid "Alerts & events"
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Alerts about organization"
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Alerts about providers"
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Alerts about resources (VMs and applications)"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js
@@ -427,8 +400,11 @@ msgstr ""
 
 #: app/scripts/components/issues/list/issues-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
-#: app/scripts/components/user/support/UserFilter.tsx
 msgid "Apply filters"
+msgstr ""
+
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Apply filters:"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
@@ -464,15 +440,15 @@ msgstr ""
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html
+#: app/scripts/components/openstack/openstack-tenant/actions/assign-package-dialog.html
 msgid "Assign"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/AssignPackageAction.ts
 msgid "Assign VPC package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html
+#: app/scripts/components/openstack/openstack-tenant/actions/assign-package-dialog.html
 msgid "Assign package"
 msgstr ""
 
@@ -496,7 +472,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js
+#: app/scripts/components/resource/list/resource-volumes-list.js
 msgid "Attached to"
 msgstr ""
 
@@ -527,7 +503,7 @@ msgstr ""
 msgid "Authenticate using Mobile ID"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
+#: app/scripts/components/auth/events.ts
 msgid "Authentication events"
 msgstr ""
 
@@ -630,14 +606,6 @@ msgstr ""
 msgid "Backups"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Balance has been decreased by {amount} for customer {customer_name}."
-msgstr ""
-
-#: app/scripts/components/events/constants.ts
-msgid "Balance has been increased by {amount} for customer {customer_name}."
-msgstr ""
-
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Bank account"
@@ -716,8 +684,8 @@ msgstr ""
 msgid "Block volume count"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
+#: app/scripts/components/resource-import/import-volumes-list.js
 msgid "Bootable"
 msgstr ""
 
@@ -744,7 +712,6 @@ msgid "CIDR"
 msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
@@ -807,8 +774,8 @@ msgstr ""
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/offering/appstore-offering.html
 #: app/scripts/components/offering/offering-policy.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/assign-package-dialog.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 #: app/scripts/components/project/ProjectCreateForm.tsx
@@ -844,6 +811,10 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
+msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js
 msgid "Category"
 msgstr ""
@@ -861,12 +832,12 @@ msgstr ""
 msgid "Change Request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/ChangePackageAction.ts
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 msgid "Change VPC package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/ChangeFlavorAction.ts
 msgid "Change flavor"
 msgstr ""
 
@@ -921,15 +892,11 @@ msgstr ""
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/billing/events/invoice-events-dialog.html
 #: app/scripts/components/customer/details/customer-report-error.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.html
 #: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html
 #: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
 msgid "Close"
-msgstr ""
-
-#: app/scripts/components/alerts/alert-filter.html
-msgid "Closed"
 msgstr ""
 
 #: app/scripts/components/resource/support/ChartContainer.tsx
@@ -952,10 +919,6 @@ msgstr ""
 msgid "Cloud vCPU"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-compare-list.js
-msgid "Code"
-msgstr ""
-
 #: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: app/scripts/components/issues/comments/IssueCommentsFormMainContainer.tsx
 msgid "Comment"
@@ -966,9 +929,8 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-store.html
-#: app/scripts/components/appstore/routes.js
-msgid "Compare flavors"
+#: app/scripts/components/marketplace/routes.js
+msgid "Compare items"
 msgstr ""
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
@@ -998,7 +960,7 @@ msgid "Components"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Configure"
 msgstr ""
 
@@ -1023,7 +985,7 @@ msgstr ""
 msgid "Connect to a virtual machine: :22"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Connected subnets"
 msgstr ""
 
@@ -1103,8 +1065,11 @@ msgstr ""
 #: app/scripts/components/freeipa/freeipa-account-create.html
 #: app/scripts/components/issues/create/issue-create-dialog.js
 #: app/scripts/components/offering/appstore-offering.html
-#: app/scripts/components/openstack/openstack-instance/actions.js
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupAction.ts
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateNetworkAction.ts
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
 #: app/scripts/components/openstack/openstack-volume/module.js
 #: app/scripts/components/project/project-issues.js
 #: app/scripts/components/resource/list/resources-list.js
@@ -1145,11 +1110,11 @@ msgstr ""
 msgid "Create application"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupAction.ts
 msgid "Create backup for"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 msgid "Create backup schedule for OpenStack instance"
 msgstr ""
 
@@ -1157,11 +1122,11 @@ msgstr ""
 msgid "Create expert request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
 msgid "Create floating IP for"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateNetworkAction.ts
 msgid "Create network for"
 msgstr ""
 
@@ -1198,7 +1163,7 @@ msgstr ""
 msgid "Create request"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
 msgid "Create security group for"
 msgstr ""
 
@@ -1235,8 +1200,8 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Created a new payment for {customer_name}."
+#: app/scripts/components/paypal/events.ts
+msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js
@@ -1275,20 +1240,16 @@ msgstr ""
 msgid "Creation date"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Creation of service project link {service_name} has failed."
-msgstr ""
-
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Current API token"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html
 msgid "Current VPC package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 msgid "Current VPC usage"
 msgstr ""
 
@@ -1376,6 +1337,10 @@ msgstr ""
 msgid "Delete python management & virtual environments"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
+msgid "Delete volumes"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 msgid "Deployment plan"
 msgstr ""
@@ -1402,16 +1367,18 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/project/ProjectDetails.tsx
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js
+#: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/resource/actions/constants.js
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
+#: app/scripts/components/rijkscloud/VolumeCreateConfig.js
 #: app/scripts/components/slurm/slurm-allocation-config.js
 #: app/scripts/components/slurm/slurm-allocation-list.js
 #: app/scripts/components/user/support/UserEditForm.tsx
@@ -1426,7 +1393,9 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
 #: app/scripts/components/openstack/openstack-security-groups/module.js
+#: app/scripts/components/openstack/openstack-tenant/actions/DestroyAction.ts
 msgid "Destroy"
 msgstr ""
 
@@ -1441,6 +1410,7 @@ msgstr ""
 #: app/scripts/components/appstore/providers/appstore-providers.html
 #: app/scripts/components/cost-planning/cost-plans-list.js
 #: app/scripts/components/dashboard/DashboardFeed.tsx
+#: app/scripts/components/events/EventDetailsButton.tsx
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/experts/requests/create/expert-contract-form.js
 #: app/scripts/components/experts/requests/details/expert-request-summary.html
@@ -1452,10 +1422,11 @@ msgstr ""
 #: app/scripts/components/providers/details/dialog.html
 #: app/scripts/components/providers/provider-list.js
 #: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
+#: app/scripts/components/resource/summary/ResourceSummaryButton.tsx
+#: app/scripts/components/resource/summary/ResourceSummaryModal.tsx
 #: app/scripts/components/slurm/actions.js
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
-#: app/scripts/components/user/list/EventDetailsButton.tsx
 #: app/scripts/components/user/support/UserDetailsButton.tsx
 #: app/scripts/components/user/support/UserDetailsView.tsx
 #: app/scripts/components/user/user-sidebar.html
@@ -1570,6 +1541,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
+#: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/resource/actions/constants.js
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
@@ -1690,14 +1662,15 @@ msgid "Event type"
 msgstr ""
 
 #: app/scripts/components/dashboard/ProjectEventsFeed.tsx
+#: app/scripts/components/events/EventTypesButton.tsx
 #: app/scripts/components/events/EventTypesDialog.tsx
 #: app/scripts/components/events/base-event-list.js
-#: app/scripts/components/user/list/EventTypesButton.tsx
 msgid "Event types"
 msgstr ""
 
 #: app/scripts/components/dashboard/ProjectEventsFeed.tsx
 #: app/scripts/components/events/help.js
+#: app/scripts/components/help/constants.js
 #: app/scripts/components/user/hooks/hook-list.js
 msgid "Events"
 msgstr ""
@@ -1771,16 +1744,16 @@ msgstr ""
 msgid "Expert request"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Expert request \"{expert_request_name}\" has been activated."
+#: app/scripts/components/experts/events.ts
+msgid "Expert request \"{request_link}\" has been activated."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Expert request \"{expert_request_name}\" has been completed."
+#: app/scripts/components/experts/events.ts
+msgid "Expert request \"{request_link}\" has been cancelled."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Expert request \"{expert_request_name}\"\" has been cancelled."
+#: app/scripts/components/experts/events.ts
+msgid "Expert request \"{request_link}\" has been completed."
 msgstr ""
 
 #: app/scripts/components/experts/requests/create/expert-request-create.js
@@ -1789,6 +1762,10 @@ msgstr ""
 
 #: app/scripts/components/experts/routes.js
 msgid "Expert request details"
+msgstr ""
+
+#: app/scripts/components/experts/events.ts
+msgid "Expert request events"
 msgstr ""
 
 #: app/scripts/components/experts/requests/actions/expert-request-cancel.js
@@ -1900,6 +1877,7 @@ msgstr ""
 msgid "Filter organizations"
 msgstr ""
 
+#: app/scripts/components/analytics/ResourceAnalysis.tsx
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "Filter projects"
 msgstr ""
@@ -1937,6 +1915,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
 msgstr ""
 
@@ -1945,6 +1924,7 @@ msgid "Flavor exclude regex"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
 msgstr ""
 
@@ -1961,6 +1941,7 @@ msgid "Flexible"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Floating IP"
 msgstr ""
 
@@ -1971,6 +1952,11 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-floating-ips/breadcrumbs.js
 #: app/scripts/components/openstack/openstack-tenant/tabs.js
 msgid "Floating IPs"
+msgstr ""
+
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Flowmap"
 msgstr ""
 
 #: app/scripts/components/form/appstore-form-wizard.html
@@ -2081,6 +2067,7 @@ msgid "Got it!"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupAction.ts
 msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr ""
 
@@ -2091,6 +2078,11 @@ msgstr ""
 
 #: app/scripts/components/navigation/header/intro-button.html
 msgid "Guide me"
+msgstr ""
+
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Heatmap"
 msgstr ""
 
 #: app/scripts/components/help/routes.js
@@ -2279,7 +2271,7 @@ msgstr ""
 msgid "Import virtual machine"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/import/register-import-table-action.js
+#: app/scripts/components/resource-import/register-import-volume-table-action.js
 msgid "Import volume"
 msgstr ""
 
@@ -2371,8 +2363,16 @@ msgstr ""
 msgid "Instance does not have any security groups yet."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/EditAction.ts
 msgid "Instance has been updated."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/StartAction.ts
+msgid "Instance is already active."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/StopAction.ts
+msgid "Instance is already stopped."
 msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.js
@@ -2381,6 +2381,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
+msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
@@ -2393,6 +2397,7 @@ msgstr ""
 
 #: app/scripts/components/resource/list/resource-vms-list.js
 #: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Internal IP"
 msgstr ""
 
@@ -2486,7 +2491,7 @@ msgstr ""
 msgid "Invoice date"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
+#: app/scripts/components/billing/events.ts
 msgid "Invoice events"
 msgstr ""
 
@@ -2494,16 +2499,16 @@ msgstr ""
 msgid "Invoice events timeline"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been created."
+#: app/scripts/components/billing/events.ts
+msgid "Invoice for organization {customer_link} for the period of {period} has been created."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been deleted."
+#: app/scripts/components/billing/events.ts
+msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been updated."
+#: app/scripts/components/billing/events.ts
+msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
 msgstr ""
 
 #: app/scripts/components/paypal/paypal-invoice-actions.html
@@ -2557,8 +2562,8 @@ msgstr ""
 msgid "Issue status"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Issue {issue_key} has been created by {caller_full_name}."
+#: app/scripts/components/issues/events.ts
+msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
 
 #: app/scripts/components/customer/routes.js
@@ -2636,6 +2641,7 @@ msgid "Keep until"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupAction.ts
 #: app/scripts/components/openstack/openstack-snapshot/module.js
 #: app/scripts/components/openstack/openstack-volume/module.js
 msgid "Kept until"
@@ -2648,10 +2654,6 @@ msgstr ""
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/providers/details/provider-price-list.js
 msgid "Key"
-msgstr ""
-
-#: app/scripts/components/events/constants.ts
-msgid "Key management events"
 msgstr ""
 
 #: app/scripts/components/user/keys/key-create.html
@@ -2729,6 +2731,10 @@ msgstr ""
 
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
+msgstr ""
+
+#: app/scripts/components/analytics/utils.ts
+msgid "Limit"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html
@@ -2827,6 +2833,11 @@ msgstr ""
 msgid "Managed projects"
 msgstr ""
 
+#: app/scripts/components/marketplace/routes.js
+#: app/scripts/components/project/project-workspace.js
+msgid "Marketplace"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 msgid "Max # of backups"
 msgstr ""
@@ -2858,6 +2869,10 @@ msgstr ""
 msgid "Max vCPU"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+msgid "Maximal number of resources"
+msgstr ""
+
 #: app/scripts/components/form/appstore-field-integer.html
 msgid "Maximal valid value is"
 msgstr ""
@@ -2876,15 +2891,18 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
-#: app/scripts/components/alerts/base-alerts-list.js
+#: app/scripts/components/events/BaseEventsList.tsx
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/events/base-event-list.js
-#: app/scripts/components/user/list/UserEvents.tsx
 msgid "Message"
 msgstr ""
 
 #: app/scripts/components/user/hooks/hook-list.js
 msgid "Method"
+msgstr ""
+
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Metric"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
@@ -2933,6 +2951,10 @@ msgstr ""
 msgid "Monitoring system is being updated."
 msgstr ""
 
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Month"
+msgstr ""
+
 #: app/scripts/components/quotas/constants.js
 msgid "Monthly cost"
 msgstr ""
@@ -2954,7 +2976,6 @@ msgstr ""
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/cost-planning/cost-plans-list.js
@@ -2979,7 +3000,6 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js
-#: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
 #: app/scripts/components/project/ProjectDetails.tsx
 #: app/scripts/components/project/projects-list.js
@@ -2987,6 +3007,8 @@ msgstr ""
 #: app/scripts/components/providers/provider-list.js
 #: app/scripts/components/resource-import/import-virtual-clouds-list.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
+#: app/scripts/components/resource-import/import-volumes-list.js
+#: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/resource/actions/constants.js
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/resource/list/resources-list.js
@@ -3038,11 +3060,11 @@ msgstr ""
 msgid "Networks"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 msgid "New VPC package"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/ChangeFlavorAction.ts
 msgid "New flavor"
 msgstr ""
 
@@ -3085,18 +3107,6 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "No access info."
-msgstr ""
-
-#: app/scripts/components/alerts/base-alerts-list.js
-msgid "No alerts found matching filter."
-msgstr ""
-
-#: app/scripts/components/alerts/base-alerts-list.js
-msgid "No alerts yet"
-msgstr ""
-
-#: app/scripts/components/dashboard/ProjectAlertsFeed.tsx
-msgid "No alerts yet."
 msgstr ""
 
 #: app/scripts/components/slurm/slurm-allocation-list.js
@@ -3171,14 +3181,6 @@ msgstr ""
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "No invoices found matching filter."
-msgstr ""
-
-#: app/scripts/components/appstore/appstore-compare-list.js
-msgid "No items found matching filter."
-msgstr ""
-
-#: app/scripts/components/appstore/appstore-compare-list.js
-msgid "No items to compare yet."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -3341,11 +3343,11 @@ msgid "No virtual machines to import."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js
+#: app/scripts/components/resource/list/resource-volumes-list.js
 msgid "No volumes found matching filter."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js
+#: app/scripts/components/resource-import/import-volumes-list.js
 msgid "No volumes to import."
 msgstr ""
 
@@ -3423,6 +3425,22 @@ msgstr ""
 msgid "Objectives"
 msgstr ""
 
+#: app/scripts/components/offering/events.ts
+msgid "Offering events"
+msgstr ""
+
+#: app/scripts/components/offering/events.ts
+msgid "Offering state has changed to {offering_state}."
+msgstr ""
+
+#: app/scripts/components/offering/events.ts
+msgid "Offering {offering_link} has been created."
+msgstr ""
+
+#: app/scripts/components/offering/events.ts
+msgid "Offering {offering_name} has been deleted."
+msgstr ""
+
 #: app/scripts/components/intro/base-intro.js
 msgid "Ok, what's next?"
 msgstr ""
@@ -3467,6 +3485,10 @@ msgstr ""
 msgid "Only staff can create virtual private cloud."
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/actions/utils.ts
+msgid "Only staff can manage OpenStack tenant."
+msgstr ""
+
 #: app/scripts/components/customer/details/customer-manage.html
 msgid "Only staff can remove organization."
 msgstr ""
@@ -3479,7 +3501,6 @@ msgstr ""
 msgid "Only staff can unlink provider."
 msgstr ""
 
-#: app/scripts/components/alerts/alert-filter.html
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: app/scripts/components/resource/summary/ResourceAccessInfo.tsx
@@ -3493,6 +3514,18 @@ msgstr ""
 
 #: app/scripts/components/resource/list/resources-list.js
 msgid "Open map"
+msgstr ""
+
+#: app/scripts/components/openstack/events.ts
+msgid "OpenStack events"
+msgstr ""
+
+#: app/scripts/components/openstack/events.ts
+msgid "OpenStack package {tenant_link} has been created."
+msgstr ""
+
+#: app/scripts/components/openstack/events.ts
+msgid "OpenStack package {tenant_name} has been deleted."
 msgstr ""
 
 #: app/scripts/components/issues/list/issues-short-list.html
@@ -3537,8 +3570,8 @@ msgstr ""
 msgid "Organization details"
 msgstr ""
 
+#: app/scripts/components/customer/events.ts
 #: app/scripts/components/customer/workspace/customer-events.js
-#: app/scripts/components/events/constants.ts
 msgid "Organization events"
 msgstr ""
 
@@ -3581,6 +3614,10 @@ msgstr ""
 msgid "Organization removal"
 msgstr ""
 
+#: app/scripts/components/user/support/UserList.tsx
+msgid "Organization roles"
+msgstr ""
+
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/customer/popover/CustomerSummary.tsx
@@ -3594,32 +3631,16 @@ msgstr ""
 msgid "Organization workspace"
 msgstr ""
 
-#: app/scripts/components/alerts/constants.js
-msgid "Organization {customer_name} does not have any projects."
+#: app/scripts/components/customer/events.ts
+msgid "Organization {customer_link} has been created."
 msgstr ""
 
-#: app/scripts/components/alerts/constants.js
-msgid "Organization {customer_name} does not have any resources."
+#: app/scripts/components/customer/events.ts
+msgid "Organization {customer_link} has been updated."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Organization {customer_name} has been created."
-msgstr ""
-
-#: app/scripts/components/events/constants.ts
+#: app/scripts/components/customer/events.ts
 msgid "Organization {customer_name} has been deleted."
-msgstr ""
-
-#: app/scripts/components/events/constants.ts
-msgid "Organization {customer_name} has been updated."
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Organization {customer_name} has exhausted quota {quota_name}."
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Organization {customer_name} has no providers."
 msgstr ""
 
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
@@ -3659,7 +3680,7 @@ msgstr ""
 msgid "Package amount"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js
+#: app/scripts/components/openstack/openstack-tenant/actions/assign-package-dialog.js
 msgid "Package could not be assigned."
 msgstr ""
 
@@ -3708,24 +3729,24 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Password has been changed for user {affected_user_full_name}."
+#: app/scripts/components/user/events.ts
+msgid "Password has been changed for user {affected_user_link}."
 msgstr ""
 
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 msgid "Pay invoice"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
+#: app/scripts/components/paypal/events.ts
 msgid "Payment events"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Payment for {customer_name} has been approved."
+#: app/scripts/components/paypal/events.ts
+msgid "Payment for {customer_link} has been approved."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Payment for {customer_name} has been cancelled."
+#: app/scripts/components/paypal/events.ts
+msgid "Payment for {customer_link} has been cancelled."
 msgstr ""
 
 #: app/scripts/components/payments/payment-approve.js
@@ -3815,8 +3836,8 @@ msgstr ""
 msgid "Please give us a moment to validate your invitation."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.html
 msgid "Please note that request should specify tenant and provide a reason."
 msgstr ""
 
@@ -3824,8 +3845,8 @@ msgstr ""
 msgid "Please note that request should specify user name and provide a reason."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.js
 msgid "Please provide a reason"
 msgstr ""
 
@@ -3845,12 +3866,20 @@ msgstr ""
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
+#: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
+msgid "Please select a library"
+msgstr ""
+
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 msgid "Please select a team"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
 msgid "Please select a username that you will use for login into the Linux systems."
+msgstr ""
+
+#: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
+msgid "Please select a version"
 msgstr ""
 
 #: app/scripts/components/form-react/list-field/ListFieldModal.tsx
@@ -3875,6 +3904,18 @@ msgstr ""
 
 #: app/scripts/components/appstore/appstore-store.js
 msgid "Please specify {fields}."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/RestartAction.ts
+msgid "Please start instance first."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/ChangeFlavorAction.ts
+msgid "Please stop the instance before changing its flavor."
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
+msgid "Please stop the instance before its removal."
 msgstr ""
 
 #: app/scripts/components/ansible/application-list.js
@@ -3995,10 +4036,6 @@ msgstr ""
 msgid "Price per month (VAT not included)"
 msgstr ""
 
-#: app/scripts/components/appstore/appstore-compare-list.js
-msgid "Price/hour"
-msgstr ""
-
 #: app/scripts/components/providers/details/dialog.html
 msgid "Prices"
 msgstr ""
@@ -4079,7 +4116,7 @@ msgid "Project details"
 msgstr ""
 
 #: app/scripts/components/customer/workspace/customer-events.js
-#: app/scripts/components/events/constants.ts
+#: app/scripts/components/project/events.ts
 #: app/scripts/components/project/project-events.js
 msgid "Project events"
 msgstr ""
@@ -4092,8 +4129,8 @@ msgstr ""
 msgid "Project has been removed successfully."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Project has been renamed from {project_previous_name} to {project_name}."
+#: app/scripts/components/project/events.ts
+msgid "Project has been renamed from {project_previous_name} to {project_link}."
 msgstr ""
 
 #: app/scripts/components/project/effects.ts
@@ -4132,6 +4169,10 @@ msgstr ""
 msgid "Project providers links have been updated."
 msgstr ""
 
+#: app/scripts/components/user/support/UserList.tsx
+msgid "Project roles"
+msgstr ""
+
 #: app/scripts/components/quotas/constants.js
 msgid "Project service"
 msgstr ""
@@ -4151,16 +4192,16 @@ msgstr ""
 msgid "Project workspace"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Project {project_name} has been created."
+#: app/scripts/components/project/events.ts
+msgid "Project {project_link} has been created."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
+#: app/scripts/components/project/events.ts
+msgid "Project {project_link} has been updated."
+msgstr ""
+
+#: app/scripts/components/project/events.ts
 msgid "Project {project_name} has been deleted."
-msgstr ""
-
-#: app/scripts/components/events/constants.ts
-msgid "Project {project_name} has been updated."
 msgstr ""
 
 #: app/scripts/components/appstore/dialog/appstore-project-selector.html
@@ -4170,6 +4211,10 @@ msgstr ""
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/providers/details/dialog.html
 msgid "Projects"
+msgstr ""
+
+#: app/scripts/components/analytics/ResourceAnalysis.tsx
+msgid "Projects ({count})"
 msgstr ""
 
 #: app/scripts/components/dashboard/organization-dashboard.html
@@ -4211,11 +4256,11 @@ msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.html
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
-#: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/appstore/appstore-store.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/jira/project/jira-projects-list.js
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
 #: app/scripts/components/resource/list/resources-list.js
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
@@ -4270,19 +4315,11 @@ msgstr ""
 msgid "Provider type"
 msgstr ""
 
-#: app/scripts/components/alerts/constants.js
-msgid "Provider {service_name} is not responding."
-msgstr ""
-
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/help/constants.js
 #: app/scripts/components/project/project-dialog.html
 #: app/scripts/components/providers/routes.js
 msgid "Providers"
-msgstr ""
-
-#: app/scripts/components/events/constants.ts
-msgid "Providers events"
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js
@@ -4348,10 +4385,6 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "Quota events"
-msgstr ""
-
 #: app/scripts/components/error/routes.js
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/provider-list.js
@@ -4373,16 +4406,17 @@ msgstr ""
 msgid "Quotas updated."
 msgstr ""
 
+#: app/scripts/components/analytics/registry.ts
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "RAM"
@@ -4503,8 +4537,16 @@ msgstr ""
 msgid "Related resources"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
+msgid "Release floating IPs"
+msgstr ""
+
 #: app/scripts/components/issues/IssueReload.tsx
 msgid "Reload issue data"
+msgstr ""
+
+#: app/scripts/components/analytics/utils.ts
+msgid "Remaining limit"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -4590,15 +4632,15 @@ msgstr ""
 msgid "Request complaint"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/RequestCustomFlavorAction.ts
 msgid "Request custom flavour"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.js
 msgid "Request custom flavour for OpenStack Tenant"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.html
 msgid "Request custom flavour for {{ $ctrl.tenant.name }}"
 msgstr ""
 
@@ -4614,15 +4656,15 @@ msgstr ""
 msgid "Request details"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/RequestDirectAccessAction.ts
 msgid "Request direct access"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.js
 msgid "Request direct access to OpenStack Tenant"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.html
 msgid "Request direct access to {{ $ctrl.tenant.name }}"
 msgstr ""
 
@@ -4712,8 +4754,8 @@ msgid "Resource count in"
 msgstr ""
 
 #: app/scripts/components/customer/workspace/customer-events.js
-#: app/scripts/components/events/constants.ts
 #: app/scripts/components/project/project-events.js
+#: app/scripts/components/resource/events.ts
 msgid "Resource events"
 msgstr ""
 
@@ -4721,6 +4763,7 @@ msgstr ""
 msgid "Resource has been deleted."
 msgstr ""
 
+#: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/resource/actions/constants.js
 msgid "Resource has been updated."
 msgstr ""
@@ -4741,6 +4784,10 @@ msgstr ""
 msgid "Resource is not monitored yet."
 msgstr ""
 
+#: app/scripts/components/resource/actions/base.ts
+msgid "Resource should be {state}."
+msgstr ""
+
 #: app/scripts/components/providers/details/provider-price-list.js
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 msgid "Resource type"
@@ -4749,10 +4796,6 @@ msgstr ""
 #: app/scripts/components/analytics/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
 msgid "Resource usage"
-msgstr ""
-
-#: app/scripts/components/alerts/constants.js
-msgid "Resource {resource_name} has disappeared from the {service_name} provider in {project_name} project."
 msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-details.js
@@ -4784,6 +4827,10 @@ msgstr ""
 msgid "Resources usage"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/RestartAction.ts
+msgid "Restart"
+msgstr ""
+
 #: app/scripts/components/resource/state/constants.js
 msgid "Restarting"
 msgstr ""
@@ -4800,6 +4847,14 @@ msgstr ""
 msgid "Restroing"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+msgid "Retention time"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+msgid "Retention time in days, if 0 - resource will be kept forever"
+msgstr ""
+
 #: app/scripts/components/billing/events/invoice-events-dialog.html
 msgid "Retry"
 msgstr ""
@@ -4809,6 +4864,7 @@ msgstr ""
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
 #: app/scripts/components/user/list/ProjectPermissions.tsx
+#: app/scripts/components/user/support/UserFilter.tsx
 msgid "Role"
 msgstr ""
 
@@ -4820,7 +4876,7 @@ msgstr ""
 msgid "Role in project"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
+#: app/scripts/components/team/events.ts
 msgid "Role management events"
 msgstr ""
 
@@ -4861,16 +4917,12 @@ msgstr ""
 msgid "SSH key"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "SSH key events"
+#: app/scripts/components/user/events.ts
+msgid "SSH key {ssh_key_name} has been created for user {affected_user_link}"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "SSH key {ssh_key_name} has been created for user {user_full_name} with username {user_username}."
-msgstr ""
-
-#: app/scripts/components/events/constants.ts
-msgid "SSH key {ssh_key_name} has been deleted for user {user_full_name} with username {user_username}."
+#: app/scripts/components/user/events.ts
+msgid "SSH key {ssh_key_name} has been deleted for user {affected_user_link}"
 msgstr ""
 
 #: app/scripts/components/user/routes.js
@@ -4890,6 +4942,11 @@ msgstr ""
 
 #: app/scripts/components/experts/bids/details/expert-bid-summary.html
 msgid "SUBMITTED"
+msgstr ""
+
+#: app/scripts/components/issues/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Sankey diagram"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
@@ -4912,6 +4969,7 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 #: app/scripts/components/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 msgid "Schedule"
@@ -4944,6 +5002,7 @@ msgid "Security group has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/OpenStackInstanceSummary.tsx
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-security-groups/breadcrumbs.js
 #: app/scripts/components/openstack/openstack-tenant/tabs.js
@@ -5046,8 +5105,12 @@ msgstr ""
 msgid "Select resource type"
 msgstr ""
 
+#: app/scripts/components/user/support/UserFilter.tsx
+msgid "Select role"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup/actions.js
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "Select security groups..."
 msgstr ""
@@ -5068,7 +5131,7 @@ msgstr ""
 msgid "Select subnet"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Select subnets to connect to..."
 msgstr ""
 
@@ -5139,6 +5202,10 @@ msgstr ""
 msgid "Service name"
 msgstr ""
 
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Service provider type"
+msgstr ""
+
 #: app/scripts/components/resource/state/utils.ts
 msgid "Service settings of this resource are in state erred."
 msgstr ""
@@ -5185,6 +5252,10 @@ msgstr ""
 msgid "Should be obtained from OAuth service provider"
 msgstr ""
 
+#: app/scripts/components/table-react/TablePageSize.tsx
+msgid "Show"
+msgstr ""
+
 #: app/scripts/components/table/responsive-table.js
 msgid "Show _MENU_ entries"
 msgstr ""
@@ -5209,8 +5280,16 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Show private"
+msgstr ""
+
 #: app/scripts/components/offering/OfferingReportButton.tsx
 msgid "Show report"
+msgstr ""
+
+#: app/scripts/components/providers/support/FlowMapFilter.tsx
+msgid "Show shared"
 msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
@@ -5242,11 +5321,11 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: app/scripts/components/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js
-#: app/scripts/components/resource-import/import-virtual-machines-list.js
+#: app/scripts/components/resource-import/import-volumes-list.js
+#: app/scripts/components/resource/list/resource-volumes-list.js
+#: app/scripts/components/rijkscloud/VolumeSummary.tsx
 msgid "Size"
 msgstr ""
 
@@ -5284,6 +5363,7 @@ msgstr ""
 msgid "Snapshot size, GB"
 msgstr ""
 
+#: app/scripts/components/analytics/registry.ts
 #: app/scripts/components/openstack/openstack-backup/tabs.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
 #: app/scripts/components/openstack/openstack-volume/module.js
@@ -5302,6 +5382,10 @@ msgstr ""
 
 #: app/scripts/components/user/support/utils.ts
 msgid "Staff and Support user"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/StartAction.ts
+msgid "Start"
 msgstr ""
 
 #: app/scripts/components/customer/customer-list.js
@@ -5370,6 +5454,10 @@ msgstr ""
 msgid "Step 2. Select resources"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-instance/actions/StopAction.ts
+msgid "Stop"
+msgstr ""
+
 #: app/scripts/components/resource/state/constants.js
 msgid "Stopping"
 msgstr ""
@@ -5377,7 +5465,6 @@ msgstr ""
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: app/scripts/components/appstore/appstore-compare-list.js
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
@@ -5401,7 +5488,7 @@ msgid "Storages"
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 #: app/scripts/components/resource/actions/dialog/action-dialog.html
@@ -5461,6 +5548,10 @@ msgstr ""
 msgid "Support dashboard"
 msgstr ""
 
+#: app/scripts/components/issues/events.ts
+msgid "Support request events"
+msgstr ""
+
 #: app/scripts/components/issues/routes.js
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Support requests"
@@ -5476,14 +5567,16 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js
 #: app/scripts/components/openstack/openstack-floating-ips/module.js
-#: app/scripts/components/openstack/openstack-instance/actions.js
 #: app/scripts/components/openstack/openstack-network/module.js
 #: app/scripts/components/openstack/openstack-security-groups/module.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
 #: app/scripts/components/openstack/openstack-snapshot/module.js
 #: app/scripts/components/openstack/openstack-subnet/actions.js
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts
+#: app/scripts/components/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
 #: app/scripts/components/openstack/openstack-volume/module.js
+#: app/scripts/components/resource/actions/base.ts
+#: app/scripts/components/rijkscloud/module.js
 #: app/scripts/components/slurm/actions.js
 msgid "Synchronise"
 msgstr ""
@@ -5556,24 +5649,24 @@ msgstr ""
 msgid "Tenant ID"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js
+#: app/scripts/components/openstack/openstack-tenant/actions/assign-package-dialog.js
 msgid "Tenant has been assigned to the package."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js
+#: app/scripts/components/openstack/openstack-tenant/actions/EditAction.ts
 msgid "Tenant has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/OpenStackForm.tsx
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.js
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
 msgid "Tenant name"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-service.js
 msgid "Tenant package has been changed."
 msgstr ""
 
@@ -5684,7 +5777,7 @@ msgstr ""
 msgid "There are no resources in the organization."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 msgid "There are no suitable VPC packages for this tenant."
 msgstr ""
 
@@ -5730,16 +5823,13 @@ msgstr ""
 msgid "This is an objective."
 msgstr ""
 
-#: app/scripts/components/alerts/constants.js
-msgid "This month estimated costs for organization {customer_name} exceeded."
-msgstr ""
-
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 #: app/scripts/components/project/ProjectNameField.tsx
+#: app/scripts/components/rijkscloud/VolumeCreateConfig.js
 #: app/scripts/components/slurm/slurm-allocation-config.js
 msgid "This name will be visible in accounting data."
 msgstr ""
@@ -5761,11 +5851,14 @@ msgstr ""
 msgid "Time to resolution"
 msgstr ""
 
-#: app/scripts/components/alerts/base-alerts-list.js
+#: app/scripts/components/events/BaseEventsList.tsx
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/events/base-event-list.js
-#: app/scripts/components/user/list/UserEvents.tsx
 msgid "Timestamp"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+msgid "Timezone"
 msgstr ""
 
 #: app/scripts/components/issues/create/issue-create-dialog.js
@@ -5786,11 +5879,11 @@ msgstr ""
 msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.html
 msgid "To create custom flavour, please send a request to {{$ctrl.supportEmail}}."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
+#: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.html
 msgid "To get access, please send a request to {{$ctrl.supportEmail}}."
 msgstr ""
 
@@ -5889,7 +5982,7 @@ msgstr ""
 msgid "Unable to cancel invitation."
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js
+#: app/scripts/components/openstack/openstack-tenant/actions/change-package-service.js
 msgid "Unable to change tenant package."
 msgstr ""
 
@@ -5948,6 +6041,7 @@ msgid "Unable to edit comment."
 msgstr ""
 
 #: app/scripts/components/issues/attachments/effects.ts
+#: app/scripts/components/resource/summary/effects.ts
 msgid "Unable to fetch attachment."
 msgstr ""
 
@@ -5961,6 +6055,14 @@ msgstr ""
 
 #: app/scripts/components/project/project-providers-service.js
 msgid "Unable to fetch project providers."
+msgstr ""
+
+#: app/scripts/components/analytics/effects.ts
+msgid "Unable to fetch projects."
+msgstr ""
+
+#: app/scripts/components/analytics/effects.ts
+msgid "Unable to fetch quota history."
 msgstr ""
 
 #: app/scripts/components/issues/comments/utils.ts
@@ -6075,6 +6177,7 @@ msgstr ""
 msgid "Unit price"
 msgstr ""
 
+#: app/scripts/components/analytics/ResourceAnalysisItem.tsx
 #: app/scripts/components/freeipa/freeipa-quota.html
 msgid "Unlimited"
 msgstr ""
@@ -6092,7 +6195,7 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateFloatingIpsAction.ts
 msgid "Update floating IPs"
 msgstr ""
 
@@ -6112,7 +6215,7 @@ msgstr ""
 msgid "Update project details"
 msgstr ""
 
-#: app/scripts/components/openstack/openstack-instance/actions.js
+#: app/scripts/components/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 msgid "Update security groups"
 msgstr ""
 
@@ -6157,14 +6260,30 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
+#: app/scripts/components/analytics/utils.ts
+msgid "Usage"
+msgstr ""
+
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "Usage overview"
+msgstr ""
+
 #: app/scripts/components/slurm/SlurmForm.tsx
 msgid "Use sudo"
+msgstr ""
+
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
+msgid "Used in the period"
 msgstr ""
 
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
 msgid "User"
+msgstr ""
+
+#: app/scripts/components/rijkscloud/ProviderForm.tsx
+msgid "User ID"
 msgstr ""
 
 #: app/scripts/components/user/support/effects.ts
@@ -6179,6 +6298,7 @@ msgstr ""
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "User data"
 msgstr ""
 
@@ -6199,6 +6319,10 @@ msgstr ""
 msgid "User has not yet been saved."
 msgstr ""
 
+#: app/scripts/components/user/events.ts
+msgid "User management events"
+msgstr ""
+
 #: app/scripts/components/user/user-sidebar.html
 msgid "User profile"
 msgstr ""
@@ -6207,104 +6331,100 @@ msgstr ""
 msgid "User status"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {affected_user_full_name} claim for organization {affected_organization} has been rejected."
+#: app/scripts/components/user/events.ts
+msgid "User {affected_user_link} has been activated."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {affected_user_full_name} has been activated."
+#: app/scripts/components/user/events.ts
+msgid "User {affected_user_link} has been created."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {affected_user_full_name} has been approved for organization {affected_organization}."
+#: app/scripts/components/user/events.ts
+msgid "User {affected_user_link} has been deactivated."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {affected_user_full_name} has been created."
+#: app/scripts/components/user/events.ts
+msgid "User {affected_user_link} has been updated."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {affected_user_full_name} has been deactivated."
+#: app/scripts/components/user/events.ts
+msgid "User {affected_user_name} has been deleted."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {affected_user_full_name} has been deleted."
+#: app/scripts/components/experts/events.ts
+msgid "User {caller_link} has created request for experts under {customer_link} / {project_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {affected_user_full_name} has been removed from organization {affected_organization}."
+#: app/scripts/components/auth/events.ts
+msgid "User {user_link} authenticated successfully with Facebook."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {affected_user_full_name} has been updated."
+#: app/scripts/components/auth/events.ts
+msgid "User {user_link} authenticated successfully with Google."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {affected_user_full_name} has claimed organization {affected_organization}."
+#: app/scripts/components/auth/events.ts
+msgid "User {user_link} authenticated successfully with OpenID."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {affected_user_full_name} has gained role of {role_name}."
+#: app/scripts/components/auth/events.ts
+msgid "User {user_link} authenticated successfully with SAML2."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {affected_user_full_name} has revoked role of {role_name}."
+#: app/scripts/components/auth/events.ts
+msgid "User {user_link} authenticated successfully with Smart ID EE."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {caller_full_name} has created request for experts under {customer_name} / {project_name}."
+#: app/scripts/components/auth/events.ts
+msgid "User {user_link} authenticated successfully with username and password."
 msgstr ""
 
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has granted organization owner role in {customer_name} to {affected_user_username}."
+#: app/scripts/components/experts/events.ts
+msgid "User {user_link} has created bid for request {request_link} under {customer_link} / {project_link}."
 msgstr ""
 
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has granted organization support role in {customer_name} to {affected_user_username}."
+#: app/scripts/components/team/events.ts
+msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
 msgstr ""
 
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has granted project administrator role in project {project_name} to {affected_user_username}."
+#: app/scripts/components/team/events.ts
+msgid "User {user_link} has granted organization support role in {customer_link} to {affected_user_link}."
 msgstr ""
 
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has granted project manager role in project {project_name} to {affected_user_username}."
+#: app/scripts/components/team/events.ts
+msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
 msgstr ""
 
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has revoked organization owner {affected_user_username} from {customer_name}."
+#: app/scripts/components/team/events.ts
+msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
 msgstr ""
 
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has revoked organization support {affected_user_username} from {customer_name}."
+#: app/scripts/components/team/events.ts
+msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr ""
 
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has revoked project administrator {affected_user_username} from project {project_name}."
+#: app/scripts/components/team/events.ts
+msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
 msgstr ""
 
-#: app/scripts/components/events/event-formatter.js
-msgid "User {user_username} has revoked project manager {affected_user_username} from project {project_name}."
+#: app/scripts/components/team/events.ts
+msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {user_username} with full name {user_full_name} authenticated successfully with Facebook."
+#: app/scripts/components/team/events.ts
+msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {user_username} with full name {user_full_name} authenticated successfully with Google."
+#: app/scripts/components/team/events.ts
+msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {user_username} with full name {user_full_name} authenticated successfully with OpenID."
+#: app/scripts/components/team/events.ts
+msgid "User {user_link} has revoked {affected_user_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "User {user_username} with full name {user_full_name} authenticated successfully with Smart ID EE."
-msgstr ""
-
-#: app/scripts/components/events/constants.ts
-msgid "User {user_username} with full name {user_full_name} authenticated successfully with username and password."
+#: app/scripts/components/auth/events.ts
+msgid "User {user_link} logged out  successfully with SAML2."
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
@@ -6364,6 +6484,7 @@ msgstr ""
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "VM name"
 msgstr ""
 
@@ -6503,13 +6624,20 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
+#: app/scripts/components/rijkscloud/VolumeCreateConfig.js
 msgid "Volume name"
+msgstr ""
+
+#: app/scripts/components/rijkscloud/VolumeCreateConfig.js
+msgid "Volume size"
 msgstr ""
 
 #: app/scripts/components/dashboard/base-quotas.ts
 msgid "Volume size, GB"
 msgstr ""
 
+#: app/scripts/components/analytics/registry.ts
+#: app/scripts/components/configs/base-config.js
 #: app/scripts/components/openstack/openstack-instance/module.js
 #: app/scripts/components/resource/list/resource-storage-tabs.html
 msgid "Volumes"
@@ -6697,7 +6825,7 @@ msgid "You have no virtual machines yet."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
-#: app/scripts/components/openstack/openstack-volume/openstack-volumes-list.js
+#: app/scripts/components/resource/list/resource-volumes-list.js
 msgid "You have no volumes yet."
 msgstr ""
 
@@ -6790,6 +6918,10 @@ msgstr ""
 msgid "browse"
 msgstr ""
 
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
+msgid "by"
+msgstr ""
+
 #: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "commented on"
 msgstr ""
@@ -6802,11 +6934,15 @@ msgstr ""
 msgid "current state on backend: {resourceState}."
 msgstr ""
 
+#: app/scripts/components/table-react/TablePageSize.tsx
+msgid "entries"
+msgstr ""
+
 #: app/scripts/components/resource/state/utils.ts
 msgid "error message: {errorMessage}"
 msgstr ""
 
-#: app/scripts/components/user/list/UserEvents.tsx
+#: app/scripts/components/events/BaseEventsList.tsx
 msgid "events"
 msgstr ""
 
@@ -6825,6 +6961,10 @@ msgstr ""
 #: app/scripts/components/freeipa/freeipa-account-edit.html
 #: app/scripts/components/user/support/TermsOfService.tsx
 msgid "have been accepted on"
+msgstr ""
+
+#: app/scripts/components/providers/support/MapInfoPanel.tsx
+msgid "hours"
 msgstr ""
 
 #: app/scripts/components/table-react/TablePlaceholder.tsx
@@ -6886,6 +7026,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
+#: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "vCPU"
 msgstr ""
 
@@ -6901,84 +7042,84 @@ msgstr ""
 msgid "{fieldLabel} is required for provisioning resource."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{quota_name} quota threshold has been reached for project {project_name}."
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-tenant/package-templates-service.js
 msgid "{quota} usage exceeds quota limit by {amount}."
+msgstr ""
+
+#: app/scripts/components/analytics/ResourceAnalysisItem.tsx
+msgid "{quota} usage exceeds quota limit."
 msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts
 msgid "{resourceType} has state {resourceState}"
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} creation has been scheduled by {user_full_name}."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} creation has been scheduled by {user_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} creation has failed."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} creation has failed."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} deletion has failed."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} deletion has failed."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} has been created."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} has been created."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} has been deleted."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} has been imported by {user_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} has been imported by {user_full_name}."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} has been restarted."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} has been restarted."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} has been scheduled to deletion by {user_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} has been scheduled to deletion by {user_full_name}."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} has been scheduled to restart by {user_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} has been scheduled to restart by {user_full_name}."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} has been scheduled to start by {user_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} has been scheduled to start by {user_full_name}."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} has been scheduled to stop by {user_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} has been scheduled to stop by {user_full_name}."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} has been started."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} has been started."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} has been stopped."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} has been stopped."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} has been updated by {user_link}."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} has been updated by {user_full_name}."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} restart has failed."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} restart has failed."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} start has failed."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} start has failed."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_link} stop has failed."
 msgstr ""
 
-#: app/scripts/components/events/constants.ts
-msgid "{resource_full_name} stop has failed."
+#: app/scripts/components/resource/events.ts
+msgid "{resource_name} has been deleted."
 msgstr ""
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js

@@ -6,7 +6,7 @@ import { JupyterHubManagementFormData } from '@waldur/ansible/jupyter-hub-manage
 import { JupyterHubOAuthType } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubOAuthType';
 import { JupyterHubUserAdminMode } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUserAdminMode';
 import { JupyterHubUsersHolder } from '@waldur/ansible/jupyter-hub-management/types/JupyterHubUsersHolder';
-import { isNotBlank } from '@waldur/ansible/jupyter-hub-management/validation';
+import { isNotBlank } from '@waldur/ansible/python-management/validation';
 import { FormContainer, StringField } from '@waldur/form-react';
 import { CheckboxField } from '@waldur/form-react/CheckboxField';
 import { RadioButtonChoice, RadioButtonField } from '@waldur/form-react/RadioButtonField';

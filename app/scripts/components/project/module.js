@@ -9,10 +9,10 @@ import projectDialog from './project-dialog';
 import projectIssues from './project-issues';
 import projectEvents from './project-events';
 import projectsList from './projects-list';
-import projectAlertsList from './project-alerts-list';
 import projectTeam from './project-team';
 import projectsService from './projects-service';
 import projectRoutes from './routes';
+import './events';
 
 export default module => {
   module.component('projectDetails', projectDetails);
@@ -26,7 +26,6 @@ export default module => {
   module.component('projectIssues', projectIssues);
   module.component('projectEvents', projectEvents);
   module.component('projectsList', projectsList);
-  module.component('projectAlertsList', projectAlertsList);
   module.component('projectTeam', projectTeam);
   module.service('projectsService', projectsService);
   module.config(projectRoutes);

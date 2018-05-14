@@ -1,0 +1,18 @@
+#heat-map {
+  position: absolute;
+  top: 270px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#heat-map {
+  #country-info {
+    max-height: 400px;
+    overflow-y: scroll;
+  }
+  .ibox-title {
+    border-style: none;
+  }
+}
+

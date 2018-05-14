@@ -3,7 +3,8 @@
     <div class="col-sm-6">
       <div class="ibox">
         <div class="ibox-title">
-          <h5 translate>Summary</h5>
+          <h3 translate>Summary</h3>
+          <p ng-if="$ctrl.offeringConfig.summary" ng-bind-html="::$ctrl.offeringConfig.summary"></p>
         </div>
         <div class="ibox-content">
           <dl class="dl-horizontal">

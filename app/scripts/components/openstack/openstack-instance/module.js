@@ -6,7 +6,7 @@ import openstackInstanceInternalIpsList from './openstack-instance-internal-ips-
 import openstackInstanceNetworks from './openstack-instance-networks';
 import openstackInstanceFloatingIps from './openstack-instance-floating-ips';
 import openstackInstanceDataVolume from './openstack-instance-data-volume';
-import actionConfig from './actions';
+import actions from './actions';
 import { OpenStackInstanceSummary } from './OpenStackInstanceSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
@@ -29,6 +29,11 @@ export default module => {
 // @ngInject
 function fieldsConfig(AppstoreFieldConfigurationProvider) {
   AppstoreFieldConfigurationProvider.register('OpenStackTenant.Instance', OpenStackInstanceConfig);
+}
+
+// @ngInject
+function actionConfig(ActionConfigurationProvider) {
+  ActionConfigurationProvider.register('OpenStackTenant.Instance', actions);
 }
 
 // @ngInject

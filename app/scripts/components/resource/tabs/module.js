@@ -3,7 +3,6 @@ import resourceTabs from './resource-tabs';
 import ResourceTabsConfiguration from './resource-tabs-configuration';
 import { DEFAULT_RESOURCE_TABS, DEFAULT_SUBRESOURCE_TABS } from './constants';
 import resourceEvents from './resource-events';
-import resourceAlerts from './resource-alerts';
 import resourceIssues from './resource-issues';
 
 export default module => {
@@ -13,6 +12,5 @@ export default module => {
   module.constant('DEFAULT_RESOURCE_TABS', DEFAULT_RESOURCE_TABS);
   module.constant('DEFAULT_SUBRESOURCE_TABS', DEFAULT_SUBRESOURCE_TABS);
   module.component('resourceEvents', resourceEvents);
-  module.component('resourceAlerts', resourceAlerts);
   module.component('resourceIssues', resourceIssues);
 };

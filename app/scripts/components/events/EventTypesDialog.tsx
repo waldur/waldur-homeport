@@ -3,12 +3,12 @@ import * as React from 'react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import eventRegistry from './registry';
 import { TypeListDialog } from './TypeListDialog';
-import { getAvailableEventGroups } from './utils';
 
 const PureEventTypesDialog = ({ translate }: TranslateProps) => (
   <TypeListDialog
-    types={getAvailableEventGroups()}
+    types={eventRegistry.getGroups()}
     dialogTitle={translate('Event types')}
   />
 );

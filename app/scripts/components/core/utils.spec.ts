@@ -5,6 +5,7 @@ import {
   getUUID,
   pick,
   toKeyValue,
+  parseQueryString,
 } from './utils';
 
 describe('formatFilesize', () => {
@@ -86,5 +87,12 @@ describe('toKeyValue', () => {
     const actual = toKeyValue({title: 'Valid string?'});
     const expected = 'title=Valid%20string%3F';
     expect(actual).toBe(expected);
+  });
+});
+
+describe('parseQueryString', () => {
+  it('parses query string', () => {
+    const expected = {page: '10', page_size: '50'};
+    expect(parseQueryString('page=10&page_size=50')).toEqual(expected);
   });
 });

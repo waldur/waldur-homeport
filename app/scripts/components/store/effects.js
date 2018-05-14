@@ -1,5 +1,6 @@
 import formActionSaga from 'redux-form-saga';
 
+import analytics from '@waldur/analytics/effects';
 import downloadLinkSaga from '@waldur/core/DownloadLink/effects';
 import chartSaga from '@waldur/dashboard/chart/effects';
 import jiraSaga from '@waldur/jira/issue/effects';
@@ -13,11 +14,14 @@ import tableSaga from '@waldur/table-react/effects';
 import monitoringSaga from '@waldur/resource/monitoring/effects';
 import pythonManagementSaga from '@waldur/ansible/python-management/effects';
 import jupyterHubManagementSaga from '@waldur/ansible/jupyter-hub-management/effects';
+import serviceUsageSaga from '@waldur/providers/support/effects';
+import resourceSummarySaga from '@waldur/resource/summary/effects';
 
 import coreSaga from './coreSaga';
 
 export default [
   coreSaga,
+  analytics,
   downloadLinkSaga,
   formActionSaga,
   chartSaga,
@@ -32,4 +36,6 @@ export default [
   monitoringSaga,
   pythonManagementSaga,
   jupyterHubManagementSaga,
+  serviceUsageSaga,
+  resourceSummarySaga,
 ];

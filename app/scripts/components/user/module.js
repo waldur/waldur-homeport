@@ -1,4 +1,4 @@
-import userEvents from './user-events';
+import userEvents from './list/UserEvents';
 import userManage from './user-manage';
 import userSidebar from './user-sidebar';
 import userDetails from './user-details';
@@ -18,9 +18,10 @@ import filtersModule from './filters';
 import hooksModule from './hooks/module';
 import keysModule from './keys/module';
 import supportModule from './support/module';
+import './events';
 
 export default (module) => {
-  module.directive('userEvents', userEvents);
+  module.component('userEvents', userEvents);
   module.component('userManage', userManage);
   module.component('userSidebar', userSidebar);
   module.directive('userDetails', userDetails);

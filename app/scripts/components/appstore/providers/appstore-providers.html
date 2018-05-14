@@ -16,7 +16,7 @@
       <div class="col-md-3 col-xs-6 col-sm-4"
         ng-repeat="service in $ctrl.services">
         <div class="ibox" uib-tooltip="{{ service.warning }}">
-          <div class="ibox-content product-box cursor-pointer">
+          <div class="ibox-content provider-box cursor-pointer">
             <div class="m-md" ng-class="{disabled: !service.enabled}">
               <a class="h5 elipsis" uib-tooltip="{{ ::service.name }}">
                 <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>
@@ -30,11 +30,13 @@
             </div>
             <div class="p-xs" ng-class="{disabled: !service.enabled}">
               <a class="btn btn-xs btn-block-sm btn-block-md btn-outline btn-primary"
-                ng-click="$ctrl.showDetails(service)">
+                ng-click="$ctrl.showDetails(service)"
+                ng-hide="$ctrl.detailsHidden">
                 <span translate>Details</span>
                 <i class="fa fa-eye"></i>
               </a>
-              <div class="pull-right block-container-sm block-container-md">
+              <div class="block-container-sm block-container-md"
+                ng-class="{'pull-right': !$ctrl.detailsHidden}">
                 <a class="btn btn-xs btn-block-sm btn-block-md btn-outline"
                   ng-class="$ctrl.isSelected(service) ? 'btn-default': 'btn-primary'"
                   ng-click="$ctrl.select(service)">

@@ -1,32 +1,52 @@
-import { ENV } from '@waldur/core/services';
+import { $state } from '@waldur/core/services';
 
-import { EVENT_ICONS_TYPES, EVENT_TEMPLATES } from './constants';
-import { EventGroup } from './types';
+export const getLink = (route, params, label) =>
+  `<a href="${$state.href(route, params)}">${label}</a>`;
 
-export function getAvailableEventGroups(): EventGroup[] {
-  const eventGroups: EventGroup[] = [];
-  for (const iconType in EVENT_ICONS_TYPES) {
-    if (EVENT_ICONS_TYPES.hasOwnProperty(iconType) && ENV.toBeFeatures.indexOf(iconType) === -1) {
-      let icon = EVENT_ICONS_TYPES[iconType].imageId;
-      icon = (icon === 'provider') ? 'service' : icon;
+const getUserLink = event => {
+  const name = event.user_full_name || event.user_username;
+  const ctx = {uuid: event.user_uuid};
+  return getLink('users.details', ctx, name);
+};
 
-      const descriptions = [];
-      for (const template in EVENT_TEMPLATES) {
-        if (EVENT_TEMPLATES.hasOwnProperty(template)) {
-          const description = EVENT_TEMPLATES[template].replace(/_/gi, ' ');
-          if (template.split('_')[0] === iconType
-              && descriptions.indexOf(description) === -1
-          ) {
-            descriptions.push(description);
-          }
-        }
-      }
-      eventGroups.push({
-        icon,
-        name: EVENT_ICONS_TYPES[iconType].text,
-        descriptions,
-      });
-    }
-  }
-  return eventGroups;
-}
+const getAffectedUserLink = event => {
+  const name = event.affected_user_full_name || event.affected_user_username;
+  const ctx = {uuid: event.affected_user_uuid};
+  return getLink('users.details', ctx, name);
+};
+
+const getCallerLink = event => {
+  const name = event.caller_full_name || event.caller_username;
+  const ctx = {uuid: event.caller_uuid};
+  return getLink('users.details', ctx, name);
+};
+
+const getCustomerLink = event => {
+  const ctx = {uuid: event.customer_uuid};
+  return getLink('organization.details', ctx, event.customer_name);
+};
+
+const getProjectLink = event => {
+  const ctx = {uuid: event.project_uuid};
+  return getLink('project.details', ctx, event.project_name);
+};
+
+export const getUserContext = event => ({
+  user_link: getUserLink(event),
+});
+
+export const getAffectedUserContext = event => ({
+  affected_user_link: getAffectedUserLink(event),
+});
+
+export const getCustomerContext = event => ({
+  customer_link: getCustomerLink(event),
+});
+
+export const getProjectContext = event => ({
+  project_link: getProjectLink(event),
+});
+
+export const getCallerContext = event => ({
+  caller_link: getCallerLink(event),
+});

@@ -7,6 +7,23 @@ export function randomChoice(items) {
   return items[i];
 }
 
+function shuffle(a) {
+  let j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+  return a;
+}
+
+export function randomChoiceList(items) {
+  const len = randomInteger(1, items.length + 1);
+  const choices = shuffle([...items]);
+  return choices.slice(0, len);
+}
+
 export function randomInteger(start, end) {
   return start + Math.round(Math.random() * (end - 1));
 }

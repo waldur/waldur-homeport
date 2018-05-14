@@ -84,14 +84,6 @@ export default function organizationRoutes($stateProvider) {
       }
     })
 
-    .state('organization.alerts', {
-      url: 'alerts/',
-      template: '<customer-alerts/>',
-      data: {
-        pageTitle: gettext('Alerts')
-      }
-    })
-
     .state('organization.projects', {
       url: 'projects/',
       template: '<projects-list></projects-list>',

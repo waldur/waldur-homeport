@@ -1,6 +1,7 @@
-export interface Resource {
-  state: string;
-  runtime_state: string;
+import { BaseResource } from '@waldur/resource/types';
+export { ResourceState } from '@waldur/resource/types';
+
+export interface Resource extends BaseResource {
   resource_type: string;
   service_settings_state: string;
   service_settings_error_message?: string;
@@ -17,14 +18,3 @@ export interface StateIndicator {
   movementClassName: string;
   tooltip: string;
 }
-
-export type ResourceState =
-  | 'OK'
-  | 'Erred'
-  | 'Creation Scheduled'
-  | 'Creating'
-  | 'Update Scheduled'
-  | 'Updating'
-  | 'Deletion Scheduled'
-  | 'Deleting'
-  ;

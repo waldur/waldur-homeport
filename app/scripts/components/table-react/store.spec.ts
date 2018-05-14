@@ -181,4 +181,15 @@ describe('Table reducer', () => {
     expect(state.users.order).toEqual(['412ff42e159g7472fb3524db517e65165']);
   });
 
+  it('should handle page size update action', () => {
+    const state = reducer({}, {
+      type: actions.PAGE_SIZE_UPDATE,
+      payload: {
+        table: 'users',
+        size: {value: 40},
+      },
+    });
+    expect(state.users.pagination.pageSize).toBe(40);
+  });
+
 });

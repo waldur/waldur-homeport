@@ -79,7 +79,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
 
       scope.$watchCollection('controller.tableOptions.hiddenColumns', cols => {
         scope.controller.tableOptions.columns.forEach((col, index) => {
-          table.column(index).visible(cols.indexOf(col.id) === -1);
+          table.column(index - 1).visible(!cols || cols.indexOf(col.id) === -1);
         });
       });
 

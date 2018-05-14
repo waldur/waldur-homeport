@@ -6,7 +6,7 @@
         <span ng-if="!$ctrl.loading">({{ $ctrl.volumesCount }})</span>
       </uib-tab-heading>
       <div class="panel-body" ng-if="active=='volumes'">
-        <openstack-volumes-list on-list-receive="$ctrl.onVolumesListReceive($event)"/>
+        <resource-volumes-list on-list-receive="$ctrl.onVolumesListReceive($event)"/>
       </div>
     </uib-tab>
     <uib-tab index="'snapshots'">

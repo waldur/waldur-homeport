@@ -8,7 +8,6 @@
     "analytics.cost",
     "monitoring",
     "monitoring_state",
-    "import",
     "intro",
     "openMap",
     "help",
@@ -19,7 +18,10 @@
     "support.activity_stream",
     "support.regular_issue_filters",
     "support.user_events",
-    "support.user_manage",
+    "support.usage",
+    "support.flowmap",
+    "support.heatmap",
+    "support.sankey-diagram",
     "user.preferred_language",
     "user.competence",
     "backup",
@@ -27,7 +29,8 @@
     "jira",
     "experts.preview_contract",
     "pythonManagement",
-    "jupyterHubManagement"
+    "jupyterHubManagement",
+    "marketplace"
   ],
   "featuresVisible": false,
   "appStoreCategories": [

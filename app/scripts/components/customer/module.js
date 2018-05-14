@@ -5,6 +5,7 @@ import customerServicesModule from './services/module';
 import customerWorkspaceModule from './workspace/module';
 import customerList from './customer-list';
 import routes from './routes';
+import './events';
 
 export default module => {
   customerCreateModule(module);

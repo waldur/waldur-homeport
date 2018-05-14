@@ -1,0 +1,22 @@
+.rating-stars {
+  display: inline-block;
+
+  i {
+    color: #bfbfbf;
+    display: inline-block;
+
+    &.filled {
+      color: #ffa000;
+    }
+  }
+}
+
+.rating-stars-default {
+  font-size: 11px;
+  margin-right: 2px;
+}
+
+.rating-stars-medium {
+  font-size: 16px;
+  margin: 5px auto;
+}
