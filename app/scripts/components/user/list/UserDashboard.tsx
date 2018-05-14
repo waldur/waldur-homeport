@@ -4,9 +4,9 @@ import Panel from '@waldur/core/Panel';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { CurrentUserEvents } from './CurrentUserEvents';
 import CustomerPermissions from './CustomerPermissions';
 import ProjectPermissions from './ProjectPermissions';
-import UserEvents from './UserEvents';
 
 const PureUserDashboard = ({ translate }: TranslateProps) => (
   <div className="wrapper wrapper-content">
@@ -25,7 +25,7 @@ const PureUserDashboard = ({ translate }: TranslateProps) => (
     <div className="row">
       <div className="col-md-12">
         <Panel title={translate('Audit logs')}>
-          <UserEvents/>
+          <CurrentUserEvents/>
         </Panel>
       </div>
     </div>

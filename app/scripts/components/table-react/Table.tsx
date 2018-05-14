@@ -27,6 +27,7 @@ interface Props extends TranslateProps, TableState {
   verboseName?: string;
   showPageSizeSelector?: boolean;
   updatePageSize?: (size: number) => void;
+  resetPagination?: () => void;
 }
 
 class Table extends React.Component<Props> {
@@ -38,7 +39,7 @@ class Table extends React.Component<Props> {
 
   render() {
     return (
-      <div className="dataTables_wrapper">
+      <div className="table-responsive dataTables_wrapper">
         {this.props.blocked && <div className="table-block"/>}
         <TableButtons {...this.props}/>
         {this.props.hasQuery && (
@@ -95,18 +96,23 @@ class Table extends React.Component<Props> {
     );
   }
 
-  componentWillMount() {
-    this.props.fetch();
+  componentDidMount() {
+    if (!this.props.loading) {
+      this.props.fetch();
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.resetPagination();
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.pagination.currentPage !== this.props.pagination.currentPage) {
       this.props.fetch();
-    }
-    if (nextProps.pagination.pageSize !== this.props.pagination.pageSize) {
+    } else if (nextProps.pagination.pageSize !== this.props.pagination.pageSize) {
       this.props.fetch();
-    }
-    if (nextProps.query !== this.props.query) {
+    } else if (nextProps.query !== this.props.query) {
+      this.props.resetPagination();
       this.props.fetch();
     }
   }
