@@ -19,7 +19,7 @@ export interface UserDetailsViewProps extends TranslateProps {
 }
 
 export const PureUserDetailsView = (props: UserDetailsViewProps) => (
-  <Tabs defaultActiveKey={1} id="user-details">
+  <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
     {props.isVisibleForSupportOrStaff && (
       <Tab eventKey={1} title={props.translate('Details')}>
         <div className="m-t-sm">

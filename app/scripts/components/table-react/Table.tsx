@@ -97,17 +97,21 @@ class Table extends React.Component<Props> {
   }
 
   componentDidMount() {
-    this.props.fetch();
+    if (!this.props.loading) {
+      this.props.fetch();
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.resetPagination();
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.pagination.currentPage !== this.props.pagination.currentPage) {
       this.props.fetch();
-    }
-    if (nextProps.pagination.pageSize !== this.props.pagination.pageSize) {
+    } else if (nextProps.pagination.pageSize !== this.props.pagination.pageSize) {
       this.props.fetch();
-    }
-    if (nextProps.query !== this.props.query) {
+    } else if (nextProps.query !== this.props.query) {
       this.props.resetPagination();
       this.props.fetch();
     }
