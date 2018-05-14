@@ -7,6 +7,7 @@ import { reducer as pythonManagementDetails } from '@waldur/ansible/python-manag
 import { reducer as downloadLink } from '@waldur/core/DownloadLink/reducers';
 import { dashboardChart } from '@waldur/dashboard/chart/reducers';
 import { reducer as issues } from '@waldur/issues/reducers';
+import { reducer as marketplace } from '@waldur/marketplace/store/reducers';
 import { reducer as provider } from '@waldur/providers/reducers';
 import { reducer as serviceUsage } from '@waldur/providers/support/reducers';
 import { reducer as resource } from '@waldur/resource/reducers';
@@ -31,4 +32,5 @@ export default combineReducers({
   downloadLink,
   resource,
   serviceUsage,
+  marketplace,
 });

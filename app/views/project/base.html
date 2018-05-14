@@ -3,7 +3,7 @@
     <div id="page-wrapper" ng-class="$state.current.data.pageClass || 'white-bg'" ng-if="currentProject">
         <cookies-consent/>
         <nc-header ng-hide="$state.current.data.hideHeader"/>
-        <div class="row wrapper white-bg page-heading" ng-hide="$state.current.data.hideHeader">
+        <div class="row wrapper white-bg page-heading" ng-hide="$state.current.data.hideBreadcrumbs">
             <div class="col-lg-6">
                 <h2>{{ $state.current.data.pageTitle | translate }}</h2>
                 <p ng-if="currentProject.description">

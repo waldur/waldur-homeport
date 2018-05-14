@@ -6,10 +6,11 @@ interface LinkProps {
   label: React.ReactNode;
   state: string;
   params?: {[key: string]: string};
+  className?: string;
 }
 
 export const Link = (props: LinkProps) => (
-  <a href={$state.href(props.state, props.params)}>
+  <a href={$state.href(props.state, props.params)} className={props.className}>
     {props.label}
   </a>
 );

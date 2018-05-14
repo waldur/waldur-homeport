@@ -7,11 +7,12 @@ interface Props {
   children: React.ReactNode;
   id: string;
   className?: string;
+  onClick?(): void;
 }
 
-export const Tooltip = ({ label, children, id, className }: Props) => (
+export const Tooltip = ({ label, children, id, className, onClick }: Props) => (
   <OverlayTrigger placement="top" overlay={<BootstrapTooltip id={id}>{label}</BootstrapTooltip>}>
-    <span className={className}>
+    <span className={className} onClick={onClick}>
       {children}
     </span>
   </OverlayTrigger>

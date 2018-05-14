@@ -6,7 +6,19 @@ export default function routes($stateProvider) {
       template: '<marketplace-landing></marketplace-landing>',
       parent: 'project',
       data: {
-        hideHeader: true,
+        pageTitle: gettext('Marketplace'),
+        hideBreadcrumbs: true,
+        feature: 'marketplace',
+      }
+    })
+
+    .state('marketplace-compare', {
+      url: 'marketplace-compare/',
+      template: '<marketplace-compare></marketplace-compare>',
+      parent: 'project',
+      data: {
+        pageTitle: gettext('Compare items'),
+        feature: 'marketplace',
       }
     });
 }
