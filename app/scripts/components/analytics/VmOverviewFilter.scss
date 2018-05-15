@@ -1,3 +1,5 @@
+@import 'inspinia/_variables.scss';
+
 #vm-overview-filter {
   .form-group {
     vertical-align: middle;
@@ -6,6 +8,6 @@
     min-width: 200px;
   }
   .awesome-checkbox label:after {
-    color: #111111;
+    color: $text-color;
   }
 }
