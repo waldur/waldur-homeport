@@ -3469,12 +3469,12 @@ msgstr ""
 msgid "Only distributions with APT package manager are supported (Debian, Ubuntu...)"
 msgstr ""
 
-#: app/scripts/components/invitations/actions/cancel.js
-msgid "Only pending invitation can be canceled."
+#: app/scripts/components/invitations/actions/send.js
+msgid "Only pending and expired invitations can be sent again."
 msgstr ""
 
-#: app/scripts/components/invitations/actions/send.js
-msgid "Only pending invitation can be sent again."
+#: app/scripts/components/invitations/actions/cancel.js
+msgid "Only pending invitation can be canceled."
 msgstr ""
 
 #: app/scripts/components/providers/provider-list.js
