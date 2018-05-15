@@ -1923,6 +1923,7 @@ msgstr ""
 msgid "Flavor exclude regex"
 msgstr ""
 
+#: app/scripts/components/analytics/FlavorsList.tsx
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
@@ -1930,6 +1931,14 @@ msgstr ""
 
 #: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
 msgid "Flavor name: {flavor_name}"
+msgstr ""
+
+#: app/scripts/components/analytics/VmTypeOverview.tsx
+msgid "Flavors"
+msgstr ""
+
+#: app/scripts/components/analytics/FlavorsList.tsx
+msgid "Flavors List"
 msgstr ""
 
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
@@ -2234,12 +2243,21 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
+#: app/scripts/components/analytics/ImagesList.tsx
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "Image name"
+msgstr ""
+
+#: app/scripts/components/analytics/VmTypeOverview.tsx
+msgid "Images"
+msgstr ""
+
+#: app/scripts/components/analytics/ImagesList.tsx
+msgid "Images List"
 msgstr ""
 
 #: app/scripts/components/resource-import/resource-import-dialog.html
@@ -3394,6 +3412,16 @@ msgstr ""
 #: app/scripts/components/user/constants.js
 #: app/scripts/components/user/routes.js
 msgid "Notifications"
+msgstr ""
+
+#: app/scripts/components/analytics/FlavorsList.tsx
+#: app/scripts/components/analytics/ImagesList.tsx
+msgid "Number of created instances"
+msgstr ""
+
+#: app/scripts/components/analytics/FlavorsList.tsx
+#: app/scripts/components/analytics/ImagesList.tsx
+msgid "Number of running instances"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
@@ -5115,6 +5143,10 @@ msgstr ""
 msgid "Select security groups..."
 msgstr ""
 
+#: app/scripts/components/analytics/VmOverviewFilter.tsx
+msgid "Select service provider"
+msgstr ""
+
 #: app/scripts/components/issues/create/issue-registration.html
 msgid "Select service type..."
 msgstr ""
@@ -5280,6 +5312,7 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
+#: app/scripts/components/analytics/VmOverviewFilter.tsx
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
 msgid "Show private"
 msgstr ""
@@ -5288,6 +5321,7 @@ msgstr ""
 msgid "Show report"
 msgstr ""
 
+#: app/scripts/components/analytics/VmOverviewFilter.tsx
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
 msgid "Show shared"
 msgstr ""
@@ -6486,6 +6520,11 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "VM name"
+msgstr ""
+
+#: app/scripts/components/analytics/routes.js
+#: app/scripts/components/issues/workspace/issue-navigation-service.js
+msgid "VM type overview"
 msgstr ""
 
 #: app/scripts/components/customer/customer-list.js
