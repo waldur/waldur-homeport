@@ -65,6 +65,10 @@ const PureUserDetailsTable = (props: UserDetailsTableProps) => (
         value={formatDateTime(props.user.date_joined)}
       />
       <Row
+        label={props.translate('Organization')}
+        value={props.user.organization}
+      />
+      <Row
         label={props.translate('Job position')}
         value={props.user.job_title}
       />

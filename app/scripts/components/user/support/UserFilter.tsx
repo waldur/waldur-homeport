@@ -43,6 +43,9 @@ const PureUserFilter = (props: UserFilterProps) => (
         label={props.translate('ID code')}
         name="civil_number"/>
       <StringField
+        label={props.translate('Organization')}
+        name="organization"/>
+      <StringField
         label={props.translate('Email')}
         name="email"/>
       <SelectField
