@@ -20,5 +20,15 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Compare items'),
         feature: 'marketplace',
       }
+    })
+
+    .state('marketplace-checkout', {
+      url: 'marketplace-checkout/',
+      template: '<marketplace-checkout></marketplace-checkout>',
+      parent: 'project',
+      data: {
+        pageTitle: gettext('Marketplace checkout'),
+        feature: 'marketplace',
+      }
     });
 }

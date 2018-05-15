@@ -16,3 +16,17 @@ export const removeComparisonItem = (item: Product): Action<{item}> => ({
     item,
   },
 });
+
+export const addCartItem = (item: Product): Action<{item}> => ({
+  type: constants.CART_ITEM_ADD,
+  payload: {
+    item,
+  },
+});
+
+export const removeCartItem = (item: Product): Action<{item}> => ({
+  type: constants.CART_ITEM_REMOVE,
+  payload: {
+    item,
+  },
+});

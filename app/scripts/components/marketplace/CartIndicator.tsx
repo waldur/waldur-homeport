@@ -1,24 +1,24 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { getComparisonCount } from '@waldur/marketplace/store/selectors';
+import { getCartCount } from '@waldur/marketplace/store/selectors';
 import { NavbarIndicator } from '@waldur/navigation/header/NavbarIndicator';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
 
-const PureComparisonIndicator = props => props.project ? (
+const PureCartIndicator = props => props.project ? (
   <NavbarIndicator
-    state="marketplace-compare"
-    iconClass="fa fa-balance-scale"
+    state="marketplace-checkout"
+    iconClass="fa fa-shopping-cart"
     count={props.count}
   />
 ) : null;
 
 const mapStateToProps = state => ({
-  count: getComparisonCount(state),
+  count: getCartCount(state),
   project: getProject(state),
 });
 
-export const ComparisonIndicator = connect(mapStateToProps)(PureComparisonIndicator);
+export const CartIndicator = connect(mapStateToProps)(PureCartIndicator);
 
-export default connectAngularComponent(ComparisonIndicator);
+export default connectAngularComponent(CartIndicator);
