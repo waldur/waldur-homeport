@@ -25,7 +25,11 @@ const FullNameField = ({ row }) => (
   <span>{renderFieldOrDash(row.full_name)}</span>
 );
 
-const StaffStatusField: any = ({ row }) => {
+const OrganizationField = ({ row }) => (
+  <span>{renderFieldOrDash(row.organization)}</span>
+);
+
+const StaffStatusField = ({ row }) => {
   return <BooleanField value={row.is_staff}/>;
 };
 
@@ -84,6 +88,10 @@ const TableComponent = props => {
       {
         title: translate('Phone number'),
         render: PhoneNumberField,
+      },
+      {
+        title: translate('Organization'),
+        render: OrganizationField,
       },
       {
         title: translate('Organization roles'),
