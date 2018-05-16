@@ -3575,6 +3575,9 @@ msgstr ""
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/user/list/ProjectPermissions.tsx
+#: app/scripts/components/user/support/UserDetailsTable.tsx
+#: app/scripts/components/user/support/UserFilter.tsx
+#: app/scripts/components/user/support/UserList.tsx
 msgid "Organization"
 msgstr ""
 
