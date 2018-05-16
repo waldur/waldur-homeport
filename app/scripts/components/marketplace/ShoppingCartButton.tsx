@@ -3,14 +3,14 @@ import * as React from 'react';
 import { ProductButton } from './ProductButton';
 import { Product } from './types';
 
-interface ProductCartButtonProps {
+interface ShoppingCartButtonProps {
   product: Product;
   inCart: boolean;
   addItem(): void;
   removeItem(): void;
 }
 
-export const ProductCartButton = (props: ProductCartButtonProps) => (
+export const ShoppingCartButton = (props: ShoppingCartButtonProps) => (
   <ProductButton
     icon="fa fa-shopping-cart"
     isActive={props.inCart}

@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { ProductButton } from './ProductButton';
 import './ProductCard.scss';
-import { ProductCartButtonContainer } from './ProductCartButtonContainer';
 import { ProductCompareButtonContainer } from './ProductCompareButtonContainer';
 import { RatingStars } from './RatingStars';
+import { ShoppingCartButtonContainer } from './ShoppingCartButtonContainer';
 import { Product } from './types';
 
 interface ProductCardProps {
@@ -31,7 +31,7 @@ export const ProductCard = (props: ProductCardProps) => (
     <div className="product-button-group">
       <ProductButton icon="fa fa-comments" title="Write review"/>
       <ProductCompareButtonContainer product={props.product}/>
-      <ProductCartButtonContainer product={props.product}/>
+      <ShoppingCartButtonContainer product={props.product}/>
     </div>
   </div>
 );

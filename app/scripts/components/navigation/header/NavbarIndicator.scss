@@ -1,0 +1,15 @@
+.navbar-indicator {
+  margin-right: 0px !important;
+
+  a {
+    position: relative;
+
+    .label {
+      line-height: 12px;
+      padding: 2px 5px;
+      position: absolute;
+      top: 12px;
+      font-size: 10px;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { getCartCount } from '@waldur/marketplace/store/selectors';
+import { getShoppingCartCount } from '@waldur/marketplace/store/selectors';
 import { NavbarIndicator } from '@waldur/navigation/header/NavbarIndicator';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
@@ -10,12 +10,13 @@ const PureCartIndicator = props => props.project ? (
   <NavbarIndicator
     state="marketplace-checkout"
     iconClass="fa fa-shopping-cart"
+    labelClass="label label-warning"
     count={props.count}
   />
 ) : null;
 
 const mapStateToProps = state => ({
-  count: getCartCount(state),
+  count: getShoppingCartCount(state),
   project: getProject(state),
 });
 

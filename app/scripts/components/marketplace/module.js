@@ -3,7 +3,7 @@ import marketplaceLanding from './LandingPage';
 import marketplaceCompare from './ComparisonContainer';
 import comparisonIndicator from './ComparisonIndicator';
 import marketplaceCheckout from './CheckoutPage';
-import cartIndicator from './CartIndicator';
+import cartIndicator from './ShoppingCartIndicator';
 
 export default module => {
   module.component('marketplaceLanding', marketplaceLanding);

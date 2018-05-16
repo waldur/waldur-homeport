@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 
 import { addCartItem, removeCartItem } from '@waldur/marketplace/store/actions';
-import { getInCart } from '@waldur/marketplace/store/selectors';
+import { getInShoppingCart } from '@waldur/marketplace/store/selectors';
 
-import { ProductCartButton } from './ProductCartButton';
+import { ShoppingCartButton } from './ShoppingCartButton';
 
 const mapStateToProps = (state, ownProps) => ({
-  inCart: getInCart(state, ownProps.product),
+  inCart: getInShoppingCart(state, ownProps.product),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -18,4 +18,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);
 
-export const ProductCartButtonContainer = enhance(ProductCartButton);
+export const ShoppingCartButtonContainer = enhance(ShoppingCartButton);
