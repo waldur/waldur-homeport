@@ -15,7 +15,7 @@ export const SelectField = (props: SelectFieldProps) => {
       name={input.name}
       value={input.value}
       onChange={value => input.onChange(value)}
-      onBlur={() => input.onBlur(input.value)}
+      onBlur={() => {/* Noop */}}
     />
   );
 };
