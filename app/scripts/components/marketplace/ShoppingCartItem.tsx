@@ -4,6 +4,7 @@ import { defaultCurrency } from '@waldur/core/services';
 import { Product } from '@waldur/marketplace/types';
 
 import './ShoppingCartItem.scss';
+import { ShoppingCartItemDeleteButton } from './ShoppingCartItemDeleteButton';
 
 interface ShoppingCartItemProps {
   item: Product;
@@ -38,11 +39,7 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
           {' '}
           Edit
         </a>
-        <a className="btn btn-default btn-sm">
-          <i className="fa fa-times"/>
-          {' '}
-          Delete
-        </a>
+        <ShoppingCartItemDeleteButton item={props.item}/>
       </span>
     </td>
   </tr>
