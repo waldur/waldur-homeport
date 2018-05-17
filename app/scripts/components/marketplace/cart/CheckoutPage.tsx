@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { ShoppingCart } from '@waldur/marketplace/ShoppingCart';
-import { ShoppingCartSidebar } from '@waldur/marketplace/ShoppingCartSidebar';
-import { ShoppingCartSteps } from '@waldur/marketplace/ShoppingCartSteps';
-import { getShoppingCartItems } from '@waldur/marketplace/store/selectors';
 import { Product } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
+
+import { ShoppingCart } from './ShoppingCart';
+import { ShoppingCartSidebar } from './ShoppingCartSidebar';
+import { ShoppingCartSteps } from './ShoppingCartSteps';
+import { getShoppingCartItems } from './store/selectors';
 
 interface CheckoutPageProps {
   items: Product[];

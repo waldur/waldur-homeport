@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
 
-import { addComparisonItem, removeComparisonItem } from '@waldur/marketplace/store/actions';
-import { getIsCompared } from '@waldur/marketplace/store/selectors';
-
 import { ProductCompareButton } from './ProductCompareButton';
+import { addComparisonItem, removeComparisonItem } from './store/actions';
+import { getIsCompared } from './store/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
   isCompared: getIsCompared(state, ownProps.product),

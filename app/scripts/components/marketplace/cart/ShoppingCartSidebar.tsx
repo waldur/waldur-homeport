@@ -2,11 +2,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/services';
-import { getShoppingCartTotal } from '@waldur/marketplace/store/selectors';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
 import './ShoppingCartSidebar.scss';
+import { getShoppingCartTotal } from './store/selectors';
 
 interface ShoppingCartSidebarProps {
   total: number;

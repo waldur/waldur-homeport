@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
 
-import { addCartItem, removeCartItem } from '@waldur/marketplace/store/actions';
-import { getInShoppingCart } from '@waldur/marketplace/store/selectors';
-
 import { ShoppingCartButton } from './ShoppingCartButton';
+import { addCartItem, removeCartItem } from './store/actions';
+import { getInShoppingCart } from './store/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
   inCart: getInShoppingCart(state, ownProps.product),

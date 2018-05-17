@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { ShoppingCartItem } from '@waldur/marketplace/ShoppingCartItem';
 import { Product } from '@waldur/marketplace/types';
 
 import './ShoppingCart.scss';
+import { ShoppingCartItem } from './ShoppingCartItem';
 
 interface ShoppingCartProps {
   items: Product[];

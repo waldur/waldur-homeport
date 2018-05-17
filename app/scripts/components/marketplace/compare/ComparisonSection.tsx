@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { range } from '@waldur/core/utils';
 
-import { ProductDetails, Section } from './types';
+import { ProductDetails, Section } from '../types';
 
 interface ComparisonSectionProps {
   items: ProductDetails[];

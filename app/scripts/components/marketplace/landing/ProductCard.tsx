@@ -1,11 +1,12 @@
 import * as React from 'react';
 
-import { ProductButton } from './ProductButton';
+import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
+import { ProductCompareButtonContainer } from '@waldur/marketplace/compare/ProductCompareButtonContainer';
+
+import { ProductButton } from '../common/ProductButton';
+import { RatingStars } from '../common/RatingStars';
+import { Product } from '../types';
 import './ProductCard.scss';
-import { ProductCompareButtonContainer } from './ProductCompareButtonContainer';
-import { RatingStars } from './RatingStars';
-import { ShoppingCartButtonContainer } from './ShoppingCartButtonContainer';
-import { Product } from './types';
 
 interface ProductCardProps {
   product: Product;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { ProductButton } from './ProductButton';
-import { Product } from './types';
+import { ProductButton } from '../common/ProductButton';
+import { Product } from '../types';
 
 interface ProductCompareButtonProps {
   product: Product;

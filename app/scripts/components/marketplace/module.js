@@ -1,9 +1,9 @@
 import routes from './routes';
-import marketplaceLanding from './LandingPage';
-import marketplaceCompare from './ComparisonContainer';
-import comparisonIndicator from './ComparisonIndicator';
-import marketplaceCheckout from './CheckoutPage';
-import cartIndicator from './ShoppingCartIndicator';
+import marketplaceLanding from './landing/LandingPage';
+import marketplaceCompare from './compare/ComparisonContainer';
+import comparisonIndicator from './compare/ComparisonIndicator';
+import marketplaceCheckout from './cart/CheckoutPage';
+import cartIndicator from './cart/ShoppingCartIndicator';
 
 export default module => {
   module.component('marketplaceLanding', marketplaceLanding);

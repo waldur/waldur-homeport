@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 
-import { removeComparisonItem } from '@waldur/marketplace/store/actions';
-
 import { ComparisonItemRemoveButton } from './ComparisonItemRemoveButton';
+import { removeComparisonItem } from './store/actions';
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { removeCartItem } from '@waldur/marketplace/store/actions';
+import { removeCartItem } from './store/actions';
 
 const PureShoppingCartItemDeleteButton = props => (
   <a className="btn btn-outline btn-success" onClick={props.onClick}>

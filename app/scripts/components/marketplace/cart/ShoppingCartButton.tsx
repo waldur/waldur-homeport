@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import { ProductButton } from './ProductButton';
-import { Product } from './types';
+import { ProductButton } from '@waldur/marketplace/common/ProductButton';
+
+import { Product } from '../types';
 
 interface ShoppingCartButtonProps {
   product: Product;

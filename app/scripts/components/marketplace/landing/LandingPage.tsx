@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { categories, products } from '../fixtures';
 import { CategoryCard } from './CategoryCard';
-import { categories, products } from './fixtures';
 import { HeroSection } from './HeroSection';
 import { ProductGrid } from './ProductGrid';
 

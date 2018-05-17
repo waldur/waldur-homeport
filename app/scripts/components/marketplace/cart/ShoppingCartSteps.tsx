@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import { Step } from '@waldur/marketplace/ShoppingCartStep';
-
+import { Step } from './ShoppingCartStep';
 import './ShoppingCartSteps.scss';
 
 interface ShoppingCartStepsProps {
