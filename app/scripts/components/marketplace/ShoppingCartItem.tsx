@@ -20,11 +20,9 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
           <h4 className="product-title">
             <a>{props.item.title}</a>
           </h4>
-          {props.item.features && props.item.features.map((feature, index) => (
-            <span key={index}>
-              <b>{feature.name}:</b> {feature.value}
-            </span>
-          ))}
+          <p>
+            <b>Details:</b> {props.item.subtitle}
+          </p>
         </div>
       </div>
     </td>

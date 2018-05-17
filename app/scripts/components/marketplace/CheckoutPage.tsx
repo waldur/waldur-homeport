@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { ShoppingCart } from '@waldur/marketplace/ShoppingCart';
 import { ShoppingCartSidebar } from '@waldur/marketplace/ShoppingCartSidebar';
+import { ShoppingCartSteps } from '@waldur/marketplace/ShoppingCartSteps';
 import { getShoppingCartItems } from '@waldur/marketplace/store/selectors';
 import { Product } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
@@ -16,6 +17,7 @@ const PureCheckoutPage = (props: CheckoutPageProps) => (
   props.items.length > 0 ? (
     <div className="row">
       <div className="col-xl-9 col-lg-8">
+        <ShoppingCartSteps stage={2}/>
         <ShoppingCart items={props.items}/>
       </div>
       <div className="col-xl-3 col-lg-4">

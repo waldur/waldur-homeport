@@ -6,6 +6,8 @@ import { getShoppingCartTotal } from '@waldur/marketplace/store/selectors';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
+import './ShoppingCartSidebar.scss';
+
 interface ShoppingCartSidebarProps {
   total: number;
   customer: Customer;
@@ -13,8 +15,10 @@ interface ShoppingCartSidebarProps {
 }
 
 const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) => (
-  <aside>
-    <h3>Order Summary</h3>
+  <aside className="shopping-cart-sidebar">
+    <div className="shopping-cart-sidebar-title">
+      Order Summary
+    </div>
     <table className="table">
       <tbody>
         <tr>
@@ -33,6 +37,12 @@ const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) => (
         </tr>
       </tbody>
     </table>
+
+    <a className="btn btn-outline btn-default">
+      <i className="fa fa-file-pdf-o m-r-sm"/>
+      {' '}
+      Download order PDF file
+    </a>
   </aside>
 );
 
