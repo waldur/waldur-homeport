@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { removeCartItem } from '@waldur/marketplace/store/actions';
 
 const PureShoppingCartItemDeleteButton = props => (
-  <a className="btn btn-default btn-sm" onClick={props.onClick}>
+  <a className="btn btn-outline btn-success" onClick={props.onClick}>
     <i className="fa fa-times"/>
     {' '}
     Delete

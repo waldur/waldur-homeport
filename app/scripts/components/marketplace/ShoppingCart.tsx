@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { defaultCurrency } from '@waldur/core/services';
 import { ShoppingCartItem } from '@waldur/marketplace/ShoppingCartItem';
 import { Product } from '@waldur/marketplace/types';
 
@@ -8,7 +7,6 @@ import './ShoppingCart.scss';
 
 interface ShoppingCartProps {
   items: Product[];
-  total: number;
 }
 
 export const ShoppingCart = (props: ShoppingCartProps) => (
@@ -17,8 +15,8 @@ export const ShoppingCart = (props: ShoppingCartProps) => (
       <table className="table">
         <thead>
           <tr>
-            <th>Product Name</th>
-            <th className="text-center">Subtotal</th>
+            <th>Item</th>
+            <th className="text-center">Price</th>
             <th>{/* Actions column */}</th>
           </tr>
         </thead>
@@ -28,13 +26,6 @@ export const ShoppingCart = (props: ShoppingCartProps) => (
           ))}
         </tbody>
       </table>
-    </div>
-    <div className="shopping-cart-footer">
-      <div className="column"/>
-      <div className="column">
-        <span className="text-muted">Subtotal:&nbsp; </span>
-        <span>{defaultCurrency(props.total)}</span>
-      </div>
     </div>
   </>
 );

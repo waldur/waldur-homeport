@@ -25,6 +25,7 @@ describe('isOwnerOrStaff selector', () => {
     const workspace = {
       user: owner,
       customer: {
+        name: 'Alice',
         url: 'url',
         uuid: 'uuid',
         owners: [owner],
@@ -38,6 +39,7 @@ describe('isOwnerOrStaff selector', () => {
     const workspace = {
       user: owner,
       customer: {
+        name: 'Alice',
         url: 'url',
         uuid: 'uuid',
         owners: [staff],

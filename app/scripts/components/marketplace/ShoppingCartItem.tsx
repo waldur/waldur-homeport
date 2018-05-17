@@ -4,7 +4,6 @@ import { defaultCurrency } from '@waldur/core/services';
 import { Product } from '@waldur/marketplace/types';
 
 import './ShoppingCartItem.scss';
-import { ShoppingCartItemDeleteButton } from './ShoppingCartItemDeleteButton';
 
 interface ShoppingCartItemProps {
   item: Product;
@@ -23,7 +22,7 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
           </h4>
           {props.item.features && props.item.features.map((feature, index) => (
             <span key={index}>
-              <em>{feature.name}:</em> {feature.value}
+              <b>{feature.name}:</b> {feature.value}
             </span>
           ))}
         </div>
@@ -34,12 +33,9 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
     </td>
     <td className="text-center">
       <span className="btn-group">
-        <a className="btn btn-default btn-sm">
-          <i className="fa fa-edit"/>
-          {' '}
+        <a className="btn btn-outline btn-success">
           Edit
         </a>
-        <ShoppingCartItemDeleteButton item={props.item}/>
       </span>
     </td>
   </tr>
