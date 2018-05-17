@@ -2,10 +2,10 @@ import { connect } from 'react-redux';
 
 import { ShoppingCartButton } from './ShoppingCartButton';
 import { addCartItem, removeCartItem } from './store/actions';
-import { getInShoppingCart } from './store/selectors';
+import { hasItem } from './store/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
-  inCart: getInShoppingCart(state, ownProps.product),
+  inCart: hasItem(state, ownProps.product),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {

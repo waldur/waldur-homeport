@@ -1,2 +1,3 @@
-export const CART_ITEM_ADD = 'waldur/marketplace/cart/ADD';
-export const CART_ITEM_REMOVE = 'waldur/marketplace/cart/REMOVE';
+export const ADD_ITEM = 'waldur/marketplace/cart/ADD';
+export const REMOVE_ITEM = 'waldur/marketplace/cart/REMOVE';
+export const SET_STATE = 'waldur/marketplace/cart/SET_STATE';

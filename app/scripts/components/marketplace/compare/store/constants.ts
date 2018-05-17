@@ -1,2 +1,2 @@
-export const COMPARISON_ITEM_ADD = 'waldur/marketplace/comparison/ADD';
-export const COMPARISON_ITEM_REMOVE = 'waldur/marketplace/comparison/REMOVE';
+export const ADD_ITEM = 'waldur/marketplace/comparison/ADD';
+export const REMOVE_ITEM = 'waldur/marketplace/comparison/REMOVE';

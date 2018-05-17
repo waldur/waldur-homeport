@@ -1,8 +1,3 @@
-export interface ProductFeature {
-  name: string;
-  value: string | number;
-}
-
 export interface Product {
   thumb: string;
   title: string;
@@ -23,11 +18,6 @@ export interface Product {
   securityCertifications?: string;
   pricingOption?: string;
   price: number;
-  features?: ProductFeature[];
-}
-
-export interface ProductDetails extends Product {
-  thumb: string;
 }
 
 export interface Feature {

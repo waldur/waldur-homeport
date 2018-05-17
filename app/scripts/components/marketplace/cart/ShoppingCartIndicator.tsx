@@ -5,7 +5,7 @@ import { NavbarIndicator } from '@waldur/navigation/header/NavbarIndicator';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
 
-import { getShoppingCartCount } from './store/selectors';
+import { getCount } from './store/selectors';
 
 const PureCartIndicator = props => props.project ? (
   <NavbarIndicator
@@ -17,7 +17,7 @@ const PureCartIndicator = props => props.project ? (
 ) : null;
 
 const mapStateToProps = state => ({
-  count: getShoppingCartCount(state),
+  count: getCount(state),
   project: getProject(state),
 });
 

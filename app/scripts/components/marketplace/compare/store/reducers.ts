@@ -7,12 +7,12 @@ const INITIAL_STATE = {
 export const comparisonReducer = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
-    case constants.COMPARISON_ITEM_ADD:
+    case constants.ADD_ITEM:
       return {
         ...state,
         items: [...state.items, payload.item],
       };
-    case constants.COMPARISON_ITEM_REMOVE:
+    case constants.REMOVE_ITEM:
       const index = state.items.indexOf(payload.item);
       return {
         ...state,

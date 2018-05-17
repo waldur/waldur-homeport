@@ -1,16 +1,9 @@
-.shopping-cart td {
-  vertical-align: middle !important;
-}
+.shopping-cart {
+  td {
+    vertical-align: middle !important;
+  }
 
-.shopping-cart-footer {
-  display: table;
-  width: 100%;
-  padding: 10px 0;
-  border-top: 1px solid #e5e5e5;
-
-  .column {
-    display: table-cell;
-    padding: 5px 0;
-    vertical-align: middle;
+  tr:last-child {
+    border-bottom: 1px solid #e5e5e5;
   }
 }

@@ -5,7 +5,7 @@ import { NavbarIndicator } from '@waldur/navigation/header/NavbarIndicator';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
 
-import { getComparisonCount } from './store/selectors';
+import { getCount } from './store/selectors';
 
 const PureComparisonIndicator = props => props.project ? (
   <NavbarIndicator
@@ -16,7 +16,7 @@ const PureComparisonIndicator = props => props.project ? (
 ) : null;
 
 const mapStateToProps = state => ({
-  count: getComparisonCount(state),
+  count: getCount(state),
   project: getProject(state),
 });
 

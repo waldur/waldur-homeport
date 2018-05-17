@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import { RatingStars } from '../common/RatingStars';
-import { ProductDetails } from '../types';
+import { Product } from '../types';
 import './ComparisonItem.scss';
 import { ComparisonItemRemoveButtonContainer } from './ComparisonItemRemoveButtonContainer';
 
 interface ComparisonItemProps {
-  item: ProductDetails;
+  item: Product;
 }
 
 export const ComparisonItem = (props: ComparisonItemProps) => (

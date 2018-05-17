@@ -6,7 +6,7 @@ import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
 import './ShoppingCartSidebar.scss';
-import { getShoppingCartTotal } from './store/selectors';
+import { getTotal } from './store/selectors';
 
 interface ShoppingCartSidebarProps {
   total: number;
@@ -49,7 +49,7 @@ const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) => (
 const mapStateToProps = state => ({
   customer: getCustomer(state),
   project: getProject(state),
-  total: getShoppingCartTotal(state),
+  total: getTotal(state),
 });
 
 export const ShoppingCartSidebar = connect(mapStateToProps)(PureShoppingCartSidebar);
