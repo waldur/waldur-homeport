@@ -25,20 +25,20 @@ const goBack = (props: ActionButtonsProps) => () => {
   }
 };
 
-export const ActionButtons = (props: ActionButtonsProps) => (
-  <div className="display-flex justify-content-between m-t-md">
-    <a className="btn btn-outline btn-default" onClick={goBack(props)}>
-      <i className="fa fa-arrow-left"/>
-      {' '}
-      {props.state === 'Configure' && 'Back to shopping'}
-      {props.state === 'Approve' && 'Back'}
-      {props.state === 'Review' && 'Back'}
-    </a>
-    {(props.state === 'Configure' || props.state === 'Approve') && (
+export const ActionButtons = (props: ActionButtonsProps) =>
+  (props.state === 'Configure' || props.state === 'Approve') && (
+    <div className="display-flex justify-content-between m-t-md">
+      <a className="btn btn-outline btn-default" onClick={goBack(props)}>
+        <i className="fa fa-arrow-left"/>
+        {' '}
+        {props.state === 'Configure' && 'Back to shopping'}
+        {props.state === 'Approve' && 'Back'}
+      </a>
       <a className="btn btn-primary" onClick={goForward(props)}>
         {props.state === 'Configure' && 'Request an approval'}
         {props.state === 'Approve' && 'Purchase'}
+        {' '}
+        <i className="fa fa-arrow-right"/>
       </a>
-    )}
-  </div>
-);
+    </div>
+  );

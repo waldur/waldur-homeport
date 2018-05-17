@@ -7,6 +7,7 @@ import './ShoppingCartItem.scss';
 
 interface ShoppingCartItemProps {
   item: Product;
+  editable: boolean;
 }
 
 export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
@@ -29,12 +30,14 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
     <td className="text-center text-lg">
       {defaultCurrency(props.item.price)}
     </td>
-    <td className="text-center">
-      <span className="btn-group">
-        <a className="btn btn-outline btn-success">
-          Edit
-        </a>
-      </span>
-    </td>
+    {props.editable && (
+      <td className="text-center">
+        <span className="btn-group">
+          <a className="btn btn-outline btn-success">
+            Edit
+          </a>
+        </span>
+      </td>
+    )}
   </tr>
 );

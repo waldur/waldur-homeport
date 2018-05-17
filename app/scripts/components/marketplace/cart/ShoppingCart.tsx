@@ -7,6 +7,7 @@ import { ShoppingCartItem } from './ShoppingCartItem';
 
 interface ShoppingCartProps {
   items: Product[];
+  editable: boolean;
 }
 
 export const ShoppingCart = (props: ShoppingCartProps) => (
@@ -22,7 +23,11 @@ export const ShoppingCart = (props: ShoppingCartProps) => (
         </thead>
         <tbody>
           {props.items.map((item, index) => (
-            <ShoppingCartItem key={index} item={item}/>
+            <ShoppingCartItem
+              key={index}
+              item={item}
+              editable={props.editable}
+            />
           ))}
         </tbody>
       </table>

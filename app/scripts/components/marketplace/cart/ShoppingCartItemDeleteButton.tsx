@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { removeCartItem } from './store/actions';
+import { removeItem } from './store/actions';
 
 const PureShoppingCartItemDeleteButton = props => (
   <a className="btn btn-outline btn-success" onClick={props.onClick}>
@@ -13,7 +13,7 @@ const PureShoppingCartItemDeleteButton = props => (
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onClick: () => dispatch(removeCartItem(ownProps.item)),
+    onClick: () => dispatch(removeItem(ownProps.item)),
   };
 };
 

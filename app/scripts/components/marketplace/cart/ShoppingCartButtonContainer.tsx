@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { ShoppingCartButton } from './ShoppingCartButton';
-import { addCartItem, removeCartItem } from './store/actions';
+import { addItem, removeItem } from './store/actions';
 import { hasItem } from './store/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addItem: () => dispatch(addCartItem(ownProps.product)),
-    removeItem: () => dispatch(removeCartItem(ownProps.product)),
+    addItem: () => dispatch(addItem(ownProps.product)),
+    removeItem: () => dispatch(removeItem(ownProps.product)),
   };
 };
 

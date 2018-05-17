@@ -23,7 +23,7 @@ const PureCheckoutPage = (props: CheckoutPageProps) => (
     <div className="row">
       <div className="col-xl-9 col-lg-8">
         <ShoppingCartSteps state={props.state}/>
-        <ShoppingCart items={props.items}/>
+        <ShoppingCart items={props.items} editable={props.state === 'Configure'}/>
         <ActionButtons state={props.state} setState={props.setState}/>
       </div>
       <div className="col-xl-3 col-lg-4">
