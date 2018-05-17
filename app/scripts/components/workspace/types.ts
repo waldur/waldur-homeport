@@ -23,12 +23,14 @@ export interface UserDetails extends User {
 }
 
 export interface Customer {
+  name: string;
   uuid: string;
   url: string;
   owners: User[];
 }
 
 export interface Project {
+  name: string;
   uuid: string;
   url: string;
 }

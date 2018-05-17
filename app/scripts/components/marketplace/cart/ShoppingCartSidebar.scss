@@ -1,0 +1,38 @@
+.shopping-cart-sidebar {
+  .table {
+    td {
+      padding: 6px 0;
+      border: 0;
+    }
+
+    tr:last-child>td {
+      padding-top: 12px;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    tr:nth-last-child(2)>td {
+      padding-bottom: 12px;
+    }
+  }
+}
+
+.shopping-cart-sidebar-title {
+  position: relative;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e5e5;
+  color: #232323;
+  font-size: 15px;
+  font-weight: normal;
+
+  &::after {
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 90px;
+    height: 1px;
+    background-color: #05f;
+    content: '';
+  }
+}

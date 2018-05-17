@@ -1,10 +1,12 @@
 import * as React from 'react';
 
-import { ProductButton } from './ProductButton';
+import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
+import { ProductCompareButtonContainer } from '@waldur/marketplace/compare/ProductCompareButtonContainer';
+
+import { ProductButton } from '../common/ProductButton';
+import { RatingStars } from '../common/RatingStars';
+import { Product } from '../types';
 import './ProductCard.scss';
-import { ProductCompareButtonContainer } from './ProductCompareButtonContainer';
-import { RatingStars } from './RatingStars';
-import { Product } from './types';
 
 interface ProductCardProps {
   product: Product;
@@ -30,7 +32,7 @@ export const ProductCard = (props: ProductCardProps) => (
     <div className="product-button-group">
       <ProductButton icon="fa fa-comments" title="Write review"/>
       <ProductCompareButtonContainer product={props.product}/>
-      <ProductButton icon="fa fa-shopping-cart" title="Add to cart"/>
+      <ShoppingCartButtonContainer product={props.product}/>
     </div>
   </div>
 );
