@@ -144,29 +144,19 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       }
 
       function connectEventListeners(table) {
-        table.on('select', function(event, datatable, type, indexes) {
+        function selectionHandler(event, datatable, type) {
           if (type === 'row') {
             let items = [];
-            table.rows(indexes).every(function() {
+            table.rows('.selected').every(function() {
               items.push(this.data());
             });
             if (scope.controller.onSelect) {
               scope.controller.onSelect(items);
             }
           }
-        });
-
-        table.on('deselect', function(event, datatable, type, indexes) {
-          if (type === 'row') {
-            let items = [];
-            table.rows(indexes).every(function() {
-              items.push(this.data());
-            });
-            if (scope.controller.onDeselect) {
-              scope.controller.onDeselect(items);
-            }
-          }
-        });
+        }
+        table.on('select', selectionHandler);
+        table.on('deselect', selectionHandler);
 
         // eslint-disable-next-line no-unused-vars
         table.on('responsive-display.dt', function(event, datatable, row, show) {

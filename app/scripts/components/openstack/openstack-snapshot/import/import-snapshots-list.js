@@ -64,22 +64,12 @@ function ImportSnapshotsListController(
       ];
     },
     requestLoad(request, filter) {
-      // check if that it is
       return this._super(request, filter).then(() => {
-        this.onDeselect(this.selectedItems);
+        this.onSelect([]);
       });
     },
     onSelect(items) {
-      this.selectedItems = this.selectedItems.concat(items);
-      this.fireSelectedItemsChanged();
-    },
-    onDeselect(items) {
-      for (let i = 0; i<items.length; i++) {
-        this.selectedItems = this.selectedItems.filter(item => item.backend_id !== items[i].backend_id);
-      }
-      this.fireSelectedItemsChanged();
-    },
-    fireSelectedItemsChanged() {
+      this.selectedItems = items;
       $scope.$emit('selectedItemsChanged', {data: this.selectedItems});
     },
     getSelectedItems() {

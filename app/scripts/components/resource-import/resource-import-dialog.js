@@ -30,6 +30,7 @@ const resourceImportDialog = {
       this.loadingProviders = true;
       this.selectedItems = [];
       this.service = this.resolve.service;
+      this.service.clearAllCacheForCurrentEndpoint();
       this.componentTemplate = this.resolve.componentTemplate;
       this.selectProviderTitle = gettext('Step 1. Select provider');
       this.loadProviders().then(providers => {
@@ -57,7 +58,6 @@ const resourceImportDialog = {
         return;
       }
 
-      this.service.clearAllCacheForCurrentEndpoint();
       return this.service.importResources(this.selectedProvider, this.selectedItems).then(() => {
         this.ncUtilsFlash.success(gettext('Resources import has been initiated'));
         this.close();
