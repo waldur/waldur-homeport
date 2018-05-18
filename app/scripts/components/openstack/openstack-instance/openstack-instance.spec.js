@@ -52,7 +52,8 @@ describe('OpenStack Instance Provision Form', function() {
     expect(servicesService.getAll).toHaveBeenCalledWith({
       settings_uuid: 'VALID_SETTINGS_UUID',
       is_booked: 'False',
-      runtime_state: 'DOWN'
+      runtime_state: 'DOWN',
+      free: 'True',
     }, 'https://example.com/api/openstacktenant-floating-ips/');
   });
 });
