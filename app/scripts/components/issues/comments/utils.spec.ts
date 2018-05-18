@@ -17,14 +17,21 @@ describe('JIRA markup formatter', () => {
     test('Makes text {{monospaced}}.', 'Makes text <code>monospaced</code>.');
   });
 
+  it('linkifies text even if JIRA markup is not used explicitly', () => {
+    test(
+      `In particular, https://github.com/opennode/waldur-openstack/blob/develop/src/waldur_openstack/openstack_tenant/tasks.py#L138 was displayed as a broken link.`,
+      // tslint:disable-next-line
+      `In particular, <a href="https://github.com/opennode/waldur-openstack/blob/develop/src/waldur_openstack/openstack_tenant/tasks.py#L138">https://github.com/opennode/waldur-openstack/blob/develop/src/waldur_openstack/openstack_tenant/tasks.py#L138</a> was displayed as a broken link.`)
+  });
+
   it('creates a link to an external resource', () => {
     test('See also: [http://jira.atlassian.com]',
-      'See also: <a href="http://jira.atlassian.com" download="false">http://jira.atlassian.com</a>');
+      'See also: <a href="http://jira.atlassian.com">http://jira.atlassian.com</a>');
   });
 
   it('creates a link to an internal resource', () => {
     test('See also: [^panda.jpg]',
-      'See also: <a href="https://example.com/media/support_attachments/panda.jpg" download="true">panda.jpg</a>');
+      'See also: <a href="https://example.com/media/support_attachments/panda.jpg" download>panda.jpg</a>');
   });
 
   it('creates a message to not founded internal resource', () => {
@@ -34,7 +41,7 @@ describe('JIRA markup formatter', () => {
 
   it('creates a named link to an external resource', () => {
     test('See also: [Atlassian|http://jira.atlassian.com]',
-      'See also: <a href="http://jira.atlassian.com" download="false">Atlassian</a>');
+      'See also: <a href="http://jira.atlassian.com">Atlassian</a>');
   });
 
   it('creates an image to an internal resource', () => {
