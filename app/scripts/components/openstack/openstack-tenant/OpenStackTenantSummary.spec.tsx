@@ -41,4 +41,9 @@ describe('OpenStackTenantSummary', () => {
     });
     expect(getField(wrapper, 'Access').text()).toBe('No access info.');
   });
+
+  it('skips package rendering if template is not provided', () => {
+    const wrapper = renderSummary({resource: {...resource, extra_configuration: {}}});
+    expect(getField(wrapper, 'Package').length).toBe(0);
+  });
 });
