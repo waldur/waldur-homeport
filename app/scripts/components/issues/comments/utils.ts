@@ -5,8 +5,12 @@ import { openModalDialog } from '@waldur/modal/actions';
 
 import { Comment } from './types';
 
-export const urlRegex =
-  /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[A-Z0-9+&@#/%=~_|$])/im;
+const urlPattern =
+  '(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[A-Z0-9+&@#/%=~_|$])';
+
+const urlRegex = new RegExp(urlPattern, 'im');
+
+const standaloneLinkRegex = new RegExp(`(?:\\s+)(${urlPattern})(?:\\s+)`, 'img');
 
 export const getUrl = (str: string): string => {
   const result = str.match(urlRegex);
@@ -46,7 +50,7 @@ export const getAttachmentByFileName = (attachments: Attachment[] = [], fileName
 };
 
 export const renderLink = (href: string, name: string = href, download: boolean = false) =>
-  `<a href="${href}" download="${download}">${name}</a>`;
+  `<a href="${href}"${download ? ' download' : ''}>${name}</a>`;
 
 // See also JIRA to Markdown converter: https://github.com/kylefarris/J2M/blob/master/index.js
 // and JIRA Text Formatting Notation: https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all
@@ -62,6 +66,11 @@ export const formatJiraMarkup = (text: string = '', attachments: Attachment[] = 
 
     // Monospaced text
     .replace(/\{\{([^}]+)\}\}/g, '<code>$1</code>')
+
+    // Standalone links
+    .replace(standaloneLinkRegex, (_, url) => {
+      return ' ' + renderLink(url, url) + ' ';
+    })
 
     // Un-named Links
     .replace(/\[\^?([^|]+)\]/g, (_, fileName) => {

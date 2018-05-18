@@ -10,19 +10,19 @@ export const getComments = (issue: string) => {
 };
 
 export const createComment = (description: string, uuid: string) => {
-  return sendForm('POST', `${ENV.apiEndpoint}api/support-issues/{${uuid}}/comment/`, {
+  return sendForm('POST', `${ENV.apiEndpoint}api/support-issues/${uuid}/comment/`, {
     is_public: true,
     description,
   });
 };
 
 export const updateComment = (description: string, uuid: string) => {
-  return sendForm('PUT', `${ENV.apiEndpoint}api/support-comments/{${uuid}}/`, {
+  return sendForm('PUT', `${ENV.apiEndpoint}api/support-comments/${uuid}/`, {
     is_public: true,
     description,
   });
 };
 
 export const deleteComment = (uuid: string) => {
-  return $http.delete(`${ENV.apiEndpoint}api/support-comments/{${uuid}}/`);
+  return $http.delete(`${ENV.apiEndpoint}api/support-comments/${uuid}/`);
 };
