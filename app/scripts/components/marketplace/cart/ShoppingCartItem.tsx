@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { Product } from '@waldur/marketplace/types';
 
@@ -14,9 +15,11 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
   <tr>
     <td>
       <div className="product-item">
-        <a className="product-thumb">
+        <Link
+          state="marketplace-product"
+          className="product-thumb">
           <img src={props.item.thumb}/>
-        </a>
+        </Link>
         <div className="product-info">
           <h4 className="product-title">
             <a>{props.item.title}</a>

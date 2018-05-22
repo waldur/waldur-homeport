@@ -9,7 +9,7 @@ describe('SecretField', () => {
   it('renders password field by default', () => {
     const wrapper = renderField();
     expect(wrapper.find('input').prop('type')).toBe('password');
-    expect(wrapper.find('a').prop('className')).toBe('icon password-icon fa-eye');
+    expect(wrapper.find('a').prop('className')).toBe('fa password-icon fa-eye');
     expect(wrapper.find('a').prop('title')).toBe('Show');
   });
 
@@ -17,7 +17,7 @@ describe('SecretField', () => {
     const wrapper = renderField();
     wrapper.find('a').simulate('click');
     expect(wrapper.find('input').prop('type')).toBe('text');
-    expect(wrapper.find('a').prop('className')).toBe('icon password-icon fa-eye-slash');
+    expect(wrapper.find('a').prop('className')).toBe('fa password-icon fa-eye-slash');
     expect(wrapper.find('a').prop('title')).toBe('Hide');
   });
 });
