@@ -5319,7 +5319,6 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
-#: app/scripts/components/analytics/VmOverviewFilter.tsx
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
 msgid "Show private"
 msgstr ""

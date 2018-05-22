@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { compose } from 'redux';
 
-import { VmOverviewFilter } from '@waldur/analytics/VmOverviewFilter';
+import VmOverviewFilter from '@waldur/analytics/VmOverviewFilterContainer';
 import { VmTypeOverview } from '@waldur/analytics/VmTypeOverview';
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
