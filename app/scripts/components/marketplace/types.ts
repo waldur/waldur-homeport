@@ -17,10 +17,7 @@ export interface Product {
   managementAuth?: string;
   securityCertifications?: string;
   pricingOption?: string;
-}
-
-export interface ProductDetails extends Product {
-  thumb: string;
+  price: number;
 }
 
 export interface Feature {

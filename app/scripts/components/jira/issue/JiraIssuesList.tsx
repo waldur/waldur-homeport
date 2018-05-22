@@ -77,7 +77,7 @@ const TableOptions = {
   table: 'jiraIssues',
   fetchData: createFetcher('jira-issues'),
   queryField: 'summary',
-  mapPropsToFilter: ({ resource }) => ({project_uuid: resource.uuid}),
+  mapPropsToFilter: ({ resource }) => ({jira_project_uuid: resource.uuid}),
   exportFields: [
     'key',
     'type',

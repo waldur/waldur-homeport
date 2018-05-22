@@ -41,9 +41,9 @@ function CustomerListController(
       };
     },
     getHiddenColumns: function(value) {
-      if (value) {
+      if (value === true) {
         return ['prev_cost'];
-      } else {
+      } else if (value === false) {
         return ['current_cost', 'estimated_cost'];
       }
     },

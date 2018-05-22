@@ -15,6 +15,7 @@ export interface UserDetails extends User {
   preferred_language: string;
   competence: string;
   date_joined: string;
+  organization: string;
   job_title: string;
   is_support: boolean;
   token: string;
@@ -22,12 +23,14 @@ export interface UserDetails extends User {
 }
 
 export interface Customer {
+  name: string;
   uuid: string;
   url: string;
   owners: User[];
 }
 
 export interface Project {
+  name: string;
   uuid: string;
   url: string;
 }

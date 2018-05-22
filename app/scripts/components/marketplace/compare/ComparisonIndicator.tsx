@@ -1,28 +1,22 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { Link } from '@waldur/core/Link';
-import { getComparisonCount } from '@waldur/marketplace/store/selectors';
+import { NavbarIndicator } from '@waldur/navigation/header/NavbarIndicator';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
 
+import { getCount } from './store/selectors';
+
 const PureComparisonIndicator = props => props.project ? (
-  <li style={{ marginRight: '0px' }}>
-    <Link
-      state="marketplace-compare"
-      className="count-info position-relative"
-      label={
-        <>
-          <i className="fa fa-balance-scale"/>
-          <span className="label label-primary">{props.count}</span>
-        </>
-      }
-    />
-  </li>
+  <NavbarIndicator
+    state="marketplace-compare"
+    iconClass="fa fa-balance-scale"
+    count={props.count}
+  />
 ) : null;
 
 const mapStateToProps = state => ({
-  count: getComparisonCount(state),
+  count: getCount(state),
   project: getProject(state),
 });
 

@@ -73,7 +73,10 @@ export default function baseResourceListController(
         tableActions: this.getTableActions(),
         rowActions: function(row) {
           let index = this.findIndexById(row);
-          return '<action-button-resource button-controller="controller" button-model="controller.list[' + index + ']"/>';
+          return `<span class="btn-group">` +
+                 `<action-button-resource button-controller="controller" button-model="controller.list[${index}]"></action-button-resource>` +
+                 `<resource-summary-button resource="controller.list[${index}]"></resource-summary-button>` +
+                 `</span>`;
         }
       };
       if (this.currentUser.is_support && !this.currentUser.is_staff) {

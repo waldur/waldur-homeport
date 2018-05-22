@@ -70,6 +70,12 @@ const REPORT_ITEMS = [
       }
     ]
   },
+  {
+    label: gettext('VM type overview'),
+    icon: 'fa-desktop',
+    link: 'support.vm-type-overview',
+    feature: 'support.vm-type-overview'
+  },
 ];
 
 // This service checks users status and returns different sidebar items and router state

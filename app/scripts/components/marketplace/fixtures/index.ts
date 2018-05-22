@@ -90,6 +90,7 @@ export const products: Product[] = [
     reviews: 14,
     installs: 100,
     vendor: 'Salesforce.com',
+    price: 900,
   },
   {
     title: 'Redtail CRM',
@@ -99,6 +100,7 @@ export const products: Product[] = [
     reviews: 20,
     installs: 200,
     vendor: 'Redtail Technology',
+    price: 300,
   },
   {
     title: 'Zoho CRM',
@@ -108,6 +110,7 @@ export const products: Product[] = [
     reviews: 10,
     installs: 300,
     vendor: 'Zoho Corporation',
+    price: 400,
   },
   {
     title: 'Dynamics 365',
@@ -117,6 +120,7 @@ export const products: Product[] = [
     reviews: 30,
     installs: 40,
     vendor: 'Microsoft',
+    price: 1000,
   },
 ];
 

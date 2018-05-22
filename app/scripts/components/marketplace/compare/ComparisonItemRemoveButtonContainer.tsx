@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 
-import { removeComparisonItem } from '@waldur/marketplace/store/actions';
-
 import { ComparisonItemRemoveButton } from './ComparisonItemRemoveButton';
+import { removeItem } from './store/actions';
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onClick: () => dispatch(removeComparisonItem(ownProps.product)),
+    onClick: () => dispatch(removeItem(ownProps.product)),
   };
 };
 

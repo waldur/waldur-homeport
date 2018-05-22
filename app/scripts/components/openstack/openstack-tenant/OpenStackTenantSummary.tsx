@@ -38,13 +38,16 @@ const formatPassword = (props: OpenStackTenantSummaryProps) =>
 
 export const PureOpenStackTenantSummary = (props: OpenStackTenantSummaryProps) => {
   const { translate, resource } = props;
+  const template = getTenantTemplate(resource);
   return (
-    <span>
+    <>
       <PureResourceSummaryBase {...props}/>
-      <Field
-        label={translate('Package')}
-        value={formatPackage(getTenantTemplate(resource))}
-      />
+      {template && (
+        <Field
+          label={translate('Package')}
+          value={formatPackage(template)}
+        />
+      )}
       <Field
         label={translate('Access')}
         value={formatAccess(props)}
@@ -57,7 +60,7 @@ export const PureOpenStackTenantSummary = (props: OpenStackTenantSummaryProps) =
         label={translate('Password')}
         value={formatPassword(props)}
       />
-    </span>
+    </>
   );
 };
 

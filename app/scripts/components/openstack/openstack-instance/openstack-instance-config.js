@@ -134,6 +134,7 @@ export default {
             settings_uuid: context.settings_uuid,
             is_booked: 'False',
             runtime_state: 'DOWN',
+            free: 'True',
           }
         }
       })
