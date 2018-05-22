@@ -6,6 +6,7 @@ export interface Product {
   installs: number;
   reviews: number;
   vendor: string;
+  vendorDetails?: string;
   cloudDeploymentModel?: string;
   vendorType?: string;
   userSupportOptions?: string[];
@@ -18,6 +19,14 @@ export interface Product {
   securityCertifications?: string;
   pricingOption?: string;
   price: number;
+  screenshots?: Screenshot[];
+  description?: string;
+}
+
+export interface Screenshot {
+  thumb: string;
+  title: string;
+  description: string;
 }
 
 export interface Feature {
