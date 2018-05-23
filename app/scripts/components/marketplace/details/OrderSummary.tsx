@@ -48,7 +48,7 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
           <td>{props.project.name}</td>
         </tr>
         <tr>
-          <td className="text-lg">Total</td>
+          <td className="text-lg">Price</td>
           <td className="text-lg">
             {defaultCurrency(props.product.price)}
           </td>
