@@ -14,6 +14,14 @@ interface OrderSummaryProps {
   project: Project;
 }
 
+const CompareButton = () => (
+  <button
+    type="button"
+    className="btn btn-outline btn-sm btn-default">
+    <i className="fa fa fa-balance-scale"/>
+  </button>
+);
+
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
     <img src={props.product.thumb} className="img-lg"/>
@@ -47,7 +55,10 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
         </tr>
       </tbody>
     </table>
-    <CheckoutButton/>
+    <div className="display-flex justify-content-between">
+      <CheckoutButton/>
+      <CompareButton/>
+    </div>
   </>
 );
 
