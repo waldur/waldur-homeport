@@ -11,7 +11,7 @@ const DemoButton = () => (
 );
 
 export const OverviewTab = props => (
-  <Row className="m-t-md">
+  <Row>
     <Col md={6}>
       <h4>Product details</h4>
       <div dangerouslySetInnerHTML={{__html: props.product.description}}/>

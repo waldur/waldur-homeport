@@ -9,7 +9,7 @@ interface ScreenshotsTabProps {
 }
 
 export const ScreenshotsTab = (props: ScreenshotsTabProps) => (
-  <Row className="m-t-md">
+  <Row>
     {props.screenshots.map((item, index) => (
       <Col key={index} md={4} className="text-center">
         <img src={item.thumb} className="img-thumbnail m-xs"/>

@@ -22,7 +22,9 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
         </Link>
         <div className="product-info">
           <h4 className="product-title">
-            <a>{props.item.title}</a>
+          <Link state="marketplace-product">
+            {props.item.title}
+          </Link>
           </h4>
           <p>
             <b>Details:</b> {props.item.subtitle}
