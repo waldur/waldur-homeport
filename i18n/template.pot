@@ -4115,6 +4115,10 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
+#: app/scripts/components/marketplace/routes.js
+msgid "Product details"
+msgstr ""
+
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx

@@ -30,5 +30,16 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Marketplace checkout'),
         feature: 'marketplace',
       }
+    })
+
+    .state('marketplace-product', {
+      url: 'marketplace-product/',
+      template: '<marketplace-product></marketplace-product>',
+      parent: 'project',
+      data: {
+        pageTitle: gettext('Product details'),
+        feature: 'marketplace',
+      }
     });
+
 }

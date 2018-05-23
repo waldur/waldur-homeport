@@ -3,7 +3,11 @@ import * as React from 'react';
 
 import { FormField } from './types';
 
-export class SecretField extends React.Component<FormField> {
+interface SecretFieldProps extends FormField {
+  placeholder?: string;
+}
+
+export class SecretField extends React.Component<SecretFieldProps> {
   state = {
     showSecret: false,
   };
@@ -15,7 +19,7 @@ export class SecretField extends React.Component<FormField> {
   render() {
     const { input, label, validate, ...rest } = this.props;
     const { showSecret } = this.state;
-    const iconClass = classNames('icon password-icon', {
+    const iconClass = classNames('fa password-icon', {
       'fa-eye-slash': showSecret,
       'fa-eye': !showSecret,
     });
@@ -26,6 +30,7 @@ export class SecretField extends React.Component<FormField> {
           type={showSecret ? 'text' : 'password'}
           autoComplete="new-password"
           className="form-control"
+          placeholder={this.props.placeholder}
           {...rest}/>
         <a className={iconClass}
           title={showSecret ? 'Hide' : 'Show'}
