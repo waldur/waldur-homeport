@@ -4,7 +4,7 @@ import marketplaceCompare from './compare/ComparisonContainer';
 import comparisonIndicator from './compare/ComparisonIndicator';
 import marketplaceCheckout from './cart/CheckoutPage';
 import cartIndicator from './cart/ShoppingCartIndicator';
-import marketplaceProduct from './details/ProductDetails';
+import marketplaceProduct from './details/DetailsPage';
 import { setupFixture } from '@waldur/marketplace/fixtures/setup';
 
 export default module => {

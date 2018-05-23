@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
+import { CheckoutButton } from '@waldur/marketplace/details/CheckoutButton';
 
 export const ProductHeader = props => (
   <>
@@ -8,5 +9,6 @@ export const ProductHeader = props => (
     <RatingStars rating={props.product.rating} size="medium"/>
     <h4>{props.product.title}</h4>
     <p>by <a>{props.product.vendor}</a></p>
+    <CheckoutButton/>
   </>
 );

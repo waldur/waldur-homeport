@@ -5,6 +5,7 @@ export interface Product {
   rating: number;
   installs: number;
   reviews: number;
+  category?: string;
   vendor: string;
   vendorDetails?: string;
   cloudDeploymentModel?: string;

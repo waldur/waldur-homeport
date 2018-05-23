@@ -4,11 +4,11 @@ import * as Row from 'react-bootstrap/lib/Row';
 
 import { Screenshot } from '@waldur/marketplace/types';
 
-interface ProductGalleryProps {
+interface ScreenshotsTabProps {
   screenshots: Screenshot[];
 }
 
-export const ProductGallery = (props: ProductGalleryProps) => (
+export const ScreenshotsTab = (props: ScreenshotsTabProps) => (
   <Row className="m-t-md">
     {props.screenshots.map((item, index) => (
       <Col key={index} md={4} className="text-center">

@@ -9,18 +9,6 @@ import {
   SecretField
 } from '@waldur/form-react';
 
-const CheckoutButton = () => (
-  <div className="form-group">
-    <div className="col-sm-9 col-sm-offset-3">
-      <button type="button" className="btn btn-primary">
-        <i className="fa fa fa-shopping-cart"/>
-        {' '}
-        Add to cart
-      </button>
-    </div>
-  </div>
-);
-
 const PureProductConfigurator = () => (
   <form className="form-horizontal">
     <FormContainer
@@ -52,7 +40,6 @@ const PureProductConfigurator = () => (
         placeholder="generate automatically"
         name="password"
       />
-      <CheckoutButton/>
     </FormContainer>
   </form>
 );

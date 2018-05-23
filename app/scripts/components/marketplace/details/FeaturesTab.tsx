@@ -3,7 +3,7 @@ import * as Table from 'react-bootstrap/lib/Table';
 
 import { sections } from '@waldur/marketplace/fixtures';
 
-export const ProductFeatures = props => (
+export const FeaturesTab = props => (
   <Table
     bordered={true}
     hover={true}

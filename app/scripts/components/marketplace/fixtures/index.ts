@@ -220,6 +220,7 @@ for(const product of products) {
   product.screenshots = WaldurScreenshots;
   product.vendorDetails = OpenNodeVendor;
   product.description = ProductDescription;
+  product.category = 'CRM / ERP';
 }
 
 export const sections = [
