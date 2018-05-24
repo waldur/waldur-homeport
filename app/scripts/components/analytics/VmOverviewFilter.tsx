@@ -34,6 +34,7 @@ export const VmOverviewFilter = (props: VmOverviewFilterProps) => (
                 onBlur={() => prop.input.onBlur(prop.input.value)}
                 options={props.serviceProviders}
                 multi={true}
+                disabled={props.serviceProviders.length === 0}
               />
             }
           />
