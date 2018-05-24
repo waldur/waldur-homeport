@@ -1,7 +1,6 @@
 import * as moment from 'moment';
 
 import { getList } from '@waldur/core/api';
-import { $http, ENV } from '@waldur/core/services';
 
 export const fetchProjects = (organizationUuid: string) =>
   getList('/projects/', { customer: organizationUuid });
@@ -22,10 +21,6 @@ export const loadServiceProviders = () => {
   const params = {
     type: 'OpenStackTenant',
   };
-  const url = `${ENV.apiEndpoint}api/service-settings/`;
-  return $http({
-    method: 'GET',
-    url,
-    params,
-  }).then(response => response.data);
+  const url = '/service-settings/';
+  return getList(url, params);
 };

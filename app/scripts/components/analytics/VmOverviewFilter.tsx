@@ -1,19 +1,17 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 import Select from 'react-select';
-import { compose } from 'redux';
-import { reduxForm, Field } from 'redux-form';
+import { Field } from 'redux-form';
 
-import { withTranslation, TranslateProps } from '@waldur/i18n';
-
-import { formatServiceProviders } from './utils';
+import { ServiceProvider } from '@waldur/analytics/types';
+import { TranslateProps } from '@waldur/i18n';
 
 import './VmOverviewFilter.scss';
 
-interface PureVmOverviewFilterProps extends TranslateProps {
-  serviceProviders: any[];
+interface VmOverviewFilterProps extends TranslateProps {
+  serviceProviders: ServiceProvider[];
 }
-const PureVmOverviewFilter = (props: PureVmOverviewFilterProps) => (
+
+export const VmOverviewFilter = (props: VmOverviewFilterProps) => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
       <form className="form-inline" id="vm-overview-filter">
@@ -34,7 +32,7 @@ const PureVmOverviewFilter = (props: PureVmOverviewFilterProps) => (
                 value={prop.input.value}
                 onChange={prop.input.onChange}
                 onBlur={() => prop.input.onBlur(prop.input.value)}
-                options={formatServiceProviders(props.serviceProviders)}
+                options={props.serviceProviders}
                 multi={true}
               />
             }
@@ -44,16 +42,3 @@ const PureVmOverviewFilter = (props: PureVmOverviewFilterProps) => (
     </div>
   </div>
 );
-
-const mapStateToProps = (_, ownProps) => ({...ownProps});
-
-const enhance = compose(
-  connect(mapStateToProps),
-  reduxForm({
-    form: 'vmOverviewFilter',
-    initialValues: {shared: true},
-  }),
-  withTranslation,
-);
-
-export const VmOverviewFilter = enhance(PureVmOverviewFilter);
