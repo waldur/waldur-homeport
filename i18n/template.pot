@@ -5323,7 +5323,6 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
-#: app/scripts/components/analytics/VmOverviewFilter.tsx
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
 msgid "Show private"
 msgstr ""
@@ -6163,6 +6162,10 @@ msgstr ""
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/ansible/python-management/details/PythonManagementDetailsContainer.tsx
 msgid "Unable to load python management details."
+msgstr ""
+
+#: app/scripts/components/analytics/VmOverviewFilterContainer.tsx
+msgid "Unable to load service providers."
 msgstr ""
 
 #: app/scripts/components/user/user-popover.html

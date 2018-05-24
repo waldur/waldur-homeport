@@ -16,3 +16,11 @@ export const fetchQuotaHistory = (quotaUuid: string) => {
     points_count: pointsCount,
   });
 };
+
+export const loadServiceProviders = () => {
+  const params = {
+    type: 'OpenStackTenant',
+  };
+  const url = '/service-settings/';
+  return getList(url, params);
+};

@@ -40,3 +40,8 @@ export interface ChartData {
   loading?: boolean;
   options: { [key: string]: any };
 }
+
+export interface ServiceProvider {
+  name: string;
+  value: string;
+}

@@ -28,3 +28,9 @@ Stylesheet file may import dependencies from core module.
 
 In order to inject dependencies into component, ng-annotate-loader is used.
 It is required to mark each function which needs annotations, with the following comment: `// @ngInject`
+
+# General tips on writing React components
+
+New tables should be implemented using 'Table' component under 'table-react' folder.
+A new table should be named with 'List' postfix, for instance: UsersList.
+Try to maximize usage of theme's colors and do not add custom styling if not necessary.
