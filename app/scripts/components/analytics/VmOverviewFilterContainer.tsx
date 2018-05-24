@@ -11,19 +11,38 @@ import { VmOverviewFilter } from './VmOverviewFilter';
 
 class VmOverviewFilterComponent extends React.Component<InjectedFormProps&TranslateProps> {
   state = {
+    loaded: false,
+    erred: false,
     serviceProviders: [],
   };
 
   componentDidMount() {
     api.loadServiceProviders().then(serviceProviders => {
       const formatedServiceProviders = formatServiceProviders(serviceProviders);
-      this.setState({serviceProviders: formatedServiceProviders});
+      this.setState({
+        serviceProviders: formatedServiceProviders,
+        loaded: true,
+        erred: false,
+      });
+    })
+    .catch(() => {
+      this.setState({
+        loaded: false,
+        erred: true,
+      });
     });
   }
 
   render() {
-    if (this.state.serviceProviders.length === 0) {
-      return <LoadingSpinner />;
+    if (this.state.erred) {
+      return (
+        <h3 className="text-center">
+          {this.props.translate('Unable to load service providers.')}
+        </h3>
+      );
+    }
+    if (!this.state.loaded) {
+      return <LoadingSpinner/>;
     }
     return <VmOverviewFilter {...this.props} serviceProviders={this.state.serviceProviders}/>;
   }
