@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { FilterBar } from '@waldur/marketplace/common/FilterBar';
 import { ProductGrid } from '@waldur/marketplace/common/ProductGrid';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -9,11 +10,9 @@ import { HeroSection } from './HeroSection';
 
 export const LandingPage = () => (
   <div>
-    <HeroSection
-      header="Explore Waldur Marketplace"
-      placeholder="Search for apps and services..."
-      buttonLabel="Search"
-    />
+    <HeroSection title="Explore Waldur Marketplace">
+      <FilterBar/>
+    </HeroSection>
     <div className="row">
       {categories.map((category, index) => (
         <div key={index} className="col-md-3 col-sm-6">
