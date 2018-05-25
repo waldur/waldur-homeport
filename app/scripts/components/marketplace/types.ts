@@ -40,3 +40,10 @@ export interface Section {
   title: string;
   features: Feature[];
 }
+
+export interface Category {
+  title: string;
+  icon: string;
+  children?: Category[];
+  counter: number;
+}

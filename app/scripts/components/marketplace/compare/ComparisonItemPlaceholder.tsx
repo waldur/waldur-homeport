@@ -10,7 +10,7 @@ export const ComparisonItemPlaceholder = () => (
   }}>
     <h3>
       <Link
-        state="marketplace-list"
+        state="marketplace-landing"
         label={
           <>
             <i className="fa fa-plus-circle"/>

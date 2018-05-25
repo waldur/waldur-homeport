@@ -3,27 +3,16 @@ import * as React from 'react';
 import './HeroSection.scss';
 
 interface HeroSectionProps {
-  header: string;
-  placeholder: string;
-  buttonLabel: string;
+  title: string;
+  children?: React.ReactNode;
 }
 
-export const HeroSection = (props: HeroSectionProps) => (
+export const HeroSection: React.SFC<HeroSectionProps> = (props: HeroSectionProps) => (
   <div className="marketplace-hero__background">
     <div className="marketplace-hero__table">
       <div className="marketplace-hero__main">
-        <h1>{props.header}</h1>
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder={props.placeholder}/>
-          <span className="input-group-btn">
-            <button className="btn btn-primary">
-              {props.buttonLabel}
-            </button>
-          </span>
-        </div>
+        <h1>{props.title}</h1>
+        {props.children}
       </div>
     </div>
   </div>

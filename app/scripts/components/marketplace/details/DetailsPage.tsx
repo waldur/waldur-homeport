@@ -21,10 +21,11 @@ class ProductDetailsPage extends React.Component {
       },
       {
         label: 'Marketplace',
-        state: 'marketplace-list',
+        state: 'marketplace-landing',
       },
       {
         label: this.product.category,
+        state: 'marketplace-list',
       },
     ];
     titleService.setTitle(this.product.title);

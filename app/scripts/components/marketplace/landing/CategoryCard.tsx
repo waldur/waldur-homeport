@@ -1,15 +1,24 @@
 import * as React from 'react';
 
+import { Link } from '@waldur/core/Link';
+import { Category } from '@waldur/marketplace/types';
+
 import './CategoryCard.scss';
 
-export const CategoryCard = props => (
+interface CategoryCardProps {
+  category: Category;
+}
+
+export const CategoryCard = (props: CategoryCardProps) => (
   <div className="category-card">
-    <a className="category-thumb">
+    <Link className="category-thumb" state="marketplace-list">
       <img src={props.category.icon}/>
-    </a>
+    </Link>
     <div className="category-card-body">
       <h3 className="category-title">
-        <a>{props.category.title}</a>
+        <Link state="marketplace-list">
+          {props.category.title}
+        </Link>
       </h3>
       {props.category.counter} items
     </div>

@@ -2860,6 +2860,10 @@ msgstr ""
 msgid "Marketplace checkout"
 msgstr ""
 
+#: app/scripts/components/marketplace/routes.js
+msgid "Marketplace products"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 msgid "Max # of backups"
 msgstr ""
