@@ -5,6 +5,7 @@ import comparisonIndicator from './compare/ComparisonIndicator';
 import marketplaceCheckout from './cart/CheckoutPage';
 import cartIndicator from './cart/ShoppingCartIndicator';
 import marketplaceProduct from './details/DetailsPage';
+import marketplaceList from './list/ListPage';
 import { setupFixture } from '@waldur/marketplace/fixtures/setup';
 
 export default module => {
@@ -14,6 +15,7 @@ export default module => {
   module.component('marketplaceCheckout', marketplaceCheckout);
   module.component('cartIndicator', cartIndicator);
   module.component('marketplaceProduct', marketplaceProduct);
+  module.component('marketplaceList', marketplaceList);
   module.config(routes);
   module.run(setupFixture);
 };

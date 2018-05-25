@@ -1,11 +1,11 @@
 import * as React from 'react';
 
+import { ProductGrid } from '@waldur/marketplace/common/ProductGrid';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { categories, products } from '../fixtures';
 import { CategoryCard } from './CategoryCard';
 import { HeroSection } from './HeroSection';
-import { ProductGrid } from './ProductGrid';
 
 export const LandingPage = () => (
   <div>
