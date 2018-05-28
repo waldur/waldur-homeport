@@ -22,7 +22,6 @@ function ExpertRequestListController(
     init: function() {
       this.controllerScope = controllerScope;
       this.service = expertRequestsService;
-      this.$sanitize = $sanitize;
       let fn = this._super.bind(this);
       this.loadContext().then(() => {
         this.tableOptions = this.getTableOptions();
@@ -80,8 +79,9 @@ function ExpertRequestListController(
           title: gettext('Objectives'),
           orderable: false,
           render: row => {
-            return `<span uib-tooltip-html="'<div>${this.$sanitize(row.objectives)}</div>'">` +
-              `${this.$sanitize(row.objectives.substring(0, 30))}</span>`;
+            const tooltip = $sanitize(row.objectives).replace('\'', '\\\'');
+            const label = $sanitize(row.objectives.substring(0, 30));
+            return `<span uib-tooltip-html="'${tooltip}'">${label}</span>`;
           }
         },
         {
