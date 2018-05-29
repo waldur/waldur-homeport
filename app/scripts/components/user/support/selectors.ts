@@ -10,10 +10,6 @@ export const userManageIsVisible = state => {
   return user.is_staff;
 };
 
-export const userEventsIsVisible = state => {
-  return isVisible(state, 'support.user_events');
-};
-
 export const userTokenIsVisible = (state, ownProps) => {
   const currentUser = getUser(state);
   if (currentUser.uuid !== ownProps.user.uuid) {
