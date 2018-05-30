@@ -41,21 +41,29 @@ class Table extends React.Component<Props> {
     return (
       <div className="table-responsive dataTables_wrapper">
         {this.props.blocked && <div className="table-block"/>}
-        <TableButtons {...this.props}/>
-        {this.props.hasQuery && (
-          <TableQuery
-            query={this.props.query}
-            setQuery={this.props.setQuery}
-            translate={this.props.translate}/>
-        )}
-        {this.props.showPageSizeSelector &&
-          <TablePageSize
-            translate={this.props.translate}
-            pageSize={this.props.pagination.pageSize}
-            updatePageSize={this.props.updatePageSize}
-          />
-        }
-        <TableInfo {...this.props.pagination} translate={this.props.translate}/>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-sm-5">
+              {this.props.showPageSizeSelector &&
+                <TablePageSize
+                  translate={this.props.translate}
+                  pageSize={this.props.pagination.pageSize}
+                  updatePageSize={this.props.updatePageSize}
+                />
+              }
+              <TableInfo {...this.props.pagination} translate={this.props.translate}/>
+            </div>
+            <div className="col-sm-7">
+              <TableButtons {...this.props}/>
+              {this.props.hasQuery && (
+                <TableQuery
+                  query={this.props.query}
+                  setQuery={this.props.setQuery}
+                  translate={this.props.translate}/>
+              )}
+            </div>
+          </div>
+        </div>
         {this.renderBody()}
         <TablePagination
           {...this.props.pagination}
