@@ -1,4 +1,5 @@
 import ResourceFeatures from '../resource/features';
+import { parseCounters } from '@waldur/quotas/QuotaUtilsService';
 
 const projectsList = {
   templateUrl: 'views/partials/filtered-list.html',
@@ -23,7 +24,6 @@ function ProjectsListController(
   ncUtilsFlash,
   TableExtensionService,
   currentStateService,
-  QuotaUtilsService,
   usersService) {
   let controllerScope = this;
   let Controller = baseControllerListClass.extend({
@@ -199,7 +199,7 @@ function ProjectsListController(
       });
     },
     afterGetList: function() {
-      this.list.forEach(item => angular.extend(item, QuotaUtilsService.parseCounters(item)));
+      this.list.forEach(item => angular.extend(item, parseCounters(item)));
       this._super();
     },
     hasConnectedResources: function(project) {

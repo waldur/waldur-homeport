@@ -51,7 +51,7 @@ export const PureCustomerListFilter = props => (
                     valueKey="value"
                     value={prop.input.value}
                     onChange={prop.input.onChange}
-                    onBlur={() => prop.input.onBlur(prop.input.value)}
+                    onBlur={e => e.preventDefault()}
                     options={accountingPeriods}
                     clearable={false}
                   />

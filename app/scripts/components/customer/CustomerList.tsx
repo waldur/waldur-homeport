@@ -6,8 +6,8 @@ import { getFormValues } from 'redux-form';
 import { formatDate } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
-import { parseCounters } from '@waldur/customer/utils';
 import { withTranslation } from '@waldur/i18n';
+import { parseCounters } from '@waldur/quotas/QuotaUtilsService';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { TableRequest, Fetcher } from '@waldur/table-react/types';
@@ -81,17 +81,17 @@ export const TableComponent = props => {
     {
       title: translate('Current cost'),
       render: CurrentCostField,
-      visible: !accountingPeriodIsCurrent,
+      visible: accountingPeriodIsCurrent,
     },
     {
       title: translate('Estimated cost'),
       render: EstimatedCostField,
-      visible: !accountingPeriodIsCurrent,
+      visible: accountingPeriodIsCurrent,
     },
     {
       title: translate('Cost'),
       render: EstimatedCostField,
-      visible: accountingPeriodIsCurrent,
+      visible: !accountingPeriodIsCurrent,
     },
   ]);
 
