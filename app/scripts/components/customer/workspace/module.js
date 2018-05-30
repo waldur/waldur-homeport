@@ -1,7 +1,7 @@
 import customerWorkspace from './customer-workspace';
 import { CustomerWorkspaceController } from './customer-workspace';
 import customerIssues from './customer-issues';
-import customerEvents from './customer-events';
+import customerEvents from './CustomerEventsList';
 import customerTeam from './customer-team';
 
 export default module => {
