@@ -32,12 +32,18 @@ export function connectTable(options: TableOptions) {
       resetPagination: () => dispatch(actions.resetPagination(table)),
     });
 
-    const filterColumns = state => columns => columns.filter(
+    const filterByFeature = state => columns => columns.filter(
       column => !column.feature || isVisible(state, column.feature)
     );
 
+    const filterColumns = state => columns => {
+      return filterByFeature(state)(columns).filter(
+        column => column.visible === undefined || column.visible === true
+      );
+    };
+
     const mapStateToProps = state => ({
-      filterByFeature: filterColumns(state),
+      filterColumns: filterColumns(state),
       ...getTableState(table)(state),
       rows: selectTableRows(state, table),
     });
@@ -77,3 +83,5 @@ const getId = (row, index) => {
   }
   return index;
 };
+
+export const renderFieldOrDash = field => field ? field : '\u2014';
