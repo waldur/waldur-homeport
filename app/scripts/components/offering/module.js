@@ -4,7 +4,7 @@ import projectOfferingsList from './offerings-list';
 import appstoreOffering from './appstore-offering';
 import offeringSummary from './offering-summary';
 import offeringDetails from './offering-details';
-import offeringEvents from './offering-events';
+import offeringEvents from './OfferingEvents';
 import offeringState from './offering-state';
 import offeringPolicy from './offering-policy';
 import offeringReportButton from './OfferingReportButton';

@@ -1411,7 +1411,6 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plans-list.js
 #: app/scripts/components/dashboard/DashboardFeed.tsx
 #: app/scripts/components/events/EventDetailsButton.tsx
-#: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/experts/requests/create/expert-contract-form.js
 #: app/scripts/components/experts/requests/details/expert-request-summary.html
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
@@ -1664,7 +1663,6 @@ msgstr ""
 #: app/scripts/components/dashboard/ProjectEventsFeed.tsx
 #: app/scripts/components/events/EventTypesButton.tsx
 #: app/scripts/components/events/EventTypesDialog.tsx
-#: app/scripts/components/events/base-event-list.js
 msgid "Event types"
 msgstr ""
 
@@ -2919,7 +2917,6 @@ msgstr ""
 
 #: app/scripts/components/events/BaseEventsList.tsx
 #: app/scripts/components/events/EventDetailsTable.tsx
-#: app/scripts/components/events/base-event-list.js
 msgid "Message"
 msgstr ""
 
@@ -3165,14 +3162,6 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plans-list.js
 msgid "No cost plans found matching filter."
-msgstr ""
-
-#: app/scripts/components/events/base-event-list.js
-msgid "No events found matching filter."
-msgstr ""
-
-#: app/scripts/components/events/base-event-list.js
-msgid "No events yet"
 msgstr ""
 
 #: app/scripts/components/dashboard/ProjectEventsFeed.tsx
@@ -3610,7 +3599,7 @@ msgid "Organization details"
 msgstr ""
 
 #: app/scripts/components/customer/events.ts
-#: app/scripts/components/customer/workspace/customer-events.js
+#: app/scripts/components/customer/workspace/CustomerEventsFilter.tsx
 msgid "Organization events"
 msgstr ""
 
@@ -4158,9 +4147,9 @@ msgstr ""
 msgid "Project details"
 msgstr ""
 
-#: app/scripts/components/customer/workspace/customer-events.js
+#: app/scripts/components/customer/workspace/CustomerEventsFilter.tsx
+#: app/scripts/components/project/ProjectEventsFilter.tsx
 #: app/scripts/components/project/events.ts
-#: app/scripts/components/project/project-events.js
 msgid "Project events"
 msgstr ""
 
@@ -4796,8 +4785,8 @@ msgstr ""
 msgid "Resource count in"
 msgstr ""
 
-#: app/scripts/components/customer/workspace/customer-events.js
-#: app/scripts/components/project/project-events.js
+#: app/scripts/components/customer/workspace/CustomerEventsFilter.tsx
+#: app/scripts/components/project/ProjectEventsFilter.tsx
 #: app/scripts/components/resource/events.ts
 msgid "Resource events"
 msgstr ""
@@ -5901,7 +5890,6 @@ msgstr ""
 
 #: app/scripts/components/events/BaseEventsList.tsx
 #: app/scripts/components/events/EventDetailsTable.tsx
-#: app/scripts/components/events/base-event-list.js
 msgid "Timestamp"
 msgstr ""
 
