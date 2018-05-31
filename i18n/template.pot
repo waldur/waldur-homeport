@@ -403,10 +403,6 @@ msgstr ""
 msgid "Apply filters"
 msgstr ""
 
-#: app/scripts/components/providers/support/FlowMapFilter.tsx
-msgid "Apply filters:"
-msgstr ""
-
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 msgid "Apply or rerun JupyterHub configuration"
 msgstr ""
