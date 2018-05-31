@@ -35,6 +35,12 @@ const AppCountField = ({ row }) => <span>{renderFieldOrDash(row.app_count)}</spa
 
 const PrivateCloudCountField = ({ row }) => <span>{renderFieldOrDash(row.private_cloud_count)}</span>;
 
+const AllocationCountField = ({ row }) => <span>{renderFieldOrDash(row.allocation_count)}</span>;
+
+const ExpertCountField = ({ row }) => <span>{renderFieldOrDash(row.expert_count)}</span>;
+
+const OfferingCountField = ({ row }) => <span>{renderFieldOrDash(row.offering_count)}</span>;
+
 const CurrentCostField = ({ row }) =>
   <span>{renderFieldOrDash(defaultCurrency(row.billing_price_estimate && row.billing_price_estimate.current || 0))}</span>;
 
@@ -77,6 +83,21 @@ export const TableComponent = props => {
     {
       title: translate('Private clouds'),
       render: PrivateCloudCountField,
+    },
+    {
+      title: translate('Allocations'),
+      render: AllocationCountField,
+      feature: 'slurm',
+    },
+    {
+      title: translate('Experts'),
+      render: ExpertCountField,
+      feature: 'experts',
+    },
+    {
+      title: translate('Requests'),
+      render: OfferingCountField,
+      feature: 'offering',
     },
     {
       title: translate('Current cost'),

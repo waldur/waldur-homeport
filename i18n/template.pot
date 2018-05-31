@@ -317,6 +317,7 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/slurm/table-extension.js
 msgid "Allocations"
 msgstr ""
@@ -1781,6 +1782,7 @@ msgstr ""
 msgid "Expert team"
 msgstr ""
 
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/experts/constants.js
 #: app/scripts/components/experts/expert-provider-details.html
 #: app/scripts/components/experts/extensions/sidebar.js
@@ -4720,6 +4722,7 @@ msgstr ""
 msgid "Request {requestId} has been created."
 msgstr ""
 
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/offering/offering-details.js
 #: app/scripts/components/offering/routes.js
 #: app/scripts/components/offering/sidebar.js
