@@ -3,11 +3,11 @@ import * as React from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 
 import loadLeafleat from '../../../shims/load-leaflet';
-import './CanvasFlowmapLayer';
 
 import './FlowMap.scss';
 
 const loadEsriLeaflet = () => import(/* webpackChunkName: "esri-leaflet" */ 'esri-leaflet');
+const loadFlowmapLayer = () => import(/* webpackChunkName: "CanvasFlowmapLayer" */ './CanvasFlowmapLayer');
 
 interface FlowMapProps {
   center?: number[];
@@ -36,6 +36,8 @@ export default class FlowMap extends React.Component<FlowMapProps> {
   async loadAll() {
     const { leaflet} = await loadLeafleat();
     this.leaflet = leaflet;
+
+    await loadFlowmapLayer();
 
     const { basemapLayer } = await loadEsriLeaflet();
     this.basemapLayer = basemapLayer;
