@@ -17,6 +17,7 @@ export default {
     'user_password',
     'subnet_cidr',
     'subnet_allocation_pool',
+    'skip_connection_extnet',
   ],
   options: {
     name: {
@@ -79,6 +80,12 @@ export default {
       label: gettext('Internal network allocation pool'),
       range: '192.168.X.10 — 192.168.X.200',
       parentField: 'subnet_cidr'
+    },
+    skip_connection_extnet: {
+      type: 'boolean',
+      label: gettext('Skip connection to external network'),
+      default_value: false,
+      is_visible: ENV => ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES,
     },
   },
   summaryComponent: 'openstackTenantCheckoutSummary'
