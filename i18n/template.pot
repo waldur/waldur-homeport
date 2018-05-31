@@ -5371,6 +5371,10 @@ msgstr ""
 msgid "Size name"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
+msgid "Skip connection to external network"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Skip floating IP assignment"
 msgstr ""
