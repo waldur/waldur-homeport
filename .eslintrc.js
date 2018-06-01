@@ -82,6 +82,8 @@ module.exports = {
     beforeEach: true,
     inject: true,
     process: true,
-    require: true
+    require: true,
+    cy: true,
+    Cypress: true,
   }
 };
