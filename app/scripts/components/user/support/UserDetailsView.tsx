@@ -6,7 +6,7 @@ import { compose } from 'redux';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { UserEvents } from '@waldur/user/list/UserEvents';
-import { isVisibleForSupportOrStaff, userEventsIsVisible, userManageIsVisible } from '@waldur/user/support/selectors';
+import { isVisibleForSupportOrStaff, userManageIsVisible } from '@waldur/user/support/selectors';
 import { UserDetailsTable } from '@waldur/user/support/UserDetailsTable';
 import { UserEditContainer } from '@waldur/user/support/UserEditContainer';
 import { UserDetails } from '@waldur/workspace/types';
@@ -27,13 +27,11 @@ export const PureUserDetailsView = (props: UserDetailsViewProps) => (
         </div>
       </Tab>
     )}
-    {props.userEventsIsVisible && (
-      <Tab eventKey={2} title={props.translate('Audit log')}>
-        <div className="m-t-sm">
-          <UserEvents user={props.user}/>
-        </div>
-      </Tab>
-    )}
+    <Tab eventKey={2} title={props.translate('Audit log')}>
+      <div className="m-t-sm">
+        <UserEvents user={props.user}/>
+      </div>
+    </Tab>
     {props.userManageIsVisible && (
       <Tab eventKey={3} title={props.translate('Manage')}>
         <div className="m-t-sm">
@@ -47,7 +45,6 @@ export const PureUserDetailsView = (props: UserDetailsViewProps) => (
 const mapStateToProps = state => ({
   userManageIsVisible: userManageIsVisible(state),
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
-  userEventsIsVisible: userEventsIsVisible(state),
 });
 
 const enhance = compose(withTranslation, connect(mapStateToProps));

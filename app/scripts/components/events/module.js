@@ -1,5 +1,4 @@
 import eventsService from './events-service';
-import baseEventListController from './base-event-list';
 import eventDetailsDialog from './EventDetailsDialog';
 import eventTypesDialog from './EventTypesDialog';
 import EventDialogsService from './event-dialogs-service';
@@ -9,7 +8,6 @@ import './help';
 
 export default module => {
   module.service('eventsService', eventsService);
-  module.service('baseEventListController', baseEventListController);
   module.component('eventDetailsDialog', eventDetailsDialog);
   module.component('eventTypesDialog', eventTypesDialog);
   module.component('eventGroups', eventGroups);

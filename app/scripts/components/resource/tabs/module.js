@@ -2,7 +2,7 @@ import resourceTab from './resource-tab';
 import resourceTabs from './resource-tabs';
 import ResourceTabsConfiguration from './resource-tabs-configuration';
 import { DEFAULT_RESOURCE_TABS, DEFAULT_SUBRESOURCE_TABS } from './constants';
-import resourceEvents from './resource-events';
+import resourceEvents from './ResourceEvents';
 import resourceIssues from './resource-issues';
 
 export default module => {

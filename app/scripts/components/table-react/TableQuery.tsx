@@ -30,7 +30,7 @@ class TableQuery extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="text-right table-query">
+      <div className="pull-right text-right table-query">
         <label>{this.props.translate('Search')}
           <input
             type="search"

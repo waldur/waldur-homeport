@@ -48,7 +48,6 @@ const PureFlowMapFilter = (props: FlowMapFilterProps) => (
           labelClass="m-r-md"
           controlClass="m-r-md"
           submitting={props.submitting}>
-          <h4 id="flow-map-filter-title">{props.translate('Apply filters:')}</h4>
           <StringField
             label={props.translate('Month')}
             name="month"/>

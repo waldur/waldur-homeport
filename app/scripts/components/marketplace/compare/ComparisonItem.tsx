@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { Link } from '@waldur/core/Link';
+
 import { RatingStars } from '../common/RatingStars';
 import { Product } from '../types';
 import './ComparisonItem.scss';
@@ -12,9 +14,11 @@ interface ComparisonItemProps {
 export const ComparisonItem = (props: ComparisonItemProps) => (
   <div className="text-center comparison-item">
     <ComparisonItemRemoveButtonContainer product={props.item}/>
-    <a className="comparison-item-thumb">
+    <Link
+      state="marketplace-product"
+      className="comparison-item-thumb">
       <img src={props.item.thumb}/>
-    </a>
+    </Link>
     <h3>{props.item.title}</h3>
     <p>by {props.item.vendor}</p>
     <RatingStars rating={props.item.rating} size="medium"/>

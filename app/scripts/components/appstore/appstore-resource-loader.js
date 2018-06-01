@@ -19,13 +19,13 @@ export default class AppstoreResourceLoader {
         }));
       }
 
-      if (field.resource) {
+      else if (field.resource) {
         promises.push(this.loadResource(context, field).then(response => {
           validChoices[name] = response;
         }));
       }
 
-      if (field.url && name !== 'service_project_link') {
+      else if (field.url && name !== 'service_project_link') {
         promises.push(this.loadUrl(context, field).then(response => {
           validChoices[name] = response;
         }));

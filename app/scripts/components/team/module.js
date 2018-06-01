@@ -5,8 +5,8 @@ import customerUsersList from './customer-users-list';
 import { projectUsers } from './project-users-list';
 import customerPermissionsLogService from './customer-permissions-log-service';
 import projectPermissionsLogService from './project-permissions-log-service';
-import customerPermissionsLogList from './customer-permissions-log-list';
-import projectPermissionsLogList from './project-permissions-log-list';
+import customerPermissionsLogList from './CustomerPermissionsLogList';
+import projectPermissionsLogList from './ProjectPermissionsLogList';
 import './events';
 
 export default module => {

@@ -403,10 +403,6 @@ msgstr ""
 msgid "Apply filters"
 msgstr ""
 
-#: app/scripts/components/providers/support/FlowMapFilter.tsx
-msgid "Apply filters:"
-msgstr ""
-
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 msgid "Apply or rerun JupyterHub configuration"
 msgstr ""
@@ -1411,7 +1407,6 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plans-list.js
 #: app/scripts/components/dashboard/DashboardFeed.tsx
 #: app/scripts/components/events/EventDetailsButton.tsx
-#: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/experts/requests/create/expert-contract-form.js
 #: app/scripts/components/experts/requests/details/expert-request-summary.html
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
@@ -1664,7 +1659,6 @@ msgstr ""
 #: app/scripts/components/dashboard/ProjectEventsFeed.tsx
 #: app/scripts/components/events/EventTypesButton.tsx
 #: app/scripts/components/events/EventTypesDialog.tsx
-#: app/scripts/components/events/base-event-list.js
 msgid "Event types"
 msgstr ""
 
@@ -2860,6 +2854,10 @@ msgstr ""
 msgid "Marketplace checkout"
 msgstr ""
 
+#: app/scripts/components/marketplace/routes.js
+msgid "Marketplace products"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 msgid "Max # of backups"
 msgstr ""
@@ -2915,7 +2913,6 @@ msgstr ""
 
 #: app/scripts/components/events/BaseEventsList.tsx
 #: app/scripts/components/events/EventDetailsTable.tsx
-#: app/scripts/components/events/base-event-list.js
 msgid "Message"
 msgstr ""
 
@@ -3161,14 +3158,6 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plans-list.js
 msgid "No cost plans found matching filter."
-msgstr ""
-
-#: app/scripts/components/events/base-event-list.js
-msgid "No events found matching filter."
-msgstr ""
-
-#: app/scripts/components/events/base-event-list.js
-msgid "No events yet"
 msgstr ""
 
 #: app/scripts/components/dashboard/ProjectEventsFeed.tsx
@@ -3606,7 +3595,7 @@ msgid "Organization details"
 msgstr ""
 
 #: app/scripts/components/customer/events.ts
-#: app/scripts/components/customer/workspace/customer-events.js
+#: app/scripts/components/customer/workspace/CustomerEventsFilter.tsx
 msgid "Organization events"
 msgstr ""
 
@@ -4115,6 +4104,10 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
+#: app/scripts/components/marketplace/routes.js
+msgid "Product details"
+msgstr ""
+
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
@@ -4150,9 +4143,9 @@ msgstr ""
 msgid "Project details"
 msgstr ""
 
-#: app/scripts/components/customer/workspace/customer-events.js
+#: app/scripts/components/customer/workspace/CustomerEventsFilter.tsx
+#: app/scripts/components/project/ProjectEventsFilter.tsx
 #: app/scripts/components/project/events.ts
-#: app/scripts/components/project/project-events.js
 msgid "Project events"
 msgstr ""
 
@@ -4788,8 +4781,8 @@ msgstr ""
 msgid "Resource count in"
 msgstr ""
 
-#: app/scripts/components/customer/workspace/customer-events.js
-#: app/scripts/components/project/project-events.js
+#: app/scripts/components/customer/workspace/CustomerEventsFilter.tsx
+#: app/scripts/components/project/ProjectEventsFilter.tsx
 #: app/scripts/components/resource/events.ts
 msgid "Resource events"
 msgstr ""
@@ -5319,7 +5312,6 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
-#: app/scripts/components/analytics/VmOverviewFilter.tsx
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
 msgid "Show private"
 msgstr ""
@@ -5373,6 +5365,10 @@ msgstr ""
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 msgid "Size name"
+msgstr ""
+
+#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
+msgid "Skip connection to external network"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.js
@@ -5894,7 +5890,6 @@ msgstr ""
 
 #: app/scripts/components/events/BaseEventsList.tsx
 #: app/scripts/components/events/EventDetailsTable.tsx
-#: app/scripts/components/events/base-event-list.js
 msgid "Timestamp"
 msgstr ""
 
@@ -6159,6 +6154,10 @@ msgstr ""
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/ansible/python-management/details/PythonManagementDetailsContainer.tsx
 msgid "Unable to load python management details."
+msgstr ""
+
+#: app/scripts/components/analytics/VmOverviewFilterContainer.tsx
+msgid "Unable to load service providers."
 msgstr ""
 
 #: app/scripts/components/user/user-popover.html

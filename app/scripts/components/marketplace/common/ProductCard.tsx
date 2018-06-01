@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { Link } from '@waldur/core/Link';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { ProductCompareButtonContainer } from '@waldur/marketplace/compare/ProductCompareButtonContainer';
 
@@ -14,12 +15,16 @@ interface ProductCardProps {
 
 export const ProductCard = (props: ProductCardProps) => (
   <div className="product-card">
-    <a className="product-thumb">
+    <Link
+      state="marketplace-product"
+      className="product-thumb">
       <img src={props.product.thumb}/>
-    </a>
+    </Link>
     <div className="product-card-body">
       <h3 className="product-title">
-        <a>{props.product.title}</a>
+        <Link state="marketplace-product">
+          {props.product.title}
+        </Link>
       </h3>
       <div className="product-subtitle elipsis">
         {props.product.subtitle}

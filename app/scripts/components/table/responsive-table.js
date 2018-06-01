@@ -78,7 +78,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       });
 
       scope.$watchCollection('controller.tableOptions.hiddenColumns', cols => {
-        scope.controller.tableOptions.columns.forEach((col, index) => {
+        table.waldurColumns.forEach((col, index) => {
           if (col.id) {
             table.column(index).visible(!cols || cols.indexOf(col.id) === -1);
           }
@@ -140,7 +140,9 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
           tableOptions.scrollCollapse = options.scrollCollapse;
         }
 
-        return $(element.find('.table')[0]).DataTable(tableOptions);
+        const dt = $(element.find('.table')[0]).DataTable(tableOptions);
+        dt.waldurColumns = columns;
+        return dt;
       }
 
       function connectEventListeners(table) {

@@ -37,6 +37,10 @@ const securityGroupRuleEditor = {
       }
     }
 
+    getToPortMin(rule) {
+      return Math.max(this.getPortMin(rule), rule.from_port || -1);
+    }
+
     addRule() {
       this.target.push({
         protocol: PROTOCOLS[0]

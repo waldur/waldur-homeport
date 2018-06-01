@@ -1,83 +1,97 @@
-import L from 'leaflet';
 import * as React from 'react';
 
-import countries from './countries.geo.js';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+
+import loadLeafleat from '../../../shims/load-leaflet';
 import { countryInfo } from './countryInfo';
 import './HeatMap.scss';
-import HeatMapCalculator from './HeatMapCalculator';
+import { getStyle, getChartData } from './HeatMapCalculator';
+import { UsageData, Feature } from './types';
+
+const loadCountries = () => import(/* webpackChunkName: "countries" */ './countries.geo.js');
 
 interface HeatMapProps {
   center?: number[];
   zoom?: number;
-  id: string;
-  data: any;
-  countriesToRender: any[];
+  serviceUsage: UsageData;
+  countriesToRender: string[];
 }
 
-export default class HeatMap extends React.Component<HeatMapProps> {
+export class HeatMap extends React.Component<HeatMapProps> {
   map = undefined;
-  heatMapCalculator = undefined;
+  mapNode: HTMLDivElement;
+  features: Feature[];
+  leaflet = null;
 
-  constructor(props) {
-    super(props);
-    this.heatMapCalculator = new HeatMapCalculator();
+  state = {
+    loading: true,
+    loaded: false,
+  };
+
+  componentDidMount() {
+    this.loadAll().then(() => {
+      this.initMap();
+    });
   }
 
-  setStyle = feature => {
-    return {
-      fillColor: this.heatMapCalculator.getColor(feature.properties.diff),
-      weight: 2,
-      opacity: 1,
-      color: 'white',
-      dashArray: '3',
-      fillOpacity: 0.7,
-    };
-  }
-
-  getDataForCountry(data, countryName) {
-    return Object.keys(data.service_providers).reduce((acc, uuid) => {
-      if (data.organizations[uuid].country === countryName) {
-        acc.providers.push(data.organizations[uuid]);
+  componentDidUpdate() {
+    if (this.leaflet) {
+      if (!this.map) {
+        this.initMap();
+      } else {
+        this.updateMap();
       }
-      data.service_providers[uuid].map(consumerUuid => {
-        if (data.organizations[consumerUuid].country === countryName
-          && acc.consumers.indexOf(data.organizations[consumerUuid]) === -1) {
-          acc.consumers.push(data.organizations[consumerUuid]);
-        }
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.map) {
+      this.map.remove();
+    }
+  }
+
+  async loadAll() {
+    try {
+      const { default: {features}} = await loadCountries();
+      const { leaflet } = await loadLeafleat();
+      this.setState({
+        loading: false,
+        loaded: true,
       });
-      return acc;
-    }, {providers: [], consumers: []});
+      this.features = features;
+      this.leaflet = leaflet;
+    } catch {
+      this.setState({
+        loading: false,
+        loaded: false,
+      });
+    }
+  }
+
+  initMap() {
+    const { center, zoom } = this.props;
+    this.map = this.leaflet.map(this.mapNode).setView(center, zoom);
+    const layerUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    const layerAttrib = 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+
+    this.leaflet.tileLayer(layerUrl, {attribution: layerAttrib}).addTo(this.map);
+    this.updateMap();
   }
 
   updateMap() {
-    const { data } = this.props;
-    const nameOfCountries = this.props.countriesToRender;
-    const countriesToRender = [];
-    nameOfCountries.map(countryName => {
-      countries.features.map(country => {
-        if (country.properties.name === countryName) {
-          countriesToRender.push({
-              ...country,
-              properties: {
-                ...country.properties,
-                diff: this.heatMapCalculator.getTotalMetricsDiff(data, countryName),
-                data: this.getDataForCountry(data, countryName),
-              },
-            });
-          }
-        });
-    });
-    if (countriesToRender.length > 0) {
-      const layer = L.geoJson(countriesToRender, {
-        style: this.setStyle,
+    const chartData = getChartData(
+      this.props.serviceUsage,
+      this.props.countriesToRender,
+      this.features
+    );
+    if (chartData.length > 0) {
+      const layer = this.leaflet.geoJson(chartData, {
+        style: getStyle,
         onEachFeature: this.onEachFeature,
       });
       this.map.fitBounds(layer.getBounds());
       layer.addTo(this.map);
     }
-  }
-  componentDidUpdate() {
-    this.updateMap();
   }
 
   onEachFeature(feature, layer) {
@@ -85,17 +99,12 @@ export default class HeatMap extends React.Component<HeatMapProps> {
     layer.bindPopup(content);
   }
 
-  componentDidMount() {
-    const { id, center, zoom } = this.props;
-    this.map = L.map(id).setView(center, zoom);
-    const layerUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    const layerAttrib = 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-
-    L.tileLayer(layerUrl, {attribution: layerAttrib}).addTo(this.map);
-    this.updateMap();
-  }
-
   render() {
-    return (<div id="heat-map"/>);
+    if (this.state.loading) {
+      return <LoadingSpinner />;
+    }
+    if (this.state.loaded) {
+      return (<div ref={node => this.mapNode = node} id="heat-map"/>);
+    }
   }
 }

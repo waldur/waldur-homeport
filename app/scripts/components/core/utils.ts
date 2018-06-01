@@ -109,3 +109,5 @@ export function parseQueryString(qs) {
     return result;
   }, {});
 }
+
+export const isEmpty = obj => Object.keys(obj).length === 0;

@@ -1,7 +1,7 @@
 // @ngInject
 export default function routes($stateProvider) {
   $stateProvider
-    .state('marketplace-list', {
+    .state('marketplace-landing', {
       url: 'marketplace/',
       template: '<marketplace-landing></marketplace-landing>',
       parent: 'project',
@@ -28,6 +28,26 @@ export default function routes($stateProvider) {
       parent: 'project',
       data: {
         pageTitle: gettext('Marketplace checkout'),
+        feature: 'marketplace',
+      }
+    })
+
+    .state('marketplace-product', {
+      url: 'marketplace-product/',
+      template: '<marketplace-product></marketplace-product>',
+      parent: 'project',
+      data: {
+        pageTitle: gettext('Product details'),
+        feature: 'marketplace',
+      }
+    })
+
+    .state('marketplace-list', {
+      url: 'marketplace-list/',
+      template: '<marketplace-list></marketplace-list>',
+      parent: 'project',
+      data: {
+        pageTitle: gettext('Marketplace products'),
         feature: 'marketplace',
       }
     });
