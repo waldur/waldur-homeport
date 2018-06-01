@@ -51,7 +51,7 @@ msgstr ""
 msgid "API token lifetime"
 msgstr ""
 
-#: app/scripts/components/customer/customer-list.js
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Abbreviation"
 msgstr ""
@@ -99,18 +99,6 @@ msgstr ""
 #: app/scripts/components/billing/billing-utils.js
 #: app/scripts/components/billing/routes.js
 msgid "Accounting"
-msgstr ""
-
-#: app/scripts/components/customer/customer-list.js
-msgid "Accounting is not running"
-msgstr ""
-
-#: app/scripts/components/customer/customer-list.js
-msgid "Accounting is running"
-msgstr ""
-
-#: app/scripts/components/customer/customer-list.js
-msgid "Accounting period"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-header.html
@@ -329,6 +317,7 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/slurm/table-extension.js
 msgid "Allocations"
 msgstr ""
@@ -411,7 +400,7 @@ msgstr ""
 msgid "Approve payment"
 msgstr ""
 
-#: app/scripts/components/customer/customer-list.js
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/project/projects-list.js
 msgid "Apps"
 msgstr ""
@@ -1016,7 +1005,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
-#: app/scripts/components/customer/customer-list.js
+#: app/scripts/components/customer/CustomerList.tsx
 msgid "Cost"
 msgstr ""
 
@@ -1182,7 +1171,7 @@ msgstr ""
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 #: app/scripts/components/ansible/python-management/details/PythonManagementActionsHistory.tsx
 #: app/scripts/components/billing/billing-utils.js
-#: app/scripts/components/customer/customer-list.js
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/experts/bids/expert-bids-list.js
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/issues/issue-detail.html
@@ -1249,7 +1238,7 @@ msgstr ""
 msgid "Current VPC usage"
 msgstr ""
 
-#: app/scripts/components/customer/customer-list.js
+#: app/scripts/components/customer/CustomerList.tsx
 msgid "Current cost"
 msgstr ""
 
@@ -1268,6 +1257,10 @@ msgstr ""
 
 #: app/scripts/components/offering/register-offering-category.js
 msgid "Custom request"
+msgstr ""
+
+#: app/scripts/components/customer/CustomerList.tsx
+msgid "Customers List"
 msgstr ""
 
 #: app/scripts/components/customer/routes.js
@@ -1610,7 +1603,7 @@ msgstr ""
 msgid "Esimated price per month"
 msgstr ""
 
-#: app/scripts/components/customer/customer-list.js
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/project/projects-list.js
 msgid "Estimated cost"
 msgstr ""
@@ -1785,6 +1778,7 @@ msgstr ""
 msgid "Expert team"
 msgstr ""
 
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/experts/constants.js
 #: app/scripts/components/experts/expert-provider-details.html
 #: app/scripts/components/experts/extensions/sidebar.js
@@ -3221,14 +3215,6 @@ msgstr ""
 msgid "No notifications registered."
 msgstr ""
 
-#: app/scripts/components/customer/customer-list.js
-msgid "No organizations found matching filter."
-msgstr ""
-
-#: app/scripts/components/customer/customer-list.js
-msgid "No organizations yet"
-msgstr ""
-
 #: app/scripts/components/payments/payment-list.js
 msgid "No payments found matching filter."
 msgstr ""
@@ -3557,6 +3543,7 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/experts/bids/expert-bids-list.js
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
@@ -3611,7 +3598,6 @@ msgstr ""
 msgid "Organization is billed on project completion."
 msgstr ""
 
-#: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/user/list/CustomerPermissions.tsx
 #: app/scripts/components/user/support/UserEditForm.tsx
@@ -4091,7 +4077,7 @@ msgstr ""
 #: app/scripts/components/analytics/resource-chart-service.js
 #: app/scripts/components/appstore/routes.js
 #: app/scripts/components/configs/base-config.js
-#: app/scripts/components/customer/customer-list.js
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/dashboard/base-quotas.ts
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/projects-list.js
@@ -4732,6 +4718,7 @@ msgstr ""
 msgid "Request {requestId} has been created."
 msgstr ""
 
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/offering/offering-details.js
 #: app/scripts/components/offering/routes.js
 #: app/scripts/components/offering/sidebar.js
@@ -5072,6 +5059,10 @@ msgstr ""
 msgid "Select a component"
 msgstr ""
 
+#: app/scripts/components/customer/CustomerListFilter.tsx
+msgid "Select accounting period"
+msgstr ""
+
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 msgid "Select affected resource..."
@@ -5325,6 +5316,10 @@ msgstr ""
 msgid "Show shared"
 msgstr ""
 
+#: app/scripts/components/customer/CustomerListFilter.tsx
+msgid "Show with running accounting"
+msgstr ""
+
 #: app/scripts/components/table/responsive-table.js
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
@@ -5425,7 +5420,7 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: app/scripts/components/customer/customer-list.js
+#: app/scripts/components/customer/CustomerList.tsx
 msgid "Start day of accounting"
 msgstr ""
 
@@ -5502,7 +5497,7 @@ msgstr ""
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: app/scripts/components/customer/customer-list.js
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
@@ -5952,7 +5947,7 @@ msgstr ""
 msgid "Total cost"
 msgstr ""
 
-#: app/scripts/components/customer/customer-list.html
+#: app/scripts/components/customer/CustomerListBilling.tsx
 msgid "Total cost:"
 msgstr ""
 
@@ -6533,7 +6528,7 @@ msgstr ""
 msgid "VM type overview"
 msgstr ""
 
-#: app/scripts/components/customer/customer-list.js
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/project/projects-list.js
 msgid "VMs"
 msgstr ""

@@ -85,7 +85,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.organizations', {
       url: 'organizations/',
-      template: '<div class="ibox-content"><customer-list/></div>',
+      template: '<customer-list/>',
       data: {
         feature: 'support.organizations',
         pageTitle: gettext('Financial overview'),
