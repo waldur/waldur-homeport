@@ -4,16 +4,7 @@ const getTextList = $p =>
 describe('Workspace selector', () => {
   beforeEach(() => {
     cy.login();
-
-    cy
-      // Open workspace selector by clicking on button
-      .contains('Select workspace').click()
-
-      // Modal dialog should be displayed
-      .get('.modal-content').should('be.visible')
-
-      // Wait until dialog is loaded
-      .waitForSpinner();
+    cy.openWorkspaceSelector();
   });
 
   it('Allows to filter organizations by name', () => {
