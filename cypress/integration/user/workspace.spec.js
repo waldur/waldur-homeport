@@ -1,6 +1,9 @@
 describe('User workspace', function() {
   beforeEach(() => {
-    cy.login();
+    cy
+      .server()
+      .mockUser()
+      .login();
   });
 
   it('Should go to audit log', () => {

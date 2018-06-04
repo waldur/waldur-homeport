@@ -1,28 +1,26 @@
-describe('Customer creation toggle', () => {
-  beforeEach(() => {
-    cy.login();
-  });
-
-  it('Allows to create customer from user dashoard', () => {
-    cy.openCustomerCreateDialog();
-  });
-
-  it('Allows to create customer from workspace selector', () => {
-    cy
-      .openWorkspaceSelector()
-
-      // Click on "Add new organization" button
-      .get('#add-new-organization').click()
-
-      // Modal dialog should be displayed
-      .get('.modal-title').contains('Create organization');
-  });
-});
-
 describe('Customer creation dialog', () => {
   beforeEach(() => {
-    cy.login();
-    cy.openCustomerCreateDialog();
+    cy
+    .server()
+    .mockUser()
+    .mockCustomer()
+    .route({
+      url: 'http://localhost:8080/api/customers/?**',
+      method: 'GET',
+      response: 'fixture:customers/alice_bob_web.json',
+    })
+    .route({
+      url: 'http://localhost:8080/api/customers/',
+      method: 'OPTIONS',
+      response: 'fixture:customers/countries.json',
+    })
+    .route({
+      url: 'http://localhost:8080/api/customers/',
+      method: 'POST',
+      response: 'fixture:customers/alice.json',
+    })
+    .login()
+    .openCustomerCreateDialog();
   });
 
   it('Validates required fields', () => {
@@ -31,25 +29,22 @@ describe('Customer creation dialog', () => {
       .get('button span').contains('Next').click()
 
       // Error message should be displayed
-      .get('p.text-danger').should('have.length', 2);
-  });
+      .get('p.text-danger').should('have.length', 2)
 
-  it.only('Accepts valid values', () => {
-    cy
       // Enter organization name
-      .get('input[name="name"]').type('ABC')
-
-      // Enter organization email
-      .get('input[name="email"]').type('contact@abc.com')
-
-      // Enter organization phone
-      .get('input[name="phone_number"]').type('+1234567890')
+      .get('input[name="name"]').type('Alice Lebowski')
 
       // Open dropdown for organization type selector
       .get('.ui-select-container').click()
 
       // Select first organization type
       .get('.ui-select-choices-row').first().click()
+
+      // Enter organization email
+      .get('input[name="email"]').type('contact@abc.com')
+
+      // Enter organization phone
+      .get('input[name="phone_number"]').type('+1234567890')
 
       // Go to the next step
       .get('button span').contains('Next').click()
@@ -76,6 +71,6 @@ describe('Customer creation dialog', () => {
       .get('.select-workspace-toggle.btn-primary')
 
       // Workspace selector should indicate new organization name
-      .get('#select-workspace-title').contains('ABC');
+      .get('#select-workspace-title').contains('Alice Lebowski');
   });
 });

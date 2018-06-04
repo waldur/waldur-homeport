@@ -65,3 +65,25 @@ Cypress.Commands.add('openCustomerCreateDialog', () => {
     // Modal dialog should be displayed
     .get('.modal-title').contains('Create organization');
 });
+
+Cypress.Commands.add('mockUser', () => {
+  cy
+    .route({
+      url: 'http://localhost:8080/api-auth/password/',
+      method: 'POST',
+      response: {token: 'valid'}
+    })
+    .route('http://localhost:8080/api/users/**', 'fixture:users/alice.json')
+    .route('http://localhost:8080/api/customer-permissions/**', [])
+    .route('http://localhost:8080/api/project-permissions/**', [])
+    .route('http://localhost:8080/api/events/**', []);
+});
+
+Cypress.Commands.add('mockCustomer', () => {
+  cy
+  .route('http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/counters/**', {})
+  .route('http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/?uuid=bf6d515c9e6e445f9c339021b30fc96b',
+    'fixture:customers/alice.json')
+  .route('http://localhost:8080/api/invoices/**', [])
+  .route('http://localhost:8080/api/projects/**', [])
+});

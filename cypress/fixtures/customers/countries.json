@@ -1,0 +1,26 @@
+{
+  "actions": {
+    "POST": {
+      "country": {
+        "type": "choice",
+        "required": false,
+        "read_only": false,
+        "label": "Country",
+        "choices": [
+          {
+            "display_name": "Estonia",
+            "value": "EE"
+          },
+          {
+            "display_name": "Latvia",
+            "value": "LV"
+          },
+          {
+            "display_name": "Lithuania",
+            "value": "LT"
+          }
+        ]
+      }
+    }
+  }
+}

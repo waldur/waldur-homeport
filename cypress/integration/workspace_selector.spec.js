@@ -3,8 +3,31 @@ const getTextList = $p =>
 
 describe('Workspace selector', () => {
   beforeEach(() => {
-    cy.login();
-    cy.openWorkspaceSelector();
+    cy
+      .server()
+      .mockUser()
+      .mockCustomer()
+      .route('http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/?uuid=bf6d515c9e6e445f9c339021b30fc96b', 'fixture:customers/alice.json')
+      .route('http://localhost:8080/api/customers/?**', 'fixture:customers/alice_bob_web.json')
+      .route('http://localhost:8080/api/projects/**', 'fixture:projects/alice_azure.json')
+      .route('http://localhost:8080/api/quotas/**/history/**', [])
+      .login()
+      .openWorkspaceSelector();
+  });
+
+  it('Lists all organizations by default', () => {
+    cy
+      // Get filtered organization rows
+      .get('.list-group-item div')
+
+      // Only matching organizations should be present
+      .should($p =>
+        expect(getTextList($p)).to.deep.eq([
+          'Alice Lebowski',
+          'Bob Lebowski',
+          'Web Services',
+        ])
+      );
   });
 
   it('Allows to filter organizations by name', () => {
@@ -20,14 +43,6 @@ describe('Workspace selector', () => {
         expect(getTextList($p)).to.deep.eq([
           'Alice Lebowski',
           'Bob Lebowski',
-          'Dave Lebowski',
-          'Erin Lebowski',
-          'Frank Lebowski',
-          'Gus Lebowski',
-          'Harry Lebowski',
-          'Lebowski Ltd.',
-          'Walter Lebowski',
-          'Zed Lebowski',
         ])
       );
   });
@@ -38,13 +53,13 @@ describe('Workspace selector', () => {
       .get('.list-group-item').first().click()
 
       // Filter projects by name
-      .get('input[placeholder="Filter projects"]').type('SaaS')
+      .get('input[placeholder="Filter projects"]').type('OpenStack')
 
       // Get filtered project rows
       .get('.list-group').last().find('.list-group-item div')
 
       // Only matching projects should be present
-      .should($p => expect(getTextList($p)).to.deep.eq(['SaaS']));
+      .should($p => expect(getTextList($p)).to.deep.eq(['OpenStack Alice project']));
   });
 
   it('Allows to go switch to organization workspace', () => {
@@ -56,7 +71,7 @@ describe('Workspace selector', () => {
       .get('.select-workspace-toggle.btn-primary');
   });
 
-  it.only('Allows to go switch to project workspace', () => {
+  it('Allows to go switch to project workspace', () => {
     cy
       // Select first available organization
       .get('.list-group-item').first().click()

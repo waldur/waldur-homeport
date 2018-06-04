@@ -1,0 +1,200 @@
+{
+  "url": "http://localhost:8080/api/projects/df4193e2bee24a4c8e339474d74c5f8c/",
+  "uuid": "df4193e2bee24a4c8e339474d74c5f8c",
+  "name": "Azure Alice project",
+  "customer": "http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/",
+  "customer_uuid": "bf6d515c9e6e445f9c339021b30fc96b",
+  "customer_name": "Alice Lebowski",
+  "customer_native_name": "",
+  "customer_abbreviation": "",
+  "description": "",
+  "quotas": [
+    {
+      "url": "http://localhost:8080/api/quotas/8c8293ce6ad745098ce79eeb48eadc66/",
+      "uuid": "8c8293ce6ad745098ce79eeb48eadc66",
+      "name": "freeipa_quota",
+      "limit": 10000,
+      "usage": 0
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/68675a9e50df475598ffe7078139f8ac/",
+      "uuid": "68675a9e50df475598ffe7078139f8ac",
+      "name": "nc_app_count",
+      "limit": -1,
+      "usage": 0
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/25c317ecdc63430eb88af9ca6bb58242/",
+      "uuid": "25c317ecdc63430eb88af9ca6bb58242",
+      "name": "nc_vm_count",
+      "limit": -1,
+      "usage": 3
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/de27af25f92b44e7b4c353535bd52e86/",
+      "uuid": "de27af25f92b44e7b4c353535bd52e86",
+      "name": "nc_allocation_count",
+      "limit": -1,
+      "usage": 2
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/c2f2a9330a224857a9343ab23e9b0e2d/",
+      "uuid": "c2f2a9330a224857a9343ab23e9b0e2d",
+      "name": "nc_snapshot_count",
+      "limit": -1,
+      "usage": 0
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/db9eab9ab2fb403ab271e783e0f38cd3/",
+      "uuid": "db9eab9ab2fb403ab271e783e0f38cd3",
+      "name": "nc_volume_count",
+      "limit": -1,
+      "usage": 6
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/b83529a888a949a9941b309a24c2a92b/",
+      "uuid": "b83529a888a949a9941b309a24c2a92b",
+      "name": "nc_storage_count",
+      "limit": -1,
+      "usage": 6
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/6c9ee356ba6749aba49c881cdd48c38f/",
+      "uuid": "6c9ee356ba6749aba49c881cdd48c38f",
+      "name": "nc_service_project_link_count",
+      "limit": -1,
+      "usage": 14
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/c31f80b98c294840a8a62f006f1c655b/",
+      "uuid": "c31f80b98c294840a8a62f006f1c655b",
+      "name": "nc_snapshot_size",
+      "limit": -1,
+      "usage": 0
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/93c459c7e3da41f58a008043b3e042e0/",
+      "uuid": "93c459c7e3da41f58a008043b3e042e0",
+      "name": "nc_jira_project_count",
+      "limit": -1,
+      "usage": 0
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/c770ba84dcb04003ab6fd16fb2d35218/",
+      "uuid": "c770ba84dcb04003ab6fd16fb2d35218",
+      "name": "nc_expert_count",
+      "limit": -1,
+      "usage": 5
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/6b9bca5dc65a43b08244e67a6eeaca94/",
+      "uuid": "6b9bca5dc65a43b08244e67a6eeaca94",
+      "name": "nc_volume_size",
+      "limit": -1,
+      "usage": 33792
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/346da064d21442e88ff9f4c6e85b34a7/",
+      "uuid": "346da064d21442e88ff9f4c6e85b34a7",
+      "name": "nc_offering_count",
+      "limit": -1,
+      "usage": 13
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/27057b2b9e1940beaa7de34593bfe944/",
+      "uuid": "27057b2b9e1940beaa7de34593bfe944",
+      "name": "vpc_floating_ip_count",
+      "limit": -1,
+      "usage": 1
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/35aa18d6d75d4a50b22dfc5d363bcf8e/",
+      "uuid": "35aa18d6d75d4a50b22dfc5d363bcf8e",
+      "name": "os_storage_size",
+      "limit": -1,
+      "usage": 33792
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/deea28e22e9d4471ab06e54e1eae90c6/",
+      "uuid": "deea28e22e9d4471ab06e54e1eae90c6",
+      "name": "batch_cpu_usage",
+      "limit": -1,
+      "usage": 0
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/c39b49b4784d4be6bf339f0fc65cbf86/",
+      "uuid": "c39b49b4784d4be6bf339f0fc65cbf86",
+      "name": "vpc_cpu_count",
+      "limit": -1,
+      "usage": 1
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/07998eb60739462085fd5579f472046b/",
+      "uuid": "07998eb60739462085fd5579f472046b",
+      "name": "vpc_ram_size",
+      "limit": -1,
+      "usage": 2048
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/2795dda6e2224e4c8e4b6851aadb0457/",
+      "uuid": "2795dda6e2224e4c8e4b6851aadb0457",
+      "name": "batch_gpu_usage",
+      "limit": -1,
+      "usage": 0
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/45b809e83bf84dd9a941cfa0beb1ef7e/",
+      "uuid": "45b809e83bf84dd9a941cfa0beb1ef7e",
+      "name": "batch_ram_usage",
+      "limit": -1,
+      "usage": 0
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/edcbc48f74184e2fb2bc05604a1f79bf/",
+      "uuid": "edcbc48f74184e2fb2bc05604a1f79bf",
+      "name": "vpc_storage_size",
+      "limit": -1,
+      "usage": 33792
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/689d4017d2544b4eab05eb8519199819/",
+      "uuid": "689d4017d2544b4eab05eb8519199819",
+      "name": "os_cpu_count",
+      "limit": -1,
+      "usage": 3
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/e4df9a75a22c43018e3edc80f3314b04/",
+      "uuid": "e4df9a75a22c43018e3edc80f3314b04",
+      "name": "os_ram_size",
+      "limit": -1,
+      "usage": 3072
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/a896374c652c446e80e74ec5f8cefe45/",
+      "uuid": "a896374c652c446e80e74ec5f8cefe45",
+      "name": "nc_private_cloud_count",
+      "limit": -1,
+      "usage": 5
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/14cc88a490ae4288b9812b9138028f80/",
+      "uuid": "14cc88a490ae4288b9812b9138028f80",
+      "name": "nc_resource_count",
+      "limit": -1,
+      "usage": 17
+    }
+  ],
+  "services": [],
+  "created": "2016-03-14T19:36:00Z",
+  "certifications": [],
+  "type": null,
+  "type_name": null,
+  "billing_price_estimate": {
+    "url": "http://localhost:8080/api/billing-price-estimates/8933409d01d14a869ca74116a8bfb269/",
+    "threshold": 0,
+    "total": 0,
+    "current": 0,
+    "limit": -1
+  }
+}
