@@ -8,7 +8,6 @@ A good workflow is crucial for development because it saves time. The following 
 4. Create new Git branch for new task:
 ```bash
 git branch -b feature/WAL-101  # if you're working on new feature
-
 git branch -b bug/WAL-101  # if you're working on bug fix
 ```
 5. Once implementation is done, ensure that new code is covered with unit tests and integration tests. Tests are needed in order to avoid bug regressions, and improve documentation for new features. Think of tests as a kind of executable documentation. Therefore, tests would allow to clearly document design decisions and reduce barrier to entry for new developers.
