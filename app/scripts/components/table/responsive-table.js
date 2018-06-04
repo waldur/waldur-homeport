@@ -78,6 +78,9 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       });
 
       scope.$watchCollection('controller.tableOptions.hiddenColumns', cols => {
+        if (!table) {
+          return;
+        }
         table.waldurColumns.forEach((col, index) => {
           if (col.id) {
             table.column(index).visible(!cols || cols.indexOf(col.id) === -1);
