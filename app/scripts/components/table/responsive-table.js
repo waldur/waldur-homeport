@@ -12,6 +12,7 @@
 */
 
 import { formatDate } from '@waldur/core/dateUtils';
+import { blockingExecutor } from '@waldur/core/services';
 
 // @ngInject
 export default function responsiveTable($rootScope, $q, $timeout, $interval, $compile, $filter, ENV, features) {
@@ -270,7 +271,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         });
 
         let timer = $interval(
-          scope.controller.resetCache.bind(scope.controller),
+          blockingExecutor(scope.controller.resetCache.bind(scope.controller)),
           ENV.countersTimerInterval * 1000
         );
         scope.$on('$destroy', function() {
