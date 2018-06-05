@@ -143,6 +143,26 @@ const TableOptions = {
   table: 'customerList',
   fetchData: createCustomFetcher('customers'),
   mapPropsToFilter: props => formatFilter(props.customerListFilter),
+  exportRow: row => [
+    row.name,
+    row.abbreviation,
+    formatDate(row.created),
+    formatDate(row.accounting_start_date),
+    row.vm_count,
+    row.storage_count,
+    row.private_cloud_count,
+    row.billing_price_estimate && row.billing_price_estimate.current || 0,
+  ],
+  exportFields: [
+    'Organization',
+    'Abbreviation',
+    'Created',
+    'Start day of accounting',
+    'VMs',
+    'Storage',
+    'Private clouds',
+    'Current cost',
+  ],
 };
 
 const formatFilter = filter => {
