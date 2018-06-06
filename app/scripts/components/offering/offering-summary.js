@@ -1,3 +1,5 @@
+import { isOracleOffering } from '@waldur/offering/utils';
+
 import template from './offering-summary.html';
 
 const offeringSummary = {
@@ -6,7 +8,7 @@ const offeringSummary = {
     offering: '<',
     offeringConfig: '<',
   },
-  controller: class {
+  controller: class OfferingSummaryController {
     // @ngInject
     constructor(usersService) {
       this.usersService = usersService;
@@ -22,6 +24,10 @@ const offeringSummary = {
 
     showLink() {
       return this.offering.issue_link && this.currentUser && (this.currentUser.is_staff || this.currentUser.is_support);
+    }
+
+    get showOracleReport() {
+      return isOracleOffering(this.offering) && this.offering.report;
     }
   }
 };

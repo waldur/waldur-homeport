@@ -3543,6 +3543,15 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
+#: app/scripts/components/offering/sidebar.js
+msgid "Oracle"
+msgstr ""
+
+#: app/scripts/components/offering/offering-details.js
+#: app/scripts/components/offering/routes.js
+msgid "Oracle virtual machines and databases"
+msgstr ""
+
 #: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/experts/bids/expert-bids-list.js
