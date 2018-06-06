@@ -16,6 +16,11 @@ describe('Table reducer', () => {
       },
       entities: {},
       order: [],
+      sorting: {
+        mode: '',
+        field: null,
+        loading: false,
+      },
     });
   });
 
@@ -65,7 +70,7 @@ describe('Table reducer', () => {
     expect(state.users.pagination.currentPage).toBe(3);
   });
 
-  it('should handle entity create action', () => {
+  it('should handle ENTITY_CREATE action', () => {
     const prevState = reducer({},
       {
         type: actions.FETCH_LIST_DONE,
@@ -113,7 +118,7 @@ describe('Table reducer', () => {
     ]);
   });
 
-  it('should handle entity update action', () => {
+  it('should handle ENTITY_UPDATE action', () => {
     const prevState = reducer({},
       {
         type: actions.FETCH_LIST_DONE,
@@ -152,7 +157,7 @@ describe('Table reducer', () => {
     expect(state.users.order).toEqual(['10ff42e159d7472fb35d4db517e6c16e', '412ff42e159g7472fb3524db517e65165']);
   });
 
-  it('should handle entity delete action', () => {
+  it('should handle ENTITY_DELETE action', () => {
     const prevState = reducer({},
       {
         type: actions.FETCH_LIST_DONE,
@@ -181,7 +186,7 @@ describe('Table reducer', () => {
     expect(state.users.order).toEqual(['412ff42e159g7472fb3524db517e65165']);
   });
 
-  it('should handle page size update action', () => {
+  it('should handle PAGE_SIZE_UPDATE action', () => {
     const state = reducer({}, {
       type: actions.PAGE_SIZE_UPDATE,
       payload: {
@@ -192,4 +197,20 @@ describe('Table reducer', () => {
     expect(state.users.pagination.pageSize).toBe(40);
   });
 
+  it('should handle SORT_LIST_START action', () => {
+    const expected = {
+      field: 'phone_number',
+      mode: 'desc',
+      loading: true,
+    };
+    const state = reducer({}, {
+      type: actions.SORT_LIST_START,
+      payload: {
+        table: 'users',
+        field: 'phone_number',
+        mode: 'desc',
+      },
+    });
+    expect(state.users.sorting).toEqual(expected);
+  });
 });

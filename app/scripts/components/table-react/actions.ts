@@ -11,6 +11,8 @@ export const ENTITY_CREATE = 'waldur/table/ENTITY_CREATE';
 export const ENTITY_UPDATE = 'waldur/table/ENTITY_UPDATE';
 export const ENTITY_DELETE = 'waldur/table/ENTITY_DELETE';
 export const PAGE_SIZE_UPDATE = 'waldur/table/PAGE_SIZE_UPDATE';
+export const SORT_LIST_START = 'waldur/table/SORT_LIST_START';
+export const SORT_LIST_DONE = 'waldur/table/SORT_LIST_DONE';
 
 export const fetchListStart = (table: string, extraFilter?: any) => ({
   type: FETCH_LIST_START,
@@ -114,5 +116,21 @@ export const deleteEntity = (table: string, uuid: string) => ({
   payload: {
     table,
     uuid,
+  },
+});
+
+export const sortListStart = (table: string, field: string, mode: string) => ({
+  type: SORT_LIST_START,
+  payload: {
+    table,
+    field,
+    mode,
+  },
+});
+
+export const sortListDone = (table: string) => ({
+  type: SORT_LIST_DONE,
+  payload: {
+    table,
   },
 });

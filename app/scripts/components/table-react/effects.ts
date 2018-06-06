@@ -27,10 +27,20 @@ function* fetchList(action) {
     if (options.queryField && state.query !== '') {
       request.filter[options.queryField] = state.query;
     }
+    if (state.sorting && state.sorting.field) {
+      let field = state.sorting.field;
+      if (state.sorting.mode === 'desc') {
+        field = `-${field}`;
+      }
+      request.filter.o = field;
+    }
 
     const { rows, resultCount } = yield call(options.fetchData, request);
     const { entities, order } = transformRows(rows);
     yield put(actions.fetchListDone(table, entities, order, resultCount));
+    if (state.sorting && state.sorting.loading) {
+      yield put(actions.sortListDone(table));
+    }
   } catch (error) {
     yield put(actions.fetchListError(table, error));
   }

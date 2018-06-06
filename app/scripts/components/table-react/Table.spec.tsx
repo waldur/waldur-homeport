@@ -14,6 +14,11 @@ describe('Table', () => {
     error: null,
     fetch,
     rows: [],
+    sorting: {
+      mode: '',
+      field: null,
+      loading: false,
+    },
   };
 
   describe('special states', () => {

@@ -84,10 +84,12 @@ const TableComponent = props => {
       {
         title: translate('Email'),
         render: EmailField,
+        orderField: 'email',
       },
       {
         title: translate('Phone number'),
         render: PhoneNumberField,
+        orderField: 'phone_number',
       },
       {
         title: translate('Organization'),

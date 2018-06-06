@@ -13,6 +13,11 @@ const INITIAL_STATE: TableState = {
     resultCount: 0,
     currentPage: 1,
   },
+  sorting: {
+    mode: '',
+    field: null,
+    loading: false,
+  },
 };
 
 const pagination = (state = INITIAL_STATE, action): TableState => {
@@ -114,6 +119,26 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
       return {
         ...state,
         blocked: false,
+      };
+
+    case actions.SORT_LIST_START:
+      return {
+        ...state,
+        sorting: {
+          ...state.sorting,
+          field: action.payload.field,
+          mode: action.payload.mode,
+          loading: true,
+        },
+      };
+
+    case actions.SORT_LIST_DONE:
+      return {
+        ...state,
+        sorting: {
+          ...state.sorting,
+          loading: false,
+        },
       };
 
   default:
