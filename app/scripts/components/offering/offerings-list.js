@@ -45,7 +45,7 @@ function ProjectOfferingsListController(
         },
         {
           title: gettext('Type'),
-          render: row => row.type_label
+          render: row => row.type_label || 'N/A'
         },
         {
           title: gettext('State'),

@@ -10,7 +10,7 @@ interface OfferingStateProps extends TranslateProps {
   offering: Offering;
 }
 
-export const PureOfferingState = (props: OfferingStateProps) => (
+export const PureOfferingState = (props: OfferingStateProps) => props.offering ? (
   <span className={classNames('label', {
     'label-success': props.offering.state === 'OK',
     'label-warning': props.offering.state === 'Requested',
@@ -18,7 +18,7 @@ export const PureOfferingState = (props: OfferingStateProps) => (
   })}>
     {props.translate(props.offering.state).toUpperCase()}
   </span>
-);
+) : null;
 
 export const OfferingState = withTranslation(PureOfferingState);
 

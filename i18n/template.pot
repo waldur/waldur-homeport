@@ -410,11 +410,11 @@ msgid "Are you sure you do not want to create a data volume? System volume is no
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js
-msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}."
+msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js
-msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}."
+msgid "Are you sure you want to delete a {resourceType}?"
 msgstr ""
 
 #: app/scripts/components/providers/provider-list.js

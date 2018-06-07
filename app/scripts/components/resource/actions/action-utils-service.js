@@ -1,3 +1,5 @@
+import { translate } from "@waldur/i18n";
+
 // @ngInject
 export default function actionUtilsService(
   ncUtilsFlash, $rootScope, $http, $q, $uibModal, $injector, ncUtils, features,
@@ -106,14 +108,16 @@ export default function actionUtilsService(
     const custom = ActionConfiguration[model.resource_type];
     let confirmTextSuffix = custom && custom.delete_message || '';
     if (name === 'destroy') {
+      const context = { resourceType: model.resource_type || 'resource'};
       let confirmText = (model.state === 'Erred')
-        ?  coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}.'),
-          { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix })
-        : coreUtils.templateFormatter(gettext('Are you sure you want to delete a {resourceType}? {confirmTextSuffix}.'),
-        { resourceType: model.resource_type, confirmTextSuffix: confirmTextSuffix });
+        ? translate('Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. ', context)
+        : translate('Are you sure you want to delete a {resourceType}? ', context);
+      if (confirmTextSuffix) {
+        confirmText += confirmTextSuffix;
+      }
       return confirm(confirmText);
     } else {
-      return confirm(gettext('Are you sure? This action cannot be undone.'));
+      return confirm(translate('Are you sure? This action cannot be undone.'));
     }
   };
 
