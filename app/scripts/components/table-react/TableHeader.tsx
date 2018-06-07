@@ -15,7 +15,9 @@ const TableHeader = ({ columns, onSortClick, currentSorting }: Props) => (
   <thead>
     <tr>
       {columns.map((column, index) => (
-        <th key={index} className={classNames(column.className, column.orderField && 'sorting-column')}
+        <th
+          key={index}
+          className={classNames(column.className, column.orderField && 'sorting-column') || undefined}
           onClick={column.orderField && (() => onSortClick(column.orderField, currentSorting))}>
           {column.title}
           {(column.orderField && (currentSorting && column.orderField !== currentSorting.field)) && <i className="fa fa-sort m-l-xs"/>}
