@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import Panel from '@waldur/core/Panel';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 const parseTable = raw =>
   // Skip first and last line: header and teaser
@@ -41,5 +40,3 @@ export const OracleSnapshots = props => {
     </Panel>
   );
 };
-
-export default connectAngularComponent(OracleSnapshots, ['report']);

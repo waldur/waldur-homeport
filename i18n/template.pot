@@ -469,6 +469,7 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
+#: app/scripts/components/offering/OfferingTabs.tsx
 #: app/scripts/components/resource/tabs/constants.js
 #: app/scripts/components/user/support/UserDetailsView.tsx
 msgid "Audit log"
@@ -1351,8 +1352,8 @@ msgstr ""
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
+#: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
-#: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
 #: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
@@ -2555,16 +2556,16 @@ msgstr ""
 msgid "Is official"
 msgstr ""
 
-#: app/scripts/components/offering/offering-summary.html
+#: app/scripts/components/offering/OfferingHeader.tsx
 msgid "Issue key"
 msgstr ""
 
 #: app/scripts/components/events/EventDetailsTable.tsx
-#: app/scripts/components/offering/offering-summary.html
+#: app/scripts/components/offering/OfferingHeader.tsx
 msgid "Issue link"
 msgstr ""
 
-#: app/scripts/components/offering/offering-summary.html
+#: app/scripts/components/offering/OfferingHeader.tsx
 msgid "Issue status"
 msgstr ""
 
@@ -3000,8 +3001,8 @@ msgstr ""
 #: app/scripts/components/jira/project/JiraProjectSummary.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/jira/project/jira-projects-list.js
+#: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
-#: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/offering/offerings-list.js
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
@@ -3515,7 +3516,7 @@ msgid "Open"
 msgstr ""
 
 #: app/scripts/components/issues/issue-detail.html
-#: app/scripts/components/offering/offering-summary.html
+#: app/scripts/components/offering/OfferingHeader.tsx
 msgid "Open in Service Desk"
 msgstr ""
 
@@ -3543,13 +3544,10 @@ msgstr ""
 msgid "Or use social login"
 msgstr ""
 
-#: app/scripts/components/offering/sidebar.js
-msgid "Oracle"
-msgstr ""
-
 #: app/scripts/components/offering/offering-details.js
 #: app/scripts/components/offering/routes.js
-msgid "Oracle virtual machines and databases"
+#: app/scripts/components/offering/sidebar.js
+msgid "Oracle"
 msgstr ""
 
 #: app/scripts/components/customer/CustomerList.tsx
@@ -3989,7 +3987,7 @@ msgstr ""
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/expert-bids-list.js
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
-#: app/scripts/components/offering/offering-summary.html
+#: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Price"
 msgstr ""
@@ -5453,7 +5451,7 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
-#: app/scripts/components/offering/offering-summary.html
+#: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/offerings-list.js
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
@@ -5574,7 +5572,7 @@ msgid "Subtotal"
 msgstr ""
 
 #: app/scripts/components/jira/issue/IssueCreateDialog.tsx
-#: app/scripts/components/offering/offering-summary.html
+#: app/scripts/components/offering/OfferingTabs.tsx
 #: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
 msgid "Summary"
 msgstr ""
@@ -5988,7 +5986,7 @@ msgstr ""
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/jira/project/jira-projects-list.js
-#: app/scripts/components/offering/offering-summary.html
+#: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/offerings-list.js
 #: app/scripts/components/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: app/scripts/components/payments/payment-list.js

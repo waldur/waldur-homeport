@@ -87,7 +87,7 @@ const offeringDetails = {
       ];
       if (isOracleOffering(this.offering)) {
         this.BreadcrumbsService.items[this.BreadcrumbsService.items.length - 1] = {
-          label: gettext('Oracle virtual machines and databases'),
+          label: gettext('Oracle'),
           state: 'project.resources.oracle',
           params: {
             uuid: this.offering.project_uuid

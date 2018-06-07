@@ -39,7 +39,7 @@ export default function offeringRoutes($stateProvider) {
     url: 'oracle/',
     template: '<project-offerings-list filter="oracleFilter"/>',
     data: {
-      pageTitle: gettext('Oracle virtual machines and databases'),
+      pageTitle: gettext('Oracle'),
       feature: 'oracle'
     },
     controller: oracleRequestList,
