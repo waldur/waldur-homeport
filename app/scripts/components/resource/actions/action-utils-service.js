@@ -1,4 +1,4 @@
-import { translate } from "@waldur/i18n";
+import { translate } from '@waldur/i18n';
 
 // @ngInject
 export default function actionUtilsService(
