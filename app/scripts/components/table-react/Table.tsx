@@ -28,6 +28,7 @@ interface Props extends TranslateProps, TableState {
   showPageSizeSelector?: boolean;
   updatePageSize?: (size: number) => void;
   resetPagination?: () => void;
+  sortList?: () => void;
 }
 
 class Table extends React.Component<Props> {
@@ -66,7 +67,7 @@ class Table extends React.Component<Props> {
   }
 
   renderBody() {
-    if (this.props.loading) {
+    if (this.props.loading && (this.props.sorting && !this.props.sorting.loading)) {
       return <LoadingSpinner/>;
     }
 
@@ -89,10 +90,23 @@ class Table extends React.Component<Props> {
     }
 
     return (
-      <table className="table table-striped dataTable">
-        <TableHeader columns={this.props.columns}/>
-        <TableBody rows={this.props.rows} columns={this.props.columns}/>
-      </table>
+      <>
+        {(this.props.sorting && this.props.sorting.loading) && (
+          <>
+            <div className="blocking-layer">
+              <LoadingSpinner/>
+            </div>
+          </>
+        )}
+        <table className="table table-striped dataTable">
+          <TableHeader
+            onSortClick={this.props.sortList}
+            currentSorting={this.props.sorting}
+            columns={this.props.columns}
+          />
+          <TableBody rows={this.props.rows} columns={this.props.columns}/>
+        </table>
+      </>
     );
   }
 
@@ -113,6 +127,8 @@ class Table extends React.Component<Props> {
       this.props.fetch();
     } else if (nextProps.query !== this.props.query) {
       this.props.resetPagination();
+      this.props.fetch();
+    } else if (nextProps.sorting !== this.props.sorting && nextProps.sorting.loading) {
       this.props.fetch();
     }
   }
