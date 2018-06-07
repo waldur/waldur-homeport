@@ -36,7 +36,6 @@ class PurePriceTooltip extends React.PureComponent<Props> {
   render() {
     const message = this.getTooltipMessage();
     if (!message) {
-      // https://reactjs.org/docs/conditional-rendering.html#preventing-component-from-rendering
       return null;
     }
 

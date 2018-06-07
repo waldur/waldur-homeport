@@ -2,6 +2,9 @@ const projectOfferingsList = {
   templateUrl: 'views/partials/filtered-list.html',
   controllerAs: 'ListController',
   controller: ProjectOfferingsListController,
+  bindings: {
+    filter: '<'
+  },
 };
 
 // @ngInject
@@ -72,6 +75,7 @@ function ProjectOfferingsListController(
     getFilter: function() {
       return {
         project_uuid: this.project.uuid,
+        ...this.filter,
       };
     }
   });

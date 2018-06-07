@@ -1,3 +1,5 @@
+import { isOracleOffering } from '@waldur/offering/utils';
+
 import template from './offering-details.html';
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
@@ -83,7 +85,20 @@ const offeringDetails = {
           }
         }
       ];
+      if (isOracleOffering(this.offering)) {
+        this.BreadcrumbsService.items[this.BreadcrumbsService.items.length - 1] = {
+          label: gettext('Oracle'),
+          state: 'project.resources.oracle',
+          params: {
+            uuid: this.offering.project_uuid
+          }
+        };
+      }
       this.BreadcrumbsService.activeItem = this.offering.name;
+    }
+
+    get showReportButton() {
+      return !isOracleOffering(this.offering) && this.offering.report;
     }
   }
 };
