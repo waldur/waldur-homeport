@@ -1,3 +1,4 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 
 import './TableHeader.scss';
@@ -14,7 +15,7 @@ const TableHeader = ({ columns, onSortClick, currentSorting }: Props) => (
   <thead>
     <tr>
       {columns.map((column, index) => (
-        <th key={index} className={column.orderField ? column.className += ' sorting-column' : column.className}
+        <th key={index} className={classNames(column.className, column.orderField && 'sorting-column')}
           onClick={column.orderField && (() => onSortClick(column.orderField, currentSorting))}>
           {column.title}
           {(column.orderField && (currentSorting && column.orderField !== currentSorting.field)) && <i className="fa fa-sort m-l-xs"/>}
