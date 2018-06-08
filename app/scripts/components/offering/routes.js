@@ -1,3 +1,10 @@
+import { OracleOfferingTypes } from '@waldur/offering/utils';
+
+// @ngInject
+function oracleRequestList($scope) {
+  $scope.oracleFilter = {type: OracleOfferingTypes};
+}
+
 // @ngInject
 export default function offeringRoutes($stateProvider) {
   $stateProvider
@@ -26,5 +33,16 @@ export default function offeringRoutes($stateProvider) {
       pageTitle: gettext('Requests'),
       feature: 'offering'
     }
+  })
+
+  .state('project.resources.oracle', {
+    url: 'oracle/',
+    template: '<project-offerings-list filter="oracleFilter"/>',
+    data: {
+      pageTitle: gettext('Oracle'),
+      feature: 'oracle'
+    },
+    controller: oracleRequestList,
   });
+
 }

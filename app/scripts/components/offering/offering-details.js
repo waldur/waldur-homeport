@@ -1,3 +1,5 @@
+import { isOracleOffering } from '@waldur/offering/utils';
+
 import template from './offering-details.html';
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
@@ -12,6 +14,7 @@ const offeringDetails = {
       currentStateService,
       WorkspaceService,
       BreadcrumbsService,
+      ncUtilsFlash,
       $stateParams,
       $state) {
       this.offeringsService = offeringsService;
@@ -20,6 +23,7 @@ const offeringDetails = {
       this.currentStateService = currentStateService;
       this.WorkspaceService = WorkspaceService;
       this.BreadcrumbsService = BreadcrumbsService;
+      this.ncUtilsFlash = ncUtilsFlash;
       this.$stateParams = $stateParams;
       this.$state = $state;
     }
@@ -83,7 +87,33 @@ const offeringDetails = {
           }
         }
       ];
+      if (isOracleOffering(this.offering)) {
+        this.BreadcrumbsService.items[this.BreadcrumbsService.items.length - 1] = {
+          label: gettext('Oracle'),
+          state: 'project.resources.oracle',
+          params: {
+            uuid: this.offering.project_uuid
+          }
+        };
+      }
       this.BreadcrumbsService.activeItem = this.offering.name;
+    }
+
+    afterInstanceRemove() {
+      this.offeringsService.clearAllCacheForCurrentEndpoint();
+      const state = isOracleOffering(this.offering) ? 'project.resources.oracle' : 'project.resources.offerings';
+      this.$state.go(state, {uuid: this.offering.project_uuid});
+    }
+
+    handleActionException(response) {
+      if (response.status === 409) {
+        let message = response.data.detail || response.data.status;
+        this.ncUtilsFlash.error(message);
+      }
+    }
+
+    get showReportButton() {
+      return !isOracleOffering(this.offering) && this.offering.report;
     }
   }
 };

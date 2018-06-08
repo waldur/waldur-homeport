@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OracleSnapshots renders HTML table for Oracle snapshots 1`] = `"<div class=\\"ibox-title\\"><h5>Snapshots</h5></div><div class=\\"ibox-content\\"><table class=\\"table\\"><thead><tr><th>Name</th><th>Copy of</th><th>Creation time</th></tr></thead><tbody><tr><td>ora-prdmoj-asm01.180530</td><td>ora-prdmoj-asm01</td><td>2018-05-30 23:30:00 GST</td></tr><tr><td>ora-prdmoj-asm01.180531</td><td>ora-prdmoj-asm01</td><td>2018-05-31 23:30:01 GST</td></tr></tbody></table></div>"`;

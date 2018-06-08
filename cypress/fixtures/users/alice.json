@@ -1,0 +1,27 @@
+[
+  {
+    "url": "http://localhost:8080/api/users/3a836bc76e1b40349ec1a0d8220f374f/",
+    "uuid": "3a836bc76e1b40349ec1a0d8220f374f",
+    "username": "staff",
+    "full_name": "Alice Lebowski",
+    "native_name": "Alice Lebowski",
+    "job_title": "Administrator",
+    "email": "alice@lebowski.com",
+    "phone_number": "",
+    "organization": null,
+    "civil_number": null,
+    "description": "",
+    "is_staff": true,
+    "is_active": true,
+    "is_support": true,
+    "token": "2c4d2a2d0296cee94ef817beb0ff9fbf96ce0624",
+    "token_lifetime": 1800,
+    "registration_method": "default",
+    "date_joined": "2015-11-17T06:45:46Z",
+    "agreement_date": "2016-12-20T12:24:34.963889Z",
+    "preferred_language": "",
+    "competence": "",
+    "customer_permissions": [],
+    "project_permissions": []
+  }
+]

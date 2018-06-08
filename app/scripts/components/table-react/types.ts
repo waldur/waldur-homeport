@@ -34,6 +34,7 @@ export interface Column {
   title: string;
   render: React.SFC<{row: Entity}>;
   className?: string;
+  orderField?: string;
 }
 
 export interface Pagination {
@@ -50,4 +51,11 @@ export interface TableState {
   error?: any;
   pagination?: Pagination;
   query?: string;
+  sorting?: Sorting;
+}
+
+export interface Sorting {
+  mode: string;
+  field: string;
+  loading: boolean;
 }

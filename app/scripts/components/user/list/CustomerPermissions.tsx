@@ -9,10 +9,10 @@ import CustomerExpertField from './CustomerExpertField';
 import CustomerRole from './CustomerRole';
 
 const TableComponent = props => {
-  const { translate, filterByFeature } = props;
+  const { translate, filterColumns } = props;
   return (
     <Table {...props}
-      columns={filterByFeature([
+      columns={filterColumns([
         {
           title: translate('Organization name'),
           render: CustomerLink,

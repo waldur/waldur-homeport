@@ -30,14 +30,33 @@ export function connectTable(options: TableOptions) {
       setQuery: query => dispatch(actions.setFilterQuery(table, query)),
       updatePageSize: size => dispatch(actions.updatePageSize(table, size)),
       resetPagination: () => dispatch(actions.resetPagination(table)),
+      sortList: (field, currentSorting) => dispatch(handleOrdering(field, currentSorting)),
     });
 
-    const filterColumns = state => columns => columns.filter(
+    const handleOrdering = (field, currentSorting) => {
+      let mode = 'asc';
+      if (field === currentSorting.field) {
+        if (currentSorting.mode === 'asc') {
+          mode = 'desc';
+        } else if (currentSorting.mode === 'desc') {
+          mode = 'asc';
+        }
+      }
+      return actions.sortListStart(table, field, mode);
+    };
+
+    const filterByFeature = state => columns => columns.filter(
       column => !column.feature || isVisible(state, column.feature)
     );
 
+    const filterColumns = state => columns => {
+      return filterByFeature(state)(columns).filter(
+        column => column.visible === undefined || column.visible === true
+      );
+    };
+
     const mapStateToProps = state => ({
-      filterByFeature: filterColumns(state),
+      filterColumns: filterColumns(state),
       ...getTableState(table)(state),
       rows: selectTableRows(state, table),
     });
@@ -77,3 +96,5 @@ const getId = (row, index) => {
   }
   return index;
 };
+
+export const renderFieldOrDash = field => field ? field : '\u2014';

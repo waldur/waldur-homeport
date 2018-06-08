@@ -12,6 +12,7 @@
 */
 
 import { formatDate } from '@waldur/core/dateUtils';
+import { blockingExecutor } from '@waldur/core/services';
 
 // @ngInject
 export default function responsiveTable($rootScope, $q, $timeout, $interval, $compile, $filter, ENV, features) {
@@ -78,6 +79,9 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       });
 
       scope.$watchCollection('controller.tableOptions.hiddenColumns', cols => {
+        if (!table) {
+          return;
+        }
         table.waldurColumns.forEach((col, index) => {
           if (col.id) {
             table.column(index).visible(!cols || cols.indexOf(col.id) === -1);
@@ -267,7 +271,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         });
 
         let timer = $interval(
-          scope.controller.resetCache.bind(scope.controller),
+          blockingExecutor(scope.controller.resetCache.bind(scope.controller)),
           ENV.countersTimerInterval * 1000
         );
         scope.$on('$destroy', function() {

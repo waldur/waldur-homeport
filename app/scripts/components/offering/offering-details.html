@@ -12,7 +12,10 @@
       <div class="col-lg-12">
         <h2 translate>Request details</h2>
         <div class="pull-right">
-          <offering-report-button offering="$ctrl.offering"></offering-report-button>
+          <offering-report-button
+            ng-if="$ctrl.showReportButton"
+            offering="$ctrl.offering">
+          </offering-report-button>
           <action-button-resource
             button-model="$ctrl.offering"
             button-controller="$ctrl">
@@ -21,7 +24,7 @@
         <breadcrumbs-container/>
       </div>
     </div>
-    <offering-summary offering="$ctrl.offering" offering-config="$ctrl.offeringConfig"/>
+    <offering-summary offering="$ctrl.offering" summary="$ctrl.offeringConfig.summary"/>
   </div>
   <div class="footer-indent"/>
   <app-footer/>

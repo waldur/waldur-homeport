@@ -1,4 +1,5 @@
 import template from './resource-header.html';
+import { blockingExecutor } from '@waldur/core/services';
 
 const resourceHeader = {
   template: template,
@@ -62,7 +63,7 @@ const resourceHeader = {
 
     afterActivate() {
       this.refreshPromise = this.$interval(
-        this.reInitResource.bind(this),
+        blockingExecutor(this.reInitResource.bind(this)),
         this.ENV.resourcesTimerInterval * 1000
       );
     }

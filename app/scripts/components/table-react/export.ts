@@ -3,15 +3,15 @@ import Papa from 'papaparse';
 import { put, call, select } from 'redux-saga/effects';
 
 import { fetchAll } from '@waldur/table-react/api';
-import { getTableState } from '@waldur/table-react/store';
 
 import { blockStart, blockStop } from './actions';
 import exportExcel from './excel';
 import { getTableOptions } from './registry';
+import { selectTableRows } from './selectors';
 
 export function* exportTable(action) {
   const { table, format } = action.payload;
-  let { rows } = yield select(getTableState(table));
+  let rows = yield select(state => selectTableRows(state, table));
   const { exportFields, exportRow, fetchData, exportAll } = getTableOptions(table);
 
   if (exportAll) {
