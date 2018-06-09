@@ -10,3 +10,4 @@ export { FieldError } from './FieldError';
 export { FormGroup } from './FormGroup';
 export { SecretField } from './SecretField';
 export { FileUploadField } from './FileUploadField';
+export { RadioButtonIconField, RadioButtonIconChoice } from './RadioButtonIconField';

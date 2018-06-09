@@ -645,6 +645,10 @@ msgstr ""
 msgid "Batch vCPU"
 msgstr ""
 
+#: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
+msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
+msgstr ""
+
 #: app/scripts/components/billing/billing-utils.js
 #: app/scripts/components/customer/create/customer-create-config.js
 msgid "Billing"
@@ -1261,6 +1265,10 @@ msgstr ""
 msgid "Custom request"
 msgstr ""
 
+#: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
+msgid "Customer"
+msgstr ""
+
 #: app/scripts/components/customer/CustomerList.tsx
 msgid "Customers List"
 msgstr ""
@@ -1716,6 +1724,7 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
+#: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
 #: app/scripts/components/experts/extensions/table-extension.js
 #: app/scripts/components/user/list/CustomerPermissions.tsx
 msgid "Expert"
@@ -3354,6 +3363,7 @@ msgstr ""
 msgid "No volumes to import."
 msgstr ""
 
+#: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
 #: app/scripts/components/customer/create/customer-create-prompt.html
 msgid "No, I will do it later"
 msgstr ""
@@ -3865,6 +3875,10 @@ msgstr ""
 
 #: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
 msgid "Please note that request should specify user name and provide a reason."
+msgstr ""
+
+#: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
+msgid "Please pick the profile that describes your organization."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.js
@@ -4515,6 +4529,14 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
 msgid "Register"
+msgstr ""
+
+#: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
+msgid "Register as a customer of our portal and provider your cloud services through Waldur's Marketplace."
+msgstr ""
+
+#: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
+msgid "Register as a customer of our portal that can also offer own experts to the other customers of Waldur."
 msgstr ""
 
 #: app/scripts/components/experts/expert-provider-details.html
@@ -5208,6 +5230,7 @@ msgstr ""
 msgid "Server error occurred."
 msgstr ""
 
+#: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 msgid "Service Provider"
 msgstr ""
@@ -6771,6 +6794,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+#: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
 #: app/scripts/components/customer/create/customer-create-prompt.html
 msgid "Yes, I would"
 msgstr ""
@@ -7222,4 +7246,8 @@ msgstr ""
 
 #: app/scripts/components/dashboard/dashboard-chart-service.js
 msgid "{value} at {date}, estimated"
+msgstr ""
+
+#: app/scripts/components/customer/create/utils.ts
+msgid "Сhoose the role please"
 msgstr ""

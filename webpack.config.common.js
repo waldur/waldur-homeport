@@ -71,6 +71,21 @@ module.exports = {
         })
       },
       {
+        test: /\.font\.js/,
+        loader: ExtractTextPlugin.extract({
+          use: [
+            'css-loader',
+            {
+              loader: 'webfonts-loader',
+              options: {
+                embed: utils.isProd,
+              },
+            },
+          ],
+          fallback: 'style-loader',
+        })
+      },
+      {
         test: /\.(eot|svg|otf|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?/,
         use: [
           {
