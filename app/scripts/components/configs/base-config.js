@@ -193,6 +193,10 @@ const ENV = {
 
   languageChoices: [
     {
+      code: 'az',
+      label: gettext('Azerbaijani')
+    },
+    {
       code: 'en',
       label: gettext('English')
     },
