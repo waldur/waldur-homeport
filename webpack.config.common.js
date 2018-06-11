@@ -122,7 +122,7 @@ module.exports = {
       filename: 'css/[name]-bundle.css?[contenthash]'
     }),
     // Moment locales extraction
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en-gb|et|ru|lt|lv)/),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(az|en-gb|et|ru|lt|lv)/),
     // some files are not referenced explicitly, copy them.
     new CopyWebpackPlugin([
       {from: './app/views', to: utils.formatPath('./views')},
