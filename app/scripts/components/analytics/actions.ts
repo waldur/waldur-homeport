@@ -1,5 +1,5 @@
 import * as constants from './constants';
-import { Project } from './types';
+import { Project, Quota } from './types';
 
 export const analyticsProjectsFetch = () => ({
   type: constants.ANALYTICS_PROJECTS_FETCH,
@@ -26,28 +26,46 @@ export const analyticsSearchFilterChange = (searchValue: string) => ({
   },
 });
 
-export const analyticsHistoryQuotaFetch = (projectUuid: string, quotaUuid: string) => ({
+export const analyticsHistoryQuotaFetch = (tenantUuid: string, quotaUuid: string) => ({
   type: constants.ANALYTICS_HISTORY_QUOTA_FETCH,
   payload: {
-    projectUuid,
+    tenantUuid,
     quotaUuid,
   },
 });
 
-export const analyticsHistoryQuotaFetchSuccess = (quotas: any, projectUuid: string, quotaUuid: string) => ({
+export const analyticsHistoryQuotaFetchSuccess = (quotas: Quota[], tenantUuid: string, quotaUuid: string) => ({
   type: constants.ANALYTICS_HISTORY_QUOTA_FETCH_SUCCESS,
   payload: {
     quotas,
-    projectUuid,
+    tenantUuid,
     quotaUuid,
   },
 });
 
-export const analyticsHistoryQuotaFetchError = (error: any, projectUuid: string, quotaUuid: string) => ({
+export const analyticsHistoryQuotaFetchError = (error: any, tenantUuid: string, quotaUuid: string) => ({
   type: constants.ANALYTICS_HISTORY_QUOTA_FETCH_ERROR,
   payload: {
     error,
-    projectUuid,
+    tenantUuid,
     quotaUuid,
+  },
+});
+
+export const analyticsTenantsFetch = () => ({
+  type: constants.ANALYTICS_TENANTS_FETCH,
+});
+
+export const analyticsTenantsFetchSuccess = (tenants: Project[]) => ({
+  type: constants.ANALYTICS_TENANTS_FETCH_SUCCESS,
+  payload: {
+    tenants,
+  },
+});
+
+export const analyticsTenantsFetchError = (error: Response) => ({
+  type: constants.ANALYTICS_TENANTS_FETCH_ERROR,
+  payload: {
+    error,
   },
 });

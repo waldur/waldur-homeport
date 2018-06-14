@@ -109,7 +109,7 @@ export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) =
 const mapStateToProps = (state, ownProps) => ({
   pieChartsData: getPieChartsDataSelector(state, ownProps),
   barChartsData: getBarChartsDataSelector(state, ownProps),
-  barChartsLoading: getBarChartsLoadingSelector(state, ownProps),
+  barChartsLoading: getBarChartsLoadingSelector(state),
   exceededQuotas: getExceededQuotasSelector(state, ownProps),
 });
 

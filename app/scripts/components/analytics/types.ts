@@ -13,12 +13,17 @@ export interface Project {
   quotas: Quota[];
 }
 
+export interface Tenant extends Project {
+  url?: string;
+}
+
 export interface Payload {
   customerName: string;
   projects: Project[];
+  tenants: Tenant[];
   error: any;
   searchValue: string;
-  projectUuid: string;
+  tenantUuid: string;
   quotaUuid: string;
   quotas: string;
 }
@@ -26,7 +31,8 @@ export interface Payload {
 export interface State {
   loading: boolean;
   errors: any[];
-  projects: any[];
+  projects: Project[];
+  tenants: any[];
   searchValue: string;
   quotasHistory: any;
 }
