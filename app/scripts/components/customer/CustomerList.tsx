@@ -54,18 +54,22 @@ export const TableComponent = props => {
     {
       title: translate('Organization'),
       render: OrganizationLink,
+      orderField: 'name',
     },
     {
       title: translate('Abbreviation'),
       render: AbbreviationField,
+      orderField: 'abbreviation',
     },
     {
       title: translate('Created'),
       render: CreatedDateField,
+      orderField: 'created',
     },
     {
       title: translate('Start day of accounting'),
       render: AccountingStartDateField,
+      orderField: 'accounting_start_date',
     },
     {
       title: translate('VMs'),
