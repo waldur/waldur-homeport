@@ -112,6 +112,7 @@ export const TableComponent = props => {
       title: translate('Estimated cost'),
       render: EstimatedCostField,
       visible: accountingPeriodIsCurrent,
+      orderField: 'estimated_cost',
     },
     {
       title: translate('Cost'),
