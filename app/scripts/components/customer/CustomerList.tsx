@@ -107,6 +107,7 @@ export const TableComponent = props => {
       title: translate('Current cost'),
       render: CurrentCostField,
       visible: accountingPeriodIsCurrent,
+      orderField: 'current_cost',
     },
     {
       title: translate('Estimated cost'),
@@ -116,8 +117,9 @@ export const TableComponent = props => {
     },
     {
       title: translate('Cost'),
-      render: EstimatedCostField,
+      render: CurrentCostField,
       visible: !accountingPeriodIsCurrent,
+      orderField: 'current_cost',
     },
   ]);
 
