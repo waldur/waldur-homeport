@@ -107,6 +107,7 @@ export const TableComponent = props => {
       title: translate('Current cost'),
       render: CurrentCostField,
       visible: accountingPeriodIsCurrent,
+      orderField: 'current_cost',
     },
     {
       title: translate('Estimated cost'),
@@ -116,8 +117,9 @@ export const TableComponent = props => {
     },
     {
       title: translate('Cost'),
-      render: EstimatedCostField,
+      render: CurrentCostField,
       visible: !accountingPeriodIsCurrent,
+      orderField: 'current_cost',
     },
   ]);
 
@@ -175,7 +177,8 @@ const formatFilter = filter => {
     if (filter.accounting_period) {
       return {
         accounting_is_running: filter.accounting_is_running,
-        ...filter.accounting_period.value,
+        year: filter.accounting_period.value.year,
+        month: filter.accounting_period.value.month,
       };
     }
     return filter;
