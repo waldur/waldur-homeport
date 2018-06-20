@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { ServiceProvider } from '@waldur/analytics/types';
+import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { TranslateProps } from '@waldur/i18n';
 
 import './VmOverviewFilter.scss';
@@ -15,14 +16,19 @@ export const VmOverviewFilter = (props: VmOverviewFilterProps) => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
       <form className="form-inline" id="vm-overview-filter">
-        <div className="checkbox awesome-checkbox m-r-sm">
-          <Field name="shared" component="input" type="checkbox" id="show-shared"/>
-          <label htmlFor="show-shared">
-            {props.translate('Show shared')}
-          </label>
-        </div>
+        <Field
+          name="shared"
+          component={prop =>
+            <AwesomeCheckbox
+              id="show-shared"
+              label={props.translate('Show shared')}
+              {...prop.input}
+            />
+          }
+        />
         <div className="form-group">
-          <Field name="service_provider"
+          <Field
+            name="service_provider"
             component={prop =>
               <Select
                 className="service-provider-selector"
