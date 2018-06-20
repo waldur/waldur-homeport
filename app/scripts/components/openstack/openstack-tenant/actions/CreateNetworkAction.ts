@@ -9,7 +9,7 @@ export default function createAction(): ResourceAction {
     method: 'POST',
     tab: 'networks',
     title: translate('Create'),
-    dialogTitle: translate('Create network for '),
+    dialogTitle: translate('Create network for OpenStack tenant'),
     iconClass: 'fa fa-plus',
     fields: [
       createLatinNameField(),

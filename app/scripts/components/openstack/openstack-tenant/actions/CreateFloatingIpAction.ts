@@ -16,7 +16,7 @@ export default function createAction(): ResourceAction {
     method: 'POST',
     tab: 'floating_ips',
     title: translate('Create'),
-    dialogTitle: translate('Create floating IP for '),
+    dialogTitle: translate('Create floating IP for OpenStack tenant'),
     iconClass: 'fa fa-plus',
     validators: [
       validateState('OK'),

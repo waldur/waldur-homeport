@@ -9,7 +9,7 @@ export default function createAction(): ResourceAction {
     method: 'POST',
     tab: 'backups',
     title: translate('Create'),
-    dialogTitle: translate('Create backup for '),
+    dialogTitle: translate('Create backup for OpenStack instance'),
     iconClass: 'fa fa-plus',
     validators: [validateState('OK')],
     fields: [
