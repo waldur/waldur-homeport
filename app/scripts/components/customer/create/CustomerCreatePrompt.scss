@@ -5,40 +5,6 @@
     border-color: #337ab7;
     color: #fff;
   }
-
-  input[type="radio"] {
-    display: none;
-  }
-}
-
-.message-button {
-  padding: 10px;
-  cursor: pointer;
-  display: block;
-  text-align: center;
-  border: 1px solid #e5e5e5;
-
-
-  &::before {
-    font-size: 57px;
-    display: block;
-  }
-
-  &:hover {
-    background-color: #e6e6e6;
-  }
-}
-
-.message-button__title {
-  font-size: 20px;
-  font-weight: 600;
-  padding-top: 10px;
-  display: block;
-}
-
-.message-button__content {
-  padding-top: 10px;
-  font-weight: 400;
 }
 
 @media(min-width:768px) {

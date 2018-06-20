@@ -1,11 +1,15 @@
 import * as React from 'react';
 import { InjectedFormProps } from 'redux-form';
+import { Field } from 'redux-form';
 
-import { SubmitButton, CancelButton, FormContainer, RadioButtonIconField, RadioButtonIconChoice, FieldError } from '@waldur/form-react';
+import { SubmitButton, CancelButton, FieldError } from '@waldur/form-react';
+import { RadioButtonChoice, RadioButtonField } from '@waldur/form-react/RadioButtonField';
 import { TranslateProps } from '@waldur/i18n';
+import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import * as constants from './constants';
 import './CustomerCreatePrompt.scss';
+import { MessageButton } from './MessageButton';
 
 interface CustomerCreatePromptProps extends TranslateProps, InjectedFormProps {
   canRegisterProvider: boolean;
@@ -45,63 +49,65 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
         return 'col-sm-4';
     }
   };
+  const renderRadioButtons = field => (
+    <RadioButtonField
+      {...field}
+      name={constants.FIELD_NAMES.role}
+      wrapperClassName="row"
+      defaultItemClassName={getColumnClassName()}
+      isHiddenInput={true}
+      choices={[
+        new RadioButtonChoice(constants.ROLES.customer, (
+          <MessageButton
+            wrapperClassName="svgfonticon svgfonticon-customer"
+            title={translate('Customer')}
+          >
+            {translate('Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place.')}
+          </MessageButton>
+        )),
+        new RadioButtonChoice(constants.ROLES.expert, (
+          <MessageButton
+            wrapperClassName="svgfonticon svgfonticon svgfonticon-expert"
+            title={translate('Expert')}
+          >
+            {translate('Register as a customer of our portal that can also offer own experts to the other customers of Waldur.')}
+          </MessageButton>
+        )),
+        new RadioButtonChoice(constants.ROLES.provider, (
+          <MessageButton
+            wrapperClassName="svgfonticon svgfonticon-provider"
+            title={translate('Service Provider')}
+          >
+            {translate('Register as a customer of our portal and provider your cloud services through Waldur\'s Marketplace.')}
+          </MessageButton>
+        )),
+      ]}
+    />
+  );
   return (
     <div className="customer-create-prompt">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="modal-header">
-          <h3 className="modal-message-button__title">{translate('Please pick the profile that describes your organization.')}</h3>
-        </div>
-        <div className="modal-body">
-          <FormContainer
-            submitting={submitting}
-            clearOnUnmount={false}
-          >
-            <RadioButtonIconField
-              name={constants.FIELD_NAMES.role}
-              wrapperClassName="row"
-              defaultItemClassName={getColumnClassName()}
-              choices={[
-                RadioButtonIconChoice(constants.ROLES.customer, (
-                  <div className="message-button svgfonticon svgfonticon-customer">
-                    <div className="message-button__title">{translate('Customer')}</div>
-                    <div className="message-button__content">
-                      {translate('Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place.')}
-                    </div>
-                  </div>
-                )),
-                canRegisterExpert && RadioButtonIconChoice(constants.ROLES.expert, (
-                  <div className="message-button svgfonticon svgfonticon-expert">
-                    <div className="message-button__title">{translate('Expert')}</div>
-                    <div className="message-button__content">
-                      {translate('Register as a customer of our portal that can also offer own experts to the other customers of Waldur.')}
-                    </div>
-                  </div>
-                )),
-                canRegisterProvider && RadioButtonIconChoice(constants.ROLES.provider, (
-                  <div className="message-button svgfonticon svgfonticon-provider">
-                    <div className="message-button__title">{translate('Service Provider')}</div>
-                    <div className="message-button__content">
-                      {translate('Register as a customer of our portal and provider your cloud services through Waldur\'s Marketplace.')}
-                    </div>
-                  </div>
-                )),
-              ]}
+        <ModalDialog
+          title={translate('Please pick the profile that describes your organization.')}
+          footer={<div>
+            <div className="content-center">
+              <FieldError error={error} />
+            </div>
+            <SubmitButton
+              submitting={submitting}
+              label={translate('Yes, I would')}
             />
-          </FormContainer>
-        </div>
-        <div className="modal-footer">
-          <div className="content-center">
-            <FieldError error={error} />
-          </div>
-          <SubmitButton
-            submitting={submitting}
-            label={translate('Yes, I would')}
+            <CancelButton
+              label={translate('No, I will do it later')}
+              onClick={closeModal}
+            />
+          </div>}
+        >
+          <Field
+            name={constants.FIELD_NAMES.role}
+            component={renderRadioButtons}
           />
-          <CancelButton
-            label={translate('No, I will do it later')}
-            onClick={closeModal}
-          />
-        </div>
+        </ModalDialog>
       </form>
     </div>
   );

@@ -1,9 +1,8 @@
-import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm, InjectedFormProps } from 'redux-form';
+import { reduxForm } from 'redux-form';
 
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { withTranslation } from '@waldur/i18n';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -11,15 +10,6 @@ import * as constants from './constants';
 import { CustomerCreatePrompt } from './CustomerCreatePrompt';
 import { getOwnerCanRegisterProvider, getOwnerCanRegisterExpert } from './selectors';
 import * as utils from './utils';
-
-interface PureCustomerCreatePromptContainerProps extends TranslateProps, InjectedFormProps {
-  canRegisterProvider: boolean;
-  canRegisterExpert: boolean;
-  closeModal(): void;
-  onSubmit(data: { [key: string]: string }): void;
-}
-
-export const PureCustomerCreatePromptContainer = (props: PureCustomerCreatePromptContainerProps) => (<CustomerCreatePrompt {...props} />);
 
 const mapStateToProps = state => ({
   canRegisterProvider: getOwnerCanRegisterProvider(state),
@@ -49,6 +39,6 @@ const enhance = compose(
   withTranslation,
 );
 
-export const CustomerCreatePromptContainer = enhance(PureCustomerCreatePromptContainer);
+export const CustomerCreatePromptContainer = enhance(CustomerCreatePrompt);
 
 export default connectAngularComponent(CustomerCreatePromptContainer, ['resolve']);

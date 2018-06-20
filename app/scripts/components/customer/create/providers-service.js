@@ -15,12 +15,4 @@ export default class providersService {
       enable_notifications: false,
     });
   }
-
-  getByCustomer(customer) {
-    return this.$http.get(this.endpoint, {
-      params: {
-        customer: customer.uuid,
-      }
-    });
-  }
 }
