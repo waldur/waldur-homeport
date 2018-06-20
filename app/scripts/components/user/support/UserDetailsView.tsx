@@ -29,7 +29,7 @@ export const PureUserDetailsView = (props: UserDetailsViewProps) => (
     )}
     <Tab eventKey={2} title={props.translate('Audit log')}>
       <div className="m-t-sm">
-        <UserEvents user={props.user}/>
+        <UserEvents user={props.user} showActions={false}/>
       </div>
     </Tab>
     {props.userManageIsVisible && (
