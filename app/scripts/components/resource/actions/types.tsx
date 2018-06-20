@@ -60,7 +60,6 @@ export interface ResourceAction<Resource = BaseResource> {
   dialogTitle?: string;
   tab?: string;
   iconClass?: string;
-  order?: string[];
   fields?: Array<ActionField<Resource>>;
   type: ActionType;
   successMessage?: string;

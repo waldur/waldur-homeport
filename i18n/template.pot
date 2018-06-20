@@ -1101,7 +1101,7 @@ msgid "Create application"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/actions/CreateBackupAction.ts
-msgid "Create backup for"
+msgid "Create backup for OpenStack instance"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
@@ -1113,11 +1113,11 @@ msgid "Create expert request"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
-msgid "Create floating IP for"
+msgid "Create floating IP for OpenStack tenant"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/actions/CreateNetworkAction.ts
-msgid "Create network for"
+msgid "Create network for OpenStack tenant"
 msgstr ""
 
 #: app/scripts/components/user/hooks/hook-details.html
@@ -1154,13 +1154,10 @@ msgid "Create request"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
-msgid "Create security group for"
+msgid "Create security group for OpenStack tenant"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/module.js
-msgid "Create snapshot for"
-msgstr ""
-
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 msgid "Create snapshot for OpenStack volume"
 msgstr ""
