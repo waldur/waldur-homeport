@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
+import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { Section } from '@waldur/marketplace/types';
 
 interface FeatureFilterListProps {
@@ -26,17 +27,17 @@ const FeatureFilter = (props: FeatureFilterProps) => (
     </h3>
 
     {props.section.features.map((feature, index) => (
-      <div className="checkbox awesome-checkbox checkbox-success" key={index}>
-        <Field
-          component="input"
-          type="checkbox"
-          id={`filter-item-${feature.key}`}
-          name={`filter-item-${feature.key}`}
-        />
-        <label htmlFor={`filter-item-${feature.key}`}>
-          {feature.title}
-        </label>
-      </div>
+      <Field
+        key={index}
+        name={`filter-item-${feature.key}`}
+        component={prop =>
+          <AwesomeCheckbox
+            id={`filter-item-${feature.key}`}
+            label={feature.title}
+            {...prop.input}
+          />
+        }
+      />
     ))}
   </section>
 );
