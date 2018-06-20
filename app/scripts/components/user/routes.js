@@ -49,6 +49,14 @@ const tabs = {
 };
 
 // @ngInject
+function requireIdParam($stateParams, $q) {
+  // Abort state transition if mandatory route parameter (UUID) is not specified
+  if (!$stateParams.uuid) {
+    return $q.reject('UUID is mandatory parameter');
+  }
+}
+
+// @ngInject
 export default function($stateProvider) {
   $stateProvider
     .state('profile', {
@@ -76,6 +84,9 @@ export default function($stateProvider) {
         workspace: WOKSPACE_NAMES.user
       },
       template: '<user-details></user-details>',
+      resolve: {
+        requireIdParam,
+      },
     })
 
     .state('users.details', angular.copy(tabs.events))
