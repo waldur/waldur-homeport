@@ -1,5 +1,5 @@
 import routes from './routes';
-import marketplaceLanding from './landing/LandingPage';
+import marketplaceLanding from './landing/LandingPageContainer';
 import marketplaceCompare from './compare/ComparisonContainer';
 import comparisonIndicator from './compare/ComparisonIndicator';
 import marketplaceCheckout from './cart/CheckoutPage';

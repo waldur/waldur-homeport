@@ -1810,6 +1810,10 @@ msgstr ""
 msgid "Explain price"
 msgstr ""
 
+#: app/scripts/components/marketplace/landing/LandingPage.tsx
+msgid "Explore Waldur Marketplace"
+msgstr ""
+
 #: app/scripts/components/table-react/TableExportButton.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Export as"
@@ -4471,6 +4475,10 @@ msgstr ""
 msgid "Reason unknown, please contact support."
 msgstr ""
 
+#: app/scripts/components/marketplace/landing/LandingPage.tsx
+msgid "Recent additions"
+msgstr ""
+
 #: app/scripts/components/billing/billing-record-details.html
 msgid "Record no."
 msgstr ""
@@ -5767,6 +5775,10 @@ msgstr ""
 msgid "There are no available users."
 msgstr ""
 
+#: app/scripts/components/marketplace/landing/CategoriesList.tsx
+msgid "There are no categories in marketplace yet."
+msgstr ""
+
 #: app/scripts/components/issues/comments/IssueCommentsList.spec.tsx
 #: app/scripts/components/issues/comments/IssueCommentsList.tsx
 msgid "There are no comments yet."
@@ -6144,6 +6156,10 @@ msgstr ""
 
 #: app/scripts/components/core/DownloadLink/effects.tsx
 msgid "Unable to load file."
+msgstr ""
+
+#: app/scripts/components/marketplace/landing/CategoriesList.tsx
+msgid "Unable to load marketplace categories."
 msgstr ""
 
 #: app/scripts/components/project/ProjectCreateContainer.tsx
