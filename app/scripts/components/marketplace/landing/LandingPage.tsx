@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { ENV } from '@waldur/core/services';
 import { TranslateProps } from '@waldur/i18n';
 import { FilterBar } from '@waldur/marketplace/common/FilterBar';
 import { ProductGrid } from '@waldur/marketplace/common/ProductGrid';
@@ -15,7 +16,9 @@ interface LandingPage extends TranslateProps {
 
 export const LandingPage = props => (
   <div>
-    <HeroSection title={props.translate('Explore Waldur Marketplace')}>
+    <HeroSection title={props.translate(
+      'Explore {deployment} Marketplace',
+      {deployment: ENV.shortPageTitle})}>
       <FilterBar/>
     </HeroSection>
     <div className="row">
