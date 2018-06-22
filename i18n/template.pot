@@ -1811,7 +1811,7 @@ msgid "Explain price"
 msgstr ""
 
 #: app/scripts/components/marketplace/landing/LandingPage.tsx
-msgid "Explore Waldur Marketplace"
+msgid "Explore {deployment} Marketplace"
 msgstr ""
 
 #: app/scripts/components/table-react/TableExportButton.tsx

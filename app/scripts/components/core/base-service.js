@@ -108,6 +108,9 @@ export function baseServiceClass($q, $http, $resource, ENV, $rootScope, listCach
             let result = [];
             for (let i = 1; i < vm.pages + 1; i++) {
               let page = pages[i];
+              if (!page) {
+                continue;
+              }
               for (let j = 0; j < page.length; j++) {
                 result.push(page[j]);
               }
