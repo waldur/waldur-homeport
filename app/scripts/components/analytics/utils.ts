@@ -84,7 +84,7 @@ export const getBarChartsData = quotas => quotas.map(quota => {
     usageData.push(usage);
   }
   return {
-    id: quota.uuid,
+    id: quota.uuid[0],
     label: quota.label,
     loading: quota.loading,
     erred: quota.erred,
