@@ -13,36 +13,36 @@ export const categories: Category[] = [
   {
     icon: BillingIcon,
     title: 'Billing',
-    counter: 90,
+    offering_count: 90,
   },
   {
     icon: CrmIcon,
     title: 'Customer relationship management',
-    counter: 100,
+    offering_count: 100,
   },
   {
     icon: HpcIcon,
     title: 'High performance computing',
-    counter: 50,
+    offering_count: 50,
   },
   {
     icon: IdentityIcon,
     title: 'Identity management',
-    counter: 10,
+    offering_count: 10,
   },
   {
     icon: PublicCloudIcon,
     title: 'Public cloud',
-    counter: 300,
+    offering_count: 300,
   },
   {
     icon: ServiceDeskIcon,
     title: 'Service desk',
-    counter: 1000,
+    offering_count: 1000,
   },
   {
     icon: VpcIcon,
     title: 'Virtual private cloud',
-    counter: 100,
+    offering_count: 100,
   },
 ];

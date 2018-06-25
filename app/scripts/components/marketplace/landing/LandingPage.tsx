@@ -1,28 +1,35 @@
 import * as React from 'react';
 
+import { ENV } from '@waldur/core/services';
+import { TranslateProps } from '@waldur/i18n';
 import { FilterBar } from '@waldur/marketplace/common/FilterBar';
 import { ProductGrid } from '@waldur/marketplace/common/ProductGrid';
-import { connectAngularComponent } from '@waldur/store/connect';
+import { CategoriesListType } from '@waldur/marketplace/types';
 
-import { categories, products } from '../fixtures';
-import { CategoryCard } from './CategoryCard';
+import { products } from '../fixtures';
+import { CategoriesList } from './CategoriesList';
 import { HeroSection } from './HeroSection';
 
-export const LandingPage = () => (
+interface LandingPage extends TranslateProps {
+  categories: CategoriesListType;
+}
+
+export const LandingPage = props => (
   <div>
-    <HeroSection title="Explore Waldur Marketplace">
+    <HeroSection title={props.translate(
+      'Explore {deployment} Marketplace',
+      {deployment: ENV.shortPageTitle})}>
       <FilterBar/>
     </HeroSection>
     <div className="row">
-      {categories.map((category, index) => (
-        <div key={index} className="col-md-3 col-sm-6">
-          <CategoryCard category={category}/>
-        </div>
-      ))}
+      <CategoriesList
+        translate={props.translate}
+        {...props.categories}
+      />
     </div>
-    <h2 className="m-b-md">Recent additions</h2>
+    <h2 className="m-b-md">
+      {props.translate('Recent additions')}
+    </h2>
     <ProductGrid products={products}/>
   </div>
 );
-
-export default connectAngularComponent(LandingPage);

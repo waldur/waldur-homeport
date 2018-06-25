@@ -44,6 +44,11 @@ export interface Section {
 export interface Category {
   title: string;
   icon: string;
-  children?: Category[];
-  counter: number;
+  offering_count: number;
+}
+
+export interface CategoriesListType {
+  items: Category[];
+  loaded: boolean;
+  loading: boolean;
 }

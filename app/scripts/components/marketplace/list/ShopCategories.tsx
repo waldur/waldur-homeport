@@ -20,7 +20,7 @@ const Node = (props: NodeProps) => {
         {props.category.title}
       </Link>
       {' '}
-      ({props.category.counter})
+      ({props.category.offering_count})
     </li>
   );
 };

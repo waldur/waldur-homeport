@@ -4,12 +4,21 @@ import { getEventsList } from '@waldur/events/BaseEventsList';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { User } from '@waldur/workspace/types';
 
-export const UserEvents: React.SFC<{user: User}> = getEventsList({
+interface UserEventsProps {
+  showActions?: boolean;
+  user: User;
+}
+
+export const UserEvents: React.SFC<UserEventsProps> = getEventsList({
   mapPropsToFilter: props => ({
     scope: props.user.url,
     feature: 'users',
     exclude_extra: true,
   }),
 });
+
+UserEvents.defaultProps = {
+  showActions: true,
+};
 
 export default connectAngularComponent(UserEvents, ['user']);

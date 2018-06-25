@@ -5,6 +5,7 @@ import Select from 'react-select';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
+import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import './CustomerListFilter.scss';
@@ -33,12 +34,16 @@ export const PureCustomerListFilter = props => (
       <form className="form-inline" id="customer-list-filter">
         <div className="row">
           <div className="col-sm-9">
-            <div className="checkbox awesome-checkbox checkbox-primary m-r-sm">
-              <Field name="accounting_is_running" component="input" type="checkbox" id="accounting-is-running"/>
-              <label htmlFor="accounting-is-running">
-                {props.translate('Show with running accounting')}
-              </label>
-            </div>
+            <Field
+              name="accounting_is_running"
+              component={prop =>
+                <AwesomeCheckbox
+                  label={props.translate('Show with running accounting')}
+                  id="accounting-is-running"
+                  {...prop.input}
+                />
+              }
+            />
           </div>
           <div className="col-sm-3">
             <div className="form-group">

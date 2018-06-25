@@ -65,7 +65,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
       snapshot: {
         tab: 'snapshots',
         title: gettext('Create'),
-        dialogTitle: gettext('Create snapshot for '),
+        dialogTitle: gettext('Create snapshot for OpenStack volume'),
         iconClass: 'fa fa-plus',
         component: 'snapshotCreateDialog',
         fields: {

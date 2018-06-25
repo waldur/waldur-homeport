@@ -10,7 +10,7 @@ export default function createAction(): ResourceAction {
     method: 'POST',
     tab: 'security_groups',
     title: translate('Create'),
-    dialogTitle: translate('Create security group for '),
+    dialogTitle: translate('Create security group for OpenStack tenant'),
     iconClass: 'fa fa-plus',
     fields: [
       createLatinNameField(),

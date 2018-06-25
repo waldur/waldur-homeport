@@ -54,18 +54,22 @@ export const TableComponent = props => {
     {
       title: translate('Organization'),
       render: OrganizationLink,
+      orderField: 'name',
     },
     {
       title: translate('Abbreviation'),
       render: AbbreviationField,
+      orderField: 'abbreviation',
     },
     {
       title: translate('Created'),
       render: CreatedDateField,
+      orderField: 'created',
     },
     {
       title: translate('Start day of accounting'),
       render: AccountingStartDateField,
+      orderField: 'accounting_start_date',
     },
     {
       title: translate('VMs'),
@@ -103,16 +107,19 @@ export const TableComponent = props => {
       title: translate('Current cost'),
       render: CurrentCostField,
       visible: accountingPeriodIsCurrent,
+      orderField: 'current_cost',
     },
     {
       title: translate('Estimated cost'),
       render: EstimatedCostField,
       visible: accountingPeriodIsCurrent,
+      orderField: 'estimated_cost',
     },
     {
       title: translate('Cost'),
-      render: EstimatedCostField,
+      render: CurrentCostField,
       visible: !accountingPeriodIsCurrent,
+      orderField: 'current_cost',
     },
   ]);
 
@@ -170,7 +177,8 @@ const formatFilter = filter => {
     if (filter.accounting_period) {
       return {
         accounting_is_running: filter.accounting_is_running,
-        ...filter.accounting_period.value,
+        year: filter.accounting_period.value.year,
+        month: filter.accounting_period.value.month,
       };
     }
     return filter;

@@ -8,7 +8,7 @@ import { Field } from './Field';
 import { ResourceSummaryProps } from './types';
 
 const formatErrorField = (props: ResourceSummaryProps) => {
-  if (props.resource.state !== 'Erred') {
+  if (props.resource.state !== 'Erred' && props.resource.runtime_state !== 'ERROR') {
     return null;
   }
   if (!props.resource.error_message) {

@@ -20,7 +20,7 @@ export const CategoryCard = (props: CategoryCardProps) => (
           {props.category.title}
         </Link>
       </h3>
-      {props.category.counter} items
+      {props.category.offering_count} items
     </div>
   </div>
 );

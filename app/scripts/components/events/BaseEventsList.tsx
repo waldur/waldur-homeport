@@ -18,7 +18,7 @@ const EventDateField = ({ row }) => (
 const TableComponent = props => {
   const { translate } = props;
   return (
-    <Table {...props} columns={[
+    <Table {...props} columns={props.filterColumns([
       {
         title: translate('Message'),
         render: EventMessageField,
@@ -31,8 +31,9 @@ const TableComponent = props => {
         title: translate('Actions'),
         render: EventDetailsButton,
         className: 'text-center col-md-2',
+        visible: props.showActions,
       },
-    ]}
+    ])}
     hasQuery={true}
     verboseName={translate('events')}
     actions={<EventTypesButton/>}/>
