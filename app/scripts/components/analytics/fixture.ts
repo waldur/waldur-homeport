@@ -4,7 +4,7 @@ export const quotas = {
     uuid: '049fab371f2844e79d2997eadfbb4cd6',
     name: 'ram',
     label: 'RAM',
-    limit: 5000,
+    limit: 50000,
     usage: 26033,
   },
   registeredUnlimited: {
@@ -470,7 +470,10 @@ export const quotas = {
               threshold: 0,
               url: 'https://rest-test.nodeconductor.com/api/quotas/082c6fd918f0432296f00fab0cc30234/',
               usage: 2048,
-              uuid: '082c6fd918f0432296f00fab0cc30234',
+              uuid: [
+                '082c6fd918f0432296f00fab0cc30234',
+                'ed561cdf1656432494761e457049f337',
+              ],
             },
             point: 1527258000,
           },
@@ -482,7 +485,10 @@ export const quotas = {
               threshold: 0,
               url: 'https://rest-test.nodeconductor.com/api/quotas/082c6fd918f0432296f00fab0cc30234/',
               usage: 2048,
-              uuid: '082c6fd918f0432296f00fab0cc30234',
+              uuid: [
+                '082c6fd918f0432296f00fab0cc30234',
+                'ed561cdf1656432494761e457049f337',
+              ],
             },
             point: 1527443142,
           },
@@ -494,7 +500,10 @@ export const quotas = {
               threshold: 0,
               url: 'https://rest-test.nodeconductor.com/api/quotas/082c6fd918f0432296f00fab0cc30234/',
               usage: 2048,
-              uuid: '082c6fd918f0432296f00fab0cc30234',
+              uuid: [
+                '082c6fd918f0432296f00fab0cc30234',
+                'ed561cdf1656432494761e457049f337',
+              ],
             },
             point: 1527628285,
           },
@@ -516,7 +525,10 @@ export const quotas = {
               threshold: 0,
               url: 'https://rest-test.nodeconductor.com/api/quotas/fcd04f77023a43be931749434cf7b777/',
               usage: 0,
-              uuid: 'fcd04f77023a43be931749434cf7b777',
+              uuid: [
+                'fcd04f77023a43be931749434cf7b777',
+                '9d3bece47e3745f0b6320e49dbe92443',
+              ],
             },
             point: 1527258000,
           },
@@ -528,7 +540,10 @@ export const quotas = {
               threshold: 0,
               url: 'https://rest-test.nodeconductor.com/api/quotas/fcd04f77023a43be931749434cf7b777/',
               usage: 0,
-              uuid: 'fcd04f77023a43be931749434cf7b777',
+              uuid: [
+                'fcd04f77023a43be931749434cf7b777',
+                '9d3bece47e3745f0b6320e49dbe92443',
+              ],
             },
             point: 1527443142,
           },
@@ -540,7 +555,10 @@ export const quotas = {
               threshold: 0,
               url: 'https://rest-test.nodeconductor.com/api/quotas/fcd04f77023a43be931749434cf7b777/',
               usage: 0,
-              uuid: 'fcd04f77023a43be931749434cf7b777',
+              uuid: [
+                'fcd04f77023a43be931749434cf7b777',
+                '9d3bece47e3745f0b6320e49dbe92443',
+              ],
             },
             point: 1527628285,
           },
@@ -561,8 +579,11 @@ export const quotas = {
               scope: 'https://rest-test.nodeconductor.com/api/openstack-tenants/faa3df51b3b949b9ba5c9612a725bf70/',
               threshold: 0,
               url: 'https://rest-test.nodeconductor.com/api/quotas/5adbf62179a143e4b4ed29d796976ff1/',
-              usage: 0,
-              uuid: '5adbf62179a143e4b4ed29d796976ff1',
+              usage: 6,
+              uuid: [
+                '5adbf62179a143e4b4ed29d796976ff1',
+                '26b963516cf04a69ab7a45a2972787d0',
+              ],
             },
             point: 1527258000,
           },
@@ -573,8 +594,11 @@ export const quotas = {
               scope: 'https://rest-test.nodeconductor.com/api/openstack-tenants/faa3df51b3b949b9ba5c9612a725bf70/',
               threshold: 0,
               url: 'https://rest-test.nodeconductor.com/api/quotas/5adbf62179a143e4b4ed29d796976ff1/',
-              usage: 0,
-              uuid: '5adbf62179a143e4b4ed29d796976ff1',
+              usage: 6,
+              uuid: [
+                '5adbf62179a143e4b4ed29d796976ff1',
+                '26b963516cf04a69ab7a45a2972787d0',
+              ],
             },
             point: 1527443142,
           },
@@ -585,8 +609,11 @@ export const quotas = {
               scope: 'https://rest-test.nodeconductor.com/api/openstack-tenants/faa3df51b3b949b9ba5c9612a725bf70/',
               threshold: 0,
               url: 'https://rest-test.nodeconductor.com/api/quotas/5adbf62179a143e4b4ed29d796976ff1/',
-              usage: 0,
-              uuid: '5adbf62179a143e4b4ed29d796976ff1',
+              usage: 6,
+              uuid: [
+                '5adbf62179a143e4b4ed29d796976ff1',
+                '26b963516cf04a69ab7a45a2972787d0',
+              ],
             },
             point: 1527628285,
           },
@@ -953,6 +980,65 @@ export const barCharts = {
     label: 'Snapshots',
     exceeds: true,
     loading: true,
+  },
+  resulting: {
+    id: '082c6fd918f0432296f00fab0cc30234',
+    label: 'RAM',
+    exceeds: false,
+    loading: false,
+    erred: undefined,
+    options: {
+      color: ['rgb(255, 159, 64)', 'rgb(54, 162, 235)'],
+      title: {
+        text: 'RAM',
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        },
+      },
+      toolbox: {
+        show: true,
+        orient: 'vertical',
+        left: 'right',
+        top: 'center',
+        feature: {
+          mark: { show: true },
+          dataView: { show: true, readOnly: false },
+          magicType: { show: true, type: ['line', 'bar', 'stack', 'tiled'] },
+          restore: { show: true },
+          saveAsImage: { show: true },
+        },
+      },
+      calculable: true,
+      xAxis: [
+        {
+          type: 'category',
+          axisTick: { show: false },
+          data: ['23rd May'],
+        },
+      ],
+      yAxis: [
+        {
+          type: 'value',
+        },
+      ],
+      series: [
+        {
+          name: 'Usage',
+          type: 'bar',
+          barGap: 0,
+          data: [2048],
+        },
+        {
+          name: 'Limit',
+          type: 'bar',
+          barGap: 0,
+          data: [20480],
+        },
+      ],
+    },
   },
 };
 

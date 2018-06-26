@@ -187,10 +187,15 @@ export const mergeQuotas = (quotaA, quotaB) => {
   if (!quotaB) { return quotaA; }
   return {
     ...quotaA,
-    uuid: [
-      ...quotaA.uuid,
-      quotaB.uuid,
-    ],
+    uuid: Array.isArray(quotaA.uuid) ?
+      [
+        ...quotaA.uuid,
+        quotaB.uuid,
+      ] :
+      [
+        quotaA.uuid,
+        quotaB.uuid,
+      ],
     limit: quotaB.limit > -1 ?
       (quotaA.limit > -1 ? quotaA.limit + quotaB.limit : quotaB.limit) :
       quotaA.limit,

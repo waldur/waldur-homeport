@@ -33,7 +33,7 @@ describe('Analytics utils', () => {
   });
 
   it('Get bar chart options', () => {
-    expect(utils.getBarChartsData(quotas.resultingQuotas.barCharts)).toEqual(barCharts);
+    expect(utils.getBarChartsData(quotas.resultingQuotas.barCharts)).toEqual([barCharts.resulting]);
   });
 
   it('Checks if qouata is exceeds', () => {
@@ -74,7 +74,7 @@ describe('Analytics utils', () => {
   });
 
   it('Combine history quotas', () => {
-    expect(utils.combineQuotas(quotas.quotasArr.historyQuotasBeforeCombine))
+    expect(utils.combineHistoryQuotas(quotas.quotasArr.historyQuotasBeforeCombine))
       .toEqual(quotas.quotasArr.historyQuotasAfterCombine);
   });
 });
