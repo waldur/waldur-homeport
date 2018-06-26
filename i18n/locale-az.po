@@ -7,7 +7,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"X-Generator: Poedit 2.0.8\n"
+"X-Generator: Poedit 2.0.7\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: az_AZ@latin\n"
@@ -89,7 +89,7 @@ msgstr "Giriş açarı ID"
 
 #: app/scripts/components/digitalocean/DigitalOceanForm.tsx
 msgid "Access token"
-msgstr ""
+msgstr "Giriş token"
 
 #: app/scripts/components/auth/auth-activation.html
 msgid "Account activation"
@@ -527,7 +527,7 @@ msgstr "Mobil İD-dən istifadə etməklə autentifikasiya istifadəçi tərəfi
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Auto-assign floating IP"
-msgstr ""
+msgstr "Avtomatik təyin olunan IP"
 
 #: app/scripts/components/openstack/OpenStackForm.tsx
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
@@ -540,7 +540,7 @@ msgstr "Jupyter kodu kimi əlçatandır?"
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
 msgid "Available quota usage: {usage}"
-msgstr ""
+msgstr "Mövcud kvota: {istifadə}"
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Azure Active Directory ID"
@@ -3463,82 +3463,82 @@ msgstr "Yalnız müştəri sahibi və ya işçi provayder yarada bilər."
 
 #: app/scripts/components/invitations/actions/create.js
 msgid "Only customer owner or staff can invite users."
-msgstr ""
+msgstr "Yalnız müştəri sahibi və ya işçi istifadəçiləri dəvət edə bilər."
 
 #: app/scripts/components/providers/provider-list.js
 msgid "Only customer owner or staff can remove provider."
-msgstr ""
+msgstr "Yalnız müştəri sahibi və ya işçi provayderləri çıxara bilər."
 
 #: app/scripts/components/providers/provider-list.js
 msgid "Only customer owner or staff can unlink provider."
-msgstr ""
+msgstr "Yalnız müştəri sahibi və ya işçi provayderin bağlantısını kəsə bilər."
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Only distributions with APT package manager are supported (Debian, Ubuntu...)"
-msgstr ""
+msgstr "Yalnız APT paket meneceri ilə paylamalar dəstəklənir (Debian, Ubuntu ...)"
 
 #: app/scripts/components/invitations/actions/cancel.js
 msgid "Only pending invitation can be canceled."
-msgstr ""
+msgstr "Yalnız natamam dəvət ləğv edilə bilər."
 
 #: app/scripts/components/invitations/actions/send.js
 msgid "Only pending invitation can be sent again."
-msgstr ""
+msgstr "Yalnız natamam dəvət yenidən göndərilə bilər."
 
 #: app/scripts/components/providers/provider-list.js
 msgid "Only staff can create provider."
-msgstr ""
+msgstr "Yalnız işçi heyət provayder yarada bilər."
 
 #: app/scripts/components/resource/resource-provision-policy.js
 msgid "Only staff can create virtual private cloud."
-msgstr ""
+msgstr "Yalnız işçi heyət virtual özəl bulud yarada bilər."
 
 #: app/scripts/components/customer/details/customer-manage.html
 msgid "Only staff can remove organization."
-msgstr ""
+msgstr "Yalnız işçi heyət təşkilatı çıxara bilər."
 
 #: app/scripts/components/providers/provider-list.js
 msgid "Only staff can remove provider."
-msgstr ""
+msgstr "Yalnız işçi heyət provayderləri çıxara bilər."
 
 #: app/scripts/components/providers/provider-list.js
 msgid "Only staff can unlink provider."
-msgstr ""
+msgstr "Yalnız işçi heyət provayderin bağlantısını kəsə bilər."
 
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: app/scripts/components/resource/summary/ResourceAccessInfo.tsx
 msgid "Open"
-msgstr ""
+msgstr "Açıq"
 
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/offering/offering-summary.html
 msgid "Open in Service Desk"
-msgstr ""
+msgstr "Xidmət Masasında açın"
 
 #: app/scripts/components/resource/list/resources-list.js
 msgid "Open map"
-msgstr ""
+msgstr "Xəritə açın"
 
 #: app/scripts/components/openstack/events.ts
 msgid "OpenStack events"
-msgstr ""
+msgstr "OpenStack hadisələri"
 
 #: app/scripts/components/openstack/events.ts
 msgid "OpenStack package {tenant_link} has been created."
-msgstr ""
+msgstr "OpenStack paketi {tenant_link} yaradıldı."
 
 #: app/scripts/components/openstack/events.ts
 msgid "OpenStack package {tenant_name} has been deleted."
-msgstr ""
+msgstr "OpenStack paketi {tenant_name} silindi."
 
 #: app/scripts/components/issues/list/issues-short-list.html
 msgid "Opened by"
-msgstr ""
+msgstr "____tərəfindın açılıb"
 
 #: app/scripts/components/auth/auth-login.html
 msgid "Or use social login"
-msgstr ""
+msgstr "və ya sosial girişdən istifadə edin"
 
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/experts/bids/expert-bids-list.js
@@ -3552,172 +3552,172 @@ msgstr ""
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/user/list/ProjectPermissions.tsx
 msgid "Organization"
-msgstr ""
+msgstr "Təşkilat"
 
 #: app/scripts/components/customer/details/customer-manage.html
 msgid "Organization actions"
-msgstr ""
+msgstr "Təşkilat hərəkətləri"
 
 #: app/scripts/components/issues/list/constants.js
 msgid "Organization code"
-msgstr ""
+msgstr "Təşkilat kodu"
 
 #: app/scripts/components/customer/details/customer-delete.js
 msgid "Organization contains invoices. Please remove them first."
-msgstr ""
+msgstr "Təşkilatda faktura vardır. Xahiş edirik əvvəlcə onları çıxarın."
 
 #: app/scripts/components/customer/details/customer-delete.js
 msgid "Organization contains projects. Please remove them first."
-msgstr ""
+msgstr "Təşkilatda layihələr vardır. Xahiş edirik əvvəlcə onları çıxarın."
 
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Organization details"
-msgstr ""
+msgstr "Təşkilat məlumatları"
 
 #: app/scripts/components/customer/events.ts
 #: app/scripts/components/customer/workspace/customer-events.js
 msgid "Organization events"
-msgstr ""
+msgstr "Təşkilat tədbirləri"
 
 #: app/scripts/components/customer/create/customer-create-dialog.js
 msgid "Organization has been created."
-msgstr ""
+msgstr "Təşkilat yaradıldı."
 
 #: app/scripts/components/experts/requests/billing-type.js
 msgid "Organization is billed on monthly basis."
-msgstr ""
+msgstr "Təşkilata aylıq olaraq hesab-faktura göndərilir."
 
 #: app/scripts/components/experts/requests/billing-type.js
 msgid "Organization is billed on project completion."
-msgstr ""
+msgstr "Təşkilata layihənin tamamlanmasında hesab-faktura göndərilir."
 
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/user/list/CustomerPermissions.tsx
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Organization name"
-msgstr ""
+msgstr "Təşkilatın Adı"
 
 #: app/scripts/components/configs/base-config.js
 msgid "Organization owner"
-msgstr ""
+msgstr "Təşkilatın sahibi"
 
 #: app/scripts/components/team/add-team-member.html
 msgid "Organization owner role expires on"
-msgstr ""
+msgstr "Təşkilat sahibinin vəzifəsi_____sona çatır"
 
 #: app/scripts/components/customer/details/customer-policies.js
 msgid "Organization policies have been updated."
-msgstr ""
+msgstr "Təşkilat siyasəti yeniləndi."
 
 #: app/scripts/components/customer/create/customer-create-config.js
 msgid "Organization registration code"
-msgstr ""
+msgstr "Təşkilatın qeydiyyat kodu"
 
 #: app/scripts/components/customer/details/customer-manage.js
 msgid "Organization removal"
-msgstr ""
+msgstr "Təşkilatın çıxarılması"
 
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Organization type"
-msgstr ""
+msgstr "Təşkilat növü"
 
 #: app/scripts/components/billing/billing-record-header.js
 #: app/scripts/components/billing/invoice-header.html
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 msgid "Organization workspace"
-msgstr ""
+msgstr "Təşkilatın iş sahəsi"
 
 #: app/scripts/components/customer/events.ts
 msgid "Organization {customer_link} has been created."
-msgstr ""
+msgstr "Təşkilat {customer_link} yaradıldı."
 
 #: app/scripts/components/customer/events.ts
 msgid "Organization {customer_link} has been updated."
-msgstr ""
+msgstr "Təşkilat {customer_link} yeniləndi"
 
 #: app/scripts/components/customer/events.ts
 msgid "Organization {customer_name} has been deleted."
-msgstr ""
+msgstr "Təşkilat {customer_name} silindi."
 
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "Organizations"
-msgstr ""
+msgstr "Təşkilatlar"
 
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Output log"
-msgstr ""
+msgstr "Çıxış qeydləri"
 
 #: app/scripts/components/ansible/python-management/state-builder/ManagementStatesIndicator.tsx
 msgid "Overall state of the service"
-msgstr ""
+msgstr "Xidmətin ümumi vəziyyəti"
 
 #: app/scripts/components/user/list/UserDashboard.tsx
 msgid "Owned organizations"
-msgstr ""
+msgstr "Məxsus olan təşkilatlar"
 
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/user/list/CustomerPermissions.tsx
 msgid "Owner"
-msgstr ""
+msgstr "Sahib"
 
 #: app/scripts/components/table-react/TableExportButton.tsx
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: app/scripts/components/experts/bids/details/expert-bid-summary.html
 msgid "PRICE"
-msgstr ""
+msgstr "QİYMƏT"
 
 #: app/scripts/components/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "Package"
-msgstr ""
+msgstr "Paket"
 
 #: app/scripts/components/quotas/constants.js
 msgid "Package amount"
-msgstr ""
+msgstr "Paket məbləği"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js
 msgid "Package could not be assigned."
-msgstr ""
+msgstr "Paket təyin edilə bilmədi."
 
 #: app/scripts/components/openstack/openstack-tenant/package-templates-service.js
 msgid "Package is not available because current VPC resource usage exceeds package quota limits."
-msgstr ""
+msgstr "Paket mövcud deyil, çünki mövcud VPC (virtual çığır birləşmələri) resurs istifadə paketi kvota limitlərini aşır."
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Package limits"
-msgstr ""
+msgstr "Paket limiti"
 
 #: app/scripts/components/error/routes.js
 msgid "Page is not found."
-msgstr ""
+msgstr "Səhifə tapılmadı."
 
 #: app/scripts/components/error/invalid-object-page.html
 msgid "Page is not found. You've either entered invalid URL or don't have enough permissions to view this page."
-msgstr ""
+msgstr "Səhifə tapılmadı. Siz ya yalnış URL daxil etdiniz və ya da bu səhifəyə baxmaq üçün kifayət qədər icazəniz yoxdur."
 
 #: app/scripts/components/error/invalid-route-page.html
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
-msgstr ""
+msgstr "Səhifə tapılmadı. Siz ya yalnış URL daxil etdiniz və ya işləməyən  xüsusiyyətə daxil olmağa çalışırsınız."
 
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Paid"
-msgstr ""
+msgstr "Ödənilib"
 
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Parameters"
-msgstr ""
+msgstr "Parametrlər"
 
 #: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 msgid "Parent request"
-msgstr ""
+msgstr "Əsas sorğu"
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: app/scripts/components/auth/auth-login.html
@@ -3727,242 +3727,242 @@ msgstr ""
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
 #: app/scripts/components/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "Password"
-msgstr ""
+msgstr "Şifrə"
 
 #: app/scripts/components/user/events.ts
 msgid "Password has been changed for user {affected_user_link}."
-msgstr ""
+msgstr "Şifrə {affected_user_link} istifadəçisi üçün dəyişdirildi."
 
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 msgid "Pay invoice"
-msgstr ""
+msgstr "Fakturanı ödəyin"
 
 #: app/scripts/components/paypal/events.ts
 msgid "Payment events"
-msgstr ""
+msgstr "Ödəmə hadisələri"
 
 #: app/scripts/components/paypal/events.ts
 msgid "Payment for {customer_link} has been approved."
-msgstr ""
+msgstr "{customer_link} üçün ödəniş təsdiq edilmişdir."
 
 #: app/scripts/components/paypal/events.ts
 msgid "Payment for {customer_link} has been cancelled."
-msgstr ""
+msgstr "{customer_link} üçün ödəniş ləğv edildi."
 
 #: app/scripts/components/payments/payment-approve.js
 #: app/scripts/components/payments/payment-cancel.js
 msgid "Payment has been processed successfully."
-msgstr ""
+msgstr "Ödəmə uğurla həyata keçmişdir."
 
 #: app/scripts/components/payments/payment-approve.html
 #: app/scripts/components/payments/payment-cancel.html
 msgid "Payment is being processed, please wait."
-msgstr ""
+msgstr "Ödəniş işlənilir, xahiş edirik gözləyin."
 
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Payment pending"
-msgstr ""
+msgstr "Ödəniş natamamdır"
 
 #: app/scripts/components/billing/billing-utils.js
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/invitations/invitations-list.js
 msgid "Pending"
-msgstr ""
+msgstr "Natamam"
 
 #: app/scripts/components/digitalocean/droplet-resize.html
 msgid "Permanent"
-msgstr ""
+msgstr "Daimi"
 
 #: app/scripts/components/customer/workspace/customer-team.html
 #: app/scripts/components/project/project-team.html
 msgid "Permissions log"
-msgstr ""
+msgstr "İcazə qeydləri"
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.html
 msgid "Permitted"
-msgstr ""
+msgstr "İcazə verilib"
 
 #: app/scripts/components/billing/CustomerDetails.tsx
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
 #: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserList.tsx
 msgid "Phone number"
-msgstr ""
+msgstr "Telefon nömrəsi"
 
 #: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Phone numbers"
-msgstr ""
+msgstr "Telefon nömrələri"
 
 #: app/scripts/components/providers/details/provider-details.html
 msgid "Physical locations"
-msgstr ""
+msgstr "Fiziki yerlər"
 
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 msgid "Planned budget"
-msgstr ""
+msgstr "Planlaşdırılmış büdcə"
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
 msgid "Planned quota usage: {usage}"
-msgstr ""
+msgstr "Planlaşdırılan kvota istifadəsi: {usage}"
 
 #: app/scripts/components/ansible/application-list.js
 msgid "Playbook"
-msgstr ""
+msgstr "Playbook"
 
 #: app/scripts/components/form/appstore-field-tos.html
 msgid "Please accept Terms of Services to proceed."
-msgstr ""
+msgstr "Davam etmək üçün Xidmət Şərtlərini qəbul edin."
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Please add following public key to authorized_keys file on the selected instance."
-msgstr ""
+msgstr "Xahiş edirik seçilmiş nümunədə icazəli_açarlar faylına ictimai açarı əlavə edin."
 
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 msgid "Please add users or select another team."
-msgstr ""
+msgstr "Xahiş edirik istifadəçiləri əlavə edin və ya başqa bir qrupu seçin."
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Please assign 'SSH' security group to the virtual machine (to allow SSH connections)."
-msgstr ""
+msgstr "Xahiş edirik 'SSH' (təhlükəsiz örtük) təhlükəsizlik qrupunu virtual maşına təyin edin (SSH əlaqələrinə icazə verin)."
 
 #: app/scripts/components/issues/request-service-button.js
 msgid "Please clarify why do you need it"
-msgstr ""
+msgstr "Xahiş olunur, bunu nəyə görə istədiyinizini aydınlaşdırasınız"
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html
 msgid "Please give us a moment to validate your invitation."
-msgstr ""
+msgstr "Dəvətinizi təsdiqləmək üçün bizə bir ani vaxt verin."
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
 msgid "Please note that request should specify tenant and provide a reason."
-msgstr ""
+msgstr "Xahiş edirik, nəzərə alasınız ki, sorğu işarəçini göstərməli və səbəb bildirməlidir."
 
 #: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
 msgid "Please note that request should specify user name and provide a reason."
-msgstr ""
+msgstr "Xahiş edirik ki, nəzərə alasınız ki, sorğu istifadəçi adını və səbəbi göstərməlidir."
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
 msgid "Please provide a reason"
-msgstr ""
+msgstr "Xahiş edirik, səbəbi göstərin"
 
 #: app/scripts/components/openstack/openstack-snapshot/module.js
 msgid "Please provide details of a new volume created from snapshot."
-msgstr ""
+msgstr "Xahiş edirik anı təsvirdən yaradılan yeni həcmin təfərrüatlarını bildirəsiniz."
 
 #: app/scripts/components/customer/create/customer-create-config.js
 msgid "Please provide registration code of your company."
-msgstr ""
+msgstr "Şirkətinizin qeydiyyat kodunu təqdim edin."
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.html
 msgid "Please provide valid quotas."
-msgstr ""
+msgstr "Xahiş edirik, etibarlı kvotaları verin"
 
 #: app/scripts/components/customer/create/customer-create-config.js
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
-msgstr ""
+msgstr "Avropa İttifaqında qeydiyyatdan keçdiyiniz təqdirdə, Aİ-nin ƏDV Identifikasiya nömrəsini təqdim edin."
 
 #: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
 msgid "Please select a library"
-msgstr ""
+msgstr "Xahiş edirik, kitabxananı seçin"
 
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 msgid "Please select a team"
-msgstr ""
+msgstr "Xahiş edirik, qrupu seçin"
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
 msgid "Please select a username that you will use for login into the Linux systems."
-msgstr ""
+msgstr "Xahiş edirik, Linux sistemlərinə daxil olmaq üçün istifadə edəcəyiniz istifadəçi adını seçəsiniz."
 
 #: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
 msgid "Please select a version"
-msgstr ""
+msgstr "Xahiş edirik, versiyanı seçin"
 
 #: app/scripts/components/form-react/list-field/ListFieldModal.tsx
 msgid "Please select one"
-msgstr ""
+msgstr "Xahiş edirik, birini seçin"
 
 #: app/scripts/components/providers/details/provider-projects.html
 msgid "Please select projects where usage of the provider is permitted."
-msgstr ""
+msgstr "Xahiş edirik, provayderin istifadəsinə icazə verilmiş layihələri seçin."
 
 #: app/scripts/components/project/project-providers.html
 msgid "Please select providers allowed to be used in this project."
-msgstr ""
+msgstr "Xahiş edirik, bu layihədə istifadə üçün icazə verilmiş provayderləri seçin."
 
 #: app/scripts/components/i18n/language-list.html
 msgid "Please select your language"
-msgstr ""
+msgstr "Xahiş edirik, dili seçin"
 
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html
 msgid "Please select your organization"
-msgstr ""
+msgstr "Xahiş edirik, təşkilatınızı seçin"
 
 #: app/scripts/components/appstore/appstore-store.js
 msgid "Please specify {fields}."
-msgstr ""
+msgstr "Xahiş edirik, {fields} daxil edin."
 
 #: app/scripts/components/openstack/openstack-instance/actions/RestartAction.ts
 msgid "Please start instance first."
-msgstr ""
+msgstr "İlk növbədə, nümunəni başlayın."
 
 #: app/scripts/components/openstack/openstack-instance/actions/ChangeFlavorAction.ts
 msgid "Please stop the instance before changing its flavor."
-msgstr ""
+msgstr "Nümunəni dəyişdirmədən əvvəl nümunəni dayandırın."
 
 #: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
 msgid "Please stop the instance before its removal."
-msgstr ""
+msgstr "Xahiş edirik, nümunəni çıxarmadan əvvəl onu dayandırın."
 
 #: app/scripts/components/ansible/application-list.js
 msgid "Please wait until provisioning is completed."
-msgstr ""
+msgstr "Təminat tamamlananadək gözləyin."
 
 #: app/scripts/components/providers/ProviderUpdateComponent.tsx
 msgid "Please wait while provider is being configured."
-msgstr ""
+msgstr "Provayder konfiqurasiya edildikdə gözləyin."
 
 #: app/scripts/components/customer/details/customer-policies.html
 #: app/scripts/components/project/project-dialog.html
 msgid "Policies"
-msgstr ""
+msgstr "Siyasətlər"
 
 #: app/scripts/components/slurm/SlurmForm.tsx
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rules-list.html
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Port range"
-msgstr ""
+msgstr "Port əhatəsi"
 
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Postal code"
-msgstr ""
+msgstr "Poçt kodu"
 
 #: app/scripts/components/auth/powered-by.html
 msgid "Powered by"
-msgstr ""
+msgstr "Dəstəkləyən: "
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
 #: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Preferred language"
-msgstr ""
+msgstr "Üstünlük verilən dil"
 
 #: app/scripts/components/experts/requests/create/expert-contract-create.html
 msgid "Preview contract"
-msgstr ""
+msgstr "Müqaviləyə əvvəlcədən baxmaq"
 
 #: app/scripts/components/form/appstore-form-wizard.html
 #: app/scripts/components/table-react/TablePagination.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Previous"
-msgstr ""
+msgstr "Əvvəlki"
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/billing/invoices-list.js
@@ -3973,47 +3973,47 @@ msgstr ""
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Price"
-msgstr ""
+msgstr "Qiymət"
 
 #: app/scripts/components/billing/PriceEstimateDialog.tsx
 msgid "Price estimate details"
-msgstr ""
+msgstr "Qiymət təxmini təfsilatları"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html
 msgid "Price for 1 GB of RAM per day"
-msgstr ""
+msgstr "Gündəlik 1 GB RAM-ın qiyməti"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html
 msgid "Price for 1 GB of storage per day"
-msgstr ""
+msgstr "Gündəlik 1 GB saxlamanın qiyməti"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html
 msgid "Price for 1 vCPU per day"
-msgstr ""
+msgstr "Gündə 1 vCPU-nun (virtual mərkəzi əməliyyat prosessoru) qiyməti"
 
 #: app/scripts/components/price/PriceTooltip.tsx
 msgid "Price is estimated."
-msgstr ""
+msgstr "Qiyməti təxminidir."
 
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html
 #: app/scripts/components/slurm/slurm-prices.html
 msgid "Price of CPU hour"
-msgstr ""
+msgstr "CPU (mərkəzi əməliyyat prosessoru) saatının qiyməti"
 
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html
 #: app/scripts/components/slurm/slurm-prices.html
 msgid "Price of GPU hour"
-msgstr ""
+msgstr "GPU (qrafik prosessor) saatının qiyməti"
 
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html
 #: app/scripts/components/slurm/slurm-prices.html
 msgid "Price of RAM GB"
-msgstr ""
+msgstr "RAM GB qiyməti"
 
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html
 #: app/scripts/components/slurm/slurm-prices.html
 msgid "Price package name"
-msgstr ""
+msgstr "RAM GB qiyməti"
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
@@ -4021,7 +4021,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Price per day"
-msgstr ""
+msgstr "Gündəlik qiymət"
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
@@ -4030,43 +4030,43 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Price per month"
-msgstr ""
+msgstr "Aylıq qiymət"
 
 #: app/scripts/components/appstore/dialog/appstore-category-selector.html
 msgid "Price per month (VAT not included)"
-msgstr ""
+msgstr "Aylıq qiymət (ƏDV daxil deyil)"
 
 #: app/scripts/components/appstore/appstore-compare-list.js
 msgid "Price/hour"
-msgstr ""
+msgstr "Qiymət / saat"
 
 #: app/scripts/components/providers/details/dialog.html
 msgid "Prices"
-msgstr ""
+msgstr "Qiymətlər"
 
 #: app/scripts/components/billing/invoice-header.html
 msgid "Print invoice"
-msgstr ""
+msgstr "Fakturanı çap edin"
 
 #: app/scripts/components/billing/billing-record-header.html
 msgid "Print record"
-msgstr ""
+msgstr "Qeydi çap edin"
 
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 msgid "Priority"
-msgstr ""
+msgstr "Prioritet"
 
 #: app/scripts/components/navigation/app-footer.html
 #: app/scripts/components/routes/about.js
 msgid "Privacy policy"
-msgstr ""
+msgstr "Məxfilik siyasəti"
 
 #: app/scripts/components/azure/AzureForm.tsx
 msgid "Private certificate file"
-msgstr ""
+msgstr "Xüsusi sertifikat faylı"
 
 #: app/scripts/components/analytics/resource-chart-service.js
 #: app/scripts/components/appstore/routes.js
@@ -4078,11 +4078,11 @@ msgstr ""
 #: app/scripts/components/project/routes.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Private clouds"
-msgstr ""
+msgstr "Özəl buludlar"
 
 #: app/scripts/components/table/responsive-table.js
 msgid "Processing..."
-msgstr ""
+msgstr "Emal edilir ..."
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/events/EventDetailsTable.tsx
@@ -4100,62 +4100,62 @@ msgstr ""
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html
 msgid "Project"
-msgstr ""
+msgstr "Layihə"
 
 #: app/scripts/components/project/effects.ts
 msgid "Project could not be created."
-msgstr ""
+msgstr "Layihə yaradıla bilmədi."
 
 #: app/scripts/components/project/effects.ts
 msgid "Project could not be updated."
-msgstr ""
+msgstr "Layihə yenilənə bilmədi."
 
 #: app/scripts/components/project/ProjectCreateForm.tsx
 #: app/scripts/components/project/ProjectUpdateForm.tsx
 msgid "Project description"
-msgstr ""
+msgstr "Layihənin təsviri"
 
 #: app/scripts/components/project/project-dialog.html
 msgid "Project details"
-msgstr ""
+msgstr "Layihə  təfsilatları"
 
 #: app/scripts/components/customer/workspace/customer-events.js
 #: app/scripts/components/project/events.ts
 #: app/scripts/components/project/project-events.js
 msgid "Project events"
-msgstr ""
+msgstr "Layihə hadisələri"
 
 #: app/scripts/components/project/effects.ts
 msgid "Project has been created."
-msgstr ""
+msgstr "Layihə yaradıldı."
 
 #: app/scripts/components/project/projects-list.js
 msgid "Project has been removed successfully."
-msgstr ""
+msgstr "Layihə müvəffəqiyyətlə silindi."
 
 #: app/scripts/components/project/events.ts
 msgid "Project has been renamed from {project_previous_name} to {project_link}."
-msgstr ""
+msgstr "Layihə { project_previous_name}-dan {project_link} adına dəyişdirildi."
 
 #: app/scripts/components/project/effects.ts
 msgid "Project has been updated."
-msgstr ""
+msgstr "Layihə yeniləndi."
 
 #: app/scripts/components/project/projects-list.js
 msgid "Project has connected resources and can't be removed"
-msgstr ""
+msgstr "Layihə resursları birləşdirdi və çıxarıla bilmədi"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 msgid "Project limits"
-msgstr ""
+msgstr "Layihə məhdudiyyəti"
 
 #: app/scripts/components/configs/base-config.js
 msgid "Project manager"
-msgstr ""
+msgstr "Layihə meneceri"
 
 #: app/scripts/components/team/project-users-list.js
 msgid "Project manager cannot edit users with same role."
-msgstr ""
+msgstr "Layihə meneceri eyni vəzifəsi olan istifadəçiləri redaktə edə bilməz."
 
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/project/ProjectNameField.tsx
@@ -4163,25 +4163,25 @@ msgstr ""
 #: app/scripts/components/team/add-team-member.html
 #: app/scripts/components/user/list/ProjectPermissions.tsx
 msgid "Project name"
-msgstr ""
+msgstr "Layihənin adı"
 
 #: app/scripts/components/project/project-policies.js
 msgid "Project policies have been updated."
-msgstr ""
+msgstr "Layihə siyasəti yeniləndi."
 
 #: app/scripts/components/project/project-providers-service.js
 msgid "Project providers links have been updated."
-msgstr ""
+msgstr "Layihə provayderlərinin əlaqələri yeniləndi."
 
 #: app/scripts/components/quotas/constants.js
 msgid "Project service"
-msgstr ""
+msgstr "Layihə xidməti"
 
 #: app/scripts/components/jira/project/JiraProjectSummary.tsx
 #: app/scripts/components/project/ProjectCreateForm.tsx
 #: app/scripts/components/project/ProjectUpdateForm.tsx
 msgid "Project type"
-msgstr ""
+msgstr "Layihə növü"
 
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-details.js
 #: app/scripts/components/appstore/appstore-store.js
@@ -4190,19 +4190,19 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs-service.js
 msgid "Project workspace"
-msgstr ""
+msgstr "Layihənin iş sahəsi"
 
 #: app/scripts/components/project/events.ts
 msgid "Project {project_link} has been created."
-msgstr ""
+msgstr "{project_link} layihəsi yaradıldı."
 
 #: app/scripts/components/project/events.ts
 msgid "Project {project_link} has been updated."
-msgstr ""
+msgstr "{project_link} layihəsi yeniləndi"
 
 #: app/scripts/components/project/events.ts
 msgid "Project {project_name} has been deleted."
-msgstr ""
+msgstr "{project_name} layihəsi silindi.\t"
 
 #: app/scripts/components/appstore/dialog/appstore-project-selector.html
 #: app/scripts/components/customer/routes.js
@@ -4211,44 +4211,44 @@ msgstr ""
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/providers/details/dialog.html
 msgid "Projects"
-msgstr ""
+msgstr "Layihələr"
 
 #: app/scripts/components/dashboard/organization-dashboard.html
 #: app/scripts/components/team/add-team-member.html
 msgid "Projects list"
-msgstr ""
+msgstr "Layihələr siyahısı"
 
 #: app/scripts/components/experts/bids/details/expert-bid-details.html
 msgid "Proposal"
-msgstr ""
+msgstr "Təklif"
 
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 msgid "Proposal could be created only for pending expert request."
-msgstr ""
+msgstr "Təklif yalnız gözləyən ekspert sorğusu üçün yaradıla bilər."
 
 #: app/scripts/components/experts/bids/expert-bid-utils.js
 msgid "Proposal could not be accepted."
-msgstr ""
+msgstr "Təklif təklif qəbul edilə bilmədi."
 
 #: app/scripts/components/experts/bids/expert-bid-utils.js
 msgid "Proposal could not be cancelled."
-msgstr ""
+msgstr "Təklif ləğv edilə bilmədi."
 
 #: app/scripts/components/experts/bids/details/expert-bid-details.js
 msgid "Proposal could not be fetched."
-msgstr ""
+msgstr "Təklif baş tutmadı."
 
 #: app/scripts/components/experts/bids/details/expert-bid-summary.html
 msgid "Proposal description"
-msgstr ""
+msgstr "Təklifin təsviri"
 
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.js
 msgid "Proposal has been created."
-msgstr ""
+msgstr "Təklif yaradılıb."
 
 #: app/scripts/components/experts/requests/details/expert-request-details.html
 msgid "Proposals"
-msgstr ""
+msgstr "Təkliflər"
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.html
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
@@ -4262,125 +4262,125 @@ msgstr ""
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "Provider"
-msgstr ""
+msgstr "Təchizatçı (provayder)"
 
 #: app/scripts/components/project/project-policies.html
 msgid "Provider certification required by this project"
-msgstr ""
+msgstr "Bu layihə tərəfindən provayder sertifikatı tələb olunur "
 
 #: app/scripts/components/project/ProjectCreateForm.tsx
 msgid "Provider certification required by this project."
-msgstr ""
+msgstr "Bu layihə tərəfindən provayder sertifikatı tələb olunur."
 
 #: app/scripts/components/providers/details/dialog.html
 msgid "Provider details"
-msgstr ""
+msgstr "Təchizatçı (provayder) təfsilatları"
 
 #: app/scripts/components/resource/ResourceName.tsx
 msgid "Provider does not comply with project policies"
-msgstr ""
+msgstr "Təchizatçı layihə siyasətinə əməl etmir"
 
 #: app/scripts/components/providers/effects.tsx
 msgid "Provider has been created."
-msgstr ""
+msgstr "Təchizatçı (provayder) yaradılmışdır"
 
 #: app/scripts/components/providers/effects.tsx
 msgid "Provider has been updated."
-msgstr ""
+msgstr "Təchizatçı (provayder) yenilənmişdir."
 
 #: app/scripts/components/providers/provider-list.js
 msgid "Provider has resources. Please remove them first."
-msgstr ""
+msgstr "Provayderin resursları var. Xahiş edirik əvvəlcə onları çıxarın."
 
 #: app/scripts/components/appstore/providers/appstore-providers-service.js
 msgid "Provider is in erred state."
-msgstr ""
+msgstr "Provider səhv vəziyyətindədir."
 
 #: app/scripts/components/providers/ProviderNameField.tsx
 msgid "Provider name"
-msgstr ""
+msgstr "Təchizatçı (provayder) adı"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
 msgid "Provider package is not defined."
-msgstr ""
+msgstr "Provider paketi müəyyənləşdirilməyib."
 
 #: app/scripts/components/appstore/providers/appstore-providers-service.js
 msgid "Provider quota has reached threshold."
-msgstr ""
+msgstr "Təchizatçı (provider) kvotası limitinə çatıb."
 
 #: app/scripts/components/providers/ProviderTypeField.tsx
 msgid "Provider type"
-msgstr ""
+msgstr "Təchizatçı (provider) növü"
 
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/help/constants.js
 #: app/scripts/components/project/project-dialog.html
 #: app/scripts/components/providers/routes.js
 msgid "Providers"
-msgstr ""
+msgstr "Təchizatçılar(providerlər)"
 
 #: app/scripts/components/configs/base-config.js
 msgid "Provision persistent storage volumes in available Providers."
-msgstr ""
+msgstr "Mövcud Provayderlərdə davamlı saxlama həcmlərinin təmin edilməsi."
 
 #: app/scripts/components/configs/base-config.js
 msgid "Provision virtual machines (VMs) in available Providers."
-msgstr ""
+msgstr "Mövcud Provayderlərdə virtual maşınların (VM) təmin edilməsi."
 
 #: app/scripts/components/user/keys/key-create.html
 msgid "Public key"
-msgstr ""
+msgstr "İctimai açar"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Pulling"
-msgstr ""
+msgstr "Çəkmək"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Pulling quotas"
-msgstr ""
+msgstr "Çəkmə kvotaları"
 
 #: app/scripts/components/appstore/appstore-store.html
 msgid "Purchase"
-msgstr ""
+msgstr "Alış"
 
 #: app/scripts/components/configs/base-config.js
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
-msgstr ""
+msgstr "Virtual Özəl Buludlar (VPC) kimi bütöv resursları alın."
 
 #: app/scripts/components/appstore/appstore-store.js
 msgid "Purchase of {vm_name} was successful."
-msgstr ""
+msgstr "{vm_name} alışı uğurlu oldu."
 
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 msgid "Python Management"
-msgstr ""
+msgstr "Python İdarəetməsi"
 
 #: app/scripts/components/ansible/python-management/routes.js
 msgid "Python Management details"
-msgstr ""
+msgstr "Python İdarəetməsinin təfsilatları"
 
 #: app/scripts/components/ansible/python-management/effects.ts
 msgid "Python environment could not be created."
-msgstr ""
+msgstr "Python mühiti yaradıla bilmədi."
 
 #: app/scripts/components/ansible/python-management/effects.ts
 msgid "Python environment has been created."
-msgstr ""
+msgstr "Python mühiti yaradılıb."
 
 #: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Python management details"
-msgstr ""
+msgstr "Python idarəetmə təfsilatları "
 
 #: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Python version"
-msgstr ""
+msgstr "Python versiyası"
 
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
 #: app/scripts/components/cost-planning/cost-plan-flavors.html
 #: app/scripts/components/cost-planning/cost-plan-items.html
 msgid "Quantity"
-msgstr ""
+msgstr "Miqdarı"
 
 #: app/scripts/components/error/routes.js
 #: app/scripts/components/project/projects-list.js
@@ -4388,20 +4388,20 @@ msgstr ""
 #: app/scripts/components/resource-import/utils.js
 #: app/scripts/components/resource/resource-provision-policy.js
 msgid "Quota has been reached."
-msgstr ""
+msgstr "Kvotaya çatdırılıb."
 
 #: app/scripts/components/providers/details/provider-project-link-quota.html
 msgid "Quota usage exceeds limit."
-msgstr ""
+msgstr "Kvota istifadəsi limitini aşır."
 
 #: app/scripts/components/openstack/openstack-tenant/tabs.js
 #: app/scripts/components/providers/details/dialog.html
 msgid "Quotas"
-msgstr ""
+msgstr "Kvotalar"
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.js
 msgid "Quotas updated."
-msgstr ""
+msgstr "Kvotalar yenilənib."
 
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -4417,51 +4417,51 @@ msgstr ""
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "RAM"
-msgstr ""
+msgstr "RAM (Əməliyyat yaddaşı)"
 
 #: app/scripts/components/slurm/slurm-allocation-config.js
 msgid "RAM limit"
-msgstr ""
+msgstr "RAM limiti"
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.html
 msgid "RAM limit GB"
-msgstr ""
+msgstr "RAM məhdud GB"
 
 #: app/scripts/components/slurm/actions.js
 msgid "RAM limit, MB"
-msgstr ""
+msgstr "RAM limiti, MB"
 
 #: app/scripts/components/slurm/details/constants.js
 msgid "RAM usage"
-msgstr ""
+msgstr "RAM istifadəsi"
 
 #: app/scripts/components/customer/details/customer-manage.js
 #: app/scripts/components/experts/requests/actions/expert-request-complain.js
 #: app/scripts/components/user/support/actions.ts
 msgid "Reason"
-msgstr ""
+msgstr "Səbəb"
 
 #: app/scripts/components/configs/base-config.js
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 msgid "Reason unknown, please contact support."
-msgstr ""
+msgstr "Səbəb məlum deyil, dəstək xidməti ilə əlaqə saxlayın."
 
 #: app/scripts/components/billing/billing-record-details.html
 msgid "Record no."
-msgstr ""
+msgstr "Qeyd Nömrəsi"
 
 #: app/scripts/components/billing/billing-utils.js
 msgid "Record notification has been sent to organization owners."
-msgstr ""
+msgstr "Qeyd bildirişi təşkilat sahiblərinə göndərilib."
 
 #: app/scripts/components/billing/billing-records-list.js
 msgid "Record number"
-msgstr ""
+msgstr "Qeyd nömrəsi"
 
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/billing-records-list.js
 msgid "Record period"
-msgstr ""
+msgstr "Qeyd dövrü"
 
 #: app/scripts/components/issues/list/issues-short-list.html
 #: app/scripts/components/issues/workspace/issues-activity-stream.html
@@ -4469,87 +4469,87 @@ msgstr ""
 #: app/scripts/components/table-react/TableRefreshButton.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Refresh"
-msgstr ""
+msgstr "Təzələmək"
 
 #: app/scripts/components/digitalocean/DigitalOceanDropletSummary.tsx
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 msgid "Region"
-msgstr ""
+msgstr "Region"
 
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 msgid "Region name"
-msgstr ""
+msgstr "Region adı"
 
 #: app/scripts/components/auth/auth-login.html
 msgid "Register"
-msgstr ""
+msgstr "Qeydiyyatdan keçin"
 
 #: app/scripts/components/experts/expert-provider-details.html
 msgid "Register as an expert provider"
-msgstr ""
+msgstr "Ekspert təminatçısı olaraq qeydiyyatdan keçin"
 
 #: app/scripts/components/auth/auth-login.html
 msgid "Register to"
-msgstr ""
+msgstr "---- qeydiyyatdan keçin"
 
 #: app/scripts/components/auth/auth-button-text.js
 msgid "Register with"
-msgstr ""
+msgstr "ilə qeydiyyatdan keçin"
 
 #: app/scripts/components/auth/auth-login.html
 msgid "Register with trusted identity"
-msgstr ""
+msgstr "Etibarlı identifikasiya ilə qeydiyyatdan keçin"
 
 #: app/scripts/components/appstore/providers/appstore-providers-empty-message.html
 msgid "Register your own cloud account"
-msgstr ""
+msgstr "Öz bulud hesabınızı qeydiyyatdan keçirin"
 
 #: app/scripts/components/experts/expert-provider-details.html
 msgid "Registered"
-msgstr ""
+msgstr "Qeydiyyatdan keçib"
 
 #: app/scripts/components/customer/popover/CustomerSummary.tsx
 msgid "Registration code"
-msgstr ""
+msgstr "Qeydiyyat kodu"
 
 #: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Registration method"
-msgstr ""
+msgstr "Qeydiyyat metodu"
 
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Registry code"
-msgstr ""
+msgstr "Qeydiyyat kodu"
 
 #: app/scripts/components/user/support/utils.ts
 msgid "Regular user"
-msgstr ""
+msgstr "Daimi istifadəçi"
 
 #: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 msgid "Related resource"
-msgstr ""
+msgstr "Əlaqədar resurs"
 
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Related resources"
-msgstr ""
+msgstr "Əlaqədar resurslar"
 
 #: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
 msgid "Release floating IPs"
-msgstr ""
+msgstr "əyişən IP-ləri buraxın"
 
 #: app/scripts/components/issues/IssueReload.tsx
 msgid "Reload issue data"
-msgstr ""
+msgstr "Verilmə məlumatları yenidən yükləyin"
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rules-list.html
 msgid "Remote CIDR"
-msgstr ""
+msgstr "Uzaq CIDR (sinifsiz domenlərarası marşrutlama)"
 
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Remote network"
-msgstr ""
+msgstr "Uzaq şəbəkə"
 
 #: app/scripts/components/cost-planning/cost-plans-list.js
 #: app/scripts/components/project/projects-list.js
@@ -4559,124 +4559,124 @@ msgstr ""
 #: app/scripts/components/user/hooks/hook-list.js
 #: app/scripts/components/user/keys/key-list.js
 msgid "Remove"
-msgstr ""
+msgstr "Sil"
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 msgid "Remove JupyterHub user"
-msgstr ""
+msgstr "JupyterHub istifadəçisini silin"
 
 #: app/scripts/components/ansible/application-list.js
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Remove application"
-msgstr ""
+msgstr "Tətbiqi silin"
 
 #: app/scripts/components/customer/details/customer-manage.html
 msgid "Remove organization"
-msgstr ""
+msgstr "Təşkilatı silin"
 
 #: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
 msgid "Remove package"
-msgstr ""
+msgstr "Paketi çıxarın"
 
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Remove profile"
-msgstr ""
+msgstr "Profili silin"
 
 #: app/scripts/components/ansible/python-management/form/RemoveVirtualEnvironmentButton.tsx
 msgid "Remove virtual environment"
-msgstr ""
+msgstr "Virtual mühiti çıxarın"
 
 #: app/scripts/components/project/project-providers-service.js
 #: app/scripts/components/providers/details/provider-projects.js
 msgid "Removing link"
-msgstr ""
+msgstr "Bağlantını silin"
 
 #: app/scripts/components/offering/OfferingReportDialog.tsx
 msgid "Report details"
-msgstr ""
+msgstr "Təfsilatları silmək"
 
 #: app/scripts/components/customer/details/customer-manage.html
 msgid "Report incorrect data"
-msgstr ""
+msgstr "Yanlış məlumatları bildirmək"
 
 #: app/scripts/components/issues/list/issues-short-list.html
 msgid "Reported by me"
-msgstr ""
+msgstr "Yanlış məlumatları bildirmək"
 
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/issues/list/issues-list.js
 msgid "Reporter"
-msgstr ""
+msgstr "Reportyor"
 
 #: app/scripts/components/issues/request-service-button.js
 msgid "Request a new service"
-msgstr ""
+msgstr "Yeni bir xidmət istəmək"
 
 #: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
 msgid "Request account removal for {userName}."
-msgstr ""
+msgstr "{userName} üçün hesabın silinməsini tələb edin."
 
 #: app/scripts/components/experts/extensions/expert-request-create-button.html
 msgid "Request an expert"
-msgstr ""
+msgstr "Ekspertin istənməsi"
 
 #: app/scripts/components/experts/requests/actions/expert-request-complain.js
 msgid "Request complaint"
-msgstr ""
+msgstr "Şikayət tələbi"
 
 #: app/scripts/components/openstack/openstack-tenant/actions.js
 msgid "Request custom flavour"
-msgstr ""
+msgstr "Xüsusi cəhətin tələbi"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
 msgid "Request custom flavour for OpenStack Tenant"
-msgstr ""
+msgstr "OpenStack İçarədar üçün xüsusi cəhət tələbi"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
 msgid "Request custom flavour for {{ $ctrl.tenant.name }}"
-msgstr ""
+msgstr "{{ $ctrl.tenant.name }} üçün xüsusi cəhət tələbi"
 
 #: app/scripts/components/issues/create/issue-create-dialog.js
 msgid "Request description"
-msgstr ""
+msgstr "Təsvir üçün sorğu"
 
 #: app/scripts/components/issues/routes.js
 msgid "Request detail"
-msgstr ""
+msgstr "Təfsilat üçün sorğu"
 
 #: app/scripts/components/offering/offering-details.html
 msgid "Request details"
-msgstr ""
+msgstr "Təfsilatlar üçün sorğu"
 
 #: app/scripts/components/openstack/openstack-tenant/actions.js
 msgid "Request direct access"
-msgstr ""
+msgstr "Birbaşa giriş sorğusu"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
 msgid "Request direct access to OpenStack Tenant"
-msgstr ""
+msgstr "OpenStack İçarədara birbaşa giriş sorğusu"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
 msgid "Request direct access to {{ $ctrl.tenant.name }}"
-msgstr ""
+msgstr "{{ $ctrl.tenant.name }} birbaşa giriş sorğusu"
 
 #: app/scripts/components/ansible/python-management/effects.ts
 msgid "Request for search for installed libraries in the virtual environments could not be created."
-msgstr ""
+msgstr "Virtual mühitdə quraşdırılmış kitabxanalar üçün axtarış sorğusu yaradıla bilməz."
 
 #: app/scripts/components/customer/details/customer-manage.js
 #: app/scripts/components/user/support/actions.ts
 msgid "Request removal"
-msgstr ""
+msgstr "Silmək üçün sorğu"
 
 #: app/scripts/components/issues/create/issue-create-dialog.js
 msgid "Request title"
-msgstr ""
+msgstr "Başlıq sorğusu"
 
 #: app/scripts/components/resource/actions/action-utils-service.js
 msgid "Request to {action} has been accepted."
-msgstr ""
+msgstr "{action} sorğusu qəbul edildi."
 
 #: app/scripts/components/ansible/python-management/details/PythonManagementActionsHistory.tsx
 #: app/scripts/components/issues/create/issue-create-dialog.html
@@ -4686,106 +4686,106 @@ msgstr ""
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 msgid "Request type"
-msgstr ""
+msgstr "Sorğu növü"
 
 #: app/scripts/components/issues/create/issue-registration.js
 msgid "Request {key} has been created."
-msgstr ""
+msgstr "Sorğu {key} yaradıldı."
 
 #: app/scripts/components/issues/create/issue-create-dialog.js
 #: app/scripts/components/issues/create/issue-quick-create.js
 msgid "Request {requestId} has been created."
-msgstr ""
+msgstr "Sorğu {requestId} yaradıldı."
 
 #: app/scripts/components/offering/offering-details.js
 #: app/scripts/components/offering/routes.js
 #: app/scripts/components/offering/sidebar.js
 #: app/scripts/components/offering/table-extension.js
 msgid "Requests"
-msgstr ""
+msgstr "Sorğular "
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/project/project-policies.html
 msgid "Required certifications"
-msgstr ""
+msgstr "Lazımi təsdiqləmələr"
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 msgid "Requirements"
-msgstr ""
+msgstr "Tələblər"
 
 #: app/scripts/components/invitations/actions/send.js
 msgid "Resend"
-msgstr ""
+msgstr "Yenidən göndərmək"
 
 #: app/scripts/components/digitalocean/droplet-resize.html
 msgid "Resize droplet"
-msgstr ""
+msgstr "Damlacığın ölçüsünü dəyişmək"
 
 #: app/scripts/components/issues/issue-detail.html
 msgid "Resolution"
-msgstr ""
+msgstr "Buraxılış"
 
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 msgid "Resolution SLA"
-msgstr ""
+msgstr "SLA (səviyyə xidmət razılaşması) buraxılışı"
 
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/issues/create/issue-create-dialog.html
 msgid "Resource"
-msgstr ""
+msgstr "Resurs"
 
 #: app/scripts/components/events/EventDetailsTable.tsx
 msgid "Resource configuration"
-msgstr ""
+msgstr "Resurs konfiqurasiyası"
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 msgid "Resource configuration is invalid. Please fix errors in form."
-msgstr ""
+msgstr "Resurs konfiqurasiyası etibarsızdır. Xahiş edirik formada səhvləri düzəldin."
 
 #: app/scripts/components/analytics/resource-analysis-new.html
 msgid "Resource count in"
-msgstr ""
+msgstr "-----resurs sayı"
 
 #: app/scripts/components/customer/workspace/customer-events.js
 #: app/scripts/components/project/project-events.js
 #: app/scripts/components/resource/events.ts
 msgid "Resource events"
-msgstr ""
+msgstr "Resurs hadisələri"
 
 #: app/scripts/components/resource/actions/action-utils-service.js
 msgid "Resource has been deleted."
-msgstr ""
+msgstr "Resurs silindi."
 
 #: app/scripts/components/resource/actions/base.ts
 #: app/scripts/components/resource/actions/constants.js
 msgid "Resource has been updated."
-msgstr ""
+msgstr "Resurs yeniləndi."
 
 #: app/scripts/components/resource/resource-header.js
 msgid "Resource is gone."
-msgstr ""
+msgstr "Resurs getdi."
 
 #: app/scripts/components/resource/state/utils.ts
 msgid "Resource is in sync"
-msgstr ""
+msgstr "Resurs sinxronlaşmadadır"
 
 #: app/scripts/components/resource/monitoring/ZabbixHostStateButton.tsx
 msgid "Resource is monitored using Zabbix."
-msgstr ""
+msgstr "Resurs Zabbixdən istifadə edərək izlənilir."
 
 #: app/scripts/components/resource/monitoring/ZabbixHostCreateButton.tsx
 msgid "Resource is not monitored yet."
-msgstr ""
+msgstr "Resurs hələ də izlənilmir."
 
 #: app/scripts/components/providers/details/provider-price-list.js
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 msgid "Resource type"
-msgstr ""
+msgstr "Resurs növü"
 
 #: app/scripts/components/analytics/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
 msgid "Resource usage"
-msgstr ""
+msgstr "Resurs istifadəsi"
 
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-details.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
@@ -4797,56 +4797,56 @@ msgstr ""
 #: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "Resources"
-msgstr ""
+msgstr "Resurslar"
 
 #: app/scripts/components/analytics/resource-analysis-new.html
 msgid "Resources by projects"
-msgstr ""
+msgstr "Layihələr üzrə resurslar"
 
 #: app/scripts/components/resource-import/resource-import-dialog.js
 msgid "Resources could not be imported"
-msgstr ""
+msgstr "Resurslar idxal edilə bilmədi"
 
 #: app/scripts/components/resource-import/resource-import-dialog.js
 msgid "Resources import has been initiated"
-msgstr ""
+msgstr "Resursların idxalı başlandı"
 
 #: app/scripts/components/issues/routes.js
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Resources usage"
-msgstr ""
+msgstr "Resursların istifadəsi"
 
 #: app/scripts/components/openstack/openstack-instance/actions/RestartAction.ts
 msgid "Restart"
-msgstr ""
+msgstr "Yenidən başlamaq"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Restarting"
-msgstr ""
+msgstr "Yenidən başlama"
 
 #: app/scripts/components/openstack/openstack-snapshot/module.js
 msgid "Restored volumes"
-msgstr ""
+msgstr "Bərpa edilmiş həcmlər"
 
 #: app/scripts/components/issues/attachments/utils.ts
 msgid "Restricted, because of type."
-msgstr ""
+msgstr "Növünə görə qadağandır."
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Restroing"
-msgstr ""
+msgstr "Bərpa"
 
 #: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 msgid "Retention time"
-msgstr ""
+msgstr "Saxlama vaxtı"
 
 #: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 msgid "Retention time in days, if 0 - resource will be kept forever"
-msgstr ""
+msgstr "Gündə saxlama müddəti, əgər 0 - resurs sonsuza qədər saxlanılacaq"
 
 #: app/scripts/components/billing/events/invoice-events-dialog.html
 msgid "Retry"
-msgstr ""
+msgstr "Yenidən cəhd edin"
 
 #: app/scripts/components/invitations/actions/invitation-dialog.html
 #: app/scripts/components/invitations/invitations-list.js
@@ -4855,88 +4855,88 @@ msgstr ""
 #: app/scripts/components/user/list/ProjectPermissions.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
 msgid "Role"
-msgstr ""
+msgstr "Vəzifə"
 
 #: app/scripts/components/team/add-project-member.html
 msgid "Role expires on"
-msgstr ""
+msgstr "Vəzifə ______başa çatır"
 
 #: app/scripts/components/team/project-users-list.js
 msgid "Role in project"
-msgstr ""
+msgstr "Layihədə vəzifəsi"
 
 #: app/scripts/components/team/events.ts
 msgid "Role management events"
-msgstr ""
+msgstr "Vəzifə idarəçiliyi hadisələri"
 
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "Run 'Find missing installed libraries' command to synchronize cloud broker state"
-msgstr ""
+msgstr "“Çatışmayan quraşdırılmış kitabxanaları tapın” əmrini işlədib bulud broker vəziyyətini sinxronizasiya edin"
 
 #: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js
 msgid "Runtime State"
-msgstr ""
+msgstr "İşləmə vaxtı Vəziyyəti"
 
 #: app/scripts/components/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 #: app/scripts/components/resource-import/import-virtual-machines-list.js
 msgid "Runtime state"
-msgstr ""
+msgstr "İşləmə vaxtı vəziyyəti"
 
 #: app/scripts/components/configs/base-config.js
 msgid "Russian"
-msgstr ""
+msgstr "Rus "
 
 #: app/scripts/components/auth/auth-service.js
 msgid "SAML2 single logout has been started. Please wait until it completes."
-msgstr ""
+msgstr "SAML2 (təhlükəsizlik təminatı sistemi üçün işarə dili) tək çıxış başlandı. Xahiş edirik tamamlanana qədər gözləyin."
 
 #: app/scripts/components/slurm/register-header.ts
 msgid "SLURM allocation"
-msgstr ""
+msgstr "SLURM yerləşdirilməsi"
 
 #: app/scripts/components/slurm/details/slurm-allocation-details-dialog.html
 msgid "SLURM allocation usage"
-msgstr ""
+msgstr "SLURM ayırma istifadəsi"
 
 #: app/scripts/components/user/constants.js
 msgid "SSH Keys"
-msgstr ""
+msgstr "SSH (təhlükəsizlik örtükləri) açarları"
 
 #: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
 msgid "SSH key"
-msgstr ""
+msgstr "SSH (təhlükəsizlik örtükləri) açarı"
 
 #: app/scripts/components/user/events.ts
 msgid "SSH key {ssh_key_name} has been created for user {affected_user_link}"
-msgstr ""
+msgstr "{ssh_key_name} SSH (təhlükəsizlik örtükləri) açarı {affected_user_link} istifadəçi üçün yaradılmışdır"
 
 #: app/scripts/components/user/events.ts
 msgid "SSH key {ssh_key_name} has been deleted for user {affected_user_link}"
-msgstr ""
+msgstr "{ssh_key_name} SSH (təhlükəsizlik örtükləri) {ssh_key_name} üçün {affected_user_link}"
 
 #: app/scripts/components/user/routes.js
 msgid "SSH keys"
-msgstr ""
+msgstr "SSH (təhlükəsizlik örtükləri) açarları"
 
 #: app/scripts/components/azure/AzureVirtualMachineSummary.tsx
 msgid "SSH port"
-msgstr ""
+msgstr "SSH (təhlükəsizlik örtükləri) portu"
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "SSH public key"
-msgstr ""
+msgstr "SSH (təhlükəsizlik örtükləri) ictimai açarı"
 
 #: app/scripts/components/experts/bids/details/expert-bid-summary.html
 msgid "SUBMITTED"
-msgstr ""
+msgstr "TƏQDIM EDILMIŞDIR"
 
 #: app/scripts/components/issues/routes.js
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Sankey diagram"
-msgstr ""
+msgstr "“Sankey” diaqramı"
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 #: app/scripts/components/project/project-providers.html
@@ -4945,16 +4945,16 @@ msgstr ""
 #: app/scripts/components/team/add-project-member.js
 #: app/scripts/components/team/add-team-member.js
 msgid "Save"
-msgstr ""
+msgstr "Yaddaşda saxlamaq"
 
 #: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Save virtual environments"
-msgstr ""
+msgstr "Virtual mühitləri saxla"
 
 #: app/scripts/components/controllers/base-controller-class-es6.js
 #: app/scripts/components/controllers/base-controller-class.js
 msgid "Saving of {vm_name} was successful."
-msgstr ""
+msgstr "{vm_name} yaddaşda saxlanması uğurlu olmuşdur."
 
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
@@ -4962,33 +4962,33 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 msgid "Schedule"
-msgstr ""
+msgstr "Cədvəl"
 
 #: app/scripts/components/navigation/header/main-search.html
 #: app/scripts/components/table-react/TableQuery.tsx
 #: app/scripts/components/table/responsive-table.js
 msgid "Search"
-msgstr ""
+msgstr "Axtarış"
 
 #: app/scripts/components/appstore/dialog/appstore-category-selector.html
 msgid "Search by name"
-msgstr ""
+msgstr "Adı ilə axtarış"
 
 #: app/scripts/components/ansible/python-management/effects.ts
 msgid "Search for installed libraries in the virtual environment has been scheduled."
-msgstr ""
+msgstr "Virtual mühitdə quraşdırılmış kitabxanalar üçün axtarış planlaşdırılıb."
 
 #: app/scripts/components/aws/AmazonForm.tsx
 msgid "Secret access key"
-msgstr ""
+msgstr "Gizli giriş açarı"
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
 msgid "Security group does not contain any rule yet."
-msgstr ""
+msgstr "Təhlükəsizlik qrupunda hələ heç bir qayda yoxdur."
 
 #: app/scripts/components/openstack/openstack-security-groups/module.js
 msgid "Security group has been updated."
-msgstr ""
+msgstr "Təhlükəsizlik qrupu yeniləndi."
 
 #: app/scripts/components/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: app/scripts/components/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
@@ -4996,208 +4996,208 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-security-groups/breadcrumbs.js
 #: app/scripts/components/openstack/openstack-tenant/tabs.js
 msgid "Security groups"
-msgstr ""
+msgstr "Təhlükəsizlik qrupları"
 
 #: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Security groups details"
-msgstr ""
+msgstr "Təhlükəsizlik qruplarının təfsilatları"
 
 #: app/scripts/components/issues/list/issues-short-list.html
 #: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "See all"
-msgstr ""
+msgstr "Hamısını gör"
 
 #: app/scripts/components/openstack/openstack-network/OpenStackNetworkSummary.tsx
 msgid "Segmentation ID"
-msgstr ""
+msgstr "Segmentasiya ID-si"
 
 #: app/scripts/components/appstore/dialog/appstore-category-selector.html
 #: app/scripts/components/appstore/providers/appstore-providers.js
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "Select"
-msgstr ""
+msgstr "Seçin"
 
 #: app/scripts/components/openstack/openstack-tenant/appstore-field-select-openstack-tenant.html
 msgid "Select OpenStack tenant..."
-msgstr ""
+msgstr "OpenStack icarədarını seçin ..."
 
 #: app/scripts/components/user/keys/appstore-field-select-ssh-key.html
 msgid "Select SSH public key..."
-msgstr ""
+msgstr "SSH (təhlükəsizlik örtükləri) ictimai açarı  seçin ..."
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Select Virtual Private Cloud package"
-msgstr ""
+msgstr "Virtual Özəl bulud paketini seçin"
 
 #: app/scripts/components/cost-planning/cost-plan-items.html
 msgid "Select a component"
-msgstr ""
+msgstr "Komponenti seçin"
 
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 msgid "Select affected resource..."
-msgstr ""
+msgstr "Təsirə məruz qalan resursu seçin ..."
 
 #: app/scripts/components/issues/create/issue-registration.html
 msgid "Select assignee..."
-msgstr ""
+msgstr "Təyinatçını seçin ..."
 
 #: app/scripts/components/issues/create/issue-registration.html
 msgid "Select caller..."
-msgstr ""
+msgstr "Zəng edəni seçin ..."
 
 #: app/scripts/components/cost-planning/cost-plan-certifications.html
 #: app/scripts/components/project/ProjectCreateForm.tsx
 #: app/scripts/components/project/project-policies.html
 msgid "Select certifications"
-msgstr ""
+msgstr "Təsdiqləmələri seçin"
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
 msgid "Select connected subnet"
-msgstr ""
+msgstr "Birləşmiş alt-şəbəkəni seçin"
 
 #: app/scripts/components/customer/create/customer-create-config.js
 msgid "Select country..."
-msgstr ""
+msgstr "Ölkəni seç..."
 
 #: app/scripts/components/intro/base-intro.js
 msgid "Select one to go to a customer workspace"
-msgstr ""
+msgstr "Müştəri iş yerinə keçmək üçün birini seçin"
 
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 msgid "Select organization..."
-msgstr ""
+msgstr "Təşkilat seçin ..."
 
 #: app/scripts/components/appstore/dialog/appstore-project-selector.html
 msgid "Select project"
-msgstr ""
+msgstr "Layihəni seçin"
 
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
 msgid "Select project..."
-msgstr ""
+msgstr "Layihəni seçin ..."
 
 #: app/scripts/components/appstore/providers/appstore-providers.js
 msgid "Select provider"
-msgstr ""
+msgstr "Provayderi seçin"
 
 #: app/scripts/components/providers/ProviderTypeField.tsx
 msgid "Select provider type"
-msgstr ""
+msgstr "Provayder növünü seçin"
 
 #: app/scripts/components/issues/types/issue-type-select.html
 msgid "Select request type"
-msgstr ""
+msgstr "Sorğu növünü seçin"
 
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 msgid "Select resource type"
-msgstr ""
+msgstr "Resurs növünü seçin"
 
 #: app/scripts/components/user/support/UserFilter.tsx
 msgid "Select role"
-msgstr ""
+msgstr "Vəzifəni seçin"
 
 #: app/scripts/components/openstack/openstack-backup/actions.js
 #: app/scripts/components/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "Select security groups..."
-msgstr ""
+msgstr "Təhlükəsizlik qruplarını seçin ..."
 
 #: app/scripts/components/issues/create/issue-registration.html
 msgid "Select service type..."
-msgstr ""
+msgstr "Xidmət növünü seçin ..."
 
 #: app/scripts/components/digitalocean/droplet-resize.html
 msgid "Select size..."
-msgstr ""
+msgstr "Ölçünü seçin ..."
 
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 msgid "Select state"
-msgstr ""
+msgstr "Vəziyyəti seçin"
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html
 msgid "Select subnet"
-msgstr ""
+msgstr "Alt şəbəkəni seçin"
 
 #: app/scripts/components/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Select subnets to connect to..."
-msgstr ""
+msgstr "____qoşulmaq üçün alt şəbəkələri seçin ..."
 
 #: app/scripts/components/team/user-selector.html
 msgid "Select user..."
-msgstr ""
+msgstr "İstifadəçini seçin ..."
 
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/navigation/workspace/select-workspace-toggle.html
 msgid "Select workspace"
-msgstr ""
+msgstr "İş yerini seçin"
 
 #: app/scripts/components/form/appstore-list-dialog.js
 msgid "Select {fieldLabel}"
-msgstr ""
+msgstr "{fieldLabel} seçin"
 
 #: app/scripts/components/appstore/providers/appstore-providers.js
 msgid "Selected"
-msgstr ""
+msgstr "Seçilmiş"
 
 #: app/scripts/components/billing/billing-utils.js
 msgid "Send notification"
-msgstr ""
+msgstr "Bildiriş göndər"
 
 #: app/scripts/components/intro/expert-manager-intro.js
 msgid "Sending invitation has never been simpler"
-msgstr ""
+msgstr "Dəvət göndərilməsi heç vaxt daha asan olmayıb"
 
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Sent"
-msgstr ""
+msgstr "Göndərildi"
 
 #: app/scripts/components/appstore/appstore-store.js
 msgid "Server error occurred."
-msgstr ""
+msgstr "Server xətası baş verdi."
 
 #: app/scripts/components/issues/types/constants.ts
 msgid "Service Request"
-msgstr ""
+msgstr "Xidmət tələbi"
 
 #: app/scripts/components/issues/types/constants.ts
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
-msgstr ""
+msgstr "Sorğu Tələbi - qismən və ya tamamilə xüsusi bir xidməti düzəliş etmək, əlavə etmək, dəyişdirmək və ya çıxarmaq üçün müştərinin tələbi."
 
 #: app/scripts/components/configs/base-config.js
 #: app/scripts/components/jira/sidebar.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Service desk"
-msgstr ""
+msgstr "Xidmət masası"
 
 #: app/scripts/components/jira/routes.js
 msgid "Service desk project"
-msgstr ""
+msgstr "Xidmət masası layihəsi"
 
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
 msgid "Service desk project name"
-msgstr ""
+msgstr "Xidmət masası layihəsinin adı"
 
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
 msgid "Service desk project type"
-msgstr ""
+msgstr "Xidmət masası layihəsinin növü"
 
 #: app/scripts/components/jira/routes.js
 msgid "Service desk projects"
-msgstr ""
+msgstr "Xidmət masası layihələri"
 
 #: app/scripts/components/issues/request-service-button.js
 msgid "Service name"
-msgstr ""
+msgstr "Xidmət adı"
 
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
 msgid "Service provider type"
-msgstr ""
+msgstr "Xidmət provayderinin növü"
 
 #: app/scripts/components/resource/state/utils.ts
 msgid "Service settings of this resource are in state erred."
-msgstr ""
+msgstr "Bu resursun xidmət parametrləri xəta vəziyyətindədir."
 
 #: app/scripts/components/appstore/appstore-store.js
 #: app/scripts/components/appstore/dialog/appstore-selector-dialog.html
@@ -5205,97 +5205,97 @@ msgstr ""
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/project/project-workspace.js
 msgid "Service store"
-msgstr ""
+msgstr "Xidmət bazası"
 
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/issues/list/issues-list.js
 msgid "Service type"
-msgstr ""
+msgstr "Xidmət növü"
 
 #: app/scripts/components/ansible/jupyter-hub-management/validation.ts
 msgid "Session time to live should be creater than 1 hour"
-msgstr ""
+msgstr "İnteraktiv rejim üçün vaxt 1 saatdan çox olmalıdır"
 
 #: app/scripts/components/freeipa/freeipa-quota.html
 msgid "Set limit"
-msgstr ""
+msgstr "Limiti seçin"
 
 #: app/scripts/components/openstack/openstack-security-groups/module.js
 msgid "Set rules"
-msgstr ""
+msgstr "Qaydaları seçin"
 
 #: app/scripts/components/slurm/SlurmForm.tsx
 msgid "Set to true to activate privilege escalation"
-msgstr ""
+msgstr "İmtiyaz artımını aktivləşdirmək üçün doğrunu seçin"
 
 #: app/scripts/components/providers/details/dialog.html
 msgid "Settings"
-msgstr ""
+msgstr "Parametrlər"
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Should be given to OAuth service provider. Example: https://VM_EXTERNAL_IP/hub/oauth_callback"
-msgstr ""
+msgstr "OAuth (Açıq İcazə) xidmət provayderinə verilməlidir. Məsələn: https: // VM_EXTERNAL_IP / hub / oauth_callback"
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Should be obtained from OAuth service provider"
-msgstr ""
+msgstr "OAuth xidmət təminatçısından alınmalıdır"
 
 #: app/scripts/components/table/responsive-table.js
 msgid "Show _MENU_ entries"
-msgstr ""
+msgstr "_MENU_ girişlərini göstər"
 
 #: app/scripts/components/dashboard/DashboardFeed.tsx
 msgid "Show all"
-msgstr ""
+msgstr "Hamısını göstər"
 
 #: app/scripts/components/billing/price-estimate-button.html
 msgid "Show details"
-msgstr ""
+msgstr "Təfsilatları göstər"
 
 #: app/scripts/components/billing/events/invoice-events-toggle.html
 msgid "Show events"
-msgstr ""
+msgstr "Hadisələri göstər"
 
 #: app/scripts/components/intro/expert-manager-intro.js
 msgid "Show me invitations"
-msgstr ""
+msgstr "Mənə dəvətləri göstər"
 
 #: app/scripts/components/resource/UserPassword.tsx
 msgid "Show password"
-msgstr ""
+msgstr "Şifrəni göstər"
 
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
 msgid "Show private"
-msgstr ""
+msgstr "Özəli göstər"
 
 #: app/scripts/components/offering/OfferingReportButton.tsx
 msgid "Show report"
-msgstr ""
+msgstr "Hesabatı göstər"
 
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
 msgid "Show shared"
-msgstr ""
+msgstr "Paylaşılanları göstərin"
 
 #: app/scripts/components/table/responsive-table.js
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
-msgstr ""
+msgstr "_CƏMİ_ girişləri _ƏVVƏLDƏN_  _AXIRA_kimi göstərmək"
 
 #: app/scripts/components/table-react/TableInfo.tsx
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
-msgstr ""
+msgstr "{nəticə Sayı} girişlərindən {parçaBaşlanğıc}-dan {parçaSon}-a kimi göstərmək."
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.html
 msgid "Sign in"
-msgstr ""
+msgstr "Daxil ol"
 
 #: app/scripts/components/auth/auth-button-text.js
 msgid "Sign in with"
-msgstr ""
+msgstr "__ilə daxil ol"
 
 #: app/scripts/components/auth/auth-login.html
 msgid "Sign in with trusted identity"
-msgstr ""
+msgstr "Etibarlı identifikasiya ilə daxil olun"
 
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
@@ -5312,78 +5312,78 @@ msgstr ""
 #: app/scripts/components/resource/list/resource-volumes-list.js
 #: app/scripts/components/rijkscloud/VolumeSummary.tsx
 msgid "Size"
-msgstr ""
+msgstr "Ölçü"
 
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 msgid "Size name"
-msgstr ""
+msgstr "Ölçü adı"
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Skip floating IP assignment"
-msgstr ""
+msgstr "Üzən IP təyinatını üstündən adlayıb keçin"
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.js
 msgid "Small"
-msgstr ""
+msgstr "Kiçik"
 
 #: app/scripts/components/openstack/openstack-snapshot/module.js
 msgid "Snapshot has been updated."
-msgstr ""
+msgstr "Ani təsvir yeniləndi."
 
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 msgid "Snapshot name"
-msgstr ""
+msgstr "Ani təsvir adı"
 
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
 msgid "Snapshot schedule has been updated."
-msgstr ""
+msgstr "An təsvir qrafiki yeniləndi."
 
 #: app/scripts/components/openstack/openstack-snapshot-schedule/breadcrumbs.js
 #: app/scripts/components/openstack/openstack-volume/module.js
 msgid "Snapshot schedules"
-msgstr ""
+msgstr "Ani təsvir qrafikləri"
 
 #: app/scripts/components/dashboard/base-quotas.ts
 msgid "Snapshot size, GB"
-msgstr ""
+msgstr "Ani təsvir ölçüsü, GB"
 
 #: app/scripts/components/openstack/openstack-backup/tabs.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
 #: app/scripts/components/openstack/openstack-volume/module.js
 #: app/scripts/components/resource/list/resource-storage-tabs.html
 msgid "Snapshots"
-msgstr ""
+msgstr "Ani təsvirlər"
 
 #: app/scripts/components/quotas/constants.js
 msgid "Snapshots count"
-msgstr ""
+msgstr "Ani təsvirlər sayı"
 
 #: app/scripts/components/user/support/UserList.tsx
 #: app/scripts/components/user/support/utils.ts
 msgid "Staff"
-msgstr ""
+msgstr "Personal "
 
 #: app/scripts/components/user/support/utils.ts
 msgid "Staff and Support user"
-msgstr ""
+msgstr "Personal və Dəstək istifadəçisi"
 
 #: app/scripts/components/openstack/openstack-instance/actions/StartAction.ts
 msgid "Start"
-msgstr ""
+msgstr "Başlama"
 
 #: app/scripts/components/customer/customer-list.js
 msgid "Start day of accounting"
-msgstr ""
+msgstr "Uçotun  başlama günü"
 
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
 msgid "Start time"
-msgstr ""
+msgstr "Başlama vaxtı"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Starting"
-msgstr ""
+msgstr "Başlanğıc"
 
 #: app/scripts/components/ansible/application-list.js
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
@@ -5418,7 +5418,7 @@ msgstr ""
 #: app/scripts/components/slurm/slurm-allocation-list.js
 #: app/scripts/components/user/hooks/hook-list.js
 msgid "State"
-msgstr ""
+msgstr "Vəziyyət "
 
 #: app/scripts/components/invitations/invitations-list.js
 #: app/scripts/components/issues/issue-detail.html
@@ -5428,23 +5428,23 @@ msgstr ""
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/user/support/UserDetailsTable.tsx
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: app/scripts/components/resource-import/resource-import-dialog.js
 msgid "Step 1. Select provider"
-msgstr ""
+msgstr "Addım 1. Provayderi seçin"
 
 #: app/scripts/components/resource-import/resource-import-dialog.html
 msgid "Step 2. Select resources"
-msgstr ""
+msgstr "Addım 2. Resursları seçin"
 
 #: app/scripts/components/openstack/openstack-instance/actions/StopAction.ts
 msgid "Stop"
-msgstr ""
+msgstr "Dur"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Stopping"
-msgstr ""
+msgstr "Durdurma"
 
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -5461,16 +5461,16 @@ msgstr ""
 #: app/scripts/components/quotas/constants.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Storage"
-msgstr ""
+msgstr "Saxlama"
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.html
 msgid "Storage limit GB"
-msgstr ""
+msgstr "Saxlama məhdudiyyəti GB"
 
 #: app/scripts/components/appstore/routes.js
 #: app/scripts/components/configs/base-config.js
 msgid "Storages"
-msgstr ""
+msgstr "Saxlanmalar"
 
 #: app/scripts/components/digitalocean/droplet-resize.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
@@ -5478,77 +5478,77 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 #: app/scripts/components/resource/actions/dialog/action-dialog.html
 msgid "Submit"
-msgstr ""
+msgstr "Təqdim etmə"
 
 #: app/scripts/components/experts/requests/actions/expert-request-complain.js
 msgid "Submit complaint"
-msgstr ""
+msgstr "Şikayət vermə"
 
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
 msgid "Submit with"
-msgstr ""
+msgstr "__ilə təqdim etmə"
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js
 msgid "Subnet CIDR"
-msgstr ""
+msgstr "CIDR (sinifsiz domenlərarası marşrutlama) alt-şəbəkəsi"
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js
 msgid "Subnet Name"
-msgstr ""
+msgstr "Alt-şəbəkə Adı"
 
 #: app/scripts/components/openstack/openstack-subnet/actions.js
 msgid "Subnet has been updated."
-msgstr ""
+msgstr "Alt-şəbəkə yeniləndi."
 
 #: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js
 #: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js
 msgid "Subnets"
-msgstr ""
+msgstr "Al-şəbəkələr"
 
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "Subnets from where connection to self-service is allowed."
-msgstr ""
+msgstr "Özünə xidmətə qoşulma icazə verilən alt-şəbəkələr."
 
 #: app/scripts/components/azure/AzureForm.tsx
 msgid "Subscription ID"
-msgstr ""
+msgstr "Abunə ID-si"
 
 #: app/scripts/components/billing/invoice-details.html
 msgid "Subtotal"
-msgstr ""
+msgstr "Cəmi"
 
 #: app/scripts/components/jira/issue/IssueCreateDialog.tsx
 #: app/scripts/components/offering/offering-summary.html
 #: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
 msgid "Summary"
-msgstr ""
+msgstr "Xülasə"
 
 #: app/scripts/components/navigation/header/support-link.html
 #: app/scripts/components/user/support/UserList.tsx
 msgid "Support"
-msgstr ""
+msgstr "Dəstək"
 
 #: app/scripts/components/issues/routes.js
 #: app/scripts/components/issues/workspace/issues-workspace.html
 msgid "Support dashboard"
-msgstr ""
+msgstr "Dəstək paneli"
 
 #: app/scripts/components/issues/events.ts
 msgid "Support request events"
-msgstr ""
+msgstr "Dəstək sorğu hadisələri"
 
 #: app/scripts/components/issues/routes.js
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Support requests"
-msgstr ""
+msgstr "Dəstək sorğuları"
 
 #: app/scripts/components/user/support/utils.ts
 msgid "Support user"
-msgstr ""
+msgstr "Dəstək istifadəçisi"
 
 #: app/scripts/components/freeipa/freeipa-account-edit.html
 msgid "Sync profile"
-msgstr ""
+msgstr "Sinxronizasiya profili"
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js
 #: app/scripts/components/openstack/openstack-floating-ips/module.js
@@ -5563,42 +5563,42 @@ msgstr ""
 #: app/scripts/components/rijkscloud/module.js
 #: app/scripts/components/slurm/actions.js
 msgid "Synchronise"
-msgstr ""
+msgstr "Sinxronlaşdırın"
 
 #: app/scripts/components/configs/base-config.js
 msgid "System administrator"
-msgstr ""
+msgstr "Sistem administratoru"
 
 #: app/scripts/components/providers/provider-list.js
 msgid "System provider"
-msgstr ""
+msgstr "Sistem provayderi (təminatçısı)"
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 #: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "System user"
-msgstr ""
+msgstr "Sistem istifadəçisi"
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "System volume size"
-msgstr ""
+msgstr "Sistemin həcmi ölçüsü"
 
 #: app/scripts/components/billing/invoice-details.html
 msgid "TAX"
-msgstr ""
+msgstr "VERGİ"
 
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
 msgid "TOTAL"
-msgstr ""
+msgstr "ÜMUMİ"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Taking a snapshot"
-msgstr ""
+msgstr "Ani təsviri çəkmək"
 
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Tax"
-msgstr ""
+msgstr "Vergi"
 
 #: app/scripts/components/customer/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
@@ -5607,39 +5607,39 @@ msgstr ""
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/project/routes.js
 msgid "Team"
-msgstr ""
+msgstr "Heyət "
 
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 msgid "Team does not have members yet."
-msgstr ""
+msgstr "Heyətin hələlik üzvləri yoxdur."
 
 #: app/scripts/components/dashboard/base-quotas.ts
 msgid "Team size"
-msgstr ""
+msgstr "Heyət ölçüsü"
 
 #: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
 msgid "Templates"
-msgstr ""
+msgstr "Şablonlar"
 
 #: app/scripts/components/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 #: app/scripts/components/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: app/scripts/components/openstack/openstack-security-groups/OpenStackSecurityGroupSummary.tsx
 #: app/scripts/components/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 msgid "Tenant"
-msgstr ""
+msgstr "İcarədar"
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
 msgid "Tenant ID"
-msgstr ""
+msgstr "İcarədar ID-si"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.js
 msgid "Tenant has been assigned to the package."
-msgstr ""
+msgstr "Paketə icarədar təyin edilib."
 
 #: app/scripts/components/openstack/openstack-tenant/actions.js
 msgid "Tenant has been updated."
-msgstr ""
+msgstr "İcarədar yenilənib."
 
 #: app/scripts/components/openstack/OpenStackForm.tsx
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
@@ -5648,21 +5648,21 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
 msgid "Tenant name"
-msgstr ""
+msgstr "İcarədar adı"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js
 msgid "Tenant package has been changed."
-msgstr ""
+msgstr "İcarə paketi dəyişdirildi."
 
 #: app/scripts/components/openstack/OpenStackForm.tsx
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
 msgid "Tenant user password"
-msgstr ""
+msgstr "İcarədar istifadəçi şifrəsi"
 
 #: app/scripts/components/openstack/OpenStackForm.tsx
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
 msgid "Tenant user username"
-msgstr ""
+msgstr "İcarədar istifadəçi adı"
 
 #: app/scripts/components/experts/expert-provider-details.html
 #: app/scripts/components/form/appstore-field-tos.html
@@ -5672,140 +5672,140 @@ msgstr ""
 #: app/scripts/components/offering/appstore-offering.html
 #: app/scripts/components/user/support/TermsOfService.tsx
 msgid "Terms of Service"
-msgstr ""
+msgstr "Xidmət Şərtləri"
 
 #: app/scripts/components/providers/details/provider-details.html
 msgid "Terms of Services"
-msgstr ""
+msgstr "Xidmət şərtləri"
 
 #: app/scripts/components/routes/about.js
 msgid "Terms of service"
-msgstr ""
+msgstr "Xidmət şərtləri"
 
 #: app/scripts/components/intro/expert-manager-intro.js
 msgid "Thanks"
-msgstr ""
+msgstr "Təşəkkürlər"
 
 #: app/scripts/components/openstack/openstack-tenant/appstore-field-select-openstack-tenant.html
 msgid "There are no OpenStack tenants yet."
-msgstr ""
+msgstr "Heç bir OpenStack icarədarı yoxdur."
 
 #: app/scripts/components/user/keys/appstore-field-select-ssh-key.html
 msgid "There are no SSH public keys yet."
-msgstr ""
+msgstr "Hələ SSH (təhlükəsizlik örtükləri) ictimai açarları yoxdur."
 
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 #: app/scripts/components/resource/actions/action-button-resource.html
 msgid "There are no actions."
-msgstr ""
+msgstr "Heç bir hərəkət yoxdur."
 
 #: app/scripts/components/ansible/application-list.js
 msgid "There are no applications yet."
-msgstr ""
+msgstr "Heç bir tətbiq proqramı yoxdur."
 
 #: app/scripts/components/team/add-team-member.html
 msgid "There are no available projects."
-msgstr ""
+msgstr "Mövcud layihələr yoxdur."
 
 #: app/scripts/components/team/add-project-member.html
 msgid "There are no available users."
-msgstr ""
+msgstr "Mövcud istifadəçilər yoxdur."
 
 #: app/scripts/components/issues/comments/IssueCommentsList.spec.tsx
 #: app/scripts/components/issues/comments/IssueCommentsList.tsx
 msgid "There are no comments yet."
-msgstr ""
+msgstr "Hələ heç bir şərh yoxdur."
 
 #: app/scripts/components/billing/events/invoice-events-dialog.html
 msgid "There are no events for this resource."
-msgstr ""
+msgstr "Bu resurs üçün heç bir tədbir yoxdur."
 
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
 msgid "There are no experts yet."
-msgstr ""
+msgstr "Hələ heç bir ekspert yoxdur."
 
 #: app/scripts/components/form/appstore-field-list.js
 msgid "There are no items yet."
-msgstr ""
+msgstr "Hələ heç bir maddə yoxdur."
 
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "There are no organizations matching filter."
-msgstr ""
+msgstr "Filtrə uyğun bir təşkilat yoxdur."
 
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "There are no projects yet for this organization."
-msgstr ""
+msgstr "Hələ bu təşkilat üçün bir layihə yoxdur."
 
 #: app/scripts/components/providers/details/provider-projects.html
 msgid "There are no projects yet."
-msgstr ""
+msgstr "Hələ heç bir layihə yoxdur."
 
 #: app/scripts/components/experts/bids/expert-bids-list.js
 msgid "There are no proposals yet."
-msgstr ""
+msgstr "Hələ heç bir təklif yoxdur."
 
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 msgid "There are no providers for this deployment plan."
-msgstr ""
+msgstr "Bu yerləşdirmə planı üçün heç bir provayder yoxdur."
 
 #: app/scripts/components/project/project-providers.html
 msgid "There are no providers yet."
-msgstr ""
+msgstr "Hələ heç Hələ heç bir sorğu yoxdur.bir provayder yoxdur."
 
 #: app/scripts/components/issues/list/issues-short-list.html
 msgid "There are no requests yet."
-msgstr ""
+msgstr "Hələ heç bir sorğu yoxdur."
 
 #: app/scripts/components/analytics/resource-analysis-new.html
 msgid "There are no resources in the organization."
-msgstr ""
+msgstr "Təşkilatda heç bir resurs yoxdur."
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html
 msgid "There are no suitable VPC packages for this tenant."
-msgstr ""
+msgstr "İcarədar üçün uyğun VPC (virtual çığır birləşmələri) paketləri yoxdur."
 
 #: app/scripts/components/appstore/providers/appstore-providers-empty-message.js
 msgid "There are no {categoryLabel} providers available for the current project."
-msgstr ""
+msgstr "Mövcud layihə üçün heç bir {categoryLabel} provayderi mövcud deyil."
 
 #: app/scripts/components/table-react/TablePlaceholder.tsx
 msgid "There are no {verboseName} found matching the filter."
-msgstr ""
+msgstr "Filtrə uyğun heç bir {verboseName} tapılmadı."
 
 #: app/scripts/components/table-react/TablePlaceholder.tsx
 msgid "There are no {verboseName} yet."
-msgstr ""
+msgstr "Hələ heç bir {verboseName} yoxdur."
 
 #: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "There is no activity yet."
-msgstr ""
+msgstr "Hələlik heç bir fəaliyyət yoxdur."
 
 #: app/scripts/components/slurm/slurm-prices.html
 msgid "There's no pricing package for the batch processing provider."
-msgstr ""
+msgstr "Qrup emalı provayderi üçün heç bir qiymət paketi yoxdur."
 
 #: app/scripts/components/form/appstore-field-string.html
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 msgid "This field contains invalid characters."
-msgstr ""
+msgstr "Bu sahədə yanlış simvollar var."
 
 #: app/scripts/components/form/appstore-field-email.html
 #: app/scripts/components/form/appstore-field-tel.html
 msgid "This field is required"
-msgstr ""
+msgstr "Bu xananın doldurulması məcburidir"
 
 #: app/scripts/components/form/appstore-field-string.html
 msgid "This field is required."
-msgstr ""
+msgstr "Bu xananın doldurulması məcburidir."
 
 #: app/scripts/components/user/keys/key-create.js
 msgid "This field may not be blank."
-msgstr ""
+msgstr "Bu sahə boş ola bilməz."
 
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 msgid "This is an objective."
-msgstr ""
+msgstr "Bu, bir məqsəddir."
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
@@ -5816,34 +5816,34 @@ msgstr ""
 #: app/scripts/components/rijkscloud/VolumeCreateConfig.js
 #: app/scripts/components/slurm/slurm-allocation-config.js
 msgid "This name will be visible in accounting data."
-msgstr ""
+msgstr "Bu ad uçot məlumatlarında görünəcək."
 
 #: app/scripts/components/experts/extensions/workspace-selector.html
 msgid "This organization is an expert provider."
-msgstr ""
+msgstr "Bu təşkilat bir ekspert provayderidir."
 
 #: app/scripts/components/navigation/cookies/cookies-consent.html
 msgid "This website uses cookies to ensure you get the best experience on our website."
-msgstr ""
+msgstr "Bu vebsayt sizin ən yaxşı təcrübəni əldə etməyiniz üçün cookies istifadə edir."
 
 #: app/scripts/components/issues/list/issues-list.js
 #: app/scripts/components/issues/list/issues-short-list.html
 msgid "Time in progress"
-msgstr ""
+msgstr "Vaxt gedir"
 
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 msgid "Time to resolution"
-msgstr ""
+msgstr "Buraxılış üçün vaxt"
 
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/events/base-event-list.js
 #: app/scripts/components/user/list/UserEvents.tsx
 msgid "Timestamp"
-msgstr ""
+msgstr "Zaman qeydi"
 
 #: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 msgid "Timezone"
-msgstr ""
+msgstr "Zaman zonası"
 
 #: app/scripts/components/issues/create/issue-create-dialog.js
 #: app/scripts/components/issues/create/issue-quick-create.html
@@ -5853,39 +5853,41 @@ msgstr ""
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/user/keys/key-list.js
 msgid "Title"
-msgstr ""
+msgstr "Başlıq"
 
 #: app/scripts/components/billing/invoice-details.html
 msgid "To"
-msgstr ""
+msgstr "Kimə"
 
 #: app/scripts/components/customer/details/customer-report-error.js
 msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
 msgstr ""
+"Təşkilatınızına dair təfsilatları düzəltmək üçün, xahiş edirik \n"
+"<a href=\"mailto:{supportEmail}\"> {supportEmail} </a> , ünvanına bir e-poçt göndərin və mövcud məlumatdakı səhvləri göstərin. Çox sağ olun!"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.html
 msgid "To create custom flavour, please send a request to {{$ctrl.supportEmail}}."
-msgstr ""
+msgstr "Xüsusi cəhət yaratmaq üçün {{$ ctrl.supportEmail}} ünvanına bir sorğu göndərin."
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html
 msgid "To get access, please send a request to {{$ctrl.supportEmail}}."
-msgstr ""
+msgstr "Giriş üçün, {{$ ctrl.supportEmail}} ünvanına bir sorğu göndərin."
 
 #: app/scripts/components/auth/auth-init.html
 msgid "To get your clouds under control, please fill in your data."
-msgstr ""
+msgstr "Buludlarınızı nəzarətə almaq üçün, məlumatlarınızı doldurun."
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
 msgid "To port"
-msgstr ""
+msgstr "Porta "
 
 #: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
 msgid "To remove account, please send a request to {support}."
-msgstr ""
+msgstr "Hesabı silmək üçün, {support} üçün sorğu göndərin."
 
 #: app/scripts/components/intro/base-intro.js
 msgid "To start please select a workspace"
-msgstr ""
+msgstr "Başlamaq üçün iş sahəsi seçin"
 
 #: app/scripts/components/analytics/resource-pie-chart.html
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -5894,37 +5896,37 @@ msgstr ""
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Total"
-msgstr ""
+msgstr "Ümumi"
 
 #: app/scripts/components/dashboard/dashboard-chart-service.js
 msgid "Total cost"
-msgstr ""
+msgstr "Ümumi dəyəri"
 
 #: app/scripts/components/customer/customer-list.html
 msgid "Total cost:"
-msgstr ""
+msgstr "Ümumi dəyəri:"
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
 msgid "Total planned resource consumption"
-msgstr ""
+msgstr "Ümumi planlaşdırılan resursların istehlakı"
 
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
 msgid "Total price"
-msgstr ""
+msgstr "Ümumi qiymət"
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 msgid "Total storage"
-msgstr ""
+msgstr "Ümumi saxlama"
 
 #: app/scripts/components/billing/billing-record-details.html
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
-msgstr ""
+msgstr "UTC vaxt zonasından istifadə etməklə izlənilir, sizin brauzerinizin vaxt zonası ilə nümayiş olunur "
 
 #: app/scripts/components/experts/requests/details/expert-request-details.html
 #: app/scripts/components/user/user-popover.html
 msgid "Try again"
-msgstr ""
+msgstr "Yenidən cəhd et"
 
 #: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
@@ -5939,463 +5941,463 @@ msgstr ""
 #: app/scripts/components/providers/details/provider-details.html
 #: app/scripts/components/providers/provider-list.js
 msgid "Type"
-msgstr ""
+msgstr "Tipi"
 
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 #: app/scripts/components/invitations/invitations-list.js
 msgid "URL"
-msgstr ""
+msgstr "URL (resursun vahid göstərici)"
 
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 msgid "UUID"
-msgstr ""
+msgstr "UUID (universal unikal idenifikator)"
 
 #: app/scripts/components/auth/auth-activation.js
 msgid "Unable to activate account."
-msgstr ""
+msgstr "Hesabı aktivləşdirmək olmur."
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
 msgid "Unable to authenticate using Mobile ID."
-msgstr ""
+msgstr "Mobil ID istifadə edərək identifikasiya təsdiqlənməsi edilə bilmir."
 
 #: app/scripts/components/experts/requests/actions/expert-request-cancel.js
 msgid "Unable to cancel expert request."
-msgstr ""
+msgstr "Ekspert sorğusu ləğv edilə bilmir."
 
 #: app/scripts/components/invitations/actions/cancel.js
 msgid "Unable to cancel invitation."
-msgstr ""
+msgstr "Dəvəti ləğv etmək olmur."
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package-service.js
 msgid "Unable to change tenant package."
-msgstr ""
+msgstr "İcarədar paketi dəyişdirə bilmir."
 
 #: app/scripts/components/experts/requests/actions/expert-request-complete.js
 msgid "Unable to complete expert request."
-msgstr ""
+msgstr "Ekspert sorğusunu tamamlamaq olmur."
 
 #: app/scripts/components/freeipa/freeipa-account-create.js
 msgid "Unable to create a FreeIPA profile."
-msgstr ""
+msgstr "Bir FreeIPA profili yaratmaq olmur."
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 msgid "Unable to create application."
-msgstr ""
+msgstr "Tətbiq yaratmaq olmur."
 
 #: app/scripts/components/invitations/actions/invitation-dialog-service.js
 msgid "Unable to create invitation."
-msgstr ""
+msgstr "Dəvəti yaratmaq mümkün deyil."
 
 #: app/scripts/components/project/project-providers-service.js
 #: app/scripts/components/providers/details/provider-projects.js
 msgid "Unable to create link."
-msgstr ""
+msgstr "Linki yaratmaq mümkün deyil."
 
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.js
 msgid "Unable to create proposal."
-msgstr ""
+msgstr "Təklifi yaratmaq mümkün deyil."
 
 #: app/scripts/components/providers/effects.tsx
 msgid "Unable to create provider, please check your credentials and try again."
-msgstr ""
+msgstr "Provayderi yaratmaq mümkün deyil, məlumatlarınızı yoxlayın və yenidən cəhd edin."
 
 #: app/scripts/components/offering/appstore-offering.js
 msgid "Unable to create request for a turnkey solution."
-msgstr ""
+msgstr "Açar ilə təslim həlli üçün sorğu yaratmaq mümkün deyil."
 
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.js
 msgid "Unable to delete application"
-msgstr ""
+msgstr "Tətbiqi silmək mümkün olmur"
 
 #: app/scripts/components/issues/attachments/effects.ts
 msgid "Unable to delete attachment."
-msgstr ""
+msgstr "Əlavəni silmək mümkün deyil."
 
 #: app/scripts/components/issues/comments/effects.ts
 msgid "Unable to delete comment."
-msgstr ""
+msgstr "Şərhi silmək mümkün deyil."
 
 #: app/scripts/components/project/project-providers-service.js
 #: app/scripts/components/providers/details/provider-projects.js
 msgid "Unable to delete link."
-msgstr ""
+msgstr "Linki silmək mümkün deyil."
 
 #: app/scripts/components/issues/comments/effects.ts
 msgid "Unable to edit comment."
-msgstr ""
+msgstr "Şərhi redaktə etmək mümkün deyil."
 
 #: app/scripts/components/issues/attachments/effects.ts
 msgid "Unable to fetch attachment."
-msgstr ""
+msgstr "Əlavəni həll etmək mümkün deyil."
 
 #: app/scripts/components/issues/comments/effects.ts
 msgid "Unable to fetch comments."
-msgstr ""
+msgstr "Şərhi almaq mümkün deyil."
 
 #: app/scripts/components/table-react/Table.tsx
 msgid "Unable to fetch data."
-msgstr ""
+msgstr "Məlumatı əldə etmək mümkün deyil."
 
 #: app/scripts/components/project/project-providers-service.js
 msgid "Unable to fetch project providers."
-msgstr ""
+msgstr "Layihə təchizatçılarını əldə etmək mümkün deyil."
 
 #: app/scripts/components/issues/comments/utils.ts
 msgid "Unable to find:"
-msgstr ""
+msgstr "Tapmaq mümkün deyil:"
 
 #: app/scripts/components/openstack/openstack-tenant/appstore-field-select-openstack-tenant.js
 msgid "Unable to get list of OpenStack tenants."
-msgstr ""
+msgstr "OpenStack icarədarlarının siyahısını almaq mümkün deyil."
 
 #: app/scripts/components/user/keys/appstore-field-select-ssh-key.js
 msgid "Unable to get list of SSH public keys."
-msgstr ""
+msgstr "SSH (təhlükəsizlik örtükləri) ictimai açarlarının siyahısını əldə etmək mümkün deyil."
 
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsContainer.tsx
 msgid "Unable to load JupyterHub management details."
-msgstr ""
+msgstr "JupyterHub idarəetmə təfsilatlarını yükləmək mümkün deyil."
 
 #: app/scripts/components/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Unable to load Zabbix host details."
-msgstr ""
+msgstr "Zabbix host təfərrüatlarını yükləmək olmur."
 
 #: app/scripts/components/core/bootstrap.js
 msgid "Unable to load application configuration. Please reload this page."
-msgstr ""
+msgstr "Tətbiq konfiqurasiyası yüklənə bilmir. Xahiş edirik, bu səhifəni yenidən yükləyin."
 
 #: app/scripts/components/issues/comments/IssueCommentsList.spec.tsx
 #: app/scripts/components/issues/comments/IssueCommentsList.tsx
 msgid "Unable to load comments."
-msgstr ""
+msgstr "Şərhlər yüklənə bilmir."
 
 #: app/scripts/components/billing/events/invoice-events-dialog.html
 msgid "Unable to load events for this resource."
-msgstr ""
+msgstr "Bu resurs üçün hadisələr yüklənə bilmir."
 
 #: app/scripts/components/experts/requests/details/expert-request-details.html
 msgid "Unable to load expert request."
-msgstr ""
+msgstr "Ekspert sorğusu yüklənə bilmir."
 
 #: app/scripts/components/core/DownloadLink/effects.tsx
 msgid "Unable to load file."
-msgstr ""
+msgstr "Fayl yüklənə bilmir."
 
 #: app/scripts/components/project/ProjectCreateContainer.tsx
 msgid "Unable to load project types or certifications."
-msgstr ""
+msgstr "Layihə növləri və təsdiqlər yüklənə bilmir."
 
 #: app/scripts/components/providers/ProviderUpdateComponent.tsx
 msgid "Unable to load provider."
-msgstr ""
+msgstr "Provayder yüklənə bilmir."
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/ansible/python-management/details/PythonManagementDetailsContainer.tsx
 msgid "Unable to load python management details."
-msgstr ""
+msgstr "Python idarəetmə təfərrüatları yüklənə bilmir."
 
 #: app/scripts/components/user/user-popover.html
 msgid "Unable to load user."
-msgstr ""
+msgstr "İstifadəçi yüklənə bilmir."
 
 #: app/scripts/components/resource/actions/dialog/action-dialog.js
 msgid "Unable to perform action"
-msgstr ""
+msgstr "Hərəkət icra edilə bilmir"
 
 #: app/scripts/components/issues/comments/effects.ts
 msgid "Unable to post comment."
-msgstr ""
+msgstr "Şərhi qoymaq mümkün deyil."
 
 #: app/scripts/components/invitations/actions/send.js
 msgid "Unable to resend invitation."
-msgstr ""
+msgstr "Dəvəti yenidən göndərmək mümkün deyil."
 
 #: app/scripts/components/auth/auth-init.js
 msgid "Unable to save user."
-msgstr ""
+msgstr "İstifadəçi yaddaşda saxlanıla bilmir."
 
 #: app/scripts/components/billing/billing-utils.js
 msgid "Unable to send record notification."
-msgstr ""
+msgstr "Qeyd bildirişini göndərmək mümkün deyil."
 
 #: app/scripts/components/providers/details/provider-project-link-quotas.js
 msgid "Unable to set quotas."
-msgstr ""
+msgstr "Kvotaları təyin etmək mümkün deyil."
 
 #: app/scripts/components/issues/comments/effects.ts
 msgid "Unable to submit empty comment."
-msgstr ""
+msgstr "Boş şərh vermək mümkün deyil."
 
 #: app/scripts/components/providers/effects.tsx
 msgid "Unable to update provider."
-msgstr ""
+msgstr "Provayderi yeniləmək mümkün deyil."
 
 #: app/scripts/components/issues/attachments/effects.ts
 msgid "Unable to upload attachment."
-msgstr ""
+msgstr "Əlavəni yükləmək mümkün deyil."
 
 #: app/scripts/components/auth/auth-login.js
 msgid "Unable to validate invitation token."
-msgstr ""
+msgstr "Dəvət işarəsini təsdiqləmək olmur."
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
 msgid "Unexpected exception happened during login process."
-msgstr ""
+msgstr "Giriş prosesində gözlənilməyən istisna baş verdi."
 
 #: app/scripts/components/core/ErrorMessageFormatter.ts
 msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
-msgstr ""
+msgstr "Təəssüf ki, serverə bağlantı baş tutmadı. Xahiş edirik brauzerinizdən {apiEndpoint} qoşulmanızı yoxlayın və xəta davam edərsə, dəstək xidməti ilə əlaqə qurun."
 
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
 msgid "Unit price"
-msgstr ""
+msgstr "Vahidin qiyməti"
 
 #: app/scripts/components/freeipa/freeipa-quota.html
 msgid "Unlimited"
-msgstr ""
+msgstr "Limitsiz"
 
 #: app/scripts/components/providers/provider-list.js
 msgid "Unlink"
-msgstr ""
+msgstr "Limitsiz"
 
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Unpaid"
-msgstr ""
+msgstr "Ödənilməmiş"
 
 #: app/scripts/components/customer/details/customer-policies.html
 #: app/scripts/components/user/hooks/hook-details.html
 msgid "Update"
-msgstr ""
+msgstr "Yeniləmə"
 
 #: app/scripts/components/openstack/openstack-instance/actions/UpdateFloatingIpsAction.ts
 msgid "Update floating IPs"
-msgstr ""
+msgstr "Dəyişən IP-leri yeniləyin"
 
 #: app/scripts/components/user/hooks/hook-details.html
 msgid "Update notification"
-msgstr ""
+msgstr "Bildirişi yeniləyin"
 
 #: app/scripts/components/project/project-policies.html
 msgid "Update policies"
-msgstr ""
+msgstr "Siyasəti yeniləyin"
 
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "Update profile"
-msgstr ""
+msgstr "Profili yeniləyin"
 
 #: app/scripts/components/project/ProjectUpdateForm.tsx
 msgid "Update project details"
-msgstr ""
+msgstr "Layihə məlumatlarını yeniləyin"
 
 #: app/scripts/components/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 msgid "Update security groups"
-msgstr ""
+msgstr "Təhlükəsizlik qruplarını yeniləyin "
 
 #: app/scripts/components/issues/list/issues-short-list.html
 msgid "Updated"
-msgstr ""
+msgstr "Yenilənib"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Updating"
-msgstr ""
+msgstr "Yenilənir"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Updating floaating IPs"
-msgstr ""
+msgstr "Dəyişən IP-lərın yenilənməsi"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Updating internal IPs"
-msgstr ""
+msgstr "Daxili IP-lərin yenilənməsi"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Updating quotas"
-msgstr ""
+msgstr "Kvotaların yenilənməsi"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Updating rules"
-msgstr ""
+msgstr "Qaydaların yenilənməsi\t"
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Updating security groups"
-msgstr ""
+msgstr "Təhlükəsizlik qruplarının yenilənməsi"
 
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironment.tsx
 msgid "Upload Requirements.txt"
-msgstr ""
+msgstr "Yüklənmə tələbləri.txt"
 
 #: app/scripts/components/customer/details/customer-threshold.html
 #: app/scripts/components/project/project-policies.html
 msgid "Upper bound of monthly resource cost provisioned from shared providers."
-msgstr ""
+msgstr "Paylaşılan provayderlər tərəfindən təmin edilən aylıq resursların yuxarı həddi."
 
 #: app/scripts/components/resource/summary/VirtualMachineSummary.tsx
 msgid "Uptime"
-msgstr ""
+msgstr "Fasiləsiz işləmə vaxtı"
 
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Usage overview"
-msgstr ""
+msgstr "İstifadənin ümumi baxışı"
 
 #: app/scripts/components/slurm/SlurmForm.tsx
 msgid "Use sudo"
-msgstr ""
+msgstr "“Sudo”  istifadə edin"
 
 #: app/scripts/components/providers/support/MapInfoPanel.tsx
 msgid "Used in the period"
-msgstr ""
+msgstr "Dövrdə istifadə"
 
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/team/add-project-member.html
 #: app/scripts/components/team/add-team-member.html
 msgid "User"
-msgstr ""
+msgstr "İstifadəçi"
 
 #: app/scripts/components/rijkscloud/ProviderForm.tsx
 msgid "User ID"
-msgstr ""
+msgstr "İstifadəçi İD-si"
 
 #: app/scripts/components/user/support/effects.ts
 msgid "User could not been updated"
-msgstr ""
+msgstr "İstifadəçi yenilənə bilmədi"
 
 #: app/scripts/components/user/routes.js
 #: app/scripts/components/user/user-details.html
 msgid "User dashboard"
-msgstr ""
+msgstr "İstifadəçi paneli"
 
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "User data"
-msgstr ""
+msgstr "İstifadəçi məlumatları"
 
 #: app/scripts/components/user/support/UserDetailsDialog.tsx
 #: app/scripts/components/user/user-popover.html
 msgid "User details"
-msgstr ""
+msgstr "İstifadəçi təfərrüatları"
 
 #: app/scripts/components/auth/callbacks/auth-logout-completed.html
 msgid "User has been logged out. You will be redirected to the login page soon."
-msgstr ""
+msgstr "İstifadəçidən çıxılmışdır. Tezliklə siz giriş səhifəsinə yönəldiləcəksiniz."
 
 #: app/scripts/components/user/support/effects.ts
 msgid "User has been updated"
-msgstr ""
+msgstr "İstifadəçi yeniləndi"
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 msgid "User has not yet been saved."
-msgstr ""
+msgstr "İstifadəçi hələ yaddaşda saxlanmadı."
 
 #: app/scripts/components/user/events.ts
 msgid "User management events"
-msgstr ""
+msgstr "İstifadəçi idarəçiliyi hadisələri"
 
 #: app/scripts/components/user/user-sidebar.html
 msgid "User profile"
-msgstr ""
+msgstr "İstifadəçi profili"
 
 #: app/scripts/components/user/support/UserEditForm.tsx
 msgid "User status"
-msgstr ""
+msgstr "İstifadəçi statusu"
 
 #: app/scripts/components/user/events.ts
 msgid "User {affected_user_link} has been activated."
-msgstr ""
+msgstr "{affected_user_link} istifadəçi aktivləşdirildi."
 
 #: app/scripts/components/user/events.ts
 msgid "User {affected_user_link} has been created."
-msgstr ""
+msgstr "{affected_user_link}  istifadəçi yaradıldı."
 
 #: app/scripts/components/user/events.ts
 msgid "User {affected_user_link} has been deactivated."
-msgstr ""
+msgstr "{affected_user_link} istifadəçi  ləğv edildi."
 
 #: app/scripts/components/user/events.ts
 msgid "User {affected_user_link} has been updated."
-msgstr ""
+msgstr "{affected_user_link} istifadəçi yeniləndi."
 
 #: app/scripts/components/user/events.ts
 msgid "User {affected_user_name} has been deleted."
-msgstr ""
+msgstr "{affected_user_link} istifadəçi silindi."
 
 #: app/scripts/components/experts/events.ts
 msgid "User {caller_link} has created request for experts under {customer_link} / {project_link}."
-msgstr ""
+msgstr "{caller_link} istifadəçi, {customer_link} / {project_link} altında mütəxəssislər üçün sorğu yaratdı."
 
 #: app/scripts/components/auth/events.ts
 msgid "User {user_link} authenticated successfully with Facebook."
-msgstr ""
+msgstr "{user_link} istifadəçi Facebook ilə uğurla təsdiqləndi."
 
 #: app/scripts/components/auth/events.ts
 msgid "User {user_link} authenticated successfully with Google."
-msgstr ""
+msgstr "{user_link} istifadəçi Google ilə uğurla təsdiqləndi."
 
 #: app/scripts/components/auth/events.ts
 msgid "User {user_link} authenticated successfully with OpenID."
-msgstr ""
+msgstr "{user_link} istifadəçi OpenID ilə uğurla təsdiqləndi."
 
 #: app/scripts/components/auth/events.ts
 msgid "User {user_link} authenticated successfully with SAML2."
-msgstr ""
+msgstr "{user_link} istifadəçi SAML2 (təhlükəsizlik təminatı sistemi üçün işarə dili) ilə uğurla təsdiqləndi."
 
 #: app/scripts/components/auth/events.ts
 msgid "User {user_link} authenticated successfully with Smart ID EE."
-msgstr ""
+msgstr "{user_link} istifadəçi Smart ID EE ilə uğurla təsdiqləndi."
 
 #: app/scripts/components/auth/events.ts
 msgid "User {user_link} authenticated successfully with username and password."
-msgstr ""
+msgstr "{user_link} istifadəçi istifadəçi adı və şifrə ilə uğurla təsdiqləndi."
 
 #: app/scripts/components/experts/events.ts
 msgid "User {user_link} has created bid for request {request_link} under {customer_link} / {project_link}."
-msgstr ""
+msgstr "{user_link} istifadəçi {customer_link} / {project_link} əsasən {request_link} sorğusu üçün təklif yaratmışdır."
 
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
-msgstr ""
+msgstr "{user_link} istifadəçi təşkilatın sahibi vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has granted organization support role in {customer_link} to {affected_user_link}."
-msgstr ""
+msgstr "{user_link} istifadəçi təşkilatın dəstəyi vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
-msgstr ""
+msgstr "{user_link} istifadəçi layihə administratoru vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
-msgstr ""
+msgstr "{user_link} istifadəçi layihə meneceri vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has granted role to {affected_user_link}."
-msgstr ""
+msgstr "{user_link} istifadəçi vəzifəni {affected_user_link}-ə vermişdir."
 
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
-msgstr ""
+msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın sahibini {müştəri_linki}-ndən ləğv etmşdir."
 
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
-msgstr ""
+msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın dəstəyini {müştəri_linki}-ndən ləğv etmşdir."
 
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
-msgstr ""
+msgstr "{user_link} istifadəçi {affected_user_link} layihə administratorunu {müştəri_linki}-ndən ləğv etmşdir."
 
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
-msgstr ""
+msgstr "{user_link} istifadəçi {affected_user_link} layihə menecerini {müştəri_linki}-ndən ləğv etmşdir."
 
 #: app/scripts/components/team/events.ts
 msgid "User {user_link} has revoked {affected_user_link}."
-msgstr ""
+msgstr "{user_link} istifadəçi {affected_user_link} ləğv etmşdir."
 
 #: app/scripts/components/auth/events.ts
 msgid "User {user_link} logged out  successfully with SAML2."
-msgstr ""
+msgstr "{user_link} istifadəçi SAML2 (təhlükəsizlik təminatı sistemi üçün işarə dili) ilə uğurla çıxmışdır."
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: app/scripts/components/auth/auth-login.html
@@ -6409,46 +6411,46 @@ msgstr ""
 #: app/scripts/components/slurm/SlurmForm.tsx
 #: app/scripts/components/team/user-selector.html
 msgid "Username"
-msgstr ""
+msgstr "İstifadəçi adı"
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
 msgid "Username is required."
-msgstr ""
+msgstr "İstifadəçi adı tələb olunur."
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
 msgid "Username prefix"
-msgstr ""
+msgstr "İstifadəçi adı prefiksi"
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 msgid "Username should be provided"
-msgstr ""
+msgstr "İstifadəçi adı verilməlidir"
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
-msgstr ""
+msgstr "İstifadəçi adlarında(a-z) hərfləri, (0-9), rəqəmlər, (-) tirelər,  (_) alt xətt və (.) dövrlər ola bilər."
 
 #: app/scripts/components/customer/workspace/customer-team.html
 #: app/scripts/components/issues/routes.js
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 #: app/scripts/components/project/project-team.html
 msgid "Users"
-msgstr ""
+msgstr "İstifadəçilər"
 
 #: app/scripts/components/billing/CustomerDetails.tsx
 msgid "VAT"
-msgstr ""
+msgstr "ƏDV"
 
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "VAT code"
-msgstr ""
+msgstr "ƏDV kodu"
 
 #: app/scripts/components/price/PriceTooltip.tsx
 msgid "VAT is not included."
-msgstr ""
+msgstr "ƏDV daxil deyildir."
 
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 msgid "VAT rate"
-msgstr ""
+msgstr "ƏDV dərəcəsi"
 
 #: app/scripts/components/azure/azure-virtual-machine-config.js
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
@@ -6456,116 +6458,116 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 #: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "VM name"
-msgstr ""
+msgstr "VM (virtual maşın) adı"
 
 #: app/scripts/components/customer/customer-list.js
 #: app/scripts/components/project/projects-list.js
 msgid "VMs"
-msgstr ""
+msgstr "VM (virtual maşın)-lar"
 
 #: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "VPC RAM"
-msgstr ""
+msgstr "VPC (Virtual Cığır Birləşməsi) RAM"
 
 #: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "VPC block storage size"
-msgstr ""
+msgstr "VPC(Virtual Cığır Birləşməsi)  blok yaddaşı ölçüsü"
 
 #: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "VPC floating IP count"
-msgstr ""
+msgstr "VPC (Virtual Cığır Birləşməsi) üzən IP sayı"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "VPC package"
-msgstr ""
+msgstr "VPC (Virtual Cığır Birləşməsi) paketi"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-prices.html
 msgid "VPC packages for this provider are not found."
-msgstr ""
+msgstr "Bu provayder üçün VPC (Virtual Cığır Birləşməsi) paketləri tapılmadı."
 
 #: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "VPC vCPU"
-msgstr ""
+msgstr "VPC(Virtual Cığır Birləşməsi) vCPU(virtual Mərkəzi Əməliyyat prosessoru)"
 
 #: app/scripts/components/navigation/app-footer.html
 msgid "Version"
-msgstr ""
+msgstr "Versiya"
 
 #: app/scripts/components/experts/bids/expert-bids-list.js
 msgid "View details"
-msgstr ""
+msgstr "Təfərrüatlara baxmaq"
 
 #: app/scripts/components/ansible/python-management/details/PythonManagementActionsHistory.tsx
 msgid "Virtual environment"
-msgstr ""
+msgstr "Virtual mühit"
 
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironment.tsx
 msgid "Virtual environment has not yet been saved."
-msgstr ""
+msgstr "Virtual mühit hələ də yaddaşda saxlanmayıb."
 
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironment.tsx
 msgid "Virtual environment name"
-msgstr ""
+msgstr "Virtual mühitin adı"
 
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "Virtual environments"
-msgstr ""
+msgstr "Virtual mühitlər"
 
 #: app/scripts/components/ansible/jupyter-hub-management/effects.ts
 #: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments deletion has been scheduled."
-msgstr ""
+msgstr "Virtual mühitlərin silinməsi planlaşdırılib."
 
 #: app/scripts/components/ansible/jupyter-hub-management/effects.ts
 #: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments deletion request could not be created."
-msgstr ""
+msgstr "Virtual mühitin silinməsi tələbi yaradıla bilməz."
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Virtual environments directory"
-msgstr ""
+msgstr "Virtual mühit kataloqu"
 
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 msgid "Virtual environments directory name"
-msgstr ""
+msgstr "Virtual mühitlərin kataloq adı"
 
 #: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments requests could not be created."
-msgstr ""
+msgstr "Virtual mühit tələbləri yaradıla bilməz."
 
 #: app/scripts/components/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "Virtual environments root directory"
-msgstr ""
+msgstr "Virtual mühit kök kataloqu"
 
 #: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments search has been scheduled."
-msgstr ""
+msgstr "Virtual mühit axtarışları planlaşdırılıb."
 
 #: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments search request could not be created."
-msgstr ""
+msgstr "Virtual mühit axtarış sorğusu yaradıla bilmədi."
 
 #: app/scripts/components/ansible/python-management/effects.ts
 msgid "Virtual environments updates have been scheduled."
-msgstr ""
+msgstr "Virtual mühit yeniləmələri planlaşdırılıb."
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Virtual machine"
-msgstr ""
+msgstr "Virtual maşın"
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Virtual machine contains a public key of the cloud broker"
-msgstr ""
+msgstr "Virtual maşın bulud brokerinin ictimai əsasını ehtiva edir"
 
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 msgid "Virtual machine has no floating ips assigned!"
-msgstr ""
+msgstr "Virtual maşında heç bir üzən ips təyin edilməmişdir!"
 
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 msgid "Virtual machine should have Web security group assigned"
-msgstr ""
+msgstr "Virtual maşında Veb təhlükəsizliyi qrupu təyin edilməlidir"
 
 #: app/scripts/components/analytics/resource-chart-service.js
 #: app/scripts/components/appstore/routes.js
@@ -6575,20 +6577,20 @@ msgstr ""
 #: app/scripts/components/project/routes.js
 #: app/scripts/components/resource/breadcrumbs/resource-categories.js
 msgid "Virtual machines"
-msgstr ""
+msgstr "Virtual maşınlar"
 
 #: app/scripts/components/quotas/constants.js
 msgid "Virtual machines count"
-msgstr ""
+msgstr "Virtual maşınlar sayı"
 
 #: app/scripts/components/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Volume"
-msgstr ""
+msgstr "Həcm"
 
 #: app/scripts/components/openstack/openstack-volume/module.js
 msgid "Volume has been updated."
-msgstr ""
+msgstr "Həcm yeniləndi."
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js
@@ -6596,394 +6598,394 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
 #: app/scripts/components/rijkscloud/VolumeCreateConfig.js
 msgid "Volume name"
-msgstr ""
+msgstr "Həcmin adı"
 
 #: app/scripts/components/rijkscloud/VolumeCreateConfig.js
 msgid "Volume size"
-msgstr ""
+msgstr "Həcmin ölçüsü"
 
 #: app/scripts/components/dashboard/base-quotas.ts
 msgid "Volume size, GB"
-msgstr ""
+msgstr "Həcmin ölçüsü, GB"
 
 #: app/scripts/components/configs/base-config.js
 #: app/scripts/components/openstack/openstack-instance/module.js
 #: app/scripts/components/resource/list/resource-storage-tabs.html
 msgid "Volumes"
-msgstr ""
+msgstr "Həcmlər"
 
 #: app/scripts/components/quotas/constants.js
 msgid "Volumes count"
-msgstr ""
+msgstr "Həcmlər sayı"
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 msgid "Was the correct cloud broker public key UUID specified in the properties?"
-msgstr ""
+msgstr "Xüsusiyyətlərdə bulud brokerinin ictimai açarı UUID (universal unikal identifikator) düzgün göstərilibmi?"
 
 #: app/scripts/components/experts/requests/actions/expert-request-complain.js
 msgid "We are sorry you had a bad experience. Tell us what happend?"
-msgstr ""
+msgstr "Üzr istəyirik, pis bir hadisə oldu. Bizə nə baş verdiyini deyin?"
 
 #: app/scripts/components/auth/auth-init.js
 #: app/scripts/components/auth/auth-login.js
 msgid "Welcome to {pageTitle}!"
-msgstr ""
+msgstr "{pageTitle} səhifəsinə xoş gəlmisiniz!"
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Where to get the required values from?"
-msgstr ""
+msgstr "Lazımi dəyərləri harada əldə etmək olar?"
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Whitelist admins"
-msgstr ""
+msgstr "Tövsiyə edilən siyahı administratorları"
 
 #: app/scripts/components/customer/details/customer-manage.js
 msgid "Why do you need to remove organization with existing projects?"
-msgstr ""
+msgstr "Sizə təşkilatı mövcud layihələrlə nəyə görə silmək lazımdır?"
 
 #: app/scripts/components/user/support/actions.ts
 msgid "Why would you want to go away? Help us become better please!"
-msgstr ""
+msgstr "Siz nəyə görə getmək istəyirsiniz? Bizə daha yaxşı olmağımıza kömək edin!"
 
 #: app/scripts/components/customer/create/customer-create-prompt.html
 msgid "Would you like to register your organization?"
-msgstr ""
+msgstr "Təşkilatınızı qeydiyyata salmaq istəyirsinizmi?"
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html
 msgid "Would you like to update your current email with the one from the invitation?"
-msgstr ""
+msgstr "Mövcud e-poçtunuzu dəvətdən olan birisilə yeniləmək istərdinizmi?"
 
 #: app/scripts/components/azure/AzureForm.tsx
 msgid "X509 certificate in .PEM format"
-msgstr ""
+msgstr "X509 sertifikatı .PEM formatında "
 
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 msgid "Yes"
-msgstr ""
+msgstr "Bəli"
 
 #: app/scripts/components/customer/create/customer-create-prompt.html
 msgid "Yes, I would"
-msgstr ""
+msgstr "Bəli, istərdim"
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html
 msgid "Yes, use invitation email"
-msgstr ""
+msgstr "Bəli, dəvət e-poçtunu  istifadə edin"
 
 #: app/scripts/components/customer/details/customer-manage.html
 msgid "You can remove this organization by pressing the button"
-msgstr ""
+msgstr "Siz düyməyə basaraq bu təşkilatı silə bilərsiniz"
 
 #: app/scripts/components/team/add-team-member.js
 msgid "You cannot change your own role."
-msgstr ""
+msgstr "Siz öz vəzifənizi dəyişdirə bilməzsiniz."
 
 #: app/scripts/components/team/add-team-member.js
 msgid "You cannot manage other organization owner."
-msgstr ""
+msgstr "Siz digər təşkilat sahibini idarə edə bilməzsiniz."
 
 #: app/scripts/components/providers/provider-list.js
 msgid "You cannot remove shared provider."
-msgstr ""
+msgstr "Siz paylaşılan provayderləri silə bilməzsiniz."
 
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/issues/create/issue-create-dialog.js
 #: app/scripts/components/issues/create/issue-quick-create.js
 #: app/scripts/components/issues/create/issue-registration.js
 msgid "You did not enter a field."
-msgstr ""
+msgstr "Siz sahəyə girmədiniz."
 
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "You do not belong to any organization yet."
-msgstr ""
+msgstr "Siz hələ heç bir bir təşkilatın üzvü deyilsiniz."
 
 #: app/scripts/components/resource/resource-provision-policy.js
 msgid "You do not have permissions to create private cloud for current project."
-msgstr ""
+msgstr "Sizin mövcud layihə üçün xüsusi bulud yaratma icazəniz yoxdur."
 
 #: app/scripts/components/navigation/workspace/select-workspace-toggle.js
 msgid "You don't have any organization yet."
-msgstr ""
+msgstr "Sizin hələ heç bir təşkilatınız yoxdur."
 
 #: app/scripts/components/project/project-providers.html
 msgid "You don't have enough permission to edit providers for current project."
-msgstr ""
+msgstr "Sizin mövcud layihə üçün provayderləri redaktə etmək üçün kifayət qədər icazəniz yoxdur."
 
 #: app/scripts/components/providers/ProviderUpdateComponent.tsx
 msgid "You don't have enough permissions to edit settings for <strong>{name}</strong> provider."
-msgstr ""
+msgstr "Sizin <strong>{name}</strong> provayderi üçün parametrləri redaktə etmək üçün kifayət qədər icazəniz yoxdur."
 
 #: app/scripts/components/project/projects-list.js
 msgid "You don't have enough privileges to perform this operation."
-msgstr ""
+msgstr "Sizin bu əməliyyatı yerinə yetirmək üçün kifayət qədər imtiyazlarınız yoxdur."
 
 #: app/scripts/components/invitations/actions/cancel.js
 msgid "You don't have permission to cancel this invitation."
-msgstr ""
+msgstr "Sizin bu dəvəti ləğv etmək icazəniz yoxdur."
 
 #: app/scripts/components/invitations/actions/send.js
 msgid "You don't have permission to send this invitation."
-msgstr ""
+msgstr "Sizin bu dəvəti göndərmək üçün icazəniz yoxdur."
 
 #: app/scripts/components/error/invalid-quota-page.html
 msgid "You have exceeded maximum number of quotas."
-msgstr ""
+msgstr "Siz maksimal sayda kvotanı aşdınız."
 
 #: app/scripts/components/cost-planning/cost-plans-list.js
 msgid "You have no cost plans yet"
-msgstr ""
+msgstr "Sizin hələ heç bir xərclər planınız yoxdur"
 
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "You have no invoices yet."
-msgstr ""
+msgstr "Sizin hələ heç bir fakturanız yoxdur."
 
 #: app/scripts/components/resource/list/resource-private-clouds-list.js
 msgid "You have no private clouds yet."
-msgstr ""
+msgstr "Sizin hələ heç bir özəl buludunuz yoxdur."
 
 #: app/scripts/components/project/projects-list.js
 msgid "You have no projects yet."
-msgstr ""
+msgstr "Sizin hələ heç bir layihəniz yoxdur"
 
 #: app/scripts/components/quotas/quotas-table.html
 msgid "You have no quotas yet."
-msgstr ""
+msgstr "Sizin hələ heç bir kvotanız yoxdur."
 
 #: app/scripts/components/billing/billing-records-list.js
 msgid "You have no records yet."
-msgstr ""
+msgstr "Sizin hələ heç bir qeydiniz yoxdur."
 
 #: app/scripts/components/offering/offerings-list.js
 msgid "You have no requests."
-msgstr ""
+msgstr "Sizin hələ heç bir sorğunuz yoxdur."
 
 #: app/scripts/components/resource/list/resources-list.js
 msgid "You have no resources yet."
-msgstr ""
+msgstr "Sizin hələ heç bir  resursunuz yoxdur."
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 msgid "You have no restored volumes yet."
-msgstr ""
+msgstr "Sizin hələ heç bir bərpa edilmiş həcminiz yoxdur."
 
 #: app/scripts/components/jira/project/jira-projects-list.js
 msgid "You have no service desk projects yet."
-msgstr ""
+msgstr "Sizin hələ heç bir xidmət masası layihələriniz yoxdur"
 
 #: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-snapshots.js
 msgid "You have no snapshots yet."
-msgstr ""
+msgstr "Sizin hələ heç bir ani təsviriniz yoxdur."
 
 #: app/scripts/components/invitations/invitations-list.js
 msgid "You have no team invitations yet."
-msgstr ""
+msgstr "Sizin hələ heç bir heyət dəvətiniz yoxdur."
 
 #: app/scripts/components/team/customer-users-list.js
 #: app/scripts/components/team/project-users-list.js
 msgid "You have no team members yet."
-msgstr ""
+msgstr "Sizin hələ heç bir heyət üzvünüz yoxdur."
 
 #: app/scripts/components/customer/popover/customer-users-details-list.js
 msgid "You have no users yet."
-msgstr ""
+msgstr "Sizin hələ heç bir istifadəçiniz yoxdur."
 
 #: app/scripts/components/resource/list/resource-vms-list.js
 msgid "You have no virtual machines yet."
-msgstr ""
+msgstr "Sizin hələ heç bir virtual maşınınız yoxdur."
 
 #: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js
 #: app/scripts/components/resource/list/resource-volumes-list.js
 msgid "You have no volumes yet."
-msgstr ""
+msgstr "Sizin hələ həcmləriniz yoxdur."
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
 msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
-msgstr ""
+msgstr "Siz <a ui-sref=\"profile.keys\"> profilinizə hər hansı bir SSH (təhlükəsiz örtük) açarını əlavə etməmisiniz."
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 msgid "You have not selected any SSH key yet."
-msgstr ""
+msgstr "Siz hələ heç bir SSH (təhlükəsiz örtük) açarını seçmədiniz."
 
 #: app/scripts/components/experts/bids/details/expert-bid-details.html
 msgid "You have not submitted proposal yet."
-msgstr ""
+msgstr "Siz hələ heç bir təklifi verməmisiniz."
 
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 msgid "You have placed a proposal already."
-msgstr ""
+msgstr "Siz artıq təklifi yerləşdirmisiniz."
 
 #: app/scripts/components/freeipa/freeipa-account-create.js
 msgid "You must agree with terms of service."
-msgstr ""
+msgstr "Siz xidmət şərtləri ilə razılaşmalısınız."
 
 #: app/scripts/components/invitations/invitation-accept.html
 msgid "You will be redirected in a moment."
-msgstr ""
+msgstr "Siz bir ana yönləndiriləcəksiniz."
 
 #: app/scripts/components/freeipa/freeipa-account-edit.js
 msgid "Your FreeIPA has been enabled."
-msgstr ""
+msgstr "Sizin FreeIPA-nız aktivləşdirilib."
 
 #: app/scripts/components/freeipa/freeipa-account-edit.js
 msgid "Your FreeIPA has been removed in FreeIPA server."
-msgstr ""
+msgstr "Sizin FreeIPA-nız FreeIPA serverində keçirilib."
 
 #: app/scripts/components/freeipa/freeipa-account-edit.js
 msgid "Your FreeIPA has been synced successfully."
-msgstr ""
+msgstr "Sizin FreeIPA uğurla sinxronlaşdırılıb."
 
 #: app/scripts/components/freeipa/freeipa-account-edit.js
 msgid "Your FreeIPA profile has been disabled."
-msgstr ""
+msgstr "Sizin FreeIPA profiliniz söndürülüb."
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 msgid "Your Microsoft Account full username. It should not contain @domain.com part."
-msgstr ""
+msgstr "Sizin Microsoft Hesabınızın tam istifadəçi adınız. Burada @ domain.com hissəsi olmamalıdır."
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html
 msgid "Your current email is:"
-msgstr ""
+msgstr "Sizin mövcud e-poçtunuz:"
 
 #: app/scripts/components/invitations/invitation-accept.html
 msgid "Your invitation is being processed."
-msgstr ""
+msgstr "Dəvətiniz işlənilir."
 
 #: app/scripts/components/invitations/utils.js
 msgid "Your invitation was accepted."
-msgstr ""
+msgstr "Dəvətiniz qəbul edildi."
 
 #: app/scripts/components/auth/auth-login.html
 msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr ""
+msgstr "Bütün bulud xidmətləriniz üçün tək nəzarət paneli. Bunu hərəkətdə görmək üçün daxil olun."
 
 #: app/scripts/components/resource/monitoring/effects.ts
 msgid "Zabbix host could not be created."
-msgstr ""
+msgstr "Zabbix hostu yaradıla bilmədi."
 
 #: app/scripts/components/resource/monitoring/effects.ts
 msgid "Zabbix host could not be deleted."
-msgstr ""
+msgstr "Zabbix hostu silinə bilmədi."
 
 #: app/scripts/components/resource/monitoring/effects.ts
 msgid "Zabbix host has been created."
-msgstr ""
+msgstr "Zabbix hostu yaradıldı."
 
 #: app/scripts/components/resource/monitoring/effects.ts
 msgid "Zabbix host has been deleted."
-msgstr ""
+msgstr "Zabbix hostu silindi."
 
 #: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
 msgid "Zabbix provider"
-msgstr ""
+msgstr "Zabbix provayderi"
 
 #: app/scripts/components/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "bootable"
-msgstr ""
+msgstr "Yükləyici "
 
 #: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
 msgid "browse"
-msgstr ""
+msgstr "baxmaq "
 
 #: app/scripts/components/providers/support/MapInfoPanel.tsx
 msgid "by"
-msgstr ""
+msgstr "tərəfindən"
 
 #: app/scripts/components/issues/workspace/issues-activity-stream.html
 msgid "commented on"
-msgstr ""
+msgstr "___ üzrə şərh edilib"
 
 #: app/scripts/components/issues/comments/IssueCommentItem.tsx
 msgid "commented:"
-msgstr ""
+msgstr "şərh etdi:"
 
 #: app/scripts/components/resource/state/utils.ts
 msgid "current state on backend: {resourceState}."
-msgstr ""
+msgstr "Çıxış buferi üzrə mövcud vəziyyət: {resursVəziyyəti}."
 
 #: app/scripts/components/resource/state/utils.ts
 msgid "error message: {errorMessage}"
-msgstr ""
+msgstr "Xəta mesajı: {xətaMesajı}"
 
 #: app/scripts/components/user/list/UserEvents.tsx
 msgid "events"
-msgstr ""
+msgstr "hadisələr"
 
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 msgid "expert"
-msgstr ""
+msgstr "ekspert"
 
 #: app/scripts/components/issues/list/issues-short-list.html
 msgid "from"
-msgstr ""
+msgstr "-dan/dən"
 
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "generate automatically"
-msgstr ""
+msgstr "avtomatik olaraq yaradır"
 
 #: app/scripts/components/freeipa/freeipa-account-edit.html
 #: app/scripts/components/user/support/TermsOfService.tsx
 msgid "have been accepted on"
-msgstr ""
+msgstr "___ üzrə qəbul edildi"
 
 #: app/scripts/components/providers/support/MapInfoPanel.tsx
 msgid "hours"
-msgstr ""
+msgstr "saatlar"
 
 #: app/scripts/components/table-react/TablePlaceholder.tsx
 msgid "items"
-msgstr ""
+msgstr "maddələr"
 
 #: app/scripts/components/quotas/quotas-table.html
 msgid "of"
-msgstr ""
+msgstr "nin/nun"
 
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "organization"
-msgstr ""
+msgstr "təşkilat"
 
 #: app/scripts/components/user/list/CustomerPermissions.tsx
 msgid "organizations"
-msgstr ""
+msgstr "təşkilatlar"
 
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 msgid "owner"
-msgstr ""
+msgstr "sahib"
 
 #: app/scripts/components/user/list/ProjectPermissions.tsx
 msgid "projects"
-msgstr ""
+msgstr "layihələr"
 
 #: app/scripts/components/ansible/python-management/types/ManagementRequest.ts
 msgid "request"
-msgstr ""
+msgstr "sorğu"
 
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 msgid "requests"
-msgstr ""
+msgstr "Sorğular"
 
 #: app/scripts/components/analytics/resource-bar-chart.html
 msgid "resources"
-msgstr ""
+msgstr "Resurslar"
 
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 msgid "staff"
-msgstr ""
+msgstr "personal"
 
 #: app/scripts/components/experts/requests/details/expert-request-details.js
 #: app/scripts/components/user/support/UserRemovalMessageDialog.tsx
 msgid "support"
-msgstr ""
+msgstr "dəstək"
 
 #: app/scripts/components/user/support/utils.ts
 msgid "token will not timeout"
-msgstr ""
+msgstr "işarə zamandan çıxmayacaq"
 
 #: app/scripts/components/user/support/UserList.tsx
 msgid "users"
-msgstr ""
+msgstr "istifadəçilər"
 
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
@@ -6993,117 +6995,117 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js
 #: app/scripts/components/rijkscloud/InstanceCreateConfig.js
 msgid "vCPU"
-msgstr ""
+msgstr "vCPU (virtual mərkəzi əməliyyat prosessoru)"
 
 #: app/scripts/components/quotas/constants.js
 msgid "vCPU count"
-msgstr ""
+msgstr "vCPU (virtual mərkəzi əməliyyat prosessoru) sayı"
 
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "virtualenv and virtualenvwrapper utilities are used to manage Python virtual environments."
-msgstr ""
+msgstr "virtualenv və virtualenvwrapper əlavələri Python virtual mühitlərini idarə etmək üçün istifadə olunur."
 
 #: app/scripts/components/form/appstore-field-list.js
 msgid "{fieldLabel} is required for provisioning resource."
-msgstr ""
+msgstr "resurs təmin etmək üçün {fieldLabel} tələb olunur."
 
 #: app/scripts/components/openstack/openstack-tenant/package-templates-service.js
 msgid "{quota} usage exceeds quota limit by {amount}."
-msgstr ""
+msgstr "{quota} istifadə miqdarı {amount} ilə kvota limitini aşır."
 
 #: app/scripts/components/resource/state/utils.ts
 msgid "{resourceType} has state {resourceState}"
-msgstr ""
+msgstr "{resourceType} {resourceState} vəziyyətindədir"
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} creation has been scheduled by {user_link}."
-msgstr ""
+msgstr "{resource_link} yaradılması {user_link} tərəfindən planlaşdırılıb."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} creation has failed."
-msgstr ""
+msgstr "{resource_link} yaradılması baş tutmadı."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} deletion has failed."
-msgstr ""
+msgstr "{resource_link} silinməsi baş tutmadı."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} has been created."
-msgstr ""
+msgstr "{resource_link} yaradıldı."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} has been imported by {user_link}."
-msgstr ""
+msgstr "{resource_link} {user_link} tərəfindən idxal edilib."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} has been restarted."
-msgstr ""
+msgstr "{resource_link} yenidən başlamışdır."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} has been scheduled to deletion by {user_link}."
-msgstr ""
+msgstr "{resource_link} {user_link} tərəfindən silinməsi planlaşdırılıb."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} has been scheduled to restart by {user_link}."
-msgstr ""
+msgstr "{resource_link} {user_link} tərəfindən yenidən başlanma üçün planlaşdırıldı."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} has been scheduled to start by {user_link}."
-msgstr ""
+msgstr "{resource_link} {user_link} tərəfindən başlanma üçün planlaşdırıldı."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} has been scheduled to stop by {user_link}."
-msgstr ""
+msgstr "{resource_link} {user_link} tərəfindən dayandırılma üçün planlaşdırıldı."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} has been started."
-msgstr ""
+msgstr "{resource_link} başlandı."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} has been stopped."
-msgstr ""
+msgstr "{resource_link} dayandırılıb."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} has been updated by {user_link}."
-msgstr ""
+msgstr "{resource_link} {user_link} tərəfindən yeniləndi."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} restart has failed."
-msgstr ""
+msgstr "{resource_link} yenidən başlamadı."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} start has failed."
-msgstr ""
+msgstr "{resource_link} başlamadı."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_link} stop has failed."
-msgstr ""
+msgstr "{resource_link} dayandırıla bilmədi."
 
 #: app/scripts/components/resource/events.ts
 msgid "{resource_name} has been deleted."
-msgstr ""
+msgstr "{resurs_adı} silindi."
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
 msgid "{type} quota usage exceeds available limit."
-msgstr ""
+msgstr "{type} kvota istifadəsi mövcud limitdən çoxdur."
 
 #: app/scripts/components/slurm/details/SlurmAllocationSummary.tsx
 #: app/scripts/components/slurm/slurm-allocation-list.js
 msgid "{usage} of {limit}"
-msgstr ""
+msgstr "{limit}-in {usage} istifadəsi"
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
 msgid "{usage} of {limit} used"
-msgstr ""
+msgstr "istifadə edilmiş{limit}-in {usage} istifadəsi"
 
 #: app/scripts/components/providers/details/provider-project-link-quota.js
 msgid "{usage} used"
-msgstr ""
+msgstr "istifadə edilmiş {usage}"
 
 #: app/scripts/components/dashboard/dashboard-chart-service.js
 msgid "{value} at {date}"
-msgstr ""
+msgstr "{date} tarixdə {value} dəyəri"
 
 #: app/scripts/components/dashboard/dashboard-chart-service.js
 msgid "{value} at {date}, estimated"
-msgstr ""
+msgstr "{date} tarixdə {value} dəyəri, təxmin edilən"
