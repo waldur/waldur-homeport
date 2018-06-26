@@ -29,7 +29,7 @@ describe('Analytics utils', () => {
   });
 
   it('Get pie chart options', () => {
-    expect(utils.getPieChartsData(quotas.resultingQuotas.pieCharts)).toEqual(pieCharts);
+    expect(utils.getPieChartsData(quotas.resultingQuotas.pieCharts)).toEqual([pieCharts.resulting]);
   });
 
   it('Get bar chart options', () => {
@@ -69,23 +69,12 @@ describe('Analytics utils', () => {
   });
 
   it('Combine quotas', () => {
-    expect(utils.combineQuotas(quotas.quotasArr.labeled)).toEqual({
-      url: 'https://example.com/api/quotas/049fab371f2844e79d2997eadfbb4cd6/',
-      uuid: [
-        '049fab371f2844e79d2997eadfbb4cd6',
-        '082c6fd918f0432296f00fab0cc30234',
-        '8c8293ce6ad745098ce79eeb48eadc66',
-      ],
-      name: 'ram',
-      label: 'RAM',
-      limit: 60000 ,
-      usage: 26033,
-    });
+    expect(utils.combineQuotas(quotas.quotasArr.quotasBeforeCombine))
+      .toEqual(quotas.quotasArr.quotasAfterCombine);
   });
 
   it('Combine history quotas', () => {
-    expect(utils.combineHistoryQuotas([quotas.historyQuotas, quotas.historyQuotas])).toEqual([
-
-    ]);
+    expect(utils.combineQuotas(quotas.quotasArr.historyQuotasBeforeCombine))
+      .toEqual(quotas.quotasArr.historyQuotasAfterCombine);
   });
 });
