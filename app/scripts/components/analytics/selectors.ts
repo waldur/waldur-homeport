@@ -8,35 +8,10 @@ import * as utils from './utils';
 export const getSearchValue = state => state.analytics.searchValue;
 export const getLoading = state => state.analytics.loading;
 export const getProjects = state => state.analytics.projects;
-export const getHistoryQuotas = state => state.analytics.quotasHistory;
+export const getHistoryQuota = (state, props) => state.analytics.quotasHistory[props.project.uuid];
 export const getQuotas = (_, props) => props.project.quotas;
-export const getTenants = state => state.analytics.tenants;
-export const getProjectFromProps = (_, props) => props.project;
 export const getLocale = state => state.locale;
 export const getVisibleQuotasFilter = state => quotas => quotas.filter(quota => isVisible(state, quota.name));
-
-export const getQuotasSelector = createSelector(
-  getTenants,
-  getProjectFromProps,
-  (tenants, project) => {
-    const quotas = tenants
-      .filter(tenant => tenant.project_name === project.name)
-      .map(tenant => tenant.quotas);
-    return utils.combineQuotas(quotas);
-  }
-);
-
-export const getHistoryQuotasSelector = createSelector(
-  getTenants,
-  getHistoryQuotas,
-  getProjectFromProps,
-  (tenants, quotas, project) => {
-    const resultingTenants = tenants.filter(tenant => tenant.project_uuid === project.uuid);
-    const resultingQuotas = resultingTenants.map(tenant =>
-      utils.setHistoryQuotasName(dictToList(quotas[tenant.uuid])));
-    return utils.combineHistoryQuotas(resultingQuotas);
-  }
-);
 
 export const getProjectsSelector = createSelector(
   getProjects,
@@ -49,7 +24,7 @@ export const getProjectsSelector = createSelector(
 );
 
 export const getPieChartsDataSelector = createSelector(
-  getQuotasSelector,
+  getQuotas,
   getVisibleQuotasFilter,
   getLocale,
   (quotas, quotasVisibilityFilter, locale) => {
@@ -62,7 +37,7 @@ export const getPieChartsDataSelector = createSelector(
 );
 
 export const getBarChartsDataSelector = createSelector(
-  getHistoryQuotasSelector,
+  getHistoryQuota,
   getLocale,
   (quotas, locale) => {
     if (!quotas) { return []; }
@@ -75,7 +50,7 @@ export const getBarChartsDataSelector = createSelector(
 );
 
 export const getExceededQuotasSelector = createSelector(
-  getQuotasSelector,
+  getQuotas,
   getVisibleQuotasFilter,
   (quotas, quotasVisibilityFilter) => {
     let resultingQuotas = utils.quotasRegitryFilter(quotas);
@@ -86,6 +61,6 @@ export const getExceededQuotasSelector = createSelector(
 );
 
 export const getBarChartsLoadingSelector = createSelector(
-  getHistoryQuotas,
+  getHistoryQuota,
   quotas => quotas ? utils.getIsHistoryQuotasLoading(dictToList(quotas)) : true,
 );

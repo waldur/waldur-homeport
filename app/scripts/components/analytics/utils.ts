@@ -1,6 +1,5 @@
 import * as moment from 'moment';
 
-import { dictToList } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 import * as constants from './constants';
@@ -8,7 +7,7 @@ import { getRegisteredQuota } from './registry';
 
 export const sortObjecstByProp =
   (propName: string) =>
-    (objects: Array<{ [key: string]: string }>, locale?: string | string[], options?: { [key: string]: string | boolean }) =>
+    (objects: Array<{[key: string]: string}>, locale?: string | string[], options?: { [key: string]: string | boolean }) =>
       [...objects].sort((a, b) => a[propName].localeCompare(b[propName], locale, options));
 
 export const sortQuotasByLabel = sortObjecstByProp('label');
@@ -36,7 +35,7 @@ export const setHistoryQuotasName = quotas => quotas.map(quota => {
 });
 
 export const getPieChartsData = quotas => quotas.map(quota => ({
-  id: quota.uuid[0],
+  id: quota.uuid,
   limit: quota.limit,
   label: quota.label,
   exceeds: isQuotaExceeds(quota),
@@ -84,7 +83,7 @@ export const getBarChartsData = quotas => quotas.map(quota => {
     usageData.push(usage);
   }
   return {
-    id: quota.uuid[0],
+    id: quota.uuid,
     label: quota.label,
     loading: quota.loading,
     erred: quota.erred,
@@ -164,12 +163,12 @@ export const getIsHistoryQuotasLoading = quotas => {
 };
 
 export const formatFilter = vmFilter => {
-  const vmFilterCopy = { ...vmFilter };
-  if (vmFilter && vmFilter.service_provider) {
-    vmFilterCopy.service_provider = vmFilter.service_provider.map(provider => provider.value);
-    return vmFilterCopy;
-  }
-  return vmFilter;
+    const vmFilterCopy = {...vmFilter};
+    if (vmFilter && vmFilter.service_provider) {
+        vmFilterCopy.service_provider = vmFilter.service_provider.map(provider => provider.value);
+        return vmFilterCopy;
+    }
+    return vmFilter;
 };
 
 export const formatServiceProviders = serviceProviders => {
@@ -179,74 +178,4 @@ export const formatServiceProviders = serviceProviders => {
       name: serviceProvider.name,
     };
   });
-};
-
-export const mergeQuotas = (quotaA, quotaB) => {
-  if (!quotaA && !quotaB) { return null; }
-  if (!quotaA) { return quotaB; }
-  if (!quotaB) { return quotaA; }
-  return {
-    ...quotaA,
-    uuid: Array.isArray(quotaA.uuid) ?
-      [
-        ...quotaA.uuid,
-        quotaB.uuid,
-      ] :
-      [
-        quotaA.uuid,
-        quotaB.uuid,
-      ],
-    limit: quotaB.limit > -1 ?
-      (quotaA.limit > -1 ? quotaA.limit + quotaB.limit : quotaB.limit) :
-      quotaA.limit,
-    usage: quotaA.usage + quotaB.usage,
-  };
-};
-
-export const combineQuotas = quotas => {
-  const combinedQuotas = {};
-  for (const currQuotas of quotas) {
-    for (const quota of currQuotas) {
-      const combinedQuota = combinedQuotas[quota.name];
-      if (combinedQuota) {
-        combinedQuotas[quota.name] = mergeQuotas(combinedQuota, quota);
-      } else {
-        combinedQuotas[quota.name] = {
-          ...quota,
-          uuid: [quota.uuid],
-        };
-      }
-    }
-  }
-  return dictToList(combinedQuotas);
-};
-
-export const combineHistoryQuotas = quotas => {
-  const combinedQuotas = {};
-  for (const currQuotas of quotas) {
-    for (const quota of currQuotas) {
-      if (!quota || !quota.name || quota.loading) { return null; }
-      const combinedQuota = combinedQuotas[quota.name];
-      if (combinedQuota) {
-        const data = combinedQuota.data.map((timePointQuota, index) => ({
-          ...timePointQuota,
-          object: mergeQuotas(timePointQuota.object, quota.data[index].object),
-        }));
-        combinedQuotas[quota.name] = {
-          ...combinedQuota,
-          uuid: [
-            ...combinedQuota.uuid,
-            quota.uuid,
-          ],
-          data,
-        };
-      } else {
-        combinedQuotas[quota.name] = {
-          ...quota,
-          uuid: [quota.uuid],
-        };
-      }
-    }
-  }
-  return dictToList(combinedQuotas);
 };

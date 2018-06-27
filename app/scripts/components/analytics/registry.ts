@@ -1,13 +1,16 @@
 import { translate } from '@waldur/i18n';
 
 export const registeredQuotas = {
-  ram: {
+  // tslint:disable-next-line
+  nc_ram_usage: {
     get label() { return translate('RAM'); },
   },
-  volumes: {
+  // tslint:disable-next-line
+  nc_volume_count: {
     get label() { return translate('Volumes'); },
   },
-  snapshots: {
+  // tslint:disable-next-line
+  nc_snapshot_size: {
     get label() { return translate('Snapshots'); },
   },
 };
