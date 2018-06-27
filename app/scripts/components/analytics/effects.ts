@@ -1,4 +1,4 @@
-import { call, put, takeEvery, select, spawn } from 'redux-saga/effects';
+import { call, put, takeEvery, select, spawn, fork } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
@@ -8,7 +8,6 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import * as actions from './actions';
 import * as api from './api';
 import * as constants from './constants';
-import { getProjects } from './selectors';
 import * as utils from './utils';
 
 export function* analyticsProjectsFetch() {
@@ -16,6 +15,7 @@ export function* analyticsProjectsFetch() {
   try {
     const projects = yield call(api.fetchProjects, customer.uuid);
     yield put(actions.analyticsProjectsFetchSuccess(projects));
+    return projects;
   } catch (error) {
     yield put(actions.analyticsProjectsFetchError(error));
     const errorMessage = `${translate('Unable to fetch projects.')} ${format(error)}`;
@@ -23,25 +23,38 @@ export function* analyticsProjectsFetch() {
   }
 }
 
-export function* analyticsHistoryQuotaFetch(projectUuid, quotaUuid) {
+export function* analyticsTenantsFetch() {
+  const customer = yield select(getCustomer);
+  try {
+    const tenants = yield call(api.fetchTenants, customer.name);
+    yield put(actions.analyticsTenantsFetchSuccess(tenants));
+    return tenants;
+  } catch (error) {
+    yield put(actions.analyticsProjectsFetchError(error));
+    const errorMessage = `${translate('Unable to fetch tenants.')} ${format(error)}`;
+    yield put(showError(errorMessage));
+  }
+}
+
+export function* analyticsHistoryQuotaFetch(tenantUuid, quotaUuid) {
   try {
     const data = yield call(api.fetchQuotaHistory, quotaUuid);
-    yield put(actions.analyticsHistoryQuotaFetchSuccess(data, projectUuid, quotaUuid));
+    yield put(actions.analyticsHistoryQuotaFetchSuccess(data, tenantUuid, quotaUuid));
   } catch (error) {
-    yield put(actions.analyticsHistoryQuotaFetchError(error, projectUuid, quotaUuid));
+    yield put(actions.analyticsHistoryQuotaFetchError(error, tenantUuid, quotaUuid));
     const errorMessage = `${translate('Unable to fetch quota history.')} ${format(error)}`;
     yield put(showError(errorMessage));
   }
 }
 
 export function* analiticsGetData() {
-  yield call(analyticsProjectsFetch);
-  const projects = yield select(getProjects);
-  for (const project of projects) {
-    const registeredQuotas = utils.quotasRegitryFilter(project.quotas);
+  yield fork(analyticsProjectsFetch);
+  const tenants = yield call(analyticsTenantsFetch);
+  for (const tenant of tenants) {
+    const registeredQuotas = utils.quotasRegitryFilter(tenant.quotas);
     for (const quota of registeredQuotas) {
-      yield put(actions.analyticsHistoryQuotaFetch(project.uuid, quota.uuid));
-      yield spawn(analyticsHistoryQuotaFetch, project.uuid, quota.uuid);
+      yield put(actions.analyticsHistoryQuotaFetch(tenant.uuid, quota.uuid));
+      yield spawn(analyticsHistoryQuotaFetch, tenant.uuid, quota.uuid);
     }
   }
 }
