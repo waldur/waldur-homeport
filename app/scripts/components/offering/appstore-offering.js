@@ -36,6 +36,9 @@ const appstoreOffering = {
           return this.$state.go('errorPage.notFound');
         }
         this.offering = offering;
+        if (!this.offering.terms_of_service) {
+          this.createButtonStatus = true;
+        }
         this.offering.order.unshift('name', 'description');
         angular.extend(this.offering.options, {
           name: {

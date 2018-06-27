@@ -11,7 +11,7 @@
         </div>
         <div class="ibox-content">
           <appstore-form form="$ctrl.form" fields="$ctrl.offering" model="$ctrl.model" errors="$ctrl.errors"/>
-          <div class="form-group">
+          <div class="form-group" ng-if="$ctrl.offering.terms_of_service">
             <div class="control-label col-sm-offset-3">
               <label>
                 <input type="checkbox" ng-model="$ctrl.agreeWithPolicy" ng-change="$ctrl.toggleCreateBtnStatus()"/>
