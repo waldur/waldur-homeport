@@ -2,8 +2,8 @@ import * as moment from 'moment';
 
 import { getList } from '@waldur/core/api';
 
-export const fetchProjects = (customerUuid: string) =>
-  getList('/projects/', { customer: customerUuid });
+export const fetchProjects = (organizationUuid: string) =>
+  getList('/projects/', { customer: organizationUuid });
 
 export const fetchQuotaHistory = (quotaUuid: string) => {
   const url = `/quotas/${quotaUuid}/history/`;
@@ -17,11 +17,10 @@ export const fetchQuotaHistory = (quotaUuid: string) => {
   });
 };
 
-export const loadServiceProviders = () => getList('/service-settings/', {
-  type: 'OpenStackTenant',
-});
-
-export const fetchTenants = (customerName: string) => getList('/openstack-tenants/', {
-  // tslint:disable-next-line
-  customer_name: customerName,
-});
+export const loadServiceProviders = () => {
+  const params = {
+    type: 'OpenStackTenant',
+  };
+  const url = '/service-settings/';
+  return getList(url, params);
+};
