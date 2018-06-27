@@ -143,9 +143,21 @@ const TableOptions = {
   table: 'userList',
   fetchData: createFetcher('users'),
   mapPropsToFilter: props => formatRoleFilter(props.userFilter),
-  exportFields: ['Full name', 'Username', 'Email', 'Phone number'],
+  exportFields: ['Full name', 'Username', 'Email', 'Phone number',
+    'Organization', 'Organizations owner'],
   exportAll: true,
-  exportRow: row => [row.full_name, row.username, row.email, row.phone_number],
+  exportRow: row => [row.full_name, row.username, row.email, row.phone_number,
+    row.organization, getOrganizationsWhereOwner(row.customer_permissions)],
+};
+
+export const getOrganizationsWhereOwner = permissions => {
+  const customerNames = [];
+  permissions.map(perm => {
+    if (perm.role === 'owner') {
+      customerNames.push(perm.customer_name);
+    }
+  });
+  return customerNames.join(', ');
 };
 
 const mapStateToProps = state => ({
