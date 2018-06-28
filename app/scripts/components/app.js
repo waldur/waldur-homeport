@@ -1,5 +1,5 @@
 // @ngInject
-export function protectStates($rootScope, $state, $auth, features) {
+export function protectStates($rootScope, $state, $auth, features, $window) {
   // 1) If state data has `disabled` flag, user is redirected to dashboard.
 
   // 3) If state data has `anonymous` flag and user has authentication token,
@@ -15,10 +15,19 @@ export function protectStates($rootScope, $state, $auth, features) {
       let nextState = getNextState();
       if (nextState) {
         event.preventDefault();
-        $state.go(nextState);
+        if (nextState.params) {
+          $state.go(nextState.state, nextState.params);
+        } else {
+          $state.go(nextState);
+        }
       }
 
       function getNextState() {
+        const attemptState = $window.localStorage.getItem('goToStateAfterLogin');
+        if (attemptState) {
+          return redirectToAttemptState(attemptState);
+        }
+
         let data = toState.data;
         if (!data) {
           return;
@@ -28,6 +37,17 @@ export function protectStates($rootScope, $state, $auth, features) {
           return 'profile.details';
         } else if (data.feature && !features.isVisible(data.feature)) {
           return 'errorPage.otherwise';
+        }
+      }
+
+      function redirectToAttemptState(attemptState) {
+        if ($auth.isAuthenticated()) {
+          $window.localStorage.removeItem('goToStateAfterLogin');
+          const nextState = JSON.parse(attemptState);
+          return {
+            state: nextState.state,
+            params: nextState.params,
+          };
         }
       }
 
