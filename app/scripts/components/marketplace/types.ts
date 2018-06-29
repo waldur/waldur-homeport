@@ -52,3 +52,9 @@ export interface CategoriesListType {
   loaded: boolean;
   loading: boolean;
 }
+
+export interface ProductsListType {
+  items: Product[];
+  loaded: boolean;
+  loading: boolean;
+}

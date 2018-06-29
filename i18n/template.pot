@@ -5802,6 +5802,10 @@ msgstr ""
 msgid "There are no items yet."
 msgstr ""
 
+#: app/scripts/components/marketplace/common/ProductGrid.tsx
+msgid "There are no offerings in marketplace yet."
+msgstr ""
+
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "There are no organizations matching filter."
 msgstr ""
@@ -6165,6 +6169,10 @@ msgstr ""
 
 #: app/scripts/components/marketplace/landing/CategoriesList.tsx
 msgid "Unable to load marketplace categories."
+msgstr ""
+
+#: app/scripts/components/marketplace/common/ProductGrid.tsx
+msgid "Unable to load marketplace offerings."
 msgstr ""
 
 #: app/scripts/components/project/ProjectCreateContainer.tsx

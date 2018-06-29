@@ -1,20 +1,20 @@
 import * as React from 'react';
 
 import { ENV } from '@waldur/core/services';
-import { TranslateProps } from '@waldur/i18n';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { FilterBar } from '@waldur/marketplace/common/FilterBar';
 import { ProductGrid } from '@waldur/marketplace/common/ProductGrid';
-import { CategoriesListType } from '@waldur/marketplace/types';
+import { CategoriesListType, ProductsListType } from '@waldur/marketplace/types';
 
-import { products } from '../fixtures';
 import { CategoriesList } from './CategoriesList';
 import { HeroSection } from './HeroSection';
 
-interface LandingPage extends TranslateProps {
+interface LandingPageProps extends TranslateProps {
   categories: CategoriesListType;
+  products: ProductsListType;
 }
 
-export const LandingPage = props => (
+export const LandingPage = withTranslation((props: LandingPageProps) => (
   <div>
     <HeroSection title={props.translate(
       'Explore {deployment} Marketplace',
@@ -30,6 +30,6 @@ export const LandingPage = props => (
     <h2 className="m-b-md">
       {props.translate('Recent additions')}
     </h2>
-    <ProductGrid products={products}/>
+    <ProductGrid {...props.products}/>
   </div>
-);
+));
