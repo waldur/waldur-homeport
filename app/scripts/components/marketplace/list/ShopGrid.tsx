@@ -25,7 +25,7 @@ export const ShopGrid = (props: ShopGridProps) => (
       <div className="m-b-md p-sm gray-bg">
         <FilterBar/>
       </div>
-      <ProductGrid products={props.products} width={4}/>
+      <ProductGrid items={props.products} loading={false} loaded={true} width={4}/>
     </Col>
   </Row>
 );

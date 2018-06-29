@@ -1,46 +1,69 @@
 import * as React from 'react';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { getCategories } from '@waldur/marketplace/common/api';
-import { Category } from '@waldur/marketplace/types';
+import { getCategories, getProducts } from '@waldur/marketplace/common/api';
+import { CategoriesListType, ProductsListType } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { LandingPage } from './LandingPage';
 
 interface LandingPageContainerState {
-  items: Category[];
+  categories: CategoriesListType;
+  products: ProductsListType;
   loading: boolean;
   loaded: boolean;
 }
 
 export class LandingPageContainer extends React.Component<TranslateProps, LandingPageContainerState> {
   componentDidMount() {
-    this.loadCategories();
+    this.loadAll();
   }
 
-  async loadCategories() {
+  async loadAll() {
     this.setState({
-      loading: true,
+      categories: {
+        loading: true,
+        loaded: false,
+        items: [],
+      },
+      products: {
+        loading: true,
+        loaded: false,
+        items: [],
+      },
     });
     try {
-      const categories = await getCategories();
+      const [categories, products] = await Promise.all([getCategories(), getProducts()]);
       this.setState({
-        loading: false,
-        loaded: true,
-        items: categories,
+        categories: {
+          loading: false,
+          loaded: true,
+          items: categories,
+        },
+        products: {
+          loading: false,
+          loaded: true,
+          items: products,
+        },
       });
     } catch {
       this.setState({
-        loading: false,
-        loaded: false,
+        categories: {
+          loading: false,
+          loaded: false,
+          items: [],
+        },
+        products: {
+          loading: false,
+          loaded: false,
+          items: [],
+        },
       });
     }
   }
 
   render() {
-    return (
-      <LandingPage categories={this.state} translate={this.props.translate}/>
-    );
+    return <LandingPage {...this.state}/>;
   }
 }
 
