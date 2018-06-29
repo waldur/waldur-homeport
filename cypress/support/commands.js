@@ -1,3 +1,5 @@
+import '../integration/support/commands';
+
 // Fill and sumbit login form
 Cypress.Commands.add('fillAndSubmitLoginForm', (username, password) => {
   username = username || 'staff';
