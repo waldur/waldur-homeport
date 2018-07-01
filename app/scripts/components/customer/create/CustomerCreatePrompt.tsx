@@ -65,7 +65,7 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
             {translate('Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place.')}
           </MessageButton>
         )),
-        new RadioButtonChoice(constants.ROLES.expert, (
+        canRegisterExpert && new RadioButtonChoice(constants.ROLES.expert, (
           <MessageButton
             wrapperClassName="svgfonticon svgfonticon svgfonticon-expert"
             title={translate('Expert')}
@@ -73,7 +73,7 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
             {translate('Register as a customer of our portal that can also offer own experts to the other customers of Waldur.')}
           </MessageButton>
         )),
-        new RadioButtonChoice(constants.ROLES.provider, (
+        canRegisterProvider && new RadioButtonChoice(constants.ROLES.provider, (
           <MessageButton
             wrapperClassName="svgfonticon svgfonticon-provider"
             title={translate('Service Provider')}

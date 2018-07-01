@@ -7,6 +7,7 @@ import cartIndicator from './cart/ShoppingCartIndicator';
 import marketplaceProduct from './details/DetailsPage';
 import marketplaceList from './list/ListPage';
 import { setupFixture } from '@waldur/marketplace/fixtures/setup';
+import providersService from './providers-service';
 
 export default module => {
   module.component('marketplaceLanding', marketplaceLanding);
@@ -16,6 +17,7 @@ export default module => {
   module.component('cartIndicator', cartIndicator);
   module.component('marketplaceProduct', marketplaceProduct);
   module.component('marketplaceList', marketplaceList);
+  module.service('providersService', providersService);
   module.config(routes);
   module.run(setupFixture);
 };

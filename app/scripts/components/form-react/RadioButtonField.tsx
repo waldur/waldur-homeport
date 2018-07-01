@@ -15,7 +15,7 @@ interface RadioButtonFieldProps extends FormField {
 export class RadioButtonChoice {
   constructor(
     public value: any,
-    public label: string | React.ReactNode,
+    public label: React.ReactNode,
     public itemClassName?: string,
   ) {
   }
@@ -28,9 +28,10 @@ export const RadioButtonField: React.SFC<RadioButtonFieldProps> = props => {
       {choices.map((choice, index) => {
         if (!choice) { return null; }
         return (
-          <ItemElement className={classNames({
-            [choice.itemClassName || defaultItemClassName]: !!choice.itemClassName || !!defaultItemClassName,
-          })} key={index}>
+          <ItemElement
+            className={classNames(choice.itemClassName || defaultItemClassName)}
+            key={index}
+          >
             <label className={classNames({
               checked: input.value === choice.value,
             })}>

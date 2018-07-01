@@ -10,5 +10,5 @@ export const validate = data => {
       _error: translate('Сhoose the role please'),
     });
   }
-  return(data);
+  return data;
 };
