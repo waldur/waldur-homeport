@@ -1,3 +1,4 @@
+import issueCommentsService from './issue-comments-service';
 import { attachStateUtils } from './issue-navigation-service';
 import IssueNavigationService from './issue-navigation-service';
 import issuesWorkspace from './issues-workspace';
@@ -7,6 +8,7 @@ import issuesHelpdesk from './issues-helpdesk';
 
 export default module => {
   module.run(attachStateUtils);
+  module.service('issueCommentsService', issueCommentsService);
   module.service('IssueNavigationService', IssueNavigationService);
   module.component('issuesWorkspace', issuesWorkspace);
   module.component('issuesDashboard', issuesDashboard);
