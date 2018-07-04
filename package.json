@@ -105,6 +105,7 @@
     "summernote": "^0.8.8",
     "uglify-js": "^2.7.5",
     "ui-select": "^0.18.1",
+    "webfonts-loader": "^4.1.0",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1",
     "world-flags-sprite": "^0.0.2"

@@ -1,6 +1,6 @@
 import customerCountryField from './customer-country-field';
 import customerCreateDialog from './customer-create-dialog';
-import customerCreatePrompt from './customer-create-prompt';
+import customerCreatePrompt from './CustomerCreatePromptContainer';
 import CustomerCreateService from './customer-create-service';
 import attachHooks from './hooks';
 

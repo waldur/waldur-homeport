@@ -1,11 +1,15 @@
 import wizardStepsConfig from './customer-create-config';
+import * as constants from './constants';
 
 export default class CustomerCreateService {
   // @ngInject
-  constructor(features, customersService, expertsService, ENV) {
+  constructor(features, customersService, expertsService, customerPermissionsService, usersService, providersService, ENV) {
     this.features = features;
     this.customersService = customersService;
     this.expertsService = expertsService;
+    this.customerPermissionsService = customerPermissionsService;
+    this.usersService = usersService;
+    this.providersService = providersService;
     this.ENV = ENV;
   }
 
@@ -18,10 +22,25 @@ export default class CustomerCreateService {
     const customer = this.customersService.$create();
     angular.extend(customer, this.composeCustomerModel(model));
     return customer.$save().then(customer => {
-      if (!model.agree_with_policy) {
-        return customer;
+      if (model.agree_with_policy || model.role === constants.ROLES.expert) {
+        return this.expertsService.register(customer).then(() => customer);
       }
-      return this.expertsService.register(customer).then(() => customer);
+
+      if (model.role === constants.ROLES.provider) {
+        return this.providersService.register(customer).then(() => customer);
+      }
+
+      return customer;
+    });
+  }
+
+  createCustomerPermission(customer) {
+    return this.usersService.getCurrentUser().then(user => {
+      let instance = this.customerPermissionsService.$create();
+      instance.role = 'owner';
+      instance.customer = customer.url;
+      instance.user = user.url;
+      return instance.$save();
     });
   }
 

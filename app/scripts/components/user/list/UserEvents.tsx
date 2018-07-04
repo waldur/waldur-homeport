@@ -9,13 +9,13 @@ interface UserEventsProps {
   user: User;
 }
 
-export const UserEvents: React.SFC<UserEventsProps> = getEventsList({
+export const UserEvents: React.SFC<UserEventsProps> = outerProps => outerProps.user ? getEventsList({
   mapPropsToFilter: props => ({
     scope: props.user.url,
     feature: 'users',
     exclude_extra: true,
   }),
-});
+})(outerProps) : null;
 
 UserEvents.defaultProps = {
   showActions: true,

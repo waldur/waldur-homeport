@@ -2,7 +2,8 @@
 export default function attachHooks($rootScope, $uibModal, ENV, usersService) {
   function openPrompt() {
     return $uibModal.open({
-      component: 'customerCreatePrompt'
+      component: 'customerCreatePrompt',
+      size: 'lg',
     }).result;
   }
 
