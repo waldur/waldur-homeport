@@ -59,7 +59,7 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
       choices={[
         new RadioButtonChoice(constants.ROLES.customer, (
           <MessageButton
-            wrapperClassName="svgfonticon svgfonticon-customer"
+            iconClass="svgfonticon svgfonticon-customer"
             title={translate('Customer')}
           >
             {translate('Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place.')}
@@ -67,7 +67,7 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
         )),
         canRegisterExpert && new RadioButtonChoice(constants.ROLES.expert, (
           <MessageButton
-            wrapperClassName="svgfonticon svgfonticon svgfonticon-expert"
+            iconClass="svgfonticon svgfonticon svgfonticon-expert"
             title={translate('Expert')}
           >
             {translate('Register as a customer of our portal that can also offer own experts to the other customers of Waldur.')}
@@ -75,7 +75,7 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
         )),
         canRegisterProvider && new RadioButtonChoice(constants.ROLES.provider, (
           <MessageButton
-            wrapperClassName="svgfonticon svgfonticon-provider"
+            iconClass="svgfonticon svgfonticon-provider"
             title={translate('Service Provider')}
           >
             {translate('Register as a customer of our portal and provider your cloud services through Waldur\'s Marketplace.')}
