@@ -52,6 +52,7 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
   const renderRadioButtons = field => (
     <RadioButtonField
       {...field}
+      required={true}
       name={constants.FIELD_NAMES.role}
       wrapperClassName="row"
       defaultItemClassName={getColumnClassName()}

@@ -7248,6 +7248,6 @@ msgstr ""
 msgid "{value} at {date}, estimated"
 msgstr ""
 
-#: app/scripts/components/customer/create/utils.ts
+#: app/scripts/components/customer/create/CustomerCreatePromptContainer.tsx
 msgid "Сhoose the role please"
 msgstr ""

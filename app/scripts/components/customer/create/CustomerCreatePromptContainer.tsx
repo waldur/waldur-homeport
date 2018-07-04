@@ -1,15 +1,14 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, SubmissionError } from 'redux-form';
 
-import { withTranslation } from '@waldur/i18n';
+import { translate, withTranslation } from '@waldur/i18n';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as constants from './constants';
 import { CustomerCreatePrompt } from './CustomerCreatePrompt';
 import { getOwnerCanRegisterProvider, getOwnerCanRegisterExpert } from './selectors';
-import * as utils from './utils';
 
 const mapStateToProps = state => ({
   canRegisterProvider: getOwnerCanRegisterProvider(state),
@@ -18,14 +17,21 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   closeModal: (): void => dispatch(closeModalDialog),
-  onSubmit: data => utils.validate(data).then(values => {
+  onSubmit: data => {
+    if (!data[constants.FIELD_NAMES.role]) {
+      throw new SubmissionError({
+        _error: translate('Сhoose the role please'),
+      });
+    }
+
     dispatch(closeModalDialog());
     dispatch(openModalDialog('customer-create-dialog', {
       resolve: {
-        role: values[constants.FIELD_NAMES.role],
+        role: data[constants.FIELD_NAMES.role],
       },
+      size: 'lg',
     }));
-  }),
+  },
 });
 
 const enhance = compose(
