@@ -134,6 +134,7 @@ msgid "Activating"
 msgstr ""
 
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
+#: app/scripts/components/marketplace/VendorOfferingsList.tsx
 msgid "Active"
 msgstr ""
 
@@ -809,6 +810,7 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
+#: app/scripts/components/marketplace/VendorOfferingsList.tsx
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js
 msgid "Category"
 msgstr ""
@@ -1267,10 +1269,6 @@ msgstr ""
 
 #: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
 msgid "Customer"
-msgstr ""
-
-#: app/scripts/components/customer/CustomerList.tsx
-msgid "Customers List"
 msgstr ""
 
 #: app/scripts/components/customer/routes.js
@@ -2863,6 +2861,10 @@ msgstr ""
 msgid "Marketplace checkout"
 msgstr ""
 
+#: app/scripts/components/marketplace/sidebar.js
+msgid "Marketplace offerings"
+msgstr ""
+
 #: app/scripts/components/marketplace/routes.js
 msgid "Marketplace products"
 msgstr ""
@@ -3015,6 +3017,7 @@ msgstr ""
 #: app/scripts/components/jira/project/JiraProjectSummary.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/jira/project/jira-projects-list.js
+#: app/scripts/components/marketplace/VendorOfferingsList.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/offering/offerings-list.js
@@ -3066,6 +3069,7 @@ msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/marketplace/VendorOfferingsList.tsx
 #: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
@@ -3464,6 +3468,11 @@ msgstr ""
 msgid "Offering {offering_name} has been deleted."
 msgstr ""
 
+#: app/scripts/components/marketplace/VendorOfferingsList.tsx
+#: app/scripts/components/marketplace/routes.js
+msgid "Offerings"
+msgstr ""
+
 #: app/scripts/components/intro/base-intro.js
 msgid "Ok, what's next?"
 msgstr ""
@@ -3675,6 +3684,7 @@ msgstr ""
 msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "Organizations"
 msgstr ""
