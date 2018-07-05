@@ -6,11 +6,11 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
-import { project, quotas, barCharts, pieCharts } from './fixture';
+import { project, quotas, pieCharts, barCharts } from './fixture';
 import { PureResourceAnalysisItem } from './ResourceAnalysisItem';
 
 const initialProps = {
-  exceededQuotas: [quotas.registeredLimited, quotas.registeredUnlimited],
+  exceededQuotas: [quotas.exceeded],
   project,
   pieChartsData: [pieCharts.limited, pieCharts.limitedExceeded],
   barChartsData: [barCharts.common, barCharts.exceeded],

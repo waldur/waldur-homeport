@@ -7,6 +7,7 @@ const INITIAL_STATE: State = {
   loading: false,
   errors: [],
   projects: [],
+  tenants: [],
   searchValue: '',
   quotasHistory: {},
 };
@@ -31,6 +32,16 @@ export const reducer = (state: State = INITIAL_STATE, action: Action<Payload>) =
         errors: [...state.errors, payload.error],
         loading: false,
       };
+    case constants.ANALYTICS_TENANTS_FETCH_SUCCESS:
+      return {
+        ...state,
+        tenants: payload.tenants,
+      };
+    case constants.ANALYTICS_TENANTS_FETCH_ERROR:
+      return {
+        ...state,
+        errors: [...state.errors, payload.error],
+      };
     case constants.ANALYTICS_SEARCH_FILTER_CHANGE:
       return {
         ...state,
@@ -41,8 +52,8 @@ export const reducer = (state: State = INITIAL_STATE, action: Action<Payload>) =
         ...state,
         quotasHistory: {
           ...state.quotasHistory,
-          [payload.projectUuid]: {
-            ...state.quotasHistory[payload.projectUuid],
+          [payload.tenantUuid]: {
+            ...state.quotasHistory[payload.tenantUuid],
             [payload.quotaUuid]: {
               loading: true,
               uuid: payload.quotaUuid,
@@ -55,10 +66,10 @@ export const reducer = (state: State = INITIAL_STATE, action: Action<Payload>) =
         ...state,
         quotasHistory: {
           ...state.quotasHistory,
-          [payload.projectUuid]: {
-            ...state.quotasHistory[payload.projectUuid],
+          [payload.tenantUuid]: {
+            ...state.quotasHistory[payload.tenantUuid],
             [payload.quotaUuid]: {
-              ...state.quotasHistory[payload.projectUuid][payload.quotaUuid],
+              ...state.quotasHistory[payload.tenantUuid][payload.quotaUuid],
               loading: false,
               data: payload.quotas,
             },
@@ -71,10 +82,10 @@ export const reducer = (state: State = INITIAL_STATE, action: Action<Payload>) =
         errors: [...state.errors, payload.error],
         quotasHistory: {
           ...state.quotasHistory,
-          [payload.projectUuid]: {
-            ...state.quotasHistory[payload.projectUuid],
+          [payload.tenantUuid]: {
+            ...state.quotasHistory[payload.tenantUuid],
             [payload.quotaUuid]: {
-              ...state.quotasHistory[payload.projectUuid][payload.quotaUuid],
+              ...state.quotasHistory[payload.tenantUuid][payload.quotaUuid],
               loading: false,
               erred: true,
             },
