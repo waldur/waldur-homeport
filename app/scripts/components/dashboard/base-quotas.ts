@@ -47,9 +47,9 @@ registerQuotas([
   },
   {
     quota: 'nc_volume_size',
-    title: gettext('Volume size, GB'),
+    title: gettext('Volume size'),
     feature: 'storage',
-    formatter: x => Math.round(x / 1024),
+    type: 'filesize',
     dashboards: [PROJECT_DASHBOARD, CUSTOMER_DASHBOARD],
   },
   {
@@ -60,9 +60,9 @@ registerQuotas([
   },
   {
     quota: 'nc_snapshot_size',
-    title: gettext('Snapshot size, GB'),
+    title: gettext('Snapshot size'),
     feature: 'storage',
-    formatter: x => Math.round(x / 1024),
+    type: 'filesize',
     dashboards: [PROJECT_DASHBOARD, CUSTOMER_DASHBOARD],
   },
 ]);

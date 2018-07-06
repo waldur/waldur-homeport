@@ -20,10 +20,8 @@ const normalizeData = items => {
 const SparklineChart = ({ data }: Props) => (
   <figure className="sparkline">
     {normalizeData(data).map((item, index) =>
-      <Tooltip key={index} label={item.label} id="sparkline">
-        <div className="sparkline-column">
-          <div className="sparkline-bar" style={{height: `${item.value}%`}}/>
-        </div>
+      <Tooltip key={index} label={item.label} id="sparkline" className="sparkline-column">
+        <div className="sparkline-bar" style={{height: `${item.value}%`}}/>
       </Tooltip>
     )}
   </figure>

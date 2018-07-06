@@ -5,6 +5,7 @@ export type ChartData = Array<{
 
 export interface Chart {
   title: string;
+  units?: string;
   feature?: string;
   current: number;
   change: number;

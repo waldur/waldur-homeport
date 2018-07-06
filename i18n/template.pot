@@ -607,11 +607,11 @@ msgid "Bank name"
 msgstr ""
 
 #: app/scripts/components/slurm/dashboard-quotas.ts
-msgid "Batch CPU usage, hours"
+msgid "Batch CPU usage"
 msgstr ""
 
 #: app/scripts/components/slurm/dashboard-quotas.ts
-msgid "Batch GPU usage, hours"
+msgid "Batch GPU usage"
 msgstr ""
 
 #: app/scripts/components/resource/support/ChartContainer.tsx
@@ -619,7 +619,7 @@ msgid "Batch RAM"
 msgstr ""
 
 #: app/scripts/components/slurm/dashboard-quotas.ts
-msgid "Batch RAM usage, GB"
+msgid "Batch RAM usage"
 msgstr ""
 
 #: app/scripts/components/resource/support/ChartContainer.tsx
@@ -5436,7 +5436,7 @@ msgid "Snapshot schedules"
 msgstr ""
 
 #: app/scripts/components/dashboard/base-quotas.ts
-msgid "Snapshot size, GB"
+msgid "Snapshot size"
 msgstr ""
 
 #: app/scripts/components/analytics/registry.ts
@@ -6728,12 +6728,9 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
+#: app/scripts/components/dashboard/base-quotas.ts
 #: app/scripts/components/rijkscloud/VolumeCreateConfig.js
 msgid "Volume size"
-msgstr ""
-
-#: app/scripts/components/dashboard/base-quotas.ts
-msgid "Volume size, GB"
 msgstr ""
 
 #: app/scripts/components/analytics/registry.ts
