@@ -1,16 +1,17 @@
 import { $http, ENV } from './services';
 
-export const get = (endpoint: string, options?: any) =>
-  $http.get(`${ENV.apiEndpoint}api${endpoint}`, options);
+export function get<T = {}>(endpoint: string, options?: {}): angular.IHttpPromise<T> {
+  return $http.get(`${ENV.apiEndpoint}api${endpoint}`, options);
+}
 
-export const getList = (endpoint, params?) => {
+export function getList<T = {}>(endpoint: string, params?: {}): angular.IPromise<T[]> {
   const options = params ? {params} : undefined;
   return get(endpoint, options).then(response =>
     Array.isArray(response.data) ?
     response.data :
     []
   );
-};
+}
 
 export const getFirst = (endpoint, params?) =>
   getList(endpoint, params).then(data => data[0]);
@@ -21,8 +22,9 @@ export const getById = (endpoint, id) =>
 export const deleteById = (endpoint, id, options?) =>
   $http.delete(`${ENV.apiEndpoint}api${endpoint}${id}/`, options);
 
-export const post = (endpoint: string, options?: any) =>
-  $http.post(`${ENV.apiEndpoint}api${endpoint}`, options);
+export function post<T = {}>(endpoint: string, options?: {}): angular.IHttpPromise<T> {
+  return $http.post(`${ENV.apiEndpoint}api${endpoint}`, options);
+}
 
 export const sendForm = (method: string, url: string, options) => {
   const data = new FormData();

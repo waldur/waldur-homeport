@@ -117,6 +117,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-items.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/events/BaseEventsList.tsx
+#: app/scripts/components/marketplace/offerings/OfferingsList.tsx
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 #: app/scripts/components/resource/actions/action-button-resource.html
@@ -134,6 +135,7 @@ msgid "Activating"
 msgstr ""
 
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
+#: app/scripts/components/marketplace/offerings/OfferingsList.tsx
 msgid "Active"
 msgstr ""
 
@@ -200,6 +202,11 @@ msgstr ""
 
 #: app/scripts/components/user/hooks/hook-list.js
 msgid "Add notification"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/OfferingCreateButton.tsx
+#: app/scripts/components/marketplace/routes.js
+msgid "Add offering"
 msgstr ""
 
 #: app/scripts/components/user/list/CustomerCreateButton.tsx
@@ -622,6 +629,10 @@ msgstr ""
 msgid "Batch RAM usage"
 msgstr ""
 
+#: app/scripts/components/analytics/registry.ts
+msgid "Batch RAM usage, GB"
+msgstr ""
+
 #: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "Batch block storage size"
 msgstr ""
@@ -684,6 +695,7 @@ msgid "Bootable"
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
+#: app/scripts/components/marketplace/offerings/OfferingCreateDialog.tsx
 msgid "Browse"
 msgstr ""
 
@@ -764,6 +776,7 @@ msgstr ""
 #: app/scripts/components/invitations/actions/cancel.js
 #: app/scripts/components/invitations/actions/invitation-dialog.html
 #: app/scripts/components/issues/comments/IssueCommentsForm.tsx
+#: app/scripts/components/marketplace/offerings/OfferingCreateDialog.tsx
 #: app/scripts/components/modal/CloseDialogButton.tsx
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 #: app/scripts/components/offering/appstore-offering.html
@@ -809,6 +822,8 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/OfferingCreateDialog.tsx
+#: app/scripts/components/marketplace/offerings/OfferingsList.tsx
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js
 msgid "Category"
 msgstr ""
@@ -1269,10 +1284,6 @@ msgstr ""
 msgid "Customer"
 msgstr ""
 
-#: app/scripts/components/customer/CustomerList.tsx
-msgid "Customers List"
-msgstr ""
-
 #: app/scripts/components/customer/routes.js
 #: app/scripts/components/customer/workspace/customer-workspace.js
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
@@ -1318,6 +1329,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-items.html
 #: app/scripts/components/experts/bids/details/expert-bid-details.html
 #: app/scripts/components/issues/comments/IssueCommentDeleteDialog.tsx
+#: app/scripts/components/marketplace/offerings/OfferingDeleteButton.tsx
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -1361,6 +1373,7 @@ msgstr ""
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
+#: app/scripts/components/marketplace/offerings/OfferingCreateDialog.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
@@ -2259,10 +2272,6 @@ msgstr ""
 msgid "Images"
 msgstr ""
 
-#: app/scripts/components/analytics/ImagesList.tsx
-msgid "Images List"
-msgstr ""
-
 #: app/scripts/components/resource-import/resource-import-dialog.html
 #: app/scripts/components/resource-import/utils.js
 msgid "Import"
@@ -2863,6 +2872,10 @@ msgstr ""
 msgid "Marketplace checkout"
 msgstr ""
 
+#: app/scripts/components/marketplace/sidebar.js
+msgid "Marketplace offerings"
+msgstr ""
+
 #: app/scripts/components/marketplace/routes.js
 msgid "Marketplace products"
 msgstr ""
@@ -3015,6 +3028,8 @@ msgstr ""
 #: app/scripts/components/jira/project/JiraProjectSummary.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/jira/project/jira-projects-list.js
+#: app/scripts/components/marketplace/offerings/OfferingCreateDialog.tsx
+#: app/scripts/components/marketplace/offerings/OfferingsList.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/offering/offerings-list.js
@@ -3064,8 +3079,13 @@ msgstr ""
 msgid "Name should contain at least 3 symbols."
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/OfferingCreateDialog.tsx
+msgid "Native description"
+msgstr ""
+
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/marketplace/offerings/OfferingCreateDialog.tsx
 #: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
@@ -3452,6 +3472,14 @@ msgstr ""
 msgid "Offering events"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/OfferingCreateContainer.tsx
+msgid "Offering has been created"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/OfferingCreateDialog.tsx
+msgid "Offering logo"
+msgstr ""
+
 #: app/scripts/components/offering/events.ts
 msgid "Offering state has changed to {offering_state}."
 msgstr ""
@@ -3462,6 +3490,11 @@ msgstr ""
 
 #: app/scripts/components/offering/events.ts
 msgid "Offering {offering_name} has been deleted."
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/OfferingsList.tsx
+#: app/scripts/components/marketplace/routes.js
+msgid "Offerings"
 msgstr ""
 
 #: app/scripts/components/intro/base-intro.js
@@ -3537,6 +3570,10 @@ msgstr ""
 
 #: app/scripts/components/resource/list/resources-list.js
 msgid "Open map"
+msgstr ""
+
+#: app/scripts/components/analytics/ImagesList.tsx
+msgid "OpenStack Images"
 msgstr ""
 
 #: app/scripts/components/openstack/events.ts
@@ -3675,6 +3712,7 @@ msgstr ""
 msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
+#: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/navigation/workspace/select-workspace-dialog.html
 msgid "Organizations"
 msgstr ""
@@ -4446,7 +4484,6 @@ msgstr ""
 msgid "Quotas updated."
 msgstr ""
 
-#: app/scripts/components/analytics/registry.ts
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
@@ -5440,6 +5477,9 @@ msgid "Snapshot size"
 msgstr ""
 
 #: app/scripts/components/analytics/registry.ts
+msgid "Snapshot size, GB"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-backup/tabs.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
 #: app/scripts/components/openstack/openstack-volume/module.js
@@ -5564,6 +5604,7 @@ msgid "Storages"
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html
+#: app/scripts/components/marketplace/offerings/OfferingCreateDialog.tsx
 #: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
@@ -6720,6 +6761,10 @@ msgstr ""
 msgid "Volume"
 msgstr ""
 
+#: app/scripts/components/analytics/registry.ts
+msgid "Volume count"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-volume/module.js
 msgid "Volume has been updated."
 msgstr ""
@@ -6737,7 +6782,6 @@ msgstr ""
 msgid "Volume size"
 msgstr ""
 
-#: app/scripts/components/analytics/registry.ts
 #: app/scripts/components/configs/base-config.js
 #: app/scripts/components/openstack/openstack-instance/module.js
 #: app/scripts/components/resource/list/resource-storage-tabs.html

@@ -127,7 +127,7 @@ export const TableComponent = props => {
     <Table
       {...props}
       columns={columns}
-      verboseName={translate('Customers List')}
+      verboseName={translate('Organizations')}
       hasQuery={true}
       showPageSizeSelector={true}
     />
