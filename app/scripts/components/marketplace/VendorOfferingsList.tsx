@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import BooleanField from '@waldur/table-react/BooleanField';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 export const TableComponent = props => {
   const { translate } = props;
@@ -40,6 +42,9 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'customerList',
   fetchData: createFetcher('customers'),
+  mapPropsToFilter: props => ({
+    customer_uuid: props.customer.uuid,
+  }),
   exportRow: row => [
     row.name,
     row.native_name,
@@ -54,7 +59,10 @@ const TableOptions = {
   ],
 };
 
+const mapStateToProps = state => ({ customer: getCustomer(state) });
+
 const enhance = compose(
+  connect(mapStateToProps),
   connectTable(TableOptions),
   withTranslation,
 );
