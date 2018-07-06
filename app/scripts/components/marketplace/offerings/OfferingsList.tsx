@@ -8,6 +8,9 @@ import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import BooleanField from '@waldur/table-react/BooleanField';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { OfferingCreateButton } from './OfferingCreateButton';
+import { OfferingDeleteButton } from './OfferingDeleteButton';
+
 export const TableComponent = props => {
   const { translate } = props;
 
@@ -28,6 +31,10 @@ export const TableComponent = props => {
       title: translate('Active'),
       render: ({ row }) => <BooleanField value={row.is_active}/>,
     },
+    {
+      title: translate('Actions'),
+      render: OfferingDeleteButton,
+    },
   ];
 
   return (
@@ -35,6 +42,7 @@ export const TableComponent = props => {
       {...props}
       columns={columns}
       verboseName={translate('Offerings')}
+      actions={<OfferingCreateButton/>}
     />
   );
 };
