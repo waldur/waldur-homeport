@@ -29,7 +29,7 @@ const TableComponent = props => {
         render: NumOfCreatedInstancesField,
       },
     ]}
-    verboseName={translate('Images List')}/>
+    verboseName={translate('OpenStack Images')}/>
   );
 };
 

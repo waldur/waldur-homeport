@@ -20,8 +20,8 @@ export const TableComponent = props => {
       render: ({ row }) => row.name,
     },
     {
-      title: translate('Native name'),
-      render: ({ row }) => row.native_name,
+      title: translate('Language'),
+      render: ({ row }) => row.preferred_language || 'English',
     },
     {
       title: translate('Category'),
@@ -48,8 +48,8 @@ export const TableComponent = props => {
 };
 
 const TableOptions = {
-  table: 'customerList',
-  fetchData: createFetcher('customers'),
+  table: 'marketplace-offerings',
+  fetchData: createFetcher('marketplace-offerings'),
   mapPropsToFilter: props => ({
     customer_uuid: props.customer.uuid,
   }),

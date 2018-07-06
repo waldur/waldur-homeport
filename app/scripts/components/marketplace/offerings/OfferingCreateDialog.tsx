@@ -1,22 +1,15 @@
 import * as React from 'react';
 
-import { StringField, TextField, SelectIconField, FileUploadField } from '@waldur/form-react';
+import {
+  FileUploadField,
+  SelectAsyncField,
+  StringField,
+  TextField,
+  SelectField,
+} from '@waldur/form-react';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 
-const OfferingAttributes = props =>
-  props.category ? props.category.sections.map((section, sectionIndex) => (
-    <div key={sectionIndex}>
-      <h4>{section.title}</h4>
-      {section.attributes.map((attribute, attributeIndex) => (
-        <div key={attributeIndex}>
-          <StringField
-            name={attribute.key}
-            label={attribute.title}
-          />
-        </div>
-      ))}
-    </div>
-  )) : null;
+import { OfferingAttributes } from './OfferingAttributes';
 
 export const OfferingCreateDialog = props => (
   <ActionDialog
@@ -34,23 +27,40 @@ export const OfferingCreateDialog = props => (
       name="description"
       label={props.translate('Description')}
     />
+    <SelectField
+      name="preferred_language"
+      label={props.translate('Language')}
+      options={props.languageChoices}
+      labelKey="label"
+      valueKey="value"
+    />
+    {props.preferred_language && (
+      <StringField
+        name="native_name"
+        label={props.translate('Native name')}
+      />
+    )}
+    {props.preferred_language && (
+      <TextField
+        name="native_description"
+        label={props.translate('Native description')}
+      />
+    )}
     <FileUploadField
       name="thumbnail"
-      label={props.translate('Logo')}
-      description={props.translate('Offering logo')}
+      label={props.translate('Offering logo')}
       accept={['image/png', 'image/jpeg', 'image/svg+xml'].join(',')}
       buttonLabel={props.translate('Browse')}
       showFileName={true}
     />
-    <SelectIconField
+    <SelectAsyncField
       name="category"
       label={props.translate('Category')}
-      options={props.categories}
+      loadOptions={props.loadCategories}
       required={true}
       labelKey="title"
       valueKey="url"
-      iconKey="icon"
     />
-    <OfferingAttributes {...props}/>
+    {props.category && <OfferingAttributes {...props}/>}
   </ActionDialog>
 );

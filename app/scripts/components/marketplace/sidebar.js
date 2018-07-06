@@ -6,7 +6,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         return [
           {
             label: gettext('Marketplace offerings'),
-            icon: 'fa-file-alt',
+            icon: 'fa-file',
             link: 'marketplace-vendor-offerings({uuid: $ctrl.context.customer.uuid})',
             feature: 'marketplace',
           }
