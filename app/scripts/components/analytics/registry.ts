@@ -2,16 +2,18 @@ import { translate } from '@waldur/i18n';
 
 export const registeredQuotas = {
   // tslint:disable-next-line
-  nc_ram_usage: {
-    get label() { return translate('RAM'); },
+  ram: {
+    get label() { return translate('Batch RAM usage, GB'); },
+    formatter: x => Math.round(x / 1024),
   },
   // tslint:disable-next-line
-  nc_volume_count: {
-    get label() { return translate('Volumes'); },
+  volumes: {
+    get label() { return translate('Volume count'); },
   },
   // tslint:disable-next-line
-  nc_snapshot_size: {
-    get label() { return translate('Snapshots'); },
+  snapshots: {
+    get label() { return translate('Snapshot size, GB'); },
+    formatter: x => Math.round(x / 1024),
   },
 };
 
