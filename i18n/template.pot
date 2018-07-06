@@ -2703,10 +2703,6 @@ msgstr ""
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingsList.tsx
-msgid "Language"
-msgstr ""
-
 #: app/scripts/components/cost-planning/cost-plan-dialog.js
 msgid "Large"
 msgstr ""

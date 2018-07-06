@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 
 // See also: https://github.com/erikras/redux-form/issues/1852
-const parseIntField = value => value === undefined ? undefined : parseInt(value, 10);
-const formatIntField = value => value === undefined ? undefined : value.toString();
+const parseIntField = value => parseInt(value, 10) || 0;
+const formatIntField = value => value ? value.toString() : '';
 
 export const OfferingAttributes = props =>
   props.category.sections.map((section, sectionIndex) => (
