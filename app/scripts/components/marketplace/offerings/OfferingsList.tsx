@@ -20,10 +20,6 @@ export const TableComponent = props => {
       render: ({ row }) => row.name,
     },
     {
-      title: translate('Language'),
-      render: ({ row }) => row.preferred_language || 'English',
-    },
-    {
       title: translate('Category'),
       render: ({ row }) => row.category_title,
     },
