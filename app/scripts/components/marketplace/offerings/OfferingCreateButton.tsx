@@ -1,23 +1,14 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 
+import { Link } from '@waldur/core/Link';
 import { withTranslation } from '@waldur/i18n/translate';
-import { openModalDialog } from '@waldur/modal/actions';
-import ActionButton from '@waldur/table-react/ActionButton';
 
-const PureOfferingCreateButton = ({ onClick, translate }) => (
-  <ActionButton
-    title={translate('Add offering')}
-    action={onClick}
-    icon={'fa fa-plus'}/>
-);
-
-const enhance = compose(
-  withTranslation,
-  connect(null, {
-    onClick: () => openModalDialog('offeringCreateDialog'),
-  })
-);
-
-export const OfferingCreateButton = enhance(PureOfferingCreateButton);
+export const OfferingCreateButton = withTranslation(({ translate }) => (
+  <Link
+    state="marketplace-offering-create"
+    className="btn btn-default btn-sm">
+    <i className="fa fa-plus"/>
+    {' '}
+    {translate('Add offering')}
+  </Link>
+));

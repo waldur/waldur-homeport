@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 
+import { $state } from '@waldur/core/services';
 import { withTranslation, translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { showSuccess } from '@waldur/store/coreSaga';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -14,26 +14,20 @@ import { OfferingCreateDialog } from './OfferingCreateDialog';
 
 const OfferingCreateController = props => (
   <OfferingCreateDialog
-    languageChoices={[
-      {label: 'English', value: 'en'},
-      {label: 'Estonian', value: 'et'},
-    ]}
     loadCategories={() => api.loadCategories().then(options => ({ options }))}
     createOffering={request => {
       const {
         name,
         description,
-        thumbnail,
-        category,
-        preferred_language,
         native_name,
         native_description,
+        thumbnail,
+        category,
         ...attributes } = request;
       const params = {
         name,
         description,
         thumbnail,
-        preferred_language: preferred_language ? preferred_language.value : undefined,
         native_name,
         native_description,
         category: category.url,
@@ -41,10 +35,11 @@ const OfferingCreateController = props => (
         attributes,
       };
       return api.createOffering(params).then(() => {
-        props.dispatch(closeModalDialog());
         props.dispatch(showSuccess(translate('Offering has been created')));
+        $state.go('marketplace-vendor-offerings');
       });
     }}
+    gotoOfferingList={() => $state.go('marketplace-vendor-offerings')}
     {...props}
   />
 );

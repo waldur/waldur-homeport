@@ -7,7 +7,7 @@ import cartIndicator from './cart/ShoppingCartIndicator';
 import marketplaceProduct from './details/DetailsPage';
 import marketplaceList from './list/ListPage';
 import marketplaceVendorOfferings from './offerings/OfferingsList';
-import offeringCreateDialog from './offerings/OfferingCreateContainer';
+import marketplaceOfferingCreate from './offerings/OfferingCreateContainer';
 import { setupFixture } from '@waldur/marketplace/fixtures/setup';
 import providersService from './providers-service';
 import registerSidebarExtension from './sidebar';
@@ -21,7 +21,7 @@ export default module => {
   module.component('marketplaceProduct', marketplaceProduct);
   module.component('marketplaceList', marketplaceList);
   module.component('marketplaceVendorOfferings', marketplaceVendorOfferings);
-  module.component('offeringCreateDialog', offeringCreateDialog);
+  module.component('marketplaceOfferingCreate', marketplaceOfferingCreate);
   module.service('providersService', providersService);
   module.config(routes);
   module.run(setupFixture);
