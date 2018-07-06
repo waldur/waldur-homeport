@@ -4,7 +4,7 @@ import * as React from 'react';
 import SparklineChart from './sparkline';
 
 describe('SparklineChart', () => {
-  const getColumns = wrapper => wrapper.find('.sparkline-column');
+  const getColumns = wrapper => wrapper.find('span.sparkline-column');
   const getBars = wrapper => wrapper.find('.sparkline-bar');
 
   it('renders empty figure if list is empty', () => {

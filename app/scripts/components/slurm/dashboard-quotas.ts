@@ -5,23 +5,23 @@ import { gettext } from '@waldur/i18n';
 registerQuotas([
   {
     quota: 'nc_cpu_usage',
-    title: gettext('Batch CPU usage, hours'),
+    title: gettext('Batch CPU usage'),
     feature: 'slurm',
-    formatter: x => Math.round(x / 60),
+    type: 'hours',
     dashboards: [PROJECT_DASHBOARD, CUSTOMER_DASHBOARD],
   },
   {
     quota: 'nc_gpu_usage',
-    title: gettext('Batch GPU usage, hours'),
+    title: gettext('Batch GPU usage'),
     feature: 'slurm',
-    formatter: x => Math.round(x / 60),
+    type: 'hours',
     dashboards: [PROJECT_DASHBOARD, CUSTOMER_DASHBOARD],
   },
   {
     quota: 'nc_ram_usage',
-    title: gettext('Batch RAM usage, GB'),
+    title: gettext('Batch RAM usage'),
     feature: 'slurm',
-    formatter: x => Math.round(x / 1024),
+    type: 'filesize',
     dashboards: [PROJECT_DASHBOARD, CUSTOMER_DASHBOARD],
   },
 ]);

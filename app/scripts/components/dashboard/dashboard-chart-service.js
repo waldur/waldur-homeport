@@ -1,5 +1,6 @@
 import { POINTS_COUNT, PROJECT_DASHBOARD, CUSTOMER_DASHBOARD } from './constants';
 import { getDashboardQuotas } from './registry';
+import { translate } from '@waldur/i18n';
 
 export default class DashboardChartService {
   // @ngInject
@@ -77,26 +78,52 @@ export default class DashboardChartService {
     const start = moment.utc().subtract(1, 'month').unix();
 
     return this.quotasService.getHistory(url, start, end, POINTS_COUNT).then(items => {
-      items = items.filter(item => {
-        return !!item.object;
-      }).map(item => {
-        let value = item.object.usage;
-        if (chart.formatter) {
-          value = chart.formatter(value);
-        }
-        return {
+      items = items
+        .filter(item => !!item.object)
+        .map(item => ({
           date: moment.unix(item.point).toDate(),
-          value
-        };
-      });
+          value: item.object.usage,
+        }));
 
       items = this.padMissingValues(items);
+      const { formatter, units } = this.getFormatterUnits(chart, items);
+      chart.units = units;
 
       return items.map(item => {
-        item.label = item.value + ' at ' + this.$filter('date', 'yyyy-MM-dd')(item.date);
+        const date = this.$filter('date', 'yyyy-MM-dd')(item.date);
+        const value = formatter(item.value);
+        const label = translate('{value} at {date}', {value, date});
+
+        item.label = label;
+        item.value = value;
         return item;
       });
     });
+  }
+
+  getFormatterUnits(chart, items) {
+    let formatter = x => x;
+    let units;
+
+    const maxValue = items.sort((c1, c2) => c1.value < c2.value)[0].value;
+    if (chart.type === 'filesize') {
+      if (maxValue > 1024 * 1024) {
+        formatter = x => Math.round(x / 1024 * 1024);
+        units = 'TB';
+      }
+      else if (maxValue > 1024) {
+        formatter = x => Math.round(x / 1024);
+        units = 'GB';
+      }
+      else {
+        units = 'MB';
+      }
+    }
+    else if (chart.type === 'hours') {
+      formatter = x => Math.round(x / 60);
+      units = 'hours';
+    }
+    return {formatter, units};
   }
 
   getCostChart(scope) {
