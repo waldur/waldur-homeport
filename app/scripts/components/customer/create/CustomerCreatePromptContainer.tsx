@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  closeModal: (): void => dispatch(closeModalDialog),
+  closeModal: (): void => dispatch(closeModalDialog()),
   onSubmit: data => {
     if (!data[constants.FIELD_NAMES.role]) {
       throw new SubmissionError({
