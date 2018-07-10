@@ -15,7 +15,6 @@ const authSaml2Dialog = {
     }
 
     $onInit() {
-      this.loginUrl = this.Saml2Service.getLoginUrl();
       this.initialized = false;
 
       this.$rootScope.$broadcast('enableRequests');
@@ -35,6 +34,10 @@ const authSaml2Dialog = {
 
     isProviderSelected() {
       return !!this.provider;
+    }
+
+    login() {
+      return this.Saml2Service.login(this.provider.url);
     }
   }
 };
