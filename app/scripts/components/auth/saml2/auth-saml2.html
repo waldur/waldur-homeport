@@ -1,9 +1,6 @@
 <div class="m-b-sm">
-  <form action="{{ $ctrl.loginUrl }}" method="post">
-    <input type="hidden" name="idp" value="{{ $ctrl.provider }}"/>
-    <button type="submit" class="btn btn-saml2 btn-block">
-      <i class="fa fa-university" aria-hidden="true"></i>
-      <auth-button-text mode="$ctrl.mode" provider="{{$ctrl.providerLabel}}"/>
-    </button>
-  </form>
+  <button type="button" class="btn btn-saml2 btn-block" submit-button="$ctrl.login()">
+    <i class="fa fa-university" aria-hidden="true"></i>
+    <auth-button-text mode="$ctrl.mode" provider="{{$ctrl.providerLabel}}"/>
+  </button>
 </div>

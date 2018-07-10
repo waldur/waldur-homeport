@@ -6264,6 +6264,10 @@ msgstr ""
 msgid "Unable to load user."
 msgstr ""
 
+#: app/scripts/components/auth/saml2/saml2-service.js
+msgid "Unable to login via SAML2 protocol."
+msgstr ""
+
 #: app/scripts/components/resource/actions/dialog/action-dialog.js
 msgid "Unable to perform action"
 msgstr ""

@@ -132,7 +132,8 @@ export function httpInterceptor($q, ncUtilsFlash, ENV, ErrorMessageFormatter, $r
 
   return {
     request: function(config) {
-      if (abortRequests && !(/^views.*\/(.*?).html$/.test(config.url))) {
+      // When user is logged out, all REST API requests are aborted.
+      if (abortRequests && /\/api\//.test(config.url)) {
         let canceler = $q.defer();
         config.timeout = canceler.promise;
         canceler.resolve();

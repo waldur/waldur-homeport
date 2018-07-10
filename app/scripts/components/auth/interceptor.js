@@ -50,7 +50,7 @@ function initAuthToken($window, $http) {
 }
 
 function saveAttemptState($window, toState, toParams) {
-  if(toState.url !== '/login/') {
+  if (toState.data.auth) {
     const nextState = JSON.stringify({state: toState.name, params: toParams});
     $window.localStorage.setItem('goToStateAfterLogin', nextState);
   }

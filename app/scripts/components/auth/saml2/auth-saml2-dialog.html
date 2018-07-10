@@ -28,13 +28,14 @@
   </div>
 </div>
 <div class="modal-footer">
-  <form action="{{ $ctrl.loginUrl }}" method="post">
-    <input type="hidden" name="idp" value="{{ $ctrl.provider.url }}"/>
-    <button type="submit" class="btn btn-primary" ng-disabled="!$ctrl.isProviderSelected()">
-      <span translate>Login</span>
-    </button>
-    <button class="btn btn-default" type="button" ng-click="$ctrl.dismiss()">
-      <span translate>Cancel</span>
-    </button>
-  </form>
+  <button
+    type="button"
+    class="btn btn-primary"
+    ng-disabled="!$ctrl.isProviderSelected()"
+    submit-button="$ctrl.login()">
+    <span translate>Login</span>
+  </button>
+  <button class="btn btn-default" type="button" ng-click="$ctrl.dismiss()">
+    <span translate>Cancel</span>
+  </button>
 </div>
