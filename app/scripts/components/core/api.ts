@@ -42,7 +42,7 @@ export const sendForm = (method: string, url: string, options) => {
   });
 };
 
-export async function getAll(endpoint, options?) {
+export async function getAll<T = {}>(endpoint: string, options?: {}): Promise<T[]> {
   let response = await get(endpoint, options);
   let result = [];
 
