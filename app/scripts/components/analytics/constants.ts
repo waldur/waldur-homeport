@@ -18,3 +18,8 @@ export const chartColors = {
   purple: 'rgb(153, 102, 255)',
   grey: 'rgb(231,233,237)',
 };
+
+export const valueType = {
+  byte: 'byte',
+  unit: 'unit',
+};
