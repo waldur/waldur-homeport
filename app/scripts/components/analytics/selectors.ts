@@ -29,10 +29,10 @@ export const getHistoryQuotasSelector = createSelector(
   getTenants,
   getHistoryQuotas,
   getProjectFromProps,
-  (tenants, quotas, project) => {
+  (tenants, historyQuotas, project) => {
     const resultingTenants = tenants.filter(tenant => tenant.project_uuid === project.uuid);
     const resultingQuotas = resultingTenants.map(tenant =>
-      utils.setHistoryQuotasName(dictToList(quotas[tenant.uuid])));
+      utils.setHistoryQuotasName(dictToList(historyQuotas[tenant.uuid])));
     return utils.combineHistoryQuotas(resultingQuotas);
   }
 );
@@ -47,14 +47,28 @@ export const getProjectsSelector = createSelector(
   },
 );
 
+export const getMaxSizeNamesSelector = createSelector(
+  getQuotasSelector,
+  getVisibleQuotasFilter,
+  (quotas, quotasVisibilityFilter) => {
+    const resultingQuotas = quotasVisibilityFilter(quotas);
+    return utils.getMaxFileSizeNames(resultingQuotas);
+  },
+);
+
 export const getPieChartsDataSelector = createSelector(
   getQuotasSelector,
   getVisibleQuotasFilter,
+  getMaxSizeNamesSelector,
   getLocale,
-  (quotas, quotasVisibilityFilter, locale) => {
+  (quotas, quotasVisibilityFilter, fileSizeNames, locale) => {
     let resultingQuotas = utils.quotasRegitryFilter(quotas);
     resultingQuotas = quotasVisibilityFilter(resultingQuotas);
-    resultingQuotas = utils.setQuotasLabel(resultingQuotas);
+    resultingQuotas = utils.addRegistryConfig(resultingQuotas);
+    resultingQuotas = resultingQuotas.map(quota => ({
+      ...quota,
+      maxFileSizeName: fileSizeNames[quota.name],
+    }));
     resultingQuotas = utils.sortQuotasByLabel(resultingQuotas, locale);
     return utils.getPieChartsData(resultingQuotas);
   },
@@ -62,14 +76,18 @@ export const getPieChartsDataSelector = createSelector(
 
 export const getBarChartsDataSelector = createSelector(
   getHistoryQuotasSelector,
+  getMaxSizeNamesSelector,
   getLocale,
-  (quotas, locale) => {
+  (quotas, fileSizeNames, locale) => {
     if (!quotas) { return []; }
     let resultingQuotas = utils.setHistoryQuotasName(quotas);
-    resultingQuotas = utils.setQuotasLabel(resultingQuotas);
+    resultingQuotas = utils.addRegistryConfig(resultingQuotas);
+    resultingQuotas = resultingQuotas.map(quota => ({
+      ...quota,
+      maxFileSizeName: fileSizeNames[quota.name],
+    }));
     resultingQuotas = utils.sortQuotasByLabel(resultingQuotas, locale);
-    const data = utils.getBarChartsData(resultingQuotas);
-    return  data;
+    return utils.getBarChartsData(resultingQuotas);
   },
 );
 
@@ -79,7 +97,7 @@ export const getExceededQuotasSelector = createSelector(
   (quotas, quotasVisibilityFilter) => {
     let resultingQuotas = utils.quotasRegitryFilter(quotas);
     resultingQuotas = quotasVisibilityFilter(resultingQuotas);
-    resultingQuotas = utils.setQuotasLabel(resultingQuotas);
+    resultingQuotas = utils.addRegistryConfig(resultingQuotas);
     return utils.getExceededQuotas(resultingQuotas);
   }
 );

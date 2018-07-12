@@ -2,7 +2,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 
 export const FILESIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
-export const formatFilesize = (input, fromUnit = 'MB') => {
+export const formatFilesize = (input, fromUnit = 'MB', toUnit = 'B') => {
   if (isNaN(parseFloat(input)) || !isFinite(input)) {
     return '?';
   }
@@ -15,17 +15,21 @@ export const formatFilesize = (input, fromUnit = 'MB') => {
     return input;
   }
 
-  let unit = FILESIZE_UNITS.indexOf(fromUnit);
-  if (unit === -1) {
+  let startUnit = FILESIZE_UNITS.indexOf(fromUnit);
+  let endUnit = FILESIZE_UNITS.indexOf(toUnit);
+  if (startUnit === -1) {
     return '?';
   }
-
-  while (input >= 1024) {
-    input /= 1024;
-    unit++;
+  if (endUnit <= startUnit) {
+    endUnit = -1;
   }
 
-  return Math.floor(input * 10) / 10 + ' ' + FILESIZE_UNITS[unit];
+  while ( endUnit === -1 ? input >= 1024 : endUnit > startUnit) {
+    input /= 1024;
+    startUnit++;
+  }
+
+  return Math.floor(input * 10) / 10 + ' ' + FILESIZE_UNITS[startUnit];
 };
 
 const SNAKE_CASE_REGEXP = /[A-Z]/g;

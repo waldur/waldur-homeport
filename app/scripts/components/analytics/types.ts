@@ -46,6 +46,7 @@ export interface ChartData {
   exceeds: boolean;
   erred?: boolean;
   loading?: boolean;
+  maxFileSizeName: string;
   options: { [key: string]: any };
 }
 

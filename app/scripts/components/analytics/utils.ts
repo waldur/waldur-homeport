@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-import { dictToList } from '@waldur/core/utils';
+import { dictToList, formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 import * as constants from './constants';
@@ -17,10 +17,41 @@ export const sortProjectsByName = sortObjecstByProp('name');
 
 export const quotasRegitryFilter = quotas => quotas.filter(quota => !!getRegisteredQuota(quota.name));
 
-export const setQuotasLabel = quotas => quotas.map(quota => ({
-  ...quota,
-  label: getRegisteredQuota(quota.name) ? getRegisteredQuota(quota.name).label : '',
-}));
+export const getMaxFileSizeNames = quotas => {
+  const fileSizeNames = {};
+  for (const quota of quotas) {
+    const registeredQuotaConfig = getRegisteredQuota(quota.name);
+    if (registeredQuotaConfig && registeredQuotaConfig.valueType !== constants.valueType.byte || !registeredQuotaConfig) { continue; }
+    const size = quota.limit === -1 ? quota.usage : quota.limit;
+    fileSizeNames[quota.name] = formatFilesize(size).slice(-2).trim();
+  }
+  return fileSizeNames;
+};
+
+export const addRegistryConfig = quotas => quotas.map(quota => {
+  const {
+    formatterTemplateBar = null,
+    formatterTemplatePie = null,
+    label = '',
+  } = getRegisteredQuota(quota.name) ? getRegisteredQuota(quota.name) : {};
+  return {
+    ...quota,
+    formatterTemplateBar,
+    formatterTemplatePie,
+    label,
+  };
+});
+
+export const formatQuotaUsage = quota => {
+  const formatter = getRegisteredQuota(quota.name).formatter;
+  return formatter ?
+    {
+      ...quota,
+      usage: quota.usage > 0 ? Math.round(formatter(quota.usage)) : quota.usage,
+      limit: quota.limit !== -1 ? Math.round(formatter(quota.limit)) : quota.limit,
+    } :
+    quota;
+};
 
 export const setHistoryQuotasName = quotas => quotas.map(quota => {
   const { data = [] } = quota;
@@ -39,13 +70,16 @@ export const getPieChartsData = quotas => quotas.map(quota => ({
   id: quota.uuid[0],
   limit: quota.limit,
   label: quota.label,
+  maxFileSizeName: quota.maxFileSizeName,
   exceeds: isQuotaExceeds(quota),
   options: {
     color: [constants.chartColors.orange, constants.chartColors.blue],
     title: {
       text: quota.label,
     },
-    tooltip: {},
+    tooltip: {
+      formatter: typeof quota.formatterTemplatePie === 'function' ? quota.formatterTemplatePie(quota.maxFileSizeName) : null,
+    },
     series: [
       {
         name: quota.label,
@@ -79,9 +113,15 @@ export const getBarChartsData = quotas => quotas.map(quota => {
   const usageData = [];
   for (const item of quota.data) {
     const { point, object: { limit, usage } = { limit: 0, usage: 0 } } = item;
+    let limitDataItem = limit === -1 ? 0 : limit;
+    let usageDataItem = usage;
+    if (typeof quota.formatterTemplateBar === 'function') {
+      limitDataItem = parseFloat(formatFilesize(limitDataItem, quota.minFileSizeName, quota.maxFileSizeName));
+      usageDataItem = parseFloat(formatFilesize(usage, quota.minFileSizeName, quota.maxFileSizeName));
+    }
     dateData.push(moment(point * 1000).format('Do MMMM'));
-    limitData.push(limit === -1 ? 0 : limit);
-    usageData.push(usage);
+    limitData.push(limitDataItem);
+    usageData.push(usageDataItem);
   }
   return {
     id: quota.uuid[0],
@@ -89,6 +129,7 @@ export const getBarChartsData = quotas => quotas.map(quota => {
     loading: quota.loading,
     erred: quota.erred,
     exceeds: isQuotaExceeds(quota.data.slice(-1)[0].object),
+    maxFileSizeName: quota.maxFileSizeName,
     options: {
       color: [constants.chartColors.orange, constants.chartColors.blue],
       title: {
@@ -99,6 +140,7 @@ export const getBarChartsData = quotas => quotas.map(quota => {
         axisPointer: {
           type: 'shadow',
         },
+        formatter: typeof quota.formatterTemplateBar === 'function' ? quota.formatterTemplateBar(quota.maxFileSizeName) : null,
       },
       toolbox: {
         show: true,

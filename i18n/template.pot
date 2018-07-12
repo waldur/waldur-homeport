@@ -625,12 +625,9 @@ msgstr ""
 msgid "Batch RAM"
 msgstr ""
 
+#: app/scripts/components/analytics/registry.ts
 #: app/scripts/components/slurm/dashboard-quotas.ts
 msgid "Batch RAM usage"
-msgstr ""
-
-#: app/scripts/components/analytics/registry.ts
-msgid "Batch RAM usage, GB"
 msgstr ""
 
 #: app/scripts/components/resource/support/ChartContainer.tsx
@@ -5472,12 +5469,9 @@ msgstr ""
 msgid "Snapshot schedules"
 msgstr ""
 
+#: app/scripts/components/analytics/registry.ts
 #: app/scripts/components/dashboard/base-quotas.ts
 msgid "Snapshot size"
-msgstr ""
-
-#: app/scripts/components/analytics/registry.ts
-msgid "Snapshot size, GB"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup/tabs.js
