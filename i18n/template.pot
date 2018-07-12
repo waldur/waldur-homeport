@@ -5005,11 +5005,15 @@ msgid "SSH key"
 msgstr ""
 
 #: app/scripts/components/user/events.ts
-msgid "SSH key {ssh_key_name} has been created for user {affected_user_link}"
+msgid "SSH key management events"
 msgstr ""
 
 #: app/scripts/components/user/events.ts
-msgid "SSH key {ssh_key_name} has been deleted for user {affected_user_link}"
+msgid "SSH key {ssh_key_name} has been created for user {user_link}"
+msgstr ""
+
+#: app/scripts/components/user/events.ts
+msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr ""
 
 #: app/scripts/components/user/routes.js
