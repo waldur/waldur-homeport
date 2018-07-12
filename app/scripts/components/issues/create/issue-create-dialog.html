@@ -51,6 +51,25 @@
       </div>
     </div>
 
+    <div class="form-group" ng-if="$ctrl.filteredTemplates.length > 0">
+      <label class="control-label" translate>
+        Template
+      </label>
+      <div>
+        <ui-select
+          ng-model="$ctrl.issueTemplate"
+          name="template"
+          on-select="$ctrl.onTemplateSelect($select.selected)">
+          <ui-select-match placeholder="{{ 'Select issue template' | translate }}...">
+            {{ $select.selected.name }}
+          </ui-select-match>
+          <ui-select-choices repeat="option in $ctrl.filteredTemplates">
+            <div ng-bind-html="option.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
     <div class="form-group" ng-if="::!$ctrl.options.hideTitle">
       <label for="issueSummary" class="control-label">
         {{::$ctrl.options.summaryLabel | translate }}
@@ -87,6 +106,22 @@
           ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
           <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
         </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-if="$ctrl.issueTemplate.attachments.length > 0">
+      <label class="control-label">
+        Template files
+      </label>
+      <div>
+        <ul class="list-unstyled">
+          <li ng-repeat="attachment in $ctrl.issueTemplate.attachments">
+            <a ng-href="{{ attachment.file }}" target="_blank">
+              <i class="fa fa-cloud-download"></i>
+              {{ attachment.name }}
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </form>

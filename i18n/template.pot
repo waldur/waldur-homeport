@@ -5162,6 +5162,10 @@ msgstr ""
 msgid "Select country..."
 msgstr ""
 
+#: app/scripts/components/issues/create/issue-create-dialog.html
+msgid "Select issue template"
+msgstr ""
+
 #: app/scripts/components/intro/base-intro.js
 msgid "Select one to go to a customer workspace"
 msgstr ""
@@ -5742,6 +5746,10 @@ msgstr ""
 
 #: app/scripts/components/dashboard/base-quotas.ts
 msgid "Team size"
+msgstr ""
+
+#: app/scripts/components/issues/create/issue-create-dialog.html
+msgid "Template"
 msgstr ""
 
 #: app/scripts/components/resource/monitoring/ZabbixHostCreateDialog.tsx
