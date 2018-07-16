@@ -37,7 +37,7 @@ const renderFlavors = withTranslation(props => (
               onClick={() => props.fields.remove(index)}>
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4>{props.translate('Offering flavor #{{index}}', {index: index + 1})}</h4>
+            <h4>{props.translate('Offering flavor #{index}', {index: index + 1})}</h4>
           </div>
           <div className="panel-body">
             <Field

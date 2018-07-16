@@ -3480,7 +3480,7 @@ msgid "Offering events"
 msgstr ""
 
 #: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
-msgid "Offering flavor #{{index}}"
+msgid "Offering flavor #{index}"
 msgstr ""
 
 #: app/scripts/components/marketplace/offerings/OfferingCreateContainer.tsx
