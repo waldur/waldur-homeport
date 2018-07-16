@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { Step } from './ShoppingCartStep';
-import './ShoppingCartSteps.scss';
+import { StepsList } from '@waldur/marketplace/common/StepsList';
+
 import { OrderState } from './types';
 
 interface ShoppingCartStepsProps {
@@ -14,19 +14,6 @@ const STEPS = [
   'Review',
 ];
 
-export const ShoppingCartSteps = (props: ShoppingCartStepsProps) => {
-  const stepIndex = STEPS.indexOf(props.state);
-
-  return (
-    <div className="shopping-cart-steps">
-      {STEPS.map((title, index) => (
-        <Step
-          key={index}
-          title={`${index + 1}. ${title}`}
-          complete={stepIndex > index}
-          active={stepIndex === index}
-        />
-      ))}
-    </div>
-  );
-};
+export const ShoppingCartSteps = (props: ShoppingCartStepsProps) => (
+  <StepsList choices={STEPS} value={props.state}/>
+);

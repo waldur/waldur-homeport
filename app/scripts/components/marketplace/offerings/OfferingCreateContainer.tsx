@@ -11,6 +11,8 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as api from './api';
 import { OfferingCreateDialog } from './OfferingCreateDialog';
+import { setStep } from './store/actions';
+import { getStep } from './store/selectors';
 
 const OfferingCreateController = props => (
   <OfferingCreateDialog
@@ -46,20 +48,22 @@ const OfferingCreateController = props => (
 
 const selector = formValueSelector('marketplaceOfferingCreate');
 
-const mapStateToProps = state => {
-  return {
-    customer: getCustomer(state),
-    category: selector(state, 'category'),
-    preferred_language: selector(state, 'preferred_language'),
-  };
-};
+const mapStateToProps = state => ({
+  customer: getCustomer(state),
+  category: selector(state, 'category'),
+  step: getStep(state),
+});
 
-const connector = connect(mapStateToProps);
+const connector = connect(mapStateToProps, { setStep });
 
 const enhance = compose(
   connector,
   withTranslation,
-  reduxForm({form: 'marketplaceOfferingCreate'}),
+  reduxForm({
+    form: 'marketplaceOfferingCreate',
+    enableReinitialize: true,
+    destroyOnUnmount: false,
+  }),
 );
 
 const OfferingCreateContainer = enhance(OfferingCreateController);
