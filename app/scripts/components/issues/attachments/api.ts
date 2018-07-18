@@ -9,13 +9,13 @@ export const getAttachments = (issue: string) => {
   });
 };
 
-export const putAttachments = (issueUrl: string, file: File) => {
+export const putAttachment = (issueUrl: string, file: File) => {
   return sendForm('POST', `${ENV.apiEndpoint}api/support-attachments/`, {
     issue: issueUrl,
     file,
   });
 };
 
-export const deleteAttachments = (uuid: string) => {
+export const deleteAttachment = (uuid: string) => {
   return $http.delete(`${ENV.apiEndpoint}api/support-attachments/{${uuid}}/`);
 };
