@@ -1,6 +1,8 @@
-import { getList, post } from '@waldur/core/api';
+import { getList, sendForm } from '@waldur/core/api';
+import { ENV } from '@waldur/core/services';
 import { Category } from '@waldur/marketplace/types';
 import { Offering } from '@waldur/offering/types';
 
 export const loadCategories = () => getList<Category>('/marketplace-categories/');
-export const createOffering = data => post<Offering>('/marketplace-offerings/', data);
+export const createOffering = data =>
+  sendForm<Offering>('POST', `${ENV.apiEndpoint}api/marketplace-offerings/`, data);

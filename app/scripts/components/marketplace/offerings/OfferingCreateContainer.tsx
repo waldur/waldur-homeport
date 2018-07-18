@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm, formValueSelector } from 'redux-form';
+import { reset } from 'redux-form';
 
 import { $state } from '@waldur/core/services';
 import { withTranslation, translate } from '@waldur/i18n';
@@ -13,6 +14,8 @@ import * as api from './api';
 import { OfferingCreateDialog } from './OfferingCreateDialog';
 import { setStep } from './store/actions';
 import { getStep } from './store/selectors';
+
+const FORM_ID = 'marketplaceOfferingCreate';
 
 const OfferingCreateController = props => (
   <OfferingCreateDialog
@@ -34,9 +37,11 @@ const OfferingCreateController = props => (
         native_description,
         category: category.url,
         customer: props.customer.url,
-        attributes,
+        attributes: JSON.stringify(attributes),
       };
       return api.createOffering(params).then(() => {
+        props.dispatch(reset(FORM_ID));
+        props.dispatch(setStep('Describe'));
         props.dispatch(showSuccess(translate('Offering has been created')));
         $state.go('marketplace-vendor-offerings');
       });
@@ -46,7 +51,7 @@ const OfferingCreateController = props => (
   />
 );
 
-const selector = formValueSelector('marketplaceOfferingCreate');
+const selector = formValueSelector(FORM_ID);
 
 const mapStateToProps = state => ({
   customer: getCustomer(state),
@@ -60,7 +65,7 @@ const enhance = compose(
   connector,
   withTranslation,
   reduxForm({
-    form: 'marketplaceOfferingCreate',
+    form: FORM_ID,
     enableReinitialize: true,
     destroyOnUnmount: false,
   }),

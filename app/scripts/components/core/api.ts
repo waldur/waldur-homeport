@@ -26,7 +26,7 @@ export function post<T = {}>(endpoint: string, options?: {}): angular.IHttpPromi
   return $http.post(`${ENV.apiEndpoint}api${endpoint}`, options);
 }
 
-export const sendForm = (method: string, url: string, options) => {
+export function sendForm<T = {}>(method: string, url: string, options): angular.IHttpPromise<T> {
   const data = new FormData();
   for (const name of Object.keys(options)) {
     if (options[name] !== undefined) {
@@ -40,7 +40,7 @@ export const sendForm = (method: string, url: string, options) => {
     transformRequest: x => x,
     headers: {'Content-Type': undefined},
   });
-};
+}
 
 export async function getAll<T = {}>(endpoint: string, options?: {}): Promise<T[]> {
   let response = await get(endpoint, options);
