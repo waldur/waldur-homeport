@@ -1,6 +1,6 @@
 export interface Product {
   thumb: string;
-  title: string;
+  name: string;
   subtitle: string;
   rating: number;
   installs: number;

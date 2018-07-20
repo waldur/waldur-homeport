@@ -15,7 +15,7 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
       <th>{props.section.title}</th>
       {props.items.map((item, index) => (
         <th key={index}>
-          {item.title}
+          {item.name}
         </th>
       ))}
       {range(4 - props.items.length).map(index =>

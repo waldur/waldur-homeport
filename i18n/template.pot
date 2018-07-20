@@ -3613,6 +3613,10 @@ msgstr ""
 msgid "Oracle"
 msgstr ""
 
+#: app/scripts/components/marketplace/cart/store/effects.ts
+msgid "Order has been submitted."
+msgstr ""
+
 #: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/experts/bids/expert-bids-list.js
@@ -6154,6 +6158,10 @@ msgstr ""
 #: app/scripts/components/project/project-providers-service.js
 #: app/scripts/components/providers/details/provider-projects.js
 msgid "Unable to create link."
+msgstr ""
+
+#: app/scripts/components/marketplace/cart/store/effects.ts
+msgid "Unable to create order."
 msgstr ""
 
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.js

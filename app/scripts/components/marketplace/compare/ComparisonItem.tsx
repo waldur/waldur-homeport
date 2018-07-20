@@ -19,7 +19,7 @@ export const ComparisonItem = (props: ComparisonItemProps) => (
       className="comparison-item-thumb">
       <img src={props.item.thumb}/>
     </Link>
-    <h3>{props.item.title}</h3>
+    <h3>{props.item.name}</h3>
     <p>by {props.item.vendor}</p>
     <RatingStars rating={props.item.rating} size="medium"/>
     <p>Based on <a>{props.item.reviews} reviews</a></p>

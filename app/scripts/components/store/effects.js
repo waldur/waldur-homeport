@@ -16,6 +16,7 @@ import pythonManagementSaga from '@waldur/ansible/python-management/effects';
 import jupyterHubManagementSaga from '@waldur/ansible/jupyter-hub-management/effects';
 import serviceUsageSaga from '@waldur/providers/support/effects';
 import resourceSummarySaga from '@waldur/resource/summary/effects';
+import marketplaceSaga from '@waldur/marketplace/cart/store/effects';
 
 import coreSaga from './coreSaga';
 
@@ -38,4 +39,5 @@ export default [
   jupyterHubManagementSaga,
   serviceUsageSaga,
   resourceSummarySaga,
+  marketplaceSaga,
 ];

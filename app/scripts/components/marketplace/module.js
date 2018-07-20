@@ -8,7 +8,6 @@ import marketplaceProduct from './details/DetailsPage';
 import marketplaceList from './list/ListPage';
 import marketplaceVendorOfferings from './offerings/OfferingsList';
 import marketplaceOfferingCreate from './offerings/OfferingCreateContainer';
-import { setupFixture } from '@waldur/marketplace/fixtures/setup';
 import providersService from './providers-service';
 import registerSidebarExtension from './sidebar';
 
@@ -24,6 +23,5 @@ export default module => {
   module.component('marketplaceOfferingCreate', marketplaceOfferingCreate);
   module.service('providersService', providersService);
   module.config(routes);
-  module.run(setupFixture);
   module.run(registerSidebarExtension);
 };

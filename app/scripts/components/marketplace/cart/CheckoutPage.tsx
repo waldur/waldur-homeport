@@ -8,7 +8,7 @@ import { ActionButtons } from './ActionButtons';
 import { ShoppingCart } from './ShoppingCart';
 import { ShoppingCartSidebar } from './ShoppingCartSidebar';
 import { ShoppingCartSteps } from './ShoppingCartSteps';
-import { setState } from './store/actions';
+import * as actions from './store/actions';
 import { getItems, getState } from './store/selectors';
 import { OrderState } from './types';
 
@@ -16,6 +16,7 @@ interface CheckoutPageProps {
   items: Product[];
   state: OrderState;
   setState(state: OrderState): void;
+  createOrder(): void;
 }
 
 const PureCheckoutPage = (props: CheckoutPageProps) => (
@@ -24,7 +25,11 @@ const PureCheckoutPage = (props: CheckoutPageProps) => (
       <div className="col-xl-9 col-lg-8">
         <ShoppingCartSteps state={props.state}/>
         <ShoppingCart items={props.items} editable={props.state === 'Configure'}/>
-        <ActionButtons state={props.state} setState={props.setState}/>
+        <ActionButtons
+          state={props.state}
+          setState={props.setState}
+          createOrder={props.createOrder}
+        />
       </div>
       <div className="col-xl-3 col-lg-4">
         <ShoppingCartSidebar/>
@@ -43,7 +48,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setState,
+  setState: actions.setState,
+  createOrder: actions.createOrder,
 };
 
 export const CheckoutPage = connect(mapStateToProps, mapDispatchToProps)(PureCheckoutPage);
