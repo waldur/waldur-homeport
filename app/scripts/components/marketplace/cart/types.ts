@@ -6,3 +6,13 @@ export interface State {
   items: Product[];
   state: OrderState;
 }
+
+export interface OrderItem {
+  order: string;
+  offering: Product;
+}
+
+export interface Order {
+  project: string;
+  items: OrderItem[];
+}

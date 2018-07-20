@@ -29,7 +29,7 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
       <tbody>
         <tr>
           <td><strong>Product</strong></td>
-          <td>{props.product.title}</td>
+          <td>{props.product.name}</td>
         </tr>
         <tr>
           <td><strong>Vendor</strong></td>

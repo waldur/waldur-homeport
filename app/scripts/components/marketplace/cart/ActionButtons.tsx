@@ -5,11 +5,12 @@ import { OrderState } from './types';
 interface ActionButtonsProps {
   state: OrderState;
   setState(state: OrderState): void;
+  createOrder(): void;
 }
 
 const goForward = (props: ActionButtonsProps) => () => {
   if (props.state === 'Configure') {
-    props.setState('Approve');
+    props.createOrder();
   }
   if (props.state === 'Approve') {
     props.setState('Review');

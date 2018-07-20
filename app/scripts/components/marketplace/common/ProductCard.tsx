@@ -23,7 +23,7 @@ export const ProductCard = (props: ProductCardProps) => (
     <div className="product-card-body">
       <h3 className="product-title">
         <Link state="marketplace-product">
-          {props.product.title}
+          {props.product.name}
         </Link>
       </h3>
       <div className="product-subtitle elipsis">
