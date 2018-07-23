@@ -4,10 +4,11 @@ import { compose } from 'redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { reset } from 'redux-form';
 
+import { format } from '@waldur/core/ErrorMessageFormatter';
 import { $state } from '@waldur/core/services';
 import { withTranslation, translate } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
-import { showSuccess } from '@waldur/store/coreSaga';
+import { showSuccess, showError } from '@waldur/store/coreSaga';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as api from './api';
@@ -21,29 +22,20 @@ const OfferingCreateController = props => (
   <OfferingCreateDialog
     loadCategories={() => api.loadCategories().then(options => ({ options }))}
     createOffering={request => {
-      const {
-        name,
-        description,
-        native_name,
-        native_description,
-        thumbnail,
-        category,
-        ...attributes } = request;
       const params = {
-        name,
-        description,
-        thumbnail,
-        native_name,
-        native_description,
-        category: category.url,
+        ...request,
+        category: request.category.url,
         customer: props.customer.url,
-        attributes: JSON.stringify(attributes),
+        attributes: JSON.stringify(request.attributes),
       };
       return api.createOffering(params).then(() => {
         props.dispatch(reset(FORM_ID));
         props.dispatch(setStep('Describe'));
         props.dispatch(showSuccess(translate('Offering has been created')));
         $state.go('marketplace-vendor-offerings');
+      }).catch(response => {
+        const errorMessage = `${translate('Unable to create offering.')} ${format(response)}`;
+        props.dispatch(showError(errorMessage));
       });
     }}
     gotoOfferingList={() => $state.go('marketplace-vendor-offerings')}
