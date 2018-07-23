@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Select from 'react-select';
 import { Field } from 'redux-form';
 
 // See also: https://github.com/erikras/redux-form/issues/1852
@@ -24,6 +25,19 @@ export const OfferingAttributes = props =>
             parse: parseIntField,
             format: formatIntField,
           };
+        } else if (attribute.type === 'choice') {
+          attrs = {
+            component: componentProp => (
+              <Select
+                value={componentProp.input.value}
+                onChange={value => componentProp.input.onChange(value)}
+                options={attribute.options}
+                valueKey="key"
+                labelKey="title"
+                simpleValue={true}
+              />
+            ),
+          };
         } else {
           attrs = {
             type: 'text',
@@ -37,7 +51,7 @@ export const OfferingAttributes = props =>
             <div className="col-sm-5">
               <Field
                 key={attributeIndex}
-                name={attribute.key}
+                name={`attributes.${attribute.key}`}
                 component="input"
                 className="form-control"
                 {...attrs}
