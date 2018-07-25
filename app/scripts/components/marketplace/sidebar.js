@@ -16,4 +16,24 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
       }
     });
   });
+
+  SidebarExtensionService.register('project', () => {
+    return [
+      {
+        key: 'marketplace',
+        icon: 'fa-shopping-cart',
+        label: gettext('Marketplace'),
+        feature: 'marketplace',
+        link: 'marketplace-landing({uuid: $ctrl.context.project.uuid})',
+        index: 210,
+      },
+      {
+        label: gettext('Marketplace orders'),
+        icon: 'fa-folder-open',
+        link: 'marketplace-order-list({uuid: $ctrl.context.project.uuid})',
+        feature: 'marketplace',
+        index: 220,
+      }
+    ];
+  });
 }
