@@ -411,6 +411,14 @@ msgstr ""
 msgid "Approve payment"
 msgstr ""
 
+#: app/scripts/components/marketplace/orders/OrdersList.tsx
+msgid "Approved at"
+msgstr ""
+
+#: app/scripts/components/marketplace/orders/OrdersList.tsx
+msgid "Approved by"
+msgstr ""
+
 #: app/scripts/components/customer/CustomerList.tsx
 #: app/scripts/components/project/projects-list.js
 msgid "Apps"
@@ -1036,6 +1044,7 @@ msgid "Copy to clipboard"
 msgstr ""
 
 #: app/scripts/components/customer/CustomerList.tsx
+#: app/scripts/components/marketplace/orders/OrdersList.tsx
 msgid "Cost"
 msgstr ""
 
@@ -1217,7 +1226,12 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js
+#: app/scripts/components/marketplace/orders/OrdersList.tsx
 msgid "Created at"
+msgstr ""
+
+#: app/scripts/components/marketplace/orders/OrdersList.tsx
+msgid "Created by"
 msgstr ""
 
 #: app/scripts/components/resource/state/constants.js
@@ -2870,7 +2884,7 @@ msgid "Managed projects"
 msgstr ""
 
 #: app/scripts/components/marketplace/routes.js
-#: app/scripts/components/project/project-workspace.js
+#: app/scripts/components/marketplace/sidebar.js
 msgid "Marketplace"
 msgstr ""
 
@@ -2880,6 +2894,11 @@ msgstr ""
 
 #: app/scripts/components/marketplace/sidebar.js
 msgid "Marketplace offerings"
+msgstr ""
+
+#: app/scripts/components/marketplace/routes.js
+#: app/scripts/components/marketplace/sidebar.js
+msgid "Marketplace orders"
 msgstr ""
 
 #: app/scripts/components/marketplace/routes.js
@@ -3615,6 +3634,10 @@ msgstr ""
 
 #: app/scripts/components/marketplace/cart/store/effects.ts
 msgid "Order has been submitted."
+msgstr ""
+
+#: app/scripts/components/marketplace/orders/OrdersList.tsx
+msgid "Orders"
 msgstr ""
 
 #: app/scripts/components/customer/CustomerList.tsx
@@ -5553,6 +5576,7 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
+#: app/scripts/components/marketplace/orders/OrdersList.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/offerings-list.js
 #: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js

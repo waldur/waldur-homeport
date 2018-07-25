@@ -8,6 +8,7 @@ import marketplaceProduct from './details/DetailsPage';
 import marketplaceList from './list/ListPage';
 import marketplaceVendorOfferings from './offerings/OfferingsList';
 import marketplaceOfferingCreate from './offerings/OfferingCreateContainer';
+import marketplaceOrdersList from './orders/OrdersList';
 import providersService from './providers-service';
 import registerSidebarExtension from './sidebar';
 
@@ -21,6 +22,7 @@ export default module => {
   module.component('marketplaceList', marketplaceList);
   module.component('marketplaceVendorOfferings', marketplaceVendorOfferings);
   module.component('marketplaceOfferingCreate', marketplaceOfferingCreate);
+  module.component('marketplaceOrdersList', marketplaceOrdersList);
   module.service('providersService', providersService);
   module.config(routes);
   module.run(registerSidebarExtension);
