@@ -2,7 +2,7 @@ interface Quota {
   quota: string;
   title: string;
   feature?: string;
-  formatter?: (usage: number) => number;
+  type?: 'filesize' | 'hours';
   dashboards: string[];
 }
 

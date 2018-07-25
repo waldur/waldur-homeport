@@ -1,17 +1,38 @@
+import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
+import * as constants from './constants';
+
 export const registeredQuotas = {
-  // tslint:disable-next-line
-  nc_ram_usage: {
-    get label() { return translate('RAM'); },
+  ram: {
+    get label() { return translate('Batch RAM usage'); },
+    formatter: formatFilesize,
+    valueType: constants.valueType.byte,
+    minFileSizeName: 'MB',
+    formatterTemplatePie: fileSizeName => item =>
+      `${item.seriesName}<br />
+      ${item.marker}${item.name}: ${formatFilesize(item.value, 'MB', fileSizeName)}`,
+    formatterTemplateBar: fileSizeName => ([usage, limit]) =>
+      `${usage.axisValue}<br />
+      ${usage.marker}${usage.seriesName}: ${usage.value} ${fileSizeName}<br />
+      ${limit.marker}${limit.seriesName}: ${limit.value} ${fileSizeName}`,
   },
-  // tslint:disable-next-line
-  nc_volume_count: {
-    get label() { return translate('Volumes'); },
+  volumes: {
+    get label() { return translate('Volume count'); },
+    valueType: constants.valueType.unit,
   },
-  // tslint:disable-next-line
-  nc_snapshot_size: {
-    get label() { return translate('Snapshots'); },
+  snapshots: {
+    get label() { return translate('Snapshot size'); },
+    formatter: formatFilesize,
+    valueType: constants.valueType.byte,
+    minFileSizeName: 'MB',
+    formatterTemplatePie: fileSizeName => item =>
+      `${item.seriesName}<br />
+      ${item.marker}${item.name}: ${formatFilesize(item.value, 'MB', fileSizeName)}`,
+    formatterTemplateBar: fileSizeName => ([usage, limit]) =>
+      `${usage.axisValue}<br />
+      ${usage.marker}${usage.seriesName}: ${usage.value} ${fileSizeName}<br />
+      ${limit.marker}${limit.seriesName}: ${limit.value} ${fileSizeName}`,
   },
 };
 

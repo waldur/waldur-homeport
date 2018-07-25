@@ -43,7 +43,7 @@ export function* issueAttachmentUpload(action) {
   const { cancel } = yield race({
     sync: call(function*() {
       try {
-        const response = yield call(api.putAttachments, issueUrl, file);
+        const response = yield call(api.putAttachment, issueUrl, file);
         yield put(actions.issueAttachmentsPutSuccess(response.data));
       } catch (error) {
         yield put(actions.issueAttachmentsPutError(error));
@@ -64,7 +64,7 @@ export function* issueAttachmentsDelete(action) {
   if (deleting[uuid]) { return; }
   try {
     yield put(actions.issueAttachmentsDeleteStart(uuid));
-    yield call(api.deleteAttachments, uuid);
+    yield call(api.deleteAttachment, uuid);
     yield put(actions.issueAttachmentsDeleteSuccess(uuid));
   } catch (error) {
     yield put(actions.issueAttachmentsDeleteError(error, uuid));

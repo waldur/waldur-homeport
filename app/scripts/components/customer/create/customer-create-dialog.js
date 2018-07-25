@@ -17,7 +17,9 @@ const customerCreateDialog = {
     }
 
     $onInit() {
-      this.model = {};
+      this.model = {
+        role: this.resolve.role,
+      };
       this.steps = this.CustomerCreateService.getSteps();
     }
 

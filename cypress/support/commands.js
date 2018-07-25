@@ -1,7 +1,26 @@
-// Login using UI
-Cypress.Commands.add('login', function(username, password){
+import '../integration/support/commands';
+
+// Fill and sumbit login form
+Cypress.Commands.add('fillAndSubmitLoginForm', (username, password) => {
   username = username || 'staff';
   password = password || 'secret';
+
+  cy
+    // Fill and submit the form
+    .log('fill and submit login form')
+
+    // Type username
+    .get('input[placeholder="Username"]', {log: false}).type(username, {log: false})
+
+    // Type password
+    .get('input[placeholder="Password"]', {log: false}).type(password, {log: false})
+
+    // Press button to submit login form
+    .get('button[type="submit"]', {log: false}).click({log: false});
+});
+
+// Login using UI
+Cypress.Commands.add('login', function(username, password){
 
   const log = Cypress.log({
     name: 'login',
@@ -19,14 +38,8 @@ Cypress.Commands.add('login', function(username, password){
     // Ensure taht we're on login page
     .contains('Login', {log: false})
 
-    // Type username
-    .get('input[placeholder="Username"]', {log: false}).type(username, {log: false})
-
-    // Type password
-    .get('input[placeholder="Password"]', {log: false}).type(password, {log: false})
-
-    // Press button to submit login form
-    .get('button[type="submit"]', {log: false}).click({log: false})
+    // Fill login form
+    .fillAndSubmitLoginForm(username, password)
 
     // We should be on the dashboard now
     .get('h2', {log: false}).contains('User dashboard', {log: false})
@@ -85,5 +98,5 @@ Cypress.Commands.add('mockCustomer', () => {
   .route('http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/?uuid=bf6d515c9e6e445f9c339021b30fc96b',
     'fixture:customers/alice.json')
   .route('http://localhost:8080/api/invoices/**', [])
-  .route('http://localhost:8080/api/projects/**', [])
+  .route('http://localhost:8080/api/projects/**', []);
 });

@@ -42,12 +42,31 @@
       <label class="control-label" translate>
         Request type
       </label>
-      <div>
+      <div ng-class="{disabled: $ctrl.saving}">
         <issue-type-select model="$ctrl.issue" field="{name: 'type'}"></issue-type-select>
         <div class="help-block text-danger"
           ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.type.$touched) && $ctrl.IssueForm.type.$error.required">
           <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
         </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-if="$ctrl.filteredTemplates.length > 0">
+      <label class="control-label" translate>
+        Template
+      </label>
+      <div ng-class="{disabled: $ctrl.saving}">
+        <ui-select
+          ng-model="$ctrl.issueTemplate"
+          name="template"
+          on-select="$ctrl.onTemplateSelect($select.selected)">
+          <ui-select-match placeholder="{{ 'Select issue template' | translate }}...">
+            {{ $select.selected.name }}
+          </ui-select-match>
+          <ui-select-choices repeat="option in $ctrl.filteredTemplates">
+            <div ng-bind-html="option.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
       </div>
     </div>
 
@@ -87,6 +106,48 @@
           ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
           <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
         </div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-if="$ctrl.issueTemplate.attachments.length > 0">
+      <label class="control-label" translate>
+        Template files
+      </label>
+      <div>
+        <ul class="list-unstyled">
+          <li ng-repeat="attachment in $ctrl.issueTemplate.attachments">
+            <a ng-href="{{ attachment.file }}" target="_blank">
+              <i class="fa fa-cloud-download"></i>
+              {{ attachment.name }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" translate>
+        Attachments
+      </label>
+      <div ng-class="{disabled: $ctrl.saving}">
+        <input
+          type="file"
+          id="fileInput"
+          multiple
+          style="display:none">
+        <button
+          type="button"
+          class="btn btn-default"
+          id="fileButton"
+          translate>
+          Select some files
+        </button>
+        <ul>
+          <li ng-repeat="file in $ctrl.files">
+            {{ file.name }}
+            ({{ file.size | filesize:'B' }})
+          </li>
+        </ul>
       </div>
     </div>
   </form>

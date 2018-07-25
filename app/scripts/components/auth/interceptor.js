@@ -25,11 +25,14 @@ function invalidTokenInterceptor($injector, $q) {
 }
 
 // @ngInject
-function requireAuth($rootScope, $state, $auth) {
+function requireAuth($rootScope, $state, $auth, $window) {
   // If state parent is `auth` and user does not have authentication token,
   // he should be redirected to login page.
 
-  $rootScope.$on('$stateChangeStart', function(event, toState) {
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+    if (!$auth.isAuthenticated()) {
+      saveAttemptState($window, toState, toParams);
+    }
     if (toState.data && toState.data.auth && !$auth.isAuthenticated()) {
       event.preventDefault();
       $state.go('login');
@@ -43,5 +46,12 @@ function initAuthToken($window, $http) {
   const token = $window.localStorage['satellizer_token'];
   if (token) {
     $http.defaults.headers.common.Authorization = 'Token ' + token;
+  }
+}
+
+function saveAttemptState($window, toState, toParams) {
+  if (toState.data.auth) {
+    const nextState = JSON.stringify({state: toState.name, params: toParams});
+    $window.localStorage.setItem('goToStateAfterLogin', nextState);
   }
 }

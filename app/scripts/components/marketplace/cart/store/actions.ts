@@ -18,9 +18,17 @@ export const removeItem = (item: Product): Action<{item}> => ({
   },
 });
 
+export const clearCart = () => ({
+  type: constants.CLEAR_CART,
+});
+
 export const setState = (state: OrderState): Action<{state}> => ({
   type: constants.SET_STATE,
   payload: {
     state,
   },
+});
+
+export const createOrder = () => ({
+  type: constants.CREATE_ORDER,
 });

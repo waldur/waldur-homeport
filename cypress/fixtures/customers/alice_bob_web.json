@@ -16,7 +16,8 @@
       }
     ],
     "owners": [],
-    "is_expert_provider": false
+    "is_expert_provider": false,
+    "quotas": []
   },
   {
     "uuid": "8f2f80601d82422ea4124559da92dddb",
@@ -32,7 +33,8 @@
         "native_name": "Bob Leböwski"
       }
     ],
-    "is_expert_provider": true
+    "is_expert_provider": true,
+    "quotas": []
   },
   {
     "uuid": "bbf6d302440644f0ba5d21a7d7b244fa",
@@ -46,6 +48,7 @@
       }
     ],
     "owners": [],
-    "is_expert_provider": false
+    "is_expert_provider": false,
+    "quotas": []
   }
 ]

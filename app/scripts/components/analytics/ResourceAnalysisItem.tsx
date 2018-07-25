@@ -9,7 +9,12 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
-import { getPieChartsDataSelector, getBarChartsDataSelector, getExceededQuotasSelector, getBarChartsLoadingSelector } from './selectors';
+import {
+  getPieChartsDataSelector,
+  getBarChartsDataSelector,
+  getExceededQuotasSelector,
+  getBarChartsLoadingSelector,
+} from './selectors';
 import { Project, Quota, ChartData } from './types';
 
 interface PureResourceAnalysisItemProps extends TranslateProps, ToggleOpenProps {
@@ -23,18 +28,9 @@ interface PureResourceAnalysisItemProps extends TranslateProps, ToggleOpenProps 
 export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) => {
   const { project, isOpen, handleToggleOpen, pieChartsData, barChartsData, translate, exceededQuotas, barChartsLoading } = props;
   const usagePieCharts = pieChartsData.map(pieChart => {
-    const { limit, options, id, label, exceeds } = pieChart;
+    const { limit, options, id, label, exceeds, maxFileSizeName } = pieChart;
     const content = limit === -1 ? translate('Unlimited') : (<EChart options={options} />);
-
-    return (
-      <li key={id}>
-        <span className={`chart-title ${exceeds ? 'text-danger' : ''}`}>{`${label} :`}</span>
-        <span className="chart-content">{content}</span>
-      </li>
-    );
-  });
-  const usageBarCharts = barChartsData.map(barChart => {
-    const { options, id, label, exceeds } = barChart;
+    const title = `${label}${(maxFileSizeName ? `, ${maxFileSizeName}` : '')} :`;
 
     return (
       <li key={id}>
@@ -42,12 +38,28 @@ export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) =
           'chart-title': true,
           'text-danger': exceeds,
         })}>
-          {label}
+          {title}
+        </span>
+        <span className="chart-content">{content}</span>
+      </li>
+    );
+  });
+  const usageBarCharts = barChartsData.map(barChart => {
+    const { options, id, label, exceeds, maxFileSizeName } = barChart;
+    const title = `${label}${(maxFileSizeName ? `, ${maxFileSizeName}` : '')} :`;
+
+    return (
+      <li key={id}>
+        <span className={classNames(
+          'chart-title',
+          { 'text-danger': exceeds, }
+        )}>
+          {title}
         </span>
         <span className="chart-content">
           <EChart options={options} />
         </span>
-      </li>
+      </li >
     );
   });
   const tooltipLabelContent = exceededQuotas.length && exceededQuotas.map(quota => (
@@ -57,11 +69,11 @@ export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) =
   return (
     <div>
       <div
-        className={classNames({
-          'resource-analysis-item__title': true,
-          'content-between-center': true,
-          'opened': isOpen,
-        })}
+        className={classNames(
+          'resource-analysis-item__title',
+          'content-between-center',
+          { opened: isOpen, }
+        )}
         onClick={handleToggleOpen}
       >
         <h4 className={classNames({ 'text-danger': !!exceededQuotas.length })}>
@@ -77,22 +89,24 @@ export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) =
         </h4>
         <div>
           <i
-            className={classNames({
-              'fa': true,
-              'fa-angle-up': isOpen,
-              'fa-angle-down': !isOpen,
-            })}
+            className={classNames(
+              'fa',
+              {
+                'fa-angle-up': isOpen,
+                'fa-angle-down': !isOpen,
+              })}
           />
         </div>
       </div>
       <div className="resource-analysis-item__content">
         {isOpen &&
           <ul className={
-            classNames({
-              'resource-analysis-item__bar-chart-list': true,
-              'content-center-center': barChartsLoading,
-            })
-          }>
+            classNames(
+              'resource-analysis-item__bar-chart-list',
+              {
+                'content-center-center': barChartsLoading,
+              }
+            )}>
             {
               barChartsLoading ? (<LoadingSpinner />) : usageBarCharts
             }

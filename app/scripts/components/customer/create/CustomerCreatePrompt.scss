@@ -1,0 +1,17 @@
+.customer-create-prompt {
+  
+  .checked .message-button{
+    background-color: #337ab7;
+    border-color: #337ab7;
+    color: #fff;
+  }
+}
+
+@media(min-width:768px) {
+  .customer-create-prompt {
+  
+    .message-button {
+      min-height: 245px;
+    }
+  }
+}

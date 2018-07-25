@@ -8,7 +8,7 @@ const Dynamics365Icon = require('./microsoft-dynamics-365.png');
 
 export const products: Product[] = [
   {
-    title: 'Salesforce CRM',
+    name: 'Salesforce CRM',
     subtitle: 'It covers every customer touch point and every stage of the customer lifecycle.',
     thumb: SalesForceIcon,
     rating: 5,
@@ -18,7 +18,7 @@ export const products: Product[] = [
     price: 900,
   },
   {
-    title: 'Redtail CRM',
+    name: 'Redtail CRM',
     subtitle: 'Web-based, full-featured and easy-to-use client management solution designed specifically for financial professionals.',
     thumb: RedtailIcon,
     rating: 3,
@@ -28,7 +28,7 @@ export const products: Product[] = [
     price: 300,
   },
   {
-    title: 'Zoho CRM',
+    name: 'Zoho CRM',
     subtitle: 'Reach out to prospects at the right moment and engage them across every channel. Zoho CRM helps businesses of all sizes close more deals the smarter way.',
     thumb: ZohoIcon,
     rating: 3,
@@ -38,7 +38,7 @@ export const products: Product[] = [
     price: 400,
   },
   {
-    title: 'Dynamics 365',
+    name: 'Dynamics 365',
     subtitle: 'Unify CRM and ERP capabilities and break down data silos with Dynamics 365—modern, intelligent cloud applications that help move your business forward.',
     thumb: Dynamics365Icon,
     rating: 5,

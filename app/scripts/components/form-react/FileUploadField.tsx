@@ -1,3 +1,4 @@
+import accepts from 'attr-accept';
 import * as React from 'react';
 
 import { FormField } from './types';
@@ -23,7 +24,10 @@ export class FileUploadField extends React.Component<FileUploadFieldProps> {
     const files = event.target.files;
     if (files.length === 1) {
       const file = files[0];
-      if (!this.props.accept || file.type === this.props.accept) {
+      if (!this.props.accept || accepts({
+        type: file.type,
+        name: file.name,
+      }, this.props.accept)) {
         this.setState({fileName: file.name});
         this.props.input.onChange(file);
         return;

@@ -1,16 +1,17 @@
 import { $http, ENV } from './services';
 
-export const get = (endpoint: string, options?: any) =>
-  $http.get(`${ENV.apiEndpoint}api${endpoint}`, options);
+export function get<T = {}>(endpoint: string, options?: {}): angular.IHttpPromise<T> {
+  return $http.get(`${ENV.apiEndpoint}api${endpoint}`, options);
+}
 
-export const getList = (endpoint, params?) => {
+export function getList<T = {}>(endpoint: string, params?: {}): angular.IPromise<T[]> {
   const options = params ? {params} : undefined;
   return get(endpoint, options).then(response =>
     Array.isArray(response.data) ?
     response.data :
     []
   );
-};
+}
 
 export const getFirst = (endpoint, params?) =>
   getList(endpoint, params).then(data => data[0]);
@@ -21,10 +22,11 @@ export const getById = (endpoint, id) =>
 export const deleteById = (endpoint, id, options?) =>
   $http.delete(`${ENV.apiEndpoint}api${endpoint}${id}/`, options);
 
-export const post = (endpoint: string, options?: any) =>
-  $http.post(`${ENV.apiEndpoint}api${endpoint}`, options);
+export function post<T = {}>(endpoint: string, options?: {}): angular.IHttpPromise<T> {
+  return $http.post(`${ENV.apiEndpoint}api${endpoint}`, options);
+}
 
-export const sendForm = (method: string, url: string, options) => {
+export function sendForm<T = {}>(method: string, url: string, options): angular.IHttpPromise<T> {
   const data = new FormData();
   for (const name of Object.keys(options)) {
     if (options[name] !== undefined) {
@@ -38,9 +40,9 @@ export const sendForm = (method: string, url: string, options) => {
     transformRequest: x => x,
     headers: {'Content-Type': undefined},
   });
-};
+}
 
-export async function getAll(endpoint, options?) {
+export async function getAll<T = {}>(endpoint: string, options?: {}): Promise<T[]> {
   let response = await get(endpoint, options);
   let result = [];
 

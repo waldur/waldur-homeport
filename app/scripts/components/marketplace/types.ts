@@ -1,6 +1,6 @@
 export interface Product {
   thumb: string;
-  title: string;
+  name: string;
   subtitle: string;
   rating: number;
   installs: number;
@@ -49,6 +49,12 @@ export interface Category {
 
 export interface CategoriesListType {
   items: Category[];
+  loaded: boolean;
+  loading: boolean;
+}
+
+export interface ProductsListType {
+  items: Product[];
   loaded: boolean;
   loading: boolean;
 }

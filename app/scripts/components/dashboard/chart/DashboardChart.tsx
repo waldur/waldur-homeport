@@ -11,9 +11,13 @@ interface Props {
 }
 
 const DashboardChart = (props: Props) => {
-  const { title, current, change, data } = props.chart;
+  const { title, units, current, change, data } = props.chart;
+  let titleUnits = title;
+  if (units) {
+    titleUnits += ', ' + units;
+  }
   return (
-    <Panel title={title}>
+    <Panel title={titleUnits}>
       <h1>{current}</h1>
       <SparklineChart data={data}/>
       <ChangeIndicator change={change}/>

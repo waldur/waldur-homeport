@@ -1,6 +1,7 @@
 import './vendor';
 import './globals';
 import '../../assets/sass/style.scss';
+import '../../svgfonts.font';
 
 import featuresModule from './components/features/module';
 import teamModule from './components/team/module';
