@@ -285,6 +285,7 @@ msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 #: app/scripts/components/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
 msgstr ""
@@ -622,11 +623,13 @@ msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 msgid "Bank account"
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 msgid "Bank name"
 msgstr ""
 
@@ -1018,12 +1021,14 @@ msgid "Contact e-mail"
 msgstr ""
 
 #: app/scripts/components/customer/popover/CustomerSummary.tsx
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 msgid "Contact email"
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/customer/popover/CustomerSummary.tsx
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 msgid "Contact phone"
 msgstr ""
 
@@ -1076,6 +1081,7 @@ msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 msgid "Country"
 msgstr ""
 
@@ -1563,6 +1569,7 @@ msgid "E-mail address"
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 msgid "EU VAT ID"
 msgstr ""
 
@@ -3112,6 +3119,7 @@ msgstr ""
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 #: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/support/UserEditForm.tsx
 #: app/scripts/components/user/support/UserFilter.tsx
@@ -3524,6 +3532,7 @@ msgstr ""
 
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
 #: app/scripts/components/marketplace/routes.js
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 msgid "Offerings"
 msgstr ""
 
@@ -3728,6 +3737,7 @@ msgstr ""
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
 #: app/scripts/components/customer/popover/CustomerSummary.tsx
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 msgid "Organization type"
 msgstr ""
 
@@ -4054,6 +4064,7 @@ msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 msgid "Postal code"
 msgstr ""
 
@@ -4392,6 +4403,7 @@ msgstr ""
 msgid "Provider certification required by this project."
 msgstr ""
 
+#: app/scripts/components/marketplace/routes.js
 #: app/scripts/components/providers/details/dialog.html
 msgid "Provider details"
 msgstr ""
@@ -4640,6 +4652,7 @@ msgid "Registered"
 msgstr ""
 
 #: app/scripts/components/customer/popover/CustomerSummary.tsx
+#: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 msgid "Registration code"
 msgstr ""
 
