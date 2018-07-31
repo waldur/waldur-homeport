@@ -1,5 +1,6 @@
 import { fillFeatures } from './features';
 import { products as rawProducts } from './products';
+export { providers } from './providers';
 export { categories } from './categories';
 export { sections } from './sections';
 

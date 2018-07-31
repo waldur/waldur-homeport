@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { CheckoutButton } from '@waldur/marketplace/details/CheckoutButton';
@@ -33,7 +34,11 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
         </tr>
         <tr>
           <td><strong>Vendor</strong></td>
-          <td>{props.product.vendor}</td>
+          <td>
+            <Link state="marketplace-provider-details">
+              {props.product.vendor}
+            </Link>
+          </td>
         </tr>
         <tr>
           <td><strong>Rating</strong></td>

@@ -1,3 +1,5 @@
+import { Customer } from '@waldur/customer/types';
+
 export interface Product {
   thumb: string;
   name: string;
@@ -57,4 +59,10 @@ export interface ProductsListType {
   items: Product[];
   loaded: boolean;
   loading: boolean;
+}
+
+export interface Provider extends Customer {
+  logo?: string;
+  description?: string;
+  service_offerings?: Product[];
 }

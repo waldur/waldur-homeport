@@ -20,7 +20,11 @@ export const ComparisonItem = (props: ComparisonItemProps) => (
       <img src={props.item.thumb}/>
     </Link>
     <h3>{props.item.name}</h3>
-    <p>by {props.item.vendor}</p>
+    <p>by{' '}
+      <Link state="marketplace-provider-details">
+        {props.item.vendor}
+      </Link>
+    </p>
     <RatingStars rating={props.item.rating} size="medium"/>
     <p>Based on <a>{props.item.reviews} reviews</a></p>
   </div>
