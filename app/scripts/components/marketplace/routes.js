@@ -62,6 +62,16 @@ export default function routes($stateProvider) {
       }
     })
 
+    .state('marketplace-provider-details', {
+      url: 'marketplace-provider-details/',
+      template: '<marketplace-provider-details></marketplace-provider-details>',
+      parent: 'project',
+      data: {
+        pageTitle: gettext('Provider details'),
+        feature: 'marketplace',
+      }
+    })
+
     .state('marketplace-vendor-offerings', {
       url: 'marketplace-offerings/',
       template: '<marketplace-vendor-offerings></marketplace-vendor-offerings>',
