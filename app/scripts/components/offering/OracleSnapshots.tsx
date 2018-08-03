@@ -12,7 +12,7 @@ export const parseTable = raw =>
   });
 
 export const OracleSnapshots = props => {
-  let snapshots = props.report.find(section => section.header === 'Snapshots');
+  let snapshots = props.report.find(section => section.header.toLowerCase() === 'snapshots');
   if (!snapshots) {
     return null;
   }
