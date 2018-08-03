@@ -196,6 +196,8 @@ function AppStoreController(
           });
         }
         let formOptions = angular.merge({}, response.actions.POST, fields.options);
+        delete formOptions.project;
+        delete formOptions.service_settings;
         this.fields = fields;
 
         this.allFormOptions = formOptions;
