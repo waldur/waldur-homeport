@@ -5,7 +5,7 @@ import Panel from '@waldur/core/Panel';
 import { OfferingReportComponent } from './OfferingReportComponent';
 
 const reportWithoutSnapshots = report =>
-  report.filter(section => section.header !== 'Snapshots');
+  report.filter(section => section.header.toLowerCase() !== 'snapshots');
 
 export const OracleReport = props => (
   <Panel title="Report">
