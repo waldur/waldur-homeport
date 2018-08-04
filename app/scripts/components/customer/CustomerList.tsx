@@ -158,7 +158,7 @@ const TableOptions = {
     row.vm_count,
     row.storage_count,
     row.private_cloud_count,
-    row.billing_price_estimate && row.billing_price_estimate.current || 0,
+    row.billing_price_estimate && row.billing_price_estimate.total || 0,
   ],
   exportFields: [
     'Organization',
@@ -168,7 +168,7 @@ const TableOptions = {
     'VMs',
     'Storage',
     'Private clouds',
-    'Current cost',
+    'Total cost',
   ],
 };
 
