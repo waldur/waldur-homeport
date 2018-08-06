@@ -3,6 +3,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it\n"
 
 #: app/scripts/components/billing/billing-record-details.html
 msgid "(VAT is not included)"
@@ -56,8 +64,7 @@ msgstr ""
 msgid "Abbreviation"
 msgstr ""
 
-#: app/scripts/components/routes/about.js
-#: app/views/about/index.html
+#: app/scripts/components/routes/about.js app/views/about/index.html
 msgid "About"
 msgstr ""
 
@@ -367,7 +374,9 @@ msgid "Any"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Any default system user (ubuntu, debian...). The user should be able to run commands as root"
+msgid ""
+"Any default system user (ubuntu, debian...). The user should be able to run "
+"commands as root"
 msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
@@ -426,11 +435,15 @@ msgid "Apps"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
-msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
+msgid ""
+"Are you sure you do not want to create a data volume? System volume is not "
+"resizable"
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js
-msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
+msgid ""
+"Are you sure you want to delete a {resourceType} in an Erred state? A "
+"cleanup attempt will be performed if you choose so."
 msgstr ""
 
 #: app/scripts/components/resource/actions/action-utils-service.js
@@ -523,7 +536,9 @@ msgid "Authentication method"
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js
-msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
+msgid ""
+"Authentication with Mobile ID has been canceled by user or timed out. "
+"Details:"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.js
@@ -674,7 +689,9 @@ msgid "Batch vCPU"
 msgstr ""
 
 #: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
-msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
+msgid ""
+"Become a customer of our portal. Provision IT services from the Marketplace "
+"and manage your team from one place."
 msgstr ""
 
 #: app/scripts/components/billing/billing-utils.js
@@ -855,7 +872,7 @@ msgstr ""
 
 #: app/scripts/components/issues/types/constants.ts
 msgid "Change Request"
-msgstr ""
+msgstr "ISD Change Request"
 
 #: app/scripts/components/openstack/openstack-tenant/actions/ChangePackageAction.ts
 #: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
@@ -867,8 +884,10 @@ msgid "Change flavor"
 msgstr ""
 
 #: app/scripts/components/issues/types/constants.ts
-msgid "Change request - client’s request to perform a generic modification of data or service."
-msgstr ""
+msgid ""
+"Change request - client’s request to perform a generic modification of data "
+"or service."
+msgstr "ISD Change Request - request changes in Security and Network from ISD."
 
 #: app/scripts/components/resource/state/constants.js
 msgid "Changing flavor"
@@ -907,7 +926,9 @@ msgid "Civil number"
 msgstr ""
 
 #: app/scripts/components/intro/expert-manager-intro.js
-msgid "Click on a 'Create proposal' button when you are ready to fulfill expert request"
+msgid ""
+"Click on a 'Create proposal' button when you are ready to fulfill expert "
+"request"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
@@ -1483,11 +1504,15 @@ msgid "DigitalOcean provider"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Directory will be created in home directory of the specified system user:/home//"
+msgid ""
+"Directory will be created in home directory of the specified system user:/"
+"home//"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-edit.html
-msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
+msgid ""
+"Disable a profile in FreeIPA. Disabled profiles are not allowed for login "
+"into the Linux systems"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html
@@ -1516,7 +1541,8 @@ msgid "Do you really want to delete comment?"
 msgstr ""
 
 #: app/scripts/components/experts/bids/expert-bid-utils.js
-msgid "Do you really want to delete this proposal? This action cannot be undone."
+msgid ""
+"Do you really want to delete this proposal? This action cannot be undone."
 msgstr ""
 
 #: app/scripts/components/navigation/header/docs-link.html
@@ -1578,7 +1604,9 @@ msgid "EU VAT ID"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-msgid "Each JupyterHub user is mapped to a corresponding system user. Appropriate system user will be created on a first login."
+msgid ""
+"Each JupyterHub user is mapped to a corresponding system user. Appropriate "
+"system user will be created on a first login."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js
@@ -1620,7 +1648,9 @@ msgid "Enable DHCP"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-edit.html
-msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
+msgid ""
+"Enable a profile in FreeIPA. Only enabled profiles are allowed for login "
+"into the Linux systems"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-edit.html
@@ -1641,7 +1671,9 @@ msgid "English"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Ensure that the following public key is present in /home//.ssh/authorized_keys file."
+msgid ""
+"Ensure that the following public key is present in /home//.ssh/"
+"authorized_keys file."
 msgstr ""
 
 #: app/scripts/components/resource/actions/dialog/action-field-datetime.html
@@ -1989,7 +2021,8 @@ msgid "Flavors List"
 msgstr ""
 
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
-msgid "Flavors matching this regex expression will not be pulled from the backend."
+msgid ""
+"Flavors matching this regex expression will not be pulled from the backend."
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html
@@ -2196,7 +2229,8 @@ msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
 #: app/scripts/components/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "Hours. Once notebook instance is not active for this time it is terminated"
+msgid ""
+"Hours. Once notebook instance is not active for this time it is terminated"
 msgstr ""
 
 #: app/scripts/components/help/constants.js
@@ -2263,7 +2297,9 @@ msgid "Identity providers are not unavailable."
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "If no additional whitelisted users are specified, only admins will have access to JupyterHub."
+msgid ""
+"If no additional whitelisted users are specified, only admins will have "
+"access to JupyterHub."
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
@@ -2271,7 +2307,9 @@ msgid "If nobody is whitelisted, any OAuth user can log in to JupyterHub."
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "If not, append it there on a new line. If file is not present, create a new file with the key."
+msgid ""
+"If not, append it there on a new line. If file is not present, create a new "
+"file with the key."
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
@@ -2309,7 +2347,8 @@ msgid "Import"
 msgstr ""
 
 #: app/scripts/components/resource-import/utils.js
-msgid "Import is not possible as there are no personal provider accounts registered."
+msgid ""
+"Import is not possible as there are no personal provider accounts registered."
 msgstr ""
 
 #: app/scripts/components/resource-import/register-import-vpc-table-action.js
@@ -2345,7 +2384,9 @@ msgid "Importing resources"
 msgstr ""
 
 #: app/scripts/components/resource/monitoring/MonitoringGuide.tsx
-msgid "In order to enable monitoring you should install and configure Zabbix agent on monitored virtual machine."
+msgid ""
+"In order to enable monitoring you should install and configure Zabbix agent "
+"on monitored virtual machine."
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
@@ -2362,7 +2403,9 @@ msgid "Incident"
 msgstr ""
 
 #: app/scripts/components/issues/types/constants.ts
-msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
+msgid ""
+"Incident - client issue with service usage or availability (interruptions, "
+"degradation of quality)."
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-report-error.html
@@ -2383,7 +2426,9 @@ msgid "Informational"
 msgstr ""
 
 #: app/scripts/components/issues/types/constants.ts
-msgid "Informational - client’s request to get or provide additional information related to a service."
+msgid ""
+"Informational - client’s request to get or provide additional information "
+"related to a service."
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js
@@ -2441,7 +2486,9 @@ msgid "Instance is not configured."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
-msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgid ""
+"Instance is not connected to any internal subnets yet. Please connect it to "
+"internal subnet first."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/actions/DestroyAction.ts
@@ -2561,15 +2608,21 @@ msgid "Invoice events timeline"
 msgstr ""
 
 #: app/scripts/components/billing/events.ts
-msgid "Invoice for organization {customer_link} for the period of {period} has been created."
+msgid ""
+"Invoice for organization {customer_link} for the period of {period} has been "
+"created."
 msgstr ""
 
 #: app/scripts/components/billing/events.ts
-msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
+msgid ""
+"Invoice for organization {customer_link} for the period of {period} has been "
+"updated."
 msgstr ""
 
 #: app/scripts/components/billing/events.ts
-msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
+msgid ""
+"Invoice for organization {customer_name} for the period of {period} has been "
+"deleted."
 msgstr ""
 
 #: app/scripts/components/paypal/paypal-invoice-actions.html
@@ -2956,7 +3009,8 @@ msgid "Maximal valid value is"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
-msgid "Maximum username length with mandatory username prefix is 32 characters."
+msgid ""
+"Maximum username length with mandatory username prefix is 32 characters."
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.js
@@ -3439,11 +3493,15 @@ msgid "Not known"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.js
-msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
+msgid ""
+"Note that this virtual machine is charged as part of <strong>{serviceName}</"
+"strong> package."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.js
-msgid "Note that this volume is charged as part of <strong>{serviceName}</strong> package."
+msgid ""
+"Note that this volume is charged as part of <strong>{serviceName}</strong> "
+"package."
 msgstr ""
 
 #: app/scripts/components/user/hooks/hook-details.js
@@ -3565,7 +3623,8 @@ msgid "Only customer owner or staff can unlink provider."
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Only distributions with APT package manager are supported (Debian, Ubuntu...)"
+msgid ""
+"Only distributions with APT package manager are supported (Debian, Ubuntu...)"
 msgstr ""
 
 #: app/scripts/components/invitations/actions/send.js
@@ -3807,7 +3866,9 @@ msgid "Package could not be assigned."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/package-templates-service.js
-msgid "Package is not available because current VPC resource usage exceeds package quota limits."
+msgid ""
+"Package is not available because current VPC resource usage exceeds package "
+"quota limits."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -3820,11 +3881,15 @@ msgid "Page is not found."
 msgstr ""
 
 #: app/scripts/components/error/invalid-object-page.html
-msgid "Page is not found. You've either entered invalid URL or don't have enough permissions to view this page."
+msgid ""
+"Page is not found. You've either entered invalid URL or don't have enough "
+"permissions to view this page."
 msgstr ""
 
 #: app/scripts/components/error/invalid-route-page.html
-msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
+msgid ""
+"Page is not found. You've either entered invalid URL or trying to reach "
+"disabled feature."
 msgstr ""
 
 #: app/scripts/components/billing/invoices-list.js
@@ -3939,7 +4004,9 @@ msgid "Please accept Terms of Services to proceed."
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Please add following public key to authorized_keys file on the selected instance."
+msgid ""
+"Please add following public key to authorized_keys file on the selected "
+"instance."
 msgstr ""
 
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
@@ -3947,7 +4014,9 @@ msgid "Please add users or select another team."
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Please assign 'SSH' security group to the virtual machine (to allow SSH connections)."
+msgid ""
+"Please assign 'SSH' security group to the virtual machine (to allow SSH "
+"connections)."
 msgstr ""
 
 #: app/scripts/components/issues/request-service-button.js
@@ -3989,7 +4058,8 @@ msgid "Please provide valid quotas."
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
-msgid "Please provide your EU VAT ID if you are registered in the European Union."
+msgid ""
+"Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
@@ -4001,7 +4071,8 @@ msgid "Please select a team"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
-msgid "Please select a username that you will use for login into the Linux systems."
+msgid ""
+"Please select a username that you will use for login into the Linux systems."
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
@@ -4262,7 +4333,8 @@ msgid "Project has been removed successfully."
 msgstr ""
 
 #: app/scripts/components/project/events.ts
-msgid "Project has been renamed from {project_previous_name} to {project_link}."
+msgid ""
+"Project has been renamed from {project_previous_name} to {project_link}."
 msgstr ""
 
 #: app/scripts/components/project/effects.ts
@@ -4624,11 +4696,15 @@ msgid "Register"
 msgstr ""
 
 #: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
-msgid "Register as a customer of our portal and provider your cloud services through Waldur's Marketplace."
+msgid ""
+"Register as a customer of our portal and provider your cloud services "
+"through Waldur's Marketplace."
 msgstr ""
 
 #: app/scripts/components/customer/create/CustomerCreatePrompt.tsx
-msgid "Register as a customer of our portal that can also offer own experts to the other customers of Waldur."
+msgid ""
+"Register as a customer of our portal that can also offer own experts to the "
+"other customers of Waldur."
 msgstr ""
 
 #: app/scripts/components/experts/expert-provider-details.html
@@ -4818,7 +4894,9 @@ msgid "Request direct access to {{ $ctrl.tenant.name }}"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/effects.ts
-msgid "Request for search for installed libraries in the virtual environments could not be created."
+msgid ""
+"Request for search for installed libraries in the virtual environments could "
+"not be created."
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.js
@@ -5031,7 +5109,9 @@ msgid "Role management events"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
-msgid "Run 'Find missing installed libraries' command to synchronize cloud broker state"
+msgid ""
+"Run 'Find missing installed libraries' command to synchronize cloud broker "
+"state"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js
@@ -5140,7 +5220,8 @@ msgid "Search by name"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/effects.ts
-msgid "Search for installed libraries in the virtual environment has been scheduled."
+msgid ""
+"Search for installed libraries in the virtual environment has been scheduled."
 msgstr ""
 
 #: app/scripts/components/aws/AmazonForm.tsx
@@ -5345,7 +5426,9 @@ msgid "Service Request"
 msgstr ""
 
 #: app/scripts/components/issues/types/constants.ts
-msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
+msgid ""
+"Service Request - client’s request to modify, add, change or remove "
+"partially or completely a particular service."
 msgstr ""
 
 #: app/scripts/components/configs/base-config.js
@@ -5417,7 +5500,9 @@ msgid "Settings"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "Should be given to OAuth service provider. Example: https://VM_EXTERNAL_IP/hub/oauth_callback"
+msgid ""
+"Should be given to OAuth service provider. Example: https://VM_EXTERNAL_IP/"
+"hub/oauth_callback"
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
@@ -5977,7 +6062,8 @@ msgid "There are no suitable VPC packages for this tenant."
 msgstr ""
 
 #: app/scripts/components/appstore/providers/appstore-providers-empty-message.js
-msgid "There are no {categoryLabel} providers available for the current project."
+msgid ""
+"There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
 #: app/scripts/components/table-react/TablePlaceholder.tsx
@@ -6034,7 +6120,9 @@ msgid "This organization is an expert provider."
 msgstr ""
 
 #: app/scripts/components/navigation/cookies/cookies-consent.html
-msgid "This website uses cookies to ensure you get the best experience on our website."
+msgid ""
+"This website uses cookies to ensure you get the best experience on our "
+"website."
 msgstr ""
 
 #: app/scripts/components/issues/list/issues-list.js
@@ -6070,11 +6158,15 @@ msgid "To"
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-report-error.js
-msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
+msgid ""
+"To correct details of your organization, please send an email to <a href="
+"\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in "
+"current details. Thank you!"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.html
-msgid "To create custom flavour, please send a request to {{$ctrl.supportEmail}}."
+msgid ""
+"To create custom flavour, please send a request to {{$ctrl.supportEmail}}."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.html
@@ -6334,10 +6426,6 @@ msgstr ""
 msgid "Unable to load python management details."
 msgstr ""
 
-#: app/scripts/components/marketplace/service-providers/ProviderDetailsContainer.tsx
-msgid "Unable to load service provider."
-msgstr ""
-
 #: app/scripts/components/analytics/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
 msgstr ""
@@ -6395,7 +6483,10 @@ msgid "Unexpected exception happened during login process."
 msgstr ""
 
 #: app/scripts/components/core/ErrorMessageFormatter.ts
-msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
+msgid ""
+"Unfortunately, connection to server has failed. Please check if you can "
+"connect to {apiEndpoint} from your browser and contact support if the error "
+"continues."
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
@@ -6534,7 +6625,8 @@ msgid "User details"
 msgstr ""
 
 #: app/scripts/components/auth/callbacks/auth-logout-completed.html
-msgid "User has been logged out. You will be redirected to the login page soon."
+msgid ""
+"User has been logged out. You will be redirected to the login page soon."
 msgstr ""
 
 #: app/scripts/components/user/support/effects.ts
@@ -6578,7 +6670,9 @@ msgid "User {affected_user_name} has been deleted."
 msgstr ""
 
 #: app/scripts/components/experts/events.ts
-msgid "User {caller_link} has created request for experts under {customer_link} / {project_link}."
+msgid ""
+"User {caller_link} has created request for experts under {customer_link} / "
+"{project_link}."
 msgstr ""
 
 #: app/scripts/components/auth/events.ts
@@ -6606,23 +6700,33 @@ msgid "User {user_link} authenticated successfully with username and password."
 msgstr ""
 
 #: app/scripts/components/experts/events.ts
-msgid "User {user_link} has created bid for request {request_link} under {customer_link} / {project_link}."
+msgid ""
+"User {user_link} has created bid for request {request_link} under "
+"{customer_link} / {project_link}."
 msgstr ""
 
 #: app/scripts/components/team/events.ts
-msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
+msgid ""
+"User {user_link} has granted organization owner role in {customer_link} to "
+"{affected_user_link}."
 msgstr ""
 
 #: app/scripts/components/team/events.ts
-msgid "User {user_link} has granted organization support role in {customer_link} to {affected_user_link}."
+msgid ""
+"User {user_link} has granted organization support role in {customer_link} to "
+"{affected_user_link}."
 msgstr ""
 
 #: app/scripts/components/team/events.ts
-msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
+msgid ""
+"User {user_link} has granted project administrator role in project "
+"{project_link} to {affected_user_link}."
 msgstr ""
 
 #: app/scripts/components/team/events.ts
-msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
+msgid ""
+"User {user_link} has granted project manager role in project {project_link} "
+"to {affected_user_link}."
 msgstr ""
 
 #: app/scripts/components/team/events.ts
@@ -6630,19 +6734,27 @@ msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr ""
 
 #: app/scripts/components/team/events.ts
-msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
+msgid ""
+"User {user_link} has revoked organization owner {affected_user_link} from "
+"{customer_link}."
 msgstr ""
 
 #: app/scripts/components/team/events.ts
-msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
+msgid ""
+"User {user_link} has revoked organization support {affected_user_link} from "
+"{customer_link}."
 msgstr ""
 
 #: app/scripts/components/team/events.ts
-msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
+msgid ""
+"User {user_link} has revoked project administrator {affected_user_link} from "
+"project {project_link}."
 msgstr ""
 
 #: app/scripts/components/team/events.ts
-msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
+msgid ""
+"User {user_link} has revoked project manager {affected_user_link} from "
+"project {project_link}."
 msgstr ""
 
 #: app/scripts/components/team/events.ts
@@ -6680,7 +6792,9 @@ msgid "Username should be provided"
 msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
-msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
+msgid ""
+"Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores "
+"(_) and periods (.)."
 msgstr ""
 
 #: app/scripts/components/customer/workspace/customer-team.html
@@ -6879,7 +6993,8 @@ msgid "Volumes count"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
-msgid "Was the correct cloud broker public key UUID specified in the properties?"
+msgid ""
+"Was the correct cloud broker public key UUID specified in the properties?"
 msgstr ""
 
 #: app/scripts/components/experts/requests/actions/expert-request-complain.js
@@ -6912,7 +7027,8 @@ msgid "Would you like to register your organization?"
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html
-msgid "Would you like to update your current email with the one from the invitation?"
+msgid ""
+"Would you like to update your current email with the one from the invitation?"
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
@@ -6962,7 +7078,8 @@ msgid "You do not belong to any organization yet."
 msgstr ""
 
 #: app/scripts/components/resource/resource-provision-policy.js
-msgid "You do not have permissions to create private cloud for current project."
+msgid ""
+"You do not have permissions to create private cloud for current project."
 msgstr ""
 
 #: app/scripts/components/navigation/workspace/select-workspace-toggle.js
@@ -6974,7 +7091,9 @@ msgid "You don't have enough permission to edit providers for current project."
 msgstr ""
 
 #: app/scripts/components/providers/ProviderUpdateComponent.tsx
-msgid "You don't have enough permissions to edit settings for <strong>{name}</strong> provider."
+msgid ""
+"You don't have enough permissions to edit settings for <strong>{name}</"
+"strong> provider."
 msgstr ""
 
 #: app/scripts/components/project/projects-list.js
@@ -7063,7 +7182,9 @@ msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js
-msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
+msgid ""
+"You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</"
+"a>."
 msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
@@ -7103,7 +7224,8 @@ msgid "Your FreeIPA profile has been disabled."
 msgstr ""
 
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
-msgid "Your Microsoft Account full username. It should not contain @domain.com part."
+msgid ""
+"Your Microsoft Account full username. It should not contain @domain.com part."
 msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html
@@ -7119,7 +7241,9 @@ msgid "Your invitation was accepted."
 msgstr ""
 
 #: app/scripts/components/auth/auth-login.html
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
+msgid ""
+"Your single pane of control for all cloud services. Login in to see it in "
+"action."
 msgstr ""
 
 #: app/scripts/components/resource/monitoring/effects.ts
@@ -7267,7 +7391,9 @@ msgid "vCPU count"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/form/VirtualEnvironmentsForm.tsx
-msgid "virtualenv and virtualenvwrapper utilities are used to manage Python virtual environments."
+msgid ""
+"virtualenv and virtualenvwrapper utilities are used to manage Python virtual "
+"environments."
 msgstr ""
 
 #: app/scripts/components/form/appstore-field-list.js
