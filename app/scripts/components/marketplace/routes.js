@@ -63,7 +63,7 @@ export default function routes($stateProvider) {
     })
 
     .state('marketplace-provider-details', {
-      url: 'marketplace-provider-details/',
+      url: 'marketplace-provider-details/:customer_uuid/',
       template: '<marketplace-provider-details></marketplace-provider-details>',
       parent: 'project',
       data: {

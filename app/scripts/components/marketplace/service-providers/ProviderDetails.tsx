@@ -1,27 +1,32 @@
 import * as React from 'react';
 
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { TranslateProps } from '@waldur/i18n';
 import { ProductGrid } from '@waldur/marketplace/common/ProductGrid';
-import { providers } from '@waldur/marketplace/fixtures';
-import { products } from '@waldur/marketplace/fixtures';
 import { ProviderData } from '@waldur/marketplace/service-providers/ProviderData';
 import { ProviderDescription } from '@waldur/marketplace/service-providers/ProviderDescription';
-import { connectAngularComponent } from '@waldur/store/connect';
+import { Provider } from '@waldur/marketplace/types';
+import { ProductsListType } from '@waldur/marketplace/types';
 
-export const ProviderDetails = withTranslation((props: TranslateProps) => (
+interface ProviderDetailsProps {
+  provider: Provider;
+  providerOfferings: ProductsListType;
+}
+
+export const ProviderDetails = (props: TranslateProps & ProviderDetailsProps) => (
   <div className="ibox">
     <div className="ibox-content">
       <div className="row">
         <div className="col-md-4">
-          <ProviderDescription provider={providers[0]} />
+          <ProviderDescription provider={props.provider} />
         </div>
         <div className="col-md-8">
-          <ProviderData provider={providers[0]} translate={props.translate}/>
-          <ProductGrid items={products} loading={false} loaded={true} width={4}/>
+          <ProviderData provider={props.provider} translate={props.translate}/>
+          <ProductGrid
+            width={4}
+            {...props.providerOfferings}
+          />
         </div>
       </div>
     </div>
   </div>
-));
-
-export default connectAngularComponent(ProviderDetails);
+);

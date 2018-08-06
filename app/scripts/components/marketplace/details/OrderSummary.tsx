@@ -35,7 +35,10 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
         <tr>
           <td><strong>Vendor</strong></td>
           <td>
-            <Link state="marketplace-provider-details">
+            <Link
+              state="marketplace-provider-details"
+              params={{customer_uuid: '9f43128e9eb24c288b6577568420dc1c'}}
+            >
               {props.product.vendor}
             </Link>
           </td>
