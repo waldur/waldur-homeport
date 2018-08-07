@@ -11,12 +11,16 @@ interface CategoryCardProps {
 
 export const CategoryCard = (props: CategoryCardProps) => (
   <div className="category-card">
-    <Link className="category-thumb" state="marketplace-list">
+    <Link
+      className="category-thumb"
+      state="marketplace-list"
+      params={{category_uuid: props.category.uuid}}
+    >
       <img src={props.category.icon}/>
     </Link>
     <div className="category-card-body">
       <h3 className="category-title">
-        <Link state="marketplace-list">
+        <Link state="marketplace-list" params={{category_uuid: props.category.uuid}}>
           {props.category.title}
         </Link>
       </h3>

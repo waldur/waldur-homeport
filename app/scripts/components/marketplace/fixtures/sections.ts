@@ -3,7 +3,7 @@ import { ListCell } from './ListCell';
 export const sections = [
   {
     title: 'Summary',
-    features: [
+    attributes: [
       {
         key: 'pricingOption',
         title: 'Pricing options',
@@ -24,7 +24,7 @@ export const sections = [
   },
   {
     title: 'Access and support',
-    features: [
+    attributes: [
       {
         key: 'userSupportOptions',
         title: 'User support',
@@ -44,7 +44,7 @@ export const sections = [
   },
   {
     title: 'Security',
-    features: [
+    attributes: [
       {
         key: 'dataProtectionExternal',
         title: 'Data protection between buyer and supplier networks',

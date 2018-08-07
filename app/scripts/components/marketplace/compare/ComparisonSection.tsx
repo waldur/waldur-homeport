@@ -22,7 +22,7 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
         <td key={index}/>
       )}
     </tr>
-    {props.section.features.map((feature, index1) => (
+    {props.section.attributes.map((feature, index1) => (
       <tr key={index1}>
         <td>
           {feature.title}
