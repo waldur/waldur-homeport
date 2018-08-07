@@ -6,7 +6,7 @@ import marketplaceCheckout from './cart/CheckoutPage';
 import cartIndicator from './cart/ShoppingCartIndicator';
 import marketplaceProduct from './details/DetailsPage';
 import marketplaceList from './list/ListPage';
-import marketplaceProviderDetails from './service-providers/ProviderDetails';
+import marketplaceProviderDetails from './service-providers/ProviderDetailsContainer';
 import marketplaceVendorOfferings from './offerings/OfferingsList';
 import marketplaceOfferingCreate from './offerings/OfferingCreateContainer';
 import marketplaceOrdersList from './orders/OrdersList';
