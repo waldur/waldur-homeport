@@ -5129,6 +5129,7 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
+#: app/scripts/components/marketplace/common/FilterBar.tsx
 #: app/scripts/components/navigation/header/main-search.html
 #: app/scripts/components/table-react/TableQuery.tsx
 #: app/scripts/components/table/responsive-table.js
@@ -5137,6 +5138,10 @@ msgstr ""
 
 #: app/scripts/components/appstore/dialog/appstore-category-selector.html
 msgid "Search by name"
+msgstr ""
+
+#: app/scripts/components/marketplace/common/FilterBar.tsx
+msgid "Search for apps and services..."
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/effects.ts
@@ -5918,6 +5923,10 @@ msgstr ""
 msgid "There are no categories in marketplace yet."
 msgstr ""
 
+#: app/scripts/components/marketplace/list/FeatureFilterListContainer.tsx
+msgid "There are no category sections yet."
+msgstr ""
+
 #: app/scripts/components/issues/comments/IssueCommentsList.spec.tsx
 #: app/scripts/components/issues/comments/IssueCommentsList.tsx
 msgid "There are no comments yet."
@@ -6294,6 +6303,10 @@ msgstr ""
 
 #: app/scripts/components/core/bootstrap.js
 msgid "Unable to load application configuration. Please reload this page."
+msgstr ""
+
+#: app/scripts/components/marketplace/list/FeatureFilterListContainer.tsx
+msgid "Unable to load category sections."
 msgstr ""
 
 #: app/scripts/components/issues/comments/IssueCommentsList.spec.tsx
