@@ -7,3 +7,10 @@ export const setStep = (step: OfferingStep) => ({
     step,
   },
 });
+
+export const setFilterQuery = (filterQuery: string) => ({
+  type: constants.SET_FILTER_QUERY,
+  payload: {
+    filterQuery,
+  },
+});

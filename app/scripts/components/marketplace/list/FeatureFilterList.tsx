@@ -26,7 +26,7 @@ const FeatureFilter = (props: FeatureFilterProps) => (
       {props.section.title}
     </h3>
 
-    {props.section.features.map((feature, index) => (
+    {props.section.attributes.map((feature, index) => (
       <Field
         key={index}
         name={`filter-item-${feature.key}`}

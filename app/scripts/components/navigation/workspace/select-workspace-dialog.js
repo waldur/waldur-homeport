@@ -48,7 +48,7 @@ function SelectWorkspaceDialogController(
     if (organization.name.toLowerCase().indexOf(ctrl.organizationSearchInput.toLowerCase()) >= 0) {
       return true;
     }
-    if (organization.abbreviation.indexOf(ctrl.organizationSearchInput) >= 0) {
+    if (organization.abbreviation.toLowerCase().indexOf(ctrl.organizationSearchInput.toLowerCase()) >= 0) {
       return true;
     }
     return false;

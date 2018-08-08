@@ -12,6 +12,13 @@ export const offeringReducer = (state = INITIAL_STATE, action) => {
         ...state,
         step: payload.step,
       };
+
+    case constants.SET_FILTER_QUERY:
+      return {
+        ...state,
+        filterQuery: payload.filterQuery,
+      };
+
     default:
       return state;
   }

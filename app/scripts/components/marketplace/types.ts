@@ -32,7 +32,7 @@ export interface Screenshot {
   description: string;
 }
 
-export interface Feature {
+export interface Attribute {
   title: string;
   key: string;
   render?: React.SFC<any>;
@@ -40,13 +40,15 @@ export interface Feature {
 
 export interface Section {
   title: string;
-  features: Feature[];
+  attributes: Attribute[];
 }
 
 export interface Category {
+  uuid?: string;
   title: string;
   icon: string;
   offering_count: number;
+  sections?: Section[];
 }
 
 export interface CategoriesListType {
