@@ -5,6 +5,8 @@ import { OpenStackSecurityGroupsLink } from '@waldur/openstack/openstack-securit
 import { ZabbixHostField } from '@waldur/resource/monitoring/ZabbixHostField';
 import { Field, ResourceSummaryProps, PureVirtualMachineSummary } from '@waldur/resource/summary';
 
+import { OpenStackInstance } from './types';
+
 const formatSecurityGroups = props => {
   if (props.resource.security_groups) {
     return <OpenStackSecurityGroupsLink items={props.resource.security_groups}/>;
@@ -13,7 +15,7 @@ const formatSecurityGroups = props => {
   }
 };
 
-const PureOpenStackInstanceSummary = (props: ResourceSummaryProps) => {
+const PureOpenStackInstanceSummary = (props: ResourceSummaryProps<OpenStackInstance>) => {
   const { translate } = props;
   return (
     <span>

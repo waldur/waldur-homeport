@@ -3,6 +3,7 @@ import * as React from 'react';
 import { formatDateTime, formatFromNow } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
+import { BaseResource } from '@waldur/resource/types';
 
 import { Field } from './Field';
 import { ResourceSummaryProps } from './types';
@@ -27,7 +28,7 @@ const formatCreatedField = (props: ResourceSummaryProps) => (
   ) : null
 );
 
-export const PureResourceSummaryBase = (props: ResourceSummaryProps) => {
+export function PureResourceSummaryBase<T extends BaseResource = any>(props: ResourceSummaryProps<T>) {
   const { translate, resource } = props;
   return (
     <>
@@ -63,6 +64,6 @@ export const PureResourceSummaryBase = (props: ResourceSummaryProps) => {
       />
     </>
   );
-};
+}
 
 export const ResourceSummaryBase = withTranslation(PureResourceSummaryBase);
