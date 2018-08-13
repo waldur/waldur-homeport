@@ -1,3 +1,4 @@
+import { $rootScope } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { validateState, createNameField, createDescriptionField } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
@@ -26,12 +27,8 @@ export default function createAction(): ResourceAction {
       },
       {
         name: 'timezone',
-        default_value: 'UTC',
         label: translate('Timezone'),
-        type: 'choice',
-        choices: [
-          {value: 'UTC', display_name: 'UTC'},
-        ],
+        type: 'timezone',
       },
       {
         name: 'maximal_number_of_resources',
@@ -49,5 +46,8 @@ export default function createAction(): ResourceAction {
         maxlength: 15,
       },
     ],
+    onSuccess() {
+      $rootScope.$broadcast('updateBackupScheduleList');
+    },
   };
 }

@@ -31,7 +31,10 @@ function actionConfig(ActionConfigurationProvider) {
         fields: {
           schedule: {
             type: 'crontab'
-          }
+          },
+          timezone: {
+            type: 'timezone',
+          },
         }
       },
       pull: {

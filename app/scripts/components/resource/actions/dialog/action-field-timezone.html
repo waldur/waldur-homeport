@@ -1,0 +1,16 @@
+<ui-select
+  id="action-{{ $ctrl.field.name }}"
+  ng-model="$ctrl.model[$ctrl.field.name]"
+  reset-search-input="false">
+
+  <ui-select-match>{{$select.selected.display_name}}</ui-select-match>
+  <ui-select-choices
+    repeat="choice.value as choice in $ctrl.choices |
+     filter: { display_name: $select.search } track by $index">
+    <div ng-bind-html="choice.display_name"></div>
+  </ui-select-choices>
+</ui-select>
+<div
+  class="form-control-static"
+  ng-if="!$ctrl.choices || $ctrl.choices.length === 0">N/A
+</div>

@@ -9,7 +9,7 @@ const openstackBackupSchedulesList = {
 
 // @ngInject
 function openstackBackupSchedulesListController(
-  baseResourceListController, openstackBackupSchedulesService, actionUtilsService, $filter) {
+  baseResourceListController, openstackBackupSchedulesService, actionUtilsService, $filter, $scope) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -60,7 +60,13 @@ function openstackBackupSchedulesListController(
       return {
         instance: controllerScope.resource.url
       };
-    }
+    },
+    connectWatchers: function() {
+      $scope.$on('updateBackupScheduleList', () => {
+        this.service.clearAllCacheForCurrentEndpoint();
+        controllerScope.getList();
+      });
+    },
   });
 
   controllerScope.__proto__ = new controllerClass();
