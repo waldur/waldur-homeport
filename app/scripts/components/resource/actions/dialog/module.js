@@ -10,6 +10,7 @@ import actionFieldSelect from './action-field-select';
 import actionFieldString from './action-field-string';
 import actionFieldText from './action-field-text';
 import actionFieldChoice from './action-field-choice';
+import actionFieldTimezone from './action-field-timezone';
 
 export default module => {
   module.directive('actionDialog', actionDialog);
@@ -24,4 +25,5 @@ export default module => {
   module.component('actionFieldString', actionFieldString);
   module.component('actionFieldText', actionFieldText);
   module.component('actionFieldChoice', actionFieldChoice);
+  module.component('actionFieldTimezone', actionFieldTimezone);
 };

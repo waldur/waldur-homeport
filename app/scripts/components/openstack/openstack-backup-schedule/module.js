@@ -30,8 +30,11 @@ function actionConfig(ActionConfigurationProvider) {
         successMessage: gettext('Backup schedule has been updated'),
         fields: {
           schedule: {
-            type: 'crontab'
-          }
+            type: 'crontab',
+          },
+          timezone: {
+            type: 'timezone',
+          },
         }
       },
       pull: {

@@ -81,6 +81,7 @@
     "lodash.debounce": "^4.0.8",
     "markdown-loader": "^2.0.2",
     "moment": "~2.19.3",
+    "moment-timezone": "^0.5.21",
     "ng-annotate-loader": "^0.2.0",
     "npm-font-open-sans": "^1.0.3",
     "oclazyload": "^1.1.0",
