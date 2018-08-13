@@ -6060,7 +6060,9 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+#: app/scripts/components/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 msgid "Timezone"
 msgstr ""
 
