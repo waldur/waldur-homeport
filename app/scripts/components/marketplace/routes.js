@@ -90,5 +90,15 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Add offering'),
         feature: 'marketplace',
       }
+    })
+
+    .state('marketplace-order-details', {
+      url: 'marketplace-order-details/:order_uuid/',
+      template: '<marketplace-order-details></marketplace-order-details>',
+      parent: 'project',
+      data: {
+        pageTitle: gettext('Order details'),
+        feature: 'marketplace',
+      }
     });
 }

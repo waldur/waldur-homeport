@@ -3645,6 +3645,10 @@ msgstr ""
 msgid "Oracle"
 msgstr ""
 
+#: app/scripts/components/marketplace/routes.js
+msgid "Order details"
+msgstr ""
+
 #: app/scripts/components/marketplace/cart/store/effects.ts
 msgid "Order has been submitted."
 msgstr ""
@@ -6334,6 +6338,10 @@ msgstr ""
 
 #: app/scripts/components/marketplace/common/ProductGrid.tsx
 msgid "Unable to load marketplace offerings."
+msgstr ""
+
+#: app/scripts/components/marketplace/orders/OrderDetails.tsx
+msgid "Unable to load order details."
 msgstr ""
 
 #: app/scripts/components/project/ProjectCreateContainer.tsx

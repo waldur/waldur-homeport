@@ -10,6 +10,7 @@ import marketplaceProviderDetails from './service-providers/ProviderDetailsConta
 import marketplaceVendorOfferings from './offerings/OfferingsList';
 import marketplaceOfferingCreate from './offerings/OfferingCreateContainer';
 import marketplaceOrdersList from './orders/OrdersList';
+import marketplaceOrderDetails from './orders/OrderDetails';
 import providersService from './providers-service';
 import registerSidebarExtension from './sidebar';
 
@@ -25,6 +26,7 @@ export default module => {
   module.component('marketplaceVendorOfferings', marketplaceVendorOfferings);
   module.component('marketplaceOfferingCreate', marketplaceOfferingCreate);
   module.component('marketplaceOrdersList', marketplaceOrdersList);
+  module.component('marketplaceOrderDetails', marketplaceOrderDetails);
   module.service('providersService', providersService);
   module.config(routes);
   module.run(registerSidebarExtension);
