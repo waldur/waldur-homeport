@@ -4,6 +4,7 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation } from '@waldur/i18n';
 import { formatCrontab } from '@waldur/resource/crontab';
 import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
+import { Schedule } from '@waldur/resource/types';
 
 const formatSchedule = ({ resource }) => (
   <Tooltip label={resource.schedule} id="scheduleTooltip">
@@ -11,7 +12,7 @@ const formatSchedule = ({ resource }) => (
   </Tooltip>
 );
 
-const PureOpenStackSnapshotScheduleSummary = (props: ResourceSummaryProps) => {
+const PureOpenStackSnapshotScheduleSummary = (props: ResourceSummaryProps<Schedule>) => {
   const { translate, resource } = props;
   return (
     <span>
@@ -23,6 +24,10 @@ const PureOpenStackSnapshotScheduleSummary = (props: ResourceSummaryProps) => {
       <Field
         label={translate('Schedule')}
         value={formatSchedule(props)}
+      />
+      <Field
+        label={translate('Timezone')}
+        value={resource.timezone}
       />
       <Field
         label={translate('Is active')}

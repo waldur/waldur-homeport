@@ -21,10 +21,15 @@ export default class LanguageUtilsService {
   checkLanguage() {
     // Check if current language is listed in choices and
     // switch to default language if current choice is invalid.
+    // Fallback to first option in languageChoices list if defaultLanguage is invalid.
     const key = this.$translate.storageKey();
     const storage = this.$translate.storage();
     const code = storage.get(key);
-    const current = this.findLanguageByCode(code) || this.findLanguageByCode(this.ENV.defaultLanguage);
+    const current = (
+      this.findLanguageByCode(code)
+        || this.findLanguageByCode(this.ENV.defaultLanguage)
+        || this.getChoices()[0]
+    );
     this.setCurrentLanguage(current);
   }
 
