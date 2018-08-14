@@ -20,6 +20,8 @@ export const formatRegistrationMethod = user => {
     return translate('Default');
   } else if (user.registration_method === 'openid') {
     return translate('Estonian ID');
+  } else if (user.registration_method === 'saml2') {
+    return 'SAML2';
   } else {
     return titleCase(user.registration_method);
   }
