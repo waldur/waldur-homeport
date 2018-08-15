@@ -1,4 +1,5 @@
 import { latinName } from '@waldur/resource/actions/constants';
+import { getTemplateFilterOptions } from './actions/utils';
 
 import { templateParser } from '../utils';
 import {
@@ -42,7 +43,8 @@ export default {
       formatter: ($filter, value) => $filter('formatPackage')(value),
       columns: openstackTemplateColumns,
       comparator: templateComparator,
-      filterOptions: openstackTemplateFilters
+      filterOptions: openstackTemplateFilters,
+      concealEmptyOptions: getTemplateFilterOptions,
     },
     description: {
       type: 'text',

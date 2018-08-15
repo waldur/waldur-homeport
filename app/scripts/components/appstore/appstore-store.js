@@ -204,6 +204,10 @@ function AppStoreController(
           .then(validChoices => angular.forEach(validChoices, (choices, name) => {
             if (this.fields.options.hasOwnProperty(name)) {
               this.fields.options[name].choices = choices;
+              if (this.fields.options.template) {
+                this.fields.options.template.filterOptions = this.fields.options.template
+                .concealEmptyOptions(choices, this.fields.options.template.filterOptions);
+              }
             }
           }));
       }).finally(() => {
