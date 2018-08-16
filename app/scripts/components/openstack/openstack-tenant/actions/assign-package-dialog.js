@@ -1,5 +1,6 @@
 import template from './assign-package-dialog.html';
 import { openstackTemplateColumns, openstackTemplateFilters } from '../openstack-template';
+import { getTemplateFilterOptions } from './utils';
 
 const openstackTenantAssignPackageDialog = {
   template,
@@ -25,6 +26,7 @@ const openstackTenantAssignPackageDialog = {
       // replace with package templates service
       this.packageTemplatesService.loadTemplates(this.tenant).then(templates => {
         this.templates = templates;
+        this.filterOptions = getTemplateFilterOptions(templates, openstackTemplateFilters);
       });
     }
 

@@ -1,5 +1,6 @@
 import template from './change-package-dialog.html';
 import { openstackTemplateColumns, openstackTemplateFilters } from '../openstack-template';
+import { getTemplateFilterOptions } from './utils';
 
 class DialogController {
   // @ngInject
@@ -25,6 +26,7 @@ class DialogController {
         this.package = context.package;
         this.template = context.template;
         this.templates = context.templates;
+        this.filterOptions = getTemplateFilterOptions(context.templates, openstackTemplateFilters);
       }),
     ]).catch(response => {
       if (response) {
