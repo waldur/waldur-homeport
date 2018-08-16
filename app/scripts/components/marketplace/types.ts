@@ -3,6 +3,7 @@ import { Customer } from '@waldur/customer/types';
 export interface Product {
   thumb: string;
   name: string;
+  offering_name?: string;
   subtitle: string;
   rating: number;
   installs: number;

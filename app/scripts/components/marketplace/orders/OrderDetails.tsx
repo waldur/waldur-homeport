@@ -3,9 +3,9 @@ import * as React from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { ShoppingCartSidebar } from '@waldur/marketplace/cart/ShoppingCartSidebar';
 import { ShoppingCartSteps } from '@waldur/marketplace/cart/ShoppingCartSteps';
 import { State } from '@waldur/marketplace/cart/types';
+import { OrderSummary } from '@waldur/marketplace/orders/OrderSummary';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ShoppingCart } from '../cart/ShoppingCart';
@@ -68,7 +68,7 @@ class OrderDetailsContainer extends React.Component<TranslateProps, OrderDetails
           <ShoppingCart items={this.state.orderDetails.items} editable={this.state.orderDetails.state === 'Configure'} />
         </div>
         <div className="col-xl-3 col-lg-4">
-          <ShoppingCartSidebar />
+          <OrderSummary total={this.state.orderDetails.total}/>
         </div>
       </div>
     );
