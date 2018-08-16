@@ -26,7 +26,7 @@ export const ProductCard = (props: ProductCardProps) => (
           {props.product.name}
         </Link>
       </h3>
-      <div className="product-subtitle elipsis">
+      <div className="product-subtitle ellipsis">
         {props.product.subtitle}
       </div>
       <RatingStars rating={props.product.rating}/>

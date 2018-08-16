@@ -39,12 +39,12 @@ const PureOpenStackSubNetSummary = (props: ResourceSummaryProps) => {
       <Field
         label={translate('CIDR')}
         value={formatDefault(resource.cidr)}
-        valueClass="elipsis"
+        valueClass="ellipsis"
       />
       <Field
         label={translate('Allocation pools')}
         value={formatAllocationPool(resource.allocation_pools)}
-        valueClass="elipsis"
+        valueClass="ellipsis"
       />
       <Field
         label={translate('Gateway IP')}

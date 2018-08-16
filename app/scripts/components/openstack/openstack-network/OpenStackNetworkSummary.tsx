@@ -26,7 +26,7 @@ const PureOpenStackNetworkSummary = (props: ResourceSummaryProps) => {
       <Field
         label={translate('Type')}
         value={formatDefault(resource.type)}
-        valueClass="elipsis"
+        valueClass="ellipsis"
       />
       <Field
         label={translate('Segmentation ID')}

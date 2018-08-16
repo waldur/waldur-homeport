@@ -55,12 +55,12 @@ export function PureResourceSummaryBase<T extends BaseResource = any>(props: Res
       <Field
         label={translate('UUID')}
         value={resource.uuid}
-        valueClass="elipsis"
+        valueClass="ellipsis"
       />
       <Field
         label={translate('Backend ID')}
         value={resource.backend_id}
-        valueClass="elipsis"
+        valueClass="ellipsis"
       />
     </>
   );
