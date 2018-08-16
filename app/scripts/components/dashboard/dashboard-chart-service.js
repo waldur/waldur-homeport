@@ -108,11 +108,11 @@ export default class DashboardChartService {
     const maxValue = items.map(c => c.value).sort()[items.length - 1];
     if (chart.type === 'filesize') {
       if (maxValue > 1024 * 1024) {
-        formatter = x => Math.round(10 * x / 1024 / 1024) / 10;
+        formatter = x => (x / 1024 / 1024).toFixed(1);
         units = 'TB';
       }
       else if (maxValue > 1024) {
-        formatter = x => Math.round(10 * x / 1024) / 10;
+        formatter = x => (x / 1024).toFixed(1);
         units = 'GB';
       }
       else {
