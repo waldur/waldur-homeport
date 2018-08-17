@@ -1,6 +1,7 @@
 import { Customer } from '@waldur/customer/types';
 
 export interface Product {
+  uuid?: string;
   thumb: string;
   name: string;
   offering_name?: string;
@@ -9,6 +10,7 @@ export interface Product {
   installs: number;
   reviews: number;
   category?: string;
+  category_title?: string;
   vendor: string;
   vendorDetails?: string;
   cloudDeploymentModel?: string;

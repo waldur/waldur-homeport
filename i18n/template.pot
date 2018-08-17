@@ -2583,6 +2583,7 @@ msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
+#: app/scripts/components/marketplace/details/OrderSummary.tsx
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -4105,6 +4106,7 @@ msgstr ""
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/expert-bids-list.js
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
+#: app/scripts/components/marketplace/details/OrderSummary.tsx
 #: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/paypal/paypal-invoices-list.js
@@ -4216,6 +4218,10 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
+#: app/scripts/components/marketplace/details/OrderSummary.tsx
+msgid "Product"
+msgstr ""
+
 #: app/scripts/components/marketplace/routes.js
 msgid "Product details"
 msgstr ""
@@ -4229,6 +4235,7 @@ msgstr ""
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
+#: app/scripts/components/marketplace/details/OrderSummary.tsx
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -4576,6 +4583,10 @@ msgstr ""
 
 #: app/scripts/components/slurm/details/constants.js
 msgid "RAM usage"
+msgstr ""
+
+#: app/scripts/components/marketplace/details/OrderSummary.tsx
+msgid "Rating"
 msgstr ""
 
 #: app/scripts/components/customer/details/customer-manage.js
@@ -6346,6 +6357,10 @@ msgstr ""
 msgid "Unable to load marketplace offerings."
 msgstr ""
 
+#: app/scripts/components/marketplace/details/DetailsPage.tsx
+msgid "Unable to load offering details."
+msgstr ""
+
 #: app/scripts/components/marketplace/orders/OrderDetails.tsx
 msgid "Unable to load order details."
 msgstr ""
@@ -6777,6 +6792,10 @@ msgstr ""
 
 #: app/scripts/components/resource/support/ChartContainer.tsx
 msgid "VPC vCPU"
+msgstr ""
+
+#: app/scripts/components/marketplace/details/OrderSummary.tsx
+msgid "Vendor"
 msgstr ""
 
 #: app/scripts/components/navigation/app-footer.html

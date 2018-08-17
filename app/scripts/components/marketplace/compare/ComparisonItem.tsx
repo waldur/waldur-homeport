@@ -16,6 +16,7 @@ export const ComparisonItem = (props: ComparisonItemProps) => (
     <ComparisonItemRemoveButtonContainer product={props.item}/>
     <Link
       state="marketplace-product"
+      params={{product_uuid: props.item.uuid}}
       className="comparison-item-thumb">
       <img src={props.item.thumb}/>
     </Link>

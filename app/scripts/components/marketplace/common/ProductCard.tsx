@@ -17,12 +17,15 @@ export const ProductCard = (props: ProductCardProps) => (
   <div className="product-card">
     <Link
       state="marketplace-product"
+      params={{product_uuid: props.product.uuid}}
       className="product-thumb">
       <img src={props.product.thumb}/>
     </Link>
     <div className="product-card-body">
       <h3 className="product-title">
-        <Link state="marketplace-product">
+        <Link
+          state="marketplace-product"
+          params={{product_uuid: props.product.uuid}}>
           {props.product.name}
         </Link>
       </h3>

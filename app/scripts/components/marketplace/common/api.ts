@@ -1,6 +1,11 @@
-import { getAll } from '@waldur/core/api';
+import { getAll, getById } from '@waldur/core/api';
 import { Category, Product } from '@waldur/marketplace/types';
 
-export const getCategories = (): Promise<Category[]> => getAll('/marketplace-categories/');
-export const getProducts = (options?: {}): Promise<Product[]> =>
-  getAll('/marketplace-offerings/', options);
+export const getCategories = () =>
+  getAll<Category>('/marketplace-categories/');
+
+export const getProducts = (options?: {}) =>
+  getAll<Product>('/marketplace-offerings/', options);
+
+export const getProduct = id =>
+  getById<Product>('/marketplace-offerings/', id);

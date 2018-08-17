@@ -17,12 +17,15 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
       <div className="product-item">
         <Link
           state="marketplace-product"
+          params={{product_uuid: props.item.uuid}}
           className="product-thumb">
           <img src={props.item.thumb}/>
         </Link>
         <div className="product-info">
           <h4 className="product-title">
-            <Link state="marketplace-product">
+            <Link
+              state="marketplace-product"
+              params={{product_uuid: props.item.uuid}}>
               {props.item.offering_name}
             </Link>
           </h4>
