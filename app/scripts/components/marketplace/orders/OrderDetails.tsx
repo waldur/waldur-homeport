@@ -12,17 +12,17 @@ import { ShoppingCart } from '../cart/ShoppingCart';
 import { getOrderDetails } from './api';
 import { matchState } from './utils';
 
-interface OrderDetailsContainerState {
+interface OrderDetailsState {
   orderDetails: State;
   loading: boolean;
   loaded: boolean;
 }
 
-class OrderDetailsContainer extends React.Component<TranslateProps, OrderDetailsContainerState> {
+class OrderDetails extends React.Component<TranslateProps, OrderDetailsState> {
   constructor(props) {
     super(props);
     this.state = {
-      orderDetails: {state: 'Configure', items: []},
+      orderDetails: {state: 'Approve', items: []},
       loading: true,
       loaded: false,
     };
@@ -45,7 +45,7 @@ class OrderDetailsContainer extends React.Component<TranslateProps, OrderDetails
       });
     } catch {
       this.setState({
-        orderDetails: {state: 'Configure', items: []},
+        orderDetails: {state: 'Approve', items: []},
         loading: false,
         loaded: false,
       });
@@ -69,7 +69,10 @@ class OrderDetailsContainer extends React.Component<TranslateProps, OrderDetails
       <div className="row">
         <div className="col-xl-9 col-lg-8">
           <ShoppingCartSteps state={this.state.orderDetails.state} />
-          <ShoppingCart items={this.state.orderDetails.items} editable={this.state.orderDetails.state === 'Configure'} />
+          <ShoppingCart
+            items={this.state.orderDetails.items}
+            editable={false}
+          />
         </div>
         <div className="col-xl-3 col-lg-4">
           <OrderSummary total={this.state.orderDetails.total}/>
@@ -79,4 +82,4 @@ class OrderDetailsContainer extends React.Component<TranslateProps, OrderDetails
   }
 }
 
-export default connectAngularComponent(withTranslation(OrderDetailsContainer));
+export default connectAngularComponent(withTranslation(OrderDetails));
