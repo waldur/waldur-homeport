@@ -35,6 +35,6 @@ export const ProductDetails = (props: ProductDetailsProps) => (
         <OrderSummary product={props.product}/>
       </Col>
     </Row>
-    <ProductTabs product={props.product}/>
+    <ProductTabs product={props.product} sections={[]}/>
   </>
 );
