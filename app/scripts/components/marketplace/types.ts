@@ -1,5 +1,12 @@
 import { Customer } from '@waldur/customer/types';
 
+export interface GeolocationPoint {
+  latitude: number;
+  longitude: number;
+}
+
+export type Geolocations = GeolocationPoint[];
+
 export interface Product {
   uuid?: string;
   thumb: string;
@@ -27,6 +34,7 @@ export interface Product {
   price: number;
   screenshots?: Screenshot[];
   description?: string;
+  geolocations?: Geolocations;
 }
 
 export interface Screenshot {

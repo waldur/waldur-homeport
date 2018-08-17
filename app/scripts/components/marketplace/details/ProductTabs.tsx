@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 
+import { translate } from '@waldur/i18n';
 import { sections } from '@waldur/marketplace/fixtures';
 
 import { FeaturesTab } from './FeaturesTab';
@@ -21,27 +22,29 @@ export const ProductTabs = props => {
       className="m-t-lg product-tabs"
       unmountOnExit={true}
     >
-      <Tab eventKey="details" title="Description">
+      <Tab eventKey="details" title={translate('Description')}>
         <div className="m-t-md">
           <OverviewTab product={props.product}/>
         </div>
       </Tab>
-      <Tab eventKey="features" title="Features">
+      <Tab eventKey="features" title={translate('Features')}>
         <div className="m-t-md">
           <FeaturesTab product={props.product} sections={basicSections}/>
         </div>
       </Tab>
-      <Tab eventKey="screenshots" title="Screenshots">
-        <div className="m-t-md">
-          <ScreenshotsTab screenshots={props.product.screenshots}/>
-        </div>
-      </Tab>
-      <Tab eventKey="security" title="Security">
+      {props.product.screenshots && props.product.screenshots.length > 0 && (
+        <Tab eventKey="screenshots" title={translate('Screenshots')}>
+          <div className="m-t-md">
+            <ScreenshotsTab screenshots={props.product.screenshots}/>
+          </div>
+        </Tab>
+      )}
+      <Tab eventKey="security" title={translate('Security')}>
         <div className="m-t-md">
           <SecurityTab product={props.product} sections={securitySections}/>
         </div>
       </Tab>
-      <Tab eventKey="support" title="Support">
+      <Tab eventKey="support" title={translate('Support')}>
         SLAs table and contacts table.
       </Tab>
     </Tabs>

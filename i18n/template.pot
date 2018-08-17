@@ -1403,6 +1403,7 @@ msgstr ""
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
+#: app/scripts/components/marketplace/details/ProductTabs.tsx
 #: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
@@ -1892,6 +1893,10 @@ msgstr ""
 
 #: app/scripts/components/resource/state/utils.ts
 msgid "Failed to operate with backend."
+msgstr ""
+
+#: app/scripts/components/marketplace/details/ProductTabs.tsx
+msgid "Features"
 msgstr ""
 
 #: app/scripts/components/form/appstore-field-email.js
@@ -3658,6 +3663,10 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
+#: app/scripts/components/marketplace/details/ProductDetails.tsx
+msgid "Order summary"
+msgstr ""
+
 #: app/scripts/components/marketplace/orders/OrdersList.tsx
 msgid "Orders"
 msgstr ""
@@ -4222,6 +4231,10 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
+#: app/scripts/components/marketplace/details/ProductDetails.tsx
+msgid "Product configuration"
+msgstr ""
+
 #: app/scripts/components/marketplace/routes.js
 msgid "Product details"
 msgstr ""
@@ -4445,6 +4458,10 @@ msgstr ""
 
 #: app/scripts/components/appstore/providers/appstore-providers-service.js
 msgid "Provider is in erred state."
+msgstr ""
+
+#: app/scripts/components/marketplace/details/SecurityTab.tsx
+msgid "Provider location"
 msgstr ""
 
 #: app/scripts/components/providers/ProviderNameField.tsx
@@ -5150,6 +5167,10 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
+#: app/scripts/components/marketplace/details/ProductTabs.tsx
+msgid "Screenshots"
+msgstr ""
+
 #: app/scripts/components/marketplace/common/FilterBar.tsx
 #: app/scripts/components/navigation/header/main-search.html
 #: app/scripts/components/table-react/TableQuery.tsx
@@ -5171,6 +5192,14 @@ msgstr ""
 
 #: app/scripts/components/aws/AmazonForm.tsx
 msgid "Secret access key"
+msgstr ""
+
+#: app/scripts/components/marketplace/details/ProductTabs.tsx
+msgid "Security"
+msgstr ""
+
+#: app/scripts/components/marketplace/details/SecurityTab.tsx
+msgid "Security features"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -5398,6 +5427,10 @@ msgstr ""
 
 #: app/scripts/components/issues/request-service-button.js
 msgid "Service name"
+msgstr ""
+
+#: app/scripts/components/marketplace/details/LeafletMap.tsx
+msgid "Service provider"
 msgstr ""
 
 #: app/scripts/components/providers/support/FlowMapFilter.tsx
@@ -5747,6 +5780,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
+#: app/scripts/components/marketplace/details/ProductTabs.tsx
 #: app/scripts/components/navigation/header/support-link.html
 #: app/scripts/components/user/support/UserList.tsx
 msgid "Support"
