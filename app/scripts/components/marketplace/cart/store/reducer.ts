@@ -20,6 +20,10 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         items: [...state.items.slice(0, index), ...state.items.slice(index + 1)],
       };
+    case constants.SET_CART:
+      return {
+        ...payload.cart,
+      };
     case constants.CLEAR_CART:
       return {
         ...state,

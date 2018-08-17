@@ -1,4 +1,4 @@
-const getCart = state => state.marketplace.cart;
+export const getCart = state => state.marketplace.cart;
 
 export const hasItem = (state, item) => getCart(state).items.indexOf(item) !== -1;
 

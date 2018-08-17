@@ -27,6 +27,17 @@ function* createOrder() {
   }
 }
 
+function* syncCart() {
+  const cart = yield select(selectors.getCart);
+  localStorage.setItem('shoppingCart', JSON.stringify(cart));
+}
+
+function* clearCart() {
+  localStorage.removeItem('shoppingCart');
+}
+
 export default function*() {
   yield takeEvery(constants.CREATE_ORDER, createOrder);
+  yield takeEvery([constants.ADD_ITEM, constants.REMOVE_ITEM], syncCart);
+  yield takeEvery(constants.CLEAR_CART, clearCart);
 }

@@ -12,6 +12,7 @@ import marketplaceOfferingCreate from './offerings/OfferingCreateContainer';
 import marketplaceOrdersList from './orders/OrdersList';
 import providersService from './providers-service';
 import registerSidebarExtension from './sidebar';
+import shoppingCartConfig from './shoppingCartConfig';
 
 export default module => {
   module.component('marketplaceLanding', marketplaceLanding);
@@ -28,4 +29,5 @@ export default module => {
   module.service('providersService', providersService);
   module.config(routes);
   module.run(registerSidebarExtension);
+  module.run(shoppingCartConfig);
 };
