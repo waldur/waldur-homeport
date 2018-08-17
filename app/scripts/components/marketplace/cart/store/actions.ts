@@ -18,6 +18,13 @@ export const removeItem = (item: Product): Action<{item}> => ({
   },
 });
 
+export const setCart = cart => ({
+  type: constants.SET_CART,
+  payload: {
+    cart,
+  },
+});
+
 export const clearCart = () => ({
   type: constants.CLEAR_CART,
 });
