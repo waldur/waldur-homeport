@@ -19,7 +19,7 @@ export interface Product {
   category?: string;
   category_title?: string;
   vendor: string;
-  vendorDetails?: string;
+  vendor_details?: string;
   cloudDeploymentModel?: string;
   vendorType?: string;
   userSupportOptions?: string[];
@@ -35,6 +35,8 @@ export interface Product {
   screenshots?: Screenshot[];
   description?: string;
   geolocations?: Geolocations;
+  customer_uuid?: string;
+  customer_name?: string;
 }
 
 export interface Screenshot {

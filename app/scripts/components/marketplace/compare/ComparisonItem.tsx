@@ -22,8 +22,10 @@ export const ComparisonItem = (props: ComparisonItemProps) => (
     </Link>
     <h3>{props.item.name}</h3>
     <p>by{' '}
-      <Link state="marketplace-provider-details">
-        {props.item.vendor}
+      <Link
+        state="marketplace-provider-details"
+        params={{customer_uuid: props.item.customer_uuid}}>
+        {props.item.customer_name}
       </Link>
     </p>
     <RatingStars rating={props.item.rating} size="medium"/>
