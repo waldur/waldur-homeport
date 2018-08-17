@@ -10,6 +10,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ShoppingCart } from '../cart/ShoppingCart';
 import { getOrderDetails } from './api';
+import { matchState } from './utils';
 
 interface OrderDetailsContainerState {
   orderDetails: State;
@@ -35,7 +36,10 @@ class OrderDetailsContainer extends React.Component<TranslateProps, OrderDetails
     try {
       const orderDetails = await getOrderDetails($state.params.order_uuid);
       this.setState({
-        orderDetails,
+        orderDetails: {
+          state: matchState(orderDetails.state),
+          items: orderDetails.items,
+        },
         loading: false,
         loaded: true,
       });
