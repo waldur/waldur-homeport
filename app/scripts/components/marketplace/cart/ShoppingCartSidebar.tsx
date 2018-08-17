@@ -14,7 +14,7 @@ interface ShoppingCartSidebarProps {
   project: Project;
 }
 
-const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) => (
+export const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) => (
   <aside className="shopping-cart-sidebar">
     <div className="shopping-cart-sidebar-title">
       Order Summary

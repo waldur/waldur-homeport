@@ -5,6 +5,7 @@ export type OrderState = 'Configure' | 'Approve' | 'Review';
 export interface State {
   items: Product[];
   state: OrderState;
+  total?: number;
 }
 
 export interface OrderItem {

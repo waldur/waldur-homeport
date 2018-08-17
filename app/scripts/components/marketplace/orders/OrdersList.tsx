@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { formatDate } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
@@ -14,7 +15,13 @@ export const TableComponent = props => {
   const columns = [
     {
       title: translate('Created at'),
-      render: ({ row }) => formatDate(row.created),
+      render: ({ row }) => (
+        <Link
+          state="marketplace-order-details"
+          params={{ order_uuid: row.uuid }}
+          label={formatDate(row.created)}
+        />
+      ),
       orderField: 'created',
     },
     {
