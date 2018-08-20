@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 
-import { sections } from '@waldur/marketplace/fixtures';
+import { translate } from '@waldur/i18n';
 
 import { FeaturesTab } from './FeaturesTab';
 import { OverviewTab } from './OverviewTab';
@@ -11,8 +11,8 @@ import { ScreenshotsTab } from './ScreenshotsTab';
 import { SecurityTab } from './SecurityTab';
 
 export const ProductTabs = props => {
-  const basicSections = sections.filter(s => s.title !== 'Security');
-  const securitySections = [sections.find(s => s.title === 'Security')];
+  const basicSections = props.sections.filter(s => s.title !== 'Security');
+  const securitySections = props.sections.filter(s => s.title === 'Security');
 
   return (
     <Tabs
@@ -21,27 +21,33 @@ export const ProductTabs = props => {
       className="m-t-lg product-tabs"
       unmountOnExit={true}
     >
-      <Tab eventKey="details" title="Description">
+      <Tab eventKey="details" title={translate('Description')}>
         <div className="m-t-md">
           <OverviewTab product={props.product}/>
         </div>
       </Tab>
-      <Tab eventKey="features" title="Features">
-        <div className="m-t-md">
-          <FeaturesTab product={props.product} sections={basicSections}/>
-        </div>
-      </Tab>
-      <Tab eventKey="screenshots" title="Screenshots">
-        <div className="m-t-md">
-          <ScreenshotsTab screenshots={props.product.screenshots}/>
-        </div>
-      </Tab>
-      <Tab eventKey="security" title="Security">
-        <div className="m-t-md">
-          <SecurityTab product={props.product} sections={securitySections}/>
-        </div>
-      </Tab>
-      <Tab eventKey="support" title="Support">
+      {basicSections.length > 0 && (
+        <Tab eventKey="features" title={translate('Features')}>
+          <div className="m-t-md">
+            <FeaturesTab product={props.product} sections={basicSections}/>
+          </div>
+        </Tab>
+      )}
+      {props.product.screenshots && props.product.screenshots.length > 0 && (
+        <Tab eventKey="screenshots" title={translate('Screenshots')}>
+          <div className="m-t-md">
+            <ScreenshotsTab screenshots={props.product.screenshots}/>
+          </div>
+        </Tab>
+      )}
+      {securitySections.length > 0 && (
+        <Tab eventKey="security" title={translate('Security')}>
+          <div className="m-t-md">
+            <SecurityTab product={props.product} sections={securitySections}/>
+          </div>
+        </Tab>
+      )}
+      <Tab eventKey="support" title={translate('Support')}>
         SLAs table and contacts table.
       </Tab>
     </Tabs>

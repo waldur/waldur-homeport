@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
+import { translate } from '@waldur/i18n';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { CheckoutButton } from '@waldur/marketplace/details/CheckoutButton';
 import { Product } from '@waldur/marketplace/types';
@@ -25,38 +26,40 @@ const CompareButton = () => (
 
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
-    <img src={props.product.thumb} className="img-lg"/>
+    <img src={props.product.thumbnail} className="img-lg"/>
     <table className="table">
       <tbody>
         <tr>
-          <td><strong>Product</strong></td>
+          <td><strong>{translate('Product')}</strong></td>
           <td>{props.product.name}</td>
         </tr>
         <tr>
-          <td><strong>Vendor</strong></td>
+          <td><strong>{translate('Vendor')}</strong></td>
           <td>
             <Link
               state="marketplace-provider-details"
-              params={{customer_uuid: '9f43128e9eb24c288b6577568420dc1c'}}
+              params={{customer_uuid: props.product.customer_uuid}}
             >
-              {props.product.vendor}
+              {props.product.customer_name}
             </Link>
           </td>
         </tr>
+        {props.product.rating && (
+          <tr>
+            <td><strong>{translate('Rating')}</strong></td>
+            <td><RatingStars rating={props.product.rating} size="medium"/></td>
+          </tr>
+        )}
         <tr>
-          <td><strong>Rating</strong></td>
-          <td><RatingStars rating={props.product.rating} size="medium"/></td>
-        </tr>
-        <tr>
-          <td><strong>Invoiced to</strong></td>
+          <td><strong>{translate('Invoiced to')}</strong></td>
           <td>{props.customer.name}</td>
         </tr>
         <tr>
-          <td><strong>Project</strong></td>
+          <td><strong>{translate('Project')}</strong></td>
           <td>{props.project.name}</td>
         </tr>
         <tr>
-          <td className="text-lg">Price</td>
+          <td className="text-lg">{translate('Price')}</td>
           <td className="text-lg">
             {defaultCurrency(props.product.price)}
           </td>

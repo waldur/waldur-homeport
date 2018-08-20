@@ -1,35 +1,38 @@
 import { Customer } from '@waldur/customer/types';
 
+export interface GeolocationPoint {
+  latitude: number;
+  longitude: number;
+}
+
+export type Geolocations = GeolocationPoint[];
+
 export interface Product {
-  thumb: string;
+  uuid?: string;
+  thumbnail: string;
   name: string;
   offering_name?: string;
-  subtitle: string;
+  subtitle?: string;
   rating: number;
-  installs: number;
+  order_item_count: number;
   reviews: number;
   category?: string;
+  category_title?: string;
+  category_uuid?: string;
   vendor: string;
-  vendorDetails?: string;
-  cloudDeploymentModel?: string;
-  vendorType?: string;
-  userSupportOptions?: string[];
-  interfaceOptions?: string[];
-  metricsReporting?: string[];
-  dataProtectionInternal?: string;
-  dataProtectionExternal?: string;
-  userAuth?: string;
-  managementAuth?: string;
-  securityCertifications?: string;
-  pricingOption?: string;
+  vendor_details?: string;
   price: number;
   screenshots?: Screenshot[];
   description?: string;
+  geolocations?: Geolocations;
+  customer_uuid?: string;
+  customer_name?: string;
+  attributes?: {};
 }
 
 export interface Screenshot {
-  thumb: string;
-  title: string;
+  thumbnail: string;
+  name: string;
   description: string;
 }
 
