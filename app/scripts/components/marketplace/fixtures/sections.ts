@@ -1,4 +1,4 @@
-import { ListCell } from './ListCell';
+import { ListCell } from '@waldur/marketplace/common/ListCell';
 
 export const sections = [
   {

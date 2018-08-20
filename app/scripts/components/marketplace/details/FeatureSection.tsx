@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { ListCell } from '@waldur/marketplace/common/ListCell';
 import { Section, Product } from '@waldur/marketplace/types';
 
 interface FeatureSectionProps {
@@ -7,20 +8,24 @@ interface FeatureSectionProps {
   product: Product;
 }
 
-const AttributeRow = ({ product, attribute }) => (
-  <tr>
-    <td className="col-md-3">
-      {attribute.title}
-    </td>
-    <td className="col-md-9">
-      {
-        attribute.render ?
-        attribute.render(product[attribute.key]) :
-        product[attribute.key]
-      }
-    </td>
-  </tr>
-);
+const AttributeRow = ({ product, attribute }) => {
+  let value = product.attributes[attribute.key];
+  if (attribute.type === 'list' && typeof value === 'object') {
+    const options = attribute.options.reduce((map, item) => ({...map, [item.key]: item.title}), {});
+    value = value.map(item => options[item]);
+    value = ListCell(value);
+  }
+  return (
+    <tr>
+      <td className="col-md-3">
+        {attribute.title}
+      </td>
+      <td className="col-md-9">
+        {value}
+      </td>
+    </tr>
+  );
+};
 
 export const FeatureSection = (props: FeatureSectionProps) => (
   <>
@@ -29,7 +34,7 @@ export const FeatureSection = (props: FeatureSectionProps) => (
       <th/>
     </tr>
     {props.section.attributes
-      .filter(attr => props.product.hasOwnProperty(attr.key))
+      .filter(attr => props.product.attributes.hasOwnProperty(attr.key))
       .map((attr, index) => (
         <AttributeRow
           key={index}

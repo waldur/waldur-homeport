@@ -27,6 +27,7 @@ export interface Product {
   geolocations?: Geolocations;
   customer_uuid?: string;
   customer_name?: string;
+  attributes?: {};
 }
 
 export interface Screenshot {
