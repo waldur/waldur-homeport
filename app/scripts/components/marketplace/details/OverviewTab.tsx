@@ -14,10 +14,12 @@ const DemoButton = () => (
 
 export const OverviewTab = props => (
   <Row>
-    <Col md={6}>
-      <h4>{translate('Product details')}</h4>
-      <div dangerouslySetInnerHTML={{__html: props.product.description}}/>
-    </Col>
+    {props.product.full_description && (
+      <Col md={6}>
+        <h4>{translate('Product details')}</h4>
+        <div dangerouslySetInnerHTML={{__html: props.product.full_description}}/>
+      </Col>
+    )}
     {props.product.vendor_details && (
       <Col md={6}>
         <div className="display-flex justify-content-between align-items-baseline m-b-sm">

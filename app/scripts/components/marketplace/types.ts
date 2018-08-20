@@ -9,28 +9,18 @@ export type Geolocations = GeolocationPoint[];
 
 export interface Product {
   uuid?: string;
-  thumb: string;
+  thumbnail: string;
   name: string;
   offering_name?: string;
-  subtitle: string;
+  subtitle?: string;
   rating: number;
-  installs: number;
+  order_item_count: number;
   reviews: number;
   category?: string;
   category_title?: string;
+  category_uuid?: string;
   vendor: string;
   vendor_details?: string;
-  cloudDeploymentModel?: string;
-  vendorType?: string;
-  userSupportOptions?: string[];
-  interfaceOptions?: string[];
-  metricsReporting?: string[];
-  dataProtectionInternal?: string;
-  dataProtectionExternal?: string;
-  userAuth?: string;
-  managementAuth?: string;
-  securityCertifications?: string;
-  pricingOption?: string;
   price: number;
   screenshots?: Screenshot[];
   description?: string;
@@ -40,8 +30,8 @@ export interface Product {
 }
 
 export interface Screenshot {
-  thumb: string;
-  title: string;
+  thumbnail: string;
+  name: string;
   description: string;
 }
 

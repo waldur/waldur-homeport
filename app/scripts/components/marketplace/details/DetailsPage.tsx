@@ -3,7 +3,7 @@ import * as React from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { getProduct } from '@waldur/marketplace/common/api';
+import { getProduct, getCategory } from '@waldur/marketplace/common/api';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ProductDetails } from './ProductDetails';
@@ -11,6 +11,7 @@ import { ProductDetails } from './ProductDetails';
 class ProductDetailsPage extends React.Component {
   state = {
     product: null,
+    category: null,
     loading: true,
     erred: false,
   };
@@ -23,7 +24,8 @@ class ProductDetailsPage extends React.Component {
     const $stateParams = ngInjector.get('$stateParams');
     try {
       const product = await getProduct($stateParams.product_uuid);
-      this.setState({product, loading: false, erred: false});
+      const category = await getCategory(product.category_uuid);
+      this.setState({product, category, loading: false, erred: false});
       this.updateBreadcrumbs(product);
     } catch (error) {
       this.setState({loading: false, erred: true});
@@ -39,11 +41,11 @@ class ProductDetailsPage extends React.Component {
       BreadcrumbsService.activeItem = product.name;
       BreadcrumbsService.items = [
         {
-          label: 'Project workspace',
+          label: translate('Project workspace'),
           state: 'project.details',
         },
         {
-          label: 'Marketplace',
+          label: translate('Marketplace'),
           state: 'marketplace-landing',
         },
         {
@@ -62,7 +64,7 @@ class ProductDetailsPage extends React.Component {
     if (this.state.erred) {
       return translate('Unable to load offering details.');
     }
-    return <ProductDetails product={this.state.product}/>;
+    return <ProductDetails product={this.state.product} category={this.state.category}/>;
   }
 }
 

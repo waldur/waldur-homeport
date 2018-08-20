@@ -3,7 +3,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
 import { translate } from '@waldur/i18n';
-import { Product } from '@waldur/marketplace/types';
+import { Product, Category } from '@waldur/marketplace/types';
 
 import { OrderSummary } from './OrderSummary';
 import { ProductConfigurator } from './ProductConfigurator';
@@ -12,6 +12,7 @@ import { ProductTabs } from './ProductTabs';
 
 interface ProductDetailsProps {
   product: Product;
+  category: Category;
 }
 
 export const ProductDetails = (props: ProductDetailsProps) => (
@@ -35,6 +36,9 @@ export const ProductDetails = (props: ProductDetailsProps) => (
         <OrderSummary product={props.product}/>
       </Col>
     </Row>
-    <ProductTabs product={props.product} sections={[]}/>
+    <ProductTabs
+      product={props.product}
+      sections={props.category.sections}
+    />
   </>
 );

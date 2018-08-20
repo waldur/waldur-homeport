@@ -19,7 +19,7 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
           state="marketplace-product"
           params={{product_uuid: props.item.uuid}}
           className="product-thumb">
-          <img src={props.item.thumb}/>
+          <img src={props.item.thumbnail}/>
         </Link>
         <div className="product-info">
           <h4 className="product-title">

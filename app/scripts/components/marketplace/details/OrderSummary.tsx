@@ -26,7 +26,7 @@ const CompareButton = () => (
 
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
-    <img src={props.product.thumb} className="img-lg"/>
+    <img src={props.product.thumbnail} className="img-lg"/>
     <table className="table">
       <tbody>
         <tr>

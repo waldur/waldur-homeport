@@ -2904,6 +2904,7 @@ msgstr ""
 msgid "Managed projects"
 msgstr ""
 
+#: app/scripts/components/marketplace/details/DetailsPage.tsx
 #: app/scripts/components/marketplace/routes.js
 #: app/scripts/components/marketplace/sidebar.js
 msgid "Marketplace"
@@ -4347,6 +4348,7 @@ msgstr ""
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-details.js
 #: app/scripts/components/appstore/appstore-store.js
 #: app/scripts/components/experts/requests/details/expert-request-details.js
+#: app/scripts/components/marketplace/details/DetailsPage.tsx
 #: app/scripts/components/offering/offering-details.js
 #: app/scripts/components/project/project-workspace.js
 #: app/scripts/components/resource/breadcrumbs/resource-breadcrumbs-service.js
@@ -7004,6 +7006,10 @@ msgstr ""
 
 #: app/scripts/components/invitations/invitation-confirm-dialog.html
 msgid "Would you like to update your current email with the one from the invitation?"
+msgstr ""
+
+#: app/scripts/components/marketplace/common/ProductCard.tsx
+msgid "Write review"
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx

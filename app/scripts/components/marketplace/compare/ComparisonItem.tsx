@@ -18,7 +18,7 @@ export const ComparisonItem = (props: ComparisonItemProps) => (
       state="marketplace-product"
       params={{product_uuid: props.item.uuid}}
       className="comparison-item-thumb">
-      <img src={props.item.thumb}/>
+      <img src={props.item.thumbnail}/>
     </Link>
     <h3>{props.item.name}</h3>
     <p>by{' '}
