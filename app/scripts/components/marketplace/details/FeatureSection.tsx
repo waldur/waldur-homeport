@@ -8,12 +8,18 @@ interface FeatureSectionProps {
   product: Product;
 }
 
+const getOptions = attribute =>
+  attribute.options.reduce((map, item) => ({...map, [item.key]: item.title}), {});
+
 const AttributeRow = ({ product, attribute }) => {
   let value = product.attributes[attribute.key];
   if (attribute.type === 'list' && typeof value === 'object') {
-    const options = attribute.options.reduce((map, item) => ({...map, [item.key]: item.title}), {});
+    const options = getOptions(attribute);
     value = value.map(item => options[item]);
     value = ListCell(value);
+  } else if (attribute.type === 'choice') {
+    const options = getOptions(attribute);
+    value = options[value];
   }
   return (
     <tr>
