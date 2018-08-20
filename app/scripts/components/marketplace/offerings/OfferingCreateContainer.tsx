@@ -7,11 +7,11 @@ import { reset } from 'redux-form';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { $state } from '@waldur/core/services';
 import { withTranslation, translate } from '@waldur/i18n';
+import * as api from '@waldur/marketplace/common/api';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import * as api from './api';
 import { OfferingCreateDialog } from './OfferingCreateDialog';
 import { setStep } from './store/actions';
 import { getStep } from './store/selectors';
@@ -20,7 +20,7 @@ const FORM_ID = 'marketplaceOfferingCreate';
 
 const OfferingCreateController = props => (
   <OfferingCreateDialog
-    loadCategories={() => api.loadCategories().then(options => ({ options }))}
+    loadCategories={() => api.getCategories().then(options => ({ options }))}
     createOffering={request => {
       const params = {
         ...request,

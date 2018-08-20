@@ -3,7 +3,7 @@ import * as React from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { getCategory } from '@waldur/marketplace/list/api';
+import { getCategory } from '@waldur/marketplace/common/api';
 
 import { Section } from '../types';
 import { FeatureFilterList } from './FeatureFilterList';

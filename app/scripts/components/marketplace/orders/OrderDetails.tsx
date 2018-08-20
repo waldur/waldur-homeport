@@ -5,11 +5,11 @@ import { $state } from '@waldur/core/services';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { ShoppingCartSteps } from '@waldur/marketplace/cart/ShoppingCartSteps';
 import { State } from '@waldur/marketplace/cart/types';
+import { getOrderDetails } from '@waldur/marketplace/common/api';
 import { OrderSummary } from '@waldur/marketplace/orders/OrderSummary';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ShoppingCart } from '../cart/ShoppingCart';
-import { getOrderDetails } from './api';
 import { matchState } from './utils';
 
 interface OrderDetailsState {
