@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { getProducts } from '@waldur/marketplace/common/api';
 import { CategoriesListType, ProductsListType } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -13,58 +12,30 @@ import * as selectors from './store/selectors';
 
 interface LandingPageContainerProps {
   getCategories: () => void;
+  getProducts: () => void;
   categories: CategoriesListType;
-}
-
-interface LandingPageContainerState {
   products: ProductsListType;
 }
 
-export class LandingPageContainer extends React.Component<LandingPageContainerProps & TranslateProps, LandingPageContainerState> {
+export class LandingPageContainer extends React.Component<LandingPageContainerProps & TranslateProps> {
   componentDidMount() {
     this.props.getCategories();
-    this.loadProducts();
-  }
-
-  async loadProducts() {
-    this.setState({
-      products: {
-        loading: true,
-        loaded: false,
-        items: [],
-      },
-    });
-    try {
-      const products = await getProducts();
-      this.setState({
-        products: {
-          loading: false,
-          loaded: true,
-          items: products,
-        },
-      });
-    } catch {
-      this.setState({
-        products: {
-          loading: false,
-          loaded: false,
-          items: [],
-        },
-      });
-    }
+    this.props.getProducts();
   }
 
   render() {
-    return <LandingPage {...{...this.state, categories: this.props.categories}}/>;
+    return <LandingPage {...this.props}/>;
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getCategories: () => dispatch(actions.getCategories()),
+  getProducts: () => dispatch(actions.getProducts()),
 });
 
 const mapStateToProps = state => ({
   categories: selectors.getCategories(state),
+  products: selectors.getProducts(state),
 });
 
 const enhance = compose(

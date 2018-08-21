@@ -6,6 +6,11 @@ const INITIAL_STATE = {
     loading: false,
     loaded: false,
   },
+  products: {
+    items: [],
+    loading: false,
+    loaded: false,
+  },
 };
 
 export const landingReducer = (state = INITIAL_STATE, action) => {
@@ -19,11 +24,27 @@ export const landingReducer = (state = INITIAL_STATE, action) => {
           items: payload.categories,
         },
       };
-    case constants.SET_LOADING_STATE:
+    case constants.SET_PRODUCTS:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          items: payload.products,
+        },
+      };
+    case constants.SET_CATEGORIES_LOADING_STATE:
       return {
         ...state,
         categories: {
           ...state.categories,
+          ...payload.state,
+        },
+      };
+    case constants.SET_PRODUCTS_LOADING_STATE:
+      return {
+        ...state,
+        products: {
+          ...state.products,
           ...payload.state,
         },
       };
