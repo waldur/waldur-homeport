@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 import { TranslateProps } from '@waldur/i18n';
-import { ProductGrid } from '@waldur/marketplace/common/ProductGrid';
+import { OfferingGrid } from '@waldur/marketplace/common/OfferingGrid';
 import { ProviderData } from '@waldur/marketplace/service-providers/ProviderData';
 import { ProviderDescription } from '@waldur/marketplace/service-providers/ProviderDescription';
 import { Provider } from '@waldur/marketplace/types';
-import { ProductsListType } from '@waldur/marketplace/types';
+import { OfferingsListType } from '@waldur/marketplace/types';
 
 interface ProviderDetailsProps {
   provider: Provider;
-  providerOfferings: ProductsListType;
+  providerOfferings: OfferingsListType;
 }
 
 export const ProviderDetails = (props: TranslateProps & ProviderDetailsProps) => (
@@ -21,7 +21,7 @@ export const ProviderDetails = (props: TranslateProps & ProviderDetailsProps) =>
         </div>
         <div className="col-md-8">
           <ProviderData provider={props.provider} translate={props.translate}/>
-          <ProductGrid
+          <OfferingGrid
             width={4}
             {...props.providerOfferings}
           />

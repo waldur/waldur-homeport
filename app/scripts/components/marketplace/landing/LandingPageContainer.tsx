@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { CategoriesListType, ProductsListType } from '@waldur/marketplace/types';
+import { CategoriesListType, OfferingsListType } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { LandingPage } from './LandingPage';
@@ -12,15 +12,15 @@ import * as selectors from './store/selectors';
 
 interface LandingPageContainerProps {
   getCategories: () => void;
-  getProducts: () => void;
+  getOfferings: () => void;
   categories: CategoriesListType;
-  products: ProductsListType;
+  offerings: OfferingsListType;
 }
 
 export class LandingPageContainer extends React.Component<LandingPageContainerProps & TranslateProps> {
   componentDidMount() {
     this.props.getCategories();
-    this.props.getProducts();
+    this.props.getOfferings();
   }
 
   render() {
@@ -30,12 +30,12 @@ export class LandingPageContainer extends React.Component<LandingPageContainerPr
 
 const mapDispatchToProps = dispatch => ({
   getCategories: () => dispatch(actions.getCategories()),
-  getProducts: () => dispatch(actions.getProducts()),
+  getOfferings: () => dispatch(actions.getOfferings()),
 });
 
 const mapStateToProps = state => ({
   categories: selectors.getCategories(state),
-  products: selectors.getProducts(state),
+  offerings: selectors.getOfferings(state),
 });
 
 const enhance = compose(

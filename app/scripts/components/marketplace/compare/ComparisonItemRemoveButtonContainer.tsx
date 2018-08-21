@@ -5,7 +5,7 @@ import { removeItem } from './store/actions';
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onClick: () => dispatch(removeItem(ownProps.product)),
+    onClick: () => dispatch(removeItem(ownProps.offering)),
   };
 };
 

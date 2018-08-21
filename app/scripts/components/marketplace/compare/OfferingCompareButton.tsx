@@ -1,17 +1,17 @@
 import * as React from 'react';
 
-import { ProductButton } from '../common/ProductButton';
-import { Product } from '../types';
+import { OfferingButton } from '../common/OfferingButton';
+import { Offering } from '../types';
 
-interface ProductCompareButtonProps {
-  product: Product;
+interface OfferingCompareButtonProps {
+  offering: Offering;
   isCompared: boolean;
   addItem(): void;
   removeItem(): void;
 }
 
-export const ProductCompareButton = (props: ProductCompareButtonProps) => (
-  <ProductButton
+export const OfferingCompareButton = (props: OfferingCompareButtonProps) => (
+  <OfferingButton
     icon="fa fa-balance-scale"
     isActive={props.isCompared}
     title={props.isCompared ? 'Remove from comparison' : 'Add to comparison'}

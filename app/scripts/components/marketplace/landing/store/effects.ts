@@ -15,18 +15,18 @@ function* getCategories() {
   }
 }
 
-function* getProducts() {
-  yield put(actions.setProductsLoadingState({loading: true}));
+function* getOfferings() {
+  yield put(actions.setOfferingsLoadingState({loading: true}));
   try {
-    const products = yield call(api.getProducts);
-    yield put(actions.setProducts(products));
-    yield put(actions.setProductsLoadingState({loading: false, loaded: true}));
+    const offerings = yield call(api.getOfferings);
+    yield put(actions.setOfferings(offerings));
+    yield put(actions.setOfferingsLoadingState({loading: false, loaded: true}));
   } catch {
-    yield put(actions.setProductsLoadingState({loading: false, loaded: false}));
+    yield put(actions.setOfferingsLoadingState({loading: false, loaded: false}));
   }
 }
 
 export default function*() {
   yield takeEvery(constants.GET_CATEGORIES, getCategories);
-  yield takeEvery(constants.GET_PRODUCTS, getProducts);
+  yield takeEvery(constants.GET_OFFERINGS, getOfferings);
 }

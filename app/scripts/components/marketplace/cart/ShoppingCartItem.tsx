@@ -14,18 +14,18 @@ interface ShoppingCartItemProps {
 export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
   <tr>
     <td>
-      <div className="product-item">
+      <div className="offering-item">
         <Link
-          state="marketplace-product"
-          params={{product_uuid: props.item.uuid}}
-          className="product-thumb">
+          state="marketplace-offering"
+          params={{offering_uuid: props.item.uuid}}
+          className="offering-thumb">
           <img src={props.item.thumbnail}/>
         </Link>
-        <div className="product-info">
-          <h4 className="product-title">
+        <div className="offering-info">
+          <h4 className="offering-title">
             <Link
-              state="marketplace-product"
-              params={{product_uuid: props.item.uuid}}>
+              state="marketplace-offering"
+              params={{offering_uuid: props.item.uuid}}>
               {props.item.offering_name}
             </Link>
           </h4>

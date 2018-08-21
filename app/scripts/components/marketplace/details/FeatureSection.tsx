@@ -1,18 +1,18 @@
 import * as React from 'react';
 
 import { ListCell } from '@waldur/marketplace/common/ListCell';
-import { Section, Product } from '@waldur/marketplace/types';
+import { Section, Offering } from '@waldur/marketplace/types';
 
 interface FeatureSectionProps {
   section: Section;
-  product: Product;
+  offering: Offering;
 }
 
 const getOptions = attribute =>
   attribute.options.reduce((map, item) => ({...map, [item.key]: item.title}), {});
 
-const AttributeRow = ({ product, attribute }) => {
-  let value = product.attributes[attribute.key];
+const AttributeRow = ({ offering, attribute }) => {
+  let value = offering.attributes[attribute.key];
   if (attribute.type === 'list' && typeof value === 'object') {
     const options = getOptions(attribute);
     value = value.map(item => options[item]);
@@ -40,11 +40,11 @@ export const FeatureSection = (props: FeatureSectionProps) => (
       <th/>
     </tr>
     {props.section.attributes
-      .filter(attr => props.product.attributes.hasOwnProperty(attr.key))
+      .filter(attr => props.offering.attributes.hasOwnProperty(attr.key))
       .map((attr, index) => (
         <AttributeRow
           key={index}
-          product={props.product}
+          offering={props.offering}
           attribute={attr}/>
     ))}
   </>

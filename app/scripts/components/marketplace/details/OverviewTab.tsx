@@ -16,24 +16,24 @@ const DemoButton = () => (
 
 export const OverviewTab = props => (
   <Row>
-    {props.product.full_description && (
+    {props.offering.full_description && (
       <Col md={6}>
-        <h4>{translate('Product details')}</h4>
-        <div dangerouslySetInnerHTML={{__html: props.product.full_description}}/>
+        <h4>{translate('Offering details')}</h4>
+        <div dangerouslySetInnerHTML={{__html: props.offering.full_description}}/>
       </Col>
     )}
-    {props.product.vendor_details && (
+    {props.offering.vendor_details && (
       <Col md={6}>
         <div className="display-flex justify-content-between align-items-baseline m-b-sm">
           <h4>{translate('Vendor details')}</h4>
           <DemoButton/>
         </div>
-        <div dangerouslySetInnerHTML={{__html: props.product.vendor_details}}/>
+        <div dangerouslySetInnerHTML={{__html: props.offering.vendor_details}}/>
 
         <h4 className="header-bottom-border">
           {translate('Provider location')}
         </h4>
-        <LeafletMap positions={props.product.geolocations}/>
+        <LeafletMap positions={props.offering.geolocations}/>
       </Col>
     )}
   </Row>

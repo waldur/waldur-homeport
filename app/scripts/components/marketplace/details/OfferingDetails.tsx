@@ -3,41 +3,41 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
 import { translate } from '@waldur/i18n';
-import { Product, Category } from '@waldur/marketplace/types';
+import { Offering, Category } from '@waldur/marketplace/types';
 
+import { OfferingConfigurator } from './OfferingConfigurator';
+import './OfferingDetails.scss';
+import { OfferingTabs } from './OfferingTabs';
 import { OrderSummary } from './OrderSummary';
-import { ProductConfigurator } from './ProductConfigurator';
-import './ProductDetails.scss';
-import { ProductTabs } from './ProductTabs';
 
-interface ProductDetailsProps {
-  product: Product;
+interface OfferingDetailsProps {
+  offering: Offering;
   category: Category;
 }
 
-export const ProductDetails = (props: ProductDetailsProps) => (
+export const OfferingDetails = (props: OfferingDetailsProps) => (
   <>
-    {props.product.description && (
+    {props.offering.description && (
       <div className="bs-callout bs-callout-success">
-        {props.product.description}
+        {props.offering.description}
       </div>
     )}
-    <Row className="product-details-section">
+    <Row className="offering-details-section">
       <Col md={9}>
         <h3 className="header-bottom-border">
           {translate('Product configuration')}
         </h3>
-        <ProductConfigurator product={props.product}/>
+        <OfferingConfigurator offering={props.offering}/>
       </Col>
       <Col md={3}>
         <h3 className="header-bottom-border">
           {translate('Order summary')}
         </h3>
-        <OrderSummary product={props.product}/>
+        <OrderSummary offering={props.offering}/>
       </Col>
     </Row>
-    <ProductTabs
-      product={props.product}
+    <OfferingTabs
+      offering={props.offering}
       sections={props.category.sections}
     />
   </>

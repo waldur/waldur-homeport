@@ -3,7 +3,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
 import { FilterBarContainer } from '@waldur/marketplace/common/FilterBarContainer';
-import { ProductGridContainer } from '@waldur/marketplace/common/ProductGridContainer';
+import { OfferingGridContainer } from '@waldur/marketplace/common/OfferingGridContainer';
 import { Category } from '@waldur/marketplace/types';
 
 import FeatureFilterListContainer from './FeatureFilterListContainer';
@@ -23,7 +23,7 @@ export const ShopGrid = (props: ShopGridProps) => (
       <div className="m-b-md p-sm gray-bg">
         <FilterBarContainer />
       </div>
-      <ProductGridContainer />
+      <OfferingGridContainer />
     </Col>
   </Row>
 );

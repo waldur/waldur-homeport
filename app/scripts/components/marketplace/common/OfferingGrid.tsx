@@ -4,15 +4,15 @@ import * as Row from 'react-bootstrap/lib/Row';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { ProductsListType } from '@waldur/marketplace/types';
+import { OfferingsListType } from '@waldur/marketplace/types';
 
-import { ProductCard } from './ProductCard';
+import { OfferingCard } from './OfferingCard';
 
-interface ProductGridProps extends ProductsListType {
+interface OfferingGridProps extends OfferingsListType {
   width?: number;
 }
 
-export const ProductGrid: React.SFC<ProductGridProps> = withTranslation((props: ProductGridProps & TranslateProps) => {
+export const OfferingGrid: React.SFC<OfferingGridProps> = withTranslation((props: OfferingGridProps & TranslateProps) => {
   if (props.loading) {
     return <LoadingSpinner/>;
   }
@@ -35,15 +35,15 @@ export const ProductGrid: React.SFC<ProductGridProps> = withTranslation((props: 
 
   return (
     <Row>
-      {props.items.map((product, index) => (
+      {props.items.map((offering, index) => (
         <Col key={index} md={props.width} sm={6}>
-          <ProductCard product={product}/>
+          <OfferingCard offering={offering}/>
         </Col>
       ))}
     </Row>
   );
 });
 
-ProductGrid.defaultProps = {
+OfferingGrid.defaultProps = {
   width: 3,
 };

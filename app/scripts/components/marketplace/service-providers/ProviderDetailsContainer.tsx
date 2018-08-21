@@ -5,14 +5,14 @@ import { $state } from '@waldur/core/services';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { getProvider, getProviderOfferings } from '@waldur/marketplace/common/api';
 import { ProviderDetails } from '@waldur/marketplace/service-providers/ProviderDetails';
-import { ProductsListType } from '@waldur/marketplace/types';
+import { OfferingsListType } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ProviderDataType } from './types';
 
 interface ProviderDetailsContainerState {
   provider: ProviderDataType;
-  providerOfferings: ProductsListType;
+  providerOfferings: OfferingsListType;
 }
 
 class ProviderDetailsContainer extends React.Component<TranslateProps, ProviderDetailsContainerState> {

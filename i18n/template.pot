@@ -1403,7 +1403,7 @@ msgstr ""
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
-#: app/scripts/components/marketplace/details/ProductTabs.tsx
+#: app/scripts/components/marketplace/details/OfferingTabs.tsx
 #: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
@@ -1895,7 +1895,7 @@ msgstr ""
 msgid "Failed to operate with backend."
 msgstr ""
 
-#: app/scripts/components/marketplace/details/ProductTabs.tsx
+#: app/scripts/components/marketplace/details/OfferingTabs.tsx
 msgid "Features"
 msgstr ""
 
@@ -2914,6 +2914,7 @@ msgstr ""
 msgid "Marketplace checkout"
 msgstr ""
 
+#: app/scripts/components/marketplace/routes.js
 #: app/scripts/components/marketplace/sidebar.js
 msgid "Marketplace offerings"
 msgstr ""
@@ -2921,10 +2922,6 @@ msgstr ""
 #: app/scripts/components/marketplace/routes.js
 #: app/scripts/components/marketplace/sidebar.js
 msgid "Marketplace orders"
-msgstr ""
-
-#: app/scripts/components/marketplace/routes.js
-msgid "Marketplace products"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
@@ -3517,6 +3514,14 @@ msgstr ""
 msgid "Objectives"
 msgstr ""
 
+#: app/scripts/components/marketplace/details/OrderSummary.tsx
+msgid "Offering"
+msgstr ""
+
+#: app/scripts/components/marketplace/details/OverviewTab.tsx
+msgid "Offering details"
+msgstr ""
+
 #: app/scripts/components/offering/events.ts
 msgid "Offering events"
 msgstr ""
@@ -3664,7 +3669,7 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
-#: app/scripts/components/marketplace/details/ProductDetails.tsx
+#: app/scripts/components/marketplace/details/OfferingDetails.tsx
 msgid "Order summary"
 msgstr ""
 
@@ -4228,15 +4233,10 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
-#: app/scripts/components/marketplace/details/OrderSummary.tsx
-msgid "Product"
-msgstr ""
-
-#: app/scripts/components/marketplace/details/ProductDetails.tsx
+#: app/scripts/components/marketplace/details/OfferingDetails.tsx
 msgid "Product configuration"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/OverviewTab.tsx
 #: app/scripts/components/marketplace/routes.js
 msgid "Product details"
 msgstr ""
@@ -5174,7 +5174,7 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/ProductTabs.tsx
+#: app/scripts/components/marketplace/details/OfferingTabs.tsx
 msgid "Screenshots"
 msgstr ""
 
@@ -5998,7 +5998,7 @@ msgstr ""
 msgid "There are no items yet."
 msgstr ""
 
-#: app/scripts/components/marketplace/common/ProductGrid.tsx
+#: app/scripts/components/marketplace/common/OfferingGrid.tsx
 msgid "There are no offerings in marketplace yet."
 msgstr ""
 
@@ -6385,7 +6385,7 @@ msgstr ""
 msgid "Unable to load marketplace categories."
 msgstr ""
 
-#: app/scripts/components/marketplace/common/ProductGrid.tsx
+#: app/scripts/components/marketplace/common/OfferingGrid.tsx
 msgid "Unable to load marketplace offerings."
 msgstr ""
 
@@ -6999,7 +6999,7 @@ msgstr ""
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr ""
 
-#: app/scripts/components/marketplace/common/ProductCard.tsx
+#: app/scripts/components/marketplace/common/OfferingCard.tsx
 msgid "Write review"
 msgstr ""
 

@@ -32,9 +32,9 @@ export default function routes($stateProvider) {
       }
     })
 
-    .state('marketplace-product', {
-      url: 'marketplace-product/:product_uuid/',
-      template: '<marketplace-product></marketplace-product>',
+    .state('marketplace-offering', {
+      url: 'marketplace-offering/:offering_uuid/',
+      template: '<marketplace-offering></marketplace-offering>',
       parent: 'project',
       data: {
         pageTitle: gettext('Product details'),
@@ -47,7 +47,7 @@ export default function routes($stateProvider) {
       template: '<marketplace-list></marketplace-list>',
       parent: 'project',
       data: {
-        pageTitle: gettext('Marketplace products'),
+        pageTitle: gettext('Marketplace offerings'),
         feature: 'marketplace',
       }
     })
