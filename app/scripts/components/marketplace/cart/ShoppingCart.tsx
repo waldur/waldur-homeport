@@ -1,12 +1,11 @@
 import * as React from 'react';
 
-import { Product } from '@waldur/marketplace/types';
-
 import './ShoppingCart.scss';
 import { ShoppingCartItem } from './ShoppingCartItem';
+import { OrderItem } from './types';
 
 interface ShoppingCartProps {
-  items: Product[];
+  items: OrderItem[];
   editable: boolean;
 }
 

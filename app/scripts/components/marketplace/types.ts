@@ -11,8 +11,7 @@ export interface Product {
   uuid?: string;
   thumbnail: string;
   name: string;
-  offering_name?: string;
-  subtitle?: string;
+  subtitle: string;
   rating: number;
   order_item_count: number;
   reviews: number;

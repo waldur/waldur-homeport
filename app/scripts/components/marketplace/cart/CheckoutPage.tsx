@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { Product } from '@waldur/marketplace/types';
+import { OrderItem } from '@waldur/marketplace/cart/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ActionButtons } from './ActionButtons';
@@ -13,7 +13,7 @@ import { getItems, getState } from './store/selectors';
 import { OrderState } from './types';
 
 interface CheckoutPageProps {
-  items: Product[];
+  items: OrderItem[];
   state: OrderState;
   setState(state: OrderState): void;
   createOrder(): void;
