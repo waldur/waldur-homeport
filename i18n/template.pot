@@ -2395,10 +2395,12 @@ msgstr ""
 msgid "Infrastructure"
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackPackageForm.tsx
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Initial admin password"
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackPackageForm.tsx
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Initial admin username"
 msgstr ""
@@ -2471,11 +2473,13 @@ msgstr ""
 msgid "Internal IPs"
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackPackageForm.tsx
 #: app/scripts/components/openstack/openstack-network/module.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Internal network allocation pool"
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackPackageForm.tsx
 #: app/scripts/components/openstack/openstack-network/module.js
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Internal network mask (CIDR)"
@@ -3944,6 +3948,10 @@ msgstr ""
 
 #: app/scripts/components/providers/details/provider-details.html
 msgid "Physical locations"
+msgstr ""
+
+#: app/scripts/components/openstack/OpenStackPackageForm.tsx
+msgid "Plan"
 msgstr ""
 
 #: app/scripts/components/experts/requests/create/expert-request-create.js
@@ -5569,6 +5577,7 @@ msgstr ""
 msgid "Size name"
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackPackageForm.tsx
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Skip connection to external network"
 msgstr ""
@@ -5894,6 +5903,10 @@ msgstr ""
 msgid "Tenant ID"
 msgstr ""
 
+#: app/scripts/components/openstack/OpenStackPackageForm.tsx
+msgid "Tenant description"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/actions/assign-package-dialog.js
 msgid "Tenant has been assigned to the package."
 msgstr ""
@@ -5903,6 +5916,7 @@ msgid "Tenant has been updated."
 msgstr ""
 
 #: app/scripts/components/openstack/OpenStackForm.tsx
+#: app/scripts/components/openstack/OpenStackPackageForm.tsx
 #: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 #: app/scripts/components/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: app/scripts/components/openstack/openstack-tenant/actions/request-direct-access.js

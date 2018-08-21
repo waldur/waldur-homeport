@@ -7,6 +7,14 @@ export interface GeolocationPoint {
 
 export type Geolocations = GeolocationPoint[];
 
+export interface Plan {
+  url: string;
+  name: string;
+  description: string;
+  unit_price: number;
+  unit: string;
+}
+
 export interface Offering {
   uuid?: string;
   thumbnail: string;
@@ -27,6 +35,7 @@ export interface Offering {
   customer_uuid?: string;
   customer_name?: string;
   attributes?: {};
+  plans?: Plan[];
 }
 
 export interface Screenshot {
