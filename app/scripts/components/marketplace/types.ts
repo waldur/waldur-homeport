@@ -45,6 +45,7 @@ export interface Attribute {
 export interface Section {
   title: string;
   attributes: Attribute[];
+  is_standalone: boolean;
 }
 
 export interface Category {

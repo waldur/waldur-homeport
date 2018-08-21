@@ -4,6 +4,8 @@ import * as Row from 'react-bootstrap/lib/Row';
 
 import { translate } from '@waldur/i18n';
 
+import { LeafletMap } from './LeafletMap';
+
 const DemoButton = () => (
   <button className="btn btn-outline btn-success btn-sm">
     <i className="fa fa-comment"/>
@@ -27,6 +29,11 @@ export const OverviewTab = props => (
           <DemoButton/>
         </div>
         <div dangerouslySetInnerHTML={{__html: props.product.vendor_details}}/>
+
+        <h4 className="header-bottom-border">
+          {translate('Provider location')}
+        </h4>
+        <LeafletMap positions={props.product.geolocations}/>
       </Col>
     )}
   </Row>
