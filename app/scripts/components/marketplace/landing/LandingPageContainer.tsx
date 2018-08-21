@@ -1,31 +1,33 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { getCategories, getProducts } from '@waldur/marketplace/common/api';
+import { getProducts } from '@waldur/marketplace/common/api';
 import { CategoriesListType, ProductsListType } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { LandingPage } from './LandingPage';
+import * as actions from './store/actions';
+import * as selectors from './store/selectors';
 
-interface LandingPageContainerState {
+interface LandingPageContainerProps {
+  getCategories: () => void;
   categories: CategoriesListType;
-  products: ProductsListType;
-  loading: boolean;
-  loaded: boolean;
 }
 
-export class LandingPageContainer extends React.Component<TranslateProps, LandingPageContainerState> {
+interface LandingPageContainerState {
+  products: ProductsListType;
+}
+
+export class LandingPageContainer extends React.Component<LandingPageContainerProps & TranslateProps, LandingPageContainerState> {
   componentDidMount() {
-    this.loadAll();
+    this.props.getCategories();
+    this.loadProducts();
   }
 
-  async loadAll() {
+  async loadProducts() {
     this.setState({
-      categories: {
-        loading: true,
-        loaded: false,
-        items: [],
-      },
       products: {
         loading: true,
         loaded: false,
@@ -33,13 +35,8 @@ export class LandingPageContainer extends React.Component<TranslateProps, Landin
       },
     });
     try {
-      const [categories, products] = await Promise.all([getCategories(), getProducts()]);
+      const products = await getProducts();
       this.setState({
-        categories: {
-          loading: false,
-          loaded: true,
-          items: categories,
-        },
         products: {
           loading: false,
           loaded: true,
@@ -48,11 +45,6 @@ export class LandingPageContainer extends React.Component<TranslateProps, Landin
       });
     } catch {
       this.setState({
-        categories: {
-          loading: false,
-          loaded: false,
-          items: [],
-        },
         products: {
           loading: false,
           loaded: false,
@@ -63,8 +55,21 @@ export class LandingPageContainer extends React.Component<TranslateProps, Landin
   }
 
   render() {
-    return <LandingPage {...this.state}/>;
+    return <LandingPage {...{...this.state, categories: this.props.categories}}/>;
   }
 }
 
-export default connectAngularComponent(withTranslation(LandingPageContainer));
+const mapDispatchToProps = dispatch => ({
+  getCategories: () => dispatch(actions.getCategories()),
+});
+
+const mapStateToProps = state => ({
+  categories: selectors.getCategories(state),
+});
+
+const enhance = compose(
+  withTranslation,
+  connect(mapStateToProps, mapDispatchToProps)
+);
+
+export default connectAngularComponent(enhance(LandingPageContainer));
