@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { getFormValues } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
@@ -10,10 +11,13 @@ import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
+import { OfferingFormData } from './types';
+
 interface OrderSummaryProps {
   offering: Offering;
   customer: Customer;
   project: Project;
+  formData: OfferingFormData;
 }
 
 const CompareButton = () => (
@@ -58,12 +62,14 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
           <td><strong>{translate('Project')}</strong></td>
           <td>{props.project.name}</td>
         </tr>
-        <tr>
-          <td className="text-lg">{translate('Price')}</td>
-          <td className="text-lg">
-            {defaultCurrency(props.offering.price)}
-          </td>
-        </tr>
+        {props.formData && props.formData.plan && (
+          <tr>
+            <td className="text-lg">{translate('Price')}</td>
+            <td className="text-lg">
+              {defaultCurrency(props.formData.plan.unit_price)}
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
     <div className="display-flex justify-content-between">
@@ -76,6 +82,7 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
 const mapStateToProps = state => ({
   customer: getCustomer(state),
   project: getProject(state),
+  formData: getFormValues('marketplaceOffering')(state),
 });
 
 export const OrderSummary = connect(mapStateToProps)(PureOrderSummary);

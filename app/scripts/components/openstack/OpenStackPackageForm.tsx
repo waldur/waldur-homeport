@@ -1,43 +1,58 @@
 import * as React from 'react';
 
 import {
+  CheckboxField,
   FormContainer,
   StringField,
   TextField,
   SelectField,
   SecretField
 } from '@waldur/form-react';
+import { translate } from '@waldur/i18n';
 
-export const OpenStackPackageForm = () => (
+export const OpenStackPackageForm = props => (
   <form className="form-horizontal">
     <FormContainer
       submitting={false}
       labelClass="col-sm-3"
       controlClass="col-sm-9">
       <StringField
-        label="Tenant name"
+        label={translate('Tenant name')}
         name="name"
         required={true}
       />
       <SelectField
-        label="VPC package"
-        name="package"
+        label={translate('Plan')}
+        name="plan"
         labelKey="name"
         valueKey="url"
+        options={props.offering.plans}
       />
       <TextField
-        label="Tenant description"
+        label={translate('Tenant description')}
         name="description"
       />
       <StringField
-        label="Initial admin username"
+        label={translate('Initial admin username')}
         placeholder="generate automatically"
         name="username"
       />
       <SecretField
-        label="Initial admin password"
+        label={translate('Initial admin password')}
         placeholder="generate automatically"
         name="password"
+      />
+      <StringField
+        label={translate('Internal network mask (CIDR)')}
+        name="subnet_cidr"
+      />
+      <StringField
+        label={translate('Internal network allocation pool')}
+        name="subnet_allocation_pool"
+      />
+      <CheckboxField
+        label={translate('Skip connection to external network')}
+        name="skip_connection_extnet"
       />
     </FormContainer>
   </form>
