@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
-import { Product } from '@waldur/marketplace/types';
 
 import './ShoppingCartItem.scss';
+import { OrderItem } from './types';
 
 interface ShoppingCartItemProps {
-  item: Product;
+  item: OrderItem;
   editable: boolean;
 }
 
@@ -30,7 +30,7 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
             </Link>
           </h4>
           <p>
-            <b>Details:</b> {props.item.description}
+            <b>Details:</b> {props.item.offering_description}
           </p>
         </div>
       </div>

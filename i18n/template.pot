@@ -5779,7 +5779,6 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/ProductTabs.tsx
 #: app/scripts/components/navigation/header/support-link.html
 #: app/scripts/components/user/support/UserList.tsx
 msgid "Support"
