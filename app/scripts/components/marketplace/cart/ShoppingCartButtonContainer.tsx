@@ -5,13 +5,13 @@ import { addItem, removeItem } from './store/actions';
 import { hasItem } from './store/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
-  inCart: hasItem(state, ownProps.product),
+  inCart: hasItem(state, ownProps.offering),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addItem: () => dispatch(addItem(ownProps.product)),
-    removeItem: () => dispatch(removeItem(ownProps.product)),
+    addItem: () => dispatch(addItem(ownProps.offering)),
+    removeItem: () => dispatch(removeItem(ownProps.offering)),
   };
 };
 

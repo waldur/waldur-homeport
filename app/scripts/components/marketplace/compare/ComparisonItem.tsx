@@ -3,20 +3,20 @@ import * as React from 'react';
 import { Link } from '@waldur/core/Link';
 
 import { RatingStars } from '../common/RatingStars';
-import { Product } from '../types';
+import { Offering } from '../types';
 import './ComparisonItem.scss';
 import { ComparisonItemRemoveButtonContainer } from './ComparisonItemRemoveButtonContainer';
 
 interface ComparisonItemProps {
-  item: Product;
+  item: Offering;
 }
 
 export const ComparisonItem = (props: ComparisonItemProps) => (
   <div className="text-center comparison-item">
-    <ComparisonItemRemoveButtonContainer product={props.item}/>
+    <ComparisonItemRemoveButtonContainer offering={props.item}/>
     <Link
-      state="marketplace-product"
-      params={{product_uuid: props.item.uuid}}
+      state="marketplace-offering"
+      params={{offering_uuid: props.item.uuid}}
       className="comparison-item-thumb">
       <img src={props.item.thumbnail}/>
     </Link>

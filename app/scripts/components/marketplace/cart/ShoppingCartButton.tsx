@@ -1,18 +1,18 @@
 import * as React from 'react';
 
-import { ProductButton } from '@waldur/marketplace/common/ProductButton';
+import { OfferingButton } from '@waldur/marketplace/common/OfferingButton';
 
-import { Product } from '../types';
+import { Offering } from '../types';
 
 interface ShoppingCartButtonProps {
-  product: Product;
+  offering: Offering;
   inCart: boolean;
   addItem(): void;
   removeItem(): void;
 }
 
 export const ShoppingCartButton = (props: ShoppingCartButtonProps) => (
-  <ProductButton
+  <OfferingButton
     icon="fa fa-shopping-cart"
     isActive={props.inCart}
     title={props.inCart ? 'Remove from cart' : 'Add to cart'}

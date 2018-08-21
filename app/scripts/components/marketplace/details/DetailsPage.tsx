@@ -3,42 +3,42 @@ import * as React from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { getProduct, getCategory } from '@waldur/marketplace/common/api';
+import { getOffering, getCategory } from '@waldur/marketplace/common/api';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { ProductDetails } from './ProductDetails';
+import { OfferingDetails } from './OfferingDetails';
 
-class ProductDetailsPage extends React.Component {
+class OfferingDetailsPage extends React.Component {
   state = {
-    product: null,
+    offering: null,
     category: null,
     loading: true,
     erred: false,
   };
 
   componentDidMount() {
-    this.fetchProduct();
+    this.fetchOffering();
   }
 
-  async fetchProduct() {
+  async fetchOffering() {
     const $stateParams = ngInjector.get('$stateParams');
     try {
-      const product = await getProduct($stateParams.product_uuid);
-      const category = await getCategory(product.category_uuid);
-      this.setState({product, category, loading: false, erred: false});
-      this.updateBreadcrumbs(product);
+      const offering = await getOffering($stateParams.offering_uuid);
+      const category = await getCategory(offering.category_uuid);
+      this.setState({offering, category, loading: false, erred: false});
+      this.updateBreadcrumbs(offering);
     } catch (error) {
       this.setState({loading: false, erred: true});
     }
   }
 
-  updateBreadcrumbs(product) {
+  updateBreadcrumbs(offering) {
     const $timeout = ngInjector.get('$timeout');
     const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
     const titleService = ngInjector.get('titleService');
 
     $timeout(() => {
-      BreadcrumbsService.activeItem = product.name;
+      BreadcrumbsService.activeItem = offering.name;
       BreadcrumbsService.items = [
         {
           label: translate('Project workspace'),
@@ -49,11 +49,14 @@ class ProductDetailsPage extends React.Component {
           state: 'marketplace-landing',
         },
         {
-          label: product.category_title,
+          label: offering.category_title,
           state: 'marketplace-list',
+          params: {
+            category_uuid: offering.category_uuid,
+          },
         },
       ];
-      titleService.setTitle(product.name);
+      titleService.setTitle(offering.name);
     });
   }
 
@@ -64,8 +67,8 @@ class ProductDetailsPage extends React.Component {
     if (this.state.erred) {
       return translate('Unable to load offering details.');
     }
-    return <ProductDetails product={this.state.product} category={this.state.category}/>;
+    return <OfferingDetails offering={this.state.offering} category={this.state.category}/>;
   }
 }
 
-export default connectAngularComponent(ProductDetailsPage);
+export default connectAngularComponent(OfferingDetailsPage);

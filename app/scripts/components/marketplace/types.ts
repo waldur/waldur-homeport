@@ -7,7 +7,7 @@ export interface GeolocationPoint {
 
 export type Geolocations = GeolocationPoint[];
 
-export interface Product {
+export interface Offering {
   uuid?: string;
   thumbnail: string;
   name: string;
@@ -61,8 +61,8 @@ export interface CategoriesListType {
   loading: boolean;
 }
 
-export interface ProductsListType {
-  items: Product[];
+export interface OfferingsListType {
+  items: Offering[];
   loaded: boolean;
   loading: boolean;
 }
@@ -70,5 +70,5 @@ export interface ProductsListType {
 export interface Provider extends Customer {
   logo?: string;
   description?: string;
-  service_offerings?: Product[];
+  service_offerings?: Offering[];
 }

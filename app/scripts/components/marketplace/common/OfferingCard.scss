@@ -1,4 +1,4 @@
-.product-card {
+.offering-card {
   display: block;
   position: relative;
   width: 100%;
@@ -7,7 +7,7 @@
   background-color: #fff;
   margin-bottom: 30px;
 
-  .product-thumb {
+  .offering-thumb {
     display: block;
     overflow: hidden;
     padding-bottom: 10px;
@@ -21,19 +21,19 @@
     }
   }
 
-  .product-card-body {
+  .offering-card-body {
     padding: 18px;
     padding-top: 0px;
     text-align: center;
   }
 
-  .product-title {
+  .offering-title {
     margin-bottom: 8px;
     font-size: 16px;
     font-weight: normal;
   }
 
-  .product-subtitle {
+  .offering-subtitle {
     width: 100%;
     margin-bottom: 10px;
     font-size: 12px;
@@ -43,7 +43,7 @@
     }
   }
 
-  .product-installs {
+  .offering-installs {
     font-size: 11px;
     margin-left: 5px;
   }

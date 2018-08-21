@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as Table from 'react-bootstrap/lib/Table';
 
-import { Section, Product } from '@waldur/marketplace/types';
+import { Section, Offering } from '@waldur/marketplace/types';
 
 import { FeatureSection } from './FeatureSection';
 
 interface FeaturesTabProps {
   sections: Section[];
-  product: Product;
+  offering: Offering;
 }
 
 export const FeaturesTab = (props: FeaturesTabProps) => (
@@ -21,7 +21,7 @@ export const FeaturesTab = (props: FeaturesTabProps) => (
         <FeatureSection
           key={index}
           section={section}
-          product={props.product}
+          offering={props.offering}
         />
       ))}
     </tbody>

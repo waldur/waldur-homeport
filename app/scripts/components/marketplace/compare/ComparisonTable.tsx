@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import { range } from '@waldur/core/utils';
 
-import { Product, Section } from '../types';
+import { Offering, Section } from '../types';
 import { ComparisonItem } from './ComparisonItem';
 import { ComparisonItemPlaceholder } from './ComparisonItemPlaceholder';
 import { ComparisonSection } from './ComparisonSection';
 
 interface ComparisonTableProps {
-  items: Product[];
+  items: Offering[];
   sections: Section[];
 }
 

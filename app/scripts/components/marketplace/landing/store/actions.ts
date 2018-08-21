@@ -11,15 +11,15 @@ export const getCategories = () => ({
   type: constants.GET_CATEGORIES,
 });
 
-export const setProducts = items => ({
-  type: constants.SET_PRODUCTS,
+export const setOfferings = items => ({
+  type: constants.SET_OFFERINGS,
   payload: {
-    products: items,
+    offerings: items,
   },
 });
 
-export const getProducts = () => ({
-  type: constants.GET_PRODUCTS,
+export const getOfferings = () => ({
+  type: constants.GET_OFFERINGS,
 });
 
 export const setCategoriesLoadingState = state => ({
@@ -29,8 +29,8 @@ export const setCategoriesLoadingState = state => ({
   },
 });
 
-export const setProductsLoadingState = state => ({
-  type: constants.SET_PRODUCTS_LOADING_STATE,
+export const setOfferingsLoadingState = state => ({
+  type: constants.SET_OFFERINGS_LOADING_STATE,
   payload: {
     state,
   },

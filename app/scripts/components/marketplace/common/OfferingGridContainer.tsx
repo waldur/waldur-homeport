@@ -4,23 +4,23 @@ import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
 import { TranslateProps } from '@waldur/i18n';
-import { getProducts } from '@waldur/marketplace/common/api';
-import { Product } from '@waldur/marketplace/types';
+import { getOfferings } from '@waldur/marketplace/common/api';
+import { Offering } from '@waldur/marketplace/types';
 
 import { selectFilterQuery } from '../offerings/store/selectors';
-import { ProductGrid } from './ProductGrid';
+import { OfferingGrid } from './OfferingGrid';
 
-interface ProductGridWrapperState {
-  items: Product[];
+interface OfferingGridWrapperState {
+  items: Offering[];
   loading: boolean;
   loaded: boolean;
 }
 
-interface ProductGridWrapperProps {
+interface OfferingGridWrapperProps {
   filterQuery: string;
 }
 
-export class ProductGridWrapper extends React.Component<ProductGridWrapperProps & TranslateProps, ProductGridWrapperState> {
+export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProps & TranslateProps, OfferingGridWrapperState> {
 
   componentDidUpdate(prevProps) {
     if (prevProps.filterQuery !== this.props.filterQuery) {
@@ -44,9 +44,9 @@ export class ProductGridWrapper extends React.Component<ProductGridWrapperProps 
         loading: true,
         loaded: false,
       });
-      const products = await getProducts(options);
+      const offerings = await getOfferings(options);
       this.setState({
-        items: products,
+        items: offerings,
         loading: false,
         loaded: true,
       });
@@ -60,7 +60,7 @@ export class ProductGridWrapper extends React.Component<ProductGridWrapperProps 
   }
 
   render() {
-    return <ProductGrid {...this.state} width={4}/>;
+    return <OfferingGrid {...this.state} width={4}/>;
   }
 }
 
@@ -73,4 +73,4 @@ const enhance = compose(
   connect(mapStateToProps),
 );
 
-export const ProductGridContainer = enhance(ProductGridWrapper);
+export const OfferingGridContainer = enhance(OfferingGridWrapper);

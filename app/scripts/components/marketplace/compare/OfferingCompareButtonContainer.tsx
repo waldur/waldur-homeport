@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 
-import { ProductCompareButton } from './ProductCompareButton';
+import { OfferingCompareButton } from './OfferingCompareButton';
 import { addItem, removeItem } from './store/actions';
 import { hasItem } from './store/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
-  isCompared: hasItem(state, ownProps.product),
+  isCompared: hasItem(state, ownProps.offering),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addItem: () => dispatch(addItem(ownProps.product)),
-    removeItem: () => dispatch(removeItem(ownProps.product)),
+    addItem: () => dispatch(addItem(ownProps.offering)),
+    removeItem: () => dispatch(removeItem(ownProps.offering)),
   };
 };
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);
 
-export const ProductCompareButtonContainer = enhance(ProductCompareButton);
+export const OfferingCompareButtonContainer = enhance(OfferingCompareButton);
