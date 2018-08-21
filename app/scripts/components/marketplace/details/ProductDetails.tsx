@@ -27,7 +27,7 @@ export const ProductDetails = (props: ProductDetailsProps) => (
         <h3 className="header-bottom-border">
           {translate('Product configuration')}
         </h3>
-        <ProductConfigurator/>
+        <ProductConfigurator product={props.product}/>
       </Col>
       <Col md={3}>
         <h3 className="header-bottom-border">
