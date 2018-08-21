@@ -3,16 +3,21 @@ import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 
 import { translate } from '@waldur/i18n';
+import { Section, Product } from '@waldur/marketplace/types';
 
 import { FeaturesTab } from './FeaturesTab';
 import { OverviewTab } from './OverviewTab';
 import './ProductTabs.scss';
 import { ScreenshotsTab } from './ScreenshotsTab';
-import { SecurityTab } from './SecurityTab';
 
-export const ProductTabs = props => {
-  const basicSections = props.sections.filter(s => s.title !== 'Security');
-  const securitySections = props.sections.filter(s => s.title === 'Security');
+interface ProductTabsProps {
+  sections: Section[];
+  product: Product;
+}
+
+export const ProductTabs = (props: ProductTabsProps) => {
+  const basicSections = props.sections.filter(s => s.is_standalone === false);
+  const standaloneSections = props.sections.filter(s => s.is_standalone === true);
 
   return (
     <Tabs
@@ -40,16 +45,13 @@ export const ProductTabs = props => {
           </div>
         </Tab>
       )}
-      {securitySections.length > 0 && (
-        <Tab eventKey="security" title={translate('Security')}>
+      {standaloneSections.map((section, index) => (
+        <Tab key={index} eventKey={index} title={section}>
           <div className="m-t-md">
-            <SecurityTab product={props.product} sections={securitySections}/>
+            <FeaturesTab product={props.product} sections={[section]}/>
           </div>
         </Tab>
-      )}
-      <Tab eventKey="support" title={translate('Support')}>
-        SLAs table and contacts table.
-      </Tab>
+      ))}
     </Tabs>
   );
 };
