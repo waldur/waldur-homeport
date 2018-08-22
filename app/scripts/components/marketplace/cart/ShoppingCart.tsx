@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { translate } from '@waldur/i18n';
+
 import './ShoppingCart.scss';
 import { ShoppingCartItem } from './ShoppingCartItem';
 import { OrderItem } from './types';
@@ -15,8 +17,8 @@ export const ShoppingCart = (props: ShoppingCartProps) => (
       <table className="table">
         <thead>
           <tr>
-            <th>Item</th>
-            <th className="text-center">Price</th>
+            <th>{translate('Item')}</th>
+            <th className="text-center">{translate('Price')}</th>
             <th>{/* Actions column */}</th>
           </tr>
         </thead>

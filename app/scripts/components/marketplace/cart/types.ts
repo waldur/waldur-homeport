@@ -3,7 +3,7 @@ export type OrderState = 'Configure' | 'Approve' | 'Review';
 export interface State {
   items: OrderItem[];
   state: OrderState;
-  total?: number;
+  total_cost?: number;
 }
 
 export interface OrderItem {
