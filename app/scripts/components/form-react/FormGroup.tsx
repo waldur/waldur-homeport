@@ -23,7 +23,7 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
       description,
       labelClass,
       controlClass,
-      meta: { error },
+      meta: { touched, error },
       children,
       ...rest,
     } = this.props;
@@ -35,7 +35,7 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
         <div className={classNames(controlClass)}>
           {React.cloneElement((children as any), { input, ...omit(rest, 'clearOnUnmount') })}
           {description && <p className="help-block m-b-none text-muted">{description}</p>}
-          <FieldError error={error} />
+          {touched && <FieldError error={error} />}
         </div>
       </div>
     );

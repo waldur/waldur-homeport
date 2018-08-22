@@ -10,6 +10,8 @@ import {
 } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 
+const required = value => value ? undefined : 'Required';
+
 export const OpenStackPackageForm = props => (
   <form className="form-horizontal">
     <FormContainer
@@ -18,41 +20,46 @@ export const OpenStackPackageForm = props => (
       controlClass="col-sm-9">
       <StringField
         label={translate('Tenant name')}
-        name="name"
+        name="attributes.name"
+        validate={required}
         required={true}
       />
-      <SelectField
-        label={translate('Plan')}
-        name="plan"
-        labelKey="name"
-        valueKey="url"
-        options={props.offering.plans}
-      />
+      {props.offering.plans && (
+        <SelectField
+          label={translate('Plan')}
+          name="plan"
+          labelKey="name"
+          valueKey="url"
+          options={props.offering.plans}
+          validate={required}
+          required={true}
+        />
+      )}
       <TextField
         label={translate('Tenant description')}
-        name="description"
+        name="attributes.description"
       />
       <StringField
         label={translate('Initial admin username')}
         placeholder="generate automatically"
-        name="username"
+        name="attributes.username"
       />
       <SecretField
         label={translate('Initial admin password')}
         placeholder="generate automatically"
-        name="password"
+        name="attributes.password"
       />
       <StringField
         label={translate('Internal network mask (CIDR)')}
-        name="subnet_cidr"
+        name="attributes.subnet_cidr"
       />
       <StringField
         label={translate('Internal network allocation pool')}
-        name="subnet_allocation_pool"
+        name="attributes.subnet_allocation_pool"
       />
       <CheckboxField
         label={translate('Skip connection to external network')}
-        name="skip_connection_extnet"
+        name="attributes.skip_connection_extnet"
       />
     </FormContainer>
   </form>

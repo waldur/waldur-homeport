@@ -248,6 +248,14 @@ msgstr ""
 msgid "Add snapshots"
 msgstr ""
 
+#: app/scripts/components/marketplace/cart/ShoppingCartButton.tsx
+msgid "Add to cart"
+msgstr ""
+
+#: app/scripts/components/marketplace/compare/OfferingCompareButton.tsx
+msgid "Add to comparison"
+msgstr ""
+
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 msgid "Add user"
 msgstr ""
@@ -1541,6 +1549,10 @@ msgstr ""
 msgid "Download invoice"
 msgstr ""
 
+#: app/scripts/components/marketplace/cart/ShoppingCartSidebar.tsx
+msgid "Download order PDF file"
+msgstr ""
+
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Draft"
 msgstr ""
@@ -2592,6 +2604,7 @@ msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
+#: app/scripts/components/marketplace/cart/ShoppingCartSidebar.tsx
 #: app/scripts/components/marketplace/details/OrderSummary.tsx
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -3665,6 +3678,10 @@ msgstr ""
 msgid "Oracle"
 msgstr ""
 
+#: app/scripts/components/marketplace/cart/ShoppingCartSidebar.tsx
+msgid "Order Summary"
+msgstr ""
+
 #: app/scripts/components/marketplace/routes.js
 msgid "Order details"
 msgstr ""
@@ -4258,6 +4275,7 @@ msgstr ""
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
+#: app/scripts/components/marketplace/cart/ShoppingCartSidebar.tsx
 #: app/scripts/components/marketplace/details/OrderSummary.tsx
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -4767,6 +4785,14 @@ msgstr ""
 #: app/scripts/components/ansible/application-list.js
 #: app/scripts/components/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Remove application"
+msgstr ""
+
+#: app/scripts/components/marketplace/cart/ShoppingCartButton.tsx
+msgid "Remove from cart"
+msgstr ""
+
+#: app/scripts/components/marketplace/compare/OfferingCompareButton.tsx
+msgid "Remove from comparison"
 msgstr ""
 
 #: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
@@ -5482,6 +5508,10 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: app/scripts/components/marketplace/cart/CheckoutPage.tsx
+msgid "Shopping cart is empty. You should add items to cart first."
+msgstr ""
+
 #: app/scripts/components/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Should be given to OAuth service provider. Example: https://VM_EXTERNAL_IP/hub/oauth_callback"
 msgstr ""
@@ -6180,6 +6210,7 @@ msgstr ""
 #: app/scripts/components/billing/PriceEstimateDialog.tsx
 #: app/scripts/components/billing/billing-records-list.js
 #: app/scripts/components/billing/invoices-list.js
+#: app/scripts/components/marketplace/cart/ShoppingCartSidebar.tsx
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Total"
 msgstr ""

@@ -17,7 +17,11 @@ function* createOrder() {
   try {
     const response = yield call(api.createOrder, {
       project: project.url,
-      items: items.map(item => ({ offering: item.url })),
+      items: items.map(item => ({
+        offering: item.offering.url,
+        plan: item.plan ? item.plan.url : undefined,
+        attributes: item.attributes,
+      })),
     });
     yield put(showSuccess(translate('Order has been submitted.')));
     yield put(actions.setState('Approve'));

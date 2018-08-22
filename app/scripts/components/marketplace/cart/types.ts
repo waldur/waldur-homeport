@@ -8,10 +8,11 @@ export interface State {
 
 export interface OrderItem {
   uuid: string;
+  offering_uuid: string;
   offering_name: string;
   offering_description: string;
-  thumbnail: string;
-  price: string;
+  offering_thumbnail: string;
+  cost: string;
 }
 
 export interface Order {

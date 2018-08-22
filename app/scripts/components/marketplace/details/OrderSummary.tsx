@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { getFormValues, isValid } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
-import { CheckoutButton } from '@waldur/marketplace/details/CheckoutButton';
+import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
@@ -18,15 +19,8 @@ interface OrderSummaryProps {
   customer: Customer;
   project: Project;
   formData: OfferingFormData;
+  formValid: boolean;
 }
-
-const CompareButton = () => (
-  <button
-    type="button"
-    className="btn btn-outline btn-sm btn-default">
-    <i className="fa fa fa-balance-scale"/>
-  </button>
-);
 
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
@@ -73,8 +67,18 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
       </tbody>
     </table>
     <div className="display-flex justify-content-between">
-      <CheckoutButton/>
-      <CompareButton/>
+      <ShoppingCartButtonContainer
+        item={
+          {
+            offering: props.offering,
+            plan: props.formData ? props.formData.plan : undefined,
+            attributes: props.formData ? props.formData.attributes : undefined,
+          }
+        }
+        flavor="primary"
+        disabled={!props.formValid}
+      />
+      <OfferingCompareButtonContainer offering={props.offering} flavor="secondary"/>
     </div>
   </>
 );
@@ -83,6 +87,7 @@ const mapStateToProps = state => ({
   customer: getCustomer(state),
   project: getProject(state),
   formData: getFormValues('marketplaceOffering')(state),
+  formValid: isValid('marketplaceOffering')(state),
 });
 
 export const OrderSummary = connect(mapStateToProps)(PureOrderSummary);
