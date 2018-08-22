@@ -10,7 +10,7 @@ import { ShoppingCart } from './ShoppingCart';
 import { ShoppingCartSidebar } from './ShoppingCartSidebar';
 import { ShoppingCartSteps } from './ShoppingCartSteps';
 import * as actions from './store/actions';
-import { getItems, getState } from './store/selectors';
+import { getState, getCheckoutItems } from './store/selectors';
 import { OrderState } from './types';
 
 interface CheckoutPageProps {
@@ -44,7 +44,7 @@ const PureCheckoutPage = (props: CheckoutPageProps) => (
 );
 
 const mapStateToProps = state => ({
-  items: getItems(state),
+  items: getCheckoutItems(state),
   state: getState(state),
 });
 

@@ -2667,6 +2667,7 @@ msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
+#: app/scripts/components/marketplace/cart/ShoppingCart.tsx
 msgid "Item"
 msgstr ""
 
@@ -3690,6 +3691,10 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
+#: app/scripts/components/marketplace/cart/ShoppingCartButtonContainer.tsx
+msgid "Order item has been created."
+msgstr ""
+
 #: app/scripts/components/marketplace/details/OfferingDetails.tsx
 msgid "Order summary"
 msgstr ""
@@ -4146,6 +4151,7 @@ msgstr ""
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/expert-bids-list.js
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
+#: app/scripts/components/marketplace/cart/ShoppingCart.tsx
 #: app/scripts/components/marketplace/details/OrderSummary.tsx
 #: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx

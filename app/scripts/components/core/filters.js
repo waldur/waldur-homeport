@@ -17,7 +17,7 @@ function replace() {
 // @ngInject
 function defaultCurrency(ENV, $filter) {
   return function(value) {
-    if (value === undefined || value.indexOf && value.indexOf(ENV.currency) !== -1) {
+    if (value === undefined || value === null || value.indexOf && value.indexOf(ENV.currency) !== -1) {
       return value;
     }
     let fractionSize = 2;
