@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import { translate } from '@waldur/i18n';
 import { OrderItem } from '@waldur/marketplace/cart/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -37,7 +38,7 @@ const PureCheckoutPage = (props: CheckoutPageProps) => (
     </div>
   ) : (
     <p className="text-center">
-      Shopping cart is empty. You should add items to cart first.
+      {translate('Shopping cart is empty. You should add items to cart first.')}
     </p>
   )
 );

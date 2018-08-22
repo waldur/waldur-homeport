@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 
 import { OfferingButton } from '../common/OfferingButton';
@@ -47,7 +46,6 @@ export const OfferingCard = (props: OfferingCardProps) => (
     <div className="offering-button-group">
       <OfferingButton icon="fa fa-comments" title={translate('Write review')}/>
       <OfferingCompareButtonContainer offering={props.offering}/>
-      <ShoppingCartButtonContainer offering={props.offering}/>
     </div>
   </div>
 );

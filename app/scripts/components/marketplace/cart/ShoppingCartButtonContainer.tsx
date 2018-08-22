@@ -1,8 +1,22 @@
 import { connect } from 'react-redux';
 
+import { Offering, Plan } from '@waldur/marketplace/types';
+
 import { ShoppingCartButton } from './ShoppingCartButton';
 import { addItem, removeItem } from './store/actions';
 import { hasItem } from './store/selectors';
+
+interface OrderItem {
+  offering: Offering;
+  plan?: Plan;
+  attributes?: {[key: string]: any};
+}
+
+interface ShoppingCartButtonContainerProps {
+  item: OrderItem;
+  flavor?: string;
+  disabled?: boolean;
+}
 
 const mapStateToProps = (state, ownProps) => ({
   inCart: hasItem(state, ownProps.offering),
@@ -10,11 +24,12 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addItem: () => dispatch(addItem(ownProps.offering)),
-    removeItem: () => dispatch(removeItem(ownProps.offering)),
+    addItem: () => dispatch(addItem(ownProps.item)),
+    removeItem: () => dispatch(removeItem(ownProps.item)),
   };
 };
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);
 
-export const ShoppingCartButtonContainer = enhance(ShoppingCartButton);
+export const ShoppingCartButtonContainer: React.ComponentClass<ShoppingCartButtonContainerProps> =
+  enhance(ShoppingCartButton);

@@ -17,15 +17,15 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
       <div className="offering-item">
         <Link
           state="marketplace-offering"
-          params={{offering_uuid: props.item.uuid}}
+          params={{offering_uuid: props.item.offering_uuid}}
           className="offering-thumb">
-          <img src={props.item.thumbnail}/>
+          <img src={props.item.offering_thumbnail}/>
         </Link>
         <div className="offering-info">
           <h4 className="offering-title">
             <Link
               state="marketplace-offering"
-              params={{offering_uuid: props.item.uuid}}>
+              params={{offering_uuid: props.item.offering_uuid}}>
               {props.item.offering_name}
             </Link>
           </h4>
@@ -36,7 +36,7 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
       </div>
     </td>
     <td className="text-center text-lg">
-      {defaultCurrency(props.item.price)}
+      {defaultCurrency(props.item.cost)}
     </td>
     {props.editable && (
       <td className="text-center">
