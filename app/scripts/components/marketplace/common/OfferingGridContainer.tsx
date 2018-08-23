@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
 import { TranslateProps } from '@waldur/i18n';
@@ -35,7 +36,7 @@ export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProp
   async loadData(filterQuery?) {
     const options = {
       params: {
-        name: filterQuery,
+        ...filterQuery,
       },
     };
     try {
@@ -64,8 +65,26 @@ export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProp
   }
 }
 
+export const formatAttributesFilter = query => {
+  if (query) {
+    const formattedQuery = {};
+    Object.keys(query).forEach(key => {
+      const attributeKey = key.split('-')[0];
+      if (Object.keys(formattedQuery).indexOf(attributeKey) === -1) {
+        formattedQuery[attributeKey] = [query[key]];
+      } else {
+        formattedQuery[attributeKey].push(query[key]);
+      }
+    });
+    return formattedQuery;
+  }
+};
+
 const mapStateToProps = state => ({
-  filterQuery: selectFilterQuery(state),
+  filterQuery: {
+    name: selectFilterQuery(state),
+    attributes: formatAttributesFilter(getFormValues('marketplaceFilter')(state)),
+  },
 });
 
 const enhance = compose(

@@ -1,2 +1,3 @@
-export const getStep = state => state.marketplace.offering.step;
-export const selectFilterQuery = state => state.marketplace.offering.filterQuery;
+const getOffering = state => state.marketplace.offering;
+export const getStep = state => getOffering(state).step;
+export const selectFilterQuery = state => getOffering(state).filterQuery;
