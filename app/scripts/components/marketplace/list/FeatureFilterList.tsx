@@ -20,26 +20,42 @@ const PureFeatureFilterList = props => (
   </form>
 );
 
-const FeatureFilter = (props: FeatureFilterProps) => (
-  <section className="m-t-md">
-    <h3 className="shopping-cart-sidebar-title">
-      {props.section.title}
-    </h3>
+const renderSection = section => {
+  if (!!section.attributes.length) {
+    return section.attributes.some(attribute => !!attribute.options.length);
+  }
+};
 
-    {props.section.attributes.map((feature, index) => (
-      <Field
-        key={index}
-        name={`filter-item-${feature.key}`}
-        component={prop =>
-          <AwesomeCheckbox
-            id={`filter-item-${feature.key}`}
-            label={feature.title}
-            {...prop.input}
-          />
-        }
-      />
-    ))}
-  </section>
+const FeatureFilter = (props: FeatureFilterProps) => (
+  renderSection(props.section) &&
+  (
+    <section className="m-t-md">
+      <h3 className="shopping-cart-sidebar-title">
+        {props.section.title}
+      </h3>
+      {props.section.attributes.map((attribute, outerIndex) => (
+        (!!attribute.options.length && attribute.type === 'list' &&
+          <span key={outerIndex}>
+            <h4>{attribute.title}</h4>
+            {attribute.options.map((option, index) => (
+              <div key={index} className="m-l-sm">
+                <Field
+                  name={`${attribute.key}-${index}`}
+                  component={prop =>
+                    <AwesomeCheckbox
+                      id={`filter-item-${option.key}`}
+                      label={option.title}
+                      {...prop.input}
+                    />
+                  }
+                  normalize={v => v ? option.key : ''}
+                />
+              </div>)
+            )}
+          </span>)
+      ))}
+    </section>
+  )
 );
 
 export const FeatureFilterList = reduxForm<any, FeatureFilterListProps>({

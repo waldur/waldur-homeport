@@ -47,7 +47,14 @@ export interface Screenshot {
 export interface Attribute {
   title: string;
   key: string;
+  type: string;
   render?: React.SFC<any>;
+  options?: AttributeOption[];
+}
+
+interface AttributeOption {
+  key: string;
+  title: string;
 }
 
 export interface Section {

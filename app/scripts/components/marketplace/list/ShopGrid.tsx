@@ -4,19 +4,14 @@ import * as Row from 'react-bootstrap/lib/Row';
 
 import { FilterBarContainer } from '@waldur/marketplace/common/FilterBarContainer';
 import { OfferingGridContainer } from '@waldur/marketplace/common/OfferingGridContainer';
-import { Category } from '@waldur/marketplace/types';
 
 import FeatureFilterListContainer from './FeatureFilterListContainer';
-import { ShopCategories } from './ShopCategories';
+import { ShopCategoriesContainer } from './ShopCategoriesContainer';
 
-interface ShopGridProps {
-  categories: Category[];
-}
-
-export const ShopGrid = (props: ShopGridProps) => (
+export const ShopGrid = () => (
   <Row>
     <Col lg={3}>
-      <ShopCategories categories={props.categories}/>
+      <ShopCategoriesContainer />
       <FeatureFilterListContainer />
     </Col>
     <Col lg={9}>
