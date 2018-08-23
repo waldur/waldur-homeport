@@ -6,12 +6,16 @@ import { Offering } from '@waldur/marketplace/types';
 
 import { OfferingFormData } from './types';
 
-const PureOfferingConfigurator = props => {
-  const FormComponent = getFormComponent(props.offering.offering_type);
+interface PureOfferingConfiguratorProps {
+  offering: Offering;
+}
+
+const PureOfferingConfigurator = (props: PureOfferingConfiguratorProps) => {
+  const FormComponent = getFormComponent(props.offering.type);
   return <FormComponent offering={props.offering}/>;
 };
 
-const enhance = reduxForm<OfferingFormData, {offering: Offering}>(
+const enhance = reduxForm<OfferingFormData, PureOfferingConfiguratorProps>(
   {form: 'marketplaceOffering'}
 );
 

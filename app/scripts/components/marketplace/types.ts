@@ -26,9 +26,7 @@ export interface Offering {
   category?: string;
   category_title?: string;
   category_uuid?: string;
-  vendor: string;
   vendor_details?: string;
-  price: number;
   screenshots?: Screenshot[];
   description?: string;
   geolocations?: Geolocations;
@@ -36,6 +34,7 @@ export interface Offering {
   customer_name?: string;
   attributes?: {};
   plans?: Plan[];
+  type: string;
 }
 
 export interface Screenshot {
