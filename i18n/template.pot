@@ -847,6 +847,10 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
+#: app/scripts/components/marketplace/list/ShopCategories.tsx
+msgid "Categories"
+msgstr ""
+
 #: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js

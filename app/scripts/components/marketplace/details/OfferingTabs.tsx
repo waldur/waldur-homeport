@@ -18,19 +18,22 @@ interface OfferingTabsProps {
 export const OfferingTabs = (props: OfferingTabsProps) => {
   const basicSections = props.sections.filter(s => s.is_standalone === false);
   const standaloneSections = props.sections.filter(s => s.is_standalone === true);
+  const defaultTab = props.offering.full_description ? 'details' : 'features';
 
   return (
     <Tabs
-      defaultActiveKey="details"
+      defaultActiveKey={defaultTab}
       id="tabs"
       className="m-t-lg offering-tabs"
       unmountOnExit={true}
     >
-      <Tab eventKey="details" title={translate('Description')}>
-        <div className="m-t-md">
-          <OverviewTab offering={props.offering}/>
-        </div>
-      </Tab>
+      {props.offering.full_description && (
+        <Tab eventKey="details" title={translate('Description')}>
+          <div className="m-t-md">
+            <OverviewTab offering={props.offering}/>
+          </div>
+        </Tab>
+      )}
       {basicSections.length > 0 && (
         <Tab eventKey="features" title={translate('Features')}>
           <div className="m-t-md">
@@ -46,7 +49,7 @@ export const OfferingTabs = (props: OfferingTabsProps) => {
         </Tab>
       )}
       {standaloneSections.map((section, index) => (
-        <Tab key={index} eventKey={index} title={section}>
+        <Tab key={index} eventKey={index} title={section.title}>
           <div className="m-t-md">
             <FeaturesTab offering={props.offering} sections={[section]}/>
           </div>

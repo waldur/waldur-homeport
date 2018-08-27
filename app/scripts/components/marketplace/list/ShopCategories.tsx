@@ -2,6 +2,7 @@ import * as classNames from 'classnames';
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
 
 import './ShopCategories.scss';
@@ -45,7 +46,7 @@ const List = (props: ListProps) => (
 export const ShopCategories = (props: ListProps) => (
   <section>
     <h3 className="shopping-cart-sidebar-title">
-      Shop categories
+      {translate('Categories')}
     </h3>
     <List
       categories={props.categories}

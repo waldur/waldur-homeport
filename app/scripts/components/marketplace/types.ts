@@ -29,6 +29,7 @@ export interface Offering {
   vendor_details?: string;
   screenshots?: Screenshot[];
   description?: string;
+  full_description: string;
   geolocations?: Geolocations;
   customer_uuid?: string;
   customer_name?: string;
