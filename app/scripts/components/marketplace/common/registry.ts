@@ -1,9 +1,13 @@
 const REGISTRY = {};
 
-export function registerFormComponent(offeringType, formComponent) {
-  REGISTRY[offeringType] = formComponent;
+export function registerOfferingType({type, component, serializer}) {
+  REGISTRY[type] = {component, serializer};
 }
 
 export function getFormComponent(offeringType) {
-  return REGISTRY[offeringType];
+  return REGISTRY[offeringType].component;
+}
+
+export function getFormSerializer(offeringType) {
+  return REGISTRY[offeringType].serializer || (x => x);
 }

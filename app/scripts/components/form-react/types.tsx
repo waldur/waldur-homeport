@@ -7,6 +7,7 @@ export interface FormField {
   required?: boolean;
   label?: ReactNode;
   description?: ReactNode;
+  tooltip?: ReactNode;
   labelClass?: string;
   controlClass?: string;
   validate?: Validator | Validator[];
