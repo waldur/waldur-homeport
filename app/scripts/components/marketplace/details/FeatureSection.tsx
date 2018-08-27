@@ -6,6 +6,7 @@ import { Section, Offering } from '@waldur/marketplace/types';
 interface FeatureSectionProps {
   section: Section;
   offering: Offering;
+  hideHeader: boolean;
 }
 
 const getOptions = attribute =>

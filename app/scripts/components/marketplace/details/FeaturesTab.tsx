@@ -22,6 +22,7 @@ export const FeaturesTab = (props: FeaturesTabProps) => (
           key={index}
           section={section}
           offering={props.offering}
+          hideHeader={props.sections.length === 1}
         />
       ))}
     </tbody>
