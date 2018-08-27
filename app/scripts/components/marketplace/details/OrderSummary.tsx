@@ -7,6 +7,7 @@ import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
+import { getFormSerializer } from '@waldur/marketplace/common/registry';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
@@ -21,6 +22,15 @@ interface OrderSummaryProps {
   formData: OfferingFormData;
   formValid: boolean;
 }
+
+const getOrderItem = (props: OrderSummaryProps) => {
+  const serializer = getFormSerializer(props.offering.type);
+  return {
+    offering: props.offering,
+    plan: props.formData ? props.formData.plan : undefined,
+    attributes: props.formData ? serializer(props.formData.attributes) : undefined,
+  };
+};
 
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
@@ -68,13 +78,7 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
     </table>
     <div className="display-flex justify-content-between">
       <ShoppingCartButtonContainer
-        item={
-          {
-            offering: props.offering,
-            plan: props.formData ? props.formData.plan : undefined,
-            attributes: props.formData ? props.formData.attributes : undefined,
-          }
-        }
+        item={getOrderItem(props)}
         flavor="primary"
         disabled={!props.formValid}
       />

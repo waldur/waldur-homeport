@@ -12,7 +12,10 @@ interface PureOfferingConfiguratorProps {
 
 const PureOfferingConfigurator = (props: PureOfferingConfiguratorProps) => {
   const FormComponent = getFormComponent(props.offering.type);
-  return <FormComponent offering={props.offering}/>;
+  if (!FormComponent) {
+    return null;
+  }
+  return <FormComponent {...props}/>;
 };
 
 const enhance = reduxForm<OfferingFormData, PureOfferingConfiguratorProps>(

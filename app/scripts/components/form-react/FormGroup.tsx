@@ -3,6 +3,7 @@ import * as React from 'react';
 // @ts-ignore
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
+import { Tooltip } from '@waldur/core/Tooltip';
 import { omit } from '@waldur/core/utils';
 
 import { FieldError } from './FieldError';
@@ -21,6 +22,7 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
       required,
       label,
       description,
+      tooltip,
       labelClass,
       controlClass,
       meta: { touched, error },
@@ -30,6 +32,11 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
     return (
       <div className="form-group">
         <label className={classNames('control-label', labelClass)}>
+          {tooltip && (
+            <Tooltip id="form-field-tooltip" label={tooltip}>
+              <i className="fa fa-question-circle"/>{' '}
+            </Tooltip>
+          )}
           {label}{required && <span className="text-danger"> *</span>}
         </label>
         <div className={classNames(controlClass)}>
