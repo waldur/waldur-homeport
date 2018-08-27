@@ -4,13 +4,13 @@ import { InjectedFormProps } from 'redux-form';
 import { ENV } from '@waldur/core/services';
 import { required, getLatinNameValidators } from '@waldur/core/validators';
 import {
-  CheckboxField,
   FormContainer,
   StringField,
   TextField,
   SelectField,
   SecretField
 } from '@waldur/form-react';
+import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { LabelField } from '@waldur/form-react/LabelField';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
@@ -89,7 +89,8 @@ export class OpenStackPackageForm extends React.Component<OpenStackPackageFormPr
             range="192.168.X.10 — 192.168.X.200"
           />
           {ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES && (
-            <CheckboxField
+            <AwesomeCheckboxField
+              hideLabel={true}
               label={translate('Skip connection to external network')}
               name="attributes.skip_connection_extnet"
             />

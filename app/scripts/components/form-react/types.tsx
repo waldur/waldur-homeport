@@ -12,4 +12,5 @@ export interface FormField {
   controlClass?: string;
   validate?: Validator | Validator[];
   disabled?: boolean;
+  hideLabel?: boolean;
 }
