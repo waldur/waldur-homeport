@@ -30,7 +30,7 @@ class ProviderUtilsService {
 
       // Do not display provider settings for tenants if direct access is not enabled
       if (provider.service_type === 'OpenStackTenant') {
-        settingsVisible = settingsVisible && this.ENV.tenantCredentialsVisible;
+        settingsVisible = settingsVisible && this.ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE;
       }
 
       // Do not display provider settings if only staff manages services but user is not staff

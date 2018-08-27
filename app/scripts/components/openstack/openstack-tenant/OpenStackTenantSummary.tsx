@@ -65,7 +65,7 @@ export const PureOpenStackTenantSummary = (props: OpenStackTenantSummaryProps) =
 };
 
 const mapStateToProps = state => ({
-  tenantCredentialsVisible: state.config.tenantCredentialsVisible,
+  tenantCredentialsVisible: state.config.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE,
 });
 
 const enhance = compose(withTranslation, connect(mapStateToProps));

@@ -12,7 +12,15 @@ import { OpenStackTenantSummary } from './OpenStackTenantSummary';
 export const renderSummary = props => {
   const { tenantCredentialsVisible, ...rest } = props;
   const mockStore = configureStore();
-  const store = mockStore({config: {tenantCredentialsVisible}});
+  const store = mockStore({
+    config: {
+      plugins: {
+        WALDUR_OPENSTACK: {
+          TENANT_CREDENTIALS_VISIBLE: tenantCredentialsVisible,
+        },
+      },
+    },
+  });
   return mount(
     <Provider store={store}>
       <OpenStackTenantSummary {...rest} translate={translate}/>
