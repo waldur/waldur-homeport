@@ -1,4 +1,4 @@
-import { isOwnerOrStaff } from './selectors';
+import { isOwnerOrStaff, isManager, isAdmin } from './selectors';
 
 describe('isOwnerOrStaff selector', () => {
   const staff = {
@@ -47,5 +47,57 @@ describe('isOwnerOrStaff selector', () => {
     };
     const actual = isOwnerOrStaff({ workspace });
     expect(actual).toBe(false);
+  });
+});
+
+describe('isManager selector', () => {
+  it('should return true if project has a manager who is a current user', () => {
+    const user = {
+      is_staff: false,
+      is_support: false,
+      url: 'manager_url',
+      uuid: 'manager_uuid',
+    };
+    const manager = {
+      user_uuid: 'manager_uuid',
+      role: 'manager',
+    };
+    const workspace = {
+      user,
+      project: {
+        name: 'Project 1',
+        url: 'url',
+        uuid: 'uuid',
+        permissions: [manager],
+      },
+    };
+    const actual = isManager({ workspace });
+    expect(actual).toBe(true);
+  });
+});
+
+describe('isAdmin selector', () => {
+  it('should return true if project has an admin who is a current user', () => {
+    const user = {
+      is_staff: false,
+      is_support: false,
+      url: 'admin_url',
+      uuid: 'admin_uuid',
+    };
+    const admin = {
+      user_uuid: 'admin_uuid',
+      role: 'admin',
+    };
+    const workspace = {
+      user,
+      project: {
+        name: 'Project 1',
+        url: 'url',
+        uuid: 'uuid',
+        permissions: [admin],
+      },
+    };
+    const actual = isAdmin({ workspace });
+    expect(actual).toBe(true);
   });
 });

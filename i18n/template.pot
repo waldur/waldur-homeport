@@ -3698,6 +3698,10 @@ msgstr ""
 msgid "Order details"
 msgstr ""
 
+#: app/scripts/components/marketplace/orders/store/effects.ts
+msgid "Order has been approved."
+msgstr ""
+
 #: app/scripts/components/marketplace/cart/store/effects.ts
 msgid "Order has been submitted."
 msgstr ""
@@ -6290,6 +6294,10 @@ msgstr ""
 
 #: app/scripts/components/auth/auth-activation.js
 msgid "Unable to activate account."
+msgstr ""
+
+#: app/scripts/components/marketplace/orders/store/effects.ts
+msgid "Unable to approve order."
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.js

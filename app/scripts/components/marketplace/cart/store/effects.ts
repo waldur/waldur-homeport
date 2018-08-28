@@ -24,7 +24,6 @@ function* createOrder() {
       })),
     });
     yield put(showSuccess(translate('Order has been submitted.')));
-    yield put(actions.setState('Approve'));
     yield put(actions.clearCart());
     yield $state.go('marketplace-order-details', {order_uuid: response.data.uuid});
   } catch (error) {

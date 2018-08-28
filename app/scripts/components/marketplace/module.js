@@ -10,7 +10,7 @@ import marketplaceProviderDetails from './service-providers/ProviderDetailsConta
 import marketplaceVendorOfferings from './offerings/OfferingsList';
 import marketplaceOfferingCreate from './offerings/OfferingCreateContainer';
 import marketplaceOrdersList from './orders/OrdersList';
-import marketplaceOrderDetails from './orders/OrderDetails';
+import marketplaceOrderDetails from './orders/OrderDetailsContainer';
 import providersService from './providers-service';
 import registerSidebarExtension from './sidebar';
 import shoppingCartConfig from './shoppingCartConfig';

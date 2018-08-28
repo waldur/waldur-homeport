@@ -14,18 +14,57 @@ export const getProject = (state: OuterState): Project =>
 export const isStaff = (state: OuterState): boolean =>
   getUser(state) && getUser(state).is_staff;
 
-export const isOwnerOrStaff = createSelector(
+export const getOwner = createSelector(
   getUser,
   getCustomer,
   (user, customer) => {
     if (!user) {
-      return false;
+      return undefined;
     }
+    if (customer) {
+      return customer.owners.find(owner => owner.uuid === user.uuid);
+    }
+  }
+);
+
+export const isOwner = createSelector(
+  getOwner,
+  owner => {
+    return !!owner;
+  }
+);
+
+export const isOwnerOrStaff = createSelector(
+  getUser,
+  isOwner,
+  (user, userIsOwner) => {
     if (user.is_staff) {
       return true;
     }
-    const isOwner = customer.owners.find(owner => owner.uuid === user.uuid) !== undefined;
-    return isOwner;
+    return userIsOwner;
+  }
+);
+
+const checkRole = (project, user, role) => {
+  const projectUser = project.permissions.find(perm => perm.user_uuid === user.uuid);
+  if (projectUser) {
+    return projectUser.role === role;
+  }
+};
+
+export const isManager = createSelector(
+  getUser,
+  getProject,
+  (user, project) => {
+    return checkRole(project, user, 'manager');
+  }
+);
+
+export const isAdmin = createSelector(
+  getUser,
+  getProject,
+  (user, project) => {
+    return checkRole(project, user, 'admin');
   }
 );
 
