@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm, formValueSelector } from 'redux-form';
-import { reset } from 'redux-form';
+import { reduxForm, formValueSelector, reset } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { $state } from '@waldur/core/services';
