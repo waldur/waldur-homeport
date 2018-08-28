@@ -2,15 +2,22 @@ import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { TranslateProps } from '@waldur/i18n';
 import { ShoppingCartSteps } from '@waldur/marketplace/cart/ShoppingCartSteps';
 import { State } from '@waldur/marketplace/cart/types';
 import { getOrderDetails } from '@waldur/marketplace/common/api';
 import { OrderSummary } from '@waldur/marketplace/orders/OrderSummary';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ShoppingCart } from '../cart/ShoppingCart';
+import { ApproveButton } from './ApproveButton';
+import { StatusChange } from './types';
 import { matchState } from './utils';
+
+interface OrderDetailsProps {
+  setOrderState: (orderUuid: string, state: string) => void;
+  stateChangeStatus: StatusChange;
+  shouldRenderApproveButton?: boolean;
+}
 
 interface OrderDetailsState {
   orderDetails: State;
@@ -18,7 +25,7 @@ interface OrderDetailsState {
   loaded: boolean;
 }
 
-class OrderDetails extends React.Component<TranslateProps, OrderDetailsState> {
+export class OrderDetails extends React.Component<OrderDetailsProps & TranslateProps, OrderDetailsState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,6 +37,12 @@ class OrderDetails extends React.Component<TranslateProps, OrderDetailsState> {
 
   componentDidMount() {
     this.loadData();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.stateChangeStatus !== this.props.stateChangeStatus) {
+      this.loadData();
+    }
   }
 
   async loadData() {
@@ -53,6 +66,14 @@ class OrderDetails extends React.Component<TranslateProps, OrderDetailsState> {
     }
   }
 
+  renderApproveButton = () => {
+    return this.props.shouldRenderApproveButton && this.state.orderDetails.state === 'Approve';
+  }
+
+  setOrderState = () => {
+    this.props.setOrderState($state.params.order_uuid, 'executing');
+  }
+
   render() {
     if (this.state.loading) {
       return <LoadingSpinner/>;
@@ -74,6 +95,13 @@ class OrderDetails extends React.Component<TranslateProps, OrderDetailsState> {
             items={this.state.orderDetails.items}
             editable={false}
           />
+          <div className="pull-right">
+            {this.renderApproveButton() &&
+              <ApproveButton
+                submitting={this.props.stateChangeStatus.processing}
+                onClick={this.setOrderState}/>
+            }
+          </div>
         </div>
         <div className="col-xl-3 col-lg-4">
           <OrderSummary total={this.state.orderDetails.total_cost}/>
@@ -82,5 +110,3 @@ class OrderDetails extends React.Component<TranslateProps, OrderDetailsState> {
     );
   }
 }
-
-export default connectAngularComponent(withTranslation(OrderDetails));

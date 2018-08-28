@@ -29,10 +29,16 @@ export interface Customer {
   owners: User[];
 }
 
+interface Permission {
+  user_uuid: string;
+  role: string;
+}
+
 export interface Project {
   name: string;
   uuid: string;
   url: string;
+  permissions: Permission[];
 }
 
 export interface Workspace {
