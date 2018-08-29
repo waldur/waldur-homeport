@@ -38,7 +38,6 @@ export interface Offering {
   uuid?: string;
   thumbnail: string;
   name: string;
-  subtitle: string;
   rating: number;
   order_item_count: number;
   reviews: number;

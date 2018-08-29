@@ -25,6 +25,7 @@
     padding: 18px;
     padding-top: 0px;
     text-align: center;
+    min-height: 100px; //to make sure all cards have the same height regardless content.
   }
 
   .offering-title {
@@ -33,7 +34,7 @@
     font-weight: normal;
   }
 
-  .offering-subtitle {
+  .offering-description {
     width: 100%;
     margin-bottom: 10px;
     font-size: 12px;
