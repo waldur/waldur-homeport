@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { InjectedFormProps } from 'redux-form';
 
 import { ENV } from '@waldur/core/services';
 import { required, getLatinNameValidators } from '@waldur/core/validators';
@@ -8,23 +7,19 @@ import {
   StringField,
   TextField,
   SelectField,
-  SecretField
+  SecretField,
 } from '@waldur/form-react';
 import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { LabelField } from '@waldur/form-react/LabelField';
 import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
+import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { OpenStackAllocationPool } from './OpenStackAllocationPool';
 import { OpenStackSubnetField } from './OpenStackSubnetField';
 
 export const DEFAULT_SUBNET_CIDR = '192.168.X.0/24';
 
-interface OpenStackPackageFormProps extends InjectedFormProps {
-  offering: Offering;
-}
-
-export class OpenStackPackageForm extends React.Component<OpenStackPackageFormProps> {
+export class OpenStackPackageForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
     this.props.initialize({ attributes: {subnet_cidr: '42' }});
   }

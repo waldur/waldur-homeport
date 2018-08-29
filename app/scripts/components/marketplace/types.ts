@@ -1,4 +1,7 @@
+import { InjectedFormProps } from 'redux-form';
+
 import { Customer } from '@waldur/customer/types';
+import { Offering } from '@waldur/marketplace/types';
 
 export interface GeolocationPoint {
   latitude: number;
@@ -13,6 +16,22 @@ export interface Plan {
   description: string;
   unit_price: number;
   unit: string;
+}
+
+export interface OptionField {
+  type?: string;
+  label: string;
+  help_text?: string;
+  required?: boolean;
+  choices?: string[];
+  default?: boolean | string | number;
+  min?: number;
+  max?: number;
+}
+
+export interface OfferingOptions {
+  order: string[];
+  options: {[key: string]: OptionField};
 }
 
 export interface Offering {
@@ -34,6 +53,7 @@ export interface Offering {
   customer_uuid?: string;
   customer_name?: string;
   attributes?: {};
+  options?: OfferingOptions;
   plans?: Plan[];
   type: string;
 }
@@ -87,4 +107,8 @@ export interface Provider extends Customer {
   logo?: string;
   description?: string;
   service_offerings?: Offering[];
+}
+
+export interface OfferingConfigurationFormProps extends InjectedFormProps {
+  offering: Offering;
 }
