@@ -1418,6 +1418,7 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/marketplace/details/OfferingTabs.tsx
 #: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
+#: app/scripts/components/offering/OfferingConfigurationForm.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js
@@ -3100,6 +3101,7 @@ msgstr ""
 #: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
 #: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
+#: app/scripts/components/offering/OfferingConfigurationForm.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/offering/offerings-list.js
@@ -3987,6 +3989,7 @@ msgstr ""
 msgid "Physical locations"
 msgstr ""
 
+#: app/scripts/components/offering/OfferingConfigurationForm.tsx
 #: app/scripts/components/openstack/OpenStackPackageForm.tsx
 msgid "Plan"
 msgstr ""
@@ -6149,6 +6152,7 @@ msgstr ""
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-create.js
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 #: app/scripts/components/jira/project/jira-project-config.js
+#: app/scripts/components/offering/OfferingConfigurationForm.tsx
 #: app/scripts/components/offering/appstore-offering.js
 #: app/scripts/components/openstack/OpenStackPackageForm.tsx
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
