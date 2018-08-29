@@ -5,14 +5,14 @@ import * as Row from 'react-bootstrap/lib/Row';
 import { FilterBarContainer } from '@waldur/marketplace/common/FilterBarContainer';
 import { OfferingGridContainer } from '@waldur/marketplace/common/OfferingGridContainer';
 
-import FeatureFilterListContainer from './FeatureFilterListContainer';
+import AttributeFilterListContainer from './AttributeFilterListContainer';
 import { ShopCategoriesContainer } from './ShopCategoriesContainer';
 
 export const ShopGrid = () => (
   <Row>
     <Col lg={3}>
       <ShopCategoriesContainer />
-      <FeatureFilterListContainer />
+      <AttributeFilterListContainer />
     </Col>
     <Col lg={9}>
       <div className="m-b-md p-sm gray-bg">

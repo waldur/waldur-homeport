@@ -6,15 +6,15 @@ import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { getCategory } from '@waldur/marketplace/common/api';
 
 import { Section } from '../types';
-import { FeatureFilterList } from './FeatureFilterList';
+import { AttributeFilterList } from './AttributeFilterList';
 
-interface FeatureFilterListContainerState {
+interface AttributeFilterListContainerState {
   sections: Section[];
   loading: boolean;
   loaded: boolean;
 }
 
-class FeatureFilterListContainer extends React.Component<TranslateProps, FeatureFilterListContainerState> {
+class AttributeFilterListContainer extends React.Component<TranslateProps, AttributeFilterListContainerState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,9 +68,9 @@ class FeatureFilterListContainer extends React.Component<TranslateProps, Feature
     }
 
     return (
-      <FeatureFilterList sections={this.state.sections}/>
+      <AttributeFilterList sections={this.state.sections}/>
     );
   }
 }
 
-export default withTranslation(FeatureFilterListContainer);
+export default withTranslation(AttributeFilterListContainer);

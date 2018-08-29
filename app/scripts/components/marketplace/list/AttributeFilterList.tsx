@@ -4,18 +4,18 @@ import { Field, reduxForm } from 'redux-form';
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { Section } from '@waldur/marketplace/types';
 
-interface FeatureFilterListProps {
+interface AttributeFilterListProps {
   sections: Section[];
 }
 
-interface FeatureFilterProps {
+interface AttributeFilterProps {
   section: Section;
 }
 
-const PureFeatureFilterList = props => (
+const PureAttributeFilterList = props => (
   <form>
     {props.sections.map((section, index) => (
-      <FeatureFilter key={index} section={section}/>
+      <AttributeFilter key={index} section={section}/>
     ))}
   </form>
 );
@@ -26,7 +26,7 @@ const renderSection = section => {
   }
 };
 
-const FeatureFilter = (props: FeatureFilterProps) => (
+const AttributeFilter = (props: AttributeFilterProps) => (
   renderSection(props.section) &&
   (
     <section className="m-t-md">
@@ -40,10 +40,11 @@ const FeatureFilter = (props: FeatureFilterProps) => (
             {attribute.options.map((option, index) => (
               <div key={index} className="m-l-sm">
                 <Field
+                  key={index}
                   name={`${attribute.key}-${index}`}
                   component={prop =>
                     <AwesomeCheckbox
-                      id={`filter-item-${option.key}`}
+                      id={`filter-item-${option.key}-${outerIndex}`}
                       label={option.title}
                       {...prop.input}
                     />
@@ -58,6 +59,6 @@ const FeatureFilter = (props: FeatureFilterProps) => (
   )
 );
 
-export const FeatureFilterList = reduxForm<any, FeatureFilterListProps>({
+export const AttributeFilterList = reduxForm<any, AttributeFilterListProps>({
   form: 'marketplaceFilter',
-})(PureFeatureFilterList);
+})(PureAttributeFilterList);
