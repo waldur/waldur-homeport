@@ -39,6 +39,7 @@ const appstoreOffering = {
         if (!this.offering.terms_of_service) {
           this.createButtonStatus = true;
         }
+        this.wrapOptions();
         this.offering.order.unshift('name', 'description');
         angular.extend(this.offering.options, {
           name: {
@@ -60,6 +61,33 @@ const appstoreOffering = {
         }
         angular.forEach(offering.options, (option, name) => option.name = name);
       }).finally(() => this.loading = false);
+    }
+
+    wrapKey(key) {
+      return `___attribute___${key}`;
+    }
+
+    wrapOptions() {
+      this.keys = Object.keys(this.offering.options);
+      this.offering.options = this.keys.reduce((result, key) => ({
+        ...result,
+        [this.wrapKey(key)]: this.offering.options[key],
+      }), {});
+      this.offering.order = this.keys.map(key => this.wrapKey(key));
+    }
+
+    unwrapOptions() {
+      const offering = {
+        type: this.offeringType,
+        project: this.project.url,
+        name: this.model.name,
+        description: this.model.description,
+        attributes: {},
+      };
+      this.keys.forEach(key => {
+        offering.attributes[key] = this.model[this.wrapKey(key)];
+      });
+      return offering;
     }
 
     toggleCreateBtnStatus() {
@@ -90,10 +118,7 @@ const appstoreOffering = {
     }
 
     save() {
-      const offering = angular.extend({
-        type: this.offeringType,
-        project: this.project.url,
-      }, this.model);
+      const offering = this.unwrapOptions();
       return this.offeringsService.createOffering(offering).then(offering => {
         this.$state.go('offeringDetails', {uuid: offering.uuid});
       }, response => {
