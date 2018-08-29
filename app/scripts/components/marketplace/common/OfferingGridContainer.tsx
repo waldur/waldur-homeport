@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { $state } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { TranslateProps } from '@waldur/i18n';
 import { getOfferings } from '@waldur/marketplace/common/api';
@@ -36,6 +37,7 @@ export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProp
   async loadData(filterQuery?) {
     const options = {
       params: {
+        category_uuid: $state.params.category_uuid,
         ...filterQuery,
       },
     };
