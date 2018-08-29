@@ -22,16 +22,16 @@ export const OfferingCard = (props: OfferingCardProps) => (
       <img src={props.offering.thumbnail}/>
     </Link>
     <div className="offering-card-body">
-      <h3 className="offering-title">
+      <h3 className="offering-title ellipsis">
         <Link
           state="marketplace-offering"
           params={{offering_uuid: props.offering.uuid}}>
           {props.offering.name}
         </Link>
       </h3>
-      {props.offering.subtitle && (
-        <div className="offering-subtitle ellipsis">
-          {props.offering.subtitle}
+      {props.offering.description && (
+        <div className="offering-description ellipsis">
+          {props.offering.description}
         </div>
       )}
       {props.offering.rating && (
