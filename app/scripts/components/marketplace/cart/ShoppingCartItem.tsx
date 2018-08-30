@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
+import { translate } from '@waldur/i18n';
 
 import './ShoppingCartItem.scss';
 import { OrderItem } from './types';
@@ -29,9 +30,11 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
               {props.item.offering_name}
             </Link>
           </h4>
-          <p>
-            <b>Details:</b> {props.item.offering_description}
-          </p>
+          {props.item.offering_description && (
+            <p>
+              <b>{translate('Details')}:</b> {props.item.offering_description}
+            </p>
+          )}
         </div>
       </div>
     </td>
@@ -42,7 +45,7 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
       <td className="text-center">
         <span className="btn-group">
           <a className="btn btn-outline btn-success">
-            Edit
+            {translate('Edit')}
           </a>
         </span>
       </td>

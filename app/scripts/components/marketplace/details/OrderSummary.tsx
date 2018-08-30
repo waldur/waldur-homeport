@@ -28,7 +28,7 @@ const getOrderItem = (props: OrderSummaryProps) => {
   return {
     offering: props.offering,
     plan: props.formData ? props.formData.plan : undefined,
-    attributes: props.formData ? serializer(props.formData.attributes) : undefined,
+    attributes: props.formData ? serializer(props.formData.attributes, props.offering) : undefined,
   };
 };
 
