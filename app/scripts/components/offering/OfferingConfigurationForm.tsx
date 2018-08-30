@@ -35,14 +35,31 @@ export const OfferingConfigurationForm = (props: OfferingConfigurationFormProps)
       />
       {props.offering.options.order.map(key => {
         const options = props.offering.options.options[key];
+        if (!options) {
+          return null;
+        }
+        let OptionField = StringField;
+        let params = {};
+        switch (options.type) {
+          case 'text':
+            OptionField = TextField;
+            break;
+
+          case 'select_string':
+            OptionField = SelectField;
+            const choices = options.choices.map(item => ({label: item, value: item}));
+            params = {options: choices};
+            break;
+        }
         return (
-          <StringField
+          <OptionField
             key={key}
             label={options.label}
             name={`attributes.${key}`}
             tooltip={options.help_text}
             required={options.required}
             validate={options.required ? required : undefined}
+            {...params}
           />
         );
       })}
