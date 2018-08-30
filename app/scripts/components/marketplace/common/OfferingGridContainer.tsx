@@ -7,6 +7,7 @@ import { $state } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { TranslateProps } from '@waldur/i18n';
 import { getOfferings } from '@waldur/marketplace/common/api';
+import { FilterQuery } from '@waldur/marketplace/offerings/types';
 import { Offering } from '@waldur/marketplace/types';
 
 import { selectFilterQuery } from '../offerings/store/selectors';
@@ -19,15 +20,30 @@ interface OfferingGridWrapperState {
 }
 
 interface OfferingGridWrapperProps {
-  filterQuery: string;
+  filterQuery: FilterQuery;
 }
 
 export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProps & TranslateProps, OfferingGridWrapperState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+      loading: true,
+      loaded: false,
+    };
+  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.filterQuery !== this.props.filterQuery) {
       this.loadData(this.props.filterQuery);
     }
+  }
+
+  shouldComponentUpdate(_, nextState) {
+    if (nextState.items.length !== this.state.items.length) {
+      return true;
+    }
+    return false;
   }
 
   componentDidMount() {
@@ -42,11 +58,6 @@ export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProp
       },
     };
     try {
-      this.setState({
-        items: [],
-        loading: true,
-        loaded: false,
-      });
       const offerings = await getOfferings(options);
       this.setState({
         items: offerings,
