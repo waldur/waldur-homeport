@@ -13,18 +13,21 @@ const formatIntField = value => value ? value.toString() : '';
 interface AttrType {
   fieldName?: string;
   type?: string;
+  fieldType?: string;
   min?: number;
   parse?: any;
   format?: any;
   component?: any;
+  normalize?: (v: string) => string;
 }
 
-const configAttrField = attribute => {
+export const configAttrField = attribute => {
   let attr: AttrType = {};
   switch (attribute.type) {
     case 'integer':
       attr = {
         fieldName: attribute.key,
+        fieldType: 'number',
         type: 'number',
         min: 0,
         parse: parseIntField,
@@ -34,6 +37,7 @@ const configAttrField = attribute => {
     case 'choice':
       attr = {
         fieldName: attribute.key,
+        fieldType: 'choice',
         component: componentProp => (
           <Select
             value={componentProp.input.value}
@@ -44,10 +48,12 @@ const configAttrField = attribute => {
             simpleValue={true}
           />
         ),
+        normalize: v => v ? v : '',
       };
       break;
     case 'boolean':
       attr = {
+        fieldType: 'boolean',
         component: componentProp => attribute.options.map((option, index) => (
           <AwesomeCheckbox
             key={index}
