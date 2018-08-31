@@ -1,3 +1,5 @@
+import { Offering, Plan } from '@waldur/marketplace/types';
+
 export type OrderState = 'Configure' | 'Approve' | 'Review';
 
 export interface State {
@@ -18,4 +20,10 @@ export interface OrderItem {
 export interface Order {
   project: string;
   items: OrderItem[];
+}
+
+export interface NewOrderItem {
+  offering: Offering;
+  plan?: Plan;
+  attributes?: {[key: string]: any};
 }
