@@ -41,7 +41,13 @@ function* clearCart() {
   localStorage.removeItem('shoppingCart');
 }
 
+function* addItem() {
+  yield put(showSuccess(translate('Order item has been created.')));
+  yield $state.go('marketplace-checkout');
+}
+
 export default function*() {
+  yield takeEvery(constants.ADD_ITEM, addItem);
   yield takeEvery(constants.CREATE_ORDER, createOrder);
   yield takeEvery([constants.ADD_ITEM, constants.REMOVE_ITEM], syncCart);
   yield takeEvery(constants.CLEAR_CART, clearCart);
