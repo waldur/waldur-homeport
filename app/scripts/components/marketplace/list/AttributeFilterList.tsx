@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { AwesomeCheckBoxGroup } from '@waldur/form-react/AwesomeCheckboxGroup';
+import { configAttrField } from '@waldur/marketplace/offerings/OfferingAttributes';
 import { Section } from '@waldur/marketplace/types';
 
 interface AttributeFilterListProps {
@@ -26,38 +27,44 @@ const renderSection = section => {
   }
 };
 
-const AttributeFilter = (props: AttributeFilterProps) => (
-  renderSection(props.section) &&
-  (
+const renderAttribute = attribute => !!attribute.options.length;
+
+const AttributeFilter = (props: AttributeFilterProps) => {
+  return renderSection(props.section) && (
     <section className="m-t-md">
       <h3 className="shopping-cart-sidebar-title">
         {props.section.title}
       </h3>
-      {props.section.attributes.map((attribute, outerIndex) => (
-        (!!attribute.options.length && attribute.type === 'list' &&
-          <span key={outerIndex}>
-            <h4>{attribute.title}</h4>
-            {attribute.options.map((option, index) => (
-              <div key={index} className="m-l-sm">
-                <Field
-                  key={index}
-                  name={`${attribute.key}-${index}`}
-                  component={prop =>
-                    <AwesomeCheckbox
-                      id={`filter-item-${option.key}-${outerIndex}`}
-                      label={option.title}
-                      {...prop.input}
-                    />
-                  }
-                  normalize={v => v ? option.key : ''}
-                />
-              </div>)
-            )}
-          </span>)
-      ))}
+      {
+        props.section.attributes.map((attribute, outerIndex) => {
+          if (renderAttribute(attribute)) {
+            const attr = configAttrField(attribute);
+            return (
+              <span key={outerIndex}>
+                <h4>{attribute.title}</h4>
+                {
+                  attribute.type === 'list' ?
+                    <AwesomeCheckBoxGroup
+                      outerIndex={outerIndex}
+                      fieldName={attribute.key}
+                      options={attribute.options}
+                    /> :
+                  <Field
+                    key={outerIndex}
+                    name={`${attr.fieldType}-${attr.fieldName}-${outerIndex}`}
+                    component="input"
+                    className="form-control"
+                    {...attr}
+                  />
+                }
+              </span>
+            );
+          }
+        })
+      }
     </section>
-  )
-);
+  );
+};
 
 export const AttributeFilterList = reduxForm<any, AttributeFilterListProps>({
   form: 'marketplaceFilter',

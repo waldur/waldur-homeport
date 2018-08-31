@@ -82,11 +82,16 @@ export const formatAttributesFilter = query => {
   if (query) {
     const formattedQuery = {};
     Object.keys(query).forEach(key => {
-      const attributeKey = key.split('-')[0];
-      if (Object.keys(formattedQuery).indexOf(attributeKey) === -1) {
-        formattedQuery[attributeKey] = [query[key]];
+      const attributeType = key.split('-')[0];
+      const attributeKey = key.split('-')[1];
+      if (attributeType === 'list') {
+        if (Object.keys(formattedQuery).indexOf(attributeKey) === -1) {
+          formattedQuery[attributeKey] = [query[key]];
+        } else {
+          formattedQuery[attributeKey].push(query[key]);
+        }
       } else {
-        formattedQuery[attributeKey].push(query[key]);
+        formattedQuery[attributeKey] = query[key];
       }
     });
     return formattedQuery;
