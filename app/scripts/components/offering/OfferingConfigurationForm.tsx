@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { required, getLatinNameValidators } from '@waldur/core/validators';
 import { FormContainer, TextField, StringField, SelectField } from '@waldur/form-react';
+import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
@@ -50,6 +51,10 @@ export const OfferingConfigurationForm = (props: OfferingConfigurationFormProps)
             const choices = options.choices.map(item => ({label: item, value: item}));
             params = {options: choices};
             break;
+
+          case 'boolean':
+            OptionField = AwesomeCheckboxField;
+            params = {hideLabel: true};
         }
         return (
           <OptionField
