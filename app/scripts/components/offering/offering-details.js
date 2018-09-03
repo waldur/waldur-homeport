@@ -51,8 +51,8 @@ const offeringDetails = {
             workspace: WOKSPACE_NAMES.project,
           });
         })
-        .then(() => this.offeringsService.getConfiguration().then(configs => {
-          this.offeringConfig = configs[this.offering.type];
+        .then(() => this.offeringsService.getOffering(this.offering.template_uuid).then(template => {
+          this.offeringConfig = template.config;
         }))
         .then(() => this.refreshBreadcrumbs())
         .catch(() => {
