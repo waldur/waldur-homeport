@@ -3,12 +3,12 @@ import { Offering, Plan } from '@waldur/marketplace/types';
 export type OrderState = 'Configure' | 'Approve' | 'Review';
 
 export interface State {
-  items: OrderItem[];
+  items: OrderItemResponse[];
   state: OrderState;
   total_cost?: number;
 }
 
-export interface OrderItem {
+export interface OrderItemResponse {
   uuid: string;
   offering_uuid: string;
   offering_name: string;
@@ -19,10 +19,10 @@ export interface OrderItem {
 
 export interface Order {
   project: string;
-  items: OrderItem[];
+  items: OrderItemResponse[];
 }
 
-export interface NewOrderItem {
+export interface OrderItemRequest {
   offering: Offering;
   plan?: Plan;
   attributes?: {[key: string]: any};
