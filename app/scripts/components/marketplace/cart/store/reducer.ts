@@ -15,10 +15,9 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         items: [...state.items, payload.item],
       };
     case constants.REMOVE_ITEM:
-      const index = state.items.indexOf(payload.item);
       return {
         ...state,
-        items: [...state.items.slice(0, index), ...state.items.slice(index + 1)],
+        items: state.items.filter(item => item.offering.uuid !== payload.item.offering_uuid),
       };
     case constants.SET_CART:
       return {

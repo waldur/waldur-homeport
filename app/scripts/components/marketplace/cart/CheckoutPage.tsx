@@ -18,6 +18,7 @@ interface CheckoutPageProps {
   state: OrderState;
   setState(state: OrderState): void;
   createOrder(): void;
+  removeShoppingCartItem(item: OrderItemResponse): void;
 }
 
 const PureCheckoutPage = (props: CheckoutPageProps) => (
@@ -25,7 +26,10 @@ const PureCheckoutPage = (props: CheckoutPageProps) => (
     <div className="row">
       <div className="col-xl-9 col-lg-8">
         <ShoppingCartSteps state={props.state}/>
-        <ShoppingCart items={props.items} editable={props.state === 'Configure'}/>
+        <ShoppingCart
+          items={props.items}
+          onShoppingCartItemRemove={props.removeShoppingCartItem}
+          editable={props.state === 'Configure'}/>
         <ActionButtons
           state={props.state}
           setState={props.setState}
@@ -51,6 +55,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setState: actions.setState,
   createOrder: actions.createOrder,
+  removeShoppingCartItem: actions.removeItem,
 };
 
 export const CheckoutPage = connect(mapStateToProps, mapDispatchToProps)(PureCheckoutPage);

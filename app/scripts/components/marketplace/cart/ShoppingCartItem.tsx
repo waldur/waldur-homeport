@@ -10,6 +10,7 @@ import { OrderItemResponse } from './types';
 interface ShoppingCartItemProps {
   item: OrderItemResponse;
   editable: boolean;
+  onRemove(): void;
 }
 
 export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
@@ -41,14 +42,17 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
     <td className="text-center text-lg">
       {defaultCurrency(props.item.cost)}
     </td>
-    {props.editable && (
-      <td className="text-center">
-        <span className="btn-group">
-          <a className="btn btn-outline btn-success">
+    <td className="text-center">
+      <span className="btn-group">
+        {props.editable && (
+          <a className="btn btn-outline btn-success m-r-xs">
             {translate('Edit')}
           </a>
-        </span>
-      </td>
-    )}
+        )}
+        <a className="btn btn-outline btn-danger" onClick={props.onRemove}>
+          {translate('Remove')}
+        </a>
+      </span>
+    </td>
   </tr>
 );

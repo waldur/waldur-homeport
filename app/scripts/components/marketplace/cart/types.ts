@@ -3,7 +3,7 @@ import { Offering, Plan } from '@waldur/marketplace/types';
 export type OrderState = 'Configure' | 'Approve' | 'Review';
 
 export interface State {
-  items: OrderItemResponse[];
+  items: any[]; // a temporary workaround before the upcoming MR
   state: OrderState;
   total_cost?: number;
 }
