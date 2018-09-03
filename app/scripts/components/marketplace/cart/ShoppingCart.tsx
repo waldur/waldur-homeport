@@ -4,10 +4,10 @@ import { translate } from '@waldur/i18n';
 
 import './ShoppingCart.scss';
 import { ShoppingCartItem } from './ShoppingCartItem';
-import { OrderItem } from './types';
+import { OrderItemResponse } from './types';
 
 interface ShoppingCartProps {
-  items: OrderItem[];
+  items: OrderItemResponse[];
   editable: boolean;
 }
 

@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 
-import { NewOrderItem } from '@waldur/marketplace/cart/types';
+import { OrderItemRequest } from '@waldur/marketplace/cart/types';
 
 import { ShoppingCartButton } from './ShoppingCartButton';
 import { addItem, removeItem } from './store/actions';
 import { hasItem } from './store/selectors';
 
 interface ShoppingCartButtonContainerProps {
-  item: NewOrderItem;
+  item: OrderItemRequest;
   flavor?: string;
   disabled?: boolean;
 }

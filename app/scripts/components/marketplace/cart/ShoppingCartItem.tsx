@@ -5,10 +5,10 @@ import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
 import './ShoppingCartItem.scss';
-import { OrderItem } from './types';
+import { OrderItemResponse } from './types';
 
 interface ShoppingCartItemProps {
-  item: OrderItem;
+  item: OrderItemResponse;
   editable: boolean;
 }
 
