@@ -23,19 +23,18 @@ const appstoreOffering = {
     $onInit() {
       this.summaryComponent = 'appstoreOfferingSummary';
       this.model = {};
-      this.offeringType = this.$stateParams.category;
       this.loading = true;
 
       this.currentStateService.getProject().then(project => {
         this.project = project;
       });
 
-      this.offeringsService.getConfiguration().then(offerings => {
-        const offering = offerings[this.offeringType];
-        if (!offering) {
+      this.offeringsService.getOffering(this.$stateParams.category).then(template => {
+        if (!template) {
           return this.$state.go('errorPage.notFound');
         }
-        this.offering = offering;
+        this.offering = angular.extend({}, template.config);
+        this.template = template;
         if (!this.offering.terms_of_service) {
           this.createButtonStatus = true;
         }
@@ -59,7 +58,7 @@ const appstoreOffering = {
         if (this.offering.prefill_name) {
           this.model.name = this.offering.label;
         }
-        angular.forEach(offering.options, (option, name) => option.name = name);
+        angular.forEach(this.offering.options, (option, name) => option.name = name);
       }).finally(() => this.loading = false);
     }
 
@@ -78,7 +77,7 @@ const appstoreOffering = {
 
     unwrapOptions() {
       const offering = {
-        type: this.offeringType,
+        template: this.template.url,
         project: this.project.url,
         name: this.model.name,
         description: this.model.description,

@@ -1,3 +1,5 @@
+import { getAll, getById } from '@waldur/core/api';
+
 // @ngInject
 export default function offeringsService(baseServiceClass, $http, ENV) {
   let ServiceClass = baseServiceClass.extend({
@@ -7,9 +9,11 @@ export default function offeringsService(baseServiceClass, $http, ENV) {
     },
 
     getConfiguration: function() {
-      const endpoint = 'api/support-offerings/configured/';
-      return $http.get(ENV.apiEndpoint + endpoint)
-        .then(response => response.data);
+      return getAll('/support-offering-templates/');
+    },
+
+    getOffering: function(id) {
+      return getById('/support-offering-templates/', id);
     },
 
     createOffering: function(offering) {
