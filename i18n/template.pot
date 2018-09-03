@@ -4795,6 +4795,7 @@ msgid "Remote network"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plans-list.js
+#: app/scripts/components/marketplace/cart/ShoppingCartItem.tsx
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/provider-list.js
 #: app/scripts/components/team/customer-users-list.js

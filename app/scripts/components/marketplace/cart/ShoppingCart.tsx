@@ -9,6 +9,7 @@ import { OrderItemResponse } from './types';
 interface ShoppingCartProps {
   items: OrderItemResponse[];
   editable: boolean;
+  onShoppingCartItemRemove?(item: OrderItemResponse): void;
 }
 
 export const ShoppingCart = (props: ShoppingCartProps) => (
@@ -28,6 +29,7 @@ export const ShoppingCart = (props: ShoppingCartProps) => (
               key={index}
               item={item}
               editable={props.editable}
+              onRemove={() => props.onShoppingCartItemRemove(item)}
             />
           ))}
         </tbody>
