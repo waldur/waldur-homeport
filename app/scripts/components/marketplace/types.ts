@@ -111,3 +111,9 @@ export interface Provider extends Customer {
 export interface OfferingConfigurationFormProps extends InjectedFormProps {
   offering: Offering;
 }
+
+export interface PlanComponent {
+  type: string;
+  label: string;
+  units: string;
+}
