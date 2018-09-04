@@ -210,12 +210,12 @@ msgstr ""
 msgid "Add offering"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
-msgid "Add offering flavor"
-msgstr ""
-
 #: app/scripts/components/user/list/CustomerCreateButton.tsx
 msgid "Add organization"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/PlanAddButton.tsx
+msgid "Add plan"
 msgstr ""
 
 #: app/scripts/components/resource/list/resource-private-clouds-list.js
@@ -351,6 +351,7 @@ msgstr ""
 msgid "Amazon EC2 provider"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/OfferingPlanComponents.tsx
 #: app/scripts/components/payments/payment-list.js
 msgid "Amount"
 msgstr ""
@@ -496,10 +497,6 @@ msgstr ""
 
 #: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
 msgid "Attachments"
-msgstr ""
-
-#: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
-msgid "Attributes"
 msgstr ""
 
 #: app/scripts/components/offering/OfferingTabs.tsx
@@ -693,6 +690,10 @@ msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 msgid "Billing details"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/PriceUnitField.tsx
+msgid "Billing period"
 msgstr ""
 
 #: app/scripts/components/dashboard/base-quotas.ts
@@ -3100,9 +3101,9 @@ msgstr ""
 #: app/scripts/components/jira/project/JiraProjectSummary.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/jira/project/jira-projects-list.js
-#: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
 #: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
+#: app/scripts/components/marketplace/offerings/PlanForm.tsx
 #: app/scripts/components/offering/OfferingConfigurationForm.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
@@ -3559,12 +3560,8 @@ msgstr ""
 msgid "Offering events"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
-msgid "Offering flavor #{index}"
-msgstr ""
-
-#: app/scripts/components/marketplace/offerings/OfferingCreateContainer.tsx
-msgid "Offering has been created"
+#: app/scripts/components/marketplace/offerings/utils.ts
+msgid "Offering has been created."
 msgstr ""
 
 #: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
@@ -4000,6 +3997,10 @@ msgstr ""
 msgid "Plan"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/OfferingPlans.tsx
+msgid "Plan #{index}"
+msgstr ""
+
 #: app/scripts/components/experts/requests/create/expert-request-create.js
 msgid "Planned budget"
 msgstr ""
@@ -4177,7 +4178,8 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/marketplace/cart/ShoppingCart.tsx
 #: app/scripts/components/marketplace/details/OrderSummary.tsx
-#: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
+#: app/scripts/components/marketplace/offerings/OfferingPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/PriceField.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Price"
@@ -4826,16 +4828,16 @@ msgstr ""
 msgid "Remove from comparison"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
-msgid "Remove offering flavor"
-msgstr ""
-
 #: app/scripts/components/customer/details/customer-manage.html
 msgid "Remove organization"
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
 msgid "Remove package"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/PlanRemoveButton.tsx
+msgid "Remove plan"
 msgstr ""
 
 #: app/scripts/components/user/support/UserEditForm.tsx
@@ -6353,7 +6355,7 @@ msgstr ""
 msgid "Unable to create link."
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingCreateContainer.tsx
+#: app/scripts/components/marketplace/offerings/utils.ts
 msgid "Unable to create offering."
 msgstr ""
 
@@ -6565,6 +6567,10 @@ msgstr ""
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
 msgid "Unit price"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/OfferingPlanComponents.tsx
+msgid "Units"
 msgstr ""
 
 #: app/scripts/components/analytics/ResourceAnalysisItem.tsx
