@@ -7,7 +7,7 @@
     </div>
     <ul class="nav navbar-top-links pull-right">
       <li ng-if="$ctrl.isValidUser">
-        <a back-button>
+        <a ng-click="$ctrl.goBack()">
           <i class="fa fa-arrow-left"></i>
           <span translate>Back</span>
         </a>
