@@ -1,3 +1,4 @@
+import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { OfferingConfigurationForm } from '@waldur/offering/OfferingConfigurationForm';
 
@@ -27,6 +28,9 @@ const serializer = (attributes, offering) => {
 
 registerOfferingType({
   type: 'Support.OfferingTemplate',
+  get label() {
+    return translate('Request-based item');
+  },
   component: OfferingConfigurationForm,
   serializer,
 });

@@ -3672,6 +3672,10 @@ msgstr ""
 msgid "OpenStack events"
 msgstr ""
 
+#: app/scripts/components/openstack/marketplace.ts
+msgid "OpenStack package"
+msgstr ""
+
 #: app/scripts/components/openstack/events.ts
 msgid "OpenStack package {tenant_link} has been created."
 msgstr ""
@@ -4955,6 +4959,10 @@ msgstr ""
 #: app/scripts/components/issues/create/issue-create-dialog.js
 #: app/scripts/components/issues/create/issue-quick-create.js
 msgid "Request {requestId} has been created."
+msgstr ""
+
+#: app/scripts/components/offering/marketplace.ts
+msgid "Request-based item"
 msgstr ""
 
 #: app/scripts/components/customer/CustomerList.tsx
@@ -6281,6 +6289,7 @@ msgstr ""
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/jira/project/jira-projects-list.js
+#: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/offerings-list.js
 #: app/scripts/components/openstack/openstack-network/OpenStackNetworkSummary.tsx
