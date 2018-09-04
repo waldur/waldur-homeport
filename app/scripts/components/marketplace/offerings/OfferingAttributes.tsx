@@ -11,9 +11,7 @@ const parseIntField = value => parseInt(value, 10) || 0;
 const formatIntField = value => value ? value.toString() : '';
 
 interface AttrType {
-  fieldName?: string;
   type?: string;
-  fieldType?: string;
   min?: number;
   parse?: any;
   format?: any;
@@ -26,8 +24,6 @@ export const configAttrField = attribute => {
   switch (attribute.type) {
     case 'integer':
       attr = {
-        fieldName: attribute.key,
-        fieldType: 'number',
         type: 'number',
         min: 0,
         parse: parseIntField,
@@ -36,8 +32,6 @@ export const configAttrField = attribute => {
       break;
     case 'choice':
       attr = {
-        fieldName: attribute.key,
-        fieldType: 'choice',
         component: componentProp => (
           <Select
             value={componentProp.input.value}
@@ -53,7 +47,6 @@ export const configAttrField = attribute => {
       break;
     case 'boolean':
       attr = {
-        fieldType: 'boolean',
         component: componentProp => attribute.options.map((option, index) => (
           <AwesomeCheckbox
             key={index}
@@ -62,11 +55,9 @@ export const configAttrField = attribute => {
           />
         )),
       };
-      attribute.options.map(o => attr.fieldName = o.key);
       break;
     default:
       attr = {
-        fieldName: attribute.key,
         type: 'text',
       };
   }
@@ -93,7 +84,7 @@ export const OfferingAttributes = props =>
             <div className="col-sm-5">
               <Field
                 key={attributeIndex}
-                name={`attributes.${attr.fieldName}`}
+                name={`attributes.${attribute.key}`}
                 component="input"
                 className="form-control"
                 {...attr}

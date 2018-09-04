@@ -51,7 +51,7 @@ const AttributeFilter = (props: AttributeFilterProps) => {
                     /> :
                   <Field
                     key={outerIndex}
-                    name={`${attr.fieldType}-${attr.fieldName}-${outerIndex}`}
+                    name={`${attribute.type}-${attribute.key}-${outerIndex}`}
                     component="input"
                     className="form-control"
                     {...attr}

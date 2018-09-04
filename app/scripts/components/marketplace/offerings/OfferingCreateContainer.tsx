@@ -7,6 +7,7 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { $state } from '@waldur/core/services';
 import { withTranslation, translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
+import { getOfferingTypes } from '@waldur/marketplace/common/registry';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -25,6 +26,7 @@ const OfferingCreateController = props => (
         ...request,
         category: request.category.url,
         customer: props.customer.url,
+        type: request.type.value,
         attributes: JSON.stringify(request.attributes),
       };
       return api.createOffering(params).then(() => {
@@ -38,6 +40,7 @@ const OfferingCreateController = props => (
       });
     }}
     gotoOfferingList={() => $state.go('marketplace-vendor-offerings')}
+    offeringTypes={getOfferingTypes()}
     {...props}
   />
 );

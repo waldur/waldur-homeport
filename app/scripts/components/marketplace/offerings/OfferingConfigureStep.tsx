@@ -4,6 +4,7 @@ import { FieldArray, Field } from 'redux-form';
 import {
   SelectAsyncField,
   FormContainer,
+  SelectField,
 } from '@waldur/form-react';
 import { withTranslation } from '@waldur/i18n';
 
@@ -97,6 +98,12 @@ export const OfferingConfigureStep = props => (
       labelClass="col-sm-3"
       controlClass="col-sm-9"
       clearOnUnmount={false}>
+      <SelectField
+        name="type"
+        label={props.translate('Type')}
+        required={true}
+        options={props.offeringTypes}
+      />
       <SelectAsyncField
         name="category"
         label={props.translate('Category')}
