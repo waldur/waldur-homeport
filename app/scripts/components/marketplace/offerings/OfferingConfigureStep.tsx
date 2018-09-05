@@ -23,6 +23,7 @@ export const OfferingConfigureStep = props => (
         label={props.translate('Type')}
         required={true}
         options={props.offeringTypes}
+        clearable={false}
       />
       <SelectAsyncField
         name="category"
@@ -31,6 +32,7 @@ export const OfferingConfigureStep = props => (
         required={true}
         labelKey="title"
         valueKey="url"
+        clearable={false}
       />
     </FormContainer>
     {props.category && <OfferingAttributes {...props}/>}
