@@ -105,13 +105,13 @@ export const OptionForm = connector(withTranslation((props: OptionFormProps) => 
         <StringField option={props.option} name="choices"/>
       </FormGroup>
     )}
-    <FormGroup label={props.translate('Default value')}>
-      <StringField option={props.option} name="default"/>
-    </FormGroup>
     {props.type === 'string' && (
-      <FormGroup>
-        <RequiredField option={props.option}/>
+      <FormGroup label={props.translate('Default value')}>
+        <StringField option={props.option} name="default"/>
       </FormGroup>
     )}
+    <FormGroup>
+      <RequiredField option={props.option}/>
+    </FormGroup>
   </>
 )));
