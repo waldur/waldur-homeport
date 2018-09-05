@@ -27,6 +27,25 @@ const formatPlan = plan => {
   return result;
 };
 
+const formatOptions = options => ({
+  order: options.map(option => option.name),
+  options: options.reduce((result, option) => {
+    const {name, type, ...rest} = option;
+    const item = {
+      type: type.value,
+      ...rest,
+    };
+    // Split comma-separated list, strip spaces, omit empty items
+    if (option.choices) {
+      item.choices = option.choices.split(',').map(s => s.trim()).filter(s => s.length > 0).sort();
+    }
+    return {
+      ...result,
+      [name]: item,
+    };
+  }, {}),
+});
+
 const formatOfferingRequest = (request, customer) => {
   const result = {
     ...request,
@@ -39,6 +58,9 @@ const formatOfferingRequest = (request, customer) => {
   }
   if (request.plans) {
     result.plans = request.plans.map(formatPlan);
+  }
+  if (request.options) {
+    result.options = formatOptions(request.options);
   }
   return result;
 };
@@ -81,6 +103,6 @@ export const connectPlanComponents = connect<any, any, {plan: string}>((state, o
       return {components, total: 0};
     }
   } else {
-    return null;
+    return {};
   }
 });

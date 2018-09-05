@@ -6,7 +6,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { $state } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
-import { getOfferingTypes } from '@waldur/marketplace/common/registry';
+import { getOfferingTypes, showOfferingOptions } from '@waldur/marketplace/common/registry';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -28,11 +28,18 @@ const OfferingCreateController = props => (
 
 const selector = formValueSelector(FORM_ID);
 
-const mapStateToProps = state => ({
-  customer: getCustomer(state),
-  category: selector(state, 'category'),
-  step: getStep(state),
-});
+const mapStateToProps = state => {
+  const result: any = {
+    customer: getCustomer(state),
+    category: selector(state, 'category'),
+    step: getStep(state),
+  };
+  const type = selector(state, 'type');
+  if (type) {
+    result.showOptions = showOfferingOptions(type.value);
+  }
+  return result;
+};
 
 const connector = connect(mapStateToProps, { setStep });
 

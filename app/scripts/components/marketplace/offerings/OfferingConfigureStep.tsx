@@ -8,6 +8,7 @@ import {
 } from '@waldur/form-react';
 
 import { OfferingAttributes } from './OfferingAttributes';
+import { OfferingOptions } from './OfferingOptions';
 import { OfferingPlans } from './OfferingPlans';
 
 export const OfferingConfigureStep = props => (
@@ -34,5 +35,6 @@ export const OfferingConfigureStep = props => (
     </FormContainer>
     {props.category && <OfferingAttributes {...props}/>}
     <FieldArray name="plans" component={OfferingPlans} />
+    {props.showOptions && <FieldArray name="options" component={OfferingOptions}/>}
   </>
 );
