@@ -18,3 +18,26 @@ export const PRICE_UNITS = [
     value: 'quantity',
   },
 ];
+
+export const FIELD_TYPES = [
+  {
+    value: 'boolean',
+    label: 'Boolean',
+  },
+  {
+    value: 'integer',
+    label: 'Integer',
+  },
+  {
+    value: 'string',
+    label: 'String',
+  },
+  {
+    value: 'text',
+    label: 'Text',
+  },
+  {
+    value: 'select_string',
+    label: 'Select',
+  },
+];

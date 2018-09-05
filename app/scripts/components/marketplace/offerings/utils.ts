@@ -27,6 +27,22 @@ const formatPlan = plan => {
   return result;
 };
 
+const formatOptions = options => {
+  return {
+    order: options.map(option => option.name),
+    options: options.reduce((result, option) => {
+      const {name, type, ...rest} = option;
+      return {
+        ...result,
+        [name]: {
+          type: type.value,
+          ...rest,
+        },
+      };
+    }, {}),
+  };
+};
+
 const formatOfferingRequest = (request, customer) => {
   const result = {
     ...request,
@@ -39,6 +55,9 @@ const formatOfferingRequest = (request, customer) => {
   }
   if (request.plans) {
     result.plans = request.plans.map(formatPlan);
+  }
+  if (request.options) {
+    result.options = formatOptions(request.options);
   }
   return result;
 };
@@ -81,6 +100,6 @@ export const connectPlanComponents = connect<any, any, {plan: string}>((state, o
       return {components, total: 0};
     }
   } else {
-    return null;
+    return {};
   }
 });

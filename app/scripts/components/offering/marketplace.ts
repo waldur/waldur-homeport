@@ -33,4 +33,5 @@ registerOfferingType({
   },
   component: OfferingConfigurationForm,
   serializer,
+  showOptions: true,
 });

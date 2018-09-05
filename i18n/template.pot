@@ -210,6 +210,10 @@ msgstr ""
 msgid "Add offering"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/OfferingOptions.tsx
+msgid "Add option"
+msgstr ""
+
 #: app/scripts/components/user/list/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr ""
@@ -692,7 +696,7 @@ msgstr ""
 msgid "Billing details"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/PriceUnitField.tsx
+#: app/scripts/components/marketplace/offerings/PlanForm.tsx
 msgid "Billing period"
 msgstr ""
 
@@ -2771,6 +2775,10 @@ msgstr ""
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+msgid "Label"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-dialog.js
 msgid "Large"
 msgstr ""
@@ -3103,6 +3111,7 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
+#: app/scripts/components/marketplace/offerings/OptionForm.tsx
 #: app/scripts/components/marketplace/offerings/PlanForm.tsx
 #: app/scripts/components/offering/OfferingConfigurationForm.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
@@ -3685,6 +3694,10 @@ msgstr ""
 msgid "Opened by"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/OfferingOptions.tsx
+msgid "Option #{index}"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html
 msgid "Or use social login"
 msgstr ""
@@ -4179,7 +4192,7 @@ msgstr ""
 #: app/scripts/components/marketplace/cart/ShoppingCart.tsx
 #: app/scripts/components/marketplace/details/OrderSummary.tsx
 #: app/scripts/components/marketplace/offerings/OfferingPlanComponents.tsx
-#: app/scripts/components/marketplace/offerings/PriceField.tsx
+#: app/scripts/components/marketplace/offerings/PlanForm.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Price"
@@ -4802,6 +4815,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plans-list.js
 #: app/scripts/components/marketplace/cart/ShoppingCartItem.tsx
+#: app/scripts/components/marketplace/offerings/OfferingOptions.tsx
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/provider-list.js
 #: app/scripts/components/team/customer-users-list.js
@@ -6292,6 +6306,7 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/jira/project/jira-projects-list.js
 #: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
+#: app/scripts/components/marketplace/offerings/OptionForm.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/offerings-list.js
 #: app/scripts/components/openstack/openstack-network/OpenStackNetworkSummary.tsx

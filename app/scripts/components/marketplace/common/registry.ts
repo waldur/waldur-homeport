@@ -11,15 +11,12 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
   label: string;
   components?: PlanComponent[];
+  showOptions?: boolean;
 }
 
 export function registerOfferingType(config: OfferingConfiguration) {
-  REGISTRY[config.type] = {
-    component: config.component,
-    serializer: config.serializer,
-    label: config.label,
-    components: config.components,
-  };
+  const {type, ...rest} = config;
+  REGISTRY[type] = rest;
 }
 
 export function getFormComponent(offeringType) {
@@ -39,4 +36,8 @@ export function getOfferingTypes() {
 
 export function getOfferingComponents(offeringType) {
   return REGISTRY[offeringType].components;
+}
+
+export function showOfferingOptions(offeringType) {
+  return REGISTRY[offeringType].showOptions;
 }
