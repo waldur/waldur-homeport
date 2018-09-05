@@ -97,7 +97,7 @@ export const OptionForm = connector(withTranslation((props: OptionFormProps) => 
     <FormGroup label={props.translate('Type')}>
       <OptionTypeField option={props.option}/>
     </FormGroup>
-    {props.type === 'integer' && (
+    {(props.type === 'integer' || props.type === 'money') && (
       <MinMaxFields option={props.option}/>
     )}
     {props.type === 'select_string' && (
@@ -108,8 +108,10 @@ export const OptionForm = connector(withTranslation((props: OptionFormProps) => 
     <FormGroup label={props.translate('Default value')}>
       <StringField option={props.option} name="default"/>
     </FormGroup>
-    <FormGroup>
-      <RequiredField option={props.option}/>
-    </FormGroup>
+    {props.type === 'string' && (
+      <FormGroup>
+        <RequiredField option={props.option}/>
+      </FormGroup>
+    )}
   </>
 )));

@@ -31,6 +31,10 @@ export const FIELD_TYPES: Array<{value: FieldType, label: string}> = [
     label: 'Integer',
   },
   {
+    value: 'money',
+    label: 'Money',
+  },
+  {
     value: 'string',
     label: 'String',
   },
@@ -39,7 +43,15 @@ export const FIELD_TYPES: Array<{value: FieldType, label: string}> = [
     label: 'Text',
   },
   {
+    value: 'html_text',
+    label: 'HTML text',
+  },
+  {
     value: 'select_string',
     label: 'Select',
+  },
+  {
+    value: 'select_openstack_tenant',
+    label: 'Select OpenStack tenant',
   },
 ];
