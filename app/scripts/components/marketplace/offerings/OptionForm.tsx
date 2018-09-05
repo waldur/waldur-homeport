@@ -8,7 +8,7 @@ import { withTranslation, TranslateProps } from '@waldur/i18n';
 
 import { FORM_ID, FIELD_TYPES } from './constants';
 import { FormGroup } from './FormGroup';
-import { FieldType } from '@waldur/marketplace/offerings/types';
+import { FieldType } from './types';
 
 const selector = formValueSelector(FORM_ID);
 
