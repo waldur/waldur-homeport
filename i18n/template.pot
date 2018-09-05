@@ -910,6 +910,10 @@ msgstr ""
 msgid "Checkout summary"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+msgid "Choices as comma-separated list"
+msgstr ""
+
 #: app/scripts/components/auth/saml2/auth-saml2-dialog.html
 msgid "Choose an organization"
 msgstr ""
@@ -1374,6 +1378,10 @@ msgstr ""
 msgid "Default availability zone for provisioned instances."
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+msgid "Default value"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-items.html
 #: app/scripts/components/experts/bids/details/expert-bid-details.html
 #: app/scripts/components/issues/comments/IssueCommentDeleteDialog.tsx
@@ -1423,6 +1431,7 @@ msgstr ""
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/marketplace/details/OfferingTabs.tsx
 #: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
+#: app/scripts/components/marketplace/offerings/OptionForm.tsx
 #: app/scripts/components/offering/OfferingConfigurationForm.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
@@ -3000,6 +3009,10 @@ msgstr ""
 msgid "Maximal valid value is"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+msgid "Maximal value"
+msgstr ""
+
 #: app/scripts/components/freeipa/freeipa-account-create.html
 msgid "Maximum username length with mandatory username prefix is 32 characters."
 msgstr ""
@@ -3042,6 +3055,10 @@ msgstr ""
 
 #: app/scripts/components/customer/details/customer-threshold.html
 msgid "Minimal valid value is 0"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+msgid "Minimal value"
 msgstr ""
 
 #: app/scripts/components/auth/valimo/auth-valimo-dialog.html
@@ -4987,6 +5004,10 @@ msgstr ""
 #: app/scripts/components/offering/sidebar.js
 #: app/scripts/components/offering/table-extension.js
 msgid "Requests"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+msgid "Required"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html

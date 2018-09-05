@@ -11,3 +11,11 @@ export interface Option {
   key: string;
   title: string;
 }
+
+export type FieldType =
+  | 'boolean'
+  | 'integer'
+  | 'string'
+  | 'text'
+  | 'select_string'
+  ;

@@ -12,7 +12,6 @@ const PlanNameField = props => (
   <Field
     name={`${props.plan}.name`}
     type="text"
-    label={props.translate('Name')}
     component="input"
     className="form-control"
   />

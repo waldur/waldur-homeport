@@ -1,3 +1,5 @@
+import { FieldType } from './types';
+
 export const FORM_ID = 'marketplaceOfferingCreate';
 
 export const PRICE_UNITS = [
@@ -19,7 +21,7 @@ export const PRICE_UNITS = [
   },
 ];
 
-export const FIELD_TYPES = [
+export const FIELD_TYPES: Array<{value: FieldType, label: string}> = [
   {
     value: 'boolean',
     label: 'Boolean',

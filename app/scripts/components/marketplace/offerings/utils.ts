@@ -27,21 +27,24 @@ const formatPlan = plan => {
   return result;
 };
 
-const formatOptions = options => {
-  return {
-    order: options.map(option => option.name),
-    options: options.reduce((result, option) => {
-      const {name, type, ...rest} = option;
-      return {
-        ...result,
-        [name]: {
-          type: type.value,
-          ...rest,
-        },
-      };
-    }, {}),
-  };
-};
+const formatOptions = options => ({
+  order: options.map(option => option.name),
+  options: options.reduce((result, option) => {
+    const {name, type, ...rest} = option;
+    const item = {
+      type: type.value,
+      ...rest,
+    };
+    // Split comma-separated list, strip spaces, omit empty items
+    if (option.choices) {
+      item.choices = option.choices.split(',').map(s => s.trim()).filter(s => s.length > 0).sort();
+    }
+    return {
+      ...result,
+      [name]: item,
+    };
+  }, {}),
+});
 
 const formatOfferingRequest = (request, customer) => {
   const result = {
