@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { $state } from '@waldur/core/services';
+
 import { OrderState } from './types';
 
 interface ActionButtonsProps {
@@ -18,6 +20,9 @@ const goForward = (props: ActionButtonsProps) => () => {
 };
 
 const goBack = (props: ActionButtonsProps) => () => {
+  if (props.state === 'Configure') {
+    $state.go('marketplace-landing');
+  }
   if (props.state === 'Approve') {
     props.setState('Configure');
   }
