@@ -33,17 +33,11 @@ export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProp
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.filterQuery !== this.props.filterQuery) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.items.length !== this.state.items.length
+        || prevProps.filterQuery !== this.props.filterQuery) {
       this.loadData(this.props.filterQuery);
     }
-  }
-
-  shouldComponentUpdate(_, nextState) {
-    if (nextState.items.length !== this.state.items.length) {
-      return true;
-    }
-    return false;
   }
 
   componentDidMount() {
@@ -58,6 +52,9 @@ export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProp
       },
     };
     try {
+      this.setState({
+        loading: true,
+      });
       const offerings = await getOfferings(options);
       this.setState({
         items: offerings,
@@ -84,14 +81,17 @@ export const formatAttributesFilter = query => {
     Object.keys(query).forEach(key => {
       const attributeType = key.split('-')[0];
       const attributeKey = key.split('-')[1];
+      const queryKey = query[key];
       if (attributeType === 'list') {
         if (Object.keys(formattedQuery).indexOf(attributeKey) === -1) {
-          formattedQuery[attributeKey] = [query[key]];
+          formattedQuery[attributeKey] = [queryKey];
         } else {
-          formattedQuery[attributeKey].push(query[key]);
+          formattedQuery[attributeKey].push(queryKey);
         }
+      } else if (attributeType === 'boolean') {
+        formattedQuery[attributeKey] = JSON.parse(queryKey);
       } else {
-        formattedQuery[attributeKey] = query[key];
+        formattedQuery[attributeKey] = queryKey;
       }
     });
     return formattedQuery;

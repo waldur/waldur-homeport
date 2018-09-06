@@ -27,7 +27,9 @@ const renderSection = section => {
   }
 };
 
-const renderAttribute = attribute => !!attribute.options.length;
+const SUPPORTED_TYPES = ['choice', 'list', 'boolean'];
+
+const renderAttribute = attribute => SUPPORTED_TYPES.indexOf(attribute.type) !== -1;
 
 const AttributeFilter = (props: AttributeFilterProps) => {
   return renderSection(props.section) && (
@@ -36,30 +38,29 @@ const AttributeFilter = (props: AttributeFilterProps) => {
         {props.section.title}
       </h3>
       {
-        props.section.attributes.map((attribute, outerIndex) => {
-          if (renderAttribute(attribute)) {
-            const attr = configAttrField(attribute);
-            return (
-              <span key={outerIndex}>
-                <h4>{attribute.title}</h4>
-                {
-                  attribute.type === 'list' ?
-                    <AwesomeCheckBoxGroup
-                      outerIndex={outerIndex}
-                      fieldName={attribute.key}
-                      options={attribute.options}
-                    /> :
-                  <Field
-                    key={outerIndex}
-                    name={`${attribute.type}-${attribute.key}-${outerIndex}`}
-                    component="input"
-                    className="form-control"
-                    {...attr}
-                  />
-                }
-              </span>
-            );
-          }
+        props.section.attributes.filter(renderAttribute).map((attribute, outerIndex) => {
+          const attr = configAttrField(attribute);
+          const attrKey = attribute.key;
+          return (
+            <span key={outerIndex}>
+              <h4>{attribute.title}</h4>
+              {
+                attribute.type === 'list' ?
+                  <AwesomeCheckBoxGroup
+                    outerIndex={outerIndex}
+                    fieldName={attribute.key}
+                    options={attribute.options}
+                  /> :
+                <Field
+                  key={outerIndex}
+                  name={`${attribute.type}-${attrKey}-${outerIndex}`}
+                  component="input"
+                  className="form-control"
+                  {...attr}
+                />
+              }
+            </span>
+          );
         })
       }
     </section>

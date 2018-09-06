@@ -7,7 +7,7 @@ describe('formatAttributesFilter', () => {
       'list-secure_at_rest-1': 'less secure',
       'choice-secure_in_transit-1': 'low',
       'choice-secure_in_transit-2': 'high',
-      'boolean-approved-2': true,
+      'boolean-approved-2': 'true',
       'number-quantity-3': 4,
     };
     const expected = {
