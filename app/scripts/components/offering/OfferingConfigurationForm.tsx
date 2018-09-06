@@ -9,12 +9,14 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 export class OfferingConfigurationForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
     const attributes = {};
-    this.props.offering.options.order.forEach(key => {
-      const options = this.props.offering.options.options[key];
-      if (options && options.default !== undefined) {
-        attributes[key] = options.default;
-      }
-    });
+    if (this.props.offering.options.order) {
+      this.props.offering.options.order.forEach(key => {
+        const options = this.props.offering.options.options[key];
+        if (options && options.default !== undefined) {
+          attributes[key] = options.default;
+        }
+      });
+    }
     const initialData: any = {attributes};
     if (this.props.offering.plans.length === 1) {
       initialData.plan = this.props.offering.plans[0];
@@ -52,7 +54,7 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
             name="attributes.description"
             label={translate('Description')}
           />
-          {props.offering.options.order.map(key => {
+          {props.offering.options.order && (props.offering.options.order.map(key => {
             const options = props.offering.options.options[key];
             if (!options) {
               return null;
@@ -85,7 +87,7 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
                 {...params}
               />
             );
-          })}
+          }))}
         </FormContainer>
       </form>
     );
