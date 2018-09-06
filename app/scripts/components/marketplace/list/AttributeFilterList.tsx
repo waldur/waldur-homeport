@@ -27,9 +27,9 @@ const renderSection = section => {
   }
 };
 
-// Commented until necessary changes applied regarding 'options' attribute on the backend.
+const SUPPORTED_TYPES = ['choice', 'list', 'boolean'];
 
-// const renderAttribute = attribute => !!attribute.options.length;
+const renderAttribute = attribute => SUPPORTED_TYPES.indexOf(attribute.type) !== -1;
 
 const AttributeFilter = (props: AttributeFilterProps) => {
   return renderSection(props.section) && (
@@ -38,7 +38,7 @@ const AttributeFilter = (props: AttributeFilterProps) => {
         {props.section.title}
       </h3>
       {
-        props.section.attributes.map((attribute, outerIndex) => {
+        props.section.attributes.filter(renderAttribute).map((attribute, outerIndex) => {
           const attr = configAttrField(attribute);
           const attrKey = attribute.key;
           return (
