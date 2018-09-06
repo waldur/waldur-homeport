@@ -2,7 +2,7 @@ import * as React from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { CustomRadioButton } from '@waldur/marketplace/offerings/CustomRadioButton';
 
 import './OfferingAttributes.scss';
 
@@ -17,6 +17,7 @@ interface AttrType {
   format?: any;
   component?: any;
   normalize?: (v: string) => string;
+  checked?: boolean;
 }
 
 export const configAttrField = attribute => {
@@ -62,13 +63,19 @@ export const configAttrField = attribute => {
       break;
     case 'boolean':
       attr = {
-        component: componentProp => attribute.options.map((option, index) => (
-          <AwesomeCheckbox
-            key={index}
-            id={option.key}
-            {...componentProp.input}
-          />
-        )),
+        component: componentProp => {
+          const choices = [
+            {value: '', label: 'All'},
+            {value: 'true', label: 'Yes'},
+            {value: 'false', label: 'No'},
+          ];
+          return (
+            <CustomRadioButton
+              choices={choices}
+              name={attribute.key}
+              input={componentProp.input}/>
+          );
+        },
       };
       break;
     default:

@@ -22,3 +22,7 @@ export type FieldType =
   | 'select_string'
   | 'select_openstack_tenant'
   ;
+export interface Choice {
+  value: string;
+  label: string;
+}

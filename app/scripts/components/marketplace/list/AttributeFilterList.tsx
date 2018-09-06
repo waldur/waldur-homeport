@@ -27,7 +27,9 @@ const renderSection = section => {
   }
 };
 
-const renderAttribute = attribute => !!attribute.options.length;
+// Commented until necessary changes applied regarding 'options' attribute on the backend.
+
+// const renderAttribute = attribute => !!attribute.options.length;
 
 const AttributeFilter = (props: AttributeFilterProps) => {
   return renderSection(props.section) && (
@@ -37,29 +39,28 @@ const AttributeFilter = (props: AttributeFilterProps) => {
       </h3>
       {
         props.section.attributes.map((attribute, outerIndex) => {
-          if (renderAttribute(attribute)) {
-            const attr = configAttrField(attribute);
-            return (
-              <span key={outerIndex}>
-                <h4>{attribute.title}</h4>
-                {
-                  attribute.type === 'list' ?
-                    <AwesomeCheckBoxGroup
-                      outerIndex={outerIndex}
-                      fieldName={attribute.key}
-                      options={attribute.options}
-                    /> :
-                  <Field
-                    key={outerIndex}
-                    name={`${attribute.type}-${attribute.key}-${outerIndex}`}
-                    component="input"
-                    className="form-control"
-                    {...attr}
-                  />
-                }
-              </span>
-            );
-          }
+          const attr = configAttrField(attribute);
+          const attrKey = attribute.key;
+          return (
+            <span key={outerIndex}>
+              <h4>{attribute.title}</h4>
+              {
+                attribute.type === 'list' ?
+                  <AwesomeCheckBoxGroup
+                    outerIndex={outerIndex}
+                    fieldName={attribute.key}
+                    options={attribute.options}
+                  /> :
+                <Field
+                  key={outerIndex}
+                  name={`${attribute.type}-${attrKey}-${outerIndex}`}
+                  component="input"
+                  className="form-control"
+                  {...attr}
+                />
+              }
+            </span>
+          );
         })
       }
     </section>
