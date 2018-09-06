@@ -30,6 +30,21 @@ export const configAttrField = attribute => {
         format: formatIntField,
       };
       break;
+    case 'list':
+      attr = {
+        component: componentProp => (
+          <Select
+            value={componentProp.input.value}
+            onChange={value => componentProp.input.onChange(value)}
+            options={attribute.options}
+            valueKey="key"
+            labelKey="title"
+            multi={true}
+          />
+        ),
+        normalize: v => v ? v : '',
+      };
+      break;
     case 'choice':
       attr = {
         component: componentProp => (

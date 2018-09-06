@@ -46,6 +46,17 @@ const formatOptions = options => ({
   }, {}),
 });
 
+const formatAttributes = attributes => Object.keys(attributes).reduce((result, key) => {
+  let value = attributes[key];
+  if (value.length > 0) {
+    value = value.map(item => item.key);
+  }
+  return {
+    ...result,
+    [key]: value,
+  };
+}, {});
+
 const formatOfferingRequest = (request, customer) => {
   const result = {
     ...request,
@@ -54,7 +65,7 @@ const formatOfferingRequest = (request, customer) => {
     type: request.type.value,
   };
   if (request.attributes) {
-    result.attributes = request.attributes;
+    result.attributes = formatAttributes(request.attributes);
   }
   if (request.plans) {
     result.plans = request.plans.map(formatPlan);
