@@ -5,7 +5,6 @@ import { compose } from 'redux';
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import BooleanField from '@waldur/table-react/BooleanField';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OfferingCreateButton } from './OfferingCreateButton';
@@ -24,8 +23,8 @@ export const TableComponent = props => {
       render: ({ row }) => row.category_title,
     },
     {
-      title: translate('Active'),
-      render: ({ row }) => <BooleanField value={row.is_active}/>,
+      title: translate('State'),
+      render: ({ row }) => row.state,
     },
     {
       title: translate('Actions'),
@@ -53,13 +52,13 @@ const TableOptions = {
     row.name,
     row.native_name,
     row.category_title,
-    row.is_active,
+    row.state,
   ],
   exportFields: [
     'Name',
     'Native name',
     'Category',
-    'Active',
+    'State',
   ],
 };
 

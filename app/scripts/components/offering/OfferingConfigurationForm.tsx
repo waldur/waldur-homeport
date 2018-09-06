@@ -15,9 +15,11 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
         attributes[key] = options.default;
       }
     });
-    if (attributes) {
-      this.props.initialize({ attributes });
+    const initialData: any = {attributes};
+    if (this.props.offering.plans.length === 1) {
+      initialData.plan = this.props.offering.plans[0];
     }
+    this.props.initialize(initialData);
   }
 
   render() {
