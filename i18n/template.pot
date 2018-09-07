@@ -1485,7 +1485,7 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/expert-request-summary.html
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/issues/create/issue-registration.html
-#: app/scripts/components/marketplace/cart/ShoppingCartItem.tsx
+#: app/scripts/components/marketplace/cart/ShoppingCartItemDetails.tsx
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: app/scripts/components/project/project-details-button.html
 #: app/scripts/components/project/projects-list.js

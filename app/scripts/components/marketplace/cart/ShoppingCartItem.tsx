@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { ShoppingCartItemDetails } from '@waldur/marketplace/cart/ShoppingCartItemDetails';
 
 import './ShoppingCartItem.scss';
 import { OrderItemResponse } from './types';
@@ -31,11 +32,7 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
               {props.item.offering_name}
             </Link>
           </h4>
-          {props.item.offering_description && (
-            <p>
-              <b>{translate('Details')}:</b> {props.item.offering_description}
-            </p>
-          )}
+          <ShoppingCartItemDetails item={props.item} translate={translate}/>
         </div>
       </div>
     </td>
