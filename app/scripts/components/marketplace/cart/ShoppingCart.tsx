@@ -13,27 +13,26 @@ interface ShoppingCartProps {
 }
 
 export const ShoppingCart = (props: ShoppingCartProps) => (
-  <>
-    <div className="table-responsive shopping-cart">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>{translate('Item')}</th>
-            <th className="text-center">{translate('Price')}</th>
-            <th>{/* Actions column */}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.items.map((item, index) => (
-            <ShoppingCartItem
-              key={index}
-              item={item}
-              editable={props.editable}
-              onRemove={() => props.onShoppingCartItemRemove(item)}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </>
+  <div className="table-responsive shopping-cart">
+    <table className="table">
+      <thead>
+        <tr>
+          <th>{translate('Item')}</th>
+          <th className="text-center">{translate('Price')}</th>
+          {!props.editable && <th className="text-center">{translate('State')}</th>}
+          {props.editable && <th className="text-center">{translate('Actions')}</th>}
+        </tr>
+      </thead>
+      <tbody>
+        {props.items.map((item, index) => (
+          <ShoppingCartItem
+            key={index}
+            item={item}
+            editable={props.editable}
+            onRemove={() => props.onShoppingCartItemRemove(item)}
+          />
+        ))}
+      </tbody>
+    </table>
+  </div>
 );

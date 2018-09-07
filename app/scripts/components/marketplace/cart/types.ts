@@ -2,6 +2,10 @@ import { Offering, Plan } from '@waldur/marketplace/types';
 
 export type OrderState = 'Configure' | 'Approve' | 'Review';
 
+export interface AttributesType {
+  [key: string]: any;
+}
+
 export interface State {
   items: any[]; // a temporary workaround before the upcoming MR
   state: OrderState;
@@ -17,6 +21,8 @@ export interface OrderItemResponse {
   resource_uuid: string;
   resource_type: string;
   cost: string;
+  state: string;
+  attributes: AttributesType;
 }
 
 export interface Order {
@@ -27,5 +33,5 @@ export interface Order {
 export interface OrderItemRequest {
   offering: Offering;
   plan?: Plan;
-  attributes?: {[key: string]: any};
+  attributes?: AttributesType;
 }
