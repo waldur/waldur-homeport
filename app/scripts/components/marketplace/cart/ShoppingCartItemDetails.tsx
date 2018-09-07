@@ -31,7 +31,7 @@ export const ShoppingCartItemDetails: React.SFC<ShoppingCartItemDetailsProps> = 
           params={{
             uuid: props.item.resource_uuid,
           }}
-          label="Offering link"
+          label={props.translate('Offering link')}
         />
       ) : props.item.resource_uuid && props.item.resource_type && (
             <Link
@@ -40,7 +40,7 @@ export const ShoppingCartItemDetails: React.SFC<ShoppingCartItemDetailsProps> = 
                 resource_type: props.item.resource_type,
                 uuid: props.item.resource_uuid,
               }}
-              label="Resource link"
+              label={props.translate('Resource link')}
             />
           )
       }

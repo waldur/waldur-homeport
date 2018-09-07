@@ -3589,6 +3589,10 @@ msgstr ""
 msgid "Offering has been created."
 msgstr ""
 
+#: app/scripts/components/marketplace/cart/ShoppingCartItemDetails.tsx
+msgid "Offering link"
+msgstr ""
+
 #: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
 msgid "Offering logo"
 msgstr ""
@@ -5080,6 +5084,10 @@ msgstr ""
 
 #: app/scripts/components/resource/monitoring/ZabbixHostCreateButton.tsx
 msgid "Resource is not monitored yet."
+msgstr ""
+
+#: app/scripts/components/marketplace/cart/ShoppingCartItemDetails.tsx
+msgid "Resource link"
 msgstr ""
 
 #: app/scripts/components/resource/actions/base.ts
