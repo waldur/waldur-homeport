@@ -118,6 +118,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-items.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/events/BaseEventsList.tsx
+#: app/scripts/components/marketplace/cart/ShoppingCart.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
 #: app/scripts/components/paypal/paypal-invoice-actions.html
@@ -1485,7 +1486,6 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/expert-request-summary.html
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/issues/create/issue-registration.html
-#: app/scripts/components/marketplace/cart/ShoppingCartItemDetails.tsx
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: app/scripts/components/project/project-details-button.html
 #: app/scripts/components/project/projects-list.js
@@ -3589,7 +3589,7 @@ msgstr ""
 msgid "Offering has been created."
 msgstr ""
 
-#: app/scripts/components/marketplace/cart/ShoppingCartItemDetails.tsx
+#: app/scripts/components/marketplace/cart/OrderItemLink.tsx
 msgid "Offering link"
 msgstr ""
 
@@ -5086,7 +5086,7 @@ msgstr ""
 msgid "Resource is not monitored yet."
 msgstr ""
 
-#: app/scripts/components/marketplace/cart/ShoppingCartItemDetails.tsx
+#: app/scripts/components/marketplace/cart/OrderItemLink.tsx
 msgid "Resource link"
 msgstr ""
 
@@ -5769,6 +5769,7 @@ msgstr ""
 #: app/scripts/components/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
+#: app/scripts/components/marketplace/cart/ShoppingCart.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
 #: app/scripts/components/marketplace/orders/OrdersList.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
