@@ -1,3 +1,4 @@
+import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Offering, Plan } from '@waldur/marketplace/types';
 
 export type OrderState = 'Configure' | 'Approve' | 'Review';
@@ -7,22 +8,9 @@ export interface AttributesType {
 }
 
 export interface State {
-  items: any[]; // a temporary workaround before the upcoming MR
+  items: OrderItemRequest[];
   state: OrderState;
   total_cost?: number;
-}
-
-export interface OrderItemResponse {
-  uuid: string;
-  offering_uuid: string;
-  offering_name: string;
-  offering_description: string;
-  offering_thumbnail: string;
-  resource_uuid: string;
-  resource_type: string;
-  cost: string;
-  state: string;
-  attributes: AttributesType;
 }
 
 export interface Order {

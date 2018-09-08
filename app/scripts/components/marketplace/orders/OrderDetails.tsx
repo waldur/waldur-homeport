@@ -3,13 +3,13 @@ import * as React from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { TranslateProps } from '@waldur/i18n';
-import { ShoppingCartSteps } from '@waldur/marketplace/cart/ShoppingCartSteps';
-import { State } from '@waldur/marketplace/cart/types';
 import { getOrderDetails } from '@waldur/marketplace/common/api';
 import { OrderSummary } from '@waldur/marketplace/orders/OrderSummary';
 
-import { ShoppingCart } from '../cart/ShoppingCart';
 import { ApproveButton } from './ApproveButton';
+import { Order } from './Order';
+import { OrderSteps } from './OrderSteps';
+import { State } from './types';
 import { StatusChange } from './types';
 import { matchState } from './utils';
 
@@ -90,8 +90,8 @@ export class OrderDetails extends React.Component<OrderDetailsProps & TranslateP
     return (
       <div className="row">
         <div className="col-xl-9 col-lg-8">
-          <ShoppingCartSteps state={this.state.orderDetails.state} />
-          <ShoppingCart
+          <OrderSteps state={this.state.orderDetails.state} />
+          <Order
             items={this.state.orderDetails.items}
             editable={false}
           />

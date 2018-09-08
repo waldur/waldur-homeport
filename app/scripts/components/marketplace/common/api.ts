@@ -1,6 +1,6 @@
 import { getAll, getById, post, sendForm } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
-import { State } from '@waldur/marketplace/cart/types';
+import { State } from '@waldur/marketplace/orders/types';
 import { Category, Offering, Provider } from '@waldur/marketplace/types';
 
 export const getCategories = () =>

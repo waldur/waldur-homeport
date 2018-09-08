@@ -1615,6 +1615,7 @@ msgid "Each JupyterHub user is mapped to a corresponding system user. Appropriat
 msgstr ""
 
 #: app/scripts/components/marketplace/cart/ShoppingCartItem.tsx
+#: app/scripts/components/marketplace/orders/OrderItem.tsx
 #: app/scripts/components/openstack/openstack-backup-schedule/module.js
 #: app/scripts/components/openstack/openstack-snapshot-schedule/module.js
 #: app/scripts/components/resource/actions/base.ts
@@ -2689,6 +2690,7 @@ msgstr ""
 #: app/scripts/components/billing/billing-record-details.html
 #: app/scripts/components/billing/invoice-details.html
 #: app/scripts/components/marketplace/cart/ShoppingCart.tsx
+#: app/scripts/components/marketplace/orders/Order.tsx
 msgid "Item"
 msgstr ""
 
@@ -3589,7 +3591,7 @@ msgstr ""
 msgid "Offering has been created."
 msgstr ""
 
-#: app/scripts/components/marketplace/cart/OrderItemLink.tsx
+#: app/scripts/components/marketplace/orders/OrderItemLink.tsx
 msgid "Offering link"
 msgstr ""
 
@@ -4213,6 +4215,7 @@ msgstr ""
 #: app/scripts/components/marketplace/details/OrderSummary.tsx
 #: app/scripts/components/marketplace/offerings/OfferingPlanComponents.tsx
 #: app/scripts/components/marketplace/offerings/PlanForm.tsx
+#: app/scripts/components/marketplace/orders/Order.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Price"
@@ -5086,7 +5089,7 @@ msgstr ""
 msgid "Resource is not monitored yet."
 msgstr ""
 
-#: app/scripts/components/marketplace/cart/OrderItemLink.tsx
+#: app/scripts/components/marketplace/orders/OrderItemLink.tsx
 msgid "Resource link"
 msgstr ""
 
