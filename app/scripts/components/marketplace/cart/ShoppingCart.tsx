@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
+import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import './ShoppingCart.scss';
 import { ShoppingCartItem } from './ShoppingCartItem';
-import { OrderItemResponse } from './types';
 
 interface ShoppingCartProps {
   items: OrderItemResponse[];

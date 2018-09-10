@@ -1,5 +1,6 @@
 import { Action } from '@waldur/core/reducerActions';
-import { OrderState, OrderItemResponse } from '@waldur/marketplace/cart/types';
+import { OrderState } from '@waldur/marketplace/cart/types';
+import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import * as constants from './constants';
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { OrderItemResponse } from '@waldur/marketplace/cart/types';
+import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ActionButtons } from './ActionButtons';

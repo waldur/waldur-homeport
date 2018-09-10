@@ -4,10 +4,9 @@ import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
-import { OrderItemLink } from './OrderItemLink';
 import './ShoppingCartItem.scss';
-import { OrderItemResponse } from './types';
 
 interface ShoppingCartItemProps {
   item: OrderItemResponse;
@@ -35,11 +34,6 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
               {props.item.attributes.name}
             </Link>
           </h4>
-          <p>
-            {props.item.attributes.description || props.item.offering_description}
-            <br/>
-            {props.item.resource_uuid && <OrderItemLink item={props.item} translate={translate}/>}
-          </p>
         </div>
       </div>
     </td>
