@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
+import { OfferingActions } from '@waldur/marketplace/offerings/OfferingActions';
+import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OfferingCreateButton } from './OfferingCreateButton';
-import { OfferingDeleteButton } from './OfferingDeleteButton';
 
 export const TableComponent = props => {
   const { translate } = props;
@@ -28,7 +29,7 @@ export const TableComponent = props => {
     },
     {
       title: translate('Actions'),
-      render: OfferingDeleteButton,
+      render: OfferingActions,
     },
   ];
 
@@ -43,7 +44,7 @@ export const TableComponent = props => {
 };
 
 const TableOptions = {
-  table: 'marketplace-offerings',
+  table: TABLE_NAME,
   fetchData: createFetcher('marketplace-offerings'),
   mapPropsToFilter: props => ({
     customer_uuid: props.customer.uuid,

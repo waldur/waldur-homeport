@@ -6,6 +6,7 @@ import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { getOfferingComponents } from '@waldur/marketplace/common/registry';
+import { OfferingAction, OfferingStateTransition } from '@waldur/marketplace/offerings/types';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 
 import { FORM_ID } from './constants';
@@ -117,3 +118,24 @@ export const connectPlanComponents = connect<any, any, {plan: string}>((state, o
     return {};
   }
 });
+
+export const stateTransition: {[value: string]: OfferingStateTransition[]} = {
+  Draft: ['activate', 'archive'],
+  Active: ['pause', 'archive'],
+  Paused: ['activate', 'archive'],
+};
+
+export const stateTransitionActions: Array<OfferingAction<OfferingStateTransition>> = [
+  {
+    value: 'activate',
+    label: 'Activate',
+  },
+  {
+    value: 'pause',
+    label: 'Pause',
+  },
+  {
+    value: 'archive',
+    label: 'Archive',
+  },
+];
