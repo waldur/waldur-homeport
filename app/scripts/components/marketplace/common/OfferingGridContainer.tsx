@@ -33,11 +33,17 @@ export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProp
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.items.length !== this.state.items.length
-        || prevProps.filterQuery !== this.props.filterQuery) {
+  componentDidUpdate(prevProps) {
+    if (this.filterQueryHasDiff(prevProps)) {
       this.loadData(this.props.filterQuery);
     }
+  }
+
+  filterQueryHasDiff = prevProps => {
+    if (prevProps.filterQuery.name !== this.props.filterQuery.name
+      || prevProps.filterQuery.attributes !== this.props.filterQuery.attributes) {
+        return true;
+      }
   }
 
   componentDidMount() {
