@@ -119,6 +119,7 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/events/BaseEventsList.tsx
 #: app/scripts/components/marketplace/cart/ShoppingCart.tsx
+#: app/scripts/components/marketplace/offerings/ActionsDropdown.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
 #: app/scripts/components/paypal/paypal-invoice-actions.html
@@ -3599,6 +3600,10 @@ msgstr ""
 msgid "Offering logo"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/store/effects.ts
+msgid "Offering state has been updated."
+msgstr ""
+
 #: app/scripts/components/offering/events.ts
 msgid "Offering state has changed to {offering_state}."
 msgstr ""
@@ -6083,6 +6088,7 @@ msgstr ""
 msgid "There are no SSH public keys yet."
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/ActionsDropdown.tsx
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 #: app/scripts/components/resource/actions/action-button-resource.html
 msgid "There are no actions."
@@ -6590,6 +6596,10 @@ msgstr ""
 
 #: app/scripts/components/issues/comments/effects.ts
 msgid "Unable to submit empty comment."
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/store/effects.ts
+msgid "Unable to update offering state."
 msgstr ""
 
 #: app/scripts/components/providers/effects.tsx

@@ -29,3 +29,6 @@ export const getOrderDetails = (id: string) =>
 
 export const getProvider = (id: string) =>
   getById<Provider>('/customers/', id);
+
+export const updateOfferingState = (offeringUuid, action) =>
+  post(`/marketplace-offerings/${offeringUuid}/${action}/`).then(response => response.data);
