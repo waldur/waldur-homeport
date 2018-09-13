@@ -3,6 +3,12 @@ import { InjectedFormProps } from 'redux-form';
 import { Customer } from '@waldur/customer/types';
 import { Offering } from '@waldur/marketplace/types';
 
+export type BillingPeriod =
+  | 'day'
+  | 'half_month'
+  | 'month'
+  ;
+
 export interface GeolocationPoint {
   latitude: number;
   longitude: number;
@@ -10,12 +16,20 @@ export interface GeolocationPoint {
 
 export type Geolocations = GeolocationPoint[];
 
+export interface PlanComponent {
+  billing_type: 'usage' | 'fixed';
+  type: string;
+  amount: number;
+  price: string;
+}
+
 export interface Plan {
   url: string;
   name: string;
   description: string;
   unit_price: number;
-  unit: string;
+  unit: BillingPeriod;
+  components: PlanComponent[];
 }
 
 export interface OptionField {
@@ -112,7 +126,7 @@ export interface OfferingConfigurationFormProps extends InjectedFormProps {
   offering: Offering;
 }
 
-export interface PlanComponent {
+export interface PlanComponentDescription {
   type: string;
   label: string;
   units: string;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
-import { Offering, PlanComponent } from '@waldur/marketplace/types';
+import { Offering, PlanComponentDescription } from '@waldur/marketplace/types';
 
 const REGISTRY = {};
 
@@ -10,7 +10,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   component: React.ComponentType<OfferingConfigurationFormProps>;
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
   label: string;
-  components?: PlanComponent[];
+  components?: PlanComponentDescription[];
   showOptions?: boolean;
 }
 

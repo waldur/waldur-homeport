@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
 import { connectPlanComponents } from '@waldur/marketplace/offerings/utils';
-import { PlanComponent } from '@waldur/marketplace/types';
+import { PlanComponentDescription } from '@waldur/marketplace/types';
 
 const enhance = compose(connectPlanComponents, withTranslation);
 
@@ -19,7 +19,7 @@ export const OfferingPlanComponents = enhance(props => props.components ? (
       </tr>
     </thead>
     <tbody>
-      {props.components.map((component: PlanComponent, index) => (
+      {props.components.map((component: PlanComponentDescription, index) => (
         <tr key={index}>
           <td>
             <div className="form-control-static">

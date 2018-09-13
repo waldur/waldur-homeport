@@ -35,7 +35,7 @@ const getOrderItem = (props: OrderSummaryProps) => {
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
     <img src={props.offering.thumbnail} className="img-lg"/>
-    <table className="table">
+    <table className="table offering-details-section-table">
       <tbody>
         <tr>
           <td><strong>{translate('Offering')}</strong></td>

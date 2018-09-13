@@ -4,6 +4,7 @@ import { required, getLatinNameValidators } from '@waldur/core/validators';
 import { FormContainer, TextField, StringField, SelectField } from '@waldur/form-react';
 import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
+import { PlanDetailsTable } from '@waldur/marketplace/details/PlanDetailsTable';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 export class OfferingConfigurationForm extends React.Component<OfferingConfigurationFormProps> {
@@ -50,6 +51,7 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
               required={true}
             />
           )}
+          <PlanDetailsTable type={props.offering.type}/>
           <TextField
             name="attributes.description"
             label={translate('Description')}

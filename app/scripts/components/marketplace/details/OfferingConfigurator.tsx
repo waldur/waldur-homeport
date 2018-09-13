@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form';
 import { getFormComponent } from '@waldur/marketplace/common/registry';
 import { Offering } from '@waldur/marketplace/types';
 
+import { FORM_ID } from './constants';
 import { OfferingFormData } from './types';
 
 interface PureOfferingConfiguratorProps {
@@ -19,7 +20,7 @@ const PureOfferingConfigurator = (props: PureOfferingConfiguratorProps) => {
 };
 
 const enhance = reduxForm<OfferingFormData, PureOfferingConfiguratorProps>(
-  {form: 'marketplaceOffering'}
+  {form: FORM_ID}
 );
 
 export const OfferingConfigurator = enhance(PureOfferingConfigurator);

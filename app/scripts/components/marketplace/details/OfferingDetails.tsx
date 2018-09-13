@@ -22,7 +22,7 @@ export const OfferingDetails = (props: OfferingDetailsProps) => (
         {props.offering.description}
       </div>
     )}
-    <Row className="offering-details-section">
+    <Row>
       <Col md={9}>
         <h3 className="header-bottom-border">
           {translate('Product configuration')}
