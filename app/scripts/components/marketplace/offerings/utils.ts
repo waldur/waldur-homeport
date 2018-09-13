@@ -49,7 +49,7 @@ const formatOptions = options => ({
 
 const formatAttributes = attributes => Object.keys(attributes).reduce((result, key) => {
   let value = attributes[key];
-  if (value.length > 0) {
+  if (Array.isArray(value)) {
     value = value.map(item => item.key);
   }
   return {

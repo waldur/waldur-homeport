@@ -9,7 +9,7 @@ const serializer = props => ({
 
 const components = [
   {
-    type: 'vcpu',
+    type: 'cores',
     label: 'vCPU',
     units: 'cores',
   },

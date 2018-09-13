@@ -12,6 +12,7 @@ import {
 import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { LabelField } from '@waldur/form-react/LabelField';
 import { translate } from '@waldur/i18n';
+import { PlanDetailsTable } from '@waldur/marketplace/details/PlanDetailsTable';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { OpenStackAllocationPool } from './OpenStackAllocationPool';
@@ -50,6 +51,7 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
               required={true}
             />
           )}
+          <PlanDetailsTable type={props.offering.type}/>
           <TextField
             label={translate('Tenant description')}
             name="attributes.description"

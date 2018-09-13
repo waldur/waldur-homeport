@@ -4,8 +4,8 @@
   border-bottom: 1px solid #e5e5e5;
 }
 
-.offering-details-section {
-  .table {
+.offering-details-section-table {
+  &.table {
     td {
       padding: 6px 0;
       border: 0;
