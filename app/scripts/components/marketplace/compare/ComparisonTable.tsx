@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { range } from '@waldur/core/utils';
+import { ComparisonSections } from '@waldur/marketplace/compare/ComparisonSections';
 
 import { Offering, Section } from '../types';
 import { ComparisonItem } from './ComparisonItem';
 import { ComparisonItemPlaceholder } from './ComparisonItemPlaceholder';
-import { ComparisonSection } from './ComparisonSection';
 
 interface ComparisonTableProps {
   items: Offering[];
@@ -27,13 +27,7 @@ export const ComparisonTable = (props: ComparisonTableProps) => (
             <ComparisonItemPlaceholder key={index}/>
           )}
         </tr>
-        {props.sections.map((section, index) => (
-          <ComparisonSection
-            key={index}
-            section={section}
-            items={props.items}
-          />
-        ))}
+        <ComparisonSections items={props.items}/>
       </tbody>
     </table>
   </div>

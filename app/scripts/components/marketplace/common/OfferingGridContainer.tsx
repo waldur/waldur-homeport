@@ -39,6 +39,16 @@ export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProp
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.filterQueryHasDiff(nextProps)) {
+      return true;
+    }
+    if (this.state !== nextState) {
+      return true;
+    }
+    return false;
+  }
+
   filterQueryHasDiff = prevProps => {
     if (prevProps.filterQuery.name !== this.props.filterQuery.name
       || prevProps.filterQuery.attributes !== this.props.filterQuery.attributes) {

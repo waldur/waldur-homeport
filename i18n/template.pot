@@ -6191,6 +6191,10 @@ msgstr ""
 msgid "There are no resources in the organization."
 msgstr ""
 
+#: app/scripts/components/marketplace/compare/ComparisonSections.tsx
+msgid "There are no sections for comparison yet."
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 msgid "There are no suitable VPC packages for this tenant."
 msgstr ""
@@ -6575,6 +6579,10 @@ msgstr ""
 #: app/scripts/components/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: app/scripts/components/ansible/python-management/details/PythonManagementDetailsContainer.tsx
 msgid "Unable to load python management details."
+msgstr ""
+
+#: app/scripts/components/marketplace/compare/ComparisonSections.tsx
+msgid "Unable to load sections for comparison."
 msgstr ""
 
 #: app/scripts/components/marketplace/service-providers/ProviderDetailsContainer.tsx
