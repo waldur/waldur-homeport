@@ -28,7 +28,11 @@ export const ComparisonItem = (props: ComparisonItemProps) => (
         {props.item.customer_name}
       </Link>
     </p>
-    <RatingStars rating={props.item.rating} size="medium"/>
-    <p>Based on <a>{props.item.reviews} reviews</a></p>
+    {props.item.rating &&
+      <RatingStars rating={props.item.rating} size="medium"/>
+    }
+    {props.item.reviews &&
+      <p>Based on <a>{props.item.reviews} reviews</a></p>
+    }
   </div>
 );
