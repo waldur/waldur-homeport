@@ -13,10 +13,9 @@ export const comparisonReducer = (state = INITIAL_STATE, action) => {
         items: [...state.items, payload.item],
       };
     case constants.REMOVE_ITEM:
-      const index = state.items.indexOf(payload.item);
       return {
         ...state,
-        items: [...state.items.slice(0, index), ...state.items.slice(index + 1)],
+        items: state.items.filter(item => item.uuid !== payload.item.uuid),
       };
     default:
       return state;
