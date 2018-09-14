@@ -4089,6 +4089,10 @@ msgstr ""
 msgid "Please clarify why do you need it"
 msgstr ""
 
+#: app/scripts/components/marketplace/details/PlanDetailsTable.tsx
+msgid "Please enter estimated maximum usage in the rows below:"
+msgstr ""
+
 #: app/scripts/components/invitations/invitation-confirm-dialog.html
 msgid "Please give us a moment to validate your invitation."
 msgstr ""
@@ -4282,30 +4286,30 @@ msgstr ""
 msgid "Price package name"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/utils.ts
+#: app/scripts/components/marketplace/details/selectors.ts
 msgid "Price per 30 days"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/utils.ts
+#: app/scripts/components/marketplace/details/selectors.ts
 msgid "Price per 365 days"
 msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
-#: app/scripts/components/marketplace/details/utils.ts
+#: app/scripts/components/marketplace/details/selectors.ts
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Price per day"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/utils.ts
+#: app/scripts/components/marketplace/details/selectors.ts
 msgid "Price per half-month"
 msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
-#: app/scripts/components/marketplace/details/utils.ts
+#: app/scripts/components/marketplace/details/selectors.ts
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -4317,7 +4321,7 @@ msgstr ""
 msgid "Price per month (VAT not included)"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/utils.ts
+#: app/scripts/components/marketplace/details/selectors.ts
 msgid "Price per year"
 msgstr ""
 
@@ -6343,6 +6347,7 @@ msgstr ""
 #: app/scripts/components/billing/billing-records-list.js
 #: app/scripts/components/billing/invoices-list.js
 #: app/scripts/components/marketplace/cart/ShoppingCartSidebar.tsx
+#: app/scripts/components/marketplace/details/PlanDetailsTable.tsx
 #: app/scripts/components/paypal/paypal-invoices-list.js
 msgid "Total"
 msgstr ""
@@ -6663,6 +6668,10 @@ msgstr ""
 
 #: app/scripts/components/core/ErrorMessageFormatter.ts
 msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
+msgstr ""
+
+#: app/scripts/components/marketplace/details/PlanDetailsTable.tsx
+msgid "Unit"
 msgstr ""
 
 #: app/scripts/components/billing/billing-record-details.html

@@ -19,6 +19,8 @@ export type Geolocations = GeolocationPoint[];
 export interface PlanComponent {
   billing_type: 'usage' | 'fixed';
   type: string;
+  name: string;
+  measured_unit: string;
   amount: number;
   price: string;
 }

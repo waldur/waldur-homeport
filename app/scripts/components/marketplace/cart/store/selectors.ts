@@ -20,4 +20,5 @@ export const getCheckoutItems = createSelector(getItems, items => items.map(item
   offering_thumbnail: item.offering.thumbnail,
   cost: item.plan ? item.plan.cost : undefined,
   attributes: item.attributes,
+  limits: item.limits,
 })));
