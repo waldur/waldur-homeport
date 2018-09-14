@@ -2,13 +2,10 @@ import * as React from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
+import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
 import { CustomRadioButton } from '@waldur/marketplace/offerings/CustomRadioButton';
 
 import './OfferingAttributes.scss';
-
-// See also: https://github.com/erikras/redux-form/issues/1852
-const parseIntField = value => parseInt(value, 10) || 0;
-const formatIntField = value => value ? value.toString() : '';
 
 interface AttrType {
   type?: string;

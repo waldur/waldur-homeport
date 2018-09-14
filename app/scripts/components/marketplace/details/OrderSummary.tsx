@@ -1,36 +1,18 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getFormValues, isValid } from 'redux-form';
+import { isValid, getFormValues } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
-import { getFormSerializer } from '@waldur/marketplace/common/registry';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
-import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
-import { Customer, Project } from '@waldur/workspace/types';
 
-import { OfferingFormData } from './types';
-
-interface OrderSummaryProps {
-  offering: Offering;
-  customer: Customer;
-  project: Project;
-  formData: OfferingFormData;
-  formValid: boolean;
-}
-
-const getOrderItem = (props: OrderSummaryProps) => {
-  const serializer = getFormSerializer(props.offering.type);
-  return {
-    offering: props.offering,
-    plan: props.formData ? props.formData.plan : undefined,
-    attributes: props.formData ? serializer(props.formData.attributes, props.offering) : undefined,
-  };
-};
+import { totalPriceSelector } from './selectors';
+import { OrderSummaryProps } from './types';
+import { getOrderItem } from './utils';
 
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
@@ -66,14 +48,12 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
           <td><strong>{translate('Project')}</strong></td>
           <td>{props.project.name}</td>
         </tr>
-        {props.formData && props.formData.plan && (
-          <tr>
-            <td className="text-lg">{translate('Price')}</td>
-            <td className="text-lg">
-              {defaultCurrency(props.formData.plan.unit_price)}
-            </td>
-          </tr>
-        )}
+        <tr>
+          <td className="text-lg">{translate('Price')}</td>
+          <td className="text-lg">
+            {defaultCurrency(props.total)}
+          </td>
+        </tr>
       </tbody>
     </table>
     <div className="display-flex justify-content-between">
@@ -90,6 +70,7 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
 const mapStateToProps = state => ({
   customer: getCustomer(state),
   project: getProject(state),
+  total: totalPriceSelector(state),
   formData: getFormValues('marketplaceOffering')(state),
   formValid: isValid('marketplaceOffering')(state),
 });

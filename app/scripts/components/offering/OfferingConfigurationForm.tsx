@@ -51,7 +51,7 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
               required={true}
             />
           )}
-          <PlanDetailsTable type={props.offering.type}/>
+          <PlanDetailsTable/>
           <TextField
             name="attributes.description"
             label={translate('Description')}

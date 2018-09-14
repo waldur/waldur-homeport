@@ -21,6 +21,7 @@ function* createOrder() {
         offering: item.offering.url,
         plan: item.plan ? item.plan.url : undefined,
         attributes: item.attributes,
+        limits: item.limits,
       })),
     });
     yield put(showSuccess(translate('Order has been submitted.')));
