@@ -5,8 +5,8 @@ import { withTranslation } from '@waldur/i18n';
 
 import { FormGroup } from './FormGroup';
 import { OfferingPlanComponents } from './OfferingPlanComponents';
+import { PlanBillingPeriodField } from './PlanBillingPeriodField';
 import { PriceField } from './PriceField';
-import { PriceUnitField } from './PriceUnitField';
 
 const PlanNameField = props => (
   <Field
@@ -26,7 +26,7 @@ export const PlanForm = withTranslation(props => (
       <PriceField plan={props.plan}/>
     </FormGroup>
     <FormGroup label={props.translate('Billing period')}>
-      <PriceUnitField plan={props.plan}/>
+      <PlanBillingPeriodField plan={props.plan}/>
     </FormGroup>
     <OfferingPlanComponents plan={props.plan}/>
   </>

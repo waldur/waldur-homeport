@@ -1,25 +1,23 @@
+import { translate } from '@waldur/i18n';
+
 import { FieldType } from './types';
 
 export const FORM_ID = 'marketplaceOfferingCreate';
 
-export const PRICE_UNITS = [
+export const getBillingPeriods = () => ([
   {
-    label: 'Per month',
+    label: translate('Per month'),
     value: 'month',
   },
   {
-    label: 'Per half month',
+    label: translate('Per half month'),
     value: 'half_month',
   },
   {
-    label: 'Per day',
+    label: translate('Per day'),
     value: 'day',
   },
-  {
-    label: 'Quantity',
-    value: 'quantity',
-  },
-];
+]);
 
 export const FIELD_TYPES: Array<{value: FieldType, label: string}> = [
   {

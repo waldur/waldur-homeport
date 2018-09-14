@@ -4005,6 +4005,18 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/constants.ts
+msgid "Per day"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/constants.ts
+msgid "Per half month"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/constants.ts
+msgid "Per month"
+msgstr ""
+
 #: app/scripts/components/digitalocean/droplet-resize.html
 msgid "Permanent"
 msgstr ""
