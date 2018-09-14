@@ -2,6 +2,7 @@ import * as classNames from 'classnames';
 import * as React from 'react';
 
 import { range } from '@waldur/core/utils';
+import { COMPARISON_COLUMNS } from '@waldur/marketplace/compare/store/constants';
 
 import { Offering, Section } from '../types';
 
@@ -52,7 +53,7 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
           {item.name}
         </th>
       ))}
-      {range(4 - props.items.length).map(index =>
+      {props.items.length < COMPARISON_COLUMNS && range(COMPARISON_COLUMNS - props.items.length).map(index =>
         <td key={index}/>
       )}
     </tr>
@@ -64,7 +65,7 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
         {props.items.map((item, index2) =>
           renderAttribute(index2, item.attributes, attribute)
         )}
-        {range(4 - props.items.length).map(index =>
+        {props.items.length < COMPARISON_COLUMNS && range(COMPARISON_COLUMNS - props.items.length).map(index =>
           <td key={index}/>
         )}
       </tr>
