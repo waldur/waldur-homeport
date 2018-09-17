@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { offeringsAutocomplete, gotoOffering } from '@waldur/marketplace/landing/store/api';
 import { CategoriesListType, OfferingsListType } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -24,7 +25,12 @@ export class LandingPageContainer extends React.Component<LandingPageContainerPr
   }
 
   render() {
-    return <LandingPage {...this.props}/>;
+    return (
+      <LandingPage {...this.props}
+        loadOfferings={offeringsAutocomplete}
+        gotoOffering={gotoOffering}
+      />
+    );
   }
 }
 
