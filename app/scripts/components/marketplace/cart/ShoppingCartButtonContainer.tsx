@@ -13,7 +13,7 @@ interface ShoppingCartButtonContainerProps {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  inCart: hasItem(state, ownProps.offering),
+  inCart: hasItem(state, ownProps.item),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {

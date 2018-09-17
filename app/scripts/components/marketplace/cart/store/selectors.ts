@@ -2,7 +2,8 @@ import { createSelector } from 'reselect';
 
 export const getCart = state => state.marketplace.cart;
 
-export const hasItem = (state, item) => getCart(state).items.indexOf(item) !== -1;
+export const hasItem = (state, item) =>
+  getCart(state).items.find(i => i.offering.uuid === item.offering.uuid) !== undefined;
 
 export const getCount = state => getCart(state).items.length;
 
