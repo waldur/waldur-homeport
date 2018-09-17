@@ -423,6 +423,10 @@ msgstr ""
 msgid "Apply or rerun JupyterHub configuration"
 msgstr ""
 
+#: app/scripts/components/marketplace/orders/ApproveButton.tsx
+msgid "Approve"
+msgstr ""
+
 #: app/scripts/components/payments/routes.js
 msgid "Approve payment"
 msgstr ""

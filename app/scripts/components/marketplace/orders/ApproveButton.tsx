@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { translate } from '@waldur/i18n';
+
 interface ApproveButtonProps {
   onClick: () => void;
   submitting?: boolean;
@@ -13,7 +15,7 @@ export const ApproveButton: React.SFC<ApproveButtonProps> = ({onClick, submittin
     disabled={submitting}>
     <i className="fa fa-check"/>
     {' '}
-    Approve
+    {translate('Approve')}
     {' '}
     {submitting && <i className="fa fa-spinner fa-spin m-r-xs"/>}
   </button>
