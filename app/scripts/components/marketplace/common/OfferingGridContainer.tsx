@@ -6,7 +6,7 @@ import { getFormValues } from 'redux-form';
 import { $state } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { TranslateProps } from '@waldur/i18n';
-import { getOfferings } from '@waldur/marketplace/common/api';
+import { getAllOfferings } from '@waldur/marketplace/common/api';
 import { FilterQuery } from '@waldur/marketplace/offerings/types';
 import { Offering } from '@waldur/marketplace/types';
 
@@ -71,7 +71,7 @@ export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProp
       this.setState({
         loading: true,
       });
-      const offerings = await getOfferings(options);
+      const offerings = await getAllOfferings(options);
       this.setState({
         items: offerings,
         loading: false,

@@ -1,37 +1,29 @@
+import { Category, Offering } from '@waldur/marketplace/types';
+
 import * as constants from './constants';
 
-export const setCategories = items => ({
-  type: constants.SET_CATEGORIES,
-  payload: {
-    categories: items,
-  },
+export const categoriesFetchStart = () => ({
+  type: constants.CATEGORIES_FETCH_START,
 });
 
-export const getCategories = () => ({
-  type: constants.GET_CATEGORIES,
+export const categoriesFetchSuccess = (categories: Category[]) => ({
+  type: constants.CATEGORIES_FETCH_SUCCESS,
+  payload: {categories},
 });
 
-export const setOfferings = items => ({
-  type: constants.SET_OFFERINGS,
-  payload: {
-    offerings: items,
-  },
+export const categoriesFetchError = () => ({
+  type: constants.CATEGORIES_FETCH_ERROR,
 });
 
-export const getOfferings = () => ({
-  type: constants.GET_OFFERINGS,
+export const offeringsFetchStart = () => ({
+  type: constants.OFFERINGS_FETCH_START,
 });
 
-export const setCategoriesLoadingState = state => ({
-  type: constants.SET_CATEGORIES_LOADING_STATE,
-  payload: {
-    state,
-  },
+export const offeringsFetchSuccess = (offerings: Offering[]) => ({
+  type: constants.OFFERINGS_FETCH_SUCCESS,
+  payload: {offerings},
 });
 
-export const setOfferingsLoadingState = state => ({
-  type: constants.SET_OFFERINGS_LOADING_STATE,
-  payload: {
-    state,
-  },
+export const offeringsFetchError = () => ({
+  type: constants.OFFERINGS_FETCH_ERROR,
 });

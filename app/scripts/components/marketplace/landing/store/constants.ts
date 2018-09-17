@@ -1,6 +1,6 @@
-export const SET_CATEGORIES = 'waldur/marketplace/landing/SET_CATEGORIES';
-export const GET_CATEGORIES = 'waldur/marketplace/landing/GET_CATEGORIES';
-export const SET_OFFERINGS = 'waldur/marketplace/landing/SET_OFFERINGS';
-export const GET_OFFERINGS = 'waldur/marketplace/landing/GET_OFFERINGS';
-export const SET_CATEGORIES_LOADING_STATE = 'waldur/marketplace/landing/SET_CATEGORIES_LOADING_STATE';
-export const SET_OFFERINGS_LOADING_STATE = 'waldur/marketplace/landing/SET_OFFERINGS_LOADING_STATE';
+export const CATEGORIES_FETCH_START = 'waldur/marketplace/landing/CATEGORIES_FETCH_START';
+export const CATEGORIES_FETCH_SUCCESS = 'waldur/marketplace/landing/CATEGORIES_FETCH_SUCCESS';
+export const CATEGORIES_FETCH_ERROR = 'waldur/marketplace/landing/CATEGORIES_FETCH_ERROR';
+export const OFFERINGS_FETCH_START = 'waldur/marketplace/landing/OFFERINGS_FETCH_START';
+export const OFFERINGS_FETCH_SUCCESS = 'waldur/marketplace/landing/OFFERINGS_FETCH_SUCCESS';
+export const OFFERINGS_FETCH_ERROR = 'waldur/marketplace/landing/OFFERINGS_FETCH_ERROR';
