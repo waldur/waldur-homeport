@@ -25,17 +25,16 @@ export const OrderItem = (props: OrderItemProps) => (
           <img src={props.item.offering_thumbnail}/>
         </Link>
         <div className="offering-info">
-          <h4 className="offering-title">
+          <h5 className="offering-title">
             <Link
               state="marketplace-offering"
               params={{offering_uuid: props.item.offering_uuid}}>
               {props.item.offering_name}
             </Link>
-          </h4>
+          </h5>
           <p>
             {props.item.attributes.description || props.item.offering_description}
-            <br/>
-            {props.item.resource_uuid && <OrderItemLink item={props.item} translate={translate}/>}
+            {props.item.resource_uuid && <p><OrderItemLink item={props.item} translate={translate}/></p>}
           </p>
         </div>
       </div>
@@ -46,7 +45,7 @@ export const OrderItem = (props: OrderItemProps) => (
     <td className="text-center">
       <span className="btn-group">
         {props.editable && (
-          <a className="btn btn-outline btn-success m-r-xs">
+          <a className="btn btn-outline btn-default btn-sm m-r-xs">
             {translate('Edit')}
           </a>
         )}

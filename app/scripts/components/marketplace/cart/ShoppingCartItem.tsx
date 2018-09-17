@@ -27,13 +27,14 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
           </Link>
         </Tooltip>
         <div className="offering-info">
-          <h4 className="offering-title">
+          <h5 className="offering-title">
             <Link
               state="marketplace-offering"
               params={{offering_uuid: props.item.offering_uuid}}>
               {props.item.attributes.name}
             </Link>
-          </h4>
+          </h5>
+          <p>{props.item.attributes.description || props.item.offering_description}</p>
         </div>
       </div>
     </td>
@@ -48,10 +49,12 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
     {props.editable && (
       <td className="text-center">
         <span className="btn-group">
-          <a className="btn btn-outline btn-success m-r-xs">
+          <a className="btn btn-outline btn-default btn-sm m-r-xs">
             {translate('Edit')}
           </a>
-          <a className="btn btn-outline btn-danger" onClick={props.onRemove}>
+          <a className="btn btn-outline btn-danger btn-sm" onClick={props.onRemove}>
+            <i className="fa fa-trash"/>
+            {' '}
             {translate('Remove')}
           </a>
         </span>
