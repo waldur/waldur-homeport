@@ -5,28 +5,38 @@ import * as actions from './actions';
 import * as constants from './constants';
 
 function* getCategories() {
-  yield put(actions.setCategoriesLoadingState({loading: true}));
   try {
     const categories = yield call(api.getCategories);
-    yield put(actions.setCategories(categories));
-    yield put(actions.setCategoriesLoadingState({loading: false, loaded: true}));
+    yield put(actions.categoriesFetchSuccess(categories));
   } catch {
-    yield put(actions.setCategoriesLoadingState({loading: false, loaded: false}));
+    yield put(actions.categoriesFetchError());
   }
 }
 
 function* getOfferings() {
-  yield put(actions.setOfferingsLoadingState({loading: true}));
+  const field = [
+    'uuid',
+    'name',
+    'description',
+    'thumbnail',
+    'rating',
+    'order_item_count',
+  ];
+  const params = {
+    page_size: 6,
+    o: '-created',
+    state: 'Active',
+    field,
+  };
   try {
-    const offerings = yield call(api.getOfferings);
-    yield put(actions.setOfferings(offerings));
-    yield put(actions.setOfferingsLoadingState({loading: false, loaded: true}));
+    const offerings = yield call(api.getOfferingsList, params);
+    yield put(actions.offeringsFetchSuccess(offerings));
   } catch {
-    yield put(actions.setOfferingsLoadingState({loading: false, loaded: false}));
+    yield put(actions.offeringsFetchError());
   }
 }
 
 export default function*() {
-  yield takeEvery(constants.GET_CATEGORIES, getCategories);
-  yield takeEvery(constants.GET_OFFERINGS, getOfferings);
+  yield takeEvery(constants.CATEGORIES_FETCH_START, getCategories);
+  yield takeEvery(constants.OFFERINGS_FETCH_START, getOfferings);
 }

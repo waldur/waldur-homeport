@@ -1,4 +1,4 @@
-import { getAll, getById, post, sendForm } from '@waldur/core/api';
+import { getAll, getById, post, sendForm, getList } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 import { State } from '@waldur/marketplace/orders/types';
 import { Category, Offering, Provider } from '@waldur/marketplace/types';
@@ -9,11 +9,14 @@ export const getCategories = () =>
 export const getCategory = (id: string) =>
   getById<Category>('/marketplace-categories/', id);
 
-export const getOfferings = (options?: {}) =>
+export const getOfferingsList = (params?: {}) =>
+  getList<Offering>('/marketplace-offerings/', params);
+
+export const getAllOfferings = (options?: {}) =>
   getAll<Offering>('/marketplace-offerings/', options);
 
 export const getProviderOfferings = (customerUuid: string) =>
-  getOfferings({params: {customer_uuid: customerUuid}});
+  getAllOfferings({params: {customer_uuid: customerUuid}});
 
 export const getOffering = id =>
   getById<Offering>('/marketplace-offerings/', id);

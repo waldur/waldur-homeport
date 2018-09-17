@@ -16,36 +16,60 @@ const INITIAL_STATE = {
 export const landingReducer = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
-    case constants.SET_CATEGORIES:
+    case constants.CATEGORIES_FETCH_START:
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          loading: true,
+          loaded: false,
+        },
+      };
+    case constants.CATEGORIES_FETCH_SUCCESS:
       return {
         ...state,
         categories: {
           ...state.categories,
           items: payload.categories,
+          loading: false,
+          loaded: true,
         },
       };
-    case constants.SET_OFFERINGS:
+    case constants.CATEGORIES_FETCH_ERROR:
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          loading: false,
+          loaded: false,
+        },
+      };
+    case constants.OFFERINGS_FETCH_START:
+      return {
+        ...state,
+        offerings: {
+          ...state.offerings,
+          loading: true,
+          loaded: false,
+        },
+      };
+    case constants.OFFERINGS_FETCH_SUCCESS:
       return {
         ...state,
         offerings: {
           ...state.offerings,
           items: payload.offerings,
+          loading: false,
+          loaded: true,
         },
       };
-    case constants.SET_CATEGORIES_LOADING_STATE:
-      return {
-        ...state,
-        categories: {
-          ...state.categories,
-          ...payload.state,
-        },
-      };
-    case constants.SET_OFFERINGS_LOADING_STATE:
+    case constants.OFFERINGS_FETCH_ERROR:
       return {
         ...state,
         offerings: {
           ...state.offerings,
-          ...payload.state,
+          loading: false,
+          loaded: false,
         },
       };
     default:

@@ -17,7 +17,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getCategories: () => dispatch(actions.getCategories()),
+  getCategories: () => dispatch(actions.categoriesFetchStart()),
 });
 
 interface ShopCategoriesWrapperProps {

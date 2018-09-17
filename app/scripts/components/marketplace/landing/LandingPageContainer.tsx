@@ -29,8 +29,8 @@ export class LandingPageContainer extends React.Component<LandingPageContainerPr
 }
 
 const mapDispatchToProps = dispatch => ({
-  getCategories: () => dispatch(actions.getCategories()),
-  getOfferings: () => dispatch(actions.getOfferings()),
+  getCategories: () => dispatch(actions.categoriesFetchStart()),
+  getOfferings: () => dispatch(actions.offeringsFetchStart()),
 });
 
 const mapStateToProps = state => ({
