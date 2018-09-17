@@ -21,6 +21,7 @@ export const Order = (props: OrderProps) => (
           <tr>
             <th>{translate('Item')}</th>
             <th className="text-center">{translate('Price')}</th>
+            <th className="text-center">{translate('State')}</th>
             <th>{/* Actions column */}</th>
           </tr>
         </thead>
