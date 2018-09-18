@@ -5361,6 +5361,10 @@ msgstr ""
 msgid "Search for installed libraries in the virtual environment has been scheduled."
 msgstr ""
 
+#: app/scripts/components/marketplace/landing/LandingPage.tsx
+msgid "Search offerings"
+msgstr ""
+
 #: app/scripts/components/aws/AmazonForm.tsx
 msgid "Secret access key"
 msgstr ""
