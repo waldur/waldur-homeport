@@ -3,7 +3,9 @@ import { reduxForm } from 'redux-form';
 
 import { Section } from '@waldur/marketplace/types';
 
-import { AttributeFilter } from './AttributeFilter';
+import './AttributeFilterList.scss';
+
+import { AttributeFilterSection } from './AttributeFilterSection';
 
 interface AttributeFilterListProps {
   sections: Section[];
@@ -20,11 +22,12 @@ const prepareSections = sections =>
 const PureAttributeFilterList = props => (
   <form>
     {prepareSections(props.sections).map((section, index) => (
-      <AttributeFilter key={index} section={section}/>
+      <AttributeFilterSection key={index} section={section} />
     ))}
   </form>
 );
 
 export const AttributeFilterList = reduxForm<any, AttributeFilterListProps>({
   form: 'marketplaceFilter',
+  destroyOnUnmount: false,
 })(PureAttributeFilterList);

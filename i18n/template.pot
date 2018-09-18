@@ -414,6 +414,10 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
+#: app/scripts/components/marketplace/list/AttributeFilterListDialog.tsx
+msgid "Apply"
+msgstr ""
+
 #: app/scripts/components/issues/list/issues-list-filtered.html
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 msgid "Apply filters"
@@ -506,6 +510,10 @@ msgstr ""
 
 #: app/scripts/components/issues/attachments/IssueAttachmentsContainer.tsx
 msgid "Attachments"
+msgstr ""
+
+#: app/scripts/components/marketplace/list/AttributeFilterListDialog.tsx
+msgid "Attributes filter"
 msgstr ""
 
 #: app/scripts/components/offering/OfferingTabs.tsx
@@ -1965,6 +1973,7 @@ msgid "Files"
 msgstr ""
 
 #: app/scripts/components/issues/create/issue-registration.html
+#: app/scripts/components/marketplace/list/MobileFilterActions.tsx
 msgid "Filter"
 msgstr ""
 

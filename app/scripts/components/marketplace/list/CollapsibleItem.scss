@@ -1,0 +1,21 @@
+.collapsible-item {
+  cursor: pointer;
+
+  .collapsed {
+    display: block !important;
+  }
+
+  .collapsible-item__title {
+    display: inline-block;
+  }
+
+  .collapsible-item__content {
+    display: none;
+    padding-top: 10px;
+    padding-bottom: 15px;
+  }
+
+  i {
+    color: #c4c4c4 !important;
+  }
+}

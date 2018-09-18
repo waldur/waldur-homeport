@@ -11,6 +11,7 @@ import marketplaceVendorOfferings from './offerings/OfferingsList';
 import marketplaceOfferingCreate from './offerings/OfferingCreateContainer';
 import marketplaceOrdersList from './orders/OrdersList';
 import marketplaceOrderDetails from './orders/OrderDetailsContainer';
+import marketplaceAttributeFilterListDialog from './list/AttributeFilterListDialog';
 import providersService from './providers-service';
 import registerSidebarExtension from './sidebar';
 import shoppingCartConfig from './shoppingCartConfig';
@@ -28,6 +29,7 @@ export default module => {
   module.component('marketplaceOfferingCreate', marketplaceOfferingCreate);
   module.component('marketplaceOrdersList', marketplaceOrdersList);
   module.component('marketplaceOrderDetails', marketplaceOrderDetails);
+  module.component('marketplaceAttributeFilterListDialog', marketplaceAttributeFilterListDialog);
   module.service('providersService', providersService);
   module.config(routes);
   module.run(registerSidebarExtension);
