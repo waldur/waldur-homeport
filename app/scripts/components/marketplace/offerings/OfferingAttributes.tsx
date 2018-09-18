@@ -7,7 +7,7 @@ import { CustomRadioButton } from '@waldur/marketplace/offerings/CustomRadioButt
 
 import './OfferingAttributes.scss';
 
-interface AttrType {
+export interface AttrConfig {
   type?: string;
   min?: number;
   parse?: any;
@@ -18,7 +18,7 @@ interface AttrType {
 }
 
 export const configAttrField = attribute => {
-  let attr: AttrType = {};
+  let attr: AttrConfig = {};
   switch (attribute.type) {
     case 'integer':
       attr = {
