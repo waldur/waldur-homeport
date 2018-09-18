@@ -4249,8 +4249,6 @@ msgstr ""
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/expert-bids-list.js
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
-#: app/scripts/components/marketplace/cart/ShoppingCart.tsx
-#: app/scripts/components/marketplace/details/OrderSummary.tsx
 #: app/scripts/components/marketplace/offerings/OfferingPlanComponents.tsx
 #: app/scripts/components/marketplace/offerings/PlanForm.tsx
 #: app/scripts/components/marketplace/orders/Order.tsx
@@ -4309,11 +4307,16 @@ msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
+#: app/scripts/components/marketplace/common/BillingPeriod.tsx
 #: app/scripts/components/marketplace/details/selectors.ts
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Price per day"
+msgstr ""
+
+#: app/scripts/components/marketplace/common/BillingPeriod.tsx
+msgid "Price per half month"
 msgstr ""
 
 #: app/scripts/components/marketplace/details/selectors.ts
@@ -4322,6 +4325,7 @@ msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
+#: app/scripts/components/marketplace/common/BillingPeriod.tsx
 #: app/scripts/components/marketplace/details/selectors.ts
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html

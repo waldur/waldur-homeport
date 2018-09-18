@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
+import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import './ShoppingCart.scss';
@@ -8,6 +9,7 @@ import { ShoppingCartItem } from './ShoppingCartItem';
 
 interface ShoppingCartProps {
   items: OrderItemResponse[];
+  maxUnit: 'month' | 'day';
   editable: boolean;
   onShoppingCartItemRemove?(item: OrderItemResponse): void;
 }
@@ -18,7 +20,9 @@ export const ShoppingCart = (props: ShoppingCartProps) => (
       <thead>
         <tr>
           <th>{translate('Item')}</th>
-          <th className="text-center">{translate('Price')}</th>
+          <th className="text-center">
+            <BillingPeriod unit={props.maxUnit}/>
+          </th>
           {!props.editable && <th className="text-center">{translate('State')}</th>}
           {props.editable && <th className="text-center">{translate('Actions')}</th>}
         </tr>

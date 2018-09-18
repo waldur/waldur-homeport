@@ -14,6 +14,8 @@ export interface OrderItemResponse {
   resource_uuid: string;
   resource_type: string;
   cost: string;
+  estimate?: number;
+  unit: string;
   state: string;
   attributes: AttributesType;
 }

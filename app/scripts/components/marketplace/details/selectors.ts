@@ -49,7 +49,7 @@ const offeringSelector = formValueSelector(FORM_ID);
 const planSelector = (state: OfferingFormData): Plan => offeringSelector(state, 'plan');
 const limitsSelector = (state: OfferingFormData): Limits => offeringSelector(state, 'limits');
 
-const combinePlanLimit = (plan: Plan, limits: Limits): PricesData => {
+export const combinePlanLimit = (plan: Plan, limits: Limits): PricesData => {
   if (plan) {
     const {periods, multipliers} = getBillingPeriods(plan.unit);
     const components: Component[] = plan.components
@@ -68,7 +68,8 @@ const combinePlanLimit = (plan: Plan, limits: Limits): PricesData => {
         const prices = multipliers.map(mult => mult * subTotal);
         return {label, units, amount, prices, type, billing_type, subTotal};
       });
-    const total = components.reduce((result, item) => result + item.subTotal, 0);
+    const usageComponents = components.filter(component => component.billing_type === 'usage');
+    const total = parseFloat(plan.unit_price) + usageComponents.reduce((result, item) => result + item.subTotal, 0);
     const totalPeriods = multipliers.map(mult => mult * total);
     return {components, periods, total, totalPeriods};
   } else {
