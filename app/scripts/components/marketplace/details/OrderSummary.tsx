@@ -6,6 +6,7 @@ import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
+import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
@@ -48,12 +49,16 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
           <td><strong>{translate('Project')}</strong></td>
           <td>{props.project.name}</td>
         </tr>
-        <tr>
-          <td className="text-lg">{translate('Price')}</td>
-          <td className="text-lg">
-            {defaultCurrency(props.total)}
-          </td>
-        </tr>
+        {props.formData && props.formData.plan && (
+          <tr>
+            <td className="text-lg">
+              <BillingPeriod unit={props.formData.plan.unit}/>
+            </td>
+            <td className="text-lg">
+              {defaultCurrency(props.total)}
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
     <div className="display-flex justify-content-between">

@@ -30,14 +30,12 @@ export const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) => (
           <td><strong>{translate('Project')}</strong></td>
           <td>{props.project.name}</td>
         </tr>
-        {props.total ? (
-          <tr>
-            <td className="text-lg">{translate('Total')}</td>
-            <td className="text-lg">
-              {defaultCurrency(props.total)}
-            </td>
-          </tr>
-        ) : null}
+        <tr>
+          <td className="text-lg">{translate('Total')}</td>
+          <td className="text-lg">
+            {defaultCurrency(props.total)}
+          </td>
+        </tr>
       </tbody>
     </table>
 

@@ -10,11 +10,12 @@ import { ShoppingCart } from './ShoppingCart';
 import { ShoppingCartSidebar } from './ShoppingCartSidebar';
 import { ShoppingCartSteps } from './ShoppingCartSteps';
 import * as actions from './store/actions';
-import { getState, getCheckoutItems } from './store/selectors';
+import { getState, getCheckoutItems, getMaxUnit } from './store/selectors';
 import { OrderState } from './types';
 
 interface CheckoutPageProps {
   items: OrderItemResponse[];
+  maxUnit: 'month' | 'day';
   state: OrderState;
   setState(state: OrderState): void;
   createOrder(): void;
@@ -28,6 +29,7 @@ const PureCheckoutPage = (props: CheckoutPageProps) => (
         <ShoppingCartSteps state={props.state}/>
         <ShoppingCart
           items={props.items}
+          maxUnit={props.maxUnit}
           onShoppingCartItemRemove={props.removeShoppingCartItem}
           editable={props.state === 'Configure'}/>
         <ActionButtons
@@ -49,6 +51,7 @@ const PureCheckoutPage = (props: CheckoutPageProps) => (
 
 const mapStateToProps = state => ({
   items: getCheckoutItems(state),
+  maxUnit: getMaxUnit(state),
   state: getState(state),
 });
 

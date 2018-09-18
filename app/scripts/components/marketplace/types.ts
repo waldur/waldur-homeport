@@ -29,7 +29,7 @@ export interface Plan {
   url: string;
   name: string;
   description: string;
-  unit_price: number;
+  unit_price: string;
   unit: BillingPeriod;
   components: PlanComponent[];
 }
