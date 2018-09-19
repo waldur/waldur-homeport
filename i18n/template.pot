@@ -5090,6 +5090,10 @@ msgstr ""
 msgid "Resend"
 msgstr ""
 
+#: app/scripts/components/form-react/ResetFormButton.tsx
+msgid "Reset"
+msgstr ""
+
 #: app/scripts/components/digitalocean/droplet-resize.html
 msgid "Resize droplet"
 msgstr ""

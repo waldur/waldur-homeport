@@ -7,6 +7,8 @@ import './CollapsibleItem.scss';
 interface CollapsibleItemProps {
   title: ReactNode;
   content: ReactNode;
+  selected?: boolean;
+  counter?: number;
 }
 
 interface CollapsibleItemState {
@@ -29,10 +31,12 @@ export class CollapsibleItem extends React.Component<CollapsibleItemProps, Colla
     const props = this.props;
     return (
       <div className="collapsible-item">
-        <div className="collapsible-item__title" onClick={this.onClick}>
+        <div className={classNames('collapsible-item__title', {selected: props.selected})} onClick={this.onClick}>
           {props.title}
           {' '}
           {this.state.collapsed ? <i className="fa fa-chevron-up" /> : <i className="fa fa-chevron-down" />}
+          {' '}
+          {props.counter !== 0 && `(${props.counter})`}
         </div>
         <div className={classNames('collapsible-item__content', {collapsed: this.state.collapsed})}>
           {props.content}

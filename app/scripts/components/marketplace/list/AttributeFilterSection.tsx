@@ -1,17 +1,27 @@
 import * as React from 'react';
-import { Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, getFormValues } from 'redux-form';
 
 import { AwesomeCheckBoxGroup } from '@waldur/form-react/AwesomeCheckboxGroup';
+import { countSelectedFilterValues } from '@waldur/marketplace/list/utils';
 import { configAttrField } from '@waldur/marketplace/offerings/OfferingAttributes';
 import { Section } from '@waldur/marketplace/types';
 
 import { AttributeFilterItem } from './AttributeFilterItem';
+import { MARKETPLACE_FILTER_FORM} from './store/constants';
 
-interface AttributeFilterSectionProps {
+interface PureAttributeFilterSectionProps {
   section: Section;
+  filterValues?: object;
 }
 
-export const AttributeFilterSection = (props: AttributeFilterSectionProps) => (
+const markSelectedFilter = (filterValues, fieldName) => {
+  if (filterValues) {
+    return !!filterValues[fieldName];
+  }
+};
+
+export const PureAttributeFilterSection = (props: PureAttributeFilterSectionProps) => (
   <section className="m-t-md m-b-md">
     <h3 className="shopping-cart-sidebar-title">
       {props.section.title}
@@ -20,27 +30,37 @@ export const AttributeFilterSection = (props: AttributeFilterSectionProps) => (
       props.section.attributes.map((attribute, outerIndex) => {
         const attrConfig = configAttrField(attribute);
         const attrKey = attribute.key;
-        return  <AttributeFilterItem
-                  key={outerIndex}
-                  title={<h4 className="attribute__title">{attribute.title}</h4>}
-                >
-                  {
-                    attribute.type === 'list' ?
-                    <AwesomeCheckBoxGroup
-                      outerIndex={outerIndex}
-                      fieldName={attribute.key}
-                      options={attribute.options}
-                    /> :
-                    <Field
-                      key={outerIndex}
-                      name={`${attribute.type}-${attrKey}-${outerIndex}`}
-                      component="input"
-                      className="form-control"
-                      {...attrConfig}
-                    />
-                  }
-                </AttributeFilterItem>;
+        return (
+          <AttributeFilterItem
+            key={outerIndex}
+            title={<h4 className="attribute__title">{attribute.title}</h4>}
+            selected={markSelectedFilter(props.filterValues, `${attribute.type}-${attrKey}-${outerIndex}`)}
+            counter={countSelectedFilterValues(props.filterValues, attrKey)}>
+            {
+              attribute.type === 'list' ?
+              <AwesomeCheckBoxGroup
+                outerIndex={outerIndex}
+                fieldName={attribute.key}
+                options={attribute.options}
+              /> :
+              <Field
+                key={outerIndex}
+                name={`${attribute.type}-${attrKey}-${outerIndex}`}
+                component="input"
+                className="form-control"
+                {...attrConfig}
+              />
+            }
+          </AttributeFilterItem>
+        );
       })
     }
   </section>
 );
+
+const mapStateToProps = (state, props) => ({
+  filterValues: getFormValues(MARKETPLACE_FILTER_FORM)(state),
+  section: props.section,
+});
+
+export const AttributeFilterSection = connect(mapStateToProps)(PureAttributeFilterSection);
