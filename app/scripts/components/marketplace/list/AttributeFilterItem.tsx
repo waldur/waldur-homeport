@@ -7,6 +7,8 @@ import { CollapsibleItem } from '@waldur/marketplace/list/CollapsibleItem';
 interface AttributeFilterItemProps {
   title: ReactNode;
   children: ReactNode;
+  selected?: boolean;
+  counter?: number;
 }
 
 export const AttributeFilterItem: React.SFC<AttributeFilterItemProps> = (props: AttributeFilterItemProps) => (
@@ -15,11 +17,14 @@ export const AttributeFilterItem: React.SFC<AttributeFilterItemProps> = (props: 
       <>
         {props.title}
         {props.children}
-      </>) : (
-      <CollapsibleItem
-        title={props.title}
-        content={props.children}
-      />
+      </>
+    ) : (
+        <CollapsibleItem
+          title={props.title}
+          content={props.children}
+          selected={props.selected}
+          counter={props.counter}
+        />
       )
     }
   </MediaQuery>

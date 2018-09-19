@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { reduxForm } from 'redux-form';
 
+import { MARKETPLACE_FILTER_FORM } from '@waldur/marketplace/list/store/constants';
 import { Section } from '@waldur/marketplace/types';
 
 import './AttributeFilterList.scss';
@@ -28,6 +29,6 @@ const PureAttributeFilterList = props => (
 );
 
 export const AttributeFilterList = reduxForm<any, AttributeFilterListProps>({
-  form: 'marketplaceFilter',
+  form: MARKETPLACE_FILTER_FORM,
   destroyOnUnmount: false,
 })(PureAttributeFilterList);
