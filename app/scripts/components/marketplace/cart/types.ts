@@ -1,11 +1,7 @@
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
-import { Offering, Plan } from '@waldur/marketplace/types';
+import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
 
 export type OrderState = 'Configure' | 'Approve' | 'Review';
-
-export interface AttributesType {
-  [key: string]: any;
-}
 
 export interface State {
   items: OrderItemRequest[];

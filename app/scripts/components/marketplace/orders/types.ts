@@ -1,4 +1,5 @@
-import { OrderState, AttributesType } from '@waldur/marketplace/cart/types';
+import { OrderState } from '@waldur/marketplace/cart/types';
+import { AttributesType } from '@waldur/marketplace/types';
 
 export interface StatusChange {
   processing: boolean;
