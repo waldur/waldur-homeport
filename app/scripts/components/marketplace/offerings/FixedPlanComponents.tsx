@@ -1,14 +1,10 @@
 import * as React from 'react';
-import { compose } from 'redux';
 import { Field } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
-import { connectPlanComponents } from '@waldur/marketplace/offerings/utils';
 import { PlanComponentDescription } from '@waldur/marketplace/types';
 
-const enhance = compose(connectPlanComponents, withTranslation);
-
-export const OfferingPlanComponents = enhance(props => props.components ? (
+export const FixedPlanComponents = withTranslation(props => (
   <table className="table table-borderless">
     <thead>
       <tr>
@@ -23,7 +19,7 @@ export const OfferingPlanComponents = enhance(props => props.components ? (
         <tr key={index}>
           <td>
             <div className="form-control-static">
-              {component.label}
+              {component.name}
             </div>
           </td>
           <td>
@@ -31,7 +27,7 @@ export const OfferingPlanComponents = enhance(props => props.components ? (
               component="input"
               min={0}
               className="form-control"
-              name={`${props.plan}.components.${component.type}.amount`}
+              name={`${props.plan}.fixedComponentQuotas.${component.type}`}
               type="number"
             />
           </td>
@@ -40,17 +36,17 @@ export const OfferingPlanComponents = enhance(props => props.components ? (
               component="input"
               min={0}
               className="form-control"
-              name={`${props.plan}.components.${component.type}.price`}
+              name={`${props.plan}.fixedComponentPrices.${component.type}`}
               type="number"
             />
           </td>
           <td>
             <div className="form-control-static">
-              {component.units}
+              {component.measured_unit}
             </div>
           </td>
         </tr>
       ))}
     </tbody>
   </table>
-) : null);
+));

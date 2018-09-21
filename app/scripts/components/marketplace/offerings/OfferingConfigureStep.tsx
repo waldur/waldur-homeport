@@ -1,17 +1,24 @@
 import * as React from 'react';
 import { FieldArray } from 'redux-form';
 
-import {
-  SelectAsyncField,
-  FormContainer,
-  SelectField,
-} from '@waldur/form-react';
+import { FormContainer, SelectField } from '@waldur/form-react';
+import { TranslateProps } from '@waldur/i18n';
+import { Option } from '@waldur/marketplace/common/registry';
+import { Category } from '@waldur/marketplace/types';
 
 import { OfferingAttributes } from './OfferingAttributes';
 import { OfferingOptions } from './OfferingOptions';
 import { OfferingPlans } from './OfferingPlans';
 
-export const OfferingConfigureStep = props => (
+interface OfferingConfigureStepProps extends TranslateProps {
+  submitting: boolean;
+  showOptions: boolean;
+  offeringTypes: Option[];
+  categories: Category[];
+  category?: Category;
+}
+
+export const OfferingConfigureStep = (props: OfferingConfigureStepProps) => (
   <>
     <FormContainer
       submitting={props.submitting}
@@ -25,10 +32,10 @@ export const OfferingConfigureStep = props => (
         options={props.offeringTypes}
         clearable={false}
       />
-      <SelectAsyncField
+      <SelectField
         name="category"
         label={props.translate('Category')}
-        loadOptions={props.loadCategories}
+        options={props.categories}
         required={true}
         labelKey="title"
         valueKey="url"

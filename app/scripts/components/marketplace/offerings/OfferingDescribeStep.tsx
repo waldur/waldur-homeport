@@ -6,8 +6,13 @@ import {
   TextField,
   FormContainer,
 } from '@waldur/form-react';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 
-export const OfferingDescribeStep = props => (
+interface OfferingDescribeStepProps extends TranslateProps {
+  submitting: boolean;
+}
+
+export const OfferingDescribeStep = withTranslation((props: OfferingDescribeStepProps) => (
   <FormContainer
     submitting={props.submitting}
     labelClass="col-sm-3"
@@ -38,4 +43,4 @@ export const OfferingDescribeStep = props => (
       showFileName={true}
     />
   </FormContainer>
-);
+));

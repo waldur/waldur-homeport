@@ -5,8 +5,9 @@ import { Field, formValueSelector } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 
-import { FORM_ID, FIELD_TYPES } from './constants';
+import { FIELD_TYPES } from './constants';
 import { FormGroup } from './FormGroup';
 import { FieldType } from './types';
 

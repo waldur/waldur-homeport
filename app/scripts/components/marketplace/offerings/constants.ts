@@ -2,8 +2,6 @@ import { translate } from '@waldur/i18n';
 
 import { FieldType } from './types';
 
-export const FORM_ID = 'marketplaceOfferingCreate';
-
 export const getBillingPeriods = () => ([
   {
     label: translate('Per month'),

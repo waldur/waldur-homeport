@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
-import { Offering, PlanComponentDescription } from '@waldur/marketplace/types';
+import { Offering } from '@waldur/marketplace/types';
 
 const REGISTRY = {};
 
@@ -10,8 +10,12 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   component: React.ComponentType<OfferingConfigurationFormProps>;
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
   label: string;
-  components?: PlanComponentDescription[];
   showOptions?: boolean;
+}
+
+export interface Option {
+  value: string;
+  label: string;
 }
 
 export function registerOfferingType(config: OfferingConfiguration) {
@@ -27,15 +31,11 @@ export function getFormSerializer(offeringType) {
   return REGISTRY[offeringType].serializer || (x => x);
 }
 
-export function getOfferingTypes() {
+export function getOfferingTypes(): Option[] {
   return Object.keys(REGISTRY).map(key => ({
     value: key,
     label: REGISTRY[key].label,
   }));
-}
-
-export function getOfferingComponents(offeringType) {
-  return REGISTRY[offeringType].components;
 }
 
 export function showOfferingOptions(offeringType) {

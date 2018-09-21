@@ -4,7 +4,7 @@ import { withTranslation } from '@waldur/i18n';
 
 import { PlanAddButton } from './PlanAddButton';
 import { PlanForm } from './PlanForm';
-import { PlanRemoveButton } from './PlanRemoveButton';
+import { RemoveButton } from './RemoveButton';
 
 export const OfferingPlans = withTranslation(props => (
   <div className="form-group">
@@ -12,7 +12,7 @@ export const OfferingPlans = withTranslation(props => (
       {props.fields.map((plan, index) => (
         <div key={index} className="panel panel-default">
           <div className="panel-heading">
-            <PlanRemoveButton onClick={() => props.fields.remove(index)}/>
+            <RemoveButton onClick={() => props.fields.remove(index)}/>
             <h4>{props.translate('Plan #{index}', {index: index + 1})}</h4>
           </div>
           <div className="panel-body">

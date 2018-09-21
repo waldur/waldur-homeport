@@ -24,3 +24,19 @@ export const updateOfferingState = (offering: Offering, stateAction: string) => 
     stateAction,
   },
 });
+
+export const loadDataStart = () => ({
+  type: constants.LOAD_DATA_START,
+});
+
+export const loadDataSuccess = (categories, plugins) => ({
+  type: constants.LOAD_DATA_SUCCESS,
+  payload: {
+    categories,
+    plugins,
+  },
+});
+
+export const loadDataError = () => ({
+  type: constants.LOAD_DATA_ERROR,
+});

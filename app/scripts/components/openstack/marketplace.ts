@@ -7,24 +7,6 @@ const serializer = props => ({
   subnet_cidr: DEFAULT_SUBNET_CIDR.replace('X', props.subnet_cidr),
 });
 
-const components = [
-  {
-    type: 'cores',
-    label: 'vCPU',
-    units: 'cores',
-  },
-  {
-    type: 'ram',
-    label: 'RAM',
-    units: 'GB',
-  },
-  {
-    type: 'storage',
-    label: 'Storage',
-    units: 'GB',
-  },
-];
-
 registerOfferingType({
   type: 'Packages.Template',
   get label() {
@@ -32,5 +14,4 @@ registerOfferingType({
   },
   component: OpenStackPackageForm,
   serializer,
-  components,
 });

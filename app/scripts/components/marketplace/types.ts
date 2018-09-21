@@ -99,6 +99,7 @@ export interface Section {
 }
 
 export interface Category {
+  url: string;
   uuid?: string;
   title: string;
   icon: string;
@@ -130,6 +131,10 @@ export interface OfferingConfigurationFormProps extends InjectedFormProps {
 
 export interface PlanComponentDescription {
   type: string;
-  label: string;
-  units: string;
+  name: string;
+  measured_unit: string;
+}
+
+export interface AttributesType {
+  [key: string]: any;
 }

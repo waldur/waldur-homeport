@@ -170,6 +170,10 @@ msgstr ""
 msgid "Add comment"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
+msgid "Add component"
+msgstr ""
+
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Add data volume"
 msgstr ""
@@ -356,7 +360,8 @@ msgstr ""
 msgid "Amazon EC2 provider"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/FixedPlanComponents.tsx
 #: app/scripts/components/payments/payment-list.js
 msgid "Amount"
 msgstr ""
@@ -1549,6 +1554,10 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
+msgid "Display name"
+msgstr ""
+
 #: app/scripts/components/auth/auth-login.html
 msgid "Do not have an account?"
 msgstr ""
@@ -2523,6 +2532,10 @@ msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/module.js
 msgid "Internal IPs"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
+msgid "Internal name"
 msgstr ""
 
 #: app/scripts/components/openstack/OpenStackPackageForm.tsx
@@ -3605,7 +3618,7 @@ msgstr ""
 msgid "Offering events"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/utils.ts
+#: app/scripts/components/marketplace/offerings/store/effects.ts
 msgid "Offering has been created."
 msgstr ""
 
@@ -4249,7 +4262,8 @@ msgstr ""
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/expert-bids-list.js
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
-#: app/scripts/components/marketplace/offerings/OfferingPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/FixedPlanComponents.tsx
 #: app/scripts/components/marketplace/offerings/PlanForm.tsx
 #: app/scripts/components/marketplace/orders/Order.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
@@ -4899,7 +4913,7 @@ msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plans-list.js
 #: app/scripts/components/marketplace/cart/ShoppingCartItem.tsx
-#: app/scripts/components/marketplace/offerings/OfferingOptions.tsx
+#: app/scripts/components/marketplace/offerings/RemoveButton.tsx
 #: app/scripts/components/project/projects-list.js
 #: app/scripts/components/providers/provider-list.js
 #: app/scripts/components/team/customer-users-list.js
@@ -4932,10 +4946,6 @@ msgstr ""
 
 #: app/scripts/components/ansible/python-management/form/InstalledLibraryRowForm.tsx
 msgid "Remove package"
-msgstr ""
-
-#: app/scripts/components/marketplace/offerings/PlanRemoveButton.tsx
-msgid "Remove plan"
 msgstr ""
 
 #: app/scripts/components/user/support/UserEditForm.tsx
@@ -6479,7 +6489,7 @@ msgstr ""
 msgid "Unable to create link."
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/utils.ts
+#: app/scripts/components/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
 msgstr ""
 
@@ -6705,7 +6715,8 @@ msgstr ""
 msgid "Unit price"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/FixedPlanComponents.tsx
 msgid "Units"
 msgstr ""
 
