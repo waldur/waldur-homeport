@@ -14,6 +14,7 @@ import detailsModule from './details/module';
 import './dashboard-quotas';
 import './provider';
 import './register-header';
+import './marketplace';
 
 export default module => {
   module.config(slurmRoutes);
