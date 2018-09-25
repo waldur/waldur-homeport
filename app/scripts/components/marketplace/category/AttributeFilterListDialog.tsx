@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { ResetFormButton } from '@waldur/form-react/ResetFormButton';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { MARKETPLACE_FILTER_FORM } from '@waldur/marketplace/list/store/constants';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import AttributeFilterListContainer from './AttributeFilterListContainer';
+import { MARKETPLACE_FILTER_FORM } from './store/constants';
 
 const PureAttributeFilterListDialog = (props: TranslateProps) => {
   return (

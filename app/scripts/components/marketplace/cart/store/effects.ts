@@ -4,7 +4,8 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { getProject } from '@waldur/workspace/selectors';
+import { getProject, getWorkspace } from '@waldur/workspace/selectors';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import * as actions from './actions';
 import * as api from './api';
@@ -26,7 +27,12 @@ function* createOrder() {
     });
     yield put(showSuccess(translate('Order has been submitted.')));
     yield put(actions.clearCart());
-    yield $state.go('marketplace-order-details', {order_uuid: response.data.uuid});
+    const workspace: WorkspaceType = yield select(getWorkspace);
+    if (workspace === 'organization') {
+      yield $state.go('marketplace-order-details-customer', {order_uuid: response.data.uuid});
+    } else {
+      yield $state.go('marketplace-order-details', {order_uuid: response.data.uuid});
+    }
   } catch (error) {
     const errorMessage = `${translate('Unable to create order.')} ${format(error)}`;
     yield put(showError(errorMessage));
@@ -44,7 +50,12 @@ function* clearCart() {
 
 function* addItem() {
   yield put(showSuccess(translate('Order item has been created.')));
-  yield $state.go('marketplace-checkout');
+  const workspace: WorkspaceType = yield select(getWorkspace);
+  if (workspace === 'organization') {
+    yield $state.go('marketplace-checkout-customer');
+  } else {
+    yield $state.go('marketplace-checkout');
+  }
 }
 
 export default function*() {

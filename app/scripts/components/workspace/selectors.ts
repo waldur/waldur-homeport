@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { User, Customer, Project, OuterState } from './types';
+import { User, Customer, Project, OuterState, WorkspaceType } from './types';
 
 export const getUser = (state: OuterState): User =>
   state.workspace.user;
@@ -10,6 +10,9 @@ export const getCustomer = (state: OuterState): Customer =>
 
 export const getProject = (state: OuterState): Project =>
   state.workspace.project;
+
+export const getWorkspace = (state: OuterState): WorkspaceType =>
+  state.workspace.workspace;
 
 export const isStaff = (state: OuterState): boolean =>
   getUser(state) && getUser(state).is_staff;

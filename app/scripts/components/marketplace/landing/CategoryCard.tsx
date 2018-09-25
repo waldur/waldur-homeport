@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Link } from '@waldur/core/Link';
+import { CategoryLink } from '@waldur/marketplace/category/CategoryLink';
 import { Category } from '@waldur/marketplace/types';
 
 import './CategoryCard.scss';
@@ -11,18 +11,17 @@ interface CategoryCardProps {
 
 export const CategoryCard = (props: CategoryCardProps) => (
   <div className="category-card">
-    <Link
+    <CategoryLink
       className="category-thumb"
-      state="marketplace-list"
-      params={{category_uuid: props.category.uuid}}
+      category_uuid={props.category.uuid}
     >
       <img src={props.category.icon}/>
-    </Link>
+    </CategoryLink>
     <div className="category-card-body">
       <h3 className="category-title">
-        <Link state="marketplace-list" params={{category_uuid: props.category.uuid}}>
+        <CategoryLink category_uuid={props.category.uuid}>
           {props.category.title}
-        </Link>
+        </CategoryLink>
       </h3>
       {props.category.offering_count} items
     </div>

@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { reduxForm } from 'redux-form';
 
-import { MARKETPLACE_FILTER_FORM } from '@waldur/marketplace/list/store/constants';
 import { Section } from '@waldur/marketplace/types';
 
 import './AttributeFilterList.scss';
-
 import { AttributeFilterSection } from './AttributeFilterSection';
+import { MARKETPLACE_FILTER_FORM } from './store/constants';
 
 interface AttributeFilterListProps {
   sections: Section[];

@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 
@@ -8,6 +7,7 @@ import { OfferingButton } from '../common/OfferingButton';
 import { RatingStars } from '../common/RatingStars';
 import { Offering } from '../types';
 import './OfferingCard.scss';
+import { OfferingLink } from './OfferingLink';
 
 interface OfferingCardProps {
   offering: Offering;
@@ -15,19 +15,16 @@ interface OfferingCardProps {
 
 export const OfferingCard = (props: OfferingCardProps) => (
   <div className="offering-card">
-    <Link
-      state="marketplace-offering"
-      params={{offering_uuid: props.offering.uuid}}
+    <OfferingLink
+      offering_uuid={props.offering.uuid}
       className="offering-thumb">
       <img src={props.offering.thumbnail}/>
-    </Link>
+    </OfferingLink>
     <div className="offering-card-body">
       <h3 className="offering-title ellipsis">
-        <Link
-          state="marketplace-offering"
-          params={{offering_uuid: props.offering.uuid}}>
+        <OfferingLink offering_uuid={props.offering.uuid}>
           {props.offering.name}
-        </Link>
+        </OfferingLink>
       </h3>
       {props.offering.description && (
         <div className="offering-description ellipsis">

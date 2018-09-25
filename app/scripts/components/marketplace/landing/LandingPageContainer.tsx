@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { offeringsAutocomplete, gotoOffering } from '@waldur/marketplace/landing/store/api';
+import { offeringsAutocomplete } from '@waldur/marketplace/landing/store/api';
 import { CategoriesListType, OfferingsListType } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -28,7 +28,6 @@ export class LandingPageContainer extends React.Component<LandingPageContainerPr
     return (
       <LandingPage {...this.props}
         loadOfferings={offeringsAutocomplete}
-        gotoOffering={gotoOffering}
       />
     );
   }
@@ -37,6 +36,7 @@ export class LandingPageContainer extends React.Component<LandingPageContainerPr
 const mapDispatchToProps = dispatch => ({
   getCategories: () => dispatch(actions.categoriesFetchStart()),
   getOfferings: () => dispatch(actions.offeringsFetchStart()),
+  gotoOffering: (offeringId: string) => dispatch(actions.gotoOffering(offeringId)),
 });
 
 const mapStateToProps = state => ({

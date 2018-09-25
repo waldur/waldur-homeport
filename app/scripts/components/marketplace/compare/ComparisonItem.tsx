@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import { Link } from '@waldur/core/Link';
+import { OfferingLink } from '@waldur/marketplace/common/OfferingLink';
+import { ProviderLink } from '@waldur/marketplace/service-providers/ProviderLink';
 
 import { RatingStars } from '../common/RatingStars';
 import { Offering } from '../types';
@@ -14,19 +15,16 @@ interface ComparisonItemProps {
 export const ComparisonItem = (props: ComparisonItemProps) => (
   <div className="text-center comparison-item">
     <ComparisonItemRemoveButtonContainer offering={props.item}/>
-    <Link
-      state="marketplace-offering"
-      params={{offering_uuid: props.item.uuid}}
+    <OfferingLink
+      offering_uuid={props.item.uuid}
       className="comparison-item-thumb">
       <img src={props.item.thumbnail}/>
-    </Link>
+    </OfferingLink>
     <h3>{props.item.name}</h3>
     <p>by{' '}
-      <Link
-        state="marketplace-provider-details"
-        params={{customer_uuid: props.item.customer_uuid}}>
+      <ProviderLink customer_uuid={props.item.customer_uuid}>
         {props.item.customer_name}
-      </Link>
+      </ProviderLink>
     </p>
     {props.item.rating &&
       <RatingStars rating={props.item.rating} size="medium"/>

@@ -5,12 +5,13 @@ import MediaQuery from 'react-responsive';
 
 import { FilterBarContainer } from '@waldur/marketplace/common/FilterBarContainer';
 import { OfferingGridContainer } from '@waldur/marketplace/common/OfferingGridContainer';
+import { connectAngularComponent } from '@waldur/store/connect';
 
 import AttributeFilterListContainer from './AttributeFilterListContainer';
 import { MobileFilterActions } from './MobileFilterActions';
 import { ShopCategoriesContainer } from './ShopCategoriesContainer';
 
-export const ShopGrid = () => (
+export const CategoryPage = () => (
   <Row>
     <Col lg={3}>
       <ShopCategoriesContainer />
@@ -29,3 +30,5 @@ export const ShopGrid = () => (
     </Col>
   </Row>
 );
+
+export default connectAngularComponent(CategoryPage);

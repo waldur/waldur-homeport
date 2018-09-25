@@ -2,17 +2,19 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { isValid, getFormValues } from 'redux-form';
 
-import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
+import { ProviderLink } from '@waldur/marketplace/service-providers/ProviderLink';
+import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
+import { Project, Customer } from '@waldur/workspace/types';
 
 import { totalPriceSelector } from './selectors';
-import { OrderSummaryProps } from './types';
+import { OrderSummaryProps, OfferingFormData } from './types';
 import { getOrderItem } from './utils';
 
 const PureOrderSummary = (props: OrderSummaryProps) => (
@@ -27,12 +29,9 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
         <tr>
           <td><strong>{translate('Vendor')}</strong></td>
           <td>
-            <Link
-              state="marketplace-provider-details"
-              params={{customer_uuid: props.offering.customer_uuid}}
-            >
+            <ProviderLink customer_uuid={props.offering.customer_uuid}>
               {props.offering.customer_name}
-            </Link>
+            </ProviderLink>
           </td>
         </tr>
         {props.offering.rating && (
@@ -45,10 +44,12 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
           <td><strong>{translate('Invoiced to')}</strong></td>
           <td>{props.customer.name}</td>
         </tr>
-        <tr>
-          <td><strong>{translate('Project')}</strong></td>
-          <td>{props.project.name}</td>
-        </tr>
+        {props.project && (
+          <tr>
+            <td><strong>{translate('Project')}</strong></td>
+            <td>{props.project.name}</td>
+          </tr>
+        )}
         {props.formData && props.formData.plan && (
           <tr>
             <td className="text-lg">
@@ -72,6 +73,14 @@ const PureOrderSummary = (props: OrderSummaryProps) => (
   </>
 );
 
+interface OrderSummaryStateProps {
+  customer: Customer;
+  project?: Project;
+  total: number;
+  formData: OfferingFormData;
+  formValid: boolean;
+}
+
 const mapStateToProps = state => ({
   customer: getCustomer(state),
   project: getProject(state),
@@ -80,4 +89,4 @@ const mapStateToProps = state => ({
   formValid: isValid('marketplaceOffering')(state),
 });
 
-export const OrderSummary = connect(mapStateToProps)(PureOrderSummary);
+export const OrderSummary = connect<OrderSummaryStateProps, {}, {offering: Offering}>(mapStateToProps)(PureOrderSummary);

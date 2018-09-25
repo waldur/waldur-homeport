@@ -16,7 +16,7 @@ export interface OfferingFormData {
 export interface OrderSummaryProps {
   offering: Offering;
   customer: Customer;
-  project: Project;
+  project?: Project;
   total: number;
   formData: OfferingFormData;
   formValid: boolean;
