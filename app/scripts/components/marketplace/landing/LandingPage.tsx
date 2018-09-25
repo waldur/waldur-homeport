@@ -23,7 +23,7 @@ export const LandingPage = withTranslation((props: LandingPageProps) => (
       'Explore {deployment} Marketplace',
       {deployment: ENV.shortPageTitle})}>
       <AutocompleteField
-        placeholder={props.translate('Search offerings')}
+        placeholder={props.translate('Search for apps and services...')}
         loadOfferings={props.loadOfferings}
         onChange={props.gotoOffering}
       />

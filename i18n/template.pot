@@ -5384,15 +5384,12 @@ msgid "Search by name"
 msgstr ""
 
 #: app/scripts/components/marketplace/common/FilterBar.tsx
+#: app/scripts/components/marketplace/landing/LandingPage.tsx
 msgid "Search for apps and services..."
 msgstr ""
 
 #: app/scripts/components/ansible/python-management/effects.ts
 msgid "Search for installed libraries in the virtual environment has been scheduled."
-msgstr ""
-
-#: app/scripts/components/marketplace/landing/LandingPage.tsx
-msgid "Search offerings"
 msgstr ""
 
 #: app/scripts/components/aws/AmazonForm.tsx
