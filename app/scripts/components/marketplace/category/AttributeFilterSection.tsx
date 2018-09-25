@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { Field, getFormValues } from 'redux-form';
 
 import { AwesomeCheckBoxGroup } from '@waldur/form-react/AwesomeCheckboxGroup';
-import { countSelectedFilterValues } from '@waldur/marketplace/list/utils';
 import { configAttrField } from '@waldur/marketplace/offerings/OfferingAttributes';
 import { Section } from '@waldur/marketplace/types';
 
 import { AttributeFilterItem } from './AttributeFilterItem';
 import { MARKETPLACE_FILTER_FORM} from './store/constants';
+import { countSelectedFilterValues } from './utils';
 
 interface PureAttributeFilterSectionProps {
   section: Section;

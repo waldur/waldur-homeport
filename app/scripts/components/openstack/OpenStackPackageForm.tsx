@@ -13,6 +13,7 @@ import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { LabelField } from '@waldur/form-react/LabelField';
 import { translate } from '@waldur/i18n';
 import { PlanDetailsTable } from '@waldur/marketplace/details/PlanDetailsTable';
+import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { OpenStackAllocationPool } from './OpenStackAllocationPool';
@@ -22,7 +23,8 @@ export const DEFAULT_SUBNET_CIDR = '192.168.X.0/24';
 
 export class OpenStackPackageForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
-    this.props.initialize({ attributes: {subnet_cidr: '42' }});
+    const project = this.props.project;
+    this.props.initialize({ attributes: {subnet_cidr: '42' }, project});
   }
 
   render() {
@@ -33,6 +35,7 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
           submitting={false}
           labelClass="col-sm-3"
           controlClass="col-sm-9">
+          <ProjectField/>
           <StringField
             label={translate('Tenant name')}
             name="attributes.name"
@@ -49,6 +52,7 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
               options={props.offering.plans}
               validate={required}
               required={true}
+              clearable={false}
             />
           )}
           <PlanDetailsTable/>

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { connectAngularComponent } from '@waldur/store/connect';
+import { getWorkspace } from '@waldur/workspace/selectors';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import { ActionButtons } from './ActionButtons';
 import { ShoppingCart } from './ShoppingCart';
@@ -20,6 +22,7 @@ interface CheckoutPageProps {
   setState(state: OrderState): void;
   createOrder(): void;
   removeShoppingCartItem(item: OrderItemResponse): void;
+  workspace: WorkspaceType;
 }
 
 const PureCheckoutPage = (props: CheckoutPageProps) => (
@@ -36,6 +39,7 @@ const PureCheckoutPage = (props: CheckoutPageProps) => (
           state={props.state}
           setState={props.setState}
           createOrder={props.createOrder}
+          workspace={props.workspace}
         />
       </div>
       <div className="col-xl-3 col-lg-4">
@@ -53,6 +57,7 @@ const mapStateToProps = state => ({
   items: getCheckoutItems(state),
   maxUnit: getMaxUnit(state),
   state: getState(state),
+  workspace: getWorkspace(state),
 });
 
 const mapDispatchToProps = {

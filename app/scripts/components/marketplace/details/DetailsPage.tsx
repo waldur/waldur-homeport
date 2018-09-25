@@ -35,27 +35,49 @@ class OfferingDetailsPage extends React.Component {
   updateBreadcrumbs(offering) {
     const $timeout = ngInjector.get('$timeout');
     const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
+    const WorkspaceService = ngInjector.get('WorkspaceService');
     const titleService = ngInjector.get('titleService');
 
     $timeout(() => {
       BreadcrumbsService.activeItem = offering.name;
-      BreadcrumbsService.items = [
-        {
-          label: translate('Project workspace'),
-          state: 'project.details',
-        },
-        {
-          label: translate('Marketplace'),
-          state: 'marketplace-landing',
-        },
-        {
-          label: offering.category_title,
-          state: 'marketplace-list',
-          params: {
-            category_uuid: offering.category_uuid,
+      const data = WorkspaceService.getWorkspace();
+      if (data.workspace === 'organization') {
+        BreadcrumbsService.items = [
+          {
+            label: translate('Organization workspace'),
+            state: 'organization.details',
           },
-        },
-      ];
+          {
+            label: translate('Marketplace'),
+            state: 'marketplace-landing-customer',
+          },
+          {
+            label: offering.category_title,
+            state: 'marketplace-category-customer',
+            params: {
+              category_uuid: offering.category_uuid,
+            },
+          },
+        ];
+      } else {
+        BreadcrumbsService.items = [
+          {
+            label: translate('Project workspace'),
+            state: 'project.details',
+          },
+          {
+            label: translate('Marketplace'),
+            state: 'marketplace-landing',
+          },
+          {
+            label: offering.category_title,
+            state: 'marketplace-category',
+            params: {
+              category_uuid: offering.category_uuid,
+            },
+          },
+        ];
+      }
       titleService.setTitle(offering.name);
     });
   }

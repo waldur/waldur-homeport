@@ -5,6 +5,7 @@ import { FormContainer, TextField, StringField, SelectField } from '@waldur/form
 import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { PlanDetailsTable } from '@waldur/marketplace/details/PlanDetailsTable';
+import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 export class OfferingConfigurationForm extends React.Component<OfferingConfigurationFormProps> {
@@ -22,6 +23,7 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
     if (this.props.offering.plans.length === 1) {
       initialData.plan = this.props.offering.plans[0];
     }
+    initialData.project = this.props.project;
     this.props.initialize(initialData);
   }
 
@@ -30,9 +32,10 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
     return (
       <form className="form-horizontal">
         <FormContainer
-          submitting={false}
+          submitting={props.submitting}
           labelClass="col-sm-3"
           controlClass="col-sm-9">
+          <ProjectField/>
           <StringField
             name="attributes.name"
             label={translate('Name')}
@@ -49,6 +52,7 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
               validate={required}
               label={translate('Plan')}
               required={true}
+              clearable={false}
             />
           )}
           <PlanDetailsTable/>

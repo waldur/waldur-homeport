@@ -26,10 +26,12 @@ export const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) => (
           <td><strong>{translate('Invoiced to')}</strong></td>
           <td>{props.customer.name}</td>
         </tr>
-        <tr>
-          <td><strong>{translate('Project')}</strong></td>
-          <td>{props.project.name}</td>
-        </tr>
+        {props.project && (
+          <tr>
+            <td><strong>{translate('Project')}</strong></td>
+            <td>{props.project.name}</td>
+          </tr>
+        )}
         <tr>
           <td className="text-lg">{translate('Total')}</td>
           <td className="text-lg">

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { $state } from '@waldur/core/services';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import { OrderState } from './types';
 
@@ -8,6 +9,7 @@ interface ActionButtonsProps {
   state: OrderState;
   setState(state: OrderState): void;
   createOrder(): void;
+  workspace: WorkspaceType;
 }
 
 const goForward = (props: ActionButtonsProps) => () => {
@@ -21,7 +23,11 @@ const goForward = (props: ActionButtonsProps) => () => {
 
 const goBack = (props: ActionButtonsProps) => () => {
   if (props.state === 'Configure') {
-    $state.go('marketplace-landing');
+    if (props.workspace === 'organization') {
+      $state.go('marketplace-landing-customer');
+    } else {
+      $state.go('marketplace-landing');
+    }
   }
   if (props.state === 'Approve') {
     props.setState('Configure');

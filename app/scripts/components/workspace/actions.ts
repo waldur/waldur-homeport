@@ -4,7 +4,9 @@ import {
   USER_LOGGED_OUT,
   SET_CURRENT_CUSTOMER,
   SET_CURRENT_PROJECT,
+  SET_CURRENT_WORKSPACE,
 } from './constants';
+import { WorkspaceType, Project } from './types';
 
 export const userLoggedIn = user => ({
   type: USER_LOGGED_IN,
@@ -27,9 +29,16 @@ export const setCurrentCustomer = customer => ({
   },
 });
 
-export const setCurrentProject = project => ({
+export const setCurrentProject = (project: Project) => ({
   type: SET_CURRENT_PROJECT,
   payload: {
     project,
+  },
+});
+
+export const setCurrentWorkspace = (workspace: WorkspaceType) => ({
+  type: SET_CURRENT_WORKSPACE,
+  payload: {
+    workspace,
   },
 });

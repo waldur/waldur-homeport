@@ -27,6 +27,7 @@ export interface Customer {
   uuid: string;
   url: string;
   owners: User[];
+  projects?: Project[];
 }
 
 interface Permission {
@@ -41,10 +42,13 @@ export interface Project {
   permissions: Permission[];
 }
 
+export type WorkspaceType = 'user' | 'project' | 'organization' | 'support';
+
 export interface Workspace {
   user: User;
   customer?: Customer;
   project?: Project;
+  workspace?: WorkspaceType;
 }
 
 export interface OuterState {

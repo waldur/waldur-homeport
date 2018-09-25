@@ -1,4 +1,3 @@
-import { $state } from '@waldur/core/services';
 import { getOfferingsList } from '@waldur/marketplace/common/api';
 
 export const offeringsAutocomplete = (query: string) => {
@@ -9,6 +8,3 @@ export const offeringsAutocomplete = (query: string) => {
   };
   return getOfferingsList(params).then(options => ({options}));
 };
-
-export const gotoOffering = (offeringId: string) =>
-  $state.go('marketplace-offering', {offering_uuid: offeringId});

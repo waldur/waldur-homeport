@@ -27,3 +27,10 @@ export const offeringsFetchSuccess = (offerings: Offering[]) => ({
 export const offeringsFetchError = () => ({
   type: constants.OFFERINGS_FETCH_ERROR,
 });
+
+export const gotoOffering = (offeringId: string) => ({
+  type: constants.GOTO_OFFERING,
+  payload: {
+    offeringId,
+  },
+});

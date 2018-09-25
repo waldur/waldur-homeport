@@ -17,6 +17,7 @@ import jupyterHubManagementSaga from '@waldur/ansible/jupyter-hub-management/eff
 import serviceUsageSaga from '@waldur/providers/support/effects';
 import resourceSummarySaga from '@waldur/resource/summary/effects';
 import marketplaceSaga from '@waldur/marketplace/store/effects';
+import workspaceSaga from '@waldur/workspace/effects';
 
 import coreSaga from './coreSaga';
 
@@ -40,4 +41,5 @@ export default [
   serviceUsageSaga,
   resourceSummarySaga,
   marketplaceSaga,
+  workspaceSaga,
 ];

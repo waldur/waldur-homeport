@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import * as React from 'react';
 import MediaQuery from 'react-responsive';
 
-import { CollapsibleItem } from '@waldur/marketplace/list/CollapsibleItem';
+import { CollapsibleItem } from './CollapsibleItem';
 
 interface AttributeFilterItemProps {
   title: ReactNode;

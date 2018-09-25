@@ -4,11 +4,10 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { MARKETPLACE_FILTER_FORM } from '@waldur/marketplace/list/store/constants';
 
 import './MobileFilterActions.scss';
-
 import * as actions from './store/actions';
+import { MARKETPLACE_FILTER_FORM } from './store/constants';
 import { countSelectedFilters } from './utils';
 
 interface MobileFilterActionsProps {
