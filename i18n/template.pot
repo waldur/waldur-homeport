@@ -336,10 +336,15 @@ msgstr ""
 msgid "All spaces, hyphens and dots will be replaced with underscores."
 msgstr ""
 
+#: app/scripts/components/slurm/AllocationForm.tsx
+msgid "Allocation description"
+msgstr ""
+
 #: app/scripts/components/slurm/actions.js
 msgid "Allocation has been updated."
 msgstr ""
 
+#: app/scripts/components/slurm/AllocationForm.tsx
 #: app/scripts/components/slurm/slurm-allocation-checkout-summary.html
 #: app/scripts/components/slurm/slurm-allocation-config.js
 msgid "Allocation name"
@@ -4078,6 +4083,7 @@ msgstr ""
 
 #: app/scripts/components/offering/OfferingConfigurationForm.tsx
 #: app/scripts/components/openstack/OpenStackPackageForm.tsx
+#: app/scripts/components/slurm/AllocationForm.tsx
 msgid "Plan"
 msgstr ""
 
@@ -5290,6 +5296,7 @@ msgstr ""
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr ""
 
+#: app/scripts/components/slurm/marketplace.ts
 #: app/scripts/components/slurm/register-header.ts
 msgid "SLURM allocation"
 msgstr ""
@@ -6307,6 +6314,7 @@ msgstr ""
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js
 #: app/scripts/components/project/ProjectNameField.tsx
 #: app/scripts/components/rijkscloud/VolumeCreateConfig.js
+#: app/scripts/components/slurm/AllocationForm.tsx
 #: app/scripts/components/slurm/slurm-allocation-config.js
 msgid "This name will be visible in accounting data."
 msgstr ""

@@ -63,6 +63,7 @@ export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProp
   async loadData(filterQuery?) {
     const options = {
       params: {
+        state: 'Active',
         category_uuid: $state.params.category_uuid,
         ...filterQuery,
       },
