@@ -5372,7 +5372,6 @@ msgstr ""
 msgid "Screenshots"
 msgstr ""
 
-#: app/scripts/components/marketplace/common/FilterBar.tsx
 #: app/scripts/components/navigation/header/main-search.html
 #: app/scripts/components/table-react/TableQuery.tsx
 #: app/scripts/components/table/responsive-table.js

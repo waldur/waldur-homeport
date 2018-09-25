@@ -5,7 +5,6 @@ import { getFormValues } from 'redux-form';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
-import './MobileFilterActions.scss';
 import * as actions from './store/actions';
 import { MARKETPLACE_FILTER_FORM } from './store/constants';
 import { countSelectedFilters } from './utils';
@@ -16,19 +15,16 @@ interface MobileFilterActionsProps {
 }
 
 export const PureMobileFilterActions: React.SFC<MobileFilterActionsProps> = (props: MobileFilterActionsProps & TranslateProps) => (
-  <div className="mobile-filter-actions">
-    <button
-      type="button"
-      id="attribute-filter-btn"
-      className="btn btn-outline btn-info"
-      onClick={props.showAttributeFilterDialog}>
-      <i className="fa fa-filter"/>
-      {' '}
-      {props.translate('Filter')}
-      {' '}
-      {props.filterValues && `(${countSelectedFilters(props.filterValues)})`}
-    </button>
-  </div>
+  <button
+    type="button"
+    className="btn btn-primary btn-info"
+    onClick={props.showAttributeFilterDialog}>
+    <i className="fa fa-filter"/>
+    {' '}
+    {props.translate('Filter')}
+    {' '}
+    {props.filterValues && `(${countSelectedFilters(props.filterValues)})`}
+  </button>
 );
 
 const mapDispatchToProps = dispatch => ({

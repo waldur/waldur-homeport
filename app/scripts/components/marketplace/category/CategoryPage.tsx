@@ -15,16 +15,18 @@ export const CategoryPage = () => (
   <Row>
     <Col lg={3}>
       <ShopCategoriesContainer />
-      <MediaQuery maxWidth={768}>
-        <MobileFilterActions />
-      </MediaQuery>
       <MediaQuery minWidth={768}>
         <AttributeFilterListContainer />
       </MediaQuery>
     </Col>
     <Col lg={9}>
       <div className="m-b-md p-sm gray-bg">
-        <FilterBarContainer />
+        <div style={{display: 'flex'}}>
+          <FilterBarContainer />
+          <MediaQuery maxWidth={768}>
+            <MobileFilterActions />
+          </MediaQuery>
+        </div>
       </div>
       <OfferingGridContainer />
     </Col>
