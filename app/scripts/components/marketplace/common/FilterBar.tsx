@@ -31,19 +31,12 @@ export class FilterBar extends React.Component<FilterBarProps & TranslateProps, 
 
   render() {
     return (
-      <div className="input-group">
-        <input
-          type="text"
-          className="form-control"
-          placeholder={this.props.translate('Search for apps and services...')}
-          onChange={this.setFilterQuery}
-        />
-        <span className="input-group-btn">
-          <button className="btn btn-primary">
-            {this.props.translate('Search')}
-          </button>
-        </span>
-      </div>
+      <input
+        type="text"
+        className="form-control"
+        placeholder={this.props.translate('Search for apps and services...')}
+        onChange={this.setFilterQuery}
+      />
     );
   }
 }
