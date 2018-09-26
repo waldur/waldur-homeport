@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InjectedFormProps } from 'redux-form';
 import { Field } from 'redux-form';
 
-import { SubmitButton, CancelButton, FieldError } from '@waldur/form-react';
+import { SubmitButton, FieldError } from '@waldur/form-react';
 import { RadioButtonChoice, RadioButtonField } from '@waldur/form-react/RadioButtonField';
 import { TranslateProps } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -12,43 +12,46 @@ import './CustomerCreatePrompt.scss';
 import { MessageButton } from './MessageButton';
 
 interface CustomerCreatePromptProps extends TranslateProps, InjectedFormProps {
-  canRegisterProvider: boolean;
-  canRegisterExpert: boolean;
+  renderExpert: boolean;
+  renderServiceProvider: boolean;
   closeModal(): void;
   onSubmit(data: { [key: string]: string }): void;
 }
 
 export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
   const {
+    renderExpert,
+    renderServiceProvider,
     translate,
-    canRegisterProvider,
-    canRegisterExpert,
     handleSubmit,
     submitting,
     error,
-    closeModal,
     onSubmit,
   } = props;
-  const getColumnClassName = () => {
+
+  const getColumnsNumber = () => {
     let counter = 1;
-
-    if (canRegisterProvider) {
+    if (renderExpert) {
       counter++;
     }
-
-    if (canRegisterExpert) {
+    if (renderServiceProvider) {
       counter++;
     }
+    return counter;
+  };
 
+  const getColumnClassName = () => {
+    const counter = getColumnsNumber();
     switch (counter) {
       case 1:
-        return 'col-12';
+        return 'col-sm-12 single-button';
       case 2:
         return 'col-sm-6';
       case 3:
         return 'col-sm-4';
     }
   };
+
   const renderRadioButtons = field => (
     <RadioButtonField
       {...field}
@@ -61,12 +64,12 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
         new RadioButtonChoice(constants.ROLES.customer, (
           <MessageButton
             iconClass="svgfonticon svgfonticon-customer"
-            title={translate('Customer')}
+            title={translate('Organization')}
           >
             {translate('Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place.')}
           </MessageButton>
         )),
-        canRegisterExpert && new RadioButtonChoice(constants.ROLES.expert, (
+        renderExpert && new RadioButtonChoice(constants.ROLES.expert, (
           <MessageButton
             iconClass="svgfonticon svgfonticon svgfonticon-expert"
             title={translate('Expert')}
@@ -74,7 +77,7 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
             {translate('Register as a customer of our portal that can also offer own experts to the other customers of Waldur.')}
           </MessageButton>
         )),
-        canRegisterProvider && new RadioButtonChoice(constants.ROLES.provider, (
+        renderServiceProvider && new RadioButtonChoice(constants.ROLES.provider, (
           <MessageButton
             iconClass="svgfonticon svgfonticon-provider"
             title={translate('Service Provider')}
@@ -85,23 +88,29 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
       ]}
     />
   );
+
+  const getTitle = () => {
+    const customerTitle1 = translate('You do not currently have any organizations.');
+    const customerTitle2 = translate('Please create a new one:');
+    const expertOrProviderTitle = translate('Please create a new one picking the profile that best matches your organization:');
+    return getColumnsNumber() === 1 ? [customerTitle1, <br key={1}/>, customerTitle2] : [customerTitle1, <br key={2}/>, expertOrProviderTitle];
+  };
+
   return (
     <div className="customer-create-prompt">
       <form onSubmit={handleSubmit(onSubmit)}>
         <ModalDialog
-          title={translate('Please pick the profile that describes your organization.')}
+          title={getTitle()}
           footer={<div>
             <div className="content-center">
               <FieldError error={error} />
             </div>
-            <SubmitButton
-              submitting={submitting}
-              label={translate('Yes, I would')}
-            />
-            <CancelButton
-              label={translate('No, I will do it later')}
-              onClick={closeModal}
-            />
+            <div className="content-center">
+              <SubmitButton
+                submitting={submitting}
+                label={translate('Create')}
+              />
+            </div>
           </div>}
         >
           <Field

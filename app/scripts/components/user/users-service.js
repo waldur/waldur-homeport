@@ -13,6 +13,10 @@ export default function usersService(baseServiceClass, $q, ENV, $rootScope) {
       this.currentUser = user;
     },
 
+    resetCurrentUser: function() {
+      this.currentUser = undefined;
+    },
+
     getCurrentUser: function() {
       if (this.currentUser) {
         return $q.when(this.currentUser);

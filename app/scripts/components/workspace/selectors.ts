@@ -8,6 +8,16 @@ export const getUser = (state: OuterState): User =>
 export const getCustomer = (state: OuterState): Customer =>
   state.workspace.customer;
 
+export const getUserCustomerPermissions = createSelector(
+  getUser,
+  user => {
+    if (user) {
+      return user.customer_permissions;
+    }
+    return [];
+  }
+);
+
 export const getProject = (state: OuterState): Project =>
   state.workspace.project;
 
@@ -70,12 +80,6 @@ export const isAdmin = createSelector(
     return checkRole(project, user, 'admin');
   }
 );
-
-export const canManageCustomer = (state: any): boolean =>
-  state.config.ownerCanManageCustomer;
-
-export const canCreateOrganization = (state: OuterState): boolean =>
-  isStaff(state) || canManageCustomer(state);
 
 export const filterByUser = (state: OuterState) => ({
   user_url: getUser(state).url,
