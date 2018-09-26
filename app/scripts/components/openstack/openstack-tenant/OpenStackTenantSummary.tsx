@@ -8,9 +8,10 @@ import { getTenantTemplate } from '@waldur/openstack/utils';
 import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
 
+import { OpenStackTenant } from './types';
 import { formatPackage } from './utils';
 
-interface OpenStackTenantSummaryProps extends ResourceSummaryProps {
+interface OpenStackTenantSummaryProps extends ResourceSummaryProps<OpenStackTenant> {
   tenantCredentialsVisible: boolean;
 }
 
@@ -34,6 +35,7 @@ const formatUsername = (props: OpenStackTenantSummaryProps) =>
 
 const formatPassword = (props: OpenStackTenantSummaryProps) =>
   props.tenantCredentialsVisible && props.resource.user_password ?
+  // @ts-ignore
   <UserPassword {...props}/> : null;
 
 export const PureOpenStackTenantSummary = (props: OpenStackTenantSummaryProps) => {
@@ -59,6 +61,14 @@ export const PureOpenStackTenantSummary = (props: OpenStackTenantSummaryProps) =
       <Field
         label={translate('Password')}
         value={formatPassword(props)}
+      />
+      <Field
+        label={translate('Internal network ID')}
+        value={resource.internal_network_id}
+      />
+      <Field
+        label={translate('External network ID')}
+        value={resource.external_network_id}
       />
     </>
   );
