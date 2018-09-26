@@ -9,7 +9,7 @@ const openstackTenantNetworks = {
 
 // @ngInject
 function TenantNetworksController(
-  baseResourceListController, openstackNetworksService, actionUtilsService) {
+  baseResourceListController, openstackNetworksService, actionUtilsService, ncUtils) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -22,7 +22,7 @@ function TenantNetworksController(
       actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
         vm.listActions = result;
         fn();
-        this.addRowFields(['subnets']);
+        this.addRowFields(['subnets', 'is_external']);
         vm.service = openstackNetworksService;
       });
     },
@@ -54,7 +54,11 @@ function TenantNetworksController(
           render: function(row) {
             return vm.renderResourceState(row);
           }
-        }
+        },
+        {
+          title: gettext('Is external'),
+          render: row => ncUtils.booleanField(row.is_external),
+        },
       ];
       return options;
     },

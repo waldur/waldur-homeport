@@ -2688,6 +2688,11 @@ msgstr ""
 msgid "Is active"
 msgstr ""
 
+#: app/scripts/components/openstack/openstack-network/OpenStackNetworkSummary.tsx
+#: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js
+msgid "Is external"
+msgstr ""
+
 #: app/scripts/components/digitalocean/digitalocean-droplet-config.js
 msgid "Is official"
 msgstr ""
@@ -3280,6 +3285,7 @@ msgid "Next"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
+#: app/scripts/components/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: app/scripts/components/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 msgid "No"
@@ -7261,6 +7267,7 @@ msgid "X509 certificate in .PEM format"
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
+#: app/scripts/components/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: app/scripts/components/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: app/scripts/components/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 msgid "Yes"
