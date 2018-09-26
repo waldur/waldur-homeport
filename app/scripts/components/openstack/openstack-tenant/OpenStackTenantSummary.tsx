@@ -7,7 +7,6 @@ import { withTranslation } from '@waldur/i18n';
 import { getTenantTemplate } from '@waldur/openstack/utils';
 import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
-import { isStaff } from '@waldur/workspace/selectors';
 
 import { OpenStackTenant } from './types';
 import { formatPackage } from './utils';
@@ -76,7 +75,6 @@ export const PureOpenStackTenantSummary = (props: OpenStackTenantSummaryProps) =
 };
 
 const mapStateToProps = state => ({
-  isStaff: isStaff(state),
   tenantCredentialsVisible: state.config.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE,
 });
 
