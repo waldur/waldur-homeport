@@ -3,6 +3,7 @@ export interface User {
   is_support: boolean;
   url: string;
   uuid: string;
+  customer_permissions?: Permission[];
 }
 
 export interface UserDetails extends User {

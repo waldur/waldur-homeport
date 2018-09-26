@@ -8,11 +8,11 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as constants from './constants';
 import { CustomerCreatePrompt } from './CustomerCreatePrompt';
-import { getOwnerCanRegisterProvider, getOwnerCanRegisterExpert } from './selectors';
+import { renderServiceProvider, expertIsVisible } from './selectors';
 
 const mapStateToProps = state => ({
-  canRegisterProvider: getOwnerCanRegisterProvider(state),
-  canRegisterExpert: getOwnerCanRegisterExpert(state),
+  renderExpert: expertIsVisible(state),
+  renderServiceProvider: renderServiceProvider(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -24,7 +24,6 @@ const mapDispatchToProps = dispatch => ({
       });
     }
 
-    dispatch(closeModalDialog());
     dispatch(openModalDialog('customer-create-dialog', {
       resolve: {
         role: data[constants.FIELD_NAMES.role],
