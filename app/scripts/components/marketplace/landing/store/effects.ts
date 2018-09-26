@@ -25,6 +25,8 @@ function* getOfferings() {
     'thumbnail',
     'rating',
     'order_item_count',
+    'category_uuid',
+    'attributes',
   ];
   const params = {
     page_size: 6,
