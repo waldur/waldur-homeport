@@ -6,7 +6,6 @@ import { getFormValues } from 'redux-form';
 import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -53,7 +52,7 @@ export const TableComponent = props => {
 };
 
 const TableOptions = {
-  table: TABLE_NAME,
+  table: 'OrderItemList',
   fetchData: createFetcher('marketplace-order-items'),
   mapPropsToFilter: props => {
     const filter: any = {provider_uuid: props.customer.uuid};
