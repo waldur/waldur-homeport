@@ -1,57 +1,34 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { getCategory } from '@waldur/marketplace/common/api';
 
 import { Section } from '../../types';
+import * as actions from '../store/actions';
+import * as selectors from '../store/selectors';
 import { AttributeFilterList } from './AttributeFilterList';
 
-interface AttributeFilterListContainerState {
+interface AttributeFilterListContainerState extends TranslateProps {
   sections: Section[];
   loading: boolean;
   loaded: boolean;
+  loadData(): void;
 }
 
-class AttributeFilterListContainer extends React.Component<TranslateProps, AttributeFilterListContainerState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sections: [],
-      loading: true,
-      loaded: false,
-    };
-  }
-
+class AttributeFilterListContainer extends React.Component<AttributeFilterListContainerState> {
   componentDidMount() {
-    this.loadData();
-  }
-
-  async loadData() {
-    const category_uuid = $state.params.category_uuid;
-    try {
-      const category = await getCategory(category_uuid);
-      this.setState({
-        sections: category.sections,
-        loading: false,
-        loaded: true,
-      });
-    } catch {
-      this.setState({
-        sections: [],
-        loading: false,
-        loaded: false,
-      });
-    }
+    this.props.loadData();
   }
 
   render() {
-    if (this.state.loading) {
+    if (this.props.loading) {
       return <LoadingSpinner/>;
     }
 
-    if (!this.state.loaded) {
+    if (!this.props.loaded) {
       return (
         <h3 className="text-center">
           {this.props.translate('Unable to load category sections.')}
@@ -59,7 +36,7 @@ class AttributeFilterListContainer extends React.Component<TranslateProps, Attri
       );
     }
 
-    if (this.state.loaded && !this.state.sections.length) {
+    if (this.props.loaded && !this.props.sections.length) {
       return (
         <h3 className="text-center">
           {this.props.translate('There are no category sections yet.')}
@@ -68,9 +45,20 @@ class AttributeFilterListContainer extends React.Component<TranslateProps, Attri
     }
 
     return (
-      <AttributeFilterList sections={this.state.sections}/>
+      <AttributeFilterList sections={this.props.sections}/>
     );
   }
 }
 
-export default withTranslation(AttributeFilterListContainer);
+const connector = connect(state => ({
+  loading: selectors.isLoading(state),
+  loaded: selectors.isLoaded(state),
+  erred: selectors.isErred(state),
+  sections: selectors.getSections(state),
+}), dispatch => ({
+  loadData: () => dispatch(actions.loadDataStart($state.params.category_uuid)),
+}));
+
+const enhance = compose(connector, withTranslation);
+
+export default enhance(AttributeFilterListContainer);

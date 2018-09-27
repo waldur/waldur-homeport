@@ -6,12 +6,13 @@ import { getFormValues } from 'redux-form';
 import { $state } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { TranslateProps } from '@waldur/i18n';
+import { MARKETPLACE_FILTER_FORM } from '@waldur/marketplace/category/store/constants';
 import { getAllOfferings } from '@waldur/marketplace/common/api';
+import { OfferingGrid } from '@waldur/marketplace/common/OfferingGrid';
 import { FilterQuery } from '@waldur/marketplace/offerings/types';
 import { Offering } from '@waldur/marketplace/types';
 
-import { selectFilterQuery } from '../offerings/store/selectors';
-import { OfferingGrid } from './OfferingGrid';
+import { selectFilterQuery } from './store/selectors';
 
 interface OfferingGridWrapperState {
   items: Offering[];
@@ -118,7 +119,7 @@ export const formatAttributesFilter = query => {
 const mapStateToProps = state => ({
   filterQuery: {
     name: selectFilterQuery(state),
-    attributes: formatAttributesFilter(getFormValues('marketplaceFilter')(state)),
+    attributes: formatAttributesFilter(getFormValues(MARKETPLACE_FILTER_FORM)(state)),
   },
 });
 

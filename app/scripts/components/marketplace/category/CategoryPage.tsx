@@ -3,12 +3,12 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 import MediaQuery from 'react-responsive';
 
-import { OfferingGridContainer } from '@waldur/marketplace/common/OfferingGridContainer';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import AttributeFilterListContainer from './filters/AttributeFilterListContainer';
 import { FilterBarContainer } from './filters/FilterBarContainer';
 import { MobileFilterActions } from './filters/MobileFilterActions';
+import { OfferingGridContainer } from './OfferingGridContainer';
 import { ShopCategoriesContainer } from './ShopCategoriesContainer';
 
 export const CategoryPage = () => (

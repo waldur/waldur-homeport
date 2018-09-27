@@ -1,21 +1,21 @@
 import * as constants from './constants';
 
 const INITIAL_STATE = {
-  step: 'Describe',
+  filterQuery: undefined,
+  sections: [],
   loading: true,
   loaded: false,
   erred: false,
-  categories: [],
-  plugins: {},
 };
 
-export const offeringReducer = (state = INITIAL_STATE, action) => {
+export const categoryReducer = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
-    case constants.SET_STEP:
+
+    case constants.SET_FILTER_QUERY:
       return {
         ...state,
-        step: payload.step,
+        filterQuery: payload.filterQuery,
       };
 
     case constants.LOAD_DATA_START:
@@ -32,8 +32,7 @@ export const offeringReducer = (state = INITIAL_STATE, action) => {
         loading: false,
         loaded: true,
         erred: false,
-        categories: payload.categories,
-        plugins: payload.plugins,
+        sections: payload.sections,
       };
 
     case constants.LOAD_DATA_ERROR:
