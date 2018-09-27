@@ -1,9 +1,12 @@
 import * as React from 'react';
 import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
+import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { Section, Offering } from '@waldur/marketplace/types';
+import { getCustomer } from '@waldur/workspace/selectors';
+import { Customer } from '@waldur/workspace/types';
 
 import { FeaturesTab } from './attributes/FeaturesTab';
 import { OfferingOrderItems } from './OfferingOrderItems';
@@ -12,6 +15,7 @@ import { OverviewTab } from './OverviewTab';
 import { ScreenshotsTab } from './ScreenshotsTab';
 
 interface OfferingTabsProps {
+  customer: Customer;
   sections: Section[];
   offering: Offering;
 }
@@ -47,16 +51,22 @@ const getTabs = (props: OfferingTabsProps) => {
   });
   tabs = tabs.filter(tab => tab.visible);
 
-  tabs.push({
-    title: translate('Order items'),
-    component: () => <OfferingOrderItems offering_uuid={props.offering.uuid}/>,
-    visible: true,
-  });
+  if (props.offering.customer_uuid === props.customer.uuid) {
+    tabs.push({
+      title: translate('Order items'),
+      component: () => <OfferingOrderItems offering_uuid={props.offering.uuid}/>,
+      visible: true,
+    });
+  }
 
   return tabs;
 };
 
-export const OfferingTabs = (props: OfferingTabsProps) => (
+const connector = connect(state => ({
+  customer: getCustomer(state),
+}));
+
+export const OfferingTabs = connector((props: OfferingTabsProps) => (
   <Tabs
     defaultActiveKey="tab-0"
     id="tabs"
@@ -71,4 +81,4 @@ export const OfferingTabs = (props: OfferingTabsProps) => (
       </Tab>
     ))}
   </Tabs>
-);
+));
