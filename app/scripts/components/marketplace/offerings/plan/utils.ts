@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { Component } from '@waldur/marketplace/details/types';
+import { Component } from '@waldur/marketplace/details/plan/types';
 
 import { getPlanPrice, getComponents, getType } from '../store/selectors';
 

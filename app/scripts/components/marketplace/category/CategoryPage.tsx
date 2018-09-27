@@ -3,11 +3,11 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 import MediaQuery from 'react-responsive';
 
-import { FilterBarContainer } from '@waldur/marketplace/common/FilterBarContainer';
 import { OfferingGridContainer } from '@waldur/marketplace/common/OfferingGridContainer';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import AttributeFilterListContainer from './AttributeFilterListContainer';
+import { FilterBarContainer } from './FilterBarContainer';
 import { MobileFilterActions } from './MobileFilterActions';
 import { ShopCategoriesContainer } from './ShopCategoriesContainer';
 

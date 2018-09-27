@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
-import './OfferingAttributes.scss';
 import { configAttrField } from './utils';
 
 export const OfferingAttributes = props =>

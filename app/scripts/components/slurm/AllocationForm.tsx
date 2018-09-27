@@ -8,7 +8,7 @@ import {
   SelectField,
 } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
-import { PlanDetailsTable } from '@waldur/marketplace/details/PlanDetailsTable';
+import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 

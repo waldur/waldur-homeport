@@ -13,7 +13,7 @@ import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Project, Customer } from '@waldur/workspace/types';
 
-import { totalPriceSelector } from './selectors';
+import { totalPriceSelector } from './plan/selectors';
 import { OrderSummaryProps, OfferingFormData } from './types';
 import { getOrderItem } from './utils';
 

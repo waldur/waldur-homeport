@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { combinePlanLimit } from '@waldur/marketplace/details/selectors';
+import { combinePlanLimit } from '@waldur/marketplace/details/plan/utils';
 
 export const getCart = state => state.marketplace.cart;
 
