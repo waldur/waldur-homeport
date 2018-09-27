@@ -2,6 +2,7 @@ import { get, getAll, getById, post, sendForm, getList } from '@waldur/core/api'
 import { ENV } from '@waldur/core/services';
 import { State } from '@waldur/marketplace/orders/types';
 import { Category, Offering, Provider } from '@waldur/marketplace/types';
+import { Customer } from '@waldur/workspace/types';
 
 export const getPlugins = () =>
   get('/marketplace-plugins/').then(response => response.data);
@@ -32,6 +33,9 @@ export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
 
 export const getOrderDetails = (id: string) =>
   getById<State>('/marketplace-orders/', id);
+
+export const getCustomerList = (params?: {}) =>
+  getList<Customer>('/customers/', params);
 
 export const getProvider = (id: string) =>
   getById<Provider>('/customers/', id);

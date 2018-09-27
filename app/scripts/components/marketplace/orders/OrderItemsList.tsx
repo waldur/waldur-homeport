@@ -17,12 +17,8 @@ export const TableComponent = props => {
       render: ({ row }) => row.offering_name,
     },
     {
-      title: translate('Organization'),
+      title: translate('Client organization'),
       render: ({ row }) => row.customer_name,
-    },
-    {
-      title: translate('Project'),
-      render: ({ row }) => row.project_name,
     },
     {
       title: translate('Created at'),
@@ -56,8 +52,16 @@ const TableOptions = {
   fetchData: createFetcher('marketplace-order-items'),
   mapPropsToFilter: props => {
     const filter: any = {provider_uuid: props.customer.uuid};
-    if (props.filter && props.filter.offering) {
-      filter.offering_uuid = props.filter.offering.uuid;
+    if (props.filter) {
+      if (props.filter.offering) {
+        filter.offering_uuid = props.filter.offering.uuid;
+      }
+      if (props.filter.organization) {
+        filter.customer_uuid = props.filter.organization.uuid;
+      }
+      if (props.filter.state) {
+        filter.state = props.filter.state.value;
+      }
     }
     return filter;
   },

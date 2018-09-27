@@ -965,6 +965,11 @@ msgstr ""
 msgid "Client Secret"
 msgstr ""
 
+#: app/scripts/components/marketplace/orders/OrderItemsFilter.tsx
+#: app/scripts/components/marketplace/orders/OrderItemsList.tsx
+msgid "Client organization"
+msgstr ""
+
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: app/scripts/components/billing/events/invoice-events-dialog.html
 #: app/scripts/components/customer/details/customer-report-error.html
@@ -1592,6 +1597,10 @@ msgstr ""
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
+#: app/scripts/components/marketplace/orders/OrderItemsFilter.tsx
+msgid "Done"
+msgstr ""
+
 #: app/scripts/components/experts/requests/details/ExpertContractDetails.tsx
 msgid "Download PDF"
 msgstr ""
@@ -1714,6 +1723,10 @@ msgstr ""
 msgid "Enter date"
 msgstr ""
 
+#: app/scripts/components/marketplace/orders/OrderItemsFilter.tsx
+msgid "Erred"
+msgstr ""
+
 #: app/scripts/components/events/EventDetailsTable.tsx
 #: app/scripts/components/resource/summary/ResourceSummaryBase.tsx
 msgid "Error message"
@@ -1828,6 +1841,10 @@ msgstr ""
 
 #: app/scripts/components/table-react/TableExportButton.tsx
 msgid "Excel"
+msgstr ""
+
+#: app/scripts/components/marketplace/orders/OrderItemsFilter.tsx
+msgid "Executing"
 msgstr ""
 
 #: app/scripts/components/quotas/quota-usage-bar-chart.js
@@ -3622,6 +3639,7 @@ msgid "Objectives"
 msgstr ""
 
 #: app/scripts/components/marketplace/details/OrderSummary.tsx
+#: app/scripts/components/marketplace/orders/OrderItemsFilter.tsx
 #: app/scripts/components/marketplace/orders/OrderItemsList.tsx
 msgid "Offering"
 msgstr ""
@@ -3826,7 +3844,6 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/issues/list/issues-list.js
-#: app/scripts/components/marketplace/orders/OrderItemsList.tsx
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/user/list/ProjectPermissions.tsx
 #: app/scripts/components/user/support/UserDetailsTable.tsx
@@ -4053,6 +4070,7 @@ msgstr ""
 #: app/scripts/components/billing/billing-utils.js
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/invitations/invitations-list.js
+#: app/scripts/components/marketplace/orders/OrderItemsFilter.tsx
 msgid "Pending"
 msgstr ""
 
@@ -4451,7 +4469,6 @@ msgstr ""
 #: app/scripts/components/marketplace/cart/ShoppingCartSidebar.tsx
 #: app/scripts/components/marketplace/details/OrderSummary.tsx
 #: app/scripts/components/marketplace/details/ProjectField.tsx
-#: app/scripts/components/marketplace/orders/OrderItemsList.tsx
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -5522,6 +5539,7 @@ msgstr ""
 
 #: app/scripts/components/issues/create/issue-quick-create.html
 #: app/scripts/components/issues/create/issue-registration.html
+#: app/scripts/components/marketplace/orders/OrderItemsFilter.tsx
 msgid "Select organization..."
 msgstr ""
 
@@ -5575,6 +5593,10 @@ msgstr ""
 
 #: app/scripts/components/resource/list/resource-global-list-filtered.html
 msgid "Select state"
+msgstr ""
+
+#: app/scripts/components/marketplace/orders/OrderItemsFilter.tsx
+msgid "Select state..."
 msgstr ""
 
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html
@@ -5888,6 +5910,7 @@ msgstr ""
 #: app/scripts/components/marketplace/cart/ShoppingCart.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
 #: app/scripts/components/marketplace/orders/Order.tsx
+#: app/scripts/components/marketplace/orders/OrderItemsFilter.tsx
 #: app/scripts/components/marketplace/orders/OrderItemsList.tsx
 #: app/scripts/components/marketplace/orders/OrdersList.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
@@ -6166,6 +6189,10 @@ msgstr ""
 #: app/scripts/components/openstack/OpenStackForm.tsx
 #: app/scripts/components/openstack/OpenStackTenantForm.tsx
 msgid "Tenant user username"
+msgstr ""
+
+#: app/scripts/components/marketplace/orders/OrderItemsFilter.tsx
+msgid "Terminated"
 msgstr ""
 
 #: app/scripts/components/experts/expert-provider-details.html

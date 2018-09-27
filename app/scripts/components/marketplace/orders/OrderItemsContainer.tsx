@@ -7,11 +7,7 @@ import { OrderItemsList } from './OrderItemsList';
 
 const OrderItemsContainer = () => (
   <div className="ibox-content">
-    <div className="row">
-      <div className="form-group col-sm-3">
-        <OrderItemsFilter/>
-      </div>
-    </div>
+    <OrderItemsFilter/>
     <OrderItemsList/>
   </div>
 );
