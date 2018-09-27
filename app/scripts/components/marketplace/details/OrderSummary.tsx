@@ -8,7 +8,7 @@ import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCa
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
-import { ProviderLink } from '@waldur/marketplace/service-providers/ProviderLink';
+import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Project, Customer } from '@waldur/workspace/types';

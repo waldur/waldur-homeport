@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { OfferingLink } from '@waldur/marketplace/common/OfferingLink';
-import { ProviderLink } from '@waldur/marketplace/service-providers/ProviderLink';
+import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
+import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 
 import { RatingStars } from '../common/RatingStars';
 import { Offering } from '../types';

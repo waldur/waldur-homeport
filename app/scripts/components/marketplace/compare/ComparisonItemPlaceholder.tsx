@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
-import { LandingLink } from '@waldur/marketplace/compare/LandingLink';
+import { LandingLink } from '@waldur/marketplace/links/LandingLink';
 
 export const ComparisonItemPlaceholder = () => (
   <td style={{

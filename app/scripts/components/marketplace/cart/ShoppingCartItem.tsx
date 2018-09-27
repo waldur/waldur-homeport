@@ -3,7 +3,7 @@ import * as React from 'react';
 import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-import { OfferingLink } from '@waldur/marketplace/common/OfferingLink';
+import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import './ShoppingCartItem.scss';
