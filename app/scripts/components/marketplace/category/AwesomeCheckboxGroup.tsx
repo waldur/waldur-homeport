@@ -2,7 +2,11 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { Option } from '@waldur/marketplace/offerings/types';
+
+interface Option {
+  key: string;
+  title: string;
+}
 
 interface AwesomeCheckBoxGroupProps {
   fieldName?: string;

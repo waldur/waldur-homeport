@@ -2,11 +2,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Field, getFormValues } from 'redux-form';
 
-import { AwesomeCheckBoxGroup } from '@waldur/form-react/AwesomeCheckboxGroup';
 import { configAttrField } from '@waldur/marketplace/offerings/OfferingAttributes';
 import { Section } from '@waldur/marketplace/types';
 
 import { AttributeFilterItem } from './AttributeFilterItem';
+import { AwesomeCheckBoxGroup } from './AwesomeCheckboxGroup';
 import { MARKETPLACE_FILTER_FORM} from './store/constants';
 import { countSelectedFilterValues } from './utils';
 

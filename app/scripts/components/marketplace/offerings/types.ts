@@ -9,11 +9,6 @@ export interface FilterQuery {
   attributes?: object;
 }
 
-export interface Option {
-  key: string;
-  title: string;
-}
-
 export type FieldType =
   | 'boolean'
   | 'integer'
