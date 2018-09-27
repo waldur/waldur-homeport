@@ -6,9 +6,9 @@ import { TranslateProps } from '@waldur/i18n';
 import { Option } from '@waldur/marketplace/common/registry';
 import { Category } from '@waldur/marketplace/types';
 
-import { OfferingAttributes } from './OfferingAttributes';
-import { OfferingOptions } from './OfferingOptions';
-import { OfferingPlans } from './OfferingPlans';
+import { OfferingAttributes } from '../attributes/OfferingAttributes';
+import { OfferingOptions } from '../option/OfferingOptions';
+import { OfferingPlans } from '../plan/OfferingPlans';
 
 interface OfferingConfigureStepProps extends TranslateProps {
   submitting: boolean;

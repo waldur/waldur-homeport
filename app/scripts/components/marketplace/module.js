@@ -8,7 +8,7 @@ import marketplaceOffering from './details/DetailsPage';
 import marketplaceCategory from './category/CategoryPage';
 import marketplaceProviderDetails from './service-providers/ProviderDetailsContainer';
 import marketplaceVendorOfferings from './offerings/OfferingsList';
-import marketplaceOfferingCreate from './offerings/OfferingCreateContainer';
+import marketplaceOfferingCreate from './offerings/create/OfferingCreateContainer';
 import marketplaceOrdersList from './orders/OrdersList';
 import marketplaceOrderDetails from './orders/OrderDetailsContainer';
 import marketplaceAttributeFilterListDialog from './category/AttributeFilterListDialog';

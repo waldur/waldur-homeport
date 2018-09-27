@@ -4,8 +4,8 @@ import { compose } from 'redux';
 import { withTranslation } from '@waldur/i18n';
 import { getOfferingTypes, showOfferingOptions } from '@waldur/marketplace/common/registry';
 
+import { getCategory, getCategories, getType } from '../store/selectors';
 import { OfferingConfigureStep } from './OfferingConfigureStep';
-import { getCategory, getCategories, getType } from './store/selectors';
 
 const mapStateToProps = state => {
   const props: any = {

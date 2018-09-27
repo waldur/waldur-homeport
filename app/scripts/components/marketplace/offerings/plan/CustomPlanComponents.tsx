@@ -2,19 +2,9 @@ import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
 
+import { RemoveButton } from '../RemoveButton';
+import { ComponentAddButton } from './ComponentAddButton';
 import { ComponentRow } from './ComponentRow';
-import { RemoveButton } from './RemoveButton';
-
-const ComponentAddButton = withTranslation(props => (
-  <button
-    type="button"
-    className="btn btn-default"
-    onClick={props.onClick}>
-    <i className="fa fa-plus"/>
-    {' '}
-    {props.translate('Add component')}
-  </button>
-));
 
 export const CustomPlanComponents = withTranslation(props => props.fields.length > 0 ? (
   <table className="table table-borderless">

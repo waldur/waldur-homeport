@@ -4,7 +4,8 @@ import { Field } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
-import { connectPlanComponents } from '@waldur/marketplace/offerings/utils';
+
+import { connectPlanComponents } from './utils';
 
 const enhance = compose(connectPlanComponents, withTranslation);
 

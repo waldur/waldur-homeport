@@ -3,7 +3,7 @@ import * as React from 'react';
 import { SubmitButton } from '@waldur/form-react';
 import { TranslateProps } from '@waldur/i18n';
 
-import { OfferingStep } from './types';
+import { OfferingStep } from '../types';
 
 interface ActionButtonsProps extends TranslateProps {
   step: OfferingStep;

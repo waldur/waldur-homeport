@@ -119,8 +119,8 @@ msgstr ""
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/events/BaseEventsList.tsx
 #: app/scripts/components/marketplace/cart/ShoppingCart.tsx
-#: app/scripts/components/marketplace/offerings/ActionsDropdown.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
+#: app/scripts/components/marketplace/offerings/actions/ActionsDropdown.tsx
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 #: app/scripts/components/resource/actions/action-button-resource.html
@@ -170,7 +170,7 @@ msgstr ""
 msgid "Add comment"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/ComponentAddButton.tsx
 msgid "Add component"
 msgstr ""
 
@@ -211,12 +211,12 @@ msgstr ""
 msgid "Add notification"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingCreateButton.tsx
+#: app/scripts/components/marketplace/offerings/actions/OfferingCreateButton.tsx
 #: app/scripts/components/marketplace/routes.js
 msgid "Add offering"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingOptions.tsx
+#: app/scripts/components/marketplace/offerings/option/AddOptionButton.tsx
 msgid "Add option"
 msgstr ""
 
@@ -224,7 +224,7 @@ msgstr ""
 msgid "Add organization"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/PlanAddButton.tsx
+#: app/scripts/components/marketplace/offerings/plan/PlanAddButton.tsx
 msgid "Add plan"
 msgstr ""
 
@@ -367,8 +367,8 @@ msgstr ""
 msgid "Amazon EC2 provider"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
-#: app/scripts/components/marketplace/offerings/FixedPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/CustomPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/FixedPlanComponents.tsx
 #: app/scripts/components/payments/payment-list.js
 msgid "Amount"
 msgstr ""
@@ -595,7 +595,7 @@ msgstr ""
 msgid "Azure region where to provision resources (default: \"Central US\")"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/ActionButtons.tsx
+#: app/scripts/components/marketplace/offerings/create/ActionButtons.tsx
 #: app/scripts/components/navigation/header/site-header.html
 msgid "Back"
 msgstr ""
@@ -721,7 +721,7 @@ msgstr ""
 msgid "Billing details"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/PlanForm.tsx
+#: app/scripts/components/marketplace/offerings/plan/PlanForm.tsx
 msgid "Billing period"
 msgstr ""
 
@@ -751,7 +751,7 @@ msgid "Bootable"
 msgstr ""
 
 #: app/scripts/components/azure/AzureForm.tsx
-#: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
+#: app/scripts/components/marketplace/offerings/create/OfferingDescribeStep.tsx
 msgid "Browse"
 msgstr ""
 
@@ -881,8 +881,8 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
+#: app/scripts/components/marketplace/offerings/create/OfferingConfigureStep.tsx
 #: app/scripts/components/openstack/openstack-tenant/openstack-template.js
 msgid "Category"
 msgstr ""
@@ -935,7 +935,7 @@ msgstr ""
 msgid "Checkout summary"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+#: app/scripts/components/marketplace/offerings/option/OptionForm.tsx
 msgid "Choices as comma-separated list"
 msgstr ""
 
@@ -1040,7 +1040,7 @@ msgid "Components"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.html
-#: app/scripts/components/marketplace/offerings/ActionButtons.tsx
+#: app/scripts/components/marketplace/offerings/create/ActionButtons.tsx
 #: app/scripts/components/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Configure"
 msgstr ""
@@ -1404,14 +1404,14 @@ msgstr ""
 msgid "Default availability zone for provisioned instances."
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+#: app/scripts/components/marketplace/offerings/option/OptionForm.tsx
 msgid "Default value"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-items.html
 #: app/scripts/components/experts/bids/details/expert-bid-details.html
 #: app/scripts/components/issues/comments/IssueCommentDeleteDialog.tsx
-#: app/scripts/components/marketplace/offerings/OfferingDeleteButton.tsx
+#: app/scripts/components/marketplace/offerings/actions/OfferingDeleteButton.tsx
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html
 #: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -1456,8 +1456,8 @@ msgstr ""
 #: app/scripts/components/jira/issue/JiraIssuesList.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/marketplace/details/OfferingTabs.tsx
-#: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
-#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+#: app/scripts/components/marketplace/offerings/create/OfferingDescribeStep.tsx
+#: app/scripts/components/marketplace/offerings/option/OptionForm.tsx
 #: app/scripts/components/offering/OfferingConfigurationForm.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
@@ -1558,7 +1558,7 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/CustomPlanComponents.tsx
 msgid "Display name"
 msgstr ""
 
@@ -2538,7 +2538,7 @@ msgstr ""
 msgid "Internal IPs"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/CustomPlanComponents.tsx
 msgid "Internal name"
 msgstr ""
 
@@ -2829,7 +2829,7 @@ msgstr ""
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+#: app/scripts/components/marketplace/offerings/option/OptionForm.tsx
 msgid "Label"
 msgstr ""
 
@@ -3054,7 +3054,7 @@ msgstr ""
 msgid "Maximal valid value is"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+#: app/scripts/components/marketplace/offerings/option/OptionForm.tsx
 msgid "Maximal value"
 msgstr ""
 
@@ -3102,7 +3102,7 @@ msgstr ""
 msgid "Minimal valid value is 0"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+#: app/scripts/components/marketplace/offerings/option/OptionForm.tsx
 msgid "Minimal value"
 msgstr ""
 
@@ -3171,10 +3171,10 @@ msgstr ""
 #: app/scripts/components/jira/project/JiraProjectSummary.tsx
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/jira/project/jira-projects-list.js
-#: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
-#: app/scripts/components/marketplace/offerings/OptionForm.tsx
-#: app/scripts/components/marketplace/offerings/PlanForm.tsx
+#: app/scripts/components/marketplace/offerings/create/OfferingDescribeStep.tsx
+#: app/scripts/components/marketplace/offerings/option/OptionForm.tsx
+#: app/scripts/components/marketplace/offerings/plan/PlanForm.tsx
 #: app/scripts/components/offering/OfferingConfigurationForm.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/appstore-offering.js
@@ -3229,13 +3229,13 @@ msgstr ""
 msgid "Name should contain at least 3 symbols."
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
+#: app/scripts/components/marketplace/offerings/create/OfferingDescribeStep.tsx
 msgid "Native description"
 msgstr ""
 
 #: app/scripts/components/customer/create/customer-create-config.js
 #: app/scripts/components/customer/details/CustomerDetails.tsx
-#: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
+#: app/scripts/components/marketplace/offerings/create/OfferingDescribeStep.tsx
 #: app/scripts/components/marketplace/service-providers/ProviderData.tsx
 #: app/scripts/components/user/support/UserDetailsTable.tsx
 #: app/scripts/components/user/support/UserEditForm.tsx
@@ -3639,7 +3639,7 @@ msgstr ""
 msgid "Offering link"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingDescribeStep.tsx
+#: app/scripts/components/marketplace/offerings/create/OfferingDescribeStep.tsx
 msgid "Offering logo"
 msgstr ""
 
@@ -3764,7 +3764,7 @@ msgstr ""
 msgid "Opened by"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingOptions.tsx
+#: app/scripts/components/marketplace/offerings/option/OfferingOptions.tsx
 msgid "Option #{index}"
 msgstr ""
 
@@ -4046,15 +4046,15 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/constants.ts
+#: app/scripts/components/marketplace/offerings/plan/constants.ts
 msgid "Per day"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/constants.ts
+#: app/scripts/components/marketplace/offerings/plan/constants.ts
 msgid "Per half month"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/constants.ts
+#: app/scripts/components/marketplace/offerings/plan/constants.ts
 msgid "Per month"
 msgstr ""
 
@@ -4095,7 +4095,7 @@ msgstr ""
 msgid "Plan"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OfferingPlans.tsx
+#: app/scripts/components/marketplace/offerings/plan/OfferingPlans.tsx
 msgid "Plan #{index}"
 msgstr ""
 
@@ -4282,9 +4282,9 @@ msgstr ""
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/expert-bids-list.js
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
-#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
-#: app/scripts/components/marketplace/offerings/FixedPlanComponents.tsx
-#: app/scripts/components/marketplace/offerings/PlanForm.tsx
+#: app/scripts/components/marketplace/offerings/plan/CustomPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/FixedPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/PlanForm.tsx
 #: app/scripts/components/marketplace/orders/Order.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/paypal/paypal-invoices-list.js
@@ -5104,7 +5104,7 @@ msgstr ""
 msgid "Requests"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+#: app/scripts/components/marketplace/offerings/option/OptionForm.tsx
 msgid "Required"
 msgstr ""
 
@@ -5949,7 +5949,7 @@ msgid "Storages"
 msgstr ""
 
 #: app/scripts/components/digitalocean/droplet-resize.html
-#: app/scripts/components/marketplace/offerings/ActionButtons.tsx
+#: app/scripts/components/marketplace/offerings/create/ActionButtons.tsx
 #: app/scripts/components/openstack/openstack-tenant/actions/change-package-dialog.html
 #: app/scripts/components/openstack/openstack-volume/snapshot-create.html
 #: app/scripts/components/openstack/openstack-volume/volume-extend.html
@@ -6185,7 +6185,7 @@ msgstr ""
 msgid "There are no SSH public keys yet."
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/ActionsDropdown.tsx
+#: app/scripts/components/marketplace/offerings/actions/ActionsDropdown.tsx
 #: app/scripts/components/paypal/paypal-invoice-actions.html
 #: app/scripts/components/resource/actions/action-button-resource.html
 msgid "There are no actions."
@@ -6448,8 +6448,8 @@ msgstr ""
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
 #: app/scripts/components/jira/project/jira-project-config.js
 #: app/scripts/components/jira/project/jira-projects-list.js
-#: app/scripts/components/marketplace/offerings/OfferingConfigureStep.tsx
-#: app/scripts/components/marketplace/offerings/OptionForm.tsx
+#: app/scripts/components/marketplace/offerings/create/OfferingConfigureStep.tsx
+#: app/scripts/components/marketplace/offerings/option/OptionForm.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/offerings-list.js
 #: app/scripts/components/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -6739,8 +6739,8 @@ msgstr ""
 msgid "Unit price"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/CustomPlanComponents.tsx
-#: app/scripts/components/marketplace/offerings/FixedPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/CustomPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/FixedPlanComponents.tsx
 msgid "Units"
 msgstr ""
 

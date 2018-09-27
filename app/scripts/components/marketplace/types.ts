@@ -72,6 +72,7 @@ export interface Offering {
   options?: OfferingOptions;
   plans?: Plan[];
   type: string;
+  state: string;
 }
 
 export interface Screenshot {

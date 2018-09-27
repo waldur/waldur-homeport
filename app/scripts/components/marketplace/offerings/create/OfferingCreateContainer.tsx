@@ -4,10 +4,10 @@ import { reduxForm } from 'redux-form';
 
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { loadDataStart } from '../store/actions';
+import { FORM_ID, createOffering } from '../store/constants';
+import { getStep, isLoading, isLoaded } from '../store/selectors';
 import { OfferingCreateDialog } from './OfferingCreateDialog';
-import { loadDataStart } from './store/actions';
-import { FORM_ID, createOffering } from './store/constants';
-import { getStep, isLoading, isLoaded } from './store/selectors';
 
 const mapStateToProps = state => ({
   step: getStep(state),

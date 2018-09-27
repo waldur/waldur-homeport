@@ -2,19 +2,9 @@ import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
 
+import { RemoveButton } from '../RemoveButton';
+import { AddOptionButton } from './AddOptionButton';
 import { OptionForm } from './OptionForm';
-import { RemoveButton } from './RemoveButton';
-
-const AddOptionButton = withTranslation(props => (
-  <button
-    type="button"
-    className="btn btn-default"
-    onClick={props.onClick}>
-    <i className="fa fa-plus"/>
-    {' '}
-    {props.translate('Add option')}
-  </button>
-));
 
 export const OfferingOptions = withTranslation(props => (
   <div className="form-group">

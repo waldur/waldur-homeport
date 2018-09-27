@@ -4,9 +4,9 @@ import { Field, FieldArray } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
 
+import { FormGroup } from '../FormGroup';
 import { CustomPlanComponents } from './CustomPlanComponents';
 import { FixedPlanComponents } from './FixedPlanComponents';
-import { FormGroup } from './FormGroup';
 import { PlanBillingPeriodField } from './PlanBillingPeriodField';
 import { PriceField } from './PriceField';
 import { connectPlanComponents } from './utils';

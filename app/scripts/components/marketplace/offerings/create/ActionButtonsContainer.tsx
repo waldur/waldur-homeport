@@ -4,11 +4,11 @@ import { isInvalid, isSubmitting } from 'redux-form';
 import { $state } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 
+import { setStep } from '../store/actions';
+import { FORM_ID } from '../store/constants';
+import { getStep } from '../store/selectors';
+import { OfferingStep } from '../types';
 import { ActionButtons } from './ActionButtons';
-import { setStep } from './store/actions';
-import { FORM_ID } from './store/constants';
-import { getStep } from './store/selectors';
-import { OfferingStep } from './types';
 
 const mapStateToProps = state => ({
   step: getStep(state),

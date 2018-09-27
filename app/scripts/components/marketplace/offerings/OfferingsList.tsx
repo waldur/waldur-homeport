@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
-import { OfferingActions } from '@waldur/marketplace/offerings/OfferingActions';
 import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { OfferingCreateButton } from './OfferingCreateButton';
+import { OfferingActions } from './actions/OfferingActions';
+import { OfferingCreateButton } from './actions/OfferingCreateButton';
 
 export const TableComponent = props => {
   const { translate } = props;

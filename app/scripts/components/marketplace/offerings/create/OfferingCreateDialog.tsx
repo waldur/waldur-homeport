@@ -7,10 +7,10 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { FieldError } from '@waldur/form-react';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
 
+import { STEPS, OfferingStep } from '../types';
 import { ActionButtonsContainer } from './ActionButtonsContainer';
 import { OfferingConfigurationContainer } from './OfferingConfigurationContainer';
 import { OfferingDescribeStep } from './OfferingDescribeStep';
-import { STEPS, OfferingStep } from './types';
 
 interface OfferingCreateDialogProps extends InjectedFormProps {
   step: OfferingStep;

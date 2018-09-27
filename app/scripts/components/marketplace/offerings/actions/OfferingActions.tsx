@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { ActionsDropdown } from '@waldur/marketplace/offerings/ActionsDropdown';
-import { stateTransitionActions, stateTransition } from '@waldur/marketplace/offerings/utils';
+import { Offering } from '@waldur/marketplace/types';
 
+import * as actions from '../store/actions';
+import { ActionsDropdown } from './ActionsDropdown';
 import './OfferingActions.scss';
-
-import * as actions from './store/actions';
+import { stateTransitionActions, stateTransition } from './utils';
 
 interface OfferingActionsProps extends TranslateProps {
-  row: any;
+  row: Offering;
   updateOfferingState?(offering, stateAction): void;
 }
 

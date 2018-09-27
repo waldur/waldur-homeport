@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
 
+import { RemoveButton } from '../RemoveButton';
 import { PlanAddButton } from './PlanAddButton';
 import { PlanForm } from './PlanForm';
-import { RemoveButton } from './RemoveButton';
 
 export const OfferingPlans = withTranslation(props => (
   <div className="form-group">

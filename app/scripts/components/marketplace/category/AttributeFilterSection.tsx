@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Field, getFormValues } from 'redux-form';
 
-import { configAttrField } from '@waldur/marketplace/offerings/OfferingAttributes';
+import { configAttrField } from '@waldur/marketplace/offerings/attributes/utils';
 import { Section } from '@waldur/marketplace/types';
 
 import { AttributeFilterItem } from './AttributeFilterItem';

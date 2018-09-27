@@ -2,7 +2,8 @@ import * as classNames from 'classnames';
 import * as React from 'react';
 
 import { TranslateProps } from '@waldur/i18n';
-import { OfferingAction, OfferingStateTransition } from '@waldur/marketplace/offerings/types';
+
+import { OfferingAction, OfferingStateTransition } from './types';
 
 interface ActionsDropdownProps extends TranslateProps {
   actions?: Array<OfferingAction<OfferingStateTransition>>;
