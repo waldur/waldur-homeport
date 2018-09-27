@@ -25,7 +25,7 @@ export const LandingPage = withTranslation((props: LandingPageProps) => (
       <AutocompleteField
         placeholder={props.translate('Search for apps and services...')}
         loadOfferings={props.loadOfferings}
-        onChange={props.gotoOffering}
+        onChange={(offering: any) => props.gotoOffering(offering.uuid)}
       />
     </HeroSection>
     <div className="row">

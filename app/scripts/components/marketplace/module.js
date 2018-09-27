@@ -10,6 +10,7 @@ import marketplaceProviderDetails from './service-providers/ProviderDetailsConta
 import marketplaceVendorOfferings from './offerings/OfferingsList';
 import marketplaceOfferingCreate from './offerings/create/OfferingCreateContainer';
 import marketplaceOrdersList from './orders/OrdersList';
+import marketplaceOrderItemsList from './orders/OrderItemsContainer';
 import marketplaceOrderDetails from './orders/OrderDetailsContainer';
 import marketplaceAttributeFilterListDialog from './category/filters/AttributeFilterListDialog';
 import providersService from './providers-service';
@@ -28,6 +29,7 @@ export default module => {
   module.component('marketplaceVendorOfferings', marketplaceVendorOfferings);
   module.component('marketplaceOfferingCreate', marketplaceOfferingCreate);
   module.component('marketplaceOrdersList', marketplaceOrdersList);
+  module.component('marketplaceOrderItemsList', marketplaceOrderItemsList);
   module.component('marketplaceOrderDetails', marketplaceOrderDetails);
   module.component('marketplaceAttributeFilterListDialog', marketplaceAttributeFilterListDialog);
   module.service('providersService', providersService);

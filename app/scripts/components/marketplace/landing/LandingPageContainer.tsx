@@ -27,7 +27,7 @@ export class LandingPageContainer extends React.Component<LandingPageContainerPr
   render() {
     return (
       <LandingPage {...this.props}
-        loadOfferings={offeringsAutocomplete}
+        loadOfferings={query => offeringsAutocomplete(query)}
       />
     );
   }

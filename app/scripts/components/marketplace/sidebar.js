@@ -47,6 +47,14 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         link: 'marketplace-landing-customer({uuid: $ctrl.context.customer.uuid})',
         index: 210,
       },
+      {
+        key: 'marketplace',
+        icon: 'fa-file',
+        label: gettext('Order items'),
+        feature: 'marketplace',
+        link: 'marketplace-order-items({uuid: $ctrl.context.customer.uuid})',
+        index: 220,
+      },
     ];
   });
 }

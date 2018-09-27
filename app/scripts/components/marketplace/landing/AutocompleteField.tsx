@@ -13,6 +13,7 @@ interface AutocompleteFieldProps {
   placeholder: string;
   loadOfferings: (query: string) => Option;
   onChange: (offeringId: string) => void;
+  value?: any;
 }
 
 export const AutocompleteField = (props: AutocompleteFieldProps) => (
@@ -23,6 +24,7 @@ export const AutocompleteField = (props: AutocompleteFieldProps) => (
     labelKey="name"
     optionRenderer={renderer}
     valueRenderer={renderer}
-    onChange={(value: any) => props.onChange(value.uuid)}
+    value={props.value}
+    onChange={(value: any) => props.onChange(value)}
   />
 );
