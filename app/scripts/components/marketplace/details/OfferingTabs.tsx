@@ -6,6 +6,7 @@ import { translate } from '@waldur/i18n';
 import { Section, Offering } from '@waldur/marketplace/types';
 
 import { FeaturesTab } from './attributes/FeaturesTab';
+import { OfferingOrderItems } from './OfferingOrderItems';
 import './OfferingTabs.scss';
 import { OverviewTab } from './OverviewTab';
 import { ScreenshotsTab } from './ScreenshotsTab';
@@ -45,6 +46,13 @@ const getTabs = (props: OfferingTabsProps) => {
     });
   });
   tabs = tabs.filter(tab => tab.visible);
+
+  tabs.push({
+    title: translate('Order items'),
+    component: () => <OfferingOrderItems offering_uuid={props.offering.uuid}/>,
+    visible: true,
+  });
+
   return tabs;
 };
 
