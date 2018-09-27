@@ -5,10 +5,10 @@ import { Field, getFormValues } from 'redux-form';
 import { configAttrField } from '@waldur/marketplace/offerings/attributes/utils';
 import { Section } from '@waldur/marketplace/types';
 
+import { MARKETPLACE_FILTER_FORM} from '../store/constants';
+import { countSelectedFilterValues } from '../utils';
 import { AttributeFilterItem } from './AttributeFilterItem';
 import { AwesomeCheckBoxGroup } from './AwesomeCheckboxGroup';
-import { MARKETPLACE_FILTER_FORM} from './store/constants';
-import { countSelectedFilterValues } from './utils';
 
 interface PureAttributeFilterSectionProps {
   section: Section;

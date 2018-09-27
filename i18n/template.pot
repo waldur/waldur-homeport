@@ -426,7 +426,7 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
-#: app/scripts/components/marketplace/category/AttributeFilterListDialog.tsx
+#: app/scripts/components/marketplace/category/filters/AttributeFilterListDialog.tsx
 msgid "Apply"
 msgstr ""
 
@@ -524,7 +524,7 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
-#: app/scripts/components/marketplace/category/AttributeFilterListDialog.tsx
+#: app/scripts/components/marketplace/category/filters/AttributeFilterListDialog.tsx
 msgid "Attributes filter"
 msgstr ""
 
@@ -1986,7 +1986,7 @@ msgid "Files"
 msgstr ""
 
 #: app/scripts/components/issues/create/issue-registration.html
-#: app/scripts/components/marketplace/category/MobileFilterActions.tsx
+#: app/scripts/components/marketplace/category/filters/MobileFilterActions.tsx
 msgid "Filter"
 msgstr ""
 
@@ -4331,18 +4331,18 @@ msgstr ""
 msgid "Price package name"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/plan/selectors.ts
+#: app/scripts/components/marketplace/details/plan/utils.ts
 msgid "Price per 30 days"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/plan/selectors.ts
+#: app/scripts/components/marketplace/details/plan/utils.ts
 msgid "Price per 365 days"
 msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/marketplace/common/BillingPeriod.tsx
-#: app/scripts/components/marketplace/details/plan/selectors.ts
+#: app/scripts/components/marketplace/details/plan/utils.ts
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html
@@ -4353,14 +4353,14 @@ msgstr ""
 msgid "Price per half month"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/plan/selectors.ts
+#: app/scripts/components/marketplace/details/plan/utils.ts
 msgid "Price per half-month"
 msgstr ""
 
 #: app/scripts/components/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/marketplace/common/BillingPeriod.tsx
-#: app/scripts/components/marketplace/details/plan/selectors.ts
+#: app/scripts/components/marketplace/details/plan/utils.ts
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -4372,7 +4372,7 @@ msgstr ""
 msgid "Price per month (VAT not included)"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/plan/selectors.ts
+#: app/scripts/components/marketplace/details/plan/utils.ts
 msgid "Price per year"
 msgstr ""
 
@@ -5401,7 +5401,7 @@ msgstr ""
 msgid "Search by name"
 msgstr ""
 
-#: app/scripts/components/marketplace/category/FilterBar.tsx
+#: app/scripts/components/marketplace/category/filters/FilterBar.tsx
 #: app/scripts/components/marketplace/landing/LandingPage.tsx
 msgid "Search for apps and services..."
 msgstr ""
@@ -6207,7 +6207,7 @@ msgstr ""
 msgid "There are no categories in marketplace yet."
 msgstr ""
 
-#: app/scripts/components/marketplace/category/AttributeFilterListContainer.tsx
+#: app/scripts/components/marketplace/category/filters/AttributeFilterListContainer.tsx
 msgid "There are no category sections yet."
 msgstr ""
 
@@ -6608,7 +6608,7 @@ msgstr ""
 msgid "Unable to load application configuration. Please reload this page."
 msgstr ""
 
-#: app/scripts/components/marketplace/category/AttributeFilterListContainer.tsx
+#: app/scripts/components/marketplace/category/filters/AttributeFilterListContainer.tsx
 msgid "Unable to load category sections."
 msgstr ""
 

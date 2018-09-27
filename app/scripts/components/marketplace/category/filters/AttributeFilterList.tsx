@@ -3,9 +3,9 @@ import { reduxForm } from 'redux-form';
 
 import { Section } from '@waldur/marketplace/types';
 
+import { MARKETPLACE_FILTER_FORM } from '../store/constants';
 import './AttributeFilterList.scss';
 import { AttributeFilterSection } from './AttributeFilterSection';
-import { MARKETPLACE_FILTER_FORM } from './store/constants';
 
 interface AttributeFilterListProps {
   sections: Section[];

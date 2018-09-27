@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withTranslation } from '@waldur/i18n';
 import { setFilterQuery } from '@waldur/marketplace/offerings/store/actions';
 
-import { selectFilterQuery } from '../offerings/store/selectors';
+import { selectFilterQuery } from '../../offerings/store/selectors';
 import { FilterBar } from './FilterBar';
 
 const mapStateToProps = state => ({

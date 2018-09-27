@@ -6,9 +6,9 @@ import MediaQuery from 'react-responsive';
 import { OfferingGridContainer } from '@waldur/marketplace/common/OfferingGridContainer';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import AttributeFilterListContainer from './AttributeFilterListContainer';
-import { FilterBarContainer } from './FilterBarContainer';
-import { MobileFilterActions } from './MobileFilterActions';
+import AttributeFilterListContainer from './filters/AttributeFilterListContainer';
+import { FilterBarContainer } from './filters/FilterBarContainer';
+import { MobileFilterActions } from './filters/MobileFilterActions';
 import { ShopCategoriesContainer } from './ShopCategoriesContainer';
 
 export const CategoryPage = () => (

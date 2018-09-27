@@ -11,7 +11,7 @@ interface AttributeFilterItemProps {
   counter?: number;
 }
 
-export const AttributeFilterItem: React.SFC<AttributeFilterItemProps> = (props: AttributeFilterItemProps) => (
+export const AttributeFilterItem = (props: AttributeFilterItemProps) => (
   <MediaQuery minWidth={768}>
     {matches => matches ? (
       <>

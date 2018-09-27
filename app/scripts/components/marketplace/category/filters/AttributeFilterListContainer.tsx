@@ -5,7 +5,7 @@ import { $state } from '@waldur/core/services';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { getCategory } from '@waldur/marketplace/common/api';
 
-import { Section } from '../types';
+import { Section } from '../../types';
 import { AttributeFilterList } from './AttributeFilterList';
 
 interface AttributeFilterListContainerState {

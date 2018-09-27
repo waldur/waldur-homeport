@@ -11,7 +11,7 @@ import marketplaceVendorOfferings from './offerings/OfferingsList';
 import marketplaceOfferingCreate from './offerings/create/OfferingCreateContainer';
 import marketplaceOrdersList from './orders/OrdersList';
 import marketplaceOrderDetails from './orders/OrderDetailsContainer';
-import marketplaceAttributeFilterListDialog from './category/AttributeFilterListDialog';
+import marketplaceAttributeFilterListDialog from './category/filters/AttributeFilterListDialog';
 import providersService from './providers-service';
 import registerSidebarExtension from './sidebar';
 import shoppingCartConfig from './shoppingCartConfig';
