@@ -1104,7 +1104,7 @@ msgid "Copy to clipboard"
 msgstr ""
 
 #: app/scripts/components/customer/CustomerList.tsx
-#: app/scripts/components/marketplace/details/OfferingOrderItems.tsx
+#: app/scripts/components/marketplace/orders/OrderItemsList.tsx
 #: app/scripts/components/marketplace/orders/OrdersList.tsx
 msgid "Cost"
 msgstr ""
@@ -1289,7 +1289,7 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: app/scripts/components/invitations/invitations-list.js
-#: app/scripts/components/marketplace/details/OfferingOrderItems.tsx
+#: app/scripts/components/marketplace/orders/OrderItemsList.tsx
 #: app/scripts/components/marketplace/orders/OrdersList.tsx
 msgid "Created at"
 msgstr ""
@@ -3622,6 +3622,7 @@ msgid "Objectives"
 msgstr ""
 
 #: app/scripts/components/marketplace/details/OrderSummary.tsx
+#: app/scripts/components/marketplace/orders/OrderItemsList.tsx
 msgid "Offering"
 msgstr ""
 
@@ -3800,8 +3801,9 @@ msgstr ""
 msgid "Order item has been created."
 msgstr ""
 
-#: app/scripts/components/marketplace/details/OfferingOrderItems.tsx
-#: app/scripts/components/marketplace/details/OfferingTabs.tsx
+#: app/scripts/components/marketplace/orders/OrderItemsList.tsx
+#: app/scripts/components/marketplace/routes.js
+#: app/scripts/components/marketplace/sidebar.js
 msgid "Order items"
 msgstr ""
 
@@ -3824,7 +3826,7 @@ msgstr ""
 #: app/scripts/components/issues/issue-detail.html
 #: app/scripts/components/issues/list/constants.js
 #: app/scripts/components/issues/list/issues-list.js
-#: app/scripts/components/marketplace/details/OfferingOrderItems.tsx
+#: app/scripts/components/marketplace/orders/OrderItemsList.tsx
 #: app/scripts/components/resource/list/resource-global-list.js
 #: app/scripts/components/user/list/ProjectPermissions.tsx
 #: app/scripts/components/user/support/UserDetailsTable.tsx
@@ -4097,7 +4099,7 @@ msgstr ""
 msgid "Physical locations"
 msgstr ""
 
-#: app/scripts/components/marketplace/details/OfferingOrderItems.tsx
+#: app/scripts/components/marketplace/orders/OrderItemsList.tsx
 #: app/scripts/components/offering/OfferingConfigurationForm.tsx
 #: app/scripts/components/openstack/OpenStackPackageForm.tsx
 #: app/scripts/components/slurm/AllocationForm.tsx
@@ -4447,9 +4449,9 @@ msgstr ""
 #: app/scripts/components/jira/issue/JiraIssueSummary.tsx
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
 #: app/scripts/components/marketplace/cart/ShoppingCartSidebar.tsx
-#: app/scripts/components/marketplace/details/OfferingOrderItems.tsx
 #: app/scripts/components/marketplace/details/OrderSummary.tsx
 #: app/scripts/components/marketplace/details/ProjectField.tsx
+#: app/scripts/components/marketplace/orders/OrderItemsList.tsx
 #: app/scripts/components/offering/appstore-offering-summary.html
 #: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -5510,6 +5512,10 @@ msgstr ""
 msgid "Select issue template"
 msgstr ""
 
+#: app/scripts/components/marketplace/orders/OrderItemsFilter.tsx
+msgid "Select offering..."
+msgstr ""
+
 #: app/scripts/components/intro/base-intro.js
 msgid "Select one to go to a customer workspace"
 msgstr ""
@@ -5880,9 +5886,9 @@ msgstr ""
 #: app/scripts/components/experts/requests/list/expert-request-customer-list.js
 #: app/scripts/components/experts/requests/list/expert-request-project-list.js
 #: app/scripts/components/marketplace/cart/ShoppingCart.tsx
-#: app/scripts/components/marketplace/details/OfferingOrderItems.tsx
 #: app/scripts/components/marketplace/offerings/OfferingsList.tsx
 #: app/scripts/components/marketplace/orders/Order.tsx
+#: app/scripts/components/marketplace/orders/OrderItemsList.tsx
 #: app/scripts/components/marketplace/orders/OrdersList.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
 #: app/scripts/components/offering/offerings-list.js

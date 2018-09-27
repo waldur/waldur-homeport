@@ -171,5 +171,15 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Order details'),
         feature: 'marketplace',
       }
+    })
+
+    .state('marketplace-order-items', {
+      url: 'marketplace-order-items/',
+      template: '<marketplace-order-items-list></marketplace-order-items-list>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('Order items'),
+        feature: 'marketplace',
+      }
     });
 }

@@ -1,18 +1,22 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 export const TableComponent = props => {
-  const { translate } = props;
-
   const columns = [
+    {
+      title: translate('Offering'),
+      render: ({ row }) => row.offering_name,
+    },
     {
       title: translate('Organization'),
       render: ({ row }) => row.customer_name,
@@ -51,16 +55,23 @@ export const TableComponent = props => {
 const TableOptions = {
   table: TABLE_NAME,
   fetchData: createFetcher('marketplace-order-items'),
-  mapPropsToFilter: props => ({
-    offering_uuid: props.offering_uuid,
-  }),
+  mapPropsToFilter: props => {
+    const filter: any = {provider_uuid: props.customer.uuid};
+    if (props.filter && props.filter.offering) {
+      filter.offering_uuid = props.filter.offering.uuid;
+    }
+    return filter;
+  },
 };
 
+const mapStateToProps = state => ({
+  filter: getFormValues('OrderItemFilter')(state),
+  customer: getCustomer(state),
+});
+
 const enhance = compose(
+  connect(mapStateToProps),
   connectTable(TableOptions),
-  withTranslation,
 );
 
-export const OfferingOrderItems: React.SFC<{offering_uuid: string}> = enhance(TableComponent);
-
-export default connectAngularComponent(OfferingOrderItems);
+export const OrderItemsList = enhance(TableComponent);
