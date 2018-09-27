@@ -5,7 +5,7 @@ import * as Tabs from 'react-bootstrap/lib/Tabs';
 import { translate } from '@waldur/i18n';
 import { Section, Offering } from '@waldur/marketplace/types';
 
-import { FeaturesTab } from './FeaturesTab';
+import { FeaturesTab } from './attributes/FeaturesTab';
 import './OfferingTabs.scss';
 import { OverviewTab } from './OverviewTab';
 import { ScreenshotsTab } from './ScreenshotsTab';

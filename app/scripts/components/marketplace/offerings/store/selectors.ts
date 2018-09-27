@@ -4,7 +4,6 @@ import { FORM_ID } from './constants';
 
 const getOffering = state => state.marketplace.offering;
 export const getStep = state => getOffering(state).step;
-export const selectFilterQuery = state => getOffering(state).filterQuery;
 export const isLoading = state => getOffering(state).loading;
 export const isLoaded = state => getOffering(state).loaded;
 export const isErred = state => getOffering(state).erred;

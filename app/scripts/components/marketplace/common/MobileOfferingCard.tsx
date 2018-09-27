@@ -1,7 +1,8 @@
 import * as React from 'react';
 
+import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
+
 import { Offering } from '../types';
-import { OfferingLink } from './OfferingLink';
 
 interface MobileOfferingCardProps {
   offering: Offering;

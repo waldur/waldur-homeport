@@ -1,9 +1,8 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 
+import { CategoryLink } from '@waldur/marketplace/links/CategoryLink';
 import { Category } from '@waldur/marketplace/types';
-
-import { CategoryLink } from './CategoryLink';
 
 interface CategoryItemProps {
   category: Category;

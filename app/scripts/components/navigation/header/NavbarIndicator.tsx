@@ -13,17 +13,12 @@ interface NavbarIndicatorProps {
 
 export const NavbarIndicator: React.SFC<NavbarIndicatorProps> = (props: NavbarIndicatorProps) => (
   <li className="navbar-indicator">
-    <Link
-      state={props.state}
-      label={
-        <>
-          <i className={props.iconClass}/>
-          {props.count > 0 && (
-            <span className={props.labelClass}>{props.count}</span>
-          )}
-        </>
-      }
-    />
+    <Link state={props.state}>
+      <i className={props.iconClass}/>
+      {props.count > 0 && (
+        <span className={props.labelClass}>{props.count}</span>
+      )}
+    </Link>
   </li>
 );
 

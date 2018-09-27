@@ -12,7 +12,7 @@ import {
 import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { LabelField } from '@waldur/form-react/LabelField';
 import { translate } from '@waldur/i18n';
-import { PlanDetailsTable } from '@waldur/marketplace/details/PlanDetailsTable';
+import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 

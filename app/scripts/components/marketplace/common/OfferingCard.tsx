@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
+import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
 
 import { OfferingButton } from '../common/OfferingButton';
 import { RatingStars } from '../common/RatingStars';
 import { Offering } from '../types';
 import './OfferingCard.scss';
-import { OfferingLink } from './OfferingLink';
 
 interface OfferingCardProps {
   offering: Offering;

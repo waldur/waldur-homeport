@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { CategoryLink } from '@waldur/marketplace/category/CategoryLink';
+import { CategoryLink } from '@waldur/marketplace/links/CategoryLink';
 import { Category } from '@waldur/marketplace/types';
 
 import './CategoryCard.scss';

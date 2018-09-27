@@ -10,13 +10,6 @@ export const setStep = (step: OfferingStep) => ({
   },
 });
 
-export const setFilterQuery = (filterQuery: string) => ({
-  type: constants.SET_FILTER_QUERY,
-  payload: {
-    filterQuery,
-  },
-});
-
 export const updateOfferingState = (offering: Offering, stateAction: string) => ({
   type: constants.UPDATE_OFFERING_STATE,
   payload: {

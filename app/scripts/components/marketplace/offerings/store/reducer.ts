@@ -18,12 +18,6 @@ export const offeringReducer = (state = INITIAL_STATE, action) => {
         step: payload.step,
       };
 
-    case constants.SET_FILTER_QUERY:
-      return {
-        ...state,
-        filterQuery: payload.filterQuery,
-      };
-
     case constants.LOAD_DATA_START:
       return {
         ...state,
