@@ -122,7 +122,7 @@ export interface OfferingsListType {
 }
 
 export interface Provider extends Customer {
-  logo?: string;
+  image?: string;
   description?: string;
   service_offerings?: Offering[];
 }
