@@ -5,6 +5,7 @@ export type PhoneNumber = string | {
 
 // Customer has only two mandatory fields: name and email, rest are optional.
 export interface Customer {
+  url?: string;
   email: string;
   name: string;
   abbreviation?: string;

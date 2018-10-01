@@ -218,7 +218,6 @@ const ENV = {
     }
   ],
   defaultLanguage: 'en',
-  tenantCredentialsVisible: true,
   organizationSubnetsVisible: false,
 
   FREEIPA_USERNAME_PREFIX: 'waldur_',

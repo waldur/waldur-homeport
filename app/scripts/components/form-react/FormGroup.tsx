@@ -3,6 +3,7 @@ import * as React from 'react';
 // @ts-ignore
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
+import { Tooltip } from '@waldur/core/Tooltip';
 import { omit } from '@waldur/core/utils';
 
 import { FieldError } from './FieldError';
@@ -10,7 +11,7 @@ import { FormField } from './types';
 
 interface FormGroupProps extends FormField {
   meta: WrappedFieldMetaProps;
-  children: React.ReactChildren;
+  children: React.ReactElement<any>;
   clearOnUnmount?: boolean;
 }
 
@@ -21,21 +22,30 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
       required,
       label,
       description,
+      tooltip,
       labelClass,
+      hideLabel,
       controlClass,
-      meta: { error },
+      meta: { touched, error },
       children,
       ...rest,
     } = this.props;
     return (
       <div className="form-group">
-        <label className={classNames('control-label', labelClass)}>
-          {label}{required && <span className="text-danger"> *</span>}
-        </label>
-        <div className={classNames(controlClass)}>
+        {!hideLabel && (
+          <label className={classNames('control-label', labelClass)}>
+            {tooltip && (
+              <Tooltip id="form-field-tooltip" label={tooltip}>
+                <i className="fa fa-question-circle"/>{' '}
+              </Tooltip>
+            )}
+            {label}{required && <span className="text-danger"> *</span>}
+          </label>
+        )}
+        <div className={classNames(controlClass, {'col-sm-offset-3': hideLabel})}>
           {React.cloneElement((children as any), { input, ...omit(rest, 'clearOnUnmount') })}
           {description && <p className="help-block m-b-none text-muted">{description}</p>}
-          <FieldError error={error} />
+          {touched && <FieldError error={error} />}
         </div>
       </div>
     );

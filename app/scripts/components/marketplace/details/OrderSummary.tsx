@@ -1,78 +1,92 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { isValid, getFormValues } from 'redux-form';
 
-import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
+import { translate } from '@waldur/i18n';
+import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
+import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
-import { CheckoutButton } from '@waldur/marketplace/details/CheckoutButton';
-import { Product } from '@waldur/marketplace/types';
+import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
+import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
+import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
-import { Customer, Project } from '@waldur/workspace/types';
+import { Project, Customer } from '@waldur/workspace/types';
 
-interface OrderSummaryProps {
-  product: Product;
-  customer: Customer;
-  project: Project;
-}
-
-const CompareButton = () => (
-  <button
-    type="button"
-    className="btn btn-outline btn-sm btn-default">
-    <i className="fa fa fa-balance-scale"/>
-  </button>
-);
+import { totalPriceSelector } from './plan/selectors';
+import { OrderSummaryProps, OfferingFormData } from './types';
+import { getOrderItem } from './utils';
 
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
-    <img src={props.product.thumb} className="img-lg"/>
-    <table className="table">
+    <img src={props.offering.thumbnail} className="img-lg"/>
+    <table className="table offering-details-section-table">
       <tbody>
         <tr>
-          <td><strong>Product</strong></td>
-          <td>{props.product.name}</td>
+          <td><strong>{translate('Offering')}</strong></td>
+          <td>{props.offering.name}</td>
         </tr>
         <tr>
-          <td><strong>Vendor</strong></td>
+          <td><strong>{translate('Vendor')}</strong></td>
           <td>
-            <Link
-              state="marketplace-provider-details"
-              params={{customer_uuid: '9f43128e9eb24c288b6577568420dc1c'}}
-            >
-              {props.product.vendor}
-            </Link>
+            <ProviderLink customer_uuid={props.offering.customer_uuid}>
+              {props.offering.customer_name}
+            </ProviderLink>
           </td>
         </tr>
+        {props.offering.rating && (
+          <tr>
+            <td><strong>{translate('Rating')}</strong></td>
+            <td><RatingStars rating={props.offering.rating} size="medium"/></td>
+          </tr>
+        )}
         <tr>
-          <td><strong>Rating</strong></td>
-          <td><RatingStars rating={props.product.rating} size="medium"/></td>
-        </tr>
-        <tr>
-          <td><strong>Invoiced to</strong></td>
+          <td><strong>{translate('Invoiced to')}</strong></td>
           <td>{props.customer.name}</td>
         </tr>
-        <tr>
-          <td><strong>Project</strong></td>
-          <td>{props.project.name}</td>
-        </tr>
-        <tr>
-          <td className="text-lg">Price</td>
-          <td className="text-lg">
-            {defaultCurrency(props.product.price)}
-          </td>
-        </tr>
+        {props.project && (
+          <tr>
+            <td><strong>{translate('Project')}</strong></td>
+            <td>{props.project.name}</td>
+          </tr>
+        )}
+        {props.formData && props.formData.plan && (
+          <tr>
+            <td className="text-lg">
+              <BillingPeriod unit={props.formData.plan.unit}/>
+            </td>
+            <td className="text-lg">
+              {defaultCurrency(props.total)}
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
     <div className="display-flex justify-content-between">
-      <CheckoutButton/>
-      <CompareButton/>
+      <ShoppingCartButtonContainer
+        item={getOrderItem(props)}
+        flavor="primary"
+        disabled={!props.formValid}
+      />
+      <OfferingCompareButtonContainer offering={props.offering} flavor="secondary"/>
     </div>
   </>
 );
 
+interface OrderSummaryStateProps {
+  customer: Customer;
+  project?: Project;
+  total: number;
+  formData: OfferingFormData;
+  formValid: boolean;
+}
+
 const mapStateToProps = state => ({
   customer: getCustomer(state),
   project: getProject(state),
+  total: totalPriceSelector(state),
+  formData: getFormValues('marketplaceOffering')(state),
+  formValid: isValid('marketplaceOffering')(state),
 });
 
-export const OrderSummary = connect(mapStateToProps)(PureOrderSummary);
+export const OrderSummary = connect<OrderSummaryStateProps, {}, {offering: Offering}>(mapStateToProps)(PureOrderSummary);

@@ -202,7 +202,7 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       return index;
     },
     renderLongText: function(value) {
-      return `<span class="elipsis" style="width: 150px;" uib-tooltip="${value}">${value}</span>`;
+      return `<span class="ellipsis" style="width: 150px;" uib-tooltip="${value}">${value}</span>`;
     },
   });
 

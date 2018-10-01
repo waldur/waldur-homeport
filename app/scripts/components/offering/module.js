@@ -13,6 +13,7 @@ import registerSidebarExtension from './sidebar';
 import appstoreOfferingSummary from './appstore-offering-summary';
 import registerTableExtension from './table-extension';
 import './events';
+import './marketplace';
 
 export default module => {
   module.config(offeringRoutes);

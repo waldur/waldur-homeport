@@ -1,10 +1,16 @@
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { translate } from '@waldur/i18n';
+import { Geolocations } from '@waldur/marketplace/types';
 
 import loadLeafleat from '../../../shims/load-leaflet';
 
-export class LeafletMap extends React.Component {
+interface LeafletMapProps {
+  positions: Geolocations;
+}
+
+export class LeafletMap extends React.Component<LeafletMapProps> {
   map = undefined;
   mapNode: HTMLDivElement;
   leaflet = null;
@@ -38,7 +44,7 @@ export class LeafletMap extends React.Component {
 
   initMap() {
     const map = this.leaflet.map(this.mapNode);
-    const position = [51.505, -0.09];
+    const position = [this.props.positions[0].latitude, this.props.positions[0].longitude];
     map.setView(position, 13);
 
     this.leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -47,7 +53,7 @@ export class LeafletMap extends React.Component {
 
     this.leaflet.marker(position)
       .addTo(map)
-      .bindPopup('Baker Street.');
+      .bindPopup(translate('Service provider'));
 
     this.forceUpdate();
   }

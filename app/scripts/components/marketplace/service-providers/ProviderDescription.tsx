@@ -11,7 +11,7 @@ interface ProviderDescriptionProps {
 export const ProviderDescription: React.SFC<ProviderDescriptionProps> = (props: ProviderDescriptionProps) => (
   <div className="provider-description">
     <div className="provider-description__logo">
-      <img src={props.provider.logo}/>
+      <img src={props.provider.image}/>
     </div>
     <div className="provider-description__content">
       <p>{props.provider.description}</p>

@@ -1,20 +1,27 @@
 import { Action } from '@waldur/core/reducerActions';
 import { OrderState } from '@waldur/marketplace/cart/types';
-import { Product } from '@waldur/marketplace/types';
+import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import * as constants from './constants';
 
-export const addItem = (item: Product): Action<{item}> => ({
+export const addItem = (item: OrderItemResponse): Action<{item}> => ({
   type: constants.ADD_ITEM,
   payload: {
     item,
   },
 });
 
-export const removeItem = (item: Product): Action<{item}> => ({
+export const removeItem = (item: OrderItemResponse): Action<{item}> => ({
   type: constants.REMOVE_ITEM,
   payload: {
     item,
+  },
+});
+
+export const setCart = cart => ({
+  type: constants.SET_CART,
+  payload: {
+    cart,
   },
 });
 

@@ -62,7 +62,7 @@
             <span translate>Select</span>
           </a>
           <div
-            class="elipsis"
+            class="ellipsis"
             ng-if="organization.abbreviation"
             uib-tooltip="{{ organization.name }}"
             tooltip-append-to-body="true"
@@ -71,14 +71,14 @@
             <extension-point id="organization-selector"></extension-point>
           </div>
           <div
-            class="elipsis"
+            class="ellipsis"
             ng-if="!organization.abbreviation">
             {{ organization.name }}
             <extension-point id="organization-selector"></extension-point>
           </div>
         </div>
         <div class="list-group-item" ng-if="filteredOrganizations.length === 0">
-          <span class="elipsis" translate>There are no organizations matching filter.</span>
+          <span class="ellipsis" translate>There are no organizations matching filter.</span>
         </div>
       </div>
     </div>
@@ -123,7 +123,7 @@
           <a class="btn btn-xs btn-default pull-right" submit-button="$ctrl.gotoProject(project)">
             <span translate>Select</span>
           </a>
-          <div class="elipsis">{{ project.name }}</div>
+          <div class="ellipsis">{{ project.name }}</div>
         </div>
       </div>
     </div>

@@ -12,3 +12,21 @@ export function userCanModifyTenant(ctx: ActionContext): string {
     return translate('Only staff can manage OpenStack tenant.');
   }
 }
+
+// The function filters out empty filter categories based on categories present in template choices.
+export function getTemplateFilterOptions(templates, templateFilters) {
+  if (!!templates && !!templateFilters.choices) {
+    const filterCategories = [];
+    templates.forEach(choice => {
+      filterCategories.push(choice.category);
+    });
+    const choices = templateFilters.choices.filter(choice => {
+      return filterCategories.indexOf(choice.value) !== -1 || choice.label === 'All categories';
+    });
+    return {
+      name: 'category',
+      choices,
+      defaultValue: '',
+    };
+  }
+}

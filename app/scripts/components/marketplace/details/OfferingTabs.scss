@@ -1,0 +1,11 @@
+.offering-tabs {
+  .nav-tabs {
+    text-align: center;
+
+    & > li {
+      float: none;
+      display: inline-block;
+      font-size: 14px;
+    }
+  }
+}

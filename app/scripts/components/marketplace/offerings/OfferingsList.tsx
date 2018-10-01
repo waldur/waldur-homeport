@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
+import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import BooleanField from '@waldur/table-react/BooleanField';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { OfferingCreateButton } from './OfferingCreateButton';
-import { OfferingDeleteButton } from './OfferingDeleteButton';
+import { OfferingActions } from './actions/OfferingActions';
+import { OfferingCreateButton } from './actions/OfferingCreateButton';
 
 export const TableComponent = props => {
   const { translate } = props;
@@ -24,12 +24,12 @@ export const TableComponent = props => {
       render: ({ row }) => row.category_title,
     },
     {
-      title: translate('Active'),
-      render: ({ row }) => <BooleanField value={row.is_active}/>,
+      title: translate('State'),
+      render: ({ row }) => row.state,
     },
     {
       title: translate('Actions'),
-      render: OfferingDeleteButton,
+      render: OfferingActions,
     },
   ];
 
@@ -44,7 +44,7 @@ export const TableComponent = props => {
 };
 
 const TableOptions = {
-  table: 'marketplace-offerings',
+  table: TABLE_NAME,
   fetchData: createFetcher('marketplace-offerings'),
   mapPropsToFilter: props => ({
     customer_uuid: props.customer.uuid,
@@ -53,13 +53,13 @@ const TableOptions = {
     row.name,
     row.native_name,
     row.category_title,
-    row.is_active,
+    row.state,
   ],
   exportFields: [
     'Name',
     'Native name',
     'Category',
-    'Active',
+    'State',
   ],
 };
 

@@ -1,31 +1,36 @@
 import * as React from 'react';
 
-import { Link } from '@waldur/core/Link';
+import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
+import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 
 import { RatingStars } from '../common/RatingStars';
-import { Product } from '../types';
+import { Offering } from '../types';
 import './ComparisonItem.scss';
 import { ComparisonItemRemoveButtonContainer } from './ComparisonItemRemoveButtonContainer';
 
 interface ComparisonItemProps {
-  item: Product;
+  item: Offering;
 }
 
 export const ComparisonItem = (props: ComparisonItemProps) => (
   <div className="text-center comparison-item">
-    <ComparisonItemRemoveButtonContainer product={props.item}/>
-    <Link
-      state="marketplace-product"
+    <ComparisonItemRemoveButtonContainer offering={props.item}/>
+    <OfferingLink
+      offering_uuid={props.item.uuid}
       className="comparison-item-thumb">
-      <img src={props.item.thumb}/>
-    </Link>
+      <img src={props.item.thumbnail}/>
+    </OfferingLink>
     <h3>{props.item.name}</h3>
     <p>by{' '}
-      <Link state="marketplace-provider-details">
-        {props.item.vendor}
-      </Link>
+      <ProviderLink customer_uuid={props.item.customer_uuid}>
+        {props.item.customer_name}
+      </ProviderLink>
     </p>
-    <RatingStars rating={props.item.rating} size="medium"/>
-    <p>Based on <a>{props.item.reviews} reviews</a></p>
+    {props.item.rating &&
+      <RatingStars rating={props.item.rating} size="medium"/>
+    }
+    {props.item.reviews &&
+      <p>Based on <a>{props.item.reviews} reviews</a></p>
+    }
   </div>
 );

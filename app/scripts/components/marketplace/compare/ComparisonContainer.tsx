@@ -1,13 +1,11 @@
 import { connect } from 'react-redux';
 
+import { ComparisonTable } from '@waldur/marketplace/compare/ComparisonTable';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { sections } from '../fixtures';
-import { ComparisonTable } from './ComparisonTable';
 import { getItems } from './store/selectors';
 
 const mapStateToProps = state => ({
-  sections,
   items: getItems(state),
 });
 

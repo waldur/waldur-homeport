@@ -74,7 +74,7 @@ export function connectTable(options: TableOptions) {
 export const formatLongText = value =>
   value.length > 100 ? (
     <Tooltip label={value} id="longText">
-      <span className="elipsis" style={{width: 150}}>{value}</span>
+      <span className="ellipsis" style={{width: 150}}>{value}</span>
     </Tooltip>
   ) : value;
 

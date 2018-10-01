@@ -6,6 +6,8 @@ import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
 import { formatDefault } from '@waldur/resource/utils';
 
+import { Network } from './types';
+
 const formatTenant = props => (
   <ResourceLink
     type="OpenStack.Tenant"
@@ -14,7 +16,7 @@ const formatTenant = props => (
   />
 );
 
-const PureOpenStackNetworkSummary = (props: ResourceSummaryProps) => {
+const PureOpenStackNetworkSummary = (props: ResourceSummaryProps<Network>) => {
   const { translate, resource } = props;
   return (
     <span>
@@ -26,11 +28,15 @@ const PureOpenStackNetworkSummary = (props: ResourceSummaryProps) => {
       <Field
         label={translate('Type')}
         value={formatDefault(resource.type)}
-        valueClass="elipsis"
+        valueClass="ellipsis"
       />
       <Field
         label={translate('Segmentation ID')}
         value={formatDefault(resource.segmentation_id)}
+      />
+      <Field
+        label={translate('Is external')}
+        value={resource.is_external ? translate('Yes') : translate('No')}
       />
     </span>
   );

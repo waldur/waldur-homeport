@@ -23,22 +23,22 @@ const appstoreOffering = {
     $onInit() {
       this.summaryComponent = 'appstoreOfferingSummary';
       this.model = {};
-      this.offeringType = this.$stateParams.category;
       this.loading = true;
 
       this.currentStateService.getProject().then(project => {
         this.project = project;
       });
 
-      this.offeringsService.getConfiguration().then(offerings => {
-        const offering = offerings[this.offeringType];
-        if (!offering) {
+      this.offeringsService.getOffering(this.$stateParams.category).then(template => {
+        if (!template) {
           return this.$state.go('errorPage.notFound');
         }
-        this.offering = offering;
+        this.offering = angular.extend({}, template.config);
+        this.template = template;
         if (!this.offering.terms_of_service) {
           this.createButtonStatus = true;
         }
+        this.wrapOptions();
         this.offering.order.unshift('name', 'description');
         angular.extend(this.offering.options, {
           name: {
@@ -58,8 +58,35 @@ const appstoreOffering = {
         if (this.offering.prefill_name) {
           this.model.name = this.offering.label;
         }
-        angular.forEach(offering.options, (option, name) => option.name = name);
+        angular.forEach(this.offering.options, (option, name) => option.name = name);
       }).finally(() => this.loading = false);
+    }
+
+    wrapKey(key) {
+      return `___attribute___${key}`;
+    }
+
+    wrapOptions() {
+      this.keys = Object.keys(this.offering.options);
+      this.offering.options = this.keys.reduce((result, key) => ({
+        ...result,
+        [this.wrapKey(key)]: this.offering.options[key],
+      }), {});
+      this.offering.order = this.keys.map(key => this.wrapKey(key));
+    }
+
+    unwrapOptions() {
+      const offering = {
+        template: this.template.url,
+        project: this.project.url,
+        name: this.model.name,
+        description: this.model.description,
+        attributes: {},
+      };
+      this.keys.forEach(key => {
+        offering.attributes[key] = this.model[this.wrapKey(key)];
+      });
+      return offering;
     }
 
     toggleCreateBtnStatus() {
@@ -90,10 +117,7 @@ const appstoreOffering = {
     }
 
     save() {
-      const offering = angular.extend({
-        type: this.offeringType,
-        project: this.project.url,
-      }, this.model);
+      const offering = this.unwrapOptions();
       return this.offeringsService.createOffering(offering).then(offering => {
         this.$state.go('offeringDetails', {uuid: offering.uuid});
       }, response => {

@@ -18,7 +18,7 @@
         <div class="ibox" uib-tooltip="{{ service.warning }}">
           <div class="ibox-content provider-box cursor-pointer">
             <div class="m-md" ng-class="{disabled: !service.enabled}">
-              <a class="h5 elipsis" uib-tooltip="{{ ::service.name }}">
+              <a class="h5 ellipsis" uib-tooltip="{{ ::service.name }}">
                 <i class="fa fa-exclamation-triangle" ng-if="!!service.warning"></i>
                 {{ ::service.name }}
               </a>

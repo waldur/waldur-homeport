@@ -3,6 +3,7 @@ export interface User {
   is_support: boolean;
   url: string;
   uuid: string;
+  customer_permissions?: Permission[];
 }
 
 export interface UserDetails extends User {
@@ -27,18 +28,28 @@ export interface Customer {
   uuid: string;
   url: string;
   owners: User[];
+  projects?: Project[];
+}
+
+interface Permission {
+  user_uuid: string;
+  role: string;
 }
 
 export interface Project {
   name: string;
   uuid: string;
   url: string;
+  permissions: Permission[];
 }
+
+export type WorkspaceType = 'user' | 'project' | 'organization' | 'support';
 
 export interface Workspace {
   user: User;
   customer?: Customer;
   project?: Project;
+  workspace?: WorkspaceType;
 }
 
 export interface OuterState {

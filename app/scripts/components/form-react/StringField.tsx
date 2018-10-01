@@ -11,7 +11,6 @@ export const StringField = (props: StringFieldProps) => {
   return (
     <input
       {...props.input}
-      onBlur={() => {/* Noop */}}
       type="text"
       className="form-control"
       {...rest}

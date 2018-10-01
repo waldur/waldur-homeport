@@ -1,39 +1,36 @@
 import * as React from 'react';
 
 import { range } from '@waldur/core/utils';
+import { ComparisonSections } from '@waldur/marketplace/compare/ComparisonSections';
+import { COMPARISON_COLUMNS } from '@waldur/marketplace/compare/store/constants';
 
-import { Product, Section } from '../types';
+import { Offering, Section } from '../types';
 import { ComparisonItem } from './ComparisonItem';
 import { ComparisonItemPlaceholder } from './ComparisonItemPlaceholder';
-import { ComparisonSection } from './ComparisonSection';
+
+import './ComparisonTable.scss';
 
 interface ComparisonTableProps {
-  items: Product[];
+  items: Offering[];
   sections: Section[];
 }
 
 export const ComparisonTable = (props: ComparisonTableProps) => (
-  <div className="table-responsive">
+  <div className="h-scrollable">
     <table className="table table-bordered table-hover">
       <tbody>
         <tr>
-          <td style={{width: '20%'}}/>
+          <td style={{minWidth: '200px'}}/>
           {props.items.map((item, index) => (
-            <td key={index} style={{width: '20%'}}>
+            <td key={index} style={{minWidth: '200px'}}>
               <ComparisonItem item={item}/>
             </td>
           ))}
-          {range(4 - props.items.length).map(index =>
+          {props.items.length < 4 && range(COMPARISON_COLUMNS - props.items.length).map(index =>
             <ComparisonItemPlaceholder key={index}/>
           )}
         </tr>
-        {props.sections.map((section, index) => (
-          <ComparisonSection
-            key={index}
-            section={section}
-            items={props.items}
-          />
-        ))}
+        <ComparisonSections items={props.items}/>
       </tbody>
     </table>
   </div>

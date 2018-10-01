@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 
-export type IconGetter = (option: any) => string;
+export type AttrGetter = string | ((option: any) => string);
 
 export interface RendererConfig {
-  iconKey: string | IconGetter;
-  labelKey: string;
+  iconKey: AttrGetter;
+  labelKey: AttrGetter;
   tooltipKey?: string;
   imgStyle?: {};
 }
@@ -30,19 +30,25 @@ export const optionRenderer = (config: RendererConfig) => option => {
   } else {
     src = option[iconKey];
   }
+  let label;
+  if (typeof labelKey === 'function') {
+    label = labelKey(option);
+  } else {
+    label = option[labelKey];
+  }
   const img = renderIcon(src, imgStyle);
   if (tooltipKey) {
     return (
       <div>
         <Tooltip label={option[tooltipKey]} id="iconTooltip" children={img}/>
-        {option[labelKey]}
+        {label}
       </div>
     );
   }
   return (
     <div>
       {img}
-      {option[labelKey]}
+      {label}
     </div>
   );
 };

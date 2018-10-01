@@ -1,7 +1,11 @@
 import * as React from 'react';
 
+import { Tooltip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { getTypeDisplay, getServiceIcon } from '@waldur/providers/registry';
+import { formatCrontab } from '@waldur/resource/crontab';
+import { ResourceSummaryProps } from '@waldur/resource/summary';
+import { Schedule } from '@waldur/resource/types';
 
 export const getResourceIcon = type =>
   getServiceIcon(type.split('.')[0]);
@@ -61,3 +65,14 @@ export const formatDefault = value => value || <span>&mdash;</span>;
 
 export const formatCommaList = (items: string []) =>
   items.length === 0 ? <span>&ndash;</span> : items.join(', ');
+
+export const formatSchedule = ({ resource }) => (
+  <Tooltip label={resource.schedule} id="scheduleTooltip">
+    {formatCrontab(resource.schedule)}
+  </Tooltip>
+);
+
+export const formatRetentionTime = (props: ResourceSummaryProps<Schedule>) =>
+  props.resource.retention_time === 0
+  ? props.translate('Keep forever')
+  : props.translate('{number} days', {number: props.resource.retention_time});

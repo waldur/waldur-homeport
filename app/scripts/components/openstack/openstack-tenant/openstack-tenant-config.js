@@ -1,4 +1,5 @@
 import { latinName } from '@waldur/resource/actions/constants';
+import { getTemplateFilterOptions } from './actions/utils';
 
 import { templateParser } from '../utils';
 import {
@@ -42,7 +43,8 @@ export default {
       formatter: ($filter, value) => $filter('formatPackage')(value),
       columns: openstackTemplateColumns,
       comparator: templateComparator,
-      filterOptions: openstackTemplateFilters
+      filterOptions: openstackTemplateFilters,
+      concealEmptyOptions: getTemplateFilterOptions,
     },
     description: {
       type: 'text',
@@ -51,14 +53,14 @@ export default {
     access: {
       type: 'label',
       label: gettext('Access'),
-      is_visible: ENV => ENV.tenantCredentialsVisible,
+      is_visible: ENV => ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE,
     },
     user_username: {
       type: 'string',
       label: gettext('Initial admin username'),
       placeholder: gettext('generate automatically'),
       help_text: gettext('Leave blank if you want admin username to be auto-generated.'),
-      is_visible: ENV => ENV.tenantCredentialsVisible,
+      is_visible: ENV => ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE,
     },
     user_password: {
       type: 'password',
@@ -66,7 +68,7 @@ export default {
       label: gettext('Initial admin password'),
       placeholder: gettext('generate automatically'),
       help_text: gettext('Leave blank if you want admin password to be auto-generated.'),
-      is_visible: ENV => ENV.tenantCredentialsVisible,
+      is_visible: ENV => ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE,
     },
     subnet_cidr: {
       component: 'openstackSubnet',
