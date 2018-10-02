@@ -1,7 +1,9 @@
 import { translate } from '@waldur/i18n';
-import { PricesData, Component } from '@waldur/marketplace/details/plan/types';
+import { offeringSelector } from '@waldur/marketplace/details/selectors';
 import { Limits } from '@waldur/marketplace/details/types';
 import { Plan } from '@waldur/marketplace/types';
+
+import { Component, PricesData } from './types';
 
 interface BillingPeriodDescription {
   periods: string[];
@@ -41,10 +43,12 @@ function getBillingPeriods(unit: string): BillingPeriodDescription {
   }
 }
 
-export const combinePlanLimit = (plan: Plan, limits: Limits): PricesData => {
+export const pricesSelector = (state, props): PricesData => {
+  const plan: Plan = offeringSelector(state, 'plan');
+  const limits: Limits = offeringSelector(state, 'limits');
   if (plan) {
     const {periods, multipliers} = getBillingPeriods(plan.unit);
-    const components: Component[] = []// offering.components
+    const components: Component[] = props.offering.components
       .map(item => {
         const label = item.name;
         const units = item.measured_unit;

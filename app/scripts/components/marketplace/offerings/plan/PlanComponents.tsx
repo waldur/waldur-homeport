@@ -31,7 +31,11 @@ export const PlanComponents = withTranslation(props => (
                 name={`${props.plan}.quotas.${component.type}`}
                 type="number"
               />
-            ) : 'N/A'}
+            ) : (
+              <div className="form-control-static">
+                &mdash;
+              </div>
+            )}
           </td>
           <td>
             <Field
