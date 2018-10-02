@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { compose } from 'redux';
-import { Field, FieldArray } from 'redux-form';
+import { Field } from 'redux-form';
 
+import { required } from '@waldur/core/validators';
 import { withTranslation } from '@waldur/i18n';
 
 import { FormGroup } from '../FormGroup';
-import { CustomPlanComponents } from './CustomPlanComponents';
-import { FixedPlanComponents } from './FixedPlanComponents';
 import { PlanBillingPeriodField } from './PlanBillingPeriodField';
+import { PlanComponents } from './PlanComponents';
 import { PriceField } from './PriceField';
 import { connectPlanComponents } from './utils';
 
@@ -17,6 +17,7 @@ const PlanNameField = props => (
     type="text"
     component="input"
     className="form-control"
+    validate={props.validate}
   />
 );
 
@@ -24,19 +25,17 @@ const enhance = compose(connectPlanComponents, withTranslation);
 
 export const PlanForm = enhance(props => (
   <>
-    <FormGroup label={props.translate('Name')}>
-      <PlanNameField plan={props.plan}/>
+    <FormGroup label={props.translate('Name')} required={true}>
+      <PlanNameField plan={props.plan} validate={required}/>
     </FormGroup>
     <FormGroup label={props.translate('Price')}>
       <PriceField plan={props.plan}/>
     </FormGroup>
-    <FormGroup label={props.translate('Billing period')}>
+    <FormGroup label={props.translate('Billing period')} required={true}>
       <PlanBillingPeriodField plan={props.plan}/>
     </FormGroup>
-    {props.components && props.components.length > 0 ? (
-      <FixedPlanComponents plan={props.plan} components={props.components}/>
-    ) : (
-      <FieldArray name={`${props.plan}.customComponents`} component={CustomPlanComponents} />
+    {props.components && props.components.length > 0 && (
+      <PlanComponents plan={props.plan} components={props.components}/>
     )}
   </>
 ));

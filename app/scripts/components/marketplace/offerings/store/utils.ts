@@ -9,16 +9,11 @@ const formatPlan = (plan: PlanFormData): PlanRequest => {
     unit: plan.unit.value,
     unit_price: plan.unit_price,
   };
-  if (plan.fixedComponentPrices) {
-    result.prices = plan.fixedComponentPrices;
-    result.quotas = plan.fixedComponentQuotas;
-  } else if (plan.customComponents) {
-    result.custom_components = plan.customComponents.map(component => {
-      const {price, amount, ...rest} = component;
-      return rest;
-    });
-    result.prices = plan.customComponents.reduce((prices, component) => ({...prices, [component.type]: component.price}), {});
-    result.quotas = plan.customComponents.reduce((prices, component) => ({...prices, [component.type]: component.amount}), {});
+  if (plan.prices) {
+    result.prices = plan.prices;
+  }
+  if (plan.quotas) {
+    result.quotas = plan.quotas;
   }
   return result;
 };
@@ -53,6 +48,15 @@ const formatAttributes = attributes => Object.keys(attributes).reduce((result, k
   };
 }, {});
 
+export const formatComponents = components =>
+  components.map(component => ({
+    ...component,
+    billing_type:
+      typeof component.billing_type === 'object' ?
+      component.billing_type.value :
+      component.billing_type,
+  }));
+
 export const formatOfferingRequest = (request: OfferingFormData, customer: Customer) => {
   const result: OfferingRequest = {
     name: request.name,
@@ -62,6 +66,9 @@ export const formatOfferingRequest = (request: OfferingFormData, customer: Custo
   };
   if (request.attributes) {
     result.attributes = formatAttributes(request.attributes);
+  }
+  if (request.components) {
+    result.components = formatComponents(request.components);
   }
   if (request.plans) {
     result.plans = request.plans.map(formatPlan);

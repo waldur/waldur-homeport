@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 
-import { Component } from '@waldur/marketplace/details/plan/types';
+import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { getPlanPrice, getComponents, getType } from '../store/selectors';
 
 interface ConnectedPlanStateProps {
   total: number;
-  components: Component[];
+  components: OfferingComponent[];
 }
 
 export const connectPlanComponents = connect<ConnectedPlanStateProps, {}, {plan: string}>((state, ownProps) => {

@@ -1,13 +1,12 @@
 import { Option } from '@waldur/marketplace/common/registry';
-import { AttributesType, Category, PlanComponent, OfferingOptions } from '@waldur/marketplace/types';
+import { AttributesType, Category, OfferingComponent, OfferingOptions } from '@waldur/marketplace/types';
 
 export interface PlanFormData {
   name: string;
   unit: Option;
   unit_price: number;
-  fixedComponentPrices: {[key: string]: number};
-  fixedComponentQuotas: {[key: string]: number};
-  customComponents: PlanComponent[];
+  prices: {[key: string]: number};
+  quotas: {[key: string]: number};
 }
 
 export interface OptionFormData {
@@ -22,15 +21,9 @@ export interface OfferingFormData {
   category: Category;
   type: Option;
   attributes?: AttributesType;
+  components?: OfferingComponent[];
   plans?: PlanFormData[];
   options?: OptionFormData[];
-}
-
-interface CustomPlanComponent {
-  billing_type: 'usage' | 'fixed';
-  type: string;
-  name: string;
-  measured_unit: string;
 }
 
 export interface PlanRequest {
@@ -39,7 +32,6 @@ export interface PlanRequest {
   unit_price: number;
   quotas?: {[key: string]: number};
   prices?: {[key: string]: number};
-  custom_components?: CustomPlanComponent[];
 }
 
 export interface OfferingRequest {
@@ -48,6 +40,7 @@ export interface OfferingRequest {
   customer: string;
   category: string;
   attributes?: AttributesType;
+  components?: OfferingComponent[];
   plans?: PlanRequest[];
   options?: OfferingOptions;
 }

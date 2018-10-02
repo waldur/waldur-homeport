@@ -9,10 +9,12 @@ import { Category } from '@waldur/marketplace/types';
 import { OfferingAttributes } from '../attributes/OfferingAttributes';
 import { OfferingOptions } from '../option/OfferingOptions';
 import { OfferingPlans } from '../plan/OfferingPlans';
+import { OfferingComponents } from './OfferingComponents';
 
 interface OfferingConfigureStepProps extends TranslateProps {
   submitting: boolean;
   showOptions: boolean;
+  showComponents: boolean;
   offeringTypes: Option[];
   categories: Category[];
   category?: Category;
@@ -43,6 +45,7 @@ export const OfferingConfigureStep = (props: OfferingConfigureStepProps) => (
       />
     </FormContainer>
     {props.category && <OfferingAttributes {...props}/>}
+    {props.showComponents && <FieldArray name="components" component={OfferingComponents} />}
     <FieldArray name="plans" component={OfferingPlans} />
     {props.showOptions && <FieldArray name="options" component={OfferingOptions}/>}
   </>
