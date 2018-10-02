@@ -55,7 +55,7 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
               clearable={false}
             />
           )}
-          <PlanDetailsTable/>
+          <PlanDetailsTable offering={props.offering}/>
           <TextField
             label={translate('Tenant description')}
             name="attributes.description"

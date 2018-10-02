@@ -43,12 +43,10 @@ function getBillingPeriods(unit: string): BillingPeriodDescription {
   }
 }
 
-export const pricesSelector = (state, props): PricesData => {
-  const plan: Plan = offeringSelector(state, 'plan');
-  const limits: Limits = offeringSelector(state, 'limits');
-  if (plan) {
+export const combinePrices = (plan, limits, offering) => {
+  if (plan && offering) {
     const {periods, multipliers} = getBillingPeriods(plan.unit);
-    const components: Component[] = props.offering.components
+    const components: Component[] = offering.components
       .map(item => {
         const label = item.name;
         const units = item.measured_unit;
@@ -71,4 +69,10 @@ export const pricesSelector = (state, props): PricesData => {
   } else {
     return {components: [], periods: [], total: 0, totalPeriods: []};
   }
+};
+
+export const pricesSelector = (state, props): PricesData => {
+  const plan: Plan = offeringSelector(state, 'plan');
+  const limits: Limits = offeringSelector(state, 'limits');
+  return combinePrices(plan, limits, props.offering);
 };

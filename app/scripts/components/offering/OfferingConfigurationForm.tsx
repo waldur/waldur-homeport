@@ -55,7 +55,7 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
               clearable={false}
             />
           )}
-          <PlanDetailsTable/>
+          <PlanDetailsTable offering={props.offering}/>
           <TextField
             name="attributes.description"
             label={translate('Description')}
