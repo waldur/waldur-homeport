@@ -63,7 +63,7 @@ module.exports = {
       'angular-intro.js',
 
       'react2angular',
-      './app/scripts/shims/slimscroll',
+      './src/shims/slimscroll',
     ],
   },
   output: {
@@ -92,7 +92,7 @@ module.exports = {
     // Temporary workaround for Angular UI router and React Bootstrap integration
     new webpack.NormalModuleReplacementPlugin(
       /SafeAnchor\.js/,
-      path.resolve('./app/scripts/shims/AngularRouterAnchor.tsx')
+      path.resolve('./src/shims/AngularRouterAnchor.tsx')
     ),
     new webpack.DllPlugin({
       // The path to the manifest file which maps between

@@ -46,9 +46,9 @@ cd waldur-homeport
 yarn
 ```
 
-5. Create `/app/scripts/configs/custom-config.json`:
+5. Create `/src/configs/custom-config.json`:
 ```
-cp app/scripts/configs/config.json.example app/scripts/configs/config.json
+cp src/configs/config.json.example src/configs/config.json
 ```
 
 6. Configure `config.json`. Please read [Configuration guide](docs/config.md) to learn more.

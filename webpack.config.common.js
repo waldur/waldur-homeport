@@ -6,12 +6,12 @@ const AngularGetTextPlugin = require('./angular-gettext-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const utils = require('./webpack.utils');
 
-const scssPath = path.resolve('./assets/sass');
-const imagesPath = path.resolve('./assets/images');
+const scssPath = path.resolve('./src/');
+const imagesPath = path.resolve('./src/images');
 
 module.exports = {
   entry: {
-    index: './app/scripts/index.js',
+    index: './src/index.js',
   },
   output: {
     path: utils.formatPath('.'),
@@ -22,7 +22,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
-      '@waldur': path.resolve('./app/scripts/components/'),
+      '@waldur': path.resolve('./src/'),
+      sass: path.resolve('./src/sass/'),
     }
   },
   devtool: 'source-map',
@@ -124,7 +125,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './app/index-template.html',
+      template: './src/index-template.html',
       filename: utils.formatPath('index.html'),
       inject: 'body',
       chunks: ['index'],
@@ -140,7 +141,7 @@ module.exports = {
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(az|en-gb|et|ru|lt|lv)/),
     // some files are not referenced explicitly, copy them.
     new CopyWebpackPlugin([
-      {from: './app/views', to: utils.formatPath('./views')},
+      {from: './src/views', to: utils.formatPath('./views')},
       {from: path.resolve(imagesPath, './appstore'), to: utils.formatPath('images/appstore')},
       {from: path.resolve(imagesPath, './help'), to: utils.formatPath('images/help')},
       {from: path.resolve(imagesPath, './waldur'), to: utils.formatPath('images/waldur')},
@@ -160,12 +161,11 @@ module.exports = {
       },
       extractStrings: {
         patterns: [
-          'app/views/**/*.html',
-          'app/scripts/components/**/*.html',
-          'app/scripts/**/*.js',
-          'app/scripts/**/*.jsx',
-          'app/scripts/**/*.ts',
-          'app/scripts/**/*.tsx',
+          'src/**/*.html',
+          'src/**/*.js',
+          'src/**/*.jsx',
+          'src/**/*.ts',
+          'src/**/*.tsx',
         ],
         destination: path.resolve('./i18n/template.pot'),
         lineNumbers: false,

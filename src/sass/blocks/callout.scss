@@ -1,0 +1,21 @@
+@import '~sass/inspinia/_variables.scss';
+
+.bs-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid $gray;
+  border-left-width: 5px;
+  border-radius: 3px;
+}
+
+.bs-callout-info {
+  border-left-color: $blue;
+}
+
+.bs-callout-danger {
+  border-left-color: $red;
+}
+
+.bs-callout-success {
+  border-left-color: $navy;
+}

@@ -5,8 +5,8 @@ All plugins are built statically as part of the main app in the single bundle,
 so whenever you modify your plugin you should rebuild the whole app too.
 
 1. Setup a Waldur HomePort development environment.
-2. Create new directory with module.js file in app/scripts/plugins directory:
-For example, put following code in app/scripts/plugins/my-plugin/module.js
+2. Create new directory with module.js file in src/plugins directory:
+For example, put following code in src/plugins/my-plugin/module.js
 
 ```javascript
 // @ngInject
