@@ -13,105 +13,105 @@ msgstr ""
 "2);\n"
 "Language: lv_LV\n"
 
-#: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.js:21
+#: src/premiumSupport/premium-support-contracts/contract-details-dialog.js:21
 msgid "\"{planName}\" details"
 msgstr "\"{planName}\" detaļas"
 
-#: app/scripts/components/billing/billing-record-details.html:72
+#: src/billing/billing-record-details.html:72
 msgid "(VAT is not included)"
 msgstr "(PVN nav iekļauts)"
 
-#: app/scripts/components/events/constants.ts:22
+#: src/events/constants.ts:22
 msgid ""
 "{quota_name} quota threshold has been reached for project {project_name}."
 msgstr "{quota_name} ir sasniegts projekta {project_name} kvotas slieksnis."
 
-#: app/scripts/components/directives/customer-balance.js:54
+#: src/directives/customer-balance.js:54
 msgid "{quotaUsage} out of {quotaLimit}."
 msgstr "{quotaUsage} no {quotaLimit}."
 
-#: app/scripts/components/events/constants.ts:25
+#: src/events/constants.ts:25
 msgid "{resource_full_name} has been created."
 msgstr "{resource_full_name} tika izveidots."
 
-#: app/scripts/components/events/constants.ts:28
+#: src/events/constants.ts:28
 msgid "{resource_full_name} has been deleted."
 msgstr "{resource_full_name} tika nodzēsts."
 
-#: app/scripts/components/quotas/quota-usage-bar-chart.js:19
+#: src/quotas/quota-usage-bar-chart.js:19
 msgid "{usage} of {limit} used"
 msgstr "{usage} no {limit} ir izmantoti"
 
-#: app/scripts/components/providers/details/provider-project-link-quota.js:24
+#: src/providers/details/provider-project-link-quota.js:24
 msgid "{usage} used"
 msgstr "{usage} izmantots"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:27
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:25
+#: src/openstack/openstack-tenant/openstack-template.js:27
+#: src/openstack/openstack-tenant/openstack-tenant-prices.js:25
 msgid "1 day"
 msgstr "1 diena"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:33
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:30
+#: src/openstack/openstack-tenant/openstack-template.js:33
+#: src/openstack/openstack-tenant/openstack-tenant-prices.js:30
 msgid "30 days"
 msgstr "30 dienas"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:40
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:35
+#: src/openstack/openstack-tenant/openstack-template.js:40
+#: src/openstack/openstack-tenant/openstack-tenant-prices.js:35
 msgid "365 days"
 msgstr "365 dienas"
 
-#: app/scripts/components/freeipa/freeipa-account-create.js:49
+#: src/freeipa/freeipa-account-create.js:49
 msgid "A profile has been created."
 msgstr "Profils tika izveidots."
 
-#: app/scripts/components/customer/customer-manage.html:18
+#: src/customer/customer-manage.html:18
 msgid "Abbreviation"
 msgstr "Abreviatūra"
 
-#: app/scripts/components/experts/bids/expert-bid.html:4
+#: src/experts/bids/expert-bid.html:4
 msgid "ACCEPT"
 msgstr "PIEŅEMT"
 
-#: app/scripts/components/invitations/invitations-list.js:84
+#: src/invitations/invitations-list.js:84
 msgid "Accepted"
 msgstr "Pieņemts"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:51
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:15
-#: app/scripts/components/resource/summary/virtual-machine-summary.html:13
+#: src/openstack/openstack-tenant/openstack-tenant-config.js:51
+#: src/openstack/openstack-tenant/openstack-tenant-summary.html:15
+#: src/resource/summary/virtual-machine-summary.html:13
 msgid "Access"
 msgstr "Pieeja"
 
-#: app/scripts/components/customer/customer-manage.html:92
+#: src/customer/customer-manage.html:92
 msgid "Account"
 msgstr "Konts"
 
-#: app/scripts/components/auth/auth-activation.html:3
+#: src/auth/auth-activation.html:3
 msgid "Account activation"
 msgstr "Konta aktivizēšana"
 
-#: app/scripts/components/auth/auth-activation.js:19
+#: src/auth/auth-activation.js:19
 msgid "Account has been activated."
 msgstr "Konts tika aktivizēts."
 
-#: app/scripts/components/cost-planning/cost-plan-items.html:11
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:18
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
-#: app/scripts/components/paypal/paypal-invoice-actions.html:3
-#: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/components/table/responsive-table.js:333
+#: src/cost-planning/cost-plan-items.html:11
+#: src/cost-planning/cost-plan-optimizer.html:18
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html:15
+#: src/paypal/paypal-invoice-actions.html:3
+#: src/resource/actions/action-button-resource.html:3
+#: src/table/responsive-table.js:333
 msgid "Actions"
 msgstr "Darbības"
 
-#: app/scripts/components/issues/comments/issue-comments-form.html:17
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:53
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:39
-#: app/scripts/components/team/add-project-member.js:22
+#: src/issues/comments/issue-comments-form.html:17
+#: src/openstack/openstack-instance/openstack-instance-floating-ips.html:53
+#: src/openstack/openstack-instance/openstack-instance-networks.html:39
+#: src/team/add-project-member.js:22
 msgid "Add"
 msgstr "Pievienot"
 
-#: app/scripts/components/intro/base-intro.js:105
+#: src/intro/base-intro.js:105
 msgid "Add a new organization"
 msgstr "Pievienot jaunu uzņēmumu"
 
@@ -120,472 +120,472 @@ msgstr "Pievienot jaunu uzņēmumu"
 msgid "Add credit"
 msgstr "Papildināt bilanci"
 
-#: app/scripts/components/user/keys/key-create.html:42
+#: src/user/keys/key-create.html:42
 msgid "Add key"
 msgstr "Pievienot atslēgu"
 
-#: app/scripts/components/team/project-users-list.js:76
+#: src/team/project-users-list.js:76
 msgid "Add member"
 msgstr "Pievienot dalībnieku"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:35
+#: src/navigation/select-workspace-dialog.html:35
 msgid "Add new"
 msgstr "Pievieno jaunu"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:23
+#: src/navigation/select-workspace-dialog.html:23
 msgid "Add new organization"
 msgstr "Pievienot jaunu uzņēmumu"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:90
+#: src/navigation/select-workspace-dialog.html:90
 msgid "Add new project"
 msgstr "Pievienot jaunu projektu"
 
-#: app/scripts/components/user/hooks/hook-list.js:62
+#: src/user/hooks/hook-list.js:62
 msgid "Add notification"
 msgstr "Pievienot paziņojumu"
 
-#: app/scripts/components/user/user-organizations.js:76
+#: src/user/user-organizations.js:76
 msgid "Add organization"
 msgstr "Pievienot uzņēmumu"
 
-#: app/scripts/components/resource/list/resource-private-clouds-list.js:39
+#: src/resource/list/resource-private-clouds-list.js:39
 msgid "Add private cloud"
 msgstr "Pievienot privāto mākoni"
 
-#: app/scripts/components/appstore/dialog/appstore-project-selector.html:16
-#: app/scripts/components/project/project-create.html:72
-#: app/scripts/components/project/projects-list.js:157
+#: src/appstore/dialog/appstore-project-selector.html:16
+#: src/project/project-create.html:72
+#: src/project/projects-list.js:157
 msgid "Add project"
 msgstr "Pievienot projektu"
 
-#: app/scripts/components/team/add-project-member.js:23
+#: src/team/add-project-member.js:23
 msgid "Add project member"
 msgstr "Pievienot projekta dalībnieku"
 
-#: app/scripts/components/providers/create.html:155
-#: app/scripts/components/providers/provider-list.js:186
+#: src/providers/create.html:155
+#: src/providers/provider-list.js:186
 msgid "Add provider"
 msgstr "Pievienot pakalpojumu sniedzēju"
 
-#: app/scripts/components/experts/requests/expert-request-project-list.js:91
+#: src/experts/requests/expert-request-project-list.js:91
 msgid "Add request"
 msgstr "Pievienot pieprasījumu"
 
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:70
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html:70
 msgid "Add rule"
 msgstr "Pievienot noteikumu"
 
-#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:52
+#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:52
 msgid "Add SLA"
 msgstr "Pievienot SLA"
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:82
+#: src/openstack/openstack-snapshot/openstack-snapshots-list.js:82
 msgid "Add snapshots"
 msgstr "Pievienot snapshots"
 
-#: app/scripts/components/user/keys/key-list.js:62
-#: app/scripts/components/user/routes.js:91
+#: src/user/keys/key-list.js:62
+#: src/user/routes.js:91
 msgid "Add SSH key"
 msgstr "Pievienot  SSH atslēgu"
 
-#: app/scripts/components/resource/list/resource-vms-list.js:60
+#: src/resource/list/resource-vms-list.js:60
 msgid "Add virtual machine"
 msgstr "Pievienot virtuālo serveri"
 
-#: app/scripts/components/customer/customer-create-config.js:47
-#: app/scripts/components/customer/customer-manage.html:38
-#: app/scripts/components/customer/customer-manage.html:74
-#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
+#: src/customer/customer-create-config.js:47
+#: src/customer/customer-manage.html:38
+#: src/customer/customer-manage.html:74
+#: src/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
 msgstr "Adrese"
 
-#: app/scripts/components/billing/billing-record-details.html:14
-#: app/scripts/components/customer/customer-manage.html:33
+#: src/billing/billing-record-details.html:14
+#: src/customer/customer-manage.html:33
 msgid "Agreement number"
 msgstr "Līguma numurs"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:54
+#: src/openstack/openstack-tenant/openstack-template.js:54
 msgid "All categories"
 msgstr "Visas kategorijas"
 
-#: app/scripts/components/navigation/site-header.html:12
+#: src/navigation/site-header.html:12
 msgid "Back"
 msgstr "Atpakaļ"
 
-#: app/scripts/components/user/user-details.js:20
+#: src/user/user-details.js:20
 msgid "Back to project"
 msgstr "Atpakaļ uz projektu"
 
-#: app/scripts/components/billing/billing-utils.js:3
+#: src/billing/billing-utils.js:3
 msgid "Billing"
 msgstr "Norēķini"
 
-#: app/scripts/components/ansible/ansible-job-create.html:37
-#: app/scripts/components/appstore/appstore-store.html:55
-#: app/scripts/components/appstore/dialog/appstore-selector-dialog.html:30
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:37
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:56
-#: app/scripts/components/digitalocean/droplet-resize.html:76
-#: app/scripts/components/events/event-details-dialog.html:133
-#: app/scripts/components/events/event-types-dialog.html:14
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:93
-#: app/scripts/components/experts/requests/expert-request-create.html:22
-#: app/scripts/components/form/appstore-form-wizard.html:54
-#: app/scripts/components/invitations/actions/cancel.js:8
-#: app/scripts/components/invitations/actions/invitation-dialog.html:77
-#: app/scripts/components/issues/comments/issue-comments-form.html:22
-#: app/scripts/components/issues/issue-create-dialog.html:99
-#: app/scripts/components/navigation/select-workspace-dialog.html:137
-#: app/scripts/components/offering/appstore-offering.html:22
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:26
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:54
-#: app/scripts/components/openstack/openstack-volume/snapshot-create.html:43
-#: app/scripts/components/openstack/openstack-volume/volume-extend.html:34
-#: app/scripts/components/plans/plans-list.html:38
-#: app/scripts/components/premiumSupport/premium-support-agreement.html:34
-#: app/scripts/components/project/project-create.html:75
-#: app/scripts/components/providers/create.html:160
-#: app/scripts/components/resource-import/resource-import-dialog.html:42
-#: app/scripts/components/resource/actions/dialog/action-dialog.html:36
-#: app/scripts/components/team/add-project-member.html:54
-#: app/scripts/components/team/add-team-member.html:86
-#: app/scripts/components/user/hooks/hook-details.html:81
-#: app/scripts/components/user/keys/key-create.html:45
+#: src/ansible/ansible-job-create.html:37
+#: src/appstore/appstore-store.html:55
+#: src/appstore/dialog/appstore-selector-dialog.html:30
+#: src/auth/saml2/auth-saml2-dialog.html:37
+#: src/cost-planning/cost-plan-dialog.html:56
+#: src/digitalocean/droplet-resize.html:76
+#: src/events/event-details-dialog.html:133
+#: src/events/event-types-dialog.html:14
+#: src/experts/bids/expert-bid-create-dialog.html:93
+#: src/experts/requests/expert-request-create.html:22
+#: src/form/appstore-form-wizard.html:54
+#: src/invitations/actions/cancel.js:8
+#: src/invitations/actions/invitation-dialog.html:77
+#: src/issues/comments/issue-comments-form.html:22
+#: src/issues/issue-create-dialog.html:99
+#: src/navigation/select-workspace-dialog.html:137
+#: src/offering/appstore-offering.html:22
+#: src/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:26
+#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:54
+#: src/openstack/openstack-volume/snapshot-create.html:43
+#: src/openstack/openstack-volume/volume-extend.html:34
+#: src/plans/plans-list.html:38
+#: src/premiumSupport/premium-support-agreement.html:34
+#: src/project/project-create.html:75
+#: src/providers/create.html:160
+#: src/resource-import/resource-import-dialog.html:42
+#: src/resource/actions/dialog/action-dialog.html:36
+#: src/team/add-project-member.html:54
+#: src/team/add-team-member.html:86
+#: src/user/hooks/hook-details.html:81
+#: src/user/keys/key-create.html:45
 msgid "Cancel"
 msgstr "Atcelt"
 
-#: app/scripts/components/payments/routes.js:26
+#: src/payments/routes.js:26
 msgid "Cancel payment"
 msgstr "Atcelt maksājumu"
 
-#: app/scripts/components/experts/requests/expert-request-cancel.html:7
+#: src/experts/requests/expert-request-cancel.html:7
 msgid "Cancel request"
 msgstr "Atcelt pieprasījumu"
 
-#: app/scripts/components/billing/billing-utils.js:37
-#: app/scripts/components/invitations/invitations-list.js:76
+#: src/billing/billing-utils.js:37
+#: src/invitations/invitations-list.js:76
 msgid "Canceled"
 msgstr "Atcelts"
 
-#: app/scripts/components/paypal/paypal-invoices-list.js:117
+#: src/paypal/paypal-invoices-list.js:117
 msgid "Cancelled"
 msgstr "Atcelts"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:8
+#: src/openstack/openstack-tenant/openstack-template.js:8
 msgid "Category"
 msgstr "Kategorija"
 
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:16
+#: src/auth/saml2/auth-saml2-dialog.html:16
 msgid "Choose an organization"
 msgstr "Izvēlēties uzņēmumu"
 
-#: app/scripts/components/plans/plans-list.html:6
+#: src/plans/plans-list.html:6
 msgid "Choose new plan"
 msgstr "Izvēlēties jaunu plānu"
 
-#: app/scripts/components/billing/invoice-events-dialog.html:45
-#: app/scripts/components/customer/customer-report-error.html:10
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
+#: src/billing/invoice-events-dialog.html:45
+#: src/customer/customer-report-error.html:10
+#: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 msgid "Close"
 msgstr "Aizvērt"
 
-#: app/scripts/components/alerts/alert-filter.html:4
+#: src/alerts/alert-filter.html:4
 msgid "Closed"
 msgstr "Aizvērts"
 
-#: app/scripts/components/appstore/appstore-compare-list.js:62
+#: src/appstore/appstore-compare-list.js:62
 msgid "Code"
 msgstr "Kods"
 
-#: app/scripts/components/issues/comments/issue-comments-form.html:10
-#: app/scripts/components/issues/comments/issue-comments-form.html:6
+#: src/issues/comments/issue-comments-form.html:10
+#: src/issues/comments/issue-comments-form.html:6
 msgid "Comment"
 msgstr "Komentārs"
 
-#: app/scripts/components/issues/comments/issue-comments-form.js:18
+#: src/issues/comments/issue-comments-form.js:18
 msgid "Comment has been added."
 msgstr "Komentārs tika pievienots"
 
-#: app/scripts/components/issues/comments/issue-comments-list.html:22
+#: src/issues/comments/issue-comments-list.html:22
 msgid "commented"
 msgstr "komentēts"
 
-#: app/scripts/components/issues/comments/issue-comments-container.html:3
+#: src/issues/comments/issue-comments-container.html:3
 msgid "Comments"
 msgstr "Komentāri"
 
-#: app/scripts/components/customer/customer-manage.html:71
+#: src/customer/customer-manage.html:71
 msgid "Company"
 msgstr "Uzņēmums"
 
-#: app/scripts/components/customer/customer-users-details-list.js:69
-#: app/scripts/components/user/user-popover-table.html:25
+#: src/customer/customer-users-details-list.js:69
+#: src/user/user-popover-table.html:25
 msgid "Competence"
 msgstr "Kompetence"
 
-#: app/scripts/components/cost-planning/cost-plan-flavors.html:4
+#: src/cost-planning/cost-plan-flavors.html:4
 msgid "Component"
 msgstr "Komponents"
 
-#: app/scripts/components/cost-planning/cost-plan-items.html:9
+#: src/cost-planning/cost-plan-items.html:9
 msgid "Components"
 msgstr "Komponenti"
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:9
-#: app/scripts/components/openstack/openstack-instance/actions.js:66
+#: src/cost-planning/cost-plan-dialog.html:9
+#: src/openstack/openstack-instance/actions.js:66
 msgid "Configure"
 msgstr "Konfigurēt"
 
-#: app/scripts/components/customer/customer-manage.js:117
+#: src/customer/customer-manage.js:117
 msgid "Confirm deletion?"
 msgstr "Vai apstiprināt dzēšanu?"
 
-#: app/scripts/components/auth/auth-login.js:204
+#: src/auth/auth-login.js:204
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr "Apstiprināšanas e-pasts tika nosūtīts. Lūdzu, pārbaudiet savu pastu!"
 
-#: app/scripts/components/customer/customer-create-config.js:17
-#: app/scripts/components/customer/customer-manage.html:43
+#: src/customer/customer-create-config.js:17
+#: src/customer/customer-manage.html:43
 msgid "Contact e-mail"
 msgstr "E-pasta adrese"
 
-#: app/scripts/components/customer/customer-popover.html:28
+#: src/customer/customer-popover.html:28
 msgid "Contact email"
 msgstr "E-pasts"
 
-#: app/scripts/components/customer/customer-create-config.js:41
-#: app/scripts/components/customer/customer-manage.html:77
+#: src/customer/customer-create-config.js:41
+#: src/customer/customer-manage.html:77
 msgid "Country"
 msgstr "Valsts"
 
-#: app/scripts/components/appstore/appstore-compare-list.js:76
-#: app/scripts/components/resource-import/import-virtual-machines-list.js:76
+#: src/appstore/appstore-compare-list.js:76
+#: src/resource-import/import-virtual-machines-list.js:76
 msgid "CPU"
 msgstr "CPU"
 
-#: app/scripts/components/providers/details/provider-project-link-quotas.html:8
-#: app/scripts/components/slurm/slurm-allocation-list.js:37
-#: app/scripts/components/slurm/slurm-allocation-summary.html:5
+#: src/providers/details/provider-project-link-quotas.html:8
+#: src/slurm/slurm-allocation-list.js:37
+#: src/slurm/slurm-allocation-summary.html:5
 msgid "CPU limit"
 msgstr "CPU limits"
 
-#: app/scripts/components/slurm/actions.js:15
+#: src/slurm/actions.js:15
 msgid "CPU limit, minutes"
 msgstr "CPU limits, minūtes"
 
-#: app/scripts/components/ansible/ansible-job-create.html:34
-#: app/scripts/components/appstore/appstore-store.html:20
-#: app/scripts/components/appstore/appstore-store.html:51
-#: app/scripts/components/customer/customer-issues.js:31
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:90
-#: app/scripts/components/experts/requests/expert-request-create.html:19
-#: app/scripts/components/freeipa/freeipa-account-create.html:67
-#: app/scripts/components/issues/issue-create-dialog.js:10
-#: app/scripts/components/offering/appstore-offering.html:19
-#: app/scripts/components/openstack/openstack-instance/actions.js:108
-#: app/scripts/components/openstack/openstack-instance/actions.js:51
-#: app/scripts/components/openstack/openstack-tenant/actions.js:25
-#: app/scripts/components/openstack/openstack-tenant/actions.js:60
-#: app/scripts/components/openstack/openstack-tenant/actions.js:80
-#: app/scripts/components/openstack/openstack-volume/module.js:60
-#: app/scripts/components/openstack/openstack-volume/module.js:74
-#: app/scripts/components/project/project-issues.js:31
-#: app/scripts/components/resource/list/resources-list.js:110
-#: app/scripts/components/resource/tabs/resource-issues.js:26
-#: app/scripts/components/user/hooks/hook-details.html:77
+#: src/ansible/ansible-job-create.html:34
+#: src/appstore/appstore-store.html:20
+#: src/appstore/appstore-store.html:51
+#: src/customer/customer-issues.js:31
+#: src/experts/bids/expert-bid-create-dialog.html:90
+#: src/experts/requests/expert-request-create.html:19
+#: src/freeipa/freeipa-account-create.html:67
+#: src/issues/issue-create-dialog.js:10
+#: src/offering/appstore-offering.html:19
+#: src/openstack/openstack-instance/actions.js:108
+#: src/openstack/openstack-instance/actions.js:51
+#: src/openstack/openstack-tenant/actions.js:25
+#: src/openstack/openstack-tenant/actions.js:60
+#: src/openstack/openstack-tenant/actions.js:80
+#: src/openstack/openstack-volume/module.js:60
+#: src/openstack/openstack-volume/module.js:74
+#: src/project/project-issues.js:31
+#: src/resource/list/resources-list.js:110
+#: src/resource/tabs/resource-issues.js:26
+#: src/user/hooks/hook-details.html:77
 msgid "Create"
 msgstr "Izveidot"
 
-#: app/scripts/components/auth/auth-login.html:111
-#: app/scripts/components/auth/auth-login.html:19
+#: src/auth/auth-login.html:111
+#: src/auth/auth-login.html:19
 msgid "Create an account"
 msgstr "Izveidot kontu"
 
-#: app/scripts/components/customer/routes.js:137
+#: src/customer/routes.js:137
 msgid "Create project"
 msgstr "Izveidot projektu"
 
-#: app/scripts/components/customer/routes.js:145
+#: src/customer/routes.js:145
 msgid "Create provider"
 msgstr "Izveidot pakalpojumu sniedzēju"
 
-#: app/scripts/components/issues/issue-create-dialog.js:4
-#: app/scripts/components/issues/issue-quick-create.html:116
-#: app/scripts/components/issues/issue-quick-create.html:3
-#: app/scripts/components/issues/issue-registration.html:216
+#: src/issues/issue-create-dialog.js:4
+#: src/issues/issue-quick-create.html:116
+#: src/issues/issue-quick-create.html:3
+#: src/issues/issue-registration.html:216
 msgid "Create request"
 msgstr "Izveidot pieprasījumu"
 
-#: app/scripts/components/events/constants.ts:17
+#: src/events/constants.ts:17
 msgid "Created a new payment for {customer_name}."
 msgstr "Izveidot jaunu maksājumu par {customer_name}."
 
-#: app/scripts/components/ansible/ansible-jobs-list.js:74
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:89
-#: app/scripts/components/experts/requests/expert-request-project-list.js:79
-#: app/scripts/components/offering/offerings-list.js:55
-#: app/scripts/components/project/projects-list.js:98
+#: src/ansible/ansible-jobs-list.js:74
+#: src/experts/requests/expert-request-customer-list.js:89
+#: src/experts/requests/expert-request-project-list.js:79
+#: src/offering/offerings-list.js:55
+#: src/project/projects-list.js:98
 msgid "Creation date"
 msgstr "Izveides datums"
 
-#: app/scripts/components/payments/payment-list.js:43
-#: app/scripts/components/plans/plan-agreements-list.js:41
+#: src/payments/payment-list.js:43
+#: src/plans/plan-agreements-list.js:41
 msgid "Date"
 msgstr "Datums"
 
-#: app/scripts/components/cost-planning/cost-plan-items.html:46
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:39
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
+#: src/cost-planning/cost-plan-items.html:46
+#: src/openstack/openstack-instance/openstack-instance-floating-ips.html:39
+#: src/openstack/openstack-instance/openstack-instance-networks.html:24
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
 msgstr "Dzēst"
 
-#: app/scripts/components/appstore/appstore-providers.html:40
-#: app/scripts/components/cost-planning/cost-plans-list.js:54
-#: app/scripts/components/events/base-event-list.js:43
-#: app/scripts/components/issues/issue-registration.html:32
-#: app/scripts/components/issues/issue-registration.html:69
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
-#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
-#: app/scripts/components/project/project-details-button.html:4
-#: app/scripts/components/project/projects-list.js:175
-#: app/scripts/components/providers/details/dialog.html:10
-#: app/scripts/components/providers/provider-list.js:92
-#: app/scripts/components/team/customer-users-list.js:123
-#: app/scripts/components/team/project-users-list.js:87
-#: app/scripts/components/user/user-sidebar.html:12
+#: src/appstore/appstore-providers.html:40
+#: src/cost-planning/cost-plans-list.js:54
+#: src/events/base-event-list.js:43
+#: src/issues/issue-registration.html:32
+#: src/issues/issue-registration.html:69
+#: src/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
+#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
+#: src/project/project-details-button.html:4
+#: src/project/projects-list.js:175
+#: src/providers/details/dialog.html:10
+#: src/providers/provider-list.js:92
+#: src/team/customer-users-list.js:123
+#: src/team/project-users-list.js:87
+#: src/user/user-sidebar.html:12
 msgid "Details"
 msgstr "Detaļas"
 
-#: app/scripts/components/billing/invoice-details.html:21
-#: app/scripts/components/billing/invoices-list.js:74
-#: app/scripts/components/paypal/paypal-invoices-list.js:78
+#: src/billing/invoice-details.html:21
+#: src/billing/invoices-list.js:74
+#: src/paypal/paypal-invoices-list.js:78
 msgid "Due date"
 msgstr "Termiņš"
 
-#: app/scripts/components/customer/customer-users-details-list.js:40
-#: app/scripts/components/invitations/actions/invitation-dialog.html:12
-#: app/scripts/components/team/customer-users-list.js:71
-#: app/scripts/components/team/project-users-list.js:56
-#: app/scripts/components/team/user-selector.html:12
-#: app/scripts/components/user/user-edit.html:29
-#: app/scripts/components/user/user-popover-table.html:17
+#: src/customer/customer-users-details-list.js:40
+#: src/invitations/actions/invitation-dialog.html:12
+#: src/team/customer-users-list.js:71
+#: src/team/project-users-list.js:56
+#: src/team/user-selector.html:12
+#: src/user/user-edit.html:29
+#: src/user/user-popover-table.html:17
 msgid "E-mail"
 msgstr "E-pasts"
 
-#: app/scripts/components/user/hooks/hook-details.html:45
+#: src/user/hooks/hook-details.html:45
 msgid "E-mail address"
 msgstr "E-pasta adrese"
 
-#: app/scripts/components/team/add-project-member.js:56
+#: src/team/add-project-member.js:56
 msgid "Edit project member"
 msgstr "Izmainīt projekta dalībnieku"
 
-#: app/scripts/components/team/add-team-member.js:34
+#: src/team/add-team-member.js:34
 msgid "Edit team member"
 msgstr "Izmainīt komandas dalībnieku"
 
-#: app/scripts/components/auth/auth-login.html:62
-#: app/scripts/components/customer/customer-manage.html:80
-#: app/scripts/components/invitations/invitations-list.js:97
+#: src/auth/auth-login.html:62
+#: src/customer/customer-manage.html:80
+#: src/invitations/invitations-list.js:97
 msgid "Email"
 msgstr "E-pasts"
 
-#: app/scripts/components/freeipa/freeipa-account-edit.html:50
+#: src/freeipa/freeipa-account-edit.html:50
 msgid "Enable profile"
 msgstr "Aktivizēt profilu"
 
-#: app/scripts/components/user/hooks/hook-details.html:37
+#: src/user/hooks/hook-details.html:37
 msgid "Enabled"
 msgstr "Ieslēgts"
 
-#: app/scripts/components/configs/base-config.js:203
+#: src/configs/base-config.js:203
 msgid "English"
 msgstr "Angļu valoda"
 
-#: app/scripts/components/events/event-details-dialog.html:51
-#: app/scripts/components/resource/summary/resource-summary-base.html:12
+#: src/events/event-details-dialog.html:51
+#: src/resource/summary/resource-summary-base.html:12
 msgid "Error message"
 msgstr "Kļūdas ziņojums"
 
-#: app/scripts/components/configs/base-config.js:207
+#: src/configs/base-config.js:207
 msgid "Estonian"
 msgstr "Igauņu valoda"
 
-#: app/scripts/components/customer/customer-create-config.js:53
+#: src/customer/customer-create-config.js:53
 msgid "EU VAT ID"
 msgstr "ES PVN reģistrācijas numurs"
 
-#: app/scripts/components/dashboard/project-events-feed.js:12
-#: app/scripts/components/help/constants.ts:10
-#: app/scripts/components/user/hooks/hook-list.js:53
+#: src/dashboard/project-events-feed.js:12
+#: src/help/constants.ts:10
+#: src/user/hooks/hook-list.js:53
 msgid "Events"
 msgstr "Notikumi"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:28
+#: src/openstack/openstack-backup-schedule/filters.js:28
 msgid "Every day"
 msgstr "Katru dienu"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:26
+#: src/openstack/openstack-backup-schedule/filters.js:26
 msgid "Every day at"
 msgstr "Katru dienu plkst."
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:21
+#: src/openstack/openstack-backup-schedule/filters.js:21
 msgid "Every hour"
 msgstr "Katru stundu"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:14
+#: src/openstack/openstack-backup-schedule/filters.js:14
 msgid "Every minute"
 msgstr "Katru minūti"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:44
+#: src/openstack/openstack-backup-schedule/filters.js:44
 msgid "Every month"
 msgstr "Katru mēnesi"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:36
+#: src/openstack/openstack-backup-schedule/filters.js:36
 msgid "Every week"
 msgstr "Katru nedēļu"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:52
+#: src/openstack/openstack-backup-schedule/filters.js:52
 msgid "Every year"
 msgstr "Katru gadu"
 
-#: app/scripts/components/experts/extensions/user-organizations.js:4
+#: src/experts/extensions/user-organizations.js:4
 msgid "Expert"
 msgstr "Eksperts"
 
-#: app/scripts/components/experts/constants.ts:1
-#: app/scripts/components/experts/expert-provider-details.html:2
-#: app/scripts/components/experts/extensions/sidebar.js:28
-#: app/scripts/components/experts/extensions/sidebar.js:8
-#: app/scripts/components/experts/requests/expert-request-header.html:15
-#: app/scripts/components/experts/routes.js:19
-#: app/scripts/components/experts/routes.js:28
-#: app/scripts/components/experts/routes.js:38
+#: src/experts/constants.ts:1
+#: src/experts/expert-provider-details.html:2
+#: src/experts/extensions/sidebar.js:28
+#: src/experts/extensions/sidebar.js:8
+#: src/experts/requests/expert-request-header.html:15
+#: src/experts/routes.js:19
+#: src/experts/routes.js:28
+#: src/experts/routes.js:38
 msgid "Experts"
 msgstr "Eksperti"
 
-#: app/scripts/components/resource/list/resource-vms-list.js:43
-#: app/scripts/components/resource/summary/virtual-machine-summary.html:42
+#: src/resource/list/resource-vms-list.js:43
+#: src/resource/summary/virtual-machine-summary.html:42
 msgid "External IP"
 msgstr "Ārējā IP adrese"
 
-#: app/scripts/components/issues/issue-registration.html:150
-#: app/scripts/components/issues/issue-registration.html:36
-#: app/scripts/components/issues/issue-registration.html:73
+#: src/issues/issue-registration.html:150
+#: src/issues/issue-registration.html:36
+#: src/issues/issue-registration.html:73
 msgid "Filter"
 msgstr "Filtrs"
 
-#: app/scripts/components/customer/customer-create-config.js:4
+#: src/customer/customer-create-config.js:4
 msgid "General information"
 msgstr "Vispārējā informācija"
 
-#: app/scripts/components/resource/tabs/constants.ts:17
+#: src/resource/tabs/constants.ts:17
 msgid "Graphs"
 msgstr "Grafiki"
 
-#: app/scripts/components/help/routes.js:9
-#: app/scripts/components/navigation/app-footer.html:17
+#: src/help/routes.js:9
+#: src/navigation/app-footer.html:17
 msgid "Help"
 msgstr "Palīdzība"
 
@@ -593,386 +593,386 @@ msgstr "Palīdzība"
 msgid "Help topics"
 msgstr "Palīdzības tēmas"
 
-#: app/scripts/components/experts/expert-provider-details.html:17
-#: app/scripts/components/form/appstore-field-tos.html:8
-#: app/scripts/components/freeipa/freeipa-account-create.html:51
-#: app/scripts/components/user/user-edit.html:157
+#: src/experts/expert-provider-details.html:17
+#: src/form/appstore-field-tos.html:8
+#: src/freeipa/freeipa-account-create.html:51
+#: src/user/user-edit.html:157
 msgid "I accept the"
 msgstr "Es pieņemu"
 
-#: app/scripts/components/issues/request-service-button.html:7
+#: src/issues/request-service-button.html:7
 msgid "I want another service"
 msgstr "Es gribu citu pakalpojumu"
 
-#: app/scripts/components/azure/azure-virtual-machine-config.js:26
-#: app/scripts/components/digitalocean/digitalocean-droplet-config.js:31
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:27
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:24
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:22
+#: src/azure/azure-virtual-machine-config.js:26
+#: src/digitalocean/digitalocean-droplet-config.js:31
+#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:27
+#: src/openstack/openstack-instance/openstack-instance-config.js:24
+#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:22
 msgid "Image"
 msgstr "Attēls"
 
-#: app/scripts/components/azure/azure-virtual-machine-config.js:30
-#: app/scripts/components/digitalocean/digitalocean-droplet-config.js:35
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:28
+#: src/azure/azure-virtual-machine-config.js:30
+#: src/digitalocean/digitalocean-droplet-config.js:35
+#: src/openstack/openstack-instance/openstack-instance-config.js:28
 msgid "Image name"
 msgstr "Attēla nosaukums"
 
-#: app/scripts/components/resource-import/resource-import-dialog.html:39
-#: app/scripts/components/resource-import/utils.js:46
+#: src/resource-import/resource-import-dialog.html:39
+#: src/resource-import/utils.js:46
 msgid "Import"
 msgstr "Imports"
 
-#: app/scripts/components/resource/list/resource-vms-list.js:33
-#: app/scripts/components/resource/summary/virtual-machine-summary.html:30
+#: src/resource/list/resource-vms-list.js:33
+#: src/resource/summary/virtual-machine-summary.html:30
 msgid "Internal IP"
 msgstr "Iekšējā IP adrese"
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:2
+#: src/invitations/invitation-confirm-dialog.html:2
 msgid "Invitation check"
 msgstr "Uzaicinājuma pārbaude"
 
-#: app/scripts/components/invitations/utils.js:45
+#: src/invitations/utils.js:45
 msgid "Invitation could not be accepted"
 msgstr "Uzaicinājums nevar tikt pieņemts."
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:20
+#: src/invitations/invitation-confirm-dialog.html:20
 msgid "Invitation email is:"
 msgstr "Uzaicinājuma e-pasts ir:"
 
-#: app/scripts/components/invitations/actions/cancel.js:13
+#: src/invitations/actions/cancel.js:13
 msgid "Invitation has been canceled."
 msgstr "Uzaicinājums tika atcelts."
 
-#: app/scripts/components/invitations/actions/invitation-dialog-service.js:52
+#: src/invitations/actions/invitation-dialog-service.js:52
 msgid "Invitation has been created."
 msgstr "Uzaicinājums tika izveidots."
 
-#: app/scripts/components/invitations/actions/send.js:13
+#: src/invitations/actions/send.js:13
 msgid "Invitation has been sent again."
 msgstr "Uzaicinājums tika nosūtīts atkārtoti."
 
-#: app/scripts/components/invitations/utils.js:100
+#: src/invitations/utils.js:100
 msgid "Invitation is not found."
 msgstr "Uzaicinājums nav atrasts."
 
-#: app/scripts/components/invitations/utils.js:66
+#: src/invitations/utils.js:66
 msgid "Invitation is not valid anymore."
 msgstr "Uzaicinājums vairs nav derīgs."
 
-#: app/scripts/components/invitations/utils.js:103
+#: src/invitations/utils.js:103
 msgid "Invitation is not valid."
 msgstr "Uzaicinājums nav derīgs."
 
-#: app/scripts/components/customer/customer-team.html:10
+#: src/customer/customer-team.html:10
 msgid "Invitations"
 msgstr "Uzaicinājumi"
 
-#: app/scripts/components/intro/expert-manager-intro.js:119
+#: src/intro/expert-manager-intro.js:119
 msgid "Invite new users."
 msgstr "Uzaicināt jaunus lietotājus."
 
-#: app/scripts/components/invitations/actions/create.js:8
-#: app/scripts/components/invitations/actions/invitation-dialog.html:2
-#: app/scripts/components/invitations/actions/invitation-dialog.html:73
+#: src/invitations/actions/create.js:8
+#: src/invitations/actions/invitation-dialog.html:2
+#: src/invitations/actions/invitation-dialog.html:73
 msgid "Invite user"
 msgstr "Uzaicināt lietotāju"
 
-#: app/scripts/components/billing/invoice-header.html:3
+#: src/billing/invoice-header.html:3
 msgid "Invoice"
 msgstr "Rēķins"
 
-#: app/scripts/components/billing/invoice-details.html:19
-#: app/scripts/components/billing/invoices-list.js:69
-#: app/scripts/components/paypal/paypal-invoices-list.js:73
+#: src/billing/invoice-details.html:19
+#: src/billing/invoices-list.js:69
+#: src/paypal/paypal-invoices-list.js:73
 msgid "Invoice date"
 msgstr "Rēķina datums"
 
-#: app/scripts/components/billing/invoice-details.html:14
+#: src/billing/invoice-details.html:14
 msgid "Invoice No."
 msgstr "Rēķins Nr."
 
-#: app/scripts/components/billing/invoices-list.js:41
-#: app/scripts/components/paypal/paypal-invoices-list.js:42
+#: src/billing/invoices-list.js:41
+#: src/paypal/paypal-invoices-list.js:42
 msgid "Invoice number"
 msgstr "Rēķina numurs"
 
-#: app/scripts/components/billing/billing-tabs.html:16
-#: app/scripts/components/billing/billing-tabs.html:4
+#: src/billing/billing-tabs.html:16
+#: src/billing/billing-tabs.html:4
 msgid "Invoices"
 msgstr "Rēķini"
 
-#: app/scripts/components/billing/invoice-header.html:9
+#: src/billing/invoice-header.html:9
 msgid "Invoices list"
 msgstr "Rēķinu saraksts"
 
-#: app/scripts/components/events/event-details-dialog.html:27
+#: src/events/event-details-dialog.html:27
 msgid "IP address"
 msgstr "IP adrese"
 
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:11
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rules-list.html:5
-#: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:14
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html:11
+#: src/openstack/openstack-security-groups/security-group-rules-list.html:5
+#: src/openstack/openstack-security-groups/security-groups-dialog.html:14
 msgid "IP protocol"
 msgstr "IP protokols"
 
-#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:60
+#: src/openstack/openstack-subnet/openstack-subnet-summary.html:60
 msgid "IP version"
 msgstr "IP versija"
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:44
+#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js:44
 msgid "IPv4 address"
 msgstr "IPv4 adrese"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
-#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:48
-#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedule-summary.html:25
-#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:48
+#: src/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
+#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:48
+#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedule-summary.html:25
+#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:48
 msgid "Is active"
 msgstr "Aktīvs"
 
-#: app/scripts/components/issues/issue-detail.html:70
+#: src/issues/issue-detail.html:70
 msgid "Link"
 msgstr "Saite"
 
-#: app/scripts/components/project/project-providers-service.js:80
-#: app/scripts/components/providers/details/provider-projects.js:92
+#: src/project/project-providers-service.js:80
+#: src/providers/details/provider-projects.js:92
 msgid "Link created"
 msgstr "Saite ir izveidota"
 
-#: app/scripts/components/project/project-providers-service.js:97
-#: app/scripts/components/providers/details/provider-projects.js:111
+#: src/project/project-providers-service.js:97
+#: src/providers/details/provider-projects.js:111
 msgid "Link removed"
 msgstr "Saite ir nodzēsta"
 
-#: app/scripts/components/configs/base-config.js:215
+#: src/configs/base-config.js:215
 msgid "Lithuanian"
 msgstr "Lietuviešu valoda"
 
-#: app/scripts/components/customer/customer-users-details-list.js:30
-#: app/scripts/components/team/customer-users-list.js:67
-#: app/scripts/components/team/project-users-list.js:52
+#: src/customer/customer-users-details-list.js:30
+#: src/team/customer-users-list.js:67
+#: src/team/project-users-list.js:52
 msgid "Member"
 msgstr "Dalībnieks"
 
-#: app/scripts/components/user/hooks/hook-list.js:37
+#: src/user/hooks/hook-list.js:37
 msgid "Method"
 msgstr "Metode"
 
-#: app/scripts/components/quotas/filters.js:12
+#: src/quotas/filters.js:12
 msgid "Monthly cost"
 msgstr "Mēneša maksa"
 
-#: app/scripts/components/billing/invoice-events-dialog.html:33
+#: src/billing/invoice-events-dialog.html:33
 msgid "More info"
 msgstr "Vairāk informācijas"
 
-#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:19
+#: src/openstack/openstack-subnet/openstack-subnet-summary.html:19
 msgid "Network"
 msgstr "Tīkls"
 
-#: app/scripts/components/openstack/openstack-backup/actions.js:41
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:122
-#: app/scripts/components/openstack/openstack-network/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:23
+#: src/openstack/openstack-backup/actions.js:41
+#: src/openstack/openstack-instance/openstack-instance-config.js:122
+#: src/openstack/openstack-network/breadcrumbs.js:22
+#: src/openstack/openstack-subnet/breadcrumbs.js:23
 msgid "Networks"
 msgstr "Tīkli"
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.js:42
+#: src/cost-planning/cost-plan-dialog.js:42
 msgid "New plan"
 msgstr "Jauns plāns"
 
-#: app/scripts/components/digitalocean/droplet-resize.html:20
-#: app/scripts/components/openstack/openstack-volume/volume-extend.html:10
+#: src/digitalocean/droplet-resize.html:20
+#: src/openstack/openstack-volume/volume-extend.html:10
 msgid "New size"
 msgstr "Jauns izmērs"
 
-#: app/scripts/components/form/appstore-form-wizard.html:68
-#: app/scripts/components/table/responsive-table.js:108
+#: src/form/appstore-form-wizard.html:68
+#: src/table/responsive-table.js:108
 msgid "Next"
 msgstr "Tālāk"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:24
-#: app/scripts/components/resource/resource-utils-service.js:5
+#: src/openstack/openstack-tenant/openstack-tenant-summary.html:24
+#: src/resource/resource-utils-service.js:5
 msgid "No access info"
 msgstr "Nav pieejas datu"
 
-#: app/scripts/components/user/hooks/hook-list.js:22
+#: src/user/hooks/hook-list.js:22
 msgid "No notifications registered."
 msgstr "Nav reģistrēto paziņojumu."
 
-#: app/scripts/components/user/user-organizations.js:49
+#: src/user/user-organizations.js:49
 msgid "No organizations yet"
 msgstr "Pagaidām nav uzņēmumu"
 
-#: app/scripts/components/resource-import/import-virtual-clouds-list.js:39
+#: src/resource-import/import-virtual-clouds-list.js:39
 msgid "No private clouds to import."
 msgstr "Nav privāto mākoņu importam"
 
-#: app/scripts/components/user/user-projects.js:40
+#: src/user/user-projects.js:40
 msgid "No projects yet"
 msgstr "Pagaidām nav projektu"
 
-#: app/scripts/components/providers/provider-list.js:44
+#: src/providers/provider-list.js:44
 msgid "No providers yet."
 msgstr "Pagaidām nav pakapājumu sniedzēju."
 
-#: app/scripts/components/providers/details/provider-project-link-quota.html:3
+#: src/providers/details/provider-project-link-quota.html:3
 msgid "No quota set"
 msgstr "Kvota nav uzstādīta"
 
-#: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js:37
+#: src/openstack/openstack-snapshot/import/import-snapshots-list.js:37
 msgid "No snapshots to import."
 msgstr "Nav snapshotu importam."
 
-#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:28
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:26
+#: src/openstack/openstack-backup/backup-snapshots-list.js:28
+#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:26
 msgid "No snapshots yet."
 msgstr "Pagaidām nav snapshotu."
 
-#: app/scripts/components/user/keys/key-list.js:25
+#: src/user/keys/key-list.js:25
 msgid "No SSH keys yet."
 msgstr "Pagaidām nav SSH atslēgu."
 
-#: app/scripts/components/customer/customer-create-prompt.html:9
+#: src/customer/customer-create-prompt.html:9
 msgid "No, I will do it later"
 msgstr "Nē, es izdarīšu to vēlāk"
 
-#: app/scripts/components/user/constants.ts:18
-#: app/scripts/components/user/routes.js:29
+#: src/user/constants.ts:18
+#: src/user/routes.js:29
 msgid "Notifications"
 msgstr "Paziņojumi"
 
-#: app/scripts/components/alerts/alert-filter.html:1
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:22
-#: app/scripts/components/resource/resource-utils-service.js:12
+#: src/alerts/alert-filter.html:1
+#: src/openstack/openstack-tenant/openstack-tenant-summary.html:22
+#: src/resource/resource-utils-service.js:12
 msgid "Open"
 msgstr "Atvērt"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:36
+#: src/navigation/select-workspace-dialog.html:36
 msgid "organization"
 msgstr "uzņēmums"
 
-#: app/scripts/components/events/event-details-dialog.html:59
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:66
-#: app/scripts/components/issues/constants.ts:94
-#: app/scripts/components/issues/issue-create-dialog.html:12
-#: app/scripts/components/issues/issue-create-dialog.html:22
-#: app/scripts/components/issues/issue-create-dialog.html:7
-#: app/scripts/components/issues/issue-detail.html:30
-#: app/scripts/components/issues/issue-quick-create.html:56
-#: app/scripts/components/issues/issue-registration.html:43
-#: app/scripts/components/issues/issues-list.js:93
-#: app/scripts/components/user/user-projects.js:53
+#: src/events/event-details-dialog.html:59
+#: src/experts/requests/expert-request-customer-list.js:66
+#: src/issues/constants.ts:94
+#: src/issues/issue-create-dialog.html:12
+#: src/issues/issue-create-dialog.html:22
+#: src/issues/issue-create-dialog.html:7
+#: src/issues/issue-detail.html:30
+#: src/issues/issue-quick-create.html:56
+#: src/issues/issue-registration.html:43
+#: src/issues/issues-list.js:93
+#: src/user/user-projects.js:53
 msgid "Organization"
 msgstr "Uzņēmums"
 
-#: app/scripts/components/alerts/constants.ts:4
+#: src/alerts/constants.ts:4
 msgid "Organization {customer_name} does not have any projects."
 msgstr "Uzņēmumam {customer_name} nav neviena projekta."
 
-#: app/scripts/components/alerts/constants.ts:3
+#: src/alerts/constants.ts:3
 msgid "Organization {customer_name} does not have any resources."
 msgstr "Uzņēmumam {customer_name} nav neviena resursa."
 
-#: app/scripts/components/events/constants.ts:9
+#: src/events/constants.ts:9
 msgid "Organization {customer_name} has been created."
 msgstr "Uzņēmums {customer_name} tika izveidots."
 
-#: app/scripts/components/events/constants.ts:10
+#: src/events/constants.ts:10
 msgid "Organization {customer_name} has been deleted."
 msgstr "Uzņēmums {customer_name} tika nodzēsts."
 
-#: app/scripts/components/events/constants.ts:11
+#: src/events/constants.ts:11
 msgid "Organization {customer_name} has been updated."
 msgstr "Uzņēmums {customer_name} tika izmanīts."
 
-#: app/scripts/components/alerts/constants.ts:2
+#: src/alerts/constants.ts:2
 msgid "Organization {customer_name} has no providers."
 msgstr "Uzņēmumam {customer_name} nav pakalpojumu sniedzējau."
 
-#: app/scripts/components/customer/customer-manage.html:7
+#: src/customer/customer-manage.html:7
 msgid "Organization details"
 msgstr "Uzņēmuma detaļas"
 
-#: app/scripts/components/customer/customer-create-dialog.js:26
+#: src/customer/customer-create-dialog.js:26
 msgid "Organization has been created."
 msgstr "Uzņēmums tika izveidots."
 
-#: app/scripts/components/analytics/cost-analysis.html:69
-#: app/scripts/components/issues/constants.ts:47
-#: app/scripts/components/user/user-edit.html:71
-#: app/scripts/components/user/user-organizations.js:54
+#: src/analytics/cost-analysis.html:69
+#: src/issues/constants.ts:47
+#: src/user/user-edit.html:71
+#: src/user/user-organizations.js:54
 msgid "Organization name"
 msgstr "Uzņēmuma nosaukums"
 
-#: app/scripts/components/configs/base-config.js:188
+#: src/configs/base-config.js:188
 msgid "Organization owner"
 msgstr "Uzņēmuma īpašnieks"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:39
+#: src/navigation/select-workspace-dialog.html:39
 msgid "Organizations"
 msgstr "Uzņēmumi"
 
-#: app/scripts/components/team/customer-users-list.js:77
-#: app/scripts/components/user/user-organizations.js:62
+#: src/team/customer-users-list.js:77
+#: src/user/user-organizations.js:62
 msgid "Owner"
 msgstr "Īpašnieks"
 
-#: app/scripts/components/error/routes.js:17
+#: src/error/routes.js:17
 msgid "Page not found"
 msgstr "Lapa nav atrasta"
 
-#: app/scripts/components/error/error-404.html:3
+#: src/error/error-404.html:3
 msgid "Page Not Found :/"
 msgstr "Lapa Nav Atrasta :/"
 
-#: app/scripts/components/billing/invoices-list.js:91
-#: app/scripts/components/paypal/paypal-invoices-list.js:105
+#: src/billing/invoices-list.js:91
+#: src/paypal/paypal-invoices-list.js:105
 msgid "Paid"
 msgstr "Apmaksāts"
 
-#: app/scripts/components/auth/auth-login.html:36
-#: app/scripts/components/auth/auth-login.html:67
-#: app/scripts/components/azure/password-details.js:11
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:41
+#: src/auth/auth-login.html:36
+#: src/auth/auth-login.html:67
+#: src/azure/password-details.js:11
+#: src/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
 msgstr "Parole"
 
-#: app/scripts/components/events/constants.ts:53
+#: src/events/constants.ts:53
 msgid "Password has been changed for user {affected_user_full_name}."
 msgstr "Parole lietotājam {affected_user_full_name} tika nomainīta."
 
-#: app/scripts/components/paypal/paypal-invoice-actions.html:21
+#: src/paypal/paypal-invoice-actions.html:21
 msgid "Pay invoice"
 msgstr "Apmaksāt rēķinu"
 
-#: app/scripts/components/events/event-details-dialog.html:17
-#: app/scripts/components/team/add-project-member.html:10
-#: app/scripts/components/team/add-project-member.html:20
-#: app/scripts/components/team/add-team-member.html:11
-#: app/scripts/components/team/customer-permissions-log-list.js:23
-#: app/scripts/components/team/project-permissions-log-list.js:22
+#: src/events/event-details-dialog.html:17
+#: src/team/add-project-member.html:10
+#: src/team/add-project-member.html:20
+#: src/team/add-team-member.html:11
+#: src/team/customer-permissions-log-list.js:23
+#: src/team/project-permissions-log-list.js:22
 msgid "User"
 msgstr "Lietotājs"
 
-#: app/scripts/components/team/customer-permissions-log-list.js:29
-#: app/scripts/components/team/project-permissions-log-list.js:27
+#: src/team/customer-permissions-log-list.js:29
+#: src/team/project-permissions-log-list.js:27
 msgid "User email"
 msgstr "Lietotāja e-pasta adrese"
 
-#: app/scripts/components/user/user-sidebar.html:8
+#: src/user/user-sidebar.html:8
 msgid "User profile"
 msgstr "Lietotāja profils"
 
-#: app/scripts/components/user/user-edit.html:51
+#: src/user/user-edit.html:51
 msgid "User status"
 msgstr "Lietotāja statuss"
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:16
+#: src/invitations/invitation-confirm-dialog.html:16
 msgid "Your current email is:"
 msgstr "Jūsu esošā e-pasta adrese ir:"
 
-#: app/scripts/components/invitations/utils.js:77
+#: src/invitations/utils.js:77
 msgid "Your invitation was accepted."
 msgstr "Jūsu uzaicinājums tika pieņemts."

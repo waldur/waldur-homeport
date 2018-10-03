@@ -100,7 +100,7 @@ By default, actions list is rendered as dropdown menu only when user clicks at `
 * `tab` is a string, it should match tab name for related resource specified in resource tab configuration.
 
 ```javascript
-// waldur-homeport/app/scripts/components/openstack/openstack-tenant/tabs.js
+// waldur-homeport/src/openstack/openstack-tenant/tabs.js
   ResourceTabsConfigurationProvider.register('OpenStack.Tenant', {
     order: [
       'networks',
@@ -113,7 +113,7 @@ By default, actions list is rendered as dropdown menu only when user clicks at `
     }
   });
 
-  // waldur-homeport/app/scripts/components/openstack/openstack-tenant/actions/CreateNetworkAction.ts
+  // waldur-homeport/src/openstack/openstack-tenant/actions/CreateNetworkAction.ts
   export default function createAction(): ResourceAction {
     return {
       name: 'create_network',

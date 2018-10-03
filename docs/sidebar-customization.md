@@ -3,10 +3,10 @@
 In Waldur HomePort there are 4 workspaces. Eeach workspace has it's own sidebar. Sidebar consists of list of sidebar items. There are two sources where sidebar items are defined: base and plugins.
 
 Following are the links to the base definitions of sidebar items for each workspace.
-* [user workspace](../app/scripts/components/user/constants.js)
-* [project workspace](../app/scripts/components/project/project-workspace.js)
-* [organization workspace](../app/scripts/components/customer/workspace/customer-workspace.js)
-* [support workspace](../app/scripts/components/issues/workspace/issue-navigation-service.js)
+* [user workspace](../src/user/constants.js)
+* [project workspace](../src/project/project-workspace.js)
+* [organization workspace](../src/customer/workspace/customer-workspace.js)
+* [support workspace](../src/issues/workspace/issue-navigation-service.js)
 
 ## Sidebar structure
 

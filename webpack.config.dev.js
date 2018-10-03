@@ -26,7 +26,7 @@ module.exports = merge(baseConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin([
       {
-        from: './app/scripts/configs/config.json',
+        from: './src/configs/config.json',
         to: utils.formatPath('scripts/configs/config.json'),
         toType: 'file',
       },

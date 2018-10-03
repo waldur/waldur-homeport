@@ -1,0 +1,10 @@
+@import '~sass/inspinia/_variables.scss';
+
+#vm-overview-filter {
+  .form-group {
+    vertical-align: middle;
+  }
+  .service-provider-selector {
+    min-width: 200px;
+  }
+}
