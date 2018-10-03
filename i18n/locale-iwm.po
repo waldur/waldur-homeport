@@ -11,87 +11,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.12\n"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:32
+#: src/navigation/select-workspace-dialog.html:32
 msgid "organization"
 msgstr "federation"
 
-#: app/scripts/components/events/event-details-dialog.html:59
-#: app/scripts/components/issues/issue-create-dialog.html:12
-#: app/scripts/components/issues/issue-create-dialog.html:22
-#: app/scripts/components/issues/issue-create-dialog.html:7
-#: app/scripts/components/issues/issue-detail.html:30
+#: src/events/event-details-dialog.html:59
+#: src/issues/issue-create-dialog.html:12
+#: src/issues/issue-create-dialog.html:22
+#: src/issues/issue-create-dialog.html:7
+#: src/issues/issue-detail.html:30
 msgid "Organization"
 msgstr "Federation"
 
-#: app/scripts/components/billing/billing-record-details.html:6
-#: app/scripts/components/billing/invoice-details.html:6
-#: app/scripts/components/customer/customer-workspace.html:9
+#: src/billing/billing-record-details.html:6
+#: src/billing/invoice-details.html:6
+#: src/customer/customer-workspace.html:9
 msgid "Organization dashboard"
 msgstr "Federation dashboard"
 
-#: app/scripts/components/user/user-edit.html:67
+#: src/user/user-edit.html:67
 msgid "Organization name"
 msgstr "Federation name"
 
-#: app/scripts/components/configs/base-config.js:189
+#: src/configs/base-config.js:189
 msgid "Organization owner"
 msgstr "Federation administrator"
 
-#: app/scripts/components/team/add-team-member.html:32
+#: src/team/add-team-member.html:32
 msgid "Organization owner role expires on"
 msgstr "Federation owner role expires on"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:35
+#: src/navigation/select-workspace-dialog.html:35
 msgid "Organizations"
 msgstr "Federations"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:41
+#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:46
+#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:41
 msgid "Project"
 msgstr "Operational Tenant"
 
-#: app/scripts/components/offering/offering-header.html:13
+#: src/offering/offering-header.html:13
 #: app/views/project/base.html:13
 msgid "Project dashboard"
 msgstr "Operational Tenant dashboard"
 
-#: app/scripts/components/configs/base-config.js:190
+#: src/configs/base-config.js:190
 msgid "Project manager"
 msgstr "Operationl Tenant manager"
 
-#: app/scripts/components/team/add-team-member.html:45
+#: src/team/add-team-member.html:45
 msgid "Project name"
 msgstr "Operational Tenant name"
 
-#: app/scripts/components/appstore/category-selector.html:10
-#: app/scripts/components/customer/customer-workspace.js:55
-#: app/scripts/components/navigation/select-workspace-dialog.html:82
+#: src/appstore/category-selector.html:10
+#: src/customer/customer-workspace.js:55
+#: src/navigation/select-workspace-dialog.html:82
 msgid "Projects"
 msgstr "Operational Tenants"
 
-#: app/scripts/components/team/add-team-member.html:40
+#: src/team/add-team-member.html:40
 msgid "Projects list"
 msgstr "Operational Tenants list"
 
 
-#: app/scripts/components/appstore/category-selector.html:16
+#: src/appstore/category-selector.html:16
 msgid "Select project"
 msgstr "Select operational tenant"
 
-#: app/scripts/components/configs/base-config.js:191
+#: src/configs/base-config.js:191
 msgid "System administrator"
 msgstr "Operational Tenant administrator"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:10
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
+#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:10
+#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
 msgid "Tenant name"
 msgstr "Operational Tenant name"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:44
+#: src/navigation/select-workspace-dialog.html:44
 msgid "Filter organizations"
 msgstr "Filter federations"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:92
+#: src/navigation/select-workspace-dialog.html:92
 msgid "Filter projects"
 msgstr "Filter operational tenants"
 
