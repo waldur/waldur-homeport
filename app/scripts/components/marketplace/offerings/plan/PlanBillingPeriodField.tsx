@@ -16,6 +16,7 @@ export const PlanBillingPeriodField = (props: PlanBillingPeriodFieldProps) => (
         value={fieldProps.input.value}
         onChange={value => fieldProps.input.onChange(value)}
         options={getBillingPeriods()}
+        clearable={false}
       />
     )}
   />

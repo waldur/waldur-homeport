@@ -6,8 +6,8 @@ import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 
 import { ComponentRow } from './ComponentRow';
-import { pricesSelector } from './selectors';
 import { Component, PricesData } from './types';
+import { pricesSelector } from './utils';
 
 const HeaderRow = (props: {periods: string[]}) => (
   <tr>

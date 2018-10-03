@@ -46,7 +46,7 @@ export class AllocationForm extends React.Component<OfferingConfigurationFormPro
               clearable={false}
             />
           )}
-          <PlanDetailsTable/>
+          <PlanDetailsTable offering={props.offering}/>
           <TextField
             label={translate('Allocation description')}
             name="attributes.description"

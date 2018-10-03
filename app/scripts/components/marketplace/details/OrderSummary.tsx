@@ -13,7 +13,7 @@ import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Project, Customer } from '@waldur/workspace/types';
 
-import { totalPriceSelector } from './plan/selectors';
+import { pricesSelector } from './plan/utils';
 import { OrderSummaryProps, OfferingFormData } from './types';
 import { getOrderItem } from './utils';
 
@@ -81,10 +81,10 @@ interface OrderSummaryStateProps {
   formValid: boolean;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   customer: getCustomer(state),
   project: getProject(state),
-  total: totalPriceSelector(state),
+  total: pricesSelector(state, ownProps).total,
   formData: getFormValues('marketplaceOffering')(state),
   formValid: isValid('marketplaceOffering')(state),
 });

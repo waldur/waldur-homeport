@@ -115,6 +115,10 @@ msgstr ""
 msgid "Accounting start date"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/create/ComponentForm.tsx
+msgid "Accounting type"
+msgstr ""
+
 #: app/scripts/components/cost-planning/cost-plan-items.html
 #: app/scripts/components/cost-planning/cost-plan-optimizer.html
 #: app/scripts/components/events/BaseEventsList.tsx
@@ -170,7 +174,7 @@ msgstr ""
 msgid "Add comment"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/plan/ComponentAddButton.tsx
+#: app/scripts/components/marketplace/offerings/create/ComponentAddButton.tsx
 msgid "Add component"
 msgstr ""
 
@@ -367,8 +371,7 @@ msgstr ""
 msgid "Amazon EC2 provider"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/plan/CustomPlanComponents.tsx
-#: app/scripts/components/marketplace/offerings/plan/FixedPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/PlanComponents.tsx
 #: app/scripts/components/payments/payment-list.js
 msgid "Amount"
 msgstr ""
@@ -1036,6 +1039,10 @@ msgstr ""
 msgid "Component"
 msgstr ""
 
+#: app/scripts/components/marketplace/offerings/create/OfferingComponents.tsx
+msgid "Component #{index}"
+msgstr ""
+
 #: app/scripts/components/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Component name"
 msgstr ""
@@ -1565,7 +1572,7 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/plan/CustomPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/create/ComponentForm.tsx
 msgid "Display name"
 msgstr ""
 
@@ -2044,6 +2051,10 @@ msgstr ""
 
 #: app/scripts/components/table/responsive-table.js
 msgid "First"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/create/ComponentForm.tsx
+msgid "Fixed price"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-flavors.html
@@ -2557,7 +2568,7 @@ msgstr ""
 msgid "Internal IPs"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/plan/CustomPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/create/ComponentForm.tsx
 msgid "Internal name"
 msgstr ""
 
@@ -3079,6 +3090,10 @@ msgstr ""
 
 #: app/scripts/components/freeipa/freeipa-account-create.html
 msgid "Maximum username length with mandatory username prefix is 32 characters."
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/create/ComponentForm.tsx
+msgid "Measured unit"
 msgstr ""
 
 #: app/scripts/components/cost-planning/cost-plan-dialog.js
@@ -4311,8 +4326,7 @@ msgstr ""
 #: app/scripts/components/experts/bids/create/expert-bid-create-dialog.html
 #: app/scripts/components/experts/bids/expert-bids-list.js
 #: app/scripts/components/jira/project/jira-project-checkout-summary.html
-#: app/scripts/components/marketplace/offerings/plan/CustomPlanComponents.tsx
-#: app/scripts/components/marketplace/offerings/plan/FixedPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/PlanComponents.tsx
 #: app/scripts/components/marketplace/offerings/plan/PlanForm.tsx
 #: app/scripts/components/marketplace/orders/Order.tsx
 #: app/scripts/components/offering/OfferingHeader.tsx
@@ -6783,8 +6797,7 @@ msgstr ""
 msgid "Unit price"
 msgstr ""
 
-#: app/scripts/components/marketplace/offerings/plan/CustomPlanComponents.tsx
-#: app/scripts/components/marketplace/offerings/plan/FixedPlanComponents.tsx
+#: app/scripts/components/marketplace/offerings/plan/PlanComponents.tsx
 msgid "Units"
 msgstr ""
 
@@ -6877,6 +6890,10 @@ msgstr ""
 
 #: app/scripts/components/issues/workspace/issue-navigation-service.js
 msgid "Usage overview"
+msgstr ""
+
+#: app/scripts/components/marketplace/offerings/create/ComponentForm.tsx
+msgid "Usage-based"
 msgstr ""
 
 #: app/scripts/components/slurm/SlurmForm.tsx

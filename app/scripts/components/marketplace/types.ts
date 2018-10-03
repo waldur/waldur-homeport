@@ -17,13 +17,11 @@ export interface GeolocationPoint {
 
 export type Geolocations = GeolocationPoint[];
 
-export interface PlanComponent {
+export interface OfferingComponent {
   billing_type: 'usage' | 'fixed';
   type: string;
   name: string;
   measured_unit: string;
-  amount: number;
-  price: string;
 }
 
 export interface Plan {
@@ -32,7 +30,8 @@ export interface Plan {
   description: string;
   unit_price: string;
   unit: BillingPeriod;
-  components: PlanComponent[];
+  quotas: {[key: string]: number};
+  prices: {[key: string]: number};
 }
 
 export interface OptionField {
@@ -69,6 +68,7 @@ export interface Offering {
   customer_uuid?: string;
   customer_name?: string;
   attributes?: {};
+  components: OfferingComponent[];
   options?: OfferingOptions;
   plans?: Plan[];
   type: string;
@@ -130,12 +130,6 @@ export interface Provider extends Customer {
 export interface OfferingConfigurationFormProps extends InjectedFormProps {
   offering: Offering;
   project?: Project;
-}
-
-export interface PlanComponentDescription {
-  type: string;
-  name: string;
-  measured_unit: string;
 }
 
 export interface AttributesType {

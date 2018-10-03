@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
-import { PlanComponentDescription } from '@waldur/marketplace/types';
+import { OfferingComponent } from '@waldur/marketplace/types';
 
-export const FixedPlanComponents = withTranslation(props => (
+export const PlanComponents = withTranslation(props => (
   <table className="table table-borderless">
     <thead>
       <tr>
@@ -15,7 +15,7 @@ export const FixedPlanComponents = withTranslation(props => (
       </tr>
     </thead>
     <tbody>
-      {props.components.map((component: PlanComponentDescription, index) => (
+      {props.components.map((component: OfferingComponent, index) => (
         <tr key={index}>
           <td>
             <div className="form-control-static">
@@ -23,20 +23,26 @@ export const FixedPlanComponents = withTranslation(props => (
             </div>
           </td>
           <td>
-            <Field
-              component="input"
-              min={0}
-              className="form-control"
-              name={`${props.plan}.fixedComponentQuotas.${component.type}`}
-              type="number"
-            />
+            {component.billing_type === 'fixed' ? (
+              <Field
+                component="input"
+                min={0}
+                className="form-control"
+                name={`${props.plan}.quotas.${component.type}`}
+                type="number"
+              />
+            ) : (
+              <div className="form-control-static">
+                &mdash;
+              </div>
+            )}
           </td>
           <td>
             <Field
               component="input"
               min={0}
               className="form-control"
-              name={`${props.plan}.fixedComponentPrices.${component.type}`}
+              name={`${props.plan}.prices.${component.type}`}
               type="number"
             />
           </td>

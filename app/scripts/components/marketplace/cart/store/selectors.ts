@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { combinePlanLimit } from '@waldur/marketplace/details/plan/utils';
+import { combinePrices } from '@waldur/marketplace/details/plan/utils';
 
 export const getCart = state => state.marketplace.cart;
 
@@ -23,7 +23,7 @@ export const getCheckoutItems = createSelector(getItems, getMaxUnit, (items, max
   const multipliers = {day: 30, half_month: 2, month: 1};
   return items.map(item => {
     const unit = item.plan ? item.plan.unit : undefined;
-    const price = item.plan ? combinePlanLimit(item.plan, item.limits).total : 0;
+    const price = item.plan ? combinePrices(item.plan, item.limits, item.offering).total : 0;
     const factor = (unit && maxUnit === 'month') && multipliers[unit] || 1;
     const estimate = factor * price;
     return {

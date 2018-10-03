@@ -11,6 +11,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
   label: string;
   showOptions?: boolean;
+  showComponents?: boolean;
 }
 
 export interface Option {
@@ -40,4 +41,8 @@ export function getOfferingTypes(): Option[] {
 
 export function showOfferingOptions(offeringType) {
   return REGISTRY[offeringType].showOptions;
+}
+
+export function showOfferingComponents(offeringType) {
+  return REGISTRY[offeringType].showComponents;
 }

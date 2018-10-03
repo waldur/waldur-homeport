@@ -1,7 +1,9 @@
 import { translate } from '@waldur/i18n';
-import { PricesData, Component } from '@waldur/marketplace/details/plan/types';
+import { offeringSelector } from '@waldur/marketplace/details/selectors';
 import { Limits } from '@waldur/marketplace/details/types';
 import { Plan } from '@waldur/marketplace/types';
+
+import { Component, PricesData } from './types';
 
 interface BillingPeriodDescription {
   periods: string[];
@@ -41,22 +43,22 @@ function getBillingPeriods(unit: string): BillingPeriodDescription {
   }
 }
 
-export const combinePlanLimit = (plan: Plan, limits: Limits): PricesData => {
-  if (plan) {
+export const combinePrices = (plan, limits, offering) => {
+  if (plan && offering) {
     const {periods, multipliers} = getBillingPeriods(plan.unit);
-    const components: Component[] = plan.components
+    const components: Component[] = offering.components
       .map(item => {
         const label = item.name;
         const units = item.measured_unit;
         let amount = 0;
         if (item.billing_type === 'fixed') {
-          amount = item.amount;
+          amount = plan.quotas[item.type];
         } else if (limits && limits[item.type]) {
           amount = limits[item.type];
         }
         const type = item.type;
         const billing_type = item.billing_type;
-        const subTotal = parseFloat(item.price) * amount;
+        const subTotal = plan.prices[type] * amount;
         const prices = multipliers.map(mult => mult * subTotal);
         return {label, units, amount, prices, type, billing_type, subTotal};
       });
@@ -67,4 +69,10 @@ export const combinePlanLimit = (plan: Plan, limits: Limits): PricesData => {
   } else {
     return {components: [], periods: [], total: 0, totalPeriods: []};
   }
+};
+
+export const pricesSelector = (state, props): PricesData => {
+  const plan: Plan = offeringSelector(state, 'plan');
+  const limits: Limits = offeringSelector(state, 'limits');
+  return combinePrices(plan, limits, props.offering);
 };
