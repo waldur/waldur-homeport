@@ -100,6 +100,13 @@ export interface Section {
   is_standalone: boolean;
 }
 
+export interface CategoryColumn {
+  index: number;
+  title: string;
+  attribute?: string;
+  widget?: string;
+}
+
 export interface Category {
   url: string;
   uuid?: string;
@@ -107,6 +114,7 @@ export interface Category {
   icon: string;
   offering_count: number;
   sections?: Section[];
+  columns?: CategoryColumn[];
 }
 
 export interface CategoriesListType {

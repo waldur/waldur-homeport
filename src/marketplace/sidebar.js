@@ -1,3 +1,5 @@
+import { getCategories } from '@waldur/marketplace/common/api';
+
 // @ngInject
 export default function registerSidebarExtension(SidebarExtensionService, currentStateService) {
   SidebarExtensionService.register('customer', () => {
@@ -35,6 +37,18 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         index: 220,
       }
     ];
+  });
+
+  SidebarExtensionService.register('project', async () => {
+    const categories = await getCategories({params: {field: ['uuid', 'title']}});
+    return categories.map(category => ({
+      label: category.title,
+      icon: 'fa-cloud',
+      link: `marketplace-project-resources({uuid: $ctrl.context.project.uuid, category_uuid: '${category.uuid}'})`,
+      feature: 'marketplace',
+      parent: 'resources',
+      index: 300,
+    }));
   });
 
   SidebarExtensionService.register('customer', () => {

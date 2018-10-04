@@ -181,5 +181,15 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Order items'),
         feature: 'marketplace',
       }
+    })
+
+    .state('marketplace-project-resources', {
+      url: 'marketplace-resources/:category_uuid',
+      template: '<marketplace-project-resources-list></marketplace-project-resources-list>',
+      parent: 'project',
+      data: {
+        pageTitle: gettext('Resources'),
+        feature: 'marketplace',
+      }
     });
 }

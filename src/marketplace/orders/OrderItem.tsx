@@ -33,7 +33,7 @@ export const OrderItem = (props: OrderItemProps) => (
             </OfferingLink>
           </h5>
           <p>{props.item.attributes.description || props.item.offering_description}</p>
-          {props.item.resource_uuid && <p><OrderItemLink item={props.item} translate={translate}/></p>}
+          {props.item.resource_uuid && <p><OrderItemLink item={props.item}/>{translate('Resource link')}</p>}
         </div>
       </div>
     </td>

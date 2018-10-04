@@ -7,11 +7,11 @@ import { Customer } from '@waldur/workspace/types';
 export const getPlugins = () =>
   get('/marketplace-plugins/').then(response => response.data);
 
-export const getCategories = () =>
-  getAll<Category>('/marketplace-categories/');
+export const getCategories = (options?: {}) =>
+  getAll<Category>('/marketplace-categories/', options);
 
-export const getCategory = (id: string) =>
-  getById<Category>('/marketplace-categories/', id);
+export const getCategory = (id: string, options?: {}) =>
+  getById<Category>('/marketplace-categories/', id, options);
 
 export const getOfferingsList = (params?: {}) =>
   getList<Offering>('/marketplace-offerings/', params);
@@ -33,6 +33,9 @@ export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
 
 export const getOrderDetails = (id: string) =>
   getById<State>('/marketplace-orders/', id);
+
+export const setOrderState = (orderUuid, state) =>
+  post(`/marketplace-orders/${orderUuid}/set_state_${state}/`).then(response => response.data);
 
 export const getCustomerList = (params?: {}) =>
   getList<Customer>('/customers/', params);

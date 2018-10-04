@@ -1303,6 +1303,7 @@ msgstr ""
 #: src/invitations/invitations-list.js
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/ProjectResourcesList.tsx
 msgid "Created at"
 msgstr ""
 
@@ -3209,6 +3210,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OfferingDescribeStep.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/orders/ProjectResourcesList.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/appstore-offering.js
@@ -3669,10 +3671,6 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering has been created."
-msgstr ""
-
-#: src/marketplace/orders/OrderItemLink.tsx
-msgid "Offering link"
 msgstr ""
 
 #: src/marketplace/offerings/create/OfferingDescribeStep.tsx
@@ -5228,7 +5226,7 @@ msgstr ""
 msgid "Resource is not monitored yet."
 msgstr ""
 
-#: src/marketplace/orders/OrderItemLink.tsx
+#: src/marketplace/orders/OrderItem.tsx
 msgid "Resource link"
 msgstr ""
 
@@ -5250,6 +5248,8 @@ msgstr ""
 #: src/experts/requests/details/expert-request-details.js
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
+#: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/marketplace/routes.js
 #: src/offering/offering-details.js
 #: src/project/project-workspace.js
 #: src/providers/provider-list.js
@@ -5927,6 +5927,7 @@ msgstr ""
 #: src/marketplace/orders/OrderItemsFilter.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/ProjectResourcesList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
@@ -6689,6 +6690,10 @@ msgstr ""
 
 #: src/marketplace/landing/CategoriesList.tsx
 msgid "Unable to load marketplace categories."
+msgstr ""
+
+#: src/marketplace/orders/ProjectResourcesContainer.tsx
+msgid "Unable to load marketplace category details"
 msgstr ""
 
 #: src/marketplace/common/OfferingGrid.tsx
@@ -7687,6 +7692,10 @@ msgstr ""
 
 #: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "virtualenv and virtualenvwrapper utilities are used to manage Python virtual environments."
+msgstr ""
+
+#: src/marketplace/orders/ProjectResourcesContainer.tsx
+msgid "{category} resources"
 msgstr ""
 
 #: src/form/appstore-field-list.js
