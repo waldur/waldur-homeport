@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { TranslateProps } from '@waldur/i18n';
 
 import { OrderItemResponse } from './types';
 
-interface OrderItemLinkProps extends TranslateProps {
+interface OrderItemLinkProps {
   item: OrderItemResponse;
+  children?: React.ReactNode;
 }
 
-const supportOfferingTemplate = 'Support.OfferingTemplate';
+const supportOfferingTemplate = 'Support.Offering';
 
 export const OrderItemLink = (props: OrderItemLinkProps) => {
   if (props.item.resource_type === supportOfferingTemplate) {
@@ -19,8 +19,7 @@ export const OrderItemLink = (props: OrderItemLinkProps) => {
         params={{
           uuid: props.item.resource_uuid,
         }}
-        label={props.translate('Offering link')}
-      />
+        label={props.children}/>
     );
   } else {
     return (
@@ -30,7 +29,7 @@ export const OrderItemLink = (props: OrderItemLinkProps) => {
           resource_type: props.item.resource_type,
           uuid: props.item.resource_uuid,
         }}
-        label={props.translate('Resource link')}
+        label={props.children}
       />
     );
   }
