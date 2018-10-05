@@ -3662,6 +3662,8 @@ msgid "Offering"
 msgstr ""
 
 #: src/marketplace/details/OverviewTab.tsx
+#: src/marketplace/orders/OfferingDetailsButton.tsx
+#: src/marketplace/orders/OfferingDetailsDialog.tsx
 msgid "Offering details"
 msgstr ""
 
@@ -6698,6 +6700,10 @@ msgstr ""
 
 #: src/marketplace/common/OfferingGrid.tsx
 msgid "Unable to load marketplace offerings."
+msgstr ""
+
+#: src/marketplace/orders/OfferingDetailsDialog.tsx
+msgid "Unable to load offering details"
 msgstr ""
 
 #: src/marketplace/details/DetailsPage.tsx

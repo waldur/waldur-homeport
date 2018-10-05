@@ -3,10 +3,11 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { OfferingConfigurationForm } from '@waldur/offering/OfferingConfigurationForm';
 
 const serializer = (attributes, offering) => {
-  const payload = {
-    name: attributes.name,
-    description: attributes.description,
-  };
+  const payload: any = {};
+  if (attributes) {
+    payload.name = attributes.name;
+    payload.description = attributes.description;
+  }
   if (offering.options.order) {
     offering.options.order.forEach(key => {
       const options = offering.options.options[key];
