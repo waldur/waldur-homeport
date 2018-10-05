@@ -7,7 +7,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import ActionButton from '@waldur/table-react/ActionButton';
 
 const openOfferingDetailsDialog = (offeringUuid: string) =>
-  openModalDialog('marketplaceOfferingDetailsDialog', {resolve: {offeringUuid}});
+  openModalDialog('marketplaceOfferingDetailsDialog', {resolve: {offeringUuid}, size: 'lg'});
 
 interface OfferingDetailsButton {
   offering: string;

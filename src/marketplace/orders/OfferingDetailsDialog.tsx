@@ -41,7 +41,7 @@ class OfferingDetailsDialog extends React.Component<OfferingDetailsDialogProps, 
     } catch {
       this.setState({
         loading: false,
-        erred: true
+        erred: true,
       });
     }
   }
