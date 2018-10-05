@@ -6,6 +6,7 @@ import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
+import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
@@ -19,7 +20,7 @@ import { getOrderItem } from './utils';
 
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
-    <img src={props.offering.thumbnail} className="img-lg"/>
+    <OfferingLogo src={props.offering.thumbnail} className="img-lg"/>
     <table className="table offering-details-section-table">
       <tbody>
         <tr>

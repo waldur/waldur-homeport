@@ -6,7 +6,7 @@ module.exports = {
   moduleFileExtensions: ['ts','tsx','js','jsx','json'],
   moduleNameMapper: {
     '@waldur/(.*)': '<rootDir>/src/$1',
-    '\\.(css|scss)$': '<rootDir>/test/style-mock.js'
+    '\\.(css|scss|svg)$': '<rootDir>/test/style-mock.js'
   },
   setupFiles: ['<rootDir>/test/enzyme-setup.js'],
   modulePathIgnorePatterns: ['<rootDir>/node_modules/']

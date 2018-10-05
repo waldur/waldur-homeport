@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { CategoryLink } from '@waldur/marketplace/links/CategoryLink';
 import { Category } from '@waldur/marketplace/types';
 
@@ -15,7 +16,7 @@ export const CategoryCard = (props: CategoryCardProps) => (
       className="category-thumb"
       category_uuid={props.category.uuid}
     >
-      <img src={props.category.icon}/>
+      <OfferingLogo src={props.category.icon}/>
     </CategoryLink>
     <div className="category-card-body">
       <h3 className="category-title">
