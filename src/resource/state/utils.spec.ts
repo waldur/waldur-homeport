@@ -1,7 +1,6 @@
 import { translate } from '@waldur/i18n';
 import '@waldur/openstack/provider';
-
-import { Resource } from './types';
+import { Resource } from '@waldur/resource/types';
 
 import { getResourceState } from './utils';
 

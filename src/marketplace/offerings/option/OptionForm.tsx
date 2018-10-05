@@ -14,7 +14,7 @@ import { FieldType } from './types';
 
 const selector = formValueSelector(FORM_ID);
 
-const connector = connect<any, any, {option: string}>((state, ownProps) => {
+const connector = connect<{type?: string}, {}, {option: string}>((state, ownProps) => {
   const option = selector(state, ownProps.option);
   if (option.type) {
     return {type: option.type.value};
@@ -33,7 +33,7 @@ const StringField = props => (
   />
 );
 
-const RequiredField = withTranslation(props => (
+const RequiredField = withTranslation((props: TranslateProps & {option: string}) => (
   <Field
     name={`${props.option}.required`}
     component={fieldProps => (
@@ -61,7 +61,7 @@ const OptionTypeField = props => (
   />
 );
 
-const MinMaxFields = withTranslation(props => (
+const MinMaxFields = withTranslation((props: TranslateProps & {option: string}) => (
   <>
     <FormGroup label={props.translate('Minimal value')}>
       <Field

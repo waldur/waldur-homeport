@@ -76,7 +76,7 @@ const mapStateToProps = (state, ownProps) => {
   return {showIssueLink};
 };
 
-const enhance = compose(withTranslation, connect(mapStateToProps));
+const enhance = compose(connect(mapStateToProps), withTranslation);
 
 export const OfferingHeader = enhance(PureOfferingHeader);
 

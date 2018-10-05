@@ -23,6 +23,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick: () => dispatch(createRequestDialog(ownProps.project)),
 });
 
-const enhance = compose(withTranslation, connect(null, mapDispatchToProps));
+const enhance = compose(connect(null, mapDispatchToProps), withTranslation);
 
 export const JiraIssueCreateButton = enhance(PureJiraIssueCreateButton);

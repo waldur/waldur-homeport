@@ -102,8 +102,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 };
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps, mapDispatchToProps, mergeProps),
+  withTranslation,
 );
 
 export const UserEditContainer = enhance(UserUpdateComponent);

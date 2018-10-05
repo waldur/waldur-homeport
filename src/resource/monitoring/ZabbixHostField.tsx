@@ -12,7 +12,7 @@ import { ZabbixHostStateButton } from './ZabbixHostStateButton';
 interface ZabbixHostFieldProps extends ResourceSummaryProps {
   isVisible: boolean;
   resource: {
-    url: string;
+    url?: string;
     zabbix_host?: ZabbixHost;
   };
 }

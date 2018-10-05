@@ -22,17 +22,28 @@ export interface BaseResource {
   created?: string;
 }
 
-export interface Volume extends BaseResource {
+export interface Resource extends BaseResource {
+  resource_type: string;
+  service_settings_state: string;
+  service_settings_error_message?: string;
+  error_message?: string;
+  action?: string;
+  action_details?: {
+    message: string
+  };
+}
+
+export interface Volume extends Resource {
   size: number;
 }
 
-export interface VirtualMachine extends BaseResource {
+export interface VirtualMachine extends Resource {
   cores: number;
   disk: number;
   ram: number;
 }
 
-export interface Schedule extends BaseResource {
+export interface Schedule extends Resource {
   maximal_number_of_resources: number;
   retention_time: number;
   timezone: string;

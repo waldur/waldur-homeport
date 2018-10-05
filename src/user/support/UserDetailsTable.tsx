@@ -13,13 +13,18 @@ import { UserDetails } from '@waldur/workspace/types';
 import { Row } from './Row';
 import { userLanguageIsVisible, userCompetenceIsVisible, isVisibleForSupportOrStaff } from './selectors';
 
-export interface UserDetailsTableProps extends TranslateProps {
-  user: UserDetails;
+interface StateProps {
   userLanguageIsVisible: boolean;
   userCompetenceIsVisible: boolean;
   isVisibleForSupportOrStaff: boolean;
   nativeNameVisible: boolean;
 }
+
+interface OwnProps {
+  user: UserDetails;
+}
+
+export type UserDetailsTableProps = TranslateProps & StateProps & OwnProps;
 
 const PureUserDetailsTable = (props: UserDetailsTableProps) => (
   <Table responsive={true} bordered={true}>
@@ -89,8 +94,8 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
+  connect<StateProps, {}, OwnProps>(mapStateToProps),
   withTranslation,
-  connect(mapStateToProps),
 );
 
 export const UserDetailsTable = enhance(PureUserDetailsTable);

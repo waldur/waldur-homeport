@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import { withTranslation } from '@waldur/i18n';
+import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ResourceLink } from './ResourceLink';
@@ -29,7 +29,7 @@ const ResourceIcon = (props: ResourceNameProps) => (
   </Tooltip>
 );
 
-const ResourceWarning = withTranslation(props =>
+const ResourceWarning = withTranslation((props: ResourceNameProps & TranslateProps) =>
   !props.resource.is_link_valid ? (
     <Tooltip
       id="resourceWarning"

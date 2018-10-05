@@ -35,4 +35,5 @@ export interface JiraIssue {
   type: JiraIssueType;
   summary: string;
   description?: string;
+  first_response_sla?: string;
 }

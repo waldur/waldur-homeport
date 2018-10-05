@@ -8,7 +8,7 @@ import { Comment } from './types';
 
 interface PureIssueCommentsListProps extends TranslateProps {
   comments: Comment[];
-  erred: boolean;
+  erred?: boolean;
 }
 
 export const PureIssueCommentsList = (props: PureIssueCommentsListProps) => {

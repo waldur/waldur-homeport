@@ -1,6 +1,6 @@
 import { TranslateProps } from '@waldur/i18n';
-import { BaseResource } from '@waldur/resource/types';
+import { Resource } from '@waldur/resource/types';
 
-export interface ResourceSummaryProps<T extends BaseResource = any> extends TranslateProps {
+export interface ResourceSummaryProps<T extends Resource = any> extends TranslateProps {
   resource: T;
 }

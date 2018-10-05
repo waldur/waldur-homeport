@@ -1,6 +1,6 @@
-import { BaseResource } from '@waldur/resource/types';
+import { Resource } from '@waldur/resource/types';
 
-export interface OpenStackTenant extends BaseResource {
+export interface OpenStackTenant extends Resource {
   extra_configuration?: {
     package_uuid?: string;
   };

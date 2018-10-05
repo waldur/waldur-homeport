@@ -1,12 +1,15 @@
 import * as React from 'react';
+import { WrappedFieldArrayProps } from 'redux-form';
 
-import { withTranslation } from '@waldur/i18n';
+import { withTranslation, TranslateProps } from '@waldur/i18n';
 
 import { RemoveButton } from '../RemoveButton';
 import { AddOptionButton } from './AddOptionButton';
 import { OptionForm } from './OptionForm';
 
-export const OfferingOptions = withTranslation(props => (
+type Props = TranslateProps & WrappedFieldArrayProps<any>;
+
+export const OfferingOptions = withTranslation((props: Props) => (
   <div className="form-group">
     <div className="col-sm-offset-3 col-sm-9">
       {props.fields.map((option, index) => (

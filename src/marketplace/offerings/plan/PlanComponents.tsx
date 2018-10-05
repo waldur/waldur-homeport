@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
-import { withTranslation } from '@waldur/i18n';
+import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
-export const PlanComponents = withTranslation(props => (
+interface PlanComponentsProps extends TranslateProps {
+  components: OfferingComponent[];
+  plan: string;
+}
+
+export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
   <table className="table table-borderless">
     <thead>
       <tr>
