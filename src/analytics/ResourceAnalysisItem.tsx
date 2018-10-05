@@ -129,8 +129,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const enhance = compose(
   toggleOpen,
-  withTranslation,
   connect(mapStateToProps),
+  withTranslation,
 );
 
 export const ResourceAnalysisItem = enhance(PureResourceAnalysisItem);

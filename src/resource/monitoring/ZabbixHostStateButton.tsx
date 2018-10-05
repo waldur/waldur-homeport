@@ -1,16 +1,10 @@
 import * as React from 'react';
 
-import { withTranslation, Translate } from '@waldur/i18n';
+import { withTranslation, Translate, TranslateProps } from '@waldur/i18n';
 
 import { ResourceState } from '@waldur/resource/state/types';
 
 import { ZabbixHostDetailsButton } from './ZabbixHostDetailsButton';
-
-interface ZabbixHostStateButtonProps {
-  host: {
-    state: ResourceState
-  };
-}
 
 const mapStateToParams = (state: ResourceState, translate: Translate) => {
   switch (state) {
@@ -47,10 +41,15 @@ const mapStateToParams = (state: ResourceState, translate: Translate) => {
   }
 };
 
-export const PureZabbixHostStateButton = props => {
+interface Props extends TranslateProps {
+  host: {
+    state: ResourceState;
+  };
+}
+
+export const PureZabbixHostStateButton = (props: Props) => {
   const params = mapStateToParams(props.host.state, props.translate);
   return <ZabbixHostDetailsButton host={props.host} {...params}/>;
 };
 
-export const ZabbixHostStateButton: React.ComponentType<ZabbixHostStateButtonProps> =
-  withTranslation(PureZabbixHostStateButton);
+export const ZabbixHostStateButton = withTranslation(PureZabbixHostStateButton);

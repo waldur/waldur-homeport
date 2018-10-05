@@ -1,8 +1,12 @@
 import * as React from 'react';
 
-import { withTranslation } from '@waldur/i18n';
+import { withTranslation, TranslateProps } from '@waldur/i18n';
 
-export const AddOptionButton = withTranslation(props => (
+interface AddOptionButtonProps extends TranslateProps {
+  onClick(): void;
+}
+
+export const AddOptionButton = withTranslation((props: AddOptionButtonProps) => (
   <button
     type="button"
     className="btn btn-default"

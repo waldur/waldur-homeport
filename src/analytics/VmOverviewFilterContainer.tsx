@@ -49,11 +49,11 @@ class VmOverviewFilterComponent extends React.Component<InjectedFormProps&Transl
 }
 
 const enhance = compose(
-  withTranslation,
   reduxForm({
     form: 'vmOverviewFilter',
     initialValues: {shared: true},
   }),
+  withTranslation,
 );
 
 export const VmOverviewFilterContainer = enhance(VmOverviewFilterComponent);

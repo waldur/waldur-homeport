@@ -1,8 +1,12 @@
 import * as React from 'react';
 
-import { withTranslation } from '@waldur/i18n';
+import { withTranslation, TranslateProps } from '@waldur/i18n';
 
-export const RemoveButton = withTranslation(props => (
+interface RemoveButtonProps extends TranslateProps {
+  onClick(): void;
+}
+
+export const RemoveButton = withTranslation((props: RemoveButtonProps) => (
   <button
     type="button"
     className="close"

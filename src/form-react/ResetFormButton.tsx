@@ -24,6 +24,6 @@ const mapDispatchToProps = (dispatch, props) => ({
   resetForm: () => dispatch(reset(props.formName)),
 });
 
-const enhance = compose(withTranslation, connect(undefined, mapDispatchToProps));
+const enhance = compose(connect(undefined, mapDispatchToProps), withTranslation);
 
 export const ResetFormButton = enhance(PureResetFormButton);

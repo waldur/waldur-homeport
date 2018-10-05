@@ -1,8 +1,9 @@
 import { Translate } from '@waldur/i18n/types';
+import { Resource } from '@waldur/resource/types';
 import { formatResourceType } from '@waldur/resource/utils';
 
 import { getStateMessages } from './constants';
-import { Resource, StateIndicator } from './types';
+import { StateIndicator } from './types';
 
 export function getResourceState(resource: Resource, translate: Translate): StateIndicator {
   const resourceType = formatResourceType(resource);

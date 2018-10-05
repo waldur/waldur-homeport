@@ -2,9 +2,10 @@ import * as React from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { Resource } from '@waldur/resource/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { Resource, StateIndicator } from './types';
+import { StateIndicator } from './types';
 import { getResourceState } from './utils';
 
 interface ResourceStateProps extends TranslateProps {

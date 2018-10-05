@@ -11,12 +11,16 @@ import { UserDetailsTable } from '@waldur/user/support/UserDetailsTable';
 import { UserEditContainer } from '@waldur/user/support/UserEditContainer';
 import { UserDetails } from '@waldur/workspace/types';
 
-export interface UserDetailsViewProps extends TranslateProps {
-  user: UserDetails;
+interface StateProps {
   isVisibleForSupportOrStaff: boolean;
   userManageIsVisible: boolean;
-  userEventsIsVisible: boolean;
 }
+
+interface OwnProps {
+  user: UserDetails;
+}
+
+export type UserDetailsViewProps = TranslateProps & StateProps & OwnProps;
 
 export const PureUserDetailsView = (props: UserDetailsViewProps) => (
   <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
@@ -47,6 +51,6 @@ const mapStateToProps = state => ({
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
 });
 
-const enhance = compose(withTranslation, connect(mapStateToProps));
+const enhance = compose(connect<StateProps, {}, OwnProps>(mapStateToProps), withTranslation);
 
 export const UserDetailsView = enhance(PureUserDetailsView);

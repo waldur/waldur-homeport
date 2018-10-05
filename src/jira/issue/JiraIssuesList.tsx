@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tooltip } from '@waldur/core/Tooltip';
-import { withTranslation } from '@waldur/i18n';
+import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { JiraIssue } from '@waldur/jira/issue/types';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
@@ -12,7 +13,7 @@ import { JiraIssueCreateButton } from './JiraIssueCreateButton';
 import { JiraIssuePriorityField } from './JiraIssuePriorityField';
 import { JiraIssueStatusField } from './JiraIssueStatusField';
 
-const IssueSlaField = withTranslation(props => (
+const IssueSlaField = withTranslation((props: {row: JiraIssue} & TranslateProps) => (
   <Tooltip label={props.translate('Time to resolution')} id="slaField">
     {props.row.first_response_sla ? formatDateTime(props.row.first_response_sla) : 'N/A'}
   </Tooltip>

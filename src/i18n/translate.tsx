@@ -1,10 +1,8 @@
-import * as React from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { $filter } from '@waldur/core/services';
 
-import { Translate } from './types';
+import { Translate, TranslateProps } from './types';
 
 export const formatTemplate: Translate = (template, context) => (
   context ? template.replace(/{(.+?)}/g, (_, key) => context[key]) : template
@@ -22,12 +20,7 @@ export const translate: Translate = (template, context) => (
 
 const getLocale = state => ({
   locale: state.locale,
+  translate,
 });
 
-const withLocale = connect(getLocale);
-
-const withTranslationPure = WrappedComponent => props => (
-  <WrappedComponent {...props} translate={translate}/>
-);
-
-export const withTranslation = compose(withTranslationPure, withLocale);
+export const withTranslation = connect<TranslateProps>(getLocale);

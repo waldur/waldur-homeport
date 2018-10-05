@@ -14,6 +14,7 @@ import * as selectors from './store/selectors';
 interface LandingPageContainerProps {
   getCategories: () => void;
   getOfferings: () => void;
+  gotoOffering(offeringId: string): void;
   categories: CategoriesListType;
   offerings: OfferingsListType;
 }
