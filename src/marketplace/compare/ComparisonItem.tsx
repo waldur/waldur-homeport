@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 
@@ -18,7 +19,7 @@ export const ComparisonItem = (props: ComparisonItemProps) => (
     <OfferingLink
       offering_uuid={props.item.uuid}
       className="comparison-item-thumb">
-      <img src={props.item.thumbnail}/>
+      <OfferingLogo src={props.item.thumbnail}/>
     </OfferingLink>
     <h3>{props.item.name}</h3>
     <p>by{' '}

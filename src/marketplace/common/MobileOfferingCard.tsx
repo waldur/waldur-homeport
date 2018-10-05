@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
 
 import { Offering } from '../types';
@@ -12,7 +13,7 @@ export const MobileOfferingCard = (props: MobileOfferingCardProps) => (
   <tr>
     <td className="img-md">
       <OfferingLink offering_uuid={props.offering.uuid}>
-        <img src={props.offering.thumbnail}/>
+        <OfferingLogo src={props.offering.thumbnail}/>
       </OfferingLink>
     </td>
     <td>

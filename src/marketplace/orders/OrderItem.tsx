@@ -3,6 +3,7 @@ import * as React from 'react';
 import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
 import { OrderItemLink } from '@waldur/marketplace/orders/OrderItemLink';
 
@@ -22,7 +23,7 @@ export const OrderItem = (props: OrderItemProps) => (
         <div className="offering-thumb">
           <Tooltip id="offering-tooltip" label={props.item.offering_name}>
             <OfferingLink offering_uuid={props.item.offering_uuid}>
-              <img src={props.item.offering_thumbnail}/>
+              <OfferingLogo src={props.item.offering_thumbnail}/>
             </OfferingLink>
           </Tooltip>
         </div>

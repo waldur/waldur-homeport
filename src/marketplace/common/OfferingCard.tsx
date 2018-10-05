@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
+import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
 
@@ -18,7 +19,7 @@ export const OfferingCard = (props: OfferingCardProps) => (
     <OfferingLink
       offering_uuid={props.offering.uuid}
       className="offering-thumb">
-      <img src={props.offering.thumbnail}/>
+      <OfferingLogo src={props.offering.thumbnail}/>
     </OfferingLink>
     <div className="offering-card-body">
       <h3 className="offering-title ellipsis">
