@@ -1,4 +1,3 @@
-import agreementsService from './agreements-service';
 import currentStateService from './current-state-service';
 import defaultPriceListItemsService from './default-price-list-items-service';
 import joinService from './join-service';
@@ -9,7 +8,6 @@ import projectPermissionsService from './project-permissions-service';
 import quotasService from './quotas-service';
 
 export default module => {
-  module.service('agreementsService', agreementsService);
   module.service('currentStateService', currentStateService);
   module.service('defaultPriceListItemsService', defaultPriceListItemsService);
   module.service('joinService', joinService);
