@@ -1,0 +1,25 @@
+<div class="wrapper wrapper-content" ng-if="$ctrl.resource">
+  <div class="ibox-content">
+    <div class="row m-b-md">
+      <div class="col-lg-12">
+        <div class="pull-right">
+          <action-button-resource
+            button-model="$ctrl.resource"
+            button-controller="$ctrl.controller">
+          </action-button-resource>
+          <resource-refresh-button></resource-refresh-button>
+          <extension-point id="resource-details-button"></extension-point>
+        </div>
+        <h2>{{ ::$ctrl.header | translate }}</h2>
+      </div>
+    </div>
+    <div class="row m-b-md">
+      <resource-summary resource="$ctrl.resource"></resource-summary>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <resource-tabs resource="$ctrl.resource"></resource-tabs>
+      </div>
+    </div>
+  </div>
+</div>

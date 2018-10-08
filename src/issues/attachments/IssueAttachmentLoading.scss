@@ -1,0 +1,12 @@
+@import '~sass/inspinia/_variables.scss';
+@import '~sass/variables.scss';
+
+.attachment-item-loading {
+  position: relative;
+  background-color: $gray;
+  border: none;
+  border-radius: 3px;
+  width: 200px;
+  height: 216px;
+  padding: 0 0 10px;
+}

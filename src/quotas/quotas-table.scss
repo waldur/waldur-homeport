@@ -1,0 +1,20 @@
+@import '~sass/mixins/mediaqueries.scss';
+
+.provider-quotas {
+  column-count: 2;
+  -moz-column-count: 2;
+  @include bp(xs) {
+    column-count: initial;
+    -moz-column-count: initial;
+  }
+  @include bp(sm) {
+    column-count: initial;
+    -moz-column-count: initial;
+  }
+  .details-table__key {
+    width: 200px;
+    @include bp(xs) {
+      width: 150px;
+    }
+  }
+}

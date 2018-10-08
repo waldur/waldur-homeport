@@ -1,0 +1,11 @@
+@import '~sass/mixins/display.scss';
+@import '~sass/mixins/lists.scss';
+
+.language-list {
+  li + li {
+    padding-left: 0px;
+    &:before {
+      content: '|';
+    }
+  }
+}

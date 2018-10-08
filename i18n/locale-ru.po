@@ -11,164 +11,164 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.3\n"
 
-#: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.js:21
+#: src/premiumSupport/premium-support-contracts/contract-details-dialog.js:21
 msgid "\"{planName}\" details"
 msgstr "\"{planName}\" детали"
 
-#: app/scripts/components/billing/billing-record-details.html:72
+#: src/billing/billing-record-details.html:72
 msgid "(VAT is not included)"
 msgstr "(НДС не включен)"
 
-#: app/scripts/components/form/appstore-field-list.js:42
+#: src/form/appstore-field-list.js:42
 msgid "{fieldLabel} is required for provisioning resource."
 msgstr "{fieldLabel} требуется для предоставления ресурса."
 
-#: app/scripts/components/events/constants.js:22
+#: src/events/constants.js:22
 msgid ""
 "{quota_name} quota threshold has been reached for project {project_name}."
 msgstr "{quota_name} квота была достигнута для проекта {project_name}."
 
-#: app/scripts/components/directives/customer-balance.js:54
+#: src/directives/customer-balance.js:54
 msgid "{quotaUsage} out of {quotaLimit}."
 msgstr "{quotaUsage} из {quotaLimit}."
 
-#: app/scripts/components/events/constants.js:24
+#: src/events/constants.js:24
 msgid "{resource_full_name} creation has been scheduled by {user_full_name}."
 msgstr "{resource_full_name} создание запланировано {user_full_name}."
 
-#: app/scripts/components/events/constants.js:23
+#: src/events/constants.js:23
 msgid "{resource_full_name} creation has failed."
 msgstr "{resource_full_name} создание не удалось."
 
-#: app/scripts/components/events/constants.js:26
+#: src/events/constants.js:26
 msgid "{resource_full_name} deletion has failed."
 msgstr "{resource_full_name} удаление  не удалось."
 
-#: app/scripts/components/events/constants.js:25
+#: src/events/constants.js:25
 msgid "{resource_full_name} has been created."
 msgstr "{resource_full_name} создан."
 
-#: app/scripts/components/events/constants.js:28
+#: src/events/constants.js:28
 msgid "{resource_full_name} has been deleted."
 msgstr "{resource_full_name} удалён."
 
-#: app/scripts/components/events/constants.js:29
+#: src/events/constants.js:29
 msgid "{resource_full_name} has been imported by {user_full_name}."
 msgstr "{resource_full_name} импортировано {user_full_name}."
 
-#: app/scripts/components/events/constants.js:32
+#: src/events/constants.js:32
 msgid "{resource_full_name} has been restarted."
 msgstr "{resource_full_name} перезагружен."
 
-#: app/scripts/components/events/constants.js:27
+#: src/events/constants.js:27
 msgid ""
 "{resource_full_name} has been scheduled to deletion by {user_full_name}."
 msgstr "{resource_full_name} запланировано на удаление {user_full_name}."
 
-#: app/scripts/components/events/constants.js:31
+#: src/events/constants.js:31
 msgid "{resource_full_name} has been scheduled to restart by {user_full_name}."
 msgstr "{resource_full_name} запланировано на перезагрузку {user_full_name}."
 
-#: app/scripts/components/events/constants.js:39
+#: src/events/constants.js:39
 msgid "{resource_full_name} has been updated by {user_full_name}."
 msgstr "{resource_full_name} обновлено {user_full_name}."
 
-#: app/scripts/components/events/constants.js:30
+#: src/events/constants.js:30
 msgid "{resource_full_name} restart has failed."
 msgstr "{resource_full_name} перезагрузка не удалась."
 
-#: app/scripts/components/quotas/quota-usage-bar-chart.js:19
+#: src/quotas/quota-usage-bar-chart.js:19
 msgid "{usage} of {limit} used"
 msgstr "{usage} из {limit} использовано"
 
-#: app/scripts/components/providers/details/provider-project-link-quota.js:24
+#: src/providers/details/provider-project-link-quota.js:24
 msgid "{usage} used"
 msgstr "{usage} использовано"
 
-#: app/scripts/components/dashboard/dashboard-chart-service.js:141
+#: src/dashboard/dashboard-chart-service.js:141
 msgid "{value} at {date}"
 msgstr "{value} {date}"
 
-#: app/scripts/components/error/error-403.html:8
-#: app/scripts/components/error/error-404.html:6
+#: src/error/error-403.html:8
+#: src/error/error-404.html:6
 msgid "&lt; Back"
 msgstr "&lt; Назад"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:27
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:25
+#: src/openstack/openstack-tenant/openstack-template.js:27
+#: src/openstack/openstack-tenant/openstack-tenant-prices.js:25
 msgid "1 day"
 msgstr "1 день"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:33
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:30
+#: src/openstack/openstack-tenant/openstack-template.js:33
+#: src/openstack/openstack-tenant/openstack-tenant-prices.js:30
 msgid "30 days"
 msgstr "30 дней"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:40
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.js:35
+#: src/openstack/openstack-tenant/openstack-template.js:40
+#: src/openstack/openstack-tenant/openstack-tenant-prices.js:35
 msgid "365 days"
 msgstr "365 дней"
 
-#: app/scripts/components/freeipa/freeipa-account-create.js:49
+#: src/freeipa/freeipa-account-create.js:49
 msgid "A profile has been created."
 msgstr "Профиль создан."
 
-#: app/scripts/components/customer/customer-manage.html:18
+#: src/customer/customer-manage.html:18
 msgid "Abbreviation"
 msgstr "Аббревиатура"
 
-#: app/scripts/components/experts/bids/expert-bid.html:4
+#: src/experts/bids/expert-bid.html:4
 msgid "ACCEPT"
 msgstr "ПРИНЯТЬ"
 
-#: app/scripts/components/invitations/invitations-list.js:84
+#: src/invitations/invitations-list.js:84
 msgid "Accepted"
 msgstr "Принятый"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:51
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:15
-#: app/scripts/components/resource/summary/virtual-machine-summary.html:13
+#: src/openstack/openstack-tenant/openstack-tenant-config.js:51
+#: src/openstack/openstack-tenant/openstack-tenant-summary.html:15
+#: src/resource/summary/virtual-machine-summary.html:13
 msgid "Access"
 msgstr "Доступ"
 
-#: app/scripts/components/customer/customer-manage.html:92
+#: src/customer/customer-manage.html:92
 msgid "Account"
 msgstr "Аккаунт"
 
-#: app/scripts/components/auth/auth-activation.html:3
+#: src/auth/auth-activation.html:3
 msgid "Account activation"
 msgstr "Активация аккаунта"
 
-#: app/scripts/components/auth/auth-activation.js:19
+#: src/auth/auth-activation.js:19
 msgid "Account has been activated."
 msgstr "Аккаунт был активирован."
 
-#: app/scripts/components/user/user-manage.js:54
+#: src/user/user-manage.js:54
 msgid "Account removal"
 msgstr "Удаление аккаунта"
 
-#: app/scripts/components/cost-planning/cost-plan-items.html:11
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:18
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:15
-#: app/scripts/components/paypal/paypal-invoice-actions.html:3
-#: app/scripts/components/resource/actions/action-button-resource.html:3
-#: app/scripts/components/table/responsive-table.js:333
+#: src/cost-planning/cost-plan-items.html:11
+#: src/cost-planning/cost-plan-optimizer.html:18
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html:15
+#: src/paypal/paypal-invoice-actions.html:3
+#: src/resource/actions/action-button-resource.html:3
+#: src/table/responsive-table.js:333
 msgid "Actions"
 msgstr "Действия"
 
-#: app/scripts/components/issues/issue-navigation-service.js:21
-#: app/scripts/components/issues/issues-activity-stream.html:15
+#: src/issues/issue-navigation-service.js:21
+#: src/issues/issues-activity-stream.html:15
 msgid "Activity stream"
 msgstr "Лента активности"
 
-#: app/scripts/components/issues/comments/issue-comments-form.html:17
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:53
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:39
-#: app/scripts/components/team/add-project-member.js:22
+#: src/issues/comments/issue-comments-form.html:17
+#: src/openstack/openstack-instance/openstack-instance-floating-ips.html:53
+#: src/openstack/openstack-instance/openstack-instance-networks.html:39
+#: src/team/add-project-member.js:22
 msgid "Add"
 msgstr "Добавить"
 
-#: app/scripts/components/intro/base-intro.js:105
+#: src/intro/base-intro.js:105
 msgid "Add a new organization"
 msgstr "Добавить новую организацию"
 
@@ -177,103 +177,103 @@ msgstr "Добавить новую организацию"
 msgid "Add credit"
 msgstr "Пополнить баланс"
 
-#: app/scripts/components/user/keys/key-create.html:42
+#: src/user/keys/key-create.html:42
 msgid "Add key"
 msgstr "Добавить ключ"
 
-#: app/scripts/components/team/project-users-list.js:76
+#: src/team/project-users-list.js:76
 msgid "Add member"
 msgstr "Добавить участника"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:35
+#: src/navigation/select-workspace-dialog.html:35
 msgid "Add new"
 msgstr "Добавить новый"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:23
+#: src/navigation/select-workspace-dialog.html:23
 msgid "Add new organization"
 msgstr "Добавить новую организацию"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:90
+#: src/navigation/select-workspace-dialog.html:90
 msgid "Add new project"
 msgstr "Добавить новый проект"
 
-#: app/scripts/components/user/hooks/hook-list.js:62
+#: src/user/hooks/hook-list.js:62
 msgid "Add notification"
 msgstr "Добавить уведомление"
 
-#: app/scripts/components/user/user-organizations.js:76
+#: src/user/user-organizations.js:76
 msgid "Add organization"
 msgstr "Добавить организацию"
 
-#: app/scripts/components/resource/list/resource-private-clouds-list.js:39
+#: src/resource/list/resource-private-clouds-list.js:39
 msgid "Add private cloud"
 msgstr "Добавить частное облако"
 
-#: app/scripts/components/appstore/dialog/appstore-project-selector.html:16
-#: app/scripts/components/project/project-create.html:72
-#: app/scripts/components/project/projects-list.js:157
+#: src/appstore/dialog/appstore-project-selector.html:16
+#: src/project/project-create.html:72
+#: src/project/projects-list.js:157
 msgid "Add project"
 msgstr "Добавить проект"
 
-#: app/scripts/components/team/add-project-member.js:23
+#: src/team/add-project-member.js:23
 msgid "Add project member"
 msgstr "Добавить участника проекта"
 
-#: app/scripts/components/providers/create.html:155
-#: app/scripts/components/providers/provider-list.js:186
+#: src/providers/create.html:155
+#: src/providers/provider-list.js:186
 msgid "Add provider"
 msgstr "Добавить провайдер"
 
-#: app/scripts/components/experts/requests/expert-request-project-list.js:91
+#: src/experts/requests/expert-request-project-list.js:91
 msgid "Add request"
 msgstr "Добавить запрос"
 
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:70
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html:70
 msgid "Add rule"
 msgstr "Добавить правило"
 
-#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:52
+#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:52
 msgid "Add SLA"
 msgstr "Добавить SLA"
 
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-list.js:82
+#: src/openstack/openstack-snapshot/openstack-snapshots-list.js:82
 msgid "Add snapshots"
 msgstr "Добавить snapshot"
 
-#: app/scripts/components/user/keys/key-list.js:62
-#: app/scripts/components/user/routes.js:91
+#: src/user/keys/key-list.js:62
+#: src/user/routes.js:91
 msgid "Add SSH key"
 msgstr "Добавить SSH ключ"
 
-#: app/scripts/components/resource/list/resource-vms-list.js:60
+#: src/resource/list/resource-vms-list.js:60
 msgid "Add virtual machine"
 msgstr "Добавить виртуальную машину"
 
-#: app/scripts/components/customer/customer-create-config.js:47
-#: app/scripts/components/customer/customer-manage.html:38
-#: app/scripts/components/customer/customer-manage.html:74
-#: app/scripts/components/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
+#: src/customer/customer-create-config.js:47
+#: src/customer/customer-manage.html:38
+#: src/customer/customer-manage.html:74
+#: src/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
 msgstr "Адрес"
 
-#: app/scripts/components/billing/billing-record-details.html:14
-#: app/scripts/components/customer/customer-manage.html:33
+#: src/billing/billing-record-details.html:14
+#: src/customer/customer-manage.html:33
 msgid "Agreement number"
 msgstr "Номер договора"
 
-#: app/scripts/components/alerts/base-alerts-list.js:35
-#: app/scripts/components/dashboard/project-alerts-feed.js:12
-#: app/scripts/components/events/event-types-dialog.js:20
+#: src/alerts/base-alerts-list.js:35
+#: src/dashboard/project-alerts-feed.js:12
+#: src/events/event-types-dialog.js:20
 msgid "Alert types"
 msgstr "Типы оповещения"
 
-#: app/scripts/components/customer/customer-workspace.js:112
-#: app/scripts/components/customer/routes.js:89
-#: app/scripts/components/dashboard/project-alerts-feed.js:11
-#: app/scripts/components/help/constants.js:5
-#: app/scripts/components/project/project-workspace.js:98
-#: app/scripts/components/project/routes.js:110
-#: app/scripts/components/resource/tabs/constants.js:12
+#: src/customer/customer-workspace.js:112
+#: src/customer/routes.js:89
+#: src/dashboard/project-alerts-feed.js:11
+#: src/help/constants.js:5
+#: src/project/project-workspace.js:98
+#: src/project/routes.js:110
+#: src/resource/tabs/constants.js:12
 msgid "Alerts"
 msgstr "Оповещения"
 
@@ -281,47 +281,47 @@ msgstr "Оповещения"
 msgid "Alerts & events"
 msgstr "Оповещения и  события"
 
-#: app/scripts/components/alerts/constants.js:14
+#: src/alerts/constants.js:14
 msgid "Alerts about organization"
 msgstr "Оповещения об организации"
 
-#: app/scripts/components/alerts/constants.js:16
+#: src/alerts/constants.js:16
 msgid "Alerts about providers"
 msgstr "Оповещения о провайдерах"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:54
+#: src/openstack/openstack-tenant/openstack-template.js:54
 msgid "All categories"
 msgstr "Все категории"
 
-#: app/scripts/components/appstore/appstore-providers-service.js:56
+#: src/appstore/appstore-providers-service.js:56
 msgid "All provider quotas have reached limit."
 msgstr "Все квоты достигли своего лимита."
 
-#: app/scripts/components/auth/auth-login.html:115
+#: src/auth/auth-login.html:115
 msgid "Already have an account?"
 msgstr "У вас уже есть аккаунт?"
 
-#: app/scripts/components/project/projects-list.js:237
+#: src/project/projects-list.js:237
 msgid "An error occurred on project removal."
 msgstr "Произошла ошибка при удалении проекта."
 
-#: app/scripts/components/customer/customer-workspace.js:75
+#: src/customer/customer-workspace.js:75
 msgid "Analytics"
 msgstr "Аналитика"
 
-#: app/scripts/components/project/projects-list.js:112
+#: src/project/projects-list.js:112
 msgid "Apps"
 msgstr "Приложения"
 
-#: app/scripts/components/resource/actions/action-utils-service.js:68
+#: src/resource/actions/action-utils-service.js:68
 msgid "Are you sure? This action cannot be undone."
 msgstr "Вы уверены? Это действие не может быть отменено."
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:23
+#: src/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:23
 msgid "Assign"
 msgstr "Назначить"
 
-#: app/scripts/components/navigation/site-header.html:12
+#: src/navigation/site-header.html:12
 msgid "Back"
 msgstr "Назад"
 
@@ -329,35 +329,35 @@ msgstr "Назад"
 msgid "Back to help topics"
 msgstr "Назад к вызову справки"
 
-#: app/scripts/components/auth/callbacks/auth-login-failed.html:10
-#: app/scripts/components/auth/callbacks/auth-logout-failed.html:10
+#: src/auth/callbacks/auth-login-failed.html:10
+#: src/auth/callbacks/auth-logout-failed.html:10
 msgid "Back to login"
 msgstr "Назад ко входу"
 
-#: app/scripts/components/user/user-details.js:27
+#: src/user/user-details.js:27
 msgid "Back to organization"
 msgstr "Назад к организации"
 
-#: app/scripts/components/user/user-details.js:20
+#: src/user/user-details.js:20
 msgid "Back to project"
 msgstr "Назад к проекту"
 
-#: app/scripts/components/openstack/openstack-backup/actions.js:11
+#: src/openstack/openstack-backup/actions.js:11
 msgid "Backup has been updated"
 msgstr "Резервная копия обновлена"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/module.js:31
+#: src/openstack/openstack-backup-schedule/module.js:31
 msgid "Backup schedule has been updated"
 msgstr "График резервных копий обновлён"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:66
+#: src/openstack/openstack-backup-schedule/breadcrumbs.js:22
+#: src/openstack/openstack-instance/module.js:66
 msgid "Backup schedules"
 msgstr "График резервных копий"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/module.js:63
-#: app/scripts/components/openstack/openstack-backup/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-instance/module.js:62
+#: src/openstack/openstack-backup-schedule/module.js:63
+#: src/openstack/openstack-backup/breadcrumbs.js:22
+#: src/openstack/openstack-instance/module.js:62
 msgid "Backups"
 msgstr "Резервные копии"
 
@@ -367,521 +367,521 @@ msgstr "Резервные копии"
 msgid "Balance"
 msgstr "Баланс"
 
-#: app/scripts/components/events/constants.js:8
+#: src/events/constants.js:8
 msgid "Balance has been decreased by {amount} for customer {customer_name}."
 msgstr "Баланс уменьшен на {amount} для клиента {customer_name}."
 
-#: app/scripts/components/events/constants.js:7
+#: src/events/constants.js:7
 msgid "Balance has been increased by {amount} for customer {customer_name}."
 msgstr "Баланс увеличен на {amount} для клиента {customer_name}"
 
-#: app/scripts/components/customer/customer-manage.html:89
+#: src/customer/customer-manage.html:89
 msgid "Bank"
 msgstr "Банк"
 
-#: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:19
+#: src/premiumSupport/premium-support-contracts/contract-details-dialog.html:19
 msgid "Base rate"
 msgstr "Базовая ставка"
 
-#: app/scripts/components/billing/billing-utils.js:3
+#: src/billing/billing-utils.js:3
 msgid "Billing"
 msgstr "Рассчёты"
 
-#: app/scripts/components/ansible/ansible-job-create.html:37
-#: app/scripts/components/appstore/appstore-store.html:55
-#: app/scripts/components/appstore/dialog/appstore-selector-dialog.html:30
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:37
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:56
-#: app/scripts/components/digitalocean/droplet-resize.html:76
-#: app/scripts/components/events/event-details-dialog.html:133
-#: app/scripts/components/events/event-types-dialog.html:14
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:93
-#: app/scripts/components/experts/requests/expert-request-create.html:22
-#: app/scripts/components/form/appstore-form-wizard.html:54
-#: app/scripts/components/invitations/actions/cancel.js:8
-#: app/scripts/components/invitations/actions/invitation-dialog.html:77
-#: app/scripts/components/issues/comments/issue-comments-form.html:22
-#: app/scripts/components/issues/issue-create-dialog.html:99
-#: app/scripts/components/navigation/select-workspace-dialog.html:137
-#: app/scripts/components/offering/appstore-offering.html:22
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:26
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-change-package.html:54
-#: app/scripts/components/openstack/openstack-volume/snapshot-create.html:43
-#: app/scripts/components/openstack/openstack-volume/volume-extend.html:34
-#: app/scripts/components/plans/plans-list.html:38
-#: app/scripts/components/premiumSupport/premium-support-agreement.html:34
-#: app/scripts/components/project/project-create.html:75
-#: app/scripts/components/providers/create.html:160
-#: app/scripts/components/resource-import/resource-import-dialog.html:42
-#: app/scripts/components/resource/actions/dialog/action-dialog.html:36
-#: app/scripts/components/team/add-project-member.html:54
-#: app/scripts/components/team/add-team-member.html:86
-#: app/scripts/components/user/hooks/hook-details.html:81
-#: app/scripts/components/user/keys/key-create.html:45
+#: src/ansible/ansible-job-create.html:37
+#: src/appstore/appstore-store.html:55
+#: src/appstore/dialog/appstore-selector-dialog.html:30
+#: src/auth/saml2/auth-saml2-dialog.html:37
+#: src/cost-planning/cost-plan-dialog.html:56
+#: src/digitalocean/droplet-resize.html:76
+#: src/events/event-details-dialog.html:133
+#: src/events/event-types-dialog.html:14
+#: src/experts/bids/expert-bid-create-dialog.html:93
+#: src/experts/requests/expert-request-create.html:22
+#: src/form/appstore-form-wizard.html:54
+#: src/invitations/actions/cancel.js:8
+#: src/invitations/actions/invitation-dialog.html:77
+#: src/issues/comments/issue-comments-form.html:22
+#: src/issues/issue-create-dialog.html:99
+#: src/navigation/select-workspace-dialog.html:137
+#: src/offering/appstore-offering.html:22
+#: src/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:26
+#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:54
+#: src/openstack/openstack-volume/snapshot-create.html:43
+#: src/openstack/openstack-volume/volume-extend.html:34
+#: src/plans/plans-list.html:38
+#: src/premiumSupport/premium-support-agreement.html:34
+#: src/project/project-create.html:75
+#: src/providers/create.html:160
+#: src/resource-import/resource-import-dialog.html:42
+#: src/resource/actions/dialog/action-dialog.html:36
+#: src/team/add-project-member.html:54
+#: src/team/add-team-member.html:86
+#: src/user/hooks/hook-details.html:81
+#: src/user/keys/key-create.html:45
 msgid "Cancel"
 msgstr "Отменить"
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:43
+#: src/invitations/invitation-confirm-dialog.html:43
 msgid "Cancel invitation"
 msgstr "Отменить приглашение"
 
-#: app/scripts/components/payments/routes.js:26
+#: src/payments/routes.js:26
 msgid "Cancel payment"
 msgstr "Отменить платёж"
 
-#: app/scripts/components/experts/requests/expert-request-cancel.html:7
+#: src/experts/requests/expert-request-cancel.html:7
 msgid "Cancel request"
 msgstr "Отменить запрос"
 
-#: app/scripts/components/billing/billing-utils.js:37
-#: app/scripts/components/invitations/invitations-list.js:76
+#: src/billing/billing-utils.js:37
+#: src/invitations/invitations-list.js:76
 msgid "Canceled"
 msgstr "Отменённый"
 
-#: app/scripts/components/paypal/paypal-invoices-list.js:117
+#: src/paypal/paypal-invoices-list.js:117
 msgid "Cancelled"
 msgstr "Отменённый"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-template.js:8
+#: src/openstack/openstack-tenant/openstack-template.js:8
 msgid "Category"
 msgstr "Категория"
 
-#: app/scripts/components/premiumSupport/premium-support-agreement.html:6
+#: src/premiumSupport/premium-support-agreement.html:6
 msgid "Check terms"
 msgstr "Проверить сроки"
 
-#: app/scripts/components/intro/expert-manager-intro.js:161
+#: src/intro/expert-manager-intro.js:161
 msgid ""
 "Click on a 'Create proposal' button when you are ready to fulfill expert request"
 msgstr ""
 "Нажмите на кнопку 'Создать предложение', когда будете готовы заполнить "
 "заявку на эксперта"
 
-#: app/scripts/components/billing/invoice-events-dialog.html:45
-#: app/scripts/components/customer/customer-report-error.html:10
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
+#: src/billing/invoice-events-dialog.html:45
+#: src/customer/customer-report-error.html:10
+#: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 msgid "Close"
 msgstr "Закрыть"
 
-#: app/scripts/components/alerts/alert-filter.html:4
+#: src/alerts/alert-filter.html:4
 msgid "Closed"
 msgstr "Закрытый"
 
-#: app/scripts/components/appstore/appstore-compare-list.js:62
+#: src/appstore/appstore-compare-list.js:62
 msgid "Code"
 msgstr "Код"
 
-#: app/scripts/components/issues/comments/issue-comments-form.html:10
-#: app/scripts/components/issues/comments/issue-comments-form.html:6
+#: src/issues/comments/issue-comments-form.html:10
+#: src/issues/comments/issue-comments-form.html:6
 msgid "Comment"
 msgstr "Комментарий"
 
-#: app/scripts/components/issues/comments/issue-comments-form.js:18
+#: src/issues/comments/issue-comments-form.js:18
 msgid "Comment has been added."
 msgstr "Комментарий добавлен."
 
-#: app/scripts/components/issues/comments/issue-comments-container.html:3
+#: src/issues/comments/issue-comments-container.html:3
 msgid "Comments"
 msgstr "Комментарии"
 
-#: app/scripts/components/customer/customer-manage.html:71
+#: src/customer/customer-manage.html:71
 msgid "Company"
 msgstr "Фирма"
 
-#: app/scripts/components/appstore/appstore-store.html:66
-#: app/scripts/components/appstore/routes.js:80
+#: src/appstore/appstore-store.html:66
+#: src/appstore/routes.js:80
 msgid "Compare flavors"
 msgstr "Флаг сравнения"
 
-#: app/scripts/components/customer/customer-users-details-list.js:69
-#: app/scripts/components/user/user-popover-table.html:25
+#: src/customer/customer-users-details-list.js:69
+#: src/user/user-popover-table.html:25
 msgid "Competence"
 msgstr "Компетентность"
 
-#: app/scripts/components/cost-planning/cost-plan-flavors.html:4
+#: src/cost-planning/cost-plan-flavors.html:4
 msgid "Component"
 msgstr "Компонент"
 
-#: app/scripts/components/cost-planning/cost-plan-items.html:9
+#: src/cost-planning/cost-plan-items.html:9
 msgid "Components"
 msgstr "Компоненты"
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:9
-#: app/scripts/components/openstack/openstack-instance/actions.js:66
+#: src/cost-planning/cost-plan-dialog.html:9
+#: src/openstack/openstack-instance/actions.js:66
 msgid "Configure"
 msgstr "Настроить"
 
-#: app/scripts/components/plans/plans-list.html:35
+#: src/plans/plans-list.html:35
 msgid "Confirm changing your plan"
 msgstr "Подтвердите смену вашего плана"
 
-#: app/scripts/components/customer/customer-manage.js:117
+#: src/customer/customer-manage.js:117
 msgid "Confirm deletion?"
 msgstr "Подтвердить удаление?"
 
-#: app/scripts/components/auth/auth-login.js:204
+#: src/auth/auth-login.js:204
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 "Подтверждающее письмо было отправлено. Пожалуйста, проверьте свою почту!"
 
-#: app/scripts/components/customer/customer-create-config.js:17
-#: app/scripts/components/customer/customer-manage.html:43
+#: src/customer/customer-create-config.js:17
+#: src/customer/customer-manage.html:43
 msgid "Contact e-mail"
 msgstr "Контактный email адрес"
 
-#: app/scripts/components/customer/customer-popover.html:28
+#: src/customer/customer-popover.html:28
 msgid "Contact email"
 msgstr "Контактный email"
 
-#: app/scripts/components/customer/customer-create-config.js:23
-#: app/scripts/components/customer/customer-manage.html:48
+#: src/customer/customer-create-config.js:23
+#: src/customer/customer-manage.html:48
 msgid "Contact phone"
 msgstr "Контактный телефон"
 
-#: app/scripts/components/experts/requests/expert-request-summary.html:34
+#: src/experts/requests/expert-request-summary.html:34
 msgid "Contract description"
 msgstr "Описание договора"
 
-#: app/scripts/components/analytics/cost-analysis.html:114
-#: app/scripts/components/analytics/cost-analysis.html:70
-#: app/scripts/components/analytics/cost-analysis.html:92
+#: src/analytics/cost-analysis.html:114
+#: src/analytics/cost-analysis.html:70
+#: src/analytics/cost-analysis.html:92
 msgid "Cost"
 msgstr "Стоимость"
 
-#: app/scripts/components/analytics/routes.js:19
-#: app/scripts/components/customer/customer-workspace.js:82
+#: src/analytics/routes.js:19
+#: src/customer/customer-workspace.js:82
 msgid "Cost analysis"
 msgstr "Анализ стоимости"
 
-#: app/scripts/components/project/project-workspace.js:113
-#: app/scripts/components/project/routes.js:171
+#: src/project/project-workspace.js:113
+#: src/project/routes.js:171
 msgid "Cost planning"
 msgstr "Планирование стоимости"
 
-#: app/scripts/components/customer/customer-threshold.html:4
-#: app/scripts/components/project/project-policies.html:39
+#: src/customer/customer-threshold.html:4
+#: src/project/project-policies.html:39
 msgid "Cost threshold"
 msgstr "Порог стоимости"
 
-#: app/scripts/components/customer/customer-create-config.js:41
-#: app/scripts/components/customer/customer-manage.html:77
+#: src/customer/customer-create-config.js:41
+#: src/customer/customer-manage.html:77
 msgid "Country"
 msgstr "Страна"
 
-#: app/scripts/components/providers/details/provider-project-link-quotas.html:8
-#: app/scripts/components/slurm/slurm-allocation-list.js:37
-#: app/scripts/components/slurm/slurm-allocation-summary.html:5
+#: src/providers/details/provider-project-link-quotas.html:8
+#: src/slurm/slurm-allocation-list.js:37
+#: src/slurm/slurm-allocation-summary.html:5
 msgid "CPU limit"
 msgstr "CPU лимит"
 
-#: app/scripts/components/slurm/actions.js:15
+#: src/slurm/actions.js:15
 msgid "CPU limit, minutes"
 msgstr "CPU лимит, минуты"
 
-#: app/scripts/components/slurm/slurm-allocation-list.js:41
-#: app/scripts/components/slurm/slurm-allocation-summary.html:14
+#: src/slurm/slurm-allocation-list.js:41
+#: src/slurm/slurm-allocation-summary.html:14
 msgid "CPU usage"
 msgstr "CPU использование"
 
-#: app/scripts/components/ansible/ansible-job-create.html:34
-#: app/scripts/components/appstore/appstore-store.html:20
-#: app/scripts/components/appstore/appstore-store.html:51
-#: app/scripts/components/customer/customer-issues.js:31
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:90
-#: app/scripts/components/experts/requests/expert-request-create.html:19
-#: app/scripts/components/freeipa/freeipa-account-create.html:67
-#: app/scripts/components/issues/issue-create-dialog.js:10
-#: app/scripts/components/offering/appstore-offering.html:19
-#: app/scripts/components/openstack/openstack-instance/actions.js:108
-#: app/scripts/components/openstack/openstack-instance/actions.js:51
-#: app/scripts/components/openstack/openstack-tenant/actions.js:25
-#: app/scripts/components/openstack/openstack-tenant/actions.js:60
-#: app/scripts/components/openstack/openstack-tenant/actions.js:80
-#: app/scripts/components/openstack/openstack-volume/module.js:60
-#: app/scripts/components/openstack/openstack-volume/module.js:74
-#: app/scripts/components/project/project-issues.js:31
-#: app/scripts/components/resource/list/resources-list.js:110
-#: app/scripts/components/resource/tabs/resource-issues.js:26
-#: app/scripts/components/user/hooks/hook-details.html:77
+#: src/ansible/ansible-job-create.html:34
+#: src/appstore/appstore-store.html:20
+#: src/appstore/appstore-store.html:51
+#: src/customer/customer-issues.js:31
+#: src/experts/bids/expert-bid-create-dialog.html:90
+#: src/experts/requests/expert-request-create.html:19
+#: src/freeipa/freeipa-account-create.html:67
+#: src/issues/issue-create-dialog.js:10
+#: src/offering/appstore-offering.html:19
+#: src/openstack/openstack-instance/actions.js:108
+#: src/openstack/openstack-instance/actions.js:51
+#: src/openstack/openstack-tenant/actions.js:25
+#: src/openstack/openstack-tenant/actions.js:60
+#: src/openstack/openstack-tenant/actions.js:80
+#: src/openstack/openstack-volume/module.js:60
+#: src/openstack/openstack-volume/module.js:74
+#: src/project/project-issues.js:31
+#: src/resource/list/resources-list.js:110
+#: src/resource/tabs/resource-issues.js:26
+#: src/user/hooks/hook-details.html:77
 msgid "Create"
 msgstr "Создать"
 
-#: app/scripts/components/auth/auth-login.html:111
-#: app/scripts/components/auth/auth-login.html:19
+#: src/auth/auth-login.html:111
+#: src/auth/auth-login.html:19
 msgid "Create an account"
 msgstr "Создать аккаунт"
 
-#: app/scripts/components/experts/routes.js:9
+#: src/experts/routes.js:9
 msgid "Create expert request"
 msgstr "Создать запрос на эксперта"
 
-#: app/scripts/components/openstack/openstack-tenant/actions.js:26
+#: src/openstack/openstack-tenant/actions.js:26
 msgid "Create network for"
 msgstr "Создать сеть для"
 
-#: app/scripts/components/user/hooks/hook-details.html:4
+#: src/user/hooks/hook-details.html:4
 msgid "Create notification"
 msgstr "Создать уведомление"
 
-#: app/scripts/components/customer/customer-create-dialog.html:2
+#: src/customer/customer-create-dialog.html:2
 msgid "Create organization"
 msgstr "Создать организацию"
 
-#: app/scripts/components/cost-planning/cost-plans-list.js:44
+#: src/cost-planning/cost-plans-list.js:44
 msgid "Create plan"
 msgstr "Создать план"
 
-#: app/scripts/components/customer/routes.js:137
+#: src/customer/routes.js:137
 msgid "Create project"
 msgstr "Создать проект"
 
-#: app/scripts/components/customer/routes.js:145
+#: src/customer/routes.js:145
 msgid "Create provider"
 msgstr "Создать провайдер"
 
-#: app/scripts/components/issues/issue-create-dialog.js:4
-#: app/scripts/components/issues/issue-quick-create.html:116
-#: app/scripts/components/issues/issue-quick-create.html:3
-#: app/scripts/components/issues/issue-registration.html:216
+#: src/issues/issue-create-dialog.js:4
+#: src/issues/issue-quick-create.html:116
+#: src/issues/issue-quick-create.html:3
+#: src/issues/issue-registration.html:216
 msgid "Create request"
 msgstr "Создать запрос"
 
-#: app/scripts/components/invitations/invitations-list.js:132
+#: src/invitations/invitations-list.js:132
 msgid "Created at"
 msgstr "Создано"
 
-#: app/scripts/components/ansible/ansible-jobs-list.js:74
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:89
-#: app/scripts/components/experts/requests/expert-request-project-list.js:79
-#: app/scripts/components/offering/offerings-list.js:55
-#: app/scripts/components/project/projects-list.js:98
+#: src/ansible/ansible-jobs-list.js:74
+#: src/experts/requests/expert-request-customer-list.js:89
+#: src/experts/requests/expert-request-project-list.js:79
+#: src/offering/offerings-list.js:55
+#: src/project/projects-list.js:98
 msgid "Creation date"
 msgstr "Дата создания"
 
-#: app/scripts/components/digitalocean/droplet-resize.html:14
-#: app/scripts/components/openstack/openstack-volume/volume-extend.html:7
+#: src/digitalocean/droplet-resize.html:14
+#: src/openstack/openstack-volume/volume-extend.html:7
 msgid "Current size"
 msgstr "Текущий размер"
 
-#: app/scripts/components/payments/payment-list.js:43
-#: app/scripts/components/plans/plan-agreements-list.js:41
+#: src/payments/payment-list.js:43
+#: src/plans/plan-agreements-list.js:41
 msgid "Date"
 msgstr "Дата"
 
-#: app/scripts/components/user/user-popover-table.html:33
+#: src/user/user-popover-table.html:33
 msgid "Date joined"
 msgstr "Дата присоединения"
 
-#: app/scripts/components/cost-planning/cost-plan-items.html:46
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-floating-ips.html:39
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-networks.html:24
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:58
+#: src/cost-planning/cost-plan-items.html:46
+#: src/openstack/openstack-instance/openstack-instance-floating-ips.html:39
+#: src/openstack/openstack-instance/openstack-instance-networks.html:24
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
 msgstr "Удалить"
 
-#: app/scripts/components/ansible/ansible-job-summary.html:32
-#: app/scripts/components/azure/azure-virtual-machine-config.js:20
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:74
-#: app/scripts/components/experts/requests/expert-request-create.js:47
-#: app/scripts/components/experts/requests/expert-request-summary.html:24
-#: app/scripts/components/issues/issue-detail.html:89
-#: app/scripts/components/issues/issue-quick-create.html:39
-#: app/scripts/components/issues/issue-registration.html:110
-#: app/scripts/components/issues/issues-list.js:76
-#: app/scripts/components/issues/issues-short-list.html:28
-#: app/scripts/components/offering/appstore-offering.js:48
-#: app/scripts/components/offering/offering-summary.html:65
-#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:37
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:43
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:143
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:47
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:30
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-config.js:25
-#: app/scripts/components/openstack/openstack-volume/snapshot-create.html:20
-#: app/scripts/components/premiumSupport/premium-support-contracts/contract-details-dialog.html:17
-#: app/scripts/components/project/project-details.html:25
-#: app/scripts/components/project/projects-list.js:91
-#: app/scripts/components/resource-import/import-virtual-clouds-list.js:53
-#: app/scripts/components/resource/actions/constants.js:26
-#: app/scripts/components/resource/summary/resource-summary-base.html:31
-#: app/scripts/components/slurm/slurm-allocation-config.js:18
-#: app/scripts/components/slurm/slurm-allocation-list.js:29
-#: app/scripts/components/user/user-edit.html:93
+#: src/ansible/ansible-job-summary.html:32
+#: src/azure/azure-virtual-machine-config.js:20
+#: src/experts/bids/expert-bid-create-dialog.html:74
+#: src/experts/requests/expert-request-create.js:47
+#: src/experts/requests/expert-request-summary.html:24
+#: src/issues/issue-detail.html:89
+#: src/issues/issue-quick-create.html:39
+#: src/issues/issue-registration.html:110
+#: src/issues/issues-list.js:76
+#: src/issues/issues-short-list.html:28
+#: src/offering/appstore-offering.js:48
+#: src/offering/offering-summary.html:65
+#: src/openstack/openstack-backup/backup-snapshots-list.js:37
+#: src/openstack/openstack-backup/openstack-backups-list.js:43
+#: src/openstack/openstack-instance/openstack-instance-config.js:143
+#: src/openstack/openstack-tenant/openstack-tenant-config.js:47
+#: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:30
+#: src/openstack/openstack-volume/openstack-volume-config.js:25
+#: src/openstack/openstack-volume/snapshot-create.html:20
+#: src/premiumSupport/premium-support-contracts/contract-details-dialog.html:17
+#: src/project/project-details.html:25
+#: src/project/projects-list.js:91
+#: src/resource-import/import-virtual-clouds-list.js:53
+#: src/resource/actions/constants.js:26
+#: src/resource/summary/resource-summary-base.html:31
+#: src/slurm/slurm-allocation-config.js:18
+#: src/slurm/slurm-allocation-list.js:29
+#: src/user/user-edit.html:93
 msgid "Description"
 msgstr "Описание"
 
-#: app/scripts/components/appstore/appstore-providers.html:40
-#: app/scripts/components/cost-planning/cost-plans-list.js:54
-#: app/scripts/components/events/base-event-list.js:43
-#: app/scripts/components/issues/issue-registration.html:32
-#: app/scripts/components/issues/issue-registration.html:69
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
-#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
-#: app/scripts/components/project/project-details-button.html:4
-#: app/scripts/components/project/projects-list.js:175
-#: app/scripts/components/providers/details/dialog.html:10
-#: app/scripts/components/providers/provider-list.js:92
-#: app/scripts/components/team/customer-users-list.js:123
-#: app/scripts/components/team/project-users-list.js:87
-#: app/scripts/components/user/user-sidebar.html:12
+#: src/appstore/appstore-providers.html:40
+#: src/cost-planning/cost-plans-list.js:54
+#: src/events/base-event-list.js:43
+#: src/issues/issue-registration.html:32
+#: src/issues/issue-registration.html:69
+#: src/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
+#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
+#: src/project/project-details-button.html:4
+#: src/project/projects-list.js:175
+#: src/providers/details/dialog.html:10
+#: src/providers/provider-list.js:92
+#: src/team/customer-users-list.js:123
+#: src/team/project-users-list.js:87
+#: src/user/user-sidebar.html:12
 msgid "Details"
 msgstr "Детали"
 
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-summary.html:33
+#: src/openstack/openstack-volume/openstack-volume-summary.html:33
 msgid "Device"
 msgstr "Устройство"
 
-#: app/scripts/components/auth/auth-login.html:109
+#: src/auth/auth-login.html:109
 msgid "Do not have an account?"
 msgstr "У вас ещё нет аккаунта?"
 
-#: app/scripts/components/navigation/header/docs-link.html:3
+#: src/navigation/header/docs-link.html:3
 msgid "Documentation"
 msgstr "Документация"
 
-#: app/scripts/components/billing/invoice-header.html:30
-#: app/scripts/components/paypal/paypal-invoice-actions.html:15
+#: src/billing/invoice-header.html:30
+#: src/paypal/paypal-invoice-actions.html:15
 msgid "Download invoice"
 msgstr "Скачать счёт"
 
-#: app/scripts/components/billing/invoice-details.html:21
-#: app/scripts/components/billing/invoices-list.js:74
-#: app/scripts/components/paypal/paypal-invoices-list.js:78
+#: src/billing/invoice-details.html:21
+#: src/billing/invoices-list.js:74
+#: src/paypal/paypal-invoices-list.js:78
 msgid "Due date"
 msgstr "Срок"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/module.js:30
-#: app/scripts/components/openstack/openstack-snapshot-schedule/module.js:28
-#: app/scripts/components/resource/actions/constants.js:13
-#: app/scripts/components/team/customer-users-list.js:129
-#: app/scripts/components/team/project-users-list.js:95
-#: app/scripts/components/user/hooks/hook-list.js:69
+#: src/openstack/openstack-backup-schedule/module.js:30
+#: src/openstack/openstack-snapshot-schedule/module.js:28
+#: src/resource/actions/constants.js:13
+#: src/team/customer-users-list.js:129
+#: src/team/project-users-list.js:95
+#: src/user/hooks/hook-list.js:69
 msgid "Edit"
 msgstr "Изменить"
 
-#: app/scripts/components/team/add-project-member.js:56
+#: src/team/add-project-member.js:56
 msgid "Edit project member"
 msgstr "Изменить участника проекта"
 
-#: app/scripts/components/team/add-team-member.js:34
+#: src/team/add-team-member.js:34
 msgid "Edit team member"
 msgstr "Изменить участника команды"
 
-#: app/scripts/components/user/hooks/hook-details.html:37
+#: src/user/hooks/hook-details.html:37
 msgid "Enabled"
 msgstr "Включен"
 
-#: app/scripts/components/billing/billing-record-details.html:56
+#: src/billing/billing-record-details.html:56
 msgid "End time"
 msgstr "Время окончания"
 
-#: app/scripts/components/configs/base-config.js:203
+#: src/configs/base-config.js:203
 msgid "English"
 msgstr "Английский"
 
-#: app/scripts/components/events/event-details-dialog.html:51
-#: app/scripts/components/resource/summary/resource-summary-base.html:12
+#: src/events/event-details-dialog.html:51
+#: src/resource/summary/resource-summary-base.html:12
 msgid "Error message"
 msgstr "Сообщение об ошибке"
 
-#: app/scripts/components/configs/base-config.js:207
+#: src/configs/base-config.js:207
 msgid "Estonian"
 msgstr "Эстонский"
 
-#: app/scripts/components/dashboard/project-events-feed.js:12
-#: app/scripts/components/help/constants.js:10
-#: app/scripts/components/user/hooks/hook-list.js:53
+#: src/dashboard/project-events-feed.js:12
+#: src/help/constants.js:10
+#: src/user/hooks/hook-list.js:53
 msgid "Events"
 msgstr "События"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:28
+#: src/openstack/openstack-backup-schedule/filters.js:28
 msgid "Every day"
 msgstr "Каждый день"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:26
+#: src/openstack/openstack-backup-schedule/filters.js:26
 msgid "Every day at"
 msgstr "Каждый день в"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:21
+#: src/openstack/openstack-backup-schedule/filters.js:21
 msgid "Every hour"
 msgstr "Каждый час"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:14
+#: src/openstack/openstack-backup-schedule/filters.js:14
 msgid "Every minute"
 msgstr "Каждую минуту"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:44
+#: src/openstack/openstack-backup-schedule/filters.js:44
 msgid "Every month"
 msgstr "Каждый месяц"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:41
+#: src/openstack/openstack-backup-schedule/filters.js:41
 msgid "Every month on the {days} at {time}"
 msgstr "Каждый месяц {days} в {time}"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:36
+#: src/openstack/openstack-backup-schedule/filters.js:36
 msgid "Every week"
 msgstr "Каждую неделю"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:33
+#: src/openstack/openstack-backup-schedule/filters.js:33
 msgid "Every week on {day} at {time}"
 msgstr "Каждую неделю {days} в {time}"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/filters.js:52
+#: src/openstack/openstack-backup-schedule/filters.js:52
 msgid "Every year"
 msgstr "Каждый год"
 
-#: app/scripts/components/quotas/quota-usage-bar-chart.js:26
+#: src/quotas/quota-usage-bar-chart.js:26
 msgid "Existing quota usage: {usage}"
 msgstr "Использование текущей квоты:"
 
-#: app/scripts/components/experts/extensions/user-organizations.js:4
+#: src/experts/extensions/user-organizations.js:4
 msgid "Expert"
 msgstr "Эксперт"
 
-#: app/scripts/components/experts/constants.js:1
-#: app/scripts/components/experts/expert-provider-details.html:2
-#: app/scripts/components/experts/extensions/sidebar.js:28
-#: app/scripts/components/experts/extensions/sidebar.js:8
-#: app/scripts/components/experts/requests/expert-request-header.html:15
-#: app/scripts/components/experts/routes.js:19
-#: app/scripts/components/experts/routes.js:28
-#: app/scripts/components/experts/routes.js:38
+#: src/experts/constants.js:1
+#: src/experts/expert-provider-details.html:2
+#: src/experts/extensions/sidebar.js:28
+#: src/experts/extensions/sidebar.js:8
+#: src/experts/requests/expert-request-header.html:15
+#: src/experts/routes.js:19
+#: src/experts/routes.js:28
+#: src/experts/routes.js:38
 msgid "Experts"
 msgstr "Эксперты"
 
-#: app/scripts/components/table/responsive-table.js:171
+#: src/table/responsive-table.js:171
 msgid "Export as"
 msgstr "Экспортировать как"
 
-#: app/scripts/components/resource/list/resource-vms-list.js:43
-#: app/scripts/components/resource/summary/virtual-machine-summary.html:42
+#: src/resource/list/resource-vms-list.js:43
+#: src/resource/summary/virtual-machine-summary.html:42
 msgid "External IP"
 msgstr "Внешний IP"
 
-#: app/scripts/components/issues/issue-registration.html:150
-#: app/scripts/components/issues/issue-registration.html:36
-#: app/scripts/components/issues/issue-registration.html:73
+#: src/issues/issue-registration.html:150
+#: src/issues/issue-registration.html:36
+#: src/issues/issue-registration.html:73
 msgid "Filter"
 msgstr "Фильтр"
 
-#: app/scripts/components/form/appstore-form-wizard.html:74
+#: src/form/appstore-form-wizard.html:74
 msgid "Finish"
 msgstr "Закончить"
 
-#: app/scripts/components/billing/billing-record-details.html:18
+#: src/billing/billing-record-details.html:18
 msgid "For"
 msgstr "Для"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:134
+#: src/navigation/select-workspace-dialog.html:134
 msgid "Go to my profile"
 msgstr "К моему профилю"
 
-#: app/scripts/components/resource/tabs/constants.js:17
+#: src/resource/tabs/constants.js:17
 msgid "Graphs"
 msgstr "Графики"
 
-#: app/scripts/components/help/routes.js:9
-#: app/scripts/components/navigation/app-footer.html:17
+#: src/help/routes.js:9
+#: src/navigation/app-footer.html:17
 msgid "Help"
 msgstr "Помощь"
 
@@ -889,540 +889,540 @@ msgstr "Помощь"
 msgid "Help topics"
 msgstr "Вызов справки"
 
-#: app/scripts/components/experts/expert-provider-details.html:17
-#: app/scripts/components/form/appstore-field-tos.html:8
-#: app/scripts/components/freeipa/freeipa-account-create.html:51
-#: app/scripts/components/user/user-edit.html:157
+#: src/experts/expert-provider-details.html:17
+#: src/form/appstore-field-tos.html:8
+#: src/freeipa/freeipa-account-create.html:51
+#: src/user/user-edit.html:157
 msgid "I accept the"
 msgstr "Я принимаю"
 
-#: app/scripts/components/issues/request-service-button.html:7
+#: src/issues/request-service-button.html:7
 msgid "I want another service"
 msgstr "Я хочу другую услугу"
 
-#: app/scripts/components/resource-import/resource-import-dialog.html:39
-#: app/scripts/components/resource-import/utils.js:46
+#: src/resource-import/resource-import-dialog.html:39
+#: src/resource-import/utils.js:46
 msgid "Import"
 msgstr "Импорт ресурсов"
 
-#: app/scripts/components/resource-import/resource-import-dialog.html:2
+#: src/resource-import/resource-import-dialog.html:2
 msgid "Import resource"
 msgstr "Ресурс для импорта"
 
-#: app/scripts/components/customer/customer-report-error.html:2
-#: app/scripts/components/customer/customer-report-error.js:21
+#: src/customer/customer-report-error.html:2
+#: src/customer/customer-report-error.js:21
 msgid "Incorrect organization details"
 msgstr "Неверные данные организации"
 
-#: app/scripts/components/resource/list/resource-vms-list.js:33
-#: app/scripts/components/resource/summary/virtual-machine-summary.html:30
+#: src/resource/list/resource-vms-list.js:33
+#: src/resource/summary/virtual-machine-summary.html:30
 msgid "Internal IP"
 msgstr "Внутренний IP"
 
-#: app/scripts/components/invitations/invitation-confirm-dialog.html:2
+#: src/invitations/invitation-confirm-dialog.html:2
 msgid "Invitation check"
 msgstr "Проверка приглашения"
 
-#: app/scripts/components/invitations/utils.js:45
+#: src/invitations/utils.js:45
 msgid "Invitation could not be accepted"
 msgstr "Приглашение не может быть принято"
 
-#: app/scripts/components/invitations/actions/cancel.js:13
+#: src/invitations/actions/cancel.js:13
 msgid "Invitation has been canceled."
 msgstr "Приглашение отменено."
 
-#: app/scripts/components/invitations/actions/invitation-dialog-service.js:52
+#: src/invitations/actions/invitation-dialog-service.js:52
 msgid "Invitation has been created."
 msgstr "Приглашение создано."
 
-#: app/scripts/components/invitations/actions/send.js:13
+#: src/invitations/actions/send.js:13
 msgid "Invitation has been sent again."
 msgstr "Приглашение отправлено повторно."
 
-#: app/scripts/components/invitations/utils.js:100
+#: src/invitations/utils.js:100
 msgid "Invitation is not found."
 msgstr "Приглашение не найдено."
 
-#: app/scripts/components/invitations/utils.js:66
+#: src/invitations/utils.js:66
 msgid "Invitation is not valid anymore."
 msgstr "Приглашение больше не действительно."
 
-#: app/scripts/components/invitations/utils.js:103
+#: src/invitations/utils.js:103
 msgid "Invitation is not valid."
 msgstr "Приглашение не действительно."
 
-#: app/scripts/components/customer/customer-team.html:10
+#: src/customer/customer-team.html:10
 msgid "Invitations"
 msgstr "Приглашения"
 
-#: app/scripts/components/intro/expert-manager-intro.js:119
+#: src/intro/expert-manager-intro.js:119
 msgid "Invite new users."
 msgstr "Пригласить новых пользователей."
 
-#: app/scripts/components/invitations/actions/create.js:8
-#: app/scripts/components/invitations/actions/invitation-dialog.html:2
-#: app/scripts/components/invitations/actions/invitation-dialog.html:73
+#: src/invitations/actions/create.js:8
+#: src/invitations/actions/invitation-dialog.html:2
+#: src/invitations/actions/invitation-dialog.html:73
 msgid "Invite user"
 msgstr "Пригласить пользователя"
 
-#: app/scripts/components/billing/invoice-header.html:3
+#: src/billing/invoice-header.html:3
 msgid "Invoice"
 msgstr "Счёт"
 
-#: app/scripts/components/billing/invoice-details.html:19
-#: app/scripts/components/billing/invoices-list.js:69
-#: app/scripts/components/paypal/paypal-invoices-list.js:73
+#: src/billing/invoice-details.html:19
+#: src/billing/invoices-list.js:69
+#: src/paypal/paypal-invoices-list.js:73
 msgid "Invoice date"
 msgstr "Дата счёта"
 
-#: app/scripts/components/events/constants.js:12
+#: src/events/constants.js:12
 msgid ""
 "Invoice for organization {customer_name} for the period of {invoice_date} "
 "has been created."
 msgstr "Счёт дла организации {customer_name} за период {invoice_date} создан."
 
-#: app/scripts/components/events/constants.js:13
+#: src/events/constants.js:13
 msgid ""
 "Invoice for organization {customer_name} for the period of {invoice_date} "
 "has been deleted."
 msgstr "Счёт дла организации {customer_name} за период {invoice_date} удалён."
 
-#: app/scripts/components/events/constants.js:14
+#: src/events/constants.js:14
 msgid ""
 "Invoice for organization {customer_name} for the period of {invoice_date} "
 "has been updated."
 msgstr ""
 "Счёт дла организации {customer_name} за период {invoice_date} обновлён."
 
-#: app/scripts/components/billing/invoice-details.html:14
+#: src/billing/invoice-details.html:14
 msgid "Invoice No."
 msgstr "Счёт №"
 
-#: app/scripts/components/billing/invoices-list.js:41
-#: app/scripts/components/paypal/paypal-invoices-list.js:42
+#: src/billing/invoices-list.js:41
+#: src/paypal/paypal-invoices-list.js:42
 msgid "Invoice number"
 msgstr "Номер счёта"
 
-#: app/scripts/components/billing/billing-tabs.html:16
-#: app/scripts/components/billing/billing-tabs.html:4
+#: src/billing/billing-tabs.html:16
+#: src/billing/billing-tabs.html:4
 msgid "Invoices"
 msgstr "Счета"
 
-#: app/scripts/components/billing/invoice-header.html:9
+#: src/billing/invoice-header.html:9
 msgid "Invoices list"
 msgstr "Список счетов"
 
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rule-editor.html:11
-#: app/scripts/components/openstack/openstack-security-groups/security-group-rules-list.html:5
-#: app/scripts/components/openstack/openstack-security-groups/security-groups-dialog.html:14
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html:11
+#: src/openstack/openstack-security-groups/security-group-rules-list.html:5
+#: src/openstack/openstack-security-groups/security-groups-dialog.html:14
 msgid "IP protocol"
 msgstr "IP протокол"
 
-#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:60
+#: src/openstack/openstack-subnet/openstack-subnet-summary.html:60
 msgid "IP version"
 msgstr "IP версия"
 
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-internal-ips-list.js:44
+#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js:44
 msgid "IPv4 address"
 msgstr "IPv4 адрес"
 
-#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
-#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:48
-#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedule-summary.html:25
-#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:48
+#: src/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
+#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:48
+#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedule-summary.html:25
+#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:48
 msgid "Is active"
 msgstr "Активен"
 
-#: app/scripts/components/digitalocean/digitalocean-droplet-config.js:39
+#: src/digitalocean/digitalocean-droplet-config.js:39
 msgid "Is official"
 msgstr "Официален"
 
-#: app/scripts/components/customer/customer-workspace.js:105
-#: app/scripts/components/customer/routes.js:81
-#: app/scripts/components/project/project-workspace.js:91
-#: app/scripts/components/project/routes.js:93
-#: app/scripts/components/resource/tabs/constants.js:7
+#: src/customer/customer-workspace.js:105
+#: src/customer/routes.js:81
+#: src/project/project-workspace.js:91
+#: src/project/routes.js:93
+#: src/resource/tabs/constants.js:7
 msgid "Issues"
 msgstr "Проблемы"
 
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:47
+#: src/openstack/openstack-backup/openstack-backups-list.js:47
 msgid "Keep until"
 msgstr "Сохранить до"
 
-#: app/scripts/components/openstack/openstack-backup/actions.js:15
-#: app/scripts/components/openstack/openstack-snapshot/module.js:38
-#: app/scripts/components/openstack/openstack-volume/module.js:67
+#: src/openstack/openstack-backup/actions.js:15
+#: src/openstack/openstack-snapshot/module.js:38
+#: src/openstack/openstack-volume/module.js:67
 msgid "Kept until"
 msgstr "Сохранён до"
 
-#: app/scripts/components/issues/constants.js:103
-#: app/scripts/components/issues/issues-list.js:44
-#: app/scripts/components/issues/issues-short-list.html:27
-#: app/scripts/components/providers/details/provider-price-list.js:41
+#: src/issues/constants.js:103
+#: src/issues/issues-list.js:44
+#: src/issues/issues-short-list.html:27
+#: src/providers/details/provider-price-list.js:41
 msgid "Key"
 msgstr "Ключ"
 
-#: app/scripts/components/configs/base-config.js:211
+#: src/configs/base-config.js:211
 msgid "Latvian"
 msgstr "Латышский"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:66
+#: src/openstack/openstack-tenant/openstack-tenant-config.js:66
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr ""
 "Оставьте пустым, если желаете, чтобы пароль администратора был сгенерирован "
 "автоматически."
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-config.js:58
+#: src/openstack/openstack-tenant/openstack-tenant-config.js:58
 msgid "Leave blank if you want admin username to be auto-generated."
 msgstr ""
 "Оставьте пустым, если желаете, чтобы имя пользователя администратора было "
 "сгенерировано автоматически."
 
-#: app/scripts/components/customer/customer-popover.html:24
+#: src/customer/customer-popover.html:24
 msgid "Legal address"
 msgstr "Юридический адрес"
 
-#: app/scripts/components/issues/issue-detail.html:70
+#: src/issues/issue-detail.html:70
 msgid "Link"
 msgstr "Ссылка"
 
-#: app/scripts/components/project/project-providers-service.js:80
-#: app/scripts/components/providers/details/provider-projects.js:92
+#: src/project/project-providers-service.js:80
+#: src/providers/details/provider-projects.js:92
 msgid "Link created"
 msgstr "Ссылка создана"
 
-#: app/scripts/components/project/project-providers-service.js:97
-#: app/scripts/components/providers/details/provider-projects.js:111
+#: src/project/project-providers-service.js:97
+#: src/providers/details/provider-projects.js:111
 msgid "Link removed"
 msgstr "Ссылка удалена"
 
-#: app/scripts/components/configs/base-config.js:215
+#: src/configs/base-config.js:215
 msgid "Lithuanian"
 msgstr "Литовский"
 
-#: app/scripts/components/table/responsive-table.js:102
+#: src/table/responsive-table.js:102
 msgid "Loading..."
 msgstr "Загружается..."
 
-#: app/scripts/components/navigation/header/logout-link.html:4
-#: app/scripts/components/navigation/site-header.html:18
-#: app/scripts/components/user/user-sidebar.html:24
+#: src/navigation/header/logout-link.html:4
+#: src/navigation/site-header.html:18
+#: src/user/user-sidebar.html:24
 msgid "Log out"
 msgstr "Выход"
 
-#: app/scripts/components/auth/auth-login.html:117
-#: app/scripts/components/auth/auth-login.html:42
-#: app/scripts/components/auth/saml2/auth-saml2-dialog.html:34
+#: src/auth/auth-login.html:117
+#: src/auth/auth-login.html:42
+#: src/auth/saml2/auth-saml2-dialog.html:34
 msgid "Login"
 msgstr "Вход"
 
-#: app/scripts/components/auth/callbacks/auth-login-failed.html:3
+#: src/auth/callbacks/auth-login-failed.html:3
 msgid "Login failed"
 msgstr "Вход не удался"
 
-#: app/scripts/components/auth/callbacks/auth-logout-failed.html:3
+#: src/auth/callbacks/auth-logout-failed.html:3
 msgid "Logout failed"
 msgstr "Выход не удался"
 
-#: app/scripts/components/customer/customer-users-details-list.js:30
-#: app/scripts/components/team/customer-users-list.js:67
-#: app/scripts/components/team/project-users-list.js:52
+#: src/customer/customer-users-details-list.js:30
+#: src/team/customer-users-list.js:67
+#: src/team/project-users-list.js:52
 msgid "Member"
 msgstr "Участник"
 
-#: app/scripts/components/alerts/base-alerts-list.js:19
-#: app/scripts/components/events/base-event-list.js:18
-#: app/scripts/components/events/event-details-dialog.html:114
+#: src/alerts/base-alerts-list.js:19
+#: src/events/base-event-list.js:18
+#: src/events/event-details-dialog.html:114
 msgid "Message"
 msgstr "Сообщение"
 
-#: app/scripts/components/user/hooks/hook-list.js:37
+#: src/user/hooks/hook-list.js:37
 msgid "Method"
 msgstr "Метод"
 
-#: app/scripts/components/billing/invoice-events-dialog.html:33
+#: src/billing/invoice-events-dialog.html:33
 msgid "More info"
 msgstr "Больше информации"
 
-#: app/scripts/components/ansible/ansible-jobs-list.js:49
-#: app/scripts/components/appstore/appstore-compare-list.js:69
-#: app/scripts/components/cost-planning/cost-plan-dialog.html:13
-#: app/scripts/components/cost-planning/cost-plans-list.js:31
-#: app/scripts/components/customer/customer-create-config.js:11
-#: app/scripts/components/customer/customer-manage.html:10
-#: app/scripts/components/digitalocean/digitalocean-droplet-config.js:76
-#: app/scripts/components/experts/requests/expert-request-create.js:40
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:53
-#: app/scripts/components/experts/requests/expert-request-project-list.js:53
-#: app/scripts/components/offering/appstore-offering.js:41
-#: app/scripts/components/offering/offering-summary.html:11
-#: app/scripts/components/offering/offerings-list.js:35
-#: app/scripts/components/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34
-#: app/scripts/components/openstack/openstack-backup/backup-snapshots-list.js:32
-#: app/scripts/components/openstack/openstack-backup/openstack-backups-list.js:38
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:90
-#: app/scripts/components/openstack/openstack-network/openstack-tenant-networks.js:36
-#: app/scripts/components/openstack/openstack-security-groups/security-groups-list.js:35
-#: app/scripts/components/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
-#: app/scripts/components/openstack/openstack-snapshot/import/import-snapshots-list.js:46
-#: app/scripts/components/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:30
-#: app/scripts/components/openstack/openstack-subnet/openstack-subnets-list.js:28
-#: app/scripts/components/openstack/openstack-volume/import/import-volumes-list.js:46
-#: app/scripts/components/openstack/openstack-volume/openstack-instance-volumes.js:41
-#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:31
-#: app/scripts/components/project/projects-list.js:82
-#: app/scripts/components/providers/details/provider-details.html:4
-#: app/scripts/components/providers/details/provider-settings.js:44
-#: app/scripts/components/providers/provider-list.js:55
-#: app/scripts/components/resource-import/import-virtual-clouds-list.js:48
-#: app/scripts/components/resource-import/import-virtual-machines-list.js:48
-#: app/scripts/components/resource/actions/constants.js:20
-#: app/scripts/components/resource/list/resources-list.js:42
-#: app/scripts/components/slurm/slurm-allocation-list.js:24
+#: src/ansible/ansible-jobs-list.js:49
+#: src/appstore/appstore-compare-list.js:69
+#: src/cost-planning/cost-plan-dialog.html:13
+#: src/cost-planning/cost-plans-list.js:31
+#: src/customer/customer-create-config.js:11
+#: src/customer/customer-manage.html:10
+#: src/digitalocean/digitalocean-droplet-config.js:76
+#: src/experts/requests/expert-request-create.js:40
+#: src/experts/requests/expert-request-customer-list.js:53
+#: src/experts/requests/expert-request-project-list.js:53
+#: src/offering/appstore-offering.js:41
+#: src/offering/offering-summary.html:11
+#: src/offering/offerings-list.js:35
+#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34
+#: src/openstack/openstack-backup/backup-snapshots-list.js:32
+#: src/openstack/openstack-backup/openstack-backups-list.js:38
+#: src/openstack/openstack-instance/openstack-instance-config.js:90
+#: src/openstack/openstack-network/openstack-tenant-networks.js:36
+#: src/openstack/openstack-security-groups/security-groups-list.js:35
+#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
+#: src/openstack/openstack-snapshot/import/import-snapshots-list.js:46
+#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:30
+#: src/openstack/openstack-subnet/openstack-subnets-list.js:28
+#: src/openstack/openstack-volume/import/import-volumes-list.js:46
+#: src/openstack/openstack-volume/openstack-instance-volumes.js:41
+#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:31
+#: src/project/projects-list.js:82
+#: src/providers/details/provider-details.html:4
+#: src/providers/details/provider-settings.js:44
+#: src/providers/provider-list.js:55
+#: src/resource-import/import-virtual-clouds-list.js:48
+#: src/resource-import/import-virtual-machines-list.js:48
+#: src/resource/actions/constants.js:20
+#: src/resource/list/resources-list.js:42
+#: src/slurm/slurm-allocation-list.js:24
 msgid "Name"
 msgstr "Имя"
 
-#: app/scripts/components/openstack/openstack-subnet/openstack-subnet-summary.html:19
+#: src/openstack/openstack-subnet/openstack-subnet-summary.html:19
 msgid "Network"
 msgstr "Сеть"
 
-#: app/scripts/components/openstack/openstack-network/module.js:30
+#: src/openstack/openstack-network/module.js:30
 msgid "Network has been updated."
 msgstr "Сеть обновлена."
 
-#: app/scripts/components/openstack/openstack-backup/actions.js:41
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-config.js:122
-#: app/scripts/components/openstack/openstack-network/breadcrumbs.js:22
-#: app/scripts/components/openstack/openstack-subnet/breadcrumbs.js:23
+#: src/openstack/openstack-backup/actions.js:41
+#: src/openstack/openstack-instance/openstack-instance-config.js:122
+#: src/openstack/openstack-network/breadcrumbs.js:22
+#: src/openstack/openstack-subnet/breadcrumbs.js:23
 msgid "Networks"
 msgstr "Сети"
 
-#: app/scripts/components/cost-planning/cost-plan-dialog.js:42
+#: src/cost-planning/cost-plan-dialog.js:42
 msgid "New plan"
 msgstr "Новый план"
 
-#: app/scripts/components/digitalocean/droplet-resize.html:20
-#: app/scripts/components/openstack/openstack-volume/volume-extend.html:10
+#: src/digitalocean/droplet-resize.html:20
+#: src/openstack/openstack-volume/volume-extend.html:10
 msgid "New size"
 msgstr "Новый размер"
 
-#: app/scripts/components/form/appstore-form-wizard.html:68
-#: app/scripts/components/table/responsive-table.js:108
+#: src/form/appstore-form-wizard.html:68
+#: src/table/responsive-table.js:108
 msgid "Next"
 msgstr "Дальше"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:24
-#: app/scripts/components/resource/resource-utils-service.js:5
+#: src/openstack/openstack-tenant/openstack-tenant-summary.html:24
+#: src/resource/resource-utils-service.js:5
 msgid "No access info"
 msgstr "Данных доступа нет"
 
-#: app/scripts/components/events/base-event-list.js:12
+#: src/events/base-event-list.js:12
 msgid "No events yet"
 msgstr "Событий пока нет"
 
-#: app/scripts/components/dashboard/project-events-feed.js:14
+#: src/dashboard/project-events-feed.js:14
 msgid "No events yet."
 msgstr "Событий пока нет."
 
-#: app/scripts/components/user/user-organizations.js:49
+#: src/user/user-organizations.js:49
 msgid "No organizations yet"
 msgstr "Организаций пока нет"
 
-#: app/scripts/components/payments/payment-list.js:23
+#: src/payments/payment-list.js:23
 msgid "No payments yet"
 msgstr "Платежей пока нет"
 
-#: app/scripts/components/providers/provider-list.js:44
+#: src/providers/provider-list.js:44
 msgid "No providers yet."
 msgstr "Провайдеров пока нет"
 
-#: app/scripts/components/providers/details/provider-project-link-quota.html:3
+#: src/providers/details/provider-project-link-quota.html:3
 msgid "No quota set"
 msgstr "Квота не установлена"
 
-#: app/scripts/components/customer/customer-create-prompt.html:9
+#: src/customer/customer-create-prompt.html:9
 msgid "No, I will do it later"
 msgstr "Нет, я сделаю это позже"
 
-#: app/scripts/components/user/constants.js:18
-#: app/scripts/components/user/routes.js:29
+#: src/user/constants.js:18
+#: src/user/routes.js:29
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: app/scripts/components/alerts/alert-filter.html:1
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:22
-#: app/scripts/components/resource/resource-utils-service.js:12
+#: src/alerts/alert-filter.html:1
+#: src/openstack/openstack-tenant/openstack-tenant-summary.html:22
+#: src/resource/resource-utils-service.js:12
 msgid "Open"
 msgstr "Открыть"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:36
+#: src/navigation/select-workspace-dialog.html:36
 msgid "organization"
 msgstr "организация"
 
-#: app/scripts/components/events/event-details-dialog.html:59
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:66
-#: app/scripts/components/issues/constants.js:94
-#: app/scripts/components/issues/issue-create-dialog.html:12
-#: app/scripts/components/issues/issue-create-dialog.html:22
-#: app/scripts/components/issues/issue-create-dialog.html:7
-#: app/scripts/components/issues/issue-detail.html:30
-#: app/scripts/components/issues/issue-quick-create.html:56
-#: app/scripts/components/issues/issue-registration.html:43
-#: app/scripts/components/issues/issues-list.js:93
-#: app/scripts/components/user/user-projects.js:53
+#: src/events/event-details-dialog.html:59
+#: src/experts/requests/expert-request-customer-list.js:66
+#: src/issues/constants.js:94
+#: src/issues/issue-create-dialog.html:12
+#: src/issues/issue-create-dialog.html:22
+#: src/issues/issue-create-dialog.html:7
+#: src/issues/issue-detail.html:30
+#: src/issues/issue-quick-create.html:56
+#: src/issues/issue-registration.html:43
+#: src/issues/issues-list.js:93
+#: src/user/user-projects.js:53
 msgid "Organization"
 msgstr "Организация"
 
-#: app/scripts/components/alerts/constants.js:4
+#: src/alerts/constants.js:4
 msgid "Organization {customer_name} does not have any projects."
 msgstr "У организации {customer_name} нет ни одного проекта."
 
-#: app/scripts/components/alerts/constants.js:3
+#: src/alerts/constants.js:3
 msgid "Organization {customer_name} does not have any resources."
 msgstr "У организации {customer_name} нет ресурсов."
 
-#: app/scripts/components/events/constants.js:9
+#: src/events/constants.js:9
 msgid "Organization {customer_name} has been created."
 msgstr "Организация {customer_name} создана."
 
-#: app/scripts/components/events/constants.js:10
+#: src/events/constants.js:10
 msgid "Organization {customer_name} has been deleted."
 msgstr "Организация {customer_name} удалена."
 
-#: app/scripts/components/events/constants.js:11
+#: src/events/constants.js:11
 msgid "Organization {customer_name} has been updated."
 msgstr "Организация {customer_name} изменена."
 
-#: app/scripts/components/alerts/constants.js:2
+#: src/alerts/constants.js:2
 msgid "Organization {customer_name} has no providers."
 msgstr "У организации {customer_name} нет провайдера."
 
-#: app/scripts/components/analytics/cost-analysis.html:69
-#: app/scripts/components/issues/constants.js:47
-#: app/scripts/components/user/user-edit.html:71
-#: app/scripts/components/user/user-organizations.js:54
+#: src/analytics/cost-analysis.html:69
+#: src/issues/constants.js:47
+#: src/user/user-edit.html:71
+#: src/user/user-organizations.js:54
 msgid "Organization name"
 msgstr "Название организации"
 
-#: app/scripts/components/configs/base-config.js:188
+#: src/configs/base-config.js:188
 msgid "Organization owner"
 msgstr "Владелец организации"
 
-#: app/scripts/components/customer/customer-popover.html:16
+#: src/customer/customer-popover.html:16
 msgid "Organization type"
 msgstr "Тип организации"
 
-#: app/scripts/components/navigation/select-workspace-dialog.html:39
+#: src/navigation/select-workspace-dialog.html:39
 msgid "Organizations"
 msgstr "Организации"
 
-#: app/scripts/components/team/customer-users-list.js:77
-#: app/scripts/components/user/user-organizations.js:62
+#: src/team/customer-users-list.js:77
+#: src/user/user-organizations.js:62
 msgid "Owner"
 msgstr "Владелец"
 
-#: app/scripts/components/error/routes.js:17
+#: src/error/routes.js:17
 msgid "Page not found"
 msgstr "Страница не найдена"
 
-#: app/scripts/components/error/error-404.html:3
+#: src/error/error-404.html:3
 msgid "Page Not Found :/"
 msgstr "Страница Не Найдена :/"
 
-#: app/scripts/components/billing/invoices-list.js:91
-#: app/scripts/components/paypal/paypal-invoices-list.js:105
+#: src/billing/invoices-list.js:91
+#: src/paypal/paypal-invoices-list.js:105
 msgid "Paid"
 msgstr "Оплачен"
 
-#: app/scripts/components/ansible/ansible-job-summary.html:47
+#: src/ansible/ansible-job-summary.html:47
 msgid "Parameters"
 msgstr "Параметры"
 
-#: app/scripts/components/auth/auth-login.html:36
-#: app/scripts/components/auth/auth-login.html:67
-#: app/scripts/components/azure/password-details.js:11
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-summary.html:41
+#: src/auth/auth-login.html:36
+#: src/auth/auth-login.html:67
+#: src/azure/password-details.js:11
+#: src/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
 msgstr "Пароль"
 
-#: app/scripts/components/events/constants.js:53
+#: src/events/constants.js:53
 msgid "Password has been changed for user {affected_user_full_name}."
 msgstr "Пароль для пользователя {affected_user_full_name} был изменён."
 
-#: app/scripts/components/paypal/paypal-invoice-actions.html:21
+#: src/paypal/paypal-invoice-actions.html:21
 msgid "Pay invoice"
 msgstr "Оплатить счёт"
 
-#: app/scripts/components/digitalocean/droplet-resize.html:56
+#: src/digitalocean/droplet-resize.html:56
 msgid "Permanent"
 msgstr "Постоянный"
 
-#: app/scripts/components/billing/billing-customer-details.html:5
-#: app/scripts/components/billing/billing-issuer-details.html:5
-#: app/scripts/components/customer/customer-manage.html:86
-#: app/scripts/components/customer/customer-popover.html:32
+#: src/billing/billing-customer-details.html:5
+#: src/billing/billing-issuer-details.html:5
+#: src/customer/customer-manage.html:86
+#: src/customer/customer-popover.html:32
 msgid "Phone"
 msgstr "Телефон"
 
-#: app/scripts/components/customer/customer-users-details-list.js:54
-#: app/scripts/components/user/user-edit.html:104
+#: src/customer/customer-users-details-list.js:54
+#: src/user/user-edit.html:104
 msgid "Phone number"
 msgstr "Номер телефона"
 
-#: app/scripts/components/user/user-popover-table.html:13
+#: src/user/user-popover-table.html:13
 msgid "Phone numbers"
 msgstr "Номера телефона"
 
-#: app/scripts/components/customer/customer-users-details-list.js:61
-#: app/scripts/components/user/user-popover-table.html:21
+#: src/customer/customer-users-details-list.js:61
+#: src/user/user-popover-table.html:21
 msgid "Preferred language"
 msgstr "Предпочитаемый язык"
 
-#: app/scripts/components/billing/invoices-list.js:54
-#: app/scripts/components/cost-planning/cost-plan-flavors.html:8
-#: app/scripts/components/experts/bids/expert-bid-create-dialog.html:57
-#: app/scripts/components/offering/offering-summary.html:34
-#: app/scripts/components/paypal/paypal-invoices-list.js:58
-#: app/scripts/components/plans/plan-agreements-list.js:48
+#: src/billing/invoices-list.js:54
+#: src/cost-planning/cost-plan-flavors.html:8
+#: src/experts/bids/expert-bid-create-dialog.html:57
+#: src/offering/offering-summary.html:34
+#: src/paypal/paypal-invoices-list.js:58
+#: src/plans/plan-agreements-list.js:48
 msgid "Price"
 msgstr "Цена"
 
-#: app/scripts/components/experts/bids/expert-bid.html:30
+#: src/experts/bids/expert-bid.html:30
 msgid "PRICE"
 msgstr "ЦЕНА"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-prices.html:30
+#: src/openstack/openstack-tenant/openstack-tenant-prices.html:30
 msgid "Price for 1 GB of RAM per day"
 msgstr "Цена за 1 GB RAM в день"
 
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:11
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:48
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:36
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:31
+#: src/cost-planning/cost-plan-optimizer.html:11
+#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:48
+#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:36
+#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:31
 msgid "Price per day"
 msgstr "Цена в день"
 
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:15
-#: app/scripts/components/offering/appstore-offering-summary.html:16
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:55
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:43
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:38
+#: src/cost-planning/cost-plan-optimizer.html:15
+#: src/offering/appstore-offering-summary.html:16
+#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:55
+#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:43
+#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:38
 msgid "Price per month"
 msgstr "Цена в месяц"
 
-#: app/scripts/components/appstore/dialog/appstore-category-selector.html:29
+#: src/appstore/dialog/appstore-category-selector.html:29
 msgid "Price per month (VAT not included)"
 msgstr "Цена в месяц (НДС не включен)"
 
-#: app/scripts/components/appstore/appstore-compare-list.js:97
+#: src/appstore/appstore-compare-list.js:97
 msgid "Price/hour"
 msgstr "Цена/час"
 
-#: app/scripts/components/providers/details/dialog.html:34
+#: src/providers/details/dialog.html:34
 msgid "Prices"
 msgstr "Цены"
 
-#: app/scripts/components/billing/invoice-header.html:22
+#: src/billing/invoice-header.html:22
 msgid "Print invoice"
 msgstr "Распечатать счёт"
 
@@ -1430,180 +1430,180 @@ msgstr "Распечатать счёт"
 msgid "Profile"
 msgstr "Профиль"
 
-#: app/scripts/components/user/user-manage.js:39
+#: src/user/user-manage.js:39
 msgid "Profile has been updated."
 msgstr "Профиль обновлён."
 
-#: app/scripts/components/analytics/cost-analysis.html:113
-#: app/scripts/components/events/event-details-dialog.html:69
-#: app/scripts/components/experts/requests/expert-request-customer-list.js:71
-#: app/scripts/components/invitations/actions/invitation-dialog.html:46
-#: app/scripts/components/issues/constants.js:97
-#: app/scripts/components/issues/issue-create-dialog.html:17
-#: app/scripts/components/issues/issue-create-dialog.html:27
-#: app/scripts/components/issues/issue-detail.html:40
-#: app/scripts/components/issues/issue-quick-create.html:75
-#: app/scripts/components/issues/issue-registration.html:127
-#: app/scripts/components/offering/appstore-offering-summary.html:25
-#: app/scripts/components/openstack/openstack-instance/openstack-instance-checkout-summary.html:65
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:52
-#: app/scripts/components/openstack/openstack-volume/openstack-volume-checkout-summary.html:48
-#: app/scripts/components/premiumSupport/premium-support-summary.html:35
+#: src/analytics/cost-analysis.html:113
+#: src/events/event-details-dialog.html:69
+#: src/experts/requests/expert-request-customer-list.js:71
+#: src/invitations/actions/invitation-dialog.html:46
+#: src/issues/constants.js:97
+#: src/issues/issue-create-dialog.html:17
+#: src/issues/issue-create-dialog.html:27
+#: src/issues/issue-detail.html:40
+#: src/issues/issue-quick-create.html:75
+#: src/issues/issue-registration.html:127
+#: src/offering/appstore-offering-summary.html:25
+#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:65
+#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:52
+#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:48
+#: src/premiumSupport/premium-support-summary.html:35
 msgid "Project"
 msgstr "Проект"
 
-#: app/scripts/components/project/project-dialog.html:2
+#: src/project/project-dialog.html:2
 msgid "Project details"
 msgstr "Детали проекта"
 
-#: app/scripts/components/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:60
+#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:60
 msgid "Project limits"
 msgstr "Лимиты проекта"
 
-#: app/scripts/components/analytics/cost-analysis.html:68
-#: app/scripts/components/issues/constants.js:55
-#: app/scripts/components/project/project-create.html:8
-#: app/scripts/components/project/project-details.html:9
-#: app/scripts/components/providers/details/provider-project-link-quotas.html:6
-#: app/scripts/components/team/add-team-member.html:46
-#: app/scripts/components/user/user-projects.js:45
+#: src/analytics/cost-analysis.html:68
+#: src/issues/constants.js:55
+#: src/project/project-create.html:8
+#: src/project/project-details.html:9
+#: src/providers/details/provider-project-link-quotas.html:6
+#: src/team/add-team-member.html:46
+#: src/user/user-projects.js:45
 msgid "Project name"
 msgstr "Название проекта"
 
-#: app/scripts/components/analytics/cost-analysis.html:27
-#: app/scripts/components/analytics/dashboard-cost-chart.html:12
-#: app/scripts/components/appstore/dialog/appstore-project-selector.html:2
-#: app/scripts/components/customer/customer-workspace.js:58
-#: app/scripts/components/customer/routes.js:97
-#: app/scripts/components/navigation/select-workspace-dialog.html:93
-#: app/scripts/components/providers/details/dialog.html:28
+#: src/analytics/cost-analysis.html:27
+#: src/analytics/dashboard-cost-chart.html:12
+#: src/appstore/dialog/appstore-project-selector.html:2
+#: src/customer/customer-workspace.js:58
+#: src/customer/routes.js:97
+#: src/navigation/select-workspace-dialog.html:93
+#: src/providers/details/dialog.html:28
 msgid "Projects"
 msgstr "Проекты"
 
-#: app/scripts/components/dashboard/organization-dashboard.html:10
-#: app/scripts/components/team/add-team-member.html:41
+#: src/dashboard/organization-dashboard.html:10
+#: src/team/add-team-member.html:41
 msgid "Projects list"
 msgstr "Список проектов"
 
-#: app/scripts/components/ansible/ansible-job-create.html:18
-#: app/scripts/components/ansible/ansible-job-summary.html:42
-#: app/scripts/components/appstore/appstore-compare-list.js:51
-#: app/scripts/components/appstore/appstore-store.html:32
-#: app/scripts/components/cost-planning/cost-plan-optimizer.html:9
-#: app/scripts/components/resource/list/resources-list.js:51
-#: app/scripts/components/resource/summary/resource-summary-base.html:21
+#: src/ansible/ansible-job-create.html:18
+#: src/ansible/ansible-job-summary.html:42
+#: src/appstore/appstore-compare-list.js:51
+#: src/appstore/appstore-store.html:32
+#: src/cost-planning/cost-plan-optimizer.html:9
+#: src/resource/list/resources-list.js:51
+#: src/resource/summary/resource-summary-base.html:21
 #: app/views/help/list.html:10
 msgid "Provider"
 msgstr "Провайдер"
 
-#: app/scripts/components/providers/details/dialog.html:2
+#: src/providers/details/dialog.html:2
 msgid "Provider details"
 msgstr "Детали провайдера"
 
-#: app/scripts/components/providers/create.js:74
+#: src/providers/create.js:74
 msgid "Provider has been created."
 msgstr "Провайдер создан."
 
-#: app/scripts/components/providers/details/provider-settings.js:138
+#: src/providers/details/provider-settings.js:138
 msgid "Provider has been updated."
 msgstr "Провайдер изменён."
 
-#: app/scripts/components/analytics/cost-analysis.html:43
-#: app/scripts/components/analytics/dashboard-cost-chart.html:14
-#: app/scripts/components/customer/customer-workspace.js:50
-#: app/scripts/components/customer/routes.js:113
-#: app/scripts/components/project/project-dialog.html:21
+#: src/analytics/cost-analysis.html:43
+#: src/analytics/dashboard-cost-chart.html:14
+#: src/customer/customer-workspace.js:50
+#: src/customer/routes.js:113
+#: src/project/project-dialog.html:21
 msgid "Providers"
 msgstr "Провайдеры"
 
-#: app/scripts/components/providers/details/dialog.html:22
+#: src/providers/details/dialog.html:22
 msgid "Quotas"
 msgstr "Квоты"
 
-#: app/scripts/components/cost-planning/cost-plans-list.js:59
-#: app/scripts/components/project/projects-list.js:180
-#: app/scripts/components/providers/provider-list.js:97
-#: app/scripts/components/team/customer-users-list.js:135
-#: app/scripts/components/team/project-users-list.js:103
-#: app/scripts/components/user/hooks/hook-list.js:74
-#: app/scripts/components/user/keys/key-list.js:51
+#: src/cost-planning/cost-plans-list.js:59
+#: src/project/projects-list.js:180
+#: src/providers/provider-list.js:97
+#: src/team/customer-users-list.js:135
+#: src/team/project-users-list.js:103
+#: src/user/hooks/hook-list.js:74
+#: src/user/keys/key-list.js:51
 msgid "Remove"
 msgstr "Удалить"
 
-#: app/scripts/components/customer/customer-manage.html:123
+#: src/customer/customer-manage.html:123
 msgid "Remove organization"
 msgstr "Удалить организацию"
 
-#: app/scripts/components/user/user-edit.html:187
+#: src/user/user-edit.html:187
 msgid "Remove profile"
 msgstr "Удалить профиль"
 
-#: app/scripts/components/project/project-providers-service.js:92
-#: app/scripts/components/providers/details/provider-projects.js:107
+#: src/project/project-providers-service.js:92
+#: src/providers/details/provider-projects.js:107
 msgid "Removing link"
 msgstr "Удалить ссылку"
 
-#: app/scripts/components/configs/base-config.js:52
-#: app/scripts/components/navigation/header/support-link.html:4
-#: app/scripts/components/project/project-workspace.js:76
+#: src/configs/base-config.js:52
+#: src/navigation/header/support-link.html:4
+#: src/project/project-workspace.js:76
 msgid "Support"
 msgstr "Поддержка"
 
-#: app/scripts/components/billing/invoices-list.js:36
-#: app/scripts/components/paypal/paypal-invoices-list.js:37
+#: src/billing/invoices-list.js:36
+#: src/paypal/paypal-invoices-list.js:37
 msgid "You have no invoices yet."
 msgstr "У вас пока нет счетов."
 
-#: app/scripts/components/team/customer-permissions-log-list.js:18
-#: app/scripts/components/team/project-permissions-log-list.js:18
+#: src/team/customer-permissions-log-list.js:18
+#: src/team/project-permissions-log-list.js:18
 msgid "You have no permissions yet."
 msgstr "У вас пока нет разрешения."
 
-#: app/scripts/components/resource/list/resource-private-clouds-list.js:29
+#: src/resource/list/resource-private-clouds-list.js:29
 msgid "You have no private clouds yet."
 msgstr "У вас пока частных облаков."
 
-#: app/scripts/components/project/projects-list.js:58
+#: src/project/projects-list.js:58
 msgid "You have no projects yet."
 msgstr "У вас пока нет проектов."
 
-#: app/scripts/components/quotas/quotas-table.html:2
+#: src/quotas/quotas-table.html:2
 msgid "You have no quotas yet."
 msgstr "У вас пока нет квоты."
 
-#: app/scripts/components/billing/billing-records-list.js:35
+#: src/billing/billing-records-list.js:35
 msgid "You have no records yet."
 msgstr "У вас пока нет записей."
 
-#: app/scripts/components/offering/offerings-list.js:24
+#: src/offering/offerings-list.js:24
 msgid "You have no requests."
 msgstr "У вас пока нет запросов."
 
-#: app/scripts/components/resource/list/resources-list.js:36
+#: src/resource/list/resources-list.js:36
 msgid "You have no resources yet."
 msgstr "У вас пока нет ресурсов."
 
-#: app/scripts/components/premiumSupport/premium-support-contracts/premium-support-contracts.js:27
+#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:27
 msgid "You have no SLAs yet."
 msgstr "У вас пока нет SLA."
 
-#: app/scripts/components/team/customer-users-list.js:62
-#: app/scripts/components/team/project-users-list.js:47
+#: src/team/customer-users-list.js:62
+#: src/team/project-users-list.js:47
 msgid "You have no team members yet."
 msgstr "У вас пока нет участников команды."
 
-#: app/scripts/components/customer/customer-users-details-list.js:25
+#: src/customer/customer-users-details-list.js:25
 msgid "You have no users yet."
 msgstr "У вас пока нет пользователей."
 
-#: app/scripts/components/resource/list/resource-vms-list.js:30
+#: src/resource/list/resource-vms-list.js:30
 msgid "You have no virtual machines yet."
 msgstr "У вас пока нет виртуальных машин."
 
-#: app/scripts/components/freeipa/freeipa-account-create.js:36
+#: src/freeipa/freeipa-account-create.js:36
 msgid "You must agree with terms of service."
 msgstr "Вы должны принять правила использования услуг."
 
-#: app/scripts/components/invitations/utils.js:77
+#: src/invitations/utils.js:77
 msgid "Your invitation was accepted."
 msgstr "Ваше приглашение было принято."

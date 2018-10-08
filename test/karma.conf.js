@@ -21,7 +21,7 @@ module.exports = function(config) {
       'node_modules/angular-resource/angular-resource.js',
       'node_modules/angular-ui-router/release/angular-ui-router.js',
       'node_modules/angular-translate/dist/angular-translate.js',
-      'app/scripts/class.js',
+      'src/class.js',
       'test/test_index.js',
     ],
 
