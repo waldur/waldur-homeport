@@ -5252,6 +5252,7 @@ msgstr ""
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/orders/ProjectResourcesList.tsx
 #: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
 #: src/offering/offering-details.js
 #: src/project/project-workspace.js
 #: src/providers/provider-list.js

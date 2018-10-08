@@ -1,7 +1,7 @@
 import { getCategories } from '@waldur/marketplace/common/api';
 
 // @ngInject
-export default function registerSidebarExtension(SidebarExtensionService, currentStateService) {
+export default function registerSidebarExtension(SidebarExtensionService, currentStateService, features) {
   SidebarExtensionService.register('customer', () => {
     return currentStateService.getCustomer().then(customer => {
       if (customer && customer.is_service_provider) {
@@ -39,16 +39,28 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
     ];
   });
 
-  SidebarExtensionService.register('project', async () => {
-    const categories = await getCategories({params: {field: ['uuid', 'title']}});
-    return categories.map(category => ({
-      label: category.title,
-      icon: 'fa-cloud',
-      link: `marketplace-project-resources({uuid: $ctrl.context.project.uuid, category_uuid: '${category.uuid}'})`,
-      feature: 'marketplace',
-      parent: 'resources',
-      index: 300,
-    }));
+  SidebarExtensionService.register('project', () => {
+    if (features.isVisible('marketplace')) {
+      return getCategories({params: {field: ['uuid', 'title']}}).then(categories => {
+        const children = categories.map(category => ({
+          label: category.title,
+          icon: 'fa-cloud',
+          link: `marketplace-project-resources({uuid: $ctrl.context.project.uuid, category_uuid: '${category.uuid}'})`,
+          countFieldKey: `marketplace_category_${category.uuid}`,
+        }));
+        return [
+          {
+            label: gettext('Resources'),
+            link: 'project.resources',
+            icon: 'fa-files-o',
+            index: 300,
+            children
+          }
+        ];
+      });
+    } else {
+      return [];
+    }
   });
 
   SidebarExtensionService.register('customer', () => {

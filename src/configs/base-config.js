@@ -148,6 +148,7 @@ const ENV = {
   defaultListCacheTime: 60 * 10,
   optionsCacheTime: 10 * 1000,
   disabledFeatures: [],
+  enabledFeatures: ['resources.legacy'],
   featuresVisible: false,
 
   requestTimeout: 1000 * 20,

@@ -1,6 +1,7 @@
 export default class featuresProvider {
   constructor() {
-    this.features = {};
+    this.disabledFeatures = {};
+    this.enabledFeatures = {};
     this.visibility = true;
   }
 
@@ -8,15 +9,22 @@ export default class featuresProvider {
     this.visibility = visibility;
   }
 
-  setFeatures(features) {
-    this.features = features.reduce((result, feature) => {
+  setDisabledFeatures(features) {
+    this.disabledFeatures = features.reduce((result, feature) => {
+      result[feature] = true;
+      return result;
+    }, {});
+  }
+
+  setEnabledFeatures(features) {
+    this.enabledFeatures = features.reduce((result, feature) => {
       result[feature] = true;
       return result;
     }, {});
   }
 
   $get() {
-    const isVisible = feature => this.visibility || !this.features[feature];
+    const isVisible = feature => !feature || this.enabledFeatures[feature] || this.visibility || !this.disabledFeatures[feature];
     return {isVisible};
   }
 }
