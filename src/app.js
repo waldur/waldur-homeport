@@ -112,7 +112,8 @@ export function extendEnv(ENV) {
 
 // @ngInject
 export function featuresProviderConfig(ENV, featuresProvider) {
-  featuresProvider.setFeatures(ENV.toBeFeatures.concat(ENV.disabledFeatures));
+  featuresProvider.setDisabledFeatures(ENV.toBeFeatures.concat(ENV.disabledFeatures));
+  featuresProvider.setEnabledFeatures(ENV.enabledFeatures);
   featuresProvider.setVisibility(ENV.featuresVisible);
 }
 

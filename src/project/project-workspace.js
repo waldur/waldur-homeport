@@ -73,6 +73,7 @@ export default function ProjectWorkspaceController(
         icon: 'fa-files-o',
         link: 'project.resources',
         key: 'resources',
+        feature: 'resources.legacy',
         index: 300,
         orderByLabel: true,
         children: [
