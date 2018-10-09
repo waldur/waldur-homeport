@@ -27,6 +27,8 @@ function* getOfferings() {
     'order_item_count',
     'category_uuid',
     'attributes',
+    'customer_name',
+    'customer_uuid',
   ];
   const params = {
     page_size: 6,
