@@ -52,7 +52,7 @@ export interface OfferingOptions {
 
 export interface ComparedOffering {
   name: string;
-  attributes: {[key: string]: any};
+  attributes: AttributesType;
 }
 
 export interface Offering {
@@ -72,7 +72,7 @@ export interface Offering {
   geolocations?: Geolocations;
   customer_uuid?: string;
   customer_name?: string;
-  attributes?: {};
+  attributes: AttributesType;
   components: OfferingComponent[];
   options?: OfferingOptions;
   plans?: Plan[];
