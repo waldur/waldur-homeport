@@ -17,8 +17,7 @@
       </li>
       <li ui-sref-active="active"
         ng-repeat="item in $ctrl.items"
-        ng-class="item.class"
-        visible-if="item.feature">
+        ng-class="item.class">
         <a ui-sref="{{ item.link }}"
           ng-attr-id="{{item.key}}"
           ng-if="item.link" ng-click="$ctrl.onMenuClick($event, item)">
@@ -39,8 +38,7 @@
           ng-if="::item.children"
           ng-class="{in: item.expanded}">
           <li ui-sref-active="active"
-            ng-repeat="child in item.children"
-            visible-if="child.feature">
+            ng-repeat="child in item.children">
             <a ui-sref="{{ child.link }}">
               <i class="fa {{ ::child.icon }}"></i>
               <span class="nav-label">{{ child.label | translate }}</span>
