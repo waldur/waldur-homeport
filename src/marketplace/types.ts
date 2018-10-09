@@ -50,6 +50,11 @@ export interface OfferingOptions {
   options: {[key: string]: OptionField};
 }
 
+export interface ComparedOffering {
+  name: string;
+  attributes: {[key: string]: any};
+}
+
 export interface Offering {
   uuid?: string;
   thumbnail: string;
@@ -81,12 +86,20 @@ export interface Screenshot {
   description: string;
 }
 
+type AttributeType =
+  | 'boolean'
+  | 'string'
+  | 'integer'
+  | 'choice'
+  | 'list'
+  ;
+
 export interface Attribute {
   title: string;
   key: string;
-  type: string;
-  render?: React.SFC<any>;
+  type: AttributeType;
   options?: AttributeOption[];
+  required?: boolean;
 }
 
 interface AttributeOption {
