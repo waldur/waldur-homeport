@@ -7,7 +7,7 @@ interface HeroSectionProps {
   children?: React.ReactNode;
 }
 
-export const HeroSection: React.SFC<HeroSectionProps> = (props: HeroSectionProps) => (
+export const HeroSection = (props: HeroSectionProps) => (
   <div className="marketplace-hero__background">
     <div className="marketplace-hero__table">
       <div className="marketplace-hero__main">
