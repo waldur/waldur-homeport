@@ -9,7 +9,7 @@ interface ProviderDescriptionProps {
   provider: Provider;
 }
 
-export const ProviderDescription: React.SFC<ProviderDescriptionProps> = (props: ProviderDescriptionProps) => (
+export const ProviderDescription = (props: ProviderDescriptionProps) => (
   <div className="provider-description">
     <div className="provider-description__logo">
       <OfferingLogo src={props.provider.image}/>

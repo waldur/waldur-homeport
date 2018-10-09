@@ -15,7 +15,7 @@ interface OfferingActionsProps extends TranslateProps {
   updateOfferingState?(offering, stateAction): void;
 }
 
-const PureOfferingActions: React.SFC<OfferingActionsProps> = (props: OfferingActionsProps) => {
+const PureOfferingActions = (props: OfferingActionsProps) => {
   const onStateChange = e => {
     props.updateOfferingState(props.row, e.target.id);
   };
