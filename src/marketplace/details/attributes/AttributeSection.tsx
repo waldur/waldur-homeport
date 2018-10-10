@@ -4,13 +4,13 @@ import { Section, Offering } from '@waldur/marketplace/types';
 
 import { AttributeRow } from './AttributeRow';
 
-interface FeatureSectionProps {
+interface AttributeSectionProps {
   section: Section;
   offering: Offering;
   hideHeader: boolean;
 }
 
-export const FeatureSection = (props: FeatureSectionProps) => (
+export const AttributeSection = (props: AttributeSectionProps) => (
   <>
     {!props.hideHeader && (
       <tr className="gray-bg">

@@ -6,6 +6,7 @@ import { Attribute } from '../types';
 interface AttributeCellProps {
   value: string | string[] | number | boolean | undefined;
   attr: Attribute;
+  className?: string;
 }
 
 export const AttributeCell = (props: AttributeCellProps) => {
@@ -21,7 +22,7 @@ export const AttributeCell = (props: AttributeCellProps) => {
         });
       }
       return (
-        <td>
+        <td className={props.className}>
           {titles.map((item, index) => (
             <span key={index}>
               <i className="fa fa-check"/>{` ${item}`}
@@ -35,18 +36,18 @@ export const AttributeCell = (props: AttributeCellProps) => {
     case 'boolean': {
       const icon = props.value === true ? 'fa fa-check text-info' : 'fa fa-times text-danger';
       return (
-        <td className="text-center">
-          <i className={classNames('text-center', icon)} />
+        <td className={classNames('text-center', props.className)}>
+          <i className={icon} />
         </td>
       );
     }
 
     case 'choice': {
       const option = props.attr.options.find(item => item.key === props.value);
-      return <td>{option ? option.title : 'N/A'}</td>;
+      return <td className={props.className}>{option ? option.title : 'N/A'}</td>;
     }
 
     default:
-      return <td>{props.value === undefined ? 'N/A' : props.value}</td>;
+      return <td className={props.className}>{props.value === undefined ? 'N/A' : props.value}</td>;
   }
 };
