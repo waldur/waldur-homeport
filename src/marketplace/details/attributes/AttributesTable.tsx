@@ -3,14 +3,14 @@ import * as Table from 'react-bootstrap/lib/Table';
 
 import { Section, Offering } from '@waldur/marketplace/types';
 
-import { FeatureSection } from './FeatureSection';
+import { AttributeSection } from './AttributeSection';
 
-interface FeaturesTabProps {
+interface AttributesTableProps {
   sections: Section[];
   offering: Offering;
 }
 
-export const FeaturesTab = (props: FeaturesTabProps) => (
+export const AttributesTable = (props: AttributesTableProps) => (
   <Table
     bordered={true}
     hover={true}
@@ -18,7 +18,7 @@ export const FeaturesTab = (props: FeaturesTabProps) => (
   >
      <tbody>
       {props.sections.map((section, index) => (
-        <FeatureSection
+        <AttributeSection
           key={index}
           section={section}
           offering={props.offering}

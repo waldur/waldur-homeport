@@ -1,28 +1,22 @@
 import * as React from 'react';
 
-import { ListCell } from './ListCell';
+import { AttributeCell } from '@waldur/marketplace/common/AttributeCell';
+import { Offering, Attribute } from '@waldur/marketplace/types';
 
-const getOptions = attribute =>
-  attribute.options.reduce((map, item) => ({...map, [item.key]: item.title}), {});
+interface AttributeRowProps {
+  offering: Offering;
+  attribute: Attribute;
+}
 
-export const AttributeRow = ({ offering, attribute }) => {
-  let value = offering.attributes[attribute.key];
-  if (attribute.type === 'list' && typeof value === 'object') {
-    const options = getOptions(attribute);
-    value = value.map(item => options[item]);
-    value = ListCell(value);
-  } else if (attribute.type === 'choice') {
-    const options = getOptions(attribute);
-    value = options[value];
-  }
-  return (
-    <tr>
-      <td className="col-md-3">
-        {attribute.title}
-      </td>
-      <td className="col-md-9">
-        {value}
-      </td>
-    </tr>
-  );
-};
+export const AttributeRow = (props: AttributeRowProps) => (
+  <tr>
+    <td className="col-md-3">
+      {props.attribute.title}
+    </td>
+    <AttributeCell
+      className="col-md-9"
+      attr={props.attribute}
+      value={props.offering.attributes[props.attribute.key]}
+    />
+  </tr>
+);

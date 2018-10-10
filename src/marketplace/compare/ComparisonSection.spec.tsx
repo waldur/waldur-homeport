@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
 
-import { SystemSection, Offerings } from './AttributeCell.fixtures';
+import { SystemSection, Offerings } from '../common/AttributeCell.fixtures';
 import { ComparisonSection } from './ComparisonSection';
 
 describe('ComparisonSection', () => {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AttributeCell renders boolean value 1`] = `"<td class=\\"text-center\\"><i class=\\"text-center fa fa-check text-info\\"></i></td>"`;
+exports[`AttributeCell renders boolean value 1`] = `"<td class=\\"text-center\\"><i class=\\"fa fa-check text-info\\"></i></td>"`;
 
 exports[`AttributeCell renders choice attribute 1`] = `"<td>NVidia K80</td>"`;
 
@@ -8,6 +8,6 @@ exports[`AttributeCell renders invalid choice attribute 1`] = `"<td>N/A</td>"`;
 
 exports[`AttributeCell renders list attribute 1`] = `"<td><span><i class=\\"fa fa-check\\"></i> Intel Xeon E5-2650v3<br/></span><span><i class=\\"fa fa-check\\"></i> Intel Xeon E5-2680v3<br/></span></td>"`;
 
-exports[`AttributeCell renders negative boolean value 1`] = `"<td class=\\"text-center\\"><i class=\\"text-center fa fa-times text-danger\\"></i></td>"`;
+exports[`AttributeCell renders negative boolean value 1`] = `"<td class=\\"text-center\\"><i class=\\"fa fa-times text-danger\\"></i></td>"`;
 
 exports[`AttributeCell renders string attribute 1`] = `"<td>/opt/</td>"`;
