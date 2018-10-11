@@ -14,6 +14,7 @@ class CustomerManageController {
     $state,
     $q,
     $filter,
+    $rootScope,
     ENV,
     ISSUE_IDS
   ) {
@@ -27,6 +28,7 @@ class CustomerManageController {
     this.$state = $state;
     this.$q = $q;
     this.$filter = $filter;
+    this.$rootScope = $rootScope;
     this.ENV = ENV;
     this.ISSUE_IDS = ISSUE_IDS;
     this.organizationSubnetsVisible = ENV.organizationSubnetsVisible;
@@ -34,6 +36,15 @@ class CustomerManageController {
   }
 
   $onInit() {
+    this.loadCustomer();
+    this.$rootScope.$on('refreshCustomer', this.refreshCustomer.bind(this));
+  }
+
+  refreshCustomer() {
+    this.customersService.refreshCurrentCustomer(this.customer.uuid).then(customer => this.customer = customer);
+  }
+
+  loadCustomer() {
     this.loading = true;
     return this.currentStateService.getCustomer().then((customer) => {
       this.customer = customer;

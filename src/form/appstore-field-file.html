@@ -1,0 +1,16 @@
+<input type="file"
+  class="form-control"
+  id="fileField"
+  name="{{ ::$ctrl.field.name }}"
+  placeholder="{{ $ctrl.field.placeholder }}"
+  accept="{{ ::$ctrl.field.accept }}"
+  ng-required="$ctrl.field.required"
+/>
+<p class="text-danger"
+  ng-if="$ctrl.showRequiredError()">
+  <span translate>This field is required</span>.
+</p>
+<p class="text-danger"
+  ng-if="$ctrl.showFileError()">
+  <span>File is invalid</span>.
+</p>

@@ -1,0 +1,45 @@
+.customer-edit-details {
+  .organization-logo {
+    display: inline-block;
+
+    .organization-img-wrapper {
+      height: 200px;
+      width: 200px;
+      
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: 100%;
+      }
+    }
+  }
+  .organization-logo-actions {
+    margin-top: 40px;
+    display: inline-block;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .customer-edit-details {
+    min-height: 278px;
+  }
+}
+
+@media screen and (min-width: 1145px) {
+  .customer-edit-details {
+    min-height: 260px;
+  }
+}
+
+@media screen and (min-width: 1161px) {
+  .customer-edit-details {
+    min-height: 242px;
+  }
+}
+  
+@media screen and (min-width: 1261px) {
+  .customer-edit-details {
+    min-height: 224px;
+  }
+}
+  
