@@ -57,6 +57,13 @@ export default function customersService(baseServiceClass, $state, $q, $http, EN
       return $http.head(ENV.apiEndpoint + 'api/customers/').then(response => {
         return parseInt(response.headers()['x-result-count']);
       });
+    },
+    refreshCurrentCustomer(customerUuid) {
+      return this.$get(customerUuid)
+      .then(customer => {
+        currentStateService.setCustomer(customer);
+        return customer;
+      });
     }
   });
   return new ServiceClass();

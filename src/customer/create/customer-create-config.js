@@ -43,6 +43,12 @@ export default ENV => [
         type: 'tel',
         label: gettext('Contact phone'),
       },
+      {
+        name: 'image',
+        type: 'file',
+        label: gettext('Logo'),
+        accept: '.jpg, .jpeg, .png, .svg',
+      },
     ]
   },
   {

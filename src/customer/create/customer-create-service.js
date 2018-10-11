@@ -1,11 +1,12 @@
 import wizardStepsConfig from './customer-create-config';
 import * as constants from './constants';
 
+import { sendForm } from '@waldur/core/api';
+
 export default class CustomerCreateService {
   // @ngInject
-  constructor(features, customersService, expertsService, customerPermissionsService, usersService, providersService, ENV) {
+  constructor(features, expertsService, customerPermissionsService, usersService, providersService, ENV) {
     this.features = features;
-    this.customersService = customersService;
     this.expertsService = expertsService;
     this.customerPermissionsService = customerPermissionsService;
     this.usersService = usersService;
@@ -19,19 +20,21 @@ export default class CustomerCreateService {
   }
 
   createCustomer(model) {
-    const customer = this.customersService.$create();
+    const customer = {};
     angular.extend(customer, this.composeCustomerModel(model));
-    return customer.$save().then(customer => {
-      if (model.agree_with_policy || model.role === constants.ROLES.expert) {
-        return this.expertsService.register(customer).then(() => customer);
-      }
+    return sendForm('POST', `${this.ENV.apiEndpoint}api/customers/`, {...customer})
+      .then(response => response.data)
+      .then(customer => {
+        if (model.agree_with_policy || model.role === constants.ROLES.expert) {
+          return this.expertsService.register(customer).then(() => customer);
+        }
 
-      if (model.role === constants.ROLES.provider) {
-        return this.providersService.register(customer).then(() => customer);
-      }
+        if (model.role === constants.ROLES.provider) {
+          return this.providersService.register(customer).then(() => customer);
+        }
 
-      return customer;
-    });
+        return customer;
+      });
   }
 
   createCustomerPermission(customer) {
@@ -58,6 +61,7 @@ export default class CustomerCreateService {
       'postal',
       'bank_name',
       'bank_account',
+      'image'
     ];
 
     let model = {};
@@ -71,7 +75,6 @@ export default class CustomerCreateService {
     if (formModel.type) {
       model.type = formModel.type.value;
     }
-
     return model;
   }
 

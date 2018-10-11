@@ -2995,6 +2995,18 @@ msgstr ""
 msgid "Login failed"
 msgstr ""
 
+#: src/customer/create/customer-create-config.js
+msgid "Logo"
+msgstr ""
+
+#: src/customer/details/store/effects.ts
+msgid "Logo has been removed."
+msgstr ""
+
+#: src/customer/details/store/effects.ts
+msgid "Logo has been uploaded."
+msgstr ""
+
 #: src/auth/callbacks/auth-logout-failed.html
 msgid "Logout failed"
 msgstr ""
@@ -3902,6 +3914,10 @@ msgstr ""
 
 #: src/experts/requests/billing-type.js
 msgid "Organization is billed on project completion."
+msgstr ""
+
+#: src/customer/details/CustomerEditDetails.tsx
+msgid "Organization logo"
 msgstr ""
 
 #: src/issues/list/constants.js
@@ -5002,6 +5018,10 @@ msgstr ""
 
 #: src/marketplace/compare/OfferingCompareButton.tsx
 msgid "Remove from comparison"
+msgstr ""
+
+#: src/customer/details/CustomerEditDetails.tsx
+msgid "Remove logo"
 msgstr ""
 
 #: src/customer/details/customer-manage.html
@@ -6361,6 +6381,7 @@ msgid "This field contains invalid characters."
 msgstr ""
 
 #: src/form/appstore-field-email.html
+#: src/form/appstore-field-file.html
 #: src/form/appstore-field-tel.html
 #: src/marketplace/details/OfferingConfigurator.tsx
 msgid "This field is required"
@@ -6756,6 +6777,10 @@ msgstr ""
 msgid "Unable to post comment."
 msgstr ""
 
+#: src/customer/details/store/effects.ts
+msgid "Unable to remove logo."
+msgstr ""
+
 #: src/invitations/actions/send.js
 msgid "Unable to resend invitation."
 msgstr ""
@@ -6786,6 +6811,10 @@ msgstr ""
 
 #: src/issues/attachments/effects.ts
 msgid "Unable to upload attachment."
+msgstr ""
+
+#: src/customer/details/store/effects.ts
+msgid "Unable to upload logo."
 msgstr ""
 
 #: src/auth/auth-login.js
@@ -6826,6 +6855,7 @@ msgstr ""
 msgid "Unpaid"
 msgstr ""
 
+#: src/customer/details/CustomerEditDetailsForm.tsx
 #: src/customer/details/customer-policies.html
 #: src/user/hooks/hook-details.html
 msgid "Update"
@@ -6885,6 +6915,10 @@ msgstr ""
 
 #: src/ansible/python-management/form/VirtualEnvironment.tsx
 msgid "Upload Requirements.txt"
+msgstr ""
+
+#: src/customer/details/CustomerEditDetailsForm.tsx
+msgid "Upload new"
 msgstr ""
 
 #: src/customer/details/customer-threshold.html

@@ -3,6 +3,7 @@ import appstoreField from './appstore-field';
 import appstoreFieldHtmlText from './appstore-field-html-text';
 import appstoreFieldString from './appstore-field-string';
 import appstoreFieldEmail from './appstore-field-email';
+import appstoreFieldFile from './appstore-field-file';
 import appstoreFieldTel from './appstore-field-tel';
 import appstoreFieldTos from './appstore-field-tos';
 import appstoreFieldPassword from './appstore-field-password';
@@ -34,6 +35,7 @@ export default module => {
   module.component('appstoreFieldHtmlText', appstoreFieldHtmlText);
   module.component('appstoreFieldString', appstoreFieldString);
   module.component('appstoreFieldEmail', appstoreFieldEmail);
+  module.component('appstoreFieldFile', appstoreFieldFile);
   module.component('appstoreFieldTel', appstoreFieldTel);
   module.component('appstoreFieldTos', appstoreFieldTos);
   module.directive('appstoreFieldPassword', appstoreFieldPassword);

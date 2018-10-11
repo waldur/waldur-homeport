@@ -4,10 +4,17 @@
 
 <div ng-if="!$ctrl.loading">
   <customer-details customer="$ctrl.customer"></customer-details>
-  <customer-policies
-    ng-if="$ctrl.canUpdateCustomerPolicies"
-    customer="$ctrl.customer"
-    can-update-quota="$ctrl.canUpdateQuota"></customer-policies>
+  <div class="row">
+    <div class="col-md-6">
+      <customer-policies
+        ng-if="$ctrl.canUpdateCustomerPolicies"
+        customer="$ctrl.customer"
+        can-update-quota="$ctrl.canUpdateQuota"></customer-policies>
+    </div>
+    <div class="col-md-6">
+      <customer-edit-details customer="$ctrl.customer"></customer-edit-details>
+    </div>
+  </div>
   <expert-provider-details
     visible-if="'experts'"
     ng-if="$ctrl.canRegisterExpertProvider"
