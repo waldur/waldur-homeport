@@ -57,6 +57,10 @@ class TreemapContainer extends React.Component<TranslateProps> {
         title: translate('VPC floating IP count'),
       },
       {
+        key: 'vpc_instance_count',
+        title: translate('VPC instance count'),
+      },
+      {
         key: 'os_cpu_count',
         title: translate('Cloud vCPU'),
       },
