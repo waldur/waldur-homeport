@@ -8,6 +8,6 @@ module.exports = {
     '@waldur/(.*)': '<rootDir>/src/$1',
     '\\.(css|scss|svg)$': '<rootDir>/test/style-mock.js'
   },
-  setupFiles: ['<rootDir>/test/enzyme-setup.js'],
+  setupFiles: ['<rootDir>/test/enzyme-setup.js', 'jest-date-mock'],
   modulePathIgnorePatterns: ['<rootDir>/node_modules/']
 };

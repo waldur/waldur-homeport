@@ -14,10 +14,6 @@ export interface Chart {
 
 export interface Scope {
   url: string;
-  quotas: Array<{
-    name: string;
-    url: string;
-  }>;
 }
 
 export interface ChartsState {
