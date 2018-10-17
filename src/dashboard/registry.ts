@@ -1,4 +1,4 @@
-interface Quota {
+export interface Quota {
   quota: string;
   title: string;
   feature?: string;

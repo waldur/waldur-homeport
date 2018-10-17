@@ -6495,7 +6495,7 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: src/dashboard/dashboard-chart-service.js
+#: src/dashboard/chart/api.ts
 msgid "Total cost"
 msgstr ""
 
@@ -7184,6 +7184,10 @@ msgstr ""
 msgid "VPC floating IP count"
 msgstr ""
 
+#: src/resource/support/ChartContainer.tsx
+msgid "VPC instance count"
+msgstr ""
+
 #: src/openstack/openstack-tenant/openstack-template.js
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
@@ -7844,11 +7848,11 @@ msgstr ""
 msgid "{usage} used"
 msgstr ""
 
-#: src/dashboard/dashboard-chart-service.js
+#: src/dashboard/chart/api.ts
 msgid "{value} at {date}"
 msgstr ""
 
-#: src/dashboard/dashboard-chart-service.js
+#: src/dashboard/chart/api.ts
 msgid "{value} at {date}, estimated"
 msgstr ""
 
