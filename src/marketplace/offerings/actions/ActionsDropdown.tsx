@@ -1,7 +1,7 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 
-import { TranslateProps } from '@waldur/i18n';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { OfferingAction, OfferingStateTransition } from './types';
 
@@ -13,16 +13,15 @@ interface ActionsDropdownState {
   open: boolean;
 }
 
-export class ActionsDropdown extends React.Component<ActionsDropdownProps & TranslateProps, ActionsDropdownState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-  }
+class PureActionsDropdown extends React.Component<ActionsDropdownProps & TranslateProps, ActionsDropdownState> {
+  state = {
+    open: false,
+  };
+
   onClick = () => {
     this.setState({open: !this.state.open});
   }
+
   render() {
     const { actions, translate } = this.props;
     return (
@@ -50,3 +49,5 @@ export class ActionsDropdown extends React.Component<ActionsDropdownProps & Tran
     );
   }
 }
+
+export const ActionsDropdown = withTranslation(PureActionsDropdown);

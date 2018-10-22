@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as Table from 'react-bootstrap/lib/Table';
 
-import { Section, Offering } from '@waldur/marketplace/types';
+import { Section } from '@waldur/marketplace/types';
 
 import { AttributeSection } from './AttributeSection';
 
 interface AttributesTableProps {
   sections: Section[];
-  offering: Offering;
+  attributes: any;
 }
 
 export const AttributesTable = (props: AttributesTableProps) => (
@@ -21,7 +21,7 @@ export const AttributesTable = (props: AttributesTableProps) => (
         <AttributeSection
           key={index}
           section={section}
-          offering={props.offering}
+          attributes={props.attributes}
           hideHeader={props.sections.length === 1}
         />
       ))}

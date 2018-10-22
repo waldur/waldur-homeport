@@ -8,7 +8,17 @@ interface SelectAsyncFieldProps extends ReactAsyncSelectProps, FormField {
 }
 
 export const SelectAsyncField = (props: SelectAsyncFieldProps) => {
-  const {input, label, description, tooltip, hideLabel, labelClass, controlClass, validate, ...rest} = props;
+  const {
+    input,
+    label,
+    description,
+    tooltip,
+    hideLabel,
+    labelClass,
+    controlClass,
+    validate,
+    normalize,
+    ...rest} = props;
   return React.createElement(Async, {
     ...rest,
     name: input.name,

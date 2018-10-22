@@ -37,7 +37,7 @@ const formatOptions = (options: OptionFormData[]) => ({
   }, {}),
 });
 
-const formatAttributes = attributes => Object.keys(attributes).reduce((result, key) => {
+export const formatAttributes = attributes => Object.keys(attributes).reduce((result, key) => {
   let value = attributes[key];
   if (Array.isArray(value)) {
     value = value.map(item => item.key);
@@ -75,6 +75,9 @@ export const formatOfferingRequest = (request: OfferingFormData, customer: Custo
   }
   if (request.options) {
     result.options = formatOptions(request.options);
+  }
+  if (request.scope) {
+    result.scope = request.scope;
   }
   return result;
 };

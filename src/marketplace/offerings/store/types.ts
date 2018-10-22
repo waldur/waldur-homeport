@@ -24,6 +24,9 @@ export interface OfferingFormData {
   components?: OfferingComponent[];
   plans?: PlanFormData[];
   options?: OptionFormData[];
+  service_settings?: any;
+  thumbnail?: File;
+  scope?: string;
 }
 
 export interface PlanRequest {
@@ -43,4 +46,5 @@ export interface OfferingRequest {
   components?: OfferingComponent[];
   plans?: PlanRequest[];
   options?: OfferingOptions;
+  scope?: string;
 }

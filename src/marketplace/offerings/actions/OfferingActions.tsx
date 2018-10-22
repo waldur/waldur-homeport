@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 
 import * as actions from '../store/actions';
@@ -10,12 +8,15 @@ import { ActionsDropdown } from './ActionsDropdown';
 import './OfferingActions.scss';
 import { stateTransitionActions, stateTransition } from './utils';
 
-interface OfferingActionsProps extends TranslateProps {
+interface OwnProps {
   row: Offering;
+}
+
+interface DispatchProps {
   updateOfferingState?(offering, stateAction): void;
 }
 
-const PureOfferingActions = (props: OfferingActionsProps) => {
+const PureOfferingActions = (props: OwnProps & DispatchProps) => {
   const onStateChange = e => {
     props.updateOfferingState(props.row, e.target.id);
   };
@@ -34,7 +35,7 @@ const PureOfferingActions = (props: OfferingActionsProps) => {
     }));
 
   return (
-    <ActionsDropdown translate={props.translate} actions={assignHandler(filterActions())}/>
+    <ActionsDropdown actions={assignHandler(filterActions())}/>
   );
 };
 
@@ -42,9 +43,6 @@ const matchDispatchToProps = dispatch => ({
   updateOfferingState: (offering, stateAction) => dispatch(actions.updateOfferingState(offering, stateAction)),
 });
 
-const enhance = compose(
-  withTranslation,
-  connect(null, matchDispatchToProps),
-);
+const enhance = connect<{}, DispatchProps, OwnProps>(null, matchDispatchToProps);
 
 export const OfferingActions = enhance(PureOfferingActions);

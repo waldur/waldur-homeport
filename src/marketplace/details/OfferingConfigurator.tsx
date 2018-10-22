@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { getFormComponent } from '@waldur/marketplace/common/registry';
@@ -17,7 +17,7 @@ interface PureOfferingConfiguratorProps {
   project?: Project;
 }
 
-const PureOfferingConfigurator = (props: PureOfferingConfiguratorProps) => {
+const PureOfferingConfigurator = (props: PureOfferingConfiguratorProps & InjectedFormProps) => {
   const FormComponent = getFormComponent(props.offering.type);
   if (!FormComponent) {
     return null;

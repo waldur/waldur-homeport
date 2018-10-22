@@ -4,13 +4,23 @@ import * as Row from 'react-bootstrap/lib/Row';
 import { InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { FieldError } from '@waldur/form-react';
-import { StepsList } from '@waldur/marketplace/common/StepsList';
+import { $state } from '@waldur/core/services';
 
 import { STEPS, OfferingStep } from '../types';
-import { ActionButtonsContainer } from './ActionButtonsContainer';
-import { OfferingConfigurationContainer } from './OfferingConfigurationContainer';
-import { OfferingDescribeStep } from './OfferingDescribeStep';
+import { AccountingStepContainer } from './AccountingStepContainer';
+import { DescriptionStepContainer } from './DescriptionStepContainer';
+import { ManagementStepContainer } from './ManagementStepContainer';
+import { OverviewStep } from './OverviewStep';
+import { ReviewStep } from './ReviewStep';
+import { Wizard } from './Wizard';
+
+const TABS = {
+  Overview: OverviewStep,
+  Description: DescriptionStepContainer,
+  Management: ManagementStepContainer,
+  Accounting: AccountingStepContainer,
+  Review: ReviewStep,
+};
 
 interface OfferingCreateDialogProps extends InjectedFormProps {
   step: OfferingStep;
@@ -18,38 +28,43 @@ interface OfferingCreateDialogProps extends InjectedFormProps {
   loadData(): void;
   loading: boolean;
   loaded: boolean;
+  erred: boolean;
+  setStep(step: string): void;
+  disabled: boolean;
+  isLastStep: boolean;
+  goBack(): void;
+  goNext(): void;
 }
 
 export class OfferingCreateDialog extends React.Component<OfferingCreateDialogProps> {
   componentDidMount() {
+    if (this.props.disabled) {
+      return $state.go('errorPage.notFound');
+    }
     this.props.loadData();
   }
 
   render() {
-    const props = this.props;
+    const {
+      loading,
+      loaded,
+      erred,
+      handleSubmit,
+      createOffering,
+      ...rest} = this.props;
 
-    if (props.loading) {
+    if (loading) {
       return <LoadingSpinner/>;
-    } else if (props.loaded) {
+    } else if (erred) {
+      return <p>Unable to load data.</p>;
+    } else if (loaded) {
       return (
         <Row>
-          <Col lg={8} lgOffset={1}>
+          <Col lg={10} lgOffset={1}>
             <form
-              onSubmit={props.handleSubmit(props.createOffering)}
+              onSubmit={handleSubmit(createOffering)}
               className="form-horizontal">
-              <StepsList choices={STEPS} value={props.step}/>
-              {props.step === 'Describe' && (
-                <OfferingDescribeStep submitting={props.submitting}/>
-              )}
-              {props.step === 'Configure' && (
-                <OfferingConfigurationContainer/>
-              )}
-              <div className="form-group">
-                <div className="col-sm-offset-3 col-sm-9">
-                  <FieldError error={props.error}/>
-                  <ActionButtonsContainer/>
-                </div>
-              </div>
+              <Wizard steps={STEPS} tabs={TABS} {...rest}/>
             </form>
           </Col>
         </Row>

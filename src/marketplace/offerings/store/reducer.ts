@@ -1,7 +1,7 @@
 import * as constants from './constants';
 
 const INITIAL_STATE = {
-  step: 'Describe',
+  step: 'Overview',
   loading: true,
   loaded: false,
   erred: false,
