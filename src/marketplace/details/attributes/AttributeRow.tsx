@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import { AttributeCell } from '@waldur/marketplace/common/AttributeCell';
-import { Offering, Attribute } from '@waldur/marketplace/types';
+import { Attribute } from '@waldur/marketplace/types';
 
 interface AttributeRowProps {
-  offering: Offering;
+  value: any;
   attribute: Attribute;
 }
 
@@ -13,10 +13,11 @@ export const AttributeRow = (props: AttributeRowProps) => (
     <td className="col-md-3">
       {props.attribute.title}
     </td>
-    <AttributeCell
-      className="col-md-9"
-      attr={props.attribute}
-      value={props.offering.attributes[props.attribute.key]}
-    />
+    <td className="col-md-9">
+      <AttributeCell
+        attr={props.attribute}
+        value={props.value}
+      />
+    </td>
   </tr>
 );

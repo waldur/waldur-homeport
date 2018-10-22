@@ -46,6 +46,7 @@ export class FileUploadField extends React.Component<FileUploadFieldProps> {
     return (
       <span>
         {this.props.showFileName ? this.state.fileName || 'None' : null}
+        {' '}
         <button
           type="button"
           className={this.props.className}

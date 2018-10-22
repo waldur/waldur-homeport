@@ -8,8 +8,10 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { OfferingLink } from '../links/OfferingLink';
 import { OfferingActions } from './actions/OfferingActions';
 import { OfferingCreateButton } from './actions/OfferingCreateButton';
+import { isOfferingManagementDisabled } from './store/selectors';
 
 export const TableComponent = props => {
   const { translate } = props;
@@ -17,7 +19,7 @@ export const TableComponent = props => {
   const columns = [
     {
       title: translate('Name'),
-      render: ({ row }) => row.name,
+      render: ({ row }) => <OfferingLink offering_uuid={row.uuid}>{row.name}</OfferingLink>,
     },
     {
       title: translate('Category'),
@@ -27,11 +29,14 @@ export const TableComponent = props => {
       title: translate('State'),
       render: ({ row }) => row.state,
     },
-    {
-      title: translate('Actions'),
-      render: OfferingActions,
-    },
   ];
+
+  if (!props.actionsDisabled) {
+    columns.push({
+      title: translate('Actions'),
+      render: ({ row }) => <OfferingActions row={row}/>,
+    });
+  }
 
   return (
     <Table
@@ -63,7 +68,10 @@ const TableOptions = {
   ],
 };
 
-const mapStateToProps = state => ({ customer: getCustomer(state) });
+const mapStateToProps = state => ({
+  customer: getCustomer(state),
+  actionsDisabled: isOfferingManagementDisabled(state),
+});
 
 const enhance = compose(
   connect(mapStateToProps),

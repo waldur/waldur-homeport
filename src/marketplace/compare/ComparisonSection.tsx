@@ -30,11 +30,12 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
           {attribute.title}
         </td>
         {props.items.map((item, index2) => (
-          <AttributeCell
-            attr={attribute}
-            value={item.attributes[attribute.key]}
-            key={index2}
-          />
+          <td key={index2}>
+            <AttributeCell
+              attr={attribute}
+              value={item.attributes[attribute.key]}
+            />
+          </td>
         ))}
         {props.items.length < COMPARISON_COLUMNS && range(COMPARISON_COLUMNS - props.items.length).map(index =>
           <td key={index}/>

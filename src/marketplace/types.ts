@@ -92,6 +92,7 @@ type AttributeType =
   | 'integer'
   | 'choice'
   | 'list'
+  | 'password'
   ;
 
 export interface Attribute {
@@ -110,7 +111,7 @@ interface AttributeOption {
 export interface Section {
   title: string;
   attributes: Attribute[];
-  is_standalone: boolean;
+  is_standalone?: boolean;
 }
 
 export interface CategoryColumn {

@@ -16,6 +16,7 @@ interface OfferingTabsProps {
 }
 
 const getTabs = (props: OfferingTabsProps) => {
+  const attributes = props.offering.attributes;
   const filterSection = section => section.attributes.some(attr => props.offering.attributes.hasOwnProperty(attr.key));
   const sections = props.sections.filter(filterSection);
 
@@ -31,7 +32,7 @@ const getTabs = (props: OfferingTabsProps) => {
     {
       visible: basicSections.length > 0,
       title: translate('Features'),
-      component: () => <AttributesTable offering={props.offering} sections={basicSections}/>,
+      component: () => <AttributesTable attributes={attributes} sections={basicSections}/>,
     },
     {
       visible: props.offering.screenshots.length > 0,
@@ -44,7 +45,7 @@ const getTabs = (props: OfferingTabsProps) => {
     tabs.push({
       visible: true,
       title: section.title,
-      component: () => <AttributesTable offering={props.offering} sections={[section]}/>,
+      component: () => <AttributesTable attributes={attributes} sections={[section]}/>,
     });
   });
   tabs = tabs.filter(tab => tab.visible);
