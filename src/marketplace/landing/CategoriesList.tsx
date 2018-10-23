@@ -8,7 +8,7 @@ import { CategoryCard } from './CategoryCard';
 
 interface CategoriesListProps extends TranslateProps, CategoriesListType {}
 
-export const CategoriesList: React.SFC<CategoriesListProps> = (props: CategoriesListProps) => {
+export const CategoriesList = (props: CategoriesListProps) => {
   if (props.loading) {
     return <LoadingSpinner/>;
   }

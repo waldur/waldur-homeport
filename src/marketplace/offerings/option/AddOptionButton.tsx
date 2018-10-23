@@ -13,6 +13,6 @@ export const AddOptionButton = withTranslation((props: AddOptionButtonProps) => 
     onClick={props.onClick}>
     <i className="fa fa-plus"/>
     {' '}
-    {props.translate('Add option')}
+    {props.translate('Add user input field')}
   </button>
 ));

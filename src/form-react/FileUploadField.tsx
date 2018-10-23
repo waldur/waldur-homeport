@@ -7,6 +7,7 @@ interface FileUploadFieldProps extends FormField {
   accept?: string;
   showFileName?: boolean;
   buttonLabel: string;
+  className?: string;
 }
 
 export class FileUploadField extends React.Component<FileUploadFieldProps> {
@@ -14,6 +15,10 @@ export class FileUploadField extends React.Component<FileUploadFieldProps> {
 
   state = {
     fileName: undefined,
+  };
+
+  static defaultProps = {
+    className: 'btn btn-sm btn-primary',
   };
 
   openFileDialog = () => {
@@ -41,9 +46,10 @@ export class FileUploadField extends React.Component<FileUploadFieldProps> {
     return (
       <span>
         {this.props.showFileName ? this.state.fileName || 'None' : null}
+        {' '}
         <button
           type="button"
-          className="btn btn-sm btn-primary m-l-sm"
+          className={this.props.className}
           onClick={this.openFileDialog}
           disabled={this.props.disabled}>
           <i className="fa fa-upload"/>

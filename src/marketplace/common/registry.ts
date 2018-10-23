@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { Omit } from 'react-redux';
 
-import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
+import { OfferingConfigurationFormProps, Attribute } from '@waldur/marketplace/types';
 import { Offering } from '@waldur/marketplace/types';
 
-const REGISTRY = {};
+const REGISTRY: {[key: string]: Omit<OfferingConfiguration, 'type'>} = {};
 
 interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   type: string;
@@ -12,6 +13,8 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   label: string;
   showOptions?: boolean;
   showComponents?: boolean;
+  providerType?: string;
+  attributes?(): Attribute[];
 }
 
 export interface Option {
@@ -43,6 +46,15 @@ export function showOfferingOptions(offeringType) {
   return REGISTRY[offeringType].showOptions;
 }
 
-export function showOfferingComponents(offeringType) {
+export function showComponentsList(offeringType) {
   return REGISTRY[offeringType].showComponents;
+}
+
+export function getProviderType(offeringType) {
+  return REGISTRY[offeringType].providerType;
+}
+
+export function getAttributes(offeringType) {
+  const func = REGISTRY[offeringType].attributes;
+  return func ? func() : [];
 }

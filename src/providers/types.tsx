@@ -9,7 +9,7 @@ export interface ProviderFormProps extends TranslateProps {
 export interface ProviderConfig {
   name: string;
   type: string;
-  component: React.ComponentClass<ProviderFormProps> | React.SFC<ProviderFormProps>;
+  component: React.ComponentType<ProviderFormProps>;
   endpoint: string;
   icon: string;
   serializer: (details: any) => any;

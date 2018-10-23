@@ -5,7 +5,7 @@ import * as Tabs from 'react-bootstrap/lib/Tabs';
 import { translate } from '@waldur/i18n';
 import { Section, Offering } from '@waldur/marketplace/types';
 
-import { FeaturesTab } from './attributes/FeaturesTab';
+import { AttributesTable } from './attributes/AttributesTable';
 import './OfferingTabs.scss';
 import { OverviewTab } from './OverviewTab';
 import { ScreenshotsTab } from './ScreenshotsTab';
@@ -16,8 +16,12 @@ interface OfferingTabsProps {
 }
 
 const getTabs = (props: OfferingTabsProps) => {
-  const basicSections = props.sections.filter(s => s.is_standalone === false);
-  const standaloneSections = props.sections.filter(s => s.is_standalone === true);
+  const attributes = props.offering.attributes;
+  const filterSection = section => section.attributes.some(attr => props.offering.attributes.hasOwnProperty(attr.key));
+  const sections = props.sections.filter(filterSection);
+
+  const basicSections = sections.filter(s => s.is_standalone === false);
+  const standaloneSections = sections.filter(s => s.is_standalone === true);
 
   let tabs = [
     {
@@ -28,7 +32,7 @@ const getTabs = (props: OfferingTabsProps) => {
     {
       visible: basicSections.length > 0,
       title: translate('Features'),
-      component: () => <FeaturesTab offering={props.offering} sections={basicSections}/>,
+      component: () => <AttributesTable attributes={attributes} sections={basicSections}/>,
     },
     {
       visible: props.offering.screenshots.length > 0,
@@ -41,26 +45,32 @@ const getTabs = (props: OfferingTabsProps) => {
     tabs.push({
       visible: true,
       title: section.title,
-      component: () => <FeaturesTab offering={props.offering} sections={[section]}/>,
+      component: () => <AttributesTable attributes={attributes} sections={[section]}/>,
     });
   });
   tabs = tabs.filter(tab => tab.visible);
   return tabs;
 };
 
-export const OfferingTabs = (props: OfferingTabsProps) => (
-  <Tabs
-    defaultActiveKey="tab-0"
-    id="tabs"
-    className="m-t-lg offering-tabs"
-    unmountOnExit={true}
-  >
-    {getTabs(props).map((tab, index) => (
-      <Tab key={index} eventKey={`tab-${index}`} title={tab.title}>
-        <div className="m-t-md">
-          {tab.component()}
-        </div>
-      </Tab>
-    ))}
-  </Tabs>
-);
+export const OfferingTabs = (props: OfferingTabsProps) => {
+  const tabs = getTabs(props);
+  if (tabs.length === 0) {
+    return null;
+  }
+  return (
+    <Tabs
+      defaultActiveKey="tab-0"
+      id="tabs"
+      className="m-t-lg offering-tabs"
+      unmountOnExit={true}
+    >
+      {tabs.map((tab, index) => (
+        <Tab key={index} eventKey={`tab-${index}`} title={tab.title}>
+          <div className="m-t-md">
+            {tab.component()}
+          </div>
+        </Tab>
+      ))}
+    </Tabs>
+  );
+};

@@ -38,7 +38,7 @@ export default class SidebarExtensionService {
       }
     });
     this.sortItems(items);
-    return items;
+    return this.filterItems(items);
   }
 
   sortItems(items) {
@@ -53,6 +53,19 @@ export default class SidebarExtensionService {
           parent.children.sort(compareIndex);
         }
       }
+    });
+  }
+
+  filterItems(items) {
+    const predicate = item => this.features.isVisible(item.feature);
+    return items.filter(predicate).map(item => {
+      if (!item.children) {
+        return item;
+      }
+      return {
+        ...item,
+        children: item.children.filter(predicate),
+      };
     });
   }
 

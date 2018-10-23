@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-type DateFormatter = (date: Date | string) => string;
+type DateFormatter = (date: moment.MomentInput) => string;
 
 export const formatDate: DateFormatter = date =>
   moment(date).format('YYYY-MM-DD');

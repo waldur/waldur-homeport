@@ -1,16 +1,16 @@
 import * as React from 'react';
 
-import { Section, Offering } from '@waldur/marketplace/types';
+import { Section } from '@waldur/marketplace/types';
 
 import { AttributeRow } from './AttributeRow';
 
-interface FeatureSectionProps {
+interface AttributeSectionProps {
   section: Section;
-  offering: Offering;
+  attributes: any;
   hideHeader: boolean;
 }
 
-export const FeatureSection = (props: FeatureSectionProps) => (
+export const AttributeSection = (props: AttributeSectionProps) => (
   <>
     {!props.hideHeader && (
       <tr className="gray-bg">
@@ -19,11 +19,11 @@ export const FeatureSection = (props: FeatureSectionProps) => (
       </tr>
     )}
     {props.section.attributes
-      .filter(attr => props.offering.attributes.hasOwnProperty(attr.key))
+      .filter(attr => props.attributes.hasOwnProperty(attr.key))
       .map((attr, index) => (
         <AttributeRow
           key={index}
-          offering={props.offering}
+          value={props.attributes[attr.key]}
           attribute={attr}/>
     ))}
   </>

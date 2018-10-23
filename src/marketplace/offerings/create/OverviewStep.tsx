@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { required } from '@waldur/core/validators';
 import {
   FileUploadField,
   StringField,
@@ -8,20 +9,17 @@ import {
 } from '@waldur/form-react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
-interface OfferingDescribeStepProps extends TranslateProps {
-  submitting: boolean;
-}
-
-export const OfferingDescribeStep = withTranslation((props: OfferingDescribeStepProps) => (
+export const OverviewStep = withTranslation((props: TranslateProps) => (
   <FormContainer
-    submitting={props.submitting}
-    labelClass="col-sm-3"
-    controlClass="col-sm-9"
+    submitting={false}
+    labelClass="col-sm-2"
+    controlClass="col-sm-8"
     clearOnUnmount={false}>
     <StringField
       name="name"
       label={props.translate('Name')}
       required={true}
+      validate={required}
     />
     <TextField
       name="description"

@@ -50,6 +50,11 @@ export interface OfferingOptions {
   options: {[key: string]: OptionField};
 }
 
+export interface ComparedOffering {
+  name: string;
+  attributes: AttributesType;
+}
+
 export interface Offering {
   uuid?: string;
   thumbnail: string;
@@ -67,7 +72,7 @@ export interface Offering {
   geolocations?: Geolocations;
   customer_uuid?: string;
   customer_name?: string;
-  attributes?: {};
+  attributes: AttributesType;
   components: OfferingComponent[];
   options?: OfferingOptions;
   plans?: Plan[];
@@ -81,12 +86,21 @@ export interface Screenshot {
   description: string;
 }
 
+type AttributeType =
+  | 'boolean'
+  | 'string'
+  | 'integer'
+  | 'choice'
+  | 'list'
+  | 'password'
+  ;
+
 export interface Attribute {
   title: string;
   key: string;
-  type: string;
-  render?: React.SFC<any>;
+  type: AttributeType;
   options?: AttributeOption[];
+  required?: boolean;
 }
 
 interface AttributeOption {
@@ -97,7 +111,7 @@ interface AttributeOption {
 export interface Section {
   title: string;
   attributes: Attribute[];
-  is_standalone: boolean;
+  is_standalone?: boolean;
 }
 
 export interface CategoryColumn {

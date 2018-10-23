@@ -1,6 +1,6 @@
-export type OfferingStep = 'Describe' | 'Configure' | 'Review';
+export type OfferingStep = 'Overview' | 'Description' | 'Management' | 'Accounting' | 'Review';
 
-export const STEPS = ['Describe', 'Configure', 'Review'];
+export const STEPS: OfferingStep[] = ['Overview', 'Description', 'Management', 'Accounting', 'Review'];
 
 export interface FilterQuery {
   name?: string;

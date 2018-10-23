@@ -9,7 +9,7 @@ interface ProviderDataProps extends TranslateProps {
   provider: Provider;
 }
 
-export const ProviderData: React.SFC<ProviderDataProps> = (props: ProviderDataProps) => (
+export const ProviderData = (props: ProviderDataProps) => (
   <div className="provider-data">
     <h2 className="font-bold m-b-lg">
       {props.provider.name}

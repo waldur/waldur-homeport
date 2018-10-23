@@ -10,6 +10,7 @@ import modalSaga from '@waldur/modal/effects';
 import projectSaga from '@waldur/project/effects';
 import userSaga from '@waldur/user/support/effects';
 import providerSaga from '@waldur/providers/effects';
+import customerDetailsSaga from '@waldur/customer/details/store/effects';
 import tableSaga from '@waldur/table-react/effects';
 import monitoringSaga from '@waldur/resource/monitoring/effects';
 import pythonManagementSaga from '@waldur/ansible/python-management/effects';
@@ -31,6 +32,7 @@ export default [
   projectSaga,
   userSaga,
   providerSaga,
+  customerDetailsSaga,
   issueAttachmentsSaga,
   issueCommentsSaga,
   modalSaga,

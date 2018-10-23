@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AttributeCell renders boolean value 1`] = `"<i class=\\"fa fa-check text-info\\"></i>"`;
+
+exports[`AttributeCell renders choice attribute 1`] = `"NVidia K80"`;
+
+exports[`AttributeCell renders invalid choice attribute 1`] = `"N/A"`;
+
+exports[`AttributeCell renders list attribute 1`] = `"<span><i class=\\"fa fa-check\\"></i> Intel Xeon E5-2650v3<br/></span><span><i class=\\"fa fa-check\\"></i> Intel Xeon E5-2680v3<br/></span>"`;
+
+exports[`AttributeCell renders negative boolean value 1`] = `"<i class=\\"fa fa-times text-danger\\"></i>"`;
+
+exports[`AttributeCell renders string attribute 1`] = `"/opt/"`;

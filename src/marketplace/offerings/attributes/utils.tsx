@@ -13,6 +13,7 @@ export interface AttrConfig {
   component?: any;
   normalize?: (v: string) => string;
   checked?: boolean;
+  rows?: number;
 }
 
 export const configAttrField = attribute => {
@@ -24,6 +25,12 @@ export const configAttrField = attribute => {
         min: 0,
         parse: parseIntField,
         format: formatIntField,
+      };
+      break;
+    case 'text':
+      attr = {
+        component: 'textarea',
+        rows: 7,
       };
       break;
     case 'list':

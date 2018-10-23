@@ -1,6 +1,7 @@
 import { formValueSelector } from 'redux-form';
 
 import { OfferingComponent } from '@waldur/marketplace/types';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { FORM_ID } from './constants';
 import { PlanFormData } from './types';
@@ -26,7 +27,7 @@ export const getComponents = (state, type): OfferingComponent[] => {
 
 const getForm = formValueSelector(FORM_ID);
 
-export const getType = state => {
+export const getType = (state: any): string => {
   const option = getForm(state, 'type');
   if (option) {
     return option.value;
@@ -48,4 +49,9 @@ export const getPlanPrice = (state, planPath) => {
     return keys.reduce((total, item) => total + (planData.quotas[item] || 0) * (planData.prices[item] || 0), 0);
   }
   return 0;
+};
+
+export const isOfferingManagementDisabled = state => {
+  const user = getUser(state);
+  return user.is_support && !user.is_staff;
 };
