@@ -1,6 +1,6 @@
 import { get, getAll, getById, post, sendForm, getList } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
-import { State } from '@waldur/marketplace/orders/types';
+import { State, OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Category, Offering, Provider } from '@waldur/marketplace/types';
 import { Customer } from '@waldur/workspace/types';
 
@@ -33,6 +33,9 @@ export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
 
 export const getOrderDetails = (id: string) =>
   getById<State>('/marketplace-orders/', id);
+
+export const getOrderItem = id =>
+  getById<OrderItemResponse>('/marketplace-order-items/', id);
 
 export const setOrderState = (orderUuid, state) =>
   post(`/marketplace-orders/${orderUuid}/set_state_${state}/`).then(response => response.data);

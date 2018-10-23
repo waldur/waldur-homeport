@@ -20,11 +20,13 @@ export function getById<T = {}>(endpoint: string, id: string, options?: {}) {
   return get<T>(`${endpoint}${id}/`, options).then(response => response.data);
 }
 
-export const remove = <T = {}>(endpoint: string, options?: {}): angular.IHttpPromise<T> =>
-  $http.delete(`${ENV.apiEndpoint}api${endpoint}`, options);
+export function remove<T = {}>(endpoint: string, options?: {}): angular.IHttpPromise<T> {
+  return $http.delete(`${ENV.apiEndpoint}api${endpoint}`, options);
+}
 
-export const deleteById = <T = {}>(endpoint, id, options?) =>
-  remove<T>(`${endpoint}${id}/`, options).then(response => response.data);
+export function deleteById<T = {}>(endpoint, id, options?) {
+  return remove<T>(`${endpoint}${id}/`, options).then(response => response.data);
+}
 
 export function post<T = {}>(endpoint: string, options?: {}): angular.IHttpPromise<T> {
   return $http.post(`${ENV.apiEndpoint}api${endpoint}`, options);

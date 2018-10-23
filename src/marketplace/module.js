@@ -12,6 +12,7 @@ import marketplaceOfferingCreate from './offerings/create/OfferingCreateContaine
 import marketplaceOrdersList from './orders/OrdersList';
 import marketplaceOrderItemsList from './orders/OrderItemsContainer';
 import marketplaceOrderDetails from './orders/OrderDetailsContainer';
+import marketplaceOrderItemDetails from './orders/OrderItemDetailsContainer';
 import marketplaceProjectResourcesList from './orders/ProjectResourcesContainer';
 import marketplaceOfferingDetailsButton from './orders/OfferingDetailsButton';
 import marketplaceOfferingDetailsDialog from './orders/OfferingDetailsDialog';
@@ -36,6 +37,7 @@ export default module => {
   module.component('marketplaceOrderItemsList', marketplaceOrderItemsList);
   module.component('marketplaceProjectResourcesList', marketplaceProjectResourcesList);
   module.component('marketplaceOrderDetails', marketplaceOrderDetails);
+  module.component('marketplaceOrderItemDetails', marketplaceOrderItemDetails);
   module.component('marketplaceAttributeFilterListDialog', marketplaceAttributeFilterListDialog);
   module.component('marketplaceOfferingDetailsButton', marketplaceOfferingDetailsButton);
   module.component('marketplaceOfferingDetailsDialog', marketplaceOfferingDetailsDialog);

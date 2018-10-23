@@ -1,3 +1,5 @@
+import { Offering } from '@waldur/marketplace/types';
+
 export interface Component {
   type: string;
   billing_type: 'usage' | 'fixed';
@@ -13,4 +15,11 @@ export interface PricesData {
   periods: string[];
   total: number;
   totalPeriods: number[];
+}
+
+export interface PlanDetailsTableProps extends PricesData {
+  offering: Offering;
+  viewMode?: boolean;
+  formGroupClassName?: string;
+  columnClassName?: string;
 }

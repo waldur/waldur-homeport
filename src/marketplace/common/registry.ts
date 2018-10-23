@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Omit } from 'react-redux';
 
-import { OfferingConfigurationFormProps, Attribute } from '@waldur/marketplace/types';
-import { Offering } from '@waldur/marketplace/types';
+import { Offering, Attribute, OfferingDetailsProps, OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 const REGISTRY: {[key: string]: Omit<OfferingConfiguration, 'type'>} = {};
 
 interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   type: string;
   component: React.ComponentType<OfferingConfigurationFormProps>;
+  detailsComponent?: React.ComponentType<OfferingDetailsProps>;
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
   label: string;
   showOptions?: boolean;
@@ -29,6 +29,10 @@ export function registerOfferingType(config: OfferingConfiguration) {
 
 export function getFormComponent(offeringType) {
   return REGISTRY[offeringType].component;
+}
+
+export function getDetailsComponent(offeringType) {
+  return REGISTRY[offeringType].detailsComponent;
 }
 
 export function getFormSerializer(offeringType) {
