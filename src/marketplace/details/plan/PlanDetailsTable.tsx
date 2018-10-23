@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { ComponentEditRow } from '@waldur/marketplace/details/plan/ComponentEditRow';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 
 import { ComponentRow } from './ComponentRow';
-import { Component, PricesData } from './types';
+import { Component, PlanDetailsTableProps } from './types';
 import { pricesSelector } from './utils';
 
 const HeaderRow = (props: {periods: string[]}) => (
@@ -32,23 +33,25 @@ const HeaderRow = (props: {periods: string[]}) => (
 const FixedRows = (props: {components: Component[]}) => (
   <>
     {props.components.map((component, index) => (
-      <ComponentRow key={index} component={component}/>
+      <ComponentRow key={index} component={component} field={component.amount}/>
     ))}
   </>
 );
 
-const UsageRows = (props: {periods: string[], components: Component[]}) => (
-  <>
-    <tr className="text-center">
-      <td colSpan={3 + props.periods.length}>
-        {translate('Please enter estimated maximum usage in the rows below:')}
-      </td>
-    </tr>
-    {props.components.map((component, index) => (
-      <ComponentRow key={index} component={component}/>
-    ))}
-  </>
-);
+const UsageRows = (props: {periods: string[], components: Component[], viewMode: boolean}) => {
+  if (props.viewMode) {
+    return (
+      <>
+        {props.components.map((component, index) => (
+          <ComponentRow key={index} component={component} field={component.amount} />
+        ))}
+      </>
+    );
+  }
+  return (
+    <ComponentEditRow periods={props.periods} components={props.components}/>
+  );
+};
 
 const TotalRow = props => (
   <tr>
@@ -63,7 +66,7 @@ const TotalRow = props => (
   </tr>
 );
 
-const PureDetailsTable = (props: PricesData) => {
+const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDetailsTableProps) => {
   if (props.components.length === 0) {
     return null;
   }
@@ -72,21 +75,26 @@ const PureDetailsTable = (props: PricesData) => {
   const usageRows = props.components.filter(component => component.billing_type === 'usage');
 
   return (
-    <div className="form-group">
-      <div className="col-sm-offset-3 col-sm-9">
+    <div className={props.formGroupClassName}>
+      <div className={props.columnClassName}>
         <table className="table table-bordered">
           <thead>
             <HeaderRow periods={props.periods}/>
           </thead>
           <tbody>
             {fixedRows.length > 0 && <FixedRows components={fixedRows}/>}
-            {usageRows.length > 0 && <UsageRows components={usageRows} periods={props.periods}/>}
+            {usageRows.length > 0 && <UsageRows components={usageRows} periods={props.periods} viewMode={props.viewMode}/>}
             {props.components.length > 1 && <TotalRow totalPeriods={props.totalPeriods}/>}
           </tbody>
         </table>
       </div>
     </div>
   );
+};
+
+PureDetailsTable.defaultProps = {
+  formGroupClassName: 'form-group',
+  columnClassName: 'col-sm-offset-3 col-sm-9',
 };
 
 const connector = connect(pricesSelector);

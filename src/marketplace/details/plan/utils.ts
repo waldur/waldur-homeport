@@ -71,8 +71,28 @@ export const combinePrices = (plan, limits, offering) => {
   }
 };
 
+const getPlan = (state, props) => {
+  if (!props.viewMode) {
+    return  offeringSelector(state, 'plan');
+  }
+  if (props.viewMode && !!props.offering.plans.length) {
+    return props.offering.plans[0];
+  }
+};
+
+const getLimits = (state, props) => {
+  if (props.viewMode) {
+    return props.orderItem.quotas.reduce((acc, quota) => {
+      acc[quota.type] = quota.limit;
+      return acc;
+    }, {});
+  } else {
+    return offeringSelector(state, 'limits');
+  }
+};
+
 export const pricesSelector = (state, props): PricesData => {
-  const plan: Plan = offeringSelector(state, 'plan');
-  const limits: Limits = offeringSelector(state, 'limits');
+  const plan: Plan = getPlan(state, props);
+  const limits: Limits = getLimits(state, props);
   return combinePrices(plan, limits, props.offering);
 };

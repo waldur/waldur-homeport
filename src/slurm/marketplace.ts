@@ -2,6 +2,7 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 import { AllocationForm } from '@waldur/slurm/AllocationForm';
+import { SlurmPackageDetails } from '@waldur/slurm/SlurmPackageDetails';
 
 const ServiceSettingsAttributes = (): Attribute[] => [
   {
@@ -49,4 +50,5 @@ registerOfferingType({
   component: AllocationForm,
   providerType: 'SLURM',
   attributes: ServiceSettingsAttributes,
+  detailsComponent: SlurmPackageDetails,
 });

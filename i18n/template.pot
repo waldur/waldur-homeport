@@ -347,6 +347,7 @@ msgid "All spaces, hyphens and dots will be replaced with underscores."
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
+#: src/slurm/SlurmPackageDetails.tsx
 msgid "Allocation description"
 msgstr ""
 
@@ -355,6 +356,7 @@ msgid "Allocation has been updated."
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
+#: src/slurm/SlurmPackageDetails.tsx
 #: src/slurm/slurm-allocation-checkout-summary.html
 #: src/slurm/slurm-allocation-config.js
 msgid "Allocation name"
@@ -532,6 +534,12 @@ msgstr ""
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 msgid "Attachments"
+msgstr ""
+
+#: src/offering/OfferingConfigurationDetails.tsx
+#: src/openstack/OpenStackPackageDetails.tsx
+#: src/slurm/SlurmPackageDetails.tsx
+msgid "Attributes"
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
@@ -1481,10 +1489,12 @@ msgstr ""
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/jira/project/jira-project-config.js
 #: src/marketplace/details/OfferingTabs.tsx
+#: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/appstore-offering.js
@@ -2506,11 +2516,13 @@ msgstr ""
 msgid "Infrastructure"
 msgstr ""
 
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Initial admin password"
 msgstr ""
 
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Initial admin username"
@@ -2598,6 +2610,7 @@ msgstr ""
 msgid "Internal network allocation pool"
 msgstr ""
 
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-network/module.js
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
@@ -3237,12 +3250,14 @@ msgstr ""
 #: src/jira/project/JiraProjectSummary.tsx
 #: src/jira/project/jira-project-config.js
 #: src/jira/project/jira-projects-list.js
+#: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/appstore-offering.js
@@ -3866,6 +3881,10 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
+#: src/marketplace/routes.js
+msgid "Order item details"
+msgstr ""
+
 #: src/marketplace/cart/store/effects.ts
 msgid "Order item has been created."
 msgstr ""
@@ -4177,6 +4196,7 @@ msgstr ""
 msgid "Physical locations"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/openstack/OpenStackPackageForm.tsx
@@ -4236,7 +4256,7 @@ msgstr ""
 msgid "Please create a new one:"
 msgstr ""
 
-#: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/ComponentEditRow.tsx
 msgid "Please enter estimated maximum usage in the rows below:"
 msgstr ""
 
@@ -5904,6 +5924,7 @@ msgstr ""
 msgid "Size name"
 msgstr ""
 
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Skip connection to external network"
@@ -6236,6 +6257,7 @@ msgstr ""
 msgid "Tenant ID"
 msgstr ""
 
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "Tenant description"
 msgstr ""
@@ -6249,6 +6271,7 @@ msgid "Tenant has been updated."
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/actions/change-package-dialog.html
@@ -6721,6 +6744,10 @@ msgstr ""
 
 #: src/user/keys/appstore-field-select-ssh-key.js
 msgid "Unable to get list of SSH public keys."
+msgstr ""
+
+#: src/marketplace/orders/OrderItemDetailsContainer.tsx
+msgid "Unable to get order item."
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
