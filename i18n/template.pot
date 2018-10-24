@@ -315,7 +315,7 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
 msgstr ""
@@ -677,13 +677,13 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Bank account"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Bank name"
 msgstr ""
 
@@ -1105,14 +1105,14 @@ msgid "Contact e-mail"
 msgstr ""
 
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Contact email"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Contact phone"
 msgstr ""
 
@@ -1166,7 +1166,7 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Country"
 msgstr ""
 
@@ -1677,7 +1677,7 @@ msgid "E-mail address"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "EU VAT ID"
 msgstr ""
 
@@ -3090,6 +3090,10 @@ msgstr ""
 msgid "Marketplace orders"
 msgstr ""
 
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+msgid "Marketplace service provider"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 msgid "Max # of backups"
 msgstr ""
@@ -3321,7 +3325,7 @@ msgstr ""
 #: src/customer/details/CustomerDetails.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
@@ -3629,6 +3633,10 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+msgid "Not a service provider."
+msgstr ""
+
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 msgid "Not assigned"
 msgstr ""
@@ -3752,7 +3760,7 @@ msgstr ""
 
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/routes.js
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Offerings"
 msgstr ""
 
@@ -3996,7 +4004,7 @@ msgstr ""
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Organization type"
 msgstr ""
 
@@ -4375,7 +4383,7 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Postal code"
 msgstr ""
 
@@ -4986,6 +4994,10 @@ msgstr ""
 msgid "Register as an expert provider"
 msgstr ""
 
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+msgid "Register as service provider"
+msgstr ""
+
 #: src/auth/auth-login.html
 msgid "Register to"
 msgstr ""
@@ -5006,8 +5018,12 @@ msgstr ""
 msgid "Registered"
 msgstr ""
 
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+msgid "Registered at:"
+msgstr ""
+
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Registration code"
 msgstr ""
 
@@ -5781,6 +5797,10 @@ msgstr ""
 
 #: src/marketplace/details/LeafletMap.tsx
 msgid "Service provider"
+msgstr ""
+
+#: src/marketplace/service-providers/ServiceProviderRegisterButtonContainer.tsx
+msgid "Service provider has been registered."
 msgstr ""
 
 #: src/providers/support/FlowMapFilter.tsx
@@ -6812,6 +6832,10 @@ msgstr ""
 msgid "Unable to load project types or certifications."
 msgstr ""
 
+#: src/marketplace/service-providers/CustomerDetails.tsx
+msgid "Unable to load provider details."
+msgstr ""
+
 #: src/providers/ProviderUpdateComponent.tsx
 msgid "Unable to load provider."
 msgstr ""
@@ -6825,7 +6849,7 @@ msgstr ""
 msgid "Unable to load sections for comparison."
 msgstr ""
 
-#: src/marketplace/service-providers/ProviderDetailsContainer.tsx
+#: src/marketplace/service-providers/ServiceProviderRegisterButtonContainer.tsx
 msgid "Unable to load service provider."
 msgstr ""
 
@@ -6847,6 +6871,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to post comment."
+msgstr ""
+
+#: src/marketplace/service-providers/ServiceProviderRegisterButtonContainer.tsx
+msgid "Unable to register service provider."
 msgstr ""
 
 #: src/customer/details/store/effects.ts

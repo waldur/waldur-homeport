@@ -1,6 +1,5 @@
 import { InjectedFormProps } from 'redux-form';
 
-import { Customer } from '@waldur/customer/types';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Offering } from '@waldur/marketplace/types';
 import { Project } from '@waldur/workspace/types';
@@ -144,10 +143,11 @@ export interface OfferingsListType {
   loading: boolean;
 }
 
-export interface Provider extends Customer {
+export interface ServiceProvider {
   image?: string;
   description?: string;
   service_offerings?: Offering[];
+  created: string;
 }
 
 export interface OfferingConfigurationFormProps extends InjectedFormProps {

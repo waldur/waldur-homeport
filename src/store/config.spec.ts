@@ -1,24 +1,24 @@
 import { initConfig, reducer, isVisible } from './config';
 
 describe('Configuration reducer', () => {
-  const features = {experts: true, paypal: true};
+  const disabledFeatures = {experts: true, paypal: true};
 
   it('should merge experimental and disabled features', () => {
     const actual = reducer(undefined, initConfig({
       disabledFeatures: ['experts'],
       toBeFeatures: ['paypal'],
     }));
-    expect(actual.features).toEqual(features);
+    expect(actual.disabledFeatures).toEqual(disabledFeatures);
   });
 
   it('should check disabled feature', () => {
-    const state = {config: {features, featuresVisible: false}};
+    const state = {config: {disabledFeatures, featuresVisible: false}};
     expect(isVisible(state, 'experts')).toBe(false);
     expect(isVisible(state, 'billing')).toBe(true);
   });
 
   it('should skip check if all features are visible', () => {
-    const state = {config: {features, featuresVisible: true}};
+    const state = {config: {disabledFeatures, featuresVisible: true}};
     expect(isVisible(state, 'experts')).toBe(true);
     expect(isVisible(state, 'billing')).toBe(true);
   });
