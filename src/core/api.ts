@@ -13,8 +13,8 @@ export function getList<T = {}>(endpoint: string, params?: {}): angular.IPromise
   );
 }
 
-export const getFirst = (endpoint, params?) =>
-  getList(endpoint, params).then(data => data[0]);
+export const getFirst = <T = {}>(endpoint, params?) =>
+  getList<T>(endpoint, params).then(data => data[0]);
 
 export function getById<T = {}>(endpoint: string, id: string, options?: {}) {
   return get<T>(`${endpoint}${id}/`, options).then(response => response.data);

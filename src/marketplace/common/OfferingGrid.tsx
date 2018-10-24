@@ -10,11 +10,11 @@ import { OfferingsListType } from '@waldur/marketplace/types';
 import { MobileOfferingCard } from './MobileOfferingCard';
 import { OfferingCard } from './OfferingCard';
 
-interface OfferingGridProps extends OfferingsListType {
+interface OfferingGridProps extends OfferingsListType, TranslateProps {
   width?: number;
 }
 
-export const OfferingGrid: React.ComponentType<OfferingGridProps> = withTranslation((props: OfferingGridProps & TranslateProps) => {
+export const OfferingGrid = withTranslation((props: OfferingGridProps) => {
   if (props.loading) {
     return <LoadingSpinner/>;
   }

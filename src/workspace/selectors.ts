@@ -27,6 +27,9 @@ export const getWorkspace = (state: OuterState): WorkspaceType =>
 export const isStaff = (state: OuterState): boolean =>
   getUser(state) && getUser(state).is_staff;
 
+export const isSupport = (state: OuterState): boolean =>
+  getUser(state) && getUser(state).is_support;
+
 export const getOwner = createSelector(
   getUser,
   getCustomer,

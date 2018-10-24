@@ -6,7 +6,8 @@ import marketplaceCheckout from './cart/CheckoutPage';
 import cartIndicator from './cart/ShoppingCartIndicator';
 import marketplaceOffering from './details/DetailsPage';
 import marketplaceCategory from './category/CategoryPage';
-import marketplaceProviderDetails from './service-providers/ProviderDetailsContainer';
+import marketplaceProviderDetails from './service-providers/CustomerDetailsContainer';
+import marketplaceServiceProviderButton from './service-providers/ServiceProviderRegisterButtonContainer';
 import marketplaceVendorOfferings from './offerings/OfferingsList';
 import marketplaceOfferingCreate from './offerings/create/OfferingCreateContainer';
 import marketplaceOrdersList from './orders/OrdersList';
@@ -31,6 +32,7 @@ export default module => {
   module.component('marketplaceOffering', marketplaceOffering);
   module.component('marketplaceCategory', marketplaceCategory);
   module.component('marketplaceProviderDetails', marketplaceProviderDetails);
+  module.component('marketplaceServiceProviderButton', marketplaceServiceProviderButton);
   module.component('marketplaceVendorOfferings', marketplaceVendorOfferings);
   module.component('marketplaceOfferingCreate', marketplaceOfferingCreate);
   module.component('marketplaceOrdersList', marketplaceOrdersList);
