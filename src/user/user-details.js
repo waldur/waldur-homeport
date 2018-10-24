@@ -12,7 +12,7 @@ export default function userDetails() {
 
 // @ngInject
 function UserDetailsController($scope, $state, $stateParams, usersService,
-  stateUtilsService, currentStateService, WorkspaceService) {
+  stateUtilsService, currentStateService, WorkspaceService, SidebarExtensionService) {
 
   function getDashboardTab(user) {
     const prevWorkspace = stateUtilsService.getPrevWorkspace();
@@ -37,9 +37,9 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
       let dashboardTab = getDashboardTab(user);
       if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
         if (dashboardTab) {
-          $scope.items = [dashboardTab].concat(PRIVATE_USER_TABS);
+          $scope.items = SidebarExtensionService.filterItems([dashboardTab].concat(PRIVATE_USER_TABS));
         } else {
-          $scope.items = PRIVATE_USER_TABS;
+          $scope.items = SidebarExtensionService.filterItems(PRIVATE_USER_TABS);
         }
         $scope.isPrivate = true;
         $scope.currentUser = user;
@@ -52,9 +52,9 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
       } else {
         usersService.$get($stateParams.uuid).then(function(user) {
           if (dashboardTab) {
-            $scope.items = [dashboardTab].concat(PUBLIC_USER_TABS);
+            $scope.items = SidebarExtensionService.filterItems([dashboardTab].concat(PUBLIC_USER_TABS));
           } else {
-            $scope.items = PUBLIC_USER_TABS;
+            $scope.items = SidebarExtensionService.filterItems(PUBLIC_USER_TABS);
           }
           $scope.currentUser = user;
           $scope.isPrivate = false;
