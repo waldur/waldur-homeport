@@ -6,6 +6,7 @@ import { getFormValues } from 'redux-form';
 import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { OrderItemDetailsLink } from '@waldur/marketplace/orders/OrderItemDetailsLink';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -14,7 +15,11 @@ export const TableComponent = props => {
   const columns = [
     {
       title: translate('Offering'),
-      render: ({ row }) => row.offering_name,
+      render: ({row}) => (
+        <OrderItemDetailsLink order_item_uuid={row.uuid}>
+          {row.offering_name}
+        </OrderItemDetailsLink>
+      ),
     },
     {
       title: translate('Client organization'),
