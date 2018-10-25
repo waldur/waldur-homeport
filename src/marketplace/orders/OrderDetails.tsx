@@ -53,6 +53,7 @@ export class OrderDetails extends React.Component<OrderDetailsProps & TranslateP
           state: matchState(orderDetails.state),
           items: orderDetails.items,
           total_cost: orderDetails.total_cost,
+          file: orderDetails.file,
         },
         loading: false,
         loaded: true,
@@ -104,7 +105,10 @@ export class OrderDetails extends React.Component<OrderDetailsProps & TranslateP
           </div>
         </div>
         <div className="col-xl-3 col-lg-4">
-          <OrderSummary total={this.state.orderDetails.total_cost}/>
+          <OrderSummary
+            total={this.state.orderDetails.total_cost}
+            file={this.state.orderDetails.file}
+          />
         </div>
       </div>
     );

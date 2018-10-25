@@ -29,4 +29,5 @@ export interface State {
   items: OrderItemResponse[];
   state: OrderState;
   total_cost?: number;
+  file?: string;
 }

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import { DownloadLink } from '@waldur/core/DownloadLink';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
@@ -11,6 +12,7 @@ import { getTotal } from './store/selectors';
 
 interface ShoppingCartSidebarProps {
   total: number;
+  file?: string;
   customer: Customer;
   project: Project;
 }
@@ -41,11 +43,14 @@ export const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) => (
       </tbody>
     </table>
 
-    <a className="btn btn-outline btn-default">
-      <i className="fa fa-file-pdf-o m-r-sm"/>
-      {' '}
-      {translate('Download order PDF file')}
-    </a>
+    {props.file && (
+      <DownloadLink
+        label={translate('Download order PDF file')}
+        url={props.file}
+        filename="marketplace-order.pdf"
+        className="btn btn-outline btn-default"
+      />
+    )}
   </aside>
 );
 
