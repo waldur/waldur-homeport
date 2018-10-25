@@ -34,7 +34,7 @@ export const OfferingConfigurationDetails = (props: OfferingDetailsProps) => {
         {renderValue(attributes.name)}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Description')}>
-        {renderValue(attributes.name)}
+        {renderValue(attributes.description)}
       </OrderItemDetailsField>
       {renderDynamicAttributes(props.offering, attributes)}
       <PlanDetails orderItem={props.orderItem} offering={props.offering} translate={translate}/>
