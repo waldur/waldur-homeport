@@ -12,13 +12,18 @@ interface StateProps {
   project: Project;
 }
 
+interface OwnProps {
+  total: number;
+  file?: string;
+}
+
 const mapStateToProps = state => ({
   customer: getCustomer(state),
   project: getProject(state),
 });
 
 const enhance = compose(
-  connect<StateProps, {}, {total: number}>(mapStateToProps),
+  connect<StateProps, {}, OwnProps>(mapStateToProps),
   withTranslation,
 );
 

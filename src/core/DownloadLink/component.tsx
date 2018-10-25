@@ -10,6 +10,7 @@ interface DownloadLinkProps extends ExternalLinkProps {
   loading: boolean;
   loaded: boolean;
   erred: boolean;
+  className?: string;
 }
 
 export class PureDownloadLink extends React.Component<DownloadLinkProps> {
@@ -18,7 +19,7 @@ export class PureDownloadLink extends React.Component<DownloadLinkProps> {
     return (
       <span>
         <a onClick={onDownload}
-          className={classNames({disabled: loading})}>
+          className={classNames({disabled: loading}, this.props.className)}>
           <i className="fa fa-download m-r-xs"/>
           {' '}
           {label}
