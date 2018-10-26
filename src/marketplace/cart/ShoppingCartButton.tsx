@@ -2,10 +2,8 @@ import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
 import { OfferingButton } from '@waldur/marketplace/common/OfferingButton';
-import { Offering } from '@waldur/marketplace/types';
 
 interface ShoppingCartButtonProps {
-  offering: Offering;
   inCart: boolean;
   addItem(): void;
   removeItem(): void;

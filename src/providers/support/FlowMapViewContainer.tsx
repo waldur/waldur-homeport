@@ -30,7 +30,7 @@ interface FlowMapViewComponentProps extends TranslateProps {
 }
 
 class FlowMapViewComponent extends React.Component<FlowMapViewComponentProps> {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchServiceUsageStart();
   }
   render() {
@@ -57,8 +57,8 @@ const mapDispatchToProps = {
 };
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps, mapDispatchToProps),
+  withTranslation,
 );
 
 const FlowMapViewContainer = enhance(FlowMapViewComponent);

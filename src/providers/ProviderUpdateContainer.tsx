@@ -41,8 +41,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps, mapDispatchToProps),
+  withTranslation,
 );
 
 export const ProviderUpdateContainer = enhance(ProviderUpdateComponent);

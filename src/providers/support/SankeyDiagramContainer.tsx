@@ -18,14 +18,9 @@ interface SankeyDiagramComponentProps {
 }
 
 class SankeyDiagramComponent extends React.Component<SankeyDiagramComponentProps> {
-  sankeyDiagramCalculator = undefined;
+  sankeyDiagramCalculator = new SankeyDiagramCalculator();
 
-  constructor(props) {
-    super(props);
-    this.sankeyDiagramCalculator = new SankeyDiagramCalculator();
-  }
-
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchServiceUsageStart();
   }
 

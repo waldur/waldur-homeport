@@ -7,7 +7,7 @@ import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
 import ActionButton from '@waldur/table-react/ActionButton';
 
-interface WizardProps {
+interface WizardProps extends TranslateProps {
   steps: string[];
   step: string;
   setStep(step: string): void;
@@ -19,7 +19,7 @@ interface WizardProps {
   tabs: {[key: string]: React.ComponentType};
 }
 
-export const Wizard = withTranslation((props: WizardProps & TranslateProps) => (
+export const Wizard = withTranslation((props: WizardProps) => (
   <>
     <StepsList
       choices={props.steps}

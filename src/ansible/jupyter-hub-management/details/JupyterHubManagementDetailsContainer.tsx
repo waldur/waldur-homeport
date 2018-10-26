@@ -92,9 +92,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({form: JUPYTER_HUB_MANAGEMENT_DETAILS_FORM_NAME, validate: validateJupyterHubManagementForm}),
+  withTranslation,
 );
 
 const JupyterHubManagementDetailsContainer = enhance(JupyterHubManagementDetailsComponent);

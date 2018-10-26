@@ -6,8 +6,12 @@ import { withTranslation } from '@waldur/i18n';
 
 import { openCreateDialog } from './actions';
 
-interface ZabbixHostCreateButtonProps {
+interface OwnProps {
   resource: any;
+}
+
+interface DispatchProps {
+  onOpenCreateDialog(): void;
 }
 
 const PureZabbixHostCreateButton = props => (
@@ -22,6 +26,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   onOpenCreateDialog: () => dispatch(openCreateDialog(ownProps.resource)),
 });
 
-const enhance = compose(connect(null, mapDispatchToProps), withTranslation);
+const enhance = compose(connect<{}, DispatchProps, OwnProps>(null, mapDispatchToProps), withTranslation);
 
-export const ZabbixHostCreateButton: React.ComponentType<ZabbixHostCreateButtonProps> = enhance(PureZabbixHostCreateButton);
+export const ZabbixHostCreateButton = enhance(PureZabbixHostCreateButton);

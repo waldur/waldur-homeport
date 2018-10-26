@@ -31,13 +31,13 @@ const PureCustomerEventsFilter = () => (
 );
 
 const enhance = compose(
-  withTranslation,
   reduxForm({
     form: 'customerEventsFilter',
     initialValues: {
       feature: ['customers'],
     },
   }),
+  withTranslation,
 );
 
 export const CustomerEventsFilter = enhance(PureCustomerEventsFilter);

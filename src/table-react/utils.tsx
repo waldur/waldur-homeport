@@ -63,8 +63,8 @@ export function connectTable(options: TableOptions) {
       });
 
       const enhance = compose(
+        connect(mapStateToProps, mapDispatchToProps),
         withTranslation,
-        connect(mapStateToProps, mapDispatchToProps)
       );
 
       const ConnectedComponent = enhance(Component);

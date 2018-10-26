@@ -18,10 +18,7 @@ export default class SankeyDiagram extends React.Component<SankeyDiagramProps, S
   container: ReactNode;
   chart = undefined;
 
-  constructor(props) {
-    super(props);
-    this.state = {loading: true};
-  }
+  state = {loading: true};
 
   getChartsOptions() {
     return {

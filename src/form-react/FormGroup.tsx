@@ -11,7 +11,6 @@ import { FormField } from './types';
 
 interface FormGroupProps extends FormField {
   meta: WrappedFieldMetaProps;
-  children: React.ReactElement<any>;
   clearOnUnmount?: boolean;
 }
 

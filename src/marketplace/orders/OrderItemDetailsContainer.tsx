@@ -18,16 +18,13 @@ interface OrderItemDetailsContainerState {
 }
 
 class OrderItemDetailsContainer extends React.Component<undefined, OrderItemDetailsContainerState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      orderItem: null,
-      offering: null,
-      category: null,
-      loading: true,
-      loaded: false,
-    };
-  }
+  state = {
+    orderItem: null,
+    offering: null,
+    category: null,
+    loading: true,
+    loaded: false,
+  };
 
   async loadData() {
     try {

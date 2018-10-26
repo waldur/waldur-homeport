@@ -9,12 +9,12 @@ import * as actions from '../store/actions';
 import { MARKETPLACE_FILTER_FORM } from '../store/constants';
 import { countSelectedFilters } from '../utils';
 
-interface MobileFilterActionsProps {
+interface MobileFilterActionsProps extends TranslateProps {
   showAttributeFilterDialog?(): void;
   filterValues?: any;
 }
 
-export const PureMobileFilterActions: React.SFC<MobileFilterActionsProps> = (props: MobileFilterActionsProps & TranslateProps) => (
+export const PureMobileFilterActions: React.SFC<MobileFilterActionsProps> = props => (
   <button
     type="button"
     className="btn btn-primary btn-info"
@@ -36,8 +36,8 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps, mapDispatchToProps),
+  withTranslation,
 );
 
 export const MobileFilterActions = enhance(PureMobileFilterActions);

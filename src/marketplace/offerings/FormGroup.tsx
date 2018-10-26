@@ -2,7 +2,6 @@ import * as React from 'react';
 
 interface FormGroupProps {
   label?: string;
-  children: React.ReactNode;
   required?: boolean;
   className?: string;
   labelClassName?: string;
@@ -10,7 +9,7 @@ interface FormGroupProps {
   classNameWithoutLabel?: string;
 }
 
-export const FormGroup: React.SFC<FormGroupProps> = (props: FormGroupProps) => (
+export const FormGroup: React.SFC<FormGroupProps> = props => (
   <div className={props.className}>
     {props.label ? (
       <>

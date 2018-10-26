@@ -2,15 +2,14 @@ import * as React from 'react';
 import * as OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import * as BootstrapTooltip from 'react-bootstrap/lib/Tooltip';
 
-interface Props {
+interface TooltipProps {
   label: React.ReactNode;
-  children: React.ReactNode;
   id: string;
   className?: string;
   onClick?(): void;
 }
 
-export const Tooltip = ({ label, children, id, className, onClick }: Props) => (
+export const Tooltip: React.SFC<TooltipProps> = ({ label, children, id, className, onClick }) => (
   <OverlayTrigger placement="top" overlay={<BootstrapTooltip id={id}>{label}</BootstrapTooltip>}>
     <span className={className} onClick={onClick}>
       {children}
