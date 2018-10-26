@@ -28,8 +28,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const enhance = compose(
+  connect(null, mapDispatchToProps),
   withTranslation,
-  connect(null, mapDispatchToProps)
 );
 
 export const UserDetailsButton = enhance(PureUserDetailsButton);

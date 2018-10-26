@@ -13,7 +13,7 @@ interface ActionsDropdownState {
   open: boolean;
 }
 
-class PureActionsDropdown extends React.Component<ActionsDropdownProps & TranslateProps, ActionsDropdownState> {
+class PureActionsDropdown extends React.Component<ActionsDropdownProps, ActionsDropdownState> {
   state = {
     open: false,
   };

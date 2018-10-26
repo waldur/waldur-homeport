@@ -27,13 +27,13 @@ const PureProjectEventsFilter = () => (
 );
 
 const enhance = compose(
-  withTranslation,
   reduxForm({
     form: 'projectEventsFilter',
     initialValues: {
       feature: ['projects'],
     },
   }),
+  withTranslation,
 );
 
 export const ProjectEventsFilter = enhance(PureProjectEventsFilter);

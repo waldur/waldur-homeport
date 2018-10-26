@@ -4,14 +4,13 @@ import { Field } from 'redux-form';
 import { FormGroup } from './FormGroup';
 
 interface FormContainerProps {
-  children: React.ReactNode;
   submitting: boolean;
   clearOnUnmount?: boolean;
   labelClass?: string;
   controlClass?: string;
 }
 
-export const FormContainer = (props: FormContainerProps) => (
+export const FormContainer: React.SFC<FormContainerProps> = props => (
   <div>
     {React.Children.map(props.children, (input: any) => (input && input.props.name ?
       <Field

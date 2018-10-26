@@ -40,8 +40,8 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const enhance = compose(
   connector,
-  withTranslation,
   reduxForm({form: FORM_ID}),
+  withTranslation,
 );
 
 const IssueCreateDialogComponent = enhance(IssueCreateDialog);

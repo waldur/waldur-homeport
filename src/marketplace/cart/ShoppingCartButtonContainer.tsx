@@ -6,10 +6,19 @@ import { ShoppingCartButton } from './ShoppingCartButton';
 import { addItem, removeItem } from './store/actions';
 import { hasItem } from './store/selectors';
 
-interface ShoppingCartButtonContainerProps {
+interface OwnProps {
   item: OrderItemRequest;
   flavor?: string;
   disabled?: boolean;
+}
+
+interface StateProps {
+  inCart: boolean;
+}
+
+interface DispatchProps {
+  addItem(): void;
+  removeItem(): void;
 }
 
 const mapStateToProps = (state, ownProps) => ({
@@ -23,7 +32,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-const enhance = connect(mapStateToProps, mapDispatchToProps);
+const enhance = connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps);
 
-export const ShoppingCartButtonContainer: React.ComponentClass<ShoppingCartButtonContainerProps> =
-  enhance(ShoppingCartButton);
+export const ShoppingCartButtonContainer = enhance(ShoppingCartButton);

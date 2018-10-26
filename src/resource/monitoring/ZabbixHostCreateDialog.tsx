@@ -69,10 +69,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const enhance = compose(
-  withTranslation,
   reduxForm({form: 'monitoringCreate'}),
   formValues({link: 'service_project_link'}),
   connect(null, mapDispatchToProps),
+  withTranslation,
 );
 
 export default connectAngularComponent(enhance(ZabbixHostCreateDialog), ['resolve']);

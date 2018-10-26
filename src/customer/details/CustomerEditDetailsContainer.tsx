@@ -18,8 +18,8 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps, mapDispatchToProps),
+  withTranslation,
 );
 
 export const CustomerEditDetailsContainer = enhance(CustomerEditDetails);

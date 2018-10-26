@@ -6,9 +6,18 @@ import { OfferingCompareButton } from './OfferingCompareButton';
 import { addItem, removeItem } from './store/actions';
 import { hasItem } from './store/selectors';
 
-interface OfferingCompareButtonContainerProps {
+interface OwnProps {
   offering: Offering;
   flavor?: string;
+}
+
+interface StateProps {
+  isCompared: boolean;
+}
+
+interface DispatchProps {
+  addItem(): void;
+  removeItem(): void;
 }
 
 const mapStateToProps = (state, ownProps) => ({
@@ -22,7 +31,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-const enhance = connect(mapStateToProps, mapDispatchToProps);
+const enhance = connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps);
 
-export const OfferingCompareButtonContainer: React.ComponentClass<OfferingCompareButtonContainerProps> =
-  enhance(OfferingCompareButton);
+export const OfferingCompareButtonContainer = enhance(OfferingCompareButton);

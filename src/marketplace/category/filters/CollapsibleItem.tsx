@@ -16,12 +16,9 @@ interface CollapsibleItemState {
 }
 
 export class CollapsibleItem extends React.Component<CollapsibleItemProps, CollapsibleItemState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapsed: false,
-    };
-  }
+  state = {
+    collapsed: false,
+  };
 
   onClick = () => {
     this.setState({collapsed: !this.state.collapsed});

@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 
 import { openDetailsDialog } from './actions';
 
-interface ZabbixHostDetailsButtonProps {
+interface OwnProps {
   host: any;
   label: React.ReactNode;
   textClass: string;
+}
+
+interface DispatchProps {
+  onOpenDetailsDialog(): void;
 }
 
 const PureZabbixHostDetailsButton = props => (
@@ -21,5 +25,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   onOpenDetailsDialog: () => dispatch(openDetailsDialog(ownProps.host)),
 });
 
-export const ZabbixHostDetailsButton: React.ComponentType<ZabbixHostDetailsButtonProps> =
-  connect(null, mapDispatchToProps)(PureZabbixHostDetailsButton);
+const connector = connect<{}, DispatchProps, OwnProps>(null, mapDispatchToProps);
+
+export const ZabbixHostDetailsButton = connector(PureZabbixHostDetailsButton);

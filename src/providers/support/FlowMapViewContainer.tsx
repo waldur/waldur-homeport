@@ -57,8 +57,8 @@ const mapDispatchToProps = {
 };
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps, mapDispatchToProps),
+  withTranslation,
 );
 
 const FlowMapViewContainer = enhance(FlowMapViewComponent);

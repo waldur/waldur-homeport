@@ -50,8 +50,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps, mapDispatchToProps),
+  withTranslation,
 );
 
 export const ResourceSummaryModal = enhance(PureResourceSummaryModal);

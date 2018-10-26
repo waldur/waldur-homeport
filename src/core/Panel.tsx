@@ -1,13 +1,12 @@
 import * as React from 'react';
 
-interface Props {
+interface PanelProps {
   title: string;
   className?: string;
-  children: React.ReactNode;
   actions?: React.ReactNode;
 }
 
-const Panel = ({ title, children, className, actions }: Props) => (
+const Panel: React.SFC<PanelProps> = ({ title, children, className, actions }) => (
   <div className={'ibox ' + className}>
     <div className="ibox-title">
       <h5>{title}</h5>

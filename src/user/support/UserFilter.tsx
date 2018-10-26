@@ -65,9 +65,9 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  withTranslation,
   reduxForm({form: 'userFilter'}),
   connect(mapStateToProps),
+  withTranslation,
 );
 
 export const UserFilter = enhance(PureUserFilter);
