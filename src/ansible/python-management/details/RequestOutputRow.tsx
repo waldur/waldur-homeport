@@ -17,14 +17,15 @@ export class RequestOutputRow<R extends ManagementRequest<R>> extends React.Comp
     taskPosition: -1,
   };
 
-  componentWillReceiveProps(nextProps: RequestOutputRowProps<R>) {
-    this.setState({
-      taskPosition: this.findTaskPosition(nextProps.request, nextProps.unfoldedRequests),
-    });
+  static getDerivedStateFromProps(props) {
+    return {
+      taskPosition: this.findTaskPosition(props.request, props.unfoldedRequests),
+    };
   }
 
-  findTaskPosition = (request: R, unfoldedRequests: UnfoldedRequest[]) =>
-    unfoldedRequests.findIndex(unfoldedRequest => unfoldedRequest.requestUuid === request.uuid)
+  static findTaskPosition(request, unfoldedRequests: UnfoldedRequest[]) {
+    return unfoldedRequests.findIndex(unfoldedRequest => unfoldedRequest.requestUuid === request.uuid);
+  }
 
   isOutputBeingLoadedForTheFirstTime = () => this.props.unfoldedRequests[this.state.taskPosition].loadingForFirstTime;
 

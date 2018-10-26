@@ -3,7 +3,10 @@ import * as React from 'react';
 import { translate } from '@waldur/i18n';
 import { OfferingButton } from '@waldur/marketplace/common/OfferingButton';
 
+import { OrderItemRequest } from './types';
+
 interface ShoppingCartButtonProps {
+  item: OrderItemRequest;
   inCart: boolean;
   addItem(): void;
   removeItem(): void;

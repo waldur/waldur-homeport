@@ -10,9 +10,9 @@
   version "17.2.0"
   resolved "https://registry.yarnpkg.com/@tweenjs/tween.js/-/tween.js-17.2.0.tgz#21f89b709bafc4b303adae7a83b4f35a0d9e4796"
 
-"@types/angular@>=1.5", "@types/angular@^1.6.32":
-  version "1.6.38"
-  resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.6.38.tgz#78640577ad50b23e5aaa94a9f584c38cd3ac0ab5"
+"@types/angular@^1.6.39":
+  version "1.6.51"
+  resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.6.51.tgz#a67515b0ba6a2ff68894a39405c1343cbf9c36d4"
 
 "@types/cheerio@*":
   version "0.22.5"
@@ -39,9 +39,13 @@
   dependencies:
     "@types/lodash" "*"
 
-"@types/lodash@*", "@types/lodash@^4.14.76":
+"@types/lodash@*":
   version "4.14.81"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.81.tgz#c944b38118615fa54be6cac1ef7ba5326ff70d6e"
+
+"@types/lodash@^4.14.85":
+  version "4.14.117"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.117.tgz#695a7f514182771a1e0f4345d189052ee33c8778"
 
 "@types/node@*":
   version "8.0.47"
@@ -57,12 +61,6 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dom@^15.5.1":
-  version "15.5.6"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-15.5.6.tgz#7794ff7822882b59b899c30294e1b1e62e97757e"
-  dependencies:
-    "@types/react" "^15"
-
 "@types/react-dom@^16.0.2":
   version "16.0.2"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.2.tgz#2da9de21fd83f0140b64794ad9c47930230aedae"
@@ -70,9 +68,9 @@
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react-redux@^5.0.12":
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-5.0.12.tgz#c066812eb970009b373372f439d08265ed2a6f8e"
+"@types/react-redux@5.0.19":
+  version "5.0.19"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-5.0.19.tgz#d9e9af54c619b7495fffcfa23a0b8922d68316c4"
   dependencies:
     "@types/react" "*"
     redux "^3.6.0"
@@ -83,13 +81,11 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.0.0", "@types/react@^16.0.20":
-  version "16.0.20"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.20.tgz#dc16feb9c0bdf50e439482c6fd3c43d5a1d9f3b1"
-
-"@types/react@^15":
-  version "15.6.5"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.6.5.tgz#fb23b8d8b7226313b645b6e84fb178976bbfe587"
+"@types/react@*", "@types/react@16.3.8":
+  version "16.3.8"
+  resolved "http://registry.npmjs.org/@types/react/-/react-16.3.8.tgz#40c7e4eca3f48783e4c4ccee26fc7f5a5a476d84"
+  dependencies:
+    csstype "^2.0.0"
 
 "@types/redux-form@^7.0.10":
   version "7.0.10"
@@ -321,7 +317,11 @@ angular@1.x, angular@^1.0.8, angular@^1.2.5, angular@~1.5.11:
   version "1.5.11"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.5.11.tgz#8c5ba7386f15965c9acf3429f6881553aada30d6"
 
-angular@>=1.5.0, angular@>=1.5.11:
+angular@>=1.5:
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.5.tgz#d1c1c01c6f5dc835638f3f9aa51012857bdac49e"
+
+angular@>=1.5.0:
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.6.tgz#fd5a3cfb437ce382d854ee01120797978527cb64"
 
@@ -2126,6 +2126,10 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   resolved "https://registry.yarnpkg.com/cssstyle/-/cssstyle-0.2.37.tgz#541097234cb2513c83ceed3acddc27ff27987d54"
   dependencies:
     cssom "0.3.x"
+
+csstype@^2.0.0:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.7.tgz#bf9235d5872141eccfb2d16d82993c6b149179ff"
 
 cubic2quad@^1.0.0:
   version "1.1.1"
@@ -5345,12 +5349,12 @@ ng-annotate@1.2.1:
     stringset "~0.2.1"
     tryor "~0.1.2"
 
-ngcomponent@^4.0.1:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/ngcomponent/-/ngcomponent-4.0.2.tgz#ad0692dfddb99c7abf802088cca7edfeb98c1018"
+ngcomponent@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/ngcomponent/-/ngcomponent-4.1.0.tgz#793e379138f552ea0cd2c767ad0aa7057678e228"
   dependencies:
-    "@types/angular" "^1.6.32"
-    "@types/lodash" "^4.14.76"
+    "@types/angular" "^1.6.39"
+    "@types/lodash" "^4.14.85"
     angular ">=1.5.0"
     lodash "^4.17.4"
 
@@ -6530,9 +6534,9 @@ react-bootstrap@^0.31.5:
     uncontrollable "^4.1.0"
     warning "^3.0.0"
 
-react-dom@16.2.0:
-  version "16.2.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"
+react-dom@16.4:
+  version "16.4.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.4.2.tgz#4afed569689f2c561d2b8da0b819669c38a0bda4"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -6604,21 +6608,18 @@ react-test-renderer@^16.0.0-0:
     fbjs "^0.8.16"
     object-assign "^4.1.1"
 
-react2angular@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/react2angular/-/react2angular-3.0.1.tgz#4c459d908edbf2854a195b033658fcdd4eab5641"
+react2angular@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/react2angular/-/react2angular-4.0.4.tgz#501e75a7ca191c4af6f5582513c45a9ee0375602"
   dependencies:
-    "@types/angular" ">=1.5"
     "@types/lodash.frompairs" "^4.0.3"
-    "@types/react" "^16.0.0"
-    "@types/react-dom" "^15.5.1"
-    angular ">=1.5.11"
+    angular ">=1.5"
     lodash.frompairs "^4.0.1"
-    ngcomponent "^4.0.1"
+    ngcomponent "^4.1.0"
 
-react@16.2.0:
-  version "16.2.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
+react@16.4:
+  version "16.4.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.4.2.tgz#2cd90154e3a9d9dd8da2991149fdca3c260e129f"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
