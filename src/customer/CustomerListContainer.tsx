@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { CustomerListFilter } from '@waldur/customer/CustomerListFilter';
-import { CustomerListFilterInterface } from '@waldur/customer/types';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -13,7 +12,18 @@ import { CustomerList } from './CustomerList';
 import { CustomerListBilling } from './CustomerListBilling';
 
 interface CustomerListComponentProps extends TranslateProps {
-  customerListFilter: CustomerListFilterInterface;
+  customerListFilter: {
+    accounting_is_running: boolean;
+    month: number;
+    year: number;
+    accounting_period?: {
+      label: string;
+      value: {
+        year: number;
+        month: number;
+      };
+    }
+  };
 }
 
 export class CustomerListComponent extends React.Component<CustomerListComponentProps> {
@@ -26,13 +36,13 @@ export class CustomerListComponent extends React.Component<CustomerListComponent
       this.setState({...this.state, ...data});
     });
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.customerListFilter) {
-      let params = {...nextProps.customerListFilter};
-      if (nextProps.customerListFilter.accounting_period) {
+  componentDidUpdate() {
+    if (this.props.customerListFilter) {
+      let params = {...this.props.customerListFilter};
+      if (this.props.customerListFilter.accounting_period) {
         params = {
           accounting_is_running: params.accounting_is_running,
-          ...nextProps.customerListFilter.accounting_period.value,
+          ...this.props.customerListFilter.accounting_period.value,
         };
       }
       this.getTotalBilling({params});

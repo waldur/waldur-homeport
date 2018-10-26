@@ -12,7 +12,7 @@ import { getProject } from '@waldur/workspace/selectors';
 import { DashboardFeed } from './DashboardFeed';
 import { Project } from './types';
 
-interface Props extends TranslateProps, TableState {
+interface ProjectEventsFeedProps extends TranslateProps, TableState {
   project: Project;
   showTypes: () => void;
   showDetails: (event) => void;
@@ -20,13 +20,13 @@ interface Props extends TranslateProps, TableState {
   rows: any[];
 }
 
-class PureProjectEventsFeed extends React.PureComponent<Props> {
+class PureProjectEventsFeed extends React.Component<ProjectEventsFeedProps> {
   componentDidMount() {
     this.props.fetch();
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (this.props.project !== nextProps.project) {
+  componentDidUpdate(prevProps: ProjectEventsFeedProps) {
+    if (this.props.project !== prevProps.project) {
       this.props.fetch();
     }
   }

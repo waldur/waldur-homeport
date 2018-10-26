@@ -120,15 +120,15 @@ class Table extends React.Component<Props> {
     this.props.resetPagination();
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.pagination.currentPage !== this.props.pagination.currentPage) {
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.pagination.currentPage !== this.props.pagination.currentPage) {
       this.props.fetch();
-    } else if (nextProps.pagination.pageSize !== this.props.pagination.pageSize) {
+    } else if (prevProps.pagination.pageSize !== this.props.pagination.pageSize) {
       this.props.fetch();
-    } else if (nextProps.query !== this.props.query) {
+    } else if (prevProps.query !== this.props.query) {
       this.props.resetPagination();
       this.props.fetch();
-    } else if (nextProps.sorting !== this.props.sorting && nextProps.sorting.loading) {
+    } else if (prevProps.sorting !== this.props.sorting && prevProps.sorting.loading) {
       this.props.fetch();
     }
   }

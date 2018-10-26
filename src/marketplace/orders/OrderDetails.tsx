@@ -36,8 +36,8 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
     this.loadData();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.stateChangeStatus !== this.props.stateChangeStatus) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.stateChangeStatus !== this.props.stateChangeStatus) {
       this.loadData();
     }
   }

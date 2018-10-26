@@ -28,9 +28,3 @@ export interface Customer {
   vat_code?: string;
   image?: string;
 }
-
-export interface CustomerListFilterInterface {
-  accounting_is_running: boolean;
-  month: number;
-  year: number;
-}
