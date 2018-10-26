@@ -1,3 +1,5 @@
+import { IHttpResponse } from 'angular';
+
 import { getNextPageUrl } from '@waldur/core/api';
 import { ENV, $http } from '@waldur/core/services';
 import { parseQueryString } from '@waldur/core/utils';
@@ -16,7 +18,7 @@ export function createFetcher(endpoint: string): Fetcher {
       method: 'GET',
       url,
       params,
-    }).then((response: angular.IHttpResponse<any>) => {
+    }).then((response: IHttpResponse<any>) => {
       const resultCount = parseInt(response.headers()['x-result-count'], 10);
       return {
         rows: Array.isArray(response.data) ? response.data : [],

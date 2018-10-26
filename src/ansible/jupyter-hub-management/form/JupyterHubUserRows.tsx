@@ -47,7 +47,7 @@ export class JupyterHubUserRowsComponent extends React.Component<JupyterHubUserR
                   disabled={this.props.isGlobalRequestRunning}
                   onChange={newValue => {
                     this.props.getJupyterHubUsers(this.props.jupyterHubManagement)[index].uuid = undefined;
-                    this.props.getJupyterHubUsers(this.props.jupyterHubManagement)[index].username = newValue;
+                    this.props.getJupyterHubUsers(this.props.jupyterHubManagement)[index].username = newValue.target.value;
                     this.props.getJupyterHubUsers(this.props.jupyterHubManagement)[index].password = undefined;
                     if (this.props.whitelisting) {
                       this.props.jupyterHubManagement.authenticationConfig.whitelistAdmins = true;
@@ -80,7 +80,7 @@ export class JupyterHubUserRowsComponent extends React.Component<JupyterHubUserR
                 <div className="col-xs-1">
                   {translate('Admin rights')}
                 </div>
-                <div className="col-xs-1" style={{'min-width': '15px'}}>
+                <div className="col-xs-1" style={{minWidth: '15px'}}>
                   <div style={{width: '15px'}}>
                     <Field name={`${jupyterHubUser}.admin`}
                            type="checkbox"

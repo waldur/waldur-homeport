@@ -95,7 +95,7 @@ export class VirtualEnvironmentComponent<R extends ManagementRequest<R>>
   handleOnFileLoaded = (index: number, reader: FileReader) => {
     const installedLibraries = this.getVirtualEnvironments(this.props.pythonManagement)[index].installedLibraries;
     const installedLibrariesCopy = installedLibraries ? installedLibraries.slice() : [];
-    reader.result.split('\n')
+    (reader.result instanceof String ? reader.result.split('\n') : [])
       .forEach((libraryRow: string) => {
         const nameVersionParts = libraryRow.split('==');
         if (nameVersionParts[0]) {

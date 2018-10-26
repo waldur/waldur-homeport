@@ -1,5 +1,7 @@
+import { IHttpService, IPromise } from 'angular';
+
 export let ENV = null;
-export let $http: angular.IHttpService;
+export let $http: IHttpService;
 export let $rootScope = null;
 export let $state = null;
 export let $filter = null;
@@ -25,7 +27,7 @@ injectServices.$inject = ['$injector'];
   It happens if either network or backend server is slow.
   Instead new task should be scheduled if previous have been completed.
   */
-export const blockingExecutor = (callback: () => angular.IPromise<any>) => {
+export const blockingExecutor = (callback: () => IPromise<any>) => {
   let isExecuting = false;
   return () => {
     if (isExecuting) {

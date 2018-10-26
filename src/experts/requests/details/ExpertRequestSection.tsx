@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { react2angular } from 'react2angular';
+
+import { connectAngularComponent } from '@waldur/store/connect';
 
 import {
   ExpertRequestConfiguration,
@@ -12,4 +13,4 @@ export const ExpertRequestSection = (props: ExpertRequestConfigurationProps) => 
   </dl>
 );
 
-export default react2angular(ExpertRequestSection, ['config', 'model']);
+export default connectAngularComponent(ExpertRequestSection, ['config', 'model']);

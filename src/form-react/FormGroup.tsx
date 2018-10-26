@@ -27,8 +27,7 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
       controlClass,
       meta: { touched, error },
       children,
-      ...rest,
-    } = this.props;
+      ...rest} = this.props;
     return (
       <div className="form-group">
         {!hideLabel && (
