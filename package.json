@@ -18,9 +18,7 @@
     "eslint": "eslint src",
     "tslint-build": "tsc -p ./tslint/tsconfig.json",
     "tslint": "npm run tslint-build && tslint -c tslint.json -p tsconfig.json && tslint -c tslint.json -p tslint/tsconfig.json",
-    "tslint-fix": "npm run tslint-build && tslint --fix -c tslint.json -p tsconfig.json && tslint --fix -c tslint.json -p tslint/tsconfig.json",
-    "test-server": "karma start test/karma.conf.js",
-    "test-single-run": "karma start test/karma.conf.js --single-run"
+    "tslint-fix": "npm run tslint-build && tslint --fix -c tslint.json -p tsconfig.json && tslint --fix -c tslint.json -p tslint/tsconfig.json"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
@@ -147,17 +145,9 @@
     "html-webpack-harddisk-plugin": "^0.1.0",
     "html-webpack-plugin": "^2.29.0",
     "imports-loader": "^0.7.1",
-    "jasmine-core": "^2.1.3",
     "jest": "^21.2.1",
     "jest-date-mock": "^1.0.5",
     "json-loader": "^0.5.4",
-    "karma": "^1.3.0",
-    "karma-babel-preprocessor": "^6.0.1",
-    "karma-jasmine": "^1.0.2",
-    "karma-junit-reporter": "^1.1.0",
-    "karma-phantomjs-launcher": "^1.0.2",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^2.0.4",
     "lodash": "^4.17.4",
     "node-sass": "4.9.0",
     "offline-plugin": "^4.8.1",
