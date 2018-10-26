@@ -30,7 +30,7 @@ interface FlowMapViewComponentProps extends TranslateProps {
 }
 
 class FlowMapViewComponent extends React.Component<FlowMapViewComponentProps> {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchServiceUsageStart();
   }
   render() {

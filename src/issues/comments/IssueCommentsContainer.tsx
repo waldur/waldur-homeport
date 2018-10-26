@@ -34,7 +34,7 @@ export class PureIssueCommentsContainer extends React.Component<PureIssueComment
 
   dropzoneNode: Dropzone;
 
-  componentWillMount() {
+  componentDidMount() {
     const { fetchComments, setIssue, issue } = this.props;
 
     fetchComments();

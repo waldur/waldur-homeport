@@ -30,7 +30,7 @@ export class PureIssueAttachmentsContainer extends React.Component<PureIssueAtta
 
   dropzoneNode: Dropzone;
 
-  componentWillMount() { this.props.getAttachments(); }
+  componentDidMount() { this.props.getAttachments(); }
 
   onDragEnter = () => this.setState({ dropzoneActive: true });
 

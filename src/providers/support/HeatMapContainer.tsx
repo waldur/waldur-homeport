@@ -15,7 +15,7 @@ interface HeatMapComponentProps {
 }
 
 class HeatMapComponent extends React.Component<HeatMapComponentProps> {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchServiceUsageStart();
   }
   render() {

@@ -21,7 +21,7 @@ interface Props extends TranslateProps, TableState {
 }
 
 class PureProjectEventsFeed extends React.PureComponent<Props> {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetch();
   }
 
@@ -63,12 +63,7 @@ const mapDispatchToProps = dispatch => ({
   showDetails: event => dispatch(showEventDetails(event)),
 });
 
-const ProjectEventsFeed: any = compose(
+export const ProjectEventsFeed = compose(
   connect(null, mapDispatchToProps),
   connectTable(TableOptions),
 )(PureProjectEventsFeed);
-
-export {
-  PureProjectEventsFeed,
-  ProjectEventsFeed,
-};
