@@ -36,8 +36,10 @@ export class CustomerListComponent extends React.Component<CustomerListComponent
       this.setState({...this.state, ...data});
     });
   }
-  componentDidUpdate() {
-    if (this.props.customerListFilter) {
+  componentDidUpdate(prevProps) {
+    if (this.props.customerListFilter === prevProps.customerListFilter) {
+      return;
+    } else if (this.props.customerListFilter) {
       let params = {...this.props.customerListFilter};
       if (this.props.customerListFilter.accounting_period) {
         params = {
