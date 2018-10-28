@@ -10,11 +10,10 @@ interface ActionDialogProps {
   submitLabel: string;
   submitting?: boolean;
   onSubmit: any;
-  children: React.ReactNode;
   error?: string;
 }
 
-export const ActionDialog = (props: ActionDialogProps) => (
+export const ActionDialog: React.SFC<ActionDialogProps> = props => (
   <form onSubmit={props.onSubmit}>
     <ModalDialog
       title={props.title}

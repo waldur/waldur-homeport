@@ -36,8 +36,8 @@ class ShopCategoriesWrapper extends React.Component<ShopCategoriesWrapperProps> 
 }
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps, mapDispatchToProps),
+  withTranslation,
 );
 
 export const ShopCategoriesContainer = enhance(ShopCategoriesWrapper);

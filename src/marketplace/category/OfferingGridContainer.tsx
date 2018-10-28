@@ -20,19 +20,16 @@ interface OfferingGridWrapperState {
   loaded: boolean;
 }
 
-interface OfferingGridWrapperProps {
+interface OfferingGridWrapperProps extends TranslateProps {
   filterQuery: FilterQuery;
 }
 
-export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProps & TranslateProps, OfferingGridWrapperState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [],
-      loading: true,
-      loaded: false,
-    };
-  }
+export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProps, OfferingGridWrapperState> {
+  state = {
+    items: [],
+    loading: true,
+    loaded: false,
+  };
 
   componentDidUpdate(prevProps) {
     if (this.filterQueryHasDiff(prevProps)) {
@@ -124,8 +121,8 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps),
+  withTranslation,
 );
 
 export const OfferingGridContainer = enhance(OfferingGridWrapper);

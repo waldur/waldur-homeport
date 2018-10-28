@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { TranslateProps } from '@waldur/i18n';
 
-interface FilterBarProps {
+interface FilterBarProps extends TranslateProps {
   filterQuery: string;
   setFilterQuery: (query: string) => void;
 }
@@ -12,13 +12,10 @@ interface FilterBarState {
   filter: string;
 }
 
-export class FilterBar extends React.Component<FilterBarProps & TranslateProps, FilterBarState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filter: '',
-    };
-  }
+export class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
+  state = {
+    filter: '',
+  };
 
   setFilterQuery = e => {
     this.setState({filter: e.target.value});

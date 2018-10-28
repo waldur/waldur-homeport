@@ -13,10 +13,10 @@ const PureOfferingDeleteButton = ({ onClick, translate }) => (
 );
 
 const enhance = compose(
-  withTranslation,
   connect(null, {
     onClick: () => alert('Not implemented yet'),
-  })
+  }),
+  withTranslation,
 );
 
 export const OfferingDeleteButton = enhance(PureOfferingDeleteButton);

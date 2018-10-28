@@ -11,7 +11,7 @@ import { LandingPage } from './LandingPage';
 import * as actions from './store/actions';
 import * as selectors from './store/selectors';
 
-interface LandingPageContainerProps {
+interface LandingPageContainerProps extends TranslateProps {
   getCategories: () => void;
   getOfferings: () => void;
   gotoOffering(offeringId: string): void;
@@ -19,7 +19,7 @@ interface LandingPageContainerProps {
   offerings: OfferingsListType;
 }
 
-export class LandingPageContainer extends React.Component<LandingPageContainerProps & TranslateProps> {
+export class LandingPageContainer extends React.Component<LandingPageContainerProps> {
   componentDidMount() {
     this.props.getCategories();
     this.props.getOfferings();
@@ -46,8 +46,8 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
+  connect(mapStateToProps, mapDispatchToProps),
   withTranslation,
-  connect(mapStateToProps, mapDispatchToProps)
 );
 
 export default connectAngularComponent(enhance(LandingPageContainer));

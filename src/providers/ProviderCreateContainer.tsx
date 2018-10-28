@@ -25,10 +25,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({form: 'providerCreate'}),
   formValues('type'),
+  withTranslation,
 );
 
 const ProviderCreateContainer = enhance(ProviderCreateForm);

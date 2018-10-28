@@ -18,7 +18,7 @@ interface Props extends TranslateProps {
   showTypes: () => void;
 }
 
-class DashboardFeed extends React.PureComponent<Props> {
+export class DashboardFeed extends React.PureComponent<Props> {
   render() {
     return (
       <Panel
@@ -79,5 +79,3 @@ class DashboardFeed extends React.PureComponent<Props> {
     );
   }
 }
-
-export { DashboardFeed };

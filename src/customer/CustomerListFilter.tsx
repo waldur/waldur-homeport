@@ -28,7 +28,7 @@ const makeAccountingPeriods = () => {
 
 const accountingPeriods = makeAccountingPeriods();
 
-export const PureCustomerListFilter = props => (
+export const PureCustomerListFilter: React.SFC<TranslateProps> = props => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
       <form className="form-inline" id="customer-list-filter">
@@ -71,13 +71,13 @@ export const PureCustomerListFilter = props => (
 );
 
 const enhance = compose(
-  withTranslation,
-  reduxForm<any, TranslateProps>({
+  reduxForm({
     form: 'customerListFilter',
     initialValues: {
       accounting_period: accountingPeriods[0],
     },
   }),
+  withTranslation,
 );
 
 export const CustomerListFilter = enhance(PureCustomerListFilter);

@@ -13,7 +13,7 @@ import { State } from './types';
 import { StatusChange } from './types';
 import { matchState } from './utils';
 
-interface OrderDetailsProps {
+interface OrderDetailsProps extends TranslateProps {
   setOrderState: (orderUuid: string, state: string) => void;
   stateChangeStatus: StatusChange;
   shouldRenderApproveButton?: boolean;
@@ -25,22 +25,19 @@ interface OrderDetailsState {
   loaded: boolean;
 }
 
-export class OrderDetails extends React.Component<OrderDetailsProps & TranslateProps, OrderDetailsState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      orderDetails: {state: 'Approve', items: []},
-      loading: true,
-      loaded: false,
-    };
-  }
+export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetailsState> {
+  state = {
+    orderDetails: undefined,
+    loading: true,
+    loaded: false,
+  };
 
   componentDidMount() {
     this.loadData();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.stateChangeStatus !== this.props.stateChangeStatus) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.stateChangeStatus !== this.props.stateChangeStatus) {
       this.loadData();
     }
   }
@@ -53,6 +50,7 @@ export class OrderDetails extends React.Component<OrderDetailsProps & TranslateP
           state: matchState(orderDetails.state),
           items: orderDetails.items,
           total_cost: orderDetails.total_cost,
+          file: orderDetails.file,
         },
         loading: false,
         loaded: true,
@@ -67,7 +65,7 @@ export class OrderDetails extends React.Component<OrderDetailsProps & TranslateP
   }
 
   renderApproveButton = () => {
-    return this.props.shouldRenderApproveButton && this.state.orderDetails.state === 'Approve';
+    return this.props.shouldRenderApproveButton && this.state.orderDetails && this.state.orderDetails.state === 'Approve';
   }
 
   setOrderState = () => {
@@ -104,7 +102,10 @@ export class OrderDetails extends React.Component<OrderDetailsProps & TranslateP
           </div>
         </div>
         <div className="col-xl-3 col-lg-4">
-          <OrderSummary total={this.state.orderDetails.total_cost}/>
+          <OrderSummary
+            total={this.state.orderDetails.total_cost}
+            file={this.state.orderDetails.file}
+          />
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
+import { OpenStackPackageDetails } from '@waldur/openstack/OpenStackPackageDetails';
 import { OpenStackPackageForm, DEFAULT_SUBNET_CIDR } from '@waldur/openstack/OpenStackPackageForm';
 
 const serializer = props => ({
@@ -47,6 +48,7 @@ registerOfferingType({
     return translate('OpenStack package');
   },
   component: OpenStackPackageForm,
+  detailsComponent: OpenStackPackageDetails,
   serializer,
   providerType: 'OpenStack',
   attributes: ServiceSettingsAttributes,

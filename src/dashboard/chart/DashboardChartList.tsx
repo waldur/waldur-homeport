@@ -11,7 +11,7 @@ interface Props extends ChartsState {
 }
 
 class DashboardChartList extends React.PureComponent<Props> {
-  componentWillMount() {
+  componentDidMount() {
     this.props.onStart();
   }
 

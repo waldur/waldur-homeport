@@ -13,6 +13,6 @@ const mapStateToProps = state => {
   return {showComponents, type};
 };
 
-const connector = compose(withTranslation, connect(mapStateToProps));
+const connector = compose(connect(mapStateToProps), withTranslation);
 
 export const AccountingStepContainer = connector(AccountingStep);

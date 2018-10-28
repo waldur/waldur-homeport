@@ -4,7 +4,7 @@ import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
-import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
+import { OrderItemDetailsLink } from '@waldur/marketplace/orders/OrderItemDetailsLink';
 import { OrderItemLink } from '@waldur/marketplace/orders/OrderItemLink';
 
 import './OrderItem.scss';
@@ -22,16 +22,16 @@ export const OrderItem = (props: OrderItemProps) => (
       <div className="offering-item">
         <div className="offering-thumb">
           <Tooltip id="offering-tooltip" label={props.item.offering_name}>
-            <OfferingLink offering_uuid={props.item.offering_uuid}>
+            <OrderItemDetailsLink order_item_uuid={props.item.uuid}>
               <OfferingLogo src={props.item.offering_thumbnail}/>
-            </OfferingLink>
+            </OrderItemDetailsLink>
           </Tooltip>
         </div>
         <div className="offering-info">
           <h5 className="offering-title">
-            <OfferingLink offering_uuid={props.item.offering_uuid}>
-              {props.item.offering_name}
-            </OfferingLink>
+            <OrderItemDetailsLink order_item_uuid={props.item.uuid}>
+              {props.item.attributes.name || props.item.offering_name}
+            </OrderItemDetailsLink>
           </h5>
           <p>{props.item.attributes.description || props.item.offering_description}</p>
           {props.item.resource_uuid && <p><OrderItemLink item={props.item}/>{translate('Resource link')}</p>}

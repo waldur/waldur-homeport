@@ -106,9 +106,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const enhance = compose(
-  withTranslation,
   connect(null, mapDispatchToProps),
   reduxForm({form: 'listFieldModal'}),
+  withTranslation,
 );
 
 const ListFieldModal = enhance(PureListFieldModal);

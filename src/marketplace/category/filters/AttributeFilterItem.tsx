@@ -6,12 +6,11 @@ import { CollapsibleItem } from './CollapsibleItem';
 
 interface AttributeFilterItemProps {
   title: ReactNode;
-  children: ReactNode;
   selected?: boolean;
   counter?: number;
 }
 
-export const AttributeFilterItem = (props: AttributeFilterItemProps) => (
+export const AttributeFilterItem: React.SFC<AttributeFilterItemProps> = props => (
   <MediaQuery minWidth={768}>
     {matches => matches ? (
       <>

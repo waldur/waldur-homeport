@@ -1,8 +1,8 @@
-import { get, getAll, getById, post, sendForm, getList } from '@waldur/core/api';
+import { get, getAll, getById, post, sendForm, getList, getFirst } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
-import { State } from '@waldur/marketplace/orders/types';
-import { Category, Offering, Provider } from '@waldur/marketplace/types';
-import { Customer } from '@waldur/workspace/types';
+import { Customer } from '@waldur/customer/types';
+import { State, OrderItemResponse } from '@waldur/marketplace/orders/types';
+import { Category, Offering, ServiceProvider } from '@waldur/marketplace/types';
 
 export const getPlugins = () =>
   get('/marketplace-plugins/').then(response => response.data);
@@ -34,14 +34,23 @@ export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
 export const getOrderDetails = (id: string) =>
   getById<State>('/marketplace-orders/', id);
 
+export const getOrderItem = id =>
+  getById<OrderItemResponse>('/marketplace-order-items/', id);
+
 export const setOrderState = (orderUuid, state) =>
   post(`/marketplace-orders/${orderUuid}/set_state_${state}/`).then(response => response.data);
 
 export const getCustomerList = (params?: {}) =>
   getList<Customer>('/customers/', params);
 
-export const getProvider = (id: string) =>
-  getById<Provider>('/customers/', id);
+export const getCustomer = (id: string) =>
+  getById<Customer>('/customers/', id);
 
 export const updateOfferingState = (offeringUuid, action) =>
   post(`/marketplace-offerings/${offeringUuid}/${action}/`).then(response => response.data);
+
+export const createServiceProvider = params =>
+  post<ServiceProvider>('/marketplace-service-providers/', params).then(response => response.data);
+
+export const getServiceProviderByCustomer = params =>
+  getFirst<ServiceProvider>('/marketplace-service-providers/', params);

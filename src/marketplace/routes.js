@@ -163,6 +163,26 @@ export default function routes($stateProvider) {
       }
     })
 
+    .state('marketplace-order-item-details', {
+      url: 'marketplace-order-item-details/:order_item_uuid',
+      template: '<marketplace-order-item-details></marketplace-order-item-details>',
+      parent: 'project',
+      data: {
+        pageTitle: gettext('Order item details'),
+        feature: 'marketplace',
+      }
+    })
+
+    .state('marketplace-order-item-details-customer', {
+      url: 'marketplace-order-item-details/:order_item_uuid',
+      template: '<marketplace-order-item-details></marketplace-order-item-details>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('Order item details'),
+        feature: 'marketplace',
+      }
+    })
+
     .state('marketplace-order-details-customer', {
       url: 'marketplace-order-details/:order_uuid/',
       template: '<marketplace-order-details></marketplace-order-details>',

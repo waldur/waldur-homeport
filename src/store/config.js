@@ -9,9 +9,8 @@ export const initConfig = (config) => ({
   }
 });
 
-const getFeaturesMap = config => {
+const getFeaturesMap = features => {
   let map = {};
-  const features = config.toBeFeatures.concat(config.disabledFeatures);
   features.forEach(feature => {
     map[feature] = true;
   });
@@ -21,11 +20,14 @@ const getFeaturesMap = config => {
 export const reducer = (state=INITIAL_STATE, action) => {
   switch(action.type) {
 
-  case INIT_CONFIG:
+  case INIT_CONFIG: {
+    const {toBeFeatures, disabledFeatures = [], enabledFeatures = []} = action.payload.config;
     return {
       ...action.payload.config,
-      features: getFeaturesMap(action.payload.config)
+      disabledFeatures: getFeaturesMap(toBeFeatures.concat(disabledFeatures)),
+      enabledFeatures: getFeaturesMap(enabledFeatures),
     };
+  }
 
   default:
     return state;
@@ -34,9 +36,10 @@ export const reducer = (state=INITIAL_STATE, action) => {
 
 export const getConfig = state => state.config;
 
-export const isVisible = (state, feature) => (
-  state.config.featuresVisible || !state.config.features[feature]
-);
+export const isVisible = (state, feature) => {
+  const {featuresVisible, disabledFeatures = {}, enabledFeatures = {}} = state.config;
+  return enabledFeatures[feature] || featuresVisible || !disabledFeatures[feature];
+};
 
 export const getNativeNameVisible = state =>
   state.config.plugins.WALDUR_CORE.NATIVE_NAME_ENABLED === true;

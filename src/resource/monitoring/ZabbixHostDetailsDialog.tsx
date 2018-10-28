@@ -72,7 +72,7 @@ class ZabbixHostDetailsDialog extends React.Component<ZabbixHostDetailsDialogPro
     );
   }
 
-  componentWillMount() {
+  componenDidMount() {
     this.props.onFetch();
   }
 }

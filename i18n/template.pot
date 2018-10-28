@@ -315,7 +315,7 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
 msgstr ""
@@ -347,6 +347,7 @@ msgid "All spaces, hyphens and dots will be replaced with underscores."
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
+#: src/slurm/SlurmPackageDetails.tsx
 msgid "Allocation description"
 msgstr ""
 
@@ -355,6 +356,7 @@ msgid "Allocation has been updated."
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
+#: src/slurm/SlurmPackageDetails.tsx
 #: src/slurm/slurm-allocation-checkout-summary.html
 #: src/slurm/slurm-allocation-config.js
 msgid "Allocation name"
@@ -534,6 +536,12 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
+#: src/offering/OfferingConfigurationDetails.tsx
+#: src/openstack/OpenStackPackageDetails.tsx
+#: src/slurm/SlurmPackageDetails.tsx
+msgid "Attributes"
+msgstr ""
+
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
 msgid "Attributes filter"
 msgstr ""
@@ -669,13 +677,13 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Bank account"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Bank name"
 msgstr ""
 
@@ -1097,14 +1105,14 @@ msgid "Contact e-mail"
 msgstr ""
 
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Contact email"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Contact phone"
 msgstr ""
 
@@ -1158,7 +1166,7 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Country"
 msgstr ""
 
@@ -1481,10 +1489,12 @@ msgstr ""
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/jira/project/jira-project-config.js
 #: src/marketplace/details/OfferingTabs.tsx
+#: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/appstore-offering.js
@@ -1667,7 +1677,7 @@ msgid "E-mail address"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "EU VAT ID"
 msgstr ""
 
@@ -2506,11 +2516,13 @@ msgstr ""
 msgid "Infrastructure"
 msgstr ""
 
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Initial admin password"
 msgstr ""
 
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Initial admin username"
@@ -2598,6 +2610,7 @@ msgstr ""
 msgid "Internal network allocation pool"
 msgstr ""
 
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-network/module.js
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
@@ -3077,6 +3090,10 @@ msgstr ""
 msgid "Marketplace orders"
 msgstr ""
 
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+msgid "Marketplace service provider"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 msgid "Max # of backups"
 msgstr ""
@@ -3237,12 +3254,14 @@ msgstr ""
 #: src/jira/project/JiraProjectSummary.tsx
 #: src/jira/project/jira-project-config.js
 #: src/jira/project/jira-projects-list.js
+#: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/appstore-offering.js
@@ -3306,7 +3325,7 @@ msgstr ""
 #: src/customer/details/CustomerDetails.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
@@ -3614,6 +3633,10 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+msgid "Not a service provider."
+msgstr ""
+
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 msgid "Not assigned"
 msgstr ""
@@ -3737,7 +3760,7 @@ msgstr ""
 
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/routes.js
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Offerings"
 msgstr ""
 
@@ -3866,6 +3889,10 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
+#: src/marketplace/routes.js
+msgid "Order item details"
+msgstr ""
+
 #: src/marketplace/cart/store/effects.ts
 msgid "Order item has been created."
 msgstr ""
@@ -3977,7 +4004,7 @@ msgstr ""
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Organization type"
 msgstr ""
 
@@ -4177,6 +4204,7 @@ msgstr ""
 msgid "Physical locations"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/openstack/OpenStackPackageForm.tsx
@@ -4236,7 +4264,7 @@ msgstr ""
 msgid "Please create a new one:"
 msgstr ""
 
-#: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/ComponentEditRow.tsx
 msgid "Please enter estimated maximum usage in the rows below:"
 msgstr ""
 
@@ -4355,7 +4383,7 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Postal code"
 msgstr ""
 
@@ -4966,6 +4994,10 @@ msgstr ""
 msgid "Register as an expert provider"
 msgstr ""
 
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+msgid "Register as service provider"
+msgstr ""
+
 #: src/auth/auth-login.html
 msgid "Register to"
 msgstr ""
@@ -4986,8 +5018,12 @@ msgstr ""
 msgid "Registered"
 msgstr ""
 
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+msgid "Registered at:"
+msgstr ""
+
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/ProviderData.tsx
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Registration code"
 msgstr ""
 
@@ -5763,6 +5799,10 @@ msgstr ""
 msgid "Service provider"
 msgstr ""
 
+#: src/marketplace/service-providers/ServiceProviderRegisterButtonContainer.tsx
+msgid "Service provider has been registered."
+msgstr ""
+
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Service provider type"
 msgstr ""
@@ -5904,6 +5944,7 @@ msgstr ""
 msgid "Size name"
 msgstr ""
 
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Skip connection to external network"
@@ -6236,6 +6277,7 @@ msgstr ""
 msgid "Tenant ID"
 msgstr ""
 
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "Tenant description"
 msgstr ""
@@ -6249,6 +6291,7 @@ msgid "Tenant has been updated."
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/actions/change-package-dialog.html
@@ -6723,6 +6766,10 @@ msgstr ""
 msgid "Unable to get list of SSH public keys."
 msgstr ""
 
+#: src/marketplace/orders/OrderItemDetailsContainer.tsx
+msgid "Unable to get order item."
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsContainer.tsx
 msgid "Unable to load JupyterHub management details."
@@ -6785,6 +6832,10 @@ msgstr ""
 msgid "Unable to load project types or certifications."
 msgstr ""
 
+#: src/marketplace/service-providers/CustomerDetails.tsx
+msgid "Unable to load provider details."
+msgstr ""
+
 #: src/providers/ProviderUpdateComponent.tsx
 msgid "Unable to load provider."
 msgstr ""
@@ -6798,7 +6849,7 @@ msgstr ""
 msgid "Unable to load sections for comparison."
 msgstr ""
 
-#: src/marketplace/service-providers/ProviderDetailsContainer.tsx
+#: src/marketplace/service-providers/ServiceProviderRegisterButtonContainer.tsx
 msgid "Unable to load service provider."
 msgstr ""
 
@@ -6820,6 +6871,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to post comment."
+msgstr ""
+
+#: src/marketplace/service-providers/ServiceProviderRegisterButtonContainer.tsx
+msgid "Unable to register service provider."
 msgstr ""
 
 #: src/customer/details/store/effects.ts

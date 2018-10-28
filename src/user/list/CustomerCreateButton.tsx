@@ -20,12 +20,12 @@ const CustomerCreateButton = ({ isVisible, onClick, translate }) => (
 const customerCreateDialog = () => openModalDialog('customerCreateDialog', {size: 'lg'});
 
 const enhance = compose(
-  withTranslation,
   connect((state: OuterState) => ({
     isVisible: canCreateOrganization(state),
   }), {
     onClick: customerCreateDialog,
-  })
+  }),
+  withTranslation,
 );
 
 export default enhance(CustomerCreateButton);

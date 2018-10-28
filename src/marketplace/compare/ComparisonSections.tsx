@@ -19,15 +19,12 @@ interface ComparisonSectionsState {
 }
 
 export class ComparisonSections extends React.Component<ComparisonSectionsProps, ComparisonSectionsState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sections: [],
-      loading: true,
-      loaded: false,
-      categoryUuid: '',
-    };
-  }
+  state = {
+    sections: [],
+    loading: true,
+    loaded: false,
+    categoryUuid: '',
+  };
 
   componentDidMount() {
     this.loadData();

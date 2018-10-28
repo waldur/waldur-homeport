@@ -98,9 +98,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({form: PYTHON_MANAGEMENT_DETAILS_FORM_NAME}),
+  withTranslation,
 );
 
 const PythonManagementDetailsContainer = enhance(PythonManagementDetailsComponent);

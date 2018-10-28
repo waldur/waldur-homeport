@@ -12,11 +12,11 @@ import { CurrentUserEvents } from './CurrentUserEvents';
 import CustomerPermissions from './CustomerPermissions';
 import ProjectPermissions from './ProjectPermissions';
 
-interface PureUserDashboardProps {
+interface PureUserDashboardProps extends TranslateProps {
   renderCustomerCreatePrompt: boolean;
 }
 
-const PureUserDashboard = (props: PureUserDashboardProps & TranslateProps) => (
+const PureUserDashboard: React.SFC<PureUserDashboardProps> = props => (
   <div className="wrapper wrapper-content">
     {props.renderCustomerCreatePrompt &&
       <div className="row">
@@ -52,8 +52,8 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  withTranslation,
   connect(mapStateToProps),
+  withTranslation,
 );
 
 const UserDashboard = enhance(PureUserDashboard);

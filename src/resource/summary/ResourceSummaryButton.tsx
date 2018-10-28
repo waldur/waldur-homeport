@@ -24,8 +24,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const enhance = compose(
-  withTranslation,
   connect(null, mapDispatchToProps),
+  withTranslation,
 );
 
 export const ResorceSummaryButton = enhance(PureResorceSummaryButton);
