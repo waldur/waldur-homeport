@@ -1,7 +1,7 @@
 import * as React from 'react';
-import * as Pagination from 'react-bootstrap/lib/Pagination';
 
 import { TranslateProps } from '@waldur/i18n/types';
+import Pagination from '@waldur/shims/Pagination';
 
 import { Pagination as PaginationProps } from './types';
 

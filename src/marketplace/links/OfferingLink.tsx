@@ -3,8 +3,20 @@ import { connect } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { getWorkspace } from '@waldur/workspace/selectors';
+import { OuterState } from '@waldur/workspace/types';
 
-const PureOfferingLink = props => (
+interface StateProps {
+  state: string;
+}
+
+interface OwnProps {
+  offering_uuid: string;
+  className?: string;
+}
+
+type MergedProps = StateProps & OwnProps;
+
+const PureOfferingLink: React.SFC<MergedProps> = props => (
   <Link
     state={props.state}
     params={{offering_uuid: props.offering_uuid}}
@@ -13,7 +25,7 @@ const PureOfferingLink = props => (
   </Link>
 );
 
-const connector = connect<{state: string}, {}, {offering_uuid: string, className?: string}>(state => {
+const connector = connect<StateProps, {}, OwnProps, OuterState>(state => {
   const workspace = getWorkspace(state);
   if (workspace === 'organization') {
     return {

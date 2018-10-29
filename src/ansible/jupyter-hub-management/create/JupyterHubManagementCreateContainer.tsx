@@ -41,7 +41,11 @@ export interface JupyterHubManagementCreateProps extends InjectedFormProps, Tran
   jupyterHubManagementErred: () => Promise<void>;
 }
 
-class JupyterHubManagementCreateComponent extends React.Component<JupyterHubManagementCreateProps> {
+interface State {
+  pythonManagementListProperties: ListConfiguration;
+}
+
+class JupyterHubManagementCreateComponent extends React.Component<JupyterHubManagementCreateProps, State> {
   state = {
     pythonManagementListProperties: {
       columns: [
@@ -76,23 +80,24 @@ class JupyterHubManagementCreateComponent extends React.Component<JupyterHubMana
       ],
       choices: this.props.availablePythonManagements,
       selectedValueToShow: selectedValue => selectedValue.name,
-    } as ListConfiguration,
+    },
   };
 
-  componentWillReceiveProps(nextProps: JupyterHubManagementCreateProps) {
-    if (this.props.availablePythonManagements.length !== nextProps.availablePythonManagements.length) {
-      this.setState({
-        ...this.state,
-        pythonManagementListProperties: {
-          ...this.state.pythonManagementListProperties,
-          choices: nextProps.availablePythonManagements,
-        },
-      });
-    } else if (this.props.jupyterHubManagement) {
-      if (this.props.jupyterHubManagement.selectedPythonManagement && this.hasAuthenticationMethodChangedToOAuth(nextProps)) {
+  static getDerivedStateFromProps(props: JupyterHubManagementCreateProps, state: State) {
+    return {
+      pythonManagementListProperties: {
+        ...state.pythonManagementListProperties,
+        choices: props.availablePythonManagements,
+      },
+    };
+  }
+
+  componentDidUpdate(prevProps: JupyterHubManagementCreateProps) {
+    if (this.props.jupyterHubManagement) {
+      if (this.props.jupyterHubManagement.selectedPythonManagement && this.hasAuthenticationMethodChangedToOAuth(prevProps)) {
         this.defaultCallbackUrl(this.props.jupyterHubManagement.selectedPythonManagement.instance);
-      } else if (this.hasNewPythonManagementBeenSelected(nextProps)) {
-        this.defaultCallbackUrl(nextProps.jupyterHubManagement.selectedPythonManagement.instance);
+      } else if (this.hasNewPythonManagementBeenSelected(prevProps)) {
+        this.defaultCallbackUrl(prevProps.jupyterHubManagement.selectedPythonManagement.instance);
       }
     }
   }

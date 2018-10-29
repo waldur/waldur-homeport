@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { react2angular } from 'react2angular';
+
+import { react2angular } from '@waldur/shims/react2angular';
 
 import store from './store';
 

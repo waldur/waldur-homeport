@@ -4,7 +4,7 @@ import Select, {ReactSelectProps} from 'react-select';
 import { FormField } from './types';
 
 export interface SelectFieldProps extends ReactSelectProps, FormField {
-  name: string;
+  name?: string;
 }
 
 export const SelectField = (props: SelectFieldProps) => {

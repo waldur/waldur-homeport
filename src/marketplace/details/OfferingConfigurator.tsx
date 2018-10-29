@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { getFormComponent } from '@waldur/marketplace/common/registry';
 import { Offering } from '@waldur/marketplace/types';
 import { getProject } from '@waldur/workspace/selectors';
-import { Project } from '@waldur/workspace/types';
+import { Project, OuterState } from '@waldur/workspace/types';
 
 import { FORM_ID } from './constants';
 import { OfferingFormData } from './types';
@@ -28,7 +28,8 @@ const PureOfferingConfigurator = (props: PureOfferingConfiguratorProps & Injecte
 const storeConnector = connect<
   { project: Project },
   {},
-  { offering: Offering }
+  { offering: Offering },
+  OuterState
 >(state => ({ project: getProject(state) }));
 
 const validate = (_, props) => {

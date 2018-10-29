@@ -1,22 +1,26 @@
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import { emitSignal } from '@waldur/store/coreSaga';
 
 import actions from './actions';
 import DashboardChartList from './DashboardChartList';
 import { getChart } from './reducers';
-import { Scope } from './types';
+import { Scope, ChartsState } from './types';
 
-interface Props {
+interface OwnProps {
   scope: Scope;
   signal: string;
   chartId: string;
 }
 
-const mapStateToProps = (state, ownProps: Props) => getChart(state, ownProps.chartId);
+interface DispatchProps {
+  onStart(): void;
+  onStop(): void;
+}
 
-const mapDispatchToProps = (dispatch: Dispatch<{}>, ownProps: Props) => ({
+const mapStateToProps = (state, ownProps: OwnProps) => getChart(state, ownProps.chartId);
+
+const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
   onStart: () => {
     dispatch(actions.dashboardChartStart(ownProps.chartId, ownProps.scope));
     dispatch(emitSignal(ownProps.signal));
@@ -26,4 +30,14 @@ const mapDispatchToProps = (dispatch: Dispatch<{}>, ownProps: Props) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardChartList);
+const mergeProps = (stateProps, dispatchProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+});
+
+type MergedProps = ChartsState & DispatchProps;
+
+const connector = connect<ChartsState, DispatchProps, OwnProps, MergedProps>(
+  mapStateToProps, mapDispatchToProps, mergeProps);
+
+export default connector(DashboardChartList);

@@ -3,8 +3,20 @@ import { connect } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { getWorkspace } from '@waldur/workspace/selectors';
+import { OuterState } from '@waldur/workspace/types';
 
-const PureCategoryLink = props => (
+interface StateProps {
+  state: string;
+}
+
+interface OwnProps {
+  category_uuid: string;
+  className?: string;
+}
+
+type MergedProps = StateProps & OwnProps;
+
+const PureCategoryLink: React.SFC<MergedProps> = props => (
   <Link
     state={props.state}
     params={{category_uuid: props.category_uuid}}
@@ -13,7 +25,7 @@ const PureCategoryLink = props => (
   </Link>
 );
 
-const connector = connect<{state: string}, {}, {category_uuid: string, className?: string}>(state => {
+const connector = connect<StateProps, {}, OwnProps, OuterState>(state => {
   const workspace = getWorkspace(state);
   if (workspace === 'organization') {
     return {

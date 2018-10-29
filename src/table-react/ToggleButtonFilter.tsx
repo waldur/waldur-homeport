@@ -7,9 +7,11 @@ interface FilterChoice {
   value: string;
 }
 
-interface ToogleButtonFilterProps extends React.HTMLProps<any> {
+interface ToogleButtonFilterProps {
   defaultValue?: string | string[];
   choices: FilterChoice[];
+  value: string;
+  onChange(values: any[]): void;
 }
 
 export const ToogleButtonFilter = (props: ToogleButtonFilterProps) => (
