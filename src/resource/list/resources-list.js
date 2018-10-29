@@ -16,7 +16,7 @@ export default function baseResourceListController(
   $rootScope,
   $state,
   $q,
-  $timeout) {
+  $interval) {
   let ControllerListClass = baseControllerListClass.extend({
     init: function() {
       this.service = resourcesService;
@@ -33,6 +33,7 @@ export default function baseResourceListController(
         fn();
       });
       this.hasCustomFilters = false;
+      this.resourceTimers = {};
     },
     getTableOptions: function() {
       let vm = this.controllerScope;
@@ -295,7 +296,6 @@ export default function baseResourceListController(
     },
     pollResource: function(resource) {
       let vm = this;
-      vm.monitoredResources = vm.monitoredResources || [];
       function removeItem(collection, item) {
         // modify an object, not a reference.
         let index = collection.indexOf(item);
@@ -306,36 +306,32 @@ export default function baseResourceListController(
       function internalPollResource(resource) {
         let uuid = resource.uuid;
 
-        const timer = $timeout(() => {
+        if (vm.resourceTimers[resource.uuid]) {
+          return;
+        }
+
+        vm.resourceTimers[resource.uuid] = $interval(() => {
           resourcesService.$get(resource.resource_type, uuid).then((response) => {
             // do not call updateRow as it reloads a table and actions are reloaded on ENV.singleResourcePollingTimeout
             vm.setResource(resource, response);
-            if (vm.resourceIsUpdating(response)) {
-              internalPollResource(resource);
-            } else {
+            if (!vm.resourceIsUpdating(response)) {
+              $interval.cancel(vm.resourceTimers[uuid]);
+              delete vm.resourceTimers[uuid];
               // update row only once to avoid table redrawing on each call.
               $rootScope.$broadcast('updateRow', {data:response});
               resourcesService.cleanOptionsCache(resource.url);
-              removeItem(vm.monitoredResources, uuid);
             }
           }).catch((response) => {
+            $interval.cancel(vm.resourceTimers[uuid]);
+            delete vm.resourceTimers[uuid];
             if (response.status === 404) {
               removeItem(vm.list, resource);
               $rootScope.$broadcast('removeRow', {data: uuid});
             }
-            removeItem(vm.monitoredResources, uuid);
           });
         }, ENV.singleResourcePollingTimeout);
-        // Use injected scope to cancel timer
-        if (vm.controllerScope && vm.controllerScope.$$scope) {
-          vm.controllerScope.$$scope.$on('$destroy', () => $timeout.cancel(timer));
-        }
       }
-
-      if (vm.monitoredResources.indexOf(resource.uuid) === -1) {
-        vm.monitoredResources.push(resource.uuid);
-        internalPollResource(resource);
-      }
+      return internalPollResource(resource);
     },
     pollResources: function() {
       if (!ENV.resourcePollingEnabled) {
@@ -347,6 +343,15 @@ export default function baseResourceListController(
       angular.forEach(newResources, (resource) => {
         vm.pollResource(resource);
       });
+
+      // Use injected scope to cancel timer
+      if (vm.controllerScope && vm.controllerScope.$$scope) {
+        vm.controllerScope.$$scope.$on('$destroy', () => {
+          angular.forEach(vm.resourceTimers, timer => {
+            $interval.cancel(timer);
+          });
+        });
+      }
     }
   });
 
