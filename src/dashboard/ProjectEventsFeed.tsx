@@ -12,10 +12,16 @@ import { getProject } from '@waldur/workspace/selectors';
 import { DashboardFeed } from './DashboardFeed';
 import { Project } from './types';
 
-interface ProjectEventsFeedProps extends TranslateProps, TableState {
+interface OwnProps {
   project: Project;
-  showTypes: () => void;
-  showDetails: (event) => void;
+}
+
+interface DispatchProps {
+  showTypes(): void;
+  showDetails(event: object): void;
+}
+
+interface ProjectEventsFeedProps extends OwnProps, DispatchProps, TranslateProps, TableState {
   fetch: () => void;
   rows: any[];
 }
@@ -64,6 +70,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export const ProjectEventsFeed = compose(
-  connect(null, mapDispatchToProps),
+  connect<{}, DispatchProps, OwnProps>(null, mapDispatchToProps),
   connectTable(TableOptions),
 )(PureProjectEventsFeed);
