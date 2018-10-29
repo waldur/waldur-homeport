@@ -35,6 +35,11 @@ export default function baseResourceListController(
       this.hasCustomFilters = false;
       this.resourceTimers = {};
     },
+    $onDestroy: function() {
+      angular.forEach(this.resourceTimers, timer => {
+        $interval.cancel(timer);
+      });
+    },
     getTableOptions: function() {
       let vm = this.controllerScope;
       const options = {
@@ -343,15 +348,6 @@ export default function baseResourceListController(
       angular.forEach(newResources, (resource) => {
         vm.pollResource(resource);
       });
-
-      // Use injected scope to cancel timer
-      if (vm.controllerScope && vm.controllerScope.$$scope) {
-        vm.controllerScope.$$scope.$on('$destroy', () => {
-          angular.forEach(vm.resourceTimers, timer => {
-            $interval.cancel(timer);
-          });
-        });
-      }
     }
   });
 
