@@ -43,7 +43,7 @@ class SafeAnchor extends React.Component<any> {
   }
 
   render() {
-    const { componentClass: Component, disabled, ...props } = this.props;
+    const { componentClass: Component, disabled, eventKey, ...props } = this.props;
     let newProps = props;
 
     if (disabled) {
