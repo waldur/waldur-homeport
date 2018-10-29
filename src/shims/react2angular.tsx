@@ -31,7 +31,7 @@ export function react2angular<Props>(
       static get $$ngIsClass() {
         return true;
       }
-      injectedProps: { [name: string]: any }
+      injectedProps: { [name: string]: any };
       constructor(private $element: IAugmentedJQuery, ...injectedProps: any[]) {
         super();
         this.injectedProps = {};
