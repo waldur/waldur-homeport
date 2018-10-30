@@ -10,6 +10,7 @@ import marketplaceProviderDetails from './service-providers/CustomerDetailsConta
 import marketplaceServiceProviderButton from './service-providers/ServiceProviderRegisterButtonContainer';
 import marketplaceVendorOfferings from './offerings/OfferingsList';
 import marketplaceOfferingCreate from './offerings/create/OfferingCreateContainer';
+import marketplaceOfferingUpdate from './offerings/update/OfferingUpdateContainer';
 import marketplaceOrdersList from './orders/OrdersList';
 import marketplaceOrderItemsList from './orders/OrderItemsContainer';
 import marketplaceOrderDetails from './orders/OrderDetailsContainer';
@@ -35,6 +36,7 @@ export default module => {
   module.component('marketplaceServiceProviderButton', marketplaceServiceProviderButton);
   module.component('marketplaceVendorOfferings', marketplaceVendorOfferings);
   module.component('marketplaceOfferingCreate', marketplaceOfferingCreate);
+  module.component('marketplaceOfferingUpdate', marketplaceOfferingUpdate);
   module.component('marketplaceOrdersList', marketplaceOrdersList);
   module.component('marketplaceOrderItemsList', marketplaceOrderItemsList);
   module.component('marketplaceProjectResourcesList', marketplaceProjectResourcesList);

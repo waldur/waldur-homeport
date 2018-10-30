@@ -18,6 +18,9 @@ export interface OptionFormData {
 
 export interface OfferingFormData {
   name: string;
+  native_name?: string;
+  description?: string;
+  native_description?: string;
   category: Category;
   type: Option;
   attributes?: AttributesType;
@@ -27,6 +30,10 @@ export interface OfferingFormData {
   service_settings?: any;
   thumbnail?: File;
   scope?: string;
+}
+
+export interface OfferingUpdateFormData extends OfferingFormData {
+  offeringUuid: string;
 }
 
 export interface PlanRequest {
@@ -39,6 +46,9 @@ export interface PlanRequest {
 
 export interface OfferingRequest {
   name: string;
+  native_name?: string;
+  description?: string;
+  native_description?: string;
   type: string;
   customer: string;
   category: string;

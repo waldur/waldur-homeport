@@ -35,6 +35,10 @@ export function post<T = {}>(endpoint: string, options?: {}): IHttpPromise<T> {
   return $http.post(`${ENV.apiEndpoint}api${endpoint}`, options);
 }
 
+export function patch<T = {}>(endpoint: string, options?: {}): IHttpPromise<T> {
+  return $http.patch(`${ENV.apiEndpoint}api${endpoint}`, options);
+}
+
 export function sendForm<T = {}>(method: string, url: string, options): IHttpPromise<T> {
   const data = new FormData();
   for (const name of Object.keys(options)) {

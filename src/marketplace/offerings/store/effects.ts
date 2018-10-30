@@ -16,7 +16,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { setStep, loadDataSuccess, loadDataError } from './actions';
 import * as constants from './constants';
 import { STATES } from './constants';
-import { OfferingFormData } from './types';
+import { OfferingFormData, OfferingUpdateFormData } from './types';
 import { formatOfferingRequest } from './utils';
 
 function* loadData() {
@@ -24,7 +24,7 @@ function* loadData() {
     const categories = yield call(api.getCategories);
     const pluginsData = yield call(api.getPlugins);
     const plugins = pluginsData.reduce((result, plugin) => ({...result, [plugin.offering_type]: plugin.components}), {});
-    yield put(loadDataSuccess(categories, plugins));
+    yield put(loadDataSuccess({categories, plugins}));
   } catch {
     yield put(loadDataError());
   }
@@ -67,6 +67,25 @@ function* createOffering(action: Action<OfferingFormData>) {
   $state.go('marketplace-vendor-offerings');
 }
 
+function* updateOffering(action: Action<OfferingUpdateFormData>) {
+  const { offeringUuid, thumbnail, ...rest } = action.payload;
+  try {
+  yield call(api.updateOffering, offeringUuid, rest);
+  if (thumbnail instanceof File || thumbnail === '') {
+    yield call(api.uploadOfferingThumbnail, offeringUuid, thumbnail);
+  }
+  } catch (error) {
+    const errorMessage = `${translate('Unable to update offering.')} ${format(error)}`;
+    yield put(showError(errorMessage));
+    yield put(constants.updateOffering.failure());
+    return;
+  }
+  yield put(constants.updateOffering.success());
+  yield put(reset(constants.OFFERING_UPDATE_FORM));
+  yield put(showSuccess(translate('Offering has been updated.')));
+  $state.go('marketplace-vendor-offerings');
+}
+
 function* updateOfferingState(action) {
   const { offering, stateAction } = action.payload;
   try {
@@ -80,8 +99,20 @@ function* updateOfferingState(action) {
   }
 }
 
+function* loadOffering(action) {
+  const { offeringUuid } = action.payload;
+  try {
+    const offering = yield call(api.getOffering, offeringUuid);
+    yield put(loadDataSuccess({offering}));
+  } catch {
+    yield put(loadDataError());
+  }
+}
+
 export default function*() {
   yield takeEvery(constants.LOAD_DATA_START, loadData);
+  yield takeEvery(constants.LOAD_OFFERING_START, loadOffering);
   yield takeEvery(constants.createOffering.REQUEST, createOffering);
+  yield takeEvery(constants.updateOffering.REQUEST, updateOffering);
   yield takeEvery(constants.UPDATE_OFFERING_STATE, updateOfferingState);
 }

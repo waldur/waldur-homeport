@@ -2,14 +2,19 @@ import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
 import {
-  FileUploadField,
   StringField,
   TextField,
   FormContainer,
 } from '@waldur/form-react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { ImageUploadField } from '@waldur/marketplace/offerings/create/ImageUploadField';
 
-export const OverviewStep = withTranslation((props: TranslateProps) => (
+interface OverviewStepProps extends TranslateProps {
+  thumbnail: HTMLImageElement;
+  removeThumbnail(): void;
+}
+
+export const OverviewStep = withTranslation((props: OverviewStepProps) => (
   <FormContainer
     submitting={false}
     labelClass="col-sm-2"
@@ -33,12 +38,13 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
       name="native_description"
       label={props.translate('Native description')}
     />
-    <FileUploadField
+    <ImageUploadField
       name="thumbnail"
       label={props.translate('Offering logo')}
       accept={['image/png', 'image/jpeg', 'image/svg+xml'].join(',')}
       buttonLabel={props.translate('Browse')}
-      showFileName={true}
+      image={props.thumbnail}
+      onImageRemove={props.removeThumbnail}
     />
   </FormContainer>
 ));
