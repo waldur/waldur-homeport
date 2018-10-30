@@ -1,10 +1,12 @@
+import { IHttpPromise, IPromise } from 'angular';
+
 import { $http, ENV } from './services';
 
-export function get<T = {}>(endpoint: string, options?: {}): angular.IHttpPromise<T> {
+export function get<T = {}>(endpoint: string, options?: {}): IHttpPromise<T> {
   return $http.get(`${ENV.apiEndpoint}api${endpoint}`, options);
 }
 
-export function getList<T = {}>(endpoint: string, params?: {}): angular.IPromise<T[]> {
+export function getList<T = {}>(endpoint: string, params?: {}): IPromise<T[]> {
   const options = params ? {params} : undefined;
   return get(endpoint, options).then(response =>
     Array.isArray(response.data) ?
@@ -13,14 +15,15 @@ export function getList<T = {}>(endpoint: string, params?: {}): angular.IPromise
   );
 }
 
-export const getFirst = <T = {}>(endpoint, params?) =>
-  getList<T>(endpoint, params).then(data => data[0]);
+export function getFirst<T = {}>(endpoint, params?) {
+  return getList<T>(endpoint, params).then(data => data[0]);
+}
 
 export function getById<T = {}>(endpoint: string, id: string, options?: {}) {
   return get<T>(`${endpoint}${id}/`, options).then(response => response.data);
 }
 
-export function remove<T = {}>(endpoint: string, options?: {}): angular.IHttpPromise<T> {
+export function remove<T = {}>(endpoint: string, options?: {}): IHttpPromise<T> {
   return $http.delete(`${ENV.apiEndpoint}api${endpoint}`, options);
 }
 
@@ -28,11 +31,11 @@ export function deleteById<T = {}>(endpoint, id, options?) {
   return remove<T>(`${endpoint}${id}/`, options).then(response => response.data);
 }
 
-export function post<T = {}>(endpoint: string, options?: {}): angular.IHttpPromise<T> {
+export function post<T = {}>(endpoint: string, options?: {}): IHttpPromise<T> {
   return $http.post(`${ENV.apiEndpoint}api${endpoint}`, options);
 }
 
-export function sendForm<T = {}>(method: string, url: string, options): angular.IHttpPromise<T> {
+export function sendForm<T = {}>(method: string, url: string, options): IHttpPromise<T> {
   const data = new FormData();
   for (const name of Object.keys(options)) {
     if (options[name] !== undefined) {

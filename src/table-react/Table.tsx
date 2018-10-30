@@ -128,7 +128,7 @@ class Table extends React.Component<Props> {
     } else if (prevProps.query !== this.props.query) {
       this.props.resetPagination();
       this.props.fetch();
-    } else if (prevProps.sorting !== this.props.sorting && prevProps.sorting.loading) {
+    } else if (prevProps.sorting !== this.props.sorting && this.props.sorting.loading) {
       this.props.fetch();
     }
   }

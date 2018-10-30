@@ -1,3 +1,4 @@
+import { IPromise } from 'angular';
 import * as React from 'react';
 
 export interface TableRequest {
@@ -17,7 +18,7 @@ interface TableResponse {
   nextPage: number;
 }
 
-export type Fetcher = (request: TableRequest) => angular.IPromise<TableResponse>;
+export type Fetcher = (request: TableRequest) => IPromise<TableResponse>;
 
 export interface TableOptions {
   table: string;

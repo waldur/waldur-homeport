@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { getWorkspace, getCustomer } from '@waldur/workspace/selectors';
+import { Project, OuterState } from '@waldur/workspace/types';
 
 import { ProjectCreateField } from './ProjectCreateField';
 import { ProjectSelectField } from './ProjectSelectField';
 
-const connector = connect(state => {
+const connector = connect<{projects?: Project[]}, {}, {}, OuterState>(state => {
   const workspace = getWorkspace(state);
   const customer = getCustomer(state);
   if (workspace === 'organization') {

@@ -13,8 +13,8 @@ import { getTableState } from './store';
 import { TableOptions } from './types';
 
 export function connectTable(options: TableOptions) {
-  return function wrapper(Component: React.ComponentType) {
-    const Wrapper: React.SFC = props => {
+  return function wrapper<P = {}>(Component: React.ComponentType<P>) {
+    const Wrapper: React.ComponentType<P> = props => {
       const {table} = options;
       registerTable(options);
 

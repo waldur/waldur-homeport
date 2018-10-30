@@ -1,6 +1,6 @@
 module.exports = {
   transform: {
-    '^.+\\.(tsx?|jsx?)$': '<rootDir>/node_modules/ts-jest/preprocessor.js'
+    '^.+\\.(tsx?|jsx?)$': 'ts-jest'
   },
   testRegex: '\\.spec\\.tsx?$',
   moduleFileExtensions: ['ts','tsx','js','jsx','json'],
@@ -9,5 +9,12 @@ module.exports = {
     '\\.(css|scss|svg)$': '<rootDir>/test/style-mock.js'
   },
   setupFiles: ['<rootDir>/test/enzyme-setup.js', 'jest-date-mock'],
-  modulePathIgnorePatterns: ['<rootDir>/node_modules/']
+  modulePathIgnorePatterns: ['<rootDir>/node_modules/'],
+  globals: {
+    'ts-jest': {
+      diagnostics: {
+        ignoreCodes: [151001]
+      }
+    }
+  }
 };

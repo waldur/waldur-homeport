@@ -1,6 +1,7 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
-import { react2angular } from 'react2angular';
+
+import { connectAngularComponent } from '@waldur/store/connect';
 
 import { RequestState } from './types';
 
@@ -34,4 +35,4 @@ export const ExpertRequestState = (props: ExpertRequestStateProps) => (
   </div>
 );
 
-export default react2angular(ExpertRequestState, ['model']);
+export default connectAngularComponent(ExpertRequestState, ['model']);

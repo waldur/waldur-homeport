@@ -10,12 +10,10 @@ interface OfferingReportComponentProps {
 }
 
 export const OfferingReportComponent = (props: OfferingReportComponentProps) => (
-  // Temporary workaround for typing incompatibility.
-  // It allows to open first section of according by default.
-  // See also: https://github.com/react-bootstrap/react-bootstrap/issues/2599
-  <Accordion {...{defaultActiveKey: 0}}>
+  <Accordion defaultExpanded={true}>
     {props.report.map((section, index) => (
-      <Panel header={section.header} eventKey={index} key={index}>
+      <Panel eventKey={index} key={index}>
+        <Panel.Heading>{section.header}</Panel.Heading>
         <pre>{section.body}</pre>
       </Panel>
     ))}

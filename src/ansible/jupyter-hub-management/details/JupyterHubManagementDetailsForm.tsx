@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Tab } from 'react-bootstrap';
+import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 
 import { authenticationMethodDescription } from '@waldur/ansible/jupyter-hub-management/create/JupyterHubManagementForm';

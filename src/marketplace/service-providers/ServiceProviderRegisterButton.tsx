@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Panel from 'react-bootstrap/lib/Panel';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { dateTime } from '@waldur/core/utils';
@@ -34,12 +35,12 @@ const renderBody = (props: ServiceProviderRegisterButtonProps) => {
 };
 
 export const ServiceProviderRegisterButton = (props: ServiceProviderRegisterButtonProps) => (
-  <div className="panel panel-default">
-    <div className="panel-heading">
+  <Panel>
+    <Panel.Heading>
       {props.translate('Marketplace service provider')}
-    </div>
-    <div className="panel-body">
+    </Panel.Heading>
+    <Panel.Body>
       {renderBody(props)}
-    </div>
-  </div>
+    </Panel.Body>
+  </Panel>
 );

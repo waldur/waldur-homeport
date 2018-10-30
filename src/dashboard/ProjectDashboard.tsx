@@ -15,7 +15,7 @@ const ProjectDashboard: React.SFC<ProjectDashboardProps> = ({ project }) => (
     <ProjectChart project={project} />
     <div className="row">
       <div className="col-md-6">
-        <ProjectEventsFeed />
+        <ProjectEventsFeed project={project}/>
       </div>
     </div>
   </div>

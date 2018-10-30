@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { makeCancelable } from '@waldur/core/makeCancelable';
 import { $filter } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
@@ -18,6 +19,8 @@ class TreemapContainer extends React.Component<TranslateProps> {
     quotasMap: undefined,
     selectedQuota: undefined,
   };
+
+  cancel?(): void;
 
   quotas = [];
 
@@ -95,7 +98,8 @@ class TreemapContainer extends React.Component<TranslateProps> {
     this.quotas = this.getQuotas();
     const keys = this.quotas.map(quota => quota.key);
     const selectedQuota = 'nc_resource_count';
-    loadData(keys).then(quotasMap => {
+    const { cancel, promise } = makeCancelable(loadData(keys));
+    promise.then(quotasMap => {
       this.setState({
         selectedQuota,
         quotasMap,
@@ -103,10 +107,17 @@ class TreemapContainer extends React.Component<TranslateProps> {
         loaded: true,
       });
     });
+    this.cancel = cancel;
   }
 
   componentDidUpdate() {
     this.quotas = this.getQuotas();
+  }
+
+  componentWillUnmount() {
+    if (this.cancel) {
+      this.cancel();
+    }
   }
 
   render() {

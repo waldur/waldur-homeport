@@ -25,8 +25,10 @@ module.exports = {
       'react-overlays',
       'react-redux',
       'react-select',
+      'react-bootstrap/lib/Accordion',
       'react-bootstrap/lib/Col',
       'react-bootstrap/lib/OverlayTrigger',
+      'react-bootstrap/lib/Panel',
       'react-bootstrap/lib/Row',
       'react-bootstrap/lib/Tab',
       'react-bootstrap/lib/Tabs',
@@ -64,7 +66,6 @@ module.exports = {
       'oclazyload',
       'angular-intro.js',
 
-      'react2angular',
       './src/shims/slimscroll',
     ],
   },

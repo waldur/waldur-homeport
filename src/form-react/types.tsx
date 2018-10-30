@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { WrappedFieldInputProps, Validator, Normalizer } from 'redux-form';
 
 export interface FormField {
-  name: string;
+  name?: string;
   input?: WrappedFieldInputProps;
   required?: boolean;
   label?: ReactNode;
