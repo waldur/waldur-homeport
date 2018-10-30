@@ -67,7 +67,7 @@ export async function getDailyQuotaCharts(quotas: Quota[], scope: Scope): Promis
 export const formatQuotaChart = (quota: Quota, values: number[]): Chart => {
   const { formatter, units } = getFormatterUnits(quota.type, values);
 
-  const current = values[values.length - 1];
+  const current = formatter(values[values.length - 1]);
 
   const change = getRelativeChange(
     values[values.length - 2],
