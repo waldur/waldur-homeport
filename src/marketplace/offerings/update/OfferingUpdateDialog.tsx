@@ -5,44 +5,32 @@ import { InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
+import { TABS } from '@waldur/marketplace/offerings/create/OfferingCreateDialog';
 
+import { Wizard } from '../create/Wizard';
 import { STEPS, OfferingStep } from '../types';
-import { AccountingStepContainer } from './AccountingStepContainer';
-import { DescriptionStepContainer } from './DescriptionStepContainer';
-import { ManagementStepContainer } from './ManagementStepContainer';
-import { OverviewStep } from './OverviewStep';
-import { ReviewStep } from './ReviewStep';
-import { Wizard } from './Wizard';
 
-export const TABS = {
-  Overview: OverviewStep,
-  Description: DescriptionStepContainer,
-  Management: ManagementStepContainer,
-  Accounting: AccountingStepContainer,
-  Review: ReviewStep,
-};
-
-interface OfferingCreateDialogProps extends InjectedFormProps {
+interface OfferingUpdateDialogProps extends InjectedFormProps {
   step: OfferingStep;
-  createOffering(): void;
-  loadData(): void;
+  updateOffering(): void;
   loading: boolean;
   loaded: boolean;
   erred: boolean;
-  setStep(step: string): void;
   disabled: boolean;
   isLastStep: boolean;
   goBack(): void;
   goNext(): void;
   thumbnail: HTMLImageElement;
+  removeThumbnail(): void;
+  loadOffering(offeringUuid: string): void;
 }
 
-export class OfferingCreateDialog extends React.Component<OfferingCreateDialogProps> {
+export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogProps> {
   componentDidMount() {
     if (this.props.disabled) {
       return $state.go('errorPage.notFound');
     }
-    this.props.loadData();
+    this.props.loadOffering($state.params.offering_uuid);
   }
 
   render() {
@@ -51,7 +39,7 @@ export class OfferingCreateDialog extends React.Component<OfferingCreateDialogPr
       loaded,
       erred,
       handleSubmit,
-      createOffering,
+      updateOffering,
       ...rest} = this.props;
 
     if (loading) {
@@ -63,9 +51,9 @@ export class OfferingCreateDialog extends React.Component<OfferingCreateDialogPr
         <Row>
           <Col lg={10} lgOffset={1}>
             <form
-              onSubmit={handleSubmit(createOffering)}
+              onSubmit={handleSubmit(updateOffering)}
               className="form-horizontal">
-              <Wizard steps={STEPS} tabs={TABS} {...rest}/>
+              <Wizard steps={[STEPS[0]]} tabs={{Overview: TABS.Overview}} {...rest}/>
             </form>
           </Col>
         </Row>

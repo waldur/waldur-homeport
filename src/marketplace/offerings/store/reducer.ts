@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   erred: false,
   categories: [],
   plugins: {},
+  offering: {},
 };
 
 export const offeringReducer = (state = INITIAL_STATE, action) => {
@@ -32,8 +33,7 @@ export const offeringReducer = (state = INITIAL_STATE, action) => {
         loading: false,
         loaded: true,
         erred: false,
-        categories: payload.categories,
-        plugins: payload.plugins,
+        ...payload,
       };
 
     case constants.LOAD_DATA_ERROR:
@@ -42,6 +42,14 @@ export const offeringReducer = (state = INITIAL_STATE, action) => {
         loading: false,
         loaded: false,
         erred: true,
+      };
+
+    case constants.LOAD_OFFERING_START:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+        erred: false,
       };
 
     default:

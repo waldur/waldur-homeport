@@ -7,7 +7,7 @@ import { FORM_ID } from './constants';
 import { PlanFormData } from './types';
 import { formatComponents } from './utils';
 
-const getOffering = state => state.marketplace.offering;
+export const getOffering = state => state.marketplace.offering;
 export const getStep = state => getOffering(state).step;
 export const isLoading = state => getOffering(state).loading;
 export const isLoaded = state => getOffering(state).loaded;

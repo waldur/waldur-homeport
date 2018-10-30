@@ -1,4 +1,4 @@
-import { get, getAll, getById, post, sendForm, getList, getFirst } from '@waldur/core/api';
+import { get, getAll, getById, post, sendForm, getList, getFirst, patch } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 import { Customer } from '@waldur/customer/types';
 import { State, OrderItemResponse } from '@waldur/marketplace/orders/types';
@@ -27,6 +27,9 @@ export const getOffering = id =>
 
 export const createOffering = data =>
   post<Offering>('/marketplace-offerings/', data);
+
+export const updateOffering = (offeringId, data) =>
+  patch<Offering>(`/marketplace-offerings/${offeringId}/`, data);
 
 export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
   sendForm<Offering>('PATCH', `${ENV.apiEndpoint}api/marketplace-offerings/${offeringId}/`, {thumbnail});

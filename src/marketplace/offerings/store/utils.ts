@@ -57,9 +57,12 @@ export const formatComponents = components =>
       component.billing_type,
   }));
 
-export const formatOfferingRequest = (request: OfferingFormData, customer: Customer) => {
+export const formatOfferingRequest = (request: OfferingFormData, customer?: Customer) => {
   const result: OfferingRequest = {
     name: request.name,
+    native_name: request.native_name,
+    description: request.description,
+    native_description: request.native_description,
     category: request.category.url,
     customer: customer.url,
     type: request.type.value,

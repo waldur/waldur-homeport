@@ -153,6 +153,16 @@ export default function routes($stateProvider) {
       }
     })
 
+    .state('marketplace-offering-update', {
+      url: 'marketplace-offering-update/:offering_uuid',
+      template: '<marketplace-offering-update></marketplace-offering-update>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('Update offering'),
+        feature: 'marketplace',
+      }
+    })
+
     .state('marketplace-order-details', {
       url: 'marketplace-order-details/:order_uuid/',
       template: '<marketplace-order-details></marketplace-order-details>',

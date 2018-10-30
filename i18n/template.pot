@@ -3733,6 +3733,10 @@ msgstr ""
 msgid "Offering has been created."
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Offering has been updated."
+msgstr ""
+
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/create/ReviewStep.tsx
 msgid "Offering is not configured yet."
@@ -5073,6 +5077,7 @@ msgstr ""
 #: src/cost-planning/cost-plans-list.js
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
+#: src/marketplace/offerings/create/ImageUploadField.tsx
 #: src/project/projects-list.js
 #: src/providers/provider-list.js
 #: src/team/customer-users-list.js
@@ -6905,6 +6910,10 @@ msgstr ""
 msgid "Unable to update offering state."
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to update offering."
+msgstr ""
+
 #: src/providers/effects.tsx
 msgid "Unable to update provider."
 msgstr ""
@@ -6968,6 +6977,10 @@ msgstr ""
 
 #: src/user/hooks/hook-details.html
 msgid "Update notification"
+msgstr ""
+
+#: src/marketplace/routes.js
+msgid "Update offering"
 msgstr ""
 
 #: src/project/project-policies.html

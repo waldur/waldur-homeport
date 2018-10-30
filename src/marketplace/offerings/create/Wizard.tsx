@@ -10,7 +10,7 @@ import ActionButton from '@waldur/table-react/ActionButton';
 interface WizardProps extends TranslateProps {
   steps: string[];
   step: string;
-  setStep(step: string): void;
+  setStep?(step: string): void;
   goBack(): void;
   goNext(): void;
   submitting: boolean;
@@ -18,6 +18,17 @@ interface WizardProps extends TranslateProps {
   isLastStep: boolean;
   tabs: {[key: string]: React.ComponentType};
 }
+
+const renderStepComponent = props => {
+  if (props.step === 'Overview') {
+    return React.createElement(props.tabs[props.step], {
+      thumbnail: props.thumbnail,
+      removeThumbnail: props.removeThumbnail,
+    });
+  } else {
+    return React.createElement(props.tabs[props.step]);
+  }
+};
 
 export const Wizard = withTranslation((props: WizardProps) => (
   <>
@@ -27,7 +38,7 @@ export const Wizard = withTranslation((props: WizardProps) => (
       onClick={props.setStep}
       disabled={props.submitting}
     />
-    {React.createElement(props.tabs[props.step])}
+    {renderStepComponent(props)}
     <div className="form-group">
       <Col smOffset={2} sm={8}>
         <div className="display-flex justify-content-between m-t-md">
