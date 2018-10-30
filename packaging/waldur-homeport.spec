@@ -6,7 +6,7 @@
 
 Name: waldur-homeport
 Summary: Waldur HomePort
-Version: 3.1.1
+Version: 3.1.2
 Release: 1.el7
 License: MIT
 Source0: %{name}-%{version}.tar.gz
@@ -62,6 +62,9 @@ rm -rf %{buildroot}
 %config(noreplace) %{__conf_dir}/nginx.conf
 
 %changelog
+* Tue Oct 30 2018 Jenkins <jenkins@opennodecloud.com> - 3.1.2-1.el7
+- New upstream release
+
 * Sun Oct 28 2018 Jenkins <jenkins@opennodecloud.com> - 3.1.1-1.el7
 - New upstream release
 
