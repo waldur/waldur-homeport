@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { FormField } from './types';
 
-interface FileUploadFieldProps extends FormField {
+export interface FileUploadFieldProps extends FormField {
   accept?: string;
   showFileName?: boolean;
   buttonLabel: string;

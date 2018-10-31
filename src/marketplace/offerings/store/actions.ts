@@ -22,14 +22,20 @@ export const loadDataStart = () => ({
   type: constants.LOAD_DATA_START,
 });
 
-export const loadDataSuccess = (categories, plugins) => ({
+export const loadDataSuccess = data => ({
   type: constants.LOAD_DATA_SUCCESS,
   payload: {
-    categories,
-    plugins,
+    ...data,
   },
 });
 
 export const loadDataError = () => ({
   type: constants.LOAD_DATA_ERROR,
+});
+
+export const loadOfferingStart = offeringUuid => ({
+  type: constants.LOAD_OFFERING_START,
+  payload: {
+    offeringUuid,
+  },
 });

@@ -23,7 +23,7 @@ export const getMaxFileSizeNames = quotas => {
     const registeredQuotaConfig = getRegisteredQuota(quota.name);
     if (registeredQuotaConfig && registeredQuotaConfig.valueType !== constants.valueType.byte || !registeredQuotaConfig) { continue; }
     const size = quota.limit === -1 ? quota.usage : quota.limit;
-    fileSizeNames[quota.name] = formatFilesize(size).slice(-2).trim();
+    fileSizeNames[quota.name] = (size === 0) ? 'GB' : formatFilesize(size).slice(-2).trim();
   }
   return fileSizeNames;
 };

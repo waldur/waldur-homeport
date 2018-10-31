@@ -699,7 +699,6 @@ msgstr ""
 msgid "Batch RAM"
 msgstr ""
 
-#: src/analytics/registry.ts
 #: src/slurm/dashboard-quotas.ts
 msgid "Batch RAM usage"
 msgstr ""
@@ -753,6 +752,7 @@ msgstr ""
 msgid "Block devices"
 msgstr ""
 
+#: src/analytics/registry.ts
 #: src/dashboard/base-quotas.ts
 msgid "Block snapshot count"
 msgstr ""
@@ -761,6 +761,11 @@ msgstr ""
 msgid "Block storage"
 msgstr ""
 
+#: src/analytics/registry.ts
+msgid "Block storage size"
+msgstr ""
+
+#: src/analytics/registry.ts
 #: src/dashboard/base-quotas.ts
 msgid "Block volume count"
 msgstr ""
@@ -2125,6 +2130,7 @@ msgstr ""
 msgid "Floating IP"
 msgstr ""
 
+#: src/analytics/registry.ts
 #: src/quotas/constants.js
 msgid "Floating IP count"
 msgstr ""
@@ -2544,6 +2550,10 @@ msgstr ""
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 msgid "Instance"
+msgstr ""
+
+#: src/analytics/registry.ts
+msgid "Instance count"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
@@ -3731,6 +3741,10 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering has been created."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Offering has been updated."
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -4921,6 +4935,10 @@ msgstr ""
 msgid "RAM limit, MB"
 msgstr ""
 
+#: src/analytics/registry.ts
+msgid "RAM size"
+msgstr ""
+
 #: src/slurm/details/constants.js
 msgid "RAM usage"
 msgstr ""
@@ -5073,6 +5091,7 @@ msgstr ""
 #: src/cost-planning/cost-plans-list.js
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
+#: src/marketplace/offerings/create/ImageUploadField.tsx
 #: src/project/projects-list.js
 #: src/providers/provider-list.js
 #: src/team/customer-users-list.js
@@ -6905,6 +6924,10 @@ msgstr ""
 msgid "Unable to update offering state."
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to update offering."
+msgstr ""
+
 #: src/providers/effects.tsx
 msgid "Unable to update provider."
 msgstr ""
@@ -6968,6 +6991,10 @@ msgstr ""
 
 #: src/user/hooks/hook-details.html
 msgid "Update notification"
+msgstr ""
+
+#: src/marketplace/routes.js
+msgid "Update offering"
 msgstr ""
 
 #: src/project/project-policies.html
@@ -7415,10 +7442,6 @@ msgstr ""
 msgid "Volume"
 msgstr ""
 
-#: src/analytics/registry.ts
-msgid "Volume count"
-msgstr ""
-
 #: src/openstack/openstack-volume/module.js
 msgid "Volume has been updated."
 msgstr ""
@@ -7431,6 +7454,7 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
+#: src/analytics/registry.ts
 #: src/dashboard/base-quotas.ts
 #: src/rijkscloud/VolumeCreateConfig.js
 msgid "Volume size"
@@ -7839,6 +7863,7 @@ msgstr ""
 msgid "vCPU"
 msgstr ""
 
+#: src/analytics/registry.ts
 #: src/quotas/constants.js
 msgid "vCPU count"
 msgstr ""

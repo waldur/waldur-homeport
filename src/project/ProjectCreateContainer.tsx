@@ -79,8 +79,8 @@ const mapDispatchToProps = dispatch => ({
 
 const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  reduxForm({form: 'projectCreate'}),
   withTranslation,
+  reduxForm({form: 'projectCreate'}),
 );
 
 const ProjectCreateContainer = enhance(ProjectCreateComponent);
