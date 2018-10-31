@@ -9,10 +9,17 @@ export default async function bootstrap(modulename) {
   const initInjector = angular.injector(['ng']);
   const $http = initInjector.get('$http');
 
+  let frontendSettings;
   try {
     const frontendResponse = await $http.get(CONFIG_FILE);
-    const frontendSettings = frontendResponse.data;
+    frontendSettings = frontendResponse.data;
+  } catch(error) {
+    frontendSettings = {
+      apiEndpoint: 'http://localhost:8080/',
+    };
+  }
 
+  try {
     const backendResponse = await $http.get(`${frontendSettings.apiEndpoint}api/configuration/`);
     const backendSettings = backendResponse.data;
 
