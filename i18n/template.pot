@@ -6679,7 +6679,10 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
+#: src/offering/OfferingConfigurationDetails.tsx
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
+#: src/slurm/SlurmPackageDetails.tsx
 msgid "UUID"
 msgstr ""
 
