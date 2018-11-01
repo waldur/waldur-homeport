@@ -7,7 +7,6 @@ describe('Workspace selector', () => {
       .server()
       .mockUser()
       .mockCustomer()
-      .route('http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/?uuid=bf6d515c9e6e445f9c339021b30fc96b', 'fixture:customers/alice.json')
       .route('http://localhost:8080/api/customers/?**', 'fixture:customers/alice_bob_web.json')
       .route('http://localhost:8080/api/projects/**', 'fixture:projects/alice_azure.json')
       .route('http://localhost:8080/api/quotas/**/history/**', [])

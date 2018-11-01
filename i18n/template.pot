@@ -1449,7 +1449,6 @@ msgstr ""
 #: src/cost-planning/cost-plan-items.html
 #: src/experts/bids/details/expert-bid-details.html
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
-#: src/marketplace/offerings/actions/OfferingDeleteButton.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
