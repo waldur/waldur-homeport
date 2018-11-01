@@ -4515,6 +4515,10 @@ msgstr ""
 msgid "Price per month (VAT not included)"
 msgstr ""
 
+#: src/marketplace/common/BillingPeriod.tsx
+msgid "Price per unit"
+msgstr ""
+
 #: src/marketplace/details/plan/utils.ts
 msgid "Price per year"
 msgstr ""
@@ -4883,6 +4887,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-flavors.html
 #: src/cost-planning/cost-plan-items.html
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/utils.ts
 msgid "Quantity"
 msgstr ""
 
