@@ -5,6 +5,7 @@ import categoryEffects from '../category/store/effects';
 import landingEffects from '../landing/store/effects';
 import offeringEffects from '../offerings/store/effects';
 import ordersEffects from '../orders/store/effects';
+import serviceProviderEffects from '../service-providers/store/effects';
 
 export default function*() {
   yield all([
@@ -13,5 +14,6 @@ export default function*() {
     fork(landingEffects),
     fork(offeringEffects),
     fork(ordersEffects),
+    fork(serviceProviderEffects),
   ]);
 }
