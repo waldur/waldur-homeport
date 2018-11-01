@@ -18,5 +18,5 @@ export const AccountingStep = (props: AccountingStepProps) => props.type ? (
     <FieldArray name="plans" component={PlansList} />
   </>
 ) : (
-  <h3>{translate('Please select type at Management tab first.')}</h3>
+  <h3>{translate('Please select type in Management tab first.')}</h3>
 );

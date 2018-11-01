@@ -4356,7 +4356,7 @@ msgid "Please select providers allowed to be used in this project."
 msgstr ""
 
 #: src/marketplace/offerings/create/AccountingStep.tsx
-msgid "Please select type at Management tab first."
+msgid "Please select type in Management tab first."
 msgstr ""
 
 #: src/i18n/language-list.html
