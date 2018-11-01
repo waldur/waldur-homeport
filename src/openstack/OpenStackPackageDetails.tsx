@@ -15,13 +15,16 @@ const renderBooleanValue = value =>
   value !== undefined ? <BooleanField value={value}/> : <span>&mdash;</span>;
 
 export const OpenStackPackageDetails = (props: OfferingDetailsProps) => {
-  const { attributes } = props.orderItem;
+  const { uuid, attributes } = props.orderItem;
   return (
     <>
       <OrderItemDetailsField>
         <OrderItemDetailsSection>
           {translate('Attributes')}
         </OrderItemDetailsSection>
+      </OrderItemDetailsField>
+      <OrderItemDetailsField label={translate('UUID')}>
+        {renderValue(uuid)}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Tenant name')}>
         {renderValue(attributes.name)}

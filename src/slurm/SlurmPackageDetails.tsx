@@ -9,13 +9,16 @@ import { OfferingDetailsProps } from '@waldur/marketplace/types';
 const renderValue = value => value ? value : <span>&mdash;</span>;
 
 export const SlurmPackageDetails = (props: OfferingDetailsProps) => {
-  const { attributes } = props.orderItem;
+  const { uuid, attributes } = props.orderItem;
   return (
     <>
       <OrderItemDetailsField>
         <OrderItemDetailsSection>
           {translate('Attributes')}
         </OrderItemDetailsSection>
+      </OrderItemDetailsField>
+      <OrderItemDetailsField label={translate('UUID')}>
+        {renderValue(uuid)}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Allocation name')}>
         {renderValue(attributes.name)}
