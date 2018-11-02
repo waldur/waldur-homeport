@@ -1083,6 +1083,9 @@ msgid "Component name"
 msgstr ""
 
 #: src/cost-planning/cost-plan-items.html
+#: src/offering/OfferingConfigurationDetails.tsx
+#: src/openstack/OpenStackPackageDetails.tsx
+#: src/slurm/SlurmPackageDetails.tsx
 msgid "Components"
 msgstr ""
 
