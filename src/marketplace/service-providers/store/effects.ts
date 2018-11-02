@@ -29,7 +29,8 @@ function* getServiceProviderSecretCode(action) {
   const errorMessage = translate('Unable to get service provider API secret code.');
   try {
     const data = yield api.getServiceProviderSecretCode(serviceProvider.uuid);
-    yield put(actions.secretCodeFetchSuccess(data.api_secret_code));
+    const secretCode = data.api_secret_code ? data.api_secret_code : '';
+    yield put(actions.secretCodeFetchSuccess(secretCode));
   } catch (error) {
     yield put(showError(errorMessage));
   }
