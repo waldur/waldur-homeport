@@ -3,11 +3,7 @@ describe('Customer creation toggle', () => {
     cy
     .server()
     .mockUser()
-    .route({
-      url: 'http://localhost:8080/api/customers/?**',
-      method: 'GET',
-      response: 'fixture:customers/alice_bob_web.json',
-    })
+    .route('http://localhost:8080/api/customers/?**', 'fixture:customers/alice_bob_web.json')
     .login();
   });
 

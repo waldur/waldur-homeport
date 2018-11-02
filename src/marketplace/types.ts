@@ -144,6 +144,7 @@ export interface OfferingsListType {
 }
 
 export interface ServiceProvider {
+  uuid: string;
   image?: string;
   description?: string;
   service_offerings?: Offering[];

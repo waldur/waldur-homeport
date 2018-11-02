@@ -30,9 +30,9 @@ Unit tests are written in the `.spec.ts` files.
 
 ## Integration tests
 
-1. Download and unpack [Cypress](https://www.cypress.io/).
-2. Launch Waldur MasterMind and Waldur HomePort.
-3. In Cypress open waldur-homeport directory and click button __Run all tests__.
+Tests are implemented using [Cypress framework](https://www.cypress.io/).
+In order to run all integration tests, execute command `yarn ci:test`.
+If you already have Webpack server running, it's better to execute command `yarn cypress open`.
 
 # Component approach
 

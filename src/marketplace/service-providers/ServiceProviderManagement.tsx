@@ -1,17 +1,19 @@
 import * as React from 'react';
+import * as Panel from 'react-bootstrap/lib/Panel';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import { Customer } from '@waldur/customer/types';
 import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { ServiceProvider } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { getCustomer } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
 
 import { canRegisterServiceProviderForCustomer } from './selectors';
 import { ServiceProviderRegisterButton } from './ServiceProviderRegisterButton';
+import { ServiceProviderSecretCode } from './ServiceProviderSecretCode';
 
 interface ServiceProviderWrapperProps extends TranslateProps {
   customer: Customer;
@@ -67,11 +69,29 @@ class ServiceProviderWrapper extends React.Component<ServiceProviderWrapperProps
 
   render() {
     return (
-      <ServiceProviderRegisterButton
-        registerServiceProvider={this.registerServiceProvider}
-        {...this.props}
-        {...this.state}
-      />
+      <Panel>
+        <Panel.Heading>
+          {this.props.translate('Marketplace service provider')}
+        </Panel.Heading>
+        <Panel.Body>
+          <ServiceProviderRegisterButton
+            registerServiceProvider={this.registerServiceProvider}
+            {...this.props}
+            {...this.state}
+          />
+          {this.props.customer && this.props.customer.is_service_provider &&
+            <>
+              <br/>
+              <ServiceProviderSecretCode
+                serviceProvider={this.state.serviceProvider}
+                showError={this.props.showError}
+                showSuccess={this.props.showSuccess}
+                translate={translate}
+              />
+            </>
+          }
+        </Panel.Body>
+      </Panel>
     );
   }
 }
@@ -89,6 +109,6 @@ const enhance = compose(
   }),
 );
 
-export const ServiceProviderRegisterButtonContainer = enhance(ServiceProviderWrapper);
+export const ServiceProviderManagement = enhance(ServiceProviderWrapper);
 
-export default connectAngularComponent(ServiceProviderRegisterButtonContainer);
+export default connectAngularComponent(ServiceProviderManagement);

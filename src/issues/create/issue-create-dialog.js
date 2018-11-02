@@ -142,6 +142,9 @@ const issueCreateDialog = {
       if (this.issue.resource) {
         issue.resource = this.issue.resource.url;
       }
+      if (this.issueTemplate) {
+        issue.template = this.issueTemplate.url;
+      }
       return this.service.createIssue(issue).then(issue => {
         const promises = [];
         angular.forEach(this.files, file => {

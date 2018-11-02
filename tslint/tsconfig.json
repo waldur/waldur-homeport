@@ -6,7 +6,9 @@
     "noImplicitAny": false,
     "module": "CommonJS",
     "moduleResolution": "node",
-    "target": "es5"
+    "target": "es5",
+    // Workaround for https://github.com/cypress-io/cypress/issues/1087
+    "skipLibCheck": true
   },
   "paths": {
     "*": ["*", "../node_modules"]

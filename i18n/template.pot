@@ -48,6 +48,10 @@ msgstr ""
 msgid "API key"
 msgstr ""
 
+#: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
+msgid "API secret code:"
+msgstr ""
+
 #: src/user/support/UserEditForm.tsx
 msgid "API token lifetime"
 msgstr ""
@@ -329,9 +333,17 @@ msgstr ""
 msgid "Affected resource"
 msgstr ""
 
+#: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
+msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
+msgstr ""
+
 #: src/billing/billing-record-details.html
 #: src/customer/details/CustomerDetails.tsx
 msgid "Agreement number"
+msgstr ""
+
+#: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
+msgid "Alert"
 msgstr ""
 
 #: src/openstack/openstack-tenant/openstack-template.js
@@ -1449,7 +1461,6 @@ msgstr ""
 #: src/cost-planning/cost-plan-items.html
 #: src/experts/bids/details/expert-bid-details.html
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
-#: src/marketplace/offerings/actions/OfferingDeleteButton.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -3100,7 +3111,7 @@ msgstr ""
 msgid "Marketplace orders"
 msgstr ""
 
-#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Marketplace service provider"
 msgstr ""
 
@@ -4345,7 +4356,7 @@ msgid "Please select providers allowed to be used in this project."
 msgstr ""
 
 #: src/marketplace/offerings/create/AccountingStep.tsx
-msgid "Please select type at Management tab first."
+msgid "Please select type in Management tab first."
 msgstr ""
 
 #: src/i18n/language-list.html
@@ -4514,6 +4525,10 @@ msgstr ""
 
 #: src/appstore/dialog/appstore-category-selector.html
 msgid "Price per month (VAT not included)"
+msgstr ""
+
+#: src/marketplace/common/BillingPeriod.tsx
+msgid "Price per unit"
 msgstr ""
 
 #: src/marketplace/details/plan/utils.ts
@@ -4884,6 +4899,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-flavors.html
 #: src/cost-planning/cost-plan-items.html
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/utils.ts
 msgid "Quantity"
 msgstr ""
 
@@ -4985,6 +5001,11 @@ msgstr ""
 #: src/table-react/TableRefreshButton.tsx
 #: src/table/responsive-table.js
 msgid "Refresh"
+msgstr ""
+
+#: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
+#: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
+msgid "Regenerate"
 msgstr ""
 
 #: src/digitalocean/DigitalOceanDropletSummary.tsx
@@ -5818,7 +5839,11 @@ msgstr ""
 msgid "Service provider"
 msgstr ""
 
-#: src/marketplace/service-providers/ServiceProviderRegisterButtonContainer.tsx
+#: src/marketplace/service-providers/store/effects.ts
+msgid "Service provider API secret code has been generated."
+msgstr ""
+
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Service provider has been registered."
 msgstr ""
 
@@ -6654,7 +6679,10 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
+#: src/offering/OfferingConfigurationDetails.tsx
+#: src/openstack/OpenStackPackageDetails.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
+#: src/slurm/SlurmPackageDetails.tsx
 msgid "UUID"
 msgstr ""
 
@@ -6777,6 +6805,10 @@ msgstr ""
 msgid "Unable to find:"
 msgstr ""
 
+#: src/marketplace/service-providers/store/effects.ts
+msgid "Unable to generate service provider API secret code."
+msgstr ""
+
 #: src/openstack/openstack-tenant/appstore-field-select-openstack-tenant.js
 msgid "Unable to get list of OpenStack tenants."
 msgstr ""
@@ -6787,6 +6819,10 @@ msgstr ""
 
 #: src/marketplace/orders/OrderItemDetailsContainer.tsx
 msgid "Unable to get order item."
+msgstr ""
+
+#: src/marketplace/service-providers/store/effects.ts
+msgid "Unable to get service provider API secret code."
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
@@ -6868,7 +6904,7 @@ msgstr ""
 msgid "Unable to load sections for comparison."
 msgstr ""
 
-#: src/marketplace/service-providers/ServiceProviderRegisterButtonContainer.tsx
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Unable to load service provider."
 msgstr ""
 
@@ -6892,7 +6928,7 @@ msgstr ""
 msgid "Unable to post comment."
 msgstr ""
 
-#: src/marketplace/service-providers/ServiceProviderRegisterButtonContainer.tsx
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Unable to register service provider."
 msgstr ""
 

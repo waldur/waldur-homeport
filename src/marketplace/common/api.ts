@@ -57,3 +57,9 @@ export const createServiceProvider = params =>
 
 export const getServiceProviderByCustomer = params =>
   getFirst<ServiceProvider>('/marketplace-service-providers/', params);
+
+export const getServiceProviderSecretCode = id =>
+  get(`/marketplace-service-providers/${id}/api_secret_code/`).then(response => response.data);
+
+export const generateServiceProviderSecretCode = id =>
+  post(`/marketplace-service-providers/${id}/api_secret_code/`).then(response => response.data);

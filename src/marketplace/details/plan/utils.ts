@@ -40,6 +40,12 @@ function getBillingPeriods(unit: string): BillingPeriodDescription {
         ],
         multipliers: [1, 12],
       };
+
+    default:
+      return {
+        periods: [translate('Quantity')],
+        multipliers: [1],
+      };
   }
 }
 

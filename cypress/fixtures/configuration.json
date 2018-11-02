@@ -1,0 +1,42 @@
+{
+  "WALDUR_CORE": {
+    "VALIDATE_INVITATION_EMAIL": false,
+    "OWNER_CAN_MANAGE_CUSTOMER": true,
+    "ALLOW_SIGNUP_WITHOUT_INVITATION": true,
+    "INVITATIONS_ENABLED": true,
+    "NATIVE_NAME_ENABLED": false,
+    "AUTHENTICATION_METHODS": ["LOCAL_SIGNIN"],
+    "COMPANY_TYPES": [
+      "Ministry",
+      "Private company",
+      "Public company",
+      "Government owned company"
+    ],
+    "ONLY_STAFF_MANAGES_SERVICES": false,
+    "OWNERS_CAN_MANAGE_OWNERS": false
+  },
+  "WALDUR_AUTH_SOCIAL": {
+    "SMARTIDEE_CLIENT_ID": "SMARTIDEE_CLIENT_ID",
+    "FACEBOOK_CLIENT_ID": "FACEBOOK_CLIENT_ID",
+    "GOOGLE_CLIENT_ID": "GOOGLE_CLIENT_ID"
+  },
+  "WALDUR_OPENSTACK": {
+    "TENANT_CREDENTIALS_VISIBLE": true
+  },
+  "WALDUR_AUTH_VALIMO": {
+    "MOBILE_PREFIX": "+372",
+    "LABEL": "Mobile ID"
+  },
+  "WALDUR_AUTH_SAML2": {
+    "ENABLE_SINGLE_LOGOUT": false,
+    "ALLOW_TO_SELECT_IDENTITY_PROVIDER": true,
+    "IDENTITY_PROVIDER_LABEL": null,
+    "IDENTITY_PROVIDER_URL": null
+  },
+  "WALDUR_MARKETPLACE": {
+    "MANAGER_CAN_APPROVE_ORDER": false,
+    "OWNER_CAN_REGISTER_SERVICE_PROVIDER": false,
+    "ADMIN_CAN_APPROVE_ORDER": false,
+    "OWNER_CAN_APPROVE_ORDER": true
+  }
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "uuid": "71969b205ff943c6b0d89e98f466a2dc",
+    "url": "http://localhost:8080/api/service-certifications/71969b205ff943c6b0d89e98f466a2dc/",
+    "name": "ISO27001",
+    "description": "",
+    "link": "https://en.wikipedia.org/wiki/ISO/IEC_27001:2013"
+  },
+  {
+    "uuid": "21930e2e3ac34d358cf01bab53720dd8",
+    "url": "http://localhost:8080/api/service-certifications/21930e2e3ac34d358cf01bab53720dd8/",
+    "name": "ISKE L",
+    "description": "",
+    "link": "https://iske.ria.ee"
+  },
+  {
+    "uuid": "5bcda57aa6be484ea3059e396050276b",
+    "url": "http://localhost:8080/api/service-certifications/5bcda57aa6be484ea3059e396050276b/",
+    "name": "ISKE H",
+    "description": "",
+    "link": "https://iske.ria.ee"
+  }
+]
