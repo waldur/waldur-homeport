@@ -7,6 +7,7 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
+import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { parseCounters } from '@waldur/quotas/QuotaUtilsService';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
@@ -104,19 +105,19 @@ export const TableComponent = props => {
       feature: 'offering',
     },
     {
-      title: translate('Current cost'),
+      title: renderTitleWithPriceTooltip(translate('Current cost')),
       render: CurrentCostField,
       visible: accountingPeriodIsCurrent,
       orderField: 'current_cost',
     },
     {
-      title: translate('Estimated cost'),
+      title: renderTitleWithPriceTooltip(translate('Estimated cost')),
       render: EstimatedCostField,
       visible: accountingPeriodIsCurrent,
       orderField: 'estimated_cost',
     },
     {
-      title: translate('Cost'),
+      title: renderTitleWithPriceTooltip(translate('Cost')),
       render: CurrentCostField,
       visible: !accountingPeriodIsCurrent,
       orderField: 'current_cost',
@@ -133,6 +134,9 @@ export const TableComponent = props => {
     />
   );
 };
+
+const renderTitleWithPriceTooltip = title =>
+  <><PriceTooltip/>{' '}{title}</>;
 
 const createCustomFetcher = (endpoint: string): Fetcher => {
   return (request: TableRequest) => {
