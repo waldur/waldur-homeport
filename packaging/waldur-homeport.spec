@@ -1,12 +1,12 @@
 # BuildRequiresRepo: epel-release
-# BuildRequiresRepo: https://rpm.nodesource.com/pub_6.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
+# BuildRequiresRepo: https://rpm.nodesource.com/pub_8.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
 
 %define __conf_dir %{_sysconfdir}/%{name}
 %define __data_dir %{_datadir}/%{name}
 
 Name: waldur-homeport
 Summary: Waldur HomePort
-Version: 3.1.4
+Version: 3.1.5
 Release: 1.el7
 License: MIT
 Source0: %{name}-%{version}.tar.gz
@@ -62,6 +62,9 @@ rm -rf %{buildroot}
 %config(noreplace) %{__conf_dir}/nginx.conf
 
 %changelog
+* Sat Nov 3 2018 Jenkins <jenkins@opennodecloud.com> - 3.1.5-1.el7
+- New upstream release
+
 * Fri Nov 2 2018 Jenkins <jenkins@opennodecloud.com> - 3.1.4-1.el7
 - New upstream release
 
