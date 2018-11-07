@@ -1,36 +1,20 @@
 import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
-import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
+import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
+import { PureScheduleSummary } from '@waldur/resource/summary/ScheduleSummary';
 import { Schedule } from '@waldur/resource/types';
-import { formatRetentionTime, formatSchedule } from '@waldur/resource/utils';
 
 const PureOpenStackSnapshotScheduleSummary = (props: ResourceSummaryProps<Schedule>) => {
   const { translate, resource } = props;
   return (
-    <span>
-      <PureResourceSummaryBase {...props}/>
-      <Field
-        label={translate('Schedule')}
-        value={formatSchedule(props)}
-      />
-      <Field
-        label={translate('Timezone')}
-        value={resource.timezone}
-      />
-      <Field
-        label={translate('Is active')}
-        value={resource.is_active ? translate('Yes') : translate('No')}
-      />
+    <>
+      <PureScheduleSummary {...props}/>
       <Field
         label={translate('Max # of snapshots')}
         value={resource.maximal_number_of_resources}
       />
-      <Field
-        label={translate('Retention time')}
-        value={formatRetentionTime(props)}
-      />
-    </span>
+    </>
   );
 };
 
