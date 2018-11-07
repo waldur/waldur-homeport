@@ -46,6 +46,7 @@ export interface VirtualMachine extends Resource {
 export interface Schedule extends Resource {
   maximal_number_of_resources: number;
   retention_time: number;
+  next_trigger_at: string;
   timezone: string;
   is_active: boolean;
 }

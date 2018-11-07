@@ -2766,10 +2766,9 @@ msgstr ""
 msgid "Invoices list"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "Is active"
 msgstr ""
 
@@ -3400,10 +3399,13 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
+#: src/resource/summary/ScheduleSummary.tsx
+msgid "Next trigger at"
+msgstr ""
+
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "No"
 msgstr ""
 
@@ -5440,9 +5442,8 @@ msgstr ""
 msgid "Restroing"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "Retention time"
 msgstr ""
 
@@ -5567,11 +5568,10 @@ msgstr ""
 msgid "Saving of {vm_name} was successful."
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "Schedule"
 msgstr ""
 
@@ -6568,9 +6568,8 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "Timezone"
 msgstr ""
 
@@ -7552,10 +7551,9 @@ msgstr ""
 msgid "X509 certificate in .PEM format"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "Yes"
 msgstr ""
 
