@@ -6236,11 +6236,9 @@ msgstr ""
 msgid "Sync profile"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/module.js
 #: src/openstack/openstack-floating-ips/module.js
 #: src/openstack/openstack-network/module.js
 #: src/openstack/openstack-security-groups/module.js
-#: src/openstack/openstack-snapshot-schedule/module.js
 #: src/openstack/openstack-snapshot/module.js
 #: src/openstack/openstack-subnet/actions.js
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts

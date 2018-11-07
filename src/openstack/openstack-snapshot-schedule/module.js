@@ -22,7 +22,6 @@ function actionConfig(ActionConfigurationProvider) {
       'activate',
       'deactivate',
       'destroy',
-      'pull'
     ],
     options: {
       update: {
@@ -36,9 +35,6 @@ function actionConfig(ActionConfigurationProvider) {
             type: 'timezone',
           },
         }
-      },
-      pull: {
-        title: gettext('Synchronise')
       },
     }
   });
