@@ -15,6 +15,9 @@ const formatPlan = (plan: PlanFormData): PlanRequest => {
   if (plan.quotas) {
     result.quotas = plan.quotas;
   }
+  if (plan.description) {
+    result.description = plan.description;
+  }
   return result;
 };
 

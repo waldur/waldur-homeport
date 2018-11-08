@@ -7,6 +7,7 @@ export interface PlanFormData {
   unit_price: number;
   prices: {[key: string]: number};
   quotas: {[key: string]: number};
+  description?: string;
 }
 
 export interface OptionFormData {
@@ -42,6 +43,7 @@ export interface PlanRequest {
   unit_price: number;
   quotas?: {[key: string]: number};
   prices?: {[key: string]: number};
+  description?: string;
 }
 
 export interface OfferingRequest {

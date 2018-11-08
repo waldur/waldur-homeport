@@ -5,6 +5,7 @@ import comparisonIndicator from './compare/ComparisonIndicator';
 import marketplaceCheckout from './cart/CheckoutPage';
 import cartIndicator from './cart/ShoppingCartIndicator';
 import marketplaceOffering from './details/DetailsPage';
+import marketplaceOfferingPlanDescription from './details/plan/PlanDescription';
 import marketplaceCategory from './category/CategoryPage';
 import marketplaceProviderDetails from './service-providers/CustomerDetailsContainer';
 import marketplaceServiceProviderManagement from './service-providers/ServiceProviderManagement';
@@ -32,6 +33,7 @@ export default module => {
   module.component('marketplaceCheckout', marketplaceCheckout);
   module.component('cartIndicator', cartIndicator);
   module.component('marketplaceOffering', marketplaceOffering);
+  module.component('marketplaceOfferingPlanDescription', marketplaceOfferingPlanDescription);
   module.component('marketplaceCategory', marketplaceCategory);
   module.component('marketplaceProviderDetails', marketplaceProviderDetails);
   module.component('marketplaceServiceProviderManagement', marketplaceServiceProviderManagement);

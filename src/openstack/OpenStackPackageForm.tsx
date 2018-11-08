@@ -1,18 +1,18 @@
 import * as React from 'react';
 
 import { ENV } from '@waldur/core/services';
-import { required, getLatinNameValidators } from '@waldur/core/validators';
+import { getLatinNameValidators } from '@waldur/core/validators';
 import {
   FormContainer,
   StringField,
   TextField,
-  SelectField,
   SecretField,
 } from '@waldur/form-react';
 import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { LabelField } from '@waldur/form-react/LabelField';
 import { translate } from '@waldur/i18n';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
+import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
@@ -43,18 +43,7 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
             validate={getLatinNameValidators()}
             required={true}
           />
-          {props.offering.plans && (
-            <SelectField
-              label={translate('Plan')}
-              name="plan"
-              labelKey="name"
-              valueKey="url"
-              options={props.offering.plans}
-              validate={required}
-              required={true}
-              clearable={false}
-            />
-          )}
+          <PlanField offering={props.offering}/>
           <PlanDetailsTable offering={props.offering}/>
           <TextField
             label={translate('Tenant description')}
