@@ -1513,6 +1513,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
@@ -1568,6 +1569,7 @@ msgstr ""
 #: src/experts/requests/details/expert-request-summary.html
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/issues/create/issue-registration.html
+#: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/project-details-button.html
 #: src/project/projects-list.js
@@ -4235,10 +4237,8 @@ msgid "Physical locations"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetails.tsx
+#: src/marketplace/details/plan/PlanField.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
-#: src/offering/OfferingConfigurationForm.tsx
-#: src/openstack/OpenStackPackageForm.tsx
-#: src/slurm/AllocationForm.tsx
 msgid "Plan"
 msgstr ""
 
@@ -4248,6 +4248,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentsList.tsx
 msgid "Plan components"
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDescription.tsx
+msgid "Plan description"
 msgstr ""
 
 #: src/marketplace/offerings/create/AccountingSummary.tsx

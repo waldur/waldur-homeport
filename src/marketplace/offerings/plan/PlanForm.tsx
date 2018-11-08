@@ -21,6 +21,15 @@ const PlanNameField = props => (
   />
 );
 
+const PlanDescriptionField = props => (
+  <Field
+    name={`${props.plan}.description`}
+    type="text"
+    component="input"
+    className="form-control"
+  />
+);
+
 const enhance = compose(connectPlanComponents, withTranslation);
 
 export const PlanForm = enhance(props => (
@@ -33,6 +42,9 @@ export const PlanForm = enhance(props => (
     </FormGroup>
     <FormGroup label={props.translate('Billing period')} required={true}>
       <PlanBillingPeriodField plan={props.plan}/>
+    </FormGroup>
+    <FormGroup label={props.translate('Description')}>
+      <PlanDescriptionField plan={props.plan}/>
     </FormGroup>
     {props.components && props.components.length > 0 && (
       <PlanComponents plan={props.plan} components={props.components}/>
