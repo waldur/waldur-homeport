@@ -1,6 +1,7 @@
 // @ngInject
 export default function initAuthProvider(ENV, $authProvider) {
   $authProvider.httpInterceptor = false;
+  $authProvider.storageType = ENV.authStorage;
 
   $authProvider.loginUrl = ENV.apiEndpoint + 'api-auth/password/';
 
