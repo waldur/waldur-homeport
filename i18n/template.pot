@@ -1045,6 +1045,7 @@ msgstr ""
 
 #: src/experts/requests/details/expert-request-details.html
 #: src/issues/comments/IssueCommentsContainer.tsx
+#: src/offering/OfferingTabs.tsx
 msgid "Comments"
 msgstr ""
 
@@ -1146,6 +1147,10 @@ msgstr ""
 
 #: src/experts/requests/details/ExpertContractDetails.tsx
 msgid "Contract price"
+msgstr ""
+
+#: src/offering/OracleSnapshots.tsx
+msgid "Copy of"
 msgstr ""
 
 #: src/table-react/TableExportButton.tsx
@@ -1380,6 +1385,10 @@ msgstr ""
 msgid "Creation date"
 msgstr ""
 
+#: src/offering/OracleSnapshots.tsx
+msgid "Creation time"
+msgstr ""
+
 #: src/user/support/UserEditForm.tsx
 msgid "Current API token"
 msgstr ""
@@ -1516,7 +1525,7 @@ msgstr ""
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
-#: src/offering/OfferingHeader.tsx
+#: src/offering/OfferingSummaryTab.tsx
 #: src/offering/appstore-offering.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
@@ -3289,6 +3298,7 @@ msgstr ""
 #: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
+#: src/offering/OracleSnapshots.tsx
 #: src/offering/appstore-offering.js
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
@@ -5173,6 +5183,10 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
+#: src/offering/OfferingTabs.tsx
+msgid "Report"
+msgstr ""
+
 #: src/offering/OfferingReportDialog.tsx
 msgid "Report details"
 msgstr ""
@@ -6031,6 +6045,8 @@ msgstr ""
 msgid "Snapshot size"
 msgstr ""
 
+#: src/offering/OfferingTabs.tsx
+#: src/offering/OracleSnapshots.tsx
 #: src/openstack/openstack-backup/tabs.js
 #: src/openstack/openstack-snapshot-schedule/module.js
 #: src/openstack/openstack-volume/module.js

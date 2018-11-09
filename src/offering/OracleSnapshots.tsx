@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Panel from '@waldur/core/Panel';
+import { translate } from '@waldur/i18n';
 
 export const parseTable = raw =>
   // Skip first and last line: header and teaser
@@ -18,13 +19,13 @@ export const OracleSnapshots = props => {
   }
   snapshots = parseTable(snapshots.body);
   return (
-    <Panel title="Snapshots">
+    <Panel title={translate('Snapshots')}>
       <table className="table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Copy of</th>
-            <th>Creation time</th>
+            <th>{translate('Name')}</th>
+            <th>{translate('Copy of')}</th>
+            <th>{translate('Creation time')}</th>
           </tr>
         </thead>
         <tbody>
