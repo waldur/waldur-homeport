@@ -254,6 +254,9 @@ const ENV = {
 
   // Ensure that customer, project and resource name contains only ASCII chars
   enforceLatinName: true,
+
+  // It can be either 'localStorage' or 'sessionStorage'
+  authStorage: 'localStorage',
 };
 
 export default ENV;
