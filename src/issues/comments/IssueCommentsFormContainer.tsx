@@ -50,7 +50,7 @@ export const PureIssueCommentsFormContainer = (props: PureIssueCommentsFormConta
         attachments={attachments}
         uploading={uploadingAttachments}
       />
-    </div >
+    </div>
   );
 };
 
