@@ -32,7 +32,7 @@ export function* issueCommentsGet(action) {
   }
 }
 
-export function* issueCommentsCreate(message: string, issueId: string) {
+export function* issueCommentsCreate(formId: string, message: string, issueId: string) {
   try {
     const response = yield call(api.createComment, message, issueId);
     yield put(actions.issueCommentsCreateSuccess(response.data));
@@ -40,7 +40,13 @@ export function* issueCommentsCreate(message: string, issueId: string) {
     yield put(actions.issueCommentsCreateError(error));
     const errorMessage = `${translate('Unable to post comment.')} ${format(error)}`;
     yield put(showError(errorMessage));
+    return;
   }
+  if (formId) {
+    yield put(reset(formId));
+  }
+  yield put(actions.issueCommentsPendingAttachmentsReset());
+  yield put(actions.issueCommentsFormToggle(null));
 }
 
 export function* issueCommentsUpdate(message: string, commentId: string) {
@@ -85,11 +91,8 @@ export function* issueCommentsFormSubmit(action) {
         yield call(issueCommentsUpdate, message, formId);
       } else {
         const issue = yield select(getIssue);
-        yield call(issueCommentsCreate, message, issue.uuid);
-        yield put(reset(formId));
+        yield call(issueCommentsCreate, formId, message, issue.uuid);
       }
-      yield put(actions.issueCommentsPendingAttachmentsReset());
-      yield put(actions.issueCommentsFormToggle(null));
     }),
     cancel: take([
       constants.ISSUE_COMMENTS_FORM_SUBMIT_CANCEL,
@@ -129,7 +132,7 @@ export function* issueCommentsAttachmentsPutStart() {
 export function* issueCommentsWrapAttachment(attachments: Attachment[]) {
   const issue = yield select(getIssue);
   const commentDescription = utils.createJiraComment(null, attachments);
-  yield call(issueCommentsCreate, commentDescription, issue.uuid);
+  yield call(issueCommentsCreate, undefined, commentDescription, issue.uuid);
 }
 
 export function* issueCommentsPendingAttachmentsDelete() {

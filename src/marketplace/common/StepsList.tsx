@@ -22,7 +22,7 @@ export const StepsList = (props: StepsListProps) => {
           title={`${index + 1}. ${title}`}
           complete={stepIndex > index}
           active={stepIndex === index}
-          onClick={() => props.onClick(title)}
+          onClick={() => props.onClick && props.onClick(title)}
         />
       ))}
     </div>

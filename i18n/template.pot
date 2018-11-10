@@ -1045,6 +1045,7 @@ msgstr ""
 
 #: src/experts/requests/details/expert-request-details.html
 #: src/issues/comments/IssueCommentsContainer.tsx
+#: src/offering/OfferingTabs.tsx
 msgid "Comments"
 msgstr ""
 
@@ -1083,6 +1084,9 @@ msgid "Component name"
 msgstr ""
 
 #: src/cost-planning/cost-plan-items.html
+#: src/offering/OfferingConfigurationDetails.tsx
+#: src/openstack/OpenStackPackageDetails.tsx
+#: src/slurm/SlurmPackageDetails.tsx
 msgid "Components"
 msgstr ""
 
@@ -1143,6 +1147,10 @@ msgstr ""
 
 #: src/experts/requests/details/ExpertContractDetails.tsx
 msgid "Contract price"
+msgstr ""
+
+#: src/offering/OracleSnapshots.tsx
+msgid "Copy of"
 msgstr ""
 
 #: src/table-react/TableExportButton.tsx
@@ -1377,6 +1385,10 @@ msgstr ""
 msgid "Creation date"
 msgstr ""
 
+#: src/offering/OracleSnapshots.tsx
+msgid "Creation time"
+msgstr ""
+
 #: src/user/support/UserEditForm.tsx
 msgid "Current API token"
 msgstr ""
@@ -1510,9 +1522,10 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
-#: src/offering/OfferingHeader.tsx
+#: src/offering/OfferingSummaryTab.tsx
 #: src/offering/appstore-offering.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
@@ -1565,6 +1578,7 @@ msgstr ""
 #: src/experts/requests/details/expert-request-summary.html
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/issues/create/issue-registration.html
+#: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/project-details-button.html
 #: src/project/projects-list.js
@@ -2763,10 +2777,9 @@ msgstr ""
 msgid "Invoices list"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "Is active"
 msgstr ""
 
@@ -3285,6 +3298,7 @@ msgstr ""
 #: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
+#: src/offering/OracleSnapshots.tsx
 #: src/offering/appstore-offering.js
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
@@ -3397,10 +3411,13 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
+#: src/resource/summary/ScheduleSummary.tsx
+msgid "Next trigger at"
+msgstr ""
+
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "No"
 msgstr ""
 
@@ -4230,10 +4247,8 @@ msgid "Physical locations"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetails.tsx
+#: src/marketplace/details/plan/PlanField.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
-#: src/offering/OfferingConfigurationForm.tsx
-#: src/openstack/OpenStackPackageForm.tsx
-#: src/slurm/AllocationForm.tsx
 msgid "Plan"
 msgstr ""
 
@@ -4243,6 +4258,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentsList.tsx
 msgid "Plan components"
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDescription.tsx
+msgid "Plan description"
 msgstr ""
 
 #: src/marketplace/offerings/create/AccountingSummary.tsx
@@ -5164,6 +5183,10 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
+#: src/offering/OfferingTabs.tsx
+msgid "Report"
+msgstr ""
+
 #: src/offering/OfferingReportDialog.tsx
 msgid "Report details"
 msgstr ""
@@ -5437,9 +5460,8 @@ msgstr ""
 msgid "Restroing"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "Retention time"
 msgstr ""
 
@@ -5564,11 +5586,10 @@ msgstr ""
 msgid "Saving of {vm_name} was successful."
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "Schedule"
 msgstr ""
 
@@ -6024,6 +6045,8 @@ msgstr ""
 msgid "Snapshot size"
 msgstr ""
 
+#: src/offering/OfferingTabs.tsx
+#: src/offering/OracleSnapshots.tsx
 #: src/openstack/openstack-backup/tabs.js
 #: src/openstack/openstack-snapshot-schedule/module.js
 #: src/openstack/openstack-volume/module.js
@@ -6233,11 +6256,9 @@ msgstr ""
 msgid "Sync profile"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/module.js
 #: src/openstack/openstack-floating-ips/module.js
 #: src/openstack/openstack-network/module.js
 #: src/openstack/openstack-security-groups/module.js
-#: src/openstack/openstack-snapshot-schedule/module.js
 #: src/openstack/openstack-snapshot/module.js
 #: src/openstack/openstack-subnet/actions.js
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts
@@ -6567,9 +6588,8 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "Timezone"
 msgstr ""
 
@@ -7551,10 +7571,9 @@ msgstr ""
 msgid "X509 certificate in .PEM format"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "Yes"
 msgstr ""
 

@@ -26,7 +26,7 @@ export const PureIssueCommentsForm = (props: PureIssueCommentsFormProps) => {
   } = props;
 
   return (
-    <div className="comments-form m-t-md">
+    <div className="comments-form">
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormContainer
           submitting={submitting}

@@ -5,6 +5,7 @@ import { FormContainer, TextField, StringField, SelectField } from '@waldur/form
 import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
+import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
@@ -43,18 +44,7 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
             description={translate('This name will be visible in accounting data.')}
             validate={getLatinNameValidators()}
           />
-          {props.offering.plans.length > 0 && (
-            <SelectField
-              name="plan"
-              labelKey="name"
-              valueKey="url"
-              options={props.offering.plans}
-              validate={required}
-              label={translate('Plan')}
-              required={true}
-              clearable={false}
-            />
-          )}
+          <PlanField offering={props.offering}/>
           <PlanDetailsTable offering={props.offering}/>
           <TextField
             name="attributes.description"

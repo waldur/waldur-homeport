@@ -25,11 +25,16 @@ interface PureIssueCommentsContainerProps extends TranslateProps {
   fetchComments(): void;
   putAttachments(files: File[]): void;
   setIssue(issue: Issue): void;
+  renderHeader: boolean;
 }
 
 export class PureIssueCommentsContainer extends React.Component<PureIssueCommentsContainerProps> {
   state = {
     dropzoneActive: false,
+  };
+
+  static defaultProps = {
+    renderHeader: true,
   };
 
   dropzoneNode: Dropzone;
@@ -55,6 +60,15 @@ export class PureIssueCommentsContainer extends React.Component<PureIssueComment
   render() {
     const { comments, loading, issue, translate, erred } = this.props;
     const { dropzoneActive } = this.state;
+    const body = loading ? <LoadingSpinner /> : (
+      <>
+        <IssueCommentsList comments={comments} />
+        <IssueCommentsFormMainContainer
+          formId={constants.MAIN_FORM_ID}
+          erred={erred}
+        />
+      </>
+    );
 
     return (
       <Dropzone
@@ -71,26 +85,19 @@ export class PureIssueCommentsContainer extends React.Component<PureIssueComment
             message={translate('Drop files to attach them to the issue.')}
           />
         }
-        <div className="ibox">
-          <div className="ibox-title content-between-center">
-            <h4>{translate('Comments')}</h4>
-            <div>
-              <IssueReload issueUrl={issue.url} />
+        {this.props.renderHeader ? (
+          <div className="ibox">
+            <div className="ibox-title content-between-center">
+              <h4>{translate('Comments')}</h4>
+              <div>
+                <IssueReload issueUrl={issue.url} />
+              </div>
+            </div>
+            <div className="ibox-content">
+              {body}
             </div>
           </div>
-          <div className="ibox-content">
-            {loading ?
-              <LoadingSpinner /> :
-              <IssueCommentsList comments={comments} />
-            }
-            <div>
-              <IssueCommentsFormMainContainer
-                formId={constants.MAIN_FORM_ID}
-                erred={erred}
-              />
-            </div>
-          </div>
-        </div>
+        ) : body}
       </Dropzone>
     );
   }

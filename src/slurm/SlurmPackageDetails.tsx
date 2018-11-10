@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
 import { PlanDetails } from '@waldur/marketplace/details/plan/PlanDetails';
+import { renderOfferingComponents } from '@waldur/marketplace/offerings/utils';
 import { OrderItemDetailsField } from '@waldur/marketplace/orders/OrderItemDetailsField';
 import { OrderItemDetailsSection } from '@waldur/marketplace/orders/OrderItemDetailsSection';
 import { OfferingDetailsProps } from '@waldur/marketplace/types';
@@ -19,6 +20,9 @@ export const SlurmPackageDetails = (props: OfferingDetailsProps) => {
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('UUID')}>
         {renderValue(uuid)}
+      </OrderItemDetailsField>
+      <OrderItemDetailsField label={translate('Components')}>
+        {renderValue(renderOfferingComponents(props.offering))}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Allocation name')}>
         {renderValue(attributes.name)}
