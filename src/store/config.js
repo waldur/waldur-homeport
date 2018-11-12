@@ -1,6 +1,6 @@
 const INITIAL_STATE = null;
 
-const INIT_CONFIG = 'waldur/core/INIT_CONFIG';
+export const INIT_CONFIG = 'waldur/core/INIT_CONFIG';
 
 export const initConfig = (config) => ({
   type: INIT_CONFIG,

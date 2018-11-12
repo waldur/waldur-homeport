@@ -3,6 +3,7 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { INIT_CONFIG } from '@waldur/store/config';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { getProject, getWorkspace } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
@@ -41,11 +42,24 @@ function* createOrder() {
 
 function* syncCart() {
   const cart = yield select(selectors.getCart);
-  localStorage.setItem('shoppingCart', JSON.stringify(cart));
+  localStorage.setItem(constants.STORAGE_KEY, JSON.stringify(cart));
 }
 
 function* clearCart() {
-  localStorage.removeItem('shoppingCart');
+  localStorage.removeItem(constants.STORAGE_KEY);
+}
+
+function* restoreCart() {
+  let cart = localStorage.getItem(constants.STORAGE_KEY);
+  if (cart) {
+    try {
+      cart = JSON.parse(cart);
+      yield put(actions.setCart(cart));
+    } catch (error) {
+      yield put(showError(translate('Unable to restore shopping cart.')));
+      localStorage.removeItem(constants.STORAGE_KEY);
+    }
+  }
 }
 
 function* addItem() {
@@ -62,5 +76,6 @@ export default function*() {
   yield takeEvery(constants.ADD_ITEM, addItem);
   yield takeEvery(constants.CREATE_ORDER, createOrder);
   yield takeEvery([constants.ADD_ITEM, constants.REMOVE_ITEM], syncCart);
+  yield takeEvery(INIT_CONFIG, restoreCart);
   yield takeEvery(constants.CLEAR_CART, clearCart);
 }
