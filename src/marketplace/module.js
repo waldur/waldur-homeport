@@ -24,7 +24,6 @@ import marketplaceAttributeFilterListDialog from './category/filters/AttributeFi
 import registerExtensionPoint from './extension-point';
 import providersService from './providers-service';
 import registerSidebarExtension from './sidebar';
-import shoppingCartConfig from './shoppingCartConfig';
 
 export default module => {
   module.component('marketplaceLanding', marketplaceLanding);
@@ -52,6 +51,5 @@ export default module => {
   module.service('providersService', providersService);
   module.config(routes);
   module.run(registerSidebarExtension);
-  module.run(shoppingCartConfig);
   module.run(registerExtensionPoint);
 };
