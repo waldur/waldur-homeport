@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
-import { Tooltip } from '@waldur/core/Tooltip';
 import { dateTime } from '@waldur/core/utils';
 import { FieldError, FormContainer, SecretField, SelectField, StringField, SubmitButton } from '@waldur/form-react';
 import { EmailField } from '@waldur/form-react/EmailField';
@@ -11,6 +10,7 @@ import { formatRegistrationMethod, formatUserStatus } from '@waldur/user/support
 import { UserDetails } from '@waldur/workspace/types';
 
 import { TermsOfService } from './TermsOfService';
+import { tokenOptions, tokenLifetimeTooltip, TokenLifeteimeWarning } from './TokenLifetimeField';
 
 interface UserEditFormData {
   full_name: string;
@@ -37,26 +37,6 @@ interface UserEditFormProps extends TranslateProps, InjectedFormProps {
   showDeleteButton: boolean;
   user: UserDetails;
 }
-
-const tokenOptions = [
-  { name: '10 min', value: 600 },
-  { name: '30 min', value: 1800 },
-  { name: '1 h', value: 3600 },
-  { name: '2 h', value: 7200 },
-  { name: '12 h', value: 43200 },
-  { name: 'token will not timeout', value: null },
-];
-
-const tokenLifetimeTooltip =
-  (
-    <Tooltip
-      id="token"
-      label={translate('Lifetime will be updated and reset upon saving the form.')}>
-        {translate('API token lifetime')}
-        {' '}
-        <i className="fa fa-question-circle"/>
-    </Tooltip>
-  );
 
 export const PureUserEditForm = (props: UserEditFormProps) => (
   <form
@@ -145,6 +125,7 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
           valueKey="value"
         />
       )}
+      {props.userTokenIsVisible && <TokenLifeteimeWarning/>}
       <TermsOfService
         initial={props.initial}
         agreementDate={dateTime(props.user.agreement_date)}
