@@ -52,7 +52,7 @@ msgstr ""
 msgid "API secret code:"
 msgstr ""
 
-#: src/user/support/UserEditForm.tsx
+#: src/user/support/TokenLifetimeField.tsx
 msgid "API token lifetime"
 msgstr ""
 
@@ -798,6 +798,10 @@ msgstr ""
 
 #: src/offering/appstore-offering.html
 msgid "By creating I agree with the"
+msgstr ""
+
+#: src/user/support/TokenLifetimeField.tsx
+msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr ""
 
 #: src/user/support/TermsOfService.tsx
@@ -2984,7 +2988,7 @@ msgstr ""
 msgid "Library version"
 msgstr ""
 
-#: src/user/support/UserEditForm.tsx
+#: src/user/support/TokenLifetimeField.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
 
@@ -4314,6 +4318,10 @@ msgstr ""
 
 #: src/invitations/invitation-confirm-dialog.html
 msgid "Please give us a moment to validate your invitation."
+msgstr ""
+
+#: src/user/support/TokenLifetimeField.tsx
+msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.html
