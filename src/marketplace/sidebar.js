@@ -11,7 +11,15 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
             icon: 'fa-file',
             link: 'marketplace-vendor-offerings({uuid: $ctrl.context.customer.uuid})',
             feature: 'marketplace',
-          }
+          },
+          {
+            key: 'marketplace',
+            icon: 'fa-file',
+            label: gettext('Order items'),
+            feature: 'marketplace',
+            link: 'marketplace-order-items({uuid: $ctrl.context.customer.uuid})',
+            index: 220,
+          },
         ];
       } else {
         return [];
@@ -72,14 +80,6 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         feature: 'marketplace',
         link: 'marketplace-landing-customer({uuid: $ctrl.context.customer.uuid})',
         index: 210,
-      },
-      {
-        key: 'marketplace',
-        icon: 'fa-file',
-        label: gettext('Order items'),
-        feature: 'marketplace',
-        link: 'marketplace-order-items({uuid: $ctrl.context.customer.uuid})',
-        index: 220,
       },
     ];
   });
