@@ -1,34 +1,34 @@
 import { put, select, takeEvery } from 'redux-saga/effects';
 
-import { translate } from '@waldur/i18n';
-import { INIT_CONFIG } from '@waldur/store/config';
-import { showError } from '@waldur/store/coreSaga';
+import { UserStorage } from '@waldur/marketplace/common/UserStorage';
+import { USER_UPDATED } from '@waldur/workspace/constants';
+import { getUser } from '@waldur/workspace/selectors';
 
 import * as actions from './actions';
 import * as constants from './constants';
 import * as selectors from './selectors';
 
 function* syncItems() {
+  const user = yield select(getUser);
+  const storage = new UserStorage(constants.STORAGE_KEY, user.uuid);
   const items = yield select(selectors.getItems);
-  localStorage.setItem(constants.STORAGE_KEY, JSON.stringify(items));
+  storage.set(items);
 }
 
 function* restoreItems() {
-  const items = localStorage.getItem(constants.STORAGE_KEY);
-  if (items) {
-    try {
-      const parsedItems = JSON.parse(items);
-      if (Array.isArray(parsedItems)) {
-        yield put(actions.setItems(parsedItems));
-      }
-    } catch (error) {
-      yield put(showError(translate('Unable to restore marketplace comparison.')));
-      localStorage.removeItem(constants.STORAGE_KEY);
+  const user = yield select(getUser);
+  const storage = new UserStorage(constants.STORAGE_KEY, user.uuid);
+  try {
+    const parsedItems = storage.get();
+    if (Array.isArray(parsedItems)) {
+      yield put(actions.setItems(parsedItems));
     }
+  } catch (error) {
+    storage.remove();
   }
 }
 
 export default function*() {
   yield takeEvery([constants.ADD_ITEM, constants.REMOVE_ITEM], syncItems);
-  yield takeEvery(INIT_CONFIG, restoreItems);
+  yield takeEvery(USER_UPDATED, restoreItems);
 }

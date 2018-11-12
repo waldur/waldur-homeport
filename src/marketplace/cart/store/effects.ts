@@ -3,9 +3,10 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { INIT_CONFIG } from '@waldur/store/config';
+import { UserStorage } from '@waldur/marketplace/common/UserStorage';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { getProject, getWorkspace } from '@waldur/workspace/selectors';
+import { USER_UPDATED } from '@waldur/workspace/constants';
+import { getProject, getWorkspace, getUser } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
 import * as actions from './actions';
@@ -41,24 +42,26 @@ function* createOrder() {
 }
 
 function* syncCart() {
+  const user = yield select(getUser);
+  const storage = new UserStorage(constants.STORAGE_KEY, user.uuid);
   const cart = yield select(selectors.getCart);
-  localStorage.setItem(constants.STORAGE_KEY, JSON.stringify(cart));
+  storage.set(cart);
 }
 
 function* clearCart() {
-  localStorage.removeItem(constants.STORAGE_KEY);
+  const user = yield select(getUser);
+  const storage = new UserStorage(constants.STORAGE_KEY, user.uuid);
+  storage.remove();
 }
 
 function* restoreCart() {
-  let cart = localStorage.getItem(constants.STORAGE_KEY);
-  if (cart) {
-    try {
-      cart = JSON.parse(cart);
-      yield put(actions.setCart(cart));
-    } catch (error) {
-      yield put(showError(translate('Unable to restore shopping cart.')));
-      localStorage.removeItem(constants.STORAGE_KEY);
-    }
+  const user = yield select(getUser);
+  const storage = new UserStorage(constants.STORAGE_KEY, user.uuid);
+  try {
+    const cart = storage.get();
+    yield put(actions.setCart(cart));
+  } catch (error) {
+    storage.remove();
   }
 }
 
@@ -76,6 +79,6 @@ export default function*() {
   yield takeEvery(constants.ADD_ITEM, addItem);
   yield takeEvery(constants.CREATE_ORDER, createOrder);
   yield takeEvery([constants.ADD_ITEM, constants.REMOVE_ITEM], syncCart);
-  yield takeEvery(INIT_CONFIG, restoreCart);
+  yield takeEvery(USER_UPDATED, restoreCart);
   yield takeEvery(constants.CLEAR_CART, clearCart);
 }
