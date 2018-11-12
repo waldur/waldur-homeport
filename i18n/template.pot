@@ -2027,6 +2027,7 @@ msgstr ""
 msgid "Extending"
 msgstr ""
 
+#: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
