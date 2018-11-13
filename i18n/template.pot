@@ -4490,6 +4490,10 @@ msgstr ""
 msgid "Price for 1 vCPU per day"
 msgstr ""
 
+#: src/marketplace/details/plan/utils.ts
+msgid "Price for consumption"
+msgstr ""
+
 #: src/price/PriceTooltip.tsx
 msgid "Price is estimated."
 msgstr ""
@@ -4927,7 +4931,6 @@ msgstr ""
 #: src/cost-planning/cost-plan-flavors.html
 #: src/cost-planning/cost-plan-items.html
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#: src/marketplace/details/plan/utils.ts
 msgid "Quantity"
 msgstr ""
 
