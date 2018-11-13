@@ -29,7 +29,7 @@ const getDailyQuotas = params =>
   get<DailyQuota>('/daily-quotas/', {params}).then(response => response.data);
 
 const getInvoiceSummary = (customer: string) =>
-  getList<InvoiceSummary>('/invoices/', {params: {customer, page_size: POINTS_COUNT, field: ['year', 'month', 'price']}});
+  getList<InvoiceSummary>('/invoices/', {customer, page_size: POINTS_COUNT, field: ['year', 'month', 'price']});
 
 export function fetchChart(chartId: 'customer' | 'project', scope: Scope): Promise<Chart[]> {
   if (chartId === 'customer') {
