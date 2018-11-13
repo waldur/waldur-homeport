@@ -123,7 +123,7 @@
     "@types/react-dom": "^16.0.9",
     "@types/react-redux": "^6.0.9",
     "@types/react-select": "^1.0.60",
-    "@types/redux-form": "^7.0.10",
+    "@types/redux-form": "^7.4.12",
     "add-asset-html-webpack-plugin": "^2.1.2",
     "angular-mocks": "~1.5.11",
     "awesome-typescript-loader": "^3.3.0",
