@@ -197,10 +197,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/redux-form@^7.0.10":
-  version "7.4.11"
-  resolved "https://registry.yarnpkg.com/@types/redux-form/-/redux-form-7.4.11.tgz#4fe344399d167378f8701c748ae6e36c196a235c"
-  integrity sha512-S0QONTnP/+GHYTIFKPtAIqXwdeZWWBsxxBPyOtKYhZkLURd1XnTZbYQTJF33iiOQXRFW6O2Uw0ysOgPDznTHyQ==
+"@types/redux-form@^7.4.12":
+  version "7.4.12"
+  resolved "https://registry.yarnpkg.com/@types/redux-form/-/redux-form-7.4.12.tgz#2afb0615e3b7417d460ab14a4802ede4a98f9c79"
+  integrity sha512-qHRkJcgdc5MntQHrkYCg5o6oySh+OdVKA90yELTdi9XlNvSGRxd6K230aTckVrwdUjdxtwZ31UqFgLoU5SiWYQ==
   dependencies:
     "@types/react" "*"
     redux "^3.6.0 || ^4.0.0"
