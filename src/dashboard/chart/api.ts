@@ -164,7 +164,7 @@ export const padMissingValues = (items: DateValuePair[]) => {
   if (items.length > 0) {
     end = moment(items[items.length - 1].date);
   }
-  while (items.length !== POINTS_COUNT) {
+  while (items.length < POINTS_COUNT) {
     items.unshift({
       value: 0,
       date: new Date(end.subtract(1, 'month').toDate()),
