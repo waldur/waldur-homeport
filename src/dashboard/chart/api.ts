@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-import { get, getAll } from '@waldur/core/api';
+import { get, getList } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -29,7 +29,7 @@ const getDailyQuotas = params =>
   get<DailyQuota>('/daily-quotas/', {params}).then(response => response.data);
 
 const getInvoiceSummary = (customer: string) =>
-  getAll<InvoiceSummary>('/invoices/', {params: {customer, field: ['year', 'month', 'price']}});
+  getList<InvoiceSummary>('/invoices/', {params: {customer, page_size: POINTS_COUNT, field: ['year', 'month', 'price']}});
 
 export function fetchChart(chartId: 'customer' | 'project', scope: Scope): Promise<Chart[]> {
   if (chartId === 'customer') {
