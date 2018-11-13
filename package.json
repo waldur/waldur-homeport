@@ -14,7 +14,7 @@
     "build-stats": "cross-env NODE_ENV=production webpack --config=webpack.config.prod.js --profile --json > stats.json",
     "build-dll": "webpack --config webpack.config.dll.js -p --hide-modules",
     "build-dll-dev": "webpack --config webpack.config.dll.js --hide-modules",
-    "test": "npm run tslint && jest --verbose",
+    "test": "npm run tslint && jest --verbose && npm run build",
     "eslint": "eslint src",
     "ci:start": "yarn build && yarn serve build -l 8001",
     "ci:run": "cypress run",
