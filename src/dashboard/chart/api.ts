@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-import { get, getAll } from '@waldur/core/api';
+import { get, getList } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -29,7 +29,7 @@ const getDailyQuotas = params =>
   get<DailyQuota>('/daily-quotas/', {params}).then(response => response.data);
 
 const getInvoiceSummary = (customer: string) =>
-  getAll<InvoiceSummary>('/invoices/', {params: {customer, field: ['year', 'month', 'price']}});
+  getList<InvoiceSummary>('/invoices/', {customer, page_size: POINTS_COUNT, field: ['year', 'month', 'price']});
 
 export function fetchChart(chartId: 'customer' | 'project', scope: Scope): Promise<Chart[]> {
   if (chartId === 'customer') {
@@ -164,7 +164,7 @@ export const padMissingValues = (items: DateValuePair[]) => {
   if (items.length > 0) {
     end = moment(items[items.length - 1].date);
   }
-  while (items.length !== POINTS_COUNT) {
+  while (items.length < POINTS_COUNT) {
     items.unshift({
       value: 0,
       date: new Date(end.subtract(1, 'month').toDate()),

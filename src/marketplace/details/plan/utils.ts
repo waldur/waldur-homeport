@@ -43,7 +43,7 @@ function getBillingPeriods(unit: string): BillingPeriodDescription {
 
     default:
       return {
-        periods: [translate('Quantity')],
+        periods: [translate('Price for consumption')],
         multipliers: [1],
       };
   }

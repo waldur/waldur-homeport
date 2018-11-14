@@ -52,7 +52,7 @@ msgstr ""
 msgid "API secret code:"
 msgstr ""
 
-#: src/user/support/UserEditForm.tsx
+#: src/user/support/TokenLifetimeField.tsx
 msgid "API token lifetime"
 msgstr ""
 
@@ -798,6 +798,10 @@ msgstr ""
 
 #: src/offering/appstore-offering.html
 msgid "By creating I agree with the"
+msgstr ""
+
+#: src/user/support/TokenLifetimeField.tsx
+msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr ""
 
 #: src/user/support/TermsOfService.tsx
@@ -2023,6 +2027,7 @@ msgstr ""
 msgid "Extending"
 msgstr ""
 
+#: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
@@ -2984,7 +2989,7 @@ msgstr ""
 msgid "Library version"
 msgstr ""
 
-#: src/user/support/UserEditForm.tsx
+#: src/user/support/TokenLifetimeField.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
 
@@ -4316,6 +4321,10 @@ msgstr ""
 msgid "Please give us a moment to validate your invitation."
 msgstr ""
 
+#: src/user/support/TokenLifetimeField.tsx
+msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
+msgstr ""
+
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.html
 #: src/openstack/openstack-tenant/actions/request-direct-access.html
 msgid "Please note that request should specify tenant and provide a reason."
@@ -4479,6 +4488,10 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/openstack-tenant-prices.html
 msgid "Price for 1 vCPU per day"
+msgstr ""
+
+#: src/marketplace/details/plan/utils.ts
+msgid "Price for consumption"
 msgstr ""
 
 #: src/price/PriceTooltip.tsx
@@ -4918,7 +4931,6 @@ msgstr ""
 #: src/cost-planning/cost-plan-flavors.html
 #: src/cost-planning/cost-plan-items.html
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#: src/marketplace/details/plan/utils.ts
 msgid "Quantity"
 msgstr ""
 

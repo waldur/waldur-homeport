@@ -20,7 +20,6 @@
     ],
     "member-ordering": false,
     "interface-name": [true, "never-prefix"],
-    "no-unused-variable": true,
     "jsx-no-multiline-js": false,
     "jsx-alignment": false,
     "jsx-no-lambda": false,

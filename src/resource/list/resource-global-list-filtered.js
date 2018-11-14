@@ -77,6 +77,14 @@ const resourceGlobalListFiltered = {
       }
     }
 
+    onExternalIpChange() {
+      if (this.externalIp) {
+        this.filter.external_ip = this.externalIp;
+      } else {
+        delete this.filter.external_ip;
+      }
+    }
+
   }
 };
 

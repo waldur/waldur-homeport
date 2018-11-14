@@ -1,6 +1,5 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
-// @ts-ignore
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
 import { Tooltip } from '@waldur/core/Tooltip';

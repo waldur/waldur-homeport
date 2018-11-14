@@ -7,4 +7,4 @@ node_js:
 cache: yarn
 
 script:
-  yarn test --maxWorkers=$(nproc)
+  yarn test
