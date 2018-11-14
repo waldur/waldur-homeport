@@ -7,9 +7,7 @@ import { OrderItemRequest } from './types';
 
 interface ShoppingCartButtonProps {
   item: OrderItemRequest;
-  inCart: boolean;
   addItem(): void;
-  removeItem(): void;
   flavor?: 'primary' | 'secondary' | 'ternary';
   disabled?: boolean;
 }
@@ -17,9 +15,9 @@ interface ShoppingCartButtonProps {
 export const ShoppingCartButton = (props: ShoppingCartButtonProps) => (
   <OfferingButton
     icon="fa fa-shopping-cart"
-    isActive={props.inCart}
-    title={props.inCart ? translate('Remove from cart') : translate('Add to cart')}
-    onClick={() => props.inCart ? props.removeItem() : props.addItem()}
+    isActive={true}
+    title={translate('Add to cart')}
+    onClick={() => props.addItem()}
     flavor={props.flavor}
     disabled={props.disabled}
   />

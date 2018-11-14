@@ -10,8 +10,7 @@ import { ShoppingCartItem } from './ShoppingCartItem';
 interface ShoppingCartProps {
   items: OrderItemResponse[];
   maxUnit: 'month' | 'day';
-  editable: boolean;
-  onShoppingCartItemRemove?(item: OrderItemResponse): void;
+  onRemove?(uuid: string): void;
 }
 
 export const ShoppingCart = (props: ShoppingCartProps) => (
@@ -23,8 +22,7 @@ export const ShoppingCart = (props: ShoppingCartProps) => (
           <th className="text-center">
             <BillingPeriod unit={props.maxUnit}/>
           </th>
-          {!props.editable && <th className="text-center">{translate('State')}</th>}
-          {props.editable && <th className="text-center">{translate('Actions')}</th>}
+          <th className="text-center">{translate('Actions')}</th>
         </tr>
       </thead>
       <tbody>
@@ -32,8 +30,7 @@ export const ShoppingCart = (props: ShoppingCartProps) => (
           <ShoppingCartItem
             key={index}
             item={item}
-            editable={props.editable}
-            onRemove={() => props.onShoppingCartItemRemove(item)}
+            onRemove={() => props.onRemove(item.uuid)}
           />
         ))}
       </tbody>

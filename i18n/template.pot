@@ -2836,6 +2836,14 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Item has been added to shopping cart."
+msgstr ""
+
+#: src/marketplace/cart/store/effects.ts
+msgid "Item has been removed from shopping cart."
+msgstr ""
+
 #: src/providers/details/provider-price-list.js
 msgid "Item type"
 msgstr ""
@@ -3938,10 +3946,6 @@ msgstr ""
 
 #: src/marketplace/routes.js
 msgid "Order item details"
-msgstr ""
-
-#: src/marketplace/cart/store/effects.ts
-msgid "Order item has been created."
 msgstr ""
 
 #: src/marketplace/orders/OrderItemsList.tsx
@@ -5162,10 +5166,6 @@ msgstr ""
 msgid "Remove application"
 msgstr ""
 
-#: src/marketplace/cart/ShoppingCartButton.tsx
-msgid "Remove from cart"
-msgstr ""
-
 #: src/marketplace/compare/OfferingCompareButton.tsx
 msgid "Remove from comparison"
 msgstr ""
@@ -6107,7 +6107,6 @@ msgstr ""
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/experts/requests/list/expert-request-project-list.js
-#: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrderItemsFilter.tsx
@@ -6722,6 +6721,10 @@ msgstr ""
 msgid "Unable to activate account."
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to add item to shopping cart."
+msgstr ""
+
 #: src/marketplace/orders/store/effects.ts
 msgid "Unable to approve order."
 msgstr ""
@@ -6765,10 +6768,6 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
-msgstr ""
-
-#: src/marketplace/cart/store/effects.ts
-msgid "Unable to create order."
 msgstr ""
 
 #: src/experts/bids/create/expert-bid-create-dialog.js
@@ -6855,6 +6854,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/store/effects.ts
 msgid "Unable to get service provider API secret code."
+msgstr ""
+
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to initialize shopping cart."
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
@@ -6964,6 +6967,10 @@ msgstr ""
 msgid "Unable to register service provider."
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to remove item from shopping cart."
+msgstr ""
+
 #: src/customer/details/store/effects.ts
 msgid "Unable to remove logo."
 msgstr ""
@@ -6986,6 +6993,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to submit empty comment."
+msgstr ""
+
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to submit order."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts

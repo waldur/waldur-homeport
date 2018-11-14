@@ -4,9 +4,7 @@ import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
 export type OrderState = 'Configure' | 'Approve' | 'Review';
 
 export interface State {
-  items: OrderItemRequest[];
-  state: OrderState;
-  total_cost?: number;
+  items: OrderItemResponse[];
 }
 
 export interface Order {
