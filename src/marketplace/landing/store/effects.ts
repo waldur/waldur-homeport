@@ -20,6 +20,7 @@ function* getCategories() {
 }
 
 function* getOfferings() {
+  const customer = yield select(getCustomer);
   const field = [
     'uuid',
     'name',
@@ -37,6 +38,7 @@ function* getOfferings() {
     o: '-created',
     state: 'Active',
     field,
+    allowed_customer_uuid: customer.uuid,
   };
   try {
     const offerings = yield call(api.getOfferingsList, params);
