@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
@@ -6,14 +7,16 @@ import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import './ShoppingCart.scss';
 import { ShoppingCartItem } from './ShoppingCartItem';
+import * as actions from './store/actions';
+import { getMaxUnit, getItems } from './store/selectors';
 
 interface ShoppingCartProps {
   items: OrderItemResponse[];
   maxUnit: 'month' | 'day';
-  onRemove?(uuid: string): void;
+  removeItem(uuid: string): void;
 }
 
-export const ShoppingCart = (props: ShoppingCartProps) => (
+const PureShoppingCart = (props: ShoppingCartProps) => props.items.length > 0 ? (
   <div className="table-responsive shopping-cart">
     <table className="table">
       <thead>
@@ -30,10 +33,27 @@ export const ShoppingCart = (props: ShoppingCartProps) => (
           <ShoppingCartItem
             key={index}
             item={item}
-            onRemove={() => props.onRemove(item.uuid)}
+            onRemove={() => props.removeItem(item.uuid)}
           />
         ))}
       </tbody>
     </table>
   </div>
+) : (
+  <p className="text-center">
+    {translate('Shopping cart is empty. You should add items to cart first.')}
+  </p>
 );
+
+const mapStateToProps = state => ({
+  items: getItems(state),
+  maxUnit: getMaxUnit(state),
+});
+
+const mapDispatchToProps = {
+  removeItem: actions.removeItemRequest,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export const ShoppingCart = connector(PureShoppingCart);
