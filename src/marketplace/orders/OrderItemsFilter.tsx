@@ -38,7 +38,10 @@ const PureOrderItemsFilter = props => (
         component={fieldProps => (
           <AutocompleteField
             placeholder={translate('Select offering...')}
-            loadOfferings={query => offeringsAutocomplete(query, props.customer.uuid)}
+            loadOfferings={query => offeringsAutocomplete({
+              name: query,
+              customer_uuid: props.customer.uuid,
+            })}
             value={fieldProps.input.value}
             onChange={value => fieldProps.input.onChange(value)}
           />

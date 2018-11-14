@@ -463,6 +463,7 @@ msgstr ""
 msgid "Apply or rerun JupyterHub configuration"
 msgstr ""
 
+#: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/marketplace/orders/ApproveButton.tsx
 msgid "Approve"
 msgstr ""
@@ -648,6 +649,10 @@ msgstr ""
 #: src/issues/workspace/issue-navigation-service.js
 #: src/user/user-details.js
 msgid "Back to project"
+msgstr ""
+
+#: src/marketplace/cart/BackButton.tsx
+msgid "Back to shopping"
 msgstr ""
 
 #: src/openstack/openstack-snapshot/import/import-snapshots-list.js
@@ -1095,6 +1100,7 @@ msgid "Components"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.html
+#: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Configure"
 msgstr ""
@@ -2836,6 +2842,14 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Item has been added to shopping cart."
+msgstr ""
+
+#: src/marketplace/cart/store/effects.ts
+msgid "Item has been removed from shopping cart."
+msgstr ""
+
 #: src/providers/details/provider-price-list.js
 msgid "Item type"
 msgstr ""
@@ -3938,10 +3952,6 @@ msgstr ""
 
 #: src/marketplace/routes.js
 msgid "Order item details"
-msgstr ""
-
-#: src/marketplace/cart/store/effects.ts
-msgid "Order item has been created."
 msgstr ""
 
 #: src/marketplace/orders/OrderItemsList.tsx
@@ -5162,10 +5172,6 @@ msgstr ""
 msgid "Remove application"
 msgstr ""
 
-#: src/marketplace/cart/ShoppingCartButton.tsx
-msgid "Remove from cart"
-msgstr ""
-
 #: src/marketplace/compare/OfferingCompareButton.tsx
 msgid "Remove from comparison"
 msgstr ""
@@ -5223,6 +5229,10 @@ msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "Request account removal for {userName}."
+msgstr ""
+
+#: src/marketplace/cart/ForwardButton.tsx
+msgid "Request an approval"
 msgstr ""
 
 #: src/experts/extensions/expert-request-create-button.html
@@ -5483,6 +5493,10 @@ msgstr ""
 
 #: src/billing/events/invoice-events-dialog.html
 msgid "Retry"
+msgstr ""
+
+#: src/marketplace/cart/ShoppingCartSteps.tsx
+msgid "Review"
 msgstr ""
 
 #: src/invitations/actions/invitation-dialog.html
@@ -5922,7 +5936,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/marketplace/cart/CheckoutPage.tsx
+#: src/marketplace/cart/ShoppingCart.tsx
 msgid "Shopping cart is empty. You should add items to cart first."
 msgstr ""
 
@@ -6107,7 +6121,6 @@ msgstr ""
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/experts/requests/list/expert-request-project-list.js
-#: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrderItemsFilter.tsx
@@ -6722,6 +6735,10 @@ msgstr ""
 msgid "Unable to activate account."
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to add item to shopping cart."
+msgstr ""
+
 #: src/marketplace/orders/store/effects.ts
 msgid "Unable to approve order."
 msgstr ""
@@ -6765,10 +6782,6 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
-msgstr ""
-
-#: src/marketplace/cart/store/effects.ts
-msgid "Unable to create order."
 msgstr ""
 
 #: src/experts/bids/create/expert-bid-create-dialog.js
@@ -6855,6 +6868,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/store/effects.ts
 msgid "Unable to get service provider API secret code."
+msgstr ""
+
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to initialize shopping cart."
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
@@ -6964,6 +6981,10 @@ msgstr ""
 msgid "Unable to register service provider."
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to remove item from shopping cart."
+msgstr ""
+
 #: src/customer/details/store/effects.ts
 msgid "Unable to remove logo."
 msgstr ""
@@ -6986,6 +7007,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to submit empty comment."
+msgstr ""
+
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to submit order."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
