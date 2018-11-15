@@ -94,6 +94,30 @@
     <img src="/images/waldur/logo120x120.png" alt="Logo should be here">
     <h1 class="loading-title">Loading assets, please wait.</h1>
   </div>
+  <div class="erred-screen center-block hidden">
+    <style>
+      .erred-screen {
+        position: relative;
+        top: 25%;
+        text-align: center;
+        color: white;
+        width: 500px;
+      }
+      @media (max-width: 768px) {
+        .erred-screen {
+          color: #676a6c;
+        }
+      }
+      .erred-screen-icon {
+        font-size: 100pt;
+      }
+    </style>
+    <div class="erred-screen-icon">
+      <i class="fa fa-exclamation-triangle"></i>
+    </div>
+    <h1>Unable to bootstrap application.</h1>
+    <p class="erred-screen-message"></p>
+  </div>
   <noscript>
     <div class="container">
       <div class="row">

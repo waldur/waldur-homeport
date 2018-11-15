@@ -24,6 +24,9 @@ function* initCart() {
     const items = yield call(api.getCartItems);
     yield put(actions.setCart({items}));
   } catch (error) {
+    if (error.status === -1 || error.status === 401) {
+      return;
+    }
     const errorMessage = `${translate('Unable to initialize shopping cart.')} ${format(error)}`;
     yield put(showError(errorMessage));
   }
