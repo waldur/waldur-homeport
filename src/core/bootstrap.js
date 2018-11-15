@@ -5,33 +5,61 @@ import attachTracking from './tracking';
 const CONFIG_FILE = 'scripts/configs/config.json';
 const modes = {stableMode, experimentalMode};
 
-export default async function bootstrap(modulename) {
+function renderError(details) {
+  document.querySelector('.loading-screen').classList.add('hidden');
+  document.querySelector('.erred-screen').classList.remove('hidden');
+  document.querySelector('.erred-screen-message').textContent = details;
+}
+
+async function loadConfig() {
   const initInjector = angular.injector(['ng']);
   const $http = initInjector.get('$http');
 
-  let frontendSettings;
+  let frontendSettings, backendSettings;
   try {
     const frontendResponse = await $http.get(CONFIG_FILE);
     frontendSettings = frontendResponse.data;
   } catch(error) {
-    frontendSettings = {
-      apiEndpoint: 'http://localhost:8080/',
-    };
+    if (error.status === 404) {
+      // fallback to default configuration
+      frontendSettings = {
+        apiEndpoint: 'http://localhost:8080/',
+      };
+    } else if (error instanceof SyntaxError) {
+      renderError(`Unable to parse client configuration file ${CONFIG_FILE}. Error message: ${error}`);
+    } else {
+      renderError(error);
+    }
+    return;
   }
 
   try {
     const backendResponse = await $http.get(`${frontendSettings.apiEndpoint}api/configuration/`);
-    const backendSettings = backendResponse.data;
-
-    window.$$CUSTOMENV = {...frontendSettings, plugins: backendSettings};
-    window.$$MODES = modes;
-    attachTracking(window.$$CUSTOMENV);
-
-    angular.element(document).ready(function() {
-      angular.bootstrap(document, [modulename], {strictDi: true});
-    });
-
+    backendSettings = backendResponse.data;
   } catch (error) {
-    alert(gettext('Unable to load application configuration. Please reload this page.'));
+    if (error.status === -1) {
+      renderError(`Unfortunately, connection to server has failed. Please check if you can connect to ${frontendSettings.apiEndpoint} from your browser and contact support if the error continues.`);
+    } else if (error.status >= 400) {
+      renderError(`Unable to fetch server configuration. Error message: ${error.statusText}`);
+    } else {
+      renderError(error);
+    }
+    return;
   }
+
+  return {...frontendSettings, plugins: backendSettings};
+}
+
+export default async function bootstrap(modulename) {
+  const config = await loadConfig();
+  if (!config) {
+    return;
+  }
+  window.$$CUSTOMENV = config;
+  window.$$MODES = modes;
+  attachTracking(window.$$CUSTOMENV);
+
+  angular.element(document).ready(function() {
+    angular.bootstrap(document, [modulename], {strictDi: true});
+  });
 }

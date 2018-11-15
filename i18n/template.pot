@@ -6883,10 +6883,6 @@ msgstr ""
 msgid "Unable to load Zabbix host details."
 msgstr ""
 
-#: src/core/bootstrap.js
-msgid "Unable to load application configuration. Please reload this page."
-msgstr ""
-
 #: src/marketplace/category/filters/AttributeFilterListContainer.tsx
 msgid "Unable to load category sections."
 msgstr ""
