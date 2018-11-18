@@ -42,7 +42,7 @@ class OrderItemDetailsContainer extends React.Component<undefined, OrderItemDeta
     } catch (error) {
       this.setState({
         loading: false,
-        loaded: true,
+        loaded: false,
       });
     }
   }
