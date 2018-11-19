@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import {
@@ -19,12 +17,12 @@ import {
   selectServiceProviderConsumers,
 } from './selectors';
 
-interface FlowMapViewComponentProps extends TranslateProps {
+interface FlowMapViewComponentProps {
   serviceUsage: any;
   selectedServiceProvider: any;
   infoPanelIsVisible: boolean;
   fetchServiceUsageStart: () => void;
-  serviceProviderSelect: () => void;
+  serviceProviderSelect(uuid: string): void;
   showInfoPanel: () => void;
   hideInfoPanel: () => void;
 }
@@ -56,10 +54,7 @@ const mapDispatchToProps = {
   hideInfoPanel,
 };
 
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 const FlowMapViewContainer = enhance(FlowMapViewComponent);
 

@@ -8,7 +8,7 @@ export interface FlowMapViewProps {
   serviceUsage: any;
   selectedServiceProvider: any;
   infoPanelIsVisible: boolean;
-  serviceProviderSelect: () => void;
+  serviceProviderSelect(uuid: string): void;
   showInfoPanel: () => void;
   hideInfoPanel: () => void;
 }
