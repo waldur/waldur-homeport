@@ -7,8 +7,10 @@ import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { getProviderType } from '@waldur/marketplace/common/registry';
+import { Category } from '@waldur/marketplace/types';
 import { createProvider } from '@waldur/providers/api';
 import { findProvider } from '@waldur/providers/registry';
+import { getConfig } from '@waldur/store/config';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { updateEntity } from '@waldur/table-react/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -20,8 +22,12 @@ import { OfferingFormData, OfferingUpdateFormData } from './types';
 import { formatOfferingRequest } from './utils';
 
 function* loadData() {
+  const conf = yield select(getConfig);
   try {
-    const categories = yield call(api.getCategories);
+    let categories: Category[] = yield call(api.getCategories);
+    if (!conf.showEmptyMarketplaceCategories) {
+      categories = categories.filter(category => category.offering_count > 0);
+    }
     const pluginsData = yield call(api.getPlugins);
     const plugins = pluginsData.reduce((result, plugin) => ({...result, [plugin.offering_type]: plugin.components}), {});
     yield put(loadDataSuccess({categories, plugins}));

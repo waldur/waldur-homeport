@@ -252,11 +252,14 @@ const ENV = {
   // image/* representing image files.
   excludedAttachmentTypes : [],
 
-  // Ensure that customer, project and resource name contains only ASCII chars
+  // Ensure that customer, project and resource name contains only ASCII chars.
   enforceLatinName: true,
 
-  // It can be either 'localStorage' or 'sessionStorage'
+  // It can be either 'localStorage' or 'sessionStorage'.
   authStorage: 'localStorage',
+
+  // Allows to toggle visibility of empty marketplace categories.
+  showEmptyMarketplaceCategories: false,
 };
 
 export default ENV;
