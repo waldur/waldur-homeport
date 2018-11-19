@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { PlanDetails } from '@waldur/marketplace/details/plan/PlanDetails';
 import { renderOfferingComponents } from '@waldur/marketplace/offerings/utils';
@@ -27,6 +28,9 @@ export const OpenStackPackageDetails = (props: OfferingDetailsProps) => {
       <OrderItemDetailsField label={translate('UUID')}>
         {renderValue(uuid)}
       </OrderItemDetailsField>
+      <OrderItemDetailsField label={translate('Created at')}>
+        {formatDateTime(props.orderItem.created)}
+      </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Components')}>
         {renderValue(renderOfferingComponents(props.offering))}
       </OrderItemDetailsField>
@@ -37,10 +41,12 @@ export const OpenStackPackageDetails = (props: OfferingDetailsProps) => {
         {renderValue(attributes.description)}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Initial admin username')}>
-        {renderValue(attributes.user_username)}
+        {attributes.user_username || translate('Auto-generated')}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Initial admin password')}>
-        <SecretValueField className="max-w-300" value={attributes.user_password}/>
+        {attributes.user_password ? (
+          <SecretValueField className="max-w-300" value={attributes.user_password}/>
+        ) : translate('Auto-generated')}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Internal network mask (CIDR)')}>
         {renderValue(attributes.subnet_cidr)}
@@ -48,7 +54,7 @@ export const OpenStackPackageDetails = (props: OfferingDetailsProps) => {
       <OrderItemDetailsField label={translate('Skip connection to external network')}>
         {renderBooleanValue(attributes.skip_connection_extnet)}
       </OrderItemDetailsField>
-      <PlanDetails orderItem={props.orderItem} offering={props.offering} translate={translate}/>
+      <PlanDetails orderItem={props.orderItem} offering={props.offering}/>
     </>
   );
 };

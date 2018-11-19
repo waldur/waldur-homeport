@@ -23,6 +23,7 @@ export interface OrderItemResponse {
   attributes: AttributesType;
   plan_name: string;
   plan_description: string;
+  created: string;
 }
 
 export interface State {
