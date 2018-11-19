@@ -257,6 +257,9 @@ const ENV = {
 
   // It can be either 'localStorage' or 'sessionStorage'
   authStorage: 'localStorage',
+
+  // Allows to toggle visibility of empty marketplace categories.
+  showEmptyMarketplaceCategories: false,
 };
 
 export default ENV;
