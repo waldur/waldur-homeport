@@ -35,6 +35,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         customer: action.payload.customer,
+        project: undefined,
       };
 
     case SET_CURRENT_PROJECT:
