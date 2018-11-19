@@ -1,3 +1,5 @@
+import { Sorting } from './types';
+
 export const FETCH_LIST_START = 'waldur/table/FETCH_START';
 export const FETCH_LIST_DONE = 'waldur/table/FETCH_DONE';
 export const FETCH_LIST_ERROR = 'waldur/table/FETCH_ERROR';
@@ -119,12 +121,11 @@ export const deleteEntity = (table: string, uuid: string) => ({
   },
 });
 
-export const sortListStart = (table: string, field: string, mode: string) => ({
+export const sortListStart = (table: string, sorting: Sorting) => ({
   type: SORT_LIST_START,
   payload: {
     table,
-    field,
-    mode,
+    sorting,
   },
 });
 

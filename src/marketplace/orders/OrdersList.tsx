@@ -55,6 +55,7 @@ export const TableComponent = props => {
       verboseName={translate('Orders')}
       hasQuery={true}
       showPageSizeSelector={true}
+      initialSorting={{field: 'created', mode: 'desc'}}
     />
   );
 };

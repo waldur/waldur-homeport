@@ -15,7 +15,7 @@ describe('Table', () => {
     fetch,
     rows: [],
     sorting: {
-      mode: '',
+      mode: undefined,
       field: null,
       loading: false,
     },

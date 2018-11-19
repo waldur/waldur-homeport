@@ -13,7 +13,7 @@ import TablePagination from './TablePagination';
 import TablePlaceholder from './TablePlaceholder';
 import TableQuery from './TableQuery';
 import TableRefreshButton from './TableRefreshButton';
-import { Column, TableState } from './types';
+import { Column, TableState, Sorting } from './types';
 
 interface Props extends TranslateProps, TableState {
   rows: any[];
@@ -28,7 +28,8 @@ interface Props extends TranslateProps, TableState {
   showPageSizeSelector?: boolean;
   updatePageSize?: (size: number) => void;
   resetPagination?: () => void;
-  sortList?: () => void;
+  sortList?(sorting: Sorting): void;
+  initialSorting?: Sorting;
 }
 
 class Table extends React.Component<Props> {
@@ -111,7 +112,9 @@ class Table extends React.Component<Props> {
   }
 
   componentDidMount() {
-    if (!this.props.loading) {
+    if (this.props.initialSorting) {
+      this.props.sortList(this.props.initialSorting);
+    } else if (!this.props.loading) {
       this.props.fetch();
     }
   }
