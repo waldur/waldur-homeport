@@ -10,7 +10,7 @@ import { selectTableRows } from '@waldur/table-react/selectors';
 import * as actions from './actions';
 import { registerTable } from './registry';
 import { getTableState } from './store';
-import { TableOptions } from './types';
+import { TableOptions, Sorting } from './types';
 
 export function connectTable(options: TableOptions) {
   return function wrapper<P = {}>(Component: React.ComponentType<P>) {
@@ -31,20 +31,8 @@ export function connectTable(options: TableOptions) {
         setQuery: query => dispatch(actions.setFilterQuery(table, query)),
         updatePageSize: size => dispatch(actions.updatePageSize(table, size)),
         resetPagination: () => dispatch(actions.resetPagination(table)),
-        sortList: (field, currentSorting) => dispatch(handleOrdering(field, currentSorting)),
+        sortList: (sorting: Sorting) => dispatch(actions.sortListStart(table, sorting)),
       });
-
-      const handleOrdering = (field, currentSorting) => {
-        let mode = 'asc';
-        if (field === currentSorting.field) {
-          if (currentSorting.mode === 'asc') {
-            mode = 'desc';
-          } else if (currentSorting.mode === 'desc') {
-            mode = 'asc';
-          }
-        }
-        return actions.sortListStart(table, field, mode);
-      };
 
       const filterByFeature = state => columns => columns.filter(
         column => !column.feature || isVisible(state, column.feature)

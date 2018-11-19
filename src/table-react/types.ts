@@ -52,11 +52,14 @@ export interface TableState {
   error?: any;
   pagination?: Pagination;
   query?: string;
-  sorting?: Sorting;
+  sorting?: SortingState;
 }
 
 export interface Sorting {
-  mode: string;
   field: string;
-  loading: boolean;
+  mode: undefined | 'asc' | 'desc';
+}
+
+export interface SortingState extends Sorting {
+  loading?: boolean;
 }

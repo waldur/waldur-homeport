@@ -14,7 +14,7 @@ const INITIAL_STATE: TableState = {
     currentPage: 1,
   },
   sorting: {
-    mode: '',
+    mode: undefined,
     field: null,
     loading: false,
   },
@@ -126,8 +126,7 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         ...state,
         sorting: {
           ...state.sorting,
-          field: action.payload.field,
-          mode: action.payload.mode,
+          ...action.payload.sorting,
           loading: true,
         },
       };

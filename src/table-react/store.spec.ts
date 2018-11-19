@@ -17,7 +17,7 @@ describe('Table reducer', () => {
       entities: {},
       order: [],
       sorting: {
-        mode: '',
+        mode: undefined,
         field: null,
         loading: false,
       },
@@ -207,8 +207,10 @@ describe('Table reducer', () => {
       type: actions.SORT_LIST_START,
       payload: {
         table: 'users',
-        field: 'phone_number',
-        mode: 'desc',
+        sorting: {
+          field: 'phone_number',
+          mode: 'desc',
+        },
       },
     });
     expect(state.users.sorting).toEqual(expected);
