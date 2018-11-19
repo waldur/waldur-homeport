@@ -11,7 +11,7 @@ import {
   showInfoPanel,
   hideInfoPanel,
 } from './actions';
-import FlowMapView from './FlowMapView';
+import { FlowMapView } from './FlowMapView';
 import {
   selectServiceProvider,
   selectServiceUsage,
