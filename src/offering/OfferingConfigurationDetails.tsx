@@ -48,7 +48,7 @@ export const OfferingConfigurationDetails = (props: OfferingDetailsProps) => {
         {renderValue(attributes.description)}
       </OrderItemDetailsField>
       {renderDynamicAttributes(props.offering, attributes)}
-      <PlanDetails orderItem={props.orderItem} offering={props.offering} translate={translate}/>
+      <PlanDetails orderItem={props.orderItem} offering={props.offering}/>
     </>
   );
 };

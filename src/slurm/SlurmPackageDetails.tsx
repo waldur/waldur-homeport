@@ -34,7 +34,7 @@ export const SlurmPackageDetails = (props: OfferingDetailsProps) => {
       <OrderItemDetailsField label={translate('Allocation description')}>
         {renderValue(attributes.description)}
       </OrderItemDetailsField>
-      <PlanDetails orderItem={props.orderItem} offering={props.offering} translate={translate}/>
+      <PlanDetails orderItem={props.orderItem} offering={props.offering}/>
     </>
   );
 };

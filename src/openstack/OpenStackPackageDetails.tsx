@@ -52,7 +52,7 @@ export const OpenStackPackageDetails = (props: OfferingDetailsProps) => {
       <OrderItemDetailsField label={translate('Skip connection to external network')}>
         {renderBooleanValue(attributes.skip_connection_extnet)}
       </OrderItemDetailsField>
-      <PlanDetails orderItem={props.orderItem} offering={props.offering} translate={translate}/>
+      <PlanDetails orderItem={props.orderItem} offering={props.offering}/>
     </>
   );
 };
