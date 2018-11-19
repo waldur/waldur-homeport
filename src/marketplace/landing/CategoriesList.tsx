@@ -1,14 +1,16 @@
 import * as React from 'react';
+import * as Col from 'react-bootstrap/lib/Col';
+import * as Row from 'react-bootstrap/lib/Row';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { TranslateProps } from '@waldur/i18n';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CategoriesListType } from '@waldur/marketplace/types';
 
 import { CategoryCard } from './CategoryCard';
 
 interface CategoriesListProps extends TranslateProps, CategoriesListType {}
 
-export const CategoriesList = (props: CategoriesListProps) => {
+export const CategoriesList = withTranslation((props: CategoriesListProps) => {
   if (props.loading) {
     return <LoadingSpinner/>;
   }
@@ -30,12 +32,12 @@ export const CategoriesList = (props: CategoriesListProps) => {
   }
 
   return (
-    <>
+    <Row>
       {props.items.map((category, index) => (
-        <div key={index} className="col-md-3 col-sm-6">
+        <Col key={index} md={3} sm={6}>
           <CategoryCard category={category}/>
-        </div>
+        </Col>
       ))}
-    </>
+    </Row>
   );
-};
+});
