@@ -41,10 +41,12 @@ export const OpenStackPackageDetails = (props: OfferingDetailsProps) => {
         {renderValue(attributes.description)}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Initial admin username')}>
-        {renderValue(attributes.user_username)}
+        {attributes.user_username || translate('Auto-generated')}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Initial admin password')}>
-        <SecretValueField className="max-w-300" value={attributes.user_password}/>
+        {attributes.user_password ? (
+          <SecretValueField className="max-w-300" value={attributes.user_password}/>
+        ) : translate('Auto-generated')}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Internal network mask (CIDR)')}>
         {renderValue(attributes.subnet_cidr)}

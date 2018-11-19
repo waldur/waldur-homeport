@@ -597,6 +597,10 @@ msgstr ""
 msgid "Auto-assign floating IP"
 msgstr ""
 
+#: src/openstack/OpenStackPackageDetails.tsx
+msgid "Auto-generated"
+msgstr ""
+
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
