@@ -18,6 +18,9 @@ const renderValue = value => value ? value : <span>&mdash;</span>;
 
 export const PlanDetails = withTranslation((props: PlanDetailsProps) => {
   const { plan_name, plan_description } = props.orderItem;
+  if (!plan_name) {
+    return null;
+  }
   return (
     <>
       <OrderItemDetailsField>
