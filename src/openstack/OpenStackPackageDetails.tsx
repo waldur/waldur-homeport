@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { PlanDetails } from '@waldur/marketplace/details/plan/PlanDetails';
 import { renderOfferingComponents } from '@waldur/marketplace/offerings/utils';
@@ -26,6 +27,9 @@ export const OpenStackPackageDetails = (props: OfferingDetailsProps) => {
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('UUID')}>
         {renderValue(uuid)}
+      </OrderItemDetailsField>
+      <OrderItemDetailsField label={translate('Created at')}>
+        {formatDateTime(props.orderItem.created)}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Components')}>
         {renderValue(renderOfferingComponents(props.offering))}

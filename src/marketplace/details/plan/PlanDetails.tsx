@@ -28,15 +28,14 @@ export const PlanDetails = (props: PlanDetailsProps) => {
       <OrderItemDetailsField label={props.translate('Name')}>
         {renderValue(plan_name)}
       </OrderItemDetailsField>
+      {plan_description ? (
         <OrderItemDetailsField label={props.translate('Description')}>
-          {
-            plan_description ?
-              <PlanDescriptionButton
-                className="btn btn-sm btn-default"
-                planDescription={plan_description}
-              /> : <span>&mdash;</span>
-          }
+          <PlanDescriptionButton
+            className="btn btn-sm btn-default"
+            planDescription={plan_description}
+          />
         </OrderItemDetailsField>
+      ) : null}
       <OrderItemDetailsField>
         <PlanDetailsTable
           formGroupClassName="form-group row"

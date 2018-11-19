@@ -1356,6 +1356,9 @@ msgstr ""
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/offering/OfferingConfigurationDetails.tsx
+#: src/openstack/OpenStackPackageDetails.tsx
+#: src/slurm/SlurmPackageDetails.tsx
 msgid "Created at"
 msgstr ""
 
