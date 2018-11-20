@@ -63,7 +63,7 @@ const TableOptions = {
   mapPropsToFilter: props => ({
     project_uuid: props.project.uuid,
     category_uuid: props.category_uuid,
-    state: 'done',
+    has_resource: true,
   }),
 };
 
