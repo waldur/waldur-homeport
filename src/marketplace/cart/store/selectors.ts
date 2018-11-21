@@ -1,17 +1,20 @@
 import { createSelector } from 'reselect';
 
-export const getCart = state => state.marketplace.cart;
+import { OuterState } from '../types';
 
-export const hasItem = (state, item) =>
-  getCart(state).items.find(i => i.offering.uuid === item.offering.uuid) !== undefined;
+const getCart = (state: OuterState) => state.marketplace.cart;
 
-export const getCount = state => getCart(state).items.length;
+export const getItems = (state: OuterState) => getCart(state).items;
 
-export const getItems = state => getCart(state).items;
+export const getCount = (state: OuterState) => getItems(state).length;
 
-export const getState = state => getCart(state).state;
+export const isAddingItem = (state: OuterState) => getCart(state).addingItem;
 
-export const getMaxUnit = (state): 'month' | 'day' => {
+export const isRemovingItem = (state: OuterState) => getCart(state).removingItem;
+
+export const isCreatingOrder = (state: OuterState) => getCart(state).creatingOrder;
+
+export const getMaxUnit = (state: OuterState): 'month' | 'day' => {
   const items = getItems(state);
   const units: string[] = items.filter(item => item.plan).map(item => item.plan_unit);
   return (units.indexOf('month') === -1 && units.indexOf('half_month') === -1) ? 'day' : 'month';

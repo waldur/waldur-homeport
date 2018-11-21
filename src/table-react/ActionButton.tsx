@@ -1,3 +1,4 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 
 interface Props {
@@ -5,12 +6,13 @@ interface Props {
   action: () => void;
   icon: string;
   className?: string;
+  disabled?: boolean;
 }
 
-const ActionButton: React.SFC<Props> = ({ title, action, icon, className}: Props) => (
+const ActionButton: React.SFC<Props> = ({ title, action, icon, className, disabled}: Props) => (
   <button
     type="button"
-    className={className}
+    className={classNames(className, {disabled})}
     onClick={action}>
     <i className={icon}/>&nbsp;
     {title}

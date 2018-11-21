@@ -17,6 +17,10 @@ export const addItemSuccess = (item: OrderItemResponse) => ({
   },
 });
 
+export const addItemError = () => ({
+  type: constants.ADD_ITEM_ERROR,
+});
+
 export const removeItemRequest = (uuid: string) => ({
   type: constants.REMOVE_ITEM_REQUEST,
   payload: {
@@ -31,6 +35,10 @@ export const removeItemSuccess = (uuid: string) => ({
   },
 });
 
+export const removeItemError = () => ({
+  type: constants.REMOVE_ITEM_ERROR,
+});
+
 export const setCart = cart => ({
   type: constants.SET_CART,
   payload: {
@@ -38,10 +46,14 @@ export const setCart = cart => ({
   },
 });
 
-export const clearCart = () => ({
-  type: constants.CLEAR_CART,
+export const createOrderRequest = () => ({
+  type: constants.CREATE_ORDER_REQUEST,
 });
 
-export const createOrder = () => ({
-  type: constants.CREATE_ORDER,
+export const createOrderSuccess = () => ({
+  type: constants.CREATE_ORDER_SUCCESS,
+});
+
+export const createOrderError = () => ({
+  type: constants.CREATE_ORDER_ERROR,
 });
