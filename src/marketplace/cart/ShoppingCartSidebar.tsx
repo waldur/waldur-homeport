@@ -17,7 +17,7 @@ interface ShoppingCartSidebarProps {
   project: Project;
 }
 
-export const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) => (
+export const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) => props.customer ? (
   <aside className="shopping-cart-sidebar">
     <div className="shopping-cart-sidebar-title">
       {translate('Order Summary')}
@@ -52,7 +52,7 @@ export const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) => (
       />
     )}
   </aside>
-);
+) : null;
 
 const mapStateToProps = state => ({
   customer: getCustomer(state),

@@ -39,10 +39,10 @@ export const removeItemError = () => ({
   type: constants.REMOVE_ITEM_ERROR,
 });
 
-export const setCart = cart => ({
-  type: constants.SET_CART,
+export const setItems = (items: OrderItemResponse[]) => ({
+  type: constants.SET_ITEMS,
   payload: {
-    cart,
+    items,
   },
 });
 

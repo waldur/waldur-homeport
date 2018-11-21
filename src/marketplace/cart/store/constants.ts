@@ -10,5 +10,4 @@ export const CREATE_ORDER_REQUEST = 'waldur/marketplace/cart/CREATE_ORDER_REQUES
 export const CREATE_ORDER_SUCCESS = 'waldur/marketplace/cart/CREATE_ORDER_SUCCESS';
 export const CREATE_ORDER_ERROR = 'waldur/marketplace/cart/CREATE_ORDER_ERROR';
 
-export const SET_CART = 'waldur/marketplace/cart/SET_CART';
-export const CLEAR_CART = 'waldur/marketplace/cart/CLEAR_CART';
+export const SET_ITEMS = 'waldur/marketplace/cart/SET_ITEMS';
