@@ -10,12 +10,12 @@ function loadResource(
   return resourcesService.$get($stateParams.resource_type, $stateParams.uuid)
   .then(resource => {
     return projectsService.$get(resource.project_uuid).then(project => {
-      currentStateService.setProject(project);
       return { project };
     });
   }).then(({ project }) => {
     return customersService.$get(project.customer_uuid).then(customer => {
       currentStateService.setCustomer(customer);
+      currentStateService.setProject(project);
       return { customer, project };
     });
   }).then(({ customer, project }) => {

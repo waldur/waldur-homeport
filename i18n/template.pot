@@ -4700,6 +4700,10 @@ msgstr ""
 msgid "Project has connected resources and can't be removed"
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Project is not selected."
+msgstr ""
+
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 msgid "Project limits"
 msgstr ""

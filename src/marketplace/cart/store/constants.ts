@@ -1,10 +1,14 @@
 export const ADD_ITEM_REQUEST = 'waldur/marketplace/cart/ADD_ITEM_REQUEST';
 export const ADD_ITEM_SUCCESS = 'waldur/marketplace/cart/ADD_ITEM_SUCCESS';
+export const ADD_ITEM_ERROR = 'waldur/marketplace/cart/ADD_ITEM_ERROR';
+
 export const REMOVE_ITEM_REQUEST = 'waldur/marketplace/cart/REMOVE_ITEM_REQUEST';
 export const REMOVE_ITEM_SUCCESS = 'waldur/marketplace/cart/REMOVE_ITEM_SUCCESS';
+export const REMOVE_ITEM_ERROR = 'waldur/marketplace/cart/REMOVE_ITEM_ERROR';
+
+export const CREATE_ORDER_REQUEST = 'waldur/marketplace/cart/CREATE_ORDER_REQUEST';
+export const CREATE_ORDER_SUCCESS = 'waldur/marketplace/cart/CREATE_ORDER_SUCCESS';
+export const CREATE_ORDER_ERROR = 'waldur/marketplace/cart/CREATE_ORDER_ERROR';
+
 export const SET_CART = 'waldur/marketplace/cart/SET_CART';
 export const CLEAR_CART = 'waldur/marketplace/cart/CLEAR_CART';
-export const SET_STATE = 'waldur/marketplace/cart/SET_STATE';
-export const CREATE_ORDER = 'waldur/marketplace/cart/CREATE_ORDER';
-
-export const STORAGE_KEY = 'waldur/marketplace/cart';

@@ -23,13 +23,13 @@ function loadProject(
         project: project.uuid,
       }).then(permissions => {
         project.permissions = permissions;
-        currentStateService.setProject(project);
         return { project };
       });
     });
   }).then(({ project }) => {
     return customersService.$get(project.customer_uuid).then(customer => {
       currentStateService.setCustomer(customer);
+      currentStateService.setProject(project);
       return { customer, project };
     });
   }).then(({ customer, project }) => {

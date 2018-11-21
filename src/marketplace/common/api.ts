@@ -1,7 +1,7 @@
 import { get, getAll, getById, post, sendForm, getList, getFirst, patch, deleteById } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 import { Customer } from '@waldur/customer/types';
-import { Order } from '@waldur/marketplace/cart/types';
+import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
 import { State, OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Category, Offering, ServiceProvider } from '@waldur/marketplace/types';
 
@@ -45,7 +45,7 @@ export const removeCartItem = (id: string) =>
   deleteById('/marketplace-cart-items/', id);
 
 export const submitCart = (data: object) =>
-  post<Order>('/marketplace-cart-items/submit/', data).then(response => response.data);
+  post<SubmitCartRequest>('/marketplace-cart-items/submit/', data).then(response => response.data);
 
 export const getOrderDetails = (id: string) =>
   getById<State>('/marketplace-orders/', id);

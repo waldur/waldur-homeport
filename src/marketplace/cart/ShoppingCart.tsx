@@ -8,12 +8,14 @@ import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import './ShoppingCart.scss';
 import { ShoppingCartItem } from './ShoppingCartItem';
 import * as actions from './store/actions';
-import { getMaxUnit, getItems } from './store/selectors';
+import { getMaxUnit, getItems, isRemovingItem } from './store/selectors';
+import { OuterState } from './types';
 
 interface ShoppingCartProps {
   items: OrderItemResponse[];
   maxUnit: 'month' | 'day';
   removeItem(uuid: string): void;
+  isRemovingItem: boolean;
 }
 
 const PureShoppingCart = (props: ShoppingCartProps) => props.items.length > 0 ? (
@@ -34,6 +36,7 @@ const PureShoppingCart = (props: ShoppingCartProps) => props.items.length > 0 ? 
             key={index}
             item={item}
             onRemove={() => props.removeItem(item.uuid)}
+            isRemovingItem={props.isRemovingItem}
           />
         ))}
       </tbody>
@@ -45,9 +48,10 @@ const PureShoppingCart = (props: ShoppingCartProps) => props.items.length > 0 ? 
   </p>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: OuterState) => ({
   items: getItems(state),
   maxUnit: getMaxUnit(state),
+  isRemovingItem: isRemovingItem(state),
 });
 
 const mapDispatchToProps = {
@@ -56,4 +60,4 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export const ShoppingCart = connector(PureShoppingCart);
+export const ShoppingCart = connector(PureShoppingCart) as React.ComponentClass<{}>;

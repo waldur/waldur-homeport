@@ -1,3 +1,4 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 
 import { defaultCurrency } from '@waldur/core/services';
@@ -12,6 +13,7 @@ import './ShoppingCartItem.scss';
 interface ShoppingCartItemProps {
   item: OrderItemResponse;
   onRemove(): void;
+  isRemovingItem: boolean;
 }
 
 export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
@@ -40,7 +42,8 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
     </td>
     <td className="text-center">
       <span className="btn-group">
-        <a className="btn btn-outline btn-danger btn-sm" onClick={props.onRemove}>
+        <a className={classNames('btn btn-outline btn-danger btn-sm', {disabled: props.isRemovingItem})}
+          onClick={props.onRemove}>
           <i className="fa fa-trash"/>
           {' '}
           {translate('Remove')}

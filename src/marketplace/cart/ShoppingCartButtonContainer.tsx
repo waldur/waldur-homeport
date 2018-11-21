@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
-import { OrderItemRequest } from '@waldur/marketplace/cart/types';
+import { OrderItemRequest, OuterState } from '@waldur/marketplace/cart/types';
 
 import { ShoppingCartButton } from './ShoppingCartButton';
 import { addItemRequest } from './store/actions';
+import { isAddingItem } from './store/selectors';
 
 interface OwnProps {
   item: OrderItemRequest;
@@ -15,12 +17,14 @@ interface DispatchProps {
   addItem(): void;
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    addItem: () => dispatch(addItemRequest(ownProps.item)),
-  };
-};
+const mapStateToProps = (state: OuterState, ownProps: OwnProps) => ({
+  disabled: ownProps.disabled || isAddingItem(state),
+});
 
-const enhance = connect<{}, DispatchProps, OwnProps>(null, mapDispatchToProps);
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => ({
+  addItem: () => dispatch(addItemRequest(ownProps.item)),
+});
+
+const enhance = connect<{}, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps);
 
 export const ShoppingCartButtonContainer = enhance(ShoppingCartButton);

@@ -1,5 +1,6 @@
-import { OrderState } from '@waldur/marketplace/cart/types';
 import { AttributesType } from '@waldur/marketplace/types';
+
+export type OrderState = 'Configure' | 'Approve' | 'Review';
 
 export interface StatusChange {
   processing: boolean;
@@ -21,8 +22,10 @@ export interface OrderItemResponse {
   unit: string;
   state: string;
   attributes: AttributesType;
-  plan_name: string;
-  plan_description: string;
+  plan?: string;
+  plan_name?: string;
+  plan_description?: string;
+  plan_unit?: string;
   created: string;
 }
 

@@ -5,12 +5,14 @@ import { translate } from '@waldur/i18n';
 import ActionButton from '@waldur/table-react/ActionButton';
 
 import { OrderItemResponse } from '../orders/types';
-import { createOrder } from './store/actions';
-import { getItems } from './store/selectors';
+import { createOrderRequest } from './store/actions';
+import { getItems, isCreatingOrder } from './store/selectors';
+import { OuterState } from './types';
 
 interface ForwardButtonProps {
   createOrder(): void;
   items: OrderItemResponse[];
+  disabled: boolean;
 }
 
 const PureForwardButton = (props: ForwardButtonProps) =>
@@ -20,7 +22,15 @@ const PureForwardButton = (props: ForwardButtonProps) =>
       icon="fa fa-arrow-right"
       className="btn btn-primary"
       action={props.createOrder}
+      disabled={props.disabled}
     />
   ) : null;
 
-export const ForwardButton = connect(state => ({ items: getItems(state)}), {createOrder})(PureForwardButton);
+const mapStateToProps = (state: OuterState) => ({
+  items: getItems(state),
+  disabled: isCreatingOrder(state),
+});
+
+const connector = connect(mapStateToProps, {createOrder: createOrderRequest});
+
+export const ForwardButton = connector(PureForwardButton) as React.ComponentClass<{}>;

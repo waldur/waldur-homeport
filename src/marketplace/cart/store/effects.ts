@@ -46,6 +46,7 @@ function* addItem(action) {
   } catch (error) {
     const errorMessage = `${translate('Unable to add item to shopping cart.')} ${format(error)}`;
     yield put(showError(errorMessage));
+    yield put(actions.addItemError());
   }
 }
 
@@ -57,15 +58,21 @@ function* removeItem(action) {
   } catch (error) {
     const errorMessage = `${translate('Unable to remove item from shopping cart.')} ${format(error)}`;
     yield put(showError(errorMessage));
+    yield put(actions.removeItemError());
   }
 }
 
 function* createOrder() {
   const project = yield select(getProject);
+  if (!project) {
+    yield put(actions.createOrderError());
+    yield put(showError(translate('Project is not selected.')));
+    return;
+  }
   try {
     const order = yield call(api.submitCart, {project: project.url});
     yield put(showSuccess(translate('Order has been submitted.')));
-    yield put(actions.clearCart());
+    yield put(actions.createOrderSuccess());
     const workspace: WorkspaceType = yield select(getWorkspace);
     if (workspace === 'organization') {
       yield $state.go('marketplace-order-details-customer', {order_uuid: order.uuid});
@@ -75,6 +82,7 @@ function* createOrder() {
   } catch (error) {
     const errorMessage = `${translate('Unable to submit order.')} ${format(error)}`;
     yield put(showError(errorMessage));
+    yield put(actions.createOrderError());
   }
 }
 
@@ -82,5 +90,5 @@ export default function*() {
   yield takeEvery(INIT_CONFIG, initCart);
   yield takeEvery(constants.ADD_ITEM_REQUEST, addItem);
   yield takeEvery(constants.REMOVE_ITEM_REQUEST, removeItem);
-  yield takeEvery(constants.CREATE_ORDER, createOrder);
+  yield takeEvery(constants.CREATE_ORDER_REQUEST, createOrder);
 }
