@@ -2,10 +2,12 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { $state } from '@waldur/core/services';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { INIT_CONFIG } from '@waldur/store/config';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { USER_LOGGED_IN } from '@waldur/workspace/constants';
 import { getProject, getWorkspace } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
@@ -20,9 +22,12 @@ const formatItem = item => ({
 });
 
 function* initCart() {
+  if (!isFeatureVisible('marketplace')) {
+    return;
+  }
   try {
     const items = yield call(api.getCartItems);
-    yield put(actions.setCart({items}));
+    yield put(actions.setItems(items));
   } catch (error) {
     if (error.status === -1 || error.status === 401) {
       return;
@@ -36,6 +41,10 @@ function* addItem(action) {
   try {
     const item = yield call(api.addCartItem, formatItem(action.payload.item));
     yield put(actions.addItemSuccess(item));
+
+    const items = yield call(api.getCartItems);
+    yield put(actions.setItems(items));
+
     yield put(showSuccess(translate('Item has been added to shopping cart.')));
     const workspace: WorkspaceType = yield select(getWorkspace);
     if (workspace === 'organization') {
@@ -54,6 +63,10 @@ function* removeItem(action) {
   try {
     yield call(api.removeCartItem, action.payload.uuid);
     yield put(actions.removeItemSuccess(action.payload.uuid));
+
+    const items = yield call(api.getCartItems);
+    yield put(actions.setItems(items));
+
     yield put(showSuccess(translate('Item has been removed from shopping cart.')));
   } catch (error) {
     const errorMessage = `${translate('Unable to remove item from shopping cart.')} ${format(error)}`;
@@ -87,7 +100,7 @@ function* createOrder() {
 }
 
 export default function*() {
-  yield takeEvery(INIT_CONFIG, initCart);
+  yield takeEvery([INIT_CONFIG, USER_LOGGED_IN], initCart);
   yield takeEvery(constants.ADD_ITEM_REQUEST, addItem);
   yield takeEvery(constants.REMOVE_ITEM_REQUEST, removeItem);
   yield takeEvery(constants.CREATE_ORDER_REQUEST, createOrder);
