@@ -88,10 +88,7 @@ const getPlan = (state, props) => {
 
 const getLimits = (state, props) => {
   if (props.viewMode) {
-    return props.orderItem.quotas.reduce((acc, quota) => {
-      acc[quota.type] = quota.limit;
-      return acc;
-    }, {});
+    return props.orderItem.limits;
   } else {
     return offeringSelector(state, 'limits');
   }

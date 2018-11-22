@@ -59,11 +59,10 @@ export const TableComponent = props => {
 
 const TableOptions = {
   table: 'ProjectResourcesList',
-  fetchData: createFetcher('marketplace-order-items'),
+  fetchData: createFetcher('marketplace-resources'),
   mapPropsToFilter: props => ({
     project_uuid: props.project.uuid,
     category_uuid: props.category_uuid,
-    has_resource: true,
   }),
 };
 
