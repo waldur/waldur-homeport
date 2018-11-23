@@ -93,7 +93,7 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
             items={this.state.orderDetails.items}
             editable={false}
           />
-          <div className="pull-right">
+          <div className="text-right">
             {this.renderApproveButton() &&
               <ApproveButton
                 submitting={this.props.stateChangeStatus.processing}
