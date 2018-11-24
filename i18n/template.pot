@@ -188,6 +188,7 @@ msgstr ""
 msgid "Add component"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Add data volume"
 msgstr ""
@@ -1449,6 +1450,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Data volume size:"
 msgstr ""
@@ -1629,6 +1631,7 @@ msgstr ""
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Disable data volume"
 msgstr ""
