@@ -154,7 +154,7 @@ export default function routes($stateProvider) {
     })
 
     .state('marketplace-offering-update', {
-      url: 'marketplace-offering-update/:offering_uuid',
+      url: 'marketplace-offering-update/:offering_uuid/',
       template: '<marketplace-offering-update></marketplace-offering-update>',
       parent: 'organization',
       data: {
@@ -174,7 +174,7 @@ export default function routes($stateProvider) {
     })
 
     .state('marketplace-order-item-details', {
-      url: 'marketplace-order-item-details/:order_item_uuid',
+      url: 'marketplace-order-item-details/:order_item_uuid/',
       template: '<marketplace-order-item-details></marketplace-order-item-details>',
       parent: 'project',
       data: {
@@ -184,7 +184,7 @@ export default function routes($stateProvider) {
     })
 
     .state('marketplace-order-item-details-customer', {
-      url: 'marketplace-order-item-details/:order_item_uuid',
+      url: 'marketplace-order-item-details/:order_item_uuid/',
       template: '<marketplace-order-item-details></marketplace-order-item-details>',
       parent: 'organization',
       data: {
@@ -214,7 +214,7 @@ export default function routes($stateProvider) {
     })
 
     .state('marketplace-project-resources', {
-      url: 'marketplace-resources/:category_uuid',
+      url: 'marketplace-resources/:category_uuid/',
       template: '<marketplace-project-resources-list></marketplace-project-resources-list>',
       parent: 'project',
       data: {
