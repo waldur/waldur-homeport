@@ -53,8 +53,8 @@ export const getOrderDetails = (id: string) =>
 export const getOrderItem = id =>
   getById<OrderItemResponse>('/marketplace-order-items/', id);
 
-export const setOrderState = (orderUuid, state) =>
-  post(`/marketplace-orders/${orderUuid}/set_state_${state}/`).then(response => response.data);
+export const approveOrder = (orderUuid: string) =>
+  post(`/marketplace-orders/${orderUuid}/approve/`).then(response => response.data);
 
 export const getCustomerList = (params?: {}) =>
   getList<Customer>('/customers/', params);
