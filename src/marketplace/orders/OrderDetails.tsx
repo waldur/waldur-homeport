@@ -14,7 +14,7 @@ import { StatusChange } from './types';
 import { matchState } from './utils';
 
 interface OrderDetailsProps extends TranslateProps {
-  setOrderState: (orderUuid: string, state: string) => void;
+  approveOrder: (orderUuid: string) => void;
   stateChangeStatus: StatusChange;
   shouldRenderApproveButton?: boolean;
 }
@@ -68,8 +68,8 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
     return this.props.shouldRenderApproveButton && this.state.orderDetails && this.state.orderDetails.state === 'Approve';
   }
 
-  setOrderState = () => {
-    this.props.setOrderState($state.params.order_uuid, 'executing');
+  approveOrder = () => {
+    this.props.approveOrder($state.params.order_uuid);
   }
 
   render() {
@@ -97,7 +97,7 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
             {this.renderApproveButton() &&
               <ApproveButton
                 submitting={this.props.stateChangeStatus.processing}
-                onClick={this.setOrderState}/>
+                onClick={this.approveOrder}/>
             }
           </div>
         </div>

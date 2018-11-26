@@ -1,10 +1,9 @@
 import * as constants from './constants';
 
-export const setOrderState = (orderUuid, state) => ({
-  type: constants.SET_ORDER_STATE,
+export const approveOrder = (orderUuid: string) => ({
+  type: constants.APPROVE_ORDER,
   payload: {
     orderUuid,
-    state,
   },
 });
 

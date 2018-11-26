@@ -14,9 +14,9 @@ const mapStateToProps = state => ({
   shouldRenderApproveButton: selectors.shouldRenderApproveButton(ENV, state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  setOrderState: (orderUuid, state) => dispatch(actions.setOrderState(orderUuid, state)),
-});
+const mapDispatchToProps = {
+  approveOrder: actions.approveOrder,
+};
 
 const enhance = compose(
   withTranslation,
