@@ -131,6 +131,11 @@ rijkscloudModule(appModule);
 marketplaceModule(appModule);
 appModule.config(analyticsRoutes);
 
+if (process.env.NODE_ENV !== 'production') {
+  const storybookModule = require('./marketplace/storybook.ts').default;
+  storybookModule(appModule);
+}
+
 function requirePlugins(module) {
   const context = require.context('./plugins', true, /module\.js$/);
   context.keys().forEach(key => {
