@@ -7,9 +7,9 @@ import BooleanField from '@waldur/table-react/BooleanField';
 const renderValue = value => value ? value : <span>&mdash;</span>;
 
 export const OfferingConfigurationDetails = (props: OrderItemDetailsProps) => {
-  const options = props.offering.options.options;
-  const keys = Object.keys(options).filter(key => props.orderItem.attributes[key] !== undefined);
+  const options = props.offering.options.options || {};
   const attributes = props.orderItem.attributes;
+  const keys = Object.keys(options).filter(key => attributes[key] !== undefined);
   return (
     <>
       {keys.map((key, index) => (

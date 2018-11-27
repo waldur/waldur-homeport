@@ -4,6 +4,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
+import { OfferingTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OrderItemDetails } from '@waldur/marketplace/orders/OrderItemDetails';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Offering, Category } from '@waldur/marketplace/types';
@@ -65,11 +66,16 @@ class OrderItemDetailsContainer extends React.Component<undefined, OrderItemDeta
     }
 
     return (
-      <OrderItemDetails
-        orderItem={this.state.orderItem}
-        offering={this.state.offering}
-        category={this.state.category}
-      />
+      <>
+        <OrderItemDetails
+          orderItem={this.state.orderItem}
+          offering={this.state.offering}
+        />
+        <OfferingTabs
+          offering={this.state.offering}
+          sections={this.state.category.sections}
+        />
+      </>
     );
   }
 }
