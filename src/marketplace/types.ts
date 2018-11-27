@@ -156,7 +156,7 @@ export interface OfferingConfigurationFormProps extends InjectedFormProps {
   project?: Project;
 }
 
-export interface OfferingDetailsProps {
+export interface OrderItemDetailsProps {
   orderItem: OrderItemResponse;
   offering: Offering;
 }
