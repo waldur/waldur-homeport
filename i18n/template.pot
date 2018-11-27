@@ -360,7 +360,6 @@ msgid "All spaces, hyphens and dots will be replaced with underscores."
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
-#: src/slurm/SlurmPackageDetails.tsx
 msgid "Allocation description"
 msgstr ""
 
@@ -369,7 +368,6 @@ msgid "Allocation has been updated."
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
-#: src/slurm/SlurmPackageDetails.tsx
 #: src/slurm/slurm-allocation-checkout-summary.html
 #: src/slurm/slurm-allocation-config.js
 msgid "Allocation name"
@@ -550,9 +548,7 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
-#: src/offering/OfferingConfigurationDetails.tsx
-#: src/openstack/OpenStackPackageDetails.tsx
-#: src/slurm/SlurmPackageDetails.tsx
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
 msgid "Attributes"
 msgstr ""
 
@@ -1098,9 +1094,7 @@ msgid "Component name"
 msgstr ""
 
 #: src/cost-planning/cost-plan-items.html
-#: src/offering/OfferingConfigurationDetails.tsx
-#: src/openstack/OpenStackPackageDetails.tsx
-#: src/slurm/SlurmPackageDetails.tsx
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
 msgid "Components"
 msgstr ""
 
@@ -1358,12 +1352,10 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: src/invitations/invitations-list.js
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/ProjectResourcesList.tsx
-#: src/offering/OfferingConfigurationDetails.tsx
-#: src/openstack/OpenStackPackageDetails.tsx
-#: src/slurm/SlurmPackageDetails.tsx
 msgid "Created at"
 msgstr ""
 
@@ -1542,7 +1534,6 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
-#: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingSummaryTab.tsx
 #: src/offering/appstore-offering.js
@@ -3324,7 +3315,6 @@ msgstr ""
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/orders/ProjectResourcesList.tsx
-#: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/OracleSnapshots.tsx
@@ -5383,6 +5373,10 @@ msgstr ""
 msgid "Resource"
 msgstr ""
 
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
+msgid "Resource UUID"
+msgstr ""
+
 #: src/events/EventDetailsTable.tsx
 msgid "Resource configuration"
 msgstr ""
@@ -5393,6 +5387,10 @@ msgstr ""
 
 #: src/analytics/resource-analysis-new.html
 msgid "Resource count in"
+msgstr ""
+
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
+msgid "Resource description"
 msgstr ""
 
 #: src/customer/workspace/CustomerEventsFilter.tsx
@@ -5428,6 +5426,10 @@ msgstr ""
 
 #: src/marketplace/orders/OrderItem.tsx
 msgid "Resource link"
+msgstr ""
+
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
+msgid "Resource name"
 msgstr ""
 
 #: src/resource/actions/base.ts
@@ -6381,7 +6383,6 @@ msgstr ""
 msgid "Tenant ID"
 msgstr ""
 
-#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "Tenant description"
 msgstr ""
@@ -6395,7 +6396,6 @@ msgid "Tenant has been updated."
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx
-#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/actions/change-package-dialog.html
@@ -6738,10 +6738,7 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
-#: src/offering/OfferingConfigurationDetails.tsx
-#: src/openstack/OpenStackPackageDetails.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
-#: src/slurm/SlurmPackageDetails.tsx
 msgid "UUID"
 msgstr ""
 

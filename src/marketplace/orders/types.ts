@@ -15,6 +15,7 @@ export interface OrderItemResponse {
   offering_description: string;
   offering_thumbnail: string;
   offering_type: string;
+  marketplace_resource_uuid?: string;
   resource_uuid?: string;
   resource_type?: string;
   cost: string;

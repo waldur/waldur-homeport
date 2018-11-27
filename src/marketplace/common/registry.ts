@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Omit } from 'react-redux';
 
-import { Offering, Attribute, OfferingDetailsProps, OfferingConfigurationFormProps } from '@waldur/marketplace/types';
+import { Offering, Attribute, OrderItemDetailsProps, OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 const REGISTRY: {[key: string]: Omit<OfferingConfiguration, 'type'>} = {};
 
 interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   type: string;
   component: React.ComponentType<OfferingConfigurationFormProps>;
-  detailsComponent?: React.ComponentType<OfferingDetailsProps>;
+  detailsComponent?: React.ComponentType<OrderItemDetailsProps>;
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
   label: string;
   showOptions?: boolean;
