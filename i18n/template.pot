@@ -412,7 +412,7 @@ msgstr ""
 msgid "Analytics"
 msgstr ""
 
-#: src/openstack/openstack-security-groups/filters.js
+#: src/openstack/openstack-security-groups/utils.ts
 msgid "Any"
 msgstr ""
 
@@ -1589,6 +1589,7 @@ msgstr ""
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/issues/create/issue-registration.html
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/project-details-button.html
 #: src/project/projects-list.js
@@ -2413,6 +2414,7 @@ msgstr ""
 msgid "IP address"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/openstack/openstack-security-groups/security-group-rules-list.html
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
@@ -2597,6 +2599,7 @@ msgstr ""
 msgid "Instance does not have any floating IPs yet."
 msgstr ""
 
+#: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Instance does not have any security groups yet."
 msgstr ""
@@ -4439,6 +4442,7 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-group-rules-list.html
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Port range"
@@ -5150,6 +5154,7 @@ msgstr ""
 msgid "Remote CIDR"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Remote network"
 msgstr ""
@@ -5678,6 +5683,7 @@ msgstr ""
 msgid "Security groups"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Security groups details"
 msgstr ""
