@@ -132,7 +132,7 @@ marketplaceModule(appModule);
 appModule.config(analyticsRoutes);
 
 if (process.env.NODE_ENV !== 'production') {
-  const storybookModule = require('./marketplace/storybook.ts').default;
+  const storybookModule = require('./marketplace/storybook.js').default;
   storybookModule(appModule);
 }
 
