@@ -43,18 +43,18 @@ export const PureOfferingTabs = (props: OfferingTabsProps) => {
         </Tab>
       )}
       {showOracleReport && (
-        <>
-          <Tab title={props.translate('Report')} eventKey="report">
-            <div className="m-t-sm">
-              <OracleReport report={props.offering.report}/>
-            </div>
-          </Tab>
-          <Tab title={props.translate('Snapshots')} eventKey="snapshots">
-            <div className="m-t-sm">
-              <OracleSnapshots report={props.offering.report}/>}
-            </div>
-          </Tab>
-        </>
+        <Tab title={props.translate('Report')} eventKey="report">
+          <div className="m-t-sm">
+            <OracleReport report={props.offering.report}/>
+          </div>
+        </Tab>
+      )}
+      {showOracleReport && (
+        <Tab title={props.translate('Snapshots')} eventKey="snapshots">
+          <div className="m-t-sm">
+            <OracleSnapshots report={props.offering.report}/>}
+          </div>
+        </Tab>
       )}
     </Tabs>
   );

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
@@ -24,12 +25,16 @@ export const PureOfferingHeader = (props: OfferingHeaderProps) => (
       {props.offering.name}
     </Field>
 
+    <Field label={props.translate('Created')}>
+      {formatDateTime(props.offering.created)}
+    </Field>
+
     <Field label={props.translate('State')}>
       <OfferingState offering={props.offering}/>
     </Field>
 
     <Field label={props.translate('Type')}>
-      {props.offering.type_label}
+      {props.offering.type_label || props.offering.type}
     </Field>
 
     <Field label={<><PriceTooltip/>{' '}{props.translate('Price')}</>}>

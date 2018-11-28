@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OfferingTabs renders tabs for Oracle report and snapshots 1`] = `
+"<div id=\\"offeringSummary\\"><ul role=\\"tablist\\" class=\\"nav nav-tabs\\"><li role=\\"presentation\\" class=\\"active\\"><a id=\\"offeringSummary-tab-summary\\" role=\\"tab\\" aria-controls=\\"offeringSummary-pane-summary\\" aria-selected=\\"true\\" href=\\"#\\">Summary</a></li><li role=\\"presentation\\" class=\\"\\"><a id=\\"offeringSummary-tab-events\\" role=\\"tab\\" aria-controls=\\"offeringSummary-pane-events\\" tabindex=\\"-1\\" aria-selected=\\"false\\" href=\\"#\\">Audit log</a></li><li role=\\"presentation\\" class=\\"\\"><a id=\\"offeringSummary-tab-comments\\" role=\\"tab\\" aria-controls=\\"offeringSummary-pane-comments\\" tabindex=\\"-1\\" aria-selected=\\"false\\" href=\\"#\\">Comments</a></li><li role=\\"presentation\\" class=\\"\\"><a id=\\"offeringSummary-tab-report\\" role=\\"tab\\" aria-controls=\\"offeringSummary-pane-report\\" tabindex=\\"-1\\" aria-selected=\\"false\\" href=\\"#\\">Report</a></li><li role=\\"presentation\\" class=\\"\\"><a id=\\"offeringSummary-tab-snapshots\\" role=\\"tab\\" aria-controls=\\"offeringSummary-pane-snapshots\\" tabindex=\\"-1\\" aria-selected=\\"false\\" href=\\"#\\">Snapshots</a></li></ul><div class=\\"tab-content\\"><div id=\\"offeringSummary-pane-summary\\" aria-labelledby=\\"offeringSummary-tab-summary\\" role=\\"tabpanel\\" aria-hidden=\\"false\\" class=\\"fade tab-pane active in\\"><div class=\\"m-t-sm\\"><h5>Description</h5><textarea class=\\"form-control h-150\\" readonly=\\"\\">Tenants: ---
+Additional Info: 
+- Organization: ActiveSys
+- Project: SaaS
+</textarea></div></div></div></div>"
+`;

@@ -10,6 +10,7 @@ type OfferingState = 'OK' | 'Requested' | 'Terminated';
 export interface Offering {
   state: OfferingState;
   name: string;
+  type: string;
   type_label: string;
   unit_price: number;
   issue: string;
@@ -19,4 +20,5 @@ export interface Offering {
   issue_uuid: string;
   issue_description: string;
   report: object;
+  [key: string]: any;
 }
