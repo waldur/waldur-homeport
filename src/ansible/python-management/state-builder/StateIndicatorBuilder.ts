@@ -19,7 +19,7 @@ class CommonStateIndicatorBuilder {
 
   private buildOkStateIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicator => {
     const stateIndicator = this.buildEmptyStateIndicator();
-    stateIndicator.className = 'progress-bar-primary';
+    stateIndicator.variant = 'primary';
     stateIndicator.label = STATE_READABLE_TEXT_MAPPING[requestState];
     stateIndicator.tooltip = tooltip;
     return stateIndicator;
@@ -27,7 +27,7 @@ class CommonStateIndicatorBuilder {
 
   private buildErredStateIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicator => {
     const stateIndicator = this.buildEmptyStateIndicator();
-    stateIndicator.className = 'progress-bar-danger';
+    stateIndicator.variant = 'danger';
     stateIndicator.label = STATE_READABLE_TEXT_MAPPING[requestState];
     stateIndicator.tooltip = tooltip;
     return stateIndicator;
@@ -35,8 +35,8 @@ class CommonStateIndicatorBuilder {
 
   private buildDefaultIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicator => {
     const stateIndicator = this.buildEmptyStateIndicator();
-    stateIndicator.className = 'progress-bar-info';
-    stateIndicator.movementClassName = 'progress-striped active';
+    stateIndicator.variant = 'info';
+    stateIndicator.active = true;
     stateIndicator.label = STATE_READABLE_TEXT_MAPPING[requestState];
     stateIndicator.tooltip = tooltip;
     return stateIndicator;
@@ -44,10 +44,10 @@ class CommonStateIndicatorBuilder {
 
   private buildEmptyStateIndicator = (): StateIndicator => {
     return {
-      className: '',
+      variant: 'primary',
       label: '',
       tooltip: '',
-      movementClassName: '',
+      active: false,
     };
   }
 

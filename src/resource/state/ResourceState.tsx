@@ -2,23 +2,24 @@ import * as React from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { StateIndicator } from '@waldur/offering/StateIndicator';
 import { Resource } from '@waldur/resource/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { StateIndicator } from './types';
+import { StateIndicator as StateIndicatorType } from './types';
 import { getResourceState } from './utils';
 
 interface ResourceStateProps extends TranslateProps {
   resource: Resource;
 }
 
-export const ResourceStateIndicator = (props: StateIndicator) => (
+export const ResourceStateIndicator = (props: StateIndicatorType) => (
   <Tooltip label={props.tooltip} id="resourceState">
-    <div className={`progress ${props.movementClassName} state-indicator m-b-none`}>
-      <span className={`progress-bar ${props.className} p-w-sm full-width`}>
-        {props.label.toUpperCase()}
-      </span>
-    </div>
+    <StateIndicator
+      label={props.label.toUpperCase()}
+      variant={props.variant}
+      active={props.active}
+    />
   </Tooltip>
 );
 

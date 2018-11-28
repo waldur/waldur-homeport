@@ -1,8 +1,9 @@
+import { StateVariant } from '@waldur/offering/StateIndicator';
 export { ResourceState } from '@waldur/resource/types';
 
 export interface StateIndicator {
-  className: string;
+  variant: StateVariant;
   label: string;
-  movementClassName: string;
+  active?: boolean;
   tooltip: string;
 }
