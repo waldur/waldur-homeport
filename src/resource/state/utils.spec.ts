@@ -76,7 +76,7 @@ describe('getResourceState', () => {
     expect(getResourceState(resource, translate)).toEqual({
       variant: 'primary',
       label: 'Updating',
-      active: 'progress-striped active',
+      active: true,
       tooltip: 'Updating OpenStack Instance, current state on backend: RESIZING.',
     });
   });
@@ -93,7 +93,7 @@ describe('getResourceState', () => {
     expect(getResourceState(resource, translate)).toEqual({
       variant: 'primary',
       label: 'Changing flavor',
-      active: 'progress-striped active',
+      active: true,
       tooltip: 'Changing flavor from small to large., current state on backend: RESIZING.',
     });
   });
