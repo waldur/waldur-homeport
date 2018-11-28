@@ -10,3 +10,25 @@ export interface OpenStackInstance extends VirtualMachine {
   runtime_state: 'SHUTOFF' | 'ACTIVE';
   security_groups?: string[];
 }
+
+export interface Subnet {
+  url: string;
+  uuid: string;
+  name: string;
+  cidr: string;
+  gateway_ip: string;
+  allocation_pools: Array<{[key: string]: string}>;
+  ip_version: number;
+  enable_dhcp: boolean;
+  dns_nameservers: Array<{[key: string]: string}>;
+  network: string;
+}
+
+export interface FloatingIp {
+  url: string;
+  uuid: string;
+  settings: string;
+  address: string;
+  runtime_state: string;
+  is_booked: boolean;
+}
