@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import * as Accordion from 'react-bootstrap/lib/Accordion';
 import * as Panel from 'react-bootstrap/lib/Panel';
+import * as PanelGroup from 'react-bootstrap/lib/PanelGroup';
 
 import { Report } from './types';
 
@@ -10,12 +10,18 @@ interface OfferingReportComponentProps {
 }
 
 export const OfferingReportComponent = (props: OfferingReportComponentProps) => (
-  <Accordion defaultExpanded={true}>
+  <PanelGroup accordion={true} defaultActiveKey={0} id="oracle-report">
     {props.report.map((section, index) => (
       <Panel eventKey={index} key={index}>
-        <Panel.Heading>{section.header}</Panel.Heading>
-        <pre>{section.body}</pre>
+        <Panel.Heading>
+          <Panel.Title toggle={true}>
+            {section.header}
+          </Panel.Title>
+        </Panel.Heading>
+        <Panel.Body collapsible={true}>
+          <pre>{section.body}</pre>
+        </Panel.Body>
       </Panel>
     ))}
-  </Accordion>
+  </PanelGroup>
 );

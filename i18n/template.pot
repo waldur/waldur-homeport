@@ -6094,7 +6094,6 @@ msgid "Snapshot size"
 msgstr ""
 
 #: src/offering/OfferingTabs.tsx
-#: src/offering/OracleSnapshots.tsx
 #: src/openstack/openstack-backup/tabs.js
 #: src/openstack/openstack-snapshot-schedule/module.js
 #: src/openstack/openstack-volume/module.js
