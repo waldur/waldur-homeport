@@ -160,6 +160,7 @@ msgid "Activity stream"
 msgstr ""
 
 #: src/issues/comments/IssueCommentsForm.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/team/add-project-member.js
@@ -589,6 +590,7 @@ msgstr ""
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.js
 #: src/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Auto-assign floating IP"
@@ -1485,6 +1487,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-items.html
 #: src/experts/bids/details/expert-bid-details.html
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -5825,6 +5828,7 @@ msgstr ""
 msgid "Select state..."
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 msgid "Select subnet"
 msgstr ""
@@ -6064,6 +6068,7 @@ msgstr ""
 msgid "Skip connection to external network"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Skip floating IP assignment"
 msgstr ""
