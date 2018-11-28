@@ -13,9 +13,9 @@ describe('getResourceState', () => {
       service_settings_state: 'OK',
     };
     expect(getResourceState(resource, translate)).toEqual({
-      className: 'progress-bar-primary',
+      variant: 'primary',
       label: 'ONLINE',
-      movementClassName: '',
+      active: false,
       tooltip: 'Resource is in sync, current state on backend: ONLINE.',
     });
   });
@@ -28,9 +28,9 @@ describe('getResourceState', () => {
       service_settings_state: 'OK',
     };
     expect(getResourceState(resource, translate)).toEqual({
-      className: 'progress-bar-warning',
+      variant: 'warning',
       label: 'ONLINE',
-      movementClassName: '',
+      active: false,
       tooltip: 'Failed to operate with backend.',
     });
   });
@@ -43,9 +43,9 @@ describe('getResourceState', () => {
       service_settings_state: 'OK',
     };
     expect(getResourceState(resource, translate)).toEqual({
-      className: 'progress-bar-danger',
+      variant: 'danger',
       label: 'ERROR',
-      movementClassName: '',
+      active: false,
       tooltip: 'Resource is in sync, current state on backend: ERROR.',
     });
   });
@@ -59,9 +59,9 @@ describe('getResourceState', () => {
       service_settings_error_message: 'Server does not respond.',
     };
     expect(getResourceState(resource, translate)).toEqual({
-      className: 'progress-bar-warning',
+      variant: 'warning',
       label: 'ONLINE',
-      movementClassName: '',
+      active: false,
       tooltip: 'Service settings of this resource are in state erred., error message: Server does not respond.',
     });
   });
@@ -74,9 +74,9 @@ describe('getResourceState', () => {
       service_settings_state: 'OK',
     };
     expect(getResourceState(resource, translate)).toEqual({
-      className: 'progress-bar-primary',
+      variant: 'primary',
       label: 'Updating',
-      movementClassName: 'progress-striped active',
+      active: 'progress-striped active',
       tooltip: 'Updating OpenStack Instance, current state on backend: RESIZING.',
     });
   });
@@ -91,9 +91,9 @@ describe('getResourceState', () => {
       action_details: {message: 'Changing flavor from small to large.'},
     };
     expect(getResourceState(resource, translate)).toEqual({
-      className: 'progress-bar-primary',
+      variant: 'primary',
       label: 'Changing flavor',
-      movementClassName: 'progress-striped active',
+      active: 'progress-striped active',
       tooltip: 'Changing flavor from small to large., current state on backend: RESIZING.',
     });
   });
