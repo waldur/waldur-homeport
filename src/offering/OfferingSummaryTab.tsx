@@ -1,6 +1,8 @@
 import * as React from 'react';
+import * as Panel from 'react-bootstrap/lib/Panel';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { formatJiraMarkup } from '@waldur/issues/comments/utils';
 
 import { Offering } from './types';
 
@@ -11,12 +13,16 @@ interface OfferingSummaryTabProps extends TranslateProps {
 
 export const OfferingSummaryTab = withTranslation((props: OfferingSummaryTabProps) => (
   <>
-    {props.summary && <p dangerouslySetInnerHTML={{__html: props.summary}}/>}
-    <h5>{props.translate('Description')}</h5>
-    <textarea
-      value={props.offering.issue_description}
-      className="form-control h-150"
-      readOnly={true}
-    />
+    {props.summary && <p  className="m-b-md" dangerouslySetInnerHTML={{__html: props.summary}}/>}
+    <Panel>
+      <Panel.Heading>
+        <Panel.Title>
+          {props.translate('Description')}
+        </Panel.Title>
+      </Panel.Heading>
+      <Panel.Body>
+        <div dangerouslySetInnerHTML={{__html: formatJiraMarkup(props.offering.issue_description)}}/>
+      </Panel.Body>
+    </Panel>
   </>
 ));
