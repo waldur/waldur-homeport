@@ -877,6 +877,7 @@ msgstr ""
 #: src/experts/bids/create/expert-bid-create-dialog.html
 #: src/experts/bids/details/expert-bid-dialog.html
 #: src/experts/requests/create/expert-contract-create.html
+#: src/form/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
 #: src/invitations/actions/cancel.js
 #: src/invitations/actions/invitation-dialog.html
@@ -5361,6 +5362,7 @@ msgid "Resend"
 msgstr ""
 
 #: src/form-react/ResetFormButton.tsx
+#: src/form/AppstoreListDialog.tsx
 msgid "Reset"
 msgstr ""
 
@@ -5702,6 +5704,7 @@ msgstr ""
 
 #: src/appstore/dialog/appstore-category-selector.html
 #: src/appstore/providers/appstore-providers.js
+#: src/form/AppstoreListDialog.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Select"
 msgstr ""
@@ -5984,6 +5987,10 @@ msgstr ""
 
 #: src/dashboard/DashboardFeed.tsx
 msgid "Show all"
+msgstr ""
+
+#: src/form-react/SelectDialogField.tsx
+msgid "Show choices"
 msgstr ""
 
 #: src/billing/price-estimate-button.html

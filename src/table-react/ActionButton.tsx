@@ -4,7 +4,7 @@ import * as React from 'react';
 interface Props {
   title: string;
   action: () => void;
-  icon: string;
+  icon?: string;
   className?: string;
   disabled?: boolean;
 }
@@ -14,8 +14,9 @@ const ActionButton: React.SFC<Props> = ({ title, action, icon, className, disabl
     type="button"
     className={classNames(className, {disabled})}
     onClick={action}>
-    <i className={icon}/>&nbsp;
-    {title}
+      {icon && <i className={icon}/>}
+      {' '}
+      {title}
   </button>
 );
 
