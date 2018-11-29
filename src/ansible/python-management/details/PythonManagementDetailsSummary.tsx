@@ -6,11 +6,13 @@ import { PythonManagementActionsHistory } from '@waldur/ansible/python-managemen
 import { PythonManagementDetailsProps } from '@waldur/ansible/python-management/details/PythonManagementDetailsContainer';
 import { VirtualEnvironmentsForm } from '@waldur/ansible/python-management/form/VirtualEnvironmentsForm';
 import { existsExecutingGlobalRequest } from '@waldur/ansible/python-management/form/VirtualEnvironmentUtils';
-import { PureManagementStatesIndicator } from '@waldur/ansible/python-management/state-builder/ManagementStatesIndicator';
 import { PythonManagementRequest } from '@waldur/ansible/python-management/types/PythonManagementRequest';
 import { PythonManagementRequestType } from '@waldur/ansible/python-management/types/PythonManagementRequestType';
+import { StateIndicator } from '@waldur/core/StateIndicator';
 import { FormContainer } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
+
+import { buildStateIndicator } from '../state-builder/StateIndicatorBuilder';
 
 export const PythonManagementDetailsSummary = (props: PythonManagementDetailsProps) => {
   const buildRequestAdditionalInfo = (request: PythonManagementRequest) => {
@@ -60,7 +62,7 @@ export const PythonManagementDetailsSummary = (props: PythonManagementDetailsPro
                     <div className="form-group">
                       <label className="control-label col-sm-2">{translate('State')}</label>
                       <div className="same-padding-as-control-label">
-                        <PureManagementStatesIndicator managementState={props.pythonManagement.managementState}/>
+                        <StateIndicator {...buildStateIndicator(props.pythonManagement.managementState)}/>
                       </div>
                     </div>
                     <div className="form-group">

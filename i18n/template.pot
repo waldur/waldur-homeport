@@ -4108,10 +4108,6 @@ msgstr ""
 msgid "Output log"
 msgstr ""
 
-#: src/ansible/python-management/state-builder/ManagementStatesIndicator.tsx
-msgid "Overall state of the service"
-msgstr ""
-
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 msgid "Overview"
 msgstr ""

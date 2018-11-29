@@ -16,7 +16,7 @@ export const isActive = (state: ManagementRequestState) =>
 export const getVariant = (state: ManagementRequestState): StateVariant =>
   state === ManagementRequestState.ERRED ? 'danger' : 'primary';
 
-export const buildStateIndicator = (state: ManagementRequestState, tooltip: string): StateIndicatorProps => {
+export const buildStateIndicator = (state: ManagementRequestState, tooltip?: string): StateIndicatorProps => {
   return {
     variant: getVariant(state),
     label: getLabel(state),
