@@ -1,7 +1,7 @@
 import ResourceStateConfiguration from './resource-state-configuration';
 import resourceState from './ResourceState';
-import resourceStateMonitoring from './resource-state-monitoring';
-import resourceStateBackup from './resource-state-backup';
+import resourceStateMonitoring from './MonitoringState';
+import resourceStateBackup from './BackupState';
 
 export default module => {
   module.provider('ResourceStateConfiguration', ResourceStateConfiguration);

@@ -14,7 +14,8 @@ import { JupyterHubUserAdminMode } from '@waldur/ansible/jupyter-hub-management/
 import { validateSessionTimeoutHours } from '@waldur/ansible/jupyter-hub-management/validation';
 import { PythonManagementActionsHistory } from '@waldur/ansible/python-management/details/PythonManagementActionsHistory';
 import { VirtualEnvironmentsForm } from '@waldur/ansible/python-management/form/VirtualEnvironmentsForm';
-import { PureManagementStatesIndicator } from '@waldur/ansible/python-management/state-builder/ManagementStatesIndicator';
+import { buildStateIndicator } from '@waldur/ansible/python-management/state-builder/StateIndicatorBuilder';
+import { StateIndicator } from '@waldur/core/StateIndicator';
 import { FormContainer, StringField } from '@waldur/form-react';
 import { RadioButtonChoice, RadioButtonField } from '@waldur/form-react/RadioButtonField';
 import { translate } from '@waldur/i18n';
@@ -51,7 +52,7 @@ export class JupyterHubManagementDetailsForm extends React.Component<JupyterHubM
                       <div className="form-group">
                         <label className="control-label col-sm-2">{translate('State')}</label>
                         <div className="same-padding-as-control-label">
-                          <PureManagementStatesIndicator managementState={this.props.jupyterHubManagement.managementState}/>
+                          <StateIndicator {...buildStateIndicator(this.props.jupyterHubManagement.managementState)}/>
                         </div>
                       </div>
                       <div className="form-group">

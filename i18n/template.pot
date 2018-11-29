@@ -1799,6 +1799,7 @@ msgstr ""
 msgid "Enter date"
 msgstr ""
 
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Erred"
 msgstr ""
@@ -1919,8 +1920,13 @@ msgstr ""
 msgid "Excel"
 msgstr ""
 
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Executing"
+msgstr ""
+
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
+msgid "Execution Scheduled"
 msgstr ""
 
 #: src/quotas/quota-usage-bar-chart.js
@@ -3752,6 +3758,7 @@ msgstr ""
 msgid "OAuth2 type"
 msgstr ""
 
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/customer/popover/customer-popover.html
 #: src/experts/requests/details/expert-request-details-dialog.html
 #: src/project/project-dialog.html
@@ -4099,10 +4106,6 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Output log"
-msgstr ""
-
-#: src/ansible/python-management/state-builder/ManagementStatesIndicator.tsx
-msgid "Overall state of the service"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx

@@ -1,60 +1,26 @@
-import { STATE_READABLE_TEXT_MAPPING } from '@waldur/ansible/python-management/state-builder/RequestTypeReadableTextMappings';
-import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
-import { StateIndicator } from '@waldur/resource/state/types';
+import { StateIndicatorProps, StateVariant } from '@waldur/core/StateIndicator';
+import { translate } from '@waldur/i18n';
 
-interface PythonManagementRequestStateIndicatorBuilderMap {
-  [key: string]: (PythonManagementRequestState, tooltip: string) => StateIndicator;
-}
+import { ManagementRequestState } from '../types/ManagementRequestState';
 
-class CommonStateIndicatorBuilder {
+export const getLabel = (state: ManagementRequestState) => ({
+  [ManagementRequestState.OK]: translate('OK'),
+  [ManagementRequestState.ERRED]: translate('Erred'),
+  [ManagementRequestState.CREATION_SCHEDULED]: translate('Execution Scheduled'),
+  [ManagementRequestState.CREATING]: translate('Executing'),
+}[state]);
 
-  public buildStateIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicator => {
-    const buildingFunction = this.REQUEST_STATE_STATE_INDICATOR_MAPPER[requestState];
-    if (buildingFunction) {
-      return buildingFunction(requestState, tooltip);
-    } else {
-      return this.buildDefaultIndicator(requestState, tooltip);
-    }
-  }
+export const isActive = (state: ManagementRequestState) =>
+  [ManagementRequestState.CREATION_SCHEDULED, ManagementRequestState.CREATING].includes(state);
 
-  private buildOkStateIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicator => {
-    const stateIndicator = this.buildEmptyStateIndicator();
-    stateIndicator.className = 'progress-bar-primary';
-    stateIndicator.label = STATE_READABLE_TEXT_MAPPING[requestState];
-    stateIndicator.tooltip = tooltip;
-    return stateIndicator;
-  }
+export const getVariant = (state: ManagementRequestState): StateVariant =>
+  state === ManagementRequestState.ERRED ? 'danger' : 'primary';
 
-  private buildErredStateIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicator => {
-    const stateIndicator = this.buildEmptyStateIndicator();
-    stateIndicator.className = 'progress-bar-danger';
-    stateIndicator.label = STATE_READABLE_TEXT_MAPPING[requestState];
-    stateIndicator.tooltip = tooltip;
-    return stateIndicator;
-  }
-
-  private buildDefaultIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicator => {
-    const stateIndicator = this.buildEmptyStateIndicator();
-    stateIndicator.className = 'progress-bar-info';
-    stateIndicator.movementClassName = 'progress-striped active';
-    stateIndicator.label = STATE_READABLE_TEXT_MAPPING[requestState];
-    stateIndicator.tooltip = tooltip;
-    return stateIndicator;
-  }
-
-  private buildEmptyStateIndicator = (): StateIndicator => {
-    return {
-      className: '',
-      label: '',
-      tooltip: '',
-      movementClassName: '',
-    };
-  }
-
-  private REQUEST_STATE_STATE_INDICATOR_MAPPER: PythonManagementRequestStateIndicatorBuilderMap = {
-    [ManagementRequestState.OK]: this.buildOkStateIndicator,
-    [ManagementRequestState.ERRED]: this.buildErredStateIndicator,
+export const buildStateIndicator = (state: ManagementRequestState, tooltip?: string): StateIndicatorProps => {
+  return {
+    variant: getVariant(state),
+    label: getLabel(state),
+    active: isActive(state),
+    tooltip,
   };
-}
-
-export const commonStateIndicatorBuilder = new CommonStateIndicatorBuilder();
+};

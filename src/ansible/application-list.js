@@ -1,4 +1,4 @@
-import { APPLICAION_TYPE, APPSTORE_CATEGORY } from './constants';
+import { APPLICATION_TYPE, APPSTORE_CATEGORY } from './constants';
 
 const applicationList = {
   templateUrl: 'views/partials/filtered-list.html',
@@ -58,11 +58,11 @@ function ApplicationListController(
           title: gettext('Playbook'),
           render: row => {
             const applicationType = this.getApplicationType(row);
-            if (applicationType === APPLICAION_TYPE.PLAYBOOK_JOB) {
+            if (applicationType === APPLICATION_TYPE.PLAYBOOK_JOB) {
               return row.playbook_name;
-            } else if (applicationType === APPLICAION_TYPE.PYTHON_MANAGEMENT) {
+            } else if (applicationType === APPLICATION_TYPE.PYTHON_MANAGEMENT) {
               return $filter('translate')('Python Management');
-            } else if (applicationType === APPLICAION_TYPE.JUPYTER_HUB_MANAGEMENT) {
+            } else if (applicationType === APPLICATION_TYPE.JUPYTER_HUB_MANAGEMENT) {
               return $filter('translate')('JupyterHub Management');
             }
           }
@@ -72,8 +72,7 @@ function ApplicationListController(
           orderField: 'state',
           render: row => {
             const index = this.findIndexById(row);
-            const applicationType = this.getApplicationType(row);
-            return this.buildStateTag(index, applicationType);
+            return this.buildStateTag(index);
           }
         },
         {
@@ -86,9 +85,9 @@ function ApplicationListController(
       ];
     },
     buildStateTag: function (index, applicationType) {
-      if (applicationType === APPLICAION_TYPE.PLAYBOOK_JOB) {
+      if (applicationType === APPLICATION_TYPE.PLAYBOOK_JOB) {
         return `<ansible-job-state model="controller.list[${index}]"/>`;
-      } else if ([APPLICAION_TYPE.PYTHON_MANAGEMENT, APPLICAION_TYPE.JUPYTER_HUB_MANAGEMENT].includes(applicationType)) {
+      } else if ([APPLICATION_TYPE.PYTHON_MANAGEMENT, APPLICATION_TYPE.JUPYTER_HUB_MANAGEMENT].includes(applicationType)) {
         return `<python-management-state model="controller.list[${index}]"/>`;
       }
     },
@@ -102,17 +101,17 @@ function ApplicationListController(
       return row.name;
     },
     buildStateTransition: function (row, applicationType) {
-      if (applicationType === APPLICAION_TYPE.PLAYBOOK_JOB) {
+      if (applicationType === APPLICATION_TYPE.PLAYBOOK_JOB) {
         return $state.href('project.resources.ansible.details', {
           uuid: this.project.uuid,
           jobId: row.uuid
         });
-      } else if (applicationType === APPLICAION_TYPE.PYTHON_MANAGEMENT) {
+      } else if (applicationType === APPLICATION_TYPE.PYTHON_MANAGEMENT) {
         return $state.href('project.resources.pythonManagement.details', {
           uuid: this.project.uuid,
           pythonManagementUuid: row.uuid
         });
-      } else if (applicationType === APPLICAION_TYPE.JUPYTER_HUB_MANAGEMENT) {
+      } else if (applicationType === APPLICATION_TYPE.JUPYTER_HUB_MANAGEMENT) {
         return $state.href('project.resources.jupyterHubManagement.details', {
           uuid: this.project.uuid,
           jupyterHubManagementUuid: row.uuid
@@ -121,11 +120,11 @@ function ApplicationListController(
     },
     removeInstance: function(model) {
       const applicationType = this.getApplicationType(model);
-      if (applicationType === APPLICAION_TYPE.PLAYBOOK_JOB) {
+      if (applicationType === APPLICATION_TYPE.PLAYBOOK_JOB) {
         return AnsibleJobsService.$delete(model.jobId);
-      } else if (applicationType === APPLICAION_TYPE.PYTHON_MANAGEMENT) {
+      } else if (applicationType === APPLICATION_TYPE.PYTHON_MANAGEMENT) {
         return $http.delete(`${ENV.apiEndpoint}api/python-management/${model.uuid}/`);
-      } else if (applicationType === APPLICAION_TYPE.JUPYTER_HUB_MANAGEMENT) {
+      } else if (applicationType === APPLICATION_TYPE.JUPYTER_HUB_MANAGEMENT) {
         return $http.delete(`${ENV.apiEndpoint}api/jupyter-hub-management/${model.uuid}/`);
       }
     },
@@ -169,11 +168,11 @@ function ApplicationListController(
 
     getApplicationType(row) {
       if (row.type === 'python_management') {
-        return APPLICAION_TYPE.PYTHON_MANAGEMENT;
+        return APPLICATION_TYPE.PYTHON_MANAGEMENT;
       } else if (row.type === 'playbook_job') {
-        return APPLICAION_TYPE.PLAYBOOK_JOB;
+        return APPLICATION_TYPE.PLAYBOOK_JOB;
       } else {
-        return APPLICAION_TYPE.JUPYTER_HUB_MANAGEMENT;
+        return APPLICATION_TYPE.JUPYTER_HUB_MANAGEMENT;
       }
     }
   });

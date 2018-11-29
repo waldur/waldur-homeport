@@ -1,7 +1,7 @@
 import { ENV } from '@waldur/core/services';
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { ResourceState } from '@waldur/resource/state/types';
+import { ResourceState } from '@waldur/resource/types';
 
 import { ResourceAction, ActionField, ActionContext } from './types';
 
