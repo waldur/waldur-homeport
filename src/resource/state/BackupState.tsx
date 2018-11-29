@@ -15,11 +15,11 @@ const LABEL_CLASSES: {[key in BackupStateType]: StateVariant} = {
 interface BackupStateIndicatorProps {
   resource: {
     backup_state: BackupStateType;
-    last_backup: string;
+    last_backup?: string;
   };
 }
 
-export const BackupStateIndicator = (props: BackupStateIndicatorProps) => (
+export const BackupState = (props: BackupStateIndicatorProps) => (
   <StateIndicator
     label={props.resource.backup_state}
     variant={LABEL_CLASSES[props.resource.backup_state] || 'info'}
@@ -27,4 +27,4 @@ export const BackupStateIndicator = (props: BackupStateIndicatorProps) => (
   />
 );
 
-export default connectAngularComponent(BackupStateIndicator, ['resource']);
+export default connectAngularComponent(BackupState, ['resource']);

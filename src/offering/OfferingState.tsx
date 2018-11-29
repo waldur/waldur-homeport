@@ -7,7 +7,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import { Offering } from './types';
 
 interface OfferingStateProps extends TranslateProps {
-  offering: Offering;
+  offering: Pick<Offering, 'state'>;
 }
 
 export const PureOfferingState = (props: OfferingStateProps) => props.offering ? (

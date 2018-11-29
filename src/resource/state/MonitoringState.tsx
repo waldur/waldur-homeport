@@ -18,11 +18,11 @@ interface MonitoringStateIndicatorProps {
   };
 }
 
-export const MonitoringStateIndicator = (props: MonitoringStateIndicatorProps) => (
+export const MonitoringState = (props: MonitoringStateIndicatorProps) => (
   <StateIndicator
     label={props.resource.monitoring_state}
     variant={LABEL_CLASSES[props.resource.monitoring_state] || 'info'}
   />
 );
 
-export default connectAngularComponent(MonitoringStateIndicator, ['resource']);
+export default connectAngularComponent(MonitoringState, ['resource']);

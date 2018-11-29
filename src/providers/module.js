@@ -1,5 +1,5 @@
 import { getServiceIcon, getTypeDisplay } from './registry';
-import providerState from './provider-state';
+import providerState from './ProviderState';
 import providersList from './provider-list';
 import providerCreate from './ProviderCreateContainer';
 import providerSettings from './ProviderUpdateContainer';
