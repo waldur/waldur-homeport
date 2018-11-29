@@ -1,4 +1,7 @@
 import * as React from 'react';
+import * as Col from 'react-bootstrap/lib/Col';
+import * as Panel from 'react-bootstrap/lib/Panel';
+import * as Row from 'react-bootstrap/lib/Row';
 import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 
@@ -23,11 +26,35 @@ export const PureOfferingTabs = (props: OfferingTabsProps) => {
     url: props.offering.issue,
   };
   const showOracleReport = isOracleOffering(props.offering) && props.offering.report;
+  const Summary = showOracleReport ? (
+    <Row>
+      <Col md={6}>
+        <div className="m-b-md">
+          <OfferingSummaryTab offering={props.offering} summary={props.summary}/>
+        </div>
+        <Panel>
+          <Panel.Heading>
+            <Panel.Title>
+              {props.translate('Snapshots')}
+            </Panel.Title>
+          </Panel.Heading>
+          <Panel.Body>
+            <OracleSnapshots report={props.offering.report}/>
+          </Panel.Body>
+        </Panel>
+      </Col>
+      <Col md={6}>
+        <OracleReport report={props.offering.report}/>
+      </Col>
+    </Row>
+  ) : (
+    <OfferingSummaryTab offering={props.offering} summary={props.summary}/>
+  );
   return (
     <Tabs unmountOnExit={true} defaultActiveKey="summary" id="offeringSummary">
       <Tab title={props.translate('Summary')} eventKey="summary">
         <div className="m-t-sm">
-          <OfferingSummaryTab offering={props.offering} summary={props.summary}/>
+          {Summary}
         </div>
       </Tab>
       <Tab title={props.translate('Audit log')} eventKey="events">
@@ -39,20 +66,6 @@ export const PureOfferingTabs = (props: OfferingTabsProps) => {
         <Tab title={props.translate('Comments')} eventKey="comments">
           <div className="m-t-sm">
             <IssueCommentsContainer issue={issue} renderHeader={false}/>
-          </div>
-        </Tab>
-      )}
-      {showOracleReport && (
-        <Tab title={props.translate('Report')} eventKey="report">
-          <div className="m-t-sm">
-            <OracleReport report={props.offering.report}/>
-          </div>
-        </Tab>
-      )}
-      {showOracleReport && (
-        <Tab title={props.translate('Snapshots')} eventKey="snapshots">
-          <div className="m-t-sm">
-            <OracleSnapshots report={props.offering.report}/>}
           </div>
         </Tab>
       )}

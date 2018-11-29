@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Table from 'react-bootstrap/lib/Table';
 
 import { translate } from '@waldur/i18n';
 
@@ -18,7 +19,7 @@ export const OracleSnapshots = props => {
   }
   snapshots = parseTable(snapshots.body);
   return (
-    <table className="table">
+    <Table responsive={true}>
       <thead>
         <tr>
           <th>{translate('Name')}</th>
@@ -35,6 +36,6 @@ export const OracleSnapshots = props => {
           </tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   );
 };
