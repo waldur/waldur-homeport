@@ -12,6 +12,12 @@
       <div class="col-lg-12">
         <h2 translate>Request details</h2>
         <div class="pull-right">
+          <button
+            class="btn btn-default btn-sm"
+            ng-click="$ctrl.reInitResource($ctrl.offering)">
+            <i class="fa fa-refresh"></i>
+            <span translate>Refresh</span>
+          </button>
           <offering-report-button
             ng-if="$ctrl.showReportButton"
             offering="$ctrl.offering">
