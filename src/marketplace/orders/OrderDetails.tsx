@@ -104,7 +104,7 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
             )}
             <button
               type="button"
-              className="btn btn-default"
+              className="btn btn-default btn-sm m-l-sm"
               onClick={() => this.loadData()}
             >
               <i className="fa fa-refresh"/>
