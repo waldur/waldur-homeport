@@ -96,21 +96,21 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
             editable={false}
           />
           <div className="text-right">
-            {this.renderApproveButton() && (
-              <ApproveButton
-                submitting={this.props.stateChangeStatus.processing}
-                onClick={this.approveOrder}
-              />
-            )}
             <button
               type="button"
-              className="btn btn-default btn-sm m-l-sm"
+              className="btn btn-default btn-sm m-r-sm"
               onClick={() => this.loadData()}
             >
               <i className="fa fa-refresh"/>
               {' '}
               {this.props.translate('Refresh')}
             </button>
+            {this.renderApproveButton() && (
+              <ApproveButton
+                submitting={this.props.stateChangeStatus.processing}
+                onClick={this.approveOrder}
+              />
+            )}
           </div>
         </Col>
         <Col lg={4}>
