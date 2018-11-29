@@ -1,18 +1,18 @@
-import { Translate } from '@waldur/i18n/types';
+import { StateIndicatorProps } from '@waldur/core/StateIndicator';
+import { translate } from '@waldur/i18n';
 import { Resource } from '@waldur/resource/types';
 import { formatResourceType } from '@waldur/resource/utils';
 
 import { getStateMessages } from './constants';
-import { StateIndicator } from './types';
 
-export function getResourceState(resource: Resource, translate: Translate): StateIndicator {
+export function getResourceState(resource: Resource): StateIndicatorProps {
   const resourceType = formatResourceType(resource);
   const runtimeShutdownStates = ['SHUTOFF', 'STOPPED', 'SUSPENDED'];
   const runtimeErrorStates = ['ERROR', 'ERRED'];
   const state = resource.state && resource.state.toLowerCase();
   const runtimeState = resource.runtime_state && resource.runtime_state.toUpperCase();
   let messageSuffix = null;
-  const context: StateIndicator = {
+  const context: StateIndicatorProps = {
     variant: 'primary',
     label: '',
     tooltip: '',
@@ -34,7 +34,7 @@ export function getResourceState(resource: Resource, translate: Translate): Stat
       showRuntimeState = true;
     } else {
       const errorMessage = resource.service_settings_error_message;
-      context.variant = context.variant || 'warning';
+      context.variant = 'warning';
       context.tooltip = translate('Service settings of this resource are in state erred.');
       if (errorMessage) {
         messageSuffix = translate('error message: {errorMessage}', { errorMessage });

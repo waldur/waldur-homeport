@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import { RequestOutputRow } from '@waldur/ansible/python-management/details/RequestOutputRow';
-import { commonStateIndicatorBuilder } from '@waldur/ansible/python-management/state-builder/StateIndicatorBuilder';
+import { buildStateIndicator } from '@waldur/ansible/python-management/state-builder/StateIndicatorBuilder';
 import { ManagementRequest } from '@waldur/ansible/python-management/types/ManagementRequest';
 import { UnfoldedRequest } from '@waldur/ansible/python-management/types/UnfoldedRequest';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
-import { ResourceStateIndicator } from '@waldur/resource/state/ResourceState';
 
 interface PythonManagementDetailsActionsHistoryRowProps<R extends ManagementRequest<R>> {
   request: R;
@@ -26,8 +26,8 @@ export class PythonManagementActionHistoryRow<R extends ManagementRequest<R>>
             style={{cursor: 'pointer'}}>
           <td>{this.props.request.buildRequestTypeTooltip(this.props.request)}</td>
           <td>
-            <ResourceStateIndicator
-              {...commonStateIndicatorBuilder.buildStateIndicator(
+            <StateIndicator
+              {...buildStateIndicator(
                 this.props.request.requestState, this.props.request.buildReadableTooltip(this.props.request))}/>
           </td>
           <td>

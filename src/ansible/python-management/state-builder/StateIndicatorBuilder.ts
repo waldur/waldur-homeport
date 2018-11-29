@@ -1,60 +1,19 @@
-import { STATE_READABLE_TEXT_MAPPING } from '@waldur/ansible/python-management/state-builder/RequestTypeReadableTextMappings';
-import { ManagementRequestState } from '@waldur/ansible/python-management/types/ManagementRequestState';
-import { StateIndicator } from '@waldur/resource/state/types';
+import { StateIndicatorProps } from '@waldur/core/StateIndicator';
 
-interface PythonManagementRequestStateIndicatorBuilderMap {
-  [key: string]: (PythonManagementRequestState, tooltip: string) => StateIndicator;
-}
+import { ManagementRequestState } from '../types/ManagementRequestState';
 
-class CommonStateIndicatorBuilder {
+const LABELS: {[key in ManagementRequestState]: string} = {
+  [ManagementRequestState.OK]: 'OK',
+  [ManagementRequestState.ERRED]: 'Erred',
+  [ManagementRequestState.CREATION_SCHEDULED]: 'Execution Scheduled',
+  [ManagementRequestState.CREATING]: 'Executing',
+};
 
-  public buildStateIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicator => {
-    const buildingFunction = this.REQUEST_STATE_STATE_INDICATOR_MAPPER[requestState];
-    if (buildingFunction) {
-      return buildingFunction(requestState, tooltip);
-    } else {
-      return this.buildDefaultIndicator(requestState, tooltip);
-    }
-  }
-
-  private buildOkStateIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicator => {
-    const stateIndicator = this.buildEmptyStateIndicator();
-    stateIndicator.variant = 'primary';
-    stateIndicator.label = STATE_READABLE_TEXT_MAPPING[requestState];
-    stateIndicator.tooltip = tooltip;
-    return stateIndicator;
-  }
-
-  private buildErredStateIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicator => {
-    const stateIndicator = this.buildEmptyStateIndicator();
-    stateIndicator.variant = 'danger';
-    stateIndicator.label = STATE_READABLE_TEXT_MAPPING[requestState];
-    stateIndicator.tooltip = tooltip;
-    return stateIndicator;
-  }
-
-  private buildDefaultIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicator => {
-    const stateIndicator = this.buildEmptyStateIndicator();
-    stateIndicator.variant = 'info';
-    stateIndicator.active = true;
-    stateIndicator.label = STATE_READABLE_TEXT_MAPPING[requestState];
-    stateIndicator.tooltip = tooltip;
-    return stateIndicator;
-  }
-
-  private buildEmptyStateIndicator = (): StateIndicator => {
-    return {
-      variant: 'primary',
-      label: '',
-      tooltip: '',
-      active: false,
-    };
-  }
-
-  private REQUEST_STATE_STATE_INDICATOR_MAPPER: PythonManagementRequestStateIndicatorBuilderMap = {
-    [ManagementRequestState.OK]: this.buildOkStateIndicator,
-    [ManagementRequestState.ERRED]: this.buildErredStateIndicator,
+export const buildStateIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicatorProps => {
+  return {
+    variant: requestState === ManagementRequestState.ERRED ? 'danger' : 'primary',
+    label: LABELS[requestState],
+    active: requestState === ManagementRequestState.CREATION_SCHEDULED || requestState === ManagementRequestState.CREATING,
+    tooltip,
   };
-}
-
-export const commonStateIndicatorBuilder = new CommonStateIndicatorBuilder();
+};

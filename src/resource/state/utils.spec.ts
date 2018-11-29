@@ -1,4 +1,3 @@
-import { translate } from '@waldur/i18n';
 import '@waldur/openstack/provider';
 import { Resource } from '@waldur/resource/types';
 
@@ -12,7 +11,7 @@ describe('getResourceState', () => {
       runtime_state: 'ONLINE',
       service_settings_state: 'OK',
     };
-    expect(getResourceState(resource, translate)).toEqual({
+    expect(getResourceState(resource)).toEqual({
       variant: 'primary',
       label: 'ONLINE',
       active: false,
@@ -27,7 +26,7 @@ describe('getResourceState', () => {
       runtime_state: 'ONLINE',
       service_settings_state: 'OK',
     };
-    expect(getResourceState(resource, translate)).toEqual({
+    expect(getResourceState(resource)).toEqual({
       variant: 'warning',
       label: 'ONLINE',
       active: false,
@@ -42,7 +41,7 @@ describe('getResourceState', () => {
       runtime_state: 'ERROR',
       service_settings_state: 'OK',
     };
-    expect(getResourceState(resource, translate)).toEqual({
+    expect(getResourceState(resource)).toEqual({
       variant: 'danger',
       label: 'ERROR',
       active: false,
@@ -58,7 +57,7 @@ describe('getResourceState', () => {
       service_settings_state: 'ERRED',
       service_settings_error_message: 'Server does not respond.',
     };
-    expect(getResourceState(resource, translate)).toEqual({
+    expect(getResourceState(resource)).toEqual({
       variant: 'warning',
       label: 'ONLINE',
       active: false,
@@ -73,7 +72,7 @@ describe('getResourceState', () => {
       runtime_state: 'RESIZING',
       service_settings_state: 'OK',
     };
-    expect(getResourceState(resource, translate)).toEqual({
+    expect(getResourceState(resource)).toEqual({
       variant: 'primary',
       label: 'Updating',
       active: true,
@@ -90,7 +89,7 @@ describe('getResourceState', () => {
       action: 'change_flavor',
       action_details: {message: 'Changing flavor from small to large.'},
     };
-    expect(getResourceState(resource, translate)).toEqual({
+    expect(getResourceState(resource)).toEqual({
       variant: 'primary',
       label: 'Changing flavor',
       active: true,
