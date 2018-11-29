@@ -5054,6 +5054,7 @@ msgstr ""
 
 #: src/issues/list/issues-short-list.html
 #: src/issues/workspace/issues-activity-stream.html
+#: src/marketplace/orders/OrderDetails.tsx
 #: src/offering/offering-details.html
 #: src/resource/ResourceRefreshButton.tsx
 #: src/table-react/TableRefreshButton.tsx
