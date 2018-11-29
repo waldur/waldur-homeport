@@ -5214,10 +5214,6 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
-#: src/offering/OfferingTabs.tsx
-msgid "Report"
-msgstr ""
-
 #: src/offering/OfferingReportDialog.tsx
 msgid "Report details"
 msgstr ""
