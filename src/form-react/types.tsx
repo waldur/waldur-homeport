@@ -28,6 +28,4 @@ export interface SelectDialogFieldColumn {
   name: string;
   label: React.ReactNode;
   headerClass?: string;
-  priceTooltip?: boolean;
-  priceEstimated?: boolean;
 }
