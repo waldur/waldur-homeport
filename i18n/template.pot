@@ -1799,6 +1799,7 @@ msgstr ""
 msgid "Enter date"
 msgstr ""
 
+#: src/ansible/playbook-jobs/JobStateIndicator.tsx
 #: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Erred"
 msgstr ""
@@ -1919,8 +1920,13 @@ msgstr ""
 msgid "Excel"
 msgstr ""
 
+#: src/ansible/playbook-jobs/JobStateIndicator.tsx
 #: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Executing"
+msgstr ""
+
+#: src/ansible/playbook-jobs/JobStateIndicator.tsx
+msgid "Execution Scheduled"
 msgstr ""
 
 #: src/quotas/quota-usage-bar-chart.js
@@ -3752,6 +3758,7 @@ msgstr ""
 msgid "OAuth2 type"
 msgstr ""
 
+#: src/ansible/playbook-jobs/JobStateIndicator.tsx
 #: src/customer/popover/customer-popover.html
 #: src/experts/requests/details/expert-request-details-dialog.html
 #: src/project/project-dialog.html
