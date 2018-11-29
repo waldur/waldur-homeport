@@ -22,7 +22,6 @@ BuildRequires: libtool
 BuildRequires: make
 BuildRequires: nasm
 BuildRequires: nodejs
-BuildRequires: rubygem-sass
 
 %description
 Web interface for Waldur MasterMind cloud orchestrator.
