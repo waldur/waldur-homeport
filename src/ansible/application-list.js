@@ -84,8 +84,12 @@ function ApplicationListController(
         }
       ];
     },
-    buildStateTag: function (index) {
-      return `<ansible-job-state model="controller.list[${index}]"/>`;
+    buildStateTag: function (index, applicationType) {
+      if (applicationType === APPLICATION_TYPE.PLAYBOOK_JOB) {
+        return `<ansible-job-state model="controller.list[${index}]"/>`;
+      } else if ([APPLICATION_TYPE.PYTHON_MANAGEMENT, APPLICATION_TYPE.JUPYTER_HUB_MANAGEMENT].includes(applicationType)) {
+        return `<python-management-state model="controller.list[${index}]"/>`;
+      }
     },
     buildLinkTag: function (row) {
       const applicationType = this.getApplicationType(row);

@@ -1799,7 +1799,7 @@ msgstr ""
 msgid "Enter date"
 msgstr ""
 
-#: src/ansible/playbook-jobs/JobStateIndicator.tsx
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Erred"
 msgstr ""
@@ -1920,12 +1920,12 @@ msgstr ""
 msgid "Excel"
 msgstr ""
 
-#: src/ansible/playbook-jobs/JobStateIndicator.tsx
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Executing"
 msgstr ""
 
-#: src/ansible/playbook-jobs/JobStateIndicator.tsx
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 msgid "Execution Scheduled"
 msgstr ""
 
@@ -3758,7 +3758,7 @@ msgstr ""
 msgid "OAuth2 type"
 msgstr ""
 
-#: src/ansible/playbook-jobs/JobStateIndicator.tsx
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/customer/popover/customer-popover.html
 #: src/experts/requests/details/expert-request-details-dialog.html
 #: src/project/project-dialog.html

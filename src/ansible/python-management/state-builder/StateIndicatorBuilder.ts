@@ -1,19 +1,26 @@
-import { StateIndicatorProps } from '@waldur/core/StateIndicator';
+import { StateIndicatorProps, StateVariant } from '@waldur/core/StateIndicator';
+import { translate } from '@waldur/i18n';
 
 import { ManagementRequestState } from '../types/ManagementRequestState';
 
-const LABELS: {[key in ManagementRequestState]: string} = {
-  [ManagementRequestState.OK]: 'OK',
-  [ManagementRequestState.ERRED]: 'Erred',
-  [ManagementRequestState.CREATION_SCHEDULED]: 'Execution Scheduled',
-  [ManagementRequestState.CREATING]: 'Executing',
-};
+export const getLabel = (state: ManagementRequestState) => ({
+  [ManagementRequestState.OK]: translate('OK'),
+  [ManagementRequestState.ERRED]: translate('Erred'),
+  [ManagementRequestState.CREATION_SCHEDULED]: translate('Execution Scheduled'),
+  [ManagementRequestState.CREATING]: translate('Executing'),
+}[state]);
 
-export const buildStateIndicator = (requestState: ManagementRequestState, tooltip: string): StateIndicatorProps => {
+export const isActive = (state: ManagementRequestState) =>
+  [ManagementRequestState.CREATION_SCHEDULED, ManagementRequestState.CREATING].includes(state);
+
+export const getVariant = (state: ManagementRequestState): StateVariant =>
+  state === ManagementRequestState.ERRED ? 'danger' : 'primary';
+
+export const buildStateIndicator = (state: ManagementRequestState, tooltip: string): StateIndicatorProps => {
   return {
-    variant: requestState === ManagementRequestState.ERRED ? 'danger' : 'primary',
-    label: LABELS[requestState],
-    active: requestState === ManagementRequestState.CREATION_SCHEDULED || requestState === ManagementRequestState.CREATING,
+    variant: getVariant(state),
+    label: getLabel(state),
+    active: isActive(state),
     tooltip,
   };
 };
