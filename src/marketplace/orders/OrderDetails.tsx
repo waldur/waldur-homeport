@@ -1,4 +1,6 @@
 import * as React from 'react';
+import * as Col from 'react-bootstrap/lib/Col';
+import * as Row from 'react-bootstrap/lib/Row';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
@@ -86,28 +88,38 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
     }
 
     return (
-      <div className="row">
-        <div className="col-xl-9 col-lg-8">
+      <Row>
+        <Col lg={8}>
           <OrderSteps state={this.state.orderDetails.state} />
           <Order
             items={this.state.orderDetails.items}
             editable={false}
           />
           <div className="text-right">
-            {this.renderApproveButton() &&
+            {this.renderApproveButton() && (
               <ApproveButton
                 submitting={this.props.stateChangeStatus.processing}
-                onClick={this.approveOrder}/>
-            }
+                onClick={this.approveOrder}
+              />
+            )}
+            <button
+              type="button"
+              className="btn btn-default"
+              onClick={() => this.loadData()}
+            >
+              <i className="fa fa-refresh"/>
+              {' '}
+              {this.props.translate('Refresh')}
+            </button>
           </div>
-        </div>
-        <div className="col-xl-3 col-lg-4">
+        </Col>
+        <Col lg={4}>
           <OrderSummary
             total={this.state.orderDetails.total_cost}
             file={this.state.orderDetails.file}
           />
-        </div>
-      </div>
+        </Col>
+      </Row>
     );
   }
 }
