@@ -16,6 +16,6 @@ describe('ProviderState', () => {
 
   it('renders active class if action is pending', () => {
     const wrapper = render(<ProviderState provider={{state: 'Creation Scheduled'}}/>);
-    expect(wrapper.find('.progress-bar-primary .active').length).toBe(1);
+    expect(wrapper.find('.active').length).toBe(1);
   });
 });
