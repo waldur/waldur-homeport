@@ -5,7 +5,6 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
@@ -14,6 +13,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { ProjectCreateButton } from './ProjectCreateButton';
 import { ProjectDeleteButton } from './ProjectDeleteButton';
 import { ProjectDetailsButton } from './ProjectDetailsButton';
+import { ProjectExpandableRow } from './ProjectExpandableRow';
 
 const ProjectLink = ({ row }) => (
   <Link
@@ -23,23 +23,17 @@ const ProjectLink = ({ row }) => (
   />
 );
 
-const DescriptionField = ({ row }) => <span>{renderFieldOrDash(row.description)}</span>;
+const DescriptionField = ({ row }) =>
+  <span>{renderFieldOrDash(row.description)}</span>;
 
-const ProjectExpandableRow = () => (
-  <dl className="dl-horizontal m-t-sm">
-    <Field
-      label="Virtual machines"
-      value={1}
-    />
-    <Field
-      label="Volumes"
-      value={1}
-    />
-    <Field
-      label="Snapshots"
-      value={1}
-    />
-  </dl>
+const ProjectCostField = ({ row }) =>
+  defaultCurrency(row.billing_price_estimate && row.billing_price_estimate.total || 0);
+
+const ProjectActionsField = ({ row }) => (
+  <div className="btn-group">
+    <ProjectDetailsButton project={row}/>
+    <ProjectDeleteButton project={row}/>
+  </div>
 );
 
 export const TableComponent = props => {
@@ -62,16 +56,11 @@ export const TableComponent = props => {
     {
       title: translate('Estimated cost'),
       feature: 'projectCostDetails',
-      render: ({ row }) => defaultCurrency(row.billing_price_estimate && row.billing_price_estimate.total || 0),
+      render: ProjectCostField,
     },
     {
       title: translate('Actions'),
-      render: ({ row }) => (
-        <>
-          <ProjectDetailsButton project={row}/>
-          <ProjectDeleteButton project={row}/>
-        </>
-      ),
+      render: ProjectActionsField,
     },
   ]);
 

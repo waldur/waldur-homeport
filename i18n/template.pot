@@ -4674,6 +4674,10 @@ msgstr ""
 msgid "Project details"
 msgstr ""
 
+#: src/project/ProjectExpandableRow.tsx
+msgid "Project does not have any resources yet."
+msgstr ""
+
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/project/ProjectEventsFilter.tsx
 #: src/project/events.ts
