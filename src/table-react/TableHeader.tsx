@@ -5,10 +5,11 @@ import './TableHeader.scss';
 
 import { Column, Sorting } from './types';
 
-interface Props {
+interface TableHeaderProps {
   columns: Column[];
   onSortClick?(sorting: Sorting): void;
   currentSorting?: Sorting;
+  expandableRow?: React.ComponentType<{row: any}>;
 }
 
 function handleOrdering(currentSorting: Sorting, field: string): Sorting {
@@ -23,9 +24,12 @@ function handleOrdering(currentSorting: Sorting, field: string): Sorting {
   return {field, mode};
 }
 
-const TableHeader = ({ columns, onSortClick, currentSorting }: Props) => (
+const TableHeader = ({ columns, onSortClick, currentSorting, expandableRow }: TableHeaderProps) => (
   <thead>
     <tr>
+      {expandableRow && (
+        <th style={{width: '10px'}}/>
+      )}
       {columns.map((column, index) => (
         <th
           key={index}

@@ -15,7 +15,7 @@ import TableQuery from './TableQuery';
 import TableRefreshButton from './TableRefreshButton';
 import { Column, TableState, Sorting } from './types';
 
-interface Props extends TranslateProps, TableState {
+interface TableProps extends TranslateProps, TableState {
   rows: any[];
   fetch: () => void;
   gotoPage?: (page: number) => void;
@@ -30,9 +30,12 @@ interface Props extends TranslateProps, TableState {
   resetPagination?: () => void;
   sortList?(sorting: Sorting): void;
   initialSorting?: Sorting;
+  expandableRow?: React.ComponentType<{row: any}>;
+  toggleRow?(row: any): void;
+  toggled?: object;
 }
 
-class Table extends React.Component<Props> {
+class Table extends React.Component<TableProps> {
   static defaultProps = {
     rows: [],
     columns: [],
@@ -104,8 +107,15 @@ class Table extends React.Component<Props> {
             onSortClick={this.props.sortList}
             currentSorting={this.props.sorting}
             columns={this.props.columns}
+            expandableRow={this.props.expandableRow}
           />
-          <TableBody rows={this.props.rows} columns={this.props.columns}/>
+          <TableBody
+            rows={this.props.rows}
+            columns={this.props.columns}
+            expandableRow={this.props.expandableRow}
+            toggleRow={this.props.toggleRow}
+            toggled={this.props.toggled}
+          />
         </table>
       </>
     );
@@ -123,7 +133,7 @@ class Table extends React.Component<Props> {
     this.props.resetPagination();
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: TableProps) {
     if (prevProps.pagination.currentPage !== this.props.pagination.currentPage) {
       this.props.fetch();
     } else if (prevProps.pagination.pageSize !== this.props.pagination.pageSize) {
