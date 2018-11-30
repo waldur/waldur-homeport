@@ -1,4 +1,5 @@
-import { $http, $state, $rootScope, ENV } from '@waldur/core/services';
+import { deleteById } from '@waldur/core/api';
+import { $http, ENV } from '@waldur/core/services';
 
 export const createProject = project =>
   $http
@@ -17,6 +18,9 @@ export const updateProject = project =>
       description: project.description,
     });
 
+export const deleteProject = projectId =>
+  deleteById('/projects/', projectId);
+
 export const loadCertifications = () =>
   $http
     .get(`${ENV.apiEndpoint}api/service-certifications/`)
@@ -26,15 +30,6 @@ export const loadProjectTypes = () =>
   $http
     .get(`${ENV.apiEndpoint}api/project-types/`)
     .then(response => response.data);
-
-export const gotoProjectDetails = project =>
-  $state.go('project.details', {uuid: project.uuid});
-
-export const gotoProjectList = customer =>
-  $state.go('organization.projects', {uuid: customer.uuid});
-
-export const refreshProjectList = project =>
-  $rootScope.$broadcast('refreshProjectList', {project});
 
 export const dangerouslyUpdateProject = (cache, project) => {
   cache.name = project.name;

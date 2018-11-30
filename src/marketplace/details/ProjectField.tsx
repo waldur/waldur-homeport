@@ -2,10 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { ProjectCreateButton } from '@waldur/project/ProjectCreateButton';
 import { getWorkspace, getCustomer } from '@waldur/workspace/selectors';
 import { Project, OuterState } from '@waldur/workspace/types';
 
-import { ProjectCreateField } from './ProjectCreateField';
 import { ProjectSelectField } from './ProjectSelectField';
 
 const connector = connect<{projects?: Project[]}, {}, {}, OuterState>(state => {
@@ -33,7 +33,7 @@ const PureProjectField = props => props.projects ? (
             <ProjectSelectField projects={props.projects}/>
           </div>
         )}
-        <ProjectCreateField/>
+        <ProjectCreateButton/>
       </div>
       <div className="help-block m-b-none text-muted">
         {translate('The project will be changed for all items in cart.')}

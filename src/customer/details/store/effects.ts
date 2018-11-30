@@ -1,9 +1,8 @@
 import { SubmissionError, reset } from 'redux-form';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { $rootScope } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { showSuccess, showError } from '@waldur/store/coreSaga';
+import { showSuccess, showError, emitSignal } from '@waldur/store/coreSaga';
 
 import * as actions from './actions';
 import * as api from './api';
@@ -15,7 +14,7 @@ export function* uploadLogo(action) {
 
   try {
     yield call(api.uploadLogo, {customerUuid, image});
-    $rootScope.$broadcast('refreshCustomer');
+    yield put(emitSignal('refreshCustomer'));
     yield put(actions.uploadLogo.success());
     yield put(showSuccess(successMessage));
   } catch (error) {
@@ -36,7 +35,7 @@ export function* removeLogo(action) {
     yield put(reset('customerLogo'));
     if (customer.image) {
       yield call(api.removeLogo, {customerUuid: customer.uuid});
-      $rootScope.$broadcast('refreshCustomer');
+      yield put(emitSignal('refreshCustomer'));
       yield put(showSuccess(successMessage));
     }
   } catch (error) {
