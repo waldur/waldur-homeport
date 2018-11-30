@@ -69,7 +69,7 @@ function* handleProjectDelete(action) {
   const projectId = action.payload.project.uuid;
 
   try {
-    yield call(api.deleteProject(projectId));
+    yield call(api.deleteProject, projectId);
     yield put(deleteEntity('ProjectsList', projectId));
     yield put(showSuccess(successMessage));
   } catch (error) {
