@@ -103,7 +103,11 @@
       @media (max-width: 768px) {
         .erred-screen-message {
           font-size: 17px;
-          margin: auto 15px;
+          margin: 15px;
+        }
+
+        .erred-screen {
+          top: 15%;
         }
       }
       .erred-screen-icon {
@@ -115,6 +119,10 @@
     </div>
     <h1>Unable to bootstrap application.</h1>
     <p class="erred-screen-message"></p>
+    <button type="button" class="btn btn-success text-uppercase" onclick="location.reload()">
+      <i class="fa fa-refresh"></i>
+      Retry
+    </button>
   </div>
   <noscript>
     <div class="container">
