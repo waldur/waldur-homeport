@@ -5,6 +5,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
+import { Field } from '@waldur/resource/summary';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
@@ -23,6 +24,23 @@ const ProjectLink = ({ row }) => (
 );
 
 const DescriptionField = ({ row }) => <span>{renderFieldOrDash(row.description)}</span>;
+
+const ProjectExpandableRow = () => (
+  <dl className="dl-horizontal m-t-sm">
+    <Field
+      label="Virtual machines"
+      value={1}
+    />
+    <Field
+      label="Volumes"
+      value={1}
+    />
+    <Field
+      label="Snapshots"
+      value={1}
+    />
+  </dl>
+);
 
 export const TableComponent = props => {
   const { translate, filterColumns } = props;
@@ -65,6 +83,7 @@ export const TableComponent = props => {
       hasQuery={true}
       showPageSizeSelector={true}
       actions={<ProjectCreateButton/>}
+      expandableRow={ProjectExpandableRow}
     />
   );
 };
