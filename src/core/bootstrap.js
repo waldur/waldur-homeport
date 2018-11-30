@@ -8,6 +8,7 @@ const modes = {stableMode, experimentalMode};
 function renderError(details) {
   document.querySelector('.loading-screen').classList.add('hidden');
   document.querySelector('.erred-screen').classList.remove('hidden');
+  document.querySelector('#wrapper').remove();
   document.querySelector('.erred-screen-message').textContent = details;
 }
 
