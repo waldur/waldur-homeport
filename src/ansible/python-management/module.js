@@ -1,7 +1,7 @@
 import routes from './routes';
 import injectServices from './services';
 import registerAppstoreCategory from './appstore-category';
-import pythonManagementState from './python-management-state';
+import pythonManagementState from './RequestStateIndicator';
 import PythonManagementCreateContainer from './create/PythonManagementCreateContainer';
 import PythonManagementDetailsContainer from './details/PythonManagementDetailsContainer';
 

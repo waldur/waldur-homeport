@@ -25,7 +25,6 @@ module.exports = {
       'react-overlays',
       'react-redux',
       'react-select',
-      'react-bootstrap/lib/Accordion',
       'react-bootstrap/lib/Col',
       'react-bootstrap/lib/OverlayTrigger',
       'react-bootstrap/lib/Panel',

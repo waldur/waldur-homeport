@@ -58,9 +58,9 @@ export const combinePrices = (plan, limits, offering) => {
         const units = item.measured_unit;
         let amount = 0;
         if (item.billing_type === 'fixed') {
-          amount = plan.quotas[item.type];
+          amount = plan.quotas[item.type] || 0;
         } else if (limits && limits[item.type]) {
-          amount = limits[item.type];
+          amount = limits[item.type] || 0;
         }
         const type = item.type;
         const billing_type = item.billing_type;
@@ -70,7 +70,7 @@ export const combinePrices = (plan, limits, offering) => {
       });
     const usageComponents = components.filter(component => component.billing_type === 'usage');
     const total = parseFloat(plan.unit_price) + usageComponents.reduce((result, item) => result + item.subTotal, 0);
-    const totalPeriods = multipliers.map(mult => mult * total);
+    const totalPeriods = multipliers.map(mult => mult * total || 0);
     return {components, periods, total, totalPeriods};
   } else {
     return {components: [], periods: [], total: 0, totalPeriods: []};
@@ -88,10 +88,7 @@ const getPlan = (state, props) => {
 
 const getLimits = (state, props) => {
   if (props.viewMode) {
-    return props.orderItem.quotas.reduce((acc, quota) => {
-      acc[quota.type] = quota.limit;
-      return acc;
-    }, {});
+    return props.orderItem.limits;
   } else {
     return offeringSelector(state, 'limits');
   }

@@ -15,3 +15,17 @@ export interface FormField {
   hideLabel?: boolean;
   normalize?: Normalizer;
 }
+
+export interface SelectDialogFieldChoice {
+  url: string;
+  uuid: string;
+  name: string;
+  disabled?: boolean;
+  disabledReason?: string;
+}
+
+export interface SelectDialogFieldColumn {
+  name: string;
+  label: React.ReactNode;
+  headerClass?: string;
+}

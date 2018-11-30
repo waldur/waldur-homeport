@@ -1,19 +1,15 @@
 import * as React from 'react';
 
+import { translate } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
 
-import { OrderState } from './types';
-
-interface ShoppingCartStepsProps {
-  state: OrderState;
-}
-
-const STEPS = [
-  'Configure',
-  'Approve',
-  'Review',
-];
-
-export const ShoppingCartSteps = (props: ShoppingCartStepsProps) => (
-  <StepsList choices={STEPS} value={props.state}/>
+export const ShoppingCartSteps = () => (
+  <StepsList
+    choices={[
+      translate('Configure'),
+      translate('Approve'),
+      translate('Review'),
+    ]}
+    value={translate('Configure')}
+  />
 );

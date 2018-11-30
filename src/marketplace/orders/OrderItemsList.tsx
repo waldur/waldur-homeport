@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
-import { formatDate } from '@waldur/core/dateUtils';
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/OrderItemDetailsLink';
@@ -27,7 +27,7 @@ export const TableComponent = props => {
     },
     {
       title: translate('Created at'),
-      render: ({ row }) => formatDate(row.created),
+      render: ({ row }) => formatDateTime(row.created),
     },
     {
       title: translate('State'),

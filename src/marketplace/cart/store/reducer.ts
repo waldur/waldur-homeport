@@ -3,35 +3,66 @@ import * as constants from './constants';
 
 const INITIAL_STATE: State = {
   items: [],
-  state: 'Configure',
+  addingItem: false,
+  removingItem: false,
+  creatingOrder: false,
 };
 
 export const cartReducer = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
-    case constants.ADD_ITEM:
+    case constants.ADD_ITEM_REQUEST:
+      return {
+        ...state,
+        addingItem: true,
+      };
+    case constants.ADD_ITEM_ERROR:
+      return {
+        ...state,
+        addingItem: false,
+      };
+    case constants.ADD_ITEM_SUCCESS:
       return {
         ...state,
         items: [...state.items, payload.item],
+        addingItem: false,
       };
-    case constants.REMOVE_ITEM:
+    case constants.REMOVE_ITEM_REQUEST:
       return {
         ...state,
-        items: state.items.filter(item => item.offering.uuid !== payload.item.offering_uuid),
+        removingItem: true,
       };
-    case constants.SET_CART:
-      return {
-        ...payload.cart,
-      };
-    case constants.CLEAR_CART:
+    case constants.REMOVE_ITEM_ERROR:
       return {
         ...state,
+        removingItem: false,
+      };
+    case constants.REMOVE_ITEM_SUCCESS:
+      return {
+        ...state,
+        items: state.items.filter(item => item.uuid !== payload.uuid),
+        removingItem: false,
+      };
+    case constants.CREATE_ORDER_REQUEST:
+      return {
+        ...state,
+        creatingOrder: true,
+      };
+    case constants.CREATE_ORDER_SUCCESS:
+      return {
+        ...state,
+        creatingOrder: false,
         items: [],
       };
-    case constants.SET_STATE:
+    case constants.CREATE_ORDER_ERROR:
       return {
         ...state,
-        state: payload.state,
+        creatingOrder: false,
+      };
+    case constants.SET_ITEMS:
+      return {
+        ...state,
+        items: payload.items,
       };
     default:
       return state;

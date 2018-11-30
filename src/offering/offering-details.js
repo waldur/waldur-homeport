@@ -33,13 +33,13 @@ const offeringDetails = {
         .then(offering => {
           this.offering = offering;
           return this.projectsService.$get(offering.project_uuid).then(project => {
-            this.currentStateService.setProject(project);
             return { project };
           });
         })
         .then(({ project }) => {
           return this.customersService.$get(project.customer_uuid).then(customer => {
             this.currentStateService.setCustomer(customer);
+            this.currentStateService.setProject(project);
             return { customer, project };
           });
         })

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { TranslateProps } from '@waldur/i18n';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
 import { OrderItemDetailsField } from '@waldur/marketplace/orders/OrderItemDetailsField';
@@ -16,8 +16,11 @@ interface PlanDetailsProps extends TranslateProps {
 
 const renderValue = value => value ? value : <span>&mdash;</span>;
 
-export const PlanDetails = (props: PlanDetailsProps) => {
+export const PlanDetails = withTranslation((props: PlanDetailsProps) => {
   const { plan_name, plan_description } = props.orderItem;
+  if (!plan_name) {
+    return null;
+  }
   return (
     <>
       <OrderItemDetailsField>
@@ -28,15 +31,14 @@ export const PlanDetails = (props: PlanDetailsProps) => {
       <OrderItemDetailsField label={props.translate('Name')}>
         {renderValue(plan_name)}
       </OrderItemDetailsField>
+      {plan_description ? (
         <OrderItemDetailsField label={props.translate('Description')}>
-          {
-            plan_description ?
-              <PlanDescriptionButton
-                className="btn btn-sm btn-default"
-                planDescription={plan_description}
-              /> : <span>&mdash;</span>
-          }
+          <PlanDescriptionButton
+            className="btn btn-sm btn-default"
+            planDescription={plan_description}
+          />
         </OrderItemDetailsField>
+      ) : null}
       <OrderItemDetailsField>
         <PlanDetailsTable
           formGroupClassName="form-group row"
@@ -48,4 +50,4 @@ export const PlanDetails = (props: PlanDetailsProps) => {
       </OrderItemDetailsField>
     </>
   );
-};
+});

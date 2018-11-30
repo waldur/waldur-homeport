@@ -6,7 +6,7 @@
 
 Name: waldur-homeport
 Summary: Waldur HomePort
-Version: 3.1.7
+Version: 3.1.8
 Release: 1.el7
 License: MIT
 Source0: %{name}-%{version}.tar.gz
@@ -22,7 +22,6 @@ BuildRequires: libtool
 BuildRequires: make
 BuildRequires: nasm
 BuildRequires: nodejs
-BuildRequires: rubygem-sass
 
 %description
 Web interface for Waldur MasterMind cloud orchestrator.
@@ -62,6 +61,9 @@ rm -rf %{buildroot}
 %config(noreplace) %{__conf_dir}/nginx.conf
 
 %changelog
+* Fri Nov 30 2018 Jenkins <jenkins@opennodecloud.com> - 3.1.8-1.el7
+- New upstream release
+
 * Wed Nov 14 2018 Jenkins <jenkins@opennodecloud.com> - 3.1.7-1.el7
 - New upstream release
 

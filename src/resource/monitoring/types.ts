@@ -1,6 +1,6 @@
 import { IPromise } from 'angular';
 
-import { ResourceState } from '@waldur/resource/state/types';
+import { ResourceState } from '@waldur/resource/types';
 
 export interface ZabbixLink {
   name: string;

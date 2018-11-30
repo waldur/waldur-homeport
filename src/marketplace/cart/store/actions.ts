@@ -1,41 +1,59 @@
-import { Action } from '@waldur/core/reducerActions';
-import { OrderState } from '@waldur/marketplace/cart/types';
+import { OrderItemRequest } from '@waldur/marketplace/cart/types';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import * as constants from './constants';
 
-export const addItem = (item: OrderItemResponse): Action<{item}> => ({
-  type: constants.ADD_ITEM,
+export const addItemRequest = (item: OrderItemRequest) => ({
+  type: constants.ADD_ITEM_REQUEST,
   payload: {
     item,
   },
 });
 
-export const removeItem = (item: OrderItemResponse): Action<{item}> => ({
-  type: constants.REMOVE_ITEM,
+export const addItemSuccess = (item: OrderItemResponse) => ({
+  type: constants.ADD_ITEM_SUCCESS,
   payload: {
     item,
   },
 });
 
-export const setCart = cart => ({
-  type: constants.SET_CART,
+export const addItemError = () => ({
+  type: constants.ADD_ITEM_ERROR,
+});
+
+export const removeItemRequest = (uuid: string) => ({
+  type: constants.REMOVE_ITEM_REQUEST,
   payload: {
-    cart,
+    uuid,
   },
 });
 
-export const clearCart = () => ({
-  type: constants.CLEAR_CART,
-});
-
-export const setState = (state: OrderState): Action<{state}> => ({
-  type: constants.SET_STATE,
+export const removeItemSuccess = (uuid: string) => ({
+  type: constants.REMOVE_ITEM_SUCCESS,
   payload: {
-    state,
+    uuid,
   },
 });
 
-export const createOrder = () => ({
-  type: constants.CREATE_ORDER,
+export const removeItemError = () => ({
+  type: constants.REMOVE_ITEM_ERROR,
+});
+
+export const setItems = (items: OrderItemResponse[]) => ({
+  type: constants.SET_ITEMS,
+  payload: {
+    items,
+  },
+});
+
+export const createOrderRequest = () => ({
+  type: constants.CREATE_ORDER_REQUEST,
+});
+
+export const createOrderSuccess = () => ({
+  type: constants.CREATE_ORDER_SUCCESS,
+});
+
+export const createOrderError = () => ({
+  type: constants.CREATE_ORDER_ERROR,
 });

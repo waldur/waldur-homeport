@@ -160,6 +160,7 @@ msgid "Activity stream"
 msgstr ""
 
 #: src/issues/comments/IssueCommentsForm.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/team/add-project-member.js
@@ -188,6 +189,7 @@ msgstr ""
 msgid "Add component"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Add data volume"
 msgstr ""
@@ -359,7 +361,6 @@ msgid "All spaces, hyphens and dots will be replaced with underscores."
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
-#: src/slurm/SlurmPackageDetails.tsx
 msgid "Allocation description"
 msgstr ""
 
@@ -368,7 +369,6 @@ msgid "Allocation has been updated."
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
-#: src/slurm/SlurmPackageDetails.tsx
 #: src/slurm/slurm-allocation-checkout-summary.html
 #: src/slurm/slurm-allocation-config.js
 msgid "Allocation name"
@@ -413,7 +413,7 @@ msgstr ""
 msgid "Analytics"
 msgstr ""
 
-#: src/openstack/openstack-security-groups/filters.js
+#: src/openstack/openstack-security-groups/utils.ts
 msgid "Any"
 msgstr ""
 
@@ -463,6 +463,7 @@ msgstr ""
 msgid "Apply or rerun JupyterHub configuration"
 msgstr ""
 
+#: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/marketplace/orders/ApproveButton.tsx
 msgid "Approve"
 msgstr ""
@@ -548,9 +549,7 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
-#: src/offering/OfferingConfigurationDetails.tsx
-#: src/openstack/OpenStackPackageDetails.tsx
-#: src/slurm/SlurmPackageDetails.tsx
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
 msgid "Attributes"
 msgstr ""
 
@@ -591,9 +590,14 @@ msgstr ""
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.js
 #: src/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Auto-assign floating IP"
+msgstr ""
+
+#: src/openstack/OpenStackPackageDetails.tsx
+msgid "Auto-generated"
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx
@@ -648,6 +652,10 @@ msgstr ""
 #: src/issues/workspace/issue-navigation-service.js
 #: src/user/user-details.js
 msgid "Back to project"
+msgstr ""
+
+#: src/marketplace/cart/BackButton.tsx
+msgid "Back to shopping"
 msgstr ""
 
 #: src/openstack/openstack-snapshot/import/import-snapshots-list.js
@@ -869,6 +877,7 @@ msgstr ""
 #: src/experts/bids/create/expert-bid-create-dialog.html
 #: src/experts/bids/details/expert-bid-dialog.html
 #: src/experts/requests/create/expert-contract-create.html
+#: src/form/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
 #: src/invitations/actions/cancel.js
 #: src/invitations/actions/invitation-dialog.html
@@ -1088,13 +1097,12 @@ msgid "Component name"
 msgstr ""
 
 #: src/cost-planning/cost-plan-items.html
-#: src/offering/OfferingConfigurationDetails.tsx
-#: src/openstack/OpenStackPackageDetails.tsx
-#: src/slurm/SlurmPackageDetails.tsx
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
 msgid "Components"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.html
+#: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Configure"
 msgstr ""
@@ -1335,6 +1343,7 @@ msgstr ""
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/jira/project/jira-projects-list.js
+#: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -1347,6 +1356,7 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: src/invitations/invitations-list.js
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/ProjectResourcesList.tsx
@@ -1436,6 +1446,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Data volume size:"
 msgstr ""
@@ -1477,6 +1488,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-items.html
 #: src/experts/bids/details/expert-bid-details.html
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -1527,7 +1539,6 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
-#: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingSummaryTab.tsx
 #: src/offering/appstore-offering.js
@@ -1583,6 +1594,7 @@ msgstr ""
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/issues/create/issue-registration.html
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/project-details-button.html
 #: src/project/projects-list.js
@@ -1616,6 +1628,7 @@ msgstr ""
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Disable data volume"
 msgstr ""
@@ -1787,6 +1800,7 @@ msgstr ""
 msgid "Enter date"
 msgstr ""
 
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Erred"
 msgstr ""
@@ -1907,8 +1921,13 @@ msgstr ""
 msgid "Excel"
 msgstr ""
 
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Executing"
+msgstr ""
+
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
+msgid "Execution Scheduled"
 msgstr ""
 
 #: src/quotas/quota-usage-bar-chart.js
@@ -2406,6 +2425,7 @@ msgstr ""
 msgid "IP address"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/openstack/openstack-security-groups/security-group-rules-list.html
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
@@ -2590,6 +2610,7 @@ msgstr ""
 msgid "Instance does not have any floating IPs yet."
 msgstr ""
 
+#: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Instance does not have any security groups yet."
 msgstr ""
@@ -2834,6 +2855,14 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/orders/Order.tsx
 msgid "Item"
+msgstr ""
+
+#: src/marketplace/cart/store/effects.ts
+msgid "Item has been added to shopping cart."
+msgstr ""
+
+#: src/marketplace/cart/store/effects.ts
+msgid "Item has been removed from shopping cart."
 msgstr ""
 
 #: src/providers/details/provider-price-list.js
@@ -3300,7 +3329,6 @@ msgstr ""
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/orders/ProjectResourcesList.tsx
-#: src/offering/OfferingConfigurationDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/OracleSnapshots.tsx
@@ -3731,6 +3759,7 @@ msgstr ""
 msgid "OAuth2 type"
 msgstr ""
 
+#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/customer/popover/customer-popover.html
 #: src/experts/requests/details/expert-request-details-dialog.html
 #: src/project/project-dialog.html
@@ -3940,10 +3969,6 @@ msgstr ""
 msgid "Order item details"
 msgstr ""
 
-#: src/marketplace/cart/store/effects.ts
-msgid "Order item has been created."
-msgstr ""
-
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
@@ -4082,10 +4107,6 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Output log"
-msgstr ""
-
-#: src/ansible/python-management/state-builder/ManagementStatesIndicator.tsx
-msgid "Overall state of the service"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -4429,6 +4450,7 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-group-rules-list.html
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Port range"
@@ -4681,6 +4703,10 @@ msgstr ""
 
 #: src/project/projects-list.js
 msgid "Project has connected resources and can't be removed"
+msgstr ""
+
+#: src/marketplace/cart/store/effects.ts
+msgid "Project is not selected."
 msgstr ""
 
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -5028,6 +5054,8 @@ msgstr ""
 
 #: src/issues/list/issues-short-list.html
 #: src/issues/workspace/issues-activity-stream.html
+#: src/marketplace/orders/OrderDetails.tsx
+#: src/offering/offering-details.html
 #: src/resource/ResourceRefreshButton.tsx
 #: src/table-react/TableRefreshButton.tsx
 #: src/table/responsive-table.js
@@ -5136,6 +5164,7 @@ msgstr ""
 msgid "Remote CIDR"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Remote network"
 msgstr ""
@@ -5160,10 +5189,6 @@ msgstr ""
 #: src/ansible/application-list.js
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Remove application"
-msgstr ""
-
-#: src/marketplace/cart/ShoppingCartButton.tsx
-msgid "Remove from cart"
 msgstr ""
 
 #: src/marketplace/compare/OfferingCompareButton.tsx
@@ -5195,10 +5220,6 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
-#: src/offering/OfferingTabs.tsx
-msgid "Report"
-msgstr ""
-
 #: src/offering/OfferingReportDialog.tsx
 msgid "Report details"
 msgstr ""
@@ -5223,6 +5244,10 @@ msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "Request account removal for {userName}."
+msgstr ""
+
+#: src/marketplace/cart/ForwardButton.tsx
+msgid "Request an approval"
 msgstr ""
 
 #: src/experts/extensions/expert-request-create-button.html
@@ -5339,6 +5364,7 @@ msgid "Resend"
 msgstr ""
 
 #: src/form-react/ResetFormButton.tsx
+#: src/form/AppstoreListDialog.tsx
 msgid "Reset"
 msgstr ""
 
@@ -5359,6 +5385,10 @@ msgstr ""
 msgid "Resource"
 msgstr ""
 
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
+msgid "Resource UUID"
+msgstr ""
+
 #: src/events/EventDetailsTable.tsx
 msgid "Resource configuration"
 msgstr ""
@@ -5369,6 +5399,10 @@ msgstr ""
 
 #: src/analytics/resource-analysis-new.html
 msgid "Resource count in"
+msgstr ""
+
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
+msgid "Resource description"
 msgstr ""
 
 #: src/customer/workspace/CustomerEventsFilter.tsx
@@ -5404,6 +5438,10 @@ msgstr ""
 
 #: src/marketplace/orders/OrderItem.tsx
 msgid "Resource link"
+msgstr ""
+
+#: src/marketplace/orders/OrderItemDetailsHeader.tsx
+msgid "Resource name"
 msgstr ""
 
 #: src/resource/actions/base.ts
@@ -5483,6 +5521,10 @@ msgstr ""
 
 #: src/billing/events/invoice-events-dialog.html
 msgid "Retry"
+msgstr ""
+
+#: src/marketplace/cart/ShoppingCartSteps.tsx
+msgid "Review"
 msgstr ""
 
 #: src/invitations/actions/invitation-dialog.html
@@ -5648,6 +5690,7 @@ msgstr ""
 msgid "Security groups"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Security groups details"
 msgstr ""
@@ -5663,6 +5706,7 @@ msgstr ""
 
 #: src/appstore/dialog/appstore-category-selector.html
 #: src/appstore/providers/appstore-providers.js
+#: src/form/AppstoreListDialog.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Select"
 msgstr ""
@@ -5788,6 +5832,7 @@ msgstr ""
 msgid "Select state..."
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 msgid "Select subnet"
 msgstr ""
@@ -5922,7 +5967,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/marketplace/cart/CheckoutPage.tsx
+#: src/marketplace/cart/ShoppingCart.tsx
 msgid "Shopping cart is empty. You should add items to cart first."
 msgstr ""
 
@@ -5944,6 +5989,10 @@ msgstr ""
 
 #: src/dashboard/DashboardFeed.tsx
 msgid "Show all"
+msgstr ""
+
+#: src/form-react/SelectDialogField.tsx
+msgid "Show choices"
 msgstr ""
 
 #: src/billing/price-estimate-button.html
@@ -6027,6 +6076,7 @@ msgstr ""
 msgid "Skip connection to external network"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Skip floating IP assignment"
 msgstr ""
@@ -6058,7 +6108,6 @@ msgid "Snapshot size"
 msgstr ""
 
 #: src/offering/OfferingTabs.tsx
-#: src/offering/OracleSnapshots.tsx
 #: src/openstack/openstack-backup/tabs.js
 #: src/openstack/openstack-snapshot-schedule/module.js
 #: src/openstack/openstack-volume/module.js
@@ -6107,7 +6156,6 @@ msgstr ""
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/experts/requests/list/expert-request-project-list.js
-#: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrderItemsFilter.tsx
@@ -6354,7 +6402,6 @@ msgstr ""
 msgid "Tenant ID"
 msgstr ""
 
-#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "Tenant description"
 msgstr ""
@@ -6368,7 +6415,6 @@ msgid "Tenant has been updated."
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx
-#: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/actions/change-package-dialog.html
@@ -6711,15 +6757,16 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
-#: src/offering/OfferingConfigurationDetails.tsx
-#: src/openstack/OpenStackPackageDetails.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
-#: src/slurm/SlurmPackageDetails.tsx
 msgid "UUID"
 msgstr ""
 
 #: src/auth/auth-activation.js
 msgid "Unable to activate account."
+msgstr ""
+
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to add item to shopping cart."
 msgstr ""
 
 #: src/marketplace/orders/store/effects.ts
@@ -6765,10 +6812,6 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
-msgstr ""
-
-#: src/marketplace/cart/store/effects.ts
-msgid "Unable to create order."
 msgstr ""
 
 #: src/experts/bids/create/expert-bid-create-dialog.js
@@ -6857,6 +6900,10 @@ msgstr ""
 msgid "Unable to get service provider API secret code."
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to initialize shopping cart."
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsContainer.tsx
 msgid "Unable to load JupyterHub management details."
@@ -6864,10 +6911,6 @@ msgstr ""
 
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Unable to load Zabbix host details."
-msgstr ""
-
-#: src/core/bootstrap.js
-msgid "Unable to load application configuration. Please reload this page."
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterListContainer.tsx
@@ -6964,6 +7007,10 @@ msgstr ""
 msgid "Unable to register service provider."
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to remove item from shopping cart."
+msgstr ""
+
 #: src/customer/details/store/effects.ts
 msgid "Unable to remove logo."
 msgstr ""
@@ -6986,6 +7033,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to submit empty comment."
+msgstr ""
+
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to submit order."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts

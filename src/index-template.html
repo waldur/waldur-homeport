@@ -34,9 +34,6 @@
       }
       
       @media screen and (min-width: 769px){
-        .loading-title {
-          color: silver;
-        }
         .loading-title:after {
           color: #ffffff;
           animation: dots 1s steps(5, end) infinite;
@@ -93,6 +90,39 @@
     </style>
     <img src="/images/waldur/logo120x120.png" alt="Logo should be here">
     <h1 class="loading-title">Loading assets, please wait.</h1>
+  </div>
+  <div class="erred-screen center-block hidden">
+    <style>
+      .erred-screen {
+        position: relative;
+        top: 25%;
+        text-align: center;
+        color: #676a6c;
+        max-width: 500px;
+      }
+      @media (max-width: 768px) {
+        .erred-screen-message {
+          font-size: 17px;
+          margin: 15px;
+        }
+
+        .erred-screen {
+          top: 15%;
+        }
+      }
+      .erred-screen-icon {
+        font-size: 100pt;
+      }
+    </style>
+    <div class="erred-screen-icon">
+      <i class="fa fa-exclamation-triangle"></i>
+    </div>
+    <h1>Unable to bootstrap application.</h1>
+    <p class="erred-screen-message"></p>
+    <button type="button" class="btn btn-success text-uppercase" onclick="location.reload()">
+      <i class="fa fa-refresh"></i>
+      Retry
+    </button>
   </div>
   <noscript>
     <div class="container">

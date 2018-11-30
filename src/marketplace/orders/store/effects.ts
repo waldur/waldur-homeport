@@ -9,10 +9,10 @@ import * as actions from './actions';
 import * as constants from './constants';
 
 function* setOrderState(action) {
-  const { orderUuid, state } = action.payload;
+  const { orderUuid } = action.payload;
   try {
     yield put(actions.setOrderStateChangeStatus({processing: true}));
-    yield call(api.setOrderState, orderUuid, state);
+    yield call(api.approveOrder, orderUuid);
     yield put(showSuccess(translate('Order has been approved.')));
     yield put(actions.setOrderStateChangeStatus({processing: false, processed: true}));
   } catch (error) {
@@ -23,5 +23,5 @@ function* setOrderState(action) {
 }
 
 export default function*() {
-  yield takeEvery(constants.SET_ORDER_STATE, setOrderState);
+  yield takeEvery(constants.APPROVE_ORDER, setOrderState);
 }

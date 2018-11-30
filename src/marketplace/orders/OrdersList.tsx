@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { formatDate } from '@waldur/core/dateUtils';
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
@@ -19,7 +19,7 @@ export const TableComponent = props => {
         <Link
           state="marketplace-order-details"
           params={{ order_uuid: row.uuid }}
-          label={formatDate(row.created)}
+          label={formatDateTime(row.created)}
         />
       ),
       orderField: 'created',
@@ -35,7 +35,7 @@ export const TableComponent = props => {
     },
     {
       title: translate('Approved at'),
-      render: ({ row }) => row.approved_at ? formatDate(row.approved_at) : '\u2014',
+      render: ({ row }) => row.approved_at ? formatDateTime(row.approved_at) : '\u2014',
     },
     {
       title: translate('Approved by'),
@@ -55,6 +55,7 @@ export const TableComponent = props => {
       verboseName={translate('Orders')}
       hasQuery={true}
       showPageSizeSelector={true}
+      initialSorting={{field: 'created', mode: 'desc'}}
     />
   );
 };
@@ -64,10 +65,10 @@ const TableOptions = {
   fetchData: createFetcher('marketplace-orders'),
   mapPropsToFilter: props => ({project_uuid: props.project.uuid}),
   exportRow: row => [
-    formatDate(row.created),
+    formatDateTime(row.created),
     row.created_by_full_name ||  row.created_by_username,
     row.state,
-    row.approved_at ? formatDate(row.approved_at) : '\u2014',
+    row.approved_at ? formatDateTime(row.approved_at) : '\u2014',
     row.row.approved_by_full_name ||  row.approved_by_username || '\u2014',
     row.total_cost,
   ],

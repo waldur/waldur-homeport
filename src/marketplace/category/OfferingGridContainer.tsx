@@ -11,6 +11,8 @@ import { getAllOfferings } from '@waldur/marketplace/common/api';
 import { OfferingGrid } from '@waldur/marketplace/common/OfferingGrid';
 import { FilterQuery } from '@waldur/marketplace/offerings/types';
 import { Offering } from '@waldur/marketplace/types';
+import { getCustomer } from '@waldur/workspace/selectors';
+import { Customer } from '@waldur/workspace/types';
 
 import { selectFilterQuery } from './store/selectors';
 
@@ -22,6 +24,7 @@ interface OfferingGridWrapperState {
 
 interface OfferingGridWrapperProps extends TranslateProps {
   filterQuery: FilterQuery;
+  customer: Customer;
 }
 
 export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProps, OfferingGridWrapperState> {
@@ -63,6 +66,7 @@ export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProp
       params: {
         state: 'Active',
         category_uuid: $state.params.category_uuid,
+        allowed_customer_uuid: this.props.customer.uuid,
         ...filterQuery,
       },
     };
@@ -118,6 +122,7 @@ const mapStateToProps = state => ({
     name: selectFilterQuery(state),
     attributes: formatAttributesFilter(getFormValues(MARKETPLACE_FILTER_FORM)(state)),
   },
+  customer: getCustomer(state),
 });
 
 const enhance = compose(

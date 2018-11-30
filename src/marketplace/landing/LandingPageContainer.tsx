@@ -1,22 +1,23 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/landing/store/api';
 import { CategoriesListType, OfferingsListType } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
+import { getCustomer } from '@waldur/workspace/selectors';
+import { Customer } from '@waldur/workspace/types';
 
 import { LandingPage } from './LandingPage';
 import * as actions from './store/actions';
 import * as selectors from './store/selectors';
 
-interface LandingPageContainerProps extends TranslateProps {
+interface LandingPageContainerProps {
   getCategories: () => void;
   getOfferings: () => void;
   gotoOffering(offeringId: string): void;
   categories: CategoriesListType;
   offerings: OfferingsListType;
+  customer: Customer;
 }
 
 export class LandingPageContainer extends React.Component<LandingPageContainerProps> {
@@ -28,26 +29,27 @@ export class LandingPageContainer extends React.Component<LandingPageContainerPr
   render() {
     return (
       <LandingPage {...this.props}
-        loadOfferings={query => offeringsAutocomplete(query)}
+        loadOfferings={query => offeringsAutocomplete({
+          name: query,
+          allowed_customer_uuid: this.props.customer.uuid,
+        })}
       />
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  getCategories: () => dispatch(actions.categoriesFetchStart()),
-  getOfferings: () => dispatch(actions.offeringsFetchStart()),
-  gotoOffering: (offeringId: string) => dispatch(actions.gotoOffering(offeringId)),
-});
+const mapDispatchToProps = {
+  getCategories: actions.categoriesFetchStart,
+  getOfferings: actions.offeringsFetchStart,
+  gotoOffering: actions.gotoOffering,
+};
 
 const mapStateToProps = state => ({
+  customer: getCustomer(state),
   categories: selectors.getCategories(state),
   offerings: selectors.getOfferings(state),
 });
 
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export default connectAngularComponent(enhance(LandingPageContainer));

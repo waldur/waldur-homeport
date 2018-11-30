@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { formatDate } from '@waldur/core/dateUtils';
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { CategoryColumn } from '@waldur/marketplace/types';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
@@ -33,7 +33,7 @@ export const TableComponent = props => {
     },
     {
       title: translate('Created at'),
-      render: ({ row }) => formatDate(row.created),
+      render: ({ row }) => formatDateTime(row.created),
     },
     {
       title: translate('State'),
@@ -59,11 +59,10 @@ export const TableComponent = props => {
 
 const TableOptions = {
   table: 'ProjectResourcesList',
-  fetchData: createFetcher('marketplace-order-items'),
+  fetchData: createFetcher('marketplace-resources'),
   mapPropsToFilter: props => ({
     project_uuid: props.project.uuid,
     category_uuid: props.category_uuid,
-    state: 'done',
   }),
 };
 

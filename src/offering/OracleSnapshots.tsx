@@ -1,6 +1,6 @@
 import * as React from 'react';
+import * as Table from 'react-bootstrap/lib/Table';
 
-import Panel from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
 
 export const parseTable = raw =>
@@ -19,25 +19,23 @@ export const OracleSnapshots = props => {
   }
   snapshots = parseTable(snapshots.body);
   return (
-    <Panel title={translate('Snapshots')}>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>{translate('Name')}</th>
-            <th>{translate('Copy of')}</th>
-            <th>{translate('Creation time')}</th>
+    <Table responsive={true}>
+      <thead>
+        <tr>
+          <th>{translate('Name')}</th>
+          <th>{translate('Copy of')}</th>
+          <th>{translate('Creation time')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {snapshots.map((snapshot, index) => (
+          <tr key={index}>
+            <td>{snapshot.name}</td>
+            <td>{snapshot.source}</td>
+            <td>{snapshot.dt}</td>
           </tr>
-        </thead>
-        <tbody>
-          {snapshots.map((snapshot, index) => (
-            <tr key={index}>
-              <td>{snapshot.name}</td>
-              <td>{snapshot.source}</td>
-              <td>{snapshot.dt}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </Panel>
+        ))}
+      </tbody>
+    </Table>
   );
 };

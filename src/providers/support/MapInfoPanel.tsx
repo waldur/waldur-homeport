@@ -1,7 +1,14 @@
 import * as React from 'react';
 
-export const MapInfoPanel = ({data, onPanelClose, translate}) => {
-  return (
+import { withTranslation, TranslateProps } from '@waldur/i18n';
+
+interface MapInfoPanelProps extends TranslateProps {
+  onPanelClose(): void;
+  data: any;
+}
+
+export const MapInfoPanel = withTranslation(({ data, onPanelClose, translate }: MapInfoPanelProps) => (
+  <div id="flow-map-panel">
     <div className="ibox">
       <div className="ibox-title">
           <h5>{translate('Provider')}</h5>
@@ -47,5 +54,5 @@ export const MapInfoPanel = ({data, onPanelClose, translate}) => {
         );
       })}
     </div>
-  );
-};
+  </div>
+));

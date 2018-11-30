@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
-import { OrderItemRequest } from '@waldur/marketplace/cart/types';
+import { OrderItemRequest, OuterState } from '@waldur/marketplace/cart/types';
 
 import { ShoppingCartButton } from './ShoppingCartButton';
-import { addItem, removeItem } from './store/actions';
-import { hasItem } from './store/selectors';
+import { addItemRequest } from './store/actions';
+import { isAddingItem } from './store/selectors';
 
 interface OwnProps {
   item: OrderItemRequest;
@@ -12,26 +13,18 @@ interface OwnProps {
   disabled?: boolean;
 }
 
-interface StateProps {
-  inCart: boolean;
-}
-
 interface DispatchProps {
   addItem(): void;
-  removeItem(): void;
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  inCart: hasItem(state, ownProps.item),
+const mapStateToProps = (state: OuterState, ownProps: OwnProps) => ({
+  disabled: ownProps.disabled || isAddingItem(state),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    addItem: () => dispatch(addItem(ownProps.item)),
-    removeItem: () => dispatch(removeItem(ownProps.item)),
-  };
-};
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => ({
+  addItem: () => dispatch(addItemRequest(ownProps.item)),
+});
 
-const enhance = connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps);
+const enhance = connect<{}, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps);
 
 export const ShoppingCartButtonContainer = enhance(ShoppingCartButton);

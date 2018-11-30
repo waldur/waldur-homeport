@@ -28,12 +28,7 @@ export const LandingPage = withTranslation((props: LandingPageProps) => (
         onChange={(offering: any) => props.gotoOffering(offering.uuid)}
       />
     </HeroSection>
-    <div className="row">
-      <CategoriesList
-        translate={props.translate}
-        {...props.categories}
-      />
-    </div>
+    <CategoriesList {...props.categories}/>
     <h2 className="m-b-md">
       {props.translate('Recent additions')}
     </h2>

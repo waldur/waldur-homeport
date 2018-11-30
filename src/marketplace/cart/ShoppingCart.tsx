@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
@@ -6,15 +7,18 @@ import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import './ShoppingCart.scss';
 import { ShoppingCartItem } from './ShoppingCartItem';
+import * as actions from './store/actions';
+import { getMaxUnit, getItems, isRemovingItem } from './store/selectors';
+import { OuterState } from './types';
 
 interface ShoppingCartProps {
   items: OrderItemResponse[];
   maxUnit: 'month' | 'day';
-  editable: boolean;
-  onShoppingCartItemRemove?(item: OrderItemResponse): void;
+  removeItem(uuid: string): void;
+  isRemovingItem: boolean;
 }
 
-export const ShoppingCart = (props: ShoppingCartProps) => (
+const PureShoppingCart = (props: ShoppingCartProps) => props.items.length > 0 ? (
   <div className="table-responsive shopping-cart">
     <table className="table">
       <thead>
@@ -23,8 +27,7 @@ export const ShoppingCart = (props: ShoppingCartProps) => (
           <th className="text-center">
             <BillingPeriod unit={props.maxUnit}/>
           </th>
-          {!props.editable && <th className="text-center">{translate('State')}</th>}
-          {props.editable && <th className="text-center">{translate('Actions')}</th>}
+          <th className="text-center">{translate('Actions')}</th>
         </tr>
       </thead>
       <tbody>
@@ -32,11 +35,29 @@ export const ShoppingCart = (props: ShoppingCartProps) => (
           <ShoppingCartItem
             key={index}
             item={item}
-            editable={props.editable}
-            onRemove={() => props.onShoppingCartItemRemove(item)}
+            onRemove={() => props.removeItem(item.uuid)}
+            isRemovingItem={props.isRemovingItem}
           />
         ))}
       </tbody>
     </table>
   </div>
+) : (
+  <p className="text-center">
+    {translate('Shopping cart is empty. You should add items to cart first.')}
+  </p>
 );
+
+const mapStateToProps = (state: OuterState) => ({
+  items: getItems(state),
+  maxUnit: getMaxUnit(state),
+  isRemovingItem: isRemovingItem(state),
+});
+
+const mapDispatchToProps = {
+  removeItem: actions.removeItemRequest,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export const ShoppingCart = connector(PureShoppingCart) as React.ComponentClass<{}>;
