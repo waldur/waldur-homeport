@@ -21,6 +21,7 @@ describe('Table reducer', () => {
         field: null,
         loading: false,
       },
+      toggled: {},
     });
   });
 
