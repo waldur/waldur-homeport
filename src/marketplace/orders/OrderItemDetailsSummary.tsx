@@ -12,7 +12,7 @@ import { Customer, Project } from '@waldur/workspace/types';
 
 const PureOrderItemDetailsSummary: React.SFC<OrderSummaryProps> = (props: OrderSummaryProps) => (
   <>
-    <OfferingLogo src={props.offering.thumbnail} className="img-lg"/>
+    <OfferingLogo src={props.offering.thumbnail}/>
     <SummaryTable {...props}/>
   </>
 );
