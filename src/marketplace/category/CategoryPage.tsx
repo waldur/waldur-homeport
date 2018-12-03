@@ -5,7 +5,7 @@ import MediaQuery from 'react-responsive';
 
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import AttributeFilterListContainer from './filters/AttributeFilterListContainer';
+import { AttributeFilterListContainer } from './filters/AttributeFilterListContainer';
 import { FilterBarContainer } from './filters/FilterBarContainer';
 import { MobileFilterActions } from './filters/MobileFilterActions';
 import { OfferingGridContainer } from './OfferingGridContainer';
