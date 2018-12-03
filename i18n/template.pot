@@ -6499,7 +6499,7 @@ msgstr ""
 msgid "There are no categories in marketplace yet."
 msgstr ""
 
-#: src/marketplace/category/filters/AttributeFilterListContainer.tsx
+#: src/marketplace/category/filters/AttributeFilterList.tsx
 msgid "There are no category sections yet."
 msgstr ""
 
@@ -6913,7 +6913,7 @@ msgstr ""
 msgid "Unable to load Zabbix host details."
 msgstr ""
 
-#: src/marketplace/category/filters/AttributeFilterListContainer.tsx
+#: src/marketplace/category/filters/AttributeFilterList.tsx
 msgid "Unable to load category sections."
 msgstr ""
 

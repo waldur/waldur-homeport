@@ -1,133 +1,79 @@
+import debounce from 'lodash.debounce';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { getFormValues } from 'redux-form';
+import { reset } from 'redux-form';
 
 import { $state } from '@waldur/core/services';
-import { withTranslation } from '@waldur/i18n';
-import { TranslateProps } from '@waldur/i18n';
-import { MARKETPLACE_FILTER_FORM } from '@waldur/marketplace/category/store/constants';
-import { getAllOfferings } from '@waldur/marketplace/common/api';
-import { OfferingGrid } from '@waldur/marketplace/common/OfferingGrid';
-import { FilterQuery } from '@waldur/marketplace/offerings/types';
-import { Offering } from '@waldur/marketplace/types';
-import { getCustomer } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
 
-import { selectFilterQuery } from './store/selectors';
+import { OfferingGrid } from '../common/OfferingGrid';
+import * as actions from '../landing/store/actions';
+import { Offering } from '../types';
+import { loadOfferingsStart, loadDataStart } from './store/actions';
+import { MARKETPLACE_FILTER_FORM } from './store/constants';
+import { getOfferings, isOfferingsLoading, isOfferingsLoaded, getFilterAttributes, getFilterName } from './store/selectors';
 
-interface OfferingGridWrapperState {
+const mapStateToProps = state => ({
+  items: getOfferings(state),
+  loading: isOfferingsLoading(state),
+  loaded: isOfferingsLoaded(state),
+  filterCategory: $state.params.category_uuid,
+  filterAttributes: getFilterAttributes(state),
+  filterName: getFilterName(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadCategories: () => dispatch(loadDataStart()),
+  getCategories: () => dispatch(actions.categoriesFetchStart()),
+  resetForm: () => dispatch(reset(MARKETPLACE_FILTER_FORM)),
+  loadOfferings: () => dispatch(loadOfferingsStart()),
+});
+
+interface OfferingGridWrapperProps {
+  filterCategory: string;
+  filterName: string;
+  filterAttributes: object;
   items: Offering[];
   loading: boolean;
   loaded: boolean;
+  loadCategories: () => void;
+  getCategories: () => void;
+  resetForm: () => void;
+  loadOfferings: () => void;
 }
 
-interface OfferingGridWrapperProps extends TranslateProps {
-  filterQuery: FilterQuery;
-  customer: Customer;
-}
-
-export class OfferingGridWrapper extends React.Component<OfferingGridWrapperProps, OfferingGridWrapperState> {
-  state = {
-    items: [],
-    loading: true,
-    loaded: false,
-  };
-
-  componentDidUpdate(prevProps) {
-    if (this.filterQueryHasDiff(prevProps)) {
-      this.loadData(this.props.filterQuery);
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.filterQueryHasDiff(nextProps)) {
-      return true;
-    }
-    if (this.state !== nextState) {
-      return true;
-    }
-    return false;
-  }
-
-  filterQueryHasDiff = prevProps => {
-    if (prevProps.filterQuery.name !== this.props.filterQuery.name
-      || prevProps.filterQuery.attributes !== this.props.filterQuery.attributes) {
-        return true;
-      }
-  }
-
+class OfferingGridWrapper extends React.Component<OfferingGridWrapperProps> {
   componentDidMount() {
-    this.loadData();
+    this.props.getCategories();
+    this.props.loadCategories();
+    this.loadOfferings();
   }
 
-  async loadData(filterQuery?) {
-    const options = {
-      params: {
-        state: 'Active',
-        category_uuid: $state.params.category_uuid,
-        allowed_customer_uuid: this.props.customer.uuid,
-        ...filterQuery,
-      },
-    };
-    try {
-      this.setState({
-        loading: true,
-      });
-      const offerings = await getAllOfferings(options);
-      this.setState({
-        items: offerings,
-        loading: false,
-        loaded: true,
-      });
-    } catch {
-      this.setState({
-        items: [],
-        loading: false,
-        loaded: false,
-      });
+  loadOfferings = debounce(() => this.props.loadOfferings(), 100);
+
+  componentDidUpdate(prevProps: OfferingGridWrapperProps) {
+    if (this.props.filterCategory !== prevProps.filterCategory) {
+      if (this.props.filterAttributes && Object.keys(this.props.filterAttributes).length > 0) {
+        this.props.resetForm();
+      }
+    } else if (this.props.filterAttributes !== prevProps.filterAttributes) {
+      this.loadOfferings();
+    } else if (this.props.filterName !== prevProps.filterName) {
+      this.loadOfferings();
     }
   }
 
   render() {
-    return <OfferingGrid {...this.state} width={4}/>;
+    return (
+      <OfferingGrid
+        width={4}
+        items={this.props.items}
+        loading={this.props.loading}
+        loaded={this.props.loaded}
+      />
+    );
   }
 }
 
-export const formatAttributesFilter = query => {
-  if (query) {
-    const formattedQuery = {};
-    Object.keys(query).forEach(key => {
-      const attributeType = key.split('-')[0];
-      const attributeKey = key.split('-')[1];
-      const queryKey = query[key];
-      if (attributeType === 'list') {
-        if (Object.keys(formattedQuery).indexOf(attributeKey) === -1) {
-          formattedQuery[attributeKey] = [queryKey];
-        } else {
-          formattedQuery[attributeKey].push(queryKey);
-        }
-      } else if (attributeType === 'boolean') {
-        formattedQuery[attributeKey] = JSON.parse(queryKey);
-      } else {
-        formattedQuery[attributeKey] = queryKey;
-      }
-    });
-    return formattedQuery;
-  }
-};
-
-const mapStateToProps = state => ({
-  filterQuery: {
-    name: selectFilterQuery(state),
-    attributes: formatAttributesFilter(getFormValues(MARKETPLACE_FILTER_FORM)(state)),
-  },
-  customer: getCustomer(state),
-});
-
-const enhance = compose(
-  connect(mapStateToProps),
-  withTranslation,
-);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export const OfferingGridContainer = enhance(OfferingGridWrapper);

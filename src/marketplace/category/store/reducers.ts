@@ -47,3 +47,37 @@ export const categoryReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+
+export const categoryOfferingsReducer = (state = {items: []}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+
+    case constants.LOAD_OFFERINGS_START:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+        erred: false,
+      };
+
+    case constants.LOAD_OFFERINGS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        erred: false,
+        items: payload.items,
+      };
+
+    case constants.LOAD_OFFERINGS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        erred: true,
+      };
+
+    default:
+      return state;
+  }
+};

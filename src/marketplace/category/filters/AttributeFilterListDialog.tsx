@@ -7,7 +7,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { MARKETPLACE_FILTER_FORM } from '../store/constants';
-import AttributeFilterListContainer from './AttributeFilterListContainer';
+import { AttributeFilterListContainer } from './AttributeFilterListContainer';
 
 const PureAttributeFilterListDialog = (props: TranslateProps) => (
   <ModalDialog title={props.translate('Attributes filter')}
