@@ -1,9 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AngularGetTextPlugin = require('./angular-gettext-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const utils = require('./webpack.utils');
 
 const scssPath = path.resolve('./src/');
@@ -40,7 +40,7 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
+        loader: 'ts-loader'
       },
       {
         test: /\.html$/,
@@ -55,36 +55,32 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            utils.isProd ? 'css-loader': 'css-loader?sourceMap',
-            utils.isProd ? 'postcss-loader': 'postcss-loader?sourceMap',
-            utils.isProd ? 'sass-loader?includePaths[]=' + scssPath : 'sass-loader?sourceMap&includePaths[]=' + scssPath,
-          ]
-        }),
+        use: [
+          utils.isProd ? 'style-loader' : MiniCssExtractPlugin.loader,
+          utils.isProd ? 'css-loader': 'css-loader?sourceMap',
+          utils.isProd ? 'postcss-loader': 'postcss-loader?sourceMap',
+          utils.isProd ? 'sass-loader?includePaths[]=' + scssPath : 'sass-loader?sourceMap&includePaths[]=' + scssPath,
+        ]
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: utils.isProd ? 'css-loader' : 'css-loader?sourcemap',
-        })
+        use: [
+          utils.isProd ? 'style-loader' : MiniCssExtractPlugin.loader,
+          utils.isProd ? 'css-loader' : 'css-loader?sourcemap',
+        ],
       },
       {
         test: /\.font\.js/,
-        loader: ExtractTextPlugin.extract({
-          use: [
-            'css-loader',
-            {
-              loader: 'webfonts-loader',
-              options: {
-                embed: utils.isProd,
-              },
+        use: [
+          utils.isProd ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'webfonts-loader',
+            options: {
+              embed: utils.isProd,
             },
-          ],
-          fallback: 'style-loader',
-        })
+          },
+        ],
       },
       {
         test: /\.(eot|svg|otf|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?/,
@@ -134,7 +130,7 @@ module.exports = {
         return (a.names[0] < b.names[0]) ? 1 : -1;
       }
     }),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: 'css/[name]-bundle.css?[contenthash]'
     }),
     // Moment locales extraction

@@ -6,7 +6,7 @@ const target = 'build.dll';
 module.exports = {
   entry: {
     vendor: [
-      'babel-polyfill',
+      '@babel/polyfill',
       'raven-js',
       'lodash',
       'jquery',
@@ -85,7 +85,7 @@ module.exports = {
       // Temporary workaround for Angular UI router and React Bootstrap integration
       {
         test: /SafeAnchor\.js$/,
-        loader: 'awesome-typescript-loader'
+        loader: 'ts-loader'
       },
     ],
   },

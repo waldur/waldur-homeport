@@ -11,6 +11,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const utils = require('./webpack.utils');
 
 module.exports = merge(baseConfig, {
+  mode: 'development',
   plugins: [
     new webpack.DllReferencePlugin({
       context: path.resolve('.'),
