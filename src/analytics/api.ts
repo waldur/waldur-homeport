@@ -21,7 +21,6 @@ export const loadServiceProviders = () => getList('/service-settings/', {
   type: 'OpenStackTenant',
 });
 
-export const fetchTenants = (customerName: string) => getList('/openstack-tenants/', {
-  // tslint:disable-next-line
-  customer_name: customerName,
+export const fetchTenants = (customerId: string) => getList('/openstack-tenants/', {
+  customer_uuid: customerId,
 });

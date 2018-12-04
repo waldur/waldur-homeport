@@ -26,7 +26,7 @@ export function* analyticsProjectsFetch() {
 export function* analyticsTenantsFetch() {
   const customer = yield select(getCustomer);
   try {
-    const tenants = yield call(api.fetchTenants, customer.name);
+    const tenants = yield call(api.fetchTenants, customer.uuid);
     yield put(actions.analyticsTenantsFetchSuccess(tenants));
     return tenants;
   } catch (error) {
