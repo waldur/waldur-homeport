@@ -36,7 +36,7 @@ interface Permission {
   role: string;
 }
 
-interface Quota {
+export interface Quota {
   name: string;
   usage: number;
 }

@@ -13,7 +13,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { ProjectCreateButton } from './ProjectCreateButton';
 import { ProjectDeleteButton } from './ProjectDeleteButton';
 import { ProjectDetailsButton } from './ProjectDetailsButton';
-import { ProjectExpandableRow } from './ProjectExpandableRow';
+import { ProjectExpandableRowContainer } from './ProjectExpandableRowContainer';
 
 const ProjectLink = ({ row }) => (
   <Link
@@ -69,7 +69,7 @@ export const TableComponent = props => {
       hasQuery={true}
       showPageSizeSelector={true}
       actions={<ProjectCreateButton/>}
-      expandableRow={ProjectExpandableRow}
+      expandableRow={ProjectExpandableRowContainer}
     />
   );
 };
