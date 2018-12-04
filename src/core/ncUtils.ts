@@ -55,7 +55,7 @@ function mergeLists(list1, list2, fieldIdentifier) {
   list2 = list2 || [];
   fieldIdentifier = fieldIdentifier || 'uuid';
   const itemByUuid = {};
-  const newListUiids = list2.map(item => {
+  const newListUuids = list2.map(item => {
     return item[fieldIdentifier];
   });
   for (const item of list1) {
@@ -64,7 +64,7 @@ function mergeLists(list1, list2, fieldIdentifier) {
 
   // Remove stale items
   list1 = list1.filter(item => {
-    return newListUiids.indexOf(item[fieldIdentifier]) !== -1;
+    return newListUuids.indexOf(item[fieldIdentifier]) !== -1;
   });
 
   // Add or update remaining items
