@@ -7,7 +7,7 @@ import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { renderFieldOrDash, formatLongText } from '@waldur/table-react/utils';
+import { formatLongText } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ProjectCreateButton } from './ProjectCreateButton';
