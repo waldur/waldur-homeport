@@ -216,4 +216,15 @@ describe('Table reducer', () => {
     });
     expect(state.users.sorting).toEqual(expected);
   });
+
+  it('should handle toggleRow action', () => {
+    const state = reducer({}, {
+      type: actions.TOGGLE_ROW,
+      payload: {
+        table: 'users',
+        row: 10,
+      },
+    });
+    expect(state.users.toggled).toEqual({10: true});
+  });
 });

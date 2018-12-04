@@ -20,7 +20,7 @@ const TableCells = ({ row, columns }) => (
   </>
 );
 
-const TableBody = ({ rows, columns, expandableRow, toggleRow, toggled }: TableBodyProps) => (
+export const TableBody = ({ rows, columns, expandableRow, toggleRow, toggled }: TableBodyProps) => (
   <tbody>
     {rows.map((row, rowIndex) => (
       <React.Fragment key={rowIndex}>
@@ -47,5 +47,3 @@ const TableBody = ({ rows, columns, expandableRow, toggleRow, toggled }: TableBo
     ))}
   </tbody>
 );
-
-export default TableBody;

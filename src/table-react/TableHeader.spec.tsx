@@ -1,109 +1,32 @@
-import { shallow } from 'enzyme';
-import * as React from 'react';
-
-import TableHeader from './TableHeader';
-
-import { renderFieldOrDash } from './utils';
-
-const FullNameField = ({ row }) => (
-  <span>{renderFieldOrDash(row.full_name)}</span>
-);
-
-const EmailField = ({ row }) => (
-  <span>{renderFieldOrDash(row.email)}</span>
-);
-
-const PhoneNumberField = ({ row }) => (
-  <span>{renderFieldOrDash(row.phone_number)}</span>
-);
-
-const renderWrapper = props => shallow(
-  <TableHeader
-    columns={props.columns}
-    currentSorting={props.currentSorting}/>);
+import { renderWrapper, ORDERED_COLUMNS, UNORDERED_COLUMNS } from './TableHeader.fixture';
 
 describe('TableHeader', () => {
-  it('should render TableHeader with sorting icons where required', () => {
+  it('should render sorting icon when column specifies order field', () => {
     const currentSorting = {mode: '', field: null};
-    const columns = [
-      {
-        title: 'Full name',
-        render: FullNameField,
-      },
-      {
-        title: 'Email',
-        render: EmailField,
-        orderField: 'email',
-      },
-      {
-        title: 'Phone number',
-        render: PhoneNumberField,
-        orderField: 'phone_number',
-      },
-    ];
-    const wrapper = renderWrapper({columns, currentSorting});
+    const wrapper = renderWrapper(ORDERED_COLUMNS, currentSorting);
     expect(wrapper.find('.fa-sort').length).toBe(2);
   });
 
-  it('should render TableHeader without sorting icons at all', () => {
+  it('should not render sorting icon if there are no columns with order field', () => {
     const currentSorting = {mode: '', field: null};
-    const columns = [
-      {
-        title: 'Full name',
-        render: FullNameField,
-      },
-      {
-        title: 'Email',
-        render: EmailField,
-      },
-      {
-        title: 'Phone number',
-        render: PhoneNumberField,
-      },
-    ];
-    const wrapper = renderWrapper({columns, currentSorting});
+    const wrapper = renderWrapper(UNORDERED_COLUMNS, currentSorting);
     expect(wrapper.find('.fa-sort').length).toBe(0);
   });
 
-  it('should render TableHeader with ascending sorting icon for the column', () => {
+  it('should render ascending sorting icon according to state', () => {
     const currentSorting = {mode: 'asc', field: 'phone_number'};
-    const columns = [
-      {
-        title: 'Full name',
-        render: FullNameField,
-      },
-      {
-        title: 'Email',
-        render: EmailField,
-      },
-      {
-        title: 'Phone number',
-        render: PhoneNumberField,
-        orderField: 'phone_number',
-      },
-    ];
-    const wrapper = renderWrapper({columns, currentSorting});
+    const wrapper = renderWrapper(ORDERED_COLUMNS, currentSorting);
     expect(wrapper.find('.fa-sort-asc').length).toBe(1);
   });
 
-  it('should render TableHeader with descending sorting icon for the column', () => {
-      const currentSorting = {mode: 'desc', field: 'phone_number'};
-      const columns = [
-          {
-              title: 'Full name',
-              render: FullNameField,
-          },
-          {
-              title: 'Email',
-              render: EmailField,
-          },
-          {
-              title: 'Phone number',
-              render: PhoneNumberField,
-              orderField: 'phone_number',
-          },
-      ];
-      const wrapper = renderWrapper({columns, currentSorting});
-      expect(wrapper.find('.fa-sort-desc').length).toBe(1);
+  it('should render descending sorting icon according to state', () => {
+    const currentSorting = {mode: 'desc', field: 'phone_number'};
+    const wrapper = renderWrapper(ORDERED_COLUMNS, currentSorting);
+    expect(wrapper.find('.fa-sort-desc').length).toBe(1);
+  });
+
+  it('should render column for expandable indicator if header has expandable row', () => {
+    const wrapper = renderWrapper(UNORDERED_COLUMNS, undefined, true);
+    expect(wrapper.find('th').length).toBe(UNORDERED_COLUMNS.length + 1);
   });
 });

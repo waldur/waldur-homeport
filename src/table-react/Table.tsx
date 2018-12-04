@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TranslateProps } from '@waldur/i18n/types';
-import { TablePageSize } from '@waldur/table-react/TablePageSize';
 
 import './Table.scss';
-import TableBody from './TableBody';
+import { TableBody } from './TableBody';
 import TableButtons from './TableButtons';
-import TableHeader from './TableHeader';
+import { TableHeader } from './TableHeader';
 import TableInfo from './TableInfo';
+import { TablePageSize } from './TablePageSize';
 import TablePagination from './TablePagination';
 import TablePlaceholder from './TablePlaceholder';
 import TableQuery from './TableQuery';
@@ -107,7 +107,7 @@ class Table extends React.Component<TableProps> {
             onSortClick={this.props.sortList}
             currentSorting={this.props.sorting}
             columns={this.props.columns}
-            expandableRow={this.props.expandableRow}
+            expandableRow={!!this.props.expandableRow}
           />
           <TableBody
             rows={this.props.rows}

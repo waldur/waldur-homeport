@@ -137,7 +137,7 @@ export const sortListDone = (table: string) => ({
   },
 });
 
-export const toggleRow = (table: string, row: any) => ({
+export const toggleRow = (table: string, row: string | number) => ({
   type: TOGGLE_ROW,
   payload: {
     table,
