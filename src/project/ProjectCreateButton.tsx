@@ -13,7 +13,7 @@ const PureProjectCreateButton = props => (
     title={translate('Add project')}
     action={props.gotoProjectCreate}
     tooltip={props.tooltip}
-    icon={'fa fa-plus'}
+    icon="fa fa-plus"
     disabled={props.disabled}
   />
 );

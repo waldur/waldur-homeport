@@ -13,7 +13,7 @@ const CustomerCreateButton = ({ isVisible, onClick, translate }) => (
     <ActionButton
       title={translate('Add organization')}
       action={onClick}
-      icon={'fa fa-plus'}/>
+      icon="fa fa-plus"/>
   ) : null
 );
 

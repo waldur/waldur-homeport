@@ -12,7 +12,7 @@ const PureJiraIssueCreateButton = props => {
     <ActionButton
       title={translate('Create request')}
       action={onClick}
-      icon={'fa fa-plus'}/>
+      icon="fa fa-plus"/>
   );
 };
 
