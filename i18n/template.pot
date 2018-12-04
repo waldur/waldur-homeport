@@ -7589,6 +7589,11 @@ msgstr ""
 msgid "We are sorry you had a bad experience. Tell us what happend?"
 msgstr ""
 
+#: src/customer/create/customer-create-config.js
+#: src/marketplace/service-providers/CustomerDetailsTable.tsx
+msgid "Website URL"
+msgstr ""
+
 #: src/auth/auth-init.js
 #: src/auth/auth-login.js
 msgid "Welcome to {pageTitle}!"
