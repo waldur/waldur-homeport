@@ -60,6 +60,7 @@ export default ENV => [
     name: gettext('Billing'),
     title: gettext('Billing details'),
     icon: 'fa-sitemap',
+    hidden: ENV.hideOrganizationBillingStep,
     fields: [
       {
         name: 'registration_code',

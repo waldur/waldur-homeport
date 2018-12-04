@@ -5,8 +5,7 @@ import { sendForm } from '@waldur/core/api';
 
 export default class CustomerCreateService {
   // @ngInject
-  constructor(features, expertsService, customerPermissionsService, usersService, providersService, ENV) {
-    this.features = features;
+  constructor(expertsService, customerPermissionsService, usersService, providersService, ENV) {
     this.expertsService = expertsService;
     this.customerPermissionsService = customerPermissionsService;
     this.usersService = usersService;
@@ -15,8 +14,7 @@ export default class CustomerCreateService {
   }
 
   getSteps() {
-    const steps = wizardStepsConfig(this.ENV);
-    return steps.filter(step => !step.feature || this.features.isVisible(step.feature));
+    return wizardStepsConfig(this.ENV).filter(step => !step.hidden);
   }
 
   createCustomer(model) {
