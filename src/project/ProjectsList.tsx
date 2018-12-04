@@ -7,7 +7,7 @@ import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { renderFieldOrDash } from '@waldur/table-react/utils';
+import { renderFieldOrDash, formatLongText } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ProjectCreateButton } from './ProjectCreateButton';
@@ -22,9 +22,6 @@ const ProjectLink = ({ row }) => (
     label={row.name}
   />
 );
-
-const DescriptionField = ({ row }) =>
-  <span>{renderFieldOrDash(row.description)}</span>;
 
 const ProjectCostField = ({ row }) =>
   defaultCurrency(row.billing_price_estimate && row.billing_price_estimate.total || 0);
@@ -46,7 +43,7 @@ export const TableComponent = props => {
     },
     {
       title: translate('Description'),
-      render: DescriptionField,
+      render: ({ row }) => formatLongText(row.description),
     },
     {
       title: translate('Created'),
