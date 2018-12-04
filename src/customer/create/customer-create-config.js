@@ -44,6 +44,11 @@ export default ENV => [
         label: gettext('Contact phone'),
       },
       {
+        name: 'homepage',
+        type: 'string',
+        label: gettext('Website URL'),
+      },
+      {
         name: 'image',
         type: 'file',
         label: gettext('Logo'),

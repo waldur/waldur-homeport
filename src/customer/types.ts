@@ -24,6 +24,7 @@ export interface Customer {
   phone_number?: PhoneNumber;
   postal?: string;
   registration_code?: string;
+  homepage?: string;
   type?: string;
   vat_code?: string;
   image?: string;
