@@ -36,11 +36,17 @@ interface Permission {
   role: string;
 }
 
+export interface Quota {
+  name: string;
+  usage: number;
+}
+
 export interface Project {
   name: string;
   uuid: string;
   url: string;
   permissions: Permission[];
+  quotas: Quota[];
 }
 
 export type WorkspaceType = 'user' | 'project' | 'organization' | 'support';

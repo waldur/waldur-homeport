@@ -18,6 +18,7 @@ const INITIAL_STATE: TableState = {
     field: null,
     loading: false,
   },
+  toggled: {},
 };
 
 const pagination = (state = INITIAL_STATE, action): TableState => {
@@ -137,6 +138,15 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         sorting: {
           ...state.sorting,
           loading: false,
+        },
+      };
+
+    case actions.TOGGLE_ROW:
+      return {
+        ...state,
+        toggled: {
+          ...state.toggled,
+          [action.payload.row]: !state.toggled[action.payload.row],
         },
       };
 

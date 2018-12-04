@@ -137,6 +137,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/paypal/paypal-invoice-actions.html
+#: src/project/ProjectsList.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
 #: src/user/support/UserList.tsx
@@ -245,9 +246,8 @@ msgid "Add private cloud"
 msgstr ""
 
 #: src/appstore/dialog/appstore-project-selector.html
-#: src/marketplace/details/ProjectCreateField.tsx
+#: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
-#: src/project/projects-list.js
 msgid "Add project"
 msgstr ""
 
@@ -405,7 +405,7 @@ msgstr ""
 msgid "An error occurred on policies update."
 msgstr ""
 
-#: src/project/projects-list.js
+#: src/project/effects.ts
 msgid "An error occurred on project removal."
 msgstr ""
 
@@ -481,7 +481,6 @@ msgid "Approved by"
 msgstr ""
 
 #: src/customer/CustomerList.tsx
-#: src/project/projects-list.js
 msgid "Apps"
 msgstr ""
 
@@ -1346,6 +1345,7 @@ msgstr ""
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
+#: src/project/ProjectsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "Created"
@@ -1395,7 +1395,6 @@ msgstr ""
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/experts/requests/list/expert-request-project-list.js
 #: src/offering/offerings-list.js
-#: src/project/projects-list.js
 msgid "Creation date"
 msgstr ""
 
@@ -1492,6 +1491,7 @@ msgstr ""
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
+#: src/project/ProjectDeleteButton.tsx
 msgid "Delete"
 msgstr ""
 
@@ -1551,7 +1551,7 @@ msgstr ""
 #: src/openstack/openstack-volume/openstack-volume-config.js
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
-#: src/project/projects-list.js
+#: src/project/ProjectsList.tsx
 #: src/resource-import/import-virtual-clouds-list.js
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -1596,8 +1596,8 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
+#: src/project/ProjectDetailsButton.tsx
 #: src/project/project-details-button.html
-#: src/project/projects-list.js
 #: src/providers/details/dialog.html
 #: src/providers/provider-list.js
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
@@ -1815,7 +1815,7 @@ msgid "Esimated price per month"
 msgstr ""
 
 #: src/customer/CustomerList.tsx
-#: src/project/projects-list.js
+#: src/project/ProjectsList.tsx
 msgid "Estimated cost"
 msgstr ""
 
@@ -3346,7 +3346,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/openstack-subnets-list.js
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/project/ProjectDetails.tsx
-#: src/project/projects-list.js
+#: src/project/ProjectsList.tsx
 #: src/providers/details/provider-details.html
 #: src/providers/provider-list.js
 #: src/resource-import/import-virtual-clouds-list.js
@@ -3589,10 +3589,6 @@ msgstr ""
 
 #: src/team/customer-users-list.js
 msgid "No projects are assigned to this role."
-msgstr ""
-
-#: src/project/projects-list.js
-msgid "No projects found matching filter."
 msgstr ""
 
 #: src/providers/provider-list.js
@@ -4623,7 +4619,6 @@ msgstr ""
 #: src/customer/CustomerList.tsx
 #: src/dashboard/base-quotas.ts
 #: src/project/project-workspace.js
-#: src/project/projects-list.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Private clouds"
@@ -4679,6 +4674,10 @@ msgstr ""
 msgid "Project details"
 msgstr ""
 
+#: src/project/ProjectExpandableRow.tsx
+msgid "Project does not have any resources yet."
+msgstr ""
+
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/project/ProjectEventsFilter.tsx
 #: src/project/events.ts
@@ -4689,7 +4688,7 @@ msgstr ""
 msgid "Project has been created."
 msgstr ""
 
-#: src/project/projects-list.js
+#: src/project/effects.ts
 msgid "Project has been removed successfully."
 msgstr ""
 
@@ -4699,10 +4698,6 @@ msgstr ""
 
 #: src/project/effects.ts
 msgid "Project has been updated."
-msgstr ""
-
-#: src/project/projects-list.js
-msgid "Project has connected resources and can't be removed"
 msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
@@ -4961,7 +4956,7 @@ msgid "Quantity"
 msgstr ""
 
 #: src/error/routes.js
-#: src/project/projects-list.js
+#: src/project/ProjectCreateButton.tsx
 #: src/providers/provider-list.js
 #: src/resource-import/utils.js
 #: src/resource/resource-provision-policy.js
@@ -5173,7 +5168,6 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
-#: src/project/projects-list.js
 #: src/providers/provider-list.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
@@ -6221,7 +6215,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: src/project/project-workspace.js
-#: src/project/projects-list.js
 #: src/project/routes.js
 #: src/quotas/constants.js
 #: src/resource/breadcrumbs/resource-categories.js
@@ -7422,7 +7415,6 @@ msgid "VM type overview"
 msgstr ""
 
 #: src/customer/CustomerList.tsx
-#: src/project/projects-list.js
 msgid "VMs"
 msgstr ""
 
@@ -7695,7 +7687,8 @@ msgstr ""
 msgid "You don't have enough permissions to edit settings for <strong>{name}</strong> provider."
 msgstr ""
 
-#: src/project/projects-list.js
+#: src/project/ProjectCreateButton.tsx
+#: src/project/ProjectDeleteButton.tsx
 msgid "You don't have enough privileges to perform this operation."
 msgstr ""
 
@@ -7722,10 +7715,6 @@ msgstr ""
 
 #: src/resource/list/resource-private-clouds-list.js
 msgid "You have no private clouds yet."
-msgstr ""
-
-#: src/project/projects-list.js
-msgid "You have no projects yet."
 msgstr ""
 
 #: src/quotas/quotas-table.html
@@ -7938,6 +7927,7 @@ msgstr ""
 msgid "owner"
 msgstr ""
 
+#: src/project/ProjectsList.tsx
 #: src/user/list/ProjectPermissions.tsx
 msgid "projects"
 msgstr ""

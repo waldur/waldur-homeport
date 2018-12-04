@@ -5,22 +5,20 @@ function getPrettyQuotaName(name) {
   return name.replace(/nc_|_count/g, '').replace(/_/g, ' ');
 }
 
-function isCustomerQuotaReached(customer, quotaName) {
-  let quotas = customer.quotas || [];
-  for (let i = 0; i < quotas.length; i++) {
-    let value = quotas[i];
-    let name = this.getPrettyQuotaName(value.name);
-    if (name === quotaName && value.limit > -1 && (value.limit === value.usage || value.limit === 0)) {
-      return {name: name, usage: [value.limit, value.usage]};
+export function isCustomerQuotaReached(customer, quotaName) {
+  const quotas = customer.quotas || [];
+  for (const quota of quotas) {
+    const name = getPrettyQuotaName(quota.name);
+    if (name === quotaName && quota.limit > -1 && (quota.limit === quota.usage || quota.limit === 0)) {
+      return {name, usage: [quota.limit, quota.usage]};
     }
   }
   return false;
 }
 
-function getQuotaUsage(quotas) {
-  let usage = {};
-  for (let i = 0; i < quotas.length; i++) {
-    let quota = quotas[i];
+export function getQuotaUsage(quotas) {
+  const usage = {};
+  for (const quota of quotas) {
     usage[quota.name] = Math.max(0, quota.usage);
   }
   return usage;
@@ -30,8 +28,8 @@ function getQueryString() {
   // Example input: http://example.com/#/approve/?foo=123&bar=456
   // Example output: foo=123&bar=456
 
-  let hash = document.location.hash;
-  let parts = hash.split('?');
+  const hash = document.location.hash;
+  const parts = hash.split('?');
   if (parts.length > 1) {
     return parts[1];
   }
@@ -56,45 +54,41 @@ function mergeLists(list1, list2, fieldIdentifier) {
   list1 = list1 || [];
   list2 = list2 || [];
   fieldIdentifier = fieldIdentifier || 'uuid';
-  let itemByUuid = {},
-    newListUiids = list2.map(function(item) {
-      return item[fieldIdentifier];
-    });
-  for (let i = 0; i < list1.length; i++) {
-    let item = list1[i];
+  const itemByUuid = {};
+  const newListUuids = list2.map(item => {
+    return item[fieldIdentifier];
+  });
+  for (const item of list1) {
     itemByUuid[item[fieldIdentifier]] = item;
   }
 
   // Remove stale items
-  list1 = list1.filter(function(item) {
-    return newListUiids.indexOf(item[fieldIdentifier]) !== -1;
+  list1 = list1.filter(item => {
+    return newListUuids.indexOf(item[fieldIdentifier]) !== -1;
   });
 
   // Add or update remaining items
-  for (let i = 0; i < list2.length; i++) {
-    let item2 = list2[i];
-    let item1 = itemByUuid[item2[fieldIdentifier]];
+  for (const item2 of list2) {
+    const item1 = itemByUuid[item2[fieldIdentifier]];
     if (!item1) {
       list1.push(item2);
       continue;
     }
-    for (let key in item2) {
-      item2.hasOwnProperty(key) && (item1[key] = item2[key]);
+    for (const key in item2) {
+      if (item2.hasOwnProperty(key)) {
+        item1[key] = item2[key];
+      }
     }
   }
   return list1;
 }
 
 function sortObj(obj, order) {
-  let i,
-    tempArry = Object.keys(obj),
-    tempObj = {};
+  let i;
+  const tempArry = Object.keys(obj);
+  const tempObj = {};
 
-  tempArry.sort(
-    function(a, b) {
-      return a.toLowerCase().localeCompare(b.toLowerCase());
-    }
-  );
+  tempArry.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
   if (order === 'desc') {
     for (i = tempArry.length - 1; i >= 0; i--) {
@@ -115,16 +109,14 @@ function truncateTo(str, limit) {
 
 // @param order - 0 for asc, 1 for desc
 function sortArrayOfObjects(arr, field, desc) {
-  let vm = this;
-  vm.field = field;
-  vm.desc = desc;
-  function compare(a,b) {
-    if (a[vm.field] < b[vm.field])
+  function compare(a, b) {
+    if (a[field] < b[field]) {
       return desc ? 1 : -1;
-    else if (a[vm.field] > b[vm.field])
+    } else if (a[field] > b[field]) {
       return !desc ? 1 : -1;
-    else
+    } else {
       return 0;
+    }
   }
   return arr.sort(compare);
 }

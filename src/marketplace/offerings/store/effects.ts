@@ -3,14 +3,13 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { Action } from '@waldur/core/reducerActions';
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { getProviderType } from '@waldur/marketplace/common/registry';
 import { Category } from '@waldur/marketplace/types';
 import { createProvider } from '@waldur/providers/api';
 import { findProvider } from '@waldur/providers/registry';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { updateEntity } from '@waldur/table-react/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -65,7 +64,7 @@ function* createOffering(action: Action<OfferingFormData>) {
   yield put(reset(constants.FORM_ID));
   yield put(setStep('Overview'));
   yield put(showSuccess(translate('Offering has been created.')));
-  $state.go('marketplace-vendor-offerings');
+  yield put(stateGo('marketplace-vendor-offerings'));
 }
 
 function* updateOffering(action: Action<OfferingUpdateFormData>) {
@@ -84,7 +83,7 @@ function* updateOffering(action: Action<OfferingUpdateFormData>) {
   yield put(constants.updateOffering.success());
   yield put(reset(constants.OFFERING_UPDATE_FORM));
   yield put(showSuccess(translate('Offering has been updated.')));
-  $state.go('marketplace-vendor-offerings');
+  yield put(stateGo('marketplace-vendor-offerings'));
 }
 
 function* updateOfferingState(action) {

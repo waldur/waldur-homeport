@@ -5,10 +5,11 @@ import './TableHeader.scss';
 
 import { Column, Sorting } from './types';
 
-interface Props {
+interface TableHeaderProps {
   columns: Column[];
   onSortClick?(sorting: Sorting): void;
   currentSorting?: Sorting;
+  expandableRow?: boolean;
 }
 
 function handleOrdering(currentSorting: Sorting, field: string): Sorting {
@@ -23,21 +24,39 @@ function handleOrdering(currentSorting: Sorting, field: string): Sorting {
   return {field, mode};
 }
 
-const TableHeader = ({ columns, onSortClick, currentSorting }: Props) => (
+function renderSortingIcon(column: Column, sorting: Sorting) {
+  if (!column.orderField || !sorting) {
+    return null;
+  } else if (column.orderField !== sorting.field) {
+    return <i className="fa fa-sort m-l-xs"/>;
+  } else if (sorting.mode === 'asc') {
+    return <i className="fa fa-sort-asc m-l-xs"/>;
+  } else {
+    return <i className="fa fa-sort-desc m-l-xs"/>;
+  }
+}
+
+export const TableHeader: React.SFC<TableHeaderProps> = ({
+  columns, onSortClick, currentSorting, expandableRow,
+}) => (
   <thead>
     <tr>
+      {expandableRow && (
+        <th style={{width: '10px'}}/>
+      )}
       {columns.map((column, index) => (
         <th
           key={index}
           className={classNames(column.className, column.orderField && 'sorting-column') || undefined}
           onClick={column.orderField && (() => onSortClick(handleOrdering(currentSorting, column.orderField)))}>
           {column.title}
-          {(column.orderField && (currentSorting && column.orderField !== currentSorting.field)) && <i className="fa fa-sort m-l-xs"/>}
-          {(currentSorting && column.orderField === currentSorting.field) && <i className={`fa fa-sort-${currentSorting.mode} m-l-xs`}/>}
+          {renderSortingIcon(column, currentSorting)}
         </th>
       ))}
     </tr>
   </thead>
 );
 
-export default TableHeader;
+TableHeader.defaultProps = {
+  expandableRow: false,
+};
