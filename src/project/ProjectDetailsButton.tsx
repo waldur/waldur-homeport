@@ -14,7 +14,7 @@ const PureProjectDetailsButton = props => (
   <ActionButton
     title={translate('Details')}
     action={props.openProjectDialog}
-    icon={'fa fa-eye'}
+    icon="fa fa-eye"
   />
 );
 

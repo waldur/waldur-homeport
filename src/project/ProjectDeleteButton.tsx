@@ -17,7 +17,7 @@ const PureProjectDeleteButton = props => (
     title={translate('Delete')}
     action={props.deleteProject}
     tooltip={props.tooltip}
-    icon={'fa fa-trash'}
+    icon="fa fa-trash"
     disabled={props.disabled}
   />
 );
