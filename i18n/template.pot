@@ -2472,6 +2472,10 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
+#: src/marketplace/offerings/create/ImageUploadField.tsx
+msgid "Image here"
+msgstr ""
+
 #: src/analytics/ImagesList.tsx
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx

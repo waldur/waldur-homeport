@@ -1,4 +1,6 @@
 import * as React from 'react';
+import * as Col from 'react-bootstrap/lib/Col';
+import * as Row from 'react-bootstrap/lib/Row';
 
 import { FileUploadField } from '@waldur/form-react';
 import { FileUploadFieldProps } from '@waldur/form-react/FileUploadField';
@@ -18,36 +20,34 @@ const getImageUrl = image => {
   return '';
 };
 
-interface ImageUploadFieldProps extends FileUploadFieldProps {
-  image: HTMLImageElement;
-  onImageRemove?(): void;
-}
-
-export const ImageUploadField = ({image, ...props}: ImageUploadFieldProps) => {
-  return image ? (
+export const ImageUploadField = (props: FileUploadFieldProps) => {
+  if (!props.input.value) {
+    return <FileUploadField {...props} />;
+  }
+  return (
     <div className="image-upload-field">
-      <div className="row">
-        <div className="col-md-5">
+      <Row>
+        <Col md={5}>
           <div className="image">
-            <img src={getImageUrl(image)} alt="Image here"/>
+            <img src={getImageUrl(props.input.value)} alt={translate('Image here')}/>
           </div>
-        </div>
-        <div className="col-md-7">
+        </Col>
+        <Col md={7}>
           <div className="image-actions">
             <div>
               <FileUploadField className="btn btn-sm btn-primary m-b-sm" {...props}/>
             </div>
-            {image &&
+            {props.input.value &&
               <ActionButton
                 className="btn btn-sm btn-danger m-b-sm"
                 title={translate('Remove')}
-                action={props.onImageRemove}
+                action={() => props.input.onChange(null)}
                 icon="fa fa-trash"
               />
             }
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </div>
-    ) : <FileUploadField {...props} />;
+  );
 };

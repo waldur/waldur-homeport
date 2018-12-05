@@ -20,8 +20,6 @@ interface OfferingUpdateDialogProps extends InjectedFormProps {
   isLastStep: boolean;
   goBack(): void;
   goNext(): void;
-  thumbnail: HTMLImageElement;
-  removeThumbnail(): void;
   loadOffering(offeringUuid: string): void;
 }
 
