@@ -4,7 +4,6 @@ const merge = require('webpack-merge');
 const path = require('path');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CleanUpStatsPlugin = require('./webpack-cleanup-stats');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
@@ -36,7 +35,6 @@ module.exports = merge(baseConfig, {
       debug: true,
       failOnError: false,
     }),
-    new CleanUpStatsPlugin(),
     new HtmlWebpackHarddiskPlugin({
       outputPath: utils.formatPath('.'),
     }),

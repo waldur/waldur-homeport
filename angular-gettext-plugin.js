@@ -7,7 +7,6 @@ const Extractor = require('./angular-gettext-extractor');
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
-const shell = require('shelljs');
 
 function AngularGetTextPlugin(options) {
   this.compileTranslations = options.compileTranslations;
