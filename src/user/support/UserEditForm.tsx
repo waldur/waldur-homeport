@@ -10,7 +10,7 @@ import { formatRegistrationMethod, formatUserStatus } from '@waldur/user/support
 import { UserDetails } from '@waldur/workspace/types';
 
 import { TermsOfService } from './TermsOfService';
-import { tokenOptions, tokenLifetimeTooltip, TokenLifeteimeWarning } from './TokenLifetimeField';
+import { tokenOptions, tokenLifetimeTooltip, TokenLifetimeWarning } from './TokenLifetimeField';
 
 interface UserEditFormData {
   full_name: string;
@@ -125,7 +125,7 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
           valueKey="value"
         />
       )}
-      {props.userTokenIsVisible && <TokenLifeteimeWarning/>}
+      {props.userTokenIsVisible && <TokenLifetimeWarning/>}
       <TermsOfService
         initial={props.initial}
         agreementDate={dateTime(props.user.agreement_date)}

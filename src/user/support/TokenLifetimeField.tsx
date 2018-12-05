@@ -25,7 +25,7 @@ export const tokenLifetimeTooltip =
     </Tooltip>
   );
 
-const PureTokenLifeteimeWarning = (props: {token_lifetime: number | null }) =>
+const PureTokenLifetimeWarning = (props: {token_lifetime: number | null }) =>
   props.token_lifetime === null ? (
     <div className="form-group">
       <p className="help-block text-danger col-sm-offset-3 col-sm-7">
@@ -40,4 +40,4 @@ const connector = connect(state => {
   return {token_lifetime: option ? option.value : undefined};
 });
 
-export const TokenLifeteimeWarning = connector(PureTokenLifeteimeWarning);
+export const TokenLifetimeWarning = connector(PureTokenLifetimeWarning);
