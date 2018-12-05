@@ -34,7 +34,6 @@ interface OfferingCreateDialogProps extends InjectedFormProps {
   isLastStep: boolean;
   goBack(): void;
   goNext(): void;
-  thumbnail: HTMLImageElement;
 }
 
 export class OfferingCreateDialog extends React.Component<OfferingCreateDialogProps> {

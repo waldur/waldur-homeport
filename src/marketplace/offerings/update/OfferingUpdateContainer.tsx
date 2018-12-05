@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm, change } from 'redux-form';
+import { reduxForm } from 'redux-form';
 
 import { $state } from '@waldur/core/services';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
-import { offeringUpdateFormSelector } from '@waldur/marketplace/offerings/update/selectors';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { updateOffering, OFFERING_UPDATE_FORM } from '../store/constants';
@@ -22,7 +21,6 @@ const mapStateToProps = state => ({
     native_description: getOffering(state).offering.native_description,
     thumbnail: getOffering(state).offering.thumbnail,
   },
-  thumbnail: offeringUpdateFormSelector(state, 'thumbnail'),
   loading: isLoading(state),
   loaded: isLoaded(state),
   erred: isErred(state),
@@ -34,7 +32,6 @@ const mapDispatchToProps = dispatch => ({
     ...data,
     offeringUuid: $state.params.offering_uuid,
   }, dispatch),
-  removeThumbnail: () => dispatch(change(OFFERING_UPDATE_FORM, 'thumbnail', '')),
   goBack() {
     $state.go('marketplace-vendor-offerings');
   },
