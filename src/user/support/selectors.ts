@@ -26,10 +26,6 @@ export const fieldIsVisible = ownProps => (field: string) => {
   return ENV.userRegistrationHiddenFields.indexOf(field) === -1;
 };
 
-export const nativeNameIsVisible = () => {
-  return ENV.plugins.WALDUR_CORE.NATIVE_NAME_ENABLED === true;
-};
-
 export const isRequired = (field: string) => {
   return ENV.userMandatoryFields.indexOf(field) !== -1;
 };

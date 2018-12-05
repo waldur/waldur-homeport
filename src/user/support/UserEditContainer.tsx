@@ -5,13 +5,13 @@ import { compose } from 'redux';
 
 import { ENV } from '@waldur/core/services';
 import { translate, withTranslation } from '@waldur/i18n';
+import { getNativeNameVisible } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
 import {
   fieldIsVisible,
   isRequired,
   isVisibleForSupportOrStaff,
   isVisibleSupport,
-  nativeNameIsVisible,
   userTokenIsVisible
 } from '@waldur/user/support/selectors';
 import { UserEditForm } from '@waldur/user/support/UserEditForm';
@@ -55,7 +55,7 @@ const mapStateToProps = (state, ownProps) => ({
   userTokenIsVisible: userTokenIsVisible(state, ownProps),
   fieldIsVisible: fieldIsVisible(ownProps),
   isRequired,
-  nativeNameIsVisible: nativeNameIsVisible(),
+  nativeNameIsVisible: getNativeNameVisible(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
