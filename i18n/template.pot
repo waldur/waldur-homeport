@@ -2338,6 +2338,10 @@ msgstr ""
 msgid "Helpdesk dashboard"
 msgstr ""
 
+#: src/customer/details/CustomerDetails.tsx
+msgid "Home organization domain name"
+msgstr ""
+
 #: src/providers/details/provider-details.html
 msgid "Homepage"
 msgstr ""

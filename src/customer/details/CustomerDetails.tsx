@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Panel from 'react-bootstrap/lib/Panel';
 import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -11,18 +12,19 @@ import { connectAngularComponent } from '@waldur/store/connect';
 interface  CustomerDetailsProps extends TranslateProps {
   customer: Customer;
   organizationSubnetsVisible: boolean;
+  organizationDomainVisible: boolean;
   nativeNameVisible: boolean;
 }
 
-export const PureCustomerDetails = (
-  { translate, customer, organizationSubnetsVisible, nativeNameVisible }: CustomerDetailsProps
-) => (
-  <div className="panel panel-default">
-    <div className="panel-heading">
+export const PureCustomerDetails: React.SFC<CustomerDetailsProps> = ({
+  translate, customer, organizationSubnetsVisible, nativeNameVisible, organizationDomainVisible,
+}) => (
+  <Panel>
+    <Panel.Heading>
       {translate('Organization details')}
-    </div>
+    </Panel.Heading>
 
-    <div className="panel-body">
+    <Panel.Body>
       <dl className="dl-horizontal resource-details-table">
 
         <Field
@@ -46,6 +48,13 @@ export const PureCustomerDetails = (
           label={translate('Abbreviation')}
           value={customer.abbreviation}
         />
+
+        {organizationDomainVisible && (
+          <Field
+            label={translate('Home organization domain name')}
+            value={customer.domain}
+          />
+        )}
 
         <Field
           label={translate('Registry code')}
@@ -112,12 +121,13 @@ export const PureCustomerDetails = (
           value={customer.bank_account}
         />
       </dl>
-    </div>
-  </div>
+    </Panel.Body>
+  </Panel>
 );
 
 const mapStateToProps = state => ({
   organizationSubnetsVisible: getConfig(state).organizationSubnetsVisible,
+  organizationDomainVisible: getConfig(state).organizationDomainVisible,
   nativeNameVisible: getNativeNameVisible(state),
 });
 
