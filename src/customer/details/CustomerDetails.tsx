@@ -12,11 +12,12 @@ import { connectAngularComponent } from '@waldur/store/connect';
 interface  CustomerDetailsProps extends TranslateProps {
   customer: Customer;
   organizationSubnetsVisible: boolean;
+  organizationDomainVisible: boolean;
   nativeNameVisible: boolean;
 }
 
 export const PureCustomerDetails: React.SFC<CustomerDetailsProps> = ({
-  translate, customer, organizationSubnetsVisible, nativeNameVisible,
+  translate, customer, organizationSubnetsVisible, nativeNameVisible, organizationDomainVisible,
 }) => (
   <Panel>
     <Panel.Heading>
@@ -48,10 +49,12 @@ export const PureCustomerDetails: React.SFC<CustomerDetailsProps> = ({
           value={customer.abbreviation}
         />
 
-        <Field
-          label={translate('Home organization domain name')}
-          value={customer.domain}
-        />
+        {organizationDomainVisible && (
+          <Field
+            label={translate('Home organization domain name')}
+            value={customer.domain}
+          />
+        )}
 
         <Field
           label={translate('Registry code')}
@@ -124,6 +127,7 @@ export const PureCustomerDetails: React.SFC<CustomerDetailsProps> = ({
 
 const mapStateToProps = state => ({
   organizationSubnetsVisible: getConfig(state).organizationSubnetsVisible,
+  organizationDomainVisible: getConfig(state).organizationDomainVisible,
   nativeNameVisible: getNativeNameVisible(state),
 });
 
