@@ -14,6 +14,7 @@ module.exports = {
       'bootstrap/js/tooltip',
       'bootstrap/js/modal',
       'bootstrap/js/dropdown',
+      'file-saver',
       'papaparse',
 
       'redux',

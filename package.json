@@ -111,6 +111,7 @@
     "@types/enzyme": "^3.1.14",
     "@types/jest": "^23.3.9",
     "@types/lodash": "^4.14.117",
+    "@types/moment-timezone": "^0.5.9",
     "@types/react": "^16.4.18",
     "@types/react-bootstrap": "^0.32.14",
     "@types/react-dom": "^16.0.9",
