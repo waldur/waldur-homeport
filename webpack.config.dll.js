@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const utils = require('./webpack.utils');
 
 const target = 'build.dll';
 
@@ -111,7 +112,7 @@ module.exports = {
       name: '[name]_[hash]_lib',
     }),
   ],
-  devtool: 'source-map',
+  devtool: utils.isProd ? '' : 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
