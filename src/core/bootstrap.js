@@ -6,8 +6,8 @@ const CONFIG_FILE = 'scripts/configs/config.json';
 const modes = {stableMode, experimentalMode};
 
 function renderError(details) {
-  document.querySelector('.loading-screen').classList.add('hidden');
-  document.querySelector('.erred-screen').classList.remove('hidden');
+  document.querySelector('.loading-screen').setAttribute('style', 'display: none');
+  document.querySelector('.erred-screen').setAttribute('style', '');
   document.querySelector('#wrapper').remove();
   document.querySelector('.erred-screen-message').textContent = details;
 }
