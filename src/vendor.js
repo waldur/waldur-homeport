@@ -2,7 +2,7 @@ import '@babel/polyfill';
 
 import 'expose-loader?$!expose-loader?jQuery!jquery';
 import 'angular';
-import moment from 'moment';
+import moment from 'moment-timezone';
 window.moment = moment;
 
 import './shims';

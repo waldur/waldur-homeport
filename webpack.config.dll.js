@@ -10,7 +10,7 @@ module.exports = {
       'raven-js',
       'lodash',
       'jquery',
-      'moment',
+      'moment-timezone',
       'bootstrap/js/tooltip',
       'bootstrap/js/modal',
       'bootstrap/js/dropdown',
