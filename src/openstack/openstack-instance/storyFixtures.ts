@@ -174,3 +174,129 @@ export const floatingIps = [
     is_booked: false,
   },
 ];
+
+export const summaryData = {
+  components: {
+    cores: 0.0125,
+    disk: 0.0000026042,
+    ram: 0.0000244141,
+  },
+  limits: {
+    cores: 80,
+    disk: 512000,
+    floating_ip_count: 50,
+    instances: 30,
+    network_count: 100,
+    ram: 4096,
+    security_group_count: 100,
+    security_group_rule_count: 100,
+    snapshots: 50,
+    snapshots_size: -1,
+    subnet_count: 100,
+    volumes: 50,
+    volumes_size: -1,
+  },
+  limitsType: {
+    cores: 'QUOTA_PACKAGE_TYPE',
+    disk: 'QUOTA_PACKAGE_TYPE',
+    ram: 'QUOTA_PACKAGE_TYPE',
+  },
+  usages: {
+    cores: 2,
+    disk: 10240,
+    floating_ip_count: 0,
+    instances: 1,
+    network_count: 1,
+    ram: 9024,
+    security_group_count: 7,
+    security_group_rule_count: 12,
+    snapshots: 0,
+    snapshots_size: 0,
+    subnet_count: 1,
+    volumes: 1,
+    volumes_size: 10240,
+  },
+  project: {
+    uuid: '779460c3c5284e5ba522707c43a720f6',
+    url: 'http://localhost:8000/api/projects/779460c3c5284e5ba522707c43a720f6/',
+    name: 'My project',
+    permissions: [],
+    billing_price_estimate: {
+      limit: -1,
+      total: 1328.58,
+      current: 1328.58,
+      threshold: 2000,
+    },
+    quotas: [],
+  },
+  customer: {
+    uuid: '9f43128e9eb24c288b6577568420dc1c',
+    url: 'http://localhost:8000/api/customers/9f43128e9eb24c288b6577568420dc1c/',
+    name: 'My customer',
+    owners: [
+      {
+        is_staff: true,
+        is_support: false,
+        url: 'http://localhost:8000/api/users/f751646f014f4ac4b2f94771ee5e703a/',
+        uuid: 'f751646f014f4ac4b2f94771ee5e703a',
+      },
+    ],
+  },
+  formData: {
+    vmName: 'My VM name',
+    data_volume_size: 1024,
+    image: {
+      name: 'CentOS 7 64bit',
+      url: 'http://localhost:8000/api/openstacktenant-images/e53ac3e70ac54f84be7b472127e5ebeb/',
+      uuid: 'e53ac3e70ac54f84be7b472127e5ebeb',
+    },
+    service: {
+      name: 'Power tenant',
+      url: 'http://localhost:8000/api/openstacktenant/ab8910832e024ebb8841e1f276ea524e/',
+      uuid: 'ab8910832e024ebb8841e1f276ea524e',
+    },
+    system_volume_size: 10240,
+    type: 'Instance',
+  },
+};
+
+export const flavor = {
+  cores: 2,
+  disabled: false,
+  disk: 10240,
+  name: 'ce.medium',
+  ram: 4066,
+  settings: 'http://localhost:8000/api/service-settings/3ffa92fa9272425282361c1451c8734d/',
+  url: 'http://localhost:8000/api/openstacktenant-flavors/7807f103925a4e5b826552fa3eae334a/',
+  uuid: '7807f103925a4e5b826552fa3eae334a',
+};
+
+export const quotas = [
+  {
+    name: 'vcpu',
+    usage: 2,
+    limit: 80,
+    limitType: 'QUOTA_PACKAGE_TYPE',
+    required: 2,
+  },
+  {
+    name: 'ram',
+    usage: 2024,
+    limit: 4096,
+    limitType: 'QUOTA_PACKAGE_TYPE',
+    required: 4066,
+  },
+  {
+    name: 'storage',
+    usage: 10240,
+    limit: 512000,
+    limitType: 'QUOTA_PACKAGE_TYPE',
+    required: 11264,
+  },
+  {
+    name: 'cost',
+    usage: 1328.58,
+    limit: -1,
+    required: 4.608043182,
+  },
+];

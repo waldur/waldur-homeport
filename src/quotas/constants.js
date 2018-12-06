@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 export const QUOTA_NAMES_MAPPING = {
   vcpu: 'cores',
   storage: 'disk',
@@ -5,15 +7,15 @@ export const QUOTA_NAMES_MAPPING = {
 };
 
 export const QUOTA_NAMES = {
-  floating_ip_count: gettext('Floating IP count'),
-  vcpu: gettext('vCPU count'),
-  ram: gettext('RAM'),
-  storage: gettext('Storage'),
-  vm_count: gettext('Virtual machines count'),
-  instances: gettext('Instances count'),
-  volumes: gettext('Volumes count'),
-  snapshots: gettext('Snapshots count'),
-  cost: gettext('Monthly cost'),
+  floating_ip_count: translate('Floating IP count'),
+  vcpu: translate('vCPU count'),
+  ram: 'RAM',
+  storage: translate('Storage'),
+  vm_count: translate('Virtual machines count'),
+  instances: translate('Instances count'),
+  volumes: translate('Volumes count'),
+  snapshots: translate('Snapshots count'),
+  cost: translate('Monthly cost'),
 };
 
 export const QUOTA_FILTERS = {
@@ -30,7 +32,7 @@ export const QUOTA_PACKAGE_TYPE = 'QUOTA_PACKAGE_TYPE';
 export const QUOTA_SPL_TYPE = 'QUOTA_SPL_TYPE';
 
 export const QUOTA_TYPES = {
-  [QUOTA_PACKAGE_TYPE]: gettext('Package amount'),
-  [QUOTA_SPL_TYPE]: gettext('Project service')
+  [QUOTA_PACKAGE_TYPE]: translate('Package amount'),
+  [QUOTA_SPL_TYPE]: translate('Project service'),
 };
 
