@@ -34,13 +34,26 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
+            loader: 'cache-loader',
+          },
+          {
             loader: 'babel-loader',
           },
         ],
       },
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader'
+        use: [
+          {
+            loader: 'cache-loader',
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true
+            },
+          },
+        ],
       },
       {
         test: /\.html$/,

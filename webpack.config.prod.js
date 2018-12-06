@@ -17,14 +17,7 @@ module.exports = merge(baseConfig, {
       new UglifyJsPlugin({
         sourceMap: true,
         uglifyOptions: {
-          compress: {
-            screw_ie8: true,
-            warnings: false,
-          },
           mangle: true,
-          output: {
-            screw_ie8: true
-          },
           exclude: [/\.min\.js$/gi]
         }
       })
