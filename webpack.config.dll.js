@@ -92,6 +92,9 @@ module.exports = {
   },
 
   plugins: [
+    // Moment locales extraction
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /(az|en-gb|et|ru|lt|lv)/),
+
     // Temporary workaround for Angular UI router and React Bootstrap integration
     new webpack.NormalModuleReplacementPlugin(
       /SafeAnchor\.js/,

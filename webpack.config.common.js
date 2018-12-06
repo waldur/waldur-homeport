@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AngularGetTextPlugin = require('./angular-gettext-plugin');
@@ -146,8 +145,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/[name]-bundle.css?[contenthash]'
     }),
-    // Moment locales extraction
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(az|en-gb|et|ru|lt|lv)/),
     // some files are not referenced explicitly, copy them.
     new CopyWebpackPlugin([
       {from: './src/views', to: utils.formatPath('./views')},

@@ -16,6 +16,7 @@ module.exports = merge(baseConfig, {
     minimizer: [
       new UglifyJsPlugin({
         sourceMap: true,
+        parallel: true,
         uglifyOptions: {
           mangle: true,
           exclude: [/\.min\.js$/gi]
