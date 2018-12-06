@@ -46,6 +46,6 @@ module.exports = merge(baseConfig, {
     inline: true,
     port: 8001,
     publicPath: '/',
+    stats: 'errors-only'
   },
-  stats: 'errors-only'
 });
