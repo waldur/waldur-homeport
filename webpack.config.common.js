@@ -68,7 +68,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader?sourceMap',
           utils.isProd ? 'css-loader': 'css-loader?sourceMap',
           utils.isProd ? 'postcss-loader': 'postcss-loader?sourceMap',
           utils.isProd ? 'sass-loader?includePaths[]=' + scssPath : 'sass-loader?sourceMap&includePaths[]=' + scssPath,
@@ -77,14 +77,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader?sourceMap',
           utils.isProd ? 'css-loader' : 'css-loader?sourcemap',
         ],
       },
       {
         test: /\.font\.js/,
         use: [
-          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader?sourceMap',
           'css-loader',
           {
             loader: 'webfonts-loader',
