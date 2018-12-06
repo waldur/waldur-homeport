@@ -39,7 +39,7 @@ function compile(options) {
 AngularGetTextPlugin.prototype.apply = function(compiler) {
   const options = this;
 
-  compiler.plugin('emit', (compilation, done) => {
+  compiler.hooks.emit.tapAsync('AngularGettextPlugin', (compilation, done) => {
     if (options.compileTranslations) {
       const results = compile(options.compileTranslations);
       results.forEach( (result) => {
