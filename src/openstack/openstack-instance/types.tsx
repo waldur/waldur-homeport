@@ -32,3 +32,20 @@ export interface FloatingIp {
   runtime_state: string;
   is_booked: boolean;
 }
+
+export interface ServiceComponent {
+  cores: number;
+  disk: number;
+  ram: number;
+}
+
+export interface Flavor extends ServiceComponent {
+  name: string;
+  disabled: boolean;
+}
+
+export interface LimitsType {
+  cores: string;
+  disk: string;
+  ram: string;
+}

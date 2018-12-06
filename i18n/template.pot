@@ -609,6 +609,7 @@ msgstr ""
 msgid "Available as Jupyter kernel?"
 msgstr ""
 
+#: src/quotas/QuotaUsageBarChart.tsx
 #: src/quotas/quota-usage-bar-chart.js
 msgid "Available quota usage: {usage}"
 msgstr ""
@@ -978,6 +979,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/offering/appstore-offering-summary.html
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
@@ -1930,6 +1932,7 @@ msgstr ""
 msgid "Execution Scheduled"
 msgstr ""
 
+#: src/quotas/QuotaUsageBarChart.tsx
 #: src/quotas/quota-usage-bar-chart.js
 msgid "Existing quota usage: {usage}"
 msgstr ""
@@ -2136,6 +2139,7 @@ msgid "Fixed price"
 msgstr ""
 
 #: src/cost-planning/cost-plan-flavors.html
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
@@ -2470,6 +2474,7 @@ msgstr ""
 
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
@@ -2796,6 +2801,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/offering/appstore-offering-summary.html
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
@@ -3544,6 +3550,7 @@ msgstr ""
 msgid "No invoices found matching filter."
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
@@ -3720,6 +3727,7 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.js
 msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
 msgstr ""
@@ -4150,6 +4158,7 @@ msgstr ""
 msgid "Package is not available because current VPC resource usage exceeds package quota limits."
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Package limits"
@@ -4302,6 +4311,7 @@ msgstr ""
 msgid "Planned budget"
 msgstr ""
 
+#: src/quotas/QuotaUsageBarChart.tsx
 #: src/quotas/quota-usage-bar-chart.js
 msgid "Planned quota usage: {usage}"
 msgstr ""
@@ -4556,6 +4566,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/utils.ts
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
@@ -4575,6 +4586,7 @@ msgstr ""
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/utils.ts
 #: src/offering/appstore-offering-summary.html
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
@@ -4657,6 +4669,7 @@ msgstr ""
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
 #: src/offering/appstore-offering-summary.html
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
@@ -4988,10 +5001,10 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
-#: src/quotas/constants.js
 #: src/resource-import/import-virtual-machines-list.js
 #: src/rijkscloud/InstanceCreateConfig.js
 #: src/slurm/details/SlurmAllocationSummary.tsx
@@ -5395,6 +5408,7 @@ msgstr ""
 msgid "Resource configuration"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 msgid "Resource configuration is invalid. Please fix errors in form."
 msgstr ""
@@ -6722,6 +6736,7 @@ msgstr ""
 msgid "Total price"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 msgid "Total storage"
 msgstr ""
@@ -7411,6 +7426,7 @@ msgstr ""
 
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/rijkscloud/InstanceCreateConfig.js
@@ -7977,6 +7993,7 @@ msgstr ""
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
@@ -8085,6 +8102,7 @@ msgstr ""
 msgid "{resource_name} has been deleted."
 msgstr ""
 
+#: src/quotas/QuotaUsageBarChart.tsx
 #: src/quotas/quota-usage-bar-chart.js
 msgid "{type} quota usage exceeds available limit."
 msgstr ""
@@ -8094,6 +8112,7 @@ msgstr ""
 msgid "{usage} of {limit}"
 msgstr ""
 
+#: src/quotas/QuotaUsageBarChart.tsx
 #: src/quotas/quota-usage-bar-chart.js
 msgid "{usage} of {limit} used"
 msgstr ""
