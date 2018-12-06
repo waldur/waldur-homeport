@@ -1,4 +1,4 @@
-import { duration } from 'moment';
+import { duration } from 'moment-timezone';
 
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';

@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 
 import { dictToList, formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';

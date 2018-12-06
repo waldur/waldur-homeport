@@ -4,13 +4,13 @@ const merge = require('webpack-merge');
 const path = require('path');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CleanUpStatsPlugin = require('./webpack-cleanup-stats');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 const utils = require('./webpack.utils');
 
 module.exports = merge(baseConfig, {
+  mode: 'development',
   plugins: [
     new webpack.DllReferencePlugin({
       context: path.resolve('.'),
@@ -35,7 +35,6 @@ module.exports = merge(baseConfig, {
       debug: true,
       failOnError: false,
     }),
-    new CleanUpStatsPlugin(),
     new HtmlWebpackHarddiskPlugin({
       outputPath: utils.formatPath('.'),
     }),
@@ -47,5 +46,6 @@ module.exports = merge(baseConfig, {
     inline: true,
     port: 8001,
     publicPath: '/',
-  }
+    stats: 'errors-only'
+  },
 });

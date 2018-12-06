@@ -1,19 +1,21 @@
 const path = require('path');
 const webpack = require('webpack');
+const utils = require('./webpack.utils');
 
 const target = 'build.dll';
 
 module.exports = {
   entry: {
     vendor: [
-      'babel-polyfill',
+      '@babel/polyfill',
       'raven-js',
       'lodash',
       'jquery',
-      'moment',
+      'moment-timezone',
       'bootstrap/js/tooltip',
       'bootstrap/js/modal',
       'bootstrap/js/dropdown',
+      'file-saver',
       'papaparse',
 
       'redux',
@@ -85,12 +87,15 @@ module.exports = {
       // Temporary workaround for Angular UI router and React Bootstrap integration
       {
         test: /SafeAnchor\.js$/,
-        loader: 'awesome-typescript-loader'
+        loader: 'ts-loader'
       },
     ],
   },
 
   plugins: [
+    // Moment locales extraction
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /(az|en-gb|et|ru|lt|lv)/),
+
     // Temporary workaround for Angular UI router and React Bootstrap integration
     new webpack.NormalModuleReplacementPlugin(
       /SafeAnchor\.js/,
@@ -107,7 +112,7 @@ module.exports = {
       name: '[name]_[hash]_lib',
     }),
   ],
-  devtool: 'source-map',
+  devtool: utils.isProd ? '' : 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },

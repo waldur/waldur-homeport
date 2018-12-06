@@ -28,10 +28,11 @@ async function loadConfig() {
       };
     } else if (error instanceof SyntaxError) {
       renderError(`Unable to parse client configuration file ${CONFIG_FILE}. Error message: ${error}`);
+      return;
     } else {
       renderError(error);
+      return;
     }
-    return;
   }
 
   try {
