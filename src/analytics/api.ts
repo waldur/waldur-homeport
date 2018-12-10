@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 
 import { getList } from '@waldur/core/api';
 
@@ -21,7 +21,6 @@ export const loadServiceProviders = () => getList('/service-settings/', {
   type: 'OpenStackTenant',
 });
 
-export const fetchTenants = (customerName: string) => getList('/openstack-tenants/', {
-  // tslint:disable-next-line
-  customer_name: customerName,
+export const fetchTenants = (customerId: string) => getList('/openstack-tenants/', {
+  customer_uuid: customerId,
 });

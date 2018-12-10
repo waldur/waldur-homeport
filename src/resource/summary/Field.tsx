@@ -6,12 +6,11 @@ export interface FieldProps {
   label: string;
   value?: React.ReactNode;
   valueClass?: string;
-  className?: string;
 }
 
 export const Field: React.SFC<FieldProps> = (props: FieldProps) =>
   props.value ? (
-    <div className={props.className}>
+    <div className="m-b-xs">
       <dt>
         {props.label.length > 20 ? (
           <Tooltip label={props.label} id="fieldLabel">
@@ -24,7 +23,3 @@ export const Field: React.SFC<FieldProps> = (props: FieldProps) =>
       </dd>
     </div>
   ) : null;
-
-Field.defaultProps = {
-  className: 'm-b-xs',
-};

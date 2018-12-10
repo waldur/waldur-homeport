@@ -69,6 +69,7 @@ describe('isManager selector', () => {
         url: 'url',
         uuid: 'uuid',
         permissions: [manager],
+        quotas: [],
       },
     };
     const actual = isManager({ workspace });
@@ -95,6 +96,7 @@ describe('isAdmin selector', () => {
         url: 'url',
         uuid: 'uuid',
         permissions: [admin],
+        quotas: [],
       },
     };
     const actual = isAdmin({ workspace });

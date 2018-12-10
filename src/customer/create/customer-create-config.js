@@ -44,6 +44,11 @@ export default ENV => [
         label: gettext('Contact phone'),
       },
       {
+        name: 'homepage',
+        type: 'string',
+        label: gettext('Website URL'),
+      },
+      {
         name: 'image',
         type: 'file',
         label: gettext('Logo'),
@@ -55,6 +60,7 @@ export default ENV => [
     name: gettext('Billing'),
     title: gettext('Billing details'),
     icon: 'fa-sitemap',
+    hidden: ENV.hideOrganizationBillingStep,
     fields: [
       {
         name: 'registration_code',

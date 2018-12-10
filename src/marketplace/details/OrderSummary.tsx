@@ -65,7 +65,7 @@ export const SummaryTable = (props: OrderSummaryProps) => (
 
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
-    <OfferingLogo src={props.offering.thumbnail} className="img-lg"/>
+    <OfferingLogo src={props.offering.thumbnail}/>
     <SummaryTable {...props}/>
     <div className="display-flex justify-content-between">
       <ShoppingCartButtonContainer

@@ -153,6 +153,7 @@ const createCustomFetcher = (endpoint: string): Fetcher => {
 const TableOptions = {
   table: 'customerList',
   fetchData: createCustomFetcher('customers'),
+  queryField: 'query',
   mapPropsToFilter: props => formatFilter(props.customerListFilter),
   exportRow: row => [
     row.name,

@@ -260,6 +260,12 @@ const ENV = {
 
   // Allows to toggle visibility of empty marketplace categories.
   showEmptyMarketplaceCategories: false,
+
+  // Allows to hide billing step in organization creation wizard
+  hideOrganizationBillingStep: false,
+
+  // Allows to hide domain field in organization detail
+  organizationDomainVisible: false,
 };
 
 export default ENV;

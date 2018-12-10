@@ -19,17 +19,6 @@ interface WizardProps extends TranslateProps {
   tabs: {[key: string]: React.ComponentType};
 }
 
-const renderStepComponent = props => {
-  if (props.step === 'Overview') {
-    return React.createElement(props.tabs[props.step], {
-      thumbnail: props.thumbnail,
-      removeThumbnail: props.removeThumbnail,
-    });
-  } else {
-    return React.createElement(props.tabs[props.step]);
-  }
-};
-
 export const Wizard = withTranslation((props: WizardProps) => (
   <>
     <StepsList
@@ -38,7 +27,7 @@ export const Wizard = withTranslation((props: WizardProps) => (
       onClick={props.setStep}
       disabled={props.submitting}
     />
-    {renderStepComponent(props)}
+    {React.createElement(props.tabs[props.step])}
     <div className="form-group">
       <Col smOffset={2} sm={8}>
         <div className="display-flex justify-content-between m-t-md">

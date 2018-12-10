@@ -1,12 +1,11 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { $state } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { INIT_CONFIG } from '@waldur/store/config';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { USER_LOGGED_IN } from '@waldur/workspace/constants';
 import { getProject, getWorkspace } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
@@ -48,9 +47,9 @@ function* addItem(action) {
     yield put(showSuccess(translate('Item has been added to shopping cart.')));
     const workspace: WorkspaceType = yield select(getWorkspace);
     if (workspace === 'organization') {
-      yield $state.go('marketplace-checkout-customer');
+      yield put(stateGo('marketplace-checkout-customer'));
     } else {
-      yield $state.go('marketplace-checkout');
+      yield put(stateGo('marketplace-checkout'));
     }
   } catch (error) {
     const errorMessage = `${translate('Unable to add item to shopping cart.')} ${format(error)}`;
@@ -88,9 +87,9 @@ function* createOrder() {
     yield put(actions.createOrderSuccess());
     const workspace: WorkspaceType = yield select(getWorkspace);
     if (workspace === 'organization') {
-      yield $state.go('marketplace-order-details-customer', {order_uuid: order.uuid});
+      yield put(stateGo('marketplace-order-details-customer', {order_uuid: order.uuid}));
     } else {
-      yield $state.go('marketplace-order-details', {order_uuid: order.uuid});
+      yield put(stateGo('marketplace-order-details', {order_uuid: order.uuid}));
     }
   } catch (error) {
     const errorMessage = `${translate('Unable to submit order.')} ${format(error)}`;

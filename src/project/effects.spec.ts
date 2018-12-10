@@ -1,4 +1,4 @@
-import { showSuccess } from '@waldur/store/coreSaga';
+import { showSuccess, emitSignal } from '@waldur/store/coreSaga';
 
 import * as actions from './actions';
 import { setupFixture } from './effects.fixture';
@@ -18,7 +18,7 @@ describe('Project side-effects', () => {
   it('invalidates projects list cache if project has been updated', async () => {
     fixture.mockUpdateProject.mockReturnValue({data: project});
     await fixture.updateProject({payload: {project}});
-    expect(fixture.mockRefreshProjectList).toBeCalledWith(project);
+    expect(fixture.dispatched).toContainEqual(emitSignal('refreshProjectList', {project}));
   });
 
   it('shows success message if project has been updated', async () => {

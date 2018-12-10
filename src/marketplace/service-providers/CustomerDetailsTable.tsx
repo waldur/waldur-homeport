@@ -35,6 +35,10 @@ export const CustomerDetailsTable = withTranslation((props: CustomerDetailsTable
         value={props.customer.registration_code}
       />
       <Field
+        label={props.translate('Website URL')}
+        value={props.customer.homepage}
+      />
+      <Field
         label={props.translate('Country')}
         value={props.customer.country}
       />

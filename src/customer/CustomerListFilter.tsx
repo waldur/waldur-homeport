@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 import * as React from 'react';
 
 import Select from 'react-select';

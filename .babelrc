@@ -1,9 +1,9 @@
 {
-    "presets": ["es2015", "react"],
+    "presets": ["@babel/preset-env", "@babel/preset-react"],
     "plugins": [
-      "syntax-dynamic-import",
-      "transform-object-rest-spread",
-      "transform-async-to-generator",
+      "@babel/syntax-dynamic-import",
+      "@babel/syntax-object-rest-spread",
+      "@babel/transform-async-to-generator",
       ["angularjs-annotate", {"explicitOnly": true}]
     ]
 }

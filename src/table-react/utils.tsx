@@ -32,6 +32,7 @@ export function connectTable(options: TableOptions) {
         updatePageSize: size => dispatch(actions.updatePageSize(table, size)),
         resetPagination: () => dispatch(actions.resetPagination(table)),
         sortList: (sorting: Sorting) => dispatch(actions.sortListStart(table, sorting)),
+        toggleRow: (row: any) => dispatch(actions.toggleRow(table, row)),
       });
 
       const filterByFeature = state => columns => columns.filter(

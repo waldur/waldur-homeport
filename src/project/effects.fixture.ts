@@ -5,7 +5,6 @@ import * as effects from './effects';
 
 export const setupFixture = (state = {}) => {
   const mockUpdateProject = jest.spyOn(api, 'updateProject');
-  const mockRefreshProjectList = jest.spyOn(api, 'refreshProjectList').mockReturnValue(null);
   jest.spyOn(api, 'dangerouslyUpdateProject').mockReturnValue(null);
   const updateProject = action => runSaga(store, effects.handleUpdateProject, action).done;
   const hasActionWithType = type => dispatched.find(a => a.type === type) !== undefined;
@@ -20,7 +19,6 @@ export const setupFixture = (state = {}) => {
     dispatched,
     hasActionWithType,
     mockUpdateProject,
-    mockRefreshProjectList,
     updateProject,
   };
 };

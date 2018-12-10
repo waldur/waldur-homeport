@@ -1,4 +1,4 @@
-import { Section } from '@waldur/marketplace/types';
+import { Section, Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import * as constants from './constants';
@@ -13,11 +13,8 @@ export const setFilterQuery = (filterQuery: string) => ({
   },
 });
 
-export const loadDataStart = (categoryId: string) => ({
+export const loadDataStart = () => ({
   type: constants.LOAD_DATA_START,
-  payload: {
-    categoryId,
-  },
 });
 
 export const loadDataSuccess = (sections: Section[]) => ({
@@ -29,4 +26,19 @@ export const loadDataSuccess = (sections: Section[]) => ({
 
 export const loadDataError = () => ({
   type: constants.LOAD_DATA_ERROR,
+});
+
+export const loadOfferingsStart = () => ({
+  type: constants.LOAD_OFFERINGS_START,
+});
+
+export const loadOfferingsSuccess = (items: Offering[]) => ({
+  type: constants.LOAD_OFFERINGS_SUCCESS,
+  payload: {
+    items,
+  },
+});
+
+export const loadOfferingsError = () => ({
+  type: constants.LOAD_OFFERINGS_ERROR,
 });

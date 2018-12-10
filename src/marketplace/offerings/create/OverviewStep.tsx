@@ -7,14 +7,10 @@ import {
   FormContainer,
 } from '@waldur/form-react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { ImageUploadField } from '@waldur/marketplace/offerings/create/ImageUploadField';
 
-interface OverviewStepProps extends TranslateProps {
-  thumbnail: HTMLImageElement;
-  removeThumbnail(): void;
-}
+import { ImageUploadField } from './ImageUploadField';
 
-export const OverviewStep = withTranslation((props: OverviewStepProps) => (
+export const OverviewStep = withTranslation((props: TranslateProps) => (
   <FormContainer
     submitting={false}
     labelClass="col-sm-2"
@@ -43,8 +39,6 @@ export const OverviewStep = withTranslation((props: OverviewStepProps) => (
       label={props.translate('Offering logo')}
       accept={['image/png', 'image/jpeg', 'image/svg+xml'].join(',')}
       buttonLabel={props.translate('Browse')}
-      image={props.thumbnail}
-      onImageRemove={props.removeThumbnail}
     />
   </FormContainer>
 ));

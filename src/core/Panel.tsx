@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface PanelProps {
-  title: string;
+  title: React.ReactNode;
   className?: string;
   actions?: React.ReactNode;
 }

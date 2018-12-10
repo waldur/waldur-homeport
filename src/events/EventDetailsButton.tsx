@@ -9,7 +9,7 @@ const EventDetailsButton = ({ row, onShowEventsDetails, translate }) => (
   <ActionButton
     title={translate('Details')}
     action={() => onShowEventsDetails(row)}
-    icon={'fa fa-eye'}/>
+    icon="fa fa-eye"/>
 );
 
 const showEventsDetails = event => openModalDialog('eventDetailsDialog', {resolve: {event}});

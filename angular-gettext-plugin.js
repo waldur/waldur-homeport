@@ -7,7 +7,6 @@ const Extractor = require('./angular-gettext-extractor');
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
-const shell = require('shelljs');
 
 function AngularGetTextPlugin(options) {
   this.compileTranslations = options.compileTranslations;
@@ -40,7 +39,7 @@ function compile(options) {
 AngularGetTextPlugin.prototype.apply = function(compiler) {
   const options = this;
 
-  compiler.plugin('emit', (compilation, done) => {
+  compiler.hooks.emit.tapAsync('AngularGettextPlugin', (compilation, done) => {
     if (options.compileTranslations) {
       const results = compile(options.compileTranslations);
       results.forEach( (result) => {

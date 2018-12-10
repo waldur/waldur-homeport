@@ -33,7 +33,7 @@ export interface TableOptions {
 
 export interface Column {
   title: string;
-  render: React.SFC<{row: Entity}>;
+  render: React.ComponentType<{row: Entity}>;
   className?: string;
   orderField?: string;
 }
@@ -53,6 +53,7 @@ export interface TableState {
   pagination?: Pagination;
   query?: string;
   sorting?: SortingState;
+  toggled?: object;
 }
 
 export interface Sorting {

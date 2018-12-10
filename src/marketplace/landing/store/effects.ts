@@ -1,8 +1,8 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
-import { $state } from '@waldur/core/services';
 import { Category } from '@waldur/marketplace/types';
 import { getConfig } from '@waldur/store/config';
+import { stateGo } from '@waldur/store/coreSaga';
 import { getWorkspace, getCustomer } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
@@ -59,9 +59,9 @@ function* gotoOffering(action) {
   const params = {offering_uuid: offeringId};
   const workspace: WorkspaceType = yield select(getWorkspace);
   if (workspace === 'organization') {
-    $state.go('marketplace-offering-customer', params);
+    yield put(stateGo('marketplace-offering-customer', params));
   } else {
-    $state.go('marketplace-offering', params);
+    yield put(stateGo('marketplace-offering', params));
   }
 }
 
