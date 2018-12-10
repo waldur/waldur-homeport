@@ -1,4 +1,4 @@
-import { takeEvery } from 'redux-saga';
+import { takeEvery } from 'redux-saga/effects';
 
 import * as actions from './actions';
 import { $uibModal, $uibModalStack } from './services';
