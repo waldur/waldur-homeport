@@ -30,7 +30,8 @@
     "experts.preview_contract",
     "pythonManagement",
     "jupyterHubManagement",
-    "marketplace"
+    "marketplace",
+    "marketplace.review"
   ],
   "featuresVisible": false,
   "appStoreCategories": [
