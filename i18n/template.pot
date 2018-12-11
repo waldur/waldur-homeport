@@ -7647,7 +7647,7 @@ msgstr ""
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr ""
 
-#: src/marketplace/common/OfferingCard.tsx
+#: src/marketplace/common/ReviewButton.tsx
 msgid "Write review"
 msgstr ""
 
