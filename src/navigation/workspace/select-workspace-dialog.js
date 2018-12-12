@@ -107,7 +107,7 @@ function SelectWorkspaceDialogController(
 
       usersService.getCurrentUser().then(function(user) {
         ctrl.currentUser = user;
-        ctrl.canCreateOrganization = ctrl.currentUser.is_staff || ENV.ownerCanManageCustomer;
+        ctrl.canCreateOrganization = ctrl.currentUser.is_staff || ENV.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER;
       }),
 
       customersService.getAll({

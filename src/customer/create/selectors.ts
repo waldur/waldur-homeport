@@ -7,7 +7,7 @@ import { OuterState } from '@waldur/workspace/types';
 export const expertIsVisible = state => isVisible(state, 'experts');
 
 export const canManageCustomer = (state: any): boolean =>
-  state.config.ownerCanManageCustomer;
+  state.config.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER;
 
 export const canCreateOrganization = (state: OuterState): boolean =>
   isStaff(state) || canManageCustomer(state);

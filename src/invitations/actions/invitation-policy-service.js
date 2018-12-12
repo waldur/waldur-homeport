@@ -23,7 +23,7 @@ export default function InvitationPolicyService(ENV) {
       return true;
     }
     if (role.field === 'customer_role') {
-      return ENV.OWNERS_CAN_MANAGE_OWNERS;
+      return ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS;
     }
   }
 
@@ -39,7 +39,7 @@ export default function InvitationPolicyService(ENV) {
       return true;
     }
     if (invitation.customer_role) {
-      return ENV.OWNERS_CAN_MANAGE_OWNERS;
+      return ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS;
     }
   }
 }

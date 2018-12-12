@@ -12,7 +12,7 @@ export default class DeleteCustomerAction {
   }
 
   get hasPermission() {
-    return this.user.is_staff || (this.isOwner && this.ENV.ownerCanManageCustomer);
+    return this.user.is_staff || (this.isOwner && this.ENV.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER);
   }
 
   get needsSupport() {

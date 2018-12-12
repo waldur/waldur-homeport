@@ -130,7 +130,7 @@ export default class BaseIntro {
 
   userCanCreateOrganization() {
     return this.usersService.getCurrentUser().then((user) => {
-      return user.is_staff || this.ENV.ownerCanManageCustomer;
+      return user.is_staff || this.ENV.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER;
     });
   }
 

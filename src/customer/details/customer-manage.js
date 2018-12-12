@@ -32,7 +32,6 @@ class CustomerManageController {
     this.ENV = ENV;
     this.ISSUE_IDS = ISSUE_IDS;
     this.organizationSubnetsVisible = ENV.organizationSubnetsVisible;
-    this.ownerCanManageCustomer = ENV.ownerCanManageCustomer;
   }
 
   $onInit() {
