@@ -49,6 +49,7 @@ export default class CustomerCreateService {
     const fields = [
       'name',
       'native_name',
+      'domain',
       'email',
       'phone_number',
       'registration_code',
