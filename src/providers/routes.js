@@ -4,7 +4,7 @@ function validateProviderCreation($q, $state, currentStateService, ENV, usersSer
     usersService.getCurrentUser(),
     currentStateService.getCustomer(),
   ]).then(([user, customer]) => {
-    if (ENV.onlyStaffManagesServices && !user.is_staff) {
+    if (ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES && !user.is_staff) {
       return $state.go('invalidRoutePage');
     }
 

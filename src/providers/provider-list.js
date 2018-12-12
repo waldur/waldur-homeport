@@ -107,7 +107,7 @@ function ProviderListController(
                     return gettext('You cannot remove shared provider.');
                   }
                   if (!this.canUserManageService) {
-                    return ENV.onlyStaffManagesServices ?
+                    return ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES ?
                       gettext('Only staff can remove provider.') :
                       gettext('Only customer owner or staff can remove provider.');
                   }
@@ -141,7 +141,7 @@ function ProviderListController(
 
                 tooltip: function(service) {
                   if (!this.canUserManageService) {
-                    return ENV.onlyStaffManagesServices ?
+                    return ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES ?
                       gettext('Only staff can unlink provider.') :
                       gettext('Only customer owner or staff can unlink provider.');
                   }
@@ -176,7 +176,7 @@ function ProviderListController(
       let quotaReached = ncUtils.isCustomerQuotaReached(vm.currentCustomer, 'service');
       let title;
       if (!this.canUserManageService) {
-        title = ENV.onlyStaffManagesServices ?
+        title = ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES ?
           gettext('Only staff can create provider.') :
           gettext('Only customer owner or staff can create provider.');
       }
@@ -204,7 +204,7 @@ function ProviderListController(
       return this.service.operation('unlink', service.url);
     },
     checkPermissions: function() {
-      if (ENV.onlyStaffManagesServices && !this.currentUser.is_staff) {
+      if (ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES && !this.currentUser.is_staff) {
         this.canUserManageService = false;
         return;
       }

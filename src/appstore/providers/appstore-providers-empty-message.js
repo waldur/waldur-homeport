@@ -36,7 +36,7 @@ const appstoreProvidersEmptyMessage = {
     }
 
     get canCreateProvider() {
-      if (this.ENV.onlyStaffManagesServices && !this.usersService.currentUser.is_staff) {
+      if (this.ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES && !this.usersService.currentUser.is_staff) {
         return false;
       }
       return true;
