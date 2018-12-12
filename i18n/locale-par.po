@@ -1,0 +1,41 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: pro\n"
+
+
+msgid "Dashboard"
+msgstr "Command Control"
+
+msgid "Explore {deployment} Marketplace"
+msgstr "Explore {deployment} Response"
+
+msgid "Marketplace"
+msgstr "Response"
+
+#: src/marketplace/routes.js
+msgid "Marketplace checkout"
+msgstr "Response checkout"
+
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
+msgid "Marketplace offerings"
+msgstr "Response offerings"
+
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
+msgid "Marketplace orders"
+msgstr "Response orders"
+
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+msgid "Marketplace service provider"
+msgstr "Response service provider"
+
