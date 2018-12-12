@@ -1,5 +1,5 @@
 <ng-form id="form" class="wizard-big wizard clearfix" role="application" name="$ctrl.Form" novalidate="novalidate">
-  <div class="steps clearfix">
+  <div class="steps clearfix" ng-if="$ctrl.steps.length > 1">
     <ul role="tablist">
       <li role="tab"
         ng-class="$ctrl.getCurrentStepClass($index)"
