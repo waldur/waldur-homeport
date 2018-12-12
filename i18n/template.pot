@@ -2342,6 +2342,7 @@ msgstr ""
 msgid "Helpdesk dashboard"
 msgstr ""
 
+#: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 msgid "Home organization domain name"
 msgstr ""

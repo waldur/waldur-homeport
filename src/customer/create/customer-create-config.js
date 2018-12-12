@@ -19,6 +19,12 @@ export default ENV => [
         pattern: ENV.enforceLatinName && LATIN_NAME_PATTERN,
       },
       {
+        name: 'domain',
+        label: gettext('Home organization domain name'),
+        component: 'customer-domain-field',
+        hidden: !ENV.organizationDomainVisible,
+      },
+      {
         name: 'native_name',
         type: 'string',
         label: gettext('Native name'),
