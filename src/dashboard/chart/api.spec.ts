@@ -36,7 +36,7 @@ describe('Dashboard chart API', () => {
   it('computes filesize unit', () => {
     const tb10 = 1024 * 1024 * 10;
     const gb20 = 1024 * 20;
-    const result = api.getFormatterUnits('filesize', [gb20, tb10]);
+    const result = api.getFormatterUnits('filesize', tb10);
     expect(result.units).toBe('TB');
     expect(result.formatter(tb10)).toBe('10.0');
     expect(result.formatter(gb20)).toBe('0.0');
