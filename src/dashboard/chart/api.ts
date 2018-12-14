@@ -65,7 +65,8 @@ export async function getDailyQuotaCharts(quotas: Quota[], scope: Scope): Promis
 }
 
 export const formatQuotaChart = (quota: Quota, values: number[]): Chart => {
-  const { formatter, units } = getFormatterUnits(quota.type, values);
+  const maxValue = Math.max(...values);
+  const { formatter, units } = getFormatterUnits(quota.type, maxValue);
 
   const current = formatter(values[values.length - 1]);
 
@@ -90,16 +91,15 @@ export const formatQuotaChart = (quota: Quota, values: number[]): Chart => {
   };
 };
 
-export const getFormatterUnits = (chartType: 'filesize' | 'hours', values: number[]) => {
+export const getFormatterUnits = (chartType: 'filesize' | 'hours', value: number) => {
   let formatter = x => x;
   let units;
 
-  const maxValue = Math.max(...values);
   if (chartType === 'filesize') {
-    if (maxValue > 1024 * 1024) {
+    if (value > 1024 * 1024) {
       formatter = x => (x / 1024 / 1024).toFixed(1);
       units = 'TB';
-    } else if (maxValue > 1024) {
+    } else if (value > 1024) {
       formatter = x => (x / 1024).toFixed(1);
       units = 'GB';
     } else {
