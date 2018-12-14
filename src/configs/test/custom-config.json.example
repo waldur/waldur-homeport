@@ -2,7 +2,5 @@
   "name": "development",
   "apiEndpoint": "http://localhost:3011/",
   "toBeFeatures": [],
-  "featuresVisible": true,
-  "googleClientId": "251636923168-9a6n6391j5vv5v4vf0m1k3n9sl9kag41.apps.googleusercontent.com",
-  "facebookClientId": "654736081301402"
+  "featuresVisible": true
 }

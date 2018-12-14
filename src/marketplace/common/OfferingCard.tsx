@@ -1,14 +1,13 @@
 import * as React from 'react';
 
-import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
 
-import { OfferingButton } from '../common/OfferingButton';
 import { RatingStars } from '../common/RatingStars';
 import { Offering } from '../types';
 import './OfferingCard.scss';
+import { ReviewButton } from './ReviewButton';
 
 interface OfferingCardProps {
   offering: Offering;
@@ -42,7 +41,7 @@ export const OfferingCard = (props: OfferingCardProps) => (
       ) : null}
     </div>
     <div className="offering-button-group">
-      <OfferingButton icon="fa fa-comments" title={translate('Write review')}/>
+      <ReviewButton/>
       <OfferingCompareButtonContainer offering={props.offering}/>
     </div>
   </div>

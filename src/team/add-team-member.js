@@ -42,7 +42,7 @@ const addTeamMember = {
       this.canManageOwner = this.resolve.currentUser.is_staff ||
         (this.customersService.isOwner(this.resolve.currentCustomer, this.resolve.editUser) &&
           this.customersService.isOwner(this.resolve.currentCustomer, this.resolve.currentUser) &&
-          this.ENV.OWNERS_CAN_MANAGE_OWNERS);
+          this.ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS);
 
       if (!this.canChangeRole) {
         this.helpText = gettext('You cannot change your own role.');

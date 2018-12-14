@@ -34,7 +34,7 @@ class ProviderUtilsService {
       }
 
       // Do not display provider settings if only staff manages services but user is not staff
-      if (this.ENV.onlyStaffManagesServices && !user.is_staff) {
+      if (this.ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES && !user.is_staff) {
         settingsVisible = false;
       }
     }

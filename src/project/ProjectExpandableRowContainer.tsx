@@ -3,6 +3,7 @@ import * as React from 'react';
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { makeCancelable } from '@waldur/core/makeCancelable';
+import { getFormatterUnits } from '@waldur/dashboard/chart/api';
 import { PROJECT_DASHBOARD } from '@waldur/dashboard/constants';
 import { getDashboardQuotas } from '@waldur/dashboard/registry';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -18,10 +19,16 @@ const parseQuotas = (quotaItems: Quota[]): ExpandableRow[] => {
     ...map,
     [quota.name]: quota.usage,
   }), {});
-  return quotas.map(quota => ({
-    label: quota.title,
-    value: usages[quota.quota] || 0,
-  }));
+
+  return quotas.filter(quota => usages[quota.quota]).map(quota => {
+    const usage = usages[quota.quota] || 0;
+    const { formatter, units } = getFormatterUnits(quota.type, usage);
+    const current = units ? `${formatter(usage)} ${units}` : formatter(usage);
+    return {
+      label: quota.title,
+      value: current,
+    };
+  });
 };
 
 const parseCounters = (categories: Category[], counters: object): ExpandableRow[] => {

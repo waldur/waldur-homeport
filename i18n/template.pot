@@ -2342,6 +2342,7 @@ msgstr ""
 msgid "Helpdesk dashboard"
 msgstr ""
 
+#: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 msgid "Home organization domain name"
 msgstr ""
@@ -7647,7 +7648,7 @@ msgstr ""
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr ""
 
-#: src/marketplace/common/OfferingCard.tsx
+#: src/marketplace/common/ReviewButton.tsx
 msgid "Write review"
 msgstr ""
 
