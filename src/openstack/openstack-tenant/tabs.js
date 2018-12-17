@@ -2,11 +2,11 @@
 export default function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStack.Tenant', {
     order: [
-      ...DEFAULT_RESOURCE_TABS.order,
       'networks',
       'security_groups',
       'floating_ips',
-      'quotas'
+      'quotas',
+      ...DEFAULT_RESOURCE_TABS.order,
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       networks: {
