@@ -109,9 +109,9 @@ function stateConfig(ResourceStateConfigurationProvider) {
 function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStackTenant.Volume', {
     order: [
-      ...DEFAULT_RESOURCE_TABS.order,
       'snapshots',
       'snapshot_schedules',
+      ...DEFAULT_RESOURCE_TABS.order,
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       snapshots: {

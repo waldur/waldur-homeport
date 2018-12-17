@@ -59,8 +59,8 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
 function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_SUBRESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStack.Network', {
     order: [
-      ...DEFAULT_SUBRESOURCE_TABS.order,
       'subnets',
+      ...DEFAULT_SUBRESOURCE_TABS.order,
     ],
     options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
       subnets: {
