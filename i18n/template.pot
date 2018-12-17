@@ -676,8 +676,8 @@ msgstr ""
 msgid "Backup"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions.js
-msgid "Backup has been updated"
+#: src/openstack/openstack-backup/actions/EditAction.ts
+msgid "Backup has been updated."
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/module.js
@@ -1573,6 +1573,7 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
+#: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.js
 #: src/openstack/openstack-tenant/actions/DestroyAction.ts
@@ -2139,6 +2140,7 @@ msgid "Fixed price"
 msgstr ""
 
 #: src/cost-planning/cost-plan-flavors.html
+#: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-instance/openstack-instance-config.js
@@ -2306,7 +2308,7 @@ msgstr ""
 msgid "Got it!"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions.js
+#: src/openstack/openstack-backup/actions/EditAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
 msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr ""
@@ -2938,7 +2940,7 @@ msgstr ""
 msgid "Keep until"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions.js
+#: src/openstack/openstack-backup/actions/EditAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
 #: src/openstack/openstack-snapshot/module.js
 #: src/openstack/openstack-volume/module.js
@@ -3423,7 +3425,7 @@ msgstr ""
 msgid "Network has been updated."
 msgstr ""
 
-#: src/openstack/openstack-backup/actions.js
+#: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-network/breadcrumbs.js
 #: src/openstack/openstack-subnet/breadcrumbs.js
@@ -5461,10 +5463,6 @@ msgstr ""
 msgid "Resource name"
 msgstr ""
 
-#: src/resource/actions/base.ts
-msgid "Resource should be {state}."
-msgstr ""
-
 #: src/providers/details/provider-price-list.js
 #: src/resource/list/resource-global-list-filtered.html
 msgid "Resource type"
@@ -5513,6 +5511,10 @@ msgstr ""
 
 #: src/resource/state/constants.js
 msgid "Restarting"
+msgstr ""
+
+#: src/openstack/openstack-backup/actions/RestoreAction.ts
+msgid "Restore"
 msgstr ""
 
 #: src/openstack/openstack-snapshot/module.js
@@ -5699,6 +5701,7 @@ msgstr ""
 msgid "Security group has been updated."
 msgstr ""
 
+#: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 #: src/openstack/openstack-instance/openstack-instance-config.js
@@ -5822,7 +5825,7 @@ msgstr ""
 msgid "Select role"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions.js
+#: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 #: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "Select security groups..."
@@ -7471,6 +7474,14 @@ msgstr ""
 
 #: src/resource/support/ChartContainer.tsx
 msgid "VPC vCPU"
+msgstr ""
+
+#: src/resource/actions/base.ts
+msgid "Valid runtime states for operation: {validStates}."
+msgstr ""
+
+#: src/resource/actions/base.ts
+msgid "Valid states for operation: {validStates}."
 msgstr ""
 
 #: src/marketplace/details/OrderSummary.tsx
