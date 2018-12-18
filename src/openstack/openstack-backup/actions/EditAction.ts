@@ -1,7 +1,7 @@
 import { translate } from '@waldur/i18n';
 import {
   createDefaultEditAction,
-  createLatinNameField,
+  createNameField,
   validateState,
   createDescriptionField
 } from '@waldur/resource/actions/base';
@@ -12,7 +12,7 @@ export default function createAction(): ResourceAction {
   return mergeActions(createDefaultEditAction(), {
     successMessage: translate('Backup has been updated.'),
     fields: [
-      createLatinNameField(),
+      createNameField(),
       createDescriptionField(),
       {
         name: 'kept_until',
