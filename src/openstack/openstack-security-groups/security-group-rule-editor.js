@@ -22,7 +22,7 @@ const securityGroupRuleEditor = {
     }
 
     getPortMin(rule) {
-      if (rule.protocol === 'icmp') {
+      if (rule.protocol === 'icmp' || rule.protocol === '') {
         return -1;
       } else {
         return 1;
