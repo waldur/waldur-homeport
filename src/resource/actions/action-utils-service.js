@@ -3,7 +3,7 @@ import { translate } from '@waldur/i18n';
 // @ngInject
 export default function actionUtilsService(
   ncUtilsFlash, $rootScope, $http, $q, $uibModal, $injector, ncUtils, features,
-  resourcesService, ActionConfiguration, ActionResourceLoader, coreUtils, usersService) {
+  resourcesService, ActionConfiguration, usersService) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return usersService.getCurrentUser().then(user => {
@@ -150,7 +150,7 @@ export default function actionUtilsService(
 
   this.handleActionSuccess = function(action) {
     let template = action.successMessage ||
-        coreUtils.templateFormatter(gettext('Request to {action} has been accepted.'), { action: action.title.toLowerCase() });
+        translate('Request to {action} has been accepted.', { action: action.title.toLowerCase() });
     ncUtilsFlash.success(template);
     if (action.onSuccess) {
       action.onSuccess($injector);

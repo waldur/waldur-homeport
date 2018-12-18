@@ -18,7 +18,13 @@ function ActionDialogController(
       $scope.errors = {};
       $scope.form = {};
       $scope.loading = true;
-      ActionResourceLoader.getSelectList($scope.action.fields).then(function() {
+      let promise;
+      if ($scope.action.init) {
+        promise = $scope.action.init($scope.resource, $scope.form, $scope.action);
+      } else {
+        promise = ActionResourceLoader.getSelectList($scope.action.fields);
+      }
+      promise.then(function() {
         angular.forEach($scope.action.fields, function(field, name) {
           if (field.init) {
             field.init(field, $scope.resource, $scope.form, $scope.action);

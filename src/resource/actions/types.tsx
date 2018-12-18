@@ -26,7 +26,6 @@ interface SelectField<Resource> extends BaseField<Resource> {
   serializer?: (items: any[]) => any[];
   formatter?: ($filter, item) => string;
   modelParser?: (field, items) => any[];
-  valueFormatter?: (field, item) => string;
   display_name_field?: string;
   value_field?: string;
   url?: string;
@@ -81,6 +80,8 @@ export interface ResourceAction<Resource = BaseResource> {
   component?: string;
   useResolve?: boolean;
   isVisible?: boolean;
+  init?(resource, form, action): void;
+  serializer?(form): object;
 }
 
 export interface ActionContext<Resource = BaseResource> {
