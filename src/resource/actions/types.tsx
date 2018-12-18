@@ -1,3 +1,5 @@
+import { Omit } from 'react-redux';
+
 import { BaseResource } from '@waldur/resource/types';
 import { User } from '@waldur/workspace/types';
 
@@ -8,10 +10,11 @@ interface BaseField<Resource> {
   required?: boolean;
   component?: string;
   placeholder?: string;
-  init?: (field, resource: Resource) => void;
+  init?: (field, resource: Resource, form?: any, action?: any) => void;
   default_value?: any;
   resource_default_value?: boolean;
   help_text?: string;
+  formGroupClass?: string;
 }
 
 interface SelectOption {
@@ -41,11 +44,16 @@ interface IntegerField<Resource> extends BaseField<Resource> {
   max_value?: number;
 }
 
+interface ComponentField<Resource> extends Omit<BaseField<Resource>, 'type'> {
+  component: string;
+}
+
 export type ActionField<Resource = BaseResource> =
   | BaseField<Resource>
   | TextField<Resource>
   | SelectField<Resource>
   | IntegerField<Resource>
+  | ComponentField<Resource>
 ;
 
 type ActionType = 'button' | 'form';
@@ -72,6 +80,8 @@ export interface ResourceAction<Resource = BaseResource> {
   component?: string;
   useResolve?: boolean;
   isVisible?: boolean;
+  init?(resource, form, action): void;
+  serializer?(form): object;
 }
 
 export interface ActionContext<Resource = BaseResource> {

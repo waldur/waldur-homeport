@@ -11,14 +11,20 @@ export default function actionDialog() {
 
 // @ngInject
 function ActionDialogController(
-  $scope, $q, $http, $state, actionUtilsService, ncUtilsFlash,
+  $scope, $q, $http, $state, $rootScope, actionUtilsService, ncUtilsFlash,
   ActionResourceLoader, ncUtils, DEFAULT_FIELD_OPTIONS) {
   angular.extend($scope, {
     init: function () {
       $scope.errors = {};
       $scope.form = {};
       $scope.loading = true;
-      ActionResourceLoader.getSelectList($scope.action.fields).then(function() {
+      let promise;
+      if ($scope.action.init) {
+        promise = $scope.action.init($scope.resource, $scope.form, $scope.action);
+      } else {
+        promise = ActionResourceLoader.getSelectList($scope.action.fields);
+      }
+      promise.then(function() {
         angular.forEach($scope.action.fields, function(field, name) {
           if (field.init) {
             field.init(field, $scope.resource, $scope.form, $scope.action);
@@ -32,7 +38,7 @@ function ActionDialogController(
           if (field.modelParser) {
             $scope.form[name] = field.modelParser(field, $scope.form[name]);
           }
-          if (field.type === 'multiselect') {
+          if (field.type === 'multiselect' && !$scope.action.init) {
             $scope.form[name] = ActionResourceLoader.formatChoices(field, $scope.form[name]);
           }
           if ($scope.action.name === 'edit') {
@@ -55,6 +61,8 @@ function ActionDialogController(
         }
       }).finally(function() {
         $scope.loading = false;
+        // Trigger digest for async/await
+        $rootScope.$applyAsync();
       });
     },
     submitActive: function() {

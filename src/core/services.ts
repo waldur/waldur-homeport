@@ -37,3 +37,6 @@ export const blockingExecutor = (callback: () => IPromise<any>) => {
     return $q.when(callback()).finally(() => isExecuting = false);
   };
 };
+
+export const cacheInvalidationFactory = service => () =>
+  ngInjector.get(service).clearAllCacheForCurrentEndpoint();
