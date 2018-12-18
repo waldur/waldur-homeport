@@ -53,8 +53,8 @@ function stateConfig(ResourceStateConfigurationProvider) {
 function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_SUBRESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStackTenant.BackupSchedule', {
     order: [
-      ...DEFAULT_SUBRESOURCE_TABS.order,
       'backups',
+      ...DEFAULT_SUBRESOURCE_TABS.order,
     ],
     options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
       backups: {

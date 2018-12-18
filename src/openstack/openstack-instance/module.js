@@ -54,11 +54,11 @@ function stateConfig(ResourceStateConfigurationProvider) {
 function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStackTenant.Instance', {
     order: [
-      ...DEFAULT_RESOURCE_TABS.order,
       'volumes',
       'backups',
       'backup_schedules',
       'internal_ips_set',
+      ...DEFAULT_RESOURCE_TABS.order,
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       volumes: {

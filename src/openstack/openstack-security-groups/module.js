@@ -27,8 +27,8 @@ export default module => {
 function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_SUBRESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStack.SecurityGroup', {
     order: [
-      ...DEFAULT_SUBRESOURCE_TABS.order,
       'rules',
+      ...DEFAULT_SUBRESOURCE_TABS.order,
     ],
     options: angular.merge({
       rules: {

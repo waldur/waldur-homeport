@@ -64,8 +64,8 @@ function stateConfig(ResourceStateConfigurationProvider) {
 function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStackTenant.Snapshot', {
     order: [
-      ...DEFAULT_RESOURCE_TABS.order,
       'restored',
+      ...DEFAULT_RESOURCE_TABS.order,
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       restored: {
