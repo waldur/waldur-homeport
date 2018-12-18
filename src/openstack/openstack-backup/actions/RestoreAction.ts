@@ -11,16 +11,6 @@ interface NamedResource {
   name: string;
 }
 
-interface Choice {
-  value: string;
-  display_name: string;
-}
-
-const formatChoices = (choices: NamedResource[]): Choice[] => choices.map(choice => ({
-  value: choice.url,
-  display_name: choice.name,
-}));
-
 // tslint:disable-next-line:variable-name
 const loadFlavors = (settings_uuid: string) =>
   getAll<NamedResource>('/openstacktenant-flavors/', {params: {settings_uuid}});
@@ -35,7 +25,7 @@ const loadSubnets = (settings_uuid: string) =>
 
 // tslint:disable-next-line:variable-name
 const loadFloatingIps = (settings_uuid: string) =>
-  getAll<NamedResource>('/openstacktenant-security-groups/', {params: {
+  getAll<NamedResource>('/openstacktenant-floating-ips/', {params: {
     is_booked: 'False',
     free: 'True',
     settings_uuid,
@@ -61,27 +51,34 @@ export default function createAction(): ResourceAction<OpenStackBackup> {
         loadSubnets(resource.service_settings_uuid),
       ]);
 
-      const securityGroupChoices = formatChoices(securityGroups);
-      const securityGroupsUrls = resource.instance_security_groups.map(sg => sg.url);
-      const preselectsecurityGroups = securityGroupChoices.filter(sg => securityGroupsUrls.includes(sg.value));
+      form.security_groups = resource.instance_security_groups.map(choice => ({
+        value: choice.url,
+        display_name: choice.name,
+      }));
 
-      action.fields.security_groups.choices = securityGroupChoices;
-      form.security_groups = preselectsecurityGroups;
+      action.fields.security_groups.choices = securityGroups.map(choice => ({
+        value: choice.url,
+        display_name: choice.name,
+      }));
 
       action.fields.flavor.choices = flavors.map(flavor => ({
         display_name: formatFlavor(flavor),
-        value: flavor.url,
+        value: flavor,
       }));
+
       action.fields.networks.choices = {
         subnets: internalIps,
         floating_ips: floatingIps,
       };
+
+      form.internal_ips_set = resource.instance_internal_ips_set;
     },
     serializer: form => {
       return {
-        flavor: form.flavor,
+        flavor: form.flavor.url,
+        internal_ips_set: form.internal_ips_set,
+        floating_ips: form.floating_ips,
         security_groups: form.security_groups.map(item => ({url: item.value})),
-        networks: form.networks,
       };
     },
     fields: [
