@@ -45,6 +45,10 @@ export default function createAction(): ResourceAction {
         label: translate('Schedule'),
         maxlength: 15,
       },
+      {
+        name: 'warning',
+        component: 'openstackBackupScheduleWarning',
+      },
     ],
     onSuccess() {
       $rootScope.$broadcast('updateBackupScheduleList');
