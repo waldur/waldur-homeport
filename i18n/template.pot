@@ -681,6 +681,10 @@ msgstr ""
 msgid "Backup has been updated."
 msgstr ""
 
+#: src/openstack/openstack-backup-schedule/BackupScheduleWarning.tsx
+msgid "Backup schedule caveats"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/module.js
 msgid "Backup schedule has been updated"
 msgstr ""

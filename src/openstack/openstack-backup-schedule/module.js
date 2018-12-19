@@ -2,12 +2,14 @@ import openstackBackupSchedulesList from './openstack-backup-schedules-list';
 import openstackBackupSchedulesService from './openstack-backup-schedules-service';
 import breadcrumbsConfig from './breadcrumbs';
 import { OpenStackBackupScheduleSummary } from './OpenStackBackupScheduleSummary';
+import openstackBackupScheduleWarning from './BackupScheduleWarning';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.BackupSchedule', OpenStackBackupScheduleSummary);
   module.service('openstackBackupSchedulesService', openstackBackupSchedulesService);
   module.component('openstackBackupSchedulesList', openstackBackupSchedulesList);
+  module.component('openstackBackupScheduleWarning', openstackBackupScheduleWarning);
   module.config(actionConfig);
   module.config(tabsConfig);
   module.config(stateConfig);
@@ -34,7 +36,10 @@ function actionConfig(ActionConfigurationProvider) {
           timezone: {
             type: 'timezone',
           },
-        }
+          warning: {
+            component: 'openstackBackupScheduleWarning',
+          },
+        },
       },
     }
   });
