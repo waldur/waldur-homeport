@@ -21,6 +21,9 @@ class SidebarController {
   }
 
   onMenuClick(event, item) {
+    if (item.action) {
+      item.action();
+    }
     if (item.children) {
       item.expanded = !item.expanded;
       event.preventDefault();

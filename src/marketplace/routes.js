@@ -108,7 +108,7 @@ export default function routes($stateProvider) {
       template: '<marketplace-orders-list></marketplace-orders-list>',
       parent: 'project',
       data: {
-        pageTitle: gettext('Marketplace orders'),
+        pageTitle: gettext('Orders'),
         feature: 'marketplace',
       }
     })
@@ -208,7 +208,7 @@ export default function routes($stateProvider) {
       template: '<marketplace-order-items-list></marketplace-order-items-list>',
       parent: 'organization',
       data: {
-        pageTitle: gettext('Order items'),
+        pageTitle: gettext('Orders'),
         feature: 'marketplace',
       }
     })
