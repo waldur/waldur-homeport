@@ -7,19 +7,25 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
       if (customer && customer.is_service_provider) {
         return [
           {
-            label: gettext('Marketplace offerings'),
-            icon: 'fa-file',
-            link: 'marketplace-vendor-offerings({uuid: $ctrl.context.customer.uuid})',
+            label: gettext('My services'),
+            icon: 'fa-shopping-cart',
             feature: 'marketplace',
-          },
-          {
-            key: 'marketplace',
-            icon: 'fa-file',
-            label: gettext('Order items'),
-            feature: 'marketplace',
-            link: 'marketplace-order-items({uuid: $ctrl.context.customer.uuid})',
-            index: 220,
-          },
+            action: () => {},
+            index: 310,
+            children: [
+              {
+                label: gettext('Offerings'),
+                icon: 'fa-file',
+                link: 'marketplace-vendor-offerings({uuid: $ctrl.context.customer.uuid})',
+              },
+              {
+                key: 'marketplace',
+                icon: 'fa-file',
+                label: gettext('Orders'),
+                link: 'marketplace-order-items({uuid: $ctrl.context.customer.uuid})',
+              },
+            ]
+          }
         ];
       } else {
         return [];
@@ -38,7 +44,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         index: 210,
       },
       {
-        label: gettext('Marketplace orders'),
+        label: gettext('Orders'),
         icon: 'fa-folder-open',
         link: 'marketplace-order-list({uuid: $ctrl.context.project.uuid})',
         feature: 'marketplace',
