@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.2\n"
 
 #: src/premiumSupport/premium-support-contracts/contract-details-dialog.js:21
 msgid "\"{planName}\" details"
@@ -24,10 +24,8 @@ msgid "{fieldLabel} is required for provisioning resource."
 msgstr "{fieldLabel} on vajalik ressursi eraldamiseks."
 
 #: src/events/constants.ts:22
-msgid ""
-"{quota_name} quota threshold has been reached for project {project_name}."
-msgstr ""
-"{quota_name} kvoodi künnis on saavutatud projekti {project_name} jaoks."
+msgid "{quota_name} quota threshold has been reached for project {project_name}."
+msgstr "{quota_name} kvoodi künnis on saavutatud projekti {project_name} jaoks."
 
 #: src/directives/customer-balance.js:54
 msgid "{quotaUsage} out of {quotaLimit}."
@@ -62,29 +60,20 @@ msgid "{resource_full_name} has been restarted."
 msgstr "{resource_full_name} on taaskäivitatud."
 
 #: src/events/constants.ts:27
-msgid ""
-"{resource_full_name} has been scheduled to deletion by {user_full_name}."
-msgstr ""
-"{resource_full_name} on planeeritud kustutamiseks kasutaja {user_full_name} "
-"poolt."
+msgid "{resource_full_name} has been scheduled to deletion by {user_full_name}."
+msgstr "{resource_full_name} on planeeritud kustutamiseks kasutaja {user_full_name} poolt."
 
 #: src/events/constants.ts:31
 msgid "{resource_full_name} has been scheduled to restart by {user_full_name}."
-msgstr ""
-"{resource_full_name} on planeeritud ajastatud restardiks kasutaja "
-"{user_full_name} poolt."
+msgstr "{resource_full_name} on planeeritud ajastatud restardiks kasutaja {user_full_name} poolt."
 
 #: src/events/constants.ts:34
 msgid "{resource_full_name} has been scheduled to start by {user_full_name}."
-msgstr ""
-"{resource_full_name} on planeeritud ajastatud käivitamiseks kasutaja "
-"{user_full_name} poolt."
+msgstr "{resource_full_name} on planeeritud ajastatud käivitamiseks kasutaja {user_full_name} poolt."
 
 #: src/events/constants.ts:37
 msgid "{resource_full_name} has been scheduled to stop by {user_full_name}."
-msgstr ""
-"{resource_full_name} on planeeritud ajastatud peatamiseks kasutaja "
-"{user_full_name} poolt."
+msgstr "{resource_full_name} on planeeritud ajastatud peatamiseks kasutaja {user_full_name} poolt."
 
 #: src/events/constants.ts:35
 msgid "{resource_full_name} has been started."
@@ -130,23 +119,19 @@ msgstr "{value} kuupäeval {date}"
 msgid "{value} at {date}, estimated"
 msgstr "{value} kuupäeval {date}, hinnanguliselt"
 
-#: src/error/error-403.html:8
-#: src/error/error-404.html:6
+#: src/error/error-403.html:8 src/error/error-404.html:6
 msgid "&lt; Back"
 msgstr "&lt; Tagasi"
 
-#: src/openstack/openstack-tenant/openstack-template.js:27
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js:25
+#: src/openstack/openstack-tenant/openstack-template.js:27 src/openstack/openstack-tenant/openstack-tenant-prices.js:25
 msgid "1 day"
 msgstr "1 päev"
 
-#: src/openstack/openstack-tenant/openstack-template.js:33
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js:30
+#: src/openstack/openstack-tenant/openstack-template.js:33 src/openstack/openstack-tenant/openstack-tenant-prices.js:30
 msgid "30 days"
 msgstr "30 päeva"
 
-#: src/openstack/openstack-tenant/openstack-template.js:40
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js:35
+#: src/openstack/openstack-tenant/openstack-template.js:40 src/openstack/openstack-tenant/openstack-tenant-prices.js:35
 msgid "365 days"
 msgstr "365 päeva"
 
@@ -158,8 +143,7 @@ msgstr "Profiil on loodud."
 msgid "Abbreviation"
 msgstr "Lühend"
 
-#: src/routes/about.js:50 app/views/about/index.html:3
-#: app/views/about/index.html:8
+#: src/routes/about.js:50 app/views/about/index.html:3 app/views/about/index.html:8
 msgid "About"
 msgstr "Info"
 
@@ -171,8 +155,7 @@ msgstr "NÕUSTU"
 msgid "Accepted"
 msgstr "Kinnitatud"
 
-#: src/openstack/openstack-tenant/openstack-tenant-config.js:51
-#: src/openstack/openstack-tenant/openstack-tenant-summary.html:15
+#: src/openstack/openstack-tenant/openstack-tenant-config.js:51 src/openstack/openstack-tenant/openstack-tenant-summary.html:15
 #: src/resource/summary/virtual-machine-summary.html:13
 msgid "Access"
 msgstr "Ligipääs"
@@ -193,8 +176,7 @@ msgstr "Konto on aktiveeritud."
 msgid "Account removal"
 msgstr "Konto eemaldamine"
 
-#: src/billing/billing-utils.js:2
-#: src/customer/customer-create-config.js:28
+#: src/billing/billing-utils.js:2 src/customer/customer-create-config.js:28
 msgid "Accounting"
 msgstr "Raamatupidamine"
 
@@ -206,8 +188,7 @@ msgstr "Raamatupidamise andmed"
 msgid "Accounting record"
 msgstr "Raamatupidamise sissekanne"
 
-#: src/billing/billing-record-header.html:9
-#: src/billing/billing-tabs.html:10
+#: src/billing/billing-record-header.html:9 src/billing/billing-tabs.html:10
 msgid "Accounting records"
 msgstr "Raamatupidamise sissekanne"
 
@@ -215,24 +196,17 @@ msgstr "Raamatupidamise sissekanne"
 msgid "Accounting start date"
 msgstr "Arvestuse alguskuupäev"
 
-#: src/cost-planning/cost-plan-items.html:11
-#: src/cost-planning/cost-plan-optimizer.html:18
-#: src/openstack/openstack-security-groups/security-group-rule-editor.html:15
-#: src/paypal/paypal-invoice-actions.html:3
-#: src/resource/actions/action-button-resource.html:3
-#: src/table/responsive-table.js:333
+#: src/cost-planning/cost-plan-items.html:11 src/cost-planning/cost-plan-optimizer.html:18 src/openstack/openstack-security-groups/security-group-rule-editor.html:15
+#: src/paypal/paypal-invoice-actions.html:3 src/resource/actions/action-button-resource.html:3 src/table/responsive-table.js:333
 msgid "Actions"
 msgstr "Toimingud"
 
-#: src/issues/issue-navigation-service.js:21
-#: src/issues/issues-activity-stream.html:15
+#: src/issues/issue-navigation-service.js:21 src/issues/issues-activity-stream.html:15
 msgid "Activity stream"
 msgstr "Aktiivsuse voog"
 
-#: src/issues/comments/issue-comments-form.html:17
-#: src/openstack/openstack-instance/openstack-instance-floating-ips.html:53
-#: src/openstack/openstack-instance/openstack-instance-networks.html:39
-#: src/team/add-project-member.js:22
+#: src/issues/comments/issue-comments-form.html:17 src/openstack/openstack-instance/openstack-instance-floating-ips.html:53
+#: src/openstack/openstack-instance/openstack-instance-networks.html:39 src/team/add-project-member.js:22
 msgid "Add"
 msgstr "Lisa"
 
@@ -240,8 +214,7 @@ msgstr "Lisa"
 msgid "Add a new organization"
 msgstr "Lisa uus organisatsioon"
 
-#: app/views/directives/customer-balance.html:113
-#: app/views/directives/customer-balance.html:147
+#: app/views/directives/customer-balance.html:113 app/views/directives/customer-balance.html:147
 msgid "Add credit"
 msgstr "Lisa krediiti"
 
@@ -285,9 +258,7 @@ msgstr "Lisa organisatsioon"
 msgid "Add private cloud"
 msgstr "Lisada privaatpilv"
 
-#: src/appstore/dialog/appstore-project-selector.html:16
-#: src/project/project-create.html:72
-#: src/project/projects-list.js:157
+#: src/appstore/dialog/appstore-project-selector.html:16 src/project/project-create.html:72 src/project/projects-list.js:157
 msgid "Add project"
 msgstr "Lisa projekt"
 
@@ -295,8 +266,7 @@ msgstr "Lisa projekt"
 msgid "Add project member"
 msgstr "Lisa projekti liige"
 
-#: src/providers/create.html:155
-#: src/providers/provider-list.js:186
+#: src/providers/create.html:155 src/providers/provider-list.js:186
 msgid "Add provider"
 msgstr "Lisa pakkuja"
 
@@ -316,8 +286,7 @@ msgstr "Lisa SLA"
 msgid "Add snapshots"
 msgstr "Lisa tõmmised"
 
-#: src/user/keys/key-list.js:62
-#: src/user/routes.js:91
+#: src/user/keys/key-list.js:62 src/user/routes.js:91
 msgid "Add SSH key"
 msgstr "Lisa SSH võti"
 
@@ -333,13 +302,11 @@ msgstr "Lisa köited"
 msgid "Add Waldur user ssh keys to the FreeIPA profile"
 msgstr "Lisa kasutaja ssh võtmed FreeIPA profiili"
 
-#: src/project/project-providers-service.js:75
-#: src/providers/details/provider-projects.js:86
+#: src/project/project-providers-service.js:75 src/providers/details/provider-projects.js:86
 msgid "Adding link"
 msgstr "Lingi lisamine"
 
-#: src/digitalocean/digitalocean-droplet-config.js:88
-#: src/openstack/openstack-instance/openstack-instance-config.js:149
+#: src/digitalocean/digitalocean-droplet-config.js:88 src/openstack/openstack-instance/openstack-instance-config.js:149
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Täiendavad andmed mida lisatakse instantsi eraldamisel."
 
@@ -347,38 +314,25 @@ msgstr "Täiendavad andmed mida lisatakse instantsi eraldamisel."
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr "Täiendavad andmed mida lisatakse virtuaalmasina eraldamisel."
 
-#: src/customer/customer-create-config.js:47
-#: src/customer/customer-manage.html:38
-#: src/customer/customer-manage.html:74
+#: src/customer/customer-create-config.js:47 src/customer/customer-manage.html:38 src/customer/customer-manage.html:74
 #: src/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
 msgid "Address"
 msgstr "Aadress"
 
-#: src/issues/constants.ts:63
-#: src/issues/issue-detail.html:50
-#: src/issues/issue-quick-create.html:94
-#: src/issues/issue-registration.html:171
+#: src/issues/constants.ts:63 src/issues/issue-detail.html:50 src/issues/issue-quick-create.html:94 src/issues/issue-registration.html:171
 msgid "Affected resource"
 msgstr "Mõjutatud ressurss"
 
-#: src/billing/billing-record-details.html:14
-#: src/customer/customer-manage.html:33
+#: src/billing/billing-record-details.html:14 src/customer/customer-manage.html:33
 msgid "Agreement number"
 msgstr "Lepingu number"
 
-#: src/alerts/base-alerts-list.js:35
-#: src/dashboard/project-alerts-feed.js:12
-#: src/events/event-types-dialog.js:20
+#: src/alerts/base-alerts-list.js:35 src/dashboard/project-alerts-feed.js:12 src/events/event-types-dialog.js:20
 msgid "Alert types"
 msgstr "Märguande tüübid"
 
-#: src/customer/customer-workspace.js:112
-#: src/customer/routes.js:89
-#: src/dashboard/project-alerts-feed.js:11
-#: src/help/constants.ts:5
-#: src/project/project-workspace.js:98
-#: src/project/routes.js:110
-#: src/resource/tabs/constants.ts:12
+#: src/customer/customer-workspace.js:112 src/customer/routes.js:89 src/dashboard/project-alerts-feed.js:11 src/help/constants.ts:5 src/project/project-workspace.js:98
+#: src/project/routes.js:110 src/resource/tabs/constants.ts:12
 msgid "Alerts"
 msgstr "Hoiatused"
 
@@ -422,9 +376,7 @@ msgstr "Jaotuse nimi"
 msgid "Already have an account?"
 msgstr "Kui Sul konto juba on?"
 
-#: src/payments/payment-list.js:50
-#: app/views/directives/customer-balance.html:101
-#: app/views/directives/customer-balance.html:136
+#: src/payments/payment-list.js:50 app/views/directives/customer-balance.html:101 app/views/directives/customer-balance.html:136
 msgid "Amount"
 msgstr "Summa"
 
@@ -444,9 +396,7 @@ msgstr "Projekti eemaldamisel tekkis viga."
 msgid "Analytics"
 msgstr "Analüütika"
 
-#: src/openstack/openstack-security-groups/filters.js:32
-#: src/openstack/openstack-security-groups/filters.js:45
-#: src/openstack/openstack-security-groups/filters.js:56
+#: src/openstack/openstack-security-groups/filters.js:32 src/openstack/openstack-security-groups/filters.js:45 src/openstack/openstack-security-groups/filters.js:56
 msgid "Any"
 msgstr "Vähemalt üks"
 
@@ -458,14 +408,8 @@ msgstr "API token'i eluiga"
 msgid "Application details"
 msgstr "Rakenduse detailid"
 
-#: src/analytics/resource-chart-service.js:27
-#: src/ansible/constants.ts:1
-#: src/ansible/routes.js:11
-#: src/ansible/routes.js:27
-#: src/ansible/sidebar.js:8
-#: src/appstore/routes.js:42
-#: src/dashboard/constants.ts:7
-#: src/resource/breadcrumbs/resource-categories.js:3
+#: src/analytics/resource-chart-service.js:27 src/ansible/constants.ts:1 src/ansible/routes.js:11 src/ansible/routes.js:27 src/ansible/sidebar.js:8
+#: src/appstore/routes.js:42 src/dashboard/constants.ts:7 src/resource/breadcrumbs/resource-categories.js:3
 msgid "Applications"
 msgstr "Rakendused"
 
@@ -482,20 +426,12 @@ msgid "Apps"
 msgstr "Rakendused"
 
 #: src/openstack/openstack-instance/openstack-instance-config.js:168
-msgid ""
-"Are you sure you do not want to create a data volume? System volume is not "
-"resizable"
-msgstr ""
-"Oled sa kindel et ei soovi luua andmete köidet? Süsteemiköite suurus ei ole "
-"muudetav"
+msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
+msgstr "Oled sa kindel et ei soovi luua andmete köidet? Süsteemiköite suurus ei ole muudetav"
 
 #: src/resource/actions/action-utils-service.js:62
-msgid ""
-"Are you sure you want to delete a {resourceType} in an Erred state? A "
-"cleanup attempt will be performed if you choose so. {confirmTextSuffix}."
-msgstr ""
-"Oled sa kindel et soovid kustutada {resourceType} Erred olekus?  Sellisel "
-"juhul proovitakse läbi viia ära puhastamise katse . {confirmTextSuffix}."
+msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. {confirmTextSuffix}."
+msgstr "Oled sa kindel et soovid kustutada {resourceType} Erred olekus?  Sellisel juhul proovitakse läbi viia ära puhastamise katse . {confirmTextSuffix}."
 
 #: src/resource/actions/action-utils-service.js:64
 msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}."
@@ -503,9 +439,7 @@ msgstr "Kas soovite kindlasti kustutada {resourceType}? {confirmTextSuffix}."
 
 #: src/providers/provider-list.js:124
 msgid "Are you sure you want to unlink provider and all related resources?"
-msgstr ""
-"Oled kindel et soovid tühistada lingi teenusepakkujale ja kõigile seotud "
-"ressurssidele?"
+msgstr "Oled kindel et soovid tühistada lingi teenusepakkujale ja kõigile seotud ressurssidele?"
 
 #: src/resource/actions/action-utils-service.js:68
 msgid "Are you sure? This action cannot be undone."
@@ -523,9 +457,7 @@ msgstr "Määrata pakett"
 msgid "Assign VPC package"
 msgstr "Määrata VPC pakett"
 
-#: src/issues/issue-detail.html:25
-#: src/issues/issue-registration.html:190
-#: src/issues/issues-list.js:120
+#: src/issues/issue-detail.html:25 src/issues/issue-registration.html:190 src/issues/issues-list.js:120
 msgid "Assigned to"
 msgstr "Kellele määratud"
 
@@ -533,8 +465,7 @@ msgstr "Kellele määratud"
 msgid "Assignee"
 msgstr "Kellele määratud"
 
-#: src/openstack/openstack-volume/openstack-instance-volumes.js:50
-#: src/openstack/openstack-volume/openstack-volume-summary.html:16
+#: src/openstack/openstack-volume/openstack-instance-volumes.js:50 src/openstack/openstack-volume/openstack-volume-summary.html:16
 #: src/openstack/openstack-volume/openstack-volumes-list.js:58
 msgid "Attached to"
 msgstr "Lisatud"
@@ -543,14 +474,8 @@ msgstr "Lisatud"
 msgid "Audit log"
 msgstr "Auditi logi"
 
-#: src/customer/customer-workspace.js:98
-#: src/customer/routes.js:72
-#: src/project/project-workspace.js:84
-#: src/project/routes.js:102
-#: src/user/constants.ts:38
-#: src/user/constants.ts:8
-#: src/user/routes.js:15
-#: src/user/user-dashboard.html:28
+#: src/customer/customer-workspace.js:98 src/customer/routes.js:72 src/project/project-workspace.js:84 src/project/routes.js:102 src/user/constants.ts:38
+#: src/user/constants.ts:8 src/user/routes.js:15 src/user/user-dashboard.html:28
 msgid "Audit logs"
 msgstr "Auditi logid"
 
@@ -558,8 +483,7 @@ msgstr "Auditi logid"
 msgid "Authentication events"
 msgstr "Autentimise sündmused"
 
-#: src/openstack/openstack-instance/openstack-instance-floating-ips.js:7
-#: src/openstack/openstack-instance/openstack-instance-networks.js:11
+#: src/openstack/openstack-instance/openstack-instance-floating-ips.js:7 src/openstack/openstack-instance/openstack-instance-networks.js:11
 msgid "Auto-assign floating IP"
 msgstr "Auto-määra ujuv IP"
 
@@ -571,8 +495,7 @@ msgstr "Tagasi"
 msgid "Back to help topics"
 msgstr "Tagasi abiteemade juurde"
 
-#: src/auth/callbacks/auth-login-failed.html:10
-#: src/auth/callbacks/auth-logout-failed.html:10
+#: src/auth/callbacks/auth-login-failed.html:10 src/auth/callbacks/auth-logout-failed.html:10
 msgid "Back to login"
 msgstr "Tagasi sisselogimise lehele"
 
@@ -584,8 +507,7 @@ msgstr "Tagasi organisatsiooni vaatesse"
 msgid "Back to project"
 msgstr "Tagasi projekti juurde"
 
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js:57
-#: src/resource-import/import-virtual-clouds-list.js:57
+#: src/openstack/openstack-snapshot/import/import-snapshots-list.js:57 src/resource-import/import-virtual-clouds-list.js:57
 #: src/resource/summary/resource-summary-base.html:59
 msgid "Backend ID"
 msgstr "Tagatoa ID"
@@ -598,20 +520,15 @@ msgstr "Varukoopia on ajakohastatud"
 msgid "Backup schedule has been updated"
 msgstr "Varunduse ajakava on uuendatud"
 
-#: src/openstack/openstack-backup-schedule/breadcrumbs.js:22
-#: src/openstack/openstack-instance/module.js:66
+#: src/openstack/openstack-backup-schedule/breadcrumbs.js:22 src/openstack/openstack-instance/module.js:66
 msgid "Backup schedules"
 msgstr "Varunduse ajakava"
 
-#: src/openstack/openstack-backup-schedule/module.js:63
-#: src/openstack/openstack-backup/breadcrumbs.js:22
-#: src/openstack/openstack-instance/module.js:62
+#: src/openstack/openstack-backup-schedule/module.js:63 src/openstack/openstack-backup/breadcrumbs.js:22 src/openstack/openstack-instance/module.js:62
 msgid "Backups"
 msgstr "Varundamine"
 
-#: app/views/directives/customer-balance.html:123
-#: app/views/directives/customer-balance.html:77
-#: app/views/directives/customer-balance.html:88
+#: app/views/directives/customer-balance.html:123 app/views/directives/customer-balance.html:77 app/views/directives/customer-balance.html:88
 msgid "Balance"
 msgstr "Saldojääk"
 
@@ -631,11 +548,7 @@ msgstr "Pank"
 msgid "Base rate"
 msgstr "Baasmäär"
 
-#: src/configs/base-config.js:106
-#: src/configs/base-config.js:60
-#: src/resource/breadcrumbs/resource-categories.js:19
-#: src/slurm/routes.js:18
-#: src/slurm/routes.js:8
+#: src/configs/base-config.js:106 src/configs/base-config.js:60 src/resource/breadcrumbs/resource-categories.js:19 src/slurm/routes.js:18 src/slurm/routes.js:8
 #: src/slurm/sidebar.js:8
 msgid "Batch processing"
 msgstr "Pakktöötlus"
@@ -652,13 +565,11 @@ msgstr "Pakkumise kirjeldus"
 msgid "Billing"
 msgstr "Arve esitamine"
 
-#: src/plans/plan-agreement-approve.js:19
-#: src/plans/plan-agreement-cancel.js:19
+#: src/plans/plan-agreement-approve.js:19 src/plans/plan-agreement-cancel.js:19
 msgid "Billing plan agreement has been processed successfully."
 msgstr "Arvelduse plaani leping on edukalt töödeldud."
 
-#: src/plans/plan-agreement-approve.html:3
-#: src/plans/plan-agreement-cancel.html:3
+#: src/plans/plan-agreement-approve.html:3 src/plans/plan-agreement-cancel.html:3
 msgid "Billing plan agreement is being processed, please wait."
 msgstr "Arvelduse plaani lepingut töödeldakse, palun oodake."
 
@@ -694,15 +605,11 @@ msgstr "Bootable"
 msgid "Both VMs and applications are counted as resources."
 msgstr "Nii VM-e kui rakendusi loetakse kui ressursse."
 
-#: src/providers/create.html:113
-#: src/providers/details/provider-settings.html:65
+#: src/providers/create.html:113 src/providers/details/provider-settings.html:65
 msgid "Browse"
 msgstr "Sirvi"
 
-#: src/issues/constants.ts:100
-#: src/issues/issue-detail.html:15
-#: src/issues/issue-registration.html:6
-#: src/issues/issues-list.js:101
+#: src/issues/constants.ts:100 src/issues/issue-detail.html:15 src/issues/issue-registration.html:6 src/issues/issues-list.js:101
 msgid "Caller"
 msgstr "Pöörduja"
 
@@ -710,37 +617,16 @@ msgstr "Pöörduja"
 msgid "Can't unlink system provider."
 msgstr "Süsteemi teenusepakkuja linkimist ei saa tühistada."
 
-#: src/ansible/ansible-job-create.html:37
-#: src/appstore/appstore-store.html:55
-#: src/appstore/dialog/appstore-selector-dialog.html:30
-#: src/auth/saml2/auth-saml2-dialog.html:37
-#: src/cost-planning/cost-plan-dialog.html:56
-#: src/digitalocean/droplet-resize.html:76
-#: src/events/event-details-dialog.html:133
-#: src/events/event-types-dialog.html:14
-#: src/experts/bids/expert-bid-create-dialog.html:93
-#: src/experts/requests/expert-request-create.html:22
-#: src/form/appstore-form-wizard.html:54
-#: src/invitations/actions/cancel.js:8
-#: src/invitations/actions/invitation-dialog.html:77
-#: src/issues/comments/issue-comments-form.html:22
-#: src/issues/issue-create-dialog.html:99
-#: src/navigation/select-workspace-dialog.html:137
-#: src/offering/appstore-offering.html:22
-#: src/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:26
-#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:54
-#: src/openstack/openstack-volume/snapshot-create.html:43
-#: src/openstack/openstack-volume/volume-extend.html:34
-#: src/plans/plans-list.html:38
-#: src/premiumSupport/premium-support-agreement.html:34
-#: src/project/project-create.html:75
-#: src/providers/create.html:160
-#: src/resource-import/resource-import-dialog.html:42
-#: src/resource/actions/dialog/action-dialog.html:36
-#: src/team/add-project-member.html:54
-#: src/team/add-team-member.html:86
-#: src/user/hooks/hook-details.html:81
-#: src/user/keys/key-create.html:45
+#: src/ansible/ansible-job-create.html:37 src/appstore/appstore-store.html:55 src/appstore/dialog/appstore-selector-dialog.html:30
+#: src/auth/saml2/auth-saml2-dialog.html:37 src/cost-planning/cost-plan-dialog.html:56 src/digitalocean/droplet-resize.html:76 src/events/event-details-dialog.html:133
+#: src/events/event-types-dialog.html:14 src/experts/bids/expert-bid-create-dialog.html:93 src/experts/requests/expert-request-create.html:22
+#: src/form/appstore-form-wizard.html:54 src/invitations/actions/cancel.js:8 src/invitations/actions/invitation-dialog.html:77
+#: src/issues/comments/issue-comments-form.html:22 src/issues/issue-create-dialog.html:99 src/navigation/select-workspace-dialog.html:137
+#: src/offering/appstore-offering.html:22 src/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:26
+#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:54 src/openstack/openstack-volume/snapshot-create.html:43
+#: src/openstack/openstack-volume/volume-extend.html:34 src/plans/plans-list.html:38 src/premiumSupport/premium-support-agreement.html:34
+#: src/project/project-create.html:75 src/providers/create.html:160 src/resource-import/resource-import-dialog.html:42 src/resource/actions/dialog/action-dialog.html:36
+#: src/team/add-project-member.html:54 src/team/add-team-member.html:86 src/user/hooks/hook-details.html:81 src/user/keys/key-create.html:45
 msgid "Cancel"
 msgstr "Tühista"
 
@@ -756,8 +642,7 @@ msgstr "Tühista makse"
 msgid "Cancel request"
 msgstr "Tühista päring"
 
-#: src/billing/billing-utils.js:37
-#: src/invitations/invitations-list.js:76
+#: src/billing/billing-utils.js:37 src/invitations/invitations-list.js:76
 msgid "Canceled"
 msgstr "Tühistatud"
 
@@ -769,8 +654,7 @@ msgstr "Tühistatud"
 msgid "Category"
 msgstr "Kategooria"
 
-#: src/project/project-create.html:40
-#: src/providers/details/provider-details.html:30
+#: src/project/project-create.html:40 src/providers/details/provider-details.html:30
 msgid "Certifications"
 msgstr "Sertifitseerimine"
 
@@ -782,13 +666,11 @@ msgstr "Muuda tüüpi"
 msgid "Change Request"
 msgstr "Muutuse päring"
 
-#: src/openstack/openstack-tenant/actions.js:35
-#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:2
+#: src/openstack/openstack-tenant/actions.js:35 src/openstack/openstack-tenant/openstack-tenant-change-package.html:2
 msgid "Change VPC package"
 msgstr "Muuda VPC paketti"
 
-#: src/resource/monitoring/resource-graphs.js:55
-#: src/resource/monitoring/resource-graphs.js:66
+#: src/resource/monitoring/resource-graphs.js:55 src/resource/monitoring/resource-graphs.js:66
 msgid "Chart is not available at this moment."
 msgstr "Diagrammi pole praegu saadaval."
 
@@ -796,10 +678,8 @@ msgstr "Diagrammi pole praegu saadaval."
 msgid "Check terms"
 msgstr "Kontrollige tingimusi"
 
-#: src/offering/appstore-offering-summary.html:7
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:7
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:4
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:7
+#: src/offering/appstore-offering-summary.html:7 src/openstack/openstack-instance/openstack-instance-checkout-summary.html:7
+#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:4 src/openstack/openstack-volume/openstack-volume-checkout-summary.html:7
 #: src/premiumSupport/premium-support-summary.html:3
 msgid "Checkout summary"
 msgstr "Kassa kokkuvõte"
@@ -816,26 +696,20 @@ msgstr "Valige uus plaan"
 msgid "Choose package"
 msgstr "Vali pakett"
 
-#: src/openstack/openstack-security-groups/security-groups-dialog.html:29
-#: src/openstack/openstack-subnet/openstack-subnet-summary.html:33
+#: src/openstack/openstack-security-groups/security-groups-dialog.html:29 src/openstack/openstack-subnet/openstack-subnet-summary.html:33
 #: src/openstack/openstack-subnet/openstack-subnets-list.js:35
 msgid "CIDR"
 msgstr "CIDR"
 
-#: src/customer/customer-users-details-list.js:47
-#: src/invitations/actions/invitation-dialog.html:21
-#: src/team/user-selector.html:15
+#: src/customer/customer-users-details-list.js:47 src/invitations/actions/invitation-dialog.html:21 src/team/user-selector.html:15
 msgid "Civil number"
 msgstr "ID kood"
 
 #: src/intro/expert-manager-intro.js:161
-msgid ""
-"Click on a 'Create proposal' button when you are ready to fulfill expert request"
+msgid "Click on a 'Create proposal' button when you are ready to fulfill expert request"
 msgstr "Vajuta \"Koosta pakkumine\" nupul, kui saate täita eksperdi päringut"
 
-#: src/billing/invoice-events-dialog.html:45
-#: src/customer/customer-report-error.html:10
-#: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
+#: src/billing/invoice-events-dialog.html:45 src/customer/customer-report-error.html:10 src/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 msgid "Close"
 msgstr "Sulge"
 
@@ -847,8 +721,7 @@ msgstr "Suletud"
 msgid "Code"
 msgstr "Kood"
 
-#: src/issues/comments/issue-comments-form.html:10
-#: src/issues/comments/issue-comments-form.html:6
+#: src/issues/comments/issue-comments-form.html:10 src/issues/comments/issue-comments-form.html:6
 msgid "Comment"
 msgstr "Kommentaar"
 
@@ -872,13 +745,11 @@ msgstr "Kommentaarid"
 msgid "Company"
 msgstr "Ettevõte"
 
-#: src/appstore/appstore-store.html:66
-#: src/appstore/routes.js:80
+#: src/appstore/appstore-store.html:66 src/appstore/routes.js:80
 msgid "Compare flavors"
 msgstr "Võrdle tüüpe"
 
-#: src/customer/customer-users-details-list.js:69
-#: src/user/user-popover-table.html:25
+#: src/customer/customer-users-details-list.js:69 src/user/user-popover-table.html:25
 msgid "Competence"
 msgstr "Pädevus"
 
@@ -890,8 +761,7 @@ msgstr "Komponent"
 msgid "Components"
 msgstr "Komponendid"
 
-#: src/cost-planning/cost-plan-dialog.html:9
-#: src/openstack/openstack-instance/actions.js:66
+#: src/cost-planning/cost-plan-dialog.html:9 src/openstack/openstack-instance/actions.js:66
 msgid "Configure"
 msgstr "Seadista"
 
@@ -915,8 +785,7 @@ msgstr "Ühenda"
 msgid "Connected subnets"
 msgstr "Ühendatud alamvõrgud"
 
-#: src/customer/customer-create-config.js:17
-#: src/customer/customer-manage.html:43
+#: src/customer/customer-create-config.js:17 src/customer/customer-manage.html:43
 msgid "Contact e-mail"
 msgstr "Kontakti e-post"
 
@@ -924,8 +793,7 @@ msgstr "Kontakti e-post"
 msgid "Contact email"
 msgstr "Kontaktid epost"
 
-#: src/customer/customer-create-config.js:23
-#: src/customer/customer-manage.html:48
+#: src/customer/customer-create-config.js:23 src/customer/customer-manage.html:48
 msgid "Contact phone"
 msgstr "Kontakttelefon"
 
@@ -941,45 +809,35 @@ msgstr "Lepingu hind"
 msgid "Contract team"
 msgstr "Lepingu meeskond"
 
-#: src/analytics/cost-analysis.html:114
-#: src/analytics/cost-analysis.html:70
-#: src/analytics/cost-analysis.html:92
+#: src/analytics/cost-analysis.html:114 src/analytics/cost-analysis.html:70 src/analytics/cost-analysis.html:92
 msgid "Cost"
 msgstr "Maksumus"
 
-#: src/analytics/routes.js:19
-#: src/customer/customer-workspace.js:82
+#: src/analytics/routes.js:19 src/customer/customer-workspace.js:82
 msgid "Cost analysis"
 msgstr "Kulude analüüs"
 
-#: src/project/project-workspace.js:113
-#: src/project/routes.js:171
+#: src/project/project-workspace.js:113 src/project/routes.js:171
 msgid "Cost planning"
 msgstr "Kulude planeerimine"
 
-#: src/customer/customer-threshold.html:4
-#: src/project/project-policies.html:39
+#: src/customer/customer-threshold.html:4 src/project/project-policies.html:39
 msgid "Cost threshold"
 msgstr "Kulude piirmäär"
 
 #: src/auth/saml2/auth-saml2-dialog.js:24
 msgid "Could not load a list of identity providers. Please try again."
-msgstr ""
-"Identiteedi pakkujate loendit ei saanud laadida. Palun proovige uuesti."
+msgstr "Identiteedi pakkujate loendit ei saanud laadida. Palun proovige uuesti."
 
-#: src/customer/customer-create-config.js:41
-#: src/customer/customer-manage.html:77
+#: src/customer/customer-create-config.js:41 src/customer/customer-manage.html:77
 msgid "Country"
 msgstr "Riik"
 
-#: src/appstore/appstore-compare-list.js:76
-#: src/resource-import/import-virtual-machines-list.js:76
+#: src/appstore/appstore-compare-list.js:76 src/resource-import/import-virtual-machines-list.js:76
 msgid "CPU"
 msgstr "CPU"
 
-#: src/providers/details/provider-project-link-quotas.html:8
-#: src/slurm/slurm-allocation-list.js:37
-#: src/slurm/slurm-allocation-summary.html:5
+#: src/providers/details/provider-project-link-quotas.html:8 src/slurm/slurm-allocation-list.js:37 src/slurm/slurm-allocation-summary.html:5
 msgid "CPU limit"
 msgstr "CPU limiit"
 
@@ -987,36 +845,20 @@ msgstr "CPU limiit"
 msgid "CPU limit, minutes"
 msgstr "CPU limiit, minutit"
 
-#: src/slurm/slurm-allocation-list.js:41
-#: src/slurm/slurm-allocation-summary.html:14
+#: src/slurm/slurm-allocation-list.js:41 src/slurm/slurm-allocation-summary.html:14
 msgid "CPU usage"
 msgstr "CPU koormus"
 
-#: src/ansible/ansible-job-create.html:34
-#: src/appstore/appstore-store.html:20
-#: src/appstore/appstore-store.html:51
-#: src/customer/customer-issues.js:31
-#: src/experts/bids/expert-bid-create-dialog.html:90
-#: src/experts/requests/expert-request-create.html:19
-#: src/freeipa/freeipa-account-create.html:67
-#: src/issues/issue-create-dialog.js:10
-#: src/offering/appstore-offering.html:19
-#: src/openstack/openstack-instance/actions.js:108
-#: src/openstack/openstack-instance/actions.js:51
-#: src/openstack/openstack-tenant/actions.js:25
-#: src/openstack/openstack-tenant/actions.js:60
-#: src/openstack/openstack-tenant/actions.js:80
-#: src/openstack/openstack-volume/module.js:60
-#: src/openstack/openstack-volume/module.js:74
-#: src/project/project-issues.js:31
-#: src/resource/list/resources-list.js:110
-#: src/resource/tabs/resource-issues.js:26
-#: src/user/hooks/hook-details.html:77
+#: src/ansible/ansible-job-create.html:34 src/appstore/appstore-store.html:20 src/appstore/appstore-store.html:51 src/customer/customer-issues.js:31
+#: src/experts/bids/expert-bid-create-dialog.html:90 src/experts/requests/expert-request-create.html:19 src/freeipa/freeipa-account-create.html:67
+#: src/issues/issue-create-dialog.js:10 src/offering/appstore-offering.html:19 src/openstack/openstack-instance/actions.js:108
+#: src/openstack/openstack-instance/actions.js:51 src/openstack/openstack-tenant/actions.js:25 src/openstack/openstack-tenant/actions.js:60
+#: src/openstack/openstack-tenant/actions.js:80 src/openstack/openstack-volume/module.js:60 src/openstack/openstack-volume/module.js:74 src/project/project-issues.js:31
+#: src/resource/list/resources-list.js:110 src/resource/tabs/resource-issues.js:26 src/user/hooks/hook-details.html:77
 msgid "Create"
 msgstr "Loo"
 
-#: src/auth/auth-login.html:111
-#: src/auth/auth-login.html:19
+#: src/auth/auth-login.html:111 src/auth/auth-login.html:19
 msgid "Create an account"
 msgstr "Loo konto"
 
@@ -1032,8 +874,7 @@ msgstr "Loo varukoopia"
 msgid "Create backup schedule for OpenStack instance"
 msgstr "Loo varunduse ajakava OpenStack instantsile"
 
-#: src/experts/bids/expert-bid-create-dialog.html:2
-#: src/experts/requests/expert-request-customer-list.js:101
+#: src/experts/bids/expert-bid-create-dialog.html:2 src/experts/requests/expert-request-customer-list.js:101
 msgid "Create proposal"
 msgstr "Koosta pakkumine"
 
@@ -1069,10 +910,7 @@ msgstr "Projekti loomine"
 msgid "Create provider"
 msgstr "Loo teenusepakkuja"
 
-#: src/issues/issue-create-dialog.js:4
-#: src/issues/issue-quick-create.html:116
-#: src/issues/issue-quick-create.html:3
-#: src/issues/issue-registration.html:216
+#: src/issues/issue-create-dialog.js:4 src/issues/issue-quick-create.html:116 src/issues/issue-quick-create.html:3 src/issues/issue-registration.html:216
 msgid "Create request"
 msgstr "Päringu koostamine"
 
@@ -1096,17 +934,10 @@ msgstr "Loo tõmmiste ajakava OpenStack volüümile"
 msgid "Create subnet"
 msgstr "Loo alamvõrk"
 
-#: src/ansible/ansible-job-summary.html:27
-#: src/billing/billing-utils.js:41
-#: src/experts/requests/expert-request-summary.html:22
-#: src/issues/issue-detail.html:80
-#: src/issues/issues-list.js:130
-#: src/openstack/openstack-backup/backup-snapshots-list.js:45
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:45
-#: src/resource/summary/resource-summary-base.html:40
-#: src/slurm/slurm-allocation-list.js:33
-#: src/team/customer-permissions-log-list.js:41
-#: src/team/project-permissions-log-list.js:37
+#: src/ansible/ansible-job-summary.html:27 src/billing/billing-utils.js:41 src/experts/requests/expert-request-summary.html:22 src/issues/issue-detail.html:80
+#: src/issues/issues-list.js:130 src/openstack/openstack-backup/backup-snapshots-list.js:45
+#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:45 src/resource/summary/resource-summary-base.html:40
+#: src/slurm/slurm-allocation-list.js:33 src/team/customer-permissions-log-list.js:41 src/team/project-permissions-log-list.js:37
 msgid "Created"
 msgstr "Loodud"
 
@@ -1118,11 +949,8 @@ msgstr "Loo uus makse kliendile {customer_name}."
 msgid "Created at"
 msgstr "Loodud"
 
-#: src/ansible/ansible-jobs-list.js:74
-#: src/experts/requests/expert-request-customer-list.js:89
-#: src/experts/requests/expert-request-project-list.js:79
-#: src/offering/offerings-list.js:55
-#: src/project/projects-list.js:98
+#: src/ansible/ansible-jobs-list.js:74 src/experts/requests/expert-request-customer-list.js:89 src/experts/requests/expert-request-project-list.js:79
+#: src/offering/offerings-list.js:55 src/project/projects-list.js:98
 msgid "Creation date"
 msgstr "Loomisaeg"
 
@@ -1134,8 +962,7 @@ msgstr "Teenuse projekti lingi {service_name} loomine nurjus."
 msgid "Current API token"
 msgstr "Praegune API token"
 
-#: src/digitalocean/droplet-resize.html:14
-#: src/openstack/openstack-volume/volume-extend.html:7
+#: src/digitalocean/droplet-resize.html:14 src/openstack/openstack-volume/volume-extend.html:7
 msgid "Current size"
 msgstr "Aktiivne suurus"
 
@@ -1143,8 +970,7 @@ msgstr "Aktiivne suurus"
 msgid "current state on backend: {resourceState}."
 msgstr "praegune staatus tagatoas: {resourceState}."
 
-#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:15
-#: src/openstack/openstack-tenant/openstack-tenant-prices.html:9
+#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:15 src/openstack/openstack-tenant/openstack-tenant-prices.html:9
 msgid "Current VPC package"
 msgstr "Praegune VPC pakett"
 
@@ -1152,11 +978,7 @@ msgstr "Praegune VPC pakett"
 msgid "Custom request"
 msgstr "Kohandatud päring"
 
-#: src/customer/customer-workspace.js:44
-#: src/customer/routes.js:63
-#: src/issues/issue-navigation-service.js:11
-#: src/project/project-workspace.js:25
-#: src/project/routes.js:83
+#: src/customer/customer-workspace.js:44 src/customer/routes.js:63 src/issues/issue-navigation-service.js:11 src/project/project-workspace.js:25 src/project/routes.js:83
 #: src/user/constants.ts:3
 msgid "Dashboard"
 msgstr "Töölaud"
@@ -1169,8 +991,7 @@ msgstr "Andmed pole saadaval."
 msgid "Data volume size:"
 msgstr "Andmete volüümi suurus:"
 
-#: src/payments/payment-list.js:43
-#: src/plans/plan-agreements-list.js:41
+#: src/payments/payment-list.js:43 src/plans/plan-agreements-list.js:41
 msgid "Date"
 msgstr "Kuupäev"
 
@@ -1178,10 +999,8 @@ msgstr "Kuupäev"
 msgid "Date joined"
 msgstr "Liitumise kuupäev"
 
-#: src/cost-planning/cost-plan-items.html:46
-#: src/openstack/openstack-instance/openstack-instance-floating-ips.html:39
-#: src/openstack/openstack-instance/openstack-instance-networks.html:24
-#: src/openstack/openstack-security-groups/security-group-rule-editor.html:58
+#: src/cost-planning/cost-plan-items.html:46 src/openstack/openstack-instance/openstack-instance-floating-ips.html:39
+#: src/openstack/openstack-instance/openstack-instance-networks.html:24 src/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
 msgstr "Kustuta"
 
@@ -1193,34 +1012,16 @@ msgstr "Kasutuselevõtu plaan"
 msgid "Deployment plan does not have any item yet."
 msgstr "Kasutuselevõtu plaanis ei ole elemente."
 
-#: src/ansible/ansible-job-summary.html:32
-#: src/azure/azure-virtual-machine-config.js:20
-#: src/experts/bids/expert-bid-create-dialog.html:74
-#: src/experts/requests/expert-request-create.js:47
-#: src/experts/requests/expert-request-summary.html:24
-#: src/issues/issue-detail.html:89
-#: src/issues/issue-quick-create.html:39
-#: src/issues/issue-registration.html:110
-#: src/issues/issues-list.js:76
-#: src/issues/issues-short-list.html:28
-#: src/offering/appstore-offering.js:48
-#: src/offering/offering-summary.html:65
-#: src/openstack/openstack-backup/backup-snapshots-list.js:37
-#: src/openstack/openstack-backup/openstack-backups-list.js:43
-#: src/openstack/openstack-instance/openstack-instance-config.js:143
-#: src/openstack/openstack-tenant/openstack-tenant-config.js:47
-#: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:30
-#: src/openstack/openstack-volume/openstack-volume-config.js:25
-#: src/openstack/openstack-volume/snapshot-create.html:20
-#: src/premiumSupport/premium-support-contracts/contract-details-dialog.html:17
-#: src/project/project-details.html:25
-#: src/project/projects-list.js:91
-#: src/resource-import/import-virtual-clouds-list.js:53
-#: src/resource/actions/constants.ts:26
-#: src/resource/summary/resource-summary-base.html:31
-#: src/slurm/slurm-allocation-config.js:18
-#: src/slurm/slurm-allocation-list.js:29
-#: src/user/user-edit.html:93
+#: src/ansible/ansible-job-summary.html:32 src/azure/azure-virtual-machine-config.js:20 src/experts/bids/expert-bid-create-dialog.html:74
+#: src/experts/requests/expert-request-create.js:47 src/experts/requests/expert-request-summary.html:24 src/issues/issue-detail.html:89
+#: src/issues/issue-quick-create.html:39 src/issues/issue-registration.html:110 src/issues/issues-list.js:76 src/issues/issues-short-list.html:28
+#: src/offering/appstore-offering.js:48 src/offering/offering-summary.html:65 src/openstack/openstack-backup/backup-snapshots-list.js:37
+#: src/openstack/openstack-backup/openstack-backups-list.js:43 src/openstack/openstack-instance/openstack-instance-config.js:143
+#: src/openstack/openstack-tenant/openstack-tenant-config.js:47 src/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:30
+#: src/openstack/openstack-volume/openstack-volume-config.js:25 src/openstack/openstack-volume/snapshot-create.html:20
+#: src/premiumSupport/premium-support-contracts/contract-details-dialog.html:17 src/project/project-details.html:25 src/project/projects-list.js:91
+#: src/resource-import/import-virtual-clouds-list.js:53 src/resource/actions/constants.ts:26 src/resource/summary/resource-summary-base.html:31
+#: src/slurm/slurm-allocation-config.js:18 src/slurm/slurm-allocation-list.js:29 src/user/user-edit.html:93
 msgid "Description"
 msgstr "Kirjeldus"
 
@@ -1232,19 +1033,10 @@ msgstr "Sihtkoht"
 msgid "Destination URL"
 msgstr "Sihtkohta URL"
 
-#: src/appstore/appstore-providers.html:40
-#: src/cost-planning/cost-plans-list.js:54
-#: src/events/base-event-list.js:43
-#: src/issues/issue-registration.html:32
-#: src/issues/issue-registration.html:69
-#: src/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
-#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
-#: src/project/project-details-button.html:4
-#: src/project/projects-list.js:175
-#: src/providers/details/dialog.html:10
-#: src/providers/provider-list.js:92
-#: src/team/customer-users-list.js:123
-#: src/team/project-users-list.js:87
+#: src/appstore/appstore-providers.html:40 src/cost-planning/cost-plans-list.js:54 src/events/base-event-list.js:43 src/issues/issue-registration.html:32
+#: src/issues/issue-registration.html:69 src/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
+#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:61 src/project/project-details-button.html:4 src/project/projects-list.js:175
+#: src/providers/details/dialog.html:10 src/providers/provider-list.js:92 src/team/customer-users-list.js:123 src/team/project-users-list.js:87
 #: src/user/user-sidebar.html:12
 msgid "Details"
 msgstr "Lisainfo"
@@ -1254,12 +1046,8 @@ msgid "Device"
 msgstr "Seade"
 
 #: src/freeipa/freeipa-account-edit.html:38
-msgid ""
-"Disable a profile in FreeIPA. Disabled profiles are not allowed for login "
-"into the Linux systems"
-msgstr ""
-"Keelake profiil FreeIPA-s. Väljalülitatud profiiliga ei ole lubatud "
-"sisselogimise Linux süsteemidesse"
+msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
+msgstr "Keelake profiil FreeIPA-s. Väljalülitatud profiiliga ei ole lubatud sisselogimise Linux süsteemidesse"
 
 #: src/openstack/openstack-instance/openstack-instance-data-volume.html:22
 msgid "Disable data volume"
@@ -1269,8 +1057,7 @@ msgstr "Lülita välja andmevolüüm"
 msgid "Disable profile"
 msgstr "Lülita välja profiil"
 
-#: src/customer/customer-threshold.html:37
-#: src/project/project-policies.html:67
+#: src/customer/customer-threshold.html:37 src/project/project-policies.html:67
 msgid "Disable provisioning when threshold is reached."
 msgstr "Keela ressursside eraldamine kui piirmäär on saavutatud."
 
@@ -1282,8 +1069,7 @@ msgstr "Konto puudub?"
 msgid "Documentation"
 msgstr "Dokumentatsioon"
 
-#: src/billing/invoice-header.html:30
-#: src/paypal/paypal-invoice-actions.html:15
+#: src/billing/invoice-header.html:30 src/paypal/paypal-invoice-actions.html:15
 msgid "Download invoice"
 msgstr "Lae arve alla"
 
@@ -1291,19 +1077,12 @@ msgstr "Lae arve alla"
 msgid "Draft"
 msgstr "Mustand"
 
-#: src/billing/invoice-details.html:21
-#: src/billing/invoices-list.js:74
-#: src/paypal/paypal-invoices-list.js:78
+#: src/billing/invoice-details.html:21 src/billing/invoices-list.js:74 src/paypal/paypal-invoices-list.js:78
 msgid "Due date"
 msgstr "Maksetähtpäev"
 
-#: src/customer/customer-users-details-list.js:40
-#: src/invitations/actions/invitation-dialog.html:12
-#: src/team/customer-users-list.js:71
-#: src/team/project-users-list.js:56
-#: src/team/user-selector.html:12
-#: src/user/user-edit.html:29
-#: src/user/user-popover-table.html:17
+#: src/customer/customer-users-details-list.js:40 src/invitations/actions/invitation-dialog.html:12 src/team/customer-users-list.js:71 src/team/project-users-list.js:56
+#: src/team/user-selector.html:12 src/user/user-edit.html:29 src/user/user-popover-table.html:17
 msgid "E-mail"
 msgstr "E-post"
 
@@ -1311,12 +1090,8 @@ msgstr "E-post"
 msgid "E-mail address"
 msgstr "E-posti aadress"
 
-#: src/openstack/openstack-backup-schedule/module.js:30
-#: src/openstack/openstack-snapshot-schedule/module.js:28
-#: src/resource/actions/constants.ts:13
-#: src/team/customer-users-list.js:129
-#: src/team/project-users-list.js:95
-#: src/user/hooks/hook-list.js:69
+#: src/openstack/openstack-backup-schedule/module.js:30 src/openstack/openstack-snapshot-schedule/module.js:28 src/resource/actions/constants.ts:13
+#: src/team/customer-users-list.js:129 src/team/project-users-list.js:95 src/user/hooks/hook-list.js:69
 msgid "Edit"
 msgstr "Muuda"
 
@@ -1328,9 +1103,7 @@ msgstr "Redigeeri projekti liiget"
 msgid "Edit team member"
 msgstr "Muuta meeskonna liige"
 
-#: src/auth/auth-login.html:62
-#: src/customer/customer-manage.html:80
-#: src/invitations/invitations-list.js:97
+#: src/auth/auth-login.html:62 src/customer/customer-manage.html:80 src/invitations/invitations-list.js:97
 msgid "Email"
 msgstr "E-post"
 
@@ -1339,12 +1112,8 @@ msgid "Email update"
 msgstr "E-posti värskendus"
 
 #: src/freeipa/freeipa-account-edit.html:46
-msgid ""
-"Enable a profile in FreeIPA. Only enabled profiles are allowed for login "
-"into the Linux systems"
-msgstr ""
-"Luba profiil FreeIPA-s. Ainult sisselülitatud profiiliga on lubatud "
-"sisselogimise Linux süsteemidesse"
+msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
+msgstr "Luba profiil FreeIPA-s. Ainult sisselülitatud profiiliga on lubatud sisselogimise Linux süsteemidesse"
 
 #: src/openstack/openstack-subnet/openstack-subnet-summary.html:69
 msgid "Enable DHCP"
@@ -1366,13 +1135,11 @@ msgstr "Lõppaeg"
 msgid "Enter date"
 msgstr "Sisestage kuupäev"
 
-#: src/events/event-details-dialog.html:51
-#: src/resource/summary/resource-summary-base.html:12
+#: src/events/event-details-dialog.html:51 src/resource/summary/resource-summary-base.html:12
 msgid "Error message"
 msgstr "Veateade"
 
-#: src/resource/state/resource-state-service.js:35
-#: src/resource/state/resource-state-service.js:46
+#: src/resource/state/resource-state-service.js:35 src/resource/state/resource-state-service.js:46
 msgid "error message: {errorMessage}"
 msgstr "tõrketeade: {errorMessage}"
 
@@ -1388,8 +1155,7 @@ msgstr "Hinnanguline maksumus ületab piiri"
 msgid "Estimated cost exceeds threshold."
 msgstr "Hinnanguline maksumus ületab piiri."
 
-#: src/customer/customer-threshold.html:29
-#: src/project/project-policies.html:59
+#: src/customer/customer-threshold.html:29 src/project/project-policies.html:59
 msgid "Estimated cost for current month"
 msgstr "Jooksva kuu hinnanguline kulu"
 
@@ -1417,15 +1183,11 @@ msgstr "Sündmuste logi"
 msgid "Event type"
 msgstr "Sündmuse tüüp"
 
-#: src/dashboard/project-events-feed.js:13
-#: src/events/base-event-list.js:35
-#: src/events/event-types-dialog.js:20
+#: src/dashboard/project-events-feed.js:13 src/events/base-event-list.js:35 src/events/event-types-dialog.js:20
 msgid "Event types"
 msgstr "Sündmuste tüübid"
 
-#: src/dashboard/project-events-feed.js:12
-#: src/help/constants.ts:10
-#: src/user/hooks/hook-list.js:53
+#: src/dashboard/project-events-feed.js:12 src/help/constants.ts:10 src/user/hooks/hook-list.js:53
 msgid "Events"
 msgstr "Sündmused"
 
@@ -1489,8 +1251,7 @@ msgstr "Eksperdi pakkumist ei saanud aksepteerida."
 msgid "Proposal has been accepted."
 msgstr "Ekserdi pakkumine on vastuvõetud."
 
-#: src/customer/customer-create-config.js:71
-#: src/experts/extensions/customer-workspace.html:4
+#: src/customer/customer-create-config.js:71 src/experts/extensions/customer-workspace.html:4
 msgid "Expert provider"
 msgstr "Experdi pakkuja"
 
@@ -1514,8 +1275,7 @@ msgstr "Eksperdi taotlus \"{expert_request_name}\" on täidetud."
 msgid "Expert request \"{expert_request_name}\"\" has been cancelled."
 msgstr "Eksperdi taotlus \"{expert_request_name}\" on katkestatud."
 
-#: src/experts/requests/expert-request-header.html:3
-#: src/experts/routes.js:48
+#: src/experts/requests/expert-request-header.html:3 src/experts/routes.js:48
 msgid "Expert request details"
 msgstr "Eskseperdi päringu üksikasjad"
 
@@ -1527,20 +1287,12 @@ msgstr "Ekseperdi päring on katkestatud."
 msgid "Expert request has been created."
 msgstr "Eksperdi päring on loodud."
 
-#: src/experts/constants.ts:1
-#: src/experts/expert-provider-details.html:2
-#: src/experts/extensions/sidebar.js:28
-#: src/experts/extensions/sidebar.js:8
-#: src/experts/requests/expert-request-header.html:15
-#: src/experts/routes.js:19
-#: src/experts/routes.js:28
-#: src/experts/routes.js:38
+#: src/experts/constants.ts:1 src/experts/expert-provider-details.html:2 src/experts/extensions/sidebar.js:28 src/experts/extensions/sidebar.js:8
+#: src/experts/requests/expert-request-header.html:15 src/experts/routes.js:19 src/experts/routes.js:28 src/experts/routes.js:38
 msgid "Experts"
 msgstr "Eksperdid"
 
-#: src/team/add-team-member.html:48
-#: src/team/customer-permissions-log-list.js:47
-#: src/team/project-permissions-log-list.js:42
+#: src/team/add-team-member.html:48 src/team/customer-permissions-log-list.js:47 src/team/project-permissions-log-list.js:42
 msgid "Expiration time"
 msgstr "Aegumise aeg"
 
@@ -1564,8 +1316,7 @@ msgstr "Eksport kui"
 msgid "Extend OpenStack volume"
 msgstr "Laienda OpenStack volüümi"
 
-#: src/resource/list/resource-vms-list.js:43
-#: src/resource/summary/virtual-machine-summary.html:42
+#: src/resource/list/resource-vms-list.js:43 src/resource/summary/virtual-machine-summary.html:42
 msgid "External IP"
 msgstr "Väline IP"
 
@@ -1573,15 +1324,11 @@ msgstr "Väline IP"
 msgid "Failed to operate with backend."
 msgstr "Ei saanud tegutseda tagatoaga."
 
-#: src/form/appstore-field-email.js:32
-#: src/form/appstore-field-string.js:28
-#: src/form/appstore-field-tel.js:28
+#: src/form/appstore-field-email.js:32 src/form/appstore-field-string.js:28 src/form/appstore-field-tel.js:28
 msgid "Field length must be less than {maxlength} symbols"
 msgstr "Välja pikkus peab olema vähem kui {maxlength} sümbolit"
 
-#: src/issues/issue-registration.html:150
-#: src/issues/issue-registration.html:36
-#: src/issues/issue-registration.html:73
+#: src/issues/issue-registration.html:150 src/issues/issue-registration.html:36 src/issues/issue-registration.html:73
 msgid "Filter"
 msgstr "Filter"
 
@@ -1593,9 +1340,7 @@ msgstr "Filtreeri organisatsioone"
 msgid "Filter projects"
 msgstr "Filtreeri projekte"
 
-#: src/digitalocean/digitalocean-droplet-config.js:80
-#: src/openstack/openstack-instance/openstack-instance-config.js:94
-#: src/user/keys/key-list.js:36
+#: src/digitalocean/digitalocean-droplet-config.js:80 src/openstack/openstack-instance/openstack-instance-config.js:94 src/user/keys/key-list.js:36
 msgid "Fingerprint"
 msgstr "Sõrmejälg"
 
@@ -1607,10 +1352,8 @@ msgstr "Lõpeta"
 msgid "First"
 msgstr "Esimene"
 
-#: src/cost-planning/cost-plan-flavors.html:5
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:31
-#: src/openstack/openstack-instance/openstack-instance-config.js:45
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js:7
+#: src/cost-planning/cost-plan-flavors.html:5 src/openstack/openstack-instance/openstack-instance-checkout-summary.html:31
+#: src/openstack/openstack-instance/openstack-instance-config.js:45 src/openstack/openstack-tenant/openstack-tenant-prices.js:7
 #: src/resource-import/import-virtual-machines-list.js:58
 msgid "Flavor"
 msgstr "Variant"
@@ -1639,8 +1382,7 @@ msgstr "Ujuvad IPd"
 msgid "Following fields contain errors"
 msgstr "Järgmised väljad on vigased"
 
-#: src/user/constants.ts:29
-#: src/user/routes.js:43
+#: src/user/constants.ts:29 src/user/routes.js:43
 msgid "FreeIPA account"
 msgstr "FreeIPA konto"
 
@@ -1660,9 +1402,7 @@ msgstr "Saatja"
 msgid "From port"
 msgstr "Pordist"
 
-#: src/auth/auth-login.html:58
-#: src/user/user-edit.html:16
-#: src/user/user-popover-table.html:5
+#: src/auth/auth-login.html:58 src/user/user-edit.html:16 src/user/user-popover-table.html:5
 msgid "Full name"
 msgstr "Täisnimi"
 
@@ -1674,8 +1414,7 @@ msgstr "Lüüsi IP"
 msgid "GB"
 msgstr "GB"
 
-#: src/customer/customer-create-config.js:3
-#: src/project/project-dialog.html:7
+#: src/customer/customer-create-config.js:3 src/project/project-dialog.html:7
 msgid "General"
 msgstr "Üldine"
 
@@ -1683,8 +1422,7 @@ msgstr "Üldine"
 msgid "General information"
 msgstr "Üldteave"
 
-#: src/openstack/openstack-tenant/openstack-tenant-config.js:57
-#: src/openstack/openstack-tenant/openstack-tenant-config.js:65
+#: src/openstack/openstack-tenant/openstack-tenant-config.js:57 src/openstack/openstack-tenant/openstack-tenant-config.js:65
 msgid "generate automatically"
 msgstr "loo automaatselt"
 
@@ -1708,8 +1446,7 @@ msgstr "Graafikud"
 msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr "Tagatud backup andmete säilitamise aeg. Kui null - hoida igavesti."
 
-#: src/openstack/openstack-snapshot/module.js:37
-#: src/openstack/openstack-volume/module.js:66
+#: src/openstack/openstack-snapshot/module.js:37 src/openstack/openstack-volume/module.js:66
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr "Garanteeritud tõmmise säilitamise aeg. Kui null - hoida igavesti."
 
@@ -1717,13 +1454,11 @@ msgstr "Garanteeritud tõmmise säilitamise aeg. Kui null - hoida igavesti."
 msgid "Guide me"
 msgstr "Juhenda mind"
 
-#: src/freeipa/freeipa-account-edit.html:22
-#: src/user/user-edit.html:145
+#: src/freeipa/freeipa-account-edit.html:22 src/user/user-edit.html:145
 msgid "have been accepted on"
 msgstr "on vastu võetud"
 
-#: src/help/routes.js:9
-#: src/navigation/app-footer.html:17
+#: src/help/routes.js:9 src/navigation/app-footer.html:17
 msgid "Help"
 msgstr "Abi"
 
@@ -1743,8 +1478,7 @@ msgstr "Klienditeeninduse töölaud"
 msgid "Homepage"
 msgstr "Avaleht"
 
-#: src/premiumSupport/premium-support-agreement.html:15
-#: src/premiumSupport/premium-support-summary.html:25
+#: src/premiumSupport/premium-support-agreement.html:15 src/premiumSupport/premium-support-summary.html:25
 msgid "Hour price"
 msgstr "Tunni hind"
 
@@ -1768,10 +1502,7 @@ msgstr "Kuidas luua SSH võti"
 msgid "How to obtain credentials"
 msgstr "Kuidas saada ligipääs"
 
-#: src/experts/expert-provider-details.html:17
-#: src/form/appstore-field-tos.html:8
-#: src/freeipa/freeipa-account-create.html:51
-#: src/user/user-edit.html:157
+#: src/experts/expert-provider-details.html:17 src/form/appstore-field-tos.html:8 src/freeipa/freeipa-account-create.html:51 src/user/user-edit.html:157
 msgid "I accept the"
 msgstr "Ma võtan vastu"
 
@@ -1783,8 +1514,7 @@ msgstr "Ma tahan teist teenust"
 msgid "IaaS"
 msgstr "IaaS"
 
-#: src/user/user-edit.html:62
-#: src/user/user-popover-table.html:9
+#: src/user/user-edit.html:62 src/user/user-popover-table.html:9
 msgid "ID code"
 msgstr "ID kood"
 
@@ -1792,31 +1522,23 @@ msgstr "ID kood"
 msgid "Identity providers are not unavailable."
 msgstr "Identiteedi pakkujad ei ole saadaval."
 
-#: src/azure/azure-virtual-machine-config.js:26
-#: src/digitalocean/digitalocean-droplet-config.js:31
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:27
-#: src/openstack/openstack-instance/openstack-instance-config.js:24
+#: src/azure/azure-virtual-machine-config.js:26 src/digitalocean/digitalocean-droplet-config.js:31
+#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:27 src/openstack/openstack-instance/openstack-instance-config.js:24
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:22
 msgid "Image"
 msgstr "Pilt"
 
-#: src/azure/azure-virtual-machine-config.js:30
-#: src/digitalocean/digitalocean-droplet-config.js:35
-#: src/openstack/openstack-instance/openstack-instance-config.js:28
+#: src/azure/azure-virtual-machine-config.js:30 src/digitalocean/digitalocean-droplet-config.js:35 src/openstack/openstack-instance/openstack-instance-config.js:28
 msgid "Image name"
 msgstr "Pildi nimi"
 
-#: src/resource-import/resource-import-dialog.html:39
-#: src/resource-import/utils.js:46
+#: src/resource-import/resource-import-dialog.html:39 src/resource-import/utils.js:46
 msgid "Import"
 msgstr "Impordi"
 
 #: src/resource-import/utils.js:39
-msgid ""
-"Import is not possible as there are no personal provider accounts registered."
-msgstr ""
-"Import pole võimalik, sest isiklik teenusepakkuja kontosid pole "
-"registreeritud."
+msgid "Import is not possible as there are no personal provider accounts registered."
+msgstr "Import pole võimalik, sest isiklik teenusepakkuja kontosid pole registreeritud."
 
 #: src/resource-import/resource-import-dialog.html:2
 msgid "Import resource"
@@ -1832,20 +1554,19 @@ msgstr "Tähtsus"
 
 #: src/issues/constants.ts:2
 msgid "Incident"
-msgstr "Vahejuhtum"
+msgstr "Intsident"
 
 #: src/issues/constants.ts:30
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr "Incident - teenuse kasutamise ja toimimisega (katkemine, kvaliteedi langus) seotud kliendi mure."
 
-#: src/customer/customer-report-error.html:2
-#: src/customer/customer-report-error.js:21
+#: src/customer/customer-report-error.html:2 src/customer/customer-report-error.js:21
 msgid "Incorrect organization details"
 msgstr "Ebakorrektsed organisatsiooni andmed"
 
 #: src/issues/constants.ts:5
 msgid "Informational"
-msgstr "Informatsiooniline"
+msgstr "Infopäring"
 
 #: src/issues/constants.ts:32
 msgid "Informational - client’s request to get or provide additional information related to a service."
@@ -1867,8 +1588,7 @@ msgstr "Esialgne parool"
 msgid "Initial username"
 msgstr "Esialgne kasutajanimi"
 
-#: src/openstack/openstack-backup/openstack-backup-summary.html:5
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js:43
+#: src/openstack/openstack-backup/openstack-backup-summary.html:5 src/openstack/openstack-floating-ips/openstack-floating-ips-list.js:43
 msgid "Instance"
 msgstr "Instants"
 
@@ -1889,19 +1609,14 @@ msgid "Instance is not configured."
 msgstr "Instants ei ole seadistatud."
 
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html:1
-msgid ""
-"Instance is not connected to any internal subnets yet. Please connect it to "
-"internal subnet first."
-msgstr ""
-"Instants ei ole veel ühendatud ühegi sisemise alamvõrguga. Palun ühenda see "
-"kõigepealt sisemisse alamvõrku."
+msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr "Instants ei ole veel ühendatud ühegi sisemise alamvõrguga. Palun ühenda see kõigepealt sisemisse alamvõrku."
 
 #: src/quotas/filters.js:9
 msgid "Instances count"
 msgstr "Instantside hulk"
 
-#: src/resource/list/resource-vms-list.js:33
-#: src/resource/summary/virtual-machine-summary.html:30
+#: src/resource/list/resource-vms-list.js:33 src/resource/summary/virtual-machine-summary.html:30
 msgid "Internal IP"
 msgstr "Sisemine IP"
 
@@ -1909,29 +1624,23 @@ msgstr "Sisemine IP"
 msgid "Internal IPs"
 msgstr "Sisemised IP-d"
 
-#: src/openstack/openstack-network/module.js:47
-#: src/openstack/openstack-tenant/openstack-tenant-config.js:78
+#: src/openstack/openstack-network/module.js:47 src/openstack/openstack-tenant/openstack-tenant-config.js:78
 msgid "Internal network allocation pool"
 msgstr "Sisemine võrgu jaotusvõrk"
 
-#: src/openstack/openstack-network/module.js:40
-#: src/openstack/openstack-tenant/openstack-tenant-config.js:71
+#: src/openstack/openstack-network/module.js:40 src/openstack/openstack-tenant/openstack-tenant-config.js:71
 msgid "Internal network mask (CIDR)"
 msgstr "Sisevõrk mask (CIDR)"
 
 #: src/invitations/utils.js:105
 msgid "Internal server error occurred. Please try again or contact support."
-msgstr ""
-"Tekkis viga \"Internal server error\". Palun proovi uuesti või võta ühendust "
-"kasutajatoega."
+msgstr "Tekkis viga \"Internal server error\". Palun proovi uuesti või võta ühendust kasutajatoega."
 
-#: src/plans/plan-agreement-approve.js:15
-#: src/plans/plan-agreement-cancel.js:15
+#: src/plans/plan-agreement-approve.js:15 src/plans/plan-agreement-cancel.js:15
 msgid "Invalid URL. Unable to parse billing plan agreement details."
 msgstr "Vigane URL. Unable to parse billing plan agreement details."
 
-#: src/payments/payment-approve.js:10
-#: src/payments/payment-cancel.js:9
+#: src/payments/payment-approve.js:10 src/payments/payment-cancel.js:9
 msgid "Invalid URL. Unable to parse payment details."
 msgstr "Vigane URL. Unable to parse payment details."
 
@@ -1983,9 +1692,7 @@ msgstr "Kutsed"
 msgid "Invite new users."
 msgstr "Kutsu uusi kasutajaid."
 
-#: src/invitations/actions/create.js:8
-#: src/invitations/actions/invitation-dialog.html:2
-#: src/invitations/actions/invitation-dialog.html:73
+#: src/invitations/actions/create.js:8 src/invitations/actions/invitation-dialog.html:2 src/invitations/actions/invitation-dialog.html:73
 msgid "Invite user"
 msgstr "Kutsu kasutaja"
 
@@ -1993,9 +1700,7 @@ msgstr "Kutsu kasutaja"
 msgid "Invoice"
 msgstr "Arve"
 
-#: src/billing/invoice-details.html:19
-#: src/billing/invoices-list.js:69
-#: src/paypal/paypal-invoices-list.js:73
+#: src/billing/invoice-details.html:19 src/billing/invoices-list.js:69 src/paypal/paypal-invoices-list.js:73
 msgid "Invoice date"
 msgstr "Arve kuupäev"
 
@@ -2008,28 +1713,16 @@ msgid "Invoice events timeline"
 msgstr "Arve sündmuste ajakava"
 
 #: src/events/constants.ts:12
-msgid ""
-"Invoice for organization {customer_name} for the period of {invoice_date} "
-"has been created."
-msgstr ""
-"Arve organisatsioonile {customer_name} perioodi {invoice_date} eest on "
-"loodud."
+msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been created."
+msgstr "Arve organisatsioonile {customer_name} perioodi {invoice_date} eest on loodud."
 
 #: src/events/constants.ts:13
-msgid ""
-"Invoice for organization {customer_name} for the period of {invoice_date} "
-"has been deleted."
-msgstr ""
-"Arve organisatsioonile {customer_name} perioodi {invoice_date} eest on "
-"kustutatud."
+msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been deleted."
+msgstr "Arve organisatsioonile {customer_name} perioodi {invoice_date} eest on kustutatud."
 
 #: src/events/constants.ts:14
-msgid ""
-"Invoice for organization {customer_name} for the period of {invoice_date} "
-"has been updated."
-msgstr ""
-"Arve organisatsioonile {customer_name} perioodi {invoice_date} eest on "
-"uuendatud."
+msgid "Invoice for organization {customer_name} for the period of {invoice_date} has been updated."
+msgstr "Arve organisatsioonile {customer_name} perioodi {invoice_date} eest on uuendatud."
 
 #: src/paypal/paypal-invoice-actions.html:8
 msgid "Invoice has not been sent to PayPal yet"
@@ -2039,21 +1732,17 @@ msgstr "Arvet pole PayPali veel saadetud."
 msgid "Invoice No."
 msgstr "Arve nr."
 
-#: src/billing/invoices-list.js:41
-#: src/paypal/paypal-invoices-list.js:42
+#: src/billing/invoices-list.js:41 src/paypal/paypal-invoices-list.js:42
 msgid "Invoice number"
 msgstr "Arve number"
 
-#: src/offering/appstore-offering-summary.html:21
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:61
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:48
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:44
+#: src/offering/appstore-offering-summary.html:21 src/openstack/openstack-instance/openstack-instance-checkout-summary.html:61
+#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:48 src/openstack/openstack-volume/openstack-volume-checkout-summary.html:44
 #: src/premiumSupport/premium-support-summary.html:31
 msgid "Invoiced to"
 msgstr "Kellele"
 
-#: src/billing/billing-tabs.html:16
-#: src/billing/billing-tabs.html:4
+#: src/billing/billing-tabs.html:16 src/billing/billing-tabs.html:4
 msgid "Invoices"
 msgstr "Arved"
 
@@ -2065,8 +1754,7 @@ msgstr "Arvete nimekiri"
 msgid "IP address"
 msgstr "IP aadress"
 
-#: src/openstack/openstack-security-groups/security-group-rule-editor.html:11
-#: src/openstack/openstack-security-groups/security-group-rules-list.html:5
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html:11 src/openstack/openstack-security-groups/security-group-rules-list.html:5
 #: src/openstack/openstack-security-groups/security-groups-dialog.html:14
 msgid "IP protocol"
 msgstr "IP protokoll"
@@ -2079,8 +1767,7 @@ msgstr "IP versioon"
 msgid "IPv4 address"
 msgstr "IPv4 aadress"
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:48
+#: src/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25 src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:48
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedule-summary.html:25
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:48
 msgid "Is active"
@@ -2098,8 +1785,7 @@ msgstr "{Caller_full_name} on loonud juhtumi {issue_key}."
 msgid "Issue key"
 msgstr "Juhtumi võti"
 
-#: src/events/event-details-dialog.html:122
-#: src/offering/offering-summary.html:56
+#: src/events/event-details-dialog.html:122 src/offering/offering-summary.html:56
 msgid "Issue link"
 msgstr "Juhtumi link"
 
@@ -2107,16 +1793,11 @@ msgstr "Juhtumi link"
 msgid "Issue status"
 msgstr "Juhtumi staatus"
 
-#: src/customer/customer-workspace.js:105
-#: src/customer/routes.js:81
-#: src/project/project-workspace.js:91
-#: src/project/routes.js:93
-#: src/resource/tabs/constants.ts:7
+#: src/customer/customer-workspace.js:105 src/customer/routes.js:81 src/project/project-workspace.js:91 src/project/routes.js:93 src/resource/tabs/constants.ts:7
 msgid "Issues"
 msgstr "Juhtumid"
 
-#: src/billing/billing-record-details.html:34
-#: src/billing/invoice-details.html:32
+#: src/billing/billing-record-details.html:34 src/billing/invoice-details.html:32
 msgid "Item"
 msgstr "Element"
 
@@ -2124,9 +1805,7 @@ msgstr "Element"
 msgid "Item type"
 msgstr "Elemendi tüüp"
 
-#: src/customer/customer-users-details-list.js:77
-#: src/user/user-edit.html:82
-#: src/user/user-popover-table.html:37
+#: src/customer/customer-users-details-list.js:77 src/user/user-edit.html:82 src/user/user-popover-table.html:37
 msgid "Job position"
 msgstr "Ametikoht"
 
@@ -2134,16 +1813,11 @@ msgstr "Ametikoht"
 msgid "Keep until"
 msgstr "Hoia kuni"
 
-#: src/openstack/openstack-backup/actions.js:15
-#: src/openstack/openstack-snapshot/module.js:38
-#: src/openstack/openstack-volume/module.js:67
+#: src/openstack/openstack-backup/actions.js:15 src/openstack/openstack-snapshot/module.js:38 src/openstack/openstack-volume/module.js:67
 msgid "Kept until"
 msgstr "Hoitud kuni"
 
-#: src/issues/constants.ts:103
-#: src/issues/issues-list.js:44
-#: src/issues/issues-short-list.html:27
-#: src/providers/details/provider-price-list.js:41
+#: src/issues/constants.ts:103 src/issues/issues-list.js:44 src/issues/issues-short-list.html:27 src/providers/details/provider-price-list.js:41
 msgid "Key"
 msgstr "Võti"
 
@@ -2203,13 +1877,11 @@ msgstr "Töötamise aeg resetitakse vormi salvestamisel."
 msgid "Link"
 msgstr "Viide"
 
-#: src/project/project-providers-service.js:80
-#: src/providers/details/provider-projects.js:92
+#: src/project/project-providers-service.js:80 src/providers/details/provider-projects.js:92
 msgid "Link created"
 msgstr "Link loodud"
 
-#: src/project/project-providers-service.js:97
-#: src/providers/details/provider-projects.js:111
+#: src/project/project-providers-service.js:97 src/providers/details/provider-projects.js:111
 msgid "Link removed"
 msgstr "Link eemaldatud"
 
@@ -2233,9 +1905,7 @@ msgstr "Meeskonnaliikmete laadimine, palun oota."
 msgid "Loading..."
 msgstr "Laadimine..."
 
-#: src/navigation/header/logout-link.html:4
-#: src/navigation/site-header.html:18
-#: src/user/user-sidebar.html:24
+#: src/navigation/header/logout-link.html:4 src/navigation/site-header.html:18 src/user/user-sidebar.html:24
 msgid "Log out"
 msgstr "Logi välja"
 
@@ -2243,9 +1913,7 @@ msgstr "Logi välja"
 msgid "Logging user in"
 msgstr "Kasutaja sisselogimine"
 
-#: src/auth/auth-login.html:117
-#: src/auth/auth-login.html:42
-#: src/auth/saml2/auth-saml2-dialog.html:34
+#: src/auth/auth-login.html:117 src/auth/auth-login.html:42 src/auth/saml2/auth-saml2-dialog.html:34
 msgid "Login"
 msgstr "Logi sisse"
 
@@ -2261,9 +1929,7 @@ msgstr "Välja logimine nurjus"
 msgid "MAC address"
 msgstr "MAC- aadress"
 
-#: src/customer/customer-workspace.js:136
-#: src/user/constants.ts:24
-#: src/user/routes.js:36
+#: src/customer/customer-workspace.js:136 src/user/constants.ts:24 src/user/routes.js:36
 msgid "Manage"
 msgstr "Haldus"
 
@@ -2291,18 +1957,15 @@ msgstr "Maks. varukoopiate arv."
 msgid "Max number of snapshots"
 msgstr "Maks. tõmmiste arv."
 
-#: src/openstack/openstack-tenant/openstack-template.js:17
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:26
+#: src/openstack/openstack-tenant/openstack-template.js:17 src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:26
 msgid "Max RAM"
 msgstr "Maks. RAM"
 
-#: src/openstack/openstack-tenant/openstack-template.js:22
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:30
+#: src/openstack/openstack-tenant/openstack-template.js:22 src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:30
 msgid "Max storage"
 msgstr "Maks. salvestusmaht"
 
-#: src/openstack/openstack-tenant/openstack-template.js:13
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:22
+#: src/openstack/openstack-tenant/openstack-template.js:13 src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:22
 msgid "Max vCPU"
 msgstr "Maks vCPU-de arv"
 
@@ -2311,25 +1974,18 @@ msgid "Maximal valid value is"
 msgstr "Maksimaalne lubatud väärtus on"
 
 #: src/freeipa/freeipa-account-create.html:34
-msgid ""
-"Maximum username length with mandatory username prefix is 32 characters."
-msgstr ""
-"Maksimaalne kasutajanime pikkus koos kohustusliku kasutajanime eesliitega on "
-"32 tähemärki."
+msgid "Maximum username length with mandatory username prefix is 32 characters."
+msgstr "Maksimaalne kasutajanime pikkus koos kohustusliku kasutajanime eesliitega on 32 tähemärki."
 
 #: src/cost-planning/cost-plan-dialog.js:8
 msgid "Medium"
 msgstr "Keskmine"
 
-#: src/customer/customer-users-details-list.js:30
-#: src/team/customer-users-list.js:67
-#: src/team/project-users-list.js:52
+#: src/customer/customer-users-details-list.js:30 src/team/customer-users-list.js:67 src/team/project-users-list.js:52
 msgid "Member"
 msgstr "Liige"
 
-#: src/alerts/base-alerts-list.js:19
-#: src/events/base-event-list.js:18
-#: src/events/event-details-dialog.html:114
+#: src/alerts/base-alerts-list.js:19 src/events/base-event-list.js:18 src/events/event-details-dialog.html:114
 msgid "Message"
 msgstr "Teade"
 
@@ -2345,8 +2001,7 @@ msgstr "Min RAM"
 msgid "Min storage"
 msgstr "Min. salvestusmaht"
 
-#: src/experts/bids/expert-bid-create-dialog.html:68
-#: src/form/appstore-field-integer.html:18
+#: src/experts/bids/expert-bid-create-dialog.html:68 src/form/appstore-field-integer.html:18
 msgid "Minimal valid value is"
 msgstr "Minimaalne lubatud väärtus on"
 
@@ -2354,8 +2009,7 @@ msgstr "Minimaalne lubatud väärtus on"
 msgid "Minimal valid value is 0"
 msgstr "Minimaalne lubatud väärtus on 0"
 
-#: src/premiumSupport/premium-support-agreement.html:10
-#: src/premiumSupport/premium-support-summary.html:18
+#: src/premiumSupport/premium-support-agreement.html:10 src/premiumSupport/premium-support-summary.html:18
 msgid "Monthly base price"
 msgstr "Igakuine baashind"
 
@@ -2371,47 +2025,24 @@ msgstr "Lisainfo"
 msgid "Motivation"
 msgstr "Motivatsioon"
 
-#: src/cost-planning/cost-plan-flavors.html:21
-#: src/cost-planning/cost-plan-optimizer.html:33
-#: src/cost-planning/cost-plan-optimizer.html:41
+#: src/cost-planning/cost-plan-flavors.html:21 src/cost-planning/cost-plan-optimizer.html:33 src/cost-planning/cost-plan-optimizer.html:41
 #: src/project/project-create.html:55
 msgid "N/A"
 msgstr "N/A"
 
-#: src/ansible/ansible-jobs-list.js:49
-#: src/appstore/appstore-compare-list.js:69
-#: src/cost-planning/cost-plan-dialog.html:13
-#: src/cost-planning/cost-plans-list.js:31
-#: src/customer/customer-create-config.js:11
-#: src/customer/customer-manage.html:10
-#: src/digitalocean/digitalocean-droplet-config.js:76
-#: src/experts/requests/expert-request-create.js:40
-#: src/experts/requests/expert-request-customer-list.js:53
-#: src/experts/requests/expert-request-project-list.js:53
-#: src/offering/appstore-offering.js:41
-#: src/offering/offering-summary.html:11
-#: src/offering/offerings-list.js:35
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34
-#: src/openstack/openstack-backup/backup-snapshots-list.js:32
-#: src/openstack/openstack-backup/openstack-backups-list.js:38
-#: src/openstack/openstack-instance/openstack-instance-config.js:90
-#: src/openstack/openstack-network/openstack-tenant-networks.js:36
-#: src/openstack/openstack-security-groups/security-groups-list.js:35
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js:46
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:30
-#: src/openstack/openstack-subnet/openstack-subnets-list.js:28
-#: src/openstack/openstack-volume/import/import-volumes-list.js:46
-#: src/openstack/openstack-volume/openstack-instance-volumes.js:41
-#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:31
-#: src/project/projects-list.js:82
-#: src/providers/details/provider-details.html:4
-#: src/providers/details/provider-settings.js:44
-#: src/providers/provider-list.js:55
-#: src/resource-import/import-virtual-clouds-list.js:48
-#: src/resource-import/import-virtual-machines-list.js:48
-#: src/resource/actions/constants.ts:20
-#: src/resource/list/resources-list.js:42
+#: src/ansible/ansible-jobs-list.js:49 src/appstore/appstore-compare-list.js:69 src/cost-planning/cost-plan-dialog.html:13 src/cost-planning/cost-plans-list.js:31
+#: src/customer/customer-create-config.js:11 src/customer/customer-manage.html:10 src/digitalocean/digitalocean-droplet-config.js:76
+#: src/experts/requests/expert-request-create.js:40 src/experts/requests/expert-request-customer-list.js:53 src/experts/requests/expert-request-project-list.js:53
+#: src/offering/appstore-offering.js:41 src/offering/offering-summary.html:11 src/offering/offerings-list.js:35
+#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34 src/openstack/openstack-backup/backup-snapshots-list.js:32
+#: src/openstack/openstack-backup/openstack-backups-list.js:38 src/openstack/openstack-instance/openstack-instance-config.js:90
+#: src/openstack/openstack-network/openstack-tenant-networks.js:36 src/openstack/openstack-security-groups/security-groups-list.js:35
+#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34 src/openstack/openstack-snapshot/import/import-snapshots-list.js:46
+#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:30 src/openstack/openstack-subnet/openstack-subnets-list.js:28
+#: src/openstack/openstack-volume/import/import-volumes-list.js:46 src/openstack/openstack-volume/openstack-instance-volumes.js:41
+#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:31 src/project/projects-list.js:82 src/providers/details/provider-details.html:4
+#: src/providers/details/provider-settings.js:44 src/providers/provider-list.js:55 src/resource-import/import-virtual-clouds-list.js:48
+#: src/resource-import/import-virtual-machines-list.js:48 src/resource/actions/constants.ts:20 src/resource/list/resources-list.js:42
 #: src/slurm/slurm-allocation-list.js:24
 msgid "Name"
 msgstr "Nimi"
@@ -2428,9 +2059,7 @@ msgstr "Võrk"
 msgid "Network has been updated."
 msgstr "Võrku on uuendatud."
 
-#: src/openstack/openstack-backup/actions.js:41
-#: src/openstack/openstack-instance/openstack-instance-config.js:122
-#: src/openstack/openstack-network/breadcrumbs.js:22
+#: src/openstack/openstack-backup/actions.js:41 src/openstack/openstack-instance/openstack-instance-config.js:122 src/openstack/openstack-network/breadcrumbs.js:22
 #: src/openstack/openstack-subnet/breadcrumbs.js:23
 msgid "Networks"
 msgstr "Võrgud"
@@ -2439,8 +2068,7 @@ msgstr "Võrgud"
 msgid "New plan"
 msgstr "Uus plaan"
 
-#: src/digitalocean/droplet-resize.html:20
-#: src/openstack/openstack-volume/volume-extend.html:10
+#: src/digitalocean/droplet-resize.html:20 src/openstack/openstack-volume/volume-extend.html:10
 msgid "New size"
 msgstr "Uus suurus"
 
@@ -2448,13 +2076,11 @@ msgstr "Uus suurus"
 msgid "New VPC package"
 msgstr "Uus VPC pakett"
 
-#: src/form/appstore-form-wizard.html:68
-#: src/table/responsive-table.js:108
+#: src/form/appstore-form-wizard.html:68 src/table/responsive-table.js:108
 msgid "Next"
 msgstr "Edasi"
 
-#: src/openstack/openstack-tenant/openstack-tenant-summary.html:24
-#: src/resource/resource-utils-service.js:5
+#: src/openstack/openstack-tenant/openstack-tenant-summary.html:24 src/resource/resource-utils-service.js:5
 msgid "No access info"
 msgstr "Juurdepääsi info puudub"
 
@@ -2522,8 +2148,7 @@ msgstr "Sündmusi pole veel"
 msgid "No events yet."
 msgstr "Sündmusi pole veel."
 
-#: src/experts/requests/expert-request-customer-list.js:44
-#: src/experts/requests/expert-request-project-list.js:44
+#: src/experts/requests/expert-request-customer-list.js:44 src/experts/requests/expert-request-project-list.js:44
 msgid "No experts found matching filter."
 msgstr "Filtrile vastavaid eksperte ei leitud."
 
@@ -2547,8 +2172,7 @@ msgstr "Sisemisi IP-sid veel ei ole."
 msgid "No invitations found matching filter."
 msgstr "Filtrile vastavaid kutseid ei leitud."
 
-#: src/billing/invoices-list.js:37
-#: src/paypal/paypal-invoices-list.js:38
+#: src/billing/invoices-list.js:37 src/paypal/paypal-invoices-list.js:38
 msgid "No invoices found matching filter."
 msgstr "Filtrile vastavaid arveid ei leitud."
 
@@ -2560,15 +2184,12 @@ msgstr "Filtrile vastavaid kirjeid ei leitud."
 msgid "No items to compare yet."
 msgstr "Võrreldavad kirjed puuduvad."
 
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:15
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:9
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:12
-#: src/premiumSupport/premium-support-summary.html:8
+#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:15 src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:9
+#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:12 src/premiumSupport/premium-support-summary.html:8
 msgid "No items yet."
 msgstr "Kirjed puuduvad."
 
-#: src/team/customer-users-list.js:63
-#: src/team/project-users-list.js:48
+#: src/team/customer-users-list.js:63 src/team/project-users-list.js:48
 msgid "No members found matching filter."
 msgstr "Filtrile vastavaid liikmeid ei leitud."
 
@@ -2604,8 +2225,7 @@ msgstr "Filtrile vastvaid makseid ei leitud."
 msgid "No payments yet"
 msgstr "Maksed puuduvad"
 
-#: src/team/customer-permissions-log-list.js:19
-#: src/team/project-permissions-log-list.js:19
+#: src/team/customer-permissions-log-list.js:19 src/team/project-permissions-log-list.js:19
 msgid "No permissions found matching filter."
 msgstr "Filtrile vastavaid õigusi ei leitud."
 
@@ -2641,8 +2261,7 @@ msgstr "Ei ole ühtegi privaatpilve importimiseks."
 msgid "No projects are assigned to this role."
 msgstr "Antud rollile pole määratud ühtegi projekti."
 
-#: src/project/projects-list.js:59
-#: src/user/user-projects.js:41
+#: src/project/projects-list.js:59 src/user/user-projects.js:41
 msgid "No projects found matching filter."
 msgstr "Ühtegi filtrile vastavat projekti ei leitud."
 
@@ -2702,10 +2321,8 @@ msgstr "Ühtegi filtrile vastavat tõmmiste ajakava ei leitud."
 msgid "No snapshot schedules yet."
 msgstr "Ühtegi tõmmiste ajakava ei ole veel."
 
-#: src/openstack/openstack-backup/backup-snapshots-list.js:29
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js:42
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:27
-#: src/openstack/openstack-volume/openstack-volume-snapshots.js:43
+#: src/openstack/openstack-backup/backup-snapshots-list.js:29 src/openstack/openstack-snapshot/openstack-snapshots-list.js:42
+#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:27 src/openstack/openstack-volume/openstack-volume-snapshots.js:43
 msgid "No snapshots found matching filter."
 msgstr "Ühtegi filtrile vastavat tõmmist ei leitud."
 
@@ -2713,8 +2330,7 @@ msgstr "Ühtegi filtrile vastavat tõmmist ei leitud."
 msgid "No snapshots to import."
 msgstr "Ühtegi importimiseks valmis tõmmist ei leitud."
 
-#: src/openstack/openstack-backup/backup-snapshots-list.js:28
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:26
+#: src/openstack/openstack-backup/backup-snapshots-list.js:28 src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:26
 msgid "No snapshots yet."
 msgstr "Ühtegi tõmmist ei ole veel."
 
@@ -2754,8 +2370,7 @@ msgstr "Ühtegi filtrile vastavat virtuaalmasinat ei leitud."
 msgid "No virtual machines to import."
 msgstr "Importimiseks ei ole ühtegi virtuaalmasinat."
 
-#: src/openstack/openstack-volume/openstack-instance-volumes.js:38
-#: src/openstack/openstack-volume/openstack-volumes-list.js:44
+#: src/openstack/openstack-volume/openstack-instance-volumes.js:38 src/openstack/openstack-volume/openstack-volumes-list.js:44
 msgid "No volumes found matching filter."
 msgstr "Ühtegi filtrile vastavat volüümi ei leitud."
 
@@ -2779,8 +2394,7 @@ msgstr "Mitte kõik kohustuslikud väljad ei ole täidetud."
 msgid "Not assigned"
 msgstr "Pole määratud"
 
-#: src/resource/monitoring/resource-graphs.js:20
-#: src/resource/monitoring/resource-graphs.js:21
+#: src/resource/monitoring/resource-graphs.js:20 src/resource/monitoring/resource-graphs.js:21
 msgid "Not enough data for chart."
 msgstr "Graafiku loomiseks pole piisavalt andmeid."
 
@@ -2797,20 +2411,12 @@ msgid "Not known"
 msgstr "Teadmata"
 
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.js:39
-msgid ""
-"Note that this virtual machine is charged as part of <strong>{serviceName}</"
-"strong> package."
-msgstr ""
-"Pane tähele et seda virtuaalmasinat tasustatakse kui osa "
-"<strong>{serviceName}</strong> paketist."
+msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
+msgstr "Pane tähele et seda virtuaalmasinat tasustatakse kui osa <strong>{serviceName}</strong> paketist."
 
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.js:39
-msgid ""
-"Note that this volume is charged as part of <strong>{serviceName}</strong> "
-"package."
-msgstr ""
-"Pane tähele et seda volüümi tasustatakse kui osa <strong>{serviceName}</"
-"strong> paketist."
+msgid "Note that this volume is charged as part of <strong>{serviceName}</strong> package."
+msgstr "Pane tähele et seda volüümi tasustatakse kui osa <strong>{serviceName}</strong> paketist."
 
 #: src/user/hooks/hook-details.js:69
 msgid "Notification has been created."
@@ -2828,8 +2434,7 @@ msgstr "Teate edastamise viis"
 msgid "Notification only for the created invoice can be sent."
 msgstr "Teate saab saata ainult loodud arve kohta."
 
-#: src/user/constants.ts:18
-#: src/user/routes.js:29
+#: src/user/constants.ts:18 src/user/routes.js:29
 msgid "Notifications"
 msgstr "Teavitused"
 
@@ -2841,10 +2446,7 @@ msgstr "Pakkumise üksikasjad"
 msgid "Offerings"
 msgstr "Pakkumised"
 
-#: src/customer/customer-popover.html:53
-#: src/project/project-dialog.html:30
-#: src/providers/details/dialog.html:44
-#: src/user/user-popover.html:16
+#: src/customer/customer-popover.html:53 src/project/project-dialog.html:30 src/providers/details/dialog.html:44 src/user/user-popover.html:16
 msgid "OK"
 msgstr "OK"
 
@@ -2888,14 +2490,11 @@ msgstr "Ainult töötaja saab eemaldada organisatsiooni."
 msgid "Only staff can update organization policies."
 msgstr "Ainult töötaja saab uuendada organisatsiooni poliitikaid."
 
-#: src/alerts/alert-filter.html:1
-#: src/openstack/openstack-tenant/openstack-tenant-summary.html:22
-#: src/resource/resource-utils-service.js:12
+#: src/alerts/alert-filter.html:1 src/openstack/openstack-tenant/openstack-tenant-summary.html:22 src/resource/resource-utils-service.js:12
 msgid "Open"
 msgstr "Ava"
 
-#: src/issues/issue-detail.html:74
-#: src/offering/offering-summary.html:60
+#: src/issues/issue-detail.html:74 src/offering/offering-summary.html:60
 msgid "Open in Service Desk"
 msgstr "Ava Service Desk'is"
 
@@ -2915,17 +2514,9 @@ msgstr "Või sisene sotsiaalmeedia kontoga"
 msgid "organization"
 msgstr "asutus"
 
-#: src/events/event-details-dialog.html:59
-#: src/experts/requests/expert-request-customer-list.js:66
-#: src/issues/constants.ts:94
-#: src/issues/issue-create-dialog.html:12
-#: src/issues/issue-create-dialog.html:22
-#: src/issues/issue-create-dialog.html:7
-#: src/issues/issue-detail.html:30
-#: src/issues/issue-quick-create.html:56
-#: src/issues/issue-registration.html:43
-#: src/issues/issues-list.js:93
-#: src/user/user-projects.js:53
+#: src/events/event-details-dialog.html:59 src/experts/requests/expert-request-customer-list.js:66 src/issues/constants.ts:94 src/issues/issue-create-dialog.html:12
+#: src/issues/issue-create-dialog.html:22 src/issues/issue-create-dialog.html:7 src/issues/issue-detail.html:30 src/issues/issue-quick-create.html:56
+#: src/issues/issue-registration.html:43 src/issues/issues-list.js:93 src/user/user-projects.js:53
 msgid "Organization"
 msgstr "Asutus"
 
@@ -2949,9 +2540,7 @@ msgstr "Organisatsioon {customer_name} on kustutatud."
 msgid "Organization {customer_name} has been updated."
 msgstr "Organisatsioon {customer_name} on muudetud."
 
-#: src/alerts/constants.ts:10
-#: src/alerts/constants.ts:8
-#: src/alerts/constants.ts:9
+#: src/alerts/constants.ts:10 src/alerts/constants.ts:8 src/alerts/constants.ts:9
 msgid "Organization {customer_name} has exhausted quota {quota_name}."
 msgstr "Organisatsioon {customer_name} on ületanud oma kvoodi {quota_name}."
 
@@ -2975,8 +2564,7 @@ msgstr "Organisatioonil on projekte. Palun eemalda need kõigepealt."
 msgid "Organization details"
 msgstr "Organisatsiooni andmed"
 
-#: src/customer/customer-events.js:25
-#: src/events/constants.ts:66
+#: src/customer/customer-events.js:25 src/events/constants.ts:66
 msgid "Organization events"
 msgstr "Organisatsiooni sündmused"
 
@@ -2984,10 +2572,7 @@ msgstr "Organisatsiooni sündmused"
 msgid "Organization has been created."
 msgstr "Organisatsioon on loodud."
 
-#: src/analytics/cost-analysis.html:69
-#: src/issues/constants.ts:47
-#: src/user/user-edit.html:71
-#: src/user/user-organizations.js:54
+#: src/analytics/cost-analysis.html:69 src/issues/constants.ts:47 src/user/user-edit.html:71 src/user/user-organizations.js:54
 msgid "Organization name"
 msgstr "Asutuse nimi"
 
@@ -3007,8 +2592,7 @@ msgstr "Organisatsiooni poliitikaid on muudetud."
 msgid "Organization registration code"
 msgstr "Organisatsiooni registreerimise kood"
 
-#: src/customer/customer-manage.js:105
-#: src/customer/customer-manage.js:108
+#: src/customer/customer-manage.js:105 src/customer/customer-manage.js:108
 msgid "Organization removal"
 msgstr "Organisatsiooni kustutamine"
 
@@ -3016,9 +2600,7 @@ msgstr "Organisatsiooni kustutamine"
 msgid "Organization type"
 msgstr "Organisatsiooni tüüp"
 
-#: src/billing/billing-record-header.html:6
-#: src/billing/invoice-header.html:6
-#: src/customer/customer-workspace.html:10
+#: src/billing/billing-record-header.html:6 src/billing/invoice-header.html:6 src/customer/customer-workspace.html:10
 msgid "Organization workspace"
 msgstr "Organisatsiooni tööruum"
 
@@ -3034,8 +2616,7 @@ msgstr "Väljundi Logi"
 msgid "Owned organizations"
 msgstr "Omanduses olevad organisatsioonid"
 
-#: src/team/customer-users-list.js:77
-#: src/user/user-organizations.js:62
+#: src/team/customer-users-list.js:77 src/user/user-organizations.js:62
 msgid "Owner"
 msgstr "Omanik"
 
@@ -3047,8 +2628,7 @@ msgstr "Pakett"
 msgid "Package could not be assigned."
 msgstr "Paketti ei olnud võimalik määrata."
 
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:73
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:56
+#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:73 src/openstack/openstack-volume/openstack-volume-checkout-summary.html:56
 msgid "Package limits"
 msgstr "Paketi limiidid"
 
@@ -3060,8 +2640,7 @@ msgstr "Lehte ei leitud"
 msgid "Page Not Found :/"
 msgstr "Lehte ei leitud :/"
 
-#: src/billing/invoices-list.js:91
-#: src/paypal/paypal-invoices-list.js:105
+#: src/billing/invoices-list.js:91 src/paypal/paypal-invoices-list.js:105
 msgid "Paid"
 msgstr "Tasuline"
 
@@ -3069,10 +2648,7 @@ msgstr "Tasuline"
 msgid "Parameters"
 msgstr "Parameetrid"
 
-#: src/auth/auth-login.html:36
-#: src/auth/auth-login.html:67
-#: src/azure/password-details.js:11
-#: src/openstack/openstack-tenant/openstack-tenant-summary.html:41
+#: src/auth/auth-login.html:36 src/auth/auth-login.html:67 src/azure/password-details.js:11 src/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
 msgstr "Parool"
 
@@ -3096,13 +2672,11 @@ msgstr "Maksed kliendile {customer_name} on kinnitatud."
 msgid "Payment for {customer_name} has been cancelled."
 msgstr "Maksed kliendile {customer_name} on katkestatud."
 
-#: src/payments/payment-approve.js:18
-#: src/payments/payment-cancel.js:13
+#: src/payments/payment-approve.js:18 src/payments/payment-cancel.js:13
 msgid "Payment has been processed successfully."
 msgstr "Makse on edukalt töödeldud."
 
-#: src/payments/payment-approve.html:2
-#: src/payments/payment-cancel.html:2
+#: src/payments/payment-approve.html:2 src/payments/payment-cancel.html:2
 msgid "Payment is being processed, please wait."
 msgstr "Makset töödeldakse, Palun oota."
 
@@ -3110,9 +2684,7 @@ msgstr "Makset töödeldakse, Palun oota."
 msgid "Payment pending"
 msgstr "Makse ootel"
 
-#: src/billing/billing-utils.js:33
-#: src/invitations/invitations-list.js:71
-#: src/project/projects-list.js:132
+#: src/billing/billing-utils.js:33 src/invitations/invitations-list.js:71 src/project/projects-list.js:132
 msgid "Pending"
 msgstr "Ootel"
 
@@ -3120,8 +2692,7 @@ msgstr "Ootel"
 msgid "Permanent"
 msgstr "Alalised"
 
-#: src/customer/customer-team.html:16
-#: src/project/project-team.html:10
+#: src/customer/customer-team.html:16 src/project/project-team.html:10
 msgid "Permissions log"
 msgstr "Lubade logi"
 
@@ -3129,15 +2700,11 @@ msgstr "Lubade logi"
 msgid "Permitted"
 msgstr "Lubatud"
 
-#: src/billing/billing-customer-details.html:5
-#: src/billing/billing-issuer-details.html:5
-#: src/customer/customer-manage.html:86
-#: src/customer/customer-popover.html:32
+#: src/billing/billing-customer-details.html:5 src/billing/billing-issuer-details.html:5 src/customer/customer-manage.html:86 src/customer/customer-popover.html:32
 msgid "Phone"
 msgstr "Telefon"
 
-#: src/customer/customer-users-details-list.js:54
-#: src/user/user-edit.html:104
+#: src/customer/customer-users-details-list.js:54 src/user/user-edit.html:104
 msgid "Phone number"
 msgstr "Telefoninumber"
 
@@ -3149,8 +2716,7 @@ msgstr "Telefoninumbrid"
 msgid "Physical locations"
 msgstr "Füüsilised asukohad"
 
-#: app/views/directives/customer-balance.html:46
-#: app/views/directives/customer-balance.html:8
+#: app/views/directives/customer-balance.html:46 app/views/directives/customer-balance.html:8
 msgid "Plan"
 msgstr "Plaan"
 
@@ -3203,8 +2769,7 @@ msgid "Please provide valid quotas."
 msgstr "Sisestage kehtivad kvoodid."
 
 #: src/customer/customer-create-config.js:55
-msgid ""
-"Please provide your EU VAT ID if you are registered in the European Union."
+msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr "Esitage EL KMKR NR kui te olete registreeritud Euroopa Liidus."
 
 #: src/experts/bids/expert-bid-create-dialog.html:22
@@ -3212,10 +2777,8 @@ msgid "Please select a team"
 msgstr "Palun vali meeskond"
 
 #: src/freeipa/freeipa-account-create.html:28
-msgid ""
-"Please select a username that you will use for login into the Linux systems."
-msgstr ""
-"Valige kasutajanimi, mida kasutate sisselogimiseks Linux süsteemidesse."
+msgid "Please select a username that you will use for login into the Linux systems."
+msgstr "Valige kasutajanimi, mida kasutate sisselogimiseks Linux süsteemidesse."
 
 #: src/providers/details/provider-projects.html:11
 msgid "Please select projects where usage of the provider is permitted."
@@ -3223,15 +2786,13 @@ msgstr "Palun valige projektid kus teenusepakkuja kasutamine on lubatud."
 
 #: src/project/project-providers.html:11
 msgid "Please select providers allowed to be used in this project."
-msgstr ""
-"Palun valige teenusepakkujad keda on lubatud kasutada selles projektis."
+msgstr "Palun valige teenusepakkujad keda on lubatud kasutada selles projektis."
 
 #: src/i18n/language-list.html:15
 msgid "Please select your language"
 msgstr "Palun valige keel"
 
-#: src/auth/saml2/auth-saml2-dialog.html:17
-#: src/auth/saml2/auth-saml2-dialog.html:3
+#: src/auth/saml2/auth-saml2-dialog.html:17 src/auth/saml2/auth-saml2-dialog.html:3
 msgid "Please select your organization"
 msgstr "Palun valige oma organisatsioon"
 
@@ -3243,14 +2804,11 @@ msgstr "Palun määrake {fields}."
 msgid "Please wait while provider is being configured."
 msgstr "Palun oodake kuni teenusepakkujat seadistatakse."
 
-#: src/customer/customer-create-config.js:60
-#: src/customer/customer-policies.html:2
-#: src/project/project-dialog.html:14
+#: src/customer/customer-create-config.js:60 src/customer/customer-policies.html:2 src/project/project-dialog.html:14
 msgid "Policies"
 msgstr "Eeskirjad"
 
-#: src/openstack/openstack-security-groups/security-group-rules-list.html:6
-#: src/openstack/openstack-security-groups/security-groups-dialog.html:15
+#: src/openstack/openstack-security-groups/security-group-rules-list.html:6 src/openstack/openstack-security-groups/security-groups-dialog.html:15
 msgid "Port range"
 msgstr "Pordivahemik"
 
@@ -3262,13 +2820,11 @@ msgstr "Postiaadress"
 msgid "Powered by"
 msgstr "Hoiab töös"
 
-#: src/customer/customer-users-details-list.js:61
-#: src/user/user-popover-table.html:21
+#: src/customer/customer-users-details-list.js:61 src/user/user-popover-table.html:21
 msgid "Preferred language"
 msgstr "Eelistatud keel"
 
-#: src/premiumSupport/routes.js:20
-#: src/premiumSupport/routes.js:9
+#: src/premiumSupport/routes.js:20 src/premiumSupport/routes.js:9
 msgid "Premium support"
 msgstr "Premium Tugi"
 
@@ -3276,17 +2832,12 @@ msgstr "Premium Tugi"
 msgid "Premium support service."
 msgstr "Premium toe teenus."
 
-#: src/form/appstore-form-wizard.html:60
-#: src/table/responsive-table.js:109
+#: src/form/appstore-form-wizard.html:60 src/table/responsive-table.js:109
 msgid "Previous"
 msgstr "Eelmine"
 
-#: src/billing/invoices-list.js:54
-#: src/cost-planning/cost-plan-flavors.html:8
-#: src/experts/bids/expert-bid-create-dialog.html:57
-#: src/offering/offering-summary.html:34
-#: src/paypal/paypal-invoices-list.js:58
-#: src/plans/plan-agreements-list.js:48
+#: src/billing/invoices-list.js:54 src/cost-planning/cost-plan-flavors.html:8 src/experts/bids/expert-bid-create-dialog.html:57 src/offering/offering-summary.html:34
+#: src/paypal/paypal-invoices-list.js:58 src/plans/plan-agreements-list.js:48
 msgid "Price"
 msgstr "Hind"
 
@@ -3310,17 +2861,13 @@ msgstr "Hind 1 vCPU päevas"
 msgid "Price is estimated."
 msgstr "Hind on arvestuslik."
 
-#: src/cost-planning/cost-plan-optimizer.html:11
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:48
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:36
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:31
+#: src/cost-planning/cost-plan-optimizer.html:11 src/openstack/openstack-instance/openstack-instance-checkout-summary.html:48
+#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:36 src/openstack/openstack-volume/openstack-volume-checkout-summary.html:31
 msgid "Price per day"
 msgstr "Päeva hind"
 
-#: src/cost-planning/cost-plan-optimizer.html:15
-#: src/offering/appstore-offering-summary.html:16
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:55
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:43
+#: src/cost-planning/cost-plan-optimizer.html:15 src/offering/appstore-offering-summary.html:16
+#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:55 src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:43
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:38
 msgid "Price per month"
 msgstr "Hind kuus"
@@ -3349,20 +2896,12 @@ msgstr "Prindi kirje"
 msgid "Priority"
 msgstr "Prioriteet"
 
-#: src/navigation/app-footer.html:5
-#: src/routes/about.js:65
+#: src/navigation/app-footer.html:5 src/routes/about.js:65
 msgid "Privacy policy"
 msgstr "Privaatsuspoliitika"
 
-#: src/analytics/resource-chart-service.js:21
-#: src/appstore/routes.js:22
-#: src/configs/base-config.js:36
-#: src/configs/base-config.js:93
-#: src/dashboard/constants.ts:15
-#: src/project/project-workspace.js:58
-#: src/project/projects-list.js:117
-#: src/project/routes.js:132
-#: src/resource/breadcrumbs/resource-categories.js:7
+#: src/analytics/resource-chart-service.js:21 src/appstore/routes.js:22 src/configs/base-config.js:36 src/configs/base-config.js:93 src/dashboard/constants.ts:15
+#: src/project/project-workspace.js:58 src/project/projects-list.js:117 src/project/routes.js:132 src/resource/breadcrumbs/resource-categories.js:7
 msgid "Private clouds"
 msgstr "Privaatpilved"
 
@@ -3378,21 +2917,11 @@ msgstr "Profiil"
 msgid "Profile has been updated."
 msgstr "Profiil on uuendatud."
 
-#: src/analytics/cost-analysis.html:113
-#: src/events/event-details-dialog.html:69
-#: src/experts/requests/expert-request-customer-list.js:71
-#: src/invitations/actions/invitation-dialog.html:46
-#: src/issues/constants.ts:97
-#: src/issues/issue-create-dialog.html:17
-#: src/issues/issue-create-dialog.html:27
-#: src/issues/issue-detail.html:40
-#: src/issues/issue-quick-create.html:75
-#: src/issues/issue-registration.html:127
-#: src/offering/appstore-offering-summary.html:25
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:65
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:52
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:48
-#: src/premiumSupport/premium-support-summary.html:35
+#: src/analytics/cost-analysis.html:113 src/events/event-details-dialog.html:69 src/experts/requests/expert-request-customer-list.js:71
+#: src/invitations/actions/invitation-dialog.html:46 src/issues/constants.ts:97 src/issues/issue-create-dialog.html:17 src/issues/issue-create-dialog.html:27
+#: src/issues/issue-detail.html:40 src/issues/issue-quick-create.html:75 src/issues/issue-registration.html:127 src/offering/appstore-offering-summary.html:25
+#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:65 src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:52
+#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:48 src/premiumSupport/premium-support-summary.html:35
 msgid "Project"
 msgstr "Projekt"
 
@@ -3416,9 +2945,7 @@ msgstr "Projekti kirjeldus"
 msgid "Project details"
 msgstr "Projekti üksikasjad"
 
-#: src/customer/customer-events.js:30
-#: src/events/constants.ts:68
-#: src/project/project-events.js:25
+#: src/customer/customer-events.js:30 src/events/constants.ts:68 src/project/project-events.js:25
 msgid "Project events"
 msgstr "Projekti sündmused"
 
@@ -3427,10 +2954,8 @@ msgid "Project has been removed successfully."
 msgstr "Projekt on edukalt eemaldatud."
 
 #: src/events/constants.ts:20
-msgid ""
-"Project has been renamed from {project_previous_name} to {project_name}."
-msgstr ""
-"Projekt {project_previous_name} on nimetatud ümber projektiks {project_name}."
+msgid "Project has been renamed from {project_previous_name} to {project_name}."
+msgstr "Projekt {project_previous_name} on nimetatud ümber projektiks {project_name}."
 
 #: src/project/project-details.js:48
 msgid "Project has been updated."
@@ -3452,13 +2977,8 @@ msgstr "Projektihaldur"
 msgid "Project manager cannot edit users with same role."
 msgstr "Projektijuht ei saa muuta kasutajaid kes on samas rollis."
 
-#: src/analytics/cost-analysis.html:68
-#: src/issues/constants.ts:55
-#: src/project/project-create.html:8
-#: src/project/project-details.html:9
-#: src/providers/details/provider-project-link-quotas.html:6
-#: src/team/add-team-member.html:46
-#: src/user/user-projects.js:45
+#: src/analytics/cost-analysis.html:68 src/issues/constants.ts:55 src/project/project-create.html:8 src/project/project-details.html:9
+#: src/providers/details/provider-project-link-quotas.html:6 src/team/add-team-member.html:46 src/user/user-projects.js:45
 msgid "Project name"
 msgstr "Projekti nimi"
 
@@ -3470,11 +2990,8 @@ msgstr "Projekti poliitikad on muudetud."
 msgid "Project providers links have been updated."
 msgstr "Projekti teenusepakkujate lingid on muudetud."
 
-#: src/appstore/appstore-header.html:11
-#: src/experts/requests/expert-request-header.html:7
-#: src/offering/offering-header.html:13
-#: src/resource/breadcrumbs/resource-breadcrumbs.js:14
-#: app/views/project/base.html:14
+#: src/appstore/appstore-header.html:11 src/experts/requests/expert-request-header.html:7 src/offering/offering-header.html:13
+#: src/resource/breadcrumbs/resource-breadcrumbs.js:14 app/views/project/base.html:14
 msgid "Project workspace"
 msgstr "Projekti töölaud"
 
@@ -3482,29 +2999,17 @@ msgstr "Projekti töölaud"
 msgid "Projected cost"
 msgstr "Ennustatud kulu"
 
-#: src/analytics/cost-analysis.html:27
-#: src/analytics/dashboard-cost-chart.html:12
-#: src/appstore/dialog/appstore-project-selector.html:2
-#: src/customer/customer-workspace.js:58
-#: src/customer/routes.js:97
-#: src/navigation/select-workspace-dialog.html:93
-#: src/providers/details/dialog.html:28
+#: src/analytics/cost-analysis.html:27 src/analytics/dashboard-cost-chart.html:12 src/appstore/dialog/appstore-project-selector.html:2
+#: src/customer/customer-workspace.js:58 src/customer/routes.js:97 src/navigation/select-workspace-dialog.html:93 src/providers/details/dialog.html:28
 msgid "Projects"
 msgstr "Projektid"
 
-#: src/dashboard/organization-dashboard.html:10
-#: src/team/add-team-member.html:41
+#: src/dashboard/organization-dashboard.html:10 src/team/add-team-member.html:41
 msgid "Projects list"
 msgstr "Projektide nimekiri"
 
-#: src/ansible/ansible-job-create.html:18
-#: src/ansible/ansible-job-summary.html:42
-#: src/appstore/appstore-compare-list.js:51
-#: src/appstore/appstore-store.html:32
-#: src/cost-planning/cost-plan-optimizer.html:9
-#: src/resource/list/resources-list.js:51
-#: src/resource/summary/resource-summary-base.html:21
-#: app/views/help/list.html:10
+#: src/ansible/ansible-job-create.html:18 src/ansible/ansible-job-summary.html:42 src/appstore/appstore-compare-list.js:51 src/appstore/appstore-store.html:32
+#: src/cost-planning/cost-plan-optimizer.html:9 src/resource/list/resources-list.js:51 src/resource/summary/resource-summary-base.html:21 app/views/help/list.html:10
 msgid "Provider"
 msgstr "Teenusepakkuja"
 
@@ -3512,8 +3017,7 @@ msgstr "Teenusepakkuja"
 msgid "Provider {service_name} is not responding."
 msgstr "Teenusepakkuja {service_name} ei vasta."
 
-#: src/project/project-create.html:41
-#: src/project/project-policies.html:10
+#: src/project/project-create.html:41 src/project/project-policies.html:10
 msgid "Provider certification required by this project"
 msgstr "Teenusepakkuja sertifitseerimine on vajalik selle projekti juures."
 
@@ -3541,8 +3045,7 @@ msgstr "Teenusepakkujal on ressursid. Palun eemalda kõigepealt need."
 msgid "Provider is in erred state."
 msgstr "Teenusepakkuja on staatuses \"erred\"."
 
-#: src/analytics/cost-analysis.html:91
-#: src/providers/create.html:48
+#: src/analytics/cost-analysis.html:91 src/providers/create.html:48
 msgid "Provider name"
 msgstr "Teenusepakkuja nimi"
 
@@ -3558,10 +3061,7 @@ msgstr "Teenusepakkuja kvoot on jõudnud piirini."
 msgid "Provider type"
 msgstr "Teenusepakkuja tüüp"
 
-#: src/analytics/cost-analysis.html:43
-#: src/analytics/dashboard-cost-chart.html:14
-#: src/customer/customer-workspace.js:50
-#: src/customer/routes.js:113
+#: src/analytics/cost-analysis.html:43 src/analytics/dashboard-cost-chart.html:14 src/customer/customer-workspace.js:50 src/customer/routes.js:113
 #: src/project/project-dialog.html:21
 msgid "Providers"
 msgstr "Teenusepakkujad"
@@ -3586,10 +3086,7 @@ msgstr "Ost"
 msgid "Purchase of {vm_name} was successful."
 msgstr "{Vm_name} ost oli edukas."
 
-#: src/billing/billing-record-details.html:35
-#: src/billing/invoice-details.html:33
-#: src/cost-planning/cost-plan-flavors.html:6
-#: src/cost-planning/cost-plan-items.html:10
+#: src/billing/billing-record-details.html:35 src/billing/invoice-details.html:33 src/cost-planning/cost-plan-flavors.html:6 src/cost-planning/cost-plan-items.html:10
 msgid "Quantity"
 msgstr "Hulk"
 
@@ -3597,10 +3094,7 @@ msgstr "Hulk"
 msgid "Quota events"
 msgstr "Kvoodi sündmused"
 
-#: src/error/routes.js:25
-#: src/project/projects-list.js:153
-#: src/providers/provider-list.js:182
-#: src/resource-import/utils.js:36
+#: src/error/routes.js:25 src/project/projects-list.js:153 src/providers/provider-list.js:182 src/resource-import/utils.js:36
 #: src/resource/resource-provision-policy.js:14
 msgid "Quota has been reached."
 msgstr "Kvoot on täis."
@@ -3609,8 +3103,7 @@ msgstr "Kvoot on täis."
 msgid "Quota usage"
 msgstr "Kvootide kasutamine"
 
-#: src/providers/details/provider-project-link-quota.html:17
-#: src/quotas/quota-usage-bar-chart.html:8
+#: src/providers/details/provider-project-link-quota.html:17 src/quotas/quota-usage-bar-chart.html:8
 msgid "Quota usage exceeds limit."
 msgstr "Kvootide kasutamine ületab limiidi."
 
@@ -3622,13 +3115,9 @@ msgstr "Kvoodid"
 msgid "Quotas updated."
 msgstr "Kvoodid muudetud."
 
-#: src/appstore/appstore-compare-list.js:83
-#: src/digitalocean/digitalocean-droplet-config.js:59
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:39
-#: src/openstack/openstack-instance/openstack-instance-config.js:58
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js:15
-#: src/quotas/filters.js:6
-#: src/resource-import/import-virtual-machines-list.js:69
+#: src/appstore/appstore-compare-list.js:83 src/digitalocean/digitalocean-droplet-config.js:59
+#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:39 src/openstack/openstack-instance/openstack-instance-config.js:58
+#: src/openstack/openstack-tenant/openstack-tenant-prices.js:15 src/quotas/filters.js:6 src/resource-import/import-virtual-machines-list.js:69
 msgid "RAM"
 msgstr "RAM"
 
@@ -3640,8 +3129,7 @@ msgstr "RAM piirmäär GB"
 msgid "Read through terms and conditions."
 msgstr "Loe tingimused läbi."
 
-#: src/customer/customer-manage.js:110
-#: src/user/user-manage.js:57
+#: src/customer/customer-manage.js:110 src/user/user-manage.js:57
 msgid "Reason"
 msgstr "Põhjus"
 
@@ -3661,19 +3149,15 @@ msgstr "Teade kirje kohta on saadetud organisatsiooni omanikele."
 msgid "Record number"
 msgstr "Kirje number"
 
-#: src/billing/billing-record-details.html:23
-#: src/billing/billing-records-list.js:53
+#: src/billing/billing-record-details.html:23 src/billing/billing-records-list.js:53
 msgid "Record period"
 msgstr "Kirje periood"
 
-#: src/issues/issues-activity-stream.html:11
-#: src/issues/issues-short-list.html:11
-#: src/table/responsive-table.js:174
+#: src/issues/issues-activity-stream.html:11 src/issues/issues-short-list.html:11 src/table/responsive-table.js:174
 msgid "Refresh"
 msgstr "Värskenda"
 
-#: src/digitalocean/digitalocean-droplet-config.js:20
-#: src/digitalocean/digitalocean-droplet-summary.html:5
+#: src/digitalocean/digitalocean-droplet-config.js:20 src/digitalocean/digitalocean-droplet-summary.html:5
 msgid "Region"
 msgstr "Piirkond"
 
@@ -3701,8 +3185,7 @@ msgstr "Registreeritud"
 msgid "Registration code"
 msgstr "Registreeringu kood"
 
-#: src/user/user-edit.html:40
-#: src/user/user-popover-table.html:29
+#: src/user/user-edit.html:40 src/user/user-popover-table.html:29
 msgid "Registration method"
 msgstr "Registreeringu meetod"
 
@@ -3714,8 +3197,7 @@ msgstr "Registrikood"
 msgid "Regular user"
 msgstr "Tavakasutaja"
 
-#: src/openstack/openstack-security-groups/security-group-rule-editor.html:14
-#: src/openstack/openstack-security-groups/security-group-rules-list.html:7
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html:14 src/openstack/openstack-security-groups/security-group-rules-list.html:7
 msgid "Remote CIDR"
 msgstr "Remote CIDR"
 
@@ -3723,13 +3205,8 @@ msgstr "Remote CIDR"
 msgid "Remote network"
 msgstr "Kaugvõrk"
 
-#: src/cost-planning/cost-plans-list.js:59
-#: src/project/projects-list.js:180
-#: src/providers/provider-list.js:97
-#: src/team/customer-users-list.js:135
-#: src/team/project-users-list.js:103
-#: src/user/hooks/hook-list.js:74
-#: src/user/keys/key-list.js:51
+#: src/cost-planning/cost-plans-list.js:59 src/project/projects-list.js:180 src/providers/provider-list.js:97 src/team/customer-users-list.js:135
+#: src/team/project-users-list.js:103 src/user/hooks/hook-list.js:74 src/user/keys/key-list.js:51
 msgid "Remove"
 msgstr "Eemalda"
 
@@ -3741,8 +3218,7 @@ msgstr "Eemalda organisatsioon"
 msgid "Remove profile"
 msgstr "Eemalda profiil"
 
-#: src/project/project-providers-service.js:92
-#: src/providers/details/provider-projects.js:107
+#: src/project/project-providers-service.js:92 src/providers/details/provider-projects.js:107
 msgid "Removing link"
 msgstr "Eemalda link"
 
@@ -3754,9 +3230,7 @@ msgstr "Anna teada ebakorrektsetest andmetest"
 msgid "Reported by me"
 msgstr "Minu poolt raporteeritud"
 
-#: src/issues/constants.ts:75
-#: src/issues/issue-detail.html:20
-#: src/issues/issues-list.js:110
+#: src/issues/constants.ts:75 src/issues/issue-detail.html:20 src/issues/issues-list.js:110
 msgid "Reporter"
 msgstr "Raporteerija"
 
@@ -3764,8 +3238,7 @@ msgstr "Raporteerija"
 msgid "Request {key} has been created."
 msgstr "Päring {key} on loodud."
 
-#: src/issues/issue-create-dialog.js:66
-#: src/issues/issue-quick-create.js:115
+#: src/issues/issue-create-dialog.js:66 src/issues/issue-quick-create.js:115
 msgid "Request {requestId} has been created."
 msgstr "Päring {requestId} on loodud."
 
@@ -3773,8 +3246,7 @@ msgstr "Päring {requestId} on loodud."
 msgid "Request a new service"
 msgstr "Uue teenuse päring"
 
-#: src/issues/issue-create-dialog.js:6
-#: src/issues/issue-create-dialog.js:7
+#: src/issues/issue-create-dialog.js:6 src/issues/issue-create-dialog.js:7
 msgid "Request description"
 msgstr "Päringu kirjeldus"
 
@@ -3790,18 +3262,15 @@ msgstr "Küsi otseligipääsu"
 msgid "Request direct access to {{ $ctrl.tenant.name }}"
 msgstr "Küsi otseligipääsu rentnikule {{ $ctrl.tenant.name }}"
 
-#: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:24
-#: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:28
+#: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:24 src/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:28
 msgid "Request direct access to OpenStack Tenant"
 msgstr "Küsi otseligipääsu OpenStack rentnikule"
 
-#: src/issues/issue-create-dialog.js:8
-#: src/issues/issue-create-dialog.js:9
+#: src/issues/issue-create-dialog.js:8 src/issues/issue-create-dialog.js:9
 msgid "Request name"
 msgstr "Päringu nimi"
 
-#: src/customer/customer-manage.js:112
-#: src/user/user-manage.js:58
+#: src/customer/customer-manage.js:112 src/user/user-manage.js:58
 msgid "Request removal"
 msgstr "Päringu eemaldamine"
 
@@ -3809,24 +3278,16 @@ msgstr "Päringu eemaldamine"
 msgid "Request to {action} has been accepted."
 msgstr "Päring {action} on vastuvõetud."
 
-#: src/issues/constants.ts:106
-#: src/issues/constants.ts:67
-#: src/issues/issue-create-dialog.html:37
-#: src/issues/issue-create-dialog.html:42
-#: src/issues/issue-detail.html:35
-#: src/issues/issue-quick-create.html:9
-#: src/issues/issue-registration.html:80
+#: src/issues/constants.ts:106 src/issues/constants.ts:67 src/issues/issue-create-dialog.html:37 src/issues/issue-create-dialog.html:42 src/issues/issue-detail.html:35
+#: src/issues/issue-quick-create.html:9 src/issues/issue-registration.html:80
 msgid "Request type"
 msgstr "Päringu liik"
 
-#: src/offering/offering-header.html:21
-#: src/offering/sidebar.js:7
-#: src/project/routes.js:154
+#: src/offering/offering-header.html:21 src/offering/sidebar.js:7 src/project/routes.js:154
 msgid "Requests"
 msgstr "Päringud"
 
-#: src/cost-planning/cost-plan-dialog.html:19
-#: src/project/project-policies.html:9
+#: src/cost-planning/cost-plan-dialog.html:19 src/project/project-policies.html:9
 msgid "Required certifications"
 msgstr "Vajalikud sertifikaadid"
 
@@ -3842,18 +3303,13 @@ msgstr "Muuda dropletide suurust"
 msgid "Resolution"
 msgstr "Resolutsioon"
 
-#: src/events/event-details-dialog.html:93
-#: src/issues/issue-create-dialog.html:32
+#: src/events/event-details-dialog.html:93 src/issues/issue-create-dialog.html:32
 msgid "Resource"
 msgstr "Ressurss"
 
 #: src/alerts/constants.ts:6
-msgid ""
-"Resource {resource_name} has disappeared from the {service_name} provider in "
-"{project_name} project."
-msgstr ""
-"Ressurss {resource_name} on kadunud teenusepakkuja {service_name} juurest "
-"projektis {project_name}."
+msgid "Resource {resource_name} has disappeared from the {service_name} provider in {project_name} project."
+msgstr "Ressurss {resource_name} on kadunud teenusepakkuja {service_name} juurest projektis {project_name}."
 
 #: src/events/event-details-dialog.html:106
 msgid "Resource configuration"
@@ -3871,9 +3327,7 @@ msgstr "Ressursside arv "
 msgid "Resource doesn't have SLA yet. Please connect it to monitoring system."
 msgstr "Ressurssil ei ole veel SLA-d. Palun ühendage see järelevalve süsteemi."
 
-#: src/customer/customer-events.js:34
-#: src/events/constants.ts:70
-#: src/project/project-events.js:30
+#: src/customer/customer-events.js:34 src/events/constants.ts:70 src/project/project-events.js:30
 msgid "Resource events"
 msgstr "Ressurssi sündmused"
 
@@ -3897,13 +3351,11 @@ msgstr "Ressurss on sünkroniseeritud."
 msgid "Resource name"
 msgstr "Ressursi nimi"
 
-#: src/analytics/cost-analysis.html:112
-#: src/providers/details/provider-price-list.js:33
+#: src/analytics/cost-analysis.html:112 src/providers/details/provider-price-list.js:33
 msgid "Resource type"
 msgstr "Ressursi liik"
 
-#: src/analytics/routes.js:28
-#: src/customer/customer-workspace.js:89
+#: src/analytics/routes.js:28 src/customer/customer-workspace.js:89
 msgid "Resource usage"
 msgstr "Ressursi kasutus"
 
@@ -3911,14 +3363,8 @@ msgstr "Ressursi kasutus"
 msgid "resources"
 msgstr "ressursid"
 
-#: src/analytics/cost-analysis.html:35
-#: src/analytics/dashboard-cost-chart.html:13
-#: src/experts/requests/expert-request-header.html:11
-#: src/offering/offering-header.html:17
-#: src/project/project-workspace.js:40
-#: src/providers/provider-list.js:79
-#: src/resource/breadcrumbs/resource-breadcrumbs.js:21
-#: app/views/project/base.html:17
+#: src/analytics/cost-analysis.html:35 src/analytics/dashboard-cost-chart.html:13 src/experts/requests/expert-request-header.html:11 src/offering/offering-header.html:17
+#: src/project/project-workspace.js:40 src/providers/provider-list.js:79 src/resource/breadcrumbs/resource-breadcrumbs.js:21 app/views/project/base.html:17
 msgid "Resources"
 msgstr "Ressursid"
 
@@ -3942,13 +3388,8 @@ msgstr "Taastatud volüümid"
 msgid "Retry"
 msgstr "Proovige uuesti"
 
-#: src/invitations/actions/invitation-dialog.html:29
-#: src/invitations/invitations-list.js:107
-#: src/team/add-project-member.html:27
-#: src/team/add-team-member.html:47
-#: src/team/customer-permissions-log-list.js:35
-#: src/team/project-permissions-log-list.js:32
-#: src/user/user-projects.js:60
+#: src/invitations/actions/invitation-dialog.html:29 src/invitations/invitations-list.js:107 src/team/add-project-member.html:27 src/team/add-team-member.html:47
+#: src/team/customer-permissions-log-list.js:35 src/team/project-permissions-log-list.js:32 src/user/user-projects.js:60
 msgid "Role"
 msgstr "Roll"
 
@@ -3964,8 +3405,7 @@ msgstr "Roll projekti juures"
 msgid "Role management events"
 msgstr "Rollide halduse sündmused"
 
-#: src/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:27
-#: src/resource-import/import-virtual-machines-list.js:53
+#: src/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:27 src/resource-import/import-virtual-machines-list.js:53
 msgid "Runtime state"
 msgstr "Käitusaegne staatus"
 
@@ -3977,12 +3417,8 @@ msgstr "Käitusaja staatus"
 msgid "Russian"
 msgstr "Русский"
 
-#: src/cost-planning/cost-plan-dialog.html:52
-#: src/project/project-providers.html:16
-#: src/providers/details/provider-projects.html:21
-#: src/providers/details/provider-settings.html:76
-#: src/team/add-project-member.js:55
-#: src/team/add-team-member.js:33
+#: src/cost-planning/cost-plan-dialog.html:52 src/project/project-providers.html:16 src/providers/details/provider-projects.html:21
+#: src/providers/details/provider-settings.html:76 src/team/add-project-member.js:55 src/team/add-team-member.js:33
 msgid "Save"
 msgstr "Salvesta"
 
@@ -3990,16 +3426,13 @@ msgstr "Salvesta"
 msgid "Saving of {vm_name} was successful."
 msgstr "Virtuaalmasina {vm_name} salvestamine oli edukas."
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:14
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:43
+#: src/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:14 src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:43
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedule-summary.html:14
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:43
 msgid "Schedule"
 msgstr "Ajagraafik"
 
-#: src/issues/issue-registration.html:212
-#: src/navigation/header/main-search.html:3
-#: src/table/responsive-table.js:104
+#: src/issues/issue-registration.html:212 src/navigation/header/main-search.html:3 src/table/responsive-table.js:104
 msgid "Search"
 msgstr "Otsing"
 
@@ -4015,8 +3448,7 @@ msgstr "Turvagrupp ei sisalda veel ühtegi reeglit."
 msgid "Security group has been updated."
 msgstr "Turvagrupp on uuendatud."
 
-#: src/openstack/openstack-instance/openstack-instance-config.js:102
-#: src/openstack/openstack-instance/openstack-instance-summary.html:5
+#: src/openstack/openstack-instance/openstack-instance-config.js:102 src/openstack/openstack-instance/openstack-instance-summary.html:5
 #: src/openstack/openstack-security-groups/breadcrumbs.js:21
 msgid "Security groups"
 msgstr "Turvagrupid"
@@ -4025,8 +3457,7 @@ msgstr "Turvagrupid"
 msgid "Security groups details"
 msgstr "Turvagruppide detailid"
 
-#: src/issues/issues-activity-stream.html:6
-#: src/issues/issues-short-list.html:6
+#: src/issues/issues-activity-stream.html:6 src/issues/issues-short-list.html:6
 msgid "See all"
 msgstr "Vaata kõiki"
 
@@ -4034,9 +3465,7 @@ msgstr "Vaata kõiki"
 msgid "Segmentation ID"
 msgstr "Segmenteerimise ID"
 
-#: src/appstore/appstore-providers.js:73
-#: src/appstore/dialog/appstore-category-selector.html:37
-#: src/navigation/select-workspace-dialog.html:124
+#: src/appstore/appstore-providers.js:73 src/appstore/dialog/appstore-category-selector.html:37 src/navigation/select-workspace-dialog.html:124
 #: src/navigation/select-workspace-dialog.html:62
 msgid "Select"
 msgstr "Vali"
@@ -4049,8 +3478,7 @@ msgstr "Valige {fieldLabel}"
 msgid "Select a component"
 msgstr "Valige komponent"
 
-#: src/issues/issue-quick-create.html:98
-#: src/issues/issue-registration.html:175
+#: src/issues/issue-quick-create.html:98 src/issues/issue-registration.html:175
 msgid "Select affected resource..."
 msgstr "Valige seotud ressurss..."
 
@@ -4062,9 +3490,7 @@ msgstr "Kellele määratud..."
 msgid "Select caller..."
 msgstr "Valige pöörduja..."
 
-#: src/cost-planning/cost-plan-certifications.html:2
-#: src/project/project-create.html:48
-#: src/project/project-policies.html:17
+#: src/cost-planning/cost-plan-certifications.html:2 src/project/project-create.html:48 src/project/project-policies.html:17
 msgid "Select certifications"
 msgstr "Valige sertifikaadid"
 
@@ -4080,18 +3506,15 @@ msgstr "Valige riik..."
 msgid "Select one to go to a customer workspace"
 msgstr "Vali üks et minna selle kliendi tööruumi"
 
-#: src/issues/issue-quick-create.html:60
-#: src/issues/issue-registration.html:48
+#: src/issues/issue-quick-create.html:60 src/issues/issue-registration.html:48
 msgid "Select organization..."
 msgstr "Valige organisatsioon..."
 
-#: src/appstore/dialog/appstore-project-selector.html:10
-#: src/invitations/actions/invitation-dialog.html:56
+#: src/appstore/dialog/appstore-project-selector.html:10 src/invitations/actions/invitation-dialog.html:56
 msgid "Select project"
 msgstr "Vali projekt"
 
-#: src/issues/issue-quick-create.html:79
-#: src/issues/issue-registration.html:131
+#: src/issues/issue-quick-create.html:79 src/issues/issue-registration.html:131
 msgid "Select project..."
 msgstr "Valige projekt..."
 
@@ -4107,9 +3530,7 @@ msgstr "Vali teenusepakkuja liik..."
 msgid "Select request type"
 msgstr "Vali päringu liik"
 
-#: src/openstack/openstack-backup/actions.js:34
-#: src/openstack/openstack-instance/actions.js:44
-#: src/openstack/openstack-instance/openstack-instance-config.js:103
+#: src/openstack/openstack-backup/actions.js:34 src/openstack/openstack-instance/actions.js:44 src/openstack/openstack-instance/openstack-instance-config.js:103
 msgid "Select security groups..."
 msgstr "Vali turvagrupid..."
 
@@ -4137,8 +3558,7 @@ msgstr "Valige kasutaja..."
 msgid "Select Virtual Private Cloud package"
 msgstr "Vali virtuaalne privaatne pilvepakett"
 
-#: src/navigation/select-workspace-dialog.html:3
-#: src/navigation/select-workspace-toggle.html:8
+#: src/navigation/select-workspace-dialog.html:3 src/navigation/select-workspace-toggle.html:8
 msgid "Select workspace"
 msgstr "Vali töölaud"
 
@@ -4172,7 +3592,7 @@ msgstr "Teenuse nimi"
 
 #: src/issues/constants.ts:4
 msgid "Service Request"
-msgstr "Teenuse päring"
+msgstr "Muudatuse tellimus"
 
 #: src/issues/constants.ts:31
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
@@ -4182,18 +3602,12 @@ msgstr "Service Request – kliendi soov teenuse osalise või täieliku funktsio
 msgid "Service settings of this resource are in state erred."
 msgstr "Teenuse seaded sellel ressursil on veastaatuses."
 
-#: src/appstore/appstore-header.html:14
-#: src/appstore/dialog/appstore-selector-dialog.html:2
-#: src/appstore/routes.js:11
-#: src/customer/customer-workspace.js:67
+#: src/appstore/appstore-header.html:14 src/appstore/dialog/appstore-selector-dialog.html:2 src/appstore/routes.js:11 src/customer/customer-workspace.js:67
 #: src/project/project-workspace.js:31
 msgid "Service store"
 msgstr "Teenuste kataloog"
 
-#: src/issues/constants.ts:59
-#: src/issues/issue-detail.html:45
-#: src/issues/issue-registration.html:156
-#: src/issues/issues-list.js:84
+#: src/issues/constants.ts:59 src/issues/issue-detail.html:45 src/issues/issue-registration.html:156 src/issues/issues-list.js:84
 msgid "Service type"
 msgstr "Teenuse tüüp"
 
@@ -4265,25 +3679,17 @@ msgstr "Logi sisse Mobiil IDga"
 msgid "Sign in with SmartID"
 msgstr "Logi sisse teenusega SmartID"
 
-#: src/azure/azure-virtual-machine-config.js:37
-#: src/digitalocean/digitalocean-droplet-config.js:47
-#: src/openstack/openstack-backup/backup-snapshots-list.js:41
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js:51
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:38
-#: src/openstack/openstack-snapshot/openstack-snapshot-summary.html:5
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js:44
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:40
-#: src/openstack/openstack-volume/import/import-volumes-list.js:51
-#: src/openstack/openstack-volume/openstack-instance-volumes.js:46
-#: src/openstack/openstack-volume/openstack-volume-config.js:17
-#: src/openstack/openstack-volume/openstack-volume-summary.html:5
-#: src/openstack/openstack-volume/openstack-volumes-list.js:47
+#: src/azure/azure-virtual-machine-config.js:37 src/digitalocean/digitalocean-droplet-config.js:47 src/openstack/openstack-backup/backup-snapshots-list.js:41
+#: src/openstack/openstack-snapshot/import/import-snapshots-list.js:51 src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js:38
+#: src/openstack/openstack-snapshot/openstack-snapshot-summary.html:5 src/openstack/openstack-snapshot/openstack-snapshots-list.js:44
+#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:40 src/openstack/openstack-volume/import/import-volumes-list.js:51
+#: src/openstack/openstack-volume/openstack-instance-volumes.js:46 src/openstack/openstack-volume/openstack-volume-config.js:17
+#: src/openstack/openstack-volume/openstack-volume-summary.html:5 src/openstack/openstack-volume/openstack-volumes-list.js:47
 #: src/resource-import/import-virtual-machines-list.js:62
 msgid "Size"
 msgstr "Suurus"
 
-#: src/azure/azure-virtual-machine-config.js:41
-#: src/digitalocean/digitalocean-droplet-config.js:51
+#: src/azure/azure-virtual-machine-config.js:41 src/digitalocean/digitalocean-droplet-config.js:51
 msgid "Size name"
 msgstr "Suuruse nimi"
 
@@ -4291,8 +3697,7 @@ msgstr "Suuruse nimi"
 msgid "Skip floating IP assignment"
 msgstr "Jäta vahele ujuva IP omistamine"
 
-#: src/project/projects-list.js:126
-#: src/resource/tabs/constants.ts:22
+#: src/project/projects-list.js:126 src/resource/tabs/constants.ts:22
 msgid "SLA"
 msgstr "SLA"
 
@@ -4320,14 +3725,11 @@ msgstr "Tõmmise nimi"
 msgid "Snapshot schedule has been updated."
 msgstr "Tõmmiste ajakava on muudetud."
 
-#: src/openstack/openstack-snapshot-schedule/breadcrumbs.js:22
-#: src/openstack/openstack-volume/module.js:114
+#: src/openstack/openstack-snapshot-schedule/breadcrumbs.js:22 src/openstack/openstack-volume/module.js:114
 msgid "Snapshot schedules"
 msgstr "Tõmmiste ajakavad"
 
-#: src/openstack/openstack-backup/tabs.js:10
-#: src/openstack/openstack-snapshot-schedule/module.js:62
-#: src/openstack/openstack-volume/module.js:110
+#: src/openstack/openstack-backup/tabs.js:10 src/openstack/openstack-snapshot-schedule/module.js:62 src/openstack/openstack-volume/module.js:110
 #: src/resource/list/resource-storage-tabs.html:14
 msgid "Snapshots"
 msgstr "Tõmmised"
@@ -4349,20 +3751,12 @@ msgid "SSH key"
 msgstr "SSH võti"
 
 #: src/events/constants.ts:43
-msgid ""
-"SSH key {ssh_key_name} has been created for user {user_full_name} with "
-"username {user_username}."
-msgstr ""
-"SSH võti {ssh_key_name} on loodud kasutajale {user_full_name} kasutajanimega "
-"{user_username}."
+msgid "SSH key {ssh_key_name} has been created for user {user_full_name} with username {user_username}."
+msgstr "SSH võti {ssh_key_name} on loodud kasutajale {user_full_name} kasutajanimega {user_username}."
 
 #: src/events/constants.ts:44
-msgid ""
-"SSH key {ssh_key_name} has been deleted for user {user_full_name} with "
-"username {user_username}."
-msgstr ""
-"SSH võti {ssh_key_name} on kustutatud kasutajale {user_full_name} "
-"kasutajanimega {user_username}."
+msgid "SSH key {ssh_key_name} has been deleted for user {user_full_name} with username {user_username}."
+msgstr "SSH võti {ssh_key_name} on kustutatud kasutajale {user_full_name} kasutajanimega {user_username}."
 
 #: src/events/constants.ts:73
 msgid "SSH key events"
@@ -4372,8 +3766,7 @@ msgstr "SSH võtme sündmused"
 msgid "SSH keys"
 msgstr "SSH võtmed"
 
-#: src/user/constants.ts:13
-#: src/user/constants.ts:43
+#: src/user/constants.ts:13 src/user/constants.ts:43
 msgid "SSH Keys"
 msgstr "SSH võtmed"
 
@@ -4381,9 +3774,7 @@ msgstr "SSH võtmed"
 msgid "SSH Port"
 msgstr "SSH Port"
 
-#: src/ansible/ansible-job-summary.html:37
-#: src/digitalocean/digitalocean-droplet-config.js:72
-#: src/openstack/openstack-instance/openstack-instance-config.js:86
+#: src/ansible/ansible-job-summary.html:37 src/digitalocean/digitalocean-droplet-config.js:72 src/openstack/openstack-instance/openstack-instance-config.js:86
 msgid "SSH public key"
 msgstr "SSH avalik võti"
 
@@ -4399,42 +3790,20 @@ msgstr "Töötaja ja kasutajatoe kasutaja"
 msgid "Start time"
 msgstr "Algusaeg"
 
-#: src/ansible/ansible-job-summary.html:22
-#: src/ansible/ansible-jobs-list.js:66
-#: src/billing/billing-records-list.js:48
-#: src/billing/invoices-list.js:49
-#: src/experts/requests/expert-request-customer-list.js:81
-#: src/experts/requests/expert-request-project-list.js:71
-#: src/experts/requests/expert-request-summary.html:13
-#: src/offering/offering-summary.html:18
-#: src/offering/offerings-list.js:48
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:52
-#: src/openstack/openstack-backup/backup-snapshots-list.js:49
-#: src/openstack/openstack-backup/openstack-backups-list.js:51
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js:39
-#: src/openstack/openstack-network/openstack-tenant-networks.js:52
-#: src/openstack/openstack-security-groups/security-groups-list.js:39
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:52
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:35
-#: src/openstack/openstack-subnet/openstack-subnets-list.js:42
-#: src/openstack/openstack-volume/openstack-instance-volumes.js:54
-#: src/payments/payment-list.js:27
-#: src/paypal/paypal-invoices-list.js:50
-#: src/plans/plan-agreements-list.js:26
-#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:38
-#: src/providers/provider-list.js:62
-#: src/resource/list/resources-list.js:60
-#: src/resource/summary/resource-summary-base.html:3
-#: src/slurm/slurm-allocation-list.js:45
-#: src/user/hooks/hook-list.js:26
+#: src/ansible/ansible-job-summary.html:22 src/ansible/ansible-jobs-list.js:66 src/billing/billing-records-list.js:48 src/billing/invoices-list.js:49
+#: src/experts/requests/expert-request-customer-list.js:81 src/experts/requests/expert-request-project-list.js:71 src/experts/requests/expert-request-summary.html:13
+#: src/offering/offering-summary.html:18 src/offering/offerings-list.js:48 src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:52
+#: src/openstack/openstack-backup/backup-snapshots-list.js:49 src/openstack/openstack-backup/openstack-backups-list.js:51
+#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js:39 src/openstack/openstack-network/openstack-tenant-networks.js:52
+#: src/openstack/openstack-security-groups/security-groups-list.js:39 src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:52
+#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:35 src/openstack/openstack-subnet/openstack-subnets-list.js:42
+#: src/openstack/openstack-volume/openstack-instance-volumes.js:54 src/payments/payment-list.js:27 src/paypal/paypal-invoices-list.js:50
+#: src/plans/plan-agreements-list.js:26 src/premiumSupport/premium-support-contracts/premium-support-contracts.js:38 src/providers/provider-list.js:62
+#: src/resource/list/resources-list.js:60 src/resource/summary/resource-summary-base.html:3 src/slurm/slurm-allocation-list.js:45 src/user/hooks/hook-list.js:26
 msgid "State"
 msgstr "Olek"
 
-#: src/invitations/invitations-list.js:124
-#: src/issues/constants.ts:109
-#: src/issues/constants.ts:71
-#: src/issues/issue-detail.html:55
-#: src/issues/issues-list.js:54
+#: src/invitations/invitations-list.js:124 src/issues/constants.ts:109 src/issues/constants.ts:71 src/issues/issue-detail.html:55 src/issues/issues-list.js:54
 #: src/user/user-popover-table.html:41
 msgid "Status"
 msgstr "Staatus"
@@ -4447,15 +3816,9 @@ msgstr "Samm 1. Vali teenusepakkuja"
 msgid "Step 2. Select resources"
 msgstr "Samm 2. Vali ressursid"
 
-#: src/appstore/appstore-compare-list.js:90
-#: src/digitalocean/digitalocean-droplet-config.js:64
-#: src/openstack/openstack-instance/openstack-instance-config.js:63
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js:20
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:26
-#: src/project/project-workspace.js:66
-#: src/project/projects-list.js:108
-#: src/project/routes.js:140
-#: src/quotas/filters.js:7
+#: src/appstore/appstore-compare-list.js:90 src/digitalocean/digitalocean-droplet-config.js:64 src/openstack/openstack-instance/openstack-instance-config.js:63
+#: src/openstack/openstack-tenant/openstack-tenant-prices.js:20 src/openstack/openstack-volume/openstack-volume-checkout-summary.html:26
+#: src/project/project-workspace.js:66 src/project/projects-list.js:108 src/project/routes.js:140 src/quotas/filters.js:7
 #: src/resource/breadcrumbs/resource-categories.js:11
 msgid "Storage"
 msgstr "Kettavolüümid"
@@ -4464,17 +3827,12 @@ msgstr "Kettavolüümid"
 msgid "Storage limit GB"
 msgstr "Salvestuslimiit GB"
 
-#: src/appstore/routes.js:52
-#: src/configs/base-config.js:100
+#: src/appstore/routes.js:52 src/configs/base-config.js:100
 msgid "Storages"
 msgstr "Andmehoidlad"
 
-#: src/digitalocean/droplet-resize.html:75
-#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:48
-#: src/openstack/openstack-volume/snapshot-create.html:40
-#: src/openstack/openstack-volume/volume-extend.html:33
-#: src/premiumSupport/premium-support-agreement.html:28
-#: src/resource/actions/dialog/action-dialog.html:32
+#: src/digitalocean/droplet-resize.html:75 src/openstack/openstack-tenant/openstack-tenant-change-package.html:48 src/openstack/openstack-volume/snapshot-create.html:40
+#: src/openstack/openstack-volume/volume-extend.html:33 src/premiumSupport/premium-support-agreement.html:28 src/resource/actions/dialog/action-dialog.html:32
 msgid "Submit"
 msgstr "Saada"
 
@@ -4494,9 +3852,7 @@ msgstr "Alamvõrk on muudetud."
 msgid "Subnet Name"
 msgstr "Alamvõrgu nimi"
 
-#: src/customer/customer-manage.html:60
-#: src/openstack/openstack-network/openstack-tenant-networks.js:43
-#: src/openstack/openstack-subnet/breadcrumbs.js:40
+#: src/customer/customer-manage.html:60 src/openstack/openstack-network/openstack-tenant-networks.js:43 src/openstack/openstack-subnet/breadcrumbs.js:40
 msgid "Subnets"
 msgstr "Alamvõrgud"
 
@@ -4508,19 +3864,15 @@ msgstr "Alamvõrgud kus kohast ühendus iseteenindusse on lubatud."
 msgid "Subtotal"
 msgstr "Kokku"
 
-#: src/offering/offering-summary.html:6
-#: src/resource/summary/virtual-machine-summary.html:5
+#: src/offering/offering-summary.html:6 src/resource/summary/virtual-machine-summary.html:5
 msgid "Summary"
 msgstr "Kokkuvõte"
 
-#: src/configs/base-config.js:52
-#: src/navigation/header/support-link.html:4
-#: src/project/project-workspace.js:76
+#: src/configs/base-config.js:52 src/navigation/header/support-link.html:4 src/project/project-workspace.js:76
 msgid "Support"
 msgstr "Tugi"
 
-#: src/issues/issues-workspace.html:10
-#: src/issues/routes.js:19
+#: src/issues/issues-workspace.html:10 src/issues/routes.js:19
 msgid "Support dashboard"
 msgstr "Kasutajatoe töölaud"
 
@@ -4528,8 +3880,7 @@ msgstr "Kasutajatoe töölaud"
 msgid "Support package"
 msgstr "Kasutajatoe pakett"
 
-#: src/issues/issue-navigation-service.js:16
-#: src/issues/routes.js:44
+#: src/issues/issue-navigation-service.js:16 src/issues/routes.js:44
 msgid "Support requests"
 msgstr "Kasutajatoe päringud"
 
@@ -4541,18 +3892,10 @@ msgstr "Kasutajatoe kasutaja"
 msgid "Sync profile"
 msgstr "Sünkroonimisprofiil"
 
-#: src/openstack/openstack-backup-schedule/module.js:39
-#: src/openstack/openstack-floating-ips/module.js:23
-#: src/openstack/openstack-instance/actions.js:29
-#: src/openstack/openstack-network/module.js:33
-#: src/openstack/openstack-security-groups/module.js:55
-#: src/openstack/openstack-snapshot-schedule/module.js:37
-#: src/openstack/openstack-snapshot/module.js:45
-#: src/openstack/openstack-subnet/actions.js:14
-#: src/openstack/openstack-tenant/actions.js:21
-#: src/openstack/openstack-tenant/actions.js:72
-#: src/openstack/openstack-tenant/actions.js:76
-#: src/openstack/openstack-volume/module.js:53
+#: src/openstack/openstack-backup-schedule/module.js:39 src/openstack/openstack-floating-ips/module.js:23 src/openstack/openstack-instance/actions.js:29
+#: src/openstack/openstack-network/module.js:33 src/openstack/openstack-security-groups/module.js:55 src/openstack/openstack-snapshot-schedule/module.js:37
+#: src/openstack/openstack-snapshot/module.js:45 src/openstack/openstack-subnet/actions.js:14 src/openstack/openstack-tenant/actions.js:21
+#: src/openstack/openstack-tenant/actions.js:72 src/openstack/openstack-tenant/actions.js:76 src/openstack/openstack-volume/module.js:53
 msgid "Synchronise"
 msgstr "Sünkroniseeri"
 
@@ -4568,8 +3911,7 @@ msgstr "Süsteemi pakkuja"
 msgid "System volume size"
 msgstr "Süsteemi volüümi suurus"
 
-#: src/billing/invoices-list.js:59
-#: src/paypal/paypal-invoices-list.js:63
+#: src/billing/invoices-list.js:59 src/paypal/paypal-invoices-list.js:63
 msgid "Tax"
 msgstr "Maks"
 
@@ -4577,10 +3919,7 @@ msgstr "Maks"
 msgid "TAX"
 msgstr "MAKS"
 
-#: src/customer/customer-workspace.js:120
-#: src/customer/routes.js:105
-#: src/experts/bids/expert-bid-create-dialog.html:16
-#: src/project/project-workspace.js:104
+#: src/customer/customer-workspace.js:120 src/customer/routes.js:105 src/experts/bids/expert-bid-create-dialog.html:16 src/project/project-workspace.js:104
 #: src/project/routes.js:163
 msgid "Team"
 msgstr "Kasutajad"
@@ -4593,10 +3932,8 @@ msgstr "Meeskonnas ei ole veel liikmeid."
 msgid "Team size"
 msgstr "Meeskonna suurus"
 
-#: src/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:5
-#: src/openstack/openstack-network/openstack-network-summary.html:5
-#: src/openstack/openstack-security-groups/security-group-summary.html:5
-#: src/openstack/openstack-subnet/openstack-subnet-summary.html:5
+#: src/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:5 src/openstack/openstack-network/openstack-network-summary.html:5
+#: src/openstack/openstack-security-groups/security-group-summary.html:5 src/openstack/openstack-subnet/openstack-subnet-summary.html:5
 msgid "Tenant"
 msgstr "Tenant"
 
@@ -4608,10 +3945,8 @@ msgstr "Rentnik on määratud paketile."
 msgid "Tenant has been updated."
 msgstr "Tenant on uuendatud."
 
-#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:10
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
-#: src/openstack/openstack-tenant/openstack-tenant-config.js:23
-#: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:31
+#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:10 src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:14
+#: src/openstack/openstack-tenant/openstack-tenant-config.js:23 src/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:31
 msgid "Tenant name"
 msgstr "Tenanti nimi"
 
@@ -4623,19 +3958,12 @@ msgstr "Tenanti pakett on muudetud."
 msgid "Terms"
 msgstr "Tingimused"
 
-#: src/routes/about.js:15
-#: src/routes/about.js:24
-#: src/routes/about.js:34
+#: src/routes/about.js:15 src/routes/about.js:24 src/routes/about.js:34
 msgid "Terms of service"
 msgstr "Kasutustingimused"
 
-#: src/experts/expert-provider-details.html:20
-#: src/form/appstore-field-tos.html:11
-#: src/freeipa/freeipa-account-create.html:54
-#: src/freeipa/freeipa-account-edit.html:20
-#: src/navigation/app-footer.html:8
-#: src/user/user-edit.html:143
-#: src/user/user-edit.html:159
+#: src/experts/expert-provider-details.html:20 src/form/appstore-field-tos.html:11 src/freeipa/freeipa-account-create.html:54 src/freeipa/freeipa-account-edit.html:20
+#: src/navigation/app-footer.html:8 src/user/user-edit.html:143 src/user/user-edit.html:159
 msgid "Terms of Service"
 msgstr "Kasutustingimused"
 
@@ -4648,12 +3976,10 @@ msgid "Thanks"
 msgstr "Tänud"
 
 #: src/appstore/appstore-providers.js:49
-msgid ""
-"There are no {categoryLabel} providers available for the current project."
+msgid "There are no {categoryLabel} providers available for the current project."
 msgstr "Teenuse {categoryLabel} pakkujaid sellele projektile ei ole."
 
-#: src/paypal/paypal-invoice-actions.html:8
-#: src/resource/actions/action-button-resource.html:12
+#: src/paypal/paypal-invoice-actions.html:8 src/resource/actions/action-button-resource.html:12
 msgid "There are no actions."
 msgstr "Tegevusi ei ole."
 
@@ -4681,8 +4007,7 @@ msgstr "Kommentaare ei ole veel."
 msgid "There are no events for this resource."
 msgstr "Sellele ressursile puuduvad sündmused."
 
-#: src/experts/requests/expert-request-customer-list.js:43
-#: src/experts/requests/expert-request-project-list.js:43
+#: src/experts/requests/expert-request-customer-list.js:43 src/experts/requests/expert-request-project-list.js:43
 msgid "There are no experts yet."
 msgstr "Eksperte ei ole veel."
 
@@ -4723,38 +4048,27 @@ msgid "There are no suitable VPC packages for this tenant."
 msgstr "Sellele rentnikule sobivaid VPC pakette ei ole."
 
 #: src/premiumSupport/premium-support-plans.html:6
-msgid ""
-"There are no working premium support packages available for the current "
-"organization."
-msgstr ""
-"Ühtegi toimivat preemium kasutajatoe teenuse paketti sellel organisatsioonil "
-"ei ole."
+msgid "There are no working premium support packages available for the current organization."
+msgstr "Ühtegi toimivat preemium kasutajatoe teenuse paketti sellel organisatsioonil ei ole."
 
 #: src/issues/issues-activity-stream.html:22
 msgid "There is no activity yet."
 msgstr "Tegevused veel puuduvad."
 
-#: src/form/appstore-field-email.html:11
-#: src/form/appstore-field-string.html:12
-#: src/form/appstore-field-tel.html:11
+#: src/form/appstore-field-email.html:11 src/form/appstore-field-string.html:12 src/form/appstore-field-tel.html:11
 msgid "This field is required"
 msgstr "See väli on kohustuslik"
 
-#: src/user/keys/key-create.js:34
-#: src/user/keys/key-create.js:37
+#: src/user/keys/key-create.js:34 src/user/keys/key-create.js:37
 msgid "This field may not be blank."
 msgstr "See väli ei tohi olla tühi."
 
 #: src/alerts/constants.ts:7
 msgid "This month estimated costs for organization {customer_name} exceeded."
-msgstr ""
-"Selle kuu ennustatavad kulud organisatsioonile {customer_name} on ületatud."
+msgstr "Selle kuu ennustatavad kulud organisatsioonile {customer_name} on ületatud."
 
-#: src/experts/requests/expert-request-create.js:41
-#: src/offering/appstore-offering.js:42
-#: src/openstack/openstack-tenant/openstack-tenant-config.js:24
-#: src/project/project-create.html:15
-#: src/slurm/slurm-allocation-config.js:12
+#: src/experts/requests/expert-request-create.js:41 src/offering/appstore-offering.js:42 src/openstack/openstack-tenant/openstack-tenant-config.js:24
+#: src/project/project-create.html:15 src/slurm/slurm-allocation-config.js:12
 msgid "This name will be visible in accounting data."
 msgstr "See nimi on nähtav raamatupidamise andmetes."
 
@@ -4763,28 +4077,18 @@ msgid "This organization is an expert provider."
 msgstr "See organisatsiooni on ekspertide pakkuja."
 
 #: src/navigation/cookies-consent.html:4
-msgid ""
-"This website uses cookies to ensure you get the best experience on our "
-"website."
-msgstr ""
-"See veebsait kasutab küpsiseid, et tagada teile parim kogemus meie "
-"veebisaidil."
+msgid "This website uses cookies to ensure you get the best experience on our website."
+msgstr "See veebsait kasutab küpsiseid, et tagada teile parim kogemus meie veebisaidil."
 
-#: src/issues/issues-list.js:139
-#: src/issues/issues-short-list.html:30
+#: src/issues/issues-list.js:139 src/issues/issues-short-list.html:30
 msgid "Time in progress"
 msgstr "Töös olemise aeg"
 
-#: src/alerts/base-alerts-list.js:26
-#: src/events/base-event-list.js:25
-#: src/events/event-details-dialog.html:9
+#: src/alerts/base-alerts-list.js:26 src/events/base-event-list.js:25 src/events/event-details-dialog.html:9
 msgid "Timestamp"
 msgstr "Ajatempel"
 
-#: src/issues/issue-quick-create.html:22
-#: src/issues/issue-registration.html:93
-#: src/issues/issues-list.js:68
-#: src/user/keys/key-list.js:29
+#: src/issues/issue-quick-create.html:22 src/issues/issue-registration.html:93 src/issues/issues-list.js:68 src/user/keys/key-list.js:29
 msgid "Title"
 msgstr "Nimetus"
 
@@ -4794,13 +4098,10 @@ msgstr "Kellele"
 
 #: src/customer/customer-report-error.js:28
 msgid ""
-"To correct details of your organization, please send an email to <a href="
-"\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in "
-"current details. Thank you!"
+"To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. "
+"Thank you!"
 msgstr ""
-"Et parandada oma organisatsiooni andmeid palun saada email aadressile <a "
-"href=\"mailto:{supportEmail}\">{supportEmail}</a> tuues välja muutmist "
-"vajavad andmed. Täname!"
+"Et parandada oma organisatsiooni andmeid palun saada email aadressile <a href=\"mailto:{supportEmail}\">{supportEmail}</a> tuues välja muutmist vajavad andmed. Täname!"
 
 #: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:6
 msgid "To get access, please send a request to {{$ctrl.supportEmail}}."
@@ -4820,24 +4121,17 @@ msgstr "Alustamiseks palun valige tööruum"
 
 #: src/error/error-403.js:17
 msgid "To update current plan visit <a href=\"{link}\">plans page</a>."
-msgstr ""
-"Praeguse paketi uuendamiseks palun külastage <a href=\"{link}\">pakettide "
-"lehekülge</a>."
+msgstr "Praeguse paketi uuendamiseks palun külastage <a href=\"{link}\">pakettide lehekülge</a>."
 
-#: src/analytics/resource-pie-chart.html:21
-#: src/billing/billing-records-list.js:58
-#: src/billing/invoices-list.js:64
-#: src/paypal/paypal-invoices-list.js:68
+#: src/analytics/resource-pie-chart.html:21 src/billing/billing-records-list.js:58 src/billing/invoices-list.js:64 src/paypal/paypal-invoices-list.js:68
 msgid "Total"
 msgstr "Kokku"
 
-#: src/billing/billing-record-details.html:72
-#: src/billing/invoice-details.html:79
+#: src/billing/billing-record-details.html:72 src/billing/invoice-details.html:79
 msgid "TOTAL"
 msgstr "KOKKU"
 
-#: src/analytics/cost-analysis.html:59
-#: src/dashboard/dashboard-chart-service.js:129
+#: src/analytics/cost-analysis.html:59 src/dashboard/dashboard-chart-service.js:129
 msgid "Total cost"
 msgstr "Kulud kokku"
 
@@ -4845,8 +4139,7 @@ msgstr "Kulud kokku"
 msgid "Total planned resource consumption"
 msgstr "Kogu planeeritud ressursside tarbimine"
 
-#: src/billing/billing-record-details.html:37
-#: src/billing/invoice-details.html:36
+#: src/billing/billing-record-details.html:37 src/billing/invoice-details.html:36
 msgid "Total price"
 msgstr "Hind kokku"
 
@@ -4854,15 +4147,9 @@ msgstr "Hind kokku"
 msgid "Total storage"
 msgstr "Kogu salvestusmaht"
 
-#: src/experts/requests/expert-request-customer-list.js:76
-#: src/experts/requests/expert-request-project-list.js:66
-#: src/experts/requests/expert-request-summary.html:18
-#: src/offering/offering-summary.html:25
-#: src/offering/offerings-list.js:44
-#: src/openstack/openstack-network/openstack-network-summary.html:19
-#: src/payments/payment-list.js:36
-#: src/providers/details/provider-details.html:8
-#: src/providers/provider-list.js:48
+#: src/experts/requests/expert-request-customer-list.js:76 src/experts/requests/expert-request-project-list.js:66 src/experts/requests/expert-request-summary.html:18
+#: src/offering/offering-summary.html:25 src/offering/offerings-list.js:44 src/openstack/openstack-network/openstack-network-summary.html:19
+#: src/payments/payment-list.js:36 src/providers/details/provider-details.html:8 src/providers/provider-list.js:48
 msgid "Type"
 msgstr "Tüüp"
 
@@ -4906,8 +4193,7 @@ msgstr "Ei saa luua eksperdi päringut."
 msgid "Unable to create invitation."
 msgstr "Ei saa luua kutset."
 
-#: src/project/project-providers-service.js:86
-#: src/providers/details/provider-projects.js:99
+#: src/project/project-providers-service.js:86 src/providers/details/provider-projects.js:99
 msgid "Unable to create link."
 msgstr "Ei saa linki luua."
 
@@ -4919,8 +4205,7 @@ msgstr "Ei ole võimalik luua premium kasutajatoe paketti."
 msgid "Unable to create request for a turnkey solution."
 msgstr "Ei ole võimalik luua päringud võtmed kätte lahendusele."
 
-#: src/project/project-providers-service.js:103
-#: src/providers/details/provider-projects.js:117
+#: src/project/project-providers-service.js:103 src/providers/details/provider-projects.js:117
 msgid "Unable to delete link."
 msgstr "Ei saa kustutada linki."
 
@@ -4930,9 +4215,7 @@ msgstr "Ei ole võimalik hankida projekti teenusepakkujaid."
 
 #: src/core/bootstrap.js:25
 msgid "Unable to load application configuration. Please reload this page."
-msgstr ""
-"Ei ole võimalik laadida rakenduse seadistust. Palun laadige see lehekülg "
-"uuesti."
+msgstr "Ei ole võimalik laadida rakenduse seadistust. Palun laadige see lehekülg uuesti."
 
 #: src/issues/comments/issue-comments-list.html:8
 msgid "Unable to load comments."
@@ -4966,13 +4249,11 @@ msgstr "Ei õnnestunud limiiti sättida."
 msgid "Unable to validate invitation token."
 msgstr "Ei ole võimalik valideerida kutse žetooni."
 
-#: src/billing/billing-record-details.html:36
-#: src/billing/invoice-details.html:34
+#: src/billing/billing-record-details.html:36 src/billing/invoice-details.html:34
 msgid "Unit price"
 msgstr "Ühiku hind"
 
-#: src/freeipa/freeipa-quota.html:12
-#: src/freeipa/freeipa-quota.html:37
+#: src/freeipa/freeipa-quota.html:12 src/freeipa/freeipa-quota.html:37
 msgid "Unlimited"
 msgstr "Piiramatu"
 
@@ -4984,8 +4265,7 @@ msgstr "Tühista linkimine"
 msgid "Unpaid"
 msgstr "Tasumata"
 
-#: src/customer/customer-policies.html:19
-#: src/user/hooks/hook-details.html:76
+#: src/customer/customer-policies.html:19 src/user/hooks/hook-details.html:76
 msgid "Update"
 msgstr "Update"
 
@@ -5017,13 +4297,11 @@ msgstr "Muuda turvagruppe"
 msgid "Updated"
 msgstr "Uuendatud"
 
-#: app/views/directives/customer-balance.html:36
-#: app/views/directives/customer-balance.html:66
+#: app/views/directives/customer-balance.html:36 app/views/directives/customer-balance.html:66
 msgid "Upgrade"
 msgstr "Uuenda"
 
-#: src/customer/customer-threshold.html:5
-#: src/project/project-policies.html:40
+#: src/customer/customer-threshold.html:5 src/project/project-policies.html:40
 msgid "Upper bound of monthly resource cost provisioned from shared providers."
 msgstr "Igakuise kulu ülempiir on välja jagatud jagatud teenusepakkujatelt."
 
@@ -5039,34 +4317,22 @@ msgstr "URL"
 msgid "Usage"
 msgstr "Kasutus"
 
-#: src/events/event-details-dialog.html:17
-#: src/team/add-project-member.html:10
-#: src/team/add-project-member.html:20
-#: src/team/add-team-member.html:11
-#: src/team/customer-permissions-log-list.js:23
-#: src/team/project-permissions-log-list.js:22
+#: src/events/event-details-dialog.html:17 src/team/add-project-member.html:10 src/team/add-project-member.html:20 src/team/add-team-member.html:11
+#: src/team/customer-permissions-log-list.js:23 src/team/project-permissions-log-list.js:22
 msgid "User"
 msgstr "Kasutaja"
 
 #: src/events/constants.ts:51
-msgid ""
-"User {affected_user_full_name} claim for organization "
-"{affected_organization} has been rejected."
-msgstr ""
-"Organisatsiooni {affected_organization} {affected_user_full_name} kasutaja "
-"taotlus on tagasi lükatud."
+msgid "User {affected_user_full_name} claim for organization {affected_organization} has been rejected."
+msgstr "Organisatsiooni {affected_organization} {affected_user_full_name} kasutaja taotlus on tagasi lükatud."
 
 #: src/events/constants.ts:45
 msgid "User {affected_user_full_name} has been activated."
 msgstr "Kasutaja {affected_user_full_name} on aktiveeritud."
 
 #: src/events/constants.ts:49
-msgid ""
-"User {affected_user_full_name} has been approved for organization "
-"{affected_organization}."
-msgstr ""
-"Kasutaja {affected_user_full_name} on kinnitatud organisatsiooni juurde "
-"{affected_organization}."
+msgid "User {affected_user_full_name} has been approved for organization {affected_organization}."
+msgstr "Kasutaja {affected_user_full_name} on kinnitatud organisatsiooni juurde {affected_organization}."
 
 #: src/events/constants.ts:46
 msgid "User {affected_user_full_name} has been created."
@@ -5081,24 +4347,16 @@ msgid "User {affected_user_full_name} has been deleted."
 msgstr "Kasutaja {affected_user_full_name} on kustutatud."
 
 #: src/events/constants.ts:52
-msgid ""
-"User {affected_user_full_name} has been removed from organization "
-"{affected_organization}."
-msgstr ""
-"Kasutaja {affected_user_full_name} on eemaldatud organisatsiooni juurest "
-"{affected_organization}."
+msgid "User {affected_user_full_name} has been removed from organization {affected_organization}."
+msgstr "Kasutaja {affected_user_full_name} on eemaldatud organisatsiooni juurest {affected_organization}."
 
 #: src/events/constants.ts:54
 msgid "User {affected_user_full_name} has been updated."
 msgstr "Kasutaja {affected_user_full_name} on muudetud."
 
 #: src/events/constants.ts:50
-msgid ""
-"User {affected_user_full_name} has claimed organization "
-"{affected_organization}."
-msgstr ""
-"Kasutaja {affected_user_full_name} on nõudnud endale organisatsiooni "
-"{affected_organization}."
+msgid "User {affected_user_full_name} has claimed organization {affected_organization}."
+msgstr "Kasutaja {affected_user_full_name} on nõudnud endale organisatsiooni {affected_organization}."
 
 #: src/events/constants.ts:40
 msgid "User {affected_user_full_name} has gained role of {role_name}."
@@ -5109,61 +4367,34 @@ msgid "User {affected_user_full_name} has revoked role of {role_name}."
 msgstr "Kasutaja {affected_user_full_name} on eemaldanud rolli {role_name}."
 
 #: src/events/constants.ts:56
-msgid ""
-"User {caller_full_name} has created request for experts under "
-"{customer_name} / {project_name}."
-msgstr ""
-"Kasutaja {caller_full_name} on loonud eksperdi päringu projektis "
-"{customer_name} / {project_name}."
+msgid "User {caller_full_name} has created request for experts under {customer_name} / {project_name}."
+msgstr "Kasutaja {caller_full_name} on loonud eksperdi päringu projektis {customer_name} / {project_name}."
 
 #: src/events/constants.ts:5
-msgid ""
-"User {user_username} with full name {user_full_name} authenticated "
-"successfully with Facebook."
-msgstr ""
-"Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud "
-"ennast Facebook kaudu."
+msgid "User {user_username} with full name {user_full_name} authenticated successfully with Facebook."
+msgstr "Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud ennast Facebook kaudu."
 
 #: src/events/constants.ts:4
-msgid ""
-"User {user_username} with full name {user_full_name} authenticated "
-"successfully with Google."
-msgstr ""
-"Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud "
-"ennast Google kaudu."
+msgid "User {user_username} with full name {user_full_name} authenticated successfully with Google."
+msgstr "Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud ennast Google kaudu."
 
 #: src/events/constants.ts:3
-msgid ""
-"User {user_username} with full name {user_full_name} authenticated "
-"successfully with OpenID."
-msgstr ""
-"Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud "
-"ennast OpenID kaudu."
+msgid "User {user_username} with full name {user_full_name} authenticated successfully with OpenID."
+msgstr "Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud ennast OpenID kaudu."
 
 #: src/events/constants.ts:6
-msgid ""
-"User {user_username} with full name {user_full_name} authenticated "
-"successfully with Smart ID EE."
-msgstr ""
-"Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud "
-"ennast Smart ID EE kaudu."
+msgid "User {user_username} with full name {user_full_name} authenticated successfully with Smart ID EE."
+msgstr "Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud ennast Smart ID EE kaudu."
 
 #: src/events/constants.ts:2
-msgid ""
-"User {user_username} with full name {user_full_name} authenticated "
-"successfully with username and password."
-msgstr ""
-"Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud "
-"ennast kasutajanime ja parooliga."
+msgid "User {user_username} with full name {user_full_name} authenticated successfully with username and password."
+msgstr "Kasutaja {user_username} täisnimega {user_full_name} on edukalt autentinud ennast kasutajanime ja parooliga."
 
-#: src/user/routes.js:6
-#: src/user/user-details.html:10
+#: src/user/routes.js:6 src/user/user-details.html:10
 msgid "User dashboard"
 msgstr "Kasutaja töölaud"
 
-#: src/azure/azure-virtual-machine-config.js:59
-#: src/digitalocean/digitalocean-droplet-config.js:87
-#: src/openstack/openstack-instance/openstack-instance-config.js:148
+#: src/azure/azure-virtual-machine-config.js:59 src/digitalocean/digitalocean-droplet-config.js:87 src/openstack/openstack-instance/openstack-instance-config.js:148
 msgid "User data"
 msgstr "Kasutajaandmed"
 
@@ -5171,8 +4402,7 @@ msgstr "Kasutajaandmed"
 msgid "User details"
 msgstr "Kasutaja üksikasjad"
 
-#: src/team/customer-permissions-log-list.js:29
-#: src/team/project-permissions-log-list.js:27
+#: src/team/customer-permissions-log-list.js:29 src/team/project-permissions-log-list.js:27
 msgid "User email"
 msgstr "Kasutaja e-mail"
 
@@ -5184,13 +4414,8 @@ msgstr "Kasutaja profiil"
 msgid "User status"
 msgstr "Kasutaja staatus"
 
-#: src/auth/auth-login.html:29
-#: src/auth/auth-login.html:52
-#: src/azure/azure-virtual-machine-summary.html:10
-#: src/freeipa/freeipa-account-create.html:8
-#: src/freeipa/freeipa-account-edit.html:8
-#: src/openstack/openstack-tenant/openstack-tenant-summary.html:32
-#: src/team/user-selector.html:9
+#: src/auth/auth-login.html:29 src/auth/auth-login.html:52 src/azure/azure-virtual-machine-summary.html:10 src/freeipa/freeipa-account-create.html:8
+#: src/freeipa/freeipa-account-edit.html:8 src/openstack/openstack-tenant/openstack-tenant-summary.html:32 src/team/user-selector.html:9
 msgid "Username"
 msgstr "Kasutajanimi"
 
@@ -5203,15 +4428,10 @@ msgid "Username prefix"
 msgstr "Kasutajanime eesliide"
 
 #: src/freeipa/freeipa-account-create.html:31
-msgid ""
-"Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores "
-"(_) and periods (.)."
-msgstr ""
-"Kasutajanimed võivavad sisaldada tähti (a-z), numbreid (0-9), sidekriipse "
-"(-), alakriipse (_) ja punkte (.)."
+msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
+msgstr "Kasutajanimed võivavad sisaldada tähti (a-z), numbreid (0-9), sidekriipse (-), alakriipse (_) ja punkte (.)."
 
-#: src/customer/customer-team.html:4
-#: src/project/project-team.html:4
+#: src/customer/customer-team.html:4 src/project/project-team.html:4
 msgid "Users"
 msgstr "Kasutajad"
 
@@ -5235,10 +4455,8 @@ msgstr "Käibemaksu ei sisalda."
 msgid "VAT rate"
 msgstr "Käibemaksu määr (%)"
 
-#: src/digitalocean/digitalocean-droplet-config.js:55
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:35
-#: src/openstack/openstack-instance/openstack-instance-config.js:54
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js:11
+#: src/digitalocean/digitalocean-droplet-config.js:55 src/openstack/openstack-instance/openstack-instance-checkout-summary.html:35
+#: src/openstack/openstack-instance/openstack-instance-config.js:54 src/openstack/openstack-tenant/openstack-tenant-prices.js:11
 msgid "vCPU"
 msgstr "vCPU"
 
@@ -5250,15 +4468,8 @@ msgstr "vCPU arv"
 msgid "Version"
 msgstr "Versioon"
 
-#: src/analytics/resource-chart-service.js:15
-#: src/appstore/routes.js:32
-#: src/configs/base-config.js:114
-#: src/configs/base-config.js:28
-#: src/configs/base-config.js:86
-#: src/dashboard/constants.ts:11
-#: src/project/project-workspace.js:50
-#: src/project/routes.js:124
-#: src/resource/breadcrumbs/resource-categories.js:15
+#: src/analytics/resource-chart-service.js:15 src/appstore/routes.js:32 src/configs/base-config.js:114 src/configs/base-config.js:28 src/configs/base-config.js:86
+#: src/dashboard/constants.ts:11 src/project/project-workspace.js:50 src/project/routes.js:124 src/resource/breadcrumbs/resource-categories.js:15
 msgid "Virtual machines"
 msgstr "Virtuaalmasinad"
 
@@ -5266,10 +4477,8 @@ msgstr "Virtuaalmasinad"
 msgid "Virtual machines count"
 msgstr "Virtuaalmasinate arv"
 
-#: src/azure/azure-virtual-machine-config.js:15
-#: src/digitalocean/digitalocean-droplet-config.js:14
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:23
-#: src/openstack/openstack-instance/openstack-instance-config.js:18
+#: src/azure/azure-virtual-machine-config.js:15 src/digitalocean/digitalocean-droplet-config.js:14
+#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:23 src/openstack/openstack-instance/openstack-instance-config.js:18
 msgid "VM name"
 msgstr "VMi nimi"
 
@@ -5277,8 +4486,7 @@ msgstr "VMi nimi"
 msgid "VMs"
 msgstr "VMid"
 
-#: src/openstack/openstack-snapshot/openstack-snapshot-summary.html:13
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js:55
+#: src/openstack/openstack-snapshot/openstack-snapshot-summary.html:13 src/openstack/openstack-snapshot/openstack-snapshots-list.js:55
 msgid "Volume"
 msgstr "Volüüm"
 
@@ -5286,15 +4494,12 @@ msgstr "Volüüm"
 msgid "Volume has been updated."
 msgstr "Köide on uuendatud."
 
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:18
-#: src/openstack/openstack-volume/openstack-volume-config.js:10
-#: src/openstack/openstack-volume/snapshot-create.html:7
-#: src/openstack/openstack-volume/volume-extend.html:5
+#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:18 src/openstack/openstack-volume/openstack-volume-config.js:10
+#: src/openstack/openstack-volume/snapshot-create.html:7 src/openstack/openstack-volume/volume-extend.html:5
 msgid "Volume name"
 msgstr "Volüümi nimi"
 
-#: src/openstack/openstack-instance/module.js:58
-#: src/resource/list/resource-storage-tabs.html:5
+#: src/openstack/openstack-instance/module.js:58 src/resource/list/resource-storage-tabs.html:5
 msgid "Volumes"
 msgstr "Volüümid"
 
@@ -5302,8 +4507,7 @@ msgstr "Volüümid"
 msgid "Volumes count"
 msgstr "Kõidete arv"
 
-#: src/openstack/openstack-tenant/openstack-template.js:4
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:18
+#: src/openstack/openstack-tenant/openstack-template.js:4 src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html:18
 #: src/openstack/openstack-tenant/openstack-tenant-config.js:29
 msgid "VPC package"
 msgstr "VPC pakett"
@@ -5312,8 +4516,7 @@ msgstr "VPC pakett"
 msgid "VPC packages for this provider are not found."
 msgstr "VPS pakette sellele teenusepakkujale ei leitud."
 
-#: src/auth/auth-init.js:13
-#: src/auth/auth-login.js:33
+#: src/auth/auth-init.js:13 src/auth/auth-login.js:33
 msgid "Welcome to {pageTitle}!"
 msgstr "Tere tulemast {pageTitle}!"
 
@@ -5330,10 +4533,8 @@ msgid "Would you like to register your organization?"
 msgstr "Kas sa sooviksid registreerida oma organisatsiooni?"
 
 #: src/invitations/invitation-confirm-dialog.html:24
-msgid ""
-"Would you like to update your current email with the one from the invitation?"
-msgstr ""
-"Kas sa sooviksid uuendada oma emaili sellega mida kasutati selles kutses?"
+msgid "Would you like to update your current email with the one from the invitation?"
+msgstr "Kas sa sooviksid uuendada oma emaili sellega mida kasutati selles kutses?"
 
 #: src/customer/customer-create-prompt.html:6
 msgid "Yes, I would"
@@ -5344,11 +4545,8 @@ msgid "Yes, use invitation email"
 msgstr "Jah, kasuta kutse emaili"
 
 #: src/appstore/appstore-providers.js:58
-msgid ""
-"You can provision a new provider through <a href=\"{link}\">Service store</"
-"a>."
-msgstr ""
-"Sa saad eraldada uue teenusepakkuja läbi <a href=\"{link}\">Teenuste poe</a>."
+msgid "You can provision a new provider through <a href=\"{link}\">Service store</a>."
+msgstr "Sa saad eraldada uue teenusepakkuja läbi <a href=\"{link}\">Teenuste poe</a>."
 
 #: src/customer/customer-manage.html:120
 msgid "You can remove this organization by pressing the button"
@@ -5366,10 +4564,7 @@ msgstr "Sa ei saa hallata teist ettevõtte omanikku."
 msgid "You cannot remove shared provider."
 msgstr "Sa ei saa eemaldada jagatud teenusepakkujat."
 
-#: src/experts/bids/expert-bid-create-dialog.html:31
-#: src/issues/issue-create-dialog.js:39
-#: src/issues/issue-quick-create.js:47
-#: src/issues/issue-registration.js:68
+#: src/experts/bids/expert-bid-create-dialog.html:31 src/issues/issue-create-dialog.js:39 src/issues/issue-quick-create.js:47 src/issues/issue-registration.js:68
 msgid "You did not enter a field."
 msgstr "Te ei sisestanud väljale."
 
@@ -5378,8 +4573,7 @@ msgid "You do not belong to any organization yet."
 msgstr "Sa ei kuulu veel ühegi organisatsiooni koosseisu."
 
 #: src/resource/resource-provision-policy.js:23
-msgid ""
-"You do not have permissions to create private cloud for current project."
+msgid "You do not have permissions to create private cloud for current project."
 msgstr "Sul ei ole piisavalt õigusi teha privaatpilve selle projekti jaoks."
 
 #: src/navigation/select-workspace-toggle.js:66
@@ -5388,11 +4582,9 @@ msgstr "Sul ei ole veel ühtegi organisatsiooni."
 
 #: src/project/project-providers.html:4
 msgid "You don't have enough permission to edit providers for current project."
-msgstr ""
-"Sul ei ole piisavalt õigusi et muuta käesoleva projekti teenusepakkujaid."
+msgstr "Sul ei ole piisavalt õigusi et muuta käesoleva projekti teenusepakkujaid."
 
-#: src/project/projects-list.js:151
-#: src/project/projects-list.js:188
+#: src/project/projects-list.js:151 src/project/projects-list.js:188
 msgid "You don't have enough privileges to perform this operation."
 msgstr "Sul ei ole selle toimingu sooritamiseks vajalikke õigusi."
 
@@ -5412,13 +4604,11 @@ msgstr "Olete ületanud maksimaalse arvu kvoote."
 msgid "You have no cost plans yet"
 msgstr "Sul ei ole valitud veel ühtegi makseplaani"
 
-#: src/billing/invoices-list.js:36
-#: src/paypal/paypal-invoices-list.js:37
+#: src/billing/invoices-list.js:36 src/paypal/paypal-invoices-list.js:37
 msgid "You have no invoices yet."
 msgstr "Sul ei ole veel arveid."
 
-#: src/team/customer-permissions-log-list.js:18
-#: src/team/project-permissions-log-list.js:18
+#: src/team/customer-permissions-log-list.js:18 src/team/project-permissions-log-list.js:18
 msgid "You have no permissions yet."
 msgstr "Sul ei ole veel ligipääsi õigusi."
 
@@ -5454,8 +4644,7 @@ msgstr "Sul ei ole veel taastatud köiteid."
 msgid "You have no SLAs yet."
 msgstr "Sul ei ole veel SLA-sid."
 
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js:41
-#: src/openstack/openstack-volume/openstack-volume-snapshots.js:42
+#: src/openstack/openstack-snapshot/openstack-snapshots-list.js:41 src/openstack/openstack-volume/openstack-volume-snapshots.js:42
 msgid "You have no snapshots yet."
 msgstr "Sul ei ole veel tõmmiseid"
 
@@ -5463,8 +4652,7 @@ msgstr "Sul ei ole veel tõmmiseid"
 msgid "You have no team invitations yet."
 msgstr "Sul ei ole veel meeskonna kutseid."
 
-#: src/team/customer-users-list.js:62
-#: src/team/project-users-list.js:47
+#: src/team/customer-users-list.js:62 src/team/project-users-list.js:47
 msgid "You have no team members yet."
 msgstr "Sul ei ole veel meekonna liikmeid."
 
@@ -5476,18 +4664,13 @@ msgstr "Sul ei ole veel kasutajaid."
 msgid "You have no virtual machines yet."
 msgstr "Teil pole veel virtuaalseid masinaid."
 
-#: src/openstack/openstack-volume/openstack-instance-volumes.js:37
-#: src/openstack/openstack-volume/openstack-volumes-list.js:43
+#: src/openstack/openstack-volume/openstack-instance-volumes.js:37 src/openstack/openstack-volume/openstack-volumes-list.js:43
 msgid "You have no volumes yet."
 msgstr "Sul ei ole veel kõiteid."
 
 #: src/openstack/openstack-instance/openstack-instance-config.js:98
-msgid ""
-"You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</"
-"a>."
-msgstr ""
-"Sa ei ole veel lisanud ühtegi SSH võtit oma <a ui-sref=\"profile.keys"
-"\">profiilile</a>."
+msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
+msgstr "Sa ei ole veel lisanud ühtegi SSH võtit oma <a ui-sref=\"profile.keys\">profiilile</a>."
 
 #: src/freeipa/freeipa-account-create.js:36
 msgid "You must agree with terms of service."
@@ -5526,9 +4709,5 @@ msgid "Your invitation was accepted."
 msgstr "Sinu kutse võeti vastu."
 
 #: src/auth/auth-login.html:16
-msgid ""
-"Your single pane of control for all cloud services. Login in to see it in "
-"action."
-msgstr ""
-"Sinu ühtne kontrollkeskus pilveteenuste haldamiseks. Logi sisse et näha seda "
-"töös."
+msgid "Your single pane of control for all cloud services. Login in to see it in action."
+msgstr "Sinu ühtne kontrollkeskus pilveteenuste haldamiseks. Logi sisse et näha seda töös."
