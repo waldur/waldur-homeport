@@ -10,7 +10,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
             label: gettext('My services'),
             icon: 'fa-shopping-cart',
             feature: 'marketplace',
-            action: () => {},
+            link: 'marketplace-services',
             index: 310,
             children: [
               {
@@ -65,7 +65,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         return [
           {
             label: gettext('Resources'),
-            link: 'project.resources',
+            link: 'marketplace-resources',
             icon: 'fa-files-o',
             index: 300,
             children
