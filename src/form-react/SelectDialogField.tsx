@@ -3,18 +3,20 @@ import * as React from 'react';
 import { SelectDialogFieldColumn, SelectDialogFieldChoice } from '@waldur/form-react/types';
 import { AppstoreListDialog } from '@waldur/form/AppstoreListDialog';
 import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
-import { TranslateProps } from '@waldur/i18n';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 interface OwnProps {
   label?: React.ReactNode;
   dialogTitle?: string;
+  preSelectFirst?: boolean;
+  emptyMessage?: React.ReactNode;
   columns: SelectDialogFieldColumn[];
   choices: SelectDialogFieldChoice[];
   filterOptions?: FilterOptions;
-  input: CustomComponentInputProps;
+  input: CustomComponentInputProps<SelectDialogFieldChoice>;
 }
 
-export class SelectDialogField extends React.Component<OwnProps & TranslateProps> {
+export class SelectDialogFieldComponent extends React.Component<OwnProps & TranslateProps> {
   state = {
     showListDialog: false,
     value: null,
@@ -33,12 +35,26 @@ export class SelectDialogField extends React.Component<OwnProps & TranslateProps
     this.setState({value});
   }
 
+  componentDidMount() {
+    if (this.props.preSelectFirst && this.props.choices.length !== 0) {
+      this.onChange(this.props.choices[0]);
+      this.props.input.onChange(this.props.choices[0]);
+    }
+  }
+
   render() {
     const props = this.props;
+    if (props.choices && props.choices.length === 0) {
+      return (
+        <div className="form-control-static">
+          {props.emptyMessage ? props.emptyMessage : <span>&mdash;</span>}
+        </div>
+      );
+    }
     return (
       <div className="form-control-static">
         <a onClick={this.openSelectDialog}>
-          {props.input.value || props.label || props.translate('Show choices')}
+          {props.input.value && props.input.value.name || props.label || props.translate('Show choices')}
           {' '}
           <i className="fa fa-caret-down"/>
         </a>
@@ -49,7 +65,7 @@ export class SelectDialogField extends React.Component<OwnProps & TranslateProps
           choices={props.choices}
           input={{
             name: this.props.input.name,
-            value: this.state.value,
+            value: this.state.value || this.props.input.value,
             onChange: this.onChange,
           }}
           filterOptions={props.filterOptions}
@@ -60,3 +76,5 @@ export class SelectDialogField extends React.Component<OwnProps & TranslateProps
     );
   }
 }
+
+export const SelectDialogField = withTranslation(SelectDialogFieldComponent);

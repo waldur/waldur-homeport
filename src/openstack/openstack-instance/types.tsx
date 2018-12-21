@@ -35,7 +35,7 @@ export interface FloatingIp {
 
 export interface ServiceComponent {
   cores: number;
-  disk: number;
+  storage: number;
   ram: number;
 }
 
@@ -46,6 +46,16 @@ export interface Flavor extends ServiceComponent {
 
 export interface LimitsType {
   cores: string;
-  disk: string;
+  storage: string;
   ram: string;
+}
+
+export interface SshKey {
+  url: string;
+  uuid: string;
+  name: string;
+  public_key: string;
+  fingerprint: string;
+  user_uuid: string;
+  is_shared: boolean;
 }

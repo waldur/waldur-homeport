@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import { OpenstackInstanceCheckoutSummary } from '@waldur/openstack/openstack-instance/OpenstackInstanceCheckoutSummary';
+import { translate } from '@waldur/i18n';
+import { PureOpenstackInstanceCheckoutSummary } from '@waldur/openstack/openstack-instance/OpenstackInstanceCheckoutSummary';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { summaryData, flavor } from './storyFixtures';
@@ -25,7 +26,9 @@ export class OpenstackInstanceCheckoutSummaryStory extends React.Component {
             {this.state.withFlavor ? 'Without Flavor' : 'With Flavor'}
           </button>
         </strong>
-        <OpenstackInstanceCheckoutSummary {...data}/>
+        <PureOpenstackInstanceCheckoutSummary
+          translate={translate}
+          {...data}/>
       </>
     );
   }

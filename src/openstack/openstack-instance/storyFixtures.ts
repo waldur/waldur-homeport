@@ -113,38 +113,38 @@ export const subnets = [
     network: 'http://localhost:8000/api/openstacktenant-networks/8773466ef002433881cc2cd28e095026/',
   },
   {
-      url: 'http://localhost:8000/api/openstacktenant-subnets/3a6d62de0ad54f5bbb9bdb5dcce11abf/',
-      uuid: '3a6d62de0ad54f5bbb9bdb5dcce11abf',
-      name: 'awdawd-sub-net',
-      cidr: '192.168.42.0/24',
-      gateway_ip: '192.168.42.1',
-      allocation_pools: [
-          {
-              start: '192.168.42.10',
-              end: '192.168.42.200',
-          },
-      ],
-      ip_version: 4,
-      enable_dhcp: true,
-      dns_nameservers: [],
-      network: 'http://localhost:8000/api/openstacktenant-networks/a4c80b032cc54166822b741b1d64e8b9/',
+    url: 'http://localhost:8000/api/openstacktenant-subnets/3a6d62de0ad54f5bbb9bdb5dcce11abf/',
+    uuid: '3a6d62de0ad54f5bbb9bdb5dcce11abf',
+    name: 'awdawd-sub-net',
+    cidr: '192.168.42.0/24',
+    gateway_ip: '192.168.42.1',
+    allocation_pools: [
+        {
+            start: '192.168.42.10',
+            end: '192.168.42.200',
+        },
+    ],
+    ip_version: 4,
+    enable_dhcp: true,
+    dns_nameservers: [],
+    network: 'http://localhost:8000/api/openstacktenant-networks/a4c80b032cc54166822b741b1d64e8b9/',
   },
   {
-      url: 'http://localhost:8000/api/openstacktenant-subnets/8a07dca67f71459daab5f7f02147a367/',
-      uuid: '8a07dca67f71459daab5f7f02147a367',
-      name: 'baip-demo-sub-net',
-      cidr: '192.168.42.0/24',
-      gateway_ip: '192.168.42.1',
-      allocation_pools: [
-          {
-              start: '192.168.42.10',
-              end: '192.168.42.200',
-          },
-      ],
-      ip_version: 4,
-      enable_dhcp: true,
-      dns_nameservers: [],
-      network: 'http://localhost:8000/api/openstacktenant-networks/9b8fa00872fc4c0599b0c0d8ea41f473/',
+    url: 'http://localhost:8000/api/openstacktenant-subnets/8a07dca67f71459daab5f7f02147a367/',
+    uuid: '8a07dca67f71459daab5f7f02147a367',
+    name: 'baip-demo-sub-net',
+    cidr: '192.168.42.0/24',
+    gateway_ip: '192.168.42.1',
+    allocation_pools: [
+        {
+            start: '192.168.42.10',
+            end: '192.168.42.200',
+        },
+    ],
+    ip_version: 4,
+    enable_dhcp: true,
+    dns_nameservers: [],
+    network: 'http://localhost:8000/api/openstacktenant-networks/9b8fa00872fc4c0599b0c0d8ea41f473/',
   },
 ];
 
@@ -178,12 +178,12 @@ export const floatingIps = [
 export const summaryData = {
   components: {
     cores: 0.0125,
-    disk: 0.0000026042,
+    storage: 0.0000026042,
     ram: 0.0000244141,
   },
   limits: {
     cores: 80,
-    disk: 512000,
+    storage: 512000,
     floating_ip_count: 50,
     instances: 30,
     network_count: 100,
@@ -198,12 +198,12 @@ export const summaryData = {
   },
   limitsType: {
     cores: 'QUOTA_PACKAGE_TYPE',
-    disk: 'QUOTA_PACKAGE_TYPE',
+    storage: 'QUOTA_PACKAGE_TYPE',
     ram: 'QUOTA_PACKAGE_TYPE',
   },
   usages: {
     cores: 2,
-    disk: 10240,
+    storage: 10240,
     floating_ip_count: 0,
     instances: 1,
     network_count: 1,

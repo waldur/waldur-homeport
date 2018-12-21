@@ -8,113 +8,96 @@ import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { internalIpFormatter } from '@waldur/openstack/openstack-instance/openstack-instance-config';
 import { Subnet, FloatingIp } from '@waldur/openstack/openstack-instance/types';
 
-interface NetworkItems {
-  [index: number]: {
-    subnet?: Option<OptionValues>,
-    floatingIp?: Option<OptionValues>,
-  };
+interface NetworkItem {
+  subnet?: Option<OptionValues>;
+  floatingIp?: Option<OptionValues>;
 }
 
-interface OpenstackInstanceNetworksProps extends TranslateProps {
+interface OpenstackInstanceNetworksComponentProps extends TranslateProps {
   input: {
-    value: NetworkItems;
-    onChange(value: NetworkItems): void;
+    value: NetworkItem[];
+    onChange(value: NetworkItem[]): void;
   };
   subnets: Subnet[];
   floatingIps: FloatingIp[];
 }
 
-interface OpenstackInstanceNetworksState {
-  items: Array<{[index: number]: number}>;
-  currentIndex: number;
-}
-
-export default class OpenstackInstanceNetworks extends React.Component<OpenstackInstanceNetworksProps, OpenstackInstanceNetworksState> {
-  state = {
-    items: [],
-    currentIndex: 0,
-  };
-
+export default class OpenstackInstanceNetworksComponent extends React.Component<OpenstackInstanceNetworksComponentProps> {
   addItem = () => {
-    this.setState({
-      items: [...this.state.items, {index: this.state.currentIndex}],
-    }, () => this.setState({currentIndex: this.state.currentIndex + 1}));
+    if (this.hasFreeSubnets()) {
+      if (this.props.input.value) {
+        this.props.input.onChange([...this.props.input.value, this.getDefaultValue()]);
+      } else {
+        this.props.input.onChange([this.getDefaultValue()]);
+      }
+    }
   }
 
-  removeItem = (item, index) => {
-    const itemIndex = this.state.items.indexOf(item);
-    this.setState({items: [
-      ...this.state.items.slice(0, itemIndex),
-      ...this.state.items.slice(itemIndex + 1),
-    ]});
-    const {[index]: _, ...rest} = this.props.input.value;
-    this.props.input.onChange(rest);
+  getDefaultValue = () => ({
+    subnet: this.getFreeSubnets().length !== 0 ? this.getFreeSubnets()[0] : {},
+    floatingIp: this.getDefaultFloatingIps().length !== 0 ? this.getDefaultFloatingIps()[0] : {},
+  })
+
+  removeItem = index => {
+    const valueCopy = [
+      ...this.props.input.value.slice(0, index),
+      ...this.props.input.value.slice(index + 1),
+    ];
+    this.props.input.onChange(valueCopy);
   }
 
   componentDidMount() {
-    this.addItem();
+    if (!this.props.input.value) {
+      this.addItem();
+    }
   }
 
   onSubnetChange = (value, index) => {
-    const combinedValue = {...this.props.input.value};
-    const subnet = {
-        ...value,
-        clearableValue: false,
-      };
-    if (combinedValue[index] !== undefined) {
-      combinedValue[index].subnet = subnet;
-    } else {
-      combinedValue[index] = {
-        subnet,
-      };
-    }
-    this.props.input.onChange(combinedValue);
+    const valueCopy = [...this.props.input.value];
+    valueCopy[index] = {
+      ...valueCopy[index],
+        subnet: value,
+    };
+    this.props.input.onChange(valueCopy);
   }
 
   onFloatingIpChange = (value, index) => {
-    const combinedValue = {...this.props.input.value};
-    combinedValue[index].floatingIp = value;
-    this.props.input.onChange(combinedValue);
+    const valueCopy = [...this.props.input.value];
+    valueCopy[index] = {
+      ...valueCopy[index],
+        floatingIp: value,
+    };
+    this.props.input.onChange(valueCopy);
   }
 
-  getAvailableNetworkItems = itemType => item => {
-    const selectedItemUrls = [];
-    Object.keys(this.props.input.value).map(key => {
-      if (this.props.input.value[key][itemType]) {
-        selectedItemUrls.push(this.props.input.value[key][itemType].value);
-      }
-    });
-    return selectedItemUrls.indexOf(item.url) === -1;
-  }
+  getAvailableNetworkItems = itemType => item =>
+    this.props.input.value ?
+      this.props.input.value.filter(val => val[itemType].uuid === item.uuid).length === 0 : true
 
   getFreeSubnets = () =>
     this.props.subnets
       .filter(this.getAvailableNetworkItems('subnet'))
       .map(subnet => ({
+        ...subnet,
         label: internalIpFormatter(subnet),
-        value: subnet.url,
       }))
 
-  getDefaultFloatingIpOptions = () => [
-      {
-        label: this.props.translate('Skip floating IP assignment'),
-        value: 'false',
-      },
-      {
-        label: this.props.translate('Auto-assign floating IP'),
-        value: 'true',
-      },
+  getDefaultFloatingIps = () => [
+    {
+      address: this.props.translate('Skip floating IP assignment'),
+      url: 'false',
+    },
+    {
+      address: this.props.translate('Auto-assign floating IP'),
+      url: 'true',
+    },
   ]
 
   getFreeFloatingIps = () =>
     [
-      ...this.getDefaultFloatingIpOptions(),
+      ...this.getDefaultFloatingIps(),
       ...this.props.floatingIps
-        .filter(this.getAvailableNetworkItems('floatingIp'))
-        .map(floatingIp => ({
-          label: floatingIp.address,
-          value: floatingIp.url,
-        })),
+        .filter(this.getAvailableNetworkItems('floatingIp')),
     ]
 
   getSelectValue = selectType => index => {
@@ -125,59 +108,62 @@ export default class OpenstackInstanceNetworks extends React.Component<Openstack
   }
 
   hasFreeSubnets = () =>
-    this.getFreeSubnets().length > 0
+    this.getFreeSubnets().length !== 0
 
-  disableFloatingIpSelect = item =>
-    !this.props.input.value[item.index] || !this.props.input.value[item.index].subnet
+  disableFloatingIpSelect = index =>
+    this.props.input.value[index].subnet.uuid === undefined
 
   render() {
-    const subnetOptions = this.getFreeSubnets();
-    const floatingIpOptions = this.getFreeFloatingIps();
     return (
       <>
         <Table bsClass="table table-borderless m-b-xs">
           <tbody>
-            {this.state.items.map(item => (
-              <tr key={item.index}>
-                <td className="p-l-n col-md-6">
-                  <Select
-                    name="subnets"
-                    value={this.getSelectValue('subnet')(item.index)}
-                    onChange={value => this.onSubnetChange(value, item.index)}
-                    placeholder={this.props.translate('Select subnet')}
-                    onBlur={() => {/* Noop */}}
-                    options={subnetOptions}
-                    clearable={false}
-                  />
-                </td>
-                <td className="col-md-5">
-                  <Select
-                    name="floatingIps"
-                    value={this.getSelectValue('floatingIp')(item.index)}
-                    onChange={value => this.onFloatingIpChange(value, item.index)}
-                    onBlur={() => {/* Noop */}}
-                    options={floatingIpOptions}
-                    disabled={this.disableFloatingIpSelect(item)}
-                  />
-                </td>
-                <td className="p-r-n">
-                  <Tooltip
-                    id="item-remove"
-                    label={this.props.translate('Delete')}>
-                      <button
-                        type="button"
-                        className="btn btn-default"
-                        onClick={() => this.removeItem(item, item.index)}
-                      >
-                        <i className="fa fa-trash-o"/>
-                      </button>
-                  </Tooltip>
-                </td>
-              </tr>
-            ))}
+            {this.props.input.value ?
+              this.props.input.value.map((_, index) => (
+                <tr key={index}>
+                  <td className="p-l-n col-md-6">
+                    <Select
+                      name="subnets"
+                      value={this.getSelectValue('subnet')(index)}
+                      onChange={value => this.onSubnetChange(value, index)}
+                      placeholder={this.props.translate('Select subnet')}
+                      onBlur={() => {/* Noop */}}
+                      options={this.getFreeSubnets()}
+                      clearable={false}
+                      valueKey="url"
+                    />
+                  </td>
+                  <td className="col-md-5">
+                    <Select
+                      name="floatingIps"
+                      value={this.getSelectValue('floatingIp')(index)}
+                      onChange={value => this.onFloatingIpChange(value, index)}
+                      onBlur={() => {/* Noop */}}
+                      options={this.getFreeFloatingIps()}
+                      disabled={this.disableFloatingIpSelect(index)}
+                      clearable={false}
+                      labelKey="address"
+                      valueKey="url"
+                    />
+                  </td>
+                  <td className="p-r-n">
+                    <Tooltip
+                      id="item-remove"
+                      label={this.props.translate('Delete')}>
+                        <button
+                          type="button"
+                          className="btn btn-default"
+                          onClick={() => this.removeItem(index)}
+                        >
+                          <i className="fa fa-trash-o"/>
+                        </button>
+                    </Tooltip>
+                  </td>
+                </tr>
+              )) : <tr/>
+            }
           </tbody>
         </Table>
-
         <button
           type="button"
           className="btn btn-default"
@@ -192,4 +178,4 @@ export default class OpenstackInstanceNetworks extends React.Component<Openstack
   }
 }
 
-export const OpenstackInstanceNetworksContainer = withTranslation(OpenstackInstanceNetworks);
+export const OpenstackInstanceNetworks = withTranslation(OpenstackInstanceNetworksComponent);

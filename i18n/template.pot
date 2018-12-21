@@ -306,6 +306,7 @@ msgid "Adding link"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Additional data that will be added to instance on provisioning."
@@ -1551,6 +1552,7 @@ msgstr ""
 #: src/offering/appstore-offering.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
@@ -2127,6 +2129,7 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/user/keys/key-list.js
 msgid "Fingerprint"
@@ -2147,6 +2150,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-flavors.html
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
@@ -2160,6 +2164,7 @@ msgid "Flavor exclude regex"
 msgstr ""
 
 #: src/analytics/FlavorsList.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
@@ -2483,6 +2488,7 @@ msgstr ""
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
@@ -2498,6 +2504,7 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "Image name"
 msgstr ""
@@ -3252,10 +3259,12 @@ msgstr ""
 msgid "Metric"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "Min RAM"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "Min storage"
 msgstr ""
@@ -3357,6 +3366,7 @@ msgstr ""
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-network/openstack-tenant-networks.js
 #: src/openstack/openstack-security-groups/security-groups-list.js
@@ -3429,6 +3439,7 @@ msgid "Network has been updated."
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-network/breadcrumbs.js
 #: src/openstack/openstack-subnet/breadcrumbs.js
@@ -3940,6 +3951,10 @@ msgstr ""
 
 #: src/openstack/events.ts
 msgid "OpenStack events"
+msgstr ""
+
+#: src/openstack/openstack-instance/marketplace.ts
+msgid "OpenStack instance"
 msgstr ""
 
 #: src/openstack/marketplace.ts
@@ -5632,6 +5647,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "SSH public key"
 msgstr ""
@@ -5707,6 +5723,7 @@ msgstr ""
 
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-security-groups/breadcrumbs.js
@@ -5830,6 +5847,7 @@ msgid "Select role"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
+#: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 #: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "Select security groups..."
@@ -6241,6 +6259,7 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/customer/CustomerList.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
@@ -6366,6 +6385,7 @@ msgstr ""
 msgid "System user"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "System volume size"
 msgstr ""
@@ -6908,6 +6928,14 @@ msgstr ""
 msgid "Unable to generate service provider API secret code."
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+msgid "Unable to get checkout summary data."
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+msgid "Unable to get form's data."
+msgstr ""
+
 #: src/openstack/openstack-tenant/appstore-field-select-openstack-tenant.js
 msgid "Unable to get list of OpenStack tenants."
 msgstr ""
@@ -7243,6 +7271,7 @@ msgstr ""
 
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "User data"
@@ -7435,6 +7464,7 @@ msgstr ""
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/rijkscloud/InstanceCreateConfig.js
@@ -7813,6 +7843,10 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+msgid "You have not added any SSH keys to your"
+msgstr ""
+
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
@@ -7970,6 +8004,10 @@ msgstr ""
 
 #: src/experts/requests/details/expert-request-details.js
 msgid "owner"
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+msgid "profile."
 msgstr ""
 
 #: src/project/ProjectsList.tsx

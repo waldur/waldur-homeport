@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { SelectDialogField } from '@waldur/form-react/SelectDialogField';
-import { translate } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { columns, choices, openstackTemplateFilters } from './storyFixtures';
@@ -29,7 +28,6 @@ class SelectDialogFieldStory extends React.Component {
           columns={columns}
           choices={choices}
           filterOptions={openstackTemplateFilters}
-          translate={translate}
         />
       </>
     );

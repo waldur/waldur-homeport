@@ -3,23 +3,28 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 import { connect } from 'react-redux';
 import Select from 'react-select';
+import { compose } from 'redux';
 
-import { TranslateProps } from '@waldur/i18n';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { openSecurityGroupsDetailsDialog } from '@waldur/openstack/openstack-instance/store/actions';
 import { SecurityGroup, SecurityGroupOption } from '@waldur/openstack/openstack-security-groups/types';
 
-interface OpenstackInstanceSecurityGroupsProps extends TranslateProps {
-  openSecurityGroupsDetailsDialog(securityGroups: SecurityGroup[]): void;
+interface OwnProps {
   input: {
-    values: SecurityGroupOption[];
-    onChange(values: SecurityGroupOption[]): void;
+    value: SecurityGroupOption[];
+    onChange(value: SecurityGroupOption[]): void;
   };
   securityGroups: SecurityGroup[];
 }
 
-class OpenstackInstanceSecurityGroups extends React.Component<OpenstackInstanceSecurityGroupsProps> {
-  openDetailsDialog = () => {
-    const selectedSecurityGroupsUuids = this.props.input.values
+interface DispatchProps {
+  openSecurityGroupsDetailsDialog(securityGroups: SecurityGroup[]): void;
+}
+
+class OpenstackInstanceSecurityGroupsComponent extends React.Component<OwnProps & DispatchProps & TranslateProps> {
+  openDetailsDialog = e => {
+    e.preventDefault();
+    const selectedSecurityGroupsUuids = this.props.input.value
       .map(selectedSecurityGroup => selectedSecurityGroup.uuid);
     const selectedSecurityGroups = this.props.securityGroups.filter(selectedSecurityGroup =>
       selectedSecurityGroupsUuids.indexOf(selectedSecurityGroup.uuid) !== -1
@@ -45,7 +50,8 @@ class OpenstackInstanceSecurityGroups extends React.Component<OpenstackInstanceS
         <Col md={9}>
           <Select
             name="security-group"
-            value={this.props.input.values}
+            placeholder={this.props.translate('Select security groups...')}
+            value={this.props.input.value}
             options={this.props.securityGroups}
             labelKey="name"
             valueKey="uuid"
@@ -58,7 +64,7 @@ class OpenstackInstanceSecurityGroups extends React.Component<OpenstackInstanceS
         <Col md={3}>
           <button
             className="btn btn-default"
-            disabled={this.props.input.values.length === 0}
+            disabled={this.props.input.value.length === 0}
             onClick={this.openDetailsDialog}>
               <i className="fa fa-eye"/>
               {' '}
@@ -74,4 +80,13 @@ const mapDispatchToProps = dispatch => ({
   openSecurityGroupsDetailsDialog: securityGroups => dispatch(openSecurityGroupsDetailsDialog(securityGroups)),
 });
 
-export const OpenstackInstanceSecurityGroupsContainer = connect(undefined, mapDispatchToProps)(OpenstackInstanceSecurityGroups);
+const enhance = compose(
+  connect<
+    {},
+    DispatchProps,
+    OwnProps
+  >(undefined, mapDispatchToProps),
+  withTranslation
+);
+
+export const OpenstackInstanceSecurityGroups = enhance(OpenstackInstanceSecurityGroupsComponent);

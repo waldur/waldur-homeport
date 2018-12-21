@@ -14,7 +14,7 @@ interface PureChoicesTableProps {
   enableSelect?: boolean;
   columns: SelectDialogFieldColumn[];
   choices: SelectDialogFieldChoice[];
-  input: CustomComponentInputProps;
+  input: CustomComponentInputProps<SelectDialogFieldChoice>;
 }
 
 interface ChoicesTableProps extends PureChoicesTableProps {
@@ -40,12 +40,12 @@ export const PureChoicesTable: React.SFC<PureChoicesTableProps> = (props: Choice
             key={choice.uuid}
             onKeyUp={e => {
               if (e.nativeEvent.keyCode === 13) {
-                return props.input.onChange(choice.name);
+                return props.input.onChange(choice);
               }
             }}
             onClick={() => {
               if (!choice.disabled) {
-                return props.input.onChange(choice.name);
+                return props.input.onChange(choice);
               }
             }}
             className={classNames({'selectable-row': props.enableSelect})}
@@ -62,15 +62,16 @@ export const PureChoicesTable: React.SFC<PureChoicesTableProps> = (props: Choice
                     </Tooltip> :
                     <input
                       type="radio"
-                      checked={choice.name === props.input.value}
+                      checked={props.input.value && choice.uuid === props.input.value.uuid}
                       name={props.input.name}
-                      readOnly={true}/>
+                      readOnly={true}
+                    />
                 }
               </td>
             }
             {props.columns.map((column, index) => (
               <td key={index} className={classNames({disabled: choice.disabled})}>
-                {choice[column.name]}
+                {column.filter ? column.filter(choice[column.name]) : choice[column.name]}
               </td>
             ))}
           </tr>

@@ -1,35 +1,10 @@
-import { getAll } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
+import { loadFlavors, loadSecurityGroups, loadFloatingIps, loadSubnets } from '@waldur/openstack/api';
 import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
 import { OpenStackBackup } from '../types';
-
-interface NamedResource {
-  url: string;
-  name: string;
-}
-
-// tslint:disable-next-line:variable-name
-const loadFlavors = (settings_uuid: string) =>
-  getAll<NamedResource>('/openstacktenant-flavors/', {params: {settings_uuid}});
-
-// tslint:disable-next-line:variable-name
-const loadSecurityGroups = (settings_uuid: string) =>
-  getAll<NamedResource>('/openstacktenant-security-groups/', {params: {settings_uuid}});
-
-// tslint:disable-next-line:variable-name
-const loadSubnets = (settings_uuid: string) =>
-  getAll<NamedResource>('/openstacktenant-subnets/', {params: {settings_uuid}});
-
-// tslint:disable-next-line:variable-name
-const loadFloatingIps = (settings_uuid: string) =>
-  getAll<NamedResource>('/openstacktenant-floating-ips/', {params: {
-    is_booked: 'False',
-    free: 'True',
-    settings_uuid,
-  }});
 
 export default function createAction(): ResourceAction<OpenStackBackup> {
   return {
