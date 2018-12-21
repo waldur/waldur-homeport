@@ -27,6 +27,15 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
       meta: { touched, error },
       children,
       ...rest} = this.props;
+    const newProps = {
+      input,
+      ...omit(rest, 'clearOnUnmount'),
+      onBlur: event => {
+        if (!this.props.noUpdateOnBlur) {
+          this.props.input.onBlur(event);
+        }
+      },
+    };
     return (
       <div className="form-group">
         {!hideLabel && (
@@ -40,7 +49,7 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
           </label>
         )}
         <div className={classNames(controlClass, {'col-sm-offset-3': hideLabel})}>
-          {React.cloneElement((children as any), { input, ...omit(rest, 'clearOnUnmount') })}
+          {React.cloneElement((children as any), newProps)}
           {description && <p className="help-block m-b-none text-muted">{description}</p>}
           {touched && <FieldError error={error} />}
         </div>
