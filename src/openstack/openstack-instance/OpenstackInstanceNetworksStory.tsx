@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import { OpenstackInstanceNetworksContainer } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
+import { OpenstackInstanceNetworks } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import { subnets, floatingIps } from '@waldur/openstack/openstack-instance/storyFixtures';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 export class OpenstackInstanceNetworksStory extends React.Component {
   state = {
-    selectedValue: {},
+    selectedValue: [],
   };
 
   selectValue = value => {
@@ -17,7 +17,7 @@ export class OpenstackInstanceNetworksStory extends React.Component {
     return (
       <>
       <strong>{`Selected value: ${JSON.stringify(this.state.selectedValue, null, 2)}`}</strong>
-      <OpenstackInstanceNetworksContainer
+      <OpenstackInstanceNetworks
         input={{
           onChange: this.selectValue,
           value: this.state.selectedValue,

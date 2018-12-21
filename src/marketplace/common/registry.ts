@@ -9,6 +9,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   type: string;
   component: React.ComponentType<OfferingConfigurationFormProps>;
   detailsComponent?: React.ComponentType<OrderItemDetailsProps>;
+  checkoutSummaryComponent?: any;
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
   label: string;
   showOptions?: boolean;
@@ -37,6 +38,10 @@ export function getDetailsComponent(offeringType) {
 
 export function getFormSerializer(offeringType) {
   return REGISTRY[offeringType].serializer || (x => x);
+}
+
+export function getCheckoutSummaryComponent(offeringType) {
+  return REGISTRY[offeringType].checkoutSummaryComponent;
 }
 
 export function getOfferingTypes(): Option[] {

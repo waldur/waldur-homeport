@@ -1,16 +1,16 @@
 import * as React from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import { TranslateProps } from '@waldur/i18n';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 interface IntegerFormField {
   input: {
     value: string;
     onChange(e: React.ChangeEvent<HTMLInputElement>): void;
   };
-  step?: string;
-  min?: string;
-  max?: string;
+  step?: number;
+  min?: number;
+  max?: number;
 }
 
 interface OpenstackInstanceDataVolumeProps extends TranslateProps {
@@ -18,7 +18,7 @@ interface OpenstackInstanceDataVolumeProps extends TranslateProps {
   units?: string;
 }
 
-export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstanceDataVolumeProps> {
+export class OpenstackInstanceDataVolumeComponent extends React.Component<OpenstackInstanceDataVolumeProps> {
   state = {
     active: false,
   };
@@ -90,3 +90,5 @@ export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstan
     );
   }
 }
+
+export const OpenstackInstanceDataVolume = withTranslation(OpenstackInstanceDataVolumeComponent);

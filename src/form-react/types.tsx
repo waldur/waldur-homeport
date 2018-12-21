@@ -30,4 +30,5 @@ export interface SelectDialogFieldColumn {
   name: string;
   label: React.ReactNode;
   headerClass?: string;
+  filter?(input: string): string;
 }
