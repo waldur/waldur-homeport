@@ -20,6 +20,7 @@ export interface BaseResource {
   service_settings_uuid?: string;
   error_message?: string;
   created?: string;
+  marketplace_offering_uuid?: boolean;
 }
 
 export interface Resource extends BaseResource {
