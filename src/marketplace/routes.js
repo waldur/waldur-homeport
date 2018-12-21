@@ -133,6 +133,12 @@ export default function routes($stateProvider) {
       }
     })
 
+    .state('marketplace-services', {
+      url: '',
+      abstract: true,
+      template: '<ui-view/>',
+    })
+
     .state('marketplace-vendor-offerings', {
       url: 'marketplace-offerings/',
       template: '<marketplace-vendor-offerings></marketplace-vendor-offerings>',
@@ -140,6 +146,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Offerings'),
         feature: 'marketplace',
+        sidebarState: 'marketplace-services',
       }
     })
 
@@ -150,6 +157,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Add offering'),
         feature: 'marketplace',
+        sidebarState: 'marketplace-services',
       }
     })
 
@@ -210,7 +218,14 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Orders'),
         feature: 'marketplace',
+        sidebarState: 'marketplace-services',
       }
+    })
+
+    .state('marketplace-resources', {
+      url: '',
+      abstract: true,
+      template: '<ui-view/>',
     })
 
     .state('marketplace-project-resources', {
@@ -220,6 +235,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Resources'),
         feature: 'marketplace',
+        sidebarState: 'marketplace-resources'
       }
     });
 }
