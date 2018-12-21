@@ -33,21 +33,31 @@ const PureUserFilter = (props: UserFilterProps) => (
       submitting={props.submitting}>
       <StringField
         label={props.translate('Full name')}
-        name="full_name"/>
+        name="full_name"
+        noUpdateOnBlur={true}
+      />
       {props.nativeNameVisible && (
         <StringField
           label={props.translate('Native name')}
-          name="native_name"/>
+          name="native_name"
+          noUpdateOnBlur={true}
+        />
       )}
       <StringField
         label={props.translate('ID code')}
-        name="civil_number"/>
+        name="civil_number"
+        noUpdateOnBlur={true}
+      />
       <StringField
         label={props.translate('Organization')}
-        name="organization"/>
+        name="organization"
+        noUpdateOnBlur={true}
+      />
       <StringField
         label={props.translate('Email')}
-        name="email"/>
+        name="email"
+        noUpdateOnBlur={true}
+      />
       <SelectField
         label={props.translate('Role')}
         name="role"
@@ -55,7 +65,9 @@ const PureUserFilter = (props: UserFilterProps) => (
         options={statusOptions}
         labelKey="name"
         valueKey="value"
-        multi={true}/>
+        multi={true}
+        noUpdateOnBlur={true}
+      />
     </FormContainer>
   </form>
 );

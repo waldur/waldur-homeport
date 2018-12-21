@@ -3174,10 +3174,6 @@ msgstr ""
 msgid "Marketplace offerings"
 msgstr ""
 
-#: src/marketplace/routes.js
-msgid "Marketplace orders"
-msgstr ""
-
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Marketplace service provider"
 msgstr ""
