@@ -30,9 +30,10 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
     const newProps = {
       input,
       ...omit(rest, 'clearOnUnmount'),
-      onBlur: event => {
+      onBlur: () => {
         if (!this.props.noUpdateOnBlur) {
-          this.props.input.onBlur(event);
+          // @ts-ignore
+          this.props.input.onBlur();
         }
       },
     };
