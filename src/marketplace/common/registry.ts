@@ -16,6 +16,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   showComponents?: boolean;
   providerType?: string;
   attributes?(): Attribute[];
+  disableOfferingCreation?: boolean;
 }
 
 export interface Option {
@@ -45,7 +46,8 @@ export function getCheckoutSummaryComponent(offeringType) {
 }
 
 export function getOfferingTypes(): Option[] {
-  return Object.keys(REGISTRY).map(key => ({
+  const keys = Object.keys(REGISTRY).filter(key => !REGISTRY[key].disableOfferingCreation);
+  return keys.map(key => ({
     value: key,
     label: REGISTRY[key].label,
   }));

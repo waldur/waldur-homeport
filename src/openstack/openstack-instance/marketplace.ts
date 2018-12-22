@@ -30,4 +30,5 @@ registerOfferingType({
   component: OpenstackInstanceCreateForm,
   checkoutSummaryComponent: OpenstackInstanceCheckoutSummary,
   serializer,
+  disableOfferingCreation: true,
 });
