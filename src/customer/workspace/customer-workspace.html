@@ -2,7 +2,7 @@
 <div id="page-wrapper" ng-class="$state.current.data.pageClass || 'white-bg'" ng-if="currentCustomer">
   <cookies-consent/>
   <nc-header></nc-header>
-  <div class="row wrapper white-bg page-heading">
+  <div class="row wrapper white-bg page-heading" ng-hide="$state.current.data.hideBreadcrumbs">
     <div class="col-lg-6">
       <h2>{{ pageTitle | translate }}</h2>
       <breadcrumbs-container/>
