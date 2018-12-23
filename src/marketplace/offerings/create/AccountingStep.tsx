@@ -9,11 +9,18 @@ import { ComponentsList } from './ComponentsList';
 interface AccountingStepProps {
   showComponents: boolean;
   type?: string;
+  removeOfferingComponent(component: string): void;
 }
 
 export const AccountingStep = (props: AccountingStepProps) => props.type ? (
   <>
-    {props.showComponents && <FieldArray name="components" component={ComponentsList} />}
+    {props.showComponents && (
+      <FieldArray
+        name="components"
+        component={ComponentsList}
+        props={{removeOfferingComponent: props.removeOfferingComponent}}
+      />
+    )}
     {props.showComponents && <hr/>}
     <FieldArray name="plans" component={PlansList} />
   </>

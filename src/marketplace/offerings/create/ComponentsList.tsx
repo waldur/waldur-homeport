@@ -4,14 +4,17 @@ import * as Panel from 'react-bootstrap/lib/Panel';
 import { WrappedFieldArrayProps } from 'redux-form';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { RemoveButton } from '../RemoveButton';
 import { ComponentAddButton } from './ComponentAddButton';
 import { ComponentForm } from './ComponentForm';
 
-type Props = TranslateProps & WrappedFieldArrayProps<any>;
+interface ComponentsListProps extends TranslateProps, WrappedFieldArrayProps<OfferingComponent> {
+  removeOfferingComponent(component: string): void;
+}
 
-export const ComponentsList = withTranslation((props: Props) => (
+export const ComponentsList = withTranslation((props: ComponentsListProps) => (
   <div className="form-group">
     <Col smOffset={2} sm={8} className="m-b-sm">
       <p className="form-control-static">
@@ -23,7 +26,10 @@ export const ComponentsList = withTranslation((props: Props) => (
       {props.fields.map((component, index) => (
         <Panel key={index}>
           <Panel.Heading>
-            <RemoveButton onClick={() => props.fields.remove(index)}/>
+            <RemoveButton onClick={() => {
+              props.removeOfferingComponent(props.fields.get(index).type);
+              props.fields.remove(index);
+            }}/>
             <h4>{props.translate('Component #{index}', {index: index + 1})}</h4>
           </Panel.Heading>
           <Panel.Body>
@@ -31,7 +37,9 @@ export const ComponentsList = withTranslation((props: Props) => (
           </Panel.Body>
         </Panel>
       ))}
-      <ComponentAddButton onClick={() => props.fields.push({})}/>
+      <ComponentAddButton onClick={() => {
+        props.fields.push({} as OfferingComponent);
+      }}/>
     </Col>
   </div>
 ));

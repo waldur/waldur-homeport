@@ -1,7 +1,14 @@
+import { omit } from '@waldur/core/utils';
 import { Customer } from '@waldur/customer/types';
 import { OptionField } from '@waldur/marketplace/types';
 
 import { OfferingRequest, OfferingFormData, PlanRequest, PlanFormData, OptionFormData } from './types';
+
+export const planWithoutComponent = (plan: PlanFormData, component: string) => ({
+  ...plan,
+  prices: omit(plan.prices, component),
+  quotas: omit(plan.quotas, component),
+});
 
 const formatPlan = (plan: PlanFormData): PlanRequest => {
   const result: PlanRequest = {

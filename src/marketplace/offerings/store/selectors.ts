@@ -36,6 +36,8 @@ export const getType = (state: any): string => {
 
 export const getCategory = state => getForm(state, 'category');
 
+export const getPlans = (state): PlanFormData[] => getForm(state, 'plans');
+
 export const getPlanData = (state, planPath: string): PlanFormData => getForm(state, planPath);
 
 export const getPlanPrice = (state, planPath) => {
