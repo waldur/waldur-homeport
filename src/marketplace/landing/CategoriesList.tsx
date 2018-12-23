@@ -34,7 +34,7 @@ export const CategoriesList = withTranslation((props: CategoriesListProps) => {
   return (
     <Row>
       {props.items.map((category, index) => (
-        <Col key={index} md={3} sm={6}>
+        <Col key={index} md={2} sm={6}>
           <CategoryCard category={category}/>
         </Col>
       ))}
