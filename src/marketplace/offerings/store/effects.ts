@@ -18,7 +18,7 @@ import * as constants from './constants';
 import { STATES } from './constants';
 import { getPlans } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
-import { formatOfferingRequest, planWithoutComponent } from './utils';
+import { formatOfferingRequest, planWithoutComponent, planWithoutQuotas } from './utils';
 
 function* loadData() {
   try {
@@ -34,6 +34,12 @@ function* loadData() {
 function* removeOfferingComponent(action) {
   const plans = yield select(getPlans);
   const newPlans = plans.map(plan => planWithoutComponent(plan, action.payload.component));
+  yield put(change(constants.FORM_ID, 'plans', newPlans));
+}
+
+function* removeOfferingQuotas(action) {
+  const plans = yield select(getPlans);
+  const newPlans = plans.map(plan => planWithoutQuotas(plan, action.payload.component));
   yield put(change(constants.FORM_ID, 'plans', newPlans));
 }
 
@@ -118,6 +124,7 @@ function* loadOffering(action) {
 
 export default function*() {
   yield takeEvery(constants.REMOVE_OFFERING_COMPONENT, removeOfferingComponent);
+  yield takeEvery(constants.REMOVE_OFFERING_QUOTAS, removeOfferingQuotas);
   yield takeEvery(constants.LOAD_DATA_START, loadData);
   yield takeEvery(constants.LOAD_OFFERING_START, loadOffering);
   yield takeEvery(constants.createOffering.REQUEST, createOffering);

@@ -10,6 +10,11 @@ export const planWithoutComponent = (plan: PlanFormData, component: string) => (
   quotas: omit(plan.quotas, component),
 });
 
+export const planWithoutQuotas = (plan: PlanFormData, component: string) => ({
+  ...plan,
+  quotas: omit(plan.quotas, component),
+});
+
 const formatPlan = (plan: PlanFormData): PlanRequest => {
   const result: PlanRequest = {
     name: plan.name,
