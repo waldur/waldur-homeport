@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';
 import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { connectAngularComponent } from '@waldur/store/connect';
@@ -20,10 +21,16 @@ export const TableComponent = props => {
     {
       title: translate('Name'),
       render: ({ row }) => <OfferingLink offering_uuid={row.uuid}>{row.name}</OfferingLink>,
+      orderField: 'name',
     },
     {
       title: translate('Category'),
       render: ({ row }) => row.category_title,
+    },
+    {
+      title: translate('Created'),
+      render: ({ row }) => formatDateTime(row.created),
+      orderField: 'created',
     },
     {
       title: translate('State'),
@@ -44,6 +51,7 @@ export const TableComponent = props => {
       columns={columns}
       verboseName={translate('Offerings')}
       actions={<OfferingCreateButton/>}
+      initialSorting={{field: 'created', mode: 'desc'}}
     />
   );
 };
@@ -57,12 +65,14 @@ const TableOptions = {
   exportRow: row => [
     row.name,
     row.native_name,
+    formatDateTime(row.created),
     row.category_title,
     row.state,
   ],
   exportFields: [
     'Name',
     'Native name',
+    'Created',
     'Category',
     'State',
   ],
