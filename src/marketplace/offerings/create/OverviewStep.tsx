@@ -26,6 +26,10 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
       name="description"
       label={props.translate('Description')}
     />
+    <TextField
+      name="full_description"
+      label={props.translate('Full description')}
+    />
     <StringField
       name="native_name"
       label={props.translate('Native name')}

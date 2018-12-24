@@ -23,6 +23,11 @@ const PureOverviewSummary = props => {
         type: 'string',
       },
       {
+        key: 'full_description',
+        title: translate('Full description'),
+        type: 'string',
+      },
+      {
         key: 'native_name',
         title: translate('Native name'),
         type: 'string',

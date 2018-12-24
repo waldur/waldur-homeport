@@ -2247,6 +2247,11 @@ msgstr ""
 msgid "From port"
 msgstr ""
 
+#: src/marketplace/offerings/create/OverviewStep.tsx
+#: src/marketplace/offerings/create/OverviewSummary.tsx
+msgid "Full description"
+msgstr ""
+
 #: src/auth/auth-login.html
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
