@@ -30,13 +30,12 @@ export const ComponentForm = (props: ComponentFormProps) => (
         validate={required}
       />
     </FormGroup>
-    <FormGroup label={translate('Measured unit')} required={true}>
+    <FormGroup label={translate('Measured unit')}>
       <Field
         component="input"
         className="form-control"
         name={`${props.component}.measured_unit`}
         type="text"
-        validate={required}
       />
     </FormGroup>
     <FormGroup label={translate('Accounting type')} required={true}>
