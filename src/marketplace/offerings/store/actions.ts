@@ -46,3 +46,10 @@ export const removeOfferingComponent = (component: string) => ({
     component,
   },
 });
+
+export const removeOfferingQuotas = (component: string) => ({
+  type: constants.REMOVE_OFFERING_QUOTAS,
+  payload: {
+    component,
+  },
+});
