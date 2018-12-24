@@ -1,5 +1,5 @@
-import * as classNames from 'classnames';
 import * as React from 'react';
+import * as Dropdown from 'react-bootstrap/lib/Dropdown';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
@@ -9,45 +9,26 @@ interface ActionsDropdownProps extends TranslateProps {
   actions?: Array<OfferingAction<OfferingStateTransition>>;
 }
 
-interface ActionsDropdownState {
-  open: boolean;
-}
-
-class PureActionsDropdown extends React.Component<ActionsDropdownProps, ActionsDropdownState> {
-  state = {
-    open: false,
-  };
-
-  onClick = () => {
-    this.setState({open: !this.state.open});
-  }
-
-  render() {
-    const { actions, translate } = this.props;
-    return (
-      <div className={classNames('btn-group dropdown', {open: this.state.open})} onClick={this.onClick}>
-        <a className="btn btn-default btn-sm">
-          <span>{translate('Actions')}</span>
-          {' '}
-          <span className="caret"/>
-        </a>
-        <ul className="dropdown-menu dropdown-menu-right">
-          {actions.length === 0 &&
-            <li role="menuitem">
-              <a>{translate('There are no actions.')}</a>
-            </li>
-          }
-          {actions.map((action, index) => (
-            <li key={index} className="cursor-pointer">
-              <a id={action.value} onClick={action.handler}>
-                {action.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-}
+const PureActionsDropdown = ({ actions, translate }: ActionsDropdownProps) => (
+  <Dropdown id="offering-actions">
+    <Dropdown.Toggle className="btn-sm">
+      {translate('Actions')}
+    </Dropdown.Toggle>
+    <Dropdown.Menu>
+      {actions.length === 0 &&
+        <li role="presentation">
+          <a>{translate('There are no actions.')}</a>
+        </li>
+      }
+      {actions.map((action, index) => (
+        <li key={index} className="cursor-pointer" role="presentation">
+          <a id={action.value} onClick={action.handler} role="menuitem" tabIndex={-1}>
+            {action.label}
+          </a>
+        </li>
+      ))}
+    </Dropdown.Menu>
+  </Dropdown>
+);
 
 export const ActionsDropdown = withTranslation(PureActionsDropdown);

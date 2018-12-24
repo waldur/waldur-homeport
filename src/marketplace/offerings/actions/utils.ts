@@ -28,6 +28,6 @@ export const mainActions = [
   {
     key: 'update',
     value: 'update',
-    label: 'Update',
+    label: 'Edit',
   },
 ];
