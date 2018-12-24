@@ -3408,6 +3408,10 @@ msgstr ""
 msgid "Name is required field."
 msgstr ""
 
+#: src/core/validators.ts
+msgid "Name is too short, names should be at least two alphanumeric characters."
+msgstr ""
+
 #: src/customer/create/customer-create-config.js
 msgid "Name of your organization."
 msgstr ""
