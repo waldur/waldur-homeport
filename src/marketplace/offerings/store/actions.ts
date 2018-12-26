@@ -39,3 +39,17 @@ export const loadOfferingStart = offeringUuid => ({
     offeringUuid,
   },
 });
+
+export const removeOfferingComponent = (component: string) => ({
+  type: constants.REMOVE_OFFERING_COMPONENT,
+  payload: {
+    component,
+  },
+});
+
+export const removeOfferingQuotas = (component: string) => ({
+  type: constants.REMOVE_OFFERING_QUOTAS,
+  payload: {
+    component,
+  },
+});

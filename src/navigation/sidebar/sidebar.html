@@ -29,9 +29,10 @@
           <span class="fa arrow" ng-if="::item.children"/>
         </a>
         <a ng-if="::item.action"
-          ng-click="item.action()">
+          ng-click="$ctrl.onMenuClick($event, item)">
           <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
           <span class="nav-label">{{ item.label | translate }}</span>
+          <span class="fa arrow" ng-if="::item.children"/>
         </a>
         <ul class="nav nav-second-level ng-hide"
           ng-show="item.expanded"

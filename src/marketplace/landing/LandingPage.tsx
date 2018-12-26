@@ -32,6 +32,6 @@ export const LandingPage = withTranslation((props: LandingPageProps) => (
     <h2 className="m-b-md">
       {props.translate('Recent additions')}
     </h2>
-    <OfferingGrid {...props.offerings}/>
+    <OfferingGrid width={2} {...props.offerings}/>
   </div>
 ));

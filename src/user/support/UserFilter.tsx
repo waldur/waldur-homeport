@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import { StringField, FormContainer, SelectField } from '@waldur/form-react';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 
 import './UserFilter.scss';
@@ -14,17 +14,6 @@ interface UserFilterProps extends TranslateProps {
   nativeNameVisible: boolean;
 }
 
-const statusOptions = [
-  {
-    name: 'Staff',
-    value: 'is_staff',
-  },
-  {
-    name: 'Support',
-    value: 'is_support',
-  },
-];
-
 const PureUserFilter = (props: UserFilterProps) => (
   <form className="form-inline" id="user-filter">
     <FormContainer
@@ -33,29 +22,72 @@ const PureUserFilter = (props: UserFilterProps) => (
       submitting={props.submitting}>
       <StringField
         label={props.translate('Full name')}
-        name="full_name"/>
+        name="full_name"
+        noUpdateOnBlur={true}
+      />
       {props.nativeNameVisible && (
         <StringField
           label={props.translate('Native name')}
-          name="native_name"/>
+          name="native_name"
+          noUpdateOnBlur={true}
+        />
       )}
       <StringField
         label={props.translate('ID code')}
-        name="civil_number"/>
+        name="civil_number"
+        noUpdateOnBlur={true}
+      />
       <StringField
         label={props.translate('Organization')}
-        name="organization"/>
+        name="organization"
+        noUpdateOnBlur={true}
+      />
       <StringField
         label={props.translate('Email')}
-        name="email"/>
+        name="email"
+        noUpdateOnBlur={true}
+      />
       <SelectField
         label={props.translate('Role')}
         name="role"
         placeholder={props.translate('Select role')}
-        options={statusOptions}
+        options={[
+          {
+            name: translate('Staff'),
+            value: 'is_staff',
+          },
+          {
+            name: translate('Support'),
+            value: 'is_support',
+          },
+        ]}
         labelKey="name"
         valueKey="value"
-        multi={true}/>
+        multi={true}
+        noUpdateOnBlur={true}
+      />
+      <SelectField
+        label={props.translate('Status')}
+        name="status"
+        placeholder={props.translate('Select status')}
+        options={[
+          {
+            name: translate('Any'),
+            value: undefined,
+          },
+          {
+            name: translate('Active'),
+            value: true,
+          },
+          {
+            name: translate('Disabled'),
+            value: false,
+          },
+        ]}
+        labelKey="name"
+        valueKey="value"
+        noUpdateOnBlur={true}
+      />
     </FormContainer>
   </form>
 );

@@ -88,8 +88,12 @@ export const dateTime = input => {
 };
 
 export const omit = (object, prop) => {
-  const { [prop]: _, ...rest } = object;
-  return rest;
+  if (prop in object) {
+    const { [prop]: _, ...rest } = object;
+    return rest;
+  } else {
+    return object;
+  }
 };
 
 export const toKeyValue = obj =>

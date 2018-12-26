@@ -1,4 +1,4 @@
-import { reset } from 'redux-form';
+import { reset, change } from 'redux-form';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
@@ -16,8 +16,9 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { setStep, loadDataSuccess, loadDataError } from './actions';
 import * as constants from './constants';
 import { STATES } from './constants';
+import { getPlans } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
-import { formatOfferingRequest } from './utils';
+import { formatOfferingRequest, planWithoutComponent, planWithoutQuotas } from './utils';
 
 function* loadData() {
   try {
@@ -28,6 +29,18 @@ function* loadData() {
   } catch {
     yield put(loadDataError());
   }
+}
+
+function* removeOfferingComponent(action) {
+  const plans = yield select(getPlans);
+  const newPlans = plans.map(plan => planWithoutComponent(plan, action.payload.component));
+  yield put(change(constants.FORM_ID, 'plans', newPlans));
+}
+
+function* removeOfferingQuotas(action) {
+  const plans = yield select(getPlans);
+  const newPlans = plans.map(plan => planWithoutQuotas(plan, action.payload.component));
+  yield put(change(constants.FORM_ID, 'plans', newPlans));
 }
 
 function* createOffering(action: Action<OfferingFormData>) {
@@ -110,6 +123,8 @@ function* loadOffering(action) {
 }
 
 export default function*() {
+  yield takeEvery(constants.REMOVE_OFFERING_COMPONENT, removeOfferingComponent);
+  yield takeEvery(constants.REMOVE_OFFERING_QUOTAS, removeOfferingQuotas);
   yield takeEvery(constants.LOAD_DATA_START, loadData);
   yield takeEvery(constants.LOAD_OFFERING_START, loadOffering);
   yield takeEvery(constants.createOffering.REQUEST, createOffering);

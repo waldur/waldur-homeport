@@ -12,7 +12,16 @@ jest.mock('@waldur/core/services', () => ({
 }));
 
 const renderWrapper = props =>
-  shallow(<PureOpenstackInstanceCheckoutSummary translate={translate} {...props} />);
+  shallow(
+    (
+      <PureOpenstackInstanceCheckoutSummary
+        loading={false}
+        loaded={true}
+        translate={translate}
+        {...props}
+      />
+    )
+  );
 
 describe('OpenstackInstanceCheckoutSummary', () => {
   const dataWithFlavor = {...dataWithoutFlavor, formData: {...dataWithoutFlavor.formData, flavor}};

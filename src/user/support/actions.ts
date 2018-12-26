@@ -29,3 +29,5 @@ export const showUserRemovalMessage = resolve => {
 };
 
 export const updateUser = createFormAction('waldur/user/UPDATE');
+export const activateUser = createFormAction('waldur/user/ACTIVATE');
+export const deactivateUser = createFormAction('waldur/user/DEACTIVATE');

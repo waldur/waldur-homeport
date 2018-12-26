@@ -9,12 +9,14 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   type: string;
   component: React.ComponentType<OfferingConfigurationFormProps>;
   detailsComponent?: React.ComponentType<OrderItemDetailsProps>;
+  checkoutSummaryComponent?: any;
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
   label: string;
   showOptions?: boolean;
   showComponents?: boolean;
   providerType?: string;
   attributes?(): Attribute[];
+  disableOfferingCreation?: boolean;
 }
 
 export interface Option {
@@ -39,8 +41,13 @@ export function getFormSerializer(offeringType) {
   return REGISTRY[offeringType].serializer || (x => x);
 }
 
+export function getCheckoutSummaryComponent(offeringType) {
+  return REGISTRY[offeringType].checkoutSummaryComponent;
+}
+
 export function getOfferingTypes(): Option[] {
-  return Object.keys(REGISTRY).map(key => ({
+  const keys = Object.keys(REGISTRY).filter(key => !REGISTRY[key].disableOfferingCreation);
+  return keys.map(key => ({
     value: key,
     label: REGISTRY[key].label,
   }));

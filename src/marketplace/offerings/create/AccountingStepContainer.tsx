@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { withTranslation } from '@waldur/i18n';
 import { showComponentsList } from '@waldur/marketplace/common/registry';
 
+import { removeOfferingComponent, removeOfferingQuotas } from '../store/actions';
 import { getType } from '../store/selectors';
 import { AccountingStep } from './AccountingStep';
 
@@ -13,6 +14,11 @@ const mapStateToProps = state => {
   return {showComponents, type};
 };
 
-const connector = compose(connect(mapStateToProps), withTranslation);
+const mapStateToDispatch = {
+  removeOfferingComponent,
+  removeOfferingQuotas,
+};
+
+const connector = compose(connect(mapStateToProps, mapStateToDispatch), withTranslation);
 
 export const AccountingStepContainer = connector(AccountingStep);

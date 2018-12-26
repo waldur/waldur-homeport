@@ -59,18 +59,18 @@ export function createPullAction(_): ResourceAction {
   };
 }
 
-export function validateState(state: ResourceState): (ctx: ActionContext) => string {
+export function validateState(...validStates: ResourceState[]): (ctx: ActionContext) => string {
   return ctx => {
-    if (ctx.resource.state !== state) {
-      return translate('Resource should be {state}.', {state});
+    if (!validStates.includes(ctx.resource.state)) {
+      return translate('Valid states for operation: {validStates}.', {validStates: validStates.join(', ')});
     }
   };
 }
 
-export function validateRuntimeState(state: string): (ctx: ActionContext) => string {
+export function validateRuntimeState(...validStates: string[]): (ctx: ActionContext) => string {
   return ctx => {
-    if (ctx.resource.runtime_state !== state) {
-      return translate('Resource should be {state}.', {state});
+    if (!validStates.includes(ctx.resource.runtime_state)) {
+      return translate('Valid runtime states for operation: {validStates}.', {validStates: validStates.join(', ')});
     }
   };
 }

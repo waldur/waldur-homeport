@@ -220,7 +220,7 @@ export function flavorFormatter($filter, flavor) {
   return `${flavor.name} (${props})`;
 }
 
-function flavorComparator(a, b) {
+export function flavorComparator(a, b) {
   if (a.disabled < b.disabled) return -1;
   if (a.disabled > b.disabled) return 1;
 
@@ -235,7 +235,7 @@ function flavorComparator(a, b) {
   return 0;
 }
 
-function flavorValidator(model, choice) {
+export function flavorValidator(model, choice) {
   if (!model.image) {
     return true;
   }

@@ -40,10 +40,12 @@ export function PureResourceSummaryBase<T extends Resource = any>(props: Resourc
         label={translate('Error message')}
         value={formatErrorField(props)}
       />
-      <Field
-        label={translate('Provider')}
-        value={resource.service_name}
-      />
+      {!props.resource.marketplace_offering_uuid && (
+        <Field
+          label={translate('Provider')}
+          value={resource.service_name}
+        />
+      )}
       <Field
         label={translate('Description')}
         value={resource.description}

@@ -12,10 +12,10 @@ interface AppstoreListDialogProps extends TranslateProps {
   show: boolean;
   columns: SelectDialogFieldColumn[];
   choices: SelectDialogFieldChoice[];
-  input: CustomComponentInputProps;
+  input: CustomComponentInputProps<SelectDialogFieldChoice>;
   filterOptions?: FilterOptions;
   onClose(): void;
-  onSelect(value: string): void;
+  onSelect(value: SelectDialogFieldChoice): void;
 }
 
 export const AppstoreListDialog = withTranslation((props: AppstoreListDialogProps) => (

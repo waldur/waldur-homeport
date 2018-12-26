@@ -78,6 +78,8 @@ export interface Offering {
   plans?: Plan[];
   type: string;
   state: string;
+  scope?: string;
+  scope_uuid?: string;
 }
 
 export interface Screenshot {

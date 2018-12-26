@@ -15,7 +15,12 @@ export const SelectField = (props: SelectFieldProps) => {
       name={input.name}
       value={input.value}
       onChange={value => input.onChange(value)}
-      onBlur={() => {/* Noop */}}
+      onBlur={() => {
+        if (!props.noUpdateOnBlur) {
+          // See also: https://github.com/erikras/redux-form/issues/1185
+          props.input.onBlur(props.input.value);
+        }
+      }}
     />
   );
 };

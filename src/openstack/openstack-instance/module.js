@@ -9,6 +9,7 @@ import openstackInstanceDataVolume from './openstack-instance-data-volume';
 import actions from './actions';
 import { OpenStackInstanceSummary } from './OpenStackInstanceSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
+import './marketplace';
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.Instance', OpenStackInstanceSummary);

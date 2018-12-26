@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import { required, getLatinNameValidators } from '@waldur/core/validators';
-import { FormContainer, TextField, StringField, SelectField } from '@waldur/form-react';
+import { FormContainer, TextField, StringField, SelectField, NumberField } from '@waldur/form-react';
 import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
+import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
 import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
@@ -71,6 +72,15 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
               case 'boolean':
                 OptionField = AwesomeCheckboxField;
                 params = {hideLabel: true};
+                break;
+
+              case 'integer':
+                OptionField = NumberField;
+                params = {
+                  parse: parseIntField,
+                  format: formatIntField,
+                };
+                break;
             }
             return (
               <OptionField

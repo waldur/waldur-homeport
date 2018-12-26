@@ -14,6 +14,8 @@ export interface FormField {
   disabled?: boolean;
   hideLabel?: boolean;
   normalize?: Normalizer;
+  // See also: https://github.com/erikras/redux-form/issues/2768#issuecomment-292770517
+  noUpdateOnBlur?: boolean;
 }
 
 export interface SelectDialogFieldChoice {
@@ -28,4 +30,5 @@ export interface SelectDialogFieldColumn {
   name: string;
   label: React.ReactNode;
   headerClass?: string;
+  filter?(input: string): string;
 }

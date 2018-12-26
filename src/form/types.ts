@@ -1,7 +1,7 @@
-export interface CustomComponentInputProps {
+export interface CustomComponentInputProps<T> {
   name: string;
-  value: string;
-  onChange(name?: string): void;
+  value: T;
+  onChange(value?: T): void;
 }
 
 export interface FilterOptions {

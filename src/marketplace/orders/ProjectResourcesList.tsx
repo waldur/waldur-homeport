@@ -60,10 +60,10 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'ProjectResourcesList',
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: props => props.project ? ({
     project_uuid: props.project.uuid,
     category_uuid: props.category_uuid,
-  }),
+  }) : {},
 };
 
 const mapStateToProps = state => ({

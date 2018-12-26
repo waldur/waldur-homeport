@@ -65,6 +65,7 @@ export const QuotaUsageBarChartDescription = ({quota}) => (
           id={quota.name}
           label={getExceeds(quota)}
         >
+          {' '}
           <i className="fa fa-exclamation-triangle" />
         </Tooltip>
       )}

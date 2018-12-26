@@ -8,6 +8,7 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 interface ComponentFormProps {
   component: string;
+  removeOfferingQuotas(): void;
 }
 
 export const ComponentForm = (props: ComponentFormProps) => (
@@ -30,19 +31,23 @@ export const ComponentForm = (props: ComponentFormProps) => (
         validate={required}
       />
     </FormGroup>
-    <FormGroup label={translate('Measured unit')} required={true}>
+    <FormGroup label={translate('Measured unit')}>
       <Field
         component="input"
         className="form-control"
         name={`${props.component}.measured_unit`}
         type="text"
-        validate={required}
       />
     </FormGroup>
     <FormGroup label={translate('Accounting type')} required={true}>
       <Field
         name={`${props.component}.billing_type`}
         validate={required}
+        onChange={(_, newOption, prevOption) => {
+          if (newOption && prevOption && newOption.value === 'usage' && prevOption.value === 'fixed') {
+            props.removeOfferingQuotas();
+          }
+        }}
         component={fieldProps => (
           <Select
             value={fieldProps.input.value}
