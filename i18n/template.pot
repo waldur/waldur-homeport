@@ -988,6 +988,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: src/slurm/slurm-allocation-checkout-summary.html
 msgid "Checkout summary"
@@ -1558,6 +1559,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/openstack-volume-config.js
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
@@ -2825,6 +2827,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: src/slurm/slurm-allocation-checkout-summary.html
 msgid "Invoiced to"
@@ -3580,6 +3583,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "No items yet."
 msgstr ""
@@ -3759,6 +3763,7 @@ msgstr ""
 msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
 msgstr ""
 
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.js
 msgid "Note that this volume is charged as part of <strong>{serviceName}</strong> package."
 msgstr ""
@@ -3979,6 +3984,10 @@ msgstr ""
 msgid "OpenStack package {tenant_name} has been deleted."
 msgstr ""
 
+#: src/openstack/openstack-volume/marketplace.ts
+msgid "OpenStack volume"
+msgstr ""
+
 #: src/issues/list/issues-short-list.html
 msgid "Opened by"
 msgstr ""
@@ -4192,6 +4201,7 @@ msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Package limits"
 msgstr ""
@@ -4601,6 +4611,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Price per day"
 msgstr ""
@@ -4621,6 +4632,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Price per month"
 msgstr ""
@@ -4704,6 +4716,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: src/resource/list/resource-global-list.js
 #: src/slurm/slurm-allocation-checkout-summary.html
@@ -6109,6 +6122,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/openstack/openstack-volume/openstack-volume-config.js
 #: src/resource-import/import-volumes-list.js
@@ -6272,6 +6286,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: src/project/project-workspace.js
 #: src/project/routes.js
@@ -6939,6 +6954,7 @@ msgid "Unable to generate service provider API secret code."
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Unable to get checkout summary data."
 msgstr ""
 
@@ -7637,6 +7653,7 @@ msgstr ""
 msgid "Volume has been updated."
 msgstr ""
 
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: src/openstack/openstack-volume/openstack-volume-config.js
 #: src/openstack/openstack-volume/snapshot-create.html
