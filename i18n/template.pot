@@ -161,6 +161,10 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+#: src/user/support/UserActivateButton.tsx
+msgid "Active user will be able to login into the portal."
+msgstr ""
+
 #: src/issues/workspace/issues-activity-stream.html
 msgid "Activity stream"
 msgstr ""
@@ -2587,6 +2591,10 @@ msgstr ""
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
 #: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 msgid "Inactive notebook instance time to live"
+msgstr ""
+
+#: src/user/support/UserActivateButton.tsx
+msgid "Inactive user will not be able to login into the portal."
 msgstr ""
 
 #: src/issues/types/constants.ts

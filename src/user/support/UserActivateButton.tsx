@@ -2,7 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { Tooltip } from '@waldur/core/Tooltip';
+import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
 import ActionButton from '@waldur/table-react/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails, User } from '@waldur/workspace/types';
@@ -16,10 +17,17 @@ interface UserActivateButtonProps extends TranslateProps {
 }
 
 const PureUserActivateButton = (props: UserActivateButtonProps) => props.user.is_staff ? (
-  <ActionButton
-    title={props.row.is_active ? props.translate('Deactivate') : props.translate('Activate')}
-    action={props.onClick}
-  />
+  <Tooltip
+    id="user-activate"
+    label={props.row.is_active ?
+      translate('Inactive user will not be able to login into the portal.') :
+      translate('Active user will be able to login into the portal.')}
+    >
+    <ActionButton
+      title={props.row.is_active ? props.translate('Deactivate') : props.translate('Activate')}
+      action={props.onClick}
+    />
+  </Tooltip>
 ) : null;
 
 const mapStatToProps = state => ({
