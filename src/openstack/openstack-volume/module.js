@@ -8,6 +8,7 @@ import openstackVolumeSnapshots from './openstack-volume-snapshots';
 import { OpenStackVolumeSummary } from './OpenStackVolumeSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { latinName } from '@waldur/resource/actions/constants';
+import './marketplace';
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.Volume', OpenStackVolumeSummary);

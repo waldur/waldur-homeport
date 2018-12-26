@@ -30,7 +30,7 @@ interface OpenstackInstanceFormGroupProps {
   children: React.ReactNode;
 }
 
-const OpenstackInstanceFormGroup = ({label, required, children}: OpenstackInstanceFormGroupProps) => (
+export const OpenstackInstanceFormGroup = ({label, required, children}: OpenstackInstanceFormGroupProps) => (
   <>
   {label ? (
     <FormGroup
