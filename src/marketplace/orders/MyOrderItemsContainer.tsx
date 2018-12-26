@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { MyOrderItemsList } from './MyOrderItemsList';
 import { OrderItemsFilter } from './OrderItemsFilter';
-import { OrderItemsList } from './OrderItemsList';
 
 const OrderItemsContainer = () => (
   <div className="ibox-content">
-    <OrderItemsFilter showOrganizationFilter={true}/>
-    <OrderItemsList/>
+    <OrderItemsFilter showOrganizationFilter={false}/>
+    <MyOrderItemsList/>
   </div>
 );
 
