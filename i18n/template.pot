@@ -144,6 +144,10 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
+#: src/user/support/UserActivateButton.tsx
+msgid "Activate"
+msgstr ""
+
 #: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "Activate a virtual environment with following command:"
 msgstr ""
@@ -153,6 +157,7 @@ msgid "Activating"
 msgstr ""
 
 #: src/experts/requests/list/expert-request-customer-list.js
+#: src/user/support/UserFilter.tsx
 msgid "Active"
 msgstr ""
 
@@ -416,6 +421,7 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/openstack/openstack-security-groups/utils.ts
+#: src/user/support/UserFilter.tsx
 msgid "Any"
 msgstr ""
 
@@ -1468,6 +1474,10 @@ msgstr ""
 msgid "Date joined"
 msgstr ""
 
+#: src/user/support/UserActivateButton.tsx
+msgid "Deactivate"
+msgstr ""
+
 #: src/resource/state/constants.js
 msgid "Deactivating"
 msgstr ""
@@ -1653,6 +1663,10 @@ msgstr ""
 #: src/customer/details/customer-threshold.html
 #: src/project/project-policies.html
 msgid "Disable provisioning when threshold is reached."
+msgstr ""
+
+#: src/user/support/UserFilter.tsx
+msgid "Disabled"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentForm.tsx
@@ -5905,6 +5919,10 @@ msgstr ""
 msgid "Select state..."
 msgstr ""
 
+#: src/user/support/UserFilter.tsx
+msgid "Select status"
+msgstr ""
+
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 msgid "Select subnet"
@@ -6193,6 +6211,7 @@ msgstr ""
 msgid "Snapshots count"
 msgstr ""
 
+#: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 #: src/user/support/utils.ts
 msgid "Staff"
@@ -6267,6 +6286,8 @@ msgstr ""
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserFilter.tsx
+#: src/user/support/UserList.tsx
 msgid "Status"
 msgstr ""
 
@@ -6365,6 +6386,7 @@ msgid "Summary"
 msgstr ""
 
 #: src/navigation/header/support-link.html
+#: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Support"
 msgstr ""
@@ -6842,6 +6864,10 @@ msgstr ""
 msgid "Unable to activate account."
 msgstr ""
 
+#: src/user/support/effects.ts
+msgid "Unable to activate user."
+msgstr ""
+
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to add item to shopping cart."
 msgstr ""
@@ -6901,6 +6927,10 @@ msgstr ""
 
 #: src/offering/appstore-offering.js
 msgid "Unable to create request for a turnkey solution."
+msgstr ""
+
+#: src/user/support/effects.ts
+msgid "Unable to deactivate user."
 msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-summary.js
@@ -7314,6 +7344,14 @@ msgstr ""
 #: src/user/support/UserDetailsDialog.tsx
 #: src/user/user-popover.html
 msgid "User details"
+msgstr ""
+
+#: src/user/support/effects.ts
+msgid "User has been activated."
+msgstr ""
+
+#: src/user/support/effects.ts
+msgid "User has been deactivated."
 msgstr ""
 
 #: src/auth/callbacks/auth-logout-completed.html

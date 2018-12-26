@@ -1,3 +1,4 @@
+import { post } from '@waldur/core/api';
 import { $http, ENV } from '@waldur/core/services';
 
 export const updateUser = user =>
@@ -13,3 +14,9 @@ export const updateUser = user =>
       agree_with_policy: user.agree_with_policy,
       token_lifetime: user.token_lifetime.value,
     });
+
+export const activateUser = userUuid =>
+    post(`/users/${userUuid}/activate/`);
+
+export const deactivateUser = userUuid =>
+  post(`/users/${userUuid}/deactivate/`);
