@@ -21,6 +21,7 @@ export interface UserDetails extends User {
   is_support: boolean;
   token: string;
   agreement_date: string;
+  is_active: boolean;
 }
 
 export interface Customer {

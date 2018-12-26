@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -7,7 +8,15 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import BooleanField from '@waldur/table-react/BooleanField';
 import { Table, connectTable, createFetcher } from '@waldur/table-react/index';
 
+import { UserActivateButton } from './UserActivateButton';
 import { UserDetailsButton } from './UserDetailsButton';
+
+const UserActionsButton = props => (
+  <ButtonGroup>
+    <UserDetailsButton {...props}/>
+    <UserActivateButton {...props}/>
+  </ButtonGroup>
+);
 
 const renderFieldOrDash = field => {
   return field ? field : '\u2014';
@@ -31,6 +40,10 @@ const OrganizationField = ({ row }) => (
 
 const StaffStatusField = ({ row }) => {
   return <BooleanField value={row.is_staff}/>;
+};
+
+const UserStatusField = ({ row }) => {
+  return <BooleanField value={row.is_active}/>;
 };
 
 const OrganizationRolesField = ({row}) => {
@@ -114,8 +127,13 @@ const TableComponent = props => {
         className: 'text-center',
       },
       {
+        title: translate('Status'),
+        render: UserStatusField,
+        className: 'text-center',
+      },
+      {
         title: translate('Actions'),
-        render: UserDetailsButton,
+        render: UserActionsButton,
         className: 'text-center col-md-2',
       },
     ]}
@@ -139,10 +157,30 @@ export const formatRoleFilter = filter => {
   return filter;
 };
 
+export const formatStatusFilter = filter => {
+  if (filter && filter.status) {
+    if (filter.status.value === true) {
+      return {
+        ...filter,
+        is_active: true,
+      };
+    }
+    if (filter.status.value === false) {
+      return {
+        ...filter,
+        is_active: false,
+      };
+    }
+  }
+  return filter;
+};
+
+const formatFilter = compose(formatStatusFilter, formatRoleFilter);
+
 const TableOptions = {
   table: 'userList',
   fetchData: createFetcher('users'),
-  mapPropsToFilter: props => formatRoleFilter(props.userFilter),
+  mapPropsToFilter: props => formatFilter(props.userFilter),
   exportFields: [
     'Full name',
     'Username',
