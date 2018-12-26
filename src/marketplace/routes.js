@@ -144,7 +144,18 @@ export default function routes($stateProvider) {
       template: '<marketplace-vendor-offerings></marketplace-vendor-offerings>',
       parent: 'organization',
       data: {
-        pageTitle: gettext('Offerings'),
+        pageTitle: gettext('Public offerings'),
+        feature: 'marketplace',
+        sidebarState: 'marketplace-services',
+      }
+    })
+
+    .state('marketplace-my-offerings', {
+      url: 'marketplace-my-offerings/',
+      template: '<marketplace-my-offerings></marketplace-my-offerings>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('My offerings'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
       }
@@ -214,6 +225,17 @@ export default function routes($stateProvider) {
     .state('marketplace-order-items', {
       url: 'marketplace-order-items/',
       template: '<marketplace-order-items-list></marketplace-order-items-list>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('Orders'),
+        feature: 'marketplace',
+        sidebarState: 'marketplace-services',
+      }
+    })
+
+    .state('marketplace-my-order-items', {
+      url: 'marketplace-my-order-items/',
+      template: '<marketplace-my-order-items-list></marketplace-my-order-items-list>',
       parent: 'organization',
       data: {
         pageTitle: gettext('Orders'),

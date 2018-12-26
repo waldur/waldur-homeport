@@ -56,11 +56,12 @@ export const TableComponent = props => {
   );
 };
 
-const TableOptions = {
+export const TableOptions = {
   table: TABLE_NAME,
   fetchData: createFetcher('marketplace-offerings'),
   mapPropsToFilter: props => ({
     customer_uuid: props.customer.uuid,
+    billable: true,
   }),
   exportRow: row => [
     row.name,

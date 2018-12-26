@@ -9,6 +9,7 @@ import { getCustomerList } from '@waldur/marketplace/common/api';
 import { AutocompleteField } from '@waldur/marketplace/landing/AutocompleteField';
 import { offeringsAutocomplete } from '@waldur/marketplace/landing/store/api';
 import { getCustomer } from '@waldur/workspace/selectors';
+import { Customer } from '@waldur/workspace/types';
 
 const organizationAutocomplete = (query: string) => {
   const params: any = {
@@ -27,7 +28,15 @@ const getStates = () => [
   {value: 'terminated', label: translate('Terminated')},
 ];
 
-const PureOrderItemsFilter = props => (
+interface OwnProps {
+  showOrganizationFilter: boolean;
+}
+
+interface StateProps {
+  customer: Customer;
+}
+
+const PureOrderItemsFilter = (props: OwnProps & StateProps) => (
   <div className="row">
     <div className="form-group col-sm-3">
       <label className="control-label">
@@ -48,24 +57,26 @@ const PureOrderItemsFilter = props => (
         )}
       />
     </div>
-    <div className="form-group col-sm-3">
-      <label className="control-label">
-        {translate('Client organization')}
-      </label>
-      <Field
-        name="organization"
-        component={fieldProps => (
-          <Async
-            placeholder={translate('Select organization...')}
-            loadOptions={organizationAutocomplete}
-            valueKey="uuid"
-            labelKey="name"
-            value={fieldProps.input.value}
-            onChange={value => fieldProps.input.onChange(value)}
-          />
-        )}
-      />
-    </div>
+    {props.showOrganizationFilter && (
+      <div className="form-group col-sm-3">
+        <label className="control-label">
+          {translate('Client organization')}
+        </label>
+        <Field
+          name="organization"
+          component={fieldProps => (
+            <Async
+              placeholder={translate('Select organization...')}
+              loadOptions={organizationAutocomplete}
+              valueKey="uuid"
+              labelKey="name"
+              value={fieldProps.input.value}
+              onChange={value => fieldProps.input.onChange(value)}
+            />
+          )}
+        />
+      </div>
+    )}
     <div className="form-group col-sm-3">
       <label className="control-label">
         {translate('State')}
@@ -90,8 +101,8 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  connect(mapStateToProps),
-  reduxForm({form: 'OrderItemFilter'}),
+  reduxForm<{}, OwnProps>({form: 'OrderItemFilter'}),
+  connect<StateProps, {}, OwnProps>(mapStateToProps),
 );
 
-export const OrderItemsFilter = enhance(PureOrderItemsFilter);
+export const OrderItemsFilter = enhance(PureOrderItemsFilter) as React.ComponentType<OwnProps>;

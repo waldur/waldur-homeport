@@ -3,9 +3,21 @@ import { getCategories } from '@waldur/marketplace/common/api';
 // @ngInject
 export default function registerSidebarExtension(SidebarExtensionService, currentStateService, features) {
   SidebarExtensionService.register('customer', () => {
+    let items = [
+      {
+        key: 'marketplace',
+        icon: 'fa-shopping-cart',
+        label: gettext('Marketplace'),
+        feature: 'marketplace',
+        link: 'marketplace-landing-customer({uuid: $ctrl.context.customer.uuid})',
+        index: 210,
+      },
+    ];
+
     return currentStateService.getCustomer().then(customer => {
       if (customer && customer.is_service_provider) {
         return [
+          ...items,
           {
             label: gettext('My services'),
             icon: 'fa-shopping-cart',
@@ -14,7 +26,12 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
             index: 310,
             children: [
               {
-                label: gettext('Offerings'),
+                label: gettext('My offerings'),
+                icon: 'fa-file',
+                link: 'marketplace-my-offerings({uuid: $ctrl.context.customer.uuid})',
+              },
+              {
+                label: gettext('Public offerings'),
                 icon: 'fa-file',
                 link: 'marketplace-vendor-offerings({uuid: $ctrl.context.customer.uuid})',
               },
@@ -28,13 +45,35 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
           }
         ];
       } else {
-        return [];
+        return [
+          ...items,
+          {
+            label: gettext('My services'),
+            icon: 'fa-shopping-cart',
+            feature: 'marketplace',
+            link: 'marketplace-services',
+            index: 310,
+            children: [
+              {
+                label: gettext('My offerings'),
+                icon: 'fa-file',
+                link: 'marketplace-my-offerings({uuid: $ctrl.context.customer.uuid})',
+              },
+              {
+                key: 'marketplace',
+                icon: 'fa-file',
+                label: gettext('Orders'),
+                link: 'marketplace-my-order-items({uuid: $ctrl.context.customer.uuid})',
+              },
+            ]
+          }
+        ];
       }
     });
   });
 
   SidebarExtensionService.register('project', () => {
-    return [
+    let items = [
       {
         key: 'marketplace',
         icon: 'fa-shopping-cart',
@@ -51,9 +90,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         index: 220,
       }
     ];
-  });
 
-  SidebarExtensionService.register('project', () => {
     if (features.isVisible('marketplace')) {
       return getCategories({params: {field: ['uuid', 'title']}}).then(categories => {
         const children = categories.map(category => ({
@@ -63,6 +100,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
           countFieldKey: `marketplace_category_${category.uuid}`,
         }));
         return [
+          ...items,
           {
             label: gettext('Resources'),
             link: 'marketplace-resources',
@@ -73,20 +111,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         ];
       });
     } else {
-      return [];
+      return items;
     }
-  });
-
-  SidebarExtensionService.register('customer', () => {
-    return [
-      {
-        key: 'marketplace',
-        icon: 'fa-shopping-cart',
-        label: gettext('Marketplace'),
-        feature: 'marketplace',
-        link: 'marketplace-landing-customer({uuid: $ctrl.context.customer.uuid})',
-        index: 210,
-      },
-    ];
   });
 }

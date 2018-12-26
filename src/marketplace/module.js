@@ -11,10 +11,12 @@ import marketplaceProviderDetails from './service-providers/CustomerDetailsConta
 import marketplaceServiceProviderManagement from './service-providers/ServiceProviderManagement';
 import marketplaceServiceProviderSecretCodeGenerateConfirm from './service-providers/ServiceProviderSecretCodeGenerateConfirm';
 import marketplaceVendorOfferings from './offerings/OfferingsList';
+import marketplaceMyOfferings from './offerings/MyOfferingsList';
 import marketplaceOfferingCreate from './offerings/create/OfferingCreateContainer';
 import marketplaceOfferingUpdate from './offerings/update/OfferingUpdateContainer';
 import marketplaceOrdersList from './orders/OrdersList';
 import marketplaceOrderItemsList from './orders/OrderItemsContainer';
+import marketplaceMyOrderItemsList from './orders/MyOrderItemsContainer';
 import marketplaceOrderDetails from './orders/OrderDetailsContainer';
 import marketplaceOrderItemDetails from './orders/OrderItemDetailsContainer';
 import marketplaceProjectResourcesList from './orders/ProjectResourcesContainer';
@@ -38,10 +40,12 @@ export default module => {
   module.component('marketplaceServiceProviderManagement', marketplaceServiceProviderManagement);
   module.component('marketplaceServiceProviderSecretCodeGenerateConfirm', marketplaceServiceProviderSecretCodeGenerateConfirm);
   module.component('marketplaceVendorOfferings', marketplaceVendorOfferings);
+  module.component('marketplaceMyOfferings', marketplaceMyOfferings);
   module.component('marketplaceOfferingCreate', marketplaceOfferingCreate);
   module.component('marketplaceOfferingUpdate', marketplaceOfferingUpdate);
   module.component('marketplaceOrdersList', marketplaceOrdersList);
   module.component('marketplaceOrderItemsList', marketplaceOrderItemsList);
+  module.component('marketplaceMyOrderItemsList', marketplaceMyOrderItemsList);
   module.component('marketplaceProjectResourcesList', marketplaceProjectResourcesList);
   module.component('marketplaceOrderDetails', marketplaceOrderDetails);
   module.component('marketplaceOrderItemDetails', marketplaceOrderItemDetails);

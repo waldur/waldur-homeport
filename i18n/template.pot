@@ -3336,6 +3336,11 @@ msgstr ""
 msgid "Motivation"
 msgstr ""
 
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
+msgid "My offerings"
+msgstr ""
+
 #: src/marketplace/sidebar.js
 msgid "My services"
 msgstr ""
@@ -3879,9 +3884,7 @@ msgid "Offering {offering_name} has been deleted."
 msgstr ""
 
 #: src/marketplace/offerings/OfferingsList.tsx
-#: src/marketplace/routes.js
 #: src/marketplace/service-providers/CustomerDetailsTable.tsx
-#: src/marketplace/sidebar.js
 msgid "Offerings"
 msgstr ""
 
@@ -4967,6 +4970,11 @@ msgstr ""
 
 #: src/user/keys/key-create.html
 msgid "Public key"
+msgstr ""
+
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
+msgid "Public offerings"
 msgstr ""
 
 #: src/resource/state/constants.js
