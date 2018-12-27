@@ -39,6 +39,7 @@ function OpenstackSecurityGroupsListController(
       options.columns = [
         {
           title: gettext('Name'),
+          orderField: 'name',
           render: row => this.renderResourceName(row)
         },
         {

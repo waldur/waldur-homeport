@@ -27,6 +27,7 @@ function OpenstackSubnetsListController(
         {
           title: gettext('Name'),
           className: 'all',
+          orderField: 'name',
           render: function(row) {
             return vm.renderResourceName(row);
           }

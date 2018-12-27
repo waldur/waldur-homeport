@@ -223,7 +223,8 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
           }
           return angular.extend({}, column, {
             render: render,
-            title: title
+            title: title,
+            orderable: column.hasOwnProperty('orderField'),
           });
         });
         columns = columns.filter(function(column) {
