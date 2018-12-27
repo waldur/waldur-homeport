@@ -4055,6 +4055,7 @@ msgstr ""
 msgid "Order summary"
 msgstr ""
 
+#: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
@@ -5887,6 +5888,10 @@ msgstr ""
 msgid "Select provider type"
 msgstr ""
 
+#: src/marketplace/orders/OrderItemsFilter.tsx
+msgid "Select provider..."
+msgstr ""
+
 #: src/issues/types/issue-type-select.html
 msgid "Select request type"
 msgstr ""
@@ -6013,6 +6018,7 @@ msgid "Service name"
 msgstr ""
 
 #: src/marketplace/details/LeafletMap.tsx
+#: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Service provider"
 msgstr ""
 

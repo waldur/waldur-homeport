@@ -17,6 +17,7 @@ import marketplaceOfferingUpdate from './offerings/update/OfferingUpdateContaine
 import marketplaceOrdersList from './orders/OrdersList';
 import marketplaceOrderItemsList from './orders/OrderItemsContainer';
 import marketplaceMyOrderItemsList from './orders/MyOrderItemsContainer';
+import marketplaceSupportOrderItemsList from './orders/SupportOrderItemsContainer';
 import marketplaceOrderDetails from './orders/OrderDetailsContainer';
 import marketplaceOrderItemDetails from './orders/OrderItemDetailsContainer';
 import marketplaceProjectResourcesList from './orders/ProjectResourcesContainer';
@@ -46,6 +47,7 @@ export default module => {
   module.component('marketplaceOrdersList', marketplaceOrdersList);
   module.component('marketplaceOrderItemsList', marketplaceOrderItemsList);
   module.component('marketplaceMyOrderItemsList', marketplaceMyOrderItemsList);
+  module.component('marketplaceSupportOrderItemsList', marketplaceSupportOrderItemsList);
   module.component('marketplaceProjectResourcesList', marketplaceProjectResourcesList);
   module.component('marketplaceOrderDetails', marketplaceOrderDetails);
   module.component('marketplaceOrderItemDetails', marketplaceOrderItemDetails);

@@ -1,3 +1,5 @@
+import { checkPermission } from '@waldur/issues/routes';
+
 // @ngInject
 export default function routes($stateProvider) {
   $stateProvider
@@ -241,6 +243,19 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Orders'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
+      }
+    })
+
+    .state('marketplace-support-order-items', {
+      url: 'order-items/',
+      template: '<marketplace-support-order-items-list></marketplace-support-order-items-list>',
+      parent: 'support',
+      data: {
+        feature: 'marketplace',
+        pageTitle: gettext('Orders'),
+      },
+      resolve: {
+        permission: checkPermission,
       }
     })
 
