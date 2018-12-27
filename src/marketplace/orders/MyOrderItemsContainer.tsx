@@ -7,7 +7,7 @@ import { OrderItemsFilter } from './OrderItemsFilter';
 
 const OrderItemsContainer = () => (
   <div className="ibox-content">
-    <OrderItemsFilter showOrganizationFilter={false}/>
+    <OrderItemsFilter/>
     <MyOrderItemsList/>
   </div>
 );

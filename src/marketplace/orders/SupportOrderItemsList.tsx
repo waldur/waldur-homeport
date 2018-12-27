@@ -8,11 +8,17 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { TableComponent } from './OrderItemsList';
 
 const TableOptions = {
-  table: 'MyOrderItemList',
+  table: 'SupportOrderItemList',
   fetchData: createFetcher('marketplace-order-items'),
   mapPropsToFilter: props => {
-    const filter: any = {customer_uuid: props.customer.uuid};
+    const filter: any = {};
     if (props.filter) {
+      if (props.filter.organization) {
+        filter.customer_uuid = props.filter.organization.uuid;
+      }
+      if (props.filter.provider) {
+        filter.provider_uuid = props.filter.provider.customer_uuid;
+      }
       if (props.filter.state) {
         filter.state = props.filter.state.value;
       }
@@ -31,4 +37,4 @@ const enhance = compose(
   connectTable(TableOptions),
 );
 
-export const MyOrderItemsList = enhance(TableComponent);
+export const SupportOrderItemsList = enhance(TableComponent);
