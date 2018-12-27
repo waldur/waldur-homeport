@@ -11,6 +11,7 @@ const resourceHeader = {
       $scope,
       $interval,
       ENV,
+      features,
       resourcesService,
       resourceUtils,
       ResourceBreadcrumbsService,
@@ -22,6 +23,7 @@ const resourceHeader = {
       this.$scope = $scope;
       this.$interval = $interval;
       this.ENV = ENV;
+      this.features = features;
       this.resourcesService = resourcesService;
       this.resourceUtils = resourceUtils;
       this.ResourceBreadcrumbsService = ResourceBreadcrumbsService;
@@ -73,8 +75,17 @@ const resourceHeader = {
     }
 
     modelNotFound() {
-      let state = this.resourceUtils.getListState(this.ENV.resourceCategory[this.model.resource_type]);
-      this.$state.go(state, {uuid: this.model.project_uuid});
+      if (this.features.isVisible('resources.legacy')) {
+        const state = this.resourceUtils.getListState(this.ENV.resourceCategory[this.model.resource_type]);
+        this.$state.go(state, {uuid: this.model.project_uuid});
+      } else if (this.features.isVisible('marketplace')) {
+        this.$state.go('marketplace-project-resources', {
+          category_uuid: this.model.marketplace_category_uuid,
+          uuid: this.model.project_uuid,
+        });
+      } else {
+        this.$state.go('project.details', {uuid: this.model.project_uuid});
+      }
     }
 
     reInitResource() {
