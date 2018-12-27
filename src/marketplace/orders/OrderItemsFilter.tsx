@@ -8,7 +8,7 @@ import { translate } from '@waldur/i18n';
 import { getCustomerList, getServiceProviderList } from '@waldur/marketplace/common/api';
 import { AutocompleteField } from '@waldur/marketplace/landing/AutocompleteField';
 import { offeringsAutocomplete } from '@waldur/marketplace/landing/store/api';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 const organizationAutocomplete = (query: string) => {
@@ -44,7 +44,7 @@ interface OwnProps {
 }
 
 interface StateProps {
-  customer: Customer;
+  offeringFilter: object;
 }
 
 const PureOrderItemsFilter = (props: OwnProps & StateProps) => (
@@ -61,7 +61,7 @@ const PureOrderItemsFilter = (props: OwnProps & StateProps) => (
               placeholder={translate('Select offering...')}
               loadOfferings={query => offeringsAutocomplete({
                 name: query,
-                customer_uuid: props.customer.uuid,
+                ...props.offeringFilter,
               })}
               value={fieldProps.input.value}
               onChange={value => fieldProps.input.onChange(value)}
@@ -129,9 +129,17 @@ const PureOrderItemsFilter = (props: OwnProps & StateProps) => (
   </div>
 );
 
-const mapStateToProps = state => ({
-  customer: getCustomer(state),
-});
+const mapStateToProps = state => {
+  const customer = getCustomer(state);
+  const workspace = getWorkspace(state);
+  if (workspace === 'organization') {
+    return {
+      offeringFilter: {
+        customer_uuid: customer.uuid,
+      },
+    };
+  }
+};
 
 const enhance = compose(
   reduxForm<{}, OwnProps>({form: 'OrderItemFilter'}),

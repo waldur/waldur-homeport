@@ -10,6 +10,7 @@ const SupportOrderItemsContainer = () => (
     <OrderItemsFilter
       showOrganizationFilter={true}
       showProviderFilter={true}
+      showOfferingFilter={true}
     />
     <SupportOrderItemsList/>
   </div>

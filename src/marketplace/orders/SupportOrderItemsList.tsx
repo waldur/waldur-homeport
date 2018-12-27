@@ -13,6 +13,9 @@ const TableOptions = {
   mapPropsToFilter: props => {
     const filter: any = {};
     if (props.filter) {
+      if (props.filter.offering) {
+        filter.offering_uuid = props.filter.offering.uuid;
+      }
       if (props.filter.organization) {
         filter.customer_uuid = props.filter.organization.uuid;
       }
