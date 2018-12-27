@@ -9,7 +9,6 @@ import { getCustomerList, getServiceProviderList } from '@waldur/marketplace/com
 import { AutocompleteField } from '@waldur/marketplace/landing/AutocompleteField';
 import { offeringsAutocomplete } from '@waldur/marketplace/landing/store/api';
 import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
 
 const organizationAutocomplete = (query: string) => {
   const params = {
