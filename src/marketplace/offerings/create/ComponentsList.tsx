@@ -34,9 +34,10 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => (
             <h4>{props.translate('Component #{index}', {index: index + 1})}</h4>
           </Panel.Heading>
           <Panel.Body>
-            <ComponentForm component={component} removeOfferingQuotas={() => {
-              props.removeOfferingQuotas(props.fields.get(index).type);
-            }}/>
+            <ComponentForm
+              component={component}
+              removeOfferingQuotas={() => props.removeOfferingQuotas(props.fields.get(index).type)}
+            />
           </Panel.Body>
         </Panel>
       ))}

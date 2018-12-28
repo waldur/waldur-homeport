@@ -1942,6 +1942,10 @@ msgstr ""
 msgid "Every month on the {days} of {months} at {time}"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Every month service provider can report up to the amount requested by user."
+msgstr ""
+
 #: src/resource/crontab.ts
 msgid "Every week"
 msgstr ""
@@ -3092,6 +3096,14 @@ msgstr ""
 msgid "Limit"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Limit amount"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Limit period"
+msgstr ""
+
 #: src/issues/issue-detail.html
 msgid "Link"
 msgstr ""
@@ -3263,6 +3275,14 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Maximal value"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Maximum monthly"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Maximum total"
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.html
@@ -6038,6 +6058,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/store/effects.ts
 msgid "Service provider API secret code has been generated."
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Service provider can report up to the requested amount over the whole active state of resource."
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
