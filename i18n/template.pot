@@ -3092,6 +3092,14 @@ msgstr ""
 msgid "Limit"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Limit amount"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Limit period"
+msgstr ""
+
 #: src/issues/issue-detail.html
 msgid "Link"
 msgstr ""
@@ -3263,6 +3271,14 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Maximal value"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Maximum monthly - every month service provider can report up to the amount requested by user."
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Maximum total - SP can report up to the requested amount over the whole active state of resource."
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.html

@@ -1,17 +1,27 @@
 import * as React from 'react';
 import Select from 'react-select';
-import { Field } from 'redux-form';
+import { Field, formValues } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-interface ComponentFormProps {
+interface Values {
+  billingType: {
+    value: 'usage' | 'fixed'
+  };
+}
+
+interface Props {
   component: string;
   removeOfferingQuotas(): void;
 }
 
-export const ComponentForm = (props: ComponentFormProps) => (
+const enhance = formValues(props => ({
+  billingType: `${props.component}.billing_type`,
+}));
+
+export const ComponentForm = enhance((props: Values & Props) => (
   <>
     <FormGroup label={translate('Internal name')} required={true}>
       <Field
@@ -61,5 +71,35 @@ export const ComponentForm = (props: ComponentFormProps) => (
         )}
       />
     </FormGroup>
+    {props.billingType && props.billingType.value === 'usage' && (
+      <>
+        <FormGroup label={translate('Limit period')}>
+          <Field
+            name={`${props.component}.limit_period`}
+            normalize={choice => choice.value}
+            component={fieldProps => (
+              <Select
+                value={fieldProps.input.value}
+                onChange={value => fieldProps.input.onChange(value)}
+                options={[
+                  {label: translate(`Maximum monthly - every month service provider can report up to the amount requested by user.`), value: 'month'},
+                  {label: translate(`Maximum total - SP can report up to the requested amount over the whole active state of resource.`), value: 'total'},
+                ]}
+                clearable={false}
+              />
+            )}
+          />
+        </FormGroup>
+        <FormGroup label={translate('Limit amount')}>
+          <Field
+            component="input"
+            className="form-control"
+            name={`${props.component}.limit_amount`}
+            type="number"
+            min={0}
+          />
+        </FormGroup>
+      </>
+    )}
   </>
-);
+)) as React.ComponentType<Props>;
