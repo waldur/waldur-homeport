@@ -1,5 +1,5 @@
 const breadcrumbsContainer = {
-  template: '<breadcrumbs items="$ctrl.items" active-item="$ctrl.activeItem"/>',
+  template: '<breadcrumbs items="$ctrl.items" active-item="$ctrl.activeItem"></breadcrumbs>',
   controller: class BreadcrumbsContainerController {
     // @ngInject
     constructor(BreadcrumbsService) {

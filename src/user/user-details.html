@@ -1,7 +1,7 @@
 <sidebar items="items" context="context"></sidebar>
 <div id="page-wrapper" ng-class="$state.current.data.pageClass || 'white-bg'" ng-if="currentUser">
-  <cookies-consent/>
-  <nc-header/>
+  <cookies-consent></cookies-consent>
+  <nc-header></nc-header>
   <div class="row wrapper white-bg page-heading">
     <div class="col-lg-12">
       <h2>{{ $state.current.data.pageTitle | translate }}</h2>
@@ -17,5 +17,5 @@
     </div>
   </div>
   <div class="footer-indent" ui-view></div>
-  <app-footer/>
+  <app-footer></app-footer>
 </div>

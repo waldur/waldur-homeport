@@ -86,7 +86,7 @@ function PayPalInvoicesListController(
     getRowActions: function(row) {
       if (this.isOwnerOrStaff) {
         const index = this.findIndexById(row);
-        return `<paypal-invoice-actions invoice="controller.list[${index}]"/>`;
+        return `<paypal-invoice-actions invoice="controller.list[${index}]"></paypal-invoice-actions>`;
       }
     },
     getUserFilter: function() {

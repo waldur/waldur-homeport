@@ -22,13 +22,13 @@ export default function offeringRoutes($stateProvider) {
 
   .state('offeringDetails', {
     url: '/offering/:uuid/',
-    template: '<offering-details/>',
+    template: '<offering-details></offering-details>',
     feature: 'offering',
   })
 
   .state('project.resources.offerings', {
     url: 'offerings/',
-    template: '<project-offerings-list/>',
+    template: '<project-offerings-list></project-offerings-list>',
     data: {
       pageTitle: gettext('Requests'),
       feature: 'offering'
@@ -37,7 +37,7 @@ export default function offeringRoutes($stateProvider) {
 
   .state('project.resources.oracle', {
     url: 'oracle/',
-    template: '<project-offerings-list filter="oracleFilter"/>',
+    template: '<project-offerings-list filter="oracleFilter"></project-offerings-list>',
     data: {
       pageTitle: gettext('Oracle'),
       feature: 'oracle'

@@ -61,7 +61,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.resources', {
       url: 'resources/',
-      template: '<resource-global-list-filtered/>',
+      template: '<resource-global-list-filtered></resource-global-list-filtered>',
       data: {
         feature: 'support.resources',
         pageTitle: gettext('Resources'),
@@ -73,7 +73,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.resources-treemap', {
       url: 'resources-treemap/',
-      template: '<resources-treemap/>',
+      template: '<resources-treemap></resources-treemap>',
       data: {
         feature: 'support.resources-treemap',
         pageTitle: gettext('Resources usage'),
@@ -85,7 +85,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.organizations', {
       url: 'organizations/',
-      template: '<customer-list/>',
+      template: '<customer-list></customer-list>',
       data: {
         feature: 'support.organizations',
         pageTitle: gettext('Financial overview'),

@@ -3,13 +3,13 @@
     <uib-tab ng-if="!$ctrl.showAccountingRecords && !$ctrl.payPalVisible">
       <uib-tab-heading translate>Invoices</uib-tab-heading>
       <div class="panel-body">
-        <invoices-list/>
+        <invoices-list></invoices-list>
       </div>
     </uib-tab>
     <uib-tab ng-if="$ctrl.showAccountingRecords">
       <uib-tab-heading translate>Accounting records</uib-tab-heading>
       <div class="panel-body">
-        <billing-records-list/>
+        <billing-records-list></billing-records-list>
       </div>
     </uib-tab>
     <uib-tab ng-if="!$ctrl.showAccountingRecords && $ctrl.payPalVisible">
@@ -20,7 +20,7 @@
           {{ $ctrl.customer.billing_price_estimate.total | defaultCurrency }}
           <price-estimate-button customer="$ctrl.customer"></price-estimate-button>
         </p>
-        <paypal-invoices-list/>
+        <paypal-invoices-list></paypal-invoices-list>
       </div>
     </uib-tab>
   </uib-tabset>

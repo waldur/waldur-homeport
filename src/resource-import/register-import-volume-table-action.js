@@ -14,7 +14,7 @@ export default function registerImportInstanceTableAction($rootScope,
 
       let callback = () => {
         ImportUtils.openImportDialog(
-          '<import-volumes-list provider="provider"/>',
+          '<import-volumes-list provider="provider"></import-volumes-list>',
           importResourcesService,
           'volumes',
           'refreshVolumesList',

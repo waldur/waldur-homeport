@@ -7,7 +7,7 @@ export default function analyticsRoutes($stateProvider) {
     .state('organization.analysis', {
       url: '',
       abstract: true,
-      template: '<ui-view/>',
+      template: '<ui-view></ui-view>',
       resolve: {
         module: moduleLoader
       }
@@ -15,7 +15,7 @@ export default function analyticsRoutes($stateProvider) {
 
     .state('organization.analysis.resources', {
       url: 'resource-usage/',
-      template: '<resource-analysis-container/>',
+      template: '<resource-analysis-container></resource-analysis-container>',
       data: {
         pageClass: 'gray-bg',
         pageTitle: gettext('Resource usage')

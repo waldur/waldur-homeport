@@ -14,7 +14,7 @@ export default function registerImportInstanceTableAction($rootScope,
 
       let callback = () => {
         ImportUtils.openImportDialog(
-          '<import-virtual-machines-list provider="provider"/>',
+          '<import-virtual-machines-list provider="provider"></import-virtual-machines-list>',
           importResourcesService,
           'vms',
           'refreshVirtualMachinesList',

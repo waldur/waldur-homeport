@@ -1,5 +1,5 @@
 <div ng-if="$ctrl.loading">
-  <loading-spinner/>
+  <loading-spinner></loading-spinner>
 </div>
 <div class="row m-t-md" ng-if="!$ctrl.loading">
   <div ng-if="$ctrl.total === 0">
@@ -24,7 +24,7 @@
           </h5>
         </div>
         <div class="ibox-content">
-          <resource-pie-chart items="$ctrl.pieChart" total="$ctrl.total"/>
+          <resource-pie-chart items="$ctrl.pieChart" total="$ctrl.total"></resource-pie-chart>
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
           <h5 translate>Resources by projects</h5>
         </div>
         <div class="ibox-content">
-          <resource-bar-chart items="$ctrl.barChart"/>
+          <resource-bar-chart items="$ctrl.barChart"></resource-bar-chart>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@
   tooltip-placement="bottom">
   <i ng-class="['fa', 'm-r-xs', $ctrl.getIconClass()]"></i>
   <span ng-attr-id="select-workspace-title" ng-if="$ctrl.getTitle()">{{ $ctrl.getTitle() }}
-    <extension-point id="organization-selector"/>
+    <extension-point id="organization-selector"></extension-point>
   </span>
   <span ng-attr-id="select-workspace-title" ng-if="!$ctrl.getTitle()" translate>Select workspace</span>
   <i class="fa fa-angle-down"></i>

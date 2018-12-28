@@ -340,6 +340,8 @@ msgstr ""
 msgid "Admin rights"
 msgstr ""
 
+#: src/issues/create/issue-quick-create.html
+#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/constants.js
 msgid "Affected resource"
@@ -528,6 +530,7 @@ msgstr ""
 msgid "Assign package"
 msgstr ""
 
+#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssuesList.tsx
@@ -557,6 +560,7 @@ msgid "Attaching"
 msgstr ""
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
+#: src/issues/create/issue-create-dialog.html
 msgid "Attachments"
 msgstr ""
 
@@ -898,6 +902,7 @@ msgstr ""
 #: src/invitations/actions/cancel.js
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/comments/IssueCommentsForm.tsx
+#: src/issues/create/issue-create-dialog.html
 #: src/modal/CloseDialogButton.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 #: src/offering/appstore-offering.html
@@ -1329,6 +1334,7 @@ msgstr ""
 
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.html
+#: src/issues/create/issue-registration.html
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueCreateButton.tsx
 msgid "Create request"
@@ -4069,6 +4075,7 @@ msgstr ""
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/issues/create/issue-create-dialog.html
+#: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/constants.js
@@ -4731,6 +4738,8 @@ msgstr ""
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/create/issue-create-dialog.html
+#: src/issues/create/issue-quick-create.html
+#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/constants.js
 #: src/jira/issue/JiraIssueSummary.tsx
@@ -5744,6 +5753,7 @@ msgstr ""
 msgid "Screenshots"
 msgstr ""
 
+#: src/issues/create/issue-registration.html
 #: src/navigation/header/main-search.html
 #: src/table-react/TableQuery.tsx
 #: src/table/responsive-table.js
@@ -5924,6 +5934,10 @@ msgstr ""
 msgid "Select size..."
 msgstr ""
 
+#: src/issues/create/issue-create-dialog.html
+msgid "Select some files"
+msgstr ""
+
 #: src/resource/list/resource-global-list-filtered.html
 msgid "Select state"
 msgstr ""
@@ -6046,6 +6060,7 @@ msgstr ""
 msgid "Service store"
 msgstr ""
 
+#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/constants.js
 #: src/issues/list/issues-list.js
@@ -6496,6 +6511,10 @@ msgstr ""
 
 #: src/issues/create/issue-create-dialog.html
 msgid "Template"
+msgstr ""
+
+#: src/issues/create/issue-create-dialog.html
+msgid "Template files"
 msgstr ""
 
 #: src/resource/monitoring/ZabbixHostCreateDialog.tsx

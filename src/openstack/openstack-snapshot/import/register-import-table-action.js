@@ -14,7 +14,7 @@ export default function registerImportTableAction($rootScope,
 
       let callback = () => {
         ImportUtils.openImportDialog(
-          '<import-snapshots-list provider="provider"/>',
+          '<import-snapshots-list provider="provider"></import-snapshots-list>',
           importSnapshotsService,
           'storages',
           'refreshSnapshotsList',

@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-sm-6">
             <h5><span translate>From</span>:</h5>
-            <billing-customer-details customer="$ctrl.invoice.issuer_details"/>
+            <billing-customer-details customer="$ctrl.invoice.issuer_details"></billing-customer-details>
           </div>
 
           <div class="col-sm-6 text-right">
@@ -16,7 +16,7 @@
               <h4 class="text-navy">{{ ::$ctrl.invoice.number}}</h4>
             </span>
             <span><span translate>To</span>:</span>
-            <billing-customer-details customer="$ctrl.invoice.customer_details"/>
+            <billing-customer-details customer="$ctrl.invoice.customer_details"></billing-customer-details>
             <div>
               <span><strong><span translate>Invoice date</span>:</strong> {{ ::$ctrl.invoice.invoice_date || '&mdash;'}}</span><br>
               <span>

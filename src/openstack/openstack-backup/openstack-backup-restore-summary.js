@@ -1,5 +1,5 @@
 const openstackBackupRestoreSummary = {
-  template: '<openstack-instance-checkout-summary ng-if="$ctrl.resource" model="$ctrl.summaryModel"/>',
+  template: '<openstack-instance-checkout-summary ng-if="$ctrl.resource" model="$ctrl.summaryModel"></openstack-instance-checkout-summary>',
   bindings: {
     model: '<',
     field: '<',

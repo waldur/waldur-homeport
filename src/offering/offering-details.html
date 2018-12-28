@@ -2,9 +2,9 @@
   <sidebar items="items" context="context"></sidebar>
 </div>
 <div id="page-wrapper" class="gray-bg">
-  <cookies-consent/>
+  <cookies-consent></cookies-consent>
   <div ng-if="!$ctrl.offering">
-    <loading-spinner/>
+    <loading-spinner></loading-spinner>
   </div>
   <div ng-if="$ctrl.offering">
     <nc-header></nc-header>
@@ -28,11 +28,11 @@
           </action-button-resource>
           <extension-point id="offering-details-button"></extension-point>
         </div>
-        <breadcrumbs-container/>
+        <breadcrumbs-container></breadcrumbs-container>
       </div>
     </div>
-    <offering-summary offering="$ctrl.offering" summary="$ctrl.offeringConfig.summary"/>
+    <offering-summary offering="$ctrl.offering" summary="$ctrl.offeringConfig.summary"></offering-summary>
   </div>
-  <div class="footer-indent"/>
-  <app-footer/>
+  <div class="footer-indent"></div>
+  <app-footer></app-footer>
 </div>

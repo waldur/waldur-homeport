@@ -108,12 +108,12 @@ export default function projectRoutes($stateProvider) {
     .state('project.resources', {
       url: '',
       abstract: true,
-      template: '<ui-view/>'
+      template: '<ui-view></ui-view>'
     })
 
     .state('project.resources.vms', {
       url: 'virtual-machines/',
-      template: '<resource-vms-list/>',
+      template: '<resource-vms-list></resource-vms-list>',
       data: {
         pageTitle: gettext('Virtual machines')
       }
@@ -121,7 +121,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.resources.clouds', {
       url: 'private-clouds/',
-      template: '<resource-private-clouds-list/>',
+      template: '<resource-private-clouds-list></resource-private-clouds-list>',
       data: {
         pageTitle: gettext('Private clouds')
       }
@@ -129,7 +129,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.resources.storage', {
       url: 'storage/',
-      template: '<ui-view/>',
+      template: '<ui-view></ui-view>',
       data: {
         pageTitle: gettext('Storage')
       },
@@ -138,7 +138,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.resources.storage.tabs', {
       url: '',
-      template: '<resource-storage-tabs/>'
+      template: '<resource-storage-tabs></resource-storage-tabs>'
     })
 
     .state('project.team', {
@@ -151,7 +151,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.cost-planning', {
       url: 'cost-planning/',
-      template: '<cost-plans-list/>',
+      template: '<cost-plans-list></cost-plans-list>',
       data: {
         pageTitle: gettext('Cost planning'),
         feature: 'cost-planning'

@@ -5,7 +5,7 @@ export default function ansibleRoutes($stateProvider) {
   $stateProvider
     .state('appstore.ansible', {
       url: 'applications/:category/',
-      template: '<ansible-job-create/>',
+      template: '<ansible-job-create></ansible-job-create>',
       data: {
         category: APPSTORE_CATEGORY,
         pageTitle: gettext('Applications'),
@@ -26,13 +26,13 @@ export default function ansibleRoutes($stateProvider) {
 
     .state('project.resources.ansible', {
       url: 'applications/',
-      template: '<ui-view/>',
+      template: '<ui-view></ui-view>',
       abstract: true,
     })
 
     .state('project.resources.ansible.list', {
       url: '',
-      template: '<application-list/>',
+      template: '<application-list></application-list>',
       data: {
         pageTitle: gettext('Applications'),
         feature: 'ansible'
@@ -41,7 +41,7 @@ export default function ansibleRoutes($stateProvider) {
 
     .state('project.resources.ansible.details', {
       url: ':jobId/',
-      template: '<ansible-job-details/>',
+      template: '<ansible-job-details></ansible-job-details>',
       data: {
         pageTitle: gettext('Application details'),
         pageClass: 'gray-bg',

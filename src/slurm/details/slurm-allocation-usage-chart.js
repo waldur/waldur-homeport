@@ -6,7 +6,7 @@ export default function slurmAllocationUsageChart() {
     scope: {
       chart: '=',
     },
-    template: `<loading-spinner ng-show="loading"/><div style="width: 100%" ng-show="!loading"><canvas/></div>`,
+    template: `<loading-spinner ng-show="loading"></loading-spinner><div style="width: 100%" ng-show="!loading"><canvas></canvas></div>`,
     link: function(scope, element) {
       // @ngInject
       scope.loading = true;

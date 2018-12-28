@@ -138,7 +138,7 @@ export default function routes($stateProvider) {
     .state('marketplace-services', {
       url: '',
       abstract: true,
-      template: '<ui-view/>',
+      template: '<ui-view></ui-view>',
     })
 
     .state('marketplace-vendor-offerings', {
@@ -262,7 +262,7 @@ export default function routes($stateProvider) {
     .state('marketplace-resources', {
       url: '',
       abstract: true,
-      template: '<ui-view/>',
+      template: '<ui-view></ui-view>',
     })
 
     .state('marketplace-project-resources', {

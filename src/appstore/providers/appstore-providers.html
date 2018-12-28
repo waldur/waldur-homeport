@@ -1,5 +1,5 @@
 <div class="ibox-content" ng-if="!$ctrl.services.length">
-  <appstore-providers-empty-message/>
+  <appstore-providers-empty-message></appstore-providers-empty-message>
 </div>
 
 <div class="ibox" ng-if="$ctrl.services.length">
@@ -26,7 +26,7 @@
 
             <div class="text-center m-b m-t"
               ng-class="{disabled: !service.enabled}">
-              <provider-icon type="service.type" size="img-md"/>
+              <provider-icon type="service.type" size="img-md"></provider-icon>
             </div>
             <div class="p-xs" ng-class="{disabled: !service.enabled}">
               <a class="btn btn-xs btn-block-sm btn-block-md btn-outline btn-primary"

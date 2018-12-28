@@ -102,7 +102,7 @@
           placeholder="{{ $ctrl.options.descriptionPlaceholder | translate }}"
           required
           ng-class="{disabled: $ctrl.saving}">
-          </textarea>
+        </textarea>
         <div class="help-block text-danger"
           ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
           <span>{{ $ctrl.emptyFieldMessage | translate }}</span>

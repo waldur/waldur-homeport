@@ -6,21 +6,21 @@
     <uib-tab index="0">
       <uib-tab-heading translate>General</uib-tab-heading>
       <div class="panel-body" ng-if="active == 0">
-        <project-details project="$ctrl.project"/>
+        <project-details project="$ctrl.project"></project-details>
       </div>
     </uib-tab>
 
     <uib-tab index="1">
       <uib-tab-heading translate>Policies</uib-tab-heading>
       <div class="panel-body" ng-if="active == 1">
-        <project-policies project="$ctrl.project"/>
+        <project-policies project="$ctrl.project"></project-policies>
       </div>
     </uib-tab>
 
     <uib-tab index="2">
       <uib-tab-heading translate>Providers</uib-tab-heading>
       <div class="panel-body" ng-if="active == 2">
-        <project-providers project="$ctrl.project"/>
+        <project-providers project="$ctrl.project"></project-providers>
       </div>
     </uib-tab>
   </uib-tabset>

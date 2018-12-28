@@ -25,14 +25,15 @@
           <span class="nav-label">{{ item.label | translate }}</span>
           <span class="label label-default pull-right"
             ng-if="::item.countFieldKey"
-            ng-bind="item.count"/>
-          <span class="fa arrow" ng-if="::item.children"/>
+            ng-bind="item.count">
+          </span>
+          <span class="fa arrow" ng-if="::item.children"></span>
         </a>
         <a ng-if="::item.action"
           ng-click="$ctrl.onMenuClick($event, item)">
           <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
           <span class="nav-label">{{ item.label | translate }}</span>
-          <span class="fa arrow" ng-if="::item.children"/>
+          <span class="fa arrow" ng-if="::item.children"></span>
         </a>
         <ul class="nav nav-second-level ng-hide"
           ng-show="item.expanded"
@@ -45,16 +46,17 @@
               <span class="nav-label">{{ child.label | translate }}</span>
               <span class="label label-info pull-right"
                 ng-if="::child.countFieldKey"
-                ng-bind="child.count"/>
+                ng-bind="child.count">
+              </span>
             </a>
           </li>
         </ul>
       </li>
     </ul>
     <ul class="nav metismenu visible-xs">
-      <support-link/>
-      <language-selector-menu-item/>
-      <docs-link/>
+      <support-link></support-link>
+      <language-selector-menu-item></language-selector-menu-item>
+      <docs-link></docs-link>
     </ul>
   </div>
 </nav>

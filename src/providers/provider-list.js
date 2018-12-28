@@ -159,7 +159,7 @@ function ProviderListController(
     },
     renderProviderState: function(row) {
       const index = this.findIndexById(row);
-      return `<provider-state provider="controller.list[${index}]"/>`;
+      return `<provider-state provider="controller.list[${index}]"></provider-state>`;
     },
     openDialog: function(row) {
       $uibModal.open({

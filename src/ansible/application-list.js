@@ -86,9 +86,9 @@ function ApplicationListController(
     },
     buildStateTag: function (index, applicationType) {
       if (applicationType === APPLICATION_TYPE.PLAYBOOK_JOB) {
-        return `<ansible-job-state model="controller.list[${index}]"/>`;
+        return `<ansible-job-state model="controller.list[${index}]"></ansible-job-state>`;
       } else if ([APPLICATION_TYPE.PYTHON_MANAGEMENT, APPLICATION_TYPE.JUPYTER_HUB_MANAGEMENT].includes(applicationType)) {
-        return `<python-management-state model="controller.list[${index}]"/>`;
+        return `<python-management-state model="controller.list[${index}]"></python-management-state>`;
       }
     },
     buildLinkTag: function (row) {

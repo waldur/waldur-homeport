@@ -1,11 +1,11 @@
 <sidebar items="items" context="context"></sidebar>
 <div id="page-wrapper" ng-class="$state.current.data.pageClass || 'white-bg'" ng-if="currentCustomer">
-  <cookies-consent/>
+  <cookies-consent></cookies-consent>
   <nc-header></nc-header>
   <div class="row wrapper white-bg page-heading" ng-hide="$state.current.data.hideBreadcrumbs">
     <div class="col-lg-6">
       <h2>{{ pageTitle | translate }}</h2>
-      <breadcrumbs-container/>
+      <breadcrumbs-container></breadcrumbs-container>
     </div>
     <div class="col-lg-6" ng-if="$state.current.name === 'organization.dashboard'">
       <div class="title-action">
@@ -14,5 +14,5 @@
     </div>
   </div>
   <div class="footer-indent" ng-transclude></div>
-  <app-footer/>
+  <app-footer></app-footer>
 </div>

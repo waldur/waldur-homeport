@@ -9,8 +9,8 @@ import './dashboard-quotas';
 // @ngInject
 function registerExtensionPoint(extensionPointService, features) {
   if (features.isVisible('experts')) {
-    extensionPointService.register('project-dashboard-button', '<expert-request-create-button/>');
-    extensionPointService.register('organization-dashboard-button', '<expert-request-create-button select-project=true />');
+    extensionPointService.register('project-dashboard-button', '<expert-request-create-button></expert-request-create-button>');
+    extensionPointService.register('organization-dashboard-button', '<expert-request-create-button select-project=true ></expert-request-create-button>');
     extensionPointService.register('organization-selector', workspaceSelector);
     extensionPointService.register('organization-dashboard-button', customerWorkspace);
   }
