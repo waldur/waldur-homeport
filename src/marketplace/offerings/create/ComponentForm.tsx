@@ -6,10 +6,32 @@ import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
+interface LimitPeriodOption {
+  value: string;
+  label: string;
+  description: string;
+}
+
+function getLimitPeriods(): LimitPeriodOption[] {
+  return [
+    {
+      value: 'month',
+      label: translate('Maximum monthly'),
+      description: translate('Every month service provider can report up to the amount requested by user.'),
+    },
+    {
+      value: 'total',
+      label: translate('Maximum total'),
+      description: translate('Service provider can report up to the requested amount over the whole active state of resource.'),
+    },
+  ];
+}
+
 interface Values {
   billingType: {
     value: 'usage' | 'fixed'
   };
+  limitPeriod: LimitPeriodOption;
 }
 
 interface Props {
@@ -19,6 +41,7 @@ interface Props {
 
 const enhance = formValues(props => ({
   billingType: `${props.component}.billing_type`,
+  limitPeriod: `${props.component}.limit_period`,
 }));
 
 export const ComponentForm = enhance((props: Values & Props) => (
@@ -76,19 +99,20 @@ export const ComponentForm = enhance((props: Values & Props) => (
         <FormGroup label={translate('Limit period')}>
           <Field
             name={`${props.component}.limit_period`}
-            normalize={choice => choice.value}
             component={fieldProps => (
               <Select
                 value={fieldProps.input.value}
                 onChange={value => fieldProps.input.onChange(value)}
-                options={[
-                  {label: translate(`Maximum monthly - every month service provider can report up to the amount requested by user.`), value: 'month'},
-                  {label: translate(`Maximum total - SP can report up to the requested amount over the whole active state of resource.`), value: 'total'},
-                ]}
+                options={getLimitPeriods()}
                 clearable={false}
               />
             )}
           />
+          {props.limitPeriod && (
+            <div className="help-text m-t-sm">
+              {props.limitPeriod.description}
+            </div>
+          )}
         </FormGroup>
         <FormGroup label={translate('Limit amount')}>
           <Field

@@ -70,6 +70,7 @@ export const formatComponents = components =>
       typeof component.billing_type === 'object' ?
       component.billing_type.value :
       component.billing_type,
+    limit_period: component.limit_period ? component.limit_period.value : null,
   }));
 
 export const formatOfferingRequest = (request: OfferingFormData, customer?: Customer) => {
