@@ -37,6 +37,7 @@ function OpenStackBackupsListController(
         {
           title: gettext('Name'),
           className: 'all',
+          orderField: 'name',
           render: row => this.renderResourceName(row)
         },
         {

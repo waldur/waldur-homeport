@@ -4,7 +4,7 @@
 <form name="ActionForm">
   <div class="modal-body">
     <div ng-if="loading">
-      <loading-spinner/>
+      <loading-spinner></loading-spinner>
     </div>
     <div ng-if="!loading">
       <p ng-if="::action.dialogSubtitle" bind-html-compile="action.dialogSubtitle"></p>

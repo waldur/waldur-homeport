@@ -1,5 +1,5 @@
 <div class="ibox" ng-if="$ctrl.loading">
-  <loading-spinner/>
+  <loading-spinner></loading-spinner>
 </div>
 <div class="ibox" ng-if="!$ctrl.loading">
   <div class="ibox-title">
@@ -8,7 +8,7 @@
     </h5>
   </div>
   <div class="ibox-content" ng-if="$ctrl.expertBid">
-    <expert-bid-summary expert-bid="$ctrl.expertBid"/>
+    <expert-bid-summary expert-bid="$ctrl.expertBid"></expert-bid-summary>
 
     <div class="m-t-md">
       <button type="submit"

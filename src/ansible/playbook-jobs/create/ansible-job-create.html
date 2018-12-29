@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-9">
       <div ng-if="$ctrl.loading">
-        <loading-spinner/>
+        <loading-spinner></loading-spinner>
       </div>
       <appstore-providers
         ng-if="!$ctrl.selectedService && !$ctrl.loading"
@@ -62,7 +62,8 @@
         <ansible-job-checkout-summary
           job="$ctrl.model"
           playbook="$ctrl.playbook"
-          provider="$ctrl.selectedService"/>
+          provider="$ctrl.selectedService">
+        </ansible-job-checkout-summary>
       </div>
     </div>
   </div>

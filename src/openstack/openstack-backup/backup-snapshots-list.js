@@ -31,6 +31,7 @@ function backupSnapshotsListController(
         {
           title: gettext('Name'),
           className: 'all',
+          orderField: 'name',
           render: row => this.renderResourceName(row)
         },
         {

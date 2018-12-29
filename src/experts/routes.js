@@ -25,7 +25,7 @@ export default function expertRequestsRoutes($stateProvider) {
 
     .state('organization.experts', {
       url: 'experts/',
-      template: '<expert-requests-customer-list/>',
+      template: '<expert-requests-customer-list></expert-requests-customer-list>',
       data: {
         pageTitle: gettext('Experts'),
         feature: 'experts',
@@ -34,7 +34,7 @@ export default function expertRequestsRoutes($stateProvider) {
 
     .state('organization.expertRequestDetails', {
       url: 'experts/:requestId/',
-      template: '<expert-request-details/>',
+      template: '<expert-request-details></expert-request-details>',
       data: {
         pageTitle: gettext('Experts'),
         feature: 'experts',
@@ -44,7 +44,7 @@ export default function expertRequestsRoutes($stateProvider) {
 
     .state('project.resources.experts', {
       url: 'experts/',
-      template: '<expert-requests-project-list/>',
+      template: '<expert-requests-project-list></expert-requests-project-list>',
       data: {
         pageTitle: gettext('Experts'),
         feature: 'experts'
@@ -53,7 +53,7 @@ export default function expertRequestsRoutes($stateProvider) {
 
     .state('project.expertRequestDetails', {
       url: 'experts/:requestId/',
-      template: '<expert-request-details/>',
+      template: '<expert-request-details></expert-request-details>',
       data: {
         feature: 'experts',
         pageTitle: gettext('Expert request details'),

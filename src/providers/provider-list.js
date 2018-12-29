@@ -71,7 +71,7 @@ function ProviderListController(
                 className: 'text-center min-tablet-l',
                 render: function(row) {
                   let cls = row.shared && 'fa-check' || 'fa-minus';
-                  return '<a class="bool-field"><i class="fa {cls}"/></a>'.replace('{cls}', cls);
+                  return '<a class="bool-field"><i class="fa {cls}"></i></a>'.replace('{cls}', cls);
                 },
                 width: '100px'
               },
@@ -159,7 +159,7 @@ function ProviderListController(
     },
     renderProviderState: function(row) {
       const index = this.findIndexById(row);
-      return `<provider-state provider="controller.list[${index}]"/>`;
+      return `<provider-state provider="controller.list[${index}]"></provider-state>`;
     },
     openDialog: function(row) {
       $uibModal.open({

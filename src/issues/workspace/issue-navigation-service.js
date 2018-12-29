@@ -33,6 +33,12 @@ const REPORT_ITEMS = [
     feature: 'support.resources'
   },
   {
+    label: gettext('Orders'),
+    icon: 'fa-files-o',
+    link: 'marketplace-support-order-items',
+    feature: 'marketplace'
+  },
+  {
     label: gettext('Resources usage'),
     icon: 'fa-map',
     link: 'support.resources-treemap',

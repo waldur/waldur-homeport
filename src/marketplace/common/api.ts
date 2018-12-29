@@ -65,6 +65,9 @@ export const getCustomer = (id: string) =>
 export const updateOfferingState = (offeringUuid, action) =>
   post(`/marketplace-offerings/${offeringUuid}/${action}/`).then(response => response.data);
 
+export const getServiceProviderList = (params?: {}) =>
+  getList<ServiceProvider>('/marketplace-service-providers/', params);
+
 export const createServiceProvider = params =>
   post<ServiceProvider>('/marketplace-service-providers/', params).then(response => response.data);
 

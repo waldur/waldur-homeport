@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body" ng-class="{disabled: $ctrl.saving}">
   <div ng-if="$ctrl.loading">
-    <loading-spinner/>
+    <loading-spinner></loading-spinner>
   </div>
   <uib-tabset ng-if="!$ctrl.loading">
     <uib-tab heading="{{ 'Configure' | translate }}">
@@ -26,7 +26,8 @@
           items="$ctrl.plan.items"
           presets="$ctrl.presets"
           on-add="$ctrl.addItem()"
-          on-delete="$ctrl.deleteItem(item)"/>
+          on-delete="$ctrl.deleteItem(item)">
+        </cost-plan-items>
         <p class="m-t-sm">
           <strong translate>Total planned resource consumption</strong>:
           {{ $ctrl.getTotalConsumption() | formatFlavor }}
@@ -39,8 +40,8 @@
         <span translate>Evaluate</span>
       </uib-tab-heading>
       <div class="panel-body">
-        <loading-spinner ng-if="$ctrl.isEvaluating"/>
-        <cost-plan-optimizer ng-if="!$ctrl.isEvaluating" services="$ctrl.optimalServices"/>
+        <loading-spinner ng-if="$ctrl.isEvaluating"></loading-spinner>
+        <cost-plan-optimizer ng-if="!$ctrl.isEvaluating" services="$ctrl.optimalServices"></cost-plan-optimizer>
       </div>
     </uib-tab>
 </div>

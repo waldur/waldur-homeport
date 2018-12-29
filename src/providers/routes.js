@@ -19,7 +19,7 @@ export default function providerRoutes($stateProvider) {
   $stateProvider
     .state('organization.providers', {
       url: 'providers/?providerUuid&providerType',
-      template: '<providers-list/>',
+      template: '<providers-list></providers-list>',
       data: {
         pageTitle: gettext('Providers')
       }

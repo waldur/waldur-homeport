@@ -23,7 +23,9 @@ export default function packageTemplatesService($filter, baseServiceClass, resou
           service_settings_uuid: tenant.service_settings_uuid,
           archived: 'False',
         }).then(templates => {
-          let result = templates.map(templateParser)
+          let result = templates
+            // Exclude current package template
+            .filter(choice => choice.uuid !== template.uuid).map(templateParser)
             .map(choice => {
               const check = this.checkTemplate(template, quotas, choice);
               return {...choice, ...check};
@@ -35,11 +37,6 @@ export default function packageTemplatesService($filter, baseServiceClass, resou
     },
 
     checkTemplate: function (currentTemplate, quotas, template) {
-      // Exclude current package template
-      if (currentTemplate && currentTemplate.uuid === template.uuid) {
-        return false;
-      }
-
       // Allow to change package only if current usage of all quotas <= new package quotas
       const components = parseComponents(template.components);
       const enabled = (

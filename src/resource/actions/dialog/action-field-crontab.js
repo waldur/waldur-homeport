@@ -1,5 +1,5 @@
 const actionFieldCrontab = {
-  template: '<cron-selection ng-model="$ctrl.model[$ctrl.field.name]" config="$ctrl.field.config"/>',
+  template: '<cron-selection ng-model="$ctrl.model[$ctrl.field.name]" config="$ctrl.field.config"></cron-selection>',
   bindings: {
     model: '<',
     field: '<',

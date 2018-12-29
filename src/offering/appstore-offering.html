@@ -2,7 +2,7 @@
   <div class="row">
     <div ng-class="{'col-sm-9': $ctrl.offering.price}">
       <div ng-if="$ctrl.loading">
-        <loading-spinner/>
+        <loading-spinner></loading-spinner>
       </div>
       <div class="ibox" ng-if="$ctrl.offering">
         <div class="ibox-title">
@@ -10,7 +10,7 @@
           <p ng-if="$ctrl.offering.summary" ng-bind-html="::$ctrl.offering.summary"></p>
         </div>
         <div class="ibox-content">
-          <appstore-form form="$ctrl.form" fields="$ctrl.offering" model="$ctrl.model" errors="$ctrl.errors"/>
+          <appstore-form form="$ctrl.form" fields="$ctrl.offering" model="$ctrl.model" errors="$ctrl.errors"></appstore-form>
           <div class="form-group" ng-if="$ctrl.offering.terms_of_service">
             <div class="control-label col-sm-offset-3">
               <label>

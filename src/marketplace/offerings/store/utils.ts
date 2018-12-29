@@ -6,13 +6,13 @@ import { OfferingRequest, OfferingFormData, PlanRequest, PlanFormData, OptionFor
 
 export const planWithoutComponent = (plan: PlanFormData, component: string) => ({
   ...plan,
-  prices: omit(plan.prices, component),
-  quotas: omit(plan.quotas, component),
+  prices: plan.prices ? omit(plan.prices, component) : plan.prices,
+  quotas: plan.quotas ? omit(plan.quotas, component) : plan.quotas,
 });
 
 export const planWithoutQuotas = (plan: PlanFormData, component: string) => ({
   ...plan,
-  quotas: omit(plan.quotas, component),
+  quotas: plan.quotas ? omit(plan.quotas, component) : plan.quotas,
 });
 
 const formatPlan = (plan: PlanFormData): PlanRequest => {
@@ -70,6 +70,7 @@ export const formatComponents = components =>
       typeof component.billing_type === 'object' ?
       component.billing_type.value :
       component.billing_type,
+    limit_period: component.limit_period ? component.limit_period.value : null,
   }));
 
 export const formatOfferingRequest = (request: OfferingFormData, customer?: Customer) => {

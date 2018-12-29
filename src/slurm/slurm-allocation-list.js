@@ -33,6 +33,7 @@ function SlurmAllocationListController(
         {
           title: gettext('Name'),
           className: 'all',
+          orderField: 'name',
           render: row => this.renderResourceName(row)
         },
         {
@@ -75,7 +76,7 @@ function SlurmAllocationListController(
       const template = usage >= 0 ? gettext('{usage} of {limit}') : '0';
       const tooltip = coreUtils.templateFormatter(template, context);
       const percent = Math.min(1, limit > 0 ? usage / limit : 0);
-      return `<span uib-tooltip="${tooltip}"><quota-pie value="${percent}"/></span>`;
+      return `<span uib-tooltip="${tooltip}"><quota-pie value="${percent}"></quota-pie></span>`;
     },
     getTableActions: function() {
       return [this.getCreateAction()];

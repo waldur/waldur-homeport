@@ -16,7 +16,7 @@ export const TableComponent = props => {
     {
       title: translate('Offering'),
       render: ({row}) => (
-        <OrderItemDetailsLink order_item_uuid={row.uuid}>
+        <OrderItemDetailsLink order_item_uuid={row.uuid} customer_uuid={row.customer_uuid}>
           {row.offering_name}
         </OrderItemDetailsLink>
       ),
@@ -63,6 +63,9 @@ const TableOptions = {
       }
       if (props.filter.organization) {
         filter.customer_uuid = props.filter.organization.uuid;
+      }
+      if (props.filter.provider) {
+        filter.provider_uuid = props.filter.provider.customer_uuid;
       }
       if (props.filter.state) {
         filter.state = props.filter.state.value;

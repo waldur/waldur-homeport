@@ -60,8 +60,11 @@ module.exports = {
           {
             loader: 'html-loader',
             options: {
-              minimize: true,
+              minimize: utils.isProd,
             },
+          },
+          {
+            loader: path.resolve('./html-lint-loader'),
           },
         ],
       },

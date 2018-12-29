@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body m-b-n">
   <div ng-if="$ctrl.loading">
-    <loading-spinner/>
+    <loading-spinner></loading-spinner>
   </div>
   <div ng-if="!$ctrl.loading" block-ui="add-team-member-dialog">
     <div class="form-group" ng-if="$ctrl.resolve.editUser">
@@ -34,7 +34,8 @@
       <label class="control-label" translate>Organization owner role expires on</label>
       <action-field-datetime
         model="$ctrl.userModel"
-        field="$ctrl.ownerExpirationTimeField"/>
+        field="$ctrl.ownerExpirationTimeField">
+      </action-field-datetime>
     </div>
 
     <div class="form-group" ng-if="!$ctrl.emptyProjectList">
@@ -57,12 +58,14 @@
                 <action-field-select
                   model="project"
                   field="$ctrl.roleField"
-                  disable-input="!$ctrl.canChangeRole"></action-field-select>
+                  disable-input="!$ctrl.canChangeRole">
+                </action-field-select>
               </td>
               <td>
                 <action-field-datetime
                   model="project"
-                  field="$ctrl.projectExpirationTimeField"/>
+                  field="$ctrl.projectExpirationTimeField">
+                </action-field-datetime>
               </td>
             </tr>
           </tbody>

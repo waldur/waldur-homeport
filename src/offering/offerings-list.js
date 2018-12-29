@@ -64,7 +64,7 @@ function ProjectOfferingsListController(
     },
     getRowActions: function(row) {
       const index = this.findIndexById(row);
-      return `<action-button-resource button-controller="controller" button-model="controller.list[${index}]"/>`;
+      return `<action-button-resource button-controller="controller" button-model="controller.list[${index}]"></action-button-resource>`;
     },
     reInitResource:function(offering) {
       return this.service.$get(offering.uuid).then(response => {

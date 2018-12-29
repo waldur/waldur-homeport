@@ -1,17 +1,50 @@
 import * as React from 'react';
 import Select from 'react-select';
-import { Field } from 'redux-form';
+import { Field, formValues } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-interface ComponentFormProps {
+interface LimitPeriodOption {
+  value: string;
+  label: string;
+  description: string;
+}
+
+function getLimitPeriods(): LimitPeriodOption[] {
+  return [
+    {
+      value: 'month',
+      label: translate('Maximum monthly'),
+      description: translate('Every month service provider can report up to the amount requested by user.'),
+    },
+    {
+      value: 'total',
+      label: translate('Maximum total'),
+      description: translate('Service provider can report up to the requested amount over the whole active state of resource.'),
+    },
+  ];
+}
+
+interface Values {
+  billingType: {
+    value: 'usage' | 'fixed'
+  };
+  limitPeriod: LimitPeriodOption;
+}
+
+interface Props {
   component: string;
   removeOfferingQuotas(): void;
 }
 
-export const ComponentForm = (props: ComponentFormProps) => (
+const enhance = formValues(props => ({
+  billingType: `${props.component}.billing_type`,
+  limitPeriod: `${props.component}.limit_period`,
+}));
+
+export const ComponentForm = enhance((props: Values & Props) => (
   <>
     <FormGroup label={translate('Internal name')} required={true}>
       <Field
@@ -61,5 +94,36 @@ export const ComponentForm = (props: ComponentFormProps) => (
         )}
       />
     </FormGroup>
+    {props.billingType && props.billingType.value === 'usage' && (
+      <>
+        <FormGroup label={translate('Limit period')}>
+          <Field
+            name={`${props.component}.limit_period`}
+            component={fieldProps => (
+              <Select
+                value={fieldProps.input.value}
+                onChange={value => fieldProps.input.onChange(value)}
+                options={getLimitPeriods()}
+                clearable={false}
+              />
+            )}
+          />
+          {props.limitPeriod && (
+            <div className="help-text m-t-sm">
+              {props.limitPeriod.description}
+            </div>
+          )}
+        </FormGroup>
+        <FormGroup label={translate('Limit amount')}>
+          <Field
+            component="input"
+            className="form-control"
+            name={`${props.component}.limit_amount`}
+            type="number"
+            min={0}
+          />
+        </FormGroup>
+      </>
+    )}
   </>
-);
+)) as React.ComponentType<Props>;

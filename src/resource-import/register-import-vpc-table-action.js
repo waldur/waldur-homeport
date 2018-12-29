@@ -14,7 +14,7 @@ export default function registerImportVPCTableAction($rootScope,
 
       let callback = () => {
         ImportUtils.openImportDialog(
-          '<import-virtual-clouds-list provider="provider"/>',
+          '<import-virtual-clouds-list provider="provider"></import-virtual-clouds-list>',
           importResourcesService,
           'private_clouds',
           'PrivateCloudImported',

@@ -111,11 +111,12 @@
           <span class="text-danger">*</span>
         </label>
         <div class="col-sm-6">
-                    <textarea type="text"
-                      id="issueDescription"
-                      ng-model="$ctrl.issue.description"
-                      class="form-control"
-                      name="description" required/>
+          <textarea type="text"
+            id="issueDescription"
+            ng-model="$ctrl.issue.description"
+            class="form-control"
+            name="description" required>
+            </textarea>
           <div class="help-block text-danger"
             ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
             <span>{{ $ctrl.emptyFieldMessage | translate }}</span>

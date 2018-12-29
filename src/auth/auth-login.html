@@ -1,4 +1,4 @@
-<cookies-consent/>
+<cookies-consent></cookies-consent>
 <div class="middle-box text-center loginscreen footer-indent">
   <span ng-if="::!auth.loginLogo">
     <h1 class="logo-name">{{ ::auth.shortPageTitle }}</h1>
@@ -82,13 +82,13 @@
   <div ng-if="auth.showGoogle()" class="m-b-sm">
     <button ng-click="auth.authenticate('google')" class="btn btn-google btn-block">
       <i class="fa fa-google-plus-square" aria-hidden="true"></i>
-      <auth-button-text mode="auth.mode" provider="Google"/>
+      <auth-button-text mode="auth.mode" provider="Google"></auth-button-text>
     </button>
   </div>
   <div ng-if="auth.showFacebook()" class="m-b-sm">
     <button ng-click="auth.authenticate('facebook')" class="btn btn-facebook btn-block">
       <i class="fa fa-facebook-square" aria-hidden="true"></i>
-      <auth-button-text mode="auth.mode" provider="Facebook"/>
+      <auth-button-text mode="auth.mode" provider="Facebook"></auth-button-text>
     </button>
   </div>
   <div ng-if="auth.showSmartId()" class="m-b-sm">
@@ -99,16 +99,16 @@
     </button>
   </div>
   <div ng-if="auth.showSaml2()">
-    <auth-saml2 mode="auth.mode"/>
+    <auth-saml2 mode="auth.mode"></auth-saml2>
   </div>
   <div ng-if="auth.showSaml2Providers()">
-    <auth-saml2-trigger mode="auth.mode"/>
+    <auth-saml2-trigger mode="auth.mode"></auth-saml2-trigger>
   </div>
   <div ng-if="auth.showEstonianId()">
-    <auth-estonian-id mode="auth.mode"/>
+    <auth-estonian-id mode="auth.mode"></auth-estonian-id>
   </div>
   <div ng-if="auth.showValimo()">
-    <auth-valimo-trigger mode="auth.mode"/>
+    <auth-valimo-trigger mode="auth.mode"></auth-valimo-trigger>
   </div>
   <div class="form-group m-b-sm" ng-if="auth.showRegisterButton()">
     <p>
@@ -126,7 +126,7 @@
       <span translate>Login</span>
     </a>
   </div>
-  <language-list/>
-  <powered-by/>
+  <language-list></language-list>
+  <powered-by></powered-by>
 </div>
-<app-footer/>
+<app-footer></app-footer>

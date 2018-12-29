@@ -15,11 +15,11 @@ export default function helpRoutes($stateProvider) {
 
     .state('help.list', {
       url: '',
-      template: '<help-list/>',
+      template: '<help-list></help-list>',
     })
 
     .state('help.details', {
       url: ':type/:name/',
-      template: '<help-details/>',
+      template: '<help-details></help-details>',
     });
 }

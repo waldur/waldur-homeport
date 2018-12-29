@@ -4,7 +4,7 @@
       <p>{{ ::AppStore.policyErrorMessage }}</p>
     </div>
   </div>
-  <loading-spinner ng-if="AppStore.loading"/>
+  <loading-spinner ng-if="AppStore.loading"></loading-spinner>
   <div class="row" ng-if="!AppStore.policyErrorMessage">
     <div ng-class="{'col-md-9': AppStore.selectedResourceType}">
       <div ng-if="!AppStore.selectedResourceType">
@@ -24,7 +24,7 @@
         </div>
         <div class="ibox-content">
           <div ng-if="AppStore.loadingResourceProperties">
-            <loading-spinner/>
+            <loading-spinner></loading-spinner>
           </div>
           <div class="form-horizontal" ng-if="!AppStore.loadingResourceProperties">
             <div class="form-group">

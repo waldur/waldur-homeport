@@ -340,6 +340,8 @@ msgstr ""
 msgid "Admin rights"
 msgstr ""
 
+#: src/issues/create/issue-quick-create.html
+#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/constants.js
 msgid "Affected resource"
@@ -528,6 +530,7 @@ msgstr ""
 msgid "Assign package"
 msgstr ""
 
+#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssuesList.tsx
@@ -557,6 +560,7 @@ msgid "Attaching"
 msgstr ""
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
+#: src/issues/create/issue-create-dialog.html
 msgid "Attachments"
 msgstr ""
 
@@ -898,6 +902,7 @@ msgstr ""
 #: src/invitations/actions/cancel.js
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/comments/IssueCommentsForm.tsx
+#: src/issues/create/issue-create-dialog.html
 #: src/modal/CloseDialogButton.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 #: src/offering/appstore-offering.html
@@ -1329,6 +1334,7 @@ msgstr ""
 
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.html
+#: src/issues/create/issue-registration.html
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueCreateButton.tsx
 msgid "Create request"
@@ -1934,6 +1940,10 @@ msgstr ""
 
 #: src/resource/crontab.ts
 msgid "Every month on the {days} of {months} at {time}"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Every month service provider can report up to the amount requested by user."
 msgstr ""
 
 #: src/resource/crontab.ts
@@ -3086,6 +3096,14 @@ msgstr ""
 msgid "Limit"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Limit amount"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Limit period"
+msgstr ""
+
 #: src/issues/issue-detail.html
 msgid "Link"
 msgstr ""
@@ -3257,6 +3275,14 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Maximal value"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Maximum monthly"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Maximum total"
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.html
@@ -4055,6 +4081,7 @@ msgstr ""
 msgid "Order summary"
 msgstr ""
 
+#: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
@@ -4068,6 +4095,7 @@ msgstr ""
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/issues/create/issue-create-dialog.html
+#: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/constants.js
@@ -4730,6 +4758,8 @@ msgstr ""
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/create/issue-create-dialog.html
+#: src/issues/create/issue-quick-create.html
+#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/constants.js
 #: src/jira/issue/JiraIssueSummary.tsx
@@ -5743,6 +5773,7 @@ msgstr ""
 msgid "Screenshots"
 msgstr ""
 
+#: src/issues/create/issue-registration.html
 #: src/navigation/header/main-search.html
 #: src/table-react/TableQuery.tsx
 #: src/table/responsive-table.js
@@ -5887,6 +5918,10 @@ msgstr ""
 msgid "Select provider type"
 msgstr ""
 
+#: src/marketplace/orders/OrderItemsFilter.tsx
+msgid "Select provider..."
+msgstr ""
+
 #: src/issues/types/issue-type-select.html
 msgid "Select request type"
 msgstr ""
@@ -5917,6 +5952,10 @@ msgstr ""
 
 #: src/digitalocean/droplet-resize.html
 msgid "Select size..."
+msgstr ""
+
+#: src/issues/create/issue-create-dialog.html
+msgid "Select some files"
 msgstr ""
 
 #: src/resource/list/resource-global-list-filtered.html
@@ -6013,11 +6052,16 @@ msgid "Service name"
 msgstr ""
 
 #: src/marketplace/details/LeafletMap.tsx
+#: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Service provider"
 msgstr ""
 
 #: src/marketplace/service-providers/store/effects.ts
 msgid "Service provider API secret code has been generated."
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentForm.tsx
+msgid "Service provider can report up to the requested amount over the whole active state of resource."
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
@@ -6040,6 +6084,7 @@ msgstr ""
 msgid "Service store"
 msgstr ""
 
+#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/constants.js
 #: src/issues/list/issues-list.js
@@ -6490,6 +6535,10 @@ msgstr ""
 
 #: src/issues/create/issue-create-dialog.html
 msgid "Template"
+msgstr ""
+
+#: src/issues/create/issue-create-dialog.html
+msgid "Template files"
 msgstr ""
 
 #: src/resource/monitoring/ZabbixHostCreateDialog.tsx

@@ -8,7 +8,7 @@
 </div>
 <div class="modal-body" ng-class="{disabled: $ctrl.loadingState}">
   <div ng-if="$ctrl.loadingOrganizations">
-    <loading-spinner/>
+    <loading-spinner></loading-spinner>
   </div>
   <div ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length === 0" class="row">
     <div class="middle-box text-center">

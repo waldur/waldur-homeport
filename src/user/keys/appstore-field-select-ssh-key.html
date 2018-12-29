@@ -1,4 +1,4 @@
-<loading-spinner ng-if="$ctrl.loading"/>
+<loading-spinner ng-if="$ctrl.loading"></loading-spinner>
 <div ng-if="$ctrl.loaded">
   <ui-select ng-model="$ctrl.model[$ctrl.field.name]" ng-if="$ctrl.choices.length > 0">
     <ui-select-match placeholder="{{ 'Select SSH public key...' | translate}}">

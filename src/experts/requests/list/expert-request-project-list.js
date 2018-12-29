@@ -72,7 +72,7 @@ function ExpertRequestListController(
           orderField: 'state',
           render: row => {
             const index = this.findIndexById(row);
-            return `<expert-request-state model="controller.list[${index}]"/>`;
+            return `<expert-request-state model="controller.list[${index}]"></expert-request-state>`;
           }
         },
         {
