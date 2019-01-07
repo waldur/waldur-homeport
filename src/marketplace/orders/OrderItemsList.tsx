@@ -11,6 +11,8 @@ import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { ResourceUsageButton } from './ResourceUsageButton';
+
 export const TableComponent = props => {
   const columns = [
     {
@@ -40,6 +42,10 @@ export const TableComponent = props => {
     {
       title: translate('Cost'),
       render: ({ row }) => defaultCurrency(row.cost),
+    },
+    {
+      title: translate('Actions'),
+      render: ({ row }) => <ResourceUsageButton resource={row.marketplace_resource_uuid}/>,
     },
   ];
 
