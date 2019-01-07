@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import { Field } from 'redux-form';
 
+import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { Section } from '@waldur/marketplace/types';
 
 import { configAttrField } from './utils';
@@ -24,6 +25,24 @@ export const OfferingAttributes: React.SFC<OfferingAttributesProps> = props => (
           </Col>
         </div>
         {section.attributes.map((attribute, attributeIndex) => {
+          if (attribute.type === 'boolean') {
+            return (
+              <div className="form-group" key={attributeIndex}>
+                <Col smOffset={props.labelCols} sm={props.controlCols}>
+                  <Field
+                    name={`attributes.${attribute.key}`}
+                    component={prop =>
+                      <AwesomeCheckbox
+                        id={`attributes.${attribute.key}`}
+                        label={attribute.title}
+                        {...prop.input}
+                      />
+                    }
+                  />
+                </Col>
+              </div>
+            );
+          }
           const attr = configAttrField(attribute);
           return (
             <div className="form-group" key={attributeIndex}>
