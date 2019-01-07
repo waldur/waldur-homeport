@@ -8,6 +8,7 @@ class CustomerManageController {
     invoicesService,
     usersService,
     currentStateService,
+    stateUtilsService,
     features,
     ncUtilsFlash,
     $uibModal,
@@ -32,6 +33,7 @@ class CustomerManageController {
     this.ENV = ENV;
     this.ISSUE_IDS = ISSUE_IDS;
     this.organizationSubnetsVisible = ENV.organizationSubnetsVisible;
+    this.stateUtilsService = stateUtilsService;
   }
 
   $onInit() {
@@ -105,7 +107,10 @@ class CustomerManageController {
       this.currentStateService.setCustomer(null);
       this.customer.$delete().then(() => {
         this.customersService.clearAllCacheForCurrentEndpoint();
-        this.$state.go('profile.details');
+        this.$state.go('profile.details').then(() => {
+          this.stateUtilsService.clear();
+          this.currentStateService.setHasCustomer(false);
+        });
       }, () => this.currentStateService.setCustomer(this.customer));
     }
   }
