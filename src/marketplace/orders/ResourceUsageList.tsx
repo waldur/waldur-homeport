@@ -15,16 +15,16 @@ export const TableComponent = props => {
       render: ({ row }) => row.usage,
     },
     {
+      title: translate('Unit'),
+      render: ({ row }) => row.measured_unit,
+    },
+    {
       title: translate('Type'),
       render: ({ row }) => row.type,
     },
     {
       title: translate('Name'),
       render: ({ row }) => row.name,
-    },
-    {
-      title: translate('Unit'),
-      render: ({ row }) => row.measured_unit,
     },
   ];
 
@@ -45,16 +45,16 @@ const TableOptions = {
   exportRow: row => [
     row.date,
     row.usage,
+    row.measured_unit,
     row.type,
     row.name,
-    row.measured_unit,
   ],
   exportFields: [
     'Date',
     'Value',
+    'Unit',
     'Type',
     'Name',
-    'Unit',
   ],
 };
 
