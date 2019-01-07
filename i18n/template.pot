@@ -1476,6 +1476,7 @@ msgstr ""
 msgid "Data volume size:"
 msgstr ""
 
+#: src/marketplace/orders/ResourceUsageList.tsx
 #: src/payments/payment-list.js
 msgid "Date"
 msgstr ""
@@ -3420,6 +3421,7 @@ msgstr ""
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/marketplace/orders/ResourceUsageList.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/OracleSnapshots.tsx
@@ -5572,6 +5574,7 @@ msgstr ""
 
 #: src/analytics/routes.js
 #: src/customer/workspace/customer-workspace.js
+#: src/marketplace/orders/ResourceUsageDialog.tsx
 msgid "Resource usage"
 msgstr ""
 
@@ -6166,6 +6169,10 @@ msgstr ""
 #: src/analytics/VmOverviewFilter.tsx
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Show shared"
+msgstr ""
+
+#: src/marketplace/orders/ResourceUsageButton.tsx
+msgid "Show usage"
 msgstr ""
 
 #: src/customer/CustomerListFilter.tsx
@@ -6899,6 +6906,7 @@ msgstr ""
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/orders/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -7245,6 +7253,7 @@ msgid "Unfortunately, connection to server has failed. Please check if you can c
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/orders/ResourceUsageList.tsx
 msgid "Unit"
 msgstr ""
 
@@ -7360,6 +7369,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentForm.tsx
 msgid "Usage-based"
+msgstr ""
+
+#: src/marketplace/orders/ResourceUsageList.tsx
+msgid "Usages"
 msgstr ""
 
 #: src/slurm/SlurmForm.tsx
@@ -7645,6 +7658,10 @@ msgstr ""
 
 #: src/resource/actions/base.ts
 msgid "Valid states for operation: {validStates}."
+msgstr ""
+
+#: src/marketplace/orders/ResourceUsageList.tsx
+msgid "Value"
 msgstr ""
 
 #: src/marketplace/details/OrderSummary.tsx
