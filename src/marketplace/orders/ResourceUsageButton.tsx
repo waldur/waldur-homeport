@@ -10,7 +10,7 @@ const openResourceUsageDialog = (id: string) =>
   openModalDialog('marketplaceResourceUsageDialog', {resolve: {resource_uuid: id}});
 
 interface ResourceUsageButton {
-  resource_uuid: string;
+  resource: string;
   openDialog(): void;
 }
 
@@ -26,6 +26,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   openDialog: () => dispatch(openResourceUsageDialog(ownProps.resource)),
 });
 
-const ResourceUsageButton = connect(null, mapDispatchToProps)(PureResourceUsageButton);
+export const ResourceUsageButton = connect(null, mapDispatchToProps)(PureResourceUsageButton);
 
 export default connectAngularComponent(ResourceUsageButton, ['resource']);
