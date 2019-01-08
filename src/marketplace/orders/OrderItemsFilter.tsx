@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Select, { Async } from 'react-select';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
 import { getCustomerList, getServiceProviderList } from '@waldur/marketplace/common/api';
@@ -128,17 +129,19 @@ const PureOrderItemsFilter = (props: OwnProps & StateProps) => (
   </div>
 );
 
-const mapStateToProps = state => {
-  const customer = getCustomer(state);
-  const workspace = getWorkspace(state);
-  if (workspace === 'organization') {
-    return {
-      offeringFilter: {
-        customer_uuid: customer.uuid,
-      },
-    };
+const filterSelector = createSelector(
+  getCustomer,
+  getWorkspace,
+  (customer, workspace) => {
+    if (workspace === 'organization') {
+      return {customer_uuid: customer.uuid};
+    }
   }
-};
+);
+
+const mapStateToProps = state => ({
+  offeringFilter: filterSelector(state),
+});
 
 const enhance = compose(
   reduxForm<{}, OwnProps>({form: 'OrderItemFilter'}),

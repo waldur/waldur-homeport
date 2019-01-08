@@ -11,7 +11,8 @@ import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { ResourceUsageButton } from './ResourceUsageButton';
+import { ResourceCreateUsageButton } from './ResourceCreateUsageButton';
+import { ResourceShowUsageButton } from './ResourceShowUsageButton';
 
 export const TableComponent = props => {
   const columns = [
@@ -45,7 +46,16 @@ export const TableComponent = props => {
     },
     {
       title: translate('Actions'),
-      render: ({ row }) => <ResourceUsageButton resource={row.marketplace_resource_uuid}/>,
+      render: ({ row }) => row.marketplace_resource_uuid && (
+        <div className="btn-group">
+          <ResourceShowUsageButton resource={row.marketplace_resource_uuid}/>
+          <ResourceCreateUsageButton
+            offering_uuid={row.offering_uuid}
+            resource_uuid={row.marketplace_resource_uuid}
+            plan_unit={row.plan_unit}
+          />
+        </div>
+      ),
     },
   ];
 

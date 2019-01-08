@@ -11,10 +11,10 @@ interface ResourceUsageDialogProps {
   resolve: { resource_uuid: string };
 }
 
-const ResourceUsageDialog = (props: ResourceUsageDialogProps) => (
+const ResourceShowUsageDialog = (props: ResourceUsageDialogProps) => (
   <ModalDialog title={translate('Resource usage')} footer={<CloseDialogButton/>}>
     <ResourceUsagesList resource_uuid={props.resolve.resource_uuid}/>
   </ModalDialog>
 );
 
-export default connectAngularComponent(ResourceUsageDialog, ['resolve']);
+export default connectAngularComponent(ResourceShowUsageDialog, ['resolve']);

@@ -21,8 +21,9 @@ import marketplaceSupportOrderItemsList from './orders/SupportOrderItemsContaine
 import marketplaceOrderDetails from './orders/OrderDetailsContainer';
 import marketplaceOrderItemDetails from './orders/OrderItemDetailsContainer';
 import marketplaceProjectResourcesList from './orders/ProjectResourcesContainer';
-import marketplaceUsageButton from './orders/ResourceUsageButton';
-import marketplaceUsageDialog from './orders/ResourceUsageDialog';
+import marketplaceResourceShowUsageButton from './orders/ResourceShowUsageButton';
+import marketplaceResourceShowUsageDialog from './orders/ResourceShowUsageDialog';
+import marketplaceResourceCreateUsageDialog from './orders/ResourceCreateUsageDialog';
 import marketplaceOfferingDetailsButton from './orders/OfferingDetailsButton';
 import marketplaceOfferingDetailsDialog from './orders/OfferingDetailsDialog';
 import marketplaceAttributeFilterListDialog from './category/filters/AttributeFilterListDialog';
@@ -51,8 +52,9 @@ export default module => {
   module.component('marketplaceMyOrderItemsList', marketplaceMyOrderItemsList);
   module.component('marketplaceSupportOrderItemsList', marketplaceSupportOrderItemsList);
   module.component('marketplaceProjectResourcesList', marketplaceProjectResourcesList);
-  module.component('marketplaceResourceUsageButton', marketplaceUsageButton);
-  module.component('marketplaceResourceUsageDialog', marketplaceUsageDialog);
+  module.component('marketplaceResourceShowUsageButton', marketplaceResourceShowUsageButton);
+  module.component('marketplaceResourceShowUsageDialog', marketplaceResourceShowUsageDialog);
+  module.component('marketplaceResourceCreateUsageDialog', marketplaceResourceCreateUsageDialog);
   module.component('marketplaceOrderDetails', marketplaceOrderDetails);
   module.component('marketplaceOrderItemDetails', marketplaceOrderItemDetails);
   module.component('marketplaceAttributeFilterListDialog', marketplaceAttributeFilterListDialog);
