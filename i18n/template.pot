@@ -2515,6 +2515,10 @@ msgstr ""
 msgid "If not, append it there on a new line. If file is not present, create a new file with the key."
 msgstr ""
 
+#: src/marketplace/orders/ResourceUsageForm.tsx
+msgid "If value for usage period does not exist yet, it will be created, otherwise new value wíll override old value."
+msgstr ""
+
 #: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "If you need to manually install a library, please follow these steps:"
 msgstr ""
@@ -3226,6 +3230,10 @@ msgstr ""
 
 #: src/marketplace/routes.js
 msgid "Marketplace checkout"
+msgstr ""
+
+#: src/marketplace/orders/ResourceUsageContainer.tsx
+msgid "Marketplace offering does not have any usage-based components."
 msgstr ""
 
 #: src/marketplace/routes.js
@@ -5351,6 +5359,10 @@ msgstr ""
 msgid "Report incorrect data"
 msgstr ""
 
+#: src/marketplace/orders/ResourceCreateUsageButton.tsx
+msgid "Report usage"
+msgstr ""
+
 #: src/issues/list/issues-short-list.html
 msgid "Reported by me"
 msgstr ""
@@ -5575,7 +5587,8 @@ msgstr ""
 
 #: src/analytics/routes.js
 #: src/customer/workspace/customer-workspace.js
-#: src/marketplace/orders/ResourceUsageDialog.tsx
+#: src/marketplace/orders/ResourceCreateUsageDialog.tsx
+#: src/marketplace/orders/ResourceShowUsageDialog.tsx
 msgid "Resource usage"
 msgstr ""
 
@@ -6172,7 +6185,7 @@ msgstr ""
 msgid "Show shared"
 msgstr ""
 
-#: src/marketplace/orders/ResourceUsageButton.tsx
+#: src/marketplace/orders/ResourceShowUsageButton.tsx
 msgid "Show usage"
 msgstr ""
 
@@ -6405,6 +6418,10 @@ msgstr ""
 
 #: src/experts/requests/actions/expert-request-complain.js
 msgid "Submit complaint"
+msgstr ""
+
+#: src/marketplace/orders/ResourceCreateUsageDialog.tsx
+msgid "Submit usage report"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
@@ -7124,6 +7141,10 @@ msgstr ""
 msgid "Unable to load marketplace category details"
 msgstr ""
 
+#: src/marketplace/orders/ResourceUsageContainer.tsx
+msgid "Unable to load marketplace offering details."
+msgstr ""
+
 #: src/marketplace/common/OfferingGrid.tsx
 msgid "Unable to load marketplace offerings."
 msgstr ""
@@ -7219,6 +7240,10 @@ msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to submit order."
+msgstr ""
+
+#: src/marketplace/orders/store/effects.ts
+msgid "Unable to submit usage report."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -7366,6 +7391,26 @@ msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Usage overview"
+msgstr ""
+
+#: src/marketplace/orders/ResourceUsageForm.tsx
+msgid "Usage period"
+msgstr ""
+
+#: src/marketplace/orders/ResourceUsageForm.tsx
+msgid "Usage period corresponds to one day."
+msgstr ""
+
+#: src/marketplace/orders/ResourceUsageForm.tsx
+msgid "Usage period corresponds to one half of month."
+msgstr ""
+
+#: src/marketplace/orders/ResourceUsageForm.tsx
+msgid "Usage period corresponds to one month."
+msgstr ""
+
+#: src/marketplace/orders/store/effects.ts
+msgid "Usage report has been submitted."
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentForm.tsx

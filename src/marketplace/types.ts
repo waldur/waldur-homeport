@@ -22,6 +22,9 @@ export interface OfferingComponent {
   type: string;
   name: string;
   measured_unit: string;
+  description: string;
+  limit_period?: 'month' | 'total';
+  limit_amount: number;
 }
 
 export interface Plan {

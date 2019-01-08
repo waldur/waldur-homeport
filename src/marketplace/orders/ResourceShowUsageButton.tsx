@@ -7,7 +7,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import ActionButton from '@waldur/table-react/ActionButton';
 
 const openResourceUsageDialog = (id: string) =>
-  openModalDialog('marketplaceResourceUsageDialog', {resolve: {resource_uuid: id}});
+  openModalDialog('marketplaceResourceShowUsageDialog', {resolve: {resource_uuid: id}});
 
 interface ResourceUsageButton {
   resource: string;
@@ -26,6 +26,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   openDialog: () => dispatch(openResourceUsageDialog(ownProps.resource)),
 });
 
-export const ResourceUsageButton = connect(null, mapDispatchToProps)(PureResourceUsageButton);
+export const ResourceShowUsageButton = connect(null, mapDispatchToProps)(PureResourceUsageButton);
 
-export default connectAngularComponent(ResourceUsageButton, ['resource']);
+export default connectAngularComponent(ResourceShowUsageButton, ['resource']);

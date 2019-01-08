@@ -6,11 +6,12 @@ interface NumberFieldProps extends FormField {
   step?: number | string;
   min?: number | string;
   max?: number | string;
+  unit?: string;
 }
 
 export const NumberField = (props: NumberFieldProps) => {
   const { input, label, validate, ...rest } = props;
-  return (
+  const control = (
     <input
       {...props.input}
       type="number"
@@ -18,4 +19,14 @@ export const NumberField = (props: NumberFieldProps) => {
       {...rest}
     />
   );
+  if (props.unit) {
+    return (
+      <div className="input-group" style={{maxWidth: '15em'}}>
+        {control}
+        <span className="input-group-addon">{props.unit}</span>
+      </div>
+    );
+  } else {
+    return control;
+  }
 };

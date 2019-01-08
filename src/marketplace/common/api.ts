@@ -79,3 +79,6 @@ export const getServiceProviderSecretCode = id =>
 
 export const generateServiceProviderSecretCode = id =>
   post(`/marketplace-service-providers/${id}/api_secret_code/`).then(response => response.data);
+
+export const submitUsageReport = payload =>
+  post(`/marketplace-component-usages/set_usage/`, payload).then(response => response.data);
