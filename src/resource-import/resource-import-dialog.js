@@ -16,6 +16,7 @@ const resourceImportDialog = {
       ncUtilsFlash,
       WorkspaceService,
       AppstoreProvidersService,
+      currentStateService,
       CategoriesService) {
       this.$state = $state;
       this.$rootScope = $rootScope;
@@ -24,6 +25,7 @@ const resourceImportDialog = {
       this.WorkspaceService = WorkspaceService;
       this.AppstoreProvidersService = AppstoreProvidersService;
       this.CategoriesService = CategoriesService;
+      this.currentStateService = currentStateService;
     }
 
     $onInit() {
@@ -72,11 +74,14 @@ const resourceImportDialog = {
     }
 
     loadProviders() {
-      let workspace = this.WorkspaceService.getWorkspace();
-      return this.AppstoreProvidersService.loadServices(workspace.project).then(project => {
-        let categories = this.CategoriesService.getResourceCategories();
-        let selectedCategory = categories.filter(category => category.key === this.resolve.category)[0];
-        return project.services.filter(provider => selectedCategory.services.indexOf(provider.type) !== -1);
+      return this.currentStateService.getProject().then(project => {
+        return this.AppstoreProvidersService.loadServices(project).then(project => {
+          let categories = this.CategoriesService.getResourceCategories();
+          // Volumes and storages are treated the same way for the moment.
+          const key = this.resolve.category === 'volumes' ? 'storages' : this.resolve.category;
+          let selectedCategory = categories.filter(category => category.key === key)[0];
+          return project.services.filter(provider => selectedCategory.services.indexOf(provider.type) !== -1);
+        });
       });
     }
   }
