@@ -1,10 +1,22 @@
-export interface FeedItem {
-  html_message: string;
-  created: Date;
-  event_type?: string;
+export type ChartData = Array<{
+  label: string;
+  value: number | string;
+}>;
+
+export interface Chart {
+  title: string;
+  units?: string;
+  current: number | string;
+  data: ChartData;
 }
 
-export interface Project {
-  uuid: string;
+export interface Scope {
   url: string;
+}
+
+export interface Quota {
+  quota: string;
+  title: string;
+  feature?: string;
+  type?: 'filesize' | 'hours';
 }

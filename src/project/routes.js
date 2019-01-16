@@ -83,7 +83,8 @@ export default function projectRoutes($stateProvider) {
       template: '<project-dashboard project="currentProject"></project-dashboard>',
       data: {
         pageTitle: gettext('Dashboard'),
-        pageClass: 'gray-bg'
+        pageClass: 'gray-bg',
+        hideBreadcrumbs: true,
       }
     })
 

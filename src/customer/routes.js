@@ -51,7 +51,7 @@ export default function organizationRoutes($stateProvider) {
         auth: true,
         workspace: WOKSPACE_NAMES.organization
       },
-      template: '<customer-workspace><ui-view></ui-view></customer-workspace>',
+      template: '<customer-workspace><div ui-view></div></customer-workspace>',
       resolve: {
         currentCustomer: loadCustomer,
       },
@@ -60,10 +60,11 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.dashboard', {
       url: 'dashboard/',
-      template: '<organization-dashboard customer="currentCustomer"></organization-dashboard>',
+      template: '<customer-dashboard></customer-dashboard>',
       data: {
         pageTitle: gettext('Dashboard'),
         pageClass: 'gray-bg',
+        hideBreadcrumbs: true,
       }
     })
 

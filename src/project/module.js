@@ -1,3 +1,4 @@
+import ProjectDashboard from './ProjectDashboardContainer';
 import projectDetails from './ProjectUpdateContainer';
 import projectDetailsButton from './project-details-button';
 import projectCreate from './ProjectCreateContainer';
@@ -15,6 +16,7 @@ import projectRoutes from './routes';
 import './events';
 
 export default module => {
+  module.component('projectDashboard', ProjectDashboard);
   module.component('projectDetails', projectDetails);
   module.component('projectDetailsButton', projectDetailsButton);
   module.component('projectCreate', projectCreate);

@@ -4,10 +4,10 @@ export interface User {
   url: string;
   uuid: string;
   customer_permissions?: Permission[];
+  full_name?: string;
 }
 
 export interface UserDetails extends User {
-  full_name: string;
   native_name?: string;
   civil_number: string;
   phone_number: string;
@@ -42,12 +42,20 @@ export interface Quota {
   usage: number;
 }
 
+interface BillingPriceEstimate {
+  total: number;
+  current: number;
+  limit: number;
+  threshold: number;
+}
+
 export interface Project {
   name: string;
   uuid: string;
   url: string;
   permissions: Permission[];
   quotas: Quota[];
+  billing_price_estimate?: BillingPriceEstimate;
 }
 
 export type WorkspaceType = 'user' | 'project' | 'organization' | 'support';

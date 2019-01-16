@@ -5,7 +5,6 @@ import { reducer as analytics } from '@waldur/analytics/reducers';
 import { reducer as jupyterHubManagement } from '@waldur/ansible/jupyter-hub-management/reducers';
 import { reducer as pythonManagementDetails } from '@waldur/ansible/python-management/reducers';
 import { reducer as downloadLink } from '@waldur/core/DownloadLink/reducers';
-import { dashboardChart } from '@waldur/dashboard/chart/reducers';
 import { reducer as issues } from '@waldur/issues/reducers';
 import { reducer as marketplace } from '@waldur/marketplace/store/reducers';
 import { reducer as provider } from '@waldur/providers/reducers';
@@ -21,7 +20,6 @@ export default combineReducers({
   analytics,
   form: formReducer,
   config,
-  dashboardChart,
   tables,
   issues,
   pythonManagementDetails,
