@@ -11,7 +11,6 @@ import slurmAllocationCheckoutSummary from './slurm-allocation-checkout-summary'
 import quotaPie from './quota-pie';
 import slurmPrices from './slurm-prices';
 import detailsModule from './details/module';
-import './dashboard-quotas';
 import './provider';
 import './register-header';
 import './marketplace';

@@ -75,7 +75,7 @@ export class EChart extends React.Component<ChartProps> {
         style={style}
       >
         {loading && <LoadingSpinner />}
-        < div
+        <div
           className={classNames({ hidden: loading })}
           style={style}
           ref={container => this.container = container}

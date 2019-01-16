@@ -3,9 +3,8 @@ import * as React from 'react';
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { makeCancelable } from '@waldur/core/makeCancelable';
-import { getFormatterUnits } from '@waldur/dashboard/chart/api';
-import { PROJECT_DASHBOARD } from '@waldur/dashboard/constants';
-import { getDashboardQuotas } from '@waldur/dashboard/registry';
+import { getFormatterUnits } from '@waldur/dashboard/api';
+import { getDashboardCategories } from '@waldur/dashboard/categories';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
@@ -14,7 +13,8 @@ import { Quota, Project } from '@waldur/workspace/types';
 import { ExpandableRow, ProjectExpandableRow } from './ProjectExpandableRow';
 
 const parseQuotas = (quotaItems: Quota[]): ExpandableRow[] => {
-  const quotas = getDashboardQuotas(PROJECT_DASHBOARD);
+  const categories = getDashboardCategories('project');
+  const quotas = categories.reduce((acc, category) => [...acc, ...category.quotas], []);
   const usages = quotaItems.reduce((map, quota) => ({
     ...map,
     [quota.name]: quota.usage,

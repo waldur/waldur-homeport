@@ -2,7 +2,6 @@ import formActionSaga from 'redux-form-saga';
 
 import analytics from '@waldur/analytics/effects';
 import downloadLinkSaga from '@waldur/core/DownloadLink/effects';
-import chartSaga from '@waldur/dashboard/chart/effects';
 import jiraSaga from '@waldur/jira/issue/effects';
 import issueAttachmentsSaga from '@waldur/issues/attachments/effects';
 import issueCommentsSaga from '@waldur/issues/comments/effects';
@@ -26,7 +25,6 @@ export default [
   analytics,
   downloadLinkSaga,
   formActionSaga,
-  chartSaga,
   jiraSaga,
   projectSaga,
   userSaga,
