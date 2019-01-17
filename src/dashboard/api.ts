@@ -64,9 +64,12 @@ export const formatQuotaChart = (quota: Quota, values: number[]): Chart => {
   const current = formatter(values[values.length - 1]);
 
   const data: ChartData = values.map((value, index) => {
-    const date = formatDate(moment().startOf('day').subtract(index, 'days'));
-    return {label: date, value: formatter(value)};
-  }).reverse();
+    const date = moment().subtract(30, 'days').startOf('day').add(index, 'days');
+    const formattedDate = formatDate(date);
+    const formattedValue = formatter(value);
+    const label = `${formattedValue} at ${formattedDate}`;
+    return {label, value: formattedValue};
+  });
 
   return {
     title: quota.title,
