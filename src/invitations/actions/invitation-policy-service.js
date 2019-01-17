@@ -1,5 +1,5 @@
 // @ngInject
-export default function InvitationPolicyService(ENV) {
+export default function InvitationPolicyService(ENV, customersService) {
   // This service provides business logic for invitation permissions:
   // 1) Staff can manage any invitation.
   // 2) Non-owner (namely customer support, project manager or system admin) can not manage invitations.
@@ -13,10 +13,10 @@ export default function InvitationPolicyService(ENV) {
 
   // Check user permissions for new invitation
   function canManageRole(context, role) {
-    if (context.isStaff) {
+    if (context.user.is_staff) {
       return true;
     }
-    if (!context.isOwner) {
+    if (!customersService.isOwner(context.customer, context.user)) {
       return false;
     }
     if (role.field === 'project_role') {
@@ -29,10 +29,10 @@ export default function InvitationPolicyService(ENV) {
 
   // Check user permissions for existing invitation
   function canManageInvitation(context, invitation) {
-    if (context.isStaff) {
+    if (context.user.is_staff) {
       return true;
     }
-    if (!context.isOwner) {
+    if (!customersService.isOwner(context.customer, context.user)) {
       return false;
     }
     if (invitation.project_role) {

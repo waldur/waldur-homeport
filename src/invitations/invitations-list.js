@@ -54,8 +54,6 @@ function InvitationsListController(
         resetCache: controllerScope.resetCache.bind(this),
         customer: this.currentCustomer,
         user: this.currentUser,
-        isStaff: this.currentUser.is_staff,
-        isOwner: customersService.isOwner(this.currentCustomer, this.currentUser)
       };
     },
     getFilter: function() {

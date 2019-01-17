@@ -1,6 +1,7 @@
 import ErrorMessageFormatter from './ErrorMessageFormatter';
 import submitButton from './submit-button';
 import loadingSpinner from './LoadingSpinner';
+import messageDialog from './MessageDialog';
 import multipleSelect from './multiple-select';
 import sentryModule from './sentry';
 import { baseServiceClass, listCache } from './base-service';
@@ -22,6 +23,7 @@ export default module => {
   module.service('tabCounterService', tabCounterService);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
+  module.component('messageDialog', messageDialog);
   module.directive('multipleSelect', multipleSelect);
   module.directive('extensionPoint', extensionPoint);
   module.service('extensionPointService', extensionPointService);
