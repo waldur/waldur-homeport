@@ -264,7 +264,7 @@ msgid "Add private cloud"
 msgstr ""
 
 #: src/appstore/dialog/appstore-project-selector.html
-#: src/customer/dashboard/CustomerActions.tsx
+#: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
 msgid "Add project"
@@ -289,6 +289,10 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Add snapshots"
+msgstr ""
+
+#: src/project/ProjectActions.tsx
+msgid "Add team member"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartButton.tsx
@@ -2825,8 +2829,7 @@ msgstr ""
 msgid "Invite new users."
 msgstr ""
 
-#: src/customer/dashboard/CustomerActions.tsx
-#: src/project/ProjectActions.tsx
+#: src/customer/dashboard/InviteUserAction.ts
 msgid "Invite team member"
 msgstr ""
 
@@ -5376,17 +5379,16 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
+#: src/dashboard/ReportIssueAction.tsx
+msgid "Report an issue"
+msgstr ""
+
 #: src/offering/OfferingReportDialog.tsx
 msgid "Report details"
 msgstr ""
 
 #: src/customer/details/customer-manage.html
 msgid "Report incorrect data"
-msgstr ""
-
-#: src/customer/dashboard/CustomerActions.tsx
-#: src/project/ProjectActions.tsx
-msgid "Report issue"
 msgstr ""
 
 #: src/marketplace/orders/ResourceCreateUsageButton.tsx
@@ -6894,6 +6896,10 @@ msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "To remove account, please send a request to {support}."
+msgstr ""
+
+#: src/dashboard/ReportIssueAction.tsx
+msgid "To report an issue, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a>."
 msgstr ""
 
 #: src/intro/base-intro.js

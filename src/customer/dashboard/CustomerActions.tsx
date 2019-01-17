@@ -1,28 +1,16 @@
 import * as React from 'react';
 
-import { $state } from '@waldur/core/services';
 import { ActionList } from '@waldur/dashboard/ActionList';
-import { translate } from '@waldur/i18n';
+import { getIssueAction } from '@waldur/dashboard/ReportIssueAction';
 
-export const CustomerActions = () => (
+import { getProjectAction } from './CreateProjectAction';
+import { getInviteAction } from './InviteUserAction';
+import { CustomerActionsProps } from './types';
+
+export const CustomerActions = (props: CustomerActionsProps) => (
   <ActionList actions={[
-    {
-      title: translate('Add project'),
-      onClick() {
-        $state.go('organization.createProject');
-      },
-    },
-    {
-      title: translate('Invite team member'),
-      onClick() {
-        $state.go('organization.team');
-      },
-    },
-    {
-      title: translate('Report issue'),
-      onClick() {
-        $state.go('organization.issues');
-      },
-    },
-  ]}/>
+    getProjectAction(props),
+    getInviteAction(props),
+    getIssueAction({issue: {customer: props.customer}, state: 'organization.issues'}),
+  ].filter(action => action !== null)}/>
 );

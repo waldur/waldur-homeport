@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { $state } from '@waldur/core/services';
 import { ActionList } from '@waldur/dashboard/ActionList';
+import { getIssueAction } from '@waldur/dashboard/ReportIssueAction';
 import { translate } from '@waldur/i18n';
 import { $uibModal } from '@waldur/modal/services';
 import { Project } from '@waldur/workspace/types';
@@ -25,21 +26,11 @@ export const ProjectActions = (props: ProjectActionsProps) => (
       },
     },
     {
-      title: translate('Invite team member'),
+      title: translate('Add team member'),
       onClick() {
         $state.go('project.team');
       },
     },
-    {
-      title: translate('Report issue'),
-      onClick() {
-        $uibModal.open({
-          component: 'issueCreateDialog',
-          resolve: {
-            issue: () => ({project: props.project}),
-          },
-        });
-      },
-    },
+    getIssueAction({issue: {project: props.project}, state: 'project.issues'}),
   ]}/>
 );

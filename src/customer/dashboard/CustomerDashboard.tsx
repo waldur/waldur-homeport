@@ -44,7 +44,7 @@ export const CustomerDashboard = (props: CustomerDashboardProps) => (
                 </Col>
               ))}
               <Col md={4}>
-                <CustomerActions/>
+                <CustomerActions customer={props.customer} user={props.user}/>
               </Col>
             </Row>
             <CategoryResourcesList
