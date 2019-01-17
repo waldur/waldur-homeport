@@ -44,7 +44,6 @@ module.exports = {
       'angular',
       'angular-cron-jobs',
       'angular-animate',
-      'angular-block-ui',
       'angular-cookies',
       'angular-loader',
       'angular-gravatar',
