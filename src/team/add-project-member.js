@@ -72,10 +72,13 @@ const addProjectMember = {
 
     saveUser() {
       this.errors = [];
+      this.saving = true;
       return this.saveProjectPermissions()
         .then(() => {
           this.close();
+          this.saving = false;
         }, (error) => {
+          this.saving = false;
           this.errors = this.ErrorMessageFormatter.formatErrorFields(error);
         });
     }

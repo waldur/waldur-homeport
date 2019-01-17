@@ -112,13 +112,16 @@ const addTeamMember = {
 
     saveUser() {
       this.errors = [];
+      this.saving = true;
       return this.$q.all([
         this.saveCustomerPermission(),
         this.saveProjectPermissions()
       ]).then(() => {
         this.close();
+        this.saving = false;
       }, error => {
         this.errors = this.ErrorMessageFormatter.formatErrorFields(error);
+        this.saving = false;
       });
     }
 
