@@ -69,7 +69,6 @@ const appModule = angular.module('waldur', [
   'flash',
   'angulartics',
   'angulartics.google.analytics',
-  'blockUI',
   'ngSanitize',
   'angular-cron-jobs',
   'ui.bootstrap',

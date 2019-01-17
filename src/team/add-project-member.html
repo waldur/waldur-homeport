@@ -5,7 +5,7 @@
   <div ng-if="$ctrl.loading">
     <loading-spinner></loading-spinner>
   </div>
-  <div ng-if="!$ctrl.loading" block-ui="add-team-member-dialog">
+  <div ng-if="!$ctrl.loading" ng-class="{disabled: $ctrl.saving}">
     <div class="form-group" ng-if="!$ctrl.resolve.editUser && $ctrl.users.length">
       <label class="control-label" translate>User</label>
       <user-selector users="$ctrl.users" model="$ctrl.projectModel"></user-selector>
