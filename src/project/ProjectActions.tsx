@@ -25,7 +25,7 @@ export const ProjectActions = (props: ProjectActionsProps) => (
       },
     },
     {
-      title: translate('Invite team member'),
+      title: translate('Add team member'),
       onClick() {
         $state.go('project.team');
       },

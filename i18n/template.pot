@@ -291,6 +291,10 @@ msgstr ""
 msgid "Add snapshots"
 msgstr ""
 
+#: src/project/ProjectActions.tsx
+msgid "Add team member"
+msgstr ""
+
 #: src/marketplace/cart/ShoppingCartButton.tsx
 msgid "Add to cart"
 msgstr ""
@@ -2826,7 +2830,6 @@ msgid "Invite new users."
 msgstr ""
 
 #: src/customer/dashboard/CustomerActions.tsx
-#: src/project/ProjectActions.tsx
 msgid "Invite team member"
 msgstr ""
 
