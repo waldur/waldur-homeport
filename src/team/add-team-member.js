@@ -14,7 +14,6 @@ const addTeamMember = {
       customersService,
       customerPermissionsService,
       projectPermissionsService,
-      blockUI,
       ENV,
       ErrorMessageFormatter,
       $filter) {
@@ -22,7 +21,6 @@ const addTeamMember = {
       this.customersService = customersService;
       this.customerPermissionsService = customerPermissionsService;
       this.projectPermissionsService = projectPermissionsService;
-      this.blockUI = blockUI;
       this.ENV = ENV;
       this.ErrorMessageFormatter = ErrorMessageFormatter;
       this.$filter = $filter;
@@ -114,16 +112,12 @@ const addTeamMember = {
 
     saveUser() {
       this.errors = [];
-      let block = this.blockUI.instances.get('add-team-member-dialog');
-      block.start({delay: 0});
       return this.$q.all([
         this.saveCustomerPermission(),
         this.saveProjectPermissions()
       ]).then(() => {
-        block.stop();
         this.close();
       }, error => {
-        block.stop();
         this.errors = this.ErrorMessageFormatter.formatErrorFields(error);
       });
     }

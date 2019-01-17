@@ -1235,11 +1235,6 @@ angular-bind-html-compile-ci-dev@^1.2.2:
   resolved "https://registry.yarnpkg.com/angular-bind-html-compile-ci-dev/-/angular-bind-html-compile-ci-dev-1.2.2.tgz#fb85dba1ab8e8ceb9564a4260dd360ddd43606ab"
   integrity sha1-+4XboauOjOuVZKQmDdNg3dQ2Bqs=
 
-angular-block-ui@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/angular-block-ui/-/angular-block-ui-0.2.2.tgz#466613cd80ad286eb4b588cfced00fec6ac5e975"
-  integrity sha1-RmYTzYCtKG60tYjPztAP7GrF6XU=
-
 "angular-cookies@>=1.2.26 <=1.5", angular-cookies@~1.5.11:
   version "1.5.11"
   resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.5.11.tgz#88558de7c5044dcc3abeb79614d7ef8107ba49c0"

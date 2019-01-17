@@ -28,7 +28,6 @@
     "angular": "~1.5.11",
     "angular-animate": "~1.5.11",
     "angular-bind-html-compile-ci-dev": "^1.2.2",
-    "angular-block-ui": "^0.2.2",
     "angular-cookies": "~1.5.11",
     "angular-cron-jobs": "^3.2.0",
     "angular-flash-alert": "~1.1.0",

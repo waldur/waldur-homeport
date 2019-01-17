@@ -18,8 +18,6 @@ import 'bootstrap/js/dropdown';
 import 'angular-cron-jobs';
 import 'angular-cron-jobs/dist/angular-cron-jobs.css';
 import 'angular-animate';
-import 'angular-block-ui';
-import 'angular-block-ui/dist/angular-block-ui.css';
 import 'angular-cookies';
 import 'angular-loader';
 import 'angular-gravatar';
