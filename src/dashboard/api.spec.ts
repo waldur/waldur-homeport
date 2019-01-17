@@ -50,18 +50,9 @@ describe('Dashboard chart API', () => {
     expect(chart.units).toBe('MB');
     expect(chart.current).toBe(40);
     expect(chart.data).toEqual([
-      {
-        label: '2018-10-14',
-        value: 40,
-      },
-      {
-        label: '2018-10-15',
-        value: 20,
-      },
-      {
-        label: '2018-10-16',
-        value: 10,
-      },
+      { label: '10 at 2018-09-16', value: 10 },
+      { label: '20 at 2018-09-17', value: 20 },
+      { label: '40 at 2018-09-18', value: 40 },
     ]);
   });
 });
