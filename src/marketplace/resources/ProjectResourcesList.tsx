@@ -9,16 +9,22 @@ import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
-import { OrderItemLink } from './OrderItemLink';
-import { OrderItemResponse } from './types';
+import { CategoryColumnField } from './CategoryColumnField';
+import { ResourceDetailsLink } from './ResourceDetailsLink';
+import { ResourceStateField } from './ResourceStateField';
+import { Resource } from './types';
 
-const NameField = ({ row }: {row: OrderItemResponse}) => {
+interface FieldProps {
+  row: Resource;
+}
+
+const NameField = ({row}: FieldProps) => {
   const label = row.attributes.name || row.offering_name;
   if (row.resource_type && row.resource_uuid) {
     return (
-      <OrderItemLink item={row}>
+      <ResourceDetailsLink item={row}>
         {label}
-      </OrderItemLink>
+      </ResourceDetailsLink>
     );
   } else {
     return label;
@@ -32,19 +38,23 @@ export const TableComponent = props => {
       render: NameField,
     },
     {
+      title: translate('Provider'),
+      render: ({ row }: FieldProps) => row.offering_name,
+    },
+    {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
     },
     {
       title: translate('State'),
-      render: ({ row }) => row.state,
+      render: ResourceStateField,
     },
   ];
 
   props.columns.map((column: CategoryColumn) => {
     columns.push({
       title: column.title,
-      render: ({ row }) => row.attributes[column.attribute] || 'N/A',
+      render: ({row}) => CategoryColumnField({ row, column }),
     });
   });
 

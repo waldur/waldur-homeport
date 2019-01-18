@@ -123,7 +123,7 @@ export interface CategoryColumn {
   index: number;
   title: string;
   attribute?: string;
-  widget?: string;
+  widget?: 'csv' | 'filesize' | 'attached_instance';
 }
 
 export interface Category {
