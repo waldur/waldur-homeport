@@ -1406,7 +1406,7 @@ msgstr ""
 #: src/marketplace/orders/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/marketplace/resources/ProjectResourcesList.tsx
 msgid "Created at"
 msgstr ""
 
@@ -1498,7 +1498,7 @@ msgid "Data volume size:"
 msgstr ""
 
 #: src/dashboard/chart.ts
-#: src/marketplace/orders/ResourceUsageList.tsx
+#: src/marketplace/resources/ResourceUsageList.tsx
 #: src/payments/payment-list.js
 msgid "Date"
 msgstr ""
@@ -2535,7 +2535,7 @@ msgstr ""
 msgid "If not, append it there on a new line. If file is not present, create a new file with the key."
 msgstr ""
 
-#: src/marketplace/orders/ResourceUsageForm.tsx
+#: src/marketplace/resources/ResourceUsageForm.tsx
 msgid "If value for usage period does not exist yet, it will be created, otherwise new value wíll override old value."
 msgstr ""
 
@@ -3257,7 +3257,7 @@ msgstr ""
 msgid "Marketplace checkout"
 msgstr ""
 
-#: src/marketplace/orders/ResourceUsageContainer.tsx
+#: src/marketplace/resources/ResourceUsageContainer.tsx
 msgid "Marketplace offering does not have any usage-based components."
 msgstr ""
 
@@ -3454,8 +3454,8 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
-#: src/marketplace/orders/ProjectResourcesList.tsx
-#: src/marketplace/orders/ResourceUsageList.tsx
+#: src/marketplace/resources/ProjectResourcesList.tsx
+#: src/marketplace/resources/ResourceUsageList.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/OracleSnapshots.tsx
@@ -4983,6 +4983,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/events/EventDetailsTable.tsx
 #: src/jira/project/jira-projects-list.js
+#: src/marketplace/resources/ProjectResourcesList.tsx
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -5391,7 +5392,7 @@ msgstr ""
 msgid "Report incorrect data"
 msgstr ""
 
-#: src/marketplace/orders/ResourceCreateUsageButton.tsx
+#: src/marketplace/resources/ResourceCreateUsageButton.tsx
 msgid "Report usage"
 msgstr ""
 
@@ -5619,8 +5620,8 @@ msgstr ""
 
 #: src/analytics/routes.js
 #: src/customer/workspace/customer-workspace.js
-#: src/marketplace/orders/ResourceCreateUsageDialog.tsx
-#: src/marketplace/orders/ResourceShowUsageDialog.tsx
+#: src/marketplace/resources/ResourceCreateUsageDialog.tsx
+#: src/marketplace/resources/ResourceShowUsageDialog.tsx
 msgid "Resource usage"
 msgstr ""
 
@@ -5628,7 +5629,7 @@ msgstr ""
 #: src/experts/requests/details/expert-request-details.js
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
-#: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/marketplace/resources/ProjectResourcesList.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 #: src/offering/offering-details.js
@@ -6213,7 +6214,7 @@ msgstr ""
 msgid "Show shared"
 msgstr ""
 
-#: src/marketplace/orders/ResourceShowUsageButton.tsx
+#: src/marketplace/resources/ResourceShowUsageButton.tsx
 msgid "Show usage"
 msgstr ""
 
@@ -6356,7 +6357,7 @@ msgstr ""
 #: src/marketplace/orders/OrderItemsFilter.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/marketplace/resources/ProjectResourcesList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
@@ -6449,7 +6450,7 @@ msgstr ""
 msgid "Submit complaint"
 msgstr ""
 
-#: src/marketplace/orders/ResourceCreateUsageDialog.tsx
+#: src/marketplace/resources/ResourceCreateUsageDialog.tsx
 msgid "Submit usage report"
 msgstr ""
 
@@ -6957,7 +6958,7 @@ msgstr ""
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
-#: src/marketplace/orders/ResourceUsageList.tsx
+#: src/marketplace/resources/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -7170,11 +7171,11 @@ msgstr ""
 msgid "Unable to load marketplace categories."
 msgstr ""
 
-#: src/marketplace/orders/ProjectResourcesContainer.tsx
+#: src/marketplace/resources/ProjectResourcesContainer.tsx
 msgid "Unable to load marketplace category details"
 msgstr ""
 
-#: src/marketplace/orders/ResourceUsageContainer.tsx
+#: src/marketplace/resources/ResourceUsageContainer.tsx
 msgid "Unable to load marketplace offering details."
 msgstr ""
 
@@ -7275,7 +7276,7 @@ msgstr ""
 msgid "Unable to submit order."
 msgstr ""
 
-#: src/marketplace/orders/store/effects.ts
+#: src/marketplace/resources/store/effects.ts
 msgid "Unable to submit usage report."
 msgstr ""
 
@@ -7312,7 +7313,7 @@ msgid "Unfortunately, connection to server has failed. Please check if you can c
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#: src/marketplace/orders/ResourceUsageList.tsx
+#: src/marketplace/resources/ResourceUsageList.tsx
 msgid "Unit"
 msgstr ""
 
@@ -7427,23 +7428,23 @@ msgstr ""
 msgid "Usage overview"
 msgstr ""
 
-#: src/marketplace/orders/ResourceUsageForm.tsx
+#: src/marketplace/resources/ResourceUsageForm.tsx
 msgid "Usage period"
 msgstr ""
 
-#: src/marketplace/orders/ResourceUsageForm.tsx
+#: src/marketplace/resources/ResourceUsageForm.tsx
 msgid "Usage period corresponds to one day."
 msgstr ""
 
-#: src/marketplace/orders/ResourceUsageForm.tsx
+#: src/marketplace/resources/ResourceUsageForm.tsx
 msgid "Usage period corresponds to one half of month."
 msgstr ""
 
-#: src/marketplace/orders/ResourceUsageForm.tsx
+#: src/marketplace/resources/ResourceUsageForm.tsx
 msgid "Usage period corresponds to one month."
 msgstr ""
 
-#: src/marketplace/orders/store/effects.ts
+#: src/marketplace/resources/store/effects.ts
 msgid "Usage report has been submitted."
 msgstr ""
 
@@ -7451,7 +7452,7 @@ msgstr ""
 msgid "Usage-based"
 msgstr ""
 
-#: src/marketplace/orders/ResourceUsageList.tsx
+#: src/marketplace/resources/ResourceUsageList.tsx
 msgid "Usages"
 msgstr ""
 
@@ -7740,7 +7741,7 @@ msgstr ""
 msgid "Valid states for operation: {validStates}."
 msgstr ""
 
-#: src/marketplace/orders/ResourceUsageList.tsx
+#: src/marketplace/resources/ResourceUsageList.tsx
 msgid "Value"
 msgstr ""
 
@@ -8296,7 +8297,7 @@ msgstr ""
 msgid "virtualenv and virtualenvwrapper utilities are used to manage Python virtual environments."
 msgstr ""
 
-#: src/marketplace/orders/ProjectResourcesContainer.tsx
+#: src/marketplace/resources/ProjectResourcesContainer.tsx
 msgid "{category} resources"
 msgstr ""
 

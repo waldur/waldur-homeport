@@ -4,8 +4,8 @@ import { FormContainer, NumberField } from '@waldur/form-react';
 import { DateField } from '@waldur/form-react/DateField';
 import { translate } from '@waldur/i18n';
 
+import { PlanUnit } from '../orders/types';
 import { OfferingComponent } from '../types';
-import { PlanUnit } from './types';
 
 interface OwnProps {
   components: OfferingComponent[];

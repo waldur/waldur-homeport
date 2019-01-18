@@ -5,9 +5,9 @@ import { Query } from '@waldur/core/Query';
 import { translate } from '@waldur/i18n';
 
 import { getOffering } from '../common/api';
+import { PlanUnit } from '../orders/types';
 import { Offering } from '../types';
 import { ResourceUsageForm } from './ResourceUsageForm';
-import { PlanUnit } from './types';
 
 export interface ResourceUsageContainerProps {
   offering_uuid: string;

@@ -2,16 +2,16 @@ import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
 
-import { OrderItemResponse } from './types';
+import { ResourceReference } from './types';
 
-interface OrderItemLinkProps {
-  item: OrderItemResponse;
+interface ResourceDetailsLinkProps {
+  item: ResourceReference;
   children?: React.ReactNode;
 }
 
 const supportOfferingTemplate = 'Support.Offering';
 
-export const OrderItemLink = (props: OrderItemLinkProps) => {
+export const ResourceDetailsLink = (props: ResourceDetailsLinkProps) => {
   if (props.item.resource_type === supportOfferingTemplate) {
     return (
       <Link

@@ -9,9 +9,9 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { PlanUnit } from '../orders/types';
 import { ResourceUsageContainer } from './ResourceUsageContainer';
 import { submitUsage } from './store/constants';
-import { PlanUnit } from './types';
 
 interface ResourceCreateUsageDialogProps {
   resolve: {

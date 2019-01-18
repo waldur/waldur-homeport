@@ -5,8 +5,9 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/OrderItemDetailsLink';
-import { OrderItemLink } from '@waldur/marketplace/orders/OrderItemLink';
+import { ResourceDetailsLink } from '@waldur/marketplace/resources/ResourceDetailsLink';
 
+import { ResourceReference } from '../resources/types';
 import './OrderItem.scss';
 import { OrderItemResponse } from './types';
 
@@ -36,9 +37,9 @@ export const OrderItem = (props: OrderItemProps) => (
           <p>{props.item.attributes.description || props.item.offering_description}</p>
           {props.item.resource_uuid && (
             <p>
-              <OrderItemLink item={props.item}>
+              <ResourceDetailsLink item={props.item as ResourceReference}>
                 {translate('Resource link')}
-              </OrderItemLink>
+              </ResourceDetailsLink>
             </p>
           )}
         </div>

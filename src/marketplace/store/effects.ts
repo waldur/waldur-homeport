@@ -6,6 +6,7 @@ import comparisonEffects from '../compare/store/effects';
 import landingEffects from '../landing/store/effects';
 import offeringEffects from '../offerings/store/effects';
 import ordersEffects from '../orders/store/effects';
+import resourcesEffects from '../resources/store/effects';
 import serviceProviderEffects from '../service-providers/store/effects';
 
 export default function*() {
@@ -16,6 +17,7 @@ export default function*() {
     fork(landingEffects),
     fork(offeringEffects),
     fork(ordersEffects),
+    fork(resourcesEffects),
     fork(serviceProviderEffects),
   ]);
 }

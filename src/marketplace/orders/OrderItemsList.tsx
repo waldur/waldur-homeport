@@ -11,8 +11,8 @@ import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { ResourceCreateUsageButton } from './ResourceCreateUsageButton';
-import { ResourceShowUsageButton } from './ResourceShowUsageButton';
+import { ResourceCreateUsageButton } from '../resources/ResourceCreateUsageButton';
+import { ResourceShowUsageButton } from '../resources/ResourceShowUsageButton';
 
 export const TableComponent = props => {
   const columns = [
