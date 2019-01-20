@@ -4,6 +4,7 @@ import { FormField } from './types';
 
 interface StringFieldProps extends FormField {
   placeholder?: string;
+  style?: any;
 }
 
 export const StringField = (props: StringFieldProps) => {

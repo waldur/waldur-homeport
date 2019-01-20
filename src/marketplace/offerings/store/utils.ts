@@ -79,6 +79,7 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
     native_name: request.native_name,
     description: request.description,
     native_description: request.native_description,
+    full_description: request.full_description,
     category: request.category.url,
     customer: customer.url,
     type: request.type.value,

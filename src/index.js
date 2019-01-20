@@ -29,7 +29,6 @@ import offeringsModule from './offering/module';
 import helpModule from './help/module';
 import costPlanningModule from './cost-planning/module';
 import coreModule from './core/module';
-import dashboardModule from './dashboard/module';
 import filtersModule from './core/filters';
 import quotasModule from './quotas/module';
 import tableModule from './table/module';
@@ -70,7 +69,6 @@ const appModule = angular.module('waldur', [
   'flash',
   'angulartics',
   'angulartics.google.analytics',
-  'blockUI',
   'ngSanitize',
   'angular-cron-jobs',
   'ui.bootstrap',
@@ -109,7 +107,6 @@ offeringsModule(appModule);
 helpModule(appModule);
 costPlanningModule(appModule);
 coreModule(appModule);
-dashboardModule(appModule);
 filtersModule(appModule);
 quotasModule(appModule);
 tableModule(appModule);

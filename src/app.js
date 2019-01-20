@@ -172,17 +172,8 @@ export function httpInterceptor($q, ncUtilsFlash, ENV, ErrorMessageFormatter, $r
 }
 
 // @ngInject
-export function errorsHandler($httpProvider, blockUIConfig) {
-  blockUIConfig.autoBlock = false;
-  blockUIConfig.delay = 500;
+export function errorsHandler($httpProvider) {
   $httpProvider.interceptors.push('httpInterceptor');
-
-  blockUIConfig.requestFilter = function(config) {
-    if(config.hasOwnProperty('params') && config.params.hasOwnProperty('DONTBLOCK')) {
-      delete config.params.DONTBLOCK;
-      return false;
-    }
-  };
 }
 
 // @ngInject

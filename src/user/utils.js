@@ -19,6 +19,12 @@ export function stateUtilsService($state) {
       $state.go(vm.prevState, vm.prevParams);
     }
   };
+
+  vm.clear = function() {
+    vm.prevState = undefined;
+    vm.prevParams = undefined;
+    vm.prevWorkspace = undefined;
+  };
 }
 
 // @ngInject

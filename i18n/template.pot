@@ -135,6 +135,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
+#: src/marketplace/orders/OrderItemsList.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/paypal/paypal-invoice-actions.html
 #: src/project/ProjectsList.tsx
@@ -175,6 +176,14 @@ msgstr ""
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/team/add-project-member.js
 msgid "Add"
+msgstr ""
+
+#: src/dashboard/categories.ts
+msgid "Add MOAB allocation"
+msgstr ""
+
+#: src/dashboard/categories.ts
+msgid "Add SLURM allocation"
 msgstr ""
 
 #: src/user/keys/key-list.js
@@ -255,6 +264,7 @@ msgid "Add private cloud"
 msgstr ""
 
 #: src/appstore/dialog/appstore-project-selector.html
+#: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
 msgid "Add project"
@@ -281,6 +291,10 @@ msgstr ""
 msgid "Add snapshots"
 msgstr ""
 
+#: src/project/ProjectActions.tsx
+msgid "Add team member"
+msgstr ""
+
 #: src/marketplace/cart/ShoppingCartButton.tsx
 msgid "Add to cart"
 msgstr ""
@@ -301,8 +315,17 @@ msgstr ""
 msgid "Add virtual environment"
 msgstr ""
 
+#: src/dashboard/categories.ts
 #: src/resource/list/resource-vms-list.js
 msgid "Add virtual machine"
+msgstr ""
+
+#: src/dashboard/categories.ts
+msgid "Add virtual private cloud"
+msgstr ""
+
+#: src/dashboard/categories.ts
+msgid "Add volume"
 msgstr ""
 
 #: src/resource/list/resource-volumes-list.js
@@ -459,7 +482,6 @@ msgstr ""
 #: src/ansible/playbook-jobs/sidebar.js
 #: src/ansible/python-management/routes.js
 #: src/appstore/routes.js
-#: src/dashboard/base-quotas.ts
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Applications"
 msgstr ""
@@ -727,20 +749,8 @@ msgstr ""
 msgid "Bank name"
 msgstr ""
 
-#: src/slurm/dashboard-quotas.ts
-msgid "Batch CPU usage"
-msgstr ""
-
-#: src/slurm/dashboard-quotas.ts
-msgid "Batch GPU usage"
-msgstr ""
-
 #: src/resource/support/ChartContainer.tsx
 msgid "Batch RAM"
-msgstr ""
-
-#: src/slurm/dashboard-quotas.ts
-msgid "Batch RAM usage"
 msgstr ""
 
 #: src/resource/support/ChartContainer.tsx
@@ -748,6 +758,7 @@ msgid "Batch block storage size"
 msgstr ""
 
 #: src/configs/base-config.js
+#: src/dashboard/categories.ts
 #: src/resource/breadcrumbs/resource-categories.js
 #: src/slurm/routes.js
 #: src/slurm/sidebar.js
@@ -784,7 +795,7 @@ msgstr ""
 msgid "Billing period"
 msgstr ""
 
-#: src/dashboard/base-quotas.ts
+#: src/dashboard/categories.ts
 msgid "Block device count"
 msgstr ""
 
@@ -793,7 +804,7 @@ msgid "Block devices"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/base-quotas.ts
+#: src/dashboard/categories.ts
 msgid "Block snapshot count"
 msgstr ""
 
@@ -806,7 +817,7 @@ msgid "Block storage size"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/base-quotas.ts
+#: src/dashboard/categories.ts
 msgid "Block volume count"
 msgstr ""
 
@@ -858,6 +869,7 @@ msgstr ""
 msgid "CPU limit, minutes"
 msgstr ""
 
+#: src/dashboard/categories.ts
 #: src/slurm/details/constants.js
 msgid "CPU usage"
 msgstr ""
@@ -1124,6 +1136,10 @@ msgstr ""
 msgid "Components"
 msgstr ""
 
+#: src/dashboard/categories.ts
+msgid "Compute"
+msgstr ""
+
 #: src/cost-planning/cost-plan-dialog.html
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
@@ -1208,6 +1224,7 @@ msgid "Cost planning"
 msgstr ""
 
 #: src/customer/details/customer-threshold.html
+#: src/project/ProjectCounters.tsx
 #: src/project/project-policies.html
 msgid "Cost threshold"
 msgstr ""
@@ -1222,6 +1239,10 @@ msgstr ""
 
 #: src/auth/saml2/auth-saml2-dialog.js
 msgid "Could not load a list of identity providers. Please try again."
+msgstr ""
+
+#: src/dashboard/api.ts
+msgid "Count"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -1385,7 +1406,7 @@ msgstr ""
 #: src/marketplace/orders/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/marketplace/resources/ProjectResourcesList.tsx
 msgid "Created at"
 msgstr ""
 
@@ -1476,6 +1497,8 @@ msgstr ""
 msgid "Data volume size:"
 msgstr ""
 
+#: src/dashboard/chart.ts
+#: src/marketplace/resources/ResourceUsageList.tsx
 #: src/payments/payment-list.js
 msgid "Date"
 msgstr ""
@@ -1620,7 +1643,6 @@ msgstr ""
 
 #: src/appstore/providers/appstore-providers.html
 #: src/cost-planning/cost-plans-list.js
-#: src/dashboard/DashboardFeed.tsx
 #: src/events/EventDetailsButton.tsx
 #: src/experts/requests/create/expert-contract-form.js
 #: src/experts/requests/details/expert-request-summary.html
@@ -1629,6 +1651,7 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
+#: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/project-details-button.html
 #: src/providers/details/dialog.html
@@ -1852,6 +1875,7 @@ msgid "Esimated price per month"
 msgstr ""
 
 #: src/customer/CustomerList.tsx
+#: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
 msgid "Estimated cost"
 msgstr ""
@@ -1897,13 +1921,11 @@ msgstr ""
 msgid "Event type"
 msgstr ""
 
-#: src/dashboard/ProjectEventsFeed.tsx
 #: src/events/EventTypesButton.tsx
 #: src/events/EventTypesDialog.tsx
 msgid "Event types"
 msgstr ""
 
-#: src/dashboard/ProjectEventsFeed.tsx
 #: src/events/help.js
 #: src/help/constants.js
 #: src/user/hooks/hook-list.js
@@ -2031,7 +2053,6 @@ msgid "Expert request has been created."
 msgstr ""
 
 #: src/experts/extensions/customer-workspace.html
-#: src/experts/extensions/dashboard-quotas.ts
 #: src/experts/extensions/sidebar.js
 #: src/experts/requests/details/expert-request-details.js
 msgid "Expert requests"
@@ -2308,6 +2329,7 @@ msgstr ""
 msgid "GPU limit, minutes"
 msgstr ""
 
+#: src/dashboard/categories.ts
 #: src/slurm/details/constants.js
 msgid "GPU usage"
 msgstr ""
@@ -2511,6 +2533,10 @@ msgstr ""
 
 #: src/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "If not, append it there on a new line. If file is not present, create a new file with the key."
+msgstr ""
+
+#: src/marketplace/resources/ResourceUsageForm.tsx
+msgid "If value for usage period does not exist yet, it will be created, otherwise new value wíll override old value."
 msgstr ""
 
 #: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
@@ -2803,6 +2829,10 @@ msgstr ""
 msgid "Invite new users."
 msgstr ""
 
+#: src/customer/dashboard/InviteUserAction.ts
+msgid "Invite team member"
+msgstr ""
+
 #: src/invitations/actions/create.js
 #: src/invitations/actions/invitation-dialog.html
 msgid "Invite user"
@@ -3093,6 +3123,7 @@ msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
 
 #: src/analytics/utils.ts
+#: src/dashboard/chart.ts
 msgid "Limit"
 msgstr ""
 
@@ -3224,6 +3255,10 @@ msgstr ""
 
 #: src/marketplace/routes.js
 msgid "Marketplace checkout"
+msgstr ""
+
+#: src/marketplace/resources/ResourceUsageContainer.tsx
+msgid "Marketplace offering does not have any usage-based components."
 msgstr ""
 
 #: src/marketplace/routes.js
@@ -3419,7 +3454,8 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
-#: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/marketplace/resources/ProjectResourcesList.tsx
+#: src/marketplace/resources/ResourceUsageList.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/OracleSnapshots.tsx
@@ -3597,10 +3633,6 @@ msgstr ""
 
 #: src/cost-planning/cost-plans-list.js
 msgid "No cost plans found matching filter."
-msgstr ""
-
-#: src/dashboard/ProjectEventsFeed.tsx
-msgid "No events yet."
 msgstr ""
 
 #: src/experts/requests/list/expert-request-customer-list.js
@@ -4219,6 +4251,14 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
+#: src/customer/dashboard/CustomerDashboard.tsx
+msgid "Overview of {organization} organization"
+msgstr ""
+
+#: src/project/ProjectDashboard.tsx
+msgid "Overview of {project} project"
+msgstr ""
+
 #: src/user/list/UserDashboard.tsx
 msgid "Owned organizations"
 msgstr ""
@@ -4734,7 +4774,7 @@ msgstr ""
 #: src/appstore/routes.js
 #: src/configs/base-config.js
 #: src/customer/CustomerList.tsx
-#: src/dashboard/base-quotas.ts
+#: src/dashboard/categories.ts
 #: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
@@ -4892,7 +4932,6 @@ msgstr ""
 #: src/appstore/dialog/appstore-project-selector.html
 #: src/customer/routes.js
 #: src/customer/workspace/customer-workspace.js
-#: src/dashboard/base-quotas.ts
 #: src/navigation/workspace/select-workspace-dialog.html
 #: src/providers/details/dialog.html
 msgid "Projects"
@@ -4902,7 +4941,6 @@ msgstr ""
 msgid "Projects ({count})"
 msgstr ""
 
-#: src/dashboard/organization-dashboard.html
 #: src/team/add-team-member.html
 msgid "Projects list"
 msgstr ""
@@ -4945,6 +4983,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/events/EventDetailsTable.tsx
 #: src/jira/project/jira-projects-list.js
+#: src/marketplace/resources/ProjectResourcesList.tsx
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -5133,6 +5172,7 @@ msgstr ""
 msgid "RAM size"
 msgstr ""
 
+#: src/dashboard/categories.ts
 #: src/slurm/details/constants.js
 msgid "RAM usage"
 msgstr ""
@@ -5340,12 +5380,20 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
+#: src/dashboard/ReportIssueAction.tsx
+msgid "Report an issue"
+msgstr ""
+
 #: src/offering/OfferingReportDialog.tsx
 msgid "Report details"
 msgstr ""
 
 #: src/customer/details/customer-manage.html
 msgid "Report incorrect data"
+msgstr ""
+
+#: src/marketplace/resources/ResourceCreateUsageButton.tsx
+msgid "Report usage"
 msgstr ""
 
 #: src/issues/list/issues-short-list.html
@@ -5572,6 +5620,8 @@ msgstr ""
 
 #: src/analytics/routes.js
 #: src/customer/workspace/customer-workspace.js
+#: src/marketplace/resources/ResourceCreateUsageDialog.tsx
+#: src/marketplace/resources/ResourceShowUsageDialog.tsx
 msgid "Resource usage"
 msgstr ""
 
@@ -5579,7 +5629,7 @@ msgstr ""
 #: src/experts/requests/details/expert-request-details.js
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
-#: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/marketplace/resources/ProjectResourcesList.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 #: src/offering/offering-details.js
@@ -6131,10 +6181,6 @@ msgstr ""
 msgid "Show _MENU_ entries"
 msgstr ""
 
-#: src/dashboard/DashboardFeed.tsx
-msgid "Show all"
-msgstr ""
-
 #: src/form-react/SelectDialogField.tsx
 msgid "Show choices"
 msgstr ""
@@ -6166,6 +6212,10 @@ msgstr ""
 #: src/analytics/VmOverviewFilter.tsx
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Show shared"
+msgstr ""
+
+#: src/marketplace/resources/ResourceShowUsageButton.tsx
+msgid "Show usage"
 msgstr ""
 
 #: src/customer/CustomerListFilter.tsx
@@ -6248,7 +6298,7 @@ msgid "Snapshot schedules"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/base-quotas.ts
+#: src/dashboard/categories.ts
 msgid "Snapshot size"
 msgstr ""
 
@@ -6307,7 +6357,7 @@ msgstr ""
 #: src/marketplace/orders/OrderItemsFilter.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/ProjectResourcesList.tsx
+#: src/marketplace/resources/ProjectResourcesList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
@@ -6364,6 +6414,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/customer/CustomerList.tsx
+#: src/dashboard/categories.ts
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
@@ -6397,6 +6448,10 @@ msgstr ""
 
 #: src/experts/requests/actions/expert-request-complain.js
 msgid "Submit complaint"
+msgstr ""
+
+#: src/marketplace/resources/ResourceCreateUsageDialog.tsx
+msgid "Submit usage report"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
@@ -6529,7 +6584,7 @@ msgstr ""
 msgid "Team does not have members yet."
 msgstr ""
 
-#: src/dashboard/base-quotas.ts
+#: src/customer/dashboard/api.ts
 msgid "Team size"
 msgstr ""
 
@@ -6844,6 +6899,10 @@ msgstr ""
 msgid "To remove account, please send a request to {support}."
 msgstr ""
 
+#: src/dashboard/ReportIssueAction.tsx
+msgid "To report an issue, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a>."
+msgstr ""
+
 #: src/intro/base-intro.js
 msgid "To start please select a workspace"
 msgstr ""
@@ -6859,7 +6918,7 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: src/dashboard/chart/api.ts
+#: src/customer/dashboard/api.ts
 msgid "Total cost"
 msgstr ""
 
@@ -6899,6 +6958,7 @@ msgstr ""
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/resources/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -7111,8 +7171,12 @@ msgstr ""
 msgid "Unable to load marketplace categories."
 msgstr ""
 
-#: src/marketplace/orders/ProjectResourcesContainer.tsx
+#: src/marketplace/resources/ProjectResourcesContainer.tsx
 msgid "Unable to load marketplace category details"
+msgstr ""
+
+#: src/marketplace/resources/ResourceUsageContainer.tsx
+msgid "Unable to load marketplace offering details."
 msgstr ""
 
 #: src/marketplace/common/OfferingGrid.tsx
@@ -7212,6 +7276,10 @@ msgstr ""
 msgid "Unable to submit order."
 msgstr ""
 
+#: src/marketplace/resources/store/effects.ts
+msgid "Unable to submit usage report."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to update offering state."
 msgstr ""
@@ -7245,6 +7313,7 @@ msgid "Unfortunately, connection to server has failed. Please check if you can c
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/resources/ResourceUsageList.tsx
 msgid "Unit"
 msgstr ""
 
@@ -7351,6 +7420,7 @@ msgid "Uptime"
 msgstr ""
 
 #: src/analytics/utils.ts
+#: src/dashboard/chart.ts
 msgid "Usage"
 msgstr ""
 
@@ -7358,8 +7428,32 @@ msgstr ""
 msgid "Usage overview"
 msgstr ""
 
+#: src/marketplace/resources/ResourceUsageForm.tsx
+msgid "Usage period"
+msgstr ""
+
+#: src/marketplace/resources/ResourceUsageForm.tsx
+msgid "Usage period corresponds to one day."
+msgstr ""
+
+#: src/marketplace/resources/ResourceUsageForm.tsx
+msgid "Usage period corresponds to one half of month."
+msgstr ""
+
+#: src/marketplace/resources/ResourceUsageForm.tsx
+msgid "Usage period corresponds to one month."
+msgstr ""
+
+#: src/marketplace/resources/store/effects.ts
+msgid "Usage report has been submitted."
+msgstr ""
+
 #: src/marketplace/offerings/create/ComponentForm.tsx
 msgid "Usage-based"
+msgstr ""
+
+#: src/marketplace/resources/ResourceUsageList.tsx
+msgid "Usages"
 msgstr ""
 
 #: src/slurm/SlurmForm.tsx
@@ -7647,6 +7741,10 @@ msgstr ""
 msgid "Valid states for operation: {validStates}."
 msgstr ""
 
+#: src/marketplace/resources/ResourceUsageList.tsx
+msgid "Value"
+msgstr ""
+
 #: src/marketplace/details/OrderSummary.tsx
 msgid "Vendor"
 msgstr ""
@@ -7736,7 +7834,7 @@ msgstr ""
 #: src/analytics/resource-chart-service.js
 #: src/appstore/routes.js
 #: src/configs/base-config.js
-#: src/dashboard/base-quotas.ts
+#: src/dashboard/categories.ts
 #: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
@@ -7766,7 +7864,7 @@ msgid "Volume name"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/base-quotas.ts
+#: src/dashboard/categories.ts
 #: src/rijkscloud/VolumeCreateConfig.js
 msgid "Volume size"
 msgstr ""
@@ -7797,6 +7895,11 @@ msgstr ""
 #: src/auth/auth-init.js
 #: src/auth/auth-login.js
 msgid "Welcome to {pageTitle}!"
+msgstr ""
+
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/project/ProjectDashboard.tsx
+msgid "Welcome, {user}!"
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
@@ -8194,7 +8297,7 @@ msgstr ""
 msgid "virtualenv and virtualenvwrapper utilities are used to manage Python virtual environments."
 msgstr ""
 
-#: src/marketplace/orders/ProjectResourcesContainer.tsx
+#: src/marketplace/resources/ProjectResourcesContainer.tsx
 msgid "{category} resources"
 msgstr ""
 
@@ -8305,11 +8408,11 @@ msgstr ""
 msgid "{usage} used"
 msgstr ""
 
-#: src/dashboard/chart/api.ts
+#: src/customer/dashboard/api.ts
 msgid "{value} at {date}"
 msgstr ""
 
-#: src/dashboard/chart/api.ts
+#: src/customer/dashboard/api.ts
 msgid "{value} at {date}, estimated"
 msgstr ""
 

@@ -1,7 +1,7 @@
 // @ngInject
-export default function InvitationCreateAction($uibModal) {
+export default function InvitationCreateAction(customersService, $uibModal) {
   function checkPermission(context) {
-    return !context.isOwner && !context.isStaff;
+    return !context.user.is_staff && !customersService.isOwner(context.customer, context.user);
   }
 
   return context => ({

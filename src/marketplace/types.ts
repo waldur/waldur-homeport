@@ -22,6 +22,9 @@ export interface OfferingComponent {
   type: string;
   name: string;
   measured_unit: string;
+  description: string;
+  limit_period?: 'month' | 'total';
+  limit_amount: number;
 }
 
 export interface Plan {
@@ -120,7 +123,7 @@ export interface CategoryColumn {
   index: number;
   title: string;
   attribute?: string;
-  widget?: string;
+  widget?: 'csv' | 'filesize' | 'attached_instance';
 }
 
 export interface Category {

@@ -1,4 +1,4 @@
-import { shouldRenderApproveButton } from '@waldur/marketplace/orders/store/selectors';
+import { shouldRenderApproveButton } from './selectors';
 
 const staff = {
   uuid: 'staff uuid',

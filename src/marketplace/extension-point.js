@@ -10,5 +10,15 @@ export default function registerExtensionPoint(extensionPointService, features) 
       '<span ng-if="$ctrl.offering.marketplace_offering_uuid">'+
         '<marketplace-offering-details-button offering="$ctrl.offering.marketplace_offering_uuid"></marketplace-offering-details-button>'+
       '</span>');
+
+    extensionPointService.register('resource-details-button',
+      '<span ng-if="$ctrl.resource.marketplace_resource_uuid">'+
+        '<marketplace-resource-show-usage-button resource="$ctrl.resource.marketplace_resource_uuid"></marketplace-resource-show-usage-button>'+
+      '</span>');
+
+    extensionPointService.register('offering-details-button',
+      '<span ng-if="$ctrl.offering.marketplace_resource_uuid">'+
+        '<marketplace-resource-show-usage-button resource="$ctrl.offering.marketplace_resource_uuid"></marketplace-resource-show-usage-button>'+
+      '</span>');
   }
 }

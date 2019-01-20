@@ -8,11 +8,10 @@ const addProjectMember = {
   },
   controller: class AddProjectMemberDialogController {
     // @ngInject
-    constructor(projectPermissionsService, customersService, blockUI, $q, ENV, ErrorMessageFormatter) {
+    constructor(projectPermissionsService, customersService, $q, ENV, ErrorMessageFormatter) {
       this.$q = $q;
       this.projectPermissionsService = projectPermissionsService;
       this.customersService = customersService;
-      this.blockUI = blockUI;
       this.ENV = ENV;
       this.ErrorMessageFormatter = ErrorMessageFormatter;
     }
@@ -73,15 +72,13 @@ const addProjectMember = {
 
     saveUser() {
       this.errors = [];
-      let block = this.blockUI.instances.get('add-team-member-dialog');
-      block.start({delay: 0});
-
+      this.saving = true;
       return this.saveProjectPermissions()
         .then(() => {
-          block.stop();
           this.close();
+          this.saving = false;
         }, (error) => {
-          block.stop();
+          this.saving = false;
           this.errors = this.ErrorMessageFormatter.formatErrorFields(error);
         });
     }

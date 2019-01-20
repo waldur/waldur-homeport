@@ -1,3 +1,4 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 
 interface PanelProps {
@@ -7,7 +8,7 @@ interface PanelProps {
 }
 
 const Panel: React.SFC<PanelProps> = ({ title, children, className, actions }) => (
-  <div className={'ibox ' + className}>
+  <div className={classNames('ibox', className)}>
     <div className="ibox-title">
       <h5>{title}</h5>
       {actions}
