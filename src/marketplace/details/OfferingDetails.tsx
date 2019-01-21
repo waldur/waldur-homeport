@@ -33,11 +33,13 @@ export const OfferingDetails = (props: OfferingDetailsProps) => {
           <OfferingConfigurator offering={props.offering}/>
         </Col>
         <Col md={3}>
-          {CheckoutSummaryComponent && <CheckoutSummaryComponent {...props} />}
           <h3 className="header-bottom-border">
             {translate('Order summary')}
           </h3>
-          <OrderSummary offering={props.offering}/>
+          {CheckoutSummaryComponent ?
+            <CheckoutSummaryComponent {...props} /> :
+            <OrderSummary offering={props.offering}/>
+          }
         </Col>
       </Row>
       <OfferingTabs

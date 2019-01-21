@@ -237,7 +237,7 @@ export class OpenstackInstanceCreateFormComponent extends
             label={translate('System volume size')}
             required={true}
           >
-            <div className="input-group">
+            <div className="input-group" style={{maxWidth: 200}}>
               <Field
                 name="attributes.system_volume_size"
                 component={fieldProps =>
