@@ -5,7 +5,7 @@ import { LandingLink } from '@waldur/marketplace/links/LandingLink';
 
 export const ComparisonItemPlaceholder = () => (
   <td style={{
-    width: '20%',
+    width: 230,
     verticalAlign: 'middle',
     textAlign: 'center',
   }}>
