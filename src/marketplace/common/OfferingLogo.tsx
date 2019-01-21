@@ -7,8 +7,15 @@ const DefaultLogo = require('./OfferingLogo.svg');
 
 interface OfferingLogoProps {
   src?: string;
+  size?: string;
 }
 
-export const OfferingLogo = (props: OfferingLogoProps) => (
-  <img src={props.src || DefaultLogo} className="marketplace-offering-logo"/>
-);
+export const OfferingLogo = (props: OfferingLogoProps) => {
+  let className = 'marketplace-offering-logo';
+  if (props.size === 'small') {
+    className = 'marketplace-offering-logo--small';
+  }
+  return (
+    <img src={props.src || DefaultLogo} className={className}/>
+  );
+};

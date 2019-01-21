@@ -59,8 +59,8 @@ export class OpenstackInstanceDataVolumeComponent extends React.Component<Openst
           }
           {this.state.active &&
             <tr>
-              <td className="no-padding">
-                <div className="input-group">
+              <td className="no-padding" style={{width: 220}}>
+                <div className="input-group" style={{maxWidth: 200}}>
                   <input
                     {...props.field.input}
                     type="number"
