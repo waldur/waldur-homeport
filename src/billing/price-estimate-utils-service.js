@@ -19,21 +19,7 @@ export default class PriceEstimateUtilsService {
       return [];
     }
     const invoice = invoices[0];
-    const items = this.getInvoiceItems(invoice);
-    return this.parseInvoiceItems(items);
-  }
-
-  getInvoiceItems(invoice) {
-    const items = invoice.items || [];
-    const openstack_items = invoice.openstack_items || [];
-    const offering_items = invoice.offering_items || [];
-    const generic_items = invoice.generic_items || [];
-    return [
-      ...items,
-      ...openstack_items,
-      ...offering_items,
-      ...generic_items,
-    ];
+    return this.parseInvoiceItems(invoice.items);
   }
 
   parseInvoiceItems(items) {
