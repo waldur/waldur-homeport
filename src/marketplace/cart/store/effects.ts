@@ -14,10 +14,19 @@ import * as actions from './actions';
 import * as constants from './constants';
 
 const formatItem = item => ({
-  offering: item.offering.url,
   plan: item.plan ? item.plan.url : undefined,
   attributes: item.attributes,
   limits: item.limits,
+});
+
+const formatItemToCreate = item => ({
+  offering: item.offering.url,
+  ...formatItem(item),
+});
+
+const formatItemToUpdate = item => ({
+  uuid: item.shoppingCartItemUuid,
+  ...formatItem(item),
 });
 
 function* initCart() {
@@ -38,7 +47,7 @@ function* initCart() {
 
 function* addItem(action) {
   try {
-    const item = yield call(api.addCartItem, formatItem(action.payload.item));
+    const item = yield call(api.addCartItem, formatItemToCreate(action.payload.item));
     yield put(actions.addItemSuccess(item));
 
     const items = yield call(api.getCartItems);
@@ -74,6 +83,28 @@ function* removeItem(action) {
   }
 }
 
+function* updateItem(action) {
+  try {
+    const item = yield call(api.updateCartItem, action.payload.item.uuid, formatItemToUpdate(action.payload.item));
+    yield put(actions.updateItemSuccess(item));
+
+    const items = yield call(api.getCartItems);
+    yield put(actions.setItems(items));
+
+    yield put(showSuccess(translate('Shopping cart item has been updated.')));
+    const workspace: WorkspaceType = yield select(getWorkspace);
+    if (workspace === 'organization') {
+      yield put(stateGo('marketplace-checkout-customer'));
+    } else {
+      yield put(stateGo('marketplace-checkout'));
+    }
+  } catch (error) {
+    const errorMessage = `${translate('Unable to update shopping cart item.')} ${format(error)}`;
+    yield put(showError(errorMessage));
+    yield put(actions.updateItemError());
+  }
+}
+
 function* createOrder() {
   const project = yield select(getProject);
   if (!project) {
@@ -101,6 +132,7 @@ function* createOrder() {
 export default function*() {
   yield takeEvery([INIT_CONFIG, USER_LOGGED_IN], initCart);
   yield takeEvery(constants.ADD_ITEM_REQUEST, addItem);
+  yield takeEvery(constants.UPDATE_ITEM_REQUEST, updateItem);
   yield takeEvery(constants.REMOVE_ITEM_REQUEST, removeItem);
   yield takeEvery(constants.CREATE_ORDER_REQUEST, createOrder);
 }

@@ -84,3 +84,10 @@ export const aggregateQuotasFromSPL = (components, quotas) => {
   });
   return components;
 };
+
+export const extractSubnet = value => {
+  if (value) {
+    return value.split('.')[2];
+  }
+  return '';
+};

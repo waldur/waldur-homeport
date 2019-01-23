@@ -5,10 +5,11 @@ import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
-import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import './ShoppingCartItem.scss';
+
+import { ShoppingCartItemUpdateLink } from './ShoppingCartItemUpdateLink';
 
 interface ShoppingCartItemProps {
   item: OrderItemResponse;
@@ -22,16 +23,16 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
       <div className="offering-item">
         <div className="offering-thumb">
           <Tooltip id="offering-tooltip" label={props.item.offering_name}>
-            <OfferingLink offering_uuid={props.item.offering_uuid}>
+            <ShoppingCartItemUpdateLink order_item_uuid={props.item.uuid}>
               <OfferingLogo src={props.item.offering_thumbnail}/>
-            </OfferingLink>
+            </ShoppingCartItemUpdateLink>
           </Tooltip>
         </div>
         <div className="offering-info">
           <h5 className="offering-title">
-            <OfferingLink offering_uuid={props.item.offering_uuid}>
+          <ShoppingCartItemUpdateLink order_item_uuid={props.item.uuid}>
               {props.item.attributes.name || props.item.offering_name}
-            </OfferingLink>
+          </ShoppingCartItemUpdateLink>
           </h5>
           <p>{props.item.attributes.description || props.item.offering_description}</p>
         </div>

@@ -47,6 +47,9 @@ export const addCartItem = (data: object) =>
 export const removeCartItem = (id: string) =>
   deleteById('/marketplace-cart-items/', id);
 
+export const updateCartItem = (id: string, data: object) =>
+  patch(`/marketplace-cart-items/${id}/`, data).then(response => response.data);
+
 export const submitCart = (data: object) =>
   post<SubmitCartRequest>('/marketplace-cart-items/submit/', data).then(response => response.data);
 

@@ -12,7 +12,7 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 export class OfferingConfigurationForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
-    const attributes = {};
+    const attributes = {...this.props.initialAttributes};
     if (this.props.offering.options.order) {
       this.props.offering.options.order.forEach(key => {
         const options = this.props.offering.options.options[key];
@@ -22,7 +22,9 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
       });
     }
     const initialData: any = {attributes};
-    if (this.props.offering.plans.length === 1) {
+    if (this.props.plan) {
+      initialData.plan = this.props.plan;
+    } else if (this.props.offering.plans.length === 1) {
       initialData.plan = this.props.offering.plans[0];
     }
     initialData.project = this.props.project;

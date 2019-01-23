@@ -14,7 +14,7 @@ import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
-import { getOrderItem } from '@waldur/marketplace/details/utils';
+import { formatOrderItemForCreate } from '@waldur/marketplace/details/utils';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Offering } from '@waldur/marketplace/types';
 import * as api from '@waldur/openstack/api';
@@ -317,7 +317,7 @@ class OpenstackInstanceCheckoutSummaryComponent extends React.Component<Openstac
           <PureOpenstackInstanceCheckoutSummary {...this.props} {...this.state}/>
           <div className="display-flex justify-content-between">
             <ShoppingCartButtonContainer
-              item={getOrderItem({
+              item={formatOrderItemForCreate({
                 formData: {attributes: formData},
                 offering,
                 customer,

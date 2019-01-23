@@ -14,8 +14,8 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 export class AllocationForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
-    const project = this.props.project;
-    this.props.initialize({ project });
+    const { project, plan } = this.props;
+    this.props.initialize({ ...this.props.initialAttributes, project, plan });
   }
 
   render() {

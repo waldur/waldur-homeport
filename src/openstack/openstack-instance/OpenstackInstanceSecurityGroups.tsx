@@ -34,7 +34,7 @@ class OpenstackInstanceSecurityGroupsComponent extends React.Component<OwnProps 
 
   componentDidMount() {
     const defaultSecurityGroup = this.props.securityGroups.find(securityGroup => securityGroup.name === 'default');
-    if (defaultSecurityGroup) {
+    if (defaultSecurityGroup && !this.props.input.value) {
       this.props.input.onChange([
         {
           ...defaultSecurityGroup,

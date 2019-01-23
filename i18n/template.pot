@@ -4113,6 +4113,7 @@ msgstr ""
 msgid "Order items"
 msgstr ""
 
+#: src/marketplace/cart/ShoppingCartItemUpdate.tsx
 #: src/marketplace/details/OfferingDetails.tsx
 msgid "Order summary"
 msgstr ""
@@ -6175,6 +6176,15 @@ msgstr ""
 msgid "Shopping cart is empty. You should add items to cart first."
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Shopping cart item has been updated."
+msgstr ""
+
+#: src/marketplace/cart/ShoppingCartItemUpdate.tsx
+#: src/marketplace/routes.js
+msgid "Shopping cart item update"
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Should be given to OAuth service provider. Example: https://VM_EXTERNAL_IP/hub/oauth_callback"
 msgstr ""
@@ -6817,6 +6827,7 @@ msgstr ""
 #: src/form/appstore-field-email.html
 #: src/form/appstore-field-file.html
 #: src/form/appstore-field-tel.html
+#: src/marketplace/cart/ShoppingCartItemUpdateForm.tsx
 #: src/marketplace/details/OfferingConfigurator.tsx
 msgid "This field is required"
 msgstr ""
@@ -7209,6 +7220,10 @@ msgstr ""
 msgid "Unable to load offering details."
 msgstr ""
 
+#: src/marketplace/cart/ShoppingCartItemUpdate.tsx
+msgid "Unable to load offering."
+msgstr ""
+
 #: src/marketplace/orders/OrderDetails.tsx
 msgid "Unable to load order details."
 msgstr ""
@@ -7310,6 +7325,10 @@ msgstr ""
 msgid "Unable to update provider."
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to update shopping cart item."
+msgstr ""
+
 #: src/issues/attachments/effects.ts
 msgid "Unable to upload attachment."
 msgstr ""
@@ -7360,6 +7379,7 @@ msgstr ""
 
 #: src/customer/details/CustomerEditDetailsForm.tsx
 #: src/customer/details/customer-policies.html
+#: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/user/hooks/hook-details.html
 msgid "Update"
 msgstr ""

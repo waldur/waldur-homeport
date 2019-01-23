@@ -20,4 +20,5 @@ export interface OrderSummaryProps {
   total: number;
   formData: OfferingFormData;
   formValid: boolean;
+  updateMode?: boolean;
 }
