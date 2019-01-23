@@ -17,10 +17,10 @@ export interface ResourceUsageContainerProps {
 
 export const ResourceUsageContainer = (props: ResourceUsageContainerProps) => (
   <Query loader={getOffering} variables={props.offering_uuid}>
-    {({ loading, erred, data }: {loading: boolean, erred: boolean, data: Offering}) => {
+    {({ loading, error, data }: {loading: boolean, error?: any, data?: Offering}) => {
       if (loading) {
         return <LoadingSpinner/>;
-      } else if (erred) {
+      } else if (error) {
         return <h3>{translate('Unable to load marketplace offering details.')}</h3>;
       } else if (data.components.filter(component => component.billing_type === 'usage').length === 0) {
         return <h3>{translate('Marketplace offering does not have any usage-based components.')}</h3>;

@@ -283,6 +283,10 @@ msgstr ""
 msgid "Add request"
 msgstr ""
 
+#: src/dashboard/marketplace.ts
+msgid "Add resource"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 msgid "Add rule"
 msgstr ""
@@ -5314,6 +5318,10 @@ msgstr ""
 msgid "Release floating IPs"
 msgstr ""
 
+#: src/dashboard/CategoryResourcesList.tsx
+msgid "Reload"
+msgstr ""
+
 #: src/issues/IssueReload.tsx
 msgid "Reload issue data"
 msgstr ""
@@ -6715,6 +6723,10 @@ msgstr ""
 msgid "There are no category sections yet."
 msgstr ""
 
+#: src/dashboard/CategoryResources.tsx
+msgid "There are no charts yet."
+msgstr ""
+
 #: src/issues/comments/IssueCommentsList.spec.tsx
 #: src/issues/comments/IssueCommentsList.tsx
 msgid "There are no comments yet."
@@ -7150,6 +7162,10 @@ msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterList.tsx
 msgid "Unable to load category sections."
+msgstr ""
+
+#: src/dashboard/CategoryResourcesList.tsx
+msgid "Unable to load charts."
 msgstr ""
 
 #: src/issues/comments/IssueCommentsList.spec.tsx

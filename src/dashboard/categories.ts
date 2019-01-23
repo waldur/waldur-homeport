@@ -2,6 +2,14 @@ import { ngInjector, $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { WorkspaceType } from '@waldur/workspace/types';
 
+import { Quota, Action } from './types';
+
+export interface DashboardCategory {
+  title: string;
+  quotas: Quota[];
+  actions: Action[];
+}
+
 const createHandler = (workspace: WorkspaceType, state: string) => () => {
   if (workspace === 'project') {
     $state.go(state);
@@ -101,7 +109,7 @@ const getBatch = (workspace: WorkspaceType) => ({
   ],
 });
 
-export const getDashboardCategories = (workspace: WorkspaceType) => {
+export const getDashboardCategories = (workspace: WorkspaceType): DashboardCategory[] => {
   const categories = [getCompute(workspace)];
   const features = ngInjector.get('features');
 

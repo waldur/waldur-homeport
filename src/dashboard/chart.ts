@@ -68,7 +68,6 @@ export const getResourceChartOptions = (dates, usages, limits, units: string) =>
   return {
     tooltip: {
       trigger: 'axis',
-      formatter: '{b}',
     },
     grid: {
       left: 30,
