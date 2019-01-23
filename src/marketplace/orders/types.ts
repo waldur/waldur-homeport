@@ -25,6 +25,7 @@ export interface OrderItemResponse {
   unit: string;
   state: string;
   attributes: AttributesType;
+  plan_uuid?: string;
   plan?: string;
   plan_name?: string;
   plan_description?: string;

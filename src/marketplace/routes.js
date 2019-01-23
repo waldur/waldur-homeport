@@ -274,5 +274,25 @@ export default function routes($stateProvider) {
         feature: 'marketplace',
         sidebarState: 'marketplace-resources'
       }
+    })
+
+    .state('marketplace-shopping-cart-item-update', {
+      url: 'marketplace-shopping-cart-item-update/:order_item_uuid/',
+      template: '<marketplace-shopping-cart-item-update></marketplace-shopping-cart-item-update>',
+      parent: 'project',
+      data: {
+        pageTitle: gettext('Shopping cart item update'),
+        feature: 'marketplace',
+      }
+    })
+
+    .state('marketplace-shopping-cart-item-update-customer', {
+      url: 'marketplace-shopping-cart-item-update/:order_item_uuid/',
+      template: '<marketplace-shopping-cart-item-update></marketplace-shopping-cart-item-update>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('Shopping cart item update'),
+        feature: 'marketplace',
+      }
     });
 }

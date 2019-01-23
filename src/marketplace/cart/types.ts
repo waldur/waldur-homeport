@@ -5,6 +5,7 @@ export interface State {
   items: OrderItemResponse[];
   addingItem: boolean;
   removingItem: boolean;
+  updatingItem: boolean;
   creatingOrder: boolean;
 }
 

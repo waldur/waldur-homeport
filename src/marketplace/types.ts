@@ -174,6 +174,8 @@ export interface ServiceProvider {
 export interface OfferingConfigurationFormProps extends InjectedFormProps {
   offering: Offering;
   project?: Project;
+  plan?: Plan;
+  initialAttributes?: AttributesType;
 }
 
 export interface OrderItemDetailsProps {

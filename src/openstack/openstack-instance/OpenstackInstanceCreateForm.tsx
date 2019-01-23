@@ -7,6 +7,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { formatFilesize } from '@waldur/core/utils';
 import { getLatinNameValidators } from '@waldur/core/validators';
 import { StringField, NumberField, TextField } from '@waldur/form-react';
+import { FieldValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
 import { SelectDialogField } from '@waldur/form-react/SelectDialogField';
 import { translate, TranslateProps } from '@waldur/i18n';
 import { getUser } from '@waldur/issues/comments/selectors';
@@ -108,6 +109,24 @@ export class OpenstackInstanceCreateFormComponent extends
 
   componentDidMount() {
     this.loadData();
+    if (this.props.initialAttributes) {
+      this.props.initialize({
+        attributes: {
+          ...this.props.initialAttributes,
+          networks:  this.formatNetworks(this.props.initialAttributes),
+        }});
+      }
+  }
+
+  formatNetworks(initialAttributes) {
+    const networks = [];
+    for (let i = 0; i < initialAttributes.subnets.length; i++) {
+      networks.push({
+        subnet: initialAttributes.subnets[i],
+        floatingIp: initialAttributes.floating_ips[i],
+      });
+    }
+    return networks;
   }
 
   componentDidUpdate(prevProps) {
@@ -152,7 +171,12 @@ export class OpenstackInstanceCreateFormComponent extends
           >
             <Field
               name="attributes.name"
-              component={StringField}
+              component={fieldProps =>
+                <FieldValidationWrapper
+                  field={StringField}
+                  {...fieldProps}
+                />
+              }
               validate={getLatinNameValidators()}
             />
           </OpenstackInstanceFormGroup>

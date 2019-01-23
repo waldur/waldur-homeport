@@ -1,0 +1,113 @@
+import * as React from 'react';
+import * as Col from 'react-bootstrap/lib/Col';
+import * as Row from 'react-bootstrap/lib/Row';
+import { connect } from 'react-redux';
+
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { $state } from '@waldur/core/services';
+import { translate } from '@waldur/i18n';
+import { Plan, Offering } from '@waldur/marketplace/types';
+import { connectAngularComponent } from '@waldur/store/connect';
+
+import * as api from '../common/api';
+
+import '../details/OfferingDetails.scss';
+
+import { OrderSummary } from '../details/OrderSummary';
+import { OrderItemResponse } from '../orders/types';
+import { ShoppingCartItemUpdateForm } from './ShoppingCartItemUpdateForm';
+import { getItemSelectorFactory } from './store/selectors';
+
+interface PureShoppingCartItemUpdateProps {
+  offering: Offering;
+  plan?: Plan;
+  shoppingCartItem: OrderItemResponse;
+}
+
+const PureShoppingCartItemUpdate = (props: PureShoppingCartItemUpdateProps) => (
+    <>
+      {props.offering.description && (
+        <div className="bs-callout bs-callout-success">
+          {props.offering.description}
+        </div>
+      )}
+      <Row>
+        <Col md={9}>
+          <h3 className="header-bottom-border">
+            {translate('Shopping cart item update')}
+          </h3>
+          <ShoppingCartItemUpdateForm
+            initialAttributes={props.shoppingCartItem.attributes}
+            offering={props.offering}
+            plan={props.plan}
+          />
+        </Col>
+        <Col md={3}>
+          <h3 className="header-bottom-border">
+            {translate('Order summary')}
+          </h3>
+          <OrderSummary
+            offering={{...props.offering, uuid: props.shoppingCartItem.uuid}}
+            updateMode={true}/>
+        </Col>
+      </Row>
+    </>
+  );
+
+interface ShoppingCartItemUpdateProps {
+  shoppingCartItem: OrderItemResponse;
+}
+
+class ShoppingCartItemUpdateComponent extends React.Component<ShoppingCartItemUpdateProps> {
+  state = {
+    loading: false,
+    loaded: false,
+    plan: null,
+    offering: null,
+  };
+
+  async loadData() {
+    try {
+      this.setState({loading: true});
+      const offering = await api.getOffering(this.props.shoppingCartItem.offering_uuid);
+      let plan = {};
+      if (offering && this.props.shoppingCartItem.plan_uuid) {
+        plan = offering.plans.find(offeringPlan =>
+          offeringPlan.uuid === this.props.shoppingCartItem.plan_uuid
+        );
+      }
+      this.setState({loading: false, loaded: true, plan, offering});
+    } catch (error) {
+      this.setState({loading: false, loaded: false});
+    }
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  render() {
+    if (this.state.loading) {
+      return <LoadingSpinner/>;
+    }
+    if (!this.state.loading && !this.state.loaded) {
+      return translate('Unable to load offering.');
+    }
+    if (this.state.loaded) {
+      return (
+        <PureShoppingCartItemUpdate
+          plan={this.state.plan}
+          offering={this.state.offering}
+          shoppingCartItem={this.props.shoppingCartItem}/>
+      );
+    }
+  }
+}
+
+const mapStateToProps = state => ({
+  shoppingCartItem: getItemSelectorFactory($state.params.order_item_uuid)(state),
+});
+
+export const ShoppingCartItemUpdate = connect(mapStateToProps)(ShoppingCartItemUpdateComponent);
+
+export default connectAngularComponent(ShoppingCartItemUpdate);

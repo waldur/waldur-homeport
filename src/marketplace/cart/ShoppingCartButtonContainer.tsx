@@ -14,7 +14,7 @@ interface OwnProps {
 }
 
 interface DispatchProps {
-  addItem(): void;
+  onBtnClick(): void;
 }
 
 const mapStateToProps = (state: OuterState, ownProps: OwnProps) => ({
@@ -22,7 +22,7 @@ const mapStateToProps = (state: OuterState, ownProps: OwnProps) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => ({
-  addItem: () => dispatch(addItemRequest(ownProps.item)),
+  onBtnClick: () => dispatch(addItemRequest(ownProps.item)),
 });
 
 const enhance = connect<{}, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps);

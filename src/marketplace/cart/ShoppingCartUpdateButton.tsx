@@ -3,23 +3,23 @@ import * as React from 'react';
 import { translate } from '@waldur/i18n';
 import { OfferingButton } from '@waldur/marketplace/common/OfferingButton';
 
-import { OrderItemRequest } from './types';
+import { OrderItemResponse } from '../orders/types';
 
-interface ShoppingCartButtonProps {
-  item: OrderItemRequest;
-  onBtnClick(): void;
+interface ShoppingCartUpdateButtonProps {
+  item: OrderItemResponse;
+  updateItem(): void;
   flavor?: 'primary' | 'secondary' | 'ternary';
   disabled?: boolean;
   title?: string;
   icon?: string;
 }
 
-export const ShoppingCartButton = (props: ShoppingCartButtonProps) => (
+export const ShoppingCartUpdateButton = (props: ShoppingCartUpdateButtonProps) => (
   <OfferingButton
-    icon={props.icon || 'fa fa-shopping-cart'}
+    icon="fa fa-refresh"
     isActive={true}
-    title={props.title || translate('Add to cart')}
-    onClick={() => props.onBtnClick()}
+    title={translate('Update')}
+    onClick={() => props.updateItem()}
     flavor={props.flavor}
     disabled={props.disabled}
   />
