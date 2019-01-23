@@ -20,3 +20,8 @@ export interface Quota {
   feature?: string;
   type?: 'filesize' | 'hours';
 }
+
+export interface Action {
+  title: string;
+  onClick(): void;
+}

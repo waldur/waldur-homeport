@@ -2,12 +2,14 @@ import * as moment from 'moment-timezone';
 
 import { get } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
+import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { WorkspaceType } from '@waldur/workspace/types';
 
 import { getDashboardCategories } from './categories';
 import { Category } from './CategoryResources';
 import { getResourceChartOptions } from './chart';
+import { loadMarketplaceCategories } from './marketplace';
 import { Quota, Scope, Chart, ChartData } from './types';
 
 interface DailyQuota {
@@ -47,6 +49,11 @@ export async function loadCategories(workspace: WorkspaceType, scope: Scope): Pr
       actions: category.actions,
     });
   }
+  const features = ngInjector.get('features');
+  if (features.isVisible('marketplace')) {
+    const marketplaceCategories = await loadMarketplaceCategories(workspace, scope);
+    result.push(...marketplaceCategories);
+  }
   return result;
 }
 
@@ -67,8 +74,7 @@ export const formatQuotaChart = (quota: Quota, values: number[]): Chart => {
     const date = moment().subtract(30, 'days').startOf('day').add(index, 'days');
     const formattedDate = formatDate(date);
     const formattedValue = formatter(value);
-    const label = `${formattedValue} at ${formattedDate}`;
-    return {label, value: formattedValue};
+    return {label: formattedDate, value: formattedValue};
   });
 
   return {

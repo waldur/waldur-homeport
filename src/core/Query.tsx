@@ -2,21 +2,25 @@ import * as React from 'react';
 
 interface QueryState<Data> {
   loading: boolean;
-  erred: boolean;
+  error?: any;
   data?: Data;
+}
+
+interface QueryChildProps<Data> extends QueryState<Data> {
+  loadData(): Promise<void>;
 }
 
 interface QueryProps<Variables, Data> {
   variables?: Variables;
   loader(variables: Variables): Promise<Data>;
-  children: React.StatelessComponent<QueryState<Data>>;
+  children: React.StatelessComponent<QueryChildProps<Data>>;
 }
 
 export class Query<Variables = object, Data = object> extends
   React.Component<QueryProps<Variables, Data>, QueryState<Data>> {
   state = {
     loading: true,
-    erred: false,
+    error: null,
     data: null,
   };
 
@@ -43,7 +47,7 @@ export class Query<Variables = object, Data = object> extends
     }
   }
 
-  async loadData() {
+  loadData = async () => {
     this.safeSetState({
       loading: true,
       erred: false,
@@ -55,15 +59,15 @@ export class Query<Variables = object, Data = object> extends
         loading: false,
         erred: false,
       });
-    } catch {
+    } catch (error) {
       this.safeSetState({
         loading: false,
-        erred: true,
+        error,
       });
     }
   }
 
   render() {
-    return this.props.children(this.state);
+    return this.props.children({...this.state, loadData: this.loadData});
   }
 }
