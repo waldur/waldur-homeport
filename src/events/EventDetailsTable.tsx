@@ -9,9 +9,13 @@ import { Event } from './types';
 
 interface EventDetailsTableProps extends TranslateProps {
   event: Event;
+  isStaffOrSupport: boolean;
 }
 
-export const EventDetailsTable = ({ translate, event }: EventDetailsTableProps) => (
+const showLink = (event, isStaffOrSupport) =>
+  event.issue_link && isStaffOrSupport;
+
+export const EventDetailsTable = ({ translate, event, isStaffOrSupport }: EventDetailsTableProps) => (
   <table className="table table-borderless">
     <tbody>
       <EventField
@@ -81,7 +85,7 @@ export const EventDetailsTable = ({ translate, event }: EventDetailsTableProps) 
       />
       <EventField
         label={translate('Issue link')}
-        value={event.issue_link && <ExternalLink label={translate('Open')} url={event.issue_link}/>}
+        value={showLink(event, isStaffOrSupport) && <ExternalLink label={translate('Open')} url={event.issue_link}/>}
       />
     </tbody>
   </table>

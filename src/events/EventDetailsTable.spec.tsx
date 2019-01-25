@@ -11,7 +11,14 @@ jest.mock('@waldur/core/services', () => ({
 }));
 
 const renderTable = (props?) =>
-  mount(<EventDetailsTable event={event} translate={translate} {...props}/>);
+  mount(
+    <EventDetailsTable
+      event={event}
+      translate={translate}
+      isStaffOrSupport={true}
+      {...props}
+    />
+  );
 
 const getRowLabels = (wrapper: ReactWrapper) =>
   wrapper.find('tr').map(tr => tr.find('td').first().text());
