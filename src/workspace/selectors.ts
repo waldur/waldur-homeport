@@ -30,6 +30,9 @@ export const isStaff = (state: OuterState): boolean =>
 export const isSupport = (state: OuterState): boolean =>
   getUser(state) && getUser(state).is_support;
 
+export const isStaffOrSupport = (state: OuterState): boolean =>
+  isStaff(state) || isSupport(state);
+
 export const getOwner = createSelector(
   getUser,
   getCustomer,
