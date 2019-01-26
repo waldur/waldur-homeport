@@ -12,7 +12,7 @@ export const getCategories = (options?: {}) =>
   getAll<Category>('/marketplace-categories/', options);
 
 export const getCategoryUsages = (options?: {}) =>
-  getAll<CategoryComponentUsage>('/marketplace-category-component-usages/', options);
+  getAll<CategoryComponentUsage>('/marketplace-component-usages/', options);
 
 export const getCategory = (id: string, options?: {}) =>
   getById<Category>('/marketplace-categories/', id, options);
