@@ -100,6 +100,8 @@ export default function actionUtilsService(
     } else if (action.type === 'form') {
       this.openActionDialog(controller, model, name, action);
       return $q.when(true);
+    } else if (action.type === 'callback') {
+      return action.execute(model);
     }
     return $q.reject();
   };

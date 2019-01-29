@@ -4038,6 +4038,10 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/VncAction.ts
+msgid "Open VNC console"
+msgstr ""
+
 #: src/issues/issue-detail.html
 #: src/offering/OfferingHeader.tsx
 msgid "Open in Service Desk"
@@ -6205,6 +6209,10 @@ msgstr ""
 msgid "Show choices"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
+msgid "Show console log"
+msgstr ""
+
 #: src/billing/price-estimate-button.html
 msgid "Show details"
 msgstr ""
@@ -7265,6 +7273,10 @@ msgstr ""
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/VncAction.ts
+msgid "Unable to open VNC console. Error message: {message}"
+msgstr ""
+
 #: src/resource/actions/dialog/action-dialog.js
 msgid "Unable to perform action"
 msgstr ""
@@ -7299,6 +7311,10 @@ msgstr ""
 
 #: src/providers/details/provider-project-link-quotas.js
 msgid "Unable to set quotas."
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
+msgid "Unable to show console log. Error message: {message}"
 msgstr ""
 
 #: src/issues/comments/effects.ts

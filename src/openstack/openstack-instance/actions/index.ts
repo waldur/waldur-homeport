@@ -1,6 +1,7 @@
 import { createPullAction } from '@waldur/resource/actions/base';
 
 import changeFlavorAction from './ChangeFlavorAction';
+import consoleLogAction from './ConsoleLogAction';
 import createBackupAction from './CreateBackupAction';
 import createBackupScheduleAction from './CreateBackupScheduleAction';
 import destroyAction from './DestroyAction';
@@ -11,6 +12,7 @@ import stopAction from './StopAction';
 import updateFloatingIpsAction from './UpdateFloatingIpsAction';
 import updateInternalIpsSet from './UpdateInternalIpsSet';
 import updateSecurityGroupsAction from './UpdateSecurityGroupsAction';
+import vncAction from './VncAction';
 
 export default [
   editAction,
@@ -18,6 +20,8 @@ export default [
   startAction,
   stopAction,
   restartAction,
+  consoleLogAction,
+  vncAction,
   changeFlavorAction,
   createBackupAction,
   createBackupScheduleAction,
