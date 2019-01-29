@@ -56,7 +56,7 @@ export type ActionField<Resource = BaseResource> =
   | ComponentField<Resource>
 ;
 
-type ActionType = 'button' | 'form';
+type ActionType = 'button' | 'form' | 'callback';
 
 type ActionMethod = 'POST' | 'PUT' | 'DELETE';
 
@@ -73,7 +73,7 @@ export interface ResourceAction<Resource = BaseResource> {
   type: ActionType;
   successMessage?: string;
   onSuccess?: () => void;
-  method: ActionMethod;
+  method?: ActionMethod;
   destructive?: boolean;
   validators?: Array<ActionValidator<Resource>>;
   dialogSize?: 'lg';
@@ -82,6 +82,7 @@ export interface ResourceAction<Resource = BaseResource> {
   isVisible?: boolean;
   init?(resource, form, action): void;
   serializer?(form): object;
+  execute?(resource): void;
 }
 
 export interface ActionContext<Resource = BaseResource> {

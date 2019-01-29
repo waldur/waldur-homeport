@@ -1,6 +1,8 @@
 import { createPullAction } from '@waldur/resource/actions/base';
 
 import changeFlavorAction from './ChangeFlavorAction';
+import consoleAction from './ConsoleAction';
+import consoleLogAction from './ConsoleLogAction';
 import createBackupAction from './CreateBackupAction';
 import createBackupScheduleAction from './CreateBackupScheduleAction';
 import destroyAction from './DestroyAction';
@@ -18,6 +20,8 @@ export default [
   startAction,
   stopAction,
   restartAction,
+  consoleLogAction,
+  consoleAction,
   changeFlavorAction,
   createBackupAction,
   createBackupScheduleAction,
