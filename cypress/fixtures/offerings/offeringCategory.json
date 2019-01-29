@@ -1,0 +1,78 @@
+{
+  "url": "http://localhost:8080/api/marketplace-categories/f392e562d0954b609fa42b828e77bd2d/",
+  "uuid": "f392e562d0954b609fa42b828e77bd2d",
+  "title": "Compute",
+  "description": "Computing services",
+  "icon": "http://localhost:8080/media/marketplace_category_icons/compute.svg",
+  "offering_count": 50,
+  "sections": [
+      {
+          "key": "compute_Support",
+          "title": "Support",
+          "attributes": [
+              {
+                  "key": "compute_Support_email",
+                  "title": "E-mail",
+                  "type": "string",
+                  "options": [],
+                  "required": false
+              },
+              {
+                  "key": "compute_Support_phone",
+                  "title": "Phone",
+                  "type": "string",
+                  "options": [],
+                  "required": false
+              },
+              {
+                  "key": "compute_Support_portal",
+                  "title": "Support portal",
+                  "type": "string",
+                  "options": [],
+                  "required": false
+              },
+              {
+                  "key": "compute_Support_guide",
+                  "title": "User guide",
+                  "type": "string",
+                  "options": [],
+                  "required": false
+              }
+          ],
+          "is_standalone": true
+      },
+      {
+          "key": "compute_Security",
+          "title": "Security",
+          "attributes": [
+              {
+                  "key": "compute_Security_certification",
+                  "title": "Certification",
+                  "type": "listattr",
+                  "options": [
+                      {
+                          "key": "compute_Security_certification_iskel",
+                          "title": "ISKE L"
+                      },
+                      {
+                          "key": "compute_Security_certification_iskem",
+                          "title": "ISKE M"
+                      },
+                      {
+                          "key": "compute_Security_certification_iskeh",
+                          "title": "ISKE H"
+                      },
+                      {
+                          "key": "compute_Security_certification_iso27001",
+                          "title": "ISO27001"
+                      }
+                  ],
+                  "required": false
+              }
+          ],
+          "is_standalone": true
+      }
+  ],
+  "columns": [],
+  "components": []
+}

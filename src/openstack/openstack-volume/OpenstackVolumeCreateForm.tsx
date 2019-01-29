@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 
 import { getLatinNameValidators } from '@waldur/core/validators';
-import { StringField, NumberField, TextField } from '@waldur/form-react';
-import { FieldValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
+import { NumberField, TextField, StringField } from '@waldur/form-react';
+import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
 import { translate } from '@waldur/i18n';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import { OpenstackInstanceFormGroup } from '@waldur/openstack/openstack-instance/OpenstackInstanceCreateForm';
@@ -20,12 +20,7 @@ export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigura
           required={true}>
           <Field
             name="attributes.name"
-            component={fieldProps =>
-              <FieldValidationWrapper
-                field={StringField}
-                {...fieldProps}
-              />
-            }
+            component={renderValidationWrapper(StringField)}
             validate={getLatinNameValidators()}
           />
         </OpenstackInstanceFormGroup>

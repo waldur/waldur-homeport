@@ -44,7 +44,7 @@ export const validate = (_, props) => {
 const formConnector = reduxForm<
   OfferingFormData,
   PureOfferingConfiguratorProps
->({ form: FORM_ID, validate });
+>({ form: FORM_ID, validate, touchOnChange: true });
 
 const enhance = compose(
   storeConnector,
