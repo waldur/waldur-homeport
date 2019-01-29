@@ -1,0 +1,19 @@
+[
+  {
+      "url": "http://localhost:8080/api/openstacktenant-subnets/073d0e76587e4c1d9055a49b2d298d17/",
+      "uuid": "073d0e76587e4c1d9055a49b2d298d17",
+      "name": "blaaa-sub-net",
+      "cidr": "192.168.42.0/24",
+      "gateway_ip": "192.168.42.1",
+      "allocation_pools": [
+          {
+              "start": "192.168.42.10",
+              "end": "192.168.42.200"
+          }
+      ],
+      "ip_version": 4,
+      "enable_dhcp": true,
+      "dns_nameservers": [],
+      "network": "http://localhost:8080/api/openstacktenant-networks/d6d3de58dce94596970a67cc59ba5c6e/"
+  }
+]

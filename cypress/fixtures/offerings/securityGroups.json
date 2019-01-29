@@ -1,0 +1,38 @@
+[
+  {
+      "url": "http://localhost:8080/api/openstacktenant-security-groups/c4d9e3ece3be48ddb6dcf86c81b695de/",
+      "uuid": "c4d9e3ece3be48ddb6dcf86c81b695de",
+      "name": "default",
+      "settings": "http://localhost:8080/api/service-settings/671f2f1f45f146cfb94a5ab1d0506162/",
+      "description": "Default security group",
+      "rules": [
+          {
+              "to_port": -1,
+              "cidr": "0.0.0.0/0",
+              "from_port": -1,
+              "protocol": ""
+          },
+          {
+              "to_port": -1,
+              "cidr": "0.0.0.0/0",
+              "from_port": -1,
+              "protocol": ""
+          }
+      ]
+  },
+  {
+      "url": "http://localhost:8080/api/openstacktenant-security-groups/b40968a448034febbf04c195aafbb4e2/",
+      "uuid": "b40968a448034febbf04c195aafbb4e2",
+      "name": "http",
+      "settings": "http://localhost:8080/api/service-settings/671f2f1f45f146cfb94a5ab1d0506162/",
+      "description": "Security group for HTTP",
+      "rules": [
+          {
+              "to_port": 80,
+              "cidr": "0.0.0.0/0",
+              "from_port": 80,
+              "protocol": "tcp"
+          }
+      ]
+  }
+]

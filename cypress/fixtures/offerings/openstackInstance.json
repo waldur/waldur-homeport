@@ -1,0 +1,79 @@
+{
+  "url": "http://localhost:8080/api/marketplace-offerings/3bcdcdb0987545f0b50e6eed26bb49d6/",
+  "uuid": "3bcdcdb0987545f0b50e6eed26bb49d6",
+  "created": "2018-12-18T17:54:31.188836Z",
+  "name": "Openstack virtual machine",
+  "description": "",
+  "full_description": "",
+  "customer": "http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/",
+  "customer_uuid": "bf6d515c9e6e445f9c339021b30fc96b",
+  "customer_name": "ActiveSys",
+  "category": "http://localhost:8080/api/marketplace-categories/f392e562d0954b609fa42b828e77bd2d/",
+  "category_uuid": "f392e562d0954b609fa42b828e77bd2d",
+  "category_title": "Compute",
+  "rating": null,
+  "attributes": {},
+  "options": {},
+  "components": [
+      {
+          "billing_type": "fixed",
+          "type": "ram",
+          "name": "RAM",
+          "description": "",
+          "measured_unit": "GB",
+          "limit_period": null,
+          "limit_amount": null
+      },
+      {
+          "billing_type": "fixed",
+          "type": "cores",
+          "name": "Cores",
+          "description": "",
+          "measured_unit": "cores",
+          "limit_period": null,
+          "limit_amount": null
+      },
+      {
+          "billing_type": "fixed",
+          "type": "storage",
+          "name": "Storage",
+          "description": "",
+          "measured_unit": "GB",
+          "limit_period": null,
+          "limit_amount": null
+      }
+  ],
+  "geolocations": [],
+  "state": "Active",
+  "native_name": "",
+  "native_description": "",
+  "vendor_details": "",
+  "thumbnail": null,
+  "order_item_count": 0.0,
+  "plans": [
+      {
+          "url": "http://localhost:8080/api/marketplace-plans/c132b398b7da45ba9a7d21c821180ff2/",
+          "uuid": "c132b398b7da45ba9a7d21c821180ff2",
+          "name": "Medium",
+          "description": "",
+          "unit_price": "0.0000000",
+          "unit": "day",
+          "prices": {
+              "cores": 0.0125,
+              "ram": 2.44141e-05,
+              "storage": 2.6042e-06
+          },
+          "quotas": {
+              "cores": 80,
+              "ram": 40960,
+              "storage": 512000
+          }
+      }
+  ],
+  "screenshots": [],
+  "type": "OpenStackTenant.Instance",
+  "shared": false,
+  "billable": true,
+  "scope": "http://localhost:8080/api/service-settings/671f2f1f45f146cfb94a5ab1d0506162/",
+  "scope_uuid": "671f2f1f45f146cfb94a5ab1d0506162"
+}

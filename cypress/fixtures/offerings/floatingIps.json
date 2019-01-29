@@ -1,0 +1,18 @@
+[
+  {
+      "url": "http://localhost:8080/api/openstacktenant-floating-ips/c7611cd79f414e47bd1d465245aaaca6/",
+      "uuid": "c7611cd79f414e47bd1d465245aaaca6",
+      "settings": "http://localhost:8080/api/service-settings/b13719a4b49344f699706716058209c5/",
+      "address": "185.82.124.107",
+      "runtime_state": "ACTIVE",
+      "is_booked": false
+  },
+  {
+      "url": "http://localhost:8080/api/openstacktenant-floating-ips/7892347016d74ba2872a6d6b24877319/",
+      "uuid": "7892347016d74ba2872a6d6b24877319",
+      "settings": "http://localhost:8080/api/service-settings/0989b23135f348ae8a30f0ec32d9551c/",
+      "address": "192.168.11.7",
+      "runtime_state": "DOWN",
+      "is_booked": false
+  }
+]

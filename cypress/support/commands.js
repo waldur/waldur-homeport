@@ -1,4 +1,5 @@
 import '../integration/support/commands';
+import '../integration/openstack/instance/commands';
 
 // Fill and sumbit login form
 Cypress.Commands.add('fillAndSubmitLoginForm', (username, password) => {

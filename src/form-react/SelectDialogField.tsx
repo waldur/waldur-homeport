@@ -6,6 +6,7 @@ import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 interface OwnProps {
+  id?: string;
   label?: React.ReactNode;
   dialogTitle?: string;
   preSelectFirst?: boolean;
@@ -53,7 +54,7 @@ export class SelectDialogFieldComponent extends React.Component<OwnProps & Trans
     }
     return (
       <div className="form-control-static">
-        <a onClick={this.openSelectDialog}>
+        <a onClick={this.openSelectDialog} id={props.id}>
           {props.input.value && props.input.value.name || props.label || props.translate('Show choices')}
           {' '}
           <i className="fa fa-caret-down"/>

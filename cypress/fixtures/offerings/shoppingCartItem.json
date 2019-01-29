@@ -1,0 +1,95 @@
+[
+  {
+    "offering": "http://localhost:8080/api/marketplace-offerings/3bcdcdb0987545f0b50e6eed26bb49d6/",
+    "offering_name": "Virtual machine",
+    "offering_uuid": "3bcdcdb0987545f0b50e6eed26bb49d6",
+    "offering_description": "",
+    "offering_thumbnail": null,
+    "offering_type": "OpenStackTenant.Instance",
+    "provider_name": "ActiveSys",
+    "provider_uuid": "9f43128e9eb24c288b6577568420dc1c",
+    "category_title": "Compute",
+    "category_uuid": "f392e562d0954b609fa42b828e77bd2d",
+    "plan": null,
+    "plan_unit": null,
+    "plan_name": null,
+    "plan_uuid": null,
+    "plan_description": null,
+    "attributes": {
+      "subnets": [
+        {
+          "network": "http://localhost:8080/api/openstacktenant-networks/9b8fa00872fc4c0599b0c0d8ea41f473/",
+          "enable_dhcp": true,
+          "url": "http://localhost:8080/api/openstacktenant-subnets/8a07dca67f71459daab5f7f02147a367/",
+          "dns_nameservers": [],
+          "uuid": "8a07dca67f71459daab5f7f02147a367",
+          "label": "baip-demo-sub-net (192.168.42.0/24)",
+          "allocation_pools": [
+            {
+              "start": "192.168.42.10",
+              "end": "192.168.42.200"
+            }
+          ],
+          "gateway_ip": "192.168.42.1",
+          "ip_version": 4,
+          "cidr": "192.168.42.0/24",
+          "name": "baip-demo-sub-net"
+        }
+      ],
+      "name": "Openstack instance",
+      "image": {
+        "name": "Centosa",
+        "settings": "http://localhost:8080/api/service-settings/b13719a4b49344f699706716058209c5/",
+        "url": "http://localhost:8080/api/openstacktenant-images/b7c42df5f67a4e36b9ea4ab99d9d3193/",
+        "min_ram": 0,
+        "min_disk": 0,
+        "uuid": "b7c42df5f67a4e36b9ea4ab99d9d3193"
+      },
+      "floating_ips": [
+        {
+          "url": "false",
+          "address": "Skip floating IP assignment"
+        }
+      ],
+      "flavor": {
+        "uuid": "a15bd0d6f03b4784966dcb484c2b0f61",
+        "settings": "http://localhost:8080/api/service-settings/b13719a4b49344f699706716058209c5/",
+        "url": "http://localhost:8080/api/openstacktenant-flavors/a15bd0d6f03b4784966dcb484c2b0f61/",
+        "ram": 2048,
+        "disabled": false,
+        "cores": 1,
+        "disk": 10240,
+        "name": "g1.medium1"
+      },
+      "system_volume_size": 10240,
+      "security_groups": [
+        {
+          "description": "Default security group",
+          "settings": "http://localhost:8080/api/service-settings/b13719a4b49344f699706716058209c5/",
+          "url": "http://localhost:8080/api/openstacktenant-security-groups/3773c164fc4849a3947cccaa06ba2905/",
+          "uuid": "3773c164fc4849a3947cccaa06ba2905",
+          "rules": [
+            {
+              "to_port": -1,
+              "cidr": "0.0.0.0/0",
+              "from_port": -1,
+              "protocol": ""
+            },
+            {
+              "to_port": -1,
+              "cidr": "0.0.0.0/0",
+              "from_port": -1,
+              "protocol": ""
+            }
+          ],
+          "clearableValue": false,
+          "name": "default"
+        }
+      ]
+    },
+    "limits": {},
+    "uuid": "7e23e6f382874dde88f5934712ccc6f1",
+    "created": "2019-01-28T14:22:51.773943Z",
+    "type": "Create"
+  }
+]

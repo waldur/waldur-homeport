@@ -1,0 +1,125 @@
+{
+  "url": "http://localhost:8080/api/service-settings/671f2f1f45f146cfb94a5ab1d0506162/",
+  "uuid": "671f2f1f45f146cfb94a5ab1d0506162",
+  "name": "Blaaa",
+  "type": "OpenStackTenant",
+  "state": "Erred",
+  "error_message": "Unable to establish connection to https://kratt-openstack-dev.makonix.com:5000/v3/auth/tokens: HTTPSConnectionPool(host='kratt-openstack-dev.makonix.com', port=5000): Max retries exceeded with url: /v3/auth/tokens (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f42d585e690>: Failed to establish a new connection: [Errno -2] Name or service not known',))",
+  "shared": false,
+  "backend_url": "https://kratt-openstack-dev.makonix.com:5000/v3",
+  "username": "blaaa-user-ucqJ",
+  "password": "RJsf3RfKf53phn8V",
+  "customer": "http://localhost:8080/api/customers/9f43128e9eb24c288b6577568420dc1c/",
+  "customer_name": "ActiveSys",
+  "customer_native_name": "",
+  "homepage": "",
+  "terms_of_services": "",
+  "certifications": [
+      {
+          "uuid": "21930e2e3ac34d358cf01bab53720dd8",
+          "url": "http://localhost:8080/api/service-certifications/21930e2e3ac34d358cf01bab53720dd8/",
+          "name": "ISKE L",
+          "description": "",
+          "link": "https://iske.ria.ee"
+      }
+  ],
+  "quotas": [
+      {
+          "url": "http://localhost:8080/api/quotas/56666cbd995440d38f00cd98c24a46f3/",
+          "uuid": "56666cbd995440d38f00cd98c24a46f3",
+          "name": "volumes_size",
+          "limit": -1.0,
+          "usage": 0.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/ae7d4b2c4e0f4195a650724fe8c5dcb2/",
+          "uuid": "ae7d4b2c4e0f4195a650724fe8c5dcb2",
+          "name": "floating_ip_count",
+          "limit": 50.0,
+          "usage": 0.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/27e3121e261849f4825ded8269f6371a/",
+          "uuid": "27e3121e261849f4825ded8269f6371a",
+          "name": "snapshots",
+          "limit": 50.0,
+          "usage": 0.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/de8a2ec2f8164ed8a22cb06fb702c3b2/",
+          "uuid": "de8a2ec2f8164ed8a22cb06fb702c3b2",
+          "name": "instances",
+          "limit": 30.0,
+          "usage": 0.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/6f8bb2be6de048e18a3be4bf8a90d712/",
+          "uuid": "6f8bb2be6de048e18a3be4bf8a90d712",
+          "name": "volumes",
+          "limit": 50.0,
+          "usage": 0.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/ef0519be22ca496d9be352c19c512ddd/",
+          "uuid": "ef0519be22ca496d9be352c19c512ddd",
+          "name": "snapshots_size",
+          "limit": -1.0,
+          "usage": 0.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/ea5e1c27064549d2b4c3ebdb35b96652/",
+          "uuid": "ea5e1c27064549d2b4c3ebdb35b96652",
+          "name": "ram",
+          "limit": 40960.0,
+          "usage": 0.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/52a079404e77439d96ac3ff981ff0805/",
+          "uuid": "52a079404e77439d96ac3ff981ff0805",
+          "name": "vcpu",
+          "limit": 80.0,
+          "usage": 0.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/9fb68760b6154239b2492a40b9ea3f07/",
+          "uuid": "9fb68760b6154239b2492a40b9ea3f07",
+          "name": "storage",
+          "limit": 512000.0,
+          "usage": 0.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/ffd9e8c355084d3bb97e51771aaf9204/",
+          "uuid": "ffd9e8c355084d3bb97e51771aaf9204",
+          "name": "security_group_count",
+          "limit": 100.0,
+          "usage": 7.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/2340e9bdd6bb49209103026c7a40d787/",
+          "uuid": "2340e9bdd6bb49209103026c7a40d787",
+          "name": "security_group_rule_count",
+          "limit": 100.0,
+          "usage": 12.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/3e2434a517244636bb9d712e1f34f863/",
+          "uuid": "3e2434a517244636bb9d712e1f34f863",
+          "name": "network_count",
+          "limit": 100.0,
+          "usage": 1.0
+      },
+      {
+          "url": "http://localhost:8080/api/quotas/48cdad45fecd43088f9062a8a56ed0ec/",
+          "uuid": "48cdad45fecd43088f9062a8a56ed0ec",
+          "name": "subnet_count",
+          "limit": 100.0,
+          "usage": 1.0
+      }
+  ],
+  "scope": "http://localhost:8080/api/openstack-tenants/88d31d1d1ee94b17b13eaefe4313f4cf/",
+  "geolocations": [],
+  "tenant_id": "08e4d6b2f3b34c3b9d823969b1b59f50",
+  "flavor_exclude_regex": "",
+  "external_network_id": "d7e64bfc-f51b-4f9b-9df5-70baeb301e75",
+  "availability_zone": ""
+}
