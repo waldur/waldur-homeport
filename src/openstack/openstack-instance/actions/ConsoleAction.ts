@@ -9,15 +9,15 @@ const getConsoleURL = (id: string) =>
 
 export default function createAction(): ResourceAction {
   return {
-    name: 'vnc',
-    title: translate('Open VNC console'),
+    name: 'console',
+    title: translate('Open console'),
     type: 'callback',
     execute: resource => {
       getConsoleURL(resource.uuid).then(({ url }) => {
         window.open(url);
       }).catch(error => {
         const ctx = {message: format(error)};
-        const message = translate('Unable to open VNC console. Error message: {message}', ctx);
+        const message = translate('Unable to open console. Error message: {message}', ctx);
         alert(message);
       });
     },

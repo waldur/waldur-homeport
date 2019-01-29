@@ -4039,7 +4039,7 @@ msgid "Open"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/VncAction.ts
-msgid "Open VNC console"
+msgid "Open console"
 msgstr ""
 
 #: src/issues/issue-detail.html
@@ -7274,7 +7274,7 @@ msgid "Unable to login via SAML2 protocol."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/VncAction.ts
-msgid "Unable to open VNC console. Error message: {message}"
+msgid "Unable to open console. Error message: {message}"
 msgstr ""
 
 #: src/resource/actions/dialog/action-dialog.js
