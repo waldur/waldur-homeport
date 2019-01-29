@@ -4008,6 +4008,10 @@ msgstr ""
 msgid "Only pending invitation can be canceled."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/ConsoleAction.ts
+msgid "Only staff and organization users are allowed to open console."
+msgstr ""
+
 #: src/providers/provider-list.js
 msgid "Only staff can create provider."
 msgstr ""
@@ -4038,7 +4042,7 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/VncAction.ts
+#: src/openstack/openstack-instance/actions/ConsoleAction.ts
 msgid "Open console"
 msgstr ""
 
@@ -7273,7 +7277,7 @@ msgstr ""
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/VncAction.ts
+#: src/openstack/openstack-instance/actions/ConsoleAction.ts
 msgid "Unable to open console. Error message: {message}"
 msgstr ""
 
