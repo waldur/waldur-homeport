@@ -1,0 +1,13 @@
+<div>
+  <textarea 
+    class="form-control"
+    id="{{ $ctrl.field.name }}"
+    name="{{ ::$ctrl.field.name }}"
+    ng-change="$ctrl.validateJSON()" 
+    ng-model="$ctrl.model[$ctrl.field.name]">
+  </textarea>
+  <p class="text-danger"
+    ng-if="$ctrl.form[$ctrl.field.name].$invalid">
+    <span translate>This value is invalid.</span>
+  </p>
+</div>

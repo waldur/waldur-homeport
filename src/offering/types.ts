@@ -5,7 +5,7 @@ interface ReportSection {
 
 export type Report = ReportSection[];
 
-export type OfferingState = 'OK' | 'Requested' | 'Terminated';
+export type OfferingState = 'OK' | 'Requested' | 'Terminated' | 'Erred';
 
 export interface Offering {
   state: OfferingState;

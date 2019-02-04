@@ -1113,6 +1113,7 @@ msgid "Complain"
 msgstr ""
 
 #: src/experts/requests/actions/expert-request-complete.html
+#: src/offering/actions/CompleteAction.ts
 msgid "Complete"
 msgstr ""
 
@@ -1628,6 +1629,7 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
+#: src/offering/actions/DestroyAction.ts
 #: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.js
@@ -1980,6 +1982,10 @@ msgstr ""
 
 #: src/resource/crontab.ts
 msgid "Every year"
+msgstr ""
+
+#: src/offering/actions/UpdateAction.ts
+msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 msgstr ""
 
 #: src/table-react/TableExportButton.tsx
@@ -4036,6 +4042,10 @@ msgstr ""
 msgid "Only staff can unlink provider."
 msgstr ""
 
+#: src/offering/actions/utils.ts
+msgid "Only staff users are allowed to perform this action."
+msgstr ""
+
 #: src/events/EventDetailsTable.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/resource/summary/ResourceAccessInfo.tsx
@@ -4391,14 +4401,17 @@ msgid "Pending"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
+#: src/offering/actions/CompleteAction.ts
 msgid "Per day"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
+#: src/offering/actions/CompleteAction.ts
 msgid "Per half month"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
+#: src/offering/actions/CompleteAction.ts
 msgid "Per month"
 msgstr ""
 
@@ -5130,6 +5143,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-flavors.html
 #: src/cost-planning/cost-plan-items.html
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/offering/actions/CompleteAction.ts
 msgid "Quantity"
 msgstr ""
 
@@ -5399,6 +5413,10 @@ msgstr ""
 msgid "Removing link"
 msgstr ""
 
+#: src/offering/actions/UpdateAction.ts
+msgid "Report"
+msgstr ""
+
 #: src/dashboard/ReportIssueAction.tsx
 msgid "Report an issue"
 msgstr ""
@@ -5496,6 +5514,10 @@ msgstr ""
 
 #: src/issues/create/issue-create-dialog.js
 msgid "Request title"
+msgstr ""
+
+#: src/offering/actions/UpdateAction.ts
+msgid "Request to update has been accepted."
 msgstr ""
 
 #: src/resource/actions/action-utils-service.js
@@ -6681,6 +6703,10 @@ msgstr ""
 msgid "Tenant user username"
 msgstr ""
 
+#: src/offering/actions/TerminateAction.ts
+msgid "Terminate"
+msgstr ""
+
 #: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Terminated"
 msgstr ""
@@ -6873,6 +6899,10 @@ msgstr ""
 
 #: src/experts/extensions/workspace-selector.html
 msgid "This organization is an expert provider."
+msgstr ""
+
+#: src/resource/actions/dialog/action-field-json.html
+msgid "This value is invalid."
 msgstr ""
 
 #: src/navigation/cookies/cookies-consent.html
@@ -7371,11 +7401,13 @@ msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/resources/ResourceUsageList.tsx
+#: src/offering/actions/CompleteAction.ts
 msgid "Unit"
 msgstr ""
 
 #: src/billing/billing-record-details.html
 #: src/billing/invoice-details.html
+#: src/offering/actions/CompleteAction.ts
 msgid "Unit price"
 msgstr ""
 
@@ -7400,6 +7432,7 @@ msgstr ""
 #: src/customer/details/CustomerEditDetailsForm.tsx
 #: src/customer/details/customer-policies.html
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
+#: src/offering/actions/UpdateAction.ts
 #: src/user/hooks/hook-details.html
 msgid "Update"
 msgstr ""
@@ -7795,6 +7828,7 @@ msgstr ""
 msgid "Valid runtime states for operation: {validStates}."
 msgstr ""
 
+#: src/offering/actions/utils.ts
 #: src/resource/actions/base.ts
 msgid "Valid states for operation: {validStates}."
 msgstr ""

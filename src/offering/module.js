@@ -12,6 +12,7 @@ import registerOfferingCategory from './register-offering-category';
 import registerSidebarExtension from './sidebar';
 import appstoreOfferingSummary from './appstore-offering-summary';
 import registerTableExtension from './table-extension';
+import actions from './actions';
 import './events';
 import './marketplace';
 
@@ -30,4 +31,10 @@ export default module => {
   module.run(registerOfferingCategory);
   module.run(registerSidebarExtension);
   module.run(registerTableExtension);
+  module.config(actionsConfig);
 };
+
+// @ngInject
+function actionsConfig(ActionConfigurationProvider) {
+  ActionConfigurationProvider.register('Support.Offering', actions);
+}
