@@ -129,7 +129,7 @@ export function getSheet(sharedStrings: SharedStrings, rows: any[][]) {
 
 export default async function exportExcel(table, data) {
   const JSZip = await import(/* webpackChunkName: "jszip" */ 'jszip');
-  const zip = new JSZip();
+  const zip = new JSZip.default();
   for (const path in templates) {
     if (templates.hasOwnProperty(path)) {
       addToZip(zip, path, templates[path]);
