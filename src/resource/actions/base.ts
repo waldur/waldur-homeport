@@ -16,7 +16,7 @@ export function createLatinNameField(): ActionField {
   };
 }
 
-export function createNameField(): ActionField {
+export function createNameField<R>(): ActionField<R> {
   return {
     name: 'name',
     label: translate('Name'),
