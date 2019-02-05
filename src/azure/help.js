@@ -1,4 +1,4 @@
-import content from './help.html';
+import content from './help.md';
 import {HELP_CATEGORIES} from '@waldur/help/constants';
 import HelpRegistry from '@waldur/help/help-registry';
 

@@ -660,16 +660,16 @@ msgstr ""
 msgid "Azerbaijani"
 msgstr ""
 
+#: src/azure/AzureForm.tsx
+msgid "Azure Active Directory Application Secret"
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Azure Active Directory ID"
 msgstr ""
 
 #: src/azure/help.js
 msgid "Azure provider"
-msgstr ""
-
-#: src/azure/AzureForm.tsx
-msgid "Azure region where to provision resources (default: \"Central US\")"
 msgstr ""
 
 #: src/marketplace/offerings/create/Wizard.tsx
@@ -830,7 +830,6 @@ msgstr ""
 msgid "Bootable"
 msgstr ""
 
-#: src/azure/AzureForm.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Browse"
 msgstr ""
@@ -1046,6 +1045,7 @@ msgid "Click on a 'Create proposal' button when you are ready to fulfill expert 
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+#: src/azure/AzureForm.tsx
 msgid "Client ID"
 msgstr ""
 
@@ -1056,6 +1056,10 @@ msgstr ""
 #: src/marketplace/orders/OrderItemsFilter.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 msgid "Client organization"
+msgstr ""
+
+#: src/azure/AzureForm.tsx
+msgid "Client secret"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -1074,14 +1078,6 @@ msgstr ""
 
 #: src/resource/support/ChartContainer.tsx
 msgid "Cloud block storage size"
-msgstr ""
-
-#: src/azure/AzureForm.tsx
-msgid "Cloud service group to assign all connected SPLs to"
-msgstr ""
-
-#: src/azure/AzureForm.tsx
-msgid "Cloud service name"
 msgstr ""
 
 #: src/resource/support/ChartContainer.tsx
@@ -3181,10 +3177,6 @@ msgstr ""
 msgid "Located in home directory of the specified system user."
 msgstr ""
 
-#: src/azure/AzureForm.tsx
-msgid "Location"
-msgstr ""
-
 #: src/navigation/header/logout-link.html
 #: src/navigation/header/site-header.html
 #: src/user/user-sidebar.html
@@ -4790,10 +4782,6 @@ msgstr ""
 #: src/navigation/app-footer.html
 #: src/routes/about.js
 msgid "Privacy policy"
-msgstr ""
-
-#: src/azure/AzureForm.tsx
-msgid "Private certificate file"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
@@ -6662,6 +6650,7 @@ msgid "Tenant"
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+#: src/azure/AzureForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Tenant ID"
 msgstr ""
@@ -8022,10 +8011,6 @@ msgstr ""
 
 #: src/marketplace/common/ReviewButton.tsx
 msgid "Write review"
-msgstr ""
-
-#: src/azure/AzureForm.tsx
-msgid "X509 certificate in .PEM format"
 msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
