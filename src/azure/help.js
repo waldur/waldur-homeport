@@ -9,7 +9,7 @@ const helpData = {
   title: gettext('How to obtain credentials for Azure provider'),
   link: null,
   content: content,
-  template: '<help-content-two-column model="$ctrl.model"></help-content-two-column>'
+  template: '<help-content-one-column model="$ctrl.model"></help-content-one-column>'
 };
 
 HelpRegistry.register(helpData.type, helpData);
