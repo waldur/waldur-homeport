@@ -1,13 +1,14 @@
+import { pick } from '@waldur/core/utils';
 import * as ProvidersRegistry from '@waldur/providers/registry';
 
 import { AzureForm } from './AzureForm';
 
-const serializer = data => ({
-  username: data.username,
-  certificate: data.certificate,
-  cloud_service_name: data.cloud_service_name,
-  location: data.location.value,
-});
+const serializer = pick([
+  'tenant_id',
+  'client_id',
+  'client_secret',
+  'subscription_id',
+]);
 
 ProvidersRegistry.register({
   name: 'Azure',

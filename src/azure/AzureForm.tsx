@@ -1,45 +1,32 @@
 import * as React from 'react';
 
-import { FileUploadField, FormContainer, SelectField, StringField } from '@waldur/form-react';
-
-const AzureRegions = [
-  'Central US',
-  'East US 2',
-  'South Central US',
-  'North Europe',
-  'East Asia',
-  'Southeast Asia',
-  'Japan West',
-].map(region => ({label: region, value: region}));
+import { FormContainer, StringField } from '@waldur/form-react';
 
 export const AzureForm = ({ translate, container }) => (
   <FormContainer {...container}>
     <StringField
-      name="username"
+      name="subscription_id"
       label={translate('Subscription ID')}
       description={translate('In the format of GUID')}
       required={true}
     />
-    <FileUploadField
-      name="certificate"
-      label={translate('Private certificate file')}
-      description={translate('X509 certificate in .PEM format')}
-      accept="application/x-x509-ca-cert"
-      buttonLabel={translate('Browse')}
-      showFileName={true}
+    <StringField
+      name="tenant_id"
+      label={translate('Tenant ID')}
+      description={translate('In the format of GUID')}
       required={true}
     />
     <StringField
-      name="cloud_service_name"
-      label={translate('Cloud service name')}
-      description={translate('Cloud service group to assign all connected SPLs to')}
+      name="client_id"
+      label={translate('Client ID')}
+      description={translate('In the format of GUID')}
       required={true}
     />
-    <SelectField
-      name="location"
-      label={translate('Location')}
-      description={translate('Azure region where to provision resources (default: "Central US")')}
-      options={AzureRegions}
+    <StringField
+      name="client_secret"
+      label={translate('Client secret')}
+      description={translate('Azure Active Directory Application Secret')}
+      required={true}
     />
   </FormContainer>
 );
