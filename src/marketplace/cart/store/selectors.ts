@@ -12,6 +12,8 @@ export const isAddingItem = (state: OuterState) => getCart(state).addingItem;
 
 export const isRemovingItem = (state: OuterState) => getCart(state).removingItem;
 
+export const isUpdatingItem = (state: OuterState) => getCart(state).updatingItem;
+
 export const isCreatingOrder = (state: OuterState) => getCart(state).creatingOrder;
 
 export const getMaxUnit = (state: OuterState): 'month' | 'day' => {
@@ -23,3 +25,8 @@ export const getMaxUnit = (state: OuterState): 'month' | 'day' => {
 export const getTotal = createSelector(getItems, items => {
   return items.reduce((total, item) => total + item.estimate, 0);
 });
+
+export const getItemSelectorFactory = orderItemUuid =>
+  createSelector(getItems, items =>
+    items.find(item => item.uuid === orderItemUuid)
+  );

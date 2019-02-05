@@ -17,12 +17,15 @@ export interface GeolocationPoint {
 
 export type Geolocations = GeolocationPoint[];
 
-export interface OfferingComponent {
-  billing_type: 'usage' | 'fixed';
+export interface BaseComponent {
   type: string;
   name: string;
   measured_unit: string;
   description: string;
+}
+
+export interface OfferingComponent extends BaseComponent {
+  billing_type: 'usage' | 'fixed';
   limit_period?: 'month' | 'total';
   limit_amount: number;
 }
@@ -134,6 +137,18 @@ export interface Category {
   offering_count: number;
   sections?: Section[];
   columns?: CategoryColumn[];
+  components?: BaseComponent[];
+}
+
+export interface CategoryComponentUsage {
+  date: string;
+  reported_usage: number;
+  fixed_usage: number;
+  category_uuid: string;
+  category_title: string;
+  name: string;
+  type: string;
+  measured_unit: string;
 }
 
 export interface CategoriesListType {
@@ -159,6 +174,8 @@ export interface ServiceProvider {
 export interface OfferingConfigurationFormProps extends InjectedFormProps {
   offering: Offering;
   project?: Project;
+  plan?: Plan;
+  initialAttributes?: AttributesType;
 }
 
 export interface OrderItemDetailsProps {

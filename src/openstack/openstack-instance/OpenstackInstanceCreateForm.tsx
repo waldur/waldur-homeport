@@ -5,8 +5,9 @@ import { Field } from 'redux-form';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { formatFilesize } from '@waldur/core/utils';
-import { getLatinNameValidators } from '@waldur/core/validators';
-import { StringField, NumberField, TextField } from '@waldur/form-react';
+import { getLatinNameValidators, required as valueIsRequired } from '@waldur/core/validators';
+import { NumberField, TextField, StringField } from '@waldur/form-react';
+import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
 import { SelectDialogField } from '@waldur/form-react/SelectDialogField';
 import { translate, TranslateProps } from '@waldur/i18n';
 import { getUser } from '@waldur/issues/comments/selectors';
@@ -108,6 +109,24 @@ export class OpenstackInstanceCreateFormComponent extends
 
   componentDidMount() {
     this.loadData();
+    if (this.props.initialAttributes) {
+      this.props.initialize({
+        attributes: {
+          ...this.props.initialAttributes,
+          networks:  this.formatNetworks(this.props.initialAttributes),
+        }});
+      }
+  }
+
+  formatNetworks(initialAttributes) {
+    const networks = [];
+    for (let i = 0; i < initialAttributes.subnets.length; i++) {
+      networks.push({
+        subnet: initialAttributes.subnets[i],
+        floatingIp: initialAttributes.floating_ips[i],
+      });
+    }
+    return networks;
   }
 
   componentDidUpdate(prevProps) {
@@ -128,6 +147,13 @@ export class OpenstackInstanceCreateFormComponent extends
     if (this.props.flavor && flavorValidator({image: value}, this.props.flavor)) {
       this.props.change('attributes.flavor', null);
     }
+  }
+
+  shouldComponentUpdate(prevProps) {
+    if (prevProps.valid !== this.props.valid || prevProps.invalid !== this.props.invalid) {
+      return false;
+    }
+    return true;
   }
 
   render() {
@@ -152,7 +178,7 @@ export class OpenstackInstanceCreateFormComponent extends
           >
             <Field
               name="attributes.name"
-              component={StringField}
+              component={renderValidationWrapper(StringField)}
               validate={getLatinNameValidators()}
             />
           </OpenstackInstanceFormGroup>
@@ -162,40 +188,44 @@ export class OpenstackInstanceCreateFormComponent extends
           >
             <Field
               name="attributes.image"
-              component={fieldProps =>
-                <SelectDialogField
-                  columns={[
-                    {
-                      label: translate('Image name'),
-                      name: 'name',
-                    },
-                    {
-                      label: (
-                        <>
-                          {translate('Min RAM')}
-                          {' '}
-                          <PriceTooltip/>
-                        </>
-                      ),
-                      name: 'min_ram',
-                      filter: formatFilesize,
-                    },
-                    {
-                      label: translate('Min storage'),
-                      name: 'min_disk',
-                      filter: formatFilesize,
-                    },
-                  ]}
-                  choices={this.state.images}
-                  input={{
-                    name: fieldProps.input.name,
-                    value: fieldProps.input.value,
-                    onChange: value => {
-                      fieldProps.input.onChange(value);
-                      this.validateFlavor(value);
-                    },
-                  }}
-                />
+              validate={valueIsRequired}
+              component={renderValidationWrapper(
+                fieldProps =>
+                  <SelectDialogField
+                    id="image"
+                    columns={[
+                      {
+                        label: translate('Image name'),
+                        name: 'name',
+                      },
+                      {
+                        label: (
+                          <>
+                            {translate('Min RAM')}
+                            {' '}
+                            <PriceTooltip/>
+                          </>
+                        ),
+                        name: 'min_ram',
+                        filter: formatFilesize,
+                      },
+                      {
+                        label: translate('Min storage'),
+                        name: 'min_disk',
+                        filter: formatFilesize,
+                      },
+                    ]}
+                    choices={this.state.images}
+                    input={{
+                      name: fieldProps.input.name,
+                      value: fieldProps.input.value,
+                      onChange: value => {
+                        fieldProps.input.onChange(value);
+                        this.validateFlavor(value);
+                      },
+                    }}
+                  />
+                )
               }
             />
           </OpenstackInstanceFormGroup>
@@ -207,6 +237,7 @@ export class OpenstackInstanceCreateFormComponent extends
               name="attributes.flavor"
               component={fieldProps =>
                 <SelectDialogField
+                  id="flavor"
                   columns={[
                     {
                       label: translate('Flavor name'),
@@ -237,22 +268,25 @@ export class OpenstackInstanceCreateFormComponent extends
             label={translate('System volume size')}
             required={true}
           >
-            <div className="input-group">
-              <Field
-                name="attributes.system_volume_size"
-                component={fieldProps =>
-                  <NumberField
-                    min={1}
-                    max={1 * 4096}
-                    {...fieldProps.input}/>
-                }
-                format={v => v ? v / 1024 : ''}
-                normalize={v => Number(v) * 1024}
-              />
-              <span className="input-group-addon">
-                GB
-              </span>
-            </div>
+            <Field
+              name="attributes.system_volume_size"
+              validate={valueIsRequired}
+              component={renderValidationWrapper(
+                fieldProps =>
+                  <>
+                    <div className="input-group" style={{maxWidth: 200}}>
+                      <NumberField
+                        min={1}
+                        max={1 * 4096}
+                        {...fieldProps.input}/>
+                      <span className="input-group-addon">GB</span>
+                    </div>
+                  </>
+                )
+              }
+              format={v => v ? v / 1024 : ''}
+              normalize={v => Number(v) * 1024}
+            />
           </OpenstackInstanceFormGroup>
           <OpenstackInstanceFormGroup>
             <Field

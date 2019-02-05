@@ -3,13 +3,16 @@ import { ENV } from '@waldur/core/services';
 import { Customer } from '@waldur/customer/types';
 import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
 import { State, OrderItemResponse } from '@waldur/marketplace/orders/types';
-import { Category, Offering, ServiceProvider } from '@waldur/marketplace/types';
+import { Category, Offering, ServiceProvider, CategoryComponentUsage } from '@waldur/marketplace/types';
 
 export const getPlugins = () =>
   get('/marketplace-plugins/').then(response => response.data);
 
 export const getCategories = (options?: {}) =>
   getAll<Category>('/marketplace-categories/', options);
+
+export const getCategoryUsages = (options?: {}) =>
+  getAll<CategoryComponentUsage>('/marketplace-category-component-usages/', options);
 
 export const getCategory = (id: string, options?: {}) =>
   getById<Category>('/marketplace-categories/', id, options);
@@ -43,6 +46,9 @@ export const addCartItem = (data: object) =>
 
 export const removeCartItem = (id: string) =>
   deleteById('/marketplace-cart-items/', id);
+
+export const updateCartItem = (id: string, data: object) =>
+  patch(`/marketplace-cart-items/${id}/`, data).then(response => response.data);
 
 export const submitCart = (data: object) =>
   post<SubmitCartRequest>('/marketplace-cart-items/submit/', data).then(response => response.data);

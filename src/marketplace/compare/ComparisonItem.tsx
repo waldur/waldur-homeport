@@ -21,7 +21,7 @@ export const ComparisonItem = (props: ComparisonItemProps) => (
       className="comparison-item-thumb">
       <OfferingLogo src={props.item.thumbnail}/>
     </OfferingLink>
-    <h3>{props.item.name}</h3>
+    <p style={{fontSize: 16}}>{props.item.name}</p>
     <p>by{' '}
       <ProviderLink customer_uuid={props.item.customer_uuid}>
         {props.item.customer_name}

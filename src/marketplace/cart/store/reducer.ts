@@ -5,6 +5,7 @@ const INITIAL_STATE: State = {
   items: [],
   addingItem: false,
   removingItem: false,
+  updatingItem: false,
   creatingOrder: false,
 };
 
@@ -42,6 +43,22 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         items: state.items.filter(item => item.uuid !== payload.uuid),
         removingItem: false,
+      };
+    case constants.UPDATE_ITEM_REQUEST:
+      return {
+        ...state,
+        updatingItem: true,
+      };
+    case constants.UPDATE_ITEM_ERROR:
+      return {
+        ...state,
+        updatingItem: false,
+      };
+    case constants.UPDATE_ITEM_SUCCESS:
+      return {
+        ...state,
+        items: [...state.items, payload.item],
+        updatingItem: false,
       };
     case constants.CREATE_ORDER_REQUEST:
       return {

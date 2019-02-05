@@ -1,0 +1,20 @@
+[
+  {
+      "url": "http://localhost:8080/api/openstacktenant-flavors/eaedb2632e61484884cf7ad22f98524d/",
+      "uuid": "eaedb2632e61484884cf7ad22f98524d",
+      "name": "m1.tiny",
+      "settings": "http://localhost:8080/api/service-settings/671f2f1f45f146cfb94a5ab1d0506162/",
+      "cores": 1,
+      "ram": 512,
+      "disk": 10240
+  },
+  {
+      "url": "http://localhost:8080/api/openstacktenant-flavors/1ed9f12bc3604a728e8f9a69341af16e/",
+      "uuid": "1ed9f12bc3604a728e8f9a69341af16e",
+      "name": "m1.little",
+      "settings": "http://localhost:8080/api/service-settings/671f2f1f45f146cfb94a5ab1d0506162/",
+      "cores": 1,
+      "ram": 1024,
+      "disk": 10240
+  }
+]

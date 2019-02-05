@@ -8,7 +8,7 @@ import { omit } from '@waldur/core/utils';
 import { FieldError } from './FieldError';
 import { FormField } from './types';
 
-interface FormGroupProps extends FormField {
+export interface FormGroupProps extends FormField {
   meta: WrappedFieldMetaProps;
   clearOnUnmount?: boolean;
 }

@@ -79,8 +79,9 @@ function saveAsPdf(table, data) {
 }
 
 async function loadPdfMake() {
-  const pdfMake = await import(/* webpackChunkName: "pdfmake" */ 'pdfmake/build/pdfmake');
-  const pdfFonts = await import(/* webpackChunkName: "vfs_fonts" */ 'pdfmake/build/vfs_fonts');
+  // See also: https://github.com/bpampuch/pdfmake/issues/910#issuecomment-400199595
+  const pdfMake = (await import(/* webpackChunkName: "pdfmake" */ 'pdfmake/build/pdfmake')).default;
+  const pdfFonts = (await import(/* webpackChunkName: "vfs_fonts" */ 'pdfmake/build/vfs_fonts')).default;
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
   return pdfMake;
 }

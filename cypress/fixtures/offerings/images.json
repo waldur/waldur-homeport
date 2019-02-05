@@ -1,0 +1,18 @@
+[
+  {
+      "url": "http://localhost:8080/api/openstacktenant-images/3634698356dd4ff0893d55090b49a064/",
+      "uuid": "3634698356dd4ff0893d55090b49a064",
+      "name": "03.09_qcow2_kris",
+      "settings": "http://localhost:8080/api/service-settings/671f2f1f45f146cfb94a5ab1d0506162/",
+      "min_disk": 0,
+      "min_ram": 0
+  },
+  {
+      "url": "http://localhost:8080/api/openstacktenant-images/a776a83a9aa445d9b440747f14de7f18/",
+      "uuid": "a776a83a9aa445d9b440747f14de7f18",
+      "name": "CentOS 7 64bit",
+      "settings": "http://localhost:8080/api/service-settings/671f2f1f45f146cfb94a5ab1d0506162/",
+      "min_disk": 0,
+      "min_ram": 0
+  }
+]

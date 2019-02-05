@@ -23,6 +23,7 @@ import marketplaceOrderItemDetails from './orders/OrderItemDetailsContainer';
 import marketplaceOfferingDetailsButton from './orders/OfferingDetailsButton';
 import marketplaceOfferingDetailsDialog from './orders/OfferingDetailsDialog';
 import marketplaceAttributeFilterListDialog from './category/filters/AttributeFilterListDialog';
+import marketplaceShoppingCartItemUpdate from './cart/ShoppingCartItemUpdate';
 import registerExtensionPoint from './extension-point';
 import providersService from './providers-service';
 import registerSidebarExtension from './sidebar';
@@ -53,6 +54,7 @@ export default module => {
   module.component('marketplaceAttributeFilterListDialog', marketplaceAttributeFilterListDialog);
   module.component('marketplaceOfferingDetailsButton', marketplaceOfferingDetailsButton);
   module.component('marketplaceOfferingDetailsDialog', marketplaceOfferingDetailsDialog);
+  module.component('marketplaceShoppingCartItemUpdate', marketplaceShoppingCartItemUpdate);
   module.service('providersService', providersService);
   module.config(routes);
   module.run(registerSidebarExtension);

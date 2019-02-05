@@ -2,14 +2,15 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 
 import { getLatinNameValidators } from '@waldur/core/validators';
-import { StringField, NumberField, TextField } from '@waldur/form-react';
+import { NumberField, TextField, StringField } from '@waldur/form-react';
+import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
 import { translate } from '@waldur/i18n';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import { OpenstackInstanceFormGroup } from '@waldur/openstack/openstack-instance/OpenstackInstanceCreateForm';
 
 export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
-    this.props.initialize({ attributes: {size: 1024} });
+    this.props.initialize({ attributes: {size: 1024, ...this.props.initialAttributes} });
   }
   render() {
     return (
@@ -19,12 +20,12 @@ export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigura
           required={true}>
           <Field
             name="attributes.name"
-            component={StringField}
+            component={renderValidationWrapper(StringField)}
             validate={getLatinNameValidators()}
           />
         </OpenstackInstanceFormGroup>
         <OpenstackInstanceFormGroup label={translate('Size')}>
-            <div className="input-group">
+            <div className="input-group" style={{maxWidth: 200}}>
               <Field
                 name="attributes.size"
                 component={fieldProps =>

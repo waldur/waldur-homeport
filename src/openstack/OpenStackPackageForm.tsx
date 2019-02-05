@@ -18,13 +18,14 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { OpenStackAllocationPool } from './OpenStackAllocationPool';
 import { OpenStackSubnetField } from './OpenStackSubnetField';
+import { extractSubnet } from './utils';
 
 export const DEFAULT_SUBNET_CIDR = '192.168.X.0/24';
 
 export class OpenStackPackageForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
-    const project = this.props.project;
-    this.props.initialize({ attributes: {subnet_cidr: '42' }, project});
+    const { project, plan } = this.props;
+    this.props.initialize({attributes: {subnet_cidr: '42', ...this.props.initialAttributes}, project, plan});
   }
 
   render() {
@@ -72,6 +73,7 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
             label={translate('Internal network mask (CIDR)')}
             name="attributes.subnet_cidr"
             mask={DEFAULT_SUBNET_CIDR}
+            format={v => isNaN(v) ? extractSubnet(v) : v}
           />
           <OpenStackAllocationPool
             label={translate('Internal network allocation pool')}

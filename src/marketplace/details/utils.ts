@@ -3,9 +3,8 @@ import { getFormSerializer } from '@waldur/marketplace/common/registry';
 
 import { OrderSummaryProps } from './types';
 
-export const getOrderItem = (props: OrderSummaryProps) => {
+export const formatOrderItem = (props: OrderSummaryProps, request) => {
   const serializer = getFormSerializer(props.offering.type);
-  const request: OrderItemRequest = {offering: props.offering};
   if (props.formData) {
     request.plan = props.formData.plan;
     request.attributes = serializer(props.formData.attributes, props.offering);
@@ -14,4 +13,14 @@ export const getOrderItem = (props: OrderSummaryProps) => {
     }
   }
   return request;
+};
+
+export const formatOrderItemForCreate = (props: OrderSummaryProps) => {
+  const request: OrderItemRequest = {offering: props.offering};
+  return formatOrderItem(props, request);
+};
+
+export const formatOrderItemForUpdate = (props: OrderSummaryProps) => {
+  const request = {uuid: props.offering.uuid};
+  return formatOrderItem(props, request);
 };

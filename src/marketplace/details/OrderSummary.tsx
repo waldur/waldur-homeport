@@ -5,6 +5,7 @@ import { isValid, getFormValues } from 'redux-form';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
+import { ShoppingCartUpdateButtonContainer } from '@waldur/marketplace/cart/ShoppingCartUpdateButtonContainer';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
@@ -16,7 +17,7 @@ import { Project, Customer } from '@waldur/workspace/types';
 
 import { pricesSelector } from './plan/utils';
 import { OrderSummaryProps, OfferingFormData } from './types';
-import { getOrderItem } from './utils';
+import { formatOrderItemForUpdate, formatOrderItemForCreate } from './utils';
 
 export const SummaryTable = (props: OrderSummaryProps) => (
   <table className="table offering-details-section-table">
@@ -65,14 +66,21 @@ export const SummaryTable = (props: OrderSummaryProps) => (
 
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
-    <OfferingLogo src={props.offering.thumbnail}/>
+    <OfferingLogo src={props.offering.thumbnail} size="small"/>
     <SummaryTable {...props}/>
     <div className="display-flex justify-content-between">
-      <ShoppingCartButtonContainer
-        item={getOrderItem(props)}
-        flavor="primary"
-        disabled={!props.formValid}
-      />
+      {!props.updateMode ?
+        <ShoppingCartButtonContainer
+          item={formatOrderItemForCreate(props)}
+          flavor="primary"
+          disabled={!props.formValid}
+        /> :
+        <ShoppingCartUpdateButtonContainer
+          item={formatOrderItemForUpdate(props)}
+          flavor="primary"
+          disabled={!props.formValid}
+        />
+      }
       <OfferingCompareButtonContainer offering={props.offering} flavor="secondary"/>
     </div>
   </>

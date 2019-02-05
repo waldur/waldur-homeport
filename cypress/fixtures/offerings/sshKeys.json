@@ -1,0 +1,11 @@
+[
+  {
+      "url": "http://localhost:8080/api/keys/9c6ccc2656f949599cc64d901746cc5b/",
+      "uuid": "9c6ccc2656f949599cc64d901746cc5b",
+      "name": "WaldurKey",
+      "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCy8zaoF2j/QhUa7xnnj/o99LsgFyY9TmTT+LyaSKe93vKBHJJpw8tBwYrg1VwA7NvvBOJ0bROcVNr9jhCmXHAAMt8z8OS4g7vSdPA3vDR0TFIRyQWCaL0AIunUTb3Mrvng6Rn+VUTFjL+x83SZLis8T/GTsaaOtb7e5eaMn43lszmvxtYHN7FUIr/CLWlWMVjyahcBx+XinAM0YCxFqRl3YGhS/HTOyWvQYPFvOP2jvzc6rFXEGPOb6SXPaUWoYczggzd6of3pOyZH3TLn8FnA9Qcs2d0hncbCULItLHpBhRYFps4Hy7NhY8F1SzuCmBsgx3EEamDKDfvFdz9Au/dX victor@laptop",
+      "fingerprint": "fa:3a:de:ef:dd:b8:ce:11:d2:bd:bd:25:da:25:87:c4",
+      "user_uuid": "3a836bc76e1b40349ec1a0d8220f374f",
+      "is_shared": true
+  }
+]

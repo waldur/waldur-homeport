@@ -17,12 +17,12 @@ interface ComparisonTableProps {
 
 export const ComparisonTable = (props: ComparisonTableProps) => (
   <div className="h-scrollable">
-    <table className="table table-bordered table-hover">
+    <table className="table table-bordered table-hover" style={{tableLayout: 'fixed'}}>
       <tbody>
         <tr>
-          <td style={{minWidth: '200px'}}/>
+          <td style={{width: 200}}/>
           {props.items.map((item, index) => (
-            <td key={index} style={{minWidth: '200px'}}>
+            <td key={index} style={{width: 230}}>
               <ComparisonItem item={item}/>
             </td>
           ))}

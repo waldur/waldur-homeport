@@ -16,7 +16,7 @@ interface ProjectDashboardProps {
   project: Project;
 }
 
-export const ProjectDashboard = (props: ProjectDashboardProps) => (
+export const ProjectDashboard = (props: ProjectDashboardProps) => props.project ? (
   <>
     <DashboardHeader
       title={translate('Welcome, {user}!', {user: props.user.full_name})}
@@ -37,4 +37,4 @@ export const ProjectDashboard = (props: ProjectDashboardProps) => (
       />
     </div>
   </>
-);
+) : null;

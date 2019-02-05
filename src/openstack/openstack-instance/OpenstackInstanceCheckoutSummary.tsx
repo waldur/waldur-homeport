@@ -2,13 +2,20 @@ import * as React from 'react';
 import * as Table from 'react-bootstrap/lib/Table';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { getFormValues } from 'redux-form';
+import { getFormValues, isValid as isFormValid } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import Panel from '@waldur/core/Panel';
 import { defaultCurrency } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
+import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
+import { RatingStars } from '@waldur/marketplace/common/RatingStars';
+import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
+import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
+import { formatOrderItemForCreate } from '@waldur/marketplace/details/utils';
+import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Offering } from '@waldur/marketplace/types';
 import * as api from '@waldur/openstack/api';
 import { Flavor, ServiceComponent, LimitsType } from '@waldur/openstack/openstack-instance/types';
@@ -81,12 +88,15 @@ interface OpenstackInstanceCheckoutSummaryProps extends TranslateProps {
     image?: {name: string};
     flavor?: Flavor;
   };
+  formValid?: boolean;
   components: ServiceComponent;
   usages: ServiceComponent;
   limits: ServiceComponent;
   limitsType: LimitsType;
   customer: Customer;
   project: Project;
+  offering: Offering;
+  total?: number;
 }
 
 export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceCheckoutSummaryProps) => {
@@ -94,7 +104,6 @@ export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceChe
 
   return (
     <>
-      <h3 className="header-bottom-border">{props.translate('Checkout summary')}</h3>
       {!isValid(props.formData, props.components) && (
         <p id="invalid-info">
           {props.formData.flavor && props.translate('Resource configuration is invalid. Please fix errors in form.')}
@@ -106,6 +115,7 @@ export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceChe
           __html: props.translate('Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package.', {serviceName}),
         }}/>
       )}
+      <OfferingLogo src={props.offering.thumbnail} size="small"/>
       {isValid(props.formData, props.components) && (
         <Table bordered={true}>
           <tbody>
@@ -183,6 +193,28 @@ export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceChe
               </td>
               <td>{props.project ? props.project.name : <span>&mdash;</span>}</td>
             </tr>
+            <tr>
+              <td>
+                <strong>{props.translate('Offering')}</strong>
+              </td>
+              <td>{props.offering.name}</td>
+            </tr>
+            <tr>
+            <td>
+              <strong>{props.translate('Vendor')}</strong>
+            </td>
+            <td>
+              <ProviderLink customer_uuid={props.offering.customer_uuid}>
+                {props.offering.customer_name}
+              </ProviderLink>
+            </td>
+          </tr>
+          {props.offering.rating && (
+            <tr>
+              <td><strong>{props.translate('Rating')}</strong></td>
+              <td><RatingStars rating={props.offering.rating} size="medium"/></td>
+            </tr>
+          )}
           </tbody>
         </Table>
       )}
@@ -218,9 +250,11 @@ interface OpenstackInstanceCheckoutSummaryComponentProps extends TranslateProps 
     image?: {name: string};
     flavor?: Flavor;
   };
+  formValid: boolean;
   customer: Customer;
   project: Project;
   offering: Offering;
+  total: number;
 }
 
 class OpenstackInstanceCheckoutSummaryComponent extends React.Component<OpenstackInstanceCheckoutSummaryComponentProps, OpenstackInstanceCheckoutSummaryComponentState> {
@@ -277,19 +311,39 @@ class OpenstackInstanceCheckoutSummaryComponent extends React.Component<Openstac
     }
 
     if (this.state.loaded) {
+      const { offering, customer, project, total, formData, formValid } = props;
       return (
-        <PureOpenstackInstanceCheckoutSummary {...this.props} {...this.state}/>
+        <>
+          <PureOpenstackInstanceCheckoutSummary {...this.props} {...this.state}/>
+          <div className="display-flex justify-content-between">
+            <ShoppingCartButtonContainer
+              item={formatOrderItemForCreate({
+                formData: {attributes: formData},
+                offering,
+                customer,
+                project,
+                total,
+                formValid,
+              })}
+              flavor="primary"
+              disabled={!props.formValid}
+            />
+            <OfferingCompareButtonContainer offering={props.offering} flavor="secondary"/>
+        </div>
+      </>
       );
     }
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   const formData: any = getFormValues('marketplaceOffering')(state);
   return {
     formData: formData && formData.attributes || {attributes: {}},
+    formValid: isFormValid('marketplaceOffering')(state),
     customer: getCustomer(state),
     project: getProject(state),
+    total: pricesSelector(state, ownProps).total,
   };
 };
 

@@ -176,6 +176,18 @@ export const floatingIps = [
 ];
 
 export const summaryData = {
+  offering: {
+    thumbnail: '',
+    name: 'My Offering',
+    rating: 0,
+    order_item_count: 0,
+    reviews: 0,
+    full_description: 'Some description',
+    attributes: {},
+    components: [],
+    type: 'OpenStack.Instance',
+    state: 'OK',
+  },
   components: {
     cores: 0.0125,
     storage: 0.0000026042,

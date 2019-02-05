@@ -4,10 +4,7 @@ import * as Label from 'react-bootstrap/lib/Label';
 import * as ListGroup from 'react-bootstrap/lib/ListGroup';
 import * as ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
 
-export interface Action {
-  title: string;
-  onClick(): void;
-}
+import { Action } from './types';
 
 export interface ActionListProps {
   actions: Action[];

@@ -2,13 +2,20 @@ import * as React from 'react';
 import * as Table from 'react-bootstrap/lib/Table';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { getFormValues } from 'redux-form';
+import { getFormValues, isValid } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import Panel from '@waldur/core/Panel';
 import { defaultCurrency } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
+import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
+import { RatingStars } from '@waldur/marketplace/common/RatingStars';
+import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
+import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
+import { formatOrderItemForCreate } from '@waldur/marketplace/details/utils';
+import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Offering } from '@waldur/marketplace/types';
 import * as api from '@waldur/openstack/api';
 import { ServiceComponent, LimitsType } from '@waldur/openstack/openstack-instance/types';
@@ -54,6 +61,7 @@ interface OpenstackVolumeCheckoutSummaryProps extends TranslateProps {
   formData: {
     size?: number;
   };
+  formValid: boolean;
   components: ServiceComponent;
   usages: ServiceComponent;
   limits: ServiceComponent;
@@ -61,11 +69,11 @@ interface OpenstackVolumeCheckoutSummaryProps extends TranslateProps {
   customer: Customer;
   project: Project;
   offering: Offering;
+  total: number;
 }
 
 export const PureOpenstackVolumeCheckoutSummaryComponent = (props: OpenstackVolumeCheckoutSummaryProps) => (
   <>
-    <h3 className="header-bottom-border">{props.translate('Checkout summary')}</h3>
     <p id="invalid-info">
       {!props.formData.size && props.translate('No items yet.')}
     </p>
@@ -74,15 +82,38 @@ export const PureOpenstackVolumeCheckoutSummaryComponent = (props: OpenstackVolu
         __html: props.translate('Note that this volume is charged as part of <strong>{serviceName}</strong> package.', {serviceName: props.offering.name}),
       }}/>
     )}
+    <OfferingLogo src={props.offering.thumbnail} size="small"/>
     {!!props.formData.size &&
       <Table bordered={true}>
         <tbody>
+          <tr>
+            <td>
+              <strong>{props.translate('Offering')}</strong>
+            </td>
+            <td>{props.offering.name}</td>
+          </tr>
           <tr>
             <td>
               <strong>{props.translate('Storage')}</strong>
             </td>
             <td>{formatFilesize(props.formData.size)}</td>
           </tr>
+          <tr>
+            <td>
+              <strong>{props.translate('Vendor')}</strong>
+            </td>
+            <td>
+              <ProviderLink customer_uuid={props.offering.customer_uuid}>
+                {props.offering.customer_name}
+              </ProviderLink>
+            </td>
+          </tr>
+          {props.offering.rating && (
+            <tr>
+              <td><strong>{props.translate('Rating')}</strong></td>
+              <td><RatingStars rating={props.offering.rating} size="medium"/></td>
+            </tr>
+          )}
           <tr>
             <td>
               <strong>{props.translate('Price per day')}</strong>
@@ -119,7 +150,7 @@ export const PureOpenstackVolumeCheckoutSummaryComponent = (props: OpenstackVolu
       </Table>
     }
     {props.components && (
-      <Panel title={props.translate('Package limits')}>
+      <Panel title={props.translate('Package limits')} className="m-b-none">
         <QuotaUsageBarChart quotas={getQuotas({
           formData: props.formData,
           usages: props.usages,
@@ -146,9 +177,11 @@ interface OpenstackVolumeCheckoutSummaryComponentProps extends TranslateProps {
   formData: {
     size?: number;
   };
+  formValid: boolean;
   customer: Customer;
   project: Project;
   offering: Offering;
+  total: number;
 }
 
 class OpenstackVolumeCheckoutSummaryComponent extends React.Component<OpenstackVolumeCheckoutSummaryComponentProps, OpenstackVolumeCheckoutSummaryComponentState> {
@@ -205,19 +238,39 @@ class OpenstackVolumeCheckoutSummaryComponent extends React.Component<OpenstackV
     }
 
     if (this.state.loaded) {
+      const { offering, customer, project, total, formData, formValid } = props;
       return (
-        <PureOpenstackVolumeCheckoutSummaryComponent {...this.props} {...this.state}/>
+        <>
+          <div className="display-flex justify-content-between">
+            <ShoppingCartButtonContainer
+              item={formatOrderItemForCreate({
+                formData: {attributes: formData},
+                offering,
+                customer,
+                project,
+                total,
+                formValid,
+              })}
+              flavor="primary"
+              disabled={!props.formValid}
+            />
+            <OfferingCompareButtonContainer offering={props.offering} flavor="secondary"/>
+          </div>
+          <PureOpenstackVolumeCheckoutSummaryComponent {...this.props} {...this.state}/>
+        </>
       );
     }
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   const formData: any = getFormValues('marketplaceOffering')(state);
   return {
     formData: formData && formData.attributes || {attributes: {}},
+    formValid: isValid('marketplaceOffering')(state),
     customer: getCustomer(state),
     project: getProject(state),
+    total: pricesSelector(state, ownProps).total,
   };
 };
 

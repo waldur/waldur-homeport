@@ -283,6 +283,10 @@ msgstr ""
 msgid "Add request"
 msgstr ""
 
+#: src/dashboard/marketplace.ts
+msgid "Add resource"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 msgid "Add rule"
 msgstr ""
@@ -1012,10 +1016,8 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/offering/appstore-offering-summary.html
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: src/slurm/slurm-allocation-checkout-summary.html
 msgid "Checkout summary"
@@ -1111,6 +1113,7 @@ msgid "Complain"
 msgstr ""
 
 #: src/experts/requests/actions/expert-request-complete.html
+#: src/offering/actions/CompleteAction.ts
 msgid "Complete"
 msgstr ""
 
@@ -1626,6 +1629,7 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
+#: src/offering/actions/DestroyAction.ts
 #: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.js
@@ -1978,6 +1982,10 @@ msgstr ""
 
 #: src/resource/crontab.ts
 msgid "Every year"
+msgstr ""
+
+#: src/offering/actions/UpdateAction.ts
+msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 msgstr ""
 
 #: src/table-react/TableExportButton.tsx
@@ -3917,6 +3925,8 @@ msgstr ""
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/orders/OrderItemsFilter.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Offering"
 msgstr ""
 
@@ -4004,6 +4014,10 @@ msgstr ""
 msgid "Only pending invitation can be canceled."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/ConsoleAction.ts
+msgid "Only staff and organization users are allowed to open console."
+msgstr ""
+
 #: src/providers/provider-list.js
 msgid "Only staff can create provider."
 msgstr ""
@@ -4028,10 +4042,18 @@ msgstr ""
 msgid "Only staff can unlink provider."
 msgstr ""
 
+#: src/offering/actions/utils.ts
+msgid "Only staff users are allowed to perform this action."
+msgstr ""
+
 #: src/events/EventDetailsTable.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/resource/summary/ResourceAccessInfo.tsx
 msgid "Open"
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/ConsoleAction.ts
+msgid "Open console"
 msgstr ""
 
 #: src/issues/issue-detail.html
@@ -4109,6 +4131,7 @@ msgstr ""
 msgid "Order items"
 msgstr ""
 
+#: src/marketplace/cart/ShoppingCartItemUpdate.tsx
 #: src/marketplace/details/OfferingDetails.tsx
 msgid "Order summary"
 msgstr ""
@@ -4378,14 +4401,17 @@ msgid "Pending"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
+#: src/offering/actions/CompleteAction.ts
 msgid "Per day"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
+#: src/offering/actions/CompleteAction.ts
 msgid "Per half month"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
+#: src/offering/actions/CompleteAction.ts
 msgid "Per month"
 msgstr ""
 
@@ -5117,6 +5143,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-flavors.html
 #: src/cost-planning/cost-plan-items.html
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/offering/actions/CompleteAction.ts
 msgid "Quantity"
 msgstr ""
 
@@ -5178,6 +5205,8 @@ msgid "RAM usage"
 msgstr ""
 
 #: src/marketplace/details/OrderSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Rating"
 msgstr ""
 
@@ -5312,6 +5341,10 @@ msgstr ""
 msgid "Release floating IPs"
 msgstr ""
 
+#: src/dashboard/CategoryResourcesList.tsx
+msgid "Reload"
+msgstr ""
+
 #: src/issues/IssueReload.tsx
 msgid "Reload issue data"
 msgstr ""
@@ -5378,6 +5411,10 @@ msgstr ""
 #: src/project/project-providers-service.js
 #: src/providers/details/provider-projects.js
 msgid "Removing link"
+msgstr ""
+
+#: src/offering/actions/UpdateAction.ts
+msgid "Report"
 msgstr ""
 
 #: src/dashboard/ReportIssueAction.tsx
@@ -5477,6 +5514,10 @@ msgstr ""
 
 #: src/issues/create/issue-create-dialog.js
 msgid "Request title"
+msgstr ""
+
+#: src/offering/actions/UpdateAction.ts
+msgid "Request to update has been accepted."
 msgstr ""
 
 #: src/resource/actions/action-utils-service.js
@@ -6165,6 +6206,15 @@ msgstr ""
 msgid "Shopping cart is empty. You should add items to cart first."
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Shopping cart item has been updated."
+msgstr ""
+
+#: src/marketplace/cart/ShoppingCartItemUpdate.tsx
+#: src/marketplace/routes.js
+msgid "Shopping cart item update"
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Should be given to OAuth service provider. Example: https://VM_EXTERNAL_IP/hub/oauth_callback"
 msgstr ""
@@ -6183,6 +6233,10 @@ msgstr ""
 
 #: src/form-react/SelectDialogField.tsx
 msgid "Show choices"
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
+msgid "Show console log"
 msgstr ""
 
 #: src/billing/price-estimate-button.html
@@ -6649,6 +6703,10 @@ msgstr ""
 msgid "Tenant user username"
 msgstr ""
 
+#: src/offering/actions/TerminateAction.ts
+msgid "Terminate"
+msgstr ""
+
 #: src/marketplace/orders/OrderItemsFilter.tsx
 msgid "Terminated"
 msgstr ""
@@ -6711,6 +6769,10 @@ msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterList.tsx
 msgid "There are no category sections yet."
+msgstr ""
+
+#: src/dashboard/CategoryResources.tsx
+msgid "There are no charts yet."
 msgstr ""
 
 #: src/issues/comments/IssueCommentsList.spec.tsx
@@ -6803,6 +6865,7 @@ msgstr ""
 #: src/form/appstore-field-email.html
 #: src/form/appstore-field-file.html
 #: src/form/appstore-field-tel.html
+#: src/marketplace/cart/ShoppingCartItemUpdateForm.tsx
 #: src/marketplace/details/OfferingConfigurator.tsx
 msgid "This field is required"
 msgstr ""
@@ -6836,6 +6899,10 @@ msgstr ""
 
 #: src/experts/extensions/workspace-selector.html
 msgid "This organization is an expert provider."
+msgstr ""
+
+#: src/resource/actions/dialog/action-field-json.html
+msgid "This value is invalid."
 msgstr ""
 
 #: src/navigation/cookies/cookies-consent.html
@@ -7150,6 +7217,10 @@ msgstr ""
 msgid "Unable to load category sections."
 msgstr ""
 
+#: src/dashboard/CategoryResourcesList.tsx
+msgid "Unable to load charts."
+msgstr ""
+
 #: src/issues/comments/IssueCommentsList.spec.tsx
 #: src/issues/comments/IssueCommentsList.tsx
 msgid "Unable to load comments."
@@ -7189,6 +7260,10 @@ msgstr ""
 
 #: src/marketplace/details/DetailsPage.tsx
 msgid "Unable to load offering details."
+msgstr ""
+
+#: src/marketplace/cart/ShoppingCartItemUpdate.tsx
+msgid "Unable to load offering."
 msgstr ""
 
 #: src/marketplace/orders/OrderDetails.tsx
@@ -7232,6 +7307,10 @@ msgstr ""
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/ConsoleAction.ts
+msgid "Unable to open console. Error message: {message}"
+msgstr ""
+
 #: src/resource/actions/dialog/action-dialog.js
 msgid "Unable to perform action"
 msgstr ""
@@ -7268,6 +7347,10 @@ msgstr ""
 msgid "Unable to set quotas."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
+msgid "Unable to show console log. Error message: {message}"
+msgstr ""
+
 #: src/issues/comments/effects.ts
 msgid "Unable to submit empty comment."
 msgstr ""
@@ -7292,6 +7375,10 @@ msgstr ""
 msgid "Unable to update provider."
 msgstr ""
 
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to update shopping cart item."
+msgstr ""
+
 #: src/issues/attachments/effects.ts
 msgid "Unable to upload attachment."
 msgstr ""
@@ -7314,11 +7401,13 @@ msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/resources/ResourceUsageList.tsx
+#: src/offering/actions/CompleteAction.ts
 msgid "Unit"
 msgstr ""
 
 #: src/billing/billing-record-details.html
 #: src/billing/invoice-details.html
+#: src/offering/actions/CompleteAction.ts
 msgid "Unit price"
 msgstr ""
 
@@ -7342,6 +7431,8 @@ msgstr ""
 
 #: src/customer/details/CustomerEditDetailsForm.tsx
 #: src/customer/details/customer-policies.html
+#: src/marketplace/cart/ShoppingCartUpdateButton.tsx
+#: src/offering/actions/UpdateAction.ts
 #: src/user/hooks/hook-details.html
 msgid "Update"
 msgstr ""
@@ -7737,6 +7828,7 @@ msgstr ""
 msgid "Valid runtime states for operation: {validStates}."
 msgstr ""
 
+#: src/offering/actions/utils.ts
 #: src/resource/actions/base.ts
 msgid "Valid states for operation: {validStates}."
 msgstr ""
@@ -7746,6 +7838,8 @@ msgid "Value"
 msgstr ""
 
 #: src/marketplace/details/OrderSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Vendor"
 msgstr ""
 

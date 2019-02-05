@@ -39,6 +39,24 @@ export const removeItemError = () => ({
   type: constants.REMOVE_ITEM_ERROR,
 });
 
+export const updateItemRequest = (item: OrderItemResponse) => ({
+  type: constants.UPDATE_ITEM_REQUEST,
+  payload: {
+    item,
+  },
+});
+
+export const updateItemSuccess = (item: OrderItemResponse) => ({
+  type: constants.UPDATE_ITEM_SUCCESS,
+  payload: {
+    item,
+  },
+});
+
+export const updateItemError = () => ({
+  type: constants.UPDATE_ITEM_ERROR,
+});
+
 export const setItems = (items: OrderItemResponse[]) => ({
   type: constants.SET_ITEMS,
   payload: {
