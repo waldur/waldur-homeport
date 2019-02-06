@@ -348,7 +348,7 @@ msgstr ""
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr ""
 
@@ -363,8 +363,18 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerDetails.tsx
+#: src/azure/vm/AzureVirtualMachineDetails.tsx
+msgid "Admin password"
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 msgid "Admin rights"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerDetails.tsx
+#: src/azure/vm/AzureVirtualMachineDetails.tsx
+msgid "Admin username"
 msgstr ""
 
 #: src/issues/create/issue-quick-create.html
@@ -660,7 +670,7 @@ msgstr ""
 msgid "Azerbaijani"
 msgstr ""
 
-#: src/azure/AzureForm.tsx
+#: src/azure/provider/AzureForm.tsx
 msgid "Azure Active Directory Application Secret"
 msgstr ""
 
@@ -668,7 +678,15 @@ msgstr ""
 msgid "Azure Active Directory ID"
 msgstr ""
 
-#: src/azure/help.js
+#: src/azure/sql/marketplace.ts
+msgid "Azure PostgreSQL database server"
+msgstr ""
+
+#: src/azure/vm/marketplace.ts
+msgid "Azure Virtual Machine"
+msgstr ""
+
+#: src/azure/provider/help.js
 msgid "Azure provider"
 msgstr ""
 
@@ -1045,7 +1063,7 @@ msgid "Click on a 'Create proposal' button when you are ready to fulfill expert 
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-#: src/azure/AzureForm.tsx
+#: src/azure/provider/AzureForm.tsx
 msgid "Client ID"
 msgstr ""
 
@@ -1058,7 +1076,7 @@ msgstr ""
 msgid "Client organization"
 msgstr ""
 
-#: src/azure/AzureForm.tsx
+#: src/azure/provider/AzureForm.tsx
 msgid "Client secret"
 msgstr ""
 
@@ -1573,7 +1591,7 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/experts/bids/create/expert-bid-create-dialog.html
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
@@ -2480,7 +2498,7 @@ msgstr ""
 msgid "How to obtain credentials for Amazon EC2 provider"
 msgstr ""
 
-#: src/azure/help.js
+#: src/azure/provider/help.js
 msgid "How to obtain credentials for Azure provider"
 msgstr ""
 
@@ -2551,7 +2569,7 @@ msgstr ""
 msgid "If you use on-premise GitLab please specify the URl"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -2568,7 +2586,7 @@ msgstr ""
 #: src/analytics/ImagesList.tsx
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
@@ -2624,7 +2642,7 @@ msgstr ""
 msgid "In order to enable monitoring you should install and configure Zabbix agent on monitored virtual machine."
 msgstr ""
 
-#: src/azure/AzureForm.tsx
+#: src/azure/provider/AzureForm.tsx
 msgid "In the format of GUID"
 msgstr ""
 
@@ -2682,11 +2700,11 @@ msgstr ""
 msgid "Initial admin username"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 msgid "Initial password"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 msgid "Initial username"
 msgstr ""
 
@@ -4342,7 +4360,8 @@ msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: src/auth/auth-login.html
-#: src/azure/AzureVirtualMachineSummary.tsx
+#: src/azure/sql/AzureSQLServerSummary.tsx
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/jira/JiraForm.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
@@ -5778,6 +5797,14 @@ msgstr ""
 msgid "SLURM allocation usage"
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerForm.tsx
+msgid "SQL server description"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerForm.tsx
+msgid "SQL server name"
+msgstr ""
+
 #: src/user/constants.js
 msgid "SSH Keys"
 msgstr ""
@@ -5800,10 +5827,6 @@ msgstr ""
 
 #: src/user/routes.js
 msgid "SSH keys"
-msgstr ""
-
-#: src/azure/AzureVirtualMachineSummary.tsx
-msgid "SSH port"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
@@ -6284,7 +6307,7 @@ msgstr ""
 msgid "Sign in with trusted identity"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
@@ -6302,7 +6325,7 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 msgid "Size name"
 msgstr ""
@@ -6521,7 +6544,7 @@ msgstr ""
 msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
-#: src/azure/AzureForm.tsx
+#: src/azure/provider/AzureForm.tsx
 msgid "Subscription ID"
 msgstr ""
 
@@ -6650,7 +6673,7 @@ msgid "Tenant"
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-#: src/azure/AzureForm.tsx
+#: src/azure/provider/AzureForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Tenant ID"
 msgstr ""
@@ -6873,6 +6896,8 @@ msgid "This is an objective."
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
+#: src/azure/sql/AzureSQLServerForm.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/experts/requests/create/expert-request-create.js
 #: src/jira/project/jira-project-config.js
 #: src/offering/OfferingConfigurationForm.tsx
@@ -7564,7 +7589,7 @@ msgstr ""
 msgid "User dashboard"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
@@ -7711,7 +7736,8 @@ msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: src/auth/auth-login.html
-#: src/azure/AzureVirtualMachineSummary.tsx
+#: src/azure/sql/AzureSQLServerSummary.tsx
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
 #: src/jira/JiraForm.tsx
@@ -7764,7 +7790,7 @@ msgstr ""
 msgid "VAT rate"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -7906,8 +7932,16 @@ msgstr ""
 msgid "Virtual machine contains a public key of the cloud broker"
 msgstr ""
 
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "Virtual machine description"
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 msgid "Virtual machine has no floating ips assigned!"
+msgstr ""
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "Virtual machine name"
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx

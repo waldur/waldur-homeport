@@ -2,8 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { TranslateProps } from '@waldur/i18n';
+import { SecretValueField } from '@waldur/marketplace/SecretValueField';
 import { ServiceProvider } from '@waldur/marketplace/types';
-import { SecretValueField } from '@waldur/openstack/SecretValueField';
 import ActionButton from '@waldur/table-react/ActionButton';
 
 import './ServiceProviderSecretCode.scss';

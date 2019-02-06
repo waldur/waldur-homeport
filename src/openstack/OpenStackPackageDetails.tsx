@@ -2,10 +2,9 @@ import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsField } from '@waldur/marketplace/orders/OrderItemDetailsField';
+import { SecretValueField } from '@waldur/marketplace/SecretValueField';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 import BooleanField from '@waldur/table-react/BooleanField';
-
-import { SecretValueField } from './SecretValueField';
 
 export const OpenStackPackageDetails = (props: OrderItemDetailsProps) => {
   const { attributes } = props.orderItem;
