@@ -1,23 +1,35 @@
 import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
-import { Field, ResourceSummaryProps, PureVirtualMachineSummary } from '@waldur/resource/summary';
+import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
+import { formatSummary } from '@waldur/resource/utils';
 
-const PureAzureVirtualMachineSummary = (props: ResourceSummaryProps) => {
+import { PureAzureResourceSummary } from '../AzureResourceSummary';
+import { AzureVirtualMachine } from './types';
+
+const PureAzureVirtualMachineSummary = (props: ResourceSummaryProps<AzureVirtualMachine>) => {
   const { translate, resource } = props;
   return (
-    <span>
-      <PureVirtualMachineSummary {...props}/>
+    <>
+      <PureAzureResourceSummary {...props}/>
       <Field
-        label={translate('Username')}
+        label={translate('Summary')}
+        value={formatSummary(resource)}
+      />
+      <Field
+        label={translate('Admin username')}
         value={resource.username}
       />
       <Field
-        label={translate('Password')}
-        value={<UserPassword {...props}/>}
+        label={translate('Admin password')}
+        value={<UserPassword password={resource.password}/>}
       />
-    </span>
+      <Field
+        label={translate('Size')}
+        value={resource.size_name}
+      />
+    </>
   );
 };
 

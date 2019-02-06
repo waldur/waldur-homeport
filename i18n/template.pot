@@ -365,6 +365,7 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLServerDetails.tsx
 #: src/azure/vm/AzureVirtualMachineDetails.tsx
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
 msgid "Admin password"
 msgstr ""
 
@@ -374,6 +375,7 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLServerDetails.tsx
 #: src/azure/vm/AzureVirtualMachineDetails.tsx
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
 msgid "Admin username"
 msgstr ""
 
@@ -1026,6 +1028,10 @@ msgstr ""
 msgid "Changing password"
 msgstr ""
 
+#: src/azure/sql/AzureSQLDatabaseSummary.tsx
+msgid "Charset"
+msgstr ""
+
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Charts"
 msgstr ""
@@ -1102,6 +1108,10 @@ msgstr ""
 msgid "Cloud vCPU"
 msgstr ""
 
+#: src/azure/sql/AzureSQLDatabaseSummary.tsx
+msgid "Collation"
+msgstr ""
+
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.tsx
 msgid "Comment"
@@ -1157,6 +1167,10 @@ msgstr ""
 msgid "Compute"
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Compute generation"
+msgstr ""
+
 #: src/cost-planning/cost-plan-dialog.html
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
@@ -1186,6 +1200,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Connected subnets"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Connection details"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -3195,6 +3213,10 @@ msgstr ""
 msgid "Located in home directory of the specified system user."
 msgstr ""
 
+#: src/azure/AzureResourceSummary.tsx
+msgid "Location"
+msgstr ""
+
 #: src/navigation/header/logout-link.html
 #: src/navigation/header/site-header.html
 #: src/user/user-sidebar.html
@@ -3354,6 +3376,10 @@ msgstr ""
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 msgid "Member"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Memory per vCore"
 msgstr ""
 
 #: src/events/BaseEventsList.tsx
@@ -4361,7 +4387,6 @@ msgstr ""
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: src/auth/auth-login.html
 #: src/azure/sql/AzureSQLServerSummary.tsx
-#: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/jira/JiraForm.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
@@ -4781,6 +4806,10 @@ msgstr ""
 
 #: src/providers/details/dialog.html
 msgid "Prices"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Pricing tier"
 msgstr ""
 
 #: src/billing/invoice-header.html
@@ -5628,6 +5657,10 @@ msgstr ""
 msgid "Resource events"
 msgstr ""
 
+#: src/azure/AzureResourceSummary.tsx
+msgid "Resource group"
+msgstr ""
+
 #: src/resource/actions/action-utils-service.js
 msgid "Resource has been deleted."
 msgstr ""
@@ -6110,6 +6143,10 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
+#: src/azure/sql/AzureSQLDatabaseSummary.tsx
+msgid "Server"
+msgstr ""
+
 #: src/appstore/appstore-store.js
 msgid "Server error occurred."
 msgstr ""
@@ -6307,6 +6344,7 @@ msgstr ""
 msgid "Sign in with trusted identity"
 msgstr ""
 
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
@@ -6497,6 +6535,14 @@ msgstr ""
 msgid "Storage limit GB"
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Storage size"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Storage type"
+msgstr ""
+
 #: src/appstore/routes.js
 #: src/configs/base-config.js
 msgid "Storages"
@@ -6552,6 +6598,7 @@ msgstr ""
 msgid "Subtotal"
 msgstr ""
 
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
@@ -7736,8 +7783,6 @@ msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: src/auth/auth-login.html
-#: src/azure/sql/AzureSQLServerSummary.tsx
-#: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
 #: src/jira/JiraForm.tsx
@@ -8404,6 +8449,10 @@ msgstr ""
 #: src/analytics/registry.ts
 #: src/quotas/constants.js
 msgid "vCPU count"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "vCores"
 msgstr ""
 
 #: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx

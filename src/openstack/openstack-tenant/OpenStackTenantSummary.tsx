@@ -36,7 +36,7 @@ const formatUsername = (props: OpenStackTenantSummaryProps) =>
 const formatPassword = (props: OpenStackTenantSummaryProps) =>
   props.tenantCredentialsVisible && props.resource.user_password ?
   // @ts-ignore
-  <UserPassword {...props}/> : null;
+  <UserPassword password={props.resource.user_password}/> : null;
 
 export const PureOpenStackTenantSummary = (props: OpenStackTenantSummaryProps) => {
   const { translate, resource } = props;

@@ -1,12 +1,10 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 
-import { TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
-interface UserPasswordProps extends TranslateProps {
-  resource: {
-    user_password: string;
-  };
+interface UserPasswordProps {
+  password: string;
 }
 
 export class UserPassword extends React.Component<UserPasswordProps> {
@@ -27,13 +25,13 @@ export class UserPassword extends React.Component<UserPasswordProps> {
       <span>
         <a
           className={iconClass}
-          title={this.props.translate('Show password')}
+          title={translate('Show password')}
           onClick={this.toggle}
         />
         {' '}
         {
           this.state.showPassword ?
-          this.props.resource.user_password :
+          this.props.password :
           '***************'
         }
       </span>
