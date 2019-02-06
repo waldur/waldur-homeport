@@ -5,11 +5,12 @@ import { Tooltip } from '@waldur/core/Tooltip';
 export interface FieldProps {
   label: string;
   value?: React.ReactNode;
+  children?: React.ReactNode;
   valueClass?: string;
 }
 
 export const Field: React.SFC<FieldProps> = (props: FieldProps) =>
-  props.value ? (
+  (props.value || props.children) ? (
     <div className="m-b-xs">
       <dt>
         {props.label.length > 20 ? (
@@ -19,7 +20,7 @@ export const Field: React.SFC<FieldProps> = (props: FieldProps) =>
         ) : props.label}
       </dt>
       <dd className={props.valueClass}>
-        {props.value}
+        {props.value || props.children}
       </dd>
     </div>
   ) : null;
