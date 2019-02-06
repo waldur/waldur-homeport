@@ -1,15 +1,8 @@
-import azureVirtualMachineConfig from './azure-virtual-machine-config';
-import './help';
 import './provider';
-import { AzureVirtualMachineSummary } from './AzureVirtualMachineSummary';
-import * as ResourceSummary from '@waldur/resource/summary/registry';
+import sqlModule from './sql/module';
+import vmModule from './vm/module';
 
 export default module => {
-  ResourceSummary.register('Azure.VirtualMachine', AzureVirtualMachineSummary);
-  module.config(fieldsConfig);
+  sqlModule(module);
+  vmModule(module);
 };
-
-// @ngInject
-function fieldsConfig(AppstoreFieldConfigurationProvider) {
-  AppstoreFieldConfigurationProvider.register('Azure.VirtualMachine', azureVirtualMachineConfig);
-}
