@@ -62,6 +62,7 @@ export const TableOptions = {
   mapPropsToFilter: props => ({
     customer_uuid: props.customer.uuid,
     billable: true,
+    shared: true,
   }),
   exportRow: row => [
     row.name,
