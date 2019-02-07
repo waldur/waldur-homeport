@@ -1609,6 +1609,7 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
+#: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/experts/bids/create/expert-bid-create-dialog.html
 #: src/issues/create/issue-quick-create.html
@@ -2587,6 +2588,7 @@ msgstr ""
 msgid "If you use on-premise GitLab please specify the URl"
 msgstr ""
 
+#: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -3214,6 +3216,7 @@ msgid "Located in home directory of the specified system user."
 msgstr ""
 
 #: src/azure/AzureResourceSummary.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
 msgid "Location"
 msgstr ""
 
@@ -3481,6 +3484,7 @@ msgstr ""
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/billing/PriceEstimateDialog.tsx
 #: src/cost-planning/cost-plan-dialog.html
 #: src/cost-planning/cost-plans-list.js
@@ -6344,6 +6348,7 @@ msgstr ""
 msgid "Sign in with trusted identity"
 msgstr ""
 
+#: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
@@ -6790,6 +6795,14 @@ msgstr ""
 
 #: src/intro/expert-manager-intro.js
 msgid "Thanks"
+msgstr ""
+
+#: src/azure/vm/validators.ts
+msgid "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number"
+msgstr ""
+
+#: src/azure/vm/validators.ts
+msgid "The name must be shorter than 15 characters."
 msgstr ""
 
 #: src/marketplace/details/ProjectField.tsx
@@ -7297,6 +7310,10 @@ msgstr ""
 
 #: src/core/DownloadLink/effects.tsx
 msgid "Unable to load file."
+msgstr ""
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "Unable to load locations."
 msgstr ""
 
 #: src/marketplace/landing/CategoriesList.tsx
@@ -7977,16 +7994,8 @@ msgstr ""
 msgid "Virtual machine contains a public key of the cloud broker"
 msgstr ""
 
-#: src/azure/vm/AzureVirtualMachineForm.tsx
-msgid "Virtual machine description"
-msgstr ""
-
 #: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 msgid "Virtual machine has no floating ips assigned!"
-msgstr ""
-
-#: src/azure/vm/AzureVirtualMachineForm.tsx
-msgid "Virtual machine name"
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
