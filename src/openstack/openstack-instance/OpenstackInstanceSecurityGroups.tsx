@@ -6,8 +6,11 @@ import Select from 'react-select';
 import { compose } from 'redux';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { openSecurityGroupsDetailsDialog } from '@waldur/openstack/openstack-instance/store/actions';
+import { openModalDialog } from '@waldur/modal/actions';
 import { SecurityGroup, SecurityGroupOption } from '@waldur/openstack/openstack-security-groups/types';
+
+const openSecurityGroupsDetailsDialog = (securityGroups: SecurityGroup[]) =>
+  openModalDialog('SecurityGroupsDialogReact', {resolve: { securityGroups }, size: 'lg'});
 
 interface OwnProps {
   input: {

@@ -1,12 +1,12 @@
 import * as React from 'react';
 
+import { AzureVirtualMachine } from '@waldur/azure/common/types';
 import { withTranslation } from '@waldur/i18n';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
 import { formatSummary } from '@waldur/resource/utils';
 
 import { PureAzureResourceSummary } from '../AzureResourceSummary';
-import { AzureVirtualMachine } from './types';
 
 const PureAzureVirtualMachineSummary = (props: ResourceSummaryProps<AzureVirtualMachine>) => {
   const { translate, resource } = props;

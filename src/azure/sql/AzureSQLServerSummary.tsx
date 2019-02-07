@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { AzureSQLServer } from '@waldur/azure/common/types';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { withTranslation } from '@waldur/i18n';
@@ -7,7 +8,6 @@ import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
 
 import { PureAzureResourceSummary } from '../AzureResourceSummary';
-import { AzureSQLServer } from './types';
 
 const ValueWithTooltip = ({ value, tooltip }) => (
   <>

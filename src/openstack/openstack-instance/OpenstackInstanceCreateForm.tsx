@@ -11,45 +11,20 @@ import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapp
 import { SelectDialogField } from '@waldur/form-react/SelectDialogField';
 import { translate, TranslateProps } from '@waldur/i18n';
 import { getUser } from '@waldur/issues/comments/selectors';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { offeringSelector } from '@waldur/marketplace/details/selectors';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import * as api from '@waldur/openstack/api';
 import { flavorValidator, flavorComparator } from '@waldur/openstack/openstack-instance/openstack-instance-config';
 import { OpenstackInstanceDataVolume } from '@waldur/openstack/openstack-instance/OpenstackInstanceDataVolume';
 import { OpenstackInstanceNetworks } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import { OpenstackInstanceSecurityGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceSecurityGroups';
-import { openstackInstanceCreateFormSelector } from '@waldur/openstack/openstack-instance/store/selectors';
 import { Subnet, FloatingIp, ServiceComponent, Flavor, SshKey } from '@waldur/openstack/openstack-instance/types';
 import { validateAndSort, calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { User } from '@waldur/workspace/types';
 
-interface OpenstackInstanceFormGroupProps {
-  label?: string;
-  required?: boolean;
-  children: React.ReactNode;
-}
-
-export const OpenstackInstanceFormGroup = ({label, required, children}: OpenstackInstanceFormGroupProps) => (
-  <>
-  {label ? (
-    <FormGroup
-      labelClassName="control-label col-sm-3"
-      valueClassName="col-sm-9"
-      label={label}
-      required={required}>
-      {children}
-    </FormGroup>
-  ) : (
-    <FormGroup
-      classNameWithoutLabel="col-sm-offset-3 col-sm-9"
-      required={required}>
-      {children}
-    </FormGroup>
-  )}
-  </>
-);
+import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
 interface OpenstackInstanceCreateFormState {
   loading: boolean;
@@ -172,7 +147,7 @@ export class OpenstackInstanceCreateFormComponent extends
     if (this.state.loaded) {
       return (
         <form className="form-horizontal">
-          <OpenstackInstanceFormGroup
+          <CreateResourceFormGroup
             label={translate('VM name')}
             required={true}
           >
@@ -181,8 +156,8 @@ export class OpenstackInstanceCreateFormComponent extends
               component={renderValidationWrapper(StringField)}
               validate={getLatinNameValidators()}
             />
-          </OpenstackInstanceFormGroup>
-          <OpenstackInstanceFormGroup
+          </CreateResourceFormGroup>
+          <CreateResourceFormGroup
             label={translate('Image')}
             required={true}
           >
@@ -228,8 +203,8 @@ export class OpenstackInstanceCreateFormComponent extends
                 )
               }
             />
-          </OpenstackInstanceFormGroup>
-          <OpenstackInstanceFormGroup
+          </CreateResourceFormGroup>
+          <CreateResourceFormGroup
             label={translate('Flavor')}
             required={true}
           >
@@ -263,8 +238,8 @@ export class OpenstackInstanceCreateFormComponent extends
                 />
               }
             />
-          </OpenstackInstanceFormGroup>
-          <OpenstackInstanceFormGroup
+          </CreateResourceFormGroup>
+          <CreateResourceFormGroup
             label={translate('System volume size')}
             required={true}
           >
@@ -287,8 +262,8 @@ export class OpenstackInstanceCreateFormComponent extends
               format={v => v ? v / 1024 : ''}
               normalize={v => Number(v) * 1024}
             />
-          </OpenstackInstanceFormGroup>
-          <OpenstackInstanceFormGroup>
+          </CreateResourceFormGroup>
+          <CreateResourceFormGroup>
             <Field
               name="attributes.data_volume_size"
               component={fieldProps =>
@@ -304,8 +279,8 @@ export class OpenstackInstanceCreateFormComponent extends
               format={v => v ? v / 1024 : ''}
               normalize={v => Number(v) * 1024}
             />
-          </OpenstackInstanceFormGroup>
-          <OpenstackInstanceFormGroup label={translate('SSH public key')}>
+          </CreateResourceFormGroup>
+          <CreateResourceFormGroup label={translate('SSH public key')}>
             <Field
               name="attributes.ssh_public_key"
               component={fieldProps =>
@@ -333,8 +308,8 @@ export class OpenstackInstanceCreateFormComponent extends
                 />
               }
             />
-          </OpenstackInstanceFormGroup>
-          <OpenstackInstanceFormGroup label={translate('Security groups')}>
+          </CreateResourceFormGroup>
+          <CreateResourceFormGroup label={translate('Security groups')}>
             <Field
               name="attributes.security_groups"
               component={fieldProps =>
@@ -344,8 +319,8 @@ export class OpenstackInstanceCreateFormComponent extends
                 />
               }
             />
-          </OpenstackInstanceFormGroup>
-          <OpenstackInstanceFormGroup label={translate('Networks')}>
+          </CreateResourceFormGroup>
+          <CreateResourceFormGroup label={translate('Networks')}>
             <Field
               name="attributes.networks"
               component={fieldProps =>
@@ -356,8 +331,8 @@ export class OpenstackInstanceCreateFormComponent extends
                 />
               }
             />
-          </OpenstackInstanceFormGroup>
-          <OpenstackInstanceFormGroup label={translate('Description')}>
+          </CreateResourceFormGroup>
+          <CreateResourceFormGroup label={translate('Description')}>
             <Field
               name="attributes.description"
               component={fieldProps =>
@@ -367,8 +342,8 @@ export class OpenstackInstanceCreateFormComponent extends
                 />
               }
             />
-          </OpenstackInstanceFormGroup>
-          <OpenstackInstanceFormGroup label={translate('User data')}>
+          </CreateResourceFormGroup>
+          <CreateResourceFormGroup label={translate('User data')}>
             <Field
               name="attributes.user_data"
               component={TextField}
@@ -376,7 +351,7 @@ export class OpenstackInstanceCreateFormComponent extends
             <div className="help-block m-b-none text-muted">
               {translate('Additional data that will be added to instance on provisioning.')}
             </div>
-          </OpenstackInstanceFormGroup>
+          </CreateResourceFormGroup>
         </form>
       );
     }
@@ -385,9 +360,9 @@ export class OpenstackInstanceCreateFormComponent extends
 
 const mapStateToProps = state => ({
   currentUser: getUser(state),
-  image: openstackInstanceCreateFormSelector(state, 'attributes.image'),
-  flavor: openstackInstanceCreateFormSelector(state, 'attributes.flavor'),
-  systemVolumeSize: openstackInstanceCreateFormSelector(state, 'attributes.system_volume_size'),
+  image: offeringSelector(state, 'attributes.image'),
+  flavor: offeringSelector(state, 'attributes.flavor'),
+  systemVolumeSize: offeringSelector(state, 'attributes.system_volume_size'),
 });
 
 export const OpenstackInstanceCreateForm = connect<
