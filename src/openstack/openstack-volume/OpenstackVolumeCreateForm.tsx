@@ -6,7 +6,8 @@ import { NumberField, TextField, StringField } from '@waldur/form-react';
 import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
 import { translate } from '@waldur/i18n';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
-import { OpenstackInstanceFormGroup } from '@waldur/openstack/openstack-instance/OpenstackInstanceCreateForm';
+
+import { CreateResourceFormGroup } from '@waldur/openstack/CreateResourceFormGroup';
 
 export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
@@ -15,7 +16,7 @@ export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigura
   render() {
     return (
       <form className="form-horizontal">
-        <OpenstackInstanceFormGroup
+        <CreateResourceFormGroup
           label={translate('Volume name')}
           required={true}>
           <Field
@@ -23,8 +24,8 @@ export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigura
             component={renderValidationWrapper(StringField)}
             validate={getLatinNameValidators()}
           />
-        </OpenstackInstanceFormGroup>
-        <OpenstackInstanceFormGroup label={translate('Size')}>
+        </CreateResourceFormGroup>
+        <CreateResourceFormGroup label={translate('Size')}>
             <div className="input-group" style={{maxWidth: 200}}>
               <Field
                 name="attributes.size"
@@ -41,8 +42,8 @@ export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigura
                 GB
               </span>
           </div>
-        </OpenstackInstanceFormGroup>
-        <OpenstackInstanceFormGroup label={translate('Description')}>
+        </CreateResourceFormGroup>
+        <CreateResourceFormGroup label={translate('Description')}>
           <Field
             name="attributes.description"
             component={fieldProps =>
@@ -52,7 +53,7 @@ export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigura
               />
             }
           />
-        </OpenstackInstanceFormGroup>
+        </CreateResourceFormGroup>
       </form>
     );
   }
