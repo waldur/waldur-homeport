@@ -1609,6 +1609,10 @@ msgstr ""
 msgid "Delete volumes"
 msgstr ""
 
+#: src/azure/sql/DestroyServerAction.ts
+msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
+msgstr ""
+
 #: src/cost-planning/cost-plan-dialog.html
 msgid "Deployment plan"
 msgstr ""
