@@ -1,11 +1,11 @@
 import * as React from 'react';
 
+import { AzureSQLDatabase } from '@waldur/azure/common/types';
 import { withTranslation } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 
 import { PureAzureResourceSummary } from '../AzureResourceSummary';
-import { AzureSQLDatabase } from './types';
 
 const PureAzureSQLDatabaseSummary = (props: ResourceSummaryProps<AzureSQLDatabase>) => {
   const { translate, resource } = props;

@@ -1,7 +1,6 @@
+import { getLocations, getImages, getSizes } from '@waldur/azure/common/api';
+import { Size, Option, Image } from '@waldur/azure/common/types';
 import { formatFlavor } from '@waldur/resource/utils';
-
-import { getLocations, getImages, getSizes } from './api';
-import { Size, Option, Image } from './types';
 
 const formatSizeOption = (size: Size): Option => {
   const summary = formatFlavor({

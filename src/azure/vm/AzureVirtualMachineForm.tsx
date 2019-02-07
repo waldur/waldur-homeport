@@ -1,29 +1,16 @@
 import * as React from 'react';
 
+import { CreateSelectField } from '@waldur/azure/common/CreateSelectField';
+import { virtualMachineName } from '@waldur/azure/common/validators';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, TextField, SelectField } from '@waldur/form-react';
+import { FormContainer, StringField, TextField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { loadData } from './utils';
-import { virtualMachineName } from './validators';
-
-const CreateSelectField = (label, name, options) => (
-  <SelectField
-    label={label}
-    name={name}
-    options={options}
-    required={true}
-    labelKey="name"
-    valueKey="url"
-    clearable={false}
-    validate={required}
-    simpleValue={true}
-  />
-);
 
 export const AzureVirtualMachineForm: React.SFC<OfferingConfigurationFormProps> = props => (
   <Query variables={props.offering.scope_uuid} loader={loadData}>
