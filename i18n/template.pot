@@ -1291,6 +1291,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
 #: src/ansible/python-management/create/PythonManagementCreateForm.tsx
 #: src/appstore/appstore-store.html
+#: src/azure/sql/CreateDatabaseAction.ts
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/customer/workspace/customer-issues.js
 #: src/experts/bids/create/expert-bid-create-dialog.html
@@ -1317,6 +1318,10 @@ msgstr ""
 
 #: src/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Create Python management"
+msgstr ""
+
+#: src/azure/sql/CreateDatabaseAction.ts
+msgid "Create SQL database in PostgreSQL server"
 msgstr ""
 
 #: src/resource/actions/create-vm-button.html
@@ -1667,6 +1672,7 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
+#: src/azure/sql/DestroyServerAction.ts
 #: src/offering/actions/DestroyAction.ts
 #: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts

@@ -9,15 +9,21 @@ const azureSQLDatabasesList = {
 
 // @ngInject
 function azureSQLDatabasesListController(
-  baseResourceListController, azureSQLDatabasesService) {
+  baseResourceListController, azureSQLDatabasesService, actionUtilsService) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this._super();
-      this.service = azureSQLDatabasesService;
-      this.addRowFields(['charset']);
+      let fn = this._super.bind(this);
+      this.loading = true;
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, 'databases').then(result => {
+        this.listActions = result;
+        fn();
+        this.service = azureSQLDatabasesService;
+        this.addRowFields(['charset']);
+      });
     },
+
     getTableOptions: function() {
       let options = this._super();
       let vm = this;
@@ -50,7 +56,7 @@ function azureSQLDatabasesListController(
       };
     },
     getTableActions: function() {
-      return [];
+      return this.listActions;
     }
   });
 
