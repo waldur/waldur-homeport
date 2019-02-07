@@ -1029,6 +1029,7 @@ msgid "Changing password"
 msgstr ""
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
+#: src/azure/sql/azure-sql-databases-list.js
 msgid "Charset"
 msgstr ""
 
@@ -1530,6 +1531,10 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Data volume size:"
+msgstr ""
+
+#: src/azure/sql/azure-sql-server-tabs.js
+msgid "Databases"
 msgstr ""
 
 #: src/dashboard/chart.ts
@@ -3485,6 +3490,7 @@ msgstr ""
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
+#: src/azure/sql/azure-sql-databases-list.js
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/billing/PriceEstimateDialog.tsx
 #: src/cost-planning/cost-plan-dialog.html
@@ -3682,6 +3688,14 @@ msgstr ""
 
 #: src/cost-planning/cost-plans-list.js
 msgid "No cost plans found matching filter."
+msgstr ""
+
+#: src/azure/sql/azure-sql-databases-list.js
+msgid "No databases found matching filter."
+msgstr ""
+
+#: src/azure/sql/azure-sql-databases-list.js
+msgid "No databases yet."
 msgstr ""
 
 #: src/experts/requests/list/expert-request-customer-list.js
@@ -6456,6 +6470,7 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/ansible/python-management/details/PythonManagementActionsHistory.tsx
 #: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
+#: src/azure/sql/azure-sql-databases-list.js
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
