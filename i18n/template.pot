@@ -3216,6 +3216,7 @@ msgid "Located in home directory of the specified system user."
 msgstr ""
 
 #: src/azure/AzureResourceSummary.tsx
+#: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 msgid "Location"
 msgstr ""
@@ -6802,6 +6803,10 @@ msgid "The name can contain only letters, numbers, and hyphens. It should start 
 msgstr ""
 
 #: src/azure/common/validators.ts
+msgid "The name can only be made up of lowercase letters, numbers and the hyphen. The hyphen may not lead or trail in the name."
+msgstr ""
+
+#: src/azure/common/validators.ts
 msgid "The name must be shorter than 15 characters."
 msgstr ""
 
@@ -7312,6 +7317,7 @@ msgstr ""
 msgid "Unable to load file."
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 msgid "Unable to load locations."
 msgstr ""
