@@ -13,4 +13,13 @@ export default module => {
   module.component('openstackSubnetsList', openstackSubnetsList);
   module.run(breadcrumbsConfig);
   module.config(actionConfig);
+  module.config(tabsConfig);
 };
+
+// @ngInject
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+  ResourceTabsConfigurationProvider.register('OpenStack.SubNet', {
+    ...DEFAULT_RESOURCE_TABS,
+    order: ['events'],
+  });
+}

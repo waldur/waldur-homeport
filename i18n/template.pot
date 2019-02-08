@@ -348,7 +348,7 @@ msgstr ""
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr ""
 
@@ -363,8 +363,20 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerDetails.tsx
+#: src/azure/vm/AzureVirtualMachineDetails.tsx
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
+msgid "Admin password"
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 msgid "Admin rights"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerDetails.tsx
+#: src/azure/vm/AzureVirtualMachineDetails.tsx
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
+msgid "Admin username"
 msgstr ""
 
 #: src/issues/create/issue-quick-create.html
@@ -660,16 +672,24 @@ msgstr ""
 msgid "Azerbaijani"
 msgstr ""
 
+#: src/azure/provider/AzureForm.tsx
+msgid "Azure Active Directory Application Secret"
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Azure Active Directory ID"
 msgstr ""
 
-#: src/azure/help.js
-msgid "Azure provider"
+#: src/azure/sql/marketplace.ts
+msgid "Azure PostgreSQL database server"
 msgstr ""
 
-#: src/azure/AzureForm.tsx
-msgid "Azure region where to provision resources (default: \"Central US\")"
+#: src/azure/vm/marketplace.ts
+msgid "Azure Virtual Machine"
+msgstr ""
+
+#: src/azure/provider/help.js
+msgid "Azure provider"
 msgstr ""
 
 #: src/marketplace/offerings/create/Wizard.tsx
@@ -830,7 +850,6 @@ msgstr ""
 msgid "Bootable"
 msgstr ""
 
-#: src/azure/AzureForm.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Browse"
 msgstr ""
@@ -1009,6 +1028,11 @@ msgstr ""
 msgid "Changing password"
 msgstr ""
 
+#: src/azure/sql/AzureSQLDatabaseSummary.tsx
+#: src/azure/sql/azure-sql-databases-list.js
+msgid "Charset"
+msgstr ""
+
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Charts"
 msgstr ""
@@ -1046,6 +1070,7 @@ msgid "Click on a 'Create proposal' button when you are ready to fulfill expert 
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+#: src/azure/provider/AzureForm.tsx
 msgid "Client ID"
 msgstr ""
 
@@ -1056,6 +1081,10 @@ msgstr ""
 #: src/marketplace/orders/OrderItemsFilter.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 msgid "Client organization"
+msgstr ""
+
+#: src/azure/provider/AzureForm.tsx
+msgid "Client secret"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -1076,16 +1105,12 @@ msgstr ""
 msgid "Cloud block storage size"
 msgstr ""
 
-#: src/azure/AzureForm.tsx
-msgid "Cloud service group to assign all connected SPLs to"
-msgstr ""
-
-#: src/azure/AzureForm.tsx
-msgid "Cloud service name"
-msgstr ""
-
 #: src/resource/support/ChartContainer.tsx
 msgid "Cloud vCPU"
+msgstr ""
+
+#: src/azure/sql/AzureSQLDatabaseSummary.tsx
+msgid "Collation"
 msgstr ""
 
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
@@ -1143,6 +1168,10 @@ msgstr ""
 msgid "Compute"
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Compute generation"
+msgstr ""
+
 #: src/cost-planning/cost-plan-dialog.html
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
@@ -1172,6 +1201,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Connected subnets"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Connection details"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -1258,6 +1291,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
 #: src/ansible/python-management/create/PythonManagementCreateForm.tsx
 #: src/appstore/appstore-store.html
+#: src/azure/sql/CreateDatabaseAction.ts
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/customer/workspace/customer-issues.js
 #: src/experts/bids/create/expert-bid-create-dialog.html
@@ -1284,6 +1318,10 @@ msgstr ""
 
 #: src/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Create Python management"
+msgstr ""
+
+#: src/azure/sql/CreateDatabaseAction.ts
+msgid "Create SQL database in PostgreSQL server"
 msgstr ""
 
 #: src/resource/actions/create-vm-button.html
@@ -1500,6 +1538,10 @@ msgstr ""
 msgid "Data volume size:"
 msgstr ""
 
+#: src/azure/sql/azure-sql-server-tabs.js
+msgid "Databases"
+msgstr ""
+
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/ResourceUsageList.tsx
 #: src/payments/payment-list.js
@@ -1567,6 +1609,10 @@ msgstr ""
 msgid "Delete volumes"
 msgstr ""
 
+#: src/azure/sql/DestroyServerAction.ts
+msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
+msgstr ""
+
 #: src/cost-planning/cost-plan-dialog.html
 msgid "Deployment plan"
 msgstr ""
@@ -1577,7 +1623,8 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/experts/bids/create/expert-bid-create-dialog.html
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
@@ -1629,6 +1676,7 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
+#: src/azure/sql/DestroyServerAction.ts
 #: src/offering/actions/DestroyAction.ts
 #: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
@@ -2484,7 +2532,7 @@ msgstr ""
 msgid "How to obtain credentials for Amazon EC2 provider"
 msgstr ""
 
-#: src/azure/help.js
+#: src/azure/provider/help.js
 msgid "How to obtain credentials for Azure provider"
 msgstr ""
 
@@ -2555,7 +2603,8 @@ msgstr ""
 msgid "If you use on-premise GitLab please specify the URl"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -2572,7 +2621,7 @@ msgstr ""
 #: src/analytics/ImagesList.tsx
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
@@ -2628,7 +2677,7 @@ msgstr ""
 msgid "In order to enable monitoring you should install and configure Zabbix agent on monitored virtual machine."
 msgstr ""
 
-#: src/azure/AzureForm.tsx
+#: src/azure/provider/AzureForm.tsx
 msgid "In the format of GUID"
 msgstr ""
 
@@ -2686,11 +2735,11 @@ msgstr ""
 msgid "Initial admin username"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 msgid "Initial password"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 msgid "Initial username"
 msgstr ""
 
@@ -3181,7 +3230,9 @@ msgstr ""
 msgid "Located in home directory of the specified system user."
 msgstr ""
 
-#: src/azure/AzureForm.tsx
+#: src/azure/AzureResourceSummary.tsx
+#: src/azure/sql/AzureSQLServerForm.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
 msgid "Location"
 msgstr ""
 
@@ -3346,6 +3397,10 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Memory per vCore"
+msgstr ""
+
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
 msgid "Message"
@@ -3445,6 +3500,8 @@ msgstr ""
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
+#: src/azure/sql/azure-sql-databases-list.js
+#: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/billing/PriceEstimateDialog.tsx
 #: src/cost-planning/cost-plan-dialog.html
 #: src/cost-planning/cost-plans-list.js
@@ -3641,6 +3698,14 @@ msgstr ""
 
 #: src/cost-planning/cost-plans-list.js
 msgid "No cost plans found matching filter."
+msgstr ""
+
+#: src/azure/sql/azure-sql-databases-list.js
+msgid "No databases found matching filter."
+msgstr ""
+
+#: src/azure/sql/azure-sql-databases-list.js
+msgid "No databases yet."
 msgstr ""
 
 #: src/experts/requests/list/expert-request-customer-list.js
@@ -4350,7 +4415,7 @@ msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: src/auth/auth-login.html
-#: src/azure/AzureVirtualMachineSummary.tsx
+#: src/azure/sql/AzureSQLServerSummary.tsx
 #: src/jira/JiraForm.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
@@ -4772,6 +4837,10 @@ msgstr ""
 msgid "Prices"
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Pricing tier"
+msgstr ""
+
 #: src/billing/invoice-header.html
 msgid "Print invoice"
 msgstr ""
@@ -4790,10 +4859,6 @@ msgstr ""
 #: src/navigation/app-footer.html
 #: src/routes/about.js
 msgid "Privacy policy"
-msgstr ""
-
-#: src/azure/AzureForm.tsx
-msgid "Private certificate file"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
@@ -5621,6 +5686,10 @@ msgstr ""
 msgid "Resource events"
 msgstr ""
 
+#: src/azure/AzureResourceSummary.tsx
+msgid "Resource group"
+msgstr ""
+
 #: src/resource/actions/action-utils-service.js
 msgid "Resource has been deleted."
 msgstr ""
@@ -5790,6 +5859,14 @@ msgstr ""
 msgid "SLURM allocation usage"
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerForm.tsx
+msgid "SQL server description"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerForm.tsx
+msgid "SQL server name"
+msgstr ""
+
 #: src/user/constants.js
 msgid "SSH Keys"
 msgstr ""
@@ -5812,10 +5889,6 @@ msgstr ""
 
 #: src/user/routes.js
 msgid "SSH keys"
-msgstr ""
-
-#: src/azure/AzureVirtualMachineSummary.tsx
-msgid "SSH port"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
@@ -6099,6 +6172,10 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
+#: src/azure/sql/AzureSQLDatabaseSummary.tsx
+msgid "Server"
+msgstr ""
+
 #: src/appstore/appstore-store.js
 msgid "Server error occurred."
 msgstr ""
@@ -6296,7 +6373,9 @@ msgstr ""
 msgid "Sign in with trusted identity"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
@@ -6314,7 +6393,7 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 msgid "Size name"
 msgstr ""
@@ -6401,6 +6480,7 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/ansible/python-management/details/PythonManagementActionsHistory.tsx
 #: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
+#: src/azure/sql/azure-sql-databases-list.js
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
@@ -6486,6 +6566,14 @@ msgstr ""
 msgid "Storage limit GB"
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Storage size"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "Storage type"
+msgstr ""
+
 #: src/appstore/routes.js
 #: src/configs/base-config.js
 msgid "Storages"
@@ -6533,7 +6621,7 @@ msgstr ""
 msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
-#: src/azure/AzureForm.tsx
+#: src/azure/provider/AzureForm.tsx
 msgid "Subscription ID"
 msgstr ""
 
@@ -6541,6 +6629,7 @@ msgstr ""
 msgid "Subtotal"
 msgstr ""
 
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
@@ -6662,6 +6751,7 @@ msgid "Tenant"
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
+#: src/azure/provider/AzureForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Tenant ID"
 msgstr ""
@@ -6731,6 +6821,18 @@ msgstr ""
 
 #: src/intro/expert-manager-intro.js
 msgid "Thanks"
+msgstr ""
+
+#: src/azure/common/validators.ts
+msgid "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number"
+msgstr ""
+
+#: src/azure/common/validators.ts
+msgid "The name can only be made up of lowercase letters, numbers and the hyphen. The hyphen may not lead or trail in the name."
+msgstr ""
+
+#: src/azure/common/validators.ts
+msgid "The name must be shorter than 15 characters."
 msgstr ""
 
 #: src/marketplace/details/ProjectField.tsx
@@ -6884,6 +6986,8 @@ msgid "This is an objective."
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
+#: src/azure/sql/AzureSQLServerForm.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/experts/requests/create/expert-request-create.js
 #: src/jira/project/jira-project-config.js
 #: src/offering/OfferingConfigurationForm.tsx
@@ -7238,6 +7342,11 @@ msgstr ""
 msgid "Unable to load file."
 msgstr ""
 
+#: src/azure/sql/AzureSQLServerForm.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "Unable to load locations."
+msgstr ""
+
 #: src/marketplace/landing/CategoriesList.tsx
 msgid "Unable to load marketplace categories."
 msgstr ""
@@ -7575,7 +7684,7 @@ msgstr ""
 msgid "User dashboard"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
@@ -7722,7 +7831,6 @@ msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: src/auth/auth-login.html
-#: src/azure/AzureVirtualMachineSummary.tsx
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
 #: src/jira/JiraForm.tsx
@@ -7775,7 +7883,7 @@ msgstr ""
 msgid "VAT rate"
 msgstr ""
 
-#: src/azure/azure-virtual-machine-config.js
+#: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -8022,10 +8130,6 @@ msgstr ""
 
 #: src/marketplace/common/ReviewButton.tsx
 msgid "Write review"
-msgstr ""
-
-#: src/azure/AzureForm.tsx
-msgid "X509 certificate in .PEM format"
 msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -8385,6 +8489,10 @@ msgstr ""
 #: src/analytics/registry.ts
 #: src/quotas/constants.js
 msgid "vCPU count"
+msgstr ""
+
+#: src/azure/sql/AzureSQLServerSummary.tsx
+msgid "vCores"
 msgstr ""
 
 #: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
