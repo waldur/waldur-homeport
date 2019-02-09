@@ -7416,6 +7416,10 @@ msgstr ""
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
+msgid "Unable to open console log"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/ConsoleAction.ts
 msgid "Unable to open console. Error message: {message}"
 msgstr ""
