@@ -24,8 +24,8 @@ export default function createAction(): ResourceAction {
     title: translate('Open console'),
     type: 'callback',
     execute: resource => {
-      getConsoleURL(resource.uuid).then(({ url }) => {
-        window.open(url);
+      getConsoleURL(resource.uuid).then(response => {
+        window.open(response.data.url);
       }).catch(error => {
         const ctx = {message: format(error)};
         const message = translate('Unable to open console. Error message: {message}', ctx);
