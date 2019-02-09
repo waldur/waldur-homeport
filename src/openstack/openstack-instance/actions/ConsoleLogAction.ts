@@ -15,6 +15,10 @@ export default function createAction(): ResourceAction {
     execute: resource => {
       getConsoleOutput(resource.uuid).then(response => {
         const win = window.open();
+        if (win == null) {
+          alert(translate('Unable to open console log'));
+          return;
+        }
         const doc = win.document;
         doc.open();
         doc.write(`<pre>${response.data}</pre>`);
