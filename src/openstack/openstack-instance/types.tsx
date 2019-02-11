@@ -7,6 +7,7 @@ interface InternalIp {
 export interface OpenStackInstance extends VirtualMachine {
   flavor_name: string;
   internal_ips_set: InternalIp[];
+  floating_ips?: string[];
   runtime_state: 'SHUTOFF' | 'ACTIVE';
   security_groups?: string[];
 }

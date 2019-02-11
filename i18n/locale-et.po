@@ -3592,11 +3592,11 @@ msgstr "Teenuse nimi"
 
 #: src/issues/constants.ts:4
 msgid "Service Request"
-msgstr "Muudatuse tellimus"
+msgstr "Tellimus"
 
 #: src/issues/constants.ts:31
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
-msgstr "Service Request – kliendi soov teenuse osalise või täieliku funktsionaalsuse, ligipääsu või komponentide muutmiseks, lisamiseks, liigutamiseks või eemaldamiseks"
+msgstr "Tellimus – kliendi soov teenuse osalise või täieliku funktsionaalsuse, ligipääsu või komponentide muutmiseks, lisamiseks, liigutamiseks või eemaldamiseks"
 
 #: src/resource/state/resource-state-service.js:33
 msgid "Service settings of this resource are in state erred."

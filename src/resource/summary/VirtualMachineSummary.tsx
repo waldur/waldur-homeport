@@ -27,9 +27,12 @@ const ResourceSummaryField = ({ translate, resource }) => (
   </>
 );
 
-const formatIpList = value => {
+export const formatIpList = value => {
   if (Array.isArray(value)) {
-    return formatCommaList(value.filter(p => p !== null));
+    const list = value.filter(p => p);
+    if (list.length > 0) {
+      return formatCommaList(list);
+    }
   }
   return '–';
 };
