@@ -2165,6 +2165,7 @@ msgstr ""
 msgid "Extending"
 msgstr ""
 
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
@@ -2798,6 +2799,7 @@ msgstr ""
 msgid "Instances count"
 msgstr ""
 
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
