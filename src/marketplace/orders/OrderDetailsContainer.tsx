@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { ENV } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -11,7 +10,7 @@ import * as selectors from './store/selectors';
 
 const mapStateToProps = state => ({
   stateChangeStatus: selectors.getStateChangeStatus(state),
-  orderCanBeApproved: selectors.orderCanBeApproved(ENV, state),
+  orderCanBeApproved: selectors.orderCanBeApproved(state),
 });
 
 const mapDispatchToProps = {

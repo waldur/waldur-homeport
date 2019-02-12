@@ -6,7 +6,7 @@ interface QueryState<Data> {
   data?: Data;
 }
 
-interface QueryChildProps<Data> extends QueryState<Data> {
+export interface QueryChildProps<Data> extends QueryState<Data> {
   loadData(): Promise<void>;
 }
 

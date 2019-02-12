@@ -26,7 +26,7 @@ export const getAllOfferings = (options?: {}) =>
 export const getProviderOfferings = (customerUuid: string) =>
   getAllOfferings({params: {customer_uuid: customerUuid}});
 
-export const getOffering = id =>
+export const getOffering = (id: string): Promise<Offering> =>
   getById<Offering>('/marketplace-offerings/', id);
 
 export const createOffering = data =>
@@ -88,3 +88,10 @@ export const generateServiceProviderSecretCode = id =>
 
 export const submitUsageReport = payload =>
   post(`/marketplace-component-usages/set_usage/`, payload).then(response => response.data);
+
+export const getResource = (id: string): Promise<OrderItemResponse> =>
+  getById<OrderItemResponse>('/marketplace-resources/', id);
+
+// tslint:disable-next-line: variable-name
+export const switchPlan = (resource_uuid: string, plan_url: string) =>
+  post(`/marketplace-resources/${resource_uuid}/switch_plan/`, {plan: plan_url}).then(response => response.data);

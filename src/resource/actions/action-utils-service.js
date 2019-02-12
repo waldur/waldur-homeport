@@ -33,7 +33,10 @@ export default function actionUtilsService(
   this.parseActions = function(actions, context) {
     const result = {};
     for(const func of actions) {
-      const {name, fields, validators, ...rest} = func(context);
+      const {name, fields, validators, isVisible, ...rest} = func(context);
+      if (typeof isVisible === 'boolean' && !isVisible) {
+        continue;
+      }
       const reason = this.parseValidators(validators, context);
       const url = rest.method === 'DELETE'
         ? context.resource.url

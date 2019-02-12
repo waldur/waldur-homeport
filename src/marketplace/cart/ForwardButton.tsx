@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { ENV } from '@waldur/core/services';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import ActionButton from '@waldur/table-react/ActionButton';
 
@@ -57,7 +56,7 @@ const ForwardButtonComponent = (props: ForwardButtonComponentProps) =>
 const mapStateToProps = (state: OuterState) => ({
   items: getItems(state),
   disabled: isCreatingOrder(state),
-  orderCanBeApproved: orderCanBeApproved(ENV, state),
+  orderCanBeApproved: orderCanBeApproved(state),
 });
 
 const enhance = compose(

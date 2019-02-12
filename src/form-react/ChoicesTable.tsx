@@ -3,12 +3,12 @@ import * as React from 'react';
 import * as Table from 'react-bootstrap/lib/Table';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import { SelectDialogFieldColumn, SelectDialogFieldChoice } from '@waldur/form-react/types';
 import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
 
 import './ChoicesTable.scss';
 
 import { ChoicesTableFilter } from './ChoicesTableFilter';
+import { SelectDialogFieldColumn, SelectDialogFieldChoice } from './SelectDialogField';
 
 interface PureChoicesTableProps {
   enableSelect?: boolean;
