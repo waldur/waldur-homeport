@@ -21,10 +21,12 @@ const getColumns = (offering: Offering): SelectDialogFieldColumn[] => [
     name: 'name',
     label: translate('Name'),
   },
-  ...offering.components.map(component => ({
-    name: component.type,
-    label: component.name,
-  })),
+  ...offering.components
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(component => ({
+      name: component.type,
+      label: component.name,
+    })),
   {
     name: 'price',
     label: translate('Price'),

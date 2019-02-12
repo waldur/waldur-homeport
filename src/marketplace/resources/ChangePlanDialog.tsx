@@ -1,15 +1,16 @@
 import * as React from 'react';
+import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Query } from '@waldur/core/Query';
+import { Query, QueryChildProps } from '@waldur/core/Query';
 import { SubmitButton } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { ChangePlanContainer } from './ChangePlanComponent';
-import { loadData } from './ChangePlanLoader';
+import { ChangePlanComponent } from './ChangePlanComponent';
+import { loadData, FetchedData } from './ChangePlanLoader';
 
 interface ChangePlanDialogProps {
   resolve: {
@@ -20,32 +21,45 @@ interface ChangePlanDialogProps {
   submitting: boolean;
 }
 
+const connector = reduxForm<{plan: any}, QueryChildProps<FetchedData>>({
+  form: 'marketplaceChangePlan',
+  validate: values => values.plan === undefined ? ({
+    plan: 'Plan is required',
+  }) : undefined,
+  onSubmit: values => alert(JSON.stringify(values)),
+});
+
+const DialogBody = connector((props: QueryChildProps<FetchedData> & InjectedFormProps) => (
+  <form onSubmit={props.handleSubmit}>
+    <ModalDialog
+      title={translate('Change resource plan')}
+      footer={
+        <>
+          <CloseDialogButton/>
+          {!props.loading && (
+            <SubmitButton
+              submitting={props.submitting}
+              disabled={props.invalid}
+              label={translate('Submit')}
+            />
+          )}
+        </>
+      }>
+      {
+        props.loading ? <LoadingSpinner/> :
+        props.error ?  <h3>{translate('Unable to load data.')}</h3> :
+        <ChangePlanComponent {...props.data}/>
+      }
+    </ModalDialog>
+  </form>
+));
+
 export const ChangePlanDialog: React.SFC<ChangePlanDialogProps> = props => (
   <Query
     variables={{resource_uuid: props.resolve.resource.marketplace_resource_uuid}}
     loader={loadData}
   >
-    {({ loading, error, data }) => (
-      <ModalDialog
-        title={translate('Change resource plan')}
-        footer={
-          <>
-            <CloseDialogButton/>
-            {!loading && (
-              <SubmitButton
-                submitting={props.submitting}
-                label={translate('Submit')}
-              />
-            )}
-          </>
-        }>
-        {
-          loading ? <LoadingSpinner/> :
-          error ?  <h3>{translate('Unable to load data.')}</h3> :
-          <ChangePlanContainer {...data}/>
-        }
-      </ModalDialog>
-    )}
+    {queryProps => <DialogBody {...queryProps} initialValues={queryProps.data ? queryProps.data.initialValues : undefined}/>}
   </Query>
 );
 

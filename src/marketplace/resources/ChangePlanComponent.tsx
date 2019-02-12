@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { reduxForm, InjectedFormProps, Field } from 'redux-form';
+import { Field } from 'redux-form';
 
 import { ChoicesTable } from '@waldur/form-react/ChoicesTable';
 import { translate } from '@waldur/i18n';
 
 import { FetchedData } from './ChangePlanLoader';
 
-export const ChangePlanComponent = (props: FetchedData & InjectedFormProps) => (
+export const ChangePlanComponent = (props: FetchedData) => (
   <div>
     {props.resource.plan_name ? (
       <p>
@@ -35,7 +35,3 @@ export const ChangePlanComponent = (props: FetchedData & InjectedFormProps) => (
     )}
   </div>
 );
-
-const connector = reduxForm<{}, FetchedData>({form: 'marketplaceChangePlan'});
-
-export const ChangePlanContainer = connector(ChangePlanComponent);
