@@ -12,7 +12,7 @@ interface ActionButtonProps {
   tooltip?: string;
 }
 
-const wrapTooltip = (label, children) =>
+export const wrapTooltip = (label, children) =>
   label ? <Tooltip label={label} id="button-tooltip">{children}</Tooltip> : children;
 
 const ActionButton: React.SFC<ActionButtonProps> = ({ title, action, icon, className, disabled, tooltip }: ActionButtonProps) =>

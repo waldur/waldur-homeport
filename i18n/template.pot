@@ -5170,6 +5170,7 @@ msgid "Pulling quotas"
 msgstr ""
 
 #: src/appstore/appstore-store.html
+#: src/marketplace/cart/ForwardButton.tsx
 msgid "Purchase"
 msgstr ""
 
@@ -8301,8 +8302,16 @@ msgstr ""
 msgid "You have placed a proposal already."
 msgstr ""
 
+#: src/marketplace/cart/ForwardButton.tsx
+msgid "You have the right to purchase service without additional approval."
+msgstr ""
+
 #: src/freeipa/freeipa-account-create.js
 msgid "You must agree with terms of service."
+msgstr ""
+
+#: src/marketplace/orders/OrderDetails.tsx
+msgid "You need approval to finish purchasing of services."
 msgstr ""
 
 #: src/invitations/invitation-accept.html

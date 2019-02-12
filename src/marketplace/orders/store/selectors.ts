@@ -3,7 +3,7 @@ import { isOwner, isAdmin, isManager, isStaff } from '@waldur/workspace/selector
 const getOrders = state => state.marketplace.orders;
 export const getStateChangeStatus = state => getOrders(state).stateChangeStatus;
 
-export const shouldRenderApproveButton = (env, state) => {
+export const orderCanBeApproved = (env, state) => {
   if (isStaff(state)) {
     return true;
   }
