@@ -7,10 +7,10 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
-import { submitUsageReport } from '../../common/api';
+import * as api from '../../common/api';
 import * as constants from './constants';
 
-function* submitUsage(action) {
+function* handleSubmitUsage(action) {
   const {date, resource, ...rest} = action.payload;
   const payload = {
     resource,
@@ -22,7 +22,7 @@ function* submitUsage(action) {
   };
 
   try {
-    yield call(submitUsageReport, payload);
+    yield call(api.submitUsageReport, payload);
     yield put(showSuccess(translate('Usage report has been submitted.')));
     yield put(constants.submitUsage.success());
     yield put(closeModalDialog());
@@ -37,6 +37,21 @@ function* submitUsage(action) {
   }
 }
 
+function* handleSwitchPlan(action) {
+  const { resource_uuid, plan_url } = action.payload;
+  try {
+    yield call(api.switchPlan, resource_uuid, plan_url);
+    yield put(showSuccess(translate('Resource plan change request has been submitted.')));
+    yield put(constants.switchPlan.success());
+    yield put(closeModalDialog());
+  } catch (error) {
+    const errorMessage = `${translate('Unable to submit plan change request.')} ${format(error)}`;
+    yield put(showError(errorMessage));
+    yield put(constants.switchPlan.success());
+  }
+}
+
 export default function*() {
-  yield takeEvery(constants.submitUsage.REQUEST, submitUsage);
+  yield takeEvery(constants.submitUsage.REQUEST, handleSubmitUsage);
+  yield takeEvery(constants.switchPlan.REQUEST, handleSwitchPlan);
 }

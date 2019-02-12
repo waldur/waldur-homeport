@@ -1024,7 +1024,7 @@ msgstr ""
 msgid "Change request - client’s request to perform a generic modification of data or service."
 msgstr ""
 
-#: src/marketplace/resources/ChangePlanDialog.tsx
+#: src/marketplace/resources/ChangePlanBody.tsx
 msgid "Change resource plan"
 msgstr ""
 
@@ -4545,6 +4545,10 @@ msgstr ""
 msgid "Plan description"
 msgstr ""
 
+#: src/marketplace/resources/ChangePlanBody.tsx
+msgid "Plan is required"
+msgstr ""
+
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Plan name"
 msgstr ""
@@ -5745,6 +5749,10 @@ msgstr ""
 msgid "Resource name"
 msgstr ""
 
+#: src/marketplace/resources/store/effects.ts
+msgid "Resource plan change request has been submitted."
+msgstr ""
+
 #: src/providers/details/provider-price-list.js
 #: src/resource/list/resource-global-list-filtered.html
 msgid "Resource type"
@@ -6603,7 +6611,7 @@ msgstr ""
 
 #: src/digitalocean/droplet-resize.html
 #: src/marketplace/offerings/create/Wizard.tsx
-#: src/marketplace/resources/ChangePlanDialog.tsx
+#: src/marketplace/resources/ChangePlanBody.tsx
 #: src/openstack/openstack-tenant/actions/change-package-dialog.html
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
@@ -7357,7 +7365,7 @@ msgstr ""
 msgid "Unable to load comments."
 msgstr ""
 
-#: src/marketplace/resources/ChangePlanDialog.tsx
+#: src/marketplace/resources/ChangePlanBody.tsx
 msgid "Unable to load data."
 msgstr ""
 
@@ -7501,6 +7509,10 @@ msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to submit order."
+msgstr ""
+
+#: src/marketplace/resources/store/effects.ts
+msgid "Unable to submit plan change request."
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts

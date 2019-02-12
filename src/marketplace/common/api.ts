@@ -91,3 +91,7 @@ export const submitUsageReport = payload =>
 
 export const getResource = (id: string): Promise<OrderItemResponse> =>
   getById<OrderItemResponse>('/marketplace-resources/', id);
+
+// tslint:disable-next-line: variable-name
+export const switchPlan = (resource_uuid: string, plan_url: string) =>
+  post(`/marketplace-resources/${resource_uuid}/switch_plan/`, {plan: plan_url}).then(response => response.data);
