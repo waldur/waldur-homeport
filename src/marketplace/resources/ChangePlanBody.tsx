@@ -10,11 +10,16 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
+import { orderCanBeApproved } from '../orders/store/selectors';
 import { ChangePlanComponent } from './ChangePlanComponent';
 import { FetchedData } from './ChangePlanLoader';
 import { switchPlan } from './store/constants';
 
 const FORM_ID = 'marketplaceChangePlan';
+
+const mapStateToProps = state => ({
+  orderCanBeApproved: orderCanBeApproved(state),
+});
 
 const mapDispatchToProps = (dispatch, ownProps: QueryChildProps<FetchedData>) => ({
   submitRequest: data => switchPlan({
@@ -25,13 +30,14 @@ const mapDispatchToProps = (dispatch, ownProps: QueryChildProps<FetchedData>) =>
 
 const connector = compose(
   reduxForm<{plan: any}, QueryChildProps<FetchedData>>({form: FORM_ID}),
-  connect(undefined, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 );
 
 interface DialogBodyProps extends QueryChildProps<FetchedData>, InjectedFormProps {
   error: any;
   submitRequest(data: any): void;
   formInvalid: boolean;
+  orderCanBeApproved: boolean;
 }
 
 export const DialogBody = connector((props: DialogBodyProps) => (
@@ -45,7 +51,7 @@ export const DialogBody = connector((props: DialogBodyProps) => (
             <SubmitButton
               submitting={props.submitting}
               disabled={props.data.choices.length === 0}
-              label={translate('Submit')}
+              label={props.orderCanBeApproved ? translate('Submit') : translate('Request for a change')}
             />
           )}
         </>
