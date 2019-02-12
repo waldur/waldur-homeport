@@ -18,7 +18,7 @@ import { matchState } from './utils';
 interface OrderDetailsProps extends TranslateProps {
   approveOrder: (orderUuid: string) => void;
   stateChangeStatus: StatusChange;
-  shouldRenderApproveButton?: boolean;
+  orderCanBeApproved?: boolean;
 }
 
 interface OrderDetailsState {
@@ -67,7 +67,7 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
   }
 
   renderApproveButton = () => {
-    return this.props.shouldRenderApproveButton && this.state.orderDetails && this.state.orderDetails.state === 'Approve';
+    return this.props.orderCanBeApproved && this.state.orderDetails && this.state.orderDetails.state === 'Approve';
   }
 
   approveOrder = () => {
@@ -109,6 +109,7 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
               <ApproveButton
                 submitting={this.props.stateChangeStatus.processing}
                 onClick={this.approveOrder}
+                tooltip={this.props.translate('You need approval to finish purchasing of services.')}
               />
             )}
           </div>

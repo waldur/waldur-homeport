@@ -11,7 +11,7 @@ import * as selectors from './store/selectors';
 
 const mapStateToProps = state => ({
   stateChangeStatus: selectors.getStateChangeStatus(state),
-  shouldRenderApproveButton: selectors.shouldRenderApproveButton(ENV, state),
+  orderCanBeApproved: selectors.orderCanBeApproved(ENV, state),
 });
 
 const mapDispatchToProps = {

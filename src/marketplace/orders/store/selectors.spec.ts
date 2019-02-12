@@ -1,4 +1,4 @@
-import { shouldRenderApproveButton } from './selectors';
+import { orderCanBeApproved } from './selectors';
 
 const staff = {
   uuid: 'staff uuid',
@@ -22,7 +22,7 @@ const manager = {
   role: 'manager',
 };
 
-describe('shouldRenderApproveButton utility function', () => {
+describe('orderCanBeApproved utility function', () => {
   it('should return true if user is staff', () => {
     const env = {
       plugins: {
@@ -36,7 +36,7 @@ describe('shouldRenderApproveButton utility function', () => {
     const workspace = {
       user: staff,
     };
-    expect(shouldRenderApproveButton(env, {workspace})).toEqual(true);
+    expect(orderCanBeApproved(env, {workspace})).toEqual(true);
   });
   it('should return true if OWNER_CAN_APPROVE_ORDER and current user is owner', () => {
     const env = {
@@ -57,7 +57,7 @@ describe('shouldRenderApproveButton utility function', () => {
         owners: [user],
       },
     };
-    expect(shouldRenderApproveButton(env, {workspace})).toEqual(true);
+    expect(orderCanBeApproved(env, {workspace})).toEqual(true);
   });
   it('should return false if OWNER_CAN_APPROVE_ORDER but current user is not the owner', () => {
     const env = {
@@ -78,7 +78,7 @@ describe('shouldRenderApproveButton utility function', () => {
         owners: [],
       },
     };
-    expect(shouldRenderApproveButton(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
   });
   it('should return false if OWNER_CAN_APPROVE_ORDER is equal to false but current user is the owner', () => {
     const env = {
@@ -99,7 +99,7 @@ describe('shouldRenderApproveButton utility function', () => {
         owners: [user],
       },
     };
-    expect(shouldRenderApproveButton(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
   });
   it('should return true if ADMIN_CAN_APPROVE_ORDER and current user is the admin', () => {
     const env = {
@@ -120,7 +120,7 @@ describe('shouldRenderApproveButton utility function', () => {
         permissions: [admin],
       },
     };
-    expect(shouldRenderApproveButton(env, {workspace})).toEqual(true);
+    expect(orderCanBeApproved(env, {workspace})).toEqual(true);
   });
   it('should return false if ADMIN_CAN_APPROVE_ORDER is equal to false but current user is the admin', () => {
     const env = {
@@ -141,7 +141,7 @@ describe('shouldRenderApproveButton utility function', () => {
         permissions: [admin],
       },
     };
-    expect(shouldRenderApproveButton(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
   });
   it('should return false if ADMIN_CAN_APPROVE_ORDER but current user is not the admin', () => {
     const env = {
@@ -162,7 +162,7 @@ describe('shouldRenderApproveButton utility function', () => {
         permissions: [],
       },
     };
-    expect(shouldRenderApproveButton(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
   });
   it('should return true if MANAGER_CAN_APPROVE_ORDER and current user is the manager', () => {
     const env = {
@@ -183,7 +183,7 @@ describe('shouldRenderApproveButton utility function', () => {
         permissions: [manager],
       },
     };
-    expect(shouldRenderApproveButton(env, {workspace})).toEqual(true);
+    expect(orderCanBeApproved(env, {workspace})).toEqual(true);
   });
   it('should return false if MANAGER_CAN_APPROVE_ORDER is equal to false but current user is the manager', () => {
     const env = {
@@ -204,7 +204,7 @@ describe('shouldRenderApproveButton utility function', () => {
         permissions: [manager],
       },
     };
-    expect(shouldRenderApproveButton(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
   });
   it('should return false if MANAGER_CAN_APPROVE_ORDER but current user is not the manager', () => {
     const env = {
@@ -225,6 +225,6 @@ describe('shouldRenderApproveButton utility function', () => {
         permissions: [],
       },
     };
-    expect(shouldRenderApproveButton(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
   });
 });
