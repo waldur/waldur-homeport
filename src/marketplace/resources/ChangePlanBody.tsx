@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { InjectedFormProps, reduxForm, isInvalid } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { QueryChildProps } from '@waldur/core/Query';
