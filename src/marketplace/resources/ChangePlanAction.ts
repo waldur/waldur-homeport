@@ -3,7 +3,7 @@ import { ResourceAction } from '@waldur/resource/actions/types';
 
 import { marketplaceIsVisible } from '../utils';
 
-export default function createAction(): ResourceAction {
+export default function createAction(ctx): ResourceAction {
   return {
     name: 'change_plan',
     type: 'form',
@@ -12,6 +12,6 @@ export default function createAction(): ResourceAction {
     title: translate('Change plan'),
     useResolve: true,
     dialogSize: 'lg',
-    isVisible: marketplaceIsVisible(),
+    isVisible: marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null,
   };
 }

@@ -5698,6 +5698,10 @@ msgstr ""
 msgid "Resource description"
 msgstr ""
 
+#: src/marketplace/resources/ChangePlanComponent.tsx
+msgid "Resource does not have any plan."
+msgstr ""
+
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/project/ProjectEventsFilter.tsx
 #: src/resource/events.ts
@@ -6920,6 +6924,10 @@ msgstr ""
 
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "There are no organizations matching filter."
+msgstr ""
+
+#: src/marketplace/resources/ChangePlanComponent.tsx
+msgid "There are no other plans available."
 msgstr ""
 
 #: src/navigation/workspace/select-workspace-dialog.html
