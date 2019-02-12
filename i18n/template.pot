@@ -5586,6 +5586,10 @@ msgstr ""
 msgid "Request direct access to {{ $ctrl.tenant.name }}"
 msgstr ""
 
+#: src/marketplace/resources/ChangePlanBody.tsx
+msgid "Request for a change"
+msgstr ""
+
 #: src/ansible/python-management/effects.ts
 msgid "Request for search for installed libraries in the virtual environments could not be created."
 msgstr ""

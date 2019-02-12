@@ -24,7 +24,7 @@ const manager = {
 
 describe('orderCanBeApproved utility function', () => {
   it('should return true if user is staff', () => {
-    const env = {
+    const config = {
       plugins: {
         WALDUR_MARKETPLACE: {
           OWNER_CAN_APPROVE_ORDER: true,
@@ -36,10 +36,10 @@ describe('orderCanBeApproved utility function', () => {
     const workspace = {
       user: staff,
     };
-    expect(orderCanBeApproved(env, {workspace})).toEqual(true);
+    expect(orderCanBeApproved({config, workspace})).toEqual(true);
   });
   it('should return true if OWNER_CAN_APPROVE_ORDER and current user is owner', () => {
-    const env = {
+    const config = {
       plugins: {
         WALDUR_MARKETPLACE: {
           OWNER_CAN_APPROVE_ORDER: true,
@@ -57,10 +57,10 @@ describe('orderCanBeApproved utility function', () => {
         owners: [user],
       },
     };
-    expect(orderCanBeApproved(env, {workspace})).toEqual(true);
+    expect(orderCanBeApproved({config, workspace})).toEqual(true);
   });
   it('should return false if OWNER_CAN_APPROVE_ORDER but current user is not the owner', () => {
-    const env = {
+    const config = {
       plugins: {
         WALDUR_MARKETPLACE: {
           OWNER_CAN_APPROVE_ORDER: true,
@@ -78,10 +78,10 @@ describe('orderCanBeApproved utility function', () => {
         owners: [],
       },
     };
-    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved({config, workspace})).toEqual(false);
   });
   it('should return false if OWNER_CAN_APPROVE_ORDER is equal to false but current user is the owner', () => {
-    const env = {
+    const config = {
       plugins: {
         WALDUR_MARKETPLACE: {
           OWNER_CAN_APPROVE_ORDER: false,
@@ -99,10 +99,10 @@ describe('orderCanBeApproved utility function', () => {
         owners: [user],
       },
     };
-    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved({config, workspace})).toEqual(false);
   });
   it('should return true if ADMIN_CAN_APPROVE_ORDER and current user is the admin', () => {
-    const env = {
+    const config = {
       plugins: {
         WALDUR_MARKETPLACE: {
           OWNER_CAN_APPROVE_ORDER: false,
@@ -120,10 +120,10 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [admin],
       },
     };
-    expect(orderCanBeApproved(env, {workspace})).toEqual(true);
+    expect(orderCanBeApproved({config, workspace})).toEqual(true);
   });
   it('should return false if ADMIN_CAN_APPROVE_ORDER is equal to false but current user is the admin', () => {
-    const env = {
+    const config = {
       plugins: {
         WALDUR_MARKETPLACE: {
           OWNER_CAN_APPROVE_ORDER: false,
@@ -141,10 +141,10 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [admin],
       },
     };
-    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved({config, workspace})).toEqual(false);
   });
   it('should return false if ADMIN_CAN_APPROVE_ORDER but current user is not the admin', () => {
-    const env = {
+    const config = {
       plugins: {
         WALDUR_MARKETPLACE: {
           OWNER_CAN_APPROVE_ORDER: false,
@@ -162,10 +162,10 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [],
       },
     };
-    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved({config, workspace})).toEqual(false);
   });
   it('should return true if MANAGER_CAN_APPROVE_ORDER and current user is the manager', () => {
-    const env = {
+    const config = {
       plugins: {
         WALDUR_MARKETPLACE: {
           OWNER_CAN_APPROVE_ORDER: false,
@@ -183,10 +183,10 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [manager],
       },
     };
-    expect(orderCanBeApproved(env, {workspace})).toEqual(true);
+    expect(orderCanBeApproved({config, workspace})).toEqual(true);
   });
   it('should return false if MANAGER_CAN_APPROVE_ORDER is equal to false but current user is the manager', () => {
-    const env = {
+    const config = {
       plugins: {
         WALDUR_MARKETPLACE: {
           OWNER_CAN_APPROVE_ORDER: false,
@@ -204,10 +204,10 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [manager],
       },
     };
-    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved({config, workspace})).toEqual(false);
   });
   it('should return false if MANAGER_CAN_APPROVE_ORDER but current user is not the manager', () => {
-    const env = {
+    const config = {
       plugins: {
         WALDUR_MARKETPLACE: {
           OWNER_CAN_APPROVE_ORDER: false,
@@ -225,6 +225,6 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [],
       },
     };
-    expect(orderCanBeApproved(env, {workspace})).toEqual(false);
+    expect(orderCanBeApproved({config, workspace})).toEqual(false);
   });
 });
