@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { marketplaceIsVisible } from '@waldur/marketplace/utils';
 import { OpenStackTenant } from '@waldur/openstack/openstack-tenant/types';
 import { ResourceAction, ActionContext } from '@waldur/resource/actions/types';
 
@@ -12,7 +13,7 @@ export default function createAction(ctx: ActionContext<OpenStackTenant>): Resou
     component: 'openstackTenantAssignPackageDialog',
     title: translate('Assign VPC package'),
     useResolve: true,
-    isVisible: ctx.user.is_staff && !tenantHasPackage(ctx.resource),
+    isVisible: !marketplaceIsVisible() && ctx.user.is_staff && !tenantHasPackage(ctx.resource),
     dialogSize: 'lg',
   };
 }
