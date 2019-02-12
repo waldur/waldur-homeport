@@ -4545,10 +4545,6 @@ msgstr ""
 msgid "Plan description"
 msgstr ""
 
-#: src/marketplace/resources/ChangePlanBody.tsx
-msgid "Plan is required"
-msgstr ""
-
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Plan name"
 msgstr ""

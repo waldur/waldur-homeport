@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { InjectedFormProps, reduxForm, isInvalid } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { QueryChildProps } from '@waldur/core/Query';
@@ -14,25 +14,24 @@ import { ChangePlanComponent } from './ChangePlanComponent';
 import { FetchedData } from './ChangePlanLoader';
 import { switchPlan } from './store/constants';
 
-const connectForm = reduxForm<{plan: any}, QueryChildProps<FetchedData>>({
-  form: 'marketplaceChangePlan',
-  validate: values => values.plan === undefined ? ({
-    plan: translate('Plan is required'),
-  }) : undefined,
-});
+const FORM_ID = 'marketplaceChangePlan';
 
-const connectRedux = connect(undefined, (dispatch, ownProps: QueryChildProps<FetchedData>) => ({
+const mapDispatchToProps = (dispatch, ownProps: QueryChildProps<FetchedData>) => ({
   submitRequest: data => switchPlan({
     resource_uuid: ownProps.data.resource.uuid,
     plan_url: data.plan.url,
   }, dispatch),
-}));
+});
 
-const connector = compose(connectForm, connectRedux);
+const connector = compose(
+  reduxForm<{plan: any}, QueryChildProps<FetchedData>>({form: FORM_ID}),
+  connect(undefined, mapDispatchToProps),
+);
 
 interface DialogBodyProps extends QueryChildProps<FetchedData>, InjectedFormProps {
   error: any;
   submitRequest(data: any): void;
+  formInvalid: boolean;
 }
 
 export const DialogBody = connector((props: DialogBodyProps) => (
@@ -45,7 +44,7 @@ export const DialogBody = connector((props: DialogBodyProps) => (
           {!props.loading && (
             <SubmitButton
               submitting={props.submitting}
-              disabled={props.invalid}
+              disabled={props.data.choices.length === 0}
               label={translate('Submit')}
             />
           )}

@@ -52,8 +52,7 @@ export async function loadData({ resource_uuid }): Promise<FetchedData> {
   const offering = await getOffering(resource.offering_uuid);
   const columns = getColumns(offering);
   const choices = getChoices(offering, resource);
-  const initialValues = {
-    plan: choices.find(choice => !choice.disabled),
-  };
+  const validPlan = choices.find(choice => !choice.disabled);
+  const initialValues = validPlan ? {plan: validPlan} : undefined;
   return {offering, resource, columns, choices, initialValues};
 }
