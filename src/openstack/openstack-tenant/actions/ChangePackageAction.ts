@@ -1,5 +1,6 @@
 import { translate } from '@waldur/i18n';
 
+import { marketplaceIsVisible } from '@waldur/marketplace/utils';
 import { OpenStackTenant } from '@waldur/openstack/openstack-tenant/types';
 import { ActionContext, ResourceAction } from '@waldur/resource/actions/types';
 
@@ -13,7 +14,7 @@ export default function createAction(ctx: ActionContext<OpenStackTenant>): Resou
     method: 'POST',
     component: 'openstackTenantChangePackageDialog',
     useResolve: true,
-    isVisible: userCanModifyTenant(ctx) && tenantHasPackage(ctx.resource),
+    isVisible: !marketplaceIsVisible() && userCanModifyTenant(ctx) === undefined && tenantHasPackage(ctx.resource),
     dialogSize: 'lg',
   };
 }

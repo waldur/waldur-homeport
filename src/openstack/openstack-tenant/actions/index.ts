@@ -1,3 +1,4 @@
+import changePlanAction from '@waldur/marketplace/resources/ChangePlanAction';
 import { createPullAction } from '@waldur/resource/actions/base';
 
 import assignPackageAction from './AssignPackageAction';
@@ -18,6 +19,7 @@ export default [
   createPullAction,
   assignPackageAction,
   changePackageAction,
+  changePlanAction,
   requestCustomFlavorAction,
   createNetworkAction,
   createSecurityGroupAction,

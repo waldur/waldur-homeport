@@ -32,6 +32,7 @@ export interface OfferingComponent extends BaseComponent {
 
 export interface Plan {
   url: string;
+  uuid?: string;
   name: string;
   description: string;
   unit_price: string;

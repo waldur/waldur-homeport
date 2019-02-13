@@ -19,18 +19,3 @@ export interface FormField {
   // See also: https://github.com/erikras/redux-form/issues/2768#issuecomment-292770517
   noUpdateOnBlur?: boolean;
 }
-
-export interface SelectDialogFieldChoice {
-  url: string;
-  uuid: string;
-  name: string;
-  disabled?: boolean;
-  disabledReason?: string;
-}
-
-export interface SelectDialogFieldColumn {
-  name: string;
-  label: React.ReactNode;
-  headerClass?: string;
-  filter?(input: string): string;
-}

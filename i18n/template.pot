@@ -932,7 +932,7 @@ msgstr ""
 #: src/experts/bids/create/expert-bid-create-dialog.html
 #: src/experts/bids/details/expert-bid-dialog.html
 #: src/experts/requests/create/expert-contract-create.html
-#: src/form/AppstoreListDialog.tsx
+#: src/form-react/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
 #: src/invitations/actions/cancel.js
 #: src/invitations/actions/invitation-dialog.html
@@ -1016,8 +1016,16 @@ msgstr ""
 msgid "Change flavor"
 msgstr ""
 
+#: src/marketplace/resources/ChangePlanAction.ts
+msgid "Change plan"
+msgstr ""
+
 #: src/issues/types/constants.ts
 msgid "Change request - client’s request to perform a generic modification of data or service."
+msgstr ""
+
+#: src/marketplace/resources/ChangePlanBody.tsx
+msgid "Change resource plan"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -1509,6 +1517,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-current-flavor.tsx
 msgid "Current flavor"
+msgstr ""
+
+#: src/marketplace/resources/ChangePlanComponent.tsx
+msgid "Current plan"
 msgstr ""
 
 #: src/resource/support/ChartContainer.tsx
@@ -3521,6 +3533,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/resources/ChangePlanLoader.tsx
 #: src/marketplace/resources/ProjectResourcesList.tsx
 #: src/marketplace/resources/ResourceUsageList.tsx
 #: src/offering/OfferingConfigurationForm.tsx
@@ -3625,6 +3638,7 @@ msgid "New flavor"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.js
+#: src/marketplace/resources/ChangePlanComponent.tsx
 msgid "New plan"
 msgstr ""
 
@@ -4733,6 +4747,7 @@ msgstr ""
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/orders/Order.tsx
+#: src/marketplace/resources/ChangePlanLoader.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/paypal/paypal-invoices-list.js
 msgid "Price"
@@ -5170,6 +5185,7 @@ msgid "Pulling quotas"
 msgstr ""
 
 #: src/appstore/appstore-store.html
+#: src/marketplace/cart/ForwardButton.tsx
 msgid "Purchase"
 msgstr ""
 
@@ -5570,6 +5586,10 @@ msgstr ""
 msgid "Request direct access to {{ $ctrl.tenant.name }}"
 msgstr ""
 
+#: src/marketplace/resources/ChangePlanBody.tsx
+msgid "Request for a change"
+msgstr ""
+
 #: src/ansible/python-management/effects.ts
 msgid "Request for search for installed libraries in the virtual environments could not be created."
 msgstr ""
@@ -5639,8 +5659,8 @@ msgstr ""
 msgid "Resend"
 msgstr ""
 
+#: src/form-react/AppstoreListDialog.tsx
 #: src/form-react/ResetFormButton.tsx
-#: src/form/AppstoreListDialog.tsx
 msgid "Reset"
 msgstr ""
 
@@ -5680,6 +5700,10 @@ msgstr ""
 
 #: src/marketplace/orders/OrderItemDetailsHeader.tsx
 msgid "Resource description"
+msgstr ""
+
+#: src/marketplace/resources/ChangePlanComponent.tsx
+msgid "Resource does not have any plan."
 msgstr ""
 
 #: src/customer/workspace/CustomerEventsFilter.tsx
@@ -5723,6 +5747,10 @@ msgstr ""
 
 #: src/marketplace/orders/OrderItemDetailsHeader.tsx
 msgid "Resource name"
+msgstr ""
+
+#: src/marketplace/resources/store/effects.ts
+msgid "Resource plan change request has been submitted."
 msgstr ""
 
 #: src/providers/details/provider-price-list.js
@@ -5997,7 +6025,7 @@ msgstr ""
 
 #: src/appstore/dialog/appstore-category-selector.html
 #: src/appstore/providers/appstore-providers.js
-#: src/form/AppstoreListDialog.tsx
+#: src/form-react/AppstoreListDialog.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Select"
 msgstr ""
@@ -6583,6 +6611,7 @@ msgstr ""
 
 #: src/digitalocean/droplet-resize.html
 #: src/marketplace/offerings/create/Wizard.tsx
+#: src/marketplace/resources/ChangePlanBody.tsx
 #: src/openstack/openstack-tenant/actions/change-package-dialog.html
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
@@ -6903,6 +6932,10 @@ msgstr ""
 
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "There are no organizations matching filter."
+msgstr ""
+
+#: src/marketplace/resources/ChangePlanComponent.tsx
+msgid "There are no other plans available."
 msgstr ""
 
 #: src/navigation/workspace/select-workspace-dialog.html
@@ -7332,6 +7365,10 @@ msgstr ""
 msgid "Unable to load comments."
 msgstr ""
 
+#: src/marketplace/resources/ChangePlanBody.tsx
+msgid "Unable to load data."
+msgstr ""
+
 #: src/billing/events/invoice-events-dialog.html
 msgid "Unable to load events for this resource."
 msgstr ""
@@ -7472,6 +7509,10 @@ msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to submit order."
+msgstr ""
+
+#: src/marketplace/resources/store/effects.ts
+msgid "Unable to submit plan change request."
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
@@ -8301,8 +8342,16 @@ msgstr ""
 msgid "You have placed a proposal already."
 msgstr ""
 
+#: src/marketplace/cart/ForwardButton.tsx
+msgid "You have the right to purchase service without additional approval."
+msgstr ""
+
 #: src/freeipa/freeipa-account-create.js
 msgid "You must agree with terms of service."
+msgstr ""
+
+#: src/marketplace/orders/OrderDetails.tsx
+msgid "You need approval to finish purchasing of services."
 msgstr ""
 
 #: src/invitations/invitation-accept.html

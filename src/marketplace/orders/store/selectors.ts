@@ -3,12 +3,12 @@ import { isOwner, isAdmin, isManager, isStaff } from '@waldur/workspace/selector
 const getOrders = state => state.marketplace.orders;
 export const getStateChangeStatus = state => getOrders(state).stateChangeStatus;
 
-export const shouldRenderApproveButton = (env, state) => {
+export const orderCanBeApproved = state => {
   if (isStaff(state)) {
     return true;
   }
-  if (env.plugins.WALDUR_MARKETPLACE) {
-    const marketplace = env.plugins.WALDUR_MARKETPLACE;
+  if (state.config.plugins.WALDUR_MARKETPLACE) {
+    const marketplace = state.config.plugins.WALDUR_MARKETPLACE;
     if (marketplace.OWNER_CAN_APPROVE_ORDER && isOwner(state)) {
       return true;
     }

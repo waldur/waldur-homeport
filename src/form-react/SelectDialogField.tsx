@@ -1,9 +1,24 @@
 import * as React from 'react';
 
-import { SelectDialogFieldColumn, SelectDialogFieldChoice } from '@waldur/form-react/types';
-import { AppstoreListDialog } from '@waldur/form/AppstoreListDialog';
 import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
+
+import { AppstoreListDialog } from './AppstoreListDialog';
+
+export interface SelectDialogFieldChoice extends Record<string, any> {
+  url: string;
+  uuid: string;
+  name: string;
+  disabled?: boolean;
+  disabledReason?: string;
+}
+
+export interface SelectDialogFieldColumn {
+  name: string;
+  label: React.ReactNode;
+  headerClass?: string;
+  filter?(input: string): string;
+}
 
 interface OwnProps {
   id?: string;
