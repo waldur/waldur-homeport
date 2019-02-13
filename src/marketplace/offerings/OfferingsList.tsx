@@ -50,7 +50,7 @@ export const TableComponent = props => {
       {...props}
       columns={columns}
       verboseName={translate('Offerings')}
-      actions={<OfferingCreateButton/>}
+      actions={props.showOfferingCreateButton && <OfferingCreateButton/>}
       initialSorting={{field: 'created', mode: 'desc'}}
     />
   );
@@ -83,6 +83,7 @@ export const TableOptions = {
 const mapStateToProps = state => ({
   customer: getCustomer(state),
   actionsDisabled: isOfferingManagementDisabled(state),
+  showOfferingCreateButton: getCustomer(state).is_service_provider,
 });
 
 const enhance = compose(

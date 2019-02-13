@@ -13,6 +13,7 @@ const enhance = compose(
   connect((state: OuterState) => ({
     customer: getCustomer(state),
     actionsDisabled: true,
+    showOfferingCreateButton: false,
   })),
   connectTable({
     ...TableOptions,
