@@ -36,7 +36,6 @@ const connector = compose(
 interface DialogBodyProps extends QueryChildProps<FetchedData>, InjectedFormProps {
   error: any;
   submitRequest(data: any): void;
-  formInvalid: boolean;
   orderCanBeApproved: boolean;
 }
 
