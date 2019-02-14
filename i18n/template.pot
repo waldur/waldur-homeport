@@ -4541,10 +4541,6 @@ msgstr ""
 msgid "Physical locations"
 msgstr ""
 
-#: src/marketplace/resources/PlanUsageButton.tsx
-msgid "Pie chart"
-msgstr ""
-
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/details/plan/PlanField.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
@@ -5468,8 +5464,11 @@ msgstr ""
 msgid "Reload issue data"
 msgstr ""
 
-#: src/analytics/utils.ts
 #: src/marketplace/resources/PlanUsageDialog.tsx
+msgid "Remaining amount"
+msgstr ""
+
+#: src/analytics/utils.ts
 msgid "Remaining limit"
 msgstr ""
 
@@ -6374,6 +6373,10 @@ msgstr ""
 
 #: src/table/responsive-table.js
 msgid "Show _MENU_ entries"
+msgstr ""
+
+#: src/marketplace/resources/PlanUsageButton.tsx
+msgid "Show chart"
 msgstr ""
 
 #: src/form-react/SelectDialogField.tsx

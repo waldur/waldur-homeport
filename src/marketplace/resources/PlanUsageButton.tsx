@@ -15,7 +15,7 @@ type Props = DispatchProps & PlanUsageRowProps;
 
 const PurePlanUsageButton = (props: Props) => (
   <ActionButton
-    title={translate('Pie chart')}
+    title={translate('Show chart')}
     disabled={props.row.limit === null}
     tooltip={props.row.limit === null ? translate('Plan does not have limit') : ''}
     action={props.openDialog}

@@ -30,7 +30,7 @@ const getChartData = (props: PlanUsageRowProps) => ({
           value: props.row.usage,
         },
         {
-          name: translate('Remaining limit'),
+          name: translate('Remaining amount'),
           value: Math.max(0, props.row.limit - props.row.usage),
         },
       ],
