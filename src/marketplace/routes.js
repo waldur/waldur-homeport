@@ -259,6 +259,19 @@ export default function routes($stateProvider) {
       }
     })
 
+    .state('marketplace-support-plan-usages', {
+      url: 'plan-usages/',
+      template: '<marketplace-plan-usages-list></marketplace-plan-usages-list>',
+      parent: 'support',
+      data: {
+        feature: 'marketplace',
+        pageTitle: gettext('Plan usages'),
+      },
+      resolve: {
+        permission: checkPermission,
+      }
+    })
+
     .state('marketplace-resources', {
       url: '',
       abstract: true,
