@@ -164,6 +164,10 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+#: src/marketplace/resources/PlanUsageList.tsx
+msgid "Active plan count"
+msgstr ""
+
 #: src/user/support/UserActivateButton.tsx
 msgid "Active user will be able to login into the portal."
 msgstr ""
@@ -7681,7 +7685,6 @@ msgstr ""
 
 #: src/analytics/utils.ts
 #: src/dashboard/chart.ts
-#: src/marketplace/resources/PlanUsageList.tsx
 msgid "Usage"
 msgstr ""
 

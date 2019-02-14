@@ -26,7 +26,7 @@ export const TableComponent = props => {
       render: ({ row }) => row.limit || 'N/A',
     },
     {
-      title: translate('Usage'),
+      title: translate('Active plan count'),
       render: ({ row }) => row.usage,
     },
   ];
@@ -69,7 +69,7 @@ const TableOptions = {
     'Offering',
     'Plan',
     'Limit',
-    'Usage',
+    'Active plan count',
   ],
 };
 
