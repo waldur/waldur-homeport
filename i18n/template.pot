@@ -558,6 +558,10 @@ msgstr ""
 msgid "Are you sure you want to unlink provider and all related resources?"
 msgstr ""
 
+#: src/project/ProjectRemoveDialog.tsx
+msgid "Are you sure you would like to delete project {projectName}?"
+msgstr ""
+
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
@@ -5016,6 +5020,10 @@ msgstr ""
 msgid "Project providers links have been updated."
 msgstr ""
 
+#: src/project/ProjectRemoveDialog.tsx
+msgid "Project removal"
+msgstr ""
+
 #: src/user/support/UserList.tsx
 msgid "Project roles"
 msgstr ""
@@ -8198,6 +8206,7 @@ msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/project/ProjectRemoveDialog.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Yes"
 msgstr ""
