@@ -4547,6 +4547,11 @@ msgstr ""
 msgid "Plan #{index}"
 msgstr ""
 
+#: src/issues/workspace/issue-navigation-service.js
+#: src/marketplace/routes.js
+msgid "Plan capacity"
+msgstr ""
+
 #: src/marketplace/offerings/create/ComponentsList.tsx
 msgid "Plan components"
 msgstr ""
@@ -4557,11 +4562,6 @@ msgstr ""
 
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Plan name"
-msgstr ""
-
-#: src/issues/workspace/issue-navigation-service.js
-#: src/marketplace/routes.js
-msgid "Plan usages"
 msgstr ""
 
 #: src/experts/requests/create/expert-request-create.js

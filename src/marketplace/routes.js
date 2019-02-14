@@ -265,7 +265,7 @@ export default function routes($stateProvider) {
       parent: 'support',
       data: {
         feature: 'marketplace',
-        pageTitle: gettext('Plan usages'),
+        pageTitle: gettext('Plan capacity'),
       },
       resolve: {
         permission: checkPermission,

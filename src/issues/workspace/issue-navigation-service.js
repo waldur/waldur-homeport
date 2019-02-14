@@ -39,7 +39,7 @@ const REPORT_ITEMS = [
     feature: 'marketplace'
   },
   {
-    label: gettext('Plan usages'),
+    label: gettext('Plan capacity'),
     icon: 'fa-puzzle-piece',
     link: 'marketplace-support-plan-usages',
     feature: 'marketplace'
