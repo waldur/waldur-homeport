@@ -164,6 +164,10 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+#: src/marketplace/resources/PlanUsageList.tsx
+msgid "Active plan count"
+msgstr ""
+
 #: src/user/support/UserActivateButton.tsx
 msgid "Active user will be able to login into the portal."
 msgstr ""
@@ -1088,8 +1092,8 @@ msgstr ""
 msgid "Client Secret"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/orders/OrganizationAutocomplete.tsx
 msgid "Client organization"
 msgstr ""
 
@@ -1800,7 +1804,7 @@ msgstr ""
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Done"
 msgstr ""
 
@@ -1927,7 +1931,7 @@ msgid "Enter date"
 msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Erred"
 msgstr ""
 
@@ -2055,7 +2059,7 @@ msgid "Excel"
 msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Executing"
 msgstr ""
 
@@ -3197,6 +3201,7 @@ msgstr ""
 
 #: src/analytics/utils.ts
 #: src/dashboard/chart.ts
+#: src/marketplace/resources/PlanUsageList.tsx
 msgid "Limit"
 msgstr ""
 
@@ -4007,8 +4012,9 @@ msgid "Objectives"
 msgstr ""
 
 #: src/marketplace/details/OrderSummary.tsx
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OfferingAutocomplete.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/resources/PlanUsageList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Offering"
@@ -4480,7 +4486,7 @@ msgstr ""
 #: src/billing/billing-utils.js
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/invitations/invitations-list.js
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Pending"
 msgstr ""
 
@@ -4533,11 +4539,17 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/details/plan/PlanField.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/resources/PlanUsageList.tsx
 msgid "Plan"
 msgstr ""
 
 #: src/marketplace/offerings/plan/PlansList.tsx
 msgid "Plan #{index}"
+msgstr ""
+
+#: src/issues/workspace/issue-navigation-service.js
+#: src/marketplace/routes.js
+msgid "Plan capacity"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentsList.tsx
@@ -6084,7 +6096,7 @@ msgstr ""
 msgid "Select issue template"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OfferingAutocomplete.tsx
 msgid "Select offering..."
 msgstr ""
 
@@ -6094,7 +6106,7 @@ msgstr ""
 
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrganizationAutocomplete.tsx
 msgid "Select organization..."
 msgstr ""
 
@@ -6115,7 +6127,7 @@ msgstr ""
 msgid "Select provider type"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/ProviderAutocomplete.tsx
 msgid "Select provider..."
 msgstr ""
 
@@ -6159,7 +6171,7 @@ msgstr ""
 msgid "Select state"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Select state..."
 msgstr ""
 
@@ -6253,7 +6265,8 @@ msgid "Service name"
 msgstr ""
 
 #: src/marketplace/details/LeafletMap.tsx
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/ProviderAutocomplete.tsx
+#: src/marketplace/resources/PlanUsageList.tsx
 msgid "Service provider"
 msgstr ""
 
@@ -6521,8 +6534,8 @@ msgstr ""
 #: src/experts/requests/list/expert-request-project-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
-#: src/marketplace/orders/OrderItemsFilter.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/resources/ProjectResourcesList.tsx
 #: src/offering/OfferingHeader.tsx
@@ -6831,7 +6844,7 @@ msgstr ""
 msgid "Terminate"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Terminated"
 msgstr ""
 
@@ -8482,6 +8495,10 @@ msgstr ""
 
 #: src/quotas/quotas-table.html
 msgid "of"
+msgstr ""
+
+#: src/marketplace/resources/PlanUsageList.tsx
+msgid "offerings"
 msgstr ""
 
 #: src/navigation/workspace/select-workspace-dialog.html
