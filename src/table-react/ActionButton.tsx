@@ -15,15 +15,15 @@ interface ActionButtonProps {
 export const wrapTooltip = (label, children) =>
   label ? <Tooltip label={label} id="button-tooltip">{children}</Tooltip> : children;
 
-const ActionButton: React.SFC<ActionButtonProps> = ({ title, action, icon, className, disabled, tooltip }: ActionButtonProps) =>
-  wrapTooltip(tooltip, (
+const ActionButton: React.SFC<ActionButtonProps> = props =>
+  wrapTooltip(props.tooltip, (
   <button
     type="button"
-    className={classNames(className, {disabled})}
-    onClick={action}>
-      {icon && <i className={icon}/>}
+    className={classNames(props.className, {disabled: props.disabled})}
+    onClick={props.action}>
+      {props.icon && <i className={props.icon}/>}
       {' '}
-      {title}
+      {props.title}
   </button>
 ));
 

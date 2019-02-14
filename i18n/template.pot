@@ -136,6 +136,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/resources/PlanUsageList.tsx
 #: src/marketplace/resources/ProjectResourcesList.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/paypal/paypal-invoice-actions.html
@@ -4556,12 +4557,20 @@ msgstr ""
 msgid "Plan capacity"
 msgstr ""
 
+#: src/marketplace/resources/PlanUsageDialog.tsx
+msgid "Plan capacity ({provider} / {offering})"
+msgstr ""
+
 #: src/marketplace/offerings/create/ComponentsList.tsx
 msgid "Plan components"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDescription.tsx
 msgid "Plan description"
+msgstr ""
+
+#: src/marketplace/resources/PlanUsageButton.tsx
+msgid "Plan does not have limit"
 msgstr ""
 
 #: src/marketplace/offerings/create/AccountingSummary.tsx
@@ -5453,6 +5462,10 @@ msgstr ""
 
 #: src/issues/IssueReload.tsx
 msgid "Reload issue data"
+msgstr ""
+
+#: src/marketplace/resources/PlanUsageDialog.tsx
+msgid "Remaining amount"
 msgstr ""
 
 #: src/analytics/utils.ts
@@ -6360,6 +6373,10 @@ msgstr ""
 
 #: src/table/responsive-table.js
 msgid "Show _MENU_ entries"
+msgstr ""
+
+#: src/marketplace/resources/PlanUsageButton.tsx
+msgid "Show chart"
 msgstr ""
 
 #: src/form-react/SelectDialogField.tsx
@@ -7693,6 +7710,7 @@ msgstr ""
 
 #: src/analytics/utils.ts
 #: src/dashboard/chart.ts
+#: src/marketplace/resources/PlanUsageDialog.tsx
 msgid "Usage"
 msgstr ""
 
