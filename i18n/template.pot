@@ -136,9 +136,11 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/resources/ProjectResourcesList.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/paypal/paypal-invoice-actions.html
 #: src/project/ProjectsList.tsx
+#: src/resource/actions/ActionButtonResource.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
 #: src/user/support/UserList.tsx
@@ -3228,6 +3230,7 @@ msgstr ""
 msgid "Lithuanian"
 msgstr ""
 
+#: src/resource/actions/ActionButtonResource.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "Loading actions"
 msgstr ""
@@ -6880,6 +6883,7 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/paypal/paypal-invoice-actions.html
+#: src/resource/actions/ActionButtonResource.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "There are no actions."
 msgstr ""

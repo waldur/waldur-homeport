@@ -11,4 +11,5 @@ export interface Resource extends ResourceReference {
   offering_name: string;
   offering_type: string;
   state: string;
+  scope?: string;
 }
