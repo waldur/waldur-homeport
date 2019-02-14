@@ -3,17 +3,17 @@ import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
 
-import { PureResorceSummaryButton } from './ResourceSummaryButton';
+import { PureResourceSummaryButton } from './ResourceSummaryButton';
 
 const initialProps = {
   resource: {},
   translate,
 };
-const renderWrapper = (props?) => shallow(<PureResorceSummaryButton {...initialProps} {...props} />);
+const renderWrapper = (props?) => shallow(<PureResourceSummaryButton {...initialProps} {...props} />);
 
 const getButton = (container: ShallowWrapper) => container.find('.btn');
 
-describe('ResorceSummaryButton', () => {
+describe('ResourceSummaryButton', () => {
   it('Show modal on click', () => {
     const showDetailsModal = jest.fn();
     const wrapper = renderWrapper({ showDetailsModal });

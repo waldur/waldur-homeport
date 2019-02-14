@@ -8,6 +8,8 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { Resource } from '@waldur/marketplace/resources/types';
 
+import './ActionButtonResource.scss';
+
 interface ActionButtonResourceProps {
   row: Resource;
 }
@@ -66,8 +68,7 @@ export class ActionButtonResource extends React.Component<ActionButtonResourcePr
     return (
       <DropdownButton
         title={translate('Actions')}
-        className="btn-group dropdown"
-        id="dropdown-basic"
+        id="actions-dropdown-btn"
         onToggle={this.openDropdown}
       >
         {state.loading && <MenuItem eventKey="1">{translate('Loading actions')}</MenuItem>}
