@@ -4,6 +4,7 @@ import marketplaceResourceShowUsageDialog from './ResourceShowUsageDialog';
 import marketplaceResourceCreateUsageDialog from './ResourceCreateUsageDialog';
 import marketplaceResourcePlanChangeDialog from './ChangePlanDialog';
 import marketplacePlanUsagesList from './PlanUsageContainer';
+import marketplacePlanUsageDialog from './PlanUsageDialog';
 
 export default module => {
   module.component('marketplaceProjectResourcesList', marketplaceProjectResourcesList);
@@ -12,4 +13,5 @@ export default module => {
   module.component('marketplaceResourceCreateUsageDialog', marketplaceResourceCreateUsageDialog);
   module.component('marketplaceResourcePlanChangeDialog', marketplaceResourcePlanChangeDialog);
   module.component('marketplacePlanUsagesList', marketplacePlanUsagesList);
+  module.component('marketplacePlanUsageDialog', marketplacePlanUsageDialog);
 };

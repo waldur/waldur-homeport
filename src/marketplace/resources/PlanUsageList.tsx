@@ -6,28 +6,35 @@ import { getFormValues } from 'redux-form';
 import { withTranslation } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
+import { PlanUsageButton } from './PlanUsageButton';
+import { PlanUsageRowProps } from './types';
+
 export const TableComponent = props => {
   const { translate } = props;
   const columns = [
     {
       title: translate('Service provider'),
-      render: ({ row }) => row.customer_provider_name,
+      render: ({ row }: PlanUsageRowProps) => row.customer_provider_name,
     },
     {
       title: translate('Offering'),
-      render: ({ row }) => row.offering_name,
+      render: ({ row }: PlanUsageRowProps) => row.offering_name,
     },
     {
       title: translate('Plan'),
-      render: ({ row }) => row.plan_name,
+      render: ({ row }: PlanUsageRowProps) => row.plan_name,
     },
     {
       title: translate('Limit'),
-      render: ({ row }) => row.limit || 'N/A',
+      render: ({ row }: PlanUsageRowProps) => row.limit || 'N/A',
     },
     {
       title: translate('Active plan count'),
-      render: ({ row }) => row.usage,
+      render: ({ row }: PlanUsageRowProps) => row.usage,
+    },
+    {
+      title: translate('Actions'),
+      render: PlanUsageButton,
     },
   ];
 
