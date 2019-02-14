@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { CategoryColumn } from '@waldur/marketplace/types';
+import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
@@ -48,6 +49,10 @@ export const TableComponent = props => {
     {
       title: translate('State'),
       render: ResourceStateField,
+    },
+    {
+      title: translate('Actions'),
+      render: ({row}) => <ActionButtonResource row={row}/>,
     },
   ];
 
