@@ -6,6 +6,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { CategoryColumn } from '@waldur/marketplace/types';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
+import { ResourceSummaryButton } from '@waldur/resource/summary/ResourceSummaryButton';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
@@ -52,7 +53,7 @@ export const TableComponent = props => {
     },
     {
       title: translate('Actions'),
-      render: ({row}) => <ActionButtonResource row={row}/>,
+      render: renderRowActions,
     },
   ];
 
@@ -71,6 +72,13 @@ export const TableComponent = props => {
     />
   );
 };
+
+const renderRowActions = ({row}: FieldProps) => (
+  <span className="btn-group">
+    <ActionButtonResource row={row}/>
+    <ResourceSummaryButton resource={{...row, url: row.scope}}/>
+  </span>
+);
 
 const TableOptions = {
   table: 'ProjectResourcesList',

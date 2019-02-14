@@ -7,12 +7,12 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { BaseResource } from '@waldur/resource/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-interface PureResorceSummaryButtonProps extends TranslateProps {
+interface PureResourceSummaryButtonProps extends TranslateProps {
   resource: BaseResource;
   showDetailsModal(): void;
 }
 
-export const PureResorceSummaryButton = (props: PureResorceSummaryButtonProps) => {
+export const PureResourceSummaryButton = (props: PureResourceSummaryButtonProps) => {
   const { showDetailsModal, translate } = props;
   return (
     <div className="btn btn-default btn-sm" onClick={showDetailsModal}>{translate('Details')}</div>
@@ -28,6 +28,6 @@ const enhance = compose(
   withTranslation,
 );
 
-export const ResorceSummaryButton = enhance(PureResorceSummaryButton);
+export const ResourceSummaryButton = enhance(PureResourceSummaryButton);
 
-export default connectAngularComponent(ResorceSummaryButton, ['resource']);
+export default connectAngularComponent(ResourceSummaryButton, ['resource']);
