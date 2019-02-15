@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { marketplaceIsVisible } from '@waldur/marketplace/utils';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
 import { Offering } from '../types';
@@ -11,6 +12,7 @@ export default function createAction(): ResourceAction<Offering> {
     method: 'POST',
     title: translate('Complete'),
     validators: [validateOfferingState('Requested'), validatePermissions],
+    isVisible: !marketplaceIsVisible(),
     fields: [
       {
         name: 'unit_price',
