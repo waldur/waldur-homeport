@@ -51,7 +51,22 @@ function* handleSwitchPlan(action) {
   }
 }
 
+function* handleTerminateResource(action) {
+  const { resource_uuid } = action.payload;
+  try {
+    yield call(api.terminateResource, resource_uuid);
+    yield put(showSuccess(translate('Resource termination request has been submitted.')));
+    yield put(constants.terminateResource.success());
+    yield put(closeModalDialog());
+  } catch (error) {
+    const errorMessage = `${translate('Unable to submit resource termination request.')} ${format(error)}`;
+    yield put(showError(errorMessage));
+    yield put(constants.terminateResource.success());
+  }
+}
+
 export default function*() {
   yield takeEvery(constants.submitUsage.REQUEST, handleSubmitUsage);
   yield takeEvery(constants.switchPlan.REQUEST, handleSwitchPlan);
+  yield takeEvery(constants.terminateResource.REQUEST, handleTerminateResource);
 }

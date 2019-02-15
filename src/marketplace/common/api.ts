@@ -5,6 +5,8 @@ import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
 import { State, OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Category, Offering, ServiceProvider, CategoryComponentUsage } from '@waldur/marketplace/types';
 
+// tslint:disable: variable-name
+
 export const getPlugins = () =>
   get('/marketplace-plugins/').then(response => response.data);
 
@@ -92,6 +94,8 @@ export const submitUsageReport = payload =>
 export const getResource = (id: string): Promise<OrderItemResponse> =>
   getById<OrderItemResponse>('/marketplace-resources/', id);
 
-// tslint:disable-next-line: variable-name
 export const switchPlan = (resource_uuid: string, plan_url: string) =>
   post(`/marketplace-resources/${resource_uuid}/switch_plan/`, {plan: plan_url}).then(response => response.data);
+
+export const terminateResource = (resource_uuid: string) =>
+  post(`/marketplace-resources/${resource_uuid}/terminate/`).then(response => response.data);

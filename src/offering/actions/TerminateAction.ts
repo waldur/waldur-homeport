@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { marketplaceIsVisible } from '@waldur/marketplace/utils';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
 import { Offering } from '../types';
@@ -12,5 +13,6 @@ export default function createAction(): ResourceAction<Offering> {
     destructive: false,
     title: translate('Terminate'),
     validators: [validateOfferingState('OK', 'Erred'), validatePermissions],
+    isVisible: !marketplaceIsVisible(),
   };
 }

@@ -563,6 +563,10 @@ msgstr ""
 msgid "Are you sure you would like to delete project {projectName}?"
 msgstr ""
 
+#: src/marketplace/resources/TerminateDialog.tsx
+msgid "Are you sure you would like to terminate resource?"
+msgstr ""
+
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
@@ -5626,6 +5630,10 @@ msgstr ""
 msgid "Request for a change"
 msgstr ""
 
+#: src/marketplace/resources/TerminateDialog.tsx
+msgid "Request for a termination"
+msgstr ""
+
 #: src/ansible/python-management/effects.ts
 msgid "Request for search for installed libraries in the virtual environments could not be created."
 msgstr ""
@@ -5787,6 +5795,10 @@ msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
 msgid "Resource plan change request has been submitted."
+msgstr ""
+
+#: src/marketplace/resources/store/effects.ts
+msgid "Resource termination request has been submitted."
 msgstr ""
 
 #: src/providers/details/provider-price-list.js
@@ -6653,6 +6665,7 @@ msgstr ""
 #: src/digitalocean/droplet-resize.html
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/marketplace/resources/ChangePlanBody.tsx
+#: src/marketplace/resources/TerminateDialog.tsx
 #: src/openstack/openstack-tenant/actions/change-package-dialog.html
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
@@ -6865,8 +6878,13 @@ msgstr ""
 msgid "Tenant user username"
 msgstr ""
 
+#: src/marketplace/resources/TerminateAction.ts
 #: src/offering/actions/TerminateAction.ts
 msgid "Terminate"
+msgstr ""
+
+#: src/marketplace/resources/TerminateDialog.tsx
+msgid "Terminate resource {resourceName}"
 msgstr ""
 
 #: src/marketplace/orders/OrderStateFilter.tsx
@@ -7555,6 +7573,10 @@ msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
 msgid "Unable to submit plan change request."
+msgstr ""
+
+#: src/marketplace/resources/store/effects.ts
+msgid "Unable to submit resource termination request."
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
