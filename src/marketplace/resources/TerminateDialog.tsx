@@ -41,7 +41,9 @@ export const PureTerminateDialog = (props: TerminateDialogProps) => (
           />
         </>
       }>
-      {translate('Are you sure you would like to terminate resource?')}
+      {translate('Are you sure you would like to terminate resource {resourceName}?', {
+        resourceName: props.resolve.resource.name,
+      })}
     </ModalDialog>
   </form>
 );

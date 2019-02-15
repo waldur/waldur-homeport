@@ -564,7 +564,7 @@ msgid "Are you sure you would like to delete project {projectName}?"
 msgstr ""
 
 #: src/marketplace/resources/TerminateDialog.tsx
-msgid "Are you sure you would like to terminate resource?"
+msgid "Are you sure you would like to terminate resource {resourceName}?"
 msgstr ""
 
 #: src/resource/actions/action-utils-service.js
