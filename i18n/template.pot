@@ -226,7 +226,7 @@ msgid "Add item"
 msgstr ""
 
 #: src/user/keys/KeyCreateButton.tsx
-#: src/user/keys/key-create.html
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Add key"
 msgstr ""
 
@@ -973,7 +973,7 @@ msgstr ""
 #: src/team/add-project-member.html
 #: src/team/add-team-member.html
 #: src/user/hooks/hook-details.html
-#: src/user/keys/key-create.html
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Cancel"
 msgstr ""
 
@@ -3130,7 +3130,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/user/keys/key-create.html
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Key name"
 msgstr ""
 
@@ -5204,7 +5204,7 @@ msgstr ""
 msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
 
-#: src/user/keys/key-create.html
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Public key"
 msgstr ""
 
@@ -5952,6 +5952,10 @@ msgstr ""
 
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "SSH key"
+msgstr ""
+
+#: src/user/keys/KeyRemoveButton.tsx
+msgid "SSH key has been removed."
 msgstr ""
 
 #: src/user/events.ts
@@ -6915,6 +6919,10 @@ msgstr ""
 msgid "Thanks"
 msgstr ""
 
+#: src/user/keys/KeyCreateForm.tsx
+msgid "The key has been created."
+msgstr ""
+
 #: src/azure/common/validators.ts
 msgid "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number"
 msgstr ""
@@ -7072,10 +7080,6 @@ msgstr ""
 #: src/core/validators.ts
 #: src/form/appstore-field-string.html
 msgid "This field is required."
-msgstr ""
-
-#: src/user/keys/key-create.js
-msgid "This field may not be blank."
 msgstr ""
 
 #: src/experts/requests/create/expert-request-create.js
@@ -7291,6 +7295,10 @@ msgstr ""
 
 #: src/invitations/actions/invitation-dialog-service.js
 msgid "Unable to create invitation."
+msgstr ""
+
+#: src/user/keys/KeyCreateForm.tsx
+msgid "Unable to create key."
 msgstr ""
 
 #: src/project/project-providers-service.js
@@ -7538,7 +7546,7 @@ msgid "Unable to register service provider."
 msgstr ""
 
 #: src/user/keys/KeyRemoveButton.tsx
-msgid "Unable to remove SSH key!"
+msgid "Unable to remove SSH key."
 msgstr ""
 
 #: src/marketplace/cart/store/effects.ts

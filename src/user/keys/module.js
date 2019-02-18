@@ -1,4 +1,4 @@
-import keyCreate from './key-create';
+import keyCreate from './KeyCreateForm';
 import keysList from './KeysList';
 import keysService from './keys-service';
 import appstoreFieldSelectSshKey from './appstore-field-select-ssh-key';
