@@ -144,6 +144,7 @@ msgstr ""
 #: src/resource/actions/ActionButtonResource.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
+#: src/user/keys/KeysList.tsx
 #: src/user/support/UserList.tsx
 msgid "Actions"
 msgstr ""
@@ -193,7 +194,6 @@ msgstr ""
 msgid "Add SLURM allocation"
 msgstr ""
 
-#: src/user/keys/key-list.js
 #: src/user/routes.js
 msgid "Add SSH key"
 msgstr ""
@@ -225,6 +225,7 @@ msgstr ""
 msgid "Add item"
 msgstr ""
 
+#: src/user/keys/KeyCreateButton.tsx
 #: src/user/keys/key-create.html
 msgid "Add key"
 msgstr ""
@@ -561,6 +562,10 @@ msgstr ""
 
 #: src/project/ProjectRemoveDialog.tsx
 msgid "Are you sure you would like to delete project {projectName}?"
+msgstr ""
+
+#: src/user/keys/KeyRemoveDialog.tsx
+msgid "Are you sure you would like to delete the key?"
 msgstr ""
 
 #: src/marketplace/resources/TerminateDialog.tsx
@@ -2267,7 +2272,7 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
-#: src/user/keys/key-list.js
+#: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
 msgstr ""
 
@@ -3129,6 +3134,10 @@ msgstr ""
 msgid "Key name"
 msgstr ""
 
+#: src/user/keys/KeyRemoveDialog.tsx
+msgid "Key removal"
+msgstr ""
+
 #: src/jira/project/jira-project-config.js
 msgid "Key should consist of uppercase letters."
 msgstr ""
@@ -3683,14 +3692,6 @@ msgstr ""
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "No"
-msgstr ""
-
-#: src/user/keys/key-list.js
-msgid "No SSH keys found matching filter."
-msgstr ""
-
-#: src/user/keys/key-list.js
-msgid "No SSH keys yet."
 msgstr ""
 
 #: src/resource/summary/ResourceAccessInfo.tsx
@@ -5494,7 +5495,7 @@ msgstr ""
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 #: src/user/hooks/hook-list.js
-#: src/user/keys/key-list.js
+#: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
 msgstr ""
 
@@ -5965,6 +5966,7 @@ msgstr ""
 msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr ""
 
+#: src/user/keys/KeysList.tsx
 #: src/user/routes.js
 msgid "SSH keys"
 msgstr ""
@@ -7133,7 +7135,7 @@ msgstr ""
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/user/keys/key-list.js
+#: src/user/keys/KeysList.tsx
 msgid "Title"
 msgstr ""
 
@@ -7533,6 +7535,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Unable to register service provider."
+msgstr ""
+
+#: src/user/keys/KeyRemoveButton.tsx
+msgid "Unable to remove SSH key!"
 msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
@@ -8248,6 +8254,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/project/ProjectRemoveDialog.tsx
 #: src/resource/summary/ScheduleSummary.tsx
+#: src/user/keys/KeyRemoveDialog.tsx
 msgid "Yes"
 msgstr ""
 
