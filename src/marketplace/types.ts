@@ -66,6 +66,7 @@ export interface Offering {
   uuid?: string;
   thumbnail: string;
   name: string;
+  native_name?: string;
   rating: number;
   order_item_count: number;
   reviews: number;
@@ -87,6 +88,9 @@ export interface Offering {
   state: string;
   scope?: string;
   scope_uuid?: string;
+  created?: string;
+  shared?: boolean;
+  billable?: boolean;
 }
 
 export interface Screenshot {

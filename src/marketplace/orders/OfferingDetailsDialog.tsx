@@ -1,81 +1,58 @@
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Query } from '@waldur/core/Query';
 import { translate } from '@waldur/i18n';
 import { getOffering, getCategory } from '@waldur/marketplace/common/api';
-import { OfferingTabs } from '@waldur/marketplace/details/OfferingTabs';
-import { Offering, Section } from '@waldur/marketplace/types';
+import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
+
+import { getTabs } from '../details/OfferingTabs';
 
 interface OfferingDetailsDialogProps {
   resolve: { offeringUuid: string };
 }
 
-interface OfferingDetailsDialogState {
-  loading: boolean;
-  erred: boolean;
-  offering: Offering;
-  sections: Section[];
-}
-
-class OfferingDetailsDialog extends React.Component<OfferingDetailsDialogProps, OfferingDetailsDialogState> {
-  state: OfferingDetailsDialogState = {
-    loading: true,
-    erred: false,
-    offering: undefined,
-    sections: undefined,
+// tslint:disable-next-line: variable-name
+async function loadData(offering_uuid: string) {
+  const offering = await getOffering(offering_uuid);
+  const category = await getCategory(offering.category_uuid);
+  const sections = category.sections;
+  const tabs = getTabs({offering, sections});
+  return {
+    offering,
+    tabs,
   };
-
-  async componentDidMount() {
-    try {
-      const offering = await getOffering(this.props.resolve.offeringUuid);
-      const category = await getCategory(offering.category_uuid);
-      this.setState({
-        offering,
-        sections: category.sections,
-        loading: false,
-        erred: false,
-      });
-    } catch {
-      this.setState({
-        loading: false,
-        erred: true,
-      });
-    }
-  }
-
-  renderBody() {
-    if (this.state.loading) {
-      return <LoadingSpinner/>;
-    }
-    if (this.state.erred) {
-      return translate('Unable to load offering details');
-    }
-    const { offering, sections } = this.state;
-    return (
-      <>
-        <h3>{offering.name}</h3>
-        <p>
-          {offering.description && (
-            <div className="bs-callout bs-callout-success">
-              {offering.description}
-            </div>
-          )}
-        </p>
-        <OfferingTabs offering={offering} sections={sections}/>
-      </>
-    );
-  }
-
-  render() {
-    return (
-      <ModalDialog title={translate('Offering details')} footer={<CloseDialogButton/>}>
-        {this.renderBody()}
-      </ModalDialog>
-    );
-  }
 }
+
+const OfferingDetailsDialog: React.SFC<OfferingDetailsDialogProps> = props => (
+  <ModalDialog title={translate('Offering details')} footer={<CloseDialogButton/>}>
+    <Query loader={loadData} variables={props.resolve.offeringUuid}>
+      {({ loading, data, error }) => {
+        if (loading) {
+          return <LoadingSpinner/>;
+        }
+        if (error) {
+          return <h3>{translate('Unable to load offering details.')}</h3>;
+        }
+        return (
+          <>
+            <h3>{data.offering.name}</h3>
+            <p>
+              {data.offering.description && (
+                <div className="bs-callout bs-callout-success">
+                  {data.offering.description}
+                </div>
+              )}
+            </p>
+            <OfferingTabsComponent tabs={data.tabs}/>
+          </>
+        );
+      }}
+    </Query>
+  </ModalDialog>
+);
 
 export default connectAngularComponent(OfferingDetailsDialog, ['resolve']);

@@ -5,15 +5,15 @@ import * as Row from 'react-bootstrap/lib/Row';
 import { translate } from '@waldur/i18n';
 import { getCheckoutSummaryComponent } from '@waldur/marketplace/common/registry';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
-import { Offering, Category } from '@waldur/marketplace/types';
+import { Offering } from '@waldur/marketplace/types';
 
 import { OfferingConfigurator } from './OfferingConfigurator';
 import './OfferingDetails.scss';
-import { OfferingTabs } from './OfferingTabs';
+import { OfferingTabsComponent, OfferingTab } from './OfferingTabsComponent';
 
 interface OfferingDetailsProps {
   offering: Offering;
-  category: Category;
+  tabs: OfferingTab[];
 }
 
 export const OfferingDetails = (props: OfferingDetailsProps) => {
@@ -42,10 +42,7 @@ export const OfferingDetails = (props: OfferingDetailsProps) => {
           }
         </Col>
       </Row>
-      <OfferingTabs
-        offering={props.offering}
-        sections={props.category.sections}
-      />
+      <OfferingTabsComponent tabs={props.tabs}/>
     </>
   );
 };

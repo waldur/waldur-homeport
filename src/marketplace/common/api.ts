@@ -91,7 +91,7 @@ export const generateServiceProviderSecretCode = id =>
 export const submitUsageReport = payload =>
   post(`/marketplace-component-usages/set_usage/`, payload).then(response => response.data);
 
-export const getResource = (id: string): Promise<OrderItemResponse> =>
+export const getResource = (id: string) =>
   getById<OrderItemResponse>('/marketplace-resources/', id);
 
 export const switchPlan = (resource_uuid: string, plan_url: string) =>
