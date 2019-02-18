@@ -65,6 +65,10 @@ export function getProviderType(offeringType) {
   return REGISTRY[offeringType].providerType;
 }
 
+export function getLabel(offeringType) {
+  return REGISTRY[offeringType].label;
+}
+
 export function getAttributes(offeringType) {
   const func = REGISTRY[offeringType].attributes;
   return func ? func() : [];

@@ -70,7 +70,7 @@ export default function routes($stateProvider) {
       template: '<marketplace-offering></marketplace-offering>',
       parent: 'project',
       data: {
-        pageTitle: gettext('Product details'),
+        pageTitle: gettext('Offering details'),
         feature: 'marketplace',
       }
     })
@@ -80,7 +80,17 @@ export default function routes($stateProvider) {
       template: '<marketplace-offering></marketplace-offering>',
       parent: 'organization',
       data: {
-        pageTitle: gettext('Product details'),
+        pageTitle: gettext('Offering details'),
+        feature: 'marketplace',
+      }
+    })
+
+    .state('marketplace-offering-details', {
+      url: 'marketplace-offering-details/:offering_uuid/',
+      template: '<marketplace-offering-details-page></marketplace-offering-details-page>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('Offering details'),
         feature: 'marketplace',
       }
     })

@@ -1,83 +1,50 @@
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Query } from '@waldur/core/Query';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
-import { OfferingTabs } from '@waldur/marketplace/details/OfferingTabs';
+import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
 import { OrderItemDetails } from '@waldur/marketplace/orders/OrderItemDetails';
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
-import { Offering, Category } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-interface OrderItemDetailsContainerState {
-  orderItem: OrderItemResponse;
-  offering: Offering;
-  category: Category;
-  loading: boolean;
-  loaded: boolean;
-}
+import { getTabs } from '../details/OfferingTabs';
 
-class OrderItemDetailsContainer extends React.Component<undefined, OrderItemDetailsContainerState> {
-  state = {
-    orderItem: null,
-    offering: null,
-    category: null,
-    loading: true,
-    loaded: false,
+// tslint:disable-next-line: variable-name
+async function loadData(order_item_uuid) {
+  const orderItem = await api.getOrderItem(order_item_uuid);
+  const offering = await api.getOffering(orderItem.offering_uuid);
+  const category = await api.getCategory(offering.category_uuid);
+  const sections = category.sections;
+  const tabs = getTabs({offering, sections});
+  return {
+    orderItem,
+    offering,
+    tabs,
   };
-
-  async loadData() {
-    try {
-      const orderItemUuid = $state.params.order_item_uuid;
-      const orderItem = await api.getOrderItem(orderItemUuid);
-      const offering = await api.getOffering(orderItem.offering_uuid);
-      const category = await api.getCategory(offering.category_uuid);
-      this.setState({
-        orderItem,
-        offering,
-        category,
-        loading: false,
-        loaded: true,
-      });
-    } catch (error) {
-      this.setState({
-        loading: false,
-        loaded: false,
-      });
-    }
-  }
-
-  componentDidMount() {
-    this.loadData();
-  }
-
-  render() {
-    if (this.state.loading) {
-      return <LoadingSpinner/>;
-    }
-
-    if (!this.state.loaded) {
-      return (
-        <h3 className="text-center">
-          {translate('Unable to get order item.')}
-        </h3>
-      );
-    }
-
-    return (
-      <>
-        <OrderItemDetails
-          orderItem={this.state.orderItem}
-          offering={this.state.offering}
-        />
-        <OfferingTabs
-          offering={this.state.offering}
-          sections={this.state.category.sections}
-        />
-      </>
-    );
-  }
 }
+
+const OrderItemDetailsContainer: React.SFC<{}> = () => (
+  <Query loader={loadData} variables={$state.params.order_item_uuid}>
+    {({ loading, data, error }) => {
+      if (loading) {
+        return <LoadingSpinner/>;
+      }
+      if (error) {
+        return <h3>{translate('Unable to get order item.')}</h3>;
+      }
+      return (
+        <>
+          <OrderItemDetails
+            orderItem={data.orderItem}
+            offering={data.offering}
+          />
+          <OfferingTabsComponent tabs={data.tabs}/>
+        </>
+      );
+    }}
+  </Query>
+);
 
 export default connectAngularComponent(OrderItemDetailsContainer);

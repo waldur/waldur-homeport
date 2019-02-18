@@ -90,6 +90,10 @@ msgstr ""
 msgid "Access token"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingHeader.tsx
+msgid "Accessible to all customers."
+msgstr ""
+
 #: src/auth/auth-activation.html
 msgid "Account activation"
 msgstr ""
@@ -135,6 +139,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
+#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/resources/PlanUsageList.tsx
 #: src/marketplace/resources/ProjectResourcesList.tsx
@@ -166,6 +171,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/PlanUsageList.tsx
 msgid "Active plan count"
 msgstr ""
@@ -835,6 +841,10 @@ msgstr ""
 msgid "Billing details"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingHeader.tsx
+msgid "Billing enabled"
+msgstr ""
+
 #: src/marketplace/offerings/plan/PlanForm.tsx
 msgid "Billing period"
 msgstr ""
@@ -1010,6 +1020,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
+#: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/openstack/openstack-tenant/openstack-template.js
 msgid "Category"
 msgstr ""
@@ -1458,6 +1469,7 @@ msgstr ""
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
@@ -3219,6 +3231,7 @@ msgstr ""
 
 #: src/analytics/utils.ts
 #: src/dashboard/chart.ts
+#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/PlanUsageList.tsx
 msgid "Limit"
 msgstr ""
@@ -3346,7 +3359,7 @@ msgstr ""
 msgid "Management"
 msgstr ""
 
-#: src/marketplace/details/DetailsPage.tsx
+#: src/marketplace/details/utils.ts
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Marketplace"
@@ -3522,11 +3535,13 @@ msgstr ""
 msgid "Motivation"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "My offerings"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/sidebar.js
 msgid "My services"
 msgstr ""
@@ -3557,6 +3572,8 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/resources/ChangePlanLoader.tsx
@@ -4033,6 +4050,7 @@ msgstr ""
 #: src/marketplace/details/OverviewTab.tsx
 #: src/marketplace/orders/OfferingDetailsButton.tsx
 #: src/marketplace/orders/OfferingDetailsDialog.tsx
+#: src/marketplace/routes.js
 msgid "Offering details"
 msgstr ""
 
@@ -4345,7 +4363,8 @@ msgstr ""
 #: src/billing/invoice-header.html
 #: src/customer/workspace/customer-workspace.js
 #: src/experts/requests/details/expert-request-details.js
-#: src/marketplace/details/DetailsPage.tsx
+#: src/marketplace/details/utils.ts
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 msgid "Organization workspace"
 msgstr ""
 
@@ -4558,6 +4577,7 @@ msgid "Plan #{index}"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/routes.js
 msgid "Plan capacity"
 msgstr ""
@@ -4930,10 +4950,6 @@ msgstr ""
 msgid "Product configuration"
 msgstr ""
 
-#: src/marketplace/routes.js
-msgid "Product details"
-msgstr ""
-
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/events/EventDetailsTable.tsx
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
@@ -5055,7 +5071,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
 #: src/appstore/appstore-store.js
 #: src/experts/requests/details/expert-request-details.js
-#: src/marketplace/details/DetailsPage.tsx
+#: src/marketplace/details/utils.ts
 #: src/offering/offering-details.js
 #: src/project/project-workspace.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
@@ -5208,6 +5224,7 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Public offerings"
@@ -5224,6 +5241,10 @@ msgstr ""
 #: src/appstore/appstore-store.html
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "Purchase"
+msgstr ""
+
+#: src/marketplace/offerings/details/OfferingHeader.tsx
+msgid "Purchase and usage is invoiced."
 msgstr ""
 
 #: src/configs/base-config.js
@@ -6364,6 +6385,10 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingHeader.tsx
+msgid "Shared"
+msgstr ""
+
 #: src/marketplace/cart/ShoppingCart.tsx
 msgid "Shopping cart is empty. You should add items to cart first."
 msgstr ""
@@ -6576,6 +6601,7 @@ msgstr ""
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/experts/requests/list/expert-request-project-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrderStateFilter.tsx
@@ -7229,6 +7255,7 @@ msgstr ""
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
+#: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/resources/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
@@ -7472,11 +7499,9 @@ msgstr ""
 msgid "Unable to load marketplace offerings."
 msgstr ""
 
-#: src/marketplace/orders/OfferingDetailsDialog.tsx
-msgid "Unable to load offering details"
-msgstr ""
-
 #: src/marketplace/details/DetailsPage.tsx
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/orders/OfferingDetailsDialog.tsx
 msgid "Unable to load offering details."
 msgstr ""
 
@@ -8561,6 +8586,7 @@ msgstr ""
 msgid "of"
 msgstr ""
 
+#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/PlanUsageList.tsx
 msgid "offerings"
 msgstr ""
@@ -8575,6 +8601,10 @@ msgstr ""
 
 #: src/experts/requests/details/expert-request-details.js
 msgid "owner"
+msgstr ""
+
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+msgid "plans"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx

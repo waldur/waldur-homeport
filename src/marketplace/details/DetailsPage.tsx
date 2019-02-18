@@ -1,96 +1,40 @@
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ngInjector } from '@waldur/core/services';
+import { Query } from '@waldur/core/Query';
+import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { getOffering, getCategory } from '@waldur/marketplace/common/api';
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { getOffering, getCategory } from '../common/api';
 import { OfferingDetails } from './OfferingDetails';
+import { getTabs } from './OfferingTabs';
+import { updateBreadcrumbs } from './utils';
 
-class OfferingDetailsPage extends React.Component {
-  state = {
-    offering: null,
-    category: null,
-    loading: true,
-    erred: false,
-  };
-
-  componentDidMount() {
-    this.fetchOffering();
-  }
-
-  async fetchOffering() {
-    const $stateParams = ngInjector.get('$stateParams');
-    try {
-      const offering = await getOffering($stateParams.offering_uuid);
-      const category = await getCategory(offering.category_uuid);
-      this.setState({offering, category, loading: false, erred: false});
-      this.updateBreadcrumbs(offering);
-    } catch (error) {
-      this.setState({loading: false, erred: true});
-    }
-  }
-
-  updateBreadcrumbs(offering) {
-    const $timeout = ngInjector.get('$timeout');
-    const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-    const WorkspaceService = ngInjector.get('WorkspaceService');
-    const titleService = ngInjector.get('titleService');
-
-    $timeout(() => {
-      BreadcrumbsService.activeItem = offering.name;
-      const data = WorkspaceService.getWorkspace();
-      if (data.workspace === 'organization') {
-        BreadcrumbsService.items = [
-          {
-            label: translate('Organization workspace'),
-            state: 'organization.details',
-          },
-          {
-            label: translate('Marketplace'),
-            state: 'marketplace-landing-customer',
-          },
-          {
-            label: offering.category_title,
-            state: 'marketplace-category-customer',
-            params: {
-              category_uuid: offering.category_uuid,
-            },
-          },
-        ];
-      } else {
-        BreadcrumbsService.items = [
-          {
-            label: translate('Project workspace'),
-            state: 'project.details',
-          },
-          {
-            label: translate('Marketplace'),
-            state: 'marketplace-landing',
-          },
-          {
-            label: offering.category_title,
-            state: 'marketplace-category',
-            params: {
-              category_uuid: offering.category_uuid,
-            },
-          },
-        ];
-      }
-      titleService.setTitle(offering.name);
-    });
-  }
-
-  render() {
-    if (this.state.loading) {
-      return <LoadingSpinner/>;
-    }
-    if (this.state.erred) {
-      return translate('Unable to load offering details.');
-    }
-    return <OfferingDetails offering={this.state.offering} category={this.state.category}/>;
-  }
+// tslint:disable-next-line: variable-name
+async function loadData(offering_uuid: string) {
+  const offering = await getOffering(offering_uuid);
+  const category = await getCategory(offering.category_uuid);
+  const sections = category.sections;
+  const tabs = getTabs({offering, sections});
+  updateBreadcrumbs(offering);
+  return { offering, tabs };
 }
+
+const OfferingDetailsPage: React.SFC<{}> = () => (
+  <Query loader={loadData} variables={$state.params.offering_uuid}>
+    {({ loading, data, error }) => {
+      if (loading) {
+        return <LoadingSpinner/>;
+      }
+      if (error) {
+        return <h3>{translate('Unable to load offering details.')}</h3>;
+      }
+      return (
+        <OfferingDetails offering={data.offering} tabs={data.tabs}/>
+      );
+    }}
+  </Query>
+);
 
 export default connectAngularComponent(OfferingDetailsPage);
