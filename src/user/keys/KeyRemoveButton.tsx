@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { showError } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/coreSaga';
 import ActionButton from '@waldur/table-react/ActionButton';
 import { deleteEntity } from '@waldur/table-react/actions';
 
@@ -15,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
   showConfirmDialog: (action: () => void) => dispatch(showKeyRemoveConfirmation(action)),
   removeEntity: (id: string) => dispatch(deleteEntity(constants.keysListTable, id)),
   showError: (message: string) => dispatch(showError(message)),
+  showSuccess: (message: string) => dispatch(showSuccess(message)),
 });
 
 interface OwnProps {
@@ -25,6 +26,7 @@ interface DispatchProps {
   showConfirmDialog: (action: () => void) => void;
   removeEntity: (id: string) => void;
   showError: (message: string) => void;
+  showSuccess: (message: string) => void;
 }
 
 interface KeyRemoveButtonState {
@@ -43,9 +45,9 @@ class KeyRemoveButtonComponent extends React.Component<OwnProps & DispatchProps 
       this.setState({removing: true});
       await removeKey(id);
       this.props.removeEntity(id);
-      this.setState({removing: false});
+      this.props.showSuccess(this.props.translate('SSH key has been removed.'));
     } catch (e) {
-      this.props.showError(this.props.translate('Unable to remove SSH key!'));
+      this.props.showError(this.props.translate('Unable to remove SSH key.'));
     }
   }
 

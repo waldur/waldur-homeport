@@ -8,10 +8,15 @@ interface LinkProps {
   state: string;
   params?: {[key: string]: string};
   className?: string;
+  target?: string;
 }
 
 export const Link = (props: LinkProps) => (
-  <a href={$state.href(props.state, props.params)} className={props.className}>
+  <a
+    href={$state.href(props.state, props.params)}
+    className={props.className}
+    target={props.target}
+  >
     {props.label || props.children}
   </a>
 );
