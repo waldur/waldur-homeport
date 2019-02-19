@@ -4,9 +4,10 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
 import { translate } from '@waldur/i18n';
 
-import { getOffering } from '../common/api';
-import { PlanUnit } from '../orders/types';
-import { Offering } from '../types';
+import { getOffering } from '@waldur/marketplace/common/api';
+import { PlanUnit } from '@waldur/marketplace/orders/types';
+import { Offering } from '@waldur/marketplace/types';
+
 import { ResourceUsageForm } from './ResourceUsageForm';
 
 export interface ResourceUsageContainerProps {

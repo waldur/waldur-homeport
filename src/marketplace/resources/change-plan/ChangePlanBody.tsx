@@ -7,13 +7,13 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { QueryChildProps } from '@waldur/core/Query';
 import { SubmitButton } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
+import { orderCanBeApproved } from '@waldur/marketplace/orders/store/selectors';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-import { orderCanBeApproved } from '../orders/store/selectors';
+import { switchPlan } from '../store/constants';
 import { ChangePlanComponent } from './ChangePlanComponent';
-import { FetchedData } from './ChangePlanLoader';
-import { switchPlan } from './store/constants';
+import { FetchedData } from './utils';
 
 const FORM_ID = 'marketplaceChangePlan';
 

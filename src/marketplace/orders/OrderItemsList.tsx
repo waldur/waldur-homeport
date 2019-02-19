@@ -7,12 +7,11 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/OrderItemDetailsLink';
+import { ResourceCreateUsageButton } from '@waldur/marketplace/resources/usage/ResourceCreateUsageButton';
+import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
-
-import { ResourceCreateUsageButton } from '../resources/ResourceCreateUsageButton';
-import { ResourceShowUsageButton } from '../resources/ResourceShowUsageButton';
 
 export const TableComponent = props => {
   const columns = [

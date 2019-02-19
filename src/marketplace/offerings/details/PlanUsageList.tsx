@@ -2,7 +2,7 @@ import * as React from 'react';
 import { compose } from 'redux';
 
 import { withTranslation, translate } from '@waldur/i18n';
-import { PlanUsageButton } from '@waldur/marketplace/resources/PlanUsageButton';
+import { PlanUsageButton } from '@waldur/marketplace/resources/plan-usage/PlanUsageButton';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 interface PlanUsageListProps {

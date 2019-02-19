@@ -11,10 +11,10 @@ import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
+import { ResourceDetailsLink } from '../ResourceDetailsLink';
+import { Resource } from '../types';
 import { CategoryColumnField } from './CategoryColumnField';
-import { ResourceDetailsLink } from './ResourceDetailsLink';
 import { ResourceStateField } from './ResourceStateField';
-import { Resource } from './types';
 
 interface FieldProps {
   row: Resource;
