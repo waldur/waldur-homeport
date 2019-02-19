@@ -28,11 +28,7 @@ export function getResourceState(resource: Resource): StateIndicatorProps {
       context.variant = 'plain';
     }
     context.label = runtimeState || resource.state;
-    if (resource.service_settings_state.toLowerCase() !== 'erred') {
-      context.variant = context.variant || 'primary';
-      context.tooltip = translate('Resource is in sync');
-      showRuntimeState = true;
-    } else {
+    if (resource.service_settings_state && resource.service_settings_state.toLowerCase() === 'erred') {
       const errorMessage = resource.service_settings_error_message;
       context.variant = 'warning';
       context.tooltip = translate('Service settings of this resource are in state erred.');
@@ -40,6 +36,10 @@ export function getResourceState(resource: Resource): StateIndicatorProps {
         messageSuffix = translate('error message: {errorMessage}', { errorMessage });
         context.tooltip += (', ' + messageSuffix);
       }
+    } else {
+      context.variant = context.variant || 'primary';
+      context.tooltip = translate('Resource is in sync');
+      showRuntimeState = true;
     }
   } else if (state === 'erred') {
     context.variant = 'warning';

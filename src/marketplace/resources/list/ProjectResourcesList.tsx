@@ -5,39 +5,25 @@ import { compose } from 'redux';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { CategoryColumn } from '@waldur/marketplace/types';
-import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
-import { ResourceSummaryButton } from '@waldur/resource/summary/ResourceSummaryButton';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
+import { Resource } from '../types';
 import { CategoryColumnField } from './CategoryColumnField';
-import { ResourceDetailsLink } from './ResourceDetailsLink';
+import { ResourceActionsButton } from './ResourceActionsButton';
+import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
-import { Resource } from './types';
 
 interface FieldProps {
   row: Resource;
 }
 
-const NameField = ({row}: FieldProps) => {
-  const label = row.attributes.name || row.offering_name;
-  if (row.resource_type && row.resource_uuid) {
-    return (
-      <ResourceDetailsLink item={row}>
-        {label}
-      </ResourceDetailsLink>
-    );
-  } else {
-    return label;
-  }
-};
-
 export const TableComponent = props => {
   const columns = [
     {
       title: translate('Name'),
-      render: NameField,
+      render: ResourceNameField,
     },
     {
       title: translate('Provider'),
@@ -51,10 +37,6 @@ export const TableComponent = props => {
       title: translate('State'),
       render: ResourceStateField,
     },
-    {
-      title: translate('Actions'),
-      render: renderRowActions,
-    },
   ];
 
   props.columns.map((column: CategoryColumn) => {
@@ -62,6 +44,11 @@ export const TableComponent = props => {
       title: column.title,
       render: ({row}) => CategoryColumnField({ row, column }),
     });
+  });
+
+  columns.push({
+    title: translate('Actions'),
+    render: ResourceActionsButton,
   });
 
   return (
@@ -72,13 +59,6 @@ export const TableComponent = props => {
     />
   );
 };
-
-const renderRowActions = ({row}: FieldProps) => (
-  <span className="btn-group">
-    <ActionButtonResource row={row}/>
-    <ResourceSummaryButton resource={{...row, url: row.scope}}/>
-  </span>
-);
 
 const TableOptions = {
   table: 'ProjectResourcesList',

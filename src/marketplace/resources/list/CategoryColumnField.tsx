@@ -2,9 +2,10 @@ import * as React from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
 
-import { CategoryColumn } from '../types';
-import { ResourceDetailsLink } from './ResourceDetailsLink';
-import { Resource } from './types';
+import { CategoryColumn } from '@waldur/marketplace/types';
+
+import { ResourceDetailsLink } from '../ResourceDetailsLink';
+import { Resource } from '../types';
 
 interface CategoryColumnFieldProps {
   row: Resource;

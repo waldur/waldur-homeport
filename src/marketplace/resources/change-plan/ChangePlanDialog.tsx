@@ -4,7 +4,7 @@ import { Query } from '@waldur/core/Query';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { DialogBody } from './ChangePlanBody';
-import { loadData } from './ChangePlanLoader';
+import { loadData } from './utils';
 
 interface ChangePlanDialogProps {
   resolve: {

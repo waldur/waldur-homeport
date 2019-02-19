@@ -4,7 +4,7 @@ import { pick } from '@waldur/core/utils';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource as ResourceType } from '@waldur/resource/types';
 
-import { Resource } from './types';
+import { Resource } from '../types';
 
 const pickResource = pick(['action', 'action_details', 'state', 'runtime_state']);
 

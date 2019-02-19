@@ -5,13 +5,13 @@ import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
+import { PlanUnit } from '@waldur/marketplace/orders/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { PlanUnit } from '../orders/types';
+import { submitUsage } from '../store/constants';
 import { ResourceUsageContainer } from './ResourceUsageContainer';
-import { submitUsage } from './store/constants';
 
 interface ResourceCreateUsageDialogProps {
   resolve: {

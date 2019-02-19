@@ -1,11 +1,11 @@
-import marketplaceProjectResourcesList from './ProjectResourcesContainer';
-import marketplaceResourceShowUsageButton from './ResourceShowUsageButton';
-import marketplaceResourceShowUsageDialog from './ResourceShowUsageDialog';
-import marketplaceResourceCreateUsageDialog from './ResourceCreateUsageDialog';
-import marketplaceResourcePlanChangeDialog from './ChangePlanDialog';
-import marketplacePlanUsagesList from './PlanUsageContainer';
-import marketplacePlanUsageDialog from './PlanUsageDialog';
-import marketplaceResourceTerminateDialog from './TerminateContainer';
+import marketplaceProjectResourcesList from './list/ProjectResourcesContainer';
+import marketplaceResourceShowUsageButton from './usage/ResourceShowUsageButton';
+import marketplaceResourceShowUsageDialog from './usage/ResourceShowUsageDialog';
+import marketplaceResourceCreateUsageDialog from './usage/ResourceCreateUsageDialog';
+import marketplaceResourcePlanChangeDialog from './change-plan/ChangePlanDialog';
+import marketplacePlanUsagesList from './plan-usage/PlanUsageContainer';
+import marketplacePlanUsageDialog from './plan-usage/PlanUsageDialog';
+import marketplaceResourceTerminateDialog from './terminate/TerminateContainer';
 
 export default module => {
   module.component('marketplaceProjectResourcesList', marketplaceProjectResourcesList);

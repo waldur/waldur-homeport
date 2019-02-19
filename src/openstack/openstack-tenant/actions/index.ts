@@ -1,4 +1,4 @@
-import changePlanAction from '@waldur/marketplace/resources/ChangePlanAction';
+import changePlanAction from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
 import { createPullAction } from '@waldur/resource/actions/base';
 
 import assignPackageAction from './AssignPackageAction';

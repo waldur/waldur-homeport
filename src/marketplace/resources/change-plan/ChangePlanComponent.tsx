@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import { ChoicesTable } from '@waldur/form-react/ChoicesTable';
 import { translate } from '@waldur/i18n';
 
-import { FetchedData } from './ChangePlanLoader';
+import { FetchedData } from './utils';
 
 export const ChangePlanComponent = (props: FetchedData) => (
   <div>

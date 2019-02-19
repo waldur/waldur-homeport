@@ -1,10 +1,9 @@
 import { defaultCurrency } from '@waldur/core/services';
 import { SelectDialogFieldColumn, SelectDialogFieldChoice } from '@waldur/form-react/SelectDialogField';
 import { translate } from '@waldur/i18n';
-
-import { getOffering, getResource } from '../common/api';
-import { OrderItemResponse } from '../orders/types';
-import { Offering, Plan } from '../types';
+import { getOffering, getResource } from '@waldur/marketplace/common/api';
+import { OrderItemResponse } from '@waldur/marketplace/orders/types';
+import { Offering, Plan } from '@waldur/marketplace/types';
 
 export interface FetchedData {
   resource: OrderItemResponse;
