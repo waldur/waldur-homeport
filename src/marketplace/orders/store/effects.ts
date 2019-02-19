@@ -8,20 +8,33 @@ import { showError, showSuccess } from '@waldur/store/coreSaga';
 import * as actions from './actions';
 import * as constants from './constants';
 
-function* setOrderState(action) {
+function* approveOrder(action) {
   const { orderUuid } = action.payload;
   try {
-    yield put(actions.setOrderStateChangeStatus({processing: true}));
+    yield put(actions.setOrderStateChangeStatus({approving: true}));
     yield call(api.approveOrder, orderUuid);
     yield put(showSuccess(translate('Order has been approved.')));
-    yield put(actions.setOrderStateChangeStatus({processing: false, processed: true}));
   } catch (error) {
-    yield put(actions.setOrderStateChangeStatus({processing: false, processed: false}));
     const errorMessage = `${translate('Unable to approve order.')} ${format(error)}`;
     yield put(showError(errorMessage));
   }
+  yield put(actions.setOrderStateChangeStatus({approving: false}));
+}
+
+function* rejectOrder(action) {
+  const { orderUuid } = action.payload;
+  try {
+    yield put(actions.setOrderStateChangeStatus({rejecting: true}));
+    yield call(api.rejectOrder, orderUuid);
+    yield put(showSuccess(translate('Order has been rejected.')));
+  } catch (error) {
+    const errorMessage = `${translate('Unable to reject order.')} ${format(error)}`;
+    yield put(showError(errorMessage));
+  }
+  yield put(actions.setOrderStateChangeStatus({rejecting: false}));
 }
 
 export default function*() {
-  yield takeEvery(constants.APPROVE_ORDER, setOrderState);
+  yield takeEvery(constants.APPROVE_ORDER, approveOrder);
+  yield takeEvery(constants.REJECT_ORDER, rejectOrder);
 }

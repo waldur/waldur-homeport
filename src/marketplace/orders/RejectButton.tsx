@@ -3,23 +3,22 @@ import * as React from 'react';
 import { translate } from '@waldur/i18n';
 import { wrapTooltip } from '@waldur/table-react/ActionButton';
 
-interface ApproveButtonProps {
+interface RejectButtonProps {
   onClick: () => void;
   submitting?: boolean;
   tooltip?: string;
-  className?: string;
 }
 
-export const ApproveButton: React.SFC<ApproveButtonProps> = ({onClick, submitting, tooltip, className}: ApproveButtonProps) =>
+export const RejectButton = ({onClick, submitting, tooltip}: RejectButtonProps) =>
   wrapTooltip(tooltip, (
     <button
       type="button"
-      className={className || 'btn btn-primary btn-sm'}
+      className="btn btn-danger btn-sm"
       onClick={onClick}
       disabled={submitting}>
-        <i className="fa fa-check"/>
+        <i className="fa fa-ban"/>
         {' '}
-        {translate('Approve')}
+        {translate('Reject')}
         {' '}
         {submitting && <i className="fa fa-spinner fa-spin m-r-xs"/>}
     </button>

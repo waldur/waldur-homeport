@@ -11,12 +11,14 @@ import { OrderSummary } from '@waldur/marketplace/orders/OrderSummary';
 import { ApproveButton } from './ApproveButton';
 import { Order } from './Order';
 import { OrderSteps } from './OrderSteps';
+import { RejectButton } from './RejectButton';
 import { State } from './types';
 import { StatusChange } from './types';
 import { matchState } from './utils';
 
 interface OrderDetailsProps extends TranslateProps {
   approveOrder: (orderUuid: string) => void;
+  rejectOrder: (orderUuid: string) => void;
   stateChangeStatus: StatusChange;
   orderCanBeApproved?: boolean;
 }
@@ -74,6 +76,10 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
     this.props.approveOrder($state.params.order_uuid);
   }
 
+  rejectOrder = () => {
+    this.props.rejectOrder($state.params.order_uuid);
+  }
+
   render() {
     if (this.state.loading) {
       return <LoadingSpinner/>;
@@ -106,11 +112,18 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
               {this.props.translate('Refresh')}
             </button>
             {this.renderApproveButton() && (
-              <ApproveButton
-                submitting={this.props.stateChangeStatus.processing}
-                onClick={this.approveOrder}
-                tooltip={this.props.translate('You need approval to finish purchasing of services.')}
-              />
+              <>
+                <ApproveButton
+                  submitting={this.props.stateChangeStatus.approving}
+                  onClick={this.approveOrder}
+                  tooltip={this.props.translate('You need approval to finish purchasing of services.')}
+                  className="btn btn-primary btn-sm m-r-xs"
+                />
+                <RejectButton
+                  submitting={this.props.stateChangeStatus.rejecting}
+                  onClick={this.rejectOrder}
+                />
+              </>
             )}
           </div>
         </Col>

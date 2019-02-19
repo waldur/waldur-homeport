@@ -5,8 +5,8 @@ export type OrderState = 'Configure' | 'Approve' | 'Review';
 export type PlanUnit = 'month' | 'half_month' | 'day';
 
 export interface StatusChange {
-  processing: boolean;
-  processed: boolean;
+  approving: boolean;
+  rejecting: boolean;
 }
 
 export interface OrderItemResponse {

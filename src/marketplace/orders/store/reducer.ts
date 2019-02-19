@@ -2,8 +2,8 @@ import * as constants from './constants';
 
 const INITIAL_STATE = {
   stateChangeStatus: {
-    processing: false,
-    processed: false,
+    approving: false,
+    rejecting: false,
   },
 };
 

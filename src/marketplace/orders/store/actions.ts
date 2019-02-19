@@ -7,6 +7,13 @@ export const approveOrder = (orderUuid: string) => ({
   },
 });
 
+export const rejectOrder = (orderUuid: string) => ({
+  type: constants.REJECT_ORDER,
+  payload: {
+    orderUuid,
+  },
+});
+
 export const setOrderStateChangeStatus = status => ({
   type: constants.SET_ORDER_STATE_CHANGE_STATUS,
   payload: {

@@ -4237,6 +4237,10 @@ msgstr ""
 msgid "Order has been approved."
 msgstr ""
 
+#: src/marketplace/orders/store/effects.ts
+msgid "Order has been rejected."
+msgstr ""
+
 #: src/marketplace/cart/store/effects.ts
 msgid "Order has been submitted."
 msgstr ""
@@ -5467,6 +5471,10 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "Regular user"
+msgstr ""
+
+#: src/marketplace/orders/RejectButton.tsx
+msgid "Reject"
 msgstr ""
 
 #: src/jira/issue/IssueCreateDialog.tsx
@@ -7572,6 +7580,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Unable to register service provider."
+msgstr ""
+
+#: src/marketplace/orders/store/effects.ts
+msgid "Unable to reject order."
 msgstr ""
 
 #: src/user/keys/KeyRemoveButton.tsx
