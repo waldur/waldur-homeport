@@ -64,6 +64,9 @@ export const getOrderItem = id =>
 export const approveOrder = (orderUuid: string) =>
   post(`/marketplace-orders/${orderUuid}/approve/`).then(response => response.data);
 
+export const rejectOrder = (orderUuid: string) =>
+  post(`/marketplace-orders/${orderUuid}/reject/`).then(response => response.data);
+
 export const getCustomerList = (params?: {}) =>
   getList<Customer>('/customers/', params);
 
