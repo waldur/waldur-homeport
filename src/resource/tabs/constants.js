@@ -8,12 +8,18 @@ const TABS = {
     component: 'resourceIssues',
     feature: 'support',
   },
+  orderItems: {
+    heading: gettext('Order items'),
+    component: 'marketplaceResourceOrderItems',
+    feature: 'marketplace',
+  },
 };
 
 export const DEFAULT_RESOURCE_TABS = {
   order: [
     'issues',
     'events',
+    'orderItems',
   ],
   options: TABS
 };

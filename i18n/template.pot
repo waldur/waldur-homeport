@@ -1487,6 +1487,7 @@ msgstr ""
 #: src/marketplace/orders/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/ResourceOrderItems.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 msgid "Created at"
 msgstr ""
@@ -2593,6 +2594,10 @@ msgstr ""
 
 #: src/issues/request-service-button.html
 msgid "I want another service"
+msgstr ""
+
+#: src/marketplace/orders/ResourceOrderItems.tsx
+msgid "ID"
 msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
@@ -4250,6 +4255,8 @@ msgid "Order item details"
 msgstr ""
 
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/offering/OfferingTabs.tsx
+#: src/resource/tabs/constants.js
 msgid "Order items"
 msgstr ""
 
@@ -5811,6 +5818,10 @@ msgstr ""
 msgid "Resource is monitored using Zabbix."
 msgstr ""
 
+#: src/marketplace/orders/ResourceOrderItems.tsx
+msgid "Resource is not connected to the marketplace yet."
+msgstr ""
+
 #: src/resource/monitoring/ZabbixHostCreateButton.tsx
 msgid "Resource is not monitored yet."
 msgstr ""
@@ -6614,6 +6625,7 @@ msgstr ""
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrderStateFilter.tsx
 #: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/ResourceOrderItems.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
@@ -7265,6 +7277,7 @@ msgstr ""
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/orders/ResourceOrderItems.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
@@ -8605,6 +8618,10 @@ msgstr ""
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "offerings"
+msgstr ""
+
+#: src/marketplace/orders/ResourceOrderItems.tsx
+msgid "order items"
 msgstr ""
 
 #: src/navigation/workspace/select-workspace-dialog.html
