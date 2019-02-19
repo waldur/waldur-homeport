@@ -1,3 +1,4 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -10,17 +11,23 @@ import { connectAngularComponent } from '@waldur/store/connect';
 interface PureResourceSummaryButtonProps extends TranslateProps {
   resource: BaseResource;
   showDetailsModal(): void;
+  disabled?: boolean;
 }
 
 export const PureResourceSummaryButton = (props: PureResourceSummaryButtonProps) => {
-  const { showDetailsModal, translate } = props;
+  const { showDetailsModal, translate, disabled } = props;
   return (
-    <div className="btn btn-default btn-sm" onClick={showDetailsModal}>{translate('Details')}</div>
+    <div
+      className={classNames({disabled}, 'btn btn-default btn-sm')}
+      onClick={showDetailsModal}>
+      {translate('Details')}
+    </div>
   );
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  showDetailsModal: (): void => dispatch(openModalDialog('resource-summary-modal', { resolve: { url: ownProps.resource.url } })),
+  showDetailsModal: (): void => dispatch(openModalDialog(
+    'resource-summary-modal', { resolve: { url: ownProps.resource.url } })),
 });
 
 const enhance = compose(
