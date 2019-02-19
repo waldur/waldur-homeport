@@ -26,7 +26,7 @@ const PlanDescriptionField = props => (
     name={`${props.plan}.description`}
     component="textarea"
     rows="5"
-    maxlength="500"
+    maxLength="500"
     className="form-control"
   />
 );
