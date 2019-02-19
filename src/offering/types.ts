@@ -21,4 +21,5 @@ export interface Offering {
   issue_description: string;
   report: object;
   [key: string]: any;
+  marketplace_resource_uuid?: string;
 }

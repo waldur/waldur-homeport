@@ -18,7 +18,11 @@ export const TableComponent = props => {
     {
       title: translate('Offering'),
       render: ({row}) => (
-        <OrderItemDetailsLink order_item_uuid={row.uuid} customer_uuid={row.customer_uuid}>
+        <OrderItemDetailsLink
+          order_item_uuid={row.uuid}
+          customer_uuid={row.customer_uuid}
+          project_uuid={row.project_uuid}
+        >
           {row.offering_name}
         </OrderItemDetailsLink>
       ),
