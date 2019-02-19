@@ -15,8 +15,16 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
     <thead>
       <tr>
         <th>{/* Name */}</th>
-        <th>{props.translate('Amount')}</th>
-        <th>{props.translate('Price')}</th>
+        <th>
+          {props.translate('Amount')}
+          {' '}
+          <span className="text-danger"> *</span>
+        </th>
+        <th>
+          {props.translate('Price')}
+          {' '}
+          <span className="text-danger"> *</span>
+        </th>
         <th>{props.translate('Units')}</th>
       </tr>
     </thead>

@@ -53,6 +53,7 @@ export const ComponentForm = enhance((props: Values & Props) => (
         name={`${props.component}.type`}
         type="text"
         validate={required}
+        parse={v => v.replace('.', '')}
       />
     </FormGroup>
     <FormGroup label={translate('Display name')} required={true}>
