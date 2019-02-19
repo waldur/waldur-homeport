@@ -37,10 +37,6 @@ export const TableComponent = props => {
       title: translate('State'),
       render: ResourceStateField,
     },
-    {
-      title: translate('Actions'),
-      render: ResourceActionsButton,
-    },
   ];
 
   props.columns.map((column: CategoryColumn) => {
@@ -48,6 +44,11 @@ export const TableComponent = props => {
       title: column.title,
       render: ({row}) => CategoryColumnField({ row, column }),
     });
+  });
+
+  columns.push({
+    title: translate('Actions'),
+    render: ResourceActionsButton,
   });
 
   return (

@@ -1,41 +1,52 @@
 import * as React from 'react';
 
-import { ngInjector } from '@waldur/core/services';
-import { Resource } from '@waldur/marketplace/resources/types';
+import { ngInjector, $http } from '@waldur/core/services';
 
 import './ActionButtonResource.scss';
 import { ResourceActionComponent } from './ResourceActionComponent';
 
 interface ActionButtonResourceProps {
-  row: Resource;
+  url: string;
   disabled?: boolean;
+}
+
+async function loadActions(url) {
+  const response = await $http.get(url);
+  const resource = response.data;
+  const actionUtilsService = ngInjector.get('actionUtilsService');
+  const rawActions = await actionUtilsService.loadActions(resource);
+  const actions = {};
+  for (const key in rawActions) {
+    if (!rawActions[key].tab) {
+      actions[key] = rawActions[key];
+    }
+  }
+  return {resource, actions};
 }
 
 export class ActionButtonResource extends React.Component<ActionButtonResourceProps> {
   state = {
     loading: false,
+    error: undefined,
     actions: {},
+    resource: undefined,
   };
 
-  formatResource = (row: Resource) => ({
-    ...row,
-    url: row.scope,
-    ...row.attributes,
-  })
-
-  getActions = () => {
+  getActions = async () => {
     this.setState({loading: true});
-    ngInjector.get('actionUtilsService')
-      .loadActions(this.formatResource(this.props.row))
-      .then(actions => {
-        const actionsObj = {};
-        for (const key in actions) {
-          if (!actions[key].tab) {
-            actionsObj[key] = actions[key];
-          }
-        }
-        this.setState({loading: false, actions: actionsObj});
+    try {
+      const {resource, actions} = await loadActions(this.props.url);
+      this.setState({
+        loading: false,
+        resource,
+        actions,
       });
+    } catch (error) {
+      this.setState({
+        loading: false,
+        error,
+      });
+    }
   }
 
   openDropdown = (isOpen: boolean) => {
@@ -50,7 +61,7 @@ export class ActionButtonResource extends React.Component<ActionButtonResourcePr
       reInitResource: () => undefined,
     };
     return ngInjector.get('actionUtilsService')
-      .buttonClick(controller, this.formatResource(this.props.row), name, action);
+      .buttonClick(controller, this.state.resource, name, action);
   }
 
   render() {
@@ -58,6 +69,7 @@ export class ActionButtonResource extends React.Component<ActionButtonResourcePr
       <ResourceActionComponent
         disabled={this.props.disabled}
         loading={this.state.loading}
+        error={this.state.error}
         actions={this.state.actions}
         onToggle={this.openDropdown}
         onSelect={this.triggerAction}

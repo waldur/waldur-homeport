@@ -7449,6 +7449,10 @@ msgstr ""
 msgid "Unable to load Zabbix host details."
 msgstr ""
 
+#: src/marketplace/resources/list/ResourceActionComponent.tsx
+msgid "Unable to load actions"
+msgstr ""
+
 #: src/marketplace/category/filters/AttributeFilterList.tsx
 msgid "Unable to load category sections."
 msgstr ""

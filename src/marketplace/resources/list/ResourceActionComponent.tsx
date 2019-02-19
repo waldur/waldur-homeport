@@ -11,6 +11,7 @@ interface ResourceActionComponentProps {
   onSelect: (name: string, action: object) => void;
   disabled?: boolean;
   loading?: boolean;
+  error?: object;
   actions: object;
 }
 
@@ -26,29 +27,31 @@ export const ResourceActionComponent = (props: ResourceActionComponentProps) => 
     className={props.disabled ? 'disabled' : ''}
     onToggle={props.onToggle}
   >
-    {props.loading && <MenuItem eventKey="1">{translate('Loading actions')}</MenuItem>}
-
-    {!props.loading && Object.keys(props.actions).length === 0 &&
+    {props.loading ? (
+      <MenuItem eventKey="1">{translate('Loading actions')}</MenuItem>
+    ) : props.error ? (
+      <MenuItem eventKey="1">{translate('Unable to load actions')}</MenuItem>
+    ) : Object.keys(props.actions).length === 0 ? (
       <MenuItem eventKey="2">{translate('There are no actions.')}</MenuItem>
-    }
-
-    {Object.keys(props.actions).map(key => (
-      <MenuItem
-        key={key}
-        eventKey={key}
-        className={classNames(getButtonClass(props.actions[key]))}
-        onSelect={() => props.onSelect(key, props.actions[key])}
-      >
-        {props.actions[key].reason ?
-          <>
-            <Tooltip key={key} label={props.actions[key].reason} id="action-reason">
-              <i className="fa fa-question-circle"/>
-            </Tooltip>
-            {' '}
-            {props.actions[key].title}
-          </> : props.actions[key].title
-        }
-      </MenuItem>
-    ))}
+    ) : (
+      Object.keys(props.actions).map(key => (
+        <MenuItem
+          key={key}
+          eventKey={key}
+          className={classNames(getButtonClass(props.actions[key]))}
+          onSelect={() => props.onSelect(key, props.actions[key])}
+        >
+          {props.actions[key].reason ?
+            <>
+              <Tooltip key={key} label={props.actions[key].reason} id="action-reason">
+                <i className="fa fa-question-circle"/>
+              </Tooltip>
+              {' '}
+              {props.actions[key].title}
+            </> : props.actions[key].title
+          }
+        </MenuItem>
+      ))
+    )}
   </DropdownButton>
 );

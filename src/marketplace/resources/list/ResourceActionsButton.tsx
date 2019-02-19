@@ -13,11 +13,11 @@ export const ResourceActionsButton = ({row}: ResourceActionsButtonProps) => (
   <>
     <ActionButtonResource
       disabled={row.scope === null}
-      row={row}
+      url={row.scope}
     />
     <ResourceSummaryButton
       disabled={row.scope === null}
-      resource={{...row, url: row.scope}}
+      url={row.scope}
     />
   </>
 );
