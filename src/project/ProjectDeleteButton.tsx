@@ -6,7 +6,7 @@ import ActionButton from '@waldur/table-react/ActionButton';
 import { isOwnerOrStaff } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
-import { deleteProject } from './actions';
+import { deleteProject, showProjectRemoveDialog } from './actions';
 
 interface OwnProps {
   project: Project;
@@ -15,7 +15,7 @@ interface OwnProps {
 const PureProjectDeleteButton = props => (
   <ActionButton
     title={translate('Delete')}
-    action={props.deleteProject}
+    action={props.showProjectRemoveDialog}
     tooltip={props.tooltip}
     icon="fa fa-trash"
     disabled={props.disabled}
@@ -38,7 +38,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
-  deleteProject: () => dispatch(deleteProject(ownProps.project)),
+  showProjectRemoveDialog: () => dispatch(showProjectRemoveDialog(() =>
+    dispatch(deleteProject(ownProps.project)), ownProps.project.name)),
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);

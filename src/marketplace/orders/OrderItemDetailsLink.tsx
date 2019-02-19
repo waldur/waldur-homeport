@@ -21,6 +21,7 @@ interface StateProps {
 interface OwnProps {
   order_item_uuid: string;
   customer_uuid?: string;
+  project_uuid?: string;
   className?: string;
 }
 
@@ -33,6 +34,9 @@ const connector = connect<StateProps, {}, OwnProps, OuterState>((state, ownProps
   } else if (workspace === 'project') {
     return {
       state: 'marketplace-order-item-details',
+      params: {
+        uuid: ownProps.project_uuid,
+      },
     };
   } else if (workspace === 'support') {
     return {

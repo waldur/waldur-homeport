@@ -9,9 +9,10 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { OfferingLink } from '../links/OfferingLink';
+import { Offering } from '../types';
 import { OfferingActions } from './actions/OfferingActions';
 import { OfferingCreateButton } from './actions/OfferingCreateButton';
+import { OfferingDetailsLink } from './details/OfferingDetailsLink';
 import { isOfferingManagementDisabled } from './store/selectors';
 
 export const TableComponent = props => {
@@ -20,7 +21,7 @@ export const TableComponent = props => {
   const columns = [
     {
       title: translate('Name'),
-      render: ({ row }) => <OfferingLink offering_uuid={row.uuid}>{row.name}</OfferingLink>,
+      render: ({ row }) => <OfferingDetailsLink offering_uuid={row.uuid}>{row.name}</OfferingDetailsLink>,
       orderField: 'name',
     },
     {
@@ -50,7 +51,7 @@ export const TableComponent = props => {
       {...props}
       columns={columns}
       verboseName={translate('Offerings')}
-      actions={<OfferingCreateButton/>}
+      actions={props.showOfferingCreateButton && <OfferingCreateButton/>}
       initialSorting={{field: 'created', mode: 'desc'}}
     />
   );
@@ -64,7 +65,7 @@ export const TableOptions = {
     billable: true,
     shared: true,
   }),
-  exportRow: row => [
+  exportRow: (row: Offering) => [
     row.name,
     row.native_name,
     formatDateTime(row.created),
@@ -83,6 +84,7 @@ export const TableOptions = {
 const mapStateToProps = state => ({
   customer: getCustomer(state),
   actionsDisabled: isOfferingManagementDisabled(state),
+  showOfferingCreateButton: getCustomer(state).is_service_provider,
 });
 
 const enhance = compose(

@@ -7,6 +7,7 @@ import * as Tabs from 'react-bootstrap/lib/Tabs';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { IssueCommentsContainer } from '@waldur/issues/comments/IssueCommentsContainer';
+import { ResourceOrderItems } from '@waldur/marketplace/orders/ResourceOrderItems';
 
 import { OfferingEvents } from './OfferingEvents';
 import { OfferingSummaryTab } from './OfferingSummaryTab';
@@ -66,6 +67,13 @@ export const PureOfferingTabs = (props: OfferingTabsProps) => {
         <Tab title={props.translate('Comments')} eventKey="comments">
           <div className="m-t-sm">
             <IssueCommentsContainer issue={issue} renderHeader={false}/>
+          </div>
+        </Tab>
+      )}
+      {props.offering.marketplace_resource_uuid && (
+        <Tab title={props.translate('Order items')} eventKey="order-items">
+          <div className="m-t-sm">
+            <ResourceOrderItems resource_uuid={props.offering.marketplace_resource_uuid}/>
           </div>
         </Tab>
       )}

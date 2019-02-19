@@ -11,6 +11,7 @@ import projectIssues from './project-issues';
 import projectEvents from './ProjectEventsList';
 import projectsList from './ProjectsList';
 import projectTeam from './project-team';
+import projectRemoveDialog from './ProjectRemoveDialog';
 import projectsService from './projects-service';
 import projectRoutes from './routes';
 import './events';
@@ -29,6 +30,7 @@ export default module => {
   module.component('projectEvents', projectEvents);
   module.component('projectsList', projectsList);
   module.component('projectTeam', projectTeam);
+  module.component('projectRemoveDialog', projectRemoveDialog);
   module.service('projectsService', projectsService);
   module.config(projectRoutes);
 };

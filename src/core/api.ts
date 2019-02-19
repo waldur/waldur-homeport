@@ -19,8 +19,8 @@ export function getFirst<T = {}>(endpoint, params?) {
   return getList<T>(endpoint, params).then(data => data[0]);
 }
 
-export function getById<T = {}>(endpoint: string, id: string, options?: {}) {
-  return get<T>(`${endpoint}${id}/`, options).then(response => response.data);
+export function getById<T = {}>(endpoint: string, id: string, options?: {}): Promise<T> {
+  return get(`${endpoint}${id}/`, options).then(response => response.data);
 }
 
 export function remove<T = {}>(endpoint: string, options?: {}): IHttpPromise<T> {

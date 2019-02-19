@@ -81,7 +81,7 @@ export default function baseResourceListController(
           let index = this.findIndexById(row);
           return `<span class="btn-group">` +
                  `<action-button-resource button-controller="controller" button-model="controller.list[${index}]"></action-button-resource>` +
-                 `<resource-summary-button resource="controller.list[${index}]"></resource-summary-button>` +
+                 `<resource-summary-button url="controller.list[${index}].url"></resource-summary-button>` +
                  `</span>`;
         }
       };

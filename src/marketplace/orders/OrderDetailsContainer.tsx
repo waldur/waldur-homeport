@@ -15,6 +15,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   approveOrder: actions.approveOrder,
+  rejectOrder: actions.rejectOrder,
 };
 
 const enhance = compose(

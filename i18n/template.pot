@@ -90,6 +90,10 @@ msgstr ""
 msgid "Access token"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingHeader.tsx
+msgid "Accessible to all customers."
+msgstr ""
+
 #: src/auth/auth-activation.html
 msgid "Account activation"
 msgstr ""
@@ -135,12 +139,17 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
+#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/ResourceActionComponent.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/paypal/paypal-invoice-actions.html
 #: src/project/ProjectsList.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
+#: src/user/keys/KeysList.tsx
 #: src/user/support/UserList.tsx
 msgid "Actions"
 msgstr ""
@@ -160,6 +169,11 @@ msgstr ""
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/user/support/UserFilter.tsx
 msgid "Active"
+msgstr ""
+
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+msgid "Active plan count"
 msgstr ""
 
 #: src/user/support/UserActivateButton.tsx
@@ -186,7 +200,6 @@ msgstr ""
 msgid "Add SLURM allocation"
 msgstr ""
 
-#: src/user/keys/key-list.js
 #: src/user/routes.js
 msgid "Add SSH key"
 msgstr ""
@@ -218,7 +231,8 @@ msgstr ""
 msgid "Add item"
 msgstr ""
 
-#: src/user/keys/key-create.html
+#: src/user/keys/KeyCreateButton.tsx
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Add key"
 msgstr ""
 
@@ -552,6 +566,18 @@ msgstr ""
 msgid "Are you sure you want to unlink provider and all related resources?"
 msgstr ""
 
+#: src/project/ProjectRemoveDialog.tsx
+msgid "Are you sure you would like to delete project {projectName}?"
+msgstr ""
+
+#: src/user/keys/KeyRemoveDialog.tsx
+msgid "Are you sure you would like to delete the key?"
+msgstr ""
+
+#: src/marketplace/resources/terminate/TerminateDialog.tsx
+msgid "Are you sure you would like to terminate resource {resourceName}?"
+msgstr ""
+
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
@@ -815,6 +841,10 @@ msgstr ""
 msgid "Billing details"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingHeader.tsx
+msgid "Billing enabled"
+msgstr ""
+
 #: src/marketplace/offerings/plan/PlanForm.tsx
 msgid "Billing period"
 msgstr ""
@@ -953,7 +983,7 @@ msgstr ""
 #: src/team/add-project-member.html
 #: src/team/add-team-member.html
 #: src/user/hooks/hook-details.html
-#: src/user/keys/key-create.html
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Cancel"
 msgstr ""
 
@@ -990,6 +1020,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
+#: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/openstack/openstack-tenant/openstack-template.js
 msgid "Category"
 msgstr ""
@@ -1016,7 +1047,7 @@ msgstr ""
 msgid "Change flavor"
 msgstr ""
 
-#: src/marketplace/resources/ChangePlanAction.ts
+#: src/marketplace/resources/change-plan/ChangePlanAction.ts
 msgid "Change plan"
 msgstr ""
 
@@ -1024,7 +1055,7 @@ msgstr ""
 msgid "Change request - client’s request to perform a generic modification of data or service."
 msgstr ""
 
-#: src/marketplace/resources/ChangePlanBody.tsx
+#: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 msgid "Change resource plan"
 msgstr ""
 
@@ -1086,8 +1117,8 @@ msgstr ""
 msgid "Client Secret"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/orders/OrganizationAutocomplete.tsx
 msgid "Client organization"
 msgstr ""
 
@@ -1438,6 +1469,7 @@ msgstr ""
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
@@ -1455,7 +1487,8 @@ msgstr ""
 #: src/marketplace/orders/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/resources/ProjectResourcesList.tsx
+#: src/marketplace/orders/ResourceOrderItems.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
 msgid "Created at"
 msgstr ""
 
@@ -1519,7 +1552,7 @@ msgstr ""
 msgid "Current flavor"
 msgstr ""
 
-#: src/marketplace/resources/ChangePlanComponent.tsx
+#: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "Current plan"
 msgstr ""
 
@@ -1555,7 +1588,7 @@ msgid "Databases"
 msgstr ""
 
 #: src/dashboard/chart.ts
-#: src/marketplace/resources/ResourceUsageList.tsx
+#: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/payments/payment-list.js
 msgid "Date"
 msgstr ""
@@ -1798,7 +1831,7 @@ msgstr ""
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Done"
 msgstr ""
 
@@ -1925,7 +1958,7 @@ msgid "Enter date"
 msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Erred"
 msgstr ""
 
@@ -2053,7 +2086,7 @@ msgid "Excel"
 msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Executing"
 msgstr ""
 
@@ -2252,7 +2285,7 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
-#: src/user/keys/key-list.js
+#: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
 msgstr ""
 
@@ -2563,6 +2596,10 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
+#: src/marketplace/orders/ResourceOrderItems.tsx
+msgid "ID"
+msgstr ""
+
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
@@ -2604,7 +2641,7 @@ msgstr ""
 msgid "If not, append it there on a new line. If file is not present, create a new file with the key."
 msgstr ""
 
-#: src/marketplace/resources/ResourceUsageForm.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "If value for usage period does not exist yet, it will be created, otherwise new value wíll override old value."
 msgstr ""
 
@@ -3110,8 +3147,12 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/user/keys/key-create.html
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Key name"
+msgstr ""
+
+#: src/user/keys/KeyRemoveDialog.tsx
+msgid "Key removal"
 msgstr ""
 
 #: src/jira/project/jira-project-config.js
@@ -3195,6 +3236,8 @@ msgstr ""
 
 #: src/analytics/utils.ts
 #: src/dashboard/chart.ts
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "Limit"
 msgstr ""
 
@@ -3228,6 +3271,7 @@ msgstr ""
 msgid "Lithuanian"
 msgstr ""
 
+#: src/marketplace/resources/list/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "Loading actions"
 msgstr ""
@@ -3320,7 +3364,7 @@ msgstr ""
 msgid "Management"
 msgstr ""
 
-#: src/marketplace/details/DetailsPage.tsx
+#: src/marketplace/details/utils.ts
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Marketplace"
@@ -3330,7 +3374,7 @@ msgstr ""
 msgid "Marketplace checkout"
 msgstr ""
 
-#: src/marketplace/resources/ResourceUsageContainer.tsx
+#: src/marketplace/resources/usage/ResourceUsageContainer.tsx
 msgid "Marketplace offering does not have any usage-based components."
 msgstr ""
 
@@ -3496,11 +3540,13 @@ msgstr ""
 msgid "Motivation"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "My offerings"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/sidebar.js
 msgid "My services"
 msgstr ""
@@ -3531,11 +3577,13 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
-#: src/marketplace/resources/ChangePlanLoader.tsx
-#: src/marketplace/resources/ProjectResourcesList.tsx
-#: src/marketplace/resources/ResourceUsageList.tsx
+#: src/marketplace/resources/change-plan/utils.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/OracleSnapshots.tsx
@@ -3638,7 +3686,7 @@ msgid "New flavor"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.js
-#: src/marketplace/resources/ChangePlanComponent.tsx
+#: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "New plan"
 msgstr ""
 
@@ -3666,14 +3714,6 @@ msgstr ""
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "No"
-msgstr ""
-
-#: src/user/keys/key-list.js
-msgid "No SSH keys found matching filter."
-msgstr ""
-
-#: src/user/keys/key-list.js
-msgid "No SSH keys yet."
 msgstr ""
 
 #: src/resource/summary/ResourceAccessInfo.tsx
@@ -4004,16 +4044,18 @@ msgid "Objectives"
 msgstr ""
 
 #: src/marketplace/details/OrderSummary.tsx
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Offering"
 msgstr ""
 
 #: src/marketplace/details/OverviewTab.tsx
-#: src/marketplace/orders/OfferingDetailsButton.tsx
-#: src/marketplace/orders/OfferingDetailsDialog.tsx
+#: src/marketplace/offerings/details/OfferingDetailsButton.tsx
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+#: src/marketplace/routes.js
 msgid "Offering details"
 msgstr ""
 
@@ -4200,6 +4242,10 @@ msgstr ""
 msgid "Order has been approved."
 msgstr ""
 
+#: src/marketplace/orders/store/effects.ts
+msgid "Order has been rejected."
+msgstr ""
+
 #: src/marketplace/cart/store/effects.ts
 msgid "Order has been submitted."
 msgstr ""
@@ -4209,6 +4255,8 @@ msgid "Order item details"
 msgstr ""
 
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/offering/OfferingTabs.tsx
+#: src/resource/tabs/constants.js
 msgid "Order items"
 msgstr ""
 
@@ -4326,7 +4374,8 @@ msgstr ""
 #: src/billing/invoice-header.html
 #: src/customer/workspace/customer-workspace.js
 #: src/experts/requests/details/expert-request-details.js
-#: src/marketplace/details/DetailsPage.tsx
+#: src/marketplace/details/utils.ts
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 msgid "Organization workspace"
 msgstr ""
 
@@ -4477,7 +4526,7 @@ msgstr ""
 #: src/billing/billing-utils.js
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/invitations/invitations-list.js
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Pending"
 msgstr ""
 
@@ -4530,11 +4579,22 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/details/plan/PlanField.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "Plan"
 msgstr ""
 
 #: src/marketplace/offerings/plan/PlansList.tsx
 msgid "Plan #{index}"
+msgstr ""
+
+#: src/issues/workspace/issue-navigation-service.js
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/routes.js
+msgid "Plan capacity"
+msgstr ""
+
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+msgid "Plan capacity ({provider} / {offering})"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentsList.tsx
@@ -4543,6 +4603,10 @@ msgstr ""
 
 #: src/marketplace/details/plan/PlanDescription.tsx
 msgid "Plan description"
+msgstr ""
+
+#: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
+msgid "Plan does not have limit"
 msgstr ""
 
 #: src/marketplace/offerings/create/AccountingSummary.tsx
@@ -4747,7 +4811,7 @@ msgstr ""
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/orders/Order.tsx
-#: src/marketplace/resources/ChangePlanLoader.tsx
+#: src/marketplace/resources/change-plan/utils.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/paypal/paypal-invoices-list.js
 msgid "Price"
@@ -4897,10 +4961,6 @@ msgstr ""
 msgid "Product configuration"
 msgstr ""
 
-#: src/marketplace/routes.js
-msgid "Product details"
-msgstr ""
-
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/events/EventDetailsTable.tsx
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
@@ -5001,6 +5061,10 @@ msgstr ""
 msgid "Project providers links have been updated."
 msgstr ""
 
+#: src/project/ProjectRemoveDialog.tsx
+msgid "Project removal"
+msgstr ""
+
 #: src/user/support/UserList.tsx
 msgid "Project roles"
 msgstr ""
@@ -5018,7 +5082,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
 #: src/appstore/appstore-store.js
 #: src/experts/requests/details/expert-request-details.js
-#: src/marketplace/details/DetailsPage.tsx
+#: src/marketplace/details/utils.ts
 #: src/offering/offering-details.js
 #: src/project/project-workspace.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
@@ -5091,7 +5155,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/events/EventDetailsTable.tsx
 #: src/jira/project/jira-projects-list.js
-#: src/marketplace/resources/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -5167,10 +5231,11 @@ msgstr ""
 msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
 
-#: src/user/keys/key-create.html
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Public key"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Public offerings"
@@ -5187,6 +5252,10 @@ msgstr ""
 #: src/appstore/appstore-store.html
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "Purchase"
+msgstr ""
+
+#: src/marketplace/offerings/details/OfferingHeader.tsx
+msgid "Purchase and usage is invoiced."
 msgstr ""
 
 #: src/configs/base-config.js
@@ -5411,6 +5480,10 @@ msgstr ""
 msgid "Regular user"
 msgstr ""
 
+#: src/marketplace/orders/RejectButton.tsx
+msgid "Reject"
+msgstr ""
+
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 msgid "Related resource"
@@ -5430,6 +5503,10 @@ msgstr ""
 
 #: src/issues/IssueReload.tsx
 msgid "Reload issue data"
+msgstr ""
+
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+msgid "Remaining amount"
 msgstr ""
 
 #: src/analytics/utils.ts
@@ -5454,7 +5531,7 @@ msgstr ""
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 #: src/user/hooks/hook-list.js
-#: src/user/keys/key-list.js
+#: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
 msgstr ""
 
@@ -5512,7 +5589,7 @@ msgstr ""
 msgid "Report incorrect data"
 msgstr ""
 
-#: src/marketplace/resources/ResourceCreateUsageButton.tsx
+#: src/marketplace/resources/usage/ResourceCreateUsageButton.tsx
 msgid "Report usage"
 msgstr ""
 
@@ -5586,8 +5663,12 @@ msgstr ""
 msgid "Request direct access to {{ $ctrl.tenant.name }}"
 msgstr ""
 
-#: src/marketplace/resources/ChangePlanBody.tsx
+#: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 msgid "Request for a change"
+msgstr ""
+
+#: src/marketplace/resources/terminate/TerminateDialog.tsx
+msgid "Request for a termination"
 msgstr ""
 
 #: src/ansible/python-management/effects.ts
@@ -5702,7 +5783,7 @@ msgstr ""
 msgid "Resource description"
 msgstr ""
 
-#: src/marketplace/resources/ChangePlanComponent.tsx
+#: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "Resource does not have any plan."
 msgstr ""
 
@@ -5737,6 +5818,10 @@ msgstr ""
 msgid "Resource is monitored using Zabbix."
 msgstr ""
 
+#: src/marketplace/orders/ResourceOrderItems.tsx
+msgid "Resource is not connected to the marketplace yet."
+msgstr ""
+
 #: src/resource/monitoring/ZabbixHostCreateButton.tsx
 msgid "Resource is not monitored yet."
 msgstr ""
@@ -5753,6 +5838,10 @@ msgstr ""
 msgid "Resource plan change request has been submitted."
 msgstr ""
 
+#: src/marketplace/resources/store/effects.ts
+msgid "Resource termination request has been submitted."
+msgstr ""
+
 #: src/providers/details/provider-price-list.js
 #: src/resource/list/resource-global-list-filtered.html
 msgid "Resource type"
@@ -5760,8 +5849,8 @@ msgstr ""
 
 #: src/analytics/routes.js
 #: src/customer/workspace/customer-workspace.js
-#: src/marketplace/resources/ResourceCreateUsageDialog.tsx
-#: src/marketplace/resources/ResourceShowUsageDialog.tsx
+#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
+#: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
 msgid "Resource usage"
 msgstr ""
 
@@ -5769,7 +5858,7 @@ msgstr ""
 #: src/experts/requests/details/expert-request-details.js
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
-#: src/marketplace/resources/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 #: src/offering/offering-details.js
@@ -5905,6 +5994,10 @@ msgstr ""
 msgid "SSH key"
 msgstr ""
 
+#: src/user/keys/KeyRemoveButton.tsx
+msgid "SSH key has been removed."
+msgstr ""
+
 #: src/user/events.ts
 msgid "SSH key management events"
 msgstr ""
@@ -5917,6 +6010,7 @@ msgstr ""
 msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr ""
 
+#: src/user/keys/KeysList.tsx
 #: src/user/routes.js
 msgid "SSH keys"
 msgstr ""
@@ -6081,7 +6175,7 @@ msgstr ""
 msgid "Select issue template"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 msgid "Select offering..."
 msgstr ""
 
@@ -6091,7 +6185,7 @@ msgstr ""
 
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrganizationAutocomplete.tsx
 msgid "Select organization..."
 msgstr ""
 
@@ -6112,7 +6206,7 @@ msgstr ""
 msgid "Select provider type"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/ProviderAutocomplete.tsx
 msgid "Select provider..."
 msgstr ""
 
@@ -6156,7 +6250,7 @@ msgstr ""
 msgid "Select state"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Select state..."
 msgstr ""
 
@@ -6250,7 +6344,8 @@ msgid "Service name"
 msgstr ""
 
 #: src/marketplace/details/LeafletMap.tsx
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/orders/ProviderAutocomplete.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "Service provider"
 msgstr ""
 
@@ -6309,6 +6404,10 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingHeader.tsx
+msgid "Shared"
+msgstr ""
+
 #: src/marketplace/cart/ShoppingCart.tsx
 msgid "Shopping cart is empty. You should add items to cart first."
 msgstr ""
@@ -6336,6 +6435,10 @@ msgstr ""
 
 #: src/table/responsive-table.js
 msgid "Show _MENU_ entries"
+msgstr ""
+
+#: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
+msgid "Show chart"
 msgstr ""
 
 #: src/form-react/SelectDialogField.tsx
@@ -6375,7 +6478,7 @@ msgstr ""
 msgid "Show shared"
 msgstr ""
 
-#: src/marketplace/resources/ResourceShowUsageButton.tsx
+#: src/marketplace/resources/usage/ResourceShowUsageButton.tsx
 msgid "Show usage"
 msgstr ""
 
@@ -6517,11 +6620,13 @@ msgstr ""
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/experts/requests/list/expert-request-project-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/orders/Order.tsx
-#: src/marketplace/orders/OrderItemsFilter.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/orders/OrderStateFilter.tsx
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/resources/ProjectResourcesList.tsx
+#: src/marketplace/orders/ResourceOrderItems.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
@@ -6611,7 +6716,8 @@ msgstr ""
 
 #: src/digitalocean/droplet-resize.html
 #: src/marketplace/offerings/create/Wizard.tsx
-#: src/marketplace/resources/ChangePlanBody.tsx
+#: src/marketplace/resources/change-plan/ChangePlanBody.tsx
+#: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/openstack/openstack-tenant/actions/change-package-dialog.html
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
@@ -6623,7 +6729,7 @@ msgstr ""
 msgid "Submit complaint"
 msgstr ""
 
-#: src/marketplace/resources/ResourceCreateUsageDialog.tsx
+#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 msgid "Submit usage report"
 msgstr ""
 
@@ -6824,11 +6930,16 @@ msgstr ""
 msgid "Tenant user username"
 msgstr ""
 
+#: src/marketplace/resources/terminate/TerminateAction.ts
 #: src/offering/actions/TerminateAction.ts
 msgid "Terminate"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsFilter.tsx
+#: src/marketplace/resources/terminate/TerminateDialog.tsx
+msgid "Terminate resource {resourceName}"
+msgstr ""
+
+#: src/marketplace/orders/OrderStateFilter.tsx
 msgid "Terminated"
 msgstr ""
 
@@ -6852,6 +6963,10 @@ msgstr ""
 
 #: src/intro/expert-manager-intro.js
 msgid "Thanks"
+msgstr ""
+
+#: src/user/keys/KeyCreateForm.tsx
+msgid "The key has been created."
 msgstr ""
 
 #: src/azure/common/validators.ts
@@ -6879,6 +6994,7 @@ msgid "There are no SSH public keys yet."
 msgstr ""
 
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
+#: src/marketplace/resources/list/ResourceActionComponent.tsx
 #: src/paypal/paypal-invoice-actions.html
 #: src/resource/actions/action-button-resource.html
 msgid "There are no actions."
@@ -6934,7 +7050,7 @@ msgstr ""
 msgid "There are no organizations matching filter."
 msgstr ""
 
-#: src/marketplace/resources/ChangePlanComponent.tsx
+#: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "There are no other plans available."
 msgstr ""
 
@@ -7012,10 +7128,6 @@ msgstr ""
 msgid "This field is required."
 msgstr ""
 
-#: src/user/keys/key-create.js
-msgid "This field may not be blank."
-msgstr ""
-
 #: src/experts/requests/create/expert-request-create.js
 msgid "This is an objective."
 msgstr ""
@@ -7073,7 +7185,7 @@ msgstr ""
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/user/keys/key-list.js
+#: src/user/keys/KeysList.tsx
 msgid "Title"
 msgstr ""
 
@@ -7163,8 +7275,10 @@ msgstr ""
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
+#: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
-#: src/marketplace/resources/ResourceUsageList.tsx
+#: src/marketplace/orders/ResourceOrderItems.tsx
+#: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -7229,6 +7343,10 @@ msgstr ""
 
 #: src/invitations/actions/invitation-dialog-service.js
 msgid "Unable to create invitation."
+msgstr ""
+
+#: src/user/keys/KeyCreateForm.tsx
+msgid "Unable to create key."
 msgstr ""
 
 #: src/project/project-providers-service.js
@@ -7352,6 +7470,10 @@ msgstr ""
 msgid "Unable to load Zabbix host details."
 msgstr ""
 
+#: src/marketplace/resources/list/ResourceActionComponent.tsx
+msgid "Unable to load actions"
+msgstr ""
+
 #: src/marketplace/category/filters/AttributeFilterList.tsx
 msgid "Unable to load category sections."
 msgstr ""
@@ -7365,7 +7487,7 @@ msgstr ""
 msgid "Unable to load comments."
 msgstr ""
 
-#: src/marketplace/resources/ChangePlanBody.tsx
+#: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 msgid "Unable to load data."
 msgstr ""
 
@@ -7390,11 +7512,11 @@ msgstr ""
 msgid "Unable to load marketplace categories."
 msgstr ""
 
-#: src/marketplace/resources/ProjectResourcesContainer.tsx
+#: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "Unable to load marketplace category details"
 msgstr ""
 
-#: src/marketplace/resources/ResourceUsageContainer.tsx
+#: src/marketplace/resources/usage/ResourceUsageContainer.tsx
 msgid "Unable to load marketplace offering details."
 msgstr ""
 
@@ -7402,11 +7524,9 @@ msgstr ""
 msgid "Unable to load marketplace offerings."
 msgstr ""
 
-#: src/marketplace/orders/OfferingDetailsDialog.tsx
-msgid "Unable to load offering details"
-msgstr ""
-
 #: src/marketplace/details/DetailsPage.tsx
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 msgid "Unable to load offering details."
 msgstr ""
 
@@ -7475,6 +7595,14 @@ msgstr ""
 msgid "Unable to register service provider."
 msgstr ""
 
+#: src/marketplace/orders/store/effects.ts
+msgid "Unable to reject order."
+msgstr ""
+
+#: src/user/keys/KeyRemoveButton.tsx
+msgid "Unable to remove SSH key."
+msgstr ""
+
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to remove item from shopping cart."
 msgstr ""
@@ -7513,6 +7641,10 @@ msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
 msgid "Unable to submit plan change request."
+msgstr ""
+
+#: src/marketplace/resources/store/effects.ts
+msgid "Unable to submit resource termination request."
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
@@ -7556,7 +7688,7 @@ msgid "Unfortunately, connection to server has failed. Please check if you can c
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#: src/marketplace/resources/ResourceUsageList.tsx
+#: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/actions/CompleteAction.ts
 msgid "Unit"
 msgstr ""
@@ -7668,6 +7800,7 @@ msgstr ""
 
 #: src/analytics/utils.ts
 #: src/dashboard/chart.ts
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 msgid "Usage"
 msgstr ""
 
@@ -7675,19 +7808,19 @@ msgstr ""
 msgid "Usage overview"
 msgstr ""
 
-#: src/marketplace/resources/ResourceUsageForm.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Usage period"
 msgstr ""
 
-#: src/marketplace/resources/ResourceUsageForm.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Usage period corresponds to one day."
 msgstr ""
 
-#: src/marketplace/resources/ResourceUsageForm.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Usage period corresponds to one half of month."
 msgstr ""
 
-#: src/marketplace/resources/ResourceUsageForm.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Usage period corresponds to one month."
 msgstr ""
 
@@ -7699,7 +7832,7 @@ msgstr ""
 msgid "Usage-based"
 msgstr ""
 
-#: src/marketplace/resources/ResourceUsageList.tsx
+#: src/marketplace/resources/usage/ResourceUsageList.tsx
 msgid "Usages"
 msgstr ""
 
@@ -7988,7 +8121,7 @@ msgstr ""
 msgid "Valid states for operation: {validStates}."
 msgstr ""
 
-#: src/marketplace/resources/ResourceUsageList.tsx
+#: src/marketplace/resources/usage/ResourceUsageList.tsx
 msgid "Value"
 msgstr ""
 
@@ -8181,7 +8314,9 @@ msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/project/ProjectRemoveDialog.tsx
 #: src/resource/summary/ScheduleSummary.tsx
+#: src/user/keys/KeyRemoveDialog.tsx
 msgid "Yes"
 msgstr ""
 
@@ -8480,6 +8615,15 @@ msgstr ""
 msgid "of"
 msgstr ""
 
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+msgid "offerings"
+msgstr ""
+
+#: src/marketplace/orders/ResourceOrderItems.tsx
+msgid "order items"
+msgstr ""
+
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "organization"
 msgstr ""
@@ -8490,6 +8634,10 @@ msgstr ""
 
 #: src/experts/requests/details/expert-request-details.js
 msgid "owner"
+msgstr ""
+
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+msgid "plans"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -8554,7 +8702,7 @@ msgstr ""
 msgid "virtualenv and virtualenvwrapper utilities are used to manage Python virtual environments."
 msgstr ""
 
-#: src/marketplace/resources/ProjectResourcesContainer.tsx
+#: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "{category} resources"
 msgstr ""
 

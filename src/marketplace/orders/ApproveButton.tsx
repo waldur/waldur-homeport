@@ -7,13 +7,14 @@ interface ApproveButtonProps {
   onClick: () => void;
   submitting?: boolean;
   tooltip?: string;
+  className?: string;
 }
 
-export const ApproveButton: React.SFC<ApproveButtonProps> = ({onClick, submitting, tooltip}: ApproveButtonProps) =>
+export const ApproveButton: React.SFC<ApproveButtonProps> = ({onClick, submitting, tooltip, className}: ApproveButtonProps) =>
   wrapTooltip(tooltip, (
     <button
       type="button"
-      className="btn btn-primary btn-sm"
+      className={className || 'btn btn-primary btn-sm'}
       onClick={onClick}
       disabled={submitting}>
         <i className="fa fa-check"/>

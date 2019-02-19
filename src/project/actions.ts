@@ -1,5 +1,6 @@
 import { createFormAction } from 'redux-form-saga';
 
+import { openModalDialog } from '@waldur/modal/actions';
 import { Project } from '@waldur/workspace/types';
 
 export const createProject = createFormAction('waldur/project/CREATE');
@@ -17,3 +18,6 @@ export const deleteProject = (project: Project) => ({
   type: DELETE_PROJECT,
   payload: {project},
 });
+
+export const showProjectRemoveDialog = (action: () => void, projectName: string) =>
+  openModalDialog('projectRemoveDialog', {resolve: { action, projectName }, size: 'md'});

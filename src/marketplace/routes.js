@@ -70,7 +70,7 @@ export default function routes($stateProvider) {
       template: '<marketplace-offering></marketplace-offering>',
       parent: 'project',
       data: {
-        pageTitle: gettext('Product details'),
+        pageTitle: gettext('Offering details'),
         feature: 'marketplace',
       }
     })
@@ -80,7 +80,17 @@ export default function routes($stateProvider) {
       template: '<marketplace-offering></marketplace-offering>',
       parent: 'organization',
       data: {
-        pageTitle: gettext('Product details'),
+        pageTitle: gettext('Offering details'),
+        feature: 'marketplace',
+      }
+    })
+
+    .state('marketplace-offering-details', {
+      url: 'marketplace-offering-details/:offering_uuid/',
+      template: '<marketplace-offering-details-page></marketplace-offering-details-page>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('Offering details'),
         feature: 'marketplace',
       }
     })
@@ -253,6 +263,19 @@ export default function routes($stateProvider) {
       data: {
         feature: 'marketplace',
         pageTitle: gettext('Orders'),
+      },
+      resolve: {
+        permission: checkPermission,
+      }
+    })
+
+    .state('marketplace-support-plan-usages', {
+      url: 'plan-usages/',
+      template: '<marketplace-plan-usages-list></marketplace-plan-usages-list>',
+      parent: 'support',
+      data: {
+        feature: 'marketplace',
+        pageTitle: gettext('Plan capacity'),
       },
       resolve: {
         permission: checkPermission,

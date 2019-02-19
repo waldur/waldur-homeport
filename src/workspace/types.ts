@@ -30,6 +30,7 @@ export interface Customer {
   url: string;
   owners: User[];
   projects?: Project[];
+  is_service_provider?: boolean;
 }
 
 interface Permission {

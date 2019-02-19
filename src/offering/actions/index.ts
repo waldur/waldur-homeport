@@ -1,4 +1,5 @@
-import changePlanAction from '@waldur/marketplace/resources/ChangePlanAction';
+import changePlanAction from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
+import terminateResourceAction from '@waldur/marketplace/resources/terminate/TerminateAction';
 
 import completeAction from './CompleteAction';
 import destroyAction from './DestroyAction';
@@ -10,5 +11,6 @@ export default [
   changePlanAction,
   completeAction,
   terminateAction,
+  terminateResourceAction,
   destroyAction,
 ];

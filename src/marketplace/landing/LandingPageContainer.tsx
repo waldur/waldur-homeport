@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { offeringsAutocomplete } from '@waldur/marketplace/landing/store/api';
+import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { CategoriesListType, OfferingsListType } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getCustomer } from '@waldur/workspace/selectors';
