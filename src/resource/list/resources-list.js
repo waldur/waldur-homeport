@@ -158,7 +158,8 @@ export default function baseResourceListController(
       'resource_type', 'latitude', 'longitude',
       'service_name', 'service_uuid', 'customer', 'service_settings_state',
       'service_settings_error_message', 'service_settings_uuid', 'security_groups',
-      'description', 'is_link_valid', 'customer_name', 'project_name'
+      'description', 'is_link_valid', 'customer_name', 'project_name',
+      'marketplace_resource_uuid',
     ],
     addRowFields: function(fields) {
       for (let i = 0; i < fields.length; i++) {

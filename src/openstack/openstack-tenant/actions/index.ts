@@ -1,4 +1,5 @@
 import changePlanAction from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
+import terminateAction from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { createPullAction } from '@waldur/resource/actions/base';
 
 import assignPackageAction from './AssignPackageAction';
@@ -26,5 +27,6 @@ export default [
   pullSecurityGroupsAction,
   pullFloatingIpsAction,
   createFloatingIpAction,
+  terminateAction,
   destroyAction,
 ];
