@@ -84,6 +84,10 @@ export const authLogin = {
       return this.showSocialSignup() && !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.SMARTIDEE_CLIENT_ID;
     }
 
+    showTARA() {
+      return this.showSocialSignup() && !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_CLIENT_ID;
+    }
+
     showEstonianId() {
       return this.methods.ESTONIAN_ID;
     }
