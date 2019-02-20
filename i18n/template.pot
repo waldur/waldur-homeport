@@ -729,6 +729,7 @@ msgid "Back to login"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
+#: src/project/project-workspace.js
 #: src/user/user-details.js
 msgid "Back to organization"
 msgstr ""
