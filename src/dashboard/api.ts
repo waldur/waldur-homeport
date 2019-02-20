@@ -35,24 +35,25 @@ const formatCharts = (charts: Chart[]) =>
   ));
 
 export async function loadCategories(workspace: WorkspaceType, scope: Scope): Promise<Category[]> {
-  const categories = getDashboardCategories(workspace);
   const result: Category[] = [];
-  const quotas = categories.reduce((acc, category) => [...acc, ...category.quotas], []);
-  const charts = await getDailyQuotaCharts(quotas, scope);
-  for (const category of categories) {
-    const metrics = category.quotas.map(quota => quota.title);
-    const formattedCharts = formatCharts(charts.filter(chart => metrics.includes(chart.title)));
-    result.push({
-      metrics,
-      title: category.title,
-      charts: formattedCharts,
-      actions: category.actions,
-    });
-  }
   const features = ngInjector.get('features');
   if (features.isVisible('marketplace')) {
     const marketplaceCategories = await loadMarketplaceCategories(workspace, scope);
     result.push(...marketplaceCategories);
+  } else {
+    const categories = getDashboardCategories(workspace);
+    const quotas = categories.reduce((acc, category) => [...acc, ...category.quotas], []);
+    const charts = await getDailyQuotaCharts(quotas, scope);
+    for (const category of categories) {
+      const metrics = category.quotas.map(quota => quota.title);
+      const formattedCharts = formatCharts(charts.filter(chart => metrics.includes(chart.title)));
+      result.push({
+        metrics,
+        title: category.title,
+        charts: formattedCharts,
+        actions: category.actions,
+      });
+    }
   }
   return result;
 }
