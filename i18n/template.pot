@@ -5852,6 +5852,7 @@ msgstr ""
 #: src/customer/workspace/customer-workspace.js
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
+#: src/resource/support/ChartContainer.tsx
 msgid "Resource usage"
 msgstr ""
 
@@ -5867,6 +5868,7 @@ msgstr ""
 #: src/providers/provider-list.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: src/resource/support/ChartContainer.tsx
+#: src/resource/support/TreemapChartFilter.tsx
 msgid "Resources"
 msgstr ""
 
@@ -6484,6 +6486,7 @@ msgid "Show usage"
 msgstr ""
 
 #: src/customer/CustomerListFilter.tsx
+#: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
 msgstr ""
 
@@ -7259,6 +7262,10 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
+#: src/resource/support/TreemapChart.tsx
+msgid "Total: {total}"
+msgstr ""
+
 #: src/billing/billing-record-details.html
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
@@ -7506,6 +7513,7 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/resource/support/ChartContainer.tsx
 msgid "Unable to load locations."
 msgstr ""
 

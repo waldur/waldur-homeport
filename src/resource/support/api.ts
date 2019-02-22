@@ -1,7 +1,7 @@
 import { getAll } from '@waldur/core/api';
 import { TreemapData } from '@waldur/resource/support/types';
 
-interface QuotasMap {
+export interface QuotasMap {
   [key: string]: TreemapData;
 }
 
@@ -62,7 +62,8 @@ export function parseProjects(projects, quotaNames) {
   return quotaTrees;
 }
 
-export function loadData(quotaNames: string[]): Promise<QuotasMap> {
+// tslint:disable-next-line:variable-name
+export const loadData = (accounting_is_running: boolean) => {
   const field = [
     'name',
     'customer_name',
@@ -70,5 +71,5 @@ export function loadData(quotaNames: string[]): Promise<QuotasMap> {
     'quotas',
     'billing_price_estimate',
   ];
-  return getAll('/projects/', {params: {field}}).then(projects => parseProjects(projects, quotaNames));
-}
+  return getAll('/projects/', {params: {field, accounting_is_running}});
+};

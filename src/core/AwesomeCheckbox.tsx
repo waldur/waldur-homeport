@@ -15,6 +15,7 @@ interface AwesomeCheckboxProps {
   id: string;
   value: boolean;
   onChange(value: boolean): void;
+  disabled?: boolean;
 }
 
 export const AwesomeCheckbox: React.SFC<AwesomeCheckboxProps> = (props: AwesomeCheckboxProps) => (
@@ -23,7 +24,9 @@ export const AwesomeCheckbox: React.SFC<AwesomeCheckboxProps> = (props: AwesomeC
       type="checkbox"
       id={props.id}
       checked={props.value}
-      onChange={event => props.onChange(event.target.checked)}/>
+      onChange={event => props.onChange(event.target.checked)}
+      disabled={props.disabled}
+    />
     <label htmlFor={props.id}>
       {props.label}
     </label>
