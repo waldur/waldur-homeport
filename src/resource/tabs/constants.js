@@ -18,8 +18,8 @@ const TABS = {
 export const DEFAULT_RESOURCE_TABS = {
   order: [
     'issues',
-    'events',
     'orderItems',
+    'events',
   ],
   options: TABS
 };
