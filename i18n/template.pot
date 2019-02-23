@@ -2415,6 +2415,7 @@ msgstr ""
 msgid "Full name"
 msgstr ""
 
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/volume-extend.html
 msgid "GB"
 msgstr ""
@@ -6528,6 +6529,10 @@ msgstr ""
 #: src/resource/list/resource-volumes-list.js
 #: src/rijkscloud/VolumeSummary.tsx
 msgid "Size"
+msgstr ""
+
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
+msgid "Size is invalid"
 msgstr ""
 
 #: src/azure/vm/azure-virtual-machine-config.js

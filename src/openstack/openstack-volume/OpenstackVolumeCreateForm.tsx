@@ -1,59 +1,47 @@
 import * as React from 'react';
-import { Field } from 'redux-form';
 
 import { getLatinNameValidators } from '@waldur/core/validators';
-import { NumberField, TextField, StringField } from '@waldur/form-react';
-import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
+import { NumberField, TextField, StringField, FormContainer } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
+import { formatIntField, parseIntField } from '@waldur/marketplace/common/utils';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
-import { CreateResourceFormGroup } from '@waldur/openstack/CreateResourceFormGroup';
+const validateSize = (value: number) => value < 1 || value > 4096 ?
+  translate('Size is invalid') : undefined;
 
 export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
-    this.props.initialize({ attributes: {size: 1024, ...this.props.initialAttributes} });
+    this.props.initialize({ attributes: {size: 1, ...this.props.initialAttributes} });
   }
   render() {
     return (
       <form className="form-horizontal">
-        <CreateResourceFormGroup
-          label={translate('Volume name')}
-          required={true}>
-          <Field
+        <FormContainer
+          submitting={false}
+          labelClass="col-sm-3"
+          controlClass="col-sm-9">
+          <StringField
+            label={translate('Volume name')}
+            required={true}
             name="attributes.name"
-            component={renderValidationWrapper(StringField)}
             validate={getLatinNameValidators()}
           />
-        </CreateResourceFormGroup>
-        <CreateResourceFormGroup label={translate('Size')}>
-            <div className="input-group" style={{maxWidth: 200}}>
-              <Field
-                name="attributes.size"
-                component={fieldProps =>
-                  <NumberField
-                    min={0}
-                    max={1 * 4096}
-                    {...fieldProps.input}/>
-                }
-                format={v => v ? v / 1024 : 0}
-                normalize={v => Number(v) * 1024}
-              />
-              <span className="input-group-addon">
-                GB
-              </span>
-          </div>
-        </CreateResourceFormGroup>
-        <CreateResourceFormGroup label={translate('Description')}>
-          <Field
-            name="attributes.description"
-            component={fieldProps =>
-              <TextField
-                maxLength={500}
-                {...fieldProps.input}
-              />
-            }
+          <NumberField
+            label={translate('Size')}
+            name="attributes.size"
+            parse={parseIntField}
+            format={formatIntField}
+            min={1}
+            max={4096}
+            unit={translate('GB')}
+            validate={validateSize}
           />
-        </CreateResourceFormGroup>
+          <TextField
+            label={translate('Description')}
+            name="attributes.description"
+            maxLength={500}
+          />
+        </FormContainer>
       </form>
     );
   }
