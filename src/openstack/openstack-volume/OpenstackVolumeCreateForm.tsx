@@ -17,7 +17,7 @@ export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigura
     return (
       <form className="form-horizontal">
         <FormContainer
-          submitting={false}
+          submitting={this.props.submitting}
           labelClass="col-sm-3"
           controlClass="col-sm-9">
           <StringField

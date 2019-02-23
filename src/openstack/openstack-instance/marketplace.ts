@@ -4,23 +4,69 @@ import { OpenstackInstanceCheckoutSummary } from '@waldur/openstack/openstack-in
 
 import { OpenstackInstanceCreateForm } from './OpenstackInstanceCreateForm';
 
-const serializer = props => {
-  const floatingIps = [];
-  const subnets = [];
-  if (props.networks) {
-    props.networks.map(network => {
-      subnets.push(network.subnet);
-      floatingIps.push(network.floatingIp);
-    });
+const serializeFloatingIPs = networks => {
+  if (!networks) {
+    return undefined;
   }
-  const data = {
-    ...props,
-    floating_ips: floatingIps,
-    subnets,
-  };
-  const {networks, ...rest} = data;
-  return rest;
+  return networks
+    .filter(item => item.floatingIp.url !== 'false')
+    .map(item => {
+      // Auto-assign floating IP
+      if (item.floatingIp.url === 'true') {
+        return {
+          subnet: item.subnet.url,
+        };
+      } else {
+        return {
+          subnet: item.subnet.url,
+          url: item.floatingIp.url,
+        };
+      }
+    });
 };
+
+const serializeInternalIps = networks => {
+  if (!networks) {
+    return undefined;
+  }
+  return networks.map(network => ({
+    subnet: network.subnet.url,
+  }));
+};
+
+const serializeSecurityGroups = groups => {
+  if (!groups) {
+    return undefined;
+  }
+  return groups.map(group => ({
+    url: group.url,
+  }));
+};
+
+const serializer = ({
+  name,
+  description,
+  user_data,
+  image,
+  flavor,
+  networks,
+  system_volume_size,
+  data_volume_size,
+  ssh_public_key,
+  security_groups,
+}) => ({
+  name,
+  description,
+  user_data,
+  image: image ? image.url : undefined,
+  flavor: flavor ? flavor.url : undefined,
+  ssh_public_key: ssh_public_key ? ssh_public_key.url : undefined,
+  security_groups: serializeSecurityGroups(security_groups),
+  internal_ips_set: serializeInternalIps(networks),
+  floating_ips: serializeFloatingIPs(networks),
+  system_volume_size,
+  data_volume_size,
+});
 
 registerOfferingType({
   type: 'OpenStackTenant.Instance',
