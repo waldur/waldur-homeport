@@ -298,6 +298,7 @@ msgid "Add request"
 msgstr ""
 
 #: src/dashboard/marketplace.ts
+#: src/marketplace/resources/list/CreateResourceButton.tsx
 msgid "Add resource"
 msgstr ""
 
