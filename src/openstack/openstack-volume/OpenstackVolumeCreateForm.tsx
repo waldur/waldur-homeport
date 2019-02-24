@@ -7,7 +7,7 @@ import { formatIntField, parseIntField } from '@waldur/marketplace/common/utils'
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 const validateSize = (value: number) => value < 1 || value > 4096 ?
-  translate('Size is invalid') : undefined;
+  translate('Size should be between 1 and 4096 GB.') : undefined;
 
 export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {

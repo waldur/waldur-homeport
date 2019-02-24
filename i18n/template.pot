@@ -6532,13 +6532,13 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-msgid "Size is invalid"
-msgstr ""
-
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 msgid "Size name"
+msgstr ""
+
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
+msgid "Size should be between 1 and 4096 GB."
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
