@@ -51,7 +51,7 @@ export const DialogBody = connector((props: DialogBodyProps) => (
           {!props.loading && (
             <SubmitButton
               submitting={props.submitting}
-              disabled={props.data.choices.length === 0}
+              disabled={!props.data.initialValues}
               label={props.orderCanBeApproved ? translate('Submit') : translate('Request for a change')}
             />
           )}
