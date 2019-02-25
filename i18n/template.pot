@@ -8663,7 +8663,6 @@ msgid "of"
 msgstr ""
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "offerings"
 msgstr ""
 
@@ -8684,6 +8683,7 @@ msgid "owner"
 msgstr ""
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "plans"
 msgstr ""
 

@@ -42,7 +42,7 @@ export const TableComponent = props => {
     <Table
       {...props}
       columns={columns}
-      verboseName={translate('offerings')}
+      verboseName={translate('plans')}
       showPageSizeSelector={true}
     />
   );
