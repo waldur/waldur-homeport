@@ -5,6 +5,15 @@ export interface ResourceReference {
   resource_type: string;
 }
 
+export type ResourceState =
+  | 'Creating'
+  | 'OK'
+  | 'Erred'
+  | 'Updating'
+  | 'Terminating'
+  | 'Terminated'
+  ;
+
 export interface Resource extends ResourceReference {
   attributes: AttributesType;
   backend_metadata: AttributesType;

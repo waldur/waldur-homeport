@@ -75,7 +75,7 @@ const TableOptions = {
   table: 'OrderItemList',
   fetchData: createFetcher('marketplace-order-items'),
   mapPropsToFilter: props => {
-    const filter: any = {provider_uuid: props.customer.uuid};
+    const filter: Record<string, string> = {provider_uuid: props.customer.uuid};
     if (props.filter) {
       if (props.filter.offering) {
         filter.offering_uuid = props.filter.offering.uuid;

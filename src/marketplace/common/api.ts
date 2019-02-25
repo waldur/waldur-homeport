@@ -70,6 +70,9 @@ export const rejectOrder = (orderUuid: string) =>
 export const getCustomerList = (params?: {}) =>
   getList<Customer>('/customers/', params);
 
+export const getProjectList = (params?: {}) =>
+  getList<Customer>('/projects/', params);
+
 export const getCustomer = (id: string) =>
   getById<Customer>('/customers/', id);
 
