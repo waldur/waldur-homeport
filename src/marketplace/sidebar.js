@@ -31,6 +31,11 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
                 link: 'marketplace-my-offerings({uuid: $ctrl.context.customer.uuid})',
               },
               {
+                icon: 'fa-file',
+                label: gettext('My resources'),
+                link: 'marketplace-customer-resources({uuid: $ctrl.context.customer.uuid})',
+              },
+              {
                 label: gettext('Public offerings'),
                 icon: 'fa-file',
                 link: 'marketplace-vendor-offerings({uuid: $ctrl.context.customer.uuid})',
@@ -40,11 +45,6 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
                 icon: 'fa-file',
                 label: gettext('Orders'),
                 link: 'marketplace-order-items({uuid: $ctrl.context.customer.uuid})',
-              },
-              {
-                icon: 'fa-file',
-                label: gettext('My resources'),
-                link: 'marketplace-customer-resources({uuid: $ctrl.context.customer.uuid})',
               },
             ]
           }
@@ -65,15 +65,15 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
                 link: 'marketplace-my-offerings({uuid: $ctrl.context.customer.uuid})',
               },
               {
+                icon: 'fa-file',
+                label: gettext('My resources'),
+                link: 'marketplace-customer-resources({uuid: $ctrl.context.customer.uuid})',
+              },
+              {
                 key: 'marketplace',
                 icon: 'fa-file',
                 label: gettext('Orders'),
                 link: 'marketplace-my-order-items({uuid: $ctrl.context.customer.uuid})',
-              },
-              {
-                icon: 'fa-file',
-                label: gettext('My resources'),
-                link: 'marketplace-customer-resources({uuid: $ctrl.context.customer.uuid})',
               },
             ]
           }
