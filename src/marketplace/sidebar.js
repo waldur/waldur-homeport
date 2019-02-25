@@ -43,7 +43,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
               {
                 key: 'marketplace',
                 icon: 'fa-file',
-                label: gettext('Orders'),
+                label: gettext('Public orders'),
                 link: 'marketplace-order-items({uuid: $ctrl.context.customer.uuid})',
               },
             ]
@@ -72,7 +72,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
               {
                 key: 'marketplace',
                 icon: 'fa-file',
-                label: gettext('Orders'),
+                label: gettext('My orders'),
                 link: 'marketplace-my-order-items({uuid: $ctrl.context.customer.uuid})',
               },
             ]
@@ -93,7 +93,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         index: 210,
       },
       {
-        label: gettext('Orders'),
+        label: gettext('My orders'),
         icon: 'fa-folder-open',
         link: 'marketplace-order-list({uuid: $ctrl.context.project.uuid})',
         feature: 'marketplace',
