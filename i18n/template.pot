@@ -3558,6 +3558,11 @@ msgstr ""
 
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
+msgid "My orders"
+msgstr ""
+
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
 msgid "My resources"
 msgstr ""
 
@@ -4285,7 +4290,6 @@ msgstr ""
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/routes.js
-#: src/marketplace/sidebar.js
 msgid "Orders"
 msgstr ""
 
@@ -5259,6 +5263,11 @@ msgstr ""
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Public offerings"
+msgstr ""
+
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
+msgid "Public orders"
 msgstr ""
 
 #: src/resource/state/constants.js
