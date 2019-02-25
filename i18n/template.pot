@@ -140,6 +140,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/ResourceActionComponent.tsx
@@ -1288,6 +1289,7 @@ msgid "Copy to clipboard"
 msgstr ""
 
 #: src/customer/CustomerList.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Cost"
@@ -1488,6 +1490,7 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: src/invitations/invitations-list.js
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
@@ -4067,6 +4070,7 @@ msgstr ""
 
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -4276,6 +4280,7 @@ msgstr ""
 msgid "Order item details"
 msgstr ""
 
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/tabs/constants.js
@@ -4599,6 +4604,7 @@ msgstr ""
 
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/details/plan/PlanField.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
@@ -4997,6 +5003,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/offering/appstore-offering-summary.html
@@ -6664,6 +6671,7 @@ msgstr ""
 #: src/experts/requests/list/expert-request-project-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrderStateFilter.tsx
