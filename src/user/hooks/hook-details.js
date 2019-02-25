@@ -1,5 +1,9 @@
 import template from './hook-details.html';
 
+import store from '@waldur/store/store';
+import { createEntity, updateEntity } from '@waldur/table-react/actions';
+import { hooksListTable } from '@waldur/user/hooks/constants';
+
 export default function hookDetails() {
   return {
     restrict: 'E',
@@ -68,7 +72,14 @@ function HookDetailsController(hooksService, eventsService, ncUtilsFlash, $filte
       promise = hooksService.create(vm.instance);
       message = gettext('Notification has been created.');
     }
-    return promise.then(function() {
+    return promise.then(function(data) {
+      let action = {};
+      if (vm.instance.uuid) {
+        action = updateEntity(hooksListTable, data.uuid, data);
+      } else {
+        action = createEntity(hooksListTable, data.uuid, data);
+      }
+      store.dispatch(action);
       ncUtilsFlash.success(message);
       vm.close();
     }, function(response) {

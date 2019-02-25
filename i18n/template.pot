@@ -150,6 +150,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
+#: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
 #: src/user/support/UserList.tsx
 msgid "Actions"
@@ -257,7 +258,7 @@ msgstr ""
 msgid "Add new project"
 msgstr ""
 
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HookCreateButton.tsx
 msgid "Add notification"
 msgstr ""
 
@@ -570,6 +571,10 @@ msgstr ""
 
 #: src/project/ProjectRemoveDialog.tsx
 msgid "Are you sure you would like to delete project {projectName}?"
+msgstr ""
+
+#: src/user/hooks/HookRemoveDialog.tsx
+msgid "Are you sure you would like to delete the hook?"
 msgstr ""
 
 #: src/user/keys/KeyRemoveDialog.tsx
@@ -1724,7 +1729,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HooksList.tsx
 msgid "Destination"
 msgstr ""
 
@@ -1907,7 +1912,6 @@ msgstr ""
 #: src/resource/actions/constants.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
-#: src/user/hooks/hook-list.js
 msgid "Edit"
 msgstr ""
 
@@ -2037,7 +2041,7 @@ msgstr ""
 
 #: src/events/help.js
 #: src/help/constants.js
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr ""
 
@@ -2534,6 +2538,14 @@ msgstr ""
 
 #: src/providers/details/provider-details.html
 msgid "Homepage"
+msgstr ""
+
+#: src/user/hooks/HookRemoveButton.tsx
+msgid "Hook has been removed."
+msgstr ""
+
+#: src/user/hooks/HookRemoveDialog.tsx
+msgid "Hook removal"
 msgstr ""
 
 #: src/resource/monitoring/ZabbixHostSummary.tsx
@@ -3477,7 +3489,7 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HooksList.tsx
 msgid "Method"
 msgstr ""
 
@@ -3839,14 +3851,6 @@ msgstr ""
 msgid "No networks yet."
 msgstr ""
 
-#: src/user/hooks/hook-list.js
-msgid "No notifications found matching filter."
-msgstr ""
-
-#: src/user/hooks/hook-list.js
-msgid "No notifications registered."
-msgstr ""
-
 #: src/payments/payment-list.js
 msgid "No payments found matching filter."
 msgstr ""
@@ -4023,6 +4027,7 @@ msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
 #: src/user/constants.js
+#: src/user/hooks/HooksList.tsx
 #: src/user/routes.js
 msgid "Notifications"
 msgstr ""
@@ -5566,7 +5571,7 @@ msgstr ""
 #: src/providers/provider-list.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
 msgstr ""
@@ -6700,7 +6705,7 @@ msgstr ""
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/slurm-allocation-list.js
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HooksList.tsx
 msgid "State"
 msgstr ""
 
@@ -7666,6 +7671,10 @@ msgstr ""
 msgid "Unable to remove SSH key."
 msgstr ""
 
+#: src/user/hooks/HookRemoveButton.tsx
+msgid "Unable to remove hook."
+msgstr ""
+
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to remove item from shopping cart."
 msgstr ""
@@ -7784,6 +7793,7 @@ msgstr ""
 #: src/customer/details/customer-policies.html
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/offering/actions/UpdateAction.ts
+#: src/user/hooks/HookUpdateButton.tsx
 #: src/user/hooks/hook-details.html
 msgid "Update"
 msgstr ""
@@ -8380,6 +8390,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/project/ProjectRemoveDialog.tsx
 #: src/resource/summary/ScheduleSummary.tsx
+#: src/user/hooks/HookRemoveDialog.tsx
 #: src/user/keys/KeyRemoveDialog.tsx
 msgid "Yes"
 msgstr ""
