@@ -1023,6 +1023,8 @@ msgstr ""
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/resources/list/CategoryFilter.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/openstack/openstack-tenant/openstack-template.js
 msgid "Category"
 msgstr ""
@@ -1498,6 +1500,10 @@ msgstr ""
 msgid "Created by"
 msgstr ""
 
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
+msgid "Creating"
+msgstr ""
+
 #: src/resource/state/constants.js
 msgid "Creating a backup schedule"
 msgstr ""
@@ -1961,6 +1967,7 @@ msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"
 msgstr ""
 
@@ -3549,6 +3556,11 @@ msgstr ""
 msgid "My offerings"
 msgstr ""
 
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
+msgid "My resources"
+msgstr ""
+
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/sidebar.js
 msgid "My services"
@@ -3585,6 +3597,7 @@ msgstr ""
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingConfigurationForm.tsx
@@ -4023,6 +4036,7 @@ msgstr ""
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/customer/popover/customer-popover.html
 #: src/experts/requests/details/expert-request-details-dialog.html
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/project/project-dialog.html
 #: src/providers/details/dialog.html
 #: src/user/user-popover.html
@@ -4582,6 +4596,7 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/details/plan/PlanField.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "Plan"
 msgstr ""
@@ -4978,6 +4993,8 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/offering/appstore-offering-summary.html
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -5862,6 +5879,7 @@ msgstr ""
 #: src/experts/requests/details/expert-request-details.js
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
@@ -6162,6 +6180,10 @@ msgstr ""
 msgid "Select caller..."
 msgstr ""
 
+#: src/marketplace/resources/list/CategoryFilter.tsx
+msgid "Select category..."
+msgstr ""
+
 #: src/cost-planning/cost-plan-certifications.html
 #: src/project/ProjectCreateForm.tsx
 #: src/project/project-policies.html
@@ -6200,6 +6222,7 @@ msgstr ""
 
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
+#: src/marketplace/resources/list/ProjectFilter.tsx
 msgid "Select project..."
 msgstr ""
 
@@ -6256,6 +6279,7 @@ msgid "Select state"
 msgstr ""
 
 #: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Select state..."
 msgstr ""
 
@@ -6636,7 +6660,9 @@ msgstr ""
 #: src/marketplace/orders/OrderStateFilter.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/ResourceOrderItems.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
@@ -6950,7 +6976,12 @@ msgid "Terminate resource {resourceName}"
 msgstr ""
 
 #: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminated"
+msgstr ""
+
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
+msgid "Terminating"
 msgstr ""
 
 #: src/experts/expert-provider-details.html
@@ -7772,6 +7803,7 @@ msgstr ""
 msgid "Updated"
 msgstr ""
 
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/resource/state/constants.js
 msgid "Updating"
 msgstr ""

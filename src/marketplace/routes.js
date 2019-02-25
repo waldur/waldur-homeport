@@ -256,6 +256,17 @@ export default function routes($stateProvider) {
       }
     })
 
+    .state('marketplace-customer-resources', {
+      url: 'marketplace-customer-resources/',
+      template: '<marketplace-customer-resources-list></marketplace-customer-resources-list>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('My resources'),
+        feature: 'marketplace',
+        sidebarState: 'marketplace-services',
+      }
+    })
+
     .state('marketplace-support-order-items', {
       url: 'order-items/',
       template: '<marketplace-support-order-items-list></marketplace-support-order-items-list>',
