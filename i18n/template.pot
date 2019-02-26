@@ -1031,6 +1031,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/resources/list/CategoryFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-tenant/openstack-template.js
 msgid "Category"
 msgstr ""
@@ -1129,6 +1130,7 @@ msgstr ""
 
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 msgid "Client organization"
 msgstr ""
 
@@ -3619,6 +3621,7 @@ msgstr ""
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
@@ -4612,6 +4615,7 @@ msgstr ""
 #: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "Plan"
 msgstr ""
@@ -5282,6 +5286,11 @@ msgstr ""
 msgid "Public orders"
 msgstr ""
 
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
+msgid "Public resources"
+msgstr ""
+
 #: src/resource/state/constants.js
 msgid "Pulling"
 msgstr ""
@@ -5902,6 +5911,7 @@ msgstr ""
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 #: src/offering/offering-details.js
@@ -6684,6 +6694,7 @@ msgstr ""
 #: src/marketplace/orders/ResourceOrderItems.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
