@@ -28,6 +28,10 @@ const TableComponent = props => {
       render: ({ row }) => formatDateTime(row.created),
     },
     {
+      title: translate('Type'),
+      render: ({ row }) => row.type,
+    },
+    {
       title: translate('State'),
       render: ({ row }) => row.state,
     },

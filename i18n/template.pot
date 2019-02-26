@@ -7344,6 +7344,8 @@ msgstr ""
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
+#: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/ResourceOrderItems.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
