@@ -5,19 +5,19 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { Category } from '@waldur/marketplace/types';
+import { Category, Offering } from '@waldur/marketplace/types';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { ResourceState } from '../types';
-import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
 
 interface ResourceFilter {
   state?: Option<ResourceState>;
   organization?: Customer;
   category?: Category;
+  offering?: Offering;
 }
 
 interface StateProps {
@@ -29,7 +29,15 @@ export const TableComponent = props => {
   const columns = [
     {
       title: translate('Name'),
-      render: ResourceNameField,
+      render: ({ row }) => <span>{row.attributes.name}</span>,
+    },
+    {
+      title: translate('Resource UUID'),
+      render: ({ row }) => <span>{row.uuid}</span>,
+    },
+    {
+      title: translate('Offering type'),
+      render: ({ row }) => <span>{row.offering_name}</span>,
     },
     {
       title: translate('Client organization'),
@@ -40,12 +48,12 @@ export const TableComponent = props => {
       render: ({ row }) => <span>{row.category_title}</span>,
     },
     {
-      title: translate('State'),
-      render: ResourceStateField,
-    },
-    {
       title: translate('Plan'),
       render: ({ row }) => <span>{row.plan_name || 'N/A'}</span>,
+    },
+    {
+      title: translate('State'),
+      render: ResourceStateField,
     },
   ];
 
@@ -64,6 +72,9 @@ const mapPropsToFilter = (props: StateProps) => {
     filter.provider_uuid = props.customer.uuid;
   }
   if (props.filter) {
+    if (props.filter.offering) {
+      filter.offering_uuid = props.filter.offering.uuid;
+    }
     if (props.filter.state) {
       filter.state = props.filter.state.value;
     }
@@ -79,18 +90,22 @@ const mapPropsToFilter = (props: StateProps) => {
 
 const exportRow = row => [
   row.attributes.name,
+  row.uuid,
+  row.offering_name,
   row.customer_name,
   row.category_title,
-  row.state,
   row.plan_name,
+  row.state,
 ];
 
 const exportFields = [
   'Name',
+  'Resource UUID',
+  'Offering type',
   'Client organization',
   'Category',
-  'State',
   'Plan',
+  'State',
 ];
 
 const TableOptions = {
