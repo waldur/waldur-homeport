@@ -77,6 +77,7 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'ProjectsList',
   fetchData: createFetcher('projects'),
+  queryField: 'query',
   getDefaultFilter: state => ({
     customer: getCustomer(state).uuid,
     o: 'name',
