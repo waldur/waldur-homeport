@@ -63,7 +63,8 @@ function* handleTerminateResource(action) {
     yield put(showSuccess(translate('Resource termination request has been submitted.')));
     yield put(constants.terminateResource.success());
     yield put(closeModalDialog());
-    yield put(stateGo('resources.details', {
+    const state = resource_type === 'Support.Offering' ? 'offeringDetails' : 'resources.details';
+    yield put(stateGo(state, {
       uuid: resource_uuid,
       resource_type,
       tab: 'orderItems',
