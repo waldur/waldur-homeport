@@ -14,7 +14,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps: any) => ({
   submitRequest: () => terminateResource({
-    resource_uuid: ownProps.resolve.resource.marketplace_resource_uuid,
+    marketplace_resource_uuid: ownProps.resolve.resource.marketplace_resource_uuid,
+    resource_uuid: ownProps.resolve.resource.uuid,
+    resource_type: ownProps.resolve.resource.resource_type,
   }, dispatch),
 });
 

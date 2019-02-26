@@ -5,7 +5,7 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 
 import * as api from '../../common/api';
 import * as constants from './constants';
@@ -38,12 +38,17 @@ function* handleSubmitUsage(action) {
 }
 
 function* handleSwitchPlan(action) {
-  const { resource_uuid, plan_url } = action.payload;
+  const { marketplace_resource_uuid, resource_uuid, resource_type, plan_url } = action.payload;
   try {
-    yield call(api.switchPlan, resource_uuid, plan_url);
+    yield call(api.switchPlan, marketplace_resource_uuid, plan_url);
     yield put(showSuccess(translate('Resource plan change request has been submitted.')));
     yield put(constants.switchPlan.success());
     yield put(closeModalDialog());
+    yield put(stateGo('resources.details', {
+      uuid: resource_uuid,
+      resource_type,
+      tab: 'orderItems',
+    }));
   } catch (error) {
     const errorMessage = `${translate('Unable to submit plan change request.')} ${format(error)}`;
     yield put(showError(errorMessage));
@@ -52,12 +57,18 @@ function* handleSwitchPlan(action) {
 }
 
 function* handleTerminateResource(action) {
-  const { resource_uuid } = action.payload;
+  const { marketplace_resource_uuid, resource_uuid, resource_type } = action.payload;
   try {
-    yield call(api.terminateResource, resource_uuid);
+    yield call(api.terminateResource, marketplace_resource_uuid);
     yield put(showSuccess(translate('Resource termination request has been submitted.')));
     yield put(constants.terminateResource.success());
     yield put(closeModalDialog());
+    const state = resource_type === 'Support.Offering' ? 'offeringDetails' : 'resources.details';
+    yield put(stateGo(state, {
+      uuid: resource_uuid,
+      resource_type,
+      tab: 'orderItems',
+    }));
   } catch (error) {
     const errorMessage = `${translate('Unable to submit resource termination request.')} ${format(error)}`;
     yield put(showError(errorMessage));

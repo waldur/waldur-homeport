@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { marketplaceIsVisible } from '@waldur/marketplace/utils';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
 import { userCanModifyTenant } from './utils';
@@ -14,5 +15,6 @@ export default function createAction(): ResourceAction {
     title: translate('Destroy'),
     validators: [userCanModifyTenant],
     dialogSubtitle: DestroyActionSubtitle,
+    isVisible: !marketplaceIsVisible(),
   };
 }

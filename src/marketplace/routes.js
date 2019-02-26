@@ -120,7 +120,7 @@ export default function routes($stateProvider) {
       template: '<marketplace-orders-list></marketplace-orders-list>',
       parent: 'project',
       data: {
-        pageTitle: gettext('Orders'),
+        pageTitle: gettext('My orders'),
         feature: 'marketplace',
       }
     })
@@ -239,7 +239,7 @@ export default function routes($stateProvider) {
       template: '<marketplace-order-items-list></marketplace-order-items-list>',
       parent: 'organization',
       data: {
-        pageTitle: gettext('Orders'),
+        pageTitle: gettext('Public orders'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
       }
@@ -250,7 +250,29 @@ export default function routes($stateProvider) {
       template: '<marketplace-my-order-items-list></marketplace-my-order-items-list>',
       parent: 'organization',
       data: {
-        pageTitle: gettext('Orders'),
+        pageTitle: gettext('My orders'),
+        feature: 'marketplace',
+        sidebarState: 'marketplace-services',
+      }
+    })
+
+    .state('marketplace-customer-resources', {
+      url: 'marketplace-customer-resources/',
+      template: '<marketplace-customer-resources-list></marketplace-customer-resources-list>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('My resources'),
+        feature: 'marketplace',
+        sidebarState: 'marketplace-services',
+      }
+    })
+
+    .state('marketplace-public-resources', {
+      url: 'marketplace-public-resources/',
+      template: '<marketplace-public-resources-list></marketplace-public-resources-list>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('Public resources'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
       }

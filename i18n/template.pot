@@ -140,6 +140,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/ResourceActionComponent.tsx
@@ -149,6 +150,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
+#: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
 #: src/user/support/UserList.tsx
 msgid "Actions"
@@ -256,7 +258,7 @@ msgstr ""
 msgid "Add new project"
 msgstr ""
 
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HookCreateButton.tsx
 msgid "Add notification"
 msgstr ""
 
@@ -298,6 +300,7 @@ msgid "Add request"
 msgstr ""
 
 #: src/dashboard/marketplace.ts
+#: src/marketplace/resources/list/CreateResourceButton.tsx
 msgid "Add resource"
 msgstr ""
 
@@ -570,6 +573,10 @@ msgstr ""
 msgid "Are you sure you would like to delete project {projectName}?"
 msgstr ""
 
+#: src/user/hooks/HookRemoveDialog.tsx
+msgid "Are you sure you would like to delete the hook?"
+msgstr ""
+
 #: src/user/keys/KeyRemoveDialog.tsx
 msgid "Are you sure you would like to delete the key?"
 msgstr ""
@@ -729,6 +736,7 @@ msgid "Back to login"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
+#: src/project/project-workspace.js
 #: src/user/user-details.js
 msgid "Back to organization"
 msgstr ""
@@ -1021,6 +1029,9 @@ msgstr ""
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/resources/list/CategoryFilter.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-tenant/openstack-template.js
 msgid "Category"
 msgstr ""
@@ -1119,6 +1130,7 @@ msgstr ""
 
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 msgid "Client organization"
 msgstr ""
 
@@ -1284,6 +1296,7 @@ msgid "Copy to clipboard"
 msgstr ""
 
 #: src/customer/CustomerList.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Cost"
@@ -1484,6 +1497,7 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: src/invitations/invitations-list.js
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
@@ -1494,6 +1508,10 @@ msgstr ""
 
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Created by"
+msgstr ""
+
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
+msgid "Creating"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -1713,7 +1731,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HooksList.tsx
 msgid "Destination"
 msgstr ""
 
@@ -1896,7 +1914,6 @@ msgstr ""
 #: src/resource/actions/constants.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
-#: src/user/hooks/hook-list.js
 msgid "Edit"
 msgstr ""
 
@@ -1959,6 +1976,7 @@ msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"
 msgstr ""
 
@@ -2025,7 +2043,7 @@ msgstr ""
 
 #: src/events/help.js
 #: src/help/constants.js
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr ""
 
@@ -2414,6 +2432,7 @@ msgstr ""
 msgid "Full name"
 msgstr ""
 
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/volume-extend.html
 msgid "GB"
 msgstr ""
@@ -2521,6 +2540,14 @@ msgstr ""
 
 #: src/providers/details/provider-details.html
 msgid "Homepage"
+msgstr ""
+
+#: src/user/hooks/HookRemoveButton.tsx
+msgid "Hook has been removed."
+msgstr ""
+
+#: src/user/hooks/HookRemoveDialog.tsx
+msgid "Hook removal"
 msgstr ""
 
 #: src/resource/monitoring/ZabbixHostSummary.tsx
@@ -3464,7 +3491,7 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HooksList.tsx
 msgid "Method"
 msgstr ""
 
@@ -3546,6 +3573,16 @@ msgstr ""
 msgid "My offerings"
 msgstr ""
 
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
+msgid "My orders"
+msgstr ""
+
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
+msgid "My resources"
+msgstr ""
+
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/sidebar.js
 msgid "My services"
@@ -3582,7 +3619,9 @@ msgstr ""
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
@@ -3815,14 +3854,6 @@ msgstr ""
 msgid "No networks yet."
 msgstr ""
 
-#: src/user/hooks/hook-list.js
-msgid "No notifications found matching filter."
-msgstr ""
-
-#: src/user/hooks/hook-list.js
-msgid "No notifications registered."
-msgstr ""
-
 #: src/payments/payment-list.js
 msgid "No payments found matching filter."
 msgstr ""
@@ -3999,6 +4030,7 @@ msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
 #: src/user/constants.js
+#: src/user/hooks/HooksList.tsx
 #: src/user/routes.js
 msgid "Notifications"
 msgstr ""
@@ -4020,6 +4052,7 @@ msgstr ""
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/customer/popover/customer-popover.html
 #: src/experts/requests/details/expert-request-details-dialog.html
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/project/project-dialog.html
 #: src/providers/details/dialog.html
 #: src/user/user-popover.html
@@ -4045,6 +4078,7 @@ msgstr ""
 
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -4086,6 +4120,10 @@ msgstr ""
 
 #: src/offering/events.ts
 msgid "Offering state has changed to {offering_state}."
+msgstr ""
+
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+msgid "Offering type"
 msgstr ""
 
 #: src/offering/events.ts
@@ -4254,6 +4292,7 @@ msgstr ""
 msgid "Order item details"
 msgstr ""
 
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/tabs/constants.js
@@ -4268,7 +4307,6 @@ msgstr ""
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/routes.js
-#: src/marketplace/sidebar.js
 msgid "Orders"
 msgstr ""
 
@@ -4578,7 +4616,10 @@ msgstr ""
 
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/details/plan/PlanField.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "Plan"
 msgstr ""
@@ -4975,6 +5016,9 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/offering/appstore-offering-summary.html
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
@@ -5239,6 +5283,16 @@ msgstr ""
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Public offerings"
+msgstr ""
+
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
+msgid "Public orders"
+msgstr ""
+
+#: src/marketplace/routes.js
+#: src/marketplace/sidebar.js
+msgid "Public resources"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -5530,7 +5584,7 @@ msgstr ""
 #: src/providers/provider-list.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
 msgstr ""
@@ -5763,6 +5817,7 @@ msgid "Resource"
 msgstr ""
 
 #: src/marketplace/orders/OrderItemDetailsHeader.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 msgid "Resource UUID"
 msgstr ""
 
@@ -5851,6 +5906,7 @@ msgstr ""
 #: src/customer/workspace/customer-workspace.js
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
+#: src/resource/support/ChartContainer.tsx
 msgid "Resource usage"
 msgstr ""
 
@@ -5858,7 +5914,9 @@ msgstr ""
 #: src/experts/requests/details/expert-request-details.js
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 #: src/offering/offering-details.js
@@ -5866,6 +5924,7 @@ msgstr ""
 #: src/providers/provider-list.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: src/resource/support/ChartContainer.tsx
+#: src/resource/support/TreemapChartFilter.tsx
 msgid "Resources"
 msgstr ""
 
@@ -6157,6 +6216,10 @@ msgstr ""
 msgid "Select caller..."
 msgstr ""
 
+#: src/marketplace/resources/list/CategoryFilter.tsx
+msgid "Select category..."
+msgstr ""
+
 #: src/cost-planning/cost-plan-certifications.html
 #: src/project/ProjectCreateForm.tsx
 #: src/project/project-policies.html
@@ -6195,6 +6258,7 @@ msgstr ""
 
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
+#: src/marketplace/resources/list/ProjectFilter.tsx
 msgid "Select project..."
 msgstr ""
 
@@ -6251,6 +6315,7 @@ msgid "Select state"
 msgstr ""
 
 #: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Select state..."
 msgstr ""
 
@@ -6483,6 +6548,7 @@ msgid "Show usage"
 msgstr ""
 
 #: src/customer/CustomerListFilter.tsx
+#: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
 msgstr ""
 
@@ -6529,6 +6595,10 @@ msgstr ""
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 msgid "Size name"
+msgstr ""
+
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
+msgid "Size should be between 1 and 4096 GB."
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
@@ -6621,12 +6691,16 @@ msgstr ""
 #: src/experts/requests/list/expert-request-project-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrderStateFilter.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/ResourceOrderItems.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
@@ -6647,7 +6721,7 @@ msgstr ""
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/slurm-allocation-list.js
-#: src/user/hooks/hook-list.js
+#: src/user/hooks/HooksList.tsx
 msgid "State"
 msgstr ""
 
@@ -6940,7 +7014,12 @@ msgid "Terminate resource {resourceName}"
 msgstr ""
 
 #: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminated"
+msgstr ""
+
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
+msgid "Terminating"
 msgstr ""
 
 #: src/experts/expert-provider-details.html
@@ -7258,6 +7337,10 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
+#: src/resource/support/TreemapChart.tsx
+msgid "Total: {total}"
+msgstr ""
+
 #: src/billing/billing-record-details.html
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
@@ -7277,6 +7360,8 @@ msgstr ""
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/orders/MyOrderItemsList.tsx
+#: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/ResourceOrderItems.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
@@ -7505,6 +7590,7 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/resource/support/ChartContainer.tsx
 msgid "Unable to load locations."
 msgstr ""
 
@@ -7601,6 +7687,10 @@ msgstr ""
 
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Unable to remove SSH key."
+msgstr ""
+
+#: src/user/hooks/HookRemoveButton.tsx
+msgid "Unable to remove hook."
 msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
@@ -7721,6 +7811,7 @@ msgstr ""
 #: src/customer/details/customer-policies.html
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/offering/actions/UpdateAction.ts
+#: src/user/hooks/HookUpdateButton.tsx
 #: src/user/hooks/hook-details.html
 msgid "Update"
 msgstr ""
@@ -7757,6 +7848,7 @@ msgstr ""
 msgid "Updated"
 msgstr ""
 
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/resource/state/constants.js
 msgid "Updating"
 msgstr ""
@@ -8316,6 +8408,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/project/ProjectRemoveDialog.tsx
 #: src/resource/summary/ScheduleSummary.tsx
+#: src/user/hooks/HookRemoveDialog.tsx
 #: src/user/keys/KeyRemoveDialog.tsx
 msgid "Yes"
 msgstr ""
@@ -8616,7 +8709,6 @@ msgid "of"
 msgstr ""
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "offerings"
 msgstr ""
 
@@ -8637,6 +8729,7 @@ msgid "owner"
 msgstr ""
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "plans"
 msgstr ""
 

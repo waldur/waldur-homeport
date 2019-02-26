@@ -28,4 +28,22 @@ export default function initAuthProvider(ENV, $authProvider) {
       redirectUri: window.location.origin,
     });
   }
+
+  if (ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_CLIENT_ID) {
+    $authProvider.oauth2({
+      name: 'tara',
+      clientId: ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_CLIENT_ID,
+      url: ENV.apiEndpoint + 'api-auth/tara/',
+      authorizationEndpoint:
+        ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_SANDBOX
+          ? 'https://tara-test.ria.ee/oidc/authorize'
+          : 'https://tara.ria.ee/oidc/authorize',
+      redirectUri: window.location.origin + '/login_completed/',
+      scope: ['openid'],
+      scopePrefix: '',
+      scopeDelimiter: ' ',
+      state: () => encodeURIComponent(Math.random().toString(36).substr(2)),
+      requiredUrlParams: ['scope', 'state'],
+    });
+  }
 }

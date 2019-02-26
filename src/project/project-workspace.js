@@ -2,6 +2,7 @@
 export default function ProjectWorkspaceController(
   $scope,
   ENV,
+  usersService,
   currentStateService,
   tabCounterService,
   eventsService,
@@ -141,7 +142,18 @@ export default function ProjectWorkspaceController(
       }
     ];
     $scope.items = SidebarExtensionService.mergeItems($scope.items, customItems);
+    addBackToOrganizationItemIfAllowed($scope.items);
     $scope.items = filterItemsByProjectType($scope.items);
+  }
+
+  function addBackToOrganizationItemIfAllowed(items) {
+    currentStateService.getCustomer().then(customer => {
+      usersService.getCurrentUser().then(currentUser => {
+        if (currentStateService.getOwnerOrStaff() || currentUser.is_support) {
+          items.unshift(getBackToOrganization(customer.uuid));
+        }
+      });
+    });
   }
 
   function filterItemsByProjectType(items) {
@@ -204,5 +216,13 @@ export default function ProjectWorkspaceController(
         $state.go('project.details', {uuid: project.uuid});
       });
     }
+  }
+
+  function getBackToOrganization(customerUuid) {
+    return {
+      label: gettext('Back to organization'),
+      icon: 'fa-arrow-left',
+      action: () => $state.go('organization.dashboard', {uuid: customerUuid}),
+    };
   }
 }

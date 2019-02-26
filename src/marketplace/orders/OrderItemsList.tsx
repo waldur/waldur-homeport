@@ -6,26 +6,18 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { OrderItemDetailsLink } from '@waldur/marketplace/orders/OrderItemDetailsLink';
-import { ResourceCreateUsageButton } from '@waldur/marketplace/resources/usage/ResourceCreateUsageButton';
-import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
+import { ResourceUsageButton } from '@waldur/marketplace/resources/usage/ResourceUsageButton';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
+
+import { RowNameField } from './RowNameField';
 
 export const TableComponent = props => {
   const columns = [
     {
       title: translate('Offering'),
-      render: ({row}) => (
-        <OrderItemDetailsLink
-          order_item_uuid={row.uuid}
-          customer_uuid={row.customer_uuid}
-          project_uuid={row.project_uuid}
-        >
-          {row.offering_name}
-        </OrderItemDetailsLink>
-      ),
+      render: RowNameField,
     },
     {
       title: translate('Client organization'),
@@ -34,6 +26,10 @@ export const TableComponent = props => {
     {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
+    },
+    {
+      title: translate('Type'),
+      render: ({ row }) => row.type,
     },
     {
       title: translate('State'),
@@ -49,16 +45,7 @@ export const TableComponent = props => {
     },
     {
       title: translate('Actions'),
-      render: ({ row }) => row.marketplace_resource_uuid && (
-        <div className="btn-group">
-          <ResourceShowUsageButton resource={row.marketplace_resource_uuid}/>
-          <ResourceCreateUsageButton
-            offering_uuid={row.offering_uuid}
-            resource_uuid={row.marketplace_resource_uuid}
-            plan_unit={row.plan_unit}
-          />
-        </div>
-      ),
+      render: ResourceUsageButton,
     },
   ];
 
@@ -75,7 +62,7 @@ const TableOptions = {
   table: 'OrderItemList',
   fetchData: createFetcher('marketplace-order-items'),
   mapPropsToFilter: props => {
-    const filter: any = {provider_uuid: props.customer.uuid};
+    const filter: Record<string, string> = {provider_uuid: props.customer.uuid};
     if (props.filter) {
       if (props.filter.offering) {
         filter.offering_uuid = props.filter.offering.uuid;

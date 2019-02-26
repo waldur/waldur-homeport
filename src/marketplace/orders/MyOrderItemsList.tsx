@@ -1,28 +1,91 @@
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
-import { connectTable, createFetcher } from '@waldur/table-react';
+import { formatDateTime } from '@waldur/core/dateUtils';
+import { defaultCurrency } from '@waldur/core/services';
+import { translate } from '@waldur/i18n';
+import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
+import { connectTable, createFetcher, Table } from '@waldur/table-react';
+import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { TableComponent } from './OrderItemsList';
+import { RowNameField } from './RowNameField';
+
+const TableComponent = props => {
+  const columns = [
+    {
+      title: translate('Offering'),
+      render: RowNameField,
+    },
+    {
+      title: translate('Project'),
+      render: ({ row }) => row.project_name,
+    },
+    {
+      title: translate('Created at'),
+      render: ({ row }) => formatDateTime(row.created),
+    },
+    {
+      title: translate('Type'),
+      render: ({ row }) => row.type,
+    },
+    {
+      title: translate('State'),
+      render: ({ row }) => row.state,
+    },
+    {
+      title: translate('Plan'),
+      render: ({ row }) => renderFieldOrDash(row.plan_name),
+    },
+    {
+      title: translate('Cost'),
+      render: ({ row }) => defaultCurrency(row.cost),
+    },
+    {
+      title: translate('Actions'),
+      render: ({ row }) => (
+        row.marketplace_resource_uuid ?
+        <ResourceShowUsageButton resource={row.marketplace_resource_uuid}/> :
+        null
+      ),
+    },
+  ];
+
+  return (
+    <Table
+      {...props}
+      columns={columns}
+      verboseName={translate('Order items')}
+    />
+  );
+};
+
+const mapPropsToFilter = props => {
+  const filter: Record<string, string> = {};
+  if (props.customer) {
+    filter.customer_uuid = props.customer.uuid;
+  }
+  if (props.filter) {
+    if (props.filter.state) {
+      filter.state = props.filter.state.value;
+    }
+    if (props.filter.project) {
+      filter.project_uuid = props.filter.project.uuid;
+    }
+  }
+  return filter;
+};
 
 const TableOptions = {
   table: 'MyOrderItemList',
   fetchData: createFetcher('marketplace-order-items'),
-  mapPropsToFilter: props => {
-    const filter: any = {customer_uuid: props.customer.uuid};
-    if (props.filter) {
-      if (props.filter.state) {
-        filter.state = props.filter.state.value;
-      }
-    }
-    return filter;
-  },
+  mapPropsToFilter,
 };
 
 const mapStateToProps = state => ({
-  filter: getFormValues('OrderItemFilter')(state),
+  filter: getFormValues('MyOrderItemsFilter')(state),
   customer: getCustomer(state),
 });
 

@@ -7,15 +7,18 @@ const resourceTabs = {
   },
   controller: class ResourceTabs {
     // @ngInject
-    constructor(ResourceTabsConfiguration, DEFAULT_RESOURCE_TABS, $stateParams) {
+    constructor(ResourceTabsConfiguration, DEFAULT_RESOURCE_TABS, $stateParams, features) {
       this.registry = ResourceTabsConfiguration;
       this.defaults = DEFAULT_RESOURCE_TABS;
       this.selectedTabName = $stateParams.tab;
+      this.features = features;
     }
 
     $onInit() {
       const config = this.registry[this.resource.resource_type] || this.defaults;
-      this.tabs = config.order.map(tab => angular.extend({name: tab}, config.options[tab]));
+      this.tabs = config.order.map(tab => angular.extend({name: tab}, config.options[tab])).filter(
+        tab => this.features.isVisible(tab.feature),
+      );
       if (this.tabs.length === 0) {
         return;
       }

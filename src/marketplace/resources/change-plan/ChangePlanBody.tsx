@@ -23,7 +23,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps: QueryChildProps<FetchedData>) => ({
   submitRequest: data => switchPlan({
-    resource_uuid: ownProps.data.resource.uuid,
+    marketplace_resource_uuid: ownProps.data.resource.uuid,
+    resource_uuid: ownProps.data.resource.resource_uuid,
+    resource_type: ownProps.data.resource.resource_type,
     plan_url: data.plan.url,
   }, dispatch),
 });
@@ -49,7 +51,7 @@ export const DialogBody = connector((props: DialogBodyProps) => (
           {!props.loading && (
             <SubmitButton
               submitting={props.submitting}
-              disabled={props.data.choices.length === 0}
+              disabled={!props.data.initialValues}
               label={props.orderCanBeApproved ? translate('Submit') : translate('Request for a change')}
             />
           )}

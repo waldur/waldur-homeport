@@ -4,6 +4,11 @@ import { OpenstackVolumeCheckoutSummary } from '@waldur/openstack/openstack-volu
 
 import { OpenstackVolumeCreateForm } from './OpenstackVolumeCreateForm';
 
+const serializer = attrs => ({
+  ...attrs,
+  size: attrs.size * 1024,
+});
+
 registerOfferingType({
   type: 'OpenStackTenant.Volume',
   get label() {
@@ -11,5 +16,6 @@ registerOfferingType({
   },
   component: OpenstackVolumeCreateForm,
   checkoutSummaryComponent: OpenstackVolumeCheckoutSummary,
+  serializer,
   disableOfferingCreation: true,
 });

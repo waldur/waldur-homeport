@@ -1,4 +1,10 @@
-import { getCustomerList, getServiceProviderList, getOfferingsList } from '@waldur/marketplace/common/api';
+import {
+  getCustomerList,
+  getServiceProviderList,
+  getOfferingsList,
+  getProjectList,
+  getCategories
+} from '@waldur/marketplace/common/api';
 
 export const organizationAutocomplete = (query: string) => {
   const params = {
@@ -9,6 +15,16 @@ export const organizationAutocomplete = (query: string) => {
   return getCustomerList(params).then(options => ({options}));
 };
 
+export const projectAutocomplete = (customer: string) => (query: string) => {
+  const params = {
+    name: query,
+    customer,
+    field: ['name', 'uuid'],
+    o: 'name',
+  };
+  return getProjectList(params).then(options => ({options}));
+};
+
 export const providerAutocomplete = (query: string) => {
   const params = {
     name: query,
@@ -16,6 +32,15 @@ export const providerAutocomplete = (query: string) => {
     o: 'customer_name',
   };
   return getServiceProviderList(params).then(options => ({options}));
+};
+
+export const categoryAutocomplete = (query: string) => {
+  const params = {
+    name: query,
+    field: ['title', 'uuid'],
+    o: 'title',
+  };
+  return getCategories(params).then(options => ({options}));
 };
 
 export const offeringsAutocomplete = (query: object) => {
