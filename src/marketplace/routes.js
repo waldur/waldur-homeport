@@ -267,6 +267,17 @@ export default function routes($stateProvider) {
       }
     })
 
+    .state('marketplace-public-resources', {
+      url: 'marketplace-public-resources/',
+      template: '<marketplace-public-resources-list></marketplace-public-resources-list>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('Public resources'),
+        feature: 'marketplace',
+        sidebarState: 'marketplace-services',
+      }
+    })
+
     .state('marketplace-support-order-items', {
       url: 'order-items/',
       template: '<marketplace-support-order-items-list></marketplace-support-order-items-list>',
