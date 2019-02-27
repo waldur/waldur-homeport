@@ -38,6 +38,10 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
       name="native_description"
       label={props.translate('Native description')}
     />
+    <TextField
+      name="terms_of_service"
+      label={props.translate('Terms of Service')}
+    />
     <ImageUploadField
       name="thumbnail"
       label={props.translate('Offering logo')}
