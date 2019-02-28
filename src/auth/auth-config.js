@@ -1,3 +1,5 @@
+import { ngInjector } from '@waldur/core/services';
+
 // @ngInject
 export default function initAuthProvider(ENV, $authProvider) {
   $authProvider.httpInterceptor = false;
@@ -42,8 +44,9 @@ export default function initAuthProvider(ENV, $authProvider) {
       scope: ['openid'],
       scopePrefix: '',
       scopeDelimiter: ' ',
+      ui_locales: () => ngInjector.get('LanguageUtilsService').current.code,
       state: () => encodeURIComponent(Math.random().toString(36).substr(2)),
-      requiredUrlParams: ['scope', 'state'],
+      requiredUrlParams: ['scope', 'state', 'ui_locales'],
     });
   }
 }

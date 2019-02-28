@@ -7026,6 +7026,7 @@ msgstr ""
 #: src/form/appstore-field-tos.html
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
+#: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/navigation/app-footer.html
 #: src/offering/appstore-offering.html
 #: src/user/support/TermsOfService.tsx

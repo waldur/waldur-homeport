@@ -10,7 +10,7 @@ const urlPattern =
 
 const urlRegex = new RegExp(urlPattern, 'im');
 
-const standaloneLinkRegex = new RegExp(`(?:\\s+)(${urlPattern})(?:\\s+)`, 'img');
+const standaloneLinkRegex = /\s+(https?:\/\/[^\s]+)\s*/img;
 
 export const getUrl = (str: string): string => {
   const result = str.match(urlRegex);

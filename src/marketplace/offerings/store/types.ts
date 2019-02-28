@@ -23,6 +23,7 @@ export interface OfferingFormData {
   description?: string;
   native_description?: string;
   full_description?: string;
+  terms_of_service?: string;
   category: Category;
   type: Option;
   attributes?: AttributesType;
@@ -53,6 +54,7 @@ export interface OfferingRequest {
   description?: string;
   native_description?: string;
   full_description?: string;
+  terms_of_service?: string;
   type: string;
   customer: string;
   category: string;
