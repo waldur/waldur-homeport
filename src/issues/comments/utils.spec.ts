@@ -24,6 +24,14 @@ describe('JIRA markup formatter', () => {
       `In particular, <a href="https://github.com/opennode/waldur-openstack/blob/develop/src/waldur_openstack/openstack_tenant/tasks.py#L138">https://github.com/opennode/waldur-openstack/blob/develop/src/waldur_openstack/openstack_tenant/tasks.py#L138</a> was displayed as a broken link.`)
   });
 
+  it('linkifies correctly', () => {
+    test(
+      'Kood, mis selle realiseerib on https://github.com/opennode/waldur-mastermind/blob/develop/src/waldur_openstack/openstack_tenant/backend.py#L947',
+      // tslint:disable-next-line: max-line-length
+      'Kood, mis selle realiseerib on <a href=\"https://github.com/opennode/waldur-mastermind/blob/develop/src/waldur_openstack/openstack_tenant/backend.py#L947\">https://github.com/opennode/waldur-mastermind/blob/develop/src/waldur_openstack/openstack_tenant/backend.py#L947</a> ',
+    );
+  });
+
   it('creates a link to an external resource', () => {
     test('See also: [http://jira.atlassian.com]',
       'See also: <a href="http://jira.atlassian.com">http://jira.atlassian.com</a>');
