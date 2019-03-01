@@ -8422,6 +8422,10 @@ msgstr ""
 msgid "Yes, use invitation email"
 msgstr ""
 
+#: src/resource/actions/dialog/action-dialog.html
+msgid "You are about to delete:"
+msgstr ""
+
 #: src/customer/details/customer-manage.html
 msgid "You can remove this organization by pressing the button"
 msgstr ""
