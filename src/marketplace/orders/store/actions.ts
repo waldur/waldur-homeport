@@ -1,3 +1,5 @@
+import { openModalDialog } from '@waldur/modal/actions';
+
 import * as constants from './constants';
 
 export const approveOrder = (orderUuid: string) => ({
@@ -20,3 +22,6 @@ export const setOrderStateChangeStatus = status => ({
     status,
   },
 });
+
+export const showTermsOfServiceDialog = (content: string) =>
+  openModalDialog('marketplaceTermsOfServiceDialog', {resolve: {content}, size: 'md'});

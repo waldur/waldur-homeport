@@ -11,6 +11,7 @@ type BootstrapStyle =
 
 interface AwesomeCheckboxProps {
   bsStyle?: BootstrapStyle;
+  marginRight?: boolean;
   label: React.ReactNode;
   id: string;
   value: boolean;
@@ -19,7 +20,11 @@ interface AwesomeCheckboxProps {
 }
 
 export const AwesomeCheckbox: React.SFC<AwesomeCheckboxProps> = (props: AwesomeCheckboxProps) => (
-  <div className={classNames('checkbox', 'awesome-checkbox', `checkbox-${props.bsStyle}`, 'm-r-sm')}>
+  <div className={
+    classNames('checkbox', 'awesome-checkbox', `checkbox-${props.bsStyle}`,
+      {'m-r-sm': props.marginRight}
+    )}
+  >
     <input
       type="checkbox"
       id={props.id}
@@ -35,4 +40,5 @@ export const AwesomeCheckbox: React.SFC<AwesomeCheckboxProps> = (props: AwesomeC
 
 AwesomeCheckbox.defaultProps = {
   bsStyle: 'primary',
+  marginRight: true,
 };
