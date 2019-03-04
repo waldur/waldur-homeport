@@ -5,6 +5,7 @@ import {
   StringField,
   TextField,
   FormContainer,
+  FileUploadField,
 } from '@waldur/form-react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
@@ -47,6 +48,16 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
       label={props.translate('Offering logo')}
       accept={['image/png', 'image/jpeg', 'image/svg+xml'].join(',')}
       buttonLabel={props.translate('Browse')}
+    />
+    <FileUploadField
+      name="document.file"
+      showFileName={true}
+      label={props.translate('Documents')}
+      buttonLabel={props.translate('Browse')}
+    />
+    <StringField
+      name="document.name"
+      placeholder={props.translate('Filename')}
     />
   </FormContainer>
 ));

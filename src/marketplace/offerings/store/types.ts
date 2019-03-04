@@ -33,6 +33,7 @@ export interface OfferingFormData {
   service_settings?: any;
   thumbnail?: File;
   scope?: string;
+  document?: OfferingDocument;
 }
 
 export interface OfferingUpdateFormData extends OfferingFormData {
@@ -63,4 +64,9 @@ export interface OfferingRequest {
   plans?: PlanRequest[];
   options?: OfferingOptions;
   scope?: string;
+}
+
+export interface OfferingDocument {
+  file: File;
+  name?: string;
 }
