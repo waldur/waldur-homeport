@@ -16,7 +16,10 @@ function invalidTokenInterceptor($injector, $q) {
   return {
     responseError: function(response) {
       const authService = $injector.get('authService');
-      if (response.status === 401) {
+      const $state = $injector.get('$state');
+      // Erred state is terminal, user should not be redirected from erred state to login
+      // so that he would be able to read error message details
+      if (response.status === 401 && !$state.current.data.erred) {
         authService.localLogout();
       }
       return $q.reject(response);
