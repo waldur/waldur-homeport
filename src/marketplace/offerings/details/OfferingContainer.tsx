@@ -51,7 +51,7 @@ async function loadData(offering_uuid: string) {
       title: translate('Plan capacity'),
       component: () => <PlanUsageList offering_uuid={offering.uuid}/>,
     },
-  ];
+  ].filter(tab => tab.visible);
   updateBreadcrumbs(offering);
   return { offering, tabs };
 }
