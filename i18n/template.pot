@@ -1845,6 +1845,10 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
+#: src/marketplace/offerings/create/OverviewStep.tsx
+msgid "Documents"
+msgstr ""
+
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Domain"
 msgstr ""
@@ -2270,6 +2274,10 @@ msgstr ""
 
 #: src/core/DownloadLink/effects.tsx
 msgid "File has been downloaded."
+msgstr ""
+
+#: src/marketplace/offerings/create/OverviewStep.tsx
+msgid "Filename"
 msgstr ""
 
 #: src/issues/attachments/utils.ts

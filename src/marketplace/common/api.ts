@@ -5,6 +5,8 @@ import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
 import { State, OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Category, Offering, ServiceProvider, CategoryComponentUsage } from '@waldur/marketplace/types';
 
+import { OfferingDocument } from '../offerings/store/types';
+
 // tslint:disable: variable-name
 
 export const getPlugins = () =>
@@ -39,6 +41,9 @@ export const updateOffering = (offeringId, data) =>
 
 export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
   sendForm<Offering>('PATCH', `${ENV.apiEndpoint}api/marketplace-offerings/${offeringId}/`, {thumbnail});
+
+export const uploadOfferingDocument = (offeringUrl: string, document: OfferingDocument) =>
+  sendForm<Offering>('POST', `${ENV.apiEndpoint}api/marketplace-offering-files/`, {offering: offeringUrl, ...document});
 
 export const getCartItems = () =>
   getAll('/marketplace-cart-items/');
