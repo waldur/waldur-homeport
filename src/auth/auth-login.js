@@ -88,6 +88,10 @@ export const authLogin = {
       return this.showSocialSignup() && !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_CLIENT_ID;
     }
 
+    getTARALabel() {
+      return this.ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_LABEL;
+    }
+
     showEstonianId() {
       return this.methods.ESTONIAN_ID;
     }

@@ -98,14 +98,11 @@
       <span ng-if="auth.mode !== 'register'" translate>Sign in with trusted identity</span>
     </button>
   </div>
-  <div ng-if="auth.showTARA()" class="m-lg">
-    <a ng-click="auth.authenticate('tara')">
-      <img
-        width="170"
-        src="tara-logo.svg"
-        alt="Log in through State Authentication Service"
-      />
-    </a>
+  <div ng-if="auth.showTARA()" class="m-b-sm">
+    <button ng-click="auth.authenticate('tara')" class="btn btn-smartid btn-block">
+      <i class="fa fa-id-card-o" aria-hidden="true"></i>
+      <auth-button-text mode="auth.mode" provider="{{ auth.getTARALabel() }}"></auth-button-text>
+    </button>
   </div>
   <div ng-if="auth.showSaml2()">
     <auth-saml2 mode="auth.mode"></auth-saml2>
