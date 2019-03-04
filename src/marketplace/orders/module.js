@@ -5,6 +5,7 @@ import marketplaceSupportOrderItemsList from './SupportOrderItemsContainer';
 import marketplaceOrderDetails from './OrderDetailsContainer';
 import marketplaceOrderItemDetails from './OrderItemDetailsContainer';
 import marketplaceResourceOrderItems from './ResourceOrderItems';
+import marketplaceTermsOfServiceDialog from './TermsOfServiceDialog';
 
 export default module => {
   module.component('marketplaceOrdersList', marketplaceOrdersList);
@@ -14,4 +15,5 @@ export default module => {
   module.component('marketplaceOrderDetails', marketplaceOrderDetails);
   module.component('marketplaceOrderItemDetails', marketplaceOrderItemDetails);
   module.component('marketplaceResourceOrderItems', marketplaceResourceOrderItems);
+  module.component('marketplaceTermsOfServiceDialog', marketplaceTermsOfServiceDialog);
 };

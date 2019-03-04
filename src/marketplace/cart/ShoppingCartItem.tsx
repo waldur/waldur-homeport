@@ -7,6 +7,8 @@ import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
+import { TermsOfService } from '../orders/TermsOfService';
+
 import './ShoppingCartItem.scss';
 
 import { ShoppingCartItemUpdateLink } from './ShoppingCartItemUpdateLink';
@@ -15,6 +17,7 @@ interface ShoppingCartItemProps {
   item: OrderItemResponse;
   onRemove(): void;
   isRemovingItem: boolean;
+  termsOfServiceIsVisible?: boolean;
 }
 
 export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
@@ -51,5 +54,15 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
         </a>
       </span>
     </td>
+    {props.termsOfServiceIsVisible &&
+      <td className="text-center">
+        {props.item.offering_shared ?
+          <TermsOfService
+            name={props.item.offering_uuid}
+            offering_terms_of_service={props.item.offering_terms_of_service}
+          /> : <span>&mdash;</span>
+        }
+      </td>
+    }
   </tr>
 );

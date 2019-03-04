@@ -8,7 +8,7 @@ import ActionButton from '@waldur/table-react/ActionButton';
 import { orderCanBeApproved } from '../orders/store/selectors';
 import { OrderItemResponse } from '../orders/types';
 import { createOrderRequest } from './store/actions';
-import { getItems, isCreatingOrder } from './store/selectors';
+import { getItems, isCreatingOrder, allTermsOfServiceAgreed } from './store/selectors';
 import { OuterState } from './types';
 
 interface ForwardButtonComponentProps extends TranslateProps {
@@ -55,7 +55,7 @@ const ForwardButtonComponent = (props: ForwardButtonComponentProps) =>
 
 const mapStateToProps = (state: OuterState) => ({
   items: getItems(state),
-  disabled: isCreatingOrder(state),
+  disabled: isCreatingOrder(state) || !allTermsOfServiceAgreed(state),
   orderCanBeApproved: orderCanBeApproved(state),
 });
 
