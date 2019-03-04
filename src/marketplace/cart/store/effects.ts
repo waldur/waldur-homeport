@@ -1,3 +1,4 @@
+import { delay } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
@@ -33,6 +34,8 @@ function* initCart() {
   if (!isFeatureVisible('marketplace')) {
     return;
   }
+  // Wait a little bit to avoid race conditions
+  yield call(delay, 500);
   try {
     const items = yield call(api.getCartItems);
     yield put(actions.setItems(items));
