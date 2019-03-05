@@ -63,7 +63,7 @@ export const PureOfferingTabs = (props: OfferingTabsProps) => {
           <OfferingEvents offering={props.offering}/>
         </div>
       </Tab>
-      {props.offering.issue && (
+      {props.offering.issue && props.offering.issue_key && (
         <Tab title={props.translate('Comments')} eventKey="comments">
           <div className="m-t-sm">
             <IssueCommentsContainer issue={issue} renderHeader={false}/>
