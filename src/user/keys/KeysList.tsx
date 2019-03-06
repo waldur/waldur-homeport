@@ -32,7 +32,9 @@ const TableComponent = props => {
     hasQuery={true}
     showPageSizeSelector={true}
     verboseName={translate('SSH keys')}
-    actions={props.isStaffOrSelf && <KeyCreateButton/>}/>
+    actions={props.isStaffOrSelf && <KeyCreateButton/>}
+    enableExport={true}
+    />
   );
 };
 

@@ -60,6 +60,7 @@ const TableComponent = props => {
     showPageSizeSelector={true}
     verboseName={translate('Notifications')}
     actions={<HookCreateButton />}
+    enableExport={true}
   />
   );
 };

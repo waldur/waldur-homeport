@@ -53,6 +53,7 @@ export const TableComponent = props => {
       verboseName={translate('Offerings')}
       actions={props.showOfferingCreateButton && <OfferingCreateButton/>}
       initialSorting={{field: 'created', mode: 'desc'}}
+      enableExport={true}
     />
   );
 };

@@ -70,6 +70,7 @@ const TableComponent = props => {
       actions={<JiraIssueCreateButton project={props.resource}/>}
       verboseName={translate('requests')}
       hasQuery={true}
+      enableExport={true}
     />
   );
 };

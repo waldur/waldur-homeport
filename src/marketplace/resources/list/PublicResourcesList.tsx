@@ -62,6 +62,7 @@ export const TableComponent = props => {
       {...props}
       columns={columns}
       verboseName={translate('Resources')}
+      enableExport={true}
     />
   );
 };

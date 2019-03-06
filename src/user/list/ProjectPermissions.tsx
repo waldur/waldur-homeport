@@ -23,7 +23,9 @@ const TableComponent = props => {
           render: ({ row }) => <span>{translate(row.role)}</span>,
         },
       ]}
-      verboseName={translate('projects')}/>
+      verboseName={translate('projects')}
+      enableExport={true}
+    />
   );
 };
 
