@@ -42,7 +42,7 @@ function redirectToState($rootScope, $state, $injector) {
     }
     // Erred state is terminal, user should not be redirected from erred state to login
     // so that he would be able to read error message details
-    if (error && error.status === 401 && !$state.current.data.erred) {
+    if (error && error.status === 401 && (!$state.current.data || !$state.current.data.erred)) {
       return $injector.get('authService').localLogout();
     }
     if (error && error.redirectTo && error.status !== -1) {
