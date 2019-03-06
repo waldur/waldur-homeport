@@ -46,6 +46,9 @@ export const AttributeCell: React.SFC<AttributeCellProps> = ({ attr, value }) =>
       return <>{typeof value === 'string' ? <SecretField value={value}/> : 'N/A'}</>;
     }
 
+    case 'html':
+      return <div dangerouslySetInnerHTML={{__html: value as string}}/>;
+
     default:
       return <>{value === undefined ? 'N/A' : value}</>;
   }
