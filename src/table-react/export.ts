@@ -2,6 +2,8 @@ import FileSaver from 'file-saver';
 import Papa from 'papaparse';
 import { put, call, select } from 'redux-saga/effects';
 
+import { ENV } from '@waldur/core/services';
+import { loadPdfMake } from '@waldur/shims/pdfmake';
 import { fetchAll } from '@waldur/table-react/api';
 
 import { blockStart, blockStop } from './actions';
@@ -43,7 +45,7 @@ async function exportAsPdf(table, data) {
   const rows = data.data.map(row => row.map(cell => ({
     text: cell + '',
   })));
-  const doc = {
+  const doc: Record<string, object> = {
     content: [
       {
         text: table,
@@ -69,6 +71,12 @@ async function exportAsPdf(table, data) {
       },
     },
   };
+  const defaultFont = ENV.defaultFont;
+  if (defaultFont) {
+    doc.defaultStyle = {
+      font: defaultFont,
+    };
+  }
   const pdf = pdfmake.createPdf(doc);
   pdf.getBuffer(buffer => saveAsPdf(table, buffer));
 }
@@ -76,14 +84,6 @@ async function exportAsPdf(table, data) {
 function saveAsPdf(table, data) {
   const blob = new Blob([data], {type: 'application/pdf'});
   FileSaver.saveAs(blob, `${table}.pdf`);
-}
-
-async function loadPdfMake() {
-  // See also: https://github.com/bpampuch/pdfmake/issues/910#issuecomment-400199595
-  const pdfMake = (await import(/* webpackChunkName: "pdfmake" */ 'pdfmake/build/pdfmake')).default;
-  const pdfFonts = (await import(/* webpackChunkName: "vfs_fonts" */ 'pdfmake/build/vfs_fonts')).default;
-  pdfMake.vfs = pdfFonts.pdfMake.vfs;
-  return pdfMake;
 }
 
 function saveAsCsv(table, data) {

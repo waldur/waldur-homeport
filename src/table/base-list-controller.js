@@ -1,6 +1,4 @@
-function loadDatatables() {
-  return import(/* webpackChunkName: "datatables" */ '@waldur/shims/datatables');
-}
+import { loadDatatables } from '@waldur/shims/load-datatables';
 
 // @ngInject
 export default function baseControllerListClass(baseControllerClass, ENV, $rootScope, currentStateService, ncUtils) {
