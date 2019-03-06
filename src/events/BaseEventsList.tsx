@@ -36,7 +36,9 @@ const TableComponent = props => {
     ])}
     hasQuery={true}
     verboseName={translate('events')}
-    actions={<EventTypesButton/>}/>
+    actions={<EventTypesButton/>}
+    enableExport={true}
+    />
   );
 };
 

@@ -34,6 +34,7 @@ export const TableComponent = props => {
       columns={columns}
       verboseName={translate('Usages')}
       showPageSizeSelector={true}
+      enableExport={true}
     />
   );
 };

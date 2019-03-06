@@ -70,6 +70,7 @@ export const TableComponent = props => {
       showPageSizeSelector={true}
       actions={<ProjectCreateButton/>}
       expandableRow={ProjectExpandableRowContainer}
+      enableExport={true}
     />
   );
 };

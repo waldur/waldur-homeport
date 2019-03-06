@@ -131,6 +131,7 @@ export const TableComponent = props => {
       verboseName={translate('Organizations')}
       hasQuery={true}
       showPageSizeSelector={true}
+      enableExport={true}
     />
   );
 };
