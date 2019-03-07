@@ -44,7 +44,7 @@ function* removeOfferingQuotas(action) {
 }
 
 function* createOffering(action: Action<OfferingFormData>) {
-  const { thumbnail, service_settings, ...rest } = action.payload;
+  const { thumbnail, document, service_settings, ...rest } = action.payload;
   const customer = yield select(getCustomer);
   try {
     const offeringType = rest.type.value;
@@ -66,6 +66,9 @@ function* createOffering(action: Action<OfferingFormData>) {
     if (thumbnail) {
       const offeringId = response.data.uuid;
       yield call(api.uploadOfferingThumbnail, offeringId, thumbnail);
+    }
+    if (document && document.file) {
+      yield call(api.uploadOfferingDocument, response.data.url, document);
     }
   } catch (error) {
     const errorMessage = `${translate('Unable to create offering.')} ${format(error)}`;

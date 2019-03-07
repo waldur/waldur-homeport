@@ -261,6 +261,18 @@ const ENV = {
 
   // Allows to hide domain field in organization detail
   organizationDomainVisible: false,
+
+  // Default font for rendering exported table PDF
+  defaultFont: 'OpenSans',
+
+  // Font families should match default font.
+  // Both normal and bold types are required.
+  fontFamilies: {
+    OpenSans: {
+      normal: 'OpenSans-Regular.ttf',
+      bold: 'OpenSans-Bold.ttf',
+    }
+  },
 };
 
 export default ENV;

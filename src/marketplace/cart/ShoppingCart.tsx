@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
@@ -8,7 +10,8 @@ import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import './ShoppingCart.scss';
 import { ShoppingCartItem } from './ShoppingCartItem';
 import * as actions from './store/actions';
-import { getMaxUnit, getItems, isRemovingItem } from './store/selectors';
+import { ToSForm } from './store/constants';
+import { getMaxUnit, getItems, isRemovingItem, getTermsOfServiceIsVisible } from './store/selectors';
 import { OuterState } from './types';
 
 interface ShoppingCartProps {
@@ -16,6 +19,7 @@ interface ShoppingCartProps {
   maxUnit: 'month' | 'day';
   removeItem(uuid: string): void;
   isRemovingItem: boolean;
+  termsOfServiceIsVisible?: boolean;
 }
 
 const PureShoppingCart = (props: ShoppingCartProps) => props.items.length > 0 ? (
@@ -28,6 +32,9 @@ const PureShoppingCart = (props: ShoppingCartProps) => props.items.length > 0 ? 
             <BillingPeriod unit={props.maxUnit}/>
           </th>
           <th className="text-center">{translate('Actions')}</th>
+          {props.termsOfServiceIsVisible &&
+            <th className="text-center">{translate('Agree with ToS')}</th>
+          }
         </tr>
       </thead>
       <tbody>
@@ -37,6 +44,7 @@ const PureShoppingCart = (props: ShoppingCartProps) => props.items.length > 0 ? 
             item={item}
             onRemove={() => props.removeItem(item.uuid)}
             isRemovingItem={props.isRemovingItem}
+            termsOfServiceIsVisible={props.termsOfServiceIsVisible}
           />
         ))}
       </tbody>
@@ -52,12 +60,20 @@ const mapStateToProps = (state: OuterState) => ({
   items: getItems(state),
   maxUnit: getMaxUnit(state),
   isRemovingItem: isRemovingItem(state),
+  termsOfServiceIsVisible: getTermsOfServiceIsVisible(state),
 });
 
 const mapDispatchToProps = {
   removeItem: actions.removeItemRequest,
 };
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+interface TermsOfServiceFormData {
+  [uuid: string]: boolean;
+}
 
-export const ShoppingCart = connector(PureShoppingCart) as React.ComponentClass<{}>;
+const enhancer = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  reduxForm<TermsOfServiceFormData, ShoppingCartProps>({form: ToSForm}),
+);
+
+export const ShoppingCart = enhancer(PureShoppingCart) as React.ComponentClass<{}>;

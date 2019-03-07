@@ -15,6 +15,7 @@ export default function authCallbackRoutes($stateProvider) {
       template: '<auth-login-failed></auth-login-failed>',
       data: {
         bodyClass: 'old',
+        erred: true,
       }
     })
 
@@ -31,6 +32,7 @@ export default function authCallbackRoutes($stateProvider) {
       template: '<auth-logout-failed></auth-logout-failed>',
       data: {
         bodyClass: 'old',
+        erred: true,
       }
     });
 }

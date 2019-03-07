@@ -17,6 +17,8 @@ export interface OrderItemResponse {
   offering_description: string;
   offering_thumbnail: string;
   offering_type: string;
+  offering_terms_of_service: string;
+  offering_shared: boolean;
   marketplace_resource_uuid?: string;
   resource_uuid?: string;
   resource_type?: string;

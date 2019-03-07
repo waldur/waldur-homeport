@@ -40,7 +40,9 @@ function redirectToState($rootScope, $state, $injector) {
       // eslint-disable-next-line no-console
       console.log('$stateChangeError', error);
     }
-    if (error && error.status === 401) {
+    // Erred state is terminal, user should not be redirected from erred state to login
+    // so that he would be able to read error message details
+    if (error && error.status === 401 && (!$state.current.data || !$state.current.data.erred)) {
       return $injector.get('authService').localLogout();
     }
     if (error && error.redirectTo && error.status !== -1) {

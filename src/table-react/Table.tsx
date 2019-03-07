@@ -33,6 +33,7 @@ interface TableProps extends TranslateProps, TableState {
   expandableRow?: React.ComponentType<{row: any}>;
   toggleRow?(row: any): void;
   toggled?: object;
+  enableExport?: boolean;
 }
 
 class Table extends React.Component<TableProps> {

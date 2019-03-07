@@ -25,7 +25,7 @@ const PureOverviewSummary = props => {
       {
         key: 'full_description',
         title: translate('Full description'),
-        type: 'string',
+        type: 'html',
       },
       {
         key: 'native_name',

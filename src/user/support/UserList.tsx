@@ -138,7 +138,9 @@ const TableComponent = props => {
       },
     ]}
     showPageSizeSelector={true}
-    verboseName={translate('users')}/>
+    verboseName={translate('users')}
+    enableExport={true}
+    />
   );
 };
 

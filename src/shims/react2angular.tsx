@@ -40,6 +40,9 @@ export function react2angular<Props>(
         });
       }
       render() {
+        if (names.length > 0 && names.every(k => this.props[k] === undefined)) {
+          return null;
+        }
         render(<Class {...this.props} {...this.injectedProps} />, this.$element[0]);
       }
       componentWillUnmount() {

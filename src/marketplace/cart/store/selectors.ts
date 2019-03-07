@@ -1,6 +1,10 @@
+import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { isVisible } from '@waldur/store/config';
+
 import { OuterState } from '../types';
+import { ToSForm } from './constants';
 
 const getCart = (state: OuterState) => state.marketplace.cart;
 
@@ -30,3 +34,24 @@ export const getItemSelectorFactory = orderItemUuid =>
   createSelector(getItems, items =>
     items.find(item => item.uuid === orderItemUuid)
   );
+
+const getFormState = state => state.form;
+const getNamedFormState = formName => createSelector(getFormState, (formState = {}) => formState[formName]);
+const getRegisteredFields = formName => createSelector(getNamedFormState(formName), (namedFormState = {}) => namedFormState.registeredFields);
+
+export const getTermsOfServiceIsVisible = state => isVisible(state, 'marketplace.termsOfService');
+
+export const allTermsOfServiceAgreed = createSelector(
+  getFormValues(ToSForm),
+  getRegisteredFields(ToSForm),
+  getTermsOfServiceIsVisible,
+  (formValues, registeredFields, termsOfServiceIsVisible) => {
+    if (!termsOfServiceIsVisible) {
+      return true;
+    }
+    if (!registeredFields) {
+      return true;
+    }
+    return formValues && Object.keys(registeredFields).every(key => formValues[key] === true);
+  }
+);

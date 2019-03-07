@@ -387,7 +387,17 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
           return {
             extend: format,
             exportOptions: exportOptions,
-            title: title
+            title: title,
+            customize: doc => {
+              if (format === 'pdfHtml5') {
+                const defaultFont = ENV.defaultFont;
+                if (defaultFont) {
+                  doc.defaultStyle = {
+                    font: defaultFont,
+                  };
+                }
+              }
+            }
           };
         });
       }

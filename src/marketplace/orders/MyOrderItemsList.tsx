@@ -58,12 +58,13 @@ const TableComponent = props => {
       {...props}
       columns={columns}
       verboseName={translate('Order items')}
+      enableExport={true}
     />
   );
 };
 
 const mapPropsToFilter = props => {
-  const filter: Record<string, string> = {};
+  const filter: Record<string, string> = {o: '-created'};
   if (props.customer) {
     filter.customer_uuid = props.customer.uuid;
   }
@@ -78,10 +79,32 @@ const mapPropsToFilter = props => {
   return filter;
 };
 
+const exportRow = row => [
+  row.offering_name,
+  row.project_name,
+  formatDateTime(row.created),
+  row.type,
+  row.state,
+  renderFieldOrDash(row.plan_name),
+  defaultCurrency(row.cost || 0),
+];
+
+const exportFields = [
+  'Offering',
+  'Project',
+  'Created at',
+  'Type',
+  'State',
+  'Plan',
+  'Cost',
+];
+
 const TableOptions = {
   table: 'MyOrderItemList',
   fetchData: createFetcher('marketplace-order-items'),
   mapPropsToFilter,
+  exportRow,
+  exportFields,
 };
 
 const mapStateToProps = state => ({

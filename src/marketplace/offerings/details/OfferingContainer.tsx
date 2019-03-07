@@ -47,10 +47,11 @@ async function loadData(offering_uuid: string) {
   const tabs = [
     ...getTabs({offering, sections}),
     {
+      visible: offering.billable,
       title: translate('Plan capacity'),
       component: () => <PlanUsageList offering_uuid={offering.uuid}/>,
     },
-  ];
+  ].filter(tab => tab.visible);
   updateBreadcrumbs(offering);
   return { offering, tabs };
 }

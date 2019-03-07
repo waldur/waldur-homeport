@@ -1,9 +1,5 @@
 window.JSZip = require('jszip');
 
-const pdfMake = require('pdfmake/build/pdfmake');
-const pdfFonts = require('pdfmake/build/vfs_fonts');
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
 import 'datatables.net';
 import 'datatables.net-bs';
 import 'datatables.net-bs/css/dataTables.bootstrap.css';

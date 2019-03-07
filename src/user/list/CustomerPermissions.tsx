@@ -31,6 +31,7 @@ const TableComponent = props => {
       ])}
       verboseName={translate('organizations')}
       actions={<CustomerCreateButton/>}
+      enableExport={true}
     />
   );
 };

@@ -31,7 +31,8 @@
     "pythonManagement",
     "jupyterHubManagement",
     "marketplace",
-    "marketplace.review"
+    "marketplace.review",
+    "marketplace.termsOfService"
   ],
   "featuresVisible": false,
   "appStoreCategories": [

@@ -106,6 +106,7 @@ type AttributeType =
   | 'choice'
   | 'list'
   | 'password'
+  | 'html'
   ;
 
 export interface Attribute {
