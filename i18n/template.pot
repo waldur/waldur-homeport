@@ -4946,7 +4946,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/utils.ts
-#: src/offering/appstore-offering-summary.html
+#: src/offering/appstore-offering-summary.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
@@ -4955,8 +4955,16 @@ msgstr ""
 msgid "Price per month"
 msgstr ""
 
-#: src/appstore/dialog/appstore-category-selector.html
+#: src/appstore/dialog/appstore-category-selector.js
 msgid "Price per month (VAT not included)"
+msgstr ""
+
+#: src/offering/appstore-offering-summary.js
+msgid "Price per month from"
+msgstr ""
+
+#: src/appstore/dialog/appstore-category-selector.js
+msgid "Price per month from (VAT not included)"
 msgstr ""
 
 #: src/marketplace/common/BillingPeriod.tsx
