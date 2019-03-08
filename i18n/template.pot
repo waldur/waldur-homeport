@@ -4959,14 +4959,6 @@ msgstr ""
 msgid "Price per month (VAT not included)"
 msgstr ""
 
-#: src/offering/appstore-offering-summary.js
-msgid "Price per month from"
-msgstr ""
-
-#: src/appstore/dialog/appstore-category-selector.js
-msgid "Price per month from (VAT not included)"
-msgstr ""
-
 #: src/marketplace/common/BillingPeriod.tsx
 msgid "Price per unit"
 msgstr ""

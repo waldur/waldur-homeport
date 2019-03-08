@@ -9,7 +9,7 @@ export default function registerOfferingCategory(features, $q, offeringsService,
     category: offering.config.category || gettext('Custom request'),
     state: 'appstore.offering',
     price: offering.config.price,
-    lower_price: offering.config.lower_price,
+    price_tooltip: offering.config.price_tooltip,
   });
 
   const parseError = error => {
