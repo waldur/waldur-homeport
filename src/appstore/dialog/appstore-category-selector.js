@@ -12,11 +12,7 @@ const appstoreCategorySelector = {
   },
   controller: class {
     getPriceTooltip(category) {
-      if (category.lower_price) {
-        return translate('Price per month from (VAT not included)');
-      } else {
-        return translate('Price per month (VAT not included)');
-      }
+      return category.price_tooltip || translate('Price per month (VAT not included)');
     }
   }
 };

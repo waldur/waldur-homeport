@@ -27,11 +27,7 @@ const appstoreOfferingSummary = {
     }
 
     getPriceLabel() {
-      if (this.model.lower_price) {
-        return translate('Price per month from');
-      } else {
-        return translate('Price per month');
-      }
+      return this.model.price_tooltip || translate('Price per month');
     }
   }
 };
