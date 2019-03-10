@@ -26,7 +26,8 @@
             ng-class="{disabled: category.disabled}">
             <img class="category-icon" ng-src="{{::category.image}}" ng-if="::category.image">
             <span class="pull-right" ng-if="category.price">
-              <i uib-tooltip="{{'Price per month (VAT not included)' | translate }}" tooltip-placement="left"
+              <i uib-tooltip="{{ $ctrl.getPriceTooltip(category) }}"
+                tooltip-placement="left"
                 class="fa fa-info-circle"></i>
               <small>{{category.price | defaultCurrency}}</small>
             </span>

@@ -13,7 +13,7 @@
         <tr>
           <td>
             <price-tooltip></price-tooltip>
-            <strong translate>Price per month</strong>
+            <strong>{{ $ctrl.getPriceLabel() }}</strong>
           </td>
           <td>{{ $ctrl.model.price | defaultCurrency }}</td>
         </tr>

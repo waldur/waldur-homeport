@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 import template from './appstore-offering-summary.html';
 
 const appstoreOfferingSummary = {
@@ -22,6 +24,10 @@ const appstoreOfferingSummary = {
           this.project = project;
         }),
       ]).finally(() => this.loading = false);
+    }
+
+    getPriceLabel() {
+      return this.model.price_tooltip || translate('Price per month');
     }
   }
 };

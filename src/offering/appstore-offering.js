@@ -58,6 +58,7 @@ const appstoreOffering = {
         if (this.offering.prefill_name) {
           this.model.name = this.offering.label;
         }
+        this.model.price_tooltip = this.offering.price_tooltip;
         angular.forEach(this.offering.options, (option, name) => option.name = name);
       }).finally(() => this.loading = false);
     }
