@@ -5,7 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
-import { defaultCurrency } from '@waldur/core/services';
+import { defaultCurrency, ENV } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { parseCounters } from '@waldur/quotas/QuotaUtilsService';
@@ -42,11 +42,31 @@ const ExpertCountField = ({ row }) => <span>{renderFieldOrDash(row.expert_count)
 
 const OfferingCountField = ({ row }) => <span>{renderFieldOrDash(row.offering_count)}</span>;
 
-const CurrentCostField = ({ row }) =>
-  <span>{renderFieldOrDash(defaultCurrency(row.billing_price_estimate && row.billing_price_estimate.current || 0))}</span>;
+const CurrentCostField = ({ row }) => {
+  const estimate = row.billing_price_estimate;
+  if (!estimate) {
+    return defaultCurrency(0);
+  }
+  // VAT is not included only when accounting mode is activated
+  if (ENV.accountingMode === 'accounting') {
+    return defaultCurrency(estimate.current);
+  } else {
+    return defaultCurrency(parseFloat(estimate.current) + parseFloat(estimate.tax_current));
+  }
+};
 
-const EstimatedCostField = ({ row }) =>
-  <span>{renderFieldOrDash(defaultCurrency(row.billing_price_estimate && row.billing_price_estimate.total || 0))}</span>;
+const EstimatedCostField = ({ row }) => {
+  const estimate = row.billing_price_estimate;
+  if (!estimate) {
+    return defaultCurrency(0);
+  }
+  // VAT is not included only when accounting mode is activated
+  if (ENV.accountingMode === 'accounting') {
+    return defaultCurrency(estimate.total);
+  } else {
+    return defaultCurrency(parseFloat(estimate.total) + parseFloat(estimate.tax));
+  }
+};
 
 export const TableComponent = props => {
   const { translate, filterColumns, customerListFilter } = props;
