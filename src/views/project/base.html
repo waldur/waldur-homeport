@@ -5,7 +5,12 @@
         <nc-header ng-hide="$state.current.data.hideHeader"></nc-header>
         <div class="row wrapper white-bg page-heading" ng-hide="$state.current.data.hideBreadcrumbs">
             <div class="col-lg-6">
-                <h2>{{ $state.current.data.pageTitle | translate }}</h2>
+                <h2 ng-if="$state.current.data.renderDocumentTitle">
+                    {{ titleService.getTitle() }}
+                </h2>
+                <h2  ng-if="!$state.current.data.renderDocumentTitle">
+                    {{ $state.current.data.pageTitle | translate }}
+                </h2>
                 <p ng-if="currentProject.description">
                     {{ currentProject.description }}
                 </p>

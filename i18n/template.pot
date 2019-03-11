@@ -3585,6 +3585,7 @@ msgstr ""
 msgid "My offerings"
 msgstr ""
 
+#: src/marketplace/orders/OrderItemDetailsContainer.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "My orders"
@@ -3596,6 +3597,7 @@ msgid "My resources"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/orders/OrderItemDetailsContainer.tsx
 #: src/marketplace/sidebar.js
 msgid "My services"
 msgstr ""
@@ -4284,6 +4286,7 @@ msgstr ""
 msgid "Order Summary"
 msgstr ""
 
+#: src/marketplace/orders/OrderItemDetailsContainer.tsx
 #: src/marketplace/routes.js
 msgid "Order details"
 msgstr ""
@@ -4426,6 +4429,7 @@ msgstr ""
 #: src/experts/requests/details/expert-request-details.js
 #: src/marketplace/details/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/orders/OrderItemDetailsContainer.tsx
 msgid "Organization workspace"
 msgstr ""
 
@@ -5139,6 +5143,7 @@ msgstr ""
 #: src/appstore/appstore-store.js
 #: src/experts/requests/details/expert-request-details.js
 #: src/marketplace/details/utils.ts
+#: src/marketplace/orders/OrderItemDetailsContainer.tsx
 #: src/offering/offering-details.js
 #: src/project/project-workspace.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
@@ -5277,6 +5282,10 @@ msgstr ""
 #: src/project/project-dialog.html
 #: src/providers/routes.js
 msgid "Providers"
+msgstr ""
+
+#: src/marketplace/orders/OrderItemTypeIndicator.tsx
+msgid "Provision new resource"
 msgstr ""
 
 #: src/configs/base-config.js
@@ -6883,6 +6892,10 @@ msgstr ""
 msgid "Support user"
 msgstr ""
 
+#: src/marketplace/orders/OrderItemTypeIndicator.tsx
+msgid "Switch plan for an existing resource"
+msgstr ""
+
 #: src/freeipa/freeipa-account-edit.html
 msgid "Sync profile"
 msgstr ""
@@ -7019,6 +7032,10 @@ msgstr ""
 #: src/marketplace/resources/terminate/TerminateAction.ts
 #: src/offering/actions/TerminateAction.ts
 msgid "Terminate"
+msgstr ""
+
+#: src/marketplace/orders/OrderItemTypeIndicator.tsx
+msgid "Terminate an existing resource"
 msgstr ""
 
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
@@ -7376,6 +7393,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/orders/MyOrderItemsList.tsx
+#: src/marketplace/orders/OrderItemDetails.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/ResourceOrderItems.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx

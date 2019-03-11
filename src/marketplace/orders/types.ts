@@ -11,6 +11,7 @@ export interface StatusChange {
 
 export interface OrderItemResponse {
   uuid: string;
+  type: string;
   offering: string;
   offering_uuid: string;
   offering_name: string;
@@ -32,6 +33,11 @@ export interface OrderItemResponse {
   plan_name?: string;
   plan_description?: string;
   plan_unit?: PlanUnit;
+  order_uuid?: string;
+  category_title?: string;
+  category_uuid?: string;
+  customer_uuid?: string;
+  project_uuid?: string;
   created: string;
 }
 

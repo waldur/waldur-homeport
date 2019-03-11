@@ -21,8 +21,10 @@ export function CustomerWorkspaceController(
   WorkspaceService,
   BillingUtils,
   BreadcrumbsService,
+  titleService,
   SidebarExtensionService) {
 
+  $scope.titleService = titleService;
   activate();
 
   function activate() {

@@ -211,6 +211,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Order item details'),
         feature: 'marketplace',
+        renderDocumentTitle: true,
       }
     })
 
@@ -221,6 +222,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Order item details'),
         feature: 'marketplace',
+        renderDocumentTitle: true,
       }
     })
 
