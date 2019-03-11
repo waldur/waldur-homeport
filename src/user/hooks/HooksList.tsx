@@ -19,7 +19,7 @@ const StateField = ({row}) => {
   return <a className={`status-circle ${cls}`} title={title}/>;
 };
 
-const getDestinationField = row => row.destination || row.email;
+const getDestinationField = row => row.destination_url || row.email || 'N/A';
 const getEventsField = row => row.event_groups.map(formatEventTitle).join(', ');
 
 const TableComponent = props => {
