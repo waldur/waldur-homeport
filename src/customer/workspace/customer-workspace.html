@@ -4,7 +4,12 @@
   <nc-header></nc-header>
   <div class="row wrapper white-bg page-heading" ng-hide="$state.current.data.hideBreadcrumbs">
     <div class="col-lg-6">
-      <h2>{{ pageTitle | translate }}</h2>
+      <h2 ng-if="$state.current.data.renderDocumentTitle">
+        {{ titleService.getTitle() }}
+      </h2>
+      <h2 ng-if="!$state.current.data.renderDocumentTitle">
+        {{ pageTitle | translate }}
+      </h2>
       <breadcrumbs-container></breadcrumbs-container>
     </div>
     <div class="col-lg-6" ng-if="$state.current.name === 'organization.dashboard'">

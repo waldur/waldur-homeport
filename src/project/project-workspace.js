@@ -10,9 +10,12 @@ export default function ProjectWorkspaceController(
   $state,
   AppStoreUtilsService,
   BreadcrumbsService,
+  titleService,
   SidebarExtensionService) {
 
   activate();
+
+  $scope.titleService = titleService;
 
   function activate() {
     $scope.$on('WORKSPACE_CHANGED', () => refreshProject());

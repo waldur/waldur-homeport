@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
-import { $state } from '@waldur/core/services';
+import { $state, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
@@ -10,10 +10,68 @@ import { OrderItemDetails } from '@waldur/marketplace/orders/OrderItemDetails';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { getTabs } from '../details/OfferingTabs';
+import { OrderItemResponse } from './types';
+
+function updateBreadcrumbs(orderItem: OrderItemResponse) {
+  const $timeout = ngInjector.get('$timeout');
+  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
+  const WorkspaceService = ngInjector.get('WorkspaceService');
+  const titleService = ngInjector.get('titleService');
+
+  $timeout(() => {
+    titleService.setTitle(orderItem.offering_name);
+    BreadcrumbsService.activeItem = orderItem.attributes.name;
+    const data = WorkspaceService.getWorkspace();
+    if (data.workspace === 'organization') {
+      BreadcrumbsService.items = [
+        {
+          label: translate('Organization workspace'),
+          state: 'organization.details',
+        },
+        {
+          label: translate('My services'),
+        },
+        {
+          label: translate('My orders'),
+          state: 'marketplace-my-order-items',
+          params: {
+            uuid: orderItem.customer_uuid,
+          },
+        },
+        {
+          label: translate('Order details'),
+          state: 'marketplace-order-details-customer',
+          params: {
+            order_uuid: orderItem.order_uuid,
+          },
+        },
+      ];
+    } else {
+      BreadcrumbsService.items = [
+        {
+          label: translate('Project workspace'),
+          state: 'project.details',
+        },
+        {
+          label: translate('My orders'),
+          state: 'marketplace-order-list',
+        },
+        {
+          label: translate('Order details'),
+          state: 'marketplace-order-details',
+          params: {
+            order_uuid: orderItem.order_uuid,
+          },
+        },
+      ];
+    }
+  });
+}
 
 // tslint:disable-next-line: variable-name
 async function loadData(order_item_uuid) {
   const orderItem = await api.getOrderItem(order_item_uuid);
+  updateBreadcrumbs(orderItem);
   const offering = await api.getOffering(orderItem.offering_uuid);
   const category = await api.getCategory(offering.category_uuid);
   const sections = category.sections;

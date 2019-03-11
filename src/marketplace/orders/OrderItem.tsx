@@ -23,14 +23,20 @@ export const OrderItem = (props: OrderItemProps) => (
       <div className="offering-item">
         <div className="offering-thumb">
           <Tooltip id="offering-tooltip" label={props.item.offering_name}>
-            <OrderItemDetailsLink order_item_uuid={props.item.uuid}>
+            <OrderItemDetailsLink
+              order_item_uuid={props.item.uuid}
+              project_uuid={props.item.project_uuid}
+            >
               <OfferingLogo src={props.item.offering_thumbnail}/>
             </OrderItemDetailsLink>
           </Tooltip>
         </div>
         <div className="offering-info">
           <h5 className="offering-title">
-            <OrderItemDetailsLink order_item_uuid={props.item.uuid}>
+            <OrderItemDetailsLink
+              order_item_uuid={props.item.uuid}
+              project_uuid={props.item.project_uuid}
+            >
               {props.item.attributes.name || props.item.offering_name}
             </OrderItemDetailsLink>
           </h5>
