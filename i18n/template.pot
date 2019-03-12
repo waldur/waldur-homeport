@@ -4094,6 +4094,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -4636,6 +4637,7 @@ msgstr ""
 #: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "Plan"
 msgstr ""
@@ -4646,12 +4648,9 @@ msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/routes.js
 msgid "Plan capacity"
-msgstr ""
-
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-msgid "Plan capacity ({provider} / {offering})"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentsList.tsx
@@ -5217,6 +5216,7 @@ msgstr ""
 #: src/events/EventDetailsTable.tsx
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
