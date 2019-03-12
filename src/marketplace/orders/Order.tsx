@@ -2,9 +2,8 @@ import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
 
+import { OrderItem } from './item/details/OrderItem';
 import './Order.scss';
-
-import { OrderItem } from './OrderItem';
 import { OrderItemResponse } from './types';
 
 interface OrderProps {

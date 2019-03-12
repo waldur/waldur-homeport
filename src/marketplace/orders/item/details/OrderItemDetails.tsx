@@ -5,8 +5,8 @@ import * as Row from 'react-bootstrap/lib/Row';
 import { translate } from '@waldur/i18n';
 import { getDetailsComponent } from '@waldur/marketplace/common/registry';
 import { PlanDetails } from '@waldur/marketplace/details/plan/PlanDetails';
+import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 
-import { OrderItemDetailsProps } from '../types';
 import { OrderItemDetailsField } from './OrderItemDetailsField';
 import { OrderItemDetailsHeader } from './OrderItemDetailsHeader';
 import { OrderItemDetailsSummary } from './OrderItemDetailsSummary';

@@ -3,8 +3,8 @@ import * as React from 'react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
-import { OrderItemDetailsField } from '@waldur/marketplace/orders/OrderItemDetailsField';
-import { OrderItemDetailsSection } from '@waldur/marketplace/orders/OrderItemDetailsSection';
+import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
+import { OrderItemDetailsSection } from '@waldur/marketplace/orders/item/details/OrderItemDetailsSection';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Offering } from '@waldur/marketplace/types';
 
