@@ -8185,10 +8185,13 @@ msgid "VAT code"
 msgstr ""
 
 #: src/customer/CustomerList.tsx
-msgid "VAT is included."
+msgid "VAT is included"
 msgstr ""
 
 #: src/customer/CustomerList.tsx
+msgid "VAT is not included"
+msgstr ""
+
 #: src/price/PriceTooltip.tsx
 msgid "VAT is not included."
 msgstr ""
