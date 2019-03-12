@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { OrderItemDetailsLink } from '@waldur/marketplace/orders/OrderItemDetailsLink';
+import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
 
 export const RowNameField = ({ row }) => (
   <OrderItemDetailsLink

@@ -2,10 +2,10 @@ import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { OrderItemDetailsSection } from '@waldur/marketplace/orders/OrderItemDetailsSection';
+import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 
-import { OrderItemDetailsProps } from '../types';
 import { OrderItemDetailsField } from './OrderItemDetailsField';
+import { OrderItemDetailsSection } from './OrderItemDetailsSection';
 
 export const OrderItemDetailsHeader = (props: OrderItemDetailsProps) => (
   <>

@@ -7,7 +7,7 @@ import * as Tabs from 'react-bootstrap/lib/Tabs';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { IssueCommentsContainer } from '@waldur/issues/comments/IssueCommentsContainer';
-import { ResourceOrderItems } from '@waldur/marketplace/orders/ResourceOrderItems';
+import { ResourceOrderItems } from '@waldur/marketplace/orders/item/list/ResourceOrderItems';
 
 import { OfferingEvents } from './OfferingEvents';
 import { OfferingSummaryTab } from './OfferingSummaryTab';

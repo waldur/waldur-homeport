@@ -4,12 +4,12 @@ import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
-import { OrderItemDetailsLink } from '@waldur/marketplace/orders/OrderItemDetailsLink';
+import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { ResourceDetailsLink } from '@waldur/marketplace/resources/ResourceDetailsLink';
+import { ResourceReference } from '@waldur/marketplace/resources/types';
 
-import { ResourceReference } from '../resources/types';
 import './OrderItem.scss';
-import { OrderItemResponse } from './types';
+import { OrderItemDetailsLink } from './OrderItemDetailsLink';
 
 interface OrderItemProps {
   item: OrderItemResponse;

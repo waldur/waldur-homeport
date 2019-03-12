@@ -6,11 +6,11 @@ import { reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
+import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
+import { ProviderAutocomplete } from '@waldur/marketplace/orders/ProviderAutocomplete';
 import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
 
 import { OrderStateFilter } from './OrderStateFilter';
-import { OrganizationAutocomplete } from './OrganizationAutocomplete';
-import { ProviderAutocomplete } from './ProviderAutocomplete';
 
 interface OwnProps {
   showOfferingFilter?: boolean;
