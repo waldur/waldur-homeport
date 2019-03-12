@@ -450,7 +450,7 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 #: src/slurm/table-extension.js
 msgid "Allocations"
 msgstr ""
@@ -551,10 +551,6 @@ msgstr ""
 
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Approved by"
-msgstr ""
-
-#: src/customer/CustomerList.tsx
-msgid "Apps"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-config.js
@@ -2189,7 +2185,7 @@ msgstr ""
 msgid "Expert team"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 #: src/experts/constants.js
 #: src/experts/expert-provider-details.html
 #: src/experts/extensions/sidebar.js
@@ -5001,7 +4997,7 @@ msgstr ""
 #: src/analytics/resource-chart-service.js
 #: src/appstore/routes.js
 #: src/configs/base-config.js
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 #: src/dashboard/categories.ts
 #: src/project/project-workspace.js
 #: src/project/routes.js
@@ -5060,10 +5056,6 @@ msgstr ""
 
 #: src/project/project-dialog.html
 msgid "Project details"
-msgstr ""
-
-#: src/project/ProjectExpandableRow.tsx
-msgid "Project does not have any resources yet."
 msgstr ""
 
 #: src/customer/workspace/CustomerEventsFilter.tsx
@@ -5790,7 +5782,7 @@ msgstr ""
 msgid "Request-based item"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 #: src/offering/offering-details.js
 #: src/offering/routes.js
 #: src/offering/sidebar.js
@@ -6777,7 +6769,7 @@ msgstr ""
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 #: src/dashboard/categories.ts
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -7191,6 +7183,10 @@ msgstr ""
 
 #: src/analytics/resource-analysis-new.html
 msgid "There are no resources in the organization."
+msgstr ""
+
+#: src/resource/ResourceExpandableRow.tsx
+msgid "There are no resources yet."
 msgstr ""
 
 #: src/marketplace/compare/ComparisonSections.tsx
@@ -7655,6 +7651,14 @@ msgstr ""
 
 #: src/marketplace/orders/OrderDetails.tsx
 msgid "Unable to load order details."
+msgstr ""
+
+#: src/customer/CustomerExpandableRow.tsx
+msgid "Unable to load organization resources."
+msgstr ""
+
+#: src/project/ProjectExpandableRowContainer.tsx
+msgid "Unable to load project resources."
 msgstr ""
 
 #: src/project/ProjectCreateContainer.tsx
@@ -8180,6 +8184,11 @@ msgstr ""
 msgid "VAT code"
 msgstr ""
 
+#: src/customer/CustomerList.tsx
+msgid "VAT is included."
+msgstr ""
+
+#: src/customer/CustomerList.tsx
 #: src/price/PriceTooltip.tsx
 msgid "VAT is not included."
 msgstr ""
@@ -8203,7 +8212,7 @@ msgstr ""
 msgid "VM type overview"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 msgid "VMs"
 msgstr ""
 
