@@ -47,7 +47,7 @@ const getQuotaRows = props => {
       value: counters.nc_offering_count,
       visible: isFeatureVisible('offering'),
     },
-  ].filter(row => row.visible);
+  ].filter(row => row.visible).filter(row => row.value);
 };
 
 const parseCategories = (categories: Category[], counters: object): ExpandableRow[] => {
