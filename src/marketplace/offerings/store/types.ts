@@ -65,6 +65,7 @@ export interface OfferingRequest {
   options?: OfferingOptions;
   scope?: string;
   service_attributes?: any;
+  shared: boolean;
 }
 
 export interface OfferingDocument {

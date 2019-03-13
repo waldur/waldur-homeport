@@ -85,6 +85,7 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
     customer: customer.url,
     type: request.type.value,
     service_attributes: request.service_settings,
+    shared: true,
   };
   if (request.attributes) {
     result.attributes = formatAttributes(request.attributes);
