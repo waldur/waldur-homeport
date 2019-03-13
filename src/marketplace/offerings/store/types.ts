@@ -64,6 +64,7 @@ export interface OfferingRequest {
   plans?: PlanRequest[];
   options?: OfferingOptions;
   scope?: string;
+  service_attributes?: any;
 }
 
 export interface OfferingDocument {
