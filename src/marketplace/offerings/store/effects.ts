@@ -8,7 +8,6 @@ import * as api from '@waldur/marketplace/common/api';
 import { getProviderType } from '@waldur/marketplace/common/registry';
 import { Category } from '@waldur/marketplace/types';
 import { createProvider } from '@waldur/providers/api';
-import { findProvider } from '@waldur/providers/registry';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { updateEntity } from '@waldur/table-react/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
