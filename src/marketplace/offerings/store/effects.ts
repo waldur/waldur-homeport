@@ -5,10 +5,7 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { Action } from '@waldur/core/reducerActions';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
-import { getProviderType } from '@waldur/marketplace/common/registry';
 import { Category } from '@waldur/marketplace/types';
-import { createProvider } from '@waldur/providers/api';
-import { findProvider } from '@waldur/providers/registry';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { updateEntity } from '@waldur/table-react/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -44,23 +41,9 @@ function* removeOfferingQuotas(action) {
 }
 
 function* createOffering(action: Action<OfferingFormData>) {
-  const { thumbnail, document, service_settings, ...rest } = action.payload;
+  const { thumbnail, document, ...rest } = action.payload;
   const customer = yield select(getCustomer);
   try {
-    const offeringType = rest.type.value;
-    const providerType = getProviderType(offeringType);
-    if (providerType) {
-      const providerConfig = findProvider(providerType);
-      const providerRequest = {
-        customer,
-        name: rest.name,
-        type: providerConfig,
-        details: service_settings,
-      };
-      const providerResponse = yield call(createProvider, providerRequest);
-      // tslint:disable-next-line
-      rest['scope'] = providerResponse.data.settings;
-    }
     const offeringRequest = formatOfferingRequest(rest, customer);
     const response = yield call(api.createOffering, offeringRequest);
     if (thumbnail) {
