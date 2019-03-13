@@ -75,22 +75,24 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
   return {
     updateUser,
+    dispatchRemoval: () => dispatch(actions.showUserRemoval()),
+    dispatchMessage: resolve => dispatch(actions.showUserRemovalMessage(resolve)),
   };
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { isVisibleSupportFeature } = stateProps;
-  const { user, dispatch } = ownProps;
+  const { user } = ownProps;
+  const { dispatchRemoval, dispatchMessage } = dispatchProps;
   let showUserRemoval;
 
   if (isVisibleSupportFeature) {
-    showUserRemoval = () => dispatch(actions.showUserRemoval());
+    showUserRemoval = dispatchRemoval;
   } else {
-    const resolve = {
+    showUserRemoval = () => dispatchMessage({
       supportEmail: ENV.supportEmail,
       userName: user.full_name,
-    };
-    showUserRemoval = () => dispatch(actions.showUserRemovalMessage(resolve));
+    });
   }
 
   return {

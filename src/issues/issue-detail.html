@@ -6,7 +6,8 @@
   <div class="ibox-content">
     <div class="row m-b-md">
       <div class="col-lg-12">
-        <h2>{{ $ctrl.issue.key }}: {{ $ctrl.issue.summary }}</h2>
+        <h2 ng-if="$ctrl.issue.key">{{ $ctrl.issue.key }}: {{ $ctrl.issue.summary }}</h2>
+        <h2 ng-if="!$ctrl.issue.key">{{ $ctrl.issue.summary }}</h2>
       </div>
     </div>
     <div class="row m-b-md">
@@ -53,7 +54,7 @@
 
         <div class="m-b-xs">
           <dt><span translate>Status</span>:</dt>
-          <dd>{{ ::$ctrl.issue.status }}</dd>
+          <dd>{{ $ctrl.issue.status || 'N/A' }}</dd>
         </div>
 
         <div class="m-b-xs" ng-if="::$ctrl.issue.resolution">
