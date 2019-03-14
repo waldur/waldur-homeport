@@ -11,6 +11,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { ResourceState } from '../types';
+import { ResourceUsageButton } from '../usage/ResourceUsageButton';
 import { ResourceStateField } from './ResourceStateField';
 
 interface ResourceFilter {
@@ -54,6 +55,10 @@ export const TableComponent = props => {
     {
       title: translate('State'),
       render: ResourceStateField,
+    },
+    {
+      title: translate('Actions'),
+      render: ResourceUsageButton,
     },
   ];
 
