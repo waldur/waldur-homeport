@@ -7933,6 +7933,11 @@ msgstr ""
 msgid "Usage"
 msgstr ""
 
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/usage/ResourceUsageButton.tsx
+msgid "Usage information is not available."
+msgstr ""
+
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Usage overview"
 msgstr ""
