@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { Category } from '@waldur/marketplace/types';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -46,6 +47,10 @@ export const TableComponent = props => {
     {
       title: translate('Plan'),
       render: ({ row }) => <span>{row.plan_name || 'N/A'}</span>,
+    },
+    {
+      title: translate('Actions'),
+      render: ({ row }) => <ResourceShowUsageButton resource={row.uuid}/>,
     },
   ];
 

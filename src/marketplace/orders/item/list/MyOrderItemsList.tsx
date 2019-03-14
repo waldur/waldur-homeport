@@ -6,7 +6,6 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { connectTable, createFetcher, Table } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -42,14 +41,6 @@ const TableComponent = props => {
     {
       title: translate('Cost'),
       render: ({ row }) => defaultCurrency(row.cost),
-    },
-    {
-      title: translate('Actions'),
-      render: ({ row }) => (
-        row.marketplace_resource_uuid ?
-        <ResourceShowUsageButton resource={row.marketplace_resource_uuid}/> :
-        null
-      ),
     },
   ];
 
