@@ -5855,6 +5855,11 @@ msgstr ""
 msgid "Resource does not have any plan."
 msgstr ""
 
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/usage/ResourceUsageButton.tsx
+msgid "Resource does not have usage-based components."
+msgstr ""
+
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/project/ProjectEventsFilter.tsx
 #: src/resource/events.ts
