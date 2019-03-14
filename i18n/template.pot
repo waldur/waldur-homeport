@@ -5855,11 +5855,6 @@ msgstr ""
 msgid "Resource does not have any plan."
 msgstr ""
 
-#: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/usage/ResourceUsageButton.tsx
-msgid "Resource does not have usage-based components."
-msgstr ""
-
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/project/ProjectEventsFilter.tsx
 #: src/resource/events.ts
@@ -7936,6 +7931,11 @@ msgstr ""
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 msgid "Usage"
+msgstr ""
+
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/usage/ResourceUsageButton.tsx
+msgid "Usage information is not available."
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js

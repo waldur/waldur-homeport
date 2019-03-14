@@ -19,7 +19,7 @@ export const ResourceUsageButton = ({ row }) => {
     </div>
   );
   if (!row.is_usage_based) {
-    return wrapTooltip(translate('Resource does not have usage-based components.'), body);
+    return wrapTooltip(translate('Usage information is not available.'), body);
   } else {
     return body;
   }
