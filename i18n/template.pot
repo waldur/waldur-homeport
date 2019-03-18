@@ -2021,7 +2021,7 @@ msgid "Estimated maximum price"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
-msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}."
+msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr ""
 
 #: src/configs/base-config.js
