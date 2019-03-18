@@ -635,10 +635,6 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
-#: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
-msgid "Attributes"
-msgstr ""
-
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
 msgid "Attributes filter"
 msgstr ""
