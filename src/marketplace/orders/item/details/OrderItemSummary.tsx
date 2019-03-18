@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 
@@ -25,10 +26,10 @@ const getMessage = (orderItem: OrderItemDetailsType) => {
       user,
       old_plan: orderItem.old_plan_name,
       new_plan: orderItem.new_plan_name,
-      old_estimate: orderItem.old_cost_estimate,
-      new_estimate: orderItem.new_cost_estimate,
+      old_estimate: defaultCurrency(orderItem.old_cost_estimate),
+      new_estimate: defaultCurrency(orderItem.new_cost_estimate),
     };
-    return translate('User {user} has requested change of plan. Old plan: {old_plan}, new plan: {new_plan}. ', ctx) +
+    return translate('User {user} has requested change of plan. Old plan: {old_plan}, new plan: {new_plan}.', ctx) + ' ' +
       translate('Estimated monthly fee will change from {old_estimate} to {new_estimate}.', ctx);
   } else if (orderItem.type === 'Terminate') {
     const ctx = {
