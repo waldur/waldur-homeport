@@ -10,6 +10,7 @@ import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 import { OrderItemDetailsField } from './OrderItemDetailsField';
 import { OrderItemDetailsHeader } from './OrderItemDetailsHeader';
 import { OrderItemDetailsSummary } from './OrderItemDetailsSummary';
+import { OrderItemSummary } from './OrderItemSummary';
 import { OrderItemTypeIndicator } from './OrderItemTypeIndicator';
 
 export const OrderItemDetails = (props: OrderItemDetailsProps) => {
@@ -17,6 +18,7 @@ export const OrderItemDetails = (props: OrderItemDetailsProps) => {
   return (
     <Row>
       <Col md={9}>
+        <OrderItemSummary orderItem={props.orderItem}/>
         <OrderItemDetailsField label={translate('Type')}>
           <OrderItemTypeIndicator orderItemType={props.orderItem.type}/>
         </OrderItemDetailsField>

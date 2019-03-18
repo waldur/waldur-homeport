@@ -12,7 +12,7 @@ import { ApproveButton } from './ApproveButton';
 import { Order } from './Order';
 import { OrderSteps } from './OrderSteps';
 import { RejectButton } from './RejectButton';
-import { State } from './types';
+import { Order as OrderType } from './types';
 import { StatusChange } from './types';
 import { matchState } from './utils';
 
@@ -24,7 +24,7 @@ interface OrderDetailsProps extends TranslateProps {
 }
 
 interface OrderDetailsState {
-  orderDetails: State;
+  orderDetails: OrderType;
   loading: boolean;
   loaded: boolean;
 }
@@ -55,13 +55,14 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
           items: orderDetails.items,
           total_cost: orderDetails.total_cost,
           file: orderDetails.file,
+          project_uuid: orderDetails.project_uuid,
         },
         loading: false,
         loaded: true,
       });
     } catch {
       this.setState({
-        orderDetails: {state: 'Approve', items: []},
+        orderDetails: {state: 'Approve', items: [], project_uuid: undefined},
         loading: false,
         loaded: false,
       });
@@ -99,6 +100,7 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
           <OrderSteps state={this.state.orderDetails.state} />
           <Order
             items={this.state.orderDetails.items}
+            project_uuid={this.state.orderDetails.project_uuid}
             editable={false}
           />
           <div className="text-right">

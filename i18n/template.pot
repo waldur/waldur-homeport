@@ -2020,6 +2020,10 @@ msgstr ""
 msgid "Estimated maximum price"
 msgstr ""
 
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}."
+msgstr ""
+
 #: src/configs/base-config.js
 msgid "Estonian"
 msgstr ""
@@ -8141,6 +8145,18 @@ msgstr ""
 
 #: src/auth/events.ts
 msgid "User {user_link} logged out  successfully with SAML2."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "User {user} has requested change of plan. Old plan: {old_plan}, new plan: {new_plan}."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "User {user} has requested resource provisioning {resource_name} ({resource_type}) with plan: {plan_name}."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "User {user} has requested termination of {resource_name} ({resource_type}) with plan: {plan_name}."
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
