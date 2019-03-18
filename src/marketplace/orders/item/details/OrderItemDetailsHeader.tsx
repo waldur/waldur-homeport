@@ -5,15 +5,9 @@ import { translate } from '@waldur/i18n';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 
 import { OrderItemDetailsField } from './OrderItemDetailsField';
-import { OrderItemDetailsSection } from './OrderItemDetailsSection';
 
 export const OrderItemDetailsHeader = (props: OrderItemDetailsProps) => (
   <>
-    <OrderItemDetailsField>
-      <OrderItemDetailsSection>
-        {translate('Attributes')}
-      </OrderItemDetailsSection>
-    </OrderItemDetailsField>
     {props.orderItem.marketplace_resource_uuid && (
       <OrderItemDetailsField label={translate('Resource UUID')}>
         {props.orderItem.marketplace_resource_uuid}

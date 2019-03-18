@@ -635,10 +635,6 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
-#: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
-msgid "Attributes"
-msgstr ""
-
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
 msgid "Attributes filter"
 msgstr ""
@@ -1705,6 +1701,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingSummaryTab.tsx
 #: src/offering/appstore-offering.js
@@ -1764,6 +1761,7 @@ msgstr ""
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/issues/create/issue-registration.html
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/ProjectActions.tsx
@@ -2018,6 +2016,10 @@ msgstr ""
 
 #: src/slurm/slurm-allocation-checkout-summary.html
 msgid "Estimated maximum price"
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr ""
 
 #: src/configs/base-config.js
@@ -3735,6 +3737,7 @@ msgid "New flavor"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.js
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "New plan"
 msgstr ""
@@ -4627,8 +4630,8 @@ msgstr ""
 msgid "Physical locations"
 msgstr ""
 
-#: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/details/plan/PlanField.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
@@ -6855,6 +6858,7 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Summary"
@@ -8958,6 +8962,22 @@ msgstr ""
 
 #: src/providers/details/provider-project-link-quota.js
 msgid "{usage} used"
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has approved it on {date} at {time}."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has requested changing of plan from \"{old_plan}\" to \"{new_plan}\"."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has requested provisioning of \"{resource_name}\" with plan \"{plan_name}\"."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has requested termination of {resource_name} with active plan \"{plan_name}\"."
 msgstr ""
 
 #: src/customer/dashboard/api.ts

@@ -10,6 +10,7 @@ interface OrderProps {
   items: OrderItemResponse[];
   editable: boolean;
   onOrderItemRemove?(item: OrderItemResponse): void;
+  project_uuid: string;
 }
 
 export const Order = (props: OrderProps) => (
@@ -30,6 +31,7 @@ export const Order = (props: OrderProps) => (
               key={index}
               item={item}
               editable={props.editable}
+              project_uuid={props.project_uuid}
             />
           ))}
         </tbody>

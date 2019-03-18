@@ -1,6 +1,6 @@
 import { InjectedFormProps } from 'redux-form';
 
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
+import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { Offering } from '@waldur/marketplace/types';
 import { Project } from '@waldur/workspace/types';
 
@@ -185,7 +185,7 @@ export interface OfferingConfigurationFormProps extends InjectedFormProps {
 }
 
 export interface OrderItemDetailsProps {
-  orderItem: OrderItemResponse;
+  orderItem: OrderItemDetailsType;
   offering: Offering;
 }
 

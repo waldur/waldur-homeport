@@ -12,6 +12,7 @@ import './OrderItem.scss';
 import { OrderItemDetailsLink } from './OrderItemDetailsLink';
 
 interface OrderItemProps {
+  project_uuid: string;
   item: OrderItemResponse;
   editable: boolean;
   onRemove?(): void;
@@ -25,7 +26,7 @@ export const OrderItem = (props: OrderItemProps) => (
           <Tooltip id="offering-tooltip" label={props.item.offering_name}>
             <OrderItemDetailsLink
               order_item_uuid={props.item.uuid}
-              project_uuid={props.item.project_uuid}
+              project_uuid={props.project_uuid}
             >
               <OfferingLogo src={props.item.offering_thumbnail}/>
             </OrderItemDetailsLink>
@@ -35,7 +36,7 @@ export const OrderItem = (props: OrderItemProps) => (
           <h5 className="offering-title">
             <OrderItemDetailsLink
               order_item_uuid={props.item.uuid}
-              project_uuid={props.item.project_uuid}
+              project_uuid={props.project_uuid}
             >
               {props.item.attributes.name || props.item.offering_name}
             </OrderItemDetailsLink>
