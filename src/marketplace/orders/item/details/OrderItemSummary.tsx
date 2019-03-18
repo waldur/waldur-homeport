@@ -30,7 +30,7 @@ const getMessage = (orderItem: OrderItemDetailsType) => {
       new_estimate: defaultCurrency(orderItem.new_cost_estimate),
     };
     return translate('User {user} has requested change of plan. Old plan: {old_plan}, new plan: {new_plan}.', ctx) + ' ' +
-      translate('Estimated monthly fee will change from {old_estimate} to {new_estimate}.', ctx);
+      translate('Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included.', ctx);
   } else if (orderItem.type === 'Terminate') {
     const ctx = {
       user,
