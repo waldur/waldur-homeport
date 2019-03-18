@@ -47,6 +47,8 @@ export interface OrderItemResponse {
 
 export interface OrderItemDetailsType extends OrderItemResponse {
   order_uuid: string;
+  order_approved_at?: string;
+  order_approved_by?: string;
   created_by_full_name: string;
   created_by_civil_number: string;
   customer_name: string;

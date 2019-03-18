@@ -8147,18 +8147,6 @@ msgstr ""
 msgid "User {user_link} logged out  successfully with SAML2."
 msgstr ""
 
-#: src/marketplace/orders/item/details/OrderItemSummary.tsx
-msgid "User {user} has requested change of plan. Old plan: {old_plan}, new plan: {new_plan}."
-msgstr ""
-
-#: src/marketplace/orders/item/details/OrderItemSummary.tsx
-msgid "User {user} has requested resource provisioning {resource_name} ({resource_type}) with plan: {plan_name}."
-msgstr ""
-
-#: src/marketplace/orders/item/details/OrderItemSummary.tsx
-msgid "User {user} has requested termination of {resource_name} ({resource_type}) with plan: {plan_name}."
-msgstr ""
-
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: src/auth/auth-login.html
 #: src/freeipa/freeipa-account-create.html
@@ -8974,6 +8962,22 @@ msgstr ""
 
 #: src/providers/details/provider-project-link-quota.js
 msgid "{usage} used"
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has approved it on {date} at {time}."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has requested changing of plan from \"{old_plan}\" to \"{new_plan}\"."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has requested provisioning of \"{resource_name}\" with plan \"{plan_name}\"."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has requested termination of {resource_name} with active plan \"{plan_name}\"."
 msgstr ""
 
 #: src/customer/dashboard/api.ts
