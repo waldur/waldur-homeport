@@ -23,11 +23,6 @@ export const PlanDetails = withTranslation((props: PlanDetailsProps) => {
   }
   return (
     <>
-      <OrderItemDetailsField>
-        <OrderItemDetailsSection>
-          {props.translate('Plan')}
-        </OrderItemDetailsSection>
-      </OrderItemDetailsField>
       <OrderItemDetailsField label={props.translate('Name')}>
         {renderValue(plan_name)}
       </OrderItemDetailsField>

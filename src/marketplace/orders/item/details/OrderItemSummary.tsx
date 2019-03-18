@@ -86,7 +86,5 @@ const getMessage = (orderItem: OrderItemDetailsType): string => {
 };
 
 export const OrderItemSummary: React.SFC<OrderItemSummaryProps> = props => (
-  <div className="bs-callout bs-callout-success">
-    {getMessage(props.orderItem)}
-  </div>
+  <span>{getMessage(props.orderItem)}</span>
 );

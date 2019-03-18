@@ -1705,6 +1705,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingSummaryTab.tsx
 #: src/offering/appstore-offering.js
@@ -1764,6 +1765,7 @@ msgstr ""
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/issues/create/issue-registration.html
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/ProjectActions.tsx
@@ -3739,6 +3741,7 @@ msgid "New flavor"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.js
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "New plan"
 msgstr ""
@@ -4631,8 +4634,8 @@ msgstr ""
 msgid "Physical locations"
 msgstr ""
 
-#: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/details/plan/PlanField.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
@@ -6859,6 +6862,7 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Summary"
