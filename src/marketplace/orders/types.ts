@@ -67,5 +67,6 @@ export interface Order {
   state: OrderState;
   total_cost?: number;
   file?: string;
-  project_uuid: string;
+  project?: string;
+  project_uuid?: string;
 }

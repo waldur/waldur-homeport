@@ -4,6 +4,7 @@ import * as Row from 'react-bootstrap/lib/Row';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
+import { getUUID } from '@waldur/core/utils';
 import { TranslateProps } from '@waldur/i18n';
 import { getOrderDetails } from '@waldur/marketplace/common/api';
 import { OrderSummary } from '@waldur/marketplace/orders/OrderSummary';
@@ -55,7 +56,7 @@ export class OrderDetails extends React.Component<OrderDetailsProps, OrderDetail
           items: orderDetails.items,
           total_cost: orderDetails.total_cost,
           file: orderDetails.file,
-          project_uuid: orderDetails.project_uuid,
+          project_uuid: getUUID(orderDetails.project),
         },
         loading: false,
         loaded: true,
