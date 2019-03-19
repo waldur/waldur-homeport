@@ -140,9 +140,9 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/orders/MyOrderItemsList.tsx
-#: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourceActionComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -450,7 +450,7 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 #: src/slurm/table-extension.js
 msgid "Allocations"
 msgstr ""
@@ -553,10 +553,6 @@ msgstr ""
 msgid "Approved by"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
-msgid "Apps"
-msgstr ""
-
 #: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
 msgstr ""
@@ -637,10 +633,6 @@ msgstr ""
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 #: src/issues/create/issue-create-dialog.html
 msgid "Attachments"
-msgstr ""
-
-#: src/marketplace/orders/OrderItemDetailsHeader.tsx
-msgid "Attributes"
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
@@ -1132,8 +1124,8 @@ msgstr ""
 msgid "Client Secret"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 msgid "Client organization"
 msgstr ""
@@ -1215,7 +1207,7 @@ msgid "Component name"
 msgstr ""
 
 #: src/cost-planning/cost-plan-items.html
-#: src/marketplace/orders/OrderItemDetailsHeader.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Components"
 msgstr ""
 
@@ -1300,9 +1292,9 @@ msgid "Copy to clipboard"
 msgstr ""
 
 #: src/customer/CustomerList.tsx
-#: src/marketplace/orders/MyOrderItemsList.tsx
-#: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 msgid "Cost"
 msgstr ""
 
@@ -1501,11 +1493,11 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: src/invitations/invitations-list.js
-#: src/marketplace/orders/MyOrderItemsList.tsx
-#: src/marketplace/orders/OrderItemDetailsHeader.tsx
-#: src/marketplace/orders/OrderItemsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/ResourceOrderItems.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 msgid "Created at"
 msgstr ""
@@ -1709,6 +1701,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingSummaryTab.tsx
 #: src/offering/appstore-offering.js
@@ -1768,6 +1761,7 @@ msgstr ""
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/issues/create/issue-registration.html
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/ProjectActions.tsx
@@ -1857,7 +1851,7 @@ msgstr ""
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
-#: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 msgid "Done"
 msgstr ""
 
@@ -1915,7 +1909,7 @@ msgstr ""
 msgid "Each JupyterHub user is mapped to a corresponding system user. Appropriate system user will be created on a first login."
 msgstr ""
 
-#: src/marketplace/orders/OrderItem.tsx
+#: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/openstack/openstack-backup-schedule/module.js
 #: src/openstack/openstack-snapshot-schedule/module.js
 #: src/resource/actions/base.ts
@@ -1983,12 +1977,13 @@ msgid "Enter date"
 msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
-#: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Error message"
 msgstr ""
@@ -2022,6 +2017,10 @@ msgstr ""
 
 #: src/slurm/slurm-allocation-checkout-summary.html
 msgid "Estimated maximum price"
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr ""
 
 #: src/configs/base-config.js
@@ -2112,7 +2111,7 @@ msgid "Excel"
 msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
-#: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 msgid "Executing"
 msgstr ""
 
@@ -2189,7 +2188,7 @@ msgstr ""
 msgid "Expert team"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 #: src/experts/constants.js
 #: src/experts/expert-provider-details.html
 #: src/experts/extensions/sidebar.js
@@ -2635,7 +2634,7 @@ msgstr ""
 msgid "I want another service"
 msgstr ""
 
-#: src/marketplace/orders/ResourceOrderItems.tsx
+#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "ID"
 msgstr ""
 
@@ -3585,7 +3584,7 @@ msgstr ""
 msgid "My offerings"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemDetailsContainer.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "My orders"
@@ -3597,7 +3596,7 @@ msgid "My resources"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/orders/OrderItemDetailsContainer.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/sidebar.js
 msgid "My services"
 msgstr ""
@@ -3739,6 +3738,7 @@ msgid "New flavor"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.js
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "New plan"
 msgstr ""
@@ -4092,8 +4092,9 @@ msgstr ""
 
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
-#: src/marketplace/orders/MyOrderItemsList.tsx
-#: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -4286,7 +4287,7 @@ msgstr ""
 msgid "Order Summary"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemDetailsContainer.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/routes.js
 msgid "Order details"
 msgstr ""
@@ -4307,8 +4308,8 @@ msgstr ""
 msgid "Order item details"
 msgstr ""
 
-#: src/marketplace/orders/MyOrderItemsList.tsx
-#: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/tabs/constants.js
 msgid "Order items"
@@ -4429,7 +4430,7 @@ msgstr ""
 #: src/experts/requests/details/expert-request-details.js
 #: src/marketplace/details/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/orders/OrderItemDetailsContainer.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 msgid "Organization workspace"
 msgstr ""
 
@@ -4580,7 +4581,7 @@ msgstr ""
 #: src/billing/billing-utils.js
 #: src/experts/requests/list/expert-request-customer-list.js
 #: src/invitations/invitations-list.js
-#: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 msgid "Pending"
 msgstr ""
 
@@ -4630,12 +4631,13 @@ msgstr ""
 msgid "Physical locations"
 msgstr ""
 
-#: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/details/plan/PlanField.tsx
-#: src/marketplace/orders/MyOrderItemsList.tsx
-#: src/marketplace/orders/OrderItemsList.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "Plan"
 msgstr ""
@@ -4646,12 +4648,9 @@ msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/routes.js
 msgid "Plan capacity"
-msgstr ""
-
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-msgid "Plan capacity ({provider} / {offering})"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentsList.tsx
@@ -5002,7 +5001,7 @@ msgstr ""
 #: src/analytics/resource-chart-service.js
 #: src/appstore/routes.js
 #: src/configs/base-config.js
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 #: src/dashboard/categories.ts
 #: src/project/project-workspace.js
 #: src/project/routes.js
@@ -5032,7 +5031,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
-#: src/marketplace/orders/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/offering/appstore-offering-summary.html
@@ -5061,10 +5060,6 @@ msgstr ""
 
 #: src/project/project-dialog.html
 msgid "Project details"
-msgstr ""
-
-#: src/project/ProjectExpandableRow.tsx
-msgid "Project does not have any resources yet."
 msgstr ""
 
 #: src/customer/workspace/CustomerEventsFilter.tsx
@@ -5143,7 +5138,7 @@ msgstr ""
 #: src/appstore/appstore-store.js
 #: src/experts/requests/details/expert-request-details.js
 #: src/marketplace/details/utils.ts
-#: src/marketplace/orders/OrderItemDetailsContainer.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/offering/offering-details.js
 #: src/project/project-workspace.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
@@ -5217,6 +5212,7 @@ msgstr ""
 #: src/events/EventDetailsTable.tsx
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -5284,7 +5280,7 @@ msgstr ""
 msgid "Providers"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemTypeIndicator.tsx
+#: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Provision new resource"
 msgstr ""
 
@@ -5790,7 +5786,7 @@ msgstr ""
 msgid "Request-based item"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 #: src/offering/offering-details.js
 #: src/offering/routes.js
 #: src/offering/sidebar.js
@@ -5837,7 +5833,7 @@ msgstr ""
 msgid "Resource"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemDetailsHeader.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 msgid "Resource UUID"
 msgstr ""
@@ -5855,7 +5851,7 @@ msgstr ""
 msgid "Resource count in"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemDetailsHeader.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Resource description"
 msgstr ""
 
@@ -5894,7 +5890,7 @@ msgstr ""
 msgid "Resource is monitored using Zabbix."
 msgstr ""
 
-#: src/marketplace/orders/ResourceOrderItems.tsx
+#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "Resource is not connected to the marketplace yet."
 msgstr ""
 
@@ -5902,11 +5898,11 @@ msgstr ""
 msgid "Resource is not monitored yet."
 msgstr ""
 
-#: src/marketplace/orders/OrderItem.tsx
+#: src/marketplace/orders/item/details/OrderItem.tsx
 msgid "Resource link"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemDetailsHeader.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Resource name"
 msgstr ""
 
@@ -6335,7 +6331,7 @@ msgstr ""
 msgid "Select state"
 msgstr ""
 
-#: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Select state..."
 msgstr ""
@@ -6712,12 +6708,13 @@ msgstr ""
 #: src/experts/requests/list/expert-request-project-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/orders/MyOrderItemsList.tsx
 #: src/marketplace/orders/Order.tsx
-#: src/marketplace/orders/OrderItemsList.tsx
-#: src/marketplace/orders/OrderStateFilter.tsx
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/ResourceOrderItems.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -6777,7 +6774,7 @@ msgstr ""
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 #: src/dashboard/categories.ts
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -6863,6 +6860,7 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Summary"
@@ -6892,7 +6890,7 @@ msgstr ""
 msgid "Support user"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemTypeIndicator.tsx
+#: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Switch plan for an existing resource"
 msgstr ""
 
@@ -7034,7 +7032,7 @@ msgstr ""
 msgid "Terminate"
 msgstr ""
 
-#: src/marketplace/orders/OrderItemTypeIndicator.tsx
+#: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Terminate an existing resource"
 msgstr ""
 
@@ -7042,7 +7040,7 @@ msgstr ""
 msgid "Terminate resource {resourceName}"
 msgstr ""
 
-#: src/marketplace/orders/OrderStateFilter.tsx
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminated"
 msgstr ""
@@ -7191,6 +7189,10 @@ msgstr ""
 
 #: src/analytics/resource-analysis-new.html
 msgid "There are no resources in the organization."
+msgstr ""
+
+#: src/resource/ResourceExpandableRow.tsx
+msgid "There are no resources yet."
 msgstr ""
 
 #: src/marketplace/compare/ComparisonSections.tsx
@@ -7392,10 +7394,10 @@ msgstr ""
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
-#: src/marketplace/orders/MyOrderItemsList.tsx
-#: src/marketplace/orders/OrderItemDetails.tsx
-#: src/marketplace/orders/OrderItemsList.tsx
-#: src/marketplace/orders/ResourceOrderItems.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/offerings-list.js
@@ -7567,7 +7569,7 @@ msgstr ""
 msgid "Unable to get list of SSH public keys."
 msgstr ""
 
-#: src/marketplace/orders/OrderItemDetailsContainer.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 msgid "Unable to get order item."
 msgstr ""
 
@@ -7655,6 +7657,14 @@ msgstr ""
 
 #: src/marketplace/orders/OrderDetails.tsx
 msgid "Unable to load order details."
+msgstr ""
+
+#: src/customer/CustomerExpandableRow.tsx
+msgid "Unable to load organization resources."
+msgstr ""
+
+#: src/project/ProjectExpandableRowContainer.tsx
+msgid "Unable to load project resources."
 msgstr ""
 
 #: src/project/ProjectCreateContainer.tsx
@@ -7929,6 +7939,11 @@ msgstr ""
 msgid "Usage"
 msgstr ""
 
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/usage/ResourceUsageButton.tsx
+msgid "Usage information is not available."
+msgstr ""
+
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Usage overview"
 msgstr ""
@@ -8180,6 +8195,14 @@ msgstr ""
 msgid "VAT code"
 msgstr ""
 
+#: src/customer/CustomerList.tsx
+msgid "VAT is included"
+msgstr ""
+
+#: src/customer/CustomerList.tsx
+msgid "VAT is not included"
+msgstr ""
+
 #: src/price/PriceTooltip.tsx
 msgid "VAT is not included."
 msgstr ""
@@ -8203,7 +8226,7 @@ msgstr ""
 msgid "VM type overview"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/api.ts
 msgid "VMs"
 msgstr ""
 
@@ -8749,7 +8772,7 @@ msgstr ""
 msgid "offerings"
 msgstr ""
 
-#: src/marketplace/orders/ResourceOrderItems.tsx
+#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "order items"
 msgstr ""
 
@@ -8941,6 +8964,22 @@ msgstr ""
 
 #: src/providers/details/provider-project-link-quota.js
 msgid "{usage} used"
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has approved it on {date} at {time}."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has requested changing of plan from \"{old_plan}\" to \"{new_plan}\"."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has requested provisioning of \"{resource_name}\" with plan \"{plan_name}\"."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has requested termination of {resource_name} with active plan \"{plan_name}\"."
 msgstr ""
 
 #: src/customer/dashboard/api.ts

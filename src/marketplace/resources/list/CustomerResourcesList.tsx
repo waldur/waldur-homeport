@@ -1,3 +1,4 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Option } from 'react-select';
@@ -5,8 +6,10 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { Category } from '@waldur/marketplace/types';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { wrapTooltip } from '@waldur/table-react/ActionButton';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -46,6 +49,21 @@ export const TableComponent = props => {
     {
       title: translate('Plan'),
       render: ({ row }) => <span>{row.plan_name || 'N/A'}</span>,
+    },
+    {
+      title: translate('Actions'),
+      render: ({ row }) => {
+        const body = (
+          <div className={classNames({disabled: !row.is_usage_based})}>
+            <ResourceShowUsageButton resource={row.uuid}/>
+          </div>
+        );
+        if (!row.is_usage_based) {
+          return wrapTooltip(translate('Usage information is not available.'), body);
+        } else {
+          return body;
+        }
+      },
     },
   ];
 

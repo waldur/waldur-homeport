@@ -6,22 +6,21 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { ResourceUsageButton } from '@waldur/marketplace/resources/usage/ResourceUsageButton';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { connectTable, createFetcher, Table } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { RowNameField } from './RowNameField';
 
-export const TableComponent = props => {
+const TableComponent = props => {
   const columns = [
     {
       title: translate('Offering'),
       render: RowNameField,
     },
     {
-      title: translate('Client organization'),
-      render: ({ row }) => row.customer_name,
+      title: translate('Project'),
+      render: ({ row }) => row.project_name,
     },
     {
       title: translate('Created at'),
@@ -43,10 +42,6 @@ export const TableComponent = props => {
       title: translate('Cost'),
       render: ({ row }) => defaultCurrency(row.cost),
     },
-    {
-      title: translate('Actions'),
-      render: ResourceUsageButton,
-    },
   ];
 
   return (
@@ -54,35 +49,57 @@ export const TableComponent = props => {
       {...props}
       columns={columns}
       verboseName={translate('Order items')}
+      enableExport={true}
     />
   );
 };
 
-const TableOptions = {
-  table: 'OrderItemList',
-  fetchData: createFetcher('marketplace-order-items'),
-  mapPropsToFilter: props => {
-    const filter: Record<string, string> = {provider_uuid: props.customer.uuid};
-    if (props.filter) {
-      if (props.filter.offering) {
-        filter.offering_uuid = props.filter.offering.uuid;
-      }
-      if (props.filter.organization) {
-        filter.customer_uuid = props.filter.organization.uuid;
-      }
-      if (props.filter.provider) {
-        filter.provider_uuid = props.filter.provider.customer_uuid;
-      }
-      if (props.filter.state) {
-        filter.state = props.filter.state.value;
-      }
+const mapPropsToFilter = props => {
+  const filter: Record<string, string> = {o: '-created'};
+  if (props.customer) {
+    filter.customer_uuid = props.customer.uuid;
+  }
+  if (props.filter) {
+    if (props.filter.state) {
+      filter.state = props.filter.state.value;
     }
-    return filter;
-  },
+    if (props.filter.project) {
+      filter.project_uuid = props.filter.project.uuid;
+    }
+  }
+  return filter;
+};
+
+const exportRow = row => [
+  row.offering_name,
+  row.project_name,
+  formatDateTime(row.created),
+  row.type,
+  row.state,
+  renderFieldOrDash(row.plan_name),
+  defaultCurrency(row.cost || 0),
+];
+
+const exportFields = [
+  'Offering',
+  'Project',
+  'Created at',
+  'Type',
+  'State',
+  'Plan',
+  'Cost',
+];
+
+const TableOptions = {
+  table: 'MyOrderItemList',
+  fetchData: createFetcher('marketplace-order-items'),
+  mapPropsToFilter,
+  exportRow,
+  exportFields,
 };
 
 const mapStateToProps = state => ({
-  filter: getFormValues('OrderItemFilter')(state),
+  filter: getFormValues('MyOrderItemsFilter')(state),
   customer: getCustomer(state),
 });
 
@@ -91,4 +108,4 @@ const enhance = compose(
   connectTable(TableOptions),
 );
 
-export const OrderItemsList = enhance(TableComponent);
+export const MyOrderItemsList = enhance(TableComponent);

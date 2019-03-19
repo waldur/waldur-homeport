@@ -27,7 +27,7 @@ export function connectTable(options: TableOptions) {
           return dispatch(actions.fetchListStart(table, propFilter));
         },
         gotoPage: page => dispatch(actions.fetchListGotoPage(table, page)),
-        exportAs: format => dispatch(actions.exportTableAs(table, format)),
+        exportAs: format => dispatch(actions.exportTableAs(table, format, props)),
         setQuery: query => dispatch(actions.setFilterQuery(table, query)),
         updatePageSize: size => dispatch(actions.updatePageSize(table, size)),
         resetPagination: () => dispatch(actions.resetPagination(table)),

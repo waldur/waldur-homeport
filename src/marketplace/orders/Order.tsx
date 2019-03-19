@@ -2,15 +2,15 @@ import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
 
+import { OrderItem } from './item/details/OrderItem';
 import './Order.scss';
-
-import { OrderItem } from './OrderItem';
 import { OrderItemResponse } from './types';
 
 interface OrderProps {
   items: OrderItemResponse[];
   editable: boolean;
   onOrderItemRemove?(item: OrderItemResponse): void;
+  project_uuid: string;
 }
 
 export const Order = (props: OrderProps) => (
@@ -31,6 +31,7 @@ export const Order = (props: OrderProps) => (
               key={index}
               item={item}
               editable={props.editable}
+              project_uuid={props.project_uuid}
             />
           ))}
         </tbody>

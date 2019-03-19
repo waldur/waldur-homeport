@@ -2,10 +2,9 @@ import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
-
-import { OrderItemDetailsLink } from './OrderItemDetailsLink';
 
 interface ResourceOrderItemsProps {
   resource_uuid: string;

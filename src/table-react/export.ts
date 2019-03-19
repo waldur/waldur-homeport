@@ -12,7 +12,7 @@ import { getTableOptions } from './registry';
 import { selectTableRows } from './selectors';
 
 export function* exportTable(action) {
-  const { table, format } = action.payload;
+  const { table, format, props } = action.payload;
   let rows = yield select(state => selectTableRows(state, table));
   const { exportFields, exportRow, fetchData, exportAll } = getTableOptions(table);
 
@@ -22,9 +22,11 @@ export function* exportTable(action) {
     yield put(blockStop(table));
   }
 
+  const fields = typeof exportFields === 'function' ? exportFields(props) : exportFields;
+
   const data = {
-    fields: exportFields,
-    data: rows.map(exportRow),
+    fields,
+    data: rows.map(row => exportRow(row, props)),
   };
   exporters[format](table, data);
 }

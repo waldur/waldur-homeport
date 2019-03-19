@@ -29,6 +29,10 @@ const offeringDetails = {
     }
 
     $onInit() {
+      if (!this.$stateParams.uuid) {
+        this.$state.go('errorPage.notFound');
+        return;
+      }
       this.offeringsService.$get(this.$stateParams.uuid)
         .then(offering => {
           this.offering = offering;

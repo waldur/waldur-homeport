@@ -5,14 +5,14 @@ import { Query } from '@waldur/core/Query';
 import { $state, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
+import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
-import { OrderItemDetails } from '@waldur/marketplace/orders/OrderItemDetails';
+import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { getTabs } from '../details/OfferingTabs';
-import { OrderItemResponse } from './types';
+import { OrderItemDetails } from './OrderItemDetails';
 
-function updateBreadcrumbs(orderItem: OrderItemResponse) {
+function updateBreadcrumbs(orderItem: OrderItemDetailsType) {
   const $timeout = ngInjector.get('$timeout');
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
   const WorkspaceService = ngInjector.get('WorkspaceService');

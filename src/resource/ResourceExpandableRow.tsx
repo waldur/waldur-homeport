@@ -8,11 +8,11 @@ export interface ExpandableRow {
   value: number | string;
 }
 
-interface ProjectExpandableRowProps {
+interface ResourceExpandableRowProps {
   rows: ExpandableRow[];
 }
 
-export const ProjectExpandableRow = (props: ProjectExpandableRowProps) =>
+export const ResourceExpandableRow = (props: ResourceExpandableRowProps) =>
   props.rows.length > 0 ? (
     <dl className="dl-horizontal m-t-sm resource-details-table">
       {props.rows.map((row, index) => (
@@ -25,6 +25,6 @@ export const ProjectExpandableRow = (props: ProjectExpandableRowProps) =>
     </dl>
   ) : (
     <p>
-      {translate('Project does not have any resources yet.')}
+      {translate('There are no resources yet.')}
     </p>
   );

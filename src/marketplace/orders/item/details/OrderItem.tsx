@@ -4,14 +4,15 @@ import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
-import { OrderItemDetailsLink } from '@waldur/marketplace/orders/OrderItemDetailsLink';
+import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { ResourceDetailsLink } from '@waldur/marketplace/resources/ResourceDetailsLink';
+import { ResourceReference } from '@waldur/marketplace/resources/types';
 
-import { ResourceReference } from '../resources/types';
 import './OrderItem.scss';
-import { OrderItemResponse } from './types';
+import { OrderItemDetailsLink } from './OrderItemDetailsLink';
 
 interface OrderItemProps {
+  project_uuid: string;
   item: OrderItemResponse;
   editable: boolean;
   onRemove?(): void;
@@ -25,7 +26,7 @@ export const OrderItem = (props: OrderItemProps) => (
           <Tooltip id="offering-tooltip" label={props.item.offering_name}>
             <OrderItemDetailsLink
               order_item_uuid={props.item.uuid}
-              project_uuid={props.item.project_uuid}
+              project_uuid={props.project_uuid}
             >
               <OfferingLogo src={props.item.offering_thumbnail}/>
             </OrderItemDetailsLink>
@@ -35,7 +36,7 @@ export const OrderItem = (props: OrderItemProps) => (
           <h5 className="offering-title">
             <OrderItemDetailsLink
               order_item_uuid={props.item.uuid}
-              project_uuid={props.item.project_uuid}
+              project_uuid={props.project_uuid}
             >
               {props.item.attributes.name || props.item.offering_name}
             </OrderItemDetailsLink>

@@ -2,7 +2,7 @@ import { get, getAll, getById, post, sendForm, getList, getFirst, patch, deleteB
 import { ENV } from '@waldur/core/services';
 import { Customer } from '@waldur/customer/types';
 import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
-import { State, OrderItemResponse } from '@waldur/marketplace/orders/types';
+import { Order, OrderItemResponse, OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { Category, Offering, ServiceProvider, CategoryComponentUsage } from '@waldur/marketplace/types';
 
 import { OfferingDocument } from '../offerings/store/types';
@@ -61,10 +61,10 @@ export const submitCart = (data: object) =>
   post<SubmitCartRequest>('/marketplace-cart-items/submit/', data).then(response => response.data);
 
 export const getOrderDetails = (id: string) =>
-  getById<State>('/marketplace-orders/', id);
+  getById<Order>('/marketplace-orders/', id);
 
 export const getOrderItem = id =>
-  getById<OrderItemResponse>('/marketplace-order-items/', id);
+  getById<OrderItemDetailsType>('/marketplace-order-items/', id);
 
 export const approveOrder = (orderUuid: string) =>
   post(`/marketplace-orders/${orderUuid}/approve/`).then(response => response.data);

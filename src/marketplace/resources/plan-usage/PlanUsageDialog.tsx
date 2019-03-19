@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { formatDate } from '@waldur/core/dateUtils';
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -13,7 +14,9 @@ const getChartData = (props: PlanUsageRowProps) => ({
     show: true,
     showTitle: false,
     feature: {
-      saveAsImage: {},
+      saveAsImage: {
+        name: `${props.row.plan_name}-${formatDate()}`,
+      },
     },
   },
   series: [
@@ -40,11 +43,23 @@ const getChartData = (props: PlanUsageRowProps) => ({
 
 export const PlanUsageDialog = (props: {resolve: PlanUsageRowProps}) => (
   <ModalDialog
-    title={translate('Plan capacity ({provider} / {offering})', {
-      provider: props.resolve.row.customer_provider_name,
-      offering: props.resolve.row.offering_name,
-    })}
+    title={translate('Plan capacity')}
     footer={<CloseDialogButton/>}>
+    <p>
+      <strong>{translate('Provider')}</strong>:
+      {' '}
+      {props.resolve.row.customer_provider_name}
+    </p>
+    <p>
+      <strong>{translate('Offering')}</strong>:
+      {' '}
+      {props.resolve.row.offering_name}
+    </p>
+    <p>
+      <strong>{translate('Plan')}</strong>:
+      {' '}
+      {props.resolve.row.plan_name}
+    </p>
     <EChart options={getChartData(props.resolve)} height="300px" />
   </ModalDialog>
 );
