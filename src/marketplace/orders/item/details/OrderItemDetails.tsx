@@ -4,6 +4,7 @@ import * as Panel from 'react-bootstrap/lib/Panel';
 import * as PanelGroup from 'react-bootstrap/lib/PanelGroup';
 import * as Row from 'react-bootstrap/lib/Row';
 
+import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getDetailsComponent } from '@waldur/marketplace/common/registry';
 import { PlanDetails } from '@waldur/marketplace/details/plan/PlanDetails';
@@ -34,6 +35,14 @@ export const OrderItemDetails = (props: OrderItemDetailsProps) => {
               <OrderItemDetailsField label={translate('Type')}>
                 <OrderItemTypeIndicator orderItemType={props.orderItem.type}/>
               </OrderItemDetailsField>
+              <OrderItemDetailsField label={translate('State')}>
+                {titleCase(props.orderItem.state)}
+              </OrderItemDetailsField>
+              {props.orderItem.error_message && (
+                <OrderItemDetailsField label={translate('Error message')}>
+                  {props.orderItem.error_message}
+                </OrderItemDetailsField>
+              )}
             </Panel.Body>
           </Panel>
           <Panel eventKey="plan">

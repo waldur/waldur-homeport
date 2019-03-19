@@ -43,6 +43,7 @@ export interface OrderItemResponse {
   category_title?: string;
   category_uuid?: string;
   created: string;
+  error_message?: string;
 }
 
 export interface OrderItemDetailsType extends OrderItemResponse {

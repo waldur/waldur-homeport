@@ -1983,6 +1983,7 @@ msgid "Erred"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Error message"
 msgstr ""
@@ -6709,6 +6710,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
