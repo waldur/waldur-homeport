@@ -1,5 +1,8 @@
 import template from './issue-detail.html';
 
+const linkify = s =>
+  s.replace(/\[(.+?)\|(.+)\]/g, (_, name, href) => `<a href="${href}">${name}</a>`);
+
 const issueDetail = {
   template,
   controller: class IssueDetailController {
@@ -35,7 +38,9 @@ const issueDetail = {
           this.currentUser = user;
           this.staffOrSupport = user.is_staff || user.is_support;
         }),
-        this.issuesService.$get(this.$stateParams.uuid).then(issue => this.issue = issue)
+        this.issuesService.$get(this.$stateParams.uuid).then(issue => {
+          this.issue = {...issue, description: linkify(issue.description)};
+        }),
       ]);
     }
 
