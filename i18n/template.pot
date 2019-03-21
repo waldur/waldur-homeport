@@ -1816,7 +1816,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/DisplayNameField.tsx
 msgid "Display name"
 msgstr ""
 
@@ -2898,7 +2898,7 @@ msgstr ""
 msgid "Internal IPs"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/InternalNameField.tsx
 msgid "Internal name"
 msgstr ""
 
@@ -3207,8 +3207,8 @@ msgstr ""
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr ""
 
-#: src/marketplace/offerings/option/OptionForm.tsx
-msgid "Label"
+#: src/marketplace/offerings/DisplayNameField.tsx
+msgid "Label that is visible to users in Marketplace."
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.js
@@ -3630,7 +3630,6 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
@@ -6968,6 +6967,10 @@ msgstr ""
 
 #: src/customer/dashboard/api.ts
 msgid "Team size"
+msgstr ""
+
+#: src/marketplace/offerings/InternalNameField.tsx
+msgid "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
 msgstr ""
 
 #: src/issues/create/issue-create-dialog.html

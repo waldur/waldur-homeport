@@ -6,6 +6,9 @@ import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
+import { DisplayNameField } from '../DisplayNameField';
+import { InternalNameField } from '../InternalNameField';
+
 interface LimitPeriodOption {
   value: string;
   label: string;
@@ -46,25 +49,8 @@ const enhance = formValues(props => ({
 
 export const ComponentForm = enhance((props: Values & Props) => (
   <>
-    <FormGroup label={translate('Internal name')} required={true}>
-      <Field
-        component="input"
-        className="form-control"
-        name={`${props.component}.type`}
-        type="text"
-        validate={required}
-        parse={v => v.replace('.', '')}
-      />
-    </FormGroup>
-    <FormGroup label={translate('Display name')} required={true}>
-      <Field
-        component="input"
-        className="form-control"
-        name={`${props.component}.name`}
-        type="text"
-        validate={required}
-      />
-    </FormGroup>
+    <InternalNameField name={`${props.component}.type`}/>
+    <DisplayNameField name={`${props.component}.name`}/>
     <FormGroup label={translate('Measured unit')}>
       <Field
         component="input"
