@@ -11,6 +11,7 @@ import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { RowNameField } from './RowNameField';
+import { ShowRequestButton } from './ShowRequestButton';
 
 const TableComponent = props => {
   const columns = [
@@ -41,6 +42,10 @@ const TableComponent = props => {
     {
       title: translate('Cost'),
       render: ({ row }) => defaultCurrency(row.cost),
+    },
+    {
+      title: translate('Actions'),
+      render: ShowRequestButton,
     },
   ];
 
