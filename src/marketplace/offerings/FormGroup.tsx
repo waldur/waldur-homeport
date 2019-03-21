@@ -1,7 +1,10 @@
 import * as React from 'react';
 
+import { Tooltip } from '@waldur/core/Tooltip';
+
 interface FormGroupProps {
-  label?: string;
+  label?: React.ReactNode;
+  description?: React.ReactNode;
   required?: boolean;
   className?: string;
   labelClassName?: string;
@@ -14,6 +17,11 @@ export const FormGroup: React.SFC<FormGroupProps> = props => (
     {props.label ? (
       <>
         <label className={props.labelClassName}>
+          {props.description && (
+            <Tooltip id="form-field-tooltip" label={props.description}>
+              <i className="fa fa-question-circle"/>{' '}
+            </Tooltip>
+          )}
           {props.label}
           {props.required && <span className="text-danger"> *</span>}
         </label>

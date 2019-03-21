@@ -8,7 +8,9 @@ import { required } from '@waldur/core/validators';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 
+import { DisplayNameField } from '../DisplayNameField';
 import { FormGroup } from '../FormGroup';
+import { InternalNameField } from '../InternalNameField';
 import { FIELD_TYPES } from './constants';
 import { FieldType } from './types';
 
@@ -89,12 +91,8 @@ interface OptionFormProps extends TranslateProps {
 
 export const OptionForm = connector(withTranslation((props: OptionFormProps) => (
   <>
-    <FormGroup label={props.translate('Name')} required={true}>
-      <StringField option={props.option} name="name" validate={required}/>
-    </FormGroup>
-    <FormGroup label={props.translate('Label')} required={true}>
-      <StringField option={props.option} name="label" validate={required}/>
-    </FormGroup>
+    <InternalNameField name={`${props.option}.name`}/>
+    <DisplayNameField name={`${props.option}.label`}/>
     <FormGroup label={props.translate('Description')}>
       <StringField option={props.option} name="help_text"/>
     </FormGroup>
