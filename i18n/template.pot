@@ -140,6 +140,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -6553,6 +6554,10 @@ msgstr ""
 
 #: src/offering/OfferingReportButton.tsx
 msgid "Show report"
+msgstr ""
+
+#: src/marketplace/orders/item/list/ShowRequestButton.tsx
+msgid "Show request"
 msgstr ""
 
 #: src/analytics/VmOverviewFilter.tsx
