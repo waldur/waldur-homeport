@@ -21,7 +21,6 @@
         <select
           ng-options="protocol.toUpperCase() for protocol in $ctrl.protocols"
           ng-model="rule.protocol"
-          ng-change="$ctrl.selectProtocol(rule)"
           class="form-control">
           <option value="" translate>Any</option>
         </select>
