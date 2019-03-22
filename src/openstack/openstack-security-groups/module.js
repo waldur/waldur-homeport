@@ -70,7 +70,10 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
           }
         },
         dialogSize: 'lg',
-        serializer: model => model.rules
+        serializer: model => model.rules.map(rule => ({
+          ...rule,
+          protocol: rule.protocol === null ? '' : rule.protocol,
+        })),
       }
     }
   });
