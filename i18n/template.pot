@@ -1203,6 +1203,7 @@ msgstr ""
 msgid "Component #{index}"
 msgstr ""
 
+#: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Component name"
 msgstr ""
@@ -4963,6 +4964,7 @@ msgid "Price per month (VAT not included)"
 msgstr ""
 
 #: src/marketplace/common/BillingPeriod.tsx
+#: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 msgid "Price per unit"
 msgstr ""
 
@@ -7828,6 +7830,7 @@ msgstr ""
 msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
 msgstr ""
 
+#: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/actions/CompleteAction.ts

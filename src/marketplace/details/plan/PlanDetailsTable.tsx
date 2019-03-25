@@ -7,6 +7,7 @@ import { ComponentEditRow } from '@waldur/marketplace/details/plan/ComponentEdit
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 
 import { ComponentRow } from './ComponentRow';
+import { LimitlessComponentsTable } from './LimitlessComponentsTable';
 import { Component, PlanDetailsTableProps } from './types';
 import { pricesSelector } from './utils';
 
@@ -73,20 +74,27 @@ const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDetailsTa
 
   const fixedRows = props.components.filter(component => component.billing_type === 'fixed');
   const usageRows = props.components.filter(component => component.billing_type === 'usage');
+  const usageWithLimits = usageRows.filter(component => component.disable_quotas === false);
+  const usageWithoutLimits = usageRows.filter(component => component.disable_quotas === true);
 
   return (
     <div className={props.formGroupClassName}>
       <div className={props.columnClassName}>
+      {fixedRows.length > 0 || usageWithLimits.length > 0 && (
         <table className="table table-bordered">
           <thead>
             <HeaderRow periods={props.periods}/>
           </thead>
           <tbody>
             {fixedRows.length > 0 && <FixedRows components={fixedRows}/>}
-            {usageRows.length > 0 && <UsageRows components={usageRows} periods={props.periods} viewMode={props.viewMode}/>}
+            {usageWithLimits.length > 0 && <UsageRows components={usageRows} periods={props.periods} viewMode={props.viewMode}/>}
             {props.components.length > 1 && <TotalRow totalPeriods={props.totalPeriods}/>}
           </tbody>
         </table>
+      )}
+      {usageWithoutLimits.length > 0 && (
+        <LimitlessComponentsTable components={usageWithoutLimits}/>
+      )}
       </div>
     </div>
   );
