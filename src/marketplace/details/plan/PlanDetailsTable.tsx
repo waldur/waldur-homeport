@@ -87,7 +87,7 @@ const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDetailsTa
           </thead>
           <tbody>
             {fixedRows.length > 0 && <FixedRows components={fixedRows}/>}
-            {usageWithLimits.length > 0 && <UsageRows components={usageRows} periods={props.periods} viewMode={props.viewMode}/>}
+            {usageWithLimits.length > 0 && <UsageRows components={usageWithLimits} periods={props.periods} viewMode={props.viewMode}/>}
             {props.components.length > 1 && <TotalRow totalPeriods={props.totalPeriods}/>}
           </tbody>
         </table>
