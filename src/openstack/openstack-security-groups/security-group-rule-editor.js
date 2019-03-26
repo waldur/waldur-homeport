@@ -22,7 +22,7 @@ const securityGroupRuleEditor = {
     }
 
     getPortMin(rule) {
-      if (rule.protocol === 'icmp' || rule.protocol === '') {
+      if (rule.protocol === 'icmp' || rule.protocol === null) {
         return -1;
       } else {
         return 1;
@@ -30,7 +30,9 @@ const securityGroupRuleEditor = {
     }
 
     getPortMax(rule) {
-      if (rule.protocol === 'icmp') {
+      if (rule.protocol === null) {
+        return -1;
+      } else if (rule.protocol === 'icmp') {
         return 255;
       } else {
         return 65535;

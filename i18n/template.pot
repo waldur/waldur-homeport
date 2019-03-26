@@ -140,6 +140,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -371,6 +372,10 @@ msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Additional information"
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+msgid "Additionally vendor can charge for usage of the following components"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -1202,6 +1207,7 @@ msgstr ""
 msgid "Component #{index}"
 msgstr ""
 
+#: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Component name"
 msgstr ""
@@ -1815,7 +1821,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/DisplayNameField.tsx
 msgid "Display name"
 msgstr ""
 
@@ -2897,7 +2903,7 @@ msgstr ""
 msgid "Internal IPs"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/InternalNameField.tsx
 msgid "Internal name"
 msgstr ""
 
@@ -3206,8 +3212,8 @@ msgstr ""
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr ""
 
-#: src/marketplace/offerings/option/OptionForm.tsx
-msgid "Label"
+#: src/marketplace/offerings/DisplayNameField.tsx
+msgid "Label that is visible to users in Marketplace."
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.js
@@ -3629,7 +3635,6 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
@@ -4963,6 +4968,7 @@ msgid "Price per month (VAT not included)"
 msgstr ""
 
 #: src/marketplace/common/BillingPeriod.tsx
+#: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 msgid "Price per unit"
 msgstr ""
 
@@ -6555,6 +6561,10 @@ msgstr ""
 msgid "Show report"
 msgstr ""
 
+#: src/marketplace/orders/item/list/ShowRequestButton.tsx
+msgid "Show request"
+msgstr ""
+
 #: src/analytics/VmOverviewFilter.tsx
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Show shared"
@@ -6963,6 +6973,10 @@ msgstr ""
 
 #: src/customer/dashboard/api.ts
 msgid "Team size"
+msgstr ""
+
+#: src/marketplace/offerings/InternalNameField.tsx
+msgid "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
 msgstr ""
 
 #: src/issues/create/issue-create-dialog.html
@@ -7820,6 +7834,7 @@ msgstr ""
 msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
 msgstr ""
 
+#: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/actions/CompleteAction.ts
