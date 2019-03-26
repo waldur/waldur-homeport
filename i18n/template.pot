@@ -374,6 +374,10 @@ msgstr ""
 msgid "Additional information"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+msgid "Additionally vendor can charge for usage of the following components"
+msgstr ""
+
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 #: src/marketplace/service-providers/CustomerDetailsTable.tsx

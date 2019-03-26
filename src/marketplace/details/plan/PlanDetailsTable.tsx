@@ -93,7 +93,10 @@ const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDetailsTa
         </table>
       )}
       {usageWithoutLimits.length > 0 && (
-        <LimitlessComponentsTable components={usageWithoutLimits}/>
+        <>
+          <p>{translate('Additionally vendor can charge for usage of the following components')}</p>
+          <LimitlessComponentsTable components={usageWithoutLimits}/>
+        </>
       )}
       </div>
     </div>
