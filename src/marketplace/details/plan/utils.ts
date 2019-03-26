@@ -64,9 +64,13 @@ export const combinePrices = (plan, limits, offering) => {
         }
         const type = item.type;
         const billing_type = item.billing_type;
-        const subTotal = plan.prices[type] * amount;
+        const price = plan.prices[type];
+        const subTotal = price * amount;
         const prices = multipliers.map(mult => mult * subTotal);
-        return {label, units, amount, prices, type, billing_type, subTotal};
+        return {
+          label, units, amount, prices, type, billing_type, subTotal, price,
+          disable_quotas: item.disable_quotas,
+        };
       });
     const usageComponents = components.filter(component => component.billing_type === 'usage');
     const total = parseFloat(plan.unit_price) + usageComponents.reduce((result, item) => result + item.subTotal, 0);
