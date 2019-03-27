@@ -112,6 +112,10 @@ msgstr ""
 msgid "Accounting"
 msgstr ""
 
+#: src/customer/AccountingPeriodFilter.tsx
+msgid "Accounting period"
+msgstr ""
+
 #: src/marketplace/offerings/plan/PlansList.tsx
 msgid "Accounting plans"
 msgstr ""
@@ -1132,7 +1136,12 @@ msgstr ""
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Client organization"
+msgstr ""
+
+#: src/marketplace/resources/usage/SupportUsageList.tsx
+msgid "Client project"
 msgstr ""
 
 #: src/azure/provider/AzureForm.tsx
@@ -1167,6 +1176,7 @@ msgstr ""
 
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.tsx
+#: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Comment"
 msgstr ""
 
@@ -1615,6 +1625,10 @@ msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
 msgid "Date joined"
+msgstr ""
+
+#: src/marketplace/resources/usage/SupportUsageList.tsx
+msgid "Date of reporting"
 msgstr ""
 
 #: src/user/support/UserActivateButton.tsx
@@ -4143,6 +4157,7 @@ msgid "Offering state has changed to {offering_state}."
 msgstr ""
 
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Offering type"
 msgstr ""
 
@@ -4656,6 +4671,10 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/routes.js
 msgid "Plan capacity"
+msgstr ""
+
+#: src/marketplace/resources/usage/SupportUsageList.tsx
+msgid "Plan component name"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentsList.tsx
@@ -5909,6 +5928,7 @@ msgid "Resource link"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
+#: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Resource name"
 msgstr ""
 
@@ -6222,7 +6242,7 @@ msgstr ""
 msgid "Select a component"
 msgstr ""
 
-#: src/customer/CustomerListFilter.tsx
+#: src/customer/AccountingPeriodField.tsx
 msgid "Select accounting period"
 msgstr ""
 
@@ -7983,11 +8003,17 @@ msgstr ""
 msgid "Usage report has been submitted."
 msgstr ""
 
+#: src/issues/workspace/issue-navigation-service.js
+#: src/marketplace/routes.js
+msgid "Usage reports"
+msgstr ""
+
 #: src/marketplace/offerings/create/ComponentForm.tsx
 msgid "Usage-based"
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
+#: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Usages"
 msgstr ""
 
@@ -8285,6 +8311,7 @@ msgid "Valid states for operation: {validStates}."
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
+#: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Value"
 msgstr ""
 
