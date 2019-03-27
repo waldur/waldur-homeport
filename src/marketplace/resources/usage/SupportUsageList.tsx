@@ -1,7 +1,12 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
+
+import { FORM_ID } from './SupportUsageFilter';
 
 const UsageExpandableRow = ({ row }) => (
   <p>
@@ -75,11 +80,38 @@ const exportFields = () => ([
   translate('Comment'),
 ]);
 
+const mapPropsToFilter = props => {
+  const filter: Record<string, string> = {};
+  if (props.usageFilter) {
+    filter.accounting_period = props.usageFilter.accounting_period;
+    if (props.usageFilter.organization) {
+      filter.customer_uuid = props.usageFilter.organization.uuid;
+    }
+    if (props.usageFilter.project) {
+      filter.project_uuid = props.usageFilter.project.uuid;
+    }
+    if (props.usageFilter.offering) {
+      filter.offering_uuid = props.usageFilter.offering.uuid;
+    }
+  }
+  return filter;
+};
+
 const TableOptions = {
   table: 'SupportUsageReports',
   fetchData: createFetcher('marketplace-component-usages'),
   exportRow,
   exportFields,
+  mapPropsToFilter,
 };
 
-export const SupportUsageList = connectTable(TableOptions)(TableComponent);
+const mapStateToProps = state => ({
+  usageFilter: getFormValues(FORM_ID)(state),
+});
+
+const enhance = compose(
+  connect(mapStateToProps),
+  connectTable(TableOptions),
+);
+
+export const SupportUsageList = enhance(TableComponent);
