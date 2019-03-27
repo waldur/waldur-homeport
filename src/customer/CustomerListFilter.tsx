@@ -1,32 +1,12 @@
-import * as moment from 'moment-timezone';
 import * as React from 'react';
-
-import Select from 'react-select';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
+import { AccountingPeriodField, accountingPeriods } from './AccountingPeriodField';
 import './CustomerListFilter.scss';
-
-const makeAccountingPeriods = () => {
-  let date = moment().startOf('month');
-  const choices = [];
-  for (let i = 0; i < 12; i++) {
-    const month = date.month() + 1;
-    const year = date.year();
-    const label = date.format('MMMM, YYYY');
-    choices.push({
-      label,
-      value: { year, month, current: i === 0},
-    });
-    date = date.subtract(1, 'month');
-  }
-  return choices;
-};
-
-const accountingPeriods = makeAccountingPeriods();
 
 export const PureCustomerListFilter: React.SFC<TranslateProps> = props => (
   <div className="ibox">
@@ -47,21 +27,7 @@ export const PureCustomerListFilter: React.SFC<TranslateProps> = props => (
           </div>
           <div className="col-sm-3">
             <div className="form-group">
-              <Field name="accounting_period"
-                component={prop =>
-                  <Select
-                    className="accounting-period-selector"
-                    placeholder={props.translate('Select accounting period')}
-                    labelKey="label"
-                    valueKey="value"
-                    value={prop.input.value}
-                    onChange={prop.input.onChange}
-                    onBlur={e => e.preventDefault()}
-                    options={accountingPeriods}
-                    clearable={false}
-                  />
-                }
-              />
+              <AccountingPeriodField/>
             </div>
           </div>
         </div>

@@ -306,6 +306,19 @@ export default function routes($stateProvider) {
       }
     })
 
+    .state('marketplace-support-usage-reports', {
+      url: 'usage-reports/',
+      template: '<marketplace-support-usage-list></marketplace-support-usage-list>',
+      parent: 'support',
+      data: {
+        feature: 'marketplace',
+        pageTitle: gettext('Usage reports'),
+      },
+      resolve: {
+        permission: checkPermission,
+      }
+    })
+
     .state('marketplace-resources', {
       url: '',
       abstract: true,
