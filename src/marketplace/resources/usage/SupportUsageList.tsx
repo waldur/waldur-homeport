@@ -1,8 +1,10 @@
+import * as moment from 'moment-timezone';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { TableProps } from '@waldur/table-react/Table';
@@ -41,7 +43,7 @@ const TableComponent = (props: TableProps<UsageReport>) => {
     },
     {
       title: translate('Date of reporting'),
-      render: ({ row }) => <span>{row.created}</span>,
+      render: ({ row }) => <span>{formatDateTime(row.created)}</span>,
     },
     {
       title: translate('Value'),
@@ -67,7 +69,7 @@ const exportRow = (row: UsageReport) => [
   row.offering_name,
   row.resource_name,
   row.name,
-  row.created,
+  formatDateTime(row.created),
   row.usage + ' ' + row.measured_unit,
   row.description,
 ];
@@ -86,7 +88,12 @@ const exportFields = () => ([
 const mapPropsToFilter = props => {
   const filter: UsageReportRequest = {};
   if (props.usageFilter) {
-    filter.accounting_period = props.usageFilter.accounting_period;
+    if (props.usageFilter.accounting_period) {
+      const {year, month} = props.usageFilter.accounting_period.value;
+      const dt = moment({year, month: month - 1});
+      filter.date_after = dt.startOf('month').format('YYYY-MM-DD');
+      filter.date_before = dt.endOf('month').format('YYYY-MM-DD');
+    }
     if (props.usageFilter.organization) {
       filter.customer_uuid = props.usageFilter.organization.uuid;
     }
