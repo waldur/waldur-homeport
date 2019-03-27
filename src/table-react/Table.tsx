@@ -15,13 +15,13 @@ import TableQuery from './TableQuery';
 import TableRefreshButton from './TableRefreshButton';
 import { Column, TableState, Sorting } from './types';
 
-interface TableProps extends TranslateProps, TableState {
+export interface TableProps<RowType = any> extends TranslateProps, TableState {
   rows: any[];
   fetch: () => void;
   gotoPage?: (page: number) => void;
   hasQuery?: boolean;
   setQuery?: (query: string) => void;
-  columns?: Column[];
+  columns?: Array<Column<RowType>>;
   exportAs?: (format: string) => void;
   actions?: React.ReactNode;
   verboseName?: string;

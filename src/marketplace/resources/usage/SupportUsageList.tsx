@@ -5,8 +5,11 @@ import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { TableProps } from '@waldur/table-react/Table';
+import { Column } from '@waldur/table-react/types';
 
 import { FORM_ID } from './SupportUsageFilter';
+import { UsageReport, UsageReportRequest } from './types';
 
 const UsageExpandableRow = ({ row }) => (
   <p>
@@ -14,35 +17,35 @@ const UsageExpandableRow = ({ row }) => (
   </p>
 );
 
-const TableComponent = props => {
-  const columns = [
+const TableComponent = (props: TableProps<UsageReport>) => {
+  const columns: Array<Column<UsageReport>> = [
     {
       title: translate('Client organization'),
-      render: ({ row }) => row.customer_name,
+      render: ({ row }) => <span>{row.customer_name}</span>,
     },
     {
       title: translate('Client project'),
-      render: ({ row }) => row.project_name,
+      render: ({ row }) => <span>{row.project_name}</span>,
     },
     {
       title: translate('Offering type'),
-      render: ({ row }) => row.offering_type,
+      render: ({ row }) => <span>{row.offering_name}</span>,
     },
     {
       title: translate('Resource name'),
-      render: ({ row }) => row.resource_name,
+      render: ({ row }) => <span>{row.resource_name}</span>,
     },
     {
       title: translate('Plan component name'),
-      render: ({ row }) => row.name,
+      render: ({ row }) => <span>{row.name}</span>,
     },
     {
       title: translate('Date of reporting'),
-      render: ({ row }) => row.created,
+      render: ({ row }) => <span>{row.created}</span>,
     },
     {
       title: translate('Value'),
-      render: ({ row }) => row.usage + ' ' + row.measured_unit,
+      render: ({ row }) => <span>{row.usage + ' ' + row.measured_unit}</span>,
     },
   ];
 
@@ -58,10 +61,10 @@ const TableComponent = props => {
   );
 };
 
-const exportRow = row => [
+const exportRow = (row: UsageReport) => [
   row.customer_name,
   row.project_name,
-  row.offering_type,
+  row.offering_name,
   row.resource_name,
   row.name,
   row.created,
@@ -81,7 +84,7 @@ const exportFields = () => ([
 ]);
 
 const mapPropsToFilter = props => {
-  const filter: Record<string, string> = {};
+  const filter: UsageReportRequest = {};
   if (props.usageFilter) {
     filter.accounting_period = props.usageFilter.accounting_period;
     if (props.usageFilter.organization) {

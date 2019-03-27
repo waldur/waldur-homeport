@@ -31,9 +31,9 @@ export interface TableOptions {
   mapPropsToFilter?: (props: any) => any;
 }
 
-export interface Column {
+export interface Column<RowType = Entity> {
   title: string;
-  render: React.ComponentType<{row: Entity}>;
+  render: React.ComponentType<{row: RowType}>;
   className?: string;
   orderField?: string;
 }
