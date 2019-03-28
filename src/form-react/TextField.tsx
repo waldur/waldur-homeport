@@ -4,6 +4,7 @@ import { FormField } from './types';
 
 interface TextFieldProps extends FormField {
   maxLength?: number;
+  placeholder?: string;
 }
 
 export const TextField = (props: TextFieldProps) => {

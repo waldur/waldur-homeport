@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { FormContainer, NumberField } from '@waldur/form-react';
+import { FormContainer, NumberField, TextField } from '@waldur/form-react';
 import { DateField } from '@waldur/form-react/DateField';
 import { translate } from '@waldur/i18n';
 import { PlanUnit } from '@waldur/marketplace/orders/types';
@@ -31,27 +31,41 @@ const formatDescription = (unit: PlanUnit) => {
   return `${formatUnit(unit)} ${message}`;
 };
 
-export const ResourceUsageForm = (props: OwnProps) => (
-  <div className="form-horizontal">
-    <FormContainer
-      submitting={props.submitting}
-      labelClass="col-sm-4"
-      controlClass="col-sm-8">
-      <DateField
-        name="date"
-        label={translate('Usage period')}
-        description={formatDescription(props.plan_unit)}
+export const ResourceUsageForm = (props: OwnProps) => {
+  const components = [];
+  props.components.forEach((component: OfferingComponent, index) => {
+    components.push(
+      <NumberField
+        name={`${component.type}.amount`}
+        label={component.name}
+        key={`${index}.amount`}
+        description={component.description}
+        unit={component.measured_unit}
+        max={component.limit_period ? component.limit_amount : undefined}
       />
-      {props.components.map((component: OfferingComponent, index) => (
-        <NumberField
-          name={component.type}
-          label={component.name}
-          key={index}
-          description={component.description}
-          unit={component.measured_unit}
-          max={component.limit_period ? component.limit_amount : undefined}
+    );
+    components.push(
+      <TextField
+        name={`${component.type}.description`}
+        key={`${index}.description`}
+        placeholder={translate('Comment')}
+      />
+    );
+  });
+
+  return (
+    <div className="form-horizontal">
+      <FormContainer
+        submitting={props.submitting}
+        labelClass="col-sm-2"
+        controlClass="col-sm-10">
+        <DateField
+          name="date"
+          label={translate('Usage period')}
+          description={formatDescription(props.plan_unit)}
         />
-      ))}
-    </FormContainer>
-  </div>
-);
+        {components}
+      </FormContainer>
+    </div>
+  );
+};

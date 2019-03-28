@@ -17,7 +17,7 @@ function* handleSubmitUsage(action) {
     date: formatDate(date),
     usages: Object.keys(rest).map(key => ({
       type: key,
-      amount: rest[key],
+      ...rest[key],
     })),
   };
 
@@ -31,7 +31,6 @@ function* handleSubmitUsage(action) {
     yield put(showError(errorMessage));
     const formError = new SubmissionError({
       _error: errorMessage,
-      name: 'Unable to submit usage report.',
     });
     yield put(constants.submitUsage.failure(formError));
   }
