@@ -3,6 +3,8 @@ import { BaseResource } from '@waldur/resource/types';
 import { validateState, validateRuntimeState } from './base';
 
 const resource: BaseResource = {
+  name: 'VM',
+  uuid: 'uuid',
   state: 'Erred',
   runtime_state: 'ACTIVE',
 };

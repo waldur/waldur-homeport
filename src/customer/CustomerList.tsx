@@ -4,55 +4,23 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDate } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { defaultCurrency, ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/core/services';
 import { withTranslation, translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 
+import { CurrentCostField } from './CurrentCostField';
 import { CustomerExpandableRow } from './CustomerExpandableRow';
-
-const OrganizationLink = ({ row }) => (
-  <Link
-    state="organization.dashboard"
-    params={{ uuid: row.uuid }}
-    label={row.name}
-  />
-);
+import { EstimatedCostField } from './EstimatedCostField';
+import { OrganizationLink } from './OrganizationLink';
 
 const AbbreviationField = ({ row }) => <span>{renderFieldOrDash(row.abbreviation)}</span>;
 
 const CreatedDateField = ({ row }) => <span>{renderFieldOrDash(formatDate(row.created))}</span>;
 
 const AccountingStartDateField = ({ row }) => <span>{renderFieldOrDash(formatDate(row.accounting_start_date))}</span>;
-
-const CurrentCostField = ({ row }) => {
-  const estimate = row.billing_price_estimate;
-  if (!estimate) {
-    return defaultCurrency(0);
-  }
-  // VAT is not included only when accounting mode is activated
-  if (ENV.accountingMode === 'accounting') {
-    return defaultCurrency(estimate.current);
-  } else {
-    return defaultCurrency(parseFloat(estimate.current) + parseFloat(estimate.tax_current));
-  }
-};
-
-const EstimatedCostField = ({ row }) => {
-  const estimate = row.billing_price_estimate;
-  if (!estimate) {
-    return defaultCurrency(0);
-  }
-  // VAT is not included only when accounting mode is activated
-  if (ENV.accountingMode === 'accounting') {
-    return defaultCurrency(estimate.total);
-  } else {
-    return defaultCurrency(parseFloat(estimate.total) + parseFloat(estimate.tax));
-  }
-};
 
 export const TableComponent = props => {
   const { filterColumns, customerListFilter } = props;

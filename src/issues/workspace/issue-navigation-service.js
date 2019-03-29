@@ -57,6 +57,12 @@ const REPORT_ITEMS = [
     feature: 'support.resources-treemap'
   },
   {
+    label: gettext('Shared providers'),
+    icon: 'fa-random',
+    link: 'support.shared-providers',
+    feature: 'support.shared-providers'
+  },
+  {
     label: gettext('Financial overview'),
     icon: 'fa-university',
     link: 'support.organizations',

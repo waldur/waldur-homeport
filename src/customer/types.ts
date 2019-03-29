@@ -30,4 +30,5 @@ export interface Customer {
   vat_code?: string;
   image?: string;
   is_service_provider?: boolean;
+  created?: string;
 }
