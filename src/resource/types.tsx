@@ -10,9 +10,10 @@ export type ResourceState =
   ;
 
 export interface BaseResource {
+  name: string;
   state: ResourceState;
   runtime_state: string;
-  uuid?: string;
+  uuid: string;
   url?: string;
   backend_id?: string;
   description?: string;

@@ -58,6 +58,7 @@ msgstr ""
 
 #: src/customer/CustomerList.tsx
 #: src/customer/details/CustomerDetails.tsx
+#: src/resource/support/SharedProviderCustomers.tsx
 msgid "Abbreviation"
 msgstr ""
 
@@ -148,11 +149,11 @@ msgstr ""
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/ResourceActionComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/paypal/paypal-invoice-actions.html
 #: src/project/ProjectsList.tsx
+#: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
 #: src/user/hooks/HooksList.tsx
@@ -1501,6 +1502,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 #: src/project/ProjectsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/support/SharedProviderCustomers.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "Created"
 msgstr ""
@@ -1516,6 +1518,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/resource/support/SharedProviderResources.tsx
 msgid "Created at"
 msgstr ""
 
@@ -3330,7 +3333,7 @@ msgstr ""
 msgid "Lithuanian"
 msgstr ""
 
-#: src/marketplace/resources/list/ResourceActionComponent.tsx
+#: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "Loading actions"
 msgstr ""
@@ -3684,6 +3687,7 @@ msgstr ""
 #: src/resource/actions/constants.js
 #: src/resource/list/resource-global-list.js
 #: src/resource/list/resources-list.js
+#: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "Name"
 msgstr ""
@@ -4360,6 +4364,8 @@ msgstr ""
 #: src/issues/list/constants.js
 #: src/issues/list/issues-list.js
 #: src/resource/list/resource-global-list.js
+#: src/resource/support/SharedProviderCustomers.tsx
+#: src/resource/support/SharedProviderResources.tsx
 #: src/user/list/ProjectPermissions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -4469,6 +4475,7 @@ msgstr ""
 
 #: src/customer/CustomerList.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
+#: src/resource/support/SharedProviderTabs.tsx
 msgid "Organizations"
 msgstr ""
 
@@ -5242,6 +5249,7 @@ msgstr ""
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/support/SharedProviderFilter.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "Provider"
 msgstr ""
@@ -5956,7 +5964,6 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
 #: src/experts/requests/details/expert-request-details.js
-#: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -5969,6 +5976,7 @@ msgstr ""
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: src/resource/support/ChartContainer.tsx
 #: src/resource/support/TreemapChartFilter.tsx
+#: src/resource/support/routes.js
 msgid "Resources"
 msgstr ""
 
@@ -5984,8 +5992,8 @@ msgstr ""
 msgid "Resources import has been initiated"
 msgstr ""
 
-#: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
+#: src/resource/support/routes.js
 msgid "Resources usage"
 msgstr ""
 
@@ -6315,6 +6323,7 @@ msgid "Select provider type"
 msgstr ""
 
 #: src/marketplace/orders/ProviderAutocomplete.tsx
+#: src/resource/support/SharedProviderFilter.tsx
 msgid "Select provider..."
 msgstr ""
 
@@ -6515,6 +6524,11 @@ msgstr ""
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Shared"
+msgstr ""
+
+#: src/issues/workspace/issue-navigation-service.js
+#: src/resource/support/routes.js
+msgid "Shared providers"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCart.tsx
@@ -6769,6 +6783,7 @@ msgstr ""
 #: src/resource/list/resource-global-list.js
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/slurm-allocation-list.js
 #: src/user/hooks/HooksList.tsx
 msgid "State"
@@ -7138,8 +7153,8 @@ msgid "There are no SSH public keys yet."
 msgstr ""
 
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
-#: src/marketplace/resources/list/ResourceActionComponent.tsx
 #: src/paypal/paypal-invoice-actions.html
+#: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "There are no actions."
 msgstr ""
@@ -7440,6 +7455,7 @@ msgstr ""
 #: src/payments/payment-list.js
 #: src/providers/details/provider-details.html
 #: src/providers/provider-list.js
+#: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
 msgstr ""
 
@@ -7625,7 +7641,7 @@ msgstr ""
 msgid "Unable to load Zabbix host details."
 msgstr ""
 
-#: src/marketplace/resources/list/ResourceActionComponent.tsx
+#: src/resource/actions/ResourceActionComponent.tsx
 msgid "Unable to load actions"
 msgstr ""
 
@@ -8269,6 +8285,7 @@ msgid "VM type overview"
 msgstr ""
 
 #: src/customer/api.ts
+#: src/resource/support/SharedProviderTabs.tsx
 msgid "VMs"
 msgstr ""
 
@@ -8823,6 +8840,7 @@ msgstr ""
 msgid "organization"
 msgstr ""
 
+#: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/list/CustomerPermissions.tsx
 msgid "organizations"
 msgstr ""
@@ -8854,6 +8872,7 @@ msgid "requests"
 msgstr ""
 
 #: src/analytics/resource-bar-chart.html
+#: src/resource/support/SharedProviderResources.tsx
 msgid "resources"
 msgstr ""
 
