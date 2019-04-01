@@ -1,49 +1,38 @@
 import * as React from 'react';
-import { compose } from 'redux';
-import { Field, reduxForm } from 'redux-form';
-
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import * as Col from 'react-bootstrap/lib/Col';
+import * as Row from 'react-bootstrap/lib/Row';
+import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
 
 import { AccountingPeriodField, accountingPeriods } from './AccountingPeriodField';
-import './CustomerListFilter.scss';
+import { AccountingRunningField, getOptions } from './AccountingRunningField';
 
-export const PureCustomerListFilter: React.SFC<TranslateProps> = props => (
+export const PureCustomerListFilter = () => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
-      <form className="form-inline" id="customer-list-filter">
-        <div className="row">
-          <div className="col-sm-9">
-            <Field
-              name="accounting_is_running"
-              component={prop =>
-                <AwesomeCheckbox
-                  label={props.translate('Show with running accounting')}
-                  id="accounting-is-running"
-                  {...prop.input}
-                />
-              }
-            />
-          </div>
-          <div className="col-sm-3">
-            <div className="form-group">
-              <AccountingPeriodField/>
-            </div>
-          </div>
-        </div>
+      <form className="form-inline">
+        <Row>
+          <Col sm={9}>
+            <AccountingPeriodField/>
+          </Col>
+          <Col sm={3}>
+            <AccountingRunningField/>
+          </Col>
+        </Row>
       </form>
     </div>
   </div>
 );
 
-const enhance = compose(
-  reduxForm({
-    form: 'customerListFilter',
+const FilterForm = reduxForm({
+  form: 'customerListFilter',
+})(PureCustomerListFilter);
+
+export const CustomerListFilter = connect(
+  () => ({
     initialValues: {
       accounting_period: accountingPeriods[0],
+      accounting_is_running: getOptions()[0],
     },
   }),
-  withTranslation,
-);
-
-export const CustomerListFilter = enhance(PureCustomerListFilter);
+)(FilterForm);
