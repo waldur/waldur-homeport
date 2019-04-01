@@ -10,7 +10,9 @@ import * as api from './api';
 import { TotalCostField } from './TotalCostField';
 
 interface CustomerFilterData {
-  accounting_is_running: boolean;
+  accounting_is_running?: {
+    value: boolean;
+  };
   month: number;
   year: number;
   accounting_period?: {
@@ -31,7 +33,7 @@ const loadData = async (filter: CustomerFilterData) => {
     return {total: 0};
   }
   const params = {
-    accounting_is_running: filter.accounting_is_running,
+    accounting_is_running: filter.accounting_is_running ? filter.accounting_is_running.value : undefined,
     ...filter.accounting_period.value,
   };
   const data = await api.getTotal({params});

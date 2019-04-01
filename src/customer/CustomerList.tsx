@@ -128,7 +128,7 @@ const formatFilter = filter => {
   if (filter) {
     if (filter.accounting_period) {
       return {
-        accounting_is_running: filter.accounting_is_running,
+        accounting_is_running: filter.accounting_is_running ? filter.accounting_is_running.value : undefined,
         year: filter.accounting_period.value.year,
         month: filter.accounting_period.value.month,
       };

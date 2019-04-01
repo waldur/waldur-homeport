@@ -430,6 +430,10 @@ msgstr ""
 msgid "Alert"
 msgstr ""
 
+#: src/customer/AccountingRunningField.tsx
+msgid "All"
+msgstr ""
+
 #: src/openstack/openstack-tenant/openstack-template.js
 msgid "All categories"
 msgstr ""
@@ -4045,6 +4049,10 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
+#: src/customer/AccountingRunningField.tsx
+msgid "Not running accounting"
+msgstr ""
+
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.js
 msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
@@ -6067,6 +6075,10 @@ msgstr ""
 msgid "Run 'Find missing installed libraries' command to synchronize cloud broker state"
 msgstr ""
 
+#: src/customer/AccountingRunningField.tsx
+msgid "Running accounting"
+msgstr ""
+
 #: src/openstack/openstack-snapshot/import/import-snapshots-list.js
 msgid "Runtime State"
 msgstr ""
@@ -6613,7 +6625,7 @@ msgstr ""
 msgid "Show usage"
 msgstr ""
 
-#: src/customer/CustomerListFilter.tsx
+#: src/customer/AccountingRunningField.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
 msgstr ""
