@@ -37,6 +37,11 @@ const PureOverviewSummary = props => {
         title: translate('Native description'),
         type: 'string',
       },
+      {
+        key: 'terms_of_service',
+        title: translate('Terms of Service'),
+        type: 'string',
+      },
     ],
   };
 

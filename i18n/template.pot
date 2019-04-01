@@ -7104,6 +7104,7 @@ msgstr ""
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
 #: src/marketplace/offerings/create/OverviewStep.tsx
+#: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
 #: src/navigation/app-footer.html
