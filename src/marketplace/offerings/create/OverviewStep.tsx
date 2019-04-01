@@ -22,26 +22,32 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
       label={props.translate('Name')}
       required={true}
       validate={required}
+      maxLength={150}
     />
     <TextField
       name="description"
       label={props.translate('Description')}
+      maxLength={500}
     />
     <TextField
       name="full_description"
       label={props.translate('Full description')}
+      maxLength={500}
     />
     <StringField
       name="native_name"
       label={props.translate('Native name')}
+      maxLength={150}
     />
     <TextField
       name="native_description"
       label={props.translate('Native description')}
+      maxLength={500}
     />
     <TextField
       name="terms_of_service"
       label={props.translate('Terms of Service')}
+      maxLength={500}
     />
     <ImageUploadField
       name="thumbnail"
@@ -58,6 +64,7 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
     <StringField
       name="document.name"
       placeholder={props.translate('Filename')}
+      maxLength={150}
     />
   </FormContainer>
 ));
