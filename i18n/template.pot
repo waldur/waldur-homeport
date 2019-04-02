@@ -134,7 +134,7 @@ msgstr ""
 msgid "Accounting start date"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "Accounting type"
 msgstr ""
 
@@ -1847,6 +1847,10 @@ msgstr ""
 msgid "Display name"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentDisableQuotaField.tsx
+msgid "Do not allow user to specify quotas when offering is provisioned."
+msgstr ""
+
 #: src/auth/auth-login.html
 msgid "Do not have an account?"
 msgstr ""
@@ -2114,7 +2118,7 @@ msgstr ""
 msgid "Every month on the {days} of {months} at {time}"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Every month service provider can report up to the amount requested by user."
 msgstr ""
 
@@ -2354,7 +2358,7 @@ msgstr ""
 msgid "First"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "Fixed price"
 msgstr ""
 
@@ -3307,11 +3311,11 @@ msgstr ""
 msgid "Limit"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/create/ComponentLimitAmountField.tsx
 msgid "Limit amount"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Limit period"
 msgstr ""
 
@@ -3499,11 +3503,11 @@ msgstr ""
 msgid "Maximal value"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Maximum monthly"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Maximum total"
 msgstr ""
 
@@ -3511,7 +3515,7 @@ msgstr ""
 msgid "Maximum username length with mandatory username prefix is 32 characters."
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/create/ComponentMeasuredUnitField.tsx
 msgid "Measured unit"
 msgstr ""
 
@@ -6487,7 +6491,7 @@ msgstr ""
 msgid "Service provider API secret code has been generated."
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Service provider can report up to the requested amount over the whole active state of resource."
 msgstr ""
 
@@ -8043,7 +8047,7 @@ msgstr ""
 msgid "Usage reports"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentForm.tsx
+#: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "Usage-based"
 msgstr ""
 
