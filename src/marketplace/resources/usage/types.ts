@@ -1,3 +1,5 @@
+import { PlanUnit } from '@waldur/marketplace/orders/types';
+
 export interface UsageReport {
   customer_name: string;
   project_name: string;
@@ -16,4 +18,16 @@ export interface UsageReportRequest {
   customer_uuid?: string;
   project_uuid?: string;
   offering_uuid?: string;
+}
+
+export interface UsageReportContext {
+  resource_uuid: string;
+  offering_uuid: string;
+}
+
+export interface ResourcePlanPeriod {
+  plan_name: string;
+  plan_uuid: string;
+  start: string;
+  end: string;
 }

@@ -2711,10 +2711,6 @@ msgstr ""
 msgid "If not, append it there on a new line. If file is not present, create a new file with the key."
 msgstr ""
 
-#: src/marketplace/resources/usage/ResourceUsageForm.tsx
-msgid "If value for usage period does not exist yet, it will be created, otherwise new value wíll override old value."
-msgstr ""
-
 #: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "If you need to manually install a library, please follow these steps:"
 msgstr ""
@@ -8024,18 +8020,6 @@ msgstr ""
 
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Usage period"
-msgstr ""
-
-#: src/marketplace/resources/usage/ResourceUsageForm.tsx
-msgid "Usage period corresponds to one day."
-msgstr ""
-
-#: src/marketplace/resources/usage/ResourceUsageForm.tsx
-msgid "Usage period corresponds to one half of month."
-msgstr ""
-
-#: src/marketplace/resources/usage/ResourceUsageForm.tsx
-msgid "Usage period corresponds to one month."
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts

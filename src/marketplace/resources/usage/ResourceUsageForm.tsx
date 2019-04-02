@@ -1,35 +1,16 @@
 import * as React from 'react';
+import { Options } from 'react-select';
 
-import { FormContainer, NumberField, TextField } from '@waldur/form-react';
-import { DateField } from '@waldur/form-react/DateField';
+import { FormContainer, NumberField, TextField, SelectField } from '@waldur/form-react';
+import { StaticField } from '@waldur/form-react/StaticField';
 import { translate } from '@waldur/i18n';
-import { PlanUnit } from '@waldur/marketplace/orders/types';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 interface OwnProps {
   components: OfferingComponent[];
-  plan_unit: PlanUnit;
+  periods: Options;
   submitting: boolean;
 }
-
-const formatUnit = (unit: PlanUnit) => {
-  switch (unit) {
-    case 'day':
-    return translate('Usage period corresponds to one day.');
-
-    case 'month':
-    return translate('Usage period corresponds to one month.');
-
-    case 'half_month':
-    return translate('Usage period corresponds to one half of month.');
-  }
-};
-
-const formatDescription = (unit: PlanUnit) => {
-  // tslint:disable-next-line:max-line-length
-  const message = translate('If value for usage period does not exist yet, it will be created, otherwise new value wíll override old value.');
-  return `${formatUnit(unit)} ${message}`;
-};
 
 export const ResourceUsageForm = (props: OwnProps) => {
   const components = [];
@@ -59,11 +40,20 @@ export const ResourceUsageForm = (props: OwnProps) => {
         submitting={props.submitting}
         labelClass="col-sm-2"
         controlClass="col-sm-10">
-        <DateField
-          name="date"
-          label={translate('Usage period')}
-          description={formatDescription(props.plan_unit)}
-        />
+        {props.periods.length > 1 ? (
+          <SelectField
+            name="period"
+            label={translate('Usage period')}
+            options={props.periods}
+          />
+        ) : (
+          <StaticField
+            label={translate('Usage period')}
+            value={props.periods[0].label}
+            labelClass="col-sm-2"
+            controlClass="col-sm-10"
+          />
+        )}
         {components}
       </FormContainer>
     </div>

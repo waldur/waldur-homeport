@@ -5,20 +5,16 @@ import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
-import { PlanUnit } from '@waldur/marketplace/orders/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { submitUsage } from '../store/constants';
 import { ResourceUsageContainer } from './ResourceUsageContainer';
+import { UsageReportContext } from './types';
 
 interface ResourceCreateUsageDialogProps {
-  resolve: {
-    resource_uuid: string;
-    offering_uuid: string;
-    plan_unit: PlanUnit;
-  };
+  resolve: UsageReportContext;
   submitReport(payload: object): void;
 }
 
@@ -45,8 +41,7 @@ const ResourceCreateUsageDialog = enhance((props: ResourceCreateUsageDialogProps
         </>
       }>
       <ResourceUsageContainer
-        offering_uuid={props.resolve.offering_uuid}
-        plan_unit={props.resolve.plan_unit}
+        params={props.resolve}
         submitting={props.submitting}
       />
     </ModalDialog>

@@ -14,7 +14,6 @@ export const ResourceUsageButton = ({ row }) => {
       <ResourceCreateUsageButton
         offering_uuid={row.offering_uuid}
         resource_uuid={row.uuid}
-        plan_unit={row.plan_unit}
       />
     </div>
   );
