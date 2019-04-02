@@ -1,5 +1,3 @@
-import { PlanUnit } from '@waldur/marketplace/orders/types';
-
 export interface UsageReport {
   customer_name: string;
   project_name: string;
