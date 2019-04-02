@@ -1,4 +1,4 @@
-import { Offering } from '@waldur/offering/types';
+import { Offering, Category } from '@waldur/marketplace/types';
 
 import { OfferingStep } from '../types';
 import * as constants from './constants';
@@ -51,5 +51,12 @@ export const removeOfferingQuotas = (component: string) => ({
   type: constants.REMOVE_OFFERING_QUOTAS,
   payload: {
     component,
+  },
+});
+
+export const categoryChanged = (category: Category) => ({
+  type: constants.CATEGORY_CHANGED,
+  payload: {
+    category,
   },
 });
