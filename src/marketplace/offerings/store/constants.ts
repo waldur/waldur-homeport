@@ -6,6 +6,7 @@ export const REMOVE_OFFERING_COMPONENT = 'waldur/marketplace/offering/REMOVE_OFF
 export const REMOVE_OFFERING_QUOTAS = 'waldur/marketplace/offering/REMOVE_OFFERING_QUOTAS';
 export const SET_STEP = 'waldur/marketplace/offering/SET_STATE';
 export const UPDATE_OFFERING_STATE = 'waldur/marketplace/offering/UPDATE_OFFERING_STATE';
+export const CATEGORY_CHANGED = 'waldur/marketplace/offering/CATEGORY_CHANGED';
 
 export const LOAD_DATA_START = 'waldur/marketplace/offering/LOAD_DATA_START';
 export const LOAD_DATA_SUCCESS = 'waldur/marketplace/offering/LOAD_DATA_SUCCESS';

@@ -13,7 +13,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { setStep, loadDataSuccess, loadDataError } from './actions';
 import * as constants from './constants';
 import { STATES } from './constants';
-import { getPlans } from './selectors';
+import { getPlans, getAttributes } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
 import { formatOfferingRequest, planWithoutComponent, planWithoutQuotas } from './utils';
 
@@ -38,6 +38,20 @@ function* removeOfferingQuotas(action) {
   const plans = yield select(getPlans);
   const newPlans = plans.map(plan => planWithoutQuotas(plan, action.payload.component));
   yield put(change(constants.FORM_ID, 'plans', newPlans));
+}
+
+function* handleCategoryChange(action) {
+  const category: Category = action.payload.category;
+  const values = yield select(getAttributes);
+  const attributes = values === undefined ? {} : {...values};
+  for (const section of category.sections) {
+    for (const attribute of section.attributes) {
+      if (attributes[attribute.key] === undefined && attribute.default !== null) {
+        attributes[attribute.key] = attribute.default;
+      }
+    }
+  }
+  yield put(change(constants.FORM_ID, 'attributes', attributes));
 }
 
 function* createOffering(action: Action<OfferingFormData>) {
@@ -111,6 +125,7 @@ function* loadOffering(action) {
 export default function*() {
   yield takeEvery(constants.REMOVE_OFFERING_COMPONENT, removeOfferingComponent);
   yield takeEvery(constants.REMOVE_OFFERING_QUOTAS, removeOfferingQuotas);
+  yield takeEvery(constants.CATEGORY_CHANGED, handleCategoryChange);
   yield takeEvery(constants.LOAD_DATA_START, loadData);
   yield takeEvery(constants.LOAD_OFFERING_START, loadOffering);
   yield takeEvery(constants.createOffering.REQUEST, createOffering);
