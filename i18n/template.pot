@@ -3444,7 +3444,7 @@ msgstr ""
 msgid "Marketplace checkout"
 msgstr ""
 
-#: src/marketplace/resources/usage/ResourceUsageContainer.tsx
+#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 msgid "Marketplace offering does not have any usage-based components."
 msgstr ""
 
@@ -6883,7 +6883,7 @@ msgstr ""
 msgid "Submit complaint"
 msgstr ""
 
-#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
+#: src/marketplace/resources/usage/ResourceUsageSubmitButton.tsx
 msgid "Submit usage report"
 msgstr ""
 
@@ -7706,7 +7706,7 @@ msgstr ""
 msgid "Unable to load marketplace category details"
 msgstr ""
 
-#: src/marketplace/resources/usage/ResourceUsageContainer.tsx
+#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 msgid "Unable to load marketplace offering details."
 msgstr ""
 
