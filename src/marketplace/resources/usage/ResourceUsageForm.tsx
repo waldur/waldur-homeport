@@ -47,7 +47,8 @@ export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
           controlClass="col-sm-10">
           <SelectField
             name="period"
-            label={translate('Usage period')}
+            label={translate('Plan')}
+            description={translate('Each usage report must be connected with a billing plan to assure correct calculation of accounting data.')}
             options={props.periods}
             onChange={props.onPeriodChange}
             clearable={false}

@@ -1941,6 +1941,10 @@ msgstr ""
 msgid "Each JupyterHub user is mapped to a corresponding system user. Appropriate system user will be created on a first login."
 msgstr ""
 
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
+msgstr ""
+
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/openstack/openstack-backup-schedule/module.js
 #: src/openstack/openstack-snapshot-schedule/module.js
@@ -4679,6 +4683,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Plan"
 msgstr ""
 
@@ -8016,10 +8021,6 @@ msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Usage overview"
-msgstr ""
-
-#: src/marketplace/resources/usage/ResourceUsageForm.tsx
-msgid "Usage period"
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
