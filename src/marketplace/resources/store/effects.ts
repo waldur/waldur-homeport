@@ -1,4 +1,4 @@
-import { SubmissionError } from 'redux-form';
+import { SubmissionError, change } from 'redux-form';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 import { formatDate } from '@waldur/core/dateUtils';
@@ -11,13 +11,13 @@ import * as api from '../../common/api';
 import * as constants from './constants';
 
 function* handleSubmitUsage(action) {
-  const {date, resource, ...rest} = action.payload;
+  const {date, resource, components} = action.payload;
   const payload = {
     resource,
     date: formatDate(date),
-    usages: Object.keys(rest).map(key => ({
+    usages: Object.keys(components).map(key => ({
       type: key,
-      ...rest[key],
+      ...components[key],
     })),
   };
 
@@ -75,8 +75,17 @@ function* handleTerminateResource(action) {
   }
 }
 
+function* handlePeriodChange(action) {
+  const { period } = action.payload;
+  for (const component of period.components) {
+    yield put(change(constants.FORM_ID, `components.${component.type}.amount`, component.usage));
+    yield put(change(constants.FORM_ID, `components.${component.type}.description`, component.description));
+  }
+}
+
 export default function*() {
   yield takeEvery(constants.submitUsage.REQUEST, handleSubmitUsage);
   yield takeEvery(constants.switchPlan.REQUEST, handleSwitchPlan);
   yield takeEvery(constants.terminateResource.REQUEST, handleTerminateResource);
+  yield takeEvery(constants.PERIOD_CHANGED, handlePeriodChange);
 }

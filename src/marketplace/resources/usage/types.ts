@@ -17,3 +17,24 @@ export interface UsageReportRequest {
   project_uuid?: string;
   offering_uuid?: string;
 }
+
+export interface UsageReportContext {
+  resource_uuid: string;
+  offering_uuid: string;
+}
+
+export interface ComponentUsage {
+  name: string;
+  type: string;
+  measured_unit: string;
+  usage: number;
+  description: string;
+}
+
+export interface ResourcePlanPeriod {
+  plan_name: string;
+  plan_uuid: string;
+  start: string;
+  end: string;
+  components: ComponentUsage[];
+}

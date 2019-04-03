@@ -1941,6 +1941,10 @@ msgstr ""
 msgid "Each JupyterHub user is mapped to a corresponding system user. Appropriate system user will be created on a first login."
 msgstr ""
 
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
+msgstr ""
+
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/openstack/openstack-backup-schedule/module.js
 #: src/openstack/openstack-snapshot-schedule/module.js
@@ -2711,10 +2715,6 @@ msgstr ""
 msgid "If not, append it there on a new line. If file is not present, create a new file with the key."
 msgstr ""
 
-#: src/marketplace/resources/usage/ResourceUsageForm.tsx
-msgid "If value for usage period does not exist yet, it will be created, otherwise new value wíll override old value."
-msgstr ""
-
 #: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "If you need to manually install a library, please follow these steps:"
 msgstr ""
@@ -3448,7 +3448,7 @@ msgstr ""
 msgid "Marketplace checkout"
 msgstr ""
 
-#: src/marketplace/resources/usage/ResourceUsageContainer.tsx
+#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 msgid "Marketplace offering does not have any usage-based components."
 msgstr ""
 
@@ -4683,6 +4683,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Plan"
 msgstr ""
 
@@ -6887,7 +6888,7 @@ msgstr ""
 msgid "Submit complaint"
 msgstr ""
 
-#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
+#: src/marketplace/resources/usage/ResourceUsageSubmitButton.tsx
 msgid "Submit usage report"
 msgstr ""
 
@@ -7710,7 +7711,7 @@ msgstr ""
 msgid "Unable to load marketplace category details"
 msgstr ""
 
-#: src/marketplace/resources/usage/ResourceUsageContainer.tsx
+#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 msgid "Unable to load marketplace offering details."
 msgstr ""
 
@@ -8020,22 +8021,6 @@ msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Usage overview"
-msgstr ""
-
-#: src/marketplace/resources/usage/ResourceUsageForm.tsx
-msgid "Usage period"
-msgstr ""
-
-#: src/marketplace/resources/usage/ResourceUsageForm.tsx
-msgid "Usage period corresponds to one day."
-msgstr ""
-
-#: src/marketplace/resources/usage/ResourceUsageForm.tsx
-msgid "Usage period corresponds to one half of month."
-msgstr ""
-
-#: src/marketplace/resources/usage/ResourceUsageForm.tsx
-msgid "Usage period corresponds to one month."
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
