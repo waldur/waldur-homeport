@@ -16,17 +16,14 @@ interface PlanDescriptionButtonProps extends TranslateProps {
 
 export const PurePlanDescriptionButton = withTranslation((props: PlanDescriptionButtonProps) => {
   let planDescription = '';
-  if (props.formData && !props.formData.plan) {
-    return null;
-  }
-  if (props.planDescription !== undefined && (props.planDescription === '' || props.planDescription === null)) {
-    return null;
-  }
   if (props.formData && props.formData.plan && props.formData.plan.description) {
     planDescription = props.formData.plan.description;
   }
-  if  (props.planDescription) {
+  if (props.planDescription) {
     planDescription = props.planDescription;
+  }
+  if (!planDescription) {
+    return null;
   }
   return (
     <ActionButton

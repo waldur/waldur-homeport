@@ -12,7 +12,7 @@ interface ResourceNameProps {
     name: string;
     uuid: string;
     resource_type: string;
-    is_link_valid: boolean;
+    is_link_valid?: boolean;
   };
 }
 
@@ -30,7 +30,7 @@ const ResourceIcon = (props: ResourceNameProps) => (
 );
 
 const ResourceWarning = withTranslation((props: ResourceNameProps & TranslateProps) =>
-  !props.resource.is_link_valid ? (
+  props.resource.is_link_valid === false ? (
     <Tooltip
       id="resourceWarning"
       label={props.translate('Provider does not comply with project policies')}>

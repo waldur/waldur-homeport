@@ -10,6 +10,7 @@ import { OfferingAttributes } from '../attributes/OfferingAttributes';
 interface DescriptionStepProps extends TranslateProps {
   categories: Category[];
   category?: Category;
+  onCategoryChange(): void;
 }
 
 export const DescriptionStep = (props: DescriptionStepProps) => (
@@ -28,6 +29,7 @@ export const DescriptionStep = (props: DescriptionStepProps) => (
         valueKey="url"
         clearable={false}
         validate={required}
+        onChange={props.onCategoryChange}
       />
     </FormContainer>
     {props.category && (

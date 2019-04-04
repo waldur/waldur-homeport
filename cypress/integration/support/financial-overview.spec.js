@@ -27,6 +27,6 @@ describe('Financial overview', () => {
   it('should render total cost of €138.00', () => {
     cy
       .visitOrganizations()
-      .get('.text-right').contains('€138.00');
+      .get('.text-right').should('contain', '€138.00');
   });
 });

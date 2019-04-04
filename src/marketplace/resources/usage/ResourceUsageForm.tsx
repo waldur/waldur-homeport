@@ -1,57 +1,61 @@
 import * as React from 'react';
+import { Options } from 'react-select';
+import { InjectedFormProps } from 'redux-form';
 
-import { FormContainer, NumberField } from '@waldur/form-react';
-import { DateField } from '@waldur/form-react/DateField';
+import { FormContainer, NumberField, TextField, SelectField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
-import { PlanUnit } from '@waldur/marketplace/orders/types';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
-interface OwnProps {
+import { UsageReportContext } from './types';
+
+export interface ResourceUsageFormProps extends InjectedFormProps {
   components: OfferingComponent[];
-  plan_unit: PlanUnit;
-  submitting: boolean;
+  periods: Options;
+  params: UsageReportContext;
+  submitReport(): void;
+  onPeriodChange(): void;
 }
 
-const formatUnit = (unit: PlanUnit) => {
-  switch (unit) {
-    case 'day':
-    return translate('Usage period corresponds to one day.');
-
-    case 'month':
-    return translate('Usage period corresponds to one month.');
-
-    case 'half_month':
-    return translate('Usage period corresponds to one half of month.');
-  }
-};
-
-const formatDescription = (unit: PlanUnit) => {
-  // tslint:disable-next-line:max-line-length
-  const message = translate('If value for usage period does not exist yet, it will be created, otherwise new value wíll override old value.');
-  return `${formatUnit(unit)} ${message}`;
-};
-
-export const ResourceUsageForm = (props: OwnProps) => (
-  <div className="form-horizontal">
-    <FormContainer
-      submitting={props.submitting}
-      labelClass="col-sm-4"
-      controlClass="col-sm-8">
-      <DateField
-        name="date"
-        label={translate('Usage period')}
-        description={formatDescription(props.plan_unit)}
+export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
+  const components = [];
+  props.components.forEach((component: OfferingComponent, index) => {
+    components.push(
+      <NumberField
+        name={`components.${component.type}.amount`}
+        label={component.name}
+        key={`${index}.amount`}
+        description={component.description}
+        unit={component.measured_unit}
+        max={component.limit_period ? component.limit_amount : undefined}
       />
-      {props.components.map((component: OfferingComponent, index) => (
-        <NumberField
-          name={component.type}
-          label={component.name}
-          key={index}
-          description={component.description}
-          unit={component.measured_unit}
-          max={component.limit_period ? component.limit_amount : undefined}
-        />
-      ))}
-    </FormContainer>
-  </div>
-);
+    );
+    components.push(
+      <TextField
+        name={`components.${component.type}.description`}
+        key={`${index}.description`}
+        placeholder={translate('Comment')}
+      />
+    );
+  });
+
+  return (
+    <form onSubmit={props.handleSubmit(props.submitReport)}>
+      <div className="form-horizontal">
+        <FormContainer
+          submitting={props.submitting}
+          labelClass="col-sm-2"
+          controlClass="col-sm-10">
+          <SelectField
+            name="period"
+            label={translate('Plan')}
+            description={translate('Each usage report must be connected with a billing plan to assure correct calculation of accounting data.')}
+            options={props.periods}
+            onChange={props.onPeriodChange}
+            clearable={false}
+          />
+          {components}
+        </FormContainer>
+      </div>
+    </form>
+  );
+};

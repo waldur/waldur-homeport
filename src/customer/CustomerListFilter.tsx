@@ -1,83 +1,38 @@
-import * as moment from 'moment-timezone';
 import * as React from 'react';
+import * as Col from 'react-bootstrap/lib/Col';
+import * as Row from 'react-bootstrap/lib/Row';
+import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
 
-import Select from 'react-select';
-import { compose } from 'redux';
-import { Field, reduxForm } from 'redux-form';
+import { AccountingPeriodField, accountingPeriods } from './AccountingPeriodField';
+import { AccountingRunningField, getOptions } from './AccountingRunningField';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
-
-import './CustomerListFilter.scss';
-
-const makeAccountingPeriods = () => {
-  let date = moment().startOf('month');
-  const choices = [];
-  for (let i = 0; i < 12; i++) {
-    const month = date.month() + 1;
-    const year = date.year();
-    const label = date.format('MMMM, YYYY');
-    choices.push({
-      label,
-      value: { year, month, current: i === 0},
-    });
-    date = date.subtract(1, 'month');
-  }
-  return choices;
-};
-
-const accountingPeriods = makeAccountingPeriods();
-
-export const PureCustomerListFilter: React.SFC<TranslateProps> = props => (
+export const PureCustomerListFilter = () => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
-      <form className="form-inline" id="customer-list-filter">
-        <div className="row">
-          <div className="col-sm-9">
-            <Field
-              name="accounting_is_running"
-              component={prop =>
-                <AwesomeCheckbox
-                  label={props.translate('Show with running accounting')}
-                  id="accounting-is-running"
-                  {...prop.input}
-                />
-              }
-            />
-          </div>
-          <div className="col-sm-3">
-            <div className="form-group">
-              <Field name="accounting_period"
-                component={prop =>
-                  <Select
-                    className="accounting-period-selector"
-                    placeholder={props.translate('Select accounting period')}
-                    labelKey="label"
-                    valueKey="value"
-                    value={prop.input.value}
-                    onChange={prop.input.onChange}
-                    onBlur={e => e.preventDefault()}
-                    options={accountingPeriods}
-                    clearable={false}
-                  />
-                }
-              />
-            </div>
-          </div>
-        </div>
+      <form className="form-inline">
+        <Row>
+          <Col sm={9}>
+            <AccountingPeriodField/>
+          </Col>
+          <Col sm={3}>
+            <AccountingRunningField/>
+          </Col>
+        </Row>
       </form>
     </div>
   </div>
 );
 
-const enhance = compose(
-  reduxForm({
-    form: 'customerListFilter',
+const FilterForm = reduxForm({
+  form: 'customerListFilter',
+})(PureCustomerListFilter);
+
+export const CustomerListFilter = connect(
+  () => ({
     initialValues: {
       accounting_period: accountingPeriods[0],
+      accounting_is_running: getOptions()[0],
     },
   }),
-  withTranslation,
-);
-
-export const CustomerListFilter = enhance(PureCustomerListFilter);
+)(FilterForm);

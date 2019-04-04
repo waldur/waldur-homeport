@@ -110,6 +110,7 @@ type AttributeType =
   ;
 
 export interface Attribute {
+  default?: any;
   title: string;
   key: string;
   type: AttributeType;

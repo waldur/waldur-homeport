@@ -45,10 +45,22 @@ const REPORT_ITEMS = [
     feature: 'marketplace'
   },
   {
+    label: gettext('Usage reports'),
+    icon: 'fa-puzzle-piece',
+    link: 'marketplace-support-usage-reports',
+    feature: 'marketplace'
+  },
+  {
     label: gettext('Resources usage'),
     icon: 'fa-map',
     link: 'support.resources-treemap',
     feature: 'support.resources-treemap'
+  },
+  {
+    label: gettext('Shared providers'),
+    icon: 'fa-random',
+    link: 'support.shared-providers',
+    feature: 'support.shared-providers'
   },
   {
     label: gettext('Financial overview'),

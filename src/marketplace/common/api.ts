@@ -6,6 +6,7 @@ import { Order, OrderItemResponse, OrderItemDetailsType } from '@waldur/marketpl
 import { Category, Offering, ServiceProvider, CategoryComponentUsage } from '@waldur/marketplace/types';
 
 import { OfferingDocument } from '../offerings/store/types';
+import { ResourcePlanPeriod } from '../resources/usage/types';
 
 // tslint:disable: variable-name
 
@@ -38,6 +39,9 @@ export const createOffering = data =>
 
 export const updateOffering = (offeringId, data) =>
   patch<Offering>(`/marketplace-offerings/${offeringId}/`, data);
+
+export const getResourcePlanPeriods = (resourceId: string) =>
+  getAll<ResourcePlanPeriod>(`/marketplace-resources/${resourceId}/plan_periods/`);
 
 export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
   sendForm<Offering>('PATCH', `${ENV.apiEndpoint}api/marketplace-offerings/${offeringId}/`, {thumbnail});
