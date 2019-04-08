@@ -8,11 +8,13 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { updateOffering, OFFERING_UPDATE_FORM } from '../store/constants';
 import { getStep, isOfferingManagementDisabled, isLoading, isLoaded, isErred } from '../store/selectors';
-import { getOffering } from '../store/selectors';
+import { getOffering, getCategories } from '../store/selectors';
+import { OfferingStep } from '../types';
 import { OfferingUpdateDialog } from './OfferingUpdateDialog';
 
 const getInitialValues = state => {
   const offering = getOffering(state).offering;
+  const categories = getCategories(state);
   return {
     name: offering.name,
     description: offering.description,
@@ -21,6 +23,7 @@ const getInitialValues = state => {
     native_description: offering.native_description,
     terms_of_service: offering.terms_of_service,
     thumbnail: offering.thumbnail,
+    category: categories.find(category => category.uuid === offering.category_uuid),
   };
 };
 
@@ -43,6 +46,7 @@ const mapDispatchToProps = dispatch => ({
     $state.go('marketplace-vendor-offerings');
   },
   loadOffering: offeringUuid => dispatch(actions.loadOfferingStart(offeringUuid)),
+  setStep: (step: OfferingStep) => dispatch(actions.setStep(step)),
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

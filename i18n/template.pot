@@ -7692,6 +7692,7 @@ msgstr ""
 
 #: src/customer/TotalCostComponent.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 msgid "Unable to load data."
 msgstr ""

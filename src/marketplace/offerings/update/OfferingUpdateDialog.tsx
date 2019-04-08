@@ -6,8 +6,9 @@ import { InjectedFormProps } from 'redux-form';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { TABS } from '@waldur/marketplace/offerings/create/OfferingCreateDialog';
 
+import { DescriptionStepContainer } from '../create/DescriptionStepContainer';
+import { OverviewStep } from '../create/OverviewStep';
 import { Wizard } from '../create/Wizard';
 import { STEPS, OfferingStep } from '../types';
 
@@ -23,6 +24,11 @@ interface OfferingUpdateDialogProps extends InjectedFormProps {
   goNext(): void;
   loadOffering(offeringUuid: string): void;
 }
+
+const TABS = {
+  Overview: OverviewStep,
+  Description: DescriptionStepContainer,
+};
 
 export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogProps> {
   componentDidMount() {
@@ -52,7 +58,7 @@ export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogPr
             <form
               onSubmit={handleSubmit(updateOffering)}
               className="form-horizontal">
-              <Wizard steps={[STEPS[0]]} tabs={{Overview: TABS.Overview}} {...rest}/>
+              <Wizard steps={[STEPS[0], STEPS[1]]} tabs={TABS} {...rest}/>
             </form>
           </Col>
         </Row>
