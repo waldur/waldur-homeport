@@ -11,7 +11,7 @@ export interface LimitPeriodOption {
   description: string;
 }
 
-function getLimitPeriods(): LimitPeriodOption[] {
+export function getLimitPeriods(): LimitPeriodOption[] {
   return [
     {
       value: 'month',

@@ -11,6 +11,11 @@ interface Props {
   removeOfferingQuotas(): void;
 }
 
+export const getAccountingTypeOptions = () => [
+  {label: translate('Usage-based'), value: 'usage'},
+  {label: translate('Fixed price'), value: 'fixed'},
+];
+
 export const ComponentAccountingTypeField = (props: Props) => (
   <FormGroup label={translate('Accounting type')} required={true}>
     <Field
@@ -25,10 +30,7 @@ export const ComponentAccountingTypeField = (props: Props) => (
         <Select
           value={fieldProps.input.value}
           onChange={value => fieldProps.input.onChange(value)}
-          options={[
-            {label: translate('Usage-based'), value: 'usage'},
-            {label: translate('Fixed price'), value: 'fixed'},
-          ]}
+          options={getAccountingTypeOptions()}
           clearable={false}
         />
       )}
