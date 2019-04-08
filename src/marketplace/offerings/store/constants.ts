@@ -14,6 +14,8 @@ export const LOAD_DATA_ERROR = 'waldur/marketplace/offering/LOAD_DATA_ERROR';
 
 export const LOAD_OFFERING_START = 'waldur/marketplace/offering/LOAD_OFFERING_START';
 
+export const DRAFT = 'Draft';
+
 export const STATES = {
   1: 'Draft',
   2: 'Active',

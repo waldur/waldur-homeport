@@ -11,16 +11,23 @@ import { getStep, isOfferingManagementDisabled, isLoading, isLoaded, isErred } f
 import { getOffering } from '../store/selectors';
 import { OfferingUpdateDialog } from './OfferingUpdateDialog';
 
+const getInitialValues = state => {
+  const offering = getOffering(state).offering;
+  return {
+    name: offering.name,
+    description: offering.description,
+    full_description: offering.full_description,
+    native_name: offering.native_name,
+    native_description: offering.native_description,
+    terms_of_service: offering.terms_of_service,
+    thumbnail: offering.thumbnail,
+  };
+};
+
 const mapStateToProps = state => ({
   step: getStep(state),
   disabled: isOfferingManagementDisabled(state),
-  initialValues: {
-    name: getOffering(state).offering.name,
-    description: getOffering(state).offering.description,
-    native_name: getOffering(state).offering.native_name,
-    native_description: getOffering(state).offering.native_description,
-    thumbnail: getOffering(state).offering.thumbnail,
-  },
+  initialValues: getInitialValues(state),
   loading: isLoading(state),
   loaded: isLoaded(state),
   erred: isErred(state),
