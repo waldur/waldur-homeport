@@ -3,6 +3,7 @@ import { FieldArray, FormSection } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField } from '@waldur/form-react';
+import { StaticField } from '@waldur/form-react/StaticField';
 import { TranslateProps } from '@waldur/i18n';
 import { Option } from '@waldur/marketplace/common/registry';
 import { ProviderFormProps } from '@waldur/providers/types';
@@ -13,6 +14,8 @@ export interface ManagementStepProps extends TranslateProps {
   showOptions: boolean;
   serviceSettingsForm?: React.ComponentType<ProviderFormProps>;
   offeringTypes: Option[];
+  typeEditable: boolean;
+  typeLabel?: string;
 }
 
 const ContainerProps = {
@@ -25,14 +28,22 @@ const ContainerProps = {
 export const ManagementStep = (props: ManagementStepProps) => (
   <>
     <FormContainer {...ContainerProps}>
-      <SelectField
-        name="type"
-        label={props.translate('Type')}
-        required={true}
-        options={props.offeringTypes}
-        clearable={false}
-        validate={required}
-      />
+      {props.typeEditable ? (
+        <SelectField
+          name="type"
+          label={props.translate('Type')}
+          required={true}
+          options={props.offeringTypes}
+          clearable={false}
+          validate={required}
+        />
+      ) : (
+        <StaticField
+          label={props.translate('Type')}
+          value={props.typeLabel}
+          {...ContainerProps}
+        />
+      )}
     </FormContainer>
     {props.serviceSettingsForm && (
       <FormSection name="service_settings">

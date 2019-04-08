@@ -27,7 +27,7 @@ function* loadCategories() {
 function* loadData() {
   try {
     const data = yield loadCategories();
-    yield put(loadDataSuccess(data));
+    yield put(loadDataSuccess({...data, offering: undefined}));
   } catch {
     yield put(loadDataError());
   }

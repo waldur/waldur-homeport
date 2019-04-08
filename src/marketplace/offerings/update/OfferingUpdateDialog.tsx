@@ -7,8 +7,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
-import { DescriptionStepContainer } from '../create/DescriptionStepContainer';
-import { OverviewStep } from '../create/OverviewStep';
+import { TABS } from '../create/OfferingCreateDialog';
 import { Wizard } from '../create/Wizard';
 import { STEPS, OfferingStep } from '../types';
 
@@ -24,11 +23,6 @@ interface OfferingUpdateDialogProps extends InjectedFormProps {
   goNext(): void;
   loadOffering(offeringUuid: string): void;
 }
-
-const TABS = {
-  Overview: OverviewStep,
-  Description: DescriptionStepContainer,
-};
 
 export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogProps> {
   componentDidMount() {
@@ -58,7 +52,7 @@ export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogPr
             <form
               onSubmit={handleSubmit(updateOffering)}
               className="form-horizontal">
-              <Wizard steps={[STEPS[0], STEPS[1]]} tabs={TABS} {...rest}/>
+              <Wizard steps={STEPS} tabs={TABS} {...rest}/>
             </form>
           </Col>
         </Row>
