@@ -88,10 +88,11 @@ function* createOffering(action: Action<OfferingFormData>) {
 function* updateOffering(action: Action<OfferingUpdateFormData>) {
   const { offeringUuid, thumbnail, ...rest } = action.payload;
   try {
-  yield call(api.updateOffering, offeringUuid, rest);
-  if (thumbnail instanceof File || thumbnail === '') {
-    yield call(api.uploadOfferingThumbnail, offeringUuid, thumbnail);
-  }
+    const offeringRequest = formatOfferingRequest(rest);
+    yield call(api.updateOffering, offeringUuid, offeringRequest);
+    if (thumbnail instanceof File || thumbnail === '') {
+      yield call(api.uploadOfferingThumbnail, offeringUuid, thumbnail);
+     }
   } catch (error) {
     const errorMessage = `${translate('Unable to update offering.')} ${format(error)}`;
     yield put(showError(errorMessage));
@@ -99,7 +100,7 @@ function* updateOffering(action: Action<OfferingUpdateFormData>) {
     return;
   }
   yield put(constants.updateOffering.success());
-  yield put(reset(constants.OFFERING_UPDATE_FORM));
+  yield put(reset(constants.FORM_ID));
   yield put(showSuccess(translate('Offering has been updated.')));
   yield put(stateGo('marketplace-vendor-offerings'));
 }

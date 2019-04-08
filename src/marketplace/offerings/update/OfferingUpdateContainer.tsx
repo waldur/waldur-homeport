@@ -6,7 +6,7 @@ import { $state } from '@waldur/core/services';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { updateOffering, OFFERING_UPDATE_FORM } from '../store/constants';
+import { updateOffering, FORM_ID } from '../store/constants';
 import { getStep, isOfferingManagementDisabled, isLoading, isLoaded, isErred } from '../store/selectors';
 import { getOffering, getCategories } from '../store/selectors';
 import { OfferingStep } from '../types';
@@ -54,7 +54,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 const enhance = compose(
   connector,
   reduxForm({
-    form: OFFERING_UPDATE_FORM,
+    form: FORM_ID,
     enableReinitialize: true,
   }),
 );
