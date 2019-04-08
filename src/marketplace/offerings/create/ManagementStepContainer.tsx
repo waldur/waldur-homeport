@@ -13,7 +13,7 @@ const mapStateToProps = state => {
   const offering: Offering = getOffering(state).offering;
   const props: Partial<ManagementStepProps> = {
     offeringTypes: getOfferingTypes(),
-    typeEditable: !offering,
+    editable: !offering,
     typeLabel: getTypeLabel(state),
   };
   const type = getType(state);

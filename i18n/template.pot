@@ -7420,6 +7420,10 @@ msgstr ""
 msgid "To start please select a workspace"
 msgstr ""
 
+#: src/marketplace/offerings/create/ManagementStep.tsx
+msgid "To update settings, please contact support or use admin interface."
+msgstr ""
+
 #: src/analytics/resource-pie-chart.html
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/billing/PriceEstimateDialog.tsx
