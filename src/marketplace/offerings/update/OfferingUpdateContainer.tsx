@@ -24,6 +24,7 @@ const getInitialValues = state => {
     terms_of_service: offering.terms_of_service,
     thumbnail: offering.thumbnail,
     category: categories.find(category => category.uuid === offering.category_uuid),
+    attributes: offering.attributes,
   };
 };
 
