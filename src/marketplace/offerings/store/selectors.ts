@@ -3,7 +3,7 @@ import { formValueSelector } from 'redux-form';
 import { OfferingComponent } from '@waldur/marketplace/types';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { FORM_ID } from './constants';
+import { FORM_ID, DRAFT } from './constants';
 import { PlanFormData } from './types';
 import { formatComponents } from './utils';
 
@@ -22,10 +22,17 @@ export const getComponents = (state, type): OfferingComponent[] => {
       components = formatComponents(components);
     }
   }
-  return components;
+  return components || [];
 };
 
 const getForm = formValueSelector(FORM_ID);
+
+export const getTypeLabel = (state: any): string => {
+  const option = getForm(state, 'type');
+  if (option) {
+    return option.label;
+  }
+};
 
 export const getType = (state: any): string => {
   const option = getForm(state, 'type');
@@ -57,5 +64,15 @@ export const getPlanPrice = (state, planPath) => {
 
 export const isOfferingManagementDisabled = state => {
   const user = getUser(state);
-  return user.is_support && !user.is_staff;
+  if (user.is_staff) {
+    return false;
+  }
+  if (user.is_support) {
+    return true;
+  }
+  const offering = getOffering(state).offering;
+  if (offering && offering.state !== DRAFT) {
+    return true;
+  }
+  return false;
 };

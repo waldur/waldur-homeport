@@ -82,8 +82,8 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
     full_description: request.full_description,
     terms_of_service: request.terms_of_service,
     category: request.category.url,
-    customer: customer.url,
-    type: request.type.value,
+    customer: customer ? customer.url : undefined,
+    type: request.type ? request.type.value : undefined,
     service_attributes: request.service_settings,
     shared: true,
   };

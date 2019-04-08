@@ -3,14 +3,18 @@ import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
 import { getOfferingTypes, showOfferingOptions, getProviderType } from '@waldur/marketplace/common/registry';
+import { Offering } from '@waldur/marketplace/types';
 import { findProvider } from '@waldur/providers/registry';
 
-import { getType } from '../store/selectors';
-import { ManagementStep } from './ManagementStep';
+import { getOffering, getType, getTypeLabel } from '../store/selectors';
+import { ManagementStep, ManagementStepProps } from './ManagementStep';
 
 const mapStateToProps = state => {
-  const props: any = {
+  const offering: Offering = getOffering(state).offering;
+  const props: Partial<ManagementStepProps> = {
     offeringTypes: getOfferingTypes(),
+    editable: !offering,
+    typeLabel: getTypeLabel(state),
   };
   const type = getType(state);
   if (type) {

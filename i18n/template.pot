@@ -162,6 +162,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
+#: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/user/support/UserActivateButton.tsx
 msgid "Activate"
 msgstr ""
@@ -565,6 +566,10 @@ msgstr ""
 
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Approved by"
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingActions.tsx
+msgid "Archive"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-config.js
@@ -1945,6 +1950,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
+#: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/openstack/openstack-backup-schedule/module.js
 #: src/openstack/openstack-snapshot-schedule/module.js
@@ -4590,6 +4596,10 @@ msgstr ""
 
 #: src/user/events.ts
 msgid "Password has been changed for user {affected_user_link}."
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingActions.tsx
+msgid "Pause"
 msgstr ""
 
 #: src/paypal/paypal-invoice-actions.html
@@ -7410,6 +7420,10 @@ msgstr ""
 msgid "To start please select a workspace"
 msgstr ""
 
+#: src/marketplace/offerings/create/ManagementStep.tsx
+msgid "To update settings, please contact support or use admin interface."
+msgstr ""
+
 #: src/analytics/resource-pie-chart.html
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/billing/PriceEstimateDialog.tsx
@@ -7681,6 +7695,8 @@ msgid "Unable to load comments."
 msgstr ""
 
 #: src/customer/TotalCostComponent.tsx
+#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 msgid "Unable to load data."
 msgstr ""

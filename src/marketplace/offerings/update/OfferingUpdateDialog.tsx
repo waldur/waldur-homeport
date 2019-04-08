@@ -5,8 +5,9 @@ import { InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
-import { TABS } from '@waldur/marketplace/offerings/create/OfferingCreateDialog';
+import { translate } from '@waldur/i18n';
 
+import { TABS } from '../create/OfferingCreateDialog';
 import { Wizard } from '../create/Wizard';
 import { STEPS, OfferingStep } from '../types';
 
@@ -43,7 +44,7 @@ export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogPr
     if (loading) {
       return <LoadingSpinner/>;
     } else if (erred) {
-      return <p>Unable to load data.</p>;
+      return <p>{translate('Unable to load data.')}</p>;
     } else if (loaded) {
       return (
         <Row>
@@ -51,7 +52,7 @@ export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogPr
             <form
               onSubmit={handleSubmit(updateOffering)}
               className="form-horizontal">
-              <Wizard steps={[STEPS[0]]} tabs={{Overview: TABS.Overview}} {...rest}/>
+              <Wizard steps={STEPS} tabs={TABS} {...rest}/>
             </form>
           </Col>
         </Row>
