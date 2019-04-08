@@ -9,7 +9,7 @@ import { ProviderFormProps } from '@waldur/providers/types';
 
 import { OfferingOptions } from '../option/OfferingOptions';
 
-interface ManagementStepProps extends TranslateProps {
+export interface ManagementStepProps extends TranslateProps {
   showOptions: boolean;
   serviceSettingsForm?: React.ComponentType<ProviderFormProps>;
   offeringTypes: Option[];

@@ -6,10 +6,10 @@ import { getOfferingTypes, showOfferingOptions, getProviderType } from '@waldur/
 import { findProvider } from '@waldur/providers/registry';
 
 import { getType } from '../store/selectors';
-import { ManagementStep } from './ManagementStep';
+import { ManagementStep, ManagementStepProps } from './ManagementStep';
 
 const mapStateToProps = state => {
-  const props: any = {
+  const props: Partial<ManagementStepProps> = {
     offeringTypes: getOfferingTypes(),
   };
   const type = getType(state);
