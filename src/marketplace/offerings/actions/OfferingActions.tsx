@@ -8,7 +8,6 @@ import { OuterState } from '@waldur/workspace/types';
 import { updateOfferingState } from '../store/actions';
 import { DRAFT, ACTIVE, ARCHIVED, PAUSED } from '../store/constants';
 import { ActionsDropdown } from './ActionsDropdown';
-import './OfferingActions.scss';
 
 const mapStateToProps = (state: OuterState) => ({
   user: getUser(state),
