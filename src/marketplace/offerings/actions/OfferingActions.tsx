@@ -20,7 +20,7 @@ interface DispatchProps {
 const PureOfferingActions = (props: OwnProps & DispatchProps) => {
   const filterStateActions = () => {
     if (stateTransition[props.row.state]) {
-      return stateTransitionActions.filter(option => stateTransition[props.row.state].indexOf(option.value) !== -1);
+      return stateTransitionActions().filter(option => stateTransition[props.row.state].indexOf(option.value) !== -1);
     }
     return [];
   };
@@ -46,7 +46,7 @@ const PureOfferingActions = (props: OwnProps & DispatchProps) => {
     });
 
   return (
-    <ActionsDropdown actions={assignHandler([...filterStateActions(), ...mainActions])}/>
+    <ActionsDropdown actions={assignHandler([...filterStateActions(), ...mainActions()])}/>
   );
 };
 

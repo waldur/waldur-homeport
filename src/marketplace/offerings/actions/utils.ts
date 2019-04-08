@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 import { OfferingAction, OfferingStateTransition } from './types';
 
 export const stateTransition: {[value: string]: OfferingStateTransition[]} = {
@@ -6,28 +8,28 @@ export const stateTransition: {[value: string]: OfferingStateTransition[]} = {
   Paused: ['activate', 'archive'],
 };
 
-export const stateTransitionActions: Array<OfferingAction<OfferingStateTransition>> = [
+export const stateTransitionActions: () => Array<OfferingAction<OfferingStateTransition>> = () => [
   {
     key: 'state',
     value: 'activate',
-    label: 'Activate',
+    label: translate('Activate'),
   },
   {
     key: 'state',
     value: 'pause',
-    label: 'Pause',
+    label: translate('Pause'),
   },
   {
     key: 'state',
     value: 'archive',
-    label: 'Archive',
+    label: translate('Archive'),
   },
 ];
 
-export const mainActions = [
+export const mainActions = () => [
   {
     key: 'update',
     value: 'update',
-    label: 'Edit',
+    label: translate('Edit'),
   },
 ];

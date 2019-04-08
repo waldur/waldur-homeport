@@ -162,6 +162,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
+#: src/marketplace/offerings/actions/utils.ts
 #: src/user/support/UserActivateButton.tsx
 msgid "Activate"
 msgstr ""
@@ -565,6 +566,10 @@ msgstr ""
 
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Approved by"
+msgstr ""
+
+#: src/marketplace/offerings/actions/utils.ts
+msgid "Archive"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-config.js
@@ -4590,6 +4595,10 @@ msgstr ""
 
 #: src/user/events.ts
 msgid "Password has been changed for user {affected_user_link}."
+msgstr ""
+
+#: src/marketplace/offerings/actions/utils.ts
+msgid "Pause"
 msgstr ""
 
 #: src/paypal/paypal-invoice-actions.html
