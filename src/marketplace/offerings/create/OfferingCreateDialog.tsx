@@ -5,6 +5,7 @@ import { InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
+import { translate } from '@waldur/i18n';
 
 import { STEPS, OfferingStep } from '../types';
 import { AccountingStepContainer } from './AccountingStepContainer';
@@ -56,7 +57,7 @@ export class OfferingCreateDialog extends React.Component<OfferingCreateDialogPr
     if (loading) {
       return <LoadingSpinner/>;
     } else if (erred) {
-      return <p>Unable to load data.</p>;
+      return <p>{translate('Unable to load data.')}</p>;
     } else if (loaded) {
       return (
         <Row>
