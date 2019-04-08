@@ -22,10 +22,17 @@ export const getComponents = (state, type): OfferingComponent[] => {
       components = formatComponents(components);
     }
   }
-  return components;
+  return components || [];
 };
 
 const getForm = formValueSelector(FORM_ID);
+
+export const getTypeLabel = (state: any): string => {
+  const option = getForm(state, 'type');
+  if (option) {
+    return option.label;
+  }
+};
 
 export const getType = (state: any): string => {
   const option = getForm(state, 'type');

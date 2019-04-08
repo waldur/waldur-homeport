@@ -8,25 +8,9 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { updateOffering, FORM_ID } from '../store/constants';
 import { getStep, isOfferingManagementDisabled, isLoading, isLoaded, isErred } from '../store/selectors';
-import { getOffering, getCategories } from '../store/selectors';
 import { OfferingStep } from '../types';
 import { OfferingUpdateDialog } from './OfferingUpdateDialog';
-
-const getInitialValues = state => {
-  const offering = getOffering(state).offering;
-  const categories = getCategories(state);
-  return {
-    name: offering.name,
-    description: offering.description,
-    full_description: offering.full_description,
-    native_name: offering.native_name,
-    native_description: offering.native_description,
-    terms_of_service: offering.terms_of_service,
-    thumbnail: offering.thumbnail,
-    category: categories.find(category => category.uuid === offering.category_uuid),
-    attributes: offering.attributes,
-  };
-};
+import { getInitialValues } from './utils';
 
 const mapStateToProps = state => ({
   step: getStep(state),

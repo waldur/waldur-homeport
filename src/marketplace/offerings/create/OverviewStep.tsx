@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
+import { isFeatureVisible } from '@waldur/features/connect';
 import {
   StringField,
   TextField,
@@ -55,16 +56,20 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
       accept={['image/png', 'image/jpeg', 'image/svg+xml'].join(',')}
       buttonLabel={props.translate('Browse')}
     />
-    <FileUploadField
-      name="document.file"
-      showFileName={true}
-      label={props.translate('Documents')}
-      buttonLabel={props.translate('Browse')}
-    />
-    <StringField
-      name="document.name"
-      placeholder={props.translate('Filename')}
-      maxLength={150}
-    />
+    {isFeatureVisible('marketplace.documents') ? (
+      <FileUploadField
+        name="document.file"
+        showFileName={true}
+        label={props.translate('Documents')}
+        buttonLabel={props.translate('Browse')}
+      />
+    ) : null}
+    {isFeatureVisible('marketplace.documents') ? (
+      <StringField
+        name="document.name"
+        placeholder={props.translate('Filename')}
+        maxLength={150}
+      />
+    ) : null}
   </FormContainer>
 ));

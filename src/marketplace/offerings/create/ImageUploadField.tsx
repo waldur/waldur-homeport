@@ -8,8 +8,6 @@ import { FileUploadFieldProps } from '@waldur/form-react/FileUploadField';
 import { translate } from '@waldur/i18n';
 import ActionButton from '@waldur/table-react/ActionButton';
 
-import './ImageUploadField.scss';
-
 const getImageUrl = image => {
   if (image instanceof File) {
     return URL.createObjectURL(image);
@@ -25,7 +23,7 @@ export const ImageUploadField = (props: FileUploadFieldProps) => {
     return <FileUploadField {...props} />;
   }
   return (
-    <div className="image-upload-field">
+    <div style={{maxHeight: 200, maxWidth: 200}}>
       <Row>
         <Col md={5}>
           <div className="image">
@@ -33,19 +31,17 @@ export const ImageUploadField = (props: FileUploadFieldProps) => {
           </div>
         </Col>
         <Col md={7}>
-          <div className="image-actions">
-            <div>
-              <FileUploadField className="btn btn-sm btn-primary m-b-sm" {...props}/>
-            </div>
-            {props.input.value &&
-              <ActionButton
-                className="btn btn-sm btn-danger m-b-sm"
-                title={translate('Remove')}
-                action={() => props.input.onChange(null)}
-                icon="fa fa-trash"
-              />
-            }
+          <div>
+            <FileUploadField className="btn btn-sm btn-primary m-b-sm" {...props}/>
           </div>
+          {props.input.value &&
+            <ActionButton
+              className="btn btn-sm btn-danger m-b-sm"
+              title={translate('Remove')}
+              action={() => props.input.onChange(null)}
+              icon="fa fa-trash"
+            />
+          }
         </Col>
       </Row>
     </div>

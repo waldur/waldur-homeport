@@ -32,4 +32,3 @@ export const STATES = {
 export const TABLE_NAME = 'marketplace-offerings';
 
 export const FORM_ID = 'marketplaceOfferingCreate';
-export const OFFERING_UPDATE_FORM = 'marketplaceOfferingUpdate';
