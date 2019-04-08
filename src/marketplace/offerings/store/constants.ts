@@ -16,11 +16,17 @@ export const LOAD_OFFERING_START = 'waldur/marketplace/offering/LOAD_OFFERING_ST
 
 export const DRAFT = 'Draft';
 
+export const ACTIVE = 'Active';
+
+export const PAUSED = 'Paused';
+
+export const ARCHIVED = 'Archived';
+
 export const STATES = {
-  1: 'Draft',
-  2: 'Active',
-  3: 'Paused',
-  4: 'Archived',
+  1: DRAFT,
+  2: ACTIVE,
+  3: PAUSED,
+  4: ARCHIVED,
 };
 
 export const TABLE_NAME = 'marketplace-offerings';

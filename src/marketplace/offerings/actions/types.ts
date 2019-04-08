@@ -1,11 +1,4 @@
-import { ReactNode } from 'react';
-
-export type OfferingStateTransition =
-  'activate' | 'pause' | 'archive' | undefined;
-
-export interface OfferingAction<OfferingActionValue> {
-  key: string;
-  value: OfferingActionValue;
+export interface OfferingAction {
   label: string;
-  handler?(value: ReactNode): void;
+  handler(): void;
 }

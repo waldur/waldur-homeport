@@ -162,7 +162,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: src/marketplace/offerings/actions/utils.ts
+#: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/user/support/UserActivateButton.tsx
 msgid "Activate"
 msgstr ""
@@ -568,7 +568,7 @@ msgstr ""
 msgid "Approved by"
 msgstr ""
 
-#: src/marketplace/offerings/actions/utils.ts
+#: src/marketplace/offerings/actions/OfferingActions.tsx
 msgid "Archive"
 msgstr ""
 
@@ -1950,6 +1950,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
+#: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/openstack/openstack-backup-schedule/module.js
 #: src/openstack/openstack-snapshot-schedule/module.js
@@ -4597,7 +4598,7 @@ msgstr ""
 msgid "Password has been changed for user {affected_user_link}."
 msgstr ""
 
-#: src/marketplace/offerings/actions/utils.ts
+#: src/marketplace/offerings/actions/OfferingActions.tsx
 msgid "Pause"
 msgstr ""
 

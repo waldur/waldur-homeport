@@ -1,57 +1,56 @@
-import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { $state } from '@waldur/core/services';
-import { Offering } from '@waldur/marketplace/types';
+import { translate } from '@waldur/i18n';
+import { getUser } from '@waldur/workspace/selectors';
+import { OuterState } from '@waldur/workspace/types';
 
 import { updateOfferingState } from '../store/actions';
+import { DRAFT, ACTIVE, ARCHIVED, PAUSED } from '../store/constants';
 import { ActionsDropdown } from './ActionsDropdown';
 import './OfferingActions.scss';
-import { stateTransitionActions, stateTransition, mainActions } from './utils';
 
-interface OwnProps {
-  row: Offering;
-}
-
-interface DispatchProps {
-  updateOfferingState?(offering, stateAction): void;
-}
-
-const PureOfferingActions = (props: OwnProps & DispatchProps) => {
-  const filterStateActions = () => {
-    if (stateTransition[props.row.state]) {
-      return stateTransitionActions().filter(option => stateTransition[props.row.state].indexOf(option.value) !== -1);
-    }
-    return [];
-  };
-
-  const assignHandler = offeringActions =>
-    offeringActions.map(action => {
-      switch (action.key) {
-        case 'state':
-          return {
-            handler: e => {
-              props.updateOfferingState(props.row, e.target.id);
-            },
-            ...action,
-          };
-        case 'update':
-          return {
-            handler: () => $state.go('marketplace-offering-update', {
-              offering_uuid: props.row.uuid,
-            }),
-            ...action,
-          };
-      }
-    });
-
-  return (
-    <ActionsDropdown actions={assignHandler([...filterStateActions(), ...mainActions()])}/>
-  );
-};
-
-const enhance = connect<{}, DispatchProps, OwnProps>(null, {
-  updateOfferingState,
+const mapStateToProps = (state: OuterState) => ({
+  user: getUser(state),
 });
 
-export const OfferingActions = enhance(PureOfferingActions);
+const mapDispatchToProps = {
+  updateOfferingState,
+};
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  actions: [
+    {
+      label: translate('Activate'),
+      handler: () => {
+        dispatchProps.updateOfferingState(ownProps.row, 'activate');
+      },
+      visible: [DRAFT, PAUSED].includes(ownProps.row.state),
+    },
+    {
+      label: translate('Pause'),
+      handler: () => {
+        dispatchProps.updateOfferingState(ownProps.row, 'pause');
+      },
+      visible: ownProps.row.state === ACTIVE,
+    },
+    {
+      label: translate('Archive'),
+      handler: () => {
+        dispatchProps.updateOfferingState(ownProps.row, 'archive');
+      },
+      visible: ownProps.row.state !== ARCHIVED,
+    },
+    {
+      label: translate('Edit'),
+      handler: () => $state.go('marketplace-offering-update', {
+        offering_uuid: ownProps.row.uuid,
+      }),
+      visible: ownProps.row.state === DRAFT || stateProps.user.is_staff,
+    },
+  ].filter(row => row.visible),
+});
+
+const enhance = connect(mapStateToProps, mapDispatchToProps, mergeProps);
+
+export const OfferingActions = enhance(ActionsDropdown);
