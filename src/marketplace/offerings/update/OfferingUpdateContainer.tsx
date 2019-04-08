@@ -6,21 +6,32 @@ import { $state } from '@waldur/core/services';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { updateOffering, OFFERING_UPDATE_FORM } from '../store/constants';
+import { updateOffering, FORM_ID } from '../store/constants';
 import { getStep, isOfferingManagementDisabled, isLoading, isLoaded, isErred } from '../store/selectors';
-import { getOffering } from '../store/selectors';
+import { getOffering, getCategories } from '../store/selectors';
+import { OfferingStep } from '../types';
 import { OfferingUpdateDialog } from './OfferingUpdateDialog';
+
+const getInitialValues = state => {
+  const offering = getOffering(state).offering;
+  const categories = getCategories(state);
+  return {
+    name: offering.name,
+    description: offering.description,
+    full_description: offering.full_description,
+    native_name: offering.native_name,
+    native_description: offering.native_description,
+    terms_of_service: offering.terms_of_service,
+    thumbnail: offering.thumbnail,
+    category: categories.find(category => category.uuid === offering.category_uuid),
+    attributes: offering.attributes,
+  };
+};
 
 const mapStateToProps = state => ({
   step: getStep(state),
   disabled: isOfferingManagementDisabled(state),
-  initialValues: {
-    name: getOffering(state).offering.name,
-    description: getOffering(state).offering.description,
-    native_name: getOffering(state).offering.native_name,
-    native_description: getOffering(state).offering.native_description,
-    thumbnail: getOffering(state).offering.thumbnail,
-  },
+  initialValues: getInitialValues(state),
   loading: isLoading(state),
   loaded: isLoaded(state),
   erred: isErred(state),
@@ -36,6 +47,7 @@ const mapDispatchToProps = dispatch => ({
     $state.go('marketplace-vendor-offerings');
   },
   loadOffering: offeringUuid => dispatch(actions.loadOfferingStart(offeringUuid)),
+  setStep: (step: OfferingStep) => dispatch(actions.setStep(step)),
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -43,7 +55,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 const enhance = compose(
   connector,
   reduxForm({
-    form: OFFERING_UPDATE_FORM,
+    form: FORM_ID,
     enableReinitialize: true,
   }),
 );

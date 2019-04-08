@@ -1,15 +1,15 @@
 import * as React from 'react';
 import * as Dropdown from 'react-bootstrap/lib/Dropdown';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
-import { OfferingAction, OfferingStateTransition } from './types';
+import { OfferingAction } from './types';
 
-interface ActionsDropdownProps extends TranslateProps {
-  actions?: Array<OfferingAction<OfferingStateTransition>>;
+interface ActionsDropdownProps {
+  actions: OfferingAction[];
 }
 
-const PureActionsDropdown = ({ actions, translate }: ActionsDropdownProps) => (
+export const ActionsDropdown = ({ actions }: ActionsDropdownProps) => (
   <Dropdown id="offering-actions">
     <Dropdown.Toggle className="btn-sm">
       {translate('Actions')}
@@ -22,7 +22,7 @@ const PureActionsDropdown = ({ actions, translate }: ActionsDropdownProps) => (
       }
       {actions.map((action, index) => (
         <li key={index} className="cursor-pointer" role="presentation">
-          <a id={action.value} onClick={action.handler} role="menuitem" tabIndex={-1}>
+          <a onClick={action.handler} role="menuitem" tabIndex={-1}>
             {action.label}
           </a>
         </li>
@@ -30,5 +30,3 @@ const PureActionsDropdown = ({ actions, translate }: ActionsDropdownProps) => (
     </Dropdown.Menu>
   </Dropdown>
 );
-
-export const ActionsDropdown = withTranslation(PureActionsDropdown);

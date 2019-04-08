@@ -17,12 +17,17 @@ import { getPlans, getAttributes } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
 import { formatOfferingRequest, planWithoutComponent, planWithoutQuotas } from './utils';
 
+function* loadCategories() {
+  const categories: Category[] = yield call(api.getCategories);
+  const pluginsData = yield call(api.getPlugins);
+  const plugins = pluginsData.reduce((result, plugin) => ({...result, [plugin.offering_type]: plugin.components}), {});
+  return {categories, plugins};
+}
+
 function* loadData() {
   try {
-    const categories: Category[] = yield call(api.getCategories);
-    const pluginsData = yield call(api.getPlugins);
-    const plugins = pluginsData.reduce((result, plugin) => ({...result, [plugin.offering_type]: plugin.components}), {});
-    yield put(loadDataSuccess({categories, plugins}));
+    const data = yield loadCategories();
+    yield put(loadDataSuccess(data));
   } catch {
     yield put(loadDataError());
   }
@@ -83,10 +88,11 @@ function* createOffering(action: Action<OfferingFormData>) {
 function* updateOffering(action: Action<OfferingUpdateFormData>) {
   const { offeringUuid, thumbnail, ...rest } = action.payload;
   try {
-  yield call(api.updateOffering, offeringUuid, rest);
-  if (thumbnail instanceof File || thumbnail === '') {
-    yield call(api.uploadOfferingThumbnail, offeringUuid, thumbnail);
-  }
+    const offeringRequest = formatOfferingRequest(rest);
+    yield call(api.updateOffering, offeringUuid, offeringRequest);
+    if (thumbnail instanceof File || thumbnail === '') {
+      yield call(api.uploadOfferingThumbnail, offeringUuid, thumbnail);
+     }
   } catch (error) {
     const errorMessage = `${translate('Unable to update offering.')} ${format(error)}`;
     yield put(showError(errorMessage));
@@ -94,7 +100,7 @@ function* updateOffering(action: Action<OfferingUpdateFormData>) {
     return;
   }
   yield put(constants.updateOffering.success());
-  yield put(reset(constants.OFFERING_UPDATE_FORM));
+  yield put(reset(constants.FORM_ID));
   yield put(showSuccess(translate('Offering has been updated.')));
   yield put(stateGo('marketplace-vendor-offerings'));
 }
@@ -115,8 +121,9 @@ function* updateOfferingState(action) {
 function* loadOffering(action) {
   const { offeringUuid } = action.payload;
   try {
+    const data = yield loadCategories();
     const offering = yield call(api.getOffering, offeringUuid);
-    yield put(loadDataSuccess({offering}));
+    yield put(loadDataSuccess({offering, ...data}));
   } catch {
     yield put(loadDataError());
   }
