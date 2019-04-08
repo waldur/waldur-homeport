@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { OfferingAction } from './types';
 
 interface ActionsDropdownProps {
-  actions?: OfferingAction[];
+  actions: OfferingAction[];
 }
 
 export const ActionsDropdown = ({ actions }: ActionsDropdownProps) => (
