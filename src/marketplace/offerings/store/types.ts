@@ -2,12 +2,14 @@ import { Option } from '@waldur/marketplace/common/registry';
 import { AttributesType, Category, OfferingComponent, OfferingOptions } from '@waldur/marketplace/types';
 
 export interface PlanFormData {
+  archived: boolean;
   name: string;
   unit: Option;
   unit_price: number;
   prices: {[key: string]: number};
   quotas: {[key: string]: number};
   description?: string;
+  uuid?: string;
 }
 
 export interface OptionFormData {
@@ -47,6 +49,7 @@ export interface PlanRequest {
   quotas?: {[key: string]: number};
   prices?: {[key: string]: number};
   description?: string;
+  uuid?: string;
 }
 
 export interface OfferingRequest {

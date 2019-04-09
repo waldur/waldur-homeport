@@ -1,13 +1,11 @@
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
-import * as Panel from 'react-bootstrap/lib/Panel';
 import { WrappedFieldArrayProps } from 'redux-form';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
-import { RemoveButton } from '../RemoveButton';
 import { PlanAddButton } from './PlanAddButton';
-import { PlanForm } from './PlanForm';
+import { PlanPanel } from './PlanPanel';
 
 type PlansListProps = TranslateProps & WrappedFieldArrayProps<any>;
 
@@ -21,15 +19,7 @@ const PurePlansList = withTranslation((props: PlansListProps) => (
 
     <Col smOffset={2} sm={8}>
       {props.fields.map((plan, index) => (
-        <Panel key={index}>
-          <Panel.Heading>
-            <RemoveButton onClick={() => props.fields.remove(index)}/>
-            <h4>{props.translate('Plan #{index}', {index: index + 1})}</h4>
-          </Panel.Heading>
-          <Panel.Body>
-            <PlanForm plan={plan}/>
-          </Panel.Body>
-        </Panel>
+        <PlanPanel key={index} plan={plan} index={index} onRemove={props.fields.remove}/>
       ))}
       <PlanAddButton onClick={() => props.fields.push({})}/>
     </Col>
