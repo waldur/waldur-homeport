@@ -4697,7 +4697,7 @@ msgstr ""
 msgid "Plan"
 msgstr ""
 
-#: src/marketplace/offerings/plan/PlansList.tsx
+#: src/marketplace/offerings/plan/PlanPanel.tsx
 msgid "Plan #{index}"
 msgstr ""
 

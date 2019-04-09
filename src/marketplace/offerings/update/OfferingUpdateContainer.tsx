@@ -6,6 +6,7 @@ import { $state } from '@waldur/core/services';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { mergeProps } from '../create/OfferingCreateContainer';
 import { updateOffering, FORM_ID } from '../store/constants';
 import { getStep, isOfferingManagementDisabled, isLoading, isLoaded, isErred } from '../store/selectors';
 import { OfferingStep } from '../types';
@@ -19,7 +20,6 @@ const mapStateToProps = state => ({
   loading: isLoading(state),
   loaded: isLoaded(state),
   erred: isErred(state),
-  isLastStep: true,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -27,14 +27,11 @@ const mapDispatchToProps = dispatch => ({
     ...data,
     offeringUuid: $state.params.offering_uuid,
   }, dispatch),
-  goBack() {
-    $state.go('marketplace-vendor-offerings');
-  },
   loadOffering: offeringUuid => dispatch(actions.loadOfferingStart(offeringUuid)),
   setStep: (step: OfferingStep) => dispatch(actions.setStep(step)),
 });
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps, mergeProps);
 
 const enhance = compose(
   connector,
