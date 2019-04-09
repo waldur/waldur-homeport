@@ -30,6 +30,9 @@ const formatPlan = (plan: PlanFormData): PlanRequest => {
   if (plan.description) {
     result.description = plan.description;
   }
+  if (plan.uuid) {
+    result.uuid = plan.uuid;
+  }
   return result;
 };
 

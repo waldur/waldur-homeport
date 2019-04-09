@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => ({
   setStep: (step: OfferingStep) => dispatch(setStep(step)),
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+export const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
