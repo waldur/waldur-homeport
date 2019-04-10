@@ -76,11 +76,12 @@ const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDetailsTa
   const usageRows = props.components.filter(component => component.billing_type === 'usage');
   const usageWithLimits = usageRows.filter(component => component.disable_quotas === false);
   const usageWithoutLimits = usageRows.filter(component => component.disable_quotas === true);
+  const hasExtraRows = fixedRows.length > 0 || usageWithLimits.length > 0;
 
   return (
     <div className={props.formGroupClassName}>
       <div className={props.columnClassName}>
-      {fixedRows.length > 0 || usageWithLimits.length > 0 && (
+      {hasExtraRows && (
         <table className="table table-bordered">
           <thead>
             <HeaderRow periods={props.periods}/>
@@ -94,7 +95,10 @@ const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDetailsTa
       )}
       {usageWithoutLimits.length > 0 && (
         <>
-          <p>{translate('Additionally vendor can charge for usage of the following components')}</p>
+          <p>{hasExtraRows ?
+            translate('Additionally vendor can charge for usage of the following components') :
+            translate('Vendor can charge for usage of the following components')
+          }</p>
           <LimitlessComponentsTable components={usageWithoutLimits}/>
         </>
       )}

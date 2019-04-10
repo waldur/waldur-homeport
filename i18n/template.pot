@@ -8362,6 +8362,10 @@ msgstr ""
 msgid "Vendor"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+msgid "Vendor can charge for usage of the following components"
+msgstr ""
+
 #: src/marketplace/details/OverviewTab.tsx
 msgid "Vendor details"
 msgstr ""
