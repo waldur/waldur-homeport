@@ -1,7 +1,6 @@
 import { SubmissionError, change } from 'redux-form';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { formatDate } from '@waldur/core/dateUtils';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -11,10 +10,9 @@ import * as api from '../../common/api';
 import * as constants from './constants';
 
 function* handleSubmitUsage(action) {
-  const {date, resource, components} = action.payload;
+  const {period, components} = action.payload;
   const payload = {
-    resource,
-    date: formatDate(date),
+    plan_period: period.value.uuid,
     usages: Object.keys(components).map(key => ({
       type: key,
       ...components[key],
