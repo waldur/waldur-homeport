@@ -1,18 +1,19 @@
 import { getOfferingTypes } from '@waldur/marketplace/common/registry';
-import { Offering, Category } from '@waldur/marketplace/types';
+import { Offering, Category, OfferingOptions } from '@waldur/marketplace/types';
 
 import { getAccountingTypeOptions } from '../create/ComponentAccountingTypeField';
 import { getLimitPeriods } from '../create/ComponentLimitPeriodField';
 import { FIELD_TYPES } from '../option/constants';
 import { getOffering, getCategories } from '../store/selectors';
 
-const parseOptions = options =>
+const parseOptions = (options: OfferingOptions) =>
   (options && options.order) ? options.order.map((name: string) => {
     const option = options.options[name];
     return {
       ...option,
       name,
       type: FIELD_TYPES.find(fieldType => fieldType.value === option.type),
+      choices: Array.isArray(option.choices) ? option.choices.join(', ') : option.choices,
     };
   }) : [];
 
