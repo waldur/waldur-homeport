@@ -32,6 +32,7 @@ export interface ComponentUsage {
 }
 
 export interface ResourcePlanPeriod {
+  uuid: string;
   plan_name: string;
   plan_uuid: string;
   start: string;
