@@ -215,7 +215,6 @@ function AppStoreController(
     },
     getInstance: function() {
       return {
-        type: this.selectedResourceType,
         customer: this.currentCustomer,
         project: this.currentProject,
         service: this.selectedService,
