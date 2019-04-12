@@ -9,7 +9,6 @@ interface StepsListProps {
   value: string;
   onClick?(step: string): void;
   disabled?: boolean;
-  invalid?: boolean;
 }
 
 export const StepsList = (props: StepsListProps) => {
@@ -23,7 +22,6 @@ export const StepsList = (props: StepsListProps) => {
           title={`${index + 1}. ${title}`}
           complete={stepIndex > index}
           active={stepIndex === index}
-          disabled={index > stepIndex && props.invalid}
           onClick={() => props.onClick && props.onClick(title)}
         />
       ))}
