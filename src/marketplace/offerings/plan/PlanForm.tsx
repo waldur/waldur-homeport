@@ -17,7 +17,7 @@ const PlanNameField = props => (
     type="text"
     component="input"
     className="form-control"
-    validate={props.validate}
+    validate={required}
   />
 );
 
@@ -36,7 +36,7 @@ const enhance = compose(connectPlanComponents, withTranslation);
 export const PlanForm = enhance(props => (
   <>
     <FormGroup label={props.translate('Name')} required={true}>
-      <PlanNameField plan={props.plan} validate={required}/>
+      <PlanNameField plan={props.plan}/>
     </FormGroup>
     <FormGroup label={props.translate('Price')}>
       <PriceField plan={props.plan}/>

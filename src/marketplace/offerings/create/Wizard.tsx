@@ -26,6 +26,7 @@ export const Wizard = withTranslation((props: WizardProps) => (
       value={props.step}
       onClick={props.setStep}
       disabled={props.submitting}
+      invalid={props.invalid}
     />
     {React.createElement(props.tabs[props.step])}
     <div className="form-group">

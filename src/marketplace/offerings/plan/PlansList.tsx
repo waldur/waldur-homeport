@@ -4,6 +4,7 @@ import { WrappedFieldArrayProps } from 'redux-form';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
+import { getBillingPeriods } from './constants';
 import { PlanAddButton } from './PlanAddButton';
 import { PlanPanel } from './PlanPanel';
 
@@ -29,7 +30,9 @@ const PurePlansList = withTranslation((props: PlansListProps) => (
 export class PlansList extends React.Component<PlansListProps> {
   componentDidMount() {
     if (this.props.fields.length === 0) {
-      this.props.fields.push({});
+      this.props.fields.push({
+        billing_period: getBillingPeriods()[0],
+      });
     }
   }
 

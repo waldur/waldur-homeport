@@ -2,6 +2,8 @@ import * as React from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
+import { required } from '@waldur/core/validators';
+
 import { getBillingPeriods } from './constants';
 
 interface PlanBillingPeriodFieldProps {
@@ -11,6 +13,7 @@ interface PlanBillingPeriodFieldProps {
 export const PlanBillingPeriodField = (props: PlanBillingPeriodFieldProps) => (
   <Field
     name={`${props.plan}.unit`}
+    validate={required}
     component={fieldProps => (
       <Select
         value={fieldProps.input.value}
