@@ -7223,7 +7223,6 @@ msgstr ""
 msgid "There are no SSH public keys yet."
 msgstr ""
 
-#: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/paypal/paypal-invoice-actions.html
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
