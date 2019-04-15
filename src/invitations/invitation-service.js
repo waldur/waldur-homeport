@@ -21,6 +21,12 @@ export default function invitationService(baseServiceClass, $http, ENV, $window)
     resend: function(invitation_uuid) {
       return this.executeAction(invitation_uuid, 'send');
     },
+    approve: function(token) {
+      return $http.post(`${ENV.apiEndpoint}api/user-invitations/approve/`, {token});
+    },
+    reject: function(token) {
+      return $http.post(`${ENV.apiEndpoint}api/user-invitations/reject/`, {token});
+    },
     executeAction: function(invitation_uuid, action, data) {
       return $http.post(`${ENV.apiEndpoint}api/user-invitations/${invitation_uuid}/${action}/`, data);
     },

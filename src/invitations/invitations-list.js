@@ -66,6 +66,14 @@ function InvitationsListController(
         name: 'state',
         choices: [
           {
+            title: gettext('Requested'),
+            value: 'requested',
+          },
+          {
+            title: gettext('Rejected'),
+            value: 'rejected',
+          },
+          {
             title: gettext('Pending'),
             value: 'pending',
             chosen: true,

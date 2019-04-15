@@ -12,21 +12,80 @@
           <span translate>E-mail</span>
           <span class="text-danger">*</span>
         </label>
-        <input class="form-control" id="inviteEmail" name="email" type="email" ng-model="DialogCtrl.email" required
-          ng-disabled="DialogCtrl.submitting">
+        <input
+          class="form-control"
+          id="inviteEmail"
+          name="email"
+          type="email"
+          ng-model="DialogCtrl.email"
+          required
+          ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails">
         <p class="text-danger" ng-repeat="error in DialogCtrl.errors.email" ng-bind="error"></p>
       </div>
 
       <div class="form-group">
         <label class="control-label" for="inviteCivilNumber">
-          <span translate>Civil number</span>
+          {{ DialogCtrl.civilNumberLabel }}
+          <span class="text-danger" ng-if="DialogCtrl.civilNumberRequired">*</span>
         </label>
-        <input class="form-control" id="inviteCivilNumber" name="civil_number" ng-model="DialogCtrl.civil_number"
-          ng-disabled="DialogCtrl.submitting">
+        <input
+          class="form-control"
+          id="inviteCivilNumber"
+          name="civil_number"
+          ng-model="DialogCtrl.civil_number"
+          ng-attr-required="DialogCtrl.civilNumberRequired"
+          ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails">
         <p class="text-danger" ng-repeat="error in DialogCtrl.errors.civil_number" ng-bind="error"></p>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" ng-if="DialogCtrl.showTaxNumber">
+        <label class="control-label" for="inviteTaxNumber">
+          {{ DialogCtrl.taxNumberLabel }}
+          <span class="text-danger" ng-if="DialogCtrl.taxNumberRequired">*</span>
+        </label>
+        <input
+          class="form-control"
+          id="inviteTaxNumber"
+          name="tax_number"
+          ng-model="DialogCtrl.tax_number"
+          ng-attr-required="DialogCtrl.taxNumberRequired"
+          ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails">
+        <p class="text-danger" ng-repeat="error in DialogCtrl.errors.tax_number" ng-bind="error"></p>
+      </div>
+
+      <div class="form-group" ng-if="DialogCtrl.requireUserDetails">
+        <button
+          type="button"
+          class="btn btn-primary"
+          ng-disabled="DialogCtrl.fetchingUserDetails"
+          ng-click="DialogCtrl.fetchUserDetails()">
+          <span translate>Show user details</span>
+        </button>
+      </div>
+
+      <div class="form-group" ng-if="DialogCtrl.fetchedUserDetails">
+        <p>
+          <strong><span translate>Full name</span>:</strong>
+          {{ DialogCtrl.userDetails.name }}
+        </p>
+
+        <p>
+          <strong><span translate>Native name</span>:</strong>
+          {{ DialogCtrl.userDetails.native_name }}
+        </p>
+
+        <p>
+          <strong><span translate>Organization</span>:</strong>
+          {{ DialogCtrl.userDetails.organization }}
+        </p>
+
+        <p>
+          <strong><span translate>Job title</span>:</strong>
+          {{ DialogCtrl.userDetails.job_title }}
+        </p>
+      </div>
+
+      <div class="form-group" ng-hide="DialogCtrl.roleDisabled">
         <div>
           <label class="control-label" translate>Role</label>
         </div>
@@ -43,7 +102,9 @@
         <p class="text-danger" ng-repeat="error in DialogCtrl.errors.customer" ng-bind="error"></p>
       </div>
 
-      <div class="form-group" ng-if="DialogCtrl.role.field == 'project_role'">
+      <div class="form-group"
+        ng-hide="DialogCtrl.roleDisabled"
+        ng-if="DialogCtrl.role.field == 'project_role'">
         <label class="control-label" for="inviteProject">
           <span translate>Project</span>
           <span class="text-danger">*</span>
@@ -69,8 +130,11 @@
       </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button class="btn btn-primary" type="submit"
+  <div class="modal-footer" ng-hide="DialogCtrl.roleDisabled">
+    <button
+      class="btn btn-primary"
+      type="submit"
+      ng-disabled="DialogCtrl.DialogForm.$invalid"
       submit-button="DialogCtrl.submitForm()">
       <span translate>Invite user</span>
     </button>
