@@ -8,7 +8,7 @@ import { OFFERING } from './OfferingTabs.fixture';
 
 const renderComponent = () => {
   const mockStore = configureStore();
-  const store = mockStore({});
+  const store = mockStore({config: {}});
   const wrapper = mount(
     <Provider store={store}>
       <OfferingTabs offering={OFFERING} summary="" />
