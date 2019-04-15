@@ -1125,7 +1125,7 @@ msgid "Choose option"
 msgstr ""
 
 #: src/customer/popover/customer-users-details-list.js
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/invitation-dialog.js
 #: src/team/user-selector.html
 msgid "Civil number"
 msgstr ""
@@ -2478,6 +2478,7 @@ msgid "Full description"
 msgstr ""
 
 #: src/auth/auth-login.html
+#: src/invitations/actions/invitation-dialog.html
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
@@ -2965,6 +2966,10 @@ msgstr ""
 msgid "Invalid URL. Unable to parse payment details."
 msgstr ""
 
+#: src/invitations/invitation-approve.html
+msgid "Invitation approval"
+msgstr ""
+
 #: src/invitations/invitation-confirm-dialog.html
 msgid "Invitation check"
 msgstr ""
@@ -2977,12 +2982,20 @@ msgstr ""
 msgid "Invitation email is:"
 msgstr ""
 
+#: src/invitations/invitation-approve.js
+msgid "Invitation has been approved."
+msgstr ""
+
 #: src/invitations/actions/cancel.js
 msgid "Invitation has been canceled."
 msgstr ""
 
 #: src/invitations/actions/invitation-dialog-service.js
 msgid "Invitation has been created."
+msgstr ""
+
+#: src/invitations/invitation-reject.js
+msgid "Invitation has been rejectd."
 msgstr ""
 
 #: src/invitations/actions/send.js
@@ -2999,6 +3012,10 @@ msgstr ""
 
 #: src/invitations/utils.js
 msgid "Invitation is not valid."
+msgstr ""
+
+#: src/invitations/invitation-reject.html
+msgid "Invitation rejection"
 msgstr ""
 
 #: src/auth/auth-login.js
@@ -3165,6 +3182,10 @@ msgstr ""
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Job position"
+msgstr ""
+
+#: src/invitations/actions/invitation-dialog.html
+msgid "Job title"
 msgstr ""
 
 #: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
@@ -3745,6 +3766,7 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
+#: src/invitations/actions/invitation-dialog.html
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/service-providers/CustomerDetailsTable.tsx
@@ -4379,6 +4401,7 @@ msgstr ""
 #: src/experts/bids/expert-bids-list.js
 #: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: src/experts/requests/list/expert-request-customer-list.js
+#: src/invitations/actions/invitation-dialog.html
 #: src/issues/create/issue-create-dialog.html
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
@@ -5616,6 +5639,10 @@ msgstr ""
 msgid "Reject"
 msgstr ""
 
+#: src/invitations/invitations-list.js
+msgid "Rejected"
+msgstr ""
+
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 msgid "Related resource"
@@ -5845,6 +5872,10 @@ msgstr ""
 
 #: src/offering/marketplace.ts
 msgid "Request-based item"
+msgstr ""
+
+#: src/invitations/invitations-list.js
+msgid "Requested"
 msgstr ""
 
 #: src/customer/api.ts
@@ -6640,6 +6671,10 @@ msgstr ""
 msgid "Show usage"
 msgstr ""
 
+#: src/invitations/actions/invitation-dialog.html
+msgid "Show user details"
+msgstr ""
+
 #: src/customer/AccountingRunningField.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
@@ -7023,6 +7058,10 @@ msgstr ""
 #: src/billing/invoices-list.js
 #: src/paypal/paypal-invoices-list.js
 msgid "Tax"
+msgstr ""
+
+#: src/invitations/actions/invitation-dialog.js
+msgid "Tax number"
 msgstr ""
 
 #: src/customer/routes.js
@@ -7516,6 +7555,10 @@ msgstr ""
 msgid "Unable to add item to shopping cart."
 msgstr ""
 
+#: src/invitations/invitation-approve.js
+msgid "Unable to approve invitation."
+msgstr ""
+
 #: src/marketplace/orders/store/effects.ts
 msgid "Unable to approve order."
 msgstr ""
@@ -7629,6 +7672,10 @@ msgstr ""
 
 #: src/analytics/effects.ts
 msgid "Unable to fetch tenants."
+msgstr ""
+
+#: src/invitations/actions/invitation-dialog.js
+msgid "Unable to fetch user details."
 msgstr ""
 
 #: src/issues/comments/utils.ts
@@ -7812,6 +7859,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Unable to register service provider."
+msgstr ""
+
+#: src/invitations/invitation-reject.js
+msgid "Unable to reject invitation."
 msgstr ""
 
 #: src/marketplace/orders/store/effects.ts
@@ -8096,6 +8147,10 @@ msgstr ""
 #: src/user/support/UserDetailsDialog.tsx
 #: src/user/user-popover.html
 msgid "User details"
+msgstr ""
+
+#: src/invitations/actions/invitation-dialog.js
+msgid "User details have been fetched successfully."
 msgstr ""
 
 #: src/user/support/effects.ts
