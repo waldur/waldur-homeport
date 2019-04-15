@@ -10,16 +10,11 @@ interface ActionsDropdownProps {
 }
 
 export const ActionsDropdown = ({ actions }: ActionsDropdownProps) => (
-  <Dropdown id="offering-actions">
+  <Dropdown id="offering-actions" className={actions.length === 0 ? 'disabled' : undefined}>
     <Dropdown.Toggle className="btn-sm">
       {translate('Actions')}
     </Dropdown.Toggle>
     <Dropdown.Menu>
-      {actions.length === 0 &&
-        <li role="presentation">
-          <a>{translate('There are no actions.')}</a>
-        </li>
-      }
       {actions.map((action, index) => (
         <li key={index} className="cursor-pointer" role="presentation">
           <a onClick={action.handler} role="menuitem" tabIndex={-1}>
