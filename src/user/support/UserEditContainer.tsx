@@ -5,7 +5,7 @@ import { compose } from 'redux';
 
 import { ENV } from '@waldur/core/services';
 import { translate, withTranslation } from '@waldur/i18n';
-import { getNativeNameVisible } from '@waldur/store/config';
+import { getNativeNameVisible, getConfig } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
 import {
   fieldIsVisible,
@@ -56,6 +56,7 @@ const mapStateToProps = (state, ownProps) => ({
   fieldIsVisible: fieldIsVisible(ownProps),
   isRequired,
   nativeNameIsVisible: getNativeNameVisible(state),
+  protected: getConfig(state).plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS.contains(ownProps.user.registration_method),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
