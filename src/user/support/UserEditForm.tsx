@@ -142,7 +142,7 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
           required={props.isRequired('phone_number')}
         />
       }
-      {props.fieldIsVisible('phone_number') && !props.protected &&
+      {props.fieldIsVisible('phone_number') && props.protected &&
         <StaticField
           label={translate('Phone number')}
           value={props.user.phone_number}
