@@ -52,7 +52,7 @@ export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogPr
             <form
               onSubmit={handleSubmit(updateOffering)}
               className="form-horizontal">
-              <Wizard steps={STEPS} tabs={TABS} {...rest}/>
+              <Wizard steps={STEPS} tabs={TABS} {...rest} submitLabel={translate('Update')}/>
             </form>
           </Col>
         </Row>

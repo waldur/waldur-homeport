@@ -17,6 +17,7 @@ interface WizardProps extends TranslateProps {
   invalid: boolean;
   isLastStep: boolean;
   tabs: {[key: string]: React.ComponentType};
+  submitLabel?: string;
 }
 
 export const Wizard = withTranslation((props: WizardProps) => (
@@ -50,7 +51,7 @@ export const Wizard = withTranslation((props: WizardProps) => (
             <SubmitButton
               disabled={props.invalid}
               submitting={props.submitting}
-              label={props.translate('Submit')}
+              label={props.submitLabel || props.translate('Submit')}
             />
           )}
         </div>

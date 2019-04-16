@@ -7994,6 +7994,7 @@ msgstr ""
 #: src/customer/details/CustomerEditDetailsForm.tsx
 #: src/customer/details/customer-policies.html
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
+#: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/offering/actions/UpdateAction.ts
 #: src/user/hooks/HookUpdateButton.tsx
 #: src/user/hooks/hook-details.html
