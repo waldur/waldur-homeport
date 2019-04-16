@@ -17,7 +17,7 @@
       </div>
     </uib-tab>
 
-    <uib-tab index="2">
+    <uib-tab index="2" ng-if="$ctrl.showProviders">
       <uib-tab-heading translate>Providers</uib-tab-heading>
       <div class="panel-body" ng-if="active == 2">
         <project-providers project="$ctrl.project"></project-providers>
