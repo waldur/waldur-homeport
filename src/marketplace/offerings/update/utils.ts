@@ -27,6 +27,9 @@ const parseAttributes = (category: Category, attributes) => {
   return Object.keys(attributes).reduce((acc, key) => {
     let attr = attributes[key];
     const meta = attributeMap[key];
+    if (!meta) {
+      return acc;
+    }
     if (Array.isArray(meta.options)) {
       if (meta.type === 'choice') {
         attr = meta.options.find(opt => opt.key === attr);

@@ -31,7 +31,7 @@ const connector = connect(state => {
     return {};
   }
 
-  const attributes = formatAttributes(formData.attributes || {});
+  const attributes = formatAttributes(category, formData.attributes || {});
   const filterSection = section => section.attributes.some(attr => attributes.hasOwnProperty(attr.key));
   const sections = category.sections.filter(filterSection);
 

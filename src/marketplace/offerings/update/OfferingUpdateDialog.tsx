@@ -19,6 +19,7 @@ interface OfferingUpdateDialogProps extends InjectedFormProps {
   erred: boolean;
   disabled: boolean;
   isLastStep: boolean;
+  setStep(step: string): void;
   goBack(): void;
   goNext(): void;
   loadOffering(offeringUuid: string): void;
@@ -30,6 +31,7 @@ export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogPr
       return $state.go('errorPage.notFound');
     }
     this.props.loadOffering($state.params.offering_uuid);
+    this.props.setStep(STEPS[0]);
   }
 
   render() {
