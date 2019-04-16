@@ -1,4 +1,5 @@
 import template from './invoice-details.html';
+import { getItemName } from './utils';
 
 const invoiceDetails = {
   template,
@@ -13,6 +14,10 @@ const invoiceDetails = {
 
     $onInit() {
       this.projects = this.BillingUtils.groupInvoiceItems(this.invoice.items);
+    }
+
+    getItemName(item) {
+      return getItemName(item);
     }
   }
 };

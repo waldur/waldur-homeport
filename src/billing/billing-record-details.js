@@ -1,5 +1,6 @@
 import template from './billing-record-details.html';
 import './billing-record-details.css';
+import { getItemName } from './utils';
 
 const billingRecordDetails = {
   template,
@@ -17,8 +18,11 @@ const billingRecordDetails = {
       this.projects = this.BillingUtils.groupInvoiceItems(this.invoice.items);
       this.currentStateService.getCustomer().then(customer => {
         this.customer = customer;
-      }
-      );
+      });
+    }
+
+    getItemName(item) {
+      return getItemName(item);
     }
   }
 };

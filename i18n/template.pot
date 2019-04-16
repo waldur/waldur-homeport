@@ -8410,6 +8410,8 @@ msgstr ""
 msgid "Value"
 msgstr ""
 
+#: src/billing/billing-record-details.html
+#: src/billing/invoice-details.html
 #: src/marketplace/details/OrderSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx

@@ -51,8 +51,7 @@
               <tr ng-repeat="item in project.items track by $index">
                 <td>
                   <div>
-                    <strong ng-if="!item.details.service_provider_name">{{ ::item.name }}</strong>
-                    <strong ng-if="item.details.service_provider_name">{{ ::item.name }} - {{ ::item.details.service_provider_name }}</strong>
+                    <strong>{{ $ctrl.getItemName(item) }}</strong>
                   </div>
                   <i class="fa fa-question-circle m-l-xs"
                     uib-tooltip="{{'Tracked using UTC timezone, displayed with your browser’s timezone.' | translate }}">
@@ -61,6 +60,11 @@
                     <span translate>Start time</span>: {{ ::item.start || '&mdash;' | dateTime }}.
                     <span translate>End time</span>: {{ ::item.end || '&mdash;' | dateTime }}
                   </small>
+                  <div ng-if="item.details.service_provider_name">
+                    <small>
+                      <span translate>Vendor</span>: {{ ::item.details.service_provider_name }}
+                    </small>
+                  </div>
                   <invoice-events-toggle item="item"></invoice-events-toggle>
                 </td>
                 <td>{{ item.factor || item.quantity }}</td>
