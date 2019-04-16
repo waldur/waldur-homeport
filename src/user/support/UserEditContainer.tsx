@@ -50,7 +50,7 @@ UserUpdateComponent.defaultProps = {
 
 const getProtectedMethods = (state: any): string[] => {
   const plugins = getConfig(state).plugins;
-  return plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS || []
+  return plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS || [];
 };
 
 const mapStateToProps = (state, ownProps) => ({
