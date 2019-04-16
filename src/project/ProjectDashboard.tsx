@@ -14,6 +14,7 @@ import { ProjectCounters } from './ProjectCounters';
 interface ProjectDashboardProps {
   user: User;
   project: Project;
+  canAddUser: boolean;
 }
 
 export const ProjectDashboard = (props: ProjectDashboardProps) => props.project ? (
@@ -28,7 +29,7 @@ export const ProjectDashboard = (props: ProjectDashboardProps) => props.project 
           <ProjectCounters project={props.project}/>
         </Col>
         <Col md={4}>
-          <ProjectActions project={props.project}/>
+          <ProjectActions {...props}/>
         </Col>
       </Row>
       <CategoryResourcesList
