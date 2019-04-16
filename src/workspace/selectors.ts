@@ -75,7 +75,7 @@ export const isManager = createSelector(
   getUser,
   getProject,
   (user, project) => {
-    return checkRole(project, user, 'manager');
+    return project && checkRole(project, user, 'manager');
   }
 );
 
