@@ -36,6 +36,7 @@ interface UserEditFormProps extends TranslateProps, InjectedFormProps {
   nativeNameIsVisible: () => boolean;
   showDeleteButton: boolean;
   user: UserDetails;
+  protected?: boolean;
 }
 
 export const PureUserEditForm = (props: UserEditFormProps) => (
@@ -46,23 +47,43 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
       submitting={props.submitting}
       labelClass="col-sm-3"
       controlClass="col-sm-7">
-      <StringField
-        label={translate('Full name')}
-        name="full_name"
-        required={props.isRequired('full_name')}
-      />
-      {props.nativeNameIsVisible &&
+      {props.protected ? (
+        <StaticField
+          label={translate('Full name')}
+          value={props.user.full_name}
+        />
+      ) : (
+        <StringField
+          label={translate('Full name')}
+          name="full_name"
+          required={props.isRequired('full_name')}
+        />
+      )}
+      {props.nativeNameIsVisible && !props.protected &&
         <StringField
           label={translate('Native name')}
           name="native_name"
           required={props.isRequired('native_name')}
         />
       }
-      <EmailField
-        label={translate('Email')}
-        name="email"
-        required={props.isRequired('email')}
-      />
+      {props.nativeNameIsVisible && props.protected &&
+        <StaticField
+          label={translate('Native name')}
+          value={props.user.native_name}
+        />
+      }
+      {props.protected ? (
+        <StaticField
+          label={translate('Email')}
+          value={props.user.email}
+        />
+      ) : (
+        <EmailField
+          label={translate('Email')}
+          name="email"
+          required={props.isRequired('email')}
+        />
+      )}
       {props.fieldIsVisible('registration_method') &&
         <StaticField
           label={translate('Registration method')}
@@ -81,20 +102,32 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
           value={props.user.civil_number}
         />
       }
-      {props.fieldIsVisible('organization') &&
+      {props.fieldIsVisible('organization') && !props.protected && (
         <StringField
           label={translate('Organization name')}
           name="organization"
           required={props.isRequired('organization')}
         />
-      }
-      {props.fieldIsVisible('job_title') &&
+      )}
+      {props.fieldIsVisible('organization') && props.protected && (
+        <StaticField
+          label={translate('Organization name')}
+          value={props.user.organization}
+        />
+      )}
+      {props.fieldIsVisible('job_title') && !props.protected &&
         <StringField
           label={translate('Job position')}
           name="job_title"
           required={props.isRequired('job_title')}
         />
       }
+      {props.fieldIsVisible('job_title') && props.protected && (
+        <StaticField
+          label={translate('Job position')}
+          value={props.user.job_title}
+        />
+      )}
       {props.isVisibleForSupportOrStaff &&
         <StringField
           label={translate('Description')}
@@ -102,11 +135,17 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
           required={props.isRequired('description')}
         />
       }
-      {props.fieldIsVisible('phone_number') &&
+      {props.fieldIsVisible('phone_number') && !props.protected &&
         <StringField
           label={translate('Phone number')}
           name="phone_number"
           required={props.isRequired('phone_number')}
+        />
+      }
+      {props.fieldIsVisible('phone_number') && props.protected &&
+        <StaticField
+          label={translate('Phone number')}
+          value={props.user.phone_number}
         />
       }
       <hr/>
