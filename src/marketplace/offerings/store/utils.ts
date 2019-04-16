@@ -1,6 +1,6 @@
 import { omit } from '@waldur/core/utils';
 import { Customer } from '@waldur/customer/types';
-import { OptionField } from '@waldur/marketplace/types';
+import { OptionField, Category, Attribute } from '@waldur/marketplace/types';
 
 import { OfferingRequest, OfferingFormData, PlanRequest, PlanFormData, OptionFormData } from './types';
 
@@ -55,16 +55,33 @@ const formatOptions = (options: OptionFormData[]) => ({
   }, {}),
 });
 
-export const formatAttributes = attributes => Object.keys(attributes).reduce((result, key) => {
-  let value = attributes[key];
-  if (Array.isArray(value)) {
-    value = value.map(item => item.key);
+export const formatAttributes = (category: Category, attributes) => {
+  const attributeMap = {};
+  for (const section of category.sections) {
+    for (const attr of section.attributes) {
+      attributeMap[attr.key] = attr;
+    }
   }
-  return {
-    ...result,
-    [key]: value,
-  };
-}, {});
+  return Object.keys(attributeMap).reduce((result, key) => {
+    const meta: Attribute = attributeMap[key];
+    let value = attributes[key];
+    if (meta.type === 'list' && Array.isArray(value)) {
+      if (value.length === 0) {
+        value = undefined;
+      } else {
+        value = value.map(item => item.key);
+      }
+    } else if (meta.type === 'choice') {
+      if (value === '') {
+        value = undefined;
+      }
+    }
+    return {
+      ...result,
+      [key]: value,
+    };
+  }, {});
+};
 
 export const formatComponents = components =>
   components.map(component => ({
@@ -91,7 +108,7 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
     shared: true,
   };
   if (request.attributes) {
-    result.attributes = formatAttributes(request.attributes);
+    result.attributes = formatAttributes(request.category, request.attributes);
   }
   if (request.components) {
     result.components = formatComponents(request.components);

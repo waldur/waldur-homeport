@@ -5,7 +5,7 @@ import { compose } from 'redux';
 
 import { ENV } from '@waldur/core/services';
 import { translate, withTranslation } from '@waldur/i18n';
-import { getNativeNameVisible } from '@waldur/store/config';
+import { getNativeNameVisible, getConfig } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
 import {
   fieldIsVisible,
@@ -48,6 +48,11 @@ UserUpdateComponent.defaultProps = {
   showDeleteButton: true,
 };
 
+const getProtectedMethods = (state: any): string[] => {
+  const plugins = getConfig(state).plugins;
+  return plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS || [];
+};
+
 const mapStateToProps = (state, ownProps) => ({
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
   isVisibleSupportFeature: isVisibleSupport(state),
@@ -56,6 +61,7 @@ const mapStateToProps = (state, ownProps) => ({
   fieldIsVisible: fieldIsVisible(ownProps),
   isRequired,
   nativeNameIsVisible: getNativeNameVisible(state),
+  protected: getProtectedMethods(state).includes(ownProps.user.registration_method),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {

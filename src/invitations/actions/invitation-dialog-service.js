@@ -1,45 +1,52 @@
-// @ngInject
-export default function InvitationDialogService(
-  ENV,
-  $state,
-  InvitationPolicyService,
-  invitationService,
-  ncUtilsFlash) {
+import { translate } from '@waldur/i18n';
 
-  return {
-    getRoles,
-    createInvite,
-  };
+export default class InvitationDialogService {
+  // @ngInject
+  constructor(
+    ENV,
+    $state,
+    $http,
+    InvitationPolicyService,
+    invitationService,
+    ncUtilsFlash) {
+    this.ENV = ENV;
+    this.$state = $state;
+    this.$http = $http;
+    this.InvitationPolicyService = InvitationPolicyService;
+    this.invitationService = invitationService;
+    this.ncUtilsFlash = ncUtilsFlash;
+  }
 
-  function getRoles(context) {
+  getRoles(context) {
     const roles = [
       {
         field: 'customer_role',
-        title: ENV.roles.owner,
+        title: this.ENV.roles.owner,
         value: 'owner',
         icon: 'fa-sitemap'
       },
       {
         field: 'project_role',
-        title: ENV.roles.manager,
+        title: this.ENV.roles.manager,
         value: 'manager',
         icon: 'fa-users'
       },
       {
         field: 'project_role',
-        title: ENV.roles.admin,
+        title: this.ENV.roles.admin,
         value: 'admin',
         icon: 'fa-server'
       }
     ];
-    return roles.filter(role => InvitationPolicyService.canManageRole(context, role));
+    return roles.filter(role => this.InvitationPolicyService.canManageRole(context, role));
   }
 
-  function createInvite(customer, project, email, civil_number, role) {
-    let invite = invitationService.$create();
-    invite.link_template = getTemplateUrl();
+  createInvite(customer, project, email, civil_number, tax_number, user_details, role) {
+    let invite = this.invitationService.$create();
+    invite.link_template = this.getTemplateUrl();
     invite.email = email;
     invite.civil_number = civil_number;
+    invite.tax_number = tax_number;
     if (role.field === 'customer_role') {
       invite.customer_role = role.value;
       invite.customer = customer.url;
@@ -47,19 +54,31 @@ export default function InvitationDialogService(
       invite.project_role = role.value;
       invite.project = project.url;
     }
+    if (user_details) {
+      angular.merge(invite, user_details);
+    }
     return invite.$save()
       .then(response => {
-        ncUtilsFlash.success(gettext('Invitation has been created.'));
+        this.ncUtilsFlash.success(translate('Invitation has been created.'));
         return response;
       })
       .catch(response => {
-        ncUtilsFlash.error(gettext('Unable to create invitation.'));
+        this.ncUtilsFlash.error(translate('Unable to create invitation.'));
         return response.data;
       });
   }
 
-  function getTemplateUrl() {
-    let path = $state.href('invitation', {uuid: 'TEMPLATE'});
+  getTemplateUrl() {
+    let path = this.$state.href('invitation', {uuid: 'TEMPLATE'});
     return location.origin + '/' + path.replace('TEMPLATE', '{uuid}');
+  }
+
+  fetchUserDetails(civil_number, tax_number) {
+    const params = {
+      civil_number,
+      tax_number,
+    };
+    const url = `${this.ENV.apiEndpoint}api-auth/bcc/user-details/`;
+    return this.$http.get(url, {params});
   }
 }

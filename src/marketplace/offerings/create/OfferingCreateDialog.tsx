@@ -43,6 +43,7 @@ export class OfferingCreateDialog extends React.Component<OfferingCreateDialogPr
       return $state.go('errorPage.notFound');
     }
     this.props.loadData();
+    this.props.setStep(STEPS[0]);
   }
 
   render() {

@@ -45,7 +45,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
       handler: () => $state.go('marketplace-offering-update', {
         offering_uuid: ownProps.row.uuid,
       }),
-      visible: ownProps.row.state === DRAFT || stateProps.user.is_staff,
+      visible: ownProps.row.state !== ARCHIVED && (ownProps.row.state === DRAFT || stateProps.user.is_staff),
     },
   ].filter(row => row.visible),
 });
