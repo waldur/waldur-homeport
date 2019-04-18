@@ -12,7 +12,6 @@ import './CustomerCreatePrompt.scss';
 import { MessageButton } from './MessageButton';
 
 interface CustomerCreatePromptProps extends TranslateProps, InjectedFormProps {
-  renderExpert: boolean;
   renderServiceProvider: boolean;
   closeModal(): void;
   onSubmit(data: { [key: string]: string }): void;
@@ -20,7 +19,6 @@ interface CustomerCreatePromptProps extends TranslateProps, InjectedFormProps {
 
 export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
   const {
-    renderExpert,
     renderServiceProvider,
     translate,
     handleSubmit,
@@ -31,9 +29,6 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
 
   const getColumnsNumber = () => {
     let counter = 1;
-    if (renderExpert) {
-      counter++;
-    }
     if (renderServiceProvider) {
       counter++;
     }
@@ -69,14 +64,6 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
             {translate('Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place.')}
           </MessageButton>
         )),
-        renderExpert && new RadioButtonChoice(constants.ROLES.expert, (
-          <MessageButton
-            iconClass="svgfonticon svgfonticon svgfonticon-expert"
-            title={translate('Expert')}
-          >
-            {translate('Register as a customer of our portal that can also offer own experts to the other customers of Waldur.')}
-          </MessageButton>
-        )),
         renderServiceProvider && new RadioButtonChoice(constants.ROLES.provider, (
           <MessageButton
             iconClass="svgfonticon svgfonticon-provider"
@@ -92,8 +79,8 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
   const getTitle = () => {
     const customerTitle1 = translate('You do not currently have any organizations.');
     const customerTitle2 = translate('Please create a new one:');
-    const expertOrProviderTitle = translate('Please create a new one picking the profile that best matches your organization:');
-    return getColumnsNumber() === 1 ? [customerTitle1, <br key={1}/>, customerTitle2] : [customerTitle1, <br key={2}/>, expertOrProviderTitle];
+    const roleLabel = translate('Please create a new one picking the profile that best matches your organization:');
+    return getColumnsNumber() === 1 ? [customerTitle1, <br key={1}/>, customerTitle2] : [customerTitle1, <br key={2}/>, roleLabel];
   };
 
   return (

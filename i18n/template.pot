@@ -67,11 +67,6 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: src/experts/bids/details/expert-bid-dialog.html
-#: src/experts/bids/expert-bids-list.js
-msgid "Accept"
-msgstr ""
-
 #: src/invitations/invitations-list.js
 msgid "Accepted"
 msgstr ""
@@ -175,7 +170,6 @@ msgstr ""
 msgid "Activating"
 msgstr ""
 
-#: src/experts/requests/list/expert-request-customer-list.js
 #: src/user/support/UserFilter.tsx
 msgid "Active"
 msgstr ""
@@ -300,10 +294,6 @@ msgstr ""
 #: src/providers/ProviderCreateForm.tsx
 #: src/providers/provider-list.js
 msgid "Add provider"
-msgstr ""
-
-#: src/experts/requests/list/expert-request-project-list.js
-msgid "Add request"
 msgstr ""
 
 #: src/dashboard/marketplace.ts
@@ -907,10 +897,6 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
-#: src/experts/extensions/customer-workspace.html
-msgid "Browse expert requests"
-msgstr ""
-
 #: src/offering/appstore-offering.html
 msgid "By creating I agree with the"
 msgstr ""
@@ -982,9 +968,6 @@ msgstr ""
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/cost-planning/cost-plan-dialog.html
 #: src/digitalocean/droplet-resize.html
-#: src/experts/bids/create/expert-bid-create-dialog.html
-#: src/experts/bids/details/expert-bid-dialog.html
-#: src/experts/requests/create/expert-contract-create.html
 #: src/form-react/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
 #: src/invitations/actions/cancel.js
@@ -1018,16 +1001,11 @@ msgstr ""
 msgid "Cancel payment"
 msgstr ""
 
-#: src/experts/requests/actions/expert-request-cancel.html
-msgid "Cancel request"
-msgstr ""
-
 #: src/billing/billing-utils.js
 #: src/invitations/invitations-list.js
 msgid "Canceled"
 msgstr ""
 
-#: src/experts/requests/list/expert-request-customer-list.js
 #: src/paypal/paypal-invoices-list.js
 msgid "Cancelled"
 msgstr ""
@@ -1130,10 +1108,6 @@ msgstr ""
 msgid "Civil number"
 msgstr ""
 
-#: src/intro/expert-manager-intro.js
-msgid "Click on a 'Create proposal' button when you are ready to fulfill expert request"
-msgstr ""
-
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 #: src/azure/provider/AzureForm.tsx
 msgid "Client ID"
@@ -1191,7 +1165,6 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: src/experts/requests/details/expert-request-details.html
 #: src/issues/comments/IssueCommentsContainer.tsx
 #: src/offering/OfferingTabs.tsx
 msgid "Comments"
@@ -1206,17 +1179,8 @@ msgstr ""
 msgid "Competence"
 msgstr ""
 
-#: src/experts/requests/actions/expert-request-complain.html
-msgid "Complain"
-msgstr ""
-
-#: src/experts/requests/actions/expert-request-complete.html
 #: src/offering/actions/CompleteAction.ts
 msgid "Complete"
-msgstr ""
-
-#: src/experts/requests/list/expert-request-customer-list.js
-msgid "Completed"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -1298,18 +1262,6 @@ msgstr ""
 msgid "Contact phone"
 msgstr ""
 
-#: src/experts/requests/details/ExpertContractDetails.tsx
-msgid "Contract description"
-msgstr ""
-
-#: src/experts/requests/details/ExpertContractDetails.tsx
-msgid "Contract file"
-msgstr ""
-
-#: src/experts/requests/details/ExpertContractDetails.tsx
-msgid "Contract price"
-msgstr ""
-
 #: src/offering/OracleSnapshots.tsx
 msgid "Copy of"
 msgstr ""
@@ -1369,8 +1321,6 @@ msgstr ""
 #: src/azure/sql/CreateDatabaseAction.ts
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/customer/workspace/customer-issues.js
-#: src/experts/bids/create/expert-bid-create-dialog.html
-#: src/experts/requests/create/expert-contract-create.html
 #: src/freeipa/freeipa-account-create.html
 #: src/issues/create/issue-create-dialog.js
 #: src/offering/appstore-offering.html
@@ -1407,10 +1357,6 @@ msgstr ""
 msgid "Create Zabbix host"
 msgstr ""
 
-#: src/experts/extensions/expert-request-create-button.html
-msgid "Create a request for an expert"
-msgstr ""
-
 #: src/auth/auth-login.html
 msgid "Create an account"
 msgstr ""
@@ -1429,10 +1375,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 msgid "Create backup schedule for OpenStack instance"
-msgstr ""
-
-#: src/experts/routes.js
-msgid "Create expert request"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
@@ -1457,12 +1399,6 @@ msgstr ""
 
 #: src/customer/routes.js
 msgid "Create project"
-msgstr ""
-
-#: src/experts/bids/create/expert-bid-create-dialog.html
-#: src/experts/bids/details/expert-bid-details.html
-#: src/experts/requests/list/expert-request-customer-list.js
-msgid "Create proposal"
 msgstr ""
 
 #: src/providers/routes.js
@@ -1498,8 +1434,6 @@ msgstr ""
 #: src/ansible/python-management/details/PythonManagementActionsHistory.tsx
 #: src/billing/billing-utils.js
 #: src/customer/CustomerList.tsx
-#: src/experts/bids/expert-bids-list.js
-#: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: src/issues/issue-detail.html
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssuesList.tsx
@@ -1564,8 +1498,6 @@ msgid "Creating snapshot schedule"
 msgstr ""
 
 #: src/ansible/application-list.js
-#: src/experts/requests/list/expert-request-customer-list.js
-#: src/experts/requests/list/expert-request-project-list.js
 #: src/offering/offerings-list.js
 msgid "Creation date"
 msgstr ""
@@ -1675,7 +1607,6 @@ msgid "Default value"
 msgstr ""
 
 #: src/cost-planning/cost-plan-items.html
-#: src/experts/bids/details/expert-bid-details.html
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
@@ -1717,7 +1648,6 @@ msgstr ""
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
-#: src/experts/bids/create/expert-bid-create-dialog.html
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
@@ -1789,9 +1719,6 @@ msgstr ""
 #: src/appstore/providers/appstore-providers.html
 #: src/cost-planning/cost-plans-list.js
 #: src/events/EventDetailsButton.tsx
-#: src/experts/requests/create/expert-contract-form.js
-#: src/experts/requests/details/expert-request-summary.html
-#: src/experts/requests/list/expert-request-customer-list.js
 #: src/issues/create/issue-registration.html
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
@@ -1868,10 +1795,6 @@ msgstr ""
 msgid "Do you really want to delete comment?"
 msgstr ""
 
-#: src/experts/bids/expert-bid-utils.js
-msgid "Do you really want to delete this proposal? This action cannot be undone."
-msgstr ""
-
 #: src/navigation/header/docs-link.html
 msgid "Documentation"
 msgstr ""
@@ -1890,10 +1813,6 @@ msgstr ""
 
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 msgid "Done"
-msgstr ""
-
-#: src/experts/requests/details/ExpertContractDetails.tsx
-msgid "Download PDF"
 msgstr ""
 
 #: src/billing/invoice-header.html
@@ -2166,80 +2085,6 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
-#: src/customer/create/CustomerCreatePrompt.tsx
-#: src/experts/extensions/table-extension.js
-#: src/user/list/CustomerPermissions.tsx
-msgid "Expert"
-msgstr ""
-
-#: src/experts/requests/details/expert-request-details-dialog.html
-msgid "Expert contract details"
-msgstr ""
-
-#: src/experts/expert-provider-details.js
-msgid "Expert provider has been registered"
-msgstr ""
-
-#: src/experts/bids/create/expert-bid-create-dialog.html
-msgid "Expert request"
-msgstr ""
-
-#: src/experts/events.ts
-msgid "Expert request \"{request_link}\" has been activated."
-msgstr ""
-
-#: src/experts/events.ts
-msgid "Expert request \"{request_link}\" has been cancelled."
-msgstr ""
-
-#: src/experts/events.ts
-msgid "Expert request \"{request_link}\" has been completed."
-msgstr ""
-
-#: src/experts/requests/create/expert-request-create.js
-msgid "Expert request could not be created"
-msgstr ""
-
-#: src/experts/routes.js
-msgid "Expert request details"
-msgstr ""
-
-#: src/experts/events.ts
-msgid "Expert request events"
-msgstr ""
-
-#: src/experts/requests/actions/expert-request-cancel.js
-msgid "Expert request has been cancelled."
-msgstr ""
-
-#: src/experts/requests/actions/expert-request-complete.js
-msgid "Expert request has been completed."
-msgstr ""
-
-#: src/experts/requests/create/expert-request-create.js
-msgid "Expert request has been created."
-msgstr ""
-
-#: src/experts/extensions/customer-workspace.html
-#: src/experts/extensions/sidebar.js
-#: src/experts/requests/details/expert-request-details.js
-msgid "Expert requests"
-msgstr ""
-
-#: src/experts/requests/details/ExpertContractDetails.tsx
-msgid "Expert team"
-msgstr ""
-
-#: src/customer/api.ts
-#: src/experts/constants.js
-#: src/experts/expert-provider-details.html
-#: src/experts/extensions/sidebar.js
-#: src/experts/extensions/table-extension.js
-#: src/experts/requests/details/expert-request-details.js
-#: src/experts/routes.js
-msgid "Experts"
-msgstr ""
-
 #: src/team/add-team-member.html
 msgid "Expiration time"
 msgstr ""
@@ -2443,10 +2288,6 @@ msgstr ""
 msgid "For"
 msgstr ""
 
-#: src/experts/requests/create/expert-contract-create.js
-msgid "Form has not been filled correctly. Please check your input."
-msgstr ""
-
 #: src/jira/project/jira-project-checkout-summary.html
 msgid "Free"
 msgstr ""
@@ -2537,10 +2378,6 @@ msgstr ""
 
 #: src/ansible/python-management/details/PythonManagementActionHistoryRow.tsx
 msgid "Global request"
-msgstr ""
-
-#: src/intro/expert-manager-intro.js
-msgid "Go to a Team view to manage team members"
 msgstr ""
 
 #: src/navigation/workspace/select-workspace-dialog.html
@@ -2667,7 +2504,6 @@ msgstr ""
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr ""
 
-#: src/experts/expert-provider-details.html
 #: src/form/appstore-field-tos.html
 #: src/freeipa/freeipa-account-create.html
 msgid "I accept the"
@@ -3026,10 +2862,6 @@ msgstr ""
 msgid "Invitations"
 msgstr ""
 
-#: src/intro/expert-manager-intro.js
-msgid "Invite new users."
-msgstr ""
-
 #: src/customer/dashboard/InviteUserAction.ts
 msgid "Invite team member"
 msgstr ""
@@ -3277,10 +3109,6 @@ msgstr ""
 msgid "Last"
 msgstr ""
 
-#: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
-msgid "Last updated"
-msgstr ""
-
 #: src/configs/base-config.js
 msgid "Latvian"
 msgstr ""
@@ -3297,10 +3125,6 @@ msgstr ""
 
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Legal address"
-msgstr ""
-
-#: src/intro/expert-manager-intro.js
-msgid "Let's go"
 msgstr ""
 
 #: src/user/support/UserEditForm.tsx
@@ -3360,10 +3184,6 @@ msgstr ""
 msgid "Link removed"
 msgstr ""
 
-#: src/intro/expert-manager-intro.js
-msgid "List and edit team members."
-msgstr ""
-
 #: src/configs/base-config.js
 msgid "Lithuanian"
 msgstr ""
@@ -3375,10 +3195,6 @@ msgstr ""
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "Loading actions"
-msgstr ""
-
-#: src/experts/bids/create/expert-bid-create-dialog.html
-msgid "Loading team members, please wait."
 msgstr ""
 
 #: src/table/responsive-table.js
@@ -3583,7 +3399,6 @@ msgstr ""
 msgid "Min storage"
 msgstr ""
 
-#: src/experts/bids/create/expert-bid-create-dialog.html
 #: src/form/appstore-field-integer.html
 msgid "Minimal valid value is"
 msgstr ""
@@ -3681,8 +3496,6 @@ msgstr ""
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/experts/requests/create/expert-request-create.js
-#: src/experts/requests/list/expert-request-project-list.js
 #: src/jira/project/JiraProjectSummary.tsx
 #: src/jira/project/jira-project-config.js
 #: src/jira/project/jira-projects-list.js
@@ -3879,11 +3692,6 @@ msgstr ""
 
 #: src/azure/sql/azure-sql-databases-list.js
 msgid "No databases yet."
-msgstr ""
-
-#: src/experts/requests/list/expert-request-customer-list.js
-#: src/experts/requests/list/expert-request-project-list.js
-msgid "No experts found matching filter."
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
@@ -4133,16 +3941,11 @@ msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/customer/popover/customer-popover.html
-#: src/experts/requests/details/expert-request-details-dialog.html
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/project/project-dialog.html
 #: src/providers/details/dialog.html
 #: src/user/user-popover.html
 msgid "OK"
-msgstr ""
-
-#: src/intro/expert-manager-intro.js
-msgid "OK. Let's check expert requests"
 msgstr ""
 
 #: src/appstore/providers/appstore-providers-empty-message.html
@@ -4151,11 +3954,6 @@ msgstr ""
 
 #: src/error/routes.js
 msgid "Object is not found."
-msgstr ""
-
-#: src/experts/requests/create/expert-request-create.js
-#: src/experts/requests/list/expert-request-customer-list.js
-msgid "Objectives"
 msgstr ""
 
 #: src/marketplace/details/OrderSummary.tsx
@@ -4398,9 +4196,6 @@ msgstr ""
 #: src/customer/CustomerList.tsx
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/events/EventDetailsTable.tsx
-#: src/experts/bids/expert-bids-list.js
-#: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
-#: src/experts/requests/list/expert-request-customer-list.js
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/create/issue-create-dialog.html
 #: src/issues/create/issue-quick-create.html
@@ -4447,14 +4242,6 @@ msgstr ""
 msgid "Organization has been created."
 msgstr ""
 
-#: src/experts/requests/billing-type.js
-msgid "Organization is billed on monthly basis."
-msgstr ""
-
-#: src/experts/requests/billing-type.js
-msgid "Organization is billed on project completion."
-msgstr ""
-
 #: src/customer/details/CustomerEditDetails.tsx
 msgid "Organization logo"
 msgstr ""
@@ -4499,7 +4286,6 @@ msgstr ""
 #: src/billing/billing-record-header.js
 #: src/billing/invoice-header.html
 #: src/customer/workspace/customer-workspace.js
-#: src/experts/requests/details/expert-request-details.js
 #: src/marketplace/details/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
@@ -4551,10 +4337,6 @@ msgstr ""
 
 #: src/table-react/TableExportButton.tsx
 msgid "PDF"
-msgstr ""
-
-#: src/experts/bids/details/expert-bid-summary.html
-msgid "PRICE"
 msgstr ""
 
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
@@ -4656,7 +4438,6 @@ msgid "Payment pending"
 msgstr ""
 
 #: src/billing/billing-utils.js
-#: src/experts/requests/list/expert-request-customer-list.js
 #: src/invitations/invitations-list.js
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 msgid "Pending"
@@ -4751,10 +4532,6 @@ msgstr ""
 msgid "Plan name"
 msgstr ""
 
-#: src/experts/requests/create/expert-request-create.js
-msgid "Planned budget"
-msgstr ""
-
 #: src/quotas/QuotaUsageBarChart.tsx
 #: src/quotas/quota-usage-bar-chart.js
 msgid "Planned quota usage: {usage}"
@@ -4770,10 +4547,6 @@ msgstr ""
 
 #: src/ansible/python-management/create/PythonManagementCreateForm.tsx
 msgid "Please add following public key to authorized_keys file on the selected instance."
-msgstr ""
-
-#: src/experts/bids/create/expert-bid-create-dialog.html
-msgid "Please add users or select another team."
 msgstr ""
 
 #: src/ansible/python-management/create/PythonManagementCreateForm.tsx
@@ -4836,10 +4609,6 @@ msgstr ""
 
 #: src/ansible/python-management/form/InstalledLibraryRowForm.tsx
 msgid "Please select a library"
-msgstr ""
-
-#: src/experts/bids/create/expert-bid-create-dialog.html
-msgid "Please select a team"
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.html
@@ -4929,10 +4698,6 @@ msgstr ""
 msgid "Preferred language"
 msgstr ""
 
-#: src/experts/requests/create/expert-contract-create.html
-msgid "Preview contract"
-msgstr ""
-
 #: src/form/appstore-form-wizard.html
 #: src/table-react/TablePagination.tsx
 #: src/table/responsive-table.js
@@ -4942,8 +4707,6 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/billing/invoices-list.js
 #: src/cost-planning/cost-plan-flavors.html
-#: src/experts/bids/create/expert-bid-create-dialog.html
-#: src/experts/bids/expert-bids-list.js
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
@@ -5102,7 +4865,6 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/events/EventDetailsTable.tsx
-#: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/create/issue-create-dialog.html
 #: src/issues/create/issue-quick-create.html
@@ -5219,7 +4981,6 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
 #: src/appstore/appstore-store.js
-#: src/experts/requests/details/expert-request-details.js
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/offering/offering-details.js
@@ -5254,38 +5015,6 @@ msgstr ""
 
 #: src/team/add-team-member.html
 msgid "Projects list"
-msgstr ""
-
-#: src/experts/bids/details/expert-bid-details.html
-msgid "Proposal"
-msgstr ""
-
-#: src/experts/requests/list/expert-request-customer-list.js
-msgid "Proposal could be created only for pending expert request."
-msgstr ""
-
-#: src/experts/bids/expert-bid-utils.js
-msgid "Proposal could not be accepted."
-msgstr ""
-
-#: src/experts/bids/expert-bid-utils.js
-msgid "Proposal could not be cancelled."
-msgstr ""
-
-#: src/experts/bids/details/expert-bid-details.js
-msgid "Proposal could not be fetched."
-msgstr ""
-
-#: src/experts/bids/details/expert-bid-summary.html
-msgid "Proposal description"
-msgstr ""
-
-#: src/experts/bids/create/expert-bid-create-dialog.js
-msgid "Proposal has been created."
-msgstr ""
-
-#: src/experts/requests/details/expert-request-details.html
-msgid "Proposals"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
@@ -5518,7 +5247,6 @@ msgid "Rating"
 msgstr ""
 
 #: src/customer/details/customer-manage.js
-#: src/experts/requests/actions/expert-request-complain.js
 #: src/user/support/actions.ts
 msgid "Reason"
 msgstr ""
@@ -5581,14 +5309,6 @@ msgstr ""
 msgid "Register as a customer of our portal and provider your cloud services through Waldur's Marketplace."
 msgstr ""
 
-#: src/customer/create/CustomerCreatePrompt.tsx
-msgid "Register as a customer of our portal that can also offer own experts to the other customers of Waldur."
-msgstr ""
-
-#: src/experts/expert-provider-details.html
-msgid "Register as an expert provider"
-msgstr ""
-
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
 msgid "Register as service provider"
 msgstr ""
@@ -5607,10 +5327,6 @@ msgstr ""
 
 #: src/appstore/providers/appstore-providers-empty-message.html
 msgid "Register your own cloud account"
-msgstr ""
-
-#: src/experts/expert-provider-details.html
-msgid "Registered"
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
@@ -5772,14 +5488,6 @@ msgstr ""
 
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "Request an approval"
-msgstr ""
-
-#: src/experts/extensions/expert-request-create-button.html
-msgid "Request an expert"
-msgstr ""
-
-#: src/experts/requests/actions/expert-request-complain.js
-msgid "Request complaint"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/RequestCustomFlavorAction.ts
@@ -6021,7 +5729,6 @@ msgid "Resource usage"
 msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
-#: src/experts/requests/details/expert-request-details.js
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -6194,10 +5901,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "SSH public key"
-msgstr ""
-
-#: src/experts/bids/details/expert-bid-summary.html
-msgid "SUBMITTED"
 msgstr ""
 
 #: src/issues/routes.js
@@ -6468,10 +6171,6 @@ msgstr ""
 msgid "Send notification"
 msgstr ""
 
-#: src/intro/expert-manager-intro.js
-msgid "Sending invitation has never been simpler"
-msgstr ""
-
 #: src/paypal/paypal-invoices-list.js
 msgid "Sent"
 msgstr ""
@@ -6642,10 +6341,6 @@ msgstr ""
 msgid "Show events"
 msgstr ""
 
-#: src/intro/expert-manager-intro.js
-msgid "Show me invitations"
-msgstr ""
-
 #: src/resource/UserPassword.tsx
 msgid "Show password"
 msgstr ""
@@ -6814,9 +6509,6 @@ msgstr ""
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
-#: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
-#: src/experts/requests/list/expert-request-customer-list.js
-#: src/experts/requests/list/expert-request-project-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/orders/Order.tsx
@@ -6927,10 +6619,6 @@ msgstr ""
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/resource/actions/dialog/action-dialog.html
 msgid "Submit"
-msgstr ""
-
-#: src/experts/requests/actions/expert-request-complain.js
-msgid "Submit complaint"
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceUsageSubmitButton.tsx
@@ -7066,15 +6754,9 @@ msgstr ""
 
 #: src/customer/routes.js
 #: src/customer/workspace/customer-workspace.js
-#: src/experts/bids/create/expert-bid-create-dialog.html
-#: src/experts/bids/expert-bids-list.js
 #: src/project/project-workspace.js
 #: src/project/routes.js
 msgid "Team"
-msgstr ""
-
-#: src/experts/bids/create/expert-bid-create-dialog.html
-msgid "Team does not have members yet."
 msgstr ""
 
 #: src/customer/dashboard/api.ts
@@ -7169,7 +6851,6 @@ msgstr ""
 msgid "Terminating"
 msgstr ""
 
-#: src/experts/expert-provider-details.html
 #: src/form/appstore-field-tos.html
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
@@ -7189,10 +6870,6 @@ msgstr ""
 
 #: src/routes/about.js
 msgid "Terms of service"
-msgstr ""
-
-#: src/intro/expert-manager-intro.js
-msgid "Thanks"
 msgstr ""
 
 #: src/user/keys/KeyCreateForm.tsx
@@ -7262,11 +6939,6 @@ msgstr ""
 msgid "There are no events for this resource."
 msgstr ""
 
-#: src/experts/requests/list/expert-request-customer-list.js
-#: src/experts/requests/list/expert-request-project-list.js
-msgid "There are no experts yet."
-msgstr ""
-
 #: src/form/appstore-field-list.js
 msgid "There are no items yet."
 msgstr ""
@@ -7289,10 +6961,6 @@ msgstr ""
 
 #: src/providers/details/provider-projects.html
 msgid "There are no projects yet."
-msgstr ""
-
-#: src/experts/bids/expert-bids-list.js
-msgid "There are no proposals yet."
 msgstr ""
 
 #: src/cost-planning/cost-plan-optimizer.html
@@ -7361,14 +7029,9 @@ msgstr ""
 msgid "This field is required."
 msgstr ""
 
-#: src/experts/requests/create/expert-request-create.js
-msgid "This is an objective."
-msgstr ""
-
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/experts/requests/create/expert-request-create.js
 #: src/jira/project/jira-project-config.js
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/appstore-offering.js
@@ -7379,10 +7042,6 @@ msgstr ""
 #: src/slurm/AllocationForm.tsx
 #: src/slurm/slurm-allocation-config.js
 msgid "This name will be visible in accounting data."
-msgstr ""
-
-#: src/experts/extensions/workspace-selector.html
-msgid "This organization is an expert provider."
 msgstr ""
 
 #: src/resource/actions/dialog/action-field-json.html
@@ -7503,15 +7162,11 @@ msgstr ""
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
-#: src/experts/requests/details/expert-request-details.html
 #: src/user/user-popover.html
 msgid "Try again"
 msgstr ""
 
 #: src/billing/PriceEstimateDialog.tsx
-#: src/experts/requests/details/ExpertRequestGeneralInfo.tsx
-#: src/experts/requests/list/expert-request-customer-list.js
-#: src/experts/requests/list/expert-request-project-list.js
 #: src/jira/project/jira-project-config.js
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/offerings/create/ManagementStep.tsx
@@ -7566,20 +7221,12 @@ msgstr ""
 msgid "Unable to authenticate using Mobile ID."
 msgstr ""
 
-#: src/experts/requests/actions/expert-request-cancel.js
-msgid "Unable to cancel expert request."
-msgstr ""
-
 #: src/invitations/actions/cancel.js
 msgid "Unable to cancel invitation."
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/change-package-service.js
 msgid "Unable to change tenant package."
-msgstr ""
-
-#: src/experts/requests/actions/expert-request-complete.js
-msgid "Unable to complete expert request."
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.js
@@ -7605,10 +7252,6 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
-msgstr ""
-
-#: src/experts/bids/create/expert-bid-create-dialog.js
-msgid "Unable to create proposal."
 msgstr ""
 
 #: src/providers/effects.tsx
@@ -7749,10 +7392,6 @@ msgstr ""
 
 #: src/billing/events/invoice-events-dialog.html
 msgid "Unable to load events for this resource."
-msgstr ""
-
-#: src/experts/requests/details/expert-request-details.html
-msgid "Unable to load expert request."
 msgstr ""
 
 #: src/core/DownloadLink/effects.tsx
@@ -8209,10 +7848,6 @@ msgstr ""
 msgid "User {affected_user_name} has been deleted."
 msgstr ""
 
-#: src/experts/events.ts
-msgid "User {caller_link} has created request for experts under {customer_link} / {project_link}."
-msgstr ""
-
 #: src/auth/events.ts
 msgid "User {user_link} authenticated successfully with Facebook."
 msgstr ""
@@ -8235,10 +7870,6 @@ msgstr ""
 
 #: src/auth/events.ts
 msgid "User {user_link} authenticated successfully with username and password."
-msgstr ""
-
-#: src/experts/events.ts
-msgid "User {user_link} has created bid for request {request_link} under {customer_link} / {project_link}."
 msgstr ""
 
 #: src/team/events.ts
@@ -8431,10 +8062,6 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: src/experts/bids/expert-bids-list.js
-msgid "View details"
-msgstr ""
-
 #: src/ansible/python-management/details/PythonManagementActionsHistory.tsx
 msgid "Virtual environment"
 msgstr ""
@@ -8557,10 +8184,6 @@ msgstr ""
 msgid "Was the correct cloud broker public key UUID specified in the properties?"
 msgstr ""
 
-#: src/experts/requests/actions/expert-request-complain.js
-msgid "We are sorry you had a bad experience. Tell us what happend?"
-msgstr ""
-
 #: src/customer/create/customer-create-config.js
 #: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Website URL"
@@ -8641,7 +8264,6 @@ msgstr ""
 msgid "You cannot remove shared provider."
 msgstr ""
 
-#: src/experts/bids/create/expert-bid-create-dialog.html
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.js
 #: src/issues/create/issue-registration.js
@@ -8766,14 +8388,6 @@ msgstr ""
 msgid "You have not selected any SSH key yet."
 msgstr ""
 
-#: src/experts/bids/details/expert-bid-details.html
-msgid "You have not submitted proposal yet."
-msgstr ""
-
-#: src/experts/requests/list/expert-request-customer-list.js
-msgid "You have placed a proposal already."
-msgstr ""
-
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "You have the right to purchase service without additional approval."
 msgstr ""
@@ -8882,10 +8496,6 @@ msgstr ""
 msgid "events"
 msgstr ""
 
-#: src/experts/requests/details/expert-request-details.js
-msgid "expert"
-msgstr ""
-
 #: src/issues/list/issues-short-list.html
 msgid "from"
 msgstr ""
@@ -8929,10 +8539,6 @@ msgstr ""
 msgid "organizations"
 msgstr ""
 
-#: src/experts/requests/details/expert-request-details.js
-msgid "owner"
-msgstr ""
-
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "plans"
@@ -8960,11 +8566,6 @@ msgstr ""
 msgid "resources"
 msgstr ""
 
-#: src/experts/requests/details/expert-request-details.js
-msgid "staff"
-msgstr ""
-
-#: src/experts/requests/details/expert-request-details.js
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "support"
 msgstr ""

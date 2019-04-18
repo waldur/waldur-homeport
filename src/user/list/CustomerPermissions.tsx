@@ -5,7 +5,6 @@ import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { filterByUser } from '@waldur/workspace/selectors';
 
 import CustomerCreateButton from './CustomerCreateButton';
-import CustomerExpertField from './CustomerExpertField';
 import CustomerRole from './CustomerRole';
 
 const TableComponent = props => {
@@ -21,12 +20,6 @@ const TableComponent = props => {
           title: translate('Owner'),
           render: CustomerRole,
           className: 'text-center col-md-1',
-        },
-        {
-          title: translate('Expert'),
-          render: CustomerExpertField,
-          className: 'text-center col-md-1',
-          feature: 'experts',
         },
       ])}
       verboseName={translate('organizations')}
