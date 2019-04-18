@@ -280,6 +280,19 @@ export default function routes($stateProvider) {
       }
     })
 
+    .state('marketplace-support-resources', {
+      url: 'marketplace-support-resources/',
+      template: '<marketplace-support-resources-list></marketplace-support-resources-list>',
+      parent: 'support',
+      data: {
+        feature: 'marketplace',
+        pageTitle: gettext('Resources'),
+      },
+      resolve: {
+        permission: checkPermission,
+      }
+    })
+
     .state('marketplace-support-order-items', {
       url: 'order-items/',
       template: '<marketplace-support-order-items-list></marketplace-support-order-items-list>',
