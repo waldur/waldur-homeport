@@ -1,6 +1,7 @@
 import marketplaceCustomerResourcesList from './list/CustomerResourcesContainer';
 import marketplaceProjectResourcesList from './list/ProjectResourcesContainer';
 import marketplacePublicResourcesList from './list/PublicResourcesContainer';
+import marketplaceSupportResourcesList from './list/SupportResourcesContainer';
 import marketplaceResourceShowUsageButton from './usage/ResourceShowUsageButton';
 import marketplaceResourceShowUsageDialog from './usage/ResourceShowUsageDialog';
 import marketplaceResourceCreateUsageDialog from './usage/ResourceCreateUsageDialog';
@@ -14,6 +15,7 @@ export default module => {
   module.component('marketplaceCustomerResourcesList', marketplaceCustomerResourcesList);
   module.component('marketplaceProjectResourcesList', marketplaceProjectResourcesList);
   module.component('marketplacePublicResourcesList', marketplacePublicResourcesList);
+  module.component('marketplaceSupportResourcesList', marketplaceSupportResourcesList);
   module.component('marketplaceResourceShowUsageButton', marketplaceResourceShowUsageButton);
   module.component('marketplaceResourceShowUsageDialog', marketplaceResourceShowUsageDialog);
   module.component('marketplaceResourceCreateUsageDialog', marketplaceResourceCreateUsageDialog);
