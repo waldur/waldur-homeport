@@ -9,10 +9,8 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as constants from './constants';
 import { CustomerCreatePrompt } from './CustomerCreatePrompt';
-import { expertIsVisible } from './selectors';
 
 const mapStateToProps = state => ({
-  renderExpert: expertIsVisible(state),
   renderServiceProvider: renderServiceProvider(state),
 });
 

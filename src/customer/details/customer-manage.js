@@ -63,7 +63,6 @@ class CustomerManageController {
         this.deleteNeedsSupport = deleteAction.needsSupport;
         this.deleteNotification = deleteAction.notification;
         this.canUpdateCustomerPolicies = user.is_staff;
-        this.canRegisterExpertProvider = user.is_staff;
         this.canUpdateQuota = user.is_staff;
       });
     });

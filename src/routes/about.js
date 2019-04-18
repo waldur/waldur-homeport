@@ -26,16 +26,6 @@ export default function aboutRoutes($stateProvider) {
       }
     })
 
-    .state('tos.experts', {
-      url: 'experts/',
-      templateUrl: 'views/tos/experts.html',
-      data: {
-        bodyClass: 'old',
-        pageTitle: gettext('Terms of service'),
-        feature: 'experts'
-      }
-    })
-
     .state('about', {
       url: '/about/',
       abstract: true,

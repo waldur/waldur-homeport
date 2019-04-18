@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ExpertRequestConfiguration renders HTML field as is 1`] = `"<div class=\\"m-b-xs\\"><dt>Milestones</dt><dd><div><ul><li>Deploy virtual machine</li></ul></div></dd></div>"`;
-
-exports[`ExpertRequestConfiguration renders placeholder if value if missing 1`] = `"<div class=\\"m-b-xs\\"><dt>Milestones</dt><dd>N/A</dd></div>"`;

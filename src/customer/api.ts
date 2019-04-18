@@ -38,11 +38,6 @@ const getQuotaRows = props => {
       visible: isFeatureVisible('slurm'),
     },
     {
-      label: translate('Experts'),
-      value: counters.nc_expert_count,
-      visible: isFeatureVisible('experts'),
-    },
-    {
       label: translate('Requests'),
       value: counters.nc_offering_count,
       visible: isFeatureVisible('offering'),

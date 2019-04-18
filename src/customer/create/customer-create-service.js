@@ -5,8 +5,7 @@ import { sendForm } from '@waldur/core/api';
 
 export default class CustomerCreateService {
   // @ngInject
-  constructor(expertsService, customerPermissionsService, usersService, providersService, ENV) {
-    this.expertsService = expertsService;
+  constructor(customerPermissionsService, usersService, providersService, ENV) {
     this.customerPermissionsService = customerPermissionsService;
     this.usersService = usersService;
     this.providersService = providersService;
@@ -23,10 +22,6 @@ export default class CustomerCreateService {
     return sendForm('POST', `${this.ENV.apiEndpoint}api/customers/`, {...customer})
       .then(response => response.data)
       .then(customer => {
-        if (model.agree_with_policy || model.role === constants.ROLES.expert) {
-          return this.expertsService.register(customer).then(() => customer);
-        }
-
         if (model.role === constants.ROLES.provider) {
           return this.providersService.register(customer).then(() => customer);
         }
