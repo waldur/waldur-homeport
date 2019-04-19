@@ -4,6 +4,8 @@ import marketplaceCompare from './compare/ComparisonContainer';
 import comparisonIndicator from './compare/ComparisonIndicator';
 import marketplaceOffering from './details/DetailsPage';
 import marketplaceOfferingPlanDescription from './details/plan/PlanDescription';
+import marketplacePlanDetailsButton from './details/plan/PlanDetailsButton';
+import marketplacePlanDetailsDialog from './details/plan/PlanDetailsDialog';
 import marketplaceCategory from './category/CategoryPage';
 import marketplaceAttributeFilterListDialog from './category/filters/AttributeFilterListDialog';
 import registerExtensionPoint from './extension-point';
@@ -21,6 +23,8 @@ export default module => {
   module.component('comparisonIndicator', comparisonIndicator);
   module.component('marketplaceOffering', marketplaceOffering);
   module.component('marketplaceOfferingPlanDescription', marketplaceOfferingPlanDescription);
+  module.component('marketplacePlanDetailsButton', marketplacePlanDetailsButton);
+  module.component('marketplacePlanDetailsDialog', marketplacePlanDetailsDialog);
   module.component('marketplaceCategory', marketplaceCategory);
   module.component('marketplaceAttributeFilterListDialog', marketplaceAttributeFilterListDialog);
   module.service('providersService', providersService);

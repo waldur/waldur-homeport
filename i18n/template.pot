@@ -858,6 +858,7 @@ msgstr ""
 msgid "Billing enabled"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 msgid "Billing period"
 msgstr ""
@@ -4521,15 +4522,26 @@ msgid "Plan components"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDescription.tsx
+#: src/marketplace/details/plan/PlanDetailsDialog.tsx
 msgid "Plan description"
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsButton.tsx
+#: src/marketplace/details/plan/PlanDetailsDialog.tsx
+msgid "Plan details"
 msgstr ""
 
 #: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
 msgid "Plan does not have limit"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Plan name"
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsDialog.tsx
+msgid "Plan price"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
@@ -5657,6 +5669,10 @@ msgstr ""
 
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "Resource does not have any plan."
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsDialog.tsx
+msgid "Resource does not have plan."
 msgstr ""
 
 #: src/customer/workspace/CustomerEventsFilter.tsx
@@ -7436,6 +7452,10 @@ msgstr ""
 
 #: src/customer/CustomerExpandableRow.tsx
 msgid "Unable to load organization resources."
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsDialog.tsx
+msgid "Unable to load plan details."
 msgstr ""
 
 #: src/project/ProjectExpandableRowContainer.tsx
