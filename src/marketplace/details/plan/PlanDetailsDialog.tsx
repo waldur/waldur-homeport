@@ -53,7 +53,7 @@ const PlanDetailsDialog: React.SFC<PlanDetailsDialogProps> = props => (
               <p><strong>{translate('Billing period')}</strong>: <BillingPeriod unit={data.plan.unit}/></p>
             </>
           )}
-          <PureDetailsTable {...data} formGroupClassName="" columnClassName=""/>
+          <PureDetailsTable {...data} formGroupClassName="" columnClassName="" viewMode={true}/>
         </>);
       }}
     </Query>
