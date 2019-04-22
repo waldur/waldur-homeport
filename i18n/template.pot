@@ -4109,6 +4109,10 @@ msgstr ""
 msgid "Open map"
 msgstr ""
 
+#: src/dashboard/SupportPortalAction.ts
+msgid "Open support portal"
+msgstr ""
+
 #: src/analytics/ImagesList.tsx
 msgid "OpenStack Images"
 msgstr ""

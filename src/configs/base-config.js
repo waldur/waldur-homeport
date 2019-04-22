@@ -226,6 +226,9 @@ const ENV = {
   // supportEmail: 'support@example.com',
   // supportPhone: '+1234567890'
 
+  // Support portal URL is rendered as a shortcut on dashboard
+  // supportPortalURL: 'http://example.com/support/',
+
   // Renders label and logo at the login page
   // poweredByLogo: 'images/waldur/logo-120x120.png'
 

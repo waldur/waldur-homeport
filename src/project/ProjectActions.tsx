@@ -3,6 +3,7 @@ import * as React from 'react';
 import { $state } from '@waldur/core/services';
 import { ActionList } from '@waldur/dashboard/ActionList';
 import { getIssueAction } from '@waldur/dashboard/ReportIssueAction';
+import { getSupportPortalAction } from '@waldur/dashboard/SupportPortalAction';
 import { translate } from '@waldur/i18n';
 import { $uibModal } from '@waldur/modal/services';
 import { Project, User } from '@waldur/workspace/types';
@@ -43,6 +44,7 @@ export const ProjectActions = (props: ProjectActionsProps) => {
     getDetailsAction(props.project),
     getTeamAction(props),
     getIssueAction({issue: {project: props.project}, state: 'project.issues'}),
+    getSupportPortalAction(),
   ].filter(action => action !== undefined);
   return <ActionList actions={actions}/>;
 };
