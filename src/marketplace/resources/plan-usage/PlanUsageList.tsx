@@ -25,12 +25,19 @@ export const TableComponent = props => {
       render: ({ row }: PlanUsageRowProps) => row.plan_name,
     },
     {
-      title: translate('Limit'),
-      render: ({ row }: PlanUsageRowProps) => row.limit || 'N/A',
+      title: translate('Active count'),
+      render: ({ row }: PlanUsageRowProps) => row.usage,
+      orderField: 'usage',
     },
     {
-      title: translate('Active plan count'),
-      render: ({ row }: PlanUsageRowProps) => row.usage,
+      title: translate('Limit'),
+      render: ({ row }: PlanUsageRowProps) => row.limit || 'N/A',
+      orderField: 'limit',
+    },
+    {
+      title: translate('Remaining'),
+      render: ({ row }: PlanUsageRowProps) => row.remaining || 'N/A',
+      orderField: 'remaining',
     },
     {
       title: translate('Actions'),
@@ -45,6 +52,7 @@ export const TableComponent = props => {
       verboseName={translate('plans')}
       showPageSizeSelector={true}
       enableExport={true}
+      initialSorting={{field: 'usage', mode: 'desc'}}
     />
   );
 };
