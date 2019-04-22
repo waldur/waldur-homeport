@@ -4517,6 +4517,11 @@ msgstr ""
 msgid "Plan capacity"
 msgstr ""
 
+#: src/marketplace/details/OfferingConfigurator.tsx
+#: src/marketplace/resources/change-plan/utils.tsx
+msgid "Plan capacity is full."
+msgstr ""
+
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Plan component name"
 msgstr ""
@@ -5657,6 +5662,10 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 msgid "Resource UUID"
+msgstr ""
+
+#: src/marketplace/resources/change-plan/utils.tsx
+msgid "Resource already has this plan."
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx

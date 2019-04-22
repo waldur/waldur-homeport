@@ -39,6 +39,7 @@ export interface Plan {
   unit: BillingPeriod;
   quotas: {[key: string]: number};
   prices: {[key: string]: number};
+  is_active: boolean;
 }
 
 export interface OptionField {
