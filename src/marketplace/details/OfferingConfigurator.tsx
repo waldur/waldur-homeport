@@ -38,6 +38,9 @@ export const validate = (_, props) => {
   if (!props.project) {
     errors.project = translate('This field is required');
   }
+  if (props.values.plan && !props.values.plan.is_active) {
+    errors.plan = translate('Plan capacity is full.');
+  }
   return errors;
 };
 
