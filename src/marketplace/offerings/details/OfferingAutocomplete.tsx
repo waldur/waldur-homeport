@@ -5,8 +5,13 @@ import { translate } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { AutocompleteField } from '@waldur/marketplace/landing/AutocompleteField';
 
-export const OfferingAutocomplete = (props: {offeringFilter?: object}) => (
-  <div className="form-group col-sm-3">
+interface Props {
+  offeringFilter?: object;
+  className?: string;
+}
+
+export const OfferingAutocomplete: React.SFC<Props> = props => (
+  <div className={`form-group ${props.className}`}>
     <label className="control-label">
       {translate('Offering')}
     </label>
@@ -26,3 +31,7 @@ export const OfferingAutocomplete = (props: {offeringFilter?: object}) => (
     />
   </div>
 );
+
+OfferingAutocomplete.defaultProps = {
+  className: 'col-sm-3',
+};

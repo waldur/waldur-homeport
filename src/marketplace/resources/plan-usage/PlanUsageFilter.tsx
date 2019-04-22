@@ -7,8 +7,8 @@ import { ProviderAutocomplete } from '@waldur/marketplace/orders/ProviderAutocom
 
 const PurePlanUsageFilter = () => (
   <Row>
-    <ProviderAutocomplete/>
-    <OfferingAutocomplete/>
+    <ProviderAutocomplete className="col-sm-6"/>
+    <OfferingAutocomplete className="col-sm-6"/>
   </Row>
 );
 

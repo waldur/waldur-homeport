@@ -39,14 +39,14 @@ export const optionRenderer = (config: RendererConfig) => option => {
   const img = renderIcon(src, imgStyle);
   if (tooltipKey) {
     return (
-      <div>
+      <div style={{overflow: 'hidden'}}>
         <Tooltip label={option[tooltipKey]} id="iconTooltip" children={img}/>
         {label}
       </div>
     );
   }
   return (
-    <div>
+    <div style={{overflow: 'hidden'}}>
       {img}
       {label}
     </div>
