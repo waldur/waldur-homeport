@@ -16,12 +16,19 @@ export const TableComponent = props => {
       render: ({ row }) => row.plan_name,
     },
     {
-      title: translate('Limit'),
-      render: ({ row }) => row.limit || 'N/A',
+      title: translate('Active count'),
+      render: ({ row }) => row.usage,
+      orderField: 'usage',
     },
     {
-      title: translate('Active plan count'),
-      render: ({ row }) => row.usage,
+      title: translate('Limit'),
+      render: ({ row }) => row.limit || 'N/A',
+      orderField: 'limit',
+    },
+    {
+      title: translate('Remaining'),
+      render: ({ row }) => row.remaining || 'N/A',
+      orderField: 'remaining',
     },
     {
       title: translate('Actions'),
@@ -36,6 +43,7 @@ export const TableComponent = props => {
       verboseName={translate('offerings')}
       showPageSizeSelector={true}
       enableExport={true}
+      initialSorting={{field: 'usage', mode: 'desc'}}
     />
   );
 };
