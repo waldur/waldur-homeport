@@ -14,5 +14,5 @@ export const CustomerActions = (props: CustomerActionsProps) => (
     getInviteAction(props),
     getIssueAction({issue: {customer: props.customer}, state: 'organization.issues'}),
     getSupportPortalAction(),
-  ].filter(action => action !== null)}/>
+  ].filter(action => action !== undefined)}/>
 );

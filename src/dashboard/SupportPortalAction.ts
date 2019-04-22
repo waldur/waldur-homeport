@@ -6,4 +6,4 @@ export const getSupportPortalAction = () => ENV.supportPortalURL ? ({
   onClick() {
     window.open(ENV.supportPortalURL);
   },
-}) : null;
+}) : undefined;
