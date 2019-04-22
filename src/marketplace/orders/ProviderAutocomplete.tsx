@@ -5,8 +5,12 @@ import { Field } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { providerAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
-export const ProviderAutocomplete = () => (
-  <div className="form-group col-sm-3">
+interface Props {
+  className?: string;
+}
+
+export const ProviderAutocomplete: React.SFC<Props> = props => (
+  <div className={`form-group ${props.className}`}>
     <label className="control-label">
       {translate('Service provider')}
     </label>
@@ -25,3 +29,7 @@ export const ProviderAutocomplete = () => (
     />
   </div>
 );
+
+ProviderAutocomplete.defaultProps = {
+  className: 'col-sm-3',
+};
