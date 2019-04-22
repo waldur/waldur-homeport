@@ -7,7 +7,7 @@ import { checkPermissions } from './utils';
 
 export const getInviteAction = (props: CustomerActionsProps) => {
   if (!checkPermissions(props)) {
-    return null;
+    return undefined;
   }
   return {
     title: translate('Invite team member'),

@@ -148,7 +148,11 @@ const ENV = {
   defaultListCacheTime: 60 * 10,
   optionsCacheTime: 10 * 1000,
   disabledFeatures: [],
-  enabledFeatures: ['resources.legacy'],
+  enabledFeatures: [
+    'resources.legacy',
+    'marketplace.my-offerings',
+    'user.ssh-keys',
+  ],
   featuresVisible: false,
 
   requestTimeout: 1000 * 20,
@@ -221,6 +225,9 @@ const ENV = {
   // Support email and phone is rendered at the footer
   // supportEmail: 'support@example.com',
   // supportPhone: '+1234567890'
+
+  // Support portal URL is rendered as a shortcut on dashboard
+  // supportPortalURL: 'http://example.com/support/',
 
   // Renders label and logo at the login page
   // poweredByLogo: 'images/waldur/logo-120x120.png'

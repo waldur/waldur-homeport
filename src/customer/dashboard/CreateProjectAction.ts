@@ -6,7 +6,7 @@ import { checkPermissions } from './utils';
 
 export const getProjectAction = (props: CustomerActionsProps) => {
   if (!checkPermissions(props)) {
-    return null;
+    return undefined;
   }
   return {
     title: translate('Add project'),

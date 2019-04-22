@@ -1,5 +1,4 @@
 // @ngInject
-export default function configureIntroJS(ExpertManagerIntro, BaseIntro) {
-  ExpertManagerIntro.setup();
+export default function configureIntroJS(BaseIntro) {
   BaseIntro.setup();
 }

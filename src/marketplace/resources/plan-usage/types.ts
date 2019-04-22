@@ -10,6 +10,7 @@ export interface PlanUsageRow {
 
   limit: number;
   usage: number;
+  remaining: number;
 }
 
 export interface PlanUsageRowProps {

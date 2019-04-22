@@ -67,7 +67,7 @@ const TotalRow = props => (
   </tr>
 );
 
-const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDetailsTableProps) => {
+export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDetailsTableProps) => {
   if (props.components.length === 0) {
     return null;
   }

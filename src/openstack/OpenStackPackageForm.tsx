@@ -33,7 +33,7 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
     return (
       <form className="form-horizontal">
         <FormContainer
-          submitting={false}
+          submitting={props.submitting}
           labelClass="col-sm-3"
           controlClass="col-sm-9">
           <ProjectField/>

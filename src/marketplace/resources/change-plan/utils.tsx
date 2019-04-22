@@ -43,7 +43,10 @@ const getChoices = (offering: Offering, resource: OrderItemResponse): SelectDial
     name: plan.name,
     ...plan.quotas,
     price: defaultCurrency(plan.unit_price),
-    disabled: plan.url === resource.plan,
+    disabled: plan.url === resource.plan || !plan.is_active,
+    disabledReason:
+      !plan.is_active ? translate('Plan capacity is full.') :
+      plan.url === resource.plan ? translate('Resource already has this plan.') : undefined,
   }));
 
 export async function loadData({ resource_uuid }): Promise<FetchedData> {

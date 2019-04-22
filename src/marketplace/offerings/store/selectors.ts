@@ -1,7 +1,8 @@
 import { formValueSelector } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { OfferingComponent } from '@waldur/marketplace/types';
-import { getUser } from '@waldur/workspace/selectors';
+import { isOwnerOrStaff, getCustomer } from '@waldur/workspace/selectors';
 
 import { FORM_ID, DRAFT } from './constants';
 import { PlanFormData } from './types';
@@ -62,17 +63,20 @@ export const getPlanPrice = (state, planPath) => {
   return 0;
 };
 
-export const isOfferingManagementDisabled = state => {
-  const user = getUser(state);
-  if (user.is_staff) {
-    return false;
+export const isOfferingManagementDisabled = createSelector(
+  isOwnerOrStaff,
+  getOffering,
+  getCustomer,
+  (ownerOrStaff, offeringState, customer) => {
+    if (!customer.is_service_provider) {
+      return true;
+    }
+    if (!ownerOrStaff) {
+      return true;
+    }
+    const offering = offeringState.offering;
+    if (offering && offering.state && offering.state !== DRAFT) {
+      return true;
+    }
   }
-  if (user.is_support) {
-    return true;
-  }
-  const offering = getOffering(state).offering;
-  if (offering && offering.state !== DRAFT) {
-    return true;
-  }
-  return false;
-};
+);

@@ -114,7 +114,7 @@ const exportFields = [
   'State',
 ];
 
-const TableOptions = {
+export const TableOptions = {
   table: 'PublicResourcesList',
   fetchData: createFetcher('marketplace-resources'),
   mapPropsToFilter,

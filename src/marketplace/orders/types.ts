@@ -44,6 +44,7 @@ export interface OrderItemResponse {
   category_uuid?: string;
   created: string;
   error_message?: string;
+  limits: Record<string, number>;
 }
 
 export interface OrderItemDetailsType extends OrderItemResponse {

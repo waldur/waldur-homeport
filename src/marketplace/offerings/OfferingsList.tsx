@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';
 import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 import { Offering } from '../types';
 import { OfferingActions } from './actions/OfferingActions';
 import { OfferingCreateButton } from './actions/OfferingCreateButton';
 import { OfferingDetailsLink } from './details/OfferingDetailsLink';
-import { isOfferingManagementDisabled } from './store/selectors';
 
 export const TableComponent = props => {
   const { translate } = props;
@@ -82,10 +82,16 @@ export const TableOptions = {
   ],
 };
 
+const showOfferingCreateButton = createSelector(
+  isOwnerOrStaff,
+  getCustomer,
+  (ownerOrStaff, customer) => customer.is_service_provider && ownerOrStaff,
+);
+
 const mapStateToProps = state => ({
   customer: getCustomer(state),
-  actionsDisabled: isOfferingManagementDisabled(state),
-  showOfferingCreateButton: getCustomer(state).is_service_provider,
+  actionsDisabled: !isOwnerOrStaff(state),
+  showOfferingCreateButton: showOfferingCreateButton(state),
 });
 
 const enhance = compose(
