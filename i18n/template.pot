@@ -176,7 +176,7 @@ msgstr ""
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-msgid "Active plan count"
+msgid "Active count"
 msgstr ""
 
 #: src/user/support/UserActivateButton.tsx
@@ -5390,6 +5390,11 @@ msgstr ""
 
 #: src/issues/IssueReload.tsx
 msgid "Reload issue data"
+msgstr ""
+
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+msgid "Remaining"
 msgstr ""
 
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
