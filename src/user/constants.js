@@ -12,7 +12,8 @@ export const PRIVATE_USER_TABS = [
   {
     label: gettext('SSH Keys'),
     icon: 'fa-key',
-    link: 'profile.keys'
+    link: 'profile.keys',
+    feature: 'user.ssh-keys',
   },
   {
     label: gettext('Notifications'),
@@ -42,6 +43,7 @@ export const PUBLIC_USER_TABS = [
   {
     label: gettext('SSH Keys'),
     icon: 'fa-key',
-    link: 'users.keys({uuid: $ctrl.context.user.uuid})'
+    link: 'users.keys({uuid: $ctrl.context.user.uuid})',
+    feature: 'user.ssh-keys',
   }
 ];

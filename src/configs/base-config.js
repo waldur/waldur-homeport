@@ -151,6 +151,7 @@ const ENV = {
   enabledFeatures: [
     'resources.legacy',
     'marketplace.my-offerings',
+    'user.ssh-keys',
   ],
   featuresVisible: false,
 
