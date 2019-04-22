@@ -29,6 +29,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
                 label: gettext('My offerings'),
                 icon: 'fa-file',
                 link: 'marketplace-my-offerings({uuid: $ctrl.context.customer.uuid})',
+                feature: 'marketplace.my-offerings',
               },
               {
                 key: 'marketplace',
@@ -74,6 +75,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
                 label: gettext('My offerings'),
                 icon: 'fa-file',
                 link: 'marketplace-my-offerings({uuid: $ctrl.context.customer.uuid})',
+                feature: 'marketplace.my-offerings',
               },
               {
                 icon: 'fa-file',
