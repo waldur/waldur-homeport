@@ -23,4 +23,5 @@ export interface Resource extends ResourceReference {
   scope?: string;
   created?: string;
   category_title?: string;
+  project_name?: string;
 }

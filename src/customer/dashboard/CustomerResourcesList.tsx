@@ -8,8 +8,8 @@ import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNa
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { getProject } from '@waldur/workspace/selectors';
-import { Project } from '@waldur/workspace/types';
+import { getCustomer } from '@waldur/workspace/selectors';
+import { Customer } from '@waldur/workspace/types';
 
 interface FieldProps {
   row: Resource;
@@ -20,6 +20,10 @@ export const TableComponent = props => {
     {
       title: translate('Name'),
       render: ResourceNameField,
+    },
+    {
+      title: translate('Project'),
+      render: ({ row }: FieldProps) => row.project_name,
     },
     {
       title: translate('Category'),
@@ -49,19 +53,19 @@ export const TableComponent = props => {
 };
 
 const TableOptions = {
-  table: 'ProjectResourcesList',
+  table: 'CustomerResourcesList',
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter: props => props.project ? ({
-    project_uuid: props.project.uuid,
+  mapPropsToFilter: props => props.customer ? ({
+    customer_uuid: props.customer.uuid,
   }) : {},
 };
 
 const mapStateToProps = state => ({
-  project: getProject(state),
+  customer: getCustomer(state),
 });
 
 interface StateProps {
-  project: Project;
+  customer: Customer;
 }
 
 const enhance = compose(
@@ -69,4 +73,4 @@ const enhance = compose(
   connectTable(TableOptions),
 );
 
-export const ProjectResourcesList = enhance(TableComponent);
+export const CustomerResourcesList = enhance(TableComponent);
