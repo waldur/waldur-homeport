@@ -24,27 +24,14 @@
     padding: 18px;
     padding-top: 0px;
     text-align: center;
-    min-height: 90px; //to make sure all cards have the same height regardless content.
   }
 
   .offering-title {
     margin-bottom: 8px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
-  }
-
-  .offering-description {
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 12px;
-
-    &>a {
-      color: #999;
-    }
-  }
-
-  .offering-installs {
-    font-size: 11px;
-    margin-left: 5px;
+    height: 4em;
+    overflow: hidden;
+    line-height: 1.4em;
   }
 }
