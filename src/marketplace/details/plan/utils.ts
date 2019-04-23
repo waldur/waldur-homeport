@@ -64,7 +64,7 @@ export const combinePrices = (plan, limits, offering) => {
         }
         const type = item.type;
         const billing_type = item.billing_type;
-        const price = plan.prices[type];
+        const price = plan.prices[type] || 0;
         const subTotal = price * amount;
         const prices = multipliers.map(mult => mult * subTotal);
         return {
