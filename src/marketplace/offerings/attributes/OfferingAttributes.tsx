@@ -3,6 +3,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { FieldError } from '@waldur/form-react';
 import { Section } from '@waldur/marketplace/types';
 
 import { configAttrField } from './utils';
@@ -56,6 +57,13 @@ export const OfferingAttributes: React.SFC<OfferingAttributesProps> = props => (
                   component="input"
                   className="form-control"
                   {...attr}
+                />
+                <Field
+                  name={`attributes.${attribute.key}`}
+                  {...attr}
+                  component={fieldProps => (
+                    <FieldError error={fieldProps.meta.error}/>
+                  )}
                 />
               </Col>
             </div>
