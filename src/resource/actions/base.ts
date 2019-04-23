@@ -50,12 +50,13 @@ export function createDefaultEditAction(): ResourceAction {
   };
 }
 
-export function createPullAction(_): ResourceAction {
+export function createPullAction(ctx: ActionContext): ResourceAction {
   return {
     name: 'pull',
     title: translate('Synchronise'),
     method: 'POST',
     type: 'button',
+    isVisible: ctx.resource.backend_id !== '',
   };
 }
 
