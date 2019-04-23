@@ -8080,6 +8080,10 @@ msgstr ""
 msgid "Value"
 msgstr ""
 
+#: src/marketplace/offerings/attributes/utils.tsx
+msgid "Value should be positive integer"
+msgstr ""
+
 #: src/billing/billing-record-details.html
 #: src/billing/invoice-details.html
 #: src/marketplace/details/OrderSummary.tsx
