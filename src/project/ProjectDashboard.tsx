@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
+import Panel from '@waldur/core/Panel';
 import { loadCategories } from '@waldur/dashboard/api';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
@@ -10,6 +11,7 @@ import { User, Project } from '@waldur/workspace/types';
 
 import { ProjectActions } from './ProjectActions';
 import { ProjectCounters } from './ProjectCounters';
+import { ProjectResourcesList } from './ProjectResourcesList';
 
 interface ProjectDashboardProps {
   user: User;
@@ -32,6 +34,9 @@ export const ProjectDashboard = (props: ProjectDashboardProps) => props.project 
           <ProjectActions {...props}/>
         </Col>
       </Row>
+      <Panel title={translate('Resources')}>
+        <ProjectResourcesList/>
+      </Panel>
       <CategoryResourcesList
         loader={(project: Project) => loadCategories('project', project)}
         scope={props.project}

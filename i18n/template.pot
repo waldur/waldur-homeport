@@ -1027,6 +1027,7 @@ msgstr ""
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-tenant/openstack-template.js
+#: src/project/ProjectResourcesList.tsx
 msgid "Category"
 msgstr ""
 
@@ -1462,6 +1463,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/project/ProjectResourcesList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Created at"
 msgstr ""
@@ -3530,6 +3532,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/openstack-subnets-list.js
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/project/ProjectDetails.tsx
+#: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/providers/details/provider-details.html
 #: src/providers/provider-list.js
@@ -5046,6 +5049,7 @@ msgstr ""
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/project/ProjectResourcesList.tsx
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -5770,6 +5774,8 @@ msgstr ""
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 #: src/offering/offering-details.js
+#: src/project/ProjectDashboard.tsx
+#: src/project/ProjectResourcesList.tsx
 #: src/project/project-workspace.js
 #: src/providers/provider-list.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
@@ -6570,6 +6576,7 @@ msgstr ""
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
+#: src/project/ProjectResourcesList.tsx
 #: src/providers/provider-list.js
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-global-list.js
