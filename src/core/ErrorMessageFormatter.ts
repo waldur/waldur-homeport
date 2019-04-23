@@ -1,6 +1,9 @@
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
+const formatErrorObject = error =>
+  Object.keys(error).map(key => `${key}: ${error[key]}`).join(', ');
+
 export const format = response => {
   /*
   Status code -1 denotes network error.
@@ -33,11 +36,13 @@ export const format = response => {
     if (Array.isArray(response.data)) {
       message += ' ' + response.data.map(item => {
         if (typeof item === 'object') {
-          return Object.keys(item).map(key => `${key}: ${item[key]}`).join(', ');
+          return formatErrorObject(item);
         } else {
           return item;
         }
       }).join('. ');
+    } else {
+      message += ' ' + formatErrorObject(response.data);
     }
   }
 
