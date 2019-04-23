@@ -1019,6 +1019,7 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
@@ -1027,6 +1028,7 @@ msgstr ""
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-tenant/openstack-template.js
+#: src/project/ProjectResourcesList.tsx
 msgid "Category"
 msgstr ""
 
@@ -1455,6 +1457,7 @@ msgstr ""
 msgid "Created a new payment for {customer_link}."
 msgstr ""
 
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/invitations/invitations-list.js
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
@@ -1462,6 +1465,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/project/ProjectResourcesList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Created at"
 msgstr ""
@@ -3495,6 +3499,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-dialog.html
 #: src/cost-planning/cost-plans-list.js
 #: src/customer/create/customer-create-config.js
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetails.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/jira/project/JiraProjectSummary.tsx
@@ -3530,6 +3535,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/openstack-subnets-list.js
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/project/ProjectDetails.tsx
+#: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/providers/details/provider-details.html
 #: src/providers/provider-list.js
@@ -3957,6 +3963,7 @@ msgstr ""
 msgid "Object is not found."
 msgstr ""
 
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -3965,6 +3972,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/project/ProjectResourcesList.tsx
 msgid "Offering"
 msgstr ""
 
@@ -4885,6 +4893,7 @@ msgid "Product configuration"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/create/issue-create-dialog.html
@@ -5763,6 +5772,8 @@ msgid "Resource usage"
 msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -5770,6 +5781,8 @@ msgstr ""
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 #: src/offering/offering-details.js
+#: src/project/ProjectDashboard.tsx
+#: src/project/ProjectResourcesList.tsx
 #: src/project/project-workspace.js
 #: src/providers/provider-list.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
@@ -6543,6 +6556,7 @@ msgstr ""
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/orders/Order.tsx
@@ -6570,6 +6584,7 @@ msgstr ""
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
+#: src/project/ProjectResourcesList.tsx
 #: src/providers/provider-list.js
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-global-list.js
