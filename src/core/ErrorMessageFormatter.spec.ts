@@ -16,7 +16,7 @@ describe('ErrorMessageFormatter', () => {
     expect(message).toBe('400: BAD REQUEST.');
   });
 
-  it('renders error message for each field', () => {
+  it('renders error message for array', () => {
     const message = format({
       status: 400,
       statusText: 'BAD REQUEST',
@@ -27,4 +27,17 @@ describe('ErrorMessageFormatter', () => {
     });
     expect(message).toBe('400: BAD REQUEST. username: Invalid username, password: Invalid password');
   });
+
+  it('renders error message for object', () => {
+    const message = format({
+      status: 400,
+      statusText: 'BAD REQUEST',
+      data: {
+        username: 'Invalid username',
+        password: 'Invalid password',
+      },
+    });
+    expect(message).toBe('400: BAD REQUEST. username: Invalid username, password: Invalid password');
+  });
+
 });
