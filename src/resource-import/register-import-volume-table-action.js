@@ -20,7 +20,7 @@ export default function registerImportInstanceTableAction($rootScope,
           'refreshVolumesList',
         );
       };
-      let action = ImportUtils.getImportAction(workspace.customer, workspace.project, gettext('Import volume'), callback);
+      let action = ImportUtils.getImportAction(workspace.customer, workspace.project, gettext('Import volume'), callback, true);
       TableExtensionService.registerTableActions('resource-volumes-list', [action]);
     });
   }

@@ -20,7 +20,7 @@ export default function registerImportVPCTableAction($rootScope,
           'PrivateCloudImported',
         );
       };
-      let action = ImportUtils.getImportAction(workspace.customer, workspace.project, gettext('Import private cloud'), callback);
+      let action = ImportUtils.getImportAction(workspace.customer, workspace.project, gettext('Import private cloud'), callback, false);
       TableExtensionService.registerTableActions('resource-private-clouds-list', [action]);
     });
   }
