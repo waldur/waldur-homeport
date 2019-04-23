@@ -45,7 +45,7 @@ const combineRows = (rows: ExpandableRow[]): ExpandableRow[] =>
   rows.filter(item => item.value).sort((a, b) => a.label.localeCompare(b.label));
 
 async function loadData(props): Promise<ExpandableRow[]> {
-  const quotaRows = parseQuotas(props.quotas);
+  const quotaRows = isFeatureVisible('resources.legacy') ? parseQuotas(props.quotas) : [];
   if (!isFeatureVisible('marketplace')) {
     return combineRows(quotaRows);
   }
