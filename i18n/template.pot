@@ -58,6 +58,7 @@ msgstr ""
 
 #: src/customer/CustomerList.tsx
 #: src/customer/details/CustomerDetails.tsx
+#: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 msgid "Abbreviation"
 msgstr ""
@@ -376,7 +377,6 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
 msgstr ""
@@ -802,13 +802,11 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Bank account"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Bank name"
 msgstr ""
 
@@ -1254,14 +1252,12 @@ msgid "Contact e-mail"
 msgstr ""
 
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Contact email"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Contact phone"
 msgstr ""
 
@@ -1313,7 +1309,6 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Country"
 msgstr ""
 
@@ -1864,7 +1859,6 @@ msgid "E-mail address"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "EU VAT ID"
 msgstr ""
 
@@ -3591,7 +3585,7 @@ msgstr ""
 #: src/invitations/actions/invitation-dialog.html
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
+#: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
@@ -4028,7 +4022,7 @@ msgid "Offering {offering_name} has been deleted."
 msgstr ""
 
 #: src/marketplace/offerings/OfferingsList.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
+#: src/marketplace/service-providers/ProviderDetailsBody.tsx
 msgid "Offerings"
 msgstr ""
 
@@ -4294,7 +4288,6 @@ msgstr ""
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Organization type"
 msgstr ""
 
@@ -4717,7 +4710,6 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Postal code"
 msgstr ""
 
@@ -5368,7 +5360,6 @@ msgid "Registered at:"
 msgstr ""
 
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Registration code"
 msgstr ""
 
@@ -7503,10 +7494,6 @@ msgstr ""
 msgid "Unable to load project types or certifications."
 msgstr ""
 
-#: src/marketplace/service-providers/CustomerDetails.tsx
-msgid "Unable to load provider details."
-msgstr ""
-
 #: src/providers/ProviderUpdateComponent.tsx
 msgid "Unable to load provider."
 msgstr ""
@@ -7520,6 +7507,7 @@ msgstr ""
 msgid "Unable to load sections for comparison."
 msgstr ""
 
+#: src/marketplace/service-providers/ProviderDetails.tsx
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Unable to load service provider."
 msgstr ""
@@ -8246,7 +8234,6 @@ msgid "Was the correct cloud broker public key UUID specified in the properties?
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Website URL"
 msgstr ""
 
