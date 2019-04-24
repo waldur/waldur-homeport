@@ -8,6 +8,7 @@ import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
 import { STEPS, OfferingStep } from '../types';
+import { setStateBreadcrumbs } from '../utils';
 import { AccountingStepContainer } from './AccountingStepContainer';
 import { DescriptionStepContainer } from './DescriptionStepContainer';
 import { ManagementStepContainer } from './ManagementStepContainer';
@@ -38,6 +39,12 @@ interface OfferingCreateDialogProps extends InjectedFormProps {
 }
 
 export class OfferingCreateDialog extends React.Component<OfferingCreateDialogProps> {
+
+  constructor(props) {
+    super(props);
+    setStateBreadcrumbs();
+  }
+
   componentDidMount() {
     if (this.props.disabled) {
       return $state.go('errorPage.notFound');
