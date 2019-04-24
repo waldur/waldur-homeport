@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
+import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 import { PlanUsageButton } from './PlanUsageButton';
@@ -36,7 +37,7 @@ export const TableComponent = props => {
     },
     {
       title: translate('Remaining'),
-      render: ({ row }: PlanUsageRowProps) => row.remaining || 'N/A',
+      render: PlanRemainingColumn,
       orderField: 'remaining',
     },
     {

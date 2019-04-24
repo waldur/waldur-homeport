@@ -2,6 +2,7 @@ import * as React from 'react';
 import { compose } from 'redux';
 
 import { withTranslation, translate } from '@waldur/i18n';
+import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
 import { PlanUsageButton } from '@waldur/marketplace/resources/plan-usage/PlanUsageButton';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
@@ -27,7 +28,7 @@ export const TableComponent = props => {
     },
     {
       title: translate('Remaining'),
-      render: ({ row }) => row.remaining || 'N/A',
+      render: PlanRemainingColumn,
       orderField: 'remaining',
     },
     {
