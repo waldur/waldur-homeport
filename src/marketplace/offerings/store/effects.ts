@@ -13,7 +13,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { setStep, loadDataSuccess, loadDataError } from './actions';
 import * as constants from './constants';
 import { STATES } from './constants';
-import { getPlans, getAttributes, getComponents, getOffering } from './selectors';
+import { getPlans, getAttributes, getOffering } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
 import { formatOfferingRequest, planWithoutComponent, planWithoutQuotas } from './utils';
 
