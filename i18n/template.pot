@@ -8051,6 +8051,7 @@ msgid "VM type overview"
 msgstr ""
 
 #: src/customer/api.ts
+#: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "VMs"
 msgstr ""

@@ -5,7 +5,7 @@ import { OrganizationLink } from '@waldur/customer/OrganizationLink';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { TableProps } from '@waldur/table-react/Table';
-import { Column } from '@waldur/table-react/types';
+import { Column, TableOptions } from '@waldur/table-react/types';
 
 import { ResourceName } from '../ResourceName';
 import { ResourceState } from '../state/ResourceState';
@@ -67,12 +67,13 @@ const mapPropsToFilter = props => ({
   service_settings_uuid: props.provider_uuid,
 });
 
-const TableOptions = {
+const TableOptions: TableOptions = {
   table: 'SharedProviderResources',
   fetchData: createFetcher('openstack-shared-settings-instances'),
   exportRow,
   exportFields,
   mapPropsToFilter,
+  exportAll: true,
 };
 
 export const SharedProviderResources = connectTable(TableOptions)(TableComponent) as
