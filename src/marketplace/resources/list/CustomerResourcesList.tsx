@@ -5,6 +5,7 @@ import { Option } from 'react-select';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { Category } from '@waldur/marketplace/types';
@@ -43,6 +44,11 @@ export const TableComponent = props => {
       render: ({ row }) => <span>{row.category_title}</span>,
     },
     {
+      title: translate('Created at'),
+      render: ({ row }) => <span>{formatDateTime(row.created)}</span>,
+      orderField: 'created',
+    },
+    {
       title: translate('State'),
       render: ResourceStateField,
     },
@@ -72,6 +78,7 @@ export const TableComponent = props => {
       {...props}
       columns={columns}
       verboseName={translate('Resources')}
+      initialSorting={{field: 'created', mode: 'desc'}}
       enableExport={true}
     />
   );

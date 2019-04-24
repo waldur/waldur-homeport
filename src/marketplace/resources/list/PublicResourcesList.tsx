@@ -4,6 +4,7 @@ import { Option } from 'react-select';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
@@ -53,6 +54,11 @@ export const TableComponent = props => {
       render: ({ row }) => <span>{row.plan_name || 'N/A'}</span>,
     },
     {
+      title: translate('Created at'),
+      render: ({ row }) => formatDateTime(row.created),
+      orderField: 'created',
+    },
+    {
       title: translate('State'),
       render: ResourceStateField,
     },
@@ -68,6 +74,7 @@ export const TableComponent = props => {
       columns={columns}
       verboseName={translate('Resources')}
       enableExport={true}
+      initialSorting={{field: 'created', mode: 'desc'}}
     />
   );
 };

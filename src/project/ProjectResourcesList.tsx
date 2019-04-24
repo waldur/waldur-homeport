@@ -32,6 +32,7 @@ export const TableComponent = props => {
     {
       title: translate('Created at'),
       render: ({ row }: FieldProps) => formatDateTime(row.created),
+      orderField: 'created',
     },
     {
       title: translate('State'),
@@ -44,6 +45,7 @@ export const TableComponent = props => {
       {...props}
       columns={columns}
       verboseName={translate('Resources')}
+      initialSorting={{field: 'created', mode: 'desc'}}
     />
   );
 };
