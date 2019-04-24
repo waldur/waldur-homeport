@@ -13,7 +13,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { setStep, loadDataSuccess, loadDataError } from './actions';
 import * as constants from './constants';
 import { STATES } from './constants';
-import { getPlans, getAttributes } from './selectors';
+import { getPlans, getAttributes, getComponents } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
 import { formatOfferingRequest, planWithoutComponent, planWithoutQuotas } from './utils';
 
@@ -87,8 +87,9 @@ function* createOffering(action: Action<OfferingFormData>) {
 
 function* updateOffering(action: Action<OfferingUpdateFormData>) {
   const { offeringUuid, thumbnail, ...rest } = action.payload;
+  const components = yield select(state => getComponents(state, rest.type.value));
   try {
-    const offeringRequest = formatOfferingRequest(rest);
+    const offeringRequest = formatOfferingRequest(rest, undefined, components.length > 0);
     yield call(api.updateOffering, offeringUuid, offeringRequest);
     if (thumbnail instanceof File || thumbnail === '') {
       yield call(api.uploadOfferingThumbnail, offeringUuid, thumbnail);

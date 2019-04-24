@@ -93,7 +93,7 @@ export const formatComponents = components =>
     limit_period: component.limit_period ? component.limit_period.value : null,
   }));
 
-export const formatOfferingRequest = (request: OfferingFormData, customer?: Customer) => {
+export const formatOfferingRequest = (request: OfferingFormData, customer?: Customer, skipComponents?: boolean) => {
   const result: OfferingRequest = {
     name: request.name,
     native_name: request.native_name,
@@ -110,7 +110,7 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
   if (request.attributes) {
     result.attributes = formatAttributes(request.category, request.attributes);
   }
-  if (request.components) {
+  if (request.components && !skipComponents) {
     result.components = formatComponents(request.components);
   }
   if (request.plans) {
