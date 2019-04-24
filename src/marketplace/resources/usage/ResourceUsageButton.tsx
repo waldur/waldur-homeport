@@ -1,9 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 
-import { translate } from '@waldur/i18n';
-import { wrapTooltip } from '@waldur/table-react/ActionButton';
-
 import { ResourceCreateUsageButton } from './ResourceCreateUsageButton';
 import { ResourceShowUsageButton } from './ResourceShowUsageButton';
 
@@ -19,7 +16,7 @@ export const ResourceUsageButton = ({ row }) => {
     </div>
   );
   if (disabled) {
-    return wrapTooltip(translate('Usage information is not available.'), body);
+    return null;
   } else {
     return body;
   }

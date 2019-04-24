@@ -7778,7 +7778,6 @@ msgid "Usage"
 msgstr ""
 
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/usage/ResourceUsageButton.tsx
 msgid "Usage information is not available."
 msgstr ""
 
