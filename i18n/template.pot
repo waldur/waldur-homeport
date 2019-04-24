@@ -4301,6 +4301,7 @@ msgstr ""
 #: src/customer/workspace/customer-workspace.js
 #: src/marketplace/details/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 msgid "Organization workspace"
 msgstr ""
@@ -5140,6 +5141,7 @@ msgid "Public key"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/utils.ts
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Public offerings"

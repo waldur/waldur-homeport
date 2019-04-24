@@ -10,6 +10,7 @@ import { translate } from '@waldur/i18n';
 import { TABS } from '../create/OfferingCreateDialog';
 import { Wizard } from '../create/Wizard';
 import { STEPS, OfferingStep } from '../types';
+import { setStateBreadcrumbs } from '../utils';
 
 interface OfferingUpdateDialogProps extends InjectedFormProps {
   step: OfferingStep;
@@ -26,6 +27,12 @@ interface OfferingUpdateDialogProps extends InjectedFormProps {
 }
 
 export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogProps> {
+
+  constructor(props) {
+    super(props);
+    setStateBreadcrumbs();
+  }
+
   componentDidMount() {
     if (this.props.disabled) {
       return $state.go('errorPage.notFound');
