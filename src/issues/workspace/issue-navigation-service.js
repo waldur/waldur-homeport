@@ -30,7 +30,7 @@ const REPORT_ITEMS = [
     label: gettext('Resources'),
     icon: 'fa-files-o',
     link: 'support.resources',
-    feature: 'support.resources'
+    feature: 'resources.legacy'
   },
   {
     label: gettext('Orders'),

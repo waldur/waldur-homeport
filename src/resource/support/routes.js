@@ -7,7 +7,7 @@ export default function routes($stateProvider) {
       url: 'resources/',
       template: '<resource-global-list-filtered></resource-global-list-filtered>',
       data: {
-        feature: 'support.resources',
+        feature: 'resources.legacy',
         pageTitle: gettext('Resources'),
       },
       resolve: {
