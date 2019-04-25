@@ -5661,6 +5661,8 @@ msgstr ""
 #: src/events/EventDetailsTable.tsx
 #: src/issues/create/issue-create-dialog.html
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 msgid "Resource"
 msgstr ""
 
