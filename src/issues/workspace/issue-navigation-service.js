@@ -129,7 +129,11 @@ export default class IssueNavigationService {
 
   gotoDashboard() {
     if (!this.features.isVisible('support')) {
-      return this.$state.go('support.resources');
+      if (this.features.isVisible('marketplace')) {
+        return this.$state.go('marketplace-support-resources');
+      } else {
+        return this.$state.go('support.resources');
+      }
     }
     return this.usersService.getCurrentUser().then(user => {
       if (user.is_staff || user.is_support) {
