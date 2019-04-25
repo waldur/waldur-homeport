@@ -1,4 +1,4 @@
-import { Option } from "react-select";
+import { Option } from 'react-select';
 
 export type PhoneNumber = string | {
   national_number: string;
