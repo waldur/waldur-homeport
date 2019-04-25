@@ -7446,6 +7446,10 @@ msgstr ""
 msgid "Unable to load file."
 msgstr ""
 
+#: src/customer/CustomerListContainer.tsx
+msgid "Unable to load financial overview."
+msgstr ""
+
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/resource/support/ChartContainer.tsx
