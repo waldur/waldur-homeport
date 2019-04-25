@@ -21,7 +21,7 @@ export const reducer = (state=INITIAL_STATE, action) => {
   switch(action.type) {
 
   case INIT_CONFIG: {
-    const {toBeFeatures, disabledFeatures = [], enabledFeatures = []} = action.payload.config;
+    const {toBeFeatures = [], disabledFeatures = [], enabledFeatures = []} = action.payload.config;
     return {
       ...action.payload.config,
       disabledFeatures: getFeaturesMap(toBeFeatures.concat(disabledFeatures)),
@@ -38,7 +38,16 @@ export const getConfig = state => state.config;
 
 export const isVisible = (state, feature) => {
   const {featuresVisible, disabledFeatures = {}, enabledFeatures = {}} = state.config;
-  return enabledFeatures[feature] || featuresVisible || !disabledFeatures[feature];
+  if (feature === undefined || feature === null) {
+    return true;
+  }
+  if (enabledFeatures[feature]) {
+    return true;
+  }
+  if (disabledFeatures[feature]) {
+    return false;
+  }
+  return featuresVisible;
 };
 
 export const getNativeNameVisible = state =>
