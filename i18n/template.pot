@@ -5660,6 +5660,7 @@ msgstr ""
 
 #: src/events/EventDetailsTable.tsx
 #: src/issues/create/issue-create-dialog.html
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 msgid "Resource"
 msgstr ""
 
@@ -5737,6 +5738,7 @@ msgid "Resource is not monitored yet."
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItem.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 msgid "Resource link"
 msgstr ""
 
