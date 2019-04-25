@@ -1,29 +1,16 @@
-import * as moment from 'moment-timezone';
 import * as React from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
-const makeAccountingPeriods = () => {
-  let date = moment().startOf('month');
-  const choices = [];
-  for (let i = 0; i < 12; i++) {
-    const month = date.month() + 1;
-    const year = date.year();
-    const label = date.format('MMMM, YYYY');
-    choices.push({
-      label,
-      value: { year, month, current: i === 0},
-    });
-    date = date.subtract(1, 'month');
-  }
-  return choices;
-};
+import { AccountingPeriodOption } from './types';
 
-export const accountingPeriods = makeAccountingPeriods();
+interface Props {
+  options: AccountingPeriodOption[];
+}
 
-export const AccountingPeriodField = () => (
+export const AccountingPeriodField = (props: Props) => (
   <Field name="accounting_period"
     component={prop =>
       <Select
@@ -34,7 +21,7 @@ export const AccountingPeriodField = () => (
         value={prop.input.value}
         onChange={prop.input.onChange}
         onBlur={e => e.preventDefault()}
-        options={accountingPeriods}
+        options={props.options}
         clearable={false}
       />
     }

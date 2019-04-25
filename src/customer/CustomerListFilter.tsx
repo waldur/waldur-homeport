@@ -1,19 +1,24 @@
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
-import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { AccountingPeriodField, accountingPeriods } from './AccountingPeriodField';
-import { AccountingRunningField, getOptions } from './AccountingRunningField';
+import { AccountingPeriodField } from './AccountingPeriodField';
+import { AccountingRunningField } from './AccountingRunningField';
 
-export const PureCustomerListFilter = () => (
+import { AccountingPeriodOption } from './types';
+
+interface Props {
+  accountingPeriods: AccountingPeriodOption[];
+}
+
+export const PureCustomerListFilter = (props: Props) => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
       <form className="form-inline">
         <Row>
           <Col sm={9}>
-            <AccountingPeriodField/>
+            <AccountingPeriodField options={props.accountingPeriods}/>
           </Col>
           <Col sm={3}>
             <AccountingRunningField/>
@@ -24,15 +29,6 @@ export const PureCustomerListFilter = () => (
   </div>
 );
 
-const FilterForm = reduxForm({
+export const CustomerListFilter = reduxForm<{}, Props>({
   form: 'customerListFilter',
 })(PureCustomerListFilter);
-
-export const CustomerListFilter = connect(
-  () => ({
-    initialValues: {
-      accounting_period: accountingPeriods[0],
-      accounting_is_running: getOptions()[0],
-    },
-  }),
-)(FilterForm);
