@@ -10,6 +10,7 @@ import { connectTable, createFetcher, Table } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { ResourceNameField } from './ResourceNameField';
 import { RowNameField } from './RowNameField';
 import { ShowRequestButton } from './ShowRequestButton';
 
@@ -18,6 +19,10 @@ const TableComponent = props => {
     {
       title: translate('Offering'),
       render: RowNameField,
+    },
+    {
+      title: translate('Resource'),
+      render: ResourceNameField,
     },
     {
       title: translate('Project'),
