@@ -15,7 +15,10 @@ interface State {
 }
 
 class TableQuery extends React.Component<Props, State> {
-  state = {query: ''};
+  constructor(props) {
+    super(props);
+    this.state = {query: props.query};
+  }
 
   setQuery = event => {
     this.setState({
