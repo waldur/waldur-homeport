@@ -41,7 +41,7 @@ export const format = response => {
           return item;
         }
       }).join('. ');
-    } else {
+    } else if (typeof response.data === 'object') {
       message += ' ' + formatErrorObject(response.data);
     }
   }
