@@ -31,7 +31,8 @@ export const TableComponent = props => {
   const columns = [
     {
       title: translate('Name'),
-      render: ({ row }) => <span>{row.attributes.name}</span>,
+      render: ({ row }) => <span>{row.name}</span>,
+      orderField: 'name',
     },
     {
       title: translate('Resource UUID'),
@@ -102,7 +103,7 @@ const mapPropsToFilter = (props: StateProps) => {
 };
 
 const exportRow = row => [
-  row.attributes.name,
+  row.name,
   row.uuid,
   row.offering_name,
   row.customer_name,

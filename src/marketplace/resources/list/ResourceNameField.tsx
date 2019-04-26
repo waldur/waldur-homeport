@@ -8,7 +8,7 @@ interface ResourceNameFieldProps {
 }
 
 export const ResourceNameField = ({row}: ResourceNameFieldProps) => {
-  const label = row.attributes.name || row.offering_name;
+  const label = row.name || row.offering_name;
   if (row.resource_type && row.resource_uuid) {
     return (
       <ResourceDetailsLink item={row}>

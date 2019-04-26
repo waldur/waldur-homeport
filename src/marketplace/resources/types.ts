@@ -15,6 +15,7 @@ export type ResourceState =
   ;
 
 export interface Resource extends ResourceReference {
+  name: string;
   attributes: AttributesType;
   backend_metadata: AttributesType;
   offering_name: string;
