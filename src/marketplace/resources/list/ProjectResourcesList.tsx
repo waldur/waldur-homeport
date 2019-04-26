@@ -25,6 +25,7 @@ export const TableComponent = props => {
     {
       title: translate('Name'),
       render: ResourceNameField,
+      orderField: 'name',
     },
     {
       title: translate('Provider'),
