@@ -20,7 +20,7 @@ export default function registerImportTableAction($rootScope,
           'refreshSnapshotsList',
         );
       };
-      let action = ImportUtils.getImportAction(workspace.customer, workspace.project, gettext('Import snapshot'), callback);
+      let action = ImportUtils.getImportAction(workspace.customer, workspace.project, gettext('Import snapshot'), callback, true);
       TableExtensionService.registerTableActions('openstack-snapshots-list', [action]);
     });
   }

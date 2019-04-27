@@ -4,6 +4,7 @@ import { Option } from 'react-select';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
@@ -30,7 +31,8 @@ export const TableComponent = props => {
   const columns = [
     {
       title: translate('Name'),
-      render: ({ row }) => <span>{row.attributes.name}</span>,
+      render: ({ row }) => <span>{row.name}</span>,
+      orderField: 'name',
     },
     {
       title: translate('Resource UUID'),
@@ -53,6 +55,11 @@ export const TableComponent = props => {
       render: ({ row }) => <span>{row.plan_name || 'N/A'}</span>,
     },
     {
+      title: translate('Created at'),
+      render: ({ row }) => formatDateTime(row.created),
+      orderField: 'created',
+    },
+    {
       title: translate('State'),
       render: ResourceStateField,
     },
@@ -68,6 +75,7 @@ export const TableComponent = props => {
       columns={columns}
       verboseName={translate('Resources')}
       enableExport={true}
+      initialSorting={{field: 'created', mode: 'desc'}}
     />
   );
 };
@@ -95,7 +103,7 @@ const mapPropsToFilter = (props: StateProps) => {
 };
 
 const exportRow = row => [
-  row.attributes.name,
+  row.name,
   row.uuid,
   row.offering_name,
   row.customer_name,

@@ -24,7 +24,18 @@ export default class featuresProvider {
   }
 
   $get() {
-    const isVisible = feature => !feature || this.enabledFeatures[feature] || this.visibility || !this.disabledFeatures[feature];
+    const isVisible = feature => {
+      if (feature === undefined || feature === null) {
+        return true;
+      }
+      if (this.enabledFeatures[feature]) {
+        return true;
+      }
+      if (this.disabledFeatures[feature]) {
+        return false;
+      }
+      return this.visibility;
+    };
     return {isVisible};
   }
 }

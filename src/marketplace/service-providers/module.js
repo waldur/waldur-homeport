@@ -1,4 +1,4 @@
-import marketplaceProviderDetails from './CustomerDetailsContainer';
+import marketplaceProviderDetails from './ProviderDetails';
 import marketplaceServiceProviderManagement from './ServiceProviderManagement';
 import marketplaceServiceProviderSecretCodeGenerateConfirm from './ServiceProviderSecretCodeGenerateConfirm';
 

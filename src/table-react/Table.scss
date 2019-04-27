@@ -27,3 +27,16 @@
     margin-top: 40px;
   }
 }
+
+// Prevent vertical scroll of dropdown inside of table-responsive
+// https://stackoverflow.com/a/26021872/6917997
+@media (max-width: 767px) {
+  .table-responsive .dropdown-menu {
+      position: static !important;
+  }
+}
+@media (min-width: 768px) {
+  .table-responsive {
+      overflow: inherit;
+  }
+}

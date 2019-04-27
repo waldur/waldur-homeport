@@ -4,6 +4,7 @@ import * as Row from 'react-bootstrap/lib/Row';
 
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import Panel from '@waldur/core/Panel';
 import { Query } from '@waldur/core/Query';
 import { loadCategories } from '@waldur/dashboard/api';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
@@ -14,6 +15,7 @@ import { User, Customer } from '@waldur/workspace/types';
 
 import { loadSummary } from './api';
 import { CustomerActions } from './CustomerActions';
+import { CustomerResourcesList } from './CustomerResourcesList';
 
 interface CustomerDashboardProps {
   user: User;
@@ -47,6 +49,9 @@ export const CustomerDashboard = (props: CustomerDashboardProps) => (
                 <CustomerActions customer={props.customer} user={props.user}/>
               </Col>
             </Row>
+            <Panel title={translate('Resources')}>
+              <CustomerResourcesList/>
+            </Panel>
             <CategoryResourcesList
               loader={(customer: Customer) => loadCategories('organization', customer)}
               scope={props.customer}

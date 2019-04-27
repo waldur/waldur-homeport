@@ -8,6 +8,8 @@ import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getDetailsComponent } from '@waldur/marketplace/common/registry';
 import { PlanDetails } from '@waldur/marketplace/details/plan/PlanDetails';
+import { ResourceDetailsLink } from '@waldur/marketplace/resources/ResourceDetailsLink';
+import { ResourceReference } from '@waldur/marketplace/resources/types';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 
 import { OrderItemDetailsField } from './OrderItemDetailsField';
@@ -41,6 +43,13 @@ export const OrderItemDetails = (props: OrderItemDetailsProps) => {
               {props.orderItem.error_message && (
                 <OrderItemDetailsField label={translate('Error message')}>
                   {props.orderItem.error_message}
+                </OrderItemDetailsField>
+              )}
+              {props.orderItem.resource_uuid && (
+                <OrderItemDetailsField label={translate('Resource')}>
+                  <ResourceDetailsLink item={props.orderItem as ResourceReference}>
+                    {translate('Resource link')}
+                  </ResourceDetailsLink>
                 </OrderItemDetailsField>
               )}
             </Panel.Body>

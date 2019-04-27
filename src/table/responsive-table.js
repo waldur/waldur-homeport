@@ -397,6 +397,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
                   };
                 }
               }
+              return doc;
             }
           };
         });

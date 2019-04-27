@@ -1,3 +1,5 @@
+import { Option } from 'react-select';
+
 export type PhoneNumber = string | {
   national_number: string;
   country_code: string;
@@ -32,3 +34,9 @@ export interface Customer {
   is_service_provider?: boolean;
   created?: string;
 }
+
+export type AccountingPeriodOption = Option<{
+  year: number;
+  month: number;
+  current: boolean;
+}>;

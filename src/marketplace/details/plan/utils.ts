@@ -64,7 +64,7 @@ export const combinePrices = (plan, limits, offering) => {
         }
         const type = item.type;
         const billing_type = item.billing_type;
-        const price = plan.prices[type];
+        const price = plan.prices[type] || 0;
         const subTotal = price * amount;
         const prices = multipliers.map(mult => mult * subTotal);
         return {
@@ -82,11 +82,14 @@ export const combinePrices = (plan, limits, offering) => {
 };
 
 const getPlan = (state, props) => {
-  if (!props.viewMode) {
-    return  offeringSelector(state, 'plan');
-  }
-  if (props.viewMode && !!props.offering.plans.length) {
-    return props.offering.plans[0];
+  if (props.viewMode) {
+    if (props.orderItem.plan_uuid) {
+      return props.offering.plans.find(plan => plan.uuid === props.orderItem.plan_uuid);
+    } else {
+      return props.offering.plans[0];
+    }
+  } else {
+    return offeringSelector(state, 'plan');
   }
 };
 

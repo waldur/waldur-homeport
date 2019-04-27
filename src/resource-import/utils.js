@@ -29,12 +29,12 @@ export default class ImportUtils {
     return deferred.promise;
   }
 
-  getImportAction(customer, project, title, callback) {
+  getImportAction(customer, project, title, callback, requirePrivateService) {
     let disabled, tooltip;
     if (this.ncUtils.isCustomerQuotaReached(customer, 'resource')) {
       disabled = true;
       tooltip = gettext('Quota has been reached.');
-    } else if (!this.projectHasNonSharedService(project)) {
+    } else if (requirePrivateService && !this.projectHasPrivateService(project)) {
       disabled = true;
       tooltip = gettext('Import is not possible as there are no personal provider accounts registered.');
     } else {
@@ -54,7 +54,7 @@ export default class ImportUtils {
     };
   }
 
-  projectHasNonSharedService(project) {
+  projectHasPrivateService(project) {
     for (let i = 0; i < project.services.length; i++) {
       let service = project.services[i];
       if (!service.shared) {

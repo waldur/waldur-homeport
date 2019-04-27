@@ -4,17 +4,19 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { OrganizationLink } from '@waldur/customer/OrganizationLink';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable } from '@waldur/table-react';
 import { TableProps } from '@waldur/table-react/Table';
-import { Column } from '@waldur/table-react/types';
+import { Column, TableOptions } from '@waldur/table-react/types';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
+
+import { fetchCustomers } from './utils';
 
 const AbbreviationField = ({ row }) => <span>{renderFieldOrDash(row.abbreviation)}</span>;
 
 const CreatedDateField = ({ row }) => <span>{renderFieldOrDash(formatDate(row.created))}</span>;
 
 const TableComponent = (props: TableProps<Customer> & {provider_uuid: string}) => {
-  const columns: Array<Column<Customer>> = [
+  const columns: Array<Column<Customer & {vm_count: number}>> = [
     {
       title: translate('Organization'),
       render: OrganizationLink,
@@ -26,6 +28,10 @@ const TableComponent = (props: TableProps<Customer> & {provider_uuid: string}) =
     {
       title: translate('Created'),
       render: CreatedDateField,
+    },
+    {
+      title: translate('VMs'),
+      render: ({ row }) => <span>{row.vm_count}</span>,
     },
   ];
 
@@ -56,12 +62,13 @@ const mapPropsToFilter = props => ({
   service_settings_uuid: props.provider_uuid,
 });
 
-const TableOptions = {
+const TableOptions: TableOptions = {
   table: 'SharedProviderCustomers',
-  fetchData: createFetcher('openstack-shared-settings-customers'),
+  fetchData: fetchCustomers,
   exportRow,
   exportFields,
   mapPropsToFilter,
+  exportAll: true,
 };
 
 export const SharedProviderCustomers = connectTable(TableOptions)(TableComponent) as

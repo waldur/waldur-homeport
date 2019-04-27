@@ -20,7 +20,7 @@ export default function registerImportInstanceTableAction($rootScope,
           'refreshVirtualMachinesList',
         );
       };
-      let action = ImportUtils.getImportAction(workspace.customer, workspace.project, gettext('Import virtual machine'), callback);
+      let action = ImportUtils.getImportAction(workspace.customer, workspace.project, gettext('Import virtual machine'), callback, true);
       TableExtensionService.registerTableActions('resource-vms-list', [action]);
     });
   }

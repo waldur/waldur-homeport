@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Select from 'react-select';
+import { Validator } from 'redux-form';
 
+import { translate } from '@waldur/i18n';
 import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
 
 import { CustomRadioButton } from './CustomRadioButton';
@@ -12,8 +14,13 @@ export interface AttrConfig {
   format?: any;
   component?: any;
   normalize?: (v: string) => string;
+  validate?: Validator;
   checked?: boolean;
   rows?: number;
+}
+
+function validateInt(value) {
+  return value < 0 ? translate('Value should be positive integer') : undefined;
 }
 
 export const configAttrField = attribute => {
@@ -25,6 +32,7 @@ export const configAttrField = attribute => {
         min: 0,
         parse: parseIntField,
         format: formatIntField,
+        validate: validateInt,
       };
       break;
     case 'text':

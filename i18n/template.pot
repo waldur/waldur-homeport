@@ -58,6 +58,7 @@ msgstr ""
 
 #: src/customer/CustomerList.tsx
 #: src/customer/details/CustomerDetails.tsx
+#: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 msgid "Abbreviation"
 msgstr ""
@@ -376,7 +377,6 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
 msgstr ""
@@ -802,13 +802,11 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Bank account"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Bank name"
 msgstr ""
 
@@ -1019,6 +1017,7 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
@@ -1027,6 +1026,7 @@ msgstr ""
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-tenant/openstack-template.js
+#: src/project/ProjectResourcesList.tsx
 msgid "Category"
 msgstr ""
 
@@ -1252,14 +1252,12 @@ msgid "Contact e-mail"
 msgstr ""
 
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Contact email"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Contact phone"
 msgstr ""
 
@@ -1311,7 +1309,6 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Country"
 msgstr ""
 
@@ -1455,13 +1452,17 @@ msgstr ""
 msgid "Created a new payment for {customer_link}."
 msgstr ""
 
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/invitations/invitations-list.js
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/project/ProjectResourcesList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Created at"
 msgstr ""
@@ -1858,7 +1859,6 @@ msgid "E-mail address"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "EU VAT ID"
 msgstr ""
 
@@ -3495,6 +3495,7 @@ msgstr ""
 #: src/cost-planning/cost-plan-dialog.html
 #: src/cost-planning/cost-plans-list.js
 #: src/customer/create/customer-create-config.js
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetails.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/jira/project/JiraProjectSummary.tsx
@@ -3530,6 +3531,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/openstack-subnets-list.js
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/project/ProjectDetails.tsx
+#: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/providers/details/provider-details.html
 #: src/providers/provider-list.js
@@ -3583,7 +3585,7 @@ msgstr ""
 #: src/invitations/actions/invitation-dialog.html
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
+#: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
@@ -3957,6 +3959,7 @@ msgstr ""
 msgid "Object is not found."
 msgstr ""
 
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -3965,6 +3968,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/project/ProjectResourcesList.tsx
 msgid "Offering"
 msgstr ""
 
@@ -4018,7 +4022,7 @@ msgid "Offering {offering_name} has been deleted."
 msgstr ""
 
 #: src/marketplace/offerings/OfferingsList.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
+#: src/marketplace/service-providers/ProviderDetailsBody.tsx
 msgid "Offerings"
 msgstr ""
 
@@ -4284,7 +4288,6 @@ msgstr ""
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Organization type"
 msgstr ""
 
@@ -4293,6 +4296,7 @@ msgstr ""
 #: src/customer/workspace/customer-workspace.js
 #: src/marketplace/details/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 msgid "Organization workspace"
 msgstr ""
@@ -4706,7 +4710,6 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Postal code"
 msgstr ""
 
@@ -4885,6 +4888,7 @@ msgid "Product configuration"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/create/issue-create-dialog.html
@@ -5131,6 +5135,7 @@ msgid "Public key"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/utils.ts
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Public offerings"
@@ -5355,7 +5360,6 @@ msgid "Registered at:"
 msgstr ""
 
 #: src/customer/popover/CustomerSummary.tsx
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Registration code"
 msgstr ""
 
@@ -5656,6 +5660,9 @@ msgstr ""
 
 #: src/events/EventDetailsTable.tsx
 #: src/issues/create/issue-create-dialog.html
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 msgid "Resource"
 msgstr ""
 
@@ -5733,6 +5740,7 @@ msgid "Resource is not monitored yet."
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItem.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 msgid "Resource link"
 msgstr ""
 
@@ -5763,6 +5771,8 @@ msgid "Resource usage"
 msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -5770,6 +5780,8 @@ msgstr ""
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 #: src/offering/offering-details.js
+#: src/project/ProjectDashboard.tsx
+#: src/project/ProjectResourcesList.tsx
 #: src/project/project-workspace.js
 #: src/providers/provider-list.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
@@ -6543,6 +6555,7 @@ msgstr ""
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
+#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/orders/Order.tsx
@@ -6570,6 +6583,7 @@ msgstr ""
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
+#: src/project/ProjectResourcesList.tsx
 #: src/providers/provider-list.js
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-global-list.js
@@ -7432,6 +7446,10 @@ msgstr ""
 msgid "Unable to load file."
 msgstr ""
 
+#: src/customer/CustomerListContainer.tsx
+msgid "Unable to load financial overview."
+msgstr ""
+
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/resource/support/ChartContainer.tsx
@@ -7484,10 +7502,6 @@ msgstr ""
 msgid "Unable to load project types or certifications."
 msgstr ""
 
-#: src/marketplace/service-providers/CustomerDetails.tsx
-msgid "Unable to load provider details."
-msgstr ""
-
 #: src/providers/ProviderUpdateComponent.tsx
 msgid "Unable to load provider."
 msgstr ""
@@ -7501,6 +7515,7 @@ msgstr ""
 msgid "Unable to load sections for comparison."
 msgstr ""
 
+#: src/marketplace/service-providers/ProviderDetails.tsx
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Unable to load service provider."
 msgstr ""
@@ -7759,7 +7774,6 @@ msgid "Usage"
 msgstr ""
 
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/usage/ResourceUsageButton.tsx
 msgid "Usage information is not available."
 msgstr ""
 
@@ -8032,6 +8046,7 @@ msgid "VM type overview"
 msgstr ""
 
 #: src/customer/api.ts
+#: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "VMs"
 msgstr ""
@@ -8078,6 +8093,10 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Value"
+msgstr ""
+
+#: src/marketplace/offerings/attributes/utils.tsx
+msgid "Value should be positive integer"
 msgstr ""
 
 #: src/billing/billing-record-details.html
@@ -8223,7 +8242,6 @@ msgid "Was the correct cloud broker public key UUID specified in the properties?
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/marketplace/service-providers/CustomerDetailsTable.tsx
 msgid "Website URL"
 msgstr ""
 
