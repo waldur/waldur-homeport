@@ -17,6 +17,7 @@ interface ProjectDashboardProps {
   user: User;
   project: Project;
   canAddUser: boolean;
+  marketplaceEnabled: boolean;
 }
 
 export const ProjectDashboard = (props: ProjectDashboardProps) => props.project ? (
@@ -34,9 +35,11 @@ export const ProjectDashboard = (props: ProjectDashboardProps) => props.project 
           <ProjectActions {...props}/>
         </Col>
       </Row>
-      <Panel title={translate('Resources')}>
-        <ProjectResourcesList/>
-      </Panel>
+      {props.marketplaceEnabled && (
+        <Panel title={translate('Resources')}>
+          <ProjectResourcesList/>
+        </Panel>
+      )}
       <CategoryResourcesList
         loader={(project: Project) => loadCategories('project', project)}
         scope={props.project}
