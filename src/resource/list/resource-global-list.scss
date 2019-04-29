@@ -1,0 +1,22 @@
+@import '~sass/mixins/components.scss';
+
+tr>td.resource_name_field {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20vw;
+}
+
+tr>td.resource_customer_field {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 10vw;
+}
+
+tr>td.resource_project_field {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 10vw;
+}
