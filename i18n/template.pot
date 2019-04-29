@@ -773,10 +773,6 @@ msgstr ""
 msgid "Backing up"
 msgstr ""
 
-#: src/resource/list/resource-global-list.js
-msgid "Backup"
-msgstr ""
-
 #: src/openstack/openstack-backup/actions/EditAction.ts
 msgid "Backup has been updated."
 msgstr ""
@@ -2974,7 +2970,6 @@ msgstr ""
 #: src/jira/project/tabs.js
 #: src/project/project-workspace.js
 #: src/project/routes.js
-#: src/resource/list/resource-global-list.js
 #: src/resource/tabs/constants.js
 msgid "Issues"
 msgstr ""
@@ -3416,7 +3411,6 @@ msgstr ""
 msgid "Mobile phone number"
 msgstr ""
 
-#: src/resource/list/resource-global-list.js
 #: src/resource/monitoring/ZabbixHostField.tsx
 msgid "Monitoring"
 msgstr ""

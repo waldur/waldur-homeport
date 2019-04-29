@@ -31,7 +31,7 @@ export default function routes($stateProvider) {
       url: 'shared-providers/',
       template: '<support-shared-providers></support-shared-providers>',
       data: {
-        feature: 'support.shared-provider',
+        feature: 'support.shared-providers',
         pageTitle: gettext('Shared providers'),
       },
       resolve: {

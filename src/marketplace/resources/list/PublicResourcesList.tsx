@@ -13,6 +13,7 @@ import { Customer } from '@waldur/workspace/types';
 
 import { ResourceState } from '../types';
 import { ResourceUsageButton } from '../usage/ResourceUsageButton';
+import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
 
 interface ResourceFilter {
@@ -31,7 +32,7 @@ export const TableComponent = props => {
   const columns = [
     {
       title: translate('Name'),
-      render: ({ row }) => <span>{row.name}</span>,
+      render: ResourceNameField,
       orderField: 'name',
     },
     {

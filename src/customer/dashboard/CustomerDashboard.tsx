@@ -20,6 +20,7 @@ import { CustomerResourcesList } from './CustomerResourcesList';
 interface CustomerDashboardProps {
   user: User;
   customer: Customer;
+  marketplaceEnabled: boolean;
 }
 
 export const CustomerDashboard = (props: CustomerDashboardProps) => (
@@ -49,9 +50,11 @@ export const CustomerDashboard = (props: CustomerDashboardProps) => (
                 <CustomerActions customer={props.customer} user={props.user}/>
               </Col>
             </Row>
-            <Panel title={translate('Resources')}>
-              <CustomerResourcesList/>
-            </Panel>
+            {props.marketplaceEnabled && (
+              <Panel title={translate('Resources')}>
+                <CustomerResourcesList/>
+              </Panel>
+            )}
             <CategoryResourcesList
               loader={(customer: Customer) => loadCategories('organization', customer)}
               scope={props.customer}
