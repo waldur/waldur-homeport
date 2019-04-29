@@ -18,7 +18,7 @@ interface ResourceNameProps {
 
 const ResourceIcon = (props: ResourceNameProps) => (
   <Tooltip
-    id="resourceIcon"
+    id={`resourceIcon-${props.resource.uuid}`}
     label={formatResourceType(props.resource)}>
     <img
       src={getResourceIcon(props.resource.resource_type)}
@@ -32,7 +32,7 @@ const ResourceIcon = (props: ResourceNameProps) => (
 const ResourceWarning = withTranslation((props: ResourceNameProps & TranslateProps) =>
   props.resource.is_link_valid === false ? (
     <Tooltip
-      id="resourceWarning"
+      id={`resourceWarning-${props.resource.uuid}`}
       label={props.translate('Provider does not comply with project policies')}>
       {' '}
       <i className="fa fa-exclamation-triangle text-muted"/>
