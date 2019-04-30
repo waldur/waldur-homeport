@@ -629,6 +629,10 @@ msgstr ""
 msgid "Associated virtual machine was deleted!"
 msgstr ""
 
+#: src/openstack/openstack-volume/actions/AttachAction.ts
+msgid "Attach"
+msgstr ""
+
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/resource/list/resource-volumes-list.js
@@ -1323,7 +1327,8 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
 #: src/openstack/openstack-tenant/actions/CreateNetworkAction.ts
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
-#: src/openstack/openstack-volume/module.js
+#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/project/project-issues.js
 #: src/resource/list/resources-list.js
 #: src/resource/tabs/resource-issues.js
@@ -1411,12 +1416,12 @@ msgstr ""
 msgid "Create security group for OpenStack tenant"
 msgstr ""
 
-#: src/openstack/openstack-volume/module.js
+#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 #: src/openstack/openstack-volume/snapshot-create.html
 msgid "Create snapshot for OpenStack volume"
 msgstr ""
 
-#: src/openstack/openstack-volume/module.js
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 msgid "Create snapshot schedule for OpenStack volume"
 msgstr ""
 
@@ -1703,11 +1708,16 @@ msgstr ""
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.js
 #: src/openstack/openstack-tenant/actions/DestroyAction.ts
+#: src/openstack/openstack-volume/actions/DestroyAction.ts
 msgid "Destroy"
 msgstr ""
 
 #: src/resource/state/constants.js
 msgid "Destroying"
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/DetachAction.ts
+msgid "Detach"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -1740,6 +1750,7 @@ msgid "Details"
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+#: src/openstack/openstack-volume/actions/AttachAction.ts
 msgid "Device"
 msgstr ""
 
@@ -2111,6 +2122,10 @@ msgstr ""
 msgid "Export as"
 msgstr ""
 
+#: src/openstack/openstack-volume/actions/ExtendAction.ts
+msgid "Extend"
+msgstr ""
+
 #: src/openstack/openstack-volume/volume-extend.html
 msgid "Extend OpenStack volume"
 msgstr ""
@@ -2391,7 +2406,7 @@ msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr ""
 
 #: src/openstack/openstack-snapshot/module.js
-#: src/openstack/openstack-volume/module.js
+#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr ""
 
@@ -2710,6 +2725,7 @@ msgstr ""
 #: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/openstack/openstack-volume/actions/AttachAction.ts
 msgid "Instance"
 msgstr ""
 
@@ -3059,7 +3075,7 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/EditAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
 #: src/openstack/openstack-snapshot/module.js
-#: src/openstack/openstack-volume/module.js
+#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 msgid "Kept until"
 msgstr ""
 
@@ -3331,6 +3347,7 @@ msgid "Max vCPU"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 msgid "Maximal number of resources"
 msgstr ""
 
@@ -3555,6 +3572,10 @@ msgstr ""
 
 #: src/core/validators.ts
 msgid "Name is too short, names should be at least two alphanumeric characters."
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/AttachAction.ts
+msgid "Name of volume as instance device e.g. /dev/vdb."
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -5690,6 +5711,10 @@ msgstr ""
 msgid "Resource does not have any plan."
 msgstr ""
 
+#: src/openstack/openstack-volume/actions/utils.ts
+msgid "Resource does not have backend ID."
+msgstr ""
+
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 msgid "Resource does not have plan."
 msgstr ""
@@ -5827,11 +5852,13 @@ msgid "Restroing"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Retention time"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 msgid "Retention time in days, if 0 - resource will be kept forever"
 msgstr ""
 
@@ -5969,6 +5996,7 @@ msgstr ""
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Schedule"
 msgstr ""
@@ -6747,7 +6775,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/actions.js
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
-#: src/openstack/openstack-volume/module.js
+#: src/openstack/openstack-volume/actions/PullAction.ts
 #: src/resource/actions/base.ts
 #: src/rijkscloud/module.js
 #: src/slurm/actions.js
@@ -6765,6 +6793,10 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateForm.tsx
 #: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 msgid "System user"
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/utils.ts
+msgid "System volume couldn't be detached."
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -7109,6 +7141,7 @@ msgid "Timestamp"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Timezone"
 msgstr ""
@@ -8202,7 +8235,7 @@ msgstr ""
 msgid "Volume"
 msgstr ""
 
-#: src/openstack/openstack-volume/module.js
+#: src/openstack/openstack-volume/actions/EditAction.ts
 msgid "Volume has been updated."
 msgstr ""
 

@@ -7,8 +7,8 @@ import openstackInstanceVolumes from './openstack-instance-volumes';
 import openstackVolumeSnapshots from './openstack-volume-snapshots';
 import { OpenStackVolumeSummary } from './OpenStackVolumeSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
-import { latinName } from '@waldur/resource/actions/constants';
 import './marketplace';
+import actions from './actions';
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.Volume', OpenStackVolumeSummary);
@@ -20,7 +20,7 @@ export default module => {
   module.component('openstackVolumeSnapshots', openstackVolumeSnapshots);
 
   module.config(fieldsConfig);
-  module.config(actionConfig);
+  module.config(actionsConfig);
   module.config(stateConfig);
   module.config(tabsConfig);
   module.run(registerImportEndpoint);
@@ -38,63 +38,8 @@ function fieldsConfig(AppstoreFieldConfigurationProvider) {
 }
 
 // @ngInject
-function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
-  ActionConfigurationProvider.register('OpenStackTenant.Volume', {
-    order: [
-      'edit',
-      'pull',
-      'attach',
-      'detach',
-      'extend',
-      'snapshot',
-      'destroy',
-      'create_snapshot_schedule',
-    ],
-    options: {
-      edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: gettext('Volume has been updated.'),
-        fields: {
-          name: latinName
-        },
-      }),
-      pull: {
-        title: gettext('Synchronise')
-      },
-      extend: {
-        component: 'volumeExtendDialog'
-      },
-      snapshot: {
-        tab: 'snapshots',
-        title: gettext('Create'),
-        dialogTitle: gettext('Create snapshot for OpenStack volume'),
-        iconClass: 'fa fa-plus',
-        component: 'snapshotCreateDialog',
-        fields: {
-          name: latinName,
-          kept_until: {
-            help_text: gettext('Guaranteed time of snapshot retention. If null - keep forever.'),
-            label: gettext('Kept until'),
-            required: false,
-            type: 'datetime'
-          }
-        }
-      },
-      create_snapshot_schedule: {
-        title: gettext('Create'),
-        dialogTitle: gettext('Create snapshot schedule for OpenStack volume'),
-        tab: 'snapshot_schedules',
-        iconClass: 'fa fa-plus',
-        fields: {
-          schedule: {
-            type: 'crontab'
-          },
-          timezone: {
-            default_value: 'UTC'
-          }
-        }
-      },
-    }
-  });
+function actionsConfig(ActionConfigurationProvider) {
+  ActionConfigurationProvider.register('OpenStackTenant.Volume', actions);
 }
 
 // @ngInject

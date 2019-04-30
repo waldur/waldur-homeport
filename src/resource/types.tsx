@@ -37,6 +37,10 @@ export interface Resource extends BaseResource {
 
 export interface Volume extends Resource {
   size: number;
+  bootable: boolean;
+  instance?: string;
+  source_snapshot?: string;
+  service_uuid?: string;
 }
 
 export interface VirtualMachine extends Resource {
