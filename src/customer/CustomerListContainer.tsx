@@ -38,7 +38,7 @@ async function oldestInvoice() {
   const response = await getList('/invoices/', params);
   if (response.length === 1) {
     const invoice = response[0];
-    return moment({year: invoice.year, month: invoice.month});
+    return moment({year: invoice.year, month: invoice.month - 1});
   } else {
     return moment().startOf('month');
   }
