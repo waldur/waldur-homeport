@@ -141,6 +141,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -973,6 +974,7 @@ msgstr ""
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/issues/create/issue-create-dialog.html
+#: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 #: src/offering/appstore-offering.html
@@ -4199,6 +4201,10 @@ msgstr ""
 msgid "Order item details"
 msgstr ""
 
+#: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
+msgid "Order item has cancel has been scheduled."
+msgstr ""
+
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/offering/OfferingTabs.tsx
@@ -7298,6 +7304,10 @@ msgstr ""
 
 #: src/invitations/actions/cancel.js
 msgid "Unable to cancel invitation."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
+msgid "Unable to cancel order item."
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/change-package-service.js

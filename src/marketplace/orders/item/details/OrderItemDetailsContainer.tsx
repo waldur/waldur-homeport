@@ -69,7 +69,7 @@ function updateBreadcrumbs(orderItem: OrderItemDetailsType) {
 }
 
 // tslint:disable-next-line: variable-name
-async function loadData(order_item_uuid) {
+async function loadOrderItem(order_item_uuid) {
   const orderItem = await api.getOrderItem(order_item_uuid);
   updateBreadcrumbs(orderItem);
   const offering = await api.getOffering(orderItem.offering_uuid);
@@ -84,8 +84,8 @@ async function loadData(order_item_uuid) {
 }
 
 const OrderItemDetailsContainer: React.SFC<{}> = () => (
-  <Query loader={loadData} variables={$state.params.order_item_uuid}>
-    {({ loading, data, error }) => {
+  <Query loader={loadOrderItem} variables={$state.params.order_item_uuid}>
+    {({ loading, data, error, loadData }) => {
       if (loading) {
         return <LoadingSpinner/>;
       }
@@ -97,6 +97,7 @@ const OrderItemDetailsContainer: React.SFC<{}> = () => (
           <OrderItemDetails
             orderItem={data.orderItem}
             offering={data.offering}
+            loadData={loadData}
           />
           <OfferingTabsComponent tabs={data.tabs}/>
         </>
