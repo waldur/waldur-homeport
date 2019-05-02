@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { terminateOrderItem } from '@waldur/marketplace/common/api';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 import ActionButton from '@waldur/table-react/ActionButton';
-import { format } from '@waldur/core/ErrorMessageFormatter';
 
 interface Props {
   uuid: string;
