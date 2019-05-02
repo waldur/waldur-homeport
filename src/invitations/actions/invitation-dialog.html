@@ -33,7 +33,7 @@
           id="inviteCivilNumber"
           name="civil_number"
           ng-model="DialogCtrl.civil_number"
-          ng-attr-required="DialogCtrl.civilNumberRequired"
+          ng-required="{{ DialogCtrl.civilNumberRequired }}"
           ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails">
         <p class="text-danger" ng-repeat="error in DialogCtrl.errors.civil_number" ng-bind="error"></p>
       </div>
@@ -48,7 +48,7 @@
           id="inviteTaxNumber"
           name="tax_number"
           ng-model="DialogCtrl.tax_number"
-          ng-attr-required="DialogCtrl.taxNumberRequired"
+          ng-required="{{ DialogCtrl.taxNumberRequired }}"
           ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails">
         <p class="text-danger" ng-repeat="error in DialogCtrl.errors.tax_number" ng-bind="error"></p>
       </div>
