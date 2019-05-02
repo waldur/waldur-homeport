@@ -26,7 +26,7 @@
     </div>
   </div>
   <div ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length > 0" class="row">
-    <div class="col-md-6 col-xs-12 m-b-md">
+    <div class="workspace-listing col-md-6 col-xs-12 m-b-md">
       <a class="pull-right btn btn-sm btn-default"
         id="add-new-organization"
         ng-click="$ctrl.createOrganization()"
@@ -74,6 +74,10 @@
             class="ellipsis"
             ng-if="!organization.abbreviation">
             {{ organization.name }}
+            <i ng-if="organization.is_service_provider"
+            tooltip-append-to-body="true"
+            uib-tooltip="{{ 'Service provider' | translate }}"
+            class="provider-icon svgfonticon svgfonticon-provider"></i>
             <extension-point id="organization-selector"></extension-point>
           </div>
         </div>

@@ -6303,6 +6303,7 @@ msgstr ""
 #: src/marketplace/details/LeafletMap.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/navigation/workspace/select-workspace-dialog.html
 msgid "Service provider"
 msgstr ""
 
