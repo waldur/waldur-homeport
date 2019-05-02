@@ -2141,6 +2141,10 @@ msgstr ""
 msgid "External IP"
 msgstr ""
 
+#: src/navigation/header/ExternalLinks.tsx
+msgid "External links"
+msgstr ""
+
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts

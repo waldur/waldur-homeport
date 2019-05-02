@@ -251,6 +251,12 @@ const ENV = {
   // Renders link to docs in header
   // docsLink: 'http://example.com/docs/'
 
+  // Render external links in dropdown in header
+  // Each item should be object with label and url fields.
+  // For example:
+  // {label: 'Helpdesk', url: 'https://example.com/'}
+  externalLinks: [],
+
   // Conceal "Change request" from a selection of issue types for non-staff/non-support users
   // concealChangeRequest: false
 
