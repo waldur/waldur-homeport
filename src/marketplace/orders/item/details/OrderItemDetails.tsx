@@ -16,9 +16,10 @@ import { OrderItemDetailsField } from './OrderItemDetailsField';
 import { OrderItemDetailsHeader } from './OrderItemDetailsHeader';
 import { OrderItemDetailsSummary } from './OrderItemDetailsSummary';
 import { OrderItemSummary } from './OrderItemSummary';
+import { OrderItemTerminateButton } from './OrderItemTerminateButton';
 import { OrderItemTypeIndicator } from './OrderItemTypeIndicator';
 
-export const OrderItemDetails = (props: OrderItemDetailsProps) => {
+export const OrderItemDetails = (props: OrderItemDetailsProps & {loadData(): void}) => {
   const DetailsComponent = getDetailsComponent(props.orderItem.offering_type);
   return (
     <Row>
@@ -50,6 +51,14 @@ export const OrderItemDetails = (props: OrderItemDetailsProps) => {
                   <ResourceDetailsLink item={props.orderItem as ResourceReference}>
                     {translate('Resource link')}
                   </ResourceDetailsLink>
+                </OrderItemDetailsField>
+              )}
+              {props.orderItem.can_terminate && (
+                <OrderItemDetailsField label={translate('Actions')}>
+                  <OrderItemTerminateButton
+                    uuid={props.orderItem.uuid}
+                    loadData={props.loadData}
+                  />
                 </OrderItemDetailsField>
               )}
             </Panel.Body>

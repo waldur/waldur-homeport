@@ -1,3 +1,16 @@
 .select-workspace-dialog__tooltip--order {
   z-index: 2100;
 }
+
+.workspace-listing {
+  .provider-icon {
+    float: right;
+    position: relative;
+    top: 1px;
+    right: 10px;
+    font-size: 18px;
+  }
+  .tooltip {
+    z-index: 10000;
+  }
+}

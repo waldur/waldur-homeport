@@ -70,6 +70,9 @@ export const getOrderDetails = (id: string) =>
 export const getOrderItem = id =>
   getById<OrderItemDetailsType>('/marketplace-order-items/', id);
 
+export const terminateOrderItem = id =>
+  post(`/marketplace-order-items/${id}/terminate/`);
+
 export const approveOrder = (orderUuid: string) =>
   post(`/marketplace-orders/${orderUuid}/approve/`).then(response => response.data);
 

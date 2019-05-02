@@ -26,7 +26,7 @@ function VolumesListController(
       this.category = ENV.Volumes;
       this.controllerScope = controllerScope;
       this._super();
-      this.addRowFields(['size', 'instance', 'instance_name']);
+      this.addRowFields(['size', 'instance', 'instance_name', 'bootable', 'backend_id', 'source_snapshot']);
       $scope.$on('refreshVolumesList', function() {
         $timeout(function() {
           controllerScope.resetCache();

@@ -16,7 +16,7 @@ const makeAccountingPeriods = (start: moment.Moment) => {
   let date = moment().startOf('month');
   const diff = date.diff(start, 'months');
   const choices = [];
-  for (let i = 0; i < diff; i++) {
+  for (let i = 0; i <= diff; i++) {
     const month = date.month() + 1;
     const year = date.year();
     const label = date.format('MMMM, YYYY');
@@ -38,7 +38,7 @@ async function oldestInvoice() {
   const response = await getList('/invoices/', params);
   if (response.length === 1) {
     const invoice = response[0];
-    return moment({year: invoice.year, month: invoice.month});
+    return moment({year: invoice.year, month: invoice.month - 1});
   } else {
     return moment().startOf('month');
   }

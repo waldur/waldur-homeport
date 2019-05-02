@@ -24,7 +24,7 @@ const AccountingStartDateField = ({ row }) => <span>{renderFieldOrDash(formatDat
 
 export const TableComponent = props => {
   const { filterColumns, customerListFilter } = props;
-  const accountingPeriodIsCurrent = customerListFilter.accounting_period.value.current;
+  const accountingPeriodIsCurrent = customerListFilter.accounting_period && customerListFilter.accounting_period.value.current;
   const columns = filterColumns([
     {
       title: translate('Organization'),
@@ -90,7 +90,7 @@ const exportRow = (row, props) => {
     formatDate(row.accounting_start_date),
     CurrentCostField({row}),
   ];
-  return props.customerListFilter.accounting_period.value.current ?
+  return props.customerListFilter.accounting_period && props.customerListFilter.accounting_period.value.current ?
     [...base, EstimatedCostField({row})] :
     base;
 };
@@ -102,7 +102,7 @@ const exportFields = props => {
     translate('Created'),
     translate('Start day of accounting'),
   ];
-  const accountingPeriodIsCurrent = props.customerListFilter.accounting_period.value.current;
+  const accountingPeriodIsCurrent = props.customerListFilter.accounting_period && props.customerListFilter.accounting_period.value.current;
   const vatNotIncluded = ENV.accountingMode === 'accounting';
   const vatMessage = vatNotIncluded ? translate('VAT is not included') : translate('VAT is included');
   return accountingPeriodIsCurrent ? [

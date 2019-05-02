@@ -61,6 +61,7 @@ export interface OrderItemDetailsType extends OrderItemResponse {
   new_plan_name: string;
   old_cost_estimate: string;
   new_cost_estimate: string;
+  can_terminate: boolean;
 }
 
 export interface Order {
