@@ -1,4 +1,9 @@
 {
   "apiEndpoint": "http://localhost:8080/",
-  "enabledFeatures": ["marketplace"]
+  "enabledFeatures": [
+    "marketplace",
+    "support.organizations",
+    "user.ssh-keys",
+    "notifications"
+  ]
 }
