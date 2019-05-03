@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { StateIndicator } from '@waldur/core/StateIndicator';
 import { pick } from '@waldur/core/utils';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource as ResourceType } from '@waldur/resource/types';
@@ -20,6 +21,16 @@ export const ResourceStateField = ({ row }: {row: Resource}) => {
     } as ResourceType;
     return <ResourceState resource={resource}/>;
   } else {
-    return row.state;
+    return (
+      <StateIndicator
+        label={row.state}
+        variant={
+          row.state === 'Erred' ? 'danger' :
+          row.state === 'Terminated' ? 'warning' :
+          'primary'
+        }
+        active={['Creating', 'Updating', 'Terminating'].includes(row.state)}
+      />
+    );
   }
 };
