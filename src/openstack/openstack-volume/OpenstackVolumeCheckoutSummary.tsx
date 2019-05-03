@@ -46,7 +46,7 @@ const getQuotas = ({formData, usages, limits, limitsType, project, components}) 
       required: formData.size || 0,
     },
   ];
-  if (project) {
+  if (project && project.billing_price_estimate) {
     quotas.push({
       name: 'cost',
       usage: project.billing_price_estimate.total,
