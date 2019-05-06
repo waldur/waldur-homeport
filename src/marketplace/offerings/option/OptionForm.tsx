@@ -40,7 +40,7 @@ const RequiredField = withTranslation((props: TranslateProps & {option: string})
     name={`${props.option}.required`}
     component={fieldProps => (
       <AwesomeCheckbox
-        id="required"
+        id={`${props.option}.required`}
         label={props.translate('Required')}
         {...fieldProps.input}
       />

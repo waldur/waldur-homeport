@@ -5,7 +5,8 @@ describe('OpenStackInstanceCreateForm', () => {
       .mockUser()
       .mockCustomer()
       .login()
-      .visitInstanceCreateForm();
+      .visitInstanceCreateForm()
+      .waitForSpinner();
   });
 
   it('should create OpenStack virtual machine', () => {
@@ -19,6 +20,13 @@ describe('OpenStackInstanceCreateForm', () => {
       .get('input[name="attributes.name"]').type('OpenStack instance')
       .openSelectDialog('image', 'CentOS 7 64bit')
       .openSelectDialog('flavor', 'm1.little')
+
+      // Open dropdown for project selector
+      .get('.Select-placeholder').first().click()
+
+      // Select first project
+      .get('.Select-option').first().click()
+
       .get('button').contains('Add to cart').click();
   });
 
@@ -44,6 +52,13 @@ describe('OpenStackInstanceCreateForm', () => {
       .openSelectDialog('image', 'CentOS 7 64bit')
       .buttonShouldBeDisabled('.btn-sm')
       .openSelectDialog('flavor', 'm1.little')
+
+      // Open dropdown for project selector
+      .get('.Select-placeholder').first().click()
+
+      // Select first project
+      .get('.Select-option').first().click()
+
       .get('.btn-sm').should('not.have.class', 'disabled');
   });
 });

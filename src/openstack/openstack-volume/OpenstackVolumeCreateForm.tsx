@@ -4,6 +4,7 @@ import { getLatinNameValidators } from '@waldur/core/validators';
 import { NumberField, TextField, StringField, FormContainer } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { formatIntField, parseIntField } from '@waldur/marketplace/common/utils';
+import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 const validateSize = (value: number) => value < 1 || value > 4096 ?
@@ -20,6 +21,7 @@ export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigura
           submitting={this.props.submitting}
           labelClass="col-sm-3"
           controlClass="col-sm-9">
+          <ProjectField/>
           <StringField
             label={translate('Volume name')}
             required={true}

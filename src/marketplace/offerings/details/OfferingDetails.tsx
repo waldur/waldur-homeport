@@ -15,9 +15,11 @@ interface OfferingDetailsProps {
 
 export const OfferingDetails: React.SFC<OfferingDetailsProps> = props => (
   <div className="wrapper wrapper-content">
-    <div className="pull-right m-r-md">
-      <OfferingActions row={props.offering}/>
-    </div>
+    {props.offering.shared && (
+      <div className="pull-right m-r-md">
+        <OfferingActions row={props.offering}/>
+      </div>
+    )}
     <OfferingHeader offering={props.offering}/>
     <Row>
       <Col lg={12}>

@@ -11,6 +11,7 @@ import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapp
 import { SelectDialogField } from '@waldur/form-react/SelectDialogField';
 import { translate, TranslateProps } from '@waldur/i18n';
 import { getUser } from '@waldur/issues/comments/selectors';
+import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { offeringSelector } from '@waldur/marketplace/details/selectors';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import * as api from '@waldur/openstack/api';
@@ -147,6 +148,7 @@ export class OpenstackInstanceCreateFormComponent extends
     if (this.state.loaded) {
       return (
         <form className="form-horizontal">
+          <ProjectField/>
           <CreateResourceFormGroup
             label={translate('VM name')}
             required={true}
