@@ -1,3 +1,5 @@
+$navbar-bg-dark: darken($nav-bg, 3%);
+
 .nav > li > a {
   color: $nav-text-color;
   font-weight: 600;
@@ -13,7 +15,7 @@
 }
 
 .navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {
-  background-color: darken($nav-bg, 3%);
+  background-color: $navbar-bg-dark;
   color: white;
 }
 
@@ -162,12 +164,24 @@
 }
 
 ul.nav-second-level {
-  background: darken($nav-bg, 3%);
+  background: $navbar-bg-dark;
 }
 
-.nav > li.active {
-  border-left: 4px solid darken($navy, 2%);
-  background: darken($nav-bg, 3%);
+.nav {
+
+  & > li.active {
+    border-left: 4px solid darken($navy, 2%);
+    background: $navbar-bg-dark;
+  }
+  & > li.active-with-child:not(.active) {
+    border-left: 4px solid darken($navy, 2%);
+    background: $navbar-bg-dark;
+  }
+  &-item--expanded {
+    .fa.arrow:before {
+      content: "\f107";
+    }
+  }
 }
 
 .nav.nav-second-level > li.active {
@@ -234,10 +248,6 @@ ul.nav-second-level {
   content: "\f104";
 }
 
-.active > a > .fa.arrow:before {
-  content: "\f107";
-}
-
 .nav-second-level li,
 .nav-third-level li {
   border-bottom: none !important;
@@ -287,7 +297,7 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
 }
 
 .canvas-menu.mini-navbar .nav-second-level {
-  background: darken($nav-bg, 3%);
+  background: $navbar-bg-dark;
 }
 
 .mini-navbar li.active .nav-second-level {

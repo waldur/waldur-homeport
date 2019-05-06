@@ -17,7 +17,10 @@ class SidebarController {
 
   $onInit() {
     this.$scope.$on('$stateChangeSuccess', this.syncMenu.bind(this));
-    this.$scope.$watch('items', this.syncMenu.bind(this));
+  }
+
+  $onChanges({ items }) {
+    this.syncMenu();
   }
 
   onMenuClick(event, item) {
@@ -65,6 +68,26 @@ class SidebarController {
       this.$state.go('profile.details', {reload: true});
       break;
     }
+  }
+
+  getItemCss(item) {
+    return {
+      'active-with-child': this.hasActiveChild(item),
+      'nav-item--expanded': item.expanded,
+    }
+  }
+
+  hasActiveChild(item) {
+    const activeChild = this.getActiveChildFromState(item);
+    return !!activeChild;
+  }
+
+  getActiveChildFromState(item) {
+    if (!item.children) {
+      return;
+    }
+    const { name } = this.$state.current;
+    return item.children.find(i => !i.link.indexOf(name));
   }
 }
 
