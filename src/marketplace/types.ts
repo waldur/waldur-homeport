@@ -63,7 +63,14 @@ export interface ComparedOffering {
   attributes: AttributesType;
 }
 
+interface Quota {
+  name: string;
+  limit: number;
+  usage: number;
+}
+
 export interface Offering {
+  quotas?: Quota[];
   uuid?: string;
   thumbnail: string;
   name: string;

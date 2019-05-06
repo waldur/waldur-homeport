@@ -201,10 +201,9 @@ class OpenstackVolumeCheckoutSummaryComponent extends React.Component<OpenstackV
       if (this.props.project) {
         projectQuotas = await api.loadProjectQuotas(this.props.offering.scope_uuid, this.props.project.uuid);
       }
-      const serviceSettings = await api.loadServiceSettings(this.props.offering.scope);
       const components = this.props.offering.plans.length > 0 ? this.props.offering.plans[0].prices : {};
-      const usages = parseQuotasUsage(serviceSettings.quotas);
-      const limits = parseQuotas(serviceSettings.quotas);
+      const usages = parseQuotasUsage(this.props.offering.quotas || []);
+      const limits = parseQuotas(this.props.offering.quotas || []);
       const aggregatedData = aggregateQuotasFromSPL({components, usages, limits}, projectQuotas);
       this.setState({
         loading: false,
