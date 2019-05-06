@@ -111,7 +111,7 @@ function SelectWorkspaceDialogController(
       }),
 
       customersService.getAll({
-        field: ['name', 'uuid', 'projects', 'owners', 'abbreviation'],
+        field: ['name', 'uuid', 'projects', 'owners', 'abbreviation', 'is_service_provider'],
         o: 'name'
       }).then(function(organizations) {
         if (ctrl.selectedOrganization) {
