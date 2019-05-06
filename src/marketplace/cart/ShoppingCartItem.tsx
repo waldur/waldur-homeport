@@ -42,7 +42,7 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
       </div>
     </td>
     <td className="text-center text-lg">
-      {defaultCurrency(props.item.estimate)}
+      {defaultCurrency(props.item.estimate || 0)}
     </td>
     <td className="text-center">
       <span className="btn-group">
