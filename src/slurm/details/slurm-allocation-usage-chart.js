@@ -35,7 +35,7 @@ export default function slurmAllocationUsageChart() {
             }
           }
         };
-        new Chart(ctx, options);
+        new Chart.default(ctx, options);
         scope.$digest();
       });
     }
