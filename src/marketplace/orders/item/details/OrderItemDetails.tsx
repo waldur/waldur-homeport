@@ -63,16 +63,18 @@ export const OrderItemDetails = (props: OrderItemDetailsProps & {loadData(): voi
               )}
             </Panel.Body>
           </Panel>
-          <Panel eventKey="plan">
-            <Panel.Heading>
-              <Panel.Title toggle={true}>
-              {props.orderItem.type === 'Create' ? translate('New plan') : translate('Plan')}
-              </Panel.Title>
-            </Panel.Heading>
-            <Panel.Body collapsible={true}>
-              <PlanDetails orderItem={props.orderItem} offering={props.offering}/>
-            </Panel.Body>
-          </Panel>
+          {props.orderItem.plan && (
+            <Panel eventKey="plan">
+              <Panel.Heading>
+                <Panel.Title toggle={true}>
+                {props.orderItem.type === 'Create' ? translate('New plan') : translate('Plan')}
+                </Panel.Title>
+              </Panel.Heading>
+              <Panel.Body collapsible={true}>
+                <PlanDetails orderItem={props.orderItem} offering={props.offering}/>
+              </Panel.Body>
+            </Panel>
+          )}
           <Panel eventKey="details">
             <Panel.Heading>
               <Panel.Title toggle={true}>

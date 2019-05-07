@@ -32,15 +32,16 @@ const getCreateSummary = (ctx: Context): string => {
 const getUpdateSummary = (ctx: Context) => {
   const msg = translate('{user} has requested changing of plan from "{old_plan}" to "{new_plan}".', {
     user: ctx.user,
-    old_plan: ctx.orderItem.old_plan_name,
+    old_plan: ctx.orderItem.old_plan_name || 'Default',
     new_plan: ctx.orderItem.new_plan_name,
-    old_estimate: defaultCurrency(ctx.orderItem.old_cost_estimate),
-    new_estimate: defaultCurrency(ctx.orderItem.new_cost_estimate),
   });
   if (ctx.approved) {
     return msg + ' ' + ctx.approved;
   } else {
-    return msg + ' ' + translate('Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included.', ctx);
+    return msg + ' ' + translate('Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included.', {
+      old_estimate: defaultCurrency(ctx.orderItem.old_cost_estimate || 0),
+      new_estimate: defaultCurrency(ctx.orderItem.new_cost_estimate || 0),
+    });
   }
 };
 

@@ -69,7 +69,7 @@ const ProjectRolesField = ({row}) => {
     return row.project_permissions.map((permission, index) => {
       return (
         <span key={index}>
-          <Tooltip key={index} label={permission.role} id="project-role">
+          <Tooltip key={index} label={`${permission.role} (${permission.customer_name})`} id="project-role">
             {permission.project_name}
             {' '}
             <i className="fa fa-question-circle"/>
