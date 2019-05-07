@@ -1,7 +1,7 @@
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { MARKETPLACE_FILTER_FORM } from './constants';
 
@@ -46,10 +46,12 @@ export const getFilterQuery = createSelector(
   getFilterName,
   getFilterAttributes,
   getCustomer,
-  (name, attributes, customer) => ({
+  getProject,
+  (name, attributes, customer, project) => ({
     name,
     attributes: formatAttributesFilter(attributes),
     allowed_customer_uuid: customer.uuid,
+    project_uuid: project && project.uuid,
     state: 'Active',
   }),
 );
