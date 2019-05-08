@@ -4,12 +4,10 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { OrganizationLink } from '@waldur/customer/OrganizationLink';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable } from '@waldur/table-react';
+import { createFetcher, Table, connectTable } from '@waldur/table-react';
 import { TableProps } from '@waldur/table-react/Table';
 import { Column, TableOptions } from '@waldur/table-react/types';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
-
-import { fetchCustomers } from './utils';
 
 const AbbreviationField = ({ row }) => <span>{renderFieldOrDash(row.abbreviation)}</span>;
 
@@ -64,7 +62,7 @@ const mapPropsToFilter = props => ({
 
 const TableOptions: TableOptions = {
   table: 'SharedProviderCustomers',
-  fetchData: fetchCustomers,
+  fetchData: createFetcher('openstack-shared-settings-customers'),
   exportRow,
   exportFields,
   mapPropsToFilter,
