@@ -282,9 +282,6 @@ const ENV = {
   // It can be either 'localStorage' or 'sessionStorage'.
   authStorage: 'localStorage',
 
-  // Allows to toggle visibility of empty marketplace categories.
-  showEmptyMarketplaceCategories: false,
-
   // Allows to hide billing step in organization creation wizard
   hideOrganizationBillingStep: false,
 

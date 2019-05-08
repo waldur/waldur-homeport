@@ -1,7 +1,6 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { Category } from '@waldur/marketplace/types';
-import { getConfig } from '@waldur/store/config';
 import { stateGo } from '@waldur/store/coreSaga';
 import { getWorkspace, getCustomer, getProject } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
@@ -11,7 +10,6 @@ import * as actions from './actions';
 import * as constants from './constants';
 
 function* getCategories() {
-  const conf = yield select(getConfig);
   const customer = yield select(getCustomer);
   const project = yield select(getProject);
   const options = {params: {
@@ -19,10 +17,7 @@ function* getCategories() {
     project_uuid: project && project.uuid,
   }};
   try {
-    let categories: Category[] = yield call(api.getCategories, options);
-    if (!conf.showEmptyMarketplaceCategories) {
-      categories = categories.filter(category => category.offering_count > 0);
-    }
+    const categories: Category[] = yield call(api.getCategories, options);
     yield put(actions.categoriesFetchSuccess(categories));
   } catch {
     yield put(actions.categoriesFetchError());
