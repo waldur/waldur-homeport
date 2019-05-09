@@ -25,7 +25,7 @@ export default class featuresProvider {
 
   $get() {
     const isVisible = feature => {
-      if (feature === undefined || feature === null) {
+      if (!feature) {
         return true;
       }
       if (this.enabledFeatures[feature]) {
