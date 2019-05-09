@@ -3,6 +3,8 @@ import * as React from 'react';
 import { required, getLatinNameValidators } from '@waldur/core/validators';
 import { FormContainer, TextField, StringField, SelectField, NumberField } from '@waldur/form-react';
 import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
+import { DateField } from '@waldur/form-react/DateField';
+import { TimeSelectField } from '@waldur/form-react/TimeSelectField';
 import { translate } from '@waldur/i18n';
 import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
@@ -82,6 +84,12 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
                   parse: parseIntField,
                   format: formatIntField,
                 };
+                break;
+              case 'date':
+                OptionField = DateField;
+                break;
+              case 'time':
+                OptionField = TimeSelectField;
                 break;
             }
             return (

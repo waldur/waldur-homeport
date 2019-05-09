@@ -33,4 +33,12 @@ export const FIELD_TYPES: Array<{value: FieldType, label: string}> = [
     value: 'select_openstack_tenant',
     label: 'Select OpenStack tenant',
   },
+  {
+    value: 'date',
+    label: 'Date',
+  },
+  {
+    value: 'time',
+    label: 'Time',
+  },
 ];

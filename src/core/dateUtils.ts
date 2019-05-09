@@ -8,6 +8,9 @@ export const formatDate: DateFormatter = date =>
 export const formatDateTime: DateFormatter = date =>
   moment(date).format('YYYY-MM-DD HH:mm');
 
+export const formatTime: DateFormatter = date =>
+  moment(date).format('HH:mm');
+
 export const formatFromNow: DateFormatter = date =>
   moment(date).fromNow();
 
