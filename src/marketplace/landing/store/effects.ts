@@ -26,6 +26,7 @@ function* getCategories() {
 
 function* getOfferings() {
   const customer = yield select(getCustomer);
+  const project = yield select(getProject);
   const field = [
     'uuid',
     'name',
@@ -44,6 +45,7 @@ function* getOfferings() {
     state: 'Active',
     field,
     allowed_customer_uuid: customer.uuid,
+    project_uuid: project && project.uuid,
   };
   try {
     const offerings = yield call(api.getOfferingsList, params);
