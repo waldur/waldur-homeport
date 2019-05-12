@@ -28,10 +28,8 @@ export const loadSshKeys = (user_uuid: string) =>
 
 export const loadProjectQuotas = (settings_uuid: string, project_uuid: string) =>
   getFirst('/openstacktenant-service-project-link/', {
-    params: {
-      settings_uuid,
-      project_uuid,
-    },
+    settings_uuid,
+    project_uuid,
   }).then(data => data.quotas);
 
 export const loadServiceSettings = (scope: string) =>
