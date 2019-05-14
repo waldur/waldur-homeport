@@ -12,7 +12,7 @@ const EventMessageField = ({ row }) => (
 );
 
 const EventDateField = ({ row }) => (
-  <span>{formatDateTime(row['@timestamp'])}</span>
+  <span>{formatDateTime(row.created)}</span>
 );
 
 const TableComponent = props => {
@@ -26,6 +26,7 @@ const TableComponent = props => {
       {
         title: translate('Timestamp'),
         render: EventDateField,
+        orderField: 'created',
       },
       {
         title: translate('Actions'),
@@ -46,9 +47,9 @@ export const getEventsList = (extraOptions?) => {
   const TableOptions = {
     table: 'events',
     fetchData: createFetcher('events'),
-    queryField: 'search',
-    exportFields: ['message', 'timestamp'],
-    exportRow: row => [row.message, row['@timestamp']],
+    queryField: 'message',
+    exportFields: ['message', 'created'],
+    exportRow: row => [row.message, row.created],
     ...extraOptions,
   };
 
