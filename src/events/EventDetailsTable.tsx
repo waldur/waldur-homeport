@@ -20,7 +20,7 @@ export const EventDetailsTable = ({ translate, event, isStaffOrSupport }: EventD
     <tbody>
       <EventField
         label={translate('Timestamp')}
-        value={formatDateTime(event['@timestamp'])}
+        value={formatDateTime(event.created)}
       />
       <EventField
         label={translate('User')}
@@ -31,10 +31,6 @@ export const EventDetailsTable = ({ translate, event, isStaffOrSupport }: EventD
       <EventField
         label={translate('IP address')}
         value={event.context.ip_address}
-      />
-      <EventField
-        label={translate('Importance')}
-        value={<span style={{ textTransform: 'capitalize' }}>{event.context.importance}</span>}
       />
       <EventField
         label={translate('Event type')}

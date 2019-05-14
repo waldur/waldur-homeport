@@ -4,7 +4,6 @@ export const event: Event = {
   uuid: 'uuid',
   event_type: 'auth_logged_in_with_username',
   context: {
-    importance: 'normal',
     user_uuid: 'a45c8927e176455781f63e7c7baf9567',
     user_username: 'alice',
     user_full_name: 'Alice Lebowski',
