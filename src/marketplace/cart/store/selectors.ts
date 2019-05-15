@@ -55,3 +55,8 @@ export const allTermsOfServiceAgreed = createSelector(
     return formValues && Object.keys(registeredFields).every(key => formValues[key] === true);
   }
 );
+
+export const allOfferingsPrivate = createSelector(
+  getItems,
+  items => items.every(item => !item.offering_shared && !item.offering_billable)
+);
