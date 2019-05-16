@@ -2646,10 +2646,6 @@ msgstr ""
 msgid "Import volume"
 msgstr ""
 
-#: src/events/EventDetailsTable.tsx
-msgid "Importance"
-msgstr ""
-
 #: src/resource/state/constants.js
 msgid "Importing resources"
 msgstr ""
