@@ -12,4 +12,3 @@ const authButtonText = {
 };
 
 export default authButtonText;
-
