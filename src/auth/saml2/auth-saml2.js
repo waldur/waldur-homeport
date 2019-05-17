@@ -7,7 +7,7 @@ const authSaml2 = {
   },
   controller: class AuthSaml2Controller {
     // @ngInject
-    constructor(ENV, coreUtils, Saml2Service) {
+    constructor(ENV, Saml2Service) {
       this.Saml2Service = Saml2Service;
       this.ENV = ENV;
     }
