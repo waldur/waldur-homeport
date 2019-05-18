@@ -9,7 +9,7 @@ export const fetchEvents = request => createFetcher('events')(request).then(resp
   ).map(event => ({
     ...event,
     html_message: eventsRegistry.formatEvent(event),
-    created: event['@timestamp'],
+    created: event.created,
   }));
   return {...response, rows};
 });

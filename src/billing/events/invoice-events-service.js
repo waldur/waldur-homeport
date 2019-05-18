@@ -22,7 +22,7 @@ export default class InvoiceEventsService {
 
   parseEvents(events) {
     return events.map(event => ({
-      date: event['@timestamp'],
+      date: event.created,
       message: eventsRegistry.formatEvent(event),
       color: this.getEventColor(event),
       icon: this.getEventIcon(event),

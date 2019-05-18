@@ -12,6 +12,7 @@ import { Project } from '@waldur/workspace/types';
 import { Resource } from '../types';
 import { CategoryColumnField } from './CategoryColumnField';
 import { CreateResourceButton } from './CreateResourceButton';
+import { ImportResourceButton } from './ImportResourceButton';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
@@ -54,12 +55,19 @@ export const TableComponent = props => {
     render: ResourceActionsButton,
   });
 
+  const tableActions = (
+    <>
+      <ImportResourceButton category_uuid={props.category_uuid}/>
+      <CreateResourceButton category_uuid={props.category_uuid}/>
+    </>
+  );
+
   return (
     <Table
       {...props}
       columns={columns}
       verboseName={translate('Resources')}
-      actions={<CreateResourceButton category_uuid={props.category_uuid}/>}
+      actions={tableActions}
       initialSorting={{field: 'created', mode: 'desc'}}
     />
   );

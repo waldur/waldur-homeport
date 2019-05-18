@@ -27,7 +27,7 @@ export default function eventsService($q, baseServiceClass, ENV) {
         return response.map(function(event) {
           return {
             name: event.event_type.replace('resource_', '').replace(/_/g, ' '),
-            timestamp: event['@timestamp']
+            timestamp: event.created,
           };
         });
       });

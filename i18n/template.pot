@@ -964,7 +964,6 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateForm.tsx
 #: src/appstore/appstore-store.html
 #: src/appstore/dialog/appstore-selector-dialog.html
-#: src/auth/saml2/auth-saml2-dialog.html
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/cost-planning/cost-plan-dialog.html
 #: src/digitalocean/droplet-resize.html
@@ -1095,10 +1094,6 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Choices as comma-separated list"
-msgstr ""
-
-#: src/auth/saml2/auth-saml2-dialog.html
-msgid "Choose an organization"
 msgstr ""
 
 #: src/form-react/list-field/ListFieldInternal.tsx
@@ -1299,10 +1294,6 @@ msgstr ""
 
 #: src/customer/create/customer-create-dialog.js
 msgid "Could not create organization"
-msgstr ""
-
-#: src/auth/saml2/auth-saml2-dialog.js
-msgid "Could not load a list of identity providers. Please try again."
 msgstr ""
 
 #: src/dashboard/api.ts
@@ -2560,10 +2551,6 @@ msgstr ""
 msgid "IPv4 address"
 msgstr ""
 
-#: src/auth/saml2/auth-saml2-dialog.html
-msgid "Identity providers are not unavailable."
-msgstr ""
-
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "If no additional whitelisted users are specified, only admins will have access to JupyterHub."
 msgstr ""
@@ -2644,10 +2631,6 @@ msgstr ""
 
 #: src/resource-import/register-import-volume-table-action.js
 msgid "Import volume"
-msgstr ""
-
-#: src/events/EventDetailsTable.tsx
-msgid "Importance"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -3240,7 +3223,7 @@ msgid "Logging user in"
 msgstr ""
 
 #: src/auth/auth-login.html
-#: src/auth/saml2/auth-saml2-dialog.html
+#: src/auth/saml2/AuthSaml2Dialog.tsx
 msgid "Login"
 msgstr ""
 
@@ -3818,6 +3801,10 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 msgid "No restored volumes found matching filter."
+msgstr ""
+
+#: src/auth/saml2/AuthSaml2Dialog.tsx
+msgid "No results found"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-groups-list.js
@@ -4657,6 +4644,10 @@ msgstr ""
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
+#: src/auth/saml2/AuthSaml2Dialog.tsx
+msgid "Please search for your organization"
+msgstr ""
+
 #: src/ansible/python-management/form/InstalledLibraryRowForm.tsx
 msgid "Please select a library"
 msgstr ""
@@ -4687,10 +4678,6 @@ msgstr ""
 
 #: src/i18n/language-list.html
 msgid "Please select your language"
-msgstr ""
-
-#: src/auth/saml2/auth-saml2-dialog.html
-msgid "Please select your organization"
 msgstr ""
 
 #: src/appstore/appstore-store.js
@@ -6141,6 +6128,7 @@ msgstr ""
 msgid "Select one to go to a customer workspace"
 msgstr ""
 
+#: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
@@ -7274,6 +7262,10 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
+#: src/auth/saml2/AuthSaml2Dialog.tsx
+msgid "Type to search"
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 #: src/invitations/invitations-list.js
 msgid "URL"
@@ -7570,7 +7562,7 @@ msgstr ""
 msgid "Unable to load user."
 msgstr ""
 
-#: src/auth/saml2/saml2-service.js
+#: src/auth/saml2/store/effects.ts
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
 

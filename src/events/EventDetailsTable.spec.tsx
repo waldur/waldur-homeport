@@ -29,13 +29,13 @@ const getEventMessage = (wrapper: ReactWrapper) =>
 describe('EventDetailsDialog', () => {
   it('renders table row for each field', () => {
     const wrapper = renderTable();
-    const expected = ['Timestamp', 'User', 'IP address', 'Importance', 'Event type', 'Message'];
+    const expected = ['Timestamp', 'User', 'IP address', 'Event type', 'Message'];
     expect(getRowLabels(wrapper)).toEqual(expected);
   });
 
   it('conceals row for empty field', () => {
     const wrapper = renderTable({event: {...event, message: undefined}});
-    const expected = ['Timestamp', 'User', 'IP address', 'Importance', 'Event type'];
+    const expected = ['Timestamp', 'User', 'IP address', 'Event type'];
     expect(getRowLabels(wrapper)).toEqual(expected);
   });
 
