@@ -3171,6 +3171,10 @@ msgstr ""
 msgid "Limit period"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+msgid "Limits"
+msgstr ""
+
 #: src/issues/issue-detail.html
 msgid "Link"
 msgstr ""
@@ -3726,7 +3730,6 @@ msgstr ""
 msgid "No invoices found matching filter."
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -3904,7 +3907,6 @@ msgstr ""
 msgid "Not running accounting"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.js
 msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
 msgstr ""
@@ -4384,7 +4386,6 @@ msgstr ""
 msgid "Package is not available because current VPC resource usage exceeds package quota limits."
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
