@@ -36,6 +36,10 @@ const PureOpenStackVolumeSummary = (props: ResourceSummaryProps) => {
         label={translate('Device')}
         value={resource.device}
       />
+      <Field
+        label={translate('Availability zone')}
+        value={resource.availability_zone_name}
+      />
     </span>
   );
 };

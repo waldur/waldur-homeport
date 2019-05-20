@@ -75,11 +75,13 @@ interface OpenstackVolumeCheckoutSummaryProps extends TranslateProps {
 export const PureOpenstackVolumeCheckoutSummaryComponent = (props: OpenstackVolumeCheckoutSummaryProps) => (
   <>
     <p id="invalid-info">
-      {!props.formData.size && props.translate('No items yet.')}
+      {!props.formData.size && props.translate('Please enter volume size to see price estimate.')}
     </p>
-    {props.components && (
+    {(!props.offering.shared && !props.offering.billable) && (
       <p dangerouslySetInnerHTML={{
-        __html: props.translate('Note that this volume is charged as part of <strong>{serviceName}</strong> package.', {serviceName: props.offering.name}),
+        __html: props.translate('Note that this volume will not be charged separately for {organization}.', {
+          organization: props.customer.name,
+        }),
       }}/>
     )}
     <OfferingLogo src={props.offering.thumbnail} size="small"/>
@@ -150,7 +152,7 @@ export const PureOpenstackVolumeCheckoutSummaryComponent = (props: OpenstackVolu
       </Table>
     }
     {props.components && (
-      <Panel title={props.translate('Package limits')} className="m-b-none">
+      <Panel title={props.translate('Limits')} className="m-b-none">
         <QuotaUsageBarChart quotas={getQuotas({
           formData: props.formData,
           usages: props.usages,
