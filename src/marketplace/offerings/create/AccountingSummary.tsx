@@ -16,7 +16,7 @@ const PureAccountingSummary = props => (props.formData && props.formData.plans) 
         <p>
           <strong>{translate('Plan name')}:</strong> {plan.name}
         </p>
-        {plan.quotas && plan.prices && (
+        {(plan.quotas || plan.prices) && (
           <table className="table table-bordered">
             <thead>
               <tr>
@@ -33,10 +33,10 @@ const PureAccountingSummary = props => (props.formData && props.formData.plans) 
                     {component.name}
                   </td>
                   <td>
-                    {component.billing_type === 'fixed' ? plan.quotas[component.type] : 'N/A'}
+                    {(plan.quotas && component.billing_type === 'fixed') ? plan.quotas[component.type] : 'N/A'}
                   </td>
                   <td>
-                    {plan.prices[component.type] || 'N/A'}
+                    {(plan.prices && plan.prices[component.type]) || 'N/A'}
                   </td>
                   <td>
                     {component.measured_unit}

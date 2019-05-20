@@ -4038,6 +4038,14 @@ msgstr ""
 msgid "Ok, what's next?"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
+msgid "One-time"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
+msgid "One-time on plan switch"
+msgstr ""
+
 #: src/ansible/python-management/validation.ts
 msgid "Only alphanumeric characters, dashes or underscores"
 msgstr ""
