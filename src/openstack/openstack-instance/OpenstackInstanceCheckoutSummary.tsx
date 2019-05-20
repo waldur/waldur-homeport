@@ -108,6 +108,13 @@ export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceChe
           {!props.formData.flavor && props.translate('Please select flavor to see price estimate.')}
         </p>
       )}
+      {(!props.offering.shared && !props.offering.billable) && (
+        <p dangerouslySetInnerHTML={{
+          __html: props.translate('Note that this virtual machine will not be charged separately for {organization}.', {
+            organization: props.customer.name,
+          }),
+        }}/>
+      )}
       <OfferingLogo src={props.offering.thumbnail} size="small"/>
       {isValid(props.formData, props.components) && (
         <Table bordered={true}>
