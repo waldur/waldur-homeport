@@ -4669,6 +4669,10 @@ msgstr ""
 msgid "Please select a version"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+msgid "Please select flavor to see price estimate."
+msgstr ""
+
 #: src/form-react/list-field/ListFieldModal.tsx
 msgid "Please select one"
 msgstr ""

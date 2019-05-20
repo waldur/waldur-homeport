@@ -105,6 +105,7 @@ export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceChe
       {!isValid(props.formData, props.components) && (
         <p id="invalid-info">
           {props.formData.flavor && props.translate('Resource configuration is invalid. Please fix errors in form.')}
+          {!props.formData.flavor && props.translate('Please select flavor to see price estimate.')}
         </p>
       )}
       <OfferingLogo src={props.offering.thumbnail} size="small"/>
