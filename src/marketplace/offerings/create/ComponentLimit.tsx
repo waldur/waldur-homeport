@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { formValues } from 'redux-form';
 
+import { BillingType } from '@waldur/marketplace/types';
+
 import { ComponentDisableQuotaField } from './ComponentDisableQuotaField';
 import { ComponentLimitAmountField } from './ComponentLimitAmountField';
 import { ComponentLimitPeriodField, LimitPeriodOption } from './ComponentLimitPeriodField';
@@ -11,7 +13,7 @@ interface OwnProps {
 
 interface Values {
   billingType: {
-    value: 'usage' | 'fixed'
+    value: BillingType
   };
   limitPeriod: LimitPeriodOption;
 }

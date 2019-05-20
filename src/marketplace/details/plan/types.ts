@@ -1,10 +1,10 @@
-import { Offering } from '@waldur/marketplace/types';
+import { Offering, BillingType } from '@waldur/marketplace/types';
 
 export interface Component {
   price: number;
   disable_quotas: boolean;
   type: string;
-  billing_type: 'usage' | 'fixed';
+  billing_type: BillingType;
   label: string;
   units: string;
   amount: number;

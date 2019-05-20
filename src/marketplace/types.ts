@@ -24,8 +24,15 @@ export interface BaseComponent {
   description: string;
 }
 
+export type BillingType =
+  | 'usage'
+  | 'fixed'
+  | 'one'
+  | 'few'
+  ;
+
 export interface OfferingComponent extends BaseComponent {
-  billing_type: 'usage' | 'fixed';
+  billing_type: BillingType;
   limit_period?: 'month' | 'total';
   limit_amount: number;
 }
