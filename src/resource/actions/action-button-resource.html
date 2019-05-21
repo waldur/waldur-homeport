@@ -1,10 +1,10 @@
-<div class="btn-group dropdown" uib-dropdown on-toggle="$ctrl.onToggle(open)">
+<div class="btn-group dropdown" uib-dropdown uib-dropdown-fix on-toggle="$ctrl.onToggle(open)">
   <a class="btn btn-default btn-sm" uib-dropdown-toggle>
     <span translate>Actions</span>
     <span class="caret"></span>
   </a>
 
-  <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
+  <ul class="dropdown-menu" uib-dropdown-menu>
     <li role="menuitem" ng-show="$ctrl.loading">
       <a translate>Loading actions</a>
     </li>
