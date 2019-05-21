@@ -699,6 +699,8 @@ msgstr ""
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
+#: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Availability zone"
 msgstr ""
 
@@ -3172,6 +3174,7 @@ msgid "Limit period"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Limits"
 msgstr ""
 
@@ -3732,7 +3735,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "No items yet."
 msgstr ""
@@ -3915,9 +3917,12 @@ msgstr ""
 msgid "Note that this virtual machine will not be charged separately for {organization}."
 msgstr ""
 
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.js
 msgid "Note that this volume is charged as part of <strong>{serviceName}</strong> package."
+msgstr ""
+
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+msgid "Note that this volume will not be charged separately for {organization}."
 msgstr ""
 
 #: src/user/hooks/hook-details.js
@@ -4391,7 +4396,6 @@ msgid "Package is not available because current VPC resource usage exceeds packa
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Package limits"
 msgstr ""
@@ -4617,6 +4621,10 @@ msgstr ""
 
 #: src/marketplace/details/plan/ComponentEditRow.tsx
 msgid "Please enter estimated maximum usage in the rows below:"
+msgstr ""
+
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+msgid "Please enter volume size to see price estimate."
 msgstr ""
 
 #: src/invitations/invitation-confirm-dialog.html
@@ -7526,6 +7534,7 @@ msgstr ""
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Unable to load offering details."
 msgstr ""
 
