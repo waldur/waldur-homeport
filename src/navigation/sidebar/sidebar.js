@@ -19,7 +19,7 @@ class SidebarController {
     this.$scope.$on('$stateChangeSuccess', this.syncMenu.bind(this));
   }
 
-  $onChanges({ items }) {
+  $onChanges() {
     this.syncMenu();
   }
 
@@ -74,7 +74,7 @@ class SidebarController {
     return {
       'active-with-child': this.hasActiveChild(item),
       'nav-item--expanded': item.expanded,
-    }
+    };
   }
 
   hasActiveChild(item) {

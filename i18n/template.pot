@@ -3809,6 +3809,7 @@ msgid "No restored volumes found matching filter."
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/form-react/AsyncSelectField.tsx
 msgid "No results found"
 msgstr ""
 
@@ -6239,6 +6240,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Select subnets to connect to..."
+msgstr ""
+
+#: src/offering/OfferingConfigurationForm.tsx
+msgid "Select tenant..."
 msgstr ""
 
 #: src/team/user-selector.html

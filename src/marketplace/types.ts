@@ -2,7 +2,7 @@ import { InjectedFormProps } from 'redux-form';
 
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { Offering } from '@waldur/marketplace/types';
-import { Project } from '@waldur/workspace/types';
+import { Project, Customer } from '@waldur/workspace/types';
 
 export type BillingPeriod =
   | 'day'
@@ -200,6 +200,7 @@ export interface OfferingConfigurationFormProps extends InjectedFormProps {
   project?: Project;
   plan?: Plan;
   initialAttributes?: AttributesType;
+  customer?: Customer;
 }
 
 export interface OrderItemDetailsProps {

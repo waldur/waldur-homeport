@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 
 import { required, getLatinNameValidators } from '@waldur/core/validators';
 import { FormContainer, TextField, StringField, SelectField, NumberField } from '@waldur/form-react';
+import { AsyncSelectField } from '@waldur/form-react/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { DateField } from '@waldur/form-react/DateField';
 import { TimeSelectField } from '@waldur/form-react/TimeSelectField';
@@ -11,8 +13,11 @@ import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTa
 import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
+import { getCustomer } from '@waldur/workspace/selectors';
 
-export class OfferingConfigurationForm extends React.Component<OfferingConfigurationFormProps> {
+import { loadTenantOptions } from './utils';
+
+export class PureOfferingConfigurationForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
     const attributes = {...this.props.initialAttributes};
     if (this.props.offering.options.order) {
@@ -91,6 +96,14 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
               case 'time':
                 OptionField = TimeSelectField;
                 break;
+              case 'select_openstack_tenant':
+                const { customer } = props;
+                const customerId = customer.uuid;
+                OptionField = AsyncSelectField;
+                params = {
+                  loadOptions: loadTenantOptions(customerId),
+                  placeholder: translate('Select tenant...'),
+                };
             }
             return (
               <OptionField
@@ -109,3 +122,11 @@ export class OfferingConfigurationForm extends React.Component<OfferingConfigura
     );
   }
 }
+
+const mapStateToProps = state => ({
+  customer: getCustomer(state),
+});
+
+const enhance = connect(mapStateToProps);
+
+export const OfferingConfigurationForm = enhance(PureOfferingConfigurationForm);
