@@ -10,6 +10,7 @@ export interface OpenStackInstance extends VirtualMachine {
   floating_ips?: string[];
   runtime_state: 'SHUTOFF' | 'ACTIVE';
   security_groups?: string[];
+  availability_zone_name?: string;
 }
 
 export interface Subnet {
