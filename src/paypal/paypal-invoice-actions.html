@@ -1,9 +1,9 @@
-<div class="btn-group dropdown" uib-dropdown>
+<div class="btn-group dropdown" uib-dropdown uib-dropdown-fix>
   <a class="btn btn-default btn-sm" uib-dropdown-toggle>
     <span translate>Actions</span>
     <span class="caret"></span>
   </a>
-  <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
+  <ul class="dropdown-menu" uib-dropdown-menu>
     <li role="menuitem" ng-if="!$ctrl.invoice.backend_id">
       <a uib-tooltip="{{ 'Invoice has not been sent to PayPal yet' | translate }}" translate>There are no actions.</a>
     </li>

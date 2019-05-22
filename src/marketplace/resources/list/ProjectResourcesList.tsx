@@ -69,6 +69,7 @@ export const TableComponent = props => {
       verboseName={translate('Resources')}
       actions={tableActions}
       initialSorting={{field: 'created', mode: 'desc'}}
+      hasQuery={true}
     />
   );
 };
@@ -80,6 +81,7 @@ const TableOptions = {
     project_uuid: props.project.uuid,
     category_uuid: props.category_uuid,
   }) : {},
+  queryField: 'name',
 };
 
 const mapStateToProps = state => ({

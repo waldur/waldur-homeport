@@ -100,19 +100,19 @@ interface OpenstackInstanceCheckoutSummaryProps extends TranslateProps {
 }
 
 export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceCheckoutSummaryProps) => {
-  const serviceName = props.formData.service ? props.formData.service.name : '';
-
   return (
     <>
       {!isValid(props.formData, props.components) && (
         <p id="invalid-info">
           {props.formData.flavor && props.translate('Resource configuration is invalid. Please fix errors in form.')}
-          {!props.formData.flavor && props.translate('No items yet.')}
+          {!props.formData.flavor && props.translate('Please select flavor to see price estimate.')}
         </p>
       )}
-      {props.components && (
+      {(!props.offering.shared && !props.offering.billable) && (
         <p dangerouslySetInnerHTML={{
-          __html: props.translate('Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package.', {serviceName}),
+          __html: props.translate('Note that this virtual machine will not be charged separately for {organization}.', {
+            organization: props.customer.name,
+          }),
         }}/>
       )}
       <OfferingLogo src={props.offering.thumbnail} size="small"/>
@@ -219,7 +219,7 @@ export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceChe
         </Table>
       )}
       {props.components && (
-        <Panel title={props.translate('Package limits')}>
+        <Panel title={props.translate('Limits')}>
           <QuotaUsageBarChart quotas={getQuotas({
             formData: props.formData,
             usages: props.usages,

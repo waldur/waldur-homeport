@@ -699,6 +699,8 @@ msgstr ""
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
+#: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Availability zone"
 msgstr ""
 
@@ -3171,6 +3173,11 @@ msgstr ""
 msgid "Limit period"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+msgid "Limits"
+msgstr ""
+
 #: src/issues/issue-detail.html
 msgid "Link"
 msgstr ""
@@ -3726,10 +3733,8 @@ msgstr ""
 msgid "No invoices found matching filter."
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "No items yet."
 msgstr ""
@@ -3804,6 +3809,7 @@ msgid "No restored volumes found matching filter."
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/form-react/AsyncSelectField.tsx
 msgid "No results found"
 msgstr ""
 
@@ -3904,14 +3910,20 @@ msgstr ""
 msgid "Not running accounting"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.js
 msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
 msgstr ""
 
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+msgid "Note that this virtual machine will not be charged separately for {organization}."
+msgstr ""
+
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.js
 msgid "Note that this volume is charged as part of <strong>{serviceName}</strong> package."
+msgstr ""
+
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+msgid "Note that this volume will not be charged separately for {organization}."
 msgstr ""
 
 #: src/user/hooks/hook-details.js
@@ -4036,6 +4048,14 @@ msgstr ""
 
 #: src/intro/base-intro.js
 msgid "Ok, what's next?"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
+msgid "One-time"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
+msgid "One-time on plan switch"
 msgstr ""
 
 #: src/ansible/python-management/validation.ts
@@ -4376,9 +4396,7 @@ msgstr ""
 msgid "Package is not available because current VPC resource usage exceeds package quota limits."
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Package limits"
 msgstr ""
@@ -4606,6 +4624,10 @@ msgstr ""
 msgid "Please enter estimated maximum usage in the rows below:"
 msgstr ""
 
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+msgid "Please enter volume size to see price estimate."
+msgstr ""
+
 #: src/invitations/invitation-confirm-dialog.html
 msgid "Please give us a moment to validate your invitation."
 msgstr ""
@@ -4658,6 +4680,10 @@ msgstr ""
 
 #: src/ansible/python-management/form/InstalledLibraryRowForm.tsx
 msgid "Please select a version"
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+msgid "Please select flavor to see price estimate."
 msgstr ""
 
 #: src/form-react/list-field/ListFieldModal.tsx
@@ -6216,6 +6242,10 @@ msgstr ""
 msgid "Select subnets to connect to..."
 msgstr ""
 
+#: src/offering/OfferingConfigurationForm.tsx
+msgid "Select tenant..."
+msgstr ""
+
 #: src/team/user-selector.html
 msgid "Select user..."
 msgstr ""
@@ -7509,6 +7539,7 @@ msgstr ""
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Unable to load offering details."
 msgstr ""
 

@@ -53,7 +53,7 @@ export const OrderItem = (props: OrderItemProps) => (
       </div>
     </td>
     <td className="text-center text-lg">
-      {defaultCurrency(props.item.cost)}
+      {defaultCurrency(props.item.cost || 0)}
     </td>
     <td className="text-center">
       {props.item.state}

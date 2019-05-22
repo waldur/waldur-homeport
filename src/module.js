@@ -8,7 +8,8 @@ import {
   errorsHandler,
   closeDialogs
 } from './app';
-import ncUtilsFlash from './utils';
+import { ncUtilsFlash } from './utils';
+import { uibDropdownFix } from './shims/uibDropdownFix';
 import loadInspinia from './inspinia';
 
 export default module => {
@@ -22,4 +23,5 @@ export default module => {
   module.config(errorsHandler);
   module.run(closeDialogs);
   module.factory('ncUtilsFlash', ncUtilsFlash);
+  module.directive('uibDropdownFix', uibDropdownFix);
 };

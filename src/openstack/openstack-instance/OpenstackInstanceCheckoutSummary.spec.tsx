@@ -28,14 +28,14 @@ describe('OpenstackInstanceCheckoutSummary', () => {
 
   it('should render right message if no flavor has been selected', () => {
     const wrapper = renderWrapper(dataWithoutFlavor);
-    expect(wrapper.find('p#invalid-info').text()).toContain('No items yet.');
+    expect(wrapper.find('p#invalid-info').text()).toContain('Please select flavor to see price estimate.');
     expect(wrapper.find('p#invalid-info').text()).not.toContain('Resource configuration is invalid. Please fix errors in form.');
   });
 
   it('should render right message if resource configuration is invalid', () => {
     const wrapper = renderWrapper({...dataWithFlavor, components: null});
     expect(wrapper.find('p#invalid-info').text()).toContain('Resource configuration is invalid. Please fix errors in form.');
-    expect(wrapper.find('p#invalid-info').text()).not.toContain('No items yet.');
+    expect(wrapper.find('p#invalid-info').text()).not.toContain('Please select flavor to see price estimate.');
   });
 
   it('should render Table and QuotaUsageBarChart if flavor has been selected', () => {

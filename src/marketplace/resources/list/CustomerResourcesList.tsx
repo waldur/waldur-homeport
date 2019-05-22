@@ -81,6 +81,7 @@ export const TableComponent = props => {
       verboseName={translate('Resources')}
       initialSorting={{field: 'created', mode: 'desc'}}
       enableExport={true}
+      hasQuery={true}
     />
   );
 };
@@ -126,6 +127,7 @@ const TableOptions = {
   mapPropsToFilter,
   exportRow,
   exportFields,
+  queryField: 'name',
 };
 
 const mapStateToProps = state => ({
