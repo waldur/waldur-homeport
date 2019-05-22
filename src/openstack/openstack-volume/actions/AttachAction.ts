@@ -1,10 +1,10 @@
 import { getAll } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { validateRuntimeState } from '@waldur/resource/actions/base';
-import { ResourceAction, ActionContext } from '@waldur/resource/actions/types';
-import { Volume, VirtualMachine } from '@waldur/resource/types';
+import { ResourceAction } from '@waldur/resource/actions/types';
+import { VirtualMachine } from '@waldur/resource/types';
 
-export default function createAction(ctx: ActionContext<Volume>): ResourceAction {
+export default function createAction(): ResourceAction {
   return {
     name: 'attach',
     type: 'form',
