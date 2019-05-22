@@ -15,8 +15,8 @@ export default function createAction(ctx: ActionContext<Volume>): ResourceAction
     ],
     init: async (resource, _, action) => {
       const params = {
-        service_uuid: ctx.resource.service_uuid,
-        availability_zone_name: resource.availability_zone_name,
+        attach_volume_uuid: resource.uuid,
+        field: ['url', 'name'],
       };
       const instances = await getAll<VirtualMachine>('/openstacktenant-instances/', {params});
       action.fields.instance.choices = instances.map(choice => ({
