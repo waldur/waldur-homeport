@@ -15,6 +15,7 @@ function VolumesListController(
   ncUtils,
   $state,
   $scope,
+  $sanitize,
   $timeout,
   $filter,
   ENV,
@@ -62,7 +63,7 @@ function VolumesListController(
             uuid: uuid,
             resource_type: 'OpenStackTenant.Instance'
           });
-          return ncUtils.renderLink(href, row.instance_name || 'OpenStack instance');
+          return ncUtils.renderLink(href, $sanitize(row.instance_name) || 'OpenStack instance');
         }
       });
       return options;

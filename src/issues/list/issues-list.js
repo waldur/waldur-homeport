@@ -11,8 +11,18 @@ const issueList = {
 export default issueList;
 
 // @ngInject
-function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
-    baseControllerListClass, usersService, issuesService, $filter, $scope, $rootScope, $state, ncUtils) {
+function IssueListController(
+  ISSUE_ICONS,
+  ISSUE_TEXT_CLASSES,
+  baseControllerListClass,
+  usersService,
+  issuesService,
+  $filter,
+  $scope,
+  $sanitize,
+  $rootScope,
+  $state,
+  ncUtils) {
   let controllerScope = this;
   let controllerClass = baseControllerListClass.extend({
     init: function() {
@@ -80,7 +90,7 @@ function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
           title: gettext('Organization'),
           orderField: 'customer_name',
           render: function(row) {
-            return row.customer_name || 'N/A';
+            return $sanitize(row.customer_name) || 'N/A';
           }
         },
         {
@@ -88,7 +98,7 @@ function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
           title: gettext('Caller'),
           orderField: 'caller_full_name',
           render: function(row) {
-            return row.caller_full_name || 'N/A';
+            return $sanitize(row.caller_full_name) || 'N/A';
           },
           width: 170
         },
@@ -97,7 +107,7 @@ function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
           title: gettext('Reporter'),
           orderField: 'reporter_name',
           render: function(row) {
-            return row.reporter_name || 'N/A';
+            return $sanitize(row.reporter_name) || 'N/A';
           },
           isVisible: () => this.supportOrStaff,
           width: 170
@@ -107,7 +117,7 @@ function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
           title: gettext('Assigned to'),
           orderField: 'assignee_name',
           render: function(row) {
-            return row.assignee_name || 'N/A';
+            return $sanitize(row.assignee_name) || 'N/A';
           },
           isVisible: () => this.supportOrStaff,
           width: 170
@@ -130,8 +140,12 @@ function IssueListController(ISSUE_ICONS, ISSUE_TEXT_CLASSES,
           },
           isVisible: () => this.supportOrStaff,
           width: 100
-        }
+        },
       ];
+    },
+    renderLongText: function(value) {
+      const safe = $sanitize(value);
+      return `<span class="ellipsis" style="width: 150px;" ng-non-bindable uib-tooltip="${safe}">${safe}</span>`;
     },
     connectWatchers: function() {
       $scope.$watch(() => controllerScope.filter, () => {

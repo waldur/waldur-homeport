@@ -699,6 +699,8 @@ msgstr ""
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
+#: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Availability zone"
@@ -5397,6 +5399,7 @@ msgstr ""
 msgid "Registered at:"
 msgstr ""
 
+#: src/customer/CustomerList.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Registration code"
 msgstr ""

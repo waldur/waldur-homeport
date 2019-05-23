@@ -22,6 +22,8 @@ const CreatedDateField = ({ row }) => <span>{renderFieldOrDash(formatDate(row.cr
 
 const AccountingStartDateField = ({ row }) => <span>{renderFieldOrDash(formatDate(row.accounting_start_date))}</span>;
 
+const RegistrationCodeField = ({ row }) => <span>{renderFieldOrDash(row.registration_code)}</span>;
+
 export const TableComponent = props => {
   const { filterColumns, customerListFilter } = props;
   const accountingPeriodIsCurrent = customerListFilter.accounting_period && customerListFilter.accounting_period.value.current;
@@ -45,6 +47,11 @@ export const TableComponent = props => {
       title: translate('Start day of accounting'),
       render: AccountingStartDateField,
       orderField: 'accounting_start_date',
+    },
+    {
+      title: translate('Registration code'),
+      render: RegistrationCodeField,
+      orderField: 'registration_code',
     },
     {
       title: renderTitleWithPriceTooltip(translate('Current cost')),

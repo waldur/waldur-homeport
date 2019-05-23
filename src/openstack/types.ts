@@ -5,3 +5,8 @@ export interface Quota {
   limitType?: string;
   required?: number;
 }
+
+export interface AvailabilityZone {
+  url: string;
+  name: string;
+}

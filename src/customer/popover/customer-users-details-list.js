@@ -13,7 +13,8 @@ export default customerUsersDetailsList;
 // @ngInject
 function customerUsersDetailsListController(
     baseControllerListClass,
-    usersService) {
+    usersService,
+    $sanitize) {
   let controllerScope = this;
   let UsersController = baseControllerListClass.extend({
     init: function() {
@@ -33,9 +34,9 @@ function customerUsersDetailsListController(
             className: 'all',
             width: '20%',
             render: function(row) {
-              let avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
+              const avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
                 .replace('{gravatarSrc}', row.email);
-              return avatar + ' ' + (row.full_name || row.username);
+              return avatar + ' ' + $sanitize(row.full_name || row.username);
             }
           },
           {
@@ -49,14 +50,14 @@ function customerUsersDetailsListController(
             title: gettext('Civil number'),
             className: 'min-tablet-l',
             render: function(row) {
-              return row.civil_number || 'N/A';
+              return $sanitize(row.civil_number) || 'N/A';
             }
           },
           {
             title: gettext('Phone number'),
             className: 'min-tablet-l',
             render: function(row) {
-              return row.phone_number || 'N/A';
+              return $sanitize(row.phone_number) || 'N/A';
             }
           },
           {
@@ -64,7 +65,7 @@ function customerUsersDetailsListController(
             className: 'min-tablet-l',
             feature: 'user.preferred_language',
             render: function(row) {
-              return row.preferred_language || 'N/A';
+              return $sanitize(row.preferred_language) || 'N/A';
             }
           },
           {
@@ -72,14 +73,14 @@ function customerUsersDetailsListController(
             className: 'min-tablet-l',
             feature: 'user.competence',
             render: function(row) {
-              return row.competence || 'N/A';
+              return $sanitize(row.competence) || 'N/A';
             }
           },
           {
             title: gettext('Job position'),
             className: 'min-tablet-l',
             render: function(row) {
-              return row.job_title || 'N/A';
+              return $sanitize(row.job_title) || 'N/A';
             }
           },
         ],

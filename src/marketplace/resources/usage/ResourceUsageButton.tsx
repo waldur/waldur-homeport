@@ -16,7 +16,7 @@ export const ResourceUsageButton = ({ row }) => {
     </div>
   );
   if (disabled) {
-    return null;
+    return <span>N/A</span>;
   } else {
     return body;
   }

@@ -12,6 +12,8 @@ function ProjectOfferingsListController(
   baseControllerListClass,
   $state,
   $filter,
+  ncUtils,
+  $sanitize,
   offeringsService,
   currentStateService) {
   let controllerScope = this;
@@ -37,10 +39,8 @@ function ProjectOfferingsListController(
         {
           title: gettext('Name'),
           render: function(row) {
-            let href = $state.href('offeringDetails', {uuid: row.uuid});
-            return '<a href="{href}">{name}</a>'
-                   .replace('{href}', href)
-                   .replace('{name}', row.name);
+            const href = $state.href('offeringDetails', {uuid: row.uuid});
+            return ncUtils.renderLink(href, $sanitize(row.name));
           }
         },
         {

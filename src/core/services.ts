@@ -7,6 +7,9 @@ export let $state = null;
 export let $filter = null;
 export let ngInjector = null;
 export let $q = null;
+// Init with identity function for testing only.
+// When application is initialized, it is replaced with actual service.
+export let $sanitize = x => x;
 
 export const defaultCurrency = value => $filter('defaultCurrency')(value);
 
@@ -17,6 +20,7 @@ export default function injectServices($injector) {
   $state = $injector.get('$state');
   $filter = $injector.get('$filter');
   $q = $injector.get('$q');
+  $sanitize = $injector.get('$sanitize');
   ngInjector = $injector;
 }
 injectServices.$inject = ['$injector'];

@@ -9,6 +9,7 @@ import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
 
 jest.mock('@waldur/core/services', () => ({
   defaultCurrency: val => val,
+  $sanitize: val => val,
 }));
 
 const renderWrapper = props =>
