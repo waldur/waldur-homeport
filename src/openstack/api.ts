@@ -3,10 +3,7 @@ import { $http } from '@waldur/core/services';
 import { Flavor, FloatingIp, Subnet, ServiceComponent, SshKey } from '@waldur/openstack/openstack-instance/types';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
 
-interface AvailabilityZone {
-  url: string;
-  name: string;
-}
+import { AvailabilityZone } from './types';
 
 // tslint:disable:variable-name
 export const loadFlavors = (settings_uuid: string) =>
@@ -20,6 +17,9 @@ export const loadSecurityGroups = (settings_uuid: string) =>
 
 export const loadVolumeAvailabilityZones = (settings_uuid: string) =>
   getAll<AvailabilityZone>('/openstacktenant-volume-availability-zones/', {params: {settings_uuid}});
+
+export const loadInstanceAvailabilityZones = (settings_uuid: string) =>
+  getAll<AvailabilityZone>('/openstacktenant-instance-availability-zones/', {params: {settings_uuid}});
 
 export const loadSubnets = (settings_uuid: string) =>
   getAll<Subnet>('/openstacktenant-subnets/', {params: {settings_uuid}});

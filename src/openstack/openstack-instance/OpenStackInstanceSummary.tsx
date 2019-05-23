@@ -24,6 +24,10 @@ const PureOpenStackInstanceSummary = (props: ResourceSummaryProps<OpenStackInsta
         label={translate('Security groups')}
         value={formatSecurityGroups(props)}
       />
+      <Field
+        label={translate('Availability zone')}
+        value={props.resource.availability_zone_name}
+      />
       <ZabbixHostField {...props}/>
     </span>
   );

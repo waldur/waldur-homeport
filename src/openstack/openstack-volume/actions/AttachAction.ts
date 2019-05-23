@@ -1,10 +1,10 @@
-import { ENV } from '@waldur/core/services';
+import { getAll } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { validateRuntimeState } from '@waldur/resource/actions/base';
-import { ResourceAction, ActionContext } from '@waldur/resource/actions/types';
-import { Volume } from '@waldur/resource/types';
+import { ResourceAction } from '@waldur/resource/actions/types';
+import { VirtualMachine } from '@waldur/resource/types';
 
-export default function createAction(ctx: ActionContext<Volume>): ResourceAction {
+export default function createAction(): ResourceAction {
   return {
     name: 'attach',
     type: 'form',
@@ -13,15 +13,23 @@ export default function createAction(ctx: ActionContext<Volume>): ResourceAction
     validators: [
       validateRuntimeState('available'),
     ],
+    init: async (resource, _, action) => {
+      const params = {
+        attach_volume_uuid: resource.uuid,
+        field: ['url', 'name'],
+      };
+      const instances = await getAll<VirtualMachine>('/openstacktenant-instances/', {params});
+      action.fields.instance.choices = instances.map(choice => ({
+        value: choice.url,
+        display_name: choice.name,
+      }));
+    },
     fields: [
       {
         name: 'instance',
         label: translate('Instance'),
         type: 'select',
         required: true,
-        url: `${ENV.apiEndpoint}api/openstacktenant-instances/?service_uuid=${ctx.resource.service_uuid}`,
-        value_field: 'url',
-        display_name_field: 'name',
       },
       {
         name: 'device',

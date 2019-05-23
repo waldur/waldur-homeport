@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
@@ -26,6 +27,7 @@ import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { User } from '@waldur/workspace/types';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
+import { AvailabilityZone } from '../types';
 
 interface OpenstackInstanceCreateFormState {
   loading: boolean;
@@ -36,6 +38,7 @@ interface OpenstackInstanceCreateFormState {
   images: ServiceComponent[];
   flavors: Flavor[];
   sshKeys: SshKey[];
+  availabilityZones: AvailabilityZone[];
 }
 
 interface OpenstackInstanceCreateFormComponentProps {
@@ -56,6 +59,7 @@ export class OpenstackInstanceCreateFormComponent extends
     images: [],
     flavors: [],
     sshKeys: [],
+    availabilityZones: [],
   };
 
   async loadData() {
@@ -68,6 +72,7 @@ export class OpenstackInstanceCreateFormComponent extends
       const securityGroups = await api.loadSecurityGroups(scopeUuid);
       const subnets = await api.loadSubnets(scopeUuid);
       const floatingIps = await api.loadFloatingIps(scopeUuid);
+      const availabilityZones = await api.loadInstanceAvailabilityZones(scopeUuid);
       this.setState({
         loading: false,
         loaded: true,
@@ -77,6 +82,7 @@ export class OpenstackInstanceCreateFormComponent extends
         images,
         flavors,
         sshKeys,
+        availabilityZones,
       });
     } catch (error) {
       this.setState({loading: false, loaded: false});
@@ -241,6 +247,23 @@ export class OpenstackInstanceCreateFormComponent extends
               }
             />
           </CreateResourceFormGroup>
+          {this.state.availabilityZones.length > 0 && (
+            <CreateResourceFormGroup label={translate('Availability zone')}>
+              <Field
+                name="attributes.availability_zone"
+                component={fieldProps => (
+                  <Select
+                    value={fieldProps.input.value}
+                    onChange={fieldProps.input.onChange}
+                    options={this.state.availabilityZones}
+                    labelKey="name"
+                    valueKey="url"
+                    simpleValue={true}
+                  />
+                )}
+              />
+            </CreateResourceFormGroup>
+          )}
           <CreateResourceFormGroup
             label={translate('System volume size')}
             required={true}
