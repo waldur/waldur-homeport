@@ -1,13 +1,6 @@
 import { formatFilesize, formatSnakeCase, minutesToHours, titleCase, dateTime } from './utils';
 import { formatDate } from './dateUtils';
 
-// @ngInject
-function trustAsHtml($sce) {
-  return function(value) {
-    return $sce.trustAsHtml(value);
-  };
-}
-
 function replace() {
   return function(input, search, replacement) {
     return input.replace(new RegExp(search, 'g'), replacement);
@@ -39,16 +32,7 @@ function shortDate() {
   };
 }
 
-// @ngInject
-function decodeHtml($sce) {
-  return function(value) {
-    return $sce.trustAsHtml(angular.element('<span>').html(value).text());
-  };
-}
-
 export default module => {
-  module.filter('trustAsHtml', trustAsHtml);
-  module.filter('decodeHtml', decodeHtml);
   module.filter('filesize', () => formatFilesize);
   module.filter('titleCase', () => titleCase);
   module.filter('snakeCase', () => formatSnakeCase);

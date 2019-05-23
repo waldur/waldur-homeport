@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { formatMediumDateTime } from '@waldur/core/dateUtils';
+import { $sanitize } from '@waldur/core/services';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { getAttachments } from '@waldur/issues/attachments/selectors';
 import { Attachment } from '@waldur/issues/attachments/types';
@@ -93,7 +94,7 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
         </div>
         <div
           className="comment-item__content"
-          dangerouslySetInnerHTML={{ __html: utils.formatJiraMarkup(comment.description, attachments) }}
+          dangerouslySetInnerHTML={{ __html: $sanitize(utils.formatJiraMarkup(comment.description, attachments)) }}
           onClick={onCommentClick}
         />
         <div className="small text-muted m-t-sm">

@@ -9,7 +9,7 @@ const openstackTenantNetworks = {
 
 // @ngInject
 function TenantNetworksController(
-  baseResourceListController, openstackNetworksService, actionUtilsService, ncUtils) {
+  baseResourceListController, openstackNetworksService, actionUtilsService, ncUtils, $sanitize) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -45,7 +45,7 @@ function TenantNetworksController(
           className: 'min-tablet-l',
           render: function(row) {
             return row.subnets.map(function(subnet) {
-              return `${subnet.name}: ${subnet.cidr}`;
+              return `${$sanitize(subnet.name)}: ${subnet.cidr}`;
             }).join('<br />');
           }
         },

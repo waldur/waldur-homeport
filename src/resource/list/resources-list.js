@@ -15,6 +15,7 @@ export default function baseResourceListController(
   $ocLazyLoad,
   $rootScope,
   $state,
+  $sanitize,
   $q,
   $interval) {
   let ControllerListClass = baseControllerListClass.extend({
@@ -63,7 +64,7 @@ export default function baseResourceListController(
             className: 'desktop',
             orderField: 'service_name',
             render: function(row) {
-              return row.service_name;
+              return $sanitize(row.service_name);
             }
           },
           {

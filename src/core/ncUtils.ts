@@ -1,4 +1,5 @@
 import { formatRelative } from './dateUtils';
+import { $sanitize } from './services';
 import { getUUID, toKeyValue, parseQueryString } from './utils';
 
 function getPrettyQuotaName(name) {
@@ -37,12 +38,12 @@ function getQueryString() {
 }
 
 function renderLink(href, name) {
-  return `<a href="${href}">${name}</a>`;
+  return `<a ng-non-bindable href="${href}">${$sanitize(name)}</a>`;
 }
 
 function renderAvatar(user) {
   const avatar = `<img gravatar-src="'${user.email}'" gravatar-size="100" class="avatar-img img-xs">`;
-  return avatar + ' ' + (user.full_name || user.username);
+  return avatar + ' ' + $sanitize(user.full_name || user.username);
 }
 
 function booleanField(value) {
