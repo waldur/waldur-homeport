@@ -5399,6 +5399,7 @@ msgstr ""
 msgid "Registered at:"
 msgstr ""
 
+#: src/customer/CustomerList.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Registration code"
 msgstr ""
