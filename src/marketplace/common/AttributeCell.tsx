@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { $sanitize } from '@waldur/core/services';
+
 import { Attribute } from '../types';
 import { SecretField } from './SecretField';
 
@@ -47,7 +49,7 @@ export const AttributeCell: React.SFC<AttributeCellProps> = ({ attr, value }) =>
     }
 
     case 'html':
-      return <div dangerouslySetInnerHTML={{__html: value as string}}/>;
+      return <div dangerouslySetInnerHTML={{__html: $sanitize(value) as string}}/>;
 
     default:
       return <>{value === undefined ? 'N/A' : value}</>;

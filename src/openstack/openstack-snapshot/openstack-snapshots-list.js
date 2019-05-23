@@ -10,14 +10,16 @@ const openstackSnapshotsList = {
 export default openstackSnapshotsList;
 
 // @ngInject
-function SnapshotsListController($scope,
-                                 $state,
-                                 $timeout,
-                                 $filter,
-                                 BaseProjectResourcesTabController,
-                                 ncUtils,
-                                 TableExtensionService,
-                                 features) {
+function SnapshotsListController(
+  $scope,
+  $sanitize,
+  $state,
+  $timeout,
+  $filter,
+  BaseProjectResourcesTabController,
+  ncUtils,
+  TableExtensionService,
+  features) {
   let controllerScope = this;
   let ResourceController = BaseProjectResourcesTabController.extend({
     init: function() {
@@ -63,7 +65,7 @@ function SnapshotsListController($scope,
             uuid: uuid,
             resource_type: 'OpenStackTenant.Volume'
           });
-          return ncUtils.renderLink(href, row.source_volume_name || 'Link');
+          return ncUtils.renderLink(href, $sanitize(row.source_volume_name) || 'Link');
         }
       });
       return options;

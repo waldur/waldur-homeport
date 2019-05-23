@@ -6,7 +6,7 @@ import { getFormValues, isValid as isFormValid } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import Panel from '@waldur/core/Panel';
-import { defaultCurrency } from '@waldur/core/services';
+import { defaultCurrency, $sanitize } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
@@ -111,7 +111,7 @@ export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceChe
       {(!props.offering.shared && !props.offering.billable) && (
         <p dangerouslySetInnerHTML={{
           __html: props.translate('Note that this virtual machine will not be charged separately for {organization}.', {
-            organization: props.customer.name,
+            organization: $sanitize(props.customer.name),
           }),
         }}/>
       )}

@@ -124,7 +124,11 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
           },
           fnDrawCallback: function() {
             $(element).find('tr').each(function(index, element) {
-              $compile(element)(scope);
+              try {
+                $compile(element)(scope);
+              } catch (e) {
+                // Skip error
+              }
             });
           }
         };

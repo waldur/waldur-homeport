@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
+import { $sanitize } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 
@@ -23,7 +24,7 @@ export const OverviewTab = (props: OverviewTabProps) => (
   <Row>
     <Col md={6}>
       <h4>{translate('Offering details')}</h4>
-      <div dangerouslySetInnerHTML={{__html: props.offering.full_description}}/>
+      <div dangerouslySetInnerHTML={{__html: $sanitize(props.offering.full_description)}}/>
     </Col>
     <Col md={6}>
       {props.offering.vendor_details && (
@@ -32,7 +33,7 @@ export const OverviewTab = (props: OverviewTabProps) => (
             <h4>{translate('Vendor details')}</h4>
             <DemoButton/>
           </div>
-          <div dangerouslySetInnerHTML={{__html: props.offering.vendor_details}}/>
+          <div dangerouslySetInnerHTML={{__html: $sanitize(props.offering.vendor_details)}}/>
         </>
       )}
 

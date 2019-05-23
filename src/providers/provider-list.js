@@ -14,6 +14,7 @@ function ProviderListController(
   joinService,
   $uibModal,
   $state,
+  $sanitize,
   $scope,
   ENV,
   ncUtils,
@@ -55,7 +56,7 @@ function ProviderListController(
                 title: gettext('Name'),
                 className: 'all',
                 render: function(row) {
-                  return row.name;
+                  return $sanitize(row.name);
                 }
               },
               {
