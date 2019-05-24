@@ -72,9 +72,16 @@ export const combinePrices = (plan, limits, offering) => {
           disable_quotas: item.disable_quotas,
         };
       });
+
     const usageComponents = components.filter(component => component.billing_type === 'usage');
-    const total = parseFloat(plan.unit_price) + usageComponents.reduce((result, item) => result + item.subTotal, 0);
+    const usageSubTotal = usageComponents.reduce((result, item) => result + item.subTotal, 0);
+
+    const fixedComponents = components.filter(component => component.billing_type === 'fixed');
+    const fixedSubTotal = fixedComponents.reduce((result, item) => result + item.subTotal, 0);
+
+    const total = usageSubTotal + fixedSubTotal;
     const totalPeriods = multipliers.map(mult => mult * total || 0);
+
     return {components, periods, total, totalPeriods};
   } else {
     return {components: [], periods: [], total: 0, totalPeriods: []};
