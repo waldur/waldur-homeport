@@ -4827,6 +4827,8 @@ msgid "Price package name"
 msgstr ""
 
 #: src/marketplace/details/plan/utils.ts
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Price per 30 days"
 msgstr ""
 
@@ -4859,10 +4861,8 @@ msgstr ""
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/utils.ts
 #: src/offering/appstore-offering-summary.js
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 #: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Price per month"
 msgstr ""

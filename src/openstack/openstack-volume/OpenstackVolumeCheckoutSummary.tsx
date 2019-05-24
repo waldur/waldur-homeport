@@ -27,8 +27,14 @@ import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
 const getDailyPrice = (formData, components) => {
+  /**
+   * In Marketplace OpenStack plugin storage prices are stored per GB.
+   * But in UI storage is storead in MB.
+   * Therefore we should convert storage from GB to MB for price estimatation.
+   */
+
   if (components && formData.size) {
-    return formData.size * components.storage;
+    return formData.size * components.storage / 1024.0;
   } else {
     return 0;
   }
@@ -128,7 +134,7 @@ export const PureOpenstackVolumeCheckoutSummaryComponent = (props: OpenstackVolu
           </tr>
           <tr>
             <td>
-              <strong>{props.translate('Price per month')}</strong>
+              <strong>{props.translate('Price per 30 days')}</strong>
               {' '}
               <PriceTooltip/>
             </td>
