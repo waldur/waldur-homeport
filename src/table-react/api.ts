@@ -29,11 +29,11 @@ export function createFetcher(endpoint: string): Fetcher {
   };
 }
 
-// TODO: Implement support for filtering
-export async function fetchAll(fetch: Fetcher) {
-  const request = {
+export async function fetchAll(fetch: Fetcher, filter?: Record<string, string>) {
+  const request: TableRequest = {
     pageSize: 50,
     currentPage: 1,
+    filter,
   };
 
   let response = await fetch(request);

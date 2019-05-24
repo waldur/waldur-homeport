@@ -14,11 +14,15 @@ import { selectTableRows } from './selectors';
 export function* exportTable(action) {
   const { table, format, props } = action.payload;
   let rows = yield select(state => selectTableRows(state, table));
-  const { exportFields, exportRow, fetchData, exportAll } = getTableOptions(table);
+  const { exportFields, exportRow, fetchData, exportAll, mapPropsToFilter } = getTableOptions(table);
 
   if (exportAll) {
     yield put(blockStart(table));
-    rows = yield call(fetchAll, fetchData);
+    let propFilter;
+    if (mapPropsToFilter) {
+      propFilter = mapPropsToFilter(props);
+    }
+    rows = yield call(fetchAll, fetchData, propFilter);
     yield put(blockStop(table));
   }
 
