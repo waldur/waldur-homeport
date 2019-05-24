@@ -5,18 +5,18 @@ import { Query } from '@waldur/core/Query';
 import { getLatinNameValidators } from '@waldur/core/validators';
 import { NumberField, TextField, StringField, FormContainer, SelectField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
-import { formatIntField, parseIntField } from '@waldur/marketplace/common/utils';
+import { parseIntField } from '@waldur/marketplace/common/utils';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { loadVolumeAvailabilityZones } from '../api';
 
-const validateSize = (value: number) => value < 1 || value > 4096 ?
+const validateSize = (value: number) => value < 1024 || value > 1024 * 4096 ?
   translate('Size should be between 1 and 4096 GB.') : undefined;
 
 export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
-    this.props.initialize({ attributes: {size: 1, ...this.props.initialAttributes} });
+    this.props.initialize({ attributes: {size: 1024, ...this.props.initialAttributes} });
   }
   render() {
     return (
@@ -45,9 +45,10 @@ export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigura
                 label={translate('Size')}
                 name="attributes.size"
                 parse={parseIntField}
-                format={formatIntField}
                 min={1}
                 max={4096}
+                format={v => v ? v / 1024 : ''}
+                normalize={v => Number(v) * 1024}
                 unit={translate('GB')}
                 validate={validateSize}
               />
