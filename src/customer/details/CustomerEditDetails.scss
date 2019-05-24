@@ -1,11 +1,10 @@
 .customer-edit-details {
   .organization-logo {
-    display: inline-block;
-
     .organization-img-wrapper {
+      margin: auto;
       height: 200px;
       width: 200px;
-      
+
       img {
         height: 100%;
         width: 100%;
@@ -36,10 +35,9 @@
     min-height: 242px;
   }
 }
-  
+
 @media screen and (min-width: 1261px) {
   .customer-edit-details {
     min-height: 224px;
   }
 }
-  
