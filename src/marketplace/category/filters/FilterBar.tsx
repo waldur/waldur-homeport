@@ -13,9 +13,12 @@ interface FilterBarState {
 }
 
 export class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
-  state = {
-    filter: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      filter: props.filterQuery || '',
+    };
+  }
 
   setFilterQuery = e => {
     this.setState({filter: e.target.value});
@@ -31,6 +34,7 @@ export class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
       <input
         type="text"
         className="form-control"
+        value={this.state.filter}
         placeholder={this.props.translate('Search for apps and services...')}
         onChange={this.setFilterQuery}
       />

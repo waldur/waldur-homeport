@@ -30,10 +30,16 @@ const getTotalStorage = formData =>
   formData.system_volume_size + (formData.data_volume_size || 0);
 
 const getDailyPrice = (formData, components) => {
+  /**
+   * In Marketplace OpenStack plugin storage prices are stored per GB.
+   * But in UI storage is storead in MB.
+   * Therefore we should convert storage from GB to MB for price estimatation.
+   */
   if (components && formData.flavor) {
-    return formData.flavor.cores *
-      components.cores + formData.flavor.ram *
-        components.ram + getTotalStorage(formData) * components.storage;
+    const cpu = formData.flavor.cores * components.cores;
+    const ram = formData.flavor.ram * components.ram / 1024.0;
+    const disk = getTotalStorage(formData) * components.storage / 1024.0;
+    return cpu + ram + disk;
   } else {
     return 0;
   }
@@ -173,7 +179,7 @@ export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceChe
             </tr>
             <tr>
               <td>
-                <strong>{props.translate('Price per month')}</strong>
+                <strong>{props.translate('Price per 30 days')}</strong>
                 {' '}
                 <PriceTooltip/>
               </td>

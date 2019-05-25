@@ -54,6 +54,7 @@ const serializer = ({
   data_volume_size,
   ssh_public_key,
   security_groups,
+  availability_zone,
 }) => ({
   name,
   description,
@@ -66,6 +67,7 @@ const serializer = ({
   floating_ips: serializeFloatingIPs(networks),
   system_volume_size,
   data_volume_size,
+  availability_zone,
 });
 
 registerOfferingType({

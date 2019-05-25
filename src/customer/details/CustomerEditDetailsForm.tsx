@@ -10,6 +10,7 @@ import { CustomerDetailsEditFormData } from './types';
 
 interface OwnProps {
   onSubmit?(formData: CustomerDetailsEditFormData): void;
+  hasChosenImage: boolean;
 }
 
 type ConnectedProps = OwnProps & InjectedFormProps & TranslateProps;
@@ -31,11 +32,11 @@ const PureCustomerEditDetailsForm = (props: ConnectedProps) => (
           }
         />
       </div>
-      <SubmitButton
+      {props.hasChosenImage && <SubmitButton
         className="btn btn-sm btn-success m-t-sm"
         submitting={props.submitting}
         label={props.translate('Update')}
-      />
+      />}
   </form>
 );
 
