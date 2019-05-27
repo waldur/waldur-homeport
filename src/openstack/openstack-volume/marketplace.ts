@@ -6,7 +6,7 @@ import { OpenstackVolumeCreateForm } from './OpenstackVolumeCreateForm';
 
 const serializer = attrs => ({
   ...attrs,
-  size: attrs.size * 1024,
+  size: attrs.size,
 });
 
 registerOfferingType({
