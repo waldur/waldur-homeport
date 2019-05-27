@@ -16,9 +16,9 @@ import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { offeringSelector } from '@waldur/marketplace/details/selectors';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import * as api from '@waldur/openstack/api';
-import { flavorValidator, flavorComparator } from '@waldur/openstack/openstack-instance/openstack-instance-config';
+import { flavorValidator, flavorComparator, internalIpFormatter } from '@waldur/openstack/openstack-instance/openstack-instance-config';
 import { OpenstackInstanceDataVolume } from '@waldur/openstack/openstack-instance/OpenstackInstanceDataVolume';
-import { OpenstackInstanceNetworks } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
+import { OpenstackInstanceNetworks, getDefaultFloatingIps } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import { OpenstackInstanceSecurityGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceSecurityGroups';
 import { Subnet, FloatingIp, ServiceComponent, Flavor, SshKey } from '@waldur/openstack/openstack-instance/types';
 import { validateAndSort, calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
@@ -84,6 +84,46 @@ export class OpenstackInstanceCreateFormComponent extends
         sshKeys,
         availabilityZones,
       });
+      const initial = this.props.initialAttributes;
+      if (initial) {
+        const flavor = flavors.find(s => s.url === initial.flavor);
+        const image = images.find(s => s.url === initial.image);
+        // tslint:disable-next-line: variable-name
+        const security_groups = initial.security_groups.map(s =>
+          securityGroups.find(g => g.url === s.url));
+        // tslint:disable-next-line: variable-name
+        const availability_zone = initial.availability_zone && availabilityZones.find(
+          s => s.url === initial.availability_zone);
+        const networksMap = {};
+        initial.internal_ips_set.map(item => {
+          networksMap[item.subnet] = 'false';
+        });
+        initial.floating_ips.map(item => {
+          networksMap[item.subnet] = item.url || 'true';
+        });
+        const defaults = getDefaultFloatingIps();
+        const networks = Object.keys(networksMap).map(key => {
+          const subnet = subnets.find(s => s.url === key);
+          const value = networksMap[key];
+          const floatingIp = defaults.find(s => s.url === value) || floatingIps.find(s => s.url === value);
+          return {
+            subnet: {
+              ...subnet,
+              label: internalIpFormatter(subnet),
+            },
+            floatingIp,
+          };
+        });
+        const attributes = {
+          ...initial,
+          flavor,
+          image,
+          security_groups,
+          availability_zone,
+          networks,
+        };
+        this.props.initialize({attributes, project: this.props.project});
+      }
     } catch (error) {
       this.setState({loading: false, loaded: false});
     }
@@ -91,24 +131,6 @@ export class OpenstackInstanceCreateFormComponent extends
 
   componentDidMount() {
     this.loadData();
-    if (this.props.initialAttributes) {
-      this.props.initialize({
-        attributes: {
-          ...this.props.initialAttributes,
-          networks:  this.formatNetworks(this.props.initialAttributes),
-        }});
-      }
-  }
-
-  formatNetworks(initialAttributes) {
-    const networks = [];
-    for (let i = 0; i < initialAttributes.subnets.length; i++) {
-      networks.push({
-        subnet: initialAttributes.subnets[i],
-        floatingIp: initialAttributes.floating_ips[i],
-      });
-    }
-    return networks;
   }
 
   componentDidUpdate(prevProps) {
