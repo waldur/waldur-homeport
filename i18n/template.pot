@@ -253,6 +253,10 @@ msgstr ""
 msgid "Add new"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
+msgid "Add new offering"
+msgstr ""
+
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Add new organization"
 msgstr ""
@@ -2393,6 +2397,10 @@ msgstr ""
 msgid "Global request"
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
+msgid "Go to marketplace"
+msgstr ""
+
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Go to my profile"
 msgstr ""
@@ -3710,6 +3718,10 @@ msgstr ""
 msgid "No databases yet."
 msgstr ""
 
+#: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
+msgid "No entries to show here"
+msgstr ""
+
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 msgid "No floating IPs found matching filter."
 msgstr ""
@@ -3926,6 +3938,14 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Note that this volume will not be charged separately for {organization}."
+msgstr ""
+
+#: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
+msgid "Nothing to see here"
+msgstr ""
+
+#: src/marketplace/resources/list/CustomerResourcesListPlaceholder.tsx
+msgid "Nothing to show here"
 msgstr ""
 
 #: src/user/hooks/hook-details.js
@@ -6083,6 +6103,18 @@ msgstr ""
 msgid "See all"
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
+msgid "Seems there's nothing here"
+msgstr ""
+
+#: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
+msgid "Seems you don't have any public resources yet"
+msgstr ""
+
+#: src/marketplace/resources/list/CustomerResourcesListPlaceholder.tsx
+msgid "Seems you don't have any resources yet"
+msgstr ""
+
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 msgid "Segmentation ID"
 msgstr ""
@@ -7101,11 +7133,11 @@ msgstr ""
 msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
-#: src/table-react/TablePlaceholder.tsx
+#: src/table-react/placeholder/utils.ts
 msgid "There are no {verboseName} found matching the filter."
 msgstr ""
 
-#: src/table-react/TablePlaceholder.tsx
+#: src/table-react/placeholder/utils.ts
 msgid "There are no {verboseName} yet."
 msgstr ""
 
@@ -8372,8 +8404,16 @@ msgstr ""
 msgid "You are about to delete:"
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
+msgid "You can find offerings to order in the marketplace"
+msgstr ""
+
 #: src/customer/details/customer-manage.html
 msgid "You can remove this organization by pressing the button"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
+msgid "You can start filling this table by creating your first offering."
 msgstr ""
 
 #: src/team/add-team-member.js
@@ -8638,7 +8678,7 @@ msgstr ""
 msgid "hours"
 msgstr ""
 
-#: src/table-react/TablePlaceholder.tsx
+#: src/table-react/placeholder/utils.ts
 msgid "items"
 msgstr ""
 

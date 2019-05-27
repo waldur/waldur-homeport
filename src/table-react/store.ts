@@ -1,7 +1,7 @@
 import { createByKey } from '@waldur/store/utils';
 
 import * as actions from './actions';
-import { TableState } from './types';
+import { TableState, StateTables } from './types';
 
 const INITIAL_STATE: TableState = {
   entities: {},
@@ -160,7 +160,7 @@ export const reducer = createByKey(
   action => action.payload.table,
 )(pagination);
 
-type TableSelector = (table: string) => (state: {tables: {[key: string]: TableState}}) => TableState;
+type TableSelector = (table: string) => (state: StateTables) => TableState;
 
 export const getTableState: TableSelector = table => state => {
   if (state.tables && state.tables[table]) {

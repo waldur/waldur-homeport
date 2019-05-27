@@ -5,10 +5,11 @@ import { getFormValues } from 'redux-form';
 import { connectTable, createFetcher } from '@waldur/table-react';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { TABLE_SUPPORT_ORDERS } from './constants';
 import { TableComponent } from './OrderItemsList';
 
 const TableOptions = {
-  table: 'SupportOrderItemList',
+  table: TABLE_SUPPORT_ORDERS,
   fetchData: createFetcher('marketplace-order-items'),
   mapPropsToFilter: props => {
     const filter: any = {};

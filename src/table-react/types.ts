@@ -10,6 +10,10 @@ export interface TableRequest {
   sortOrder?: boolean;
 }
 
+export interface StateTables {
+  tables: { [key: string]: TableState };
+}
+
 type Entity = any;
 
 interface TableResponse {
@@ -29,6 +33,7 @@ export interface TableOptions {
   exportAll?: boolean;
   getDefaultFilter?: (state: any) => any;
   mapPropsToFilter?: (props: any) => any;
+  placeholderComponent?: React.ComponentType;
 }
 
 export interface Column<RowType = Entity> {
