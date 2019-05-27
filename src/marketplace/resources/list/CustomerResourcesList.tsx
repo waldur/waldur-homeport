@@ -15,6 +15,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
 import { ResourceState } from '../types';
+import { CustomerResourcesListPlaceholder } from './CustomerResourcesListPlaceholder';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
 
@@ -78,6 +79,7 @@ export const TableComponent = props => {
     <Table
       {...props}
       columns={columns}
+      placeholderComponent={<CustomerResourcesListPlaceholder/>}
       verboseName={translate('Resources')}
       initialSorting={{field: 'created', mode: 'desc'}}
       enableExport={true}

@@ -14,6 +14,7 @@ import { Offering } from '../types';
 import { OfferingActions } from './actions/OfferingActions';
 import { OfferingCreateButton } from './actions/OfferingCreateButton';
 import { OfferingDetailsLink } from './details/OfferingDetailsLink';
+import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
 
 export const TableComponent = props => {
   const { translate } = props;
@@ -49,6 +50,7 @@ export const TableComponent = props => {
   return (
     <Table
       {...props}
+      placeholderComponent={<OfferingsListTablePlaceholder />}
       columns={columns}
       verboseName={translate('Offerings')}
       actions={props.showOfferingCreateButton && <OfferingCreateButton/>}
