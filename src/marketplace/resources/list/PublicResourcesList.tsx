@@ -13,6 +13,8 @@ import { Customer } from '@waldur/workspace/types';
 
 import { ResourceState } from '../types';
 import { ResourceUsageButton } from '../usage/ResourceUsageButton';
+import { TABLE_PUBLIC_RESOURCE } from './constants';
+import { PublicResourcesListPlaceholder } from './PublicResourcesListPlaceholder';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
 
@@ -73,6 +75,7 @@ export const TableComponent = props => {
   return (
     <Table
       {...props}
+      placeholderComponent={<PublicResourcesListPlaceholder/>}
       columns={columns}
       verboseName={translate('Resources')}
       enableExport={true}
@@ -125,7 +128,7 @@ const exportFields = [
 ];
 
 export const TableOptions = {
-  table: 'PublicResourcesList',
+  table: TABLE_PUBLIC_RESOURCE,
   fetchData: createFetcher('marketplace-resources'),
   mapPropsToFilter,
   exportRow,

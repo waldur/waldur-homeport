@@ -10,6 +10,8 @@ import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { TABLE_PUBLIC_ORDERS } from './constants';
+import { OrderItemslistTablePlaceholder } from './OrderItemsListPlaceholder';
 import { ResourceNameField } from './ResourceNameField';
 import { RowNameField } from './RowNameField';
 
@@ -53,6 +55,7 @@ export const TableComponent = props => {
   return (
     <Table
       {...props}
+      placeholderComponent={<OrderItemslistTablePlaceholder/>}
       columns={columns}
       verboseName={translate('Order items')}
       initialSorting={{field: 'created', mode: 'desc'}}
@@ -61,7 +64,7 @@ export const TableComponent = props => {
 };
 
 const TableOptions = {
-  table: 'OrderItemList',
+  table: TABLE_PUBLIC_ORDERS,
   fetchData: createFetcher('marketplace-order-items'),
   mapPropsToFilter: props => {
     const filter: Record<string, string> = {provider_uuid: props.customer.uuid};

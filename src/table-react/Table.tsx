@@ -3,6 +3,8 @@ import * as React from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TranslateProps } from '@waldur/i18n/types';
 
+import FallbackTablePlaceholder from './placeholder/FallbackTablePlaceholder';
+import { TablePlaceholderProps } from './placeholder/TablePlaceholder';
 import './Table.scss';
 import { TableBody } from './TableBody';
 import TableButtons from './TableButtons';
@@ -10,7 +12,6 @@ import { TableHeader } from './TableHeader';
 import TableInfo from './TableInfo';
 import { TablePageSize } from './TablePageSize';
 import TablePagination from './TablePagination';
-import TablePlaceholder from './TablePlaceholder';
 import TableQuery from './TableQuery';
 import TableRefreshButton from './TableRefreshButton';
 import { Column, TableState, Sorting } from './types';
@@ -34,6 +35,7 @@ export interface TableProps<RowType = any> extends TranslateProps, TableState {
   toggleRow?(row: any): void;
   toggled?: object;
   enableExport?: boolean;
+  placeholderComponent?: React.ComponentType<TablePlaceholderProps>;
 }
 
 class Table extends React.Component<TableProps> {
@@ -44,29 +46,38 @@ class Table extends React.Component<TableProps> {
   };
 
   render() {
+    const TableControls = (props: TableProps) => (
+      <>
+        <TableButtons {...props}/>
+          {props.hasQuery && (
+            <TableQuery
+              query={props.query}
+              setQuery={props.setQuery}
+              translate={props.translate}/>
+          )}
+          {props.showPageSizeSelector &&
+            <TablePageSize
+              translate={props.translate}
+              pageSize={props.pagination.pageSize}
+              updatePageSize={props.updatePageSize}
+            />
+          }
+          <TableInfo {...props.pagination} translate={props.translate}/>
+      </>
+    );
+
     return (
       <div className="table-responsive dataTables_wrapper">
         {this.props.blocked && <div className="table-block"/>}
-        <TableButtons {...this.props}/>
-        {this.props.hasQuery && (
-          <TableQuery
-            query={this.props.query}
-            setQuery={this.props.setQuery}
-            translate={this.props.translate}/>
-        )}
-        {this.props.showPageSizeSelector &&
-          <TablePageSize
-            translate={this.props.translate}
-            pageSize={this.props.pagination.pageSize}
-            updatePageSize={this.props.updatePageSize}
-          />
-        }
-        <TableInfo {...this.props.pagination} translate={this.props.translate}/>
+        {this.hasRows() && <TableControls {...this.props} />}
         {this.renderBody()}
-        <TablePagination
-          {...this.props.pagination}
-          gotoPage={this.props.gotoPage}
-          translate={this.props.translate}/>
+        {
+          this.hasRows() &&
+          <TablePagination
+            {...this.props.pagination}
+            gotoPage={this.props.gotoPage}
+            translate={this.props.translate}/>
+        }
       </div>
     );
   }
@@ -85,13 +96,14 @@ class Table extends React.Component<TableProps> {
       );
     }
 
-    if (this.props.rows.length === 0) {
-      return (
-        <TablePlaceholder
-          query={this.props.query}
-          verboseName={this.props.verboseName}
-          translate={this.props.translate}/>
-      );
+    if (!this.props.loading && !this.hasRows()) {
+      const { placeholderComponent } = this.props;
+      if (placeholderComponent) {
+        return placeholderComponent;
+      } else {
+        const { query, verboseName, translate } = this.props;
+        return (<FallbackTablePlaceholder {...{query, verboseName, translate}} />);
+      }
     }
 
     return (
@@ -145,6 +157,10 @@ class Table extends React.Component<TableProps> {
     } else if (prevProps.sorting !== this.props.sorting && this.props.sorting.loading) {
       this.props.fetch();
     }
+  }
+
+  hasRows() {
+    return this.props.rows && this.props.rows.length > 0;
   }
 }
 
