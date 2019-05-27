@@ -4,7 +4,7 @@ import * as Table from 'react-bootstrap/lib/Table';
 import Select, { Option, OptionValues } from 'react-select';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { internalIpFormatter } from '@waldur/openstack/openstack-instance/openstack-instance-config';
 import { Subnet, FloatingIp } from '@waldur/openstack/openstack-instance/types';
 
@@ -13,7 +13,7 @@ interface NetworkItem {
   floatingIp?: Option<OptionValues>;
 }
 
-interface OpenstackInstanceNetworksComponentProps extends TranslateProps {
+interface OpenstackInstanceNetworksComponentProps {
   input: {
     value: NetworkItem[];
     onChange(value: NetworkItem[]): void;
@@ -22,7 +22,18 @@ interface OpenstackInstanceNetworksComponentProps extends TranslateProps {
   floatingIps: FloatingIp[];
 }
 
-export default class OpenstackInstanceNetworksComponent extends React.Component<OpenstackInstanceNetworksComponentProps> {
+export const getDefaultFloatingIps = () => [
+  {
+    address: translate('Skip floating IP assignment'),
+    url: 'false',
+  },
+  {
+    address: translate('Auto-assign floating IP'),
+    url: 'true',
+  },
+];
+
+export class OpenstackInstanceNetworks extends React.Component<OpenstackInstanceNetworksComponentProps> {
   addItem = () => {
     if (this.hasFreeSubnets()) {
       if (this.props.input.value) {
@@ -35,7 +46,7 @@ export default class OpenstackInstanceNetworksComponent extends React.Component<
 
   getDefaultValue = () => ({
     subnet: this.getFreeSubnets().length !== 0 ? this.getFreeSubnets()[0] : {},
-    floatingIp: this.getDefaultFloatingIps().length !== 0 ? this.getDefaultFloatingIps()[0] : {},
+    floatingIp: getDefaultFloatingIps().length !== 0 ? getDefaultFloatingIps()[0] : {},
   })
 
   removeItem = index => {
@@ -82,20 +93,9 @@ export default class OpenstackInstanceNetworksComponent extends React.Component<
         label: internalIpFormatter(subnet),
       }))
 
-  getDefaultFloatingIps = () => [
-    {
-      address: this.props.translate('Skip floating IP assignment'),
-      url: 'false',
-    },
-    {
-      address: this.props.translate('Auto-assign floating IP'),
-      url: 'true',
-    },
-  ]
-
   getFreeFloatingIps = () =>
     [
-      ...this.getDefaultFloatingIps(),
+      ...getDefaultFloatingIps(),
       ...this.props.floatingIps
         .filter(this.getAvailableNetworkItems('floatingIp')),
     ]
@@ -126,7 +126,7 @@ export default class OpenstackInstanceNetworksComponent extends React.Component<
                       name="subnets"
                       value={this.getSelectValue('subnet')(index)}
                       onChange={value => this.onSubnetChange(value, index)}
-                      placeholder={this.props.translate('Select subnet')}
+                      placeholder={translate('Select subnet')}
                       onBlur={() => {/* Noop */}}
                       options={this.getFreeSubnets()}
                       clearable={false}
@@ -149,7 +149,7 @@ export default class OpenstackInstanceNetworksComponent extends React.Component<
                   <td className="p-r-n">
                     <Tooltip
                       id="item-remove"
-                      label={this.props.translate('Delete')}>
+                      label={translate('Delete')}>
                         <button
                           type="button"
                           className="btn btn-default"
@@ -171,11 +171,9 @@ export default class OpenstackInstanceNetworksComponent extends React.Component<
           onClick={() => this.addItem()}>
             <i className="fa fa-plus"/>
             {' '}
-            {this.props.translate('Add')}
+            {translate('Add')}
         </button>
       </>
     );
   }
 }
-
-export const OpenstackInstanceNetworks = withTranslation(OpenstackInstanceNetworksComponent);
