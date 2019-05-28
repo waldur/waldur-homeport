@@ -1,6 +1,6 @@
 import { getAll, getFirst } from '@waldur/core/api';
 import { $http } from '@waldur/core/services';
-import { Flavor, FloatingIp, Subnet, ServiceComponent, SshKey } from '@waldur/openstack/openstack-instance/types';
+import { Flavor, FloatingIp, Subnet, Image, SshKey } from '@waldur/openstack/openstack-instance/types';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
 
 import { AvailabilityZone } from './types';
@@ -10,7 +10,7 @@ export const loadFlavors = (settings_uuid: string) =>
   getAll<Flavor>('/openstacktenant-flavors/', {params: {settings_uuid}});
 
 export const loadImages = (settings_uuid: string) =>
-  getAll<ServiceComponent>('/openstacktenant-images/', {params: {settings_uuid}});
+  getAll<Image>('/openstacktenant-images/', {params: {settings_uuid}});
 
 export const loadSecurityGroups = (settings_uuid: string) =>
   getAll<SecurityGroup>('/openstacktenant-security-groups/', {params: {settings_uuid}});

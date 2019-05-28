@@ -42,8 +42,14 @@ export interface ServiceComponent {
 }
 
 export interface Flavor extends ServiceComponent {
+  url: string;
   name: string;
   disabled: boolean;
+}
+
+export interface Image extends ServiceComponent {
+  url: string;
+  name: string;
 }
 
 export interface LimitsType {
