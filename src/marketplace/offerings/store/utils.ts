@@ -86,13 +86,12 @@ export const formatAttributes = (category: Category, attributes) => {
   }, {});
 };
 
+const getBillingTypeValue = option => typeof option === 'object' ? option.value : option;
+
 export const formatComponents = components =>
   components.map(component => ({
     ...component,
-    billing_type:
-      typeof component.billing_type === 'object' ?
-      component.billing_type.value :
-      component.billing_type,
+    billing_type: getBillingTypeValue(component.billing_type),
     limit_period: component.limit_period ? component.limit_period.value : null,
   }));
 
@@ -116,7 +115,8 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
   if (request.components && !skipComponents) {
     result.components = formatComponents(request.components);
   }
-  const fixedComponents = request.components.filter(c => c.billing_type === 'fixed').map(c => c.type);
+  const fixedComponents = request.components.filter(
+    c => getBillingTypeValue(c.billing_type) === 'fixed').map(c => c.type);
   if (request.plans) {
     result.plans = request.plans.map(plan => formatPlan(plan, fixedComponents));
   }
