@@ -133,7 +133,7 @@ export const TableOptions = {
   mapPropsToFilter,
   exportRow,
   exportFields,
-  queryField: 'name',
+  queryField: 'query',
 };
 
 const mapStateToProps = state => ({
