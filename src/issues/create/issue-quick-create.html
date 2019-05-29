@@ -74,9 +74,10 @@
       <div class="form-group">
         <label class="control-label">
           <span translate>Project</span>
+          <span class="text-danger" ng-if="$ctrl.projectRequired">*</span>
         </label>
         <div ng-class="{disabled: !$ctrl.issue.customer}">
-          <ui-select ng-model="$ctrl.issue.project" name="project">
+          <ui-select ng-model="$ctrl.issue.project" name="project" ng-required="$ctrl.projectRequired">
             <ui-select-match placeholder="{{ 'Select project...' | translate }}"
               allow-clear="true">
               {{ $select.selected.name }}
@@ -88,6 +89,10 @@
               {{ option.name }}
             </ui-select-choices>
           </ui-select>
+          <div class="help-block text-danger"
+            ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.project.$touched) && $ctrl.IssueForm.project.$error.required">
+            <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
+          </div>
         </div>
       </div>
       <div class="form-group">

@@ -21,6 +21,7 @@ class IssueQuickCreateController {
               customersService,
               projectsService,
               resourcesService,
+              usersService,
               ErrorMessageFormatter,
               coreUtils) {
     this.$state = $state;
@@ -32,6 +33,7 @@ class IssueQuickCreateController {
     this.customersService = customersService;
     this.projectsService = projectsService;
     this.resourcesService = resourcesService;
+    this.usersService = usersService;
     this.ErrorMessageFormatter = ErrorMessageFormatter;
     this.coreUtils = coreUtils;
     this.init();
@@ -41,12 +43,17 @@ class IssueQuickCreateController {
     this.$scope.$watch(() => this.issue.customer, () => {
       this.issue.project = null;
       this.refreshProjects();
+      this.refreshProjectRequired();
     });
     this.$scope.$watch(() => this.issue.project, () => {
       this.issue.resource = null;
       this.refreshResources();
     });
     this.emptyFieldMessage = gettext('You did not enter a field.');
+    this.projectRequired = false;
+    this.usersService.getCurrentUser().then(user => {
+      this.user = user;
+    });
   }
 
   refreshCustomers(name) {
@@ -57,6 +64,23 @@ class IssueQuickCreateController {
     return this.customersService.getList(params).then(customers => {
       this.customers = customers;
     });
+  }
+
+  refreshProjectRequired() {
+    // Project should be specified only if user has selected customer
+    // but user is not owner and user is not staff and user is not customer owner.
+
+    if (!this.issue.customer) {
+      this.projectRequired = false;
+      return;
+    }
+
+    if (this.user.is_staff || this.user.is_support) {
+      return;
+    }
+
+    this.projectRequired = this.issue.customer.owners.find(
+      owner => owner.uuid === this.user.uuid) === undefined;
   }
 
   refreshProjects(name) {
