@@ -3,6 +3,7 @@ import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { validatePositive } from '@waldur/marketplace/common/utils';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 interface PlanComponentsProps extends TranslateProps {
@@ -44,7 +45,8 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
                 className="form-control"
                 name={`${props.plan}.quotas.${component.type}`}
                 type="number"
-                validate={required}
+                validate={[required, validatePositive]}
+                inputMode="numeric"
               />
             ) : (
               <div className="form-control-static">
@@ -59,7 +61,8 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
               className="form-control"
               name={`${props.plan}.prices.${component.type}`}
               type="number"
-              validate={required}
+              validate={[required, validatePositive]}
+              inputMode="numeric"
             />
           </td>
           <td>

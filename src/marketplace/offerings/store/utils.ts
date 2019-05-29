@@ -15,7 +15,7 @@ export const planWithoutQuotas = (plan: PlanFormData, component: string) => ({
   quotas: plan.quotas ? omit(plan.quotas, component) : plan.quotas,
 });
 
-const formatPlan = (plan: PlanFormData): PlanRequest => {
+const formatPlan = (plan: PlanFormData, fixedComponents: string[]): PlanRequest => {
   const result: PlanRequest = {
     name: plan.name,
     unit: plan.unit.value,
@@ -25,7 +25,10 @@ const formatPlan = (plan: PlanFormData): PlanRequest => {
     result.prices = plan.prices;
   }
   if (plan.quotas) {
-    result.quotas = plan.quotas;
+    // Skip quotas for usage-based components
+    result.quotas = Object.keys(plan.quotas).reduce(
+      (acc, key) => fixedComponents.includes(key) ? {...acc, [key]: plan.quotas[key]} : acc,
+      {});
   }
   if (plan.description) {
     result.description = plan.description;
@@ -113,8 +116,9 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
   if (request.components && !skipComponents) {
     result.components = formatComponents(request.components);
   }
+  const fixedComponents = request.components.filter(c => c.billing_type === 'fixed').map(c => c.type);
   if (request.plans) {
-    result.plans = request.plans.map(formatPlan);
+    result.plans = request.plans.map(plan => formatPlan(plan, fixedComponents));
   }
   if (request.options) {
     result.options = formatOptions(request.options);
