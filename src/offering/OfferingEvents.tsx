@@ -3,6 +3,6 @@ import { Offering } from '@waldur/offering/types';
 
 export const OfferingEvents: React.ComponentType<{offering: Offering}> = getEventsList({
   mapPropsToFilter: props => ({
-    scope: props.offering.issue,
+    scope: props.offering.url,
   }),
 });
