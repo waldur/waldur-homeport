@@ -1,11 +1,11 @@
 import debounce from 'lodash.debounce';
 import * as React from 'react';
 
-import { TranslateProps } from '@waldur/i18n/types';
+import { translate } from '@waldur/i18n';
 
 import './TableQuery.scss';
 
-interface Props extends TranslateProps {
+interface Props {
   query: string;
   setQuery: (query: string) => void;
 }
@@ -14,7 +14,7 @@ interface State {
   query: string;
 }
 
-class TableQuery extends React.Component<Props, State> {
+export class TableQuery extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {query: props.query || ''};
@@ -34,7 +34,7 @@ class TableQuery extends React.Component<Props, State> {
   render() {
     return (
       <div className="pull-right text-right table-query">
-        <label>{this.props.translate('Search')}
+        <label>{translate('Search')}
           <input
             type="search"
             className="form-control input-sm"
@@ -45,5 +45,3 @@ class TableQuery extends React.Component<Props, State> {
     );
   }
 }
-
-export default TableQuery;

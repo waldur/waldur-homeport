@@ -1,12 +1,10 @@
 import * as React from 'react';
 
-import { TranslateProps } from '@waldur/i18n/types';
+import { translate } from '@waldur/i18n';
 
 import { Pagination } from './types';
 
-interface Props  extends TranslateProps, Pagination {}
-
-const TableInfo = ({ translate, currentPage, pageSize, resultCount }: Props) => {
+export const TableInfo = ({ currentPage, pageSize, resultCount }: Pagination) => {
   const context = {
     sliceStart: Math.min(resultCount, (currentPage - 1) * pageSize + 1),
     sliceEnd: Math.min(resultCount, currentPage * pageSize),
@@ -20,5 +18,3 @@ const TableInfo = ({ translate, currentPage, pageSize, resultCount }: Props) => 
     </div>
   );
 };
-
-export default TableInfo;

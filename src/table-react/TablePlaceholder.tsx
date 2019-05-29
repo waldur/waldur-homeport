@@ -7,9 +7,7 @@ interface Props {
   verboseName?: string;
 }
 
-const TablePlaceholder = ({ query, verboseName }: Props) => {
+export const TablePlaceholder = ({ query, verboseName }: Props) => {
   const message = getMessage({ query, verboseName });
   return (<p>{message}</p>);
 };
-
-export default TablePlaceholder;
