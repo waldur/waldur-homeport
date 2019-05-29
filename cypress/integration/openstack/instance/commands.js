@@ -16,6 +16,7 @@ Cypress.Commands.add('visitInstanceCreateForm', () => {
     .route('http://localhost:8080/api/openstacktenant-security-groups/**', 'fixture:offerings/securityGroups.json')
     .route('http://localhost:8080/api/openstacktenant-subnets/**', 'fixture:offerings/subnets.json')
     .route('http://localhost:8080/api/openstacktenant-floating-ips/**', 'fixture:offerings/floatingIps.json')
+    .route('http://localhost:8080/api/openstacktenant-instance-availability-zones/**', [])
     .visit('/#/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offering/3bcdcdb0987545f0b50e6eed26bb49d6/');
 });
 
