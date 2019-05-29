@@ -7133,11 +7133,11 @@ msgstr ""
 msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
-#: src/table-react/placeholder/utils.ts
+#: src/table-react/utils.tsx
 msgid "There are no {verboseName} found matching the filter."
 msgstr ""
 
-#: src/table-react/placeholder/utils.ts
+#: src/table-react/utils.tsx
 msgid "There are no {verboseName} yet."
 msgstr ""
 
@@ -8678,7 +8678,7 @@ msgstr ""
 msgid "hours"
 msgstr ""
 
-#: src/table-react/placeholder/utils.ts
+#: src/table-react/utils.tsx
 msgid "items"
 msgstr ""
 

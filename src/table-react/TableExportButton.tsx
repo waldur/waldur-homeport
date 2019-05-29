@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as Dropdown from 'react-bootstrap/lib/Dropdown';
 
-import { TranslateProps } from '@waldur/i18n/types';
+import { translate } from '@waldur/i18n';
 
-interface Props extends TranslateProps {
+interface Props {
   exportAs?: (format: string) => void;
 }
 
-const TableExportButton = ({ translate, exportAs }: Props) => {
+export const TableExportButton = ({ exportAs }: Props) => {
   const exporters = [
     {
       label: translate('Copy to clipboard'),
@@ -43,5 +43,3 @@ const TableExportButton = ({ translate, exportAs }: Props) => {
     </Dropdown>
   );
 };
-
-export default TableExportButton;
