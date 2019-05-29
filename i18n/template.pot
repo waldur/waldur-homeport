@@ -2775,6 +2775,10 @@ msgstr ""
 msgid "Instances count"
 msgstr ""
 
+#: src/issues/comments/IssueCommentItem.tsx
+msgid "Internal"
+msgstr ""
+
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
