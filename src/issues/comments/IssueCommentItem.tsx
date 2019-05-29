@@ -73,24 +73,31 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
             <a onClick={openUserDialog}>{comment.author_name}</a>&#32;
             <span>{translate('commented:')}</span>
           </div>
-          {(user.is_staff || user.uuid === comment.author_uuid) &&
-            <div className="comment-item__controls">
-              <button
-                className="comment-item__edit btn btn-link"
-                disabled={uiDisabled || formToggleDisabled}
-                onClick={toggleForm}
-              >
-                <i className="fa fa-edit" aria-hidden="true" />
-              </button>
-              <button
-                className="comment-item__delete btn btn-link"
-                disabled={uiDisabled}
-                onClick={openDeleteDialog}
-              >
-                <i className="fa fa-trash" aria-hidden="true" />
-              </button>
-            </div>
-          }
+          <div className="comment-item__controls">
+            {(user.is_staff || user.uuid === comment.author_uuid) &&
+              <>
+                <button
+                  className="comment-item__edit btn btn-link"
+                  disabled={uiDisabled || formToggleDisabled}
+                  onClick={toggleForm}
+                >
+                  <i className="fa fa-edit" aria-hidden="true" />
+                </button>
+                <button
+                  className="comment-item__delete btn btn-link"
+                  disabled={uiDisabled}
+                  onClick={openDeleteDialog}
+                >
+                  <i className="fa fa-trash" aria-hidden="true" />
+                </button>
+              </>
+            }
+            {!comment.is_public && (
+              <span className="label label-default text-uppercase">
+                {translate('Internal')}
+              </span>
+            )}
+          </div>
         </div>
         <div
           className="comment-item__content"

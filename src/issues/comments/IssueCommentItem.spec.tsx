@@ -18,7 +18,7 @@ const renderWrapper = (props?) => shallow(<PureIssueCommentItem {...initialProps
 const getDialogButton = (container: ShallowWrapper) => container.find('.comment-item__header a');
 const getToggleButton = (container: ShallowWrapper) => container.find('.comment-item__edit');
 const getDeleteButton = (container: ShallowWrapper) => container.find('.comment-item__delete');
-const hasControls = (container: ShallowWrapper) => container.find('.comment-item__controls').length === 1;
+const hasDeleteButton = (container: ShallowWrapper) => container.find('.comment-item__delete').length === 1;
 
 describe('IssueCommentItem', () => {
   it('open user dialog', () => {
@@ -48,12 +48,12 @@ describe('IssueCommentItem', () => {
     expect(getDeleteButton(wrapper).prop('disabled')).toBe(true);
   });
 
-  it('renders delete and edit button for same author or staf only', () => {
+  it('renders delete button for same author or staff only', () => {
     const wrapper = renderWrapper();
-    expect(hasControls(wrapper)).toBe(true);
+    expect(hasDeleteButton(wrapper)).toBe(true);
     wrapper.setProps({ user: users.different });
-    expect(hasControls(wrapper)).toBe(false);
+    expect(hasDeleteButton(wrapper)).toBe(false);
     wrapper.setProps({ user: users.staff });
-    expect(hasControls(wrapper)).toBe(true);
+    expect(hasDeleteButton(wrapper)).toBe(true);
   });
 });

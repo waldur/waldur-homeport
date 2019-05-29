@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import { withTranslation } from '@waldur/i18n/translate';
+import { translate, withTranslation } from '@waldur/i18n/translate';
 import { isVisible } from '@waldur/store/config';
 import { selectTableRows } from '@waldur/table-react/selectors';
 
@@ -91,3 +91,12 @@ const getId = (row, index) => {
 };
 
 export const renderFieldOrDash = field => field ? field : '\u2014';
+
+export function getMessage({ query, verboseName }) {
+  const context = {verboseName: verboseName || translate('items')};
+  if (query && query !== '') {
+    return translate('There are no {verboseName} found matching the filter.', context);
+  } else {
+    return translate('There are no {verboseName} yet.', context);
+  }
+}

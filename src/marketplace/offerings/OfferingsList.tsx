@@ -87,7 +87,7 @@ export const TableOptions = {
 const showOfferingCreateButton = createSelector(
   isOwnerOrStaff,
   getCustomer,
-  (ownerOrStaff, customer) => customer.is_service_provider && ownerOrStaff,
+  (ownerOrStaff, customer) => customer && customer.is_service_provider && ownerOrStaff,
 );
 
 const mapStateToProps = state => ({
