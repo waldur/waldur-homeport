@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { formatTemplate } from '@waldur/i18n/translate';
 
-import TableInfo from './TableInfo';
+import { TableInfo } from './TableInfo';
 
 describe('TableInfo', () => {
   const defaultProps = {
