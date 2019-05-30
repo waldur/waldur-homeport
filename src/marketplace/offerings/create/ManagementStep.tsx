@@ -9,9 +9,11 @@ import { Option } from '@waldur/marketplace/common/registry';
 import { ProviderFormProps } from '@waldur/providers/types';
 
 import { OfferingOptions } from '../option/OfferingOptions';
+import { OfferingScheduler } from '../option/OfferingScheduler';
 
 export interface ManagementStepProps extends TranslateProps {
   showOptions: boolean;
+  schedulable?: boolean;
   serviceSettingsForm?: React.ComponentType<ProviderFormProps>;
   offeringTypes: Option[];
   editable: boolean;
@@ -61,6 +63,7 @@ export const ManagementStep = (props: ManagementStepProps) => (
         </div>
       </div>
     ) : null}
+    {props.schedulable && <FieldArray name="schedule" component={OfferingScheduler}/>}
     {props.showOptions && <FieldArray name="options" component={OfferingOptions}/>}
   </>
 );

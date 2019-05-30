@@ -17,6 +17,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   providerType?: string;
   attributes?(): Attribute[];
   disableOfferingCreation?: boolean;
+  schedulable?: boolean;
 }
 
 export interface Option {
@@ -55,6 +56,10 @@ export function getOfferingTypes(): Option[] {
 
 export function showOfferingOptions(offeringType) {
   return REGISTRY[offeringType].showOptions;
+}
+
+export function isOfferingTypeSchedulable(offeringType) {
+  return REGISTRY[offeringType].schedulable;
 }
 
 export function showComponentsList(offeringType) {

@@ -3309,6 +3309,10 @@ msgstr ""
 msgid "Marketplace"
 msgstr ""
 
+#: src/booking/marketplace.ts
+msgid "Marketplace Booking"
+msgstr ""
+
 #: src/marketplace/routes.js
 msgid "Marketplace checkout"
 msgstr ""
@@ -6049,6 +6053,10 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Schedule"
+msgstr ""
+
+#: src/marketplace/offerings/option/OfferingScheduler.tsx
+msgid "Scheduler"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx

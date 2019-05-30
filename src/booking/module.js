@@ -1,0 +1,3 @@
+import './marketplace';
+
+export default () => {};
