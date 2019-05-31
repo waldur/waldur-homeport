@@ -20,6 +20,17 @@ interface ShoppingCartItemProps {
   termsOfServiceIsVisible?: boolean;
 }
 
+const TosCell = (props: ShoppingCartItemProps) => (
+  <td className="text-center">
+    {(props.item.offering_shared && props.item.offering_billable && props.item.offering_terms_of_service) ?
+      <TermsOfService
+        name={props.item.offering_uuid}
+        offering_terms_of_service={props.item.offering_terms_of_service}
+      /> : <span>&mdash;</span>
+    }
+  </td>
+);
+
 export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
   <tr>
     <td>
@@ -54,15 +65,6 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
         </a>
       </span>
     </td>
-    {props.termsOfServiceIsVisible &&
-      <td className="text-center">
-        {props.item.offering_shared ?
-          <TermsOfService
-            name={props.item.offering_uuid}
-            offering_terms_of_service={props.item.offering_terms_of_service}
-          /> : <span>&mdash;</span>
-        }
-      </td>
-    }
+    {props.termsOfServiceIsVisible && <TosCell {...props}/>}
   </tr>
 );
