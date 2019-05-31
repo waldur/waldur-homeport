@@ -896,6 +896,10 @@ msgstr ""
 msgid "Block volume count"
 msgstr ""
 
+#: src/booking/marketplace.ts
+msgid "Booking"
+msgstr ""
+
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/resource-import/import-volumes-list.js
 msgid "Bootable"
@@ -3307,10 +3311,6 @@ msgstr ""
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Marketplace"
-msgstr ""
-
-#: src/booking/marketplace.ts
-msgid "Marketplace Booking"
 msgstr ""
 
 #: src/marketplace/routes.js
