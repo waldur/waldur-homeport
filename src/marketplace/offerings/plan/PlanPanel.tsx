@@ -25,7 +25,7 @@ const PurePlanPanel = (props: OwnProps & StateProps) => (
       <h4>{translate('Plan #{index}', {index: props.index + 1})}</h4>
     </Panel.Heading>
     <Panel.Body>
-      <PlanForm plan={props.plan}/>
+      <PlanForm plan={props.plan} archived={props.archived}/>
     </Panel.Body>
   </Panel>
 );

@@ -3,13 +3,20 @@ import { compose } from 'redux';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
-import { withTranslation } from '@waldur/i18n';
+import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { FormGroup } from '../FormGroup';
 import { PlanBillingPeriodField } from './PlanBillingPeriodField';
 import { PlanComponents } from './PlanComponents';
 import { PriceField } from './PriceField';
 import { connectPlanComponents } from './utils';
+
+interface PlanFormProps extends TranslateProps {
+  archived: boolean;
+  components: OfferingComponent[];
+  plan: string;
+}
 
 const PlanNameField = props => (
   <Field
@@ -33,7 +40,7 @@ const PlanDescriptionField = props => (
 
 const enhance = compose(connectPlanComponents, withTranslation);
 
-export const PlanForm = enhance(props => (
+export const PlanForm = enhance((props: PlanFormProps) => (
   <>
     <FormGroup label={props.translate('Name')} required={true}>
       <PlanNameField plan={props.plan}/>
@@ -48,7 +55,11 @@ export const PlanForm = enhance(props => (
       <PlanDescriptionField plan={props.plan}/>
     </FormGroup>
     {props.components && props.components.length > 0 && (
-      <PlanComponents plan={props.plan} components={props.components}/>
+      <PlanComponents
+        plan={props.plan}
+        components={props.components}
+        archived={props.archived}
+      />
     )}
   </>
 ));
