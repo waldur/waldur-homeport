@@ -33,7 +33,7 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
     <TextField
       name="full_description"
       label={props.translate('Full description')}
-      maxLength={500}
+      maxLength={5000}
     />
     <StringField
       name="native_name"
