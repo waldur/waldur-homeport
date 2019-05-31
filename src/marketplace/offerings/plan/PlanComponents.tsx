@@ -7,6 +7,7 @@ import { validateNonNegative } from '@waldur/marketplace/common/utils';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 interface PlanComponentsProps extends TranslateProps {
+  archived: boolean;
   components: OfferingComponent[];
   plan: string;
 }
@@ -45,7 +46,7 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
                 className="form-control"
                 name={`${props.plan}.quotas.${component.type}`}
                 type="number"
-                validate={[required, validateNonNegative]}
+                validate={props.archived ? undefined : [required, validateNonNegative]}
                 inputMode="numeric"
               />
             ) : (
@@ -61,7 +62,7 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
               className="form-control"
               name={`${props.plan}.prices.${component.type}`}
               type="number"
-              validate={[required, validateNonNegative]}
+              validate={props.archived ? undefined : [required, validateNonNegative]}
               inputMode="numeric"
             />
           </td>
