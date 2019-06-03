@@ -11,7 +11,7 @@
   <!-- Allow installing the app to the homescreen. Temporarily disabled due to caching issues. -->
   <!-- link rel="manifest" href="manifest.json" -->
 </head>
-<body class="fixed-sidebar {{$state.current.data.bodyClass}}" id="page-top">
+<body class="fixed-sidebar {{$state.current.data.bodyClass}}" id="page-top" ng-csp="no-unsafe-eval">
   <div class="loading-screen" ng-if="::false">
     <style>
       .loading-screen {
