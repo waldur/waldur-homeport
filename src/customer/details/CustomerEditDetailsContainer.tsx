@@ -4,14 +4,15 @@ import { getFormValues } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
-import { isOwnerOrStaff } from '@waldur/workspace/selectors';
+import { isStaff, isOwner } from '@waldur/workspace/selectors';
 
+import { canManageCustomer } from '../create/selectors';
 import { CustomerEditDetails } from './CustomerEditDetails';
 import * as actions from './store/actions';
 
 const mapStateToProps = state => ({
   formData: getFormValues('customerLogo')(state),
-  canEdit: isOwnerOrStaff(state),
+  canEdit: isStaff(state) || (isOwner(state) && canManageCustomer(state)),
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
