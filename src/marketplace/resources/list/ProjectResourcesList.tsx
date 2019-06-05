@@ -70,6 +70,7 @@ export const TableComponent = props => {
       actions={tableActions}
       initialSorting={{field: 'created', mode: 'desc'}}
       hasQuery={true}
+      showPageSizeSelector={true}
     />
   );
 };
