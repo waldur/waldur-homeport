@@ -12,6 +12,6 @@ export default function createAction(ctx): ResourceAction {
     title: translate('Terminate'),
     useResolve: true,
     isVisible: marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null,
-    validators: [validateState('OK')],
+    validators: [validateState('OK', 'Erred')],
   };
 }

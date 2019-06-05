@@ -84,6 +84,7 @@ export const TableComponent = props => {
       initialSorting={{field: 'created', mode: 'desc'}}
       enableExport={true}
       hasQuery={true}
+      showPageSizeSelector={true}
     />
   );
 };

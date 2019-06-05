@@ -47,6 +47,7 @@ export const TableComponent = props => {
       columns={columns}
       verboseName={translate('Resources')}
       initialSorting={{field: 'created', mode: 'desc'}}
+      showPageSizeSelector={true}
     />
   );
 };

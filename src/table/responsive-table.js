@@ -27,6 +27,8 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       let options = scope.controller.tableOptions;
       let table;
       let rootScopeListener;
+      const childScope = scope.$new(true, $rootScope);
+      childScope.controller = scope.controller;
 
       scope.$on('updateRow', (event, args) => {
         let data = args.data;
@@ -125,7 +127,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
           fnDrawCallback: function() {
             $(element).find('tr').each(function(index, element) {
               try {
-                $compile(element)(scope);
+                $compile(element)(childScope);
               } catch (e) {
                 // Skip error
               }
@@ -259,6 +261,9 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         scope.$on('$destroy', function() {
           if(rootScopeListener) {
             rootScopeListener();
+          }
+          if(childScope) {
+            childScope.$destroy();
           }
         });
       }
