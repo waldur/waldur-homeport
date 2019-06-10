@@ -5,8 +5,9 @@ import { Field } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { ENV } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
-import { getLatinNameValidators, required as valueIsRequired } from '@waldur/core/validators';
+import { getLatinNameValidators, required as valueIsRequired, required } from '@waldur/core/validators';
 import { NumberField, TextField, StringField } from '@waldur/form-react';
 import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
 import { SelectDialogField } from '@waldur/form-react/SelectDialogField';
@@ -270,9 +271,12 @@ export class OpenstackInstanceCreateFormComponent extends
             />
           </CreateResourceFormGroup>
           {this.state.availabilityZones.length > 0 && (
-            <CreateResourceFormGroup label={translate('Availability zone')}>
+            <CreateResourceFormGroup
+              label={translate('Availability zone')}
+              required={ENV.plugins.WALDUR_OPENSTACK_TENANT.REQUIRE_AVAILABILITY_ZONE}>
               <Field
                 name="attributes.availability_zone"
+                validate={ENV.plugins.WALDUR_OPENSTACK_TENANT.REQUIRE_AVAILABILITY_ZONE ? required : undefined}
                 component={fieldProps => (
                   <Select
                     value={fieldProps.input.value}
