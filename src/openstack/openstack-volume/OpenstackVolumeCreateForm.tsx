@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
-import { getLatinNameValidators } from '@waldur/core/validators';
+import { ENV } from '@waldur/core/services';
+import { getLatinNameValidators, required } from '@waldur/core/validators';
 import { NumberField, TextField, StringField, FormContainer, SelectField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { parseIntField } from '@waldur/marketplace/common/utils';
@@ -60,6 +61,8 @@ export class OpenstackVolumeCreateForm extends React.Component<OfferingConfigura
                   labelKey="name"
                   valueKey="url"
                   simpleValue={true}
+                  required={ENV.plugins.WALDUR_OPENSTACK_TENANT.REQUIRE_AVAILABILITY_ZONE}
+                  validate={ENV.plugins.WALDUR_OPENSTACK_TENANT.REQUIRE_AVAILABILITY_ZONE ? required : undefined}
                 />
               )}
               <TextField
