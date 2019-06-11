@@ -21,10 +21,11 @@ export const addItemError = () => ({
   type: constants.ADD_ITEM_ERROR,
 });
 
-export const removeItemRequest = (uuid: string) => ({
+export const removeItemRequest = (uuid: string, project: string) => ({
   type: constants.REMOVE_ITEM_REQUEST,
   payload: {
     uuid,
+    project,
   },
 });
 

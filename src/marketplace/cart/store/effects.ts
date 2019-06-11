@@ -1,13 +1,12 @@
 import { delay } from 'redux-saga';
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
-import { INIT_CONFIG } from '@waldur/store/config';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
-import { USER_LOGGED_IN } from '@waldur/workspace/constants';
+import { SET_CURRENT_PROJECT, SET_CURRENT_CUSTOMER } from '@waldur/workspace/constants';
 import { getProject, getWorkspace } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
@@ -16,6 +15,7 @@ import * as constants from './constants';
 
 const formatItem = item => ({
   plan: item.plan ? item.plan.url : undefined,
+  project: item.project,
   attributes: item.attributes,
   limits: item.limits,
 });
@@ -36,8 +36,13 @@ function* initCart() {
   }
   // Wait a little bit to avoid race conditions
   yield call(delay, 500);
+  const project = yield select(getProject);
+  if (!project) {
+    yield put(actions.setItems([]));
+    return;
+  }
   try {
-    const items = yield call(api.getCartItems);
+    const items = yield call(api.getCartItems, project.url);
     yield put(actions.setItems(items));
   } catch (error) {
     if (error.status === -1 || error.status === 401) {
@@ -53,7 +58,7 @@ function* addItem(action) {
     const item = yield call(api.addCartItem, formatItemToCreate(action.payload.item));
     yield put(actions.addItemSuccess(item));
 
-    const items = yield call(api.getCartItems);
+    const items = yield call(api.getCartItems, item.project);
     yield put(actions.setItems(items));
 
     yield put(showSuccess(translate('Item has been added to shopping cart.')));
@@ -75,7 +80,7 @@ function* removeItem(action) {
     yield call(api.removeCartItem, action.payload.uuid);
     yield put(actions.removeItemSuccess(action.payload.uuid));
 
-    const items = yield call(api.getCartItems);
+    const items = yield call(api.getCartItems, action.payload.project);
     yield put(actions.setItems(items));
 
     yield put(showSuccess(translate('Item has been removed from shopping cart.')));
@@ -91,7 +96,7 @@ function* updateItem(action) {
     const item = yield call(api.updateCartItem, action.payload.item.uuid, formatItemToUpdate(action.payload.item));
     yield put(actions.updateItemSuccess(item));
 
-    const items = yield call(api.getCartItems);
+    const items = yield call(api.getCartItems, action.payload.item.project);
     yield put(actions.setItems(items));
 
     yield put(showSuccess(translate('Shopping cart item has been updated.')));
@@ -133,7 +138,7 @@ function* createOrder() {
 }
 
 export default function*() {
-  yield takeEvery([INIT_CONFIG, USER_LOGGED_IN], initCart);
+  yield takeLatest([SET_CURRENT_PROJECT, SET_CURRENT_CUSTOMER], initCart);
   yield takeEvery(constants.ADD_ITEM_REQUEST, addItem);
   yield takeEvery(constants.UPDATE_ITEM_REQUEST, updateItem);
   yield takeEvery(constants.REMOVE_ITEM_REQUEST, removeItem);

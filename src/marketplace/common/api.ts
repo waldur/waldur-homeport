@@ -49,8 +49,8 @@ export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
 export const uploadOfferingDocument = (offeringUrl: string, document: OfferingDocument) =>
   sendForm<Offering>('POST', `${ENV.apiEndpoint}api/marketplace-offering-files/`, {offering: offeringUrl, ...document});
 
-export const getCartItems = () =>
-  getAll('/marketplace-cart-items/');
+export const getCartItems = (projectUrl: string) =>
+  getAll('/marketplace-cart-items/', {params: {project: projectUrl}});
 
 export const addCartItem = (data: object) =>
   post('/marketplace-cart-items/', data).then(response => response.data);

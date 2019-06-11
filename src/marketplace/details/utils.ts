@@ -14,6 +14,10 @@ export const formatOrderItem = (props: OrderSummaryProps, request) => {
     if (props.formData.limits) {
       request.limits = props.formData.limits;
     }
+    const project = props.project || props.formData.project;
+    if (project) {
+      request.project = project.url;
+    }
   }
   return request;
 };

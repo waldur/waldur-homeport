@@ -41,6 +41,7 @@ export interface OrderItemResponse {
   plan_name?: string;
   plan_description?: string;
   plan_unit?: PlanUnit;
+  project: string;
   category_title?: string;
   category_uuid?: string;
   created: string;
