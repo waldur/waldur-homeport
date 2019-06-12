@@ -1,0 +1,12 @@
+.cache-loader
+.git
+.idea
+.vscode
+build
+build.dev
+coverage
+build.dll
+node_modules
+src/configs/config.json
+src/configs/test/config.json
+tslint/rules/*.js
