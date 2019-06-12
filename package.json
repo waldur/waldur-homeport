@@ -1,6 +1,6 @@
 {
   "name": "waldur-homeport",
-  "version": "3.7.6",
+  "version": "3.7.7",
   "description": "Web interface for Waldur MasterMind cloud orchestrator",
   "repository": "https://github.com/opennode/waldur-homeport",
   "license": "MIT",
@@ -148,7 +148,7 @@
     "markdown-loader": "^4.0.0",
     "mini-css-extract-plugin": "^0.4.5",
     "ng-annotate-loader": "^0.2.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "offline-plugin": "^4.8.1",
     "pofile": "^1.0.9",
     "postcss-import": "^10.0.0",
