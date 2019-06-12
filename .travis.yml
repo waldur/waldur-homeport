@@ -15,3 +15,10 @@ script:
 deploy:
 - provider: script
   script: bash docker_push.sh
+  on:
+    branch: develop
+
+- provider: script
+  script: bash docker_push.sh
+  on:
+    tags: true
