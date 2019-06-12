@@ -7,7 +7,8 @@ const target = 'build.dll';
 module.exports = {
   entry: {
     vendor: [
-      '@babel/polyfill',
+      'core-js/stable',
+      'regenerator-runtime/runtime',
       'raven-js',
       'lodash',
       'jquery',
