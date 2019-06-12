@@ -17,7 +17,7 @@ import { OuterState } from './types';
 interface ShoppingCartProps {
   items: OrderItemResponse[];
   maxUnit: 'month' | 'day';
-  removeItem(uuid: string): void;
+  removeItem(uuid: string, project: string): void;
   isRemovingItem: boolean;
   termsOfServiceIsVisible?: boolean;
 }
@@ -42,7 +42,7 @@ const PureShoppingCart = (props: ShoppingCartProps) => props.items.length > 0 ? 
           <ShoppingCartItem
             key={index}
             item={item}
-            onRemove={() => props.removeItem(item.uuid)}
+            onRemove={() => props.removeItem(item.uuid, item.project)}
             isRemovingItem={props.isRemovingItem}
             termsOfServiceIsVisible={props.termsOfServiceIsVisible}
           />
