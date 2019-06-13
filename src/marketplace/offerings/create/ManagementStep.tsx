@@ -63,7 +63,7 @@ export const ManagementStep = (props: ManagementStepProps) => (
         </div>
       </div>
     ) : null}
-    {props.schedulable && <FieldArray name="schedule" component={OfferingScheduler}/>}
+    {props.schedulable && <FieldArray name="schedules" component={OfferingScheduler}/>}
     {props.showOptions && <FieldArray name="options" component={OfferingOptions}/>}
   </>
 );

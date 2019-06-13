@@ -19,6 +19,11 @@ module.exports = {
       'file-saver',
       'papaparse',
 
+      '@fullcalendar/core',
+      '@fullcalendar/daygrid',
+      '@fullcalendar/interaction',
+      '@fullcalendar/react',
+      '@fullcalendar/timegrid',
       'redux',
       'redux-form',
       'redux-form-saga',

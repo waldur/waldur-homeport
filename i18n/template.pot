@@ -331,7 +331,7 @@ msgstr ""
 msgid "Add user"
 msgstr ""
 
-#: src/marketplace/offerings/option/AddOptionButton.tsx
+#: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "Add user input field"
 msgstr ""
 
@@ -698,6 +698,10 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
 msgid "Auto-generated"
+msgstr ""
+
+#: src/marketplace/offerings/option/OfferingScheduler.tsx
+msgid "Availability"
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx
@@ -1787,6 +1791,10 @@ msgstr ""
 
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
+msgstr ""
+
+#: src/booking/components/modal/CalendarEventModal.tsx
+msgid "Dismiss"
 msgstr ""
 
 #: src/marketplace/offerings/DisplayNameField.tsx
@@ -6055,10 +6063,6 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-#: src/marketplace/offerings/option/OfferingScheduler.tsx
-msgid "Scheduler"
-msgstr ""
-
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Screenshots"
 msgstr ""
@@ -6756,6 +6760,7 @@ msgstr ""
 msgid "Storages"
 msgstr ""
 
+#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/digitalocean/droplet-resize.html
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
@@ -7222,6 +7227,7 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
+#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
