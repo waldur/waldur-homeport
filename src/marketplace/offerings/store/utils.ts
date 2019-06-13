@@ -107,6 +107,7 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
     customer: customer ? customer.url : undefined,
     type: request.type ? request.type.value : undefined,
     service_attributes: request.service_settings,
+    schedules: request.schedules,
     shared: true,
   };
   if (request.attributes) {

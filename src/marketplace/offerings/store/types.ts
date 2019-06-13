@@ -19,6 +19,13 @@ export interface OptionFormData {
   choices: string;
 }
 
+export interface ScheduleFormData {
+  start_date: string;
+  start_time: string;
+  end_date: string;
+  end_time: string;
+}
+
 export interface OfferingFormData {
   name: string;
   native_name?: string;
@@ -32,6 +39,7 @@ export interface OfferingFormData {
   components?: OfferingComponent[];
   plans?: PlanFormData[];
   options?: OptionFormData[];
+  schedules?: ScheduleFormData[];
   service_settings?: any;
   thumbnail?: File;
   scope?: string;
@@ -66,6 +74,7 @@ export interface OfferingRequest {
   components?: OfferingComponent[];
   plans?: PlanRequest[];
   options?: OfferingOptions;
+  schedules?: ScheduleFormData[];
   scope?: string;
   service_attributes?: any;
   shared: boolean;

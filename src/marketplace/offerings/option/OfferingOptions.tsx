@@ -26,7 +26,9 @@ export const OfferingOptions = withTranslation((props: Props) => (
           </Panel.Body>
         </Panel>
       ))}
-      <AddOptionButton onClick={() => props.fields.push({})}/>
+      <AddOptionButton onClick={() => props.fields.push({})}>
+        {props.translate('Add user input field')}
+      </AddOptionButton>
     </Col>
   </div>
 ));

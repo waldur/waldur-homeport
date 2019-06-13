@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
+import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { translate } from '@waldur/i18n';
 import { getAttributes, getProviderType } from '@waldur/marketplace/common/registry';
 import { AttributesTable } from '@waldur/marketplace/details/attributes/AttributesTable';
@@ -28,12 +29,14 @@ const PureManagementSummary = props => {
   const providerType = getProviderType(type.value);
   const serializer = getSerializer(providerType);
   const attributes = props.formData.service_settings && serializer(props.formData.service_settings);
+  const schedules = props.formData.schedules;
 
   return (
     <>
       <h3>{translate('Management')}</h3>
       <p><strong>{translate('Type')}</strong>: {type.label}</p>
       {attributes && <AttributesTable attributes={attributes} sections={[section]}/>}
+      {schedules && <Calendar events={schedules}/>}
     </>
   );
 };
