@@ -2,10 +2,10 @@
 Note that we are not using builtin Angular plugin for Sentry,
 because it is required to initialize before any other application code.
 But we need to load application configuration from JSON via AJAX and
-only then decide if we need to install Raven or not.
+only then decide if we need to install Sentry client or not.
 */
 
-import Raven from 'raven-js';
+import * as Sentry from '@sentry/browser';
 
 export default module => {
   module.factory('$exceptionHandler', exceptionHandlerFactory);
@@ -16,11 +16,10 @@ export default module => {
 function exceptionHandlerFactory($log, ENV) {
   return function(exception, cause) {
     if (ENV.SENTRY_DSN) {
-      Raven.captureException(exception, {
-        extra: {
-          cause: cause
-        }
-      });
+      if (cause) {
+        Sentry.setExtra('cause', cause);
+      }
+      Sentry.captureException(exception);
     }
     $log.warn(exception, cause);
   };
@@ -29,32 +28,33 @@ function exceptionHandlerFactory($log, ENV) {
 // @ngInject
 function attachSentry(ENV) {
   if (ENV.SENTRY_DSN) {
-    Raven.config(ENV.SENTRY_DSN).install();
-    Raven.setDataCallback(function(data, original) {
-      _normalizeData(data);
-      original && original(data);
+    Sentry.init({
+      dsn: ENV.SENTRY_DSN,
+      beforeSend: normalizeEvent,
     });
   }
 }
 
 // See https://github.com/angular/angular.js/blob/v1.4.7/src/minErr.js
-let angularPattern = /^\[((?:[$a-zA-Z0-9]+:)?(?:[$a-zA-Z0-9]+))\] (.*?)\n?(\S+)$/;
+const angularPattern = /^\[((?:[$a-zA-Z0-9]+:)?(?:[$a-zA-Z0-9]+))\] (.*?)\n?(\S+)$/;
 
-function _normalizeData(data) {
+function normalizeEvent(event) {
   // We only care about mutating an exception
-  let exception = data.exception;
+  const exception = event.exception && event.exception.values && event.exception.values[0];
+
   if (exception) {
-    exception = exception.values[0];
-    let matches = angularPattern.exec(exception.value);
+    const matches = angularPattern.exec(exception.value);
 
     if (matches) {
       // This type now becomes something like: $rootScope:inprog
       exception.type = matches[1];
       exception.value = matches[2];
 
-      data.message = exception.type + ': ' + exception.value;
+      event.message = exception.type + ': ' + exception.value;
       // auto set a new tag specifically for the angular error url
-      data.extra.angularDocs = matches[3].substr(0, 250);
+      event.extra.angularDocs = matches[3].substr(0, 250);
     }
   }
+
+  return event;
 }

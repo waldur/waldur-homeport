@@ -9,7 +9,7 @@ module.exports = {
     vendor: [
       'core-js/stable',
       'regenerator-runtime/runtime',
-      'raven-js',
+      '@sentry/browser',
       'lodash',
       'jquery',
       'moment-timezone',
