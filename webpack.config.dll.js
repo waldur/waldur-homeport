@@ -9,7 +9,10 @@ module.exports = {
     vendor: [
       'core-js/stable',
       'regenerator-runtime/runtime',
+      '@sentry/core',
       '@sentry/browser',
+      '@sentry/types',
+      '@sentry/utils',
       'lodash',
       'jquery',
       'moment-timezone',
