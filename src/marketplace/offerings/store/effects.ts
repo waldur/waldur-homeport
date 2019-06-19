@@ -63,7 +63,10 @@ function* createOffering(action: Action<OfferingFormData>) {
   const { thumbnail, document, ...rest } = action.payload;
   const customer = yield select(getCustomer);
   try {
-    const offeringRequest = formatOfferingRequest(rest, customer);
+    const offering = yield select(getOffering);
+    const components = offering.plugins[rest.type.value];
+    const hasBuiltinComponents = components.length > 0;
+    const offeringRequest = formatOfferingRequest(rest, customer, hasBuiltinComponents);
     const response = yield call(api.createOffering, offeringRequest);
     if (thumbnail) {
       const offeringId = response.data.uuid;
