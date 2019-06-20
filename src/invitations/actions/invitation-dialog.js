@@ -28,6 +28,11 @@ const invitationDialog = {
       this.civilNumberRequired = this.ENV.invitationCivilNumberRequired;
       this.taxNumberRequired = this.ENV.invitationTaxNumberRequired;
       this.requireUserDetails = this.ENV.invitationRequireUserDetails;
+
+      this.civilCodeHelpText = this.ENV.invitationCivilCodeHelpText;
+      this.hasCivilCodeHelpText = !!this.ENV.invitationCivilCodeHelpText
+        && this.ENV.invitationCivilCodeHelpText.length > 0
+        && this.ENV.invitationCivilCodeHelpText.replace(/\s/g, '').length > 0; // only contains spaces, tabs or line breaks
     }
 
     submitForm() {
