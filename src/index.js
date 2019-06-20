@@ -54,6 +54,7 @@ import workspaceModule from './workspace/module';
 import formReactModule from './form-react/module';
 import rijkscloudModule from './rijkscloud/module';
 import marketplaceModule from './marketplace/module';
+import vmwareModule from './vmwareModule/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -126,6 +127,7 @@ jiraModule(appModule);
 workspaceModule(appModule);
 rijkscloudModule(appModule);
 marketplaceModule(appModule);
+vmwareModule(appModule);
 appModule.config(analyticsRoutes);
 
 if (process.env.NODE_ENV !== 'production') {
