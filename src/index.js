@@ -54,7 +54,7 @@ import workspaceModule from './workspace/module';
 import formReactModule from './form-react/module';
 import rijkscloudModule from './rijkscloud/module';
 import marketplaceModule from './marketplace/module';
-import vmwareModule from './vmwareModule/module';
+import vmwareModule from './vmware/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
