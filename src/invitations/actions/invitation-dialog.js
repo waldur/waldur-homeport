@@ -28,6 +28,8 @@ const invitationDialog = {
       this.civilNumberRequired = this.ENV.invitationCivilNumberRequired;
       this.taxNumberRequired = this.ENV.invitationTaxNumberRequired;
       this.requireUserDetails = this.ENV.invitationRequireUserDetails;
+
+      this.civilCodeHelpText = this.ENV.invitationCivilCodeHelpText;
     }
 
     submitForm() {
