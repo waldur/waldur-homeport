@@ -3490,6 +3490,10 @@ msgstr ""
 msgid "Motivation"
 msgstr ""
 
+#: src/configs/base-config.js
+msgid "Must start with a country prefix ie EE34501234215"
+msgstr ""
+
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
