@@ -35,7 +35,7 @@
           ng-model="DialogCtrl.civil_number"
           ng-required="{{ DialogCtrl.civilNumberRequired }}"
           ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails">
-        <p v-if="hasCivilCodeHelpText" class="help-block m-b-n-xs text-muted">
+        <p ng-if="DialogCtrl.hasCivilCodeHelpText" class="help-block m-b-n-xs text-muted">
           {{ DialogCtrl.civilCodeHelpText }}
         </p>
         <p class="text-danger" ng-repeat="error in DialogCtrl.errors.civil_number" ng-bind="error"></p>
