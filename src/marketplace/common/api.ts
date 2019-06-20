@@ -64,6 +64,9 @@ export const updateCartItem = (id: string, data: object) =>
 export const submitCart = (data: object) =>
   post<SubmitCartRequest>('/marketplace-cart-items/submit/', data).then(response => response.data);
 
+export const getOrdersList = (params?: {}) =>
+  getList<OrderItemResponse>('/marketplace-orders/', params);
+
 export const getOrderDetails = (id: string) =>
   getById<Order>('/marketplace-orders/', id);
 

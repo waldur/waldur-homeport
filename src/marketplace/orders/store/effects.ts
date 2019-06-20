@@ -21,6 +21,17 @@ function* approveOrder(action) {
   yield put(actions.setOrderStateChangeStatus({approving: false}));
 }
 
+function* fetchPendingOrders(action) {
+  const { params } = action.payload;
+  try {
+    const orders = yield call(api.getOrdersList, params);
+    yield put(actions.fetchPendingOrdersSuccess(orders));
+  } catch (error) {
+    const errorMessage = `${translate('Unable to load pending orders.')} ${format(error)}`;
+    yield put(showError(errorMessage));
+  }
+}
+
 function* rejectOrder(action) {
   const { orderUuid } = action.payload;
   try {
@@ -37,4 +48,5 @@ function* rejectOrder(action) {
 export default function*() {
   yield takeEvery(constants.APPROVE_ORDER, approveOrder);
   yield takeEvery(constants.REJECT_ORDER, rejectOrder);
+  yield takeEvery(constants.PENDING_ORDERS_FETCH, fetchPendingOrders);
 }
