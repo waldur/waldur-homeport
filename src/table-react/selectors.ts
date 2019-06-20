@@ -14,6 +14,11 @@ const selectTableEntitiesOrder = (state, table) => {
   return [];
 };
 
+export const getTableEntityCount = createSelector(
+  selectTableEntities,
+  entities => Object.keys(entities).length
+);
+
 export const selectTableRows = createSelector(
   selectTableEntities,
   selectTableEntitiesOrder,

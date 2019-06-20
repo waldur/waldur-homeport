@@ -1833,7 +1833,7 @@ msgstr ""
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/store/reducer.ts
 msgid "Done"
 msgstr ""
 
@@ -1959,7 +1959,7 @@ msgid "Enter date"
 msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/store/reducer.ts
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"
 msgstr ""
@@ -2093,7 +2093,7 @@ msgid "Excel"
 msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/store/reducer.ts
 msgid "Executing"
 msgstr ""
 
@@ -4520,8 +4520,20 @@ msgstr ""
 
 #: src/billing/billing-utils.js
 #: src/invitations/invitations-list.js
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/store/reducer.ts
 msgid "Pending"
+msgstr ""
+
+#: src/marketplace/orders/PendingOrderDropdown.tsx
+msgid "Pending approval for changing of"
+msgstr ""
+
+#: src/marketplace/orders/PendingOrderDropdown.tsx
+msgid "Pending approval for creation of"
+msgstr ""
+
+#: src/marketplace/orders/PendingOrderDropdown.tsx
+msgid "Pending approval for removal of"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
@@ -5697,6 +5709,10 @@ msgstr ""
 msgid "Requested"
 msgstr ""
 
+#: src/marketplace/orders/PendingOrderDropdown.tsx
+msgid "Requested by"
+msgstr ""
+
 #: src/customer/api.ts
 #: src/offering/offering-details.js
 #: src/offering/routes.js
@@ -6473,6 +6489,10 @@ msgstr ""
 msgid "Show _MENU_ entries"
 msgstr ""
 
+#: src/marketplace/orders/PendingOrderDropdown.tsx
+msgid "Show all"
+msgstr ""
+
 #: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
 msgid "Show chart"
 msgstr ""
@@ -7001,7 +7021,7 @@ msgstr ""
 msgid "Terminate resource {resourceName}"
 msgstr ""
 
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/store/reducer.ts
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminated"
 msgstr ""
@@ -7610,6 +7630,10 @@ msgstr ""
 
 #: src/customer/CustomerExpandableRow.tsx
 msgid "Unable to load organization resources."
+msgstr ""
+
+#: src/marketplace/orders/store/effects.ts
+msgid "Unable to load pending orders."
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx

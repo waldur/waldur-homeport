@@ -1,0 +1,27 @@
+.PendingOrderDropdown {
+  &__Toggle {
+    background: none!important;
+    border: none!important;
+    box-shadow: none!important;
+  }
+
+  #pending-dropdown {
+    padding: 0px!important;
+    margin-top: -3px;
+  }
+
+  .dropdown-divider {
+    height: 0;
+    margin: .5rem 0;
+    overflow: hidden;
+    border-top: 1px solid #e9ecef;
+  }
+
+  .dropdown-item {
+    line-height: 20px;
+  }
+
+  p {
+    margin-bottom: 3px;
+  }
+}

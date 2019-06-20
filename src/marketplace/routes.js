@@ -248,7 +248,7 @@ export default function routes($stateProvider) {
     })
 
     .state('marketplace-my-order-items', {
-      url: 'marketplace-my-order-items/',
+      url: 'marketplace-my-order-items/?filterState',
       template: '<marketplace-my-order-items-list></marketplace-my-order-items-list>',
       parent: 'organization',
       data: {
