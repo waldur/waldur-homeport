@@ -1700,6 +1700,7 @@ msgstr ""
 #: src/slurm/slurm-allocation-config.js
 #: src/slurm/slurm-allocation-list.js
 #: src/user/support/UserEditForm.tsx
+#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
 msgstr ""
 
@@ -2431,6 +2432,11 @@ msgstr ""
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+msgid "Guest OS"
+msgstr ""
+
 #: src/navigation/header/intro-button.html
 msgid "Guide me"
 msgstr ""
@@ -2492,6 +2498,7 @@ msgstr ""
 
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
+#: src/vmware/VMwareForm.tsx
 msgid "Hostname"
 msgstr ""
 
@@ -3411,6 +3418,10 @@ msgstr ""
 msgid "Memory per vCore"
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Memory size in MiB"
+msgstr ""
+
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
 msgid "Message"
@@ -3581,6 +3592,7 @@ msgstr ""
 #: src/resource/list/resources-list.js
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/slurm-allocation-list.js
+#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Name"
 msgstr ""
 
@@ -3988,6 +4000,14 @@ msgstr ""
 #: src/user/hooks/HooksList.tsx
 #: src/user/routes.js
 msgid "Notifications"
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Number of CPU cores per socket"
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Number of cores in a VM"
 msgstr ""
 
 #: src/analytics/FlavorsList.tsx
@@ -4477,6 +4497,7 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/vmware/VMwareForm.tsx
 msgid "Password"
 msgstr ""
 
@@ -6838,6 +6859,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Summary"
 msgstr ""
 
@@ -7220,6 +7242,7 @@ msgstr ""
 #: src/rijkscloud/VolumeCreateConfig.js
 #: src/slurm/AllocationForm.tsx
 #: src/slurm/slurm-allocation-config.js
+#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "This name will be visible in accounting data."
 msgstr ""
 
@@ -8126,6 +8149,7 @@ msgstr ""
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 #: src/team/user-selector.html
+#: src/vmware/VMwareForm.tsx
 msgid "Username"
 msgstr ""
 
@@ -8195,6 +8219,10 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "VMs"
+msgstr ""
+
+#: src/vmware/marketplace.ts
+msgid "VMware Virtual Machine"
 msgstr ""
 
 #: src/resource/support/ChartContainer.tsx
