@@ -4,6 +4,7 @@ import { withTranslation, TranslateProps } from '@waldur/i18n';
 
 interface AddOptionButtonProps extends TranslateProps {
   onClick(): void;
+  children: React.ReactNode;
 }
 
 export const AddOptionButton = withTranslation((props: AddOptionButtonProps) => (
@@ -13,6 +14,6 @@ export const AddOptionButton = withTranslation((props: AddOptionButtonProps) => 
     onClick={props.onClick}>
     <i className="fa fa-plus"/>
     {' '}
-    {props.translate('Add user input field')}
+    {props.children}
   </button>
 ));

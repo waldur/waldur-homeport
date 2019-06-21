@@ -9,7 +9,8 @@ const PureOrderItemDetailsLink = props => (
   <Link
     state={props.state}
     params={{...props.params, order_item_uuid: props.order_item_uuid}}
-    className={props.className}>
+    className={props.className}
+    onClick={props.onClick}>
     {props.children}
   </Link>
 );
@@ -23,6 +24,7 @@ interface OwnProps {
   customer_uuid?: string;
   project_uuid?: string;
   className?: string;
+  onClick?: () => void;
 }
 
 const connector = connect<StateProps, {}, OwnProps, OuterState>((state, ownProps) => {

@@ -15,7 +15,7 @@ export const planWithoutQuotas = (plan: PlanFormData, component: string) => ({
   quotas: plan.quotas ? omit(plan.quotas, component) : plan.quotas,
 });
 
-const formatPlan = (plan: PlanFormData, fixedComponents: string[]): PlanRequest => {
+const formatPlan = (plan: PlanFormData, fixedComponents: string[], skipComponentsValidation?: boolean): PlanRequest => {
   const result: PlanRequest = {
     name: plan.name,
     unit: plan.unit.value,
@@ -25,10 +25,14 @@ const formatPlan = (plan: PlanFormData, fixedComponents: string[]): PlanRequest 
     result.prices = plan.prices;
   }
   if (plan.quotas) {
-    // Skip quotas for usage-based components
-    result.quotas = Object.keys(plan.quotas).reduce(
-      (acc, key) => fixedComponents.includes(key) ? {...acc, [key]: plan.quotas[key]} : acc,
-      {});
+    if (skipComponentsValidation) {
+      result.quotas = plan.quotas;
+    } else {
+      // Skip quotas for usage-based components
+      result.quotas = Object.keys(plan.quotas).reduce(
+        (acc, key) => fixedComponents.includes(key) ? {...acc, [key]: plan.quotas[key]} : acc,
+        {});
+    }
   }
   if (plan.description) {
     result.description = plan.description;
@@ -107,6 +111,7 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
     customer: customer ? customer.url : undefined,
     type: request.type ? request.type.value : undefined,
     service_attributes: request.service_settings,
+    schedules: request.schedules,
     shared: true,
   };
   if (request.attributes) {
@@ -115,10 +120,10 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
   if (request.components && !skipComponents) {
     result.components = formatComponents(request.components);
   }
-  const fixedComponents = request.components.filter(
-    c => getBillingTypeValue(c.billing_type) === 'fixed').map(c => c.type);
   if (request.plans) {
-    result.plans = request.plans.map(plan => formatPlan(plan, fixedComponents));
+    const fixedComponents = (skipComponents || !request.components) ? [] : request.components.filter(
+      c => getBillingTypeValue(c.billing_type) === 'fixed').map(c => c.type);
+    result.plans = request.plans.map(plan => formatPlan(plan, fixedComponents, skipComponents));
   }
   if (request.options) {
     result.options = formatOptions(request.options);

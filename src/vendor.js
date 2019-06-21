@@ -1,4 +1,5 @@
-import '@babel/polyfill';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 import 'expose-loader?$!expose-loader?jQuery!jquery';
 import 'angular';

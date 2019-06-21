@@ -18,17 +18,22 @@ function getMomentDayRange(interval = 5) {
   return timeArray;
 }
 
-const options = getMomentDayRange()
+const getOptions = (interval: number) => getMomentDayRange(interval)
   .map(formatTime)
   .map(formattedOption => ({
     label: formattedOption,
     value: formattedOption,
   }));
 
-export const TimeSelectField = (props: FormField) => {
+interface TimeSelectFieldProps {
+  interval?: number;
+}
+
+export const TimeSelectField = (props: TimeSelectFieldProps & FormField) => {
   return (
     <SelectField
-      options={options}
+      simpleValue={true}
+      options={getOptions(props.interval)}
       {...props}
     />
   );

@@ -7,8 +7,12 @@ const target = 'build.dll';
 module.exports = {
   entry: {
     vendor: [
-      '@babel/polyfill',
-      'raven-js',
+      'core-js/stable',
+      'regenerator-runtime/runtime',
+      '@sentry/core',
+      '@sentry/browser',
+      '@sentry/types',
+      '@sentry/utils',
       'lodash',
       'jquery',
       'moment-timezone',
@@ -18,6 +22,11 @@ module.exports = {
       'file-saver',
       'papaparse',
 
+      '@fullcalendar/core',
+      '@fullcalendar/daygrid',
+      '@fullcalendar/interaction',
+      '@fullcalendar/react',
+      '@fullcalendar/timegrid',
       'redux',
       'redux-form',
       'redux-form-saga',

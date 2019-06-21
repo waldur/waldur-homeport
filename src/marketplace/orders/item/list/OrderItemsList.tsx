@@ -63,7 +63,7 @@ export const TableComponent = props => {
   );
 };
 
-const TableOptions = {
+const OrderItemsListTableOptions = {
   table: TABLE_PUBLIC_ORDERS,
   fetchData: createFetcher('marketplace-order-items'),
   mapPropsToFilter: props => {
@@ -93,7 +93,7 @@ const mapStateToProps = state => ({
 
 const enhance = compose(
   connect(mapStateToProps),
-  connectTable(TableOptions),
+  connectTable(OrderItemsListTableOptions),
 );
 
 export const OrderItemsList = enhance(TableComponent);

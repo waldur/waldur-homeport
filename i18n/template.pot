@@ -331,7 +331,7 @@ msgstr ""
 msgid "Add user"
 msgstr ""
 
-#: src/marketplace/offerings/option/AddOptionButton.tsx
+#: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "Add user input field"
 msgstr ""
 
@@ -698,6 +698,10 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
 msgid "Auto-generated"
+msgstr ""
+
+#: src/marketplace/offerings/option/OfferingScheduler.tsx
+msgid "Availability"
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx
@@ -1696,6 +1700,7 @@ msgstr ""
 #: src/slurm/slurm-allocation-config.js
 #: src/slurm/slurm-allocation-list.js
 #: src/user/support/UserEditForm.tsx
+#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
 msgstr ""
 
@@ -1789,6 +1794,10 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
+#: src/booking/components/modal/CalendarEventModal.tsx
+msgid "Dismiss"
+msgstr ""
+
 #: src/marketplace/offerings/DisplayNameField.tsx
 msgid "Display name"
 msgstr ""
@@ -1825,7 +1834,7 @@ msgstr ""
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/store/reducer.ts
 msgid "Done"
 msgstr ""
 
@@ -1951,7 +1960,7 @@ msgid "Enter date"
 msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/store/reducer.ts
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"
 msgstr ""
@@ -2085,7 +2094,7 @@ msgid "Excel"
 msgstr ""
 
 #: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/store/reducer.ts
 msgid "Executing"
 msgstr ""
 
@@ -2423,6 +2432,11 @@ msgstr ""
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+msgid "Guest OS"
+msgstr ""
+
 #: src/navigation/header/intro-button.html
 msgid "Guide me"
 msgstr ""
@@ -2484,6 +2498,7 @@ msgstr ""
 
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
+#: src/vmware/VMwareForm.tsx
 msgid "Hostname"
 msgstr ""
 
@@ -3403,6 +3418,10 @@ msgstr ""
 msgid "Memory per vCore"
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Memory size in MiB"
+msgstr ""
+
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
 msgid "Message"
@@ -3480,6 +3499,10 @@ msgstr ""
 
 #: src/issues/request-service-button.js
 msgid "Motivation"
+msgstr ""
+
+#: src/configs/base-config.js
+msgid "Must start with a country prefix ie EE34501234215"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingContainer.tsx
@@ -3569,6 +3592,7 @@ msgstr ""
 #: src/resource/list/resources-list.js
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/slurm-allocation-list.js
+#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Name"
 msgstr ""
 
@@ -3976,6 +4000,14 @@ msgstr ""
 #: src/user/hooks/HooksList.tsx
 #: src/user/routes.js
 msgid "Notifications"
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Number of CPU cores per socket"
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Number of cores in a VM"
 msgstr ""
 
 #: src/analytics/FlavorsList.tsx
@@ -4465,6 +4497,7 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/vmware/VMwareForm.tsx
 msgid "Password"
 msgstr ""
 
@@ -4508,8 +4541,20 @@ msgstr ""
 
 #: src/billing/billing-utils.js
 #: src/invitations/invitations-list.js
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/store/reducer.ts
 msgid "Pending"
+msgstr ""
+
+#: src/marketplace/orders/PendingOrderDropdown.tsx
+msgid "Pending approval for changing of"
+msgstr ""
+
+#: src/marketplace/orders/PendingOrderDropdown.tsx
+msgid "Pending approval for creation of"
+msgstr ""
+
+#: src/marketplace/orders/PendingOrderDropdown.tsx
+msgid "Pending approval for removal of"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
@@ -5685,6 +5730,10 @@ msgstr ""
 msgid "Requested"
 msgstr ""
 
+#: src/marketplace/orders/PendingOrderDropdown.tsx
+msgid "Requested by"
+msgstr ""
+
 #: src/customer/api.ts
 #: src/offering/offering-details.js
 #: src/offering/routes.js
@@ -6053,10 +6102,6 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Schedule"
-msgstr ""
-
-#: src/marketplace/offerings/option/OfferingScheduler.tsx
-msgid "Scheduler"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
@@ -6465,6 +6510,10 @@ msgstr ""
 msgid "Show _MENU_ entries"
 msgstr ""
 
+#: src/marketplace/orders/PendingOrderDropdown.tsx
+msgid "Show all"
+msgstr ""
+
 #: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
 msgid "Show chart"
 msgstr ""
@@ -6756,6 +6805,7 @@ msgstr ""
 msgid "Storages"
 msgstr ""
 
+#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/digitalocean/droplet-resize.html
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
@@ -6809,6 +6859,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Summary"
 msgstr ""
 
@@ -6992,7 +7043,7 @@ msgstr ""
 msgid "Terminate resource {resourceName}"
 msgstr ""
 
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/store/reducer.ts
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminated"
 msgstr ""
@@ -7191,6 +7242,7 @@ msgstr ""
 #: src/rijkscloud/VolumeCreateConfig.js
 #: src/slurm/AllocationForm.tsx
 #: src/slurm/slurm-allocation-config.js
+#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "This name will be visible in accounting data."
 msgstr ""
 
@@ -7222,6 +7274,7 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
+#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
@@ -7600,6 +7653,10 @@ msgstr ""
 
 #: src/customer/CustomerExpandableRow.tsx
 msgid "Unable to load organization resources."
+msgstr ""
+
+#: src/marketplace/orders/store/effects.ts
+msgid "Unable to load pending orders."
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
@@ -8092,6 +8149,7 @@ msgstr ""
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 #: src/team/user-selector.html
+#: src/vmware/VMwareForm.tsx
 msgid "Username"
 msgstr ""
 
@@ -8161,6 +8219,10 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "VMs"
+msgstr ""
+
+#: src/vmware/marketplace.ts
+msgid "VMware Virtual Machine"
 msgstr ""
 
 #: src/resource/support/ChartContainer.tsx

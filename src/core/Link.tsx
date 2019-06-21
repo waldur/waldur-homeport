@@ -9,6 +9,7 @@ interface LinkProps {
   params?: {[key: string]: string};
   className?: string;
   target?: string;
+  onClick?: () => void;
 }
 
 export const Link = (props: LinkProps) => (
@@ -16,6 +17,7 @@ export const Link = (props: LinkProps) => (
     href={$state.href(props.state, props.params)}
     className={props.className}
     target={props.target}
+    onClick={props.onClick}
   >
     {props.label || props.children}
   </a>

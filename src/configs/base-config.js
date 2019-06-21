@@ -179,6 +179,9 @@ const ENV = {
   resourcesTimerInterval: 30, // seconds
   countersTimerInterval: 30, // seconds
 
+  // Allows to provide help text for the civil code field in invitation form
+  invitationCivilCodeHelpText: gettext('Must start with a country prefix ie EE34501234215'),
+
   // an interval in milliseconds to check invitation if server returns 500 or there is a network error.
   invitationCheckInterval: 5000,
 
