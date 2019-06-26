@@ -5,7 +5,7 @@ import { ResourceAction } from '@waldur/resource/actions/types';
 import { Offering } from '../types';
 import { validatePermissions, validateOfferingState } from './utils';
 
-const formatReport = resource => JSON.stringify(resource.report);
+const formatReport = resource => resource.report ? JSON.stringify(resource.report) : '';
 
 export default function createAction(): ResourceAction<Offering> {
   return {
