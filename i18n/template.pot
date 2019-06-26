@@ -1794,6 +1794,10 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
+#: src/vmware/module.js
+msgid "Disks"
+msgstr ""
+
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Dismiss"
 msgstr ""
@@ -3593,6 +3597,7 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/slurm-allocation-list.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/vmware-virtual-machine-disks.js
 msgid "Name"
 msgstr ""
 
@@ -3748,6 +3753,10 @@ msgstr ""
 
 #: src/azure/sql/azure-sql-databases-list.js
 msgid "No databases yet."
+msgstr ""
+
+#: src/vmware/vmware-virtual-machine-disks.js
+msgid "No disks found matching filter."
 msgstr ""
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
@@ -6605,6 +6614,7 @@ msgstr ""
 #: src/resource-import/import-volumes-list.js
 #: src/resource/list/resource-volumes-list.js
 #: src/rijkscloud/VolumeSummary.tsx
+#: src/vmware/vmware-virtual-machine-disks.js
 msgid "Size"
 msgstr ""
 
@@ -6739,6 +6749,7 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/slurm-allocation-list.js
 #: src/user/hooks/HooksList.tsx
+#: src/vmware/vmware-virtual-machine-disks.js
 msgid "State"
 msgstr ""
 
@@ -8555,6 +8566,10 @@ msgstr ""
 
 #: src/cost-planning/cost-plans-list.js
 msgid "You have no cost plans yet"
+msgstr ""
+
+#: src/vmware/vmware-virtual-machine-disks.js
+msgid "You have no disks yet."
 msgstr ""
 
 #: src/billing/invoices-list.js
