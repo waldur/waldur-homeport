@@ -67,6 +67,9 @@ export const submitCart = (data: object) =>
 export const getOrdersList = (params?: {}) =>
   getList<OrderItemResponse>('/marketplace-orders/', params);
 
+export const getOrderItemList = (params?: {}) =>
+  getList<OrderItemResponse>('/marketplace-order-items/', params);
+
 export const getOrderDetails = (id: string) =>
   getById<Order>('/marketplace-orders/', id);
 

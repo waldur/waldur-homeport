@@ -904,6 +904,10 @@ msgstr ""
 msgid "Booking"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+msgid "Bookings"
+msgstr ""
+
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/resource-import/import-volumes-list.js
 msgid "Bootable"
@@ -1550,6 +1554,10 @@ msgstr ""
 #: src/digitalocean/droplet-resize.html
 #: src/openstack/openstack-volume/volume-extend.html
 msgid "Current size"
+msgstr ""
+
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
+msgid "Currently there are no booking requests."
 msgstr ""
 
 #: src/offering/register-offering-category.js
@@ -3557,6 +3565,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
@@ -5024,6 +5033,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
@@ -6244,6 +6254,10 @@ msgstr ""
 msgid "Select country..."
 msgstr ""
 
+#: src/offering/OfferingConfigurationForm.tsx
+msgid "Select dates"
+msgstr ""
+
 #: src/issues/create/issue-create-dialog.html
 msgid "Select issue template"
 msgstr ""
@@ -6760,6 +6774,7 @@ msgstr ""
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -7523,6 +7538,10 @@ msgstr ""
 
 #: src/table-react/Table.tsx
 msgid "Unable to fetch data."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to fetch offering bookings."
 msgstr ""
 
 #: src/project/project-providers-service.js

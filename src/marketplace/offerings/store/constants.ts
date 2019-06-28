@@ -32,3 +32,6 @@ export const STATES = {
 export const TABLE_NAME = 'marketplace-offerings';
 
 export const FORM_ID = 'marketplaceOfferingCreate';
+
+export const BOOKINGS_SET = 'waldur/marketplace/offering/BOOKINGS_SET';
+export const BOOKINGS_FETCH = 'waldur/marketplace/offering/BOOKINGS_FETCH';

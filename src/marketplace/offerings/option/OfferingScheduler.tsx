@@ -8,7 +8,6 @@ import { WrappedFieldArrayProps, formValueSelector } from 'redux-form';
 
 import { EditableCalendar } from '@waldur/booking/components/calendar/EditableCalendar';
 import { CalendarEventModal } from '@waldur/booking/components/modal/CalendarEventModal';
-import { BookingEvent } from '@waldur/booking/model/Events';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { withModal } from '@waldur/modal/withModal';
 
@@ -31,33 +30,40 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
           <h4>{props.translate('Availability')}</h4>
         </Panel.Heading>
         <Panel.Body>
-
           <EditableCalendar
             events={props.schedules}
             onSelectDate={event => {
-              props.fields.push(new BookingEvent(event));
+              const field = createBooking(event);
+              props.fields.push(field);
             }}
             onSelectEvent={prevEvent => {
               props.setModalProps({ event: prevEvent.event });
               props.openModal(event => {
                 removeEventFromFields(props.fields, prevEvent.event);
-                props.fields.push(new BookingEvent(event));
+                const field = createBooking(event);
+                props.fields.push(field);
               });
             }}
             eventResize={slot => {
               removeEventFromFields(props.fields, slot.prevEvent);
-              props.fields.push(new BookingEvent(slot.event));
+              const field = createBooking(slot.event);
+              props.fields.push(field);
             }}
             eventDrop={slot => {
               removeEventFromFields(props.fields, slot.oldEvent);
-              props.fields.push(new BookingEvent(slot.event));
+              const field = createBooking(slot.event);
+              props.fields.push(field);
             }}/>
-
         </Panel.Body>
       </Panel>
     </Col>
   </div>
 );
+
+const createBooking = (slot: EventInput) => ({
+  ...slot,
+  type: 'availability',
+});
 
 const removeEventFromFields = (fields, event) => {
   fields.getAll().forEach((field, index) => {

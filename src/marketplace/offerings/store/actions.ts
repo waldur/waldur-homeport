@@ -60,3 +60,19 @@ export const categoryChanged = (category: Category) => ({
     category,
   },
 });
+
+export const offeringBookingFetch = payload => ({
+  type: constants.BOOKINGS_FETCH,
+  payload: {
+    offering_type: 'Marketplace.Booking',
+    offering_uuid: payload.offering_uuid,
+  },
+});
+
+export const setBookingItems = (offeringId, items) => ({
+  type: constants.BOOKINGS_SET,
+  payload: {
+    offeringId,
+    items,
+  },
+});

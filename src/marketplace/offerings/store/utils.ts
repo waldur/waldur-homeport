@@ -120,6 +120,16 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
   if (request.components && !skipComponents) {
     result.components = formatComponents(request.components);
   }
+
+  if (request.schedules) {
+    const { schedules } = request;
+    result.attributes = {
+      ...result.attributes,
+      schedules,
+    };
+    delete result.schedules;
+  }
+
   if (request.plans) {
     const fixedComponents = (skipComponents || !request.components) ? [] : request.components.filter(
       c => getBillingTypeValue(c.billing_type) === 'fixed').map(c => c.type);
