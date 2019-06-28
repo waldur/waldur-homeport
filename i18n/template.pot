@@ -6981,6 +6981,7 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr ""
 
 #: src/issues/create/issue-create-dialog.html
+#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Template"
 msgstr ""
 
@@ -7703,6 +7704,10 @@ msgstr ""
 
 #: src/analytics/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Unable to load templates."
 msgstr ""
 
 #: src/user/user-popover.html
