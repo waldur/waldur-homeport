@@ -10,7 +10,7 @@ import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { updateEntity } from '@waldur/table-react/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { setStep, loadDataSuccess, loadDataError } from './actions';
+import { setStep, loadDataSuccess, loadDataError, setBookingItems } from './actions';
 import * as constants from './constants';
 import { STATES } from './constants';
 import { getPlans, getAttributes, getOffering } from './selectors';
@@ -135,6 +135,17 @@ function* loadOffering(action) {
   }
 }
 
+function* offeringBookingFetch(action) {
+  const { offering_uuid } = action.payload;
+  try {
+    const response = yield call(api.getOrderItemList, action.payload);
+    yield put(setBookingItems(offering_uuid, response));
+  } catch (error) {
+    const errorMessage = `${translate('Unable to fetch offering bookings.')} ${format(error)}`;
+    yield put(showError(errorMessage));
+  }
+}
+
 export default function*() {
   yield takeEvery(constants.REMOVE_OFFERING_COMPONENT, removeOfferingComponent);
   yield takeEvery(constants.REMOVE_OFFERING_QUOTAS, removeOfferingQuotas);
@@ -144,4 +155,5 @@ export default function*() {
   yield takeEvery(constants.createOffering.REQUEST, createOffering);
   yield takeEvery(constants.updateOffering.REQUEST, updateOffering);
   yield takeEvery(constants.UPDATE_OFFERING_STATE, updateOfferingState);
+  yield takeEvery(constants.BOOKINGS_FETCH, offeringBookingFetch);
 }

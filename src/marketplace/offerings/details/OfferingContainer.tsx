@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
 import { $state, ngInjector } from '@waldur/core/services';
@@ -9,6 +10,7 @@ import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { Offering } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { OfferingBookingTab } from './OfferingBookingTab';
 import { OfferingDetails } from './OfferingDetails';
 import { PlanUsageList } from './PlanUsageList';
 
@@ -44,12 +46,18 @@ async function loadData(offering_uuid: string) {
   const offering = await getOffering(offering_uuid);
   const category = await getCategory(offering.category_uuid);
   const sections = category.sections;
+
   const tabs = [
     ...getTabs({offering, sections}),
     {
       visible: offering.billable,
       title: translate('Plan capacity'),
       component: () => <PlanUsageList offering_uuid={offering.uuid}/>,
+    },
+    {
+      title: translate('Bookings'),
+      component: () => <OfferingBookingTab offering={offering}/>,
+      visible: offering.type === OFFERING_TYPE_BOOKING,
     },
   ].filter(tab => tab.visible);
   updateBreadcrumbs(offering);

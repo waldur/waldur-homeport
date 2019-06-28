@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { required, getLatinNameValidators } from '@waldur/core/validators';
 import { FormContainer, TextField, StringField, SelectField, NumberField } from '@waldur/form-react';
 import { AsyncSelectField } from '@waldur/form-react/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
+import { CalendarField } from '@waldur/form-react/CalendarField';
 import { DateField } from '@waldur/form-react/DateField';
 import { TimeSelectField } from '@waldur/form-react/TimeSelectField';
 import { translate } from '@waldur/i18n';
@@ -18,6 +20,11 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { loadTenantOptions } from './utils';
 
 export class PureOfferingConfigurationForm extends React.Component<OfferingConfigurationFormProps> {
+
+  state = {
+    availableDates: [],
+  };
+
   componentDidMount() {
     const attributes = {...this.props.initialAttributes};
     if (this.props.offering.options.order) {
@@ -27,6 +34,11 @@ export class PureOfferingConfigurationForm extends React.Component<OfferingConfi
           attributes[key] = options.default;
         }
       });
+    }
+    if (!attributes.schedules) {
+      const { schedules } = this.props.offering.attributes;
+      this.setState({ availableDates: schedules });
+      attributes.schedules = [];
     }
     const initialData: any = {attributes};
     if (this.props.plan) {
@@ -117,6 +129,13 @@ export class PureOfferingConfigurationForm extends React.Component<OfferingConfi
               />
             );
           }))}
+          {props.offering.type === OFFERING_TYPE_BOOKING &&
+            <CalendarField
+              name="attributes.schedules"
+              excludedEvents={this.state.availableDates}
+              label={translate('Select dates')}
+              />
+          }
         </FormContainer>
       </form>
     );
