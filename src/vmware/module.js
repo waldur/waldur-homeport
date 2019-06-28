@@ -5,6 +5,8 @@ import vmwareVirtualMachineDisks from './vmware-virtual-machine-disks';
 import { VMwareVirtualMachineSummary } from './VMwareVirtualMachineSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
+import { actionsConfig } from './actions';
+
 export default module => {
   ResourceSummary.register('VMware.VirtualMachine', VMwareVirtualMachineSummary);
   module.config(tabsConfig);
@@ -26,16 +28,5 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
         component: 'vmwareVirtualMachineDisks'
       },
     })
-  });
-}
-
-// @ngInject
-function actionsConfig(ActionConfigurationProvider) {
-  ActionConfigurationProvider.register('VMware.VirtualMachine', {
-    options: {
-      create_disk: {
-        tab: 'disks',
-      }
-    }
   });
 }
