@@ -4200,6 +4200,7 @@ msgid "Open"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleAction.ts
+#: src/vmware/actions.ts
 msgid "Open console"
 msgstr ""
 
@@ -7717,6 +7718,7 @@ msgid "Unable to open console log"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleAction.ts
+#: src/vmware/actions.ts
 msgid "Unable to open console. Error message: {message}"
 msgstr ""
 
