@@ -6629,6 +6629,7 @@ msgstr ""
 #: src/resource-import/import-volumes-list.js
 #: src/resource/list/resource-volumes-list.js
 #: src/rijkscloud/VolumeSummary.tsx
+#: src/vmware/VMwareDiskSummary.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
 msgid "Size"
 msgstr ""

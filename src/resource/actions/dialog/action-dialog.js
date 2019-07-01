@@ -32,7 +32,7 @@ function ActionDialogController(
           if (field.default_value) {
             $scope.form[name] = field.default_value;
           }
-          if (!field.init && (field.resource_default_value || $scope.action.name === 'update')) {
+          if (!field.init && (field.resource_default_value || $scope.action.title === 'Update')) {
             $scope.form[name] = angular.copy($scope.resource[name]);
           }
           if (field.modelParser) {
