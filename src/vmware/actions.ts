@@ -40,6 +40,18 @@ export function actionsConfig(ActionConfigurationProvider) {
       },
     },
   });
+
+  ActionConfigurationProvider.register('VMware.Disk', {
+    options: {
+      extend: {
+        fields: {
+          size: {
+            resource_default_value: true,
+          },
+        },
+      },
+    },
+  });
 }
 
 actionsConfig.$inject = ['ActionConfigurationProvider'];

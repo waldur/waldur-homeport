@@ -3,12 +3,14 @@ import './provider';
 import vmwareDisksService from './vmware-disks-service';
 import vmwareVirtualMachineDisks from './vmware-virtual-machine-disks';
 import { VMwareVirtualMachineSummary } from './VMwareVirtualMachineSummary';
+import { VMwareDiskSummary } from './VMwareDiskSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import { actionsConfig } from './actions';
 
 export default module => {
   ResourceSummary.register('VMware.VirtualMachine', VMwareVirtualMachineSummary);
+  ResourceSummary.register('VMware.Disk', VMwareDiskSummary);
   module.config(tabsConfig);
   module.config(actionsConfig);
   module.service('vmwareDisksService', vmwareDisksService);
