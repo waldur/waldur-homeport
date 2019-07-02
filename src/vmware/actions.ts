@@ -1,6 +1,6 @@
 import { get } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { translate } from '@waldur/i18n';
+import { translate, gettext } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
 
 const getConsoleURL = (id: string) =>
@@ -9,6 +9,7 @@ const getConsoleURL = (id: string) =>
 export function actionsConfig(ActionConfigurationProvider) {
   ActionConfigurationProvider.register('VMware.VirtualMachine', {
     order: [
+      'pull',
       'console',
       'update',
       'create_disk',
@@ -19,6 +20,9 @@ export function actionsConfig(ActionConfigurationProvider) {
       'destroy',
     ],
     options: {
+      pull: {
+        title: gettext('Synchronise'),
+      },
       create_disk: {
         tab: 'disks',
       },

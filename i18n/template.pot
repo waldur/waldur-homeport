@@ -6934,6 +6934,7 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/rijkscloud/module.js
 #: src/slurm/actions.js
+#: src/vmware/actions.ts
 msgid "Synchronise"
 msgstr ""
 
