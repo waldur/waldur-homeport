@@ -6026,6 +6026,7 @@ msgstr ""
 msgid "Runtime State"
 msgstr ""
 
+#: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 #: src/resource-import/import-virtual-machines-list.js
 msgid "Runtime state"
