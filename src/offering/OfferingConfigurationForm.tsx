@@ -17,7 +17,7 @@ import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { loadTenantOptions } from './utils';
+import { loadTenantOptions, loadInstanceOptions } from './utils';
 
 export class PureOfferingConfigurationForm extends React.Component<OfferingConfigurationFormProps> {
 
@@ -109,13 +109,19 @@ export class PureOfferingConfigurationForm extends React.Component<OfferingConfi
                 OptionField = TimeSelectField;
                 break;
               case 'select_openstack_tenant':
-                const { customer } = props;
-                const customerId = customer.uuid;
                 OptionField = AsyncSelectField;
                 params = {
-                  loadOptions: loadTenantOptions(customerId),
+                  loadOptions: loadTenantOptions(props.customer.uuid),
                   placeholder: translate('Select tenant...'),
                 };
+                break;
+              case 'select_openstack_instance':
+                OptionField = AsyncSelectField;
+                params = {
+                  loadOptions: loadInstanceOptions(props.customer.uuid),
+                  placeholder: translate('Select instance...'),
+                };
+                break;
             }
             return (
               <OptionField

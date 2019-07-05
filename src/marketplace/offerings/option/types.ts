@@ -7,6 +7,7 @@ export type FieldType =
   | 'html_text'
   | 'select_string'
   | 'select_openstack_tenant'
+  | 'select_openstack_instance'
   | 'date'
   | 'time'
 ;
