@@ -1172,6 +1172,10 @@ msgstr ""
 msgid "Cloud vCPU"
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Cluster"
+msgstr ""
+
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 msgid "Collation"
 msgstr ""
@@ -7649,6 +7653,10 @@ msgstr ""
 msgid "Unable to load financial overview."
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Unable to load form options."
+msgstr ""
+
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/resource/support/ChartContainer.tsx
@@ -7726,10 +7734,6 @@ msgstr ""
 
 #: src/analytics/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
-msgstr ""
-
-#: src/vmware/VMwareVirtualMachineForm.tsx
-msgid "Unable to load templates."
 msgstr ""
 
 #: src/user/user-popover.html

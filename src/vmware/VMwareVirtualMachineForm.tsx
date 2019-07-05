@@ -10,7 +10,8 @@ import { translate } from '@waldur/i18n';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
-import { loadTemplates } from './api';
+import { loadFormOptions } from './api';
+import { connector } from './connector';
 
 interface Template {
   cores: number;
@@ -25,14 +26,21 @@ const GuesOSField = formValues<any>({template: 'attributes.template'})(props => 
   />
 ) : null);
 
-export const VMwareVirtualMachineForm: React.SFC<OfferingConfigurationFormProps> = props => (
-  <Query variables={props.offering.scope_uuid} loader={loadTemplates}>
+interface Props extends OfferingConfigurationFormProps {
+  variable: {
+    settings_uuid: string;
+    customer_uuid: string;
+  };
+}
+
+export const VMwareVirtualMachineForm = connector((props: Props) => (
+  <Query variables={props.variable} loader={loadFormOptions}>
     {({ loading, error, data }) => {
       if (loading) {
         return <LoadingSpinner/>;
       }
       if (error) {
-        return <span>{translate('Unable to load templates.')}</span>;
+        return <span>{translate('Unable to load form options.')}</span>;
       }
       return (
         <form className="form-horizontal">
@@ -54,7 +62,7 @@ export const VMwareVirtualMachineForm: React.SFC<OfferingConfigurationFormProps>
               required={true}
               clearable={false}
               validate={required}
-              options={data}
+              options={data.templates}
               labelKey="name"
               valueKey="url"
               onChange={(value: Template) => {
@@ -76,6 +84,16 @@ export const VMwareVirtualMachineForm: React.SFC<OfferingConfigurationFormProps>
               label={translate('Memory size in MiB')}
               name="attributes.ram"
             />
+            <SelectField
+              label={translate('Cluster')}
+              name="attributes.cluster"
+              required={true}
+              clearable={false}
+              validate={required}
+              options={data.clusters}
+              labelKey="name"
+              valueKey="url"
+            />
             <TextField
               label={translate('Description')}
               name="attributes.description"
@@ -85,4 +103,4 @@ export const VMwareVirtualMachineForm: React.SFC<OfferingConfigurationFormProps>
       );
     }}
   </Query>
-);
+));
