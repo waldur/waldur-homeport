@@ -6263,6 +6263,10 @@ msgstr ""
 msgid "Select dates"
 msgstr ""
 
+#: src/offering/OfferingConfigurationForm.tsx
+msgid "Select instance..."
+msgstr ""
+
 #: src/issues/create/issue-create-dialog.html
 msgid "Select issue template"
 msgstr ""
