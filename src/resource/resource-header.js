@@ -75,6 +75,10 @@ const resourceHeader = {
     }
 
     modelNotFound() {
+      if (!this.model) {
+        this.$state.go('errorPage.notFound');
+        return;
+      }
       if (this.features.isVisible('resources.legacy')) {
         const state = this.resourceUtils.getListState(this.ENV.resourceCategory[this.model.resource_type]);
         this.$state.go(state, {uuid: this.model.project_uuid});
