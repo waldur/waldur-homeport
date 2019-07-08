@@ -23,5 +23,11 @@ export const VMwareForm = ({ translate, container }) => (
       required={true}
       validate={required}
     />
+    <StringField
+      name="default_cluster_id"
+      label={translate('Default cluster ID')}
+      required={true}
+      validate={required}
+    />
   </FormContainer>
 );
