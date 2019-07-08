@@ -99,6 +99,15 @@ const offeringDetails = {
             uuid: this.offering.project_uuid
           }
         };
+      } else if (this.offering.marketplace_category_name) {
+        this.BreadcrumbsService.items[this.BreadcrumbsService.items.length - 1] = {
+          label: this.offering.marketplace_category_name,
+          state: 'marketplace-project-resources',
+          params: {
+            category_uuid: this.offering.marketplace_category_uuid,
+            uuid: this.offering.project_uuid,
+          },
+        };
       }
       this.BreadcrumbsService.activeItem = this.offering.name;
     }
