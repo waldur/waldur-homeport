@@ -87,9 +87,6 @@ export const VMwareVirtualMachineForm = connector((props: Props) => (
             <SelectField
               label={translate('Cluster')}
               name="attributes.cluster"
-              required={false}
-              clearable={true}
-              validate={required}
               options={data.clusters}
               labelKey="name"
               valueKey="url"

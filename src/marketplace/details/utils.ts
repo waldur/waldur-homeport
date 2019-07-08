@@ -10,7 +10,9 @@ export const formatOrderItem = (props: OrderSummaryProps, request) => {
   const serializer = getFormSerializer(props.offering.type);
   if (props.formData) {
     request.plan = props.formData.plan;
-    request.attributes = serializer(props.formData.attributes, props.offering);
+    if (props.formData.attributes) {
+      request.attributes = serializer(props.formData.attributes, props.offering);
+    }
     if (props.formData.limits) {
       request.limits = props.formData.limits;
     }
