@@ -10,6 +10,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { Field } from './Field';
+import { OfferingRuntimeState } from './OfferingRuntimeState';
 import { OfferingState } from './OfferingState';
 import { Offering } from './types';
 
@@ -32,6 +33,12 @@ export const PureOfferingHeader = (props: OfferingHeaderProps) => (
     <Field label={props.translate('State')}>
       <OfferingState offering={props.offering}/>
     </Field>
+
+    {props.offering.marketplace_resource_state && (
+      <Field label={props.translate('Runtime state')}>
+        <OfferingRuntimeState state={props.offering.marketplace_resource_state}/>
+      </Field>
+    )}
 
     <Field label={props.translate('Type')}>
       {props.offering.type_label || props.offering.type}

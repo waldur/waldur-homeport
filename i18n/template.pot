@@ -904,6 +904,10 @@ msgstr ""
 msgid "Booking"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+msgid "Bookings"
+msgstr ""
+
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/resource-import/import-volumes-list.js
 msgid "Bootable"
@@ -1166,6 +1170,10 @@ msgstr ""
 
 #: src/resource/support/ChartContainer.tsx
 msgid "Cloud vCPU"
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Cluster"
 msgstr ""
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
@@ -1552,6 +1560,10 @@ msgstr ""
 msgid "Current size"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
+msgid "Currently there are no booking requests."
+msgstr ""
+
 #: src/offering/register-offering-category.js
 msgid "Custom request"
 msgstr ""
@@ -1792,6 +1804,10 @@ msgstr ""
 
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
+msgstr ""
+
+#: src/vmware/module.js
+msgid "Disks"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
@@ -3553,6 +3569,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
@@ -3593,6 +3610,7 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/slurm-allocation-list.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/vmware-virtual-machine-disks.js
 msgid "Name"
 msgstr ""
 
@@ -3748,6 +3766,10 @@ msgstr ""
 
 #: src/azure/sql/azure-sql-databases-list.js
 msgid "No databases yet."
+msgstr ""
+
+#: src/vmware/vmware-virtual-machine-disks.js
+msgid "No disks found matching filter."
 msgstr ""
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
@@ -4191,6 +4213,7 @@ msgid "Open"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleAction.ts
+#: src/vmware/actions.ts
 msgid "Open console"
 msgstr ""
 
@@ -5014,6 +5037,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
@@ -6006,6 +6030,7 @@ msgstr ""
 msgid "Runtime State"
 msgstr ""
 
+#: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 #: src/resource-import/import-virtual-machines-list.js
 msgid "Runtime state"
@@ -6232,6 +6257,14 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 msgid "Select country..."
+msgstr ""
+
+#: src/offering/OfferingConfigurationForm.tsx
+msgid "Select dates"
+msgstr ""
+
+#: src/offering/OfferingConfigurationForm.tsx
+msgid "Select instance..."
 msgstr ""
 
 #: src/issues/create/issue-create-dialog.html
@@ -6605,6 +6638,8 @@ msgstr ""
 #: src/resource-import/import-volumes-list.js
 #: src/resource/list/resource-volumes-list.js
 #: src/rijkscloud/VolumeSummary.tsx
+#: src/vmware/VMwareDiskSummary.tsx
+#: src/vmware/vmware-virtual-machine-disks.js
 msgid "Size"
 msgstr ""
 
@@ -6739,6 +6774,7 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/slurm-allocation-list.js
 #: src/user/hooks/HooksList.tsx
+#: src/vmware/vmware-virtual-machine-disks.js
 msgid "State"
 msgstr ""
 
@@ -6748,6 +6784,7 @@ msgstr ""
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -6906,6 +6943,7 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/rijkscloud/module.js
 #: src/slurm/actions.js
+#: src/vmware/actions.ts
 msgid "Synchronise"
 msgstr ""
 
@@ -6969,6 +7007,7 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr ""
 
 #: src/issues/create/issue-create-dialog.html
+#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Template"
 msgstr ""
 
@@ -7512,6 +7551,10 @@ msgstr ""
 msgid "Unable to fetch data."
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to fetch offering bookings."
+msgstr ""
+
 #: src/project/project-providers-service.js
 msgid "Unable to fetch project providers."
 msgstr ""
@@ -7614,6 +7657,10 @@ msgstr ""
 msgid "Unable to load financial overview."
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Unable to load form options."
+msgstr ""
+
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/resource/support/ChartContainer.tsx
@@ -7706,6 +7753,7 @@ msgid "Unable to open console log"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleAction.ts
+#: src/vmware/actions.ts
 msgid "Unable to open console. Error message: {message}"
 msgstr ""
 
@@ -8555,6 +8603,10 @@ msgstr ""
 
 #: src/cost-planning/cost-plans-list.js
 msgid "You have no cost plans yet"
+msgstr ""
+
+#: src/vmware/vmware-virtual-machine-disks.js
+msgid "You have no disks yet."
 msgstr ""
 
 #: src/billing/invoices-list.js

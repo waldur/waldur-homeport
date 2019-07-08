@@ -4,8 +4,10 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { OfferingConfigurationDetails } from '@waldur/offering/OfferingConfigurationDetails';
 import { OfferingConfigurationForm } from '@waldur/offering/OfferingConfigurationForm';
 
+import { OFFERING_TYPE_BOOKING } from './constants';
+
 registerOfferingType({
-  type: 'Marketplace.Booking',
+  type: OFFERING_TYPE_BOOKING,
   get label() {
     return translate('Booking');
   },

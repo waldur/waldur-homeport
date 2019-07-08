@@ -63,8 +63,12 @@ export const getInitialValues = state => {
   const offeringTypes = getOfferingTypes();
   const category = categories.find(option => option.uuid === offering.category_uuid);
   const options = parseOptions(offering.options);
-  const attributes = category ? parseAttributes(category, offering.attributes) : undefined;
+  let schedules;
+  if (offering.attributes && offering.attributes.schedules) {
+    schedules = offering.attributes.schedules;
+  }
 
+  const attributes = category ? parseAttributes(category, offering.attributes) : undefined;
   return {
     name: offering.name,
     description: offering.description,
@@ -76,6 +80,7 @@ export const getInitialValues = state => {
     type: offeringTypes.find(option => option.value === offering.type),
     category,
     attributes,
+    schedules,
     options,
     plans: offering.plans,
     components: offering.components ? parseComponents(offering.components) : [],
