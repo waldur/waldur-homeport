@@ -91,6 +91,13 @@ export const VMwareVirtualMachineForm = connector((props: Props) => (
               labelKey="name"
               valueKey="url"
             />
+            <SelectField
+              label={translate('Datastore')}
+              name="attributes.datastore"
+              options={data.datastores}
+              labelKey="name"
+              valueKey="url"
+            />
             <TextField
               label={translate('Description')}
               name="attributes.description"

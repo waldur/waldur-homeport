@@ -1586,6 +1586,10 @@ msgstr ""
 msgid "Databases"
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Datastore"
+msgstr ""
+
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/payments/payment-list.js
