@@ -16,7 +16,7 @@ function OpenstackSubnetsListController(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackSubnetsService;
-      this.addRowFields(['cidr']);
+      this.addRowFields(['cidr', 'gateway_ip', 'disable_gateway']);
     },
     getTableOptions: function() {
       let options = this._super();

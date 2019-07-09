@@ -1830,6 +1830,11 @@ msgstr ""
 msgid "Do not allow user to specify quotas when offering is provisioned."
 msgstr ""
 
+#: src/openstack/openstack-network/module.js
+#: src/openstack/openstack-subnet/actions.js
+msgid "Do not configure a gateway for this subnet"
+msgstr ""
+
 #: src/auth/auth-login.html
 msgid "Do not have an account?"
 msgstr ""
@@ -2411,6 +2416,11 @@ msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 msgid "Gateway IP"
+msgstr ""
+
+#: src/openstack/openstack-network/module.js
+#: src/openstack/openstack-subnet/actions.js
+msgid "Gateway IP of this subnet"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js

@@ -49,6 +49,16 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
             range: '192.168.X.10 — 192.168.X.200',
             parentField: 'cidr'
           },
+          gateway_ip: {
+            type: 'string',
+            required: false,
+            label: gettext('Gateway IP of this subnet'),
+          },
+          disable_gateway: {
+            type: 'boolean',
+            required: false,
+            label: gettext('Do not configure a gateway for this subnet'),
+          },
         })
       },
     },
