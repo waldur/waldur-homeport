@@ -13,4 +13,8 @@ export const getBillingPeriods = () => ([
     label: translate('Per day'),
     value: 'day',
   },
+  {
+    label: translate('Per hour'),
+    value: 'hour',
+  },
 ]);
