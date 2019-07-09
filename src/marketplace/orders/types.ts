@@ -1,8 +1,6 @@
-import { AttributesType } from '@waldur/marketplace/types';
+import { AttributesType, BillingPeriod } from '@waldur/marketplace/types';
 
 export type OrderState = 'Configure' | 'Approve' | 'Review';
-
-export type PlanUnit = 'month' | 'half_month' | 'day';
 
 export interface StatusChange {
   approving: boolean;
@@ -40,7 +38,7 @@ export interface OrderItemResponse {
   plan?: string;
   plan_name?: string;
   plan_description?: string;
-  plan_unit?: PlanUnit;
+  plan_unit?: BillingPeriod;
   project: string;
   category_title?: string;
   category_uuid?: string;

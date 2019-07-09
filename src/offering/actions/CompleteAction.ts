@@ -38,6 +38,10 @@ export default function createAction(): ResourceAction<Offering> {
             value: 'day',
           },
           {
+            display_name: translate('Per hour'),
+            value: 'hour',
+          },
+          {
             display_name: translate('Quantity'),
             value: 'quantity',
           },

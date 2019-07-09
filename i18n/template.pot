@@ -1586,6 +1586,10 @@ msgstr ""
 msgid "Databases"
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Datastore"
+msgstr ""
+
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/payments/payment-list.js
@@ -1624,6 +1628,10 @@ msgstr ""
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Default availability zone for provisioned instances."
+msgstr ""
+
+#: src/vmware/VMwareForm.tsx
+msgid "Default cluster ID"
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
@@ -1820,6 +1828,11 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentDisableQuotaField.tsx
 msgid "Do not allow user to specify quotas when offering is provisioned."
+msgstr ""
+
+#: src/openstack/openstack-network/module.js
+#: src/openstack/openstack-subnet/actions.js
+msgid "Do not configure a gateway for this subnet"
 msgstr ""
 
 #: src/auth/auth-login.html
@@ -2403,6 +2416,11 @@ msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 msgid "Gateway IP"
+msgstr ""
+
+#: src/openstack/openstack-network/module.js
+#: src/openstack/openstack-subnet/actions.js
+msgid "Gateway IP of this subnet"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -4592,6 +4610,11 @@ msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
 #: src/offering/actions/CompleteAction.ts
+msgid "Per hour"
+msgstr ""
+
+#: src/marketplace/offerings/plan/constants.ts
+#: src/offering/actions/CompleteAction.ts
 msgid "Per month"
 msgstr ""
 
@@ -4950,6 +4973,10 @@ msgstr ""
 
 #: src/marketplace/details/plan/utils.ts
 msgid "Price per half-month"
+msgstr ""
+
+#: src/marketplace/details/plan/utils.ts
+msgid "Price per hour"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
