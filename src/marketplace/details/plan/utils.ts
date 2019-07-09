@@ -12,6 +12,17 @@ interface BillingPeriodDescription {
 
 function getBillingPeriods(unit: string): BillingPeriodDescription {
   switch (unit) {
+    case 'hour':
+      return {
+        periods: [
+          translate('Price per hour'),
+          translate('Price per day'),
+          translate('Price per 30 days'),
+          translate('Price per 365 days'),
+        ],
+        multipliers: [1, 24, 24 * 30, 24 * 365],
+      };
+
     case 'day':
       return {
         periods: [

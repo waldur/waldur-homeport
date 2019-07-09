@@ -4610,6 +4610,11 @@ msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
 #: src/offering/actions/CompleteAction.ts
+msgid "Per hour"
+msgstr ""
+
+#: src/marketplace/offerings/plan/constants.ts
+#: src/offering/actions/CompleteAction.ts
 msgid "Per month"
 msgstr ""
 
@@ -4968,6 +4973,10 @@ msgstr ""
 
 #: src/marketplace/details/plan/utils.ts
 msgid "Price per half-month"
+msgstr ""
+
+#: src/marketplace/details/plan/utils.ts
+msgid "Price per hour"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
