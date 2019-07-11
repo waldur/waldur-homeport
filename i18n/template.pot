@@ -1928,6 +1928,7 @@ msgstr ""
 #: src/resource/actions/constants.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
+#: src/vmware/actions.ts
 msgid "Edit"
 msgstr ""
 
