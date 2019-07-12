@@ -122,6 +122,14 @@ export class PureOfferingConfigurationForm extends React.Component<OfferingConfi
                   placeholder: translate('Select instance...'),
                 };
                 break;
+              case 'select_multiple_openstack_instances':
+                OptionField = AsyncSelectField;
+                params = {
+                  loadOptions: query => fetchInstanceOptions(query, props.customer.uuid),
+                  placeholder: translate('Select instance...'),
+                  multi: true,
+                };
+                break;
             }
             return (
               <OptionField
