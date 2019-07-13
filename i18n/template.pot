@@ -418,6 +418,7 @@ msgid "Agree with ToS"
 msgstr ""
 
 #: src/billing/billing-record-details.html
+#: src/customer/CustomerList.tsx
 #: src/customer/details/CustomerDetails.tsx
 msgid "Agreement number"
 msgstr ""
