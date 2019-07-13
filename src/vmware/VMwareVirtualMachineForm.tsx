@@ -19,7 +19,7 @@ interface Template {
   ram: number;
 }
 
-const GuesOSField = formValues<any>({template: 'attributes.template'})(props => props.template ? (
+const GuestOSField = formValues<any>({template: 'attributes.template'})(props => props.template ? (
   <StaticField
     label={translate('Guest OS')}
     value={props.template.guest_os_name}
@@ -71,7 +71,7 @@ export const VMwareVirtualMachineForm = connector((props: Props) => (
                 props.change('attributes.ram', value.ram);
               }}
             />
-            <GuesOSField/>
+            <GuestOSField/>
             <NumberField
               label={translate('Number of cores in a VM')}
               name="attributes.cores"

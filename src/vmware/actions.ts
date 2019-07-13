@@ -26,6 +26,9 @@ export function actionsConfig(ActionConfigurationProvider) {
       create_disk: {
         tab: 'disks',
       },
+      update: {
+        title: translate('Edit'),
+      },
       console: {
         name: 'console',
         title: translate('Open console'),

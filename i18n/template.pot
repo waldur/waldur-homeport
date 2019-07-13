@@ -1928,6 +1928,7 @@ msgstr ""
 #: src/resource/actions/constants.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
+#: src/vmware/actions.ts
 msgid "Edit"
 msgstr ""
 
@@ -3422,6 +3423,14 @@ msgstr ""
 msgid "Maximal value"
 msgstr ""
 
+#: src/vmware/VMwareForm.tsx
+msgid "Maximum RAM for each VM"
+msgstr ""
+
+#: src/vmware/VMwareForm.tsx
+msgid "Maximum capacity for each disk"
+msgstr ""
+
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Maximum monthly"
 msgstr ""
@@ -3432,6 +3441,10 @@ msgstr ""
 
 #: src/freeipa/freeipa-account-create.html
 msgid "Maximum username length with mandatory username prefix is 32 characters."
+msgstr ""
+
+#: src/vmware/VMwareForm.tsx
+msgid "Maximum vCPU for each VM"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentMeasuredUnitField.tsx

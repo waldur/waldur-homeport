@@ -17,7 +17,7 @@ import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { loadTenantOptions, loadInstanceOptions } from './utils';
+import { fetchTenantOptions, fetchInstanceOptions } from './api';
 
 export class PureOfferingConfigurationForm extends React.Component<OfferingConfigurationFormProps> {
 
@@ -111,15 +111,23 @@ export class PureOfferingConfigurationForm extends React.Component<OfferingConfi
               case 'select_openstack_tenant':
                 OptionField = AsyncSelectField;
                 params = {
-                  loadOptions: loadTenantOptions(props.customer.uuid),
+                  loadOptions: query => fetchTenantOptions(query, props.customer.uuid),
                   placeholder: translate('Select tenant...'),
                 };
                 break;
               case 'select_openstack_instance':
                 OptionField = AsyncSelectField;
                 params = {
-                  loadOptions: loadInstanceOptions(props.customer.uuid),
+                  loadOptions: query => fetchInstanceOptions(query, props.customer.uuid),
                   placeholder: translate('Select instance...'),
+                };
+                break;
+              case 'select_multiple_openstack_instances':
+                OptionField = AsyncSelectField;
+                params = {
+                  loadOptions: query => fetchInstanceOptions(query, props.customer.uuid),
+                  placeholder: translate('Select instance...'),
+                  multi: true,
                 };
                 break;
             }
@@ -140,7 +148,7 @@ export class PureOfferingConfigurationForm extends React.Component<OfferingConfi
               name="attributes.schedules"
               excludedEvents={this.state.availableDates}
               label={translate('Select dates')}
-              />
+            />
           }
         </FormContainer>
       </form>
