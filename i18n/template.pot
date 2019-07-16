@@ -3709,6 +3709,7 @@ msgstr ""
 #: src/openstack/openstack-network/breadcrumbs.js
 #: src/openstack/openstack-subnet/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
+#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
 msgstr ""
 
