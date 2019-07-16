@@ -48,6 +48,7 @@ export interface Plan {
   quotas: {[key: string]: number};
   prices: {[key: string]: number};
   is_active: boolean;
+  archived: boolean;
 }
 
 export interface OptionField {
