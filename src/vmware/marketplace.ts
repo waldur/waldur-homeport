@@ -3,10 +3,11 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
 import { VMwareVirtualMachineForm } from './VMwareVirtualMachineForm';
 
-const serializer = ({template, cluster, datastore, ...rest}) => ({
+const serializer = ({template, cluster, datastore, networks, ...rest}) => ({
   template: template && template.url,
   cluster: cluster && cluster.url,
   datastore: datastore && datastore.url,
+  networks: networks && networks.map(({ url }) => ({ url })),
   ...rest,
 });
 

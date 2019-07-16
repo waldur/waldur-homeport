@@ -98,6 +98,14 @@ export const VMwareVirtualMachineForm = connector((props: Props) => (
               labelKey="name"
               valueKey="url"
             />
+            <SelectField
+              label={translate('Networks')}
+              name="attributes.networks"
+              options={data.networks}
+              labelKey="name"
+              valueKey="url"
+              multi={true}
+            />
             <TextField
               label={translate('Description')}
               name="attributes.description"

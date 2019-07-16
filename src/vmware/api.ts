@@ -11,6 +11,7 @@ export const loadFormOptions = async (props: {
   const templates = await getAll('/vmware-templates/', {params: {settings_uuid}});
   const clusters = await getAll('/vmware-clusters/', {params: {settings_uuid, customer_uuid}});
   const datastores = await getAll('/vmware-datastores/', {params: {settings_uuid, customer_uuid}});
+  const networks = await getAll('/vmware-networks/', {params: {settings_uuid, customer_uuid}});
 
-  return {templates, clusters, datastores};
+  return {templates, clusters, datastores, networks};
 };
