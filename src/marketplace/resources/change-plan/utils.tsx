@@ -42,6 +42,7 @@ const getChoices = (offering: Offering, resource: OrderItemResponse): SelectDial
     uuid: plan.uuid,
     name: plan.name,
     ...plan.quotas,
+    archived: plan.archived,
     price: defaultCurrency(plan.unit_price),
     disabled: plan.url === resource.plan || !plan.is_active,
     disabledReason:
