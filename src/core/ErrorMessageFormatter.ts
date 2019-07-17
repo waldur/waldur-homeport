@@ -33,11 +33,9 @@ export const format = response => {
   if (response.data) {
     if (response.data.non_field_errors) {
       message += ' ' + response.data.non_field_errors;
-    }
-    if (response.data.detail) {
+    } else if (response.data.detail) {
       message += ' ' + response.data.detail;
-    }
-    if (Array.isArray(response.data)) {
+    } else if (Array.isArray(response.data)) {
       message += ' ' + response.data.map(item => {
         if (typeof item === 'object') {
           return formatErrorObject(item);

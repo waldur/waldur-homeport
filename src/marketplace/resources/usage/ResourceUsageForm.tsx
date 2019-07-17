@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Options } from 'react-select';
 import { InjectedFormProps } from 'redux-form';
 
+import { required } from '@waldur/core/validators';
 import { FormContainer, NumberField, TextField, SelectField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
@@ -27,6 +28,8 @@ export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
         description={component.description}
         unit={component.measured_unit}
         max={component.limit_period ? component.limit_amount : undefined}
+        required={true}
+        validate={required}
       />
     );
     components.push(
