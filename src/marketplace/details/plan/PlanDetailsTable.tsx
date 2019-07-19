@@ -74,6 +74,8 @@ export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDe
 
   const fixedRows = props.components.filter(component => component.billing_type === 'fixed');
   const usageRows = props.components.filter(component => component.billing_type === 'usage');
+  const initialRows = props.components.filter(component => component.billing_type === 'one');
+  const switchRows = props.components.filter(component => component.billing_type === 'few');
   const usageWithLimits = usageRows.filter(component => component.disable_quotas === false);
   const usageWithoutLimits = usageRows.filter(component => component.disable_quotas === true);
   const hasExtraRows = fixedRows.length > 0 || usageWithLimits.length > 0;
@@ -100,6 +102,18 @@ export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDe
             translate('Vendor can charge for usage of the following components')
           }</p>
           <LimitlessComponentsTable components={usageWithoutLimits}/>
+        </>
+      )}
+      {initialRows.length > 0 && (
+        <>
+          <p>{translate('Additional fee is applied on resource activation')}</p>
+          <LimitlessComponentsTable components={initialRows}/>
+        </>
+      )}
+      {switchRows.length > 0 && (
+        <>
+          <p>{translate('Additional fee is applied on resource activation and every time a plan has changed, using pricing of a new plan')}</p>
+          <LimitlessComponentsTable components={switchRows}/>
         </>
       )}
       </div>

@@ -44,6 +44,8 @@ export interface Plan {
   name: string;
   description: string;
   unit_price: string;
+  init_price?: string;
+  switch_price?: string;
   unit: BillingPeriod;
   quotas: {[key: string]: number};
   prices: {[key: string]: number};

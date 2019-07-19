@@ -36,6 +36,12 @@ const sortPlans = (plans: Plan[]) => plans.map(plan => ({
   ...plan, unit_price: parseFloat(plan.unit_price),
 })).sort((a, b) => a.unit_price - b.unit_price);
 
+const getPlanSwitchPrice = (plan: Plan) => {
+  const fixedPart = typeof plan.unit_price === 'string' ? parseFloat(plan.unit_price) : plan.unit_price;
+  const switchPart = parseFloat(plan.switch_price);
+  return defaultCurrency(fixedPart + switchPart);
+};
+
 const getChoices = (offering: Offering, resource: OrderItemResponse): SelectDialogFieldChoice[] =>
   sortPlans(offering.plans).map(plan => ({
     url: plan.url,
@@ -43,7 +49,7 @@ const getChoices = (offering: Offering, resource: OrderItemResponse): SelectDial
     name: plan.name,
     ...plan.quotas,
     archived: plan.archived,
-    price: defaultCurrency(plan.unit_price),
+    price: getPlanSwitchPrice(plan),
     disabled: plan.url === resource.plan || !plan.is_active,
     disabledReason:
       !plan.is_active ? translate('Plan capacity is full.') :

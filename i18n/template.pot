@@ -372,6 +372,14 @@ msgstr ""
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+msgid "Additional fee is applied on resource activation"
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+msgid "Additional fee is applied on resource activation and every time a plan has changed, using pricing of a new plan"
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 msgid "Additional information"
 msgstr ""

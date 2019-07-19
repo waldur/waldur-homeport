@@ -90,8 +90,11 @@ export const combinePrices = (plan, limits, offering) => {
     const fixedComponents = components.filter(component => component.billing_type === 'fixed');
     const fixedSubTotal = fixedComponents.reduce((result, item) => result + item.subTotal, 0);
 
-    const total = usageSubTotal + fixedSubTotal;
-    const totalPeriods = multipliers.map(mult => mult * total || 0);
+    const subscriptionSubTotal = usageSubTotal + fixedSubTotal;
+    const subscriptionSubTotalPeriods = multipliers.map(mult => mult * subscriptionSubTotal || 0);
+
+    const total = subscriptionSubTotal + parseFloat(plan.init_price);
+    const totalPeriods = subscriptionSubTotalPeriods.map(val => val + parseFloat(plan.init_price));
 
     return {components, periods, total, totalPeriods};
   } else {
