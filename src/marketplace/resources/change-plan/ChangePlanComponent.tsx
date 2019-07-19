@@ -24,7 +24,7 @@ export const ChangePlanComponent = (props: FetchedData) => (
           component={fieldProps => (
             <ChoicesTable
               columns={props.columns}
-              choices={props.choices}
+              choices={props.choices.filter(plan => plan.archived === false)}
               input={fieldProps.input}
             />
           )}

@@ -43,11 +43,14 @@ export interface Plan {
   uuid?: string;
   name: string;
   description: string;
-  unit_price: string;
+  unit_price: number | string;
+  init_price?: number | string;
+  switch_price?: number | string;
   unit: BillingPeriod;
   quotas: {[key: string]: number};
   prices: {[key: string]: number};
   is_active: boolean;
+  archived: boolean;
 }
 
 export interface OptionField {

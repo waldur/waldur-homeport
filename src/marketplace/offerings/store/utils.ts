@@ -1,6 +1,6 @@
 import { omit } from '@waldur/core/utils';
 import { Customer } from '@waldur/customer/types';
-import { OptionField, Category, Attribute } from '@waldur/marketplace/types';
+import { OptionField, Category, Attribute, OfferingComponent } from '@waldur/marketplace/types';
 
 import { OfferingRequest, OfferingFormData, PlanRequest, PlanFormData, OptionFormData } from './types';
 
@@ -15,7 +15,7 @@ export const planWithoutQuotas = (plan: PlanFormData, component: string) => ({
   quotas: plan.quotas ? omit(plan.quotas, component) : plan.quotas,
 });
 
-const formatPlan = (plan: PlanFormData, fixedComponents: string[], skipComponentsValidation?: boolean): PlanRequest => {
+const formatPlan = (plan: PlanFormData, fixedComponents: string[]): PlanRequest => {
   const result: PlanRequest = {
     name: plan.name,
     unit: plan.unit.value,
@@ -25,14 +25,10 @@ const formatPlan = (plan: PlanFormData, fixedComponents: string[], skipComponent
     result.prices = plan.prices;
   }
   if (plan.quotas) {
-    if (skipComponentsValidation) {
-      result.quotas = plan.quotas;
-    } else {
-      // Skip quotas for usage-based components
-      result.quotas = Object.keys(plan.quotas).reduce(
-        (acc, key) => fixedComponents.includes(key) ? {...acc, [key]: plan.quotas[key]} : acc,
-        {});
-    }
+    // Skip quotas for usage-based components
+    result.quotas = Object.keys(plan.quotas).reduce(
+      (acc, key) => fixedComponents.includes(key) ? {...acc, [key]: plan.quotas[key]} : acc,
+      {});
   }
   if (plan.description) {
     result.description = plan.description;
@@ -99,7 +95,7 @@ export const formatComponents = components =>
     limit_period: component.limit_period ? component.limit_period.value : null,
   }));
 
-export const formatOfferingRequest = (request: OfferingFormData, customer?: Customer, skipComponents?: boolean) => {
+export const formatOfferingRequest = (request: OfferingFormData, components: OfferingComponent[], customer?: Customer) => {
   const result: OfferingRequest = {
     name: request.name,
     native_name: request.native_name,
@@ -117,7 +113,8 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
   if (request.attributes) {
     result.attributes = formatAttributes(request.category, request.attributes);
   }
-  if (request.components && !skipComponents) {
+  if (request.components && components.length === 0) {
+    // Serialize custom components only if there're no built-in components.
     result.components = formatComponents(request.components);
   }
 
@@ -131,9 +128,10 @@ export const formatOfferingRequest = (request: OfferingFormData, customer?: Cust
   }
 
   if (request.plans) {
-    const fixedComponents = (skipComponents || !request.components) ? [] : request.components.filter(
+    // Pick either built-in or custom fixed components.
+    const fixedComponents = (components || request.components).filter(
       c => getBillingTypeValue(c.billing_type) === 'fixed').map(c => c.type);
-    result.plans = request.plans.map(plan => formatPlan(plan, fixedComponents, skipComponents));
+    result.plans = request.plans.map(plan => formatPlan(plan, fixedComponents));
   }
   if (request.options) {
     result.options = formatOptions(request.options);

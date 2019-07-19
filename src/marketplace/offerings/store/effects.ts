@@ -65,8 +65,7 @@ function* createOffering(action: Action<OfferingFormData>) {
   try {
     const offering = yield select(getOffering);
     const components = offering.plugins[rest.type.value];
-    const hasBuiltinComponents = components.length > 0;
-    const offeringRequest = formatOfferingRequest(rest, customer, hasBuiltinComponents);
+    const offeringRequest = formatOfferingRequest(rest, components, customer);
     const response = yield call(api.createOffering, offeringRequest);
     if (thumbnail) {
       const offeringId = response.data.uuid;
@@ -92,9 +91,8 @@ function* updateOffering(action: Action<OfferingUpdateFormData>) {
   const { offeringUuid, thumbnail, ...rest } = action.payload;
   const offering = yield select(getOffering);
   const components = offering.plugins[rest.type.value];
-  const hasBuiltinComponents = components.length > 0;
   try {
-    const offeringRequest = formatOfferingRequest(rest, undefined, hasBuiltinComponents);
+    const offeringRequest = formatOfferingRequest(rest, components);
     yield call(api.updateOffering, offeringUuid, offeringRequest);
     if (thumbnail instanceof File || thumbnail === '') {
       yield call(api.uploadOfferingThumbnail, offeringUuid, thumbnail);

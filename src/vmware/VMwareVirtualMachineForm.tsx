@@ -3,6 +3,7 @@ import { formValues } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
+import { ENV } from '@waldur/core/services';
 import { required } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField, SelectField, NumberField } from '@waldur/form-react';
 import { StaticField } from '@waldur/form-react/StaticField';
@@ -42,6 +43,7 @@ export const VMwareVirtualMachineForm = connector((props: Props) => (
       if (error) {
         return <span>{translate('Unable to load form options.')}</span>;
       }
+      const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
       return (
         <form className="form-horizontal">
           <FormContainer
@@ -84,20 +86,43 @@ export const VMwareVirtualMachineForm = connector((props: Props) => (
               label={translate('Memory size in MiB')}
               name="attributes.ram"
             />
-            <SelectField
-              label={translate('Cluster')}
-              name="attributes.cluster"
-              options={data.clusters}
-              labelKey="name"
-              valueKey="url"
-            />
-            <SelectField
-              label={translate('Datastore')}
-              name="attributes.datastore"
-              options={data.datastores}
-              labelKey="name"
-              valueKey="url"
-            />
+            {advancedMode && data.clusters.length > 0 && (
+              <SelectField
+                label={translate('Cluster')}
+                name="attributes.cluster"
+                options={data.clusters}
+                labelKey="name"
+                valueKey="url"
+              />
+            )}
+            {advancedMode && data.datastores.length > 0 && (
+              <SelectField
+                label={translate('Datastore')}
+                name="attributes.datastore"
+                options={data.datastores}
+                labelKey="name"
+                valueKey="url"
+              />
+            )}
+            {advancedMode && data.folders.length > 0 && (
+              <SelectField
+                label={translate('Folder')}
+                name="attributes.folder"
+                options={data.folders}
+                labelKey="name"
+                valueKey="url"
+              />
+            )}
+            {advancedMode && data.networks.length > 0  && (
+              <SelectField
+                label={translate('Networks')}
+                name="attributes.networks"
+                options={data.networks}
+                labelKey="name"
+                valueKey="url"
+                multi={true}
+              />
+            )}
             <TextField
               label={translate('Description')}
               name="attributes.description"

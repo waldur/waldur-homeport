@@ -18,7 +18,7 @@ export const PlanField = (props: PlanFieldProps) => props.offering.plans.length 
     <div className="col-sm-9">
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <div style={{flexGrow: 1}}>
-          <PlanSelectField plans={props.offering.plans}/>
+          <PlanSelectField plans={props.offering.plans.filter(plan => plan.archived === false)}/>
         </div>
         <PlanDescriptionButton className="btn btn-md btn-default pull-right m-l-sm"/>
       </div>
