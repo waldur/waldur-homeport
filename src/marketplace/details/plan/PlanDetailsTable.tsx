@@ -106,13 +106,13 @@ export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDe
       )}
       {initialRows.length > 0 && (
         <>
-          <p>{translate('Additional fee is applied on resource activation')}</p>
+          <p>{translate('A one-time fee applied on activation.')}</p>
           <LimitlessComponentsTable components={initialRows}/>
         </>
       )}
       {switchRows.length > 0 && (
         <>
-          <p>{translate('Additional fee is applied on resource activation and every time a plan has changed, using pricing of a new plan')}</p>
+          <p>{translate('Fee applied each time this plan is activated.')}</p>
           <LimitlessComponentsTable components={switchRows}/>
         </>
       )}

@@ -34,6 +34,10 @@ msgstr ""
 msgid "< Back"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+msgid "A one-time fee applied on activation."
+msgstr ""
+
 #: src/freeipa/freeipa-account-create.js
 msgid "A profile has been created."
 msgstr ""
@@ -370,14 +374,6 @@ msgstr ""
 
 #: src/azure/vm/azure-virtual-machine-config.js
 msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr ""
-
-#: src/marketplace/details/plan/PlanDetailsTable.tsx
-msgid "Additional fee is applied on resource activation"
-msgstr ""
-
-#: src/marketplace/details/plan/PlanDetailsTable.tsx
-msgid "Additional fee is applied on resource activation and every time a plan has changed, using pricing of a new plan"
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
@@ -2211,6 +2207,10 @@ msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Features"
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+msgid "Fee applied each time this plan is activated."
 msgstr ""
 
 #: src/form/appstore-field-email.js
