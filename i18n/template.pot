@@ -34,6 +34,10 @@ msgstr ""
 msgid "< Back"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+msgid "A one-time fee applied on activation."
+msgstr ""
+
 #: src/freeipa/freeipa-account-create.js
 msgid "A profile has been created."
 msgstr ""
@@ -2203,6 +2207,10 @@ msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Features"
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+msgid "Fee applied each time this plan is activated."
 msgstr ""
 
 #: src/form/appstore-field-email.js

@@ -23,7 +23,10 @@ async function loadData(resourceId: string) {
   const plan = resource.plan && offering.plans.find(item => item.url === resource.plan);
   return {
     offering,
-    plan: plan && {...plan, unit_price: parseFloat(plan.unit_price)},
+    plan: plan && {
+      ...plan,
+      unit_price: typeof plan.unit_price === 'string' ? parseFloat(plan.unit_price) : plan.unit_price,
+    },
     ...combinePrices(plan, resource.limits, offering),
   };
 }
