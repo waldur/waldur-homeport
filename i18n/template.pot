@@ -6898,6 +6898,10 @@ msgstr ""
 msgid "Storage size"
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Storage size in MiB"
+msgstr ""
+
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Storage type"
 msgstr ""
