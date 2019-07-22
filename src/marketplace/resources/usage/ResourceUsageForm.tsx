@@ -17,6 +17,19 @@ export interface ResourceUsageFormProps extends InjectedFormProps {
   onPeriodChange(): void;
 }
 
+const StaticPlanField = () => (
+  <Field
+    name="period"
+    component={fieldProps => (
+      <p>
+        <strong>{translate('Period')}</strong>:
+        {' '}
+        {fieldProps.input.value.label}
+      </p>
+    )}
+  />
+);
+
 export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
   const components = [];
   props.components.forEach((component: OfferingComponent, index) => {
@@ -59,19 +72,7 @@ export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
               onChange={props.onPeriodChange}
               clearable={false}
             />
-          ) : (
-            <Field
-              name="period"
-              hideLabel={true}
-              component={fieldProps => (
-                <p>
-                  <strong>{translate('Period')}</strong>:
-                  {' '}
-                  {fieldProps.input.value.label}
-                </p>
-              )}
-            />
-          )}
+          ) : <StaticPlanField/>}
           {components}
         </FormContainer>
       </div>
