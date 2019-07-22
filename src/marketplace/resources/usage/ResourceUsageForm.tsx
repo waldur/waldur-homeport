@@ -58,24 +58,22 @@ export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
 
   return (
     <form onSubmit={props.handleSubmit(props.submitReport)}>
-      <div>
-        <FormContainer
-          submitting={props.submitting}
-          layout="vertical"
-        >
-          {props.periods.length > 1 ? (
-            <SelectField
-              name="period"
-              label={translate('Plan')}
-              tooltip={translate('Each usage report must be connected with a billing plan to assure correct calculation of accounting data.')}
-              options={props.periods}
-              onChange={props.onPeriodChange}
-              clearable={false}
-            />
-          ) : <StaticPlanField/>}
-          {components}
-        </FormContainer>
-      </div>
+      <FormContainer
+        submitting={props.submitting}
+        layout="vertical"
+      >
+        {props.periods.length > 1 ? (
+          <SelectField
+            name="period"
+            label={translate('Plan')}
+            tooltip={translate('Each usage report must be connected with a billing plan to assure correct calculation of accounting data.')}
+            options={props.periods}
+            onChange={props.onPeriodChange}
+            clearable={false}
+          />
+        ) : <StaticPlanField/>}
+        {components}
+      </FormContainer>
     </form>
   );
 };
