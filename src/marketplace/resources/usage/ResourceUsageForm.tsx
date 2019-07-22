@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Options } from 'react-select';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormContainer, NumberField, TextField, SelectField } from '@waldur/form-react';
@@ -30,6 +30,7 @@ export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
         max={component.limit_period ? component.limit_amount : undefined}
         required={true}
         validate={required}
+        placeholder={translate('Amount')}
       />
     );
     components.push(
@@ -37,25 +38,40 @@ export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
         name={`components.${component.type}.description`}
         key={`${index}.description`}
         placeholder={translate('Comment')}
+        hideLabel={true}
       />
     );
   });
 
   return (
     <form onSubmit={props.handleSubmit(props.submitReport)}>
-      <div className="form-horizontal">
+      <div>
         <FormContainer
           submitting={props.submitting}
-          labelClass="col-sm-2"
-          controlClass="col-sm-10">
-          <SelectField
-            name="period"
-            label={translate('Plan')}
-            description={translate('Each usage report must be connected with a billing plan to assure correct calculation of accounting data.')}
-            options={props.periods}
-            onChange={props.onPeriodChange}
-            clearable={false}
-          />
+          layout="vertical"
+        >
+          {props.periods.length > 1 ? (
+            <SelectField
+              name="period"
+              label={translate('Plan')}
+              tooltip={translate('Each usage report must be connected with a billing plan to assure correct calculation of accounting data.')}
+              options={props.periods}
+              onChange={props.onPeriodChange}
+              clearable={false}
+            />
+          ) : (
+            <Field
+              name="period"
+              hideLabel={true}
+              component={fieldProps => (
+                <p>
+                  <strong>{translate('Period')}</strong>:
+                  {' '}
+                  {fieldProps.input.value.label}
+                </p>
+              )}
+            />
+          )}
           {components}
         </FormContainer>
       </div>

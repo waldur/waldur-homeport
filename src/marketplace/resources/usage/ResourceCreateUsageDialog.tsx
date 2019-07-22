@@ -16,29 +16,28 @@ interface ResourceCreateUsageDialogProps {
 }
 
 const ResourceCreateUsageDialog = (props: ResourceCreateUsageDialogProps) => (
-  <ModalDialog
-    title={translate('Resource usage')}
-    footer={<ResourceUsageSubmitButton params={props.resolve}/>}>
-    <Query loader={getUsageComponents} variables={props.resolve}>
-      {({ loading, error, data }) => {
-        if (loading) {
-          return <LoadingSpinner/>;
-        } else if (error) {
-          return <h3>{translate('Unable to load marketplace offering details.')}</h3>;
-        } else if (data.components.length === 0) {
-          return <h3>{translate('Marketplace offering does not have any usage-based components.')}</h3>;
-        } else {
-          return (
+  <Query loader={getUsageComponents} variables={props.resolve}>
+    {({ loading, error, data }) => (
+      <ModalDialog
+        title={translate('Resource usage for {resource}', {resource: props.resolve.resource_name})}
+        footer={<ResourceUsageSubmitButton params={props.resolve}/>}>
+        {
+          loading ? <LoadingSpinner/> :
+          error ? (
+            <h3>{translate('Unable to load marketplace offering details.')}</h3>
+          ) : (data.components.length === 0)  ? (
+            <h3>{translate('Marketplace offering does not have any usage-based components.')}</h3>
+          ) : (
             <ResourceUsageFormContainer
               params={props.resolve}
               components={data.components}
               periods={data.periods}
             />
-          );
+          )
         }
-      }}
-    </Query>
-  </ModalDialog>
+      </ModalDialog>
+    )}
+  </Query>
 );
 
 export default connectAngularComponent(ResourceCreateUsageDialog, ['resolve']);

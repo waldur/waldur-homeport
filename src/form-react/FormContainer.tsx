@@ -8,6 +8,7 @@ interface FormContainerProps {
   clearOnUnmount?: boolean;
   labelClass?: string;
   controlClass?: string;
+  layout?: 'horizontal' | 'vertical';
 }
 
 export const FormContainer: React.SFC<FormContainerProps> = props => (
@@ -21,7 +22,12 @@ export const FormContainer: React.SFC<FormContainerProps> = props => (
         labelClass={props.labelClass}
         controlClass={props.controlClass}
         clearOnUnmount={props.clearOnUnmount}
+        layout={props.layout}
       /> : input
     ))}
   </div>
 );
+
+FormContainer.defaultProps = {
+  layout: 'horizontal',
+};

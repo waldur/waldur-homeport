@@ -24,6 +24,7 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
       labelClass,
       hideLabel,
       controlClass,
+      layout,
       meta: { touched, error },
       children,
       ...rest} = this.props;
@@ -39,7 +40,7 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
     return (
       <div className="form-group">
         {!hideLabel && (
-          <label className={classNames('control-label', labelClass)}>
+          <label className={layout !== 'vertical' ? classNames('control-label', labelClass) : undefined}>
             {tooltip && (
               <Tooltip id="form-field-tooltip" label={tooltip}>
                 <i className="fa fa-question-circle"/>{' '}
@@ -48,7 +49,7 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
             {label}{required && <span className="text-danger"> *</span>}
           </label>
         )}
-        <div className={classNames(controlClass, {'col-sm-offset-3': hideLabel})}>
+        <div className={layout !== 'vertical' ? classNames(controlClass, {'col-sm-offset-3': hideLabel}) : undefined}>
           {React.cloneElement((children as any), newProps)}
           {description && <p className="help-block m-b-none text-muted">{description}</p>}
           {touched && <FieldError error={error} />}

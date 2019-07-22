@@ -480,6 +480,7 @@ msgstr ""
 
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/payments/payment-list.js
 msgid "Amount"
 msgstr ""
@@ -1178,6 +1179,7 @@ msgid "Cloud vCPU"
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Cluster"
 msgstr ""
 
@@ -1592,6 +1594,7 @@ msgid "Databases"
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Datastore"
 msgstr ""
 
@@ -2347,6 +2350,10 @@ msgstr ""
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Flowmap"
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Folder"
 msgstr ""
 
 #: src/form/appstore-form-wizard.html
@@ -3718,6 +3725,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Networks"
 msgstr ""
 
@@ -4639,6 +4647,10 @@ msgstr ""
 #: src/marketplace/offerings/plan/constants.ts
 #: src/offering/actions/CompleteAction.ts
 msgid "Per month"
+msgstr ""
+
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+msgid "Period"
 msgstr ""
 
 #: src/digitalocean/droplet-resize.html
@@ -5960,10 +5972,13 @@ msgstr ""
 
 #: src/analytics/routes.js
 #: src/customer/workspace/customer-workspace.js
-#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
 #: src/resource/support/ChartContainer.tsx
 msgid "Resource usage"
+msgstr ""
+
+#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
+msgid "Resource usage for {resource}"
 msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
@@ -7058,6 +7073,7 @@ msgstr ""
 
 #: src/issues/create/issue-create-dialog.html
 #: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Template"
 msgstr ""
 
