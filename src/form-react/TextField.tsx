@@ -8,7 +8,7 @@ interface TextFieldProps extends FormField {
 }
 
 export const TextField = (props: TextFieldProps) => {
-  const { input, label, ...rest } = props;
+  const { input, label, hideLabel, ...rest } = props;
   return (
     <textarea
       {...props.input}

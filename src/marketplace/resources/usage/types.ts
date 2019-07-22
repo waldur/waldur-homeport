@@ -20,6 +20,7 @@ export interface UsageReportRequest {
 
 export interface UsageReportContext {
   resource_uuid: string;
+  resource_name: string;
   offering_uuid: string;
 }
 
