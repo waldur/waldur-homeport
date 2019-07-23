@@ -8,6 +8,7 @@ import { required } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField, SelectField, NumberField } from '@waldur/form-react';
 import { StaticField } from '@waldur/form-react/StaticField';
 import { translate } from '@waldur/i18n';
+import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
@@ -39,10 +40,11 @@ const initAttributes = props => {
   React.useEffect(() => {
     const attributes = {...props.initialAttributes};
     const initialData: Record<string, any> = {attributes};
+    const activePlans = props.offering.plans.filter(plan => plan.archived === false);
     if (props.plan) {
       initialData.plan = props.plan;
-    } else if (props.offering.plans.length === 1) {
-      initialData.plan = props.offering.plans[0];
+    } else if (activePlans.length > 0) {
+      initialData.plan = activePlans[0];
     }
     if (props.data.templates.length > 0) {
       const template = props.data.templates[0];
@@ -89,6 +91,7 @@ const FormComponent = props => {
           validate={required}
           required={true}
         />
+        <PlanField offering={props.offering}/>
         {props.data.templates.length > 0 && (
           <SelectField
             label={translate('Template')}
