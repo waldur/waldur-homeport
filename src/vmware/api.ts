@@ -1,5 +1,7 @@
-import { getAll } from '@waldur/core/api';
+import { getAll, getById } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
+
+const getLimits = settingsId => getById('/vmware-limits/', settingsId);
 
 export const loadFormOptions = async (props: {
   settings_uuid: string;
@@ -21,12 +23,14 @@ export const loadFormOptions = async (props: {
       datastores,
       networks,
       folders,
+      limits,
     ] = await Promise.all([
       getAll('/vmware-templates/', options),
       getAll('/vmware-clusters/', options),
       getAll('/vmware-datastores/', options),
       getAll('/vmware-networks/', options),
       getAll('/vmware-folders/', options),
+      getLimits(props.settings_uuid),
     ]);
 
     return {
@@ -35,9 +39,19 @@ export const loadFormOptions = async (props: {
       datastores,
       networks,
       folders,
+      limits,
     };
   } else {
-    const templates = await getAll('/vmware-templates/', options);
-    return {templates};
+    const [
+      templates,
+      limits,
+    ] = await Promise.all([
+      getAll('/vmware-templates/', options),
+      getLimits(props.settings_uuid),
+    ]);
+    return {
+      templates,
+      limits,
+    };
   }
 };

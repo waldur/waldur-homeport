@@ -11,7 +11,7 @@ interface NumberFieldProps extends FormField {
 }
 
 export const NumberField = (props: NumberFieldProps) => {
-  const { input, label, validate, ...rest } = props;
+  const { input, label, validate, parse, format, ...rest } = props;
   const control = (
     <input
       {...props.input}
