@@ -31,19 +31,19 @@ export function registerOfferingType(config: OfferingConfiguration) {
 }
 
 export function getFormComponent(offeringType) {
-  return REGISTRY[offeringType].component;
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].component;
 }
 
 export function getDetailsComponent(offeringType) {
-  return REGISTRY[offeringType].detailsComponent;
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].detailsComponent;
 }
 
 export function getFormSerializer(offeringType) {
-  return REGISTRY[offeringType].serializer || (x => x);
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].serializer || (x => x);
 }
 
 export function getCheckoutSummaryComponent(offeringType) {
-  return REGISTRY[offeringType].checkoutSummaryComponent;
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].checkoutSummaryComponent;
 }
 
 export function getOfferingTypes(): Option[] {
@@ -55,26 +55,26 @@ export function getOfferingTypes(): Option[] {
 }
 
 export function showOfferingOptions(offeringType) {
-  return REGISTRY[offeringType].showOptions;
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].showOptions;
 }
 
 export function isOfferingTypeSchedulable(offeringType) {
-  return REGISTRY[offeringType].schedulable;
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].schedulable;
 }
 
 export function showComponentsList(offeringType) {
-  return REGISTRY[offeringType].showComponents;
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].showComponents;
 }
 
 export function getProviderType(offeringType) {
-  return REGISTRY[offeringType].providerType;
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].providerType;
 }
 
 export function getLabel(offeringType) {
-  return REGISTRY[offeringType].label;
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].label;
 }
 
 export function getAttributes(offeringType) {
-  const func = REGISTRY[offeringType].attributes;
+  const func = REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].attributes;
   return func ? func() : [];
 }
