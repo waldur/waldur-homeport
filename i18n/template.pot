@@ -5010,6 +5010,7 @@ msgstr ""
 msgid "Price per half-month"
 msgstr ""
 
+#: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/utils.ts
 msgid "Price per hour"
 msgstr ""
