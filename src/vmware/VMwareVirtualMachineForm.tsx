@@ -5,9 +5,10 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
 import { ENV } from '@waldur/core/services';
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, TextField, SelectField, NumberField } from '@waldur/form-react';
+import { FormContainer, StringField, TextField, SelectField, NumberField, FieldError } from '@waldur/form-react';
 import { StaticField } from '@waldur/form-react/StaticField';
 import { translate } from '@waldur/i18n';
+import { maxAmount, minAmount, parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
 import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
@@ -60,23 +61,49 @@ const initAttributes = props => {
   }, []);
 };
 
-const StaticDiskField = () => (
-  <Field
-    name="limits.disk"
-    component={fieldProps => fieldProps.input.value ? (
-      <StaticField
-        label={translate('Storage size in MiB')}
-        value={fieldProps.input.value}
-        labelClass="col-sm-3"
-        controlClass="col-sm-9"
-      />
-    ) : null}
-  />
-);
+const StaticDiskField = props => {
+  const diskValidator = React.useMemo(() =>
+    props.limits.max_disk ? maxAmount(props.limits.max_disk) : undefined,
+    [props.limits.max_disk],
+  );
 
-const FormComponent = props => {
+  return (
+    <Field
+      name="limits.disk"
+      validate={diskValidator}
+      component={fieldProps => fieldProps.input.value ? (
+        <>
+          <StaticField
+            label={translate('Storage size in MiB')}
+            value={fieldProps.input.value}
+            labelClass="col-sm-3"
+            controlClass="col-sm-9"
+          />
+        <FieldError error={fieldProps.meta.error}/>
+        </>
+      ) : null}
+    />
+  );
+};
+
+const minOne = minAmount(1);
+
+const FormComponent = (props: any) => {
   const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
   initAttributes(props);
+
+  const limits = props.data.limits;
+
+  const cpuValidator = React.useMemo(
+    () => limits.max_cpu ? [minOne, maxAmount(limits.max_cpu)] : minOne,
+    [limits.max_cpu]
+  );
+
+  const ramValidator = React.useMemo(
+    () => limits.max_ram ? [minOne, maxAmount(limits.max_ram)] : minOne,
+    [limits.max_ram]
+  );
+
   return (
     <form className="form-horizontal">
       <FormContainer
@@ -113,16 +140,28 @@ const FormComponent = props => {
         <NumberField
           label={translate('Number of cores in a VM')}
           name="limits.cpu"
+          min={1}
+          validate={cpuValidator}
+          parse={parseIntField}
+          format={formatIntField}
         />
         <NumberField
           label={translate('Number of CPU cores per socket')}
           name="attributes.cores_per_socket"
+          min={1}
+          validate={minOne}
+          parse={parseIntField}
+          format={formatIntField}
         />
         <NumberField
           label={translate('Memory size in MiB')}
           name="limits.ram"
+          validate={ramValidator}
+          min={1}
+          parse={parseIntField}
+          format={formatIntField}
         />
-        <StaticDiskField/>
+        <StaticDiskField limits={limits}/>
         <GuestOSField/>
         {advancedMode && props.data.clusters.length > 0 && (
           <SelectField
