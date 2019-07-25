@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { formValues } from 'redux-form';
+import { formValues, Field } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
 import { ENV } from '@waldur/core/services';
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, TextField, SelectField, NumberField } from '@waldur/form-react';
+import { FormContainer, StringField, TextField, SelectField, NumberField, FieldError } from '@waldur/form-react';
 import { StaticField } from '@waldur/form-react/StaticField';
 import { translate } from '@waldur/i18n';
+import { maxAmount, minAmount, parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
+import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
@@ -18,6 +20,7 @@ interface Template {
   cores: number;
   cores_per_socket: number;
   ram: number;
+  disk: number;
 }
 
 const GuestOSField = formValues<any>({template: 'attributes.template'})(props => props.template ? (
@@ -34,6 +37,178 @@ interface Props extends OfferingConfigurationFormProps {
   };
 }
 
+const initAttributes = props => {
+  React.useEffect(() => {
+    const attributes = {...props.initialAttributes};
+    const initialData: Record<string, any> = {attributes};
+    const activePlans = props.offering.plans.filter(plan => plan.archived === false);
+    if (props.plan) {
+      initialData.plan = props.plan;
+    } else if (activePlans.length > 0) {
+      initialData.plan = activePlans[0];
+    }
+    if (props.data.templates.length > 0) {
+      const template = props.data.templates[0];
+      initialData.attributes.template = template;
+      initialData.limits = {
+        cpu: template.cores,
+        ram: template.ram,
+        disk: template.disk,
+      };
+      initialData.attributes.cores_per_socket = template.cores_per_socket;
+    }
+    props.initialize(initialData);
+  }, []);
+};
+
+const StaticDiskField = props => {
+  const diskValidator = React.useMemo(() =>
+    props.limits.max_disk ? maxAmount(props.limits.max_disk) : undefined,
+    [props.limits.max_disk],
+  );
+
+  return (
+    <Field
+      name="limits.disk"
+      validate={diskValidator}
+      component={fieldProps => fieldProps.input.value ? (
+        <>
+          <StaticField
+            label={translate('Storage size in MiB')}
+            value={fieldProps.input.value}
+            labelClass="col-sm-3"
+            controlClass="col-sm-9"
+          />
+        <FieldError error={fieldProps.meta.error}/>
+        </>
+      ) : null}
+    />
+  );
+};
+
+const minOne = minAmount(1);
+
+const FormComponent = (props: any) => {
+  const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
+  initAttributes(props);
+
+  const limits = props.data.limits;
+
+  const cpuValidator = React.useMemo(
+    () => limits.max_cpu ? [minOne, maxAmount(limits.max_cpu)] : minOne,
+    [limits.max_cpu]
+  );
+
+  const ramValidator = React.useMemo(
+    () => limits.max_ram ? [minOne, maxAmount(limits.max_ram)] : minOne,
+    [limits.max_ram]
+  );
+
+  return (
+    <form className="form-horizontal">
+      <FormContainer
+        submitting={false}
+        labelClass="col-sm-3"
+        controlClass="col-sm-9">
+        <ProjectField/>
+        <StringField
+          label={translate('Name')}
+          name="attributes.name"
+          description={translate('This name will be visible in accounting data.')}
+          validate={required}
+          required={true}
+        />
+        <PlanField offering={props.offering}/>
+        {props.data.templates.length > 0 && (
+          <SelectField
+            label={translate('Template')}
+            name="attributes.template"
+            required={true}
+            clearable={false}
+            validate={required}
+            options={props.data.templates}
+            labelKey="name"
+            valueKey="url"
+            onChange={(value: Template) => {
+              props.change('limits.cpu', value.cores);
+              props.change('limits.ram', value.ram);
+              props.change('limits.disk', value.disk);
+              props.change('attributes.cores_per_socket', value.cores_per_socket);
+            }}
+          />
+        )}
+        <NumberField
+          label={translate('Number of cores in a VM')}
+          name="limits.cpu"
+          min={1}
+          validate={cpuValidator}
+          parse={parseIntField}
+          format={formatIntField}
+        />
+        <NumberField
+          label={translate('Number of CPU cores per socket')}
+          name="attributes.cores_per_socket"
+          min={1}
+          validate={minOne}
+          parse={parseIntField}
+          format={formatIntField}
+        />
+        <NumberField
+          label={translate('Memory size in MiB')}
+          name="limits.ram"
+          validate={ramValidator}
+          min={1}
+          parse={parseIntField}
+          format={formatIntField}
+        />
+        <StaticDiskField limits={limits}/>
+        <GuestOSField/>
+        {advancedMode && props.data.clusters.length > 0 && (
+          <SelectField
+            label={translate('Cluster')}
+            name="attributes.cluster"
+            options={props.data.clusters}
+            labelKey="name"
+            valueKey="url"
+          />
+        )}
+        {advancedMode && props.data.datastores.length > 0 && (
+          <SelectField
+            label={translate('Datastore')}
+            name="attributes.datastore"
+            options={props.data.datastores}
+            labelKey="name"
+            valueKey="url"
+          />
+        )}
+        {advancedMode && props.data.folders.length > 0 && (
+          <SelectField
+            label={translate('Folder')}
+            name="attributes.folder"
+            options={props.data.folders}
+            labelKey="name"
+            valueKey="url"
+          />
+        )}
+        {advancedMode && props.data.networks.length > 0  && (
+          <SelectField
+            label={translate('Networks')}
+            name="attributes.networks"
+            options={props.data.networks}
+            labelKey="name"
+            valueKey="url"
+            multi={true}
+          />
+        )}
+        <TextField
+          label={translate('Description')}
+          name="attributes.description"
+        />
+      </FormContainer>
+    </form>
+  );
+};
+
 export const VMwareVirtualMachineForm = connector((props: Props) => (
   <Query variables={props.variable} loader={loadFormOptions}>
     {({ loading, error, data }) => {
@@ -43,93 +218,7 @@ export const VMwareVirtualMachineForm = connector((props: Props) => (
       if (error) {
         return <span>{translate('Unable to load form options.')}</span>;
       }
-      const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
-      return (
-        <form className="form-horizontal">
-          <FormContainer
-            submitting={false}
-            labelClass="col-sm-3"
-            controlClass="col-sm-9">
-            <ProjectField/>
-            <StringField
-              label={translate('Name')}
-              name="attributes.name"
-              description={translate('This name will be visible in accounting data.')}
-              validate={required}
-              required={true}
-            />
-            <SelectField
-              label={translate('Template')}
-              name="attributes.template"
-              required={true}
-              clearable={false}
-              validate={required}
-              options={data.templates}
-              labelKey="name"
-              valueKey="url"
-              onChange={(value: Template) => {
-                props.change('attributes.cores', value.cores);
-                props.change('attributes.cores_per_socket', value.cores_per_socket);
-                props.change('attributes.ram', value.ram);
-              }}
-            />
-            <GuestOSField/>
-            <NumberField
-              label={translate('Number of cores in a VM')}
-              name="attributes.cores"
-            />
-            <NumberField
-              label={translate('Number of CPU cores per socket')}
-              name="attributes.cores_per_socket"
-            />
-            <NumberField
-              label={translate('Memory size in MiB')}
-              name="attributes.ram"
-            />
-            {advancedMode && data.clusters.length > 0 && (
-              <SelectField
-                label={translate('Cluster')}
-                name="attributes.cluster"
-                options={data.clusters}
-                labelKey="name"
-                valueKey="url"
-              />
-            )}
-            {advancedMode && data.datastores.length > 0 && (
-              <SelectField
-                label={translate('Datastore')}
-                name="attributes.datastore"
-                options={data.datastores}
-                labelKey="name"
-                valueKey="url"
-              />
-            )}
-            {advancedMode && data.folders.length > 0 && (
-              <SelectField
-                label={translate('Folder')}
-                name="attributes.folder"
-                options={data.folders}
-                labelKey="name"
-                valueKey="url"
-              />
-            )}
-            {advancedMode && data.networks.length > 0  && (
-              <SelectField
-                label={translate('Networks')}
-                name="attributes.networks"
-                options={data.networks}
-                labelKey="name"
-                valueKey="url"
-                multi={true}
-              />
-            )}
-            <TextField
-              label={translate('Description')}
-              name="attributes.description"
-            />
-          </FormContainer>
-        </form>
-      );
+      return <FormComponent {...props} data={data}/>;
     }}
   </Query>
 ));

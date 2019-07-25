@@ -7,10 +7,11 @@ interface NumberFieldProps extends FormField {
   min?: number | string;
   max?: number | string;
   unit?: string;
+  placeholder?: string;
 }
 
 export const NumberField = (props: NumberFieldProps) => {
-  const { input, label, validate, ...rest } = props;
+  const { input, label, validate, parse, format, ...rest } = props;
   const control = (
     <input
       {...props.input}

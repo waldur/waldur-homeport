@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, NumberField } from '@waldur/form-react';
+import { FormContainer, StringField, NumberField, SecretField } from '@waldur/form-react';
 
 export const VMwareForm = ({ translate, container }) => (
   <FormContainer {...container}>
@@ -17,7 +17,7 @@ export const VMwareForm = ({ translate, container }) => (
       required={true}
       validate={required}
     />
-    <StringField
+    <SecretField
       name="password"
       label={translate('Password')}
       required={true}

@@ -5,19 +5,19 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import ActionButton from '@waldur/table-react/ActionButton';
 
+import { UsageReportContext } from './types';
+
 // tslint:disable-next-line:variable-name
-const openResourceUsageDialog = (resource_uuid: string, offering_uuid: string) =>
+const openResourceUsageDialog = (resource_uuid: string, resource_name: string, offering_uuid: string) =>
   openModalDialog('marketplaceResourceCreateUsageDialog', {
-    resolve: {resource_uuid, offering_uuid},
+    resolve: {resource_uuid, resource_name, offering_uuid},
   });
 
-interface ResourceUsageButton {
-  offering_uuid: string;
-  resource_uuid: string;
+interface DispatchProps {
   openDialog(): void;
 }
 
-const PureResourceUsageButton = (props: ResourceUsageButton) => (
+const PureResourceUsageButton = (props: UsageReportContext & DispatchProps) => (
   <ActionButton
     title={translate('Report usage')}
     icon="fa fa-plus"
@@ -25,9 +25,13 @@ const PureResourceUsageButton = (props: ResourceUsageButton) => (
   />
 );
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, ownProps: UsageReportContext) => ({
   openDialog: () => dispatch(openResourceUsageDialog(
-    ownProps.resource_uuid, ownProps.offering_uuid)),
+    ownProps.resource_uuid,
+    ownProps.resource_name,
+    ownProps.offering_uuid)
+  ),
 });
 
-export const ResourceCreateUsageButton = connect(null, mapDispatchToProps)(PureResourceUsageButton);
+export const ResourceCreateUsageButton = connect<{}, DispatchProps, UsageReportContext>(
+  null, mapDispatchToProps)(PureResourceUsageButton);

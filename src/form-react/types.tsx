@@ -10,6 +10,7 @@ export interface FormField {
   tooltip?: ReactNode;
   labelClass?: string;
   controlClass?: string;
+  layout?: 'horizontal' | 'vertical';
   validate?: Validator | Validator[];
   disabled?: boolean;
   hideLabel?: boolean;
