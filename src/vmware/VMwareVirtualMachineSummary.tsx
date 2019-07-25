@@ -33,10 +33,6 @@ const PureVMwareVirtualMachineSummary = props => {
             label={translate('Datastore')}
             value={resource.datastore_name}
           />
-          <Field
-            label={translate('Networks')}
-            value={resource.networks.map(network => network.name).join(', ')}
-          />
         </>
       )}
     </>
