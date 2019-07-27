@@ -1360,6 +1360,10 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
+#: src/vmware/actions.ts
+msgid "Create Ethernet adapter"
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
 msgid "Create JupyterHub management"
 msgstr ""
@@ -1398,6 +1402,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 msgid "Create backup schedule for OpenStack instance"
+msgstr ""
+
+#: src/vmware/actions.ts
+msgid "Create disk"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
@@ -1822,7 +1830,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: src/vmware/module.js
+#: src/vmware/tabs.js
 msgid "Disks"
 msgstr ""
 
@@ -3343,6 +3351,8 @@ msgid "Logout failed"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/vmware/VMwarePortSummary.tsx
+#: src/vmware/vmware-virtual-machine-ports.js
 msgid "MAC address"
 msgstr ""
 
@@ -3658,6 +3668,7 @@ msgstr ""
 #: src/slurm/slurm-allocation-list.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
+#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Name"
 msgstr ""
 
@@ -3711,6 +3722,8 @@ msgid "Native name"
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/vmware/VMwarePortSummary.tsx
+#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Network"
 msgstr ""
 
@@ -3725,7 +3738,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#: src/vmware/VMwareVirtualMachineSummary.tsx
+#: src/vmware/tabs.js
 msgid "Networks"
 msgstr ""
 
@@ -3875,6 +3888,14 @@ msgstr ""
 
 #: src/payments/payment-list.js
 msgid "No payments yet"
+msgstr ""
+
+#: src/vmware/vmware-virtual-machine-ports.js
+msgid "No ports found matching filter."
+msgstr ""
+
+#: src/vmware/vmware-virtual-machine-ports.js
+msgid "No ports yet."
 msgstr ""
 
 #: src/providers/details/provider-price-list.js
@@ -6841,6 +6862,7 @@ msgstr ""
 #: src/slurm/slurm-allocation-list.js
 #: src/user/hooks/HooksList.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
+#: src/vmware/vmware-virtual-machine-ports.js
 msgid "State"
 msgstr ""
 
