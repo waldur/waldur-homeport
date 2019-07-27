@@ -3351,6 +3351,7 @@ msgid "Logout failed"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/vmware/VMwarePortSummary.tsx
 #: src/vmware/vmware-virtual-machine-ports.js
 msgid "MAC address"
 msgstr ""
@@ -3721,6 +3722,7 @@ msgid "Native name"
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/vmware/VMwarePortSummary.tsx
 #: src/vmware/vmware-virtual-machine-ports.js
 msgid "Network"
 msgstr ""
