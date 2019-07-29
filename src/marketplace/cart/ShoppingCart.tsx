@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
+import { BillingPeriod as BillingPeriodType} from '../types';
 import './ShoppingCart.scss';
 import { ShoppingCartItem } from './ShoppingCartItem';
 import * as actions from './store/actions';
@@ -16,7 +17,7 @@ import { OuterState } from './types';
 
 interface ShoppingCartProps {
   items: OrderItemResponse[];
-  maxUnit: 'month' | 'day';
+  maxUnit: BillingPeriodType;
   removeItem(uuid: string, project: string): void;
   isRemovingItem: boolean;
   termsOfServiceIsVisible?: boolean;
