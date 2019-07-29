@@ -63,7 +63,7 @@ const initAttributes = props => {
 
 const StaticDiskField = props => {
   const diskValidator = React.useMemo(() =>
-    props.limits.max_disk ? maxAmount(props.limits.max_disk) : undefined,
+    props.limits.max_disk ? maxAmount(props.limits.max_disk * 1024) : undefined,
     [props.limits.max_disk],
   );
 
@@ -74,8 +74,8 @@ const StaticDiskField = props => {
       component={fieldProps => fieldProps.input.value ? (
         <>
           <StaticField
-            label={translate('Storage size in MiB')}
-            value={fieldProps.input.value}
+            label={translate('Storage size in GiB')}
+            value={(Number(fieldProps.input.value) / 1024).toString()}
             labelClass="col-sm-3"
             controlClass="col-sm-9"
           />
@@ -100,7 +100,7 @@ const FormComponent = (props: any) => {
   );
 
   const ramValidator = React.useMemo(
-    () => limits.max_ram ? [minOne, maxAmount(limits.max_ram)] : minOne,
+    () => limits.max_ram ? [minOne, maxAmount(limits.max_ram * 1024)] : minAmount(1024),
     [limits.max_ram]
   );
 
@@ -154,12 +154,12 @@ const FormComponent = (props: any) => {
           format={formatIntField}
         />
         <NumberField
-          label={translate('Memory size in MiB')}
+          label={translate('Memory size in GiB')}
           name="limits.ram"
           validate={ramValidator}
           min={1}
-          parse={parseIntField}
-          format={formatIntField}
+          format={v => v ? v / 1024 : ''}
+          normalize={v => Number(v) * 1024}
         />
         <StaticDiskField limits={limits}/>
         <GuestOSField/>

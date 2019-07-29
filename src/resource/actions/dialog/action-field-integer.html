@@ -1,9 +1,22 @@
 <input
   ng-model="$ctrl.model[$ctrl.field.name]"
+  name="{{ ::$ctrl.field.name }}"
   type="number"
   id="action-{{ $ctrl.field.name }}"
-  min="{{ ::$ctrl.field.min_value }}"
-  max="{{ ::$ctrl.field.max_value }}"
+  min="{{ ::$ctrl.field.minValue }}"
+  max="{{ ::$ctrl.field.maxValue }}"
+  ng-min="{{ ::$ctrl.field.min_value - 1 }}"
+  ng-max="{{ ::$ctrl.field.max_value }}"
+  multiply-by="$ctrl.field.factor"
   placeholder="{{ ::$ctrl.field.min_value }}"
   class="form-control"
-  ng-required="$ctrl.field.required"/>
+  ng-required="$ctrl.field.required"
+/>
+
+<p class="help-block text-danger" ng-if="$ctrl.form[$ctrl.field.name].$error.min">
+  <span translate>Minimal valid value is</span> {{ $ctrl.minValue }} {{ ::$ctrl.field.units }}
+</p>
+
+<p class="help-block text-danger" ng-if="$ctrl.form[$ctrl.field.name].$error.max">
+  <span translate>Maximal valid value is</span> {{ $ctrl.maxValue }} {{ ::$ctrl.field.units }}
+</p>

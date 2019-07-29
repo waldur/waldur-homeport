@@ -36,12 +36,12 @@ export const VMwareForm = ({ translate, container }) => (
     <NumberField
       name="max_ram"
       label={translate('Maximum RAM for each VM')}
-      unit="MB"
+      unit="GB"
     />
     <NumberField
       name="max_disk"
       label={translate('Maximum capacity for each disk')}
-      unit="MB"
+      unit="GB"
     />
   </FormContainer>
 );
