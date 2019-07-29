@@ -14,9 +14,9 @@ interface CartIndicatorProps {
 }
 
 const PureCartIndicator = (props: CartIndicatorProps) =>
-  ['organization', 'project'].indexOf(props.workspace) !== -1  ? (
+props.workspace === 'project' ? (
   <NavbarIndicator
-    state={props.workspace === 'organization' ? 'marketplace-checkout-customer' : 'marketplace-checkout'}
+    state={'marketplace-checkout'}
     iconClass="fa fa-shopping-cart"
     labelClass="label label-warning"
     count={props.count}

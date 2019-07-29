@@ -55,16 +55,6 @@ export default function routes($stateProvider) {
       }
     })
 
-    .state('marketplace-checkout-customer', {
-      url: 'marketplace-checkout/',
-      template: '<marketplace-checkout></marketplace-checkout>',
-      parent: 'organization',
-      data: {
-        pageTitle: gettext('Marketplace checkout'),
-        feature: 'marketplace',
-      }
-    })
-
     .state('marketplace-offering', {
       url: 'marketplace-offering/:offering_uuid/',
       template: '<marketplace-offering></marketplace-offering>',
