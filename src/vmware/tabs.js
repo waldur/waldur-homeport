@@ -12,7 +12,7 @@ export function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_T
         component: 'vmwareVirtualMachineDisks'
       },
       ports: {
-        heading: gettext('Networks'),
+        heading: gettext('Network adapters'),
         component: 'vmwareVirtualMachinePorts'
       },
     })

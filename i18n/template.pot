@@ -3727,6 +3727,10 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
+#: src/vmware/tabs.js
+msgid "Network adapters"
+msgstr ""
+
 #: src/openstack/openstack-network/module.js
 msgid "Network has been updated."
 msgstr ""
@@ -3738,7 +3742,6 @@ msgstr ""
 #: src/openstack/openstack-subnet/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#: src/vmware/tabs.js
 msgid "Networks"
 msgstr ""
 
