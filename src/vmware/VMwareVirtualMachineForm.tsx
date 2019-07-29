@@ -52,8 +52,8 @@ const initAttributes = props => {
       initialData.attributes.template = template;
       initialData.limits = {
         cpu: template.cores,
-        ram: template.ram,
-        disk: template.disk,
+        ram: template.ram && template.ram / 1024,
+        disk: template.disk && template.disk / 1024,
       };
       initialData.attributes.cores_per_socket = template.cores_per_socket;
     }
@@ -74,7 +74,7 @@ const StaticDiskField = props => {
       component={fieldProps => fieldProps.input.value ? (
         <>
           <StaticField
-            label={translate('Storage size in MiB')}
+            label={translate('Storage size in GiB')}
             value={fieldProps.input.value}
             labelClass="col-sm-3"
             controlClass="col-sm-9"
@@ -92,7 +92,11 @@ const FormComponent = (props: any) => {
   const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
   initAttributes(props);
 
-  const limits = props.data.limits;
+  const limits = {
+    max_cpu: props.data.limits.max_cpu,
+    max_ram: props.data.limits.max_ram && props.data.limits.max_ram / 1024,
+    max_disk: props.data.limits.max_disk && props.data.limits.max_disk / 1024,
+  };
 
   const cpuValidator = React.useMemo(
     () => limits.max_cpu ? [minOne, maxAmount(limits.max_cpu)] : minOne,
@@ -154,12 +158,10 @@ const FormComponent = (props: any) => {
           format={formatIntField}
         />
         <NumberField
-          label={translate('Memory size in MiB')}
+          label={translate('Memory size in GiB')}
           name="limits.ram"
           validate={ramValidator}
           min={1}
-          parse={parseIntField}
-          format={formatIntField}
         />
         <StaticDiskField limits={limits}/>
         <GuestOSField/>
