@@ -52,8 +52,8 @@ const initAttributes = props => {
       initialData.attributes.template = template;
       initialData.limits = {
         cpu: template.cores,
-        ram: template.ram,
-        disk: template.disk,
+        ram: template.ram && template.ram / 1024,
+        disk: template.disk && template.disk / 1024,
       };
       initialData.attributes.cores_per_socket = template.cores_per_socket;
     }
@@ -63,7 +63,7 @@ const initAttributes = props => {
 
 const StaticDiskField = props => {
   const diskValidator = React.useMemo(() =>
-    props.limits.max_disk ? maxAmount(props.limits.max_disk * 1024) : undefined,
+    props.limits.max_disk ? maxAmount(props.limits.max_disk) : undefined,
     [props.limits.max_disk],
   );
 
@@ -75,7 +75,7 @@ const StaticDiskField = props => {
         <>
           <StaticField
             label={translate('Storage size in GiB')}
-            value={(Number(fieldProps.input.value) / 1024).toString()}
+            value={fieldProps.input.value}
             labelClass="col-sm-3"
             controlClass="col-sm-9"
           />
@@ -92,7 +92,11 @@ const FormComponent = (props: any) => {
   const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
   initAttributes(props);
 
-  const limits = props.data.limits;
+  const limits = {
+    max_cpu: props.data.limits.max_cpu,
+    max_ram: props.data.limits.max_ram && props.data.limits.max_ram / 1024,
+    max_disk: props.data.limits.max_disk && props.data.limits.max_disk / 1024,
+  };
 
   const cpuValidator = React.useMemo(
     () => limits.max_cpu ? [minOne, maxAmount(limits.max_cpu)] : minOne,
@@ -100,7 +104,7 @@ const FormComponent = (props: any) => {
   );
 
   const ramValidator = React.useMemo(
-    () => limits.max_ram ? [minOne, maxAmount(limits.max_ram * 1024)] : minAmount(1024),
+    () => limits.max_ram ? [minOne, maxAmount(limits.max_ram)] : minOne,
     [limits.max_ram]
   );
 
@@ -158,8 +162,6 @@ const FormComponent = (props: any) => {
           name="limits.ram"
           validate={ramValidator}
           min={1}
-          format={v => v ? v / 1024 : ''}
-          normalize={v => Number(v) * 1024}
         />
         <StaticDiskField limits={limits}/>
         <GuestOSField/>
