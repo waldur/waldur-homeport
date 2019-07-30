@@ -9,7 +9,6 @@ const serializer = ({
   datastore,
   folder,
   networks,
-  limits,
   // tslint:disable-next-line: trailing-comma
   ...rest
 }) => ({
@@ -18,12 +17,13 @@ const serializer = ({
   datastore: datastore && datastore.url,
   folder: folder && folder.url,
   networks: networks && networks.map(({ url }) => ({ url })),
-  limits: limits && {
-    cpu: limits.cpu,
-    ram: limits.ram && limits.ram * 1024,
-    disk: limits.disk && limits.disk * 1024,
-  },
   ...rest,
+});
+
+const limitSerializer = limits => limits && ({
+  cpu: limits.cpu,
+  ram: limits.ram && limits.ram * 1024,
+  disk: limits.disk && limits.disk * 1024,
 });
 
 registerOfferingType({
@@ -34,4 +34,5 @@ registerOfferingType({
   component: VMwareVirtualMachineForm,
   providerType: 'VMware',
   serializer,
+  limitSerializer,
 });
