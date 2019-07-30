@@ -11,6 +11,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   detailsComponent?: React.ComponentType<OrderItemDetailsProps>;
   checkoutSummaryComponent?: any;
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
+  limitSerializer?: (limit: Record<string, number>) => Record<string, number>;
   label: string;
   showOptions?: boolean;
   showComponents?: boolean;
@@ -40,6 +41,10 @@ export function getDetailsComponent(offeringType) {
 
 export function getFormSerializer(offeringType) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].serializer || (x => x);
+}
+
+export function getFormLimitSerializer(offeringType) {
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].limitSerializer || (x => x);
 }
 
 export function getCheckoutSummaryComponent(offeringType) {

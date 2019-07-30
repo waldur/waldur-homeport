@@ -62,7 +62,7 @@ function* addItem(action) {
     yield put(actions.setItems(items));
 
     yield put(showSuccess(translate('Item has been added to shopping cart.')));
-    yield put(stateGo('marketplace-checkout'));
+    yield put(stateGo('marketplace-checkout', {uuid: item.project_uuid}));
   } catch (error) {
     const errorMessage = `${translate('Unable to add item to shopping cart.')} ${format(error)}`;
     yield put(showError(errorMessage));
