@@ -135,8 +135,8 @@ const FormComponent = (props: any) => {
             valueKey="url"
             onChange={(value: Template) => {
               props.change('limits.cpu', value.cores);
-              props.change('limits.ram', value.ram);
-              props.change('limits.disk', value.disk);
+              props.change('limits.ram', value.ram / 1024);
+              props.change('limits.disk', value.disk / 1024);
               props.change('attributes.cores_per_socket', value.cores_per_socket);
             }}
           />
