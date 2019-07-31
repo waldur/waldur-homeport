@@ -10,6 +10,7 @@ import { VMwarePortSummary } from './VMwarePortSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import { actionsConfig } from './actions';
+import breadcrumbsConfig from './breadcrumbs';
 import { tabsConfig } from './tabs';
 
 export default module => {
@@ -18,9 +19,9 @@ export default module => {
   ResourceSummary.register('VMware.Port', VMwarePortSummary);
   module.config(tabsConfig);
   module.config(actionsConfig);
+  module.run(breadcrumbsConfig);
   module.service('vmwareDisksService', vmwareDisksService);
   module.service('vmwarePortsService', vmwarePortsService);
   module.component('vmwareVirtualMachineDisks', vmwareVirtualMachineDisks);
   module.component('vmwareVirtualMachinePorts', vmwareVirtualMachinePorts);
 };
-
