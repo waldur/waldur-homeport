@@ -12,6 +12,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   checkoutSummaryComponent?: any;
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
   limitSerializer?: (limit: Record<string, number>) => Record<string, number>;
+  limitParser?: (limit: Record<string, number>) => Record<string, number>;
   label: string;
   showOptions?: boolean;
   showComponents?: boolean;
@@ -45,6 +46,10 @@ export function getFormSerializer(offeringType) {
 
 export function getFormLimitSerializer(offeringType) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].limitSerializer || (x => x);
+}
+
+export function getFormLimitParser(offeringType) {
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].limitParser || (x => x);
 }
 
 export function getCheckoutSummaryComponent(offeringType) {
