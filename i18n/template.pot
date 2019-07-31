@@ -6735,6 +6735,10 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
+#: src/vmware/actions.ts
+msgid "Size in GiB"
+msgstr ""
+
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 msgid "Size name"

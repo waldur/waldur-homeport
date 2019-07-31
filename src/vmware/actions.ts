@@ -27,6 +27,11 @@ export function actionsConfig(ActionConfigurationProvider) {
       create_disk: {
         tab: 'disks',
         title: translate('Create disk'),
+        fields: {
+          size: {
+            help_text: gettext('Size in GiB'),
+          },
+        },
       },
       create_port: {
         tab: 'ports',
