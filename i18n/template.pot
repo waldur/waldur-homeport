@@ -1647,7 +1647,7 @@ msgid "Default availability zone for provisioned instances."
 msgstr ""
 
 #: src/vmware/VMwareForm.tsx
-msgid "Default cluster ID"
+msgid "Default cluster label"
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx

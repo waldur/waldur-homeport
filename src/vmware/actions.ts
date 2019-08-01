@@ -41,6 +41,11 @@ export function actionsConfig(ActionConfigurationProvider) {
       },
       update: {
         title: translate('Edit'),
+        fields: {
+          ram: {
+            help_text: gettext('Size in GiB'),
+          },
+        },
       },
       console: {
         name: 'console',
@@ -70,6 +75,7 @@ export function actionsConfig(ActionConfigurationProvider) {
         fields: {
           size: {
             resource_default_value: true,
+            help_text: gettext('Size in GiB'),
           },
         },
       },
