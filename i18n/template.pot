@@ -2497,6 +2497,10 @@ msgstr ""
 msgid "Guest OS"
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+msgid "Guest OS power state"
+msgstr ""
+
 #: src/navigation/header/intro-button.html
 msgid "Guide me"
 msgstr ""

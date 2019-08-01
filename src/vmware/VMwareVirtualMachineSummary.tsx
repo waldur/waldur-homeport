@@ -19,6 +19,10 @@ const PureVMwareVirtualMachineSummary = props => {
         label={translate('Guest OS')}
         value={resource.guest_os_name}
       />
+      <Field
+        label={translate('Guest OS power state')}
+        value={resource.guest_power_state}
+      />
       {advancedMode && (
         <>
           <Field
