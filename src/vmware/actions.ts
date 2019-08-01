@@ -17,6 +17,8 @@ export function actionsConfig(ActionConfigurationProvider) {
       'start',
       'stop',
       'reset',
+      'shutdown_guest',
+      'reboot_guest',
       'suspend',
       'destroy',
     ],
