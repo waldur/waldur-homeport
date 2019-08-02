@@ -2497,10 +2497,6 @@ msgstr ""
 msgid "Guest OS"
 msgstr ""
 
-#: src/vmware/VMwareVirtualMachineSummary.tsx
-msgid "Guest OS power state"
-msgstr ""
-
 #: src/navigation/header/intro-button.html
 msgid "Guide me"
 msgstr ""
@@ -4053,6 +4049,10 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Not known"
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+msgid "Not running"
 msgstr ""
 
 #: src/customer/AccountingRunningField.tsx
@@ -6118,6 +6118,10 @@ msgstr ""
 
 #: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "Run 'Find missing installed libraries' command to synchronize cloud broker state"
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+msgid "Running"
 msgstr ""
 
 #: src/customer/AccountingRunningField.tsx
@@ -8375,6 +8379,10 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "VMs"
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+msgid "VMware Tools"
 msgstr ""
 
 #: src/vmware/marketplace.ts

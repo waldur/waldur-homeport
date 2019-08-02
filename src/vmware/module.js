@@ -8,10 +8,15 @@ import { VMwareVirtualMachineSummary } from './VMwareVirtualMachineSummary';
 import { VMwareDiskSummary } from './VMwareDiskSummary';
 import { VMwarePortSummary } from './VMwarePortSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
+import { registerResourceTypeLabel } from '@waldur/resource/utils';
 
 import { actionsConfig } from './actions';
 import breadcrumbsConfig from './breadcrumbs';
 import { tabsConfig } from './tabs';
+
+registerResourceTypeLabel('VMware.VirtualMachine', 'vSphere Virtual Machine');
+registerResourceTypeLabel('VMware.Disk', 'VM Disk');
+registerResourceTypeLabel('VMware.Port', 'VM Virtual Adapter');
 
 export default module => {
   ResourceSummary.register('VMware.VirtualMachine', VMwareVirtualMachineSummary);
