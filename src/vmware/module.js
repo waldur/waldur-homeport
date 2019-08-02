@@ -16,7 +16,7 @@ import { tabsConfig } from './tabs';
 
 registerResourceTypeLabel('VMware.VirtualMachine', 'vSphere Virtual Machine');
 registerResourceTypeLabel('VMware.Disk', 'VM Disk');
-registerResourceTypeLabel('VMware.Port', 'VM Virtual Adapter');
+registerResourceTypeLabel('VMware.Port', 'VM Network Adapter');
 
 export default module => {
   ResourceSummary.register('VMware.VirtualMachine', VMwareVirtualMachineSummary);
