@@ -88,6 +88,14 @@ const StaticDiskField = props => {
 
 const minOne = minAmount(1);
 
+const coresPerSocketValidator = (coresPerSocket, values) => {
+  const cores = values.limits.cpu || 1;
+  if (cores % coresPerSocket !== 0) {
+    return translate('Number of CPU cores should be multiple of cores per socket.');
+  }
+  return minOne(coresPerSocket);
+};
+
 const FormComponent = (props: any) => {
   const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
   initAttributes(props);
@@ -153,7 +161,7 @@ const FormComponent = (props: any) => {
           label={translate('Number of CPU cores per socket')}
           name="attributes.cores_per_socket"
           min={1}
-          validate={minOne}
+          validate={coresPerSocketValidator}
           parse={parseIntField}
           format={formatIntField}
         />

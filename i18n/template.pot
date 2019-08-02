@@ -4110,6 +4110,10 @@ msgid "Number of CPU cores per socket"
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Number of CPU cores should be multiple of cores per socket."
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Number of cores in a VM"
 msgstr ""
 
