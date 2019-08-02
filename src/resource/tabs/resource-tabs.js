@@ -18,7 +18,7 @@ const resourceTabs = {
       const config = this.registry[this.resource.resource_type] || this.defaults;
       this.tabs = config.order.map(tab => angular.extend({name: tab}, config.options[tab])).filter(
         tab => this.features.isVisible(tab.feature),
-      );
+      ).filter(tab => !tab.isVisible || tab.isVisible(this.resource));
       if (this.tabs.length === 0) {
         return;
       }
