@@ -6,6 +6,7 @@ import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getResource, getOffering } from '@waldur/marketplace/common/api';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
+import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
@@ -21,13 +22,14 @@ async function loadData(resourceId: string) {
   const resource = await getResource(resourceId);
   const offering = await getOffering(resource.offering_uuid);
   const plan = resource.plan && offering.plans.find(item => item.url === resource.plan);
+  const limitParser = getFormLimitParser(offering.type);
   return {
     offering,
     plan: plan && {
       ...plan,
       unit_price: typeof plan.unit_price === 'string' ? parseFloat(plan.unit_price) : plan.unit_price,
     },
-    ...combinePrices(plan, resource.limits, offering),
+    ...combinePrices(plan, limitParser(resource.limits), offering),
   };
 }
 

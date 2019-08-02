@@ -10,7 +10,16 @@ import { Schedule } from '@waldur/resource/types';
 export const getResourceIcon = type =>
   getServiceIcon(type.split('.')[0]);
 
+const RESOURCE_TYPE_LABELS = {};
+
+export function registerResourceTypeLabel(resourceType: string, label: string) {
+  RESOURCE_TYPE_LABELS[resourceType] = label;
+}
+
 export const formatResourceType = resource => {
+  if (RESOURCE_TYPE_LABELS[resource.resource_type]) {
+    return RESOURCE_TYPE_LABELS[resource.resource_type];
+  }
   const parts = resource.resource_type.split('.');
   const service = getTypeDisplay(parts[0]);
   return service + ' ' + parts[1];

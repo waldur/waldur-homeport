@@ -24,8 +24,8 @@ export const VMwareForm = ({ translate, container }) => (
       validate={required}
     />
     <StringField
-      name="default_cluster_id"
-      label={translate('Default cluster ID')}
+      name="default_cluster_label"
+      label={translate('Default cluster label')}
       required={true}
       validate={required}
     />
@@ -36,12 +36,16 @@ export const VMwareForm = ({ translate, container }) => (
     <NumberField
       name="max_ram"
       label={translate('Maximum RAM for each VM')}
-      unit="MB"
+      unit="GB"
+      format={v => v ? v / 1024 : ''}
+      normalize={v => Number(v) * 1024}
     />
     <NumberField
       name="max_disk"
       label={translate('Maximum capacity for each disk')}
-      unit="MB"
+      unit="GB"
+      format={v => v ? v / 1024 : ''}
+      normalize={v => Number(v) * 1024}
     />
   </FormContainer>
 );

@@ -19,6 +19,11 @@ const PureVMwareVirtualMachineSummary = props => {
         label={translate('Guest OS')}
         value={resource.guest_os_name}
       />
+      <Field
+        label={translate('VMware Tools')}
+        value={['UNAVAILABLE', 'NOT_RUNNING'].includes(resource.guest_power_state)
+          ? translate('Not running') : translate('Running')}
+      />
       {advancedMode && (
         <>
           <Field

@@ -13,9 +13,12 @@ export function actionsConfig(ActionConfigurationProvider) {
       'console',
       'update',
       'create_disk',
+      'create_port',
       'start',
       'stop',
       'reset',
+      'shutdown_guest',
+      'reboot_guest',
       'suspend',
       'destroy',
     ],
@@ -25,9 +28,24 @@ export function actionsConfig(ActionConfigurationProvider) {
       },
       create_disk: {
         tab: 'disks',
+        title: translate('Create disk'),
+        fields: {
+          size: {
+            help_text: gettext('Size in GiB'),
+          },
+        },
+      },
+      create_port: {
+        tab: 'ports',
+        title: translate('Create Ethernet adapter'),
       },
       update: {
         title: translate('Edit'),
+        fields: {
+          ram: {
+            help_text: gettext('Size in GiB'),
+          },
+        },
       },
       console: {
         name: 'console',
@@ -50,12 +68,24 @@ export function actionsConfig(ActionConfigurationProvider) {
 
   ActionConfigurationProvider.register('VMware.Disk', {
     options: {
+      pull: {
+        title: gettext('Synchronise'),
+      },
       extend: {
         fields: {
           size: {
             resource_default_value: true,
+            help_text: gettext('Size in GiB'),
           },
         },
+      },
+    },
+  });
+
+  ActionConfigurationProvider.register('VMware.Port', {
+    options: {
+      pull: {
+        title: gettext('Synchronise'),
       },
     },
   });

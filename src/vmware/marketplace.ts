@@ -20,6 +20,18 @@ const serializer = ({
   ...rest,
 });
 
+const limitSerializer = limits => limits && ({
+  cpu: limits.cpu,
+  ram: limits.ram && limits.ram * 1024,
+  disk: limits.disk && limits.disk * 1024,
+});
+
+const limitParser = limits => limits && ({
+  cpu: limits.cpu,
+  ram: limits.ram && limits.ram / 1024,
+  disk: limits.disk && limits.disk / 1024,
+});
+
 registerOfferingType({
   type: 'VMware.VirtualMachine',
   get label() {
@@ -28,4 +40,6 @@ registerOfferingType({
   component: VMwareVirtualMachineForm,
   providerType: 'VMware',
   serializer,
+  limitSerializer,
+  limitParser,
 });

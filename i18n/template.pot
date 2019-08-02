@@ -1360,6 +1360,10 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
+#: src/vmware/actions.ts
+msgid "Create Ethernet adapter"
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
 msgid "Create JupyterHub management"
 msgstr ""
@@ -1398,6 +1402,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 msgid "Create backup schedule for OpenStack instance"
+msgstr ""
+
+#: src/vmware/actions.ts
+msgid "Create disk"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
@@ -1639,7 +1647,7 @@ msgid "Default availability zone for provisioned instances."
 msgstr ""
 
 #: src/vmware/VMwareForm.tsx
-msgid "Default cluster ID"
+msgid "Default cluster label"
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
@@ -1822,7 +1830,8 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: src/vmware/module.js
+#: src/vmware/breadcrumbs.js
+#: src/vmware/tabs.js
 msgid "Disks"
 msgstr ""
 
@@ -3343,6 +3352,8 @@ msgid "Logout failed"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/vmware/VMwarePortSummary.tsx
+#: src/vmware/vmware-virtual-machine-ports.js
 msgid "MAC address"
 msgstr ""
 
@@ -3432,6 +3443,7 @@ msgid "Maximal number of resources"
 msgstr ""
 
 #: src/form/appstore-field-integer.html
+#: src/resource/actions/dialog/action-field-integer.html
 msgid "Maximal valid value is"
 msgstr ""
 
@@ -3482,7 +3494,7 @@ msgid "Memory per vCore"
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
-msgid "Memory size in MiB"
+msgid "Memory size in GiB"
 msgstr ""
 
 #: src/events/BaseEventsList.tsx
@@ -3509,6 +3521,7 @@ msgid "Min storage"
 msgstr ""
 
 #: src/form/appstore-field-integer.html
+#: src/resource/actions/dialog/action-field-integer.html
 msgid "Minimal valid value is"
 msgstr ""
 
@@ -3658,6 +3671,7 @@ msgstr ""
 #: src/slurm/slurm-allocation-list.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
+#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Name"
 msgstr ""
 
@@ -3711,7 +3725,14 @@ msgid "Native name"
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/vmware/VMwarePortSummary.tsx
+#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Network"
+msgstr ""
+
+#: src/vmware/breadcrumbs.js
+#: src/vmware/tabs.js
+msgid "Network adapters"
 msgstr ""
 
 #: src/openstack/openstack-network/module.js
@@ -3725,7 +3746,6 @@ msgstr ""
 #: src/openstack/openstack-subnet/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Networks"
 msgstr ""
 
@@ -3877,6 +3897,14 @@ msgstr ""
 msgid "No payments yet"
 msgstr ""
 
+#: src/vmware/vmware-virtual-machine-ports.js
+msgid "No ports found matching filter."
+msgstr ""
+
+#: src/vmware/vmware-virtual-machine-ports.js
+msgid "No ports yet."
+msgstr ""
+
 #: src/providers/details/provider-price-list.js
 msgid "No price list items found matching filter."
 msgstr ""
@@ -4023,6 +4051,10 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+msgid "Not running"
+msgstr ""
+
 #: src/customer/AccountingRunningField.tsx
 msgid "Not running accounting"
 msgstr ""
@@ -4075,6 +4107,10 @@ msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Number of CPU cores per socket"
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineForm.tsx
+msgid "Number of CPU cores should be multiple of cores per socket."
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -6088,6 +6124,10 @@ msgstr ""
 msgid "Run 'Find missing installed libraries' command to synchronize cloud broker state"
 msgstr ""
 
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+msgid "Running"
+msgstr ""
+
 #: src/customer/AccountingRunningField.tsx
 msgid "Running accounting"
 msgstr ""
@@ -6709,6 +6749,10 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
+#: src/vmware/actions.ts
+msgid "Size in GiB"
+msgstr ""
+
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 msgid "Size name"
@@ -6841,6 +6885,7 @@ msgstr ""
 #: src/slurm/slurm-allocation-list.js
 #: src/user/hooks/HooksList.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
+#: src/vmware/vmware-virtual-machine-ports.js
 msgid "State"
 msgstr ""
 
@@ -6900,7 +6945,7 @@ msgid "Storage size"
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
-msgid "Storage size in MiB"
+msgid "Storage size in GiB"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
@@ -8338,6 +8383,10 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "VMs"
+msgstr ""
+
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+msgid "VMware Tools"
 msgstr ""
 
 #: src/vmware/marketplace.ts

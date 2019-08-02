@@ -12,6 +12,7 @@ const TABS = {
     heading: gettext('Order items'),
     component: 'marketplaceResourceOrderItems',
     feature: 'marketplace',
+    isVisible: resource => Boolean(resource.marketplace_resource_uuid),
   },
 };
 

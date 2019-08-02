@@ -62,12 +62,7 @@ function* addItem(action) {
     yield put(actions.setItems(items));
 
     yield put(showSuccess(translate('Item has been added to shopping cart.')));
-    const workspace: WorkspaceType = yield select(getWorkspace);
-    if (workspace === 'organization') {
-      yield put(stateGo('marketplace-checkout-customer'));
-    } else {
-      yield put(stateGo('marketplace-checkout'));
-    }
+    yield put(stateGo('marketplace-checkout', {uuid: item.project_uuid}));
   } catch (error) {
     const errorMessage = `${translate('Unable to add item to shopping cart.')} ${format(error)}`;
     yield put(showError(errorMessage));
@@ -100,12 +95,7 @@ function* updateItem(action) {
     yield put(actions.setItems(items));
 
     yield put(showSuccess(translate('Shopping cart item has been updated.')));
-    const workspace: WorkspaceType = yield select(getWorkspace);
-    if (workspace === 'organization') {
-      yield put(stateGo('marketplace-checkout-customer'));
-    } else {
-      yield put(stateGo('marketplace-checkout'));
-    }
+    yield put(stateGo('marketplace-checkout', {uuid: item.project_uuid}));
   } catch (error) {
     const errorMessage = `${translate('Unable to update shopping cart item.')} ${format(error)}`;
     yield put(showError(errorMessage));
