@@ -102,6 +102,7 @@ const FormComponent = (props: any) => {
 
   const limits = {
     max_cpu: props.data.limits.max_cpu,
+    max_cores_per_socket: props.data.limits.max_cores_per_socket,
     max_ram: props.data.limits.max_ram && props.data.limits.max_ram / 1024,
     max_disk: props.data.limits.max_disk && props.data.limits.max_disk / 1024,
   };
@@ -109,6 +110,17 @@ const FormComponent = (props: any) => {
   const cpuValidator = React.useMemo(
     () => limits.max_cpu ? [minOne, maxAmount(limits.max_cpu)] : minOne,
     [limits.max_cpu]
+  );
+
+  const coresPerSocketLimitValidator = React.useMemo(
+    () => {
+      const validators = [minOne, coresPerSocketValidator];
+      if (limits.max_cores_per_socket) {
+        validators.push(maxAmount(limits.max_cores_per_socket));
+      }
+      return validators;
+    },
+    [limits.max_cores_per_socket]
   );
 
   const ramValidator = React.useMemo(
@@ -161,7 +173,7 @@ const FormComponent = (props: any) => {
           label={translate('Number of CPU cores per socket')}
           name="attributes.cores_per_socket"
           min={1}
-          validate={coresPerSocketValidator}
+          validate={coresPerSocketLimitValidator}
           parse={parseIntField}
           format={formatIntField}
         />
