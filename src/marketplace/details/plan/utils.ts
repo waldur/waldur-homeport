@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { offeringSelector } from '@waldur/marketplace/details/selectors';
 import { Limits } from '@waldur/marketplace/details/types';
 import { Plan } from '@waldur/marketplace/types';
@@ -125,5 +126,6 @@ const getLimits = (state, props) => {
 export const pricesSelector = (state, props): PricesData => {
   const plan: Plan = getPlan(state, props);
   const limits: Limits = getLimits(state, props);
-  return combinePrices(plan, limits, props.offering);
+  const limitParser = getFormLimitParser(props.offering.type);
+  return combinePrices(plan, limitParser(limits), props.offering);
 };
