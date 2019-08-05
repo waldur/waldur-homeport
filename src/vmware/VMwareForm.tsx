@@ -47,5 +47,12 @@ export const VMwareForm = ({ translate, container }) => (
       format={v => v ? v / 1024 : ''}
       normalize={v => Number(v) * 1024}
     />
+    <NumberField
+      name="max_disk_total"
+      label={translate('Maximum total size of the disk space per VM')}
+      unit="GB"
+      format={v => v ? v / 1024 : ''}
+      normalize={v => Number(v) * 1024}
+    />
   </FormContainer>
 );

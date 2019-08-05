@@ -3467,6 +3467,10 @@ msgstr ""
 msgid "Maximum total"
 msgstr ""
 
+#: src/vmware/VMwareForm.tsx
+msgid "Maximum total size of the disk space per VM"
+msgstr ""
+
 #: src/freeipa/freeipa-account-create.html
 msgid "Maximum username length with mandatory username prefix is 32 characters."
 msgstr ""

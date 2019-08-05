@@ -62,9 +62,17 @@ const initAttributes = props => {
 };
 
 const StaticDiskField = props => {
-  const diskValidator = React.useMemo(() =>
-    props.limits.max_disk ? maxAmount(props.limits.max_disk) : undefined,
-    [props.limits.max_disk],
+  const diskValidator = React.useMemo(() => {
+    const validators = [];
+    if (props.limits.max_disk) {
+      validators.push(maxAmount(props.limits.max_disk));
+    }
+    if (props.limits.max_disk_total) {
+      validators.push(maxAmount(props.limits.max_disk_total));
+    }
+    return validators;
+  },
+    [props.limits.max_disk, props.limits.max_disk_total],
   );
 
   return (
@@ -105,6 +113,7 @@ const FormComponent = (props: any) => {
     max_cores_per_socket: props.data.limits.max_cores_per_socket,
     max_ram: props.data.limits.max_ram && props.data.limits.max_ram / 1024,
     max_disk: props.data.limits.max_disk && props.data.limits.max_disk / 1024,
+    max_disk_total: props.data.limits.max_disk_total && props.data.limits.max_disk_total / 1024,
   };
 
   const cpuValidator = React.useMemo(
