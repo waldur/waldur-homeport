@@ -97,7 +97,7 @@ const StaticDiskField = props => {
 const minOne = minAmount(1);
 
 const coresPerSocketValidator = (coresPerSocket, values) => {
-  const cores = values.limits.cpu || 1;
+  const cores = (values.limits && values.limits.cpu) || 1;
   if (cores % coresPerSocket !== 0) {
     return translate('Number of CPU cores should be multiple of cores per socket.');
   }
