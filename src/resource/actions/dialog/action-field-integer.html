@@ -5,10 +5,10 @@
   id="action-{{ $ctrl.field.name }}"
   min="{{ ::$ctrl.field.minValue }}"
   max="{{ ::$ctrl.field.maxValue }}"
-  ng-min="{{ ::$ctrl.field.min_value - 1 }}"
-  ng-max="{{ ::$ctrl.field.max_value }}"
+  ng-min="{{ ::$ctrl.minValue - 1 }}"
+  ng-max="{{ ::$ctrl.field.maxValue }}"
   multiply-by="$ctrl.field.factor"
-  placeholder="{{ ::$ctrl.field.min_value }}"
+  placeholder="{{ ::$ctrl.minValue }}"
   class="form-control"
   ng-required="$ctrl.field.required"
 />
