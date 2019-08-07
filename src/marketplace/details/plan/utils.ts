@@ -116,8 +116,9 @@ const getPlan = (state, props) => {
 };
 
 const getLimits = (state, props) => {
+  const limitParser = getFormLimitParser(props.offering.type);
   if (props.viewMode) {
-    return props.orderItem.limits;
+    return limitParser(props.orderItem.limits);
   } else {
     return offeringSelector(state, 'limits');
   }
@@ -126,6 +127,5 @@ const getLimits = (state, props) => {
 export const pricesSelector = (state, props): PricesData => {
   const plan: Plan = getPlan(state, props);
   const limits: Limits = getLimits(state, props);
-  const limitParser = getFormLimitParser(props.offering.type);
-  return combinePrices(plan, limitParser(limits), props.offering);
+  return combinePrices(plan, limits, props.offering);
 };
