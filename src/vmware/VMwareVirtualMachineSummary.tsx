@@ -10,9 +10,8 @@ import { VMwareVirtualMachine } from './types';
 const ToolsField = (props: ResourceSummaryProps<VMwareVirtualMachine>) => (
   <Field
     label={props.translate('VMware Tools')}
-    value={(['UNAVAILABLE', 'NOT_RUNNING'].includes(props.resource.guest_power_state) ||
-            ['Creation Scheduled', 'Creating'].includes(props.resource.state))
-      ? props.translate('Not running') : props.translate('Running')}
+    value={props.resource.guest_power_state === 'Running' && props.resource.state === 'OK'
+      ? props.translate('Running') : props.translate('Not running')}
   />
 );
 
