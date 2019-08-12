@@ -25,6 +25,7 @@ class IssueRegistrationController {
               ncUtilsFlash,
               usersService,
               issueUsersService,
+              issuePrioritiesService,
               customersService,
               projectsService,
               resourcesService,
@@ -41,6 +42,7 @@ class IssueRegistrationController {
     this.ncUtilsFlash = ncUtilsFlash;
     this.usersService = usersService;
     this.issueUsersService = issueUsersService;
+    this.issuePrioritiesService = issuePrioritiesService;
     this.customersService = customersService;
     this.projectsService = projectsService;
     this.resourcesService = resourcesService;
@@ -50,6 +52,12 @@ class IssueRegistrationController {
   }
 
   init() {
+    this.usersService.getCurrentUser().then(user => {
+      this.currentUser = user;
+    });
+    this.issuePrioritiesService.getAll().then(priorities => {
+      this.priorities = priorities;
+    });
     this.$scope.$watch(() => this.issue.caller, () => {
       this.issue.customer = null;
       this.refreshCustomers();
@@ -190,6 +198,9 @@ class IssueRegistrationController {
     }
     if (this.issue.resource) {
       issue.resource = this.issue.resource.url;
+    }
+    if (this.issue.priority) {
+      issue.priority = this.issue.priority.name;
     }
     this.saving = true;
     return this.service.createIssue(issue).then(issue => {
