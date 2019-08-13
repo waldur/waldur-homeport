@@ -7495,7 +7495,6 @@ msgstr ""
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/paypal/paypal-invoices-list.js
 msgid "Total"
 msgstr ""
