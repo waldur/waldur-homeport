@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { ComponentEditRow } from '@waldur/marketplace/details/plan/ComponentEditRow';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
@@ -54,19 +53,6 @@ const UsageRows = (props: {periods: string[], components: Component[], viewMode:
   );
 };
 
-const TotalRow = props => (
-  <tr>
-    <td colSpan={3}>
-      {translate('Total')}
-    </td>
-    {props.totalPeriods.map((price, index) => (
-      <td key={index}>
-        {defaultCurrency(price)}
-      </td>
-    ))}
-  </tr>
-);
-
 export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDetailsTableProps) => {
   if (props.components.length === 0) {
     return null;
@@ -91,7 +77,6 @@ export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDe
           <tbody>
             {fixedRows.length > 0 && <FixedRows components={fixedRows}/>}
             {usageWithLimits.length > 0 && <UsageRows components={usageWithLimits} periods={props.periods} viewMode={props.viewMode}/>}
-            {props.components.length > 1 && <TotalRow totalPeriods={props.totalPeriods}/>}
           </tbody>
         </table>
       )}
