@@ -62,9 +62,17 @@ const initAttributes = props => {
 };
 
 const StaticDiskField = props => {
-  const diskValidator = React.useMemo(() =>
-    props.limits.max_disk ? maxAmount(props.limits.max_disk) : undefined,
-    [props.limits.max_disk],
+  const diskValidator = React.useMemo(() => {
+    const validators = [];
+    if (props.limits.max_disk) {
+      validators.push(maxAmount(props.limits.max_disk));
+    }
+    if (props.limits.max_disk_total) {
+      validators.push(maxAmount(props.limits.max_disk_total));
+    }
+    return validators;
+  },
+    [props.limits.max_disk, props.limits.max_disk_total],
   );
 
   return (
@@ -89,7 +97,7 @@ const StaticDiskField = props => {
 const minOne = minAmount(1);
 
 const coresPerSocketValidator = (coresPerSocket, values) => {
-  const cores = values.limits.cpu || 1;
+  const cores = (values.limits && values.limits.cpu) || 1;
   if (cores % coresPerSocket !== 0) {
     return translate('Number of CPU cores should be multiple of cores per socket.');
   }
@@ -102,13 +110,26 @@ const FormComponent = (props: any) => {
 
   const limits = {
     max_cpu: props.data.limits.max_cpu,
+    max_cores_per_socket: props.data.limits.max_cores_per_socket,
     max_ram: props.data.limits.max_ram && props.data.limits.max_ram / 1024,
     max_disk: props.data.limits.max_disk && props.data.limits.max_disk / 1024,
+    max_disk_total: props.data.limits.max_disk_total && props.data.limits.max_disk_total / 1024,
   };
 
   const cpuValidator = React.useMemo(
     () => limits.max_cpu ? [minOne, maxAmount(limits.max_cpu)] : minOne,
     [limits.max_cpu]
+  );
+
+  const coresPerSocketLimitValidator = React.useMemo(
+    () => {
+      const validators = [minOne, coresPerSocketValidator];
+      if (limits.max_cores_per_socket) {
+        validators.push(maxAmount(limits.max_cores_per_socket));
+      }
+      return validators;
+    },
+    [limits.max_cores_per_socket]
   );
 
   const ramValidator = React.useMemo(
@@ -161,7 +182,7 @@ const FormComponent = (props: any) => {
           label={translate('Number of CPU cores per socket')}
           name="attributes.cores_per_socket"
           min={1}
-          validate={coresPerSocketValidator}
+          validate={coresPerSocketLimitValidator}
           parse={parseIntField}
           format={formatIntField}
         />

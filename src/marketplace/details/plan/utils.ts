@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { offeringSelector } from '@waldur/marketplace/details/selectors';
 import { Limits } from '@waldur/marketplace/details/types';
 import { Plan } from '@waldur/marketplace/types';
@@ -115,8 +116,9 @@ const getPlan = (state, props) => {
 };
 
 const getLimits = (state, props) => {
+  const limitParser = getFormLimitParser(props.offering.type);
   if (props.viewMode) {
-    return props.orderItem.limits;
+    return limitParser(props.orderItem.limits);
   } else {
     return offeringSelector(state, 'limits');
   }

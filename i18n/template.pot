@@ -3467,6 +3467,10 @@ msgstr ""
 msgid "Maximum total"
 msgstr ""
 
+#: src/vmware/VMwareForm.tsx
+msgid "Maximum total size of the disk space per VM"
+msgstr ""
+
 #: src/freeipa/freeipa-account-create.html
 msgid "Maximum username length with mandatory username prefix is 32 characters."
 msgstr ""
@@ -5091,6 +5095,7 @@ msgstr ""
 msgid "Print record"
 msgstr ""
 
+#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
@@ -6390,6 +6395,10 @@ msgstr ""
 #: src/issues/create/issue-registration.html
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 msgid "Select organization..."
+msgstr ""
+
+#: src/issues/create/issue-registration.html
+msgid "Select priority"
 msgstr ""
 
 #: src/appstore/dialog/appstore-project-selector.html
