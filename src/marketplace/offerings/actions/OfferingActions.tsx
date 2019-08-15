@@ -24,7 +24,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
       handler: () => {
         dispatchProps.updateOfferingState(ownProps.row, 'activate');
       },
-      visible: [DRAFT, PAUSED].includes(ownProps.row.state),
+      visible: [DRAFT, PAUSED].includes(ownProps.row.state) && stateProps.user.is_staff,
     },
     {
       label: translate('Pause'),
