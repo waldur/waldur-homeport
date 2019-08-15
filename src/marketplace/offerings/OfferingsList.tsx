@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';
 import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
@@ -60,14 +60,26 @@ export const TableComponent = props => {
   );
 };
 
+const mapPropsToFilter = props => {
+  const filter: Record<string, string | boolean> = {
+    billable: true,
+    shared: true,
+  };
+  if (props.customer) {
+    filter.customer_uuid = props.customer.uuid;
+  }
+  if (props.filter) {
+    if (props.filter.state) {
+      filter.state = props.filter.state.map(option => option.value);
+    }
+  }
+  return filter;
+};
+
 export const TableOptions = {
   table: TABLE_NAME,
   fetchData: createFetcher('marketplace-offerings'),
-  mapPropsToFilter: props => ({
-    customer_uuid: props.customer.uuid,
-    billable: true,
-    shared: true,
-  }),
+  mapPropsToFilter,
   exportRow: (row: Offering) => [
     row.name,
     row.native_name,
@@ -94,6 +106,7 @@ const mapStateToProps = state => ({
   customer: getCustomer(state),
   actionsDisabled: !isOwnerOrStaff(state),
   showOfferingCreateButton: showOfferingCreateButton(state),
+  filter: getFormValues('OfferingsFilter')(state),
 });
 
 const enhance = compose(
@@ -102,6 +115,4 @@ const enhance = compose(
   withTranslation,
 );
 
-export const VendorOfferingsList = enhance(TableComponent);
-
-export default connectAngularComponent(VendorOfferingsList);
+export const OfferingsList = enhance(TableComponent);
