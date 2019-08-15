@@ -1,4 +1,4 @@
-import marketplaceVendorOfferings from './OfferingsList';
+import marketplaceVendorOfferings from './OfferingsListContainer';
 import marketplaceMyOfferings from './MyOfferingsList';
 import marketplaceOfferingCreate from './create/OfferingCreateContainer';
 import marketplaceOfferingUpdate from './update/OfferingUpdateContainer';
