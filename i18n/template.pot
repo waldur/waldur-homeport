@@ -614,6 +614,10 @@ msgstr ""
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
+#: src/marketplace/offerings/ArticleCodeField.tsx
+msgid "Article code"
+msgstr ""
+
 #: src/openstack/openstack-tenant/actions/assign-package-dialog.html
 msgid "Assign"
 msgstr ""
@@ -5133,6 +5137,10 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
+#: src/marketplace/offerings/ProductCodeField.tsx
+msgid "Product code"
+msgstr ""
+
 #: src/marketplace/details/OfferingDetails.tsx
 msgid "Product configuration"
 msgstr ""
@@ -7136,6 +7144,14 @@ msgstr ""
 
 #: src/customer/dashboard/api.ts
 msgid "Team size"
+msgstr ""
+
+#: src/marketplace/offerings/ArticleCodeField.tsx
+msgid "Technical code used by accounting software."
+msgstr ""
+
+#: src/marketplace/offerings/ProductCodeField.tsx
+msgid "Technical name intended for integration and automated reporting."
 msgstr ""
 
 #: src/marketplace/offerings/InternalNameField.tsx

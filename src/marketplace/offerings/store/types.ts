@@ -9,6 +9,8 @@ export interface PlanFormData {
   prices: {[key: string]: number};
   quotas: {[key: string]: number};
   description?: string;
+  article_code?: string;
+  product_code?: string;
   uuid?: string;
 }
 
@@ -57,6 +59,8 @@ export interface PlanRequest {
   quotas?: {[key: string]: number};
   prices?: {[key: string]: number};
   description?: string;
+  article_code?: string;
+  product_code?: string;
   uuid?: string;
 }
 

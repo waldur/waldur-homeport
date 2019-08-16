@@ -19,8 +19,6 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
         <th>{/* Name */}</th>
         <th>
           {props.translate('Amount')}
-          {' '}
-          <span className="text-danger"> *</span>
         </th>
         <th>
           {props.translate('Price')}
