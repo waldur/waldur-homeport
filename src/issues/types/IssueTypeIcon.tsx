@@ -14,10 +14,10 @@ export const IssueTypeIcon = props => {
   return (
     <Tooltip
       id="issue-type-icon"
-      label={translate(type)}>
+      label={translate(props.type)}>
       <i className={classNames('fa', iconClass, textClass)}/>
     </Tooltip>
   );
 };
 
-export default connectAngularComponent(IssueTypeIcon);
+export default connectAngularComponent(IssueTypeIcon, ['type']);

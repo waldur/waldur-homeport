@@ -1713,8 +1713,8 @@ msgstr ""
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesShortListComponent.tsx
 #: src/issues/list/issues-list.js
-#: src/issues/list/issues-short-list.html
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -3179,9 +3179,9 @@ msgid "Kept until"
 msgstr ""
 
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesShortListComponent.tsx
 #: src/issues/list/constants.js
 #: src/issues/list/issues-list.js
-#: src/issues/list/issues-short-list.html
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/providers/details/provider-price-list.js
@@ -4363,7 +4363,7 @@ msgstr ""
 msgid "OpenStack volume"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssueRow.tsx
 msgid "Opened by"
 msgstr ""
 
@@ -5569,7 +5569,7 @@ msgstr ""
 msgid "Record period"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesShortListComponent.tsx
 #: src/issues/workspace/issues-activity-stream.html
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/offering/offering-details.html
@@ -5765,7 +5765,7 @@ msgstr ""
 msgid "Report usage"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesShortListComponent.tsx
 msgid "Reported by me"
 msgstr ""
 
@@ -6317,7 +6317,7 @@ msgstr ""
 msgid "Security groups details"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesShortListComponent.tsx
 #: src/issues/workspace/issues-activity-stream.html
 msgid "See all"
 msgstr ""
@@ -7379,7 +7379,7 @@ msgstr ""
 msgid "There are no providers yet."
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesShortListComponent.tsx
 msgid "There are no requests yet."
 msgstr ""
 
@@ -7462,8 +7462,8 @@ msgid "This website uses cookies to ensure you get the best experience on our we
 msgstr ""
 
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesShortListComponent.tsx
 #: src/issues/list/issues-list.js
-#: src/issues/list/issues-short-list.html
 msgid "Time in progress"
 msgstr ""
 
@@ -8109,7 +8109,7 @@ msgstr ""
 msgid "Update security groups"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesShortListComponent.tsx
 msgid "Updated"
 msgstr ""
 
@@ -8973,7 +8973,7 @@ msgstr ""
 msgid "events"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssueRow.tsx
 msgid "from"
 msgstr ""
 
