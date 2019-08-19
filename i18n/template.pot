@@ -176,6 +176,7 @@ msgstr ""
 msgid "Activating"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Active"
 msgstr ""
@@ -573,6 +574,10 @@ msgstr ""
 msgid "Archive"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingStateFilter.tsx
+msgid "Archived"
+msgstr ""
+
 #: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
 msgstr ""
@@ -607,6 +612,10 @@ msgstr ""
 
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure? This action cannot be undone."
+msgstr ""
+
+#: src/marketplace/offerings/ArticleCodeField.tsx
+msgid "Article code"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/assign-package-dialog.html
@@ -1893,6 +1902,7 @@ msgstr ""
 msgid "Download order PDF file"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/paypal/paypal-invoices-list.js
 msgid "Draft"
 msgstr ""
@@ -4621,6 +4631,10 @@ msgstr ""
 msgid "Pause"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingStateFilter.tsx
+msgid "Paused"
+msgstr ""
+
 #: src/paypal/paypal-invoice-actions.html
 msgid "Pay invoice"
 msgstr ""
@@ -5121,6 +5135,10 @@ msgstr ""
 
 #: src/table/responsive-table.js
 msgid "Processing..."
+msgstr ""
+
+#: src/marketplace/offerings/ProductCodeField.tsx
+msgid "Product code"
 msgstr ""
 
 #: src/marketplace/details/OfferingDetails.tsx
@@ -6464,6 +6482,7 @@ msgstr ""
 msgid "Select state"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Select state..."
@@ -6857,6 +6876,7 @@ msgstr ""
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
 #: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/orders/Order.tsx
@@ -7124,6 +7144,14 @@ msgstr ""
 
 #: src/customer/dashboard/api.ts
 msgid "Team size"
+msgstr ""
+
+#: src/marketplace/offerings/ArticleCodeField.tsx
+msgid "Technical code used by accounting software."
+msgstr ""
+
+#: src/marketplace/offerings/ProductCodeField.tsx
+msgid "Technical name intended for integration and automated reporting."
 msgstr ""
 
 #: src/marketplace/offerings/InternalNameField.tsx
@@ -7495,7 +7523,6 @@ msgstr ""
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/paypal/paypal-invoices-list.js
 msgid "Total"
 msgstr ""

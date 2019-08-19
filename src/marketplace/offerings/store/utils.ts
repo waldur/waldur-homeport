@@ -20,6 +20,8 @@ const formatPlan = (plan: PlanFormData, fixedComponents: string[]): PlanRequest 
     name: plan.name,
     unit: plan.unit.value,
     unit_price: plan.unit_price,
+    article_code: plan.article_code,
+    product_code: plan.product_code,
   };
   if (plan.prices) {
     result.prices = plan.prices;

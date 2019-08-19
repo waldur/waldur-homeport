@@ -1,7 +1,9 @@
 import * as React from 'react';
 
+import { ArticleCodeField } from '../ArticleCodeField';
 import { DisplayNameField } from '../DisplayNameField';
 import { InternalNameField } from '../InternalNameField';
+import { ProductCodeField } from '../ProductCodeField';
 import { ComponentAccountingTypeField } from './ComponentAccountingTypeField';
 import { ComponentLimit } from './ComponentLimit';
 import { ComponentMeasuredUnitField } from './ComponentMeasuredUnitField';
@@ -20,6 +22,8 @@ export const ComponentForm = (props: Props) => (
       component={props.component}
       removeOfferingQuotas={props.removeOfferingQuotas}
     />
+    <ArticleCodeField name={`${props.component}.article_code`}/>
+    <ProductCodeField name={`${props.component}.product_code`}/>
     <ComponentLimit component={props.component}/>
   </>
 );
