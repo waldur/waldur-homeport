@@ -1356,6 +1356,7 @@ msgstr ""
 #: src/freeipa/freeipa-account-create.html
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/list/IssueCreateButton.tsx
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/offering/appstore-offering.html
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
@@ -6512,6 +6513,10 @@ msgstr ""
 msgid "Select tenant..."
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+msgid "Select type..."
+msgstr ""
+
 #: src/team/user-selector.html
 msgid "Select user..."
 msgstr ""
@@ -7231,6 +7236,7 @@ msgstr ""
 msgid "Tenant user username"
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/terminate/TerminateAction.ts
 #: src/offering/actions/TerminateAction.ts
 msgid "Terminate"
@@ -7582,6 +7588,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
@@ -8067,6 +8074,7 @@ msgstr ""
 #: src/customer/details/customer-policies.html
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/offering/actions/UpdateAction.ts
 #: src/user/hooks/HookUpdateButton.tsx
 #: src/user/hooks/hook-details.html
