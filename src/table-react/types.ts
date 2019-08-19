@@ -41,6 +41,7 @@ export interface Column<RowType = Entity> {
   render: React.ComponentType<{row: RowType}>;
   className?: string;
   orderField?: string;
+  visible?: boolean;
 }
 
 export interface Pagination {

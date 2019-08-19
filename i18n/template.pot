@@ -628,6 +628,7 @@ msgstr ""
 
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
+#: src/issues/list/IssuesList.tsx
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssuesList.tsx
 msgid "Assigned to"
@@ -981,6 +982,7 @@ msgstr ""
 
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
+#: src/issues/list/IssuesList.tsx
 #: src/issues/list/constants.js
 #: src/issues/list/issues-list.js
 msgid "Caller"
@@ -1347,9 +1349,9 @@ msgstr ""
 #: src/appstore/appstore-store.html
 #: src/azure/sql/CreateDatabaseAction.ts
 #: src/customer/create/CustomerCreatePrompt.tsx
-#: src/customer/workspace/customer-issues.js
 #: src/freeipa/freeipa-account-create.html
 #: src/issues/create/issue-create-dialog.js
+#: src/issues/list/IssueCreateButton.tsx
 #: src/offering/appstore-offering.html
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
@@ -1471,6 +1473,7 @@ msgstr ""
 #: src/billing/billing-utils.js
 #: src/customer/CustomerList.tsx
 #: src/issues/issue-detail.html
+#: src/issues/list/IssuesList.tsx
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/jira/project/jira-projects-list.js
@@ -1704,6 +1707,7 @@ msgstr ""
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
+#: src/issues/list/IssuesList.tsx
 #: src/issues/list/issues-list.js
 #: src/issues/list/issues-short-list.html
 #: src/jira/issue/IssueCreateDialog.tsx
@@ -3169,6 +3173,7 @@ msgstr ""
 msgid "Kept until"
 msgstr ""
 
+#: src/issues/list/IssuesList.tsx
 #: src/issues/list/constants.js
 #: src/issues/list/issues-list.js
 #: src/issues/list/issues-short-list.html
@@ -4422,6 +4427,7 @@ msgstr ""
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
+#: src/issues/list/IssuesList.tsx
 #: src/issues/list/constants.js
 #: src/issues/list/issues-list.js
 #: src/resource/list/resource-global-list.js
@@ -5755,6 +5761,7 @@ msgid "Reported by me"
 msgstr ""
 
 #: src/issues/issue-detail.html
+#: src/issues/list/IssuesList.tsx
 #: src/issues/list/constants.js
 #: src/issues/list/issues-list.js
 msgid "Reporter"
@@ -6606,6 +6613,7 @@ msgstr ""
 
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
+#: src/issues/list/IssuesList.tsx
 #: src/issues/list/constants.js
 #: src/issues/list/issues-list.js
 msgid "Service type"
@@ -6912,6 +6920,7 @@ msgstr ""
 
 #: src/invitations/invitations-list.js
 #: src/issues/issue-detail.html
+#: src/issues/list/IssuesList.tsx
 #: src/issues/list/constants.js
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssueSummary.tsx
@@ -7430,6 +7439,7 @@ msgstr ""
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
+#: src/issues/list/IssuesList.tsx
 #: src/issues/list/issues-list.js
 #: src/issues/list/issues-short-list.html
 msgid "Time in progress"
@@ -7454,6 +7464,7 @@ msgstr ""
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
+#: src/issues/list/IssuesList.tsx
 #: src/issues/list/issues-list.js
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -9010,6 +9021,10 @@ msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "support"
+msgstr ""
+
+#: src/issues/list/IssuesList.tsx
+msgid "support requests"
 msgstr ""
 
 #: src/user/support/utils.ts
