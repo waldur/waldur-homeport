@@ -12,8 +12,6 @@ export default issueList;
 
 // @ngInject
 function IssueListController(
-  ISSUE_ICONS,
-  ISSUE_TEXT_CLASSES,
   baseControllerListClass,
   usersService,
   issuesService,
