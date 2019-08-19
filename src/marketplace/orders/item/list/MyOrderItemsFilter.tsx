@@ -9,6 +9,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { OrderStateFilter } from './OrderStateFilter';
+import { OrderTypeFilter } from './OrderTypeFilter';
 
 interface StateProps {
   customer: Customer;
@@ -18,6 +19,7 @@ const PureMyOrderItemsFilter = (props: StateProps) => (
   <Row>
     <ProjectFilter customer_uuid={props.customer.uuid}/>
     <OrderStateFilter/>
+    <OrderTypeFilter/>
   </Row>
 );
 

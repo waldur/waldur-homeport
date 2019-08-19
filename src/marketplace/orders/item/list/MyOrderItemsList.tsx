@@ -61,6 +61,8 @@ const TableComponent = props => {
       {...props}
       placeholderComponent={<OrderItemslistTablePlaceholder />}
       columns={columns}
+      initialSorting={{field: 'created', mode: 'desc'}}
+      showPageSizeSelector={true}
       verboseName={translate('Order items')}
       enableExport={true}
     />
@@ -75,6 +77,9 @@ const mapPropsToFilter = props => {
   if (props.filter) {
     if (props.filter.state) {
       filter.state = props.filter.state.value;
+    }
+    if (props.filter.type) {
+      filter.type = props.filter.type.value;
     }
     if (props.filter.project) {
       filter.project_uuid = props.filter.project.uuid;
