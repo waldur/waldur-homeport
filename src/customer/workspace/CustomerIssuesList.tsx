@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -13,6 +14,8 @@ const mapStateToProps = createSelector(
   }),
 );
 
-const CustomerIssuesList = connect(mapStateToProps)(IssuesList);
+const CustomerIssuesListComponent = connect(mapStateToProps)(IssuesList);
+
+const CustomerIssuesList = () => <CustomerIssuesListComponent hiddenColumns={['customer']}/>;
 
 export default connectAngularComponent(CustomerIssuesList);

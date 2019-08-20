@@ -52,7 +52,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.list', {
       url: 'list/',
-      template: '<issues-list-filtered></issues-list-filtered>',
+      template: '<div class="ibox"><div class="ibox-content"><issues-list filter="{}"></issues-list></div></div>',
       data: {
         pageTitle: gettext('Support requests'),
         feature: 'support'
