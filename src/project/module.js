@@ -7,7 +7,7 @@ import projectPolicies from './project-policies';
 import ProviderProjectsService from './project-providers-service';
 import projectProviders from './project-providers';
 import projectDialog from './project-dialog';
-import projectIssues from './project-issues';
+import projectIssues from './ProjectIssuesList';
 import projectEvents from './ProjectEventsList';
 import projectsList from './ProjectsList';
 import projectTeam from './project-team';

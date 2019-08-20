@@ -13,11 +13,15 @@ import { getUser } from '@waldur/workspace/selectors';
 import { IssueTypeIcon } from '../types/IssueTypeIcon';
 import { IssueCreateButton } from './IssueCreateButton';
 
-interface IssueTableProps extends TableProps {
-  supportOrStaff: boolean;
-  filterColumns(cols: Column[]): Column[];
+interface OwnProps {
   hiddenColumns?: string[];
   scope?: Record<string, any>;
+  filter?: Record<string, any>;
+}
+
+interface IssueTableProps extends TableProps, OwnProps {
+  supportOrStaff: boolean;
+  filterColumns(cols: Column[]): Column[];
 }
 
 export const TableComponent: React.SFC<IssueTableProps> = props => {
@@ -57,7 +61,7 @@ export const TableComponent: React.SFC<IssueTableProps> = props => {
     {
       title: translate('Service type'),
       render: ({ row }) => row.resource_type || 'N/A',
-      visible: supportOrStaff,
+      visible: supportOrStaff && !hiddenColumns.includes('resource_type'),
     },
     {
       title: translate('Organization'),
@@ -111,11 +115,56 @@ TableComponent.defaultProps = {
   hiddenColumns: [],
 };
 
+const exportRow = (row, props) => {
+  const {supportOrStaff, hiddenColumns} = props;
+  const result = [
+    row.key || 'N/A',
+    row.status || 'N/A',
+    row.summary,
+    row.description,
+  ];
+  if (supportOrStaff && !hiddenColumns.includes('resource_type')) {
+    result.push(row.resource_type || 'N/A');
+  }
+  if (!hiddenColumns.includes('customer')) {
+    result.push(row.customer_name || 'N/A');
+  }
+  result.push(row.caller_full_name || 'N/A');
+  if (supportOrStaff) {
+    result.push(row.reporter_name || 'N/A');
+  }
+  if (supportOrStaff) {
+    result.push(row.assignee_name || 'N/A');
+  }
+  result.push(formatDate(row.created));
+  result.push(formatRelative(row.created));
+  return result;
+};
+
+const exportFields = props => {
+  const {supportOrStaff, hiddenColumns} = props;
+  return [
+    translate('Key'),
+    translate('Status'),
+    translate('Title'),
+    translate('Description'),
+    supportOrStaff && !hiddenColumns.includes('resource_type') && translate('Service type'),
+    !hiddenColumns.includes('customer') && translate('Organization'),
+    translate('Caller'),
+    supportOrStaff && translate('Reporter'),
+    supportOrStaff && translate('Assigned to'),
+    translate('Created'),
+    supportOrStaff && translate('Time in progress'),
+  ].filter(label => label);
+};
+
 const TableOptions = {
   table: 'issuesList',
   fetchData: createFetcher('support-issues'),
   queryField: 'summary',
   mapPropsToFilter: props => props.filter,
+  exportRow,
+  exportFields,
 };
 
 const mapStateToProps = state => ({
@@ -124,6 +173,6 @@ const mapStateToProps = state => ({
 
 const connector = connect(mapStateToProps);
 
-export const IssuesList = connectTable(TableOptions)(connector(TableComponent));
+export const IssuesList = connector(connectTable(TableOptions)(TableComponent)) as React.ComponentType<OwnProps>;
 
-export default connectAngularComponent(IssuesList);
+export default connectAngularComponent(IssuesList, ['filter']);
