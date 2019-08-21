@@ -4608,6 +4608,10 @@ msgstr ""
 msgid "Pause"
 msgstr ""
 
+#: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
+msgid "Pause offering"
+msgstr ""
+
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 msgid "Paused"
 msgstr ""
@@ -4809,6 +4813,10 @@ msgstr ""
 
 #: src/marketplace/details/plan/ComponentEditRow.tsx
 msgid "Please enter estimated maximum usage in the rows below:"
+msgstr ""
+
+#: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
+msgid "Please enter reason why offering has been paused."
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -6963,6 +6971,7 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/digitalocean/droplet-resize.html
+#: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx

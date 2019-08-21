@@ -10,11 +10,12 @@ export const setStep = (step: OfferingStep) => ({
   },
 });
 
-export const updateOfferingState = (offering: Offering, stateAction: string) => ({
+export const updateOfferingState = (offering: Offering, stateAction: string, reason?: string) => ({
   type: constants.UPDATE_OFFERING_STATE,
   payload: {
     offering,
     stateAction,
+    reason,
   },
 });
 

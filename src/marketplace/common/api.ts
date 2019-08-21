@@ -94,8 +94,9 @@ export const getProjectList = (params?: {}) =>
 export const getCustomer = (id: string) =>
   getById<Customer>('/customers/', id);
 
-export const updateOfferingState = (offeringUuid, action) =>
-  post(`/marketplace-offerings/${offeringUuid}/${action}/`).then(response => response.data);
+export const updateOfferingState = (offeringUuid, action, reason) =>
+  post(`/marketplace-offerings/${offeringUuid}/${action}/`,
+  reason && {paused_reason: reason}).then(response => response.data);
 
 export const getServiceProviderList = (params?: {}) =>
   getList<ServiceProvider>('/marketplace-service-providers/', params);
