@@ -53,6 +53,25 @@ function* handleSwitchPlan(action) {
   }
 }
 
+function* handleChangeLimits(action) {
+  const { marketplace_resource_uuid, resource_uuid, resource_type, limits } = action.payload;
+  try {
+    yield call(api.changeLimits, marketplace_resource_uuid, limits);
+    yield put(showSuccess(translate('Resource limits change request has been submitted.')));
+    yield put(constants.changeLimits.success());
+    yield put(closeModalDialog());
+    yield put(stateGo('resources.details', {
+      uuid: resource_uuid,
+      resource_type,
+      tab: 'orderItems',
+    }));
+  } catch (error) {
+    const errorMessage = `${translate('Unable to submit limits change request.')} ${format(error)}`;
+    yield put(showError(errorMessage));
+    yield put(constants.changeLimits.success());
+  }
+}
+
 function* handleTerminateResource(action) {
   const { marketplace_resource_uuid, resource_uuid, resource_type } = action.payload;
   try {
@@ -84,6 +103,7 @@ function* handlePeriodChange(action) {
 export default function*() {
   yield takeEvery(constants.submitUsage.REQUEST, handleSubmitUsage);
   yield takeEvery(constants.switchPlan.REQUEST, handleSwitchPlan);
+  yield takeEvery(constants.changeLimits.REQUEST, handleChangeLimits);
   yield takeEvery(constants.terminateResource.REQUEST, handleTerminateResource);
   yield takeEvery(constants.PERIOD_CHANGED, handlePeriodChange);
 }

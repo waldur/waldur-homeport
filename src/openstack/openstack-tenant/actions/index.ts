@@ -1,3 +1,4 @@
+import changeLimitsAction from '@waldur/marketplace/resources/change-limits/ChangeLimitsAction';
 import changePlanAction from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
 import terminateAction from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { createPullAction } from '@waldur/resource/actions/base';
@@ -21,6 +22,7 @@ export default [
   assignPackageAction,
   changePackageAction,
   changePlanAction,
+  changeLimitsAction,
   requestCustomFlavorAction,
   createNetworkAction,
   createSecurityGroupAction,
