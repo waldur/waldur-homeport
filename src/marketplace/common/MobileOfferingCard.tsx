@@ -1,3 +1,4 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
@@ -10,7 +11,7 @@ interface MobileOfferingCardProps {
 }
 
 export const MobileOfferingCard = (props: MobileOfferingCardProps) => (
-  <tr>
+  <tr className={classNames({disabled: props.offering.state !== 'Active'})}>
     <td className="img-md">
       <OfferingLink offering_uuid={props.offering.uuid}>
         <OfferingLogo src={props.offering.thumbnail}/>
