@@ -112,6 +112,7 @@ export interface Offering {
   created?: string;
   shared?: boolean;
   billable?: boolean;
+  paused_reason?: string;
 }
 
 export interface Screenshot {

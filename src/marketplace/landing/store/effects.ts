@@ -39,6 +39,7 @@ function* getOfferings() {
     'customer_name',
     'customer_uuid',
     'state',
+    'paused_reason',
   ];
   const params = {
     page_size: 6,
