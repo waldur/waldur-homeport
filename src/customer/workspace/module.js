@@ -1,6 +1,6 @@
 import customerWorkspace from './customer-workspace';
 import { CustomerWorkspaceController } from './customer-workspace';
-import customerIssues from './customer-issues';
+import customerIssues from './CustomerIssuesList';
 import customerEvents from './CustomerEventsList';
 import customerTeam from './customer-team';
 

@@ -11,6 +11,7 @@ import { ProviderAutocomplete } from '@waldur/marketplace/orders/ProviderAutocom
 import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
 
 import { OrderStateFilter } from './OrderStateFilter';
+import { OrderTypeFilter } from './OrderTypeFilter';
 
 interface OwnProps {
   showOfferingFilter?: boolean;
@@ -34,6 +35,7 @@ const PureOrderItemsFilter = (props: OwnProps & StateProps) => (
       <ProviderAutocomplete/>
     )}
     <OrderStateFilter/>
+    <OrderTypeFilter/>
   </Row>
 );
 

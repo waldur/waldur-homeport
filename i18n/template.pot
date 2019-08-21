@@ -410,7 +410,6 @@ msgstr ""
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
-#: src/issues/list/constants.js
 msgid "Affected resource"
 msgstr ""
 
@@ -544,7 +543,6 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: src/issues/list/issues-list-filtered.html
 #: src/resource/list/resource-global-list-filtered.html
 msgid "Apply filters"
 msgstr ""
@@ -632,13 +630,9 @@ msgstr ""
 
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
-#: src/issues/list/issues-list.js
+#: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 msgid "Assigned to"
-msgstr ""
-
-#: src/issues/list/constants.js
-msgid "Assignee"
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
@@ -985,8 +979,7 @@ msgstr ""
 
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
-#: src/issues/list/constants.js
-#: src/issues/list/issues-list.js
+#: src/issues/list/IssuesList.tsx
 msgid "Caller"
 msgstr ""
 
@@ -1351,9 +1344,10 @@ msgstr ""
 #: src/appstore/appstore-store.html
 #: src/azure/sql/CreateDatabaseAction.ts
 #: src/customer/create/CustomerCreatePrompt.tsx
-#: src/customer/workspace/customer-issues.js
 #: src/freeipa/freeipa-account-create.html
 #: src/issues/create/issue-create-dialog.js
+#: src/issues/list/IssueCreateButton.tsx
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/offering/appstore-offering.html
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
@@ -1362,9 +1356,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
-#: src/project/project-issues.js
 #: src/resource/list/resources-list.js
-#: src/resource/tabs/resource-issues.js
 #: src/user/hooks/hook-details.html
 msgid "Create"
 msgstr ""
@@ -1475,7 +1467,7 @@ msgstr ""
 #: src/billing/billing-utils.js
 #: src/customer/CustomerList.tsx
 #: src/issues/issue-detail.html
-#: src/issues/list/issues-list.js
+#: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -1708,8 +1700,8 @@ msgstr ""
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
-#: src/issues/list/issues-list.js
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesShortListComponent.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -3173,9 +3165,8 @@ msgstr ""
 msgid "Kept until"
 msgstr ""
 
-#: src/issues/list/constants.js
-#: src/issues/list/issues-list.js
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesShortListComponent.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/providers/details/provider-price-list.js
@@ -4016,14 +4007,6 @@ msgstr ""
 msgid "No subnets yet."
 msgstr ""
 
-#: src/issues/list/issues-list.js
-msgid "No support requests found matching filter."
-msgstr ""
-
-#: src/issues/list/issues-list.js
-msgid "No support requests yet."
-msgstr ""
-
 #: src/customer/popover/customer-users-details-list.js
 msgid "No users found matching filter."
 msgstr ""
@@ -4357,7 +4340,7 @@ msgstr ""
 msgid "OpenStack volume"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssueRow.tsx
 msgid "Opened by"
 msgstr ""
 
@@ -4426,8 +4409,7 @@ msgstr ""
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
-#: src/issues/list/constants.js
-#: src/issues/list/issues-list.js
+#: src/issues/list/IssuesList.tsx
 #: src/resource/list/resource-global-list.js
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -4440,10 +4422,6 @@ msgstr ""
 
 #: src/customer/details/customer-manage.html
 msgid "Organization actions"
-msgstr ""
-
-#: src/issues/list/constants.js
-msgid "Organization code"
 msgstr ""
 
 #: src/customer/details/customer-delete.js
@@ -4471,7 +4449,6 @@ msgstr ""
 msgid "Organization logo"
 msgstr ""
 
-#: src/issues/list/constants.js
 #: src/user/list/CustomerPermissions.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Organization name"
@@ -5153,7 +5130,6 @@ msgstr ""
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
-#: src/issues/list/constants.js
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
@@ -5229,7 +5205,6 @@ msgstr ""
 msgid "Project manager cannot edit users with same role."
 msgstr ""
 
-#: src/issues/list/constants.js
 #: src/project/ProjectNameField.tsx
 #: src/providers/details/provider-project-link-quotas.html
 #: src/team/add-team-member.html
@@ -5562,7 +5537,7 @@ msgstr ""
 msgid "Record period"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesShortListComponent.tsx
 #: src/issues/workspace/issues-activity-stream.html
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/offering/offering-details.html
@@ -5758,13 +5733,12 @@ msgstr ""
 msgid "Report usage"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesShortListComponent.tsx
 msgid "Reported by me"
 msgstr ""
 
 #: src/issues/issue-detail.html
-#: src/issues/list/constants.js
-#: src/issues/list/issues-list.js
+#: src/issues/list/IssuesList.tsx
 msgid "Reporter"
 msgstr ""
 
@@ -5854,7 +5828,6 @@ msgstr ""
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
-#: src/issues/list/constants.js
 #: src/jira/issue/IssueCreateDialog.tsx
 msgid "Request type"
 msgstr ""
@@ -6309,7 +6282,7 @@ msgstr ""
 msgid "Security groups details"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesShortListComponent.tsx
 #: src/issues/workspace/issues-activity-stream.html
 msgid "See all"
 msgstr ""
@@ -6505,6 +6478,10 @@ msgstr ""
 msgid "Select tenant..."
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+msgid "Select type..."
+msgstr ""
+
 #: src/team/user-selector.html
 msgid "Select user..."
 msgstr ""
@@ -6614,8 +6591,7 @@ msgstr ""
 
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
-#: src/issues/list/constants.js
-#: src/issues/list/issues-list.js
+#: src/issues/list/IssuesList.tsx
 msgid "Service type"
 msgstr ""
 
@@ -6920,8 +6896,7 @@ msgstr ""
 
 #: src/invitations/invitations-list.js
 #: src/issues/issue-detail.html
-#: src/issues/list/constants.js
-#: src/issues/list/issues-list.js
+#: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/marketplace/offerings/details/OfferingBookingTab.tsx
@@ -7222,6 +7197,7 @@ msgstr ""
 msgid "Tenant user username"
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/terminate/TerminateAction.ts
 #: src/offering/actions/TerminateAction.ts
 msgid "Terminate"
@@ -7364,7 +7340,7 @@ msgstr ""
 msgid "There are no providers yet."
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesShortListComponent.tsx
 msgid "There are no requests yet."
 msgstr ""
 
@@ -7446,8 +7422,8 @@ msgstr ""
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
-#: src/issues/list/issues-list.js
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesShortListComponent.tsx
 msgid "Time in progress"
 msgstr ""
 
@@ -7470,7 +7446,7 @@ msgstr ""
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/issues/list/issues-list.js
+#: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/user/keys/KeysList.tsx
@@ -7571,6 +7547,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
@@ -8056,6 +8033,7 @@ msgstr ""
 #: src/customer/details/customer-policies.html
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/offering/actions/UpdateAction.ts
 #: src/user/hooks/HookUpdateButton.tsx
 #: src/user/hooks/hook-details.html
@@ -8090,7 +8068,7 @@ msgstr ""
 msgid "Update security groups"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssuesShortListComponent.tsx
 msgid "Updated"
 msgstr ""
 
@@ -8954,7 +8932,7 @@ msgstr ""
 msgid "events"
 msgstr ""
 
-#: src/issues/list/issues-short-list.html
+#: src/issues/list/IssueRow.tsx
 msgid "from"
 msgstr ""
 
@@ -9026,6 +9004,10 @@ msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "support"
+msgstr ""
+
+#: src/issues/list/IssuesList.tsx
+msgid "support requests"
 msgstr ""
 
 #: src/user/support/utils.ts

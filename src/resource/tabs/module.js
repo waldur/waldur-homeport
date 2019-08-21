@@ -3,7 +3,7 @@ import resourceTabs from './resource-tabs';
 import ResourceTabsConfiguration from './resource-tabs-configuration';
 import { DEFAULT_RESOURCE_TABS, DEFAULT_SUBRESOURCE_TABS } from './constants';
 import resourceEvents from './ResourceEvents';
-import resourceIssues from './resource-issues';
+import resourceIssues from './ResourceIssuesList';
 
 export default module => {
   module.directive('resourceTab', resourceTab);

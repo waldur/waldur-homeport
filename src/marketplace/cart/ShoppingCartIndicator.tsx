@@ -3,19 +3,18 @@ import { connect } from 'react-redux';
 
 import { NavbarIndicator } from '@waldur/navigation/header/NavbarIndicator';
 import { connectAngularComponent } from '@waldur/store/connect';
-import { getWorkspace, getProject } from '@waldur/workspace/selectors';
-import { WorkspaceType, Project } from '@waldur/workspace/types';
+import { getProject } from '@waldur/workspace/selectors';
+import { Project } from '@waldur/workspace/types';
 
 import { getCount } from './store/selectors';
 
 interface CartIndicatorProps {
   count: number;
-  workspace: WorkspaceType;
   project: Project;
 }
 
 const PureCartIndicator = (props: CartIndicatorProps) =>
-props.workspace === 'project' ? (
+props.project ? (
   <NavbarIndicator
     state={'marketplace-checkout'}
     params={{uuid: props.project.uuid}}
@@ -27,7 +26,6 @@ props.workspace === 'project' ? (
 
 const mapStateToProps = state => ({
   count: getCount(state),
-  workspace: getWorkspace(state),
   project: getProject(state),
 });
 
