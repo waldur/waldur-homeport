@@ -15,7 +15,7 @@ interface OfferingCardProps {
 }
 
 export const OfferingCard = (props: OfferingCardProps) => wrapTooltip(
-  props.offering.paused_reason, (
+  props.offering.state === 'Paused' && props.offering.paused_reason, (
   <div className={classNames('offering-card', {disabled: props.offering.state !== 'Active'})}>
     <OfferingLink
       offering_uuid={props.offering.uuid}

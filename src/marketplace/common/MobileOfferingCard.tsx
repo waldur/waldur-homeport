@@ -12,7 +12,7 @@ interface MobileOfferingCardProps {
 }
 
 export const MobileOfferingCard = (props: MobileOfferingCardProps) => wrapTooltip(
-  props.offering.paused_reason, (
+  props.offering.state === 'Paused' && props.offering.paused_reason, (
   <tr className={classNames({disabled: props.offering.state !== 'Active'})}>
     <td className="img-md">
       <OfferingLink offering_uuid={props.offering.uuid}>
