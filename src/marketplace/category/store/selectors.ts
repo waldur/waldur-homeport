@@ -52,6 +52,6 @@ export const getFilterQuery = createSelector(
     attributes: formatAttributesFilter(attributes),
     allowed_customer_uuid: customer.uuid,
     project_uuid: project && project.uuid,
-    state: 'Active',
+    state: ['Active', 'Paused'],
   }),
 );

@@ -38,11 +38,13 @@ function* getOfferings() {
     'attributes',
     'customer_name',
     'customer_uuid',
+    'state',
+    'paused_reason',
   ];
   const params = {
     page_size: 6,
     o: '-created',
-    state: 'Active',
+    state: ['Active', 'Paused'],
     field,
     allowed_customer_uuid: customer.uuid,
     project_uuid: project && project.uuid,
