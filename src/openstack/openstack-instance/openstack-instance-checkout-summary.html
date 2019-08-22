@@ -15,6 +15,7 @@
       <span ng-if="!$ctrl.model.flavor" translate>
         No items yet.
       </span>
+      {{ $ctrl.error }}
     </p>
     <p ng-if="$ctrl.components" ng-bind-html="::$ctrl.componentsMessage"></p>
     <table class="table table-bordered" ng-if="$ctrl.isValid()">
