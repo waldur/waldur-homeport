@@ -4354,6 +4354,10 @@ msgstr ""
 msgid "OpenStack package {tenant_name} has been deleted."
 msgstr ""
 
+#: src/openstack/openstack-summary-service.js
+msgid "OpenStack tenant is not linked with package template."
+msgstr ""
+
 #: src/openstack/openstack-volume/marketplace.ts
 msgid "OpenStack volume"
 msgstr ""
@@ -6603,6 +6607,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Service provider has been registered."
+msgstr ""
+
+#: src/openstack/openstack-summary-service.js
+msgid "Service provider is not linked with OpenStack tenant."
 msgstr ""
 
 #: src/providers/support/FlowMapFilter.tsx
