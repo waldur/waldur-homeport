@@ -1081,12 +1081,20 @@ msgstr ""
 msgid "Change flavor"
 msgstr ""
 
+#: src/marketplace/resources/change-limits/ChangeLimitsAction.ts
+msgid "Change limits"
+msgstr ""
+
 #: src/marketplace/resources/change-plan/ChangePlanAction.ts
 msgid "Change plan"
 msgstr ""
 
 #: src/issues/types/constants.ts
 msgid "Change request - client’s request to perform a generic modification of data or service."
+msgstr ""
+
+#: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
+msgid "Change resource limits"
 msgstr ""
 
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
@@ -1563,6 +1571,7 @@ msgstr ""
 msgid "Current flavor"
 msgstr ""
 
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "Current plan"
 msgstr ""
@@ -3638,6 +3647,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -3760,6 +3770,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
 msgid "New flavor"
+msgstr ""
+
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+msgid "New limit"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.js
@@ -4216,6 +4230,10 @@ msgstr ""
 msgid "Ok, what's next?"
 msgstr ""
 
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+msgid "Old limit"
+msgstr ""
+
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "One-time"
 msgstr ""
@@ -4334,6 +4352,10 @@ msgstr ""
 
 #: src/openstack/events.ts
 msgid "OpenStack package {tenant_name} has been deleted."
+msgstr ""
+
+#: src/openstack/openstack-summary-service.js
+msgid "OpenStack tenant is not linked with package template."
 msgstr ""
 
 #: src/openstack/openstack-volume/marketplace.ts
@@ -4608,6 +4630,10 @@ msgstr ""
 msgid "Pause"
 msgstr ""
 
+#: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
+msgid "Pause offering"
+msgstr ""
+
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 msgid "Paused"
 msgstr ""
@@ -4809,6 +4835,10 @@ msgstr ""
 
 #: src/marketplace/details/plan/ComponentEditRow.tsx
 msgid "Please enter estimated maximum usage in the rows below:"
+msgstr ""
+
+#: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
+msgid "Please enter reason why offering has been paused."
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -5794,6 +5824,7 @@ msgstr ""
 msgid "Request direct access to {{ $ctrl.tenant.name }}"
 msgstr ""
 
+#: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 msgid "Request for a change"
 msgstr ""
@@ -5929,6 +5960,7 @@ msgstr ""
 msgid "Resource description"
 msgstr ""
 
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "Resource does not have any plan."
 msgstr ""
@@ -5978,6 +6010,10 @@ msgstr ""
 
 #: src/resource/monitoring/ZabbixHostCreateButton.tsx
 msgid "Resource is not monitored yet."
+msgstr ""
+
+#: src/marketplace/resources/store/effects.ts
+msgid "Resource limits change request has been submitted."
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItem.tsx
@@ -6573,6 +6609,10 @@ msgstr ""
 msgid "Service provider has been registered."
 msgstr ""
 
+#: src/openstack/openstack-summary-service.js
+msgid "Service provider is not linked with OpenStack tenant."
+msgstr ""
+
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Service provider type"
 msgstr ""
@@ -6963,7 +7003,9 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/digitalocean/droplet-resize.html
+#: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
+#: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/openstack/openstack-tenant/actions/change-package-dialog.html
@@ -7770,6 +7812,7 @@ msgstr ""
 #: src/customer/TotalCostComponent.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
+#: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 msgid "Unable to load data."
 msgstr ""
@@ -7946,6 +7989,10 @@ msgstr ""
 msgid "Unable to submit empty comment."
 msgstr ""
 
+#: src/marketplace/resources/store/effects.ts
+msgid "Unable to submit limits change request."
+msgstr ""
+
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to submit order."
 msgstr ""
@@ -8116,6 +8163,7 @@ msgstr ""
 
 #: src/analytics/utils.ts
 #: src/dashboard/chart.ts
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 msgid "Usage"
 msgstr ""

@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { openModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
@@ -15,6 +16,7 @@ const mapStateToProps = (state: OuterState) => ({
 
 const mapDispatchToProps = {
   updateOfferingState,
+  pauseOffering: offering => openModalDialog('marketplacePauseOfferingDialog', { resolve: { offering } }),
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
@@ -28,9 +30,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     },
     {
       label: translate('Pause'),
-      handler: () => {
-        dispatchProps.updateOfferingState(ownProps.row, 'pause');
-      },
+      handler: () => dispatchProps.pauseOffering(ownProps.row),
       visible: ownProps.row.state === ACTIVE,
     },
     {

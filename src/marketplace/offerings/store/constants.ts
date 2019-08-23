@@ -22,13 +22,6 @@ export const PAUSED = 'Paused';
 
 export const ARCHIVED = 'Archived';
 
-export const STATES = {
-  1: DRAFT,
-  2: ACTIVE,
-  3: PAUSED,
-  4: ARCHIVED,
-};
-
 export const TABLE_NAME = 'marketplace-offerings';
 
 export const FORM_ID = 'marketplaceOfferingCreate';

@@ -31,6 +31,9 @@ export const getAllOfferings = (options?: {}) =>
 export const getProviderOfferings = (customerUuid: string) =>
   getAllOfferings({params: {customer_uuid: customerUuid}});
 
+export const getPlan = (id: string): Promise<any> =>
+  getById<any>('/marketplace-plans/', id);
+
 export const getOffering = (id: string): Promise<Offering> =>
   getById<Offering>('/marketplace-offerings/', id);
 
@@ -94,8 +97,9 @@ export const getProjectList = (params?: {}) =>
 export const getCustomer = (id: string) =>
   getById<Customer>('/customers/', id);
 
-export const updateOfferingState = (offeringUuid, action) =>
-  post(`/marketplace-offerings/${offeringUuid}/${action}/`).then(response => response.data);
+export const updateOfferingState = (offeringUuid, action, reason) =>
+  post(`/marketplace-offerings/${offeringUuid}/${action}/`,
+  reason && {paused_reason: reason}).then(response => response.data);
 
 export const getServiceProviderList = (params?: {}) =>
   getList<ServiceProvider>('/marketplace-service-providers/', params);
@@ -123,3 +127,6 @@ export const switchPlan = (resource_uuid: string, plan_url: string) =>
 
 export const terminateResource = (resource_uuid: string) =>
   post(`/marketplace-resources/${resource_uuid}/terminate/`).then(response => response.data);
+
+export const changeLimits = (resource_uuid: string, limits: Record<string, number>) =>
+  post(`/marketplace-resources/${resource_uuid}/update_limits/`, {limits}).then(response => response.data);

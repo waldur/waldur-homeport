@@ -6,13 +6,13 @@ import { Action } from '@waldur/core/reducerActions';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
+import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { updateEntity } from '@waldur/table-react/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { setStep, loadDataSuccess, loadDataError, setBookingItems } from './actions';
 import * as constants from './constants';
-import { STATES } from './constants';
 import { getPlans, getAttributes, getOffering } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
 import { formatOfferingRequest, planWithoutComponent, planWithoutQuotas } from './utils';
@@ -110,12 +110,14 @@ function* updateOffering(action: Action<OfferingUpdateFormData>) {
 }
 
 function* updateOfferingState(action) {
-  const { offering, stateAction } = action.payload;
+  const { offering, stateAction, reason } = action.payload;
   try {
-    const response = yield call(api.updateOfferingState, offering.uuid, stateAction);
-    const state = STATES[response.state];
-    yield put(updateEntity(constants.TABLE_NAME, offering.uuid, {...offering, state}));
+    const response = yield call(api.updateOfferingState, offering.uuid, stateAction, reason);
+    yield put(updateEntity(constants.TABLE_NAME, offering.uuid, {...offering, state: response.state}));
     yield put(showSuccess(translate('Offering state has been updated.')));
+    if (stateAction === 'pause') {
+      yield put(closeModalDialog());
+    }
   } catch (error) {
     const errorMessage = `${translate('Unable to update offering state.')} ${format(error)}`;
     yield put(showError(errorMessage));

@@ -31,6 +31,10 @@ class SummaryController {
         this.usages = result.usages;
         this.limits = result.limits;
         this.limitsType = result.limitsType;
+      }).catch(error => {
+        if (error && error.details) {
+          this.error = error.details;
+        }
       });
   }
 
@@ -45,6 +49,9 @@ class SummaryController {
   }
 
   updateQuotas() {
+    if (!this.usages || !this.limits) {
+      return;
+    }
     this.quotas = [
       {
         name: 'vcpu',
@@ -77,7 +84,7 @@ class SummaryController {
   }
 
   isValid() {
-    return this.getDailyPrice();
+    return this.model.flavor !== undefined;
   }
 
   getDailyPrice() {

@@ -1,5 +1,6 @@
 import { parsePrices, parseQuotas, parseQuotasUsage } from './utils';
 import {QUOTA_PACKAGE_TYPE, QUOTA_SPL_TYPE, QUOTA_NAMES_MAPPING} from './../quotas/constants';
+import { translate } from '@waldur/i18n';
 
 export default class OpenStackSummaryService {
   // @ngInject
@@ -23,7 +24,9 @@ export default class OpenStackSummaryService {
   fetchSettingsScope(settings) {
     const scope = settings.scope;
     if (!scope) {
-      return this.$q.reject();
+      return this.$q.reject({
+        details: translate('Service provider is not linked with OpenStack tenant.')
+      });
     }
     return this.$http.get(scope).then(response => response.data);
   }
@@ -31,7 +34,9 @@ export default class OpenStackSummaryService {
   fetchTenantTemplate(tenant) {
     const config = tenant.extra_configuration;
     if (!config || !config.package_uuid) {
-      return this.$q.reject();
+      return this.$q.reject({
+        details: translate('OpenStack tenant is not linked with package template.')
+      });
     }
     const url = `${this.ENV.apiEndpoint}api/package-templates/${config.package_uuid}/`;
     return this.$http.get(url).then(response => {

@@ -45,6 +45,7 @@ export interface OrderItemResponse {
   created: string;
   error_message?: string;
   limits: Record<string, number>;
+  current_usages?: Record<string, number>;
 }
 
 export interface OrderItemDetailsType extends OrderItemResponse {

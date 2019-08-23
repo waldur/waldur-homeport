@@ -15,6 +15,7 @@
       <span ng-if="!$ctrl.model.flavor" translate>
         No items yet.
       </span>
+      {{ $ctrl.error }}
     </p>
     <p ng-if="$ctrl.components" ng-bind-html="::$ctrl.componentsMessage"></p>
     <table class="table table-bordered" ng-if="$ctrl.isValid()">
@@ -23,19 +24,24 @@
           <td><strong translate>VM name</strong></td>
           <td>{{ $ctrl.model.name }}</td>
         </tr>
-        <tr>
+        <tr ng-if="$ctrl.model.image && $ctrl.model.image.name">
           <td><strong translate>Image</strong></td>
           <td>{{ $ctrl.model.image.name }}</td>
         </tr>
-        <tr>
+        <tr ng-if="$ctrl.model.flavor">
           <td><strong translate>Flavor</strong></td>
           <td>{{ $ctrl.model.flavor.name }}</td>
         </tr>
-        <tr>
+        <tr ng-if="$ctrl.model.flavor">
           <td><strong translate>vCPU</strong></td>
-          <td>{{ $ctrl.model.flavor.cores }} cores</td>
+          <td ng-if="$ctrl.model.flavor.cores == 1">
+            {{ $ctrl.model.flavor.cores }} core
+          </td>
+          <td ng-if="$ctrl.model.flavor.cores > 1">
+            {{ $ctrl.model.flavor.cores }} cores
+          </td>
         </tr>
-        <tr>
+        <tr ng-if="$ctrl.model.flavor">
           <td><strong translate>RAM</strong></td>
           <td>{{ $ctrl.model.flavor.ram | filesize }}</td>
         </tr>
