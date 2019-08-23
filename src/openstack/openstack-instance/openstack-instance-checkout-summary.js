@@ -84,7 +84,7 @@ class SummaryController {
   }
 
   isValid() {
-    return this.getDailyPrice();
+    return this.model.flavor !== undefined;
   }
 
   getDailyPrice() {
