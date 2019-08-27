@@ -7,19 +7,6 @@ import { formatSummary } from '@waldur/resource/utils';
 
 import { VMwareVirtualMachine } from './types';
 
-const ToolsField = (props: ResourceSummaryProps<VMwareVirtualMachine>) => (
-  <Field
-    label={props.translate('VMware Tools')}
-    value={
-      props.resource.state === 'OK' &&
-      props.resource.runtime_state === 'Powered on' &&
-      props.resource.guest_power_state === 'RUNNING' ?
-      props.translate('Running') :
-      props.translate('Not running')
-    }
-  />
-);
-
 const PureVMwareVirtualMachineSummary = (props: ResourceSummaryProps<VMwareVirtualMachine>) => {
   const { translate, resource } = props;
   const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
@@ -34,7 +21,10 @@ const PureVMwareVirtualMachineSummary = (props: ResourceSummaryProps<VMwareVirtu
         label={translate('Guest OS')}
         value={resource.guest_os_name}
       />
-      <ToolsField {...props}/>
+      <Field
+        label={props.translate('VMware Tools')}
+        value={resource.tools_state}
+      />
       {advancedMode && (
         <>
           <Field
