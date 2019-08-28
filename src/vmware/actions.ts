@@ -6,6 +6,8 @@ import { validateState } from '@waldur/resource/actions/base';
 const getConsoleURL = (id: string) =>
   get(`/vmware-virtual-machine/${id}/console/`);
 
+const refreshResource = ngInjector => ngInjector.get('$rootScope').$broadcast('refreshResource');
+
 export function actionsConfig(ActionConfigurationProvider) {
   ActionConfigurationProvider.register('VMware.VirtualMachine', {
     order: [
@@ -62,6 +64,24 @@ export function actionsConfig(ActionConfigurationProvider) {
           });
         },
         validators: [validateState('OK')],
+      },
+      start: {
+        onSuccess: refreshResource,
+      },
+      stop: {
+        onSuccess: refreshResource,
+      },
+      reset: {
+        onSuccess: refreshResource,
+      },
+      shutdown_guest: {
+        onSuccess: refreshResource,
+      },
+      reboot_guest: {
+        onSuccess: refreshResource,
+      },
+      suspend: {
+        onSuccess: refreshResource,
       },
     },
   });
