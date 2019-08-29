@@ -4935,6 +4935,10 @@ msgstr ""
 msgid "Please stop the instance before its removal."
 msgstr ""
 
+#: src/marketplace/offerings/InternalNameField.tsx
+msgid "Please use Latin letters without spaces only."
+msgstr ""
+
 #: src/ansible/application-list.js
 msgid "Please wait until provisioning is completed."
 msgstr ""
