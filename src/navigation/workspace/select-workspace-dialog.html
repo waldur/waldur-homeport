@@ -68,6 +68,10 @@
             tooltip-append-to-body="true"
             tooltip-class="select-workspace-dialog__tooltip--order">
             {{ organization.abbreviation }}
+            <i ng-if="organization.is_service_provider"
+            tooltip-append-to-body="true"
+            uib-tooltip="{{ 'Service provider' | translate }}"
+            class="provider-icon svgfonticon svgfonticon-provider"></i>
             <extension-point id="organization-selector"></extension-point>
           </div>
           <div
