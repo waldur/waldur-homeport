@@ -4062,10 +4062,6 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
-#: src/vmware/VMwareVirtualMachineSummary.tsx
-msgid "Not running"
-msgstr ""
-
 #: src/customer/AccountingRunningField.tsx
 msgid "Not running accounting"
 msgstr ""
@@ -4937,6 +4933,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 msgid "Please stop the instance before its removal."
+msgstr ""
+
+#: src/marketplace/offerings/InternalNameField.tsx
+msgid "Please use Latin letters without spaces only."
 msgstr ""
 
 #: src/ansible/application-list.js
@@ -6154,10 +6154,6 @@ msgstr ""
 
 #: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
 msgid "Run 'Find missing installed libraries' command to synchronize cloud broker state"
-msgstr ""
-
-#: src/vmware/VMwareVirtualMachineSummary.tsx
-msgid "Running"
 msgstr ""
 
 #: src/customer/AccountingRunningField.tsx
