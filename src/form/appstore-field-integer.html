@@ -9,11 +9,18 @@
     ng-model="$ctrl.model[$ctrl.field.name]"
     multiply-by="$ctrl.field.factor"
     ng-required="$ctrl.field.required"
-    class="form-control"/>
+    class="form-control"
+    ng-pattern="/^[0-9]+$/"
+    step="1"
+  />
   <span class="input-group-addon" ng-if="::$ctrl.field.units">
     {{ ::$ctrl.field.units }}
   </span>
 </div>
+
+<p class="help-block text-danger" ng-if="$ctrl.form[$ctrl.field.name].$error.pattern" translate>
+  Not a valid number!
+</p>
 
 <p class="help-block text-danger" ng-if="$ctrl.form[$ctrl.field.name].$error.min">
   <span translate>Minimal valid value is</span> {{ $ctrl.field.min/$ctrl.field.factor }} {{ ::$ctrl.field.units }}
