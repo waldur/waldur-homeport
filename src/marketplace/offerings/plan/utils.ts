@@ -7,7 +7,7 @@ import { getPlanPrice, getComponents, getType, getOfferingLimits } from '../stor
 interface ConnectedPlanStateProps {
   total: number;
   components: OfferingComponent[];
-  limits: string[]
+  limits: string[];
 }
 
 export const connectPlanComponents = connect<ConnectedPlanStateProps, {}, {plan: string, archived?: boolean}>(
