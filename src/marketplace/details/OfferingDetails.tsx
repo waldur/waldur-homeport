@@ -14,6 +14,7 @@ import { OfferingTabsComponent, OfferingTab } from './OfferingTabsComponent';
 interface OfferingDetailsProps {
   offering: Offering;
   tabs: OfferingTab[];
+  limits: string[];
 }
 
 export const OfferingDetails = (props: OfferingDetailsProps) => {
@@ -30,7 +31,10 @@ export const OfferingDetails = (props: OfferingDetailsProps) => {
           <h3 className="header-bottom-border">
             {translate('Product configuration')}
           </h3>
-          <OfferingConfigurator offering={props.offering}/>
+          <OfferingConfigurator
+            offering={props.offering}
+            limits={props.limits}
+          />
         </Col>
         <Col md={3}>
           <h3 className="header-bottom-border">

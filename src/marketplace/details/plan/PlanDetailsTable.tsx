@@ -59,6 +59,8 @@ export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDe
   }
 
   const fixedRows = props.components.filter(component => component.billing_type === 'fixed');
+  const fixedWithLimits = fixedRows.filter(component => props.limits.includes(component.type));
+  const fixedWithoutLimits = fixedRows.filter(component => !props.limits.includes(component.type));
   const usageRows = props.components.filter(component => component.billing_type === 'usage');
   const initialRows = props.components.filter(component => component.billing_type === 'one');
   const switchRows = props.components.filter(component => component.billing_type === 'few');
@@ -75,8 +77,9 @@ export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDe
             <HeaderRow periods={props.periods}/>
           </thead>
           <tbody>
-            {fixedRows.length > 0 && <FixedRows components={fixedRows}/>}
+            {fixedWithoutLimits.length > 0 && <FixedRows components={fixedWithoutLimits}/>}
             {usageWithLimits.length > 0 && <UsageRows components={usageWithLimits} periods={props.periods} viewMode={props.viewMode}/>}
+            {fixedWithLimits.length > 0 && <UsageRows components={fixedWithLimits} periods={props.periods} viewMode={props.viewMode}/>}
           </tbody>
         </table>
       )}
@@ -109,6 +112,7 @@ export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDe
 PureDetailsTable.defaultProps = {
   formGroupClassName: 'form-group',
   columnClassName: 'col-sm-offset-3 col-sm-9',
+  limits: [],
 };
 
 const connector = connect(pricesSelector);

@@ -13,14 +13,14 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { setStep, loadDataSuccess, loadDataError, setBookingItems } from './actions';
 import * as constants from './constants';
-import { getPlans, getAttributes, getOffering } from './selectors';
+import { getPlans, getAttributes, getOfferingComponents } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
 import { formatOfferingRequest, planWithoutComponent, planWithoutQuotas } from './utils';
 
 function* loadCategories() {
   const categories: Category[] = yield call(api.getCategories);
   const pluginsData = yield call(api.getPlugins);
-  const plugins = pluginsData.reduce((result, plugin) => ({...result, [plugin.offering_type]: plugin.components}), {});
+  const plugins = pluginsData.reduce((result, plugin) => ({...result, [plugin.offering_type]: plugin}), {});
   return {categories, plugins};
 }
 
@@ -63,8 +63,7 @@ function* createOffering(action: Action<OfferingFormData>) {
   const { thumbnail, document, ...rest } = action.payload;
   const customer = yield select(getCustomer);
   try {
-    const offering = yield select(getOffering);
-    const components = offering.plugins[rest.type.value];
+    const components = yield select(getOfferingComponents, rest.type.value);
     const offeringRequest = formatOfferingRequest(rest, components, customer);
     const response = yield call(api.createOffering, offeringRequest);
     if (thumbnail) {
@@ -89,8 +88,7 @@ function* createOffering(action: Action<OfferingFormData>) {
 
 function* updateOffering(action: Action<OfferingUpdateFormData>) {
   const { offeringUuid, thumbnail, ...rest } = action.payload;
-  const offering = yield select(getOffering);
-  const components = offering.plugins[rest.type.value];
+  const components = yield select(getOfferingComponents, rest.type.value);
   try {
     const offeringRequest = formatOfferingRequest(rest, components);
     yield call(api.updateOffering, offeringUuid, offeringRequest);

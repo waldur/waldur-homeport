@@ -16,6 +16,7 @@ export interface PureOfferingConfiguratorProps {
   offering: Offering;
   project?: Project;
   plan?: Plan;
+  limits: string[];
 }
 
 export const PureOfferingConfigurator = (props: PureOfferingConfiguratorProps & InjectedFormProps) => {

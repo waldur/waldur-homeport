@@ -71,7 +71,11 @@ export const OrderItemDetails = (props: OrderItemDetailsProps & {loadData(): voi
                 </Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible={true}>
-                <PlanDetails orderItem={props.orderItem} offering={props.offering}/>
+                <PlanDetails
+                  orderItem={props.orderItem}
+                  offering={props.offering}
+                  limits={props.limits}
+                />
               </Panel.Body>
             </Panel>
           )}
