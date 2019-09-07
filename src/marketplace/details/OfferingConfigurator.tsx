@@ -55,4 +55,4 @@ const enhance = compose(
   formConnector
 );
 
-export const OfferingConfigurator = enhance(PureOfferingConfigurator);
+export const OfferingConfigurator = enhance(PureOfferingConfigurator) as React.ComponentClass<any>;
