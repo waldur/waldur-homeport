@@ -20,7 +20,7 @@ const getCreateSummary = (ctx: Context): string => {
     user: ctx.user,
     resource_name: ctx.orderItem.attributes.name,
     resource_type: ctx.orderItem.resource_type,
-    plan_name: ctx.orderItem.old_plan_name || 'Default',
+    plan_name: ctx.orderItem.new_plan_name || 'Default',
   });
   if (ctx.approved) {
     return msg + ' ' + ctx.approved;
