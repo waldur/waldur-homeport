@@ -2,11 +2,15 @@ import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { QueryChildProps } from '@waldur/core/Query';
 import { translate } from '@waldur/i18n';
 
 import { IssueRow } from './IssueRow';
+import { Issue } from './types';
 
-export const IssuesShortListComponent = ({ loading, data, loadData }) => (
+type Props = QueryChildProps<Issue[]>;
+
+export const IssuesShortListComponent: React.SFC<Props> = ({ loading, data, loadData }) => (
   <div className="ibox float-e-margins">
     <div className="ibox-title">
       <span className="pull-right">

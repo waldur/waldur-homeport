@@ -4,6 +4,7 @@ import * as Panel from 'react-bootstrap/lib/Panel';
 import * as PanelGroup from 'react-bootstrap/lib/PanelGroup';
 import * as Row from 'react-bootstrap/lib/Row';
 
+import { useInterval } from '@waldur/core/useInterval';
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getDetailsComponent } from '@waldur/marketplace/common/registry';
@@ -21,6 +22,9 @@ import { OrderItemTypeIndicator } from './OrderItemTypeIndicator';
 
 export const OrderItemDetails = (props: OrderItemDetailsProps & {loadData(): void}) => {
   const DetailsComponent = getDetailsComponent(props.orderItem.offering_type);
+  // Refresh order item details each 5 seconds until it is switched from pending state to terminal state
+  const pollingDelay = ['pending', 'executing'].includes(props.orderItem.state) ? 5000 : null;
+  useInterval(props.loadData, pollingDelay);
   return (
     <Row>
       <Col md={9}>
