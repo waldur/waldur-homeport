@@ -1,3 +1,5 @@
+import { formatDateTime } from '@waldur/core/dateUtils';
+
 const instanceVolumes = {
   templateUrl: 'views/partials/filtered-list.html',
   controller: VMwareVirtualMachineDisksList,
@@ -47,6 +49,10 @@ function VMwareVirtualMachineDisksList(
           title: gettext('State'),
           className: 'min-tablet-l',
           render: row => this.renderResourceState(row)
+        },
+        {
+          title: gettext('Created'),
+          render: row => formatDateTime(row.created),
         },
       ];
       return options;

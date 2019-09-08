@@ -1487,6 +1487,7 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/slurm/slurm-allocation-list.js
+#: src/vmware/vmware-virtual-machine-disks.js
 msgid "Created"
 msgstr ""
 
