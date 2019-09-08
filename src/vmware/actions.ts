@@ -27,6 +27,7 @@ export function actionsConfig(ActionConfigurationProvider) {
     options: {
       pull: {
         title: gettext('Synchronise'),
+        onSuccess: refreshResource,
       },
       create_disk: {
         tab: 'disks',
@@ -90,6 +91,7 @@ export function actionsConfig(ActionConfigurationProvider) {
     options: {
       pull: {
         title: gettext('Synchronise'),
+        onSuccess: refreshResource,
       },
       extend: {
         fields: {
