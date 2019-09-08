@@ -69,10 +69,10 @@ export const combinePrices = (plan, limits, offering) => {
         const label = item.name;
         const units = item.measured_unit;
         let amount = 0;
-        if (item.billing_type === 'fixed') {
-          amount = plan.quotas[item.type] || 0;
-        } else if (limits && limits[item.type]) {
+        if (limits && limits[item.type]) {
           amount = limits[item.type] || 0;
+        } else if (item.billing_type === 'fixed') {
+          amount = plan.quotas[item.type] || 0;
         }
         const type = item.type;
         const billing_type = item.billing_type;

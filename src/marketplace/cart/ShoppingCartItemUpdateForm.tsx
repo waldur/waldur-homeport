@@ -16,6 +16,8 @@ const storeConnector = connect<
   {},
   { offering: Offering,
     plan: Plan,
+    limits: string[],
+    initialLimits: AttributesType,
     initialAttributes: AttributesType },
   OuterState
 >(state => ({

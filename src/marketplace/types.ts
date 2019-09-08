@@ -205,14 +205,30 @@ export interface OfferingConfigurationFormProps extends InjectedFormProps {
   project?: Project;
   plan?: Plan;
   initialAttributes?: AttributesType;
+  initialLimits?: AttributesType;
   customer?: Customer;
+  limits: string[];
 }
 
 export interface OrderItemDetailsProps {
   orderItem: OrderItemDetailsType;
   offering: Offering;
+  limits?: string[];
 }
 
 export interface AttributesType {
   [key: string]: any;
+}
+
+interface PluginComponent {
+  billing_type: BillingType;
+  measured_unit: string;
+  type: string;
+  name: string;
+}
+
+export interface PluginMetadata {
+  offering_type: string;
+  available_limits: string[];
+  components: PluginComponent[];
 }

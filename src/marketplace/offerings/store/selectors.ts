@@ -14,9 +14,11 @@ export const isLoading = state => getOffering(state).loading;
 export const isLoaded = state => getOffering(state).loaded;
 export const isErred = state => getOffering(state).erred;
 export const getCategories = state => getOffering(state).categories;
+export const getOfferingComponents = (state, type) => getOffering(state).plugins[type].components;
+export const getOfferingLimits = (state, type) => getOffering(state).plugins[type].available_limits;
 
 export const getComponents = (state, type): OfferingComponent[] => {
-  let components = getOffering(state).plugins[type];
+  let components = getOfferingComponents(state, type);
   if (components.length === 0) {
     components = getForm(state, 'components');
     if (components) {

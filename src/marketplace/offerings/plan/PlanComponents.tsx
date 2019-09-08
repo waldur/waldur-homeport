@@ -9,8 +9,11 @@ import { OfferingComponent } from '@waldur/marketplace/types';
 interface PlanComponentsProps extends TranslateProps {
   archived: boolean;
   components: OfferingComponent[];
+  limits: string[];
   plan: string;
 }
+
+const numberValidators = [required, validateNonNegative];
 
 export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
   <table className="table table-borderless">
@@ -37,14 +40,14 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
             </div>
           </td>
           <td>
-            {component.billing_type === 'fixed' ? (
+            {component.billing_type === 'fixed' && !props.limits.includes(component.type) ? (
               <Field
                 component="input"
                 min={0}
                 className="form-control"
                 name={`${props.plan}.quotas.${component.type}`}
                 type="number"
-                validate={props.archived ? undefined : [required, validateNonNegative]}
+                validate={props.archived ? undefined : numberValidators}
                 inputMode="numeric"
               />
             ) : (
@@ -60,7 +63,7 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
               className="form-control"
               name={`${props.plan}.prices.${component.type}`}
               type="number"
-              validate={props.archived ? undefined : [required, validateNonNegative]}
+              validate={props.archived ? undefined : numberValidators}
               inputMode="numeric"
             />
           </td>

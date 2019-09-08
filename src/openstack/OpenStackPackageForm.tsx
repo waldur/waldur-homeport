@@ -25,7 +25,15 @@ export const DEFAULT_SUBNET_CIDR = '192.168.X.0/24';
 export class OpenStackPackageForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
     const { project, plan } = this.props;
-    this.props.initialize({attributes: {subnet_cidr: '42', ...this.props.initialAttributes}, project, plan});
+    this.props.initialize({
+      attributes: {
+        subnet_cidr: '42',
+        ...this.props.initialAttributes,
+      },
+      limits: this.props.initialLimits,
+      project,
+      plan,
+    });
   }
 
   render() {
@@ -45,7 +53,7 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
             required={true}
           />
           <PlanField offering={props.offering}/>
-          <PlanDetailsTable offering={props.offering}/>
+          <PlanDetailsTable offering={props.offering} limits={props.limits}/>
           <TextField
             label={translate('Tenant description')}
             name="attributes.description"
