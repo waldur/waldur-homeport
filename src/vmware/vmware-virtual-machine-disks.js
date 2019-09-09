@@ -43,6 +43,7 @@ function VMwareVirtualMachineDisksList(
         },
         {
           title: gettext('Size'),
+          orderField: 'size',
           render: row => $filter('filesize')(row.size)
         },
         {
@@ -52,6 +53,7 @@ function VMwareVirtualMachineDisksList(
         },
         {
           title: gettext('Created'),
+          orderField: 'created',
           render: row => formatDateTime(row.created),
         },
       ];

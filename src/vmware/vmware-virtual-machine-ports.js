@@ -34,7 +34,6 @@ function VMwareVirtualMachinePortsController(
         {
           title: gettext('Name'),
           className: 'all',
-          orderField: 'name',
           render: function(row) {
             return vm.renderResourceName(row);
           }
@@ -62,6 +61,7 @@ function VMwareVirtualMachinePortsController(
         },
         {
           title: gettext('Created'),
+          orderField: 'created',
           render: row => formatDateTime(row.created),
         },
       ];
