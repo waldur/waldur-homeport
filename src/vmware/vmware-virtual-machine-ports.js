@@ -1,3 +1,5 @@
+import { formatDateTime } from '@waldur/core/dateUtils';
+
 const vmwareVirtualMachinePorts = {
   bindings: {
     resource: '<'
@@ -57,7 +59,11 @@ function VMwareVirtualMachinePortsController(
           render: function(row) {
             return vm.renderResourceState(row);
           }
-        }
+        },
+        {
+          title: gettext('Created'),
+          render: row => formatDateTime(row.created),
+        },
       ];
 
       return options;

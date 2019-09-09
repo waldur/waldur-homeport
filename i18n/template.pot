@@ -1488,6 +1488,7 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/slurm/slurm-allocation-list.js
 #: src/vmware/vmware-virtual-machine-disks.js
+#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Created"
 msgstr ""
 
