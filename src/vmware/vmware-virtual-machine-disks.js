@@ -15,6 +15,7 @@ export default instanceVolumes;
 function VMwareVirtualMachineDisksList(
   baseResourceListController,
   $filter,
+  $scope,
   vmwareDisksService,
   actionUtilsService) {
   let controllerScope = this;
@@ -28,6 +29,9 @@ function VMwareVirtualMachineDisksList(
         fn();
         this.service = vmwareDisksService;
         this.addRowFields(['size']);
+      });
+      $scope.$on('refreshList', () => {
+        this.controllerScope.resetCache();
       });
     },
 
