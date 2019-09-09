@@ -1,12 +1,11 @@
 import { get } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
+import { $rootScope } from '@waldur/core/services';
 import { translate, gettext } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
 
 const getConsoleURL = (id: string) =>
   get(`/vmware-virtual-machine/${id}/console/`);
-
-const refreshResource = ngInjector => ngInjector.get('$rootScope').$broadcast('refreshResource');
 
 export function actionsConfig(ActionConfigurationProvider) {
   ActionConfigurationProvider.register('VMware.VirtualMachine', {
@@ -27,7 +26,6 @@ export function actionsConfig(ActionConfigurationProvider) {
     options: {
       pull: {
         title: gettext('Synchronise'),
-        onSuccess: refreshResource,
       },
       create_disk: {
         tab: 'disks',
@@ -36,6 +34,10 @@ export function actionsConfig(ActionConfigurationProvider) {
           size: {
             help_text: gettext('Size in GiB'),
           },
+        },
+        onSuccess: () => {
+          $rootScope.$broadcast('refreshResource');
+          $rootScope.$broadcast('refreshList');
         },
       },
       create_port: {
@@ -66,24 +68,6 @@ export function actionsConfig(ActionConfigurationProvider) {
         },
         validators: [validateState('OK')],
       },
-      start: {
-        onSuccess: refreshResource,
-      },
-      stop: {
-        onSuccess: refreshResource,
-      },
-      reset: {
-        onSuccess: refreshResource,
-      },
-      shutdown_guest: {
-        onSuccess: refreshResource,
-      },
-      reboot_guest: {
-        onSuccess: refreshResource,
-      },
-      suspend: {
-        onSuccess: refreshResource,
-      },
     },
   });
 
@@ -91,7 +75,6 @@ export function actionsConfig(ActionConfigurationProvider) {
     options: {
       pull: {
         title: gettext('Synchronise'),
-        onSuccess: refreshResource,
       },
       extend: {
         fields: {
