@@ -2,10 +2,10 @@ import * as React from 'react';
 
 import { StepsList } from '@waldur/marketplace/common/StepsList';
 
-import { OrderState } from './types';
+import { OrderStep } from './types';
 
 interface OrderStepsProps {
-  state: OrderState;
+  step: OrderStep;
 }
 
 const STEPS = [
@@ -15,5 +15,5 @@ const STEPS = [
 ];
 
 export const OrderSteps = (props: OrderStepsProps) => (
-  <StepsList choices={STEPS} value={props.state}/>
+  <StepsList choices={STEPS} value={props.step}/>
 );
