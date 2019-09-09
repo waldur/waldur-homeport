@@ -1,6 +1,14 @@
 import { AttributesType, BillingPeriod } from '@waldur/marketplace/types';
 
-export type OrderState = 'Configure' | 'Approve' | 'Review';
+export type OrderStep = 'Configure' | 'Approve' | 'Review';
+
+export type OrderState =
+  | 'requested for approval'
+  | 'executing'
+  | 'done'
+  | 'terminated'
+  | 'erred'
+  ;
 
 export interface StatusChange {
   approving: boolean;
