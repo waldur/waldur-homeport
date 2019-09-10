@@ -4058,7 +4058,7 @@ msgstr ""
 
 #: src/form/appstore-field-integer.html
 #: src/resource/actions/dialog/action-field-integer.html
-msgid "Not a valid number!"
+msgid "Not a valid valid"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
