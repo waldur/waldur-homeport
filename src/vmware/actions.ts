@@ -43,6 +43,9 @@ export function actionsConfig(ActionConfigurationProvider) {
       create_port: {
         tab: 'ports',
         title: translate('Create Ethernet adapter'),
+        onSuccess: () => {
+          $rootScope.$broadcast('refreshList');
+        },
       },
       update: {
         title: translate('Edit'),

@@ -11,7 +11,7 @@ const vmwareVirtualMachinePorts = {
 
 // @ngInject
 function VMwareVirtualMachinePortsController(
-  baseResourceListController, actionUtilsService, vmwarePortsService) {
+  $scope, baseResourceListController, actionUtilsService, vmwarePortsService) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -23,6 +23,9 @@ function VMwareVirtualMachinePortsController(
         fn();
         this.service = vmwarePortsService;
         this.addRowFields(['network_name', 'mac_address']);
+      });
+      $scope.$on('refreshList', () => {
+        this.controllerScope.resetCache();
       });
     },
     getTableOptions: function() {
