@@ -84,6 +84,25 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         });
       });
 
+      scope.$watchCollection('controller.tableOptions.tableActions', actions => {
+        if (!table) {
+          return;
+        }
+        actions.map(function(action, index) {
+          const button = table.buttons(`.btn-${index}`);
+          if (action.disabled) {
+            button.disable();
+          } else {
+            button.enable();
+          }
+          button.action(function() {
+            $timeout(function() {
+              action.callback();
+            });
+          });
+        });
+      });
+
       // http://www.gyrocode.com/articles/jquery-datatables-column-width-issues-with-bootstrap-tabs
       scope.$watch('isVisible', function() {
         if (table) {
