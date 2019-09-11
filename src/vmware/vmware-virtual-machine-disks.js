@@ -24,14 +24,24 @@ function VMwareVirtualMachineDisksList(
       this.controllerScope = controllerScope;
       let fn = this._super.bind(this);
       this.loading = true;
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, 'disks').then(result => {
-        this.listActions = result;
+      this.loadDiskActions().then(() => {
         fn();
         this.service = vmwareDisksService;
         this.addRowFields(['size']);
       });
       $scope.$on('refreshList', () => {
         this.controllerScope.resetCache();
+      });
+      $scope.$on('refreshResource', () => {
+        this.loadDiskActions().then(() => {
+          this.tableOptions = this.getTableOptions();
+        });
+      });
+    },
+
+    loadDiskActions: function() {
+      return actionUtilsService.loadNestedActions(this, controllerScope.resource, 'disks').then(result => {
+        this.listActions = result;
       });
     },
 
