@@ -334,6 +334,7 @@ export default function baseResourceListController(
             if (response.status === 404) {
               removeItem(vm.list, resource);
               $rootScope.$broadcast('removeRow', {data: uuid});
+              $rootScope.$broadcast('refreshResource');
             }
           });
         }, ENV.singleResourcePollingTimeout);

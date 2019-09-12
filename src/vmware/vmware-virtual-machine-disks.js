@@ -1,3 +1,5 @@
+import { formatDateTime } from '@waldur/core/dateUtils';
+
 const instanceVolumes = {
   templateUrl: 'views/partials/filtered-list.html',
   controller: VMwareVirtualMachineDisksList,
@@ -13,6 +15,7 @@ export default instanceVolumes;
 function VMwareVirtualMachineDisksList(
   baseResourceListController,
   $filter,
+  $scope,
   vmwareDisksService,
   actionUtilsService) {
   let controllerScope = this;
@@ -21,11 +24,24 @@ function VMwareVirtualMachineDisksList(
       this.controllerScope = controllerScope;
       let fn = this._super.bind(this);
       this.loading = true;
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, 'disks').then(result => {
-        this.listActions = result;
+      this.loadDiskActions().then(() => {
         fn();
         this.service = vmwareDisksService;
         this.addRowFields(['size']);
+      });
+      $scope.$on('refreshList', () => {
+        this.controllerScope.resetCache();
+      });
+      $scope.$on('refreshResource', () => {
+        this.loadDiskActions().then(() => {
+          this.tableOptions = this.getTableOptions();
+        });
+      });
+    },
+
+    loadDiskActions: function() {
+      return actionUtilsService.loadNestedActions(this, controllerScope.resource, 'disks').then(result => {
+        this.listActions = result;
       });
     },
 
@@ -41,12 +57,18 @@ function VMwareVirtualMachineDisksList(
         },
         {
           title: gettext('Size'),
+          orderField: 'size',
           render: row => $filter('filesize')(row.size)
         },
         {
           title: gettext('State'),
           className: 'min-tablet-l',
           render: row => this.renderResourceState(row)
+        },
+        {
+          title: gettext('Created'),
+          orderField: 'created',
+          render: row => formatDateTime(row.created),
         },
       ];
       return options;

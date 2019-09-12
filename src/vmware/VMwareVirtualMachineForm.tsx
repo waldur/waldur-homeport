@@ -190,6 +190,8 @@ const FormComponent = (props: any) => {
           label={translate('Memory size in GiB')}
           name="limits.ram"
           validate={ramValidator}
+          parse={parseIntField}
+          format={formatIntField}
           min={1}
         />
         <StaticDiskField limits={limits}/>

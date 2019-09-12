@@ -1487,6 +1487,8 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/slurm/slurm-allocation-list.js
+#: src/vmware/vmware-virtual-machine-disks.js
+#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Created"
 msgstr ""
 
@@ -4052,6 +4054,11 @@ msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
 msgid "Not a service provider."
+msgstr ""
+
+#: src/form/appstore-field-integer.html
+#: src/resource/actions/dialog/action-field-integer.html
+msgid "Not a valid value"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js

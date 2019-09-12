@@ -2,6 +2,7 @@ import * as React from 'react';
 
 interface QueryState<Data> {
   loading: boolean;
+  loaded: boolean;
   error?: any;
   data?: Data;
 }
@@ -20,6 +21,7 @@ export class Query<Variables = object, Data = object> extends
   React.Component<QueryProps<Variables, Data>, QueryState<Data>> {
   state = {
     loading: true,
+    loaded: false,
     error: null,
     data: null,
   };
@@ -57,6 +59,7 @@ export class Query<Variables = object, Data = object> extends
       this.safeSetState({
         data,
         loading: false,
+        loaded: true,
         erred: false,
       });
     } catch (error) {

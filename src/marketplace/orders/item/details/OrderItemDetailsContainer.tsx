@@ -73,6 +73,8 @@ async function loadOrderItem(order_item_uuid) {
   const orderItem = await api.getOrderItem(order_item_uuid);
   updateBreadcrumbs(orderItem);
   const offering = await api.getOffering(orderItem.offering_uuid);
+  const plugins = await api.getPlugins();
+  const limits = plugins.find(plugin => plugin.offering_type === offering.type).available_limits;
   const category = await api.getCategory(offering.category_uuid);
   const sections = category.sections;
   const tabs = getTabs({offering, sections});
@@ -80,13 +82,16 @@ async function loadOrderItem(order_item_uuid) {
     orderItem,
     offering,
     tabs,
+    limits,
   };
 }
 
 const OrderItemDetailsContainer: React.SFC<{}> = () => (
   <Query loader={loadOrderItem} variables={$state.params.order_item_uuid}>
-    {({ loading, data, error, loadData }) => {
-      if (loading) {
+    {({ loading, loaded, data, error, loadData }) => {
+      // Don't render loading indicator if order item is refreshing
+      // since if it is in pending state it is refreshed via periodic polling
+      if (loading && !loaded) {
         return <LoadingSpinner/>;
       }
       if (error) {
@@ -97,6 +102,7 @@ const OrderItemDetailsContainer: React.SFC<{}> = () => (
           <OrderItemDetails
             orderItem={data.orderItem}
             offering={data.offering}
+            limits={data.limits}
             loadData={loadData}
           />
           <OfferingTabsComponent tabs={data.tabs}/>

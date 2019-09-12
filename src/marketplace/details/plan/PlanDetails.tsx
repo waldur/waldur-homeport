@@ -10,6 +10,7 @@ import { Offering } from '@waldur/marketplace/types';
 interface PlanDetailsProps extends TranslateProps {
   orderItem: OrderItemResponse;
   offering: Offering;
+  limits?: string[];
   showOfferingPlanDescription?(): void;
 }
 
@@ -40,6 +41,7 @@ export const PlanDetails = withTranslation((props: PlanDetailsProps) => {
           viewMode={true}
           orderItem={props.orderItem}
           offering={props.offering}
+          limits={props.limits}
         />
       </OrderItemDetailsField>
     </>

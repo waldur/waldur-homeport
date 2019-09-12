@@ -22,6 +22,7 @@ interface PureShoppingCartItemUpdateProps {
   offering: Offering;
   plan?: Plan;
   shoppingCartItem: OrderItemResponse;
+  limits: string[];
 }
 
 const PureShoppingCartItemUpdate = (props: PureShoppingCartItemUpdateProps) => (
@@ -38,7 +39,9 @@ const PureShoppingCartItemUpdate = (props: PureShoppingCartItemUpdateProps) => (
           </h3>
           <ShoppingCartItemUpdateForm
             initialAttributes={props.shoppingCartItem.attributes}
+            initialLimits={props.shoppingCartItem.limits}
             offering={props.offering}
+            limits={props.limits}
             plan={props.plan}
           />
         </Col>
@@ -64,19 +67,22 @@ class ShoppingCartItemUpdateComponent extends React.Component<ShoppingCartItemUp
     loaded: false,
     plan: null,
     offering: null,
+    limits: [],
   };
 
   async loadData() {
     try {
       this.setState({loading: true});
       const offering = await api.getOffering(this.props.shoppingCartItem.offering_uuid);
+      const plugins = await api.getPlugins();
+      const limits = plugins.find(plugin => plugin.offering_type === offering.type).available_limits;
       let plan = {};
       if (offering && this.props.shoppingCartItem.plan_uuid) {
         plan = offering.plans.find(offeringPlan =>
           offeringPlan.uuid === this.props.shoppingCartItem.plan_uuid
         );
       }
-      this.setState({loading: false, loaded: true, plan, offering});
+      this.setState({loading: false, loaded: true, plan, offering, limits});
     } catch (error) {
       this.setState({loading: false, loaded: false});
     }
@@ -98,7 +104,9 @@ class ShoppingCartItemUpdateComponent extends React.Component<ShoppingCartItemUp
         <PureShoppingCartItemUpdate
           plan={this.state.plan}
           offering={this.state.offering}
-          shoppingCartItem={this.props.shoppingCartItem}/>
+          shoppingCartItem={this.props.shoppingCartItem}
+          limits={this.state.limits}
+        />
       );
     }
   }

@@ -3,14 +3,14 @@ import { ENV } from '@waldur/core/services';
 import { Customer } from '@waldur/customer/types';
 import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
 import { Order, OrderItemResponse, OrderItemDetailsType } from '@waldur/marketplace/orders/types';
-import { Category, Offering, ServiceProvider, CategoryComponentUsage } from '@waldur/marketplace/types';
+import { Category, Offering, ServiceProvider, CategoryComponentUsage, PluginMetadata } from '@waldur/marketplace/types';
 
 import { OfferingDocument } from '../offerings/store/types';
 import { ResourcePlanPeriod } from '../resources/usage/types';
 
 // tslint:disable: variable-name
 
-export const getPlugins = () =>
+export const getPlugins: () => Promise<PluginMetadata[]> = () =>
   get('/marketplace-plugins/').then(response => response.data);
 
 export const getCategories = (options?: {}) =>

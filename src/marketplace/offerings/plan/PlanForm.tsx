@@ -18,6 +18,7 @@ import { connectPlanComponents } from './utils';
 interface PlanFormProps extends TranslateProps {
   archived: boolean;
   components: OfferingComponent[];
+  limits: string[];
   plan: string;
 }
 
@@ -63,6 +64,7 @@ export const PlanForm = enhance((props: PlanFormProps) => (
       <PlanComponents
         plan={props.plan}
         components={props.components}
+        limits={props.limits}
         archived={props.archived}
       />
     )}

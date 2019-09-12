@@ -159,6 +159,8 @@ export default function actionUtilsService(
     ncUtilsFlash.success(template);
     if (action.onSuccess) {
       action.onSuccess($injector);
+    } else {
+      $rootScope.$broadcast('refreshResource');
     }
   };
 

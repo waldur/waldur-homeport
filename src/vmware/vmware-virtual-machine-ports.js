@@ -1,3 +1,5 @@
+import { formatDateTime } from '@waldur/core/dateUtils';
+
 const vmwareVirtualMachinePorts = {
   bindings: {
     resource: '<'
@@ -9,7 +11,7 @@ const vmwareVirtualMachinePorts = {
 
 // @ngInject
 function VMwareVirtualMachinePortsController(
-  baseResourceListController, actionUtilsService, vmwarePortsService) {
+  $scope, baseResourceListController, actionUtilsService, vmwarePortsService) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -22,6 +24,9 @@ function VMwareVirtualMachinePortsController(
         this.service = vmwarePortsService;
         this.addRowFields(['network_name', 'mac_address']);
       });
+      $scope.$on('refreshList', () => {
+        this.controllerScope.resetCache();
+      });
     },
     getTableOptions: function() {
       let options = this._super();
@@ -32,7 +37,6 @@ function VMwareVirtualMachinePortsController(
         {
           title: gettext('Name'),
           className: 'all',
-          orderField: 'name',
           render: function(row) {
             return vm.renderResourceName(row);
           }
@@ -57,7 +61,12 @@ function VMwareVirtualMachinePortsController(
           render: function(row) {
             return vm.renderResourceState(row);
           }
-        }
+        },
+        {
+          title: gettext('Created'),
+          orderField: 'created',
+          render: row => formatDateTime(row.created),
+        },
       ];
 
       return options;
