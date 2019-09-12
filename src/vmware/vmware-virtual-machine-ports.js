@@ -18,14 +18,23 @@ function VMwareVirtualMachinePortsController(
       this.controllerScope = controllerScope;
       let fn = this._super.bind(this);
       this.loading = true;
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, 'ports').then(result => {
-        this.listActions = result;
+      this.loadPortActions().then(() => {
         fn();
         this.service = vmwarePortsService;
         this.addRowFields(['network_name', 'mac_address']);
       });
       $scope.$on('refreshList', () => {
         this.controllerScope.resetCache();
+      });
+      $scope.$on('refreshResource', () => {
+        this.loadPortActions().then(() => {
+          this.tableOptions = this.getTableOptions();
+        });
+      });
+    },
+    loadPortActions: function() {
+      return actionUtilsService.loadNestedActions(this, controllerScope.resource, 'ports').then(result => {
+        this.listActions = result;
       });
     },
     getTableOptions: function() {

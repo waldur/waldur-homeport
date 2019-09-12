@@ -1369,12 +1369,12 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: src/vmware/actions.ts
-msgid "Create Ethernet adapter"
-msgstr ""
-
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
 msgid "Create JupyterHub management"
+msgstr ""
+
+#: src/vmware/actions.ts
+msgid "Create Network adapter"
 msgstr ""
 
 #: src/ansible/python-management/create/PythonManagementCreateForm.tsx

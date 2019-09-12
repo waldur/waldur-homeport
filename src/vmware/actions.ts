@@ -42,8 +42,9 @@ export function actionsConfig(ActionConfigurationProvider) {
       },
       create_port: {
         tab: 'ports',
-        title: translate('Create Ethernet adapter'),
+        title: translate('Create Network adapter'),
         onSuccess: () => {
+          $rootScope.$broadcast('refreshResource');
           $rootScope.$broadcast('refreshList');
         },
       },
