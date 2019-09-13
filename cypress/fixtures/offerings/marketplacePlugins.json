@@ -1,0 +1,108 @@
+[
+  {
+      "offering_type": "VMware.VirtualMachine",
+      "available_limits": [],
+      "components": [
+          {
+              "billing_type": "usage",
+              "measured_unit": "vCPU",
+              "type": "cpu",
+              "name": "CPU"
+          },
+          {
+              "billing_type": "usage",
+              "measured_unit": "GB",
+              "type": "ram",
+              "name": "RAM"
+          },
+          {
+              "billing_type": "usage",
+              "measured_unit": "GB",
+              "type": "disk",
+              "name": "Disk"
+          }
+      ]
+  },
+  {
+      "offering_type": "Azure.SQLServer",
+      "available_limits": [],
+      "components": []
+  },
+  {
+      "offering_type": "OpenStackTenant.Volume",
+      "available_limits": [],
+      "components": []
+  },
+  {
+      "offering_type": "OpenStackTenant.Instance",
+      "available_limits": [],
+      "components": []
+  },
+  {
+      "offering_type": "SlurmInvoices.SlurmPackage",
+      "available_limits": [],
+      "components": [
+          {
+              "billing_type": "usage",
+              "measured_unit": "hours",
+              "type": "cpu",
+              "name": "CPU"
+          },
+          {
+              "billing_type": "usage",
+              "measured_unit": "hours",
+              "type": "gpu",
+              "name": "GPU"
+          },
+          {
+              "billing_type": "usage",
+              "measured_unit": "GB",
+              "type": "ram",
+              "name": "RAM"
+          }
+      ]
+  },
+  {
+      "offering_type": "Marketplace.Booking",
+      "available_limits": [],
+      "components": []
+  },
+  {
+      "offering_type": "Azure.VirtualMachine",
+      "available_limits": [],
+      "components": []
+  },
+  {
+      "offering_type": "Packages.Template",
+      "available_limits": [
+          "ram",
+          "cores",
+          "storage"
+      ],
+      "components": [
+          {
+              "billing_type": "fixed",
+              "measured_unit": "GB",
+              "type": "ram",
+              "name": "RAM"
+          },
+          {
+              "billing_type": "fixed",
+              "measured_unit": "cores",
+              "type": "cores",
+              "name": "Cores"
+          },
+          {
+              "billing_type": "fixed",
+              "measured_unit": "GB",
+              "type": "storage",
+              "name": "Storage"
+          }
+      ]
+  },
+  {
+      "offering_type": "Support.OfferingTemplate",
+      "available_limits": [],
+      "components": []
+  }
+]

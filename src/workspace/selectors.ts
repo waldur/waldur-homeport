@@ -57,6 +57,9 @@ export const isOwnerOrStaff = createSelector(
   getUser,
   isOwner,
   (user, userIsOwner) => {
+    if (!user) {
+      return false;
+    }
     if (user.is_staff) {
       return true;
     }

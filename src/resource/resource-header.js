@@ -6,6 +6,7 @@ const resourceHeader = {
   controller: class ResourceHeaderController{
     // @ngInject
     constructor(
+      $rootScope,
       $stateParams,
       $state,
       $scope,
@@ -17,7 +18,7 @@ const resourceHeader = {
       ResourceBreadcrumbsService,
       BreadcrumbsService,
       ncUtilsFlash) {
-      // @ngInject
+      this.$rootScope = $rootScope;
       this.$stateParams = $stateParams;
       this.$state = $state;
       this.$scope = $scope;
@@ -98,6 +99,7 @@ const resourceHeader = {
       }
       return this.getModel().then(model => {
         this.model = model;
+        this.$rootScope.$broadcast('refreshResourceSucceeded');
       }, error => {
         if (error.status === 404) {
           this.ncUtilsFlash.error(gettext('Resource is gone.'));

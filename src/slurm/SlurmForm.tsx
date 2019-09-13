@@ -20,6 +20,7 @@ export const SlurmForm = ({ translate, container }) => (
       ]}
       required={true}
       validate={required}
+      simpleValue={true}
     />
     <StringField
       name="hostname"

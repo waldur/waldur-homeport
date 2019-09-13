@@ -92,10 +92,12 @@ export default function baseResourceListController(
       return options;
     },
     renderResourceName: function(row) {
-      return this.renderComponent('resource-name', row);
+      // Hack for datatables.net
+      return this.renderComponent('resource-name', row) + `<span class="ng-hide">${row.name}</span>`;
     },
     renderResourceState: function(row) {
-      return this.renderComponent('resource-state', row);
+      // Hack for datatables.net
+      return this.renderComponent('resource-state', row) + `<span class="ng-hide">${row.state}</span>`;
     },
     renderComponent: function(component, row) {
       const index = this.findIndexById(row);

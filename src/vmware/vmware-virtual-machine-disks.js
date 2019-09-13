@@ -32,7 +32,7 @@ function VMwareVirtualMachineDisksList(
       $scope.$on('refreshList', () => {
         this.controllerScope.resetCache();
       });
-      $scope.$on('refreshResource', () => {
+      $scope.$on('refreshResourceSucceeded', () => {
         this.loadDiskActions().then(() => {
           this.tableOptions = this.getTableOptions();
         });
