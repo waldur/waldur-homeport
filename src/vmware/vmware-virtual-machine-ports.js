@@ -26,7 +26,7 @@ function VMwareVirtualMachinePortsController(
       $scope.$on('refreshList', () => {
         this.controllerScope.resetCache();
       });
-      $scope.$on('refreshResource', () => {
+      $scope.$on('refreshResourceSucceeded', () => {
         this.loadPortActions().then(() => {
           this.tableOptions = this.getTableOptions();
         });
