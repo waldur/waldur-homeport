@@ -7,6 +7,8 @@ Cypress.Commands.add('openSelectDialog', (selectId, option) => {
 
 Cypress.Commands.add('visitInstanceCreateForm', () => {
   cy
+    .route('http://localhost:8080/api/marketplace-plugins/', 'fixture:offerings/marketplacePlugins.json')
+    .route('http://localhost:8080/api/marketplace-orders/**', [])
     .route('http://localhost:8080/api/marketplace-offerings/**', 'fixture:offerings/openstackInstance.json')
     .route('http://localhost:8080/api/marketplace-categories/**', 'fixture:offerings/offeringCategory.json')
     .route('http://localhost:8080/api/service-settings/**', 'fixture:offerings/serviceSettings.json')
