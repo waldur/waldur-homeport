@@ -6,7 +6,7 @@ export const required = value => value ? undefined :
   translate('This field is required.');
 
 export const latinName = (value: string) => {
-  if (value === undefined) {
+  if (!value) {
     return undefined;
   }
   if (value.length < 2) {
