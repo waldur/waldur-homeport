@@ -1640,7 +1640,7 @@ msgstr "Vaikekonto"
 
 #: src/openstack/OpenStackForm.tsx src/openstack/OpenStackTenantForm.tsx
 msgid "Default availability zone for provisioned instances."
-msgstr "Vaikimisi kättesaadav tsoon privisoneeritud teenustele"
+msgstr "Vaikimisi kättesaadav tsoon loodud teenustele"
 
 #: src/vmware/VMwareForm.tsx
 msgid "Default cluster label"
