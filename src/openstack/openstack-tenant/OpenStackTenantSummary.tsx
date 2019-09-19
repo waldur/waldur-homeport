@@ -4,12 +4,12 @@ import { compose } from 'redux';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { withTranslation } from '@waldur/i18n';
-import { getTenantTemplate } from '@waldur/openstack/utils';
 import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
+import { formatFlavor } from '@waldur/resource/utils';
 
+import { parseQuotas } from '../utils';
 import { OpenStackTenant } from './types';
-import { formatPackage } from './utils';
 
 interface OpenStackTenantSummaryProps extends ResourceSummaryProps<OpenStackTenant> {
   tenantCredentialsVisible: boolean;
@@ -40,16 +40,16 @@ const formatPassword = (props: OpenStackTenantSummaryProps) =>
 
 export const PureOpenStackTenantSummary = (props: OpenStackTenantSummaryProps) => {
   const { translate, resource } = props;
-  const template = getTenantTemplate(resource);
+  const limits = parseQuotas(resource.quotas);
   return (
     <>
       <PureResourceSummaryBase {...props}/>
-      {template && (
-        <Field
-          label={translate('Package')}
-          value={formatPackage(template)}
-        />
-      )}
+      <Field
+        label={translate('Summary')}
+        value={resource.marketplace_offering_name ?
+          `${resource.marketplace_offering_name} (${formatFlavor(limits)})` :
+          formatFlavor(limits)}
+      />
       <Field
         label={translate('Access')}
         value={formatAccess(props)}

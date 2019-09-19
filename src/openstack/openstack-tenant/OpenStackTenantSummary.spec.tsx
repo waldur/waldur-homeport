@@ -4,15 +4,15 @@ import {
   hasAccess,
   hasExternalLink,
   getField,
-  getPackage,
+  getSummary,
   renderSummary,
   resource,
 } from './OpenStackTenantSummary.fixture';
 
 describe('OpenStackTenantSummary', () => {
-  it('renders package spec', () => {
+  it('renders resource summary', () => {
     const wrapper = renderSummary({resource});
-    expect(getPackage(wrapper)).toBe('Trial package / Small (10 vCPU, 10 GB RAM, 50 GB storage)');
+    expect(getSummary(wrapper)).toBe('Trial package (10 vCPU, 10 GB RAM, 50 GB storage)');
   });
 
   it('renders credentials if they are not concealed', () => {
@@ -40,10 +40,5 @@ describe('OpenStackTenantSummary', () => {
       tenantCredentialsVisible: true,
     });
     expect(getField(wrapper, 'Access').text()).toBe('No access info.');
-  });
-
-  it('skips package rendering if template is not provided', () => {
-    const wrapper = renderSummary({resource: {...resource, extra_configuration: {}}});
-    expect(getField(wrapper, 'Package').length).toBe(0);
   });
 });

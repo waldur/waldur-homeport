@@ -314,9 +314,6 @@ function AppStoreController(
       }
     },
     getResourceUrl: function() {
-      if (this.selectedResourceType === 'Tenant') {
-        return ENV.apiEndpoint + 'api/openstack-packages/';
-      }
       return this.serviceMetadata.resources[this.selectedResourceType];
     },
     save: function() {

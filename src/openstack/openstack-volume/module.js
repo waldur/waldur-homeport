@@ -1,7 +1,5 @@
-import OpenStackVolumeConfig from './openstack-volume-config';
 import volumeExtendDialog from './volume-extend';
 import snapshotCreateDialog from './snapshot-create';
-import openstackVolumeCheckoutSummary from './openstack-volume-checkout-summary';
 import openstackVolumesService from './openstack-volumes-service';
 import openstackInstanceVolumes from './openstack-instance-volumes';
 import openstackVolumeSnapshots from './openstack-volume-snapshots';
@@ -15,11 +13,9 @@ export default module => {
   module.service('openstackVolumesService', openstackVolumesService);
   module.directive('volumeExtendDialog', volumeExtendDialog);
   module.directive('snapshotCreateDialog', snapshotCreateDialog);
-  module.component('openstackVolumeCheckoutSummary', openstackVolumeCheckoutSummary);
   module.component('openstackInstanceVolumes', openstackInstanceVolumes);
   module.component('openstackVolumeSnapshots', openstackVolumeSnapshots);
 
-  module.config(fieldsConfig);
   module.config(actionsConfig);
   module.config(stateConfig);
   module.config(tabsConfig);
@@ -30,11 +26,6 @@ export default module => {
 function registerImportEndpoint(ImportResourcesEndpointRegistry, ENV) {
   ImportResourcesEndpointRegistry.registerEndpoint(
     ENV.resourcesTypes.volumes, 'OpenStackTenant', 'openstacktenant-volumes');
-}
-
-// @ngInject
-function fieldsConfig(AppstoreFieldConfigurationProvider) {
-  AppstoreFieldConfigurationProvider.register('OpenStackTenant.Volume', OpenStackVolumeConfig);
 }
 
 // @ngInject

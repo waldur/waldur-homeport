@@ -11,7 +11,7 @@ export const ComponentEditRow = (props: {periods: string[], components: Componen
   <>
     <tr className="text-center">
       <td colSpan={3 + props.periods.length}>
-        {translate('Please enter estimated maximum usage in the rows below:')}
+        {translate('Please enter desired values in the rows below:')}
       </td>
     </tr>
     {props.components.map((component, index) => {

@@ -1,5 +1,3 @@
-import openstackInstanceCheckoutSummary from './openstack-instance-checkout-summary';
-import OpenStackInstanceConfig from './openstack-instance-config';
 import openstackInstanceCurrentFlavor from './openstack-instance-current-flavor';
 import openstackInstanceSecurityGroupsField from './openstack-instance-security-groups-field';
 import openstackInstanceInternalIpsList from './openstack-instance-internal-ips-list';
@@ -13,24 +11,17 @@ import './marketplace';
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.Instance', OpenStackInstanceSummary);
-  module.component('openstackInstanceCheckoutSummary', openstackInstanceCheckoutSummary);
   module.component('openstackInstanceCurrentFlavor', openstackInstanceCurrentFlavor);
   module.component('openstackInstanceSecurityGroupsField', openstackInstanceSecurityGroupsField);
   module.component('openstackInstanceInternalIpsList', openstackInstanceInternalIpsList);
   module.component('openstackInstanceDataVolume', openstackInstanceDataVolume);
   module.component('openstackInstanceNetworks', openstackInstanceNetworks);
   module.component('openstackInstanceFloatingIps', openstackInstanceFloatingIps);
-  module.config(fieldsConfig);
   module.config(actionConfig);
   module.config(stateConfig);
   module.config(tabsConfig);
   module.run(registerImportEndpoint);
 };
-
-// @ngInject
-function fieldsConfig(AppstoreFieldConfigurationProvider) {
-  AppstoreFieldConfigurationProvider.register('OpenStackTenant.Instance', OpenStackInstanceConfig);
-}
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider) {
