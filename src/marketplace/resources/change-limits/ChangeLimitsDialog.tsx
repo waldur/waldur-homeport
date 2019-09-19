@@ -19,7 +19,11 @@ export const ChangeLimitsDialog: React.SFC<ChangeLimitsDialogProps> = props => (
   <Query
     variables={{resource_uuid: props.resolve.resource.marketplace_resource_uuid}}
     loader={loadData}>
-    {queryProps => <DialogBody {...queryProps}/>}
+    {queryProps =>
+      <DialogBody
+        {...queryProps}
+        initialValues={queryProps.data ? queryProps.data.initialValues : null}
+      />}
   </Query>
 );
 

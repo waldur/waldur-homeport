@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
 
 import { FetchedData } from './utils';
 
@@ -28,8 +29,8 @@ export const ChangeLimitsComponent = (props: FetchedData) => (
         {props.offering.components.map((component, index) => (
           <tr key={index}>
             <td>{component.name}</td>
-            <td>{props.resource.current_usages[component.type]}</td>
-            <td>{props.resource.limits[component.type]}</td>
+            <td>{props.usages[component.type]}</td>
+            <td>{props.limits[component.type]}</td>
             <td>
             <div className="input-group">
               <Field
@@ -37,6 +38,9 @@ export const ChangeLimitsComponent = (props: FetchedData) => (
                 component="input"
                 className="form-control"
                 type="number"
+                min={0}
+                parse={parseIntField}
+                format={formatIntField}
               />
               <span className="input-group-addon">
                 {component.measured_unit}

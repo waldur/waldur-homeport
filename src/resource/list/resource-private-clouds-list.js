@@ -23,7 +23,7 @@ function ProjectPrivateCloudsTabController($scope,
         });
       });
       this._super();
-      this.addRowFields(['extra_configuration']);
+      this.addRowFields(['quotas', 'marketplace_offering_name']);
     },
     getTableOptions: function() {
       let options = this._super();

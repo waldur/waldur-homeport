@@ -33,10 +33,7 @@ export const resource = {
   state: 'OK',
   runtime_state: 'ONLINE',
   service_settings_state: 'OK',
-  extra_configuration: {
-    package_name: 'Trial package',
-    package_category: 'Small',
-  },
+  marketplace_offering_name: 'Trial package',
   quotas: [
     {
       name: 'vcpu',
@@ -71,5 +68,5 @@ export const hasAccess = (wrapper: ReactWrapper): boolean =>
 export const hasExternalLink = (wrapper: ReactWrapper): boolean =>
   wrapper.find(ExternalLink).length === 1;
 
-export const getPackage = (wrapper: ReactWrapper): string =>
-  getField(wrapper, 'Package').text();
+export const getSummary = (wrapper: ReactWrapper): string =>
+  getField(wrapper, 'Summary').text();

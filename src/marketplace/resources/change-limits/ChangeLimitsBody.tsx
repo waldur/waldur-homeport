@@ -7,12 +7,14 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { QueryChildProps } from '@waldur/core/Query';
 import { SubmitButton } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
+import { Limits } from '@waldur/marketplace/common/registry';
 import { orderCanBeApproved } from '@waldur/marketplace/orders/store/selectors';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import { changeLimits } from '../store/constants';
 import { ChangeLimitsComponent } from './ChangeLimitsComponent';
+import { FetchedData } from './utils';
 
 const FORM_ID = 'marketplaceChangeLimits';
 
@@ -20,24 +22,25 @@ const mapStateToProps = state => ({
   orderCanBeApproved: orderCanBeApproved(state),
 });
 
-const mapDispatchToProps = (dispatch, ownProps: QueryChildProps<any>) => ({
+const mapDispatchToProps = (dispatch, ownProps: QueryChildProps<FetchedData>) => ({
   submitRequest: data => changeLimits({
     marketplace_resource_uuid: ownProps.data.resource.uuid,
     resource_uuid: ownProps.data.resource.resource_uuid,
     resource_type: ownProps.data.resource.resource_type,
-    limits: data.limits,
+    limits: ownProps.data.limitSerializer(data.limits),
   }, dispatch),
 });
 
 const connector = compose(
-  reduxForm<{plan: any}, QueryChildProps<any>>({form: FORM_ID}),
+  reduxForm<{plan: any, limits: Limits}, QueryChildProps<FetchedData>>({form: FORM_ID}),
   connect(mapStateToProps, mapDispatchToProps),
 );
 
-interface DialogBodyProps extends QueryChildProps<any>, InjectedFormProps {
+interface DialogBodyProps extends QueryChildProps<FetchedData>, InjectedFormProps {
   error: any;
   submitRequest(data: any): void;
   orderCanBeApproved: boolean;
+  initialValues: {limits: Limits};
 }
 
 export const DialogBody = connector((props: DialogBodyProps) => (

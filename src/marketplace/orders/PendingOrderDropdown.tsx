@@ -31,7 +31,10 @@ interface PendingOrderIndicatorProps extends ToggleOpenProps {
 export class PurePendingOrderIndicator extends React.Component<PendingOrderIndicatorProps> {
 
   componentDidMount() {
-    const { workspace } = this.props;
+    const { workspace, customer } = this.props;
+    if (!customer) {
+      return;
+    }
     if (workspace === 'organization' || workspace === 'project') {
       this.fetchData();
     }
@@ -43,6 +46,9 @@ export class PurePendingOrderIndicator extends React.Component<PendingOrderIndic
   }
 
   componentDidUpdate(prevProps) {
+    if (!this.props.customer) {
+      return;
+    }
     if (this.props.workspace !== prevProps.workspace) {
       this.fetchData();
     }
