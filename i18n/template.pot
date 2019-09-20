@@ -1513,6 +1513,10 @@ msgid "Current flavor"
 msgstr ""
 
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+msgid "Current limit"
+msgstr ""
+
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "Current plan"
 msgstr ""
@@ -4085,10 +4089,6 @@ msgstr ""
 
 #: src/intro/base-intro.js
 msgid "Ok, what's next?"
-msgstr ""
-
-#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-msgid "Old limit"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx

@@ -21,7 +21,7 @@ export const ChangeLimitsComponent = (props: FetchedData) => (
         <tr>
           <th>{translate('Name')}</th>
           <th>{translate('Usage')}</th>
-          <th>{translate('Old limit')}</th>
+          <th>{translate('Current limit')}</th>
           <th>{translate('New limit')}</th>
         </tr>
       </thead>
