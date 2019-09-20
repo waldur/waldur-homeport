@@ -11,7 +11,6 @@ export default function createAction(ctx): ResourceAction {
     component: 'marketplaceResourceChangeLimitsDialog',
     title: translate('Change limits'),
     useResolve: true,
-    dialogSize: 'lg',
     isVisible: marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null,
     validators: [validateState('OK')],
   };
