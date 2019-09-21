@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
+import { $filter, ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
 
 import { FetchedData } from './utils';
@@ -23,6 +25,7 @@ export const ChangeLimitsComponent = (props: FetchedData) => (
           <th>{translate('Usage')}</th>
           <th>{translate('Current limit')}</th>
           <th>{translate('New limit')}</th>
+          <th><BillingPeriod unit={props.plan.unit}/></th>
         </tr>
       </thead>
       <tbody>
@@ -46,6 +49,9 @@ export const ChangeLimitsComponent = (props: FetchedData) => (
                 {component.measured_unit}
               </span>
             </div>
+            </td>
+            <td>
+              {$filter('currency')(props.plan.prices[component.type] || 0, ENV.currency, 3)}
             </td>
           </tr>
         ))}
