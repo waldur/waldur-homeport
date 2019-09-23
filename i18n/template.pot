@@ -4841,7 +4841,7 @@ msgstr ""
 msgid "Price estimate details"
 msgstr ""
 
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 msgid "Price for consumption"
 msgstr ""
 
@@ -4849,20 +4849,20 @@ msgstr ""
 msgid "Price is estimated."
 msgstr ""
 
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Price per 30 days"
 msgstr ""
 
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 msgid "Price per 365 days"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/marketplace/common/BillingPeriod.tsx
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Price per day"
@@ -4872,19 +4872,19 @@ msgstr ""
 msgid "Price per half month"
 msgstr ""
 
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 msgid "Price per half-month"
 msgstr ""
 
 #: src/marketplace/common/BillingPeriod.tsx
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 msgid "Price per hour"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/marketplace/common/BillingPeriod.tsx
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 #: src/offering/appstore-offering-summary.js
 msgid "Price per month"
 msgstr ""
@@ -4898,7 +4898,7 @@ msgstr ""
 msgid "Price per unit"
 msgstr ""
 
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 msgid "Price per year"
 msgstr ""
 
@@ -7272,6 +7272,7 @@ msgstr ""
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/paypal-invoices-list.js
 msgid "Total"
 msgstr ""

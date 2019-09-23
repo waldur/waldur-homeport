@@ -1,65 +1,10 @@
-import { translate } from '@waldur/i18n';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
+import { getBillingPeriods } from '@waldur/marketplace/common/utils';
 import { offeringSelector } from '@waldur/marketplace/details/selectors';
 import { Limits } from '@waldur/marketplace/details/types';
 import { Plan } from '@waldur/marketplace/types';
 
 import { Component, PricesData } from './types';
-
-interface BillingPeriodDescription {
-  periods: string[];
-  multipliers: number[];
-}
-
-function getBillingPeriods(unit: string): BillingPeriodDescription {
-  switch (unit) {
-    case 'hour':
-      return {
-        periods: [
-          translate('Price per hour'),
-          translate('Price per day'),
-          translate('Price per 30 days'),
-          translate('Price per 365 days'),
-        ],
-        multipliers: [1, 24, 24 * 30, 24 * 365],
-      };
-
-    case 'day':
-      return {
-        periods: [
-          translate('Price per day'),
-          translate('Price per 30 days'),
-          translate('Price per 365 days'),
-        ],
-        multipliers: [1, 30, 365],
-      };
-
-    case 'half_month':
-      return {
-        periods: [
-          translate('Price per half-month'),
-          translate('Price per month'),
-          translate('Price per year'),
-        ],
-        multipliers: [1, 2, 24],
-      };
-
-    case 'month':
-      return {
-        periods: [
-          translate('Price per month'),
-          translate('Price per year'),
-        ],
-        multipliers: [1, 12],
-      };
-
-    default:
-      return {
-        periods: [translate('Price for consumption')],
-        multipliers: [1],
-      };
-  }
-}
 
 export const combinePrices = (plan, limits, offering) => {
   if (plan && offering) {
